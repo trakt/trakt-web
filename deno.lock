@@ -1,0 +1,29 @@
+{
+  "version": "4",
+  "specifiers": {
+    "npm:@ts-rest/core@^3.51.0": "3.51.0_zod@3.23.8",
+    "npm:zod@^3.23.8": "3.23.8"
+  },
+  "npm": {
+    "@ts-rest/core@3.51.0_zod@3.23.8": {
+      "integrity": "sha512-v6lnWEcpZj1UgN9wb84XQ+EORP1QEtncFumoXMJjno5ZUV6vdjKze3MYcQN0C6vjBpIJPQEaI/gab2jr4/0KzQ==",
+      "dependencies": [
+        "zod"
+      ]
+    },
+    "zod@3.23.8": {
+      "integrity": "sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g=="
+    }
+  },
+  "workspace": {
+    "members": {
+      "projects/api": {
+        "dependencies": [
+          "jsr:@std/assert@1",
+          "npm:@ts-rest/core@^3.51.0",
+          "npm:zod@^3.23.8"
+        ]
+      }
+    }
+  }
+}
