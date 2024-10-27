@@ -1,8 +1,21 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@std/fs@^1.0.5": "1.0.5",
+    "jsr:@std/path@^1.0.7": "1.0.7",
     "npm:@ts-rest/core@^3.51.0": "3.51.0_zod@3.23.8",
     "npm:zod@^3.23.8": "3.23.8"
+  },
+  "jsr": {
+    "@std/fs@1.0.5": {
+      "integrity": "41806ad6823d0b5f275f9849a2640d87e4ef67c51ee1b8fb02426f55e02fd44e",
+      "dependencies": [
+        "jsr:@std/path"
+      ]
+    },
+    "@std/path@1.0.7": {
+      "integrity": "76a689e07f0e15dcc6002ec39d0866797e7156629212b28f27179b8a5c3b33a1"
+    }
   },
   "npm": {
     "@ts-rest/core@3.51.0_zod@3.23.8": {
@@ -19,9 +32,13 @@
     "members": {
       "projects/api": {
         "dependencies": [
-          "jsr:@std/assert@1",
           "npm:@ts-rest/core@^3.51.0",
           "npm:zod@^3.23.8"
+        ]
+      },
+      "projects/playground": {
+        "dependencies": [
+          "jsr:@std/fs@^1.0.5"
         ]
       }
     }
