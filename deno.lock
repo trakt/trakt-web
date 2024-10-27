@@ -3,7 +3,10 @@
   "specifiers": {
     "jsr:@std/fs@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.7": "1.0.7",
+    "npm:@hono/swagger-ui@~0.4.1": "0.4.1_hono@4.6.7",
     "npm:@ts-rest/core@^3.51.0": "3.51.0_zod@3.23.8",
+    "npm:@ts-rest/open-api@^3.51.0": "3.51.0_@ts-rest+core@3.51.0__zod@3.23.8_zod@3.23.8_openapi3-ts@2.0.2",
+    "npm:hono@^4.6.7": "4.6.7",
     "npm:zod@^3.23.8": "3.23.8"
   },
   "jsr": {
@@ -18,11 +21,49 @@
     }
   },
   "npm": {
+    "@anatine/zod-openapi@1.14.2_openapi3-ts@2.0.2_zod@3.23.8": {
+      "integrity": "sha512-q0qHfnuNYVKu0Swrnnvfj9971AEyW7c8v9jCOZGCl5ZbyGMNG4RPyJkRcMi/JC8CRfdOe0IDfNm1nNsi2avprg==",
+      "dependencies": [
+        "openapi3-ts",
+        "ts-deepmerge",
+        "zod"
+      ]
+    },
+    "@hono/swagger-ui@0.4.1_hono@4.6.7": {
+      "integrity": "sha512-kPaJatHffeYQ3yVkHo878hCqwfapqx54FczJVJ+eRWt8J4biyVVMIdCAJb6MyA8bcnHUoTmUpPc7OJAV1VTg2g==",
+      "dependencies": [
+        "hono"
+      ]
+    },
     "@ts-rest/core@3.51.0_zod@3.23.8": {
       "integrity": "sha512-v6lnWEcpZj1UgN9wb84XQ+EORP1QEtncFumoXMJjno5ZUV6vdjKze3MYcQN0C6vjBpIJPQEaI/gab2jr4/0KzQ==",
       "dependencies": [
         "zod"
       ]
+    },
+    "@ts-rest/open-api@3.51.0_@ts-rest+core@3.51.0__zod@3.23.8_zod@3.23.8_openapi3-ts@2.0.2": {
+      "integrity": "sha512-fvpvRr6HIbAMNZR//QQQi75z5qTxMEBMRtmbaBXVi5e1WVVwOK7P6YBaGWTQp6DXSvsZVULX5VZXmsDd1Z1dew==",
+      "dependencies": [
+        "@anatine/zod-openapi",
+        "@ts-rest/core",
+        "openapi3-ts",
+        "zod"
+      ]
+    },
+    "hono@4.6.7": {
+      "integrity": "sha512-wX4ZbOnzfNO61hUjuQbJ7OPGs1fWXXVVJ8VTPDb2Ls/x9HjCbVTm80Je6VTHMz5n5RGDtBgV9d9ZFZxBqx56ng=="
+    },
+    "openapi3-ts@2.0.2": {
+      "integrity": "sha512-TxhYBMoqx9frXyOgnRHufjQfPXomTIHYKhSKJ6jHfj13kS8OEIhvmE8CTuQyKtjjWttAjX5DPxM1vmalEpo8Qw==",
+      "dependencies": [
+        "yaml"
+      ]
+    },
+    "ts-deepmerge@6.2.1": {
+      "integrity": "sha512-8CYSLazCyj0DJDpPIxOFzJG46r93uh6EynYjuey+bxcLltBeqZL7DMfaE5ZPzZNFlav7wx+2TDa/mBl8gkTYzw=="
+    },
+    "yaml@1.10.2": {
+      "integrity": "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="
     },
     "zod@3.23.8": {
       "integrity": "sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g=="
@@ -34,6 +75,13 @@
         "dependencies": [
           "npm:@ts-rest/core@^3.51.0",
           "npm:zod@^3.23.8"
+        ]
+      },
+      "projects/open-api": {
+        "dependencies": [
+          "npm:@hono/swagger-ui@~0.4.1",
+          "npm:@ts-rest/open-api@^3.51.0",
+          "npm:hono@^4.6.7"
         ]
       },
       "projects/playground": {
