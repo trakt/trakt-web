@@ -2,14 +2,17 @@
   "workspace": [
     "./projects/api",
     "./projects/playground",
-    "./projects/swagger"
+    "./projects/swagger",
+    "./projects/client"
   ],
   "tasks": {
+    "install": "deno install --allow-scripts",
     "format": "deno fmt && deno lint --fix",
     "swagger": "cd projects/swagger && deno task start",
     "swagger:dev": "cd projects/swagger && deno task dev",
     "playground:dev": "cd projects/playground && deno run dev"
   },
+  "nodeModulesDir": "auto",
   "fmt": {
     "singleQuote": true,
     "indentWidth": 2

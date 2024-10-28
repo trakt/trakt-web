@@ -6,5 +6,10 @@
   "editor.defaultFormatter": "denoland.vscode-deno",
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  },
+  "cSpell.words": [
+    "inlang",
+    "outdir",
+    "paraglide"
+  ]
 }

@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "$lib": "./src/lib",
+    "$lib/": "./src/lib/"
+  },
+  "lint": {
+    "exclude": [
+      ".svelte-kit"
+    ]
+  }
+}
