@@ -1,6 +1,8 @@
 import { paraglide } from '@inlang/paraglide-sveltekit/vite';
 import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
+import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
+
 import path from 'node:path';
 import fs from 'node:fs';
 
@@ -32,6 +34,7 @@ export default defineConfig({
       project: './project.inlang',
       outdir: './src/lib/paraglide',
     }),
+    denoSveltekitExit(),
   ],
 
   test: {
