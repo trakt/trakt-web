@@ -11,5 +11,6 @@
     "inlang",
     "outdir",
     "paraglide"
-  ]
+  ],
+  "explorer.excludeGitIgnore": true
 }
