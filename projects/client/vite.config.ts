@@ -31,7 +31,7 @@ export default defineConfig({
   plugins: [
     sveltekit(),
     paraglide({
-      project: './project.inlang',
+      project: './i18n/project.inlang',
       outdir: './src/lib/paraglide',
     }),
     denoSveltekitExit(),
