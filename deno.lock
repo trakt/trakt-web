@@ -20,6 +20,8 @@
     "npm:eslint@^9.7.0": "9.13.0",
     "npm:globals@15": "15.11.0",
     "npm:hono@^4.6.7": "4.6.7",
+    "npm:prettier-plugin-svelte@^3.2.7": "3.2.7_prettier@3.3.3_svelte@5.1.3__acorn@8.14.0",
+    "npm:prettier@^3.3.3": "3.3.3",
     "npm:svelte-check@4": "4.0.5_svelte@5.1.3__acorn@8.14.0_typescript@5.6.3",
     "npm:svelte-check@4.0.5": "4.0.5_svelte@5.1.3__acorn@8.14.0_typescript@5.6.3",
     "npm:svelte@5": "5.1.3_acorn@8.14.0",
@@ -2049,6 +2051,16 @@
     "prelude-ls@1.2.1": {
       "integrity": "sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g=="
     },
+    "prettier-plugin-svelte@3.2.7_prettier@3.3.3_svelte@5.1.3__acorn@8.14.0": {
+      "integrity": "sha512-/Dswx/ea0lV34If1eDcG3nulQ63YNr5KPDfMsjbdtpSWOxKKJ7nAc2qlVuYwEvCr4raIuredNoR7K4JCkmTGaQ==",
+      "dependencies": [
+        "prettier",
+        "svelte"
+      ]
+    },
+    "prettier@3.3.3": {
+      "integrity": "sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew=="
+    },
     "printable-characters@1.0.42": {
       "integrity": "sha512-dKp+C4iXWK4vVYZmYSd0KBH5F/h1HoZRsbJ82AVKRO3PEo8L4lBS/vLwhVtpwwuYcoIsVY+1JYKR268yn480uQ=="
     },
@@ -2555,6 +2567,8 @@
             "npm:eslint-plugin-svelte@^2.36.0",
             "npm:eslint@^9.7.0",
             "npm:globals@15",
+            "npm:prettier-plugin-svelte@^3.2.7",
+            "npm:prettier@^3.3.3",
             "npm:svelte-check@4",
             "npm:svelte@5",
             "npm:typescript-eslint@8",
