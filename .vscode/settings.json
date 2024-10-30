@@ -12,5 +12,8 @@
     "outdir",
     "paraglide"
   ],
-  "explorer.excludeGitIgnore": true
+  "explorer.excludeGitIgnore": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  }
 }

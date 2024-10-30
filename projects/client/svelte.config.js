@@ -22,6 +22,9 @@ const config = {
         persist: false,
       },
     }),
+    alias: {
+      '@trakt/api': '../api/src/index.ts',
+    },
   },
 };
 
