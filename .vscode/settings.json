@@ -8,6 +8,7 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "cSpell.words": [
+    "deno",
     "inlang",
     "outdir",
     "paraglide"
