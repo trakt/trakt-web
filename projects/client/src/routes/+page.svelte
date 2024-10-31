@@ -1,13 +1,13 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
-  import LanguagePicker from "$lib/components/LanguagePicker.svelte";
+  import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
 
-  import * as m from "$lib/paraglide/messages.js";
+  import * as m from "$lib/features/i18n/messages.ts";
 </script>
 
 <div class="trakt-content">
   <div class="trakt-language-picker">
-    <LanguagePicker />
+    <LocalePicker />
   </div>
 
   <div class="trakt-logo">

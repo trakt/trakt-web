@@ -4,8 +4,8 @@
     availableLanguageTags,
     languageTag,
     isAvailableLanguageTag,
-  } from "$lib/paraglide/runtime.js";
-  import { i18n } from "$lib/i18n.ts";
+    i18n,
+  } from "$lib/features/i18n/index.ts";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
 
