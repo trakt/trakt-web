@@ -1,0 +1,17 @@
+:root {
+  --color-foreground: #333;
+  --color-background: #f8f8f8;
+  --color-primary: #007bff;
+  --color-secondary: #6c757d;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+  --color-light: #f8f9fa;
+  --color-dark: #343a40;
+}
+
+[data-theme='dark'] {
+  --color-foreground: #f8f9fa;
+  --color-background: #343a40;
+}

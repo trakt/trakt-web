@@ -56,14 +56,23 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-foreground);
     border-radius: 5px;
-    background-color: #f9f9f9;
+    color: var(--color-foreground);
+    background-color: color-mix(
+      in srgb,
+      var(--color-background) 85%,
+      var(--color-foreground) 15%
+    );
     appearance: none;
+
+    transition-property: background-color, color, border;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
   }
 
   select:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--color-primary);
   }
 </style>

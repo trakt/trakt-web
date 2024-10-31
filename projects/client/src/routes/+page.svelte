@@ -1,11 +1,19 @@
 <script lang="ts">
   import Logo from "$lib/components/Logo.svelte";
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
+  import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
+  import type { PageData } from "./$types";
 
   import * as m from "$lib/features/i18n/messages.ts";
+
+  export let data: PageData;
 </script>
 
 <div class="trakt-content">
+  <div class="trakt-theme-selector">
+    <ThemePicker theme={data.theme} />
+  </div>
+
   <div class="trakt-language-picker">
     <LocalePicker />
   </div>
@@ -30,6 +38,12 @@
     position: fixed;
     top: 1em;
     right: 1em;
+  }
+
+  .trakt-theme-selector {
+    position: fixed;
+    top: 1em;
+    left: 1em;
   }
 
   .trakt-logo {
