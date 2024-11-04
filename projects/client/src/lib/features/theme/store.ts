@@ -11,7 +11,7 @@ export const nextTheme = (browser: boolean) => (theme: Theme) => {
     case Theme.Auto:
     default:
       if (!browser) {
-        return Theme.Light;
+        return coerceTheme('');
       }
 
       // @ts-ignore - globalThis is a browser-only object
