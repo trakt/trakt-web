@@ -1,17 +1,95 @@
 :root {
-  --color-foreground: #333;
-  --color-background: #f8f8f8;
-  --color-primary: #007bff;
-  --color-secondary: #6c757d;
-  --color-success: #28a745;
-  --color-danger: #dc3545;
-  --color-warning: #ffc107;
-  --color-info: #17a2b8;
-  --color-light: #f8f9fa;
-  --color-dark: #343a40;
+  --purple-50: #f5ecf9;
+  --purple-100: #e1c4ed;
+  --purple-200: #d3a8e5;
+  --purple-300: #bf80d9;
+  --purple-400: #b268d1;
+  --purple-500: #9f42c6;
+  --purple-600: #913cb4;
+  --purple-700: #712f8d;
+  --purple-800: #57246d;
+  --purple-900: #431c53;
+
+  --red-50: #ffe6e6;
+  --red-100: #ffb0b0;
+  --red-200: #ff8a8a;
+  --red-300: #ff5454;
+  --red-400: #ff3333;
+  --red-500: #ff0000;
+  --red-600: #e80000;
+  --red-700: #b50000;
+  --red-800: #8c0000;
+  --red-900: #6b0000;
+
+  --orange-50: #ffefe6;
+  --orange-100: #ffcdb2;
+  --orange-200: #ffb58c;
+  --orange-300: #ff9458;
+  --orange-400: #ff7138;
+  --orange-500: #ff5f0a;
+  --orange-600: #e85605;
+  --orange-700: #b54304;
+  --orange-800: #8c3403;
+  --orange-900: #6b2803;
+
+  --blue-50: #e6f6ff;
+  --blue-100: #b0e2ff;
+  --blue-200: #8aD3ff;
+  --blue-300: #54bffe;
+  --blue-400: #33b3fe;
+  --blue-500: #00a0fe;
+  --blue-600: #0092e7;
+  --blue-700: #0072b4;
+  --blue-800: #00588c;
+  --blue-900: #00436b;
+
+  --green-50: #e9fbf3;
+  --green-100: #bbf1d9;
+  --green-200: #9aebc6;
+  --green-300: #6ce2ad;
+  --green-400: #50dc9d;
+  --green-500: #24d384;
+  --green-600: #21c078;
+  --green-700: #1a965e;
+  --green-800: #147449;
+  --green-900: #0f5937;
+
+  --shade-10: #fefefe;
+  --shade-20: #fbfbfb;
+  --shade-30: #f9f9f9;
+  --shade-40: #f6f6f7;
+  --shade-50: #f1f2f3;
+  --shade-60: #ebecee;
+  --shade-70: #e5e7e9;
+  --shade-80: #dee1e3;
+  --shade-90: #d8dcde;
+  --shade-100: #d2d6d9;
+  --shade-200: #bcc2c6;
+  --shade-300: #9ea6ac;
+  --shade-400: #8b959c;
+  --shade-500: #6e7a83;
+  --shade-600: #646f77;
+  --shade-700: #4e575d;
+  --shade-800: #3d4348;
+  --shade-900: #2e3337;
+  --shade-910: #2a2e32;
+  --shade-920: #212427;
+  --shade-930: #191c1e;
+  --shade-940: #131517;
+
+  --color-foreground: var(--shade-920);
+  --color-background: var(--shade-10);
+
+  --color-card-background: var(--shade-50);
+  --color-text-primary: var(--shade-800);
+  --color-text-secondary: var(--shade-500);
 }
 
 [data-theme='dark'] {
-  --color-foreground: #f8f9fa;
-  --color-background: #343a40;
+  --color-foreground: var(--shade-10);
+  --color-background: var(--shade-940);
+
+  --color-card-background: var(--shade-920);
+  --color-text-primary: var(--shade-10);
+  --color-text-secondary: var(--shade-300);
 }
