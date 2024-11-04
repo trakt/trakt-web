@@ -1,6 +1,10 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
+  const TRAKT_CLIENT_ID: string;
+  const TRAKT_CLIENT_SECRET: string;
+  const TRAKT_BEARER_TOKEN: string;
+
   namespace App {
     // interface Error {}
     // interface Locals {}
