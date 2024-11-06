@@ -43,6 +43,5 @@
   .theme-toggle {
     font-size: 2em;
     color: var(--color-foreground);
-    transition: color 150ms ease-in-out;
   }
 </style>

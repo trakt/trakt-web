@@ -1,4 +1,4 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "hello_world": "Hé {name}! Bienvenue à"
+  "upcoming_schedule_title": "Calendrier à venir"
 }

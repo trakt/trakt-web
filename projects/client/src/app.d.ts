@@ -3,6 +3,7 @@
 declare global {
   const TRAKT_CLIENT_ID: string;
   const TRAKT_CLIENT_SECRET: string;
+  /** TODO: remove when auth flow is part of client */
   const TRAKT_BEARER_TOKEN: string;
 
   namespace App {

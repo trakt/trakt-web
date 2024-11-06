@@ -4,8 +4,4 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: Arial, sans-serif;
-
-  transition-property: background-color, color;
-  transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
 }

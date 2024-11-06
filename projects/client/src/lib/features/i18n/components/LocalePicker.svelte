@@ -65,10 +65,6 @@
       var(--color-foreground) 15%
     );
     appearance: none;
-
-    transition-property: background-color, color, border;
-    transition-duration: 150ms;
-    transition-timing-function: ease-in-out;
   }
 
   select:focus {
