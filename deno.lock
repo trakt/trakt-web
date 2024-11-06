@@ -2563,6 +2563,7 @@
             "npm:@sveltejs/adapter-cloudflare@^4.7.4",
             "npm:@sveltejs/kit@2",
             "npm:@sveltejs/vite-plugin-svelte@4",
+            "npm:@ts-rest/core@^3.51.0",
             "npm:@types/eslint@^9.6.0",
             "npm:eslint-plugin-svelte@^2.36.0",
             "npm:eslint@^9.7.0",
@@ -2574,7 +2575,8 @@
             "npm:typescript-eslint@8",
             "npm:typescript@5",
             "npm:vite@^5.0.3",
-            "npm:vitest@^2.0.4"
+            "npm:vitest@^2.0.4",
+            "npm:zod@^3.23.8"
           ]
         }
       },
