@@ -6,6 +6,7 @@
     "npm:@eslint/js@*": "9.13.0",
     "npm:@hono/swagger-ui@~0.4.1": "0.4.1_hono@4.6.7",
     "npm:@inlang/paraglide-sveltekit@~0.11.1": "0.11.5_@sveltejs+kit@2.7.3__@sveltejs+vite-plugin-svelte@4.0.0___svelte@5.1.3____acorn@8.14.0___vite@5.4.10__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_@sveltejs+vite-plugin-svelte@4.0.0__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_svelte@5.1.3__acorn@8.14.0_vite@5.4.10",
+    "npm:@playwright/test@1.48.2": "1.48.2",
     "npm:@playwright/test@^1.45.3": "1.48.2",
     "npm:@sveltejs/adapter-auto@3": "3.3.1_@sveltejs+kit@2.7.3__@sveltejs+vite-plugin-svelte@4.0.0___svelte@5.1.3____acorn@8.14.0___vite@5.4.10__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_@sveltejs+vite-plugin-svelte@4.0.0__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_svelte@5.1.3__acorn@8.14.0_vite@5.4.10",
     "npm:@sveltejs/adapter-cloudflare@^4.7.4": "4.7.4_@sveltejs+kit@2.7.3__@sveltejs+vite-plugin-svelte@4.0.0___svelte@5.1.3____acorn@8.14.0___vite@5.4.10__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_wrangler@3.83.0__@cloudflare+workers-types@4.20241022.0__esbuild@0.17.19_@sveltejs+vite-plugin-svelte@4.0.0__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_svelte@5.1.3__acorn@8.14.0_vite@5.4.10_@cloudflare+workers-types@4.20241022.0",

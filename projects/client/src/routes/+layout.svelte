@@ -10,3 +10,7 @@
 <ParaglideJS {i18n}>
   {@render children()}
 </ParaglideJS>
+
+<svelte:head>
+  <title>Trakt Lite</title>
+</svelte:head>
