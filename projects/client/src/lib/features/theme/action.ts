@@ -1,5 +1,5 @@
 import { Theme } from './models/Theme.ts';
-import { RequestEvent } from '@sveltejs/kit';
+import type { RequestEvent } from '@sveltejs/kit';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 import {
   THEME_COOKIE_NAME,

@@ -1,6 +1,6 @@
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 import { THEME_COOKIE_NAME } from '$lib/features/theme/constants.ts';
-import { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 
 const THEME_PLACEHOLDER = '%theme.current%';
 
