@@ -35,3 +35,6 @@ please refer to the
 - Swagger:
   - Serve: `deno task swagger`
   - Development: `deno task swagger:dev`
+
+- Client:
+  - Development: `deno task client:dev`
