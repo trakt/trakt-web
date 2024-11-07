@@ -1,5 +1,9 @@
 import { api } from '$lib/requests/internal/api.ts';
-import { prependHttps } from '$lib/utils/prependHttps.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import {
+  type EpisodeType,
+  EpisodeUnknownType,
+} from '$lib/models/EpisodeType.ts';
 
 export type CalendarShowsParams = {
   startDate: string;
@@ -16,6 +20,8 @@ export type EpisodeEntry = {
   poster: {
     url: string;
   };
+  airedDate: Date;
+  type: EpisodeType;
 };
 
 export function upcomingEpisodes({
@@ -25,7 +31,7 @@ export function upcomingEpisodes({
   return api.calendars
     .shows({
       query: {
-        extended: 'cloud9',
+        extended: 'full,cloud9',
       },
       params: {
         target: 'my',
@@ -43,19 +49,22 @@ export function upcomingEpisodes({
 
       return body
         .map((item) => {
-          const posterCandidate = item.episode.images.screenshot.at(0) ??
-            item.show.images.fanart.at(0);
+          const posterCandidate = item.episode.images!.screenshot.at(0) ??
+            item.show.images!.fanart.at(0);
 
           return {
             show: {
               title: item.show.title,
             },
+            type: item.episode.episode_type as EpisodeType ??
+              EpisodeUnknownType.Unknown,
             title: item.episode.title,
             season: item.episode.season,
             number: item.episode.number,
             poster: {
               url: prependHttps(posterCandidate),
             },
+            airedDate: new Date(item.first_aired),
           };
         });
     });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { prependHttps } from '$lib/utils/prependHttps.ts';
+import { prependHttps } from './prependHttps.ts';
 
 describe('prependHttps', () => {
   it('will add https protocol to a given host url', () => {

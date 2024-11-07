@@ -1,4 +1,10 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "upcoming_schedule_title": "Calendrier à venir"
+  "upcoming_schedule_title": "Calendrier à venir",
+  "season_premiere": "Première de la saison",
+  "series_premiere": "Première de la série",
+  "mid_season_premiere": "Première de mi-saison",
+  "season_finale": "Finale de la saison",
+  "series_finale": "Finale de la série",
+  "mid_season_finale": "Finale de mi-saison"
 }

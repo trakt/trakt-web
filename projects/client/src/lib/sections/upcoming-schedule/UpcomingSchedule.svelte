@@ -1,11 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
-  import Episode from "$lib/components/Episode.svelte";
+  import Episode from "$lib/components/episode/Episode.svelte";
+
   import {
     upcomingEpisodes,
     type EpisodeEntry,
   } from "$lib/requests/calendars/upcomingEpisodes";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
 
   let calendar: EpisodeEntry[] = $state([]);
 
@@ -31,11 +33,14 @@
   <div class="episode-list episode-list-horizontal-scroll">
     {#each calendar as entry}
       <Episode
+        i18n={EpisodeIntlProvider}
         episodeNumber={entry.number}
         seasonNumber={entry.season}
         posterUrl={entry.poster.url}
         showTitle={entry.show.title}
         episodeTitle={entry.title}
+        airedDate={entry.airedDate}
+        type={entry.type}
       />
     {/each}
   </div>
