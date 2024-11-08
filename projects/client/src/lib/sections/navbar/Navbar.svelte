@@ -63,17 +63,9 @@
 
   .trakt-navbar-scroll {
     background-color: var(--color-background-navbar);
-    box-shadow:
-      0px 4px 4px 0px
-        color-mix(in srgb, var(--color-shadow) 25%, transparent 75%),
-      0px 428px 120px 0px
-        color-mix(in srgb, var(--color-shadow) 1%, transparent 75%),
-      0px 274px 110px 0px
-        color-mix(in srgb, var(--color-shadow) 5%, transparent 75%),
-      0px 154px 93px 0px
-        color-mix(in srgb, var(--color-shadow) 16%, transparent 75%),
-      0px 69px 69px 0px
-        color-mix(in srgb, var(--color-shadow) 27%, transparent 75%);
+    box-shadow: 0px 24px 64px 0px
+      color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
+
     backdrop-filter: blur(8px);
 
     --color-foreground: var(--color-foreground-navbar);
