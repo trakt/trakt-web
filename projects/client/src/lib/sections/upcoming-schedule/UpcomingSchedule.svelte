@@ -47,6 +47,11 @@
 </div>
 
 <style>
+  .upcoming-schedule-container {
+    /* TODO(@vlad): needed only for testing scroll states, remove when dev stable  */
+    padding-bottom: 100dvh;
+  }
+
   .upcoming-schedule-title {
     color: #bcbcbc;
     font-size: 1.25rem;

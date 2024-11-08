@@ -41,7 +41,11 @@
 
 <style>
   .theme-toggle {
-    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2rem;
     color: var(--color-foreground);
   }
 </style>

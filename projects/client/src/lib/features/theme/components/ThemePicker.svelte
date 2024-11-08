@@ -27,7 +27,7 @@
   };
 </script>
 
-<form method="POST" action="/?/theme" use:enhance={submitTheme}>
+<form method="POST" action="/theme/?/persist" use:enhance={submitTheme}>
   <input name={THEME_FIELD_NAME} value={nextTheme($theme)} hidden />
   <ThemeToggleIcon theme={$theme} />
 </form>

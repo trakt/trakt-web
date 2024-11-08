@@ -77,6 +77,9 @@
   --shade-930: #191c1e;
   --shade-940: #131517;
 
+  /**
+  * Theme-able variables
+  */
   --color-foreground: var(--shade-920);
   --color-background: var(--shade-10);
 
@@ -86,13 +89,21 @@
   --color-card-background: var(--shade-50);
 
   --color-text-time-tag: var(--shade-100);
-  --color-tag-background: var(--shade-900);
+  --color-background-time-tag: var(--shade-900);
 
   --color-text-premiere-tag: var(--shade-10);
   --color-premiere-tag-background: var(--green-700);
 
   --color-text-finale-tag: var(--shade-10);
   --color-background-finale-tag: var(--red-700);
+
+  /**
+  * Global variables independent of theme
+  */
+  --color-shadow: #000;
+
+  --color-background-navbar: color-mix(in srgb, var(--shade-920) 90%, transparent 10%);
+  --color-foreground-navbar: var(--shade-10);
 }
 
 [data-theme='dark'] {

@@ -1,6 +1,4 @@
-import { action as theme } from '$lib/features/theme/action.ts';
 import { THEME_COOKIE_NAME } from '$lib/features/theme/constants.ts';
-import { type Actions } from '@sveltejs/kit';
 import { type ServerLoad } from '@sveltejs/kit';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 
@@ -9,7 +7,3 @@ export const load: ServerLoad = ({ cookies }) => {
 
   return { theme };
 };
-
-export const actions = {
-  theme,
-} satisfies Actions;
