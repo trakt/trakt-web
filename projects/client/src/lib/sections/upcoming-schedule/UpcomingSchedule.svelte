@@ -53,7 +53,7 @@
   }
 
   .upcoming-schedule-title {
-    color: #bcbcbc;
+    color: var(--color-text-primary);
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 600;
