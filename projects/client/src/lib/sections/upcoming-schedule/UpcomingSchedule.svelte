@@ -48,16 +48,22 @@
 
 <style>
   .upcoming-schedule-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
     /* TODO(@vlad): needed only for testing scroll states, remove when dev stable  */
     padding-bottom: 100dvh;
   }
 
   .upcoming-schedule-title {
     color: var(--color-text-primary);
-    font-size: 1.25rem;
+    margin: 0 3.5rem;
+    font-size: 2.5rem;
     font-style: normal;
     font-weight: 600;
-    margin: 0.5rem 0;
+    line-height: 90%;
+    letter-spacing: -0.1rem;
   }
 
   .episode-list {
