@@ -5,7 +5,7 @@
 
   import { i18n } from "$lib/features/i18n/index.ts";
   import { ParaglideJS } from "@inlang/paraglide-sveltekit";
-  import Navbar from "$lib/features/navbar/Navbar.svelte";
+  import Navbar from "$lib/sections/navbar/Navbar.svelte";
 
   const { data, children } = $props();
 </script>
