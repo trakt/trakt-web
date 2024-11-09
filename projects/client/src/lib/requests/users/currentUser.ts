@@ -11,6 +11,7 @@ export type User = {
   avatar: {
     url: string;
   };
+  isVip: boolean;
 };
 
 export function currentUser(): Promise<User> {
@@ -44,6 +45,7 @@ export function currentUser(): Promise<User> {
       avatar: {
         url: body.images!.avatar.full,
       },
+      isVip: body.vip || body.vip_ep,
     };
   });
 }

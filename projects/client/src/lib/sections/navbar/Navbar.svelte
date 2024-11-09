@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Logo from "$lib/components/Logo.svelte";
+  import Logo from "$lib/components/logo/Logo.svelte";
   import { onMount } from "svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import type { Theme } from "$lib/features/theme/models/Theme";

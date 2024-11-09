@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable } from "svelte/store";
   import { onMount } from "svelte";
+  import VipBadge from "$lib/components/badge/VipBadge.svelte";
 
   const emptyUser: User = {
     name: {
@@ -16,6 +17,8 @@
     avatar: {
       url: "",
     },
+    isVip: false,
+    isVipEp: false,
   };
 
   const user = writable(emptyUser);
@@ -33,9 +36,14 @@
     />
   </div>
   <div class="profile-info">
-    <p class="profile-info-greeting">
-      {m.profile_banner_greeting({ name: $user.name.first })}
-    </p>
+    <div class="profile-info-primary">
+      <p class="profile-info-greeting">
+        {m.profile_banner_greeting({ name: $user.name.first })}
+      </p>
+      {#if $user.isVip}
+        <VipBadge />
+      {/if}
+    </div>
     <p class="profile-info-location">{$user.location}</p>
   </div>
 </div>
@@ -68,6 +76,12 @@
     display: inline-flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    .profile-info-primary {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
     .profile-info-greeting {
       margin: 0;

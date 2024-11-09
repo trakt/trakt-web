@@ -105,6 +105,9 @@
 
   --color-background-navbar: color-mix(in srgb, var(--shade-920) 90%, transparent 10%);
   --color-foreground-navbar: var(--shade-10);
+
+  --color-background-vip-badge: var(--purple-500);
+  --color-foreground-vip-badge: var(--shade-10);
 }
 
 [data-theme='dark'] {
