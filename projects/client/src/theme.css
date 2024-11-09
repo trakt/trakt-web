@@ -96,6 +96,7 @@
 
   --color-text-finale-tag: var(--shade-10);
   --color-background-finale-tag: var(--red-700);
+  --color-border-avatar: var(--shade-600);
 
   /**
   * Global variables independent of theme
@@ -123,4 +124,5 @@
 
   --color-text-finale-tag: var(--shade-10);
   --color-background-finale-tag: var(--red-700);
+  --color-border-avatar: var(--shade-50);
 }

@@ -1,9 +1,10 @@
-import { api } from '$lib/requests/internal/api.ts';
+import { api } from '../_internal/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import {
   type EpisodeType,
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
+import { authHeader } from '$lib/requests/_internal/authHeader.ts';
 
 export type CalendarShowsParams = {
   startDate: string;
@@ -39,7 +40,7 @@ export function upcomingEpisodes({
         days,
       },
       extraHeaders: {
-        Authorization: `Bearer ${TRAKT_BEARER_TOKEN}`,
+        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

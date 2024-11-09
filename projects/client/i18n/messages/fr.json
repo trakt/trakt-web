@@ -6,5 +6,6 @@
   "mid_season_premiere": "Première de mi-saison",
   "season_finale": "Finale de la saison",
   "series_finale": "Finale de la série",
-  "mid_season_finale": "Finale de mi-saison"
+  "mid_season_finale": "Finale de mi-saison",
+  "profile_banner_greeting": "Bonjour, {name}"
 }
