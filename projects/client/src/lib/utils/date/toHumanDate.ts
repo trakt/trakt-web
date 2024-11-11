@@ -3,6 +3,10 @@ import { format } from 'date-fns/format';
 import { intervalToDuration } from 'date-fns/intervalToDuration';
 import { LOCALE_MAP } from '$lib/utils/date/LOCALE_MAP.ts';
 
+function stripTime(date: Date): Date {
+  return new Date(date.toDateString());
+}
+
 export function toHumanDate(
   today: Date,
   date: Date,
@@ -11,8 +15,8 @@ export function toHumanDate(
   const locale = LOCALE_MAP[localeKey] ?? LOCALE_MAP['en'];
 
   const { days = 0 } = intervalToDuration({
-    start: today,
-    end: date,
+    start: stripTime(today),
+    end: stripTime(date),
   });
 
   const isInRelativeRange = days >= -6 && days <= 6;

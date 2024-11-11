@@ -11,6 +11,12 @@ function addDays(date: Date, days: number): Date {
   return result;
 }
 
+function addHours(date: Date, hours: number): Date {
+  const result = new Date(date);
+  result.setHours(result.getHours() + hours);
+  return result;
+}
+
 describe('toHumanDate', () => {
   it('will display Sunday at 12:00 AM', () => {
     const today = stripTime(new Date());
@@ -70,6 +76,16 @@ describe('toHumanDate', () => {
 
     expect(toHumanDate(wednesday, nextWeek, 'en')).toBe(
       'December 27th, 2023 at 12:00 AM',
+    );
+  });
+
+  it.only('will display the date in the past if is more than strictly more 6 days ', () => {
+    const wednesday = stripTime(new Date('2023-12-20'));
+
+    const previousWeek = addHours(addDays(wednesday, -6), -4);
+
+    expect(toHumanDate(wednesday, previousWeek, 'en')).toBe(
+      'December 13th, 2023 at 8:00 PM',
     );
   });
 });
