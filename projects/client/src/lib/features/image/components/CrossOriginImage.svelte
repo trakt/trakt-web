@@ -1,6 +1,7 @@
 <script lang="ts">
   import { deserialize } from "$app/forms";
   import { writable } from "svelte/store";
+  import { IS_PROD } from "$lib/utils/env";
   import type { SerializedImageResponse } from "../models/SerializedImageResponse";
   const emptyResponse = {
     uri: "https://dummyimage.com/400/333333/efefef.png&text=.",
@@ -14,7 +15,7 @@
   const { alt, src }: CrossOriginImageProps = $props();
 
   function urlContentToDataUri(url: string) {
-    if (import.meta.env.PROD) {
+    if (IS_PROD) {
       return Promise.resolve({
         uri: url,
       });
