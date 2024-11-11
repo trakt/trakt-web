@@ -54,5 +54,5 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: ./.github/actions/upload-output
         with:
-          outputArtifact: pandoras-archive
+          buildArtifact: pandoras-archive
           cloudflareArtifact: the-edge-awakened
