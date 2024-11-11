@@ -1,8 +1,20 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { SerializedImageResponse } from './models/SerializedImageResponse.ts';
 import { Buffer } from 'node:buffer';
+import { IS_PROD } from '$lib/utils/env/index.ts';
 
-export const action = async (
+const prodHandler = () => {
+  const message = [
+    'The code whispers forbidden secrets, tempting you with its power.',
+    'But beware!',
+    'The guardians of production stand vigilant,',
+    'ready to banish any who dare to defy their ancient laws.',
+  ];
+
+  throw new Error(message.join(' '));
+};
+
+const devHandler = async (
   { request }: RequestEvent,
 ): Promise<SerializedImageResponse> => {
   const data = await request.formData();
@@ -20,3 +32,5 @@ export const action = async (
 
   return { uri };
 };
+
+export const action = IS_PROD ? prodHandler : devHandler;
