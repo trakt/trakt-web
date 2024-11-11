@@ -23,7 +23,7 @@ const config = {
       },
     }),
     alias: {
-      '@trakt/api': '../api/src/index.ts',
+      '@trakt/api': './src/lib/api.ts',
     },
   },
 };
