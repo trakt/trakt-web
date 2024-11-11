@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => ({
     'TRAKT_CLIENT_SECRET': `"${process.env.TRAKT_CLIENT_SECRET}"`,
     /** TODO: remove when auth flow is part of client */
     'TRAKT_BEARER_TOKEN': `"${process.env.TRAKT_BEARER_TOKEN}"`,
-    'TRAKT_MODE': `"${mode}"`,
+    'TRAKT_MODE': `"${mode}${process.env.IS_PREVIEW ? '-preview' : ''}"`,
   },
 
   server: {

@@ -1,6 +1,17 @@
 import { Environment, traktApi } from '@trakt/api';
+import { IS_DEV, IS_PREVIEW } from '$lib/utils/env/index.ts';
 
 export const api = traktApi({
   apiKey: TRAKT_CLIENT_ID,
-  environment: Environment.svelte_dev,
+  environment: (() => {
+    if (IS_DEV) {
+      return Environment.svelte_dev;
+    }
+
+    if (IS_PREVIEW) {
+      return Environment.svelte_preview;
+    }
+
+    return Environment.production;
+  })(),
 });
