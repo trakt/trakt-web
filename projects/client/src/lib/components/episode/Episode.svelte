@@ -103,11 +103,10 @@
       font-weight: 700;
       letter-spacing: 0.025rem;
 
-      display: flex;
       height: 0.85rem;
+      line-height: 0.85rem;
       margin: 0;
       padding: 0.125rem 0.5rem;
-      align-items: center;
 
       border-radius: 1.125rem;
     }
