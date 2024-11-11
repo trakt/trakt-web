@@ -15,6 +15,11 @@ composed of multiple interconnected projects:
 - **`swagger`:** The public notice board. A simple `hono` server that exposes
   the API contract as an OpenAPI/Swagger definition, providing clear
   documentation for those who wish to understand our methods.
+- **`client`:** The gleaming chrome of our pursuit. This project houses the
+  Trakt Lite client, a sleek and efficient machine built with Deno and
+  SvelteKit. It's the polished facade, the fast car we use to chase down those
+  elusive media insights. (Just try not to crash it into a dumpster fire like
+  last time.)
 
 ## Getting Started
 
