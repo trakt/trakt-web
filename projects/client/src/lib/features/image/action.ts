@@ -1,5 +1,5 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { SerializedImageResponse } from './models/SerializedImageResponse.ts';
+import type { SerializedImageResponse } from './models/SerializedImageResponse.ts';
 import { Buffer } from 'node:buffer';
 import { IS_PROD } from '$lib/utils/env/index.ts';
 
