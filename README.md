@@ -1,5 +1,7 @@
 # trakt-webapp
 
+![CI](https://github.com/trakt/trakt-webapp/actions/workflows/ci.yml/badge.svg)
+
 ## Project Structure
 
 This [workspace](https://docs.deno.com/runtime/fundamentals/workspaces/) is
