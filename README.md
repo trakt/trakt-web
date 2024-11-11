@@ -66,3 +66,28 @@ To build the Trakt Lite client, run the following command:
 cd projects/client/
 [deno|npm|bun] run build
 ```
+
+## Summoning a Production Preview: A How-To Guide
+
+### Vite
+
+Simply run the following command:
+
+```sh
+[deno|npm|bun] run build:preview && [deno|npm|bun] run preview
+```
+
+### Wrangler
+
+To preview via Wrangler you'll need 2 terminals:
+
+1. In one terminal, `Vite Preview` commands.
+1. In the other terminal:
+
+```sh
+[npx|bunx] wrangler pages dev .svelte-kit/cloudflare
+```
+
+**NOTE**: Deno does not support
+[VM modules as of yet](https://github.com/denoland/deno/issues/26349), wrangler
+can only be preview via `npm` or `bun`.
