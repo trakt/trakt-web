@@ -21,6 +21,20 @@ composed of multiple interconnected projects:
   elusive media insights. (Just try not to crash it into a dumpster fire like
   last time.)
 
+## Environment Variables
+
+The following environment variables are required for the workspace to function
+properly:
+
+- **`TRAKT_CLIENT_ID`:** The client ID for the Trakt API.
+- **`TRAKT_CLIENT_SECRET`:** The client secret for the Trakt API.
+  - Required for the `playground` project.
+- **`TRAKT_BEARER_TOKEN`:** The bearer token for the Trakt API.
+  - Can be generated using the `playground` project.
+
+**NOTE:** Use the `trakt-ios` or `trakt-android` client ID and secret, as they
+are the only ones that work with the private API.
+
 ## Getting Started
 
 This is a Deno project, so you need to have Deno installed on your machine
@@ -43,3 +57,12 @@ please refer to the
 
 - Client:
   - Development: `deno task client:dev`
+
+## Build Trakt Lite
+
+To build the Trakt Lite client, run the following command:
+
+```sh
+cd projects/client/
+[deno|npm|bun] run build
+```
