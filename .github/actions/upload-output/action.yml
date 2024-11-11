@@ -1,0 +1,21 @@
+name: 'Delivering the Goods'
+inputs:
+  cloudflareArtifact:
+    description: 'The name of the Cloudflare artifact'
+    required: true
+  buildArtifact:
+    description: 'The name of the output artifact'
+    required: true
+description: 'Spirits the precious output of a build to the ethereal sanctuary of the GitHub artifact store, safe from the prying eyes of chaos.'
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.buildArtifact }}
+        path: projects/client/.svelte-kit/output
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.cloudflareArtifact }}
+        path: projects/client/.svelte-kit/cloudflare
