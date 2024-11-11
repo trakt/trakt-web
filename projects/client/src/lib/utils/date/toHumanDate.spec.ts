@@ -79,7 +79,7 @@ describe('toHumanDate', () => {
     );
   });
 
-  it.only('will display the date in the past if is more than strictly more 6 days ', () => {
+  it('will display the date in the past if is more than strictly more 6 days ', () => {
     const wednesday = stripTime(new Date('2023-12-20'));
 
     const previousWeek = addHours(addDays(wednesday, -6), -4);
