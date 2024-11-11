@@ -1,5 +1,6 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { SerializedImageResponse } from './models/SerializedImageResponse.ts';
+import { Buffer } from 'node:buffer';
 
 export const action = async (
   { request }: RequestEvent,
@@ -13,15 +14,9 @@ export const action = async (
 
   const response = await fetch(url);
   const blob = await response.blob();
-  const reader = new FileReader();
-
-  const uri = await new Promise<string>((resolve) => {
-    reader.onloadend = () => {
-      resolve(reader.result as string);
-    };
-    reader.onerror = () => resolve('');
-    reader.readAsDataURL(blob);
-  });
+  const arrayBuffer = await blob.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+  const uri = `data:${blob.type};base64,${buffer.toString('base64')}`;
 
   return { uri };
 };
