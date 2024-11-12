@@ -2,10 +2,11 @@
 // for information about these interfaces
 declare global {
   const TRAKT_CLIENT_ID: string;
-  const TRAKT_CLIENT_SECRET: string;
-  /** TODO: remove when auth flow is part of client */
-  const TRAKT_BEARER_TOKEN: string;
   const TRAKT_MODE: 'development' | 'production';
+
+  type Nil = null | undefined;
+
+  type HttpsUrl = `https://${string}`;
 
   namespace App {
     // interface Error {}

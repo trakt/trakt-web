@@ -4,7 +4,7 @@ import {
   type EpisodeType,
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
-import { authHeader } from '$lib/requests/_internal/authHeader.ts';
+import { authHeader } from '../_internal/authHeader.ts';
 
 export type CalendarShowsParams = {
   startDate: string;
@@ -63,7 +63,7 @@ export function upcomingEpisodes({
             season: item.episode.season,
             number: item.episode.number,
             poster: {
-              url: prependHttps(posterCandidate),
+              url: prependHttps(posterCandidate)!,
             },
             airedDate: new Date(item.first_aired),
           };

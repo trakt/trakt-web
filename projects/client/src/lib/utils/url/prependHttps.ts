@@ -1,10 +1,10 @@
 export function prependHttps(
   url: string | undefined,
-  placeholder?: string,
-): string {
+  placeholder?: HttpsUrl,
+): HttpsUrl | Nil {
   if (!url) {
-    return placeholder ?? '';
+    return placeholder;
   }
 
-  return url.startsWith('http') ? url : `https://${url}`;
+  return url.startsWith('https://') ? url as HttpsUrl : `https://${url}`;
 }

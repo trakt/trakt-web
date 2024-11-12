@@ -1,5 +1,5 @@
 import { api } from '../_internal/api.ts';
-import { authHeader } from '$lib/requests/_internal/authHeader.ts';
+import { authHeader } from '../_internal/authHeader.ts';
 
 export type User = {
   name: {

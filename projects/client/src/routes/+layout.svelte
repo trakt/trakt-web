@@ -6,15 +6,17 @@
   import { i18n } from "$lib/features/i18n/index.ts";
   import { ParaglideJS } from "@inlang/paraglide-sveltekit";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
+  import AuthGuard from "$lib/features/auth/components/AuthGuard.svelte";
 
   const { data, children } = $props();
 </script>
 
 <ParaglideJS {i18n}>
-  <Navbar theme={data.theme} />
-  {@render children()}
+  <AuthGuard token={data.token}>
+    <Navbar theme={data.theme} />
+    {@render children()}
+  </AuthGuard>
 </ParaglideJS>
-
 <svelte:head>
   <title>Trakt Lite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />

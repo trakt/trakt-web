@@ -1,5 +1,7 @@
+import { getToken } from '$lib/features/auth/token/index.ts';
+
 export function authHeader() {
   return {
-    Authorization: `Bearer ${TRAKT_BEARER_TOKEN}`,
+    Authorization: `Bearer ${getToken()}`,
   };
 }

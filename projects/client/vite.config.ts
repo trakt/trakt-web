@@ -27,9 +27,6 @@ const MONOREPO_ROOT = findGitRoot(__dirname);
 export default defineConfig(({ mode }) => ({
   define: {
     'TRAKT_CLIENT_ID': `"${process.env.TRAKT_CLIENT_ID}"`,
-    'TRAKT_CLIENT_SECRET': `"${process.env.TRAKT_CLIENT_SECRET}"`,
-    /** TODO: remove when auth flow is part of client */
-    'TRAKT_BEARER_TOKEN': `"${process.env.TRAKT_BEARER_TOKEN}"`,
     'TRAKT_MODE': `"${mode}${process.env.IS_PREVIEW ? '-preview' : ''}"`,
   },
 
