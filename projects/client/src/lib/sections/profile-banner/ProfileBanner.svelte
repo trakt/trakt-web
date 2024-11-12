@@ -18,7 +18,6 @@
       url: "",
     },
     isVip: false,
-    isVipEp: false,
   };
 
   const user = writable(emptyUser);
