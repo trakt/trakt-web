@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { type EpisodeType } from "$lib/models/EpisodeType";
+  import * as m from "$lib/features/i18n/messages.ts";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
   import EpisodeFooter from "../card/EpisodeFooter.svelte";
-  import EpisodeTimeTag from "../tags/EpisodeTimeTag.svelte";
+  import ShowProgressTag from "../tags/ShowProgressTag.svelte";
 
   type EpisodeProps = {
     posterUrl: string;
@@ -11,6 +11,9 @@
     episodeTitle: string;
     episodeNumber: number;
     seasonNumber: number;
+    total: number;
+    completed: number;
+    remaining: number;
   };
 
   const {
@@ -19,15 +22,20 @@
     episodeTitle,
     episodeNumber,
     seasonNumber,
+    total,
+    completed,
+    remaining,
   }: EpisodeProps = $props();
 </script>
 
 <EpisodeCard>
   <EpisodeCover src={`${posterUrl}`} alt={`${showTitle} - ${episodeTitle}`}>
     {#snippet tags()}
-      <EpisodeTimeTag>
-        {"TODO: add progress tag"}
-      </EpisodeTimeTag>
+      <ShowProgressTag {total} progress={completed}>
+        <span class="show-progress-text">
+          {m.remaining_episodes({ count: remaining })}
+        </span>
+      </ShowProgressTag>
     {/snippet}
   </EpisodeCover>
   <EpisodeFooter>
@@ -39,6 +47,10 @@
 </EpisodeCard>
 
 <style>
+  .show-progress-text {
+    position: relative;
+  }
+
   .episode-show-title {
     color: var(--color-text-primary);
     margin: 0;

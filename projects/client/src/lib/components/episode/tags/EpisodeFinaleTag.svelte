@@ -1,17 +1,17 @@
 <script lang="ts">
-  import EpisodeTagContent from "./EpisodeTagContent.svelte";
+  import TagContent from "$lib/components/tags/TagContent.svelte";
 
   const { children }: ChildrenProps = $props();
 </script>
 
 <div class="episode-finale-tag">
-  <EpisodeTagContent>
+  <TagContent>
     {@render children()}
-  </EpisodeTagContent>
+  </TagContent>
 </div>
 
 <style>
-  .episode-finale-tag :global(.episode-tag) {
+  .episode-finale-tag :global(.trakt-tag) {
     text-transform: uppercase;
 
     background: var(--color-background-finale-tag);

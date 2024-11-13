@@ -12,6 +12,9 @@ export type UpNextEntry = {
   poster: {
     url: string;
   };
+  total: number;
+  completed: number;
+  remaining: number;
 };
 
 export function upNext(): Promise<UpNextEntry[]> {
@@ -46,7 +49,9 @@ export function upNext(): Promise<UpNextEntry[]> {
             poster: {
               url: prependHttps(posterCandidate)!,
             },
-            airedDate: new Date(),
+            total: item.progress.aired,
+            completed: item.progress.completed,
+            remaining: item.progress.aired - item.progress.completed,
           };
         });
     });

@@ -18,6 +18,23 @@
 </div>
 
 <style>
+  .episode-tags {
+    --episode-tag-padding: 0.5rem;
+
+    width: calc(100% - var(--episode-tag-padding) * 4);
+    position: absolute;
+    padding: var(--episode-tag-padding);
+
+    bottom: 0;
+    left: 0;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
   .episode-cover {
     position: relative;
     height: 7.5rem;
@@ -70,16 +87,5 @@
         var(--color-card-background) 100%
       );
     }
-  }
-
-  .episode-tags {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 0.5rem;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: 0.25rem;
   }
 </style>

@@ -2,12 +2,12 @@
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="episode-tag">
+<div class="trakt-tag">
   {@render children()}
 </div>
 
 <style>
-  .episode-tag {
+  .trakt-tag {
     font-size: 0.625rem;
     font-style: normal;
     font-weight: 700;

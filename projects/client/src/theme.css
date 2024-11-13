@@ -88,9 +88,6 @@
 
   --color-card-background: var(--shade-50);
 
-  --color-text-time-tag: var(--shade-100);
-  --color-background-time-tag: var(--shade-900);
-
   --color-text-premiere-tag: var(--shade-10);
   --color-background-premiere-tag: var(--green-700);
 
@@ -108,6 +105,12 @@
 
   --color-background-vip-badge: var(--purple-500);
   --color-foreground-vip-badge: var(--shade-10);
+
+  --color-text-time-tag: var(--shade-800);
+  --color-background-time-tag: var(--shade-10);
+
+  --color-text-progress-tag: var(--purple-800);
+  --color-background-progress-tag: var(--purple-100);
 }
 
 [data-theme='dark'] {
@@ -118,9 +121,6 @@
   --color-text-secondary: var(--shade-300);
 
   --color-card-background: var(--shade-920);
-
-  --color-text-time-tag: var(--shade-800);
-  --color-background-time-tag: var(--shade-10);
 
   --color-text-premiere-tag: var(--shade-10);
   --color-background-premiere-tag: var(--green-700);

@@ -1,17 +1,17 @@
 <script lang="ts">
-  import EpisodeTagContent from "./EpisodeTagContent.svelte";
+  import TagContent from "$lib/components/tags/TagContent.svelte";
 
   const { children }: ChildrenProps = $props();
 </script>
 
 <div class="episode-time-tag">
-  <EpisodeTagContent>
+  <TagContent>
     {@render children()}
-  </EpisodeTagContent>
+  </TagContent>
 </div>
 
 <style>
-  .episode-time-tag :global(.episode-tag) {
+  .episode-time-tag :global(.trakt-tag) {
     &::first-letter {
       text-transform: capitalize;
     }

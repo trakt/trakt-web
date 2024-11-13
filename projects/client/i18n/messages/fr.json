@@ -8,5 +8,6 @@
   "series_finale": "Finale de la série",
   "mid_season_finale": "Finale de mi-saison",
   "profile_banner_greeting": "Bonjour, {name}",
-  "up_next_title": "À suivre"
+  "up_next_title": "À suivre",
+  "remaining_episodes": "{count} restant"
 }

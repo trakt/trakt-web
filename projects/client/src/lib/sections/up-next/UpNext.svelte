@@ -22,6 +22,9 @@
         posterUrl={entry.poster.url}
         showTitle={entry.show.title}
         episodeTitle={entry.title}
+        completed={entry.completed}
+        total={entry.total}
+        remaining={entry.remaining}
       />
     {/each}
   </div>
