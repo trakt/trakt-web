@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import Episode from "$lib/components/episode/Episode.svelte";
-
+  import UpcomingEpisode from "$lib/components/episode/upcoming/UpcomingEpisode.svelte";
   import {
     upcomingEpisodes,
     type EpisodeEntry,
@@ -32,7 +31,7 @@
 
   <div class="episode-list episode-list-horizontal-scroll">
     {#each calendar as entry}
-      <Episode
+      <UpcomingEpisode
         i18n={EpisodeIntlProvider}
         episodeNumber={entry.number}
         seasonNumber={entry.season}

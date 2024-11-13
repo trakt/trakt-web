@@ -1,7 +1,7 @@
 <script lang="ts">
   import { deserialize } from "$app/forms";
   import { type InitiateDeviceAuth } from "$lib/requests/auth/initiateDeviceAuth";
-  import { onMount, type Snippet } from "svelte";
+  import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
   import Logo from "$lib/components/logo/Logo.svelte";
@@ -9,8 +9,7 @@
 
   type AuthGuardProps = {
     token: string | Nil;
-    children: Snippet;
-  };
+  } & ChildrenProps;
 
   const { token: seed, children }: AuthGuardProps = $props();
   const authUrl = writable<string | Nil>();

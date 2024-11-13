@@ -8,6 +8,10 @@ declare global {
 
   type HttpsUrl = `https://${string}`;
 
+  type ChildrenProps = {
+    children: import('svelte').Snippet;
+  };
+
   namespace App {
     // interface Error {}
     // interface Locals {}

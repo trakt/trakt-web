@@ -5,3 +5,10 @@ body {
   color: var(--color-foreground);
   font-family: "Spline Sans", Arial, sans-serif;
 }
+
+/* TODO: remove once we have typography components defined */
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
