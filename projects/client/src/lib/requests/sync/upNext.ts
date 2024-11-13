@@ -15,13 +15,14 @@ export type UpNextEntry = {
   total: number;
   completed: number;
   remaining: number;
+  runtime: number;
 };
 
 export function upNext(): Promise<UpNextEntry[]> {
   return api.sync.progress
     .upNext({
       query: {
-        extended: 'cloud9',
+        extended: 'full,cloud9',
       },
       extraHeaders: {
         ...authHeader(),
@@ -52,6 +53,7 @@ export function upNext(): Promise<UpNextEntry[]> {
             total: item.progress.aired,
             completed: item.progress.completed,
             remaining: item.progress.aired - item.progress.completed,
+            runtime: item.show.runtime!,
           };
         });
     });

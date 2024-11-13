@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
   import EpisodeFooter from "../card/EpisodeFooter.svelte";
@@ -14,6 +15,7 @@
     total: number;
     completed: number;
     remaining: number;
+    runtime: number;
   };
 
   const {
@@ -25,6 +27,7 @@
     total,
     completed,
     remaining,
+    runtime,
   }: EpisodeProps = $props();
 </script>
 
@@ -33,7 +36,9 @@
     {#snippet tags()}
       <ShowProgressTag {total} progress={completed}>
         <span class="show-progress-text">
-          {m.remaining_episodes({ count: remaining })}
+          {m.remaining_episodes({ count: remaining })} ({toHumanDuration({
+            minutes: runtime * remaining,
+          })})
         </span>
       </ShowProgressTag>
     {/snippet}

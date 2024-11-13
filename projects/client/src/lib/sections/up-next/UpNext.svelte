@@ -25,6 +25,7 @@
         completed={entry.completed}
         total={entry.total}
         remaining={entry.remaining}
+        runtime={entry.runtime}
       />
     {/each}
   </div>
