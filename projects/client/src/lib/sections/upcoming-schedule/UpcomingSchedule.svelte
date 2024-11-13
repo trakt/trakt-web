@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import UpcomingEpisode from "$lib/components/episode/upcoming/UpcomingEpisode.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import {
     upcomingEpisodes,
     type EpisodeEntry,
   } from "$lib/requests/calendars/upcomingEpisodes";
-  import * as m from "$lib/features/i18n/messages.ts";
-  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
+  import { onMount } from "svelte";
 
   let calendar: EpisodeEntry[] = $state([]);
 
@@ -50,9 +50,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
-    /* TODO(@vlad): needed only for testing scroll states, remove when dev stable  */
-    padding-bottom: 100dvh;
   }
 
   .upcoming-schedule-title {

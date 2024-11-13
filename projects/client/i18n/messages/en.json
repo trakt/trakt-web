@@ -7,5 +7,6 @@
   "season_finale": "Season Finale",
   "series_finale": "Series Finale",
   "mid_season_finale": "Mid-Season Finale",
-  "profile_banner_greeting": "Hello, {name}"
+  "profile_banner_greeting": "Hello, {name}",
+  "up_next_title": "Up Next"
 }
