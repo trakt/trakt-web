@@ -5,6 +5,7 @@
   import EpisodeCover from "../card/EpisodeCover.svelte";
   import EpisodeFooter from "../card/EpisodeFooter.svelte";
   import ShowProgressTag from "../tags/ShowProgressTag.svelte";
+  import MarkAsWatchedButton from "./MarkAsWatchedButton.svelte";
 
   type EpisodeProps = {
     posterUrl: string;
@@ -48,6 +49,9 @@
     <p class="episode-title ellipsis">
       {seasonNumber}x{episodeNumber} - {episodeTitle}
     </p>
+    {#snippet actions()}
+      <MarkAsWatchedButton label={`Mark ${episodeTitle} as watched`} />
+    {/snippet}
   </EpisodeFooter>
 </EpisodeCard>
 
