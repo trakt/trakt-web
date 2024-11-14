@@ -1,12 +1,13 @@
 <script lang="ts">
   type MarkAsWatchedButtonProps = {
     label: string;
+    onClick?: (ev: MouseEvent) => void;
   };
 
-  const { label }: MarkAsWatchedButtonProps = $props();
+  const { label, onClick }: MarkAsWatchedButtonProps = $props();
 </script>
 
-<button class="mark-as-watched-button" aria-label={label}>
+<button class="mark-as-watched-button" aria-label={label} onclick={onClick}>
   <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="none">
     <path
       class="icon-background"

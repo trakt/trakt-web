@@ -17,6 +17,7 @@
     completed: number;
     remaining: number;
     runtime: number;
+    onMarkAsWatched: () => void;
   };
 
   const {
@@ -29,6 +30,7 @@
     completed,
     remaining,
     runtime,
+    onMarkAsWatched,
   }: EpisodeProps = $props();
 </script>
 
@@ -50,7 +52,10 @@
       {seasonNumber}x{episodeNumber} - {episodeTitle}
     </p>
     {#snippet actions()}
-      <MarkAsWatchedButton label={`Mark ${episodeTitle} as watched`} />
+      <MarkAsWatchedButton
+        label={`Mark ${episodeTitle} as watched`}
+        onClick={onMarkAsWatched}
+      />
     {/snippet}
   </EpisodeFooter>
 </EpisodeCard>

@@ -12,6 +12,7 @@ export type UpNextEntry = {
   poster: {
     url: string;
   };
+  id: number;
   total: number;
   completed: number;
   remaining: number;
@@ -50,6 +51,7 @@ export function upNext(): Promise<UpNextEntry[]> {
             poster: {
               url: prependHttps(posterCandidate)!,
             },
+            id: episode.ids.trakt,
             total: item.progress.aired,
             completed: item.progress.completed,
             remaining: item.progress.aired - item.progress.completed,

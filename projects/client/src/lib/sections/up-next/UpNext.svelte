@@ -1,6 +1,7 @@
 <script lang="ts">
   import UpNextEpisode from "$lib/components/episode/up-next/UpNextEpisode.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { markAsWatched } from "$lib/requests/sync/markAsWatched";
   import { upNext, type UpNextEntry } from "$lib/requests/sync/upNext";
   import { onMount } from "svelte";
 
@@ -26,6 +27,17 @@
         total={entry.total}
         remaining={entry.remaining}
         runtime={entry.runtime}
+        onMarkAsWatched={async () => {
+          await markAsWatched({
+            episodes: [
+              {
+                ids: { trakt: entry.id },
+                watched_at: new Date().toISOString(),
+              },
+            ],
+          });
+          next = await upNext();
+        }}
       />
     {/each}
   </div>
