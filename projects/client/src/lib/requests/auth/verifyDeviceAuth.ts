@@ -1,5 +1,5 @@
-import { api } from '$lib/requests/_internal/api.ts';
 import { env } from '$env/dynamic/private';
+import { api } from '$lib/requests/_internal/api.ts';
 
 export type DeviceAuth = {
   token: {

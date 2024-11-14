@@ -1,9 +1,9 @@
-import { api } from '../_internal/api.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import {
   type EpisodeType,
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { api } from '../_internal/api.ts';
 import { authHeader } from '../_internal/authHeader.ts';
 
 export type CalendarShowsParams = {

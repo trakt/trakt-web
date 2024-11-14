@@ -1,6 +1,6 @@
-import { readonly, writable } from 'svelte/store';
 import { Theme } from '$lib/features//theme/models/Theme.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
+import { readonly, writable } from 'svelte/store';
 
 export const nextTheme = (browser: boolean) => (theme: Theme) => {
   switch (theme) {

@@ -1,10 +1,10 @@
-import type { RequestEvent } from '@sveltejs/kit';
 import { AUTH_COOKIE_NAME } from '$lib/features/auth/constants.ts';
+import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
 import {
   DeviceUnauthorizedError,
   verifyDeviceAuth,
 } from '$lib/requests/auth/verifyDeviceAuth.ts';
-import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
+import type { RequestEvent } from '@sveltejs/kit';
 
 export type AuthResponse = { token?: string };
 

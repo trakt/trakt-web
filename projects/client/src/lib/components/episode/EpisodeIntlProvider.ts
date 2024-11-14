@@ -1,11 +1,11 @@
-import type { EpisodeIntl } from './EpisodeIntl.ts';
-import * as m from '$lib/features/i18n/messages.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
-import { toHumanDate } from '$lib/utils/date/toHumanDate.ts';
+import * as m from '$lib/features/i18n/messages.ts';
 import {
   EpisodeFinaleType,
   EpisodePremiereType,
 } from '$lib/models/EpisodeType.ts';
+import { toHumanDate } from '$lib/utils/date/toHumanDate.ts';
+import type { EpisodeIntl } from './EpisodeIntl.ts';
 
 export const EpisodeIntlProvider: EpisodeIntl = {
   premiereText: ({ type }) => {

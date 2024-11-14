@@ -1,11 +1,11 @@
 import { paraglide } from '@inlang/paraglide-sveltekit/vite';
-import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
 import { Environment } from './src/lib/api.ts';
 
-import path from 'node:path';
 import fs from 'node:fs';
+import path from 'node:path';
 import process from 'node:process';
 
 function findGitRoot(dir: string): string {

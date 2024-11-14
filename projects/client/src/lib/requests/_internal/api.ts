@@ -1,5 +1,5 @@
-import { Environment, traktApi } from '@trakt/api';
 import { IS_DEV, IS_PREVIEW } from '$lib/utils/env/index.ts';
+import { Environment, traktApi } from '@trakt/api';
 
 export const api = traktApi({
   apiKey: TRAKT_CLIENT_ID,

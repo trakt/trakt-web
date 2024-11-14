@@ -1,7 +1,7 @@
-import type { Plugin } from 'vite';
-import { exit } from 'node:process';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { exit } from 'node:process';
+import type { Plugin } from 'vite';
 
 export default function close(): Plugin {
   return {

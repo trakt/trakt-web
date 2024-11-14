@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { toHumanDate } from '$lib/utils/date/toHumanDate.ts';
+import { describe, expect, it } from 'vitest';
 
 function stripTime(date: Date): Date {
   return new Date(date.toDateString());
