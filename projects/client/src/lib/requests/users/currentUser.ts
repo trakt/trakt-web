@@ -11,15 +11,23 @@ export type User = {
   avatar: {
     url: string;
   };
+  cover: {
+    url: string;
+  };
   isVip: boolean;
 };
 
+const ALIEN_ISOLATION_COVER =
+  'https://walter-r2.trakt.tv/images/movies/000/759/944/fanarts/full/a12a59d031.jpg.webp';
+
+function useDefined(
+  ...values: Array<string | Nil>
+) {
+  return values.find((value) => value?.trim());
+}
+
 export function currentUser(): Promise<User> {
-  return api.users.profile({
-    params: { id: 'me' },
-    query: {
-      extended: 'full',
-    },
+  return api.users.settings({
     extraHeaders: {
       ...authHeader(),
     },
@@ -32,20 +40,28 @@ export function currentUser(): Promise<User> {
       throw new Error('Error fetching current user.');
     }
 
-    const { body } = response;
-    const fullName = body.name;
-    const [firstName = '', lastName = ''] = body.name.split(' ');
+    const { body: { user, account } } = response;
+    const fullName = user.name;
+    const [firstName = '', lastName = ''] = user.name.split(' ');
+
     return {
       name: {
         full: fullName,
         first: firstName,
         last: lastName,
       },
-      location: body.location,
+      location: user.location,
       avatar: {
-        url: body.images!.avatar.full,
+        url: user.images!.avatar.full,
       },
-      isVip: body.vip || body.vip_ep,
+      cover: {
+        url: useDefined(
+          user.vip_cover_image,
+          account.cover_image,
+          ALIEN_ISOLATION_COVER,
+        )!,
+      },
+      isVip: user.vip || user.vip_ep,
     };
   });
 }

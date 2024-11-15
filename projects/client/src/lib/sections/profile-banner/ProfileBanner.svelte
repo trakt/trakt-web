@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { currentUser, type User } from "$lib/requests/users/currentUser";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { currentUser, type User } from "$lib/requests/users/currentUser";
 
-  import * as m from "$lib/features/i18n/messages.ts";
-  import { writable } from "svelte/store";
-  import { onMount } from "svelte";
+  import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { onMount } from "svelte";
+  import { writable } from "svelte/store";
 
   const emptyUser: User = {
     name: {
@@ -17,6 +18,9 @@
     avatar: {
       url: "",
     },
+    cover: {
+      url: "",
+    },
     isVip: false,
   };
 
@@ -26,6 +30,10 @@
     currentUser().then(user.set);
   });
 </script>
+
+{#if $user.cover.url}
+  <BackgroundCoverImage src={$user.cover.url} type="Main" />
+{/if}
 
 <div class="profile-banner-container">
   <div class="profile-image">

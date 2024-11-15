@@ -1,18 +1,19 @@
 <script lang="ts">
   import { deserialize } from "$app/forms";
-  import { writable } from "svelte/store";
   import { IS_PROD } from "$lib/utils/env";
+  import { writable } from "svelte/store";
   import type { SerializedImageResponse } from "../models/SerializedImageResponse";
   const emptyResponse = {
-    uri: "https://dummyimage.com/400/333333/efefef.png&text=.",
+    uri: "",
   };
 
   type CrossOriginImageProps = {
     src: string;
     alt: string;
+    onLoad?: () => void;
   };
 
-  const { alt, src }: CrossOriginImageProps = $props();
+  const { alt, src, onLoad }: CrossOriginImageProps = $props();
 
   function urlContentToDataUri(url: string) {
     if (IS_PROD) {
@@ -55,4 +56,6 @@
   });
 </script>
 
-<img src={$response.uri} {alt} />
+{#if $response.uri}
+  <img src={$response.uri} {alt} onload={onLoad} />
+{/if}
