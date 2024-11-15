@@ -64,6 +64,7 @@
 
   .episode-list {
     display: flex;
+    height: 11rem;
     gap: 1rem;
   }
 
