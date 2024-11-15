@@ -1,4 +1,5 @@
 <script lang="ts">
+  import EpisodeCardTransition from "$lib/components/episode/card/EpisodeCardTransition.svelte";
   import UpNextEpisode from "$lib/components/episode/up-next/UpNextEpisode.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { markAsWatched } from "$lib/requests/sync/markAsWatched";
@@ -16,29 +17,31 @@
   <h2 class="up-next-title">{m.up_next_title()}</h2>
 
   <div class="episode-list episode-list-horizontal-scroll">
-    {#each next as entry}
-      <UpNextEpisode
-        episodeNumber={entry.number}
-        seasonNumber={entry.season}
-        posterUrl={entry.poster.url}
-        showTitle={entry.show.title}
-        episodeTitle={entry.title}
-        completed={entry.completed}
-        total={entry.total}
-        remaining={entry.remaining}
-        runtime={entry.runtime}
-        onMarkAsWatched={async () => {
-          await markAsWatched({
-            episodes: [
-              {
-                ids: { trakt: entry.id },
-                watched_at: new Date().toISOString(),
-              },
-            ],
-          });
-          next = await upNext();
-        }}
-      />
+    {#each next as entry (entry.id)}
+      <EpisodeCardTransition>
+        <UpNextEpisode
+          episodeNumber={entry.number}
+          seasonNumber={entry.season}
+          posterUrl={entry.poster.url}
+          showTitle={entry.show.title}
+          episodeTitle={entry.title}
+          completed={entry.completed}
+          total={entry.total}
+          remaining={entry.remaining}
+          runtime={entry.runtime}
+          onMarkAsWatched={async () => {
+            await markAsWatched({
+              episodes: [
+                {
+                  ids: { trakt: entry.id },
+                  watched_at: new Date().toISOString(),
+                },
+              ],
+            });
+            next = await upNext();
+          }}
+        />
+      </EpisodeCardTransition>
     {/each}
   </div>
 </div>

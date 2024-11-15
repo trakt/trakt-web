@@ -1,4 +1,5 @@
 <script lang="ts">
+  import EpisodeCardTransition from "$lib/components/episode/card/EpisodeCardTransition.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import UpcomingEpisode from "$lib/components/episode/upcoming/UpcomingEpisode.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -31,16 +32,18 @@
 
   <div class="episode-list episode-list-horizontal-scroll">
     {#each calendar as entry}
-      <UpcomingEpisode
-        i18n={EpisodeIntlProvider}
-        episodeNumber={entry.number}
-        seasonNumber={entry.season}
-        posterUrl={entry.poster.url}
-        showTitle={entry.show.title}
-        episodeTitle={entry.title}
-        airedDate={entry.airedDate}
-        type={entry.type}
-      />
+      <EpisodeCardTransition>
+        <UpcomingEpisode
+          i18n={EpisodeIntlProvider}
+          episodeNumber={entry.number}
+          seasonNumber={entry.season}
+          posterUrl={entry.poster.url}
+          showTitle={entry.show.title}
+          episodeTitle={entry.title}
+          airedDate={entry.airedDate}
+          type={entry.type}
+        />
+      </EpisodeCardTransition>
     {/each}
   </div>
 </div>
