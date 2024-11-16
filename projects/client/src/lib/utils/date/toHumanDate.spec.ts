@@ -19,7 +19,7 @@ function addHours(date: Date, hours: number): Date {
 
 describe('toHumanDate', () => {
   it('will display Sunday at 12:00 AM', () => {
-    const today = stripTime(new Date());
+    const today = stripTime(new Date('2023-12-20'));
     const nextSunday = addDays(today, 7 - today.getDay());
 
     expect(toHumanDate(today, nextSunday, 'en')).toBe('Sunday at 12:00 AM');
