@@ -7,7 +7,7 @@
   } & ChildrenProps;
 
   const { children, total, progress }: ShowProgressTagProps = $props();
-  const percentage = (progress / total) * 100;
+  const percentage = $derived((progress / total) * 100);
 </script>
 
 <div class="show-progress-tag" style:--progress-width={`${percentage}%`}>
