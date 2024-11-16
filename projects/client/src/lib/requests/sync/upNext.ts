@@ -1,3 +1,7 @@
+import {
+  type EpisodeType,
+  EpisodeUnknownType,
+} from '$lib/models/EpisodeType.ts';
 import { api } from '$lib/requests/_internal/api.ts';
 import { authHeader } from '$lib/requests/_internal/authHeader.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -17,6 +21,7 @@ export type UpNextEntry = {
   completed: number;
   remaining: number;
   runtime: number;
+  type: EpisodeType;
 };
 
 export function upNext(): Promise<UpNextEntry[]> {
@@ -56,6 +61,8 @@ export function upNext(): Promise<UpNextEntry[]> {
             completed: item.progress.completed,
             remaining: item.progress.aired - item.progress.completed,
             runtime: item.show.runtime!,
+            type: episode.episode_type as EpisodeType ??
+              EpisodeUnknownType.Unknown,
           };
         });
     });

@@ -5,6 +5,7 @@ import {
   EpisodePremiereType,
 } from '$lib/models/EpisodeType.ts';
 import { toHumanDate } from '$lib/utils/date/toHumanDate.ts';
+import { toHumanDuration } from '$lib/utils/date/toHumanDuration.ts';
 import type { EpisodeIntl } from './EpisodeIntl.ts';
 
 export const EpisodeIntlProvider: EpisodeIntl = {
@@ -29,4 +30,6 @@ export const EpisodeIntlProvider: EpisodeIntl = {
     }
   },
   timestampText: (next) => toHumanDate(new Date(), next, languageTag()),
+  durationText: (minutes) => toHumanDuration({ minutes }, languageTag()),
+  remainingText: (count) => m.remaining_episodes({ count }),
 };

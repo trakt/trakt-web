@@ -1,15 +1,9 @@
 <script lang="ts">
-  import {
-    EpisodeFinaleType,
-    EpisodePremiereType,
-    type EpisodeType,
-  } from "$lib/models/EpisodeType";
+  import { type EpisodeType } from "$lib/models/EpisodeType";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
   import EpisodeFooter from "../card/EpisodeFooter.svelte";
   import type { EpisodeIntl } from "../EpisodeIntl";
-  import EpisodeFinaleTag from "../tags/EpisodeFinaleTag.svelte";
-  import EpisodePremiereTag from "../tags/EpisodePremiereTag.svelte";
   import EpisodeTimeTag from "../tags/EpisodeTimeTag.svelte";
 
   type EpisodeProps = {
@@ -33,37 +27,16 @@
     airedDate,
     type,
   }: EpisodeProps = $props();
-
-  const isPremiere = $derived(
-    [
-      EpisodePremiereType.MidSeason,
-      EpisodePremiereType.Season,
-      EpisodePremiereType.Series,
-    ].includes(type as EpisodePremiereType),
-  );
-
-  const isFinale = $derived(
-    [
-      EpisodeFinaleType.MidSeason,
-      EpisodeFinaleType.Season,
-      EpisodeFinaleType.Series,
-    ].includes(type as EpisodeFinaleType),
-  );
 </script>
 
 <EpisodeCard>
-  <EpisodeCover src={`${posterUrl}`} alt={`${showTitle} - ${episodeTitle}`}>
+  <EpisodeCover
+    {i18n}
+    {type}
+    src={`${posterUrl}`}
+    alt={`${showTitle} - ${episodeTitle}`}
+  >
     {#snippet tags()}
-      {#if isFinale}
-        <EpisodeFinaleTag>
-          {i18n.finaleText({ type: type as EpisodeFinaleType })}
-        </EpisodeFinaleTag>
-      {/if}
-      {#if isPremiere}
-        <EpisodePremiereTag>
-          {i18n.premiereText({ type: type as EpisodePremiereType })}
-        </EpisodePremiereTag>
-      {/if}
       <EpisodeTimeTag>
         {i18n.timestampText(airedDate) ?? airedDate}
       </EpisodeTimeTag>

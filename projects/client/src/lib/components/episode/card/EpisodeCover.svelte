@@ -1,17 +1,53 @@
 <script lang="ts">
+  import {
+    EpisodeFinaleType,
+    EpisodePremiereType,
+    type EpisodeType,
+  } from "$lib/models/EpisodeType";
   import type { Snippet } from "svelte";
+  import type { EpisodeIntl } from "../EpisodeIntl";
+  import EpisodeFinaleTag from "../tags/EpisodeFinaleTag.svelte";
+  import EpisodePremiereTag from "../tags/EpisodePremiereTag.svelte";
 
   type EpisodeCoverProps = {
+    i18n: EpisodeIntl;
     src: string;
     alt: string;
     tags: Snippet;
+    type: EpisodeType;
   };
 
-  const { src, alt, tags }: EpisodeCoverProps = $props();
+  const { i18n, src, alt, tags, type }: EpisodeCoverProps = $props();
+
+  const isPremiere = $derived(
+    [
+      EpisodePremiereType.MidSeason,
+      EpisodePremiereType.Season,
+      EpisodePremiereType.Series,
+    ].includes(type as EpisodePremiereType),
+  );
+
+  const isFinale = $derived(
+    [
+      EpisodeFinaleType.MidSeason,
+      EpisodeFinaleType.Season,
+      EpisodeFinaleType.Series,
+    ].includes(type as EpisodeFinaleType),
+  );
 </script>
 
 <div class="episode-cover">
   <div class="episode-tags">
+    {#if isFinale}
+      <EpisodeFinaleTag>
+        {i18n.finaleText({ type: type as EpisodeFinaleType })}
+      </EpisodeFinaleTag>
+    {/if}
+    {#if isPremiere}
+      <EpisodePremiereTag>
+        {i18n.premiereText({ type: type as EpisodePremiereType })}
+      </EpisodePremiereTag>
+    {/if}
     {@render tags()}
   </div>
   <img {src} {alt} />

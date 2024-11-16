@@ -15,4 +15,6 @@ export type EpisodeIntl = {
   premiereText: (metadata: PremiereMetadata) => string;
   finaleText: (metadata: FinaleMetadata) => string;
   timestampText: (date: Date) => string;
+  durationText: (duration: number) => string;
+  remainingText: (remaining: number) => string;
 };

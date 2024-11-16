@@ -1,13 +1,14 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
-  import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
+  import type { EpisodeType } from "$lib/models/EpisodeType";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
   import EpisodeFooter from "../card/EpisodeFooter.svelte";
+  import type { EpisodeIntl } from "../EpisodeIntl";
   import ShowProgressTag from "../tags/ShowProgressTag.svelte";
   import MarkAsWatchedButton from "./MarkAsWatchedButton.svelte";
 
   type EpisodeProps = {
+    i18n: EpisodeIntl;
     posterUrl: string;
     showTitle: string;
     episodeTitle: string;
@@ -18,9 +19,11 @@
     remaining: number;
     runtime: number;
     onMarkAsWatched: () => void;
+    type: EpisodeType;
   };
 
   const {
+    i18n,
     posterUrl,
     showTitle,
     episodeTitle,
@@ -31,17 +34,23 @@
     remaining,
     runtime,
     onMarkAsWatched,
+    type,
   }: EpisodeProps = $props();
 </script>
 
 <EpisodeCard>
-  <EpisodeCover src={`${posterUrl}`} alt={`${showTitle} - ${episodeTitle}`}>
+  <EpisodeCover
+    {i18n}
+    {type}
+    src={`${posterUrl}`}
+    alt={`${showTitle} - ${episodeTitle}`}
+  >
     {#snippet tags()}
       <ShowProgressTag {total} progress={completed}>
         <span class="show-progress-text">
-          {m.remaining_episodes({ count: remaining })} ({toHumanDuration({
-            minutes: runtime * remaining,
-          })})
+          {i18n.remainingText(remaining)} ({i18n.durationText(
+            remaining * runtime,
+          )})
         </span>
       </ShowProgressTag>
     {/snippet}

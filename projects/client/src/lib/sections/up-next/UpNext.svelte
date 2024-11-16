@@ -1,5 +1,6 @@
 <script lang="ts">
   import EpisodeCardTransition from "$lib/components/episode/card/EpisodeCardTransition.svelte";
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import UpNextEpisode from "$lib/components/episode/up-next/UpNextEpisode.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { markAsWatched } from "$lib/requests/sync/markAsWatched";
@@ -20,6 +21,7 @@
     {#each next as entry (entry.id)}
       <EpisodeCardTransition>
         <UpNextEpisode
+          i18n={EpisodeIntlProvider}
           episodeNumber={entry.number}
           seasonNumber={entry.season}
           posterUrl={entry.poster.url}
@@ -29,6 +31,7 @@
           total={entry.total}
           remaining={entry.remaining}
           runtime={entry.runtime}
+          type={entry.type}
           onMarkAsWatched={async () => {
             await markAsWatched({
               episodes: [
