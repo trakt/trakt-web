@@ -6,11 +6,12 @@
   import { markAsWatched } from "$lib/requests/sync/markAsWatched";
   import { upNext, type UpNextEntry } from "$lib/requests/sync/upNext";
   import { onMount } from "svelte";
+  import { useEpisodeStore } from "./useEpisodeStore";
 
-  let next: UpNextEntry[] = $state([]);
+  const { value, set } = useEpisodeStore<UpNextEntry>();
 
   onMount(async () => {
-    next = await upNext();
+    set(await upNext());
   });
 </script>
 
@@ -18,7 +19,7 @@
   <h2 class="up-next-title">{m.up_next_title()}</h2>
 
   <div class="episode-list episode-list-horizontal-scroll">
-    {#each next as entry (entry.id)}
+    {#each $value as entry (entry.show.id)}
       <EpisodeCardTransition>
         <UpNextEpisode
           i18n={EpisodeIntlProvider}
@@ -41,7 +42,7 @@
                 },
               ],
             });
-            next = await upNext();
+            set(await upNext());
           }}
         />
       </EpisodeCardTransition>

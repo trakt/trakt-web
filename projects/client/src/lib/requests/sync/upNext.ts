@@ -4,24 +4,14 @@ import {
 } from '$lib/models/EpisodeType.ts';
 import { api } from '$lib/requests/_internal/api.ts';
 import { authHeader } from '$lib/requests/_internal/authHeader.ts';
+import type { EpisodeEntry } from '$lib/requests/calendars/upcomingEpisodes.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 
-export type UpNextEntry = {
-  season: number;
-  number: number;
-  title: string;
-  show: {
-    title: string;
-  };
-  poster: {
-    url: string;
-  };
-  id: number;
+export type UpNextEntry = EpisodeEntry & {
   total: number;
   completed: number;
   remaining: number;
   runtime: number;
-  type: EpisodeType;
 };
 
 export function upNext(): Promise<UpNextEntry[]> {
@@ -49,6 +39,7 @@ export function upNext(): Promise<UpNextEntry[]> {
           return {
             show: {
               title: item.show.title,
+              id: item.show.ids.trakt,
             },
             title: episode.title,
             season: episode.season,
@@ -56,6 +47,7 @@ export function upNext(): Promise<UpNextEntry[]> {
             poster: {
               url: prependHttps(posterCandidate)!,
             },
+            airedDate: new Date(item.progress.aired),
             id: episode.ids.trakt,
             total: item.progress.aired,
             completed: item.progress.completed,

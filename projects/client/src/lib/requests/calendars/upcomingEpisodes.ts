@@ -12,10 +12,12 @@ export type CalendarShowsParams = {
 };
 
 export type EpisodeEntry = {
+  id: number;
   season: number;
   number: number;
   title: string;
   show: {
+    id: number;
     title: string;
   };
   poster: {
@@ -54,7 +56,9 @@ export function upcomingEpisodes({
             item.show.images!.fanart.at(0);
 
           return {
+            id: item.episode.ids.trakt,
             show: {
+              id: item.show.ids.trakt,
               title: item.show.title,
             },
             type: item.episode.episode_type as EpisodeType ??
