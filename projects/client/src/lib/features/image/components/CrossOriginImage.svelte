@@ -54,8 +54,29 @@
 
     urlContentToDataUri(src).then(response.set);
   });
+
+  let isImageLoaded = $state(false);
 </script>
 
 {#if $response.uri}
-  <img src={$response.uri} {alt} onload={onLoad} />
+  <img
+    class:image-loaded={isImageLoaded}
+    src={$response.uri}
+    {alt}
+    onload={() => {
+      isImageLoaded = true;
+      onLoad?.();
+    }}
+  />
 {/if}
+
+<style>
+  .image-loaded {
+    opacity: 1;
+  }
+
+  img {
+    transition: opacity 250ms ease-in;
+    opacity: 0;
+  }
+</style>

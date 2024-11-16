@@ -7,15 +7,10 @@
   };
 
   const { src, type }: ImageBackgroundProps = $props();
-  let isImageLoaded = $state(false);
 </script>
 
-<div class="background-cover-image" class:image-loaded={isImageLoaded}>
-  <CrossOriginImage
-    {src}
-    alt={`${type} background`}
-    onLoad={() => (isImageLoaded = true)}
-  />
+<div class="background-cover-image">
+  <CrossOriginImage {src} alt={`${type} background`} />
 </div>
 
 <style>
@@ -28,19 +23,10 @@
     width: 100%;
     background: var(--shade-900);
 
-    &.image-loaded {
-      :global(img) {
-        opacity: 1;
-      }
-    }
-
     :global(img) {
       width: 100%;
       height: 100%;
       position: relative;
-
-      transition: opacity 250ms ease-in;
-      opacity: 0;
     }
 
     &::after {
