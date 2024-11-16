@@ -63,7 +63,9 @@
     {/if}
     {@render tags()}
   </div>
-  <img {src} {alt} onload={() => (isImagePending = false)} />
+  <div class="episode-cover-image">
+    <img {src} {alt} onload={() => (isImagePending = false)} />
+  </div>
 </div>
 
 <style>
@@ -85,23 +87,29 @@
     gap: 0.25rem;
   }
 
+  .episode-cover {
+    position: relative;
+  }
+
   .episode-cover-loading {
-    img {
+    .episode-cover-image {
+      opacity: 0;
       filter: blur(0.25rem);
     }
   }
 
-  .episode-cover {
+  .episode-cover-image {
     position: relative;
     height: 7.5rem;
     align-self: stretch;
+    transition:
+      opacity 500ms ease-in-out,
+      filter 150ms ease-in-out;
 
     :global(img) {
       width: 100%;
       height: 100%;
       object-fit: cover;
-
-      transition: filter 150ms ease-in-out;
     }
 
     &::before {
