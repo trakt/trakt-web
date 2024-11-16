@@ -102,7 +102,7 @@
     .profile-info-location {
       margin: 0;
 
-      color: #bcbcbc;
+      color: var(--color-text-secondary);
       font-size: 0.875rem;
       font-style: normal;
       font-weight: 600;
