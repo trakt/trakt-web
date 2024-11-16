@@ -48,6 +48,7 @@
     {type}
     src={`${posterUrl}`}
     alt={`${showTitle} - ${episodeTitle}`}
+    {isLoading}
   >
     {#snippet tags()}
       <ShowProgressTag {total} progress={completed}>

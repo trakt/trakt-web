@@ -15,9 +15,10 @@
     alt: string;
     tags: Snippet;
     type: EpisodeType;
+    isLoading?: boolean;
   };
 
-  const { i18n, src, alt, tags, type }: EpisodeCoverProps = $props();
+  const { i18n, src, alt, tags, type, isLoading }: EpisodeCoverProps = $props();
 
   const isPremiere = $derived(
     [
@@ -34,9 +35,21 @@
       EpisodeFinaleType.Series,
     ].includes(type as EpisodeFinaleType),
   );
+
+  let isImagePending = $state(true);
+  $effect(() => {
+    if (!isLoading) {
+      return;
+    }
+
+    isImagePending = true;
+  });
 </script>
 
-<div class="episode-cover">
+<div
+  class="episode-cover"
+  class:episode-cover-loading={isImagePending || isLoading}
+>
   <div class="episode-tags">
     {#if isFinale}
       <EpisodeFinaleTag>
@@ -50,7 +63,7 @@
     {/if}
     {@render tags()}
   </div>
-  <img {src} {alt} />
+  <img {src} {alt} onload={() => (isImagePending = false)} />
 </div>
 
 <style>
@@ -61,6 +74,7 @@
     position: absolute;
     padding: var(--episode-tag-padding);
 
+    z-index: 1;
     bottom: 0;
     left: 0;
 
@@ -69,6 +83,12 @@
     justify-content: flex-end;
     align-items: flex-start;
     gap: 0.25rem;
+  }
+
+  .episode-cover-loading {
+    img {
+      filter: blur(0.25rem);
+    }
   }
 
   .episode-cover {
@@ -80,6 +100,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+
+      transition: filter 150ms ease-in-out;
     }
 
     &::before {
