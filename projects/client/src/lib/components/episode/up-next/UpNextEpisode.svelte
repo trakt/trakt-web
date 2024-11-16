@@ -20,6 +20,7 @@
     runtime: number;
     onMarkAsWatched: () => void;
     type: EpisodeType;
+    isLoading: boolean;
   };
 
   const {
@@ -35,6 +36,7 @@
     runtime,
     onMarkAsWatched,
     type,
+    isLoading,
   }: EpisodeProps = $props();
 
   const duration = $derived(remaining * runtime);
@@ -63,7 +65,8 @@
     {#snippet actions()}
       <MarkAsWatchedButton
         label={`Mark ${episodeTitle} as watched`}
-        onClick={onMarkAsWatched}
+        disabled={isLoading}
+        onclick={onMarkAsWatched}
       />
     {/snippet}
   </EpisodeFooter>

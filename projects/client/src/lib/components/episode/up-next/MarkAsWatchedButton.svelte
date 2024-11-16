@@ -1,13 +1,12 @@
 <script lang="ts">
   type MarkAsWatchedButtonProps = {
     label: string;
-    onClick?: (ev: MouseEvent) => void;
-  };
+  } & HTMLElementProps;
 
-  const { label, onClick }: MarkAsWatchedButtonProps = $props();
+  const { label, ...props }: MarkAsWatchedButtonProps = $props();
 </script>
 
-<button class="mark-as-watched-button" aria-label={label} onclick={onClick}>
+<button class="mark-as-watched-button" aria-label={label} {...props}>
   <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="none">
     <path
       class="icon-background"
@@ -25,23 +24,37 @@
     padding: 0;
     margin: 0;
 
-    &:hover {
+    &:disabled {
+      cursor: not-allowed;
+
       .icon-background {
-        fill: var(--purple-200);
+        opacity: 0.25;
       }
 
       .icon {
-        stroke: var(--purple-900);
+        opacity: 0.25;
       }
     }
 
-    &:active {
-      .icon-background {
-        fill: var(--purple-400);
+    &:not(:disabled) {
+      &:hover {
+        .icon-background {
+          fill: var(--purple-200);
+        }
+
+        .icon {
+          stroke: var(--purple-900);
+        }
       }
 
-      .icon {
-        stroke: var(--purple-50);
+      &:active {
+        .icon-background {
+          fill: var(--purple-400);
+        }
+
+        .icon {
+          stroke: var(--purple-50);
+        }
       }
     }
 

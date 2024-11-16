@@ -6,6 +6,7 @@
   import { markAsWatched } from "$lib/requests/sync/markAsWatched";
   import { upNext, type UpNextEntry } from "$lib/requests/sync/upNext";
   import { onMount } from "svelte";
+  import { SvelteMap } from "svelte/reactivity";
   import { useEpisodeStore } from "./useEpisodeStore";
 
   const { value, set } = useEpisodeStore<UpNextEntry>();
@@ -13,6 +14,8 @@
   onMount(async () => {
     set(await upNext());
   });
+
+  const loadingMap = new SvelteMap<number, boolean>();
 </script>
 
 <div class="up-next-container">
@@ -33,7 +36,9 @@
           remaining={entry.remaining}
           runtime={entry.runtime}
           type={entry.type}
+          isLoading={loadingMap.get(entry.id) ?? false}
           onMarkAsWatched={async () => {
+            loadingMap.set(entry.id, true);
             await markAsWatched({
               episodes: [
                 {
@@ -42,6 +47,7 @@
                 },
               ],
             });
+            loadingMap.set(entry.id, false);
             set(await upNext());
           }}
         />
