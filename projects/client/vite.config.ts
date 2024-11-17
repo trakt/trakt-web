@@ -1,5 +1,6 @@
 import { paraglide } from '@inlang/paraglide-sveltekit/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
 import { Environment } from './src/lib/api.ts';
@@ -50,9 +51,19 @@ export default defineConfig(({ mode }) => ({
       outdir: './src/lib/paraglide',
     }),
     denoSveltekitExit(),
+    svelteTesting(),
   ],
 
+  //TODO enable globals when typings are fixed
   test: {
     include: ['src/**/*.{test,spec}.{js,ts}'],
+    environment: 'jsdom',
+    setupFiles: ['./vitest-setup.ts'],
   },
+
+  resolve: process.env.VITEST
+    ? {
+      conditions: ['browser'],
+    }
+    : undefined,
 }));
