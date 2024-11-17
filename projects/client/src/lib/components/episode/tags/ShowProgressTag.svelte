@@ -24,6 +24,8 @@
   }
 
   .show-progress-tag :global(.trakt-tag) {
+    overflow: hidden;
+
     &::before {
       content: "";
       display: block;

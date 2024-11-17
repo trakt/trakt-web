@@ -72,7 +72,7 @@
   .episode-tags {
     --episode-tag-padding: 0.5rem;
 
-    width: calc(100% - var(--episode-tag-padding) * 4);
+    width: calc(100% - var(--episode-tag-padding) * 2);
     position: absolute;
     padding: var(--episode-tag-padding);
 
@@ -80,6 +80,7 @@
     bottom: 0;
     left: 0;
 
+    box-sizing: border-box;
     display: inline-flex;
     flex-direction: column;
     justify-content: flex-end;
