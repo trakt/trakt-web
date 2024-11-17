@@ -10,5 +10,6 @@
   "profile_banner_greeting": "Bonjour, {name}",
   "up_next_title": "À suivre",
   "remaining_episodes": "{count} restant",
-  "recommended_movies": "Films recommandés"
+  "recommended_movies": "Films recommandés",
+  "recommended_shows": "Spectacles recommandés"
 }
