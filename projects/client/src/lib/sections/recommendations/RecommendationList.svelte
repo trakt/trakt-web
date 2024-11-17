@@ -2,6 +2,7 @@
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import PosterCard from "$lib/components/poster/card/PosterCard.svelte";
   import PosterCover from "$lib/components/poster/card/PosterCover.svelte";
+  import DurationTag from "$lib/components/poster/tags/DurationTag.svelte";
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { type RecommendedMovie } from "$lib/requests/recommendations/recommendMovies";
@@ -33,19 +34,26 @@
       <PosterCover
         src={recommendation.poster.url}
         alt={`${recommendation.title} poster`}
-      />
+      >
+        {#snippet tags()}
+          <DurationTag>
+            {toHumanDuration(
+              { minutes: recommendation.runtime },
+              languageTag(),
+            )}
+          </DurationTag>
+        {/snippet}
+      </PosterCover>
 
       <CardFooter>
-        <p class="recommendation-runtime ellipsis">
-          {toHumanDuration({ minutes: recommendation.runtime }, languageTag())}
-        </p>
+        <p class="recommendation-title ellipsis">{recommendation.title}</p>
       </CardFooter>
     </PosterCard>
   {/each}
 </SectionList>
 
 <style>
-  .recommendation-runtime {
+  .recommendation-title {
     margin: 0;
     padding: 0;
 
