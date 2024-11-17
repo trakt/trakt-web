@@ -4,17 +4,17 @@
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="episode-finale-tag">
+<div class="episode-status-tag">
   <TagContent>
     {@render children()}
   </TagContent>
 </div>
 
 <style>
-  .episode-finale-tag :global(.trakt-tag) {
+  .episode-status-tag :global(.trakt-tag) {
     text-transform: uppercase;
 
-    background: var(--color-background-finale-tag);
-    color: var(--color-text-finale-tag);
+    background: var(--color-background-status-tag);
+    color: var(--color-text-status-tag);
   }
 </style>
