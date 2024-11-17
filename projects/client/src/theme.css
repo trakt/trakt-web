@@ -111,6 +111,8 @@
 
   --color-text-progress-tag: var(--purple-800);
   --color-background-progress-tag: var(--purple-100);
+
+  --transition-increment: 150ms;
 }
 
 [data-theme='dark'] {

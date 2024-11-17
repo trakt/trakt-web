@@ -1,8 +1,8 @@
 <script lang="ts">
   import Logo from "$lib/components/logo/Logo.svelte";
-  import { onMount } from "svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import type { Theme } from "$lib/features/theme/models/Theme";
+  import { onMount } from "svelte";
 
   const { theme }: { theme: Theme } = $props();
 
@@ -57,7 +57,7 @@
 
     border-radius: 1rem;
 
-    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
     transition-property: background-color, box-shadow;
   }
 

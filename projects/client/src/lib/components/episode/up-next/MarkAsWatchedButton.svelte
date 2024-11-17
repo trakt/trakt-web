@@ -60,12 +60,12 @@
 
     .icon-background {
       fill: var(--shade-800);
-      transition: fill 100ms linear;
+      transition: fill var(--transition-increment) linear;
     }
 
     .icon {
       stroke: var(--shade-100);
-      transition: stroke 100ms linear;
+      transition: stroke var(--transition-increment) linear;
     }
   }
 </style>

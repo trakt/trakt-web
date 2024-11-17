@@ -107,7 +107,7 @@
     line-height: normal;
     text-transform: uppercase;
 
-    transition: 100ms background linear;
+    transition: var(--transition-increment) background linear;
 
     &:hover {
       background: var(--purple-700);

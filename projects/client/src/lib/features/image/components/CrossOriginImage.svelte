@@ -41,7 +41,7 @@
   }
 
   img {
-    transition: opacity 250ms ease-in;
+    transition: opacity calc(var(--transition-increment) * 2) ease-in;
     opacity: 0;
   }
 </style>
