@@ -34,7 +34,7 @@ export function recommendShows(): Promise<RecommendedShow[]> {
         return {
           id: show.ids.trakt,
           title: show.title,
-          runtime: show.runtime!,
+          runtime: show.runtime! * show.aired_episodes!,
           poster: {
             url: prependHttps(
               show.images?.poster.at(1) ??
