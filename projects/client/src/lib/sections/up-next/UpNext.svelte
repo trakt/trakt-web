@@ -18,7 +18,10 @@
   const loadingMap = new SvelteMap<number, boolean>();
 </script>
 
-<SectionList title={m.up_next_title()}>
+<SectionList
+  title={m.up_next_title()}
+  --height-section-list="var(--height-episode-list)"
+>
   {#each $value as entry (entry.show.id)}
     <UpNextEpisode
       i18n={EpisodeIntlProvider}

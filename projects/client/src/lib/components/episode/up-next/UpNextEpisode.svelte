@@ -1,8 +1,8 @@
 <script lang="ts">
+  import CardFooter from "$lib/components/card/CardFooter.svelte";
   import type { EpisodeType } from "$lib/models/EpisodeType";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
-  import EpisodeFooter from "../card/EpisodeFooter.svelte";
   import type { EpisodeIntl } from "../EpisodeIntl";
   import ShowProgressTag from "../tags/ShowProgressTag.svelte";
   import MarkAsWatchedButton from "./MarkAsWatchedButton.svelte";
@@ -58,7 +58,7 @@
       </ShowProgressTag>
     {/snippet}
   </EpisodeCover>
-  <EpisodeFooter>
+  <CardFooter>
     <p class="episode-show-title ellipsis">{showTitle}</p>
     <p class="episode-title ellipsis">
       {seasonNumber}x{episodeNumber} - {episodeTitle}
@@ -70,7 +70,7 @@
         onclick={onMarkAsWatched}
       />
     {/snippet}
-  </EpisodeFooter>
+  </CardFooter>
 </EpisodeCard>
 
 <style>

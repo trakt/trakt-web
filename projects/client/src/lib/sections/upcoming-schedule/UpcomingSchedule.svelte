@@ -27,7 +27,10 @@
   });
 </script>
 
-<SectionList title={m.upcoming_schedule_title()}>
+<SectionList
+  title={m.upcoming_schedule_title()}
+  --height-section-list="var(--height-episode-list)"
+>
   {#each calendar as entry}
     <UpcomingEpisode
       i18n={EpisodeIntlProvider}

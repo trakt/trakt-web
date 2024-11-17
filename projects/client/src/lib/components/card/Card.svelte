@@ -13,8 +13,8 @@
 
 <style>
   .trakt-card-content {
-    width: var(--card-width);
-    height: var(--card-height);
+    width: var(--width-card);
+    height: var(--height-card);
 
     border-radius: 0.75rem;
     overflow: hidden;

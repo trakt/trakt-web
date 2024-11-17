@@ -44,6 +44,8 @@
       right: 0;
       width: 3.5rem;
       height: 11rem;
+
+      /** TODO: add shadow? */
     }
   }
 
@@ -51,7 +53,7 @@
     padding: 0 var(--layout-distance-side);
 
     display: flex;
-    height: 12rem;
+    height: var(--height-section-list);
     gap: 1rem;
     overflow-x: auto;
   }

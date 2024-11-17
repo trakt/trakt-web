@@ -1,8 +1,8 @@
 <script lang="ts">
+  import CardFooter from "$lib/components/card/CardFooter.svelte";
   import { type EpisodeType } from "$lib/models/EpisodeType";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
-  import EpisodeFooter from "../card/EpisodeFooter.svelte";
   import type { EpisodeIntl } from "../EpisodeIntl";
   import EpisodeTimeTag from "../tags/EpisodeTimeTag.svelte";
 
@@ -42,12 +42,12 @@
       </EpisodeTimeTag>
     {/snippet}
   </EpisodeCover>
-  <EpisodeFooter>
+  <CardFooter>
     <p class="episode-show-title ellipsis">{showTitle}</p>
     <p class="episode-title ellipsis">
       {seasonNumber}x{episodeNumber} - {episodeTitle}
     </p>
-  </EpisodeFooter>
+  </CardFooter>
 </EpisodeCard>
 
 <style>

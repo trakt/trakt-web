@@ -9,5 +9,6 @@
   "mid_season_finale": "Mid-Season Finale",
   "profile_banner_greeting": "Hello, {name}",
   "up_next_title": "Up Next",
-  "remaining_episodes": "{count} remaining"
+  "remaining_episodes": "{count} remaining",
+  "recommended_movies": "Recommended Movies"
 }

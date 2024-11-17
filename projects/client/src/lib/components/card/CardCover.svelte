@@ -24,11 +24,11 @@
 
 <style>
   .card-cover-tags {
-    --card-tag-padding: 0.5rem;
+    --padding-card-tag: 0.5rem;
 
-    width: calc(100% - var(--card-tag-padding) * 2);
+    width: calc(100% - var(--padding-card-tag) * 2);
     position: absolute;
-    padding: var(--card-tag-padding);
+    padding: var(--padding-card-tag);
 
     z-index: 1;
     bottom: 0;
@@ -55,7 +55,7 @@
 
   .card-cover-image {
     position: relative;
-    height: 7.5rem;
+    height: var(--height-card-cover);
     align-self: stretch;
     transition:
       opacity 500ms ease-in-out,
@@ -73,7 +73,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      width: 12.5rem;
+      width: var(--width-card);
       height: 2.5rem;
       flex-shrink: 0;
 
