@@ -37,6 +37,8 @@
 
       width: var(--progress-width);
       background-color: var(--color-background-progress-tag);
+
+      transition: width var(--transition-increment) ease-in;
     }
 
     width: 100%;
