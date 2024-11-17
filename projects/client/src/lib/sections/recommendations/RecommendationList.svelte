@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AddToWatchlistButton from "$lib/components/buttons/AddButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import PosterCard from "$lib/components/poster/card/PosterCard.svelte";
   import PosterCover from "$lib/components/poster/card/PosterCover.svelte";
@@ -9,6 +10,7 @@
   import type { RecommendedShow } from "$lib/requests/recommendations/recommendShows";
   import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
   import { onMount } from "svelte";
+  import { SvelteMap } from "svelte/reactivity";
   import { writable } from "svelte/store";
 
   type RecommendedMedia = Array<RecommendedMovie | RecommendedShow>;
@@ -16,16 +18,25 @@
   type RecommendationListProps = {
     title: string;
     dataSourceFactory: () => Promise<RecommendedMedia>;
+    onAddToWatchlist: (id: number) => Promise<unknown> | void;
   };
 
-  const { dataSourceFactory, title }: RecommendationListProps = $props();
+  const {
+    dataSourceFactory,
+    title,
+    onAddToWatchlist,
+  }: RecommendationListProps = $props();
+
+  const loadingMap = new SvelteMap<number, boolean>();
 
   const recommendations = writable<RecommendedMedia>([]);
 
-  onMount(async () => {
+  async function fetchRecommendations() {
     const entries = await dataSourceFactory();
     recommendations.set(entries);
-  });
+  }
+
+  onMount(fetchRecommendations);
 </script>
 
 <SectionList {title} --height-section-list="19rem">
@@ -34,6 +45,7 @@
       <PosterCover
         src={recommendation.poster.url}
         alt={`${recommendation.title} poster`}
+        isLoading={loadingMap.get(recommendation.id) ?? false}
       >
         {#snippet tags()}
           <DurationTag>
@@ -47,6 +59,18 @@
 
       <CardFooter>
         <p class="recommendation-title ellipsis">{recommendation.title}</p>
+        {#snippet actions()}
+          <AddToWatchlistButton
+            label={`Mark ${recommendation.id} as watched`}
+            disabled={loadingMap.get(recommendation.id) ?? false}
+            onclick={async () => {
+              loadingMap.set(recommendation.id, true);
+              await onAddToWatchlist(recommendation.id);
+              loadingMap.set(recommendation.id, false);
+              await fetchRecommendations();
+            }}
+          />
+        {/snippet}
       </CardFooter>
     </PosterCard>
   {/each}

@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { recommendMovies } from "$lib/requests/recommendations/recommendMovies";
   import { recommendShows } from "$lib/requests/recommendations/recommendShows";
+  import { addToWatchlist } from "$lib/requests/sync/addToWatchlist";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
   import RecommendationList from "$lib/sections/recommendations/RecommendationList.svelte";
   import UpNext from "$lib/sections/up-next/UpNext.svelte";
@@ -15,10 +16,18 @@
   <RecommendationList
     dataSourceFactory={recommendShows}
     title={m.recommended_shows()}
+    onAddToWatchlist={(id) =>
+      addToWatchlist({
+        shows: [{ ids: { trakt: id } }],
+      })}
   />
   <RecommendationList
     dataSourceFactory={recommendMovies}
     title={m.recommended_movies()}
+    onAddToWatchlist={(id) =>
+      addToWatchlist({
+        movies: [{ ids: { trakt: id } }],
+      })}
   />
 </div>
 

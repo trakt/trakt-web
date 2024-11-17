@@ -1,5 +1,5 @@
 import type { Snippet } from 'svelte';
 
-export type CardFooterProps = ChildrenProps & {
+export type CardFooterProps = Partial<ChildrenProps> & {
   actions?: Snippet;
 };

@@ -5,9 +5,12 @@
 </script>
 
 <div class="card-footer">
-  <div class="card-footer-information">
-    {@render children()}
-  </div>
+  {#if children}
+    <div class="card-footer-information">
+      {@render children()}
+    </div>
+  {/if}
+
   {#if actions}
     <div class="card-footer-actions">
       {@render actions()}
