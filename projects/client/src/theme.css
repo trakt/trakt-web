@@ -88,11 +88,6 @@
 
   --color-card-background: var(--shade-50);
 
-  --color-text-premiere-tag: var(--shade-10);
-  --color-background-premiere-tag: var(--green-700);
-
-  --color-text-finale-tag: var(--shade-10);
-  --color-background-finale-tag: var(--red-700);
   --color-border-avatar: var(--shade-600);
 
   /**
@@ -111,6 +106,15 @@
 
   --color-text-progress-tag: var(--purple-800);
   --color-background-progress-tag: var(--purple-100);
+
+  --color-text-season-premiere-tag: var(--shade-10);
+  --color-background-season-premiere-tag: var(--blue-600);
+
+  --color-text-series-premiere-tag: var(--shade-10);
+  --color-background-series-premiere-tag: var(--green-700);
+
+  --color-text-finale-tag: var(--shade-10);
+  --color-background-finale-tag: var(--red-700);
 
   --transition-increment: 150ms;
 }

@@ -20,12 +20,14 @@
 
   const { i18n, src, alt, tags, type, isLoading }: EpisodeCoverProps = $props();
 
+  const isSeasonPremiere = $derived(
+    [EpisodePremiereType.MidSeason, EpisodePremiereType.Season].includes(
+      type as EpisodePremiereType,
+    ),
+  );
+
   const isPremiere = $derived(
-    [
-      EpisodePremiereType.MidSeason,
-      EpisodePremiereType.Season,
-      EpisodePremiereType.Series,
-    ].includes(type as EpisodePremiereType),
+    EpisodePremiereType.Series === (type as EpisodePremiereType),
   );
 
   const isFinale = $derived(
@@ -57,7 +59,18 @@
       </EpisodeFinaleTag>
     {/if}
     {#if isPremiere}
-      <EpisodePremiereTag>
+      <EpisodePremiereTag
+        --color-background-premiere-tag={"var(--color-background-series-premiere-tag)"}
+        --color-text-premiere-tag={"var(--color-text-series-premiere-tag)"}
+      >
+        {i18n.premiereText({ type: type as EpisodePremiereType })}
+      </EpisodePremiereTag>
+    {/if}
+    {#if isSeasonPremiere}
+      <EpisodePremiereTag
+        --color-background-premiere-tag={"var( --color-background-season-premiere-tag)"}
+        --color-text-premiere-tag={"var(--color-text-season-premiere-tag)"}
+      >
         {i18n.premiereText({ type: type as EpisodePremiereType })}
       </EpisodePremiereTag>
     {/if}
