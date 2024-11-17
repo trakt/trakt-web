@@ -52,7 +52,9 @@ export function upcomingEpisodes({
 
       return body
         .map((item) => {
-          const posterCandidate = item.episode.images!.screenshot.at(0) ??
+          const posterCandidate = item.episode.images!.screenshot.at(1) ??
+            item.episode.images!.screenshot.at(0) ??
+            item.show.images!.fanart.at(1) ??
             item.show.images!.fanart.at(0);
 
           return {

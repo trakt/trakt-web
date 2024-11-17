@@ -33,7 +33,9 @@ export function upNext(): Promise<UpNextEntry[]> {
         .map((item) => {
           const episode = item.progress.next_episode;
 
-          const posterCandidate = episode.images!.screenshot.at(0) ??
+          const posterCandidate = episode.images!.screenshot.at(1) ??
+            episode.images!.screenshot.at(0) ??
+            item.show.images!.fanart.at(1) ??
             item.show.images!.fanart.at(0);
 
           return {
