@@ -5,7 +5,12 @@
     "$env/static/public": "./.svelte-kit/ambient.d.ts",
     "$env/static/private": "./.svelte-kit/ambient.d.ts",
     "$env/dynamic/public": "./.svelte-kit/ambient.d.ts",
-    "$env/dynamic/private": "./.svelte-kit/ambient.d.ts"
+    "$env/dynamic/private": "./.svelte-kit/ambient.d.ts",
+    "$app/forms": "../../node_modules/@sveltejs/kit/types/index.d.ts",
+    "$app/environment": "../../node_modules/@sveltejs/kit/types/index.d.ts",
+    "$app/navigation": "../../node_modules/@sveltejs/kit/types/index.d.ts",
+    "$app/server": "../../node_modules/@sveltejs/kit/types/index.d.ts",
+    "$app/stores": "../../node_modules/@sveltejs/kit/types/index.d.ts"
   },
   "lint": {
     "exclude": [
