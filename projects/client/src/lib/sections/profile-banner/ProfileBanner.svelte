@@ -57,8 +57,8 @@
 
 <style>
   .profile-banner-container {
-    margin: 1rem 3.25rem;
-
+    margin: 1;
+    margin-left: calc(3.25rem + var(--layout-distance-side));
     display: flex;
     align-items: center;
     gap: 1rem;

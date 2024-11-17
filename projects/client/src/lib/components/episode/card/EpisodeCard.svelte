@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { linear } from "svelte/easing";
+  import { fade } from "svelte/transition";
+
   const { children }: ChildrenProps = $props();
 </script>
 
 <div class="trakt-episode">
-  <div class="episode-card">
+  <div class="episode-card" transition:fade={{ duration: 250, easing: linear }}>
     {@render children()}
   </div>
 </div>
@@ -11,6 +14,7 @@
 <style>
   .episode-card {
     width: 12.5rem;
+    height: 11rem;
 
     border-radius: 0.75rem;
     overflow: hidden;

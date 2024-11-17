@@ -1,7 +1,7 @@
 <script lang="ts">
-  import EpisodeCardTransition from "$lib/components/episode/card/EpisodeCardTransition.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import UpcomingEpisode from "$lib/components/episode/upcoming/UpcomingEpisode.svelte";
+  import SectionList from "$lib/components/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import {
     upcomingEpisodes,
@@ -27,51 +27,17 @@
   });
 </script>
 
-<div class="upcoming-schedule-container">
-  <h2 class="upcoming-schedule-title">{m.upcoming_schedule_title()}</h2>
-
-  <div class="episode-list episode-list-horizontal-scroll">
-    {#each calendar as entry}
-      <EpisodeCardTransition>
-        <UpcomingEpisode
-          i18n={EpisodeIntlProvider}
-          episodeNumber={entry.number}
-          seasonNumber={entry.season}
-          posterUrl={entry.poster.url}
-          showTitle={entry.show.title}
-          episodeTitle={entry.title}
-          airedDate={entry.airedDate}
-          type={entry.type}
-        />
-      </EpisodeCardTransition>
-    {/each}
-  </div>
-</div>
-
-<style>
-  .upcoming-schedule-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .upcoming-schedule-title {
-    color: var(--color-text-primary);
-    margin: 0 3.5rem;
-    font-size: 2.5rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 90%;
-    letter-spacing: -0.1rem;
-  }
-
-  .episode-list {
-    display: flex;
-    height: 12rem;
-    gap: 1rem;
-  }
-
-  .episode-list-horizontal-scroll {
-    overflow-x: auto;
-  }
-</style>
+<SectionList title={m.upcoming_schedule_title()}>
+  {#each calendar as entry}
+    <UpcomingEpisode
+      i18n={EpisodeIntlProvider}
+      episodeNumber={entry.number}
+      seasonNumber={entry.season}
+      posterUrl={entry.poster.url}
+      showTitle={entry.show.title}
+      episodeTitle={entry.title}
+      airedDate={entry.airedDate}
+      type={entry.type}
+    />
+  {/each}
+</SectionList>
