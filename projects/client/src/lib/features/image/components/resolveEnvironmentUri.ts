@@ -1,5 +1,5 @@
-import { deserialize } from '$app/forms';
 import type { SerializedImageResponse } from '$lib/features/image/models/SerializedImageResponse.ts';
+import { formRequest } from '$lib/requests/form/formRequest.ts';
 import { IS_PROD } from '$lib/utils/env/index.ts';
 const emptyResponse = {
   uri: '',
@@ -12,27 +12,12 @@ function createProductionUri(uri: string) {
 }
 
 function createDevelopmentUri(uri: string) {
-  const body = new FormData();
-  body.append('url', uri);
-
-  return fetch('/image/?/resolve', {
-    method: 'POST',
-    headers: {
-      'x-sveltekit-action': 'true',
+  return formRequest<SerializedImageResponse>(
+    '/image/?/resolve',
+    {
+      url: uri,
     },
-    body: body,
-  }).then(async (res) => {
-    const text = await res.text();
-    const deserialized = deserialize<SerializedImageResponse, undefined>(
-      text,
-    );
-
-    if (deserialized?.type === 'success') {
-      return deserialized.data ?? emptyResponse;
-    }
-
-    return emptyResponse;
-  });
+  ).catch(() => emptyResponse);
 }
 
 export function resolveEnvironmentUri(uri: string) {

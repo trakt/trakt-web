@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { deserialize } from "$app/forms";
+  import Logo from "$lib/components/logo/Logo.svelte";
   import { type InitiateDeviceAuth } from "$lib/requests/auth/initiateDeviceAuth";
+  import { formRequest } from "$lib/requests/form/formRequest";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
-  import Logo from "$lib/components/logo/Logo.svelte";
   import { setToken } from "../token";
 
   type AuthGuardProps = {
@@ -18,44 +18,13 @@
   token.subscribe(setToken);
 
   function requestAuthStatus(code: string) {
-    const body = new FormData();
-    body.append("code", code);
-
-    return fetch("/auth?/resolve", {
-      method: "POST",
-      headers: {
-        "x-sveltekit-action": "true",
-      },
-      body: body,
-    }).then(async (res) => {
-      const text = await res.text();
-      const deserialized = deserialize<SerializedAuthResponse, undefined>(text);
-
-      if (deserialized?.type !== "success") {
-        throw new Error("Deserialization error. The data has betrayed us.");
-      }
-
-      return deserialized.data!;
+    return formRequest<SerializedAuthResponse>("/auth?/resolve", {
+      code,
     });
   }
 
   function requestAuthCode() {
-    return fetch("/auth?/initiate", {
-      method: "POST",
-      headers: {
-        "x-sveltekit-action": "true",
-      },
-      body: new FormData(),
-    }).then(async (res) => {
-      const text = await res.text();
-      const deserialized = deserialize<InitiateDeviceAuth, undefined>(text);
-
-      if (deserialized?.type !== "success") {
-        throw new Error("Deserialization error. The data has betrayed us.");
-      }
-
-      return deserialized.data!;
-    });
+    return formRequest<InitiateDeviceAuth>("/auth?/initiate");
   }
 
   onMount(async () => {
