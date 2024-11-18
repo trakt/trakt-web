@@ -1,10 +1,10 @@
 <script lang="ts">
   import { browser } from "$app/environment";
-  import { applyAction, enhance } from "$app/forms";
   import { store } from "$lib/features/theme/store";
   import { THEME_FIELD_NAME } from "../constants";
+  import type { ThemeResponse } from "../handle";
   import type { Theme } from "../models/Theme";
-  import type { ThemeSubmitFunction } from "../models/ThemeSubmitFunction";
+  import { ThemeEndpoint } from "../ThemeEndpoint";
   import ThemeToggleIcon from "./ThemeToggleIcon.svelte";
 
   let { theme: seed }: { theme: Theme } = $props();
@@ -14,20 +14,19 @@
     browser,
   });
 
-  const submitTheme: ThemeSubmitFunction = async () => {
-    return async ({ result }) => {
-      await applyAction(result);
+  const submitTheme = async (value: Theme) => {
+    const result = await fetch(ThemeEndpoint.Set, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ [THEME_FIELD_NAME]: value }),
+    }).then((res) => res.json() as Promise<ThemeResponse>);
 
-      if (result.type !== "success") {
-        return;
-      }
-
-      setTheme(result.data?.theme ?? $theme);
-    };
+    setTheme(result.theme ?? $theme);
   };
 </script>
 
-<form method="POST" action="/theme/?/persist" use:enhance={submitTheme}>
-  <input name={THEME_FIELD_NAME} value={nextTheme($theme)} hidden />
+<form onsubmit={(ev) => submitTheme(nextTheme($theme))}>
   <ThemeToggleIcon theme={$theme} />
 </form>
