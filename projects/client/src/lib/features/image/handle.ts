@@ -1,9 +1,10 @@
+import { ImageEndpoint } from '$lib/features/image/ImageEndpoint.ts';
 import { IS_PROD } from '$lib/utils/env/index.ts';
-import type { RequestEvent } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 import { Buffer } from 'node:buffer';
 import type { SerializedImageResponse } from './models/SerializedImageResponse.ts';
 
-const prodHandler = () => {
+const prodResolver = () => {
   const message = [
     'The code whispers forbidden secrets, tempting you with its power.',
     'But beware!',
@@ -14,17 +15,14 @@ const prodHandler = () => {
   throw new Error(message.join(' '));
 };
 
-const devHandler = async (
-  { request }: RequestEvent,
+const devResolver = async (
+  source: string,
 ): Promise<SerializedImageResponse> => {
-  const data = await request.formData();
-  const url = data.get('url')?.toString();
-
-  if (!url) {
+  if (!source) {
     return { uri: '' };
   }
 
-  const response = await fetch(url);
+  const response = await fetch(source);
   const blob = await response.blob();
   const arrayBuffer = await blob.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
@@ -33,4 +31,14 @@ const devHandler = async (
   return { uri };
 };
 
-export const action = IS_PROD ? prodHandler : devHandler;
+export const resolver = IS_PROD ? prodResolver : devResolver;
+
+export const handle: Handle = async ({ event, resolve }) => {
+  if (event.url.pathname.startsWith(ImageEndpoint.Gimme)) {
+    const { url } = await event.request.json() as { url: string };
+
+    return new Response(JSON.stringify(await resolver(url)));
+  }
+
+  return resolve(event);
+};

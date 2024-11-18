@@ -1,5 +1,5 @@
+import { ImageEndpoint } from '$lib/features/image/ImageEndpoint.ts';
 import type { SerializedImageResponse } from '$lib/features/image/models/SerializedImageResponse.ts';
-import { formRequest } from '$lib/requests/form/formRequest.ts';
 import { IS_PROD } from '$lib/utils/env/index.ts';
 const emptyResponse = {
   uri: '',
@@ -12,12 +12,15 @@ function createProductionUri(uri: string) {
 }
 
 function createDevelopmentUri(uri: string) {
-  return formRequest<SerializedImageResponse>(
-    '/image/?/resolve',
+  return fetch(
+    ImageEndpoint.Gimme,
     {
-      url: uri,
+      method: 'POST',
+      body: JSON.stringify({ url: uri }),
     },
-  ).catch(() => emptyResponse);
+  )
+    .then((response) => response.json() as Promise<SerializedImageResponse>)
+    .catch(() => emptyResponse);
 }
 
 export function resolveEnvironmentUri(uri: string) {
