@@ -43,7 +43,7 @@
     height: 4rem;
   }
   .trakt-navbar {
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     top: 0;
     left: var(--layout-distance-side);
