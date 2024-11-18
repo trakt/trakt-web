@@ -1,9 +1,9 @@
 <script lang="ts">
   import Logo from "$lib/components/logo/Logo.svelte";
-  import { type InitiateDeviceAuth } from "$lib/requests/auth/initiateDeviceAuth";
-  import { formRequest } from "$lib/requests/form/formRequest";
+  import { type InitiateDeviceAuth } from "$lib/features/auth/requests/initiateDeviceAuth";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
+  import { AuthEndpoint } from "../AuthEndpoint";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
   import { setToken } from "../token";
 
@@ -18,13 +18,22 @@
   token.subscribe(setToken);
 
   function requestAuthStatus(code: string) {
-    return formRequest<SerializedAuthResponse>("/auth?/resolve", {
-      code,
-    });
+    return fetch(AuthEndpoint.Verify, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code }),
+    }).then((res) => res.json() as Promise<SerializedAuthResponse>);
   }
 
   function requestAuthCode() {
-    return formRequest<InitiateDeviceAuth>("/auth?/initiate");
+    return fetch(AuthEndpoint.Initiate, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json() as Promise<InitiateDeviceAuth>);
   }
 
   onMount(async () => {
