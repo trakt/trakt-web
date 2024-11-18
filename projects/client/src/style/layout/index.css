@@ -1,0 +1,9 @@
+:root {
+  /**
+  * Structural variables
+  */
+  --height-episode-list: 12rem;
+  --height-poster-list: 19rem;
+
+  --layout-distance-side: 2.5vw;
+}

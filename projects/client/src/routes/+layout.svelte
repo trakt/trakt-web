@@ -1,12 +1,11 @@
 <script lang="ts">
-  import "../theme.css";
-  import "../dimensions.css";
   import "../app.css";
+  import "../style";
 
-  import { i18n } from "$lib/features/i18n/index.ts";
-  import { ParaglideJS } from "@inlang/paraglide-sveltekit";
-  import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import AuthGuard from "$lib/features/auth/components/AuthGuard.svelte";
+  import { i18n } from "$lib/features/i18n/index.ts";
+  import Navbar from "$lib/sections/navbar/Navbar.svelte";
+  import { ParaglideJS } from "@inlang/paraglide-sveltekit";
 
   const { data, children } = $props();
 </script>

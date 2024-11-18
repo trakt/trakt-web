@@ -1,0 +1,31 @@
+:root {
+  /**
+  * Theme-able variables
+  */
+  --color-foreground: var(--shade-920);
+  --color-background: var(--shade-10);
+
+  --color-text-primary: var(--shade-800);
+  --color-text-secondary: var(--shade-500);
+
+  --color-card-background: var(--shade-50);
+
+  --color-border-avatar: var(--shade-600);
+}
+
+[data-theme='dark'] {
+  --color-foreground: var(--shade-10);
+  --color-background: var(--shade-940);
+
+  --color-text-primary: var(--shade-10);
+  --color-text-secondary: var(--shade-300);
+
+  --color-card-background: var(--shade-920);
+
+  --color-text-premiere-tag: var(--shade-10);
+  --color-background-premiere-tag: var(--green-700);
+
+  --color-text-finale-tag: var(--shade-10);
+  --color-background-finale-tag: var(--red-700);
+  --color-border-avatar: var(--shade-50);
+}
