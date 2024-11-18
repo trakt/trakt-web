@@ -32,6 +32,14 @@
     font-weight: 600;
     line-height: 90%;
     letter-spacing: -0.1rem;
+
+    transition: calc(var(--transition-increment) * 2) ease-in-out;
+    transition-property: margin-left, font-size;
+
+    @media (max-width: 480px) {
+      margin-left: 2rem;
+      font-size: 1.5rem;
+    }
   }
 
   .section-list {

@@ -57,11 +57,16 @@
 
 <style>
   .profile-banner-container {
-    margin: 1;
     margin-left: calc(3.25rem + var(--layout-distance-side));
     display: flex;
     align-items: center;
     gap: 1rem;
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: margin-left;
+
+    @media (max-width: 480px) {
+      margin-left: 2rem;
+    }
   }
 
   .profile-image {
