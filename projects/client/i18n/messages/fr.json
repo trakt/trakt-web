@@ -11,5 +11,6 @@
   "up_next_title": "À suivre",
   "remaining_episodes": "{count} restant",
   "recommended_movies": "Films recommandés",
-  "recommended_shows": "Spectacles recommandés"
+  "recommended_shows": "Spectacles recommandés",
+  "number_of_episodes": "{count} épisodes"
 }

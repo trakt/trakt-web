@@ -6,6 +6,9 @@ export type RecommendedShow = {
   id: number;
   runtime: number;
   title: string;
+  episode: {
+    count: number;
+  };
   poster: {
     url: string;
   };
@@ -34,6 +37,9 @@ export function recommendShows(): Promise<RecommendedShow[]> {
         return {
           id: show.ids.trakt,
           title: show.title,
+          episode: {
+            count: show.aired_episodes!,
+          },
           runtime: show.runtime! * show.aired_episodes!,
           poster: {
             url: prependHttps(

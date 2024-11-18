@@ -6,6 +6,7 @@
   import DurationTag from "$lib/components/poster/tags/DurationTag.svelte";
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import { languageTag } from "$lib/features/i18n";
+  import * as m from "$lib/features/i18n/messages";
   import { type RecommendedMovie } from "$lib/requests/recommendations/recommendMovies";
   import type { RecommendedShow } from "$lib/requests/recommendations/recommendShows";
   import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
@@ -48,12 +49,18 @@
         isLoading={loadingMap.get(recommendation.id) ?? false}
       >
         {#snippet tags()}
-          <DurationTag>
-            {toHumanDuration(
-              { minutes: recommendation.runtime },
-              languageTag(),
-            )}
-          </DurationTag>
+          {#if "episode" in recommendation}
+            <DurationTag>
+              {m.number_of_episodes({ count: recommendation.episode.count })}
+            </DurationTag>
+          {:else}
+            <DurationTag>
+              {toHumanDuration(
+                { minutes: recommendation.runtime },
+                languageTag(),
+              )}
+            </DurationTag>
+          {/if}
         {/snippet}
       </PosterCover>
 
