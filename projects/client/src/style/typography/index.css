@@ -77,6 +77,10 @@ p {
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
+
+  &.ellipsis {
+    line-height: 100%;
+  }
 }
 
 p.large {
@@ -95,4 +99,10 @@ p.meta-info {
   line-height: 90%;
   letter-spacing: 0.025rem;
   text-transform: uppercase;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
