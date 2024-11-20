@@ -2,6 +2,7 @@
   "recommendations": [
     "denoland.vscode-deno",
     "inlang.vs-code-extension",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "phoenisx.cssvar"
   ]
 }
