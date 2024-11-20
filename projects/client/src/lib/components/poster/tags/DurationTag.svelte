@@ -6,7 +6,7 @@
 
 <div class="poster-duration-tag">
   <TagContent>
-    <p class="meta-info">
+    <p class="meta-info capitalize">
       {@render children()}
     </p>
   </TagContent>
@@ -14,11 +14,6 @@
 
 <style>
   .poster-duration-tag {
-    /** TODO: remove once typography handles non-capitalized meta-info */
-    .meta-info {
-      text-transform: none;
-    }
-
     :global(.trakt-tag) {
       background: var(--color-background-time-tag);
       color: var(--color-text-time-tag);

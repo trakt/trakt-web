@@ -12,7 +12,7 @@
 
 <div class="show-progress-tag" style:--progress-width={`${percentage}%`}>
   <TagContent>
-    <p class="meta-info">
+    <p class="meta-info capitalize">
       {@render children()}
     </p>
   </TagContent>
@@ -24,11 +24,6 @@
   }
 
   .show-progress-tag {
-    /** TODO: remove once typography handles non-capitalized meta-info */
-    .meta-info {
-      text-transform: none;
-    }
-
     :global(.trakt-tag) {
       overflow: hidden;
 

@@ -99,6 +99,14 @@ p.meta-info {
   line-height: 90%;
   letter-spacing: 0.025rem;
   text-transform: uppercase;
+
+  &.capitalize {
+    text-transform: none;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
 }
 
 .ellipsis {
