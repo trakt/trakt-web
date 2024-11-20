@@ -20,6 +20,7 @@
     "npm:@sveltejs/vite-plugin-svelte@4": "4.0.0_svelte@5.1.3__acorn@8.14.0_vite@5.4.10",
     "npm:@testing-library/jest-dom@^6.6.3": "6.6.3",
     "npm:@testing-library/svelte@^5.2.6": "5.2.6_svelte@5.1.3__acorn@8.14.0_vite@5.4.10_vitest@2.1.4__vite@5.4.10",
+    "npm:@testing-library/user-event@^14.5.2": "14.5.2_@testing-library+dom@10.4.0",
     "npm:@ts-rest/core@^3.51.0": "3.51.0_zod@3.23.8",
     "npm:@ts-rest/open-api@^3.51.0": "3.51.0_@ts-rest+core@3.51.0__zod@3.23.8_zod@3.23.8_openapi3-ts@2.0.2",
     "npm:@types/eslint@^9.6.0": "9.6.1",
@@ -941,6 +942,12 @@
         "svelte",
         "vite",
         "vitest"
+      ]
+    },
+    "@testing-library/user-event@14.5.2_@testing-library+dom@10.4.0": {
+      "integrity": "sha512-YAh82Wh4TIrxYLmfGcixwD18oIjyC1pFQC2Y01F2lzV2HTMiYrI0nze0FD0ocB//CKS/7jIUgae+adPqxK5yCQ==",
+      "dependencies": [
+        "@testing-library/dom"
       ]
     },
     "@ts-rest/core@3.51.0_zod@3.23.8": {
@@ -2728,6 +2735,7 @@
             "npm:@sveltejs/vite-plugin-svelte@4",
             "npm:@testing-library/jest-dom@^6.6.3",
             "npm:@testing-library/svelte@^5.2.6",
+            "npm:@testing-library/user-event@^14.5.2",
             "npm:@ts-rest/core@^3.51.0",
             "npm:@types/eslint@^9.6.0",
             "npm:date-fns@^4.1.0",
