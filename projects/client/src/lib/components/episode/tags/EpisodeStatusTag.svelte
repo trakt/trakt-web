@@ -6,15 +6,17 @@
 
 <div class="episode-status-tag">
   <TagContent>
-    {@render children()}
+    <p class="meta-info">
+      {@render children()}
+    </p>
   </TagContent>
 </div>
 
 <style>
-  .episode-status-tag :global(.trakt-tag) {
-    text-transform: uppercase;
-
-    background: var(--color-background-status-tag);
-    color: var(--color-text-status-tag);
+  .episode-status-tag {
+    :global(.trakt-tag) {
+      background: var(--color-background-status-tag);
+      color: var(--color-text-status-tag);
+    }
   }
 </style>

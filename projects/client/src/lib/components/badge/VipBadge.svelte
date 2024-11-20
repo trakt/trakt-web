@@ -4,7 +4,7 @@
 
 <div class="trakt-vip-badge">
   <LogoMarkCircle --color-foreground="var(--color-foreground-vip-badge)" />
-  <span>VIP</span>
+  <p class="small">VIP</p>
 </div>
 
 <style>
@@ -18,9 +18,9 @@
     background: var(--color-background-vip-badge);
     color: var(--color-foreground-vip-badge);
 
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 700;
+    .small {
+      font-weight: 700;
+    }
 
     :global(svg) {
       width: 1rem;

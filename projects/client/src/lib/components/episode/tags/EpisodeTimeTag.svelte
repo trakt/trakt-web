@@ -6,17 +6,26 @@
 
 <div class="episode-time-tag">
   <TagContent>
-    {@render children()}
+    <p class="show-progress-text meta-info">
+      {@render children()}
+    </p>
   </TagContent>
 </div>
 
 <style>
-  .episode-time-tag :global(.trakt-tag) {
-    &::first-letter {
-      text-transform: capitalize;
+  .episode-time-tag {
+    /** TODO: remove once typography handles non-capitalized meta-info */
+    .meta-info {
+      text-transform: none;
+
+      &::first-letter {
+        text-transform: capitalize;
+      }
     }
 
-    background: var(--color-background-time-tag);
-    color: var(--color-text-time-tag);
+    :global(.trakt-tag) {
+      background: var(--color-background-time-tag);
+      color: var(--color-text-time-tag);
+    }
   }
 </style>

@@ -12,9 +12,9 @@
 
 <div class="show-progress-tag" style:--progress-width={`${percentage}%`}>
   <TagContent>
-    <span class="show-progress-text">
+    <p class="meta-info">
       {@render children()}
-    </span>
+    </p>
   </TagContent>
 </div>
 
@@ -23,29 +23,36 @@
     width: 100%;
   }
 
-  .show-progress-tag :global(.trakt-tag) {
-    overflow: hidden;
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-
-      border-radius: inherit;
-
-      width: var(--progress-width);
-      background-color: var(--color-background-progress-tag);
-
-      transition: width var(--transition-increment) ease-in;
+  .show-progress-tag {
+    /** TODO: remove once typography handles non-capitalized meta-info */
+    .meta-info {
+      text-transform: none;
     }
 
-    width: 100%;
-    position: relative;
-    background: var(--color-background-time-tag);
-    color: var(--color-text-progress-tag);
+    :global(.trakt-tag) {
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        border-radius: inherit;
+
+        width: var(--progress-width);
+        background-color: var(--color-background-progress-tag);
+
+        transition: width var(--transition-increment) ease-in;
+      }
+
+      width: 100%;
+      position: relative;
+      background: var(--color-background-time-tag);
+      color: var(--color-text-progress-tag);
+    }
   }
 </style>

@@ -44,7 +44,7 @@
   </EpisodeCover>
   <CardFooter>
     <p class="episode-show-title ellipsis">{showTitle}</p>
-    <p class="episode-title ellipsis">
+    <p class="episode-title ellipsis small">
       {seasonNumber}x{episodeNumber} - {episodeTitle}
     </p>
   </CardFooter>
@@ -55,19 +55,13 @@
     color: var(--color-text-primary);
     margin: 0;
 
-    font-size: 1rem;
-    font-style: normal;
     font-weight: 600;
-    line-height: normal;
   }
 
   .episode-title {
     color: var(--color-text-secondary);
     margin: 0;
 
-    font-size: 0.875rem;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
   }
 </style>

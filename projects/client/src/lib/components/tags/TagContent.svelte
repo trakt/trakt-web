@@ -8,13 +8,11 @@
 
 <style>
   .trakt-tag {
-    font-size: 0.625rem;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 0.025rem;
+    display: flex;
+    align-items: center;
 
-    height: 0.85rem;
-    line-height: 0.85rem;
+    height: 0.875rem;
+    line-height: 0.875rem;
     margin: 0;
     padding: 0.125rem 0.5rem;
 

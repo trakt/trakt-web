@@ -7,7 +7,7 @@
 </script>
 
 <section class="section-list-container">
-  <h2 class="section-list-title">{title}</h2>
+  <h4 class="section-list-title">{title}</h4>
 
   <div class="section-list">
     <div class="section-list-horizontal-scroll">
@@ -27,11 +27,6 @@
     color: var(--color-text-primary);
     margin: 0;
     margin-left: calc(3.5rem + var(--layout-distance-side));
-    font-size: 2.5rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 90%;
-    letter-spacing: -0.1rem;
 
     transition: calc(var(--transition-increment) * 2) ease-in-out;
     transition-property: margin-left, font-size;

@@ -65,7 +65,9 @@
       </PosterCover>
 
       <CardFooter>
-        <p class="recommendation-title ellipsis">{recommendation.title}</p>
+        <p class="recommendation-title small ellipsis">
+          {recommendation.title}
+        </p>
         {#snippet actions()}
           <AddToWatchlistButton
             label={`Mark ${recommendation.id} as watched`}
@@ -90,9 +92,6 @@
 
     color: var(--color-text-secondary);
 
-    font-size: 0.875rem;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
   }
 </style>

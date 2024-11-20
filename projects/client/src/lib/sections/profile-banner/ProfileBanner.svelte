@@ -36,26 +36,40 @@
 {/if}
 
 <div class="profile-banner-container">
-  <div class="profile-image">
+  <figure class="profile-image">
     <CrossOriginImage
       src={$user.avatar.url}
-      alt={`${$user.name.first}'s avatar'`}
+      alt={`${$user.name.first}'s avatar`}
     />
-  </div>
+    <figcaption class="visually-hidden">
+      {m.profile_banner_greeting({ name: $user.name.first })}
+    </figcaption>
+  </figure>
   <div class="profile-info">
     <div class="profile-info-primary">
-      <p class="profile-info-greeting">
+      <h5 class="profile-info-greeting ellipsis">
         {m.profile_banner_greeting({ name: $user.name.first })}
-      </p>
+      </h5>
       {#if $user.isVip}
         <VipBadge />
       {/if}
     </div>
-    <p class="profile-info-location">{$user.location}</p>
+    <h6 class="profile-info-location ellipsis">{$user.location}</h6>
   </div>
 </div>
 
 <style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
   .profile-banner-container {
     margin-left: calc(3.25rem + var(--layout-distance-side));
     display: flex;
@@ -70,6 +84,8 @@
   }
 
   .profile-image {
+    margin: 0;
+
     :global(img) {
       width: 100%;
       height: 100%;
@@ -87,7 +103,7 @@
   .profile-info {
     display: inline-flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem;
 
     .profile-info-primary {
       display: flex;
@@ -95,24 +111,8 @@
       gap: 0.5rem;
     }
 
-    .profile-info-greeting {
-      margin: 0;
-
-      font-size: 1.5rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 90%;
-    }
-
     .profile-info-location {
-      margin: 0;
-
       color: var(--color-text-secondary);
-      font-size: 0.875rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 90%;
-      text-transform: uppercase;
     }
   }
 </style>
