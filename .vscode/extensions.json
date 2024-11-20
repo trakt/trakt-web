@@ -3,6 +3,7 @@
     "denoland.vscode-deno",
     "inlang.vs-code-extension",
     "redhat.vscode-yaml",
-    "phoenisx.cssvar"
+    "phoenisx.cssvar",
+    "jacobcassidy.css-nesting-syntax-highlighting"
   ]
 }
