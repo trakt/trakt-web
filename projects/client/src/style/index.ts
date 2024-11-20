@@ -13,3 +13,5 @@ import './transitions/index.css';
 
 import './theme/global.css';
 import './theme/modes.css';
+
+import './typography/index.css';
