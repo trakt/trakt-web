@@ -3,12 +3,14 @@
 
   type TexturedButtonProps = ButtonProps & {
     variant?: "primary" | "vip";
+    alignment?: "centered" | "default";
   };
 
   const {
     label,
     children,
     variant = "primary",
+    alignment = "default",
     ...props
   }: TexturedButtonProps = $props();
 </script>
@@ -18,6 +20,7 @@
   {...props}
   aria-label={label}
   data-variant={variant}
+  data-alignment={alignment}
 >
   <p class="button-label">{@render children()}</p>
 </button>
@@ -55,6 +58,10 @@
       --color-background-button: var(--color-surface-button-vip);
       --color-foreground-button: var(--color-foreground-button-vip);
       --color-background-button-disabled: var(--color-surface-button-disabled);
+    }
+
+    &[data-alignment="centered"] {
+      justify-content: center;
     }
 
     all: unset;

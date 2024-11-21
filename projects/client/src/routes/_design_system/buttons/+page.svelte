@@ -7,6 +7,13 @@
 
   <section>
     <h2>Textured Buttons</h2>
+    <TexturedButton
+      label="This is the primary textured button"
+      alignment="centered"
+    >
+      Centered Textured
+    </TexturedButton>
+
     <TexturedButton label="This is the primary textured button">
       Primary Textured
     </TexturedButton>
