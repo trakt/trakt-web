@@ -114,3 +114,11 @@ p.meta-info {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+button p {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 90%;
+  text-transform: uppercase;
+}
