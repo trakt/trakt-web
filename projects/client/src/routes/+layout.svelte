@@ -10,12 +10,6 @@
   const { data, children } = $props();
 </script>
 
-<ParaglideJS {i18n}>
-  <AuthGuard token={data.token}>
-    <Navbar theme={data.theme} />
-    {@render children()}
-  </AuthGuard>
-</ParaglideJS>
 <svelte:head>
   <title>Trakt Lite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,3 +23,10 @@
     rel="stylesheet"
   />
 </svelte:head>
+
+<ParaglideJS {i18n}>
+  <AuthGuard token={data.token}>
+    <Navbar theme={data.theme} />
+    {@render children()}
+  </AuthGuard>
+</ParaglideJS>

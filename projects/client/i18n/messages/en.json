@@ -12,5 +12,8 @@
   "remaining_episodes": "{count} remaining",
   "recommended_movies": "Recommended Movies",
   "recommended_shows": "Recommended Shows",
-  "number_of_episodes": "{count} episodes"
+  "number_of_episodes": "{count} episodes",
+  "error_404_title": "404: Nothingness. The void.",
+  "error_404_message": "(Don't worry, it happens to the best of us. Even the digital gods take a wrong turn sometimes.)",
+  "error_404_action": "Back to safety..."
 }

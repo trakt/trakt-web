@@ -12,5 +12,8 @@
   "remaining_episodes": "{count} restant",
   "recommended_movies": "Films recommandés",
   "recommended_shows": "Spectacles recommandés",
-  "number_of_episodes": "{count} épisodes"
+  "number_of_episodes": "{count} épisodes",
+  "error_404_title": "404 : Le néant. Le vide.",
+  "error_404_message": "(Ne vous inquiétez pas, cela arrive aux meilleurs d'entre nous. Même les dieux du numérique prennent parfois le mauvais chemin.)",
+  "error_404_action": "Retour à la sécurité..."
 }
