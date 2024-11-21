@@ -1,5 +1,5 @@
 <script>
-  import TexturedButton from "$lib/components/buttons/textured/TexturedButton.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
 </script>
 
 <main>
@@ -7,35 +7,42 @@
 
   <section>
     <h2>Textured Buttons</h2>
-    <TexturedButton
+    <Button
       label="This is the primary textured button"
       alignment="centered"
+      style="textured"
     >
       Centered Textured
-    </TexturedButton>
+    </Button>
 
-    <TexturedButton label="This is the primary textured button">
+    <Button label="This is the primary textured button" style="textured">
       Primary Textured
-    </TexturedButton>
+    </Button>
 
-    <TexturedButton
+    <Button
       label="This is the primary textured button in a disabled state"
+      style="textured"
       disabled
     >
       Primary disabled
-    </TexturedButton>
+    </Button>
 
-    <TexturedButton variant="vip" label="This is the VIP textured button">
+    <Button
+      variant="vip"
+      label="This is the VIP textured button"
+      style="textured"
+    >
       VIP Textured
-    </TexturedButton>
+    </Button>
 
-    <TexturedButton
+    <Button
       variant="vip"
       label="This is the VIP textured button in a disabled state"
+      style="textured"
       disabled
     >
       VIP disabled
-    </TexturedButton>
+    </Button>
   </section>
 </main>
 

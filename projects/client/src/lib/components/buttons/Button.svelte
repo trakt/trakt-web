@@ -1,9 +1,10 @@
 <script lang="ts">
-  import type { ButtonProps } from "../ButtonProps";
+  import type { ButtonProps } from "./ButtonProps";
 
   type TexturedButtonProps = ButtonProps & {
     variant?: "primary" | "vip";
     alignment?: "centered" | "default";
+    style?: "textured";
   };
 
   const {
@@ -11,6 +12,7 @@
     children,
     variant = "primary",
     alignment = "default",
+    style,
     ...props
   }: TexturedButtonProps = $props();
 </script>
@@ -21,6 +23,7 @@
   aria-label={label}
   data-variant={variant}
   data-alignment={alignment}
+  data-style={style}
 >
   <p class="button-label">{@render children()}</p>
 </button>
@@ -79,21 +82,15 @@
     overflow: hidden;
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: box-shadow outline;
+    transition-property: box-shadow outline padding;
 
     &,
     &::before,
     &:active[disabled] {
       width: 14.1875rem;
       height: 3.25rem;
-      padding: 0.75rem 1rem 1rem 1rem;
       box-sizing: border-box;
       border-radius: 0.75rem;
-
-      box-shadow:
-        0px 1px 2px 0px var(--color-highlight) inset,
-        2px -4px 2px 0px var(--color-shadow) inset,
-        0px 2px 8px 0px var(--color-shadow);
     }
 
     p {
@@ -123,15 +120,6 @@
       opacity: 1;
     }
 
-    &:active {
-      padding: 1rem 1rem 1rem 1rem;
-
-      box-shadow:
-        0px -1px 2px 0px var(--color-highlight) inset,
-        2px 4px 2px 0px var(--color-shadow) inset,
-        0px 2px 8px 0px var(--color-shadow);
-    }
-
     &:active::before {
       opacity: 0;
     }
@@ -149,6 +137,28 @@
 
       &::before {
         display: none;
+      }
+    }
+
+    &[data-style="textured"] {
+      padding: 1rem;
+      padding-top: 0.75rem;
+
+      &,
+      &::before {
+        box-shadow:
+          0px 1px 2px 0px var(--color-highlight) inset,
+          2px -4px 2px 0px var(--color-shadow) inset,
+          0px 2px 8px 0px var(--color-shadow);
+      }
+
+      &:not([disabled]):active {
+        padding-top: 1rem;
+
+        box-shadow:
+          0px -1px 2px 0px var(--color-highlight) inset,
+          2px 4px 2px 0px var(--color-shadow) inset,
+          0px 2px 8px 0px var(--color-shadow);
       }
     }
   }
