@@ -10,6 +10,12 @@
 
 <style>
   .trakt-textured-button {
+    --color-background-button-outline: color-mix(
+      in srgb,
+      var(--color-background-button) 10%,
+      white 90%
+    );
+
     --color-background-button-light: color-mix(
       in srgb,
       var(--color-background-button) 35%,
@@ -33,7 +39,8 @@
     position: relative;
     overflow: hidden;
 
-    transition: box-shadow var(--transition-increment) ease-in-out;
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: box-shadow outline;
 
     &,
     &::before {
@@ -71,7 +78,8 @@
       );
     }
 
-    &:hover::before {
+    &:hover::before,
+    &:focus-visible::before {
       opacity: 1;
     }
 
@@ -86,6 +94,10 @@
 
     &:active::before {
       opacity: 0;
+    }
+
+    &:focus-visible {
+      outline: 0.125rem solid var(--color-background-button-outline);
     }
   }
 </style>
