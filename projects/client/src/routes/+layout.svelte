@@ -1,5 +1,4 @@
 <script lang="ts">
-  import "../app.css";
   import "../style";
 
   import AuthGuard from "$lib/features/auth/components/AuthGuard.svelte";
@@ -22,6 +21,22 @@
     href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap"
     rel="stylesheet"
   />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--color-background);
+      color: var(--color-foreground);
+      font-family: "Spline Sans", Arial, sans-serif;
+    }
+  </style>
 </svelte:head>
 
 <ParaglideJS {i18n}>
