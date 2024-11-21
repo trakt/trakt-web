@@ -1,10 +1,24 @@
 <script lang="ts">
   import type { ButtonProps } from "../ButtonProps";
 
-  const { label, children, ...props }: ButtonProps = $props();
+  type TexturedButtonProps = ButtonProps & {
+    variant?: "primary";
+  };
+
+  const {
+    label,
+    children,
+    variant = "primary",
+    ...props
+  }: TexturedButtonProps = $props();
 </script>
 
-<button class="trakt-textured-button" {...props} aria-label={label}>
+<button
+  class="trakt-textured-button"
+  {...props}
+  aria-label={label}
+  data-variant={variant}
+>
   <p class="button-label">{@render children()}</p>
 </button>
 
@@ -30,6 +44,12 @@
 
     --color-highlight: color-mix(in srgb, white 52%, transparent 48%);
     --color-shadow: color-mix(in srgb, black 32%, transparent 68%);
+
+    &[data-variant="primary"] {
+      --color-background-button: var(--color-surface-button-primary);
+      --color-foreground-button: var(--color-foreground-button-primary);
+      --color-background-button-disabled: var(--color-surface-button-disabled);
+    }
 
     all: unset;
 

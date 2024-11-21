@@ -1,5 +1,4 @@
 <script>
-  import PrimaryTexturedButton from "$lib/components/buttons/textured/PrimaryTexturedButton.svelte";
   import TexturedButton from "$lib/components/buttons/textured/TexturedButton.svelte";
 </script>
 
@@ -8,30 +7,16 @@
 
   <section>
     <h2>Textured Buttons</h2>
-    <TexturedButton
-      label="This is the abstract textured button"
-      --color-background-button="peru"
-      --color-foreground-button="#efefef"
-    >
-      Abstract Textured
+    <TexturedButton label="This is the primary textured button">
+      Primary Textured
     </TexturedButton>
+
     <TexturedButton
-      label="This is the abstract textured button in a disabled state"
-      --color-background-button="peru"
-      --color-foreground-button="#efefef"
+      label="This is the primary textured button in a disabled state"
       disabled
     >
-      Abstract Disabled
+      Primary disabled
     </TexturedButton>
-
-    <PrimaryTexturedButton label="This is the primary textured button"
-      >Primary Textured</PrimaryTexturedButton
-    >
-
-    <PrimaryTexturedButton
-      label="This is the primary textured button in a disabled state"
-      disabled>Primary disabled</PrimaryTexturedButton
-    >
   </section>
 </main>
 
