@@ -38,6 +38,21 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }
 }

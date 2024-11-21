@@ -61,19 +61,19 @@ jobs:
           deno-version: v2.x
 
       - name: Gather the Tools aka Install Dependencies
-        run: "deno task install"
+        run: 'deno task install'
 
       - name: Probe the Client's Mind aka Run Tests
         working-directory: projects/client
-        run: "deno task test:unit"
+        run: 'deno task test:unit'
 
       - name: Consulting the Oracles of Type aka Type Check
         working-directory: projects/client
-        run: "deno task check"
+        run: 'deno task check'
 
       - name: Probing the API's Mind aka Run Tests
         working-directory: projects/api
-        run: "deno task test"
+        run: 'deno task test'
 
   build:
     name: The Forge (Build)
@@ -90,11 +90,11 @@ jobs:
           deno-version: v2.x
 
       - name: Gather the Tools aka Install Dependencies
-        run: "deno task install"
+        run: 'deno task install'
 
       - name: Weaving the Digital Tapestry aka Build
         working-directory: projects/client
-        run: "deno task build"
+        run: 'deno task build'
         env:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
 

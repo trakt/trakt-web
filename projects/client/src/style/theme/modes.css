@@ -1,7 +1,7 @@
 :root {
   /**
-  * Theme-able variables
-  */
+   * Theme-able variables
+   */
   --color-foreground: var(--shade-920);
   --color-background: var(--shade-10);
 

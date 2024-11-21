@@ -1,17 +1,17 @@
-name: "Delivering the Goods"
+name: 'Delivering the Goods'
 inputs:
   cloudflareArtifact:
-    description: "The name of the Cloudflare artifact"
+    description: 'The name of the Cloudflare artifact'
     required: true
   buildArtifact:
-    description: "The name of the output artifact"
+    description: 'The name of the output artifact'
     required: true
   wranglerArtifact:
-    description: "The name of the Wrangler artifact"
+    description: 'The name of the Wrangler artifact'
     required: true
-description: "Spirits the precious output of a build to the ethereal sanctuary of the GitHub artifact store, safe from the prying eyes of chaos."
+description: 'Spirits the precious output of a build to the ethereal sanctuary of the GitHub artifact store, safe from the prying eyes of chaos.'
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - uses: actions/upload-artifact@v4
       with:

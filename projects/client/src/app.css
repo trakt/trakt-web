@@ -3,5 +3,5 @@ body {
   padding: 0;
   background-color: var(--color-background);
   color: var(--color-foreground);
-  font-family: "Spline Sans", Arial, sans-serif;
+  font-family: 'Spline Sans', Arial, sans-serif;
 }
