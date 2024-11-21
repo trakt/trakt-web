@@ -9,6 +9,7 @@
   {...props}
   --color-background-button="var(--color-surface-button-primary)"
   --color-foreground-button="var(--color-foreground-button-primary)"
+  --color-background-button-disabled="var(--color-surface-button-disabled)"
 >
   {@render children()}
 </TexturedButton>

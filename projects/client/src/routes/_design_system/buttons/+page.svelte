@@ -15,9 +15,22 @@
     >
       Abstract Textured
     </TexturedButton>
+    <TexturedButton
+      label="This is the abstract textured button in a disabled state"
+      --color-background-button="peru"
+      --color-foreground-button="#efefef"
+      disabled
+    >
+      Abstract Disabled
+    </TexturedButton>
 
     <PrimaryTexturedButton label="This is the primary textured button"
       >Primary Textured</PrimaryTexturedButton
+    >
+
+    <PrimaryTexturedButton
+      label="This is the primary textured button in a disabled state"
+      disabled>Primary disabled</PrimaryTexturedButton
     >
   </section>
 </main>

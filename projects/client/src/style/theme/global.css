@@ -30,5 +30,6 @@
   --color-background-finale-tag: var(--red-700);
 
   --color-surface-button-primary: var(--purple-500);
+  --color-surface-button-disabled: var(--shade-800);
   --color-foreground-button-primary: var(--shade-10);
 }

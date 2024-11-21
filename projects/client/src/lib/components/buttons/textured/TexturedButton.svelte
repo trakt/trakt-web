@@ -22,6 +22,12 @@
       white 65%
     );
 
+    --color-background-button-disabled-default: color-mix(
+      in srgb,
+      var(--color-background-button) 10%,
+      grey 90%
+    );
+
     --color-highlight: color-mix(in srgb, white 52%, transparent 48%);
     --color-shadow: color-mix(in srgb, black 32%, transparent 68%);
 
@@ -43,7 +49,8 @@
     transition-property: box-shadow outline;
 
     &,
-    &::before {
+    &::before,
+    &:active[disabled] {
       width: 14.1875rem;
       height: 3.25rem;
       padding: 0.75rem 1rem 1rem 1rem;
@@ -98,6 +105,18 @@
 
     &:focus-visible {
       outline: 0.125rem solid var(--color-background-button-outline);
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      background: var(
+        --color-background-button-disabled,
+        var(--color-background-button-disabled-default)
+      );
+
+      &::before {
+        display: none;
+      }
     }
   }
 </style>
