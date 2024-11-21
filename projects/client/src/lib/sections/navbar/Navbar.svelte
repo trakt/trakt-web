@@ -23,14 +23,12 @@
   });
 </script>
 
-<div class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
+<nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
   <div class="trakt-logo">
     <Logo />
   </div>
-  <div class="trakt-theme-selector">
-    <ThemePicker {theme} />
-  </div>
-</div>
+  <ThemePicker {theme} />
+</nav>
 
 <div class="trakt-navbar-spacer"></div>
 
@@ -42,6 +40,7 @@
     padding: 0.75rem 1rem;
     height: 4rem;
   }
+
   .trakt-navbar {
     z-index: 2;
     position: fixed;
