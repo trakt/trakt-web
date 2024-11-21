@@ -30,6 +30,8 @@
     position: relative;
     overflow: hidden;
 
+    transition: box-shadow var(--transition-increment) ease-in-out;
+
     &,
     &::before {
       width: 14.1875rem;
@@ -68,6 +70,19 @@
 
     &:hover::before {
       opacity: 1;
+    }
+
+    &:active {
+      padding: 1rem 1rem 1rem 1rem;
+
+      box-shadow:
+        0px -1px 2px 0px rgba(255, 255, 255, 0.48) inset,
+        2px 4px 2px 0px rgba(0, 0, 0, 0.32) inset,
+        0px 2px 8px 0px rgba(0, 0, 0, 0.32);
+    }
+
+    &:active::before {
+      opacity: 0;
     }
   }
 </style>
