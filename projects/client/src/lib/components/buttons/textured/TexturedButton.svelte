@@ -16,6 +16,9 @@
       white 65%
     );
 
+    --color-highlight: color-mix(in srgb, white 52%, transparent 48%);
+    --color-shadow: color-mix(in srgb, black 32%, transparent 68%);
+
     all: unset;
 
     display: flex;
@@ -41,9 +44,9 @@
       border-radius: 0.75rem;
 
       box-shadow:
-        0px 1px 2px 0px rgba(255, 255, 255, 0.48) inset,
-        2px -4px 2px 0px rgba(0, 0, 0, 0.32) inset,
-        0px 2px 8px 0px rgba(0, 0, 0, 0.32);
+        0px 1px 2px 0px var(--color-highlight) inset,
+        2px -4px 2px 0px var(--color-shadow) inset,
+        0px 2px 8px 0px var(--color-shadow);
     }
 
     p {
@@ -76,9 +79,9 @@
       padding: 1rem 1rem 1rem 1rem;
 
       box-shadow:
-        0px -1px 2px 0px rgba(255, 255, 255, 0.48) inset,
-        2px 4px 2px 0px rgba(0, 0, 0, 0.32) inset,
-        0px 2px 8px 0px rgba(0, 0, 0, 0.32);
+        0px -1px 2px 0px var(--color-highlight) inset,
+        2px 4px 2px 0px var(--color-shadow) inset,
+        0px 2px 8px 0px var(--color-shadow);
     }
 
     &:active::before {
