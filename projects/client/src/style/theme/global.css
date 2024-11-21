@@ -31,5 +31,9 @@
 
   --color-surface-button-primary: var(--purple-500);
   --color-surface-button-disabled: var(--shade-800);
+
+  --color-surface-button-vip: var(--red-500);
+  --color-foreground-button-vip: var(--share-10);
+
   --color-foreground-button-primary: var(--shade-10);
 }

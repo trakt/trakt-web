@@ -17,6 +17,18 @@
     >
       Primary disabled
     </TexturedButton>
+
+    <TexturedButton variant="vip" label="This is the VIP textured button">
+      VIP Textured
+    </TexturedButton>
+
+    <TexturedButton
+      variant="vip"
+      label="This is the VIP textured button in a disabled state"
+      disabled
+    >
+      VIP disabled
+    </TexturedButton>
   </section>
 </main>
 
