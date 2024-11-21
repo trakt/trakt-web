@@ -29,6 +29,23 @@
       </Button>
 
       <Button
+        variant="secondary"
+        label="This is the secondary textured button"
+        style="textured"
+      >
+        Secondary Textured
+      </Button>
+
+      <Button
+        variant="secondary"
+        label="This is the secondary textured button in a disabled state"
+        style="textured"
+        disabled
+      >
+        Secondary disabled
+      </Button>
+
+      <Button
         variant="vip"
         label="This is the VIP textured button"
         style="textured"
@@ -61,7 +78,19 @@
         Primary disabled
       </Button>
 
-      <Button variant="vip" label="This is the VIP textured button">
+      <Button variant="secondary" label="This is the secondary flat button">
+        Secondary Flat
+      </Button>
+
+      <Button
+        variant="secondary"
+        label="This is the secondary flat button in a disabled state"
+        disabled
+      >
+        Secondary disabled
+      </Button>
+
+      <Button variant="vip" label="This is the VIP flat button">
         VIP Flat
       </Button>
 

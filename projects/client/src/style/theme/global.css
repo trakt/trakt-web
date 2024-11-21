@@ -30,10 +30,12 @@
   --color-background-finale-tag: var(--red-700);
 
   --color-surface-button-primary: var(--purple-500);
+  --color-foreground-button-primary: var(--share-10);
   --color-surface-button-disabled: var(--shade-800);
+
+  --color-surface-button-secondary: var(--purple-700);
+  --color-foreground-button-secondary: var(--share-10);
 
   --color-surface-button-vip: var(--red-500);
   --color-foreground-button-vip: var(--share-10);
-
-  --color-foreground-button-primary: var(--shade-10);
 }

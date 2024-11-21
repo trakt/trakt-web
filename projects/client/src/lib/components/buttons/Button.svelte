@@ -2,7 +2,7 @@
   import type { ButtonProps } from "./ButtonProps";
 
   type TexturedButtonProps = ButtonProps & {
-    variant?: "primary" | "vip";
+    variant?: "primary" | "secondary" | "vip";
     alignment?: "centered" | "default";
     style?: "textured" | "flat";
   };
@@ -60,6 +60,12 @@
     &[data-variant="vip"] {
       --color-background-button: var(--color-surface-button-vip);
       --color-foreground-button: var(--color-foreground-button-vip);
+      --color-background-button-disabled: var(--color-surface-button-disabled);
+    }
+
+    &[data-variant="secondary"] {
+      --color-background-button: var(--color-surface-button-secondary);
+      --color-foreground-button: var(--color-foreground-button-secondary);
       --color-background-button-disabled: var(--color-surface-button-disabled);
     }
 
