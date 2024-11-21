@@ -4,7 +4,7 @@
   type TexturedButtonProps = ButtonProps & {
     variant?: "primary" | "vip";
     alignment?: "centered" | "default";
-    style?: "textured";
+    style?: "textured" | "flat";
   };
 
   const {
@@ -12,7 +12,7 @@
     children,
     variant = "primary",
     alignment = "default",
-    style,
+    style = "flat",
     ...props
   }: TexturedButtonProps = $props();
 </script>
@@ -138,6 +138,10 @@
       &::before {
         display: none;
       }
+    }
+
+    &[data-style="flat"] {
+      padding: 1rem;
     }
 
     &[data-style="textured"] {
