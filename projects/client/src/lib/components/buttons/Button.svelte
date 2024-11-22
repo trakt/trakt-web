@@ -39,6 +39,22 @@
 </button>
 
 <style>
+  @keyframes jiggle-wiggle {
+    0%,
+    100% {
+      transform: translateX(0) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translateX(-0.125rem) rotate(-1deg) scale(1.05);
+    }
+    50% {
+      transform: translateX(0.125rem) rotate(1deg) scale(1.05);
+    }
+    75% {
+      transform: translateX(-0.125rem) rotate(-1deg) scale(1.05);
+    }
+  }
+
   .trakt-textured-button {
     --color-background-button-outline: color-mix(
       in srgb,
@@ -150,6 +166,10 @@
 
     &:active::before {
       opacity: 0;
+    }
+
+    &:active[disabled] {
+      animation: jiggle-wiggle calc(var(--transition-increment) * 3) infinite;
     }
 
     &:focus-visible {
