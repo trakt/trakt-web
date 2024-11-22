@@ -9,6 +9,10 @@
   import UpcomingSchedule from "$lib/sections/upcoming-schedule/UpcomingSchedule.svelte";
 </script>
 
+<svelte:head>
+  <title>Trakt Lite: Dashboard</title>
+</svelte:head>
+
 <div class="trakt-content">
   <ProfileBanner />
   <UpNext />
