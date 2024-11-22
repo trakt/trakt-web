@@ -1,8 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import type { ButtonProps } from "./ButtonProps";
 
-  type TexturedButtonProps = ButtonProps & {
+  type TraktButtonProps = ButtonProps & {
     variant?: "primary" | "secondary" | "vip" | "custom";
     style?: "textured" | "flat";
     icon?: Snippet;
@@ -15,7 +14,7 @@
     style = "flat",
     icon,
     ...props
-  }: TexturedButtonProps = $props();
+  }: TraktButtonProps = $props();
 
   const hasIcon = $state(icon != null);
   const alignment = $derived(!hasIcon ? "centered" : "default");

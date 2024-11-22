@@ -58,6 +58,13 @@ declare global {
     onmouseupcapture?: (event: MouseEvent) => void;
   };
 
+  export type ButtonProps =
+    & {
+      label: string;
+    }
+    & HTMLElementProps
+    & ChildrenProps;
+
   namespace App {
     // interface Error {}
     // interface Locals {}
