@@ -3,4 +3,12 @@
    * Animation transition variables
    */
   --transition-increment: 150ms;
+
+  @media (prefers-reduced-motion: reduce) {
+    --transition-increment: 0ms;
+  }
+
+  @media (max-width: 480px) {
+    --transition-increment: 75ms;
+  }
 }
