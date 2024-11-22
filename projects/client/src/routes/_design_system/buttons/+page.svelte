@@ -64,6 +64,9 @@
         disabled
       >
         VIP disabled
+        {#snippet icon()}
+          <VipIcon />
+        {/snippet}
       </Button>
     </section>
 
@@ -111,6 +114,9 @@
         disabled
       >
         VIP disabled
+        {#snippet icon()}
+          <VipIcon />
+        {/snippet}
       </Button>
     </section>
 
@@ -167,6 +173,9 @@
         disabled
       >
         VIP disabled
+        {#snippet icon()}
+          <VipIcon />
+        {/snippet}
       </Button>
 
       <Button
