@@ -131,12 +131,6 @@
 
       opacity: 0;
       transition: opacity var(--transition-increment) ease-in-out;
-
-      background: radial-gradient(
-        59.13% 72.55% at 50.22% 118.63%,
-        var(--color-background-button-light) 0%,
-        var(--color-background-button) 100%
-      );
     }
 
     &:hover::before,
@@ -181,6 +175,14 @@
           0px 2px 8px 0px var(--color-shadow);
       }
 
+      &::before {
+        background: radial-gradient(
+          59.13% 72.55% at 50.22% 118.63%,
+          var(--color-background-button-light) 0%,
+          var(--color-background-button) 100%
+        );
+      }
+
       &:not([disabled]):active {
         padding-top: 1rem;
 
@@ -188,6 +190,20 @@
           0px -1px 2px 0px var(--color-highlight) inset,
           2px 4px 2px 0px var(--color-shadow) inset,
           0px 2px 8px 0px var(--color-shadow);
+      }
+    }
+
+    &[data-style="flat"] {
+      &[data-variant="primary"] {
+        &:hover:not([disabled]) {
+          background: var(--color-surface-button-secondary);
+        }
+      }
+
+      &[data-variant="secondary"] {
+        &:hover:not([disabled]) {
+          background: var(--color-surface-button-primary);
+        }
       }
     }
   }
