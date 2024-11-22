@@ -15,8 +15,6 @@
   const authUrl = writable<string | Nil>();
   const token = writable<string | Nil>(seed);
 
-  token.subscribe(setToken);
-
   function requestAuthStatus(code: string) {
     return fetch(AuthEndpoint.Verify, {
       method: "POST",
@@ -60,7 +58,7 @@
       }
 
       clearInterval(interval);
-      token.set(access);
+      setToken(access);
     }, auth.interval);
   });
 </script>
