@@ -101,7 +101,7 @@
     overflow: hidden;
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: box-shadow outline padding;
+    transition-property: box-shadow outline padding transform;
 
     &,
     &::before,
@@ -204,6 +204,10 @@
         &:hover:not([disabled]) {
           background: var(--color-surface-button-primary);
         }
+      }
+
+      &:active:not([disabled]) {
+        transform: scale(0.9);
       }
     }
   }
