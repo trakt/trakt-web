@@ -5,6 +5,7 @@
   import { i18n } from "$lib/features/i18n/index.ts";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import { ParaglideJS } from "@inlang/paraglide-sveltekit";
+  import { QueryClientProvider } from "@tanstack/svelte-query";
 
   const { data, children } = $props();
 </script>
@@ -40,8 +41,10 @@
 </svelte:head>
 
 <ParaglideJS {i18n}>
-  <AuthGuard token={data.token}>
-    <Navbar theme={data.theme} />
-    {@render children()}
-  </AuthGuard>
+  <QueryClientProvider client={data.client}>
+    <AuthGuard token={data.token}>
+      <Navbar theme={data.theme} />
+      {@render children()}
+    </AuthGuard>
+  </QueryClientProvider>
 </ParaglideJS>
