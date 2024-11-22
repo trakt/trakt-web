@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@std/assert@^1.0.8": "1.0.8",
+    "jsr:@std/async@^1.0.8": "1.0.8",
     "jsr:@std/data-structures@^1.0.4": "1.0.4",
     "jsr:@std/fs@^1.0.5": "1.0.5",
     "jsr:@std/internal@^1.0.5": "1.0.5",
@@ -18,6 +19,7 @@
     "npm:@sveltejs/kit@2": "2.7.3_@sveltejs+vite-plugin-svelte@4.0.0__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_svelte@5.1.3__acorn@8.14.0_vite@5.4.10",
     "npm:@sveltejs/kit@2.7.3": "2.7.3_@sveltejs+vite-plugin-svelte@4.0.0__svelte@5.1.3___acorn@8.14.0__vite@5.4.10_svelte@5.1.3__acorn@8.14.0_vite@5.4.10",
     "npm:@sveltejs/vite-plugin-svelte@4": "4.0.0_svelte@5.1.3__acorn@8.14.0_vite@5.4.10",
+    "npm:@tanstack/svelte-query@^5.60.6": "5.60.6_svelte@5.1.3__acorn@8.14.0",
     "npm:@testing-library/jest-dom@^6.6.3": "6.6.3",
     "npm:@testing-library/svelte@^5.2.6": "5.2.6_svelte@5.1.3__acorn@8.14.0_vite@5.4.10_vitest@2.1.4__vite@5.4.10",
     "npm:@testing-library/user-event@^14.5.2": "14.5.2_@testing-library+dom@10.4.0",
@@ -51,6 +53,9 @@
         "jsr:@std/internal"
       ]
     },
+    "@std/async@1.0.8": {
+      "integrity": "c057c5211a0f1d12e7dcd111ab430091301b8d64b4250052a79d277383bc3ba7"
+    },
     "@std/data-structures@1.0.4": {
       "integrity": "fa0e20c11eb9ba673417450915c750a0001405a784e2a4e0c3725031681684a0"
     },
@@ -73,6 +78,7 @@
       "integrity": "6e693cbec94c81a1ad3df668685c7ba8e20742bb10305bc7137faa5cf16d2ec4",
       "dependencies": [
         "jsr:@std/assert",
+        "jsr:@std/async",
         "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
@@ -909,6 +915,16 @@
         "svelte",
         "vite",
         "vitefu"
+      ]
+    },
+    "@tanstack/query-core@5.60.6": {
+      "integrity": "sha512-tI+k0KyCo1EBJ54vxK1kY24LWj673ujTydCZmzEZKAew4NqZzTaVQJEuaG1qKj2M03kUHN46rchLRd+TxVq/zQ=="
+    },
+    "@tanstack/svelte-query@5.60.6_svelte@5.1.3__acorn@8.14.0": {
+      "integrity": "sha512-+67RI61norp2ivb9glP0DEllSgdV0NdfOoOjop3BjQTSjlvNGX5icICLblf4ppY67acT/cbaNOXIlgOpU51U1w==",
+      "dependencies": [
+        "@tanstack/query-core",
+        "svelte"
       ]
     },
     "@testing-library/dom@10.4.0": {
@@ -2890,6 +2906,7 @@
             "npm:@sveltejs/adapter-cloudflare@^4.7.4",
             "npm:@sveltejs/kit@2",
             "npm:@sveltejs/vite-plugin-svelte@4",
+            "npm:@tanstack/svelte-query@^5.60.6",
             "npm:@testing-library/jest-dom@^6.6.3",
             "npm:@testing-library/svelte@^5.2.6",
             "npm:@testing-library/user-event@^14.5.2",
