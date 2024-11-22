@@ -12,4 +12,9 @@ export const handle: Handle = sequence(
   handleTheme,
   handleAuth,
   handleImage,
+  ({ event, resolve }) => {
+    return resolve(event, {
+      filterSerializedResponseHeaders: (name) => name === 'content-type',
+    });
+  },
 );
