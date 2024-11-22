@@ -105,13 +105,20 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: box-shadow outline padding transform;
 
+    & {
+      min-width: 11.25rem;
+    }
+
     &,
     &::before,
     &:active[disabled] {
-      min-width: 14.1875rem;
       height: 3.25rem;
       box-sizing: border-box;
       border-radius: 0.75rem;
+    }
+
+    &::before {
+      width: 100%;
     }
 
     .button-icon {
