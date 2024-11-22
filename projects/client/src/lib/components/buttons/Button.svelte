@@ -93,6 +93,8 @@
     gap: 1rem;
     flex-shrink: 0;
     cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     background: var(--color-background-button);
     color: var(--color-foreground-button);
