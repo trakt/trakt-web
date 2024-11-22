@@ -9,7 +9,7 @@
 
   <div class="button-display">
     <section>
-      <h2>Textured Buttons</h2>
+      <h2>Textured</h2>
       <Button label="This is the primary textured button" style="textured">
         Icon Textured
         {#snippet icon()}
@@ -68,7 +68,7 @@
     </section>
 
     <section>
-      <h2>Flat Buttons</h2>
+      <h2>Flat</h2>
       <Button label="This is the primary flat button"
         >Icon Flat
 
@@ -128,6 +128,7 @@
       .button-display {
         flex-direction: column;
         align-items: center;
+        gap: 2rem;
       }
     }
 
@@ -135,7 +136,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      align-items: center;
+      align-items: start;
     }
   }
 
