@@ -1,6 +1,7 @@
 <script lang="ts">
   import AddToWatchlistButton from "$lib/components/buttons/AddButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
+  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import PosterCard from "$lib/components/poster/card/PosterCard.svelte";
   import PosterCover from "$lib/components/poster/card/PosterCover.svelte";
   import DurationTag from "$lib/components/poster/tags/DurationTag.svelte";
@@ -29,6 +30,7 @@
   }: RecommendationListProps = $props();
 
   const loadingMap = new SvelteMap<number, boolean>();
+  const watchlistMap = new SvelteMap<number, boolean>();
 
   const recommendations = writable<RecommendedMedia>([]);
 
@@ -46,7 +48,6 @@
       <PosterCover
         src={recommendation.poster.url}
         alt={`${recommendation.title} poster`}
-        isLoading={loadingMap.get(recommendation.id) ?? false}
       >
         {#snippet tags()}
           {#if "episode" in recommendation}
@@ -69,16 +70,22 @@
           {recommendation.title}
         </p>
         {#snippet actions()}
-          <AddToWatchlistButton
-            label={`Mark ${recommendation.id} as watched`}
-            disabled={loadingMap.get(recommendation.id) ?? false}
-            onclick={async () => {
-              loadingMap.set(recommendation.id, true);
-              await onAddToWatchlist(recommendation.id);
-              loadingMap.set(recommendation.id, false);
-              await fetchRecommendations();
-            }}
-          />
+          {#if !watchlistMap.get(recommendation.id)}
+            <AddToWatchlistButton
+              label={`Mark ${recommendation.id} as watched`}
+              disabled={loadingMap.get(recommendation.id) ?? false}
+              onclick={async () => {
+                loadingMap.set(recommendation.id, true);
+                await onAddToWatchlist(recommendation.id);
+                loadingMap.set(recommendation.id, false);
+                watchlistMap.set(recommendation.id, true);
+              }}
+            />
+          {:else}
+            <div class="watchlist-added-icon">
+              <CheckIcon />
+            </div>
+          {/if}
         {/snippet}
       </CardFooter>
     </PosterCard>
@@ -93,5 +100,13 @@
     color: var(--color-text-secondary);
 
     font-weight: 500;
+  }
+
+  /* FIXME: This is a temporary solution to indicate that 
+   * a recommendation has been added to the watchlist
+   */
+  .watchlist-added-icon {
+    padding: 0.375rem;
+    color: var(--blue-300);
   }
 </style>
