@@ -3,7 +3,7 @@
 
   type TraktButtonProps = ButtonProps & {
     variant?: "primary" | "secondary" | "vip" | "custom";
-    style?: "textured" | "flat";
+    style?: "textured" | "flat" | "ghost";
     icon?: Snippet;
   };
 
@@ -17,7 +17,9 @@
   }: TraktButtonProps = $props();
 
   const hasIcon = $state(icon != null);
-  const alignment = $derived(!hasIcon ? "centered" : "default");
+  const isGhost = $state(style === "ghost");
+  const isDefaultAlignment = $derived(hasIcon || isGhost);
+  const alignment = $derived(isDefaultAlignment ? "default" : "centered");
 </script>
 
 <button
@@ -41,7 +43,7 @@
     --color-background-button-outline: color-mix(
       in srgb,
       var(--color-background-button) 10%,
-      white 90%
+      var(--color-foreground) 90%
     );
 
     --color-background-button-light: color-mix(
@@ -102,7 +104,7 @@
     overflow: hidden;
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: box-shadow outline padding transform;
+    transition-property: box-shadow outline padding transform color background;
 
     & {
       min-width: 11.25rem;
@@ -167,8 +169,27 @@
       }
     }
 
-    &[data-style="flat"] {
+    &[data-style="ghost"] {
       padding: 1rem;
+      transform: scale(0.9);
+      background: transparent;
+      color: inherit;
+
+      &:hover:not([disabled]) {
+        color: var(--color-foreground-button);
+      }
+
+      &[disabled] {
+        color: var(--color-foreground-button-disabled);
+      }
+
+      &:hover:not([disabled]) {
+        background: var(--color-background-button);
+      }
+
+      &:active:not([disabled]) {
+        transform: scale(0.81);
+      }
     }
 
     &[data-style="textured"] {
@@ -202,6 +223,7 @@
     }
 
     &[data-style="flat"] {
+      padding: 1rem;
       &[data-variant="primary"] {
         &:hover:not([disabled]) {
           background: var(--color-surface-button-secondary);

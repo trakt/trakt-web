@@ -113,6 +113,80 @@
         VIP disabled
       </Button>
     </section>
+
+    <section>
+      <h2>Ghost</h2>
+      <Button label="This is the primary ghost button" style="ghost">
+        Ghost icon
+
+        {#snippet icon()}
+          <WatchNowIcon />
+        {/snippet}
+      </Button>
+
+      <Button label="This is the primary ghost button" style="ghost">
+        Ghost primary
+      </Button>
+
+      <Button
+        label="This is the primary ghost button in a disabled state"
+        style="ghost"
+        disabled
+      >
+        Ghost disabled
+      </Button>
+
+      <Button
+        variant="secondary"
+        label="This is the secondary ghost button"
+        style="ghost"
+      >
+        Ghost secondary
+      </Button>
+
+      <Button
+        variant="secondary"
+        label="This is the secondary ghost button in a disabled state"
+        style="ghost"
+        disabled
+      >
+        Secondary disabled
+      </Button>
+
+      <Button variant="vip" label="This is the VIP ghost button" style="ghost">
+        Ghost VIP
+        {#snippet icon()}
+          <VipIcon />
+        {/snippet}
+      </Button>
+
+      <Button
+        variant="vip"
+        label="This is the VIP ghost button in a disabled state"
+        style="ghost"
+        disabled
+      >
+        VIP disabled
+      </Button>
+
+      <Button
+        variant="custom"
+        label="This is the custom ghost button"
+        style="ghost"
+        --color-background-button="green"
+      >
+        Ghost custom
+      </Button>
+
+      <Button
+        variant="custom"
+        label="This is the custom ghost button in a disabled state"
+        style="ghost"
+        disabled
+      >
+        Custom disabled
+      </Button>
+    </section>
   </div>
 </main>
 
