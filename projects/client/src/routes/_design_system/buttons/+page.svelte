@@ -11,14 +11,14 @@
     <section>
       <h2>Textured</h2>
       <Button label="This is the primary textured button" style="textured">
-        Icon Textured
+        Textured Icon
         {#snippet icon()}
           <WatchNowIcon />
         {/snippet}
       </Button>
 
       <Button label="This is the primary textured button" style="textured">
-        Primary Textured
+        Textured primary
       </Button>
 
       <Button
@@ -26,7 +26,7 @@
         style="textured"
         disabled
       >
-        Primary disabled
+        Textured disabled
       </Button>
 
       <Button
@@ -34,7 +34,7 @@
         label="This is the secondary textured button"
         style="textured"
       >
-        Secondary Textured
+        Textured secondary
       </Button>
 
       <Button
@@ -51,7 +51,7 @@
         label="This is the VIP textured button"
         style="textured"
       >
-        VIP Textured
+        Textured VIP
         {#snippet icon()}
           <VipIcon />
         {/snippet}
@@ -68,29 +68,46 @@
           <VipIcon />
         {/snippet}
       </Button>
+
+      <Button
+        variant="custom"
+        label="This is the custom textured button"
+        style="textured"
+        --color-background-button="deeppink"
+      >
+        Textured custom
+      </Button>
+
+      <Button
+        variant="custom"
+        label="This is the custom textured button in a disabled state"
+        style="textured"
+        disabled
+      >
+        Custom disabled
+      </Button>
     </section>
 
     <section>
       <h2>Flat</h2>
-      <Button label="This is the primary flat button"
-        >Icon Flat
-
+      <Button label="This is the primary flat button">
+        Flat Icon
         {#snippet icon()}
           <WatchNowIcon />
         {/snippet}
       </Button>
 
-      <Button label="This is the primary flat button">Primary Flat</Button>
+      <Button label="This is the primary flat button">Flat primary</Button>
 
       <Button
         label="This is the primary flat button in a disabled state"
         disabled
       >
-        Primary disabled
+        Flat disabled
       </Button>
 
       <Button variant="secondary" label="This is the secondary flat button">
-        Secondary Flat
+        Flat secondary
       </Button>
 
       <Button
@@ -102,7 +119,7 @@
       </Button>
 
       <Button variant="vip" label="This is the VIP flat button">
-        VIP Flat
+        Flat VIP
         {#snippet icon()}
           <VipIcon />
         {/snippet}
@@ -117,6 +134,24 @@
         {#snippet icon()}
           <VipIcon />
         {/snippet}
+      </Button>
+
+      <Button
+        variant="custom"
+        label="This is the custom flat button"
+        style="flat"
+        --color-background-button="deeppink"
+      >
+        Flat custom
+      </Button>
+
+      <Button
+        variant="custom"
+        label="This is the custom flat button in a disabled state"
+        style="flat"
+        disabled
+      >
+        Custom disabled
       </Button>
     </section>
 
@@ -182,7 +217,7 @@
         variant="custom"
         label="This is the custom ghost button"
         style="ghost"
-        --color-background-button="green"
+        --color-background-button="deeppink"
       >
         Ghost custom
       </Button>
@@ -204,7 +239,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem;
+    padding-top: 2rem;
     align-items: center;
 
     @media (max-width: 768px) {
