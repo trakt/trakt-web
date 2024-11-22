@@ -73,7 +73,7 @@
         variant="custom"
         label="This is the custom textured button"
         style="textured"
-        --color-background-button="deeppink"
+        --color-background-button="darkorange"
       >
         Textured custom
       </Button>
@@ -140,7 +140,7 @@
         variant="custom"
         label="This is the custom flat button"
         style="flat"
-        --color-background-button="deeppink"
+        --color-background-button="darkorange"
       >
         Flat custom
       </Button>
@@ -217,7 +217,7 @@
         variant="custom"
         label="This is the custom ghost button"
         style="ghost"
-        --color-background-button="deeppink"
+        --color-background-button="darkorange"
       >
         Ghost custom
       </Button>
