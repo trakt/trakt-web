@@ -8,38 +8,29 @@
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages";
-  import { type RecommendedMovie } from "$lib/requests/recommendations/recommendMovies";
-  import type { RecommendedShow } from "$lib/requests/recommendations/recommendShows";
+  import { type RecommendedMovie } from "$lib/requests/queries/recommendations/recommendedMoviesQuery";
+  import type { RecommendedShow } from "$lib/requests/queries/recommendations/recommendedShowsQuery";
   import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
-  import { onMount } from "svelte";
+  import { createQuery, type CreateQueryOptions } from "@tanstack/svelte-query";
   import { SvelteMap } from "svelte/reactivity";
-  import { writable } from "svelte/store";
+  import { derived } from "svelte/store";
 
   type RecommendedMedia = Array<RecommendedMovie | RecommendedShow>;
 
   type RecommendationListProps = {
     title: string;
-    dataSourceFactory: () => Promise<RecommendedMedia>;
+    queryOptions: () => CreateQueryOptions<RecommendedMedia>;
     onAddToWatchlist: (id: number) => Promise<unknown> | void;
   };
 
-  const {
-    dataSourceFactory,
-    title,
-    onAddToWatchlist,
-  }: RecommendationListProps = $props();
+  const { queryOptions, title, onAddToWatchlist }: RecommendationListProps =
+    $props();
 
   const loadingMap = new SvelteMap<number, boolean>();
   const watchlistMap = new SvelteMap<number, boolean>();
 
-  const recommendations = writable<RecommendedMedia>([]);
-
-  async function fetchRecommendations() {
-    const entries = await dataSourceFactory();
-    recommendations.set(entries);
-  }
-
-  onMount(fetchRecommendations);
+  const query = createQuery(queryOptions());
+  const recommendations = derived(query, ($query) => $query.data ?? []);
 </script>
 
 <SectionList {title} --height-section-list="19rem">

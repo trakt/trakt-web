@@ -3,10 +3,10 @@ import {
   type EpisodeType,
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
-import type { EpisodeEntry } from '$lib/requests/calendars/upcomingEpisodes.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api, type ApiParams } from '../_internal/api.ts';
-import { authHeader } from '../_internal/authHeader.ts';
+import { api, type ApiParams } from '../../_internal/api.ts';
+import { authHeader } from '../../_internal/authHeader.ts';
+import type { EpisodeEntry } from '../calendars/upcomingEpisodesQuery.ts';
 
 export type UpNextEntry = EpisodeEntry & {
   total: number;
@@ -47,7 +47,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
   };
 }
 
-export function upNext({ fetch }: UpNextParams = {}): Promise<UpNextEntry[]> {
+function upNextRequest({ fetch }: UpNextParams = {}): Promise<UpNextEntry[]> {
   return api({ fetch })
     .sync
     .progress
@@ -67,3 +67,11 @@ export function upNext({ fetch }: UpNextParams = {}): Promise<UpNextEntry[]> {
       return body.map(mapResponseToUpNextEntry);
     });
 }
+
+export const upNextQueryKey = ['upNext'] as const;
+export const upNextQuery = (
+  params: UpNextParams = {},
+) => ({
+  queryKey: upNextQueryKey,
+  queryFn: () => upNextRequest(params),
+});

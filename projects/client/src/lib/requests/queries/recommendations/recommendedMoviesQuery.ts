@@ -1,7 +1,7 @@
 import type { RecommendedMovieResponse } from '$lib/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api, type ApiParams } from '../_internal/api.ts';
-import { authHeader } from '../_internal/authHeader.ts';
+import { api, type ApiParams } from '../../_internal/api.ts';
+import { authHeader } from '../../_internal/authHeader.ts';
 
 export type RecommendedMovie = {
   id: number;
@@ -30,7 +30,7 @@ function mapResponseToRecommendedMovie(
   };
 }
 
-export function recommendMovies(
+function recommendMoviesRequest(
   { fetch }: RecommendedMoviesParams = {},
 ): Promise<RecommendedMovie[]> {
   return api({ fetch })
@@ -60,3 +60,11 @@ export function recommendMovies(
       return body.map(mapResponseToRecommendedMovie);
     });
 }
+
+const recommendedMoviesQueryKey = ['recommendedMovies'] as const;
+export const recommendedMoviesQuery = (
+  params: RecommendedMoviesParams = {},
+) => ({
+  queryKey: recommendedMoviesQueryKey,
+  queryFn: () => recommendMoviesRequest(params),
+});

@@ -1,5 +1,5 @@
-import type { EpisodeEntry } from '$lib/requests/calendars/upcomingEpisodes.ts';
 import { readonly, writable } from 'svelte/store';
+import type { EpisodeEntry } from '../../requests/queries/calendars/upcomingEpisodesQuery.ts';
 
 export const useEpisodeStore = <T extends EpisodeEntry>() => {
   const episodes = writable<T[]>([]);

@@ -6,7 +6,7 @@ type AddToWatchlistParams = {
   body: WatchlistRequest;
 } & ApiParams;
 
-export function addToWatchlist(
+export function addToWatchlistRequest(
   { body, fetch }: AddToWatchlistParams,
 ): Promise<boolean> {
   return api({ fetch })

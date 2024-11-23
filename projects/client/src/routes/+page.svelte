@@ -1,8 +1,8 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import { recommendMovies } from "$lib/requests/recommendations/recommendMovies";
-  import { recommendShows } from "$lib/requests/recommendations/recommendShows";
-  import { addToWatchlist } from "$lib/requests/sync/addToWatchlist";
+  import { recommendedMoviesQuery } from "$lib/requests/queries/recommendations/recommendedMoviesQuery";
+  import { recommendedShowsQuery } from "$lib/requests/queries/recommendations/recommendedShowsQuery";
+  import { addToWatchlistRequest } from "$lib/requests/sync/addToWatchlistRequest";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
   import RecommendationList from "$lib/sections/recommendations/RecommendationList.svelte";
   import UpNext from "$lib/sections/up-next/UpNext.svelte";
@@ -18,20 +18,20 @@
   <UpNext />
   <UpcomingSchedule />
   <RecommendationList
-    dataSourceFactory={recommendShows}
+    queryOptions={() => recommendedShowsQuery()}
     title={m.recommended_shows()}
     onAddToWatchlist={(id) =>
-      addToWatchlist({
+      addToWatchlistRequest({
         body: {
           shows: [{ ids: { trakt: id } }],
         },
       })}
   />
   <RecommendationList
-    dataSourceFactory={recommendMovies}
+    queryOptions={() => recommendedMoviesQuery()}
     title={m.recommended_movies()}
     onAddToWatchlist={(id) =>
-      addToWatchlist({
+      addToWatchlistRequest({
         body: {
           movies: [{ ids: { trakt: id } }],
         },

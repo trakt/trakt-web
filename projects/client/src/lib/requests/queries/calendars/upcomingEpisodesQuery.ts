@@ -4,8 +4,8 @@ import {
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api, type ApiParams } from '../_internal/api.ts';
-import { authHeader } from '../_internal/authHeader.ts';
+import { api, type ApiParams } from '../../_internal/api.ts';
+import { authHeader } from '../../_internal/authHeader.ts';
 
 export type CalendarShowsParams = {
   startDate: string;
@@ -52,7 +52,7 @@ function mapResponseToEpisodeEntry(item: ShowsResponse[0]): EpisodeEntry {
   };
 }
 
-export function upcomingEpisodes({
+function upcomingEpisodesRequest({
   startDate,
   days,
   fetch,
@@ -81,3 +81,9 @@ export function upcomingEpisodes({
         .map(mapResponseToEpisodeEntry);
     });
 }
+
+export const upcomingEpisodeQueryKey = ['upcomingEpisodes'] as const;
+export const upcomingEpisodesQuery = (params: CalendarShowsParams) => ({
+  queryKey: upcomingEpisodeQueryKey,
+  queryFn: () => upcomingEpisodesRequest(params),
+});

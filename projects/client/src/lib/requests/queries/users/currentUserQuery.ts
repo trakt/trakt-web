@@ -74,7 +74,8 @@ const currentUserRequest = ({ fetch }: ApiParams): Promise<User> =>
     })
     .then(mapUserResponse);
 
+export const currentUserQueryKey = ['profile'] as const;
 export const currentUserQuery = ({ fetch }: ApiParams = {}) => ({
-  queryKey: ['profile'] as const,
+  queryKey: currentUserQueryKey,
   queryFn: () => currentUserRequest({ fetch }),
 });

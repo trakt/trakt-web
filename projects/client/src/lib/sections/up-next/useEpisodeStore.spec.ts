@@ -1,7 +1,7 @@
-import type { EpisodeEntry } from '$lib/requests/calendars/upcomingEpisodes.ts';
 import { useEpisodeStore } from '$lib/sections/up-next/useEpisodeStore.ts';
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
+import type { EpisodeEntry } from '../../requests/queries/calendars/upcomingEpisodesQuery.ts';
 
 const episode1 = {
   show: {

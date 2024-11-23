@@ -1,7 +1,7 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api, type ApiParams } from '../_internal/api.ts';
-import { authHeader } from '../_internal/authHeader.ts';
+import { api, type ApiParams } from '../../_internal/api.ts';
+import { authHeader } from '../../_internal/authHeader.ts';
 
 export type RecommendedShow = {
   id: number;
@@ -36,7 +36,7 @@ function mapResponseToRecommendedShow(
   };
 }
 
-export function recommendShows(
+function recommendShowsRequest(
   { fetch }: RecommendedShowsParams = {},
 ): Promise<RecommendedShow[]> {
   return api({ fetch })
@@ -63,3 +63,11 @@ export function recommendShows(
       return body.map(mapResponseToRecommendedShow);
     });
 }
+
+const recommendedShowsQueryKey = ['recommendedShows'] as const;
+export const recommendedShowsQuery = (
+  params: RecommendedShowsParams = {},
+) => ({
+  queryKey: recommendedShowsQueryKey,
+  queryFn: () => recommendShowsRequest(params),
+});

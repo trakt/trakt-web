@@ -6,7 +6,7 @@ type MarkAsWatchedParams = {
   body: HistoryRequest;
 } & ApiParams;
 
-export function markAsWatched(
+export function markAsWatchedRequest(
   { body, fetch }: MarkAsWatchedParams,
 ): Promise<boolean> {
   return api({ fetch })
