@@ -21,7 +21,12 @@
     }),
   );
 
-  const calendar = derived(query, ($query) => $query.data ?? []);
+  const calendar = derived(query, ($query) =>
+    ($query.data ?? []).filter((d) => {
+      const distanceFromNow = d.airedDate.getTime() - Date.now();
+      return distanceFromNow > 0;
+    }),
+  );
 </script>
 
 <SectionList
