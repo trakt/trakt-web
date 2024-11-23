@@ -15,7 +15,9 @@ export async function verifyDeviceAuth(code: string): Promise<DeviceAuth> {
   const client_secret = env.TRAKT_CLIENT_SECRET ?? '';
   const client_id = env.TRAKT_CLIENT_ID ?? '';
 
-  const tokenResponse = await api.oauth.device
+  const tokenResponse = await api()
+    .oauth
+    .device
     .token({
       body: {
         code,

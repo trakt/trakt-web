@@ -39,12 +39,14 @@
       onMarkAsWatched={async () => {
         loadingMap.set(entry.id, true);
         await markAsWatched({
-          episodes: [
-            {
-              ids: { trakt: entry.id },
-              watched_at: new Date().toISOString(),
-            },
-          ],
+          body: {
+            episodes: [
+              {
+                ids: { trakt: entry.id },
+                watched_at: new Date().toISOString(),
+              },
+            ],
+          },
         });
         loadingMap.set(entry.id, false);
         set(await upNext());

@@ -1,13 +1,22 @@
 import type { WatchlistRequest } from '@trakt/api';
-import { api } from '../_internal/api.ts';
+import { api, type ApiParams } from '../_internal/api.ts';
 import { authHeader } from '../_internal/authHeader.ts';
 
-export function addToWatchlist(body: WatchlistRequest): Promise<boolean> {
-  return api.sync.watchlist.add({
-    body,
-    extraHeaders: {
-      ...authHeader(),
-    },
-  })
+type AddToWatchlistParams = {
+  body: WatchlistRequest;
+} & ApiParams;
+
+export function addToWatchlist(
+  { body, fetch }: AddToWatchlistParams,
+): Promise<boolean> {
+  return api({ fetch })
+    .sync
+    .watchlist
+    .add({
+      body,
+      extraHeaders: {
+        ...authHeader(),
+      },
+    })
     .then(({ status }) => status === 200);
 }

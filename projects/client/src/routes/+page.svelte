@@ -22,7 +22,9 @@
     title={m.recommended_shows()}
     onAddToWatchlist={(id) =>
       addToWatchlist({
-        shows: [{ ids: { trakt: id } }],
+        body: {
+          shows: [{ ids: { trakt: id } }],
+        },
       })}
   />
   <RecommendationList
@@ -30,7 +32,9 @@
     title={m.recommended_movies()}
     onAddToWatchlist={(id) =>
       addToWatchlist({
-        movies: [{ ids: { trakt: id } }],
+        body: {
+          movies: [{ ids: { trakt: id } }],
+        },
       })}
   />
 </div>

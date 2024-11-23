@@ -1,4 +1,5 @@
-import { api } from '../_internal/api.ts';
+import type { SettingsResponse } from '$lib/api.ts';
+import { api, type ApiParams } from '../_internal/api.ts';
 import { authHeader } from '../_internal/authHeader.ts';
 
 export type User = {
@@ -26,42 +27,49 @@ function useDefined(
   return values.find((value) => value?.trim());
 }
 
-export function currentUser(): Promise<User> {
-  return api.users.settings({
-    extraHeaders: {
-      ...authHeader(),
+function mapUserResponse(response: SettingsResponse): User {
+  const { user, account } = response;
+  const fullName = user.name;
+  const [firstName = '', lastName = ''] = user.name.split(' ');
+
+  return {
+    name: {
+      full: fullName,
+      first: firstName,
+      last: lastName,
     },
-  }).then((response) => {
-    if (response.status !== 200) {
-      console.error('Error fetching current user', response);
-      /**
-       * TODO: define error handling strategy/system
-       */
-      throw new Error('Error fetching current user.');
-    }
-
-    const { body: { user, account } } = response;
-    const fullName = user.name;
-    const [firstName = '', lastName = ''] = user.name.split(' ');
-
-    return {
-      name: {
-        full: fullName,
-        first: firstName,
-        last: lastName,
-      },
-      location: user.location,
-      avatar: {
-        url: user.images!.avatar.full,
-      },
-      cover: {
-        url: useDefined(
-          user.vip_cover_image,
-          account.cover_image,
-          ALIEN_ISOLATION_COVER,
-        )!,
-      },
-      isVip: user.vip || user.vip_ep,
-    };
-  });
+    location: user.location,
+    avatar: {
+      url: user.images!.avatar.full,
+    },
+    cover: {
+      url: useDefined(
+        user.vip_cover_image,
+        account.cover_image,
+        ALIEN_ISOLATION_COVER,
+      )!,
+    },
+    isVip: user.vip || user.vip_ep,
+  };
 }
+
+export const currentUser = ({ fetch }: ApiParams = {}): Promise<User> =>
+  api({ fetch })
+    .users
+    .settings({
+      extraHeaders: {
+        ...authHeader(),
+      },
+    })
+    .then((response) => {
+      if (response.status !== 200) {
+        console.error('Error fetching current user', response);
+        /**
+         * TODO: define error handling strategy/system
+         */
+        throw new Error('Error fetching current user.');
+      }
+
+      return response.body;
+    })
+    .then(mapUserResponse);

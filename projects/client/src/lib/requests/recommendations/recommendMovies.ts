@@ -1,5 +1,6 @@
+import type { RecommendedMovieResponse } from '$lib/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api } from '../_internal/api.ts';
+import { api, type ApiParams } from '../_internal/api.ts';
 import { authHeader } from '../_internal/authHeader.ts';
 
 export type RecommendedMovie = {
@@ -11,18 +12,41 @@ export type RecommendedMovie = {
   };
 };
 
-export function recommendMovies(): Promise<RecommendedMovie[]> {
-  return api.recommendations.movies.recommend({
-    query: {
-      extended: 'full,cloud9',
-      ignore_collected: true,
-      ignore_watchlisted: true,
-      limit: 35,
+type RecommendedMoviesParams = ApiParams;
+
+function mapResponseToRecommendedMovie(
+  movie: RecommendedMovieResponse[0],
+): RecommendedMovie {
+  return {
+    id: movie.ids.trakt,
+    title: movie.title,
+    runtime: movie.runtime!,
+    poster: {
+      url: prependHttps(
+        movie.images?.poster.at(1) ??
+          movie.images?.poster.at(0),
+      )!,
     },
-    extraHeaders: {
-      ...authHeader(),
-    },
-  })
+  };
+}
+
+export function recommendMovies(
+  { fetch }: RecommendedMoviesParams = {},
+): Promise<RecommendedMovie[]> {
+  return api({ fetch })
+    .recommendations
+    .movies
+    .recommend({
+      query: {
+        extended: 'full,cloud9',
+        ignore_collected: true,
+        ignore_watchlisted: true,
+        limit: 35,
+      },
+      extraHeaders: {
+        ...authHeader(),
+      },
+    })
     .then(({ status, body }) => {
       if (status !== 200) {
         throw new Error(
@@ -33,18 +57,6 @@ export function recommendMovies(): Promise<RecommendedMovie[]> {
         );
       }
 
-      return body.map((movie) => {
-        return {
-          id: movie.ids.trakt,
-          title: movie.title,
-          runtime: movie.runtime!,
-          poster: {
-            url: prependHttps(
-              movie.images?.poster.at(1) ??
-                movie.images?.poster.at(0),
-            )!,
-          },
-        };
-      });
+      return body.map(mapResponseToRecommendedMovie);
     });
 }
