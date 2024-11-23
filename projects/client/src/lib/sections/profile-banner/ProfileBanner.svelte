@@ -1,62 +1,43 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { currentUser, type User } from "$lib/requests/users/currentUser";
 
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { onMount } from "svelte";
-  import { writable } from "svelte/store";
+  import { currentUserQuery } from "$lib/requests/queries/users/currentUserQuery";
+  import { createQuery } from "@tanstack/svelte-query";
+  import { derived } from "svelte/store";
 
-  const emptyUser: User = {
-    name: {
-      first: "---------",
-      last: "---------",
-      full: "--------- ---------",
-    },
-    location: "------, ------",
-    avatar: {
-      url: "",
-    },
-    cover: {
-      url: "",
-    },
-    isVip: false,
-  };
-
-  const user = writable(emptyUser);
-
-  onMount(() => {
-    currentUser().then(user.set);
-  });
+  const query = createQuery(currentUserQuery());
+  const user = derived(query, ($query) => $query.data);
 </script>
 
-{#if $user.cover.url}
+{#if $user != null}
   <BackgroundCoverImage src={$user.cover.url} type="Main" />
-{/if}
 
-<div class="profile-banner-container">
-  <figure class="profile-image">
-    <CrossOriginImage
-      src={$user.avatar.url}
-      alt={`${$user.name.first}'s avatar`}
-    />
-    <figcaption class="visually-hidden">
-      {m.profile_banner_greeting({ name: $user.name.first })}
-    </figcaption>
-  </figure>
-  <div class="profile-info">
-    <div class="profile-info-primary">
-      <h5 class="profile-info-greeting ellipsis">
+  <div class="profile-banner-container">
+    <figure class="profile-image">
+      <CrossOriginImage
+        src={$user.avatar.url}
+        alt={`${$user.name.first}'s avatar`}
+      />
+      <figcaption class="visually-hidden">
         {m.profile_banner_greeting({ name: $user.name.first })}
-      </h5>
-      {#if $user.isVip}
-        <VipBadge />
-      {/if}
+      </figcaption>
+    </figure>
+    <div class="profile-info">
+      <div class="profile-info-primary">
+        <h5 class="profile-info-greeting ellipsis">
+          {m.profile_banner_greeting({ name: $user.name.first })}
+        </h5>
+        {#if $user.isVip}
+          <VipBadge />
+        {/if}
+      </div>
+      <h6 class="profile-info-location ellipsis">{$user.location}</h6>
     </div>
-    <h6 class="profile-info-location ellipsis">{$user.location}</h6>
   </div>
-</div>
+{/if}
 
 <style>
   .visually-hidden {

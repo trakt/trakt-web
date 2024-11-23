@@ -41,10 +41,10 @@
 </svelte:head>
 
 <ParaglideJS {i18n}>
-  <QueryClientProvider client={data.client}>
-    <AuthGuard token={data.token}>
+  <AuthGuard token={data.token}>
+    <QueryClientProvider client={data.queryClient}>
       <Navbar theme={data.theme} />
       {@render children()}
-    </AuthGuard>
-  </QueryClientProvider>
+    </QueryClientProvider>
+  </AuthGuard>
 </ParaglideJS>

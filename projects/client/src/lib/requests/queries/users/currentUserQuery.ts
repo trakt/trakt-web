@@ -1,6 +1,6 @@
 import type { SettingsResponse } from '$lib/api.ts';
-import { api, type ApiParams } from '../_internal/api.ts';
-import { authHeader } from '../_internal/authHeader.ts';
+import { api, type ApiParams } from '../../_internal/api.ts';
+import { authHeader } from '../../_internal/authHeader.ts';
 
 export type User = {
   name: {
@@ -53,7 +53,7 @@ function mapUserResponse(response: SettingsResponse): User {
   };
 }
 
-export const currentUser = ({ fetch }: ApiParams = {}): Promise<User> =>
+const currentUserRequest = ({ fetch }: ApiParams): Promise<User> =>
   api({ fetch })
     .users
     .settings({
@@ -73,3 +73,8 @@ export const currentUser = ({ fetch }: ApiParams = {}): Promise<User> =>
       return response.body;
     })
     .then(mapUserResponse);
+
+export const currentUserQuery = ({ fetch }: ApiParams = {}) => ({
+  queryKey: ['profile'] as const,
+  queryFn: () => currentUserRequest({ fetch }),
+});
