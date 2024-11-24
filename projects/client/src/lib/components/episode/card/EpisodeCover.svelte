@@ -14,7 +14,14 @@
     type: EpisodeType;
   } & CardCoverProps;
 
-  const { i18n, src, alt, tags, type, isLoading }: EpisodeCoverProps = $props();
+  const {
+    i18n,
+    src,
+    alt,
+    tags: episodeTags,
+    type,
+    isLoading,
+  }: EpisodeCoverProps = $props();
 
   const isSeasonPremiere = $derived(
     [EpisodePremiereType.MidSeason, EpisodePremiereType.Season].includes(
@@ -70,6 +77,6 @@
         {i18n.premiereText({ type: type as EpisodePremiereType })}
       </EpisodeStatusTag>
     {/if}
-    {@render tags?.()}
+    {@render episodeTags?.()}
   {/snippet}
 </CardCover>
