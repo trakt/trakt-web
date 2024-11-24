@@ -11,9 +11,11 @@
   import { markAsWatchedRequest } from "$lib/requests/sync/markAsWatchedRequest";
   import { createQuery, useQueryClient } from "@tanstack/svelte-query";
   import { SvelteMap } from "svelte/reactivity";
-  import { useEpisodeStore } from "./useEpisodeStore";
+  import { useStableArray } from "./stores/useStableArray";
 
-  const { value, set } = useEpisodeStore<UpNextEntry>();
+  const { list, set } = useStableArray<UpNextEntry>(
+    (l, r) => l.show.id === r.show.id,
+  );
 
   const client = useQueryClient();
   const query = createQuery({
@@ -34,33 +36,33 @@
   title={m.up_next_title()}
   --height-section-list="var(--height-episode-list)"
 >
-  {#each $value as entry (entry.show.id)}
+  {#each $list as episode (episode.show.id)}
     <UpNextEpisode
       i18n={EpisodeIntlProvider}
-      episodeNumber={entry.number}
-      seasonNumber={entry.season}
-      posterUrl={entry.poster.url}
-      showTitle={entry.show.title}
-      episodeTitle={entry.title}
-      completed={entry.completed}
-      total={entry.total}
-      remaining={entry.remaining}
-      runtime={entry.runtime}
-      type={entry.type}
-      isLoading={loadingMap.get(entry.id) ?? false}
+      episodeNumber={episode.number}
+      seasonNumber={episode.season}
+      posterUrl={episode.poster.url}
+      showTitle={episode.show.title}
+      episodeTitle={episode.title}
+      completed={episode.completed}
+      total={episode.total}
+      remaining={episode.remaining}
+      runtime={episode.runtime}
+      type={episode.type}
+      isLoading={loadingMap.get(episode.id) ?? false}
       onMarkAsWatched={async () => {
-        loadingMap.set(entry.id, true);
+        loadingMap.set(episode.id, true);
         await markAsWatchedRequest({
           body: {
             episodes: [
               {
-                ids: { trakt: entry.id },
+                ids: { trakt: episode.id },
                 watched_at: new Date().toISOString(),
               },
             ],
           },
         });
-        loadingMap.set(entry.id, false);
+        loadingMap.set(episode.id, false);
         client.refetchQueries({
           queryKey: upNextQueryKey,
         });
