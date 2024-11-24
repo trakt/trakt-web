@@ -3,30 +3,9 @@
   import UpcomingEpisode from "$lib/components/episode/upcoming/UpcomingEpisode.svelte";
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { upcomingEpisodesQuery } from "$lib/requests/queries/calendars/upcomingEpisodesQuery";
-  import { createQuery } from "@tanstack/svelte-query";
-  import { derived } from "svelte/store";
+  import { useCalendarEpisodes } from "./stores/useCalendarEpisodes";
 
-  function daysAgo(days: number) {
-    const ONE_DAY = 1000 * 60 * 60 * 24;
-
-    return new Date(Date.now() - ONE_DAY * days);
-  }
-
-  const [YYYY_MM_DD] = daysAgo(0).toISOString().split("T");
-  const query = createQuery(
-    upcomingEpisodesQuery({
-      startDate: YYYY_MM_DD,
-      days: 14,
-    }),
-  );
-
-  const calendar = derived(query, ($query) =>
-    ($query.data ?? []).filter((d) => {
-      const distanceFromNow = d.airedDate.getTime() - Date.now();
-      return distanceFromNow > 0;
-    }),
-  );
+  const calendar = useCalendarEpisodes();
 </script>
 
 <SectionList
