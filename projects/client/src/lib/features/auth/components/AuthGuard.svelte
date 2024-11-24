@@ -5,15 +5,15 @@
   import { writable } from "svelte/store";
   import { AuthEndpoint } from "../AuthEndpoint";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
-  import { setToken } from "../token";
+  import { useToken } from "../stores/useToken";
 
   type AuthGuardProps = {
     token: string | Nil;
   } & ChildrenProps;
 
   const { token: seed, children }: AuthGuardProps = $props();
+  const { token } = useToken(seed);
   const authUrl = writable<string | Nil>();
-  const token = writable<string | Nil>(seed);
 
   function requestAuthStatus(code: string) {
     return fetch(AuthEndpoint.Verify, {
@@ -58,7 +58,7 @@
       }
 
       clearInterval(interval);
-      setToken(access);
+      token.set(access);
     }, auth.interval);
   });
 </script>
