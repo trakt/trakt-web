@@ -40,14 +40,15 @@
   .section-list {
     position: relative;
 
-    &&::after {
+    &::after {
       content: "";
       position: absolute;
       top: 0;
       right: 0;
       width: 3.5rem;
-      height: 11rem;
-
+      height: calc(
+        var(--height-section-list) - var(--layout-distance-scroll-card)
+      );
       /** TODO: add shadow? */
     }
   }

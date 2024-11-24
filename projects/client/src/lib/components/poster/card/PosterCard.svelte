@@ -4,6 +4,10 @@
   const { children }: ChildrenProps = $props();
 </script>
 
-<Card --width-card="9.8rem" --height-card="18rem" --height-card-cover="15.5rem">
+<Card
+  --width-card="var(--width-poster-card)"
+  --height-card="var(--height-poster-card)"
+  --height-card-cover="var(--height-poster-card-cover)"
+>
   {@render children()}
 </Card>

@@ -1,9 +1,28 @@
 :root {
   /**
-   * Structural variables
+   * Card dimensions
    */
   --height-episode-list: 12rem;
-  --height-poster-list: 19rem;
 
+  --width-poster-card: 9.8rem;
+  --height-poster-card: 18rem;
+  --height-poster-card-cover: 15.5rem;
+
+  --width-episode-card: 13.25rem;
+  --height-episode-card: 11rem;
+  --height-episode-card-cover: 7.5rem;
+
+  /**
+   * List dimensions
+   */
+  --height-episode-list: 12rem;
+  --height-poster-list: calc(
+    var(--height-poster-card) + var(--layout-distance-scroll-card)
+  );
+
+  /**
+   * Structural variables
+   */
   --layout-distance-side: 2.5vw;
+  --layout-distance-scroll-card: 1rem;
 }
