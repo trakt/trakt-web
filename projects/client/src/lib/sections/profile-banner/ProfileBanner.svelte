@@ -4,12 +4,9 @@
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { currentUserQuery } from "$lib/requests/queries/users/currentUserQuery";
-  import { createQuery } from "@tanstack/svelte-query";
-  import { derived } from "svelte/store";
+  import { useUser } from "./stores/useUser";
 
-  const query = createQuery(currentUserQuery());
-  const user = derived(query, ($query) => $query.data);
+  const user = useUser();
 </script>
 
 {#if $user != null}
