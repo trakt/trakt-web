@@ -25,7 +25,7 @@
   const { isLoading, isWatchlisted, add } = useWatchlist({ type });
 </script>
 
-<SectionList {title} --height-section-list="19rem">
+<SectionList {title} --height-section-list="var(--height-poster-list)">
   {#each $list as recommendation (recommendation.id)}
     <PosterCard>
       <PosterCover
