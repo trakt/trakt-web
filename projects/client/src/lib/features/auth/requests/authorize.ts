@@ -22,10 +22,11 @@ export const authorize = async (
 
   const response = await verifyDeviceAuth(code)
     .catch((error) => {
-      console.error('Error verifying device auth:', error);
       if (error instanceof DeviceUnauthorizedError) {
         return UNAUTHORIZED_PAYLOAD;
       }
+
+      console.error('Error verifying device auth:', error.message);
 
       throw error;
     });
