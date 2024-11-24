@@ -8,33 +8,25 @@
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages";
-  import { type RecommendedMovie } from "$lib/requests/queries/recommendations/recommendedMoviesQuery";
-  import type { RecommendedShow } from "$lib/requests/queries/recommendations/recommendedShowsQuery";
-  import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
-  import { createQuery, type CreateQueryOptions } from "@tanstack/svelte-query";
-  import { SvelteMap } from "svelte/reactivity";
-  import { derived } from "svelte/store";
 
-  type RecommendedMedia = Array<RecommendedMovie | RecommendedShow>;
+  import type { MediaType } from "$lib/models/MediaType";
+  import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
+  import { useRecommendationList } from "./stores/useRecommendationList";
+  import { useWatchlist } from "./stores/useWatchlist";
 
   type RecommendationListProps = {
     title: string;
-    queryOptions: () => CreateQueryOptions<RecommendedMedia>;
-    onAddToWatchlist: (id: number) => Promise<unknown> | void;
+    type: MediaType;
   };
 
-  const { queryOptions, title, onAddToWatchlist }: RecommendationListProps =
-    $props();
+  const { title, type }: RecommendationListProps = $props();
 
-  const loadingMap = new SvelteMap<number, boolean>();
-  const watchlistMap = new SvelteMap<number, boolean>();
-
-  const query = createQuery(queryOptions());
-  const recommendations = derived(query, ($query) => $query.data ?? []);
+  const { list } = useRecommendationList({ type });
+  const { isLoading, isWatchlisted, add } = useWatchlist({ type });
 </script>
 
 <SectionList {title} --height-section-list="19rem">
-  {#each $recommendations as recommendation (recommendation.id)}
+  {#each $list as recommendation (recommendation.id)}
     <PosterCard>
       <PosterCover
         src={recommendation.poster.url}
@@ -61,15 +53,12 @@
           {recommendation.title}
         </p>
         {#snippet actions()}
-          {#if !watchlistMap.get(recommendation.id)}
+          {#if !isWatchlisted(recommendation.id)}
             <AddToWatchlistButton
               label={`Mark ${recommendation.id} as watched`}
-              disabled={loadingMap.get(recommendation.id) ?? false}
+              disabled={isLoading(recommendation.id)}
               onclick={async () => {
-                loadingMap.set(recommendation.id, true);
-                await onAddToWatchlist(recommendation.id);
-                loadingMap.set(recommendation.id, false);
-                watchlistMap.set(recommendation.id, true);
+                await add([recommendation.id]);
               }}
             />
           {:else}
