@@ -3,9 +3,11 @@ import {
   type EpisodeType,
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
+import type { Paginatable } from '$lib/models/Paginatable.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { authHeader } from '../../_internal/authHeader.ts';
+import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 import type { EpisodeEntry } from '../calendars/upcomingEpisodesQuery.ts';
 
 export type UpNextEntry = EpisodeEntry & {
@@ -15,7 +17,9 @@ export type UpNextEntry = EpisodeEntry & {
   runtime: number;
 };
 
-type UpNextParams = ApiParams;
+type UpNextParams = {
+  pageParam?: number;
+} & ApiParams;
 
 function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
   const episode = item.progress.next_episode;
@@ -47,24 +51,30 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
   };
 }
 
-function upNextRequest({ fetch }: UpNextParams = {}): Promise<UpNextEntry[]> {
+export function upNextRequest(
+  { fetch, pageParam = 1 }: UpNextParams = {},
+): Promise<Paginatable<UpNextEntry>> {
   return api({ fetch })
     .sync
     .progress
     .upNext({
       query: {
         extended: 'full,cloud9',
+        page: pageParam,
       },
       extraHeaders: {
         ...authHeader(),
       },
     })
-    .then(({ status, body }) => {
+    .then(({ status, body, headers }) => {
       if (status !== 200) {
         throw new Error('Failed to fetch up next');
       }
 
-      return body.map(mapResponseToUpNextEntry);
+      return {
+        entries: body.map(mapResponseToUpNextEntry),
+        page: extractPageMeta(headers),
+      };
     });
 }
 
@@ -74,4 +84,15 @@ export const upNextQuery = (
 ) => ({
   queryKey: upNextQueryKey,
   queryFn: () => upNextRequest(params),
+});
+
+export const upNextInfiniteQuery = (
+  params: ApiParams = {},
+) => ({
+  queryKey: upNextQueryKey,
+  queryFn: ({ pageParam }: { pageParam: number }) =>
+    upNextRequest({ ...params, pageParam: pageParam as number }),
+  initialPageParam: 1,
+  getNextPageParam: ({ page: { current, total } }: Paginatable<unknown>) =>
+    total - current > 0 ? current + 1 : undefined,
 });

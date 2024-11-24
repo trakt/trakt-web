@@ -1,12 +1,12 @@
 import { browser } from '$app/environment';
 import {
   type UpNextEntry,
-  upNextQuery,
+  upNextInfiniteQuery,
   upNextQueryKey,
 } from '$lib/requests/queries/sync/upNextQuery.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { useStableArray } from '$lib/sections/up-next/stores/useStableArray.ts';
-import { createQuery, useQueryClient } from '@tanstack/svelte-query';
+import { createInfiniteQuery, useQueryClient } from '@tanstack/svelte-query';
 import { SvelteMap } from 'svelte/reactivity';
 
 export const useUpNextEpisodes = () => {
@@ -16,15 +16,17 @@ export const useUpNextEpisodes = () => {
 
   const client = browser ? useQueryClient() : undefined;
 
-  const query = createQuery({
-    ...upNextQuery(),
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
-  });
+  const query = createInfiniteQuery(upNextInfiniteQuery());
 
   query.subscribe((query) => {
     if (query.data == null) return;
-    set(query.data);
+    set(query.data.pages.map(({ entries }) => entries).flat());
+    /**
+     * TODO: (@seferturan) improve by fetching on scroll end
+     * this method can be exposed via a next() fn
+     * which can be invoked when user scrolls at least 70-80%
+     */
+    query.fetchNextPage();
   });
 
   const reload = () => {
