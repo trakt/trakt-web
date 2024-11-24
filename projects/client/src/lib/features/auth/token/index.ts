@@ -11,3 +11,7 @@ export function getToken() {
 export function setToken(value: string | Nil) {
   token.value = value;
 }
+
+export function isAuthorized() {
+  return !!token.value;
+}
