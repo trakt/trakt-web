@@ -42,7 +42,7 @@
   }
 
   .trakt-navbar {
-    z-index: 2;
+    z-index: 999;
     position: fixed;
     top: 0;
     left: var(--layout-distance-side);
