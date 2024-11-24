@@ -14,18 +14,18 @@ span.display-title {
   display: block;
 
   font-variant-numeric: lining-nums tabular-nums;
-  font-size: var(--ss-104);
+  font-size: var(--ni-104);
   font-style: normal;
   font-weight: 600;
   line-height: 94%;
 }
 
 span.large {
-  font-size: var(--ss-160);
+  font-size: var(--ni-160);
 }
 
 h1 {
-  font-size: var(--ss-72);
+  font-size: var(--ni-72);
   font-style: normal;
   font-weight: 600;
   line-height: 90%;
@@ -33,7 +33,7 @@ h1 {
 }
 
 h2 {
-  font-size: var(--ss-56);
+  font-size: var(--ni-56);
   font-style: normal;
   font-weight: 600;
   line-height: 90%;
@@ -41,7 +41,7 @@ h2 {
 }
 
 h3 {
-  font-size: var(--ss-48);
+  font-size: var(--ni-48);
   font-style: normal;
   font-weight: 600;
   line-height: 90%;
@@ -49,7 +49,7 @@ h3 {
 }
 
 h4 {
-  font-size: var(--ss-40);
+  font-size: var(--ni-40);
   font-style: normal;
   font-weight: 600;
   line-height: 90%;
@@ -57,14 +57,14 @@ h4 {
 }
 
 h5 {
-  font-size: var(--ss-24);
+  font-size: var(--ni-24);
   font-style: normal;
   font-weight: 600;
   line-height: 90%;
 }
 
 h6 {
-  font-size: var(--ss-14);
+  font-size: var(--ni-14);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -73,7 +73,7 @@ h6 {
 }
 
 p {
-  font-size: var(--ss-16);
+  font-size: var(--ni-16);
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
@@ -84,16 +84,16 @@ p {
 }
 
 p.large {
-  font-size: var(--ss-18);
+  font-size: var(--ni-18);
 }
 
 p.small {
-  font-size: var(--ss-14);
+  font-size: var(--ni-14);
   line-height: 120%;
 }
 
 p.meta-info {
-  font-size: var(--ss-10);
+  font-size: var(--ni-10);
   font-style: normal;
   font-weight: 600;
   line-height: 90%;
