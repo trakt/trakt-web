@@ -16,10 +16,10 @@
     width: var(--width-card);
     height: var(--height-card);
 
-    border-radius: 0.75rem;
+    border-radius: var(--ni-12);
     overflow: hidden;
     background: var(--color-card-background);
-    box-shadow: 0px 4px 8px 0px
+    box-shadow: var(--ni-0) var(--ni-4) var(--ni-8) var(--ni-0)
       color-mix(in srgb, var(--color-card-background) 25%, transparent 75%);
   }
 </style>

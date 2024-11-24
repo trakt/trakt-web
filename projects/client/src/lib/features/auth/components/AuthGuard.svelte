@@ -78,13 +78,13 @@
 <style>
   .auth-container {
     width: max(30dvw, 15em);
-    padding: 10rem;
-    border-radius: 0.5rem;
+    padding: var(--ni-160);
+    border-radius: var(--ni-8);
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: var(--ni-32);
 
     inset: 0;
     margin: auto;
@@ -99,16 +99,16 @@
     align-items: center;
 
     max-width: fit-content;
-    height: 1.5rem;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
+    height: var(--ni-24);
+    padding: var(--ni-12) var(--ni-16);
+    border-radius: var(--ni-8);
 
     text-decoration: none;
 
     background: var(--purple-500);
     color: var(--shade-10);
 
-    font-size: 1rem;
+    font-size: var(--ni-16);
     font-style: normal;
     font-weight: 700;
     line-height: normal;

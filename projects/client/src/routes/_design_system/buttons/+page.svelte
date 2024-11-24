@@ -238,22 +238,22 @@
   main {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding-top: 2rem;
+    gap: var(--ni-32);
+    padding-top: var(--ni-32);
     align-items: center;
 
     @media (max-width: 768px) {
       .button-display {
         flex-direction: column;
         align-items: center;
-        gap: 2rem;
+        gap: var(--ni-32);
       }
     }
 
     section {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: var(--ni-16);
       align-items: start;
     }
   }

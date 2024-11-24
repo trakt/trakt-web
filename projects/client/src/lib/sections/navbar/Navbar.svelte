@@ -36,9 +36,9 @@
   .trakt-navbar,
   .trakt-navbar-spacer {
     box-sizing: border-box;
-    margin: 0.75rem auto;
-    padding: 0.75rem 1rem;
-    height: 4rem;
+    margin: var(--ni-12) auto;
+    padding: var(--ni-12) var(--ni-16);
+    height: var(--ni-64);
   }
 
   .trakt-navbar {
@@ -52,9 +52,9 @@
     width: calc(100dvw - 2 * var(--layout-distance-side));
 
     align-items: center;
-    gap: 3rem;
+    gap: var(--ni-48);
 
-    border-radius: 1rem;
+    border-radius: var(--ni-16);
 
     transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
     transition-property: background-color, box-shadow;
@@ -71,6 +71,6 @@
   }
 
   .trakt-logo {
-    width: 7rem;
+    width: var(--ni-112);
   }
 </style>

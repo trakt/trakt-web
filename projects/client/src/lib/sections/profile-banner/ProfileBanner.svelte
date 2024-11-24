@@ -49,15 +49,15 @@
   }
 
   .profile-banner-container {
-    margin-left: calc(3.25rem + var(--layout-distance-side));
+    margin-left: calc(var(--ni-52) + var(--layout-distance-side));
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--ni-16);
     transition: var(--transition-increment) ease-in-out;
     transition-property: margin-left;
 
     @media (max-width: 480px) {
-      margin-left: 2rem;
+      margin-left: var(--ni-32);
     }
   }
 
@@ -70,23 +70,23 @@
       object-fit: cover;
     }
 
-    width: 4rem;
-    height: 4rem;
+    width: var(--ni-64);
+    height: var(--ni-64);
     border-radius: 50%;
     overflow: hidden;
 
-    border: 0.25rem solid var(--color-border-avatar);
+    border: var(--ni-4) solid var(--color-border-avatar);
   }
 
   .profile-info {
     display: inline-flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: var(--ni-4);
 
     .profile-info-primary {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: var(--ni-8);
     }
 
     .profile-info-location {

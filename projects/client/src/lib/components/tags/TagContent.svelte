@@ -11,11 +11,11 @@
     display: flex;
     align-items: center;
 
-    height: 0.875rem;
-    line-height: 0.875rem;
+    height: var(--ni-14);
+    line-height: var(--ni-14);
     margin: 0;
-    padding: 0.125rem 0.5rem;
+    padding: var(--ni-2) var(--ni-8);
 
-    border-radius: 1.125rem;
+    border-radius: var(--ni-18);
   }
 </style>

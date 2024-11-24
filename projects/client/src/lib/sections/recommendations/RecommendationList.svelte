@@ -86,7 +86,7 @@
    * a recommendation has been added to the watchlist
    */
   .watchlist-added-icon {
-    padding: 0.375rem;
+    padding: var(--ni-8);
     color: var(--blue-300);
   }
 </style>

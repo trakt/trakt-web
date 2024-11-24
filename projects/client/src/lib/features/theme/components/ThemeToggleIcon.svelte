@@ -45,7 +45,7 @@
     align-items: center;
     justify-content: center;
 
-    font-size: 2rem;
+    font-size: var(--ni-32);
     color: var(--color-foreground);
   }
 </style>

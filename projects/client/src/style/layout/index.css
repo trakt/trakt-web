@@ -2,20 +2,20 @@
   /**
    * Card dimensions
    */
-  --height-episode-list: 12rem;
+  --height-episode-list: var(--ni-192);
 
-  --width-poster-card: 9.8rem;
-  --height-poster-card: 18rem;
-  --height-poster-card-cover: 15.5rem;
+  --width-poster-card: var(--ni-156);
+  --height-poster-card: var(--ni-288);
+  --height-poster-card-cover: var(--ni-248);
 
-  --width-episode-card: 13.25rem;
-  --height-episode-card: 11rem;
-  --height-episode-card-cover: 7.5rem;
+  --width-episode-card: var(--ni-212);
+  --height-episode-card: var(--ni-176);
+  --height-episode-card-cover: var(--ni-120);
 
   /**
    * List dimensions
    */
-  --height-episode-list: 12rem;
+  --height-episode-list: var(--ni-192);
   --height-poster-list: calc(
     var(--height-poster-card) + var(--layout-distance-scroll-card)
   );
@@ -24,5 +24,5 @@
    * Structural variables
    */
   --layout-distance-side: 2.5vw;
-  --layout-distance-scroll-card: 1rem;
+  --layout-distance-scroll-card: var(--ni-16);
 }

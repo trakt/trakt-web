@@ -22,8 +22,8 @@
   .card-footer {
     height: calc(var(--height-card) - var(--height-card-cover));
     display: flex;
-    padding: 0.5rem;
-    gap: 0.5rem;
+    padding: var(--ni-8);
+    gap: var(--ni-8);
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
@@ -31,7 +31,7 @@
     .card-footer-information {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: var(--ni-4);
       overflow: hidden;
     }
   }

@@ -45,13 +45,13 @@
       transform: translateX(0) rotate(0deg) scale(1);
     }
     25% {
-      transform: translateX(-0.125rem) rotate(-1deg) scale(1.05);
+      transform: translateX(var(--ni-neg-2)) rotate(-1deg) scale(1.05);
     }
     50% {
-      transform: translateX(0.125rem) rotate(1deg) scale(1.05);
+      transform: translateX(var(--ni-2)) rotate(1deg) scale(1.05);
     }
     75% {
-      transform: translateX(-0.125rem) rotate(-1deg) scale(1.05);
+      transform: translateX(var(--ni-neg-2)) rotate(-1deg) scale(1.05);
     }
   }
 
@@ -107,7 +107,7 @@
 
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--ni-16);
     flex-shrink: 0;
     cursor: pointer;
     user-select: none;
@@ -129,9 +129,9 @@
     &,
     &::before,
     &:active[disabled] {
-      height: 3.25rem;
+      height: var(--ni-52);
       box-sizing: border-box;
-      border-radius: 0.75rem;
+      border-radius: var(--ni-12);
     }
 
     &::before {
@@ -173,7 +173,7 @@
     }
 
     &:focus-visible {
-      outline: 0.125rem solid var(--color-background-button-outline);
+      outline: var(--ni-2) solid var(--color-background-button-outline);
     }
 
     &[disabled] {
@@ -190,7 +190,7 @@
     }
 
     &[data-style="ghost"] {
-      padding: 1rem;
+      padding: var(--ni-16);
       transform: scale(0.9);
       background: transparent;
       color: inherit;
@@ -213,8 +213,8 @@
     }
 
     &[data-style="textured"] {
-      padding: 1rem;
-      padding-top: 0.75rem;
+      padding: var(--ni-16);
+      padding-top: var(--ni-12);
 
       &,
       &::before {
@@ -233,7 +233,7 @@
       }
 
       &:not([disabled]):active {
-        padding-top: 1rem;
+        padding-top: var(--ni-16);
 
         box-shadow:
           0px -1px 2px 0px var(--color-highlight) inset,
@@ -243,7 +243,7 @@
     }
 
     &[data-style="flat"] {
-      padding: 1rem;
+      padding: var(--ni-16);
       &[data-variant="primary"] {
         &:hover:not([disabled]) {
           background: var(--color-surface-button-secondary);

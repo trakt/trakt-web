@@ -24,7 +24,7 @@
 
 <style>
   .card-cover-tags {
-    --padding-card-tag: 0.5rem;
+    --padding-card-tag: var(--ni-8);
 
     width: calc(100% - var(--padding-card-tag) * 2);
     position: absolute;
@@ -39,7 +39,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    gap: 0.25rem;
+    gap: var(--ni-4);
   }
 
   .card-cover {
@@ -49,7 +49,7 @@
   .card-cover-loading {
     .card-cover-image {
       opacity: 0;
-      filter: blur(0.25rem);
+      filter: blur(var(--ni-4));
     }
   }
 
@@ -74,7 +74,7 @@
       left: 0;
       right: 0;
       width: var(--width-card);
-      height: 2.5rem;
+      height: var(--ni-40);
       flex-shrink: 0;
 
       background: linear-gradient(

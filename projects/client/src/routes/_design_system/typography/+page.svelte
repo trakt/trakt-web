@@ -56,7 +56,7 @@
   .typography-element-container {
     transform: scale(0.75);
     display: grid;
-    gap: 1rem;
-    padding: 1rem;
+    gap: var(--ni-16);
+    padding: var(--ni-16);
   }
 </style>

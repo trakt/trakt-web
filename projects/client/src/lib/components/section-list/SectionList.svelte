@@ -20,20 +20,20 @@
   .section-list-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--ni-32);
   }
 
   .section-list-title {
     color: var(--color-text-primary);
     margin: 0;
-    margin-left: calc(3.5rem + var(--layout-distance-side));
+    margin-left: calc(var(--ni-56) + var(--layout-distance-side));
 
     transition: calc(var(--transition-increment) * 2) ease-in-out;
     transition-property: margin-left, font-size;
 
     @media (max-width: 480px) {
-      margin-left: 2rem;
-      font-size: 1.5rem;
+      margin-left: var(--ni-32);
+      font-size: var(--ni-24);
     }
   }
 
@@ -45,7 +45,7 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 3.5rem;
+      width: var(--ni-56);
       height: calc(
         var(--height-section-list) - var(--layout-distance-scroll-card)
       );
@@ -58,7 +58,7 @@
 
     display: flex;
     height: var(--height-section-list);
-    gap: 1rem;
+    gap: var(--ni-16);
     overflow-x: auto;
   }
 </style>

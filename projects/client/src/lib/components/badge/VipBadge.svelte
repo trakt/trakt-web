@@ -10,11 +10,11 @@
 <style>
   .trakt-vip-badge {
     display: flex;
-    padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+    padding: var(--ni-4) var(--ni-8) var(--ni-4) var(--ni-4);
     align-items: center;
-    gap: 0.25rem;
+    gap: var(--ni-4);
 
-    border-radius: 1.25rem;
+    border-radius: var(--ni-20);
     background: var(--color-background-vip-badge);
     color: var(--color-foreground-vip-badge);
 
@@ -23,8 +23,8 @@
     }
 
     :global(svg) {
-      width: 1rem;
-      height: 1rem;
+      width: var(--ni-16);
+      height: var(--ni-16);
     }
   }
 </style>

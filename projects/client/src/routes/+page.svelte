@@ -22,7 +22,7 @@
   .trakt-content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--ni-32);
 
     inset: 0;
     margin: auto;
