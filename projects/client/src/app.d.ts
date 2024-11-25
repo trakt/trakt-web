@@ -56,6 +56,38 @@ declare global {
     onmouseovercapture?: (event: MouseEvent) => void;
     onmouseup?: (event: MouseEvent) => void;
     onmouseupcapture?: (event: MouseEvent) => void;
+
+    /** Pointer */
+    onpointerdown?: (event: PointerEvent) => void;
+    onpointerdowncapture?: (event: PointerEvent) => void;
+    onpointermove?: (event: PointerEvent) => void;
+    onpointermovecapture?: (event: PointerEvent) => void;
+    onpointerup?: (event: PointerEvent) => void;
+    onpointerupcapture?: (event: PointerEvent) => void;
+    onpointercancel?: (event: PointerEvent) => void;
+    onpointercancelcapture?: (event: PointerEvent) => void;
+    onpointerover?: (event: PointerEvent) => void;
+    onpointerovercapture?: (event: PointerEvent) => void;
+    onpointerout?: (event: PointerEvent) => void;
+    onpointeroutcapture?: (event: PointerEvent) => void;
+    onpointerenter?: (event: PointerEvent) => void;
+    onpointerentercapture?: (event: PointerEvent) => void;
+    onpointerleave?: (event: PointerEvent) => void;
+    onpointerleavecapture?: (event: PointerEvent) => void;
+    ongotpointercapture?: (event: PointerEvent) => void;
+    ongotpointercapturecapture?: (event: PointerEvent) => void;
+    onlostpointercapture?: (event: PointerEvent) => void;
+    onlostpointercapturecapture?: (event: PointerEvent) => void;
+
+    /** Touch */
+    ontouchcancel?: (event: TouchEvent) => void;
+    ontouchcancelcapture?: (event: TouchEvent) => void;
+    ontouchend?: (event: TouchEvent) => void;
+    ontouchendcapture?: (event: TouchEvent) => void;
+    ontouchmove?: (event: TouchEvent) => void;
+    ontouchmovecapture?: (event: TouchEvent) => void;
+    ontouchstart?: (event: TouchEvent) => void;
+    ontouchstartcapture?: (event: TouchEvent) => void;
   };
 
   export type ButtonProps =
