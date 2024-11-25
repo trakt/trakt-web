@@ -18,7 +18,8 @@ export type UpNextEntry = EpisodeEntry & {
 };
 
 type UpNextParams = {
-  pageParam?: number;
+  page?: number;
+  limit?: number;
 } & ApiParams;
 
 function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
@@ -52,7 +53,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
 }
 
 export function upNextRequest(
-  { fetch, pageParam = 1 }: UpNextParams = {},
+  { fetch, page = 1, limit }: UpNextParams = {},
 ): Promise<Paginatable<UpNextEntry>> {
   return api({ fetch })
     .sync
@@ -60,7 +61,8 @@ export function upNextRequest(
     .upNext({
       query: {
         extended: 'full,cloud9',
-        page: pageParam,
+        page,
+        limit,
       },
       extraHeaders: {
         ...authHeader(),
@@ -77,22 +79,10 @@ export function upNextRequest(
       };
     });
 }
-
 export const upNextQueryKey = ['upNext'] as const;
 export const upNextQuery = (
   params: UpNextParams = {},
 ) => ({
   queryKey: upNextQueryKey,
   queryFn: () => upNextRequest(params),
-});
-
-export const upNextInfiniteQuery = (
-  params: ApiParams = {},
-) => ({
-  queryKey: upNextQueryKey,
-  queryFn: ({ pageParam }: { pageParam: number }) =>
-    upNextRequest({ ...params, pageParam: pageParam as number }),
-  initialPageParam: 1,
-  getNextPageParam: ({ page: { current, total } }: Paginatable<unknown>) =>
-    total - current > 0 ? current + 1 : undefined,
 });
