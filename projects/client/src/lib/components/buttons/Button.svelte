@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
+  import { disableTransitionOn } from "./actions/disableTransitionOnTouch";
 
   type TraktButtonProps = ButtonProps & {
     variant?: "primary" | "secondary" | "vip" | "custom";
@@ -23,6 +24,7 @@
 </script>
 
 <button
+  use:disableTransitionOn={"touch"}
   class="trakt-textured-button"
   {...props}
   aria-label={label}
@@ -56,6 +58,8 @@
   }
 
   .trakt-textured-button {
+    --animation-duration-jiggle-wiggle: calc(var(--transition-increment) * 3);
+
     --color-background-button-outline: color-mix(
       in srgb,
       var(--color-background-button) 10%,
@@ -169,7 +173,7 @@
     }
 
     &:active[disabled] {
-      animation: jiggle-wiggle calc(var(--transition-increment) * 3) infinite;
+      animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle) infinite;
     }
 
     &:focus-visible {
