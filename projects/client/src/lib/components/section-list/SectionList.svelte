@@ -128,5 +128,24 @@
     height: var(--height-section-list);
     gap: var(--ni-16);
     overflow-x: auto;
+    scroll-snap-type: x proximity;
+
+    & > :global(:not(svelte-css-wrapper)) {
+      scroll-snap-align: start;
+
+      &:first-child,
+      &:last-child {
+        scroll-snap-align: end;
+      }
+    }
+
+    & > :global(svelte-css-wrapper > *) {
+      scroll-snap-align: start;
+    }
+
+    & > :global(svelte-css-wrapper:first-child > *),
+    & > :global(svelte-css-wrapper:last-child > *) {
+      scroll-snap-align: end;
+    }
   }
 </style>
