@@ -8,12 +8,21 @@
   } & ChildrenProps;
 
   const { children, title }: SectionListProps = $props();
-  const layoutDistanceSide = varToPixels("--layout-distance-side");
+  const sideDistance = varToPixels("--layout-distance-side");
+  const windowShadowWidth = varToPixels("--ni-64");
 
   const scrollX = writable({ left: 0, right: 0 });
 
-  const isLeftShadowVisible = $derived($scrollX.left > layoutDistanceSide);
-  const isRightShadowVisible = $derived($scrollX.right > layoutDistanceSide);
+  const isLeftShadowVisible = $derived($scrollX.left > sideDistance);
+  const isRightShadowVisible = $derived($scrollX.right > sideDistance);
+
+  const leftShadowIntensity = $derived(
+    ($scrollX.left - sideDistance) / windowShadowWidth,
+  );
+
+  const rightShadowIntensity = $derived(
+    ($scrollX.right - sideDistance) / windowShadowWidth,
+  );
 </script>
 
 <section class="section-list-container">
@@ -23,6 +32,8 @@
     class="section-list"
     class:section-list-left-shadow={isLeftShadowVisible}
     class:section-list-right-shadow={isRightShadowVisible}
+    style:--left-shadow-opacity={leftShadowIntensity}
+    style:--right-shadow-opacity={rightShadowIntensity}
   >
     <div use:scrollTracking={scrollX} class="section-list-horizontal-scroll">
       {@render children()}
@@ -55,11 +66,11 @@
     position: relative;
 
     &.section-list-left-shadow::before {
-      opacity: 1;
+      opacity: var(--left-shadow-opacity);
     }
 
     &.section-list-right-shadow::after {
-      opacity: 1;
+      opacity: var(--right-shadow-opacity);
     }
 
     &::before {
@@ -86,7 +97,6 @@
         var(--height-section-list) - var(--layout-distance-scroll-card)
       );
 
-      transition: opacity var(--transition-increment) ease-in-out;
       opacity: 0;
 
       background: linear-gradient(
