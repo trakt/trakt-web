@@ -2,10 +2,7 @@
   import Logo from "$lib/components/logo/Logo.svelte";
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
-  import type { Theme } from "$lib/features/theme/models/Theme";
   import { onMount } from "svelte";
-
-  const { theme }: { theme: Theme } = $props();
 
   let windowScrollY = $state(0);
   const isScrolled = $derived(windowScrollY > 0);
@@ -30,7 +27,7 @@
   </div>
   <div class="trakt-user-preferences">
     <LocalePicker />
-    <ThemePicker {theme} />
+    <ThemePicker />
   </div>
 </nav>
 

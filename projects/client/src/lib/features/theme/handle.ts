@@ -1,5 +1,5 @@
 import { ThemeEndpoint } from '$lib/features/theme/ThemeEndpoint.ts';
-import { THEME_COOKIE_NAME } from '$lib/features/theme/constants.ts';
+import { THEME_STORE_NAME } from '$lib/features/theme/constants.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 import type { Handle } from '@sveltejs/kit';
@@ -19,7 +19,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       {
         headers: {
           'Set-Cookie': event.cookies.serialize(
-            THEME_COOKIE_NAME,
+            THEME_STORE_NAME,
             theme,
             {
               path: '/',
@@ -37,7 +37,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     event,
     {
       transformPageChunk: ({ html }) => {
-        const currentTheme = coerceTheme(cookies.get(THEME_COOKIE_NAME));
+        const currentTheme = coerceTheme(cookies.get(THEME_STORE_NAME));
         return html.replace(THEME_PLACEHOLDER, `${currentTheme}`);
       },
     },

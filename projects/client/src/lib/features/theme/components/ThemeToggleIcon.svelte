@@ -1,7 +1,10 @@
 <script lang="ts">
+  import { writable } from "svelte/store";
   import { Theme } from "../models/Theme";
 
   const { theme }: { theme: Theme } = $props();
+
+  const isTransitionDisabled = writable(true);
 </script>
 
 <svelte:head>
@@ -17,6 +20,9 @@
   type="submit"
   title="Toggle theme"
   aria-label="Toggle theme"
+  class:toggle-transition-disabled={$isTransitionDisabled}
+  ontransitionend={() => isTransitionDisabled.set(true)}
+  onclick={() => isTransitionDisabled.set(false)}
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -47,5 +53,9 @@
 
     font-size: var(--ni-32);
     color: var(--color-foreground);
+
+    &.toggle-transition-disabled * {
+      transition: none;
+    }
   }
 </style>

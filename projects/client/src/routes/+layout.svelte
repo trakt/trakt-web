@@ -3,6 +3,7 @@
 
   import AuthGuard from "$lib/features/auth/components/AuthGuard.svelte";
   import { i18n } from "$lib/features/i18n/index.ts";
+  import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import { ParaglideJS } from "@inlang/paraglide-sveltekit";
   import { QueryClientProvider } from "@tanstack/svelte-query";
@@ -41,10 +42,12 @@
 </svelte:head>
 
 <ParaglideJS {i18n}>
-  <AuthGuard token={data.token}>
-    <QueryClientProvider client={data.queryClient}>
-      <Navbar theme={data.theme} />
-      {@render children()}
-    </QueryClientProvider>
-  </AuthGuard>
+  <ThemeProvider theme={data.theme}>
+    <AuthGuard token={data.token}>
+      <QueryClientProvider client={data.queryClient}>
+        <Navbar />
+        {@render children()}
+      </QueryClientProvider>
+    </AuthGuard>
+  </ThemeProvider>
 </ParaglideJS>
