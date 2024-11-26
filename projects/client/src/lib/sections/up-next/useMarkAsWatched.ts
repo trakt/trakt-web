@@ -1,5 +1,6 @@
 import type { WatchAction } from '$lib/api.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import * as m from '$lib/features/i18n/messages.ts';
 import type { EpisodeEntry } from '$lib/requests/queries/calendars/upcomingEpisodesQuery.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { SvelteMap } from 'svelte/reactivity';
@@ -15,7 +16,7 @@ export function resolveWatchDate(
       return airedDate.toISOString();
     case 'ask':
       return prompt(
-        'When did you watch this episode? (YYYY-MM-DD HH:MM)',
+        m.mark_as_watched_ask_prompt(),
         now,
       ) ?? undefined;
     case 'now':
