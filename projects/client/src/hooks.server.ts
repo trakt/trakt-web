@@ -7,6 +7,12 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 const handleParaglide: Handle = i18n.handle();
 
+const WHITELISTED_HEADERS = new Set([
+  'content-type',
+  'x-pagination-page',
+  'x-pagination-page-count',
+]);
+
 export const handle: Handle = sequence(
   handleParaglide,
   handleTheme,
@@ -14,7 +20,7 @@ export const handle: Handle = sequence(
   handleImage,
   ({ event, resolve }) => {
     return resolve(event, {
-      filterSerializedResponseHeaders: (name) => name === 'content-type',
+      filterSerializedResponseHeaders: (name) => WHITELISTED_HEADERS.has(name),
     });
   },
 );
