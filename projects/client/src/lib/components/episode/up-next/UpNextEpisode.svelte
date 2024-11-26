@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MarkAsWatchedButton from "$lib/components/buttons/MarkAsWatchedButton.svelte";
+  import MarkAsWatchedButton from "$lib/components/buttons/actions/MarkAsWatchedButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import type { EpisodeType } from "$lib/models/EpisodeType";
   import EpisodeCard from "../card/EpisodeCard.svelte";
