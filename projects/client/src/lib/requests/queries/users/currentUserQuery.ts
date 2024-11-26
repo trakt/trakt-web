@@ -57,6 +57,9 @@ const currentUserRequest = ({ fetch }: ApiParams): Promise<User> =>
   api({ fetch })
     .users
     .settings({
+      query: {
+        extended: 'browsing',
+      },
       extraHeaders: {
         ...authHeader(),
       },
