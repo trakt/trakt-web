@@ -45,7 +45,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
     poster: {
       url: prependHttps(posterCandidate)!,
     },
-    airedDate: new Date(item.progress.aired),
+    airedDate: new Date(episode.first_aired),
     id: episode.ids.trakt,
     total: item.progress.aired,
     completed: item.progress.completed,
