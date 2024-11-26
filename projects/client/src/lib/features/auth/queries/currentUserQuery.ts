@@ -17,7 +17,7 @@ export type User = {
   };
   isVip: boolean;
   preferences: {
-    upNext: {
+    progress: {
       sort: {
         by?: string;
         direction?: SortDirection;
@@ -59,7 +59,7 @@ function mapUserResponse(response: SettingsResponse): User {
     },
     isVip: user.vip || user.vip_ep,
     preferences: {
-      upNext: {
+      progress: {
         sort: {
           by: browsing?.progress.on_deck.sort,
           direction: browsing?.progress.on_deck.sort_how,

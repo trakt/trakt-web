@@ -23,7 +23,7 @@ export const useUpNextEpisodes = () => {
   const query = createQuery(
     upNextQuery({
       limit: UP_NEXT_LIMIT,
-      sort: user().preferences.upNext.sort,
+      sort: user().preferences.progress.sort,
     }),
   );
 
