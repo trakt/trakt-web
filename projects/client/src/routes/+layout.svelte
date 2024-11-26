@@ -1,7 +1,7 @@
 <script lang="ts">
   import "../style";
 
-  import AuthGuard from "$lib/features/auth/components/AuthGuard.svelte";
+  import UserProvider from "$lib/features/auth/components/UserProvider.svelte";
   import { i18n } from "$lib/features/i18n/index.ts";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
@@ -43,11 +43,11 @@
 
 <ParaglideJS {i18n}>
   <ThemeProvider theme={data.theme}>
-    <AuthGuard token={data.token}>
-      <QueryClientProvider client={data.queryClient}>
+    <QueryClientProvider client={data.queryClient}>
+      <UserProvider token={data.token}>
         <Navbar />
         {@render children()}
-      </QueryClientProvider>
-    </AuthGuard>
+      </UserProvider>
+    </QueryClientProvider>
   </ThemeProvider>
 </ParaglideJS>

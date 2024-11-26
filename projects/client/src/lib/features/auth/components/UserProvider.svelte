@@ -1,18 +1,21 @@
 <script lang="ts">
   import Logo from "$lib/components/logo/Logo.svelte";
   import { type InitiateDeviceAuth } from "$lib/features/auth/requests/initiateDeviceAuth";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { AuthEndpoint } from "../AuthEndpoint";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
   import { useToken } from "../stores/useToken";
 
-  type AuthGuardProps = {
+  type UserProviderProps = {
     token: string | Nil;
   } & ChildrenProps;
 
-  const { token: seed, children }: AuthGuardProps = $props();
+  const { token: seed, children }: UserProviderProps = $props();
   const { token } = useToken(seed);
+  const user = useUser();
+
   const authUrl = writable<string | Nil>();
 
   function requestAuthStatus(code: string) {
@@ -63,7 +66,7 @@
   });
 </script>
 
-{#if $token != null}
+{#if $token != null && $user != null}
   {@render children()}
 {:else}
   <div class="auth-container">

@@ -4,7 +4,7 @@
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useUser } from "./stores/useUser";
+  import { useUser } from "../../features/auth/stores/useUser";
 
   const user = useUser();
 </script>

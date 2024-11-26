@@ -1,6 +1,6 @@
 import type { SettingsResponse } from '$lib/api.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
-import { authHeader } from '../../_internal/authHeader.ts';
+import { api, type ApiParams } from '../../../requests/_internal/api.ts';
+import { authHeader } from '../../../requests/_internal/authHeader.ts';
 
 export type User = {
   name: {
