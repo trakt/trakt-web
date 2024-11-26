@@ -74,7 +74,7 @@
 
     backdrop-filter: blur(8px);
 
-    --color-foreground: var(--color-foreground-navbar);
+    color: var(--color-foreground-navbar);
   }
 
   .trakt-logo {

@@ -54,7 +54,7 @@
     justify-content: center;
 
     font-size: var(--ni-32);
-    color: var(--color-foreground);
+    color: inherit;
 
     &.toggle-transition-disabled * {
       transition: none;
