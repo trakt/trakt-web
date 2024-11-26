@@ -10,8 +10,7 @@
     "$app/environment": "../../node_modules/@sveltejs/kit/types/index.d.ts",
     "$app/navigation": "../../node_modules/@sveltejs/kit/types/index.d.ts",
     "$app/server": "../../node_modules/@sveltejs/kit/types/index.d.ts",
-    "$app/stores": "../../node_modules/@sveltejs/kit/types/index.d.ts",
-    "@tanstack/svelte-query": "../../node_modules/@tanstack/svelte-query/dist/index.d.ts"
+    "$app/stores": "../../node_modules/@sveltejs/kit/types/index.d.ts"
   },
   "lint": {
     "exclude": [

@@ -7,6 +7,7 @@
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import { ParaglideJS } from "@inlang/paraglide-sveltekit";
   import { QueryClientProvider } from "@tanstack/svelte-query";
+  import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
 
   const { data, children } = $props();
 </script>
@@ -48,6 +49,7 @@
         <Navbar />
         {@render children()}
       </UserProvider>
+      <SvelteQueryDevtools />
     </QueryClientProvider>
   </ThemeProvider>
 </ParaglideJS>
