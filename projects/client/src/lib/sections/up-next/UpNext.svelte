@@ -3,9 +3,11 @@
   import UpNextEpisode from "$lib/components/episode/up-next/UpNextEpisode.svelte";
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useMarkAsWatched } from "./useMarkAsWatched";
   import { useUpNextEpisodes } from "./useUpNextEpisodes";
 
-  const { list, reload, isLoading, markAsWatched } = useUpNextEpisodes();
+  const { list, reload } = useUpNextEpisodes();
+  const { isLoading, markAsWatched } = useMarkAsWatched();
 </script>
 
 <SectionList
@@ -27,7 +29,7 @@
       type={episode.type}
       isLoading={isLoading(episode.id)}
       onMarkAsWatched={async () => {
-        await markAsWatched(episode.id);
+        await markAsWatched(episode);
         reload();
       }}
     />

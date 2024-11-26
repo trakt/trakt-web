@@ -1,4 +1,4 @@
-import type { SettingsResponse, SortDirection } from '$lib/api.ts';
+import type { SettingsResponse, SortDirection, WatchAction } from '$lib/api.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 import { authHeader } from '../../../requests/_internal/authHeader.ts';
 
@@ -22,6 +22,9 @@ export type User = {
         by?: string;
         direction?: SortDirection;
       };
+    };
+    watch: {
+      action?: WatchAction;
     };
   };
 };
@@ -59,6 +62,9 @@ function mapUserResponse(response: SettingsResponse): User {
     },
     isVip: user.vip || user.vip_ep,
     preferences: {
+      watch: {
+        action: browsing?.watch_popup_action,
+      },
       progress: {
         sort: {
           by: browsing?.progress.on_deck.sort,
