@@ -7,13 +7,12 @@ import { SvelteMap } from 'svelte/reactivity';
 
 export function resolveWatchDate(
   action: WatchAction | undefined,
-  airedDate: Date,
 ) {
   const now = new Date().toISOString();
 
   switch (action) {
     case 'released':
-      return airedDate.toISOString();
+      return 'released';
     case 'ask':
       return prompt(
         m.mark_as_watched_ask_prompt(),
@@ -31,10 +30,9 @@ export function useMarkAsWatched() {
   const isLoading = (id: number) => episodeLoadingMap.get(id) ?? false;
   const { current: user } = useUser();
 
-  const markAsWatched = async ({ id, airedDate }: EpisodeEntry) => {
+  const markAsWatched = async ({ id }: EpisodeEntry) => {
     const watchedAtDate = resolveWatchDate(
       user().preferences.watch.action,
-      airedDate,
     );
     episodeLoadingMap.set(id, true);
     await markAsWatchedRequest({
