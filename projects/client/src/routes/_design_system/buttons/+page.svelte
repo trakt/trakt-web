@@ -1,5 +1,7 @@
 <script>
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
+  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import VipIcon from "$lib/components/icons/VipIcon.svelte";
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
 </script>
@@ -231,6 +233,42 @@
         Custom disabled
       </Button>
     </section>
+
+    <section>
+      <h2>Action</h2>
+
+      <div class="action-button-demo">
+        <ActionButton label="Purple action button" variant="purple">
+          <CheckIcon />
+        </ActionButton>
+
+        Variant: purple
+      </div>
+
+      <div class="action-button-demo">
+        <ActionButton label="Red action button" variant="red">
+          <CheckIcon />
+        </ActionButton>
+
+        Variant: red
+      </div>
+
+      <div class="action-button-demo">
+        <ActionButton label="Blue action button" variant="blue">
+          <CheckIcon />
+        </ActionButton>
+
+        Variant: blue
+      </div>
+
+      <div class="action-button-demo">
+        <ActionButton label="Default action button">
+          <CheckIcon />
+        </ActionButton>
+
+        Variant: default
+      </div>
+    </section>
   </div>
 </main>
 
@@ -263,5 +301,11 @@
     justify-content: space-between;
 
     width: 75%;
+  }
+
+  .action-button-demo {
+    display: flex;
+    gap: var(--ni-16);
+    align-items: center;
   }
 </style>
