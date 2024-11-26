@@ -1,4 +1,4 @@
-import type { UpNextResponse } from '$lib/api.ts';
+import type { SortDirection, UpNextResponse } from '$lib/api.ts';
 import {
   type EpisodeType,
   EpisodeUnknownType,
@@ -20,6 +20,10 @@ export type UpNextEntry = EpisodeEntry & {
 type UpNextParams = {
   page?: number;
   limit?: number;
+  sort?: {
+    by?: string;
+    direction?: SortDirection;
+  };
 } & ApiParams;
 
 function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
@@ -53,7 +57,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
 }
 
 export function upNextRequest(
-  { fetch, page = 1, limit }: UpNextParams = {},
+  { fetch, page = 1, limit, sort }: UpNextParams = {},
 ): Promise<Paginatable<UpNextEntry>> {
   return api({ fetch })
     .sync
@@ -63,6 +67,8 @@ export function upNextRequest(
         extended: 'full,cloud9',
         page,
         limit,
+        sort_by: sort?.by,
+        sort_how: sort?.direction,
       },
       extraHeaders: {
         ...authHeader(),

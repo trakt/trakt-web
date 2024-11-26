@@ -1,5 +1,6 @@
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { createQuery } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
+import { derived, get } from 'svelte/store';
 import { currentUserQuery } from '../queries/currentUserQuery.ts';
 
 export function useUser() {
@@ -7,7 +8,15 @@ export function useUser() {
     ...currentUserQuery(),
     staleTime: Infinity,
   });
+
   const user = derived(query, ($query) => $query.data);
 
-  return user;
+  return {
+    user,
+    current: () =>
+      assertDefined(
+        get(user),
+        'This hook must be used within a user context provider!',
+      ),
+  };
 }

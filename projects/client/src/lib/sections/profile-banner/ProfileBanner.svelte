@@ -6,7 +6,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useUser } from "../../features/auth/stores/useUser";
 
-  const user = useUser();
+  const { user } = useUser();
 </script>
 
 {#if $user != null}

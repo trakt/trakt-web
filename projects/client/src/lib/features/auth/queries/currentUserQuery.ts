@@ -1,4 +1,4 @@
-import type { SettingsResponse } from '$lib/api.ts';
+import type { SettingsResponse, SortDirection } from '$lib/api.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 import { authHeader } from '../../../requests/_internal/authHeader.ts';
 
@@ -16,6 +16,14 @@ export type User = {
     url: string;
   };
   isVip: boolean;
+  preferences: {
+    upNext: {
+      sort: {
+        by?: string;
+        direction?: SortDirection;
+      };
+    };
+  };
 };
 
 const ALIEN_ISOLATION_COVER =
@@ -28,7 +36,7 @@ function useDefined(
 }
 
 function mapUserResponse(response: SettingsResponse): User {
-  const { user, account } = response;
+  const { user, account, browsing } = response;
   const fullName = user.name;
   const [firstName = '', lastName = ''] = user.name.split(' ');
 
@@ -50,6 +58,14 @@ function mapUserResponse(response: SettingsResponse): User {
       )!,
     },
     isVip: user.vip || user.vip_ep,
+    preferences: {
+      upNext: {
+        sort: {
+          by: browsing?.progress.on_deck.sort,
+          direction: browsing?.progress.on_deck.sort_how,
+        },
+      },
+    },
   };
 }
 

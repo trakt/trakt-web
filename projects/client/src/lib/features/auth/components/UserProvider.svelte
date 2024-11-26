@@ -14,7 +14,7 @@
 
   const { token: seed, children }: UserProviderProps = $props();
   const { token } = useToken(seed);
-  const user = useUser();
+  const { user } = useUser();
 
   const authUrl = writable<string | Nil>();
 

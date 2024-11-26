@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import {
   type UpNextEntry,
   upNextQuery,
@@ -17,10 +18,14 @@ export const useUpNextEpisodes = () => {
   );
 
   const client = browser ? useQueryClient() : undefined;
+  const { current: user } = useUser();
 
-  const query = createQuery(upNextQuery({
-    limit: UP_NEXT_LIMIT,
-  }));
+  const query = createQuery(
+    upNextQuery({
+      limit: UP_NEXT_LIMIT,
+      sort: user().preferences.upNext.sort,
+    }),
+  );
 
   query.subscribe((query) => {
     if (query.data == null) return;
