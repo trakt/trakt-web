@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { disableTransitionOn } from "./actions/disableTransitionOnTouch";
+  import { disableTransitionOn } from "../../utils/actions/disableTransitionOnTouch";
 
   type TraktButtonProps = ButtonProps & {
     variant?: "primary" | "secondary" | "vip" | "custom";
