@@ -51,6 +51,17 @@
         height: var(--ni-8);
       }
 
+      body,
+      html {
+        &::-webkit-scrollbar-thumb {
+          background-color: color-mix(
+            in srgb,
+            var(--color-foreground) 30%,
+            transparent 70%
+          );
+        }
+      }
+
       ::-webkit-scrollbar-thumb {
         background-color: color-mix(
           in srgb,
