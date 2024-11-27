@@ -4,15 +4,17 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import ActionIcon from "$lib/components/icons/ActionIcon.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
+  import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { useMovie } from "./useMovie";
 
-  const movie = useMovie($page.params.slug);
+  const { movie, ratings } = useMovie($page.params.slug);
 </script>
 
 <!-- FIXME: extract separate components out for easy re-use -->
-{#if $movie}
+{#if $movie != null && $ratings != null}
   <BackgroundCoverImage src={$movie.cover.url} type="Movie" />
 
   <div class="trakt-summary-container">
@@ -55,6 +57,11 @@
             {/if}
           {/each}
         </div>
+      </div>
+
+      <div class="trakt-summary-ratings">
+        <IMDBIcon /> <span>{$ratings.imdb}</span>
+        <RottenIcon /> <span>{$ratings.rotten.audience}</span>
       </div>
 
       <p class="secondary">{$movie.overview}</p>
@@ -101,6 +108,12 @@
         align-items: center;
         gap: var(--ni-8);
       }
+    }
+
+    .trakt-summary-ratings {
+      display: flex;
+      align-items: center;
+      gap: var(--ni-8);
     }
   }
 </style>

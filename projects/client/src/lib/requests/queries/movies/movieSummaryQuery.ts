@@ -64,7 +64,8 @@ export function upNextRequest(
     });
 }
 
-export const movieSummaryQueryKey = (id: string) => ['upNext', id] as const;
+export const movieSummaryQueryKey = (id: string) =>
+  ['movieSummary', id] as const;
 export const movieSummaryQuery = (
   params: MovieSummaryParams,
 ) => ({
