@@ -15,6 +15,7 @@
 
 <button
   use:disableTransitionOn={"touch"}
+  class="trakt-action-button"
   aria-label={label}
   data-variant={variant}
   {...props}
@@ -23,12 +24,58 @@
 </button>
 
 <style>
-  button {
-    background: none;
-    border: none;
+  .trakt-action-button {
+    --color-background-button-outline: color-mix(
+      in srgb,
+      var(--color-background-action-button) 10%,
+      var(--color-foreground) 90%
+    );
+
+    &[data-variant="purple"] {
+      --color-background-action-button: var(--purple-700);
+      --color-foreground-action-button: var(--shade-50);
+
+      &:hover,
+      &:focus-visible {
+        --color-background-action-button: var(--purple-500);
+      }
+    }
+
+    &[data-variant="red"] {
+      --color-background-action-button: var(--red-700);
+      --color-foreground-action-button: var(--shade-50);
+
+      &:hover,
+      &:focus-visible {
+        --color-background-action-button: var(--red-600);
+      }
+    }
+
+    &[data-variant="blue"] {
+      --color-background-action-button: var(--blue-700);
+      --color-foreground-action-button: var(--shade-50);
+
+      &:hover,
+      &:focus-visible {
+        --color-background-action-button: var(--blue-500);
+      }
+    }
+
+    &[data-variant="default"] {
+      --color-background-action-button: var(--shade-800);
+      --color-foreground-action-button: var(--shade-50);
+
+      &:hover,
+      &:focus-visible {
+        --color-background-action-button: var(--shade-500);
+      }
+    }
+
+    all: unset;
+
     cursor: pointer;
-    padding: 0;
-    margin: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     display: flex;
     width: var(--ni-36);
@@ -42,44 +89,15 @@
 
     transition: background-color var(--transition-increment) ease-in-out;
 
+    &:focus-visible {
+      outline: var(--ni-2) solid var(--color-background-button-outline);
+    }
+
     &:active {
       transform: scale(0.95);
     }
 
-    &[data-variant="purple"] {
-      background-color: var(--purple-700);
-      color: var(--shade-50);
-
-      &:hover {
-        background-color: var(--purple-500);
-      }
-    }
-
-    &[data-variant="red"] {
-      background-color: var(--red-700);
-      color: var(--shade-50);
-
-      &:hover {
-        background-color: var(--red-600);
-      }
-    }
-
-    &[data-variant="blue"] {
-      background-color: var(--blue-700);
-      color: var(--shade-50);
-
-      &:hover {
-        background-color: var(--blue-500);
-      }
-    }
-
-    &[data-variant="default"] {
-      background-color: var(--shade-800);
-      color: var(--shade-50);
-
-      &:hover {
-        background-color: var(--shade-500);
-      }
-    }
+    background-color: var(--color-background-action-button);
+    color: var(--color-foreground-action-button);
   }
 </style>
