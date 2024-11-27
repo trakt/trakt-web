@@ -2,6 +2,7 @@
   import AddToWatchlistButton from "$lib/components/buttons/AddButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import PosterCard from "$lib/components/poster/card/PosterCard.svelte";
   import PosterCover from "$lib/components/poster/card/PosterCover.svelte";
   import DurationTag from "$lib/components/poster/tags/DurationTag.svelte";
@@ -11,7 +12,10 @@
 
   import type { MediaType } from "$lib/models/MediaType";
   import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
-  import { useRecommendationList } from "./stores/useRecommendationList";
+  import {
+    useRecommendationList,
+    type RecommendedMedia,
+  } from "./stores/useRecommendationList";
   import { useWatchlist } from "./stores/useWatchlist";
 
   type RecommendationListProps = {
@@ -23,30 +27,36 @@
 
   const { list } = useRecommendationList({ type });
   const { isLoading, isWatchlisted, add } = useWatchlist({ type });
+
+  function buildLink(type, item: RecommendedMedia[0]) {
+    return type === "movie" ? `/movie/${item.slug}` : undefined;
+  }
 </script>
 
 <SectionList {title} --height-section-list="var(--height-poster-list)">
   {#each $list as recommendation (recommendation.id)}
     <PosterCard>
-      <PosterCover
-        src={recommendation.poster.url}
-        alt={`${recommendation.title} poster`}
-      >
-        {#snippet tags()}
-          {#if "episode" in recommendation}
-            <DurationTag>
-              {m.number_of_episodes({ count: recommendation.episode.count })}
-            </DurationTag>
-          {:else}
-            <DurationTag>
-              {toHumanDuration(
-                { minutes: recommendation.runtime },
-                languageTag(),
-              )}
-            </DurationTag>
-          {/if}
-        {/snippet}
-      </PosterCover>
+      <Link href={buildLink(type, recommendation)}>
+        <PosterCover
+          src={recommendation.poster.url}
+          alt={`${recommendation.title} poster`}
+        >
+          {#snippet tags()}
+            {#if "episode" in recommendation}
+              <DurationTag>
+                {m.number_of_episodes({ count: recommendation.episode.count })}
+              </DurationTag>
+            {:else}
+              <DurationTag>
+                {toHumanDuration(
+                  { minutes: recommendation.runtime },
+                  languageTag(),
+                )}
+              </DurationTag>
+            {/if}
+          {/snippet}
+        </PosterCover>
+      </Link>
 
       <CardFooter>
         <p class="recommendation-title small ellipsis">

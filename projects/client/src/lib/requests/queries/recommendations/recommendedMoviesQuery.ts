@@ -5,6 +5,7 @@ import { authHeader } from '../../_internal/authHeader.ts';
 
 export type RecommendedMovie = {
   id: number;
+  slug: string;
   runtime: number;
   title: string;
   poster: {
@@ -19,6 +20,7 @@ function mapResponseToRecommendedMovie(
 ): RecommendedMovie {
   return {
     id: movie.ids.trakt,
+    slug: movie.ids.slug,
     title: movie.title,
     runtime: movie.runtime!,
     poster: {

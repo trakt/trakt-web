@@ -5,6 +5,7 @@ import { authHeader } from '../../_internal/authHeader.ts';
 
 export type RecommendedShow = {
   id: number;
+  slug: string;
   runtime: number;
   title: string;
   episode: {
@@ -22,6 +23,7 @@ function mapResponseToRecommendedShow(
 ): RecommendedShow {
   return {
     id: show.ids.trakt,
+    slug: show.ids.slug,
     title: show.title,
     episode: {
       count: show.aired_episodes!,
