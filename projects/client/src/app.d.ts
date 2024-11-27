@@ -14,6 +14,10 @@ declare global {
     children: import('svelte').Snippet;
   };
 
+  type IconProps = {
+    size?: 'normal' | 'small';
+  };
+
   type HTMLElementProps = {
     disabled?: boolean;
 
