@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { disableTransitionOn } from "../../utils/actions/disableTransitionOnTouch";
+  import { disableTransitionOn } from "../../utils/actions/disableTransitionOn";
 
   type ActionButtonProps = ButtonProps & {
     variant?: "purple" | "red" | "blue" | "default";
