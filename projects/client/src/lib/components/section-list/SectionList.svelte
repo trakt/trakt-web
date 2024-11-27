@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { varToPixels } from "$lib/utils/css/varToPixels";
+  import { useVarToPixels } from "$lib/utils/css/useVarToPixels";
   import { writable } from "svelte/store";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CaretLeftIcon from "../icons/CaretLeftIcon.svelte";
@@ -11,20 +11,20 @@
   } & ChildrenProps;
 
   const { children, title }: SectionListProps = $props();
-  const sideDistance = varToPixels("--layout-distance-side");
-  const windowShadowWidth = varToPixels("--ni-64");
+  const sideDistance = useVarToPixels("--layout-distance-side");
+  const windowShadowWidth = useVarToPixels("--ni-64");
 
   const scrollX = writable({ left: 0, right: 0 });
 
-  const isLeftShadowVisible = $derived($scrollX.left > sideDistance);
-  const isRightShadowVisible = $derived($scrollX.right > sideDistance);
+  const isLeftShadowVisible = $derived($scrollX.left > $sideDistance);
+  const isRightShadowVisible = $derived($scrollX.right > $sideDistance);
 
   const leftShadowIntensity = $derived(
-    ($scrollX.left - sideDistance) / windowShadowWidth,
+    ($scrollX.left - $sideDistance) / $windowShadowWidth,
   );
 
   const rightShadowIntensity = $derived(
-    ($scrollX.right - sideDistance) / windowShadowWidth,
+    ($scrollX.right - $sideDistance) / $windowShadowWidth,
   );
 
   let horizontalScrollContainer: HTMLDivElement;
