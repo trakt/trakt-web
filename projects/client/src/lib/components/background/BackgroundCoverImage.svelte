@@ -1,16 +1,17 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import type { MediaType } from "$lib/models/MediaType";
 
   type ImageBackgroundProps = {
     src: string;
-    type: "Main" | "Show" | "Movie";
+    type: MediaType | "main";
   };
 
   const { src, type }: ImageBackgroundProps = $props();
 </script>
 
 <div class="background-cover-image">
-  <CrossOriginImage {src} alt={`${type} background`} />
+  <CrossOriginImage {src} alt={`Background for ${type}`} />
 </div>
 
 <style>

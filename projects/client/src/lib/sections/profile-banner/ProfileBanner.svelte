@@ -1,7 +1,6 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
-  import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useUser } from "../../features/auth/stores/useUser";
@@ -10,8 +9,6 @@
 </script>
 
 {#if $user != null}
-  <BackgroundCoverImage src={$user.cover.url} type="Main" />
-
   <div class="profile-banner-container">
     <figure class="profile-image">
       <CrossOriginImage

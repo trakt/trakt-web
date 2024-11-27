@@ -8,14 +8,29 @@
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
+  import { useWatchlist } from "$lib/stores/useWatchlist";
   import { useMovie } from "./useMovie";
 
   const { movie, ratings } = useMovie($page.params.slug);
+  const type = "movie";
+  const {
+    markAsWatched,
+    isLoading: isMarkingAsWatched,
+    isWatched,
+  } = useMarkAsWatched({
+    type,
+  });
+  const {
+    add,
+    isLoading: isAddingToWatchlist,
+    isWatchlisted,
+  } = useWatchlist({ type });
 </script>
 
 <!-- FIXME: extract separate components out for easy re-use -->
 {#if $movie != null && $ratings != null}
-  <BackgroundCoverImage src={$movie.cover.url} type="Movie" />
+  <BackgroundCoverImage src={$movie.cover.url} {type} />
 
   <div class="trakt-summary-container">
     <div class="trakt-summary-main">
@@ -24,6 +39,8 @@
       <Button
         label={m.add_to_watchlist_label({ title: $movie.title })}
         variant="custom"
+        onclick={() => add([$movie.id])}
+        disabled={isAddingToWatchlist($movie.id) || isWatchlisted($movie.id)}
         --color-background-button="var(--blue-200)"
         --color-foreground-button="var(--blue-800)"
       >
@@ -36,6 +53,8 @@
       <Button
         label={m.mark_as_watched_label({ title: $movie.title })}
         variant="custom"
+        onclick={() => markAsWatched($movie.id)}
+        disabled={isMarkingAsWatched($movie.id) || isWatched($movie.id)}
         --color-background-button="var(--purple-100)"
         --color-foreground-button="var(--purple-600)"
       >

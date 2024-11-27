@@ -1,5 +1,5 @@
-import { resolveWatchDate } from '$lib/sections/up-next/useMarkAsWatched.ts';
 import { describe, expect, it, vi } from 'vitest';
+import { resolveWatchDate } from './useMarkAsWatched.ts';
 
 describe('useMarkAsWatched', () => {
   it('should resolve correct date for a given user action', () => {

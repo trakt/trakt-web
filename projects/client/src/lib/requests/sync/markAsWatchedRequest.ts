@@ -18,5 +18,5 @@ export function markAsWatchedRequest(
         ...authHeader(),
       },
     })
-    .then(({ status }) => status === 200);
+    .then(({ status }) => status === 201);
 }

@@ -11,12 +11,12 @@
   import * as m from "$lib/features/i18n/messages";
 
   import type { MediaType } from "$lib/models/MediaType";
+  import { useWatchlist } from "$lib/stores/useWatchlist";
   import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
   import {
     useRecommendationList,
     type RecommendedMedia,
   } from "./stores/useRecommendationList";
-  import { useWatchlist } from "./stores/useWatchlist";
 
   type RecommendationListProps = {
     title: string;
@@ -28,7 +28,7 @@
   const { list } = useRecommendationList({ type });
   const { isLoading, isWatchlisted, add } = useWatchlist({ type });
 
-  function buildLink(type, item: RecommendedMedia[0]) {
+  function buildLink(type: MediaType, item: RecommendedMedia[0]) {
     return type === "movie" ? `/movie/${item.slug}` : undefined;
   }
 </script>
@@ -68,7 +68,7 @@
               label={`Mark ${recommendation.id} as watched`}
               disabled={isLoading(recommendation.id)}
               onclick={async () => {
-                await add([recommendation.id]);
+                await add(recommendation.id);
               }}
             />
           {:else}

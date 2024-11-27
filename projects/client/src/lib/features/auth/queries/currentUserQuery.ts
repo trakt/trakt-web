@@ -1,4 +1,5 @@
 import type { SettingsResponse, SortDirection, WatchAction } from '$lib/api.ts';
+import { ALIEN_ISOLATION_COVER } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 import { authHeader } from '../../../requests/_internal/authHeader.ts';
 
@@ -28,9 +29,6 @@ export type User = {
     };
   };
 };
-
-const ALIEN_ISOLATION_COVER =
-  'https://walter-r2.trakt.tv/images/movies/000/759/944/fanarts/full/a12a59d031.jpg.webp';
 
 function useDefined(
   ...values: Array<string | Nil>
