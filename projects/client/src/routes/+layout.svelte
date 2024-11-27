@@ -21,6 +21,11 @@
     crossorigin="anonymous"
   />
   <link
+    rel="preconnect"
+    href="https://walter-r2.trakt.tv"
+    crossorigin="anonymous"
+  />
+  <link
     href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap"
     rel="stylesheet"
   />
