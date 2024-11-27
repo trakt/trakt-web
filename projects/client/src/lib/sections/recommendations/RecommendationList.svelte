@@ -1,5 +1,5 @@
 <script lang="ts">
-  import AddToWatchlistButton from "$lib/components/buttons/AddButton.svelte";
+  import AddToWatchlistButton from "$lib/components/buttons/actions/AddToWatchlistButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
