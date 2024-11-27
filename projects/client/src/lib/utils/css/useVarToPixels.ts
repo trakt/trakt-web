@@ -11,6 +11,8 @@ function setup() {
 
   cache.isSetup = true;
   cache.div = document.createElement('div');
+  document.body.appendChild(cache.div);
+
   const { div } = cache;
   div.style.position = 'absolute';
   div.style.left = '-9999px';

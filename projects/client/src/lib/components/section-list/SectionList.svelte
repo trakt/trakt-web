@@ -11,8 +11,8 @@
   } & ChildrenProps;
 
   const { children, title }: SectionListProps = $props();
-  const sideDistance = useVarToPixels("--layout-distance-side");
-  const windowShadowWidth = useVarToPixels("--ni-64");
+  const sideDistance = useVarToPixels("var(--layout-distance-side)");
+  const windowShadowWidth = useVarToPixels("var(--ni-64)");
 
   const scrollX = writable({ left: 0, right: 0 });
 
