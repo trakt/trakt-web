@@ -71,6 +71,19 @@
       }
     }
 
+    &[disabled] {
+      cursor: not-allowed;
+      color: var(--color-foreground-button-disabled);
+      background: var(
+        --color-background-button-disabled,
+        var(--color-surface-button-disabled)
+      );
+
+      &::before {
+        display: none;
+      }
+    }
+
     all: unset;
 
     cursor: pointer;
@@ -95,6 +108,11 @@
 
     &:active {
       transform: scale(0.95);
+
+      &[disabled] {
+        animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle)
+          infinite;
+      }
     }
 
     background-color: var(--color-background-action-button);

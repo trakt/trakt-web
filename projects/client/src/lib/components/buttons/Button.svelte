@@ -41,25 +41,7 @@
 </button>
 
 <style>
-  @keyframes jiggle-wiggle {
-    0%,
-    100% {
-      transform: translateX(0) rotate(0deg) scale(1);
-    }
-    25% {
-      transform: translateX(var(--ni-neg-2)) rotate(-1deg) scale(1.05);
-    }
-    50% {
-      transform: translateX(var(--ni-2)) rotate(1deg) scale(1.05);
-    }
-    75% {
-      transform: translateX(var(--ni-neg-2)) rotate(-1deg) scale(1.05);
-    }
-  }
-
   .trakt-button {
-    --animation-duration-jiggle-wiggle: calc(var(--transition-increment) * 3);
-
     --color-background-button-outline: color-mix(
       in srgb,
       var(--color-background-button) 10%,

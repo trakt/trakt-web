@@ -15,3 +15,5 @@ import './theme/global.css';
 import './theme/modes.css';
 
 import './typography/index.css';
+
+import './animations/index.css';
