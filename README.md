@@ -130,3 +130,40 @@ stands ready to automatically project the client onto the Cloudflare Pages. This
 command serves as a portal to conjure
 [preview environments](https://developers.cloudflare.com/pages/configuration/preview-deployments/),
 ephemeral realms where your team can witness the unfolding future.
+
+## Update Minor Dependencies
+
+### Install `npm-check-updates`
+
+```bash
+deno install -g --allow-all -n ncu npm:npm-check-updates
+```
+
+NOTE: For the client project add the `-p npm` since we're using a `package.json`
+definition for the svelte project.
+
+### Production
+
+- **Check:** `ncu --dep prod -t minor`
+- **Update:** `ncu --dep prod -t minor -u`
+
+### Development
+
+- **Check:** `ncu --dep dev -t minor`
+- **Update:** `ncu --dep dev -t minor -u`
+
+Verify that the above steps run smoothly and revert any changes that break the
+build (this should generally not be the case).
+
+## Update Major Dependencies
+
+- **Production:** `ncu --dep prod -t latest`
+- **Development:** `ncu --dep dev -t latest`
+
+For each entry listed as a result:
+
+1. `ncu <ENTRY> -u -t latest`
+1. Build
+1. Update any breaks
+1. Test
+1. Commit
