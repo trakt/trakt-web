@@ -49,7 +49,7 @@
 
 <section class="section-list-container">
   <div class="section-list-header">
-    <h4 class="section-list-title">{title}</h4>
+    <h4 class="section-list-title ellipsis">{title}</h4>
     <div class="section-list-navigation-actions">
       <ActionButton
         onclick={scrollToLeft}
