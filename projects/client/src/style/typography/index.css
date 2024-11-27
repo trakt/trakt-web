@@ -17,7 +17,6 @@ span.display-title {
   font-size: var(--ni-104);
   font-style: normal;
   font-weight: 600;
-  line-height: 94%;
 }
 
 span.large {
@@ -28,7 +27,6 @@ h1 {
   font-size: var(--ni-72);
   font-style: normal;
   font-weight: 600;
-  line-height: 90%;
   letter-spacing: -0.18rem;
 }
 
@@ -36,7 +34,6 @@ h2 {
   font-size: var(--ni-56);
   font-style: normal;
   font-weight: 600;
-  line-height: 90%;
   letter-spacing: -0.14rem;
 }
 
@@ -44,7 +41,6 @@ h3 {
   font-size: var(--ni-48);
   font-style: normal;
   font-weight: 600;
-  line-height: 90%;
   letter-spacing: -0.12rem;
 }
 
@@ -52,7 +48,6 @@ h4 {
   font-size: var(--ni-40);
   font-style: normal;
   font-weight: 600;
-  line-height: 90%;
   letter-spacing: -0.1rem;
 }
 
@@ -60,7 +55,6 @@ h5 {
   font-size: var(--ni-24);
   font-style: normal;
   font-weight: 600;
-  line-height: 90%;
 }
 
 h6 {
