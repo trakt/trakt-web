@@ -25,7 +25,7 @@
 
 <button
   use:disableTransitionOn={"touch"}
-  class="trakt-textured-button"
+  class="trakt-button"
   {...props}
   aria-label={label}
   data-variant={variant}
@@ -57,7 +57,7 @@
     }
   }
 
-  .trakt-textured-button {
+  .trakt-button {
     --animation-duration-jiggle-wiggle: calc(var(--transition-increment) * 3);
 
     --color-background-button-outline: color-mix(
