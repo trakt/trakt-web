@@ -42,6 +42,11 @@
       behavior: "smooth",
     });
   }
+
+  const isLeftScrollDisabled = $derived($scrollX.left <= 0);
+  const isRightScrollDisabled = $derived($scrollX.right <= 0);
+
+  $inspect($scrollX);
 </script>
 
 <section class="section-list-container">
@@ -52,6 +57,7 @@
         onclick={scrollToLeft}
         label={`Scroll ${title} to the left`}
         variant="purple"
+        disabled={isLeftScrollDisabled}
       >
         <CaretLeftIcon />
       </ActionButton>
@@ -59,6 +65,7 @@
         onclick={scrollToRight}
         label={`Scroll ${title} to the right`}
         variant="purple"
+        disabled={isRightScrollDisabled}
       >
         <CaretRightIcon />
       </ActionButton>
