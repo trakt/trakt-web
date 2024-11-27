@@ -1,6 +1,9 @@
 <script lang="ts">
   import { varToPixels } from "$lib/utils/css/varToPixels";
   import { writable } from "svelte/store";
+  import ActionButton from "../buttons/ActionButton.svelte";
+  import CaretLeftIcon from "../icons/CaretLeftIcon.svelte";
+  import CaretRightIcon from "../icons/CaretRightIcon.svelte";
   import { scrollTracking } from "./scrollTracking";
 
   type SectionListProps = {
@@ -23,11 +26,44 @@
   const rightShadowIntensity = $derived(
     ($scrollX.right - sideDistance) / windowShadowWidth,
   );
+
+  let horizontalScrollContainer: HTMLDivElement;
+
+  function scrollToLeft() {
+    horizontalScrollContainer.scrollBy({
+      left: -window.innerWidth,
+      behavior: "smooth",
+    });
+  }
+
+  function scrollToRight() {
+    horizontalScrollContainer.scrollBy({
+      left: window.innerWidth,
+      behavior: "smooth",
+    });
+  }
 </script>
 
 <section class="section-list-container">
-  <h4 class="section-list-title">{title}</h4>
-
+  <div class="section-list-header">
+    <h4 class="section-list-title">{title}</h4>
+    <div class="section-list-navigation-actions">
+      <ActionButton
+        onclick={scrollToLeft}
+        label={`Scroll ${title} to the left`}
+        variant="purple"
+      >
+        <CaretLeftIcon />
+      </ActionButton>
+      <ActionButton
+        onclick={scrollToRight}
+        label={`Scroll ${title} to the right`}
+        variant="purple"
+      >
+        <CaretRightIcon />
+      </ActionButton>
+    </div>
+  </div>
   <div
     class="section-list"
     class:section-list-left-shadow={isLeftShadowVisible}
@@ -35,7 +71,11 @@
     style:--left-shadow-opacity={leftShadowIntensity}
     style:--right-shadow-opacity={rightShadowIntensity}
   >
-    <div use:scrollTracking={scrollX} class="section-list-horizontal-scroll">
+    <div
+      bind:this={horizontalScrollContainer}
+      use:scrollTracking={scrollX}
+      class="section-list-horizontal-scroll"
+    >
       {@render children()}
     </div>
   </div>
@@ -48,16 +88,40 @@
     gap: var(--ni-32);
   }
 
-  .section-list-title {
-    color: var(--color-text-primary);
+  .section-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--ni-16);
+
     margin: 0;
     margin-left: calc(var(--ni-56) + var(--layout-distance-side));
-
-    transition: calc(var(--transition-increment) * 2) ease-in-out;
-    transition-property: margin-left, font-size;
+    margin-right: var(--layout-distance-side);
+    transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
 
     @media (max-width: 480px) {
       margin-left: var(--ni-32);
+
+      .section-list-navigation-actions {
+        display: none;
+      }
+    }
+  }
+
+  .section-list-navigation-actions {
+    display: flex;
+    gap: var(--ni-4);
+  }
+
+  .section-list-title {
+    color: var(--color-text-primary);
+    transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
+
+    @media (max-width: 768px) {
+      font-size: var(--ni-32);
+    }
+
+    @media (max-width: 480px) {
       font-size: var(--ni-24);
     }
   }
