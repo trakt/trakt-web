@@ -90,6 +90,11 @@ declare global {
     ontouchstartcapture?: (event: TouchEvent) => void;
   };
 
+  type HTMLAnchorProps = {
+    href?: string;
+    target?: '_blank' | '_self' | '_parent' | '_top';
+  };
+
   export type ButtonProps =
     & {
       label: string;
