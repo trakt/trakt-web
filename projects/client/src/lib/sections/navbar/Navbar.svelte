@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import Logo from "$lib/components/logo/Logo.svelte";
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
@@ -22,9 +23,11 @@
 </script>
 
 <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
-  <div class="trakt-logo">
-    <Logo />
-  </div>
+  <Link href="/">
+    <div class="trakt-logo">
+      <Logo />
+    </div>
+  </Link>
   <div class="trakt-user-preferences">
     <LocalePicker />
     <ThemePicker />
