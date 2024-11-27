@@ -54,8 +54,8 @@
       ::-webkit-scrollbar-thumb {
         background-color: color-mix(
           in srgb,
-          var(--color-foreground) 10%,
-          transparent 90%
+          var(--color-foreground) 0%,
+          transparent 100%
         );
         border-radius: var(--ni-4);
         backdrop-filter: blur(var(--ni-4));
