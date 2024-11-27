@@ -31,14 +31,14 @@
 
   function scrollToLeft() {
     horizontalScrollContainer.scrollBy({
-      left: -window.innerWidth,
+      left: -window.innerWidth / 2,
       behavior: "smooth",
     });
   }
 
   function scrollToRight() {
     horizontalScrollContainer.scrollBy({
-      left: window.innerWidth,
+      left: window.innerWidth / 2,
       behavior: "smooth",
     });
   }

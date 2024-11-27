@@ -93,14 +93,6 @@ p.meta-info {
   line-height: 90%;
   letter-spacing: 0.025rem;
   text-transform: uppercase;
-
-  &.capitalize {
-    text-transform: none;
-
-    &::first-letter {
-      text-transform: uppercase;
-    }
-  }
 }
 
 .ellipsis {
@@ -115,4 +107,19 @@ button p {
   font-weight: 700;
   line-height: 90%;
   text-transform: uppercase;
+}
+
+p,
+span {
+  &.secondary {
+    color: var(--color-text-secondary);
+  }
+
+  &.capitalize {
+    text-transform: none;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
 }

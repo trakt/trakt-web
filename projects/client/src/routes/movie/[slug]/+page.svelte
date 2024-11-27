@@ -1,5 +1,106 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
+  import ActionIcon from "$lib/components/icons/ActionIcon.svelte";
+  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
+  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import * as m from "$lib/features/i18n/messages";
+  import { useMovie } from "./useMovie";
+
+  const movie = useMovie($page.params.slug);
 </script>
 
-<p>You are looking at: {$page.params.slug}</p>
+<!-- FIXME: extract separate components out for easy re-use -->
+{#if $movie}
+  <BackgroundCoverImage src={$movie.cover.url} type="Movie" />
+
+  <div class="trakt-summary-container">
+    <div class="trakt-summary-main">
+      <img src={$movie.poster.url} alt={$movie.title} />
+
+      <Button
+        label={m.add_to_watchlist_label({ title: $movie.title })}
+        variant="custom"
+        --color-background-button="var(--blue-200)"
+        --color-foreground-button="var(--blue-800)"
+      >
+        {m.add_to_watchlist()}
+        {#snippet icon()}
+          <PlusIcon />
+        {/snippet}
+      </Button>
+
+      <Button
+        label={m.mark_as_watched_label({ title: $movie.title })}
+        variant="custom"
+        --color-background-button="var(--purple-100)"
+        --color-foreground-button="var(--purple-600)"
+      >
+        {m.mark_as_watched()}
+        {#snippet icon()}
+          <CheckIcon size="small" />
+        {/snippet}
+      </Button>
+    </div>
+    <div class="trakt-summary-details">
+      <div class="trakt-summary-details-title">
+        <h3>{$movie.title}</h3>
+        <div class="trakt-summary-genre">
+          <ActionIcon />
+          {#each $movie.genres as genre}
+            <span class="trakt-genre capitalize">{genre}</span>
+            {#if genre !== $movie.genres.at(-1)}
+              <span>/</span>
+            {/if}
+          {/each}
+        </div>
+      </div>
+
+      <p class="secondary">{$movie.overview}</p>
+    </div>
+  </div>
+{/if}
+
+<style>
+  .trakt-summary-container {
+    display: grid;
+    gap: var(--ni-32);
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: 0 var(--ni-56);
+  }
+
+  .trakt-summary-main {
+    width: var(--ni-320);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-16);
+
+    img {
+      border-radius: var(--ni-24);
+      align-self: stretch;
+      width: var(--ni-320);
+      height: var(--ni-480);
+
+      box-shadow: 0px 7.673px 23.02px 0px rgba(0, 0, 0, 0.56);
+    }
+  }
+
+  .trakt-summary-details {
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    gap: var(--ni-32);
+
+    .trakt-summary-details-title {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ni-8);
+      .trakt-summary-genre {
+        display: flex;
+        align-items: center;
+        gap: var(--ni-8);
+      }
+    }
+  }
+</style>

@@ -16,5 +16,9 @@
   "error_404_title": "404: Nothingness. The void.",
   "error_404_message": "(Don't worry, it happens to the best of us. Even the digital gods take a wrong turn sometimes.)",
   "error_404_action": "Back to safety...",
-  "mark_as_watched_ask_prompt": "When did you watch this episode? (YYYY-MM-DD HH:MM)"
+  "mark_as_watched_ask_prompt": "When did you watch this episode? (YYYY-MM-DD HH:MM)",
+  "add_to_watchlist": "Add to Watchlist",
+  "mark_as_watched": "Mark as Watched",
+  "add_to_watchlist_label": "Add {title} to your watchlist",
+  "mark_as_watched_label": "Mark {title} as watched"
 }

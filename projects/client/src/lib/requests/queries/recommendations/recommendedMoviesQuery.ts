@@ -1,7 +1,7 @@
 import type { RecommendedMovieResponse } from '$lib/api.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { authHeader } from '../../_internal/authHeader.ts';
+import { mapResponseToMovieSummary } from '../movies/movieSummaryQuery.ts';
 
 export type RecommendedMovie = {
   id: number;
@@ -19,16 +19,7 @@ function mapResponseToRecommendedMovie(
   movie: RecommendedMovieResponse[0],
 ): RecommendedMovie {
   return {
-    id: movie.ids.trakt,
-    slug: movie.ids.slug,
-    title: movie.title,
-    runtime: movie.runtime!,
-    poster: {
-      url: prependHttps(
-        movie.images?.poster.at(1) ??
-          movie.images?.poster.at(0),
-      )!,
-    },
+    ...mapResponseToMovieSummary(movie),
   };
 }
 

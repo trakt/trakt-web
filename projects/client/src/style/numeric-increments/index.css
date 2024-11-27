@@ -69,6 +69,9 @@
   --ni-284: 17.75rem;
   --ni-288: 18rem;
 
+  --ni-320: 20rem;
+  --ni-480: 30rem;
+
   /**
    * Negative spacing and sizing variables
    * --ni-neg-X where X is the size in pixels
