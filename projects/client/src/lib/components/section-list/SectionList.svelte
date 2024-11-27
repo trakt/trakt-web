@@ -45,8 +45,6 @@
 
   const isLeftScrollDisabled = $derived($scrollX.left <= 0);
   const isRightScrollDisabled = $derived($scrollX.right <= 0);
-
-  $inspect($scrollX);
 </script>
 
 <section class="section-list-container">
