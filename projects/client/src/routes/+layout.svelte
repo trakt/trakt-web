@@ -45,38 +45,38 @@
       font-family: "Spline Sans", Arial, sans-serif;
     }
 
-    ::-webkit-scrollbar {
-      width: var(--ni-8);
-      height: var(--ni-8);
-    }
+    @media (hover: hover) and (pointer: fine) {
+      ::-webkit-scrollbar {
+        width: var(--ni-8);
+        height: var(--ni-8);
+      }
 
-    ::-webkit-scrollbar-thumb {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 10%,
-        transparent 90%
-      );
-      border-radius: var(--ni-4);
-      backdrop-filter: blur(var(--ni-4));
-      opacity: 0;
-    }
+      ::-webkit-scrollbar-thumb {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 10%,
+          transparent 90%
+        );
+        border-radius: var(--ni-4);
+        backdrop-filter: blur(var(--ni-4));
+        opacity: 0;
+      }
 
-    /* Show scrollbar when container is hovered */
-    :hover::-webkit-scrollbar-thumb {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 50%,
-        transparent 50%
-      );
-    }
+      :hover::-webkit-scrollbar-thumb {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 50%,
+          transparent 50%
+        );
+      }
 
-    /* Darken thumb on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 100%,
-        transparent 0%
-      );
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 100%,
+          transparent 0%
+        );
+      }
     }
   </style>
 </svelte:head>
