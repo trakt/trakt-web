@@ -29,7 +29,7 @@
   const { isLoading, isWatchlisted, add } = useWatchlist({ type });
 
   function buildLink(type: MediaType, item: RecommendedMedia[0]) {
-    return type === "movie" ? `/movie/${item.slug}` : undefined;
+    return type === "movie" ? `/movie/${item.slug}` : `/show/${item.slug}`;
   }
 </script>
 
