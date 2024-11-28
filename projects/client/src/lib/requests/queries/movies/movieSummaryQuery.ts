@@ -42,7 +42,7 @@ export function mapResponseToMovieSummary(movie: MovieResponse): MovieSummary {
   };
 }
 
-export function upNextRequest(
+function movieSummaryRequest(
   { fetch, slug }: MovieSummaryParams,
 ): Promise<MovieSummary> {
   return api({ fetch })
@@ -70,5 +70,5 @@ export const movieSummaryQuery = (
   params: MovieSummaryParams,
 ) => ({
   queryKey: movieSummaryQueryKey(params.slug),
-  queryFn: () => upNextRequest(params),
+  queryFn: () => movieSummaryRequest(params),
 });
