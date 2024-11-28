@@ -9,15 +9,17 @@ describe('useMarkAsWatched', () => {
   });
 
   it('should resolve current date for unknown action', () => {
-    expect(resolveWatchDate(undefined)).toBe(
-      new Date().toISOString(),
-    );
+    const now = new Date().toISOString();
+    vi.setSystemTime(new Date(now));
+    expect(resolveWatchDate(undefined)).toBe(now);
+    vi.useRealTimers();
   });
 
   it('should resolve current date for "now" action', () => {
-    expect(resolveWatchDate('now')).toBe(
-      new Date().toISOString(),
-    );
+    const now = new Date().toISOString();
+    vi.setSystemTime(new Date(now));
+    expect(resolveWatchDate('now')).toBe(now);
+    vi.useRealTimers();
   });
 
   it('should resolve current date for "ask" action', () => {
