@@ -1,7 +1,7 @@
 import type { SettingsResponse, SortDirection, WatchAction } from '$lib/api.ts';
+import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { ALIEN_ISOLATION_COVER } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
-import { authHeader } from '../../../requests/_internal/authHeader.ts';
 
 export type UserSettings = {
   name: {

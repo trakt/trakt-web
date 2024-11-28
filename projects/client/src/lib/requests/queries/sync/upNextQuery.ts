@@ -1,4 +1,5 @@
 import type { SortDirection, UpNextResponse } from '$lib/api.ts';
+import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import {
   type EpisodeType,
   EpisodeUnknownType,
@@ -6,7 +7,6 @@ import {
 import type { Paginatable } from '$lib/models/Paginatable.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import { authHeader } from '../../_internal/authHeader.ts';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 import type { EpisodeEntry } from '../calendars/upcomingEpisodesQuery.ts';
 

@@ -1,6 +1,6 @@
+import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { WatchlistRequest } from '@trakt/api';
 import { api, type ApiParams } from '../_internal/api.ts';
-import { authHeader } from '../_internal/authHeader.ts';
 
 type AddToWatchlistParams = {
   body: WatchlistRequest;

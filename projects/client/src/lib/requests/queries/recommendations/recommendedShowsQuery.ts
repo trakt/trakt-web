@@ -1,7 +1,7 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
+import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import { authHeader } from '../../_internal/authHeader.ts';
 
 export type RecommendedShow = {
   id: number;
