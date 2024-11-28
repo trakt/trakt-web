@@ -23,17 +23,15 @@
   const isImageLoaded = writable(false);
 </script>
 
-{#if $response.uri}
-  <img
-    class:image-loaded={$isImageLoaded}
-    src={$response.uri}
-    {alt}
-    onload={() => {
-      requestAnimationFrame(() => isImageLoaded.set(true));
-      onLoad?.();
-    }}
-  />
-{/if}
+<img
+  class:image-loaded={$isImageLoaded}
+  src={$response.uri}
+  {alt}
+  onload={() => {
+    requestAnimationFrame(() => isImageLoaded.set(true));
+    onLoad?.();
+  }}
+/>
 
 <style>
   .image-loaded {

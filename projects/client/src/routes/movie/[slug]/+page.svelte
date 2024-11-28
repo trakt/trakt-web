@@ -6,6 +6,7 @@
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
+  import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
@@ -32,46 +33,49 @@
   <BackgroundCoverImage src={$movie.cover.url} {type} />
 
   <div class="trakt-summary-container">
-    <div class="trakt-summary-main">
-      <img src={$movie.poster.url} alt={$movie.title} />
+    <div class="trakt-summary-poster">
+      <SummaryPoster src={$movie.poster.url} alt={$movie.title}>
+        {#snippet actions()}
+          <Button
+            label={m.add_to_watchlist_label({ title: $movie.title })}
+            variant="custom"
+            onclick={() => add([$movie.id])}
+            disabled={isAddingToWatchlist($movie.id) ||
+              isWatchlisted($movie.id)}
+            --color-background-button="var(--blue-200)"
+            --color-foreground-button="var(--blue-800)"
+          >
+            {m.add_to_watchlist()}
+            {#snippet icon()}
+              <PlusIcon />
+            {/snippet}
+          </Button>
 
-      <Button
-        label={m.add_to_watchlist_label({ title: $movie.title })}
-        variant="custom"
-        onclick={() => add([$movie.id])}
-        disabled={isAddingToWatchlist($movie.id) || isWatchlisted($movie.id)}
-        --color-background-button="var(--blue-200)"
-        --color-foreground-button="var(--blue-800)"
-      >
-        {m.add_to_watchlist()}
-        {#snippet icon()}
-          <PlusIcon />
+          <Button
+            label={m.mark_as_watched_label({ title: $movie.title })}
+            variant="custom"
+            onclick={() => markAsWatched($movie.id)}
+            disabled={isMarkingAsWatched($movie.id) || isWatched($movie.id)}
+            --color-background-button="var(--purple-100)"
+            --color-foreground-button="var(--purple-600)"
+          >
+            {m.mark_as_watched()}
+            {#snippet icon()}
+              <CheckIcon size="small" />
+            {/snippet}
+          </Button>
         {/snippet}
-      </Button>
-
-      <Button
-        label={m.mark_as_watched_label({ title: $movie.title })}
-        variant="custom"
-        onclick={() => markAsWatched($movie.id)}
-        disabled={isMarkingAsWatched($movie.id) || isWatched($movie.id)}
-        --color-background-button="var(--purple-100)"
-        --color-foreground-button="var(--purple-600)"
-      >
-        {m.mark_as_watched()}
-        {#snippet icon()}
-          <CheckIcon size="small" />
-        {/snippet}
-      </Button>
+      </SummaryPoster>
     </div>
     <div class="trakt-summary-details">
-      <div class="trakt-summary-details-title">
+      <div class="trakt-summary-header">
         <h3>{$movie.title}</h3>
         <GenreList genres={$movie.genres} />
       </div>
 
       <RatingList ratings={$ratings} />
 
-      <p class="secondary">{$movie.overview}</p>
+      <p class="trakt-media-overview secondary">{$movie.overview}</p>
     </div>
   </div>
 {/if}
@@ -84,26 +88,13 @@
     margin: 0 var(--ni-56);
 
     @media (max-width: 680px) {
-      display: flex;
-      flex-direction: column;
-      gap: var(--ni-16);
-      align-items: center;
-    }
-  }
+      grid-template-columns: 1fr;
 
-  .trakt-summary-main {
-    width: var(--ni-320);
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-16);
-
-    img {
-      border-radius: var(--ni-24);
-      align-self: stretch;
-      width: var(--ni-320);
-      height: var(--ni-480);
-
-      box-shadow: 0px 7.673px 23.02px 0px rgba(0, 0, 0, 0.56);
+      :global(.trakt-summary-poster) {
+        height: var(--ni-120);
+        visibility: hidden;
+        pointer-events: none;
+      }
     }
   }
 
@@ -113,10 +104,14 @@
     align-self: end;
     gap: var(--ni-32);
 
-    .trakt-summary-details-title {
+    .trakt-summary-header {
       display: flex;
       flex-direction: column;
       gap: var(--ni-8);
+    }
+
+    .trakt-media-overview {
+      line-height: 150%;
     }
   }
 </style>
