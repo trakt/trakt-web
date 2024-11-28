@@ -15,6 +15,7 @@
     "npm:@playwright/test@^1.49.0": "1.49.0",
     "npm:@sveltejs/adapter-auto@^3.3.1": "3.3.1_@sveltejs+kit@2.8.5__@sveltejs+vite-plugin-svelte@4.0.2___svelte@5.2.9____acorn@8.14.0___vite@5.4.11__svelte@5.2.9___acorn@8.14.0__vite@5.4.11_svelte@5.2.9__acorn@8.14.0",
     "npm:@sveltejs/adapter-cloudflare@^4.7.4": "4.7.4_@sveltejs+kit@2.8.5__@sveltejs+vite-plugin-svelte@4.0.2___svelte@5.2.9____acorn@8.14.0___vite@5.4.11__svelte@5.2.9___acorn@8.14.0__vite@5.4.11_wrangler@3.91.0__@cloudflare+workers-types@4.20241112.0__esbuild@0.17.19_svelte@5.2.9__acorn@8.14.0_@cloudflare+workers-types@4.20241112.0",
+    "npm:@sveltejs/kit@2.8.5": "2.8.5_@sveltejs+vite-plugin-svelte@4.0.2__svelte@5.2.9___acorn@8.14.0__vite@5.4.11_svelte@5.2.9__acorn@8.14.0_vite@5.4.11",
     "npm:@sveltejs/kit@^2.8.5": "2.8.5_@sveltejs+vite-plugin-svelte@4.0.2__svelte@5.2.9___acorn@8.14.0__vite@5.4.11_svelte@5.2.9__acorn@8.14.0_vite@5.4.11",
     "npm:@sveltejs/vite-plugin-svelte@^5.0.1": "5.0.1_svelte@5.2.9__acorn@8.14.0_vite@6.0.1",
     "npm:@tanstack/svelte-query-devtools@^5.61.5": "5.61.5_@tanstack+svelte-query@5.61.5__svelte@5.2.9___acorn@8.14.0_svelte@5.2.9__acorn@8.14.0",
