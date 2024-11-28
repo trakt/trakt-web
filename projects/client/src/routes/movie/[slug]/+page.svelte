@@ -2,11 +2,11 @@
   import { page } from "$app/stores";
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import ActionIcon from "$lib/components/icons/ActionIcon.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
+  import GenreList from "$lib/components/summary/GenreList.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
@@ -67,15 +67,7 @@
     <div class="trakt-summary-details">
       <div class="trakt-summary-details-title">
         <h3>{$movie.title}</h3>
-        <div class="trakt-summary-genre">
-          <ActionIcon />
-          {#each $movie.genres as genre}
-            <span class="trakt-genre capitalize">{genre}</span>
-            {#if genre !== $movie.genres.at(-1)}
-              <span>/</span>
-            {/if}
-          {/each}
-        </div>
+        <GenreList genres={$movie.genres} />
       </div>
 
       <div class="trakt-summary-ratings">
@@ -129,11 +121,6 @@
       display: flex;
       flex-direction: column;
       gap: var(--ni-8);
-      .trakt-summary-genre {
-        display: flex;
-        align-items: center;
-        gap: var(--ni-8);
-      }
     }
 
     .trakt-summary-ratings {
