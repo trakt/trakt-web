@@ -12,7 +12,7 @@
 
   import type { MediaType } from "$lib/models/MediaType";
   import { useWatchlist } from "$lib/stores/useWatchlist";
-  import { toHumanDuration } from "$lib/utils/date/toHumanDuration";
+  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import {
     useRecommendationList,
     type RecommendedMedia,

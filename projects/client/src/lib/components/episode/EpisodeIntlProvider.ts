@@ -4,8 +4,8 @@ import {
   EpisodeFinaleType,
   EpisodePremiereType,
 } from '$lib/models/EpisodeType.ts';
-import { toHumanDate } from '$lib/utils/date/toHumanDate.ts';
-import { toHumanDuration } from '$lib/utils/date/toHumanDuration.ts';
+import { toHumanDate } from '../../utils/formatting/date/toHumanDate.ts';
+import { toHumanDuration } from '../../utils/formatting/date/toHumanDuration.ts';
 import type { EpisodeIntl } from './EpisodeIntl.ts';
 
 export const EpisodeIntlProvider: EpisodeIntl = {

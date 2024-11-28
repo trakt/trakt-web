@@ -1,5 +1,5 @@
-import { toHumanDuration } from '$lib/utils/date/toHumanDuration.ts';
 import { describe, expect, it } from 'vitest';
+import { toHumanDuration } from './toHumanDuration.ts';
 
 describe('toHumanDuration', () => {
   it('should return a human readable duration', () => {

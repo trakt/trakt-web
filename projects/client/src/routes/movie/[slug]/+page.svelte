@@ -3,10 +3,9 @@
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
-  import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
-  import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
+  import RatingList from "$lib/components/summary/RatingList.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
@@ -70,10 +69,7 @@
         <GenreList genres={$movie.genres} />
       </div>
 
-      <div class="trakt-summary-ratings">
-        <IMDBIcon /> <span>{$ratings.imdb}</span>
-        <RottenIcon /> <span>{$ratings.rotten.audience}</span>
-      </div>
+      <RatingList ratings={$ratings} />
 
       <p class="secondary">{$movie.overview}</p>
     </div>
@@ -120,12 +116,6 @@
     .trakt-summary-details-title {
       display: flex;
       flex-direction: column;
-      gap: var(--ni-8);
-    }
-
-    .trakt-summary-ratings {
-      display: flex;
-      align-items: center;
       gap: var(--ni-8);
     }
   }

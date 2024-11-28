@@ -2,12 +2,18 @@ import type { MovieRatingsResponse } from '$lib/api.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 export type MovieRating = {
-  tmdb: number;
+  tmdb: {
+    rating: number;
+    votes: number;
+  };
   rotten: {
     critic: number;
     audience: number;
   };
-  imdb: number;
+  imdb: {
+    rating: number;
+    votes: number;
+  };
   metacritic: number;
 };
 
@@ -17,12 +23,18 @@ export function mapResponseToMovieRating(
   ratings: MovieRatingsResponse,
 ): MovieRating {
   return {
-    tmdb: ratings.tmdb?.rating ?? 0,
+    tmdb: {
+      rating: ratings.tmdb?.rating ?? 0,
+      votes: ratings.tmdb?.votes ?? 0,
+    },
     rotten: {
       critic: ratings.rotten_tomatoes?.rating ?? 0,
       audience: ratings.rotten_tomatoes?.user_rating ?? 0,
     },
-    imdb: ratings.imdb?.rating ?? 0,
+    imdb: {
+      rating: ratings.imdb?.rating ?? 0,
+      votes: ratings.imdb?.votes ?? 0,
+    },
     metacritic: ratings.metascore?.rating ?? 0,
   };
 }

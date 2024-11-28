@@ -1,7 +1,7 @@
-import { LOCALE_MAP } from '$lib/utils/date/LOCALE_MAP.ts';
 import { format } from 'date-fns/format';
 import { formatRelative } from 'date-fns/formatRelative';
 import { intervalToDuration } from 'date-fns/intervalToDuration';
+import { LOCALE_MAP } from './LOCALE_MAP.ts';
 
 function stripTime(date: Date): Date {
   return new Date(date.toDateString());
