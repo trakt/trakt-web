@@ -1,4 +1,4 @@
-import type { MovieResponse } from '$lib/api.ts';
+import type { Genre, MovieResponse } from '$lib/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
@@ -13,7 +13,7 @@ export type MovieSummary = {
   cover: {
     url: string;
   };
-  genres: string[];
+  genres: Genre[];
   overview: string;
 };
 
