@@ -12,6 +12,7 @@
 
 <style>
   .trakt-link {
+    -webkit-tap-highlight-color: transparent;
     display: content;
 
     text-decoration: none;
