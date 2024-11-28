@@ -1,15 +1,15 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived, get } from 'svelte/store';
-import { currentUserQuery } from '../queries/currentUserQuery.ts';
+import { currentUserSettingsQuery } from '../queries/currentUserSettingsQuery.ts';
 
 export function useUser() {
-  const query = createQuery({
-    ...currentUserQuery(),
+  const settings = createQuery({
+    ...currentUserSettingsQuery(),
     staleTime: Infinity,
   });
 
-  const user = derived(query, ($query) => $query.data);
+  const user = derived(settings, ($query) => $query.data);
 
   return {
     user,
