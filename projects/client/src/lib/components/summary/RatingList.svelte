@@ -2,13 +2,15 @@
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import type { MovieRating } from "$lib/requests/queries/movies/movieRatingQuery";
-  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
+  import type { RatingIntl } from "./RatingIntl";
+  import { RatingIntlProvider } from "./RatingIntlProvider";
 
   type RatingListProps = {
+    i18n?: RatingIntl;
     ratings: MovieRating;
   };
 
-  const { ratings }: RatingListProps = $props();
+  const { i18n = RatingIntlProvider, ratings }: RatingListProps = $props();
   const { imdb, rotten } = ratings;
 </script>
 
@@ -17,7 +19,7 @@
     <IMDBIcon />
     <div class="rating-info">
       <p class="large bold">{imdb.rating}</p>
-      <p class="small bold secondary">{toHumanNumber(imdb.votes)}</p>
+      <p class="small bold secondary">{i18n.voteText(imdb.votes)}</p>
     </div>
   </div>
   <div class="rating-item rotten-rating">
