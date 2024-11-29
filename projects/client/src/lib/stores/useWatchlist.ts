@@ -15,24 +15,23 @@ const watchlistKey = (id: number) => `watchlist_${id}`;
 export function useWatchlist({ type, id }: WatchlistStoreProps) {
   const isWatchlistUpdating = writable(false);
   const { watchlist } = useUser();
+  const cached = localStorage.getItem(watchlistKey(id)) == 'true';
 
-  const _isWatchlisted = writable(
-    localStorage.getItem(watchlistKey(id)) == 'true',
-  );
+  const _isWatchlisted = writable(false);
   const isWatchlisted = derived(
     [watchlist, _isWatchlisted],
-    ([$watchlist, $memory]) => {
+    ([$watchlist, $_isWatchlisted]) => {
       if (!$watchlist) {
-        return $memory;
+        return cached;
       }
 
       switch (type) {
         case 'movie':
-          return $watchlist.movies.has(id) || $memory;
+          return $watchlist.movies.has(id) || $_isWatchlisted;
         case 'episode':
           return false;
         case 'show':
-          return $watchlist.shows.has(id) || $memory;
+          return $watchlist.shows.has(id) || $_isWatchlisted;
       }
     },
   );

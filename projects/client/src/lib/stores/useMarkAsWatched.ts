@@ -35,21 +35,19 @@ const markAsWatchedKey = (id: number) => `markAsWatched_${id}`;
 export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
   const isMarkingAsWatched = writable(false);
   const { history } = useUser();
+  const cached = localStorage.getItem(markAsWatchedKey(id)) == 'true';
 
-  const _isWatched = writable(
-    localStorage.getItem(markAsWatchedKey(id)) == 'true',
-  );
-
+  const _isWatched = writable(false);
   const isWatched = derived(
     [history, _isWatched],
-    ([$history, $memory]) => {
+    ([$history, $_isWatched]) => {
       if (!$history) {
-        return $memory;
+        return cached;
       }
 
       switch (type) {
         case 'movie':
-          return $history.movies.has(id) || $memory;
+          return $history.movies.has(id) || $_isWatched;
         case 'episode':
           return false;
         case 'show':
@@ -73,14 +71,17 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
       }),
     });
     isMarkingAsWatched.set(false);
-
+    console.log('result', result);
     _isWatched.set(result);
   };
 
-  isWatched.subscribe((value) =>
-    localStorage
-      .setItem(markAsWatchedKey(id), value.toString())
-  );
+  derived(
+    [isWatched, _isWatched],
+    ([$isWatched, $_isWatched]) => $isWatched || $_isWatched,
+  )
+    .subscribe((value) =>
+      localStorage.setItem(markAsWatchedKey(id), value.toString())
+    );
 
   return {
     markAsWatched,
