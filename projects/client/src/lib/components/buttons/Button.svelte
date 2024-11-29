@@ -194,7 +194,7 @@
       }
 
       &:active:not([disabled]) {
-        transform: scale(0.81);
+        transform: scale(0.87);
       }
     }
 
@@ -243,7 +243,7 @@
       }
 
       &:active:not([disabled]) {
-        transform: scale(0.9);
+        transform: scale(0.97);
       }
     }
   }
