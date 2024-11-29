@@ -36,12 +36,15 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
   const isMarkingAsWatched = writable(false);
   const { history } = useUser();
 
-  const _isWatched = writable(false);
+  const _isWatched = writable(
+    localStorage.getItem(markAsWatchedKey(id)) == 'true',
+  );
+
   const isWatched = derived(
     [history, _isWatched],
     ([$history, $memory]) => {
       if (!$history) {
-        return localStorage.getItem(markAsWatchedKey(id)) == 'true';
+        return $memory;
       }
 
       switch (type) {
