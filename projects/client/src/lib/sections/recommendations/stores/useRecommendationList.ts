@@ -10,7 +10,8 @@ import {
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
-export type RecommendedMedia = Array<RecommendedMovie | RecommendedShow>;
+export type RecommendedMediaItem = RecommendedMovie | RecommendedShow;
+export type RecommendedMedia = Array<RecommendedMediaItem>;
 
 type RecommendationListStoreProps = {
   type: MediaType;
