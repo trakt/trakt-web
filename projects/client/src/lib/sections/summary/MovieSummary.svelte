@@ -21,7 +21,12 @@
     id: movie.id,
   });
 
-  const { isAddingToWatchlist, watchlist, isWatchlisted } = useWatchlist({
+  const {
+    isWatchlistUpdating,
+    isWatchlisted,
+    addToWatchlist,
+    removeFromWatchlist,
+  } = useWatchlist({
     type,
     id: movie.id,
   });
@@ -35,10 +40,10 @@
       {#snippet actions()}
         <WatchlistButton
           title={movie.title}
-          isAddingToWatchlist={$isAddingToWatchlist}
+          isWatchlistUpdating={$isWatchlistUpdating}
           isWatchlisted={$isWatchlisted}
-          onAdd={() => watchlist()}
-          onRemove={() => alert("TODO: Implement remove from watchlist")}
+          onAdd={addToWatchlist}
+          onRemove={removeFromWatchlist}
         />
 
         <Button

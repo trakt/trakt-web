@@ -3,7 +3,7 @@ import type { WatchlistButtonIntl } from '$lib/components/buttons/watchlist/Watc
 export type WatchlistButtonProps = {
   i18n?: WatchlistButtonIntl;
   title: string;
-  isAddingToWatchlist: boolean;
+  isWatchlistUpdating: boolean;
   isWatchlisted: boolean;
   onAdd: () => void;
   onRemove: () => void;

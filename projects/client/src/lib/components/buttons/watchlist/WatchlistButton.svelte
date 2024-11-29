@@ -7,7 +7,7 @@
   const {
     i18n = WatchlistButtonIntlProvider,
     title,
-    isAddingToWatchlist,
+    isWatchlistUpdating,
     isWatchlisted,
     onAdd,
     onRemove,
@@ -21,7 +21,7 @@
   label={i18n.label({ isWatchlisted, title })}
   variant="custom"
   onclick={handler}
-  disabled={isAddingToWatchlist}
+  disabled={isWatchlistUpdating}
   --color-background-button="var(--blue-200)"
   --color-foreground-button="var(--blue-800)"
 >

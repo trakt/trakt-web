@@ -33,7 +33,7 @@ function recommendMoviesRequest(
       query: {
         extended: 'full,cloud9',
         ignore_collected: true,
-        ignore_watchlisted: true,
+        ignore_watchlisted: false,
         limit: 35,
       },
       extraHeaders: {

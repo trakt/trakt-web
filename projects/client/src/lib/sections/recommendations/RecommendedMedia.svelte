@@ -23,7 +23,12 @@
 
   const { type, recommendation }: RecommendationItemProps = $props();
 
-  const { isAddingToWatchlist, isWatchlisted, watchlist } = useWatchlist({
+  const {
+    isWatchlistUpdating,
+    isWatchlisted,
+    addToWatchlist,
+    removeFromWatchlist,
+  } = useWatchlist({
     type,
     id: recommendation.id,
   });
@@ -63,12 +68,10 @@
     {#snippet actions()}
       <WatchlistActionButton
         title={recommendation.title}
-        onAdd={watchlist}
-        onRemove={async () => {
-          alert("TODO: Remove from watchlist");
-        }}
+        onAdd={addToWatchlist}
+        onRemove={removeFromWatchlist}
         isWatchlisted={$isWatchlisted}
-        isAddingToWatchlist={$isAddingToWatchlist}
+        isWatchlistUpdating={$isWatchlistUpdating}
       />
     {/snippet}
   </CardFooter>

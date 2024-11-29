@@ -10,7 +10,7 @@
     onAdd,
     onRemove,
     isWatchlisted,
-    isAddingToWatchlist,
+    isWatchlistUpdating,
     ...props
   }: WatchlistButtonProps = $props();
 
@@ -20,7 +20,7 @@
 </script>
 
 <ActionButton
-  disabled={isAddingToWatchlist}
+  disabled={isWatchlistUpdating}
   onclick={handler}
   label={i18n.label({ isWatchlisted, title })}
   {variant}
