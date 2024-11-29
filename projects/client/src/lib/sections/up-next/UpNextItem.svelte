@@ -31,7 +31,7 @@
   type={episode.type}
   isLoading={$isMarkingAsWatched}
   onMarkAsWatched={async () => {
-    await markAsWatched(episode.id);
+    await markAsWatched();
     onMarkAsWatched();
   }}
 />

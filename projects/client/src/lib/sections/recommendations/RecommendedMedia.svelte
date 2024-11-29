@@ -67,7 +67,7 @@
           label={`Mark ${recommendation.id} as watched`}
           disabled={$isAddingToWatchlist}
           onclick={async () => {
-            await watchlist(recommendation.id);
+            await watchlist();
           }}
         />
       {:else}

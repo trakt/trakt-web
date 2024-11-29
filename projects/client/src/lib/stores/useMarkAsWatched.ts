@@ -27,7 +27,7 @@ export function resolveWatchDate(
 
 type MarkAsWatchedStoreProps = {
   type: MediaType;
-  id: number | Nil;
+  id: number;
 };
 
 const markAsWatchedKey = (id: number) => `markAsWatched_${id}`;
@@ -36,13 +36,12 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
   const isMarkingAsWatched = writable(false);
   console.log('id', id);
   const isWatched = writable(
-    id != null &&
-      localStorage.getItem(markAsWatchedKey(id)) == 'true',
+    localStorage.getItem(markAsWatchedKey(id)) == 'true',
   );
 
   const { current: user } = useUser();
 
-  const markAsWatched = async (id: number) => {
+  const markAsWatched = async () => {
     const watchedAtDate = resolveWatchDate(
       user().preferences.watch.action,
     );
