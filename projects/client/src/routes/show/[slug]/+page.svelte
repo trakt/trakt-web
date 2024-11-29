@@ -21,11 +21,11 @@
   } = useMarkAsWatched({
     type,
   });
-  const {
-    add,
-    isLoading: isAddingToWatchlist,
-    isWatchlisted,
-  } = useWatchlist({ type });
+
+  const { watchlist, isAddingToWatchlist, isWatchlisted } = useWatchlist({
+    type,
+    id: $show?.id,
+  });
 </script>
 
 <!-- FIXME: extract separate components out for easy re-use -->
@@ -39,8 +39,8 @@
           <Button
             label={m.add_to_watchlist_label({ title: $show.title })}
             variant="custom"
-            onclick={() => add([$show.id])}
-            disabled={isAddingToWatchlist($show.id) || isWatchlisted($show.id)}
+            onclick={() => watchlist($show.id)}
+            disabled={$isAddingToWatchlist || $isWatchlisted}
             --color-background-button="var(--blue-200)"
             --color-foreground-button="var(--blue-800)"
           >

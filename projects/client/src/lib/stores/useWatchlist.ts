@@ -5,7 +5,7 @@ import { toWatchlistPayload } from './_internal/toWatchlistPayload.ts';
 
 type WatchlistStoreProps = {
   type: MediaType;
-  id: number;
+  id: number | Nil;
 };
 
 const watchlistKey = (id: number) => `watchlist_${id}`;
@@ -13,7 +13,9 @@ const watchlistKey = (id: number) => `watchlist_${id}`;
 export function useWatchlist({ type, id }: WatchlistStoreProps) {
   const isAddingToWatchlist = writable(false);
 
-  const isWatchlisted = localStorage.getItem(watchlistKey(id));
+  const isWatchlisted = writable(
+    id != null && !!localStorage.getItem(watchlistKey(id)),
+  );
 
   const watchlist = async (id: number) => {
     isAddingToWatchlist.set(true);
@@ -21,7 +23,7 @@ export function useWatchlist({ type, id }: WatchlistStoreProps) {
       body: toWatchlistPayload(type, [id]),
     });
     isAddingToWatchlist.set(false);
-
+    isWatchlisted.set(result);
     localStorage.setItem(watchlistKey(id), result.toString());
   };
 

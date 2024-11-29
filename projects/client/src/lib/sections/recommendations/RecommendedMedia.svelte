@@ -62,7 +62,7 @@
       {recommendation.title}
     </p>
     {#snippet actions()}
-      {#if !isWatchlisted}
+      {#if !$isWatchlisted}
         <AddToWatchlistButton
           label={`Mark ${recommendation.id} as watched`}
           disabled={$isAddingToWatchlist}

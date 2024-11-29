@@ -14,6 +14,7 @@
 
   const { movie, ratings } = useMovie($page.params.slug);
   const type = "movie";
+
   const {
     markAsWatched,
     isLoading: isMarkingAsWatched,
@@ -21,11 +22,11 @@
   } = useMarkAsWatched({
     type,
   });
-  const {
-    add,
-    isLoading: isAddingToWatchlist,
-    isWatchlisted,
-  } = useWatchlist({ type });
+
+  const { isAddingToWatchlist, watchlist, isWatchlisted } = useWatchlist({
+    type,
+    id: $movie?.id,
+  });
 </script>
 
 <!-- FIXME: extract separate components out for easy re-use -->
@@ -39,9 +40,8 @@
           <Button
             label={m.add_to_watchlist_label({ title: $movie.title })}
             variant="custom"
-            onclick={() => add([$movie.id])}
-            disabled={isAddingToWatchlist($movie.id) ||
-              isWatchlisted($movie.id)}
+            onclick={() => watchlist($movie.id)}
+            disabled={$isAddingToWatchlist || $isWatchlisted}
             --color-background-button="var(--blue-200)"
             --color-foreground-button="var(--blue-800)"
           >
