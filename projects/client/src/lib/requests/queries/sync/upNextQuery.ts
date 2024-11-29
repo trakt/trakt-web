@@ -50,7 +50,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
     total: item.progress.aired,
     completed: item.progress.completed,
     remaining: item.progress.aired - item.progress.completed,
-    runtime: item.show.runtime!,
+    runtime: episode.runtime,
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.Unknown,
   };
