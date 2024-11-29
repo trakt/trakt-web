@@ -15,6 +15,7 @@ export type MovieSummary = {
   };
   genres: Genre[];
   overview: string;
+  trailer?: string;
 };
 
 type MovieSummaryParams = { slug: string } & ApiParams;
@@ -39,6 +40,7 @@ export function mapResponseToMovieSummary(movie: MovieResponse): MovieSummary {
     },
     genres: movie.genres ?? [],
     overview: movie.overview ?? 'TBD',
+    trailer: movie.trailer,
   };
 }
 
