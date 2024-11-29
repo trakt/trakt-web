@@ -27,6 +27,6 @@
 >
   {i18n.text({ isWatchlisted, title })}
   {#snippet icon()}
-    <WatchlistIcon {state} />
+    <WatchlistIcon size="small" {state} />
   {/snippet}
 </Button>

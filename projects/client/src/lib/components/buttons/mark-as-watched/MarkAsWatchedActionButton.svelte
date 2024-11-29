@@ -1,6 +1,6 @@
 <script lang="ts">
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
-  import Button from "../Button.svelte";
+  import ActionButton from "../ActionButton.svelte";
   import { MarkAsWatchedButtonIntlProvider } from "./MarkAsWatchedButtonIntlProvider";
   import type { MarkAsWatchedButtonProps } from "./MarkAsWatchedButtonProps";
 
@@ -14,17 +14,12 @@
   }: MarkAsWatchedButtonProps = $props();
 </script>
 
-<Button
+<ActionButton
+  variant="purple"
   label={i18n.label({ title })}
-  variant="custom"
   onclick={onWatch}
   disabled={isMarkingAsWatched || isWatched}
   {...props}
-  --color-background-button="var(--purple-100)"
-  --color-foreground-button="var(--purple-600)"
 >
-  {i18n.text({ title })}
-  {#snippet icon()}
-    <CheckIcon size="small" />
-  {/snippet}
-</Button>
+  <CheckIcon />
+</ActionButton>

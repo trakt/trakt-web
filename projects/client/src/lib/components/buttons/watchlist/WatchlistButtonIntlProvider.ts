@@ -1,10 +1,8 @@
 import * as m from '$lib/features/i18n/messages.ts';
-import type { WatchlistButtonIntl } from './WatchlistButtonIntl.ts';
-
-export type WatchlistButtonMeta = {
-  isWatchlisted: boolean;
-  title: string;
-};
+import type {
+  WatchlistButtonIntl,
+  WatchlistButtonMeta,
+} from './WatchlistButtonIntl.ts';
 
 export const WatchlistButtonIntlProvider: WatchlistButtonIntl = {
   label: ({ title, isWatchlisted }: WatchlistButtonMeta) =>

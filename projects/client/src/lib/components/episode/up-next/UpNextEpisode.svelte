@@ -1,7 +1,7 @@
 <script lang="ts">
+  import MarkAsWatchedActionButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedActionButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import type { EpisodeType } from "$lib/models/EpisodeType";
-  import MarkAsWatchedButton from "../../buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
   import type { EpisodeIntl } from "../EpisodeIntl";
@@ -64,10 +64,11 @@
       {seasonNumber}x{episodeNumber} - {episodeTitle}
     </p>
     {#snippet actions()}
-      <MarkAsWatchedButton
-        label={`Mark ${episodeTitle} as watched`}
-        disabled={isLoading}
-        onclick={onMarkAsWatched}
+      <MarkAsWatchedActionButton
+        title={episodeTitle}
+        isWatched={false}
+        isMarkingAsWatched={isLoading}
+        onWatch={onMarkAsWatched}
       />
     {/snippet}
   </CardFooter>

@@ -1,10 +1,8 @@
 <script lang="ts">
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
-  import Button from "$lib/components/buttons/Button.svelte";
+  import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
-  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
-  import * as m from "$lib/features/i18n/messages";
   import type { MovieSummary } from "$lib/requests/queries/movies/movieSummaryQuery";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
@@ -46,19 +44,12 @@
           onRemove={removeFromWatchlist}
         />
 
-        <Button
-          label={m.mark_as_watched_label({ title: movie.title })}
-          variant="custom"
-          onclick={() => markAsWatched()}
-          disabled={$isMarkingAsWatched || $isWatched}
-          --color-background-button="var(--purple-100)"
-          --color-foreground-button="var(--purple-600)"
-        >
-          {m.mark_as_watched()}
-          {#snippet icon()}
-            <CheckIcon size="small" />
-          {/snippet}
-        </Button>
+        <MarkAsWatchedButton
+          title={movie.title}
+          isMarkingAsWatched={$isMarkingAsWatched}
+          isWatched={$isWatched}
+          onWatch={markAsWatched}
+        />
       {/snippet}
     </SummaryPoster>
   {/snippet}
