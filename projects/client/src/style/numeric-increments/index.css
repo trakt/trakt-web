@@ -69,7 +69,12 @@
   --ni-284: 17.75rem;
   --ni-288: 18rem;
   --ni-292: 18.25rem;
-
+  --ni-296: 18.5rem;
+  --ni-300: 18.75rem;
+  --ni-304: 19rem;
+  --ni-308: 19.25rem;
+  --ni-312: 19.5rem;
+  --ni-316: 19.75rem;
   --ni-320: 20rem;
   --ni-480: 30rem;
 
@@ -141,4 +146,13 @@
   --ni-neg-280: -17.5rem;
   --ni-neg-284: -17.75rem;
   --ni-neg-288: -18rem;
+  --ni-neg-292: -18.25rem;
+  --ni-neg-296: -18.5rem;
+  --ni-neg-300: -18.75rem;
+  --ni-neg-304: -19rem;
+  --ni-neg-308: -19.25rem;
+  --ni-neg-312: -19.5rem;
+  --ni-neg-316: -19.75rem;
+  --ni-neg-320: -20rem;
+  --ni-neg-480: -30rem;
 }
