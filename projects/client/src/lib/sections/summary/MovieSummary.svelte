@@ -1,8 +1,8 @@
 <script lang="ts">
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
+  import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
-  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { MovieSummary } from "$lib/requests/queries/movies/movieSummaryQuery";
@@ -33,19 +33,13 @@
   {#snippet poster()}
     <SummaryPoster src={movie.poster.url} alt={movie.title}>
       {#snippet actions()}
-        <Button
-          label={m.add_to_watchlist_label({ title: movie.title })}
-          variant="custom"
-          onclick={() => watchlist()}
-          disabled={$isAddingToWatchlist || $isWatchlisted}
-          --color-background-button="var(--blue-200)"
-          --color-foreground-button="var(--blue-800)"
-        >
-          {m.add_to_watchlist()}
-          {#snippet icon()}
-            <PlusIcon />
-          {/snippet}
-        </Button>
+        <WatchlistButton
+          title={movie.title}
+          isAddingToWatchlist={$isAddingToWatchlist}
+          isWatchlisted={$isWatchlisted}
+          onAdd={() => watchlist()}
+          onRemove={() => alert("TODO: Implement remove from watchlist")}
+        />
 
         <Button
           label={m.mark_as_watched_label({ title: movie.title })}

@@ -57,5 +57,7 @@
   "genre_superhero": "Superhero",
   "genre_donghua": "Donghua",
   "genre_mini_series": "Mini Series",
-  "genre_science_fiction": "Science Fiction"
+  "genre_science_fiction": "Science Fiction",
+  "remove_from_watchlist": "Remove from Watchlist",
+  "remove_from_watchlist_label": "Remove {title} from your watchlist"
 }

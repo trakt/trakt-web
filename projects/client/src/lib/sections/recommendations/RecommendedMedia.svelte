@@ -1,7 +1,6 @@
 <script lang="ts">
-  import AddToWatchlistButton from "$lib/components/buttons/actions/AddToWatchlistButton.svelte";
+  import WatchlistActionButton from "$lib/components/buttons/watchlist/WatchlistActionButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
-  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import PosterCard from "$lib/components/poster/card/PosterCard.svelte";
   import PosterCover from "$lib/components/poster/card/PosterCover.svelte";
@@ -62,19 +61,15 @@
       {recommendation.title}
     </p>
     {#snippet actions()}
-      {#if !$isWatchlisted}
-        <AddToWatchlistButton
-          label={`Mark ${recommendation.id} as watched`}
-          disabled={$isAddingToWatchlist}
-          onclick={async () => {
-            await watchlist();
-          }}
-        />
-      {:else}
-        <div class="watchlist-added-icon">
-          <CheckIcon />
-        </div>
-      {/if}
+      <WatchlistActionButton
+        title={recommendation.title}
+        onAdd={watchlist}
+        onRemove={async () => {
+          alert("TODO: Remove from watchlist");
+        }}
+        isWatchlisted={$isWatchlisted}
+        isAddingToWatchlist={$isAddingToWatchlist}
+      />
     {/snippet}
   </CardFooter>
 </PosterCard>
@@ -87,13 +82,5 @@
     color: var(--color-text-secondary);
 
     font-weight: 500;
-  }
-
-  /* FIXME: This is a temporary solution to indicate that 
-   * a recommendation has been added to the watchlist
-   */
-  .watchlist-added-icon {
-    padding: var(--ni-8);
-    color: var(--blue-300);
   }
 </style>
