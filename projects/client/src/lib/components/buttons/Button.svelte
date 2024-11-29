@@ -6,6 +6,7 @@
     variant?: "primary" | "secondary" | "vip" | "custom";
     style?: "textured" | "flat" | "ghost";
     icon?: Snippet;
+    subtitle?: Snippet;
   };
 
   const {
@@ -14,6 +15,7 @@
     variant = "primary",
     style = "flat",
     icon,
+    subtitle,
     ...props
   }: TraktButtonProps = $props();
 
@@ -32,7 +34,12 @@
   data-alignment={alignment}
   data-style={style}
 >
-  <p class="button-label">{@render children()}</p>
+  <div class="button-label">
+    <p class:small={subtitle != null}>{@render children()}</p>
+    {#if subtitle != null}
+      <p class="button-subtitle meta-info">{@render subtitle()}</p>
+    {/if}
+  </div>
   {#if icon}
     <div class="button-icon">
       {@render icon()}
