@@ -15,12 +15,9 @@
   const { movie, ratings } = useMovie($page.params.slug);
   const type = "movie";
 
-  const {
-    markAsWatched,
-    isLoading: isMarkingAsWatched,
-    isWatched,
-  } = useMarkAsWatched({
+  const { markAsWatched, isMarkingAsWatched, isWatched } = useMarkAsWatched({
     type,
+    id: $movie?.id,
   });
 
   const { isAddingToWatchlist, watchlist, isWatchlisted } = useWatchlist({
@@ -55,7 +52,7 @@
             label={m.mark_as_watched_label({ title: $movie.title })}
             variant="custom"
             onclick={() => markAsWatched($movie.id)}
-            disabled={isMarkingAsWatched($movie.id) || isWatched($movie.id)}
+            disabled={$isMarkingAsWatched || $isWatched}
             --color-background-button="var(--purple-100)"
             --color-foreground-button="var(--purple-600)"
           >

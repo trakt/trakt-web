@@ -14,12 +14,9 @@
 
   const { show, ratings } = useShow($page.params.slug);
   const type = "show";
-  const {
-    markAsWatched,
-    isLoading: isMarkingAsWatched,
-    isWatched,
-  } = useMarkAsWatched({
+  const { markAsWatched, isMarkingAsWatched, isWatched } = useMarkAsWatched({
     type,
+    id: $show?.id,
   });
 
   const { watchlist, isAddingToWatchlist, isWatchlisted } = useWatchlist({
@@ -54,7 +51,7 @@
             label={m.mark_as_watched_label({ title: $show.title })}
             variant="custom"
             onclick={() => markAsWatched($show.id)}
-            disabled={isMarkingAsWatched($show.id) || isWatched($show.id)}
+            disabled={$isMarkingAsWatched || $isWatched}
             --color-background-button="var(--purple-100)"
             --color-foreground-button="var(--purple-600)"
           >
