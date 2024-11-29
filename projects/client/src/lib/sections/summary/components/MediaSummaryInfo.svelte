@@ -4,6 +4,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
+  import * as m from "$lib/features/i18n/messages";
   import type { MediaSummary } from "./MediaSummary";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 
@@ -22,7 +23,7 @@
 <div class="trakt-info-actions">
   <Link href={media.trailer} target="_blank">
     <Button label={"Trailer"} variant="vip">
-      Watch the Trailer
+      {m.watch_the_trailer()}
       {#snippet subtitle()}
         YouTube
       {/snippet}

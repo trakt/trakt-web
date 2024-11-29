@@ -59,5 +59,6 @@
   "genre_mini_series": "Mini-série",
   "genre_science_fiction": "La science-fiction",
   "remove_from_watchlist": "Retirer de ma liste",
-  "remove_from_watchlist_label": "Supprimez {title} de votre liste de surveillance"
+  "remove_from_watchlist_label": "Supprimez {title} de votre liste de surveillance",
+  "watch_the_trailer": "Regardez la bande-annonce"
 }

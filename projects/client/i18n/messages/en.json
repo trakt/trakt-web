@@ -59,5 +59,6 @@
   "genre_mini_series": "Mini Series",
   "genre_science_fiction": "Science Fiction",
   "remove_from_watchlist": "Remove from Watchlist",
-  "remove_from_watchlist_label": "Remove {title} from your watchlist"
+  "remove_from_watchlist_label": "Remove {title} from your watchlist",
+  "watch_the_trailer": "Watch the Trailer"
 }
