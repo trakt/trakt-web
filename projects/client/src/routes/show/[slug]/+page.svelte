@@ -3,7 +3,7 @@
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { useShow } from "./useShow";
 
-  const { show, ratings } = useShow($page.params.slug);
+  const { show, ratings } = $derived(useShow($page.params.slug));
 </script>
 
 {#if $show != null && $ratings != null}
