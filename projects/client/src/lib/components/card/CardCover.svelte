@@ -18,7 +18,7 @@
     {@render tags?.()}
   </div>
   <div class="card-cover-image">
-    <img {src} {alt} onload={() => (isImagePending = false)} />
+    <img {src} {alt} onload={() => (isImagePending = false)} loading="lazy" />
   </div>
 </div>
 
