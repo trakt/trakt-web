@@ -40,7 +40,7 @@
 
   {#if state === "added"}
     <path
-      class:when-added={state === "added"}
+      class:when-active={state === "added"}
       d="M9.17157 9.17157L14.8284 14.8284 M14.8284 9.17157L9.17158 14.8284"
       stroke="currentColor"
       stroke-width={strokeWidth}
