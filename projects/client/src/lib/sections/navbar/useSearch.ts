@@ -24,7 +24,7 @@ export function useSearch() {
       query,
     }));
 
-    results.set(response);
+    results.set(response.filter((result) => result.year != null));
   }
 
   return {
