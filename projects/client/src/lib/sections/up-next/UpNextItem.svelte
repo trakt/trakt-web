@@ -11,10 +11,12 @@
 
   const { episode, onMarkAsWatched }: UpNextItemProps = $props();
 
-  const { isMarkingAsWatched, markAsWatched } = useMarkAsWatched({
-    id: episode.id,
-    type: "episode",
-  });
+  const { isMarkingAsWatched, markAsWatched } = $derived(
+    useMarkAsWatched({
+      id: episode.id,
+      type: "episode",
+    }),
+  );
 </script>
 
 <UpNextEpisode
