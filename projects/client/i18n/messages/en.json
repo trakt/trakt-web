@@ -60,5 +60,6 @@
   "genre_science_fiction": "Science Fiction",
   "remove_from_watchlist": "Remove from Watchlist",
   "remove_from_watchlist_label": "Remove {title} from your watchlist",
-  "watch_the_trailer": "Watch the Trailer"
+  "watch_the_trailer": "Watch the Trailer",
+  "search_placeholder": "Seek and ye shall find... (maybe)"
 }

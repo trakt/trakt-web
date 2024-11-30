@@ -60,5 +60,6 @@
   "genre_science_fiction": "La science-fiction",
   "remove_from_watchlist": "Retirer de ma liste",
   "remove_from_watchlist_label": "Supprimez {title} de votre liste de surveillance",
-  "watch_the_trailer": "Regardez la bande-annonce"
+  "watch_the_trailer": "Regardez la bande-annonce",
+  "search_placeholder": "Cherchez et vous trouverez... (peut-être)"
 }
