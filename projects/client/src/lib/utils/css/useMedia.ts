@@ -5,6 +5,7 @@ export const enum WellKnownMediaQuery {
   mobile = '(max-width: 480px)',
   tablet = '(min-width: 481px) and (max-width: 768px)',
   desktop = '(min-width: 769px)',
+  large = '(min-width: 1024px)',
 }
 
 export function useMedia(query: string) {

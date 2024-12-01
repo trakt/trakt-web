@@ -5,15 +5,18 @@
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { useMedia, WellKnownMediaQuery } from "$lib/utils/css/useMedia";
   import type { MediaSummary } from "./MediaSummary";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 
   const { media, ratings }: MediaSummaryProps<MediaSummary> = $props();
+  const isLargeDisplay = useMedia(WellKnownMediaQuery.large);
+  const genreCount = $derived($isLargeDisplay ? -1 : 3);
 </script>
 
 <div class="trakt-summary-header">
   <h3>{media.title}</h3>
-  <GenreList genres={media.genres} />
+  <GenreList genres={media.genres.slice(0, genreCount)} />
 </div>
 
 <RatingList {ratings} />
