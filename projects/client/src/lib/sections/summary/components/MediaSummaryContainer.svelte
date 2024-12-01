@@ -30,7 +30,7 @@
     grid-template-columns: 1fr 2fr 1fr;
     margin: 0 var(--ni-56);
 
-    @media (max-width: 680px) {
+    @media (max-width: 768px) {
       grid-template-columns: 1fr;
 
       :global(.trakt-summary-poster) {
