@@ -15,13 +15,16 @@ const environment = (() => {
 
 export type ApiParams = {
   fetch?: typeof fetch;
+  cancellable?: boolean;
 };
 
 export const api = ({
   fetch = globalThis.fetch,
+  cancellable = false,
 }: ApiParams = {}) =>
   traktApi({
     apiKey: TRAKT_CLIENT_ID,
     environment,
     fetch,
+    cancellable,
   });
