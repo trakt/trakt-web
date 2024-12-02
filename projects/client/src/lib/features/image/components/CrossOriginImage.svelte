@@ -10,15 +10,7 @@
 
   const { alt, src, onLoad }: CrossOriginImageProps = $props();
 
-  const response = writable({ uri: "" });
-
-  $effect(() => {
-    if (!src) {
-      return;
-    }
-
-    resolveEnvironmentUri(src).then(response.set);
-  });
+  const response = writable({ uri: src });
 
   const isImageLoaded = writable(false);
 </script>
@@ -27,6 +19,7 @@
   class:image-loaded={$isImageLoaded}
   src={$response.uri}
   {alt}
+  onerror={() => resolveEnvironmentUri(src).then(response.set)}
   onload={() => {
     requestAnimationFrame(() => isImageLoaded.set(true));
     onLoad?.();
