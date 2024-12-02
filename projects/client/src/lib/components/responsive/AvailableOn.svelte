@@ -19,10 +19,6 @@
   const shouldRenderDesktop = $derived(isAvailableForDesktop && $isDesktop);
   const shouldRenderTablet = $derived(isAvailableForTablet && $isTablet);
   const shouldRenderMobile = $derived(isAvailableForMobile && $isMobile);
-
-  if (device.length === 2) {
-    $inspect({ shouldRenderMobile, shouldRenderTablet, shouldRenderDesktop });
-  }
 </script>
 
 {#if shouldRenderDesktop || shouldRenderTablet || shouldRenderMobile}
