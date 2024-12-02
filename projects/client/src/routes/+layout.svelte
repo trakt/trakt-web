@@ -99,7 +99,16 @@
         <Navbar />
         {@render children()}
       </UserProvider>
-      <SvelteQueryDevtools />
+      <SvelteQueryDevtools
+        buttonPosition="bottom-left"
+        styleNonce="opacity: 0.5"
+      />
     </QueryClientProvider>
   </ThemeProvider>
 </ParaglideJS>
+
+<style>
+  :global(.tsqd-open-btn-container) {
+    opacity: 0.25;
+  }
+</style>
