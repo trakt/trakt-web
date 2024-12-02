@@ -1,15 +1,17 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import UpNextEpisode from "$lib/components/episode/up-next/UpNextEpisode.svelte";
-  import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
+  import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
+  import type { ShowMeta } from "$lib/models/ShowMeta";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
 
   type UpNextItemProps = {
-    episode: UpNextEntry;
+    episode: EpisodeProgressEntry;
+    show: ShowMeta;
     onMarkAsWatched: () => void;
   };
 
-  const { episode, onMarkAsWatched }: UpNextItemProps = $props();
+  const { episode, show, onMarkAsWatched }: UpNextItemProps = $props();
 
   const { isMarkingAsWatched, markAsWatched } = $derived(
     useMarkAsWatched({
@@ -24,7 +26,7 @@
   episodeNumber={episode.number}
   seasonNumber={episode.season}
   posterUrl={episode.poster.url}
-  showTitle={episode.show.title}
+  showTitle={show.title}
   episodeTitle={episode.title}
   completed={episode.completed}
   total={episode.total}

@@ -5,16 +5,14 @@ import {
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
 import type { Paginatable } from '$lib/models/Paginatable.ts';
+import type { ShowMeta } from '$lib/models/ShowMeta.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { EpisodeProgressEntry } from '../../../models/EpisodeProgressEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
-import type { EpisodeEntry } from '../calendars/upcomingEpisodesQuery.ts';
 
-export type UpNextEntry = EpisodeEntry & {
-  total: number;
-  completed: number;
-  remaining: number;
-  runtime: number;
+export type UpNextEntry = EpisodeProgressEntry & {
+  show: ShowMeta;
 };
 
 type UpNextParams = {

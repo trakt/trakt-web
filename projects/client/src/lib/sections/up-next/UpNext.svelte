@@ -1,7 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import UpNextItem from "./UpNextItem.svelte";
+  import EpisodeProgressItem from "./EpisodeProgressItem.svelte";
   import { useUpNextEpisodes } from "./useUpNextEpisodes";
 
   const { list, reload } = useUpNextEpisodes();
@@ -12,6 +12,10 @@
   --height-section-list="var(--height-episode-list)"
 >
   {#each $list as episode (episode.show.id)}
-    <UpNextItem {episode} onMarkAsWatched={reload} />
+    <EpisodeProgressItem
+      {episode}
+      show={episode.show}
+      onMarkAsWatched={reload}
+    />
   {/each}
 </SectionList>
