@@ -3,12 +3,17 @@
     children,
     href,
     target,
+    color,
     ...props
-  }: ChildrenProps & HTMLAnchorProps & HTMLElementProps = $props();
+  }: ChildrenProps &
+    HTMLAnchorProps &
+    HTMLElementProps & {
+      color?: "inherit" | "default";
+    } = $props();
 </script>
 
 {#if href}
-  <a {href} {target} class="trakt-link" {...props}>
+  <a {href} {target} data-color={color} class="trakt-link" {...props}>
     {@render children?.()}
   </a>
 {:else}
@@ -24,8 +29,27 @@
     text-decoration: none;
     cursor: pointer;
 
+    :global(*) {
+      transition: color calc(var(--transition-increment) / 2) ease-in-out;
+    }
+
     &:visited {
       color: inherit;
+    }
+
+    &:hover {
+      :global(*) {
+        color: var(--color-text-secondary);
+      }
+    }
+
+    &[data-color="inherit"] {
+      color: inherit;
+
+      &:visited,
+      &:hover {
+        color: inherit;
+      }
     }
   }
 </style>

@@ -44,7 +44,7 @@
 </script>
 
 <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
-  <Link href="/">
+  <Link color="inherit" href="/">
     <div class="trakt-logo">
       <Logo />
     </div>
