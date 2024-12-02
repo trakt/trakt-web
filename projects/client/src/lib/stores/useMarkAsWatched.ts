@@ -76,7 +76,6 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
       }),
     });
     isMarkingAsWatched.set(false);
-    console.log('result', result);
     _isWatched.set(result);
   };
 
