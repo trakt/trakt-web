@@ -2,7 +2,7 @@
   import AvailableOn from "$lib/components/responsive/AvailableOn.svelte";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { ShowSummary } from "$lib/requests/queries/shows/showSummaryQuery";
-  import EpisodeProgressItem from "../up-next/EpisodeProgressItem.svelte";
+  import NextEpisodeItem from "../up-next/NextEpisodeItem.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/MediaSummaryProps";
 
@@ -18,7 +18,7 @@
 {#snippet contextualContent()}
   <AvailableOn device={["desktop"]}>
     {#if progress}
-      <EpisodeProgressItem episode={progress} show={media} {onMarkAsWatched} />
+      <NextEpisodeItem episode={progress} show={media} {onMarkAsWatched} />
     {/if}
   </AvailableOn>
 {/snippet}

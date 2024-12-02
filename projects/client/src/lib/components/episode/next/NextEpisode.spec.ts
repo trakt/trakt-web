@@ -1,5 +1,5 @@
 // TODO fix typings in vs code
-import UpNextEpisode from '$lib/components/episode/up-next/UpNextEpisode.svelte';
+import NextEpisode from './NextEpisode.svelte';
 
 import { EpisodeIntlProvider } from '$lib/components/episode/EpisodeIntlProvider.ts';
 import {
@@ -11,7 +11,7 @@ import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, test, vi } from 'vitest';
 
-describe('UpNextEpisode', () => {
+describe('NextEpisode', () => {
   const defaultProps = {
     i18n: EpisodeIntlProvider,
     episodeNumber: 1,
@@ -30,7 +30,7 @@ describe('UpNextEpisode', () => {
 
   test('it renders the basic details', () => {
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: defaultProps,
       },
@@ -50,7 +50,7 @@ describe('UpNextEpisode', () => {
     const user = userEvent.setup();
 
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
@@ -67,7 +67,7 @@ describe('UpNextEpisode', () => {
 
   test('it disables the mark as watched button', () => {
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
@@ -84,7 +84,7 @@ describe('UpNextEpisode', () => {
     const episodeType = { type: EpisodeFinaleType.Season };
 
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
@@ -103,7 +103,7 @@ describe('UpNextEpisode', () => {
     const episodeType = { type: EpisodeFinaleType.Series };
 
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
@@ -122,7 +122,7 @@ describe('UpNextEpisode', () => {
     const episodeType = { type: EpisodeFinaleType.MidSeason };
 
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
@@ -141,7 +141,7 @@ describe('UpNextEpisode', () => {
     const episodeType = { type: EpisodePremiereType.Season };
 
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
@@ -160,7 +160,7 @@ describe('UpNextEpisode', () => {
     const episodeType = { type: EpisodePremiereType.Series };
 
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
@@ -179,7 +179,7 @@ describe('UpNextEpisode', () => {
     const episodeType = { type: EpisodePremiereType.MidSeason };
 
     render(
-      UpNextEpisode,
+      NextEpisode,
       {
         props: {
           ...defaultProps,
