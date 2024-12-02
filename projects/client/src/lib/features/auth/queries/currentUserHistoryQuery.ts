@@ -66,12 +66,15 @@ export type WatchedEpisode = MediaPlayHistory & {
 
 export type WatchedShow = WatchedMedia & {
   episodes: WatchedEpisode[];
+  isWatched: boolean;
 };
 
 function mapWatchedShowResponse(
   entry: WatchedShowsResponse[0],
 ): WatchedShow {
   const { show, last_watched_at, plays, seasons = [] } = entry;
+  const aired = entry.show.aired_episodes;
+
   const episodes = seasons
     .flatMap((season) =>
       season
@@ -87,6 +90,7 @@ function mapWatchedShowResponse(
   return {
     id: show.ids.trakt,
     watchedAt: new Date(last_watched_at),
+    isWatched: episodes.length === aired,
     plays,
     episodes,
   };

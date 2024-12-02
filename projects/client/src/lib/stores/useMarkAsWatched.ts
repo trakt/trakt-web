@@ -50,8 +50,13 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
           return $history.movies.has(id) || $_isWatched;
         case 'episode':
           return false;
-        case 'show':
-          throw new Error('Not implemented');
+        case 'show': {
+          if (!$history.shows.has(id)) {
+            return $_isWatched;
+          }
+
+          return $history.shows.get(id)!.isWatched;
+        }
       }
     },
   );
