@@ -44,7 +44,7 @@ function searchRequest({
   query,
   fetch,
 }: SearchParams): Promise<SearchResult[]> {
-  return api({ fetch })
+  return api({ fetch, cancellable: true })
     .search
     .query({
       query: {
@@ -71,4 +71,5 @@ export const searchQueryKey = (q: string) => ['search', q] as const;
 export const searchQuery = (params: SearchParams) => ({
   queryKey: searchQueryKey(params.query),
   queryFn: () => searchRequest(params),
+  retry: 0,
 });
