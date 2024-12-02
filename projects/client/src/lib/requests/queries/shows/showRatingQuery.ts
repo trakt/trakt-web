@@ -39,7 +39,7 @@ export function mapResponseToShowRating(
   };
 }
 
-export function upNextRequest(
+export function showRatingRequest(
   { fetch, slug }: ShowRatingParams,
 ): Promise<ShowRating> {
   return api({ fetch })
@@ -66,5 +66,5 @@ export const showRatingQuery = (
   params: ShowRatingParams,
 ) => ({
   queryKey: showRatingQueryKey(params.slug),
-  queryFn: () => upNextRequest(params),
+  queryFn: () => showRatingRequest(params),
 });
