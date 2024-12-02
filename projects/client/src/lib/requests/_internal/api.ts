@@ -1,5 +1,5 @@
 import { IS_DEV, IS_PREVIEW } from '$lib/utils/env/index.ts';
-import { Environment, traktApi } from '@trakt/api';
+import { Environment, traktApi, type TraktApiOptions } from '@trakt/api';
 
 const environment = (() => {
   if (IS_DEV) {
@@ -13,10 +13,7 @@ const environment = (() => {
   return Environment.production;
 })();
 
-export type ApiParams = {
-  fetch?: typeof fetch;
-  cancellable?: boolean;
-};
+export type ApiParams = Omit<TraktApiOptions, 'apiKey' | 'environment'>;
 
 export const api = ({
   fetch = globalThis.fetch,
