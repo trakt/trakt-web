@@ -24,7 +24,7 @@
 <p class="trakt-media-overview secondary">{media.overview}</p>
 
 <div class="trakt-info-actions">
-  <Link href={media.trailer} target="_blank">
+  <Link color="inherit" href={media.trailer} target="_blank">
     <Button label={"Trailer"} variant="vip">
       {m.watch_the_trailer()}
       {#snippet subtitle()}

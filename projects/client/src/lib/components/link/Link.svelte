@@ -34,7 +34,9 @@
     }
 
     &:visited {
-      color: inherit;
+      :global(*) {
+        color: inherit;
+      }
     }
 
     &:hover {
@@ -44,11 +46,15 @@
     }
 
     &[data-color="inherit"] {
-      color: inherit;
+      :global(*) {
+        color: inherit;
+      }
 
       &:visited,
       &:hover {
-        color: inherit;
+        :global(*) {
+          color: inherit;
+        }
       }
     }
   }
