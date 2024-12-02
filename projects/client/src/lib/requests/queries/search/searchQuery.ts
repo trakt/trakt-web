@@ -10,6 +10,7 @@ export type SearchParams = {
 export type SearchResult = {
   type: MediaType;
   id: number;
+  slug: string;
   title: string;
   year: number;
 };
@@ -33,6 +34,7 @@ function mapToSearchResultEntry(
   return {
     type,
     id: media.ids.trakt,
+    slug: media.ids.slug,
     title: media.title,
     year: media.year,
   };

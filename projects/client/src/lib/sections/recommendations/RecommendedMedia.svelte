@@ -11,10 +11,8 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
-  import {
-    type RecommendedMedia,
-    type RecommendedMediaItem,
-  } from "./stores/useRecommendationList";
+  import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
+  import { type RecommendedMediaItem } from "./stores/useRecommendationList";
 
   type RecommendationItemProps = {
     recommendation: RecommendedMediaItem;
@@ -32,14 +30,10 @@
     type,
     id: recommendation.id,
   });
-
-  function buildLink(type: MediaType, item: RecommendedMedia[0]) {
-    return type === "movie" ? `/movie/${item.slug}` : `/show/${item.slug}`;
-  }
 </script>
 
 <PosterCard>
-  <Link href={buildLink(type, recommendation)}>
+  <Link href={buildMediaLink(type, recommendation.slug)}>
     <PosterCover
       src={recommendation.poster.url}
       alt={`${recommendation.title} poster`}

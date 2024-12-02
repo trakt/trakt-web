@@ -4,7 +4,9 @@
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import * as m from "$lib/features/i18n/messages";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
-  import type { MediaType } from "$lib/models/MediaType";
+  import { useMedia, WellKnownMediaQuery } from "$lib/utils/css/useMedia";
+  import { debounce } from "$lib/utils/timing/debounce";
+  import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
   import { onMount } from "svelte";
   import { useSearch } from "./useSearch";
 
@@ -26,26 +28,16 @@
     };
   });
 
-  function debounce(func: (...args: any[]) => void, wait: number) {
-    let timeout: NodeJS.Timeout;
-    return function executedFunction(...args: any[]) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
-  const onSearch = debounce((ev: Event) => {
-    search((ev.target as HTMLInputElement).value);
-  }, 250);
-
-  // FIXME: dedupe
-  function buildLink(type: MediaType, item: number) {
-    return type === "movie" ? `/movie/${item}` : `/show/${item}`;
-  }
+  const onSearch = $derived(
+    debounce(
+      (ev: Event) => {
+        search((ev.target as HTMLInputElement).value);
+      },
+      $isDesktop ? 150 : 250,
+    ),
+  );
 
   let inputElement: HTMLInputElement;
 </script>
@@ -69,7 +61,7 @@
       <div class="trakt-search-results">
         {#each $results as result}
           <Link
-            href={buildLink(result.type, result.id)}
+            href={buildMediaLink(result.type, result.slug)}
             onclick={() => {
               inputElement.value = "";
               search("");

@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { onDestroy, onMount } from 'svelte';
 import { writable } from 'svelte/store';
 
@@ -10,7 +11,11 @@ export const enum WellKnownMediaQuery {
 
 export function useMedia(query: string) {
   const value = writable(false);
-  const media = globalThis.matchMedia(query);
+  const media = browser ? globalThis.matchMedia(query) : {
+    matches: false,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  };
 
   function updateValue() {
     value.set(media.matches);
