@@ -1,6 +1,7 @@
 <script lang="ts">
   import MarkAsWatchedActionButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedActionButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import type { EpisodeType } from "$lib/models/EpisodeType";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
@@ -21,6 +22,7 @@
     onMarkAsWatched: () => void;
     type: EpisodeType;
     isLoading: boolean;
+    showHref?: string;
   };
 
   const {
@@ -37,6 +39,7 @@
     onMarkAsWatched,
     type,
     isLoading,
+    showHref,
   }: EpisodeProps = $props();
 
   const duration = $derived(remaining * runtime);
@@ -59,7 +62,9 @@
     {/snippet}
   </EpisodeCover>
   <CardFooter>
-    <p class="episode-show-title ellipsis">{showTitle}</p>
+    <Link href={showHref}>
+      <p class="episode-show-title ellipsis">{showTitle}</p>
+    </Link>
     <p class="episode-title small ellipsis">
       {seasonNumber}x{episodeNumber} - {episodeTitle}
     </p>

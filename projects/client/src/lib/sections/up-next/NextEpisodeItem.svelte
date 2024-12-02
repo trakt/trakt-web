@@ -3,6 +3,7 @@
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { ShowMeta } from "$lib/models/ShowMeta";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
+  import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
   import NextEpisode from "../../components/episode/next/NextEpisode.svelte";
 
   type UpNextItemProps = {
@@ -34,6 +35,7 @@
   runtime={episode.runtime}
   type={episode.type}
   isLoading={$isMarkingAsWatched}
+  showHref={buildMediaLink("show", show.slug)}
   onMarkAsWatched={async () => {
     await markAsWatched();
     onMarkAsWatched();

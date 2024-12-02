@@ -1,5 +1,6 @@
 <script lang="ts">
   import CardFooter from "$lib/components/card/CardFooter.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import { type EpisodeType } from "$lib/models/EpisodeType";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
@@ -15,6 +16,7 @@
     seasonNumber: number;
     airedDate: Date;
     type: EpisodeType;
+    showHref?: string;
   };
 
   const {
@@ -26,6 +28,7 @@
     seasonNumber,
     airedDate,
     type,
+    showHref,
   }: EpisodeProps = $props();
 </script>
 
@@ -43,7 +46,9 @@
     {/snippet}
   </EpisodeCover>
   <CardFooter>
-    <p class="episode-show-title ellipsis">{showTitle}</p>
+    <Link href={showHref}>
+      <p class="episode-show-title ellipsis">{showTitle}</p>
+    </Link>
     <p class="episode-title ellipsis small">
       {seasonNumber}x{episodeNumber} - {episodeTitle}
     </p>
