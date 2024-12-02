@@ -1,3 +1,6 @@
+import {
+  showProgressQuery,
+} from '$lib/requests/queries/shows/showProgressQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import { showRatingQuery } from '../../../lib/requests/queries/shows/showRatingQuery.ts';
@@ -16,8 +19,15 @@ export function useShow(slug: string) {
     }),
   );
 
+  const progress = createQuery(
+    showProgressQuery({
+      slug,
+    }),
+  );
+
   return {
     show: derived(show, ($movie) => $movie.data),
     ratings: derived(ratings, ($ratings) => $ratings.data),
+    progress: derived(progress, ($progress) => $progress.data),
   };
 }

@@ -51,4 +51,10 @@
     align-self: end;
     gap: var(--ni-32);
   }
+
+  .trakt-summary-contextual-content {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+  }
 </style>
