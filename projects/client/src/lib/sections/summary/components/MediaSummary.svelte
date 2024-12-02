@@ -50,12 +50,12 @@
     onRemove: removeFromWatchlist,
   });
 
-  const markWasWatchedProps: MarkAsWatchedButtonProps = {
+  const markWasWatchedProps: MarkAsWatchedButtonProps = $derived({
     title: media.title,
     isMarkingAsWatched: $isMarkingAsWatched,
     isWatched: $isWatched,
     onWatch: markAsWatched,
-  };
+  });
 </script>
 
 <BackgroundCoverImage src={media.cover.url} {type} />
