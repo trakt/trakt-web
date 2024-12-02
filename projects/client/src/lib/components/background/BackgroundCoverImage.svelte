@@ -18,6 +18,8 @@
   .background-cover-image {
     z-index: -1;
     position: absolute;
+    max-height: 100dvh;
+    overflow: hidden;
 
     top: 0;
     left: 0;
