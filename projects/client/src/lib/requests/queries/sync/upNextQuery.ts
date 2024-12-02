@@ -36,6 +36,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
     show: {
       title: item.show.title,
       id: item.show.ids.trakt,
+      slug: item.show.ids.slug,
     },
     title: episode.title,
     season: episode.season,

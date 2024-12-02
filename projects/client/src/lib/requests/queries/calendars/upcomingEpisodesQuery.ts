@@ -30,6 +30,7 @@ function mapResponseToEpisodeEntry(
     id: item.episode.ids.trakt,
     show: {
       id: item.show.ids.trakt,
+      slug: item.show.ids.slug,
       title: item.show.title,
     },
     type: item.episode.episode_type as EpisodeType ??
