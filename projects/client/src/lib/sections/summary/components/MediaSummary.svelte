@@ -64,7 +64,7 @@
   {#snippet poster()}
     <SummaryPoster src={media.poster.url} alt={media.title}>
       {#snippet actions()}
-        <AvailableOn device={["desktop"]}>
+        <AvailableOn device={["tablet-lg", "desktop"]}>
           <WatchlistButton {...watchlistProps} />
           <MarkAsWatchedButton {...markWasWatchedProps} />
         </AvailableOn>
@@ -74,7 +74,7 @@
 
   <MediaSummaryInfo {media} {ratings} />
 
-  <AvailableOn device={["mobile", "tablet"]}>
+  <AvailableOn device={["mobile", "tablet-sm"]}>
     <div class="trakt-media-action-container">
       <WatchlistActionButton {...watchlistProps} />
       <MarkAsWatchedActionButton {...markWasWatchedProps} />

@@ -3,9 +3,9 @@ import { writable } from 'svelte/store';
 
 export const enum WellKnownMediaQuery {
   mobile = '(max-width: 480px)',
-  tablet = '(min-width: 481px) and (max-width: 768px)',
-  desktop = '(min-width: 769px)',
-  large = '(min-width: 1024px)',
+  tabletSmall = '(min-width: 481px) and (max-width: 768px)',
+  tabletLarge = '(min-width: 769px) and (max-width: 1023px)',
+  desktop = '(min-width: 1024px)',
 }
 
 export function useMedia(query: string) {

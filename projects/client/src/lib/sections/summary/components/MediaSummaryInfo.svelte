@@ -10,7 +10,7 @@
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 
   const { media, ratings }: MediaSummaryProps<MediaSummary> = $props();
-  const isLargeDisplay = useMedia(WellKnownMediaQuery.large);
+  const isLargeDisplay = useMedia(WellKnownMediaQuery.desktop);
   const genreCount = $derived($isLargeDisplay ? -1 : 3);
 </script>
 

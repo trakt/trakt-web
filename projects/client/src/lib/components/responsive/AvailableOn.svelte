@@ -5,22 +5,29 @@
     children,
     device,
   }: ChildrenProps & {
-    device: Array<"mobile" | "tablet" | "desktop">;
+    device: Array<"mobile" | "tablet-sm" | "tablet-lg" | "desktop">;
   } = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const isTablet = useMedia(WellKnownMediaQuery.tablet);
+  const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
+  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   const isAvailableForMobile = $derived(device.includes("mobile"));
-  const isAvailableForTablet = $derived(device.includes("tablet"));
+  const isAvailableForTabletSmall = $derived(device.includes("tablet-sm"));
+  const isAvailableForTabletLarge = $derived(device.includes("tablet-lg"));
   const isAvailableForDesktop = $derived(device.includes("desktop"));
 
-  const shouldRenderDesktop = $derived(isAvailableForDesktop && $isDesktop);
-  const shouldRenderTablet = $derived(isAvailableForTablet && $isTablet);
   const shouldRenderMobile = $derived(isAvailableForMobile && $isMobile);
+  const shouldRenderTabletSmall = $derived(
+    isAvailableForTabletSmall && $isTabletSmall,
+  );
+  const shouldRenderTabletLarge = $derived(
+    isAvailableForTabletLarge && $isTabletLarge,
+  );
+  const shouldRenderDesktop = $derived(isAvailableForDesktop && $isDesktop);
 </script>
 
-{#if shouldRenderDesktop || shouldRenderTablet || shouldRenderMobile}
+{#if shouldRenderMobile || shouldRenderTabletSmall || shouldRenderTabletLarge || shouldRenderDesktop}
   {@render children()}
 {/if}
