@@ -1,5 +1,5 @@
 <script lang="ts">
-  import AvailableOn from "$lib/components/responsive/AvailableOn.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { ShowSummary } from "$lib/requests/queries/shows/showSummaryQuery";
   import NextEpisodeItem from "../up-next/NextEpisodeItem.svelte";
@@ -16,11 +16,11 @@
 </script>
 
 {#snippet contextualContent()}
-  <AvailableOn device={["desktop"]}>
+  <RenderFor device={["desktop"]}>
     {#if progress}
       <NextEpisodeItem episode={progress} show={media} {onMarkAsWatched} />
     {/if}
-  </AvailableOn>
+  </RenderFor>
 {/snippet}
 
 <MediaSummary {media} {ratings} type="show" {contextualContent} />

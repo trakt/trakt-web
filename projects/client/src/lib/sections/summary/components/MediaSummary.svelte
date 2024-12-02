@@ -6,8 +6,8 @@
   import WatchlistActionButton from "$lib/components/buttons/watchlist/WatchlistActionButton.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import type { WatchlistButtonProps } from "$lib/components/buttons/watchlist/WatchlistButtonProps";
-  import AvailableOn from "$lib/components/responsive/AvailableOn.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
@@ -64,23 +64,23 @@
   {#snippet poster()}
     <SummaryPoster src={media.poster.url} alt={media.title}>
       {#snippet actions()}
-        <AvailableOn device={["tablet-lg", "desktop"]}>
+        <RenderFor device={["tablet-lg", "desktop"]}>
           <WatchlistButton {...watchlistProps} />
           <MarkAsWatchedButton {...markWasWatchedProps} />
-        </AvailableOn>
+        </RenderFor>
       {/snippet}
     </SummaryPoster>
   {/snippet}
 
   <MediaSummaryInfo {media} {ratings} />
 
-  <AvailableOn device={["mobile", "tablet-sm"]}>
+  <RenderFor device={["mobile", "tablet-sm"]}>
     <div class="trakt-media-action-container">
       <WatchlistActionButton {...watchlistProps} />
       <MarkAsWatchedActionButton {...markWasWatchedProps} />
     </div>
     <div class="trakt-media-action-spacer"></div>
-  </AvailableOn>
+  </RenderFor>
 </MediaSummaryContainer>
 
 <style>

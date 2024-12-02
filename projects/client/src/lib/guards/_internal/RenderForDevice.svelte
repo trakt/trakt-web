@@ -1,12 +1,8 @@
 <script lang="ts">
   import { useMedia, WellKnownMediaQuery } from "$lib/utils/css/useMedia";
+  import type { DeviceProps } from "./DeviceProps";
 
-  const {
-    children,
-    device,
-  }: ChildrenProps & {
-    device: Array<"mobile" | "tablet-sm" | "tablet-lg" | "desktop">;
-  } = $props();
+  const { children, device }: ChildrenProps & DeviceProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isTabletSmall = useMedia(WellKnownMediaQuery.tabletSmall);
