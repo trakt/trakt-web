@@ -3,10 +3,14 @@
 
   type MediaSummaryContainerProps = {
     poster: Snippet;
-    actions?: Snippet;
+    contextualContent?: Snippet;
   } & ChildrenProps;
 
-  const { poster, actions, children }: MediaSummaryContainerProps = $props();
+  const {
+    poster,
+    contextualContent: content,
+    children,
+  }: MediaSummaryContainerProps = $props();
 </script>
 
 <div class="trakt-summary-container">
@@ -16,9 +20,9 @@
   <div class="trakt-summary-children">
     {@render children()}
   </div>
-  {#if actions}
-    <div class="trakt-summary-actions">
-      {@render actions()}
+  {#if content}
+    <div class="trakt-summary-contextual-content">
+      {@render content()}
     </div>
   {/if}
 </div>

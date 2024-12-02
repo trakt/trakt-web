@@ -11,6 +11,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
+  import type { Snippet } from "svelte";
   import type { MediaSummary } from "./MediaSummary";
   import MediaSummaryContainer from "./MediaSummaryContainer.svelte";
   import MediaSummaryInfo from "./MediaSummaryInfo.svelte";
@@ -20,8 +21,10 @@
     media,
     ratings,
     type,
+    contextualContent,
   }: MediaSummaryProps<MediaSummary> & {
     type: MediaType;
+    contextualContent?: Snippet;
   } = $props();
 
   const { markAsWatched, isMarkingAsWatched, isWatched } = useMarkAsWatched({
@@ -57,7 +60,7 @@
 
 <BackgroundCoverImage src={media.cover.url} {type} />
 
-<MediaSummaryContainer>
+<MediaSummaryContainer {contextualContent}>
   {#snippet poster()}
     <SummaryPoster src={media.poster.url} alt={media.title}>
       {#snippet actions()}
