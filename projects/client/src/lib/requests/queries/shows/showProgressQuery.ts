@@ -1,6 +1,6 @@
 import type { ShowProgressResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
-import { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry.ts';
+import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry.ts';
 import {
   type EpisodeType,
   EpisodeUnknownType,

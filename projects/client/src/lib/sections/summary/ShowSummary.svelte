@@ -1,26 +1,24 @@
 <script lang="ts">
   import AvailableOn from "$lib/components/responsive/AvailableOn.svelte";
-  import type { ShowProgress } from "$lib/requests/queries/shows/showProgressQuery";
+  import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { ShowSummary } from "$lib/requests/queries/shows/showSummaryQuery";
   import EpisodeProgressItem from "../up-next/EpisodeProgressItem.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/MediaSummaryProps";
 
   type ShowSummaryProps = MediaSummaryProps<ShowSummary> & {
-    progress?: ShowProgress;
+    progress?: EpisodeProgressEntry;
+    onMarkAsWatched: () => void;
   };
 
-  const { media, ratings, progress }: ShowSummaryProps = $props();
+  const { media, ratings, progress, onMarkAsWatched }: ShowSummaryProps =
+    $props();
 </script>
 
 {#snippet contextualContent()}
   <AvailableOn device={["desktop"]}>
     {#if progress}
-      <EpisodeProgressItem
-        episode={progress}
-        show={media}
-        onMarkAsWatched={() => {}}
-      />
+      <EpisodeProgressItem episode={progress} show={media} {onMarkAsWatched} />
     {/if}
   </AvailableOn>
 {/snippet}
