@@ -1,6 +1,7 @@
 import type { SearchResultResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 export type SearchParams = {
@@ -13,6 +14,9 @@ export type SearchResult = {
   slug: string;
   title: string;
   year: number;
+  poster: {
+    url: string;
+  };
 };
 
 function mapToSearchResultEntry(
@@ -37,6 +41,12 @@ function mapToSearchResultEntry(
     slug: media.ids.slug,
     title: media.title,
     year: media.year,
+    poster: {
+      url: prependHttps(
+        media.images?.poster.at(1) ??
+          media.images?.poster.at(0),
+      )!,
+    },
   };
 }
 
@@ -49,6 +59,7 @@ function searchRequest({
     .query({
       query: {
         query,
+        extended: 'cloud9',
       },
       params: {
         type: 'movie,show',

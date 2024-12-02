@@ -3,6 +3,7 @@
   import Logo from "$lib/components/logo/Logo.svelte";
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/utils/css/useMedia";
   import { debounce } from "$lib/utils/timing/debounce";
@@ -48,6 +49,7 @@
       <Logo />
     </div>
   </Link>
+  <!-- FIXME: extract component -->
   <div class="trakt-search">
     <input
       bind:this={inputElement}
@@ -68,7 +70,8 @@
             }}
           >
             <div class="trakt-search-result-item">
-              {result.title} ({result.year})
+              <CrossOriginImage alt={result.title} src={result.poster.url} />
+              <span>{result.title} ({result.year})</span>
             </div>
           </Link>
         {/each}
@@ -112,20 +115,40 @@
       left: 0;
       right: 0;
 
-      background: rgba(25, 28, 30, 0.7);
+      background: color-mix(
+        in srgb,
+        var(--color-background) 80%,
+        transparent 20%
+      );
       backdrop-filter: blur(var(--ni-8));
       border-radius: var(--ni-8);
       padding: var(--ni-8);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       z-index: 999;
 
+      max-height: 80vh;
+      overflow: hidden;
+      overflow-y: scroll;
+
       .trakt-search-result-item {
         padding: var(--ni-8);
         border-radius: var(--ni-8);
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: var(--ni-16);
+
+        :global(img) {
+          height: var(--ni-96);
+          border-radius: var(--ni-8);
+        }
 
         &:hover {
-          background: rgba(255, 255, 255, 0.1);
+          background-color: color-mix(
+            in srgb,
+            var(--color-foreground) 5%,
+            transparent 95%
+          );
         }
       }
     }
