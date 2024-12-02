@@ -44,11 +44,11 @@
 </script>
 
 <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
-  <Link color="inherit" href="/">
-    <div class="trakt-logo">
+  <div class="trakt-logo">
+    <Link color="inherit" href="/">
       <Logo />
-    </div>
-  </Link>
+    </Link>
+  </div>
   <!-- FIXME: extract component -->
   <div class="trakt-search">
     <input
@@ -62,18 +62,18 @@
     {#if $results.length > 0}
       <div class="trakt-search-results">
         {#each $results as result}
-          <Link
-            href={buildMediaLink(result.type, result.slug)}
-            onclick={() => {
-              inputElement.value = "";
-              search("");
-            }}
-          >
-            <div class="trakt-search-result-item">
+          <div class="trakt-search-result-item">
+            <Link
+              href={buildMediaLink(result.type, result.slug)}
+              onclick={() => {
+                inputElement.value = "";
+                search("");
+              }}
+            >
               <CrossOriginImage alt={result.title} src={result.poster.url} />
               <span>{result.title} ({result.year})</span>
-            </div>
-          </Link>
+            </Link>
+          </div>
         {/each}
       </div>
     {/if}
@@ -199,6 +199,8 @@
   }
 
   .trakt-logo {
-    width: var(--ni-32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
