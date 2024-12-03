@@ -7,6 +7,7 @@
     style?: "textured" | "flat" | "ghost";
     icon?: Snippet;
     subtitle?: Snippet;
+    size?: "normal" | "small";
   };
 
   const {
@@ -16,6 +17,7 @@
     style = "flat",
     icon,
     subtitle,
+    size = "normal",
     ...props
   }: TraktButtonProps = $props();
 
@@ -33,6 +35,7 @@
   data-variant={variant}
   data-alignment={alignment}
   data-style={style}
+  data-size={size}
 >
   <div class="button-label">
     <p class:small={subtitle != null}>{@render children()}</p>
@@ -54,6 +57,8 @@
       var(--color-background-button) 10%,
       var(--color-foreground) 90%
     );
+
+    --scale-factor-button: 1;
 
     --color-background-button-light: color-mix(
       in srgb,
@@ -112,11 +117,17 @@
     position: relative;
     overflow: hidden;
 
+    transform: scale(var(--scale-factor-button));
+
     transition: var(--transition-increment) ease-in-out;
     transition-property: box-shadow outline padding transform color background;
 
+    &[data-size="small"] {
+      --scale-factor-button: 0.75;
+    }
+
     & {
-      min-width: 11.25rem;
+      min-width: var(--ni-128);
     }
 
     &,
@@ -136,6 +147,7 @@
     }
 
     p,
+    .button-label,
     .button-icon {
       z-index: 1;
     }
@@ -184,7 +196,7 @@
 
     &[data-style="ghost"] {
       padding: var(--ni-16);
-      transform: scale(0.9);
+      transform: scale(calc(var(--scale-factor-button) * 0.9));
       background: transparent;
       color: inherit;
 
@@ -201,7 +213,7 @@
       }
 
       &:active:not([disabled]) {
-        transform: scale(0.87);
+        transform: scale(calc(var(--scale-factor-button) * 0.87));
       }
     }
 
@@ -250,7 +262,7 @@
       }
 
       &:active:not([disabled]) {
-        transform: scale(0.97);
+        transform: scale(calc(var(--scale-factor-button) * 0.97));
       }
     }
   }
