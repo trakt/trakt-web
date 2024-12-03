@@ -24,7 +24,7 @@
   .trakt-link {
     -webkit-tap-highlight-color: transparent;
     color: inherit;
-
+    display: contents;
     text-decoration: none;
     cursor: pointer;
 
@@ -40,8 +40,7 @@
       }
     }
 
-    &[data-color="default"],
-    &[data-color="classic"] {
+    &[data-color="default"] {
       &,
       :global(*) {
         transition: color calc(var(--transition-increment) / 2) ease-in-out;
@@ -49,6 +48,7 @@
     }
 
     &[data-color="classic"] {
+      display: inline;
       text-decoration: underline;
 
       &:visited {
