@@ -29,7 +29,7 @@
     text-decoration: none;
     cursor: pointer;
 
-    :global(*) {
+    &[data-color="default"] :global(*) {
       transition: color calc(var(--transition-increment) / 2) ease-in-out;
     }
 
