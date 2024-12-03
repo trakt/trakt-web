@@ -3,9 +3,9 @@
   import MovieSummary from "$lib/sections/summary/MovieSummary.svelte";
   import { useMovie } from "./useMovie";
 
-  const { movie, ratings } = $derived(useMovie($page.params.slug));
+  const { movie, ratings, intl } = $derived(useMovie($page.params.slug));
 </script>
 
-{#if $movie != null && $ratings != null}
-  <MovieSummary media={$movie} ratings={$ratings} />
+{#if $movie != null && $ratings != null && $intl != null}
+  <MovieSummary media={$movie} ratings={$ratings} intl={$intl} />
 {/if}

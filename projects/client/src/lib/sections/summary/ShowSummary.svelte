@@ -11,7 +11,7 @@
     onMarkAsWatched: () => void;
   };
 
-  const { media, ratings, progress, onMarkAsWatched }: ShowSummaryProps =
+  const { media, ratings, intl, progress, onMarkAsWatched }: ShowSummaryProps =
     $props();
 </script>
 
@@ -23,4 +23,4 @@
   </RenderFor>
 {/snippet}
 
-<MediaSummary {media} {ratings} type="show" {contextualContent} />
+<MediaSummary {media} {ratings} {intl} type="show" {contextualContent} />

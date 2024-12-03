@@ -7,6 +7,7 @@ export type MovieSummary = {
   slug: string;
   runtime: number;
   title: string;
+  tagline: string;
   poster: {
     url: string;
   };
@@ -26,6 +27,7 @@ export function mapResponseToMovieSummary(movie: MovieResponse): MovieSummary {
     slug: movie.ids.slug,
     title: movie.title,
     runtime: movie.runtime!,
+    tagline: movie.tagline ?? '',
     poster: {
       url: prependHttps(
         movie.images?.poster.at(1) ??

@@ -3,7 +3,7 @@
   import MediaSummary from "./components/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/MediaSummaryProps";
 
-  const { media, ratings }: MediaSummaryProps<ShowSummary> = $props();
+  const { media, ratings, intl }: MediaSummaryProps<ShowSummary> = $props();
 </script>
 
-<MediaSummary {media} {ratings} type="movie" />
+<MediaSummary {media} {ratings} {intl} type="movie" />

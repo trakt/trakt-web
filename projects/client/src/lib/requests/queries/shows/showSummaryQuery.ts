@@ -7,6 +7,7 @@ export type ShowSummary = {
   slug: string;
   runtime: number;
   title: string;
+  tagline: string;
   poster: {
     url: string;
   };
@@ -26,6 +27,7 @@ export function mapResponseToShowSummary(show: ShowResponse): ShowSummary {
     slug: show.ids.slug,
     title: show.title,
     runtime: show.runtime!,
+    tagline: show.tagline!,
     poster: {
       url: prependHttps(
         show.images?.poster.at(1) ??

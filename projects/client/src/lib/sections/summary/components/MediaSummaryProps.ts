@@ -4,4 +4,5 @@ import type { MediaRating } from '$lib/models/MediaRating.ts';
 export type MediaSummaryProps<T> = {
   media: T;
   ratings: MediaRating;
+  intl: MediaIntl;
 };

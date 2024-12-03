@@ -9,19 +9,19 @@
   import type { MediaSummary } from "./MediaSummary";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 
-  const { media, ratings }: MediaSummaryProps<MediaSummary> = $props();
+  const { media, ratings, intl }: MediaSummaryProps<MediaSummary> = $props();
   const isLargeDisplay = useMedia(WellKnownMediaQuery.desktop);
   const genreCount = $derived($isLargeDisplay ? -1 : 3);
 </script>
 
 <div class="trakt-summary-header">
-  <h3>{media.title}</h3>
+  <h3>{intl.title}</h3>
   <GenreList genres={media.genres.slice(0, genreCount)} />
 </div>
 
 <RatingList {ratings} />
 
-<p class="trakt-media-overview secondary">{media.overview}</p>
+<p class="trakt-media-overview secondary">{intl.overview}</p>
 
 <div class="trakt-info-actions">
   <Link color="inherit" href={media.trailer} target="_blank">

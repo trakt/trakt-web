@@ -21,6 +21,7 @@
     media,
     ratings,
     type,
+    intl,
     contextualContent,
   }: MediaSummaryProps<MediaSummary> & {
     type: MediaType;
@@ -47,7 +48,7 @@
   );
 
   const watchlistProps: WatchlistButtonProps = $derived({
-    title: media.title,
+    title: intl.title,
     isWatchlistUpdating: $isWatchlistUpdating,
     isWatchlisted: $isWatchlisted,
     onAdd: addToWatchlist,
@@ -55,7 +56,7 @@
   });
 
   const markWasWatchedProps: MarkAsWatchedButtonProps = $derived({
-    title: media.title,
+    title: intl.title,
     isMarkingAsWatched: $isMarkingAsWatched,
     isWatched: $isWatched,
     onWatch: markAsWatched,
@@ -66,7 +67,7 @@
 
 <MediaSummaryContainer {contextualContent}>
   {#snippet poster()}
-    <SummaryPoster src={media.poster.url} alt={media.title}>
+    <SummaryPoster src={media.poster.url} alt={intl.title}>
       {#snippet actions()}
         <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
           <WatchlistButton {...watchlistProps} />
@@ -76,7 +77,7 @@
     </SummaryPoster>
   {/snippet}
 
-  <MediaSummaryInfo {media} {ratings} />
+  <MediaSummaryInfo {media} {ratings} {intl} />
 
   <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
     <div class="trakt-media-action-container">
