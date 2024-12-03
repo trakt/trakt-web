@@ -15,6 +15,11 @@
   "sourceLanguageTag": "en",
   "languageTags": [
     "en",
-    "fr"
+    "fr-fr",
+    "fr-ca",
+    "ja-jp",
+    "pt-br",
+    "es-es",
+    "es-mx"
   ]
 }

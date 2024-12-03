@@ -23,11 +23,21 @@
   const tagToFlag: Record<AvailableLanguageTag, string> = {
     en: "🇬🇧",
     "fr-fr": "🇫🇷",
+    "fr-ca": "🇨🇦",
+    "ja-jp": "🇯🇵",
+    "pt-br": "🇧🇷",
+    "es-es": "🇪🇸",
+    "es-mx": "🇲🇽",
   };
 
   const tagToTitle: Record<AvailableLanguageTag, string> = {
     en: "English",
     "fr-fr": "Français",
+    "fr-ca": "Français (Canada)",
+    "ja-jp": "日本語",
+    "pt-br": "Português (Brasil)",
+    "es-es": "Español (España)",
+    "es-mx": "Español (México)",
   };
 
   const currentLanguage = languageTag();
