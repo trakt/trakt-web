@@ -1,4 +1,5 @@
 import { AUTH_COOKIE_NAME } from '$lib/features/auth/constants.ts';
+import { isAuthorized } from '$lib/features/auth/token/index.ts';
 import type { Handle } from '@sveltejs/kit';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import { authorize } from './requests/authorize.ts';
@@ -34,7 +35,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
-  event.locals.auth = await initiateDeviceAuth();
+  event.locals.auth = isAuthorized()
+    ? await initiateDeviceAuth()
+    : { code: '', expireAt: -1, interval: -1, url: 'https://' };
 
   return await resolve(event);
 };
