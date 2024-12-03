@@ -10,7 +10,7 @@ export const load: LayoutLoad = async ({ data, fetch }) => {
     defaultOptions: {
       queries: {
         enabled: browser,
-        retry: 5,
+        retry: 0,
         retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
       },
     },

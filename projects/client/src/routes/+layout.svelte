@@ -36,6 +36,9 @@
       padding: 0;
 
       width: 100%;
+      height: -moz-available;
+      height: -webkit-fill-available;
+      height: fill-available;
     }
 
     body {
