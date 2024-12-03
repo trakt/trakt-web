@@ -22,12 +22,12 @@
 
   const tagToFlag: Record<AvailableLanguageTag, string> = {
     en: "🇬🇧",
-    fr: "🇫🇷",
+    "fr-fr": "🇫🇷",
   };
 
   const tagToTitle: Record<AvailableLanguageTag, string> = {
     en: "English",
-    fr: "Français",
+    "fr-fr": "Français",
   };
 
   const currentLanguage = languageTag();

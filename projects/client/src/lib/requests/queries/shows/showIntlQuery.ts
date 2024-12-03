@@ -1,5 +1,6 @@
 import type { ShowTranslationResponse } from '$lib/api.ts';
 import type { MediaIntl } from '$lib/models/MediaIntl.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 type ShowIntlParams = { slug: string; locale: string } & ApiParams;
@@ -15,12 +16,17 @@ export function mapResponseToShowIntl(
 export function showIntlRequest(
   { fetch, slug, locale }: ShowIntlParams,
 ): Promise<MediaIntl | Nil> {
+  const parts = locale.toLowerCase().split('-');
+
+  const language = assertDefined(parts.at(0), 'Language code is required.');
+  const country = assertDefined(parts.at(1), 'Country code is required.');
+
   return api({ fetch })
     .shows
     .translations({
       params: {
         id: slug,
-        language: locale,
+        language,
       },
     })
     .then(({ status, body }) => {
@@ -29,7 +35,8 @@ export function showIntlRequest(
       }
 
       const translation = body.find((translation) =>
-        translation.language === locale
+        translation.language === language &&
+        translation.country === country
       );
 
       return translation
