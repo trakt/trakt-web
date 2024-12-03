@@ -4,19 +4,21 @@ import { THEME_STORE_NAME } from '$lib/features/theme/constants.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = ({ cookies }) => {
+export const load: LayoutServerLoad = ({ locals, cookies }) => {
   const theme = coerceTheme(cookies.get(THEME_STORE_NAME));
   const serializedToken = cookies.get(AUTH_COOKIE_NAME);
 
+  const defaultResponse = { theme, auth: locals.auth };
+
   if (!serializedToken) {
-    return { theme };
+    return defaultResponse;
   }
 
   try {
     const { token } = JSON.parse(serializedToken) as SerializedAuthResponse;
-    return { theme, token: token.access };
+    return { token: token.access, ...defaultResponse };
   } catch (_err) {
     cookies.delete(AUTH_COOKIE_NAME, { path: '/' });
-    return { theme };
+    return defaultResponse;
   }
 };

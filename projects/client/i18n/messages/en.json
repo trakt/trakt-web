@@ -61,5 +61,7 @@
   "remove_from_watchlist": "Remove from Watchlist",
   "remove_from_watchlist_label": "Remove {title} from your watchlist",
   "watch_the_trailer": "Watch the Trailer",
-  "search_placeholder": "Seek and ye shall find... (maybe)"
+  "search_placeholder": "Seek and ye shall find... (maybe)",
+  "join_trakt_button": "Join Trakt",
+  "join_trakt_button_label": "Join trakt.tv to keep track of what you're watching"
 }

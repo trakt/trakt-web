@@ -2,6 +2,8 @@
 // for information about these interfaces
 /// <reference lib="dom" />
 
+import { InitiateDeviceAuth } from '$lib/features/auth/requests/initiateDeviceAuth.ts';
+
 declare global {
   const TRAKT_CLIENT_ID: string;
   const TRAKT_MODE: 'development' | 'production';
@@ -108,7 +110,9 @@ declare global {
 
   namespace App {
     // interface Error {}
-    // interface Locals {}
+    interface Locals {
+      auth: InitiateDeviceAuth;
+    }
     // interface PageData {}
     // interface PageState {}
     // interface Platform {}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
   import RecommendedMovies from "$lib/sections/recommendations/RecommendedMovies.svelte";
   import RecommendedShows from "$lib/sections/recommendations/RecommendedShows.svelte";
@@ -16,15 +17,20 @@
 </svelte:head>
 
 <div class="trakt-content">
-  <BackgroundCoverImage
-    src={$user?.cover.url ?? ALIEN_ISOLATION_COVER}
-    type="main"
-  />
-  <ProfileBanner />
-  <UpNext />
-  <UpcomingSchedule />
-  <RecommendedShows />
-  <RecommendedMovies />
+  <RenderFor audience="authenticated">
+    <BackgroundCoverImage
+      src={$user?.cover.url ?? ALIEN_ISOLATION_COVER}
+      type="main"
+    />
+    <ProfileBanner />
+    <UpNext />
+    <UpcomingSchedule />
+    <RecommendedShows />
+    <RecommendedMovies />
+  </RenderFor>
+  <RenderFor audience="public">
+    <BackgroundCoverImage src={ALIEN_ISOLATION_COVER} type="main" />
+  </RenderFor>
 </div>
 
 <style>

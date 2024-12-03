@@ -16,7 +16,7 @@
 </script>
 
 {#snippet contextualContent()}
-  <RenderFor device={["desktop"]}>
+  <RenderFor device={["desktop"]} audience="authenticated">
     {#if progress}
       <NextEpisodeItem episode={progress} show={media} {onMarkAsWatched} />
     {/if}

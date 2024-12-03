@@ -27,17 +27,15 @@ export function useUser() {
     watchlistQueryResponse,
     ($watchlist) => $watchlist.data,
   );
-  const isAuthorized = derived(user, ($user) => !!$user);
 
   return {
     user,
     history,
     watchlist,
-    isAuthorized,
     current: () =>
       assertDefined(
         get(user),
-        'This hook must be used within a user context provider!',
+        'This hook must be used within a RenderFor guard, target audience = authenticated!',
       ),
   };
 }

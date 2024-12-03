@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { useToken } from "$lib/features/auth/stores/useToken";
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import type { AudienceProps } from "./AudienceProps";
 
   const { children, audience }: ChildrenProps & AudienceProps = $props();
 
-  const { isAuthorized } = useToken();
+  const { isAuthorized } = useAuth();
   const { user } = useUser();
 
   const isAvailableForAudience = $derived(

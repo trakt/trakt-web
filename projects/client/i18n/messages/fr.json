@@ -61,5 +61,7 @@
   "remove_from_watchlist": "Retirer de ma liste",
   "remove_from_watchlist_label": "Supprimez {title} de votre liste de surveillance",
   "watch_the_trailer": "Regardez la bande-annonce",
-  "search_placeholder": "Cherchez et vous trouverez... (peut-être)"
+  "search_placeholder": "Cherchez et vous trouverez... (peut-être)",
+  "join_trakt_button": "Rejoignez Trakt",
+  "join_trakt_button_label": "Rejoignez trakt.tv pour suivre ce que vous regardez"
 }
