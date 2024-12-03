@@ -1,13 +1,13 @@
 <script lang="ts">
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
-  import type { MovieRating } from "$lib/requests/queries/movies/movieRatingQuery";
+  import type { MediaRating } from "$lib/models/MediaRating";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
 
   type RatingListProps = {
     i18n?: RatingIntl;
-    ratings: MovieRating;
+    ratings: MediaRating;
   };
 
   const { i18n = RatingIntlProvider, ratings }: RatingListProps = $props();

@@ -1,6 +1,7 @@
-import type { MovieRating } from '$lib/requests/queries/movies/movieRatingQuery.ts';
+import type { MediaIntl } from '$lib/models/MediaIntl.ts';
+import type { MediaRating } from '$lib/models/MediaRating.ts';
 
 export type MediaSummaryProps<T> = {
   media: T;
-  ratings: MovieRating;
+  ratings: MediaRating;
 };

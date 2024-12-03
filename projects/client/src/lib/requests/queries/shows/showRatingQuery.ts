@@ -1,27 +1,12 @@
 import type { ShowRatingsResponse } from '$lib/api.ts';
+import type { MediaRating } from '$lib/models/MediaRating.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-
-export type ShowRating = {
-  tmdb: {
-    rating: number;
-    votes: number;
-  };
-  rotten: {
-    critic: number;
-    audience: number;
-  };
-  imdb: {
-    rating: number;
-    votes: number;
-  };
-  metacritic: number;
-};
 
 type ShowRatingParams = { slug: string } & ApiParams;
 
 export function mapResponseToShowRating(
   ratings: ShowRatingsResponse,
-): ShowRating {
+): MediaRating {
   return {
     tmdb: {
       rating: ratings.tmdb?.rating ?? 0,
@@ -41,7 +26,7 @@ export function mapResponseToShowRating(
 
 export function showRatingRequest(
   { fetch, slug }: ShowRatingParams,
-): Promise<ShowRating> {
+): Promise<MediaRating> {
   return api({ fetch })
     .shows
     .ratings({
