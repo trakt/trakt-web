@@ -28,6 +28,10 @@
     "pt-br": "🇧🇷",
     "es-es": "🇪🇸",
     "es-mx": "🇲🇽",
+    "de-de": "🇩🇪",
+    "ro-ro": "🇷🇴",
+    "nl-nl": "🇳🇱",
+    "uk-ua": "🇺🇦",
   };
 
   const tagToTitle: Record<AvailableLanguageTag, string> = {
@@ -38,6 +42,10 @@
     "pt-br": "Português (Brasil)",
     "es-es": "Español (España)",
     "es-mx": "Español (México)",
+    "de-de": "Deutsch",
+    "ro-ro": "Română",
+    "nl-nl": "Nederlands",
+    "uk-ua": "Українська",
   };
 
   const currentLanguage = languageTag();
