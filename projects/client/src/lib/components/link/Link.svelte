@@ -8,7 +8,7 @@
   }: ChildrenProps &
     HTMLAnchorProps &
     HTMLElementProps & {
-      color?: "inherit" | "default";
+      color?: "inherit" | "default" | "classic";
     } = $props();
 </script>
 
@@ -23,15 +23,10 @@
 <style>
   .trakt-link {
     -webkit-tap-highlight-color: transparent;
-    display: contents;
     color: inherit;
 
     text-decoration: none;
     cursor: pointer;
-
-    &[data-color="default"] :global(*) {
-      transition: color calc(var(--transition-increment) / 2) ease-in-out;
-    }
 
     &:visited {
       :global(*) {
@@ -45,6 +40,34 @@
       }
     }
 
+    &[data-color="default"],
+    &[data-color="classic"] {
+      &,
+      :global(*) {
+        transition: color calc(var(--transition-increment) / 2) ease-in-out;
+      }
+    }
+
+    &[data-color="classic"] {
+      text-decoration: underline;
+
+      &:visited {
+        color: var(--red-300);
+
+        :global(*) {
+          color: var(--red-300);
+        }
+      }
+
+      &:hover {
+        color: var(--blue-600);
+
+        :global(*) {
+          color: var(--blue-600);
+        }
+      }
+    }
+
     &[data-color="inherit"] {
       :global(*) {
         color: inherit;
@@ -52,6 +75,8 @@
 
       &:visited,
       &:hover {
+        color: inherit;
+
         :global(*) {
           color: inherit;
         }
