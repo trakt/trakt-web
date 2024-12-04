@@ -1,11 +1,8 @@
-import type { SettingsResponse, SortDirection, WatchAction } from '$lib/api.ts';
+import type { ProfileResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
-import { DEFAULT_COVER } from '$lib/utils/constants.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
-export type User = {
+export type UserProfile = {
   name: {
     full: string;
     first: string;
@@ -15,25 +12,10 @@ export type User = {
   avatar: {
     url: string;
   };
-  cover: {
-    url: string;
-  };
   isVip: boolean;
-  preferences: {
-    progress: {
-      sort: {
-        by?: string;
-        direction?: SortDirection;
-      };
-    };
-    watch: {
-      action?: WatchAction;
-    };
-  };
 };
 
-function mapUserResponse(response: SettingsResponse): User {
-  const { user, account, browsing } = response;
+function mapUserResponse(user: ProfileResponse): UserProfile {
   const fullName = user.name;
   const [firstName = '', lastName = ''] = user.name.split(' ');
 
@@ -47,36 +29,16 @@ function mapUserResponse(response: SettingsResponse): User {
     avatar: {
       url: user.images!.avatar.full,
     },
-    cover: {
-      url: prependHttps(
-        findDefined(
-          user.vip_cover_image,
-          account.cover_image,
-        ),
-        DEFAULT_COVER,
-      ),
-    },
     isVip: user.vip || user.vip_ep,
-    preferences: {
-      watch: {
-        action: browsing?.watch_popup_action,
-      },
-      progress: {
-        sort: {
-          by: browsing?.progress.on_deck.sort,
-          direction: browsing?.progress.on_deck.sort_how,
-        },
-      },
-    },
   };
 }
 
-const currentUserRequest = ({ fetch }: ApiParams): Promise<User> =>
+const currentUserRequest = ({ fetch }: ApiParams): Promise<UserProfile> =>
   api({ fetch })
     .users
-    .settings({
-      query: {
-        extended: 'browsing',
+    .profile({
+      params: {
+        id: 'me',
       },
       extraHeaders: {
         ...authHeader(),
