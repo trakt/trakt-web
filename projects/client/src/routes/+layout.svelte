@@ -97,7 +97,7 @@
 <ParaglideJS {i18n}>
   <ThemeProvider theme={data.theme}>
     <QueryClientProvider client={data.queryClient}>
-      <AuthProvider auth={data.auth} token={data.token}>
+      <AuthProvider token={data.token}>
         <Navbar />
         {@render children()}
       </AuthProvider>

@@ -7,7 +7,7 @@
   const { url } = useAuth();
 </script>
 
-<Link href={$url} target="_blank" color="inherit">
+<Link href={$url} color="inherit">
   <Button
     label={m.join_trakt_button_label()}
     style="flat"

@@ -1,4 +1,3 @@
 export enum AuthEndpoint {
-  Verify = '/_features/auth/verify',
-  Initiate = '/_features/auth/initiate',
+  Exchange = '/_features/auth/exchange',
 }

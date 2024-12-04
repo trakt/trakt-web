@@ -1,19 +1,19 @@
 import { AUTH_COOKIE_NAME } from '$lib/features/auth/constants.ts';
-import { isAuthorized } from '$lib/features/auth/token/index.ts';
-import type { Handle } from '@sveltejs/kit';
+import { type Handle } from '@sveltejs/kit';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import { authorize } from './requests/authorize.ts';
-import { initiateDeviceAuth } from './requests/initiateDeviceAuth.ts';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  if (event.url.pathname.startsWith(AuthEndpoint.Initiate)) {
-    const result = await initiateDeviceAuth();
-    return new Response(JSON.stringify(result));
-  }
+  /**
+   * TODO: refresh exchange flow here
+   * https://trakt.docs.apiary.io/#reference/authentication-oauth/get-token/exchange-refresh_token-for-access_token
+   */
 
-  if (event.url.pathname.startsWith(AuthEndpoint.Verify)) {
+  if (event.url.pathname.startsWith(AuthEndpoint.Exchange)) {
     const { code } = await event.request.json() as { code: string };
-    const result = await authorize(code);
+    const referrer = event.request.headers.get('referer') ?? '';
+
+    const result = await authorize({ code, referrer });
 
     const cookieHeader = result.isAuthorized
       ? {
@@ -34,10 +34,6 @@ export const handle: Handle = async ({ event, resolve }) => {
       headers: { ...cookieHeader },
     });
   }
-
-  event.locals.auth = isAuthorized()
-    ? await initiateDeviceAuth()
-    : { code: '', expireAt: -1, interval: -1, url: 'https://' };
 
   return await resolve(event);
 };

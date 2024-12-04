@@ -11,18 +11,27 @@ export type DeviceAuth = {
 
 export class DeviceUnauthorizedError extends Error {}
 
-export async function verifyDeviceAuth(code: string): Promise<DeviceAuth> {
+type VerifyAuthParams = {
+  code: string;
+  redirect_uri: string;
+};
+
+export async function verifyAuth({
+  code,
+  redirect_uri,
+}: VerifyAuthParams): Promise<DeviceAuth> {
   const client_secret = env.TRAKT_CLIENT_SECRET ?? '';
   const client_id = env.TRAKT_CLIENT_ID ?? '';
 
   const tokenResponse = await api()
     .oauth
-    .device
     .token({
       body: {
         code,
         client_id,
         client_secret,
+        grant_type: 'authorization_code',
+        redirect_uri,
       },
     })
     .catch(() => {

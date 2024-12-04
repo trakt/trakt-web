@@ -1,26 +1,25 @@
 <script lang="ts">
-  import { type InitiateDeviceAuth } from "$lib/features/auth/requests/initiateDeviceAuth";
+  import { buildOAuthUrl } from "$lib/utils/url/buildOAuthLink";
   import { onMount } from "svelte";
   import { AuthEndpoint } from "../AuthEndpoint";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
   import { provisionAuth, useAuth } from "../stores/useAuth";
 
   type AuthProviderProps = {
-    auth: InitiateDeviceAuth;
     token: string | Nil;
   } & ChildrenProps;
 
-  const { token: seed, auth, children }: AuthProviderProps = $props();
+  const { token, children }: AuthProviderProps = $props();
 
   provisionAuth({
-    token: seed,
-    url: auth.url,
+    token,
+    url: buildOAuthUrl(),
   });
 
-  const { token } = useAuth();
+  const auth = useAuth();
 
   function requestAuthStatus(code: string) {
-    return fetch(AuthEndpoint.Verify, {
+    return fetch(AuthEndpoint.Exchange, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,28 +29,32 @@
   }
 
   onMount(async () => {
-    if (seed != null) {
+    const url = new URL(window.location.href);
+    const queryParams = url.searchParams;
+    const code = queryParams.get("code");
+
+    if (!code) {
       return;
     }
 
-    const interval = setInterval(async () => {
-      if (Date.now() > auth.expireAt) {
-        clearInterval(interval);
-        return;
-      }
+    const {
+      isAuthorized,
+      token: { access },
+    } = await requestAuthStatus(code);
 
-      const {
-        isAuthorized,
-        token: { access },
-      } = await requestAuthStatus(auth.code);
+    if (!isAuthorized) {
+      return;
+    }
 
-      if (!isAuthorized) {
-        return;
-      }
+    queryParams.delete("code");
 
-      clearInterval(interval);
-      token.set(access);
-    }, auth.interval);
+    window.history.replaceState(
+      {},
+      "",
+      `${url.pathname}${queryParams.toString() ? "?" + queryParams.toString() : ""}`,
+    );
+
+    auth.token.set(access);
   });
 </script>
 
