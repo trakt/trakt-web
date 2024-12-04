@@ -12,6 +12,7 @@ export const load: LayoutLoad = async ({ data, fetch }) => {
         enabled: browser,
         retry: 0,
         retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+        refetchOnWindowFocus: false,
       },
     },
   });
