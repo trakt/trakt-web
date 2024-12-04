@@ -215,5 +215,10 @@
     height: var(--ni-32);
     display: flex;
     justify-content: center;
+
+    :global(svg) {
+      /* Safari 🥲 */
+      height: 100%;
+    }
   }
 </style>
