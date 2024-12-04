@@ -7,8 +7,6 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { useMedia, WellKnownMediaQuery } from "$lib/utils/css/useMedia";
-  import { debounce } from "$lib/utils/timing/debounce";
   import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
   import { onMount } from "svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -17,7 +15,7 @@
   let windowScrollY = $state(0);
   const isScrolled = $derived(windowScrollY > 0);
 
-  const { search, clear, results } = useSearch();
+  const { search, clear, isSearching, results } = useSearch();
 
   function handleScroll() {
     windowScrollY = window.scrollY;
@@ -32,16 +30,11 @@
     };
   });
 
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  function onSearch(ev: Event) {
+    const inputElement = ev.target as HTMLInputElement;
 
-  const onSearch = $derived(
-    debounce(
-      (ev: Event) => {
-        search((ev.target as HTMLInputElement).value);
-      },
-      $isDesktop ? 150 : 250,
-    ),
-  );
+    search(inputElement.value);
+  }
 
   let inputElement: HTMLInputElement;
 </script>
@@ -59,7 +52,7 @@
   </div>
   <!-- FIXME: extract component -->
   <RenderFor audience="authenticated">
-    <div class="trakt-search">
+    <div class="trakt-search" class:is-loading-results={$isSearching}>
       <input
         bind:this={inputElement}
         class="trakt-search-input"
@@ -100,6 +93,15 @@
 <div class="trakt-navbar-spacer"></div>
 
 <style>
+  @keyframes slide-left-to-right {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
   /** FIXME: proper styling */
   .trakt-search {
     position: relative;
@@ -121,6 +123,28 @@
       width: calc(var(--ni-120) + 20vw);
     }
 
+    &.is-loading-results {
+      &::after {
+        content: "";
+        width: 90%;
+        position: absolute;
+        bottom: 0;
+        left: 5%;
+        right: 0;
+        height: var(--ni-2);
+        border-radius: 50%;
+        background: linear-gradient(
+          90deg,
+          var(--color-foreground) 0%,
+          var(--color-foreground) 50%,
+          transparent 50%,
+          transparent 100%
+        );
+        background-size: 200% 100%;
+        animation: slide-left-to-right calc(var(--transition-increment) * 10)
+          linear infinite;
+      }
+    }
     .trakt-search-results {
       position: absolute;
 
