@@ -9,7 +9,7 @@
   type UpNextItemProps = {
     episode: EpisodeProgressEntry;
     show: ShowMeta;
-    onMarkAsWatched: () => void;
+    onMarkAsWatched?: () => void;
   };
 
   const { episode, show, onMarkAsWatched }: UpNextItemProps = $props();
@@ -38,6 +38,6 @@
   showHref={buildMediaLink("show", show.slug)}
   onMarkAsWatched={async () => {
     await markAsWatched();
-    onMarkAsWatched();
+    onMarkAsWatched?.();
   }}
 />

@@ -3,6 +3,7 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
+import { useUpNextEpisodes } from '$lib/sections/up-next/useUpNextEpisodes.ts';
 import { derived, writable } from 'svelte/store';
 import { toMarkAsWatchedPayload } from './_internal/toMarkAsWatchedPayload.ts';
 
@@ -36,6 +37,7 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
   const isMarkingAsWatched = writable(false);
   const { history } = useUser();
   const cached = localStorage.getItem(markAsWatchedKey(id)) == 'true';
+  const { reload } = useUpNextEpisodes();
 
   const _isWatched = writable(false);
   const isWatched = derived(
@@ -63,6 +65,14 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
 
   const { current: user } = useUser();
 
+  function reloadUpNext() {
+    if (type === 'movie') {
+      return;
+    }
+
+    reload();
+  }
+
   const markAsWatched = async () => {
     const watchedAtDate = resolveWatchDate(
       user().preferences.watch.action,
@@ -83,9 +93,13 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
     [isWatched, _isWatched],
     ([$isWatched, $_isWatched]) => $isWatched || $_isWatched,
   )
-    .subscribe((value) =>
-      localStorage.setItem(markAsWatchedKey(id), value.toString())
-    );
+    .subscribe((value) => {
+      localStorage.setItem(markAsWatchedKey(id), value.toString());
+
+      if (value) {
+        reloadUpNext();
+      }
+    });
 
   return {
     markAsWatched,

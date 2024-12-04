@@ -4,7 +4,7 @@
   import NextEpisodeItem from "./NextEpisodeItem.svelte";
   import { useUpNextEpisodes } from "./useUpNextEpisodes";
 
-  const { list, reload } = useUpNextEpisodes();
+  const { list } = useUpNextEpisodes();
 </script>
 
 <SectionList
@@ -12,6 +12,6 @@
   --height-section-list="var(--height-episode-list)"
 >
   {#each $list as episode (episode.show.id)}
-    <NextEpisodeItem {episode} show={episode.show} onMarkAsWatched={reload} />
+    <NextEpisodeItem {episode} show={episode.show} />
   {/each}
 </SectionList>
