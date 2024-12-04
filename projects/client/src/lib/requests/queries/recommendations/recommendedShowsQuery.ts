@@ -1,5 +1,7 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
+import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
@@ -31,9 +33,12 @@ function mapResponseToRecommendedShow(
     runtime: show.runtime! * show.aired_episodes!,
     poster: {
       url: prependHttps(
-        show.images?.poster.at(1) ??
+        findDefined(
+          show.images?.poster.at(1),
           show.images?.poster.at(0),
-      )!,
+        ),
+        MEDIA_POSTER_PLACEHOLDER,
+      ),
     },
   };
 }

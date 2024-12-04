@@ -6,6 +6,8 @@ import {
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
 import type { ShowMeta } from '$lib/models/ShowMeta.ts';
+import { EPISODE_PLACEHOLDER } from '$lib/utils/constants.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
@@ -21,10 +23,12 @@ export type UpcomingEpisodeEntry = EpisodeEntry & {
 function mapResponseToEpisodeEntry(
   item: ShowsResponse[0],
 ): UpcomingEpisodeEntry {
-  const posterCandidate = item.episode.images!.screenshot.at(1) ??
-    item.episode.images!.screenshot.at(0) ??
-    item.show.images!.fanart.at(1) ??
-    item.show.images!.fanart.at(0);
+  const posterCandidate = findDefined(
+    item.episode.images?.screenshot.at(1) ??
+      item.episode.images?.screenshot.at(0) ??
+      item.show.images?.fanart.at(1) ??
+      item.show.images?.fanart.at(0),
+  );
 
   return {
     id: item.episode.ids.trakt,
@@ -39,7 +43,7 @@ function mapResponseToEpisodeEntry(
     season: item.episode.season,
     number: item.episode.number,
     poster: {
-      url: prependHttps(posterCandidate)!,
+      url: prependHttps(posterCandidate, EPISODE_PLACEHOLDER),
     },
     airedDate: new Date(item.first_aired),
   };

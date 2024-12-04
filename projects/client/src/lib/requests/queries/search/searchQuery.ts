@@ -1,6 +1,7 @@
 import type { SearchResultResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
+import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -46,7 +47,8 @@ function mapToSearchResultEntry(
       url: prependHttps(
         media.images?.poster.at(1) ??
           media.images?.poster.at(0),
-      )!,
+        MEDIA_POSTER_PLACEHOLDER,
+      ),
     },
   };
 }

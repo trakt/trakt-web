@@ -55,7 +55,7 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
             return $_isWatched;
           }
 
-          return $history.shows.get(id)!.isWatched;
+          return !!$history.shows.get(id)?.isWatched;
         }
       }
     },

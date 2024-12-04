@@ -1,5 +1,15 @@
+export function prependHttps(url: string): HttpsUrl;
 export function prependHttps(
-  url: string | undefined,
+  url: string | Nil,
+  placeholder: HttpsUrl,
+): HttpsUrl;
+export function prependHttps(
+  url: string | Nil,
+  placeholder?: HttpsUrl,
+): HttpsUrl | Nil;
+
+export function prependHttps(
+  url: string | Nil,
   placeholder?: HttpsUrl,
 ): HttpsUrl | Nil {
   if (!url) {

@@ -1,4 +1,8 @@
 import type { Genre, ShowResponse } from '$lib/api.ts';
+import {
+  MEDIA_COVER_PLACEHOLDER,
+  MEDIA_POSTER_PLACEHOLDER,
+} from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
@@ -32,13 +36,15 @@ export function mapResponseToShowSummary(show: ShowResponse): ShowSummary {
       url: prependHttps(
         show.images?.poster.at(1) ??
           show.images?.poster.at(0),
-      )!,
+        MEDIA_POSTER_PLACEHOLDER,
+      ),
     },
     cover: {
       url: prependHttps(
         show.images?.fanart.at(1) ??
           show.images?.fanart.at(0),
-      )!,
+        MEDIA_COVER_PLACEHOLDER,
+      ),
     },
     genres: show.genres ?? [],
     overview: show.overview ?? 'TBD',

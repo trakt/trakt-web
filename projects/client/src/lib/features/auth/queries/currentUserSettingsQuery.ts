@@ -1,6 +1,8 @@
 import type { SettingsResponse, SortDirection, WatchAction } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
-import { ALIEN_ISOLATION_COVER } from '$lib/utils/constants.ts';
+import { DEFAULT_COVER } from '$lib/utils/constants.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
 export type UserSettings = {
@@ -30,12 +32,6 @@ export type UserSettings = {
   };
 };
 
-function useDefined(
-  ...values: Array<string | Nil>
-) {
-  return values.find((value) => value?.trim());
-}
-
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
   const fullName = user.name;
@@ -52,11 +48,13 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       url: user.images!.avatar.full,
     },
     cover: {
-      url: useDefined(
-        user.vip_cover_image,
-        account.cover_image,
-        ALIEN_ISOLATION_COVER,
-      )!,
+      url: prependHttps(
+        findDefined(
+          user.vip_cover_image,
+          account.cover_image,
+        ),
+        DEFAULT_COVER,
+      ),
     },
     isVip: user.vip || user.vip_ep,
     preferences: {

@@ -6,6 +6,7 @@ import {
 } from '$lib/models/EpisodeType.ts';
 import type { Paginatable } from '$lib/models/Paginatable.ts';
 import type { ShowMeta } from '$lib/models/ShowMeta.ts';
+import { EPISODE_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { EpisodeProgressEntry } from '../../../models/EpisodeProgressEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -42,7 +43,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
     season: episode.season,
     number: episode.number,
     poster: {
-      url: prependHttps(posterCandidate)!,
+      url: prependHttps(posterCandidate, EPISODE_PLACEHOLDER),
     },
     airedDate: new Date(episode.first_aired),
     id: episode.ids.trakt,

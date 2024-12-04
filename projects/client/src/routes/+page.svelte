@@ -7,7 +7,7 @@
   import RecommendedShows from "$lib/sections/recommendations/RecommendedShows.svelte";
   import UpNext from "$lib/sections/up-next/UpNext.svelte";
   import UpcomingSchedule from "$lib/sections/upcoming-schedule/UpcomingSchedule.svelte";
-  import { ALIEN_ISOLATION_COVER } from "$lib/utils/constants";
+  import { DEFAULT_COVER } from "$lib/utils/constants";
 
   const { user } = useUser();
 </script>
@@ -18,10 +18,7 @@
 
 <div class="trakt-content">
   <RenderFor audience="authenticated">
-    <BackgroundCoverImage
-      src={$user?.cover.url ?? ALIEN_ISOLATION_COVER}
-      type="main"
-    />
+    <BackgroundCoverImage src={$user?.cover.url ?? DEFAULT_COVER} type="main" />
     <ProfileBanner />
     <UpNext />
     <UpcomingSchedule />
@@ -29,7 +26,7 @@
     <RecommendedMovies />
   </RenderFor>
   <RenderFor audience="public">
-    <BackgroundCoverImage src={ALIEN_ISOLATION_COVER} type="main" />
+    <BackgroundCoverImage src={DEFAULT_COVER} type="main" />
   </RenderFor>
 </div>
 
