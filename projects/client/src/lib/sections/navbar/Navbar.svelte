@@ -39,57 +39,62 @@
   let inputElement: HTMLInputElement;
 </script>
 
-<nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
-  <div class="trakt-logo">
-    <Link color="inherit" href="/">
-      <RenderFor audience="authenticated">
-        <LogoMark />
-      </RenderFor>
-      <RenderFor audience="public">
-        <Logo />
-      </RenderFor>
-    </Link>
-  </div>
-  <!-- FIXME: extract component -->
-  <RenderFor audience="authenticated">
-    <div class="trakt-search" class:is-loading-results={$isSearching}>
-      <input
-        bind:this={inputElement}
-        class="trakt-search-input"
-        type="search"
-        placeholder={m.search_placeholder()}
-        oninput={onSearch}
-      />
-      {#if $results.length > 0}
-        <div class="trakt-search-results">
-          {#each $results as result}
-            <div class="trakt-search-result-item">
-              <Link
-                href={buildMediaLink(result.type, result.slug)}
-                onclick={() => {
-                  inputElement.value = "";
-                  clear();
-                }}
-              >
-                <CrossOriginImage alt={result.title} src={result.poster.url} />
-                <span>{result.title} ({result.year})</span>
-              </Link>
-            </div>
-          {/each}
-        </div>
-      {/if}
+<header>
+  <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
+    <div class="trakt-logo">
+      <Link color="inherit" href="/">
+        <RenderFor audience="authenticated">
+          <LogoMark />
+        </RenderFor>
+        <RenderFor audience="public">
+          <Logo />
+        </RenderFor>
+      </Link>
     </div>
-  </RenderFor>
-  <div class="trakt-user-preferences">
-    <RenderFor audience="public">
-      <JoinTraktButton />
+    <!-- FIXME: extract component -->
+    <RenderFor audience="authenticated">
+      <div class="trakt-search" class:is-loading-results={$isSearching}>
+        <input
+          bind:this={inputElement}
+          class="trakt-search-input"
+          type="search"
+          placeholder={m.search_placeholder()}
+          oninput={onSearch}
+        />
+        {#if $results.length > 0}
+          <div class="trakt-search-results">
+            {#each $results as result}
+              <div class="trakt-search-result-item">
+                <Link
+                  href={buildMediaLink(result.type, result.slug)}
+                  onclick={() => {
+                    inputElement.value = "";
+                    clear();
+                  }}
+                >
+                  <CrossOriginImage
+                    alt={result.title}
+                    src={result.poster.url}
+                  />
+                  <span>{result.title} ({result.year})</span>
+                </Link>
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </div>
     </RenderFor>
-    <LocalePicker />
-    <ThemePicker />
-  </div>
-</nav>
+    <div class="trakt-user-preferences">
+      <RenderFor audience="public">
+        <JoinTraktButton />
+      </RenderFor>
+      <LocalePicker />
+      <ThemePicker />
+    </div>
+  </nav>
 
-<div class="trakt-navbar-spacer"></div>
+  <div class="trakt-navbar-spacer"></div>
+</header>
 
 <style>
   @keyframes slide-left-to-right {

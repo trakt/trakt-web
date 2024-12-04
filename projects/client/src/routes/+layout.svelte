@@ -4,6 +4,7 @@
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import { i18n } from "$lib/features/i18n/index.ts";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
+  import Footer from "$lib/sections/footer/Footer.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import { ParaglideJS } from "@inlang/paraglide-sveltekit";
   import { QueryClientProvider } from "@tanstack/svelte-query";
@@ -98,8 +99,13 @@
   <ThemeProvider theme={data.theme}>
     <QueryClientProvider client={data.queryClient}>
       <AuthProvider token={data.token}>
-        <Navbar />
-        {@render children()}
+        <div class="trakt-layout-wrapper">
+          <Navbar />
+          <div class="trakt-layout-content">
+            {@render children()}
+          </div>
+          <Footer />
+        </div>
       </AuthProvider>
       <SvelteQueryDevtools
         buttonPosition="bottom-left"
@@ -112,5 +118,15 @@
 <style>
   :global(.tsqd-open-btn-container) {
     opacity: 0.25;
+  }
+
+  .trakt-layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .trakt-layout-content {
+    flex: 1;
   }
 </style>
