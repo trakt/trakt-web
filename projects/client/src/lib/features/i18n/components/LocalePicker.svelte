@@ -2,25 +2,25 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
   import {
-    type AvailableLanguageTag,
-    availableLanguageTags,
+    type AvailableLocale,
+    availableLocales,
     i18n,
-    isAvailableLanguageTag,
-    languageTag,
+    isAvailableLocale,
+    locale,
   } from "$lib/features/i18n/index.ts";
 
-  function switchToLanguage(newLanguage: string) {
-    if (!isAvailableLanguageTag(newLanguage)) {
-      console.error(`Invalid language tag: ${newLanguage}`);
+  function switchToLanguage(newLocale: string) {
+    if (!isAvailableLocale(newLocale)) {
+      console.error(`Invalid language tag: ${newLocale}`);
       return;
     }
 
     const canonicalPath = i18n.route($page.url.pathname);
-    const localizedPath = i18n.resolveRoute(canonicalPath, newLanguage);
+    const localizedPath = i18n.resolveRoute(canonicalPath, newLocale);
     goto(localizedPath);
   }
 
-  const tagToFlag: Record<AvailableLanguageTag, string> = {
+  const tagToFlag: Record<AvailableLocale, string> = {
     en: "🇬🇧",
     "fr-fr": "🇫🇷",
     "fr-ca": "🇨🇦",
@@ -34,7 +34,7 @@
     "uk-ua": "🇺🇦",
   };
 
-  const tagToTitle: Record<AvailableLanguageTag, string> = {
+  const tagToTitle: Record<AvailableLocale, string> = {
     en: "English",
     "fr-fr": "Français",
     "fr-ca": "Français (Canada)",
@@ -48,7 +48,7 @@
     "uk-ua": "Українська",
   };
 
-  const currentLanguage = languageTag();
+  const currentLocale = locale();
 </script>
 
 <div class="locale-picker-container">
@@ -63,14 +63,14 @@
     />
   </svg>
   <select onchange={(ev) => switchToLanguage(ev.currentTarget.value)}>
-    {#each availableLanguageTags as tag}
+    {#each availableLocales as locale}
       <option
-        selected={currentLanguage == tag}
-        value={tag}
-        aria-label={tagToTitle[tag]}
+        selected={currentLocale === locale}
+        value={locale}
+        aria-label={tagToTitle[locale]}
       >
-        {tagToFlag[tag]}
-        {tagToTitle[tag]}
+        {tagToFlag[locale]}
+        {tagToTitle[locale]}
       </option>
     {/each}
   </select>

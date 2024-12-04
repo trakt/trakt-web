@@ -1,3 +1,4 @@
+import type { AvailableLocale } from '$lib/features/i18n/index.ts';
 import { format } from 'date-fns/format';
 import { formatRelative } from 'date-fns/formatRelative';
 import { intervalToDuration } from 'date-fns/intervalToDuration';
@@ -10,7 +11,7 @@ function stripTime(date: Date): Date {
 export function toHumanDate(
   today: Date,
   date: Date,
-  localeKey: string,
+  localeKey: AvailableLocale,
 ): string {
   const locale = LOCALE_MAP[localeKey] ?? LOCALE_MAP['en'];
 

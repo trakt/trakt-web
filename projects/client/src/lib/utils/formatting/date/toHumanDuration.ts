@@ -1,3 +1,5 @@
+import type { AvailableLanguage } from '$lib/features/i18n/index.ts';
+
 export type Duration = {
   days: number;
   hours: number;
@@ -8,7 +10,7 @@ export function toHumanDuration({
   days = 0,
   hours = 0,
   minutes = 0,
-}, locale = 'en') {
+}, locale: AvailableLanguage = 'en') {
   hours += Math.floor(minutes / 60);
   minutes %= 60;
   days += Math.floor(hours / 24);

@@ -1,9 +1,16 @@
 import type { MovieTranslationResponse } from '$lib/api.ts';
+import type {
+  AvailableLanguage,
+  AvailableRegion,
+} from '$lib/features/i18n/index.ts';
 import type { MediaIntl } from '$lib/models/MediaIntl.ts';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
-type MovieIntlParams = { slug: string; locale: string } & ApiParams;
+type MovieIntlParams = {
+  slug: string;
+  language: AvailableLanguage;
+  region: AvailableRegion;
+} & ApiParams;
 
 export function mapResponseToMovieIntl(
   translation: MovieTranslationResponse[0],
@@ -14,13 +21,8 @@ export function mapResponseToMovieIntl(
 }
 
 export function movieIntlRequest(
-  { fetch, slug, locale }: MovieIntlParams,
+  { fetch, slug, language, region }: MovieIntlParams,
 ): Promise<MediaIntl | Nil> {
-  const parts = locale.toLowerCase().split('-');
-
-  const language = assertDefined(parts.at(0), 'Language code is required.');
-  const country = assertDefined(parts.at(1), 'Country code is required.');
-
   return api({ fetch })
     .movies
     .translations({
@@ -36,7 +38,7 @@ export function movieIntlRequest(
 
       const translation = body.find((translation) =>
         translation.language === language &&
-        translation.country === country
+        translation.country === region
       );
 
       return translation

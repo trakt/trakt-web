@@ -1,4 +1,4 @@
-import { languageTag } from '$lib/features/i18n/index.ts';
+import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
@@ -22,7 +22,7 @@ export function useMovie(slug: string) {
 
   const intl = locale === 'en'
     ? movie
-    : createQuery(movieIntlQuery({ slug, locale }));
+    : createQuery(movieIntlQuery({ slug, ...getLanguageAndRegion() }));
 
   return {
     movie: derived(movie, ($movie) => $movie.data),

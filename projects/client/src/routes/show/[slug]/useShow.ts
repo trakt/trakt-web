@@ -8,7 +8,7 @@ import { derived } from 'svelte/store';
 import { showRatingQuery } from '../../../lib/requests/queries/shows/showRatingQuery.ts';
 import { showSummaryQuery } from '../../../lib/requests/queries/shows/showSummaryQuery.ts';
 
-import { languageTag } from '$lib/features/i18n/index.ts';
+import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 
 export function useShow(slug: string) {
@@ -41,7 +41,7 @@ export function useShow(slug: string) {
   const locale = languageTag();
   const intl = locale === 'en'
     ? show
-    : createQuery(showIntlQuery({ slug, locale: languageTag() }));
+    : createQuery(showIntlQuery({ slug, ...getLanguageAndRegion() }));
 
   return {
     show: derived(show, ($movie) => $movie.data),
