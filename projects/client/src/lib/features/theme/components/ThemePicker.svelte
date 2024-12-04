@@ -22,6 +22,11 @@
   };
 </script>
 
-<form onsubmit={() => submitTheme(nextTheme($theme))}>
+<form
+  onsubmit={(ev) => {
+    ev.preventDefault();
+    submitTheme(nextTheme($theme));
+  }}
+>
   <ThemeToggleIcon theme={$theme} />
 </form>
