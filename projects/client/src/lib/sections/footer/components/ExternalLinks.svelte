@@ -1,0 +1,27 @@
+<script>
+  import AndroidIcon from "$lib/components/icons/AndroidIcon.svelte";
+  import AppleIcon from "$lib/components/icons/AppleIcon.svelte";
+
+  import Link from "$lib/components/link/Link.svelte";
+</script>
+
+<div class="trakt-external-links">
+  <Link href="https://trakt.tv/a/trakt-ios" target="_blank" color="inherit">
+    <AppleIcon />
+  </Link>
+  <Link href="https://trakt.tv/a/trakt-android" target="_blank" color="inherit">
+    <AndroidIcon />
+  </Link>
+</div>
+
+<style>
+  .trakt-external-links {
+    display: flex;
+    gap: var(--ni-24);
+
+    :global(svg) {
+      height: var(--ni-24);
+      width: auto;
+    }
+  }
+</style>

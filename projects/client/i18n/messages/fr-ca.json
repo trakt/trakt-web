@@ -63,5 +63,7 @@
   "watch_the_trailer": "Regarder la bande-annonce",
   "search_placeholder": "Cherchez et vous trouverez... (peut-être)",
   "join_trakt_button": "Rejoindre Trakt",
-  "join_trakt_button_label": "Rejoignez trakt.tv pour suivre ce que vous regardez"
+  "join_trakt_button_label": "Rejoignez trakt.tv pour suivre ce que vous regardez",
+  "copyright_notice": "Tous droits réservés.",
+  "copyright_crafted_by": "Fabriqué à la main dans le monde entier"
 }
