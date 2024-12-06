@@ -6,7 +6,6 @@ import {
 } from '$lib/models/EpisodeType.ts';
 import type { Paginatable } from '$lib/models/Paginatable.ts';
 import type { ShowMeta } from '$lib/models/ShowMeta.ts';
-import { EPISODE_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { EpisodeProgressEntry } from '../../../models/EpisodeProgressEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -29,8 +28,9 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
   const episode = item.progress.next_episode;
 
   const posterCandidate = episode.images!.screenshot.at(1) ??
-    episode.images!.screenshot.at(0) ??
-    item.show.images!.fanart.at(1) ??
+    episode.images!.screenshot.at(0);
+
+  const showCoverCandidate = item.show.images!.fanart.at(1) ??
     item.show.images!.fanart.at(0);
 
   return {
@@ -38,12 +38,15 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
       title: item.show.title,
       id: item.show.ids.trakt,
       slug: item.show.ids.slug,
+      cover: {
+        url: prependHttps(showCoverCandidate),
+      },
     },
     title: episode.title,
     season: episode.season,
     number: episode.number,
     poster: {
-      url: prependHttps(posterCandidate, EPISODE_PLACEHOLDER),
+      url: prependHttps(posterCandidate),
     },
     airedDate: new Date(episode.first_aired),
     id: episode.ids.trakt,

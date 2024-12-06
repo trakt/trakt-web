@@ -44,7 +44,7 @@ export function useShow(slug: string) {
     : createQuery(showIntlQuery({ slug, ...getLanguageAndRegion() }));
 
   return {
-    show: derived(show, ($movie) => $movie.data),
+    show: derived(show, ($show) => $show.data),
     ratings: derived(ratings, ($ratings) => $ratings.data),
     progress: derived(progress, ($progress) => $progress.data),
     intl: derived(

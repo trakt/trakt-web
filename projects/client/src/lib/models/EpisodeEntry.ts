@@ -6,7 +6,7 @@ export type EpisodeEntry = {
   number: number;
   title: string;
   poster: {
-    url: string;
+    url: string | Nil;
   };
   airedDate: Date;
   type: EpisodeType;

@@ -26,7 +26,7 @@
   i18n={EpisodeIntlProvider}
   episodeNumber={episode.number}
   seasonNumber={episode.season}
-  posterUrl={episode.poster.url}
+  posterUrl={episode.poster.url ?? show.cover.url}
   showTitle={show.title}
   episodeTitle={episode.title}
   completed={episode.completed}

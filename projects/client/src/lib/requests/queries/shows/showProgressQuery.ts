@@ -5,7 +5,6 @@ import {
   type EpisodeType,
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
-import { EPISODE_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
@@ -25,7 +24,7 @@ export function mapResponseToShowProgress(
     season: episode.season,
     number: episode.number,
     poster: {
-      url: prependHttps(posterCandidate, EPISODE_PLACEHOLDER),
+      url: prependHttps(posterCandidate),
     },
     airedDate: new Date(episode.first_aired),
     total: item.aired,

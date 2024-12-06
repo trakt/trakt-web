@@ -18,7 +18,7 @@
       i18n={EpisodeIntlProvider}
       episodeNumber={entry.number}
       seasonNumber={entry.season}
-      posterUrl={entry.poster.url}
+      posterUrl={entry.poster.url ?? entry.show.cover.url}
       showTitle={entry.show.title}
       episodeTitle={entry.title}
       airedDate={entry.airedDate}

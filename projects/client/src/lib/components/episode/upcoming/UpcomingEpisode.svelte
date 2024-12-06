@@ -2,6 +2,7 @@
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { type EpisodeType } from "$lib/models/EpisodeType";
+  import { EPISODE_PLACEHOLDER } from "$lib/utils/constants";
   import EpisodeCard from "../card/EpisodeCard.svelte";
   import EpisodeCover from "../card/EpisodeCover.svelte";
   import type { EpisodeIntl } from "../EpisodeIntl";
@@ -9,7 +10,7 @@
 
   type EpisodeProps = {
     i18n: EpisodeIntl;
-    posterUrl: string;
+    posterUrl: string | Nil;
     showTitle: string;
     episodeTitle: string;
     episodeNumber: number;
@@ -36,7 +37,7 @@
   <EpisodeCover
     {i18n}
     {type}
-    src={`${posterUrl}`}
+    src={`${posterUrl ?? EPISODE_PLACEHOLDER}`}
     alt={`${showTitle} - ${episodeTitle}`}
   >
     {#snippet tags()}
