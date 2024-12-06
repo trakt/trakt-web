@@ -4,5 +4,5 @@ export type EpisodeProgressEntry = EpisodeEntry & {
   total: number;
   completed: number;
   remaining: number;
-  runtime: number;
+  minutesLeft: number;
 };

@@ -32,7 +32,7 @@
   completed={episode.completed}
   total={episode.total}
   remaining={episode.remaining}
-  runtime={episode.runtime}
+  minutesLeft={episode.minutesLeft}
   type={episode.type}
   isLoading={$isMarkingAsWatched}
   showHref={buildMediaLink("show", show.slug)}

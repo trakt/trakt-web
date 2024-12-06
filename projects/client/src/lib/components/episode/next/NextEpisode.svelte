@@ -18,7 +18,7 @@
     total: number;
     completed: number;
     remaining: number;
-    runtime: number;
+    minutesLeft: number;
     onMarkAsWatched: () => void;
     type: EpisodeType;
     isLoading: boolean;
@@ -35,14 +35,12 @@
     total,
     completed,
     remaining,
-    runtime,
+    minutesLeft,
     onMarkAsWatched,
     type,
     isLoading,
     showHref,
   }: EpisodeProps = $props();
-
-  const duration = $derived(remaining * runtime);
 </script>
 
 <EpisodeCard>
@@ -56,7 +54,7 @@
     {#snippet tags()}
       <ShowProgressTag {total} progress={completed}>
         <span class="show-progress-text">
-          {i18n.remainingText(remaining)} / {i18n.durationText(duration)}
+          {i18n.remainingText(remaining)} / {i18n.durationText(minutesLeft)}
         </span>
       </ShowProgressTag>
     {/snippet}

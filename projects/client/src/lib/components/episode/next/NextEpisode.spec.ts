@@ -22,7 +22,7 @@ describe('NextEpisode', () => {
     completed: 0,
     total: 20,
     remaining: 20,
-    runtime: 3.85,
+    minutesLeft: 77,
     type: EpisodeStandardType.Standard,
     isLoading: false,
     onMarkAsWatched: () => {},

@@ -50,7 +50,7 @@ function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
     total: item.progress.aired,
     completed: item.progress.completed,
     remaining: item.progress.aired - item.progress.completed,
-    runtime: episode.runtime,
+    minutesLeft: item.progress.stats?.minutes_left ?? 0,
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.Unknown,
   };
@@ -69,6 +69,7 @@ export function upNextRequest(
         limit,
         sort_by: sort?.by,
         sort_how: sort?.direction,
+        include_stats: true,
       },
       extraHeaders: {
         ...authHeader(),

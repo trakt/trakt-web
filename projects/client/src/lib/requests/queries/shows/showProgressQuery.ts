@@ -31,7 +31,7 @@ export function mapResponseToShowProgress(
     total: item.aired,
     completed: item.completed,
     remaining: item.aired - item.completed,
-    runtime: episode.runtime,
+    minutesLeft: item.stats?.minutes_left ?? 0,
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.Unknown,
   };
@@ -49,6 +49,7 @@ export function showProgressRequest(
         specials: false,
         hidden: false,
         extended: 'full,cloud9',
+        include_stats: true,
       },
       params: {
         id: slug,
