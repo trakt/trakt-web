@@ -1,6 +1,9 @@
 <script lang="ts">
   import "../style";
 
+  import { page } from "$app/stores";
+  import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
+  import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import { i18n } from "$lib/features/i18n/index.ts";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -96,27 +99,34 @@
   </style>
 </svelte:head>
 
-<ParaglideJS {i18n}>
-  <ThemeProvider theme={data.theme}>
-    <QueryClientProvider client={data.queryClient}>
-      <AuthProvider token={data.token}>
-        <div class="trakt-layout-wrapper">
-          <Navbar />
-          <div class="trakt-layout-content">
-            {@render children()}
+<QueryClientProvider client={data.queryClient}>
+  <AuthProvider token={data.token}>
+    <AnalyticsProvider>
+      <ParaglideJS {i18n}>
+        <ThemeProvider theme={data.theme}>
+          <div class="trakt-layout-wrapper">
+            <Navbar />
+            <div class="trakt-layout-content">
+              {@render children()}
+            </div>
+            <RenderFor device={["tablet-lg", "desktop"]} audience="all">
+              <Footer />
+            </RenderFor>
           </div>
-          <RenderFor device={["tablet-lg", "desktop"]} audience="all">
-            <Footer />
-          </RenderFor>
-        </div>
-      </AuthProvider>
-      <SvelteQueryDevtools
-        buttonPosition="bottom-left"
-        styleNonce="opacity: 0.5"
-      />
-    </QueryClientProvider>
-  </ThemeProvider>
-</ParaglideJS>
+
+          <SvelteQueryDevtools
+            buttonPosition="bottom-left"
+            styleNonce="opacity: 0.5"
+          />
+        </ThemeProvider>
+      </ParaglideJS>
+
+      {#key $page.url.pathname}
+        <PageView />
+      {/key}
+    </AnalyticsProvider>
+  </AuthProvider>
+</QueryClientProvider>
 
 <style>
   :global(.tsqd-open-btn-container) {
