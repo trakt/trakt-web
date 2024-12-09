@@ -18,6 +18,7 @@
     "@playwright/test": "^1.49.0",
     "@sveltejs/adapter-auto": "^3.3.1",
     "@sveltejs/adapter-cloudflare": "^4.7.4",
+    "@sveltejs/enhanced-img": "^0.4.1",
     "@sveltejs/kit": "^2.8.5",
     "@sveltejs/vite-plugin-svelte": "^5.0.1",
     "@testing-library/jest-dom": "^6.6.3",
