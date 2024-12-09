@@ -2,6 +2,7 @@
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import Landing from "$lib/sections/landing/Landing.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
   import RecommendedMovies from "$lib/sections/recommendations/RecommendedMovies.svelte";
   import RecommendedShows from "$lib/sections/recommendations/RecommendedShows.svelte";
@@ -26,6 +27,7 @@
     <RecommendedMovies />
   </RenderFor>
   <RenderFor audience="public">
+    <Landing />
     <BackgroundCoverImage src={DEFAULT_COVER} type="main" />
   </RenderFor>
 </div>
