@@ -1,4 +1,5 @@
 import { paraglide } from '@inlang/paraglide-sveltekit/vite';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vitest/config';
@@ -61,6 +62,7 @@ export default defineConfig(({ mode }) => ({
     }),
     denoSveltekitExit(),
     svelteTesting(),
+    enhancedImages(),
   ],
 
   //TODO enable globals when typings are fixed
