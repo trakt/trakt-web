@@ -2,14 +2,11 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
-  import MaskImage from "./assets/text_logo.svg";
 
   const { user } = useUser();
-
-  const maskUri = `"${MaskImage}"`;
 </script>
 
-<div class="trakt-footer-bg" style="--mask-image: url({maskUri})">
+<div class="trakt-footer-bg">
   <div class="trakt-footer-bg-overlay">
     <CrossOriginImage
       src={$user?.cover.url ?? DEFAULT_COVER}
@@ -33,9 +30,10 @@
     .trakt-footer-bg-overlay {
       display: flex;
       mask-repeat: no-repeat;
-      mask-image: var(--mask-image);
+      mask-image: url("$lib/sections/footer/components/assets/text_logo.svg");
       mask-size: 100% auto;
       mask-position: top center;
+      position: relative;
 
       &::after {
         content: "";

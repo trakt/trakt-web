@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { debounce } from '$lib/utils/timing/debounce.ts';
 import { onDestroy, onMount } from 'svelte';
 import { writable } from 'svelte/store';
 
@@ -18,7 +19,14 @@ export function useMedia(query: string) {
   };
 
   function updateValue() {
-    value.set(media.matches);
+    /*
+      We debounce here to catch intermediary states of the media query.
+      For example, when going from tabletLarge to desktop, tabletLarge
+      will first be set to false (at which time desktop is also still false),
+      and then desktop will be set to true, resulting in "false, false", and
+      then "false, true" as the final state.
+    */
+    debounce(() => value.set(media.matches), 1000 / 60);
   }
 
   onMount(() => {

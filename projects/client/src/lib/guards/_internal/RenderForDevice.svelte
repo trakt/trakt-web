@@ -22,8 +22,15 @@
     isAvailableForTabletLarge && $isTabletLarge,
   );
   const shouldRenderDesktop = $derived(isAvailableForDesktop && $isDesktop);
+
+  const shouldRender = $derived(
+    shouldRenderMobile ||
+      shouldRenderTabletSmall ||
+      shouldRenderTabletLarge ||
+      shouldRenderDesktop,
+  );
 </script>
 
-{#if shouldRenderMobile || shouldRenderTabletSmall || shouldRenderTabletLarge || shouldRenderDesktop}
+{#if shouldRender}
   {@render children()}
 {/if}
