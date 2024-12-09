@@ -13,7 +13,6 @@ span.display-title {
 span.display-title {
   display: block;
 
-  font-variant-numeric: lining-nums tabular-nums;
   font-size: var(--ni-104);
   font-style: normal;
   font-weight: 600;
