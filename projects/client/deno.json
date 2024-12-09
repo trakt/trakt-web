@@ -2,6 +2,8 @@
   "imports": {
     "$lib": "./src/lib",
     "$lib/": "./src/lib/",
+    "$mocks": "./src/mocks",
+    "$mocks/": "./src/mocks/",
     "$env/static/public": "./.svelte-kit/ambient.d.ts",
     "$env/static/private": "./.svelte-kit/ambient.d.ts",
     "$env/dynamic/public": "./.svelte-kit/ambient.d.ts",

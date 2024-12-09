@@ -6,7 +6,7 @@ import { Environment } from '$lib/api.ts';
 
 declare global {
   const TRAKT_CLIENT_ID: string;
-  const TRAKT_MODE: 'development' | 'production';
+  const TRAKT_MODE: 'development' | 'production' | 'test';
   const TRAKT_TARGET_ENVIRONMENT: Environment;
 
   const FIREBASE_PROJECT_ID: string;
