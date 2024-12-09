@@ -6,6 +6,7 @@ import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
 export type UserSettings = {
+  id: string;
   name: {
     full: string;
     first: string;
@@ -38,6 +39,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const [firstName = '', lastName = ''] = user.name.split(' ');
 
   return {
+    id: user.ids.uuid,
     name: {
       full: fullName,
       first: firstName,

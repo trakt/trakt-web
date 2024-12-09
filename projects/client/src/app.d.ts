@@ -9,6 +9,12 @@ declare global {
   const TRAKT_MODE: 'development' | 'production';
   const TRAKT_TARGET_ENVIRONMENT: Environment;
 
+  const FIREBASE_PROJECT_ID: string;
+  const FIREBASE_API_KEY: string;
+  const FIREBASE_APP_ID: string;
+  const FIREBASE_MEASUREMENT_ID: string;
+  const FIREBASE_MESSAGING_SENDER_ID: string;
+
   type Nil = null | undefined;
 
   type HttpsUrl = `https://${string}`;
