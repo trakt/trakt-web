@@ -15,6 +15,9 @@
     "client:dev": "cd projects/client && deno task dev",
     "client:i18n:resolve": "cd projects/client && deno task i18n:resolve"
   },
+  "unstable": [
+    "broadcast-channel"
+  ],
   "nodeModulesDir": "auto",
   "fmt": {
     "singleQuote": true,
