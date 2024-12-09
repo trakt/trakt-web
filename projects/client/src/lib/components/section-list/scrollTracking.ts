@@ -5,7 +5,10 @@ type ScrollX = { left: number; right: number };
 function extractScrollX(node: HTMLElement): ScrollX {
   const { scrollLeft, scrollWidth, clientWidth } = node;
   const left = scrollLeft;
-  const right = scrollWidth - clientWidth - left;
+
+  // Rounded up because the value can be subpixel precise
+  const roundedLeft = Math.ceil(left + 0.5);
+  const right = scrollWidth - clientWidth - roundedLeft;
 
   return { left, right };
 }
