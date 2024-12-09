@@ -21,6 +21,13 @@ declare global {
     size?: 'normal' | 'small';
   };
 
+  type HTMLImageElementProps = {
+    src: string;
+    alt: string;
+    onload?: (event: Event) => void;
+    onerror?: (event: Event) => void;
+  };
+
   type HTMLElementProps = {
     disabled?: boolean;
 

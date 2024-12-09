@@ -2,26 +2,29 @@
   import { writable } from "svelte/store";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
 
-  type CrossOriginImageProps = {
-    src: string;
-    alt: string;
-    onLoad?: () => void;
-  };
-
-  const { alt, src, onLoad }: CrossOriginImageProps = $props();
+  const {
+    alt,
+    src,
+    onload: _onload,
+    onerror: _onerror,
+  }: HTMLImageElementProps = $props();
 
   const response = $derived(writable({ uri: src }));
   const isImageLoaded = $derived(writable(false));
 </script>
 
 <img
+  crossorigin="anonymous"
   class:image-loaded={$isImageLoaded}
   src={$response.uri}
   {alt}
-  onerror={() => resolveEnvironmentUri(src).then(response.set)}
-  onload={() => {
+  onerror={(ev) => {
+    resolveEnvironmentUri(src).then(response.set);
+    _onerror?.(ev);
+  }}
+  onload={function (ev) {
     requestAnimationFrame(() => isImageLoaded.set(true));
-    onLoad?.();
+    _onload?.(ev);
   }}
 />
 

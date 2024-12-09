@@ -1,17 +1,65 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaType } from "$lib/models/MediaType";
+  import { writable } from "svelte/store";
 
   type ImageBackgroundProps = {
     src: string;
     type: MediaType | "main";
   };
 
+  const color = writable("var(--shade-900)");
+
+  function extractDominantColor(img: HTMLImageElement) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    context.drawImage(img, 0, 0, img.width, img.height);
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    const colorCount = data.reduce(
+      (acc, _, i) => {
+        if (i % 4 === 0) {
+          const rgb = `${data[i]},${data[i + 1]},${data[i + 2]}`;
+          acc[rgb] = (acc[rgb] || 0) + 1;
+        }
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+
+    const dominantColor = Object.keys(colorCount).reduce((a, b) =>
+      colorCount[a] > colorCount[b] ? a : b,
+    );
+
+    return `rgb(${dominantColor})`;
+  }
+
   const { src, type }: ImageBackgroundProps = $props();
 </script>
 
+<svelte:head>
+  <meta name="theme-color" content={$color} />
+</svelte:head>
+
 <div class="background-cover-image">
-  <CrossOriginImage {src} alt={`Background for ${type}`} />
+  <CrossOriginImage
+    {src}
+    alt={`Background for ${type}`}
+    onload={function (ev) {
+      if (ev.target instanceof HTMLImageElement) {
+        const dominantColor = extractDominantColor(ev.target);
+
+        if (dominantColor == null) return;
+
+        color.set(dominantColor);
+      }
+    }}
+  />
 </div>
 
 <style>
