@@ -65,5 +65,12 @@
   "join_trakt_button": "Trakt beitreten",
   "join_trakt_button_label": "Tritt trakt.tv bei, um zu verfolgen, was du dir ansiehst",
   "copyright_notice": "Alle Rechte vorbehalten.",
-  "copyright_crafted_by": "Handgefertigt auf der ganzen Welt"
+  "copyright_crafted_by": "Handgefertigt auf der ganzen Welt",
+  "join_trakt_for_free_button": "Kostenlos bei Trakt beitreten",
+  "landing_discover_label": "Entdecken",
+  "landing_discover_description": "was angesagt ist und wo du es streamen kannst.",
+  "landing_track_label": "Verfolgen",
+  "landing_track_description": "was du schaust und entdecke neue Shows.",
+  "landing_share_label": "Teilen",
+  "landing_share_description": "Kommentare, Bewertungen und Empfehlungen."
 }

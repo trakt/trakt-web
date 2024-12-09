@@ -65,5 +65,12 @@
   "join_trakt_button": "Rejoindre Trakt",
   "join_trakt_button_label": "Rejoignez trakt.tv pour suivre ce que vous regardez",
   "copyright_notice": "Tous droits réservés.",
-  "copyright_crafted_by": "Fabriqué à la main dans le monde entier"
+  "copyright_crafted_by": "Fabriqué à la main dans le monde entier",
+  "join_trakt_for_free_button": "Rejoignez Trakt gratuitement",
+  "landing_discover_label": "Découvrir",
+  "landing_discover_description": "ce qui est chaud et où le diffuser.",
+  "landing_track_label": "Suivre",
+  "landing_track_description": "ce que vous regardez et recevoir des recommandations personnalisées.",
+  "landing_share_label": "Partager",
+  "landing_share_description": "vos commentaires, vos évaluations et vos recommandations."
 }

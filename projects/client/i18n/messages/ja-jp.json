@@ -65,5 +65,12 @@
   "join_trakt_button": "Trakt に参加",
   "join_trakt_button_label": "視聴状況を追跡するには trakt.tv に参加してください",
   "copyright_notice": "全著作権所有。",
-  "copyright_crafted_by": "で手作り"
+  "copyright_crafted_by": "で手作り",
+  "join_trakt_for_free_button": "無料で Trakt に参加",
+  "landing_discover_label": "発見",
+  "landing_discover_description": "最新のトレンドや配信先を見つける。",
+  "landing_track_label": "追跡",
+  "landing_track_description": "これまでに視聴した番組や映画を追跡。",
+  "landing_share_label": "共有",
+  "landing_share_description": "コメント、評価、おすすめを共有。"
 }

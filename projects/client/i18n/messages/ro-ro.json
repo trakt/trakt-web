@@ -65,5 +65,12 @@
   "join_trakt_button": "Alătură-te la Trakt",
   "join_trakt_button_label": "Alătură-te la trakt.tv pentru a ține evidența a ceea ce vizionezi",
   "copyright_notice": "Toate drepturile rezervate.",
-  "copyright_crafted_by": "Realizat manual în întreaga lume"
+  "copyright_crafted_by": "Realizat manual în întreaga lume",
+  "join_trakt_for_free_button": "Alătură-te la Trakt gratuit",
+  "landing_discover_label": "Descoperă",
+  "landing_discover_description": "noi emisiuni și filme.",
+  "landing_track_label": "Urmărește",
+  "landing_track_description": "ceea ce vizionezi.",
+  "landing_share_label": "Partajează",
+  "landing_share_description": "cu prietenii și urmăritorii."
 }

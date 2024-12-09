@@ -65,5 +65,12 @@
   "join_trakt_button": "Приєднатися до Trakt",
   "join_trakt_button_label": "Приєднуйтесь до trakt.tv, щоб відстежувати, що ви дивитесь",
   "copyright_notice": "Всі права захищені.",
-  "copyright_crafted_by": "Ручна робота по всьому світу"
+  "copyright_crafted_by": "Ручна робота по всьому світу",
+  "join_trakt_for_free_button": "Приєднатися до Trakt безкоштовно",
+  "landing_discover_label": "Відкрити",
+  "landing_discover_description": "що є гаря чи популярне та де його можна подивитися.",
+  "landing_track_label": "Відстежити",
+  "landing_track_description": "всі шоу та фільми, які ви коли-небудь дивилися.",
+  "landing_share_label": "Поділитися",
+  "landing_share_description": "коментарі, оцінки та рекомендації."
 }

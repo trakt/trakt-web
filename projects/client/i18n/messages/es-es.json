@@ -65,5 +65,12 @@
   "join_trakt_button": "Únete a Trakt",
   "join_trakt_button_label": "Únete a trakt.tv para controlar lo que estás viendo",
   "copyright_notice": "Todos los derechos reservados.",
-  "copyright_crafted_by": "Creado a mano en todo el mundo"
+  "copyright_crafted_by": "Creado a mano en todo el mundo",
+  "join_trakt_for_free_button": "Únete a Trakt gratis",
+  "landing_discover_label": "Descubrir",
+  "landing_discover_description": "nuevos programas y películas.",
+  "landing_track_label": "Seguir",
+  "landing_track_description": "lo que estás viendo.",
+  "landing_share_label": "Compartir",
+  "landing_share_description": "con amigos y seguidores."
 }

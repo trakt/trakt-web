@@ -65,5 +65,12 @@
   "join_trakt_button": "Word lid van Trakt",
   "join_trakt_button_label": "Word lid van trakt.tv om bij te houden wat je kijkt",
   "copyright_notice": "Alle rechten voorbehouden.",
-  "copyright_crafted_by": "Met de hand gemaakt over de hele wereld"
+  "copyright_crafted_by": "Met de hand gemaakt over de hele wereld",
+  "join_trakt_for_free_button": "Word gratis lid van Trakt",
+  "landing_discover_label": "Ontdek",
+  "landing_discover_description": "wat hot is en waar je het kunt streamen.",
+  "landing_track_label": "Volg",
+  "landing_track_description": "wat je hebt bekeken en wat je nog wilt zien.",
+  "landing_share_label": "Deel",
+  "landing_share_description": "opmerkingen, beoordelingen en aanbevelingen."
 }

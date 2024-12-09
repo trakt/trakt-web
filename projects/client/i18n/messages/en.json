@@ -65,5 +65,12 @@
   "join_trakt_button": "Join Trakt",
   "join_trakt_button_label": "Join trakt.tv to keep track of what you're watching",
   "copyright_notice": "All rights reserved.",
-  "copyright_crafted_by": "Hand crafted around the world"
+  "copyright_crafted_by": "Hand crafted around the world",
+  "join_trakt_for_free_button": "Join Trakt for Free",
+  "landing_discover_label": "Discover",
+  "landing_discover_description": "what's hot and where to stream it.",
+  "landing_track_label": "Track",
+  "landing_track_description": "all the shows and movies you have ever watched.",
+  "landing_share_label": "Share",
+  "landing_share_description": "comments, ratings and recommendations."
 }
