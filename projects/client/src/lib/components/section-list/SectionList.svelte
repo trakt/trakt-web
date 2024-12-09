@@ -30,15 +30,29 @@
   let horizontalScrollContainer: HTMLDivElement;
 
   function scrollToLeft() {
-    horizontalScrollContainer.scrollBy({
-      left: -window.innerWidth / 2,
+    const left = Math.max(
+      0,
+      horizontalScrollContainer.scrollLeft - window.innerWidth / 2,
+    );
+
+    horizontalScrollContainer.scrollTo({
+      left,
       behavior: "smooth",
     });
   }
 
   function scrollToRight() {
-    horizontalScrollContainer.scrollBy({
-      left: window.innerWidth / 2,
+    const maxScrollLeft =
+      horizontalScrollContainer.scrollWidth -
+      horizontalScrollContainer.clientWidth;
+
+    const left = Math.min(
+      maxScrollLeft,
+      horizontalScrollContainer.scrollLeft + window.innerWidth / 2,
+    );
+
+    horizontalScrollContainer.scrollTo({
+      left,
       behavior: "smooth",
     });
   }
