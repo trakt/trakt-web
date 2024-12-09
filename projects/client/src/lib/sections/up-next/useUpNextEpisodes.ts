@@ -21,7 +21,7 @@ export const useUpNextEpisodes = () => {
   );
 
   const reload = () => {
-    client?.resetQueries({
+    client?.invalidateQueries({
       queryKey: upNextQueryKey,
     });
   };
