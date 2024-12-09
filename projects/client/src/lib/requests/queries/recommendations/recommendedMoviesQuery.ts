@@ -1,7 +1,7 @@
 import type { RecommendedMovieResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import { mapResponseToMovieSummary } from '../movies/movieSummaryQuery.ts';
+import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
 
 export type RecommendedMovie = {
   id: number;
@@ -19,7 +19,7 @@ function mapResponseToRecommendedMovie(
   movie: RecommendedMovieResponse[0],
 ): RecommendedMovie {
   return {
-    ...mapResponseToMovieSummary(movie),
+    ...mapMovieResponseToMovieSummary(movie),
   };
 }
 

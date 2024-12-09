@@ -1,4 +1,4 @@
-import type { MovieSummary } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
-import type { ShowSummary } from '$lib/requests/queries/shows/showSummaryQuery.ts';
+import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 
 export type MediaSummary = MovieSummary | ShowSummary;
