@@ -1,3 +1,3 @@
 export type AudienceProps = {
-  audience: 'authenticated' | 'public';
+  audience: 'authenticated' | 'public' | 'all';
 };

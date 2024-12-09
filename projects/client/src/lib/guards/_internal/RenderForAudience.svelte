@@ -9,7 +9,8 @@
   const { user } = useUser();
 
   const isAvailableForAudience = $derived(
-    (audience === "authenticated" && $isAuthorized && $user != null) ||
+    audience === "all" ||
+      (audience === "authenticated" && $isAuthorized && $user != null) ||
       (audience === "public" && !$isAuthorized),
   );
 </script>
