@@ -2,9 +2,10 @@
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import type { MediaRating } from "$lib/models/MediaRating";
+  import { toIMDBRating } from "$lib/utils/formatting/number/toIMDBRating";
+  import { toRottenTomatoRating } from "$lib/utils/formatting/number/toRottenTomatoRating";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
-
   type RatingListProps = {
     i18n?: RatingIntl;
     ratings: MediaRating;
@@ -16,19 +17,25 @@
 
 <div class="trakt-summary-ratings">
   <div class="rating-item imdb-rating">
-    <IMDBIcon />
+    <IMDBIcon style={toIMDBRating(imdb.votes)} />
     <div class="rating-info">
-      <p class="large bold">{imdb.rating}</p>
-      <p class="small bold secondary">{i18n.voteText(imdb.votes)}</p>
+      <p class="large bold">{imdb.votes === 0 ? "-" : imdb.rating}</p>
+      {#if imdb.votes > 0}
+        <p class="small bold secondary">
+          {i18n.voteText(imdb.votes)}
+        </p>
+      {/if}
     </div>
   </div>
   <div class="rating-item rotten-rating">
-    <RottenIcon />
+    <RottenIcon style={toRottenTomatoRating(rotten.critic)} />
     <div class="rating-info">
-      <p class="large bold">{rotten.critic}</p>
-      <p class="small bold uppercase secondary">
-        {rotten.critic > 60 ? "Fresh" : "Rotten"}
-      </p>
+      <p class="large bold">{rotten.critic === 0 ? "-" : rotten.critic}</p>
+      {#if rotten.critic > 0}
+        <p class="small bold uppercase secondary">
+          {toRottenTomatoRating(rotten.critic)}
+        </p>
+      {/if}
     </div>
   </div>
 </div>

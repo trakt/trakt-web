@@ -1,8 +1,19 @@
+<script lang="ts">
+  import type { IMDBRating } from "$lib/utils/formatting/number/toIMDBRating";
+
+  type IMDBIconProps = {
+    style?: IMDBRating;
+  };
+
+  const { style = "rated" }: IMDBIconProps = $props();
+</script>
+
 <svg
   height="18"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   viewBox="0 0 575 289.83"
+  style:filter={`grayscale(${style === "rated" ? 0 : 1})`}
 >
   <defs>
     <path
