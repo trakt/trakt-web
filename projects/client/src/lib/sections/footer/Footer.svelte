@@ -14,10 +14,5 @@
     margin-top: var(--ni-120);
     padding-left: var(--layout-distance-side);
     padding-right: var(--layout-distance-side);
-
-    /* TODO: remove when RenderFor re-render is fixed */
-    @media (max-width: 768px) {
-      display: none;
-    }
   }
 </style>

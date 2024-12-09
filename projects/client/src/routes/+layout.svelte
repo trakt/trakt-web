@@ -4,6 +4,7 @@
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import { i18n } from "$lib/features/i18n/index.ts";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import { ParaglideJS } from "@inlang/paraglide-sveltekit";
@@ -104,7 +105,9 @@
           <div class="trakt-layout-content">
             {@render children()}
           </div>
-          <Footer />
+          <RenderFor device={["tablet-lg", "desktop"]} audience="all">
+            <Footer />
+          </RenderFor>
         </div>
       </AuthProvider>
       <SvelteQueryDevtools
