@@ -20,21 +20,15 @@ export function useTrendingItems() {
   );
 
   return {
-    shows: derived(trendingShows, ($shows) => {
-      return $shows.isFetching || !$shows.data
-        ? []
-        : shuffle($shows.data).slice(0, RANDOM_SHOW_COUNT);
-    }),
+    shows: derived(
+      trendingShows,
+      ($shows) => shuffle($shows.data ?? []).slice(0, RANDOM_SHOW_COUNT),
+    ),
     //TODO replace with episode
-    show: derived(trendingShows, ($shows) => {
-      return $shows.isFetching || !$shows.data
-        ? undefined
-        : shuffle($shows.data).at(0);
-    }),
-    movie: derived(trendingMovies, ($movies) => {
-      return $movies.isFetching || !$movies.data
-        ? undefined
-        : shuffle($movies.data).at(0);
-    }),
+    show: derived(trendingShows, ($shows) => shuffle($shows.data ?? []).at(0)),
+    movie: derived(
+      trendingMovies,
+      ($movies) => shuffle($movies.data ?? []).at(0),
+    ),
   };
 }
