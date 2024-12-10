@@ -64,7 +64,6 @@ export function useSearch() {
   return {
     search: (term: string) => {
       isSearching.set(true);
-      console.log('searching', term);
       debounce(search, get(isDesktop) ? 150 : 250)(term);
     },
     clear,

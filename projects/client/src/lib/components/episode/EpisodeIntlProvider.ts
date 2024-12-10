@@ -1,4 +1,4 @@
-import { languageTag, locale } from '$lib/features/i18n/index.ts';
+import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import {
   EpisodeFinaleType,
@@ -29,7 +29,7 @@ export const EpisodeIntlProvider: EpisodeIntl = {
         return m.mid_season_finale();
     }
   },
-  timestampText: (next) => toHumanDate(new Date(), next, locale()),
+  timestampText: (next) => toHumanDate(new Date(), next, getLocale()),
   durationText: (minutes) => toHumanDuration({ minutes }, languageTag()),
   remainingText: (count) => m.remaining_episodes({ count }),
 };

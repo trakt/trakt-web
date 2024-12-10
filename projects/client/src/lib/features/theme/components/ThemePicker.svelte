@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { THEME_FIELD_NAME } from "../constants";
   import type { ThemeResponse } from "../handle";
   import { Theme } from "../models/Theme";
   import { nextTheme } from "../nextTheme";
@@ -15,7 +14,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ [THEME_FIELD_NAME]: value }),
+      body: JSON.stringify({ theme: value }),
     }).then((res) => res.json() as Promise<ThemeResponse>);
 
     set(result.theme ?? $theme);

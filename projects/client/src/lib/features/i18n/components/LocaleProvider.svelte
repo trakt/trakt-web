@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { ParaglideJS } from "@inlang/paraglide-sveltekit";
-  import { i18n } from "../index";
-
+  import { useLocale } from "./useLocale";
   const { children }: ChildrenProps = $props();
+
+  const locale = useLocale();
 </script>
 
-<ParaglideJS {i18n}>
+{#key $locale}
   {@render children()}
-</ParaglideJS>
+{/key}

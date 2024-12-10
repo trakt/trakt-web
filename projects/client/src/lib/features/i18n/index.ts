@@ -1,15 +1,6 @@
-import * as m from '$lib/paraglide/messages.js';
 import type { AvailableLanguageTag } from '$lib/paraglide/runtime.js';
 import * as runtime from '$lib/paraglide/runtime.js';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { createI18n } from '@inlang/paraglide-sveltekit';
-
-export const i18n = createI18n(
-  runtime,
-  {
-    exclude: [/^\/api\//],
-  },
-);
 
 const DEFAULT_REGION_EN = 'us';
 
@@ -34,7 +25,7 @@ export function getLanguageAndRegion(): {
   };
 }
 
-export function locale() {
+export function getLocale() {
   return runtime.languageTag();
 }
 
@@ -54,5 +45,14 @@ export type AvailableRegion = ExtractRegion<AvailableLocale>;
 
 export const isAvailableLocale = runtime.isAvailableLanguageTag;
 export const availableLocales = runtime.availableLanguageTags;
+export const setLocale = (locale: string): AvailableLocale => {
+  const sanitizedLocale = availableLocales.includes(locale as AvailableLocale)
+    ? locale as AvailableLocale
+    : defaultLocale;
 
-export { m, runtime };
+  runtime.setLanguageTag(sanitizedLocale);
+  return sanitizedLocale;
+};
+export const getTextDirection = (_locale: AvailableLocale) => 'ltr';
+export const defaultLocale = runtime.sourceLanguageTag;
+export const onLanguageChange = runtime.onSetLanguageTag;
