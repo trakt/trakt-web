@@ -9,11 +9,6 @@
 
 <svelte:head>
   <title>{title}</title>
-  <style>
-    .trakt-navbar-spacer {
-      display: none;
-    }
-  </style>
 </svelte:head>
 
 <main class="error-page">
