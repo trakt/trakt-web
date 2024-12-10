@@ -26,7 +26,7 @@ export function useMedia(query: string) {
       and then desktop will be set to true, resulting in "false, false", and
       then "false, true" as the final state.
     */
-    debounce(() => value.set(media.matches), 1000 / 60);
+    debounce(() => value.set(media.matches), 1000 / 30)();
   }
 
   onMount(() => {

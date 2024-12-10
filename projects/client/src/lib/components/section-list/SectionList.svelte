@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useVarToPixels } from "$lib/utils/css/useVarToPixels";
+  import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { writable } from "svelte/store";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CaretLeftIcon from "../icons/CaretLeftIcon.svelte";

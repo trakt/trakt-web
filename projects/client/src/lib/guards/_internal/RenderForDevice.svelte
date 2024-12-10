@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useMedia, WellKnownMediaQuery } from "$lib/utils/css/useMedia";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import type { DeviceProps } from "./DeviceProps";
 
   const { children, device }: ChildrenProps & DeviceProps = $props();

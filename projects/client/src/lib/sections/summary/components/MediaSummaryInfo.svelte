@@ -5,7 +5,7 @@
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import { useMedia, WellKnownMediaQuery } from "$lib/utils/css/useMedia";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import type { MediaSummary } from "./MediaSummary";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 

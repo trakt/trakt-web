@@ -5,11 +5,11 @@ import {
   searchQuery,
   type SearchResult,
 } from '$lib/requests/queries/search/searchQuery.ts';
-import { useMedia, WellKnownMediaQuery } from '$lib/utils/css/useMedia.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
 import { CancelledError, useQueryClient } from '@tanstack/svelte-query';
 import { onDestroy } from 'svelte';
 import { get, writable } from 'svelte/store';
+import { useMedia, WellKnownMediaQuery } from '../../stores/css/useMedia.ts';
 
 export function useSearch() {
   const results = writable([] as SearchResult[]);
