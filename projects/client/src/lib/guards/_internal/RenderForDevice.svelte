@@ -25,7 +25,7 @@
   );
   const shouldRenderDesktop = $derived(isAvailableForDesktop && $isDesktop);
 
-  const shouldRender = useDebouncedValue(false, time.seconds(1) / 60);
+  const shouldRender = useDebouncedValue(time.seconds(1) / 60);
 
   $effect(() => {
     shouldRender.set(
