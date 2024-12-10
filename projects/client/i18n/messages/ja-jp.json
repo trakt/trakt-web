@@ -72,5 +72,6 @@
   "landing_track_label": "追跡",
   "landing_track_description": "これまでに視聴した番組や映画を追跡。",
   "landing_share_label": "共有",
-  "landing_share_description": "コメント、評価、おすすめを共有。"
+  "landing_share_description": "コメント、評価、おすすめを共有。",
+  "trending_now": "トレンド中"
 }
