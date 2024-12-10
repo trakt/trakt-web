@@ -1,5 +1,6 @@
 import { upcomingEpisodesQuery } from '$lib/requests/queries/calendars/upcomingEpisodesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -12,12 +13,14 @@ function daysAgo(days: number) {
 export function useCalendarEpisodes() {
   const [YYYY_MM_DD] = daysAgo(0).toISOString().split('T');
 
-  const query = createQuery(
-    upcomingEpisodesQuery({
+  const query = createQuery({
+    ...upcomingEpisodesQuery({
       startDate: assertDefined(YYYY_MM_DD, 'Could not extract current date.'),
       days: 14,
     }),
-  );
+    gcTime: time.minutes(5),
+    refetchOnWindowFocus: true,
+  });
 
   const calendar = derived(
     query,

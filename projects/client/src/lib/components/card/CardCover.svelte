@@ -59,8 +59,8 @@
     height: var(--height-card-cover);
     align-self: stretch;
     transition:
-      opacity 500ms ease-in-out,
-      filter 150ms ease-in-out;
+      opacity calc(var(--transition-increment) * 2) ease-in-out,
+      filter var(--transition-increment) ease-in-out;
 
     :global(img) {
       width: 100%;

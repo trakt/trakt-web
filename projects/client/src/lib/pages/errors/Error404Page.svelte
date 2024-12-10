@@ -9,6 +9,3 @@
     {m.error_404_action()}
   </Link>
 </ErrorPage>
-
-<style>
-</style>
