@@ -5,12 +5,11 @@
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
-  import { i18n } from "$lib/features/i18n/index.ts";
+  import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
-  import { ParaglideJS } from "@inlang/paraglide-sveltekit";
   import { QueryClientProvider } from "@tanstack/svelte-query";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
 
@@ -102,7 +101,7 @@
 <QueryClientProvider client={data.queryClient}>
   <AuthProvider token={data.token}>
     <AnalyticsProvider>
-      <ParaglideJS {i18n}>
+      <LocaleProvider>
         <ThemeProvider theme={data.theme}>
           <div class="trakt-layout-wrapper">
             <Navbar />
@@ -119,7 +118,7 @@
             styleNonce="opacity: 0.5"
           />
         </ThemeProvider>
-      </ParaglideJS>
+      </LocaleProvider>
 
       {#key $page.url.pathname}
         <PageView />
