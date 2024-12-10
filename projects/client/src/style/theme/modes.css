@@ -10,8 +10,6 @@
 
   --color-card-background: var(--shade-50);
 
-  --color-border-avatar: var(--shade-600);
-
   --color-surface-button-disabled: var(--shade-200);
   --color-foreground-button-disabled: var(--shade-600);
 }
@@ -30,7 +28,6 @@
 
   --color-text-finale-tag: var(--shade-10);
   --color-background-finale-tag: var(--red-700);
-  --color-border-avatar: var(--shade-50);
 
   --color-surface-button-disabled: var(--shade-800);
   --color-foreground-button-disabled: var(--shade-400);

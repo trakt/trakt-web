@@ -8,6 +8,7 @@
     icon?: Snippet;
     subtitle?: Snippet;
     size?: "normal" | "small";
+    text?: "capitalize" | "uppercase";
   };
 
   const {
@@ -18,6 +19,7 @@
     icon,
     subtitle,
     size = "normal",
+    text = "uppercase",
     ...props
   }: TraktButtonProps = $props();
 
@@ -38,7 +40,9 @@
   data-size={size}
 >
   <div class="button-label">
-    <p class:small={subtitle != null}>{@render children()}</p>
+    <p class:small={subtitle != null} class:capitalize={text === "capitalize"}>
+      {@render children()}
+    </p>
     {#if subtitle != null}
       <p class="button-subtitle meta-info">{@render subtitle()}</p>
     {/if}

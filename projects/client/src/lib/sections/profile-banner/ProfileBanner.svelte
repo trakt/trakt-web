@@ -1,24 +1,22 @@
 <script lang="ts">
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useUser } from "../../features/auth/stores/useUser";
+  import ProfileImage from "./ProfileImage.svelte";
 
   const { user } = useUser();
 </script>
 
 {#if $user != null}
   <div class="profile-banner-container">
-    <figure class="profile-image">
-      <CrossOriginImage
-        src={$user.avatar.url}
-        alt={`${$user.name.first}'s avatar`}
+    <Link href="/profile/me">
+      <ProfileImage
+        --width="var(--ni-64)"
+        --height="var(--ni-64)"
+        --border-width="var(--ni-4)"
       />
-      <figcaption class="visually-hidden">
-        {m.profile_banner_greeting({ name: $user.name.first })}
-      </figcaption>
-    </figure>
+    </Link>
     <div class="profile-info">
       <div class="profile-info-primary">
         <h5 class="profile-info-greeting ellipsis">
@@ -34,17 +32,6 @@
 {/if}
 
 <style>
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-
   .profile-banner-container {
     margin-left: calc(var(--ni-52) + var(--layout-distance-side));
     display: flex;
@@ -56,23 +43,6 @@
     @media (max-width: 480px) {
       margin-left: var(--ni-32);
     }
-  }
-
-  .profile-image {
-    margin: 0;
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    width: var(--ni-64);
-    height: var(--ni-64);
-    border-radius: 50%;
-    overflow: hidden;
-
-    border: var(--ni-4) solid var(--color-border-avatar);
   }
 
   .profile-info {

@@ -10,6 +10,7 @@
   import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
   import { onMount } from "svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
+  import ProfileButton from "./ProfileButton.svelte";
   import { useSearch } from "./useSearch";
 
   let windowScrollY = $state(0);
@@ -90,6 +91,14 @@
       </RenderFor>
       <LocalePicker />
       <ThemePicker />
+      <RenderFor
+        audience="authenticated"
+        device={["tablet-sm", "tablet-lg", "desktop"]}
+      >
+        <Link href="/profile/me" color="inherit">
+          <ProfileButton />
+        </Link>
+      </RenderFor>
     </div>
   </nav>
 
