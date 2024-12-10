@@ -2,7 +2,6 @@ import type { SearchResultResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
@@ -92,5 +91,4 @@ export const searchQuery = (params: SearchParams) => ({
   queryKey: searchQueryKey(params.query),
   queryFn: () => searchRequest(params),
   retry: 0,
-  staleTime: time.minutes(5),
 });
