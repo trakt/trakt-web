@@ -1,5 +1,7 @@
 <script lang="ts">
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { useDebouncedValue } from "$lib/stores/useDebouncedValue";
+  import { time } from "$lib/utils/timing/time";
   import type { DeviceProps } from "./DeviceProps";
 
   const { children, device }: ChildrenProps & DeviceProps = $props();
@@ -23,14 +25,18 @@
   );
   const shouldRenderDesktop = $derived(isAvailableForDesktop && $isDesktop);
 
-  const shouldRender = $derived(
-    shouldRenderMobile ||
-      shouldRenderTabletSmall ||
-      shouldRenderTabletLarge ||
-      shouldRenderDesktop,
-  );
+  const shouldRender = useDebouncedValue(false, time.seconds(1) / 60);
+
+  $effect(() => {
+    shouldRender.set(
+      shouldRenderMobile ||
+        shouldRenderTabletSmall ||
+        shouldRenderTabletLarge ||
+        shouldRenderDesktop,
+    );
+  });
 </script>
 
-{#if shouldRender}
+{#if $shouldRender}
   {@render children()}
 {/if}
