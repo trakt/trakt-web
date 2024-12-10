@@ -7,7 +7,10 @@ export type TrendingShow = ShowSummary & {
   watchers: number;
 };
 
-type ShowTrendingParams = ApiParams;
+type ShowTrendingParams = {
+  page?: number;
+  limit?: number;
+} & ApiParams;
 
 export function mapResponseToTrendingShows(
   shows: ShowTrendingResponse,
@@ -19,13 +22,15 @@ export function mapResponseToTrendingShows(
 }
 
 function showTrendingRequest(
-  { fetch }: ShowTrendingParams,
+  { fetch, page = 1, limit = 10 }: ShowTrendingParams,
 ): Promise<TrendingShow[]> {
   return api({ fetch })
     .shows
     .trending({
       query: {
         extended: 'full,cloud9',
+        limit,
+        page,
       },
     })
     .then(({ status, body }) => {

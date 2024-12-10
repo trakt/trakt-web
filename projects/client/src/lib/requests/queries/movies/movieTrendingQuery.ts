@@ -9,7 +9,10 @@ export type TrendingMovie = MovieSummary & {
   watchers: number;
 };
 
-type MovieTrendingParams = ApiParams;
+type MovieTrendingParams = {
+  page?: number;
+  limit?: number;
+} & ApiParams;
 
 export function mapResponseToTrendingMovies(
   movies: MovieTrendingResponse,
@@ -21,13 +24,15 @@ export function mapResponseToTrendingMovies(
 }
 
 function movieTrendingRequest(
-  { fetch }: MovieTrendingParams,
+  { fetch, page = 1, limit = 10 }: MovieTrendingParams,
 ): Promise<TrendingMovie[]> {
   return api({ fetch })
     .movies
     .trending({
       query: {
         extended: 'full,cloud9',
+        page,
+        limit,
       },
     })
     .then(({ status, body }) => {
