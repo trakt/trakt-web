@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { CardCoverProps } from "./CardCoverProps";
 
   const { src, alt, tags, isLoading }: CardCoverProps = $props();
@@ -18,7 +19,7 @@
     {@render tags?.()}
   </div>
   <div class="card-cover-image">
-    <img {src} {alt} onload={() => (isImagePending = false)} loading="lazy" />
+    <CrossOriginImage {src} {alt} onload={() => (isImagePending = false)} />
   </div>
 </div>
 

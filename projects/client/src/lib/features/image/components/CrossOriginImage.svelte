@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { disableTransitionOnComplete } from "$lib/utils/actions/disableTransitionOnComplete";
   import { writable } from "svelte/store";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
 
@@ -14,6 +15,7 @@
 </script>
 
 <img
+  use:disableTransitionOnComplete
   class:image-loaded={$isImageLoaded}
   src={$response.uri}
   {alt}
