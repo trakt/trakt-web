@@ -1,6 +1,7 @@
 <script>
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import RecommendedMovies from "$lib/sections/recommendations/RecommendedMovies.svelte";
   import TrendingMovies from "$lib/sections/trending/TrendingMovies.svelte";
@@ -13,8 +14,7 @@
   <RenderFor audience="authenticated">
     <BackgroundCoverImage src={$user?.cover.url ?? DEFAULT_COVER} type="main" />
     <TrendingMovies />
-    <!-- TODO title needs to be "Your Recommendations" -->
-    <RecommendedMovies />
+    <RecommendedMovies title={m.your_recommendations()} />
   </RenderFor>
 </div>
 
