@@ -66,7 +66,9 @@
       <RenderFor audience="public">
         <JoinTraktButton />
       </RenderFor>
-      <ProfileButton />
+      <RenderFor audience="authenticated">
+        <ProfileButton />
+      </RenderFor>
     </div>
   </nav>
 

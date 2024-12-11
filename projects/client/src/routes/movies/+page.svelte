@@ -9,14 +9,22 @@
   import TrendingMovies from "$lib/sections/trending/TrendingMovies.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
 
-  const { user } = useUser();
+  const { current } = useUser();
 </script>
 
+<!-- TODO: @seferturan hide actions for unauthorized users -->
 <div class="trakt-shows">
   <RenderFor audience="authenticated">
-    <BackgroundCoverImage src={$user?.cover.url ?? DEFAULT_COVER} type="main" />
+    <BackgroundCoverImage src={current().cover.url} type="main" />
     <TrendingMovies />
     <RecommendedMovies title={m.your_recommendations()} />
+    <AnticipatedMovies />
+    <PopularMovies />
+  </RenderFor>
+
+  <RenderFor audience="public">
+    <BackgroundCoverImage src={DEFAULT_COVER} type="main" />
+    <TrendingMovies />
     <AnticipatedMovies />
     <PopularMovies />
   </RenderFor>
