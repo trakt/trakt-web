@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { page } from "$app/stores";
+
   const {
     children,
     href,
@@ -13,7 +15,14 @@
 </script>
 
 {#if href}
-  <a {href} {target} data-color={color} class="trakt-link" {...props}>
+  <a
+    {href}
+    {target}
+    data-color={color}
+    class="trakt-link"
+    class:trakt-link-active={$page.url.pathname === href}
+    {...props}
+  >
     {@render children?.()}
   </a>
 {:else}
@@ -27,6 +36,16 @@
     display: contents;
     text-decoration: none;
     cursor: pointer;
+
+    :global(&.trakt-link-active) {
+      :global(.trakt-button) {
+        background: color-mix(
+          in srgb,
+          var(--color-background-button) 40%,
+          transparent 60%
+        );
+      }
+    }
 
     &:visited {
       :global(*) {
