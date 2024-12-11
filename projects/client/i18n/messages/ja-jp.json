@@ -78,5 +78,6 @@
   "most_anticipated": "最も期待されている",
   "get_vip": "VIPを取得",
   "get_vip_label": "VIP機能のロックを解除",
-  "user_profile_label": "ユーザープロフィール"
+  "user_profile_label": "ユーザープロフィール",
+  "most_popular": "最も人気のある"
 }
