@@ -4,11 +4,12 @@
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
 
   const user = useUser();
+  const variant = $derived(user.current().isVip ? "vip" : "primary");
 </script>
 
 <Button
   label="profile"
-  variant="vip"
+  {variant}
   style="textured"
   text="capitalize"
   size="small"
