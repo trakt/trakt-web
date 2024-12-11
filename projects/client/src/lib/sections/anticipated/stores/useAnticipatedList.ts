@@ -3,6 +3,7 @@ import {
   type AnticipatedMovie,
   movieAnticipatedQuery,
 } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
+import { showAnticipatedQuery } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -24,7 +25,7 @@ function typeToQuery(type: MediaType): CreateQueryOptions<AnticipatedMedia> {
     case 'movie':
       return movieAnticipatedQuery(params);
     case 'show':
-      throw new Error('Not implemented yet');
+      return showAnticipatedQuery(params);
     case 'episode':
       throw new Error('Not implemented');
   }
