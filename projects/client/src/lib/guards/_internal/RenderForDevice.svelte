@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useDebouncedValue } from "$lib/stores/useDebouncedValue";
   import { time } from "$lib/utils/timing/time";
@@ -37,6 +38,6 @@
   });
 </script>
 
-{#if $shouldRender}
+{#if !browser || $shouldRender}
   {@render children()}
 {/if}
