@@ -1,9 +1,9 @@
 <script lang="ts">
+  import Button from "$lib/components/buttons/Button.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Logo from "$lib/components/logo/Logo.svelte";
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { onMount } from "svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -42,7 +42,16 @@
     <RenderFor audience="authenticated">
       <SearchInput />
     </RenderFor>
-    <div class="trakt-user-preferences">
+    <div class="trakt-navbar-links">
+      <Link href="/movies" color="inherit">
+        <Button
+          label={m.navbar_link_movies_label()}
+          style="ghost"
+          variant="secondary"
+        >
+          {m.navbar_link_movies()}
+        </Button>
+      </Link>
       <RenderFor audience="public">
         <JoinTraktButton />
       </RenderFor>
@@ -69,7 +78,7 @@
     height: var(--ni-64);
   }
 
-  .trakt-user-preferences {
+  .trakt-navbar-links {
     display: flex;
     gap: var(--ni-16);
     align-items: center;

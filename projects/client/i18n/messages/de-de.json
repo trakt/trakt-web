@@ -79,5 +79,7 @@
   "get_vip": "Werde VIP",
   "get_vip_label": "Schalten Sie VIP-Funktionen frei",
   "user_profile_label": "Benutzerprofil",
-  "most_popular": "Am beliebtesten"
+  "most_popular": "Am beliebtesten",
+  "navbar_link_movies": "Filme",
+  "navbar_link_movies_label": "Filme durchsuchen"
 }

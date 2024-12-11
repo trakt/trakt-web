@@ -79,5 +79,7 @@
   "get_vip": "VIPを取得",
   "get_vip_label": "VIP機能のロックを解除",
   "user_profile_label": "ユーザープロフィール",
-  "most_popular": "最も人気のある"
+  "most_popular": "最も人気のある",
+  "navbar_link_movies": "映画",
+  "navbar_link_movies_label": "映画を閲覧する"
 }

@@ -79,5 +79,7 @@
   "get_vip": "Word VIP",
   "get_vip_label": "Ontgrendel VIP-functies",
   "user_profile_label": "Gebruikersprofiel",
-  "most_popular": "Meest populair"
+  "most_popular": "Meest populair",
+  "navbar_link_movies": "Films",
+  "navbar_link_movies_label": "Blader door films"
 }

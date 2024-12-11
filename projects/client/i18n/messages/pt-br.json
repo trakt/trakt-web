@@ -79,5 +79,7 @@
   "get_vip": "Obtenha VIP",
   "get_vip_label": "Desbloqueie recursos VIP",
   "user_profile_label": "Perfil do usuário",
-  "most_popular": "Mais populares"
+  "most_popular": "Mais populares",
+  "navbar_link_movies": "Filmes",
+  "navbar_link_movies_label": "Navegar pelos filmes"
 }
