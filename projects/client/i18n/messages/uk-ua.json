@@ -61,7 +61,7 @@
   "remove_from_watchlist": "Видалити зі списку перегляду",
   "remove_from_watchlist_label": "Видалити {title} зі списку перегляду",
   "watch_the_trailer": "Переглянути трейлер",
-  "search_placeholder": "Шукайте і знайдете... (можливо)",
+  "search_placeholder": "Щастить?",
   "join_trakt_button": "Приєднатися до Trakt",
   "join_trakt_button_label": "Приєднуйтесь до trakt.tv, щоб відстежувати, що ви дивитесь",
   "copyright_notice": "Всі права захищені.",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "фільми",
   "navbar_link_movies_label": "Переглядайте фільми",
   "navbar_link_shows": "Показує",
-  "navbar_link_shows_label": "Перегляньте шоу"
+  "navbar_link_shows_label": "Перегляньте шоу",
+  "navbar_link_home": "Головна",
+  "navbar_link_home_label": "Повернутися на головну сторінку"
 }

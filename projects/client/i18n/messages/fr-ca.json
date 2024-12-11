@@ -61,7 +61,7 @@
   "remove_from_watchlist": "Retirer de ma liste",
   "remove_from_watchlist_label": "Retirer {title} de ma liste",
   "watch_the_trailer": "Regarder la bande-annonce",
-  "search_placeholder": "Cherchez et vous trouverez... (peut-être)",
+  "search_placeholder": "Chanceux ?",
   "join_trakt_button": "Rejoindre Trakt",
   "join_trakt_button_label": "Rejoignez trakt.tv pour suivre ce que vous regardez",
   "copyright_notice": "Tous droits réservés.",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "Films",
   "navbar_link_movies_label": "Parcourir les films",
   "navbar_link_shows": "Spectacles",
-  "navbar_link_shows_label": "Parcourir les émissions"
+  "navbar_link_shows_label": "Parcourir les émissions",
+  "navbar_link_home": "Accueil",
+  "navbar_link_home_label": "Retourner à la page d'accueil"
 }

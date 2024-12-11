@@ -7,7 +7,9 @@
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
+  import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import { QueryClientProvider } from "@tanstack/svelte-query";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
@@ -109,7 +111,9 @@
             </div>
             <Footer />
           </div>
-
+          <RenderFor audience="all" device={["mobile"]}>
+            <MobileNavbar />
+          </RenderFor>
           <SvelteQueryDevtools
             buttonPosition="bottom-left"
             styleNonce="opacity: 0.5"

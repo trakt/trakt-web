@@ -61,7 +61,7 @@
   "remove_from_watchlist": "ウォッチリストから削除",
   "remove_from_watchlist_label": "{title} をウォッチリストから削除",
   "watch_the_trailer": "予告編を見る",
-  "search_placeholder": "探せば見つかるかも... ",
+  "search_placeholder": "運試し？",
   "join_trakt_button": "Trakt に参加",
   "join_trakt_button_label": "視聴状況を追跡するには trakt.tv に参加してください",
   "copyright_notice": "全著作権所有。",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "映画",
   "navbar_link_movies_label": "映画を閲覧する",
   "navbar_link_shows": "ショー",
-  "navbar_link_shows_label": "番組を閲覧する"
+  "navbar_link_shows_label": "番組を閲覧する",
+  "navbar_link_home": "ホーム",
+  "navbar_link_home_label": "ホームページに戻る"
 }

@@ -61,7 +61,7 @@
   "remove_from_watchlist": "Verwijderen van watchlist",
   "remove_from_watchlist_label": "{title} verwijderen van je watchlist",
   "watch_the_trailer": "Bekijk de trailer",
-  "search_placeholder": "Zoek en gij zult vinden... (misschien)",
+  "search_placeholder": "Gelukkig?",
   "join_trakt_button": "Word lid van Trakt",
   "join_trakt_button_label": "Word lid van trakt.tv om bij te houden wat je kijkt",
   "copyright_notice": "Alle rechten voorbehouden.",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "Films",
   "navbar_link_movies_label": "Blader door films",
   "navbar_link_shows": "Toont",
-  "navbar_link_shows_label": "Blader door shows"
+  "navbar_link_shows_label": "Blader door shows",
+  "navbar_link_home": "Home",
+  "navbar_link_home_label": "Ga terug naar de homepage"
 }

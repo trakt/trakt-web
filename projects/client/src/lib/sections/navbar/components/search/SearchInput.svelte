@@ -87,7 +87,7 @@
       border: var(--ni-2) solid var(--shade-700);
       background: rgba(25, 28, 30, 0.7);
       backdrop-filter: blur(var(--ni-8));
-      width: calc(var(--ni-120) + 20vw);
+      width: calc(var(--ni-120) + 10vw);
     }
 
     &.search-is-loading {

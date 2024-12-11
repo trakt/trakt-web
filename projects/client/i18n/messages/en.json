@@ -61,7 +61,7 @@
   "remove_from_watchlist": "Remove from Watchlist",
   "remove_from_watchlist_label": "Remove {title} from your watchlist",
   "watch_the_trailer": "Watch the Trailer",
-  "search_placeholder": "Seek and ye shall find... (maybe)",
+  "search_placeholder": "Feeling lucky?",
   "join_trakt_button": "Join Trakt",
   "join_trakt_button_label": "Join trakt.tv to keep track of what you're watching",
   "copyright_notice": "All rights reserved.",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "Movies",
   "navbar_link_movies_label": "Browse movies",
   "navbar_link_shows": "Shows",
-  "navbar_link_shows_label": "Browse shows"
+  "navbar_link_shows_label": "Browse shows",
+  "navbar_link_home": "Home",
+  "navbar_link_home_label": "Go back to the homepage"
 }

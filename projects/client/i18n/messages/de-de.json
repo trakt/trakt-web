@@ -61,7 +61,7 @@
   "remove_from_watchlist": "Von der Watchlist entfernen",
   "remove_from_watchlist_label": "{title} von der Watchlist entfernen",
   "watch_the_trailer": "Trailer ansehen",
-  "search_placeholder": "Suche und du wirst finden... (vielleicht)",
+  "search_placeholder": "Glück?",
   "join_trakt_button": "Trakt beitreten",
   "join_trakt_button_label": "Tritt trakt.tv bei, um zu verfolgen, was du dir ansiehst",
   "copyright_notice": "Alle Rechte vorbehalten.",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "Filme",
   "navbar_link_movies_label": "Filme durchsuchen",
   "navbar_link_shows": "Sendungen",
-  "navbar_link_shows_label": "Sendungen durchsuchen"
+  "navbar_link_shows_label": "Sendungen durchsuchen",
+  "navbar_link_home": "Startseite",
+  "navbar_link_home_label": "Zurück zur Startseite"
 }

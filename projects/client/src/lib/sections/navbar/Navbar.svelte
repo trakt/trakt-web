@@ -43,35 +43,30 @@
       <SearchInput />
     </RenderFor>
     <div class="trakt-navbar-links">
-      <Link href="/shows" color="inherit">
-        <Button
-          label={m.navbar_link_shows_label()}
-          style="ghost"
-          variant="secondary"
-        >
-          {m.navbar_link_shows()}
-        </Button>
-      </Link>
-      <Link href="/movies" color="inherit">
-        <Button
-          label={m.navbar_link_movies_label()}
-          style="ghost"
-          variant="secondary"
-        >
-          {m.navbar_link_movies()}
-        </Button>
-      </Link>
+      <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+        <Link href="/shows" color="inherit">
+          <Button
+            label={m.navbar_link_shows_label()}
+            style="ghost"
+            variant="secondary"
+          >
+            {m.navbar_link_shows()}
+          </Button>
+        </Link>
+        <Link href="/movies" color="inherit">
+          <Button
+            label={m.navbar_link_movies_label()}
+            style="ghost"
+            variant="secondary"
+          >
+            {m.navbar_link_movies()}
+          </Button>
+        </Link>
+      </RenderFor>
       <RenderFor audience="public">
         <JoinTraktButton />
       </RenderFor>
-      <RenderFor
-        audience="authenticated"
-        device={["tablet-sm", "tablet-lg", "desktop"]}
-      >
-        <Link href="/profile/me" color="inherit">
-          <ProfileButton />
-        </Link>
-      </RenderFor>
+      <ProfileButton />
     </div>
   </nav>
 
@@ -89,7 +84,7 @@
 
   .trakt-navbar-links {
     display: flex;
-    gap: var(--ni-16);
+    gap: var(--ni-8);
     align-items: center;
     width: 100%;
     justify-content: end;

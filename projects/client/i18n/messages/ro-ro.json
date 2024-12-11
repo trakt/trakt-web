@@ -61,7 +61,7 @@
   "remove_from_watchlist": "Șterge din lista de vizionare",
   "remove_from_watchlist_label": "Șterge {title} din lista ta de vizionare",
   "watch_the_trailer": "Vizionează trailerul",
-  "search_placeholder": "Caută și vei găsi... (poate)",
+  "search_placeholder": "Norocos?",
   "join_trakt_button": "Alătură-te la Trakt",
   "join_trakt_button_label": "Alătură-te la trakt.tv pentru a ține evidența a ceea ce vizionezi",
   "copyright_notice": "Toate drepturile rezervate.",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "Filme",
   "navbar_link_movies_label": "Răsfoiți filme",
   "navbar_link_shows": "Spectacole",
-  "navbar_link_shows_label": "Răsfoiți emisiuni"
+  "navbar_link_shows_label": "Răsfoiți emisiuni",
+  "navbar_link_home": "Acasă",
+  "navbar_link_home_label": "Reveniți la pagina de pornire"
 }

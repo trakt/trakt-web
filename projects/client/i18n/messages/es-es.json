@@ -61,7 +61,7 @@
   "remove_from_watchlist": "Quitar de la lista",
   "remove_from_watchlist_label": "Quitar {title} de tu lista",
   "watch_the_trailer": "Ver el tráiler",
-  "search_placeholder": "Busca y encontrarás... (quizás)",
+  "search_placeholder": "¿Suerte?",
   "join_trakt_button": "Únete a Trakt",
   "join_trakt_button_label": "Únete a trakt.tv para controlar lo que estás viendo",
   "copyright_notice": "Todos los derechos reservados.",
@@ -83,5 +83,7 @@
   "navbar_link_movies": "Cine",
   "navbar_link_movies_label": "Explorar películas",
   "navbar_link_shows": "Espectáculos",
-  "navbar_link_shows_label": "Explorar programas"
+  "navbar_link_shows_label": "Explorar programas",
+  "navbar_link_home": "Inicio",
+  "navbar_link_home_label": "Regresar a la página de inicio"
 }
