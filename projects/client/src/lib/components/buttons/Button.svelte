@@ -24,8 +24,7 @@
   }: TraktButtonProps = $props();
 
   const hasIcon = $state(icon != null);
-  const isGhost = $state(style === "ghost");
-  const isDefaultAlignment = $derived(hasIcon || isGhost);
+  const isDefaultAlignment = $derived(hasIcon);
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
 </script>
 
@@ -131,7 +130,7 @@
     }
 
     & {
-      min-width: var(--ni-128);
+      min-width: var(--ni-96);
     }
 
     &,
