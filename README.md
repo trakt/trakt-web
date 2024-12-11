@@ -167,3 +167,43 @@ For each entry listed as a result:
 1. Update any breaks
 1. Test
 1. Commit
+
+## Resolving the Multilingual Mayhem
+
+### A Guide to i18n Conflict Resolution
+
+Should the chaotic forces of rebasing leave your `client/i18n/messages` folder
+in a state of disarray, fear not, intrepid developer. For within this document
+lies the knowledge to restore harmony to the realm of translations.
+
+When merging your linguistic endeavors with the `main` branch, conflicts may
+arise within the `client/i18n/messages` domain. This is to be expected, for the
+path of internationalization is fraught with peril and unexpected detours.
+
+To navigate this linguistic labyrinth and emerge victorious, follow these steps:
+
+1. **Ensure the presence of the `deno` CLI:** This digital incantation, a key to
+   unlocking the secrets of conflict resolution, must be present within your
+   development arsenal.
+2. **Invoke the resolution ritual:** From the heart of the project, intone the
+   following command:
+
+   ```bash
+   deno task client:i18n:resolve
+   ```
+
+   Alternatively, should you find yourself within the `projects/client` domain,
+   utter this incantation:
+
+   ```bash
+   deno task i18n:resolve
+   ```
+
+These commands, like ancient spells whispered in the dead of night, shall
+resolve the conflicts and restore order to the `i18n/messages/*.json` files. The
+translations, once fragmented and disjointed, shall merge into a harmonious
+symphony of multilingual understanding.
+
+With these tools at your disposal, you shall emerge from the chaos of rebasing
+with your sanity intact and your translations unified. Go forth, and conquer the
+linguistic challenges that lie before you.
