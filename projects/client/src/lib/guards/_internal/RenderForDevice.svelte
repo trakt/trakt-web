@@ -55,42 +55,32 @@
   }
 
   .render-for-mobile {
+    display: none;
+
     @media (max-width: 480px) {
       display: contents !important;
-    }
-
-    @media (min-width: 481px) {
-      display: none;
     }
   }
 
   .render-for-tablet-small {
-    @media (max-width: 768px) {
-      display: contents !important;
-    }
+    display: none;
 
-    @media (min-width: 769px) {
-      display: none;
+    @media (min-width: 481px) and (max-width: 768px) {
+      display: contents !important;
     }
   }
 
   .render-for-tablet-large {
-    @media (max-width: 1024px) {
-      display: contents !important;
-    }
+    display: none;
 
-    @media (min-width: 1025px) {
-      display: none;
+    @media (min-width: 769px) and (max-width: 1023px) {
+      display: contents !important;
     }
   }
 
   .render-for-desktop {
-    @media (min-width: 1025px) {
+    @media (min-width: 1024px) {
       display: contents !important;
-    }
-
-    @media (max-width: 1024px) {
-      display: none;
     }
   }
 </style>
