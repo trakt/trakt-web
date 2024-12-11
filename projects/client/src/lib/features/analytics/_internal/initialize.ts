@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { browser } from '$app/environment';
 import { getAnalytics, logEvent, setUserId } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import type { AnalyticsEngine } from './AnalyticsEngine.ts';
@@ -20,27 +21,34 @@ const firebaseConfig = (() => {
   };
 })();
 
-// Initialize Firebase
-function firebaseDriver() {
-  try {
-    const app = initializeApp(firebaseConfig);
-    return getAnalytics(app);
-  } catch (_) {
-    return null;
-  }
-}
-
 const NOOP_ENGINE: AnalyticsEngine = {
   record: () => {},
   setUserId: () => {},
 };
+
+// Initialize Firebase
+function firebaseDriver() {
+  if (!browser) {
+    console.warn(
+      'Firebase Analytics is only available in the browser... Skipping...',
+    );
+    return null;
+  }
+
+  try {
+    const app = initializeApp(firebaseConfig);
+    return getAnalytics(app);
+  } catch (_) {
+    console.error('Failed to initialize Firebase Analytics');
+    return null;
+  }
+}
 
 // Initialize Analytics
 export const initialize = (): AnalyticsEngine => {
   const driver = firebaseDriver();
 
   if (!driver) {
-    console.error('Failed to initialize Firebase Analytics');
     return NOOP_ENGINE;
   }
 
