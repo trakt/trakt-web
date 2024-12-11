@@ -39,5 +39,58 @@
 </script>
 
 {#if !browser || $shouldRender}
-  {@render children()}
+  <trakt-render-for
+    class:render-for-mobile={isAvailableForMobile && !browser}
+    class:render-for-tablet-small={isAvailableForTabletSmall && !browser}
+    class:render-for-tablet-large={isAvailableForTabletLarge && !browser}
+    class:render-for-desktop={isAvailableForDesktop && !browser}
+  >
+    {@render children()}
+  </trakt-render-for>
 {/if}
+
+<style>
+  trakt-render-for {
+    display: contents;
+  }
+
+  .render-for-mobile {
+    @media (max-width: 480px) {
+      display: contents !important;
+    }
+
+    @media (min-width: 481px) {
+      display: none;
+    }
+  }
+
+  .render-for-tablet-small {
+    @media (max-width: 768px) {
+      display: contents !important;
+    }
+
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+
+  .render-for-tablet-large {
+    @media (max-width: 1024px) {
+      display: contents !important;
+    }
+
+    @media (min-width: 1025px) {
+      display: none;
+    }
+  }
+
+  .render-for-desktop {
+    @media (min-width: 1025px) {
+      display: contents !important;
+    }
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+</style>
