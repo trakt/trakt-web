@@ -49,48 +49,50 @@
   </trakt-render-for>
 {/if}
 
+{@html `
 <style>
   trakt-render-for {
     display: contents;
-  }
 
-  .render-for-mobile {
-    @media (max-width: 480px) {
-      display: contents !important;
+    &.render-for-mobile {
+      @media ${WellKnownMediaQuery.mobile} {
+        display: contents !important;
+      }
+
+      @media ${WellKnownMediaQuery.tabletSmall} {
+        display: none;
+      }
     }
 
-    @media (min-width: 481px) {
-      display: none;
-    }
-  }
+    &.render-for-tablet-small {
+      @media ${WellKnownMediaQuery.tabletSmall} {
+        display: contents !important;
+      }
 
-  .render-for-tablet-small {
-    @media (max-width: 768px) {
-      display: contents !important;
-    }
-
-    @media (min-width: 769px) {
-      display: none;
-    }
-  }
-
-  .render-for-tablet-large {
-    @media (max-width: 1024px) {
-      display: contents !important;
+      @media ${WellKnownMediaQuery.tabletLarge} {
+        display: none;
+      }
     }
 
-    @media (min-width: 1025px) {
-      display: none;
-    }
-  }
+    &.render-for-tablet-large {
+      @media ${WellKnownMediaQuery.tabletLarge} {
+        display: contents !important;
+      }
 
-  .render-for-desktop {
-    @media (min-width: 1025px) {
-      display: contents !important;
+      @media ${WellKnownMediaQuery.desktop} {
+        display: none;
+      }
     }
 
-    @media (max-width: 1024px) {
-      display: none;
+    &.render-for-desktop {
+      @media ${WellKnownMediaQuery.desktop} {
+        display: contents !important;
+      }
+
+      @media (max-width: 1024px) {
+        display: none;
+      }
     }
   }
 </style>
+`}
