@@ -12,7 +12,8 @@
     "swagger": "cd projects/swagger && deno task start",
     "swagger:dev": "cd projects/swagger && deno task dev",
     "playground:dev": "cd projects/playground && deno task dev",
-    "client:dev": "cd projects/client && deno task dev"
+    "client:dev": "cd projects/client && deno task dev",
+    "client:i18n:resolve": "cd projects/client && deno task i18n:resolve"
   },
   "nodeModulesDir": "auto",
   "fmt": {
