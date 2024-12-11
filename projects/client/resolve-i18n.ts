@@ -41,7 +41,10 @@ for await (const dirEntry of Deno.readDir(messagesDir)) {
     try {
       const data = await Deno.readTextFile(filePath);
       const resolvedData = resolveConflicts(data);
-      await Deno.writeTextFile(filePath, JSON.stringify(resolvedData, null, 2));
+      await Deno.writeTextFile(
+        filePath,
+        JSON.stringify(resolvedData, null, 2) + '\n',
+      );
       console.log(`Conflicts resolved in file: ${dirEntry.name}`);
     } catch (err) {
       console.error(`Error processing file ${dirEntry.name}:`, err);

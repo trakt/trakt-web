@@ -75,5 +75,8 @@
   "landing_share_description": "коментарі, оцінки та рекомендації.",
   "trending_now": "Тренди",
   "your_recommendations": "Ваші рекомендації",
-  "most_anticipated": "Найбільш очікувані"
+  "most_anticipated": "Найбільш очікувані",
+  "get_vip": "Отримати VIP",
+  "get_vip_label": "Розблокуйте VIP-функції",
+  "user_profile_label": "Профіль користувача"
 }
