@@ -3,6 +3,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import AnticipatedMovies from "$lib/sections/anticipated/AnticipatedMovies.svelte";
   import RecommendedMovies from "$lib/sections/recommendations/RecommendedMovies.svelte";
   import TrendingMovies from "$lib/sections/trending/TrendingMovies.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
@@ -15,6 +16,7 @@
     <BackgroundCoverImage src={$user?.cover.url ?? DEFAULT_COVER} type="main" />
     <TrendingMovies />
     <RecommendedMovies title={m.your_recommendations()} />
+    <AnticipatedMovies />
   </RenderFor>
 </div>
 
