@@ -81,5 +81,7 @@
   "user_profile_label": "Profil utilizator",
   "most_popular": "Cele mai populare",
   "navbar_link_movies": "Filme",
-  "navbar_link_movies_label": "Răsfoiți filme"
+  "navbar_link_movies_label": "Răsfoiți filme",
+  "navbar_link_shows": "Spectacole",
+  "navbar_link_shows_label": "Răsfoiți emisiuni"
 }

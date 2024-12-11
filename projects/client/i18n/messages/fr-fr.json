@@ -81,5 +81,7 @@
   "user_profile_label": "Profil d'utilisateur",
   "most_popular": "Le plus populaire",
   "navbar_link_movies": "Films",
-  "navbar_link_movies_label": "Parcourir les films"
+  "navbar_link_movies_label": "Parcourir les films",
+  "navbar_link_shows": "Spectacles",
+  "navbar_link_shows_label": "Parcourir les émissions"
 }

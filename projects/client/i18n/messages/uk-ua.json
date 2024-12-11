@@ -81,5 +81,7 @@
   "user_profile_label": "Профіль користувача",
   "most_popular": "Найпопулярніші",
   "navbar_link_movies": "фільми",
-  "navbar_link_movies_label": "Переглядайте фільми"
+  "navbar_link_movies_label": "Переглядайте фільми",
+  "navbar_link_shows": "Показує",
+  "navbar_link_shows_label": "Перегляньте шоу"
 }

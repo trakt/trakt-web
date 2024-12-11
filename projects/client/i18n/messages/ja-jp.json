@@ -81,5 +81,7 @@
   "user_profile_label": "ユーザープロフィール",
   "most_popular": "最も人気のある",
   "navbar_link_movies": "映画",
-  "navbar_link_movies_label": "映画を閲覧する"
+  "navbar_link_movies_label": "映画を閲覧する",
+  "navbar_link_shows": "ショー",
+  "navbar_link_shows_label": "番組を閲覧する"
 }

@@ -81,5 +81,7 @@
   "user_profile_label": "Gebruikersprofiel",
   "most_popular": "Meest populair",
   "navbar_link_movies": "Films",
-  "navbar_link_movies_label": "Blader door films"
+  "navbar_link_movies_label": "Blader door films",
+  "navbar_link_shows": "Toont",
+  "navbar_link_shows_label": "Blader door shows"
 }

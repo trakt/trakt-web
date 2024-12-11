@@ -43,6 +43,15 @@
       <SearchInput />
     </RenderFor>
     <div class="trakt-navbar-links">
+      <Link href="/shows" color="inherit">
+        <Button
+          label={m.navbar_link_shows_label()}
+          style="ghost"
+          variant="secondary"
+        >
+          {m.navbar_link_shows()}
+        </Button>
+      </Link>
       <Link href="/movies" color="inherit">
         <Button
           label={m.navbar_link_movies_label()}

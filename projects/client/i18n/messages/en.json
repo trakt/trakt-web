@@ -81,5 +81,7 @@
   "user_profile_label": "User Profile",
   "most_popular": "Most Popular",
   "navbar_link_movies": "Movies",
-  "navbar_link_movies_label": "Browse movies"
+  "navbar_link_movies_label": "Browse movies",
+  "navbar_link_shows": "Shows",
+  "navbar_link_shows_label": "Browse shows"
 }
