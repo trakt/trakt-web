@@ -1,6 +1,7 @@
 <script lang="ts">
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
@@ -23,8 +24,8 @@
     <ProfileBanner />
     <UpNext />
     <UpcomingSchedule />
-    <RecommendedShows />
-    <RecommendedMovies />
+    <RecommendedShows title={m.recommended_shows()} />
+    <RecommendedMovies title={m.recommended_movies()} />
   </RenderFor>
   <RenderFor audience="public">
     <Landing />

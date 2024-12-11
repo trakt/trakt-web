@@ -1,6 +1,11 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
   import RecommendationList from "$lib/sections/recommendations/RecommendationList.svelte";
+
+  type RecommendedMoviesProps = {
+    title: string;
+  };
+
+  const { title }: RecommendedMoviesProps = $props();
 </script>
 
-<RecommendationList title={m.recommended_movies()} type="movie" />
+<RecommendationList {title} type="movie" />
