@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "test:unit": "vitest",
     "test": "deno task test:unit --run && deno task test:e2e",
-    "test:e2e": " PW_DISABLE_TS_ESM=true playwright test"
+    "test:e2e": " PW_DISABLE_TS_ESM=true playwright test",
+    "i18n:resolve": "deno run --allow-read --allow-write ./resolve-i18n.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",
