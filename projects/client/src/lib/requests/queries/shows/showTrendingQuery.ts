@@ -1,11 +1,15 @@
 import type { ShowTrendingResponse } from '$lib/api.ts';
+import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
 import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from './_internal/mapShowResponseToShowSummary.ts';
 
-export type TrendingShow = ShowSummary & {
-  watchers: number;
-};
+export type TrendingShow =
+  & {
+    watchers: number;
+  }
+  & ShowSummary
+  & EpisodeCount;
 
 type ShowTrendingParams = {
   page?: number;
@@ -17,6 +21,9 @@ export function mapResponseToTrendingShows(
 ): TrendingShow[] {
   return shows.map(({ show, watchers }) => ({
     watchers: watchers,
+    episode: {
+      count: show.aired_episodes!,
+    },
     ...mapShowResponseToShowSummary(show),
   }));
 }

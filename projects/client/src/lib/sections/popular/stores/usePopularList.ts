@@ -1,12 +1,14 @@
 import type { MediaType } from '$lib/models/MediaType.ts';
 import { type MovieSummary } from '$lib/requests/models/MovieSummary.ts';
-import { type ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
-import { showPopularQuery } from '$lib/requests/queries/shows/showPopularQuery.ts';
+import {
+  type PopularShow,
+  showPopularQuery,
+} from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
-export type PopularMediaItem = ShowSummary | MovieSummary;
+export type PopularMediaItem = PopularShow | MovieSummary;
 export type PopularMedia = Array<PopularMediaItem>;
 
 const POPULAR_LIMIT = 25;

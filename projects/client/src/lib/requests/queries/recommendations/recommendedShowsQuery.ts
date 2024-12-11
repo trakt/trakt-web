@@ -1,5 +1,6 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
+import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -10,13 +11,10 @@ export type RecommendedShow = {
   slug: string;
   runtime: number;
   title: string;
-  episode: {
-    count: number;
-  };
   poster: {
     url: string;
   };
-};
+} & EpisodeCount;
 
 type RecommendedShowsParams = ApiParams;
 
