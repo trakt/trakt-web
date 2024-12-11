@@ -1,18 +1,22 @@
 <script>
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import CopyRight from "./CopyRight.svelte";
-  import ExternalLinks from "./ExternalLinks.svelte";
+  import FooterActions from "./FooterActions.svelte";
 
   import FooterBar from "./FooterBar.svelte";
   import FooterLogo from "./FooterLogo.svelte";
 </script>
 
 <div class="trakt-footer-content">
-  <FooterBar>
-    <FooterLogo />
-  </FooterBar>
+  <RenderFor device={["tablet-lg", "desktop"]} audience="all">
+    <FooterBar>
+      <FooterLogo />
+    </FooterBar>
+  </RenderFor>
+
   <FooterBar>
     <CopyRight />
-    <ExternalLinks />
+    <FooterActions />
   </FooterBar>
 </div>
 

@@ -11,5 +11,6 @@
     padding: var(--ni-40);
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 </style>

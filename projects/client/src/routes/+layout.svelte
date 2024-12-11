@@ -7,7 +7,6 @@
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import { QueryClientProvider } from "@tanstack/svelte-query";
@@ -108,9 +107,7 @@
             <div class="trakt-layout-content">
               {@render children()}
             </div>
-            <RenderFor device={["tablet-lg", "desktop"]} audience="all">
-              <Footer />
-            </RenderFor>
+            <Footer />
           </div>
 
           <SvelteQueryDevtools

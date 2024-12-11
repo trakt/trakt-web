@@ -2,8 +2,8 @@
   import Link from "$lib/components/link/Link.svelte";
   import Logo from "$lib/components/logo/Logo.svelte";
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
-  import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
-  import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
+  import * as m from "$lib/features/i18n/messages";
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { onMount } from "svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -46,8 +46,6 @@
       <RenderFor audience="public">
         <JoinTraktButton />
       </RenderFor>
-      <LocalePicker />
-      <ThemePicker />
       <RenderFor
         audience="authenticated"
         device={["tablet-sm", "tablet-lg", "desktop"]}
