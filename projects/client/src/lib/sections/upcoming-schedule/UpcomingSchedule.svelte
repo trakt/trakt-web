@@ -3,7 +3,7 @@
   import UpcomingEpisode from "$lib/components/episode/upcoming/UpcomingEpisode.svelte";
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useCalendarEpisodes } from "./stores/useCalendarEpisodes";
 
   const calendar = useCalendarEpisodes();
@@ -23,7 +23,7 @@
       episodeTitle={entry.title}
       airedDate={entry.airedDate}
       type={entry.type}
-      showHref={buildMediaLink("show", entry.show.slug)}
+      showHref={UrlBuilder.show(entry.show.slug)}
     />
   {/each}
 </SectionList>

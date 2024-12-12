@@ -3,13 +3,14 @@
   import AppleIcon from "$lib/components/icons/AppleIcon.svelte";
 
   import Link from "$lib/components/link/Link.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
 <div class="trakt-external-links">
-  <Link href="https://trakt.tv/a/trakt-ios" target="_blank" color="inherit">
+  <Link href={UrlBuilder.app.ios()} target="_blank" color="inherit">
     <AppleIcon />
   </Link>
-  <Link href="https://trakt.tv/a/trakt-android" target="_blank" color="inherit">
+  <Link href={UrlBuilder.app.android()} target="_blank" color="inherit">
     <AndroidIcon />
   </Link>
 </div>

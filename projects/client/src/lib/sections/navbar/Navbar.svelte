@@ -5,6 +5,7 @@
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import SearchInput from "./components/search/SearchInput.svelte";
@@ -30,7 +31,7 @@
 <header>
   <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
     <div class="trakt-logo">
-      <Link color="inherit" href="/">
+      <Link color="inherit" href={UrlBuilder.home()}>
         <RenderFor audience="authenticated">
           <LogoMark />
         </RenderFor>
@@ -45,7 +46,7 @@
     <div class="trakt-navbar-links">
       <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
         <Button
-          href="/"
+          href={UrlBuilder.home()}
           label={m.navbar_link_home_label()}
           style="ghost"
           variant="secondary"
@@ -53,7 +54,7 @@
           {m.navbar_link_home()}
         </Button>
         <Button
-          href="/shows"
+          href={UrlBuilder.shows()}
           label={m.navbar_link_shows_label()}
           style="ghost"
           variant="primary"
@@ -61,7 +62,7 @@
           {m.navbar_link_shows()}
         </Button>
         <Button
-          href="/movies"
+          href={UrlBuilder.movies()}
           label={m.navbar_link_movies_label()}
           style="ghost"
           variant="primary"

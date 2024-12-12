@@ -11,7 +11,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
-  import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { type RecommendedMediaItem } from "./stores/useRecommendationList";
 
   type RecommendationItemProps = {
@@ -33,7 +33,7 @@
 </script>
 
 <PosterCard>
-  <Link href={buildMediaLink(type, recommendation.slug)}>
+  <Link href={UrlBuilder.media(type, recommendation.slug)}>
     <PosterCover
       src={recommendation.poster.url}
       alt={`${recommendation.title} poster`}

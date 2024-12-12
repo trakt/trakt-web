@@ -4,24 +4,25 @@
   import ShowIcon from "$lib/components/icons/mobile/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
 <div class="trakt-mobile-navbar">
-  <Link href="/" color="inherit">
+  <Link href={UrlBuilder.home()} color="inherit">
     <div class="trakt-mobile-navbar-link">
       <HomeIcon />
       <p class="meta-info">{m.navbar_link_home()}</p>
     </div>
   </Link>
 
-  <Link href="/shows" color="inherit">
+  <Link href={UrlBuilder.shows()} color="inherit">
     <div class="trakt-mobile-navbar-link">
       <ShowIcon />
       <p class="meta-info">{m.navbar_link_shows()}</p>
     </div>
   </Link>
 
-  <Link href="/movies" color="inherit">
+  <Link href={UrlBuilder.movies()} color="inherit">
     <div class="trakt-mobile-navbar-link">
       <MovieIcon />
       <p class="meta-info">{m.navbar_link_movies()}</p>

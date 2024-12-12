@@ -10,7 +10,7 @@
   import type { TrendingMovie } from "$lib/requests/queries/movies/movieTrendingQuery";
   import type { TrendingShow } from "$lib/requests/queries/shows/showTrendingQuery";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
-  import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   type TrendingItemProps = {
     trendingItem?: TrendingMovie | TrendingShow;
@@ -23,7 +23,7 @@
 <div class="trakt-preview-item">
   {#if trendingItem}
     <PosterCard>
-      <Link href={buildMediaLink(type, trendingItem.slug)}>
+      <Link href={UrlBuilder.media(type, trendingItem.slug)}>
         <PosterCover
           src={trendingItem.poster.url}
           alt={`${trendingItem.title} poster`}

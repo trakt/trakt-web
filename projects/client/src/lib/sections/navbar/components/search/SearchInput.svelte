@@ -2,7 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { buildMediaLink } from "$lib/utils/url/buildMediaLink";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
   import { useSearch } from "./useSearch";
 
@@ -43,18 +43,18 @@
   {#if $results.length > 0}
     <div class="trakt-search-results">
       {#each $results as result}
-        <div class="trakt-search-result-item">
-          <Link
-            href={buildMediaLink(result.type, result.slug)}
-            onclick={() => {
-              inputElement.value = "";
-              clear();
-            }}
-          >
+        <Link
+          href={UrlBuilder.media(result.type, result.slug)}
+          onclick={() => {
+            inputElement.value = "";
+            clear();
+          }}
+        >
+          <div class="trakt-search-result-item">
             <CrossOriginImage alt={result.title} src={result.poster.url} />
             <span>{result.title} ({result.year})</span>
-          </Link>
-        </div>
+          </div>
+        </Link>
       {/each}
     </div>
   {/if}

@@ -2,6 +2,7 @@
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useUser } from "../../features/auth/stores/useUser";
   import ProfileImage from "./ProfileImage.svelte";
 
@@ -10,7 +11,7 @@
 
 {#if $user != null}
   <div class="profile-banner-container">
-    <Link href="/profile/me">
+    <Link href={UrlBuilder.profile.me()}>
       <ProfileImage
         --width="var(--ni-64)"
         --height="var(--ni-64)"

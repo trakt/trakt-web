@@ -5,6 +5,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
   import VipBadge from "./components/VIPBadge.svelte";
 
@@ -17,7 +18,7 @@
 {#if !user.current().isVip}
   <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
     <Button
-      href="https://trakt.tv/vip"
+      href={UrlBuilder.vip()}
       label={m.get_vip_label()}
       variant="vip"
       style="textured"
@@ -31,7 +32,7 @@
 
   <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
     <ActionButton
-      href="https://trakt.tv/vip"
+      href={UrlBuilder.vip()}
       label={m.get_vip_label()}
       variant="red"
     >
@@ -42,7 +43,7 @@
 
 <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
   <Button
-    href="/profile/me"
+    href={UrlBuilder.profile.me()}
     label={m.user_profile_label()}
     {variant}
     {style}
@@ -67,7 +68,7 @@
 
 <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
   <ActionButton
-    href="/profile/me"
+    href={UrlBuilder.profile.me()}
     label={m.user_profile_label()}
     variant={actionVariant}
   >
