@@ -112,6 +112,10 @@
       color-mix(in srgb, var(--color-background) 68%, transparent 32%) 29.5%,
       var(--color-background) 100%
     );
+
+    @media (max-width: 480px) {
+      bottom: var(--ni-72);
+    }
   }
 
   .trakt-media-action-spacer {
