@@ -43,7 +43,7 @@
           <DurationTag>
             {m.number_of_episodes({ count: recommendation.episode.count })}
           </DurationTag>
-        {:else}
+        {:else if type === "movie"}
           <DurationTag>
             {toHumanDuration(
               { minutes: recommendation.runtime },
