@@ -48,7 +48,7 @@
           <Button
             label={m.navbar_link_shows_label()}
             style="ghost"
-            variant="secondary"
+            variant="primary"
           >
             {m.navbar_link_shows()}
           </Button>
@@ -57,7 +57,7 @@
           <Button
             label={m.navbar_link_movies_label()}
             style="ghost"
-            variant="secondary"
+            variant="primary"
           >
             {m.navbar_link_movies()}
           </Button>

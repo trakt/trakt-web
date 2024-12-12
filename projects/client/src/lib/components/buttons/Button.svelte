@@ -93,6 +93,7 @@
     &[data-variant="secondary"] {
       --color-background-button: var(--color-surface-button-secondary);
       --color-foreground-button: var(--color-foreground-button-secondary);
+      --color-background-button-outline: var(--color-border-button-secondary);
       --color-background-button-disabled: var(--color-surface-button-disabled);
     }
 
@@ -212,7 +213,11 @@
       }
 
       &:hover:not([disabled]) {
-        background: var(--color-background-button);
+        background: color-mix(
+          in srgb,
+          var(--color-background-button) 60%,
+          transparent 40%
+        );
       }
 
       &:active:not([disabled]) {
@@ -255,12 +260,14 @@
       &[data-variant="primary"] {
         &:hover:not([disabled]) {
           background: var(--color-surface-button-secondary);
+          color: var(--color-foreground-button-secondary);
         }
       }
 
       &[data-variant="secondary"] {
         &:hover:not([disabled]) {
           background: var(--color-surface-button-primary);
+          color: var(--color-foreground-button-primary);
         }
       }
 
