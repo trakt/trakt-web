@@ -15,7 +15,10 @@
   </RenderFor>
 
   <FooterBar>
-    <CopyRight />
+    <!-- TODO: different layout for smaller (or different component for only theme/lang pickers) -->
+    <RenderFor device={["tablet-lg", "desktop"]} audience="all">
+      <CopyRight />
+    </RenderFor>
     <FooterActions />
   </FooterBar>
 </div>

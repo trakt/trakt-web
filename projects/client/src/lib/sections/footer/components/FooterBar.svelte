@@ -12,5 +12,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 768px) {
+      padding: var(--ni-12) var(--ni-16);
+    }
   }
 </style>
