@@ -2,10 +2,7 @@
   import { page } from "$app/stores";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { navigateWithFocus } from "$lib/utils/actions/navigateWithFocus";
-
-  type TraktActionButtonProps = ButtonProps & {
-    variant?: "purple" | "red" | "blue" | "default";
-  };
+  import type { TraktActionButtonProps } from "./TraktActionButtonProps";
 
   type TraktActionButtonAnchorProps = HTMLAnchorProps & TraktActionButtonProps;
 

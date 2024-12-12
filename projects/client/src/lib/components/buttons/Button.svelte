@@ -2,16 +2,7 @@
   import { page } from "$app/stores";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { navigateWithFocus } from "$lib/utils/actions/navigateWithFocus";
-  import type { Snippet } from "svelte";
-
-  type TraktButtonProps = ButtonProps & {
-    variant?: "primary" | "secondary" | "vip" | "custom";
-    style?: "textured" | "flat" | "ghost";
-    icon?: Snippet;
-    subtitle?: Snippet;
-    size?: "normal" | "small";
-    text?: "capitalize" | "uppercase";
-  };
+  import type { TraktButtonProps } from "./TraktButtonProps";
 
   type TraktButtonAnchorProps = HTMLAnchorProps & TraktButtonProps;
 

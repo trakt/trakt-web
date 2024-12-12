@@ -1,4 +1,4 @@
-// TODO fix typings in vs code
+// @ts-ignore TODO: (@seferturan): fix typings in vs code
 import NextEpisode from './NextEpisode.svelte';
 
 import { EpisodeIntlProvider } from '$lib/components/episode/EpisodeIntlProvider.ts';
