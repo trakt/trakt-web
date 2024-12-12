@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import { navigateWithFocus } from "$lib/utils/actions/navigateWithFocus";
 
   const {
     children,
@@ -18,6 +19,7 @@
   <a
     {href}
     {target}
+    use:navigateWithFocus
     data-color={color}
     class="trakt-link"
     class:trakt-link-active={$page.url.pathname === href}

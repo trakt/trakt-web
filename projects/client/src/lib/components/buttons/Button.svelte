@@ -1,7 +1,8 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
+  import { navigateWithFocus } from "$lib/utils/actions/navigateWithFocus";
   import type { Snippet } from "svelte";
-  import { disableTransitionOn } from "../../utils/actions/disableTransitionOn";
 
   type TraktButtonProps = ButtonProps & {
     variant?: "primary" | "secondary" | "vip" | "custom";
@@ -51,6 +52,7 @@
 {#if href != null}
   <a
     use:disableTransitionOn={"touch"}
+    use:navigateWithFocus
     class="trakt-button trakt-button-link"
     class:trakt-link-active={$page.url.pathname === href}
     aria-label={label}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { disableTransitionOn } from "../../utils/actions/disableTransitionOn";
+  import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
+  import { navigateWithFocus } from "$lib/utils/actions/navigateWithFocus";
 
   type TraktActionButtonProps = ButtonProps & {
     variant?: "purple" | "red" | "blue" | "default";
@@ -21,6 +22,7 @@
 {#if href != null}
   <a
     use:disableTransitionOn={"touch"}
+    use:navigateWithFocus
     class="trakt-action-button trakt-button-link"
     class:trakt-link-active={$page.url.pathname === href}
     aria-label={label}
