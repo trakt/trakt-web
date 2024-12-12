@@ -17,7 +17,7 @@ export const load: LayoutLoad = async ({ data, fetch }) => {
     },
   });
 
-  setToken(data.token);
+  setToken(data.auth.token);
 
   if (isAuthorized()) {
     await queryClient.prefetchQuery(currentUserSettingsQuery({ fetch }));

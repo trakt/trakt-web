@@ -1,4 +1,3 @@
-import { browser } from '$app/environment';
 import { Environment } from '$lib/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 
@@ -7,16 +6,12 @@ export type BuildOAuthUrlParams = {
   target: Environment;
 };
 
-export function buildOAuthUrl() {
-  if (!browser) {
-    return '';
-  }
-
+export function buildOAuthUrl(origin: string) {
   const env = prependHttps(
     TRAKT_TARGET_ENVIRONMENT
       .replace('api.', '')
       .replace('apiz.', ''),
   );
 
-  return `${env}/oauth/authorize?client_id=${TRAKT_CLIENT_ID}&redirect_uri=${location.origin}&response_type=code`;
+  return `${env}/oauth/authorize?client_id=${TRAKT_CLIENT_ID}&redirect_uri=${origin}&response_type=code`;
 }

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { buildOAuthUrl } from "$lib/utils/url/buildOAuthLink";
   import { onMount } from "svelte";
   import { AuthEndpoint } from "../AuthEndpoint";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
@@ -7,13 +6,14 @@
 
   type AuthProviderProps = {
     token: string | Nil;
+    url: string;
   } & ChildrenProps;
 
-  const { token, children }: AuthProviderProps = $props();
+  const { token, url, children }: AuthProviderProps = $props();
 
   provisionAuth({
     token,
-    url: buildOAuthUrl(),
+    url,
   });
 
   const auth = useAuth();

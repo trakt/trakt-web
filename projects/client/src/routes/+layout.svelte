@@ -100,7 +100,7 @@
 </svelte:head>
 
 <QueryClientProvider client={data.queryClient}>
-  <AuthProvider token={data.token}>
+  <AuthProvider token={data.auth.token} url={data.auth.url}>
     <AnalyticsProvider>
       <LocaleProvider>
         <ThemeProvider theme={data.theme}>
