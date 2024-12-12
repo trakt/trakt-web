@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/stores";
   import type { Snippet } from "svelte";
   import { disableTransitionOn } from "../../utils/actions/disableTransitionOn";
 
@@ -11,6 +12,8 @@
     text?: "capitalize" | "uppercase";
   };
 
+  type TraktButtonAnchorProps = HTMLAnchorProps & TraktButtonProps;
+
   const {
     label,
     children,
@@ -21,23 +24,15 @@
     size = "normal",
     text = "uppercase",
     ...props
-  }: TraktButtonProps = $props();
+  }: TraktButtonProps | TraktButtonAnchorProps = $props();
 
   const hasIcon = $state(icon != null);
   const isDefaultAlignment = $derived(hasIcon);
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
+  const href = $derived((props as TraktButtonAnchorProps).href);
 </script>
 
-<button
-  use:disableTransitionOn={"touch"}
-  class="trakt-button"
-  {...props}
-  aria-label={label}
-  data-variant={variant}
-  data-alignment={alignment}
-  data-style={style}
-  data-size={size}
->
+{#snippet contents()}
   <div class="button-label">
     <p class:small={subtitle != null} class:capitalize={text === "capitalize"}>
       {@render children()}
@@ -51,7 +46,36 @@
       {@render icon()}
     </div>
   {/if}
-</button>
+{/snippet}
+
+{#if href != null}
+  <a
+    use:disableTransitionOn={"touch"}
+    class="trakt-button trakt-button-link"
+    class:trakt-link-active={$page.url.pathname === href}
+    aria-label={label}
+    data-variant={variant}
+    data-alignment={alignment}
+    data-style={style}
+    data-size={size}
+    {...props}
+  >
+    {@render contents()}
+  </a>
+{:else}
+  <button
+    use:disableTransitionOn={"touch"}
+    class="trakt-button"
+    aria-label={label}
+    data-variant={variant}
+    data-alignment={alignment}
+    data-style={style}
+    data-size={size}
+    {...props}
+  >
+    {@render contents()}
+  </button>
+{/if}
 
 <style>
   .trakt-button {

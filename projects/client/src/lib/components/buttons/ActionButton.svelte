@@ -1,27 +1,45 @@
 <script lang="ts">
+  import { page } from "$app/stores";
   import { disableTransitionOn } from "../../utils/actions/disableTransitionOn";
 
-  type ActionButtonProps = ButtonProps & {
+  type TraktActionButtonProps = ButtonProps & {
     variant?: "purple" | "red" | "blue" | "default";
   };
+
+  type TraktActionButtonAnchorProps = HTMLAnchorProps & TraktActionButtonProps;
 
   const {
     children,
     label,
     variant = "default",
     ...props
-  }: ActionButtonProps = $props();
+  }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
+
+  const href = $derived((props as TraktActionButtonAnchorProps).href);
 </script>
 
-<button
-  use:disableTransitionOn={"touch"}
-  class="trakt-action-button"
-  aria-label={label}
-  data-variant={variant}
-  {...props}
->
-  {@render children()}
-</button>
+{#if href != null}
+  <a
+    use:disableTransitionOn={"touch"}
+    class="trakt-action-button trakt-button-link"
+    class:trakt-link-active={$page.url.pathname === href}
+    aria-label={label}
+    data-variant={variant}
+    {...props}
+  >
+    {@render children()}
+  </a>
+{:else}
+  <button
+    use:disableTransitionOn={"touch"}
+    class="trakt-action-button trakt-button-link"
+    aria-label={label}
+    data-variant={variant}
+    {...props}
+  >
+    {@render children()}
+  </button>
+{/if}
 
 <style>
   .trakt-action-button {

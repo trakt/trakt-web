@@ -92,7 +92,7 @@ p {
   text-overflow: ellipsis;
 }
 
-button p {
+.trakt-button p {
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
