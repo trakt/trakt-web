@@ -12,6 +12,11 @@
 </div>
 
 <style>
+  .trakt-card {
+    content-visibility: auto;
+    contain-intrinsic-size: var(--width-card);
+  }
+
   .trakt-card-content {
     width: var(--width-card);
     height: var(--height-card);
