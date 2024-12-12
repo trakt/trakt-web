@@ -1,5 +1,6 @@
 <script lang="ts">
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
+  import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -14,11 +15,7 @@
   const { user } = useUser();
 </script>
 
-<svelte:head>
-  <title>Trakt Lite: Dashboard</title>
-</svelte:head>
-
-<div class="trakt-content">
+<TraktPage title={m.navbar_link_home()}>
   <RenderFor audience="authenticated">
     <BackgroundCoverImage src={$user?.cover.url ?? DEFAULT_COVER} type="main" />
     <ProfileBanner />
@@ -31,15 +28,4 @@
     <Landing />
     <BackgroundCoverImage src={DEFAULT_COVER} type="main" />
   </RenderFor>
-</div>
-
-<style>
-  .trakt-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-32);
-
-    inset: 0;
-    margin: auto;
-  }
-</style>
+</TraktPage>

@@ -63,10 +63,6 @@
   });
 </script>
 
-<svelte:head>
-  <title>Trakt Lite: {media.title}</title>
-</svelte:head>
-
 <BackgroundCoverImage src={media.cover.url} {type} />
 
 <MediaSummaryContainer {contextualContent}>

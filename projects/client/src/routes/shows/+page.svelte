@@ -1,5 +1,6 @@
 <script>
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
+  import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -13,7 +14,7 @@
 </script>
 
 <!-- TODO: @seferturan hide actions for unauthorized users -->
-<div class="trakt-shows">
+<TraktPage title={m.navbar_link_shows()}>
   <RenderFor audience="authenticated">
     <BackgroundCoverImage src={current().cover.url} type="main" />
     <TrendingShows />
@@ -28,15 +29,4 @@
     <AnticipatedShows />
     <PopularShows />
   </RenderFor>
-</div>
-
-<style>
-  .trakt-shows {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ni-32);
-
-    inset: 0;
-    margin: auto;
-  }
-</style>
+</TraktPage>
