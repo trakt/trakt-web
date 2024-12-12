@@ -7,6 +7,7 @@
   import DurationTag from "$lib/components/poster/tags/DurationTag.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
 
   import type { MediaType } from "$lib/models/MediaType";
   import { useWatchlist } from "$lib/stores/useWatchlist";
@@ -26,10 +27,12 @@
     isWatchlisted,
     addToWatchlist,
     removeFromWatchlist,
-  } = useWatchlist({
-    type,
-    id: recommendation.id,
-  });
+  } = $derived(
+    useWatchlist({
+      type,
+      id: recommendation.id,
+    }),
+  );
 </script>
 
 <PosterCard>
@@ -60,13 +63,15 @@
       {recommendation.title}
     </p>
     {#snippet actions()}
-      <WatchlistActionButton
-        title={recommendation.title}
-        onAdd={addToWatchlist}
-        onRemove={removeFromWatchlist}
-        isWatchlisted={$isWatchlisted}
-        isWatchlistUpdating={$isWatchlistUpdating}
-      />
+      <RenderFor audience="authenticated">
+        <WatchlistActionButton
+          title={recommendation.title}
+          onAdd={addToWatchlist}
+          onRemove={removeFromWatchlist}
+          isWatchlisted={$isWatchlisted}
+          isWatchlistUpdating={$isWatchlistUpdating}
+        />
+      </RenderFor>
     {/snippet}
   </CardFooter>
 </PosterCard>

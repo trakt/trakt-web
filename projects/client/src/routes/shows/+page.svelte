@@ -13,7 +13,6 @@
   const { current } = useUser();
 </script>
 
-<!-- TODO: @seferturan hide actions for unauthorized users -->
 <TraktPage title={m.navbar_link_shows()}>
   <RenderFor audience="authenticated">
     <BackgroundCoverImage src={current().cover.url} type="main" />
