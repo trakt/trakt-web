@@ -44,6 +44,15 @@
     </RenderFor>
     <div class="trakt-navbar-links">
       <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+        <Link href="/" color="inherit">
+          <Button
+            label={m.navbar_link_home_label()}
+            style="ghost"
+            variant="secondary"
+          >
+            {m.navbar_link_home()}
+          </Button>
+        </Link>
         <Link href="/shows" color="inherit">
           <Button
             label={m.navbar_link_shows_label()}
