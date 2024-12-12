@@ -1,7 +1,6 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
-  import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import * as m from "$lib/features/i18n/messages";
@@ -24,17 +23,15 @@
 <p class="trakt-media-overview secondary">{intl.overview}</p>
 
 <div class="trakt-info-actions">
-  <Link color="inherit" href={media.trailer} target="_blank">
-    <Button label={"Trailer"} variant="vip">
-      {m.watch_the_trailer()}
-      {#snippet subtitle()}
-        YouTube
-      {/snippet}
-      {#snippet icon()}
-        <YouTubeIcon />
-      {/snippet}
-    </Button>
-  </Link>
+  <Button href={media.trailer} target="_blank" label={"Trailer"} variant="vip">
+    {m.watch_the_trailer()}
+    {#snippet subtitle()}
+      YouTube
+    {/snippet}
+    {#snippet icon()}
+      <YouTubeIcon />
+    {/snippet}
+  </Button>
 </div>
 
 <style>

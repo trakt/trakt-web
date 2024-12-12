@@ -2,7 +2,6 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import VipIcon from "$lib/components/icons/VipIcon.svelte";
-  import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -16,59 +15,69 @@
 </script>
 
 {#if !user.current().isVip}
-  <Link href="https://trakt.tv/vip">
-    <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
-      <Button label={m.get_vip_label()} variant="vip" style="textured">
-        {m.get_vip()}
-        {#snippet icon()}
-          <VipIcon />
-        {/snippet}
-      </Button>
-    </RenderFor>
-
-    <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
-      <ActionButton label={m.get_vip_label()} variant="red">
-        <VipIcon />
-      </ActionButton>
-    </RenderFor>
-  </Link>
-{/if}
-
-<Link href="/profile/me" color="inherit">
   <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
     <Button
-      label={m.user_profile_label()}
-      {variant}
-      {style}
-      text="capitalize"
-      size="small"
+      href="https://trakt.tv/vip"
+      label={m.get_vip_label()}
+      variant="vip"
+      style="textured"
     >
-      {user.current().name.first}
+      {m.get_vip()}
       {#snippet icon()}
-        <div class="profile-icon">
-          <ProfileImage
-            --width="var(--ni-24)"
-            --height="var(--ni-24)"
-            --border-width="var(--ni-2)"
-          />
-          {#if user.current().isVip}
-            <VipBadge />
-          {/if}
-        </div>
+        <VipIcon />
       {/snippet}
     </Button>
   </RenderFor>
 
   <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
-    <ActionButton label={m.get_vip_label()} variant={actionVariant}>
-      <ProfileImage
-        --width="var(--ni-24)"
-        --height="var(--ni-24)"
-        --border-width="var(--ni-2)"
-      />
+    <ActionButton
+      href="https://trakt.tv/vip"
+      label={m.get_vip_label()}
+      variant="red"
+    >
+      <VipIcon />
     </ActionButton>
   </RenderFor>
-</Link>
+{/if}
+
+<RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
+  <Button
+    href="/profile/me"
+    label={m.user_profile_label()}
+    {variant}
+    {style}
+    text="capitalize"
+    size="small"
+  >
+    {user.current().name.first}
+    {#snippet icon()}
+      <div class="profile-icon">
+        <ProfileImage
+          --width="var(--ni-24)"
+          --height="var(--ni-24)"
+          --border-width="var(--ni-2)"
+        />
+        {#if user.current().isVip}
+          <VipBadge />
+        {/if}
+      </div>
+    {/snippet}
+  </Button>
+</RenderFor>
+
+<RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
+  <ActionButton
+    href="/profile/me"
+    label={m.user_profile_label()}
+    variant={actionVariant}
+  >
+    <ProfileImage
+      --width="var(--ni-24)"
+      --height="var(--ni-24)"
+      --border-width="var(--ni-2)"
+    />
+  </ActionButton>
+</RenderFor>
 
 <style>
   :global(.trakt-navbar .trakt-profile-button) {

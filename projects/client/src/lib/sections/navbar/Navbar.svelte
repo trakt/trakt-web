@@ -44,33 +44,30 @@
     </RenderFor>
     <div class="trakt-navbar-links">
       <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-        <Link href="/" color="inherit">
-          <Button
-            label={m.navbar_link_home_label()}
-            style="ghost"
-            variant="secondary"
-          >
-            {m.navbar_link_home()}
-          </Button>
-        </Link>
-        <Link href="/shows" color="inherit">
-          <Button
-            label={m.navbar_link_shows_label()}
-            style="ghost"
-            variant="primary"
-          >
-            {m.navbar_link_shows()}
-          </Button>
-        </Link>
-        <Link href="/movies" color="inherit">
-          <Button
-            label={m.navbar_link_movies_label()}
-            style="ghost"
-            variant="primary"
-          >
-            {m.navbar_link_movies()}
-          </Button>
-        </Link>
+        <Button
+          href="/"
+          label={m.navbar_link_home_label()}
+          style="ghost"
+          variant="secondary"
+        >
+          {m.navbar_link_home()}
+        </Button>
+        <Button
+          href="/shows"
+          label={m.navbar_link_shows_label()}
+          style="ghost"
+          variant="primary"
+        >
+          {m.navbar_link_shows()}
+        </Button>
+        <Button
+          href="/movies"
+          label={m.navbar_link_movies_label()}
+          style="ghost"
+          variant="primary"
+        >
+          {m.navbar_link_movies()}
+        </Button>
       </RenderFor>
       <RenderFor audience="public">
         <JoinTraktButton />
@@ -99,6 +96,14 @@
     align-items: center;
     width: 100%;
     justify-content: end;
+
+    :global(.trakt-button.trakt-link-active) {
+      background: color-mix(
+        in srgb,
+        var(--color-background-button) 70%,
+        transparent 30%
+      );
+    }
   }
 
   .trakt-navbar {

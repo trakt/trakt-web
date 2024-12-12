@@ -37,16 +37,6 @@
     text-decoration: none;
     cursor: pointer;
 
-    :global(&.trakt-link-active) {
-      :global(.trakt-button) {
-        background: color-mix(
-          in srgb,
-          var(--color-background-button) 40%,
-          transparent 60%
-        );
-      }
-    }
-
     &:visited {
       :global(*) {
         color: inherit;
