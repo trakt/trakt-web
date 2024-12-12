@@ -209,7 +209,7 @@
 
     display: flex;
     height: var(--height-section-list);
-    gap: var(--ni-16);
+    gap: var(--ni-8);
     overflow-x: auto;
     scroll-snap-type: x proximity;
 

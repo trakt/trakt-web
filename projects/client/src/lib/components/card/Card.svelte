@@ -13,6 +13,9 @@
 
 <style>
   .trakt-card {
+    min-width: var(--width-card);
+    min-height: var(--height-card);
+
     content-visibility: auto;
     contain-intrinsic-size: var(--width-card);
   }
