@@ -148,7 +148,7 @@
 
     :global(svg) {
       /* Safari 🥲 */
-      height: 100%;
+      height: var(--ni-32);
     }
   }
 </style>
