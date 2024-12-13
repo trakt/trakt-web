@@ -9,25 +9,70 @@ export const enum WellKnownMediaQuery {
   desktop = '(min-width: 1024px)',
 }
 
-export function useMedia(query: string) {
-  const value = writable(false);
-  const media = browser ? globalThis.matchMedia(query) : {
-    matches: false,
-    addEventListener: () => {},
-    removeEventListener: () => {},
-  };
+type MediaCallback = () => void;
 
-  function updateValue() {
-    value.set(media.matches);
+class MediaQueryManager {
+  private static instance: MediaQueryManager;
+  private queries: Map<string, {
+    mediaQuery: MediaQueryList;
+    callbacks: Set<MediaCallback>;
+  }> = new Map();
+
+  private constructor() {}
+
+  static getInstance(): MediaQueryManager {
+    if (!this.instance) {
+      this.instance = new MediaQueryManager();
+    }
+    return this.instance;
   }
 
-  onMount(() => {
-    value.set(media.matches);
-    media.addEventListener('change', updateValue);
-  });
+  subscribe(query: string, callback: MediaCallback): () => void {
+    if (!browser) {
+      return () => {};
+    }
 
-  onDestroy(() => {
-    media.removeEventListener('change', updateValue);
+    if (!this.queries.has(query)) {
+      const mediaQuery = globalThis.matchMedia(query);
+      this.queries.set(query, {
+        mediaQuery,
+        callbacks: new Set(),
+      });
+
+      mediaQuery.addEventListener('change', () => {
+        this.queries.get(query)?.callbacks.forEach((cb) => cb());
+      });
+    }
+
+    const entry = this.queries.get(query)!;
+    entry.callbacks.add(callback);
+
+    callback();
+
+    return () => {
+      entry.callbacks.delete(callback);
+      if (entry.callbacks.size === 0) {
+        this.queries.delete(query);
+      }
+    };
+  }
+
+  matches(query: string): boolean {
+    if (!browser) return false;
+    return globalThis.matchMedia(query).matches;
+  }
+}
+
+export function useMedia(query: string) {
+  const value = writable(false);
+  const manager = MediaQueryManager.getInstance();
+
+  onMount(() => {
+    const unsubscribe = manager.subscribe(query, () => {
+      value.set(manager.matches(query));
+    });
+
+    onDestroy(unsubscribe);
   });
 
   return value;
