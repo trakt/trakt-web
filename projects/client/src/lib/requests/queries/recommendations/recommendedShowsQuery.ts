@@ -1,20 +1,11 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { MediaSummary } from '$lib/requests/models/MediaSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 
-export type RecommendedShow = {
-  id: number;
-  slug: string;
-  runtime: number;
-  title: string;
-  poster: {
-    url: string;
-  };
-} & EpisodeCount;
+export type RecommendedShow = MediaSummary & EpisodeCount;
 
 type RecommendedShowsParams = ApiParams;
 
@@ -22,21 +13,9 @@ function mapResponseToRecommendedShow(
   show: RecommendedShowResponse[0],
 ): RecommendedShow {
   return {
-    id: show.ids.trakt,
-    slug: show.ids.slug,
-    title: show.title,
+    ...mapShowResponseToShowSummary(show),
     episode: {
       count: show.aired_episodes!,
-    },
-    runtime: show.runtime! * show.aired_episodes!,
-    poster: {
-      url: prependHttps(
-        findDefined(
-          show.images?.poster.at(1),
-          show.images?.poster.at(0),
-        ),
-        MEDIA_POSTER_PLACEHOLDER,
-      ),
     },
   };
 }

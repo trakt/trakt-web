@@ -1,6 +1,6 @@
 import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import { mapShowResponseToShowSummary } from './_internal/mapShowResponseToShowSummary.ts';
+import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 
 type ShowSummaryParams = { slug: string } & ApiParams;
 

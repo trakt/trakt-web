@@ -19,18 +19,24 @@ export type UpcomingEpisodeEntry = EpisodeEntry & {
   show: ShowMeta;
 };
 
+// TODO: normalize / dedupe episode media info
 function mapResponseToEpisodeEntry(
   item: ShowsResponse[0],
 ): UpcomingEpisodeEntry {
   const posterCandidate = findDefined(
-    item.episode.images?.screenshot.at(1) ??
-      item.episode.images?.screenshot.at(0),
+    item.episode.images?.screenshot.at(1),
+    item.episode.images?.screenshot.at(0),
+  )?.replace('/medium/', '/thumb/');
+
+  const thumbCandidate = findDefined(
+    item.show.images?.thumb.at(1),
+    item.show.images?.thumb.at(0),
   );
 
   const showCoverCandidate = findDefined(
-    item.show.images?.fanart.at(1) ??
-      item.show.images?.fanart.at(0),
-  );
+    item.show.images?.fanart.at(1),
+    item.show.images?.fanart.at(0),
+  )?.replace('/medium/', '/thumb/');
 
   return {
     id: item.episode.ids.trakt,
@@ -39,7 +45,10 @@ function mapResponseToEpisodeEntry(
       slug: item.show.ids.slug,
       title: item.show.title,
       cover: {
-        url: prependHttps(showCoverCandidate),
+        url: prependHttps(findDefined(
+          thumbCandidate,
+          showCoverCandidate,
+        )),
       },
     },
     type: item.episode.episode_type as EpisodeType ??

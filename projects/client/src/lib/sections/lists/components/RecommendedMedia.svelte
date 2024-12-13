@@ -1,10 +1,11 @@
 <script lang="ts">
   import WatchlistActionButton from "$lib/components/buttons/watchlist/WatchlistActionButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
+  import EpisodeCard from "$lib/components/episode/card/EpisodeCard.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import PosterCard from "$lib/components/poster/card/PosterCard.svelte";
-  import PosterCover from "$lib/components/poster/card/PosterCover.svelte";
-  import DurationTag from "$lib/components/poster/tags/DurationTag.svelte";
+  import MediaCover from "$lib/components/media/card/MediaCover.svelte";
+  import PosterCard from "$lib/components/media/card/PosterCard.svelte";
+  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -35,12 +36,9 @@
   );
 </script>
 
-<PosterCard>
+{#snippet content(mediaCoverImageUrl: string)}
   <Link focusable={false} href={UrlBuilder.media(type, recommendation.slug)}>
-    <PosterCover
-      src={recommendation.poster.url}
-      alt={`${recommendation.title} poster`}
-    >
+    <MediaCover src={mediaCoverImageUrl} alt={`${recommendation.title} poster`}>
       {#snippet tags()}
         {#if "episode" in recommendation}
           <DurationTag>
@@ -55,7 +53,7 @@
           </DurationTag>
         {/if}
       {/snippet}
-    </PosterCover>
+    </MediaCover>
   </Link>
 
   <CardFooter>
@@ -76,7 +74,19 @@
       </RenderFor>
     {/snippet}
   </CardFooter>
-</PosterCard>
+{/snippet}
+
+{#if type === "movie"}
+  <PosterCard>
+    {@render content(recommendation.poster.url)}
+  </PosterCard>
+{/if}
+
+{#if type === "show"}
+  <EpisodeCard>
+    {@render content(recommendation.thumb.url)}
+  </EpisodeCard>
+{/if}
 
 <style>
   .recommendation-title {

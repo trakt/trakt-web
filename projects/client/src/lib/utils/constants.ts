@@ -7,6 +7,9 @@ export const DEFAULT_COVER =
 // TODO: @alex define pretty episode placeholder
 export const EPISODE_PLACEHOLDER = 'https://placehold.co/320x180';
 
+// TODO: @alex define pretty show fanart placeholder
+export const MEDIA_FANART_PLACEHOLDER = 'https://placehold.co/320x180';
+
 // TODO: @alex define pretty media poster placeholder
 export const MEDIA_POSTER_PLACEHOLDER = 'https://placehold.co/320x500';
 

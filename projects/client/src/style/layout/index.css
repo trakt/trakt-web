@@ -2,11 +2,13 @@
   /**
    * Card dimensions
    */
-  --height-episode-list: var(--ni-192);
-
   --width-poster-card: var(--ni-156);
   --height-poster-card: var(--ni-292);
   --height-poster-card-cover: var(--ni-248);
+
+  --width-show-card: var(--ni-212);
+  --height-show-card: var(--ni-176);
+  --height-show-card-cover: var(--ni-120);
 
   --width-episode-card: var(--ni-212);
   --height-episode-card: var(--ni-176);
@@ -16,6 +18,7 @@
    * List dimensions
    */
   --height-episode-list: var(--ni-192);
+  --height-show-list: var(--ni-192);
   --height-poster-list: calc(
     var(--height-poster-card) + var(--layout-distance-scroll-card)
   );

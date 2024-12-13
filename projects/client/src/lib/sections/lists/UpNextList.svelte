@@ -6,6 +6,7 @@
   import NextEpisodeItem from "./components/NextEpisodeItem.svelte";
   import { useStableArray } from "./stores/useStableArray";
   import { useUpNextEpisodes } from "./stores/useUpNextEpisodes";
+  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   const { list: unstable } = useUpNextEpisodes();
   const { list, set } = useStableArray<UpNextEntry>(
@@ -22,7 +23,7 @@
 <SectionList
   items={$list}
   title={m.up_next_title()}
-  --height-section-list="var(--height-episode-list)"
+  --height-section-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(episode)}
     <NextEpisodeItem {episode} show={episode.show} />

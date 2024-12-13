@@ -6,6 +6,7 @@ import {
 } from '$lib/models/EpisodeType.ts';
 import type { Paginatable } from '$lib/models/Paginatable.ts';
 import type { ShowMeta } from '$lib/models/ShowMeta.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { EpisodeProgressEntry } from '../../../models/EpisodeProgressEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -27,11 +28,15 @@ type UpNextParams = {
 function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
   const episode = item.progress.next_episode;
 
-  const posterCandidate = episode.images!.screenshot.at(1) ??
-    episode.images!.screenshot.at(0);
+  const posterCandidate = findDefined(
+    episode.images!.screenshot.at(1),
+    episode.images!.screenshot.at(0),
+  )?.replace('/medium/', '/thumb/');
 
-  const showCoverCandidate = item.show.images!.fanart.at(1) ??
-    item.show.images!.fanart.at(0);
+  const showCoverCandidate = findDefined(
+    item.show.images!.fanart.at(1),
+    item.show.images!.fanart.at(0),
+  )?.replace('/medium/', '/thumb/');
 
   return {
     show: {

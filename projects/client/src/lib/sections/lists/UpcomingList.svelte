@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useCalendarEpisodes } from "./stores/useCalendarEpisodes";
+  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   const calendar = useCalendarEpisodes();
 </script>
@@ -12,7 +13,7 @@
 <SectionList
   items={$calendar}
   title={m.upcoming_schedule_title()}
-  --height-section-list="var(--height-episode-list)"
+  --height-section-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(entry)}
     <UpcomingEpisode

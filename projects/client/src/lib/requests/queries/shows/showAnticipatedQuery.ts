@@ -1,8 +1,8 @@
 import type { ShowAnticipatedResponse, ShowResponse } from '$lib/api.ts';
 import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
 import { type ShowSummary } from '$lib/requests/models/ShowSummary.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/queries/shows/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 
 export type AnticipatedShow =
   & {
