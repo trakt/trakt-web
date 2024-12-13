@@ -73,36 +73,107 @@ async function translateJson(
   }
 }
 
-async function translateJsonFile(
-  inputFilename: string,
-  outputFilename: string,
-  targetLocale: string,
-): Promise<void> {
+type TranslationMap = Record<string, string>;
+
+async function loadExistingTranslations(
+  locale: string,
+): Promise<TranslationMap> {
+  const path = `./i18n/messages/${locale}.json`;
   try {
-    // Read the JSON file
-    const fileData = await Deno.readTextFile(inputFilename);
-    const jsonData = JSON.parse(fileData.toString());
+    const content = await Deno.readTextFile(path);
+    return JSON.parse(content);
+  } catch {
+    return {};
+  }
+}
 
-    // Translate the JSON object
-    const translatedData = await translateJson(jsonData, targetLocale);
+function findNewKeys(source: TranslationMap, target: TranslationMap): string[] {
+  return Object.keys(source).filter((key) => !(key in target));
+}
 
-    Deno.writeTextFile(
-      outputFilename,
-      JSON.stringify(translatedData, null, 2) + '\n',
-    );
+async function bulkTranslateNewKeys(
+  sourceMessages: TranslationMap,
+  newKeys: string[],
+  targetLocale: string,
+): Promise<TranslationMap> {
+  if (newKeys.length === 0) return {};
 
-    console.log(`Translation to ${targetLocale} complete!`);
+  const keysToTranslate = newKeys.reduce((acc, key) => {
+    acc[key] = sourceMessages[key] ?? '';
+    return acc;
+  }, {} as TranslationMap);
+
+  return await translateJson(keysToTranslate, targetLocale);
+}
+
+function maintainKeyOrder(
+  sourceMessages: TranslationMap,
+  translations: TranslationMap,
+): TranslationMap {
+  // Create ordered object based on source keys
+  const ordered = Object.keys(sourceMessages).reduce((acc, key) => {
+    acc[key] = translations[key] ?? sourceMessages[key] ?? '';
+    return acc;
+  }, {} as TranslationMap);
+
+  // Add any additional keys that might exist in translations but not in source
+  Object.keys(translations).forEach((key) => {
+    if (!(key in ordered)) {
+      ordered[key] = translations[key] ?? '';
+    }
+  });
+
+  return ordered;
+}
+
+async function translateAllLocales(): Promise<void> {
+  try {
+    // Load English source
+    const sourceMessages = await loadExistingTranslations('en');
+
+    // Process each locale
+    for (const locale of availableLocales.filter((l) => l !== 'en')) {
+      console.log(`Processing ${locale}...`);
+
+      // Load existing translations
+      const existingTranslations = await loadExistingTranslations(locale);
+
+      // Find new keys
+      const newKeys = findNewKeys(sourceMessages, existingTranslations);
+
+      if (newKeys.length === 0) {
+        console.log(`No new keys for ${locale}`);
+        continue;
+      }
+
+      console.log(`Translating ${newKeys.length} new keys for ${locale}`);
+
+      // Translate new keys
+      const newTranslations = await bulkTranslateNewKeys(
+        sourceMessages,
+        newKeys,
+        locale,
+      );
+
+      // Merge and save
+      const updatedTranslations = maintainKeyOrder(sourceMessages, {
+        ...existingTranslations,
+        ...newTranslations,
+      });
+
+      await Deno.writeTextFile(
+        `./i18n/messages/${locale}.json`,
+        JSON.stringify(updatedTranslations, null, 2) + '\n',
+      );
+
+      console.log(`Updated ${locale} with ${newKeys.length} new translations`);
+    }
   } catch (error) {
-    console.error(`Error translating to ${targetLocale}:`, error);
+    console.error('Translation error:', error);
+    throw error;
   }
 }
 
 if (import.meta.main) {
-  const messagesDir = './i18n/messages';
-  const enJsonPath = `${messagesDir}/en.json`;
-
-  for (const locale of availableLocales) {
-    const outputFilename = `${messagesDir}/${locale}.json`;
-    await translateJsonFile(enJsonPath, outputFilename, locale);
-  }
+  await translateAllLocales();
 }
