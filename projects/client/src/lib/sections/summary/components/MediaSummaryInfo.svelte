@@ -44,4 +44,9 @@
   .trakt-media-overview {
     line-height: 150%;
   }
+
+  .trakt-info-actions {
+    display: flex;
+    gap: var(--ni-8);
+  }
 </style>
