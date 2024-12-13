@@ -18,6 +18,10 @@
 
     content-visibility: auto;
     contain-intrinsic-size: var(--width-card);
+
+    /* Add padding to ensure box-shadow isn't clipped by content-visibility */
+    padding: 0 var(--ni-8);
+    margin: 0 var(--ni-neg-8);
   }
 
   .trakt-card-content {
@@ -27,7 +31,7 @@
     border-radius: var(--ni-12);
     overflow: hidden;
     background: var(--color-card-background);
-    box-shadow: var(--ni-0) var(--ni-4) var(--ni-8) var(--ni-0)
-      color-mix(in srgb, var(--color-card-background) 25%, transparent 75%);
+    box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
+      color-mix(in srgb, var(--color-shadow) 25%, transparent 75%);
   }
 </style>
