@@ -1,17 +1,13 @@
 <script lang="ts">
-  import { useUser } from "$lib/features/auth/stores/useUser";
+  import { useCover } from "$lib/components/background/useCover";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { DEFAULT_COVER } from "$lib/utils/constants";
 
-  const { user } = useUser();
+  const cover = $derived(useCover());
 </script>
 
 <div class="trakt-footer-bg">
   <div class="trakt-footer-bg-overlay">
-    <CrossOriginImage
-      src={$user?.cover.url ?? DEFAULT_COVER}
-      alt={`Background for footer`}
-    />
+    <CrossOriginImage src={$cover} alt={`Background for footer`} />
   </div>
 </div>
 

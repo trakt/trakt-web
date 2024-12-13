@@ -2,6 +2,7 @@
   import "../style";
 
   import { page } from "$app/stores";
+  import CoverProvider from "$lib/components/background/CoverProvider.svelte";
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
@@ -103,22 +104,24 @@
   <AuthProvider token={data.auth.token} url={data.auth.url}>
     <AnalyticsProvider>
       <LocaleProvider>
-        <ThemeProvider theme={data.theme}>
-          <div class="trakt-layout-wrapper">
-            <Navbar />
-            <div class="trakt-layout-content">
-              {@render children()}
+        <CoverProvider>
+          <ThemeProvider theme={data.theme}>
+            <div class="trakt-layout-wrapper">
+              <Navbar />
+              <div class="trakt-layout-content">
+                {@render children()}
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-          <RenderFor audience="all" device={["mobile"]}>
-            <MobileNavbar />
-          </RenderFor>
-          <SvelteQueryDevtools
-            buttonPosition="bottom-left"
-            styleNonce="opacity: 0.5"
-          />
-        </ThemeProvider>
+            <RenderFor audience="all" device={["mobile"]}>
+              <MobileNavbar />
+            </RenderFor>
+            <SvelteQueryDevtools
+              buttonPosition="bottom-left"
+              styleNonce="opacity: 0.5"
+            />
+          </ThemeProvider>
+        </CoverProvider>
       </LocaleProvider>
 
       {#key $page.url.pathname}

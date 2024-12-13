@@ -1,6 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaType } from "$lib/models/MediaType";
+  import { useCover } from "./useCover";
 
   type ImageBackgroundProps = {
     src: string;
@@ -8,6 +9,10 @@
   };
 
   const { src, type }: ImageBackgroundProps = $props();
+
+  const cover = $derived(useCover());
+
+  $effect.pre(() => cover.set(src));
 </script>
 
 <div class="background-cover-image">
