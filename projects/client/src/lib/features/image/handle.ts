@@ -24,6 +24,12 @@ const devResolver = async (
 
   const response = await fetch(source);
   const blob = await response.blob();
+  const isImage = blob.type.startsWith('image');
+  if (!isImage) {
+    console.error('Unexpected response for:', source);
+    return { uri: '' };
+  }
+
   const arrayBuffer = await blob.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
   const uri = `data:${blob.type};base64,${buffer.toString('base64')}`;
