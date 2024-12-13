@@ -85,5 +85,6 @@
   "navbar_link_shows": "番組",
   "navbar_link_shows_label": "番組を閲覧",
   "navbar_link_home": "ホーム",
-  "navbar_link_home_label": "ホームページ"
+  "navbar_link_home_label": "ホームページ",
+  "watchlist": "見たいリスト"
 }

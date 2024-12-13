@@ -85,5 +85,6 @@
   "navbar_link_shows": "Series",
   "navbar_link_shows_label": "Series bekijken",
   "navbar_link_home": "Thuis",
-  "navbar_link_home_label": "Terug naar de startscherm"
+  "navbar_link_home_label": "Terug naar de startscherm",
+  "watchlist": "Mijn kijklijst"
 }

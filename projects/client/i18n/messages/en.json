@@ -85,5 +85,6 @@
   "navbar_link_shows": "Shows",
   "navbar_link_shows_label": "Browse Shows",
   "navbar_link_home": "Home",
-  "navbar_link_home_label": "Go back to the homepage"
+  "navbar_link_home_label": "Go back to the homepage",
+  "watchlist": "Watchlist"
 }

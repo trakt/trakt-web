@@ -85,5 +85,6 @@
   "navbar_link_shows": "Séries",
   "navbar_link_shows_label": "Parcourir les séries",
   "navbar_link_home": "Accueil",
-  "navbar_link_home_label": "Page d'accueil"
+  "navbar_link_home_label": "Page d'accueil",
+  "watchlist": "Liste de visionnement"
 }

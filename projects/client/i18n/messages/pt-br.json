@@ -71,6 +71,8 @@
   "landing_discover_description": "O que está bombando e onde assistir.",
   "landing_track_label": "Acompanhe",
   "landing_track_description": "Tudo o que você assistiu.",
+  "landing_share_label": "Compartilhe",
+  "landing_share_description": "Comentários, avaliações e recomendações.",
   "trending_now": "Tendências",
   "your_recommendations": "Suas Recomendações",
   "most_anticipated": "Mais Esperados",
@@ -84,6 +86,5 @@
   "navbar_link_shows_label": "Navegue pelas Séries",
   "navbar_link_home": "Início",
   "navbar_link_home_label": "Página Inicial",
-  "landing_share_label": "Compartilhe",
-  "landing_share_description": "Comentários, avaliações e recomendações."
+  "watchlist": "Lista de Visualização"
 }

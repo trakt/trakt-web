@@ -85,5 +85,6 @@
   "navbar_link_shows": "Series",
   "navbar_link_shows_label": "Explorar series",
   "navbar_link_home": "Inicio",
-  "navbar_link_home_label": "Página principal"
+  "navbar_link_home_label": "Página principal",
+  "watchlist": "Lista de Seguimiento"
 }
