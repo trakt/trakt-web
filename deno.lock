@@ -8,6 +8,7 @@
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/testing@^1.0.5": "1.0.5",
+    "npm:@google/generative-ai@0.21": "0.21.0",
     "npm:@hono/swagger-ui@0.5": "0.5.0_hono@4.6.12",
     "npm:@inlang/paraglide-sveltekit@~0.12.1": "0.12.1_@sveltejs+kit@2.8.5__@sveltejs+vite-plugin-svelte@4.0.2___svelte@5.2.9____acorn@8.14.0___vite@5.4.11__svelte@5.2.9___acorn@8.14.0__vite@5.4.11_svelte@5.2.9__acorn@8.14.0",
     "npm:@playwright/test@1.49.0": "1.49.0",
@@ -822,6 +823,9 @@
     },
     "@firebase/webchannel-wrapper@1.0.3": {
       "integrity": "sha512-2xCRM9q9FlzGZCdgDMJwc0gyUkWFtkosy7Xxr6sFgQwn+wMNIWd7xIvYNauU1r64B5L5rsGKy/n9TKJ0aAFeqQ=="
+    },
+    "@google/generative-ai@0.21.0": {
+      "integrity": "sha512-7XhUbtnlkSEZK15kN3t+tzIMxsbKm/dSkKBFalj+20NvPKe1kBY7mR2P7vuijEn+f06z5+A8bVGKO0v39cr6Wg=="
     },
     "@grpc/grpc-js@1.9.15": {
       "integrity": "sha512-nqE7Hc0AzI+euzUwDAy0aY5hCp10r734gMGRdU+qOPX0XSceI2ULrcXB5U2xSc5VkWwalCj4M7GzCAygZl2KoQ==",
@@ -3395,14 +3399,14 @@
     "siginfo@2.0.0": {
       "integrity": "sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g=="
     },
+    "signal-exit@4.1.0": {
+      "integrity": "sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw=="
+    },
     "simple-swizzle@0.2.2": {
       "integrity": "sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==",
       "dependencies": [
         "is-arrayish"
       ]
-    },
-    "signal-exit@4.1.0": {
-      "integrity": "sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw=="
     },
     "sirv@3.0.0": {
       "integrity": "sha512-BPwJGUeDaDCHihkORDchNyyTvWFhcusy1XMmhEVTQTwGeybFbp8YEmB+njbPnth1FibULBSBVwCQni25XlCUDg==",
@@ -3948,6 +3952,7 @@
       "projects/client": {
         "packageJson": {
           "dependencies": [
+            "npm:@google/generative-ai@0.21",
             "npm:@inlang/paraglide-sveltekit@~0.12.1",
             "npm:@playwright/test@^1.49.0",
             "npm:@sveltejs/adapter-auto@^3.3.1",

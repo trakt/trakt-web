@@ -16,6 +16,7 @@
     "i18n:resolve": "deno run --allow-read --allow-write ./resolve-i18n.ts"
   },
   "devDependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@playwright/test": "^1.49.0",
     "@sveltejs/adapter-auto": "^3.3.1",
     "@sveltejs/adapter-cloudflare": "^4.7.4",
