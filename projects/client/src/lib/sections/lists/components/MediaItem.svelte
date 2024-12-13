@@ -11,17 +11,19 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
 
   import type { MediaType } from "$lib/models/MediaType";
+  import type { EpisodeCount } from "$lib/requests/models/EpisodeCount";
+  import type { MovieSummary } from "$lib/requests/models/MovieSummary";
+  import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { RecommendedMediaItem } from "../stores/useRecommendationList";
 
-  type RecommendationItemProps = {
-    recommendation: RecommendedMediaItem;
+  type MediaItemProps = {
+    media: MovieSummary | (ShowSummary & EpisodeCount);
     type: MediaType;
   };
 
-  const { type, recommendation }: RecommendationItemProps = $props();
+  const { type, media }: MediaItemProps = $props();
 
   const {
     isWatchlistUpdating,
@@ -31,25 +33,22 @@
   } = $derived(
     useWatchlist({
       type,
-      id: recommendation.id,
+      id: media.id,
     }),
   );
 </script>
 
 {#snippet content(mediaCoverImageUrl: string)}
-  <Link focusable={false} href={UrlBuilder.media(type, recommendation.slug)}>
-    <MediaCover src={mediaCoverImageUrl} alt={`${recommendation.title} poster`}>
+  <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
+    <MediaCover src={mediaCoverImageUrl} alt={`${media.title} poster`}>
       {#snippet tags()}
-        {#if "episode" in recommendation}
+        {#if "episode" in media}
           <DurationTag>
-            {m.number_of_episodes({ count: recommendation.episode.count })}
+            {m.number_of_episodes({ count: media.episode.count })}
           </DurationTag>
         {:else if type === "movie"}
           <DurationTag>
-            {toHumanDuration(
-              { minutes: recommendation.runtime },
-              languageTag(),
-            )}
+            {toHumanDuration({ minutes: media.runtime }, languageTag())}
           </DurationTag>
         {/if}
       {/snippet}
@@ -57,15 +56,15 @@
   </Link>
 
   <CardFooter>
-    <Link href={UrlBuilder.media(type, recommendation.slug)}>
+    <Link href={UrlBuilder.media(type, media.slug)}>
       <p class="recommendation-title small ellipsis">
-        {recommendation.title}
+        {media.title}
       </p>
     </Link>
     {#snippet actions()}
       <RenderFor audience="authenticated">
         <WatchlistActionButton
-          title={recommendation.title}
+          title={media.title}
           onAdd={addToWatchlist}
           onRemove={removeFromWatchlist}
           isWatchlisted={$isWatchlisted}
@@ -78,13 +77,13 @@
 
 {#if type === "movie"}
   <PosterCard>
-    {@render content(recommendation.poster.url)}
+    {@render content(media.poster.url)}
   </PosterCard>
 {/if}
 
 {#if type === "show"}
   <EpisodeCard>
-    {@render content(recommendation.thumb.url)}
+    {@render content(media.thumb.url)}
   </EpisodeCard>
 {/if}
 

@@ -2,7 +2,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import type { TrendingMovie } from "$lib/requests/queries/movies/movieTrendingQuery";
   import type { TrendingShow } from "$lib/requests/queries/shows/showTrendingQuery";
-  import RecommendedMedia from "$lib/sections/lists/components/RecommendedMedia.svelte";
+  import MediaItem from "$lib/sections/lists/components/MediaItem.svelte";
 
   type TrendingItemProps = {
     trendingItem?: TrendingMovie | TrendingShow;
@@ -14,7 +14,7 @@
 
 <div class="trakt-preview-item">
   {#if trendingItem}
-    <RecommendedMedia {type} recommendation={trendingItem} />
+    <MediaItem {type} media={trendingItem} />
   {/if}
 </div>
 
