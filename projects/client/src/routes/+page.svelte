@@ -10,12 +10,12 @@
   import UpcomingSchedule from "$lib/sections/upcoming-schedule/UpcomingSchedule.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
 
-  const { user } = useUser();
+  const { current } = useUser();
 </script>
 
 <TraktPage title={m.navbar_link_home()}>
   <RenderFor audience="authenticated">
-    <BackgroundCoverImage src={$user?.cover.url ?? DEFAULT_COVER} type="main" />
+    <BackgroundCoverImage src={current().cover.url} type="main" />
     <ProfileBanner />
     <UpNext />
     <UpcomingSchedule />
