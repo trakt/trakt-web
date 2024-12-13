@@ -36,7 +36,7 @@
 </script>
 
 <PosterCard>
-  <Link href={UrlBuilder.media(type, recommendation.slug)}>
+  <Link focusable={false} href={UrlBuilder.media(type, recommendation.slug)}>
     <PosterCover
       src={recommendation.poster.url}
       alt={`${recommendation.title} poster`}
@@ -59,9 +59,11 @@
   </Link>
 
   <CardFooter>
-    <p class="recommendation-title small ellipsis">
-      {recommendation.title}
-    </p>
+    <Link href={UrlBuilder.media(type, recommendation.slug)}>
+      <p class="recommendation-title small ellipsis">
+        {recommendation.title}
+      </p>
+    </Link>
     {#snippet actions()}
       <RenderFor audience="authenticated">
         <WatchlistActionButton

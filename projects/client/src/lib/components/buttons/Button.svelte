@@ -97,7 +97,9 @@
 
     &.trakt-button-link {
       &.trakt-link-active {
-        color: var(--color-background-button);
+        &[data-style="ghost"] {
+          color: var(--color-background-button);
+        }
       }
     }
 

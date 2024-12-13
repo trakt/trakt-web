@@ -7,11 +7,13 @@
     href,
     target,
     color = "default",
+    focusable = true,
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
     HTMLElementProps & {
       color?: "default" | "classic";
+      focusable?: boolean;
     } = $props();
 </script>
 
@@ -19,6 +21,7 @@
   <a
     {href}
     {target}
+    tabindex={focusable ? 0 : -1}
     use:navigateWithFocus
     data-color={color}
     class="trakt-link"
@@ -35,7 +38,6 @@
   .trakt-link {
     -webkit-tap-highlight-color: transparent;
     color: inherit;
-    display: contents;
     text-decoration: none;
     cursor: pointer;
     transition: color var(--transition-increment) ease-in-out;
@@ -45,13 +47,33 @@
       color: inherit;
     }
 
+    &:focus-visible {
+      outline: none;
+      position: relative;
+
+      &:not(:has(p, span))::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        outline: var(--ni-2) solid var(--color-link-active);
+        border-radius: var(--ni-4);
+        outline-offset: var(--ni-4);
+
+        transition: border-radius var(--transition-increment) ease-in-out;
+      }
+    }
+
     &[data-color="default"] {
       &,
       &:visited {
         color: var(--color-foreground);
       }
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         color: var(--color-link-active);
       }
 

@@ -7,10 +7,10 @@
 </script>
 
 <div class="trakt-external-links">
-  <Link href={UrlBuilder.app.ios()} target="_blank" color="inherit">
+  <Link href={UrlBuilder.app.ios()} target="_blank">
     <AppleIcon />
   </Link>
-  <Link href={UrlBuilder.app.android()} target="_blank" color="inherit">
+  <Link href={UrlBuilder.app.android()} target="_blank">
     <AndroidIcon />
   </Link>
 </div>

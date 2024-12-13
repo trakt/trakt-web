@@ -31,7 +31,7 @@
 <header>
   <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
     <div class="trakt-logo">
-      <Link color="inherit" href={UrlBuilder.home()}>
+      <Link href={UrlBuilder.home()}>
         <RenderFor audience="authenticated">
           <LogoMark />
         </RenderFor>
@@ -91,28 +91,6 @@
     height: var(--ni-64);
   }
 
-  .trakt-navbar-links {
-    display: flex;
-    gap: var(--ni-8);
-    align-items: center;
-    width: 100%;
-    justify-content: end;
-
-    /** 
-    * Navbar links have custom design,
-    * to accommodate the custom cover background
-    * so we need to override the button styles
-    */
-    :global(.trakt-button.trakt-link-active) {
-      background: color-mix(
-        in srgb,
-        var(--color-background-button) 70%,
-        transparent 30%
-      );
-      color: var(--color-foreground-button);
-    }
-  }
-
   .trakt-navbar {
     z-index: 999;
     position: fixed;
@@ -129,6 +107,28 @@
 
     transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
     transition-property: background-color, box-shadow;
+
+    .trakt-navbar-links {
+      display: flex;
+      gap: var(--ni-8);
+      align-items: center;
+      width: 100%;
+      justify-content: end;
+
+      /** 
+      * Navbar links have custom design,
+      * to accommodate the custom cover background
+      * so we need to override the button styles
+      */
+      :global(.trakt-button.trakt-link-active[data-style="ghost"]) {
+        background: color-mix(
+          in srgb,
+          var(--color-background-button) 70%,
+          transparent 30%
+        );
+        color: var(--color-foreground-button);
+      }
+    }
   }
 
   .trakt-navbar-scroll {

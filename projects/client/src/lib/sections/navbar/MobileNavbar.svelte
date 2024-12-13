@@ -8,21 +8,21 @@
 </script>
 
 <div class="trakt-mobile-navbar">
-  <Link href={UrlBuilder.home()} color="inherit">
+  <Link href={UrlBuilder.home()}>
     <div class="trakt-mobile-navbar-link">
       <HomeIcon />
       <p class="meta-info">{m.navbar_link_home()}</p>
     </div>
   </Link>
 
-  <Link href={UrlBuilder.shows()} color="inherit">
+  <Link href={UrlBuilder.shows()}>
     <div class="trakt-mobile-navbar-link">
       <ShowIcon />
       <p class="meta-info">{m.navbar_link_shows()}</p>
     </div>
   </Link>
 
-  <Link href={UrlBuilder.movies()} color="inherit">
+  <Link href={UrlBuilder.movies()}>
     <div class="trakt-mobile-navbar-link">
       <MovieIcon />
       <p class="meta-info">{m.navbar_link_movies()}</p>
