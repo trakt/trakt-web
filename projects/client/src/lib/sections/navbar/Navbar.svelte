@@ -49,7 +49,7 @@
           href={UrlBuilder.home()}
           label={m.navbar_link_home_label()}
           style="ghost"
-          variant="secondary"
+          variant="primary"
         >
           {m.navbar_link_home()}
         </Button>
@@ -98,12 +98,18 @@
     width: 100%;
     justify-content: end;
 
+    /** 
+    * Navbar links have custom design,
+    * to accommodate the custom cover background
+    * so we need to override the button styles
+    */
     :global(.trakt-button.trakt-link-active) {
       background: color-mix(
         in srgb,
         var(--color-background-button) 70%,
         transparent 30%
       );
+      color: var(--color-foreground-button);
     }
   }
 

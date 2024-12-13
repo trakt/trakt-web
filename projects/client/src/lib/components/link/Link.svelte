@@ -6,12 +6,12 @@
     children,
     href,
     target,
-    color,
+    color = "default",
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
     HTMLElementProps & {
-      color?: "inherit" | "default" | "classic";
+      color?: "default" | "classic";
     } = $props();
 </script>
 
@@ -38,23 +38,32 @@
     display: contents;
     text-decoration: none;
     cursor: pointer;
+    transition: color var(--transition-increment) ease-in-out;
+    display: inherit;
 
-    &:visited {
-      :global(*) {
-        color: inherit;
-      }
-    }
-
-    &:hover {
-      :global(*) {
-        color: var(--color-text-secondary);
-      }
+    :global(p, span) {
+      color: inherit;
     }
 
     &[data-color="default"] {
       &,
-      :global(*) {
-        transition: color calc(var(--transition-increment) / 2) ease-in-out;
+      &:visited {
+        color: var(--color-foreground);
+      }
+
+      &:hover {
+        color: var(--color-link-active);
+      }
+
+      &.trakt-link-active {
+        &,
+        &:visited {
+          color: var(--color-link-active);
+        }
+
+        &:hover {
+          color: var(--color-foreground);
+        }
       }
     }
 
@@ -64,33 +73,10 @@
 
       &:visited {
         color: var(--red-300);
-
-        :global(*) {
-          color: var(--red-300);
-        }
       }
 
       &:hover {
         color: var(--blue-600);
-
-        :global(*) {
-          color: var(--blue-600);
-        }
-      }
-    }
-
-    &[data-color="inherit"] {
-      :global(*) {
-        color: inherit;
-      }
-
-      &:visited,
-      &:hover {
-        color: inherit;
-
-        :global(*) {
-          color: inherit;
-        }
       }
     }
   }

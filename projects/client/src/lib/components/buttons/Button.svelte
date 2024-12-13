@@ -95,6 +95,12 @@
     --color-highlight: color-mix(in srgb, white 52%, transparent 48%);
     --color-shadow: color-mix(in srgb, black 32%, transparent 68%);
 
+    &.trakt-button-link {
+      &.trakt-link-active {
+        color: var(--color-background-button);
+      }
+    }
+
     &[data-variant="primary"] {
       --color-background-button: var(--color-surface-button-primary);
       --color-foreground-button: var(--color-foreground-button-primary);

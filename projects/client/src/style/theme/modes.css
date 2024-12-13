@@ -12,6 +12,8 @@
 
   --color-surface-button-disabled: var(--shade-200);
   --color-foreground-button-disabled: var(--shade-600);
+
+  --color-link-active: var(--purple-700);
 }
 
 [data-theme='dark'] {
@@ -31,4 +33,6 @@
 
   --color-surface-button-disabled: var(--shade-800);
   --color-foreground-button-disabled: var(--shade-400);
+
+  --color-link-active: var(--purple-400);
 }
