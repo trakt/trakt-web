@@ -40,15 +40,6 @@
       EpisodeFinaleType.Series,
     ].includes(type as EpisodeFinaleType),
   );
-
-  let isImagePending = $state(true);
-  $effect(() => {
-    if (!isLoading) {
-      return;
-    }
-
-    isImagePending = true;
-  });
 </script>
 
 <CardCover {src} {alt} {isLoading}>
