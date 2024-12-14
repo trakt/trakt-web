@@ -12,6 +12,7 @@
 
   let visibleItems = $state<T[]>([]);
   let timeoutId: number;
+  let batchIndex = 0;
 
   function renderNextBatch() {
     const nextIndex = visibleItems.length;
@@ -19,9 +20,14 @@
       return;
     }
 
-    const nextBatch = items.slice(nextIndex, nextIndex + batchSize);
+    const nextExponentialBatchSize = batchSize * 2 ** batchIndex++;
+    const nextBatch = items.slice(
+      nextIndex,
+      nextIndex + nextExponentialBatchSize,
+    );
     visibleItems = [...visibleItems, ...nextBatch];
 
+    const percentage = nextIndex / items.length;
     timeoutId = window.setTimeout(renderNextBatch, delay);
   }
 
