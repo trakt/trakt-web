@@ -9,7 +9,7 @@ export function whenInViewport(
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           callback();
-          observer.disconnect();
+          queueMicrotask(() => observer.disconnect());
         }
       });
     },
