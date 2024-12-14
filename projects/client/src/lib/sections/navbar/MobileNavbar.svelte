@@ -59,6 +59,7 @@
 
   .trakt-mobile-navbar-link {
     width: var(--ni-80);
+    transition: color var(--transition-increment) ease-in-out;
 
     display: flex;
     flex-direction: column;
