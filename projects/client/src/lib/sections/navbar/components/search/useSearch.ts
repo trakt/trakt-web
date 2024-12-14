@@ -32,7 +32,7 @@ export function useSearch() {
       ...searchQuery({
         query,
       }),
-      gcTime: time.minutes(5),
+      staleTime: time.minutes(5),
     }).catch((error) => {
       if (error instanceof AbortError) {
         return new Promise<SearchResult[]>((resolve) => resolve(get(results)));

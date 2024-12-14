@@ -18,7 +18,7 @@ export function useCalendarEpisodes() {
       startDate: assertDefined(YYYY_MM_DD, 'Could not extract current date.'),
       days: 14,
     }),
-    gcTime: time.minutes(5),
+    staleTime: time.minutes(5),
     refetchOnWindowFocus: true,
   });
 

@@ -8,17 +8,17 @@ import { currentUserWatchlistQuery } from '../queries/currentUserWatchlistQuery.
 export function useUser() {
   const userQueryResponse = createQuery({
     ...currentUserSettingsQuery(),
-    gcTime: Infinity,
+    staleTime: Infinity,
   });
 
   const historyQueryResponse = createQuery({
     ...currentUserHistoryQuery(),
-    gcTime: Infinity,
+    staleTime: Infinity,
   });
 
   const watchlistQueryResponse = createQuery({
     ...currentUserWatchlistQuery(),
-    gcTime: Infinity,
+    staleTime: Infinity,
   });
 
   const user = derived(userQueryResponse, ($query) => $query.data);

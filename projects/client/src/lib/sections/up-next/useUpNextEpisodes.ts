@@ -19,7 +19,7 @@ export const useUpNextEpisodes = () => {
       limit: UP_NEXT_LIMIT,
       sort: user().preferences.progress.sort,
     }),
-    gcTime: time.minutes(5),
+    staleTime: time.minutes(5),
     refetchOnWindowFocus: true,
   });
 
