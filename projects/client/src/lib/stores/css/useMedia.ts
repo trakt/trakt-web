@@ -67,12 +67,18 @@ export function useMedia(query: string) {
   const value = writable(false);
   const manager = MediaQueryManager.getInstance();
 
+  const unsubscribe = manager.subscribe(query, () => {
+    value.set(manager.matches(query));
+  });
+
   onMount(() => {
-    const unsubscribe = manager.subscribe(query, () => {
+    return manager.subscribe(query, () => {
       value.set(manager.matches(query));
     });
+  });
 
-    onDestroy(unsubscribe);
+  onDestroy(() => {
+    unsubscribe();
   });
 
   return value;
