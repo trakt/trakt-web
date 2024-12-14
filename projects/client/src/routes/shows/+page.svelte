@@ -16,23 +16,32 @@
 
   type ShowContentProps = {
     cover: { url: string };
+    isAuthorized: boolean;
   };
 </script>
 
-{#snippet content({ cover: { url } }: ShowContentProps)}
+{#snippet content({ cover: { url }, isAuthorized }: ShowContentProps)}
   <BackgroundCoverImage src={url} type="main" />
   <TrendingList title={m.trending_now()} {type} />
-  <RecommendedList title={m.your_recommendations()} {type} />
+  {#if isAuthorized}
+    <RecommendedList title={m.your_recommendations()} {type} />
+  {/if}
   <AnticipatedList title={m.most_anticipated()} {type} />
   <PopularList title={m.most_popular()} {type} />
 {/snippet}
 
 <TraktPage title={m.navbar_link_shows()}>
   <RenderFor audience="authenticated">
-    {@render content(current())}
+    {@render content({
+      ...current(),
+      isAuthorized: true,
+    })}
   </RenderFor>
 
   <RenderFor audience="public">
-    {@render content({ cover: { url: DEFAULT_COVER } })}
+    {@render content({
+      cover: { url: DEFAULT_COVER },
+      isAuthorized: false,
+    })}
   </RenderFor>
 </TraktPage>
