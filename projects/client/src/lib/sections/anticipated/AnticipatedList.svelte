@@ -14,8 +14,12 @@
   const { list } = useAnticipatedList({ type });
 </script>
 
-<SectionList {title} --height-section-list="var(--height-poster-list)">
-  {#each $list as trendingItem (trendingItem.id)}
-    <RecommendedMedia {type} recommendation={trendingItem} />
-  {/each}
+<SectionList
+  items={$list}
+  {title}
+  --height-section-list="var(--height-poster-list)"
+>
+  {#snippet item(recommendation)}
+    <RecommendedMedia {type} {recommendation} />
+  {/snippet}
 </SectionList>

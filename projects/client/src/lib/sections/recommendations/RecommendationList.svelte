@@ -15,8 +15,12 @@
   const { list } = useRecommendationList({ type });
 </script>
 
-<SectionList {title} --height-section-list="var(--height-poster-list)">
-  {#each $list as recommendation (recommendation.id)}
+<SectionList
+  items={$list}
+  {title}
+  --height-section-list="var(--height-poster-list)"
+>
+  {#snippet item(recommendation)}
     <RecommendedMedia {type} {recommendation} />
-  {/each}
+  {/snippet}
 </SectionList>

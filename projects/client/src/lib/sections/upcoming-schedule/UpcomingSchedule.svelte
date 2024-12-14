@@ -10,10 +10,11 @@
 </script>
 
 <SectionList
+  items={$calendar}
   title={m.upcoming_schedule_title()}
   --height-section-list="var(--height-episode-list)"
 >
-  {#each $calendar as entry}
+  {#snippet item(entry)}
     <UpcomingEpisode
       i18n={EpisodeIntlProvider}
       episodeNumber={entry.number}
@@ -25,5 +26,5 @@
       type={entry.type}
       showHref={UrlBuilder.show(entry.show.slug)}
     />
-  {/each}
+  {/snippet}
 </SectionList>

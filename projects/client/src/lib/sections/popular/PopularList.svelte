@@ -14,8 +14,12 @@
   const { list } = usePopularList({ type });
 </script>
 
-<SectionList {title} --height-section-list="var(--height-poster-list)">
-  {#each $list as popularItem (popularItem.id)}
-    <RecommendedMedia {type} recommendation={popularItem} />
-  {/each}
+<SectionList
+  items={$list}
+  {title}
+  --height-section-list="var(--height-poster-list)"
+>
+  {#snippet item(recommendation)}
+    <RecommendedMedia {type} {recommendation} />
+  {/snippet}
 </SectionList>

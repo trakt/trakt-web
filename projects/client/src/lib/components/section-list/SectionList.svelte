@@ -1,16 +1,19 @@
-<script lang="ts">
+<script lang="ts" generics="T extends { id: unknown }">
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
+  import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CaretLeftIcon from "../icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "../icons/CaretRightIcon.svelte";
   import { scrollTracking } from "./scrollTracking";
 
-  type SectionListProps = {
+  type SectionListProps<T> = {
     title: string;
-  } & ChildrenProps;
+    items: T[];
+    item: Snippet<[T]>;
+  };
 
-  const { children, title }: SectionListProps = $props();
+  const { items, title, item }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
 
@@ -95,7 +98,9 @@
       use:scrollTracking={scrollX}
       class="section-list-horizontal-scroll"
     >
-      {@render children()}
+      {#each items as i (i.id)}
+        {@render item(i)}
+      {/each}
     </div>
   </div>
 </section>

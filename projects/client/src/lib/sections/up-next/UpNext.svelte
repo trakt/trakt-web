@@ -20,10 +20,11 @@
 </script>
 
 <SectionList
+  items={$list}
   title={m.up_next_title()}
   --height-section-list="var(--height-episode-list)"
 >
-  {#each $list as episode (episode.show.id)}
+  {#snippet item(episode)}
     <NextEpisodeItem {episode} show={episode.show} />
-  {/each}
+  {/snippet}
 </SectionList>
