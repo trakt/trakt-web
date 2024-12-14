@@ -1,13 +1,17 @@
 <script lang="ts">
-  import { quadIn } from "svelte/easing";
-  import { fade } from "svelte/transition";
+  import { whenInViewport } from "$lib/utils/actions/whenInViewport";
+  import { writable } from "svelte/store";
 
   const { children }: ChildrenProps = $props();
+
+  const isVisible = writable(false);
 </script>
 
-<div class="trakt-card" transition:fade={{ duration: 150, easing: quadIn }}>
+<div use:whenInViewport={() => isVisible.set(true)} class="trakt-card">
   <div class="trakt-card-content">
-    {@render children()}
+    {#if $isVisible}
+      {@render children()}
+    {/if}
   </div>
 </div>
 
@@ -15,14 +19,6 @@
   .trakt-card {
     min-width: var(--width-card);
     min-height: var(--height-card);
-
-    content-visibility: auto;
-    contain-intrinsic-width: var(--width-card);
-    contain-intrinsic-height: var(--height-card);
-
-    /* Add padding to ensure box-shadow isn't clipped by content-visibility */
-    padding: 0 var(--ni-8);
-    margin: 0 var(--ni-neg-8);
   }
 
   .trakt-card-content {

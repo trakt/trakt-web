@@ -1,12 +1,11 @@
 <script lang="ts" generics="T extends { id: unknown }">
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
-  import type { Snippet } from "svelte";
+  import { whenInViewport } from "$lib/utils/actions/whenInViewport";
+  import { type Snippet } from "svelte";
   import { writable } from "svelte/store";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CaretLeftIcon from "../icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "../icons/CaretRightIcon.svelte";
-  import BatchRender from "./BatchRender.svelte";
   import { scrollTracking } from "./scrollTracking";
 
   type SectionListProps<T> = {
@@ -65,22 +64,13 @@
   const isLeftScrollDisabled = $derived($scrollX.left <= 0);
   const isRightScrollDisabled = $derived($scrollX.right <= 0);
 
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const isTablet = useMedia(WellKnownMediaQuery.tabletSmall);
-  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-
-  const batchSize = $derived.by(() => {
-    if ($isMobile) return 3;
-    if ($isTablet) return 6;
-    if ($isTabletLarge) return 10;
-    if ($isDesktop) return 15;
-
-    return 5;
-  });
+  const isVisible = writable(false);
 </script>
 
-<section class="section-list-container">
+<section
+  use:whenInViewport={() => isVisible.set(true)}
+  class="section-list-container"
+>
   <div class="section-list-header">
     <h4 class="section-list-title ellipsis">{title}</h4>
     <div class="section-list-navigation-actions">
@@ -114,8 +104,9 @@
       use:scrollTracking={scrollX}
       class="section-list-horizontal-scroll"
     >
-      <!-- TODO: replace with virtual scroll -->
-      <BatchRender {items} {item} {batchSize} delay={250} />
+      {#each items as i (i.id)}
+        {@render item(i)}
+      {/each}
     </div>
   </div>
 </section>
@@ -127,9 +118,6 @@
     gap: var(--ni-32);
 
     min-height: var(--height-section-list);
-
-    content-visibility: auto;
-    contain-intrinsic-height: var(--height-section-list);
   }
 
   .section-list-header {
