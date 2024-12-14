@@ -15,6 +15,7 @@
 </script>
 
 <img
+  loading="lazy"
   use:disableTransitionOnComplete
   class:image-loaded={$isImageLoaded}
   src={$response.uri}
