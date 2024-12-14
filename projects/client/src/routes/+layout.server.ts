@@ -23,17 +23,15 @@ export const load: LayoutServerLoad = ({ cookies, request, setHeaders }) => {
   }
 
   try {
-    const { token } = JSON.parse(serializedToken) as SerializedAuthResponse;
-    defaultResponse.auth.token = token.access;
-
-    // Set no-cache headers for authenticated requests
-    setHeaders({
-      'Cache-Control': 'private, no-store, no-cache, must-revalidate',
-    });
-
-    return defaultResponse;
-  } catch (_err) {
+    const auth = JSON.parse(serializedToken) as SerializedAuthResponse;
+    defaultResponse.auth.token = auth.token.access;
+  } catch {
     cookies.delete(AUTH_COOKIE_NAME, { path: '/' });
-    return defaultResponse;
   }
+
+  setHeaders({
+    'Cache-Control': 'private, no-store, no-cache, must-revalidate',
+  });
+
+  return defaultResponse;
 };
