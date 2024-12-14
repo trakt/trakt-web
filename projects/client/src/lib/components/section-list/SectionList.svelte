@@ -129,7 +129,7 @@
     min-height: var(--height-section-list);
 
     content-visibility: auto;
-    contain-intrinsic-size: var(--height-section-list);
+    contain-intrinsic-height: var(--height-section-list);
   }
 
   .section-list-header {

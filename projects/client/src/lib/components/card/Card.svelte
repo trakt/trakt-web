@@ -17,7 +17,8 @@
     min-height: var(--height-card);
 
     content-visibility: auto;
-    contain-intrinsic-size: var(--width-card);
+    contain-intrinsic-width: var(--width-card);
+    contain-intrinsic-height: var(--height-card);
 
     /* Add padding to ensure box-shadow isn't clipped by content-visibility */
     padding: 0 var(--ni-8);
