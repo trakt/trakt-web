@@ -12,9 +12,6 @@ export type MediaSummary = {
   cover: {
     url: string;
   };
-  thumb: {
-    url: string;
-  };
   genres: Genre[];
   overview: string;
   trailer?: string;

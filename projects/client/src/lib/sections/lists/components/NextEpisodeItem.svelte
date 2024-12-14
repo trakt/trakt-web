@@ -1,14 +1,14 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
-  import type { ShowMeta } from "$lib/models/ShowMeta";
+  import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import NextEpisode from "../../../components/episode/next/NextEpisode.svelte";
 
   type UpNextItemProps = {
     episode: EpisodeProgressEntry;
-    show: ShowMeta;
+    show: ShowSummary;
     onMarkAsWatched?: () => void;
   };
 

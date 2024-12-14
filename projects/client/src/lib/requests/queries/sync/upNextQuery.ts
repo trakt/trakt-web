@@ -1,19 +1,15 @@
 import type { SortDirection, UpNextResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
-import {
-  type EpisodeType,
-  EpisodeUnknownType,
-} from '$lib/models/EpisodeType.ts';
 import type { Paginatable } from '$lib/models/Paginatable.ts';
-import type { ShowMeta } from '$lib/models/ShowMeta.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
+import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import type { EpisodeProgressEntry } from '../../../models/EpisodeProgressEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
 
 export type UpNextEntry = EpisodeProgressEntry & {
-  show: ShowMeta;
+  show: ShowSummary;
 };
 
 type UpNextParams = {
@@ -28,39 +24,13 @@ type UpNextParams = {
 function mapResponseToUpNextEntry(item: UpNextResponse[0]): UpNextEntry {
   const episode = item.progress.next_episode;
 
-  const posterCandidate = findDefined(
-    episode.images!.screenshot.at(1),
-    episode.images!.screenshot.at(0),
-  )?.replace('/medium/', '/thumb/');
-
-  const showCoverCandidate = findDefined(
-    item.show.images!.fanart.at(1),
-    item.show.images!.fanart.at(0),
-  )?.replace('/medium/', '/thumb/');
-
   return {
-    show: {
-      title: item.show.title,
-      id: item.show.ids.trakt,
-      slug: item.show.ids.slug,
-      cover: {
-        url: prependHttps(showCoverCandidate),
-      },
-    },
-    title: episode.title,
-    season: episode.season,
-    number: episode.number,
-    poster: {
-      url: prependHttps(posterCandidate),
-    },
-    airedDate: new Date(episode.first_aired),
-    id: episode.ids.trakt,
+    show: mapShowResponseToShowSummary(item.show),
+    ...mapEpisodeResponseToEpisodeEntry(episode),
     total: item.progress.aired,
     completed: item.progress.completed,
     remaining: item.progress.aired - item.progress.completed,
     minutesLeft: item.progress.stats?.minutes_left ?? 0,
-    type: episode.episode_type as EpisodeType ??
-      EpisodeUnknownType.Unknown,
   };
 }
 

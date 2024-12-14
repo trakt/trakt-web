@@ -31,15 +31,6 @@ export function mapMovieResponseToMovieSummary(
         MEDIA_POSTER_PLACEHOLDER,
       ),
     },
-    thumb: {
-      url: prependHttps(
-        findDefined(
-          movie.images?.thumb.at(1),
-          movie.images?.thumb.at(0),
-        ),
-        MEDIA_POSTER_PLACEHOLDER,
-      ),
-    },
     genres: movie.genres ?? [],
     overview: movie.overview ?? 'TBD',
     trailer: movie.trailer,

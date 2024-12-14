@@ -7,10 +7,20 @@ import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 export function mapShowResponseToShowSummary(
   show: ShowResponse,
 ): ShowSummary {
-  const fanart = findDefined(
+  const thumbCandidate = findDefined(
+    show.images?.thumb.at(1),
+    show.images?.thumb.at(0),
+  );
+
+  const fanArtCandidate = findDefined(
     show.images?.fanart.at(1),
     show.images?.fanart.at(0),
-  );
+  )?.replace('/medium/', '/thumb/');
+
+  const posterCandidate = findDefined(
+    show.images?.poster.at(1),
+    show.images?.poster.at(0),
+  )?.replace('/medium/', '/thumb/');
 
   return {
     id: show.ids.trakt,
@@ -20,25 +30,15 @@ export function mapShowResponseToShowSummary(
     tagline: show.tagline!,
     poster: {
       url: prependHttps(
-        findDefined(
-          show.images?.poster.at(1),
-          show.images?.poster.at(0),
-        ),
-        MEDIA_POSTER_PLACEHOLDER,
-      )?.replace('/medium/', '/thumb/'),
-    },
-    cover: {
-      url: prependHttps(
-        fanart,
+        posterCandidate,
         MEDIA_POSTER_PLACEHOLDER,
       ),
     },
-    thumb: {
+    cover: {
       url: prependHttps(
         findDefined(
-          show.images?.thumb.at(1),
-          show.images?.thumb.at(0),
-          fanart,
+          thumbCandidate,
+          fanArtCandidate,
         ),
         MEDIA_POSTER_PLACEHOLDER,
       ),

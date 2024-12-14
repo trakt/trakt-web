@@ -1,0 +1,34 @@
+import type { ShowsResponse, UpNextResponse } from '$lib/api.ts';
+import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
+import {
+  type EpisodeType,
+  EpisodeUnknownType,
+} from '$lib/models/EpisodeType.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+
+type EpisodeResponse =
+  | UpNextResponse[0]['progress']['next_episode']
+  | ShowsResponse[0]['episode'];
+
+export function mapEpisodeResponseToEpisodeEntry(
+  episode: EpisodeResponse,
+): EpisodeEntry {
+  const posterCandidate = findDefined(
+    episode.images?.screenshot.at(1),
+    episode.images?.screenshot.at(0),
+  )?.replace('/medium/', '/thumb/');
+
+  return {
+    id: episode.ids.trakt,
+    type: episode.episode_type as EpisodeType ??
+      EpisodeUnknownType.Unknown,
+    title: episode.title,
+    season: episode.season,
+    number: episode.number,
+    poster: {
+      url: prependHttps(posterCandidate),
+    },
+    airedDate: new Date(episode.first_aired),
+  };
+}
