@@ -13,7 +13,7 @@
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { type RecommendedMediaItem } from "./stores/useRecommendationList";
+  import type { RecommendedMediaItem } from "../stores/useRecommendationList";
 
   type RecommendationItemProps = {
     recommendation: RecommendedMediaItem;

@@ -3,9 +3,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
   import { onMount } from "svelte";
-  import NextEpisodeItem from "./NextEpisodeItem.svelte";
+  import NextEpisodeItem from "./components/NextEpisodeItem.svelte";
   import { useStableArray } from "./stores/useStableArray";
-  import { useUpNextEpisodes } from "./useUpNextEpisodes";
+  import { useUpNextEpisodes } from "./stores/useUpNextEpisodes";
 
   const { list: unstable } = useUpNextEpisodes();
   const { list, set } = useStableArray<UpNextEntry>(

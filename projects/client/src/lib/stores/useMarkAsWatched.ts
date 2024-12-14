@@ -3,8 +3,8 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
-import { useUpNextEpisodes } from '$lib/sections/up-next/useUpNextEpisodes.ts';
 import { derived, writable } from 'svelte/store';
+import { useUpNextEpisodes } from '../sections/lists/stores/useUpNextEpisodes.ts';
 import { toMarkAsWatchedPayload } from './_internal/toMarkAsWatchedPayload.ts';
 
 export function resolveWatchDate(

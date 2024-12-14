@@ -5,9 +5,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
+  import UpNextList from "$lib/sections/lists/UpNextList.svelte";
+  import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
-  import UpNext from "$lib/sections/up-next/UpNext.svelte";
-  import UpcomingSchedule from "$lib/sections/upcoming-schedule/UpcomingSchedule.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
 
   const { current } = useUser();
@@ -17,8 +17,8 @@
   <RenderFor audience="authenticated">
     <BackgroundCoverImage src={current().cover.url} type="main" />
     <ProfileBanner />
-    <UpNext />
-    <UpcomingSchedule />
+    <UpNextList />
+    <UpcomingList />
   </RenderFor>
   <RenderFor audience="public">
     <Landing />

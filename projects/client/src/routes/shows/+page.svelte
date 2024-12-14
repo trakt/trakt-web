@@ -4,10 +4,10 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import AnticipatedList from "$lib/sections/anticipated/AnticipatedList.svelte";
-  import PopularList from "$lib/sections/popular/PopularList.svelte";
-  import RecommendationList from "$lib/sections/recommendations/RecommendationList.svelte";
-  import TrendingList from "$lib/sections/trending/TrendingList.svelte";
+  import AnticipatedList from "$lib/sections/lists/AnticipatedList.svelte";
+  import PopularList from "$lib/sections/lists/PopularList.svelte";
+  import RecommendedList from "$lib/sections/lists/RecommendedList.svelte";
+  import TrendingList from "$lib/sections/lists/TrendingList.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
 
   const { current } = useUser();
@@ -22,7 +22,7 @@
 {#snippet content({ cover: { url } }: ShowContentProps)}
   <BackgroundCoverImage src={url} type="main" />
   <TrendingList title={m.trending_now()} {type} />
-  <RecommendationList title={m.your_recommendations()} {type} />
+  <RecommendedList title={m.your_recommendations()} {type} />
   <AnticipatedList title={m.most_anticipated()} {type} />
   <PopularList title={m.most_popular()} {type} />
 {/snippet}

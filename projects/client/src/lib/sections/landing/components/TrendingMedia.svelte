@@ -2,7 +2,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import type { TrendingMovie } from "$lib/requests/queries/movies/movieTrendingQuery";
   import type { TrendingShow } from "$lib/requests/queries/shows/showTrendingQuery";
-  import RecommendedMedia from "$lib/sections/recommendations/RecommendedMedia.svelte";
+  import RecommendedMedia from "$lib/sections/lists/components/RecommendedMedia.svelte";
 
   type TrendingItemProps = {
     trendingItem?: TrendingMovie | TrendingShow;

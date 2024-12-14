@@ -1,18 +1,17 @@
 <script lang="ts">
   import SectionList from "$lib/components/section-list/SectionList.svelte";
-  import RecommendedMedia from "./RecommendedMedia.svelte";
-
   import type { MediaType } from "$lib/models/MediaType";
-  import { useRecommendationList } from "./stores/useRecommendationList";
+  import RecommendedMedia from "./components/RecommendedMedia.svelte";
+  import { useTrendingList } from "./stores/useTrendingList";
 
-  type RecommendationListProps = {
+  type TrendingListProps = {
     title: string;
     type: MediaType;
   };
 
-  const { title, type }: RecommendationListProps = $props();
+  const { title, type }: TrendingListProps = $props();
 
-  const { list } = useRecommendationList({ type });
+  const { list } = useTrendingList({ type });
 </script>
 
 <SectionList

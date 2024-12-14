@@ -2,7 +2,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
-  import NextEpisodeItem from "../up-next/NextEpisodeItem.svelte";
+  import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/MediaSummaryProps";
 

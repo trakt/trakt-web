@@ -4,7 +4,7 @@
   import type { ShowMeta } from "$lib/models/ShowMeta";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import NextEpisode from "../../components/episode/next/NextEpisode.svelte";
+  import NextEpisode from "../../../components/episode/next/NextEpisode.svelte";
 
   type UpNextItemProps = {
     episode: EpisodeProgressEntry;
