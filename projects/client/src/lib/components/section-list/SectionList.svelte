@@ -1,25 +1,27 @@
 <script lang="ts" generics="T extends { id: unknown }">
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CaretLeftIcon from "../icons/CaretLeftIcon.svelte";
   import CaretRightIcon from "../icons/CaretRightIcon.svelte";
-  import BatchRender from "./BatchRender.svelte";
-  import { scrollTracking } from "./scrollTracking";
+  import HorizontalVirtualScroll from "./HorizontalVirtualScroll.svelte";
 
   type SectionListProps<T> = {
     title: string;
     items: T[];
     item: Snippet<[T]>;
+    /**
+     * TODO: Add aria-label for accessibility
+     */
   };
 
   const { items, title, item }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
 
-  const scrollX = writable({ left: 0, right: 0 });
+  let scrollX = $state(writable({ left: 0, right: 0 }));
+  let scrollContainer = $state(writable<HTMLDivElement | null>(null));
 
   const isLeftShadowVisible = $derived($scrollX.left > $sideDistance);
   const isRightShadowVisible = $derived($scrollX.right > $sideDistance);
@@ -32,31 +34,32 @@
     ($scrollX.right - $sideDistance) / $windowShadowWidth,
   );
 
-  let horizontalScrollContainer: HTMLDivElement;
-
   function scrollToLeft() {
+    if ($scrollContainer == null) return;
+
     const left = Math.max(
       0,
-      horizontalScrollContainer.scrollLeft - window.innerWidth / 2,
+      $scrollContainer.scrollLeft - window.innerWidth / 2,
     );
 
-    horizontalScrollContainer.scrollTo({
+    $scrollContainer.scrollTo({
       left,
       behavior: "smooth",
     });
   }
 
   function scrollToRight() {
+    if ($scrollContainer == null) return;
+
     const maxScrollLeft =
-      horizontalScrollContainer.scrollWidth -
-      horizontalScrollContainer.clientWidth;
+      $scrollContainer.scrollWidth - $scrollContainer.clientWidth;
 
     const left = Math.min(
       maxScrollLeft,
-      horizontalScrollContainer.scrollLeft + window.innerWidth / 2,
+      $scrollContainer.scrollLeft + window.innerWidth / 2,
     );
 
-    horizontalScrollContainer.scrollTo({
+    $scrollContainer.scrollTo({
       left,
       behavior: "smooth",
     });
@@ -64,20 +67,6 @@
 
   const isLeftScrollDisabled = $derived($scrollX.left <= 0);
   const isRightScrollDisabled = $derived($scrollX.right <= 0);
-
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const isTablet = useMedia(WellKnownMediaQuery.tabletSmall);
-  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-
-  const batchSize = $derived.by(() => {
-    if ($isMobile) return 3;
-    if ($isTablet) return 6;
-    if ($isTabletLarge) return 10;
-    if ($isDesktop) return 15;
-
-    return 5;
-  });
 </script>
 
 <section class="section-list-container">
@@ -109,14 +98,7 @@
     style:--left-shadow-opacity={leftShadowIntensity}
     style:--right-shadow-opacity={rightShadowIntensity}
   >
-    <div
-      bind:this={horizontalScrollContainer}
-      use:scrollTracking={scrollX}
-      class="section-list-horizontal-scroll"
-    >
-      <!-- TODO: replace with virtual scroll -->
-      <BatchRender {items} {item} {batchSize} delay={250} />
-    </div>
+    <HorizontalVirtualScroll {items} {item} bind:scrollX bind:scrollContainer />
   </div>
 </section>
 
@@ -226,34 +208,6 @@
         color-mix(in srgb, var(--color-background) 86%, transparent 14%) 86%,
         var(--color-background) 100%
       );
-    }
-  }
-
-  .section-list-horizontal-scroll {
-    padding: 0 var(--layout-distance-side);
-
-    display: flex;
-    height: var(--height-section-list);
-    gap: var(--ni-8);
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-
-    & > :global(:not(svelte-css-wrapper)) {
-      scroll-snap-align: start;
-
-      &:first-child,
-      &:last-child {
-        scroll-snap-align: end;
-      }
-    }
-
-    & > :global(svelte-css-wrapper > *) {
-      scroll-snap-align: start;
-    }
-
-    & > :global(svelte-css-wrapper:first-child > *),
-    & > :global(svelte-css-wrapper:last-child > *) {
-      scroll-snap-align: end;
     }
   }
 </style>

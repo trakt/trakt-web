@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { quadIn } from "svelte/easing";
-  import { fade } from "svelte/transition";
-
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="trakt-card" transition:fade={{ duration: 150, easing: quadIn }}>
+<div class="trakt-card">
   <div class="trakt-card-content">
     {@render children()}
   </div>
