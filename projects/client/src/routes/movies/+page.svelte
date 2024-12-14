@@ -1,31 +1,38 @@
-<script>
+<script lang="ts">
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import AnticipatedMovies from "$lib/sections/anticipated/AnticipatedMovies.svelte";
-  import PopularMovies from "$lib/sections/popular/PopularMovies.svelte";
-  import RecommendedMovies from "$lib/sections/recommendations/RecommendedMovies.svelte";
-  import TrendingMovies from "$lib/sections/trending/TrendingMovies.svelte";
+  import AnticipatedList from "$lib/sections/anticipated/AnticipatedList.svelte";
+  import PopularList from "$lib/sections/popular/PopularList.svelte";
+  import RecommendationList from "$lib/sections/recommendations/RecommendationList.svelte";
+  import TrendingList from "$lib/sections/trending/TrendingList.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
 
   const { current } = useUser();
+
+  const type = "movie";
+
+  type MovieContentProps = {
+    cover: { url: string };
+  };
 </script>
+
+{#snippet content({ cover: { url } }: MovieContentProps)}
+  <BackgroundCoverImage src={url} type="main" />
+  <TrendingList title={m.trending_now()} {type} />
+  <RecommendationList title={m.your_recommendations()} {type} />
+  <AnticipatedList title={m.most_anticipated()} {type} />
+  <PopularList title={m.most_popular()} {type} />
+{/snippet}
 
 <TraktPage title={m.navbar_link_movies()}>
   <RenderFor audience="authenticated">
-    <BackgroundCoverImage src={current().cover.url} type="main" />
-    <TrendingMovies />
-    <RecommendedMovies title={m.your_recommendations()} />
-    <AnticipatedMovies />
-    <PopularMovies />
+    {@render content(current())}
   </RenderFor>
 
   <RenderFor audience="public">
-    <BackgroundCoverImage src={DEFAULT_COVER} type="main" />
-    <TrendingMovies />
-    <AnticipatedMovies />
-    <PopularMovies />
+    {@render content({ cover: { url: DEFAULT_COVER } })}
   </RenderFor>
 </TraktPage>
