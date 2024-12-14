@@ -125,6 +125,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-32);
+
+    min-height: var(--height-section-list);
+
+    content-visibility: auto;
+    contain-intrinsic-size: var(--height-section-list);
   }
 
   .section-list-header {
