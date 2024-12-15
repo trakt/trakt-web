@@ -15,3 +15,5 @@ export const MEDIA_POSTER_PLACEHOLDER = 'https://placehold.co/320x500';
 
 // TODO: @alex define pretty media cover placeholder
 export const MEDIA_COVER_PLACEHOLDER = DEFAULT_COVER;
+
+export const DEFAULT_TRAILER = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU';

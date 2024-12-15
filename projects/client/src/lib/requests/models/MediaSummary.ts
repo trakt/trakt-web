@@ -1,5 +1,10 @@
 import type { Genre } from '$lib/api.ts';
 
+type ImageUrls = {
+  medium: string;
+  thumb: string;
+};
+
 export type MediaSummary = {
   id: number;
   slug: string;
@@ -7,12 +12,15 @@ export type MediaSummary = {
   title: string;
   tagline: string;
   poster: {
-    url: string;
+    url: ImageUrls;
   };
   cover: {
+    url: ImageUrls;
+  };
+  thumb: {
     url: string;
   };
   genres: Genre[];
   overview: string;
-  trailer?: string;
+  trailer: string;
 };

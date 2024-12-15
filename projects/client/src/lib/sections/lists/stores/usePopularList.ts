@@ -11,15 +11,16 @@ import { derived } from 'svelte/store';
 export type PopularMediaItem = PopularShow | MovieSummary;
 export type PopularMedia = Array<PopularMediaItem>;
 
-const POPULAR_LIMIT = 25;
-
 type PopularListStoreProps = {
   type: MediaType;
+  limit?: number;
 };
 
-function typeToQuery(type: MediaType): CreateQueryOptions<PopularMedia> {
+function typeToQuery(
+  { type, limit }: PopularListStoreProps,
+): CreateQueryOptions<PopularMedia> {
   const params = {
-    limit: POPULAR_LIMIT,
+    limit,
   };
 
   switch (type) {
@@ -33,9 +34,9 @@ function typeToQuery(type: MediaType): CreateQueryOptions<PopularMedia> {
 }
 
 export function usePopularList(
-  { type }: PopularListStoreProps,
+  { type, limit = 25 }: PopularListStoreProps,
 ) {
-  const query = createQuery(typeToQuery(type));
+  const query = createQuery(typeToQuery({ type, limit }));
   const list = derived(query, ($query) => $query.data ?? []);
 
   return {

@@ -13,15 +13,16 @@ import { derived } from 'svelte/store';
 export type TrendingMediaItem = TrendingMovie | TrendingShow;
 export type TrendingMedia = Array<TrendingMediaItem>;
 
-const TRENDING_LIMIT = 25;
-
 type TrendingListStoreProps = {
   type: MediaType;
+  limit?: number;
 };
 
-function typeToQuery(type: MediaType): CreateQueryOptions<TrendingMedia> {
+function typeToQuery(
+  { type, limit }: TrendingListStoreProps,
+): CreateQueryOptions<TrendingMedia> {
   const params = {
-    limit: TRENDING_LIMIT,
+    limit,
   };
 
   switch (type) {
@@ -35,9 +36,9 @@ function typeToQuery(type: MediaType): CreateQueryOptions<TrendingMedia> {
 }
 
 export function useTrendingList(
-  { type }: TrendingListStoreProps,
+  { type, limit = 25 }: TrendingListStoreProps,
 ) {
-  const query = createQuery(typeToQuery(type));
+  const query = createQuery(typeToQuery({ type, limit }));
   const list = derived(query, ($query) => $query.data ?? []);
 
   return {

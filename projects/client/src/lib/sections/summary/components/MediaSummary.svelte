@@ -63,11 +63,11 @@
   });
 </script>
 
-<BackgroundCoverImage src={media.cover.url} {type} />
+<BackgroundCoverImage src={media.cover.url.medium} {type} />
 
 <MediaSummaryContainer {contextualContent}>
   {#snippet poster()}
-    <SummaryPoster src={media.poster.url} alt={intl.title}>
+    <SummaryPoster src={media.poster.url.medium} alt={intl.title}>
       {#snippet actions()}
         <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
           <WatchlistButton {...watchlistProps} />

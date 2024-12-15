@@ -77,13 +77,13 @@
 
 {#if type === "movie"}
   <PosterCard>
-    {@render content(media.poster.url)}
+    {@render content(media.poster.url.thumb)}
   </PosterCard>
 {/if}
 
 {#if type === "show"}
   <EpisodeCard>
-    {@render content(media.cover.url)}
+    {@render content(media.cover.url.thumb)}
   </EpisodeCard>
 {/if}
 
