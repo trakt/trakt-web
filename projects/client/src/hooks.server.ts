@@ -15,10 +15,18 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
 
   if (response.headers.get('content-type')?.includes('text/html')) {
-    response.headers.set(
+    const clonedHeaders = new Headers(response.headers);
+
+    clonedHeaders.set(
       'Cache-Control',
       'private, no-store, no-cache, must-revalidate',
     );
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: clonedHeaders,
+    });
   }
 
   return response;
