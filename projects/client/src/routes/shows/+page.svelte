@@ -8,6 +8,8 @@
   import PopularList from "$lib/sections/lists/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/TrendingList.svelte";
+  import WatchlistList from "$lib/sections/lists/WatchlistList.svelte";
+
   import { DEFAULT_COVER } from "$lib/utils/constants";
 
   const { current } = useUser();
@@ -25,6 +27,7 @@
   <TrendingList title={m.trending_now()} {type} />
   {#if isAuthorized}
     <RecommendedList title={m.your_recommendations()} {type} />
+    <WatchlistList title={m.watchlist()} {type} />
   {/if}
   <AnticipatedList title={m.most_anticipated()} {type} />
   <PopularList title={m.most_popular()} {type} />
