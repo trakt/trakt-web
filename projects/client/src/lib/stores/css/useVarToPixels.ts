@@ -1,4 +1,6 @@
 import { browser } from '$app/environment';
+import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
+import { onDestroy } from 'svelte';
 import { writable } from 'svelte/store';
 
 const cache = {
@@ -51,7 +53,12 @@ export function useVarToPixels(variable: string) {
 
   if (isStable) return value;
 
-  globalThis.addEventListener('resize', () => value.set(calculate(variable)));
+  const destroy = GlobalEventBus.getInstance().register(
+    'resize',
+    () => value.set(calculate(variable)),
+  );
+
+  onDestroy(destroy);
 
   return value;
 }

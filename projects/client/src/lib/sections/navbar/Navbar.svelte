@@ -5,6 +5,7 @@
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -19,12 +20,8 @@
   }
 
   onMount(() => {
-    window.addEventListener("scroll", handleScroll);
     handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return GlobalEventBus.getInstance().register("scroll", handleScroll);
   });
 </script>
 
