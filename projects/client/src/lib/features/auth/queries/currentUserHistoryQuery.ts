@@ -1,4 +1,5 @@
 import type { WatchedMoviesResponse, WatchedShowsResponse } from '$lib/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 import { authHeader } from '../stores/authHeader.ts';
 
@@ -130,7 +131,10 @@ const currentUserWatchedShowsRequest = (
         }, new Map<number, WatchedShow>())
     );
 
-export const currentUserHistoryQueryKey = ['currentUserHistory'] as const;
+export const currentUserHistoryQueryKey = [
+  'currentUserHistory',
+  InvalidateAction.MarkAsWatched,
+] as const;
 export const currentUserHistoryQuery = ({ fetch }: ApiParams = {}) => ({
   queryKey: currentUserHistoryQueryKey,
   queryFn: () => {

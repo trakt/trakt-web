@@ -3,6 +3,7 @@ import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { Paginatable } from '$lib/models/Paginatable.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import type { EpisodeProgressEntry } from '../../../models/EpisodeProgressEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -64,7 +65,10 @@ export function upNextRequest(
       };
     });
 }
-export const upNextQueryKey = ['upNext'] as const;
+export const upNextQueryKey = [
+  'upNext',
+  InvalidateAction.MarkAsWatched,
+] as const;
 export const upNextQuery = (
   params: UpNextParams = {},
 ) => ({

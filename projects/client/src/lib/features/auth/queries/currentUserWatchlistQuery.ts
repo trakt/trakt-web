@@ -2,6 +2,7 @@ import type {
   WatchlistedMoviesResponse,
   WatchlistedShowsResponse,
 } from '$lib/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 import { authHeader } from '../stores/authHeader.ts';
 
@@ -106,7 +107,10 @@ const watchlistedShowsRequest = (
         }, new Map<number, WatchlistedShow>())
     );
 
-export const currentUserWatchlistQueryKey = ['currentUserWatchlist'] as const;
+export const currentUserWatchlistQueryKey = [
+  'currentUserWatchlist',
+  InvalidateAction.Watchlisted,
+] as const;
 export const currentUserWatchlistQuery = ({ fetch }: ApiParams = {}) => ({
   queryKey: currentUserWatchlistQueryKey,
   queryFn: () => {
