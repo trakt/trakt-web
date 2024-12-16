@@ -14,6 +14,12 @@
   --color-foreground-button-disabled: var(--shade-600);
 
   --color-link-active: var(--purple-700);
+
+  --color-background-navbar: color-mix(
+    in srgb,
+    var(--shade-30) 90%,
+    transparent 10%
+  );
 }
 
 [data-theme='dark'] {
@@ -35,4 +41,10 @@
   --color-foreground-button-disabled: var(--shade-400);
 
   --color-link-active: var(--purple-400);
+
+  --color-background-navbar: color-mix(
+    in srgb,
+    var(--shade-920) 90%,
+    transparent 10%
+  );
 }

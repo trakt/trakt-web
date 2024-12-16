@@ -4,11 +4,6 @@
    */
   --color-shadow: #000;
 
-  --color-background-navbar: color-mix(
-    in srgb,
-    var(--shade-920) 90%,
-    transparent 10%
-  );
   --color-foreground-navbar: var(--shade-10);
 
   --color-background-vip-badge: var(--red-500);
