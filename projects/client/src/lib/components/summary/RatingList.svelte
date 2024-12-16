@@ -1,43 +1,55 @@
 <script lang="ts">
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
+  import { languageTag } from "$lib/features/i18n/index.ts";
   import type { MediaRating } from "$lib/models/MediaRating";
-  import { toIMDBRating } from "$lib/utils/formatting/number/toIMDBRating";
+  import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import { toRottenTomatoRating } from "$lib/utils/formatting/number/toRottenTomatoRating";
+  import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
+  import RatingIcon from "../icons/RatingIcon.svelte";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
+  import RatingItem from "./RatingItem.svelte";
+
   type RatingListProps = {
     i18n?: RatingIntl;
     ratings: MediaRating;
   };
 
   const { i18n = RatingIntlProvider, ratings }: RatingListProps = $props();
-  const { imdb, rotten } = ratings;
+  const { trakt, imdb, rotten } = ratings;
 </script>
 
 <div class="trakt-summary-ratings">
-  <div class="rating-item imdb-rating">
-    <IMDBIcon style={toIMDBRating(imdb.votes)} />
-    <div class="rating-info">
-      <p class="large bold">{imdb.votes === 0 ? "-" : imdb.rating}</p>
-      {#if imdb.votes > 0}
-        <p class="small bold secondary">
-          {i18n.voteText(imdb.votes)}
-        </p>
-      {/if}
-    </div>
-  </div>
-  <div class="rating-item rotten-rating">
+  <RatingItem voteCount={trakt.votes}>
+    <RatingIcon style={toVotesBasedRating(trakt.votes)} />
+    {#snippet rating()}
+      {toPercentage(trakt.rating, languageTag())}
+    {/snippet}
+    {#snippet superscript()}
+      {i18n.voteText(trakt.votes)}
+    {/snippet}
+  </RatingItem>
+
+  <RatingItem voteCount={imdb.votes}>
+    <IMDBIcon style={toVotesBasedRating(imdb.votes)} />
+    {#snippet rating()}
+      {imdb.rating}
+    {/snippet}
+    {#snippet superscript()}
+      {i18n.voteText(imdb.votes)}
+    {/snippet}
+  </RatingItem>
+
+  <RatingItem voteCount={rotten.critic}>
     <RottenIcon style={toRottenTomatoRating(rotten.critic)} />
-    <div class="rating-info">
-      <p class="large bold">{rotten.critic === 0 ? "-" : rotten.critic}</p>
-      {#if rotten.critic > 0}
-        <p class="small bold uppercase secondary">
-          {toRottenTomatoRating(rotten.critic)}
-        </p>
-      {/if}
-    </div>
-  </div>
+    {#snippet rating()}
+      {rotten.critic}
+    {/snippet}
+    {#snippet superscript()}
+      {toRottenTomatoRating(rotten.critic)}
+    {/snippet}
+  </RatingItem>
 </div>
 
 <style>
@@ -45,22 +57,5 @@
     display: flex;
     align-items: center;
     gap: var(--ni-8);
-  }
-
-  .rating-item {
-    display: flex;
-
-    align-items: center;
-    gap: var(--ni-4);
-  }
-
-  .rating-info {
-    display: flex;
-    align-items: start;
-    gap: var(--ni-4);
-
-    p {
-      line-height: 90%;
-    }
   }
 </style>

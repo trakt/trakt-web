@@ -8,7 +8,7 @@ export function mapRatingResponseToMediaRating(
 ): MediaRating {
   return {
     trakt: {
-      rating: ratings.trakt.rating,
+      rating: ratings.trakt.rating / 10,
       votes: ratings.trakt.votes,
       distribution: ratings.trakt.distribution,
     },

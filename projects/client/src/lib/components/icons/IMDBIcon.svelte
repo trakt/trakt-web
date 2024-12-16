@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { IMDBRating } from "$lib/utils/formatting/number/toIMDBRating";
+  import type { VotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
 
   type IMDBIconProps = {
-    style?: IMDBRating;
+    style?: VotesBasedRating;
   };
 
   const { style = "rated" }: IMDBIconProps = $props();
