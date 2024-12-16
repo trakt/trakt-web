@@ -1,9 +1,11 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.ts';
 import { removeFromWatchlistRequest } from '$lib/requests/sync/removeFromWatchlistRequest.ts';
 import { derived, writable } from 'svelte/store';
 import { toWatchlistPayload } from './_internal/toWatchlistPayload.ts';
+import { useInvalidator } from './useInvalidator.ts';
 
 type WatchlistStoreProps = {
   type: MediaType;
@@ -12,7 +14,8 @@ type WatchlistStoreProps = {
 
 export function useWatchlist({ type, id }: WatchlistStoreProps) {
   const isWatchlistUpdating = writable(false);
-  const { watchlist, reloadWatchlist } = useUser();
+  const { watchlist } = useUser();
+  const { invalidate } = useInvalidator();
 
   const _isWatchlisted = writable(false);
   const isWatchlisted = derived(
@@ -50,7 +53,7 @@ export function useWatchlist({ type, id }: WatchlistStoreProps) {
     isWatchlistUpdating.set(false);
     _isWatchlisted.set(!result);
 
-    reloadWatchlist();
+    invalidate(InvalidateAction.Watchlisted);
   };
 
   return {
