@@ -1,5 +1,5 @@
-import { MovieRatingsResponse, ShowRatingsResponse } from '$lib/api.ts';
-import { MediaRating } from '$lib/models/MediaRating.ts';
+import type { MovieRatingsResponse, ShowRatingsResponse } from '$lib/api.ts';
+import type { MediaRating } from '$lib/models/MediaRating.ts';
 
 type RatingResponse = MovieRatingsResponse | ShowRatingsResponse;
 
@@ -7,6 +7,11 @@ export function mapRatingResponseToMediaRating(
   ratings: RatingResponse,
 ): MediaRating {
   return {
+    trakt: {
+      rating: ratings.trakt.rating,
+      votes: ratings.trakt.votes,
+      distribution: ratings.trakt.distribution,
+    },
     tmdb: {
       rating: ratings.tmdb?.rating ?? 0,
       votes: ratings.tmdb?.votes ?? 0,
