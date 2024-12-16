@@ -31,12 +31,9 @@ type MarkAsWatchedStoreProps = {
   id: number;
 };
 
-const markAsWatchedKey = (id: number) => `markAsWatched_${id}`;
-
 export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
   const isMarkingAsWatched = writable(false);
-  const { history } = useUser();
-  const cached = localStorage.getItem(markAsWatchedKey(id)) == 'true';
+  const { history, reloadHistory } = useUser();
   const { reload } = useUpNextEpisodes();
 
   const _isWatched = writable(false);
@@ -44,7 +41,7 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
     [history, _isWatched],
     ([$history, $_isWatched]) => {
       if (!$history) {
-        return cached;
+        return false;
       }
 
       switch (type) {
@@ -53,11 +50,7 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
         case 'episode':
           return false;
         case 'show': {
-          if (!$history.shows.has(id)) {
-            return $_isWatched;
-          }
-
-          return !!$history.shows.get(id)?.isWatched;
+          return !!$history.shows.get(id)?.isWatched || $_isWatched;
         }
       }
     },
@@ -66,6 +59,8 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
   const { current: user } = useUser();
 
   function reloadUpNext() {
+    reloadHistory();
+
     if (type === 'movie') {
       return;
     }
@@ -86,20 +81,10 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
       }),
     });
     isMarkingAsWatched.set(false);
+
     _isWatched.set(result);
+    reloadUpNext();
   };
-
-  derived(
-    [isWatched, _isWatched],
-    ([$isWatched, $_isWatched]) => $isWatched || $_isWatched,
-  )
-    .subscribe((value) => {
-      localStorage.setItem(markAsWatchedKey(id), value.toString());
-
-      if (value) {
-        reloadUpNext();
-      }
-    });
 
   return {
     markAsWatched,

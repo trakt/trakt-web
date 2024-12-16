@@ -10,19 +10,16 @@ type WatchlistStoreProps = {
   id: number;
 };
 
-const watchlistKey = (id: number) => `watchlist_${id}`;
-
 export function useWatchlist({ type, id }: WatchlistStoreProps) {
   const isWatchlistUpdating = writable(false);
-  const { watchlist } = useUser();
-  const cached = localStorage.getItem(watchlistKey(id)) == 'true';
+  const { watchlist, reloadWatchlist } = useUser();
 
   const _isWatchlisted = writable(false);
   const isWatchlisted = derived(
     [watchlist, _isWatchlisted],
     ([$watchlist, $_isWatchlisted]) => {
       if (!$watchlist) {
-        return cached;
+        return false;
       }
 
       switch (type) {
@@ -52,15 +49,9 @@ export function useWatchlist({ type, id }: WatchlistStoreProps) {
     });
     isWatchlistUpdating.set(false);
     _isWatchlisted.set(!result);
-  };
 
-  derived(
-    [isWatchlisted, _isWatchlisted],
-    ([$isWatchlisted, $_isWatchlisted]) => $isWatchlisted || $_isWatchlisted,
-  )
-    .subscribe((value) =>
-      localStorage.setItem(watchlistKey(id), value.toString())
-    );
+    reloadWatchlist();
+  };
 
   return {
     isWatchlistUpdating,

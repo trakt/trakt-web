@@ -1,11 +1,20 @@
+import { browser } from '$app/environment';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { createQuery } from '@tanstack/svelte-query';
+import { createQuery, useQueryClient } from '@tanstack/svelte-query';
 import { derived, get } from 'svelte/store';
-import { currentUserHistoryQuery } from '../queries/currentUserHistoryQuery.ts';
+import {
+  currentUserHistoryQuery,
+  currentUserHistoryQueryKey,
+} from '../queries/currentUserHistoryQuery.ts';
 import { currentUserSettingsQuery } from '../queries/currentUserSettingsQuery.ts';
-import { currentUserWatchlistQuery } from '../queries/currentUserWatchlistQuery.ts';
+import {
+  currentUserWatchlistQuery,
+  currentUserWatchlistQueryKey,
+} from '../queries/currentUserWatchlistQuery.ts';
 
 export function useUser() {
+  const client = browser ? useQueryClient() : undefined;
+
   const userQueryResponse = createQuery({
     ...currentUserSettingsQuery(),
     staleTime: Infinity,
@@ -21,6 +30,18 @@ export function useUser() {
     staleTime: Infinity,
   });
 
+  const reloadHistory = () => {
+    client?.invalidateQueries({
+      queryKey: currentUserHistoryQueryKey,
+    });
+  };
+
+  const reloadWatchlist = () => {
+    client?.invalidateQueries({
+      queryKey: currentUserWatchlistQueryKey,
+    });
+  };
+
   const user = derived(userQueryResponse, ($query) => $query.data);
   const history = derived(historyQueryResponse, ($query) => $query.data);
   const watchlist = derived(
@@ -31,7 +52,9 @@ export function useUser() {
   return {
     user,
     history,
+    reloadHistory,
     watchlist,
+    reloadWatchlist,
     current: () =>
       assertDefined(
         get(user),
