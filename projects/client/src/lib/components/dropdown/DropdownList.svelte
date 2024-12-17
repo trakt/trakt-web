@@ -11,18 +11,20 @@
     icon: _icon,
     children,
     items,
+    size,
     ...props
   }: TraktDropdownListProps = $props();
   const isDropdownOpen = writable(false);
 </script>
 
 <div
-  class="trakt-dropdown-container"
+  class="trakt-dropdown-list-container"
   class:is-list-open={$isDropdownOpen}
   use:clickOutside
   onclickoutside={(e) => {
     isDropdownOpen.set(false);
   }}
+  data-size={size}
 >
   <Button
     onclick={(ev) => {
@@ -34,7 +36,7 @@
   >
     {@render children()}
     {#snippet icon()}
-      <div class="trakt-dropdown-icon">
+      <div class="trakt-dropdown-list-icon">
         {#if _icon != null}
           {@render _icon()}
         {/if}
@@ -47,7 +49,6 @@
     <div class="trakt-list" transition:slide={{ duration: 150 }}>
       <div class="spacer"></div>
       <ul>
-        {$isDropdownOpen}
         {@render items()}
       </ul>
     </div>
@@ -55,12 +56,20 @@
 </div>
 
 <style>
-  .trakt-dropdown-container {
+  .trakt-dropdown-list-container {
     position: relative;
     padding: var(--ni-14);
     margin: var(--ni-neg-14);
     background: transparent;
     box-sizing: content-box;
+
+    &[data-size="small"] {
+      transform: scale(0.75);
+
+      :global(li p) {
+        font-size: var(--ni-16);
+      }
+    }
 
     &.is-list-open {
       z-index: 777;
@@ -74,29 +83,24 @@
         opacity: 1;
       }
 
-      .trakt-dropdown-icon {
+      .trakt-dropdown-list-icon {
         z-index: 777;
       }
     }
 
-    .trakt-dropdown-icon {
+    .trakt-dropdown-list-icon {
       display: flex;
       gap: var(--ni-12);
     }
 
     :global(.trakt-button[disabled]:active) {
-      :global(.trakt-dropdown-icon .trakt-dropdown-caret) {
+      :global(.trakt-dropdown-list-icon .trakt-dropdown-list-caret) {
         animation: loopy-loop var(--animation-duration-loopy-loop) infinite;
       }
     }
 
     ul {
       all: unset;
-    }
-
-    li {
-      text-decoration: none;
-      list-style-type: none;
     }
 
     .trakt-list {

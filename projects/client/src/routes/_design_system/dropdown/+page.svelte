@@ -51,26 +51,6 @@
     </section>
 
     <section>
-      <h2>Secondary</h2>
-      <DropdownList
-        {items}
-        variant="secondary"
-        label="This is the secondary dropdown"
-      >
-        secondary
-      </DropdownList>
-
-      <DropdownList
-        {items}
-        variant="secondary"
-        label="This is the secondary dropdown in a disabled state"
-        disabled
-      >
-        Secondary disabled
-      </DropdownList>
-    </section>
-
-    <section>
       <h2>VIP</h2>
       <DropdownList {items} variant="vip" label="This is the VIP dropdown">
         VIP

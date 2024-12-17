@@ -18,10 +18,7 @@
 <style>
   .trakt-dropdown-caret {
     transition: transform var(--transition-increment) ease-in-out;
-    /** 
-    * Visually align the caret with the text, due to the shape it's optically off-center.
-    */
-    margin-top: 1px;
+    align-self: center;
   }
 
   .trakt-dropdown-caret.open {
