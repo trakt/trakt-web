@@ -2,6 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
   import { useSearch } from "./useSearch";
@@ -34,7 +35,16 @@
 
 <div class="trakt-search" class:search-is-loading={$isSearching}>
   <input
+    use:clickOutside
     bind:this={inputElement}
+    onclick={(ev) => {
+      if (!inputElement.value.trim()) {
+        return;
+      }
+
+      onSearch(ev);
+    }}
+    onclickoutside={() => clear()}
     class="trakt-search-input"
     type="search"
     placeholder={m.search_placeholder()}
