@@ -1,5 +1,6 @@
 :root {
   --animation-duration-jiggle-wiggle: calc(var(--transition-increment) * 3);
+  --animation-duration-loopy-loop: calc(var(--transition-increment) * 3);
 }
 
 @keyframes jiggle-wiggle {
@@ -15,5 +16,23 @@
   }
   75% {
     transform: translateX(var(--ni-neg-2)) rotate(-1deg) scale(1.05);
+  }
+}
+
+@keyframes loopy-loop {
+  0% {
+    transform: rotate(0deg) scale(0.75);
+  }
+  25% {
+    transform: rotate(90deg) scale(0.9);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+  }
+  75% {
+    transform: rotate(270deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(360deg) scale(0.75);
   }
 }

@@ -129,6 +129,15 @@ declare global {
     // interface PageState {}
     // interface Platform {}
   }
+
+  namespace svelteHTML {
+    interface HTMLAttributes {
+      /**
+       * Works only in conjunction with the `clickOutside` action.
+       */
+      'onclickoutside'?: (ev: CustomEvent) => void;
+    }
+  }
 }
 
 export {};

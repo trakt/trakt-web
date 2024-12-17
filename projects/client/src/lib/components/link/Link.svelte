@@ -12,7 +12,7 @@
   }: ChildrenProps &
     HTMLAnchorProps &
     HTMLElementProps & {
-      color?: "default" | "classic";
+      color?: "default" | "classic" | "inherit";
       focusable?: boolean;
     } = $props();
 

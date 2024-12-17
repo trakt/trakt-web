@@ -1,10 +1,12 @@
 <script lang="ts">
   import { useActiveLink } from "$lib/stores/useActiveLink";
+  import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { navigateWithFocus } from "$lib/utils/actions/navigateWithFocus";
   import type { TraktButtonProps } from "./TraktButtonProps";
 
-  type TraktButtonAnchorProps = HTMLAnchorProps & TraktButtonProps;
+  type TraktButtonAnchorProps = HTMLAnchorProps &
+    TraktButtonProps & { onclickoutside?: (ev: CustomEvent) => void };
 
   const {
     label,
@@ -45,6 +47,7 @@
   <a
     use:disableTransitionOn={"touch"}
     use:navigateWithFocus
+    use:clickOutside
     class="trakt-button trakt-button-link"
     class:trakt-link-active={$isActive}
     aria-label={label}
@@ -59,6 +62,7 @@
 {:else}
   <button
     use:disableTransitionOn={"touch"}
+    use:clickOutside
     class="trakt-button"
     aria-label={label}
     data-variant={variant}
@@ -132,7 +136,6 @@
     }
 
     all: unset;
-
     display: flex;
     align-items: center;
     gap: var(--ni-16);
