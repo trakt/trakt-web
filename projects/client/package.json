@@ -14,7 +14,8 @@
     "test": "deno task test:unit --run && deno task test:e2e",
     "test:e2e": " PW_DISABLE_TS_ESM=true playwright test",
     "i18n:resolve": "deno run --allow-read --allow-write .scripts/resolve-i18n.ts",
-    "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts"
+    "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts",
+    "i18n:delete": "deno run --allow-read --allow-write --allow-env .scripts/delete-i18n.ts"
   },
   "devDependencies": {
     "@google/generative-ai": "^0.21.0",
