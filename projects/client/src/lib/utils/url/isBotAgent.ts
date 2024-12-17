@@ -42,6 +42,5 @@ const bots = [
 ];
 
 export function isBotAgent(userAgent: string | Nil): boolean {
-  console.log('userAgent:', userAgent);
   return bots.some((bot) => !!userAgent?.includes(bot));
 }

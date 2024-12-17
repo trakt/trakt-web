@@ -92,5 +92,6 @@
   "lists": "Listen",
   "favorited": "Favorisiert",
   "profile": "Profil",
-  "user_menu_toggle_label": "Benutzermenü"
+  "user_menu_toggle_label": "Benutzermenü",
+  "logout": "Abmelden"
 }

@@ -92,5 +92,6 @@
   "lists": "Lijsten",
   "favorited": "Bevriend",
   "profile": "Profiel",
-  "user_menu_toggle_label": "Gebruikersmenu"
+  "user_menu_toggle_label": "Gebruikersmenu",
+  "logout": "Uitloggen"
 }

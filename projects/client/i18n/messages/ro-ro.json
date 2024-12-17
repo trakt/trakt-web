@@ -92,5 +92,6 @@
   "lists": "Liste",
   "favorited": "Adăugate la favorite",
   "profile": "Profil",
-  "user_menu_toggle_label": "Meniu Utilizator"
+  "user_menu_toggle_label": "Meniu Utilizator",
+  "logout": "Deconectare"
 }

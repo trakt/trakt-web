@@ -4,6 +4,7 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import VipIcon from "$lib/components/icons/VipIcon.svelte";
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -12,6 +13,7 @@
   import VipBadge from "./components/VIPBadge.svelte";
 
   const user = useUser();
+  const { logout } = useAuth();
   const isVip = $derived(user.current().isVip);
   const variant = $derived(isVip ? "vip" : "primary");
   const actionVariant = $derived(isVip ? "red" : "purple");
@@ -68,6 +70,9 @@
     {#snippet items()}
       <DropdownItem href={UrlBuilder.profile.me()}>
         {m.profile()}
+      </DropdownItem>
+      <DropdownItem style="danger" onclick={logout}>
+        {m.logout()}
       </DropdownItem>
     {/snippet}
   </DropdownList>

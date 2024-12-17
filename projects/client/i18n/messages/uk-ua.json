@@ -92,5 +92,6 @@
   "lists": "Списки",
   "favorited": "Обрані",
   "profile": "Профіль",
-  "user_menu_toggle_label": "Меню користувача"
+  "user_menu_toggle_label": "Меню користувача",
+  "logout": "Вийти"
 }

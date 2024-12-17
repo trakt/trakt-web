@@ -92,5 +92,6 @@
   "lists": "リスト",
   "favorited": "お気に入り",
   "profile": "プロフィール",
-  "user_menu_toggle_label": "ユーザーメニュー"
+  "user_menu_toggle_label": "ユーザーメニュー",
+  "logout": "ログアウト"
 }

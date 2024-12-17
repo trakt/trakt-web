@@ -1,32 +1,24 @@
 <script lang="ts">
-  import { isSupported } from "firebase/analytics";
-  import { onMount } from "svelte";
-  import { useUser } from "../auth/stores/useUser";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import AnonymousAnalytics from "./AnonymousAnalytics.svelte";
   import { useAnalytics } from "./useAnalytics";
+  import UserAnalytics from "./UserAnalytics.svelte";
 
   const eventName = "page_view";
 
   const analytics = useAnalytics();
-  const user = useUser();
 
-  onMount(async () => {
-    if (!(await isSupported())) {
-      return;
-    }
-
-    const userId = (() => {
-      try {
-        return user.current().id;
-      } catch {
-        return null;
-      }
-    })();
-
-    analytics.setUserId(userId);
-
+  const record = async () =>
     analytics.record(eventName, {
       page_location: window.location.href,
       page_path: window.location.pathname,
     });
-  });
 </script>
+
+<RenderFor audience="authenticated">
+  <UserAnalytics onload={record} />
+</RenderFor>
+
+<RenderFor audience="public">
+  <AnonymousAnalytics onload={record} />
+</RenderFor>

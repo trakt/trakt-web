@@ -35,5 +35,18 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
+  if (event.url.pathname.startsWith(AuthEndpoint.Logout)) {
+    return new Response(null, {
+      headers: {
+        'Set-Cookie': event.cookies.serialize(AUTH_COOKIE_NAME, '', {
+          httpOnly: true,
+          secure: true,
+          maxAge: 0,
+          path: '/',
+        }),
+      },
+    });
+  }
+
   return await resolve(event);
 };

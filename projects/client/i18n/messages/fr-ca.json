@@ -92,5 +92,6 @@
   "lists": "Listes",
   "favorited": "Favoris",
   "profile": "Profil",
-  "user_menu_toggle_label": "Menu Utilisateur"
+  "user_menu_toggle_label": "Menu Utilisateur",
+  "logout": "Déconnexion"
 }

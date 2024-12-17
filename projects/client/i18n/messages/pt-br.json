@@ -92,5 +92,6 @@
   "lists": "Listas",
   "favorited": "Favoritados",
   "profile": "Perfil",
-  "user_menu_toggle_label": "Menu do Usuário"
+  "user_menu_toggle_label": "Menu do Usuário",
+  "logout": "Sair"
 }

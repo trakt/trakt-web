@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enableKeyboardA11y } from "$lib/utils/actions/enableKeyboardA11y";
   import Link from "../link/Link.svelte";
 
   type DropdownItemProps = {
@@ -28,7 +29,7 @@
 {/snippet}
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-<li tabindex={tabIndex} data-style={style} {...props}>
+<li use:enableKeyboardA11y tabindex={tabIndex} data-style={style} {...props}>
   {#if href}
     <Link {href} {target} color="inherit">
       {@render text()}

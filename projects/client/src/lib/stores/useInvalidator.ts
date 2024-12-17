@@ -5,10 +5,15 @@ import { useQueryClient } from '@tanstack/svelte-query';
 export function useInvalidator() {
   const client = browser ? useQueryClient() : undefined;
 
-  const invalidate = (action: InvalidateAction) => {
-    client?.invalidateQueries({
+  const invalidate = async (action: InvalidateAction) => {
+    if (action === InvalidateAction.Auth) {
+      await client?.resetQueries();
+    }
+
+    await client?.invalidateQueries({
       predicate: (query) => {
-        return query.queryKey.includes(action);
+        return action === InvalidateAction.Auth ||
+          query.queryKey.includes(action);
       },
     });
   };
