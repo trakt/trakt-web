@@ -1,6 +1,7 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';
+import { movieStatsQuery } from '$lib/requests/queries/movies/movieStatsQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
@@ -18,6 +19,12 @@ export function useMovie(slug: string) {
     }),
   );
 
+  const stats = createQuery(
+    movieStatsQuery({
+      slug,
+    }),
+  );
+
   const locale = languageTag();
 
   const isLocaleSkipped = locale === 'en';
@@ -28,6 +35,7 @@ export function useMovie(slug: string) {
   return {
     movie: derived(movie, ($movie) => $movie.data),
     ratings: derived(ratings, ($rating) => $rating.data),
+    stats: derived(stats, ($stats) => $stats.data),
     intl: derived(
       [movie, intl],
       ([$movie, $intl]) => {

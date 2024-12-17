@@ -8,10 +8,12 @@
   import type { WatchlistButtonProps } from "$lib/components/buttons/watchlist/WatchlistButtonProps";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { MediaStats } from "$lib/models/MediaStats";
   import type { MediaType } from "$lib/models/MediaType";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import type { Snippet } from "svelte";
+  import MediaStatsList from "./MediaStatsList.svelte";
   import type { MediaSummary } from "./MediaSummary";
   import MediaSummaryContainer from "./MediaSummaryContainer.svelte";
   import MediaSummaryInfo from "./MediaSummaryInfo.svelte";
@@ -23,9 +25,11 @@
     type,
     intl,
     contextualContent,
+    stats,
   }: MediaSummaryProps<MediaSummary> & {
     type: MediaType;
     contextualContent?: Snippet;
+    stats: MediaStats;
   } = $props();
 
   const { markAsWatched, isMarkingAsWatched, isWatched } = $derived(
@@ -86,6 +90,10 @@
     </div>
     <div class="trakt-media-action-spacer"></div>
   </RenderFor>
+</MediaSummaryContainer>
+
+<MediaSummaryContainer>
+  <MediaStatsList {stats} />
 </MediaSummaryContainer>
 
 <style>

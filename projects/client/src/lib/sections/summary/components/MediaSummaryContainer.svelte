@@ -2,7 +2,7 @@
   import type { Snippet } from "svelte";
 
   type MediaSummaryContainerProps = {
-    poster: Snippet;
+    poster?: Snippet;
     contextualContent?: Snippet;
   } & ChildrenProps;
 
@@ -14,9 +14,11 @@
 </script>
 
 <div class="trakt-summary-container">
-  <div class="trakt-summary-poster">
-    {@render poster()}
-  </div>
+  {#if poster}
+    <div class="trakt-summary-poster">
+      {@render poster()}
+    </div>
+  {/if}
   <div class="trakt-summary-children">
     {@render children()}
   </div>
@@ -31,11 +33,15 @@
   .trakt-summary-container {
     display: grid;
     gap: var(--ni-32);
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: minmax(var(--ni-320), 1fr) 2fr 1fr;
     margin: 0 var(--ni-56);
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
+
+      .trakt-summary-children {
+        grid-column: 1;
+      }
 
       :global(.trakt-summary-poster) {
         height: var(--ni-120);
@@ -46,6 +52,7 @@
   }
 
   .trakt-summary-children {
+    grid-column: 2;
     display: flex;
     flex-direction: column;
     align-self: end;

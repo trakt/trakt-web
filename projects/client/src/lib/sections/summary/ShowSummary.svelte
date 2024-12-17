@@ -1,6 +1,7 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
+  import type { MediaStats } from "$lib/models/MediaStats";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
@@ -8,9 +9,10 @@
 
   type ShowSummaryProps = MediaSummaryProps<ShowSummary> & {
     progress?: EpisodeProgressEntry;
+    stats: MediaStats;
   };
 
-  const { media, ratings, intl, progress }: ShowSummaryProps = $props();
+  const { media, ratings, stats, intl, progress }: ShowSummaryProps = $props();
 </script>
 
 {#snippet contextualContent()}
@@ -21,4 +23,11 @@
   </RenderFor>
 {/snippet}
 
-<MediaSummary {media} {ratings} {intl} type="show" {contextualContent} />
+<MediaSummary
+  {media}
+  {ratings}
+  {stats}
+  {intl}
+  type="show"
+  {contextualContent}
+/>

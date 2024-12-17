@@ -86,5 +86,9 @@
   "navbar_link_shows_label": "Serien durchsuchen",
   "navbar_link_home": "Startseite",
   "navbar_link_home_label": "Zurück zur Startseite",
-  "watchlist": "Meine Wunschliste"
+  "watchlist": "Meine Wunschliste",
+  "watchers": "Zuschauer",
+  "plays": "Wiedergaben",
+  "lists": "Listen",
+  "favorited": "Favorisiert"
 }

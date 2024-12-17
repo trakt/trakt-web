@@ -86,5 +86,9 @@
   "navbar_link_shows_label": "Răsfoiește Seriale",
   "navbar_link_home": "Acasă",
   "navbar_link_home_label": "Întoarcere la pagina de pornire",
-  "watchlist": "Lista de urmărire"
+  "watchlist": "Lista de urmărire",
+  "watchers": "Urmăritori",
+  "plays": "Redări",
+  "lists": "Liste",
+  "favorited": "Adăugate la favorite"
 }

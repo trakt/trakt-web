@@ -86,5 +86,9 @@
   "navbar_link_shows_label": "Переглянути серіали",
   "navbar_link_home": "Головна",
   "navbar_link_home_label": "Повернутися на головну сторінку",
-  "watchlist": "Список перегляду"
+  "watchlist": "Список перегляду",
+  "watchers": "Спостерігачі",
+  "plays": "Перегляди",
+  "lists": "Списки",
+  "favorited": "Обрані"
 }

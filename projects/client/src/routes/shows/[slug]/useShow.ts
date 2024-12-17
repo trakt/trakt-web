@@ -8,6 +8,7 @@ import { showSummaryQuery } from '../../../lib/requests/queries/shows/showSummar
 
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
+import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
 
 export function useShow(slug: string) {
   const show = createQuery(
@@ -18,6 +19,12 @@ export function useShow(slug: string) {
 
   const ratings = createQuery(
     showRatingQuery({
+      slug,
+    }),
+  );
+
+  const stats = createQuery(
+    showStatsQuery({
       slug,
     }),
   );
@@ -38,6 +45,7 @@ export function useShow(slug: string) {
   return {
     show: derived(show, ($show) => $show.data),
     ratings: derived(ratings, ($ratings) => $ratings.data),
+    stats: derived(stats, ($stats) => $stats.data),
     progress: derived(progress, ($progress) => $progress.data),
     intl: derived(
       [show, intl],

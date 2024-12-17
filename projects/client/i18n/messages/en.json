@@ -86,5 +86,9 @@
   "navbar_link_shows_label": "Browse Shows",
   "navbar_link_home": "Home",
   "navbar_link_home_label": "Go back to the homepage",
-  "watchlist": "Watchlist"
+  "watchlist": "Watchlist",
+  "watchers": "Watchers",
+  "plays": "Plays",
+  "lists": "Lists",
+  "favorited": "Favorited"
 }
