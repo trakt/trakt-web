@@ -1,4 +1,5 @@
 <script lang="ts">
+  import MarkAsWatchedActionButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedActionButton.svelte";
   import WatchlistActionButton from "$lib/components/buttons/watchlist/WatchlistActionButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import EpisodeCard from "$lib/components/episode/card/EpisodeCard.svelte";
@@ -14,6 +15,7 @@
   import type { EpisodeCount } from "$lib/requests/models/EpisodeCount";
   import type { MovieSummary } from "$lib/requests/models/MovieSummary";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
+  import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -32,6 +34,13 @@
     removeFromWatchlist,
   } = $derived(
     useWatchlist({
+      type,
+      id: media.id,
+    }),
+  );
+
+  const { isMarkingAsWatched, isWatched, markAsWatched } = $derived(
+    useMarkAsWatched({
       type,
       id: media.id,
     }),
@@ -69,6 +78,12 @@
           onRemove={removeFromWatchlist}
           isWatchlisted={$isWatchlisted}
           isWatchlistUpdating={$isWatchlistUpdating}
+        />
+        <MarkAsWatchedActionButton
+          title={media.title}
+          isWatched={$isWatched}
+          isMarkingAsWatched={$isMarkingAsWatched}
+          onWatch={markAsWatched}
         />
       </RenderFor>
     {/snippet}

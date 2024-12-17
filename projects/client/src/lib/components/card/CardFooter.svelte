@@ -34,5 +34,10 @@
       gap: var(--ni-4);
       overflow: hidden;
     }
+
+    .card-footer-actions {
+      display: flex;
+      gap: var(--ni-4);
+    }
   }
 </style>
