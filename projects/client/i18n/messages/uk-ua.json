@@ -90,5 +90,7 @@
   "watchers": "Спостерігачі",
   "plays": "Перегляди",
   "lists": "Списки",
-  "favorited": "Обрані"
+  "favorited": "Обрані",
+  "profile": "Профіль",
+  "user_menu_toggle_label": "Меню користувача"
 }

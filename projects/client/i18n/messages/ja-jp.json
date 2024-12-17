@@ -90,5 +90,7 @@
   "watchers": "視聴者",
   "plays": "再生回数",
   "lists": "リスト",
-  "favorited": "お気に入り"
+  "favorited": "お気に入り",
+  "profile": "プロフィール",
+  "user_menu_toggle_label": "ユーザーメニュー"
 }

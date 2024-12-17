@@ -90,5 +90,7 @@
   "watchers": "Kijkers",
   "plays": "Afspeelingen",
   "lists": "Lijsten",
-  "favorited": "Bevriend"
+  "favorited": "Bevriend",
+  "profile": "Profiel",
+  "user_menu_toggle_label": "Gebruikersmenu"
 }

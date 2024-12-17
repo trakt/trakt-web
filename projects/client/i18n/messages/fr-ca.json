@@ -90,5 +90,7 @@
   "watchers": "Regardants",
   "plays": "Lectures",
   "lists": "Listes",
-  "favorited": "Favoris"
+  "favorited": "Favoris",
+  "profile": "Profil",
+  "user_menu_toggle_label": "Menu Utilisateur"
 }

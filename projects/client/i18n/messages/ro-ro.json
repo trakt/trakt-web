@@ -90,5 +90,7 @@
   "watchers": "Urmăritori",
   "plays": "Redări",
   "lists": "Liste",
-  "favorited": "Adăugate la favorite"
+  "favorited": "Adăugate la favorite",
+  "profile": "Profil",
+  "user_menu_toggle_label": "Meniu Utilizator"
 }

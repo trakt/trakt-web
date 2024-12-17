@@ -90,5 +90,7 @@
   "watchers": "Watchers",
   "plays": "Plays",
   "lists": "Lists",
-  "favorited": "Favorited"
+  "favorited": "Favorited",
+  "profile": "Profile",
+  "user_menu_toggle_label": "User Menu"
 }

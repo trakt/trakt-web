@@ -1,6 +1,8 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import VipIcon from "$lib/components/icons/VipIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
@@ -10,12 +12,13 @@
   import VipBadge from "./components/VIPBadge.svelte";
 
   const user = useUser();
-  const variant = $derived(user.current().isVip ? "vip" : "primary");
-  const actionVariant = $derived(user.current().isVip ? "red" : "purple");
-  const style = $derived(user.current().isVip ? "textured" : "flat");
+  const isVip = $derived(user.current().isVip);
+  const variant = $derived(isVip ? "vip" : "primary");
+  const actionVariant = $derived(isVip ? "red" : "purple");
+  const style = $derived(isVip ? "textured" : "flat");
 </script>
 
-{#if !user.current().isVip}
+{#if !isVip}
   <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
     <Button
       href={UrlBuilder.vip()}
@@ -42,9 +45,8 @@
 {/if}
 
 <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
-  <Button
-    href={UrlBuilder.profile.me()}
-    label={m.user_profile_label()}
+  <DropdownList
+    label={m.user_menu_toggle_label()}
     {variant}
     {style}
     text="capitalize"
@@ -63,7 +65,12 @@
         {/if}
       </div>
     {/snippet}
-  </Button>
+    {#snippet items()}
+      <DropdownItem href={UrlBuilder.profile.me()}>
+        {m.profile()}
+      </DropdownItem>
+    {/snippet}
+  </DropdownList>
 </RenderFor>
 
 <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>

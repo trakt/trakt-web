@@ -90,5 +90,7 @@
   "watchers": "Espectadores",
   "plays": "Reproducciones",
   "lists": "Listas",
-  "favorited": "Favoritos"
+  "favorited": "Favoritos",
+  "profile": "Perfil",
+  "user_menu_toggle_label": "Menú de Usuario"
 }
