@@ -67,7 +67,10 @@ export default defineConfig(({ mode }) => ({
 
   //TODO enable globals when typings are fixed
   test: {
-    include: ['src/**/*.{test,spec}.{js,ts}', './resolve-i18n.spec.ts'],
+    include: [
+      'src/**/*.{test,spec}.{js,ts}',
+      '.scripts/**/*.{test,spec}.{js,ts}',
+    ],
     environment: 'jsdom',
     setupFiles: ['./vitest-setup.ts'],
   },

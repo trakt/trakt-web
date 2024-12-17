@@ -1,5 +1,9 @@
+import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
+
 import { availableLocales } from '$lib/features/i18n/index.ts';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { loadLocale, TranslationMap } from './_internal/loadLocale.ts';
+import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
 const genAi = new GoogleGenerativeAI(
   Deno.env.get('GEMINI_API_KEY')!,
@@ -73,20 +77,6 @@ async function translateJson(
   }
 }
 
-type TranslationMap = Record<string, string>;
-
-async function loadExistingTranslations(
-  locale: string,
-): Promise<TranslationMap> {
-  const path = `./i18n/messages/${locale}.json`;
-  try {
-    const content = await Deno.readTextFile(path);
-    return JSON.parse(content);
-  } catch {
-    return {};
-  }
-}
-
 function findNewKeys(source: TranslationMap, target: TranslationMap): string[] {
   return Object.keys(source).filter((key) => !(key in target));
 }
@@ -129,14 +119,14 @@ function maintainKeyOrder(
 async function translateAllLocales(): Promise<void> {
   try {
     // Load English source
-    const sourceMessages = await loadExistingTranslations('en');
+    const sourceMessages = await loadLocale('en');
 
     // Process each locale
     for (const locale of availableLocales.filter((l) => l !== 'en')) {
       console.log(`Processing ${locale}...`);
 
       // Load existing translations
-      const existingTranslations = await loadExistingTranslations(locale);
+      const existingTranslations = await loadLocale(locale);
 
       // Find new keys
       const newKeys = findNewKeys(sourceMessages, existingTranslations);
@@ -161,9 +151,9 @@ async function translateAllLocales(): Promise<void> {
         ...newTranslations,
       });
 
-      await Deno.writeTextFile(
-        `./i18n/messages/${locale}.json`,
-        JSON.stringify(updatedTranslations, null, 2) + '\n',
+      await writeJsonFile(
+        `${I18N_MESSAGES_DIR}/${locale}.json`,
+        updatedTranslations,
       );
 
       console.log(`Updated ${locale} with ${newKeys.length} new translations`);

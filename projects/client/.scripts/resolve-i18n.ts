@@ -1,3 +1,6 @@
+import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
+import { writeJsonFile } from './_internal/writeJsonFile.ts';
+
 const CONFLICT_HEAD_REGEX = /<<<<<<< HEAD\n([\s\S]*?)=======/;
 const INCOMING_CHANGE_REGEX = /=======\n([\s\S]*?)>>>>>>> [^\n]+\n/;
 const END_CONFLICT_MARKER_REGEX = />>>>>>> [^\n]+\n([\s\S]*)/;
@@ -46,17 +49,15 @@ export function resolveJSONConflicts(input: string): Record<string, string> {
 }
 
 if (import.meta.main) {
-  const messagesDir = './i18n/messages';
-
-  for await (const dirEntry of Deno.readDir(messagesDir)) {
+  for await (const dirEntry of Deno.readDir(I18N_MESSAGES_DIR)) {
     if (dirEntry.isFile) {
-      const filePath = `${messagesDir}/${dirEntry.name}`;
+      const filePath = `${I18N_MESSAGES_DIR}/${dirEntry.name}`;
       try {
         const data = await Deno.readTextFile(filePath);
         const resolvedData = resolveJSONConflicts(data);
-        await Deno.writeTextFile(
+        await writeJsonFile(
           filePath,
-          JSON.stringify(resolvedData, null, 2) + '\n',
+          resolvedData,
         );
         console.log(`Conflicts resolved in file: ${dirEntry.name}`);
       } catch (err) {
