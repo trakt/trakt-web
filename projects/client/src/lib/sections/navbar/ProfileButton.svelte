@@ -60,7 +60,7 @@
         <ProfileImage
           --width="var(--ni-24)"
           --height="var(--ni-24)"
-          --border-width="var(--ni-2)"
+          --border-width="var(--border-thickness-xs)"
         />
         {#if user.current().isVip}
           <VipBadge />
@@ -87,7 +87,7 @@
     <ProfileImage
       --width="var(--ni-24)"
       --height="var(--ni-24)"
-      --border-width="var(--ni-2)"
+      --border-width="var(--border-thickness-xs)"
     />
   </ActionButton>
 </RenderFor>

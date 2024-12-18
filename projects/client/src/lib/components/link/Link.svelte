@@ -60,9 +60,9 @@
         content: "";
         width: 100%;
         height: 100%;
-        outline: var(--ni-2) solid var(--color-link-active);
+        outline: var(--border-thickness-xs) solid var(--color-link-active);
         border-radius: var(--border-radius-xs);
-        outline-offset: var(--ni-4);
+        outline-offset: var(--border-thickness-s);
 
         transition: border-radius var(--transition-increment) ease-in-out;
       }

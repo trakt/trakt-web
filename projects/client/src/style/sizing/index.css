@@ -5,4 +5,10 @@
   --border-radius-l: var(--ni-16);
   --border-radius-xl: var(--ni-20);
   --border-radius-xxl: var(--ni-24);
+
+  --border-thickness-xs: var(--ni-2);
+  --border-thickness-s: var(--ni-4);
+  --border-thickness-m: var(--ni-8);
+  --border-thickness-l: var(--ni-12);
+  --border-thickness-xl: var(--ni-16);
 }

@@ -121,7 +121,8 @@
     transition: background-color var(--transition-increment) ease-in-out;
 
     &:focus-visible {
-      outline: var(--ni-2) solid var(--color-background-button-outline);
+      outline: var(--border-thickness-xs) solid
+        var(--color-background-button-outline);
     }
 
     &:active {

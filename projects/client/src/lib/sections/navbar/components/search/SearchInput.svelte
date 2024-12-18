@@ -94,7 +94,7 @@
       gap: var(--ni-16);
 
       border-radius: var(--border-radius-s);
-      border: var(--ni-2) solid var(--shade-700);
+      border: var(--border-thickness-xs) solid var(--shade-700);
       background: rgba(25, 28, 30, 0.7);
       backdrop-filter: blur(var(--ni-8));
       width: calc(var(--ni-120) + 10vw);
@@ -158,7 +158,7 @@
         :global(img) {
           height: var(--ni-96);
           width: var(--ni-64);
-          border: var(--ni-2) solid white;
+          border: var(--border-thickness-xs) solid white;
           border-radius: var(--border-radius-s);
         }
 

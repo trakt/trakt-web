@@ -81,7 +81,7 @@
 
       &:focus-visible,
       &:has(> :global(.trakt-link:focus-visible)) {
-        outline: var(--ni-2) solid var(--purple-800);
+        outline: var(--border-thickness-xs) solid var(--purple-800);
       }
     }
 
@@ -98,7 +98,7 @@
 
       &:focus-visible,
       &:has(:global(.trakt-link:focus-visible)) {
-        outline: var(--ni-2) solid var(--red-600);
+        outline: var(--border-thickness-xs) solid var(--red-600);
       }
     }
   }

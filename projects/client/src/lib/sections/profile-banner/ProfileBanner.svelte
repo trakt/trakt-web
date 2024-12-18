@@ -15,7 +15,7 @@
       <ProfileImage
         --width="var(--ni-64)"
         --height="var(--ni-64)"
-        --border-width="var(--ni-4)"
+        --border-width="var(--border-thickness-s)"
       />
     </Link>
     <div class="profile-info">
