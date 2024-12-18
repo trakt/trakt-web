@@ -34,6 +34,7 @@ function generatePromptText({
 
           *   Unless the English text value (not JSON key!) explicitly mentions "movie" or "show," avoid using those specific terms in the translation. The context should be inferred.
           *   Imagine the text might refer to a movie, show, episode, or other media-related term.
+          *   Refrain from making assumptions of where media content is consumed (e.g., theaters, streaming services) unless explicitly mentioned in the English text.
 
           Examples in Trakt Lite:
 
