@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { replaceState } from "$app/navigation";
   import { onMount } from "svelte";
   import { AuthEndpoint } from "../AuthEndpoint";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
@@ -48,10 +49,9 @@
 
     queryParams.delete("code");
 
-    window.history.replaceState(
-      {},
-      "",
+    replaceState(
       `${url.pathname}${queryParams.toString() ? "?" + queryParams.toString() : ""}`,
+      {},
     );
 
     auth.token.set(access);
