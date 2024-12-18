@@ -115,8 +115,8 @@
       transition: opacity var(--transition-increment) ease-in-out;
 
       padding: var(--list-padding) 0;
-      border-radius: var(--ni-12);
-      border-radius: var(--ni-12);
+      border-radius: var(--border-radius-m);
+      border-radius: var(--border-radius-m);
 
       background-color: var(--shade-10);
 

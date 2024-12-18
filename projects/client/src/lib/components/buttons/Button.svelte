@@ -168,7 +168,7 @@
     &:active[disabled] {
       height: var(--ni-52);
       box-sizing: border-box;
-      border-radius: var(--ni-12);
+      border-radius: var(--border-radius-m);
     }
 
     &::before {

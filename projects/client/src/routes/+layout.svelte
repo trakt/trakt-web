@@ -76,7 +76,7 @@
           var(--color-foreground) 0%,
           transparent 100%
         );
-        border-radius: var(--ni-4);
+        border-radius: var(--border-radius-xs);
         backdrop-filter: blur(var(--ni-4));
         opacity: 0;
       }

@@ -1,0 +1,8 @@
+:root {
+  --border-radius-xs: var(--ni-4);
+  --border-radius-s: var(--ni-8);
+  --border-radius-m: var(--ni-12);
+  --border-radius-l: var(--ni-16);
+  --border-radius-xl: var(--ni-20);
+  --border-radius-xxl: var(--ni-24);
+}

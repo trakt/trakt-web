@@ -29,7 +29,7 @@
     justify-content: space-between;
     padding: var(--ni-24) var(--ni-16) var(--ni-24) var(--ni-16);
     background-color: var(--color-card-background);
-    border-radius: var(--ni-8);
+    border-radius: var(--border-radius-s);
     gap: var(--ni-16);
   }
 

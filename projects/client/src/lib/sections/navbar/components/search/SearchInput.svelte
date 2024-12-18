@@ -93,7 +93,7 @@
       box-sizing: border-box;
       gap: var(--ni-16);
 
-      border-radius: var(--ni-8);
+      border-radius: var(--border-radius-s);
       border: var(--ni-2) solid var(--shade-700);
       background: rgba(25, 28, 30, 0.7);
       backdrop-filter: blur(var(--ni-8));
@@ -138,7 +138,7 @@
         transparent 20%
       );
       backdrop-filter: blur(var(--ni-8));
-      border-radius: var(--ni-8);
+      border-radius: var(--border-radius-s);
       padding: var(--ni-8);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       z-index: 999;
@@ -149,7 +149,7 @@
 
       .trakt-search-result-item {
         padding: var(--ni-8);
-        border-radius: var(--ni-8);
+        border-radius: var(--border-radius-s);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -159,7 +159,7 @@
           height: var(--ni-96);
           width: var(--ni-64);
           border: var(--ni-2) solid white;
-          border-radius: var(--ni-8);
+          border-radius: var(--border-radius-s);
         }
 
         &:hover {

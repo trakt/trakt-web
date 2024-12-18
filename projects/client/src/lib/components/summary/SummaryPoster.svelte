@@ -25,7 +25,7 @@
     gap: var(--ni-16);
 
     :global(img) {
-      border-radius: var(--ni-24);
+      border-radius: var(--border-radius-xxl);
       align-self: stretch;
       width: var(--ni-320);
       height: var(--ni-480);

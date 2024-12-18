@@ -16,6 +16,6 @@
     margin: 0;
     padding: var(--ni-2) var(--ni-8);
 
-    border-radius: var(--ni-18);
+    border-radius: var(--border-radius-l);
   }
 </style>

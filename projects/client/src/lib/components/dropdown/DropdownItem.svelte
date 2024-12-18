@@ -50,7 +50,7 @@
     padding: 0 var(--ni-12);
     height: calc(var(--ni-20) + var(--ni-12) * 2);
     width: calc(100% - var(--ni-48));
-    border-radius: var(--ni-12);
+    border-radius: var(--border-radius-m);
 
     align-content: center;
     justify-self: center;

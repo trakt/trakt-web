@@ -25,7 +25,7 @@
     width: var(--width-card);
     height: var(--height-card);
 
-    border-radius: var(--ni-12);
+    border-radius: var(--border-radius-m);
     overflow: hidden;
     background: var(--color-card-background);
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)

@@ -14,7 +14,7 @@
     align-items: center;
     gap: var(--ni-8);
 
-    border-radius: var(--ni-20);
+    border-radius: var(--border-radius-xl);
     background: var(--color-background-vip-badge);
     color: var(--color-foreground-vip-badge);
 

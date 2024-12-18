@@ -116,7 +116,7 @@
     align-items: center;
     flex-shrink: 0;
 
-    border-radius: var(--ni-12);
+    border-radius: var(--border-radius-m);
 
     transition: background-color var(--transition-increment) ease-in-out;
 

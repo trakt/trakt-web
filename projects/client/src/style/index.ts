@@ -6,6 +6,7 @@ import './palette/red.css';
 import './palette/shade.css';
 
 import './numeric-increments/index.css';
+import './sizing/index.css';
 
 import './layout/index.css';
 

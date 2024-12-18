@@ -61,7 +61,7 @@
         width: 100%;
         height: 100%;
         outline: var(--ni-2) solid var(--color-link-active);
-        border-radius: var(--ni-4);
+        border-radius: var(--border-radius-xs);
         outline-offset: var(--ni-4);
 
         transition: border-radius var(--transition-increment) ease-in-out;
