@@ -47,7 +47,7 @@
     right: 0;
     z-index: 999;
 
-    background-color: var(--color-background-navbar);
+    background-color: var(--color-background-mobile-navbar);
     box-shadow: 0px -24px 64px 0px
       color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
     backdrop-filter: blur(8px);

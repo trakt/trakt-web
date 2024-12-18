@@ -15,7 +15,7 @@
 
   --color-link-active: var(--purple-700);
 
-  --color-background-navbar: color-mix(
+  --color-background-mobile-navbar: color-mix(
     in srgb,
     var(--shade-30) 90%,
     transparent 10%
@@ -42,9 +42,5 @@
 
   --color-link-active: var(--purple-400);
 
-  --color-background-navbar: color-mix(
-    in srgb,
-    var(--shade-920) 90%,
-    transparent 10%
-  );
+  --color-background-mobile-navbar: var(--color-background-navbar);
 }
