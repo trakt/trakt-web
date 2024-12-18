@@ -20,8 +20,8 @@
     <BackgroundCoverImage src={current().cover.url} type="main" />
     <ProfileBanner />
     <UpNextList />
-    <UpcomingList />
     <OutNowList title={m.out_now_title()} />
+    <UpcomingList />
     <ComingSoonList title={m.coming_soon_title()} />
   </RenderFor>
   <RenderFor audience="public">
