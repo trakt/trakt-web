@@ -83,15 +83,25 @@
 
 <style>
   .trakt-content {
+    --content-gap: var(--ni-48);
+
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: gap margin;
+
     display: flex;
     flex-direction: column;
-    gap: var(--ni-48);
+    gap: var(--content-gap);
 
     &:first-child {
-      margin-top: var(--ni-48);
+      margin-top: var(--content-gap);
     }
 
-    inset: 0;
-    margin: auto;
+    @media (max-width: 480px) {
+      --content-gap: var(--ni-18);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 </style>

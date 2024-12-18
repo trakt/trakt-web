@@ -39,10 +39,12 @@
     align-items: center;
     gap: var(--ni-16);
     transition: var(--transition-increment) ease-in-out;
-    transition-property: margin-left;
+    transition-property: margin-left scale height;
 
     @media (max-width: 480px) {
-      margin-left: var(--ni-32);
+      margin-left: 0;
+      scale: 0.75;
+      height: 75%;
     }
   }
 
