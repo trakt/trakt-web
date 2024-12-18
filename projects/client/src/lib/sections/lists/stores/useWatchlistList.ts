@@ -1,3 +1,4 @@
+import type { SortType } from '$lib/api.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
 import {
   movieWatchlistQuery,
@@ -9,22 +10,23 @@ import {
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
-import type { ListSortType } from '../../../models/ListSortType.ts';
 
-type WatchListParams = {
-  sort: ListSortType;
+export type WatchListParams = {
+  sort: SortType;
 };
 
 export type WatchlistMediaItem = WatchlistMovie | WatchlistShow;
 export type WatchlistMedia = Array<WatchlistMediaItem>;
 
-type WatchListStoreProps = {
+export type WatchListStoreProps = {
   type: MediaType;
-};
+} & Partial<WatchListParams>;
 
-function typeToQuery(type: MediaType): CreateQueryOptions<WatchlistMedia> {
+function typeToQuery(
+  { type, sort = 'rank' }: WatchListStoreProps,
+): CreateQueryOptions<WatchlistMedia> {
   const params: WatchListParams = {
-    sort: 'rank',
+    sort,
   };
 
   switch (type) {
@@ -37,10 +39,8 @@ function typeToQuery(type: MediaType): CreateQueryOptions<WatchlistMedia> {
   }
 }
 
-export function useWatchlistList(
-  { type }: WatchListStoreProps,
-) {
-  const query = createQuery(typeToQuery(type));
+export function useWatchlistList(params: WatchListStoreProps) {
+  const query = createQuery(typeToQuery(params));
   const list = derived(
     query,
     ($query) => ($query.data ?? []).map((item) => item.mediaItem),

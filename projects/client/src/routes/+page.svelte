@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
+  import ComingSoonList from "$lib/sections/lists/ComingSoonList.svelte";
   import UpNextList from "$lib/sections/lists/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
@@ -19,6 +20,7 @@
     <ProfileBanner />
     <UpNextList />
     <UpcomingList />
+    <ComingSoonList title={m.coming_soon_title()} />
   </RenderFor>
   <RenderFor audience="public">
     <Landing />

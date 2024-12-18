@@ -8,6 +8,7 @@ type ImageUrls = {
 export type MediaSummary = {
   id: number;
   slug: string;
+  year: number | Nil;
   runtime: number;
   title: string;
   tagline: string;
@@ -23,4 +24,5 @@ export type MediaSummary = {
   genres: Genre[];
   overview: string;
   trailer: string;
+  airedDate: Date;
 };

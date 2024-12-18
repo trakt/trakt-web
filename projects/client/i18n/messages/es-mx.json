@@ -93,5 +93,7 @@
   "favorited": "Favoritos",
   "profile": "Perfil",
   "user_menu_toggle_label": "Menú de Usuario",
-  "logout": "Cerrar sesión"
+  "logout": "Cerrar sesión",
+  "coming_soon_title": "Próximamente",
+  "tba_label": "Pendiente"
 }

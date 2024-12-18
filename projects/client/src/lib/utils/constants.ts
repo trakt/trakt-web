@@ -17,3 +17,6 @@ export const MEDIA_POSTER_PLACEHOLDER = 'https://placehold.co/320x500';
 export const MEDIA_COVER_PLACEHOLDER = DEFAULT_COVER;
 
 export const DEFAULT_TRAILER = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU';
+
+export const MAX_DATE = new Date('9999-12-31T23:59:59.999Z');
+export const MIN_DATE = new Date('0000-01-01T00:00:00.000Z');

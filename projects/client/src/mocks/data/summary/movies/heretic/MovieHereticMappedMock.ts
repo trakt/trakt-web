@@ -22,6 +22,7 @@ export const MovieHereticMappedMock = {
         'https://walter-r2.trakt.tv/images/movies/000/916/302/posters/thumb/db9d66deb8.jpg.webp',
     },
   },
+  'year': 2024,
   'runtime': 111,
   'slug': 'heretic-2024',
   'tagline': 'Question everything.',
@@ -31,4 +32,5 @@ export const MovieHereticMappedMock = {
   },
   'title': 'Heretic',
   'trailer': 'https://youtube.com/watch?v=jpWUOxRozZg',
+  'airedDate': '2024-11-08T00:00:00.000Z',
 };

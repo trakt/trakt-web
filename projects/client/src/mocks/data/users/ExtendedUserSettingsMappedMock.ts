@@ -27,4 +27,5 @@ export const ExtendedUserMappedMock: UserSettings = {
       'action': 'now',
     },
   },
+  genres: [],
 };

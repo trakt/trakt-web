@@ -4,6 +4,7 @@ import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import {
   DEFAULT_TRAILER,
+  MAX_DATE,
   MEDIA_POSTER_PLACEHOLDER,
 } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
@@ -32,6 +33,7 @@ export function mapShowResponseToShowSummary(
     slug: show.ids.slug,
     title: show.title,
     runtime: show.runtime!,
+    year: show.year,
     tagline: show.tagline!,
     poster: {
       url: {
@@ -72,5 +74,6 @@ export function mapShowResponseToShowSummary(
       show.trailer,
       DEFAULT_TRAILER,
     ),
+    airedDate: new Date(show.first_aired ?? MAX_DATE),
   };
 }

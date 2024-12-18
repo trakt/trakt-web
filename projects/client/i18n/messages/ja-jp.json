@@ -93,5 +93,7 @@
   "favorited": "お気に入り",
   "profile": "プロフィール",
   "user_menu_toggle_label": "ユーザーメニュー",
-  "logout": "ログアウト"
+  "logout": "ログアウト",
+  "coming_soon_title": "もうすぐ公開",
+  "tba_label": "未定"
 }

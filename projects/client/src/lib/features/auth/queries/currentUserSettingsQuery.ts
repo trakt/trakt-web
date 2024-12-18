@@ -1,4 +1,9 @@
-import type { SettingsResponse, SortDirection, WatchAction } from '$lib/api.ts';
+import type {
+  Genre,
+  SettingsResponse,
+  SortDirection,
+  WatchAction,
+} from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
@@ -31,6 +36,7 @@ export type UserSettings = {
       action?: WatchAction;
     };
   };
+  genres: Array<Genre>;
 };
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
@@ -70,6 +76,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
         },
       },
     },
+    genres: browsing?.genres.favorites ?? [],
   };
 }
 

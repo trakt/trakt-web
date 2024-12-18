@@ -93,5 +93,7 @@
   "favorited": "Favorited",
   "profile": "Profile",
   "user_menu_toggle_label": "User Menu",
-  "logout": "Logout"
+  "logout": "Logout",
+  "coming_soon_title": "Coming Soon",
+  "tba_label": "TBA"
 }

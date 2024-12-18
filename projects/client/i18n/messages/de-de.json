@@ -93,5 +93,7 @@
   "favorited": "Favorisiert",
   "profile": "Profil",
   "user_menu_toggle_label": "Benutzermenü",
-  "logout": "Abmelden"
+  "logout": "Abmelden",
+  "coming_soon_title": "Demnächst verfügbar",
+  "tba_label": "Noch nicht bekannt"
 }

@@ -1,9 +1,9 @@
 import type { LayoutLoad } from './$types';
 
 import { browser } from '$app/environment';
+import { currentUserSettingsQuery } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 import { isAuthorized, setToken } from '$lib/features/auth/token/index.ts';
 import { QueryClient } from '@tanstack/svelte-query';
-import { currentUserSettingsQuery } from '../lib/features/auth/queries/currentUserSettingsQuery.ts';
 
 export const load: LayoutLoad = async ({ data, fetch }) => {
   const queryClient = new QueryClient({

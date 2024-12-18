@@ -22,6 +22,7 @@ export const ShowSiloMappedMock = {
         'https://walter-r2.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
     },
   },
+  'year': 2023,
   'runtime': 60,
   'slug': 'silo',
   'tagline': 'The truth will surface.',
@@ -31,4 +32,5 @@ export const ShowSiloMappedMock = {
   },
   'title': 'Silo',
   'trailer': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
+  'airedDate': '2023-05-05T01:00:00.000Z',
 };

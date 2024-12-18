@@ -4,6 +4,7 @@ import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
 import {
   DEFAULT_TRAILER,
+  MAX_DATE,
   MEDIA_POSTER_PLACEHOLDER,
 } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
@@ -27,6 +28,7 @@ export function mapMovieResponseToMovieSummary(
     slug: movie.ids.slug,
     title: movie.title,
     runtime: movie.runtime!,
+    year: movie.year,
     tagline: movie.tagline ?? '',
     poster: {
       url: {
@@ -64,5 +66,6 @@ export function mapMovieResponseToMovieSummary(
       movie.trailer,
       DEFAULT_TRAILER,
     ),
+    airedDate: new Date(movie.released ?? MAX_DATE),
   };
 }
