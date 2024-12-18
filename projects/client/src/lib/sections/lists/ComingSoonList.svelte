@@ -17,7 +17,7 @@
   const { user } = useUser();
 
   const { compare } = $derived(
-    genreCompareFactory($user?.genres ?? [], "asc", "genre"),
+    genreCompareFactory($user?.genres ?? [], "asc", "year"),
   );
 </script>
 
