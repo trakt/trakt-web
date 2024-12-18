@@ -1,13 +1,12 @@
-import type { WatchlistedMoviesResponse } from '$lib/api.ts';
+import type { SortType, WatchlistedMoviesResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
-import type { ListSortType } from '../../../models/ListSortType.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 type MovieWatchlistParams = {
-  sort: ListSortType;
+  sort: SortType;
 } & ApiParams;
 
 export type WatchlistMovie = ListItem<MovieSummary>;
