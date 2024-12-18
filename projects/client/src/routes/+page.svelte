@@ -6,6 +6,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
   import ComingSoonList from "$lib/sections/lists/ComingSoonList.svelte";
+  import OutNowList from "$lib/sections/lists/OutNowList.svelte";
   import UpNextList from "$lib/sections/lists/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
@@ -20,6 +21,7 @@
     <ProfileBanner />
     <UpNextList />
     <UpcomingList />
+    <OutNowList title={m.out_now_title()} />
     <ComingSoonList title={m.coming_soon_title()} />
   </RenderFor>
   <RenderFor audience="public">

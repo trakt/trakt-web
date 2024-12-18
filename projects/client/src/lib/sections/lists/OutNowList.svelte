@@ -2,7 +2,7 @@
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import MediaItem from "./components/MediaItem.svelte";
-  import { useComingSoon } from "./stores/useComingSoon";
+  import { useOutNow } from "./stores/useOutNow";
   import { genreCompareFactory } from "./utils/genreCompareFactory";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -13,11 +13,11 @@
   const { title }: ComingSoonProps = $props();
   const type = "movie";
 
-  const { list } = useComingSoon(type);
+  const { list } = useOutNow(type);
   const { user } = useUser();
 
   const { compare } = $derived(
-    genreCompareFactory($user?.genres ?? [], "asc", "genre"),
+    genreCompareFactory($user?.genres ?? [], "desc", "genre"),
   );
 </script>
 
