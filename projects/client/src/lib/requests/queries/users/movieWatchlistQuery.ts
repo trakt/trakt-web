@@ -1,6 +1,7 @@
 import type { SortType, WatchlistedMoviesResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -51,7 +52,10 @@ function watchlistRequest(
     });
 }
 
-const movieWatchlistQueryKey = ['movieWatchlist'] as const;
+const movieWatchlistQueryKey = [
+  'movieWatchlist',
+  InvalidateAction.Watchlisted('movie'),
+] as const;
 export const movieWatchlistQuery = (
   params: MovieWatchlistParams,
 ) => ({

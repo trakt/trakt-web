@@ -1,11 +1,14 @@
 import { browser } from '$app/environment';
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import {
+  InvalidateAction,
+  type InvalidateActionOptions,
+} from '$lib/requests/models/InvalidateAction.ts';
 import { useQueryClient } from '@tanstack/svelte-query';
 
 export function useInvalidator() {
   const client = browser ? useQueryClient() : undefined;
 
-  const invalidate = async (action: InvalidateAction) => {
+  const invalidate = async (action: InvalidateActionOptions) => {
     if (action === InvalidateAction.Auth) {
       await client?.resetQueries();
     }

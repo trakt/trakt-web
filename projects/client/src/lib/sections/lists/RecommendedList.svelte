@@ -12,7 +12,7 @@
 
   const { title, type }: RecommendationListProps = $props();
 
-  const { list } = useRecommendationList({ type });
+  const { list } = $derived(useRecommendationList({ type }));
 </script>
 
 <SectionList

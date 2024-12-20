@@ -43,6 +43,8 @@ export function useWatchlist({ type, id }: WatchlistStoreProps) {
     });
     isWatchlistUpdating.set(false);
     _isWatchlisted.set(result);
+
+    await invalidate(InvalidateAction.Watchlisted(type));
   };
 
   const removeFromWatchlist = async () => {
@@ -53,7 +55,7 @@ export function useWatchlist({ type, id }: WatchlistStoreProps) {
     isWatchlistUpdating.set(false);
     _isWatchlisted.set(!result);
 
-    invalidate(InvalidateAction.Watchlisted);
+    await invalidate(InvalidateAction.Watchlisted(type));
   };
 
   return {

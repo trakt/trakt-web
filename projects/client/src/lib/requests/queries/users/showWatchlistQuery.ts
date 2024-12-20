@@ -1,5 +1,6 @@
 import type { SortType, WatchlistedShowsResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
 import { type ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -51,7 +52,10 @@ function watchlistRequest(
     });
 }
 
-const showWatchlistQueryKey = ['showWatchlist'] as const;
+const showWatchlistQueryKey = [
+  'showWatchlist',
+  InvalidateAction.Watchlisted('show'),
+] as const;
 export const showWatchlistQuery = (
   params: ShowWatchlistParams,
 ) => ({

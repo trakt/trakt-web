@@ -109,7 +109,9 @@ const watchlistedShowsRequest = (
 
 export const currentUserWatchlistQueryKey = [
   'currentUserWatchlist',
-  InvalidateAction.Watchlisted,
+  InvalidateAction.Watchlisted('episode'),
+  InvalidateAction.Watchlisted('show'),
+  InvalidateAction.Watchlisted('movie'),
 ] as const;
 export const currentUserWatchlistQuery = ({ fetch }: ApiParams = {}) => ({
   queryKey: currentUserWatchlistQueryKey,

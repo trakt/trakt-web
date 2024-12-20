@@ -74,7 +74,7 @@ export function useMarkAsWatched({ type, id }: MarkAsWatchedStoreProps) {
     isMarkingAsWatched.set(false);
 
     _isWatched.set(result);
-    invalidate(InvalidateAction.MarkAsWatched);
+    await invalidate(InvalidateAction.MarkAsWatched);
   };
 
   return {
