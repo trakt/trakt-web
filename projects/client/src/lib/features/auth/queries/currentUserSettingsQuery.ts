@@ -6,6 +6,7 @@ import type {
 } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
+import { getRandomAbout } from '$lib/utils/data/getRandomAbout.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
@@ -17,6 +18,7 @@ export type UserSettings = {
     first: string;
     last: string;
   };
+  about: string;
   location?: string;
   avatar: {
     url: string;
@@ -51,6 +53,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       first: firstName,
       last: lastName,
     },
+    about: user.about ?? getRandomAbout(),
     location: user.location,
     avatar: {
       url: user.images!.avatar.full,

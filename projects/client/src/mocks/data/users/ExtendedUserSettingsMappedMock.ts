@@ -9,6 +9,7 @@ export const ExtendedUserMappedMock: UserSettings = {
   'cover': {
     'url': 'https://whirling_in_rags.jpg',
   },
+  'about': "Sorry about the amnesia. I'm actually a superstar detective.",
   'isVip': true,
   'location': 'Martinaise, Revachol West',
   'name': {
