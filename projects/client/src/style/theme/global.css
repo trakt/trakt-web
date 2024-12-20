@@ -40,4 +40,5 @@
   --color-foreground-button-vip: var(--shade-10);
 
   --color-border-avatar: var(--shade-50);
+  --color-border-vip-avatar: var(--red-500);
 }
