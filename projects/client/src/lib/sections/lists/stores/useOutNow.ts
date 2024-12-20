@@ -5,7 +5,10 @@ import {
 import { derived } from 'svelte/store';
 
 export function useOutNow(type: MediaType) {
-  const { list: watchlist } = useWatchlistList({ type, sort: 'released' });
+  const { list: watchlist, isLoading } = useWatchlistList({
+    type,
+    sort: 'released',
+  });
 
   const list = derived(
     watchlist,
@@ -16,5 +19,6 @@ export function useOutNow(type: MediaType) {
 
   return {
     list,
+    isLoading,
   };
 }
