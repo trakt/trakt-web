@@ -13,13 +13,13 @@
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
   import VipBadge from "./components/VIPBadge.svelte";
 
-  const user = useUser();
+  const { user } = useUser();
   const { logout } = useAuth();
-  const isVip = $derived(user.current().isVip);
+  const isVip = $derived(!!$user?.isVip);
   const variant = $derived(isVip ? "vip" : "primary");
   const style = $derived(isVip ? "textured" : "flat");
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const name = $derived(isMobile ? "" : user.current().name.first);
+  const name = $derived(isMobile ? "" : $user?.name?.first);
 </script>
 
 {#if !isVip}
@@ -63,7 +63,7 @@
         --height="var(--ni-24)"
         --border-width="var(--border-thickness-xs)"
       />
-      {#if user.current().isVip}
+      {#if isVip}
         <VipBadge />
       {/if}
     </div>

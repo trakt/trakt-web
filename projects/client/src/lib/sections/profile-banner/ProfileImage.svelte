@@ -8,13 +8,14 @@
 </script>
 
 <figure class="profile-image">
+  <!-- This should be the first element, else: HierarchyRequestError -->
+  <figcaption class="visually-hidden">
+    {m.profile_banner_greeting({ name: $user?.name.first ?? "" })}
+  </figcaption>
   <CrossOriginImage
     src={$user?.avatar.url ?? ""}
     alt={`${$user?.name.first}'s avatar`}
   />
-  <figcaption class="visually-hidden">
-    {m.profile_banner_greeting({ name: $user?.name.first ?? "" })}
-  </figcaption>
 </figure>
 
 <style>
