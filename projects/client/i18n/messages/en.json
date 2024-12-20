@@ -113,5 +113,7 @@
   "about_placeholder_12": "This user is channeling their inner Tyler Durden: rejecting consumerism and embracing the void. (Or maybe they just haven't gotten around to filling this out yet.)",
   "about_placeholder_13": "A stylized image: A funny illustration of a detective scratching their head in confusion, or a tumbleweed rolling across an empty profile page.",
   "about_placeholder_14": "An interactive element: A button that allows users to send a friendly nudge to the profile owner, encouraging them to complete their profile.",
-  "about_placeholder_15": "A personalized message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalized placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'"
+  "about_placeholder_15": "A personalized message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalized placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'",
+  "watchlist_movies_empty": "Your watchlist is a blank canvas, a silent screen awaiting the projection of your cinematic dreams. Add the movies that stir your soul, and transform it into a masterpiece of visual storytelling.",
+  "watchlist_shows_empty": "The watchlist, a lonely island in the vast sea of streaming services, beckons you to populate it with the shows that fuel your imagination. Add the series that capture your attention, and transform it into a vibrant hub of televisual exploration."
 }

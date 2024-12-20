@@ -8,11 +8,12 @@
   type WatchlistListProps = {
     title: string;
     type: MediaType;
+    emptyMessage: string;
   };
 
-  const { title, type }: WatchlistListProps = $props();
+  const { title, type, emptyMessage }: WatchlistListProps = $props();
 
-  const { list } = useWatchlistList({ type });
+  const { list, isLoading } = useWatchlistList({ type });
 </script>
 
 <SectionList
@@ -22,5 +23,13 @@
 >
   {#snippet item(media)}
     <MediaItem {type} {media} />
+  {/snippet}
+
+  {#snippet empty()}
+    {#if !$isLoading}
+      <p class="small secondary">
+        {emptyMessage}
+      </p>
+    {/if}
   {/snippet}
 </SectionList>

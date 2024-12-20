@@ -45,8 +45,10 @@ export function useWatchlistList(params: WatchListStoreProps) {
     query,
     ($query) => ($query.data ?? []).map((item) => item.mediaItem),
   );
+  const isLoading = derived(query, ($query) => $query.isLoading);
 
   return {
     list,
+    isLoading,
   };
 }

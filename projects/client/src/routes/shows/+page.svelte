@@ -27,7 +27,11 @@
   <TrendingList title={m.trending_now()} {type} />
   {#if isAuthorized}
     <RecommendedList title={m.your_recommendations()} {type} />
-    <WatchlistList title={m.watchlist()} {type} />
+    <WatchlistList
+      title={m.watchlist()}
+      emptyMessage={m.watchlist_shows_empty()}
+      {type}
+    />
   {/if}
   <AnticipatedList title={m.most_anticipated()} {type} />
   <PopularList title={m.most_popular()} {type} />
