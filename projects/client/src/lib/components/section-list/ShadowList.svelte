@@ -105,7 +105,7 @@
     justify-content: center;
     align-items: center;
 
-    :global(p) {
+    :global(> p) {
       width: 40%;
       text-align: center;
     }

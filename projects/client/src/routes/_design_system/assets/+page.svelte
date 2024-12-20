@@ -3,8 +3,8 @@
   import { page } from "$app/stores";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import MovieIcon from "$lib/components/icons/mobile/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/mobile/ShowIcon.svelte";
+  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
+  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import ShadowList from "$lib/components/section-list/ShadowList.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";

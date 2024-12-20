@@ -1,7 +1,7 @@
 <script lang="ts">
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
-  import MovieIcon from "$lib/components/icons/mobile/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/mobile/ShowIcon.svelte";
+  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
+  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
