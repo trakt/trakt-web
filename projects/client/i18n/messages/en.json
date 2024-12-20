@@ -98,5 +98,20 @@
   "tba_label": "TBA",
   "out_now_title": "Out Now",
   "related_movies_title": "Related Movies",
-  "related_shows_title": "Related Shows"
+  "related_shows_title": "Related Shows",
+  "about_placeholder_1": "This user is a mystery, shrouded in enigma... (or maybe just lazy? Who knows, this is the internet.)",
+  "about_placeholder_2": "Apparently, this user is too busy watching movies to write about themselves. (Fair enough, I can relate.)",
+  "about_placeholder_3": "This user's profile is a blank canvas, a void of information... (much like my social life. sigh)",
+  "about_placeholder_4": "Unravel the secrets of this user's identity... (if you dare)",
+  "about_placeholder_5": "What hidden depths lie beneath this empty profile? (The truth is out there...)",
+  "about_placeholder_6": "This user is a ghost in the machine, a digital phantom... (or maybe they just forgot to fill this out?)",
+  "about_placeholder_7": "Help this user out! Tell them to complete their profile. (They might even reward you with a virtual high five!)",
+  "about_placeholder_8": "This profile is begging for attention. Give it some love and tell the user to fill it out.",
+  "about_placeholder_9": "Don't be shy! Encourage this user to share their story. (Everyone has a story to tell, even if it's just about their favorite TV show.)",
+  "about_placeholder_10": "This user is like a character in a David Lynch film: enigmatic, mysterious, and possibly a figment of their own imagination.",
+  "about_placeholder_11": "This profile is as empty as a Blockbuster video store on a Friday night. (Remember those? Good times.)",
+  "about_placeholder_12": "This user is channeling their inner Tyler Durden: rejecting consumerism and embracing the void. (Or maybe they just haven't gotten around to filling this out yet.)",
+  "about_placeholder_13": "A stylized image: A funny illustration of a detective scratching their head in confusion, or a tumbleweed rolling across an empty profile page.",
+  "about_placeholder_14": "An interactive element: A button that allows users to send a friendly nudge to the profile owner, encouraging them to complete their profile.",
+  "about_placeholder_15": "A personalized message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalized placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'"
 }

@@ -98,5 +98,20 @@
   "tba_label": "À venir",
   "out_now_title": "En vedette",
   "related_movies_title": "Films apparentés",
-  "related_shows_title": "Séries apparentées"
+  "related_shows_title": "Séries apparentées",
+  "about_placeholder_1": "Cet utilisateur est un mystère, enveloppé d'énigme... (ou peut-être juste paresseux? Qui sait, c'est internet.)",
+  "about_placeholder_2": "Apparemment, cet utilisateur est trop occupé à regarder des productions pour écrire sur lui-même. (Tout à fait compréhensible, je peux le comprendre.)",
+  "about_placeholder_3": "Le profil de cet utilisateur est une toile vierge, un vide d'informations... (tout comme ma vie sociale. Soupir)",
+  "about_placeholder_4": "Dévoilez les secrets de l'identité de cet utilisateur... (si vous osez)",
+  "about_placeholder_5": "Quelles profondeurs cachées se cachent sous ce profil vide? (La vérité est là-bas...)",
+  "about_placeholder_6": "Cet utilisateur est un fantôme dans la machine, un fantôme numérique... (ou peut-être a-t-il simplement oublié de remplir ça?)",
+  "about_placeholder_7": "Aidez cet utilisateur! Dites-lui de compléter son profil. (Il pourrait même vous récompenser d'un applaudissement virtuel!)",
+  "about_placeholder_8": "Ce profil a besoin d'attention. Donnez-lui de l'amour et dites à l'utilisateur de le remplir.",
+  "about_placeholder_9": "N'hésitez pas! Encouragez cet utilisateur à partager son histoire. (Tout le monde a une histoire à raconter, même si c'est juste sur sa série préférée.)",
+  "about_placeholder_10": "Cet utilisateur est comme un personnage dans un film de David Lynch: énigmatique, mystérieux et peut-être un produit de son propre imagination.",
+  "about_placeholder_11": "Ce profil est aussi vide qu'un magasin de location de vidéos Blockbuster un vendredi soir. (Vous vous en souvenez? De bons moments.)",
+  "about_placeholder_12": "Cet utilisateur canalise son Tyler Durden intérieur: rejette le consumérisme et embrasse le vide. (Ou peut-être n'a-t-il tout simplement pas eu le temps de remplir ça encore.)",
+  "about_placeholder_13": "Une image stylisée: Une illustration amusante d'un détective se grattant la tête dans la confusion, ou un toupie qui traverse une page de profil vide.",
+  "about_placeholder_14": "Un élément interactif: Un bouton qui permet aux utilisateurs d'envoyer une petite tape amicale au propriétaire du profil, les encourageant à compléter leur profil.",
+  "about_placeholder_15": "Un message personnalisé: Si vous avez des informations sur l'utilisateur (par exemple, son historique de visionnage), vous pourriez utiliser ces informations pour générer un message plus personnalisé, comme 'Cet utilisateur adore les films d'horreur mais déteste rédiger des biographies. (Peut-être qu'il est trop occupé à se cacher des zombies?)'"
 }

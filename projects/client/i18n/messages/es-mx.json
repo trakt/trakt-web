@@ -98,5 +98,20 @@
   "tba_label": "Pendiente",
   "out_now_title": "En cartelera",
   "related_movies_title": "Películas relacionadas",
-  "related_shows_title": "Series relacionadas"
+  "related_shows_title": "Series relacionadas",
+  "about_placeholder_1": "Este usuario es una incógnita, envuelto en un enigma... (¿O tal vez solo sea perezoso? Quién sabe, esto es internet).",
+  "about_placeholder_2": "Al parecer, este usuario está demasiado ocupado viendo películas para escribir sobre sí mismo. (Está bien, lo entiendo).",
+  "about_placeholder_3": "El perfil de este usuario es un lienzo en blanco, un vacío de información... (igual que mi vida social. ¡Suspiro!).",
+  "about_placeholder_4": "Descubre los secretos de la identidad de este usuario... (si te atreves).",
+  "about_placeholder_5": "¿Qué profundidades ocultas se esconden bajo este perfil vacío? (La verdad está ahí afuera...).",
+  "about_placeholder_6": "Este usuario es un fantasma en la máquina, un fantasma digital... (¿O tal vez simplemente olvidó completar esto?).",
+  "about_placeholder_7": "¡Ayuda a este usuario! Dile que complete su perfil. (¡Quizás incluso te recompensen con una palmadita virtual!).",
+  "about_placeholder_8": "Este perfil está pidiendo atención. Dale algo de amor y dile al usuario que lo complete.",
+  "about_placeholder_9": "¡No seas tímido! Anima a este usuario a compartir su historia. (Todos tienen una historia que contar, incluso si es solo sobre su programa de televisión favorito).",
+  "about_placeholder_10": "Este usuario es como un personaje de una película de David Lynch: enigmático, misterioso y posiblemente producto de su propia imaginación.",
+  "about_placeholder_11": "Este perfil está tan vacío como una tienda de videos Blockbuster un viernes por la noche. (¿Recuerdan esas? Buenos tiempos).",
+  "about_placeholder_12": "Este usuario está canalizando a su Tyler Durden interior: rechazando el consumismo y abrazando el vacío. (O tal vez simplemente aún no ha tenido tiempo de completar esto).",
+  "about_placeholder_13": "Imagen estilizada: Una divertida ilustración de un detective rascándose la cabeza en confusión, o un remolino rodando por una página de perfil vacía.",
+  "about_placeholder_14": "Elemento interactivo: Un botón que permite a los usuarios enviar un amable recordatorio al propietario del perfil, animándolo a completar su perfil.",
+  "about_placeholder_15": "Mensaje personalizado: Si tienes alguna información sobre el usuario (por ejemplo, su historial de visualización), podrías usarla para generar un marcador de posición más personalizado, como 'A este usuario le encantan las películas de terror, pero odia escribir biografías. (¿Quizás esté demasiado ocupado escondiéndose de los zombies?)'"
 }
