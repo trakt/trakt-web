@@ -20,5 +20,6 @@ export const useUpNextEpisodes = () => {
 
   return {
     list: derived(query, ($query) => $query.data?.entries ?? []),
+    isLoading: derived(query, ($query) => $query.isLoading),
   };
 };
