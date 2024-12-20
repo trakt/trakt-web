@@ -113,7 +113,7 @@
               </div>
               <Footer />
             </div>
-            <RenderFor audience="all" device={["mobile"]}>
+            <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
               <MobileNavbar />
             </RenderFor>
             <SvelteQueryDevtools

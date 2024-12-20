@@ -41,7 +41,7 @@
       <SearchInput />
     </RenderFor>
     <div class="trakt-navbar-links">
-      <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         <Button
           href={UrlBuilder.home()}
           label={m.navbar_link_home_label()}
