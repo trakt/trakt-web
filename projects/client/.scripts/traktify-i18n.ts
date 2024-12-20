@@ -46,16 +46,7 @@ function generatePromptText({
           Provide the translated JSON in a valid format, like this:
 
           {
-            "type": "object",
-            "properties": {
-              "movie": {
-                "type": "string"
-              },
-              "show": {
-                "type": "string"
-              }
-              // ... other properties
-            }
+            "translation_key": "translated text",
           }
 
           Here's the JSON to translate: ${JSON.stringify(jsonData)}`;
