@@ -96,5 +96,7 @@
   "logout": "Logout",
   "coming_soon_title": "Coming Soon",
   "tba_label": "TBA",
-  "out_now_title": "Out Now"
+  "out_now_title": "Out Now",
+  "related_movies_title": "Related Movies",
+  "related_shows_title": "Related Shows"
 }

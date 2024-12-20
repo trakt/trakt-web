@@ -96,5 +96,7 @@
   "logout": "ログアウト",
   "coming_soon_title": "もうすぐ公開",
   "tba_label": "未定",
-  "out_now_title": "今すぐ視聴可能"
+  "out_now_title": "今すぐ視聴可能",
+  "related_movies_title": "関連する作品",
+  "related_shows_title": "関連する番組"
 }

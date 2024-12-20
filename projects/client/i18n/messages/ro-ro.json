@@ -96,5 +96,7 @@
   "logout": "Deconectare",
   "coming_soon_title": "Viitoarele premiere",
   "tba_label": "Va urma",
-  "out_now_title": "Acum disponibile"
+  "out_now_title": "Acum disponibile",
+  "related_movies_title": "Filme asemănătoare",
+  "related_shows_title": "Seriale asemănătoare"
 }

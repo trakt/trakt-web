@@ -96,5 +96,7 @@
   "logout": "Abmelden",
   "coming_soon_title": "Demnächst verfügbar",
   "tba_label": "Noch nicht bekannt",
-  "out_now_title": "Jetzt verfügbar"
+  "out_now_title": "Jetzt verfügbar",
+  "related_movies_title": "Verwandte Filme",
+  "related_shows_title": "Verwandte Serien"
 }

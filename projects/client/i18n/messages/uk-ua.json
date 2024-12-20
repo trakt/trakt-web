@@ -96,5 +96,7 @@
   "logout": "Вийти",
   "coming_soon_title": "Скоро з'явиться",
   "tba_label": "Наразі невідомо",
-  "out_now_title": "Зараз доступні"
+  "out_now_title": "Зараз доступні",
+  "related_movies_title": "Пов'язані фільми",
+  "related_shows_title": "Пов'язані серіали"
 }

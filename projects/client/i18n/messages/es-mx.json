@@ -96,5 +96,7 @@
   "logout": "Cerrar sesión",
   "coming_soon_title": "Próximamente",
   "tba_label": "Pendiente",
-  "out_now_title": "En cartelera"
+  "out_now_title": "En cartelera",
+  "related_movies_title": "Películas relacionadas",
+  "related_shows_title": "Series relacionadas"
 }

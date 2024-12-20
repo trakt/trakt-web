@@ -96,5 +96,7 @@
   "logout": "Sair",
   "coming_soon_title": "Em Breve",
   "tba_label": "Ainda por vir",
-  "out_now_title": "Em alta agora"
+  "out_now_title": "Em alta agora",
+  "related_movies_title": "Filmes Relacionados",
+  "related_shows_title": "Séries Relacionadas"
 }

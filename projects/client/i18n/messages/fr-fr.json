@@ -96,5 +96,7 @@
   "logout": "Déconnexion",
   "coming_soon_title": "Bientôt disponible",
   "tba_label": "À venir",
-  "out_now_title": "Sorties cinéma"
+  "out_now_title": "Sorties cinéma",
+  "related_movies_title": "Films apparentés",
+  "related_shows_title": "Séries apparentées"
 }
