@@ -10,9 +10,10 @@
     title: string;
     items: T[];
     item: Snippet<[T]>;
+    empty?: Snippet;
   };
 
-  const { items, title, item }: SectionListProps<T> = $props();
+  const { items, title, item, empty }: SectionListProps<T> = $props();
 
   const scrollContainer = writable<HTMLDivElement>();
   const scrollX = writable({ left: 0, right: 0 });
@@ -48,7 +49,7 @@
   const isRightScrollDisabled = $derived($scrollX.right <= 0);
 </script>
 
-<ShadowList {title} {items} {item} {scrollX} {scrollContainer}>
+<ShadowList {title} {items} {item} {empty} {scrollX} {scrollContainer}>
   {#snippet actions()}
     <ActionButton
       onclick={scrollToLeft}

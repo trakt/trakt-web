@@ -1,7 +1,7 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
-  import { type Snippet } from "svelte";
+  import { onMount, type Snippet } from "svelte";
   import { writable, type Writable } from "svelte/store";
   import { scrollTracking } from "./scrollTracking";
 
@@ -9,6 +9,7 @@
     title: string;
     items: T[];
     item: Snippet<[T]>;
+    empty?: Snippet;
     actions?: Snippet;
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
@@ -21,6 +22,7 @@
     scrollContainer = writable(),
     item,
     actions,
+    empty,
   }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
@@ -37,6 +39,11 @@
   );
 
   const isVisible = writable(false);
+  const isMounted = writable(false);
+
+  onMount(() => {
+    isMounted.set(true);
+  });
 </script>
 
 <section
@@ -58,25 +65,50 @@
     style:--left-shadow-opacity={leftShadowIntensity}
     style:--right-shadow-opacity={rightShadowIntensity}
   >
-    <div
-      bind:this={$scrollContainer}
-      use:scrollTracking={scrollX}
-      class="section-list-horizontal-scroll"
-    >
-      {#each items as i (i.id)}
-        {@render item(i)}
-      {/each}
-    </div>
+    {#if items.length > 0}
+      <div
+        bind:this={$scrollContainer}
+        use:scrollTracking={scrollX}
+        class="section-list-horizontal-scroll"
+      >
+        {#each items as i (i.id)}
+          {@render item(i)}
+        {/each}
+      </div>
+    {:else if empty != null && $isMounted}
+      <div class="section-list-empty-state">
+        {@render empty()}
+      </div>
+    {/if}
   </div>
 </section>
 
 <style>
+  .section-list-container,
+  .section-list,
+  .section-list-empty-state {
+    min-height: var(--height-section-list);
+  }
+
   .section-list-container {
     display: flex;
     flex-direction: column;
     gap: var(--ni-32);
+  }
 
-    min-height: var(--height-section-list);
+  .section-list-empty-state {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-16);
+    justify-content: center;
+    align-items: center;
+
+    :global(p) {
+      width: 40%;
+      text-align: center;
+    }
   }
 
   .section-list-header {
@@ -180,7 +212,6 @@
     padding: 0 var(--layout-distance-side);
 
     display: flex;
-    height: var(--height-section-list);
     gap: var(--ni-8);
     overflow-x: auto;
     scroll-snap-type: x proximity;
