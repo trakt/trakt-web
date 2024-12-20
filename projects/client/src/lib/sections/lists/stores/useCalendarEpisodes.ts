@@ -31,5 +31,7 @@ export function useCalendarEpisodes() {
       }),
   );
 
-  return calendar;
+  const isLoading = derived(query, ($query) => $query.isLoading);
+
+  return { calendar, isLoading };
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Button from "$lib/components/buttons/Button.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import UpcomingEpisode from "$lib/components/episode/upcoming/UpcomingEpisode.svelte";
   import SectionList from "$lib/components/section-list/SectionList.svelte";
@@ -7,7 +8,7 @@
   import { useCalendarEpisodes } from "./stores/useCalendarEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
-  const calendar = useCalendarEpisodes();
+  const { calendar, isLoading } = useCalendarEpisodes();
 </script>
 
 <SectionList
@@ -27,5 +28,18 @@
       type={entry.type}
       showHref={UrlBuilder.show(entry.show.slug)}
     />
+  {/snippet}
+  {#snippet empty()}
+    {#if !$isLoading}
+      <p class="small">{m.upcoming_schedule_empty()}</p>
+      <Button
+        href={UrlBuilder.shows()}
+        label={m.navbar_link_shows_label()}
+        style="ghost"
+        variant="primary"
+      >
+        {m.navbar_link_shows()}
+      </Button>
+    {/if}
   {/snippet}
 </SectionList>
