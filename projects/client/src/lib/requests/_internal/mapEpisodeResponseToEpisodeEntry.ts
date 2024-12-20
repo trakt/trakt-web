@@ -1,4 +1,4 @@
-import type { ShowsResponse, UpNextResponse } from '$lib/api.ts';
+import type { CalendarShowListResponse, UpNextResponse } from '$lib/api.ts';
 import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
 import {
   type EpisodeType,
@@ -10,7 +10,7 @@ import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 
 type EpisodeResponse =
   | UpNextResponse[0]['progress']['next_episode']
-  | ShowsResponse[0]['episode'];
+  | CalendarShowListResponse[0]['episode'];
 
 export function mapEpisodeResponseToEpisodeEntry(
   episode: EpisodeResponse,
