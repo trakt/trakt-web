@@ -126,7 +126,7 @@
     .trakt-search-results {
       position: absolute;
       min-height: calc(var(--height-result-item) * 7);
-      min-width: 100%;
+      min-width: var(--ni-280);
 
       top: 120%;
       left: 0;
