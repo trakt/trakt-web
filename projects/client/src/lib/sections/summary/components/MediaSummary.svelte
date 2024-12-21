@@ -7,6 +7,7 @@
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import type { WatchlistButtonProps } from "$lib/components/buttons/watchlist/WatchlistButtonProps";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
+  import ThirdPartyRatingsList from "$lib/components/summary/ThirdPartyRatingsList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaStats } from "$lib/models/MediaStats";
   import type { MediaType } from "$lib/models/MediaType";
@@ -95,6 +96,7 @@
 
 <MediaSummaryContainer>
   <MediaStatsList {stats} />
+  <ThirdPartyRatingsList {ratings} />
 </MediaSummaryContainer>
 
 <style>
