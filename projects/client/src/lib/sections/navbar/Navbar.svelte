@@ -5,6 +5,7 @@
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import BetaBadge from "$lib/sections/navbar/BetaBadge.svelte";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
@@ -31,6 +32,7 @@
       <Link href={UrlBuilder.home()}>
         <RenderFor audience="authenticated">
           <LogoMark />
+          <BetaBadge />
         </RenderFor>
         <RenderFor audience="public">
           <Logo />
