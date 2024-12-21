@@ -121,5 +121,6 @@
   "out_now_empty": "Sua mente é um monólogo caótico de trailers de filmes e datas de lançamento? Imponha alguma ordem no caos com sua lista de observação. Adicione aquelas joias cinematográficas, e nós seremos seu serviço de lembrete pessoal, garantindo que você nunca perca uma estreia.",
   "coming_soon_empty": "O futuro é um vasto campo inexplorado, esperando por você para explorar. Adicione os próximos filmes que te interessarem, e nós seremos seus guias através do labirinto de datas de lançamento e trailers.",
   "find_movies_link": "Encontre Filmes",
-  "find_shows_link": "Encontre Séries"
+  "find_shows_link": "Encontre Séries",
+  "active_watchers": "{count} assistindo"
 }

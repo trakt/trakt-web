@@ -1,12 +1,13 @@
 <script lang="ts">
   import GenreList from "$lib/components/summary/GenreList.svelte";
-  import RatingList from "$lib/components/summary/RatingList.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import MediaMetaInfo from "./MediaMetaInfo.svelte";
   import type { MediaSummary } from "./MediaSummary";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
   import YoutubeButton from "./YoutubeButton.svelte";
 
-  const { media, ratings, intl }: MediaSummaryProps<MediaSummary> = $props();
+  const { media, ratings, watchers, intl }: MediaSummaryProps<MediaSummary> =
+    $props();
   const isLargeDisplay = useMedia(WellKnownMediaQuery.desktop);
   const genreCount = $derived($isLargeDisplay ? -1 : 3);
 </script>
@@ -16,7 +17,7 @@
   <GenreList genres={media.genres.slice(0, genreCount)} />
 </div>
 
-<RatingList {ratings} />
+<MediaMetaInfo {media} {ratings} {watchers} />
 
 <p class="trakt-media-overview secondary">{intl.overview}</p>
 

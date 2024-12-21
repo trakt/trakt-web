@@ -121,5 +121,6 @@
   "out_now_empty": "Steht Ihr Geist vor einer verworrenen Collage von Filmtrailern und Veröffentlichungsterminen? Verleihen Sie der Unordnung mit Ihrer Wunschliste etwas Struktur. Fügen Sie diese filmischen Juwelen hinzu, und wir werden Ihr persönlicher Erinnerungsdienst sein, damit Sie keine Premiere verpassen.",
   "coming_soon_empty": "Die Zukunft ist ein riesiges, unerforschtes Gebiet, das darauf wartet, von dir erkundet zu werden. Füge die anstehenden Inhalte hinzu, die deine Aufmerksamkeit erregen, und wir werden dein Führer durch das Labyrinth der Veröffentlichungsdaten und Trailer sein.",
   "find_movies_link": "Filme finden",
-  "find_shows_link": "Serien finden"
+  "find_shows_link": "Serien finden",
+  "active_watchers": "{count} schauen gerade"
 }

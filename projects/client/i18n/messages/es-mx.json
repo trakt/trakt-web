@@ -121,5 +121,6 @@
   "out_now_empty": "¿Tu mente es un montaje caótico de avances de películas y fechas de estreno? Impón orden al caos con tu lista de reproducción. Agrega esas joyas cinematográficas, y seremos tu servicio de recordatorio personal, asegurándonos de que nunca te pierdas un estreno.",
   "coming_soon_empty": "El futuro es una vasta extensión de territorio inexplorado, esperando que lo explores. Agrega las próximas películas que te llamen la atención, y seremos tus guías a través del laberinto de fechas de estreno y tráilers.",
   "find_movies_link": "Encuentra Películas",
-  "find_shows_link": "Encuentra Series"
+  "find_shows_link": "Encuentra Series",
+  "active_watchers": "{count} disfrutando"
 }

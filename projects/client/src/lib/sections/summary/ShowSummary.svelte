@@ -15,7 +15,8 @@
     stats: MediaStats;
   };
 
-  const { media, ratings, stats, intl, progress }: ShowSummaryProps = $props();
+  const { media, ratings, stats, watchers, intl, progress }: ShowSummaryProps =
+    $props();
 </script>
 
 {#snippet contextualContent()}
@@ -30,6 +31,7 @@
   {media}
   {ratings}
   {stats}
+  {watchers}
   {intl}
   type="show"
   {contextualContent}

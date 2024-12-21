@@ -121,5 +121,6 @@
   "out_now_empty": "Votre esprit est-il un montage chaotique de bandes-annonces de films et de dates de sortie ? Imposez de l'ordre au chaos avec votre liste de visionnage. Ajoutez ces joyaux cinématographiques, et nous serons votre service de rappel personnel, vous assurant de ne manquer aucune première.",
   "coming_soon_empty": "L'avenir est un vaste territoire inexploré, prêt à être exploré. Ajoutez les prochains films qui vous attirent, et nous serons votre guide à travers le dédale des dates de sortie et des bandes-annonces.",
   "find_movies_link": "Trouver des films",
-  "find_shows_link": "Trouver des séries"
+  "find_shows_link": "Trouver des séries",
+  "active_watchers": "{count} en train de regarder"
 }

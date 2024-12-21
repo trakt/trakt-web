@@ -121,5 +121,6 @@
   "out_now_empty": "Is your mind a chaotic montage of movie trailers and release dates? Impose some order on the chaos with your watchlist. Add those cinematic gems, and we'll be your personal reminder service, ensuring you never miss a premiere.",
   "coming_soon_empty": "The future is a vast expanse of uncharted territory, waiting for you to explore. Add the upcoming movies that catch your eye, and we'll be your guide through the maze of release dates and trailers.",
   "find_movies_link": "Find Movies",
-  "find_shows_link": "Find Shows"
+  "find_shows_link": "Find Shows",
+  "active_watchers": "{count} watching"
 }

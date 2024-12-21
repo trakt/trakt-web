@@ -121,5 +121,6 @@
   "out_now_empty": "Îți învârte capul un colaj de trailere și date de lansare? Impune ordine cu lista ta de urmărit. Adaugă acele perle cinematografice, iar noi vom fi asistentul tău personal, asigurându-te că nu ratezi nicio premieră.",
   "coming_soon_empty": "Viitorul e un spatiu imens, nedescoperit, asteptand sa fie explorat. Adauga filmele viitoare care iti atrag atentia, si noi vom fi ghidul tau prin labirintul de date de lansare si trailere.",
   "find_movies_link": "Găsește Filme",
-  "find_shows_link": "Găsește Serialuri"
+  "find_shows_link": "Găsește Serialuri",
+  "active_watchers": "{count} urmăresc"
 }

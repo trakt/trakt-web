@@ -11,10 +11,11 @@
     media,
     ratings,
     stats,
+    watchers,
     intl,
   }: MediaSummaryProps<MovieSummary> & { stats: MediaStats } = $props();
 </script>
 
-<MediaSummary {media} {ratings} {stats} {intl} type="movie" />
+<MediaSummary {media} {ratings} {stats} {watchers} {intl} type="movie" />
 
 <RelatedList title={m.related_movies_title()} slug={media.slug} type="movie" />

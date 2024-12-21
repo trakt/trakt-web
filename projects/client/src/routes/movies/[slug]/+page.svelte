@@ -5,7 +5,9 @@
   import MovieSummary from "$lib/sections/summary/MovieSummary.svelte";
   import { useMovie } from "./useMovie";
 
-  const { movie, ratings, stats, intl } = $derived(useMovie($page.params.slug));
+  const { movie, ratings, stats, intl, watchers } = $derived(
+    useMovie($page.params.slug),
+  );
 </script>
 
 <TraktPage
@@ -18,6 +20,7 @@
     <MovieSummary
       media={$movie}
       ratings={$ratings}
+      watchers={$watchers}
       stats={$stats}
       intl={$intl}
     />

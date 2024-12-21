@@ -26,6 +26,7 @@
     intl,
     contextualContent,
     stats,
+    watchers,
   }: MediaSummaryProps<MediaSummary> & {
     type: MediaType;
     contextualContent?: Snippet;
@@ -81,7 +82,7 @@
     </SummaryPoster>
   {/snippet}
 
-  <MediaSummaryInfo {media} {ratings} {intl} />
+  <MediaSummaryInfo {media} {ratings} {watchers} {intl} />
 
   <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
     <div class="trakt-media-action-container">

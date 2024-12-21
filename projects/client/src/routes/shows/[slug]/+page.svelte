@@ -4,7 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { useShow } from "./useShow";
-  const { show, intl, ratings, stats, progress } = $derived(
+  const { show, intl, ratings, stats, progress, watchers } = $derived(
     useShow($page.params.slug),
   );
 </script>
@@ -19,6 +19,7 @@
     <ShowSummary
       media={$show}
       ratings={$ratings}
+      watchers={$watchers}
       stats={$stats}
       intl={$intl}
       progress={$progress}
