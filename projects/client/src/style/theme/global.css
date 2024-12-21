@@ -29,6 +29,15 @@
   --color-text-finale-tag: var(--shade-10);
   --color-background-finale-tag: var(--red-700);
 
+  --color-text-certification-tag: var(--shade-10);
+  --color-background-certification-tag: var(--purple-400);
+
+  --color-text-year-tag: var(--shade-10);
+  --color-background-year-tag: var(--shade-500);
+
+  --color-text-watching-tag: var(--shade-900);
+  --color-background-watching-tag: var(--shade-10);
+
   --color-surface-button-primary: var(--purple-500);
   --color-foreground-button-primary: var(--shade-10);
 
