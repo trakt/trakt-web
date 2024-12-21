@@ -33,4 +33,5 @@ export const MovieHereticMappedMock = {
   'title': 'Heretic',
   'trailer': 'https://youtube.com/watch?v=jpWUOxRozZg',
   'airedDate': '2024-11-08T00:00:00.000Z',
+  'certification': 'R',
 };

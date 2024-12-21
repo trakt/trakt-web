@@ -75,5 +75,6 @@ export function mapShowResponseToShowSummary(
       DEFAULT_TRAILER,
     ),
     airedDate: new Date(show.first_aired ?? MAX_DATE),
+    certification: show.certification,
   };
 }

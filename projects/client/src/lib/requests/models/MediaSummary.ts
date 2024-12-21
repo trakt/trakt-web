@@ -25,4 +25,5 @@ export type MediaSummary = {
   overview: string;
   trailer: string;
   airedDate: Date;
+  certification?: string;
 };

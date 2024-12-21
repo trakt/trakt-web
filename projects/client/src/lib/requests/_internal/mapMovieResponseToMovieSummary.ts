@@ -1,4 +1,4 @@
-import { type MovieResponse } from '$lib/api.ts';
+import type { MovieCertificationResponse, MovieResponse } from '$lib/api.ts';
 import { mediumUrl } from '$lib/requests/_internal/mediumUrl.ts';
 import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
@@ -9,6 +9,17 @@ import {
 } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+
+function mapMovieCertificationResponse(
+  certification?: MovieCertificationResponse,
+) {
+  const hasValidCertification = certification && certification !== 'undefined';
+  if (!hasValidCertification) {
+    return undefined;
+  }
+
+  return certification;
+}
 
 export function mapMovieResponseToMovieSummary(
   movie: MovieResponse,
@@ -67,5 +78,6 @@ export function mapMovieResponseToMovieSummary(
       DEFAULT_TRAILER,
     ),
     airedDate: new Date(movie.released ?? MAX_DATE),
+    certification: mapMovieCertificationResponse(movie.certification),
   };
 }
