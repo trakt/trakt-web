@@ -19,11 +19,9 @@
 
 <Button
   label={i18n.label({ isWatchlisted, title })}
-  variant="custom"
+  color="blue"
   onclick={handler}
   disabled={isWatchlistUpdating}
-  --color-background-button="var(--blue-200)"
-  --color-foreground-button="var(--blue-800)"
 >
   {i18n.text({ isWatchlisted, title })}
   {#snippet icon()}

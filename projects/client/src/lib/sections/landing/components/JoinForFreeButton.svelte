@@ -7,7 +7,12 @@
   const { url } = useAuth();
 </script>
 
-<Button href={$url} label={m.join_trakt_button_label()} style="flat">
+<Button
+  color="purple"
+  href={$url}
+  label={m.join_trakt_button_label()}
+  style="flat"
+>
   {m.join_trakt_for_free_button()}
   {#snippet icon()}
     <CaretRightIcon />

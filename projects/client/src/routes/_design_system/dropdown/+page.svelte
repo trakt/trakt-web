@@ -1,14 +1,21 @@
-<script>
+<script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
-  import VipIcon from "$lib/components/icons/VipIcon.svelte";
+  import type { TraktDropdownListProps } from "$lib/components/dropdown/TraktDropdownListProps";
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
+
+  const colors: TraktDropdownListProps["color"][] = ["purple", "red", "blue"];
+  const variants: NonNullable<TraktDropdownListProps["variant"]>[] = [
+    "primary",
+    "secondary",
+  ];
+  const styles: TraktDropdownListProps["style"][] = ["textured", "flat"];
 </script>
 
 {#snippet items()}
   <DropdownItem
     onclick={() => {
-      console.log("Get Schiwfty!");
+      console.log("Get Schwifty!");
     }}
   >
     Click me
@@ -28,49 +35,46 @@
   <h1>Dropdowns</h1>
 
   <div class="button-display">
-    <section>
-      <h2>Primary</h2>
-      <DropdownList {items} label="This is the primary dropdown">
-        Icon
-        {#snippet icon()}
-          <WatchNowIcon />
-        {/snippet}
-      </DropdownList>
+    {#each styles as style}
+      <section>
+        <h2 class="capitalize">{style}</h2>
+        {#each colors as color}
+          <DropdownList
+            {items}
+            {color}
+            {style}
+            label={`This is the ${style} ${color} dropdown`}
+          >
+            Icon
+            {#snippet icon()}
+              <WatchNowIcon />
+            {/snippet}
+          </DropdownList>
 
-      <DropdownList {items} label="This is the primary dropdown"
-        >primary</DropdownList
-      >
+          {#each variants as variant}
+            <DropdownList
+              {color}
+              {variant}
+              {style}
+              {items}
+              label={`This is the ${variant} ${style} ${color} dropdown`}
+            >
+              {variant}
+            </DropdownList>
 
-      <DropdownList
-        {items}
-        label="This is the primary dropdown in a disabled state"
-        disabled
-      >
-        disabled
-      </DropdownList>
-    </section>
-
-    <section>
-      <h2>VIP</h2>
-      <DropdownList {items} variant="vip" label="This is the VIP dropdown">
-        VIP
-        {#snippet icon()}
-          <VipIcon />
-        {/snippet}
-      </DropdownList>
-
-      <DropdownList
-        {items}
-        variant="vip"
-        label="This is the VIP dropdown in a disabled state"
-        disabled
-      >
-        VIP disabled
-        {#snippet icon()}
-          <VipIcon />
-        {/snippet}
-      </DropdownList>
-    </section>
+            <DropdownList
+              {items}
+              {variant}
+              {style}
+              label={`This is the ${variant} ${style} ${color} dropdown in a disabled state`}
+              disabled
+            >
+              {variant} Disabled
+            </DropdownList>
+          {/each}
+        {/each}
+      </section>
+    {/each}
   </div>
 </main>
 

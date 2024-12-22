@@ -11,5 +11,8 @@
   label={m.join_trakt_button_label()}
   style="flat"
   size="small"
-  variant="primary">{m.join_trakt_button()}</Button
+  color="purple"
+  variant="primary"
 >
+  {m.join_trakt_button()}
+</Button>

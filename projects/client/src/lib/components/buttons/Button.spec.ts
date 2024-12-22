@@ -88,6 +88,7 @@ describe('Button', () => {
         variant: 'secondary',
         size: 'small',
         style: 'textured',
+        color: 'red',
       });
 
       const button = screen.getByRole('button');
@@ -95,6 +96,7 @@ describe('Button', () => {
       expect(button).toHaveAttribute('data-style', 'textured');
       expect(button).toHaveAttribute('data-size', 'small');
       expect(button).toHaveAttribute('data-alignment', 'centered');
+      expect(button).toHaveAttribute('data-color', 'red');
     });
 
     it('should set button as disabled', () => {

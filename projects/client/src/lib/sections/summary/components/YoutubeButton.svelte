@@ -10,7 +10,7 @@
   const isDefaultTrailer = $derived(trailer === DEFAULT_TRAILER);
 </script>
 
-<Button href={trailer} target="_blank" label={"Trailer"} variant="vip">
+<Button href={trailer} target="_blank" label={"Trailer"} color="red">
   {m.watch_the_trailer()}
   {#snippet subtitle()}
     YouTube

@@ -38,16 +38,25 @@
   --color-text-watching-tag: var(--shade-900);
   --color-background-watching-tag: var(--shade-10);
 
-  --color-surface-button-primary: var(--purple-500);
-  --color-foreground-button-primary: var(--shade-10);
-
-  --color-surface-button-secondary: var(--purple-50);
-  --color-foreground-button-secondary: var(--purple-400);
-  --color-border-button-secondary: var(--purple-500);
-
-  --color-surface-button-vip: var(--red-500);
-  --color-foreground-button-vip: var(--shade-10);
-
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--red-500);
+
+  /**
+   * Buttons
+   */
+  --color-background-purple: var(--purple-500);
+  --color-foreground-purple: var(--purple-50);
+  --color-background-purple-hover: var(--purple-700);
+
+  --color-background-red: var(--red-500);
+  --color-foreground-red: var(--red-50);
+  --color-background-red-hover: var(--red-700);
+
+  --color-background-blue: var(--blue-700);
+  --color-foreground-blue: var(--blue-50);
+  --color-background-blue-hover: var(--blue-800);
+
+  --color-background-default: var(--shade-800);
+  --color-foreground-default: var(--shade-50);
+  --color-background-default-hover: var(--shade-500);
 }

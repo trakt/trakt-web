@@ -13,6 +13,7 @@
     children,
     variant = "primary",
     style = "flat",
+    color = "custom",
     icon,
     subtitle,
     size = "normal",
@@ -54,6 +55,7 @@
     data-variant={variant}
     data-alignment={alignment}
     data-style={style}
+    data-color={color}
     data-size={size}
     {...props}
   >
@@ -68,6 +70,7 @@
     data-variant={variant}
     data-alignment={alignment}
     data-style={style}
+    data-color={color}
     data-size={size}
     {...props}
   >
@@ -75,7 +78,7 @@
   </button>
 {/if}
 
-<style>
+<style lang="scss">
   .trakt-button {
     --color-background-button-outline: color-mix(
       in srgb,
@@ -91,12 +94,6 @@
       white 65%
     );
 
-    --color-background-button-disabled-default: color-mix(
-      in srgb,
-      var(--color-background-button) 10%,
-      grey 90%
-    );
-
     --color-highlight: color-mix(in srgb, white 52%, transparent 48%);
     --color-shadow: color-mix(in srgb, black 32%, transparent 68%);
 
@@ -108,23 +105,43 @@
       }
     }
 
-    &[data-variant="primary"] {
-      --color-background-button: var(--color-surface-button-primary);
-      --color-foreground-button: var(--color-foreground-button-primary);
-      --color-background-button-disabled: var(--color-surface-button-disabled);
-    }
+    @each $color in "purple", "red", "blue", "default", "custom" {
+      &[data-color="#{$color}"] {
+        $background-color: var(--color-background-#{$color});
+        $foreground-color: var(--color-foreground-#{$color});
 
-    &[data-variant="vip"] {
-      --color-background-button: var(--color-surface-button-vip);
-      --color-foreground-button: var(--color-foreground-button-vip);
-      --color-background-button-disabled: var(--color-surface-button-disabled);
-    }
+        &[data-variant="primary"] {
+          --color-background-button: #{$background-color};
+          --color-foreground-button: #{$foreground-color};
 
-    &[data-variant="secondary"] {
-      --color-background-button: var(--color-surface-button-secondary);
-      --color-foreground-button: var(--color-foreground-button-secondary);
-      --color-background-button-outline: var(--color-border-button-secondary);
-      --color-background-button-disabled: var(--color-surface-button-disabled);
+          &:not([data-style="textured"]):not([data-style="ghost"]) {
+            &:hover,
+            &:focus-visible {
+              --color-foreground-button: #{$background-color};
+              --color-background-button: #{$foreground-color};
+            }
+          }
+        }
+
+        &[data-variant="secondary"] {
+          --color-background-button: #{$foreground-color};
+          --color-foreground-button: #{$background-color};
+
+          &:not([data-style="textured"]):not([data-style="ghost"]) {
+            &:hover,
+            &:focus-visible {
+              --color-foreground-button: #{$foreground-color};
+              --color-background-button: #{$background-color};
+            }
+          }
+        }
+
+        &:focus-visible {
+          outline: var(--border-thickness-xs)
+            solid
+            var(--color-foreground-button);
+        }
+      }
     }
 
     &[data-alignment="default"] {
@@ -139,6 +156,7 @@
     display: flex;
     align-items: center;
     gap: var(--ni-16);
+    padding: var(--ni-16);
     flex-shrink: 0;
     cursor: pointer;
     user-select: none;
@@ -218,10 +236,7 @@
     &[disabled] {
       cursor: not-allowed;
       color: var(--color-foreground-button-disabled);
-      background: var(
-        --color-background-button-disabled,
-        var(--color-background-button-disabled-default)
-      );
+      background: var(--color-surface-button-disabled);
 
       &::before {
         display: none;
@@ -229,7 +244,6 @@
     }
 
     &[data-style="ghost"] {
-      padding: var(--ni-16);
       transform: scale(calc(var(--scale-factor-button) * 0.9));
       background: transparent;
       color: inherit;
@@ -243,11 +257,21 @@
       }
 
       &:hover:not([disabled]) {
-        background: color-mix(
-          in srgb,
-          var(--color-background-button) 60%,
-          transparent 40%
-        );
+        &[data-variant="primary"] {
+          background: color-mix(
+            in srgb,
+            var(--color-background-button) 60%,
+            transparent 40%
+          );
+        }
+
+        &[data-variant="secondary"] {
+          background: color-mix(
+            in srgb,
+            var(--color-foreground-button) 10%,
+            transparent 90%
+          );
+        }
       }
 
       &:active:not([disabled]) {
@@ -256,7 +280,6 @@
     }
 
     &[data-style="textured"] {
-      padding: var(--ni-16);
       padding-top: var(--ni-12);
 
       &,
@@ -286,21 +309,6 @@
     }
 
     &[data-style="flat"] {
-      padding: var(--ni-16);
-      &[data-variant="primary"] {
-        &:hover:not([disabled]) {
-          background: var(--color-surface-button-secondary);
-          color: var(--color-foreground-button-secondary);
-        }
-      }
-
-      &[data-variant="secondary"] {
-        &:hover:not([disabled]) {
-          background: var(--color-surface-button-primary);
-          color: var(--color-foreground-button-primary);
-        }
-      }
-
       &:active:not([disabled]) {
         transform: scale(calc(var(--scale-factor-button) * 0.97));
       }

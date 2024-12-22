@@ -21,6 +21,7 @@
         target="_blank"
         label="This is the primary textured link"
         style="textured"
+        color="purple"
       >
         Textured Icon
         {#snippet icon()}
@@ -33,6 +34,7 @@
         target="_blank"
         label="This is the primary textured link"
         style="flat"
+        color="purple"
       >
         Flat primary
       </Button>
@@ -42,6 +44,7 @@
         target="_blank"
         label="This is the primary textured link in a disabled"
         style="ghost"
+        color="purple"
       >
         Ghost primary
       </Button>
@@ -85,6 +88,7 @@
         target="_blank"
         label="This is the primary textured link"
         style="textured"
+        color="purple"
       >
         Textured Icon
         {#snippet icon()}
@@ -97,6 +101,7 @@
         target="_blank"
         label="This is the primary textured link"
         style="flat"
+        color="purple"
       >
         Flat primary
       </Button>
@@ -106,6 +111,7 @@
         target="_blank"
         label="This is the primary textured link in a disabled"
         style="ghost"
+        color="purple"
       >
         Ghost primary
       </Button>
@@ -146,6 +152,7 @@
 
       <Button
         href="/"
+        color="purple"
         target="_blank"
         label="This is the primary textured link"
         style="textured"
@@ -158,6 +165,7 @@
 
       <Button
         href="/"
+        color="purple"
         target="_blank"
         label="This is the primary textured link"
         style="flat"
@@ -167,6 +175,7 @@
 
       <Button
         href="/"
+        color="purple"
         target="_blank"
         label="This is the primary textured link in a disabled"
         style="ghost"

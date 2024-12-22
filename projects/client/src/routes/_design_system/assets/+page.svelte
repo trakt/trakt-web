@@ -67,7 +67,7 @@
   <div class="asset-navigation">
     <Button
       href="/_design_system/assets?type=movie"
-      variant="vip"
+      color="red"
       style="flat"
       size="small"
       label="View movie assets"
@@ -81,7 +81,7 @@
 
     <Button
       href="/_design_system/assets?type=show"
-      variant="vip"
+      color="red"
       style="flat"
       size="small"
       label="View show assets"

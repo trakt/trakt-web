@@ -16,12 +16,10 @@
 
 <Button
   label={i18n.label({ title })}
-  variant="custom"
+  color="purple"
   onclick={onWatch}
   disabled={isMarkingAsWatched || isWatched}
   {...props}
-  --color-background-button="var(--purple-100)"
-  --color-foreground-button="var(--purple-600)"
 >
   {i18n.text({ title })}
   {#snippet icon()}

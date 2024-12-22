@@ -15,7 +15,7 @@
   const { user } = useUser();
   const { logout } = useAuth();
   const isVip = $derived(!!$user?.isVip);
-  const variant = $derived(isVip ? "vip" : "primary");
+  const color = $derived(isVip ? "red" : "purple");
   const style = $derived(isVip ? "textured" : "flat");
 </script>
 
@@ -24,7 +24,7 @@
     <Button
       href={UrlBuilder.vip()}
       label={m.get_vip_label()}
-      variant="vip"
+      color="red"
       style="textured"
     >
       {m.get_vip()}
@@ -43,8 +43,9 @@
 
 <DropdownList
   label={m.user_menu_toggle_label()}
-  {variant}
+  variant="primary"
   {style}
+  {color}
   text="capitalize"
   size="small"
 >

@@ -1,7 +1,8 @@
 import type { Snippet } from 'svelte';
 
 export type TraktButtonProps = ButtonProps & {
-  variant?: 'primary' | 'secondary' | 'vip' | 'custom';
+  color?: 'purple' | 'red' | 'blue' | 'custom';
+  variant?: 'primary' | 'secondary';
   style?: 'textured' | 'flat' | 'ghost';
   icon?: Snippet;
   subtitle?: Snippet;

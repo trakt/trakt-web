@@ -19,6 +19,7 @@
     label={m.navbar_link_shows_label()}
     style="flat"
     variant="primary"
+    color="purple"
     size="small"
   >
     {m.find_shows_link()}

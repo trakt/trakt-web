@@ -49,6 +49,7 @@
           label={m.navbar_link_home_label()}
           style="ghost"
           variant="primary"
+          color="purple"
         >
           {m.navbar_link_home()}
         </Button>
@@ -57,6 +58,7 @@
           label={m.navbar_link_shows_label()}
           style="ghost"
           variant="primary"
+          color="purple"
         >
           {m.navbar_link_shows()}
         </Button>
@@ -65,6 +67,7 @@
           label={m.navbar_link_movies_label()}
           style="ghost"
           variant="primary"
+          color="purple"
         >
           {m.navbar_link_movies()}
         </Button>

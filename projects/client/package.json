@@ -37,6 +37,7 @@
     "msw": "^2.6.8",
     "prettier": "^3.4.1",
     "prettier-plugin-svelte": "^3.3.2",
+    "sass-embedded": "^1.83.0",
     "svelte": "^5.2.9",
     "svelte-check": "^4.1.0",
     "typescript": "^5.7.2",

@@ -24,6 +24,7 @@
     label={m.navbar_link_movies_label()}
     style="flat"
     variant="primary"
+    color="purple"
     size="small"
   >
     {m.find_movies_link()}
