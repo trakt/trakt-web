@@ -1,53 +1,47 @@
-import {
-  showProgressQuery,
-} from '$lib/requests/queries/shows/showProgressQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
-import { showRatingQuery } from '../../../lib/requests/queries/shows/showRatingQuery.ts';
-import { showSummaryQuery } from '../../../lib/requests/queries/shows/showSummaryQuery.ts';
-
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
+import { showProgressQuery } from '$lib/requests/queries/shows/showProgressQuery.ts';
+import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
+import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { showWatchersQuery } from '$lib/requests/queries/shows/showWatchersQuery.ts';
+import { time } from '$lib/utils/timing/time.ts';
+import { createQuery } from '@tanstack/svelte-query';
+import { derived } from 'svelte/store';
 
 export function useShow(slug: string) {
-  const show = createQuery(
-    showSummaryQuery({
-      slug,
-    }),
-  );
+  const show = createQuery({
+    ...showSummaryQuery({ slug }),
+    staleTime: time.days(1),
+  });
 
-  const ratings = createQuery(
-    showRatingQuery({
-      slug,
-    }),
-  );
+  const ratings = createQuery({
+    ...showRatingQuery({ slug }),
+    staleTime: time.days(1),
+  });
 
-  const stats = createQuery(
-    showStatsQuery({
-      slug,
-    }),
-  );
+  const stats = createQuery({
+    ...showStatsQuery({ slug }),
+    staleTime: time.minutes(30),
+  });
 
-  const watchers = createQuery(
-    showWatchersQuery({
-      slug,
-    }),
-  );
+  const watchers = createQuery({
+    ...showWatchersQuery({ slug }),
+    staleTime: time.minutes(5),
+  });
 
-  const progress = createQuery(
-    showProgressQuery({
-      slug,
-    }),
-  );
+  const progress = createQuery({
+    ...showProgressQuery({ slug }),
+    staleTime: time.days(1),
+  });
 
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
 
-  const intl = isLocaleSkipped
-    ? derived(show, ($show) => $show)
-    : createQuery(showIntlQuery({ slug, ...getLanguageAndRegion() }));
+  const intl = isLocaleSkipped ? show : createQuery({
+    ...showIntlQuery({ slug, ...getLanguageAndRegion() }),
+    staleTime: time.days(7),
+  });
 
   return {
     show: derived(show, ($show) => $show.data),

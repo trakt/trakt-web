@@ -4,6 +4,7 @@ import {
   movieAnticipatedQuery,
 } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
 import { showAnticipatedQuery } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -34,7 +35,10 @@ function typeToQuery(type: MediaType): CreateQueryOptions<AnticipatedMedia> {
 export function useAnticipatedList(
   { type }: AnticipatedListStoreProps,
 ) {
-  const query = createQuery(typeToQuery(type));
+  const query = createQuery({
+    ...typeToQuery(type),
+    staleTime: time.hours(1),
+  });
   const list = derived(query, ($query) => $query.data ?? []);
 
   return {

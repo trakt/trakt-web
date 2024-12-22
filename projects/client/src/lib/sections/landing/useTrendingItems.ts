@@ -1,4 +1,5 @@
 import { shuffle } from '$lib/utils/array/shuffle.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import {
@@ -11,13 +12,15 @@ import {
 const RANDOM_SHOW_COUNT = 2;
 
 export function useTrendingItems() {
-  const trendingShows = createQuery(
-    showTrendingQuery(),
-  );
+  const trendingShows = createQuery({
+    ...showTrendingQuery(),
+    staleTime: time.hours(1),
+  });
 
-  const trendingMovies = createQuery(
-    movieTrendingQuery(),
-  );
+  const trendingMovies = createQuery({
+    ...movieTrendingQuery(),
+    staleTime: time.hours(1),
+  });
 
   return {
     shows: derived(

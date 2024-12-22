@@ -1,5 +1,6 @@
 import type { RecommendedMovieResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
@@ -47,7 +48,10 @@ function recommendMoviesRequest(
     });
 }
 
-const recommendedMoviesQueryKey = ['recommendedMovies'] as const;
+const recommendedMoviesQueryKey = [
+  'recommendedMovies',
+  InvalidateAction.MarkAsWatched('movie'),
+] as const;
 export const recommendedMoviesQuery = (
   params: RecommendedMoviesParams = {},
 ) => ({

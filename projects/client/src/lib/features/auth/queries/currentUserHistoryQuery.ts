@@ -133,7 +133,9 @@ const currentUserWatchedShowsRequest = (
 
 export const currentUserHistoryQueryKey = [
   'currentUserHistory',
-  InvalidateAction.MarkAsWatched,
+  InvalidateAction.MarkAsWatched('show'),
+  InvalidateAction.MarkAsWatched('movie'),
+  InvalidateAction.MarkAsWatched('episode'),
 ] as const;
 export const currentUserHistoryQuery = ({ fetch }: ApiParams = {}) => ({
   queryKey: currentUserHistoryQueryKey,

@@ -67,7 +67,8 @@ export function upNextRequest(
 }
 export const upNextQueryKey = [
   'upNext',
-  InvalidateAction.MarkAsWatched,
+  InvalidateAction.MarkAsWatched('show'),
+  InvalidateAction.MarkAsWatched('episode'),
 ] as const;
 export const upNextQuery = (
   params: UpNextParams = {},

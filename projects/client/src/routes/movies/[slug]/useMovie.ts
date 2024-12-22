@@ -4,40 +4,46 @@ import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.
 import { movieStatsQuery } from '$lib/requests/queries/movies/movieStatsQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieWatchersQuery } from '$lib/requests/queries/movies/movieWatchersQuery.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export function useMovie(slug: string) {
-  const movie = createQuery(
-    movieSummaryQuery({
+  const movie = createQuery({
+    ...movieSummaryQuery({
       slug,
     }),
-  );
+    staleTime: time.days(1),
+  });
 
-  const ratings = createQuery(
-    movieRatingQuery({
+  const ratings = createQuery({
+    ...movieRatingQuery({
       slug,
     }),
-  );
+    staleTime: time.days(1),
+  });
 
-  const stats = createQuery(
-    movieStatsQuery({
+  const stats = createQuery({
+    ...movieStatsQuery({
       slug,
     }),
-  );
+    staleTime: time.minutes(30),
+  });
 
-  const watchers = createQuery(
-    movieWatchersQuery({
+  const watchers = createQuery({
+    ...movieWatchersQuery({
       slug,
     }),
-  );
+    staleTime: time.minutes(5),
+  });
 
   const locale = languageTag();
 
   const isLocaleSkipped = locale === 'en';
-  const intl = isLocaleSkipped
-    ? movie
-    : createQuery(movieIntlQuery({ slug, ...getLanguageAndRegion() }));
+  const intl = isLocaleSkipped ? movie : createQuery({
+    ...movieIntlQuery({ slug, ...getLanguageAndRegion() }),
+    staleTime: time.days(7),
+  });
 
   return {
     movie: derived(movie, ($movie) => $movie.data),

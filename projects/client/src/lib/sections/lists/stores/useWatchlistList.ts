@@ -8,6 +8,7 @@ import {
   showWatchlistQuery,
   type WatchlistShow,
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -40,7 +41,10 @@ function typeToQuery(
 }
 
 export function useWatchlistList(params: WatchListStoreProps) {
-  const query = createQuery(typeToQuery(params));
+  const query = createQuery({
+    ...typeToQuery(params),
+    staleTime: time.hours(1),
+  });
   const list = derived(
     query,
     ($query) => ($query.data ?? []).map((item) => item.mediaItem),

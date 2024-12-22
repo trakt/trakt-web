@@ -5,6 +5,7 @@ import {
   type PopularShow,
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -36,7 +37,10 @@ function typeToQuery(
 export function usePopularList(
   { type, limit = 25 }: PopularListStoreProps,
 ) {
-  const query = createQuery(typeToQuery({ type, limit }));
+  const query = createQuery({
+    ...typeToQuery({ type, limit }),
+    staleTime: time.hours(1),
+  });
   const list = derived(query, ($query) => $query.data ?? []);
 
   return {

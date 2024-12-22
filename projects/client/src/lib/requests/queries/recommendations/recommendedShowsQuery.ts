@@ -1,6 +1,7 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaSummary } from '$lib/requests/models/MediaSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
@@ -48,7 +49,11 @@ function recommendShowsRequest(
     });
 }
 
-const recommendedShowsQueryKey = ['recommendedShows'] as const;
+const recommendedShowsQueryKey = [
+  'recommendedShows',
+  InvalidateAction.MarkAsWatched('show'),
+  InvalidateAction.MarkAsWatched('episode'),
+] as const;
 export const recommendedShowsQuery = (
   params: RecommendedShowsParams = {},
 ) => ({
