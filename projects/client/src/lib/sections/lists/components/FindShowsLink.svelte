@@ -14,21 +14,18 @@
 
 <div class="find-shows-link">
   <Button
-    onmousedown={() => state.set("show-me-what-you-got")}
-    onmouseup={() => state.set("idle")}
     href={UrlBuilder.shows()}
     label={m.navbar_link_shows_label()}
     style="flat"
     variant="primary"
     size="small"
   >
-    <CromulonTracker onObserve={state.set} />
     {m.find_shows_link()}
     {#snippet icon()}
       <ShowIcon />
     {/snippet}
   </Button>
-
+  <CromulonTracker onObserve={state.set} />
   <CromulonIcon state={$state} />
 </div>
 

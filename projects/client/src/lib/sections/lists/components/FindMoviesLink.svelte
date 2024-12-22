@@ -14,22 +14,19 @@
 
 <div class="find-movies-link">
   <CromulonIcon state={$state} direction="right" />
-
   <Button
-    onmousedown={() => state.set("show-me-what-you-got")}
-    onmouseup={() => state.set("idle")}
     href={UrlBuilder.movies()}
     label={m.navbar_link_movies_label()}
     style="flat"
     variant="primary"
     size="small"
   >
-    <CromulonTracker onObserve={state.set} />
     {m.find_movies_link()}
     {#snippet icon()}
       <MovieIcon />
     {/snippet}
   </Button>
+  <CromulonTracker onObserve={state.set} />
 </div>
 
 <style>
@@ -37,6 +34,5 @@
     display: flex;
     align-items: end;
     justify-content: center;
-    margin-top: 1rem;
   }
 </style>
