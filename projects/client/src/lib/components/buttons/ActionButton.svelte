@@ -9,7 +9,7 @@
   const {
     children,
     label,
-    variant = "default",
+    style = "default",
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
@@ -24,7 +24,7 @@
     class="trakt-action-button trakt-button-link"
     class:trakt-link-active={$isActive}
     aria-label={label}
-    data-variant={variant}
+    data-style={style}
     {...props}
   >
     {@render children()}
@@ -34,7 +34,7 @@
     use:disableTransitionOn={"touch"}
     class="trakt-action-button trakt-button-link"
     aria-label={label}
-    data-variant={variant}
+    data-style={style}
     {...props}
   >
     {@render children()}
@@ -49,7 +49,7 @@
       var(--color-foreground) 90%
     );
 
-    &[data-variant="purple"] {
+    &[data-style="purple"] {
       --color-background-action-button: var(--purple-700);
       --color-foreground-action-button: var(--shade-50);
 
@@ -59,7 +59,7 @@
       }
     }
 
-    &[data-variant="red"] {
+    &[data-style="red"] {
       --color-background-action-button: var(--red-700);
       --color-foreground-action-button: var(--shade-50);
 
@@ -69,7 +69,7 @@
       }
     }
 
-    &[data-variant="blue"] {
+    &[data-style="blue"] {
       --color-background-action-button: var(--blue-700);
       --color-foreground-action-button: var(--shade-50);
 
@@ -79,7 +79,7 @@
       }
     }
 
-    &[data-variant="default"] {
+    &[data-style="default"] {
       --color-background-action-button: var(--shade-800);
       --color-foreground-action-button: var(--shade-50);
 

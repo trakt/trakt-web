@@ -30,6 +30,7 @@ describe('ActionButton', () => {
       });
       expect(button).toBeInTheDocument();
       expect(button).toHaveTextContent('Test ActionButton Content');
+      expect(button).toHaveAttribute('data-style', 'default');
     });
 
     it('should attach click event handler', async () => {
@@ -49,11 +50,11 @@ describe('ActionButton', () => {
     it('should apply correct styles based on props', () => {
       render(ActionButton, {
         ...defaultProps,
-        variant: 'purple',
+        style: 'purple',
       });
 
       const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('data-variant', 'purple');
+      expect(button).toHaveAttribute('data-style', 'purple');
     });
 
     it('should set ActionButton as disabled', () => {

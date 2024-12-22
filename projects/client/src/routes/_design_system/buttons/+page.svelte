@@ -238,7 +238,7 @@
       <h2>Action</h2>
 
       <div class="action-button-demo">
-        <ActionButton label="Purple action button" variant="purple">
+        <ActionButton label="Purple action button" style="purple">
           <CheckIcon />
         </ActionButton>
 
@@ -246,7 +246,7 @@
       </div>
 
       <div class="action-button-demo">
-        <ActionButton label="Red action button" variant="red">
+        <ActionButton label="Red action button" style="red">
           <CheckIcon />
         </ActionButton>
 
@@ -254,7 +254,7 @@
       </div>
 
       <div class="action-button-demo">
-        <ActionButton label="Blue action button" variant="blue">
+        <ActionButton label="Blue action button" style="blue">
           <CheckIcon />
         </ActionButton>
 

@@ -15,7 +15,7 @@
 </script>
 
 <ActionButton
-  variant="purple"
+  style="purple"
   label={i18n.label({ title })}
   onclick={onWatch}
   disabled={isMarkingAsWatched || isWatched}

@@ -15,7 +15,7 @@
   }: WatchlistButtonProps = $props();
 
   const state = $derived(isWatchlisted ? "added" : "missing");
-  const variant = $derived(isWatchlisted ? "default" : "blue");
+  const style = $derived(isWatchlisted ? "default" : "blue");
   const handler = $derived(isWatchlisted ? onRemove : onAdd);
 </script>
 
@@ -23,7 +23,7 @@
   disabled={isWatchlistUpdating}
   onclick={handler}
   label={i18n.label({ isWatchlisted, title })}
-  {variant}
+  {style}
   {...props}
 >
   <WatchlistIcon {state} />
