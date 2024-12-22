@@ -32,6 +32,7 @@ function recommendShowsRequest(
         ignore_collected: true,
         ignore_watchlisted: true,
         limit: 35,
+        social: false,
       },
       extraHeaders: {
         ...authHeader(),

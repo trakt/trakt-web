@@ -5,4 +5,6 @@ export const recommendationsQuerySchema = z.object({
   ignore_watchlisted: z.boolean().optional(),
   limit: z.number().int().positive().optional(),
   days: z.number().int().positive().optional(),
+  social: z.boolean().optional(),
+  related: z.boolean().optional(),
 });
