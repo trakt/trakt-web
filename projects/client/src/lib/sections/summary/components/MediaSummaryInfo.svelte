@@ -4,10 +4,14 @@
   import MediaMetaInfo from "./MediaMetaInfo.svelte";
   import type { MediaSummary } from "./MediaSummary";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
-  import YoutubeButton from "./YoutubeButton.svelte";
 
-  const { media, ratings, watchers, intl }: MediaSummaryProps<MediaSummary> =
-    $props();
+  const {
+    media,
+    ratings,
+    watchers,
+    intl,
+    actions,
+  }: MediaSummaryProps<MediaSummary> = $props();
   const isLargeDisplay = useMedia(WellKnownMediaQuery.desktop);
   const genreCount = $derived($isLargeDisplay ? -1 : 3);
 </script>
@@ -22,7 +26,7 @@
 <p class="trakt-media-overview secondary">{intl.overview}</p>
 
 <div class="trakt-info-actions">
-  <YoutubeButton trailer={media.trailer} />
+  {@render actions?.()}
 </div>
 
 <style>
