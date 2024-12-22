@@ -238,13 +238,13 @@
       <h2>Action</h2>
 
       <div class="action-button-demo">
-        <ActionButton label="Purple action button" style="purple">
+        <ActionButton label="Purple action button" color="purple">
           <CheckIcon />
         </ActionButton>
 
         <ActionButton
           label="Purple action button"
-          style="purple"
+          color="purple"
           variant="secondary"
         >
           <CheckIcon />
@@ -254,11 +254,11 @@
       </div>
 
       <div class="action-button-demo">
-        <ActionButton label="Red action button" style="red">
+        <ActionButton label="Red action button" color="red">
           <CheckIcon />
         </ActionButton>
 
-        <ActionButton label="Red action button" style="red" variant="secondary">
+        <ActionButton label="Red action button" color="red" variant="secondary">
           <CheckIcon />
         </ActionButton>
 
@@ -266,13 +266,13 @@
       </div>
 
       <div class="action-button-demo">
-        <ActionButton label="Blue action button" style="blue">
+        <ActionButton label="Blue action button" color="blue">
           <CheckIcon />
         </ActionButton>
 
         <ActionButton
           label="Blue action button"
-          style="blue"
+          color="blue"
           variant="secondary"
         >
           <CheckIcon />

@@ -10,7 +10,7 @@
     children,
     label,
     variant = "primary",
-    style = "default",
+    color = "default",
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
@@ -25,7 +25,7 @@
     class="trakt-action-button trakt-button-link"
     class:trakt-link-active={$isActive}
     aria-label={label}
-    data-style={style}
+    data-color={color}
     data-variant={variant}
     {...props}
   >
@@ -36,7 +36,7 @@
     use:disableTransitionOn={"touch"}
     class="trakt-action-button trakt-button-link"
     aria-label={label}
-    data-style={style}
+    data-color={color}
     data-variant={variant}
     {...props}
   >
@@ -52,13 +52,13 @@
       var(--color-foreground) 90%
     );
 
-    &[data-style="purple"] {
-      --background-style-purple: var(--purple-700);
-      --foreground-style-purple: var(--purple-50);
+    &[data-color="purple"] {
+      --color-background-purple: var(--purple-600);
+      --color-foreground-purple: var(--purple-50);
 
       &[data-variant="primary"] {
-        --color-background-action-button: var(--background-style-purple);
-        --color-foreground-action-button: var(--foreground-style-purple);
+        --color-background-action-button: var(--color-background-purple);
+        --color-foreground-action-button: var(--color-foreground-purple);
         &:hover,
         &:focus-visible {
           --color-background-action-button: var(--purple-500);
@@ -66,8 +66,8 @@
       }
 
       &[data-variant="secondary"] {
-        --color-background-action-button: var(--foreground-style-purple);
-        --color-foreground-action-button: var(--background-style-purple);
+        --color-background-action-button: var(--color-foreground-purple);
+        --color-foreground-action-button: var(--color-background-purple);
 
         &:hover,
         &:focus-visible {
@@ -76,13 +76,13 @@
       }
     }
 
-    &[data-style="red"] {
-      --background-style-red: var(--red-700);
-      --foreground-style-red: var(--red-50);
+    &[data-color="red"] {
+      --color-background-red: var(--red-700);
+      --color-foreground-red: var(--red-50);
 
       &[data-variant="primary"] {
-        --color-background-action-button: var(--background-style-red);
-        --color-foreground-action-button: var(--foreground-style-red);
+        --color-background-action-button: var(--color-background-red);
+        --color-foreground-action-button: var(--color-foreground-red);
         &:hover,
         &:focus-visible {
           --color-background-action-button: var(--red-600);
@@ -90,8 +90,8 @@
       }
 
       &[data-variant="secondary"] {
-        --color-background-action-button: var(--foreground-style-red);
-        --color-foreground-action-button: var(--background-style-red);
+        --color-background-action-button: var(--color-foreground-red);
+        --color-foreground-action-button: var(--color-background-red);
 
         &:hover,
         &:focus-visible {
@@ -100,13 +100,13 @@
       }
     }
 
-    &[data-style="blue"] {
-      --background-style-blue: var(--blue-700);
-      --foreground-style-blue: var(--blue-50);
+    &[data-color="blue"] {
+      --color-background-blue: var(--blue-700);
+      --color-foreground-blue: var(--blue-50);
 
       &[data-variant="primary"] {
-        --color-background-action-button: var(--background-style-blue);
-        --color-foreground-action-button: var(--foreground-style-blue);
+        --color-background-action-button: var(--color-background-blue);
+        --color-foreground-action-button: var(--color-foreground-blue);
         &:hover,
         &:focus-visible {
           --color-background-action-button: var(--blue-500);
@@ -114,8 +114,8 @@
       }
 
       &[data-variant="secondary"] {
-        --color-background-action-button: var(--foreground-style-blue);
-        --color-foreground-action-button: var(--background-style-blue);
+        --color-background-action-button: var(--color-foreground-blue);
+        --color-foreground-action-button: var(--color-background-blue);
 
         &:hover,
         &:focus-visible {
@@ -124,13 +124,13 @@
       }
     }
 
-    &[data-style="default"] {
-      --background-style-default: var(--shade-800);
-      --foreground-style-default: var(--shade-50);
+    &[data-color="default"] {
+      --color-background-default: var(--shade-800);
+      --color-foreground-default: var(--shade-50);
 
       &[data-variant="primary"] {
-        --color-background-action-button: var(--background-style-default);
-        --color-foreground-action-button: var(--foreground-style-default);
+        --color-background-action-button: var(--color-background-default);
+        --color-foreground-action-button: var(--color-foreground-default);
         &:hover,
         &:focus-visible {
           --color-background-action-button: var(--shade-500);
@@ -138,12 +138,12 @@
       }
 
       &[data-variant="secondary"] {
-        --color-background-action-button: var(--foreground-style-default);
-        --color-foreground-action-button: var(--background-style-default);
+        --color-background-action-button: var(--color-foreground-default);
+        --color-foreground-action-button: var(--color-background-default);
 
         &:hover,
         &:focus-visible {
-          --color-background-action-button: var(--shade-100);
+          --color-background-action-button: var(--shade-200);
         }
       }
     }

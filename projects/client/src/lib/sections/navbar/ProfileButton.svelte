@@ -35,7 +35,7 @@
   </RenderFor>
 
   <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
-    <ActionButton href={UrlBuilder.vip()} label={m.get_vip_label()} style="red">
+    <ActionButton href={UrlBuilder.vip()} label={m.get_vip_label()} color="red">
       <VipIcon />
     </ActionButton>
   </RenderFor>

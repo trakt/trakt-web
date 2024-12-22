@@ -51,7 +51,7 @@
           href={$page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
-          style="purple"
+          color="purple"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -60,7 +60,7 @@
           href={$page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
-          style="blue"
+          color="blue"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -69,7 +69,7 @@
           href={$page.url.pathname}
           target="_blank"
           label="This is the primary textured link in a disabled"
-          style="red"
+          color="red"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -115,7 +115,7 @@
           href={$page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
-          style="purple"
+          color="purple"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -124,7 +124,7 @@
           href={$page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
-          style="blue"
+          color="blue"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -133,7 +133,7 @@
           href={$page.url.pathname}
           target="_blank"
           label="This is the primary textured link in a disabled"
-          style="red"
+          color="red"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -179,7 +179,7 @@
           href="/"
           target="_blank"
           label="This is the primary textured link"
-          style="purple"
+          color="purple"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -188,7 +188,7 @@
           href="/"
           target="_blank"
           label="This is the primary textured link"
-          style="blue"
+          color="blue"
         >
           <WatchNowIcon />
         </ActionButton>
@@ -197,7 +197,7 @@
           href="/"
           target="_blank"
           label="This is the primary textured link in a disabled"
-          style="red"
+          color="red"
         >
           <WatchNowIcon />
         </ActionButton>

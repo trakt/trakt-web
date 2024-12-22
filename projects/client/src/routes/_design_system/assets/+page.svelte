@@ -57,7 +57,7 @@
 
 {#snippet download(label: string, onDownload: () => void)}
   {#if dev}
-    <ActionButton {label} style="red" onclick={onDownload}>
+    <ActionButton {label} color="red" onclick={onDownload}>
       <DownloadIcon />
     </ActionButton>
   {/if}

@@ -54,7 +54,7 @@
     <ActionButton
       onclick={scrollToLeft}
       label={`Scroll ${title} to the left`}
-      style="purple"
+      color="purple"
       disabled={isLeftScrollDisabled}
     >
       <CaretLeftIcon />
@@ -62,7 +62,7 @@
     <ActionButton
       onclick={scrollToRight}
       label={`Scroll ${title} to the right`}
-      style="purple"
+      color="purple"
       disabled={isRightScrollDisabled}
     >
       <CaretRightIcon />

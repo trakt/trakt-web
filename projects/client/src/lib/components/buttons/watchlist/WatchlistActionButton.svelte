@@ -23,7 +23,7 @@
   disabled={isWatchlistUpdating}
   onclick={handler}
   label={i18n.label({ isWatchlisted, title })}
-  style="blue"
+  color="blue"
   {variant}
   {...props}
 >

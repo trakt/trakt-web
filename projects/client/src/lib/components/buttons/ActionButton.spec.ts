@@ -30,7 +30,7 @@ describe('ActionButton', () => {
       });
       expect(button).toBeInTheDocument();
       expect(button).toHaveTextContent('Test ActionButton Content');
-      expect(button).toHaveAttribute('data-style', 'default');
+      expect(button).toHaveAttribute('data-color', 'default');
       expect(button).toHaveAttribute('data-variant', 'primary');
     });
 
@@ -51,12 +51,12 @@ describe('ActionButton', () => {
     it('should apply correct styles based on props', () => {
       render(ActionButton, {
         ...defaultProps,
-        style: 'purple',
+        color: 'purple',
         variant: 'secondary',
       });
 
       const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('data-style', 'purple');
+      expect(button).toHaveAttribute('data-color', 'purple');
       expect(button).toHaveAttribute('data-variant', 'secondary');
     });
 
