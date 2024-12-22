@@ -16,7 +16,6 @@
   </g>
   <defs>
     <filter
-      id="a"
       width="52"
       height="32"
       x=".358398"
