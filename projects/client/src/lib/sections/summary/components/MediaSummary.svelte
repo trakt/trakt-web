@@ -8,10 +8,12 @@
   import ThirdPartyRatingsList from "$lib/components/summary/ThirdPartyRatingsList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaStats } from "$lib/models/MediaStats";
+  import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { MediaType } from "$lib/models/MediaType";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import type { Snippet } from "svelte";
+  import MediaDetails from "./MediaDetails.svelte";
   import MediaStatsList from "./MediaStatsList.svelte";
   import type { MediaSummary } from "./MediaSummary";
   import MediaSummaryContainer from "./MediaSummaryContainer.svelte";
@@ -27,10 +29,12 @@
     contextualContent,
     stats,
     watchers,
+    studios,
   }: MediaSummaryProps<MediaSummary> & {
     type: MediaType;
     contextualContent?: Snippet;
     stats: MediaStats;
+    studios: MediaStudio[];
   } = $props();
 
   const { markAsWatched, isMarkingAsWatched, isWatched } = $derived(
@@ -99,6 +103,7 @@
 <MediaSummaryContainer>
   <MediaStatsList {stats} />
   <ThirdPartyRatingsList {ratings} />
+  <MediaDetails {media} {studios} />
 </MediaSummaryContainer>
 
 <style>

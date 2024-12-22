@@ -127,5 +127,14 @@
   "shows": "Seriale",
   "episodes_watched": "{count} episoade vizionate",
   "movies": "Filme",
-  "movies_watched": "{count} filme vizionate"
+  "movies_watched": "{count} filme vizionate",
+  "details": "Detalii",
+  "expand_category": "Extinde {category}",
+  "and_more": "{count} in plus",
+  "premiered": "A debutat",
+  "runtime": "Durata",
+  "country": "Țară",
+  "language": "Limbă",
+  "studio": "Studiouri",
+  "genre": "Gen"
 }

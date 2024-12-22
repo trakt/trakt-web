@@ -5,7 +5,7 @@
   import MovieSummary from "$lib/sections/summary/MovieSummary.svelte";
   import { useMovie } from "./useMovie";
 
-  const { movie, ratings, stats, intl, watchers } = $derived(
+  const { movie, ratings, stats, intl, watchers, studios } = $derived(
     useMovie($page.params.slug),
   );
 </script>
@@ -16,12 +16,13 @@
   image={$movie?.cover.url.thumb}
   type="movie"
 >
-  {#if $movie != null && $ratings != null && $stats != null && $intl != null}
+  {#if $movie != null && $ratings != null && $stats != null && $intl != null && $studios != null}
     <MovieSummary
       media={$movie}
       ratings={$ratings}
       watchers={$watchers}
       stats={$stats}
+      studios={$studios}
       intl={$intl}
     />
   {:else}

@@ -127,5 +127,14 @@
   "shows": "Серіали",
   "episodes_watched": "{count} серій переглянуто",
   "movies": "Фільми",
-  "movies_watched": "{count} фільмів переглянуто"
+  "movies_watched": "{count} фільмів переглянуто",
+  "details": "Деталі",
+  "expand_category": "Розгорнути {category}",
+  "and_more": "{count} ще",
+  "premiered": "Прем'єра",
+  "runtime": "Тривалість",
+  "country": "Країна",
+  "language": "Мова",
+  "studio": "Студія",
+  "genre": "Жанр"
 }

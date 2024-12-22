@@ -3,6 +3,7 @@ import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showProgressQuery } from '$lib/requests/queries/shows/showProgressQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
+import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { showWatchersQuery } from '$lib/requests/queries/shows/showWatchersQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -36,6 +37,11 @@ export function useShow(slug: string) {
     staleTime: time.days(1),
   });
 
+  const studios = createQuery({
+    ...showStudiosQuery({ slug }),
+    staleTime: time.days(1),
+  });
+
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
 
@@ -45,7 +51,7 @@ export function useShow(slug: string) {
   });
 
   // TODO: remove this when we have empty state, make sure requests fire in parallel
-  const queries = [show, ratings, stats, watchers, progress, intl];
+  const queries = [show, ratings, stats, watchers, studios, progress, intl];
 
   onMount(() => {
     queries.forEach((query) => query.subscribe(() => {}));
@@ -57,6 +63,7 @@ export function useShow(slug: string) {
     stats: derived(stats, ($stats) => $stats.data),
     watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
     progress: derived(progress, ($progress) => $progress.data),
+    studios: derived(studios, ($studios) => $studios.data),
     intl: derived(
       [show, intl],
       ([$show, $intl]) => {

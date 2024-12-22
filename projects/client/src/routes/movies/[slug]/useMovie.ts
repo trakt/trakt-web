@@ -2,6 +2,7 @@ import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';
 import { movieStatsQuery } from '$lib/requests/queries/movies/movieStatsQuery.ts';
+import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieWatchersQuery } from '$lib/requests/queries/movies/movieWatchersQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -38,6 +39,11 @@ export function useMovie(slug: string) {
     staleTime: time.minutes(5),
   });
 
+  const studios = createQuery({
+    ...movieStudiosQuery({ slug }),
+    staleTime: time.days(1),
+  });
+
   const locale = languageTag();
 
   const isLocaleSkipped = locale === 'en';
@@ -47,7 +53,7 @@ export function useMovie(slug: string) {
   });
 
   // TODO: remove this when we have empty state, make sure requests fire in parallel
-  const queries = [movie, ratings, stats, watchers, intl];
+  const queries = [movie, ratings, stats, watchers, studios, intl];
 
   onMount(() => {
     queries.forEach((query) => query.subscribe(() => {}));
@@ -58,6 +64,7 @@ export function useMovie(slug: string) {
     ratings: derived(ratings, ($rating) => $rating.data),
     stats: derived(stats, ($stats) => $stats.data),
     watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
+    studios: derived(studios, ($studios) => $studios.data),
     intl: derived(
       [movie, intl],
       ([$movie, $intl]) => {

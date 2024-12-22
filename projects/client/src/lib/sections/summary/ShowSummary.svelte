@@ -4,6 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { MediaStats } from "$lib/models/MediaStats";
+  import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -13,9 +14,10 @@
   type ShowSummaryProps = MediaSummaryProps<ShowSummary> & {
     progress?: EpisodeProgressEntry;
     stats: MediaStats;
+    studios: MediaStudio[];
   };
 
-  const { media, ratings, stats, watchers, intl, progress }: ShowSummaryProps =
+  const { media, ratings, stats, watchers, studios, intl, progress }: ShowSummaryProps =
     $props();
 </script>
 
@@ -32,6 +34,7 @@
   {ratings}
   {stats}
   {watchers}
+  {studios}
   {intl}
   type="show"
   {contextualContent}

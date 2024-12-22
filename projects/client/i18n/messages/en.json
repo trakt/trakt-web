@@ -127,5 +127,14 @@
   "shows": "Shows",
   "episodes_watched": "{count} episodes watched",
   "movies": "Movies",
-  "movies_watched": "{count} movies watched"
+  "movies_watched": "{count} movies watched",
+  "details": "Details",
+  "expand_category": "Expand {category}",
+  "and_more": "{count} more",
+  "premiered": "Premiered",
+  "runtime": "Runtime",
+  "country": "Country",
+  "language": "Language",
+  "studio": "Studio",
+  "genre": "Genre"
 }

@@ -127,5 +127,14 @@
   "shows": "番組",
   "episodes_watched": "{count}話視聴済み",
   "movies": "映画",
-  "movies_watched": "{count}作品視聴済み"
+  "movies_watched": "{count}作品視聴済み",
+  "details": "詳細",
+  "expand_category": "{category}を展開",
+  "and_more": "{count} 件もっと",
+  "premiered": "公開日",
+  "runtime": "上映時間",
+  "country": "製作国",
+  "language": "言語",
+  "studio": "製作会社",
+  "genre": "ジャンル"
 }

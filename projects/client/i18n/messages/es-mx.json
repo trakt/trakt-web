@@ -127,5 +127,14 @@
   "shows": "Series",
   "episodes_watched": "{count} episodios vistos",
   "movies": "Películas",
-  "movies_watched": "{count} películas vistas"
+  "movies_watched": "{count} películas vistas",
+  "details": "Detalles",
+  "expand_category": "Expandir {category}",
+  "and_more": "{count} más",
+  "premiered": "Estreno",
+  "runtime": "Duración",
+  "country": "País",
+  "language": "Idioma",
+  "studio": "Estudio",
+  "genre": "Género"
 }

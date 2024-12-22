@@ -127,5 +127,14 @@
   "shows": "Series",
   "episodes_watched": "{count} afleveringen bekeken",
   "movies": "Films",
-  "movies_watched": "{count} films bekeken"
+  "movies_watched": "{count} films bekeken",
+  "details": "Details",
+  "expand_category": "{category} uitvouwen",
+  "and_more": "{count} meer",
+  "premiered": "Première",
+  "runtime": "Speelduur",
+  "country": "Land",
+  "language": "Taal",
+  "studio": "Studio",
+  "genre": "Genre"
 }

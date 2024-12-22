@@ -4,7 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { useShow } from "./useShow";
-  const { show, intl, ratings, stats, progress, watchers } = $derived(
+  const { show, intl, ratings, stats, progress, watchers, studios } = $derived(
     useShow($page.params.slug),
   );
 </script>
@@ -15,7 +15,7 @@
   image={$show?.cover.url.thumb}
   type="show"
 >
-  {#if $show != null && $ratings != null && $stats != null && $intl != null}
+  {#if $show != null && $ratings != null && $stats != null && $intl != null && $studios != null}
     <ShowSummary
       media={$show}
       ratings={$ratings}
@@ -23,6 +23,7 @@
       stats={$stats}
       intl={$intl}
       progress={$progress}
+      studios={$studios}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
