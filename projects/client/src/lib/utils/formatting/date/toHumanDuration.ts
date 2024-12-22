@@ -6,11 +6,21 @@ export type Duration = {
   minutes: number;
 };
 
+type ToHumanDurationProps = {
+  days?: number;
+  hours?: number;
+  minutes?: number;
+  unitDisplay?: Intl.NumberFormatOptions['unitDisplay'];
+  separator?: string;
+};
+
 export function toHumanDuration({
   days = 0,
   hours = 0,
   minutes = 0,
-}, locale: AvailableLanguage = 'en') {
+  unitDisplay = 'narrow',
+  separator = ' ',
+}: ToHumanDurationProps, locale: AvailableLanguage = 'en') {
   hours += Math.floor(minutes / 60);
   minutes %= 60;
   days += Math.floor(hours / 24);
@@ -20,17 +30,17 @@ export function toHumanDuration({
     day: new Intl.NumberFormat(locale, {
       style: 'unit',
       unit: 'day',
-      unitDisplay: 'narrow',
+      unitDisplay,
     }),
     hour: new Intl.NumberFormat(locale, {
       style: 'unit',
       unit: 'hour',
-      unitDisplay: 'narrow',
+      unitDisplay,
     }),
     minute: new Intl.NumberFormat(locale, {
       style: 'unit',
       unit: 'minute',
-      unitDisplay: 'narrow',
+      unitDisplay,
     }),
   };
 
@@ -45,5 +55,5 @@ export function toHumanDuration({
     parts.push(formatters.minute.format(minutes));
   }
 
-  return parts.join(' ');
+  return parts.join(separator);
 }

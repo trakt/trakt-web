@@ -33,4 +33,16 @@ describe('toHumanDuration', () => {
   it('should return empty string when all parts are 0', () => {
     expect(toHumanDuration({})).toBe('');
   });
+
+  it('should use a custom separator', () => {
+    expect(toHumanDuration({ minutes: 1530, separator: ', ' })).toBe(
+      '1d, 1h, 30m',
+    );
+  });
+
+  it('should use a custom unit display units', () => {
+    expect(toHumanDuration({ minutes: 1530, unitDisplay: 'long' })).toBe(
+      '1 day 1 hour 30 minutes',
+    );
+  });
 });

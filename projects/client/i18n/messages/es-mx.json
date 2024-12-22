@@ -122,5 +122,10 @@
   "coming_soon_empty": "El futuro es una vasta extensión de territorio inexplorado, esperando que lo explores. Agrega las próximas películas que te llamen la atención, y seremos tus guías a través del laberinto de fechas de estreno y tráilers.",
   "find_movies_link": "Encuentra Películas",
   "find_shows_link": "Encuentra Series",
-  "active_watchers": "{count} disfrutando"
+  "active_watchers": "{count} disfrutando",
+  "last_30_days_watched": "Últimos 30 días vistos",
+  "shows": "Series",
+  "episodes_watched": "{count} episodios vistos",
+  "movies": "Películas",
+  "movies_watched": "{count} películas vistas"
 }

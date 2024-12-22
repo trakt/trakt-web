@@ -122,5 +122,10 @@
   "coming_soon_empty": "El futuro es un vasto territorio inexplorado, esperando a que lo explores. Añade las próximas películas que te llamen la atención, y seremos tus guías a través del laberinto de fechas de estreno y tráilers. ¡Nos encanta Trakt! ",
   "find_movies_link": "Encuentra Películas",
   "find_shows_link": "Encuentra Series",
-  "active_watchers": "{count} viendo"
+  "active_watchers": "{count} viendo",
+  "last_30_days_watched": "Películas y series vistas en los últimos 30 días",
+  "shows": "Series",
+  "episodes_watched": "{count} episodios vistos",
+  "movies": "Películas",
+  "movies_watched": "{count} películas vistas"
 }

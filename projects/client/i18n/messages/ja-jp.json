@@ -122,5 +122,10 @@
   "coming_soon_empty": "まだ見ぬ未来は、探索を待つ広大な未知の領域。気になる新作を登録して、公開日や予告編の迷宮を一緒に冒険しましょう！",
   "find_movies_link": "映画を探す",
   "find_shows_link": "番組を探す",
-  "active_watchers": "{count}人が視聴中"
+  "active_watchers": "{count}人が視聴中",
+  "last_30_days_watched": "過去30日間視聴した作品",
+  "shows": "番組",
+  "episodes_watched": "{count}話視聴済み",
+  "movies": "映画",
+  "movies_watched": "{count}作品視聴済み"
 }

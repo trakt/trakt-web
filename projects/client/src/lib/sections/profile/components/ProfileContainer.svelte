@@ -36,6 +36,19 @@
     gap: var(--ni-32);
     grid-template-columns: 1fr 2fr 1fr;
     margin: 0 var(--ni-56);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      margin: 0 var(--ni-16);
+
+      .trakt-profile-details {
+        display: none;
+      }
+
+      .trakt-profile-content {
+        grid-column: 1;
+      }
+    }
   }
 
   .trakt-profile-details,
@@ -45,5 +58,6 @@
 
   .trakt-profile-content {
     align-self: end;
+    grid-column: 2;
   }
 </style>

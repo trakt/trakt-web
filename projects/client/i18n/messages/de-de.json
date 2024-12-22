@@ -122,5 +122,10 @@
   "coming_soon_empty": "Die Zukunft ist ein riesiges, unerforschtes Gebiet, das darauf wartet, von dir erkundet zu werden. Füge die anstehenden Inhalte hinzu, die deine Aufmerksamkeit erregen, und wir werden dein Führer durch das Labyrinth der Veröffentlichungsdaten und Trailer sein.",
   "find_movies_link": "Filme finden",
   "find_shows_link": "Serien finden",
-  "active_watchers": "{count} schauen gerade"
+  "active_watchers": "{count} schauen gerade",
+  "last_30_days_watched": "Letzte 30 Tage geschaut",
+  "shows": "Serien",
+  "episodes_watched": "{count} Folgen geschaut",
+  "movies": "Filme",
+  "movies_watched": "{count} Filme geschaut"
 }

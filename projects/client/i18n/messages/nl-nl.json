@@ -122,5 +122,10 @@
   "coming_soon_empty": "De toekomst is een uitgestrekt, onontgonnen gebied, wachtende op jouw ontdekkingen. Voeg de aankomende titels toe die je aandacht trekken en wij leiden je door de wildernis van releasedata en trailers. <3 Trakt!",
   "find_movies_link": "Films zoeken",
   "find_shows_link": "Series zoeken",
-  "active_watchers": "{count} kijkt"
+  "active_watchers": "{count} kijkt",
+  "last_30_days_watched": "De afgelopen 30 dagen bekeken",
+  "shows": "Series",
+  "episodes_watched": "{count} afleveringen bekeken",
+  "movies": "Films",
+  "movies_watched": "{count} films bekeken"
 }

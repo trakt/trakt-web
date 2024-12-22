@@ -122,5 +122,10 @@
   "coming_soon_empty": "The future is a vast expanse of uncharted territory, waiting for you to explore. Add the upcoming movies that catch your eye, and we'll be your guide through the maze of release dates and trailers.",
   "find_movies_link": "Find Movies",
   "find_shows_link": "Find Shows",
-  "active_watchers": "{count} watching"
+  "active_watchers": "{count} watching",
+  "last_30_days_watched": "Last 30 days watched",
+  "shows": "Shows",
+  "episodes_watched": "{count} episodes watched",
+  "movies": "Movies",
+  "movies_watched": "{count} movies watched"
 }

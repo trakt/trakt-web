@@ -122,5 +122,10 @@
   "coming_soon_empty": "O futuro é um vasto campo inexplorado, esperando por você para explorar. Adicione os próximos filmes que te interessarem, e nós seremos seus guias através do labirinto de datas de lançamento e trailers.",
   "find_movies_link": "Encontre Filmes",
   "find_shows_link": "Encontre Séries",
-  "active_watchers": "{count} assistindo"
+  "active_watchers": "{count} assistindo",
+  "last_30_days_watched": "Últimos 30 dias assistidos",
+  "shows": "Séries",
+  "episodes_watched": "{count} episódios assistidos",
+  "movies": "Filmes",
+  "movies_watched": "{count} filmes assistidos"
 }
