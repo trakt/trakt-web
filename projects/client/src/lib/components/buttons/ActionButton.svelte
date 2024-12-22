@@ -9,6 +9,7 @@
   const {
     children,
     label,
+    variant = "primary",
     style = "default",
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
@@ -25,6 +26,7 @@
     class:trakt-link-active={$isActive}
     aria-label={label}
     data-style={style}
+    data-variant={variant}
     {...props}
   >
     {@render children()}
@@ -35,6 +37,7 @@
     class="trakt-action-button trakt-button-link"
     aria-label={label}
     data-style={style}
+    data-variant={variant}
     {...props}
   >
     {@render children()}
@@ -50,42 +53,98 @@
     );
 
     &[data-style="purple"] {
-      --color-background-action-button: var(--purple-700);
-      --color-foreground-action-button: var(--shade-50);
+      --background-style-purple: var(--purple-700);
+      --foreground-style-purple: var(--purple-50);
 
-      &:hover,
-      &:focus-visible {
-        --color-background-action-button: var(--purple-500);
+      &[data-variant="primary"] {
+        --color-background-action-button: var(--background-style-purple);
+        --color-foreground-action-button: var(--foreground-style-purple);
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--purple-500);
+        }
+      }
+
+      &[data-variant="secondary"] {
+        --color-background-action-button: var(--foreground-style-purple);
+        --color-foreground-action-button: var(--background-style-purple);
+
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--purple-100);
+        }
       }
     }
 
     &[data-style="red"] {
-      --color-background-action-button: var(--red-700);
-      --color-foreground-action-button: var(--shade-50);
+      --background-style-red: var(--red-700);
+      --foreground-style-red: var(--red-50);
 
-      &:hover,
-      &:focus-visible {
-        --color-background-action-button: var(--red-600);
+      &[data-variant="primary"] {
+        --color-background-action-button: var(--background-style-red);
+        --color-foreground-action-button: var(--foreground-style-red);
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--red-600);
+        }
+      }
+
+      &[data-variant="secondary"] {
+        --color-background-action-button: var(--foreground-style-red);
+        --color-foreground-action-button: var(--background-style-red);
+
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--red-100);
+        }
       }
     }
 
     &[data-style="blue"] {
-      --color-background-action-button: var(--blue-700);
-      --color-foreground-action-button: var(--shade-50);
+      --background-style-blue: var(--blue-700);
+      --foreground-style-blue: var(--blue-50);
 
-      &:hover,
-      &:focus-visible {
-        --color-background-action-button: var(--blue-500);
+      &[data-variant="primary"] {
+        --color-background-action-button: var(--background-style-blue);
+        --color-foreground-action-button: var(--foreground-style-blue);
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--blue-500);
+        }
+      }
+
+      &[data-variant="secondary"] {
+        --color-background-action-button: var(--foreground-style-blue);
+        --color-foreground-action-button: var(--background-style-blue);
+
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--blue-100);
+        }
       }
     }
 
     &[data-style="default"] {
-      --color-background-action-button: var(--shade-800);
-      --color-foreground-action-button: var(--shade-50);
+      --background-style-default: var(--shade-800);
+      --foreground-style-default: var(--shade-50);
 
-      &:hover,
-      &:focus-visible {
-        --color-background-action-button: var(--shade-500);
+      &[data-variant="primary"] {
+        --color-background-action-button: var(--background-style-default);
+        --color-foreground-action-button: var(--foreground-style-default);
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--shade-500);
+        }
+      }
+
+      &[data-variant="secondary"] {
+        --color-background-action-button: var(--foreground-style-default);
+        --color-foreground-action-button: var(--background-style-default);
+
+        &:hover,
+        &:focus-visible {
+          --color-background-action-button: var(--shade-100);
+        }
       }
     }
 

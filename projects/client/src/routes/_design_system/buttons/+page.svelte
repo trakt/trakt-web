@@ -242,11 +242,23 @@
           <CheckIcon />
         </ActionButton>
 
+        <ActionButton
+          label="Purple action button"
+          style="purple"
+          variant="secondary"
+        >
+          <CheckIcon />
+        </ActionButton>
+
         Variant: purple
       </div>
 
       <div class="action-button-demo">
         <ActionButton label="Red action button" style="red">
+          <CheckIcon />
+        </ActionButton>
+
+        <ActionButton label="Red action button" style="red" variant="secondary">
           <CheckIcon />
         </ActionButton>
 
@@ -258,11 +270,23 @@
           <CheckIcon />
         </ActionButton>
 
+        <ActionButton
+          label="Blue action button"
+          style="blue"
+          variant="secondary"
+        >
+          <CheckIcon />
+        </ActionButton>
+
         Variant: blue
       </div>
 
       <div class="action-button-demo">
         <ActionButton label="Default action button">
+          <CheckIcon />
+        </ActionButton>
+
+        <ActionButton label="Default action button" variant="secondary">
           <CheckIcon />
         </ActionButton>
 
