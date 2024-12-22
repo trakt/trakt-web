@@ -16,6 +16,7 @@
 </script>
 
 <SectionList
+  id={`anticipated-list-${type}`}
   items={$list}
   {title}
   --height-list={mediaListHeightResolver(type)}

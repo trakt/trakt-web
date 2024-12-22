@@ -4,8 +4,10 @@
   import { onMount, type Snippet } from "svelte";
   import { writable, type Writable } from "svelte/store";
   import { scrollTracking } from "./scrollTracking";
+  import { useScrollHistory } from "./useScrollHistory";
 
   type SectionListProps<T> = {
+    id: string;
     title: string;
     items: T[];
     item: Snippet<[T]>;
@@ -16,6 +18,7 @@
   };
 
   const {
+    id,
     items,
     title,
     scrollX = writable({ left: 0, right: 0 }),
@@ -44,6 +47,25 @@
   onMount(() => {
     isMounted.set(true);
   });
+
+  const { readScrollState, writeScrollState, event } = useScrollHistory();
+
+  function scrollHistory(container: HTMLDivElement) {
+    onMount(() => {
+      const destroySnapshot = event.on("snapshot", () => {
+        writeScrollState(id, container.scrollLeft);
+      });
+
+      const destroyRestore = event.on("restore", () => {
+        container.scrollLeft = readScrollState(id);
+      });
+
+      return () => {
+        destroySnapshot();
+        destroyRestore();
+      };
+    });
+  }
 </script>
 
 <section
@@ -69,6 +91,7 @@
       <div
         bind:this={$scrollContainer}
         use:scrollTracking={scrollX}
+        use:scrollHistory
         class="shadow-list-horizontal-scroll"
       >
         {#each items as i (i.id)}

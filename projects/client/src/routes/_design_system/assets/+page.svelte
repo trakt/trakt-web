@@ -96,6 +96,7 @@
   </div>
 
   <ShadowList
+    id="assets-covers"
     title={`Covers (${media.length})`}
     items={media}
     --height-list="var(--ni-128)"
@@ -119,6 +120,7 @@
   </ShadowList>
 
   <ShadowList
+    id="assets-posters"
     title={`Posters (${media.length})`}
     items={media}
     --height-list="var(--ni-180)"

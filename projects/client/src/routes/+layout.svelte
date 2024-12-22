@@ -3,6 +3,7 @@
 
   import { page } from "$app/stores";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
+  import ListScrollHistoryProvider from "$lib/components/section-list/ListScrollHistoryProvider.svelte";
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
@@ -106,20 +107,22 @@
       <LocaleProvider>
         <CoverProvider>
           <ThemeProvider theme={data.theme}>
-            <div class="trakt-layout-wrapper">
-              <Navbar />
-              <div class="trakt-layout-content">
-                {@render children()}
+            <ListScrollHistoryProvider>
+              <div class="trakt-layout-wrapper">
+                <Navbar />
+                <div class="trakt-layout-content">
+                  {@render children()}
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
-            <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-              <MobileNavbar />
-            </RenderFor>
-            <SvelteQueryDevtools
-              buttonPosition="bottom-left"
-              styleNonce="opacity: 0.5"
-            />
+              <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+                <MobileNavbar />
+              </RenderFor>
+              <SvelteQueryDevtools
+                buttonPosition="bottom-left"
+                styleNonce="opacity: 0.5"
+              />
+            </ListScrollHistoryProvider>
           </ThemeProvider>
         </CoverProvider>
       </LocaleProvider>

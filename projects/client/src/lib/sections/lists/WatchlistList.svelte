@@ -17,6 +17,7 @@
 </script>
 
 <SectionList
+  id={`watchlist-list-${type}`}
   items={$list}
   {title}
   --height-list={mediaListHeightResolver(type)}

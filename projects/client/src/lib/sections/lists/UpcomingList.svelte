@@ -12,6 +12,7 @@
 </script>
 
 <SectionList
+  id="upcoming-list"
   items={$calendar}
   title={m.upcoming_schedule_title()}
   --height-list={mediaListHeightResolver("episode")}

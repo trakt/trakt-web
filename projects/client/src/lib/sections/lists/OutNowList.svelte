@@ -25,6 +25,7 @@
 </script>
 
 <SectionList
+  id={`out-now-list-${type}`}
   items={$list.sort(compare)}
   {title}
   --height-list={mediaListHeightResolver(type)}

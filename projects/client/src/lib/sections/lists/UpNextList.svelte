@@ -23,6 +23,7 @@
 </script>
 
 <SectionList
+  id="up-next-list"
   items={$list}
   title={m.up_next_title()}
   --height-list={mediaListHeightResolver("episode")}

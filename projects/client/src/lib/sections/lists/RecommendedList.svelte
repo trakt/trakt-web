@@ -16,6 +16,7 @@
 </script>
 
 <SectionList
+  id={`recommended-list-${type}`}
   items={$list}
   {title}
   --height-list={mediaListHeightResolver(type)}
