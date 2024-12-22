@@ -12,6 +12,8 @@ export type MediaSummary = {
   runtime: number;
   title: string;
   tagline: string;
+  country: string | Nil;
+  languages: string[] | Nil;
   poster: {
     url: ImageUrls;
   };

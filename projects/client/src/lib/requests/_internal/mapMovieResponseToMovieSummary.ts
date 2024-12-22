@@ -41,6 +41,8 @@ export function mapMovieResponseToMovieSummary(
     runtime: movie.runtime!,
     year: movie.year,
     tagline: movie.tagline ?? '',
+    country: movie.country,
+    languages: movie.languages,
     poster: {
       url: {
         medium: prependHttps(

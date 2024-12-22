@@ -35,6 +35,8 @@ export function mapShowResponseToShowSummary(
     runtime: show.runtime!,
     year: show.year,
     tagline: show.tagline!,
+    country: show.country,
+    languages: show.languages,
     poster: {
       url: {
         medium: prependHttps(
