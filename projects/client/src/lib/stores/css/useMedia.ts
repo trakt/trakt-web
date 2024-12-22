@@ -7,6 +7,8 @@ export const enum WellKnownMediaQuery {
   tabletSmall = '(min-width: 481px) and (max-width: 768px)',
   tabletLarge = '(min-width: 769px) and (max-width: 1023px)',
   desktop = '(min-width: 1024px)',
+  mouse = '(hover: hover) and (pointer: fine)',
+  touch = '(hover: none) and (pointer: coarse)',
 }
 
 type MediaCallback = () => void;
