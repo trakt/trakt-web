@@ -23,6 +23,7 @@ export function mapResponseToShowProgress(
     title: episode.title,
     season: episode.season,
     number: episode.number,
+    runtime: episode.runtime,
     poster: {
       url: prependHttps(posterCandidate),
     },

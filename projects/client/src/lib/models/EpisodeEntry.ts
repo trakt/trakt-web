@@ -10,4 +10,5 @@ export type EpisodeEntry = {
   };
   airedDate: Date;
   type: EpisodeType;
+  runtime: number;
 };

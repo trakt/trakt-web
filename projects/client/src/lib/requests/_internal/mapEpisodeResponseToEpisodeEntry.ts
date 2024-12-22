@@ -27,6 +27,7 @@ export function mapEpisodeResponseToEpisodeEntry(
     title: episode.title,
     season: episode.season,
     number: episode.number,
+    runtime: episode.runtime,
     poster: {
       url: prependHttps(
         thumbUrl(posterCandidate),
