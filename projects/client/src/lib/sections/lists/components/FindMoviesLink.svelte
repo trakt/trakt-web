@@ -3,6 +3,7 @@
 
   import Button from "$lib/components/buttons/Button.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import CromulonIcon from "./cromulon/CromulonIcon.svelte";
@@ -13,7 +14,11 @@
 </script>
 
 <div class="find-movies-link">
-  <CromulonIcon state={$state} direction="right" />
+  <RenderFor audience="authenticated" input={["mouse"]}>
+    <CromulonIcon state={$state} direction="right" />
+    <CromulonTracker onObserve={state.set} />
+  </RenderFor>
+
   <Button
     href={UrlBuilder.movies()}
     label={m.navbar_link_movies_label()}
@@ -26,7 +31,6 @@
       <MovieIcon />
     {/snippet}
   </Button>
-  <CromulonTracker onObserve={state.set} />
 </div>
 
 <style>

@@ -3,6 +3,7 @@
 
   import Button from "$lib/components/buttons/Button.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import CromulonIcon from "./cromulon/CromulonIcon.svelte";
@@ -25,8 +26,10 @@
       <ShowIcon />
     {/snippet}
   </Button>
-  <CromulonTracker onObserve={state.set} />
-  <CromulonIcon state={$state} />
+  <RenderFor audience="authenticated" input={["mouse"]}>
+    <CromulonIcon state={$state} direction="left" />
+    <CromulonTracker onObserve={state.set} />
+  </RenderFor>
 </div>
 
 <style>

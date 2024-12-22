@@ -8,16 +8,30 @@
   const proximityDistance = 85 ** 2;
 
   function findButtonSibling(node: HTMLElement) {
-    const previous = node.previousElementSibling as HTMLElement;
-    const next = node.nextElementSibling as HTMLElement;
+    let current: HTMLElement | null = node;
 
-    if (previous.classList.contains("trakt-button")) {
-      return previous;
+    while (current) {
+      const previous = current.previousElementSibling;
+      const next = current.nextElementSibling;
+
+      if (
+        previous?.classList.contains("trakt-button") &&
+        previous instanceof HTMLElement
+      ) {
+        return previous;
+      }
+
+      if (
+        next?.classList.contains("trakt-button") &&
+        next instanceof HTMLElement
+      ) {
+        return next;
+      }
+
+      current = current.parentElement;
     }
 
-    if (next.classList.contains("trakt-button")) {
-      return next;
-    }
+    return node;
   }
 
   function getCenter(node: HTMLElement) {
