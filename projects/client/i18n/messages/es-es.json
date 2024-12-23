@@ -143,5 +143,6 @@
   "watchlist_movies": "Tus Películas",
   "watch_now": "Reproducir ahora",
   "watch_title_now": "Reproducir {title} ahora",
-  "watch_title_now_disabled": "Reproducir ahora solo está disponible si {title} está disponible en una de tus plataformas favoritas en tu país. Puedes cambiar estas configuraciones en https://trakt.tv/settings"
+  "watch_title_now_disabled": "Reproducir ahora solo está disponible si {title} está disponible en una de tus plataformas favoritas en tu país. Puedes cambiar estas configuraciones en https://trakt.tv/settings",
+  "year_to_date": "Año en curso"
 }

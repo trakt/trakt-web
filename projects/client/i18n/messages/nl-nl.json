@@ -143,5 +143,6 @@
   "watchlist_movies": "Je films",
   "watch_now": "Nu kijken",
   "watch_title_now": "Bekijk {title} nu",
-  "watch_title_now_disabled": "Nu kijken is alleen beschikbaar als {title} beschikbaar is op een van je favoriete streamingdiensten in je land. Je kunt deze instellingen wijzigen op https://trakt.tv/settings"
+  "watch_title_now_disabled": "Nu kijken is alleen beschikbaar als {title} beschikbaar is op een van je favoriete streamingdiensten in je land. Je kunt deze instellingen wijzigen op https://trakt.tv/settings",
+  "year_to_date": "Jaar tot nu toe"
 }

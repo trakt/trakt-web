@@ -143,5 +143,6 @@
   "watchlist_movies": "Ihre Filme",
   "watch_now": "Jetzt ansehen",
   "watch_title_now": "Titel {title} jetzt ansehen",
-  "watch_title_now_disabled": "Jetzt ansehen ist nur verfügbar, wenn {title} auf einem deiner bevorzugten Streaming-Dienste in deinem Land verfügbar ist. Du kannst diese Einstellungen unter https://trakt.tv/settings ändern"
+  "watch_title_now_disabled": "Jetzt ansehen ist nur verfügbar, wenn {title} auf einem deiner bevorzugten Streaming-Dienste in deinem Land verfügbar ist. Du kannst diese Einstellungen unter https://trakt.tv/settings ändern",
+  "year_to_date": "Jahr bis heute"
 }

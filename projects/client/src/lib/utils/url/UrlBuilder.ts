@@ -26,4 +26,9 @@ export const UrlBuilder = {
   },
   vip: () => 'https://trakt.tv/vip',
   watchlist: () => '/watchlist',
+  og: {
+    yearToDate: (slug: string, year: number) =>
+      `https://trakt.tv/users/${slug}/year/${year}`,
+    getVip: () => 'https://trakt.tv/vip',
+  },
 };

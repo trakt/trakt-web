@@ -143,5 +143,6 @@
   "watchlist_movies": "Filmele tale",
   "watch_now": "Urmărește acum",
   "watch_title_now": "Urmărește acum {title}",
-  "watch_title_now_disabled": "Urmărirea acum este disponibilă doar dacă {title} este disponibil pe una dintre serviciile tale preferate de streaming din țara ta. Poți schimba aceste setări pe https://trakt.tv/settings"
+  "watch_title_now_disabled": "Urmărirea acum este disponibilă doar dacă {title} este disponibil pe una dintre serviciile tale preferate de streaming din țara ta. Poți schimba aceste setări pe https://trakt.tv/settings",
+  "year_to_date": "Anul curent"
 }

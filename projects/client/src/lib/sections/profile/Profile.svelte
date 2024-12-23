@@ -4,6 +4,7 @@
   import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfileHistorySummary from "./components/ProfileHistorySummary.svelte";
+  import YearToDateLink from "./components/YearToDateLink.svelte";
   import { useHistory } from "./stores/useHistory";
 
   const { historyMovies, historyShows } = useHistory();
@@ -15,6 +16,10 @@
   {/snippet}
 
   <ProfileAbout />
+
+  {#snippet contextualContent()}
+    <YearToDateLink />
+  {/snippet}
 </ProfileContainer>
 
 <ProfileContainer>

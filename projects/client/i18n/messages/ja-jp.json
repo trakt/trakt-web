@@ -143,5 +143,6 @@
   "watchlist_movies": "あなたの映画",
   "watch_now": "今すぐ視聴",
   "watch_title_now": "{title}を今すぐ視聴",
-  "watch_title_now_disabled": "{title}は、お住まいの国の好きなストリーミングサービスで利用できる場合にのみ、今すぐ視聴できます。設定はhttps://trakt.tv/settingsで変更できます"
+  "watch_title_now_disabled": "{title}は、お住まいの国の好きなストリーミングサービスで利用できる場合にのみ、今すぐ視聴できます。設定はhttps://trakt.tv/settingsで変更できます",
+  "year_to_date": "今年"
 }

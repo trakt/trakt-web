@@ -12,6 +12,7 @@ import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
 export type UserSettings = {
   id: string;
+  slug: string;
   name: {
     full: string;
     first: string;
@@ -52,6 +53,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
 
   return {
     id: user.ids.uuid,
+    slug: user.ids.slug,
     name: {
       full: fullName,
       first: firstName,
