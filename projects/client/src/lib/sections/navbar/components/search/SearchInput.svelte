@@ -4,6 +4,7 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import SearchResultDetails from "./SearchResultDetails.svelte";
   import { useSearch } from "./useSearch";
 
   const { search, clear, isSearching, results } = useSearch();
@@ -47,7 +48,7 @@
         >
           <div class="trakt-search-result-item">
             <CrossOriginImage alt={result.title} src={result.poster.url} />
-            <span>{result.title} ({result.year})</span>
+            <SearchResultDetails {result} />
           </div>
         </Link>
       {/each}
