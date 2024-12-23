@@ -4,25 +4,9 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { onMount } from "svelte";
   import { useSearch } from "./useSearch";
 
-  let windowScrollY = $state(0);
-
   const { search, clear, isSearching, results } = useSearch();
-
-  function handleScroll() {
-    windowScrollY = window.scrollY;
-  }
-
-  onMount(() => {
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
