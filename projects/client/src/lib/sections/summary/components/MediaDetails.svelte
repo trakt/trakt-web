@@ -1,8 +1,14 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+
+  import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
+  import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
   import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
-  import { constructMediaDetails } from "../utils/constructMediaDetails";
+  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
+  import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
+  import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
   import MediaCollapsableValues from "./MediaCollapsableValues.svelte";
 
   type MediaDetailsProps = {
@@ -17,7 +23,41 @@
     -Differentiate between Show and Movie
   */
 
-  const mediaDetails = constructMediaDetails({ media, studios });
+  const genres = media.genres.map(GenreIntlProvider.genre);
+  const studioNames = studios.map((studio) => studio.name);
+
+  const languages = media.languages?.map((language) =>
+    toLanguageName(language, languageTag()),
+  );
+
+  const mediaDetails = [
+    {
+      title: m.premiered(),
+      values: [toHumanDay(media.airedDate, getLocale())],
+    },
+    {
+      title: m.runtime(),
+      values: [toHumanDuration({ minutes: media.runtime }, languageTag())],
+    },
+    {
+      title: m.country(),
+      values: media.country
+        ? [toCountryName(media.country, languageTag())]
+        : undefined,
+    },
+    {
+      title: m.language(),
+      values: languages,
+    },
+    {
+      title: m.studio(),
+      values: studioNames,
+    },
+    {
+      title: m.genre(),
+      values: genres,
+    },
+  ];
 </script>
 
 <div class="trakt-summary-details">
