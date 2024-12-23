@@ -106,7 +106,7 @@
     align-items: center;
 
     :global(> p) {
-      width: 40%;
+      padding: 0 var(--ni-16);
       text-align: center;
     }
   }
