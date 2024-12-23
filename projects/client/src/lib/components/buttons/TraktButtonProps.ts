@@ -6,6 +6,6 @@ export type TraktButtonProps = ButtonProps & {
   style?: 'textured' | 'flat' | 'ghost';
   icon?: Snippet;
   subtitle?: Snippet;
-  size?: 'normal' | 'small';
+  size?: 'normal' | 'small' | 'tag';
   text?: 'capitalize' | 'uppercase';
 };

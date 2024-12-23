@@ -87,6 +87,7 @@
     );
 
     --scale-factor-button: 1;
+    --button-height: var(--ni-52);
 
     --color-background-button-light: color-mix(
       in srgb,
@@ -177,6 +178,12 @@
       --scale-factor-button: 0.75;
     }
 
+    &[data-size="tag"] {
+      --scale-factor-button: 0.75;
+      --button-height: var(--ni-24);
+      padding: var(--ni-4) var(--ni-10);
+    }
+
     & {
       min-width: var(--ni-96);
     }
@@ -184,7 +191,7 @@
     &,
     &::before,
     &:active[disabled] {
-      height: var(--ni-52);
+      height: var(--button-height);
       box-sizing: border-box;
       border-radius: var(--border-radius-m);
     }
@@ -280,7 +287,9 @@
     }
 
     &[data-style="textured"] {
-      padding-top: var(--ni-12);
+      &:not([data-size="tag"]) {
+        padding-top: var(--ni-12);
+      }
 
       &,
       &::before {
