@@ -55,4 +55,26 @@ describe('DropdownList', () => {
       expect(list).not.toBeInTheDocument();
     });
   });
+
+  it('should close the dropdown when clicking an item', async () => {
+    render(DropdownList, {
+      props: {
+        ...defaultProps,
+      },
+    });
+
+    const dropdownButton = screen.getByRole('button', {
+      name: /click here/i,
+    });
+
+    await fireEvent.click(dropdownButton);
+    const list = screen.getByRole('list');
+    expect(list).toBeInTheDocument();
+
+    const item = screen.getByRole('listitem');
+    await fireEvent.click(item);
+    await waitFor(() => {
+      expect(list).not.toBeInTheDocument();
+    });
+  });
 });

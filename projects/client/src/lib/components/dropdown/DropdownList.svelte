@@ -48,7 +48,7 @@
   {#if $isDropdownOpen}
     <div class="trakt-list" transition:slide={{ duration: 150 }}>
       <div class="spacer"></div>
-      <ul>
+      <ul onclickcapture={() => isDropdownOpen.set(false)}>
         {@render items()}
       </ul>
     </div>
