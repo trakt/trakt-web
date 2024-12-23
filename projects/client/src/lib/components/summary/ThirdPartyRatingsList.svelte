@@ -3,6 +3,7 @@
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import TMDBIcon from "$lib/components/icons/TMDBIcon.svelte";
   import type { MediaRating } from "$lib/models/MediaRating";
+  import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import { toRottenTomatoRating } from "$lib/utils/formatting/number/toRottenTomatoRating";
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
   import type { RatingIntl } from "./RatingIntl";
@@ -32,7 +33,7 @@
   <RatingItem voteCount={tmdb.votes}>
     <TMDBIcon style={toVotesBasedRating(tmdb.votes)} />
     {#snippet rating()}
-      {tmdb.rating}
+      {toPercentage(tmdb.rating)}
     {/snippet}
     {#snippet superscript()}
       {i18n.voteText(tmdb.votes)}

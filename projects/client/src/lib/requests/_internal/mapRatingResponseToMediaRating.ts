@@ -13,7 +13,7 @@ export function mapRatingResponseToMediaRating(
       distribution: ratings.trakt.distribution,
     },
     tmdb: {
-      rating: ratings.tmdb?.rating ?? 0,
+      rating: (ratings.tmdb?.rating ?? 0) / 10,
       votes: ratings.tmdb?.votes ?? 0,
     },
     rotten: {
