@@ -136,5 +136,9 @@
   "country": "Land",
   "language": "Taal",
   "studio": "Studio",
-  "genre": "Genre"
+  "genre": "Genre",
+  "navbar_link_watchlist": "Kijklijst",
+  "navbar_link_watchlist_label": "Blader door je Kijklijst",
+  "watchlist_shows": "Je series",
+  "watchlist_movies": "Je films"
 }

@@ -136,5 +136,9 @@
   "country": "País",
   "language": "Idioma",
   "studio": "Estudio",
-  "genre": "Género"
+  "genre": "Género",
+  "navbar_link_watchlist": "Lista de seguimiento",
+  "navbar_link_watchlist_label": "Explora tu Lista de seguimiento",
+  "watchlist_shows": "Tus Series",
+  "watchlist_movies": "Tus Películas"
 }

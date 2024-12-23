@@ -25,4 +25,5 @@ export const UrlBuilder = {
     ios: () => 'https://trakt.tv/a/trakt-ios',
   },
   vip: () => 'https://trakt.tv/vip',
+  watchlist: () => '/watchlist',
 };

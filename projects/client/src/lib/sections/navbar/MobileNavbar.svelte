@@ -1,5 +1,6 @@
 <script lang="ts">
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
+  import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
@@ -26,6 +27,13 @@
     <div class="trakt-mobile-navbar-link">
       <MovieIcon />
       <p class="meta-info">{m.navbar_link_movies()}</p>
+    </div>
+  </Link>
+
+  <Link href={UrlBuilder.watchlist()}>
+    <div class="trakt-mobile-navbar-link">
+      <WatchlistIcon />
+      <p class="meta-info">{m.navbar_link_watchlist()}</p>
     </div>
   </Link>
 </div>

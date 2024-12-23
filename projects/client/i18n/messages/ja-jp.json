@@ -136,5 +136,9 @@
   "country": "製作国",
   "language": "言語",
   "studio": "製作会社",
-  "genre": "ジャンル"
+  "genre": "ジャンル",
+  "navbar_link_watchlist": "視聴リスト",
+  "navbar_link_watchlist_label": "視聴リストを閲覧する",
+  "watchlist_shows": "あなたの番組",
+  "watchlist_movies": "あなたの映画"
 }

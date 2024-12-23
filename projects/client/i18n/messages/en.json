@@ -136,5 +136,9 @@
   "country": "Country",
   "language": "Language",
   "studio": "Studio",
-  "genre": "Genre"
+  "genre": "Genre",
+  "navbar_link_watchlist": "Watchlist",
+  "navbar_link_watchlist_label": "Browse your Watchlist",
+  "watchlist_shows": "Your Shows",
+  "watchlist_movies": "Your Movies"
 }

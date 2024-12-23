@@ -136,5 +136,9 @@
   "country": "Land",
   "language": "Sprache",
   "studio": "Studio",
-  "genre": "Genre"
+  "genre": "Genre",
+  "navbar_link_watchlist": "Meine Wunschliste",
+  "navbar_link_watchlist_label": "Meine Wunschliste durchsuchen",
+  "watchlist_shows": "Ihre Serien",
+  "watchlist_movies": "Ihre Filme"
 }

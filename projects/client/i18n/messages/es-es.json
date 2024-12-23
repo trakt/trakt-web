@@ -136,5 +136,9 @@
   "country": "País",
   "language": "Idioma",
   "studio": "Estudio",
-  "genre": "Género"
+  "genre": "Género",
+  "navbar_link_watchlist": "Lista de visionado",
+  "navbar_link_watchlist_label": "Explorar tu Lista de visionado",
+  "watchlist_shows": "Tus Series",
+  "watchlist_movies": "Tus Películas"
 }

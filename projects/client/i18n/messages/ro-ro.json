@@ -136,5 +136,9 @@
   "country": "Țară",
   "language": "Limbă",
   "studio": "Studiouri",
-  "genre": "Gen"
+  "genre": "Gen",
+  "navbar_link_watchlist": "Lista de Vizionare",
+  "navbar_link_watchlist_label": "Parcurge-ți Lista de Vizionare",
+  "watchlist_shows": "Serialele tale",
+  "watchlist_movies": "Filmele tale"
 }

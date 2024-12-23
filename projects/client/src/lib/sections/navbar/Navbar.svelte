@@ -71,6 +71,15 @@
         >
           {m.navbar_link_movies()}
         </Button>
+        <Button
+          href={UrlBuilder.watchlist()}
+          label={m.navbar_link_watchlist_label()}
+          style="ghost"
+          variant="primary"
+          color="purple"
+        >
+          {m.navbar_link_watchlist()}
+        </Button>
       </RenderFor>
       <RenderFor audience="public">
         <JoinTraktButton />
