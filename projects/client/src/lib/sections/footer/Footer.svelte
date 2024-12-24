@@ -11,14 +11,16 @@
   <FooterContent />
 </footer>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .trakt-footer {
     height: var(--ni-300);
     margin-top: var(--ni-120);
     padding-left: var(--layout-distance-side);
     padding-right: var(--layout-distance-side);
 
-    @media (max-width: 768px) {
+    @include for-tablet-sm-and-below {
       margin-top: var(--ni-60);
       height: auto;
     }

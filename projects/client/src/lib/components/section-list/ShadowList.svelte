@@ -106,7 +106,9 @@
   </div>
 </section>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .shadow-list-container,
   .shadow-list,
   .shadow-list-empty-state {
@@ -119,7 +121,7 @@
     gap: var(--ni-32);
     transition: gap var(--transition-increment) ease-in-out;
 
-    @media screen and (max-width: 480px) {
+    @include for-mobile {
       gap: var(--ni-16);
     }
   }
@@ -160,11 +162,11 @@
     color: var(--color-text-primary);
     transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
 
-    @media (max-width: 768px) {
+    @include for-tablet-sm {
       font-size: var(--ni-32);
     }
 
-    @media (max-width: 480px) {
+    @include for-mobile {
       font-size: var(--ni-24);
     }
   }

@@ -9,3 +9,39 @@
     @content;
   }
 }
+
+@mixin for-mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-sm {
+  @media (min-width: 481px) and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-sm-and-below {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-lg {
+  @media (min-width: 769px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-lg-and-below {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}

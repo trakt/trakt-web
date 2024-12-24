@@ -32,7 +32,9 @@
   </trakt-render-for>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   trakt-render-for {
     display: contents;
   }
@@ -40,7 +42,7 @@
   .render-for-mouse {
     display: none;
 
-    @media (hover: hover) and (pointer: fine) {
+    @include for-mouse {
       display: contents !important;
     }
   }
@@ -48,7 +50,7 @@
   .render-for-touch {
     display: none;
 
-    @media (hover: none) and (pointer: coarse) {
+    @include for-touch {
       display: contents !important;
     }
   }

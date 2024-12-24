@@ -30,14 +30,16 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .trakt-profile-container {
     display: grid;
     gap: var(--ni-32);
     grid-template-columns: 1fr 2fr 1fr;
     margin: 0 var(--ni-56);
 
-    @media (max-width: 768px) {
+    @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
       margin: 0 var(--ni-16);
 

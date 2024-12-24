@@ -32,7 +32,9 @@
   </div>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .profile-banner-container {
     margin-left: calc(var(--ni-52) + var(--layout-distance-side));
     display: flex;
@@ -41,7 +43,7 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: margin-left scale height;
 
-    @media (max-width: 480px) {
+    @include for-mobile {
       margin-left: 0;
       scale: 0.75;
       height: 75%;

@@ -34,7 +34,9 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .trakt-profile-history-summary {
     height: var(--ni-104);
     border-radius: var(--ni-12);
@@ -45,7 +47,7 @@
     gap: var(--ni-20);
     box-shadow: 0 var(--ni-4) var(--ni-8) 0 rgba(0, 0, 0, 0.24);
 
-    @media (max-width: 1024px) {
+    @include for-desktop {
       height: var(--ni-176);
 
       .trakt-profile-history-content {

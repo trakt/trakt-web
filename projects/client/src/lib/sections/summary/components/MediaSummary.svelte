@@ -120,9 +120,11 @@
   <MediaDetails {media} {studios} {crew} />
 </MediaSummaryContainer>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   :global(.trakt-info-actions) {
-    @media ((max-width: 768px)) {
+    @include for-tablet-sm-and-below {
       display: flex;
       flex-flow: column;
 

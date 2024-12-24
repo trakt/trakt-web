@@ -49,7 +49,9 @@
   </trakt-render-for>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   trakt-render-for {
     display: contents;
   }
@@ -57,7 +59,7 @@
   .render-for-mobile {
     display: none;
 
-    @media (max-width: 480px) {
+    @include for-mobile {
       display: contents !important;
     }
   }
@@ -65,7 +67,7 @@
   .render-for-tablet-small {
     display: none;
 
-    @media (min-width: 481px) and (max-width: 768px) {
+    @include for-tablet-sm {
       display: contents !important;
     }
   }
@@ -73,13 +75,13 @@
   .render-for-tablet-large {
     display: none;
 
-    @media (min-width: 769px) and (max-width: 1023px) {
+    @include for-tablet-lg {
       display: contents !important;
     }
   }
 
   .render-for-desktop {
-    @media (min-width: 1024px) {
+    @include for-desktop {
       display: contents !important;
     }
   }

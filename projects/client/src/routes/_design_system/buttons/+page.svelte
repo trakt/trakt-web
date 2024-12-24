@@ -145,7 +145,9 @@
   </div>
 </main>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   main {
     display: flex;
     flex-direction: column;
@@ -153,7 +155,7 @@
     padding-top: var(--ni-32);
     align-items: center;
 
-    @media (max-width: 768px) {
+    @include for-tablet-sm-and-below {
       .button-display {
         flex-direction: column;
         align-items: center;

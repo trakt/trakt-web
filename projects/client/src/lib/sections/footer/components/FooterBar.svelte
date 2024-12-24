@@ -6,14 +6,16 @@
   {@render children?.()}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .trakt-footer-bar {
     padding: var(--ni-40);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 768px) {
+    @include for-tablet-sm-and-below {
       padding: var(--ni-12) var(--ni-16);
     }
   }

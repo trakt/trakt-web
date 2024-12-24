@@ -87,7 +87,9 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .trakt-summary-details {
     display: flex;
     flex-direction: column;
@@ -99,7 +101,7 @@
     grid-template-columns: 1fr 1fr;
     gap: var(--ni-16);
 
-    @media (max-width: 480px) {
+    @include for-mobile {
       grid-template-columns: 1fr;
     }
   }

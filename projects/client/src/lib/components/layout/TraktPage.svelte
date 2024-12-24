@@ -81,7 +81,9 @@
   {@render children()}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   .trakt-content {
     --content-gap: var(--ni-48);
 
@@ -96,7 +98,7 @@
       margin-top: var(--content-gap);
     }
 
-    @media (max-width: 480px) {
+    @include for-mobile {
       --content-gap: var(--ni-18);
 
       &:first-child {
