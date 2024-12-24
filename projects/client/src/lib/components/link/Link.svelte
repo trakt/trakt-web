@@ -38,7 +38,7 @@
 {/if}
 
 <style lang="scss">
-  @use "$style/mixins/index" as *;
+  @use "$style/scss/mixins/index" as *;
 
   .trakt-link {
     -webkit-tap-highlight-color: transparent;
@@ -49,7 +49,7 @@
     display: inherit;
 
     :global(p),
-    :globla(span) {
+    :global(span) {
       color: inherit;
     }
 
