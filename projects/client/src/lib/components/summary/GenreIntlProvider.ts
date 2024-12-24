@@ -1,16 +1,6 @@
 import type { GenreIntl } from '$lib/components/summary/GenreIntl.ts';
-import * as m from '$lib/features/i18n/messages.ts';
-
-type IntlStore = Record<string, () => string>;
+import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
 
 export const GenreIntlProvider: GenreIntl = {
-  genre: (genre: string) => {
-    const messages = m as unknown as IntlStore;
-
-    const key = `genre_${
-      genre.toLocaleLowerCase().replace(/[\s-]+/g, '_')
-    }` as const;
-
-    return messages[key]?.() ?? genre;
-  },
+  genre: (genre: string) => toTranslatedValue('genre', genre),
 };
