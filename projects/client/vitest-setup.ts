@@ -1,5 +1,6 @@
 //https://github.com/testing-library/jest-dom?tab=readme-ov-file#with-vitest
 import '@testing-library/jest-dom/vitest';
+import './test/mocks/messages.mock.ts';
 import './test/mocks/navigation.mock.ts';
 import './test/mocks/stores.mock.ts';
 
