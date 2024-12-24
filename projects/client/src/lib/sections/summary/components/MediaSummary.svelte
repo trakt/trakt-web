@@ -2,6 +2,7 @@
   import BackgroundCoverImage from "$lib/components/background/BackgroundCoverImage.svelte";
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import type { MarkAsWatchedButtonProps } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonProps";
+  import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import type { WatchlistButtonProps } from "$lib/components/buttons/watchlist/WatchlistButtonProps";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
@@ -12,6 +13,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
+  import { useWatchNow } from "$lib/stores/useWatchNow";
   import type { Snippet } from "svelte";
   import MediaDetails from "./MediaDetails.svelte";
   import MediaStatsList from "./MediaStatsList.svelte";
@@ -70,9 +72,16 @@
     isWatched: $isWatched,
     onWatch: markAsWatched,
   });
+
+  const { watchNow, isLoading } = useWatchNow({ type, id: media.slug });
 </script>
 
 {#snippet mediaActions()}
+  <WatchNowButton
+    isLoading={$isLoading}
+    streamingLink={$watchNow?.link}
+    mediaTitle={media.title}
+  />
   <WatchlistButton {...watchlistProps} />
   <MarkAsWatchedButton {...markWasWatchedProps} />
 {/snippet}

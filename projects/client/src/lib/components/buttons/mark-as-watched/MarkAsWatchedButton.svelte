@@ -17,6 +17,7 @@
 <Button
   label={i18n.label({ title })}
   color="purple"
+  variant="secondary"
   onclick={onWatch}
   disabled={isMarkingAsWatched || isWatched}
   {...props}
