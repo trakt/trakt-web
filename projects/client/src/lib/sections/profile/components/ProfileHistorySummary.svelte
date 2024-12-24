@@ -36,7 +36,7 @@
 
 <style>
   .trakt-profile-history-summary {
-    min-height: var(--ni-104);
+    height: var(--ni-104);
     border-radius: var(--ni-12);
     background-color: var(--purple-900);
     padding: var(--ni-24) var(--ni-16) var(--ni-24) var(--ni-16);
@@ -44,15 +44,19 @@
     flex-direction: column;
     gap: var(--ni-20);
     box-shadow: 0 var(--ni-4) var(--ni-8) 0 rgba(0, 0, 0, 0.24);
+
+    @media (max-width: 1024px) {
+      height: var(--ni-176);
+
+      .trakt-profile-history-content {
+        flex-direction: column;
+        gap: var(--ni-24);
+      }
+    }
   }
 
   .trakt-profile-history-content {
     display: flex;
     justify-content: space-between;
-
-    @media (max-width: 1024px) {
-      flex-direction: column;
-      gap: var(--ni-24);
-    }
   }
 </style>
