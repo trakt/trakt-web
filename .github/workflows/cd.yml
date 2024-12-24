@@ -12,6 +12,9 @@ jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    concurrency:
+      group: cd-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Retrieving the Sacred Artifact
         uses: dawidd6/action-download-artifact@v6
