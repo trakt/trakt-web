@@ -46,57 +46,46 @@
 {/if}
 
 <style lang="scss">
-  .trakt-action-button {
-    @each $color in "purple", "red", "blue", "default" {
-      &[data-color="#{$color}"] {
-        $background-color: var(--color-background-#{$color});
-        $foreground-color: var(--color-foreground-#{$color});
+  @use "../../../style/mixins/index.scss" as *;
 
-        &[data-variant="primary"] {
-          $hover: var(--color-background-#{$color}-hover);
+  @mixin variant-styles($variant, $background-color, $foreground-color) {
+    &[data-variant="#{$variant}"] {
+      --color-background-action-button: #{$background-color};
+      --color-foreground-action-button: #{$foreground-color};
 
-          --color-background-action-button: #{$background-color};
-          --color-foreground-action-button: #{$foreground-color};
-
-          &:hover,
-          &:focus-visible {
-            --color-background-action-button: #{$foreground-color};
-            --color-foreground-action-button: #{$background-color};
-          }
-        }
-
-        &[data-variant="secondary"] {
+      @include mouse {
+        &:hover,
+        &:focus-visible {
           --color-background-action-button: #{$foreground-color};
           --color-foreground-action-button: #{$background-color};
-
-          &:hover,
-          &:focus-visible {
-            --color-background-action-button: #{$background-color};
-            --color-foreground-action-button: #{$foreground-color};
-          }
         }
+      }
+    }
+  }
 
+  @mixin color-styles($color) {
+    &[data-color="#{$color}"] {
+      $background-color: var(--color-background-#{$color});
+      $foreground-color: var(--color-foreground-#{$color});
+
+      @include variant-styles("primary", $background-color, $foreground-color);
+
+      @include variant-styles(
+        "secondary",
+        $foreground-color,
+        $background-color
+      );
+
+      @include mouse {
         &:focus-visible {
-          outline: var(--border-thickness-xs)
-            solid
+          outline: var(--border-thickness-xs) solid
             var(--color-foreground-action-button);
         }
       }
     }
+  }
 
-    &[disabled] {
-      cursor: not-allowed;
-      color: var(--color-foreground-button-disabled);
-      background: var(
-        --color-background-button-disabled,
-        var(--color-surface-button-disabled)
-      );
-
-      &::before {
-        display: none;
-      }
-    }
-
+  .trakt-action-button {
     all: unset;
 
     cursor: pointer;
@@ -112,8 +101,27 @@
     flex-shrink: 0;
 
     border-radius: var(--border-radius-m);
+    background-color: var(--color-background-action-button);
+    color: var(--color-foreground-action-button);
 
     transition: background-color var(--transition-increment) ease-in-out;
+
+    @each $color in "purple", "red", "blue", "default" {
+      @include color-styles($color);
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      color: var(--color-foreground-button-disabled);
+      background: var(
+        --color-background-button-disabled,
+        var(--color-surface-button-disabled)
+      );
+
+      &::before {
+        display: none;
+      }
+    }
 
     &:active {
       transform: scale(0.95);
@@ -123,8 +131,5 @@
           infinite;
       }
     }
-
-    background-color: var(--color-background-action-button);
-    color: var(--color-foreground-action-button);
   }
 </style>

@@ -37,7 +37,9 @@
   {@render children?.()}
 {/if}
 
-<style>
+<style lang="scss">
+  @use "../../../style/mixins/index" as *;
+
   .trakt-link {
     -webkit-tap-highlight-color: transparent;
     color: inherit;
@@ -46,7 +48,8 @@
     transition: color var(--transition-increment) ease-in-out;
     display: inherit;
 
-    :global(p, span) {
+    :global(p),
+    :globla(span) {
       color: inherit;
     }
 
@@ -75,9 +78,11 @@
         color: var(--color-foreground);
       }
 
-      &:hover,
-      &:focus-visible {
-        color: var(--color-link-active);
+      @include mouse {
+        &:hover,
+        &:focus-visible {
+          color: var(--color-link-active);
+        }
       }
 
       &.trakt-link-active {
@@ -86,8 +91,10 @@
           color: var(--color-link-active);
         }
 
-        &:hover {
-          color: var(--color-foreground);
+        @include mouse {
+          &:hover {
+            color: var(--color-foreground);
+          }
         }
       }
     }
@@ -100,8 +107,10 @@
         color: var(--red-300);
       }
 
-      &:hover {
-        color: var(--blue-600);
+      @include mouse {
+        &:hover {
+          color: var(--blue-600);
+        }
       }
     }
   }

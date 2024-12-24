@@ -53,51 +53,6 @@
       color: var(--color-foreground);
       font-family: "Spline Sans", Arial, sans-serif;
     }
-
-    @media (hover: hover) and (pointer: fine) {
-      ::-webkit-scrollbar {
-        width: var(--ni-8);
-        height: var(--ni-8);
-      }
-
-      body,
-      html {
-        &::-webkit-scrollbar-thumb {
-          background-color: color-mix(
-            in srgb,
-            var(--color-foreground) 30%,
-            transparent 70%
-          );
-        }
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background-color: color-mix(
-          in srgb,
-          var(--color-foreground) 0%,
-          transparent 100%
-        );
-        border-radius: var(--border-radius-xs);
-        backdrop-filter: blur(var(--ni-4));
-        opacity: 0;
-      }
-
-      :hover::-webkit-scrollbar-thumb {
-        background-color: color-mix(
-          in srgb,
-          var(--color-foreground) 50%,
-          transparent 50%
-        );
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--color-foreground) 100%,
-          transparent 0%
-        );
-      }
-    }
   </style>
 </svelte:head>
 
@@ -134,7 +89,9 @@
   </AuthProvider>
 </QueryClientProvider>
 
-<style>
+<style lang="scss">
+  @use "../style/mixins/index" as *;
+
   :global(.tsqd-open-btn-container) {
     opacity: 0.25;
   }
@@ -147,5 +104,50 @@
 
   .trakt-layout-content {
     flex: 1;
+  }
+
+  @include mouse {
+    :global(::-webkit-scrollbar) {
+      width: var(--ni-8);
+      height: var(--ni-8);
+    }
+
+    :global(body),
+    :global(html) {
+      &::-webkit-scrollbar-thumb {
+        background-color: color-mix(
+          in srgb,
+          var(--color-foreground) 30%,
+          transparent 70%
+        );
+      }
+    }
+
+    :global(::-webkit-scrollbar-thumb) {
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 0%,
+        transparent 100%
+      );
+      border-radius: var(--border-radius-xs);
+      backdrop-filter: blur(var(--ni-4));
+      opacity: 0;
+    }
+
+    :global(:hover::-webkit-scrollbar-thumb) {
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 50%,
+        transparent 50%
+      );
+    }
+
+    :global(::-webkit-scrollbar-thumb:hover) {
+      background-color: color-mix(
+        in srgb,
+        var(--color-foreground) 100%,
+        transparent 0%
+      );
+    }
   }
 </style>

@@ -5,6 +5,7 @@
     "redhat.vscode-yaml",
     "phoenisx.cssvar",
     "jacobcassidy.css-nesting-syntax-highlighting",
-    "svelte.svelte-vscode"
+    "svelte.svelte-vscode",
+    "sibiraj-s.vscode-scss-formatter"
   ]
 }

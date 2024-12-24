@@ -74,7 +74,9 @@
   </select>
 </div>
 
-<style>
+<style lang="scss">
+  @use "../../../../style/mixins/index" as *;
+
   .locale-picker-container {
     position: relative;
     width: var(--ni-48);
@@ -90,12 +92,14 @@
       transform: translate(-50%, -50%);
     }
 
-    &:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--color-background) 30%,
-        transparent 70%
-      );
+    @include mouse {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--color-background) 30%,
+          transparent 70%
+        );
+      }
     }
   }
 

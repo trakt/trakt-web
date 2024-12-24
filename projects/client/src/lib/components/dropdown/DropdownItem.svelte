@@ -41,7 +41,9 @@
   {/if}
 </li>
 
-<style>
+<style lang="scss">
+  @use "../../../style/mixins/index" as *;
+
   li {
     text-decoration: none;
     list-style-type: none;
@@ -71,8 +73,10 @@
     &[data-style="normal"] {
       color: var(--purple-800);
 
-      &:hover {
-        background: var(--purple-100);
+      @include mouse {
+        &:hover {
+          background: var(--purple-100);
+        }
       }
 
       &:active {
@@ -88,8 +92,10 @@
     &[data-style="danger"] {
       color: var(--red-600);
 
-      &:hover {
-        background: var(--red-100);
+      @include mouse {
+        &:hover {
+          background: var(--red-100);
+        }
       }
 
       &:active {

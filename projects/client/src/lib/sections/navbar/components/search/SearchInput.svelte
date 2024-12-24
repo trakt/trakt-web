@@ -56,7 +56,9 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "../../../../../style/mixins/index" as *;
+
   @keyframes slide-left-to-right {
     0% {
       background-position: 200% 0;
@@ -163,11 +165,13 @@
       :global(a.trakt-link) {
         transition: background-color var(--transition-increment) ease-in-out;
 
-        &:hover,
-        &:focus-visible {
-          background: var(--purple-900);
-          color: var(--shade-10);
-          border-radius: var(--border-radius-m);
+        @include mouse {
+          &:hover,
+          &:focus-visible {
+            background: var(--purple-900);
+            color: var(--shade-10);
+            border-radius: var(--border-radius-m);
+          }
         }
 
         &:active {
