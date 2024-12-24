@@ -117,6 +117,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--ni-32);
+    transition: gap var(--transition-increment) ease-in-out;
+
+    @media screen and (max-width: 480px) {
+      gap: var(--ni-16);
+    }
   }
 
   .shadow-list-empty-state {
