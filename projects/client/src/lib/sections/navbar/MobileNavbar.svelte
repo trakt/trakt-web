@@ -43,8 +43,8 @@
 <style>
   .trakt-mobile-navbar-spacer,
   .trakt-mobile-navbar {
-    padding: var(--ni-16) 0;
-    height: var(--ni-72);
+    padding: var(--ni-12) 0;
+    height: var(--ni-56);
     box-sizing: border-box;
   }
 
@@ -72,7 +72,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--ni-8);
+    gap: var(--ni-4);
   }
 
   :global(.trakt-link.trakt-link-active) {
