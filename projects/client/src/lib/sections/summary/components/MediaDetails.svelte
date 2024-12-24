@@ -4,22 +4,24 @@
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
   import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
   import type { MediaStudio } from "$lib/models/MediaStudio";
+  import type { CrewMember, MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
   import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
+  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import MediaCollapsableValues from "./MediaCollapsableValues.svelte";
 
   type MediaDetailsProps = {
     media: MediaSummary;
     studios: MediaStudio[];
+    crew: MediaCrew;
   };
 
-  const { media, studios }: MediaDetailsProps = $props();
+  const { media, studios, crew }: MediaDetailsProps = $props();
 
   /*TODO:
-    -Director/writers
     -Differentiate between Show and Movie
   */
 
@@ -30,6 +32,9 @@
     toLanguageName(language, languageTag()),
   );
 
+  const toCrewMemberWithJob = (person: CrewMember) =>
+    `${person.name} (${toTranslatedValue("job", person.job)})`;
+
   const mediaDetails = [
     {
       title: m.premiered(),
@@ -38,6 +43,14 @@
     {
       title: m.runtime(),
       values: [toHumanDuration({ minutes: media.runtime }, languageTag())],
+    },
+    {
+      title: m.director(),
+      values: crew.directors.map(toCrewMemberWithJob),
+    },
+    {
+      title: m.writer(),
+      values: crew.writers.map(toCrewMemberWithJob),
     },
     {
       title: m.country(),

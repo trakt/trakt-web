@@ -4,9 +4,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { useShow } from "./useShow";
-  const { show, intl, ratings, stats, progress, watchers, studios } = $derived(
-    useShow($page.params.slug),
-  );
+  const { show, intl, ratings, stats, progress, watchers, studios, crew } =
+    $derived(useShow($page.params.slug));
 </script>
 
 <TraktPage
@@ -15,7 +14,7 @@
   image={$show?.cover.url.thumb}
   type="show"
 >
-  {#if $show != null && $ratings != null && $stats != null && $intl != null && $studios != null}
+  {#if $show != null && $ratings != null && $stats != null && $intl != null && $studios != null && $crew != null}
     <ShowSummary
       media={$show}
       ratings={$ratings}
@@ -24,6 +23,7 @@
       intl={$intl}
       progress={$progress}
       studios={$studios}
+      crew={$crew}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->

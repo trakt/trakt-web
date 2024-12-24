@@ -1,5 +1,6 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
+import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showProgressQuery } from '$lib/requests/queries/shows/showProgressQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
@@ -42,6 +43,11 @@ export function useShow(slug: string) {
     staleTime: time.days(1),
   });
 
+  const crew = createQuery({
+    ...showPeopleQuery({ slug }),
+    staleTime: time.days(1),
+  });
+
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
 
@@ -51,7 +57,16 @@ export function useShow(slug: string) {
   });
 
   // TODO: remove this when we have empty state, make sure requests fire in parallel
-  const queries = [show, ratings, stats, watchers, studios, progress, intl];
+  const queries = [
+    show,
+    ratings,
+    stats,
+    watchers,
+    studios,
+    progress,
+    crew,
+    intl,
+  ];
 
   onMount(() => {
     queries.forEach((query) => query.subscribe(() => {}));
@@ -64,6 +79,7 @@ export function useShow(slug: string) {
     watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
     progress: derived(progress, ($progress) => $progress.data),
     studios: derived(studios, ($studios) => $studios.data),
+    crew: derived(crew, ($crew) => $crew.data),
     intl: derived(
       [show, intl],
       ([$show, $intl]) => {

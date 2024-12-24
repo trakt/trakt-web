@@ -5,6 +5,7 @@
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { MediaStats } from "$lib/models/MediaStats";
   import type { MediaStudio } from "$lib/models/MediaStudio";
+  import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -15,10 +16,19 @@
     progress?: EpisodeProgressEntry;
     stats: MediaStats;
     studios: MediaStudio[];
+    crew: MediaCrew;
   };
 
-  const { media, ratings, stats, watchers, studios, intl, progress }: ShowSummaryProps =
-    $props();
+  const {
+    media,
+    ratings,
+    stats,
+    watchers,
+    studios,
+    intl,
+    progress,
+    crew,
+  }: ShowSummaryProps = $props();
 </script>
 
 {#snippet contextualContent()}
@@ -36,6 +46,7 @@
   {watchers}
   {studios}
   {intl}
+  {crew}
   type="show"
   {contextualContent}
 />

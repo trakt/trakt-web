@@ -11,6 +11,7 @@
   import type { MediaStats } from "$lib/models/MediaStats";
   import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { MediaType } from "$lib/models/MediaType";
+  import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { useWatchNow } from "$lib/stores/useWatchNow";
@@ -32,11 +33,13 @@
     stats,
     watchers,
     studios,
+    crew,
   }: MediaSummaryProps<MediaSummary> & {
     type: MediaType;
     contextualContent?: Snippet;
     stats: MediaStats;
     studios: MediaStudio[];
+    crew: MediaCrew;
   } = $props();
 
   const { markAsWatched, isMarkingAsWatched, isWatched } = $derived(
@@ -112,7 +115,7 @@
 <MediaSummaryContainer>
   <MediaStatsList {stats} />
   <ThirdPartyRatingsList {ratings} />
-  <MediaDetails {media} {studios} />
+  <MediaDetails {media} {studios} {crew} />
 </MediaSummaryContainer>
 
 <style>
