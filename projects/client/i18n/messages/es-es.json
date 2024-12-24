@@ -140,5 +140,8 @@
   "navbar_link_watchlist": "Lista de visionado",
   "navbar_link_watchlist_label": "Explorar tu Lista de visionado",
   "watchlist_shows": "Tus Series",
-  "watchlist_movies": "Tus Películas"
+  "watchlist_movies": "Tus Películas",
+  "watch_now": "Reproducir ahora",
+  "watch_title_now": "Reproducir {title} ahora",
+  "watch_title_now_disabled": "Reproducir ahora solo está disponible si {title} está disponible en una de tus plataformas favoritas en tu país. Puedes cambiar estas configuraciones en https://trakt.tv/settings"
 }

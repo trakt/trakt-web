@@ -140,5 +140,8 @@
   "navbar_link_watchlist": "Liste de visionnage",
   "navbar_link_watchlist_label": "Parcourir votre Liste de visionnage",
   "watchlist_shows": "Vos Séries",
-  "watchlist_movies": "Vos Films"
+  "watchlist_movies": "Vos Films",
+  "watch_now": "Regarder maintenant",
+  "watch_title_now": "Regardez {title} maintenant",
+  "watch_title_now_disabled": "Regarder maintenant n'est disponible que si {title} est disponible sur l'un de vos services de streaming favoris dans votre pays. Vous pouvez modifier ces paramètres sur https://trakt.tv/settings"
 }

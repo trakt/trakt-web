@@ -140,5 +140,8 @@
   "navbar_link_watchlist": "Lista de seguimiento",
   "navbar_link_watchlist_label": "Explora tu Lista de seguimiento",
   "watchlist_shows": "Tus Series",
-  "watchlist_movies": "Tus Películas"
+  "watchlist_movies": "Tus Películas",
+  "watch_now": "Mira ahora",
+  "watch_title_now": "Mira {title} ahora",
+  "watch_title_now_disabled": "Ver ahora solo está disponible si {title} está disponible en uno de tus servicios de transmisión favoritos en tu país. Puedes cambiar estas configuraciones en https://trakt.tv/settings"
 }

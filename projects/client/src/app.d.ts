@@ -118,6 +118,7 @@ declare global {
   export type ButtonProps =
     & {
       label: string;
+      title?: string;
     }
     & HTMLElementProps
     & ChildrenProps;

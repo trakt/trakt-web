@@ -140,5 +140,8 @@
   "navbar_link_watchlist": "Meine Wunschliste",
   "navbar_link_watchlist_label": "Meine Wunschliste durchsuchen",
   "watchlist_shows": "Ihre Serien",
-  "watchlist_movies": "Ihre Filme"
+  "watchlist_movies": "Ihre Filme",
+  "watch_now": "Jetzt ansehen",
+  "watch_title_now": "Titel {title} jetzt ansehen",
+  "watch_title_now_disabled": "Jetzt ansehen ist nur verfügbar, wenn {title} auf einem deiner bevorzugten Streaming-Dienste in deinem Land verfügbar ist. Du kannst diese Einstellungen unter https://trakt.tv/settings ändern"
 }
