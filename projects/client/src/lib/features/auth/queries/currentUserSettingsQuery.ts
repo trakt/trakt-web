@@ -38,6 +38,11 @@ export type UserSettings = {
     };
   };
   genres: Array<Genre>;
+  watchNow: {
+    country?: string;
+    favorites?: string[];
+    showOnlyFavorites?: boolean;
+  };
 };
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
@@ -79,6 +84,11 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       },
     },
     genres: browsing?.genres.favorites ?? [],
+    watchNow: {
+      country: browsing?.watchnow.country,
+      favorites: browsing?.watchnow.favorites,
+      showOnlyFavorites: browsing?.watchnow.only_favorites,
+    },
   };
 }
 

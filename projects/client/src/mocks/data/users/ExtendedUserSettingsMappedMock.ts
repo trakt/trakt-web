@@ -28,5 +28,10 @@ export const ExtendedUserMappedMock: UserSettings = {
       'action': 'now',
     },
   },
-  genres: [],
+  'watchNow': {
+    'country': 'us',
+    'favorites': ['netflix', 'max'],
+    'showOnlyFavorites': true,
+  },
+  'genres': [],
 };

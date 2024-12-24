@@ -116,5 +116,10 @@ export const ExtendedUsersResponseMock = {
         'tab': 'last_30_days',
       },
     },
+    'watchnow': {
+      'country': 'us',
+      'favorites': ['netflix', 'max'],
+      'only_favorites': true,
+    },
   },
 };
