@@ -30,7 +30,7 @@
 </div>
 
 <style lang="scss">
-  @use "$style/mixins/index" as *;
+  @use "$style/scss/mixins/index" as *;
 
   .trakt-summary-container {
     display: grid;

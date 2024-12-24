@@ -107,7 +107,7 @@
 </section>
 
 <style lang="scss">
-  @use "$style/mixins/index" as *;
+  @use "$style/scss/mixins/index" as *;
 
   .shadow-list-container,
   .shadow-list,

@@ -1,0 +1,10 @@
+@use './index.scss' as *;
+
+:export {
+  breakpointMobile: $breakpoint-mobile;
+  breakpointTabletSmMin: $breakpoint-tablet-sm-min;
+  breakpointTabletSmMax: $breakpoint-tablet-sm-max;
+  breakpointTabletLgMin: $breakpoint-tablet-lg-min;
+  breakpointTabletLgMax: $breakpoint-tablet-lg-max;
+  breakpointDesktop: $breakpoint-desktop;
+}

@@ -4,6 +4,8 @@
     "$lib/": "./src/lib/",
     "$mocks": "./src/mocks",
     "$mocks/": "./src/mocks/",
+    "$style": "./src/style",
+    "$style/": "./src/style/",
     "$test": "./test",
     "$test/": "./test/",
     "$env/static/public": "./.svelte-kit/ambient.d.ts",

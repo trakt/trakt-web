@@ -6,6 +6,7 @@ import './test/mocks/matchMedia.mock.ts';
 import './test/mocks/messages.mock.ts';
 import './test/mocks/navigation.mock.ts';
 import './test/mocks/stores.mock.ts';
+import './test/mocks/variables.mock.ts';
 
 import { afterAll, afterEach, beforeAll } from 'vitest';
 import { server } from './src/mocks/server.ts';

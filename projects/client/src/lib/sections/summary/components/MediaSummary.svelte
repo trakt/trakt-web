@@ -121,7 +121,7 @@
 </MediaSummaryContainer>
 
 <style lang="scss">
-  @use "$style/mixins/index" as *;
+  @use "$style/scss/mixins/index" as *;
 
   :global(.trakt-info-actions) {
     @include for-tablet-sm-and-below {

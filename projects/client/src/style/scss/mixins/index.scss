@@ -1,3 +1,5 @@
+@use '../variables/index.scss' as *;
+
 @mixin for-mouse {
   @media (hover: hover) and (pointer: fine) {
     @content;
@@ -11,37 +13,37 @@
 }
 
 @mixin for-mobile {
-  @media (max-width: 480px) {
+  @media (max-width: $breakpoint-mobile) {
     @content;
   }
 }
 
 @mixin for-tablet-sm {
-  @media (min-width: 481px) and (max-width: 768px) {
+  @media (min-width: $breakpoint-tablet-sm-min) and (max-width: $breakpoint-tablet-sm-max) {
     @content;
   }
 }
 
 @mixin for-tablet-sm-and-below {
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-tablet-sm-max) {
     @content;
   }
 }
 
 @mixin for-tablet-lg {
-  @media (min-width: 769px) and (max-width: 1023px) {
+  @media (min-width: $breakpoint-tablet-lg-min) and (max-width: $breakpoint-tablet-lg-max) {
     @content;
   }
 }
 
 @mixin for-tablet-lg-and-below {
-  @media (max-width: 1023px) {
+  @media (max-width: $breakpoint-tablet-lg-max) {
     @content;
   }
 }
 
 @mixin for-desktop {
-  @media (min-width: 1024px) {
+  @media (min-width: $breakpoint-desktop) {
     @content;
   }
 }

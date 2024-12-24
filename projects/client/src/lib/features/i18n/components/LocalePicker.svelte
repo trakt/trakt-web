@@ -75,7 +75,7 @@
 </div>
 
 <style lang="scss">
-  @use "$style/mixins/index" as *;
+  @use "$style/scss/mixins/index" as *;
 
   .locale-picker-container {
     position: relative;
