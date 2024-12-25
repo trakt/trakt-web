@@ -15,10 +15,11 @@
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   data-size={size}
+  data-state={state}
 >
   {#if state === "unwatched"}
     <path
-      class="when-inactive"
+      class="icon-state-idle"
       d="M22.6661 3.24663L9.16757 19.3336L1.37548 12.7952"
       stroke="currentColor"
       stroke-width={strokeWidth}
@@ -27,7 +28,7 @@
 
   {#if state === "watched"}
     <path
-      class="when-active"
+      class="icon-state-active"
       stroke="currentColor"
       stroke-width="2"
       d="M20 4 4.00002 20M4 4l16 16"
@@ -35,52 +36,71 @@
   {/if}
 
   <path
-    class:when-active={state === "unwatched"}
-    class:when-inactive={state === "watched"}
+    class:icon-state-active={state === "unwatched"}
+    class:icon-state-idle={state === "watched"}
     d="M20.6595 2.50823L15.1953 9.02014L8.44608 17.0636M8.44608 17.0636L1.55168 11.2785M8.44608 17.0636L12.2763 20.2775"
     stroke="currentColor"
     stroke-width={strokeWidth}
   />
   <path
-    class:when-active={state === "unwatched"}
-    class:when-inactive={state === "watched"}
+    class:icon-state-active={state === "unwatched"}
+    class:icon-state-idle={state === "watched"}
     d="M8.71946 12.0717L4.12319 8.21497"
     stroke="currentColor"
     stroke-width={strokeWidth}
   />
   <path
-    class:when-active={state === "unwatched"}
-    class:when-inactive={state === "watched"}
+    class:icon-state-active={state === "unwatched"}
+    class:icon-state-idle={state === "watched"}
     d="M23.7231 5.07892L13.4385 17.3356"
     stroke="currentColor"
     stroke-width={strokeWidth}
   />
 </svg>
 
-<style>
+<style lang="scss">
+  @use "$style/mixins/index" as *;
+
   path {
     transition: opacity var(--transition-increment) ease-in-out;
   }
 
-  .when-inactive {
+  .icon-state-idle {
     opacity: 1;
   }
 
-  .when-active {
+  .icon-state-active {
     opacity: 0;
   }
 
-  :global(button):active {
-    .when-inactive {
-      opacity: 0;
-    }
+  @include for-mouse {
+    :global(button):focus,
+    :global(button):hover {
+      .icon-state-idle {
+        opacity: 0;
+      }
 
-    .when-active {
-      opacity: 1;
+      .icon-state-active {
+        opacity: 1;
+      }
     }
   }
 
   svg[data-size="small"] {
     transform: scale(0.75);
+  }
+
+  @include for-touch {
+    svg {
+      &[data-state="watched"] {
+        .icon-state-active {
+          opacity: 1;
+        }
+
+        .icon-state-idle {
+          opacity: 0;
+        }
+      }
+    }
   }
 </style>
