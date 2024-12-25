@@ -222,5 +222,6 @@
   "job_writers_production": "脚本制作担当",
   "remove_from_watched": "視聴済みから削除",
   "remove_from_watched_label": "視聴済みリストから{title}を削除",
-  "remove_from_watched_warning": "{title}を視聴済みリストから削除してもよろしいですか？"
+  "remove_from_watched_warning": "{title}を視聴済みリストから削除してもよろしいですか？",
+  "season_number_label": "第{number}シーズン"
 }

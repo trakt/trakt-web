@@ -5,10 +5,12 @@
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { MediaStats } from "$lib/models/MediaStats";
   import type { MediaStudio } from "$lib/models/MediaStudio";
+  import type { Season } from "$lib/models/Season";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
+  import SeasonList from "../lists/SeasonList.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/MediaSummaryProps";
 
@@ -17,6 +19,7 @@
     stats: MediaStats;
     studios: MediaStudio[];
     crew: MediaCrew;
+    seasons: Season[];
   };
 
   const {
@@ -28,6 +31,7 @@
     intl,
     progress,
     crew,
+    seasons,
   }: ShowSummaryProps = $props();
 </script>
 
@@ -50,5 +54,7 @@
   type="show"
   {contextualContent}
 />
+
+<SeasonList slug={media.slug} {seasons} />
 
 <RelatedList title={m.related_shows_title()} slug={media.slug} type="show" />

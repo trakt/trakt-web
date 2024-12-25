@@ -222,5 +222,6 @@
   "job_writers_production": "Production scénariste",
   "remove_from_watched": "Supprimer de la liste Vue",
   "remove_from_watched_label": "Supprimer {title} de votre liste Vue",
-  "remove_from_watched_warning": "Êtes-vous certain de vouloir supprimer {title} de votre liste Vue ?"
+  "remove_from_watched_warning": "Êtes-vous certain de vouloir supprimer {title} de votre liste Vue ?",
+  "season_number_label": "Saison {number}"
 }

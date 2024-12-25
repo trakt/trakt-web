@@ -3,6 +3,7 @@ import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showProgressQuery } from '$lib/requests/queries/shows/showProgressQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
+import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
@@ -48,6 +49,11 @@ export function useShow(slug: string) {
     staleTime: time.days(1),
   });
 
+  const seasons = createQuery({
+    ...showSeasonsQuery({ slug }),
+    staleTime: time.days(1),
+  });
+
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
 
@@ -65,6 +71,7 @@ export function useShow(slug: string) {
     studios,
     progress,
     crew,
+    seasons,
     intl,
   ];
 
@@ -80,6 +87,13 @@ export function useShow(slug: string) {
     progress: derived(progress, ($progress) => $progress.data),
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
+    seasons: derived(
+      seasons,
+      ($seasons) =>
+        $seasons.data?.filter((season) =>
+          season.episodes.count > 0 && season.number !== 0
+        ),
+    ),
     intl: derived(
       [show, intl],
       ([$show, $intl]) => {

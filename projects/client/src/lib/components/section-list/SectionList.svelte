@@ -1,4 +1,5 @@
 <script lang="ts" generics="T extends { id: unknown }">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { type Snippet } from "svelte";
   import { writable } from "svelte/store";
   import ActionButton from "../buttons/ActionButton.svelte";
@@ -52,21 +53,23 @@
 
 <ShadowList {id} {title} {items} {item} {empty} {scrollX} {scrollContainer}>
   {#snippet actions()}
-    <ActionButton
-      onclick={scrollToLeft}
-      label={`Scroll ${title} to the left`}
-      color="purple"
-      disabled={isLeftScrollDisabled}
-    >
-      <CaretLeftIcon />
-    </ActionButton>
-    <ActionButton
-      onclick={scrollToRight}
-      label={`Scroll ${title} to the right`}
-      color="purple"
-      disabled={isRightScrollDisabled}
-    >
-      <CaretRightIcon />
-    </ActionButton>
+    <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <ActionButton
+        onclick={scrollToLeft}
+        label={`Scroll ${title} to the left`}
+        color="purple"
+        disabled={isLeftScrollDisabled}
+      >
+        <CaretLeftIcon />
+      </ActionButton>
+      <ActionButton
+        onclick={scrollToRight}
+        label={`Scroll ${title} to the right`}
+        color="purple"
+        disabled={isRightScrollDisabled}
+      >
+        <CaretRightIcon />
+      </ActionButton>
+    </RenderFor>
   {/snippet}
 </ShadowList>

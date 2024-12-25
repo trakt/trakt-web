@@ -18,6 +18,7 @@
     useMarkAsWatched({
       id: episode.id,
       type: "episode",
+      episode: episode.number,
     }),
   );
 </script>

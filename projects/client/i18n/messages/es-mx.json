@@ -222,5 +222,6 @@
   "job_writers_production": "Producción de Escritores",
   "remove_from_watched": "Quitar de Vistos",
   "remove_from_watched_label": "Quitar {title} de tu lista de Vistos",
-  "remove_from_watched_warning": "¿Estás seguro de que quieres eliminar {title} de tu lista de Vistos?"
+  "remove_from_watched_warning": "¿Estás seguro de que quieres eliminar {title} de tu lista de Vistos?",
+  "season_number_label": "Temporada {number}"
 }
