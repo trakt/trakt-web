@@ -222,5 +222,6 @@
   "job_writers_production": "Autor-Produktion",
   "remove_from_watched": "Aus der Favoritenliste entfernen",
   "remove_from_watched_label": "{title} aus Ihrer Favoritenliste entfernen",
-  "remove_from_watched_warning": "Sind Sie sicher, dass Sie {title} von Ihrer Favoritenliste entfernen möchten?"
+  "remove_from_watched_warning": "Sind Sie sicher, dass Sie {title} von Ihrer Favoritenliste entfernen möchten?",
+  "season_number_label": "Staffel {number}"
 }

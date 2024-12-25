@@ -149,14 +149,6 @@
     margin-left: calc(var(--ni-64) + var(--layout-distance-side));
     margin-right: var(--layout-distance-side);
     transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
-
-    @media (max-width: 480px) {
-      margin-left: var(--ni-32);
-
-      .shadow-list-actions {
-        display: none;
-      }
-    }
   }
 
   .shadow-list-actions {
