@@ -71,7 +71,7 @@
     <DropdownItem href={UrlBuilder.profile.me()}>
       {m.profile()}
     </DropdownItem>
-    <DropdownItem style="danger" onclick={logout}>
+    <DropdownItem color="red" onclick={logout}>
       {m.logout()}
     </DropdownItem>
   {/snippet}

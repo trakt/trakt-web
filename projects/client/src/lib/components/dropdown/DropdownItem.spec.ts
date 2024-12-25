@@ -34,38 +34,38 @@ describe('DropdownItem', () => {
     expect(listItemElement).toBeInTheDocument();
   });
 
-  it('should apply normal style', () => {
+  it('should apply default color', () => {
     render(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
-          render: () => 'Normal Style Item',
+          render: () => 'Default Color Item',
         })),
       },
     });
 
     const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toHaveAttribute('data-style', 'normal');
+    expect(listItemElement).toHaveAttribute('data-color', 'purple');
   });
 
-  it('should apply danger style', () => {
+  it('should apply red color', () => {
     render(DropdownItem, {
       props: {
-        style: 'danger',
+        color: 'red',
         children: createRawSnippet(() => ({
-          render: () => 'Danger Style Item',
+          render: () => 'Red Color Item',
         })),
       },
     });
 
     const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toHaveAttribute('data-style', 'danger');
+    expect(listItemElement).toHaveAttribute('data-color', 'red');
   });
 
   it('should handle tabindex correctly', () => {
     render(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
-          render: () => 'Danger Style Item',
+          render: () => 'Item',
         })),
       },
     });
@@ -79,7 +79,7 @@ describe('DropdownItem', () => {
       props: {
         onclick: () => {},
         children: createRawSnippet(() => ({
-          render: () => 'Danger Style Item',
+          render: () => 'Item',
         })),
       },
     });

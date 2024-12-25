@@ -3,7 +3,7 @@
   import Link from "../link/Link.svelte";
 
   type DropdownItemProps = {
-    style?: "danger" | "normal";
+    color?: "red" | "purple" | "blue";
     tabindex?: number;
   } & ChildrenProps &
     HTMLElementProps;
@@ -11,7 +11,7 @@
   type DropdownItemAnchorProps = DropdownItemProps & HTMLAnchorProps;
 
   const {
-    style = "normal",
+    color = "purple",
     children,
     ...props
   }: DropdownItemProps | DropdownItemAnchorProps = $props();
@@ -29,7 +29,7 @@
 {/snippet}
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-<li use:triggerWithKeyboard tabindex={tabIndex} data-style={style} {...props}>
+<li use:triggerWithKeyboard tabindex={tabIndex} data-color={color} {...props}>
   {#if href}
     <Link {href} {target} color="inherit">
       {@render text()}
@@ -70,42 +70,50 @@
       align-content: center;
     }
 
-    &[data-style="normal"] {
-      color: var(--purple-800);
+    @mixin color($color, $hover-bg, $active-bg, $outline-color) {
+      color: $color;
 
       @include for-mouse {
         &:hover {
-          background: var(--purple-100);
+          background: $hover-bg;
         }
       }
 
       &:active {
-        background: var(--purple-200);
+        background: $active-bg;
       }
 
       &:focus-visible,
       &:has(> :global(.trakt-link:focus-visible)) {
-        outline: var(--border-thickness-xs) solid var(--purple-800);
+        outline: var(--border-thickness-xs) solid $outline-color;
       }
     }
 
-    &[data-style="danger"] {
-      color: var(--red-600);
+    &[data-color="purple"] {
+      @include color(
+        var(--purple-800),
+        var(--purple-100),
+        var(--purple-200),
+        var(--purple-800)
+      );
+    }
 
-      @include for-mouse {
-        &:hover {
-          background: var(--red-100);
-        }
-      }
+    &[data-color="red"] {
+      @include color(
+        var(--red-600),
+        var(--red-100),
+        var(--red-200),
+        var(--red-600)
+      );
+    }
 
-      &:active {
-        background: var(--red-200);
-      }
-
-      &:focus-visible,
-      &:has(:global(.trakt-link:focus-visible)) {
-        outline: var(--border-thickness-xs) solid var(--red-600);
-      }
+    &[data-color="blue"] {
+      @include color(
+        var(--blue-600),
+        var(--blue-100),
+        var(--blue-200),
+        var(--blue-600)
+      );
     }
   }
 </style>

@@ -22,7 +22,7 @@
   </DropdownItem>
   <DropdownItem href="/movies">Got To Movies</DropdownItem>
   <DropdownItem
-    style="danger"
+    color="red"
     onclick={() => {
       console.log("Danger zone...");
     }}
