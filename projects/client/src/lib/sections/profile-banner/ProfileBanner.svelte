@@ -36,7 +36,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .profile-banner-container {
-    margin-left: calc(var(--ni-52) + var(--layout-distance-side));
+    margin-left: calc(var(--ni-72) + var(--layout-distance-side));
     display: flex;
     align-items: center;
     gap: var(--ni-16);
@@ -44,7 +44,7 @@
     transition-property: margin-left scale height;
 
     @include for-mobile {
-      margin-left: 0;
+      margin-left: var(--ni-neg-16);
       scale: 0.75;
       height: 75%;
     }

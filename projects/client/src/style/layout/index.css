@@ -26,6 +26,6 @@
   /**
    * Structural variables
    */
-  --layout-distance-side: 2.5vw;
+  --layout-distance-side: var(--ni-24);
   --layout-distance-scroll-card: var(--ni-16);
 }

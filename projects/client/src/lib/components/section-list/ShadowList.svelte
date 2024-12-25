@@ -148,9 +148,13 @@
     gap: var(--ni-16);
 
     margin: 0;
-    margin-left: calc(var(--ni-64) + var(--layout-distance-side));
+    margin-left: calc(var(--ni-72) + var(--layout-distance-side));
     margin-right: var(--layout-distance-side);
     transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
+
+    @include for-tablet-sm-and-below {
+      margin-left: calc(var(--layout-distance-side));
+    }
   }
 
   .shadow-list-actions {
