@@ -1,35 +1,58 @@
-import NextEpisode from './NextEpisode.svelte';
+import NextEpisodeItem from './NextEpisodeItem.svelte';
 
 import { EpisodeIntlProvider } from '$lib/components/episode/EpisodeIntlProvider.ts';
+import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry.ts';
 import {
   EpisodeFinaleType,
   EpisodePremiereType,
   EpisodeStandardType,
 } from '$lib/models/EpisodeType.ts';
-import { render, screen } from '@testing-library/svelte';
-import userEvent from '@testing-library/user-event';
-import { describe, expect, test, vi } from 'vitest';
+import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import { fireEvent, render, screen, waitFor } from '@testing-library/svelte';
+import { beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
-describe('NextEpisode', () => {
+import { useMarkAsWatched } from '$lib/stores/useMarkAsWatched.ts';
+import { writable } from 'svelte/store';
+
+vi.mock('$lib/stores/useMarkAsWatched');
+
+describe('NextEpisodeItem', () => {
   const defaultProps = {
-    i18n: EpisodeIntlProvider,
-    episodeNumber: 1,
-    seasonNumber: 1,
-    posterUrl: 'https://example.com',
-    showTitle: 'The Eminem Show',
-    episodeTitle: 'Curtains Up (skit)',
-    completed: 0,
-    total: 20,
-    remaining: 20,
-    minutesLeft: 77,
-    type: EpisodeStandardType.Standard,
-    isLoading: false,
-    onMarkAsWatched: () => {},
+    episode: {
+      number: 1,
+      season: 1,
+      poster: {
+        url: 'https://example.com',
+      },
+      title: 'Curtains Up (skit)',
+      completed: 0,
+      total: 20,
+      remaining: 20,
+      minutesLeft: 77,
+      type: EpisodeStandardType.Standard,
+    } as EpisodeProgressEntry,
+    show: {
+      title: 'The Eminem Show',
+    } as ShowSummary,
   };
+
+  const markAsWatchedSpy = vi.fn();
+
+  beforeEach(() => {
+    const isMarkingAsWatched = writable(false);
+    markAsWatchedSpy.mockImplementationOnce(
+      () => isMarkingAsWatched.set(true),
+    );
+
+    (useMarkAsWatched as Mock).mockReturnValue({
+      isMarkingAsWatched,
+      markAsWatched: markAsWatchedSpy,
+    });
+  });
 
   test('it renders the basic details', () => {
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: defaultProps,
       },
@@ -45,49 +68,47 @@ describe('NextEpisode', () => {
   });
 
   test('it calls the onclick callback', async () => {
-    const onclick = vi.fn();
-    const user = userEvent.setup();
-
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          onMarkAsWatched: onclick,
         },
       },
     );
 
     const button = screen.getByRole('button');
-    await user.click(button);
+    await fireEvent.click(button);
 
-    expect(onclick).toHaveBeenCalledTimes(1);
+    expect(markAsWatchedSpy).toHaveBeenCalledTimes(1);
   });
 
-  test('it disables the mark as watched button', () => {
+  test('it disables the mark as watched button', async () => {
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          isLoading: true,
         },
       },
     );
 
     const button = screen.getByRole('button');
-    expect(button.getAttribute('disabled')).toBe('');
+    waitFor(() => expect(button.getAttribute('disabled')).toBe(''));
   });
 
   test('it renders the season finale tag', () => {
     const episodeType = { type: EpisodeFinaleType.Season };
 
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          ...episodeType,
+          episode: {
+            ...defaultProps.episode,
+            ...episodeType,
+          },
         },
       },
     );
@@ -102,11 +123,14 @@ describe('NextEpisode', () => {
     const episodeType = { type: EpisodeFinaleType.Series };
 
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          ...episodeType,
+          episode: {
+            ...defaultProps.episode,
+            ...episodeType,
+          },
         },
       },
     );
@@ -121,11 +145,14 @@ describe('NextEpisode', () => {
     const episodeType = { type: EpisodeFinaleType.MidSeason };
 
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          ...episodeType,
+          episode: {
+            ...defaultProps.episode,
+            ...episodeType,
+          },
         },
       },
     );
@@ -140,11 +167,14 @@ describe('NextEpisode', () => {
     const episodeType = { type: EpisodePremiereType.Season };
 
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          ...episodeType,
+          episode: {
+            ...defaultProps.episode,
+            ...episodeType,
+          },
         },
       },
     );
@@ -155,15 +185,18 @@ describe('NextEpisode', () => {
     expect(tagLabel).toBeInTheDocument();
   });
 
-  test('it renders the series premier tag', () => {
+  test('it renders the series premiere tag', () => {
     const episodeType = { type: EpisodePremiereType.Series };
 
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          ...episodeType,
+          episode: {
+            ...defaultProps.episode,
+            ...episodeType,
+          },
         },
       },
     );
@@ -178,11 +211,14 @@ describe('NextEpisode', () => {
     const episodeType = { type: EpisodePremiereType.MidSeason };
 
     render(
-      NextEpisode,
+      NextEpisodeItem,
       {
         props: {
           ...defaultProps,
-          ...episodeType,
+          episode: {
+            ...defaultProps.episode,
+            ...episodeType,
+          },
         },
       },
     );
