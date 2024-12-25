@@ -16,9 +16,10 @@
 
   const { isMarkingAsWatched, markAsWatched } = $derived(
     useMarkAsWatched({
-      id: episode.id,
+      id: show.id,
       type: "episode",
       episode: episode.number,
+      season: episode.season,
     }),
   );
 </script>

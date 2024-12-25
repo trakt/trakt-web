@@ -7,21 +7,24 @@
   import { languageTag } from "$lib/features/i18n";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/models/EpisodeEntry";
+  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { EPISODE_PLACEHOLDER } from "$lib/utils/constants";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
 
   type EpisodeProps = {
     episode: EpisodeEntry;
+    show: MediaSummary;
   };
 
-  const { episode }: EpisodeProps = $props();
+  const { show, episode }: EpisodeProps = $props();
 
   const { isWatched, isMarkingAsWatched, markAsWatched, removeWatched } =
     useMarkAsWatched({
       type: "episode",
-      id: episode.id,
+      id: show.id,
       episode: episode.number,
+      season: episode.season,
     });
 </script>
 

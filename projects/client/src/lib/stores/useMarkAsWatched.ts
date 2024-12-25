@@ -31,6 +31,7 @@ export function resolveWatchDate(
 type MarkAsWatchedStoreProps = {
   type: MediaType;
   id: number;
+  season?: number;
   episode?: number;
 };
 
@@ -54,10 +55,9 @@ export function useMarkAsWatched(
         case 'movie':
           return $history.movies.has(id) || $_isWatched;
         case 'episode':
-          return Array
-            .from($history.shows.values())
-            .some((show) =>
-              show.episodes.find((entry) => entry.episode === props.episode)
+          return $history.shows.get(id)
+            ?.episodes.some((entry) =>
+              entry.episode === props.episode && entry.season === props.season
             ) || $_isWatched;
         case 'show': {
           return !!$history.shows.get(id)?.isWatched || $_isWatched;

@@ -55,6 +55,6 @@
   {contextualContent}
 />
 
-<SeasonList slug={media.slug} {seasons} />
+<SeasonList show={media} {seasons} />
 
 <RelatedList title={m.related_shows_title()} slug={media.slug} type="show" />

@@ -5,32 +5,33 @@
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import ShadowList from "$lib/components/section-list/ShadowList.svelte";
   import type { Season } from "$lib/models/Season";
+  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
   import { writable } from "svelte/store";
   import EpisodeItem from "./components/EpisodeItem.svelte";
   import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type SeasonListProps = {
-    slug: string;
+    show: MediaSummary;
     seasons: Season[];
   };
 
-  const { slug, seasons }: SeasonListProps = $props();
+  const { show, seasons }: SeasonListProps = $props();
 
   const active = writable(seasons.at(0));
-  const { list } = $derived(useSeasonEpisodes(slug, $active.number));
+  const { list } = $derived(useSeasonEpisodes(show.slug, $active.number));
 
   const title = $derived(m.season_number_label({ number: $active.number }));
 </script>
 
 <ShadowList
-  id={`season-list-${slug}`}
+  id={`season-list-${show.slug}`}
   items={$list}
   {title}
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(episode)}
-    <EpisodeItem {episode} />
+    <EpisodeItem {episode} {show} />
   {/snippet}
   {#snippet actions()}
     <DropdownList
