@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
   import type { Readable } from "svelte/store";
+  import TestProvider from "../_internal/TestProvider.svelte";
   import QueryRunner from "./_internal/QueryRunner.svelte";
 
   const {
@@ -12,6 +12,6 @@
   } = $props();
 </script>
 
-<QueryClientProvider client={new QueryClient()}>
+<TestProvider>
   <QueryRunner {queryFactory} {mapper} />
-</QueryClientProvider>
+</TestProvider>

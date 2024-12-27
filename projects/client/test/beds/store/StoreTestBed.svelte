@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
+  import TestProvider from "../_internal/TestProvider.svelte";
   import StoreRunner from "./_internal/StoreRunner.svelte";
 
   const {
@@ -12,6 +12,6 @@
 </script>
 
 <!-- TODO: add more providers here as we expand test suite -->
-<QueryClientProvider client={new QueryClient()}>
+<TestProvider>
   <StoreRunner {factory} {output} />
-</QueryClientProvider>
+</TestProvider>
