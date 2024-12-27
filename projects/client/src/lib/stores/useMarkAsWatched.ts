@@ -3,6 +3,7 @@ import type { MediaType } from '$lib/models/MediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
+import { resolve } from '$lib/utils/store/resolve.ts';
 import { derived, writable } from 'svelte/store';
 import { resolveWatchDate } from './_internal/resolveWatchDate.ts';
 import { toMarkAsWatchedPayload } from './_internal/toMarkAsWatchedPayload.ts';
@@ -36,7 +37,7 @@ export function useMarkAsWatched(
 ) {
   const { type, media } = props;
   const isMarkingAsWatched = writable(false);
-  const { current: user, history } = useUser();
+  const { user, history } = useUser();
   const { invalidate } = useInvalidator();
 
   /**
@@ -67,11 +68,18 @@ export function useMarkAsWatched(
   );
 
   const markAsWatched = async () => {
+    const current = await resolve(user);
+
+    if (!current) {
+      return;
+    }
+
     const watchedAtDate = resolveWatchDate(
-      user().preferences.watch.action,
+      current.preferences.watch.action,
     );
 
     isMarkingAsWatched.set(true);
+
     await markAsWatchedRequest({
       body: toMarkAsWatchedPayload(type, {
         ids: [media.id],

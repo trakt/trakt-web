@@ -5,6 +5,8 @@ import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/
 import { MovieHereticResponseMock } from './data/summary/movies/heretic/MovieHereticResponseMock.ts';
 import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/ShowSiloLanguageResponseMock.ts';
 import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
+import { WatchedMoviesResponseMock } from './data/users/WatchedMoviesResponseMock.ts';
+import { WatchedShowsResponseMock } from './data/users/WatchedShowsResponseMock.ts';
 
 export const handlers = [
   http.get('http://localhost/users/settings', () => {
@@ -36,4 +38,26 @@ export const handlers = [
       );
     },
   ),
+  http.post(
+    'http://localhost/sync/history',
+    () => {
+      return new HttpResponse(null, {
+        status: 201,
+      });
+    },
+  ),
+  http.post(
+    'http://localhost/sync/history/remove',
+    () => {
+      return new HttpResponse(null, {
+        status: 200,
+      });
+    },
+  ),
+  http.get('http://localhost/users/me/watched/shows', () => {
+    return HttpResponse.json(WatchedShowsResponseMock);
+  }),
+  http.get('http://localhost/users/me/watched/movies', () => {
+    return HttpResponse.json(WatchedMoviesResponseMock);
+  }),
 ];
