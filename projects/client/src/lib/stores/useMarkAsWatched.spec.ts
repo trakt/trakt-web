@@ -158,6 +158,25 @@ describe('useMarkAsWatched', () => {
       expect(await waitForEmission(isWatched, 2)).toBe(true);
     });
 
+    it('should NOT be watched if it is episode 1, 2, 3, 4 & 5 of season 1 of Silo', async () => {
+      const { isWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          ...props,
+          media: { id: 1 },
+          show: ShowSiloMappedMock,
+          episode: [
+            { season: 1, number: 1 },
+            { season: 1, number: 2 },
+            { season: 1, number: 3 },
+            { season: 1, number: 4 },
+            { season: 1, number: 5 },
+          ],
+        })
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(false);
+    });
+
     it('should NOT be watched if it is episode 2 of season 1 of Silo', async () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
@@ -169,6 +188,28 @@ describe('useMarkAsWatched', () => {
       );
 
       expect(await waitForEmission(isWatched, 2)).toBe(false);
+    });
+
+    it('should be watched for all episodes of Devs', async () => {
+      const { isWatched } = await renderStore(() =>
+        useMarkAsWatched({
+          ...props,
+          media: ShowDevsMappedMock,
+          show: ShowDevsMappedMock,
+          episode: [
+            { season: 1, number: 1 },
+            { season: 1, number: 2 },
+            { season: 1, number: 3 },
+            { season: 1, number: 4 },
+            { season: 1, number: 5 },
+            { season: 1, number: 6 },
+            { season: 1, number: 7 },
+            { season: 1, number: 8 },
+          ],
+        })
+      );
+
+      expect(await waitForEmission(isWatched, 2)).toBe(true);
     });
   });
 });

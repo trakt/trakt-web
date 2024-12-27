@@ -8,7 +8,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Season } from "$lib/models/Season";
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
-  import { useMarkAsWatchedList } from "$lib/stores/useMarkAsWatchedList";
+  import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { writable } from "svelte/store";
   import EpisodeItem from "./components/EpisodeItem.svelte";
   import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";
@@ -28,12 +28,12 @@
 
   const title = $derived(m.season_number_label({ number: $active.number }));
 
-  const { markAllAsWatched, removeAllWatched, isMarkingAsWatched, isWatched } =
+  const { markAsWatched, removeWatched, isMarkingAsWatched, isWatched } =
     $derived(
-      useMarkAsWatchedList({
+      useMarkAsWatched({
         type: "episode",
         media: $list,
-        episodes: $list,
+        episode: $list,
         show,
       }),
     );
@@ -67,8 +67,8 @@
         isWatched={$isWatched}
         isMarkingAsWatched={$isMarkingAsWatched}
         title={m.season_number_label({ number: $active.number })}
-        onWatch={() => markAllAsWatched()}
-        onRemove={() => removeAllWatched()}
+        onWatch={() => markAsWatched()}
+        onRemove={() => removeWatched()}
       />
     </RenderFor>
     <DropdownList

@@ -9,23 +9,25 @@ import { resolveWatchDate } from './_internal/resolveWatchDate.ts';
 import { toMarkAsWatchedPayload } from './_internal/toMarkAsWatchedPayload.ts';
 import { useInvalidator } from './useInvalidator.ts';
 
+type ArrayOrSingle<T> = T | T[];
+
 type BaseProps = {
   type: MediaType | 'episode';
-  media: { id: number };
+  media: ArrayOrSingle<{ id: number }>;
 };
 
 type EpisodeProps = {
   type: 'episode';
   show: { id: number };
-  episode: {
+  episode: ArrayOrSingle<{
     season: number;
     number: number;
-  };
+  }>;
 };
 
 type NonEpisodeProps = {
   type: 'movie' | 'show';
-  media: { id: number };
+  media: ArrayOrSingle<{ id: number }>;
 };
 
 export type MarkAsWatchedStoreProps =
@@ -35,7 +37,9 @@ export type MarkAsWatchedStoreProps =
 export function useMarkAsWatched(
   props: MarkAsWatchedStoreProps,
 ) {
-  const { type, media } = props;
+  const { type } = props;
+  const media = Array.isArray(props.media) ? props.media : [props.media];
+  const ids = media.map(({ id }) => id);
   const isMarkingAsWatched = writable(false);
   const { user, history } = useUser();
   const { invalidate } = useInvalidator();
@@ -53,15 +57,22 @@ export function useMarkAsWatched(
 
       switch (type) {
         case 'movie':
-          return $history.movies.has(media.id);
+          return media.every((m) => $history.movies.has(m.id));
         case 'episode':
-          return !!$history.shows.get(props.show.id)
-            ?.episodes.some((entry) =>
-              entry.episode === props.episode.number &&
-              entry.season === props.episode.season
-            );
+          const episodes = Array.isArray(props.episode)
+            ? props.episode
+            : [props.episode];
+
+          const watchedEpisodes = $history.shows.get(props.show.id)?.episodes ??
+            [];
+
+          return episodes.every((episode) =>
+            watchedEpisodes.some((e) =>
+              e.season === episode.season && e.episode === episode.number
+            )
+          );
         case 'show': {
-          return !!$history.shows.get(media.id)?.isWatched;
+          return media.every((m) => !!$history.shows.get(m.id)?.isWatched);
         }
       }
     },
@@ -82,7 +93,7 @@ export function useMarkAsWatched(
 
     await markAsWatchedRequest({
       body: toMarkAsWatchedPayload(type, {
-        ids: [media.id],
+        ids,
         watchedAtDate,
       }),
     });
@@ -95,7 +106,7 @@ export function useMarkAsWatched(
     isMarkingAsWatched.set(true);
     await removeWatchedRequest({
       body: toMarkAsWatchedPayload(type, {
-        ids: [media.id],
+        ids,
       }),
     });
     isMarkingAsWatched.set(false);
