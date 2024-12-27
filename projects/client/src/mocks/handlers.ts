@@ -7,29 +7,29 @@ import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/ShowSilo
 import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
 
 export const handlers = [
-  http.get('/users/settings', () => {
+  http.get('http://localhost/users/settings', () => {
     return HttpResponse.json(ExtendedUsersResponseMock);
   }),
   http.get(
-    `/movies/${MovieHereticResponseMock.ids.slug}`,
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}`,
     () => {
       return HttpResponse.json(MovieHereticResponseMock);
     },
   ),
   http.get(
-    `/movies/${MovieHereticResponseMock.ids.slug}/translations/*`,
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/*`,
     () => {
       return HttpResponse.json(MovieHereticLanguageResponseMock);
     },
   ),
   http.get(
-    `/shows/${ShowSiloResponseMock.ids.slug}`,
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}`,
     () => {
       return HttpResponse.json(ShowSiloResponseMock);
     },
   ),
   http.get(
-    `/shows/${ShowSiloResponseMock.ids.slug}/translations/*`,
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/*`,
     () => {
       return HttpResponse.json(
         ShowSiloLanguageResponseMock,

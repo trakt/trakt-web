@@ -6,7 +6,7 @@ export type ApiParams = Omit<TraktApiOptions, 'apiKey' | 'environment'>;
 enum ClientEnvironment {
   svelte_dev = 'http://localhost:5173/api',
   svelte_preview = 'http://localhost:4173/api',
-  test = '',
+  test = 'http://localhost',
 }
 
 const environment = (() => {
