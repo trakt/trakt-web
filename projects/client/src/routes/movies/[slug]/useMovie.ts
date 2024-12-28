@@ -69,7 +69,7 @@ export function useMovie(slug: string) {
     movie: derived(movie, ($movie) => $movie.data),
     ratings: derived(ratings, ($rating) => $rating.data),
     stats: derived(stats, ($stats) => $stats.data),
-    watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
+    watchers: derived(watchers, ($watchers) => $watchers.data),
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     intl: derived(

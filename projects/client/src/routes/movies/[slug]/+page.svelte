@@ -16,7 +16,7 @@
   image={$movie?.cover.url.thumb}
   type="movie"
 >
-  {#if $movie != null && $ratings != null && $stats != null && $intl != null && $studios != null && $crew != null}
+  {#if $movie != null && $ratings != null && $stats != null && $intl != null && $studios != null && $crew != null && $watchers != null}
     <MovieSummary
       media={$movie}
       ratings={$ratings}
