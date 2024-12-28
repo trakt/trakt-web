@@ -1,4 +1,4 @@
-export const MovieHereticWatchingResponseMock = [
+export const MediaWatchingResponseMock = [
   {
     'username': 'harrierdubois',
     'private': false,

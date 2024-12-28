@@ -1,8 +1,8 @@
 import QueryTestBed from '$test/beds/query/QueryTestBed.svelte';
 
 import { setLocale } from '$lib/features/i18n/index.ts';
-import { ShowSiloJapaneseMappedMock } from '$mocks/data/summary/shows/silo/ShowSiloJapaneseMappedMock.ts';
-import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/ShowSiloMappedMock.ts';
+import { ShowSiloJapaneseMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloJapaneseMappedMock.ts';
+import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { waitForQueryResult } from '$test/beds/query/waitForQueryResult.ts';
 import { render } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';

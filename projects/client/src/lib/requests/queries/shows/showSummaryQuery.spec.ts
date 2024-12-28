@@ -4,7 +4,7 @@ import { waitForQueryResult } from '$test/beds/query/waitForQueryResult.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { render } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
-import { ShowSiloMappedMock } from '../../../../mocks/data/summary/shows/silo/ShowSiloMappedMock.ts';
+import { ShowSiloMappedMock } from '../../../../mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { showSummaryQuery } from './showSummaryQuery.ts';
 
 describe('showSummaryQuery', () => {

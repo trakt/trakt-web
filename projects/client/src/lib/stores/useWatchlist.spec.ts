@@ -1,7 +1,7 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock';
-import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/ShowSiloMappedMock';
+import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock';
 import { renderStore } from '$test/beds/store/renderStore';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { waitFor } from '@testing-library/svelte';

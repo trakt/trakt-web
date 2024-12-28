@@ -1,14 +1,20 @@
 import { http, HttpResponse } from 'msw';
 
+import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
 import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/response/MovieHereticLanguageResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from './data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
 import { MovieHereticRatingsResponseMock } from './data/summary/movies/heretic/response/MovieHereticRatingsResponseMock.ts';
 import { MovieHereticResponseMock } from './data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import { MovieHereticStatsResponseMock } from './data/summary/movies/heretic/response/MovieHereticStatsResponseMock.ts';
-import { MovieHereticWatchingResponseMock } from './data/summary/movies/heretic/response/MovieHereticWatchingResponseMock.ts';
 import { MovieStudiosResponseMock } from './data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
-import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/ShowSiloLanguageResponseMock.ts';
-import { ShowSiloResponseMock } from './data/summary/shows/silo/ShowSiloResponseMock.ts';
+import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/response/ShowSiloLanguageResponseMock.ts';
+import { ShowSiloPeopleResponseMock } from './data/summary/shows/silo/response/ShowSiloPeopleResponseMock.ts';
+import { ShowSiloProgressResponseMock } from './data/summary/shows/silo/response/ShowSiloProgressResponseMock.ts';
+import { ShowSiloRatingsResponseMock } from './data/summary/shows/silo/response/ShowSiloRatingsResponseMock.ts';
+import { ShowSiloResponseMock } from './data/summary/shows/silo/response/ShowSiloResponseMock.ts';
+import { ShowSiloSeasonsResponseMock } from './data/summary/shows/silo/response/ShowSiloSeasonsResponseMock.ts';
+import { ShowSiloStatsResponseMock } from './data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
+import { ShowSiloStudiosResponseMock } from './data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
 import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
 import { WatchedMoviesResponseMock } from './data/users/WatchedMoviesResponseMock.ts';
 import { WatchedShowsResponseMock } from './data/users/WatchedShowsResponseMock.ts';
@@ -61,7 +67,7 @@ const movies = [
   http.get(
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/watching`,
     () => {
-      return HttpResponse.json(MovieHereticWatchingResponseMock);
+      return HttpResponse.json(MediaWatchingResponseMock);
     },
   ),
   http.get(
@@ -91,6 +97,48 @@ const shows = [
       return HttpResponse.json(
         ShowSiloLanguageResponseMock,
       );
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/ratings`,
+    () => {
+      return HttpResponse.json(ShowSiloRatingsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/stats`,
+    () => {
+      return HttpResponse.json(ShowSiloStatsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/watching`,
+    () => {
+      return HttpResponse.json(MediaWatchingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/studios`,
+    () => {
+      return HttpResponse.json(ShowSiloStudiosResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/people`,
+    () => {
+      return HttpResponse.json(ShowSiloPeopleResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/progress/watched`,
+    () => {
+      return HttpResponse.json(ShowSiloProgressResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons`,
+    () => {
+      return HttpResponse.json(ShowSiloSeasonsResponseMock);
     },
   ),
 ];
