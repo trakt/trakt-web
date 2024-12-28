@@ -1,6 +1,6 @@
 import QueryTestBed from '$test/beds/query/QueryTestBed.svelte';
 
-import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/MovieHereticMappedMock.ts';
+import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { waitForQueryResult } from '$test/beds/query/waitForQueryResult.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { render } from '@testing-library/svelte';

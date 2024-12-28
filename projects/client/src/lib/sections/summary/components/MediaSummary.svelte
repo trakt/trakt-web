@@ -62,9 +62,11 @@
     }),
   );
 
+  const title = $derived(intl.title ?? media.title);
+
   const watchlistProps: WatchlistButtonProps = $derived({
     type: "normal",
-    title: intl.title,
+    title,
     isWatchlistUpdating: $isWatchlistUpdating,
     isWatchlisted: $isWatchlisted,
     onAdd: addToWatchlist,
@@ -73,7 +75,7 @@
 
   const markWasWatchedProps: MarkAsWatchedButtonProps = $derived({
     type: "normal",
-    title: intl.title,
+    title,
     isMarkingAsWatched: $isMarkingAsWatched,
     isWatched: $isWatched,
     onWatch: markAsWatched,
@@ -97,7 +99,7 @@
 
 <MediaSummaryContainer {contextualContent}>
   {#snippet poster()}
-    <SummaryPoster src={media.poster.url.medium} alt={intl.title}>
+    <SummaryPoster src={media.poster.url.medium} alt={title}>
       {#snippet actions()}
         <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
           {@render mediaActions()}

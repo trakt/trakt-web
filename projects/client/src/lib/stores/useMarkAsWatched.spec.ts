@@ -1,5 +1,5 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction';
-import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/MovieHereticMappedMock';
+import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/ShowSiloMappedMock';
 import { renderStore } from '$test/beds/store/renderStore';

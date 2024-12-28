@@ -1,8 +1,8 @@
 import QueryTestBed from '$test/beds/query/QueryTestBed.svelte';
 
 import { setLocale } from '$lib/features/i18n/index.ts';
-import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/MovieHereticMappedMock.ts';
-import { MovieHereticPortugueseMappedMock } from '$mocks/data/summary/movies/heretic/MovieHereticPortugueseMappedMock.ts';
+import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
+import { MovieHereticPortugueseMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPortugueseMappedMock.ts';
 import { waitForQueryResult } from '$test/beds/query/waitForQueryResult.ts';
 import { render } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';

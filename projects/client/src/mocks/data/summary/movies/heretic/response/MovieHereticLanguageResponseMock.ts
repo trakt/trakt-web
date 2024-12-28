@@ -1,4 +1,6 @@
-export const MovieHereticLanguageResponseMock = [
+import type { MovieTranslationResponse } from '@trakt/api';
+
+export const MovieHereticLanguageResponseMock: MovieTranslationResponse = [
   {
     'title': 'Kafir',
     'overview':

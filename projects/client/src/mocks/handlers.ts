@@ -1,7 +1,12 @@
 import { http, HttpResponse } from 'msw';
 
-import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/MovieHereticLanguageResponseMock.ts';
-import { MovieHereticResponseMock } from './data/summary/movies/heretic/MovieHereticResponseMock.ts';
+import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/response/MovieHereticLanguageResponseMock.ts';
+import { MovieHereticPeopleResponseMock } from './data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
+import { MovieHereticRatingsResponseMock } from './data/summary/movies/heretic/response/MovieHereticRatingsResponseMock.ts';
+import { MovieHereticResponseMock } from './data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
+import { MovieHereticStatsResponseMock } from './data/summary/movies/heretic/response/MovieHereticStatsResponseMock.ts';
+import { MovieHereticWatchingResponseMock } from './data/summary/movies/heretic/response/MovieHereticWatchingResponseMock.ts';
+import { MovieStudiosResponseMock } from './data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
 import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/ShowSiloLanguageResponseMock.ts';
 import { ShowSiloResponseMock } from './data/summary/shows/silo/ShowSiloResponseMock.ts';
 import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
@@ -39,6 +44,36 @@ const movies = [
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/*`,
     () => {
       return HttpResponse.json(MovieHereticLanguageResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/ratings`,
+    () => {
+      return HttpResponse.json(MovieHereticRatingsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/stats`,
+    () => {
+      return HttpResponse.json(MovieHereticStatsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/watching`,
+    () => {
+      return HttpResponse.json(MovieHereticWatchingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/studios`,
+    () => {
+      return HttpResponse.json(MovieStudiosResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/people`,
+    () => {
+      return HttpResponse.json(MovieHereticPeopleResponseMock);
     },
   ),
 ];

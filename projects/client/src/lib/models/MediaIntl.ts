@@ -1,5 +1,5 @@
 export type MediaIntl = {
-  title: string;
-  overview: string;
-  tagline: string;
+  title: string | Nil;
+  overview: string | Nil;
+  tagline: string | Nil;
 };
