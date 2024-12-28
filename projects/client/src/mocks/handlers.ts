@@ -1,19 +1,34 @@
 import { http, HttpResponse } from 'msw';
 
-import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/ShowSiloResponseMock.ts';
 import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/MovieHereticLanguageResponseMock.ts';
 import { MovieHereticResponseMock } from './data/summary/movies/heretic/MovieHereticResponseMock.ts';
 import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/ShowSiloLanguageResponseMock.ts';
+import { ShowSiloResponseMock } from './data/summary/shows/silo/ShowSiloResponseMock.ts';
 import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
 import { WatchedMoviesResponseMock } from './data/users/WatchedMoviesResponseMock.ts';
 import { WatchedShowsResponseMock } from './data/users/WatchedShowsResponseMock.ts';
 import { WatchlistMoviesResponseMock } from './data/users/WatchlistMoviesResponseMock.ts';
 import { WatchlistShowsResponseMock } from './data/users/WatchlistShowsResponseMock.ts';
 
-export const handlers = [
+const users = [
   http.get('http://localhost/users/settings', () => {
     return HttpResponse.json(ExtendedUsersResponseMock);
   }),
+  http.get('http://localhost/users/me/watched/shows', () => {
+    return HttpResponse.json(WatchedShowsResponseMock);
+  }),
+  http.get('http://localhost/users/me/watched/movies', () => {
+    return HttpResponse.json(WatchedMoviesResponseMock);
+  }),
+  http.get('http://localhost/users/me/watchlist/movies/rank', () => {
+    return HttpResponse.json(WatchlistMoviesResponseMock);
+  }),
+  http.get('http://localhost/users/me/watchlist/shows/rank', () => {
+    return HttpResponse.json(WatchlistShowsResponseMock);
+  }),
+];
+
+const movies = [
   http.get(
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}`,
     () => {
@@ -26,6 +41,9 @@ export const handlers = [
       return HttpResponse.json(MovieHereticLanguageResponseMock);
     },
   ),
+];
+
+const shows = [
   http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}`,
     () => {
@@ -40,6 +58,9 @@ export const handlers = [
       );
     },
   ),
+];
+
+const sync = [
   http.post(
     'http://localhost/sync/history',
     () => {
@@ -72,16 +93,11 @@ export const handlers = [
       });
     },
   ),
-  http.get('http://localhost/users/me/watched/shows', () => {
-    return HttpResponse.json(WatchedShowsResponseMock);
-  }),
-  http.get('http://localhost/users/me/watched/movies', () => {
-    return HttpResponse.json(WatchedMoviesResponseMock);
-  }),
-  http.get('http://localhost/users/me/watchlist/movies/rank', () => {
-    return HttpResponse.json(WatchlistMoviesResponseMock);
-  }),
-  http.get('http://localhost/users/me/watchlist/shows/rank', () => {
-    return HttpResponse.json(WatchlistShowsResponseMock);
-  }),
+];
+
+export const handlers = [
+  ...users,
+  ...movies,
+  ...shows,
+  ...sync,
 ];
