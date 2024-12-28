@@ -9,8 +9,6 @@ export function mapWatchersResponseToActiveWatchers(
     private: watcher.private,
     name: watcher.name,
     isVip: watcher.vip || watcher.vip_ep,
-    ids: {
-      slug: watcher.ids.slug,
-    },
+    slug: watcher.ids.slug,
   }));
 }

@@ -4,116 +4,90 @@ export const MediaWatchingMappedMock = [
     'private': false,
     'name': 'Harry Du Bois',
     'isVip': false,
-    'ids': {
-      'slug': 'harrierdubois',
-    },
+    'slug': 'harrierdubois',
   },
   {
     'username': 'kimkitsuragi',
     'private': false,
     'name': 'Kim Kitsuragi',
     'isVip': false,
-    'ids': {
-      'slug': 'kimkitsuragi',
-    },
+    'slug': 'kimkitsuragi',
   },
   {
     'username': 'klaasje',
     'private': false,
     'name': 'Klaasje Amandou',
     'isVip': false,
-    'ids': {
-      'slug': 'klaasje',
-    },
+    'slug': 'klaasje',
   },
   {
     'username': 'cuno',
     'private': false,
     'name': 'Cuno',
     'isVip': false,
-    'ids': {
-      'slug': 'cuno',
-    },
+    'slug': 'cuno',
   },
   {
     'username': 'joyce',
     'private': false,
     'name': 'Joyce Messier',
     'isVip': false,
-    'ids': {
-      'slug': 'joyce',
-    },
+    'slug': 'joyce',
   },
   {
     'username': 'measurehead',
     'private': false,
     'name': 'Measurehead',
     'isVip': false,
-    'ids': {
-      'slug': 'measurehead',
-    },
+    'slug': 'measurehead',
   },
   {
     'username': 'lilian',
     'private': false,
     'name': 'Lilian Carter',
     'isVip': false,
-    'ids': {
-      'slug': 'lilian',
-    },
+    'slug': 'lilian',
   },
   {
     'username': 'titus',
     'private': false,
     'name': 'Titus Hardie',
     'isVip': false,
-    'ids': {
-      'slug': 'titus',
-    },
+    'slug': 'titus',
   },
   {
     'username': 'garte',
     'private': false,
     'name': 'Garte',
     'isVip': false,
-    'ids': {
-      'slug': 'garte',
-    },
+    'slug': 'garte',
   },
   {
     'username': 'evrart',
     'private': false,
     'name': 'Evrart Claire',
     'isVip': false,
-    'ids': {
-      'slug': 'evrart',
-    },
+    'slug': 'evrart',
   },
   {
     'username': 'thepale',
     'private': false,
     'name': 'The Pale',
     'isVip': false,
-    'ids': {
-      'slug': 'thepale',
-    },
+    'slug': 'thepale',
   },
   {
     'username': 'lena',
     'private': false,
     'name': 'Lena',
     'isVip': false,
-    'ids': {
-      'slug': 'lena',
-    },
+    'slug': 'lena',
   },
   {
     'username': 'renee',
     'private': false,
     'name': 'Renee',
     'isVip': false,
-    'ids': {
-      'slug': 'renee',
-    },
+    'slug': 'renee',
   },
 ];

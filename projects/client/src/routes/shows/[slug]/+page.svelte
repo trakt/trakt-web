@@ -23,7 +23,7 @@
   image={$show?.cover.url.thumb}
   type="show"
 >
-  {#if $show != null && $ratings != null && $stats != null && $intl != null && $studios != null && $crew != null && $seasons != null}
+  {#if $show != null && $ratings != null && $stats != null && $intl != null && $studios != null && $crew != null && $seasons != null && $watchers != null}
     <ShowSummary
       media={$show}
       ratings={$ratings}

@@ -83,7 +83,7 @@ export function useShow(slug: string) {
     show: derived(show, ($show) => $show.data),
     ratings: derived(ratings, ($ratings) => $ratings.data),
     stats: derived(stats, ($stats) => $stats.data),
-    watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
+    watchers: derived(watchers, ($watchers) => $watchers.data),
     progress: derived(progress, ($progress) => $progress.data),
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
