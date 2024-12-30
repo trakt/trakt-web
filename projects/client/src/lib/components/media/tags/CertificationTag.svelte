@@ -6,7 +6,7 @@
 
 <div class="media-certification-tag">
   <TagContent>
-    <p class="meta-info capitalize">
+    <p class="meta-info capitalize no-wrap">
       {@render children()}
     </p>
   </TagContent>

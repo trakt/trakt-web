@@ -21,7 +21,7 @@ describe('NextEpisodeItem', () => {
     episode: {
       number: 1,
       season: 1,
-      poster: {
+      cover: {
         url: 'https://example.com',
       },
       title: 'Curtains Up (skit)',

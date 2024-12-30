@@ -8,27 +8,27 @@
   import type { MediaStats } from "$lib/models/MediaStats";
   import { languageTag } from "$lib/paraglide/runtime";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import type { MediaSummary } from "./MediaSummary";
 
   type MediaMetaTagsProps = {
-    media: MediaSummary;
+    certification: string | Nil;
+    year: number | Nil;
     watchers: ActiveWatcher[];
     stats: MediaStats;
   };
 
-  const { media, stats, watchers }: MediaMetaTagsProps = $props();
+  const { certification, year, stats, watchers }: MediaMetaTagsProps = $props();
 </script>
 
 <div class="trakt-meta-tags">
-  {#if media.certification}
+  {#if certification}
     <CertificationTag>
-      {media.certification}
+      {certification}
     </CertificationTag>
   {/if}
 
-  {#if media.year}
+  {#if year}
     <YearTag>
-      {media.year}
+      {year}
     </YearTag>
   {/if}
 

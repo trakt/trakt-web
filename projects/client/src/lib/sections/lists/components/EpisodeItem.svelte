@@ -4,6 +4,7 @@
   import EpisodeCard from "$lib/components/episode/card/EpisodeCard.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import EpisodeTimeTag from "$lib/components/episode/tags/EpisodeTimeTag.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { languageTag } from "$lib/features/i18n";
@@ -13,6 +14,7 @@
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   type EpisodeProps = {
     episode: EpisodeEntry;
@@ -35,24 +37,29 @@
 </script>
 
 <EpisodeCard>
-  <MediaCover
-    src={episode.poster.url ??
-      show.cover.url.thumb ??
-      EPISODE_COVER_PLACEHOLDER}
-    alt={`${episode.title} poster`}
+  <Link
+    focusable={false}
+    href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
   >
-    {#snippet tags()}
-      {#if isFuture}
-        <EpisodeTimeTag>
-          {EpisodeIntlProvider.timestampText(episode.airedDate)}
-        </EpisodeTimeTag>
-      {:else}
-        <DurationTag>
-          {toHumanDuration({ minutes: episode.runtime }, languageTag())}
-        </DurationTag>
-      {/if}
-    {/snippet}
-  </MediaCover>
+    <MediaCover
+      src={episode.cover.url ??
+        show.cover.url.thumb ??
+        EPISODE_COVER_PLACEHOLDER}
+      alt={`${episode.title} poster`}
+    >
+      {#snippet tags()}
+        {#if isFuture}
+          <EpisodeTimeTag>
+            {EpisodeIntlProvider.timestampText(episode.airedDate)}
+          </EpisodeTimeTag>
+        {:else}
+          <DurationTag>
+            {toHumanDuration({ minutes: episode.runtime }, languageTag())}
+          </DurationTag>
+        {/if}
+      {/snippet}
+    </MediaCover>
+  </Link>
 
   <CardFooter>
     <p class="episode-title small ellipsis">

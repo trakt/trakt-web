@@ -30,23 +30,29 @@
 </script>
 
 <EpisodeCard>
-  <EpisodeCover
-    i18n={EpisodeIntlProvider}
-    type={episode.type}
-    src={`${episode.poster.url ?? show.cover.url.thumb ?? EPISODE_COVER_PLACEHOLDER}`}
-    alt={`${show.title} - ${episode.title}`}
-    isLoading={$isMarkingAsWatched}
+  <Link
+    focusable={false}
+    href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
   >
-    {#snippet tags()}
-      <ShowProgressTag total={episode.total} progress={episode.completed}>
-        <span class="show-progress-text">
-          {EpisodeIntlProvider.remainingText(episode.remaining)} / {EpisodeIntlProvider.durationText(
-            episode.minutesLeft,
-          )}
-        </span>
-      </ShowProgressTag>
-    {/snippet}
-  </EpisodeCover>
+    <EpisodeCover
+      i18n={EpisodeIntlProvider}
+      type={episode.type}
+      src={`${episode.cover.url ?? show.cover.url.thumb ?? EPISODE_COVER_PLACEHOLDER}`}
+      alt={`${show.title} - ${episode.title}`}
+      isLoading={$isMarkingAsWatched}
+    >
+      {#snippet tags()}
+        <ShowProgressTag total={episode.total} progress={episode.completed}>
+          <span class="show-progress-text">
+            {EpisodeIntlProvider.remainingText(episode.remaining)} / {EpisodeIntlProvider.durationText(
+              episode.minutesLeft,
+            )}
+          </span>
+        </ShowProgressTag>
+      {/snippet}
+    </EpisodeCover>
+  </Link>
+
   <CardFooter>
     <Link href={UrlBuilder.show(show.slug)}>
       <p class="episode-show-title ellipsis">{show.title}</p>

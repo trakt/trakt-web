@@ -19,7 +19,7 @@ function showSummaryRequest(
     })
     .then(({ status, body }) => {
       if (status !== 200) {
-        throw new Error('Failed to fetch up next');
+        throw new Error('Failed to fetch show summary');
       }
 
       return mapShowResponseToShowSummary(body);

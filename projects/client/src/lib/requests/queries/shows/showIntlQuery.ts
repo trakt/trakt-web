@@ -33,7 +33,7 @@ export function showIntlRequest(
     })
     .then(({ status, body }) => {
       if (status !== 200) {
-        throw new Error('Failed to fetch up next');
+        throw new Error('Failed to fetch show intl');
       }
 
       const translation = body.find((translation) =>

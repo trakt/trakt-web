@@ -21,7 +21,7 @@ function movieSummaryRequest(
     })
     .then(({ status, body }) => {
       if (status !== 200) {
-        throw new Error('Failed to fetch up next');
+        throw new Error('Failed to fetch movie summary');
       }
 
       return mapMovieResponseToMovieSummary(body);

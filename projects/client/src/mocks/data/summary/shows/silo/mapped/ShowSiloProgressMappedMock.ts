@@ -4,7 +4,10 @@ export const ShowSiloProgressMappedMock = {
   'season': 2,
   'number': 2,
   'runtime': 42,
-  'poster': {
+  'genres': [],
+  'overview':
+    "In Silo 18, shock and unrest take hold in the wake of Juliette doing what no one's done before.",
+  'cover': {
     'url':
       'https://walter-r2.trakt.tv/images/episodes/012/105/048/screenshots/medium/2f894ac614.jpg.webp',
   },
@@ -14,4 +17,5 @@ export const ShowSiloProgressMappedMock = {
   'remaining': 6,
   'minutesLeft': 301,
   'type': 'standard',
+  'year': 2024,
 };

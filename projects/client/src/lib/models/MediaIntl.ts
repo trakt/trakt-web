@@ -1,5 +1,5 @@
-export type MediaIntl = {
-  title: string | Nil;
-  overview: string | Nil;
+import type { EpisodeIntl } from './EpisodeIntl';
+
+export type MediaIntl = EpisodeIntl & {
   tagline: string | Nil;
 };

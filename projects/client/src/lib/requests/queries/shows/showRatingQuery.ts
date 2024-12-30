@@ -19,7 +19,7 @@ export function showRatingRequest(
     })
     .then(({ status, body }) => {
       if (status !== 200) {
-        throw new Error('Failed to fetch up next');
+        throw new Error('Failed to fetch show rating');
       }
 
       return mapRatingResponseToMediaRating(body);

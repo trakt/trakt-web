@@ -96,6 +96,10 @@ p {
   text-overflow: ellipsis;
 }
 
+.no-wrap {
+  white-space: nowrap;
+}
+
 .trakt-button p:not(.meta-info) {
   font-size: 1rem;
   font-style: normal;

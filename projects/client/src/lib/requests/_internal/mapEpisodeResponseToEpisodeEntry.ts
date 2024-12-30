@@ -20,19 +20,24 @@ export function mapEpisodeResponseToEpisodeEntry(
     episode.images?.screenshot.at(0),
   );
 
+  const airedDate = new Date(episode.first_aired);
+
   return {
     id: episode.ids.trakt,
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.Unknown,
     title: episode.title,
+    overview: episode.overview,
     season: episode.season,
+    genres: [],
     number: episode.number,
     runtime: episode.runtime,
-    poster: {
+    cover: {
       url: prependHttps(
         thumbUrl(posterCandidate),
       ),
     },
-    airedDate: new Date(episode.first_aired),
+    airedDate,
+    year: airedDate.getFullYear(),
   };
 }

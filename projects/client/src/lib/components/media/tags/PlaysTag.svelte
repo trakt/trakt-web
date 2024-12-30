@@ -6,7 +6,7 @@
 
 <div class="plays-tag">
   <TagContent>
-    <p class="meta-info uppercase">
+    <p class="meta-info uppercase no-wrap">
       {@render children()}
     </p>
   </TagContent>

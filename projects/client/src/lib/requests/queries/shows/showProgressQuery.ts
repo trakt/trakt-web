@@ -24,7 +24,7 @@ export function mapResponseToShowProgress(
     season: episode.season,
     number: episode.number,
     runtime: episode.runtime,
-    poster: {
+    cover: {
       url: prependHttps(posterCandidate),
     },
     airedDate: new Date(episode.first_aired),
@@ -34,6 +34,9 @@ export function mapResponseToShowProgress(
     minutesLeft: item.stats?.minutes_left ?? 0,
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.Unknown,
+    genres: [],
+    overview: episode.overview,
+    year: new Date(episode.first_aired).getFullYear(),
   };
 }
 
@@ -60,7 +63,7 @@ export function showProgressRequest(
     })
     .then(({ status, body }) => {
       if (status !== 200) {
-        throw new Error('Failed to fetch up next');
+        throw new Error('Failed to fetch show progress');
       }
       return mapResponseToShowProgress(body);
     });

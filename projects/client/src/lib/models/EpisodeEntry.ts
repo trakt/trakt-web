@@ -5,10 +5,14 @@ export type EpisodeEntry = {
   season: number;
   number: number;
   title: string;
-  poster: {
+  overview: string;
+  cover: {
     url: string | Nil;
   };
+  genres: [];
   airedDate: Date;
   type: EpisodeType;
   runtime: number;
+  year: number;
+  certification?: null;
 };

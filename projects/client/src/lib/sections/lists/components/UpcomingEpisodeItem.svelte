@@ -19,18 +19,23 @@
 </script>
 
 <EpisodeCard>
-  <EpisodeCover
-    i18n={EpisodeIntlProvider}
-    type={episode.type}
-    src={`${episode.poster.url ?? show.cover.url.thumb ?? EPISODE_COVER_PLACEHOLDER}`}
-    alt={`${show.title} - ${episode.title}`}
+  <Link
+    focusable={false}
+    href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
   >
-    {#snippet tags()}
-      <EpisodeTimeTag>
-        {EpisodeIntlProvider.timestampText(episode.airedDate)}
-      </EpisodeTimeTag>
-    {/snippet}
-  </EpisodeCover>
+    <EpisodeCover
+      i18n={EpisodeIntlProvider}
+      type={episode.type}
+      src={`${episode.cover.url ?? show.cover.url.thumb ?? EPISODE_COVER_PLACEHOLDER}`}
+      alt={`${show.title} - ${episode.title}`}
+    >
+      {#snippet tags()}
+        <EpisodeTimeTag>
+          {EpisodeIntlProvider.timestampText(episode.airedDate)}
+        </EpisodeTimeTag>
+      {/snippet}
+    </EpisodeCover>
+  </Link>
   <CardFooter>
     <Link href={UrlBuilder.show(show.slug)}>
       <p class="episode-show-title ellipsis">{show.title}</p>

@@ -16,6 +16,8 @@ export const UrlBuilder = {
   show: (id: string) => `/shows/${id}`,
   movies: () => '/movies',
   movie: (id: string) => `/movies/${id}`,
+  episode: (id: string, season: number, episode: number) =>
+    `/shows/${id}/seasons/${season}/episodes/${episode}`,
   profile: {
     user: (username: string) => `/profile/${username}`,
     me: () => UrlBuilder.profile.user('me'),
