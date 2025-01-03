@@ -1,0 +1,1918 @@
+{
+  "$schema": "../schema/meta-messages.schema.json",
+  "meta": {
+    "locale": "en-au",
+    "direction": "ltr",
+    "guidance": "Embrace Australian culture a little, but not too much.",
+    "generator": {
+      "inlang": {
+        "enabled": true,
+        "outputPath": "./messages/{locale}.json"
+      },
+      "android": {
+        "enabled": true,
+        "outputPath": "./android/values-{locale}/strings.xml",
+        "resourceName": "strings"
+      },
+      "ios": {
+        "enabled": true,
+        "outputPath": "./ios/Localizable.xcstrings"
+      }
+    }
+  },
+  "messages": {
+    "list_title_upcoming_schedule": {
+      "default": "Upcoming Schedule"
+    },
+    "tag_text_season_premiere": {
+      "default": "Season Premiere"
+    },
+    "tag_text_series_premiere": {
+      "default": "Series Premiere"
+    },
+    "tag_text_mid_season_premiere": {
+      "default": "Mid-Season Premiere"
+    },
+    "tag_text_season_finale": {
+      "default": "Season Finale"
+    },
+    "tag_text_series_finale": {
+      "default": "Series Finale"
+    },
+    "tag_text_mid_season_finale": {
+      "default": "Mid-Season Finale"
+    },
+    "header_profile_banner_greeting": {
+      "default": "Hello, {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_up_next": {
+      "default": "Up Next"
+    },
+    "tag_text_remaining_episodes": {
+      "default": "{count} remaining",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_recommended_movies": {
+      "default": "Recommended Movies"
+    },
+    "list_title_recommended_shows": {
+      "default": "Reccomended Shows"
+    },
+    "tag_text_number_of_episodes": {
+      "default": "{count} episodes",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "page_title_error_404": {
+      "default": "404: Nothingness. The void."
+    },
+    "error_text_404": {
+      "default": "(Don't worry, it happens! Even the Force is sometimes out of alignment.)"
+    },
+    "link_text_back_to_safety": {
+      "default": "Back to safety..."
+    },
+    "input_prompt_mark_as_watched_date": {
+      "default": "When did you finish watching this? (YYYY-MM-DD HH:MM)"
+    },
+    "button_text_watchlist": {
+      "default": "Watchlist"
+    },
+    "button_text_mark_as_watched": {
+      "default": "Mark as Watched"
+    },
+    "button_text_watched_until_here": {
+      "default": "Watched until here"
+    },
+    "button_text_watch_again": {
+      "default": "Watch again"
+    },
+    "button_label_add_to_watchlist": {
+      "default": "Add {title} to your Watchlist",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_mark_as_watched": {
+      "default": "Mark {title} as watched",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_watched_until_here": {
+      "default": "Mark {title} as watched until here",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "translated_value_genre_horror": {
+      "default": "Horror"
+    },
+    "translated_value_genre_comedy": {
+      "default": "Comedy"
+    },
+    "translated_value_genre_action": {
+      "default": "Action"
+    },
+    "translated_value_genre_adventure": {
+      "default": "Adventure"
+    },
+    "translated_value_genre_animation": {
+      "default": "Animation"
+    },
+    "translated_value_genre_biography": {
+      "default": "Biography"
+    },
+    "translated_value_genre_children": {
+      "default": "Kids'"
+    },
+    "translated_value_genre_crime": {
+      "default": "Crime"
+    },
+    "translated_value_genre_documentary": {
+      "default": "Documentary"
+    },
+    "translated_value_genre_drama": {
+      "default": "Drama"
+    },
+    "translated_value_genre_family": {
+      "default": "Family"
+    },
+    "translated_value_genre_fantasy": {
+      "default": "Fantasy"
+    },
+    "translated_value_genre_game_show": {
+      "default": "Game Show"
+    },
+    "translated_value_genre_history": {
+      "default": "History"
+    },
+    "translated_value_genre_home_and_garden": {
+      "default": "Home & Garden"
+    },
+    "translated_value_genre_holiday": {
+      "default": "Holiday"
+    },
+    "translated_value_genre_music": {
+      "default": "Music"
+    },
+    "translated_value_genre_musical": {
+      "default": "Musical"
+    },
+    "translated_value_genre_mystery": {
+      "default": "Mystery"
+    },
+    "translated_value_genre_news": {
+      "default": "News"
+    },
+    "translated_value_genre_none": {
+      "default": "None"
+    },
+    "translated_value_genre_reality": {
+      "default": "Reality"
+    },
+    "translated_value_genre_romance": {
+      "default": "Romance"
+    },
+    "translated_value_genre_short": {
+      "default": "Short"
+    },
+    "translated_value_genre_soap": {
+      "default": "Soap"
+    },
+    "translated_value_genre_special_interest": {
+      "default": "Special Interest"
+    },
+    "translated_value_genre_sporting_event": {
+      "default": "Sporting Event"
+    },
+    "translated_value_genre_suspense": {
+      "default": "Suspense"
+    },
+    "translated_value_genre_talk_show": {
+      "default": "Talk Show"
+    },
+    "translated_value_genre_thriller": {
+      "default": "Thriller"
+    },
+    "translated_value_genre_war": {
+      "default": "War"
+    },
+    "translated_value_genre_western": {
+      "default": "Western"
+    },
+    "translated_value_genre_anime": {
+      "default": "Anime"
+    },
+    "translated_value_genre_superhero": {
+      "default": "Superhero"
+    },
+    "translated_value_genre_donghua": {
+      "default": "Donghua"
+    },
+    "translated_value_genre_mini_series": {
+      "default": "Mini-Series"
+    },
+    "translated_value_genre_science_fiction": {
+      "default": "Science Fiction"
+    },
+    "button_label_remove_from_watchlist": {
+      "default": "Remove {title} from your Watchlist",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "input_placeholder_search": {
+      "default": "Search shows & movies..."
+    },
+    "button_text_join_trakt": {
+      "default": "Join Trakt"
+    },
+    "button_label_join_trakt": {
+      "default": "Join trakt.tv to keep track of what you're watching"
+    },
+    "text_copyright_notice": {
+      "default": "All rights reserved."
+    },
+    "text_copyright_crafted_by": {
+      "default": "A global Trakt community"
+    },
+    "button_text_join_trakt_for_free": {
+      "default": "Join Trakt for Free"
+    },
+    "header_landing_discover": {
+      "default": "Discover"
+    },
+    "text_landing_discover": {
+      "default": "what's hot and where to stream it."
+    },
+    "header_landing_track": {
+      "default": "Track"
+    },
+    "text_landing_track": {
+      "default": "all the shows and movies you have ever watched."
+    },
+    "header_landing_share": {
+      "default": "Share"
+    },
+    "text_landing_share": {
+      "default": "comments, ratings and recommendations."
+    },
+    "list_title_trending": {
+      "default": "Trending"
+    },
+    "list_title_recommendations": {
+      "default": "Recommendations"
+    },
+    "list_title_most_anticipated": {
+      "default": "Most Anticipated"
+    },
+    "button_text_get_vip": {
+      "default": "Get"
+    },
+    "badge_text_get_vip": {
+      "default": "Get VIP"
+    },
+    "button_label_get_vip": {
+      "default": "Unlock VIP features"
+    },
+    "link_label_get_vip": {
+      "default": "Unlock VIP features"
+    },
+    "button_label_user_profile": {
+      "default": "User Profile"
+    },
+    "list_title_most_popular": {
+      "default": "Most Popular"
+    },
+    "button_text_browse_movies": {
+      "default": "Movies"
+    },
+    "button_label_browse_movies": {
+      "default": "Browse Movies"
+    },
+    "page_title_movies": {
+      "default": "Movies"
+    },
+    "button_text_browse_shows": {
+      "default": "Shows"
+    },
+    "button_label_browse_shows": {
+      "default": "Browse Shows"
+    },
+    "page_title_shows": {
+      "default": "Shows"
+    },
+    "button_text_home": {
+      "default": "Home"
+    },
+    "button_label_home": {
+      "default": "Go back to the homepage"
+    },
+    "page_title_home": {
+      "default": "Home"
+    },
+    "tag_text_plays": {
+      "default": "{number} plays",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_logout": {
+      "default": "Logout"
+    },
+    "button_label_logout": {
+      "default": "Logout"
+    },
+    "list_title_coming_soon": {
+      "default": "Coming Soon"
+    },
+    "tag_text_tba": {
+      "default": "TBA"
+    },
+    "list_title_related_movies": {
+      "default": "Related Movies"
+    },
+    "list_title_related_shows": {
+      "default": "Related Shows"
+    },
+    "text_about_placeholder_1": {
+      "default": "This user is a mystery, shrouded in enigma... (or maybe just lazy? Who knows, this is the internet.)"
+    },
+    "text_about_placeholder_2": {
+      "default": "Too busy watchin' stuff to write a bio. (Fair enough, we get it.)"
+    },
+    "text_about_placeholder_3": {
+      "default": "This user's profile is a blank canvas, a void of information... (much like my social life. sigh)"
+    },
+    "text_about_placeholder_4": {
+      "default": "Unravel the secrets of this user's identity... (if you dare)"
+    },
+    "text_about_placeholder_5": {
+      "default": "What hidden depths lie beneath this empty profile? (The truth is out there...)"
+    },
+    "text_about_placeholder_6": {
+      "default": "This user is a ghost in the machine, a digital phantom... (or maybe they just forgot to fill this out?)"
+    },
+    "text_about_placeholder_7": {
+      "default": "Help this user out! Tell them to complete their profile. (They might even reward you with a virtual high five!)"
+    },
+    "text_about_placeholder_8": {
+      "default": "This profile's screaming for a bit of TLC. Time to spruce it up."
+    },
+    "text_about_placeholder_9": {
+      "default": "Don't be shy! Encourage this user to share their story. (Everyone has a story to tell, even if it's just about their favourite TV show.)"
+    },
+    "text_about_placeholder_10": {
+      "default": "This user is like a character in a David Lynch film: enigmatic, mysterious, and possibly a figment of their own imagination."
+    },
+    "text_about_placeholder_11": {
+      "default": "This profile is as empty as a Blockbuster video store on a Friday night. (Remember those? Good times.)"
+    },
+    "text_about_placeholder_12": {
+      "default": "This user is channeling their inner Tyler Durden: rejecting consumerism and embracing the void. (Or maybe they just haven't gotten around to filling this out yet.)"
+    },
+    "text_about_placeholder_13": {
+      "default": "A stylized image: A funny illustration of a detective scratching their head in confusion, or a tumbleweed rolling across an empty profile page."
+    },
+    "text_about_placeholder_14": {
+      "default": "An interactive element: A button that allows users to send a friendly nudge to the profile owner, encouraging them to complete their profile."
+    },
+    "text_about_placeholder_15": {
+      "default": "A personalised message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalised placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'"
+    },
+    "list_placeholder_watchlist_movies": {
+      "default": "Your watchlist is empty, mate. Chuck in a few movies!"
+    },
+    "list_placeholder_watchlist_shows": {
+      "default": "Your watchlist is looking a bit bare, mate. Add a show worth a binge!"
+    },
+    "list_placeholder_upcoming_schedule": {
+      "default": "Explore TV series and personalise your schedule."
+    },
+    "list_placeholder_up_next_empty": {
+      "default": "Start watching and add shows to your watchlist."
+    },
+    "list_placeholder_released_movies": {
+      "default": "Add movies to your watchlist and never miss a premiere."
+    },
+    "list_placeholder_unreleased_movies": {
+      "default": "Add upcoming movies to your watchlist and stay updated."
+    },
+    "button_text_find_movies": {
+      "default": "Find Movies"
+    },
+    "button_text_find_shows": {
+      "default": "Find Shows"
+    },
+    "list_title_show_credits": {
+      "default": "Shows"
+    },
+    "text_episodes_watched": {
+      "default": "{count} episodes watched",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_movie_credits": {
+      "default": "Movies"
+    },
+    "text_movies_watched": {
+      "default": "{count} movies watched",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "header_details": {
+      "default": "Details"
+    },
+    "button_label_expand_category": {
+      "default": "Expand {category}",
+      "variables": {
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_more": {
+      "default": "{count} more",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "header_premiered": {
+      "default": "Premiered"
+    },
+    "header_runtime": {
+      "default": "Runtime"
+    },
+    "header_country": {
+      "default": "Country"
+    },
+    "header_language": {
+      "default": "Language"
+    },
+    "header_studio": {
+      "default": "Studio"
+    },
+    "header_genre": {
+      "default": "Genre"
+    },
+    "button_text_browse_lists": {
+      "default": "Lists"
+    },
+    "button_label_browse_lists": {
+      "default": "Browse your lists"
+    },
+    "page_title_lists": {
+      "default": "Lists"
+    },
+    "list_title_watchlist_shows": {
+      "default": "Your Shows"
+    },
+    "list_title_watchlist_movies": {
+      "default": "Your Movies"
+    },
+    "button_label_stream_on": {
+      "default": "Watch {title} now",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "image_alt_streaming_service_logo": {
+      "default": "{service} logo",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "header_director": {
+      "default": "Director"
+    },
+    "header_writer": {
+      "default": "Writer"
+    },
+    "header_creator": {
+      "default": "Creator"
+    },
+    "translated_value_job_action_director": {
+      "default": "Action Director"
+    },
+    "translated_value_job_additional_second_assistant_director": {
+      "default": "Additional Second Assistant Director"
+    },
+    "translated_value_job_additional_third_assistant_director": {
+      "default": "Additional Third Assistant Director"
+    },
+    "translated_value_job_assistant_director": {
+      "default": "Assistant Director"
+    },
+    "translated_value_job_assistant_director_trainee": {
+      "default": "Assistant Director Trainee"
+    },
+    "translated_value_job_co_director": {
+      "default": "Co-Director"
+    },
+    "translated_value_job_continuity": {
+      "default": "Continuity"
+    },
+    "translated_value_job_crowd_assistant_director": {
+      "default": "Crowd Assistant Director"
+    },
+    "translated_value_job_director": {
+      "default": "Director"
+    },
+    "translated_value_job_field_director": {
+      "default": "Field Director"
+    },
+    "translated_value_job_first_assistant_director": {
+      "default": "First Assistant Director"
+    },
+    "translated_value_job_first_assistant_director_trainee_prep": {
+      "default": "First Assistant Director (Prep)"
+    },
+    "translated_value_job_first_assistant_director_trainee": {
+      "default": "First Assistant Director Trainee"
+    },
+    "translated_value_job_insert_unit_director": {
+      "default": "Insert Unit Director"
+    },
+    "translated_value_job_insert_unit_first_assistant_director": {
+      "default": "Insert Unit First Assistant Director"
+    },
+    "translated_value_job_layout": {
+      "default": "Layout"
+    },
+    "translated_value_job_other": {
+      "default": "Other"
+    },
+    "translated_value_job_script_coordinator": {
+      "default": "Script Coordinator"
+    },
+    "translated_value_job_script_supervisor": {
+      "default": "Script Supervisor"
+    },
+    "translated_value_job_second_assistant_director": {
+      "default": "Second Assistant Director"
+    },
+    "translated_value_job_second_assistant_director_trainee": {
+      "default": "Second Assistant Director Trainee"
+    },
+    "translated_value_job_second_second_assistant_director": {
+      "default": "Second Second Assistant Director"
+    },
+    "translated_value_job_second_unit_director": {
+      "default": "Second Unit Director"
+    },
+    "translated_value_job_second_unit_first_assistant_director": {
+      "default": "Second Unit First Assistant Director"
+    },
+    "translated_value_job_series_director": {
+      "default": "Series Director"
+    },
+    "translated_value_job_series_guest_director": {
+      "default": "Special Guest Director"
+    },
+    "translated_value_job_stage_director": {
+      "default": "Stage Director"
+    },
+    "translated_value_job_third_assistant_director": {
+      "default": "Third Assistant Director"
+    },
+    "translated_value_job_adaptation": {
+      "default": "Adaptation"
+    },
+    "translated_value_job_author": {
+      "default": "Author"
+    },
+    "translated_value_job_book": {
+      "default": "Book"
+    },
+    "translated_value_job_characters": {
+      "default": "Characters"
+    },
+    "translated_value_job_co_writer": {
+      "default": "Co-Writer"
+    },
+    "translated_value_job_comic_book": {
+      "default": "Comic Book"
+    },
+    "translated_value_job_creative_producer": {
+      "default": "Creative Producer"
+    },
+    "translated_value_job_dialogue": {
+      "default": "Dialogue"
+    },
+    "translated_value_job_executive_story_editor": {
+      "default": "Executive Story Editor"
+    },
+    "translated_value_job_graphic_novel": {
+      "default": "Graphic Novel"
+    },
+    "translated_value_job_head_of_story": {
+      "default": "Head of Story"
+    },
+    "translated_value_job_idea": {
+      "default": "Idea"
+    },
+    "translated_value_job_junior_story_editor": {
+      "default": "Junior Story Editor"
+    },
+    "translated_value_job_lyricist": {
+      "default": "Lyricist"
+    },
+    "translated_value_job_musical": {
+      "default": "Musical"
+    },
+    "translated_value_job_novel": {
+      "default": "Novel"
+    },
+    "translated_value_job_opera": {
+      "default": "Opera"
+    },
+    "translated_value_job_original_concept": {
+      "default": "Original Concept"
+    },
+    "translated_value_job_original_film_writer": {
+      "default": "Original Film Writer"
+    },
+    "translated_value_job_original_series_creator": {
+      "default": "Original Series Creator"
+    },
+    "translated_value_job_original_original_story": {
+      "default": "Original Story"
+    },
+    "translated_value_job_scenario_writer": {
+      "default": "Scenario Writer"
+    },
+    "translated_value_job_screenplay": {
+      "default": "Screenplay"
+    },
+    "translated_value_job_screenstory": {
+      "default": "Screenstory"
+    },
+    "translated_value_job_script_consultant": {
+      "default": "Script Consultant"
+    },
+    "translated_value_job_script_editor": {
+      "default": "Script Editor"
+    },
+    "translated_value_job_senior_story_editor": {
+      "default": "Senior Story Editor"
+    },
+    "translated_value_job_series_composition": {
+      "default": "Series Composition"
+    },
+    "translated_value_job_short_story": {
+      "default": "Short Story"
+    },
+    "translated_value_job_staff_writer": {
+      "default": "Staff Writer"
+    },
+    "translated_value_job_story": {
+      "default": "Story"
+    },
+    "translated_value_job_story_story_artist": {
+      "default": "Story Artist"
+    },
+    "translated_value_job_story_story_consultant": {
+      "default": "Story Consultant"
+    },
+    "translated_value_job_story_story_coordinator": {
+      "default": "Story Coordinator"
+    },
+    "translated_value_job_story_story_developer": {
+      "default": "Story Developer"
+    },
+    "translated_value_job_story_story_editor": {
+      "default": "Story Editor"
+    },
+    "translated_value_job_story_story_manager": {
+      "default": "Story Manager"
+    },
+    "translated_value_job_story_story_supervisor": {
+      "default": "Story Supervisor"
+    },
+    "translated_value_job_storyboard": {
+      "default": "Storyboard"
+    },
+    "translated_value_job_teleplay": {
+      "default": "Teleplay"
+    },
+    "translated_value_job_texte": {
+      "default": "Texte"
+    },
+    "translated_value_job_theatre_play": {
+      "default": "Theatre Play"
+    },
+    "translated_value_job_writer": {
+      "default": "Writer"
+    },
+    "translated_value_job_writers_assistant": {
+      "default": "Writers' Assistant"
+    },
+    "translated_value_job_writers_production": {
+      "default": "Writers' Production"
+    },
+    "translated_value_job_creator": {
+      "default": "Creator"
+    },
+    "button_text_remove_from_history": {
+      "default": "Remove from Watched"
+    },
+    "button_label_remove_from_watched": {
+      "default": "Remove {title} from your Watched list",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_watched": {
+      "default": "Are you sure you want to remove {title} from your Watched list? All plays will be removed.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_history": {
+      "default": "Remove this play of {title} from your Watched list",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_single_watched": {
+      "default": "Are you sure you want to remove this play of {title} from your Watched list?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_seasons": {
+      "default": "Seasons"
+    },
+    "text_season_number": {
+      "default": "Season {number}",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "text_season_specials": {
+      "default": "Specials"
+    },
+    "button_label_expand_media_overview": {
+      "default": "Expand {title} overview",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_season_episode_number": {
+      "default": "Season {season} • Episode {number}",
+      "variables": {
+        "season": {
+          "type": "number"
+        },
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_share": {
+      "default": "Share {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "header_status": {
+      "default": "Status"
+    },
+    "translated_value_status_released": {
+      "default": "Released"
+    },
+    "translated_value_status_planned": {
+      "default": "Planned"
+    },
+    "translated_value_status_post_production": {
+      "default": "Post-Production"
+    },
+    "translated_value_status_canceled": {
+      "default": "Cancelled"
+    },
+    "translated_value_status_in_production": {
+      "default": "In Production"
+    },
+    "translated_value_status_rumored": {
+      "default": "Rumored"
+    },
+    "translated_value_status_ended": {
+      "default": "Ended"
+    },
+    "translated_value_status_returning_series": {
+      "default": "Returning Series"
+    },
+    "translated_value_status_pilot": {
+      "default": "Pilot"
+    },
+    "translated_value_status_continuing": {
+      "default": "Continuing"
+    },
+    "translated_value_status_upcoming": {
+      "default": "Upcoming"
+    },
+    "translated_value_status_unknown": {
+      "default": "Unknown"
+    },
+    "header_expected_premiere": {
+      "default": "Expected Premiere"
+    },
+    "image_alt_person_headshot": {
+      "default": "Headshot of {person}",
+      "variables": {
+        "person": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_actors": {
+      "default": "Actors"
+    },
+    "button_label_view_all_trending_movies": {
+      "default": "View all trending movies"
+    },
+    "button_label_view_all_trending_shows": {
+      "default": "View all trending shows"
+    },
+    "list_title_trending_shows": {
+      "default": "Trending Shows"
+    },
+    "list_title_trending_movies": {
+      "default": "Trending Movies"
+    },
+    "button_text_view_all": {
+      "default": "View All"
+    },
+    "tag_text_full_season": {
+      "default": "Full Season"
+    },
+    "warning_prompt_remove_from_watchlist": {
+      "default": "Are you sure you want to remove {title} from your Watchlist?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_view_all_recommended_movies": {
+      "default": "View all recommended movies"
+    },
+    "button_label_view_all_recommended_shows": {
+      "default": "View all recommended shows"
+    },
+    "button_label_view_all_anticipated_movies": {
+      "default": "View all anticipated movies"
+    },
+    "button_label_view_all_anticipated_shows": {
+      "default": "View all anticipated shows"
+    },
+    "list_title_anticipated_movies": {
+      "default": "Anticipated Movies"
+    },
+    "list_title_anticipated_shows": {
+      "default": "Anticipated Shows"
+    },
+    "button_label_view_all_popular_movies": {
+      "default": "View all popular movies"
+    },
+    "button_label_view_all_popular_shows": {
+      "default": "View all popular shows"
+    },
+    "list_title_popular_movies": {
+      "default": "Popular Movies"
+    },
+    "list_title_popular_shows": {
+      "default": "Popular Shows"
+    },
+    "header_rate_now": {
+      "default": "Rate now"
+    },
+    "button_text_add_to_favorites": {
+      "default": "Add to Favourites"
+    },
+    "button_text_remove_from_favorites": {
+      "default": "Remove from Favourites"
+    },
+    "button_label_add_to_favorites": {
+      "default": "Add {title} to your Favourites",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_favorites": {
+      "default": "Remove {title} from your Favourites",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_favorites": {
+      "default": "Are you sure you want to remove {title} from your Favourites?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_favorite_movies": {
+      "default": "Favourite Movies"
+    },
+    "list_title_favorite_shows": {
+      "default": "Favourite Shows"
+    },
+    "list_placeholder_favorite_movies": {
+      "default": "Your favourite movies list is empty."
+    },
+    "list_placeholder_favorite_shows": {
+      "default": "Your favourite shows list is empty."
+    },
+    "button_text_stream_on": {
+      "default": "Stream on"
+    },
+    "header_stream_on": {
+      "default": "Stream on"
+    },
+    "list_title_your_watchlist_shows": {
+      "default": "Your Watchlist Shows"
+    },
+    "list_title_your_watchlist_movies": {
+      "default": "Your Watchlist Movies"
+    },
+    "button_label_view_all_watchlist_movies": {
+      "default": "View all watchlist movies"
+    },
+    "button_label_view_all_watchlist_shows": {
+      "default": "View all watchlist shows"
+    },
+    "header_streaming": {
+      "default": "Streaming"
+    },
+    "header_on_demand": {
+      "default": "On Demand"
+    },
+    "button_label_popup_media": {
+      "default": "Pop up menu for {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_popular_lists": {
+      "default": "Popular lists"
+    },
+    "list_placeholder_popular_lists": {
+      "default": "{title} does not appear on any popular lists.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_by": {
+      "default": "by"
+    },
+    "image_alt_user_avatar": {
+      "default": "{username}'s avatar",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "image_alt_media_poster": {
+      "default": "{title} poster",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_placeholder_comments": {
+      "default": "No comments yet."
+    },
+    "text_review_by": {
+      "default": "Review by"
+    },
+    "text_shout_by": {
+      "default": "Shout by"
+    },
+    "text_deleted_username": {
+      "default": "Deleted"
+    },
+    "list_title_social_activity": {
+      "default": "Social Activity"
+    },
+    "button_label_view_all_social_activity": {
+      "default": "View all social activity"
+    },
+    "dropdown_label_person_position": {
+      "default": "Position"
+    },
+    "translated_value_position_acting": {
+      "default": "Acting"
+    },
+    "translated_value_position_production": {
+      "default": "Production"
+    },
+    "translated_value_position_art": {
+      "default": "Art"
+    },
+    "translated_value_position_crew": {
+      "default": "Crew"
+    },
+    "translated_value_position_costume___make_up": {
+      "default": "Costume & Make-Up"
+    },
+    "translated_value_position_directing": {
+      "default": "Directing"
+    },
+    "translated_value_position_writing": {
+      "default": "Writing"
+    },
+    "translated_value_position_sound": {
+      "default": "Sound"
+    },
+    "translated_value_position_camera": {
+      "default": "Camera"
+    },
+    "translated_value_position_lighting": {
+      "default": "Lighting"
+    },
+    "translated_value_position_visual_effects": {
+      "default": "Visual Effects"
+    },
+    "translated_value_position_editing": {
+      "default": "Editing"
+    },
+    "translated_value_position_creator": {
+      "default": "Creator"
+    },
+    "translated_value_position_created_by": {
+      "default": "Created By"
+    },
+    "list_title_personal_lists": {
+      "default": "Personal"
+    },
+    "list_title_collaborative_lists": {
+      "default": "Collaborations"
+    },
+    "list_title_liked_lists": {
+      "default": "Liked"
+    },
+    "text_share_movie": {
+      "default": "Just discovered {title} - you need to see this! 🎬",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_show": {
+      "default": "Found this awesome show: {title}! 📺",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_episode": {
+      "default": "Just watched {show} S{season}E{episode} - {title}! 🔥",
+      "variables": {
+        "show": {
+          "type": "string"
+        },
+        "season": {
+          "type": "number"
+        },
+        "episode": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_person": {
+      "default": "Check out {name} on Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_profile": {
+      "default": "Check out {name} on Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_recently_watched": {
+      "default": "Recently Watched"
+    },
+    "button_label_view_all_recently_watched": {
+      "default": "View all recently watched"
+    },
+    "list_title_available_now": {
+      "default": "Available Now"
+    },
+    "button_label_view_all_released_movies": {
+      "default": "View all movies available now"
+    },
+    "button_label_view_all_unreleased_movies": {
+      "default": "View all movies coming soon"
+    },
+    "tag_text_preview": {
+      "default": "Preview"
+    },
+    "tooltip_text_preview_feature": {
+      "default": "This feature's still getting a fresh coat of paint, citizen. We're hammering away at the UX, making it sing like a choir of angels (or at least, function smoothly without inducing existential dread)."
+    },
+    "header_airs": {
+      "default": "Airs"
+    },
+    "header_aired": {
+      "default": "Aired"
+    },
+    "warning_prompt_drop_show": {
+      "default": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_show": {
+      "default": "Flag show {title} as dropped",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_show": {
+      "default": "Drop show"
+    },
+    "switch_label_up_next_nitro": {
+      "default": "Enable Up Next Nitro"
+    },
+    "tooltip_text_up_next_nitro": {
+      "default": "This experiment is a performance upgrade which improves experience for all users."
+    },
+    "tooltip_text_up_next_nitro_hidden": {
+      "default": "Due to internal design changes previously hidden shows will now be visible in your list with a black and white thumbnail to help you spot them quickly, with the option to either un-hide them or drop them from the list."
+    },
+    "warning_prompt_restore_show": {
+      "default": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_restore_show": {
+      "default": "Restore show {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_restore_show": {
+      "default": "Restore show"
+    },
+    "warning_prompt_mark_as_watched_show": {
+      "default": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_mark_as_watched_show_until": {
+      "default": "Are you sure you want to mark all unseen episodes of {title} as watched until episode {episode}? This will mark {count} episodes as watched.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "episode": {
+          "type": "number"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "warning_prompt_mark_as_watched_multiple_episodes": {
+      "default": "Are you sure you want to mark {count} episodes as watched?",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_watch_count": {
+      "default": "Watch count"
+    },
+    "list_placeholder_media_history": {
+      "default": "You haven't watched {title} yet",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_like_comment": {
+      "default": "Like Comment"
+    },
+    "button_label_unlike_comment": {
+      "default": "Unlike Comment"
+    },
+    "button_text_comment_likes": {
+      "default": "{count} likes",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_close": {
+      "default": "Close"
+    },
+    "button_label_comment_replies": {
+      "default": "Comment Replies"
+    },
+    "button_text_comment_replies": {
+      "default": "{count} replies",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_comments": {
+      "default": "Comments"
+    },
+    "dialog_title_comments": {
+      "default": "Comments"
+    },
+    "dialog_title_comment": {
+      "default": "Comment"
+    },
+    "button_text_comment_reply": {
+      "default": "Reply"
+    },
+    "button_label_comment_reply": {
+      "default": "Reply to {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
+    },
+    "textarea_placeholder_reply": {
+      "default": "Reply..."
+    },
+    "button_label_add_new_comment": {
+      "default": "Add a new comment"
+    },
+    "textarea_placeholder_comment": {
+      "default": "Comment..."
+    },
+    "switch_label_mark_as_spoiler": {
+      "default": "Mark as spoiler"
+    },
+    "text_spoiler": {
+      "default": "Spoiler"
+    },
+    "button_label_close_error": {
+      "default": "Close error"
+    },
+    "button_label_post_reply": {
+      "default": "Post reply"
+    },
+    "translated_value_error_comment_invalid_content": {
+      "default": "Comments must be at least 5 words and in English."
+    },
+    "translated_value_error_comment_unknown": {
+      "default": "An error occurred while posting your comment. Please try again later."
+    },
+    "page_title_user_profile": {
+      "default": "{username}'s profile",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "header_private_profile": {
+      "default": "This profile is private"
+    },
+    "text_private_profile_description": {
+      "default": "As if there wasn't enough hidden already. {username}'s secrets remain their own.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "header_original_title": {
+      "default": "Original Title"
+    },
+    "button_label_view_all_comments": {
+      "default": "View all comments"
+    },
+    "button_text_remove_from_list": {
+      "default": "Remove from list"
+    },
+    "button_label_remove_from_list": {
+      "default": "Remove {title} from list",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_service_unavailable": {
+      "default": "Trakt service unreachable"
+    },
+    "error_text_service_unavailable": {
+      "default": "The connection is... absent. Like a forgotten memory."
+    },
+    "link_text_service_status": {
+      "default": "Trakt service status"
+    },
+    "button_text_retry": {
+      "default": "Retry"
+    },
+    "button_label_retry": {
+      "default": "Retry"
+    },
+    "header_community_sentiment": {
+      "default": "Community Sentiment"
+    },
+    "button_text_lists": {
+      "default": "Lists"
+    },
+    "button_text_listed": {
+      "default": "Listed"
+    },
+    "dropdown_label_add_remove_from_lists": {
+      "default": "Add or remove {title} from lists",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_add_to_personal_list": {
+      "default": "Add {title} to {list}",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_personal_list": {
+      "default": "Remove {title} from {list}",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_personal_list": {
+      "default": "Are you sure you want to remove {title} from {list}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "option_text_theme_light": {
+      "default": "Light"
+    },
+    "option_text_theme_dark": {
+      "default": "Dark"
+    },
+    "option_text_theme_system": {
+      "default": "System"
+    },
+    "button_text_filters": {
+      "default": "Filter"
+    },
+    "button_label_filters": {
+      "default": "Filter"
+    },
+    "button_label_reset_filter": {
+      "default": "Reset"
+    },
+    "text_search_results_for": {
+      "default": "Results for {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "translated_value_type_movie": {
+      "default": "Movie"
+    },
+    "translated_value_type_show": {
+      "default": "Show"
+    },
+    "page_title_sign_in": {
+      "default": "Sign in"
+    },
+    "header_device_auth_failed": {
+      "default": "Something went wrong"
+    },
+    "header_device_auth_try_again": {
+      "default": "The activation was denied, expired, or something unforeseeable happened. Please try again."
+    },
+    "header_device_auth_qr_instruction": {
+      "default": "Scan the QR code, or sign in at:"
+    },
+    "header_device_auth_code_instruction": {
+      "default": "and enter the following code:"
+    },
+    "option_text_all": {
+      "default": "All"
+    },
+    "header_filters": {
+      "default": "Filters"
+    },
+    "header_ignore_watched": {
+      "default": "Ignore Watched"
+    },
+    "header_ignore_watchlisted": {
+      "default": "Ignore Watchlisted"
+    },
+    "option_text_my_favorites": {
+      "default": "My favourites"
+    },
+    "option_text_all_digital_releases": {
+      "default": "All digital releases"
+    },
+    "option_text_streaming_now": {
+      "default": "Streaming now"
+    },
+    "header_decade": {
+      "default": "Decade"
+    },
+    "header_ratings": {
+      "default": "Ratings"
+    },
+    "button_label_view_all_items_in": {
+      "default": "View all items in {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_reset_all_filters": {
+      "default": "Reset all"
+    },
+    "button_label_reset_all_filters": {
+      "default": "Reset all filters"
+    },
+    "translated_value_video_type_trailer": {
+      "default": "Trailer"
+    },
+    "translated_value_video_type_clip": {
+      "default": "Clip"
+    },
+    "translated_value_video_type_teaser": {
+      "default": "Teaser"
+    },
+    "translated_value_video_type_featurette": {
+      "default": "Featurette"
+    },
+    "translated_value_video_type_recap": {
+      "default": "Recap"
+    },
+    "translated_value_video_type_behind_the_scenes": {
+      "default": "Behind the Scenes"
+    },
+    "translated_value_video_type_bloopers": {
+      "default": "Bloopers"
+    },
+    "header_now_playing": {
+      "default": "Now Playing"
+    },
+    "text_remaining": {
+      "default": "remaining"
+    },
+    "button_text_checkin": {
+      "default": "Check in"
+    },
+    "button_label_checkin": {
+      "default": "Check in {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_cookie_notice": {
+      "default": "Trakt uses C🍪🍪KIES in order to enhance your overall experience. You can <a>read more information</a> here."
+    },
+    "button_text_cookie_accept": {
+      "default": "Got it, let's go!"
+    },
+    "button_label_cookie_accept": {
+      "default": "Accept the cookies"
+    },
+    "page_title_year_to_date": {
+      "default": "Year to date"
+    },
+    "page_title_month_in_review": {
+      "default": "Month in review"
+    },
+    "page_title_settings": {
+      "default": "Settings"
+    },
+    "header_settings": {
+      "default": "Settings"
+    },
+    "button_text_settings": {
+      "default": "Settings"
+    },
+    "button_label_settings": {
+      "default": "Settings"
+    },
+    "header_spoilers": {
+      "default": "Spoilers"
+    },
+    "text_show_spoilers": {
+      "default": "Show spoilers"
+    },
+    "switch_label_spoilers": {
+      "default": "Show spoilers"
+    },
+    "button_text_save_filters": {
+      "default": "Save"
+    },
+    "button_label_save_filters": {
+      "default": "Save filters"
+    },
+    "page_title_account_locked": {
+      "default": "Account locked"
+    },
+    "error_text_locked_account": {
+      "default": "Your account is locked, <a>contact support</a> to resolve this issue."
+    },
+    "text_first_play_this_month": {
+      "default": "First play this month"
+    },
+    "text_shows_watched": {
+      "default": "{count} shows watched",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_follow": {
+      "default": "Follow"
+    },
+    "button_label_follow": {
+      "default": "Follow {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_unfollow": {
+      "default": "Unfollow"
+    },
+    "button_label_unfollow": {
+      "default": "Unfollow {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_unfollow_user": {
+      "default": "Are you sure you want to unfollow {username}?",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_upsell": {
+      "default": "Unlock VIP features to enhance your Trakt experience"
+    },
+    "text_vip_upsell_description": {
+      "default": "Want to see your month and year in review? And get access to many other features? Sign up for Trakt VIP."
+    },
+    "list_title_following": {
+      "default": "Following"
+    },
+    "list_title_followers": {
+      "default": "Followers"
+    },
+    "list_placeholder_followers": {
+      "default": "There is no one here (yet)."
+    },
+    "list_placeholder_following": {
+      "default": "There is no one here (yet)."
+    },
+    "button_label_read_more": {
+      "default": "Read more"
+    },
+    "button_text_add_comment": {
+      "default": "Add Comment"
+    },
+    "button_label_add_comment": {
+      "default": "Add Comment"
+    },
+    "input_prompt_rename_list": {
+      "default": "Rename your list"
+    },
+    "button_label_rename_list": {
+      "default": "Rename your list {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_hot": {
+      "default": "Hot This Month"
+    },
+    "list_title_hot_movies": {
+      "default": "Hot Movies This Month"
+    },
+    "list_title_hot_shows": {
+      "default": "Hot Shows This Month"
+    },
+    "button_label_view_all_hot_shows": {
+      "default": "View all hot shows"
+    },
+    "button_label_view_all_hot_movies": {
+      "default": "View all hot movies"
+    },
+    "list_title_extras": {
+      "default": "Extras"
+    },
+    "page_title_up_next": {
+      "default": "Up Next"
+    },
+    "page_title_watchlist_shows": {
+      "default": "Your Watchlist Shows"
+    },
+    "page_title_available_now": {
+      "default": "Available Now"
+    },
+    "page_title_coming_soon": {
+      "default": "Coming Soon"
+    },
+    "page_title_watchlist_movies": {
+      "default": "Your Watchlist Movies"
+    },
+    "page_title_social_activity": {
+      "default": "Social activity"
+    },
+    "page_title_trending_shows": {
+      "default": "Trending Shows"
+    },
+    "page_title_recommended_shows": {
+      "default": "Recommended Shows"
+    },
+    "page_title_popular_shows": {
+      "default": "Popular Shows"
+    },
+    "page_title_hot_shows": {
+      "default": "Hot Shows"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Anticipated Shows"
+    },
+    "page_title_trending_movies": {
+      "default": "Trending movies"
+    },
+    "page_title_recommended_movies": {
+      "default": "Recommended movies"
+    },
+    "page_title_popular_movies": {
+      "default": "Popular movies"
+    },
+    "page_title_hot_movies": {
+      "default": "Hot movies"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Anticipated movies"
+    },
+    "page_title_recently_watched": {
+      "default": "Recently Watched"
+    },
+    "page_title_profile": {
+      "default": "Profile"
+    },
+    "page_title_search_results": {
+      "default": "Results for {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_search": {
+      "default": "Search"
+    },
+    "dropdown_label_extras": {
+      "default": "Extras"
+    },
+    "button_label_rating_bad": {
+      "default": "Rate as bad"
+    },
+    "button_label_rating_good": {
+      "default": "Rate as good"
+    },
+    "button_label_rating_great": {
+      "default": "Rate as great"
+    },
+    "badge_text_more": {
+      "default": "and {count} more",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_stop_playing": {
+      "default": "Stop the checkin for {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "link_text_view_profile": {
+      "default": "View profile"
+    },
+    "button_text_search": {
+      "default": "Search"
+    },
+    "button_label_search": {
+      "default": "Search"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Poster for an entry in {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_delete_list": {
+      "default": "Delete your list {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Are you sure you want to delete the list {name}?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "to add more lists"
+    },
+    "button_text_create_list": {
+      "default": "List"
+    },
+    "button_label_create_list": {
+      "default": "Create list"
+    },
+    "input_prompt_create_list": {
+      "default": "Enter a name for your list"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "There is nothing in this list yet."
+    },
+    "header_profile": {
+      "default": "Profile"
+    },
+    "text_avatar": {
+      "default": "Avatar"
+    },
+    "text_private": {
+      "default": "Private"
+    },
+    "switch_label_private": {
+      "default": "Is profile private"
+    },
+    "text_display_name": {
+      "default": "Display name"
+    },
+    "button_label_change_display_name": {
+      "default": "Change display name"
+    },
+    "text_location": {
+      "default": "Location"
+    },
+    "button_label_change_location": {
+      "default": "Change location"
+    },
+    "text_about": {
+      "default": "About"
+    },
+    "button_label_change_about": {
+      "default": "Change about"
+    },
+    "input_prompt_display_name": {
+      "default": "What should your display name be?"
+    },
+    "input_prompt_location": {
+      "default": "Where are you located?"
+    },
+    "input_prompt_about": {
+      "default": "Tell us a bit about yourself."
+    },
+    "header_favorite_genres": {
+      "default": "Favourite genres"
+    },
+    "button_label_toggle_genre": {
+      "default": "Toggle the {genre} genre",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

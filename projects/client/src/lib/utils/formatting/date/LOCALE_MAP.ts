@@ -4,6 +4,7 @@ import {
   da,
   de,
   enUS,
+  enAU,
   es,
   fr,
   frCA,
@@ -22,6 +23,7 @@ import type { AvailableLocale } from '$lib/features/i18n/index.ts';
 
 export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   en: enUS,
+  'en-au': enAU,
   'fr-fr': fr,
   'fr-ca': frCA,
   'ja-jp': ja,
