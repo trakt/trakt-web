@@ -2,6 +2,7 @@ import { handle as handleAuth } from '$lib/features/auth/handle.ts';
 import { handle as handleCacheBust } from '$lib/features/cache-bust/handle.ts';
 import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
 import { handle as handleImage } from '$lib/features/image/handle.ts';
+import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
 
 import type { Handle } from '@sveltejs/kit';
@@ -46,4 +47,5 @@ export const handle: Handle = sequence(
     });
   },
   handleCacheControl,
+  handleMobileOperatingSystem,
 );
