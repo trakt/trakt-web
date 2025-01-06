@@ -6,6 +6,14 @@
  */
 export function triggerWithTouch(node: HTMLElement) {
   const handleTouchEnd = (event: PointerEvent) => {
+    // TODO: improvement, ideally we apply this only for iOS devices
+    // iPad and iPhone to be more specific, investigate how to consistently detect them
+    const isMouse = event.pointerType === 'mouse';
+
+    if (!isMouse) {
+      return;
+    }
+
     const isElement = event.target instanceof HTMLElement;
     if (!isElement) {
       return;
