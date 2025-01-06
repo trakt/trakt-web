@@ -2,7 +2,6 @@ export async function encrypt<T extends Object>(
   key: CryptoKey,
   data: T,
 ): Promise<string> {
-  console.log('encrypting data', data);
   const jsonString = JSON.stringify(data);
   const encryptedBuffer = await crypto.subtle.encrypt(
     {

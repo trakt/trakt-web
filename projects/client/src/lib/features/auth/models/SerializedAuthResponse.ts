@@ -13,3 +13,7 @@ export type SerializedAuthResponse = {
   };
   expiresAt?: never;
 };
+
+export type ClientAuthResponse = {
+  isAuthorized: boolean;
+};

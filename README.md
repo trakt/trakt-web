@@ -37,6 +37,8 @@ properly:
 - **`TRAKT_CLIENT_ID`:** The client ID for the Trakt API.
 - **`TRAKT_CLIENT_SECRET`:** The client secret for the Trakt API.
   - Required for the `playground` project.
+- **`TRAKT_SESSION_SECRET`:** The session encryption secret for the Trakt API.
+  - `deno task insecurity:generate`
 
 ## Getting Started
 

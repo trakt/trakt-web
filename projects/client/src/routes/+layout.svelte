@@ -58,7 +58,7 @@
 </svelte:head>
 
 <QueryClientProvider client={data.queryClient}>
-  <AuthProvider token={data.auth.token} url={data.auth.url}>
+  <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
     <AnalyticsProvider>
       <LocaleProvider>
         <CoverProvider>

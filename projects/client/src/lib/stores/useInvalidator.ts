@@ -10,7 +10,7 @@ export function useInvalidator() {
 
   const invalidate = async (action: InvalidateActionOptions) => {
     if (action === InvalidateAction.Auth) {
-      await client?.resetQueries();
+      await client?.removeQueries();
     }
 
     await client?.invalidateQueries({

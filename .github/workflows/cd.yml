@@ -51,3 +51,4 @@ jobs:
           preCommands: |
             echo "${{ secrets.TRAKT_CLIENT_ID }}" | npx wrangler pages secret put TRAKT_CLIENT_ID
             echo "${{ secrets.TRAKT_CLIENT_SECRET }}" | npx wrangler pages secret put TRAKT_CLIENT_SECRET
+            echo "${{ secrets.TRAKT_SESSION_SECRET }}" | npx wrangler pages secret put TRAKT_SESSION_SECRET

@@ -1,8 +1,6 @@
 import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
 import { DeviceUnauthorizedError, verifyAuth } from './verifyAuth.ts';
 
-export type AuthResponse = { token?: string };
-
 const UNAUTHORIZED_PAYLOAD: SerializedAuthResponse = {
   isAuthorized: false,
   token: {},

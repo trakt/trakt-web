@@ -1,9 +1,10 @@
+import { useAuth } from '$lib/features/auth/stores/useAuth';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { isAuthorized } from '$lib/features/auth/token/index.ts';
-import { derived, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
 
 export function useUserSeason(showId: number) {
-  if (!isAuthorized()) return writable(0);
+  const { isAuthorized } = useAuth();
+  if (!get(isAuthorized)) return writable(0);
 
   const { history } = useUser();
 

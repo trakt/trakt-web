@@ -3,22 +3,22 @@
   import { page } from "$app/stores";
   import { onMount } from "svelte";
   import { AuthEndpoint } from "../AuthEndpoint";
-  import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
+  import type { ClientAuthResponse } from "../models/SerializedAuthResponse";
   import { provisionAuth, useAuth } from "../stores/useAuth";
 
   type AuthProviderProps = {
-    token: string | Nil;
     url: string;
+    isAuthorized: boolean;
   } & ChildrenProps;
 
-  const { token, url, children }: AuthProviderProps = $props();
+  const { isAuthorized, url, children }: AuthProviderProps = $props();
 
   provisionAuth({
-    token,
+    isAuthorized,
     url,
   });
 
-  const auth = useAuth();
+  const store = useAuth();
 
   function requestAuthStatus(code: string) {
     return fetch(AuthEndpoint.Exchange, {
@@ -27,7 +27,7 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ code }),
-    }).then((res) => res.json() as Promise<SerializedAuthResponse>);
+    }).then((res) => res.json() as Promise<ClientAuthResponse>);
   }
 
   onMount(async () => {
@@ -39,11 +39,8 @@
       return;
     }
 
-    const {
-      isAuthorized,
-      token: { access },
-    } = await requestAuthStatus(code);
-
+    const { isAuthorized } = await requestAuthStatus(code);
+    store.isAuthorized.set(isAuthorized);
     if (!isAuthorized) {
       return;
     }
@@ -54,8 +51,6 @@
       `${url.pathname}${queryParams.toString() ? "?" + queryParams.toString() : ""}`,
       {},
     );
-
-    auth.token.set(access);
   });
 </script>
 
