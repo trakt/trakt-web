@@ -4,7 +4,6 @@ import type {
   SortDirection,
   WatchAction,
 } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -100,9 +99,6 @@ const currentUserRequest = ({ fetch }: ApiParams): Promise<UserSettings> =>
     .settings({
       query: {
         extended: 'browsing',
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then((response) => {

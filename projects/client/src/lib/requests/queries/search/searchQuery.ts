@@ -1,5 +1,4 @@
 import type { Genre, SearchResultResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -73,9 +72,6 @@ function searchRequest({
       },
       params: {
         type: 'movie,show',
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

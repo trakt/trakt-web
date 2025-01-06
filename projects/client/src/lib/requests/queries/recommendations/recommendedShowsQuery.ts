@@ -1,5 +1,4 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaSummary } from '$lib/requests/models/MediaSummary.ts';
@@ -33,9 +32,6 @@ function recommendShowsRequest(
         ignore_collected: true,
         ignore_watchlisted: true,
         limit: 35,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

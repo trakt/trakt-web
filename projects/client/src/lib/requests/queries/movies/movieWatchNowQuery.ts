@@ -1,4 +1,3 @@
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNowResponseToWatchNowDetails.ts';
 import type { WatchNowServices } from '../../models/WatchNowServices.ts';
@@ -17,9 +16,6 @@ function movieWatchNowRequest(
       params: {
         id: slug,
         country,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

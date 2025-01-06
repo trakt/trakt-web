@@ -1,5 +1,4 @@
 import type { HistoryMoviesResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
@@ -42,9 +41,6 @@ function movieHistoryRequest(
         start_at: startDate.toISOString(),
         end_at: endDate.toISOString(),
         limit,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

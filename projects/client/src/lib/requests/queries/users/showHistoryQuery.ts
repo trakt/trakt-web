@@ -1,5 +1,4 @@
 import type { HistoryShowsResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
@@ -46,9 +45,6 @@ function showHistoryRequest(
         start_at: startDate.toISOString(),
         end_at: endDate.toISOString(),
         limit,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

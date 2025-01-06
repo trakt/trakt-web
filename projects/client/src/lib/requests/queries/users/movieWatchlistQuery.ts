@@ -1,5 +1,4 @@
 import type { SortType, WatchlistedMoviesResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
@@ -38,9 +37,6 @@ function watchlistRequest(
       },
       query: {
         extended: 'full,cloud9',
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

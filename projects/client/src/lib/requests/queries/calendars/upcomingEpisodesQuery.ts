@@ -1,4 +1,3 @@
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
@@ -29,9 +28,6 @@ function upcomingEpisodesRequest({
         target: 'my',
         start_date: startDate,
         days,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

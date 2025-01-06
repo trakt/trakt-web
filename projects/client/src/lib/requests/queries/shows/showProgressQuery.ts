@@ -1,5 +1,4 @@
 import type { ShowProgressResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry.ts';
 import {
   type EpisodeType,
@@ -57,9 +56,6 @@ export function showProgressRequest(
       },
       params: {
         id: slug,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {

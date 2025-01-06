@@ -1,7 +1,6 @@
 import type { WatchedMoviesResponse, WatchedShowsResponse } from '$lib/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
-import { authHeader } from '../stores/authHeader.ts';
 
 export type MediaPlayHistory = {
   watchedAt: Date;
@@ -35,9 +34,6 @@ const currentUserWatchedMoviesRequest = (
     .movies({
       params: {
         id: 'me',
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then((response) => {
@@ -107,9 +103,6 @@ const currentUserWatchedShowsRequest = (
     .shows({
       params: {
         id: 'me',
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then((response) => {

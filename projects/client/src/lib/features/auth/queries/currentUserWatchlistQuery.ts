@@ -4,7 +4,6 @@ import type {
 } from '$lib/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
-import { authHeader } from '../stores/authHeader.ts';
 
 type WatchlistedMedia = {
   id: number;
@@ -34,9 +33,6 @@ const watchlistedMoviesRequest = (
       params: {
         id: 'me',
         sort: 'rank',
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then((response) => {
@@ -82,9 +78,6 @@ const watchlistedShowsRequest = (
       params: {
         id: 'me',
         sort: 'rank',
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then((response) => {

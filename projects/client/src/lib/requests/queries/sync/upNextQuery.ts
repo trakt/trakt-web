@@ -1,5 +1,4 @@
 import type { SortDirection, UpNextResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import type { Paginatable } from '$lib/models/Paginatable.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
@@ -55,9 +54,6 @@ export function upNextRequest(
         limit,
         include_stats: true,
         ...sortQuery,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body, headers }) => {

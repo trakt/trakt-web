@@ -1,5 +1,4 @@
 import type { RecommendedMovieResponse } from '$lib/api.ts';
-import { authHeader } from '$lib/features/auth/stores/authHeader.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
@@ -29,9 +28,6 @@ function recommendMoviesRequest(
         ignore_collected: true,
         ignore_watchlisted: true,
         limit: 35,
-      },
-      extraHeaders: {
-        ...authHeader(),
       },
     })
     .then(({ status, body }) => {
