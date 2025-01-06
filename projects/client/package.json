@@ -18,7 +18,8 @@
     "i18n:resolve": "deno run --allow-read --allow-write .scripts/resolve-i18n.ts",
     "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts",
     "i18n:delete": "deno run --allow-read --allow-write --allow-env .scripts/delete-i18n.ts",
-    "cloudflare:cleanup": "deno run --allow-env --allow-net .scripts/cleanup-cloudflare.ts"
+    "cloudflare:cleanup": "deno run --allow-env --allow-net .scripts/cleanup-cloudflare.ts",
+    "insecurity:generate": "deno run .scripts/generate-insecurity.ts"
   },
   "devDependencies": {
     "@google/generative-ai": "^0.21.0",
