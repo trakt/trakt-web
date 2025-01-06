@@ -1,16 +1,15 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
+  import { page } from "$app/stores";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
 
   const { title } = $props();
-  const url = window.location.href;
-
   const data = $derived({
     title,
     text: m.where_to_watch_on_trakt({ title }),
-    url,
+    url: $page.url.toString(),
   });
 
   const isShareable = $derived(

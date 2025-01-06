@@ -1,5 +1,6 @@
 <script lang="ts">
   import { replaceState } from "$app/navigation";
+  import { page } from "$app/stores";
   import { onMount } from "svelte";
   import { AuthEndpoint } from "../AuthEndpoint";
   import type { SerializedAuthResponse } from "../models/SerializedAuthResponse";
@@ -30,7 +31,7 @@
   }
 
   onMount(async () => {
-    const url = new URL(window.location.href);
+    const url = new URL($page.url.href);
     const queryParams = url.searchParams;
     const code = queryParams.get("code");
 

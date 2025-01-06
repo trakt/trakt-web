@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/stores";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import AnonymousAnalytics from "./AnonymousAnalytics.svelte";
   import { useAnalytics } from "./useAnalytics";
@@ -10,8 +11,8 @@
 
   const record = async () =>
     analytics.record(eventName, {
-      page_location: window.location.href,
-      page_path: window.location.pathname,
+      page_location: $page.url.href,
+      page_path: $page.url.pathname,
     });
 </script>
 
