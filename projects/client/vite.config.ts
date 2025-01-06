@@ -45,13 +45,6 @@ export default defineConfig(({ mode }) => ({
     fs: {
       allow: [MONOREPO_ROOT],
     },
-    proxy: {
-      '/api': {
-        target: TRAKT_TARGET_ENVIRONMENT,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
   },
 
   plugins: [

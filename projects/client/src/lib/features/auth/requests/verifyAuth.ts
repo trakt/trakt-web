@@ -23,7 +23,9 @@ export async function verifyAuth({
   const client_secret = env.TRAKT_CLIENT_SECRET ?? '';
   const client_id = env.TRAKT_CLIENT_ID ?? '';
 
-  const tokenResponse = await api()
+  const tokenResponse = await api({
+    environment: TRAKT_TARGET_ENVIRONMENT,
+  })
     .oauth
     .token({
       body: {

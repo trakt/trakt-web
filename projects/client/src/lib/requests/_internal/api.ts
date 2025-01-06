@@ -1,31 +1,29 @@
 import { IS_DEV, IS_PREVIEW, IS_TEST } from '$lib/utils/env/index.ts';
 import { traktApi, type TraktApiOptions } from '@trakt/api';
 
-export type ApiParams = Omit<TraktApiOptions, 'apiKey' | 'environment'>;
+export type ApiParams = Omit<TraktApiOptions, 'apiKey' | 'environment'> & {
+  environment?: HttpsUrl;
+};
 
 enum ClientEnvironment {
-  svelte_dev = 'http://localhost:5173/api',
-  svelte_preview = 'http://localhost:4173/api',
+  svelte = '/_api/trakt',
   test = 'http://localhost',
 }
 
-const environment = (() => {
-  if (IS_DEV) {
-    return ClientEnvironment.svelte_dev;
-  }
-
-  if (IS_PREVIEW) {
-    return ClientEnvironment.svelte_preview;
+const ENV = (() => {
+  if (IS_DEV || IS_PREVIEW) {
+    return ClientEnvironment.svelte as unknown as HttpsUrl;
   }
 
   if (IS_TEST) {
-    return ClientEnvironment.test;
+    return ClientEnvironment.test as unknown as HttpsUrl;
   }
 
   return TRAKT_TARGET_ENVIRONMENT;
 })();
 
 export const api = ({
+  environment = ENV,
   fetch = globalThis.fetch,
   cancellable = false,
   cancellationId,
