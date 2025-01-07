@@ -9,8 +9,6 @@ export const UrlBuilder = {
         return UrlBuilder.show(id);
       case 'movie':
         return UrlBuilder.movie(id);
-      default:
-        throw new Error(`Invalid media type: ${type}`);
     }
   },
   show: (id: string) => `/shows/${id}`,
