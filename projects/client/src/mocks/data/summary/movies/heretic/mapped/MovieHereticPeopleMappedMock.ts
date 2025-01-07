@@ -1,4 +1,6 @@
-export const MovieHereticPeopleMappedMock = {
+import type { MediaCrew } from '$lib/requests/models/MediaCrew';
+
+export const MovieHereticPeopleMappedMock: MediaCrew = {
   'directors': [
     {
       'job': 'Director',

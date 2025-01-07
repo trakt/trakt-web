@@ -14,7 +14,7 @@
   import MediaCollapsableValues from "./MediaCollapsableValues.svelte";
   import YoutubeButton from "./YoutubeButton.svelte";
 
-  type MediaDetailsProps = {
+  export type MediaDetailsProps = {
     media: MediaSummary;
     studios: MediaStudio[];
     crew: MediaCrew;

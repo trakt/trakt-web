@@ -1,3 +1,9 @@
+/*
+  TODO: the return type should be MovieSummary
+  airedDate should be a Date object. However, JSON.stringify does not
+  play nicely with dates, and already converts them to a string
+  before the replacer function is called.
+*/
 export const MovieHereticMappedMock = {
   'cover': {
     'url': {
