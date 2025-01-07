@@ -36,11 +36,23 @@
   const toCrewMemberWithJob = (person: CrewMember) =>
     `${person.name} (${toTranslatedValue("job", person.job)})`;
 
+  const mainItemDetail = () => {
+    if (media.year) {
+      const isUpcomingItem = media.airedDate > new Date();
+      return {
+        title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
+        values: [toHumanDay(media.airedDate, getLocale())],
+      };
+    }
+
+    return {
+      title: m.status(),
+      values: [toTranslatedValue("status", media.status)],
+    };
+  };
+
   const mediaDetails = [
-    {
-      title: m.premiered(),
-      values: [toHumanDay(media.airedDate, getLocale())],
-    },
+    mainItemDetail(),
     {
       title: m.runtime(),
       values: [toHumanDuration({ minutes: media.runtime }, languageTag())],

@@ -227,5 +227,19 @@
   "expand_media_overview": "Detaliază prezentarea {title}",
   "season_episode_number_label": "Sezon {season} • Episod {number}",
   "share_title": "Distribuie {title}",
-  "where_to_watch_on_trakt": "Vezi unde să vizionezi {title} pe Trakt!"
+  "where_to_watch_on_trakt": "Vezi unde să vizionezi {title} pe Trakt!",
+  "status": "Stare",
+  "status_released": "Lansat",
+  "status_planned": "Planificat",
+  "status_post_production": "Post-producție",
+  "status_canceled": "Anulat",
+  "status_in_production": "În producție",
+  "status_rumored": "Zvonit",
+  "status_ended": "Terminat",
+  "status_returning_series": "Serialul revine",
+  "status_pilot": "Pilot",
+  "status_continuing": "În desfășurare",
+  "status_upcoming": "Urmează",
+  "status_unknown": "Necunoscut",
+  "expected_premiere": "Premiera Așteptată"
 }

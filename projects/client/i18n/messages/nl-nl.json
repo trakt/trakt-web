@@ -227,5 +227,19 @@
   "expand_media_overview": "Bekijk {title} overzicht",
   "season_episode_number_label": "Seizoen {season} • Aflevering {number}",
   "share_title": "Deel {title}",
-  "where_to_watch_on_trakt": "Bekijk waar je {title} kunt kijken op Trakt!"
+  "where_to_watch_on_trakt": "Bekijk waar je {title} kunt kijken op Trakt!",
+  "status": "Status",
+  "status_released": "Uitgebracht",
+  "status_planned": "Gepland",
+  "status_post_production": "Post-productie",
+  "status_canceled": "Geannuleerd",
+  "status_in_production": "In productie",
+  "status_rumored": "Geruchten",
+  "status_ended": "Beëindigd",
+  "status_returning_series": "Terugkerende serie",
+  "status_pilot": "Pilot",
+  "status_continuing": "Lopend",
+  "status_upcoming": "Aankomend",
+  "status_unknown": "Onbekend",
+  "expected_premiere": "Verwachte première"
 }

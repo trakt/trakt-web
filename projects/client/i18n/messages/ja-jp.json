@@ -227,5 +227,19 @@
   "expand_media_overview": "{title} の概要を表示",
   "season_episode_number_label": "シーズン{season}・エピソード{number}",
   "share_title": "{title}を共有する",
-  "where_to_watch_on_trakt": "Traktで{title}を視聴できる場所をチェック！"
+  "where_to_watch_on_trakt": "Traktで{title}を視聴できる場所をチェック！",
+  "status": "ステータス",
+  "status_released": "公開済",
+  "status_planned": "計画中",
+  "status_post_production": "ポストプロダクション",
+  "status_canceled": "中止",
+  "status_in_production": "制作中",
+  "status_rumored": "噂",
+  "status_ended": "終了",
+  "status_returning_series": "継続シリーズ",
+  "status_pilot": "パイロット版",
+  "status_continuing": "継続中",
+  "status_upcoming": "近日公開",
+  "status_unknown": "不明",
+  "expected_premiere": "公開予定"
 }

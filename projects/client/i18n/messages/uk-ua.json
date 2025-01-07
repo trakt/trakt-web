@@ -227,5 +227,19 @@
   "expand_media_overview": "Розгорнути огляд {title}",
   "season_episode_number_label": "Сезон {season} • Епізод {number}",
   "share_title": "Поділитись {title}",
-  "where_to_watch_on_trakt": "Де дивитись {title} на Trakt!"
+  "where_to_watch_on_trakt": "Де дивитись {title} на Trakt!",
+  "status": "Статус",
+  "status_released": "Випущено",
+  "status_planned": "Заплановано",
+  "status_post_production": "Пост-продакшн",
+  "status_canceled": "Скасовано",
+  "status_in_production": "У виробництві",
+  "status_rumored": "Чутки",
+  "status_ended": "Завершено",
+  "status_returning_series": "Повертається",
+  "status_pilot": "Пілот",
+  "status_continuing": "Триває",
+  "status_upcoming": "Скоро",
+  "status_unknown": "Невідомо",
+  "expected_premiere": "Очікувана прем'єра"
 }

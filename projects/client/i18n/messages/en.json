@@ -227,5 +227,19 @@
   "expand_media_overview": "Expand {title} overview",
   "season_episode_number_label": "Season {season} • Episode {number}",
   "share_title": "Share {title}",
-  "where_to_watch_on_trakt": "See where to watch {title} on Trakt!"
+  "where_to_watch_on_trakt": "See where to watch {title} on Trakt!",
+  "status": "Status",
+  "status_released": "Released",
+  "status_planned": "Planned",
+  "status_post_production": "Post-Production",
+  "status_canceled": "Canceled",
+  "status_in_production": "In Production",
+  "status_rumored": "Rumored",
+  "status_ended": "Ended",
+  "status_returning_series": "Returning Series",
+  "status_pilot": "Pilot",
+  "status_continuing": "Continuing",
+  "status_upcoming": "Upcoming",
+  "status_unknown": "Unknown",
+  "expected_premiere": "Expected Premiere"
 }
