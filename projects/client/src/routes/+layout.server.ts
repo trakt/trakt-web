@@ -11,7 +11,7 @@ export const load: LayoutServerLoad = (
   const defaultResponse = {
     theme,
     auth: {
-      url: buildOAuthUrl(requestUrl.origin),
+      url: buildOAuthUrl(TRAKT_CLIENT_ID, requestUrl.origin),
       token: null as string | Nil,
     },
     isBot: isBotAgent(request.headers.get('user-agent')),
