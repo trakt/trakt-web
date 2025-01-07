@@ -59,6 +59,52 @@ please refer to the
 - Client:
   - Development: `deno task client:dev`
 
+## Client Environment - Traversing the Digital Landscape
+
+### Web - Navigating the Browser Realm
+
+To embark on your web development journey, simply utter the incantation
+`deno task dev` within the hallowed halls of the `projects/client` directory.
+Then, summon forth the browser of your choice, and behold the fruits of your
+labor.
+
+### Android - Taming the Mobile Beast
+
+Should you seek to venture into the untamed wilds of Android development, this
+guide shall illuminate your path, granting you the power to:
+
+- **Install Development PWA:** Summon forth a development version of the
+  Progressive Web App, and bind it to your Android device. (Fear not, for the
+  arcane art of remote debugging shall be at your disposal.)
+- **Debug Website Version:** Should you prefer the familiar comforts of the
+  Chrome browser, you may also conjure forth the website version and subject it
+  to your debugging scrutiny.
+
+To embark on this mobile odyssey, consult the Chrome Remote Debugging
+[grimoire](https://developer.chrome.com/docs/devtools/remote-debugging/). Within
+its pages lies the knowledge to establish a connection between your development
+environment and the Android realm.
+
+The device management portal, accessible via the incantation
+`chrome://inspect/#devices`, shall serve as your gateway to the Android domain.
+It functions with both:
+
+- **Option 1: Android Studio Emulated Device:** A simulated realm, where digital
+  phantoms mimic the behavior of physical devices.
+- **Option 2: Physical Device (USB Connection):** A tangible device, tethered to
+  your development machine via the umbilical cord of USB.
+
+Once you have established a connection, invoke the following command to
+establish a reverse proxy:
+
+```bash
+adb reverse tcp:5173 tcp:5173
+```
+
+### iOS - Conquering the Apple Domain
+
+**Coming Soon!**
+
 ## Build Trakt Lite
 
 To build the Trakt Lite client, run the following command:
