@@ -37,7 +37,7 @@
     display: grid;
     gap: var(--ni-32);
     grid-template-columns: 1fr 2fr 1fr;
-    margin: 0 var(--ni-56);
+    margin: 0 var(--layout-distance-side);
 
     @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
@@ -53,7 +53,6 @@
     }
   }
 
-  .trakt-profile-details,
   .trakt-profile-contextual-content {
     justify-self: center;
   }

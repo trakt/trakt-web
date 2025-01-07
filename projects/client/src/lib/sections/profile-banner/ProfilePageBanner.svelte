@@ -1,6 +1,7 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useUser } from "../../features/auth/stores/useUser";
   import ProfileImage from "./ProfileImage.svelte";
 
@@ -19,17 +20,20 @@
         <VipBadge />
       {/if}
     </div>
-    <div class="profile-info">
-      <h5>
-        {m.profile_banner_greeting({ name: current().name.first })}
-      </h5>
-      <h6 class="user-location">{current().location}</h6>
-    </div>
+    <RenderFor audience="authenticated" device={["desktop"]}>
+      <div class="profile-info">
+        <h5>
+          {m.profile_banner_greeting({ name: current().name.first })}
+        </h5>
+        <h6 class="user-location">{current().location}</h6>
+      </div>
+    </RenderFor>
   </div>
 {/if}
 
 <style>
   .profile-page-banner-container {
+    margin-left: var(--ni-72);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
