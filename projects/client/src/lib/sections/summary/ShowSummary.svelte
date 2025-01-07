@@ -2,20 +2,19 @@
   import * as m from "$lib/features/i18n/messages";
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { MediaStats } from "$lib/models/MediaStats";
   import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { Season } from "$lib/models/Season";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
+  import { useShowProgress } from "$lib/stores/useShowProgress";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/SeasonList.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/MediaSummaryProps";
 
   type ShowSummaryProps = MediaSummaryProps<ShowSummary> & {
-    progress?: EpisodeProgressEntry;
     stats: MediaStats;
     studios: MediaStudio[];
     crew: MediaCrew;
@@ -29,16 +28,17 @@
     watchers,
     studios,
     intl,
-    progress,
     crew,
     seasons,
   }: ShowSummaryProps = $props();
+
+  const { progress } = $derived(useShowProgress(media.slug));
 </script>
 
 {#snippet contextualContent()}
   <RenderFor device={["desktop"]} audience="authenticated">
-    {#if progress}
-      <NextEpisodeItem episode={progress} show={media} />
+    {#if $progress}
+      <NextEpisodeItem episode={$progress} show={media} />
     {/if}
   </RenderFor>
 {/snippet}

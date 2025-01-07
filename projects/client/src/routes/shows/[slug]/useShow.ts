@@ -1,7 +1,6 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
-import { showProgressQuery } from '$lib/requests/queries/shows/showProgressQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
@@ -33,11 +32,6 @@ export function useShow(slug: string) {
     staleTime: time.minutes(5),
   });
 
-  const progress = createQuery({
-    ...showProgressQuery({ slug }),
-    staleTime: time.days(1),
-  });
-
   const studios = createQuery({
     ...showStudiosQuery({ slug }),
     staleTime: time.days(1),
@@ -67,7 +61,6 @@ export function useShow(slug: string) {
     stats,
     watchers,
     studios,
-    progress,
     crew,
     seasons,
     intl,
@@ -84,7 +77,6 @@ export function useShow(slug: string) {
     ratings: derived(ratings, ($ratings) => $ratings.data),
     stats: derived(stats, ($stats) => $stats.data),
     watchers: derived(watchers, ($watchers) => $watchers.data),
-    progress: derived(progress, ($progress) => $progress.data),
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     seasons: derived(

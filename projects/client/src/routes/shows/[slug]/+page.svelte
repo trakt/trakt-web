@@ -9,7 +9,6 @@
     intl,
     ratings,
     stats,
-    progress,
     watchers,
     studios,
     crew,
@@ -32,7 +31,6 @@
       watchers={$watchers!}
       stats={$stats!}
       intl={$intl!}
-      progress={$progress!}
       studios={$studios!}
       crew={$crew!}
       seasons={$seasons!}

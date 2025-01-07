@@ -5,7 +5,6 @@ import { MediaWatchingMappedMock } from '$mocks/data/summary/common/mapped/Media
 import { ShowSiloJapaneseMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloJapaneseMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
-import { ShowSiloProgressMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloProgressMappedMock.ts';
 import { ShowSiloRatingsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloRatingsMappedMock.ts';
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
 import { ShowSiloStatsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStatsMappedMock.ts';
@@ -65,17 +64,6 @@ describe('store: useShow', () => {
 
       const result = await waitForQueryResult();
       expect(result).to.deep.equal(ShowSiloRatingsMappedMock);
-    });
-
-    it('should return progress', async () => {
-      render(QueryTestBed, {
-        props: {
-          queryFactory: () => useShow(ShowSiloMappedMock.slug).progress,
-        },
-      });
-
-      const result = await waitForQueryResult();
-      expect(result).to.deep.equal(ShowSiloProgressMappedMock);
     });
 
     it('should return crew', async () => {
