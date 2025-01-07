@@ -6,4 +6,5 @@ export const time = {
   weeks: (w: number) => time.days(w * 7),
   months: (m: number) => time.days(30 * m),
   years: (y: number) => time.days(365 * y),
+  fps: (fps: number) => time.seconds(1) / fps,
 };

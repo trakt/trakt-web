@@ -16,7 +16,7 @@
   const shouldRenderMouse = $derived(isAvailableForMouse && $isMouse);
   const shouldRenderTouch = $derived(isAvailableForTouch && $isTouch);
 
-  const shouldRender = useDebouncedValue(time.seconds(1) / 60);
+  const shouldRender = useDebouncedValue(time.fps(60));
 
   $effect(() => {
     shouldRender.set(shouldRenderMouse || shouldRenderTouch);

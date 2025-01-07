@@ -11,7 +11,7 @@ export function useInstallPrompt() {
       set(globalThis.install);
       clearInterval(interval);
     }
-  }, time.seconds(1) / 30);
+  }, time.fps(30));
 
   setTimeout(() => clearInterval(interval), time.seconds(2.5));
 
