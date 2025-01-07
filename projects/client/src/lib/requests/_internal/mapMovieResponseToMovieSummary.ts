@@ -76,6 +76,7 @@ export function mapMovieResponseToMovieSummary(
       ),
     },
     genres: movie.genres ?? [],
+    status: movie.status ?? 'unknown',
     overview: movie.overview ?? 'TBD',
     trailer: prependHttps(
       movie.trailer,

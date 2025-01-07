@@ -73,6 +73,7 @@ export function mapShowResponseToShowSummary(
       ),
     },
     genres: show.genres ?? [],
+    status: show.status ?? 'unknown',
     overview: show.overview ?? 'TBD',
     trailer: prependHttps(
       show.trailer,

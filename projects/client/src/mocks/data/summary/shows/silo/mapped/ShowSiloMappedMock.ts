@@ -25,6 +25,7 @@ export const ShowSiloMappedMock = {
   'year': 2023,
   'runtime': 60,
   'slug': 'silo',
+  'status': 'returning series',
   'tagline': 'The truth will surface.',
   'thumb': {
     'url':

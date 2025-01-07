@@ -1,4 +1,5 @@
 import type { Genre } from '$lib/api.ts';
+import type { MediaStatus } from './MediaStatus';
 
 type ImageUrls = {
   medium: string;
@@ -24,6 +25,7 @@ export type MediaSummary = {
     url: string;
   };
   genres: Genre[];
+  status: MediaStatus;
   overview: string;
   trailer: string;
   airedDate: Date;

@@ -11,6 +11,7 @@ export const MovieHereticMappedMock = {
     'horror',
     'thriller',
   ],
+  'status': 'released',
   'id': 916302,
   'overview':
     'Two young missionaries are forced to prove their faith when they knock on the wrong door and are greeted by a diabolical Mr. Reed, becoming ensnared in his deadly game of cat-and-mouse.',
