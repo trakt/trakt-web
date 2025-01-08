@@ -77,6 +77,7 @@ function mapWatchedShowResponse(
   const aired = entry.show.aired_episodes;
 
   const episodes = seasons
+    .filter((season) => season.number !== 0)
     .flatMap((season) =>
       season
         .episodes
