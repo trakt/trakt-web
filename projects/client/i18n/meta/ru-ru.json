@@ -1,0 +1,2978 @@
+{
+  "$schema": "../schema/meta-messages.schema.json",
+  "meta": {
+    "locale": "ru-ru",
+    "direction": "ltr",
+    "guidance": "Use 'фильм' (film) for movies, 'сериал' (serial) for shows. Otherwise just try to keep correct grammar and natural language.",
+    "generator": {
+      "inlang": {
+        "enabled": true,
+        "outputPath": "./messages/{locale}.json"
+      },
+      "android": {
+        "enabled": true,
+        "outputPath": "./android/values-{locale}/strings.xml",
+        "resourceName": "strings"
+      },
+      "ios": {
+        "enabled": true,
+        "outputPath": "./ios/Localizable.xcstrings"
+      }
+    }
+  },
+  "messages": {
+    "list_title_upcoming_schedule": {
+      "default": "График"
+    },
+    "tag_text_season_premiere": {
+      "default": "Премьера сезона"
+    },
+    "tag_text_series_premiere": {
+      "default": "Премьера сериала"
+    },
+    "tag_text_mid_season_premiere": {
+      "default": "Мид-сезон"
+    },
+    "tag_text_season_finale": {
+      "default": "Финал сезона"
+    },
+    "tag_text_series_finale": {
+      "default": "Финал сериала"
+    },
+    "tag_text_mid_season_finale": {
+      "default": "Финал мид-сезона"
+    },
+    "header_profile_banner_greeting": {
+      "default": "Привет, {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_up_next": {
+      "default": "Продолжить"
+    },
+    "tag_text_remaining_episodes": {
+      "default": "{count} осталось",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_recommended_movies": {
+      "default": "Рекомендуемые фильмы"
+    },
+    "list_title_recommended_shows": {
+      "default": "Рекомендуемые сериалы"
+    },
+    "tag_text_number_of_episodes": {
+      "default": "{count} сер.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "page_title_error_404": {
+      "default": "404: Пустота. Ничто."
+    },
+    "error_text_404": {
+      "default": "(Не волнуйся, бывает! Даже в Силе иногда случается дисбаланс.)"
+    },
+    "link_text_back_to_safety": {
+      "default": "Назад, в безопасность..."
+    },
+    "input_prompt_mark_as_watched_date": {
+      "default": "Когда вы закончили просмотр? (ГГГГ-ММ-ДД ЧЧ:ММ)"
+    },
+    "button_text_watchlist": {
+      "default": "Список"
+    },
+    "button_text_mark_as_watched": {
+      "default": "Просмотрено"
+    },
+    "button_text_watched_until_here": {
+      "default": "Просмотрено до этой серии"
+    },
+    "button_text_watch_again": {
+      "default": "Посмотреть снова"
+    },
+    "button_label_add_to_watchlist": {
+      "default": "Добавить «{title}» в список",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_mark_as_watched": {
+      "default": "Отметить «{title}» как просмотренное",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_watched_until_here": {
+      "default": "Отметить «{title}» как просмотренное до этого момента",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "translated_value_genre_horror": {
+      "default": "Ужасы"
+    },
+    "translated_value_genre_comedy": {
+      "default": "Комедия"
+    },
+    "translated_value_genre_action": {
+      "default": "Боевик"
+    },
+    "translated_value_genre_adventure": {
+      "default": "Приключения"
+    },
+    "translated_value_genre_animation": {
+      "default": "Мультфильм"
+    },
+    "translated_value_genre_biography": {
+      "default": "Биография"
+    },
+    "translated_value_genre_children": {
+      "default": "Детское"
+    },
+    "translated_value_genre_crime": {
+      "default": "Криминал"
+    },
+    "translated_value_genre_documentary": {
+      "default": "Документальный"
+    },
+    "translated_value_genre_drama": {
+      "default": "Драма"
+    },
+    "translated_value_genre_family": {
+      "default": "Семейный"
+    },
+    "translated_value_genre_fantasy": {
+      "default": "Фэнтези"
+    },
+    "translated_value_genre_game_show": {
+      "default": "Игровое шоу"
+    },
+    "translated_value_genre_history": {
+      "default": "История"
+    },
+    "translated_value_genre_home_and_garden": {
+      "default": "Дом и сад"
+    },
+    "translated_value_genre_holiday": {
+      "default": "Праздник"
+    },
+    "translated_value_genre_music": {
+      "default": "Музыка"
+    },
+    "translated_value_genre_musical": {
+      "default": "Мюзикл"
+    },
+    "translated_value_genre_mystery": {
+      "default": "Детектив"
+    },
+    "translated_value_genre_news": {
+      "default": "Новости"
+    },
+    "translated_value_genre_none": {
+      "default": "Нет"
+    },
+    "translated_value_genre_reality": {
+      "default": "Реалити-шоу"
+    },
+    "translated_value_genre_romance": {
+      "default": "Мелодрама"
+    },
+    "translated_value_genre_short": {
+      "default": "Короткометражка"
+    },
+    "translated_value_genre_soap": {
+      "default": "Мыльная опера"
+    },
+    "translated_value_genre_special_interest": {
+      "default": "Специальный интерес"
+    },
+    "translated_value_genre_sporting_event": {
+      "default": "Спорт"
+    },
+    "translated_value_genre_suspense": {
+      "default": "Саспенс"
+    },
+    "translated_value_genre_talk_show": {
+      "default": "Ток-шоу"
+    },
+    "translated_value_genre_thriller": {
+      "default": "Триллер"
+    },
+    "translated_value_genre_war": {
+      "default": "Военный"
+    },
+    "translated_value_genre_western": {
+      "default": "Вестерн"
+    },
+    "translated_value_genre_anime": {
+      "default": "Аниме"
+    },
+    "translated_value_genre_superhero": {
+      "default": "Супергерои"
+    },
+    "translated_value_genre_donghua": {
+      "default": "Дунхуа"
+    },
+    "translated_value_genre_mini_series": {
+      "default": "Мини-сериал"
+    },
+    "translated_value_genre_science_fiction": {
+      "default": "Фантастика"
+    },
+    "button_label_remove_from_watchlist": {
+      "default": "Удалить «{title}» из списка",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "input_placeholder_search": {
+      "default": "Поиск сериалов и фильмов..."
+    },
+    "input_placeholder_search_movies": {
+      "default": "Поиск фильмов..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Поиск сериалов..."
+    },
+    "button_text_join_trakt": {
+      "default": "Вступить"
+    },
+    "button_text_meet_team": {
+      "default": "О команде"
+    },
+    "button_label_join_trakt": {
+      "default": "Присоединяйтесь к trakt.tv, чтобы следить за просмотрами"
+    },
+    "text_copyright_notice": {
+      "default": "Все права защищены."
+    },
+    "text_copyright_crafted_by": {
+      "default": "Сделано вручную со всего мира"
+    },
+    "button_text_join_trakt_for_free": {
+      "default": "Вступить бесплатно"
+    },
+    "header_landing_discover": {
+      "default": "Открывайте"
+    },
+    "text_landing_discover": {
+      "default": "фильмы и сериалы, которые вам полюбятся, и узнайте, где их посмотреть."
+    },
+    "header_landing_track": {
+      "default": "Отслеживайте"
+    },
+    "text_landing_track": {
+      "default": "каждый фильм, серию и сезон, что вы видели — всё в одном месте."
+    },
+    "header_landing_share": {
+      "default": "Делитесь"
+    },
+    "text_landing_share": {
+      "default": "мнением, оценками и списками, за которыми захотят следить другие."
+    },
+    "text_landing_numbers_1": {
+      "default": "лет смотрим вместе"
+    },
+    "text_landing_numbers_2": {
+      "default": "млн любителей кино и сериалов"
+    },
+    "text_landing_numbers_3": {
+      "default": "млн отметок в неделю"
+    },
+    "list_title_trending": {
+      "default": "В тренде"
+    },
+    "list_title_recommended": {
+      "default": "Рекомендуемое"
+    },
+    "list_title_most_anticipated": {
+      "default": "Ожидаемые"
+    },
+    "button_text_get_vip": {
+      "default": "Купить"
+    },
+    "badge_text_get_vip": {
+      "default": "VIP"
+    },
+    "button_label_get_vip": {
+      "default": "Разблокировать VIP-функции"
+    },
+    "link_label_get_vip": {
+      "default": "Открыть VIP-функции"
+    },
+    "button_label_user_profile": {
+      "default": "Профиль"
+    },
+    "list_title_most_popular": {
+      "default": "Популярные"
+    },
+    "button_text_browse_movies": {
+      "default": "Фильмы"
+    },
+    "button_label_browse_movies": {
+      "default": "Смотреть фильмы"
+    },
+    "page_title_movies": {
+      "default": "Фильмы"
+    },
+    "button_text_browse_shows": {
+      "default": "Сериалы"
+    },
+    "button_label_browse_shows": {
+      "default": "Смотреть сериалы"
+    },
+    "page_title_shows": {
+      "default": "Сериалы"
+    },
+    "button_label_home": {
+      "default": "На главную"
+    },
+    "page_title_home": {
+      "default": "Главная"
+    },
+    "tag_text_plays": {
+      "default": "{number} просм.",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_logout": {
+      "default": "Выйти"
+    },
+    "button_label_logout": {
+      "default": "Выход"
+    },
+    "list_title_coming_soon": {
+      "default": "Скоро"
+    },
+    "tag_text_tba": {
+      "default": "TBA"
+    },
+    "list_title_related_movies": {
+      "default": "Похожие фильмы"
+    },
+    "list_title_related_shows": {
+      "default": "Похожие сериалы"
+    },
+    "text_about_placeholder_1": {
+      "default": "Этот пользователь — загадка, окутанная тайной... (или просто ленится? Кто знает, это же интернет.)"
+    },
+    "text_about_placeholder_2": {
+      "default": "Похоже, этот пользователь слишком занят просмотром кино, чтобы писать о себе. (Справедливо, понимаю.)"
+    },
+    "text_about_placeholder_3": {
+      "default": "Профиль пуст, как чистый холст или бездна информации... (как и моя личная жизнь. эх)"
+    },
+    "text_about_placeholder_4": {
+      "default": "Раскройте секреты этого пользователя... (если осмелитесь)"
+    },
+    "text_about_placeholder_5": {
+      "default": "Какие глубины скрыты за этим пустым профилем? (Истина где-то рядом...)"
+    },
+    "text_about_placeholder_6": {
+      "default": "Этот пользователь — призрак в доспехах, цифровой фантом... (или он просто забыл заполнить анкету?)"
+    },
+    "text_about_placeholder_7": {
+      "default": "Помогите пользователю! Напомните заполнить профиль. (Может, он даже даст вам «пять»!)"
+    },
+    "text_about_placeholder_8": {
+      "default": "Этот профиль умоляет о внимании. Поделитесь любовью и попросите заполнить его."
+    },
+    "text_about_placeholder_9": {
+      "default": "Не стесняйтесь! Подтолкните пользователя рассказать свою историю. (У каждого есть история, даже если она о любимом сериале.)"
+    },
+    "text_about_placeholder_10": {
+      "default": "Этот пользователь как персонаж Дэвида Линча: загадочный, таинственный и, возможно, плод своего же воображения."
+    },
+    "text_about_placeholder_11": {
+      "default": "Этот профиль пуст, как полки видеопроката Blockbuster в пятницу вечером. (Помнишь такие? Были времена.)"
+    },
+    "text_about_placeholder_12": {
+      "default": "Этот пользователь пробуждает своего внутреннего Тайлера Дёрдена: отрицает потребление и принимает пустоту. (Или просто еще не дошли руки.)"
+    },
+    "text_about_placeholder_13": {
+      "default": "Стилизованное изображение: детектив в недоумении чешет голову, пока по профилю катится перекати-поле."
+    },
+    "text_about_placeholder_14": {
+      "default": "Интерактивный элемент: кнопка, чтобы дружески подтолкнуть владельца заполнить профиль."
+    },
+    "text_about_placeholder_15": {
+      "default": "Этот пользователь обожает ужастики, но боится писать о себе. (Может, прячется от зомби?)"
+    },
+    "button_text_find_movies": {
+      "default": "Найти фильмы"
+    },
+    "button_text_find_shows": {
+      "default": "Найти сериалы"
+    },
+    "list_title_show_credits": {
+      "default": "Сериалы"
+    },
+    "text_episodes_watched": {
+      "default": "{count} серий",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_movie_credits": {
+      "default": "Фильмы"
+    },
+    "text_movies_watched": {
+      "default": "{count} фильмов",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "header_details": {
+      "default": "Детали"
+    },
+    "button_label_expand_category": {
+      "default": "Развернуть {category}",
+      "variables": {
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_more": {
+      "default": "еще {count}",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "header_premiered": {
+      "default": "Премьера"
+    },
+    "header_runtime": {
+      "default": "Хронометраж"
+    },
+    "header_country": {
+      "default": "Страна"
+    },
+    "header_language": {
+      "default": "Язык"
+    },
+    "header_studio": {
+      "default": "Студия"
+    },
+    "header_genre": {
+      "default": "Жанр"
+    },
+    "button_label_browse_lists": {
+      "default": "Ваши списки"
+    },
+    "page_title_lists": {
+      "default": "Списки"
+    },
+    "list_title_watchlist_shows": {
+      "default": "Сериалы в списке"
+    },
+    "list_title_watchlist_movies": {
+      "default": "Фильмы в списке"
+    },
+    "image_alt_streaming_service_logo": {
+      "default": "логотип {service}",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "header_director": {
+      "default": "Режиссер"
+    },
+    "header_writer": {
+      "default": "Сценарист"
+    },
+    "header_creator": {
+      "default": "Создатель"
+    },
+    "translated_value_job_action_director": {
+      "default": "Режиссер экшн-сцен"
+    },
+    "translated_value_job_additional_second_assistant_director": {
+      "default": "Второй ассистент режиссера (доп.)"
+    },
+    "translated_value_job_additional_third_assistant_director": {
+      "default": "Третий ассистент режиссера (доп.)"
+    },
+    "translated_value_job_assistant_director": {
+      "default": "Ассистент режиссера"
+    },
+    "translated_value_job_assistant_director_trainee": {
+      "default": "Стажер ассистента режиссера"
+    },
+    "translated_value_job_co_director": {
+      "default": "Сорежиссер"
+    },
+    "translated_value_job_continuity": {
+      "default": "Скрипт-супервайзер"
+    },
+    "translated_value_job_crowd_assistant_director": {
+      "default": "Ассистент по массовке"
+    },
+    "translated_value_job_director": {
+      "default": "Режиссер"
+    },
+    "translated_value_job_field_director": {
+      "default": "Полевой режиссер"
+    },
+    "translated_value_job_first_assistant_director": {
+      "default": "Первый ассистент режиссера"
+    },
+    "translated_value_job_first_assistant_director_trainee_prep": {
+      "default": "Первый ассистент (подготовка)"
+    },
+    "translated_value_job_first_assistant_director_trainee": {
+      "default": "Стажер первого ассистента"
+    },
+    "translated_value_job_insert_unit_director": {
+      "default": "Режиссер по вставкам"
+    },
+    "translated_value_job_insert_unit_first_assistant_director": {
+      "default": "Первый ассистент по вставкам"
+    },
+    "translated_value_job_layout": {
+      "default": "Компоновка"
+    },
+    "translated_value_job_other": {
+      "default": "Прочее"
+    },
+    "translated_value_job_script_coordinator": {
+      "default": "Координатор сценария"
+    },
+    "translated_value_job_script_supervisor": {
+      "default": "Редактор сценария"
+    },
+    "translated_value_job_second_assistant_director": {
+      "default": "Второй ассистент режиссера"
+    },
+    "translated_value_job_second_assistant_director_trainee": {
+      "default": "Стажер второго ассистента"
+    },
+    "translated_value_job_second_second_assistant_director": {
+      "default": "Второй второй ассистент"
+    },
+    "translated_value_job_second_unit_director": {
+      "default": "Режиссер второго состава"
+    },
+    "translated_value_job_second_unit_first_assistant_director": {
+      "default": "Первый ассистент второго состава"
+    },
+    "translated_value_job_series_director": {
+      "default": "Режиссер сериала"
+    },
+    "translated_value_job_series_guest_director": {
+      "default": "Приглашенный режиссер"
+    },
+    "translated_value_job_stage_director": {
+      "default": "Режиссер-постановщик"
+    },
+    "translated_value_job_third_assistant_director": {
+      "default": "Третий ассистент режиссера"
+    },
+    "translated_value_job_adaptation": {
+      "default": "Адаптация"
+    },
+    "translated_value_job_author": {
+      "default": "Автор"
+    },
+    "translated_value_job_book": {
+      "default": "Книга"
+    },
+    "translated_value_job_characters": {
+      "default": "Персонажи"
+    },
+    "translated_value_job_co_writer": {
+      "default": "Соавтор сценария"
+    },
+    "translated_value_job_comic_book": {
+      "default": "Комикс"
+    },
+    "translated_value_job_creative_producer": {
+      "default": "Креативный продюсер"
+    },
+    "translated_value_job_dialogue": {
+      "default": "Диалоги"
+    },
+    "translated_value_job_executive_story_editor": {
+      "default": "Исполнительный редактор сюжета"
+    },
+    "translated_value_job_graphic_novel": {
+      "default": "Графический роман"
+    },
+    "translated_value_job_head_of_story": {
+      "default": "Руководитель сценарного отдела"
+    },
+    "translated_value_job_idea": {
+      "default": "Идея"
+    },
+    "translated_value_job_junior_story_editor": {
+      "default": "Младший редактор сюжета"
+    },
+    "translated_value_job_lyricist": {
+      "default": "Текстовик"
+    },
+    "translated_value_job_musical": {
+      "default": "Мюзикл"
+    },
+    "translated_value_job_novel": {
+      "default": "Роман"
+    },
+    "translated_value_job_opera": {
+      "default": "Опера"
+    },
+    "translated_value_job_original_concept": {
+      "default": "Оригинальная концепция"
+    },
+    "translated_value_job_original_film_writer": {
+      "default": "Автор оригинального фильма"
+    },
+    "translated_value_job_original_series_creator": {
+      "default": "Создатель ориг. сериала"
+    },
+    "translated_value_job_original_original_story": {
+      "default": "Оригинальный сюжет"
+    },
+    "translated_value_job_scenario_writer": {
+      "default": "Сценарист"
+    },
+    "translated_value_job_screenplay": {
+      "default": "Сценарий"
+    },
+    "translated_value_job_screenstory": {
+      "default": "Сюжет фильма"
+    },
+    "translated_value_job_script_consultant": {
+      "default": "Консультант по сценарию"
+    },
+    "translated_value_job_script_editor": {
+      "default": "Редактор сценария"
+    },
+    "translated_value_job_senior_story_editor": {
+      "default": "Старший редактор сюжета"
+    },
+    "translated_value_job_series_composition": {
+      "default": "Композиция сериала"
+    },
+    "translated_value_job_short_story": {
+      "default": "Рассказ"
+    },
+    "translated_value_job_staff_writer": {
+      "default": "Штатный сценарист"
+    },
+    "translated_value_job_story": {
+      "default": "Сюжет"
+    },
+    "translated_value_job_story_story_artist": {
+      "default": "Сценарный художник"
+    },
+    "translated_value_job_story_story_consultant": {
+      "default": "Консультант сюжета"
+    },
+    "translated_value_job_story_story_coordinator": {
+      "default": "Координатор сюжета"
+    },
+    "translated_value_job_story_story_developer": {
+      "default": "Разработчик сюжета"
+    },
+    "translated_value_job_story_story_editor": {
+      "default": "Редактор сюжета"
+    },
+    "translated_value_job_story_story_manager": {
+      "default": "Менеджер сюжета"
+    },
+    "translated_value_job_story_story_supervisor": {
+      "default": "Супервайзер сюжета"
+    },
+    "translated_value_job_storyboard": {
+      "default": "Раскадровка"
+    },
+    "translated_value_job_teleplay": {
+      "default": "Телесценарий"
+    },
+    "translated_value_job_texte": {
+      "default": "Текст"
+    },
+    "translated_value_job_theatre_play": {
+      "default": "Пьеса"
+    },
+    "translated_value_job_writer": {
+      "default": "Писатель"
+    },
+    "translated_value_job_writers_assistant": {
+      "default": "Ассистент сценаристов"
+    },
+    "translated_value_job_writers_production": {
+      "default": "Производство сценария"
+    },
+    "translated_value_job_creator": {
+      "default": "Создатель"
+    },
+    "button_text_remove_from_history": {
+      "default": "Удалить из просмотренного"
+    },
+    "button_label_remove_from_watched": {
+      "default": "Удалить «{title}» из истории просмотров",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_watched": {
+      "default": "Вы уверены, что хотите удалить «{title}» из просмотренного? Все отметки исчезнут.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_history": {
+      "default": "Удалить этот просмотр «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_single_watched": {
+      "default": "Вы уверены, что хотите удалить этот просмотр «{title}»?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_seasons": {
+      "default": "Сезоны"
+    },
+    "text_season_number": {
+      "default": "Сезон {number}",
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "text_season_specials": {
+      "default": "Спешлы"
+    },
+    "button_label_expand_media_overview": {
+      "default": "Развернуть описание «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_season_episode_number": {
+      "default": "Сезон {season} • Серия {number}",
+      "variables": {
+        "season": {
+          "type": "number"
+        },
+        "number": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_share": {
+      "default": "Поделиться «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_share": {
+      "default": "Поделиться"
+    },
+    "button_text_trailer": {
+      "default": "Трейлер"
+    },
+    "header_status": {
+      "default": "Статус"
+    },
+    "translated_value_status_released": {
+      "default": "Вышел"
+    },
+    "translated_value_status_planned": {
+      "default": "Запланирован"
+    },
+    "translated_value_status_post_production": {
+      "default": "Пост-продакшн"
+    },
+    "translated_value_status_canceled": {
+      "default": "Отменен"
+    },
+    "translated_value_status_in_production": {
+      "default": "В производстве"
+    },
+    "translated_value_status_rumored": {
+      "default": "Слухи"
+    },
+    "translated_value_status_ended": {
+      "default": "Завершен"
+    },
+    "translated_value_status_returning_series": {
+      "default": "Продлен"
+    },
+    "translated_value_status_pilot": {
+      "default": "Пилот"
+    },
+    "translated_value_status_continuing": {
+      "default": "Выходит"
+    },
+    "translated_value_status_upcoming": {
+      "default": "Ожидается"
+    },
+    "translated_value_status_unknown": {
+      "default": "Неизвестно"
+    },
+    "header_expected_premiere": {
+      "default": "Ожидаемая премьера"
+    },
+    "image_alt_person_headshot": {
+      "default": "Фото {person}",
+      "variables": {
+        "person": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_actors": {
+      "default": "Актеры"
+    },
+    "button_label_view_all_trending_movies": {
+      "default": "Все фильмы в тренде"
+    },
+    "button_label_view_all_trending_shows": {
+      "default": "Все сериалы в тренде"
+    },
+    "list_title_trending_shows": {
+      "default": "Сериалы в тренде"
+    },
+    "list_title_trending_movies": {
+      "default": "Фильмы в тренде"
+    },
+    "button_text_view_all": {
+      "default": "Еще"
+    },
+    "tag_text_full_season": {
+      "default": "Весь сезон"
+    },
+    "warning_prompt_remove_from_watchlist": {
+      "default": "Удалить «{title}» из списка?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_view_all_recommended_movies": {
+      "default": "Все рекомендуемые фильмы"
+    },
+    "button_label_view_all_recommended_shows": {
+      "default": "Все рекомендуемые сериалы"
+    },
+    "button_label_view_all_anticipated_movies": {
+      "default": "Все ожидаемые фильмы"
+    },
+    "button_label_view_all_anticipated_shows": {
+      "default": "Все ожидаемые сериалы"
+    },
+    "list_title_anticipated_movies": {
+      "default": "Ожидаемые фильмы"
+    },
+    "list_title_anticipated_shows": {
+      "default": "Ожидаемые сериалы"
+    },
+    "button_label_view_all_popular_movies": {
+      "default": "Все популярные фильмы"
+    },
+    "button_label_view_all_popular_shows": {
+      "default": "Все популярные сериалы"
+    },
+    "list_title_popular_movies": {
+      "default": "Популярные фильмы"
+    },
+    "list_title_popular_shows": {
+      "default": "Популярные сериалы"
+    },
+    "header_rate_now": {
+      "default": "Оценить"
+    },
+    "button_text_add_to_favorites": {
+      "default": "В избранное"
+    },
+    "button_text_remove_from_favorites": {
+      "default": "Из избранного"
+    },
+    "button_label_add_to_favorites": {
+      "default": "Добавить «{title}» в избранное",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_favorites": {
+      "default": "Удалить «{title}» из избранного",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_favorites": {
+      "default": "Удалить «{title}» из избранного?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_favorite_movies": {
+      "default": "Любимые фильмы"
+    },
+    "list_title_favorite_shows": {
+      "default": "Любимые сериалы"
+    },
+    "list_title_favorites": {
+      "default": "Избранное"
+    },
+    "list_placeholder_favorite_movies": {
+      "default": "Здесь пока нет любимых фильмов."
+    },
+    "list_placeholder_favorite_shows": {
+      "default": "Здесь пока нет любимых сериалов."
+    },
+    "list_placeholder_favorites": {
+      "default": "Здесь пока пусто."
+    },
+    "button_text_stream_on": {
+      "default": "Смотреть на"
+    },
+    "header_stream_on": {
+      "default": "Смотреть на"
+    },
+    "header_streaming": {
+      "default": "Доступность"
+    },
+    "button_label_popup_menu": {
+      "default": "Меню для «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_popular_lists": {
+      "default": "Популярные списки"
+    },
+    "list_placeholder_popular_lists": {
+      "default": "«{title}» не встречается в популярных списках.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_by": {
+      "default": "от"
+    },
+    "image_alt_user_avatar": {
+      "default": "аватар {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "image_alt_media_poster": {
+      "default": "постер «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "list_placeholder_comments": {
+      "default": "Отзывов пока нет."
+    },
+    "list_placeholder_replies": {
+      "default": "Ответов пока нет."
+    },
+    "text_review_by": {
+      "default": "Отзыв от"
+    },
+    "text_shout_by": {
+      "default": "Мнение от"
+    },
+    "text_reply_by": {
+      "default": "Ответ от"
+    },
+    "text_deleted_username": {
+      "default": "Удалено"
+    },
+    "list_title_social_activity": {
+      "default": "Активность друзей"
+    },
+    "button_label_view_all_social_activity": {
+      "default": "Вся активность друзей"
+    },
+    "dropdown_label_person_position": {
+      "default": "Позиция"
+    },
+    "translated_value_position_acting": {
+      "default": "Актер"
+    },
+    "translated_value_position_self": {
+      "default": "В роли самого себя"
+    },
+    "translated_value_position_narrator": {
+      "default": "Рассказчик"
+    },
+    "translated_value_position_production": {
+      "default": "Производство"
+    },
+    "translated_value_position_art": {
+      "default": "Художник"
+    },
+    "translated_value_position_crew": {
+      "default": "Команда"
+    },
+    "translated_value_position_costume___make_up": {
+      "default": "Костюмы и грим"
+    },
+    "translated_value_position_directing": {
+      "default": "Режиссура"
+    },
+    "translated_value_position_writing": {
+      "default": "Сценарий"
+    },
+    "translated_value_position_sound": {
+      "default": "Звук"
+    },
+    "translated_value_position_camera": {
+      "default": "Камера"
+    },
+    "translated_value_position_lighting": {
+      "default": "Свет"
+    },
+    "translated_value_position_visual_effects": {
+      "default": "Спецэффекты"
+    },
+    "translated_value_position_editing": {
+      "default": "Монтаж"
+    },
+    "translated_value_position_creator": {
+      "default": "Создатель"
+    },
+    "translated_value_position_created_by": {
+      "default": "Кем создано"
+    },
+    "list_title_personal_lists": {
+      "default": "Мои списки"
+    },
+    "list_title_collaborative_lists": {
+      "default": "Совместные"
+    },
+    "list_title_liked_lists": {
+      "default": "Понравилось"
+    },
+    "text_share_movie": {
+      "default": "Только что открыл для себя «{title}» — тебе стоит это увидеть! 🎬",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_show": {
+      "default": "Нашел классный сериал: «{title}»! 📺",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_episode": {
+      "default": "Смотрю {show} S{season}E{episode} — «{title}»! 🔥",
+      "variables": {
+        "show": {
+          "type": "string"
+        },
+        "season": {
+          "type": "number"
+        },
+        "episode": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_person": {
+      "default": "Зацени {name} на Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_profile": {
+      "default": "Зацени профиль {name} на Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_recently_watched": {
+      "default": "Недавно просмотрено"
+    },
+    "list_title_available_now": {
+      "default": "Доступно сейчас"
+    },
+    "tag_text_preview": {
+      "default": "Предпросмотр"
+    },
+    "tooltip_text_preview_feature": {
+      "default": "Эта функция еще красится, гражданин. Мы вовсю работаем над UX, чтобы он пел как хор ангелов."
+    },
+    "header_airs": {
+      "default": "В эфире"
+    },
+    "header_aired": {
+      "default": "Вышло"
+    },
+    "warning_prompt_drop_show": {
+      "default": "Вы уверены, что хотите бросить сериал «{title}»? Он исчезнет из списка «Продолжить».",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_show": {
+      "default": "Отметить сериал «{title}» как брошенный",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_show": {
+      "default": "Бросить сериал"
+    },
+    "warning_prompt_drop_movie": {
+      "default": "Уверены, что хотите бросить «{title}»?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Отметить фильм «{title}» как брошенный",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Бросить фильм"
+    },
+    "warning_prompt_restore_show": {
+      "default": "Восстановить сериал «{title}»? Он снова появится в прогрессе и календаре.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_restore_show": {
+      "default": "Восстановить сериал «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_restore_show": {
+      "default": "Восстановить"
+    },
+    "warning_prompt_mark_as_watched_show": {
+      "default": "Отметить «{title}» как просмотренный? Все серии будут помечены.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_mark_as_watched_show_until": {
+      "default": "Отметить все непросмотренные серии «{title}» до {episode}? Это затронет {count} сер.",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "episode": {
+          "type": "number"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "warning_prompt_mark_as_watched_multiple_episodes": {
+      "default": "Отметить {count} серий как просмотренные?",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_watch_count": {
+      "default": "Просмотры"
+    },
+    "list_placeholder_media_history": {
+      "default": "Вы еще не смотрели «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_comment_likes": {
+      "default": "{count} лайков",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_close": {
+      "default": "Закрыть"
+    },
+    "button_label_comment_replies": {
+      "default": "Ответы"
+    },
+    "button_text_comment_replies": {
+      "default": "{count} ответов",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_comments": {
+      "default": "Отзывы"
+    },
+    "dialog_title_comments": {
+      "default": "Отзывы"
+    },
+    "dialog_title_comment": {
+      "default": "Отзыв"
+    },
+    "button_text_add_review": {
+      "default": "Написать отзыв"
+    },
+    "button_text_add_reply": {
+      "default": "Ответить"
+    },
+    "button_label_comment_reply": {
+      "default": "Ответить {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
+    },
+    "textarea_placeholder_reply": {
+      "default": "Ответить..."
+    },
+    "button_label_add_new_comment": {
+      "default": "Написать новый отзыв"
+    },
+    "textarea_placeholder_comment": {
+      "default": "Добавить отзыв..."
+    },
+    "switch_label_mark_as_spoiler": {
+      "default": "Спойлер"
+    },
+    "text_spoiler": {
+      "default": "Спойлер"
+    },
+    "button_label_close_error": {
+      "default": "Закрыть ошибку"
+    },
+    "button_label_post_reply": {
+      "default": "Опубликовать ответ"
+    },
+    "translated_value_error_comment_invalid_content": {
+      "default": "Отзыв должен содержать минимум 5 слов."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Ответ должен содержать минимум 5 слов."
+    },
+    "translated_value_error_comment_unknown": {
+      "default": "Ошибка при публикации отзыва. Попробуйте позже."
+    },
+    "page_title_user_profile": {
+      "default": "Профиль {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "header_private_profile": {
+      "default": "Это приватный профиль"
+    },
+    "text_private_profile_description": {
+      "default": "Как будто тут и так мало скрытого. Секреты {username} остаются при нем.",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "header_original_title": {
+      "default": "Оригинальное название"
+    },
+    "button_label_view_all_comments": {
+      "default": "Все отзывы"
+    },
+    "button_text_remove_from_list": {
+      "default": "Удалить из списка"
+    },
+    "button_label_remove_from_list": {
+      "default": "Удалить «{title}» из списка",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_service_unavailable": {
+      "default": "Сервис Trakt недоступен"
+    },
+    "error_text_service_unavailable": {
+      "default": "Связь... потеряна. Как слезы в дожде."
+    },
+    "link_text_service_status": {
+      "default": "Статус Trakt"
+    },
+    "button_text_retry": {
+      "default": "Повторить"
+    },
+    "button_label_retry": {
+      "default": "Повторить"
+    },
+    "header_community_sentiment": {
+      "default": "Настроение"
+    },
+    "button_text_lists": {
+      "default": "Списки"
+    },
+    "button_text_listed": {
+      "default": "В списках"
+    },
+    "dropdown_label_add_remove_from_lists": {
+      "default": "Добавить или удалить «{title}» из списков",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_add_to_personal_list": {
+      "default": "Добавить «{title}» в {list}",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_remove_from_personal_list": {
+      "default": "Удалить «{title}» из {list}",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_remove_from_personal_list": {
+      "default": "Удалить «{title}» из {list}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "list": {
+          "type": "string"
+        }
+      }
+    },
+    "option_text_theme_light": {
+      "default": "Светлая"
+    },
+    "option_text_theme_dark": {
+      "default": "Темная"
+    },
+    "option_text_theme_system": {
+      "default": "Системная"
+    },
+    "button_label_filters": {
+      "default": "Фильтры"
+    },
+    "button_label_reset_filter": {
+      "default": "Сбросить"
+    },
+    "text_search_results_for": {
+      "default": "Результаты для {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "translated_value_type_movie": {
+      "default": "Фильм"
+    },
+    "translated_value_type_show": {
+      "default": "Сериал"
+    },
+    "header_device_auth_try_again": {
+      "default": "Активация не удалась или истекла. Попробуйте снова."
+    },
+    "header_device_auth_qr_instruction": {
+      "default": "Сканируйте QR-код или войдите здесь:"
+    },
+    "header_device_auth_code_instruction": {
+      "default": "и введите следующий код:"
+    },
+    "option_text_all": {
+      "default": "Все"
+    },
+    "header_filters": {
+      "default": "Фильтры"
+    },
+    "header_hide_watched": {
+      "default": "Скрыть просмотренное"
+    },
+    "header_hide_watchlisted": {
+      "default": "Скрыть из списка"
+    },
+    "option_text_my_favorites": {
+      "default": "Мое избранное"
+    },
+    "option_text_all_digital_releases": {
+      "default": "Цифровые релизы"
+    },
+    "option_text_streaming_now": {
+      "default": "Стриминг сейчас"
+    },
+    "header_decade": {
+      "default": "Десятилетие"
+    },
+    "header_ratings": {
+      "default": "Рейтинг"
+    },
+    "button_label_view_all_items_in": {
+      "default": "Посмотреть всё в «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_reset_all_filters": {
+      "default": "Сбросить всё"
+    },
+    "button_label_reset_all_filters": {
+      "default": "Сбросить все фильтры"
+    },
+    "translated_value_video_type_trailer": {
+      "default": "Трейлер"
+    },
+    "translated_value_video_type_clip": {
+      "default": "Клип"
+    },
+    "translated_value_video_type_teaser": {
+      "default": "Тизер"
+    },
+    "translated_value_video_type_featurette": {
+      "default": "О фильме"
+    },
+    "translated_value_video_type_recap": {
+      "default": "Пересказ"
+    },
+    "translated_value_video_type_behind_the_scenes": {
+      "default": "За кулисами"
+    },
+    "translated_value_video_type_bloopers": {
+      "default": "Ляпы"
+    },
+    "header_now_playing": {
+      "default": "Сейчас смотрю"
+    },
+    "text_remaining": {
+      "default": "осталось"
+    },
+    "button_text_checkin": {
+      "default": "Смотрю сейчас"
+    },
+    "button_label_checkin": {
+      "default": "Сейчас смотрю «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_cookie_notice": {
+      "default": "Trakt использует печеньки (C🍪🍪KIES), чтобы вам было вкуснее. <a>Подробнее здесь</a>."
+    },
+    "button_text_cookie_accept": {
+      "default": "Принять все"
+    },
+    "button_label_cookie_accept": {
+      "default": "Принять все куки"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Только нужные"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Только функциональные куки"
+    },
+    "page_title_year_to_date": {
+      "default": "С начала года"
+    },
+    "page_title_year_in_review": {
+      "default": "Итоги {year} года",
+      "variables": {
+        "year": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_month_in_review": {
+      "default": "Итоги месяца"
+    },
+    "page_title_settings": {
+      "default": "Настройки"
+    },
+    "button_label_settings": {
+      "default": "Настройки"
+    },
+    "text_show_spoilers": {
+      "default": "Показывать спойлеры"
+    },
+    "switch_label_spoilers": {
+      "default": "Показывать спойлеры"
+    },
+    "button_text_save_filters": {
+      "default": "По умолчанию"
+    },
+    "button_label_save_filters": {
+      "default": "Сделать фильтры основными"
+    },
+    "page_title_account_locked": {
+      "default": "Аккаунт заблокирован"
+    },
+    "error_text_locked_account": {
+      "default": "Аккаунт заблокирован, <a>свяжитесь с поддержкой</a>."
+    },
+    "error_text_lists_limit": {
+      "default": "Лимит списков достигнут. Переходите на VIP для безлимита!"
+    },
+    "text_first_play_this_month": {
+      "default": "Первый просмотр в месяце"
+    },
+    "text_shows_watched": {
+      "default": "{count} сериалов",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_text_follow": {
+      "default": "Подписаться"
+    },
+    "button_label_follow": {
+      "default": "Подписаться на {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_unfollow": {
+      "default": "Отписаться"
+    },
+    "button_label_unfollow": {
+      "default": "Отписаться от {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_unfollow_user": {
+      "default": "Отписаться от {username}?",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "text_vip_upsell": {
+      "default": "Станьте VIP, чтобы прокачать свой Trakt"
+    },
+    "text_vip_upsell_description": {
+      "default": "Хотите видеть итоги года и месяца? Получите доступ к эксклюзивным функциям с Trakt VIP."
+    },
+    "list_title_social": {
+      "default": "Социальное"
+    },
+    "list_placeholder_followers": {
+      "default": "Тут пока никого нет."
+    },
+    "list_placeholder_following": {
+      "default": "Вы пока ни на кого не подписаны."
+    },
+    "button_label_read_more": {
+      "default": "Читать далее"
+    },
+    "button_label_add_comment": {
+      "default": "Оставить отзыв"
+    },
+    "input_prompt_rename_list": {
+      "default": "Переименовать список"
+    },
+    "button_text_rename_list": {
+      "default": "Переименовать"
+    },
+    "button_label_rename_list": {
+      "default": "Переименовать список {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_view_all_hot_shows": {
+      "default": "Все горячие сериалы"
+    },
+    "button_label_view_all_hot_movies": {
+      "default": "Все горячие фильмы"
+    },
+    "list_title_extras": {
+      "default": "Дополнительно"
+    },
+    "page_title_up_next": {
+      "default": "Продолжить просмотр"
+    },
+    "page_title_social_activity": {
+      "default": "Активность"
+    },
+    "page_title_trending_shows": {
+      "default": "Сериалы в тренде"
+    },
+    "page_title_recommended_shows": {
+      "default": "Рекомендации сериалов"
+    },
+    "page_title_popular_shows": {
+      "default": "Популярные сериалы"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Ожидаемые сериалы"
+    },
+    "page_title_trending_movies": {
+      "default": "Фильмы в тренде"
+    },
+    "page_title_recommended_movies": {
+      "default": "Рекомендации фильмов"
+    },
+    "page_title_popular_movies": {
+      "default": "Популярные фильмы"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Ожидаемые фильмы"
+    },
+    "page_title_recently_watched": {
+      "default": "Недавно просмотрено"
+    },
+    "page_title_profile": {
+      "default": "Профиль"
+    },
+    "page_title_search_results": {
+      "default": "Результаты для {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_search": {
+      "default": "Поиск"
+    },
+    "dropdown_label_extras": {
+      "default": "Дополнительно"
+    },
+    "button_label_star_rating": {
+      "default": "Оценить на {stars} зв.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
+    },
+    "badge_text_more": {
+      "default": "и еще {count}",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "button_label_stop_playing": {
+      "default": "Остановить отметку «{title}»",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "link_text_view_profile": {
+      "default": "В профиль"
+    },
+    "button_label_search": {
+      "default": "Поиск"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Постер для {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_delete_list": {
+      "default": "Удалить"
+    },
+    "button_label_delete_list": {
+      "default": "Удалить список {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Вы уверены, что хотите удалить список {name}?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "чтобы добавить больше списков"
+    },
+    "button_text_create_list": {
+      "default": "Список"
+    },
+    "button_text_create": {
+      "default": "Создать"
+    },
+    "button_text_apply": {
+      "default": "Применить"
+    },
+    "button_text_continue": {
+      "default": "Продолжить"
+    },
+    "button_label_create_list": {
+      "default": "Создать список"
+    },
+    "button_text_cta_create_list": {
+      "default": "Создать список"
+    },
+    "page_title_create_list": {
+      "default": "Создание списка"
+    },
+    "page_description_create_list": {
+      "default": "Введите название и описание списка."
+    },
+    "page_description_edit_list": {
+      "default": "Редактирование данных списка."
+    },
+    "page_title_edit_list": {
+      "default": "Изменить список"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "В этом списке пока ничего нет."
+    },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "В этом списке пока нет сериалов."
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "В этом списке пока нет фильмов."
+    },
+    "text_avatar": {
+      "default": "Аватар"
+    },
+    "text_private_account": {
+      "default": "Приватный аккаунт"
+    },
+    "switch_label_private": {
+      "default": "Сделать профиль приватным"
+    },
+    "text_all_settings": {
+      "default": "Все настройки"
+    },
+    "text_display_name": {
+      "default": "Имя"
+    },
+    "button_label_change_display_name": {
+      "default": "Изменить имя"
+    },
+    "text_location": {
+      "default": "Местоположение"
+    },
+    "button_label_change_location": {
+      "default": "Изменить локацию"
+    },
+    "text_about": {
+      "default": "О себе"
+    },
+    "text_automatic_tracking": {
+      "default": "Авто-трекинг"
+    },
+    "text_streaming_sync": {
+      "default": "Синхронизация"
+    },
+    "button_label_change_about": {
+      "default": "Изменить описание"
+    },
+    "input_prompt_display_name": {
+      "default": "Как вас называть?"
+    },
+    "input_prompt_location": {
+      "default": "Откуда вы?"
+    },
+    "input_prompt_about": {
+      "default": "Расскажите немного о себе."
+    },
+    "header_favorite_genres": {
+      "default": "Любимые жанры"
+    },
+    "button_label_toggle_genre": {
+      "default": "Переключить жанр {genre}",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_list": {
+      "default": "Зацени список «{name}» на Trakt! 📋",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_top_list": {
+      "default": "Зацени {name} на Trakt! 🔥",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_watchlist": {
+      "default": "Список"
+    },
+    "list_title_watchlist": {
+      "default": "Хочу посмотреть"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Весь список «Хочу посмотреть»"
+    },
+    "button_text_shows": {
+      "default": "Сериалы"
+    },
+    "button_label_shows": {
+      "default": "Сериалы"
+    },
+    "button_text_movies": {
+      "default": "Фильмы"
+    },
+    "button_label_movies": {
+      "default": "Фильмы"
+    },
+    "button_text_view_details": {
+      "default": "Детали"
+    },
+    "button_text_hide_details": {
+      "default": "Скрыть"
+    },
+    "episode_footer_season_episode": {
+      "default": "С{seasonNumber} • сер.{episodeNumber}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "episodeNumber": {
+          "type": "number"
+        }
+      }
+    },
+    "episode_footer_season_episode_range": {
+      "default": "С{seasonNumber} • сер.{startEpisode}-{endEpisode}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      }
+    },
+    "translated_value_reaction_like": {
+      "default": "Нравится"
+    },
+    "translated_value_reaction_dislike": {
+      "default": "Не нравится"
+    },
+    "translated_value_reaction_love": {
+      "default": "Любовь"
+    },
+    "translated_value_reaction_laugh": {
+      "default": "Смешно"
+    },
+    "translated_value_reaction_shocked": {
+      "default": "Шок"
+    },
+    "translated_value_reaction_bravo": {
+      "default": "Браво"
+    },
+    "translated_value_reaction_spoiler": {
+      "default": "Спойлер"
+    },
+    "button_label_popup_reactions": {
+      "default": "Реакции"
+    },
+    "button_label_react": {
+      "default": "Реагировать: {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
+    },
+    "tag_text_movies": {
+      "default": "Фильмы"
+    },
+    "tag_text_released": {
+      "default": "Вышел"
+    },
+    "header_post_credits": {
+      "default": "После титров"
+    },
+    "text_after_credits": {
+      "default": "Сцена после титров"
+    },
+    "text_during_credits": {
+      "default": "Сцена во время титров"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Искать контент"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Медиа"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Искать людей"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Люди"
+    },
+    "input_placeholder_search_people": {
+      "default": "Поиск людей..."
+    },
+    "link_text_forums": {
+      "default": "Форумы"
+    },
+    "link_text_support": {
+      "default": "Поддержка"
+    },
+    "link_text_terms": {
+      "default": "Условия"
+    },
+    "link_text_policy": {
+      "default": "Приватность"
+    },
+    "header_calendar": {
+      "default": "Календарь"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Прошлый период"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Следующий период"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Сегодня"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Сегодня"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "На {day}",
+      "variables": {
+        "day": {
+          "type": "number"
+        }
+      }
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Сегодня ничего. Отдохните, насладитесь погодой."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "На эту дату ничего нет. Попробуем другой день?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "В графике пусто. Можно расслабиться."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Календарь пуст. Время отоспаться."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Свободный день. Может, начать что-то новое?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Никаких планов. Время для спонтанности."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Ничего не запланировано. Наслаждайтесь свободой."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "График чист. Используйте это с пользой."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Нет событий. Время пересмотреть старое доброе кино."
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Все чисто. Самое время изучить что-то необычное."
+    },
+    "page_title_calendar": {
+      "default": "Календарь"
+    },
+    "button_label_calendar": {
+      "default": "Календарь"
+    },
+    "text_cta_up_next_media": {
+      "default": "Ваши фильмы и сериалы. В вашем темпе. Продолжайте ровно там, где остановились."
+    },
+    "text_cta_up_next": {
+      "default": "Ваши сериалы. В вашем темпе. Продолжайте ровно там, где остановились."
+    },
+    "text_cta_up_next_movies": {
+      "default": "Ваши фильмы. В вашем темпе. Продолжайте ровно там, где остановились."
+    },
+    "text_cta_start_watching_media": {
+      "default": "Очередь ждет. Добавьте контент, который мечтаете посмотреть."
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Очередь ждет. Добавьте сериалы, которые мечтаете посмотреть."
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Очередь ждет. Добавьте фильмы, которые мечтаете посмотреть."
+    },
+    "text_cta_watchlist_released": {
+      "default": "Увидел. Сохранил. Посмотрел позже. Создайте свою очередь кино."
+    },
+    "text_cta_upcoming_media": {
+      "default": "Ваша лента. Узнайте, что выйдет следующим, с полным списком серий и фильмов."
+    },
+    "text_cta_upcoming": {
+      "default": "Ваша лента. Узнайте, что выйдет следующим, с полным списком серий."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Ваша лента. Узнайте, что выйдет следующим, с полным списком премьер."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Камера, мотор... ничего? Добавьте тайтлы в список и готовьтесь к марафону."
+    },
+    "text_cta_activity": {
+      "default": "Следите за новинками от нашей команды."
+    },
+    "text_cta_personal_activity": {
+      "default": "Смотрите. Отмечайте. История просмотров обновляется здесь в реальном времени."
+    },
+    "text_cta_activity_list": {
+      "default": "Подпишитесь на команду Trakt и узнайте, что смотрят профи."
+    },
+    "text_cta_watchlist": {
+      "default": "Увидел. Сохранил. Посмотрел позже. Создайте свой идеальный список."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Создайте персональную очередь из фильмов."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Создайте персональную очередь из сериалов."
+    },
+    "text_cta_personal_lists": {
+      "default": "Ваши списки — ваши правила. Собирайте кино так, как удобно вам."
+    },
+    "text_cta_favorites": {
+      "default": "Ваша история. Отметьте то, что оставило след в сердце."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Отметьте фильмы, которые оставили след в сердце."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Отметьте сериалы, которые оставили след в сердце."
+    },
+    "text_cta_favorites_list": {
+      "default": "Ваш золотой фонд. То, что заставило смеяться, плакать или переосмыслить всё."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Любимые фильмы на любой случай жизни."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Любимые сериалы на любой случай жизни."
+    },
+    "link_text_discover_more": {
+      "default": "Узнать больше"
+    },
+    "link_label_discover_more": {
+      "default": "Узнать больше"
+    },
+    "link_text_discover_media": {
+      "default": "Найти контент"
+    },
+    "link_label_discover_media": {
+      "default": "Искать контент"
+    },
+    "link_text_discover_shows": {
+      "default": "Найти сериалы"
+    },
+    "link_label_discover_shows": {
+      "default": "Искать сериалы"
+    },
+    "link_text_discover_movies": {
+      "default": "Найти фильмы"
+    },
+    "link_label_discover_movies": {
+      "default": "Искать фильмы"
+    },
+    "header_comment_reactions": {
+      "default": "Реакции на отзыв"
+    },
+    "button_label_close_reaction": {
+      "default": "Закрыть"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Перестать смотреть «{title}»?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_manage_subscription": {
+      "default": "Подписка"
+    },
+    "button_label_manage_subscription": {
+      "default": "Управление подпиской"
+    },
+    "header_account_details": {
+      "default": "Данные аккаунта"
+    },
+    "description_account_details": {
+      "default": "Изменить фото, имя и другие данные."
+    },
+    "description_genres": {
+      "default": "Добавьте или удалите {limit} любимых жанров.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "list_title_activity": {
+      "default": "Активность"
+    },
+    "button_text_social": {
+      "default": "Друзья"
+    },
+    "button_text_personal": {
+      "default": "Моя"
+    },
+    "page_title_unexpected_error": {
+      "default": "Что-то пошло не так"
+    },
+    "error_text_unexpected_error": {
+      "default": "Ой... это не по плану. Если ошибка повторится, пожалуйста, <a>сообщите нам</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Упс, ничего не найдено. Возможно, фильтр слишком строгий."
+    },
+    "error_text_unexpected_error_short": {
+      "default": "Ой... это не по плану. Если это повторится, свяжитесь с поддержкой."
+    },
+    "page_title_where_to_watch": {
+      "default": "Где посмотреть"
+    },
+    "list_title_streaming_subscription": {
+      "default": "Подписка"
+    },
+    "list_title_streaming_free": {
+      "default": "Бесплатно"
+    },
+    "list_title_streaming_purchase": {
+      "default": "Купить"
+    },
+    "list_title_streaming_rent": {
+      "default": "Аренда"
+    },
+    "list_title_streaming_favorite": {
+      "default": "Избранное"
+    },
+    "list_title_recently_searched": {
+      "default": "Недавние поиски"
+    },
+    "list_title_recently_searched_shows": {
+      "default": "Недавние сериалы"
+    },
+    "list_title_recently_searched_movies": {
+      "default": "Недавние фильмы"
+    },
+    "text_overview_placeholder": {
+      "default": "Описание отсутствует."
+    },
+    "text_info_signed_in": {
+      "default": "Вы вошли в систему."
+    },
+    "text_info_signed_out": {
+      "default": "Вы вышли из системы."
+    },
+    "text_info_history_added": {
+      "default": "Добавлено в историю."
+    },
+    "text_info_history_removed": {
+      "default": "Удалено из истории."
+    },
+    "text_info_favorites_added": {
+      "default": "Добавлено в избранное."
+    },
+    "text_info_favorites_removed": {
+      "default": "Удалено из избранного."
+    },
+    "text_info_list_added": {
+      "default": "Добавлено в список."
+    },
+    "text_info_watchlist_added": {
+      "default": "Добавлено в список ожидания."
+    },
+    "text_info_watchlist_removed": {
+      "default": "Удалено из списка ожидания."
+    },
+    "text_info_list_removed": {
+      "default": "Удалено из списка."
+    },
+    "text_info_show_dropped": {
+      "default": "Сериал отмечен как брошенный."
+    },
+    "text_info_review_added": {
+      "default": "Отзыв добавлен."
+    },
+    "text_info_review_deleted": {
+      "default": "Отзыв удален."
+    },
+    "text_info_reply_added": {
+      "default": "Ответ добавлен."
+    },
+    "text_info_reply_deleted": {
+      "default": "Ответ удален."
+    },
+    "button_text_long_press_for_more": {
+      "default": "Зажмите для опций"
+    },
+    "list_placeholder_empty": {
+      "default": "В списке пусто."
+    },
+    "button_text_yes": {
+      "default": "Да"
+    },
+    "button_text_cancel": {
+      "default": "Отмена"
+    },
+    "button_label_cancel": {
+      "default": "Отмена"
+    },
+    "button_text_where_to_watch": {
+      "default": "Где смотреть"
+    },
+    "button_text_no_services": {
+      "default": "Нет сервисов"
+    },
+    "header_get_trakt_app": {
+      "default": "Скачайте Trakt"
+    },
+    "text_trakt_apps_description": {
+      "default": "и используйте возможности Trakt на максимум в наших приложениях"
+    },
+    "button_label_login": {
+      "default": "Вход"
+    },
+    "button_text_login": {
+      "default": "Вход"
+    },
+    "button_label_all": {
+      "default": "Все"
+    },
+    "button_text_all": {
+      "default": "Все"
+    },
+    "button_label_following": {
+      "default": "Подписки"
+    },
+    "button_text_following": {
+      "default": "Подписки"
+    },
+    "button_label_followers": {
+      "default": "Подписчики"
+    },
+    "button_text_followers": {
+      "default": "Подписчики"
+    },
+    "button_label_dismiss": {
+      "default": "Скрыть"
+    },
+    "list_title_watch_history": {
+      "default": "История"
+    },
+    "link_text_general_settings": {
+      "default": "Общие"
+    },
+    "link_text_data_settings": {
+      "default": "Данные"
+    },
+    "link_text_advanced_settings": {
+      "default": "Профи"
+    },
+    "list_title_most_popular_searches": {
+      "default": "Топ поисков"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "Дни рождения месяца"
+    },
+    "text_season_activity": {
+      "default": "{rangeLabel} «{title}»",
+      "variables": {
+        "rangeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_last_day": {
+      "default": "в прошлый {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "text_next_day": {
+      "default": "в след. {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "filter_label_this_year": {
+      "default": "В этом году"
+    },
+    "text_sort_recently_updated": {
+      "default": "Обновлено недавно"
+    },
+    "text_sort_recently_added": {
+      "default": "Добавлено недавно"
+    },
+    "text_sort_comments_popular": {
+      "default": "Популярные"
+    },
+    "text_sort_comments_recent": {
+      "default": "Новые"
+    },
+    "text_info_list_created": {
+      "default": "Список создан."
+    },
+    "text_info_list_deleted": {
+      "default": "Список удален."
+    },
+    "text_info_list_updated": {
+      "default": "Список обновлен."
+    },
+    "input_placeholder_lists_name": {
+      "default": "Название"
+    },
+    "input_placeholder_lists_description": {
+      "default": "Описание (опционально)"
+    },
+    "button_text_view_description": {
+      "default": "Показать описание"
+    },
+    "button_text_hide_description": {
+      "default": "Скрыть описание"
+    },
+    "text_spoiler_alert": {
+      "default": "Осторожно, спойлер!"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Удалить из списка"
+    },
+    "button_text_stop_check_in": {
+      "default": "Остановить отметку"
+    },
+    "button_text_delete_comment": {
+      "default": "Удалить отзыв"
+    },
+    "button_text_delete_reply": {
+      "default": "Удалить ответ"
+    },
+    "button_label_delete_comment": {
+      "default": "Удалить отзыв"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Удалить ваш отзыв?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Удалить ваш ответ?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Вы уверены, что хотите выйти?"
+    },
+    "page_title_discover": {
+      "default": "Обзор"
+    },
+    "list_title_start_watching": {
+      "default": "Начать просмотр"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Все доступные к просмотру тайтлы"
+    },
+    "button_label_discover": {
+      "default": "Искать кино и сериалы"
+    },
+    "button_label_popular_comments": {
+      "default": "Популярные отзывы"
+    },
+    "button_text_popular_comments": {
+      "default": "Популярные"
+    },
+    "button_label_recent_comments": {
+      "default": "Свежие отзывы"
+    },
+    "button_text_recent_comments": {
+      "default": "Новые"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "чтобы менять обложки"
+    },
+    "button_text_set_cover_image": {
+      "default": "На обложку"
+    },
+    "button_label_set_cover_image": {
+      "default": "Сделать «{title}» фоном вашего профиля.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "page_title_start_watching": {
+      "default": "Начать просмотр"
+    },
+    "text_library": {
+      "default": "Медиатека"
+    },
+    "text_stream": {
+      "default": "Стриминг"
+    },
+    "text_rent": {
+      "default": "Аренда"
+    },
+    "text_buy": {
+      "default": "Купить"
+    },
+    "text_on_demand": {
+      "default": "По запросу"
+    },
+    "list_title_where_to_watch": {
+      "default": "Где смотреть"
+    },
+    "page_title_anticipated_media": {
+      "default": "Ожидаемое"
+    },
+    "page_title_popular_media": {
+      "default": "Популярное"
+    },
+    "page_title_recommended_media": {
+      "default": "Рекомендации"
+    },
+    "page_title_trending_media": {
+      "default": "В тренде"
+    },
+    "button_text_media": {
+      "default": "Медиа"
+    },
+    "button_label_media": {
+      "default": "Весь контент"
+    },
+    "header_appearance": {
+      "default": "Внешний вид"
+    },
+    "description_appearance": {
+      "default": "Настройка темы и языка."
+    },
+    "text_theme": {
+      "default": "Тема"
+    },
+    "text_language": {
+      "default": "Язык"
+    },
+    "switch_label_toggle_halloween_filters": {
+      "default": "Хэллоуинские фильтры"
+    },
+    "switch_label_toggle_christmas_filters": {
+      "default": "Рождественские фильтры"
+    },
+    "list_title_library": {
+      "default": "Медиатека"
+    },
+    "button_label_view_all_library_items": {
+      "default": "Вся медиатека"
+    },
+    "dropdown_label_library": {
+      "default": "Медиатека"
+    },
+    "translated_value_library_custom": {
+      "default": "Своя"
+    },
+    "page_title_library": {
+      "default": "Медиатека"
+    },
+    "list_title_history": {
+      "default": "История"
+    },
+    "button_label_view_all_history": {
+      "default": "Вся история"
+    },
+    "page_title_history": {
+      "default": "История"
+    },
+    "text_directed_by": {
+      "default": "Режиссер: <a>{name}</a>",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_directed_by_short": {
+      "default": "Режиссер"
+    },
+    "text_created_by": {
+      "default": "Создатель: <a>{name}</a>",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by_short": {
+      "default": "Создатель"
+    },
+    "tag_text_watched": {
+      "default": "Просмотрено"
+    },
+    "header_height": {
+      "default": "Рост"
+    },
+    "header_birthday": {
+      "default": "День рождения"
+    },
+    "header_age": {
+      "default": "Возраст"
+    },
+    "header_date_of_death": {
+      "default": "Дата смерти"
+    },
+    "button_label_view_all_where_to_watch": {
+      "default": "Все стриминг-сервисы"
+    },
+    "button_text_mark_as_watched_now": {
+      "default": "Только что"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Только что"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "В день премьеры"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "В день премьеры"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Другая дата"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Другая дата"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Не помню когда"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Дата неизвестна"
+    },
+    "text_this_month": {
+      "default": "В этом месяце"
+    },
+    "text_view_all": {
+      "default": "Все"
+    },
+    "text_play_count": {
+      "default": "{count} просм.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_hours_watched": {
+      "default": "{count} ч.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "tag_text_remaining_duration": {
+      "default": "{duration} осталось",
+      "variables": {
+        "duration": {
+          "type": "string"
+        }
+      }
+    },
+    "list_title_user_lists": {
+      "default": "Списки"
+    },
+    "button_label_view_all_lists": {
+      "default": "Все списки"
+    },
+    "button_text_sort_default": {
+      "default": "Обычно"
+    },
+    "button_label_sort_default": {
+      "default": "Сортировать по умолчанию"
+    },
+    "button_text_sort_added_date": {
+      "default": "Дата добавления"
+    },
+    "button_label_sort_added_date": {
+      "default": "По дате добавления"
+    },
+    "button_text_sort_runtime": {
+      "default": "Хронометраж"
+    },
+    "button_label_sort_runtime": {
+      "default": "По длительности"
+    },
+    "button_text_sort_rating": {
+      "default": "Рейтинг"
+    },
+    "button_label_sort_rating": {
+      "default": "По рейтингу"
+    },
+    "button_text_sort_release_date": {
+      "default": "Дата выхода"
+    },
+    "button_label_sort_release_date": {
+      "default": "По дате выхода"
+    },
+    "button_label_sort_list": {
+      "default": "Сортировать список"
+    },
+    "button_label_sort_ascending": {
+      "default": "По возрастанию"
+    },
+    "button_label_sort_descending": {
+      "default": "По убыванию"
+    },
+    "text_about_user": {
+      "default": "О {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_profile_options": {
+      "default": "Опции профиля"
+    },
+    "validation_text_list_name": {
+      "default": "Название обязательно"
+    },
+    "text_private": {
+      "default": "Приватно"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Приватность списка"
+    },
+    "list_title_from_my_history": {
+      "default": "Из моей истории"
+    },
+    "list_placeholder_from_my_history": {
+      "default": "Вы еще не видели {name} в фильмах или сериалах.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_info_younify_service_linked": {
+      "default": "Сервис привязан."
+    },
+    "text_info_younify_service_unlinked": {
+      "default": "Сервис отвязан."
+    },
+    "button_text_younify_fix": {
+      "default": "Исправить"
+    },
+    "button_text_younify_unlink": {
+      "default": "Отвязать"
+    },
+    "button_text_data_sync_yes": {
+      "default": "Синхронизировать"
+    },
+    "button_text_data_sync_ignore": {
+      "default": "Игнорировать"
+    },
+    "button_text_younify_send_logs": {
+      "default": "Отправить логи"
+    },
+    "text_younify_status_linked": {
+      "default": "Связано"
+    },
+    "text_younify_status_unlinked": {
+      "default": "Не связано"
+    },
+    "text_younify_status_broken": {
+      "default": "Ошибка связи"
+    },
+    "warning_prompt_younify_unlink": {
+      "default": "Отвязать {service}?",
+      "variables": {
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "dialog_title_younify_data_sync": {
+      "default": "Синхронизация данных"
+    },
+    "dialog_prompt_younify_data_sync": {
+      "default": "Импортировать ваши данные в Trakt или синхронизировать только новые?"
+    },
+    "list_title_trivia": {
+      "default": "Факты"
+    },
+    "button_label_trivia_no_spoilers": {
+      "default": "Без спойлеров"
+    },
+    "button_text_trivia_no_spoilers": {
+      "default": "Без спойлеров"
+    },
+    "button_label_trivia_spoilers": {
+      "default": "Со спойлерами"
+    },
+    "button_text_trivia_spoilers": {
+      "default": "Спойлеры"
+    },
+    "button_text_stop_asking": {
+      "default": "Больше не спрашивать"
+    },
+    "warning_prompt_suppress_ratings_toast": {
+      "default": "Перестать предлагать оценку после просмотра?"
+    },
+    "text_billing_month_for_free": {
+      "default": "1 месяц бесплатно, затем:"
+    },
+    "text_billing_no_payment_required": {
+      "default": "Оплата не требуется сейчас."
+    },
+    "text_billing_try_for_free": {
+      "default": "Попробуйте бесплатно!"
+    },
+    "button_text_upgrade_to_vip": {
+      "default": "Перейти на VIP"
+    },
+    "text_billing_disclaimer": {
+      "default": "Оплата начнется после пробного периода. Подписка продлевается ежемесячно ({period}), пока не будет отменена в Google Play.",
+      "variables": {
+        "period": {
+          "type": "string"
+        }
+      }
+    },
+    "text_billing_already_vip": {
+      "default": "Теперь вы Trakt VIP!\nСпасибо за поддержку."
+    },
+    "text_billing_period_month": {
+      "default": "мес."
+    },
+    "text_vip_upsell_default": {
+      "default": "Прокачайте свой Trakt"
+    },
+    "text_vip_upsell_default_description": {
+      "default": "Станьте VIP и откройте все возможности Trakt для настоящих ценителей."
+    },
+    "text_vip_upsell_default_2": {
+      "default": "Стань VIP!"
+    },
+    "text_vip_upsell_default_description_2": {
+      "default": "Безлимитный трекинг и многое другое."
+    },
+    "button_label_like_list": {
+      "default": "Лайк списку {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_unlike_list": {
+      "default": "Убрать лайк со списка {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "header_export": {
+      "default": "Экспорт"
+    },
+    "description_export": {
+      "default": "Выгрузить все свои данные в одном ZIP-архиве. Это может занять время."
+    },
+    "text_raw_export": {
+      "default": "Сырой экспорт"
+    },
+    "button_text_raw_export": {
+      "default": "Экспортировать"
+    },
+    "button_label_raw_export": {
+      "default": "Скачать ZIP со всеми данными."
+    },
+    "text_exporting": {
+      "default": "Экспорт… {progress}",
+      "variables": {
+        "progress": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_fail": {
+      "default": "Ошибка экспорта. Подробности в консоли браузера."
+    },
+    "text_export_status_fetching": {
+      "default": "Загрузка {item}…",
+      "variables": {
+        "item": {
+          "type": "string"
+        }
+      }
+    },
+    "text_export_status_zipping": {
+      "default": "Архивация…"
+    },
+    "text_export_status_complete": {
+      "default": "Готово."
+    },
+    "button_text_track": {
+      "default": "Отследить"
+    },
+    "filter_label_runtime": {
+      "default": "{range} мин.",
+      "variables": {
+        "range": {
+          "type": "string"
+        }
+      }
+    },
+    "header_behavior": {
+      "default": "Поведение"
+    },
+    "description_behavior": {
+      "default": "Настройка спойлеров и повторных просмотров."
+    },
+    "text_show_multiple_watches": {
+      "default": "Несколько просмотров"
+    },
+    "switch_label_multiple_watches": {
+      "default": "Включить или выключить учет повторных просмотров"
+    },
+    "header_add_to_list": {
+      "default": "Добавить в список"
+    }
+  }
+}
