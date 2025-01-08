@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/svelte';
 import { expect } from 'vitest';
 import { QUERY_TEST_ID } from './_internal/constants.ts';
+import { reviver } from './_internal/reviver.ts';
 
 export function waitForQueryResult() {
   return waitFor(() => {
@@ -12,6 +13,6 @@ export function waitForQueryResult() {
     expect(content).toBeDefined();
     expect(content).not.toEqual('');
 
-    return JSON.parse(content);
+    return JSON.parse(content, reviver);
   });
 }

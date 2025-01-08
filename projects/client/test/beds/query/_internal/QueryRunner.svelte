@@ -1,6 +1,7 @@
 <script lang="ts">
   import { derived, type Readable } from "svelte/store";
   import { QUERY_TEST_ID } from "./constants";
+  import { replacer } from "./replacer";
 
   const {
     queryFactory,
@@ -13,4 +14,4 @@
   const readable = derived(queryFactory(), mapper);
 </script>
 
-<pre data-testid={QUERY_TEST_ID}>{JSON.stringify($readable)}</pre>
+<pre data-testid={QUERY_TEST_ID}>{JSON.stringify($readable, replacer)}</pre>
