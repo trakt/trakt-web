@@ -19,6 +19,16 @@ export const WatchedShowsResponseMock = [
     },
     'seasons': [
       {
+        'number': 0,
+        'episodes': [
+          {
+            'number': 1,
+            'plays': 1,
+            'last_watched_at': '2024-12-27T16:28:32.000Z',
+          },
+        ],
+      },
+      {
         'number': 1,
         'episodes': [
           {
