@@ -14,13 +14,14 @@ type MovieAnticipatedParams = {
   limit?: number;
 } & ApiParams;
 
-export function mapResponseToAnticipatedMovie(
-  movies: MovieAnticipatedResponse,
-): AnticipatedMovie[] {
-  return movies.map(({ movie, list_count }) => ({
+export function mapResponseToAnticipatedMovie({
+  list_count,
+  movie,
+}: MovieAnticipatedResponse): AnticipatedMovie {
+  return {
     score: list_count,
     ...mapMovieResponseToMovieSummary(movie),
-  }));
+  };
 }
 
 function movieAnticipatedRequest(
@@ -40,7 +41,7 @@ function movieAnticipatedRequest(
         throw new Error('Failed to fetch anticipated movies');
       }
 
-      return mapResponseToAnticipatedMovie(body);
+      return body.map(mapResponseToAnticipatedMovie);
     });
 }
 

@@ -11,14 +11,14 @@ type ShowRelatedParams = {
 export type RelatedShow = ShowSummary & EpisodeCount;
 
 export function mapResponseToRelatedShow(
-  shows: ShowResponse[],
-): RelatedShow[] {
-  return shows.map((show) => ({
+  show: ShowResponse,
+): RelatedShow {
+  return {
     episode: {
       count: show.aired_episodes!,
     },
     ...mapShowResponseToShowSummary(show),
-  }));
+  };
 }
 
 function showRelatedRequest(
@@ -39,7 +39,7 @@ function showRelatedRequest(
         throw new Error('Failed to fetch related shows');
       }
 
-      return mapResponseToRelatedShow(body);
+      return body.map(mapResponseToRelatedShow);
     });
 }
 

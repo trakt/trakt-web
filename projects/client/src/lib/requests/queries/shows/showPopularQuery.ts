@@ -12,14 +12,14 @@ type ShowPopularParams = {
 export type PopularShow = ShowSummary & EpisodeCount;
 
 export function mapResponseToPopularShow(
-  shows: ShowResponse[],
-): PopularShow[] {
-  return shows.map((show) => ({
+  show: ShowResponse,
+): PopularShow {
+  return {
     episode: {
       count: show.aired_episodes!,
     },
     ...mapShowResponseToShowSummary(show),
-  }));
+  };
 }
 
 function showPopularRequest(
@@ -39,7 +39,7 @@ function showPopularRequest(
         throw new Error('Failed to fetch popular shows');
       }
 
-      return mapResponseToPopularShow(body);
+      return body.map(mapResponseToPopularShow);
     });
 }
 

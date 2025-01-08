@@ -16,16 +16,17 @@ type ShowTrendingParams = {
   limit?: number;
 } & ApiParams;
 
-export function mapResponseToTrendingShows(
-  shows: ShowTrendingResponse,
-): TrendingShow[] {
-  return shows.map(({ show, watchers }) => ({
-    watchers: watchers,
+export function mapResponseToTrendingShows({
+  watchers,
+  show,
+}: ShowTrendingResponse): TrendingShow {
+  return {
+    watchers,
     episode: {
       count: show.aired_episodes!,
     },
     ...mapShowResponseToShowSummary(show),
-  }));
+  };
 }
 
 function showTrendingRequest(
@@ -45,7 +46,7 @@ function showTrendingRequest(
         throw new Error('Failed to fetch trending shows');
       }
 
-      return mapResponseToTrendingShows(body);
+      return body.map(mapResponseToTrendingShows);
     });
 }
 

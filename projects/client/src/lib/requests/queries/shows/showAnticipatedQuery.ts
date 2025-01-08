@@ -26,14 +26,15 @@ function mapShowResponseToEpisodeCount(show: ShowResponse) {
   return { episode: { count: aired_episodes } };
 }
 
-export function mapResponseToAnticipatedShow(
-  shows: ShowAnticipatedResponse,
-): AnticipatedShow[] {
-  return shows.map(({ show, list_count }) => ({
+export function mapResponseToAnticipatedShow({
+  list_count,
+  show,
+}: ShowAnticipatedResponse): AnticipatedShow {
+  return {
     score: list_count,
     ...mapShowResponseToShowSummary(show),
     ...mapShowResponseToEpisodeCount(show),
-  }));
+  };
 }
 
 function showAnticipatedRequest(
@@ -53,7 +54,7 @@ function showAnticipatedRequest(
         throw new Error('Failed to fetch anticipated shows');
       }
 
-      return mapResponseToAnticipatedShow(body);
+      return body.map(mapResponseToAnticipatedShow);
     });
 }
 

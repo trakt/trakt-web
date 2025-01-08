@@ -13,16 +13,16 @@ type ShowWatchlistParams = {
 export type WatchlistShow = ListItem<ShowSummary>;
 
 export function mapResponseToWatchlist(
-  watchlist: WatchlistedShowsResponse,
-): WatchlistShow[] {
-  return watchlist.map((watchlistShow) => ({
+  watchlistShow: WatchlistedShowsResponse,
+): WatchlistShow {
+  return {
     id: watchlistShow.id,
     rank: watchlistShow.rank,
     notes: watchlistShow.notes,
     type: 'show',
     listedAt: new Date(watchlistShow.listed_at),
     mediaItem: mapShowResponseToShowSummary(watchlistShow.show),
-  }));
+  };
 }
 
 function watchlistRequest(
@@ -48,7 +48,7 @@ function watchlistRequest(
         throw new Error('Failed to fetch shows watchlist');
       }
 
-      return mapResponseToWatchlist(body);
+      return body.map(mapResponseToWatchlist);
     });
 }
 

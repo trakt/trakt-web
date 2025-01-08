@@ -14,7 +14,7 @@ type WatchlistedMedia = {
 type WatchlistedMovie = WatchlistedMedia;
 
 function mapWatchlistedMovieResponse(
-  entry: WatchlistedMoviesResponse[0],
+  entry: WatchlistedMoviesResponse,
 ): WatchlistedMovie {
   const { listed_at, movie } = entry;
 
@@ -62,7 +62,7 @@ const watchlistedMoviesRequest = (
 export type WatchlistedShow = WatchlistedMovie;
 
 function mapWatchlistedShowResponse(
-  entry: WatchlistedShowsResponse[0],
+  entry: WatchlistedShowsResponse,
 ): WatchlistedShow {
   const { listed_at, show } = entry;
 

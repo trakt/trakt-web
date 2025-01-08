@@ -21,14 +21,14 @@ export type HistoryShow = {
 };
 
 export function mapResponseToHistory(
-  history: HistoryShowsResponse,
-): HistoryShow[] {
-  return history.map((historyShow) => ({
+  historyShow: HistoryShowsResponse,
+): HistoryShow {
+  return {
     id: historyShow.id,
     watchedAt: new Date(historyShow.watched_at),
     show: mapShowResponseToShowSummary(historyShow.show),
     episode: mapEpisodeResponseToEpisodeEntry(historyShow.episode),
-  }));
+  };
 }
 
 function showHistoryRequest(
@@ -56,7 +56,7 @@ function showHistoryRequest(
         throw new Error('Failed to fetch shows history');
       }
 
-      return mapResponseToHistory(body);
+      return body.map(mapResponseToHistory);
     });
 }
 

@@ -18,13 +18,13 @@ export type HistoryMovie = {
 };
 
 export function mapResponseToHistory(
-  history: HistoryMoviesResponse,
-): HistoryMovie[] {
-  return history.map((historyMovie) => ({
+  historyMovie: HistoryMoviesResponse,
+): HistoryMovie {
+  return {
     id: historyMovie.id,
     watchedAt: new Date(historyMovie.watched_at),
     movie: mapMovieResponseToMovieSummary(historyMovie.movie),
-  }));
+  };
 }
 
 function movieHistoryRequest(
@@ -52,7 +52,7 @@ function movieHistoryRequest(
         throw new Error('Failed to fetch movies history');
       }
 
-      return mapResponseToHistory(body);
+      return body.map(mapResponseToHistory);
     });
 }
 

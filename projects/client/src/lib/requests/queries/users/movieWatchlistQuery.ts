@@ -13,16 +13,16 @@ type MovieWatchlistParams = {
 export type WatchlistMovie = ListItem<MovieSummary>;
 
 export function mapResponseToWatchlist(
-  watchlist: WatchlistedMoviesResponse,
-): WatchlistMovie[] {
-  return watchlist.map((watchlistMovie) => ({
+  watchlistMovie: WatchlistedMoviesResponse,
+): WatchlistMovie {
+  return {
     id: watchlistMovie.id,
     rank: watchlistMovie.rank,
     notes: watchlistMovie.notes,
     type: 'movie',
     listedAt: new Date(watchlistMovie.listed_at),
     mediaItem: mapMovieResponseToMovieSummary(watchlistMovie.movie),
-  }));
+  };
 }
 
 function watchlistRequest(
@@ -48,7 +48,7 @@ function watchlistRequest(
         throw new Error('Failed to fetch movies watchlist');
       }
 
-      return mapResponseToWatchlist(body);
+      return body.map(mapResponseToWatchlist);
     });
 }
 

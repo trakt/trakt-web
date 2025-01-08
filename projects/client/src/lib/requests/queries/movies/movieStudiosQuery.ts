@@ -1,6 +1,6 @@
 import type { MediaStudio } from '$lib/models/MediaStudio.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import { mapStudiosResponseToMediaStudio } from '../../_internal/mapStudiosResponseToMediaStudio.ts';
+import { mapStudioResponseToMediaStudio } from '../../_internal/mapStudioResponseToMediaStudio.ts';
 
 type MovieStudiosQuery = { slug: string } & ApiParams;
 
@@ -19,7 +19,7 @@ export function movieStudiosRequest(
         throw new Error('Failed to fetch movie studios');
       }
 
-      return mapStudiosResponseToMediaStudio(body);
+      return body.map(mapStudioResponseToMediaStudio);
     });
 }
 

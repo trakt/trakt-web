@@ -14,13 +14,14 @@ type MovieTrendingParams = {
   limit?: number;
 } & ApiParams;
 
-export function mapResponseToTrendingMovies(
-  movies: MovieTrendingResponse,
-): TrendingMovie[] {
-  return movies.map(({ movie, watchers }) => ({
-    watchers: watchers,
+export function mapResponseToTrendingMovies({
+  watchers,
+  movie,
+}: MovieTrendingResponse): TrendingMovie {
+  return {
+    watchers,
     ...mapMovieResponseToMovieSummary(movie),
-  }));
+  };
 }
 
 function movieTrendingRequest(
@@ -40,7 +41,7 @@ function movieTrendingRequest(
         throw new Error('Failed to fetch trending movies');
       }
 
-      return mapResponseToTrendingMovies(body);
+      return body.map(mapResponseToTrendingMovies);
     });
 }
 

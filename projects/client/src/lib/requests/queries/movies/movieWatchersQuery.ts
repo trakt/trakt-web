@@ -1,5 +1,5 @@
 import type { ActiveWatcher } from '$lib/models/ActiveWatcher.ts';
-import { mapWatchersResponseToActiveWatchers } from '$lib/requests/_internal/mapWatchersResponseToActiveWatchers.ts';
+import { mapWatcherResponseToActiveWatcher } from '$lib/requests/_internal/mapWatcherResponseToActiveWatcher.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 type MovieWatchersQuery = { slug: string } & ApiParams;
@@ -19,7 +19,7 @@ export function movieWatchersRequest(
         throw new Error('Failed to fetch active movie watchers');
       }
 
-      return mapWatchersResponseToActiveWatchers(body);
+      return body.map(mapWatcherResponseToActiveWatcher);
     });
 }
 
