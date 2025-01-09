@@ -1,7 +1,11 @@
 export async function decrypt<T>(
   key: CryptoKey,
-  data: string,
+  data: string | Nil,
 ): Promise<T | Nil> {
+  if (!data) {
+    return null;
+  }
+
   try {
     const encryptedBuffer = new Uint8Array(
       atob(data)

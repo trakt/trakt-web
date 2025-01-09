@@ -11,18 +11,29 @@ import { encrypt } from './utils/encrypt.ts';
 const AUTH_COOKIE_NAME = 'trakt-auth';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  /**
-   * TODO: refresh exchange flow here
-   * https://trakt.docs.apiary.io/#reference/authentication-oauth/get-token/exchange-refresh_token-for-access_token
-   */
-  const setAuth = (auth: ClientAuthResponse | Nil) => {
+  const setAuth = (auth: SerializedAuthResponse | Nil) => {
     event.locals.auth = auth;
   };
 
-  const encrypted = event.cookies.get(AUTH_COOKIE_NAME);
-  encrypted && setAuth(await decrypt(key, encrypted));
+  const isLogout = event.url.pathname.startsWith(AuthEndpoint.Logout);
 
-  if (event.url.pathname.startsWith(AuthEndpoint.Exchange)) {
+  if (isLogout) {
+    setAuth(null);
+    return new Response(null, {
+      headers: {
+        'Set-Cookie': event.cookies.serialize(AUTH_COOKIE_NAME, '', {
+          httpOnly: true,
+          secure: true,
+          maxAge: 0,
+          path: '/',
+        }),
+      },
+    });
+  }
+
+  const isExchange = event.url.pathname.startsWith(AuthEndpoint.Exchange);
+
+  if (isExchange) {
     const { code } = await event.request.json() as { code: string };
     const referrer = event.request.headers.get('referer') ?? '';
 
@@ -55,17 +66,21 @@ export const handle: Handle = async ({ event, resolve }) => {
     );
   }
 
-  if (event.url.pathname.startsWith(AuthEndpoint.Logout)) {
-    setAuth(null);
-    return new Response(null, {
-      headers: {
-        'Set-Cookie': event.cookies.serialize(AUTH_COOKIE_NAME, '', {
-          httpOnly: true,
-          secure: true,
-          maxAge: 0,
-          path: '/',
-        }),
-      },
+  /**
+   * TODO: refresh exchange flow here
+   * https://trakt.docs.apiary.io/#reference/authentication-oauth/get-token/exchange-refresh_token-for-access_token
+   */
+  const encrypted = event.cookies.get(AUTH_COOKIE_NAME);
+  const decrypted = await decrypt<SerializedAuthResponse>(key, encrypted);
+  const isDecryptionFailed = decrypted == null && encrypted != null;
+  setAuth(decrypted);
+
+  if (isDecryptionFailed) {
+    event.cookies.set(AUTH_COOKIE_NAME, '', {
+      httpOnly: true,
+      secure: true,
+      maxAge: 0,
+      path: '/',
     });
   }
 
