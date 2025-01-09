@@ -31,39 +31,43 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
-  const isExchange = event.url.pathname.startsWith(AuthEndpoint.Exchange);
+  const code = event.url.searchParams.get('code');
+  const isExchange = code != null;
 
   if (isExchange) {
-    const { code } = await event.request.json() as { code: string };
     const referrer = event.request.headers.get('referer') ?? '';
 
     const result = await authorize({ code, referrer });
     const { isAuthorized } = result;
     setAuth(result);
 
-    const cookieHeader = isAuthorized
-      ? {
-        'Set-Cookie': event.cookies.serialize(
-          AUTH_COOKIE_NAME,
-          await encrypt(key, result),
-          {
-            httpOnly: true,
-            secure: true,
-            maxAge: result.expiresAt ?? 0,
-            path: '/',
-          },
-        ),
-      }
-      : {} as Record<string, string>;
+    const url = new URL(event.url);
+    url.searchParams.delete('code');
 
-    return new Response(
-      JSON.stringify({
-        isAuthorized,
-      }),
-      {
-        headers: { ...cookieHeader },
+    const headers = new Headers();
+
+    if (isAuthorized) {
+      const cookie = event.cookies.serialize(
+        AUTH_COOKIE_NAME,
+        await encrypt(key, result),
+        {
+          httpOnly: true,
+          secure: true,
+          maxAge: result.expiresAt ?? 0,
+          path: '/',
+        },
+      );
+
+      headers.set('Set-Cookie', cookie);
+    }
+
+    return new Response(null, {
+      status: 302,
+      headers: {
+        ...Object.fromEntries(headers),
+        Location: url.toString(),
       },
-    );
+    });
   }
 
   /**
@@ -82,6 +86,8 @@ export const handle: Handle = async ({ event, resolve }) => {
       maxAge: 0,
       path: '/',
     });
+
+    return await resolve(event);
   }
 
   return await resolve(event);
