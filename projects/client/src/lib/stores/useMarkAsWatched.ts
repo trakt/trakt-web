@@ -90,6 +90,10 @@ export function useMarkAsWatched(
       current.preferences.watch.action,
     );
 
+    if (!watchedAtDate) {
+      return;
+    }
+
     isMarkingAsWatched.set(true);
 
     await markAsWatchedRequest({
