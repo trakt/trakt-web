@@ -11,7 +11,7 @@ export const ShowSiloMappedMock: ShowSummary = {
   },
   'genres': [
     'drama',
-    'science fiction',
+    'science-fiction',
   ],
   'id': 180770,
   'overview':

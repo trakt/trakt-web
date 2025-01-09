@@ -34,7 +34,7 @@ export const MovieMatrixMappedMock: MovieSummary = {
   },
   'genres': [
     'action',
-    'science fiction',
+    'science-fiction',
   ],
   'overview':
     'Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.',

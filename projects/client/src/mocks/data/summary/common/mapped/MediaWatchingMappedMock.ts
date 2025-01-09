@@ -1,4 +1,6 @@
-export const MediaWatchingMappedMock = [
+import type { ActiveWatcher } from '$lib/models/ActiveWatcher';
+
+export const MediaWatchingMappedMock: ActiveWatcher[] = [
   {
     'username': 'harrierdubois',
     'private': false,

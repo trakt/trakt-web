@@ -35,7 +35,7 @@ export const ShowDevsMappedMock: ShowSummary = {
   'genres': [
     'drama',
     'fantasy',
-    'science fiction',
+    'science-fiction',
     'mystery',
   ],
   'overview':

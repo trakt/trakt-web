@@ -1,4 +1,6 @@
-export const ShowSiloSeasonsMappedMock = [
+import type { Season } from '$lib/models/Season';
+
+export const ShowSiloSeasonsMappedMock: Season[] = [
   {
     'id': 257490,
     'number': 1,

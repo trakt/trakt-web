@@ -1,4 +1,12 @@
-export const UserHistoryMappedMock = {
+import type {
+  WatchedMovie,
+  WatchedShow,
+} from '$lib/features/auth/queries/currentUserHistoryQuery';
+
+export const UserHistoryMappedMock: {
+  movies: Map<number, WatchedMovie>;
+  shows: Map<number, WatchedShow>;
+} = {
   'movies': new Map([
     [916302, {
       'id': 916302,
