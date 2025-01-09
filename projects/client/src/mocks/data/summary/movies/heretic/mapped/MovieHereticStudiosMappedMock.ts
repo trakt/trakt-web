@@ -1,4 +1,6 @@
-export const MovieHereticStudiosMappedMock = [
+import type { MediaStudio } from '$lib/models/MediaStudio';
+
+export const MovieHereticStudiosMappedMock: MediaStudio[] = [
   {
     'name': 'Shiny Penny',
     'country': undefined,

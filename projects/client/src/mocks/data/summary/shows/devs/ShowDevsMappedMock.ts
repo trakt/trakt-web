@@ -1,4 +1,6 @@
-export const ShowDevsMappedMock = {
+import type { ShowSummary } from '$lib/requests/models/ShowSummary';
+
+export const ShowDevsMappedMock: ShowSummary = {
   'id': 147971,
   'slug': 'devs',
   'title': 'Devs',
@@ -6,6 +8,7 @@ export const ShowDevsMappedMock = {
   'year': 2020,
   'tagline': 'Reality is stranger than dreams.',
   'country': 'us',
+  'status': 'ended',
   'languages': [
     'en',
   ],
@@ -32,12 +35,12 @@ export const ShowDevsMappedMock = {
   'genres': [
     'drama',
     'fantasy',
-    'science-fiction',
+    'science fiction',
     'mystery',
   ],
   'overview':
     'Young computer engineer Lily Chan investigates the secretive development division of her employer, a cutting-edge tech company based in San Francisco, which she believes is behind the murder of her boyfriend.',
   'trailer': 'https://youtube.com/watch?v=Fp9LMsI6uJ8',
-  'airedDate': '2020-03-05T05:00:00.000Z',
+  'airedDate': new Date('2020-03-05T05:00:00.000Z'),
   'certification': 'TV-MA',
 };

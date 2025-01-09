@@ -1,4 +1,6 @@
-export const MovieMatrixMappedMock = {
+import type { MovieSummary } from '$lib/requests/models/MovieSummary';
+
+export const MovieMatrixMappedMock: MovieSummary = {
   'id': 481,
   'slug': 'the-matrix-1999',
   'title': 'The Matrix',
@@ -6,6 +8,7 @@ export const MovieMatrixMappedMock = {
   'year': 1999,
   'tagline': 'The fight for the future begins.',
   'country': 'us',
+  'status': 'released',
   'languages': [
     'en',
   ],
@@ -31,11 +34,11 @@ export const MovieMatrixMappedMock = {
   },
   'genres': [
     'action',
-    'science-fiction',
+    'science fiction',
   ],
   'overview':
     'Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.',
   'trailer': 'https://youtube.com/watch?v=d0XTFAMmhrE',
-  'airedDate': '1999-03-31T00:00:00.000Z',
+  'airedDate': new Date('1999-03-31T00:00:00.000Z'),
   'certification': 'R',
 };

@@ -10,7 +10,7 @@ export const ShowSiloStudiosResponseMock = [
   },
   {
     'name': 'Nemo Films',
-    'country': null,
+    'country': undefined,
     'ids': {
       'trakt': 11,
       'slug': 'nemo-films',

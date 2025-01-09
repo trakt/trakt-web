@@ -1,17 +1,23 @@
 <script lang="ts">
   import { derived, type Readable } from "svelte/store";
-  import { QUERY_TEST_ID } from "./constants";
-  import { replacer } from "./replacer";
 
   const {
-    queryFactory,
+    factory,
+    output,
     mapper = (response) => response,
   }: {
-    queryFactory: () => Readable<unknown>;
+    factory: () => Readable<unknown>;
+    output: (value: unknown) => void;
     mapper?: (response: unknown) => unknown;
   } = $props();
 
-  const readable = derived(queryFactory(), mapper);
-</script>
+  const readable = derived(factory(), mapper);
 
-<pre data-testid={QUERY_TEST_ID}>{JSON.stringify($readable, replacer)}</pre>
+  readable.subscribe((result) => {
+    if (!result) {
+      return;
+    }
+
+    output(result);
+  });
+</script>

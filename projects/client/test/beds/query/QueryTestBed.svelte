@@ -4,14 +4,16 @@
   import QueryRunner from "./_internal/QueryRunner.svelte";
 
   const {
-    queryFactory,
+    factory,
+    output,
     mapper,
   }: {
-    queryFactory: () => Readable<unknown>;
+    factory: () => Readable<unknown>;
+    output: (value: unknown) => void;
     mapper?: (response: any) => unknown;
   } = $props();
 </script>
 
 <TestProvider>
-  <QueryRunner {queryFactory} {mapper} />
+  <QueryRunner {factory} {output} {mapper} />
 </TestProvider>

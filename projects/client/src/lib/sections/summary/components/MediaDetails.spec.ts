@@ -6,12 +6,10 @@ import MediaDetails, { type MediaDetailsProps } from './MediaDetails.svelte';
 
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
-import type { MediaSummary } from './MediaSummary';
 
 describe('MediaDetails', () => {
   const defaultProps: MediaDetailsProps = {
-    //See TODO in MovieHereticMappedMock.ts for why this is cast
-    media: MovieHereticMappedMock as unknown as MediaSummary,
+    media: MovieHereticMappedMock,
     studios: MovieHereticStudiosMappedMock,
     crew: MovieHereticPeopleMappedMock,
   };

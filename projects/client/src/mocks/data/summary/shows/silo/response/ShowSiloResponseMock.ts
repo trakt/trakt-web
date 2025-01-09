@@ -75,7 +75,7 @@ export const ShowSiloResponseMock = {
   ],
   'genres': [
     'drama',
-    'science-fiction',
+    'science fiction',
   ],
   'images': {
     'fanart': [

@@ -1,10 +1,6 @@
-/*
-  TODO: the return type should be MovieSummary
-  airedDate should be a Date object. However, JSON.stringify does not
-  play nicely with dates, and already converts them to a string
-  before the replacer function is called.
-*/
-export const MovieHereticMappedMock = {
+import type { MovieSummary } from '$lib/requests/models/MovieSummary';
+
+export const MovieHereticMappedMock: MovieSummary = {
   'cover': {
     'url': {
       'medium':
@@ -39,7 +35,7 @@ export const MovieHereticMappedMock = {
   },
   'title': 'Heretic',
   'trailer': 'https://youtube.com/watch?v=jpWUOxRozZg',
-  'airedDate': '2024-11-08T00:00:00.000Z',
+  'airedDate': new Date('2024-11-08T00:00:00.000Z'),
   'certification': 'R',
   'country': 'us',
   'languages': [

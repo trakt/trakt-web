@@ -1,7 +1,7 @@
 export const MovieStudiosResponseMock = [
   {
     'name': 'Shiny Penny',
-    'country': null,
+    'country': undefined,
     'ids': {
       'trakt': 164885,
       'slug': 'shiny-penny',
@@ -10,7 +10,7 @@ export const MovieStudiosResponseMock = [
   },
   {
     'name': 'Beck/Woods',
-    'country': null,
+    'country': undefined,
     'ids': {
       'trakt': 75946,
       'slug': 'beck-woods',
@@ -28,7 +28,7 @@ export const MovieStudiosResponseMock = [
   },
   {
     'name': 'CatchLight Studios',
-    'country': null,
+    'country': undefined,
     'ids': {
       'trakt': 98650,
       'slug': 'catchlight-studios-670133a6-7993-41ee-a05a-a806f40a1288',

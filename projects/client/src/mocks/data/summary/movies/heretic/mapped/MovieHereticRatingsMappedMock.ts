@@ -1,4 +1,6 @@
-export const MovieHereticRatingsMappedMock = {
+import type { MediaRating } from '$lib/models/MediaRating';
+
+export const MovieHereticRatingsMappedMock: MediaRating = {
   'trakt': {
     'rating': 0.722561,
     'votes': 3803,

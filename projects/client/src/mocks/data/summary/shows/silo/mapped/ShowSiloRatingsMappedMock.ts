@@ -1,4 +1,6 @@
-export const ShowSiloRatingsMappedMock = {
+import type { MediaRating } from '$lib/models/MediaRating';
+
+export const ShowSiloRatingsMappedMock: MediaRating = {
   'trakt': {
     'rating': 0.815357,
     'votes': 7241,

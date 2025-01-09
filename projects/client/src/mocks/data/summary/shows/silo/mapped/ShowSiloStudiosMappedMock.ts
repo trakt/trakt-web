@@ -1,4 +1,6 @@
-export const ShowSiloStudiosMappedMock = [
+import type { MediaStudio } from '$lib/models/MediaStudio';
+
+export const ShowSiloStudiosMappedMock: MediaStudio[] = [
   {
     'name': 'AMC Networks',
     'country': 'us',
@@ -8,7 +10,7 @@ export const ShowSiloStudiosMappedMock = [
   },
   {
     'name': 'Nemo Films',
-    'country': null,
+    'country': undefined,
     'ids': {
       'slug': 'nemo-films',
     },

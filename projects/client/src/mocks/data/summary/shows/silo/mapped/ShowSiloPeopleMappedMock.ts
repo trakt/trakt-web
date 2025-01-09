@@ -1,4 +1,6 @@
-export const ShowSiloPeopleMappedMock = {
+import type { MediaCrew } from '$lib/requests/models/MediaCrew';
+
+export const ShowSiloPeopleMappedMock: MediaCrew = {
   'directors': [
     {
       'job': 'Script Supervisor',

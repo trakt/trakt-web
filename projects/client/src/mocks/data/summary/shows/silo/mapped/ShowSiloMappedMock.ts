@@ -1,4 +1,6 @@
-export const ShowSiloMappedMock = {
+import type { ShowSummary } from '$lib/requests/models/ShowSummary';
+
+export const ShowSiloMappedMock: ShowSummary = {
   'cover': {
     'url': {
       'medium':
@@ -9,7 +11,7 @@ export const ShowSiloMappedMock = {
   },
   'genres': [
     'drama',
-    'science-fiction',
+    'science fiction',
   ],
   'id': 180770,
   'overview':
@@ -33,7 +35,7 @@ export const ShowSiloMappedMock = {
   },
   'title': 'Silo',
   'trailer': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
-  'airedDate': '2023-05-05T01:00:00.000Z',
+  'airedDate': new Date('2023-05-05T01:00:00.000Z'),
   'certification': 'TV-MA',
   'country': 'us',
   'languages': [

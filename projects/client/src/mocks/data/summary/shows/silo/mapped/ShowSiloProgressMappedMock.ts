@@ -1,4 +1,7 @@
-export const ShowSiloProgressMappedMock = {
+import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry';
+import { EpisodeStandardType } from '$lib/models/EpisodeType';
+
+export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'id': 12105048,
   'title': 'Order',
   'season': 2,
@@ -11,11 +14,11 @@ export const ShowSiloProgressMappedMock = {
     'url':
       'https://walter-r2.trakt.tv/images/episodes/012/105/048/screenshots/medium/2f894ac614.jpg.webp',
   },
-  'airedDate': '2024-11-22T02:00:00.000Z',
+  'airedDate': new Date('2024-11-22T02:00:00.000Z'),
   'total': 17,
   'completed': 11,
   'remaining': 6,
   'minutesLeft': 301,
-  'type': 'standard',
+  'type': EpisodeStandardType.Standard,
   'year': 2024,
 };
