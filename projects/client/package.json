@@ -50,12 +50,12 @@
     "vitest": "^2.1.6"
   },
   "dependencies": {
-    "@inlang/paraglide-sveltekit": "^0.12.1",
-    "@tanstack/svelte-query": "^5.61.5",
-    "@tanstack/svelte-query-devtools": "^5.61.5",
+    "@inlang/paraglide-sveltekit": "^0.15.5",
+    "@tanstack/svelte-query": "^5.62.16",
+    "@tanstack/svelte-query-devtools": "^5.62.16",
     "@ts-rest/core": "^3.51.0",
     "date-fns": "^4.1.0",
-    "firebase": "^11.0.2",
-    "zod": "^3.23.8"
+    "firebase": "^11.1.0",
+    "zod": "^3.24.1"
   }
 }
