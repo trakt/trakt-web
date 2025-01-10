@@ -33,8 +33,10 @@
     toLanguageName(language, languageTag()),
   );
 
-  const toCrewMemberWithJob = (person: CrewMember) =>
-    `${person.name} (${toTranslatedValue("job", person.job)})`;
+  const toCrewMemberWithJob = (person: CrewMember) => {
+    const jobs = person.jobs.map((job) => toTranslatedValue("job", job));
+    return `${person.name} (${jobs.join(", ")})`;
+  };
 
   const mainItemDetail = () => {
     if (media.year) {

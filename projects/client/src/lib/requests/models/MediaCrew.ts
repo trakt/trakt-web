@@ -1,7 +1,7 @@
-import type { Job } from '$lib/api.ts';
+import type { Job } from '@trakt/api';
 
 export type CrewMember = {
-  job: Job;
+  jobs: Job[];
   name: string;
 };
 

@@ -5,7 +5,7 @@ function toCrewMember(
   crewResponse: CrewResponse,
 ): CrewMember {
   return ({
-    job: crewResponse.job,
+    jobs: crewResponse.jobs,
     name: crewResponse.person.name,
   });
 }

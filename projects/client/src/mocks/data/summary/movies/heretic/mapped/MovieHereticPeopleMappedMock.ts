@@ -3,25 +3,25 @@ import type { MediaCrew } from '$lib/requests/models/MediaCrew';
 export const MovieHereticPeopleMappedMock: MediaCrew = {
   'directors': [
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Scott Beck',
     },
     {
-      'job': 'First Assistant Director',
+      'jobs': ['First Assistant Director'],
       'name': 'Richard Cowan',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Bryan Woods',
     },
   ],
   'writers': [
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Scott Beck',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Bryan Woods',
     },
   ],

@@ -3,89 +3,89 @@ import type { MediaCrew } from '$lib/requests/models/MediaCrew';
 export const ShowSiloPeopleMappedMock: MediaCrew = {
   'directors': [
     {
-      'job': 'Script Supervisor',
+      'jobs': ['Script Supervisor'],
       'name': 'Rhiannon Preece-Towey',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Bert',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Michael Dinner',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Morten Tyldum',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Adam Bernstein',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'David Semel',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Bertie',
     },
     {
-      'job': 'Director',
+      'jobs': ['Director'],
       'name': 'Aric Avelino',
     },
   ],
   'writers': [
     {
-      'job': 'Book',
+      'jobs': ['Book'],
       'name': 'Hugh Howey',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Graham Yost',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Cassie Pappas',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Jessica Blaire',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Ingrid Escajeda',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Jeffery Wang',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Fred Golan',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Remi Aubuchon',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Aric Avelino',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Lekethia Dalcoe',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Sal Calleros',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Jenny DeArmitt',
     },
     {
-      'job': 'Writer',
+      'jobs': ['Writer'],
       'name': 'Katherine DiSavino',
     },
   ],
