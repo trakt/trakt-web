@@ -72,7 +72,7 @@ jobs:
 
       - name: Probe the Client's Mind aka Run Tests
         working-directory: projects/client
-        run: 'deno task test:unit'
+        run: 'deno task test:cov'
 
       - name: Consulting the Oracles of Type aka Type Check
         working-directory: projects/client
@@ -81,6 +81,14 @@ jobs:
       - name: Probing the API's Mind aka Run Tests
         working-directory: projects/api
         run: 'deno task test'
+
+      - name: Trial by Code Coverage
+        uses: paambaati/codeclimate-action@v9.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageLocations: |
+            ${{github.workspace}}/projects/client/coverage/clover.xml:clover
 
   build:
     name: The Forge (Build)
