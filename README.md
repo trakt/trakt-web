@@ -1,8 +1,10 @@
 # trakt-lite
 
-[![CI](https://github.com/trakt/trakt-lite/actions/workflows/ci.yml/badge.svg)](https://github.com/trakt/trakt-lite/actions/workflows/ci.yml)
+<a href="https://codeclimate.com/github/trakt/trakt-lite/maintainability"><img src="https://api.codeclimate.com/v1/badges/694f2ec7960d2af769be/maintainability" /></a>
+<a href="https://codeclimate.com/github/trakt/trakt-lite/test_coverage"><img src="https://api.codeclimate.com/v1/badges/694f2ec7960d2af769be/test_coverage" /></a>
 
-[![CD](https://github.com/trakt/trakt-lite/actions/workflows/cd.yml/badge.svg)](https://github.com/trakt/trakt-lite/actions/workflows/cd.yml)
+<a href="https://github.com/trakt/trakt-lite/actions/workflows/ci.yml"><img src="https://github.com/trakt/trakt-lite/actions/workflows/ci.yml/badge.svg" /></a>
+<a href="https://github.com/trakt/trakt-lite/actions/workflows/cd.yml"><img src="https://github.com/trakt/trakt-lite/actions/workflows/cd.yml/badge.svg" /></a>
 
 ## Project Structure
 
