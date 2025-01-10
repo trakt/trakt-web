@@ -1,4 +1,6 @@
-export const MovieHereticResponseMock = {
+import type { MovieResponse } from '@trakt/api';
+
+export const MovieHereticResponseMock: MovieResponse = {
   'title': 'Heretic',
   'year': 2024,
   'ids': {

@@ -1,4 +1,6 @@
-export const ShowSiloResponseMock = {
+import type { ShowResponse } from '@trakt/api';
+
+export const ShowSiloResponseMock: ShowResponse = {
   'title': 'Silo',
   'year': 2023,
   'ids': {
@@ -7,7 +9,6 @@ export const ShowSiloResponseMock = {
     'tvdb': 403245,
     'imdb': 'tt14688458',
     'tmdb': 125988,
-    'tvrage': null,
   },
   'aired_episodes': 15,
   'tagline': 'The truth will surface.',
@@ -75,7 +76,7 @@ export const ShowSiloResponseMock = {
   ],
   'genres': [
     'drama',
-    'science fiction',
+    'science-fiction',
   ],
   'images': {
     'fanart': [

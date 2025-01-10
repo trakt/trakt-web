@@ -1,4 +1,6 @@
-export const ShowSiloStudiosResponseMock = [
+import type { StudioResponse } from '@trakt/api';
+
+export const ShowSiloStudiosResponseMock: StudioResponse[] = [
   {
     'name': 'AMC Networks',
     'country': 'us',

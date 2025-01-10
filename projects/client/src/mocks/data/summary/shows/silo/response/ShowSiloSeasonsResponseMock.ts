@@ -1,11 +1,12 @@
-export const ShowSiloSeasonsResponseMock = [
+import type { SeasonsResponse } from '@trakt/api';
+
+export const ShowSiloSeasonsResponseMock: SeasonsResponse = [
   {
     'number': 0,
     'ids': {
       'trakt': 434165,
       'tvdb': null,
       'tmdb': 432135,
-      'tvrage': null,
     },
     'aired_episodes': 4,
     'rating': 8,
@@ -23,7 +24,6 @@ export const ShowSiloSeasonsResponseMock = [
       'trakt': 257490,
       'tvdb': 1928276,
       'tmdb': 196076,
-      'tvrage': null,
     },
     'aired_episodes': 10,
     'rating': 8.0617,
@@ -41,7 +41,6 @@ export const ShowSiloSeasonsResponseMock = [
       'trakt': 402288,
       'tvdb': 2087050,
       'tmdb': 404198,
-      'tvrage': null,
     },
     'aired_episodes': 7,
     'rating': 7.38889,

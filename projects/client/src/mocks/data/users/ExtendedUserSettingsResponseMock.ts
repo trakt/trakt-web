@@ -1,4 +1,6 @@
-export const ExtendedUsersResponseMock = {
+import type { SettingsResponse } from '@trakt/api';
+
+export const ExtendedUsersResponseMock: SettingsResponse = {
   'user': {
     'username': 'harrier_dubois',
     'private': false,

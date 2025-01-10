@@ -1,4 +1,6 @@
-export const MediaWatchingResponseMock = [
+import type { ProfileResponse } from '@trakt/api';
+
+export const MediaWatchingResponseMock: ProfileResponse[] = [
   {
     'username': 'harrierdubois',
     'private': false,

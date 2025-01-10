@@ -1,4 +1,6 @@
-export const MovieMatrixResponseMock = {
+import type { MovieResponse } from '@trakt/api';
+
+export const MovieMatrixResponseMock: MovieResponse = {
   'title': 'The Matrix',
   'year': 1999,
   'ids': {

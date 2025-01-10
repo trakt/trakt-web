@@ -1,4 +1,6 @@
-export const WatchlistShowsResponseMock = [
+import type { WatchlistedShowsResponse } from '@trakt/api';
+
+export const WatchlistShowsResponseMock: WatchlistedShowsResponse[] = [
   {
     'rank': 1,
     'id': 1146015487,
@@ -14,7 +16,6 @@ export const WatchlistShowsResponseMock = [
         'tvdb': 403245,
         'imdb': 'tt14688458',
         'tmdb': 125988,
-        'tvrage': null,
       },
       'aired_episodes': 17,
     },

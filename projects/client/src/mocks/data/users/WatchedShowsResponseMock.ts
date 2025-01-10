@@ -1,4 +1,6 @@
-export const WatchedShowsResponseMock = [
+import type { WatchedShowsResponse } from '@trakt/api';
+
+export const WatchedShowsResponseMock: WatchedShowsResponse = [
   {
     'plays': 8,
     'last_watched_at': '2024-12-27T16:28:32.000Z',
@@ -13,7 +15,6 @@ export const WatchedShowsResponseMock = [
         'tvdb': 364149,
         'imdb': 'tt8134186',
         'tmdb': 81349,
-        'tvrage': null,
       },
       'aired_episodes': 8,
     },
@@ -89,7 +90,6 @@ export const WatchedShowsResponseMock = [
         'tvdb': 403245,
         'imdb': 'tt14688458',
         'tmdb': 125988,
-        'tvrage': null,
       },
       'aired_episodes': 17,
     },

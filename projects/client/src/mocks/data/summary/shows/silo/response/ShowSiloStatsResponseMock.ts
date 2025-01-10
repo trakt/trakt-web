@@ -1,4 +1,6 @@
-export const ShowSiloStatsResponseMock = {
+import type { ShowStatsResponse } from '@trakt/api';
+
+export const ShowSiloStatsResponseMock: ShowStatsResponse = {
   'watchers': 127434,
   'plays': 1520971,
   'collectors': 16826,

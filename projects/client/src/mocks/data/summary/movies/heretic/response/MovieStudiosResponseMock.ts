@@ -1,4 +1,6 @@
-export const MovieStudiosResponseMock = [
+import type { StudioResponse } from '@trakt/api';
+
+export const MovieStudiosResponseMock: StudioResponse[] = [
   {
     'name': 'Shiny Penny',
     'country': undefined,

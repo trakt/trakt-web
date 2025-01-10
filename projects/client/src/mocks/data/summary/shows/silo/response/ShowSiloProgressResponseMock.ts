@@ -1,4 +1,6 @@
-export const ShowSiloProgressResponseMock = {
+import type { ShowProgressResponse } from '@trakt/api';
+
+export const ShowSiloProgressResponseMock: ShowProgressResponse = {
   'aired': 17,
   'completed': 11,
   'last_watched_at': '2024-12-27T19:40:28.000Z',
@@ -199,7 +201,6 @@ export const ShowSiloProgressResponseMock = {
       'tvdb': 10608307,
       'imdb': 'tt28100075',
       'tmdb': 5501095,
-      'tvrage': null,
     },
     'number_abs': null,
     'overview':
@@ -257,7 +258,6 @@ export const ShowSiloProgressResponseMock = {
       'tvdb': 10232256,
       'imdb': 'tt28077708',
       'tmdb': 5501094,
-      'tvrage': null,
     },
     'number_abs': null,
     'overview':

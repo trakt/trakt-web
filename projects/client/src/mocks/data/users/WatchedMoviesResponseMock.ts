@@ -1,4 +1,6 @@
-export const WatchedMoviesResponseMock = [
+import type { WatchedMoviesResponse } from '@trakt/api';
+
+export const WatchedMoviesResponseMock: WatchedMoviesResponse = [
   {
     'plays': 1,
     'last_watched_at': '2024-12-27T16:15:28.000Z',

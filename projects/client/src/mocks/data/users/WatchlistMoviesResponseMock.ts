@@ -1,4 +1,6 @@
-export const WatchlistMoviesResponseMock = [
+import type { WatchlistedMoviesResponse } from '@trakt/api';
+
+export const WatchlistMoviesResponseMock: WatchlistedMoviesResponse[] = [
   {
     'rank': 1,
     'id': 1146014560,

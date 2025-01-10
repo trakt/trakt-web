@@ -1,4 +1,6 @@
-export const ShowDevsResponseMock = {
+import type { ShowResponse } from '@trakt/api';
+
+export const ShowDevsResponseMock: ShowResponse = {
   'title': 'Devs',
   'year': 2020,
   'ids': {
@@ -7,7 +9,6 @@ export const ShowDevsResponseMock = {
     'tvdb': 364149,
     'imdb': 'tt8134186',
     'tmdb': 81349,
-    'tvrage': null,
   },
   'aired_episodes': 8,
   'tagline': 'Reality is stranger than dreams.',
