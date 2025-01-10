@@ -1,3 +1,4 @@
+import { prependHttpOrHttps } from '$lib/utils/url/prependHttpOrHttps.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import { key } from './environment.ts';
@@ -44,7 +45,9 @@ export const handle: Handle = async ({ event, resolve }) => {
   const isExchange = code != null;
 
   if (isExchange) {
-    const referrer = event.request.headers.get('referer') ?? '';
+    const referrer = event.request.headers.get('referer') ??
+      prependHttpOrHttps(event.request.headers.get('host')) ??
+      '';
 
     const result = await authorize({ code, referrer });
     const { isAuthorized } = result;
