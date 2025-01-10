@@ -1,4 +1,4 @@
-import { type Handle } from '@sveltejs/kit';
+import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import { key } from './environment.ts';
 import type {
@@ -9,6 +9,15 @@ import { decrypt } from './utils/decrypt.ts';
 import { encrypt } from './utils/encrypt.ts';
 
 const AUTH_COOKIE_NAME = 'trakt-auth';
+
+function getLegacyAuthCookie(event: RequestEvent) {
+  try {
+    const serializedToken = event.cookies.get(AUTH_COOKIE_NAME) ?? '';
+    return JSON.parse(serializedToken) as SerializedAuthResponse;
+  } catch (error) {
+    return null;
+  }
+}
 
 export const handle: Handle = async ({ event, resolve }) => {
   const setAuth = (auth: SerializedAuthResponse | Nil) => {
@@ -68,6 +77,25 @@ export const handle: Handle = async ({ event, resolve }) => {
         Location: url.toString(),
       },
     });
+  }
+
+  //TODO: remove this migration after March 1st 2025
+  const legacyAuthCookie = getLegacyAuthCookie(event);
+  if (legacyAuthCookie != null) {
+    setAuth(legacyAuthCookie);
+
+    event.cookies.set(
+      AUTH_COOKIE_NAME,
+      await encrypt(key, legacyAuthCookie),
+      {
+        httpOnly: true,
+        secure: true,
+        maxAge: legacyAuthCookie.expiresAt ?? 0,
+        path: '/',
+      },
+    );
+
+    return await resolve(event);
   }
 
   /**
