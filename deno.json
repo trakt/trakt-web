@@ -13,6 +13,7 @@
     "swagger:dev": "cd projects/swagger && deno task dev",
     "playground:dev": "cd projects/playground && deno task dev",
     "client:dev": "cd projects/client && deno task dev",
+    "client:dev:contrib": "cd projects/client && deno task dev:contrib",
     "client:i18n:resolve": "cd projects/client && deno task i18n:resolve"
   },
   "unstable": [

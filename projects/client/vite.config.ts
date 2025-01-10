@@ -26,7 +26,9 @@ function findGitRoot(dir: string): string {
 
 const MONOREPO_ROOT = findGitRoot(__dirname);
 
-const TRAKT_TARGET_ENVIRONMENT = Environment.production_private;
+const TRAKT_TARGET_ENVIRONMENT = process.env.IS_CONTRIB
+  ? Environment.production
+  : Environment.production_private;
 
 export default defineConfig(({ mode }) => ({
   define: {

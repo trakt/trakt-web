@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite dev",
+    "dev:contrib": "IS_CONTRIB=true vite dev",
     "build": "vite build",
     "build:preview": "IS_PREVIEW=true vite build",
     "preview": "vite preview",
