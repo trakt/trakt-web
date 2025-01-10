@@ -44,6 +44,40 @@ properly:
 - **`TRAKT_SESSION_SECRET`:** The session encryption secret for the Trakt API.
   - `deno task insecurity:generate`
 
+### External Contribution - Unleash Your Inner Code Wizard!
+
+Want to contribute to Trakt Lite and leave your mark on the digital tapestry of
+media? Excellent! Here's how to tap into your inner code-slinging sorcerer:
+
+1. **Summon a Trakt Application:** Venture forth to the
+   [Trakt Settings](https://trakt.tv/oauth/applications) and conjure a new
+   application. It's like creating a digital familiar, ready to do your bidding.
+1. **Set the `Redirect uri:`:** Point this mystical path to
+   `http://localhost:5173/` - the gateway to your local development realm.
+1. **Set the `Javascript (cors) origins:`:** Ensure this incantation also points
+   to `http://localhost:5173/` to allow cross-origin sorcery.
+1. Now that you've forged your Trakt application, it's time to imbue your
+   development environment with the mystical energies of the Client ID and
+   Client Secret.
+
+**A Word of Caution, Fellow Traveler:**
+
+While public applications can be used, they might withhold some of their
+secrets. Think of it as a trial version of an ancient spellbook. Limitations
+include:
+
+- **Missing Image Links:** Alas, the visual delights of posters and banners will
+  remain shrouded in mystery.
+- **"Up Next" Dysfunction:** This powerful prophecy, revealing your future
+  viewing pleasures, will be temporarily silenced.
+
+Fear not, for these measures are in place to protect Trakt Lite from the
+nefarious clutches of scrapers and bots. We wouldn't want our precious data to
+fall into the wrong hands, would we?
+
+Now go forth and code with the fury of a thousand suns! The future of Trakt Lite
+awaits your brilliance. ✨
+
 ## Getting Started
 
 This is a Deno project, so you need to have Deno installed on your machine
@@ -66,15 +100,16 @@ please refer to the
 
 - Client:
   - Development: `deno task client:dev`
+  - Contributors: `deno task client:dev:contrib`
 
 ## Client Environment - Traversing the Digital Landscape
 
 ### Web - Navigating the Browser Realm
 
 To embark on your web development journey, simply utter the incantation
-`deno task dev` within the hallowed halls of the `projects/client` directory.
-Then, summon forth the browser of your choice, and behold the fruits of your
-labor.
+`deno task dev` or `deno task dev:contrib` (for external contributors) within
+the hallowed halls of the `projects/client` directory. Then, summon forth the
+browser of your choice, and behold the fruits of your labor.
 
 ### Android - Taming the Mobile Beast
 
