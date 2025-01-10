@@ -9,7 +9,7 @@
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/testing@^1.0.5": "1.0.5",
     "npm:@google/generative-ai@0.21": "0.21.0",
-    "npm:@hono/swagger-ui@0.5": "0.5.0_hono@4.6.12",
+    "npm:@hono/swagger-ui@0.5": "0.5.0_hono@4.6.16",
     "npm:@inlang/paraglide-sveltekit@~0.12.1": "0.12.1_@sveltejs+kit@2.8.5__@sveltejs+vite-plugin-svelte@4.0.2___svelte@5.2.9____acorn@8.14.0___vite@5.4.11__svelte@5.2.9___acorn@8.14.0__vite@5.4.11_svelte@5.2.9__acorn@8.14.0",
     "npm:@playwright/test@1.49.0": "1.49.0",
     "npm:@playwright/test@^1.49.0": "1.49.0",
@@ -33,7 +33,7 @@
     "npm:eslint@^9.15.0": "9.15.0",
     "npm:firebase@^11.0.2": "11.0.2_@firebase+app@0.10.16_@firebase+app-compat@0.2.46_@firebase+app-types@0.9.3",
     "npm:globals@^15.12.0": "15.12.0",
-    "npm:hono@^4.6.12": "4.6.12",
+    "npm:hono@^4.6.16": "4.6.16",
     "npm:jsdom@^25.0.1": "25.0.1",
     "npm:msw@^2.6.8": "2.6.8_typescript@5.7.2",
     "npm:prettier-plugin-svelte@^3.3.2": "3.3.2_prettier@3.4.1_svelte@5.2.9__acorn@8.14.0",
@@ -954,7 +954,7 @@
         "yargs"
       ]
     },
-    "@hono/swagger-ui@0.5.0_hono@4.6.12": {
+    "@hono/swagger-ui@0.5.0_hono@4.6.16": {
       "integrity": "sha512-MWYYSv9kC8IwFBLZdwgZZMT9zUq2C/4/ekuyEYOkHEgUMqu+FG3eebtBZ4ofMh60xYRxRR2BgQGoNIILys/PFg==",
       "dependencies": [
         "hono"
@@ -2897,8 +2897,8 @@
     "headers-polyfill@4.0.3": {
       "integrity": "sha512-IScLbePpkvO846sIwOtOTDjutRMWdXdJmXdMvk6gCBHxFO8d+QKOQedyZSxFTTFYRSmlgSTDtXqqq4pcenBXLQ=="
     },
-    "hono@4.6.12": {
-      "integrity": "sha512-eHtf4kSDNw6VVrdbd5IQi16r22m3s7mWPLd7xOMhg1a/Yyb1A0qpUFq8xYMX4FMuDe1nTKeMX5rTx7Nmw+a+Ag=="
+    "hono@4.6.16": {
+      "integrity": "sha512-iE6xOPwDYlfnZFwk6BfIMMIH4WZm3pPhz6rc1uJM/OPew0pjG5K6p8WTLaMBY1/szF/T0TaEjprMpwn16BA0NQ=="
     },
     "html-encoding-sniffer@4.0.0": {
       "integrity": "sha512-Y22oTqIU4uuPgEemfz7NDJz6OeKf12Lsu+QC+s3BVpda64lTiMYCyGwg5ki4vFxkMwQdeZDl2adZoqUgdFuTgQ==",
@@ -4556,7 +4556,7 @@
         "dependencies": [
           "npm:@hono/swagger-ui@0.5",
           "npm:@ts-rest/open-api@^3.51.0",
-          "npm:hono@^4.6.12"
+          "npm:hono@^4.6.16"
         ]
       }
     }
