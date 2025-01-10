@@ -73,6 +73,9 @@ export default defineConfig(({ mode }) => ({
     ],
     environment: 'jsdom',
     setupFiles: ['./vitest-setup.ts'],
+    coverage: {
+      provider: 'istanbul',
+    },
   },
 
   resolve: process.env.VITEST
