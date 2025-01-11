@@ -68,6 +68,7 @@ export default defineConfig(({ mode }) => ({
     setupFiles: ['./vitest-setup.ts'],
     coverage: {
       provider: 'istanbul',
+      reporter: ['clover', 'lcov'],
     },
   },
 

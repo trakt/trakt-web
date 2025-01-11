@@ -85,7 +85,7 @@ jobs:
         working-directory: projects/api
         run: 'deno task test'
 
-      - name: Trial by Code Coverage
+      - name: Trial by Code Climate
         uses: paambaati/codeclimate-action@v9.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
@@ -93,6 +93,13 @@ jobs:
           prefix: ${{github.workspace}}
           coverageLocations: |
             ${{github.workspace}}/projects/client/coverage/clover.xml:clover
+
+      - name: Trial by Deep Source
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+          key: javascript
+          coverage-file: ${{github.workspace}}/projects/client/coverage/lcov.info
+          dsn: ${{ secrets.DEEPSOURCE_DSN }}
 
   build:
     name: The Forge (Build)

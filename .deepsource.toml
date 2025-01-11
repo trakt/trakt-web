@@ -9,6 +9,10 @@ enabled = true
   dialect = "typescript"
   style_guide = "standard"
 
+[[analyzers]]
+name = "test-coverage"
+enabled = true
+
 [[exclude]]
 paths = [
   "dist/**",
