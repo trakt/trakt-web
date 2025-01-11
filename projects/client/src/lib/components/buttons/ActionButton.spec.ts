@@ -9,7 +9,7 @@ describe('ActionButton', () => {
   const defaultProps: TraktActionButtonProps = {
     label: 'Test ActionButton',
     children: createRawSnippet(() => ({
-      render: () => 'Test ActionButton Content',
+      render: () => '<span>Test ActionButton Content</span>',
     })),
   };
 

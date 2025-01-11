@@ -9,7 +9,7 @@ describe('Button', () => {
   const defaultProps: TraktButtonProps = {
     label: 'Test Button',
     children: createRawSnippet(() => ({
-      render: () => 'Test Button Content',
+      render: () => '<span>Test Button Content</span>',
     })),
   };
 
@@ -33,7 +33,7 @@ describe('Button', () => {
       render(Button, {
         ...defaultProps,
         icon: createRawSnippet(() => ({
-          render: () => '🔍',
+          render: () => '<span>🔍</span>',
         })),
       });
 
@@ -46,7 +46,7 @@ describe('Button', () => {
       render(Button, {
         ...defaultProps,
         icon: createRawSnippet(() => ({
-          render: () => '🔍',
+          render: () => '<span>🔍</span>',
         })),
       });
 
@@ -58,7 +58,7 @@ describe('Button', () => {
       render(Button, {
         ...defaultProps,
         subtitle: createRawSnippet(() => ({
-          render: () => 'Subtitle',
+          render: () => '<span>Subtitle</span>',
         })),
       });
 
