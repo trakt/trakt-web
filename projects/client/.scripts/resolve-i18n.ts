@@ -2,7 +2,7 @@ import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
 const CONFLICT_HEAD_REGEX = /<<<<<<< HEAD\n([\s\S]*?)=======/;
-const INCOMING_CHANGE_REGEX = /=======\n([\s\S]*?)>>>>>>> [^\n]+\n/;
+const INCOMING_CHANGE_REGEX = /[=]======\n([\s\S]*?)>>>>>>> [^\n]+\n/;
 const END_CONFLICT_MARKER_REGEX = />>>>>>> [^\n]+\n([\s\S]*)/;
 
 function cleanup(data: string | undefined): string {
