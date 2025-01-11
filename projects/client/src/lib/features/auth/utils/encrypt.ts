@@ -1,4 +1,4 @@
-export async function encrypt<T extends Object>(
+export async function encrypt<T extends unknown>(
   key: CryptoKey,
   data: T,
 ): Promise<string> {
