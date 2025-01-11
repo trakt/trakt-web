@@ -33,9 +33,9 @@ export const authorize = async ({
       throw error;
     });
 
-  const isEmpty = response.token?.access == undefined ||
-    response.token?.refresh == undefined ||
-    response.expiresAt == undefined;
+  const isEmpty = response.token?.access == null ||
+    response.token?.refresh == null ||
+    response.expiresAt == null;
 
   if (isEmpty) {
     return UNAUTHORIZED_PAYLOAD;
