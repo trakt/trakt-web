@@ -15,7 +15,7 @@ describe('toMessageKey', () => {
   });
 
   it('should replace strip quotes and parenthesis', () => {
-    expect(toMessageKey('prefix', `My Value ('or not')`)).toBe(
+    expect(toMessageKey('prefix', "My Value ('or not')")).toBe(
       'prefix_my_value_or_not',
     );
   });
