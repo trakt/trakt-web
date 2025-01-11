@@ -1,11 +1,11 @@
-import DropdownList from './DropdownList.svelte';
+import DropdownList from "./DropdownList.svelte";
 
-import type { TraktDropdownListProps } from '$lib/components/dropdown/TraktDropdownListProps.ts';
-import { fireEvent, render, screen, waitFor } from '@testing-library/svelte';
-import { createRawSnippet } from 'svelte';
-import { describe, expect, it } from 'vitest';
+import type { TraktDropdownListProps } from "$lib/components/dropdown/TraktDropdownListProps.ts";
+import { fireEvent, render, screen, waitFor } from "@testing-library/svelte";
+import { createRawSnippet } from "svelte";
+import { describe, expect, it } from "vitest";
 
-describe('DropdownList', () => {
+describe("DropdownList", () => {
   const defaultProps: TraktDropdownListProps = {
     items: createRawSnippet(() => ({
       render: () => `
@@ -13,40 +13,40 @@ describe('DropdownList', () => {
       `,
     })),
     children: createRawSnippet(() => ({
-      render: () => '<span>Click Here<span>',
+      render: () => "<span>Click Here<span>",
     })),
-    label: 'click here',
+    label: "click here",
   };
 
-  it('should render the dropdown list', async () => {
+  it("should render the dropdown list", async () => {
     render(DropdownList, {
       props: {
         ...defaultProps,
       },
     });
 
-    const dropdownButton = screen.getByRole('button', {
+    const dropdownButton = screen.getByRole("button", {
       name: /click here/i,
     });
     await fireEvent.click(dropdownButton);
 
-    const items = screen.getAllByRole('listitem');
+    const items = screen.getAllByRole("listitem");
     expect(items).toHaveLength(1);
   });
 
-  it('should close the dropdown when clicking outside', async () => {
+  it("should close the dropdown when clicking outside", async () => {
     render(DropdownList, {
       props: {
         ...defaultProps,
       },
     });
 
-    const dropdownButton = screen.getByRole('button', {
+    const dropdownButton = screen.getByRole("button", {
       name: /click here/i,
     });
 
     await fireEvent.click(dropdownButton);
-    const list = screen.getByRole('list');
+    const list = screen.getByRole("list");
     expect(list).toBeInTheDocument();
 
     await fireEvent.click(window);
@@ -55,22 +55,22 @@ describe('DropdownList', () => {
     });
   });
 
-  it('should close the dropdown when clicking an item', async () => {
+  it("should close the dropdown when clicking an item", async () => {
     render(DropdownList, {
       props: {
         ...defaultProps,
       },
     });
 
-    const dropdownButton = screen.getByRole('button', {
+    const dropdownButton = screen.getByRole("button", {
       name: /click here/i,
     });
 
     await fireEvent.click(dropdownButton);
-    const list = screen.getByRole('list');
+    const list = screen.getByRole("list");
     expect(list).toBeInTheDocument();
 
-    const item = screen.getByRole('listitem');
+    const item = screen.getByRole("listitem");
     await fireEvent.click(item);
     await waitFor(() => {
       expect(list).not.toBeInTheDocument();
