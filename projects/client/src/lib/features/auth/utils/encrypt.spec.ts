@@ -1,12 +1,12 @@
 import { AuthMock } from '$mocks/data/auth/AuthMock';
 import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock';
-import { mockSessionKey } from '$mocks/data/auth/mockSessionKey';
+import { encryptionKeyMock } from '$mocks/data/auth/encryptionKeyMock';
 import { describe, expect, it } from 'vitest';
 import { encrypt } from './encrypt';
 
 describe('utils: encrypt', () => {
   it('should encrypt', async () => {
-    const testCryptoKey = await mockSessionKey();
+    const testCryptoKey = await encryptionKeyMock();
     const encryptedData = await encrypt(testCryptoKey, AuthMock);
 
     expect(encryptedData).toEqual(EncryptedAuthMock);
