@@ -13,6 +13,12 @@ enabled = true
 name = "test-coverage"
 enabled = true
 
+test_patterns = [
+  "**/*.spec.ts",
+  "**/*.mock.ts",
+  "**/*.test.ts"
+]
+
 [[exclude]]
 paths = [
   "dist/**",
