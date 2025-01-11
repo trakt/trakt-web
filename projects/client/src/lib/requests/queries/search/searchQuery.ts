@@ -86,7 +86,7 @@ function searchRequest({
 
 export const searchQueryKey = (q: string) =>
   ['search', q.toLowerCase().trim()] as const;
-export const searchCancellationId = () => `search_cancellation_token`;
+export const searchCancellationId = () => "search_cancellation_token";
 export const searchQuery = (params: SearchParams) => ({
   queryKey: searchQueryKey(params.query),
   queryFn: () => searchRequest(params),
