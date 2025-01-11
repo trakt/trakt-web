@@ -22,10 +22,11 @@ async function deleteKey(keyToDelete: string): Promise<void> {
       console.log(`Loaded ${Object.keys(existingTranslations).length} keys`);
       // Delete the key if it exists
       if (keyToDelete in existingTranslations) {
-        delete existingTranslations[keyToDelete];
+        const { [keyToDelete]: _, ...rest } = existingTranslations;
+
         await writeJsonFile(
           `${I18N_MESSAGES_DIR}/${locale}.json`,
-          existingTranslations,
+          rest,
         );
         console.log(`Deleted key '${keyToDelete}' from ${locale}`);
       } else {
