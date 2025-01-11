@@ -1,5 +1,5 @@
-import { z } from '../z.ts';
-import { episodeIdsResponseSchema } from './episodeIdsResponseSchema.ts';
+import { z } from "../z.ts";
+import { episodeIdsResponseSchema } from "./episodeIdsResponseSchema.ts";
 
 export const episodeResponseSchema = z.object({
   season: z.number(),
@@ -52,7 +52,5 @@ export const episodeResponseSchema = z.object({
   /***
    * Available if requesting extended `cloud9`.
    */
-  images: z
-    .object({ screenshot: z.array(z.string()) })
-    .optional(),
+  images: z.object({ screenshot: z.array(z.string()) }).optional(),
 });

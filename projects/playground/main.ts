@@ -1,9 +1,9 @@
-import { Environment, traktApi } from '@trakt/api';
-import { createDeviceTokenPoller } from './src/createDeviceTokenPoller.ts';
-import { TRAKT_CLIENT_ID } from './src/env/TRAKT_CLIENT_ID.ts';
-import { TRAKT_CLIENT_SECRET } from './src/env/TRAKT_CLIENT_SECRET.ts';
-import { logger } from './src/utils/logger.ts';
-import { store, StoreKey } from './src/utils/store.ts';
+import { Environment, traktApi } from "@trakt/api";
+import { createDeviceTokenPoller } from "./src/createDeviceTokenPoller.ts";
+import { TRAKT_CLIENT_ID } from "./src/env/TRAKT_CLIENT_ID.ts";
+import { TRAKT_CLIENT_SECRET } from "./src/env/TRAKT_CLIENT_SECRET.ts";
+import { logger } from "./src/utils/logger.ts";
+import { store, StoreKey } from "./src/utils/store.ts";
 
 const api = traktApi({
   environment: Environment.production_private,
@@ -31,7 +31,7 @@ async function authDevice() {
   return result;
 }
 
-const result = store.get(StoreKey.Auth) ?? await authDevice();
+const result = store.get(StoreKey.Auth) ?? (await authDevice());
 store.set(StoreKey.Auth, result);
 
 logger.statement(

@@ -1,8 +1,8 @@
-import type { Genre, SearchResultResponse } from '$lib/api.ts';
-import type { MediaType } from '$lib/models/MediaType.ts';
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
+import type { Genre, SearchResultResponse } from "$lib/api.ts";
+import type { MediaType } from "$lib/models/MediaType.ts";
+import { MEDIA_POSTER_PLACEHOLDER } from "$lib/utils/constants.ts";
+import { prependHttps } from "$lib/utils/url/prependHttps.ts";
+import { api, type ApiParams } from "../../_internal/api.ts";
 
 export type SearchParams = {
   query: string;
@@ -21,16 +21,14 @@ export type SearchResult = {
   };
 };
 
-function mapToSearchResultEntry(
-  item: SearchResultResponse[0],
-): SearchResult {
+function mapToSearchResultEntry(item: SearchResultResponse[0]): SearchResult {
   const { type } = item;
 
   const media = (() => {
     switch (type) {
-      case 'show':
+      case "show":
         return item.show;
-      case 'movie':
+      case "movie":
         return item.movie;
       default:
         throw new Error(`Unknown type: ${type}`);
@@ -47,8 +45,7 @@ function mapToSearchResultEntry(
     runtime: media.runtime,
     poster: {
       url: prependHttps(
-        media.images?.poster.at(1) ??
-          media.images?.poster.at(0),
+        media.images?.poster.at(1) ?? media.images?.poster.at(0),
         MEDIA_POSTER_PLACEHOLDER,
       ),
     },
@@ -64,28 +61,26 @@ function searchRequest({
     cancellable: true,
     cancellationId: searchCancellationId(),
   })
-    .search
-    .query({
+    .search.query({
       query: {
         query,
-        extended: 'full,cloud9',
+        extended: "full,cloud9",
       },
       params: {
-        type: 'movie,show',
+        type: "movie,show",
       },
     })
     .then(({ status, body }) => {
       if (status !== 200) {
-        throw new Error('Failed to search');
+        throw new Error("Failed to search");
       }
 
-      return body
-        .map(mapToSearchResultEntry);
+      return body.map(mapToSearchResultEntry);
     });
 }
 
 export const searchQueryKey = (q: string) =>
-  ['search', q.toLowerCase().trim()] as const;
+  ["search", q.toLowerCase().trim()] as const;
 export const searchCancellationId = () => "search_cancellation_token";
 export const searchQuery = (params: SearchParams) => ({
   queryKey: searchQueryKey(params.query),
