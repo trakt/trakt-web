@@ -73,7 +73,7 @@ export function useMarkAsWatched(
           );
         }
         case 'show': {
-          return media.every((m) => !!$history.shows.get(m.id)?.isWatched);
+          return media.every((m) => Boolean($history.shows.get(m.id)?.isWatched));
         }
       }
     },
