@@ -10,7 +10,7 @@ describe('DropdownItem', () => {
       props: {
         href: '/test-link',
         children: createRawSnippet(() => ({
-          render: () => 'Test Link',
+          render: () => '<span>Test Link</span>',
         })),
       },
     });
@@ -24,7 +24,7 @@ describe('DropdownItem', () => {
     render(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
-          render: () => 'Normal Item',
+          render: () => '<span>Normal Item</span>',
         })),
       },
     });
@@ -37,7 +37,7 @@ describe('DropdownItem', () => {
     render(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
-          render: () => 'Default Color Item',
+          render: () => '<span>Default Color Item</span>',
         })),
       },
     });
@@ -51,7 +51,7 @@ describe('DropdownItem', () => {
       props: {
         color: 'red',
         children: createRawSnippet(() => ({
-          render: () => 'Red Color Item',
+          render: () => '<span>Red Color Item</span>',
         })),
       },
     });
@@ -64,7 +64,7 @@ describe('DropdownItem', () => {
     render(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
-          render: () => 'Item',
+          render: () => '<span>Item</span>',
         })),
       },
     });
@@ -78,7 +78,7 @@ describe('DropdownItem', () => {
       props: {
         onclick: () => {},
         children: createRawSnippet(() => ({
-          render: () => 'Item',
+          render: () => '<span>Item</span>',
         })),
       },
     });

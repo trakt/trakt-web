@@ -13,7 +13,7 @@ describe('DropdownList', () => {
       `,
     })),
     children: createRawSnippet(() => ({
-      render: () => 'Click Here',
+      render: () => '<span>Click Here<span>',
     })),
     label: 'click here',
   };
