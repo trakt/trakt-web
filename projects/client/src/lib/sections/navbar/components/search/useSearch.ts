@@ -51,18 +51,17 @@ export function useSearch() {
       } as SearchResponse))
       .catch((error) => {
         if (error instanceof AbortError) {
-          return new Promise<SearchResponse>((resolve) =>
-            resolve({ ...get(results), reason: 'cancelled' })
-          );
+          return Promise.resolve<SearchResponse>({
+            ...get(results),
+            reason: 'cancelled',
+          });
         }
 
         if (error instanceof CancelledError) {
-          return new Promise<SearchResponse>((resolve) =>
-            resolve({
-              items: [],
-              reason: 'cancelled',
-            })
-          );
+          return Promise.resolve<SearchResponse>({
+            items: [],
+            reason: 'cancelled',
+          });
         }
 
         return Promise.reject(error);
