@@ -1,6 +1,5 @@
 export function debounce<T>(func: (...args: T[]) => void, wait: number) {
-  // deno-lint-ignore no-explicit-any
-  let timeout: any;
+  let timeout: NodeJS.Timeout | number;
 
   return function executedFunction(...args: T[]) {
     const later = () => {
