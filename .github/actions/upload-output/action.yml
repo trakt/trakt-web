@@ -17,13 +17,19 @@ runs:
       with:
         name: ${{ inputs.buildArtifact }}
         path: projects/client/.svelte-kit/output
+        if-no-files-found: error
+        retention-days: 1
 
     - uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.cloudflareArtifact }}
         path: projects/client/.svelte-kit/cloudflare
+        if-no-files-found: error
+        retention-days: 1
 
     - uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.wranglerArtifact }}
         path: projects/client/wrangler.toml
+        if-no-files-found: error
+        retention-days: 1
