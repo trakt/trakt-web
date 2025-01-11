@@ -1,3 +1,4 @@
+import { NOOP_FN } from '$lib/utils/constants';
 import type { Writable } from 'svelte/store';
 import { GlobalEventBus } from '../../utils/events/GlobalEventBus';
 
@@ -26,7 +27,7 @@ export function lineClamp(node: HTMLElement, {
     ? GlobalEventBus
       .getInstance()
       .register('resize', computeClamped)
-    : () => {};
+    : NOOP_FN;
 
   computeClamped();
 

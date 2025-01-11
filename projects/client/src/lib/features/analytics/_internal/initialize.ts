@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { browser } from '$app/environment';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { getAnalytics, logEvent, setUserId } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import type { AnalyticsEngine } from './AnalyticsEngine.ts';
@@ -22,8 +23,8 @@ const firebaseConfig = (() => {
 })();
 
 const NOOP_ENGINE: AnalyticsEngine = {
-  record: () => {},
-  setUserId: () => {},
+  record: NOOP_FN,
+  setUserId: NOOP_FN,
 };
 
 // Initialize Firebase

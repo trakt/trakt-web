@@ -43,3 +43,7 @@ export const DEFAULT_SHARE_COVER = assertDefined(
   ]).at(0),
   'Default share cover is required',
 );
+
+export const NOOP_FN = () => {
+  // noop
+};
