@@ -10,14 +10,14 @@
     const isNavigationToAnotherPage =
       ["link", "goto"].includes(nav.type) && nav.willUnload === false;
 
-    isNavigationToAnotherPage && event.emit("snapshot", void 0);
+    isNavigationToAnotherPage && event.emit("snapshot", undefined);
   });
 
   afterNavigate((nav) => {
     const isHistoryNavigation =
       nav.type === "popstate" && nav.willUnload === false;
 
-    isHistoryNavigation && event.emit("restore", void 0);
+    isHistoryNavigation && event.emit("restore", undefined);
   });
 </script>
 
