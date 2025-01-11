@@ -23,7 +23,7 @@ export function mapResponseToTrendingShows({
   return {
     watchers,
     episode: {
-      count: show.aired_episodes!,
+      count: show.aired_episodes ?? NaN,
     },
     ...mapShowResponseToShowSummary(show),
   };

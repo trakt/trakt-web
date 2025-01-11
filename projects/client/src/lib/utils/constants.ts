@@ -1,5 +1,6 @@
 import { assets } from '$app/paths';
 import { shuffle } from '$lib/utils/array/shuffle.ts';
+import { assertDefined } from './assert/assertDefined';
 
 /**
  * This cover is the Alien Isolation cover.
@@ -24,23 +25,21 @@ export const DEFAULT_TRAILER = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU';
 export const MAX_DATE = new Date('9999-12-31T23:59:59.999Z');
 export const MIN_DATE = new Date('0000-01-01T00:00:00.000Z');
 
-export const DEFAULT_SHARE_SHOW_COVER = shuffle([
-  `${assets}/trakt_share_show_1.webp`,
-  `${assets}/trakt_share_show_2.webp`,
-  `${assets}/trakt_share_show_3.webp`,
-  `${assets}/trakt_share_show_4.webp`,
-  `${assets}/trakt_share_show_5.webp`,
-]).at(0)!;
+const generateShareCover = (type: 'show' | 'movie') =>
+  assertDefined(
+    shuffle(
+      [1, 2, 3, 4, 5].map((n) => `${assets}/trakt_share_${type}_${n}.webp`),
+    ).at(0),
+    `${type} share cover is required`,
+  );
 
-export const DEFAULT_SHARE_MOVIE_COVER = shuffle([
-  `${assets}/trakt_share_movie_1.webp`,
-  `${assets}/trakt_share_movie_2.webp`,
-  `${assets}/trakt_share_movie_3.webp`,
-  `${assets}/trakt_share_movie_4.webp`,
-  `${assets}/trakt_share_movie_5.webp`,
-]).at(0)!;
+export const DEFAULT_SHARE_SHOW_COVER = generateShareCover('show');
+export const DEFAULT_SHARE_MOVIE_COVER = generateShareCover('movie');
 
-export const DEFAULT_SHARE_COVER = shuffle([
-  DEFAULT_SHARE_SHOW_COVER,
-  DEFAULT_SHARE_MOVIE_COVER,
-]).at(0)!;
+export const DEFAULT_SHARE_COVER = assertDefined(
+  shuffle([
+    DEFAULT_SHARE_SHOW_COVER,
+    DEFAULT_SHARE_MOVIE_COVER,
+  ]).at(0),
+  'Default share cover is required',
+);

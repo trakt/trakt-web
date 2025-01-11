@@ -15,8 +15,8 @@ export function mapResponseToShowProgress(
 ): EpisodeProgressEntry {
   const episode = item.next_episode;
 
-  const posterCandidate = episode.images!.screenshot.at(1) ??
-    episode.images!.screenshot.at(0);
+  const posterCandidate = episode.images?.screenshot.at(1) ??
+    episode.images?.screenshot.at(0);
 
   return {
     id: episode.ids.trakt,

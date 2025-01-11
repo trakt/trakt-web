@@ -16,7 +16,7 @@ export function mapResponseToPopularShow(
 ): PopularShow {
   return {
     episode: {
-      count: show.aired_episodes!,
+      count: show.aired_episodes ?? NaN,
     },
     ...mapShowResponseToShowSummary(show),
   };

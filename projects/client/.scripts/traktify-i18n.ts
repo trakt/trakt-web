@@ -1,12 +1,16 @@
 import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
 
 import { availableLocales } from '$lib/features/i18n/index.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { loadLocale, TranslationMap } from './_internal/loadLocale.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
 const genAi = new GoogleGenerativeAI(
-  Deno.env.get('GEMINI_API_KEY')!,
+  assertDefined(
+    Deno.env.get('GEMINI_API_KEY'),
+    'GEMINI_API_KEY environment variable must be set',
+  ),
 );
 
 const model = genAi.getGenerativeModel({

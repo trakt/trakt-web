@@ -1,3 +1,5 @@
+import { assertDefined } from '../assert/assertDefined';
+
 type EventHandler<T extends Event> = (event: T) => void;
 
 class GlobalEventBus {
@@ -24,7 +26,12 @@ class GlobalEventBus {
       globalThis.addEventListener(eventType, this._dispatch.bind(this));
     }
 
-    this.handlers.get(eventType)!.add(handler as EventHandler<Event>);
+    const ref = assertDefined(
+      this.handlers.get(eventType),
+      'Handler should be defined',
+    );
+
+    ref.add(handler as EventHandler<Event>);
 
     return () => this._unregister(eventType, handler);
   }
@@ -41,7 +48,10 @@ class GlobalEventBus {
     handler: EventHandler<WindowEventMap[Type]>,
   ): void {
     if (this.handlers.has(eventType)) {
-      const handlers = this.handlers.get(eventType)!;
+      const handlers = assertDefined(
+        this.handlers.get(eventType),
+        'Handler should be defined',
+      );
       handlers.delete(handler as EventHandler<Event>);
 
       if (handlers.size === 0) {

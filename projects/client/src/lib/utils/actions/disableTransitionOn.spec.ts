@@ -31,7 +31,7 @@ describe('disableTransitionOn', () => {
   });
 
   it('should clean up event listeners on destroy', () => {
-    action.destroy!();
+    action.destroy?.();
 
     const event = new Event('pointerdown', {
       bubbles: true,

@@ -15,7 +15,7 @@ export function mapResponseToRelatedShow(
 ): RelatedShow {
   return {
     episode: {
-      count: show.aired_episodes!,
+      count: show.aired_episodes ?? NaN,
     },
     ...mapShowResponseToShowSummary(show),
   };

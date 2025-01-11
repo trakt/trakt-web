@@ -1,4 +1,5 @@
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ parent, params, fetch }) => {
@@ -6,7 +7,10 @@ export const load: PageLoad = async ({ parent, params, fetch }) => {
 
   if (isBot) {
     await queryClient.prefetchQuery(
-      movieSummaryQuery({ slug: params.slug!, fetch }),
+      movieSummaryQuery({
+        slug: assertDefined(params.slug, 'Slug is required'),
+        fetch,
+      }),
     );
   }
 };

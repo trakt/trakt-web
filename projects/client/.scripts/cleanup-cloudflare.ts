@@ -108,7 +108,8 @@ async function cleanupDeployments(
     const sorted = deployments
       .filter((deployment) => deployment.created_on != null)
       .sort((a, b) =>
-        new Date(b.created_on!).getTime() - new Date(a.created_on!).getTime()
+        new Date(b.created_on ?? 0).getTime() -
+        new Date(a.created_on ?? 0).getTime()
       );
 
     const deletable = sorted.slice(DEPLOYMENTS_TO_KEEP);
@@ -154,10 +155,10 @@ if (import.meta.main) {
   const apiToken = Deno.env.get('CLOUDFLARE_API_TOKEN');
   if (apiToken == null) {
     console.error([
-      "The CLOUDFLARE_API_TOKEN environment variable,",
-      "a key to the Cloudflare kingdom, is missing.",
+      'The CLOUDFLARE_API_TOKEN environment variable,',
+      'a key to the Cloudflare kingdom, is missing.',
       "Without it, we're locked out, like a drunken",
-      "detective trying to break into a high-security server room.",
+      'detective trying to break into a high-security server room.',
     ]);
 
     Deno.exit(1);
@@ -166,10 +167,10 @@ if (import.meta.main) {
   const accountId = Deno.env.get('CLOUDFLARE_ACCOUNT_ID');
   if (accountId == null) {
     console.error([
-      "The CLOUDFLARE_ACCOUNT_ID environment variable,",
-      "a beacon in the Cloudflare nebula, is missing.",
+      'The CLOUDFLARE_ACCOUNT_ID environment variable,',
+      'a beacon in the Cloudflare nebula, is missing.',
       "Without it, we're adrift in the digital cosmos,",
-      "our deployment dreams lost in the void.",
+      'our deployment dreams lost in the void.',
     ].join(' '));
     Deno.exit(1);
   }

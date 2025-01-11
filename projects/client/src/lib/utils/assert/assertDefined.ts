@@ -1,5 +1,5 @@
-export function assertDefined<T>(value: T | undefined, message?: string): T {
-  if (value === undefined) {
+export function assertDefined<T>(value: T | Nil, message?: string): T {
+  if (value == null) {
     throw new Error(message);
   }
 

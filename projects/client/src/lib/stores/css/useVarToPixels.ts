@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { assertDefined } from '$lib/utils/assert/assertDefined';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onDestroy } from 'svelte';
 import { writable } from 'svelte/store';
@@ -9,7 +10,9 @@ const cache = {
 };
 
 function setup() {
-  if (cache.isSetup) return cache.div!;
+  if (cache.isSetup) {
+    return assertDefined(cache.div, 'Pixel measurement div not defined');
+  }
 
   cache.isSetup = true;
   cache.div = document.createElement('div');
@@ -22,7 +25,7 @@ function setup() {
   div.style.visibility = 'hidden';
   div.style.pointerEvents = 'none';
 
-  return cache.div!;
+  return div;
 }
 
 function calculate(value: string) {

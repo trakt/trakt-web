@@ -1,4 +1,5 @@
 import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummaryQuery';
+import { assertDefined } from '$lib/utils/assert/assertDefined';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ parent, params, fetch }) => {
@@ -7,9 +8,9 @@ export const load: PageLoad = async ({ parent, params, fetch }) => {
   if (isBot) {
     await queryClient.prefetchQuery(
       episodeSummaryQuery({
-        slug: params.slug!,
-        episode: parseInt(params.episode!),
-        season: parseInt(params.season!),
+        slug: assertDefined(params.slug, 'Slug is required'),
+        episode: parseInt(assertDefined(params.episode, 'Episode is required')),
+        season: parseInt(assertDefined(params.season, 'Season is required')),
         fetch,
       }),
     );

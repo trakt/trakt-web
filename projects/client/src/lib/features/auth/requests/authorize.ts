@@ -1,4 +1,5 @@
 import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DeviceUnauthorizedError, verifyAuth } from './verifyAuth.ts';
 
 const UNAUTHORIZED_PAYLOAD: SerializedAuthResponse = {
@@ -42,8 +43,14 @@ export const authorize = async ({
 
   return {
     token: {
-      access: response.token.access!,
-      refresh: response.token.refresh!,
+      access: assertDefined(
+        response.token.access,
+        'Access token should be defined',
+      ),
+      refresh: assertDefined(
+        response.token.refresh,
+        'Refresh token should be defined',
+      ),
     },
     isAuthorized: true,
     expiresAt: response.expiresAt,

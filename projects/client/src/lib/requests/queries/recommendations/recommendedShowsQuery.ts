@@ -15,7 +15,7 @@ function mapResponseToRecommendedShow(
   return {
     ...mapShowResponseToShowSummary(show),
     episode: {
-      count: show.aired_episodes!,
+      count: show.aired_episodes ?? NaN,
     },
   };
 }

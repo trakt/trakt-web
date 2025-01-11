@@ -7,9 +7,8 @@ describe('assertDefined', () => {
     expect(assertDefined(value)).toBe(value);
   });
 
-  it('should return the value if defined as null', () => {
-    const value = null;
-    expect(assertDefined(value)).toBe(value);
+  it('should throw error if value is null', () => {
+    expect(() => assertDefined(null)).toThrow();
   });
 
   it('should throw error if value is undefined', () => {

@@ -40,7 +40,7 @@ export function mapMovieResponseToMovieSummary(
     id: movie.ids.trakt,
     slug: movie.ids.slug,
     title: movie.title,
-    runtime: movie.runtime!,
+    runtime: movie.runtime ?? NaN,
     year: movie.year,
     tagline: movie.tagline ?? '',
     country: movie.country,

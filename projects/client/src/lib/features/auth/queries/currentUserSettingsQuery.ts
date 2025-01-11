@@ -61,7 +61,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     about: user.about,
     location: user.location,
     avatar: {
-      url: user.images!.avatar.full,
+      url: user.images.avatar.full,
     },
     cover: {
       url: prependHttps(

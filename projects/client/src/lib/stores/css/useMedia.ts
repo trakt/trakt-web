@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { assertDefined } from '$lib/utils/assert/assertDefined';
 import {
   breakpointDesktop,
   breakpointMobile,
@@ -56,7 +57,10 @@ class MediaQueryManager {
       });
     }
 
-    const entry = this.queries.get(query)!;
+    const entry = assertDefined(
+      this.queries.get(query),
+      'Media query entry should be defined',
+    );
     entry.callbacks.add(callback);
 
     callback();

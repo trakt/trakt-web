@@ -34,9 +34,9 @@ export function mapShowResponseToShowSummary(
     id: show.ids.trakt,
     slug: show.ids.slug,
     title: show.title,
-    runtime: show.runtime!,
+    runtime: show.runtime ?? NaN,
     year: show.year,
-    tagline: show.tagline!,
+    tagline: show.tagline ?? '',
     country: show.country,
     languages: show.languages,
     poster: {
