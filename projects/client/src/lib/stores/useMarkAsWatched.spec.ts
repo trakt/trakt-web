@@ -4,7 +4,6 @@ import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappe
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock';
 import { renderStore } from '$test/beds/store/renderStore';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
-import { waitFor } from '@testing-library/svelte';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { useInvalidator } from './useInvalidator';
@@ -44,7 +43,7 @@ describe('useMarkAsWatched', () => {
       );
 
       markAsWatched();
-      waitFor(() => expect(get(isMarkingAsWatched)).toBe(true));
+      expect(await waitForEmission(isMarkingAsWatched, 2)).toBe(true);
     });
 
     it('should NOT be marking as watched after add request is completed', async () => {
@@ -56,13 +55,13 @@ describe('useMarkAsWatched', () => {
       expect(get(isMarkingAsWatched)).toBe(false);
     });
 
-    it('should mark as watched when removing', async () => {
+    it('should be marking as watched when removing', async () => {
       const { isMarkingAsWatched, removeWatched } = await renderStore(() =>
         useMarkAsWatched(props)
       );
 
       removeWatched();
-      waitFor(() => expect(get(isMarkingAsWatched)).toBe(true));
+      expect(get(isMarkingAsWatched)).toBe(true);
     });
 
     it('should NOT be marking as watched after remove request is completed', async () => {

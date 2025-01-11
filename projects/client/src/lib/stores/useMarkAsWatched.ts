@@ -102,6 +102,7 @@ export function useMarkAsWatched(
         watchedAtDate,
       }),
     });
+
     isMarkingAsWatched.set(false);
 
     await invalidate(InvalidateAction.MarkAsWatched(type));

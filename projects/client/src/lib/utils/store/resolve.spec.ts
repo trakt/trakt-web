@@ -27,4 +27,10 @@ describe('resolve', () => {
     expect(await resolve(objectStore)).toEqual({ key: 'value' });
     expect(await resolve(arrayStore)).toEqual([1, 2, 3]);
   });
+
+  it('should resolve only when the value is not defined', async () => {
+    const store = writable(undefined);
+
+    await expect(resolve(store)).rejects.toThrow();
+  });
 });

@@ -14,7 +14,7 @@ export function waitForEmission<T>(
       lastValue = value;
 
       if (emissionCount === emission) {
-        unsubscribe();
+        queueMicrotask(() => unsubscribe());
         resolve(value);
       }
 
