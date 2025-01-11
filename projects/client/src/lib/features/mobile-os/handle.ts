@@ -13,7 +13,7 @@ function extractMobileOS(agent: string): 'android' | 'ios' | 'unknown' {
   return 'unknown';
 }
 
-export const handle: Handle = async (
+export const handle: Handle = (
   { event, resolve },
 ) => {
   const agent = event.request.headers.get('user-agent');

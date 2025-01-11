@@ -1,7 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 
 const TIMESTAMP_PLACEHOLDER = '%cache.timestamp%';
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle: Handle = ({ event, resolve }) => {
   return resolve(event, {
     transformPageChunk({ html, done }) {
       if (!done) return html;

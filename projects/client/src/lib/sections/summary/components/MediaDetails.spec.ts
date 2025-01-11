@@ -14,7 +14,7 @@ describe('MediaDetails', () => {
     crew: MovieHereticPeopleMappedMock,
   };
 
-  it('should display the media details sections', async () => {
+  it('should display the media details sections', () => {
     render(
       MediaDetails,
       {
@@ -43,7 +43,7 @@ describe('MediaDetails', () => {
     expect(genreLabel).toBeInTheDocument();
   });
 
-  it('should distinguish upcoming items', async () => {
+  it('should distinguish upcoming items', () => {
     const nextYear = new Date();
     nextYear.setFullYear(nextYear.getFullYear() + 1);
 
@@ -64,7 +64,7 @@ describe('MediaDetails', () => {
     expect(premiereLabel).toBeInTheDocument();
   });
 
-  it('should show the status if there is no known year for an item', async () => {
+  it('should show the status if there is no known year for an item', () => {
     render(
       MediaDetails,
       {
@@ -86,7 +86,7 @@ describe('MediaDetails', () => {
     expect(premieredLabel).not.toBeInTheDocument();
   });
 
-  it('should hide undefined values', async () => {
+  it('should hide undefined values', () => {
     render(
       MediaDetails,
       {
