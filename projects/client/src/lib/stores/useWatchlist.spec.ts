@@ -4,7 +4,6 @@ import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappe
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock';
 import { renderStore } from '$test/beds/store/renderStore';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
-import { waitFor } from '@testing-library/svelte';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { useInvalidator } from './useInvalidator';
@@ -38,7 +37,7 @@ describe('useWatchlist', () => {
       );
 
       addToWatchlist();
-      waitFor(() => expect(get(isWatchlistUpdating)).toBe(true));
+      expect(get(isWatchlistUpdating)).toBe(true);
     });
 
     it('should NOT be updating watchlist after add request is completed', async () => {
@@ -56,7 +55,7 @@ describe('useWatchlist', () => {
       );
 
       removeFromWatchlist();
-      waitFor(() => expect(get(isWatchlistUpdating)).toBe(true));
+      expect(get(isWatchlistUpdating)).toBe(true);
     });
 
     it('should NOT be updating watchlist after remove request is completed', async () => {
