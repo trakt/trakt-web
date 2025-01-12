@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
@@ -60,7 +60,7 @@
   <title>{displayTitle}</title>
   <meta property="og:site_name" content={websiteName} />
   <meta property="og:type" content={ogType} />
-  <meta property="og:url" content={$page.url.toString()} />
+  <meta property="og:url" content={page.url.toString()} />
   <meta property="og:image" content={image} />
   <meta property="og:title" content={title} />
   <meta property="og:locale" content="en_US" />

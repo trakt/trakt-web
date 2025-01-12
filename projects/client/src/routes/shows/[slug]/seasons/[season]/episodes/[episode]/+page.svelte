@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
@@ -8,9 +8,9 @@
   const { show, episode, seasons, ratings, stats, watchers, intl, isLoading } =
     $derived(
       useEpisode({
-        slug: $page.params.slug,
-        season: parseInt($page.params.season),
-        episode: parseInt($page.params.episode),
+        slug: page.params.slug,
+        season: parseInt(page.params.season),
+        episode: parseInt(page.params.episode),
       }),
     );
 </script>

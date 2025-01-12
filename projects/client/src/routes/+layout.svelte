@@ -1,7 +1,7 @@
 <script lang="ts">
   import "../style";
 
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import CoverImage from "$lib/components/background/CoverImage.svelte";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
   import ListScrollHistoryProvider from "$lib/components/section-list/ListScrollHistoryProvider.svelte";
@@ -85,7 +85,7 @@
         </CoverProvider>
       </LocaleProvider>
 
-      {#key $page.url.pathname}
+      {#key page.url.pathname}
         <PageView />
       {/key}
     </AnalyticsProvider>

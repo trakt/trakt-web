@@ -1,5 +1,5 @@
 <script>
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
@@ -51,7 +51,7 @@
 
       <div class="action-link-variants">
         <ActionButton
-          href={$page.url.pathname}
+          href={page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
           color="purple"
@@ -60,7 +60,7 @@
         </ActionButton>
 
         <ActionButton
-          href={$page.url.pathname}
+          href={page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
           color="blue"
@@ -69,7 +69,7 @@
         </ActionButton>
 
         <ActionButton
-          href={$page.url.pathname}
+          href={page.url.pathname}
           target="_blank"
           label="This is the primary textured link in a disabled"
           color="red"
@@ -81,10 +81,10 @@
 
     <section>
       <h2>Active</h2>
-      <Link href={$page.url.pathname} target="_blank">Trakt.tv</Link>
+      <Link href={page.url.pathname} target="_blank">Trakt.tv</Link>
 
       <Button
-        href={$page.url.pathname}
+        href={page.url.pathname}
         target="_blank"
         label="This is the primary textured link"
         style="textured"
@@ -97,7 +97,7 @@
       </Button>
 
       <Button
-        href={$page.url.pathname}
+        href={page.url.pathname}
         target="_blank"
         label="This is the primary textured link"
         style="flat"
@@ -107,7 +107,7 @@
       </Button>
 
       <Button
-        href={$page.url.pathname}
+        href={page.url.pathname}
         target="_blank"
         label="This is the primary textured link in a disabled"
         style="ghost"
@@ -118,7 +118,7 @@
 
       <div class="action-link-variants">
         <ActionButton
-          href={$page.url.pathname}
+          href={page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
           color="purple"
@@ -127,7 +127,7 @@
         </ActionButton>
 
         <ActionButton
-          href={$page.url.pathname}
+          href={page.url.pathname}
           target="_blank"
           label="This is the primary textured link"
           color="blue"
@@ -136,7 +136,7 @@
         </ActionButton>
 
         <ActionButton
-          href={$page.url.pathname}
+          href={page.url.pathname}
           target="_blank"
           label="This is the primary textured link in a disabled"
           color="red"

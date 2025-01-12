@@ -1,6 +1,6 @@
 <script lang="ts">
   import { dev } from "$app/environment";
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
@@ -15,9 +15,9 @@
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import DownloadIcon from "./DownloadIcon.svelte";
 
-  const total = $derived(parseInt($page.url.searchParams.get("limit") ?? "70"));
+  const total = $derived(parseInt(page.url.searchParams.get("limit") ?? "70"));
   const type = $derived(
-    $page.url.searchParams.get("type") === "show" ? "show" : "movie",
+    page.url.searchParams.get("type") === "show" ? "show" : "movie",
   );
   const limit = $derived(Math.floor(total / 2));
 

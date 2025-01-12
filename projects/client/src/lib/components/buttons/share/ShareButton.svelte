@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
 
@@ -9,7 +9,7 @@
   const data = $derived({
     title,
     text: m.where_to_watch_on_trakt({ title }),
-    url: $page.url.toString(),
+    url: page.url.toString(),
   });
 
   const isShareable = $derived(

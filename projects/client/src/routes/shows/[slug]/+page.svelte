@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
@@ -14,7 +14,7 @@
     crew,
     seasons,
     isLoading,
-  } = $derived(useShow($page.params.slug));
+  } = $derived(useShow(page.params.slug));
 </script>
 
 <TraktPage

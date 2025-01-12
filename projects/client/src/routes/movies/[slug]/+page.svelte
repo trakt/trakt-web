@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MovieSummary from "$lib/sections/summary/MovieSummary.svelte";
   import { useMovie } from "./useMovie";
 
   const { movie, ratings, stats, intl, watchers, studios, crew, isLoading } =
-    $derived(useMovie($page.params.slug));
+    $derived(useMovie(page.params.slug));
 </script>
 
 <TraktPage
