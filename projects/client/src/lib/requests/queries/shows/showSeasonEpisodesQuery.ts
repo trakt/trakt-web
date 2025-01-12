@@ -12,7 +12,7 @@ function showSeasonEpisodesRequest(
     .episodes({
       params: {
         id: slug,
-        season: season,
+        season,
       },
       query: {
         extended: 'full,cloud9',
