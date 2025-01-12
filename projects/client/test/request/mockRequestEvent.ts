@@ -48,11 +48,13 @@ type MockRequestEvent<
 
 type RequestEventProps = {
   url: string;
+  request?: Request;
   cookieHandler?: (key: string) => string | Nil;
 };
 
 export function mockRequestEvent({
   url,
+  request = new Request('http://localhost'),
   cookieHandler,
 }: RequestEventProps): MockRequestEvent {
   const cookies = new InMemoryCookies();
@@ -73,8 +75,6 @@ export function mockRequestEvent({
       ),
     },
     locals: {},
-    request: {
-      headers: new Headers(),
-    },
+    request,
   } as unknown as MockRequestEvent;
 }
