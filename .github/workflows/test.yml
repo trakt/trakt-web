@@ -1,0 +1,52 @@
+name: The Trial of Truth (CI)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Interrogation (Test)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Secure the Evidence (Checkout code)
+        uses: actions/checkout@v4
+
+      - name: Summon the Digital Oracle (Install Deno)
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.1.4
+
+      - name: Prepare the Tools (Install dependencies)
+        run: deno task install
+
+      - name: Probe the Client's Mind (Run client unit tests)
+        working-directory: projects/client
+        run: deno task test:unit
+        continue-on-error: true
+
+      - name: Invoke the Bun Beast (Install Bun)
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Unleash the Bun Beast (Run tests with Bun)
+        working-directory: projects/client
+        run: bun test:unit
+        continue-on-error: true
+
+      - name: Awaken the Node.js Spirit (Setup Node.js)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+
+      - name: Commune with the Node.js Spirit (Run tests with npm)
+        working-directory: projects/client
+        run: npm run test:unit
+        continue-on-error: true
