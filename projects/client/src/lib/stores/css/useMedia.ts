@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { assertDefined } from '$lib/utils/assert/assertDefined';
+import { NOOP_FN } from '$lib/utils/constants';
 import {
   breakpointDesktop,
   breakpointMobile,
@@ -31,7 +32,9 @@ class MediaQueryManager {
     callbacks: Set<MediaCallback>;
   }> = new Map();
 
-  private constructor() {}
+  private constructor() {
+    // constructor is private to prevent instantiation
+  }
 
   static getInstance(): MediaQueryManager {
     if (!this.instance) {
@@ -42,7 +45,7 @@ class MediaQueryManager {
 
   subscribe(query: string, callback: MediaCallback): () => void {
     if (!browser) {
-      return () => {};
+      return NOOP_FN;
     }
 
     if (!this.queries.has(query)) {
