@@ -65,7 +65,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         {
           httpOnly: true,
           secure: true,
-          maxAge: result.expiresAt ?? 0,
+          expires: new Date(result.expiresAt ?? 0),
           path: '/',
         },
       );
@@ -93,7 +93,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       {
         httpOnly: true,
         secure: true,
-        maxAge: legacyAuthCookie.expiresAt ?? 0,
+        expires: new Date(legacyAuthCookie.expiresAt ?? 0),
         path: '/',
       },
     );
