@@ -5,8 +5,8 @@ const SCROLL_HISTORY_CONTEXT_KEY = Symbol('scroll-history');
 const SCROLL_HISTORY_PREFIX = 'scroll-history-';
 type EventType = 'restore' | 'snapshot';
 type EventTypeData = {
-  ['restore']: void;
-  ['snapshot']: void;
+  ['restore']: undefined;
+  ['snapshot']: undefined;
 };
 
 type EventCallback<T extends EventType> = (data: EventTypeData[T]) => void;
