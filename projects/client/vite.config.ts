@@ -70,6 +70,7 @@ export default defineConfig(({ mode }) => ({
       provider: 'istanbul',
       reporter: ['clover', 'lcov'],
     },
+    reporters: process.env.GITHUB_ACTIONS ? ['dot', 'github-actions'] : ['dot'],
   },
 
   resolve: process.env.VITEST
