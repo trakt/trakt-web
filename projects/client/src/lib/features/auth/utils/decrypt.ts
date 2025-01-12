@@ -19,7 +19,7 @@ export async function decrypt<T>(
         iv: new Uint8Array(12),
       },
       key,
-      encryptedBuffer.buffer,
+      encryptedBuffer,
     );
 
     const jsonString = new TextDecoder().decode(decryptedBuffer);
