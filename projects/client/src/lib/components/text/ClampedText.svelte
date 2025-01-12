@@ -16,9 +16,12 @@
   const isExpanded = $derived($lines === 1337);
 
   function appendClassList(node: HTMLElement, classList: string) {
-    classList.split(" ").forEach((className) => {
-      node.classList.add(className);
-    });
+    classList
+      .split(" ")
+      .filter(Boolean)
+      .forEach((className) => {
+        node.classList.add(className);
+      });
   }
 </script>
 
