@@ -76,7 +76,7 @@ class MediaQueryManager {
     };
   }
 
-  matches(query: string): boolean {
+  static matches(query: string): boolean {
     if (!browser) return false;
     return globalThis.matchMedia(query).matches;
   }
@@ -87,12 +87,12 @@ export function useMedia(query: string) {
   const manager = MediaQueryManager.getInstance();
 
   const unsubscribe = manager.subscribe(query, () => {
-    value.set(manager.matches(query));
+    value.set(MediaQueryManager.matches(query));
   });
 
   onMount(() => {
     return manager.subscribe(query, () => {
-      value.set(manager.matches(query));
+      value.set(MediaQueryManager.matches(query));
     });
   });
 
