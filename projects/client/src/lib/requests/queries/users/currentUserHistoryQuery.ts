@@ -1,6 +1,6 @@
 import type { WatchedMoviesResponse, WatchedShowsResponse } from '$lib/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { api, type ApiParams } from '../../../requests/_internal/api.ts';
+import { api, type ApiParams } from '../../_internal/api.ts';
 
 export type MediaPlayHistory = {
   watchedAt: Date;

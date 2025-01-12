@@ -1,4 +1,4 @@
-import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
+import type { UserSettings } from '$lib/requests/queries/users/currentUserSettingsQuery.ts';
 
 export const ExtendedUserMappedMock: UserSettings = {
   'id': '938a591b1337dcca76a513377bb25c6646057284',
