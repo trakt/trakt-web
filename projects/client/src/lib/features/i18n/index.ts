@@ -45,6 +45,7 @@ export type AvailableRegion = ExtractRegion<AvailableLocale>;
 
 export const isAvailableLocale = runtime.isAvailableLanguageTag;
 export const availableLocales = runtime.availableLanguageTags;
+export const defaultLocale = runtime.sourceLanguageTag;
 export const setLocale = (locale: string): AvailableLocale => {
   const sanitizedLocale = availableLocales.includes(locale as AvailableLocale)
     ? locale as AvailableLocale
@@ -54,5 +55,4 @@ export const setLocale = (locale: string): AvailableLocale => {
   return sanitizedLocale;
 };
 export const getTextDirection = (_locale: AvailableLocale) => 'ltr';
-export const defaultLocale = runtime.sourceLanguageTag;
 export const onLanguageChange = runtime.onSetLanguageTag;
