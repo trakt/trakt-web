@@ -5,7 +5,7 @@ export function writeJsonFile(
 ): Promise<void> {
   return Deno.writeTextFile(
     filePath,
-    JSON.stringify(data, null, 2) + '\n',
+    `${JSON.stringify(data, null, 2)}\n`,
     options,
   );
 }
