@@ -1,33 +1,24 @@
 import { type ShowResponse } from '$lib/api.ts';
-import { mediumUrl } from '$lib/requests/_internal/mediumUrl.ts';
-import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import {
   DEFAULT_TRAILER,
   MAX_DATE,
-  MEDIA_COVER_LARGE_PLACEHOLDER,
   MEDIA_COVER_THUMB_PLACEHOLDER,
-  MEDIA_POSTER_PLACEHOLDER,
 } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { mapCover } from './mapCover.ts';
+import { mapPoster } from './mapPoster.ts';
 
 export function mapShowResponseToShowSummary(
   show: ShowResponse,
 ): ShowSummary {
+  const poster = mapPoster(show.images);
+  const cover = mapCover(show.images);
+
   const thumbCandidate = findDefined(
     show.images?.thumb.at(1),
     show.images?.thumb.at(0),
-  );
-
-  const coverCandidate = findDefined(
-    show.images?.fanart.at(1),
-    show.images?.fanart.at(0),
-  );
-
-  const posterCandidate = findDefined(
-    show.images?.poster.at(1),
-    show.images?.poster.at(0),
   );
 
   return {
@@ -39,35 +30,13 @@ export function mapShowResponseToShowSummary(
     tagline: show.tagline ?? '',
     country: show.country,
     languages: show.languages,
-    poster: {
-      url: {
-        medium: prependHttps(
-          mediumUrl(posterCandidate),
-          MEDIA_POSTER_PLACEHOLDER,
-        ),
-        thumb: prependHttps(
-          thumbUrl(posterCandidate),
-          MEDIA_POSTER_PLACEHOLDER,
-        ),
-      },
-    },
-    cover: {
-      url: {
-        medium: prependHttps(
-          mediumUrl(coverCandidate),
-          MEDIA_COVER_LARGE_PLACEHOLDER,
-        ),
-        thumb: prependHttps(
-          thumbUrl(coverCandidate),
-          MEDIA_COVER_THUMB_PLACEHOLDER,
-        ),
-      },
-    },
+    poster,
+    cover,
     thumb: {
       url: prependHttps(
         findDefined(
           thumbCandidate,
-          thumbUrl(coverCandidate),
+          cover.url.thumb,
         ),
         MEDIA_COVER_THUMB_PLACEHOLDER,
       ),
