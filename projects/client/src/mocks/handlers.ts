@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
+import { AuthResponseMock } from './data/auth/AuthResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
 import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/response/MovieHereticLanguageResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from './data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
@@ -178,9 +179,16 @@ const sync = [
   ),
 ];
 
+const auth = [
+  http.post(`${TRAKT_TARGET_ENVIRONMENT}/oauth/token`, () => {
+    return HttpResponse.json(AuthResponseMock);
+  }),
+];
+
 export const handlers = [
   ...users,
   ...movies,
   ...shows,
   ...sync,
+  ...auth,
 ];
