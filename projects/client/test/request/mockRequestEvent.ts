@@ -26,8 +26,17 @@ class InMemoryCookies {
     this.store.delete(name);
   }
 
-  serialize(name: string, value: string): string {
-    return `${name}=${value}`;
+  serialize(
+    name: string,
+    value: string,
+    options?: Record<string, unknown>,
+  ): string {
+    const optionsStr = options
+      ? Object.entries(options)
+        .map(([key, val]) => `;${key}=${val}`)
+        .join('')
+      : '';
+    return `${name}=${value}${optionsStr}`;
   }
 }
 
@@ -70,9 +79,11 @@ export function mockRequestEvent({
         options: Record<string, unknown>,
       ) => cookies.set(name, value, options)),
       delete: vi.fn((name: string) => cookies.delete(name)),
-      serialize: vi.fn((name: string, value: string) =>
-        cookies.serialize(name, value)
-      ),
+      serialize: vi.fn((
+        name: string,
+        value: string,
+        options: Record<string, unknown>,
+      ) => cookies.serialize(name, value, options)),
     },
     locals: {},
     request,

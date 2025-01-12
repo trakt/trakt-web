@@ -17,7 +17,9 @@ describe('handle: auth', () => {
 
     expect(response).toBeInstanceOf(Response);
     expect(event.locals.auth).toBeNull();
-    expect(response.headers.get('Set-Cookie')).toBe('trakt-auth=');
+    expect(response.headers.get('Set-Cookie')).toBe(
+      'trakt-auth=;httpOnly=true;secure=true;maxAge=0;path=/',
+    );
   });
 
   it('should handle auth code exchange', async () => {

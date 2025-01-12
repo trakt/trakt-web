@@ -1,18 +1,6 @@
-import type { Handle, ResolveOptions } from '@sveltejs/kit';
+import { interceptHandleResolveOptions } from '$test/resolve/interceptHandleResolveOptions';
 import { describe, expect, it } from 'vitest';
 import { handle, TIMESTAMP_PLACEHOLDER } from './handle';
-
-function interceptHandleResolveOptions(handle: Handle) {
-  return new Promise<ResolveOptions>((resolve) => {
-    handle({
-      event: {} as any,
-      resolve: (_, opts: ResolveOptions) => {
-        resolve(opts);
-        return Promise.resolve(new Response());
-      },
-    });
-  });
-}
 
 describe('handle: cache-bust', () => {
   it('should replace timestamp placeholder with current timestamp', async () => {
