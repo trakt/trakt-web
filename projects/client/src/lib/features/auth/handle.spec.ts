@@ -7,7 +7,7 @@ import { key } from './environment';
 import { AUTH_COOKIE_NAME, handle } from './handle';
 import { decrypt } from './utils/decrypt';
 
-describe('handle', () => {
+describe('handle: auth', () => {
   it('should handle logout', async () => {
     const event = mockRequestEvent({
       url: `http://localhost${AuthEndpoint.Logout}`,
