@@ -1,5 +1,7 @@
 import { env } from '$env/dynamic/private';
 import { api } from '$lib/requests/_internal/api.ts';
+import type { AuthToken } from '../models/AuthToken';
+import { getGrantTypeAndCode } from './_internal/getGrantTypeAndCode';
 
 export type DeviceAuth = {
   token: {
@@ -12,13 +14,13 @@ export type DeviceAuth = {
 export class DeviceUnauthorizedError extends Error {}
 
 type VerifyAuthParams = {
-  code: string;
-  redirect_uri: string;
+  referrer: string;
+  token: AuthToken;
 };
 
 export async function verifyAuth({
-  code,
-  redirect_uri,
+  referrer: redirect_uri,
+  token,
 }: VerifyAuthParams): Promise<DeviceAuth> {
   const client_secret = env.TRAKT_CLIENT_SECRET ?? '';
   const client_id = env.TRAKT_CLIENT_ID ?? '';
@@ -29,11 +31,10 @@ export async function verifyAuth({
     .oauth
     .token({
       body: {
-        code,
         client_id,
         client_secret,
-        grant_type: 'authorization_code',
         redirect_uri,
+        ...getGrantTypeAndCode(token),
       },
     })
     .catch(() => {

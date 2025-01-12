@@ -1,3 +1,4 @@
+import { time } from '$lib/utils/timing/time.ts';
 import { prependHttpOrHttps } from '$lib/utils/url/prependHttpOrHttps.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { AuthEndpoint } from './AuthEndpoint.ts';
@@ -10,6 +11,7 @@ import { decrypt } from './utils/decrypt.ts';
 import { encrypt } from './utils/encrypt.ts';
 
 export const AUTH_COOKIE_NAME = 'trakt-auth';
+const REFRESH_THRESHOLD_WEEKS = 1;
 
 function getLegacyAuthCookie(event: RequestEvent) {
   try {
@@ -24,6 +26,11 @@ export const handle: Handle = async ({ event, resolve }) => {
   const setAuth = (auth: SerializedAuthResponse | Nil) => {
     event.locals.auth = auth;
   };
+
+  const getReferrer = () =>
+    event.request.headers.get('referer') ??
+      prependHttpOrHttps(event.request.headers.get('host')) ??
+      '';
 
   const isLogout = event.url.pathname.startsWith(AuthEndpoint.Logout);
 
@@ -45,11 +52,13 @@ export const handle: Handle = async ({ event, resolve }) => {
   const isExchange = code != null;
 
   if (isExchange) {
-    const referrer = event.request.headers.get('referer') ??
-      prependHttpOrHttps(event.request.headers.get('host')) ??
-      '';
-
-    const result = await authorize({ code, referrer });
+    const result = await authorize({
+      token: {
+        type: 'exchange',
+        code,
+      },
+      referrer: getReferrer(),
+    });
     const { isAuthorized } = result;
     setAuth(result);
 
@@ -101,13 +110,40 @@ export const handle: Handle = async ({ event, resolve }) => {
     return await resolve(event);
   }
 
-  /**
-   * TODO: refresh exchange flow here
-   * https://trakt.docs.apiary.io/#reference/authentication-oauth/get-token/exchange-refresh_token-for-access_token
-   */
   const encrypted = event.cookies.get(AUTH_COOKIE_NAME);
   const decrypted = await decrypt<SerializedAuthResponse>(key, encrypted);
   const isDecryptionFailed = decrypted == null && encrypted != null;
+
+  const weeksToExpiry = Math.floor(
+    (new Date(decrypted?.expiresAt ?? 0).getTime() - Date.now()) /
+      time.weeks(1),
+  );
+  const shouldRefresh = weeksToExpiry <= REFRESH_THRESHOLD_WEEKS;
+
+  if (shouldRefresh && decrypted?.token.refresh != null) {
+    const result = await authorize({
+      token: {
+        type: 'refresh',
+        refreshToken: decrypted.token.refresh,
+      },
+      referrer: getReferrer(),
+    });
+
+    setAuth(result);
+    event.cookies.set(
+      AUTH_COOKIE_NAME,
+      await encrypt(key, result),
+      {
+        httpOnly: true,
+        secure: true,
+        expires: new Date(result.expiresAt ?? 0),
+        path: '/',
+      },
+    );
+
+    return await resolve(event);
+  }
+
   setAuth(decrypted);
 
   if (isDecryptionFailed) {
