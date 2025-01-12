@@ -8,7 +8,7 @@ import { authorize } from './requests/authorize.ts';
 import { decrypt } from './utils/decrypt.ts';
 import { encrypt } from './utils/encrypt.ts';
 
-const AUTH_COOKIE_NAME = 'trakt-auth';
+export const AUTH_COOKIE_NAME = 'trakt-auth';
 
 function getLegacyAuthCookie(event: RequestEvent) {
   try {
