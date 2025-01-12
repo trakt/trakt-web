@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { useStableArray } from '../../lists/stores/useStableArray.ts';
+import { useStableArray } from './useStableArray.ts';
 
 const item1 = {
   show: {
