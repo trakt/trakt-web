@@ -1,5 +1,6 @@
 import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock';
 import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock';
+import { EncryptedExpiredAuthMock } from '$mocks/data/auth/EncryptedExpiredAuthMock';
 import { mockRequestEvent } from '$test/request/mockRequestEvent';
 import { describe, expect, it, vi } from 'vitest';
 import { AuthEndpoint } from './AuthEndpoint';
@@ -100,5 +101,25 @@ describe('handle: auth', () => {
     await handle({ event, resolve: vi.fn() });
 
     expect(event.locals.auth).toEqual(AuthMappedMock);
+  });
+
+  it('should handle expiring cookies', async () => {
+    const event = mockRequestEvent({
+      url: 'http://localhost',
+      cookieHandler: (key: string) => {
+        if (key === AUTH_COOKIE_NAME) {
+          return EncryptedExpiredAuthMock;
+        }
+
+        return null;
+      },
+    });
+
+    await handle({ event, resolve: vi.fn() });
+    expect(event.cookies.set).toHaveBeenCalled();
+    expect(event.locals.auth).toEqual({
+      ...AuthMappedMock,
+      expiresAt: expect.any(Number),
+    });
   });
 });
