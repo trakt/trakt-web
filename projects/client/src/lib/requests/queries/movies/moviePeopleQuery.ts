@@ -13,6 +13,9 @@ export function moviePeopleRequest(
       params: {
         id: slug,
       },
+      query: {
+        extended: 'cloud9',
+      },
     })
     .then(({ status, body }) => {
       if (status !== 200) {

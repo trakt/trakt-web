@@ -7,7 +7,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Juliette Nichols',
       ],
-      'episode_count': 17,
+      'episode_count': 19,
       'person': {
         'name': 'Rebecca Ferguson',
         'ids': {
@@ -16,6 +16,22 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0272581',
           'tmdb': 933238,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/6NRlV9oUipeak7r00V6k73Jb7we.jpg',
+            'walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
+          ],
+          'fanart': [
+            'image.tmdb.org/t/p/w1280/krrZTVEqrYwu6vR3f4NWgdSZg8X.jpg',
+            'walter-r2.trakt.tv/images/people/000/447/271/fanarts/medium/0b95a133bb.jpg.webp',
+          ],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/6NRlV9oUipeak7r00V6k73Jb7we.jpg',
+          'walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
+        ],
       },
     },
     {
@@ -23,7 +39,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Robert Sims',
       ],
-      'episode_count': 17,
+      'episode_count': 19,
       'person': {
         'name': 'Common',
         'ids': {
@@ -32,6 +48,21 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0996669',
           'tmdb': 4238,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/eggJAnJxpn8wYraX7ea5svETB54.jpg',
+            'walter-r2.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
+          ],
+          'fanart': [
+            'image.tmdb.org/t/p/w1280/aqNJrAxudMRNo8jg3HOUQqdl2xr.jpg',
+          ],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/eggJAnJxpn8wYraX7ea5svETB54.jpg',
+          'walter-r2.trakt.tv/images/people/000/412/328/headshots/thumb/35b36ce399.jpg.webp',
+        ],
       },
     },
     {
@@ -39,7 +70,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Martha Walker',
       ],
-      'episode_count': 17,
+      'episode_count': 19,
       'person': {
         'name': 'Harriet Walter',
         'ids': {
@@ -48,6 +79,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0910040',
           'tmdb': 17477,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/vH8JrqdHaoFeGos44XeKTNuQMKE.jpg',
+            'walter-r2.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/vH8JrqdHaoFeGos44XeKTNuQMKE.jpg',
+          'walter-r2.trakt.tv/images/people/000/016/797/headshots/thumb/987b640c84.jpg.webp',
+        ],
       },
     },
     {
@@ -55,7 +99,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Paul Billings',
       ],
-      'episode_count': 17,
+      'episode_count': 19,
       'person': {
         'name': 'Chinaza Uche',
         'ids': {
@@ -64,6 +108,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm4523131',
           'tmdb': 1717255,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/tf3mYLcxXBUIWExWPsvGgr0aonc.jpg',
+            'walter-r2.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/tf3mYLcxXBUIWExWPsvGgr0aonc.jpg',
+          'walter-r2.trakt.tv/images/people/000/748/739/headshots/thumb/628b796714.jpg.webp',
+        ],
       },
     },
     {
@@ -71,7 +128,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Lukas Kyle',
       ],
-      'episode_count': 17,
+      'episode_count': 19,
       'person': {
         'name': 'Avi Nash',
         'ids': {
@@ -80,6 +137,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm5696980',
           'tmdb': 1617697,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/9FDEwdZHfZqWRTrhfG4X58chM9x.jpg',
+            'walter-r2.trakt.tv/images/people/000/627/038/headshots/thumb/ba0377d6b0.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/9FDEwdZHfZqWRTrhfG4X58chM9x.jpg',
+          'walter-r2.trakt.tv/images/people/000/627/038/headshots/thumb/ba0377d6b0.jpg.webp',
+        ],
       },
     },
     {
@@ -87,7 +157,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Patrick Kennedy',
       ],
-      'episode_count': 17,
+      'episode_count': 19,
       'person': {
         'name': 'Rick Gomez',
         'ids': {
@@ -96,6 +166,22 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0327072',
           'tmdb': 123532,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/gmVYPHJgmRVIzhaVYMns4kgBVqm.jpg',
+            'walter-r2.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
+          ],
+          'fanart': [
+            'image.tmdb.org/t/p/w1280/r4ITMrrWblan1EI1SnQk62AM71h.jpg',
+            'walter-r2.trakt.tv/images/people/000/014/904/fanarts/medium/d1d079093c.jpg.webp',
+          ],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/gmVYPHJgmRVIzhaVYMns4kgBVqm.jpg',
+          'walter-r2.trakt.tv/images/people/000/014/904/headshots/thumb/d67b0392d8.jpg.webp',
+        ],
       },
     },
     {
@@ -103,7 +189,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Bernard Holland',
       ],
-      'episode_count': 17,
+      'episode_count': 19,
       'person': {
         'name': 'Tim Robbins',
         'ids': {
@@ -112,6 +198,22 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0000209',
           'tmdb': 504,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/hsCu1JUzQQ4pl7uFxAVFLOs9yHh.jpg',
+            'walter-r2.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
+          ],
+          'fanart': [
+            'image.tmdb.org/t/p/w1280/8FlxH4q1plGzdoJmK2VHgap3Ly7.jpg',
+            'walter-r2.trakt.tv/images/people/000/015/518/fanarts/medium/efd64dfbec.jpg.webp',
+          ],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/hsCu1JUzQQ4pl7uFxAVFLOs9yHh.jpg',
+          'walter-r2.trakt.tv/images/people/000/015/518/headshots/thumb/7aa5eb6e65.jpg.webp',
+        ],
       },
     },
     {
@@ -119,7 +221,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Knox',
       ],
-      'episode_count': 7,
+      'episode_count': 9,
       'person': {
         'name': 'Shane McRae',
         'ids': {
@@ -128,6 +230,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0574460',
           'tmdb': 83222,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/ixNSdZDJ6fZzZc2Pdx4Dwr8wHir.jpg',
+            'walter-r2.trakt.tv/images/people/000/431/779/headshots/thumb/d9ba2e0cd9.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/ixNSdZDJ6fZzZc2Pdx4Dwr8wHir.jpg',
+          'walter-r2.trakt.tv/images/people/000/431/779/headshots/thumb/d9ba2e0cd9.jpg.webp',
+        ],
       },
     },
     {
@@ -135,7 +250,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Hank',
       ],
-      'episode_count': 7,
+      'episode_count': 9,
       'person': {
         'name': 'Billy Postlethwaite',
         'ids': {
@@ -144,6 +259,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm5037475',
           'tmdb': 1642036,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/cpHNAqOBP8SIcml1A8ODmtuEyNh.jpg',
+            'walter-r2.trakt.tv/images/people/000/668/720/headshots/thumb/f9a6bc12fd.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/cpHNAqOBP8SIcml1A8ODmtuEyNh.jpg',
+          'walter-r2.trakt.tv/images/people/000/668/720/headshots/thumb/f9a6bc12fd.jpg.webp',
+        ],
       },
     },
     {
@@ -151,7 +279,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Shirley',
       ],
-      'episode_count': 7,
+      'episode_count': 9,
       'person': {
         'name': 'Remmie Milner',
         'ids': {
@@ -160,6 +288,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm5081891',
           'tmdb': 2298156,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/4LDy6vhBZ11kOevBdAGBRM34d3L.jpg',
+            'walter-r2.trakt.tv/images/people/001/477/761/headshots/thumb/32559bdf7c.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/4LDy6vhBZ11kOevBdAGBRM34d3L.jpg',
+          'walter-r2.trakt.tv/images/people/001/477/761/headshots/thumb/32559bdf7c.jpg.webp',
+        ],
       },
     },
     {
@@ -167,7 +308,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Camille Sims',
       ],
-      'episode_count': 7,
+      'episode_count': 9,
       'person': {
         'name': 'Alexandria Riley',
         'ids': {
@@ -176,6 +317,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm9052240',
           'tmdb': 2189998,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/3WEi0WnyzqJ4kENQA81H2baLwWH.jpg',
+            'walter-r2.trakt.tv/images/people/001/350/141/headshots/thumb/862651c2ae.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/3WEi0WnyzqJ4kENQA81H2baLwWH.jpg',
+          'walter-r2.trakt.tv/images/people/001/350/141/headshots/thumb/862651c2ae.jpg.webp',
+        ],
       },
     },
     {
@@ -183,7 +337,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Carla McLain',
       ],
-      'episode_count': 7,
+      'episode_count': 9,
       'person': {
         'name': 'Clare Perkins',
         'ids': {
@@ -192,6 +346,19 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0673907',
           'tmdb': 1147904,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/dXYJxqSowCeyEr03cWYzbA7a33.jpg',
+            'walter-r2.trakt.tv/images/people/000/107/387/headshots/thumb/9f71e2f97c.jpg.webp',
+          ],
+          'fanart': [],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/dXYJxqSowCeyEr03cWYzbA7a33.jpg',
+          'walter-r2.trakt.tv/images/people/000/107/387/headshots/thumb/9f71e2f97c.jpg.webp',
+        ],
       },
     },
     {
@@ -199,7 +366,7 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
       'characters': [
         'Solo',
       ],
-      'episode_count': 7,
+      'episode_count': 9,
       'person': {
         'name': 'Steve Zahn',
         'ids': {
@@ -208,6 +375,22 @@ export const ShowSiloPeopleResponseMock: PeopleResponse = {
           'imdb': 'nm0001872',
           'tmdb': 18324,
         },
+        'images': {
+          'headshot': [
+            'image.tmdb.org/t/p/original/rwrPdKGwXnByxUVMxMf8Y7oswi3.jpg',
+            'walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+          ],
+          'fanart': [
+            'image.tmdb.org/t/p/w1280/u10HTGpohNBtGuVKGaIqtITpU05.jpg',
+            'walter-r2.trakt.tv/images/people/000/014/103/fanarts/medium/c7e995bfac.jpg.webp',
+          ],
+        },
+      },
+      'images': {
+        'headshot': [
+          'image.tmdb.org/t/p/original/rwrPdKGwXnByxUVMxMf8Y7oswi3.jpg',
+          'walter-r2.trakt.tv/images/people/000/014/103/headshots/thumb/2e92bf71ee.jpg.webp',
+        ],
       },
     },
   ],
