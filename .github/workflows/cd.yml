@@ -24,7 +24,7 @@ jobs:
           if_no_artifact_found: warn
           run_id: ${{ github.event.workflow_run.id }}
           name: the-edge-awakened
-          path: ./.svelte-kit/cloudflare
+          path: ./.svelte-kit
 
       - name: Download Wrangler Configuration
         uses: dawidd6/action-download-artifact@v6
@@ -37,7 +37,7 @@ jobs:
       - name: Check Artifacts
         id: check_artifacts
         run: |
-          if [ -d "./.svelte-kit/cloudflare" ] && [ -f "./wrangler.toml" ]; then
+          if [ -d "./.svelte-kit" ] && [ -f "./wrangler.toml" ]; then
             echo "artifacts_found=true" >> $GITHUB_ENV
           else
             echo "artifacts_found=false" >> $GITHUB_ENV

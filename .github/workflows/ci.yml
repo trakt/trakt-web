@@ -136,6 +136,5 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: ./.github/actions/upload-output
         with:
-          buildArtifact: pandoras-archive
-          cloudflareArtifact: the-edge-awakened
+          buildArtifact: the-edge-awakened
           wranglerArtifact: the-edge-config
