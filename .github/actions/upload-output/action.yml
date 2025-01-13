@@ -18,7 +18,12 @@ runs:
         include-hidden-files: true
         if-no-files-found: error
         name: ${{ inputs.buildArtifact }}
-        path: projects/client/.svelte-kit
+        path: projects/client/.svelte-kit/output
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.cloudflareArtifact }}
+        path: projects/client/.svelte-kit/cloudflare
 
     - uses: actions/upload-artifact@v4
       with:
