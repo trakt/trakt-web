@@ -15,8 +15,6 @@ runs:
   steps:
     - uses: actions/upload-artifact@v4
       with:
-        include-hidden-files: true
-        if-no-files-found: error
         name: ${{ inputs.buildArtifact }}
         path: projects/client/.svelte-kit/output
 
@@ -27,6 +25,5 @@ runs:
 
     - uses: actions/upload-artifact@v4
       with:
-        if-no-files-found: error
         name: ${{ inputs.wranglerArtifact }}
         path: projects/client/wrangler.toml
