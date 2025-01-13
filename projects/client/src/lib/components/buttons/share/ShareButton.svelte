@@ -21,7 +21,15 @@
       return;
     }
 
-    await navigator.share(data);
+    try {
+      await navigator.share(data);
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        return;
+      }
+
+      throw error;
+    }
   };
 </script>
 
