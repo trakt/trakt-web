@@ -13,12 +13,23 @@ description: 'Spirits the precious output of a build to the ethereal sanctuary o
 runs:
   using: 'composite'
   steps:
-    - uses: actions/upload-artifact@v4
-      with:
-        name: ${{ inputs.buildArtifact }}
-        path: projects/client/.svelte-kit
+    - shell: bash
+      run: ls -la
+      working-directory: ./projects/client
+
+    - shell: bash
+      run: ls -la
+      working-directory: ./projects/client/.svelte-kit
 
     - uses: actions/upload-artifact@v4
       with:
+        include-hidden-files: true
+        if-no-files-found: error
+        name: ${{ inputs.buildArtifact }}
+        path: projects/client/.svelte-kit/*
+
+    - uses: actions/upload-artifact@v4
+      with:
+        if-no-files-found: error
         name: ${{ inputs.wranglerArtifact }}
         path: projects/client/wrangler.toml
