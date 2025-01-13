@@ -47,8 +47,8 @@ export type UserSettings = {
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
-  const fullName = user.name;
-  const [firstName = '', lastName = ''] = user.name.split(' ');
+  const fullName = user.name ?? '';
+  const [firstName = '', lastName = ''] = fullName.split(' ');
 
   return {
     id: user.ids.uuid,
@@ -59,7 +59,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       last: lastName,
     },
     about: user.about,
-    location: user.location,
+    location: user.location ?? '',
     avatar: {
       url: user.images.avatar.full,
     },
