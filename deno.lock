@@ -14,7 +14,7 @@
     "npm:@inlang/paraglide-sveltekit@~0.15.5": "0.15.5_@sveltejs+kit@2.15.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.17.3____acorn@8.14.0___vite@6.0.7____sass-embedded@1.83.1___sass-embedded@1.83.1__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
     "npm:@playwright/test@^1.49.1": "1.49.1",
     "npm:@sveltejs/adapter-auto@^3.3.1": "3.3.1_@sveltejs+kit@2.15.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.17.3____acorn@8.14.0___vite@6.0.7____sass-embedded@1.83.1___sass-embedded@1.83.1__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
-    "npm:@sveltejs/adapter-cloudflare@4.9.0": "4.9.0_@sveltejs+kit@2.15.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.17.3____acorn@8.14.0___vite@6.0.7____sass-embedded@1.83.1___sass-embedded@1.83.1__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_wrangler@3.101.0__@cloudflare+workers-types@4.20250109.0__esbuild@0.17.19_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_@cloudflare+workers-types@4.20250109.0_sass-embedded@1.83.1",
+    "npm:@sveltejs/adapter-cloudflare@5": "5.0.0_@sveltejs+kit@2.15.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.17.3____acorn@8.14.0___vite@6.0.7____sass-embedded@1.83.1___sass-embedded@1.83.1__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_wrangler@3.101.0__@cloudflare+workers-types@4.20250109.0__esbuild@0.17.19_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_@cloudflare+workers-types@4.20250109.0_sass-embedded@1.83.1",
     "npm:@sveltejs/enhanced-img@~0.4.4": "0.4.4_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
     "npm:@sveltejs/kit@^2.15.2": "2.15.2_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
     "npm:@sveltejs/vite-plugin-svelte@^5.0.3": "5.0.3_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
@@ -3506,8 +3506,8 @@
         "import-meta-resolve"
       ]
     },
-    "@sveltejs/adapter-cloudflare@4.9.0_@sveltejs+kit@2.15.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.17.3____acorn@8.14.0___vite@6.0.7____sass-embedded@1.83.1___sass-embedded@1.83.1__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_wrangler@3.101.0__@cloudflare+workers-types@4.20250109.0__esbuild@0.17.19_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_@cloudflare+workers-types@4.20250109.0_sass-embedded@1.83.1": {
-      "integrity": "sha512-o7o8wXy5zDsEuE9oPWSHO5tAuPEulZZg2QavFdc00fcIHh1dxgCyIRZa5LPjAE8EcdJOh+8SFkhFgVRdCfOBvQ==",
+    "@sveltejs/adapter-cloudflare@5.0.0_@sveltejs+kit@2.15.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.17.3____acorn@8.14.0___vite@6.0.7____sass-embedded@1.83.1___sass-embedded@1.83.1__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_wrangler@3.101.0__@cloudflare+workers-types@4.20250109.0__esbuild@0.17.19_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_@cloudflare+workers-types@4.20250109.0_sass-embedded@1.83.1": {
+      "integrity": "sha512-YYfkdEajp4sALHFYeIUUQTGC3M1ZicrYYSVz1zmYwR2DKT59dwygYsdufI4L6ONNsDdRh3xeojjo8sO3V9dHcw==",
       "dependencies": [
         "@cloudflare/workers-types",
         "@sveltejs/kit",
@@ -6274,7 +6274,7 @@
             "npm:@inlang/paraglide-sveltekit@~0.15.5",
             "npm:@playwright/test@^1.49.1",
             "npm:@sveltejs/adapter-auto@^3.3.1",
-            "npm:@sveltejs/adapter-cloudflare@4.9.0",
+            "npm:@sveltejs/adapter-cloudflare@5",
             "npm:@sveltejs/enhanced-img@~0.4.4",
             "npm:@sveltejs/kit@^2.15.2",
             "npm:@sveltejs/vite-plugin-svelte@^5.0.3",
