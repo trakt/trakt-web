@@ -15,8 +15,8 @@
 <style>
   .plays-tag {
     :global(.trakt-tag) {
-      background: var(--color-background-watching-tag);
-      color: var(--color-text-watching-tag);
+      background: var(--color-background-plays-tag);
+      color: var(--color-text-plays-tag);
     }
   }
 </style>

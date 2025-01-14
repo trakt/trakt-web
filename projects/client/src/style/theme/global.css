@@ -38,6 +38,9 @@
   --color-text-watching-tag: var(--shade-900);
   --color-background-watching-tag: var(--shade-10);
 
+  --color-text-plays-tag: var(--shade-900);
+  --color-background-plays-tag: var(--shade-10);
+
   --color-text-media-type-tag: var(--shade-800);
   --color-background-media-type-tag: var(--purple-50);
 
