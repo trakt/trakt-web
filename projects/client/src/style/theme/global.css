@@ -35,8 +35,8 @@
   --color-text-year-tag: var(--shade-10);
   --color-background-year-tag: var(--shade-500);
 
-  --color-text-watching-tag: var(--shade-900);
-  --color-background-watching-tag: var(--shade-10);
+  --color-text-watchers-tag: var(--shade-900);
+  --color-background-watchers-tag: var(--shade-10);
 
   --color-text-plays-tag: var(--shade-900);
   --color-background-plays-tag: var(--shade-10);

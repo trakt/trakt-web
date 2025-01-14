@@ -4,7 +4,7 @@
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="media-watching-tag">
+<div class="media-watchers-tag">
   <TagContent>
     <p class="meta-info uppercase no-wrap">
       {@render children()}
@@ -13,10 +13,10 @@
 </div>
 
 <style>
-  .media-watching-tag {
+  .media-watchers-tag {
     :global(.trakt-tag) {
-      background: var(--color-background-watching-tag);
-      color: var(--color-text-watching-tag);
+      background: var(--color-background-watchers-tag);
+      color: var(--color-text-watchers-tag);
     }
   }
 </style>
