@@ -113,7 +113,7 @@
   "about_placeholder_12": "Ten użytkownik wciela się w swojego wewnętrznego Tylera Durdena: odrzuca konsumpcjonizm i pochłania się w pustkę. (A może po prostu nie miał jeszcze okazji wypełnić swojego profilu.)",
   "about_placeholder_13": "Stylizowany obrazek: Zabawna ilustracja przedstawiająca: detektywa drapiącego się po głowie z zakłopotaniem albo pustynny kłąb toczący się po pustej stronie profilu.",
   "about_placeholder_14": "Element interaktywny: przycisk umożliwiający użytkownikom wysłanie przyjaznej zachęty do właściciela profilu, zachęcającej go do jego uzupełnienia.",
-  "about_placeholder_15": "Spersonalizowana wiadomość: Jeśli posiadasz jakiekolwiek informacje o użytkowniku (np. historię oglądanych przez niego filmów), możesz ich użyć do wygenerowania bardziej spersonalizowanego elementu zastępczego, np. „Ten użytkownik uwielbia horrory, ale nie znosi pisać bio. (Może jest zbyt zajęty ukrywaniem się przed hordą zombie?)”",
+  "about_placeholder_15": "Spersonalizowana wiadomość: Jeśli posiadasz jakiekolwiek informacje o użytkowniku (np. historię obejrzanych przez niego filmów), możesz ich użyć do wygenerowania bardziej spersonalizowanego elementu zastępczego, np. „Ten użytkownik uwielbia horrory, ale nie znosi pisać bio. (Może jest zbyt zajęty ukrywaniem się przed hordą zombie?)”",
   "watchlist_movies_empty": "Twoja lista do obejrzenia jest pusta. Dodaj filmy i skomponuj swoje kinowe doświadczenia.",
   "watchlist_shows_empty": "Twoja lista do obejrzenia jest pusta. Dodaj seriale i rozpal swoją wyobraźnię.",
   "upcoming_schedule_empty": "Odkryj seriale i spersonalizuj co, i kiedy, będziesz oglądać.",
@@ -242,8 +242,8 @@
   "status_upcoming": "Nadchodzący",
   "status_unknown": "Nieznany",
   "expected_premiere": "Spodziewana premiera",
-  "recently_watched_episodes": "Ostatnio oglądane odcinki",
-  "recently_watched_movies": "Ostatnio oglądane filmy",
+  "recently_watched_episodes": "Ostatnio obejrzane odcinki",
+  "recently_watched_movies": "Ostatnio obejrzane filmy",
   "person_headshot": "Zdjęcie {person}",
   "actors": "Aktorzy"
 }
