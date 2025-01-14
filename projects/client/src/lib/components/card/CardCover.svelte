@@ -2,7 +2,13 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { CardCoverProps } from "./CardCoverProps";
 
-  const { src, alt, tags, isLoading }: CardCoverProps = $props();
+  const {
+    src,
+    alt,
+    tags,
+    isLoading,
+    style = "gradient",
+  }: CardCoverProps = $props();
 
   let isImagePending = $state(true);
   $effect(() => {
@@ -18,7 +24,7 @@
   <div class="card-cover-tags">
     {@render tags?.()}
   </div>
-  <div class="card-cover-image">
+  <div class="card-cover-image" class:has-gradient={style === "gradient"}>
     <CrossOriginImage
       animate={false}
       {src}
@@ -73,7 +79,7 @@
       object-fit: cover;
     }
 
-    &::before {
+    &.has-gradient::before {
       content: "";
       position: absolute;
       bottom: 0;

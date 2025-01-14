@@ -5,4 +5,5 @@ export type CardCoverProps = {
   alt: string;
   tags?: Snippet;
   isLoading?: boolean;
+  style?: 'flat' | 'gradient';
 };
