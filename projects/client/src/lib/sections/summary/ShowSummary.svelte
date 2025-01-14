@@ -9,6 +9,7 @@
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
+  import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/SeasonList.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
@@ -54,6 +55,8 @@
   type="show"
   {contextualContent}
 />
+
+<CastList title={m.actors()} cast={crew.cast} />
 
 <SeasonList show={media} {seasons} />
 

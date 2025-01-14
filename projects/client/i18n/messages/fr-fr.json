@@ -244,5 +244,6 @@
   "expected_premiere": "Première attendue",
   "recently_watched_episodes": "Derniers épisodes vus",
   "recently_watched_movies": "Derniers films vus",
-  "person_headshot": "Photo de {person}"
+  "person_headshot": "Photo de {person}",
+  "actors": "Acteurs"
 }

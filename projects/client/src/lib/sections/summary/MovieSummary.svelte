@@ -5,6 +5,7 @@
   import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MovieSummary } from "$lib/requests/models/MovieSummary";
+  import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import MediaSummary from "./components/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/MediaSummaryProps";
@@ -34,5 +35,7 @@
   {intl}
   type="movie"
 />
+
+<CastList title={m.actors()} cast={crew.cast} />
 
 <RelatedList title={m.related_movies_title()} slug={media.slug} type="movie" />

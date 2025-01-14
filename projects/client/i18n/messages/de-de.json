@@ -244,5 +244,6 @@
   "expected_premiere": "Erwartete Premiere",
   "recently_watched_episodes": "Zuletzt gesehene Folgen",
   "recently_watched_movies": "Zuletzt gesehene Filme",
-  "person_headshot": "Kopfschuss von {person}"
+  "person_headshot": "Kopfschuss von {person}",
+  "actors": "Schauspieler"
 }
