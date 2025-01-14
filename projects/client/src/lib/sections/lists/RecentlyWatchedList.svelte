@@ -1,16 +1,16 @@
 <script lang="ts">
   import SectionList from "$lib/components/section-list/SectionList.svelte";
-  import type { MediaType } from "$lib/models/MediaType";
+  import EpisodeItem from "./components/EpisodeItem.svelte";
   import MediaItem from "./components/MediaItem.svelte";
   import { useRecentlyWatchedList } from "./stores/useRecentlyWatchedList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
-  type WatchlistListProps = {
+  type RecentlyWatchedListProps = {
     title: string;
-    type: MediaType;
+    type: "movie" | "episode";
   };
 
-  const { title, type }: WatchlistListProps = $props();
+  const { title, type }: RecentlyWatchedListProps = $props();
 
   const { list } = useRecentlyWatchedList({ type });
 </script>
@@ -22,6 +22,16 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media} />
+    {#if media.type === "episode"}
+      <EpisodeItem
+        episode={media.episode}
+        show={media.show}
+        context="standalone"
+      />
+    {/if}
+
+    {#if media.type === "movie"}
+      <MediaItem type={"movie"} media={media.movie} />
+    {/if}
   {/snippet}
 </SectionList>

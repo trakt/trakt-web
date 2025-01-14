@@ -19,9 +19,10 @@
   type EpisodeProps = {
     episode: EpisodeEntry;
     show: MediaSummary;
+    context?: "show" | "standalone";
   };
 
-  const { show, episode }: EpisodeProps = $props();
+  const { show, episode, context = "show" }: EpisodeProps = $props();
 
   const { isWatched, isMarkingAsWatched, markAsWatched, removeWatched } =
     $derived(
@@ -62,12 +63,21 @@
   </Link>
 
   <CardFooter>
-    <p class="episode-title small ellipsis">
-      {episode.title}
-    </p>
-    <p class="episode-subtitle small ellipsis">
-      {episode.season}x{episode.number}
-    </p>
+    {#if context === "standalone"}
+      <p class="episode-title small ellipsis">
+        {show.title}
+      </p>
+      <p class="episode-subtitle small ellipsis">
+        {episode.season}x{episode.number} - {episode.title}
+      </p>
+    {:else}
+      <p class="episode-title small ellipsis">
+        {episode.title}
+      </p>
+      <p class="episode-subtitle small ellipsis">
+        {episode.season}x{episode.number}
+      </p>
+    {/if}
     {#snippet actions()}
       {#if isFuture === false}
         <RenderFor audience="authenticated">

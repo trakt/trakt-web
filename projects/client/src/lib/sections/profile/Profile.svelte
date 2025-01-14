@@ -26,5 +26,5 @@
   <ProfileHistorySummary movies={$historyMovies} shows={$historyShows} />
 </ProfileContainer>
 
-<RecentlyWatchedList title="Recently Watched Shows" type="show" />
+<RecentlyWatchedList title="Recently Watched Episodes" type="episode" />
 <RecentlyWatchedList title="Recently Watched Movies" type="movie" />
