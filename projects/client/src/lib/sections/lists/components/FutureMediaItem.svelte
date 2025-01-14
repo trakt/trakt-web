@@ -11,20 +11,12 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
 
   import { getLocale } from "$lib/features/i18n";
-  import type { MediaType } from "$lib/models/MediaType";
-  import type { EpisodeCount } from "$lib/requests/models/EpisodeCount";
-  import type { MovieSummary } from "$lib/requests/models/MovieSummary";
-  import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { MediaItemProps } from "./MediaItemProps";
 
-  type MediaItemProps = {
-    media: MovieSummary | (ShowSummary & EpisodeCount);
-    type: MediaType;
-  };
-
-  const { type, media }: MediaItemProps = $props();
+  const { type, media, tags: externalTags }: MediaItemProps = $props();
 
   const {
     isWatchlistUpdating,
@@ -39,17 +31,25 @@
   );
 </script>
 
+{#snippet defaultTags(media: MediaItemProps["media"])}
+  <DurationTag>
+    {#if media.year == null}
+      {m.tba_label()}
+    {:else}
+      {toHumanETA(new Date(), media.airedDate, getLocale())}
+    {/if}
+  </DurationTag>
+{/snippet}
+
 {#snippet content(mediaCoverImageUrl: string)}
   <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
     <MediaCover src={mediaCoverImageUrl} alt={`${media.title} poster`}>
       {#snippet tags()}
-        <DurationTag>
-          {#if media.year == null}
-            {m.tba_label()}
-          {:else}
-            {toHumanETA(new Date(), media.airedDate, getLocale())}
-          {/if}
-        </DurationTag>
+        {#if externalTags}
+          {@render externalTags(media)}
+        {:else}
+          {@render defaultTags(media)}
+        {/if}
       {/snippet}
     </MediaCover>
   </Link>

@@ -1,21 +1,13 @@
 <script lang="ts">
-  import type { MediaType } from "$lib/models/MediaType";
-  import type { EpisodeCount } from "$lib/requests/models/EpisodeCount";
-  import type { MovieSummary } from "$lib/requests/models/MovieSummary";
-  import type { ShowSummary } from "$lib/requests/models/ShowSummary";
   import AvailableMediaItem from "./AvailableMediaItem.svelte";
   import FutureMediaItem from "./FutureMediaItem.svelte";
+  import type { MediaItemProps } from "./MediaItemProps";
 
-  type MediaItemProps = {
-    media: MovieSummary | (ShowSummary & EpisodeCount);
-    type: MediaType;
-  };
-
-  const { type, media }: MediaItemProps = $props();
+  const { type, media, tags }: MediaItemProps = $props();
 </script>
 
 {#if media.airedDate > new Date()}
-  <FutureMediaItem {type} {media} />
+  <FutureMediaItem {type} {media} {tags} />
 {:else}
-  <AvailableMediaItem {type} {media} />
+  <AvailableMediaItem {type} {media} {tags} />
 {/if}
