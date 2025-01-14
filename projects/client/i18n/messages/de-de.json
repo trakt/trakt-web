@@ -241,5 +241,7 @@
   "status_continuing": "Wird fortgesetzt",
   "status_upcoming": "Demnächst",
   "status_unknown": "Unbekannt",
-  "expected_premiere": "Erwartete Premiere"
+  "expected_premiere": "Erwartete Premiere",
+  "recently_watched_episodes": "Zuletzt gesehene Folgen",
+  "recently_watched_movies": "Zuletzt gesehene Filme"
 }

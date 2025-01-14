@@ -241,5 +241,7 @@
   "status_continuing": "Continuing",
   "status_upcoming": "Upcoming",
   "status_unknown": "Unknown",
-  "expected_premiere": "Expected Premiere"
+  "expected_premiere": "Expected Premiere",
+  "recently_watched_episodes": "Recently Watched Episodes",
+  "recently_watched_movies": "Recently Watched Movies"
 }

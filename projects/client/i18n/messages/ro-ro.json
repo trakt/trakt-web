@@ -241,5 +241,7 @@
   "status_continuing": "În desfășurare",
   "status_upcoming": "Urmează",
   "status_unknown": "Necunoscut",
-  "expected_premiere": "Premiera Așteptată"
+  "expected_premiere": "Premiera Așteptată",
+  "recently_watched_episodes": "Episoade Văzute Recent",
+  "recently_watched_movies": "Filme Văzute Recent"
 }

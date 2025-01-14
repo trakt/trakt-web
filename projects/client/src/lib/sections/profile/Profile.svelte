@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages";
   import RecentlyWatchedList from "../lists/RecentlyWatchedList.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
@@ -26,5 +27,5 @@
   <ProfileHistorySummary movies={$historyMovies} shows={$historyShows} />
 </ProfileContainer>
 
-<RecentlyWatchedList title="Recently Watched Episodes" type="episode" />
-<RecentlyWatchedList title="Recently Watched Movies" type="movie" />
+<RecentlyWatchedList title={m.recently_watched_episodes()} type="episode" />
+<RecentlyWatchedList title={m.recently_watched_movies()} type="movie" />

@@ -241,5 +241,7 @@
   "status_continuing": "Lopend",
   "status_upcoming": "Aankomend",
   "status_unknown": "Onbekend",
-  "expected_premiere": "Verwachte première"
+  "expected_premiere": "Verwachte première",
+  "recently_watched_episodes": "Recentelijk bekeken afleveringen",
+  "recently_watched_movies": "Recentelijk bekeken films"
 }
