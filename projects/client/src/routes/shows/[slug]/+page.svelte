@@ -4,17 +4,24 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { useShow } from "./useShow";
+  import { useShowDetails } from "./useShowDetails";
   const {
     show,
     intl,
+    isLoading: isLoadingShow,
+  } = $derived(useShow(page.params.slug));
+
+  const {
     ratings,
     stats,
     watchers,
     studios,
     crew,
     seasons,
-    isLoading,
-  } = $derived(useShow(page.params.slug));
+    isLoading: isLoadingDetails,
+  } = $derived(useShowDetails(page.params.slug));
+
+  const isLoading = $derived($isLoadingShow || $isLoadingDetails);
 </script>
 
 <TraktPage
@@ -24,7 +31,7 @@
   image={$show?.poster.url.thumb ?? $show?.cover.url.thumb}
   type="show"
 >
-  {#if !$isLoading}
+  {#if !isLoading}
     <ShowSummary
       media={$show!}
       ratings={$ratings!}

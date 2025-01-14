@@ -22,9 +22,10 @@
   const {
     episode,
     show,
+    showIntl,
     seasons,
     ratings,
-    intl,
+    episodeIntl,
     stats,
     watchers,
   }: EpisodeSummaryProps = $props();
@@ -40,7 +41,9 @@
       }),
     );
 
-  const title = $derived(intl.title ?? episode.title);
+  const title = $derived(episodeIntl.title ?? episode.title);
+  const overview = $derived(episodeIntl.overview ?? episode.overview);
+  const showTitle = $derived(showIntl.title ?? show.title);
 
   const markWasWatchedProps: MarkAsWatchedButtonProps = $derived({
     type: "normal",
@@ -76,7 +79,7 @@
   <MediaSummaryHeader {title}>
     <MediaTitle {title} />
     <Link href={UrlBuilder.show(show.slug)}>
-      <h6>{show.title}</h6>
+      <h6>{showTitle}</h6>
     </Link>
     <p class="meta-info">{m.season_episode_number_label(episode)}</p>
     <GenreList genres={show.genres} />
@@ -91,7 +94,7 @@
     {watchers}
   />
 
-  <MediaOverview {title} overview={intl.overview ?? episode.overview} />
+  <MediaOverview {title} {overview} />
 
   <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
     <MediaSummaryActions>

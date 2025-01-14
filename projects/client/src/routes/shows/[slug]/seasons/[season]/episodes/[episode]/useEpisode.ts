@@ -7,7 +7,6 @@ import {
   episodeWatchersQuery,
 } from '$lib/requests/queries/episode/episodeWatchersQuery';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery';
-import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery';
 import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
@@ -21,11 +20,6 @@ type UseEpisodeParams = {
 export function useEpisode(
   params: UseEpisodeParams,
 ) {
-  const show = createQuery({
-    ...showSummaryQuery(params),
-    staleTime: time.days(1),
-  });
-
   const episode = createQuery({
     ...episodeSummaryQuery(params),
     staleTime: time.days(1),
@@ -59,7 +53,7 @@ export function useEpisode(
     staleTime: time.days(7),
   });
 
-  const queries = [show, episode, seasons, ratings, stats, watchers, intl];
+  const queries = [episode, seasons, ratings, stats, watchers, intl];
 
   const isLoading = derived(
     queries,
@@ -68,7 +62,6 @@ export function useEpisode(
 
   return {
     isLoading,
-    show: derived(show, ($show) => $show.data),
     episode: derived(episode, ($movie) => $movie.data),
     seasons: derived(
       [
