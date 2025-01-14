@@ -1,18 +1,15 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import EpisodeCard from "$lib/components/episode/card/EpisodeCard.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import PosterCard from "$lib/components/media/card/PosterCard.svelte";
-  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
 
-  import { getLocale } from "$lib/features/i18n";
+  import AirTag from "$lib/components/media/tags/AirTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { useWatchlist } from "$lib/stores/useWatchlist";
-  import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaItemProps } from "./MediaItemProps";
 
@@ -32,13 +29,7 @@
 </script>
 
 {#snippet defaultTags(media: MediaItemProps["media"])}
-  <DurationTag>
-    {#if media.year == null}
-      {m.tba_label()}
-    {:else}
-      {toHumanETA(new Date(), media.airedDate, getLocale())}
-    {/if}
-  </DurationTag>
+  <AirTag i18n={TagIntlProvider} year={media.year} airDate={media.airDate} />
 {/snippet}
 
 {#snippet content(mediaCoverImageUrl: string)}

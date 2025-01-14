@@ -88,7 +88,7 @@
   "navbar_link_home_label": "Go back to the homepage",
   "watchlist": "Watchlist",
   "watchers": "Watchers",
-  "plays": "Plays",
+  "plays": "{number} plays",
   "lists": "Lists",
   "favorited": "Favorited",
   "profile": "Profile",

@@ -46,7 +46,7 @@
 
       width: 100%;
       position: relative;
-      background: var(--color-background-time-tag);
+      background: var(--color-background-progress-base-tag);
       color: var(--color-text-progress-tag);
     }
   }

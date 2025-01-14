@@ -88,7 +88,7 @@
   "navbar_link_home_label": "Powróć do strony głównej",
   "watchlist": "Lista do obejrzenia",
   "watchers": "Oglądający",
-  "plays": "Odtworzenia",
+  "plays": "{number} odtworzeń",
   "lists": "Listy",
   "favorited": "Oznaczone jako ulubione",
   "profile": "Profil",

@@ -1,19 +1,20 @@
 <script lang="ts">
   import TagContent from "$lib/components/tags/TagContent.svelte";
+  import type { TagIntl } from "./TagIntl";
 
-  const { children }: ChildrenProps = $props();
+  const { plays, i18n }: { plays: number; i18n: TagIntl } = $props();
 </script>
 
-<div class="plays-tag">
+<div class="trakt-plays-tag">
   <TagContent>
     <p class="meta-info uppercase no-wrap">
-      {@render children()}
+      {i18n.toPlayCount(plays)}
     </p>
   </TagContent>
 </div>
 
 <style>
-  .plays-tag {
+  .trakt-plays-tag {
     :global(.trakt-tag) {
       background: var(--color-background-plays-tag);
       color: var(--color-text-plays-tag);

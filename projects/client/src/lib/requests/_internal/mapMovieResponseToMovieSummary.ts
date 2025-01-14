@@ -43,7 +43,7 @@ export function mapMovieResponseToMovieSummary(
       movie.trailer,
       DEFAULT_TRAILER,
     ),
-    airedDate: new Date(movie.released ?? MAX_DATE),
+    airDate: new Date(movie.released ?? MAX_DATE),
     certification: mapMovieCertificationResponse(movie.certification),
   };
 }

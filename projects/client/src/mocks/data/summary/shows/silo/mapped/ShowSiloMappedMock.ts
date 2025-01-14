@@ -35,7 +35,7 @@ export const ShowSiloMappedMock: ShowSummary = {
   },
   'title': 'Silo',
   'trailer': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
-  'airedDate': new Date('2023-05-05T01:00:00.000Z'),
+  'airDate': new Date('2023-05-05T01:00:00.000Z'),
   'certification': 'TV-MA',
   'country': 'us',
   'languages': [

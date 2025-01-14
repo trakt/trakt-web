@@ -13,8 +13,8 @@ export function useOutNow(type: MediaType) {
   const list = derived(
     watchlist,
     ($watchlist) =>
-      $watchlist.filter((item) => item?.airedDate.getTime() <= Date.now())
-        .sort((a, b) => a.airedDate.getTime() - b.airedDate.getTime()),
+      $watchlist.filter((item) => item?.airDate.getTime() <= Date.now())
+        .sort((a, b) => a.airDate.getTime() - b.airDate.getTime()),
   );
 
   return {

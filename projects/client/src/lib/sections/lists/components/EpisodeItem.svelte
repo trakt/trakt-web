@@ -7,13 +7,12 @@
   import Link from "$lib/components/link/Link.svelte";
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
-  import { languageTag } from "$lib/features/i18n";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/models/EpisodeEntry";
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   type EpisodeProps = {
@@ -34,7 +33,7 @@
       }),
     );
 
-  const isFuture = $derived(episode.airedDate > new Date());
+  const isFuture = $derived(episode.airDate > new Date());
 </script>
 
 <EpisodeCard>
@@ -51,12 +50,10 @@
       {#snippet tags()}
         {#if isFuture}
           <EpisodeTimeTag>
-            {EpisodeIntlProvider.timestampText(episode.airedDate)}
+            {EpisodeIntlProvider.timestampText(episode.airDate)}
           </EpisodeTimeTag>
         {:else}
-          <DurationTag>
-            {toHumanDuration({ minutes: episode.runtime }, languageTag())}
-          </DurationTag>
+          <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
         {/if}
       {/snippet}
     </MediaCover>

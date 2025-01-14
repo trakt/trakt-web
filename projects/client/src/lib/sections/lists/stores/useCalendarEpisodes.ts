@@ -26,7 +26,7 @@ export function useCalendarEpisodes() {
     query,
     ($query) =>
       ($query.data ?? []).filter((d) => {
-        const distanceFromNow = d.airedDate.getTime() - Date.now();
+        const distanceFromNow = d.airDate.getTime() - Date.now();
         return distanceFromNow > 0;
       }),
   );

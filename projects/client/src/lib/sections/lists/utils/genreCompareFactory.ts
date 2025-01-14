@@ -2,7 +2,7 @@ import type { Genre } from '$lib/api.ts';
 import type { MediaSummary } from '$lib/sections/summary/components/MediaSummary.ts';
 
 type Direction = 'asc' | 'desc';
-export type MediaSummarySortInfo = Pick<MediaSummary, 'airedDate' | 'genres'>;
+export type MediaSummarySortInfo = Pick<MediaSummary, 'airDate' | 'genres'>;
 
 type CompareProps = {
   left: MediaSummarySortInfo;
@@ -23,8 +23,8 @@ const compareDate = ({
   direction,
 }: DirectionCompareProps) =>
   direction === 'asc'
-    ? left.airedDate.getTime() - right.airedDate.getTime()
-    : right.airedDate.getTime() - left.airedDate.getTime();
+    ? left.airDate.getTime() - right.airDate.getTime()
+    : right.airDate.getTime() - left.airDate.getTime();
 
 const compareGenre = ({
   left,

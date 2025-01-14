@@ -17,7 +17,14 @@
   --color-text-time-tag: var(--shade-800);
   --color-background-time-tag: var(--shade-10);
 
+  --color-text-duration-tag: var(--shade-800);
+  --color-background-duration-tag: var(--shade-10);
+
+  --color-text-episode-count-tag: var(--shade-800);
+  --color-background-episode-count-tag: var(--shade-10);
+
   --color-text-progress-tag: var(--purple-800);
+  --color-background-progress-base-tag: var(--shade-10);
   --color-background-progress-tag: var(--purple-100);
 
   --color-text-season-premiere-tag: var(--shade-10);
@@ -29,20 +36,17 @@
   --color-text-finale-tag: var(--shade-10);
   --color-background-finale-tag: var(--red-700);
 
-  --color-text-certification-tag: var(--shade-10);
-  --color-background-certification-tag: var(--purple-400);
+  --color-text-info-tag: var(--shade-10);
+  --color-background-info-tag: var(--purple-400);
 
   --color-text-year-tag: var(--shade-10);
-  --color-background-year-tag: var(--shade-500);
+  --color-background-year-tag: var(--shade-700);
 
   --color-text-watchers-tag: var(--shade-900);
   --color-background-watchers-tag: var(--shade-10);
 
   --color-text-plays-tag: var(--shade-900);
   --color-background-plays-tag: var(--shade-10);
-
-  --color-text-media-type-tag: var(--shade-800);
-  --color-background-media-type-tag: var(--purple-50);
 
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--red-500);

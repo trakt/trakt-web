@@ -40,10 +40,10 @@
 
   const mainItemDetail = () => {
     if (media.year) {
-      const isUpcomingItem = media.airedDate > new Date();
+      const isUpcomingItem = media.airDate > new Date();
       return {
         title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
-        values: [toHumanDay(media.airedDate, getLocale())],
+        values: [toHumanDay(media.airDate, getLocale())],
       };
     }
 

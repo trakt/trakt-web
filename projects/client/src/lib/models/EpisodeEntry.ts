@@ -10,7 +10,7 @@ export type EpisodeEntry = {
     url: string | Nil;
   };
   genres: [];
-  airedDate: Date;
+  airDate: Date;
   type: EpisodeType;
   runtime: number;
   year: number;

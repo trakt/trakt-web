@@ -85,6 +85,7 @@
   <MediaMetaInfo
     certification={show.certification}
     year={episode.year}
+    airDate={episode.airDate}
     {ratings}
     {stats}
     {watchers}

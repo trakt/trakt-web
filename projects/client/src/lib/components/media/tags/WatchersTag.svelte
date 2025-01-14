@@ -1,19 +1,26 @@
 <script lang="ts">
   import TagContent from "$lib/components/tags/TagContent.svelte";
+  import type { TagIntl } from "./TagIntl";
 
-  const { children }: ChildrenProps = $props();
+  const {
+    watchers,
+    i18n,
+  }: {
+    watchers: number;
+    i18n: TagIntl;
+  } = $props();
 </script>
 
-<div class="media-watchers-tag">
+<div class="trakt-watchers-tag">
   <TagContent>
-    <p class="meta-info uppercase no-wrap">
-      {@render children()}
+    <p class="meta-info capitalize no-wrap">
+      {i18n.toWatcherCount(watchers)}
     </p>
   </TagContent>
 </div>
 
 <style>
-  .media-watchers-tag {
+  .trakt-watchers-tag {
     :global(.trakt-tag) {
       background: var(--color-background-watchers-tag);
       color: var(--color-text-watchers-tag);

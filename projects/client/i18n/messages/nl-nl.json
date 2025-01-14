@@ -88,7 +88,7 @@
   "navbar_link_home_label": "Terug naar het startscherm",
   "watchlist": "Watchlist",
   "watchers": "Kijkers",
-  "plays": "Afspeelingen",
+  "plays": "{number} keer bekeken",
   "lists": "Lijsten",
   "favorited": "Bevriend",
   "profile": "Profiel",

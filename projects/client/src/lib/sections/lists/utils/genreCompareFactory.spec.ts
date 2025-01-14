@@ -7,7 +7,7 @@ import {
 
 function createItem(genre: Genre, year: number) {
   return {
-    airedDate: new Date(`${year}-01-01`),
+    airDate: new Date(`${year}-01-01`),
     genres: [genre],
   };
 }

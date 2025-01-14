@@ -20,7 +20,7 @@ export function mapEpisodeResponseToEpisodeEntry(
     episode.images?.screenshot.at(0),
   );
 
-  const airedDate = new Date(episode.first_aired);
+  const airDate = new Date(episode.first_aired);
 
   return {
     id: episode.ids.trakt,
@@ -37,7 +37,7 @@ export function mapEpisodeResponseToEpisodeEntry(
         thumbUrl(posterCandidate),
       ),
     },
-    airedDate,
-    year: airedDate.getFullYear(),
+    airDate,
+    year: airDate.getFullYear(),
   };
 }

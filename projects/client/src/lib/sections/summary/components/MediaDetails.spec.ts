@@ -54,7 +54,7 @@ describe('MediaDetails', () => {
           ...defaultProps,
           media: {
             ...defaultProps.media,
-            airedDate: nextYear,
+            airDate: nextYear,
           },
         },
       },
@@ -73,7 +73,7 @@ describe('MediaDetails', () => {
           media: {
             ...defaultProps.media,
             year: undefined,
-            airedDate: MAX_DATE,
+            airDate: MAX_DATE,
           },
         },
       },

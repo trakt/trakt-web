@@ -6,7 +6,7 @@
   const { type, media, tags }: MediaItemProps = $props();
 </script>
 
-{#if media.airedDate > new Date()}
+{#if media.airDate > new Date()}
   <FutureMediaItem {type} {media} {tags} />
 {:else}
   <AvailableMediaItem {type} {media} {tags} />

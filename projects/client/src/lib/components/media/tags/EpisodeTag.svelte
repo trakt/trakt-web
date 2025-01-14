@@ -3,27 +3,27 @@
   import type { TagIntl } from "./TagIntl";
 
   const {
-    runtime,
+    count,
     i18n,
   }: {
-    runtime: number;
+    count: number;
     i18n: TagIntl;
   } = $props();
 </script>
 
-<div class="trakt-duration-tag">
+<div class="trakt-episode-tag">
   <TagContent>
     <p class="meta-info capitalize no-wrap">
-      {i18n.toDuration(runtime)}
+      {i18n.toEpisodeCount(count)}
     </p>
   </TagContent>
 </div>
 
 <style>
-  .trakt-duration-tag {
+  .trakt-episode-tag {
     :global(.trakt-tag) {
-      background: var(--color-background-duration-tag);
-      color: var(--color-text-duration-tag);
+      background: var(--color-background-episode-count-tag);
+      color: var(--color-text-episode-count-tag);
     }
   }
 </style>

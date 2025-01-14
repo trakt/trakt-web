@@ -43,7 +43,7 @@ export function mapShowResponseToShowSummary(
       show.trailer,
       DEFAULT_TRAILER,
     ),
-    airedDate: new Date(show.first_aired ?? MAX_DATE),
+    airDate: new Date(show.first_aired ?? MAX_DATE),
     certification: show.certification,
   };
 }

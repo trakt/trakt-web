@@ -1,6 +1,4 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
@@ -9,12 +7,12 @@
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import PosterCard from "$lib/components/media/card/PosterCard.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
-  import { languageTag } from "$lib/features/i18n";
   import RenderFor from "$lib/guards/RenderFor.svelte";
 
+  import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
   import { useWatchlist } from "$lib/stores/useWatchlist";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaItemProps } from "./MediaItemProps";
 
@@ -43,13 +41,9 @@
 
 {#snippet defaultTags(media: MediaItemProps["media"])}
   {#if "episode" in media}
-    <DurationTag>
-      {m.number_of_episodes({ count: media.episode.count })}
-    </DurationTag>
+    <EpisodeTag i18n={TagIntlProvider} count={media.episode.count} />
   {:else if type === "movie"}
-    <DurationTag>
-      {toHumanDuration({ minutes: media.runtime }, languageTag())}
-    </DurationTag>
+    <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
   {/if}
 {/snippet}
 

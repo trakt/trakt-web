@@ -23,12 +23,12 @@ export function useComingSoon(type: MediaType) {
     ($watchlist) =>
       $watchlist
         .filter((item) => {
-          const isUpcomingItem = item.airedDate.getTime() > Date.now();
+          const isUpcomingItem = item.airDate.getTime() > Date.now();
           const isInProgressItem = IN_PROGRESS_STATUSES.includes(item.status);
 
           return isUpcomingItem && isInProgressItem;
         })
-        .sort((a, b) => a.airedDate.getTime() - b.airedDate.getTime()),
+        .sort((a, b) => a.airDate.getTime() - b.airDate.getTime()),
   );
 
   return {

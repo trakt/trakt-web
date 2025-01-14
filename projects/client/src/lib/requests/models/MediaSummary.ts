@@ -28,6 +28,6 @@ export type MediaSummary = {
   status: MediaStatus;
   overview: string;
   trailer: string;
-  airedDate: Date;
+  airDate: Date;
   certification?: string;
 };

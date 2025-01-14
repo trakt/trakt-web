@@ -1,10 +1,9 @@
 <script lang="ts">
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
-  import MediaTypeTag from "$lib/components/media/tags/MediaTypeTag.svelte";
+  import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import GenreList from "$lib/components/summary/GenreList.svelte";
-  import { languageTag } from "$lib/features/i18n";
   import type { SearchResult } from "$lib/requests/queries/search/searchQuery";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
 
   const MAX_GENRE_COUNT = 2;
 
@@ -20,12 +19,12 @@
     {result.title} ({result.year})
   </span>
   <div class="meta-info">
-    <MediaTypeTag>{result.type}</MediaTypeTag>
+    <InfoTag>
+      {result.type}
+    </InfoTag>
 
     {#if result.runtime}
-      <DurationTag>
-        {toHumanDuration({ minutes: result.runtime }, languageTag())}
-      </DurationTag>
+      <DurationTag i18n={TagIntlProvider} runtime={result.runtime} />
     {/if}
   </div>
 

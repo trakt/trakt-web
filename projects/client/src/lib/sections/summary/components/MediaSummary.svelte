@@ -118,6 +118,7 @@
   <MediaMetaInfo
     certification={media.certification}
     year={media.year}
+    airDate={media.airDate}
     {ratings}
     {stats}
     {watchers}

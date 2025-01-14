@@ -88,7 +88,7 @@
   "navbar_link_home_label": "Página de inicio",
   "watchlist": "Lista",
   "watchers": "Espectadores",
-  "plays": "Reproducciones",
+  "plays": "{number} reproducciones",
   "lists": "Listas",
   "favorited": "Favoritos",
   "profile": "Perfil",

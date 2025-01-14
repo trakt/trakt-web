@@ -88,7 +88,7 @@
   "navbar_link_home_label": "Page d'accueil",
   "watchlist": "Liste de visionnage",
   "watchers": "Regardants",
-  "plays": "Lectures",
+  "plays": "{number} visionnages",
   "lists": "Listes",
   "favorited": "Favoris",
   "profile": "Profil",

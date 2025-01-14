@@ -27,7 +27,7 @@ export function mapResponseToShowProgress(
     cover: {
       url: prependHttps(posterCandidate),
     },
-    airedDate: new Date(episode.first_aired),
+    airDate: new Date(episode.first_aired),
     total: item.aired,
     completed: item.completed,
     remaining: item.aired - item.completed,

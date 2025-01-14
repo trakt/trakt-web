@@ -1,6 +1,5 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
   import SectionList from "$lib/components/section-list/SectionList.svelte";
   import type { MediaType } from "$lib/models/MediaType";
@@ -27,8 +26,7 @@
   {#snippet item(media)}
     <MediaItem {type} {media}>
       {#snippet tags()}
-        <WatchersTag>{m.active_watchers({ count: media.watchers })}</WatchersTag
-        >
+        <WatchersTag i18n={TagIntlProvider} watchers={media.watchers} />
       {/snippet}
     </MediaItem>
   {/snippet}

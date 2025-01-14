@@ -31,7 +31,7 @@
     >
       {#snippet tags()}
         <EpisodeTimeTag>
-          {EpisodeIntlProvider.timestampText(episode.airedDate)}
+          {EpisodeIntlProvider.timestampText(episode.airDate)}
         </EpisodeTimeTag>
       {/snippet}
     </EpisodeCover>

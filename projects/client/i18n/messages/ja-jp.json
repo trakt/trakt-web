@@ -88,7 +88,7 @@
   "navbar_link_home_label": "ホームページ",
   "watchlist": "視聴リスト",
   "watchers": "視聴者",
-  "plays": "再生回数",
+  "plays": "{number} 回再生",
   "lists": "リスト",
   "favorited": "お気に入り",
   "profile": "プロフィール",

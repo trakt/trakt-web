@@ -4,20 +4,19 @@
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="media-type-tag">
+<div class="trakt-info-tag">
   <TagContent>
-    <p class="meta-info capitalize">
+    <p class="meta-info capitalize no-wrap">
       {@render children()}
     </p>
   </TagContent>
 </div>
 
 <style>
-  .media-type-tag {
+  .trakt-info-tag {
     :global(.trakt-tag) {
-      background: var(--color-background-media-type-tag);
-      color: var(--color-text-media-type-tag);
-      border-radius: var(--border-radius-xs);
+      background: var(--color-background-info-tag);
+      color: var(--color-text-info-tag);
     }
   }
 </style>
