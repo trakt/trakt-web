@@ -1,5 +1,3 @@
-// TODO: run monthly via GitHub Actions
-
 /**
  * Reference documentation:
  *
@@ -93,7 +91,7 @@ const deleteDeployment = async ({
 
 const DEPLOYMENTS_TO_KEEP = 15;
 
-async function cleanupDeployments(
+async function cleanseDeployments(
   apiToken: string,
   accountId: string,
   projectName: string,
@@ -177,5 +175,5 @@ if (import.meta.main) {
 
   const pagesProjectName = 'trakt-lite';
 
-  cleanupDeployments(apiToken, accountId, pagesProjectName);
+  cleanseDeployments(apiToken, accountId, pagesProjectName);
 }

@@ -1,0 +1,25 @@
+name: The Cloudflare Purgation Ritual
+
+on:
+  schedule:
+    # Runs at 00:00 every other Sunday
+    - cron: '0 0 */14 * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  cleanse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Unearthing the Code Codex
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Summoning the Deno Oracle
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Performing the Sacred Cleanse
+        run: deno task cloudflare:cleanse
