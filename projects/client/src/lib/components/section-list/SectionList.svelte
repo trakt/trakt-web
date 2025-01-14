@@ -13,9 +13,11 @@
     items: T[];
     item: Snippet<[T]>;
     empty?: Snippet;
+    spacing?: "small" | "large";
   };
 
-  const { id, items, title, item, empty }: SectionListProps<T> = $props();
+  const { id, items, title, item, empty, spacing }: SectionListProps<T> =
+    $props();
 
   const scrollContainer = writable<HTMLDivElement>();
   const scrollX = writable({ left: 0, right: 0 });
@@ -51,7 +53,16 @@
   const isRightScrollDisabled = $derived($scrollX.right <= 0);
 </script>
 
-<ShadowList {id} {title} {items} {item} {empty} {scrollX} {scrollContainer}>
+<ShadowList
+  {id}
+  {title}
+  {items}
+  {item}
+  {empty}
+  {scrollX}
+  {scrollContainer}
+  {spacing}
+>
   {#snippet actions()}
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
       <ActionButton

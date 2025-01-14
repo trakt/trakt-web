@@ -15,6 +15,7 @@
     actions?: Snippet;
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
+    spacing?: "small" | "large";
   };
 
   const {
@@ -26,6 +27,7 @@
     item,
     actions,
     empty,
+    spacing = "small",
   }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
@@ -99,6 +101,8 @@
           use:scrollTracking={scrollX}
           use:scrollHistory
           class="shadow-list-horizontal-scroll"
+          class:spacing-large={spacing === "large"}
+          class:spacing-small={spacing === "small"}
         >
           {#each items as i (i.id)}
             {@render item(i)}
@@ -244,9 +248,16 @@
     padding: 0 var(--layout-distance-side);
     height: var(--height-list);
     display: flex;
-    gap: var(--ni-8);
     overflow-x: auto;
     scroll-snap-type: x proximity;
+
+    &.spacing-small {
+      gap: var(--ni-8);
+    }
+
+    &.spacing-large {
+      gap: var(--ni-16);
+    }
 
     & > :global(:not(svelte-css-wrapper)) {
       scroll-snap-align: start;
