@@ -13,7 +13,7 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
-  title={m.navbar_link_movies()}
+  title={m.navbar_link_watchlist()}
 >
   <CoverImageSetter src={current().cover.url} type="main" />
 
