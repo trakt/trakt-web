@@ -6,4 +6,5 @@ export const ShowSiloPersonMappedMock: PersonSummary = {
   headShotUrl:
     'https://walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
   name: 'Rebecca Ferguson',
+  slug: 'rebecca-ferguson',
 };

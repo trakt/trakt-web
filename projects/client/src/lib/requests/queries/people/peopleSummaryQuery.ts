@@ -16,6 +16,7 @@ function mapPeopleResponseToPersonSummary(
   );
 
   return {
+    slug: peopleSummaryResponse.ids.slug,
     name: peopleSummaryResponse.name,
     biography: peopleSummaryResponse.biography ?? '',
     headShotUrl: prependHttps(
