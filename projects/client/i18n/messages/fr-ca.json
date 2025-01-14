@@ -243,5 +243,6 @@
   "status_unknown": "Inconnu",
   "expected_premiere": "Première attendue",
   "recently_watched_episodes": "Épisodes récemment regardés",
-  "recently_watched_movies": "Films récemment regardés"
+  "recently_watched_movies": "Films récemment regardés",
+  "person_headshot": "Portrait de {person}"
 }

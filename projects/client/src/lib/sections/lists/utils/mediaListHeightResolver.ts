@@ -1,6 +1,8 @@
 import type { MediaType } from '$lib/models/MediaType.ts';
 
-export function mediaListHeightResolver(type: MediaType | 'episode') {
+export function mediaListHeightResolver(
+  type: MediaType | 'episode' | 'person',
+) {
   switch (type) {
     case 'movie':
       return 'var(--height-poster-list)';
@@ -8,5 +10,7 @@ export function mediaListHeightResolver(type: MediaType | 'episode') {
       return 'var(--height-episode-list)';
     case 'show':
       return 'var(--height-show-list)';
+    case 'person':
+      return 'var(--height-person-list)';
   }
 }

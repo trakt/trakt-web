@@ -243,5 +243,6 @@
   "status_unknown": "Onbekend",
   "expected_premiere": "Verwachte première",
   "recently_watched_episodes": "Recentelijk bekeken afleveringen",
-  "recently_watched_movies": "Recentelijk bekeken films"
+  "recently_watched_movies": "Recentelijk bekeken films",
+  "person_headshot": "Hoofdfoto van {person}"
 }

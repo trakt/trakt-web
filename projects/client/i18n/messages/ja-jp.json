@@ -243,5 +243,6 @@
   "status_unknown": "不明",
   "expected_premiere": "公開予定",
   "recently_watched_episodes": "最近見たエピソード",
-  "recently_watched_movies": "最近見た作品"
+  "recently_watched_movies": "最近見た作品",
+  "person_headshot": "{person}さんの顔写真"
 }

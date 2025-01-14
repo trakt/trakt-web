@@ -23,6 +23,7 @@
    */
   --height-episode-list: var(--ni-192);
   --height-show-list: var(--ni-192);
+  --height-person-list: var(--ni-232);
   --height-poster-list: calc(
     var(--height-poster-card) + var(--layout-distance-scroll-card)
   );
