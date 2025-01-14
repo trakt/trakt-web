@@ -10,6 +10,7 @@ import { MovieHereticStatsResponseMock } from './data/summary/movies/heretic/res
 import { MovieStudiosResponseMock } from './data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
 import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/response/ShowSiloLanguageResponseMock.ts';
 import { ShowSiloPeopleResponseMock } from './data/summary/shows/silo/response/ShowSiloPeopleResponseMock.ts';
+import { ShowSiloPersonResponseMock } from './data/summary/shows/silo/response/ShowSiloPersonResponseMock.ts';
 import { ShowSiloProgressResponseMock } from './data/summary/shows/silo/response/ShowSiloProgressResponseMock.ts';
 import { ShowSiloRatingsResponseMock } from './data/summary/shows/silo/response/ShowSiloRatingsResponseMock.ts';
 import { ShowSiloResponseMock } from './data/summary/shows/silo/response/ShowSiloResponseMock.ts';
@@ -179,6 +180,15 @@ const sync = [
   ),
 ];
 
+const people = [
+  http.get(
+    `http://localhost/people/${ShowSiloPersonResponseMock.ids.slug}`,
+    () => {
+      return HttpResponse.json(ShowSiloPersonResponseMock);
+    },
+  ),
+];
+
 const auth = [
   http.post(`${TRAKT_TARGET_ENVIRONMENT}/oauth/token`, () => {
     return HttpResponse.json(AuthResponseMock);
@@ -191,4 +201,5 @@ export const handlers = [
   ...shows,
   ...sync,
   ...auth,
+  ...people,
 ];
