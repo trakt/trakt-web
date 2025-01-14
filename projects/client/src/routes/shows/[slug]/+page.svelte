@@ -19,7 +19,7 @@
 
 <TraktPage
   audience="all"
-  title={$show?.title}
+  title={$intl?.title ?? $show?.title}
   info={$show}
   image={$show?.poster.url.thumb ?? $show?.cover.url.thumb}
   type="show"

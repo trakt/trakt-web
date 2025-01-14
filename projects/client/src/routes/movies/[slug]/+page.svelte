@@ -11,7 +11,7 @@
 
 <TraktPage
   audience="all"
-  title={$movie?.title}
+  title={$intl?.title ?? $movie?.title}
   info={$movie}
   image={$movie?.poster.url.thumb ?? $movie?.cover.url.thumb}
   type="movie"
