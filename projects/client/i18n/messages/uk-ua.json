@@ -245,5 +245,6 @@
   "recently_watched_episodes": "Нещодавно переглянуті епізоди",
   "recently_watched_movies": "Нещодавно переглянуті фільми",
   "person_headshot": "Фото {person}",
-  "actors": "Актори"
+  "actors": "Актори",
+  "anticipated_count": "{count} в очікуванні"
 }

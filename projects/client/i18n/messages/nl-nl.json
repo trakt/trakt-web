@@ -245,5 +245,6 @@
   "recently_watched_episodes": "Recentelijk bekeken afleveringen",
   "recently_watched_movies": "Recentelijk bekeken films",
   "person_headshot": "Hoofdfoto van {person}",
-  "actors": "Acteurs"
+  "actors": "Acteurs",
+  "anticipated_count": "{count} zin in"
 }

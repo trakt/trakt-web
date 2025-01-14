@@ -245,5 +245,6 @@
   "recently_watched_episodes": "Derniers épisodes vus",
   "recently_watched_movies": "Derniers films vus",
   "person_headshot": "Photo de {person}",
-  "actors": "Acteurs"
+  "actors": "Acteurs",
+  "anticipated_count": "{count} impatients"
 }

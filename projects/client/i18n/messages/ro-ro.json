@@ -245,5 +245,6 @@
   "recently_watched_episodes": "Episoade Văzute Recent",
   "recently_watched_movies": "Filme Văzute Recent",
   "person_headshot": "Portretul lui {person}",
-  "actors": "Actori"
+  "actors": "Actori",
+  "anticipated_count": "{count} nerăbdători"
 }

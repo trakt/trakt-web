@@ -245,5 +245,6 @@
   "recently_watched_episodes": "Episodios Vistos Recientemente",
   "recently_watched_movies": "Contenido Visto Recientemente",
   "person_headshot": "Foto de {person}",
-  "actors": "Actores"
+  "actors": "Actores",
+  "anticipated_count": "{count} con ansias"
 }

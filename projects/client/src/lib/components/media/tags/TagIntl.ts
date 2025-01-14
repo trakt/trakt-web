@@ -5,4 +5,5 @@ export type TagIntl = {
   toWatcherCount: (count: number) => string;
   toReleaseEstimate: (airDate: Date) => string;
   tbaLabel: () => string;
+  toAnticipatedCount: (count: number) => string;
 };

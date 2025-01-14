@@ -16,4 +16,6 @@ export const TagIntlProvider: TagIntl = {
   toWatcherCount: (count) => m.active_watchers({ count }),
   toReleaseEstimate: (airDate) => toHumanETA(new Date(), airDate, getLocale()),
   tbaLabel: () => m.tba_label(),
+  toAnticipatedCount: (count) =>
+    m.anticipated_count({ count: toHumanNumber(count, languageTag()) }),
 };

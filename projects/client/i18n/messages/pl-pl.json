@@ -245,5 +245,6 @@
   "recently_watched_episodes": "Ostatnio obejrzane odcinki",
   "recently_watched_movies": "Ostatnio obejrzane filmy",
   "person_headshot": "Zdjęcie {person}",
-  "actors": "Aktorzy"
+  "actors": "Aktorzy",
+  "anticipated_count": "{count} wyczekujących"
 }

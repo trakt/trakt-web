@@ -245,5 +245,6 @@
   "recently_watched_episodes": "Recently Watched Episodes",
   "recently_watched_movies": "Recently Watched Movies",
   "person_headshot": "Headshot of {person}",
-  "actors": "Actors"
+  "actors": "Actors",
+  "anticipated_count": "{count} eager"
 }

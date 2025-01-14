@@ -20,6 +20,9 @@
   --color-text-duration-tag: var(--shade-800);
   --color-background-duration-tag: var(--shade-10);
 
+  --color-text-listing-tag: var(--shade-800);
+  --color-background-listing-tag: var(--shade-10);
+
   --color-text-episode-count-tag: var(--shade-800);
   --color-background-episode-count-tag: var(--shade-10);
 
