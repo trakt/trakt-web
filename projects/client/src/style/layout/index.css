@@ -14,6 +14,10 @@
   --height-episode-card: var(--ni-176);
   --height-episode-card-cover: var(--ni-120);
 
+  --width-person-card: var(--ni-120);
+  --height-person-card: var(--ni-176);
+  --height-person-card-cover: var(--ni-176);
+
   /**
    * List dimensions
    */
