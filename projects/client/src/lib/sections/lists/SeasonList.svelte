@@ -4,7 +4,7 @@
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
-  import ShadowList from "$lib/components/section-list/ShadowList.svelte";
+  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Season } from "$lib/models/Season";
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";

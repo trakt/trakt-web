@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SectionList from "$lib/components/section-list/SectionList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import FindShowsLink from "./components/FindShowsLink.svelte";
   import UpcomingEpisodeItem from "./components/UpcomingEpisodeItem.svelte";

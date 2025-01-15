@@ -1,7 +1,7 @@
 <script lang="ts">
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
-  import SectionList from "$lib/components/section-list/SectionList.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import MediaItem from "./components/MediaItem.svelte";
   import { useTrendingList } from "./stores/useTrendingList";

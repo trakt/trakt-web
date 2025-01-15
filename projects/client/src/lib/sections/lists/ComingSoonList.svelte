@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
-  import SectionList from "$lib/components/section-list/SectionList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import FindMoviesLink from "./components/FindMoviesLink.svelte";
   import MediaItem from "./components/MediaItem.svelte";

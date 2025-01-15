@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SectionList from "$lib/components/section-list/SectionList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import CastMemberItem from "./components/CastMemberItem.svelte";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";

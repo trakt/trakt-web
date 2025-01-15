@@ -6,7 +6,7 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import TraktPage from "$lib/components/layout/TraktPage.svelte";
-  import ShadowList from "$lib/components/section-list/ShadowList.svelte";
+  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { resolveEnvironmentUri } from "$lib/features/image/components/resolveEnvironmentUri";
   import { usePopularList } from "$lib/sections/lists/stores/usePopularList";

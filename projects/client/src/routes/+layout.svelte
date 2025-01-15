@@ -2,9 +2,9 @@
   import "../style";
 
   import { page } from "$app/state";
+  import ListScrollHistoryProvider from "$lib//components/lists/section-list/ListScrollHistoryProvider.svelte";
   import CoverImage from "$lib/components/background/CoverImage.svelte";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
-  import ListScrollHistoryProvider from "$lib/components/section-list/ListScrollHistoryProvider.svelte";
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";

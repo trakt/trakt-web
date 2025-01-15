@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SectionList from "$lib/components/section-list/SectionList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import EpisodeItem from "./components/EpisodeItem.svelte";
   import MediaItem from "./components/MediaItem.svelte";
   import { useRecentlyWatchedList } from "./stores/useRecentlyWatchedList";

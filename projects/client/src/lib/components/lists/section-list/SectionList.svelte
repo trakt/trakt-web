@@ -1,10 +1,10 @@
 <script lang="ts" generics="T extends { id: unknown }">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { type Snippet } from "svelte";
   import { writable } from "svelte/store";
-  import ActionButton from "../buttons/ActionButton.svelte";
-  import CaretLeftIcon from "../icons/CaretLeftIcon.svelte";
-  import CaretRightIcon from "../icons/CaretRightIcon.svelte";
   import ShadowList from "./ShadowList.svelte";
 
   type SectionListProps<T> = {
@@ -13,11 +13,19 @@
     items: T[];
     item: Snippet<[T]>;
     empty?: Snippet;
+    actions?: Snippet;
     spacing?: "small" | "large";
   };
 
-  const { id, items, title, item, empty, spacing }: SectionListProps<T> =
-    $props();
+  const {
+    id,
+    items,
+    title,
+    item,
+    empty,
+    actions: externalActions,
+    spacing,
+  }: SectionListProps<T> = $props();
 
   const scrollContainer = writable<HTMLDivElement>();
   const scrollX = writable({ left: 0, right: 0 });
@@ -82,5 +90,9 @@
         <CaretRightIcon />
       </ActionButton>
     </RenderFor>
+
+    {#if externalActions != null}
+      {@render externalActions()}
+    {/if}
   {/snippet}
 </ShadowList>
