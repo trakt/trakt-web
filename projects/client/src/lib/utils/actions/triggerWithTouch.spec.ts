@@ -2,38 +2,58 @@ import { describe, expect, it } from 'vitest';
 import { triggerWithTouch } from './triggerWithTouch';
 
 describe('triggerWithTouch', () => {
-  it('should trigger click for touch events', () => {
+  it('should trigger click for touch events without movement', () => {
     const node = document.createElement('button');
     let clickCount = 0;
     node.addEventListener('click', () => clickCount++);
 
     const action = triggerWithTouch(node);
 
-    const touchEvent = new Event('pointerup', {
+    const touchStartEvent = new TouchEvent('touchstart', {
       bubbles: true,
+      touches: [
+        { clientX: 0, clientY: 0 } as unknown as Touch,
+      ],
     });
-    Object.defineProperty(touchEvent, 'pointerType', { value: 'touch' });
 
-    node.dispatchEvent(touchEvent);
+    const touchEndEvent = new TouchEvent('touchend', {
+      bubbles: true,
+      changedTouches: [
+        { clientX: 0, clientY: 0 } as unknown as Touch,
+      ],
+    });
+
+    node.dispatchEvent(touchStartEvent);
+    node.dispatchEvent(touchEndEvent);
 
     expect(clickCount).toBe(1);
 
     action.destroy();
   });
 
-  it('should NOT trigger click for mouse events', () => {
+  it('should NOT trigger click when movement exceeds threshold', () => {
     const node = document.createElement('button');
     let clickCount = 0;
     node.addEventListener('click', () => clickCount++);
 
     const action = triggerWithTouch(node);
 
-    const mouseEvent = new Event('pointerup', {
+    const touchStartEvent = new TouchEvent('touchstart', {
       bubbles: true,
+      touches: [
+        { clientX: 0, clientY: 0 } as unknown as Touch,
+      ],
     });
-    Object.defineProperty(mouseEvent, 'pointerType', { value: 'mouse' });
 
-    node.dispatchEvent(mouseEvent);
+    const touchEndEvent = new TouchEvent('touchend', {
+      bubbles: true,
+      changedTouches: [
+        { clientX: 20, clientY: 20 } as unknown as Touch,
+      ],
+    });
+
+    node.dispatchEvent(touchStartEvent);
+    node.dispatchEvent(touchEndEvent);
 
     expect(clickCount).toBe(0);
 
@@ -43,18 +63,27 @@ describe('triggerWithTouch', () => {
   it('should cleanup listeners on destroy', () => {
     const node = document.createElement('button');
     let clickCount = 0;
-
-    const action = triggerWithTouch(node);
     node.addEventListener('click', () => clickCount++);
 
+    const action = triggerWithTouch(node);
     action.destroy();
 
-    const touchEvent = new Event('pointerup', {
+    const touchStartEvent = new TouchEvent('touchstart', {
       bubbles: true,
+      touches: [
+        { clientX: 0, clientY: 0 } as unknown as Touch,
+      ],
     });
-    Object.defineProperty(touchEvent, 'pointerType', { value: 'touch' });
 
-    node.dispatchEvent(touchEvent);
+    const touchEndEvent = new TouchEvent('touchend', {
+      bubbles: true,
+      changedTouches: [
+        { clientX: 0, clientY: 0 } as unknown as Touch,
+      ],
+    });
+
+    node.dispatchEvent(touchStartEvent);
+    node.dispatchEvent(touchEndEvent);
 
     expect(clickCount).toBe(0);
   });
@@ -66,13 +95,24 @@ describe('triggerWithTouch', () => {
 
     const action = triggerWithTouch(node);
 
-    const touchEvent = new Event('pointerup', {
+    const touchStartEvent = new TouchEvent('touchstart', {
       bubbles: true,
+      touches: [
+        { clientX: 0, clientY: 0 } as unknown as Touch,
+      ],
     });
-    Object.defineProperty(touchEvent, 'pointerType', { value: 'touch' });
-    Object.defineProperty(touchEvent, 'target', { value: {} });
+    Object.defineProperty(touchStartEvent, 'target', { value: {} });
 
-    node.dispatchEvent(touchEvent);
+    const touchEndEvent = new TouchEvent('touchend', {
+      bubbles: true,
+      changedTouches: [
+        { clientX: 0, clientY: 0 } as unknown as Touch,
+      ],
+    });
+    Object.defineProperty(touchEndEvent, 'target', { value: {} });
+
+    node.dispatchEvent(touchStartEvent);
+    node.dispatchEvent(touchEndEvent);
 
     expect(clickCount).toBe(0);
 
