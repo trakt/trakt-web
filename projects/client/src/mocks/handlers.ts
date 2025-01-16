@@ -18,6 +18,10 @@ import { ShowSiloSeasonsResponseMock } from './data/summary/shows/silo/response/
 import { ShowSiloStatsResponseMock } from './data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from './data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
 import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
+import { FavoritedMoviesResponseMock } from './data/users/FavoritedMoviesResponseMock.ts';
+import { FavoritedShowsResponseMock } from './data/users/FavoritedShowsResponseMock.ts';
+import { RatedEpisodesResponseMock } from './data/users/RatedEpisodesResponseMock.ts';
+import { RatedMoviesResponseMock } from './data/users/RatedMoviesResponseMock.ts';
 import { WatchedMoviesResponseMock } from './data/users/WatchedMoviesResponseMock.ts';
 import { WatchedShowsResponseMock } from './data/users/WatchedShowsResponseMock.ts';
 import { WatchlistMoviesResponseMock } from './data/users/WatchlistMoviesResponseMock.ts';
@@ -38,6 +42,18 @@ const users = [
   }),
   http.get('http://localhost/users/me/watchlist/shows/rank', () => {
     return HttpResponse.json(WatchlistShowsResponseMock);
+  }),
+  http.get('http://localhost/users/me/ratings/movies', () => {
+    return HttpResponse.json(RatedMoviesResponseMock);
+  }),
+  http.get('http://localhost/users/me/ratings/episodes', () => {
+    return HttpResponse.json(RatedEpisodesResponseMock);
+  }),
+  http.get('http://localhost/users/me/favorites/movies/rank', () => {
+    return HttpResponse.json(FavoritedMoviesResponseMock);
+  }),
+  http.get('http://localhost/users/me/favorites/shows/rank', () => {
+    return HttpResponse.json(FavoritedShowsResponseMock);
   }),
 ];
 
@@ -163,6 +179,22 @@ const sync = [
     },
   ),
   http.post(
+    'http://localhost/sync/ratings',
+    () => {
+      return new HttpResponse(null, {
+        status: 201,
+      });
+    },
+  ),
+  http.post(
+    'http://localhost/sync/favorites',
+    () => {
+      return new HttpResponse(null, {
+        status: 201,
+      });
+    },
+  ),
+  http.post(
     'http://localhost/sync/history/remove',
     () => {
       return new HttpResponse(null, {
@@ -172,6 +204,22 @@ const sync = [
   ),
   http.post(
     'http://localhost/sync/watchlist/remove',
+    () => {
+      return new HttpResponse(null, {
+        status: 200,
+      });
+    },
+  ),
+  http.post(
+    'http://localhost/sync/ratings/remove',
+    () => {
+      return new HttpResponse(null, {
+        status: 200,
+      });
+    },
+  ),
+  http.post(
+    'http://localhost/sync/favorites/remove',
     () => {
       return new HttpResponse(null, {
         status: 200,
