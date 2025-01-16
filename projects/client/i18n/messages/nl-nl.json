@@ -246,5 +246,11 @@
   "recently_watched_movies": "Recentelijk bekeken films",
   "person_headshot": "Hoofdfoto van {person}",
   "actors": "Acteurs",
-  "anticipated_count": "{count} zin in"
+  "anticipated_count": "{count} zin in",
+  "view_all_trending_movies": "Bekijk alle populaire films",
+  "view_all_trending_shows": "Bekijk alle populaire series",
+  "trending_shows": "Populaire Series",
+  "trending_movies": "Populaire Films",
+  "view_all": "Bekijk Alles",
+  "go_to_page_number": "Ga naar pagina {number}"
 }

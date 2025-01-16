@@ -246,5 +246,11 @@
   "recently_watched_movies": "Нещодавно переглянуті фільми",
   "person_headshot": "Фото {person}",
   "actors": "Актори",
-  "anticipated_count": "{count} в очікуванні"
+  "anticipated_count": "{count} в очікуванні",
+  "view_all_trending_movies": "Дивитись всі популярні фільми",
+  "view_all_trending_shows": "Дивитись всі популярні серіали",
+  "trending_shows": "Популярні серіали",
+  "trending_movies": "Популярні фільми",
+  "view_all": "Дивитись все",
+  "go_to_page_number": "Перейти на сторінку {number}"
 }

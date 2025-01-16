@@ -5,15 +5,12 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { type Snippet } from "svelte";
   import { writable } from "svelte/store";
+  import type { ListProps } from "../ListProps";
   import ShadowList from "./ShadowList.svelte";
 
-  type SectionListProps<T> = {
+  type SectionListProps<T> = ListProps<T> & {
     id: string;
-    title: string;
-    items: T[];
-    item: Snippet<[T]>;
     empty?: Snippet;
-    actions?: Snippet;
     spacing?: "small" | "large";
   };
 

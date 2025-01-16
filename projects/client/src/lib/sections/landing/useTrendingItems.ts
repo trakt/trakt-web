@@ -25,13 +25,17 @@ export function useTrendingItems() {
   return {
     shows: derived(
       trendingShows,
-      ($shows) => shuffle($shows.data ?? []).slice(0, RANDOM_SHOW_COUNT),
+      ($shows) =>
+        shuffle($shows.data?.entries ?? []).slice(0, RANDOM_SHOW_COUNT),
     ),
     //TODO replace with episode
-    show: derived(trendingShows, ($shows) => shuffle($shows.data ?? []).at(0)),
+    show: derived(
+      trendingShows,
+      ($shows) => shuffle($shows.data?.entries ?? []).at(0),
+    ),
     movie: derived(
       trendingMovies,
-      ($movies) => shuffle($movies.data ?? []).at(0),
+      ($movies) => shuffle($movies.data?.entries ?? []).at(0),
     ),
   };
 }

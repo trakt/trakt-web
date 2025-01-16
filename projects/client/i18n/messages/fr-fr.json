@@ -246,5 +246,11 @@
   "recently_watched_movies": "Derniers films vus",
   "person_headshot": "Photo de {person}",
   "actors": "Acteurs",
-  "anticipated_count": "{count} impatients"
+  "anticipated_count": "{count} impatients",
+  "view_all_trending_movies": "Voir tous les films populaires",
+  "view_all_trending_shows": "Voir toutes les séries populaires",
+  "trending_shows": "Séries populaires",
+  "trending_movies": "Films populaires",
+  "view_all": "Tout voir",
+  "go_to_page_number": "Aller à la page {number}"
 }

@@ -1,4 +1,5 @@
 import type { MediaType } from '$lib/models/MediaType.ts';
+import type { Paginatable } from '$lib/models/Paginatable';
 import {
   movieTrendingQuery,
   type TrendingMovie,
@@ -12,18 +13,19 @@ import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export type TrendingMediaItem = TrendingMovie | TrendingShow;
-export type TrendingMedia = Array<TrendingMediaItem>;
 
 type TrendingListStoreProps = {
   type: MediaType;
   limit?: number;
+  page?: number;
 };
 
 function typeToQuery(
-  { type, limit }: TrendingListStoreProps,
-): CreateQueryOptions<TrendingMedia> {
+  { type, limit, page }: TrendingListStoreProps,
+): CreateQueryOptions<Paginatable<TrendingMediaItem>> {
   const params = {
     limit,
+    page,
   };
 
   switch (type) {
@@ -35,15 +37,18 @@ function typeToQuery(
 }
 
 export function useTrendingList(
-  { type, limit = 25 }: TrendingListStoreProps,
+  { type, limit, page }: TrendingListStoreProps,
 ) {
   const query = createQuery({
-    ...typeToQuery({ type, limit }),
+    ...typeToQuery({ type, limit, page }),
     staleTime: time.hours(1),
   });
-  const list = derived(query, ($query) => $query.data ?? []);
 
   return {
-    list,
+    list: derived(query, ($query) => $query.data?.entries ?? []),
+    page: derived(
+      query,
+      ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    ),
   };
 }

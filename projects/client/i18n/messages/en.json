@@ -246,5 +246,11 @@
   "recently_watched_movies": "Recently Watched Movies",
   "person_headshot": "Headshot of {person}",
   "actors": "Actors",
-  "anticipated_count": "{count} eager"
+  "anticipated_count": "{count} eager",
+  "view_all_trending_movies": "View all trending movies",
+  "view_all_trending_shows": "View all trending shows",
+  "trending_shows": "Trending Shows",
+  "trending_movies": "Trending Movies",
+  "view_all": "View All",
+  "go_to_page_number": "Go to page {number}"
 }

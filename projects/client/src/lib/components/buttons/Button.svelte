@@ -191,7 +191,7 @@
 
     &[data-size="small"] {
       --scale-factor-button: 0.75;
-      margin: 0 var(--ni-neg-8);
+      margin: var(--ni-neg-2) var(--ni-neg-8);
     }
 
     &[data-size="tag"] {
@@ -265,7 +265,7 @@
     }
 
     &[data-style="ghost"] {
-      margin: 0 var(--ni-neg-6);
+      margin: var(--ni-neg-2) var(--ni-neg-6);
       transform: scale(calc(var(--scale-factor-button) * 0.9));
       background: transparent;
       color: color(var(--color-foreground));

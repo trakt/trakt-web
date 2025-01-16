@@ -246,5 +246,11 @@
   "recently_watched_movies": "Zuletzt gesehene Filme",
   "person_headshot": "Kopfschuss von {person}",
   "actors": "Schauspieler",
-  "anticipated_count": "{count} gespannt"
+  "anticipated_count": "{count} gespannt",
+  "view_all_trending_movies": "Alle Trendfilme ansehen",
+  "view_all_trending_shows": "Alle Trendserien ansehen",
+  "trending_shows": "Trendserien",
+  "trending_movies": "Trendfilme",
+  "view_all": "Alle ansehen",
+  "go_to_page_number": "Gehe zu Seite {number}"
 }

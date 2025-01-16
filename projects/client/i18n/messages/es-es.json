@@ -246,5 +246,11 @@
   "recently_watched_movies": "Contenido Visto Recientemente",
   "person_headshot": "Foto de {person}",
   "actors": "Actores",
-  "anticipated_count": "{count} con ganas"
+  "anticipated_count": "{count} con ganas",
+  "view_all_trending_movies": "Ver todas las películas populares",
+  "view_all_trending_shows": "Ver todas las series populares",
+  "trending_shows": "Series populares",
+  "trending_movies": "Películas populares",
+  "view_all": "Ver Todo",
+  "go_to_page_number": "Ir a la página {number}"
 }

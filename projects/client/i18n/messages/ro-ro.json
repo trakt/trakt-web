@@ -246,5 +246,11 @@
   "recently_watched_movies": "Filme Văzute Recent",
   "person_headshot": "Portretul lui {person}",
   "actors": "Actori",
-  "anticipated_count": "{count} nerăbdători"
+  "anticipated_count": "{count} nerăbdători",
+  "view_all_trending_movies": "Vezi toate filmele populare",
+  "view_all_trending_shows": "Vezi toate serialele populare",
+  "trending_shows": "Seriale populare",
+  "trending_movies": "Filme populare",
+  "view_all": "Vezi tot",
+  "go_to_page_number": "Mergi la pagina {number}"
 }

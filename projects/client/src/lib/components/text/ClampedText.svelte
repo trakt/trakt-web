@@ -2,6 +2,7 @@
   import MoreButton from "$lib/components/buttons/more/MoreButton.svelte";
   import { MoreButtonIntlProvider } from "$lib/components/buttons/more/MoreButtonIntlProvider";
   import { lineClamp } from "$lib/components/text/lineClamp";
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { writable } from "svelte/store";
 
   type LineClampProps = {
@@ -14,15 +15,6 @@
   const isClamped = writable(false);
   const lines = writable(3);
   const isExpanded = $derived($lines === 1337);
-
-  function appendClassList(node: HTMLElement, classList: string) {
-    classList
-      .split(" ")
-      .filter(Boolean)
-      .forEach((className) => {
-        node.classList.add(className);
-      });
-  }
 </script>
 
 <div class="line-clamp-container">

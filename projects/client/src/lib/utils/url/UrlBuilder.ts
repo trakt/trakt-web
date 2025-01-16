@@ -1,4 +1,10 @@
 import type { MediaType } from '$lib/models/MediaType.ts';
+import { buildParamString } from './buildParamString';
+
+type PaginatableMediaPageUrl = {
+  type: MediaType;
+  page?: number;
+};
 
 export const UrlBuilder = {
   home: () => '/',
@@ -12,6 +18,18 @@ export const UrlBuilder = {
     }
   },
   show: (id: string) => `/shows/${id}`,
+  trending: ({ type, page }: PaginatableMediaPageUrl) => {
+    const trendingMediaUrl = (() => {
+      switch (type) {
+        case 'show':
+          return '/shows/trending';
+        case 'movie':
+          return '/movies/trending';
+      }
+    })();
+
+    return trendingMediaUrl + buildParamString({ page });
+  },
   movies: () => '/movies',
   movie: (id: string) => `/movies/${id}`,
   people: (id: string) => `/people/${id}`,

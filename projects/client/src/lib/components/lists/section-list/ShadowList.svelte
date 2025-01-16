@@ -3,6 +3,8 @@
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { onMount, type Snippet } from "svelte";
   import { writable, type Writable } from "svelte/store";
+  import "../_internal/list.css";
+  import ListHeader from "../_internal/ListHeader.svelte";
   import { scrollTracking } from "./scrollTracking";
   import { useScrollHistory } from "./useScrollHistory";
 
@@ -80,14 +82,7 @@
   class="shadow-list-container"
 >
   {#if $isVisible}
-    <div class="shadow-list-header">
-      <h4 class="shadow-list-title ellipsis">{title}</h4>
-      {#if actions != null}
-        <div class="shadow-list-actions">
-          {@render actions()}
-        </div>
-      {/if}
-    </div>
+    <ListHeader {title} {actions} inset="title" />
     <div
       class="shadow-list"
       class:shadow-list-left-shadow={isLeftShadowVisible}
@@ -100,7 +95,7 @@
           bind:this={$scrollContainer}
           use:scrollTracking={scrollX}
           use:scrollHistory
-          class="shadow-list-horizontal-scroll"
+          class="trakt-list-item-container shadow-list-horizontal-scroll"
           class:spacing-large={spacing === "large"}
           class:spacing-small={spacing === "small"}
         >
@@ -149,41 +144,6 @@
     :global(> p) {
       padding: 0 var(--ni-16);
       text-align: center;
-    }
-  }
-
-  .shadow-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--ni-16);
-
-    margin: 0;
-    margin-left: calc(var(--ni-72) + var(--layout-distance-side));
-    margin-right: var(--layout-distance-side);
-    transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
-
-    @include for-tablet-sm-and-below {
-      margin-left: calc(var(--layout-distance-side));
-    }
-  }
-
-  .shadow-list-actions {
-    display: flex;
-    gap: var(--ni-8);
-    align-items: center;
-  }
-
-  .shadow-list-title {
-    color: var(--color-text-primary);
-    transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
-
-    @include for-tablet-sm {
-      font-size: var(--ni-32);
-    }
-
-    @include for-mobile {
-      font-size: var(--ni-24);
     }
   }
 
@@ -245,7 +205,6 @@
   }
 
   .shadow-list-horizontal-scroll {
-    padding: 0 var(--layout-distance-side);
     height: var(--height-list);
     display: flex;
     overflow-x: auto;

@@ -47,3 +47,5 @@ export const DEFAULT_SHARE_COVER = assertDefined(
 export const NOOP_FN = () => {
   // noop
 };
+
+export const DEFAULT_PAGE_SIZE = 15;
