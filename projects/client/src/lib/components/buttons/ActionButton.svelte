@@ -17,6 +17,7 @@
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
   const href = $derived((props as TraktActionButtonAnchorProps).href);
+  const noscroll = $derived((props as TraktActionButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
 </script>
 
@@ -26,6 +27,7 @@
     use:triggerWithKeyboard
     use:triggerWithTouch
     data-sveltekit-keepfocus
+    data-sveltekit-noscroll={noscroll}
     class="trakt-action-button trakt-button-link"
     class:trakt-link-active={$isActive}
     aria-label={label}
@@ -114,7 +116,7 @@
       @include color-styles($color);
     }
 
-    &[disabled] {
+    &[disabled]:not([disabled="false"]) {
       cursor: not-allowed;
       color: var(--color-foreground-button-disabled);
       background: var(
@@ -130,7 +132,7 @@
     &:active {
       transform: scale(0.95);
 
-      &[disabled] {
+      &[disabled]:not([disabled="false"]) {
         animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle)
           infinite;
       }

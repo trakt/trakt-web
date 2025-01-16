@@ -22,6 +22,7 @@
   );
   const tabIndex = $derived(hasHandler ? 0 : -1);
   const href = $derived((props as DropdownItemAnchorProps).href);
+  const noscroll = $derived((props as DropdownItemAnchorProps).noscroll);
   const target = $derived((props as DropdownItemAnchorProps).target);
 </script>
 
@@ -38,7 +39,7 @@
   {...props}
 >
   {#if href}
-    <Link {href} {target} color="inherit">
+    <Link {href} {noscroll} {target} color="inherit">
       {@render text()}
     </Link>
   {:else}

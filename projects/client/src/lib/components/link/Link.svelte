@@ -10,6 +10,7 @@
     color = "default",
     focusable = true,
     retrigger = true,
+    noscroll,
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
@@ -29,6 +30,7 @@
     use:triggerWithTouch={retrigger}
     use:triggerWithKeyboard
     data-sveltekit-keepfocus
+    data-sveltekit-noscroll={noscroll}
     tabindex={focusable ? 0 : -1}
     data-color={color}
     class="trakt-link"

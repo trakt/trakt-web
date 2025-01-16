@@ -26,6 +26,7 @@
   const isDefaultAlignment = $derived(hasIcon);
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
   const href = $derived((props as TraktButtonAnchorProps).href);
+  const noscroll = $derived((props as TraktButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
 </script>
 
@@ -56,6 +57,7 @@
     use:triggerWithKeyboard
     use:triggerWithTouch
     data-sveltekit-keepfocus
+    data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
     class:trakt-link-active={$isActive}
     aria-label={label}
