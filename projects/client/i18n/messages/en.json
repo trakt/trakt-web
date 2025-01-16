@@ -253,5 +253,6 @@
   "trending_movies": "Trending Movies",
   "view_all": "View All",
   "go_to_page_number": "Go to page {number}",
-  "full_season": "Full Season"
+  "full_season": "Full Season",
+  "remove_from_watchlist_warning": "Are you sure you want to remove {title} from your Watchlist?"
 }

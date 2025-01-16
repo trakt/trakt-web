@@ -252,5 +252,6 @@
   "trending_shows": "話題のシリーズ",
   "trending_movies": "話題の作品",
   "view_all": "すべて表示",
-  "go_to_page_number": "ページ {number} へ移動"
+  "go_to_page_number": "ページ {number} へ移動",
+  "remove_from_watchlist_warning": "「{title}」をウォッチリストから削除してもよろしいですか？"
 }

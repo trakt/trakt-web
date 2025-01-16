@@ -2,6 +2,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
+  import { attachRemoveWarning } from "../_internal/attachRemoveWarning";
+  import { useDangerButton } from "../_internal/useDangerButton";
   import { WatchlistButtonIntlProvider } from "./WatchlistButtonIntlProvider";
   import type { WatchlistButtonProps } from "./WatchlistButtonProps";
 
@@ -16,16 +18,23 @@
     ...props
   }: WatchlistButtonProps = $props();
 
-  const handler = $derived(isWatchlisted ? onRemove : onAdd);
+  const handler = $derived(
+    isWatchlisted
+      ? attachRemoveWarning(onRemove, i18n.warning({ isWatchlisted, title }))
+      : onAdd,
+  );
+  const { color, variant, ...events } = $derived(
+    useDangerButton({ isActive: isWatchlisted, color: "blue" }),
+  );
   const state = $derived(isWatchlisted ? "added" : "missing");
-  const variant = $derived(isWatchlisted ? "primary" : "secondary");
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ isWatchlisted, title }),
-    color: "blue",
-    variant,
+    color: $color,
+    variant: $variant,
     onclick: handler,
     disabled: isWatchlistUpdating,
+    ...events,
   });
 </script>
 

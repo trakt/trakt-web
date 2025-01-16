@@ -11,4 +11,6 @@ export const WatchlistButtonIntlProvider: WatchlistButtonIntl = {
       : m.add_to_watchlist_label({ title }),
   text: ({ isWatchlisted }: WatchlistButtonMeta) =>
     isWatchlisted ? m.remove_from_watchlist() : m.add_to_watchlist(),
+  warning: ({ title }: WatchlistButtonMeta) =>
+    m.remove_from_watchlist_warning({ title }),
 };

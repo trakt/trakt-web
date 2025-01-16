@@ -252,5 +252,6 @@
   "trending_shows": "Séries populaires",
   "trending_movies": "Films populaires",
   "view_all": "Tout voir",
-  "go_to_page_number": "Aller à la page {number}"
+  "go_to_page_number": "Aller à la page {number}",
+  "remove_from_watchlist_warning": "Êtes-vous sûr de vouloir retirer {title} de votre liste de « à voir » ?"
 }

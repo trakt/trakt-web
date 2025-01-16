@@ -252,5 +252,6 @@
   "trending_shows": "Trendserien",
   "trending_movies": "Trendfilme",
   "view_all": "Alle ansehen",
-  "go_to_page_number": "Gehe zu Seite {number}"
+  "go_to_page_number": "Gehe zu Seite {number}",
+  "remove_from_watchlist_warning": "Möchtest du {title} wirklich von deiner Liste zum Schauen entfernen?"
 }
