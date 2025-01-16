@@ -5,7 +5,7 @@ export function waitForEmission<T>(
   emission: number,
   timeout = 15,
 ) {
-  return new Promise((resolve) => {
+  return new Promise<T>((resolve) => {
     let emissionCount = 0;
     let lastValue: T;
 
