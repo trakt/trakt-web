@@ -48,4 +48,9 @@ describe('toHumanETA', () => {
     const targetDate = new Date('2023-01-03');
     expect(toHumanETA(today, targetDate, 'ro-ro')).toBe('poimâine');
   });
+
+  it('should return the year for past dates', () => {
+    const targetDate = new Date('2022-12-31');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('2022');
+  });
 });

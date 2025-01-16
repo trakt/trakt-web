@@ -10,7 +10,13 @@ export function toHumanETA(
     (targetDate.getTime() - today.getTime()) / MS_PER_DAY,
   );
 
+  const isPastDate = days < 0;
   const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+  const year = targetDate.getFullYear().toString();
+
+  if (isPastDate) {
+    return year;
+  }
 
   if (days <= 6) {
     return rtf.format(days, 'day');
@@ -26,5 +32,5 @@ export function toHumanETA(
     return rtf.format(months, 'month');
   }
 
-  return targetDate.getFullYear().toString();
+  return year;
 }
