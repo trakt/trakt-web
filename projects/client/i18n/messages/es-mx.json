@@ -264,5 +264,9 @@
   "view_all_popular_movies": "Ver todas las pelis populares",
   "view_all_popular_shows": "Ver todas las series populares",
   "popular_movies": "Pelis populares",
-  "popular_shows": "Series populares"
+  "popular_shows": "Series populares",
+  "rate_now": "Calificar ahora",
+  "rating_bad": "👎 Esto fue horrible",
+  "rating_good": "👍 Esto estuvo bien",
+  "rating_great": "❤️ ¡Me encantó!"
 }

@@ -64,6 +64,11 @@
     margin: var(--ni-neg-14);
     background: transparent;
     box-sizing: content-box;
+    display: flex;
+
+    :global(.trakt-button) {
+      flex-grow: 1;
+    }
 
     &[data-size="small"] {
       transform: scale(0.75);

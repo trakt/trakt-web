@@ -264,5 +264,9 @@
   "view_all_popular_movies": "View all popular movies",
   "view_all_popular_shows": "View all popular shows",
   "popular_movies": "Popular Movies",
-  "popular_shows": "Popular Shows"
+  "popular_shows": "Popular Shows",
+  "rate_now": "Rate now",
+  "rating_bad": "👎 this sucked",
+  "rating_good": "👍 this was good",
+  "rating_great": "❤️ I loved this"
 }

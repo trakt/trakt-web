@@ -12,10 +12,7 @@
   .trakt-summary-actions {
     display: flex;
     gap: var(--ni-16);
-
-    @include for-tablet-sm {
-      justify-content: flex-end;
-    }
+    justify-content: flex-end;
 
     @include for-mobile {
       flex-flow: column;

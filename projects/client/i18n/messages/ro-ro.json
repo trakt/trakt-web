@@ -264,5 +264,9 @@
   "view_all_popular_movies": "Vezi toate filmele populare",
   "view_all_popular_shows": "Vezi toate serialele populare",
   "popular_movies": "Filme populare",
-  "popular_shows": "Seriale populare"
+  "popular_shows": "Seriale populare",
+  "rate_now": "Evaluează acum",
+  "rating_bad": "👎 A fost groaznic",
+  "rating_good": "👍 Mi-a plăcut",
+  "rating_great": "❤️ A fost genial"
 }

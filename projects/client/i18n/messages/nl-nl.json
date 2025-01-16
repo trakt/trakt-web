@@ -264,5 +264,9 @@
   "view_all_popular_movies": "Bekijk alle populaire films",
   "view_all_popular_shows": "Bekijk alle populaire series",
   "popular_movies": "Populaire Films",
-  "popular_shows": "Populaire Series"
+  "popular_shows": "Populaire Series",
+  "rate_now": "Nu beoordelen",
+  "rating_bad": "👎 dit was niks",
+  "rating_good": "👍 dit was goed",
+  "rating_great": "❤️ Ik vond dit geweldig"
 }
