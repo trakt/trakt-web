@@ -17,34 +17,27 @@
 >
   {#if state === "missing"}
     <path
-      stroke="currentColor"
       class="icon-state-idle"
+      stroke="currentColor"
       stroke-width="2"
-      d="M18 2v10m-5-5h10m-8-4H3v18h15v-7M6 7h5m-5 4h9m-9 4h9m-9 4h9"
+      d="M18 11v12M12 17h12M1 7h18M1 12h13M1 17h8M1 2h18"
     />
   {/if}
 
   <path
-    stroke="currentColor"
     class:icon-state-idle={state === "added"}
     class:icon-state-active={state === "missing"}
-    stroke-width="2"
-    d="m9 7 4 4 9-9"
-  />
-  <path
     stroke="currentColor"
-    class:icon-state-idle={state === "added"}
-    class:icon-state-active={state === "missing"}
     stroke-width="2"
-    d="M15 3H3v18h15v-9M6 11h2m-2 4h9m-9 4h9"
+    d="m10 17 4 4 9-9M1 7h18M1 12h14M1 17h6M1 2h18"
   />
 
   {#if state === "added"}
     <path
-      stroke="currentColor"
       class="icon-state-active"
+      stroke="currentColor"
       stroke-width="2"
-      d="m22 2-8 8m0-8 8 8M11 3H3v18h15v-9M6 7h5m-5 4h5m-5 4h9m-9 4h9"
+      d="M22 12 12 22M12 12l10 10M1 7h18M1 12h8m-8 5h8M1 2h18"
     />
   {/if}
 </svg>
