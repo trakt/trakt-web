@@ -40,10 +40,20 @@
       EpisodeFinaleType.Series,
     ].includes(type as EpisodeFinaleType),
   );
+
+  const isFullSeason = $derived(type === "full_season");
 </script>
 
 <CardCover {src} {alt} {isLoading}>
   {#snippet tags()}
+    {#if isFullSeason}
+      <EpisodeStatusTag
+        --color-background-status-tag={"var(--color-background-full-season-tag)"}
+        --color-text-status-tag={"var(--color-text-full-season-tag)"}
+      >
+        {i18n.fullSeasonText()}
+      </EpisodeStatusTag>
+    {/if}
     {#if isFinale}
       <EpisodeStatusTag
         --color-background-status-tag={"var(--color-background-finale-tag)"}

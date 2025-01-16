@@ -17,4 +17,5 @@ export type EpisodeIntl = {
   timestampText: (date: Date) => string;
   durationText: (duration: number) => string;
   remainingText: (remaining: number) => string;
+  fullSeasonText: () => string;
 };

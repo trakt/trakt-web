@@ -31,12 +31,6 @@
 
   --color-card-background: var(--shade-920);
 
-  --color-text-premiere-tag: var(--shade-10);
-  --color-background-premiere-tag: var(--green-700);
-
-  --color-text-finale-tag: var(--shade-10);
-  --color-background-finale-tag: var(--red-700);
-
   --color-surface-button-disabled: var(--shade-800);
   --color-foreground-button-disabled: var(--shade-400);
 

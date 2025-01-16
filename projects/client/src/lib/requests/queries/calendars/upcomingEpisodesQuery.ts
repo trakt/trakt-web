@@ -1,4 +1,5 @@
 import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
+import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
@@ -35,11 +36,13 @@ function upcomingEpisodesRequest({
         throw new Error('Failed to fetch calendar');
       }
 
-      return body
+      const episodes = body
         .map((item) => ({
           show: mapShowResponseToShowSummary(item.show),
           ...mapEpisodeResponseToEpisodeEntry(item.episode),
         }));
+
+      return coalesceEpisodes(episodes);
     });
 }
 

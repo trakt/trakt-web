@@ -252,5 +252,6 @@
   "trending_shows": "Trending Shows",
   "trending_movies": "Trending Movies",
   "view_all": "View All",
-  "go_to_page_number": "Go to page {number}"
+  "go_to_page_number": "Go to page {number}",
+  "full_season": "Full Season"
 }

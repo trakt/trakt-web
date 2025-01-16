@@ -18,8 +18,13 @@ export enum EpisodeStandardType {
   Standard = 'standard',
 }
 
+export enum EpisodeComputedType {
+  FullSeason = 'full_season',
+}
+
 export type EpisodeType =
   | EpisodeFinaleType
   | EpisodePremiereType
   | EpisodeUnknownType
-  | EpisodeStandardType;
+  | EpisodeStandardType
+  | EpisodeComputedType;

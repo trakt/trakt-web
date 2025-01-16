@@ -32,4 +32,5 @@ export const EpisodeIntlProvider: EpisodeIntl = {
   timestampText: (next) => toHumanDate(new Date(), next, getLocale()),
   durationText: (minutes) => toHumanDuration({ minutes }, languageTag()),
   remainingText: (count) => m.remaining_episodes({ count }),
+  fullSeasonText: () => m.full_season(),
 };

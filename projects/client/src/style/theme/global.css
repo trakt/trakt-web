@@ -39,6 +39,9 @@
   --color-text-finale-tag: var(--shade-10);
   --color-background-finale-tag: var(--red-700);
 
+  --color-text-full-season-tag: var(--shade-10);
+  --color-background-full-season-tag: var(--purple-500);
+
   --color-text-info-tag: var(--shade-10);
   --color-background-info-tag: var(--purple-400);
 
