@@ -18,6 +18,7 @@
   import MediaSummaryContainer from "./components/MediaSummaryContainer.svelte";
   import MediaSummaryHeader from "./components/MediaSummaryHeader.svelte";
   import MediaTitle from "./components/MediaTitle.svelte";
+  import RateNowButton from "./components/RateNowButton.svelte";
 
   const {
     episode,
@@ -96,9 +97,13 @@
 
   <MediaOverview {title} {overview} />
 
-  <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
+  <RenderFor audience="authenticated">
     <MediaSummaryActions>
-      {@render mediaActions()}
+      <RateNowButton type="episode" id={episode.id} />
+
+      <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
+        {@render mediaActions()}
+      </RenderFor>
     </MediaSummaryActions>
   </RenderFor>
 </MediaSummaryContainer>

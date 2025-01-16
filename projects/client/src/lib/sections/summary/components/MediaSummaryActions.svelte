@@ -13,6 +13,11 @@
     display: flex;
     gap: var(--ni-16);
     justify-content: flex-end;
+    flex-wrap: wrap;
+
+    @include for-tablet-sm {
+      display: grid;
+    }
 
     @include for-mobile {
       flex-flow: column;
