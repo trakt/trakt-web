@@ -1,6 +1,7 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived, get } from 'svelte/store';
+import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
 import { currentUserHistoryQuery } from '../queries/currentUserHistoryQuery.ts';
 import { currentUserRatingsQuery } from '../queries/currentUserRatingsQuery.ts';
 import { currentUserSettingsQuery } from '../queries/currentUserSettingsQuery.ts';
@@ -29,6 +30,11 @@ export function useUser() {
     staleTime: Infinity,
   });
 
+  const favoritesQueryResponse = createQuery({
+    ...currentUserFavoritesQuery(),
+    staleTime: Infinity,
+  });
+
   const user = derived(userQueryResponse, ($query) => $query.data);
   const history = derived(historyQueryResponse, ($query) => $query.data);
   const watchlist = derived(
@@ -36,12 +42,17 @@ export function useUser() {
     ($watchlist) => $watchlist.data,
   );
   const ratings = derived(ratingsQueryResponse, ($ratings) => $ratings.data);
+  const favorites = derived(
+    favoritesQueryResponse,
+    ($favorites) => $favorites.data,
+  );
 
   return {
     user,
     history,
     watchlist,
     ratings,
+    favorites,
     current: () =>
       assertDefined(
         get(user),
