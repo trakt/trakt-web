@@ -2,8 +2,8 @@
   import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
-  import { useDangerColor } from "../useDangerColor";
-  import { attachRemoveWarning } from "./attachRemoveWarning";
+  import { attachRemoveWarning } from "../_internal/attachRemoveWarning";
+  import { useDangerButton } from "../_internal/useDangerButton";
   import { MarkAsWatchedButtonIntlProvider } from "./MarkAsWatchedButtonIntlProvider";
   import type { MarkAsWatchedButtonProps } from "./MarkAsWatchedButtonProps";
 
@@ -24,15 +24,15 @@
       : onWatch,
   );
 
-  const { color, ...events } = $derived(
-    useDangerColor({ isActive: isWatched }),
+  const { color, variant, ...events } = $derived(
+    useDangerButton({ isActive: isWatched, color: "purple" }),
   );
-  const variant = $derived(isWatched ? "primary" : "secondary");
+  const state = $derived(isWatched ? "watched" : "unwatched");
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ title, isWatched }),
     color: $color,
-    variant,
+    variant: $variant,
     onclick: handler,
     disabled: isMarkingAsWatched,
     ...events,
@@ -43,16 +43,13 @@
   <Button {...commonProps} {...props}>
     {i18n.text({ title, isWatched })}
     {#snippet icon()}
-      <MarkAsWatchedIcon
-        state={isWatched ? "watched" : "unwatched"}
-        size="small"
-      />
+      <MarkAsWatchedIcon {state} size="small" />
     {/snippet}
   </Button>
 {/if}
 
 {#if type === "action"}
   <ActionButton {...commonProps} {...props}>
-    <MarkAsWatchedIcon state={isWatched ? "watched" : "unwatched"} />
+    <MarkAsWatchedIcon {state} />
   </ActionButton>
 {/if}
