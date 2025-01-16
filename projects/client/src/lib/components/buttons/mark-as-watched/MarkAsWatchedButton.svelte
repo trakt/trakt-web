@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { writable } from "svelte/store";
   import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
+  import { useDangerColor } from "../useDangerColor";
   import { attachRemoveWarning } from "./attachRemoveWarning";
   import { MarkAsWatchedButtonIntlProvider } from "./MarkAsWatchedButtonIntlProvider";
   import type { MarkAsWatchedButtonProps } from "./MarkAsWatchedButtonProps";
@@ -25,22 +24,10 @@
       : onWatch,
   );
 
-  const stateToColor = (isWatched: boolean) => (isWatched ? "red" : "purple");
-  const interactionToColor = (isTouch: boolean, isWatched: boolean) =>
-    isTouch ? stateToColor(isWatched) : "purple";
-  /**
-   * TODO: extact this logic as danger mode for buttons in general
-   * we need to have something like mode="action" | "danger"
-   */
-  const isTouch = useMedia(WellKnownMediaQuery.touch);
-  const color = $derived(
-    writable<"purple" | "red">(interactionToColor($isTouch, isWatched)),
+  const { color, ...events } = $derived(
+    useDangerColor({ isActive: isWatched }),
   );
   const variant = $derived(isWatched ? "primary" : "secondary");
-
-  $effect(() => {
-    color.set(interactionToColor($isTouch, isWatched));
-  });
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ title, isWatched }),
@@ -48,10 +35,7 @@
     variant,
     onclick: handler,
     disabled: isMarkingAsWatched,
-    onmouseover: () => color.set(stateToColor(isWatched)),
-    onfocusin: () => color.set(stateToColor(isWatched)),
-    onfocusout: () => color.set(interactionToColor($isTouch, isWatched)),
-    onmouseout: () => color.set(interactionToColor($isTouch, isWatched)),
+    ...events,
   });
 </script>
 
