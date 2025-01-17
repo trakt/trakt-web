@@ -11,8 +11,7 @@ function mapPeopleResponseToPersonSummary(
   peopleSummaryResponse: PeopleSummaryResponse,
 ): PersonSummary {
   const headshotCandidate = findDefined(
-    peopleSummaryResponse.images?.headshot?.at(1),
-    peopleSummaryResponse.images?.headshot?.at(0),
+    ...(peopleSummaryResponse.images?.headshot ?? []),
   );
 
   return {

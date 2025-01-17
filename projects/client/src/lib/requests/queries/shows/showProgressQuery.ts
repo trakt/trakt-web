@@ -5,6 +5,7 @@ import {
   EpisodeUnknownType,
 } from '$lib/models/EpisodeType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
@@ -15,8 +16,7 @@ export function mapResponseToShowProgress(
 ): EpisodeProgressEntry {
   const episode = item.next_episode;
 
-  const posterCandidate = episode.images?.screenshot.at(1) ??
-    episode.images?.screenshot.at(0);
+  const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
 
   return {
     id: episode.ids.trakt,

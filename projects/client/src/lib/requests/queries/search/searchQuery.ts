@@ -1,7 +1,6 @@
 import type { Genre, SearchResultResponse } from '$lib/api.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { mapPoster } from '$lib/requests/_internal/mapPoster.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 export type SearchParams = {
@@ -17,7 +16,7 @@ export type SearchResult = {
   genres: Genre[];
   runtime: number | Nil;
   poster: {
-    url: string;
+    url: HttpsUrl;
   };
 };
 
@@ -46,11 +45,7 @@ function mapToSearchResultEntry(
     genres: media.genres ?? [],
     runtime: media.runtime,
     poster: {
-      url: prependHttps(
-        media.images?.poster.at(1) ??
-          media.images?.poster.at(0),
-        MEDIA_POSTER_PLACEHOLDER,
-      ),
+      url: mapPoster(media.images).url.thumb,
     },
   };
 }

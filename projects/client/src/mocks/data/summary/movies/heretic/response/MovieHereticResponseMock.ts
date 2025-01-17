@@ -65,21 +65,21 @@ export const MovieHereticResponseMock: MovieResponse = {
   'certification': 'R',
   'images': {
     'fanart': [
-      'image.tmdb.org/t/p/w1280/ag66gJCiZ06q1GSJuQlhGLi3Udx.jpg',
       'walter-r2.trakt.tv/images/movies/000/916/302/fanarts/medium/626327d7b4.jpg.webp',
+      'image.tmdb.org/t/p/w1280/ag66gJCiZ06q1GSJuQlhGLi3Udx.jpg',
     ],
     'poster': [
-      'image.tmdb.org/t/p/w342/ojQOGq9zMiW976jGE4etunK9Wuv.jpg',
       'walter-r2.trakt.tv/images/movies/000/916/302/posters/thumb/db9d66deb8.jpg.webp',
+      'image.tmdb.org/t/p/w342/ojQOGq9zMiW976jGE4etunK9Wuv.jpg',
     ],
     'logo': [
-      'assets.fanart.tv/fanart/movies/1138194/hdmovielogo/heretic-66a2560b44b86.png',
       'walter-r2.trakt.tv/images/movies/000/916/302/logos/medium/36726904e9.png.webp',
+      'assets.fanart.tv/fanart/movies/1138194/hdmovielogo/heretic-66a2560b44b86.png',
     ],
     'clearart': [],
     'banner': [
-      'assets.fanart.tv/fanart/movies/1138194/moviebanner/heretic-672505e5892dd.jpg',
       'walter-r2.trakt.tv/images/movies/000/916/302/banners/medium/cc91e5409f.jpg.webp',
+      'assets.fanart.tv/fanart/movies/1138194/moviebanner/heretic-672505e5892dd.jpg',
     ],
     'thumb': [],
   },

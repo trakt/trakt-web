@@ -10,12 +10,12 @@ export const ShowSiloPersonResponseMock: PeopleSummaryResponse = {
   },
   'images': {
     'headshot': [
-      'image.tmdb.org/t/p/original/6NRlV9oUipeak7r00V6k73Jb7we.jpg',
       'walter-r2.trakt.tv/images/people/000/447/271/headshots/thumb/d7e3e2fc64.jpg.webp',
+      'image.tmdb.org/t/p/original/6NRlV9oUipeak7r00V6k73Jb7we.jpg',
     ],
     'fanart': [
-      'image.tmdb.org/t/p/w1280/krrZTVEqrYwu6vR3f4NWgdSZg8X.jpg',
       'walter-r2.trakt.tv/images/people/000/447/271/fanarts/medium/0b95a133bb.jpg.webp',
+      'image.tmdb.org/t/p/w1280/krrZTVEqrYwu6vR3f4NWgdSZg8X.jpg',
     ],
   },
   'social_ids': {

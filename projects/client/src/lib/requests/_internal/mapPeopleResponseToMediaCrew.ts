@@ -21,8 +21,7 @@ function toCastMember(
   castResponse: CastResponse,
 ): CastMember {
   const headshotCandidate = findDefined(
-    castResponse.person.images?.headshot?.at(1),
-    castResponse.person.images?.headshot?.at(0),
+    ...(castResponse.person.images?.headshot ?? []),
   );
 
   return ({

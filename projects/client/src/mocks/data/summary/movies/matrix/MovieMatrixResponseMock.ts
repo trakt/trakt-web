@@ -84,20 +84,20 @@ export const MovieMatrixResponseMock: MovieResponse = {
       'walter-r2.trakt.tv/images/movies/000/000/481/posters/thumb/373310d2ee.jpg.webp',
     ],
     'logo': [
-      'assets.fanart.tv/fanart/movies/603/hdmovielogo/the-matrix-5190bfebe0bcf.png',
       'walter-r2.trakt.tv/images/movies/000/000/481/logos/medium/f5e05ed291.png.webp',
+      'assets.fanart.tv/fanart/movies/603/hdmovielogo/the-matrix-5190bfebe0bcf.png',
     ],
     'clearart': [
-      'assets.fanart.tv/fanart/movies/603/hdmovieclearart/the-matrix-5197b6d243b93.png',
       'walter-r2.trakt.tv/images/movies/000/000/481/cleararts/medium/a01dd6ff88.png.webp',
+      'assets.fanart.tv/fanart/movies/603/hdmovieclearart/the-matrix-5197b6d243b93.png',
     ],
     'banner': [
-      'assets.fanart.tv/fanart/movies/603/moviebanner/the-matrix-514dc837d1387.jpg',
       'walter-r2.trakt.tv/images/movies/000/000/481/banners/medium/035f31fce0.jpg.webp',
+      'assets.fanart.tv/fanart/movies/603/moviebanner/the-matrix-514dc837d1387.jpg',
     ],
     'thumb': [
-      'assets.fanart.tv/fanart/movies/603/moviethumb/the-matrix-58678e15757df.jpg',
       'walter-r2.trakt.tv/images/movies/000/000/481/thumbs/medium/f81f544f62.jpg.webp',
+      'assets.fanart.tv/fanart/movies/603/moviethumb/the-matrix-58678e15757df.jpg',
     ],
   },
 };

@@ -13,8 +13,7 @@ export function mapShowResponseToShowSummary(
   const cover = mapCover(show.images);
 
   const thumbCandidate = findDefined(
-    show.images?.thumb.at(1),
-    show.images?.thumb.at(0),
+    ...(show.images?.thumb ?? []),
   );
 
   return {

@@ -244,8 +244,8 @@ export const ShowSiloProgressResponseMock: ShowProgressResponse = {
     'episode_type': 'standard',
     'images': {
       'screenshot': [
-        'image.tmdb.org/t/p/w1280/gB2lEpKUvTshTdq00IRjQHFgG4J.jpg',
         'walter-r2.trakt.tv/images/episodes/012/105/048/screenshots/medium/2f894ac614.jpg.webp',
+        'image.tmdb.org/t/p/w1280/gB2lEpKUvTshTdq00IRjQHFgG4J.jpg',
       ],
     },
   },
@@ -301,8 +301,8 @@ export const ShowSiloProgressResponseMock: ShowProgressResponse = {
     'episode_type': 'season_premiere',
     'images': {
       'screenshot': [
-        'image.tmdb.org/t/p/w1280/kB5wWdEknKlBJ8iGEYQyTJWTSZv.jpg',
         'walter-r2.trakt.tv/images/episodes/012/105/047/screenshots/medium/bbe831c174.jpg.webp',
+        'image.tmdb.org/t/p/w1280/kB5wWdEknKlBJ8iGEYQyTJWTSZv.jpg',
       ],
     },
   },

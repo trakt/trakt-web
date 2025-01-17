@@ -12,10 +12,7 @@ import { thumbUrl } from './thumbUrl';
 export function mapCover(
   images: ShowResponse['images'] | MovieResponse['images'],
 ): MediaSummary['cover'] {
-  const coverCandidate = findDefined(
-    images?.fanart.at(1),
-    images?.fanart.at(0),
-  );
+  const coverCandidate = findDefined(...(images?.fanart ?? []));
 
   return {
     url: {

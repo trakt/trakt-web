@@ -15,10 +15,7 @@ type EpisodeResponse =
 export function mapEpisodeResponseToEpisodeEntry(
   episode: EpisodeResponse,
 ): EpisodeEntry {
-  const posterCandidate = findDefined(
-    episode.images?.screenshot.at(1),
-    episode.images?.screenshot.at(0),
-  );
+  const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
 
   const airDate = new Date(episode.first_aired);
 

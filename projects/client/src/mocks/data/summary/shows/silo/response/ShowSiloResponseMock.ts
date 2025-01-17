@@ -80,28 +80,28 @@ export const ShowSiloResponseMock: ShowResponse = {
   ],
   'images': {
     'fanart': [
-      'image.tmdb.org/t/p/w1280/n5FPNMJ0eRoiQrKGfUQQRAZeaxg.jpg',
       'walter-r2.trakt.tv/images/shows/000/180/770/fanarts/medium/80d39f8578.jpg.webp',
+      'image.tmdb.org/t/p/w1280/n5FPNMJ0eRoiQrKGfUQQRAZeaxg.jpg',
     ],
     'poster': [
-      'image.tmdb.org/t/p/w342/tlliQuCupf8fpTH7RAor3aKMGy.jpg',
       'walter-r2.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
+      'image.tmdb.org/t/p/w342/tlliQuCupf8fpTH7RAor3aKMGy.jpg',
     ],
     'logo': [
-      'assets.fanart.tv/fanart/tv/403245/hdtvlogo/wool-640b57ff556b2.png',
       'walter-r2.trakt.tv/images/shows/000/180/770/logos/medium/b0c9a10541.png.webp',
+      'assets.fanart.tv/fanart/tv/403245/hdtvlogo/wool-640b57ff556b2.png',
     ],
     'clearart': [
-      'assets.fanart.tv/fanart/tv/403245/hdclearart/silo-644fec3fe0fe0.png',
       'walter-r2.trakt.tv/images/shows/000/180/770/cleararts/medium/924d053dc2.png.webp',
+      'assets.fanart.tv/fanart/tv/403245/hdclearart/silo-644fec3fe0fe0.png',
     ],
     'banner': [
-      'assets.fanart.tv/fanart/tv/403245/tvbanner/silo-640f4c666e9f7.jpg',
       'walter-r2.trakt.tv/images/shows/000/180/770/banners/medium/24d0a4847e.jpg.webp',
+      'assets.fanart.tv/fanart/tv/403245/tvbanner/silo-640f4c666e9f7.jpg',
     ],
     'thumb': [
-      'assets.fanart.tv/fanart/tv/403245/tvthumb/silo-640f444ce6025.jpg',
       'walter-r2.trakt.tv/images/shows/000/180/770/thumbs/medium/dddaaead2f.jpg.webp',
+      'assets.fanart.tv/fanart/tv/403245/tvthumb/silo-640f444ce6025.jpg',
     ],
   },
 };
