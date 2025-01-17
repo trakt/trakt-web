@@ -254,5 +254,7 @@
   "view_all": "View All",
   "go_to_page_number": "Go to page {number}",
   "full_season": "Full Season",
-  "remove_from_watchlist_warning": "Are you sure you want to remove {title} from your Watchlist?"
+  "remove_from_watchlist_warning": "Are you sure you want to remove {title} from your Watchlist?",
+  "view_all_recommended_movies": "View all recommended movies",
+  "view_all_recommended_shows": "View all recommended shows"
 }

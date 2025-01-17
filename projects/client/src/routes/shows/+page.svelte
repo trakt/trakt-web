@@ -33,7 +33,11 @@
     {type}
   />
   {#if isAuthorized}
-    <RecommendedList title={m.your_recommendations()} {type} />
+    <RecommendedList
+      title={m.your_recommendations()}
+      drilldownLabel={m.view_all_recommended_shows()}
+      {type}
+    />
   {/if}
   <AnticipatedList title={m.most_anticipated()} {type} />
   <PopularList title={m.most_popular()} {type} />

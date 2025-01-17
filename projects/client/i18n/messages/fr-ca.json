@@ -254,5 +254,7 @@
   "view_all": "Tout voir",
   "go_to_page_number": "Aller à la page {number}",
   "full_season": "Saison complète",
-  "remove_from_watchlist_warning": "Voulez-vous vraiment retirer {title} de votre liste à voir?"
+  "remove_from_watchlist_warning": "Voulez-vous vraiment retirer {title} de votre liste à voir?",
+  "view_all_recommended_movies": "Voir tous les films recommandés",
+  "view_all_recommended_shows": "Voir toutes les séries recommandées"
 }

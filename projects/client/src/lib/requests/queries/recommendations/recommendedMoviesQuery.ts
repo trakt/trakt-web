@@ -1,12 +1,13 @@
 import type { RecommendedMovieResponse } from '$lib/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
 
 export type RecommendedMovie = MovieSummary;
 
-type RecommendedMoviesParams = ApiParams;
+type RecommendedMoviesParams = ApiParams & { limit?: number };
 
 function mapResponseToRecommendedMovie(
   movie: RecommendedMovieResponse[0],
@@ -17,7 +18,7 @@ function mapResponseToRecommendedMovie(
 }
 
 function recommendMoviesRequest(
-  { fetch }: RecommendedMoviesParams = {},
+  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedMoviesParams = {},
 ): Promise<RecommendedMovie[]> {
   return api({ fetch })
     .recommendations
@@ -27,7 +28,7 @@ function recommendMoviesRequest(
         extended: 'full,cloud9',
         ignore_collected: true,
         ignore_watchlisted: true,
-        limit: 35,
+        limit,
       },
     })
     .then(({ status, body }) => {
@@ -44,13 +45,15 @@ function recommendMoviesRequest(
     });
 }
 
-const recommendedMoviesQueryKey = [
-  'recommendedMovies',
-  InvalidateAction.MarkAsWatched('movie'),
-] as const;
+const recommendedMoviesQueryKey = ({ limit }: RecommendedMoviesParams) =>
+  [
+    'recommendedMovies',
+    InvalidateAction.MarkAsWatched('movie'),
+    limit,
+  ] as const;
 export const recommendedMoviesQuery = (
   params: RecommendedMoviesParams = {},
 ) => ({
-  queryKey: recommendedMoviesQueryKey,
+  queryKey: recommendedMoviesQueryKey(params),
   queryFn: () => recommendMoviesRequest(params),
 });

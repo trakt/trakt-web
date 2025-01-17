@@ -15,23 +15,27 @@ export type RecommendedMediaItem = RecommendedMovie | RecommendedShow;
 export type RecommendedMedia = Array<RecommendedMediaItem>;
 
 type RecommendationListStoreProps = {
+  limit?: number;
   type: MediaType;
 };
 
-function typeToQuery(type: MediaType): CreateQueryOptions<RecommendedMedia> {
+function typeToQuery(
+  { type, limit }: RecommendationListStoreProps,
+): CreateQueryOptions<RecommendedMedia> {
+  const props = { limit };
   switch (type) {
     case 'movie':
-      return recommendedMoviesQuery();
+      return recommendedMoviesQuery(props);
     case 'show':
-      return recommendedShowsQuery();
+      return recommendedShowsQuery(props);
   }
 }
 
 export function useRecommendationList(
-  { type }: RecommendationListStoreProps,
+  props: RecommendationListStoreProps,
 ) {
   const query = createQuery({
-    ...typeToQuery(type),
+    ...typeToQuery(props),
     staleTime: time.hours(24),
   });
   const list = derived(query, ($query) => $query.data ?? []);

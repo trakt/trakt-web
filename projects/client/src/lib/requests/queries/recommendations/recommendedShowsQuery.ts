@@ -2,12 +2,15 @@ import type { RecommendedShowResponse } from '$lib/api.ts';
 import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaSummary } from '$lib/requests/models/MediaSummary.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 
 export type RecommendedShow = MediaSummary & EpisodeCount;
 
-type RecommendedShowsParams = ApiParams;
+type RecommendedShowsParams = ApiParams & {
+  limit?: number;
+};
 
 function mapResponseToRecommendedShow(
   show: RecommendedShowResponse[0],
@@ -21,7 +24,7 @@ function mapResponseToRecommendedShow(
 }
 
 function recommendShowsRequest(
-  { fetch }: RecommendedShowsParams = {},
+  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedShowsParams = {},
 ): Promise<RecommendedShow[]> {
   return api({ fetch })
     .recommendations
@@ -31,7 +34,7 @@ function recommendShowsRequest(
         extended: 'full,cloud9',
         ignore_collected: true,
         ignore_watchlisted: true,
-        limit: 35,
+        limit,
       },
     })
     .then(({ status, body }) => {
@@ -45,14 +48,16 @@ function recommendShowsRequest(
     });
 }
 
-const recommendedShowsQueryKey = [
-  'recommendedShows',
-  InvalidateAction.MarkAsWatched('show'),
-  InvalidateAction.MarkAsWatched('episode'),
-] as const;
+const recommendedShowsQueryKey = ({ limit }: RecommendedShowsParams) =>
+  [
+    'recommendedShows',
+    InvalidateAction.MarkAsWatched('show'),
+    InvalidateAction.MarkAsWatched('episode'),
+    limit,
+  ] as const;
 export const recommendedShowsQuery = (
   params: RecommendedShowsParams = {},
 ) => ({
-  queryKey: recommendedShowsQueryKey,
+  queryKey: recommendedShowsQueryKey(params),
   queryFn: () => recommendShowsRequest(params),
 });

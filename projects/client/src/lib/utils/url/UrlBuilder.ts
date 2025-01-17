@@ -30,6 +30,18 @@ export const UrlBuilder = {
 
     return trendingMediaUrl + buildParamString({ page });
   },
+  recommended: ({ type, page }: PaginatableMediaPageUrl) => {
+    const trendingMediaUrl = (() => {
+      switch (type) {
+        case 'show':
+          return '/shows/recommended';
+        case 'movie':
+          return '/movies/recommended';
+      }
+    })();
+
+    return trendingMediaUrl + buildParamString({ page });
+  },
   movies: () => '/movies',
   movie: (id: string) => `/movies/${id}`,
   people: (id: string) => `/people/${id}`,
