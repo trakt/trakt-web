@@ -1,14 +1,12 @@
 <script lang="ts">
   import { page as pageState } from "$app/state";
+  import PaginatedList from "$lib/components/lists/paginated-list/PaginatedList.svelte";
   import Paginator from "$lib/components/lists/paginated-list/Paginator.svelte";
   import { PaginatorIntlProvider } from "$lib/components/lists/paginated-list/PaginatorIntlProvider";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
-  import PaginatedList from "../../components/lists/paginated-list/PaginatedList.svelte";
-  import MediaItem from "./components/MediaItem.svelte";
+  import TrendingMediaItem from "./components/TrendingMediaItem.svelte";
   import { useTrendingList } from "./stores/useTrendingList";
   import { mediaCardWidthResolver } from "./utils/mediaCardWidthResolver";
   import { mediaPageLimitResolver } from "./utils/mediaPageLimitResolver";
@@ -47,11 +45,7 @@
   --width-item={mediaCardWidthResolver(type)}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media}>
-      {#snippet tags()}
-        <WatchersTag i18n={TagIntlProvider} watchers={media.watchers} />
-      {/snippet}
-    </MediaItem>
+    <TrendingMediaItem {type} {media} />
   {/snippet}
 
   {#snippet actions()}

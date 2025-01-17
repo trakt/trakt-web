@@ -1,13 +1,8 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
-  import Button from "$lib/components/buttons/Button.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import MediaItem from "./components/MediaItem.svelte";
+  import TrendingMediaItem from "./components/TrendingMediaItem.svelte";
   import ViewAllButton from "./components/ViewAllButton.svelte";
   import { useTrendingList } from "./stores/useTrendingList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -30,11 +25,7 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media}>
-      {#snippet tags()}
-        <WatchersTag i18n={TagIntlProvider} watchers={media.watchers} />
-      {/snippet}
-    </MediaItem>
+    <TrendingMediaItem {type} {media} />
   {/snippet}
 
   {#snippet actions()}
@@ -42,15 +33,5 @@
       href={UrlBuilder.trending({ type })}
       label={drilldownLabel}
     />
-    <Button
-      label={drilldownLabel}
-      href={UrlBuilder.trending({ type })}
-      style="flat"
-      variant="primary"
-      color="purple"
-      size="small"
-    >
-      {m.view_all()}
-    </Button>
   {/snippet}
 </SectionList>
