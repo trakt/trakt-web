@@ -40,6 +40,7 @@
       {#each $results as result}
         <Link
           href={UrlBuilder.media(result.type, result.slug)}
+          retrigger={false}
           onclick={() => {
             inputElement.value = "";
             clear();

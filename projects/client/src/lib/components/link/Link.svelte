@@ -9,12 +9,14 @@
     target,
     color = "default",
     focusable = true,
+    retrigger = true,
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
     HTMLElementProps & {
       color?: "default" | "classic" | "inherit";
       focusable?: boolean;
+      retrigger?: boolean;
     } = $props();
 
   const { isActive } = $derived(useActiveLink(href));
@@ -24,7 +26,7 @@
   <a
     {href}
     {target}
-    use:triggerWithTouch
+    use:triggerWithTouch={retrigger}
     use:triggerWithKeyboard
     data-sveltekit-keepfocus
     tabindex={focusable ? 0 : -1}
