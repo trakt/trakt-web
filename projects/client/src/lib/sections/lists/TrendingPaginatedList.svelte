@@ -1,10 +1,7 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
   import { page as pageState } from "$app/state";
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import CaretLeftIcon from "$lib/components/icons/CaretLeftIcon.svelte";
-  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
+  import Paginator from "$lib/components/lists/paginated-list/Paginator.svelte";
+  import { PaginatorIntlProvider } from "$lib/components/lists/paginated-list/PaginatorIntlProvider";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
   import type { MediaType } from "$lib/models/MediaType";
@@ -23,31 +20,25 @@
 
   const { title, type }: TrendingListProps = $props();
 
-  const page = $derived(
+  const current = $derived(
     parseInt(pageState.url.searchParams.get("page") ?? "1"),
   );
 
-  const { list, page: listPage } = $derived(
+  const { list, page } = $derived(
     useTrendingList({
       type,
-      page,
+      page: current,
       limit: mediaPageLimitResolver(type),
     }),
   );
 
-  const first = writable(1);
   const last = writable(Infinity);
 
   $effect(() => {
-    const total = $listPage.total;
+    const total = $page.total;
     if (!total) return;
     last.set(total);
   });
-
-  const prev = $derived(Math.max(page - 1, $first));
-  const next = $derived(Math.min(page + 1, $last));
-
-  const lastPage = $derived($last === Infinity ? "∞" : $last);
 </script>
 
 <PaginatedList
@@ -64,43 +55,12 @@
   {/snippet}
 
   {#snippet actions()}
-    <div class="trakt-list-pagination">
-      <ActionButton
-        href={UrlBuilder.trending({
-          type,
-          page: prev,
-        })}
-        noscroll={true}
-        label={m.go_to_page_number({ number: prev })}
-        color="purple"
-        variant="primary"
-        disabled={page === $first}
-      >
-        <CaretLeftIcon />
-      </ActionButton>
-      <p>{page} / {lastPage}</p>
-      <ActionButton
-        href={UrlBuilder.trending({
-          type,
-          page: next,
-        })}
-        noscroll={true}
-        label={m.go_to_page_number({ number: next })}
-        color="purple"
-        variant="primary"
-        disabled={page === $last}
-      >
-        <CaretRightIcon />
-      </ActionButton>
-    </div>
+    <Paginator
+      i18n={PaginatorIntlProvider}
+      {current}
+      first={1}
+      last={$last}
+      hrefFactory={(page) => UrlBuilder.trending({ type, page })}
+    />
   {/snippet}
 </PaginatedList>
-
-<style>
-  .trakt-list-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--ni-8);
-  }
-</style>
