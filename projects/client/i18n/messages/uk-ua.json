@@ -260,5 +260,9 @@
   "view_all_anticipated_movies": "Переглянути всі очікувані фільми",
   "view_all_anticipated_shows": "Переглянути всі очікувані серіали",
   "anticipated_movies": "Очікувані фільми",
-  "anticipated_shows": "Очікувані серіали"
+  "anticipated_shows": "Очікувані серіали",
+  "view_all_popular_movies": "Переглянути всі популярні фільми",
+  "view_all_popular_shows": "Переглянути всі популярні серіали",
+  "popular_movies": "Популярні фільми",
+  "popular_shows": "Популярні серіали"
 }

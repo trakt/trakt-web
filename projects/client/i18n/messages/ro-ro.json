@@ -260,5 +260,9 @@
   "view_all_anticipated_movies": "Vezi toate filmele așteptate",
   "view_all_anticipated_shows": "Vezi toate serialele așteptate",
   "anticipated_movies": "Filme anticipate",
-  "anticipated_shows": "Seriale anticipate"
+  "anticipated_shows": "Seriale anticipate",
+  "view_all_popular_movies": "Vezi toate filmele populare",
+  "view_all_popular_shows": "Vezi toate serialele populare",
+  "popular_movies": "Filme populare",
+  "popular_shows": "Seriale populare"
 }

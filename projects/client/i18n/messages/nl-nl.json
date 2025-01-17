@@ -260,5 +260,9 @@
   "view_all_anticipated_movies": "Bekijk alle verwachte films",
   "view_all_anticipated_shows": "Bekijk alle verwachte series",
   "anticipated_movies": "Verwachte films",
-  "anticipated_shows": "Verwachte series"
+  "anticipated_shows": "Verwachte series",
+  "view_all_popular_movies": "Bekijk alle populaire films",
+  "view_all_popular_shows": "Bekijk alle populaire series",
+  "popular_movies": "Populaire Films",
+  "popular_shows": "Populaire Series"
 }

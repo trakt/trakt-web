@@ -1,4 +1,5 @@
 import type { MediaType } from '$lib/models/MediaType.ts';
+import type { Paginatable } from '$lib/models/Paginatable';
 import { type MovieSummary } from '$lib/requests/models/MovieSummary.ts';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
 import {
@@ -15,13 +16,15 @@ export type PopularMedia = Array<PopularMediaItem>;
 type PopularListStoreProps = {
   type: MediaType;
   limit?: number;
+  page?: number;
 };
 
 function typeToQuery(
-  { type, limit }: PopularListStoreProps,
-): CreateQueryOptions<PopularMedia> {
+  { type, limit, page }: PopularListStoreProps,
+): CreateQueryOptions<Paginatable<PopularMediaItem>> {
   const params = {
     limit,
+    page,
   };
 
   switch (type) {
@@ -33,15 +36,18 @@ function typeToQuery(
 }
 
 export function usePopularList(
-  { type, limit = 25 }: PopularListStoreProps,
+  props: PopularListStoreProps,
 ) {
   const query = createQuery({
-    ...typeToQuery({ type, limit }),
+    ...typeToQuery(props),
     staleTime: time.hours(1),
   });
-  const list = derived(query, ($query) => $query.data ?? []);
 
   return {
-    list,
+    list: derived(query, ($query) => $query.data?.entries ?? []),
+    page: derived(
+      query,
+      ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    ),
   };
 }

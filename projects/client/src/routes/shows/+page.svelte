@@ -44,7 +44,11 @@
     title={m.most_anticipated()}
     {type}
   />
-  <PopularList title={m.most_popular()} {type} />
+  <PopularList
+    drilldownLabel={m.view_all_popular_shows()}
+    title={m.most_popular()}
+    {type}
+  />
 {/snippet}
 
 <TraktPage

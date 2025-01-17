@@ -31,7 +31,7 @@ export const UrlBuilder = {
     return trendingMediaUrl + buildParamString({ page });
   },
   recommended: ({ type, page }: PaginatableMediaPageUrl) => {
-    const trendingMediaUrl = (() => {
+    const recommendedMediaUrl = (() => {
       switch (type) {
         case 'show':
           return '/shows/recommended';
@@ -40,10 +40,10 @@ export const UrlBuilder = {
       }
     })();
 
-    return trendingMediaUrl + buildParamString({ page });
+    return recommendedMediaUrl + buildParamString({ page });
   },
   anticipated: ({ type, page }: PaginatableMediaPageUrl) => {
-    const trendingMediaUrl = (() => {
+    const anticipatedMediaUrl = (() => {
       switch (type) {
         case 'show':
           return '/shows/anticipated';
@@ -52,7 +52,19 @@ export const UrlBuilder = {
       }
     })();
 
-    return trendingMediaUrl + buildParamString({ page });
+    return anticipatedMediaUrl + buildParamString({ page });
+  },
+  popular: ({ type, page }: PaginatableMediaPageUrl) => {
+    const popularMediaUrl = (() => {
+      switch (type) {
+        case 'show':
+          return '/shows/popular';
+        case 'movie':
+          return '/movies/popular';
+      }
+    })();
+
+    return popularMediaUrl + buildParamString({ page });
   },
   movies: () => '/movies',
   movie: (id: string) => `/movies/${id}`,

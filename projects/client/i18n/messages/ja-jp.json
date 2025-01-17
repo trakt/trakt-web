@@ -260,5 +260,9 @@
   "view_all_anticipated_movies": "近日公開の映画をすべて表示",
   "view_all_anticipated_shows": "近日公開の番組をすべて表示",
   "anticipated_movies": "期待の作品",
-  "anticipated_shows": "期待のシリーズ"
+  "anticipated_shows": "期待のシリーズ",
+  "view_all_popular_movies": "View all popular movies",
+  "view_all_popular_shows": "View all popular shows",
+  "popular_movies": "Popular Movies",
+  "popular_shows": "Popular Shows"
 }

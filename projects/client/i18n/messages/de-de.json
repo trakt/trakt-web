@@ -260,5 +260,9 @@
   "view_all_anticipated_movies": "Alle erwarteten Filme anzeigen",
   "view_all_anticipated_shows": "Alle erwarteten Serien anzeigen",
   "anticipated_movies": "Erwartete Filme",
-  "anticipated_shows": "Erwartete Serien"
+  "anticipated_shows": "Erwartete Serien",
+  "view_all_popular_movies": "Alle beliebten Filme ansehen",
+  "view_all_popular_shows": "Alle beliebten Serien ansehen",
+  "popular_movies": "Beliebte Filme",
+  "popular_shows": "Beliebte Serien"
 }
