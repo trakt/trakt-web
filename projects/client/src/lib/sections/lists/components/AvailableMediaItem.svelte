@@ -2,13 +2,13 @@
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
-  import EpisodeCard from "$lib/components/episode/card/EpisodeCard.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import PosterCard from "$lib/components/media/card/PosterCard.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
 
+  import ShowCard from "$lib/components/media/card/ShowCard.svelte";
   import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
@@ -96,9 +96,9 @@
 {/if}
 
 {#if type === "show"}
-  <EpisodeCard>
+  <ShowCard>
     {@render content(media.thumb.url)}
-  </EpisodeCard>
+  </ShowCard>
 {/if}
 
 <style>
