@@ -39,7 +39,11 @@
       {type}
     />
   {/if}
-  <AnticipatedList title={m.most_anticipated()} {type} />
+  <AnticipatedList
+    drilldownLabel={m.view_all_anticipated_shows()}
+    title={m.most_anticipated()}
+    {type}
+  />
   <PopularList title={m.most_popular()} {type} />
 {/snippet}
 

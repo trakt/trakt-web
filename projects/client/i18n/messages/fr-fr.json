@@ -256,5 +256,9 @@
   "full_season": "Saison Complète",
   "remove_from_watchlist_warning": "Êtes-vous sûr de vouloir retirer {title} de votre liste de « à voir » ?",
   "view_all_recommended_movies": "Voir tous les films recommandés",
-  "view_all_recommended_shows": "Voir toutes les séries recommandées"
+  "view_all_recommended_shows": "Voir toutes les séries recommandées",
+  "view_all_anticipated_movies": "Voir tous les films attendus",
+  "view_all_anticipated_shows": "Voir toutes les séries attendues",
+  "anticipated_movies": "Films attendus",
+  "anticipated_shows": "Séries attendues"
 }

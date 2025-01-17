@@ -1,5 +1,8 @@
 import type { MovieAnticipatedResponse } from '$lib/api.ts';
+import type { Paginatable } from '$lib/models/Paginatable.ts';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import {
   mapMovieResponseToMovieSummary,
@@ -25,8 +28,8 @@ export function mapResponseToAnticipatedMovie({
 }
 
 function movieAnticipatedRequest(
-  { fetch, limit, page = 1 }: MovieAnticipatedParams,
-): Promise<AnticipatedMovie[]> {
+  { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: MovieAnticipatedParams,
+): Promise<Paginatable<AnticipatedMovie>> {
   return api({ fetch })
     .movies
     .anticipated({
@@ -36,19 +39,23 @@ function movieAnticipatedRequest(
         limit,
       },
     })
-    .then(({ status, body }) => {
+    .then(({ status, body, headers }) => {
       if (status !== 200) {
         throw new Error('Failed to fetch anticipated movies');
       }
 
-      return body.map(mapResponseToAnticipatedMovie);
+      return {
+        entries: body.map(mapResponseToAnticipatedMovie),
+        page: extractPageMeta(headers),
+      };
     });
 }
 
-const movieAnticipatedQueryKey = ['movieAnticipated'] as const;
+const movieAnticipatedQueryKey = (params: MovieAnticipatedParams) =>
+  ['movieAnticipated', params.limit, params.page] as const;
 export const movieAnticipatedQuery = (
   params: MovieAnticipatedParams = {},
 ) => ({
-  queryKey: movieAnticipatedQueryKey,
+  queryKey: movieAnticipatedQueryKey(params),
   queryFn: () => movieAnticipatedRequest(params),
 });

@@ -256,5 +256,9 @@
   "full_season": "Sezon complet",
   "remove_from_watchlist_warning": "Sigur vrei să elimini {title} din lista ta de vizionat?",
   "view_all_recommended_movies": "Vezi toate filmele recomandate",
-  "view_all_recommended_shows": "Vezi toate serialele recomandate"
+  "view_all_recommended_shows": "Vezi toate serialele recomandate",
+  "view_all_anticipated_movies": "Vezi toate filmele așteptate",
+  "view_all_anticipated_shows": "Vezi toate serialele așteptate",
+  "anticipated_movies": "Filme anticipate",
+  "anticipated_shows": "Seriale anticipate"
 }

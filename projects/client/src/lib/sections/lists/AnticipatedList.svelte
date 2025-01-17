@@ -1,18 +1,19 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import AnticipatedTag from "$lib/components/media/tags/AnticipatedTag.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import type { MediaType } from "$lib/models/MediaType";
-  import MediaItem from "./components/MediaItem.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import AnticipatedMediaItem from "./components/AnticipatedMediaItem.svelte";
+  import ViewAllButton from "./components/ViewAllButton.svelte";
   import { useAnticipatedList } from "./stores/useAnticipatedList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type TrendingListProps = {
     title: string;
+    drilldownLabel: string;
     type: MediaType;
   };
 
-  const { title, type }: TrendingListProps = $props();
+  const { title, drilldownLabel, type }: TrendingListProps = $props();
 
   const { list } = useAnticipatedList({ type });
 </script>
@@ -24,10 +25,13 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media}>
-      {#snippet tags()}
-        <AnticipatedTag i18n={TagIntlProvider} score={media.score} />
-      {/snippet}
-    </MediaItem>
+    <AnticipatedMediaItem {type} {media} />
+  {/snippet}
+
+  {#snippet actions()}
+    <ViewAllButton
+      href={UrlBuilder.anticipated({ type })}
+      label={drilldownLabel}
+    />
   {/snippet}
 </SectionList>

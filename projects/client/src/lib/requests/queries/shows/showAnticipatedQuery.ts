@@ -1,6 +1,9 @@
 import type { ShowAnticipatedResponse, ShowResponse } from '$lib/api.ts';
+import type { Paginatable } from '$lib/models/Paginatable.ts';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
 import { type ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 
@@ -38,8 +41,8 @@ export function mapResponseToAnticipatedShow({
 }
 
 function showAnticipatedRequest(
-  { fetch, limit, page = 1 }: ShowAnticipatedParams,
-): Promise<AnticipatedShow[]> {
+  { fetch, page = 1, limit = DEFAULT_PAGE_SIZE }: ShowAnticipatedParams,
+): Promise<Paginatable<AnticipatedShow>> {
   return api({ fetch })
     .shows
     .anticipated({
@@ -49,19 +52,23 @@ function showAnticipatedRequest(
         limit,
       },
     })
-    .then(({ status, body }) => {
+    .then(({ status, body, headers }) => {
       if (status !== 200) {
         throw new Error('Failed to fetch anticipated shows');
       }
 
-      return body.map(mapResponseToAnticipatedShow);
+      return {
+        entries: body.map(mapResponseToAnticipatedShow),
+        page: extractPageMeta(headers),
+      };
     });
 }
 
-const showAnticipatedQueryKey = ['showAnticipated'] as const;
+const showAnticipatedQueryKey = (params: ShowAnticipatedParams) =>
+  ['showAnticipated', params.limit, params.page] as const;
 export const showAnticipatedQuery = (
   params: ShowAnticipatedParams = {},
 ) => ({
-  queryKey: showAnticipatedQueryKey,
+  queryKey: showAnticipatedQueryKey(params),
   queryFn: () => showAnticipatedRequest(params),
 });

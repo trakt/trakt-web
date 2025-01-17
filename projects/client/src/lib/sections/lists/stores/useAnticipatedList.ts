@@ -1,4 +1,5 @@
 import type { MediaType } from '$lib/models/MediaType.ts';
+import type { Paginatable } from '$lib/models/Paginatable';
 import {
   type AnticipatedMovie,
   movieAnticipatedQuery,
@@ -11,15 +12,18 @@ import { derived } from 'svelte/store';
 export type AnticipatedMediaItem = AnticipatedMovie;
 export type AnticipatedMedia = Array<AnticipatedMediaItem>;
 
-const ANTICIPATED_LIMIT = 25;
-
 type AnticipatedListStoreProps = {
   type: MediaType;
+  limit?: number;
+  page?: number;
 };
 
-function typeToQuery(type: MediaType): CreateQueryOptions<AnticipatedMedia> {
+function typeToQuery(
+  { type, limit, page }: AnticipatedListStoreProps,
+): CreateQueryOptions<Paginatable<AnticipatedMediaItem>> {
   const params = {
-    limit: ANTICIPATED_LIMIT,
+    limit,
+    page,
   };
 
   switch (type) {
@@ -31,15 +35,18 @@ function typeToQuery(type: MediaType): CreateQueryOptions<AnticipatedMedia> {
 }
 
 export function useAnticipatedList(
-  { type }: AnticipatedListStoreProps,
+  props: AnticipatedListStoreProps,
 ) {
   const query = createQuery({
-    ...typeToQuery(type),
+    ...typeToQuery(props),
     staleTime: time.hours(1),
   });
-  const list = derived(query, ($query) => $query.data ?? []);
 
   return {
-    list,
+    list: derived(query, ($query) => $query.data?.entries ?? []),
+    page: derived(
+      query,
+      ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    ),
   };
 }
