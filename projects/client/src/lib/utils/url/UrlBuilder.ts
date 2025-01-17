@@ -6,7 +6,25 @@ type PaginatableMediaPageUrl = {
   page?: number;
 };
 
+const mediaDrilldownFactory =
+  (category: string) => ({ type, page }: PaginatableMediaPageUrl) => {
+    const baseUrl = `/${type}s/${category}`;
+    return baseUrl + buildParamString({ page });
+  };
+
 export const UrlBuilder = {
+  trending(params: PaginatableMediaPageUrl) {
+    return mediaDrilldownFactory('trending')(params);
+  },
+  recommended(params: PaginatableMediaPageUrl) {
+    return mediaDrilldownFactory('recommended')(params);
+  },
+  anticipated(params: PaginatableMediaPageUrl) {
+    return mediaDrilldownFactory('anticipated')(params);
+  },
+  popular(params: PaginatableMediaPageUrl) {
+    return mediaDrilldownFactory('popular')(params);
+  },
   home: () => '/',
   shows: () => '/shows',
   media: (type: MediaType, id: string) => {
@@ -18,54 +36,6 @@ export const UrlBuilder = {
     }
   },
   show: (id: string) => `/shows/${id}`,
-  trending: ({ type, page }: PaginatableMediaPageUrl) => {
-    const trendingMediaUrl = (() => {
-      switch (type) {
-        case 'show':
-          return '/shows/trending';
-        case 'movie':
-          return '/movies/trending';
-      }
-    })();
-
-    return trendingMediaUrl + buildParamString({ page });
-  },
-  recommended: ({ type, page }: PaginatableMediaPageUrl) => {
-    const recommendedMediaUrl = (() => {
-      switch (type) {
-        case 'show':
-          return '/shows/recommended';
-        case 'movie':
-          return '/movies/recommended';
-      }
-    })();
-
-    return recommendedMediaUrl + buildParamString({ page });
-  },
-  anticipated: ({ type, page }: PaginatableMediaPageUrl) => {
-    const anticipatedMediaUrl = (() => {
-      switch (type) {
-        case 'show':
-          return '/shows/anticipated';
-        case 'movie':
-          return '/movies/anticipated';
-      }
-    })();
-
-    return anticipatedMediaUrl + buildParamString({ page });
-  },
-  popular: ({ type, page }: PaginatableMediaPageUrl) => {
-    const popularMediaUrl = (() => {
-      switch (type) {
-        case 'show':
-          return '/shows/popular';
-        case 'movie':
-          return '/movies/popular';
-      }
-    })();
-
-    return popularMediaUrl + buildParamString({ page });
-  },
   movies: () => '/movies',
   movie: (id: string) => `/movies/${id}`,
   people: (id: string) => `/people/${id}`,
