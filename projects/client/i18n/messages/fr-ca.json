@@ -253,5 +253,6 @@
   "trending_movies": "Films populaires",
   "view_all": "Tout voir",
   "go_to_page_number": "Aller à la page {number}",
+  "full_season": "Saison complète",
   "remove_from_watchlist_warning": "Voulez-vous vraiment retirer {title} de votre liste à voir?"
 }

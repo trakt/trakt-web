@@ -252,5 +252,7 @@
   "trending_shows": "Popularne seriale",
   "trending_movies": "Popularne filmy",
   "view_all": "Zobacz wszystko",
-  "go_to_page_number": "Przejdź do strony {number}"
+  "go_to_page_number": "Przejdź do strony {number}",
+  "full_season": "Pełny sezon",
+  "remove_from_watchlist_warning": "Na pewno chcesz usunąć {title} z listy do obejrzenia?"
 }
