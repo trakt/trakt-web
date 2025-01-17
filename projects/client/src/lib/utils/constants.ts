@@ -50,3 +50,4 @@ export const NOOP_FN = () => {
 
 export const DEFAULT_PAGE_SIZE = 15;
 export const RECOMMENDED_UPPER_LIMIT = 100;
+export const PAGE_UPPER_LIMIT = 25;

@@ -4,6 +4,7 @@
   import Paginator from "$lib/components/lists/paginated-list/Paginator.svelte";
   import { PaginatorIntlProvider } from "$lib/components/lists/paginated-list/PaginatorIntlProvider";
   import type { MediaType } from "$lib/models/MediaType";
+  import { PAGE_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import TrendingMediaItem from "./components/TrendingMediaItem.svelte";
@@ -35,7 +36,7 @@
   $effect(() => {
     const total = $page.total;
     if (!total) return;
-    last.set(total);
+    last.set(Math.min(total, PAGE_UPPER_LIMIT));
   });
 </script>
 
