@@ -14,6 +14,7 @@
   import MediaItem from "./components/MediaItem.svelte";
   import { useTrendingList } from "./stores/useTrendingList";
   import { mediaCardWidthResolver } from "./utils/mediaCardWidthResolver";
+  import { mediaPageLimitResolver } from "./utils/mediaPageLimitResolver";
 
   type TrendingListProps = {
     title: string;
@@ -21,8 +22,6 @@
   };
 
   const { title, type }: TrendingListProps = $props();
-
-  const PAGE_LIST_ITEM_COUNT = type === "movie" ? 20 : 21;
 
   const page = $derived(
     parseInt(pageState.url.searchParams.get("page") ?? "1"),
@@ -32,7 +31,7 @@
     useTrendingList({
       type,
       page,
-      limit: PAGE_LIST_ITEM_COUNT,
+      limit: mediaPageLimitResolver(type),
     }),
   );
 
