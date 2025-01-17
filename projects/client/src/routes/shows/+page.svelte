@@ -29,7 +29,7 @@
 
   <TrendingList
     title={m.trending_now()}
-    label={m.view_all_trending_shows()}
+    drilldownLabel={m.view_all_trending_shows()}
     {type}
   />
   {#if isAuthorized}

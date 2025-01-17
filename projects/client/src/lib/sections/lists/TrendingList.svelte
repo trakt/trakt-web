@@ -8,16 +8,17 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import MediaItem from "./components/MediaItem.svelte";
+  import ViewAllButton from "./components/ViewAllButton.svelte";
   import { useTrendingList } from "./stores/useTrendingList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type TrendingListProps = {
     title: string;
-    label: string;
+    drilldownLabel: string;
     type: MediaType;
   };
 
-  const { title, label, type }: TrendingListProps = $props();
+  const { title, drilldownLabel, type }: TrendingListProps = $props();
 
   const { list } = useTrendingList({ type });
 </script>
@@ -37,8 +38,12 @@
   {/snippet}
 
   {#snippet actions()}
+    <ViewAllButton
+      href={UrlBuilder.trending({ type })}
+      label={drilldownLabel}
+    />
     <Button
-      {label}
+      label={drilldownLabel}
       href={UrlBuilder.trending({ type })}
       style="flat"
       variant="primary"

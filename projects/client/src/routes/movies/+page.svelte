@@ -27,7 +27,7 @@
   <CoverImageSetter src={url} type="main" />
   <TrendingList
     title={m.trending_now()}
-    label={m.view_all_trending_movies()}
+    drilldownLabel={m.view_all_trending_movies()}
     {type}
   />
   {#if isAuthorized}
