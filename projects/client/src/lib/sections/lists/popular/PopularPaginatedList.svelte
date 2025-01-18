@@ -1,8 +1,9 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import MediaItem from "../components/MediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import PopularMediaItem from "./PopularMediaItem.svelte";
   import { usePopularList } from "./usePopularList";
 
   type PopularListProps = {
@@ -20,6 +21,12 @@
   urlBuilder={UrlBuilder.popular}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media} />
+    <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <PopularMediaItem {type} {media} style="card" />
+    </RenderFor>
+
+    <RenderFor audience="all" device={["mobile"]}>
+      <PopularMediaItem {type} {media} style="list" />
+    </RenderFor>
   {/snippet}
 </DrilledMediaList>

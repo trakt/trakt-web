@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import MediaItem from "../components/MediaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import PopularMediaItem from "./PopularMediaItem.svelte";
   import { usePopularList } from "./usePopularList";
 
   type PopularListProps = {
@@ -22,6 +22,6 @@
   urlBuilder={UrlBuilder.popular}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media} />
+    <PopularMediaItem {type} {media} style="card" />
   {/snippet}
 </DrillableMediaList>
