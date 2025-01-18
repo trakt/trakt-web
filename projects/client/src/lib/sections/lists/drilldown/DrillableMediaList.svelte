@@ -19,7 +19,7 @@
     urlBuilder,
   }: DrillableList<T> = $props();
 
-  const { list } = useList({ type });
+  const { list } = $derived(useList({ type }));
 </script>
 
 <SectionList
