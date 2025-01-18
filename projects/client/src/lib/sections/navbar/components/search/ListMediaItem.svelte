@@ -1,34 +1,51 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
 
-  const { media }: { media: MediaSummary } = $props();
+  const {
+    media,
+    tags,
+    retrigger = true,
+  }: { media: MediaSummary; tags?: Snippet; retrigger?: boolean } = $props();
   const MAX_GENRE_COUNT = 2;
 </script>
 
-<div class="trakt-search-result-item">
-  <CrossOriginImage alt={media.title} src={media.poster.url.thumb} />
-  <div class="trakt-search-result-item-details">
-    <span class="trakt-search-media-title">
-      {media.title} ({media.year})
-    </span>
-    <div class="meta-info">
-      <InfoTag>
-        {media.type}
-      </InfoTag>
+<Link
+  href={UrlBuilder.media(media.type, media.slug)}
+  {retrigger}
+  color="inherit"
+>
+  <div class="trakt-search-result-item">
+    <CrossOriginImage alt={media.title} src={media.poster.url.thumb} />
+    <div class="trakt-search-result-item-details">
+      <span class="trakt-search-media-title">
+        {media.title} ({media.year})
+      </span>
+      <div class="meta-info">
+        <InfoTag>
+          {media.type}
+        </InfoTag>
 
-      {#if media.runtime}
-        <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
-      {/if}
+        {#if tags == null}
+          {#if media.runtime != null}
+            <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
+          {/if}
+        {:else}
+          {@render tags()}
+        {/if}
+      </div>
+
+      <GenreList genres={media.genres.slice(0, MAX_GENRE_COUNT)} />
     </div>
-
-    <GenreList genres={media.genres.slice(0, MAX_GENRE_COUNT)} />
   </div>
-</div>
+</Link>
 
 <style>
   .trakt-search-result-item {

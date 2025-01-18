@@ -22,6 +22,6 @@
   urlBuilder={UrlBuilder.trending}
 >
   {#snippet item(media)}
-    <TrendingMediaItem {type} {media} />
+    <TrendingMediaItem {type} {media} style="card" />
   {/snippet}
 </DrillableMediaList>

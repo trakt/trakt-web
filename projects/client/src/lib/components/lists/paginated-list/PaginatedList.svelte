@@ -45,7 +45,9 @@
   </div>
 </section>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-page-list-container {
     display: flex;
     flex-direction: column;
@@ -59,5 +61,9 @@
     justify-content: center;
     grid-column-gap: var(--ni-8);
     grid-row-gap: var(--ni-16);
+
+    @include for-mobile {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

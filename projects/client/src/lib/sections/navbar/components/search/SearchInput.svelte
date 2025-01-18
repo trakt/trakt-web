@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ListMediaItem from "./ListMediaItem.svelte";
   import { useSearch } from "./useSearch";
 
@@ -15,6 +13,21 @@
   }
 
   let inputElement: HTMLInputElement;
+
+  function clearOnClick(node: HTMLElement) {
+    const handler = () => {
+      inputElement.value = "";
+      clear();
+    };
+
+    node.addEventListener("click", handler);
+
+    return {
+      destroy() {
+        node.removeEventListener("click", handler);
+      },
+    };
+  }
 </script>
 
 <div class="trakt-search" class:search-is-loading={$isSearching}>
@@ -29,19 +42,9 @@
     oninput={onSearch}
   />
   {#if $results.length > 0}
-    <div class="trakt-search-results">
+    <div class="trakt-search-results" use:clearOnClick>
       {#each $results as result}
-        <Link
-          href={UrlBuilder.media(result.type, result.slug)}
-          retrigger={false}
-          onclick={() => {
-            inputElement.value = "";
-            clear();
-          }}
-          color="inherit"
-        >
-          <ListMediaItem media={result} />
-        </Link>
+        <ListMediaItem media={result} retrigger={false} />
       {/each}
     </div>
   {/if}
