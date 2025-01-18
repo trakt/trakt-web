@@ -7,10 +7,9 @@
   import { PAGE_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
-  import MediaItem from "./components/MediaItem.svelte";
-  import { usePopularList } from "./stores/usePopularList";
-  import { mediaCardWidthResolver } from "./utils/mediaCardWidthResolver";
-  import { mediaPageLimitResolver } from "./utils/mediaPageLimitResolver";
+  import MediaItem from "../components/MediaItem.svelte";
+  import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import { usePopularList } from "./usePopularList";
 
   type PopularListProps = {
     title: string;

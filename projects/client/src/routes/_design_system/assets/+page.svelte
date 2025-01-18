@@ -9,8 +9,8 @@
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { resolveEnvironmentUri } from "$lib/features/image/components/resolveEnvironmentUri";
-  import { usePopularList } from "$lib/sections/lists/stores/usePopularList";
-  import { useTrendingList } from "$lib/sections/lists/stores/useTrendingList";
+  import { usePopularList } from "$lib/sections/lists/popular/usePopularList";
+  import { useTrendingList } from "$lib/sections/lists/trending/useTrendingList";
   import { shuffle } from "$lib/utils/array/shuffle";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import DownloadIcon from "./DownloadIcon.svelte";
