@@ -12,6 +12,11 @@ import { CancelledError, useQueryClient } from '@tanstack/svelte-query';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
 
+function isGarbage(value?: MediaSummary): boolean {
+  return value?.year == null &&
+    !value?.genres.length;
+}
+
 export function useSearch() {
   type SearchResponse = {
     items: MediaSummary[];
@@ -70,7 +75,7 @@ export function useSearch() {
     results.set({
       items: response
         .items
-        .filter((result) => result != null),
+        .filter((result) => !isGarbage(result)),
       reason: response.reason,
     });
   }
