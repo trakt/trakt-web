@@ -3,7 +3,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import VipIcon from "$lib/components/icons/VipIcon.svelte";
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
-  import YouTubeIcon from "../../../lib/components/icons/YouTubeIcon.svelte";
+  import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
 
   import type { TraktButtonProps } from "$lib/components/buttons/TraktButtonProps";
 
