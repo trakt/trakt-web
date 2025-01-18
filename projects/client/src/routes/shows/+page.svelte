@@ -6,7 +6,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
-  import RecommendedList from "$lib/sections/lists/RecommendedList.svelte";
+  import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
 
   import {

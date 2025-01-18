@@ -2,10 +2,10 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import MediaItem from "./components/MediaItem.svelte";
-  import ViewAllButton from "./components/ViewAllButton.svelte";
-  import { useRecommendationList } from "./stores/useRecommendationList";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
+  import MediaItem from "../components/MediaItem.svelte";
+  import ViewAllButton from "../components/ViewAllButton.svelte";
+  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendationListProps = {
     title: string;
@@ -15,7 +15,7 @@
 
   const { title, drilldownLabel, type }: RecommendationListProps = $props();
 
-  const { list } = $derived(useRecommendationList({ type }));
+  const { list } = $derived(useRecommendedList({ type }));
 </script>
 
 <SectionList

@@ -15,8 +15,8 @@ export type RecommendedMediaItem = RecommendedMovie | RecommendedShow;
 export type RecommendedMedia = Array<RecommendedMediaItem>;
 
 type RecommendationListStoreProps = {
-  limit?: number;
   type: MediaType;
+  limit?: number;
 };
 
 function typeToQuery(
@@ -31,7 +31,7 @@ function typeToQuery(
   }
 }
 
-export function useRecommendationList(
+export function useRecommendedList(
   props: RecommendationListStoreProps,
 ) {
   const query = createQuery({

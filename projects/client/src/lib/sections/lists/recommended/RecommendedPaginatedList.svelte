@@ -1,15 +1,15 @@
 <script lang="ts">
   import { page as pageState } from "$app/state";
+  import PaginatedList from "$lib/components/lists/paginated-list/PaginatedList.svelte";
   import Paginator from "$lib/components/lists/paginated-list/Paginator.svelte";
   import { PaginatorIntlProvider } from "$lib/components/lists/paginated-list/PaginatorIntlProvider";
   import type { MediaType } from "$lib/models/MediaType";
   import { RECOMMENDED_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import PaginatedList from "../../components/lists/paginated-list/PaginatedList.svelte";
-  import MediaItem from "./components/MediaItem.svelte";
-  import { useRecommendationList } from "./stores/useRecommendationList";
-  import { mediaCardWidthResolver } from "./utils/mediaCardWidthResolver";
-  import { mediaPageLimitResolver } from "./utils/mediaPageLimitResolver";
+  import MediaItem from "../components/MediaItem.svelte";
+  import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
+  import { mediaPageLimitResolver } from "../utils/mediaPageLimitResolver";
+  import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendedListProps = {
     title: string;
@@ -25,7 +25,7 @@
   const limit = $derived(mediaPageLimitResolver(type));
 
   const { list } = $derived(
-    useRecommendationList({
+    useRecommendedList({
       type,
       limit: RECOMMENDED_UPPER_LIMIT,
     }),
