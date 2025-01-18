@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import AnticipatedMediaItem from "./components/AnticipatedMediaItem.svelte";
-  import DrilledMediaList from "./drilldown/DrilledMediaList.svelte";
-  import { useAnticipatedList } from "./stores/useAnticipatedList";
+  import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import AnticipatedMediaItem from "./AnticipatedMediaItem.svelte";
+  import { useAnticipatedList } from "./useAnticipatedList";
 
   type AnticipatedListProps = {
     title: string;

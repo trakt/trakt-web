@@ -1,9 +1,9 @@
 <script lang="ts">
   import AnticipatedTag from "$lib/components/media/tags/AnticipatedTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import type { AnticipatedMediaItem } from "../stores/useAnticipatedList";
-  import MediaItem from "./MediaItem.svelte";
-  import type { MediaItemProps } from "./MediaItemProps";
+  import MediaItem from "../components/MediaItem.svelte";
+  import type { MediaItemProps } from "../components/MediaItemProps";
+  import type { AnticipatedMediaItem } from "./useAnticipatedList";
 
   const { type, media }: MediaItemProps<AnticipatedMediaItem> = $props();
 </script>

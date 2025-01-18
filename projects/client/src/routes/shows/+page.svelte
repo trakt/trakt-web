@@ -4,10 +4,10 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import AnticipatedList from "$lib/sections/lists/AnticipatedList.svelte";
   import PopularList from "$lib/sections/lists/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/TrendingList.svelte";
+  import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
 
   import {
     DEFAULT_COVER,

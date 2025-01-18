@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import AnticipatedMediaItem from "./components/AnticipatedMediaItem.svelte";
-  import DrillableMediaList from "./drilldown/DrillableMediaList.svelte";
-  import { useAnticipatedList } from "./stores/useAnticipatedList";
+  import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import AnticipatedMediaItem from "./AnticipatedMediaItem.svelte";
+  import { useAnticipatedList } from "./useAnticipatedList";
 
   type TrendingListProps = {
     title: string;
