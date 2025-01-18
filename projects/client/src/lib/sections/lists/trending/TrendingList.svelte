@@ -2,10 +2,10 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import TrendingMediaItem from "./components/TrendingMediaItem.svelte";
-  import ViewAllButton from "./components/ViewAllButton.svelte";
-  import { useTrendingList } from "./stores/useTrendingList";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
+  import ViewAllButton from "../components/ViewAllButton.svelte";
+  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import TrendingMediaItem from "./TrendingMediaItem.svelte";
+  import { useTrendingList } from "./useTrendingList";
 
   type TrendingListProps = {
     title: string;

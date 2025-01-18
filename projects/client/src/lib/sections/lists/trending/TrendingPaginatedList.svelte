@@ -7,10 +7,10 @@
   import { PAGE_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
-  import TrendingMediaItem from "./components/TrendingMediaItem.svelte";
-  import { useTrendingList } from "./stores/useTrendingList";
-  import { mediaCardWidthResolver } from "./utils/mediaCardWidthResolver";
-  import { mediaPageLimitResolver } from "./utils/mediaPageLimitResolver";
+  import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
+  import { mediaPageLimitResolver } from "../utils/mediaPageLimitResolver";
+  import TrendingMediaItem from "./TrendingMediaItem.svelte";
+  import { useTrendingList } from "./useTrendingList";
 
   type TrendingListProps = {
     title: string;

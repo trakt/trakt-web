@@ -1,9 +1,9 @@
 <script lang="ts">
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
-  import type { TrendingMediaItem } from "../stores/useTrendingList";
-  import MediaItem from "./MediaItem.svelte";
-  import type { MediaItemProps } from "./MediaItemProps";
+  import MediaItem from "../components/MediaItem.svelte";
+  import type { MediaItemProps } from "../components/MediaItemProps";
+  import type { TrendingMediaItem } from "./useTrendingList";
 
   const { type, media }: MediaItemProps<TrendingMediaItem> = $props();
 </script>
