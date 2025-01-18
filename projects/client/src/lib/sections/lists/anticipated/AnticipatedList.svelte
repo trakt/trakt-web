@@ -22,6 +22,6 @@
   urlBuilder={UrlBuilder.anticipated}
 >
   {#snippet item(media)}
-    <AnticipatedMediaItem {type} {media} />
+    <AnticipatedMediaItem {type} {media} style="card" />
   {/snippet}
 </DrillableMediaList>
