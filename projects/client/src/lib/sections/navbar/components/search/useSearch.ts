@@ -1,9 +1,9 @@
 import { browser } from '$app/environment';
 import { AbortError, abortRequest } from '$lib/api.ts';
+import type { MediaSummary } from '$lib/requests/models/MediaSummary';
 import {
   searchCancellationId,
   searchQuery,
-  type SearchResult,
 } from '$lib/requests/queries/search/searchQuery.ts';
 import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
@@ -14,12 +14,12 @@ import { derived, get, writable } from 'svelte/store';
 
 export function useSearch() {
   type SearchResponse = {
-    items: SearchResult[];
+    items: MediaSummary[];
     reason: 'initial' | 'result' | 'cancelled';
   };
 
   const results = writable<SearchResponse>({
-    items: [] as SearchResult[],
+    items: [] as MediaSummary[],
     reason: 'initial',
   });
   const client = browser ? useQueryClient() : undefined;
@@ -70,7 +70,7 @@ export function useSearch() {
     results.set({
       items: response
         .items
-        .filter((result) => result.year != null),
+        .filter((result) => result != null),
       reason: response.reason,
     });
   }

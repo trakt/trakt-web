@@ -19,6 +19,7 @@ export function mapShowResponseToShowSummary(
   return {
     id: show.ids.trakt,
     slug: show.ids.slug,
+    type: 'show',
     title: show.title,
     runtime: show.runtime ?? NaN,
     year: show.year,

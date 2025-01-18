@@ -3,6 +3,7 @@ import type { ShowSummary } from '$lib/requests/models/ShowSummary';
 export const ShowDevsMappedMock: ShowSummary = {
   'id': 147971,
   'slug': 'devs',
+  'type': 'show',
   'title': 'Devs',
   'runtime': 52,
   'year': 2020,

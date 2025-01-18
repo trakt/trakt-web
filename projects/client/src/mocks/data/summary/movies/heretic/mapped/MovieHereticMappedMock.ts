@@ -26,6 +26,7 @@ export const MovieHereticMappedMock: MovieSummary = {
     },
   },
   'year': 2024,
+  'type': 'movie',
   'runtime': 111,
   'slug': 'heretic-2024',
   'tagline': 'Question everything.',

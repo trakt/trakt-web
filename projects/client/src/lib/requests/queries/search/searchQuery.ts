@@ -1,60 +1,37 @@
-import type { Genre, SearchResultResponse } from '$lib/api.ts';
-import type { MediaType } from '$lib/models/MediaType.ts';
-import { mapPoster } from '$lib/requests/_internal/mapPoster.ts';
+import type { SearchResultResponse } from '$lib/api.ts';
+import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import type { MediaSummary } from '$lib/requests/models/MediaSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 export type SearchParams = {
   query: string;
 } & ApiParams;
 
-export type SearchResult = {
-  type: MediaType;
-  id: number;
-  slug: string;
-  title: string;
-  year: number | Nil;
-  genres: Genre[];
-  runtime: number | Nil;
-  poster: {
-    url: HttpsUrl;
-  };
-};
-
 function mapToSearchResultEntry(
   item: SearchResultResponse[0],
-): SearchResult {
+): MediaSummary {
   const { type } = item;
 
-  const media = (() => {
+  const summary = (() => {
     switch (type) {
       case 'show':
-        return item.show;
+        return mapShowResponseToShowSummary(item.show);
       case 'movie':
-        return item.movie;
+        return mapMovieResponseToMovieSummary(item.movie);
       default:
         throw new Error(`Unknown type: ${type}`);
     }
   })();
 
-  return {
-    type,
-    id: media.ids.trakt,
-    slug: media.ids.slug,
-    title: media.title,
-    year: media.year,
-    genres: media.genres ?? [],
-    runtime: media.runtime,
-    poster: {
-      url: mapPoster(media.images).url.thumb,
-    },
-  };
+  return summary;
 }
 
 export const searchCancellationId = () => 'search_cancellation_token';
 function searchRequest({
   query,
   fetch,
-}: SearchParams): Promise<SearchResult[]> {
+}: SearchParams): Promise<MediaSummary[]> {
   return api({
     fetch,
     cancellable: true,

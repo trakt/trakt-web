@@ -3,6 +3,7 @@ import type { MovieSummary } from '$lib/requests/models/MovieSummary';
 export const MovieMatrixMappedMock: MovieSummary = {
   'id': 481,
   'slug': 'the-matrix-1999',
+  'type': 'movie',
   'title': 'The Matrix',
   'runtime': 136,
   'year': 1999,

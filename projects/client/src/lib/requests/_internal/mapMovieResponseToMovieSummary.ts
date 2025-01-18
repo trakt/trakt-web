@@ -25,6 +25,7 @@ export function mapMovieResponseToMovieSummary(
   return {
     id: movie.ids.trakt,
     slug: movie.ids.slug,
+    type: 'movie',
     title: movie.title,
     runtime: movie.runtime ?? NaN,
     year: movie.year,

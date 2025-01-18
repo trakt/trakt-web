@@ -1,4 +1,5 @@
 import type { Genre } from '$lib/api.ts';
+import type { MediaType } from '$lib/models/MediaType';
 import type { MediaStatus } from './MediaStatus';
 
 type ImageUrls = {
@@ -9,6 +10,7 @@ type ImageUrls = {
 export type MediaSummary = {
   id: number;
   slug: string;
+  type: MediaType;
   year: number | Nil;
   runtime: number;
   title: string;

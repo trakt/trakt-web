@@ -1,10 +1,9 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import SearchResultDetails from "./SearchResultDetails.svelte";
+  import ListMediaItem from "./ListMediaItem.svelte";
   import { useSearch } from "./useSearch";
 
   const { search, clear, isSearching, results } = useSearch();
@@ -22,13 +21,7 @@
   <input
     use:clickOutside
     bind:this={inputElement}
-    onclick={(ev) => {
-      if (!inputElement.value.trim()) {
-        return;
-      }
-
-      onSearch(ev);
-    }}
+    onclick={onSearch}
     onclickoutside={() => clear()}
     class="trakt-search-input"
     type="search"
@@ -47,10 +40,7 @@
           }}
           color="inherit"
         >
-          <div class="trakt-search-result-item">
-            <CrossOriginImage alt={result.title} src={result.poster.url} />
-            <SearchResultDetails {result} />
-          </div>
+          <ListMediaItem media={result} />
         </Link>
       {/each}
     </div>
@@ -194,21 +184,6 @@
 
         &:active {
           background: var(--purple-700);
-        }
-      }
-
-      .trakt-search-result-item {
-        padding: var(--ni-8);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: var(--ni-16);
-
-        :global(img) {
-          height: var(--ni-120);
-          width: var(--ni-80);
-          border: var(--border-thickness-xs) solid white;
-          border-radius: var(--border-radius-s);
         }
       }
     }

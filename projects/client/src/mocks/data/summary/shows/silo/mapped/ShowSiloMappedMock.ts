@@ -24,6 +24,7 @@ export const ShowSiloMappedMock: ShowSummary = {
         'https://walter-r2.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
     },
   },
+  'type': 'show',
   'year': 2023,
   'runtime': 60,
   'slug': 'silo',
