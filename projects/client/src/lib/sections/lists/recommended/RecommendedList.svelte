@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import MediaItem from "../components/MediaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import RecommendedMediaItem from "./RecommendedMediaItem.svelte";
   import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendationListProps = {
@@ -22,6 +22,6 @@
   urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media} />
+    <RecommendedMediaItem {type} {media} style="card" />
   {/snippet}
 </DrillableMediaList>

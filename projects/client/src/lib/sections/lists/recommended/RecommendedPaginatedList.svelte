@@ -1,9 +1,10 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { RECOMMENDED_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import MediaItem from "../components/MediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import RecommendedMediaItem from "./RecommendedMediaItem.svelte";
   import { toInMemoryPaginatable } from "./toInMemoryPaginatable";
   import { useRecommendedList } from "./useRecommendedList";
 
@@ -29,6 +30,12 @@
   urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media} />
+    <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <RecommendedMediaItem {type} {media} style="card" />
+    </RenderFor>
+
+    <RenderFor audience="all" device={["mobile"]}>
+      <RecommendedMediaItem {type} {media} style="list" />
+    </RenderFor>
   {/snippet}
 </DrilledMediaList>
