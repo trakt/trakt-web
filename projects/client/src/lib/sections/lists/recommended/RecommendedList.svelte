@@ -1,10 +1,8 @@
 <script lang="ts">
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import MediaItem from "../components/MediaItem.svelte";
-  import ViewAllButton from "../components/ViewAllButton.svelte";
-  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendationListProps = {
@@ -14,24 +12,16 @@
   };
 
   const { title, drilldownLabel, type }: RecommendationListProps = $props();
-
-  const { list } = $derived(useRecommendedList({ type }));
 </script>
 
-<SectionList
-  id={`recommended-list-${type}`}
-  items={$list}
+<DrillableMediaList
   {title}
-  --height-list={mediaListHeightResolver(type)}
+  {drilldownLabel}
+  {type}
+  useList={useRecommendedList}
+  urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
     <MediaItem {type} {media} />
   {/snippet}
-
-  {#snippet actions()}
-    <ViewAllButton
-      href={UrlBuilder.recommended({ type })}
-      label={drilldownLabel}
-    />
-  {/snippet}
-</SectionList>
+</DrillableMediaList>
