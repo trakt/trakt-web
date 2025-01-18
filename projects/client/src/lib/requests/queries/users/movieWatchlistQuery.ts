@@ -48,13 +48,15 @@ function watchlistRequest(
     });
 }
 
-const movieWatchlistQueryKey = [
-  'movieWatchlist',
-  InvalidateAction.Watchlisted('movie'),
-] as const;
+const movieWatchlistQueryKey = (params: MovieWatchlistParams) =>
+  [
+    'movieWatchlist',
+    InvalidateAction.Watchlisted('movie'),
+    params.sort,
+  ] as const;
 export const movieWatchlistQuery = (
   params: MovieWatchlistParams,
 ) => ({
-  queryKey: movieWatchlistQueryKey,
+  queryKey: movieWatchlistQueryKey(params),
   queryFn: () => watchlistRequest(params),
 });

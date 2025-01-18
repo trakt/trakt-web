@@ -48,13 +48,15 @@ function watchlistRequest(
     });
 }
 
-const showWatchlistQueryKey = [
-  'showWatchlist',
-  InvalidateAction.Watchlisted('show'),
-] as const;
+const showWatchlistQueryKey = (params: ShowWatchlistParams) =>
+  [
+    'showWatchlist',
+    InvalidateAction.Watchlisted('show'),
+    params.sort,
+  ] as const;
 export const showWatchlistQuery = (
   params: ShowWatchlistParams,
 ) => ({
-  queryKey: showWatchlistQueryKey,
+  queryKey: showWatchlistQueryKey(params),
   queryFn: () => watchlistRequest(params),
 });
