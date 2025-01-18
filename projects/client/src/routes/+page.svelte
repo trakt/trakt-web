@@ -5,10 +5,10 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
-  import ComingSoonList from "$lib/sections/lists/ComingSoonList.svelte";
-  import OutNowList from "$lib/sections/lists/OutNowList.svelte";
   import UpNextList from "$lib/sections/lists/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
+  import ComingSoonList from "$lib/sections/lists/watchlist/ComingSoonList.svelte";
+  import OutNowList from "$lib/sections/lists/watchlist/OutNowList.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
   import { DEFAULT_COVER, DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 

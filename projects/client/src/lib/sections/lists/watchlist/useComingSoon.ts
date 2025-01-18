@@ -2,7 +2,7 @@ import type { MediaType } from '$lib/models/MediaType.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus';
 import {
   useWatchlistList,
-} from '$lib/sections/lists/stores/useWatchlistList.ts';
+} from '$lib/sections/lists/watchlist/useWatchlistList';
 import { derived } from 'svelte/store';
 
 const IN_PROGRESS_STATUSES: MediaStatus[] = [

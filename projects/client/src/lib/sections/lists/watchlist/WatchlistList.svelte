@@ -1,9 +1,9 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { MediaType } from "$lib/models/MediaType";
-  import MediaItem from "./components/MediaItem.svelte";
-  import { useWatchlistList } from "./stores/useWatchlistList";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
+  import MediaItem from "../components/MediaItem.svelte";
+  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import { useWatchlistList } from "./useWatchlistList";
 
   type WatchlistListProps = {
     title: string;

@@ -3,11 +3,11 @@
 
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import FindMoviesLink from "./components/FindMoviesLink.svelte";
-  import MediaItem from "./components/MediaItem.svelte";
-  import { useOutNow } from "./stores/useOutNow";
+  import FindMoviesLink from "../components/FindMoviesLink.svelte";
+  import MediaItem from "../components/MediaItem.svelte";
+  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import { useComingSoon } from "./useComingSoon";
   import { genreCompareFactory } from "./utils/genreCompareFactory";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type ComingSoonProps = {
     title: string;
@@ -16,16 +16,16 @@
   const { title }: ComingSoonProps = $props();
   const type = "movie";
 
-  const { list, isLoading } = useOutNow(type);
+  const { list, isLoading } = useComingSoon(type);
   const { user } = useUser();
 
   const { compare } = $derived(
-    genreCompareFactory($user?.genres ?? [], "desc", "genre"),
+    genreCompareFactory($user?.genres ?? [], "asc", "year"),
   );
 </script>
 
 <SectionList
-  id={`out-now-list-${type}`}
+  id={`coming-soon-list-${type}`}
   items={$list.sort(compare)}
   {title}
   --height-list={mediaListHeightResolver(type)}
@@ -35,7 +35,7 @@
   {/snippet}
   {#snippet empty()}
     {#if !$isLoading}
-      <p class="small">{m.out_now_empty()}</p>
+      <p class="small">{m.coming_soon_empty()}</p>
       <FindMoviesLink />
     {/if}
   {/snippet}

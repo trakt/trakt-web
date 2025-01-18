@@ -1,8 +1,6 @@
 import type { MediaType } from '$lib/models/MediaType.ts';
-import {
-  useWatchlistList,
-} from '$lib/sections/lists/stores/useWatchlistList.ts';
 import { derived } from 'svelte/store';
+import { useWatchlistList } from './useWatchlistList.ts';
 
 export function useOutNow(type: MediaType) {
   const { list: watchlist, isLoading } = useWatchlistList({
