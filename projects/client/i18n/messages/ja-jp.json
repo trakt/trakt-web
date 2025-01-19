@@ -142,8 +142,10 @@
   "watchlist_shows": "あなたの番組",
   "watchlist_movies": "あなたの映画",
   "watch_now": "今すぐ視聴",
+  "watch_on_multiple_services": "{count}個のサービスで今すぐ視聴",
+  "watch_on_nowhere": "視聴できません",
   "watch_title_now": "{title}を今すぐ視聴",
-  "watch_title_now_disabled": "{title}は、お住まいの国の好きなストリーミングサービスで利用できる場合にのみ、今すぐ視聴できます。設定はhttps://trakt.tv/settingsで変更できます",
+  "watch_now_service_logo": "{service}のロゴ",
   "year_to_date": "今年",
   "director": "監督",
   "writer": "脚本家",
@@ -268,5 +270,6 @@
   "rate_now": "今すぐ評価",
   "rating_bad": "👎 これはイマイチ",
   "rating_good": "👍 これは良かった",
-  "rating_great": "❤️ これは最高！"
+  "rating_great": "❤️ これは最高！",
+  "watch_title_now_disabled": "{title}は、お住まいの国の好きなストリーミングサービスで利用できる場合にのみ、今すぐ視聴できます。設定はhttps://trakt.tv/settingsで変更できます"
 }

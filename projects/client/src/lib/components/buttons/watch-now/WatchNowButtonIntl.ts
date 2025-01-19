@@ -1,9 +1,11 @@
 export type WatchNowButtonMeta = {
+  count: number;
   isDisabled: boolean;
-  title: string;
 };
 
 export type WatchNowButtonIntl = {
-  title: (meta: WatchNowButtonMeta) => string;
-  text: () => string;
+  title: (title: string) => string;
+  watchNow: () => string;
+  watchOnMultiple: ({ count, isDisabled }: WatchNowButtonMeta) => string;
+  logoAlt: (serviceName: string) => string;
 };

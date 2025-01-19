@@ -3,16 +3,19 @@ import type { WatchNowServices } from '$lib/requests/models/WatchNowServices.ts'
 type FindFavoriteWatchNowServiceProps = {
   services: WatchNowServices;
   favorites: string[];
+  countryCode: string;
 };
 
 export function findFavoriteWatchNowService({
   services,
   favorites,
+  countryCode,
 }: FindFavoriteWatchNowServiceProps) {
   const favoriteSubscriptionMatch = services
-    .subscriptions
+    .streamingServices
     .find(
-      (subscription) => favorites.includes(subscription.source),
+      (subscription) =>
+        favorites.includes(`${countryCode}-${subscription.source}`),
     );
 
   return favoriteSubscriptionMatch;

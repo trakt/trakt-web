@@ -5,9 +5,10 @@ import type {
 } from './WatchNowButtonIntl.ts';
 
 export const WatchNowButtonIntlProvider: WatchNowButtonIntl = {
-  title: ({ title, isDisabled }: WatchNowButtonMeta) =>
-    isDisabled
-      ? m.watch_title_now_disabled({ title })
-      : m.watch_title_now({ title }),
-  text: () => m.watch_now(),
+  title: (title: string) => m.watch_title_now({ title }),
+  watchNow: () => m.watch_now(),
+  watchOnMultiple: ({ count, isDisabled }: WatchNowButtonMeta) =>
+    isDisabled ? m.watch_on_nowhere() : m.watch_on_multiple_services({ count }),
+  logoAlt: (serviceName: string) =>
+    m.watch_now_service_logo({ service: serviceName }),
 };

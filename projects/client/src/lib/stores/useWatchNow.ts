@@ -1,43 +1,40 @@
-import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
 import type { MediaType } from '$lib/models/MediaType.ts';
+import { episodeWatchNowQuery } from '$lib/requests/queries/episode/episodeWatchNowQuery.ts';
 import { showWatchNowQuery } from '$lib/requests/queries/shows/showWatchNowQuery.ts';
 import { findFavoriteWatchNowService } from '$lib/stores/_internal/findFavoriteWatchNowService.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived, get, writable } from 'svelte/store';
+import { derived } from 'svelte/store';
 import type { WatchNowServices } from '../requests/models/WatchNowServices.ts';
 import { movieWatchNowQuery } from '../requests/queries/movies/movieWatchNowQuery.ts';
 
+type WatchNowMediaType = MediaType | 'episode';
+
 type WatchNowStoreProps = {
-  type: MediaType;
-  id: string;
+  type: WatchNowMediaType;
+  id: number;
 };
 
 function typeToQuery(
-  type: MediaType,
-  slug: string,
+  type: WatchNowMediaType,
+  id: number,
   country: string,
 ): CreateQueryOptions<WatchNowServices> {
-  const params = { slug, country };
+  const params = { id, country };
 
   switch (type) {
     case 'movie':
       return movieWatchNowQuery(params);
     case 'show':
       return showWatchNowQuery(params);
+    case 'episode':
+      return episodeWatchNowQuery(params);
   }
 }
 
 export function useWatchNow({ type, id }: WatchNowStoreProps) {
-  const { isAuthorized } = useAuth();
-  if (!get(isAuthorized)) {
-    return {
-      watchNow: writable(undefined),
-      isLoading: writable(false),
-    };
-  }
-
   const { current } = useUser();
   const { region } = getLanguageAndRegion();
 
@@ -46,18 +43,28 @@ export function useWatchNow({ type, id }: WatchNowStoreProps) {
 
   const watchNow = createQuery({
     ...typeToQuery(type, id, country),
-    staleTime: Infinity,
-    enabled: watchNowSettings.showOnlyFavorites,
+    staleTime: time.days(1),
   });
 
   return {
     watchNow: derived(
       watchNow,
-      ($watchNow) =>
-        $watchNow.data && findFavoriteWatchNowService({
-          services: $watchNow.data,
-          favorites: watchNowSettings.favorites ?? [],
-        }),
+      ($watchNow) => {
+        if (!$watchNow.data) {
+          return;
+        }
+
+        return {
+          services: {
+            ...$watchNow.data,
+          },
+          favoriteService: findFavoriteWatchNowService({
+            services: $watchNow.data,
+            favorites: watchNowSettings.favorites ?? [],
+            countryCode: country,
+          }),
+        };
+      },
     ),
     isLoading: derived(
       watchNow,

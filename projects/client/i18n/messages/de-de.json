@@ -142,8 +142,10 @@
   "watchlist_shows": "Deine Serien",
   "watchlist_movies": "Deine Filme",
   "watch_now": "Jetzt ansehen",
+  "watch_on_multiple_services": "Jetzt auf {count} Diensten ansehen",
+  "watch_on_nowhere": "Nicht zum Ansehen verfügbar",
   "watch_title_now": "Titel {title} jetzt ansehen",
-  "watch_title_now_disabled": "Jetzt ansehen ist nur verfügbar, wenn {title} auf einem deiner bevorzugten Streaming-Dienste in deinem Land verfügbar ist. Du kannst diese Einstellungen unter https://trakt.tv/settings ändern",
+  "watch_now_service_logo": "{service} Logo",
   "year_to_date": "Jahr bis heute",
   "director": "Regisseur",
   "writer": "Autor",
@@ -268,5 +270,6 @@
   "rate_now": "Jetzt bewerten",
   "rating_bad": "👎 Das war schlecht",
   "rating_good": "👍 Das war gut",
-  "rating_great": "❤️ Das war spitze"
+  "rating_great": "❤️ Das war spitze",
+  "watch_title_now_disabled": "Jetzt ansehen ist nur verfügbar, wenn {title} auf einem deiner bevorzugten Streaming-Dienste in deinem Land verfügbar ist. Du kannst diese Einstellungen unter https://trakt.tv/settings ändern"
 }

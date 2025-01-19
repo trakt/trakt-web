@@ -142,8 +142,10 @@
   "watchlist_shows": "Twoje seriale",
   "watchlist_movies": "Twoje filmy",
   "watch_now": "Oglądaj teraz",
+  "watch_on_multiple_services": "Oglądaj teraz w {count} serwisach",
+  "watch_on_nowhere": "Niedostępne do oglądania",
   "watch_title_now": "Oglądaj {title} teraz",
-  "watch_title_now_disabled": "Oglądaj teraz jest dostępne jedynie, jeśli {title} jest dostępny na jednej z twoich ulubionych usług streamingowych w twoim kraju. Możesz zmienić te ustawienia na https://trakt.tv/settings",
+  "watch_now_service_logo": "Logo {service}",
   "year_to_date": "rok do dzisiaj",
   "director": "Reżyser",
   "writer": "Scenariusz",
@@ -268,5 +270,6 @@
   "rate_now": "Oceń teraz",
   "rating_bad": "👎 to było słabe",
   "rating_good": "👍 to było dobre",
-  "rating_great": "❤️ Uwielbiałem to"
+  "rating_great": "❤️ Uwielbiałem to",
+  "watch_title_now_disabled": "Oglądaj teraz jest dostępne jedynie, jeśli {title} jest dostępny na jednej z twoich ulubionych usług streamingowych w twoim kraju. Możesz zmienić te ustawienia na https://trakt.tv/settings"
 }

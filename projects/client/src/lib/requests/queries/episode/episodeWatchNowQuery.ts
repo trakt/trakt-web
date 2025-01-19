@@ -3,7 +3,7 @@ import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNo
 import type { WatchNowServices } from '../../models/WatchNowServices.ts';
 
 type EpisodeWatchNowParams = {
-  id: string;
+  id: number;
   country: string;
 } & ApiParams;
 
@@ -27,7 +27,7 @@ function episodeWatchNowRequest(
     });
 }
 
-const episodeWatchNowQueryKey = (id: string, country: string) =>
+const episodeWatchNowQueryKey = (id: number, country: string) =>
   ['episodeWatchNow', id, country] as const;
 export const episodeWatchNowQuery = (
   params: EpisodeWatchNowParams,

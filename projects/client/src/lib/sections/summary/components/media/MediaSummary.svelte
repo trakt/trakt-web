@@ -57,13 +57,17 @@
     media,
   });
 
-  const { watchNow, isLoading } = useWatchNow({ type, id: media.slug });
+  const { watchNow, isLoading } = useWatchNow({
+    type,
+    id: media.id,
+  });
 </script>
 
 {#snippet mediaActions()}
   <WatchNowButton
     isLoading={$isLoading}
-    streamingLink={$watchNow?.link}
+    favoriteService={$watchNow?.favoriteService}
+    services={$watchNow?.services}
     mediaTitle={media.title}
   />
   <WatchlistAction {...watchlistProps} />

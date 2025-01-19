@@ -3,18 +3,18 @@ import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNo
 import type { WatchNowServices } from '../../models/WatchNowServices.ts';
 
 type ShowWatchNowParams = {
-  slug: string;
+  id: number;
   country: string;
 } & ApiParams;
 
 function showWatchNowRequest(
-  { fetch, slug, country }: ShowWatchNowParams,
+  { fetch, id, country }: ShowWatchNowParams,
 ): Promise<WatchNowServices> {
   return api({ fetch })
     .shows
     .watchnow({
       params: {
-        id: slug,
+        id,
         country,
       },
     })
@@ -27,11 +27,11 @@ function showWatchNowRequest(
     });
 }
 
-const showWatchNowQueryKey = (id: string, country: string) =>
+const showWatchNowQueryKey = (id: number, country: string) =>
   ['showWatchNow', id, country] as const;
 export const showWatchNowQuery = (
   params: ShowWatchNowParams,
 ) => ({
-  queryKey: showWatchNowQueryKey(params.slug, params.country),
+  queryKey: showWatchNowQueryKey(params.id, params.country),
   queryFn: () => showWatchNowRequest(params),
 });

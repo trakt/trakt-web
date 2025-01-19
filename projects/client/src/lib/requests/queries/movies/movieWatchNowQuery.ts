@@ -3,18 +3,18 @@ import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNo
 import type { WatchNowServices } from '../../models/WatchNowServices.ts';
 
 type MovieWatchNowParams = {
-  slug: string;
+  id: number;
   country: string;
 } & ApiParams;
 
 function movieWatchNowRequest(
-  { fetch, slug, country }: MovieWatchNowParams,
+  { fetch, id, country }: MovieWatchNowParams,
 ): Promise<WatchNowServices> {
   return api({ fetch })
     .movies
     .watchnow({
       params: {
-        id: slug,
+        id,
         country,
       },
     })
@@ -27,11 +27,11 @@ function movieWatchNowRequest(
     });
 }
 
-const movieWatchNowQueryKey = (id: string, country: string) =>
+const movieWatchNowQueryKey = (id: number, country: string) =>
   ['movieWatchNow', id, country] as const;
 export const movieWatchNowQuery = (
   params: MovieWatchNowParams,
 ) => ({
-  queryKey: movieWatchNowQueryKey(params.slug, params.country),
+  queryKey: movieWatchNowQueryKey(params.id, params.country),
   queryFn: () => movieWatchNowRequest(params),
 });

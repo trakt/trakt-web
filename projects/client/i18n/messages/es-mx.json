@@ -142,8 +142,10 @@
   "watchlist_shows": "Tus Series",
   "watchlist_movies": "Tus Películas",
   "watch_now": "Mira ahora",
+  "watch_on_multiple_services": "Ver en {count} plataformas",
+  "watch_on_nowhere": "No disponible para ver",
   "watch_title_now": "Mira {title} ahora",
-  "watch_title_now_disabled": "Ver ahora solo está disponible si {title} está disponible en uno de tus servicios de transmisión favoritos en tu país. Puedes cambiar estas configuraciones en https://trakt.tv/settings",
+  "watch_now_service_logo": "Logo de {service}",
   "year_to_date": "Año en curso",
   "director": "Director",
   "writer": "Escritor",
@@ -268,5 +270,6 @@
   "rate_now": "Calificar ahora",
   "rating_bad": "👎 Esto fue horrible",
   "rating_good": "👍 Esto estuvo bien",
-  "rating_great": "❤️ ¡Me encantó!"
+  "rating_great": "❤️ ¡Me encantó!",
+  "watch_title_now_disabled": "Ver ahora solo está disponible si {title} está disponible en uno de tus servicios de transmisión favoritos en tu país. Puedes cambiar estas configuraciones en https://trakt.tv/settings"
 }

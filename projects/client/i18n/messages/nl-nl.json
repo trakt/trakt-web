@@ -142,8 +142,10 @@
   "watchlist_shows": "Je Series",
   "watchlist_movies": "Je Films",
   "watch_now": "Nu kijken",
+  "watch_on_multiple_services": "Kijk nu op {count} services",
+  "watch_on_nowhere": "Niet beschikbaar om te kijken",
   "watch_title_now": "Bekijk {title} nu",
-  "watch_title_now_disabled": "Nu kijken is alleen beschikbaar als {title} beschikbaar is op een van je favoriete streamingdiensten in je land. Je kunt deze instellingen wijzigen op https://trakt.tv/settings",
+  "watch_now_service_logo": "{service} logo",
   "year_to_date": "Jaar tot nu toe",
   "director": "Regisseur",
   "writer": "Schrijver",
@@ -268,5 +270,6 @@
   "rate_now": "Nu beoordelen",
   "rating_bad": "👎 dit was niks",
   "rating_good": "👍 dit was goed",
-  "rating_great": "❤️ Ik vond dit geweldig"
+  "rating_great": "❤️ Ik vond dit geweldig",
+  "watch_title_now_disabled": "Nu kijken is alleen beschikbaar als {title} beschikbaar is op een van je favoriete streamingdiensten in je land. Je kunt deze instellingen wijzigen op https://trakt.tv/settings"
 }
