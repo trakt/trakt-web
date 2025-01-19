@@ -2,11 +2,14 @@ import { http, HttpResponse } from 'msw';
 
 import { AuthResponseMock } from './data/auth/AuthResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
+import { EpisodeSiloResponseMock } from './data/summary/episodes/silo/mapped/EpisodeSiloResponseMock.ts';
+import { EpisodeSiloWatchNowResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
 import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/response/MovieHereticLanguageResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from './data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
 import { MovieHereticRatingsResponseMock } from './data/summary/movies/heretic/response/MovieHereticRatingsResponseMock.ts';
 import { MovieHereticResponseMock } from './data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import { MovieHereticStatsResponseMock } from './data/summary/movies/heretic/response/MovieHereticStatsResponseMock.ts';
+import { MovieHereticWatchNowResponseMock } from './data/summary/movies/heretic/response/MovieHereticWatchNowResponseMock.ts';
 import { MovieStudiosResponseMock } from './data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
 import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/response/ShowSiloLanguageResponseMock.ts';
 import { ShowSiloPeopleResponseMock } from './data/summary/shows/silo/response/ShowSiloPeopleResponseMock.ts';
@@ -17,6 +20,7 @@ import { ShowSiloResponseMock } from './data/summary/shows/silo/response/ShowSil
 import { ShowSiloSeasonsResponseMock } from './data/summary/shows/silo/response/ShowSiloSeasonsResponseMock.ts';
 import { ShowSiloStatsResponseMock } from './data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from './data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
+import { ShowSiloWatchNowResponseMock } from './data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
 import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
 import { FavoritedMoviesResponseMock } from './data/users/FavoritedMoviesResponseMock.ts';
 import { FavoritedShowsResponseMock } from './data/users/FavoritedShowsResponseMock.ts';
@@ -26,6 +30,7 @@ import { WatchedMoviesResponseMock } from './data/users/WatchedMoviesResponseMoc
 import { WatchedShowsResponseMock } from './data/users/WatchedShowsResponseMock.ts';
 import { WatchlistMoviesResponseMock } from './data/users/WatchlistMoviesResponseMock.ts';
 import { WatchlistShowsResponseMock } from './data/users/WatchlistShowsResponseMock.ts';
+import { WatchNowSourcesResponseMock } from './data/watchnow/response/WatchNowSourcesResponseMock.ts';
 
 const users = [
   http.get('http://localhost/users/settings', () => {
@@ -100,6 +105,12 @@ const movies = [
       return HttpResponse.json(MovieHereticPeopleResponseMock);
     },
   ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.trakt}/watchnow/*`,
+    () => {
+      return HttpResponse.json(MovieHereticWatchNowResponseMock);
+    },
+  ),
 ];
 
 const shows = [
@@ -157,6 +168,21 @@ const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons`,
     () => {
       return HttpResponse.json(ShowSiloSeasonsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.trakt}/watchnow/*`,
+    () => {
+      return HttpResponse.json(ShowSiloWatchNowResponseMock);
+    },
+  ),
+];
+
+const episodes = [
+  http.get(
+    `http://localhost/episodes/${EpisodeSiloResponseMock.ids.trakt}/watchnow/*`,
+    () => {
+      return HttpResponse.json(EpisodeSiloWatchNowResponseMock);
     },
   ),
 ];
@@ -243,11 +269,22 @@ const auth = [
   }),
 ];
 
+const watchNow = [
+  http.get(
+    'http://localhost/watchnow/sources',
+    () => {
+      return HttpResponse.json(WatchNowSourcesResponseMock);
+    },
+  ),
+];
+
 export const handlers = [
   ...users,
   ...movies,
   ...shows,
+  ...episodes,
   ...sync,
   ...auth,
   ...people,
+  ...watchNow,
 ];

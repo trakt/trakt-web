@@ -1,0 +1,19 @@
+import type { WatchNowServices } from '$lib/requests/models/WatchNowServices';
+
+export const EpisodeSiloWatchNowMappedMock: WatchNowServices = {
+  'onDemandServices': [],
+  'streamingServices': [
+    {
+      'is4k': true,
+      'link': 'https://trakt.tv/watchnow/194270962',
+      'source': 'apple_tv_plus',
+      'type': 'streaming',
+    },
+    {
+      'is4k': true,
+      'link': 'https://trakt.tv/watchnow/181597412',
+      'source': 'apple_tv_plus_amazon_channel',
+      'type': 'streaming',
+    },
+  ],
+};
