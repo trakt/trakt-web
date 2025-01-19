@@ -3,12 +3,12 @@
 
   import ClampedText from "$lib/components/text/ClampedText.svelte";
 
-  type MediaOverviewProps = {
+  type SummaryOverviewProps = {
     title: string;
     overview: string;
   };
 
-  const { title, overview }: MediaOverviewProps = $props();
+  const { title, overview }: SummaryOverviewProps = $props();
 </script>
 
 <ClampedText

@@ -8,20 +8,20 @@
   import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { MediaType } from "$lib/models/MediaType";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
+  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { useWatchNow } from "$lib/stores/useWatchNow";
   import type { Snippet } from "svelte";
+  import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
+  import RateNowButton from "../rating/RateNowButton.svelte";
+  import SummaryActions from "../summary/SummaryActions.svelte";
+  import SummaryContainer from "../summary/SummaryContainer.svelte";
+  import SummaryHeader from "../summary/SummaryHeader.svelte";
+  import SummaryOverview from "../summary/SummaryOverview.svelte";
+  import SummaryTitle from "../summary/SummaryTitle.svelte";
   import MediaDetails from "./MediaDetails.svelte";
-  import MediaMetaInfo from "./MediaMetaInfo.svelte";
-  import MediaOverview from "./MediaOverview.svelte";
-  import type { MediaSummary } from "./MediaSummary";
-  import MediaSummaryActions from "./MediaSummaryActions.svelte";
-  import MediaSummaryContainer from "./MediaSummaryContainer.svelte";
-  import MediaSummaryHeader from "./MediaSummaryHeader.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
-  import MediaTitle from "./MediaTitle.svelte";
-  import RateNowButton from "./rating/RateNowButton.svelte";
 
   const {
     media,
@@ -72,7 +72,7 @@
 
 <CoverImageSetter src={media.cover.url.medium} {type} />
 
-<MediaSummaryContainer {contextualContent}>
+<SummaryContainer {contextualContent}>
   {#snippet poster()}
     <SummaryPoster src={media.poster.url.medium} alt={title}>
       {#snippet actions()}
@@ -83,10 +83,10 @@
     </SummaryPoster>
   {/snippet}
 
-  <MediaSummaryHeader {title}>
-    <MediaTitle {title} />
+  <SummaryHeader {title}>
+    <SummaryTitle {title} />
     <GenreList genres={media.genres} />
-  </MediaSummaryHeader>
+  </SummaryHeader>
 
   <MediaMetaInfo
     certification={media.certification}
@@ -97,21 +97,21 @@
     {watchers}
   />
 
-  <MediaOverview {title} overview={intl.overview ?? media.overview} />
+  <SummaryOverview {title} overview={intl.overview ?? media.overview} />
 
   {#if type === "movie"}
     <RenderFor audience="authenticated">
-      <MediaSummaryActions>
+      <SummaryActions>
         <RateNowButton {type} id={media.id} />
 
         <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
           {@render mediaActions()}
         </RenderFor>
-      </MediaSummaryActions>
+      </SummaryActions>
     </RenderFor>
   {/if}
-</MediaSummaryContainer>
+</SummaryContainer>
 
-<MediaSummaryContainer>
+<SummaryContainer>
   <MediaDetails {media} {studios} {crew} />
-</MediaSummaryContainer>
+</SummaryContainer>

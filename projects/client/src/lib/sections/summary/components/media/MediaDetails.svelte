@@ -11,8 +11,8 @@
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
   import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import YoutubeButton from "../YoutubeButton.svelte";
   import MediaCollapsableValues from "./MediaCollapsableValues.svelte";
-  import YoutubeButton from "./YoutubeButton.svelte";
 
   export type MediaDetailsProps = {
     media: MediaSummary;

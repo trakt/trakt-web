@@ -21,7 +21,7 @@
     $props();
 </script>
 
-<div class="trakt-media-meta">
+<div class="trakt-summary-meta">
   <RatingList {ratings} />
   <div class="trakt-meta-tags">
     {#if certification}
@@ -41,7 +41,7 @@
 </div>
 
 <style>
-  .trakt-media-meta {
+  .trakt-summary-meta {
     display: flex;
     flex-direction: column;
     gap: var(--ni-8);

@@ -7,8 +7,8 @@
   import type { MovieSummary } from "$lib/requests/models/MovieSummary";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
-  import MediaSummary from "./components/MediaSummary.svelte";
-  import type { MediaSummaryProps } from "./components/MediaSummaryProps";
+  import MediaSummary from "./components/media/MediaSummary.svelte";
+  import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
 
   const {
     media,

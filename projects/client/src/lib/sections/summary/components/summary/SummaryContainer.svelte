@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-  type MediaSummaryContainerProps = {
+  type SummaryContainerProps = {
     poster?: Snippet;
     contextualContent?: Snippet;
   } & ChildrenProps;
@@ -10,7 +10,7 @@
     poster,
     contextualContent: content,
     children,
-  }: MediaSummaryContainerProps = $props();
+  }: SummaryContainerProps = $props();
 </script>
 
 <div class="trakt-summary-container">
