@@ -1,15 +1,15 @@
 import { SimpleRating } from '$lib/models/SimpleRating';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction';
+import { useInvalidator } from '$lib/stores/useInvalidator';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock';
 import { renderStore } from '$test/beds/store/renderStore';
 import { waitForEmission } from '$test/readable/waitForEmission';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
-import { useInvalidator } from './useInvalidator';
 import { useRatings } from './useRatings';
 
-vi.mock('./useInvalidator.ts');
+vi.mock('$lib/stores/useInvalidator.ts');
 
 describe('useRatings', () => {
   const invalidate = vi.fn(() => {});

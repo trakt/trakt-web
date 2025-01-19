@@ -1,14 +1,14 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { SimpleRating } from '$lib/models/SimpleRating.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest.ts';
 import { removeFromFavoritesRequest } from '$lib/requests/sync/removeFromFavoritesRequest.ts';
+import { mapRatingToSimpleRating } from '$lib/sections/summary/components/rating/mapRatingToSimpleRating.ts';
+import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { RatingsRequest } from '@trakt/api';
 import { derived, writable } from 'svelte/store';
-import { SimpleRating } from '../models/SimpleRating.ts';
-import { SIMPLE_RATINGS } from './_internal/constants.ts';
-import { mapRatingToSimpleRating } from './_internal/mapRatingToSimpleRating.ts';
-import { useInvalidator } from './useInvalidator.ts';
+import { SIMPLE_RATINGS } from './constants.ts';
 
 type RatableItem = 'movie' | 'episode';
 

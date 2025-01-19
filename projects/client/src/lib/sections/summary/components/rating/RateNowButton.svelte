@@ -4,8 +4,8 @@
   import RateIcon from "$lib/components/icons/RateIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { SimpleRating } from "$lib/models/SimpleRating";
-  import { useRatings } from "$lib/stores/useRatings.ts";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue.ts";
+  import { useRatings } from "./useRatings";
 
   const {
     type,

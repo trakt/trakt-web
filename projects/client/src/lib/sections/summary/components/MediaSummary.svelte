@@ -21,7 +21,7 @@
   import MediaSummaryHeader from "./MediaSummaryHeader.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
   import MediaTitle from "./MediaTitle.svelte";
-  import RateNowButton from "./RateNowButton.svelte";
+  import RateNowButton from "./rating/RateNowButton.svelte";
 
   const {
     media,

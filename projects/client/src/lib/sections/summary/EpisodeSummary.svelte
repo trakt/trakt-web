@@ -16,7 +16,7 @@
   import MediaSummaryContainer from "./components/MediaSummaryContainer.svelte";
   import MediaSummaryHeader from "./components/MediaSummaryHeader.svelte";
   import MediaTitle from "./components/MediaTitle.svelte";
-  import RateNowButton from "./components/RateNowButton.svelte";
+  import RateNowButton from "./components/rating/RateNowButton.svelte";
 
   const {
     episode,
