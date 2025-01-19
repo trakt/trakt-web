@@ -214,6 +214,7 @@
 
     .button-icon {
       display: flex;
+      gap: var(--ni-8);
     }
 
     p,
