@@ -1,5 +1,4 @@
 <script lang="ts">
-  import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
@@ -9,23 +8,11 @@
   import ShowCard from "$lib/components/media/card/ShowCard.svelte";
   import AirTag from "$lib/components/media/tags/AirTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import { useWatchlist } from "$lib/stores/useWatchlist";
+  import WatchlistAction from "$lib/sections/actions/watchlist/WatchlistAction.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaItemProps } from "./MediaItemProps";
 
   const { type, media, tags: externalTags }: MediaItemProps = $props();
-
-  const {
-    isWatchlistUpdating,
-    isWatchlisted,
-    addToWatchlist,
-    removeFromWatchlist,
-  } = $derived(
-    useWatchlist({
-      type,
-      media,
-    }),
-  );
 </script>
 
 {#snippet defaultTags(media: MediaItemProps["media"])}
@@ -53,14 +40,7 @@
     </Link>
     {#snippet actions()}
       <RenderFor audience="authenticated">
-        <WatchlistButton
-          type="action"
-          title={media.title}
-          onAdd={addToWatchlist}
-          onRemove={removeFromWatchlist}
-          isWatchlisted={$isWatchlisted}
-          isWatchlistUpdating={$isWatchlistUpdating}
-        />
+        <WatchlistAction style="action" title={media.title} {type} {media} />
       </RenderFor>
     {/snippet}
   </CardFooter>

@@ -1,8 +1,6 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
-  import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
-  import type { WatchlistButtonProps } from "$lib/components/buttons/watchlist/WatchlistButtonProps";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -11,7 +9,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import { useWatchlist } from "$lib/stores/useWatchlist";
+  import WatchlistAction from "$lib/sections/actions/watchlist/WatchlistAction.svelte";
   import { useWatchNow } from "$lib/stores/useWatchNow";
   import type { Snippet } from "svelte";
   import MediaDetails from "./MediaDetails.svelte";
@@ -43,27 +41,13 @@
     crew: MediaCrew;
   } = $props();
 
-  const {
-    isWatchlistUpdating,
-    isWatchlisted,
-    addToWatchlist,
-    removeFromWatchlist,
-  } = $derived(
-    useWatchlist({
-      type,
-      media,
-    }),
-  );
-
   const title = $derived(intl.title ?? media.title);
 
-  const watchlistProps: WatchlistButtonProps = $derived({
-    type: "normal",
+  const watchlistProps = $derived({
+    style: "normal" as const,
     title,
-    isWatchlistUpdating: $isWatchlistUpdating,
-    isWatchlisted: $isWatchlisted,
-    onAdd: addToWatchlist,
-    onRemove: removeFromWatchlist,
+    type,
+    media,
   });
 
   const markWasWatchedProps = $derived({
@@ -82,7 +66,7 @@
     streamingLink={$watchNow?.link}
     mediaTitle={media.title}
   />
-  <WatchlistButton {...watchlistProps} />
+  <WatchlistAction {...watchlistProps} />
   <MarkAsWatchedAction {...markWasWatchedProps} />
 {/snippet}
 

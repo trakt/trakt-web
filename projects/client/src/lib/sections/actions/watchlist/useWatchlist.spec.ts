@@ -1,4 +1,5 @@
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction';
+import { useInvalidator } from '$lib/stores/useInvalidator';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock';
@@ -6,10 +7,9 @@ import { renderStore } from '$test/beds/store/renderStore';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
-import { useInvalidator } from './useInvalidator';
 import { useWatchlist, type WatchlistStoreProps } from './useWatchlist';
 
-vi.mock('./useInvalidator.ts');
+vi.mock('$lib/stores/useInvalidator.ts');
 
 describe('useWatchlist', () => {
   const invalidate = vi.fn(() => {});
