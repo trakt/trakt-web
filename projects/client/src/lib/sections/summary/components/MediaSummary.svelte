@@ -8,8 +8,8 @@
   import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { MediaType } from "$lib/models/MediaType";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import WatchlistAction from "$lib/sections/actions/watchlist/WatchlistAction.svelte";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { useWatchNow } from "$lib/stores/useWatchNow";
   import type { Snippet } from "svelte";
   import MediaDetails from "./MediaDetails.svelte";

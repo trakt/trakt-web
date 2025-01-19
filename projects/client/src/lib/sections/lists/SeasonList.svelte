@@ -7,7 +7,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Season } from "$lib/models/Season";
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
-  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { writable } from "svelte/store";
   import EpisodeItem from "./components/EpisodeItem.svelte";
   import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";

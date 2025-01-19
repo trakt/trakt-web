@@ -9,8 +9,8 @@
   import ShowCard from "$lib/components/media/card/ShowCard.svelte";
   import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import WatchlistAction from "$lib/sections/actions/watchlist/WatchlistAction.svelte";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaItemProps } from "./MediaItemProps";
 

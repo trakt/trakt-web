@@ -7,7 +7,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
-  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";

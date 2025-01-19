@@ -11,10 +11,10 @@ import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import { fireEvent, render, screen, waitFor } from '@testing-library/svelte';
 import { beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
-import { useMarkAsWatched } from '$lib/sections/actions/mark-as-watched/useMarkAsWatched.ts';
 import { writable } from 'svelte/store';
+import { useMarkAsWatched } from '../../media-actions/mark-as-watched/useMarkAsWatched.ts';
 
-vi.mock('$lib/sections/actions/mark-as-watched/useMarkAsWatched.ts');
+vi.mock('$lib/sections/media-actions/mark-as-watched/useMarkAsWatched.ts');
 
 describe('NextEpisodeItem', () => {
   const defaultProps = {
