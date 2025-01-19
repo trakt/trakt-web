@@ -2,12 +2,14 @@
   import * as m from "$lib/features/i18n/messages";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/SeasonList.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import { useWatchNow } from "$lib/stores/useWatchNow";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
@@ -33,9 +35,19 @@
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
+  const { watchNow, isLoading } = useWatchNow({
+    type,
+    id: episode.id,
+  });
 </script>
 
 {#snippet mediaActions()}
+  <WatchNowButton
+    isLoading={$isLoading}
+    favoriteService={$watchNow?.favoriteService}
+    services={$watchNow?.services}
+    mediaTitle={episode.title}
+  />
   <MarkAsWatchedAction
     style="normal"
     {type}
