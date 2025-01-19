@@ -8,7 +8,7 @@ describe('handle: gateway', () => {
 
   beforeEach(() => {
     fetch.mockClear();
-    global.fetch = fetch;
+    globalThis.fetch = fetch;
   });
 
   it('should pass through non-trakt requests', async () => {

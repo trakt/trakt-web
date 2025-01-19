@@ -10,11 +10,11 @@ describe('computeVariable', () => {
       },
     };
 
-    global.document = {
+    globalThis.document = {
       documentElement,
     } as unknown as Document;
 
-    global.getComputedStyle = vi.fn().mockReturnValue({
+    globalThis.getComputedStyle = vi.fn().mockReturnValue({
       getPropertyValue: vi.fn().mockReturnValue('test-value'),
     });
   });

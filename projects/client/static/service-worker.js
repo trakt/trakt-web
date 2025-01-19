@@ -126,7 +126,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     Promise.race([fetched.catch((_) => cached), cached])
       .then((resp) => resp || fetched)
-      .catch((_) => {/* eat any errors */ }),
+      .catch((_) => {/* eat any errors */}),
   );
 
   // Update the cache with the version we fetched (only for ok status)
@@ -135,6 +135,6 @@ self.addEventListener('fetch', (event) => {
       .then(([response, cache]) =>
         response.ok && cache.put(event.request, response)
       )
-      .catch((_) => {/* eat any errors */ }),
+      .catch((_) => {/* eat any errors */}),
   );
 });

@@ -11,7 +11,7 @@ describe('attachRemoveWarning', () => {
 
     wrappedHandler();
 
-    expect(window.confirm).toHaveBeenCalledWith(message);
+    expect(globalThis.confirm).toHaveBeenCalledWith(message);
     expect(handler).toHaveBeenCalled();
   });
 
@@ -24,7 +24,7 @@ describe('attachRemoveWarning', () => {
 
     wrappedHandler();
 
-    expect(window.confirm).toHaveBeenCalledWith(message);
+    expect(globalThis.confirm).toHaveBeenCalledWith(message);
     expect(handler).not.toHaveBeenCalled();
   });
 });

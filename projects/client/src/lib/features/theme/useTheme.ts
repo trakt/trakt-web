@@ -19,7 +19,7 @@ export function useTheme() {
       theme,
       () =>
         computeVariable(
-          "--color-background",
+          '--color-background',
         ),
     ),
   };

@@ -1,5 +1,17 @@
 import type { Locale } from 'date-fns/locale';
-import { de, enUS, es, fr, frCA, ja, nl, pl, ptBR, ro, uk } from 'date-fns/locale';
+import {
+  de,
+  enUS,
+  es,
+  fr,
+  frCA,
+  ja,
+  nl,
+  pl,
+  ptBR,
+  ro,
+  uk,
+} from 'date-fns/locale';
 
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
 
