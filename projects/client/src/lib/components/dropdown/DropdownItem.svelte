@@ -1,11 +1,13 @@
 <script lang="ts">
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
   import { triggerWithTouch } from "$lib/utils/actions/triggerWithTouch";
+  import type { Snippet } from "svelte";
   import Link from "../link/Link.svelte";
 
   type DropdownItemProps = {
     color?: "red" | "purple" | "blue";
     tabindex?: number;
+    icon?: Snippet;
   } & ChildrenProps &
     HTMLElementProps;
 
@@ -14,6 +16,7 @@
   const {
     color = "purple",
     children,
+    icon,
     ...props
   }: DropdownItemProps | DropdownItemAnchorProps = $props();
 
@@ -41,6 +44,11 @@
   {#if href}
     <Link {href} {noscroll} {target} color="inherit">
       {@render text()}
+      {#if icon}
+        <div class="item-icon">
+          {@render icon()}
+        </div>
+      {/if}
     </Link>
   {:else}
     <p class="small bold uppercase ellipsis">
@@ -70,12 +78,17 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: background color;
 
+    .item-icon {
+      display: flex;
+    }
+
     :global(.trakt-link) {
-      display: block;
       color: inherit;
       width: 100%;
       height: 100%;
-      align-content: center;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
     }
 
     @mixin color($color, $hover-bg, $active-bg, $outline-color) {
