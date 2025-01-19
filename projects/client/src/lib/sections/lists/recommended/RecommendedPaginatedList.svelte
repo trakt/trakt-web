@@ -1,6 +1,6 @@
 <script lang="ts">
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/models/MediaType";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { RECOMMENDED_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
@@ -21,6 +21,9 @@
       type,
     }),
   );
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const style = $derived($isMobile ? "list" : "card");
 </script>
 
 <DrilledMediaList
@@ -30,12 +33,6 @@
   urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
-    <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-      <RecommendedMediaItem {type} {media} style="card" />
-    </RenderFor>
-
-    <RenderFor audience="all" device={["mobile"]}>
-      <RecommendedMediaItem {type} {media} style="list" />
-    </RenderFor>
+    <RecommendedMediaItem {type} {media} {style} />
   {/snippet}
 </DrilledMediaList>
