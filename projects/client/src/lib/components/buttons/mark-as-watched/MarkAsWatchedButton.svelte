@@ -14,7 +14,7 @@
     onRemove,
     isMarkingAsWatched,
     isWatched,
-    type,
+    style,
     ...props
   }: MarkAsWatchedButtonProps = $props();
 
@@ -39,7 +39,7 @@
   });
 </script>
 
-{#if type === "normal"}
+{#if style === "normal"}
   <Button {...commonProps} {...props}>
     {i18n.text({ title, isWatched })}
     {#snippet icon()}
@@ -48,7 +48,7 @@
   </Button>
 {/if}
 
-{#if type === "action"}
+{#if style === "action"}
   <ActionButton {...commonProps} {...props}>
     <MarkAsWatchedIcon {state} />
   </ActionButton>

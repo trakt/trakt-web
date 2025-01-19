@@ -1,23 +1,18 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import type { MediaType } from '$lib/models/MediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
+import { resolveWatchDate } from '$lib/stores/_internal/resolveWatchDate.ts';
+import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { derived, writable } from 'svelte/store';
-import { resolveWatchDate } from './_internal/resolveWatchDate.ts';
-import { toMarkAsWatchedPayload } from './_internal/toMarkAsWatchedPayload.ts';
-import { useInvalidator } from './useInvalidator.ts';
+import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 
 type ArrayOrSingle<T> = T | T[];
 
-type BaseProps = {
-  type: MediaType | 'episode';
-  media: ArrayOrSingle<{ id: number }>;
-};
-
-type EpisodeProps = {
+type MarkAsWatchedEpisodeProps = {
   type: 'episode';
+  media: ArrayOrSingle<{ id: number }>;
   show: { id: number };
   episode: ArrayOrSingle<{
     season: number;
@@ -25,14 +20,14 @@ type EpisodeProps = {
   }>;
 };
 
-type NonEpisodeProps = {
+type MarkAsWatchedMediaProps = {
   type: 'movie' | 'show';
   media: ArrayOrSingle<{ id: number }>;
 };
 
 export type MarkAsWatchedStoreProps =
-  & BaseProps
-  & (EpisodeProps | NonEpisodeProps);
+  | MarkAsWatchedEpisodeProps
+  | MarkAsWatchedMediaProps;
 
 export function useMarkAsWatched(
   props: MarkAsWatchedStoreProps,
@@ -73,7 +68,9 @@ export function useMarkAsWatched(
           );
         }
         case 'show': {
-          return media.every((m) => Boolean($history.shows.get(m.id)?.isWatched));
+          return media.every((m) =>
+            Boolean($history.shows.get(m.id)?.isWatched)
+          );
         }
       }
     },

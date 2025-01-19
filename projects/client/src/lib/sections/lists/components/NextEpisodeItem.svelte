@@ -1,5 +1,4 @@
 <script lang="ts">
-  import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import EpisodeCard from "$lib/components/episode/card/EpisodeCard.svelte";
   import EpisodeCover from "$lib/components/episode/card/EpisodeCover.svelte";
@@ -8,9 +7,10 @@
   import Link from "$lib/components/link/Link.svelte";
   import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
-  import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
+  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { writable } from "svelte/store";
 
   type UpNextItemProps = {
     episode: EpisodeProgressEntry;
@@ -19,14 +19,7 @@
 
   const { episode, show }: UpNextItemProps = $props();
 
-  const { isMarkingAsWatched, markAsWatched, removeWatched } = $derived(
-    useMarkAsWatched({
-      type: "episode",
-      media: episode,
-      show,
-      episode,
-    }),
-  );
+  const isLoading = writable(false);
 </script>
 
 <EpisodeCard>
@@ -39,7 +32,7 @@
       type={episode.type}
       src={`${episode.cover.url ?? show.cover.url.thumb ?? EPISODE_COVER_PLACEHOLDER}`}
       alt={`${show.title} - ${episode.title}`}
-      isLoading={$isMarkingAsWatched}
+      isLoading={$isLoading}
     >
       {#snippet tags()}
         <ShowProgressTag total={episode.total} progress={episode.completed}>
@@ -61,13 +54,14 @@
       {episode.season}x{episode.number} - {episode.title}
     </p>
     {#snippet actions()}
-      <MarkAsWatchedButton
-        type="action"
+      <MarkAsWatchedAction
+        style="action"
+        type="episode"
         title={episode.title}
-        isWatched={false}
-        isMarkingAsWatched={$isMarkingAsWatched}
-        onWatch={markAsWatched}
-        onRemove={removeWatched}
+        media={episode}
+        onAction={isLoading.set}
+        {episode}
+        {show}
       />
     {/snippet}
   </CardFooter>

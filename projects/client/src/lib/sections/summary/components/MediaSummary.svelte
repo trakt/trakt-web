@@ -1,7 +1,5 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
-  import type { MarkAsWatchedButtonProps } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonProps";
   import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import type { WatchlistButtonProps } from "$lib/components/buttons/watchlist/WatchlistButtonProps";
@@ -12,7 +10,7 @@
   import type { MediaStudio } from "$lib/models/MediaStudio";
   import type { MediaType } from "$lib/models/MediaType";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
+  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { useWatchNow } from "$lib/stores/useWatchNow";
   import type { Snippet } from "svelte";
@@ -45,14 +43,6 @@
     crew: MediaCrew;
   } = $props();
 
-  const { markAsWatched, removeWatched, isMarkingAsWatched, isWatched } =
-    $derived(
-      useMarkAsWatched({
-        type,
-        media,
-      }),
-    );
-
   const {
     isWatchlistUpdating,
     isWatchlisted,
@@ -76,13 +66,11 @@
     onRemove: removeFromWatchlist,
   });
 
-  const markWasWatchedProps: MarkAsWatchedButtonProps = $derived({
-    type: "normal",
+  const markWasWatchedProps = $derived({
+    style: "normal" as const,
     title,
-    isMarkingAsWatched: $isMarkingAsWatched,
-    isWatched: $isWatched,
-    onWatch: markAsWatched,
-    onRemove: removeWatched,
+    type,
+    media,
   });
 
   const { watchNow, isLoading } = useWatchNow({ type, id: media.slug });
@@ -95,7 +83,7 @@
     mediaTitle={media.title}
   />
   <WatchlistButton {...watchlistProps} />
-  <MarkAsWatchedButton {...markWasWatchedProps} />
+  <MarkAsWatchedAction {...markWasWatchedProps} />
 {/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} {type} />

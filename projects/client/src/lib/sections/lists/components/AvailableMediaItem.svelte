@@ -1,5 +1,4 @@
 <script lang="ts">
-  import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
@@ -11,7 +10,7 @@
   import ShowCard from "$lib/components/media/card/ShowCard.svelte";
   import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
+  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useWatchlist } from "$lib/stores/useWatchlist";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaItemProps } from "./MediaItemProps";
@@ -29,14 +28,6 @@
       media,
     }),
   );
-
-  const { isMarkingAsWatched, isWatched, markAsWatched, removeWatched } =
-    $derived(
-      useMarkAsWatched({
-        type: type as "movie" | "show",
-        media,
-      }),
-    );
 </script>
 
 {#snippet defaultTags(media: MediaItemProps["media"])}
@@ -76,13 +67,11 @@
           isWatchlisted={$isWatchlisted}
           isWatchlistUpdating={$isWatchlistUpdating}
         />
-        <MarkAsWatchedButton
-          type="action"
+        <MarkAsWatchedAction
+          style="action"
           title={media.title}
-          isWatched={$isWatched}
-          isMarkingAsWatched={$isMarkingAsWatched}
-          onWatch={markAsWatched}
-          onRemove={removeWatched}
+          type={media.type}
+          {media}
         />
       </RenderFor>
     {/snippet}

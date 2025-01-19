@@ -2,15 +2,13 @@
   import * as m from "$lib/features/i18n/messages";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
-  import type { MarkAsWatchedButtonProps } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonProps";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { useMarkAsWatched } from "$lib/stores/useMarkAsWatched";
+  import MarkAsWatchedAction from "$lib/sections/actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import SeasonList from "$lib/sections/lists/SeasonList.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import SeasonList from "../lists/SeasonList.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/MediaMetaInfo.svelte";
   import MediaOverview from "./components/MediaOverview.svelte";
@@ -32,32 +30,20 @@
   }: EpisodeSummaryProps = $props();
   const type = "episode";
 
-  const { markAsWatched, removeWatched, isMarkingAsWatched, isWatched } =
-    $derived(
-      useMarkAsWatched({
-        type,
-        media: episode,
-        episode,
-        show,
-      }),
-    );
-
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
-
-  const markWasWatchedProps: MarkAsWatchedButtonProps = $derived({
-    type: "normal",
-    title,
-    isMarkingAsWatched: $isMarkingAsWatched,
-    isWatched: $isWatched,
-    onWatch: markAsWatched,
-    onRemove: removeWatched,
-  });
 </script>
 
 {#snippet mediaActions()}
-  <MarkAsWatchedButton {...markWasWatchedProps} />
+  <MarkAsWatchedAction
+    style="normal"
+    {type}
+    {title}
+    media={episode}
+    {episode}
+    {show}
+  />
 {/snippet}
 
 <CoverImageSetter src={episode.cover.url ?? ""} type="show" />
