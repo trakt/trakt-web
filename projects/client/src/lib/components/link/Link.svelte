@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useActiveLink } from "$lib/stores/useActiveLink";
+  import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
-  import { triggerWithTouch } from "$lib/utils/actions/triggerWithTouch";
 
   const {
     children,
@@ -27,7 +27,7 @@
   <a
     {href}
     {target}
-    use:triggerWithTouch={retrigger}
+    use:mobileAppleDeviceTriggerHack={retrigger}
     use:triggerWithKeyboard
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}

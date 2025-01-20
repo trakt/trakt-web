@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { triggerWithTouch } from './triggerWithTouch';
+import { mobileAppleDeviceTriggerHack } from './mobileAppleDeviceTriggerHack';
 
-describe('triggerWithTouch', () => {
+describe('mobileAppleDeviceTriggerHack', () => {
   it('should trigger click for touch events', () => {
     const node = document.createElement('button');
     let clickCount = 0;
     node.addEventListener('click', () => clickCount++);
 
-    const action = triggerWithTouch(node);
+    const action = mobileAppleDeviceTriggerHack(node);
 
     const touchEvent = new Event('pointerup', {
       bubbles: true,
@@ -26,7 +26,7 @@ describe('triggerWithTouch', () => {
     let clickCount = 0;
     node.addEventListener('click', () => clickCount++);
 
-    const action = triggerWithTouch(node);
+    const action = mobileAppleDeviceTriggerHack(node);
 
     const mouseEvent = new Event('pointerup', {
       bubbles: true,
@@ -44,7 +44,7 @@ describe('triggerWithTouch', () => {
     const node = document.createElement('button');
     let clickCount = 0;
 
-    const action = triggerWithTouch(node);
+    const action = mobileAppleDeviceTriggerHack(node);
     node.addEventListener('click', () => clickCount++);
 
     action.destroy();
@@ -64,7 +64,7 @@ describe('triggerWithTouch', () => {
     let clickCount = 0;
     node.addEventListener('click', () => clickCount++);
 
-    const action = triggerWithTouch(node);
+    const action = mobileAppleDeviceTriggerHack(node);
 
     const touchEvent = new Event('pointerup', {
       bubbles: true,

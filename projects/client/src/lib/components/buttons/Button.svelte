@@ -2,8 +2,8 @@
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
+  import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
-  import { triggerWithTouch } from "$lib/utils/actions/triggerWithTouch";
   import type { TraktButtonProps } from "./TraktButtonProps";
 
   type TraktButtonAnchorProps = HTMLAnchorProps &
@@ -55,7 +55,7 @@
     use:disableTransitionOn={"touch"}
     use:clickOutside
     use:triggerWithKeyboard
-    use:triggerWithTouch
+    use:mobileAppleDeviceTriggerHack
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
