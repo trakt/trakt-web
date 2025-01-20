@@ -1,12 +1,9 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import { page as pageState } from "$app/state";
   import PaginatedList from "$lib/components/lists/paginated-list/PaginatedList.svelte";
-  import Paginator from "$lib/components/lists/paginated-list/Paginator.svelte";
-  import { PaginatorIntlProvider } from "$lib/components/lists/paginated-list/PaginatorIntlProvider";
-  import { PAGE_UPPER_LIMIT } from "$lib/utils/constants";
+  import { DEFAULT_PAGE_SIZE, PAGE_UPPER_LIMIT } from "$lib/utils/constants";
   import { writable } from "svelte/store";
   import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
-  import { mediaPageLimitResolver } from "../utils/mediaPageLimitResolver";
   import type { DrillListProps } from "./DrillListProps";
   import type { PaginatableStore } from "./PaginatableStore";
 
@@ -25,7 +22,7 @@
     useList({
       type,
       page: current,
-      limit: mediaPageLimitResolver(type),
+      limit: DEFAULT_PAGE_SIZE,
     }),
   );
 
@@ -43,14 +40,4 @@
   items={$list}
   {item}
   --width-item={mediaCardWidthResolver(type)}
->
-  {#snippet actions()}
-    <Paginator
-      i18n={PaginatorIntlProvider}
-      {current}
-      first={1}
-      last={$last}
-      hrefFactory={(page) => urlBuilder({ type, page })}
-    />
-  {/snippet}
-</PaginatedList>
+/>
