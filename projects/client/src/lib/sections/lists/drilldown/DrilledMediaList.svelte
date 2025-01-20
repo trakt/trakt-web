@@ -1,17 +1,17 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import { page as pageState } from "$app/state";
-  import PaginatedList from "$lib/components/lists/paginated-list/PaginatedList.svelte";
+  import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import { DEFAULT_PAGE_SIZE, PAGE_UPPER_LIMIT } from "$lib/utils/constants";
   import { writable } from "svelte/store";
   import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
   import type { DrillListProps } from "./DrillListProps";
   import type { PaginatableStore } from "./PaginatableStore";
 
-  type DrilledPaginatedList = DrillListProps<T> & {
+  type DrilledMediaListProps = DrillListProps<T> & {
     useList: PaginatableStore<T>;
   };
 
-  const { title, type, item, useList, urlBuilder }: DrilledPaginatedList =
+  const { title, type, item, useList, urlBuilder }: DrilledMediaListProps =
     $props();
 
   const current = $derived(
@@ -35,7 +35,7 @@
   });
 </script>
 
-<PaginatedList
+<GridList
   {title}
   items={$list}
   {item}

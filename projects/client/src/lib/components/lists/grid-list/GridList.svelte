@@ -35,10 +35,10 @@
   }
 </script>
 
-<section class="trakt-page-list-container" use:snapshotHeight>
+<section class="trakt-grid-list-container" use:snapshotHeight>
   <ListHeader {title} {actions} inset="all" />
 
-  <div class="trakt-list-item-container trakt-page-list-items">
+  <div class="trakt-list-item-container trakt-list-items">
     {#each items as i (i.id)}
       {@render item(i)}
     {/each}
@@ -48,13 +48,13 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-page-list-container {
+  .trakt-grid-list-container {
     display: flex;
     flex-direction: column;
     gap: var(--ni-32);
   }
 
-  .trakt-page-list-items {
+  .trakt-list-items {
     display: grid;
     grid-template-columns: repeat(auto-fill, var(--width-item));
     /* TODO: investigate how we can better distribute empty spaces (@anodpixels) */
