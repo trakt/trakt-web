@@ -1,8 +1,15 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { mobileAppleDeviceTriggerHack } from './mobileAppleDeviceTriggerHack';
 
 describe('mobileAppleDeviceTriggerHack', () => {
-  it('should trigger click for touch events', () => {
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
+  it('should trigger click for mobile apple touch events', () => {
+    const platformSpy = vi.spyOn(globalThis.navigator, 'platform', 'get');
+    platformSpy.mockReturnValue('iPhone');
+
     const node = document.createElement('button');
     let clickCount = 0;
     node.addEventListener('click', () => clickCount++);
@@ -21,7 +28,7 @@ describe('mobileAppleDeviceTriggerHack', () => {
     action.destroy();
   });
 
-  it('should NOT trigger click for mouse events', () => {
+  it('should NOT trigger click for other devices', () => {
     const node = document.createElement('button');
     let clickCount = 0;
     node.addEventListener('click', () => clickCount++);
