@@ -55,6 +55,9 @@
   }
 
   .card-cover {
+    border-top-left-radius: var(--border-radius-m);
+    border-top-right-radius: var(--border-radius-m);
+    overflow: hidden;
     position: relative;
   }
 

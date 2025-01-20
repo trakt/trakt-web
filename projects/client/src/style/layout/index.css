@@ -2,9 +2,9 @@
   /**
    * Card dimensions
    */
-  --width-poster-card: var(--ni-156);
-  --height-poster-card: var(--ni-292);
-  --height-poster-card-cover: var(--ni-248);
+  --width-poster-card: var(--ni-136);
+  --height-poster-card: var(--ni-256);
+  --height-poster-card-cover: var(--ni-196);
 
   --width-show-card: var(--ni-212);
   --height-show-card: var(--ni-176);
@@ -16,21 +16,34 @@
 
   --width-person-card: var(--ni-120);
   --height-person-card: var(--ni-176);
+  --height-person-summary: var(--ni-32);
   --height-person-card-cover: var(--ni-176);
 
   /**
    * List dimensions
    */
-  --height-episode-list: var(--ni-192);
-  --height-show-list: var(--ni-192);
-  --height-person-list: var(--ni-232);
+  --height-episode-list: calc(
+    var(--height-episode-card) + var(--layout-distance-scroll-card)
+      + var(--layout-scrollbar-width)
+  );
+  --height-show-list: calc(
+    var(--height-show-card) + var(--layout-distance-scroll-card)
+      + var(--layout-scrollbar-width)
+  );
+  --height-person-list: calc(
+    var(--height-person-card) + var(--layout-distance-scroll-card)
+      + var(--layout-scrollbar-width)
+      + var(--height-person-summary)
+  );
   --height-poster-list: calc(
     var(--height-poster-card) + var(--layout-distance-scroll-card)
+      + var(--layout-scrollbar-width)
   );
 
   /**
    * Structural variables
    */
   --layout-distance-side: var(--ni-24);
-  --layout-distance-scroll-card: var(--ni-16);
+  --layout-distance-scroll-card: var(--ni-24);
+  --layout-scrollbar-width: var(--ni-8);
 }

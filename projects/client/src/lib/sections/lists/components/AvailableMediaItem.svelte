@@ -4,17 +4,14 @@
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import PosterCard from "$lib/components/media/card/PosterCard.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
 
   import ShowCard from "$lib/components/media/card/ShowCard.svelte";
   import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaItemProps } from "./MediaItemProps";
 
-  const { type, media, tags: externalTags }: MediaItemProps = $props();
+  const { type, media, tags: externalTags, actions }: MediaItemProps = $props();
 </script>
 
 {#snippet defaultTags(media: MediaItemProps["media"])}
@@ -38,23 +35,12 @@
     </MediaCover>
   </Link>
 
-  <CardFooter>
+  <CardFooter {actions}>
     <Link href={UrlBuilder.media(type, media.slug)}>
       <p class="recommendation-title small ellipsis">
         {media.title}
       </p>
     </Link>
-    {#snippet actions()}
-      <RenderFor audience="authenticated">
-        <WatchlistAction style="action" title={media.title} {type} {media} />
-        <MarkAsWatchedAction
-          style="action"
-          title={media.title}
-          type={media.type}
-          {media}
-        />
-      </RenderFor>
-    {/snippet}
   </CardFooter>
 {/snippet}
 
