@@ -21,6 +21,7 @@
     "npm:@sveltejs/kit@^2.15.2": "2.15.2_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7___sass-embedded@1.83.1__sass-embedded@1.83.1_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
     "npm:@sveltejs/vite-plugin-svelte@^5.0.3": "5.0.3_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
     "npm:@tanstack/svelte-query-devtools@^5.62.16": "5.64.0_@tanstack+svelte-query@5.64.0__svelte@5.17.3___acorn@8.14.0_svelte@5.17.3__acorn@8.14.0",
+    "npm:@tanstack/svelte-query-persist-client@^5.64.2": "5.64.2_@tanstack+svelte-query@5.64.2__svelte@5.17.3___acorn@8.14.0_svelte@5.17.3__acorn@8.14.0",
     "npm:@tanstack/svelte-query@^5.62.16": "5.64.0_svelte@5.17.3__acorn@8.14.0",
     "npm:@testing-library/jest-dom@^6.6.3": "6.6.3",
     "npm:@testing-library/svelte@^5.2.6": "5.2.6_svelte@5.17.3__acorn@8.14.0_vite@6.0.7__sass-embedded@1.83.1_sass-embedded@1.83.1",
@@ -35,6 +36,7 @@
     "npm:firebase@^11.1.0": "11.1.0_@firebase+app@0.10.17_@firebase+app-compat@0.2.47_@firebase+app-types@0.9.3",
     "npm:globals@^15.14.0": "15.14.0",
     "npm:hono@^4.6.16": "4.6.16",
+    "npm:idb-keyval@^6.2.1": "6.2.1",
     "npm:jsdom@26": "26.0.0",
     "npm:msw@^2.7.0": "2.7.0_typescript@5.7.3",
     "npm:prettier-plugin-svelte@^3.3.2": "3.3.2_prettier@3.4.2_svelte@5.17.3__acorn@8.14.0",
@@ -4419,23 +4421,44 @@
         "vitefu"
       ]
     },
-    "@tanstack/query-core@5.64.0": {
-      "integrity": "sha512-/MPJt/AaaMzdWJZTafgMyYhEX/lGjQrNz8+NDQSk8fNoU5PHqh05FhQaBrEQafW2PeBHsRbefEf//qKMiSAbQQ=="
+    "@tanstack/query-core@5.64.2": {
+      "integrity": "sha512-hdO8SZpWXoADNTWXV9We8CwTkXU88OVWRBcsiFrk7xJQnhm6WRlweDzMD+uH+GnuieTBVSML6xFa17C2cNV8+g=="
     },
     "@tanstack/query-devtools@5.62.16": {
       "integrity": "sha512-3ff6UBJr0H3nIhfLSl9911rvKqXf0u4B58jl0uYdDWLqPk9pCvYIbxC35cGxK2+8INl4IaFVUHb/IdgWrNkg3Q=="
+    },
+    "@tanstack/query-persist-client-core@5.64.2": {
+      "integrity": "sha512-yhBClzqwReV7pA1J6FsyWCND++ceqv0nqv8NOrC9rTsou9XfAJ0PlSl7XFupu9ZwsBF6Ooalc9KSHa25WxJ0/Q==",
+      "dependencies": [
+        "@tanstack/query-core"
+      ]
     },
     "@tanstack/svelte-query-devtools@5.64.0_@tanstack+svelte-query@5.64.0__svelte@5.17.3___acorn@8.14.0_svelte@5.17.3__acorn@8.14.0": {
       "integrity": "sha512-9altfx1j9Is/dU/aDtdNLQ4OBLOc/yAxQsexWdtI2kDkwF8Ux1keGZeQKKJ1THJRxrs/l/5Rhhvbu1Bl+7Nu3w==",
       "dependencies": [
         "@tanstack/query-devtools",
-        "@tanstack/svelte-query",
+        "@tanstack/svelte-query@5.64.0_svelte@5.17.3__acorn@8.14.0",
         "esm-env",
+        "svelte"
+      ]
+    },
+    "@tanstack/svelte-query-persist-client@5.64.2_@tanstack+svelte-query@5.64.2__svelte@5.17.3___acorn@8.14.0_svelte@5.17.3__acorn@8.14.0": {
+      "integrity": "sha512-ieA6x2VHfO4JJTdKQFYCf90PnmXjSMJGWzjUaPMi0ojIy3HOO5aBDq1TIad2s9orLiTwicxyjtkpOltlqhDQjg==",
+      "dependencies": [
+        "@tanstack/query-persist-client-core",
+        "@tanstack/svelte-query@5.64.2_svelte@5.17.3__acorn@8.14.0",
         "svelte"
       ]
     },
     "@tanstack/svelte-query@5.64.0_svelte@5.17.3__acorn@8.14.0": {
       "integrity": "sha512-7uypjx1qN7d5EFQNcAW2buxyJh3pT1rV1ocf8LoFOGNIgvkKyadnnhWErV0IitrMQGo+nsAtahHJa52lXlGPsA==",
+      "dependencies": [
+        "@tanstack/query-core",
+        "svelte"
+      ]
+    },
+    "@tanstack/svelte-query@5.64.2_svelte@5.17.3__acorn@8.14.0": {
+      "integrity": "sha512-0Jdw33u/zSmB8bwADyx9ASdMO4KVcvZqjx5q1k9cOS/HeoMFU8eCnr6xA8Pxz5mGVSji+kM7e6zIKOAQdoj6Mw==",
       "dependencies": [
         "@tanstack/query-core",
         "svelte"
@@ -5567,6 +5590,9 @@
       "dependencies": [
         "safer-buffer"
       ]
+    },
+    "idb-keyval@6.2.1": {
+      "integrity": "sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg=="
     },
     "idb@7.1.1": {
       "integrity": "sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ=="
@@ -7128,6 +7154,7 @@
             "npm:@sveltejs/kit@^2.15.2",
             "npm:@sveltejs/vite-plugin-svelte@^5.0.3",
             "npm:@tanstack/svelte-query-devtools@^5.62.16",
+            "npm:@tanstack/svelte-query-persist-client@^5.64.2",
             "npm:@tanstack/svelte-query@^5.62.16",
             "npm:@testing-library/jest-dom@^6.6.3",
             "npm:@testing-library/svelte@^5.2.6",
@@ -7140,6 +7167,7 @@
             "npm:eslint@^9.18.0",
             "npm:firebase@^11.1.0",
             "npm:globals@^15.14.0",
+            "npm:idb-keyval@^6.2.1",
             "npm:jsdom@26",
             "npm:msw@^2.7.0",
             "npm:prettier-plugin-svelte@^3.3.2",
