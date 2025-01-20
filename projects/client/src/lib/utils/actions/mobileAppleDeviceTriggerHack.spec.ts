@@ -28,6 +28,28 @@ describe('mobileAppleDeviceTriggerHack', () => {
     action.destroy();
   });
 
+  it('should not trigger click for mobile apple devices using a mouse', () => {
+    const platformSpy = vi.spyOn(globalThis.navigator, 'platform', 'get');
+    platformSpy.mockReturnValue('iPhone');
+
+    const node = document.createElement('button');
+    let clickCount = 0;
+    node.addEventListener('click', () => clickCount++);
+
+    const action = mobileAppleDeviceTriggerHack(node);
+
+    const touchEvent = new Event('pointerup', {
+      bubbles: true,
+    });
+    Object.defineProperty(touchEvent, 'pointerType', { value: 'mouse' });
+
+    node.dispatchEvent(touchEvent);
+
+    expect(clickCount).toBe(0);
+
+    action.destroy();
+  });
+
   it('should NOT trigger click for other devices', () => {
     const node = document.createElement('button');
     let clickCount = 0;
