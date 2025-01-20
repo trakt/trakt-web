@@ -59,8 +59,8 @@
     grid-template-columns: repeat(auto-fill, var(--width-item));
     /* TODO: investigate how we can better distribute empty spaces (@anodpixels) */
     justify-content: center;
-    grid-column-gap: var(--ni-8);
-    grid-row-gap: var(--ni-16);
+    grid-column-gap: var(--ni-12);
+    grid-row-gap: var(--ni-24);
 
     @include for-mobile {
       grid-template-columns: 1fr;
