@@ -1,6 +1,6 @@
 <script lang="ts">
-  import androidScreenshot from "../assets/screenshot_android.png?enhanced";
-  import iosScreenshot from "../assets/screenshot_ios.png?enhanced";
+  import deviceAndroid from "../assets/device_android.png?enhanced";
+  import deviceApple from "../assets/device_iphone.png?enhanced";
 </script>
 
 <div class="trakt-phones">
@@ -9,12 +9,12 @@
     Params: variant to indicate iphone/android phone + screenshot source
    -->
   <enhanced:img
-    src={androidScreenshot}
+    src={deviceAndroid}
     class="trakt-background-phone"
     alt="Android screenshot"
   />
   <enhanced:img
-    src={iosScreenshot}
+    src={deviceApple}
     class="trakt-foreground-phone"
     alt="iOS screenshot"
   />
