@@ -2,30 +2,32 @@ import type {
   WatchlistedMoviesResponse,
   WatchlistedShowsResponse,
 } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { toMap } from '$lib/utils/array/toMap.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
-type WatchlistedMedia = {
-  id: number;
-  watchlistedAt: Date;
-};
+export const WatchlistedMediaSchema = z.object({
+  id: z.number(),
+  watchlistedAt: z.date(),
+});
+export type WatchlistedMedia = z.infer<typeof WatchlistedMediaSchema>;
 
-type WatchlistedMovie = WatchlistedMedia;
+const WatchlistedMovieSchema = WatchlistedMediaSchema;
+export type WatchlistedMovie = z.infer<typeof WatchlistedMovieSchema>;
 
 function mapWatchlistedMovieResponse(
   entry: WatchlistedMoviesResponse,
 ): WatchlistedMovie {
   const { listed_at, movie } = entry;
-
   return {
     id: movie.ids.trakt,
     watchlistedAt: new Date(listed_at),
   };
 }
 
-const watchlistedMoviesRequest = (
-  { fetch }: ApiParams,
-): Promise<Map<number, WatchlistedMovie>> =>
+const currentUserWatchlistedMoviesRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
     .watchlist
@@ -38,39 +40,25 @@ const watchlistedMoviesRequest = (
     .then((response) => {
       if (response.status !== 200) {
         console.error('Error fetching user movie watchlist', response);
-        /**
-         * TODO: define error handling strategy/system
-         */
         throw new Error('Error fetching user movie watchlist.');
       }
-
       return response.body;
-    })
-    .then((movies) =>
-      movies
-        .reduce((map, movie) => {
-          const mapped = mapWatchlistedMovieResponse(movie);
-          map.set(mapped.id, mapped);
-          return map;
-        }, new Map<number, WatchlistedMovie>())
-    );
+    });
 
-export type WatchlistedShow = WatchlistedMovie;
+const WatchlistedShowSchema = WatchlistedMediaSchema;
+export type WatchlistedShow = z.infer<typeof WatchlistedShowSchema>;
 
 function mapWatchlistedShowResponse(
   entry: WatchlistedShowsResponse,
 ): WatchlistedShow {
   const { listed_at, show } = entry;
-
   return {
     id: show.ids.trakt,
     watchlistedAt: new Date(listed_at),
   };
 }
 
-const watchlistedShowsRequest = (
-  { fetch }: ApiParams,
-): Promise<Map<number, WatchlistedShow>> =>
+const currentUserWatchlistedShowsRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
     .watchlist
@@ -83,40 +71,33 @@ const watchlistedShowsRequest = (
     .then((response) => {
       if (response.status !== 200) {
         console.error('Error fetching user show watchlist', response);
-        /**
-         * TODO: define error handling strategy/system
-         */
         throw new Error('Error fetching user show watchlist.');
       }
-
       return response.body;
-    })
-    .then((shows) =>
-      shows
-        .reduce((map, show) => {
-          const mapped = mapWatchlistedShowResponse(show);
-          map.set(mapped.id, mapped);
-          return map;
-        }, new Map<number, WatchlistedShow>())
-    );
+    });
 
-export const currentUserWatchlistQueryKey = [
-  'currentUserWatchlist',
-  InvalidateAction.Watchlisted('episode'),
-  InvalidateAction.Watchlisted('show'),
-  InvalidateAction.Watchlisted('movie'),
-] as const;
-export const currentUserWatchlistQuery = ({ fetch }: ApiParams = {}) => ({
-  queryKey: currentUserWatchlistQueryKey,
-  queryFn: () => {
-    return Promise.all([
-      watchlistedMoviesRequest({ fetch }),
-      watchlistedShowsRequest({ fetch }),
-    ]).then((
-      [movies, shows],
-    ) => ({
-      movies,
-      shows,
-    }));
-  },
+const UserWatchlistSchema = z.object({
+  movies: z.map(z.number(), WatchlistedMovieSchema),
+  shows: z.map(z.number(), WatchlistedShowSchema),
+});
+export type UserWatchlist = z.infer<typeof UserWatchlistSchema>;
+
+export const currentUserWatchlistQuery = await defineQuery({
+  key: 'currentUserWatchlist',
+  request: () =>
+    Promise.all([
+      currentUserWatchlistedMoviesRequest({ fetch }),
+      currentUserWatchlistedShowsRequest({ fetch }),
+    ]),
+  invalidations: [
+    InvalidateAction.Watchlisted('episode'),
+    InvalidateAction.Watchlisted('show'),
+    InvalidateAction.Watchlisted('movie'),
+  ],
+  dependencies: [],
+  mapper: ([movies, shows]) => ({
+    movies: toMap(movies, mapWatchlistedMovieResponse, (entry) => entry.id),
+    shows: toMap(shows, mapWatchlistedShowResponse, (entry) => entry.id),
+  }),
+  schema: UserWatchlistSchema,
 });

@@ -1,23 +1,27 @@
 import type { WatchedMoviesResponse, WatchedShowsResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { toMap } from '$lib/utils/array/toMap.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
-export type MediaPlayHistory = {
-  watchedAt: Date;
-  plays: number;
-};
+export const MediaPlayHistorySchema = z.object({
+  watchedAt: z.date(),
+  plays: z.number(),
+});
+export type MediaPlayHistory = z.infer<typeof MediaPlayHistorySchema>;
 
-type WatchedMedia = {
-  id: number;
-} & MediaPlayHistory;
+const WatchedMediaSchema = MediaPlayHistorySchema.extend({
+  id: z.number(),
+});
 
-export type WatchedMovie = WatchedMedia;
+const WatchMovieSchema = WatchedMediaSchema;
+export type WatchedMovie = z.infer<typeof WatchMovieSchema>;
 
 function mapWatchedMovieResponse(
   entry: WatchedMoviesResponse[0],
 ): WatchedMovie {
   const { last_watched_at, plays, movie } = entry;
-
   return {
     id: movie.ids.trakt,
     watchedAt: new Date(last_watched_at),
@@ -25,64 +29,46 @@ function mapWatchedMovieResponse(
   };
 }
 
-const currentUserWatchedMoviesRequest = (
-  { fetch }: ApiParams,
-): Promise<Map<number, WatchedMovie>> =>
+const currentUserWatchedMoviesRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
     .watched
     .movies({
-      params: {
-        id: 'me',
-      },
+      params: { id: 'me' },
     })
     .then((response) => {
       if (response.status !== 200) {
         console.error('Error fetching user movie history', response);
-        /**
-         * TODO: define error handling strategy/system
-         */
         throw new Error('Error fetching user movie history.');
       }
-
       return response.body;
-    })
-    .then((movies) =>
-      movies
-        .reduce((map, movie) => {
-          const mapped = mapWatchedMovieResponse(movie);
-          map.set(mapped.id, mapped);
-          return map;
-        }, new Map<number, WatchedMovie>())
-    );
+    });
 
-export type WatchedEpisode = MediaPlayHistory & {
-  season: number;
-  episode: number;
-};
+export const WatchedEpisodeSchema = MediaPlayHistorySchema.extend({
+  season: z.number(),
+  episode: z.number(),
+});
+export type WatchedEpisode = z.infer<typeof WatchedEpisodeSchema>;
 
-export type WatchedShow = WatchedMedia & {
-  episodes: WatchedEpisode[];
-  isWatched: boolean;
-};
+export const WatchedShowSchema = WatchedMediaSchema.extend({
+  episodes: z.array(WatchedEpisodeSchema),
+  isWatched: z.boolean(),
+});
+export type WatchedShow = z.infer<typeof WatchedShowSchema>;
 
-function mapWatchedShowResponse(
-  entry: WatchedShowsResponse[0],
-): WatchedShow {
+function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
   const { show, last_watched_at, plays, seasons = [] } = entry;
   const aired = entry.show.aired_episodes;
 
   const episodes = seasons
     .filter((season) => season.number !== 0)
     .flatMap((season) =>
-      season
-        .episodes
-        .map((episode) => ({
-          season: season.number,
-          episode: episode.number,
-          watchedAt: new Date(episode.last_watched_at),
-          plays: episode.plays,
-        }))
+      season.episodes.map((episode) => ({
+        season: season.number,
+        episode: episode.number,
+        watchedAt: new Date(episode.last_watched_at),
+        plays: episode.plays,
+      }))
     );
 
   return {
@@ -94,54 +80,43 @@ function mapWatchedShowResponse(
   };
 }
 
-const currentUserWatchedShowsRequest = (
-  { fetch }: ApiParams,
-): Promise<Map<number, WatchedShow>> =>
+const currentUserWatchedShowsRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
     .watched
     .shows({
-      params: {
-        id: 'me',
-      },
+      params: { id: 'me' },
     })
     .then((response) => {
       if (response.status !== 200) {
         console.error('Error fetching user show history', response);
-        /**
-         * TODO: define error handling strategy/system
-         */
         throw new Error('Error fetching user show history.');
       }
-
       return response.body;
-    })
-    .then((shows) =>
-      shows
-        .reduce((map, show) => {
-          const mapped = mapWatchedShowResponse(show);
-          map.set(mapped.id, mapped);
-          return map;
-        }, new Map<number, WatchedShow>())
-    );
+    });
 
-export const currentUserHistoryQueryKey = [
-  'currentUserHistory',
-  InvalidateAction.MarkAsWatched('show'),
-  InvalidateAction.MarkAsWatched('movie'),
-  InvalidateAction.MarkAsWatched('episode'),
-] as const;
-export const currentUserHistoryQuery = ({ fetch }: ApiParams = {}) => ({
-  queryKey: currentUserHistoryQueryKey,
-  queryFn: () => {
-    return Promise.all([
+const UserHistorySchema = z.object({
+  movies: z.map(z.number(), WatchMovieSchema),
+  shows: z.map(z.number(), WatchedShowSchema),
+});
+export type UserHistory = z.infer<typeof UserHistorySchema>;
+
+export const currentUserHistoryQuery = await defineQuery({
+  key: 'currentUserHistory',
+  request: () =>
+    Promise.all([
       currentUserWatchedMoviesRequest({ fetch }),
       currentUserWatchedShowsRequest({ fetch }),
-    ]).then((
-      [movies, shows],
-    ) => ({
-      movies,
-      shows,
-    }));
-  },
+    ]),
+  invalidations: [
+    InvalidateAction.MarkAsWatched('show'),
+    InvalidateAction.MarkAsWatched('movie'),
+    InvalidateAction.MarkAsWatched('episode'),
+  ],
+  dependencies: [],
+  mapper: ([movies, shows]) => ({
+    movies: toMap(movies, mapWatchedMovieResponse, (entry) => entry.id),
+    shows: toMap(shows, mapWatchedShowResponse, (entry) => entry.id),
+  }),
+  schema: UserHistorySchema,
 });

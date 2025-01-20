@@ -2,13 +2,18 @@ import type {
   FavoritedMoviesResponse,
   FavoritedShowsResponse,
 } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { toMap } from '$lib/utils/array/toMap.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
-export type UserFavoritedMedia = {
-  favoritedAt: Date;
-  id: number;
-};
+const UserFavoritedMediaSchema = z.object({
+  favoritedAt: z.date(),
+  id: z.number(),
+});
+
+export type UserFavoritedMedia = z.infer<typeof UserFavoritedMediaSchema>;
 
 function mapFavoritedMovieResponse(
   entry: FavoritedMoviesResponse,
@@ -21,7 +26,7 @@ function mapFavoritedMovieResponse(
 
 const favoritedMoviesRequest = (
   { fetch }: ApiParams,
-): Promise<Map<number, UserFavoritedMedia>> =>
+) =>
   api({ fetch })
     .users
     .favorites
@@ -41,15 +46,7 @@ const favoritedMoviesRequest = (
       }
 
       return response.body;
-    })
-    .then((movies) =>
-      movies
-        .reduce((map, movie) => {
-          const mapped = mapFavoritedMovieResponse(movie);
-          map.set(mapped.id, mapped);
-          return map;
-        }, new Map<number, UserFavoritedMedia>())
-    );
+    });
 
 function mapFavoritedShowResponse(
   entry: FavoritedShowsResponse,
@@ -62,7 +59,7 @@ function mapFavoritedShowResponse(
 
 const favoritedShowsRequest = (
   { fetch }: ApiParams,
-): Promise<Map<number, UserFavoritedMedia>> =>
+) =>
   api({ fetch })
     .users
     .favorites
@@ -74,40 +71,38 @@ const favoritedShowsRequest = (
     })
     .then((response) => {
       if (response.status !== 200) {
-        console.error('Error fetching user favorited episodes', response);
+        console.error('Error fetching user favorited shows', response);
         /**
          * TODO: define error handling strategy/system
          */
-        throw new Error('Error fetching user favorited episodes.');
+        throw new Error('Error fetching user favorited shows.');
       }
 
       return response.body;
-    })
-    .then((episodes) =>
-      episodes
-        .reduce((map, episode) => {
-          const mapped = mapFavoritedShowResponse(episode);
-          map.set(mapped.id, mapped);
-          return map;
-        }, new Map<number, UserFavoritedMedia>())
-    );
+    });
 
-export const currentUserFavoritesQueryKey = [
-  'currentUserFavorites',
-  InvalidateAction.Favorited('movie'),
-  InvalidateAction.Favorited('show'),
-] as const;
-export const currentUserFavoritesQuery = ({ fetch }: ApiParams = {}) => ({
-  queryKey: currentUserFavoritesQueryKey,
-  queryFn: () => {
-    return Promise.all([
+const UserFavoritesSchema = z.object({
+  movies: z.map(z.number(), UserFavoritedMediaSchema),
+  shows: z.map(z.number(), UserFavoritedMediaSchema),
+});
+export type UserFavorites = z.infer<typeof UserFavoritesSchema>;
+export const currentUserFavoritesQuery = await defineQuery({
+  key: 'currentUserFavorites',
+  request: () =>
+    Promise.all([
       favoritedMoviesRequest({ fetch }),
       favoritedShowsRequest({ fetch }),
-    ]).then((
-      [movies, shows],
-    ) => ({
-      movies,
-      shows,
-    }));
+    ]),
+  invalidations: [
+    InvalidateAction.Favorited('movie'),
+    InvalidateAction.Favorited('show'),
+  ],
+  dependencies: [],
+  mapper: ([movies, shows]) => {
+    return {
+      movies: toMap(movies, mapFavoritedMovieResponse, (entry) => entry.id),
+      shows: toMap(shows, mapFavoritedShowResponse, (entry) => entry.id),
+    };
   },
+  schema: UserFavoritesSchema,
 });

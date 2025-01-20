@@ -1,49 +1,48 @@
-import type {
-  Genre,
-  SettingsResponse,
-  SortDirection,
-  WatchAction,
-} from '$lib/api.ts';
+import { genreOptionSchema, type SettingsResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
-export type UserSettings = {
-  id: string;
-  slug: string;
-  name: {
-    full: string;
-    first: string;
-    last: string;
-  };
-  about?: string;
-  location?: string;
-  avatar: {
-    url: string;
-  };
-  cover: {
-    url: string;
-  };
-  isVip: boolean;
-  preferences: {
-    progress: {
-      sort: {
-        by?: string;
-        direction?: SortDirection;
-      };
-    };
-    watch: {
-      action?: WatchAction;
-    };
-  };
-  genres: Array<Genre>;
-  watchNow: {
-    country?: string;
-    favorites?: string[];
-    showOnlyFavorites?: boolean;
-  };
-};
+export const UserSettingsSchema = z.object({
+  id: z.string(),
+  slug: z.string(),
+  name: z.object({
+    full: z.string(),
+    first: z.string(),
+    last: z.string(),
+  }),
+  about: z.string().optional(),
+  location: z.string().optional(),
+  avatar: z.object({
+    url: z.string(),
+  }),
+  cover: z.object({
+    url: z.string(),
+  }),
+  isVip: z.boolean(),
+  preferences: z.object({
+    progress: z.object({
+      sort: z.object({
+        by: z.string().optional(),
+        direction: z.enum(['asc', 'desc']).optional(),
+      }),
+    }),
+    watch: z.object({
+      action: z.enum(['now', 'ask', 'released']).optional(),
+    }),
+  }),
+  genres: genreOptionSchema.array(),
+  watchNow: z.object({
+    country: z.string().optional(),
+    favorites: z.array(z.string()).optional(),
+    showOnlyFavorites: z.boolean().optional(),
+  }),
+});
+
+export type UserSettings = z.infer<typeof UserSettingsSchema>;
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
@@ -93,7 +92,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   };
 }
 
-const currentUserRequest = ({ fetch }: ApiParams): Promise<UserSettings> =>
+const currentUserRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
     .settings({
@@ -111,11 +110,14 @@ const currentUserRequest = ({ fetch }: ApiParams): Promise<UserSettings> =>
       }
 
       return response.body;
-    })
-    .then(mapUserSettingsResponse);
+    });
 
 export const currentUserQueryKey = ['userSettings'] as const;
-export const currentUserSettingsQuery = ({ fetch }: ApiParams = {}) => ({
-  queryKey: currentUserQueryKey,
-  queryFn: () => currentUserRequest({ fetch }),
+export const currentUserSettingsQuery = await defineQuery({
+  key: 'currentUserSettings',
+  invalidations: [],
+  dependencies: [],
+  request: currentUserRequest,
+  mapper: mapUserSettingsResponse,
+  schema: UserSettingsSchema,
 });
