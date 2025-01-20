@@ -9,7 +9,10 @@
 
 <PersistQueryClientProvider
   {client}
-  persistOptions={{ persister: idbPersisterFactory() }}
+  persistOptions={{
+    persister: idbPersisterFactory(),
+    buster: TRAKT_QUERY_BUSTER,
+  }}
 >
   {@render children()}
 </PersistQueryClientProvider>
