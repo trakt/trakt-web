@@ -178,7 +178,7 @@
       top: 0;
 
       width: var(--ni-56);
-      height: calc(var(--height-list) - var(--layout-distance-scroll-card));
+      height: var(--height-list);
 
       opacity: 0;
 
@@ -200,6 +200,13 @@
         color-mix(in srgb, var(--color-background) 73%, transparent 27%) 74%,
         color-mix(in srgb, var(--color-background) 86%, transparent 14%) 86%,
         var(--color-background) 100%
+      );
+
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 1) 75%,
+        rgba(255, 255, 255, 0) 100%
       );
     }
   }
