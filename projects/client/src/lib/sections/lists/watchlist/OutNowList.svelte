@@ -29,7 +29,7 @@
 
 {#snippet item(media: MediaSummary)}
   <MediaItem type={media.type} {media}>
-    {#snippet actions()}
+    {#snippet action()}
       <RenderFor audience="authenticated">
         <MarkAsWatchedAction
           style="action"

@@ -64,7 +64,7 @@
         {episode.season}x{episode.number}
       </p>
     {/if}
-    {#snippet actions()}
+    {#snippet action()}
       {#if isFuture === false}
         <RenderFor audience="authenticated">
           <MarkAsWatchedAction

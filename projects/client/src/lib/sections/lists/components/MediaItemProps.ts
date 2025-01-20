@@ -8,5 +8,5 @@ export type MediaItemProps<T = MovieSummary | (ShowSummary & EpisodeCount)> = {
   media: T;
   type: MediaType;
   tags?: Snippet<[MediaItemProps['media']]>;
-  actions?: Snippet;
+  action?: Snippet;
 };

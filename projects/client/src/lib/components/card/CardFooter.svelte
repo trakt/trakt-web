@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { CardFooterProps } from "./CardFooterProps";
 
-  const { children, actions }: CardFooterProps = $props();
+  const { children, action }: CardFooterProps = $props();
 </script>
 
 <div class="card-footer">
@@ -11,9 +11,9 @@
     </div>
   {/if}
 
-  {#if actions}
-    <div class="card-footer-actions">
-      {@render actions()}
+  {#if action}
+    <div class="card-footer-action">
+      {@render action()}
     </div>
   {/if}
 </div>
@@ -45,7 +45,7 @@
       }
     }
 
-    .card-footer-actions {
+    .card-footer-action {
       position: absolute;
       bottom: var(--ni-neg-16);
       right: var(--ni-8);

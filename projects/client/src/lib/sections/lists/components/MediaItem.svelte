@@ -5,7 +5,7 @@
   import FutureMediaItem from "./FutureMediaItem.svelte";
   import type { MediaItemProps } from "./MediaItemProps";
 
-  const { type, media, tags, actions }: MediaItemProps = $props();
+  const { type, media, tags, action }: MediaItemProps = $props();
 </script>
 
 {#snippet defaultAction()}
@@ -20,12 +20,7 @@
 {/snippet}
 
 {#if media.airDate > new Date()}
-  <FutureMediaItem {type} {media} {tags} actions={actions ?? defaultAction} />
+  <FutureMediaItem {type} {media} {tags} action={action ?? defaultAction} />
 {:else}
-  <AvailableMediaItem
-    {type}
-    {media}
-    {tags}
-    actions={actions ?? defaultAction}
-  />
+  <AvailableMediaItem {type} {media} {tags} action={action ?? defaultAction} />
 {/if}

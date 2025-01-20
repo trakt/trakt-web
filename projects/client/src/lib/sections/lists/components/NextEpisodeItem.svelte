@@ -53,7 +53,7 @@
     <p class="episode-title small ellipsis">
       {episode.season}x{episode.number} - {episode.title}
     </p>
-    {#snippet actions()}
+    {#snippet action()}
       <MarkAsWatchedAction
         style="action"
         type="episode"

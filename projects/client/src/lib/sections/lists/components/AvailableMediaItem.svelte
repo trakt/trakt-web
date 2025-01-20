@@ -11,7 +11,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaItemProps } from "./MediaItemProps";
 
-  const { type, media, tags: externalTags, actions }: MediaItemProps = $props();
+  const { type, media, tags: externalTags, action }: MediaItemProps = $props();
 </script>
 
 {#snippet defaultTags(media: MediaItemProps["media"])}
@@ -35,7 +35,7 @@
     </MediaCover>
   </Link>
 
-  <CardFooter {actions}>
+  <CardFooter {action}>
     <Link href={UrlBuilder.media(type, media.slug)}>
       <p class="recommendation-title small ellipsis">
         {media.title}
