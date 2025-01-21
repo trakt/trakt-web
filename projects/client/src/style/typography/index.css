@@ -41,6 +41,7 @@ h1 {
   font-style: normal;
   font-weight: 600;
   letter-spacing: -0.18rem;
+  padding-right: 0.18rem;
 }
 
 h2 {
@@ -48,6 +49,7 @@ h2 {
   font-style: normal;
   font-weight: 600;
   letter-spacing: -0.14rem;
+  padding-right: 0.14rem;
 }
 
 h3 {
@@ -55,6 +57,7 @@ h3 {
   font-style: normal;
   font-weight: 600;
   letter-spacing: -0.12rem;
+  padding-right: 0.12rem;
 }
 
 h4 {
@@ -62,6 +65,7 @@ h4 {
   font-style: normal;
   font-weight: 600;
   letter-spacing: -0.1rem;
+  padding-right: 0.1rem;
 }
 
 h5 {
