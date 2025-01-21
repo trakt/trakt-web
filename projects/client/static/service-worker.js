@@ -38,13 +38,21 @@ const DOMAINS = {
   styles: [
     'cdn.jsdelivr.net',
   ],
+  images: [
+    'walter-r2.trakt.tv',
+  ]
 };
 
 const HOSTNAME_WHITELIST = [
   ...DOMAINS.fonts,
   ...DOMAINS.styles,
+  ...DOMAINS.images,
   self.location.hostname,
 ];
+
+const isTraktImage = (url) => {
+  return DOMAINS.images.includes(url.hostname) && /\.(jpg|jpeg|png|gif|webp)$/i.test(url.pathname);
+};
 
 // The Util Function to hack URLs of intercepted requests
 const getFixedUrl = (req) => {
@@ -116,7 +124,11 @@ self.addEventListener('fetch', (event) => {
   // Upgrade from Jake's to Surma's: https://gist.github.com/surma/eb441223daaedf880801ad80006389f1
   const cached = caches.match(event.request);
   const fixedUrl = getFixedUrl(event.request);
-  const fetched = fetch(fixedUrl, { cache: 'no-store' });
+  const fetchOptions = {
+    cache: 'no-store',
+    ...(isTraktImage(url) ? { mode: 'no-cors' } : {})
+  };
+  const fetched = fetch(fixedUrl, fetchOptions);
   const fetchedCopy = fetched.then((resp) => resp.clone());
 
   // Call respondWith() with whatever we get first.
