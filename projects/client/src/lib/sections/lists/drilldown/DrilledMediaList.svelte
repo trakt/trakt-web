@@ -1,7 +1,7 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import { page as pageState } from "$app/state";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
-  import { DEFAULT_PAGE_SIZE, PAGE_UPPER_LIMIT } from "$lib/utils/constants";
+  import { DEFAULT_DRILL_SIZE, PAGE_UPPER_LIMIT } from "$lib/utils/constants";
   import { writable } from "svelte/store";
   import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
   import type { DrillListProps } from "./DrillListProps";
@@ -22,7 +22,7 @@
     useList({
       type,
       page: current,
-      limit: DEFAULT_PAGE_SIZE,
+      limit: DEFAULT_DRILL_SIZE,
     }),
   );
 

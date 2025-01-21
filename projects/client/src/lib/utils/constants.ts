@@ -48,6 +48,7 @@ export const NOOP_FN = () => {
   // noop
 };
 
-export const DEFAULT_PAGE_SIZE = 100;
+export const DEFAULT_PAGE_SIZE = 15;
+export const DEFAULT_DRILL_SIZE = 100;
 export const RECOMMENDED_UPPER_LIMIT = 100;
 export const PAGE_UPPER_LIMIT = 3;
