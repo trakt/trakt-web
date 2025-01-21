@@ -1,7 +1,4 @@
 <script lang="ts" generics="T extends { id: unknown }">
-  import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
-  import { debounce } from "$lib/utils/timing/debounce";
-  import { time } from "$lib/utils/timing/time";
   import "../_internal/list.css";
   import ListHeader from "../_internal/ListHeader.svelte";
   import type { ListProps } from "../ListProps";
@@ -9,33 +6,9 @@
   type PageListProps<T> = ListProps<T>;
 
   const { items, title, item, actions }: PageListProps<T> = $props();
-
-  function snapshotHeight(node: HTMLElement) {
-    const snapshot = debounce<UIEvent>(() => {
-      node.style.height = "";
-      const { height } = node.getBoundingClientRect();
-      node.style.height = `${height}px`;
-    }, time.fps(60));
-
-    snapshot();
-
-    const destroy = GlobalEventBus.getInstance().register("resize", snapshot);
-    const observer = new MutationObserver(() => {
-      snapshot();
-      observer.disconnect();
-    });
-    observer.observe(node, { childList: true, subtree: true });
-
-    return {
-      destroy: () => {
-        destroy();
-        observer.disconnect();
-      },
-    };
-  }
 </script>
 
-<section class="trakt-grid-list-container" use:snapshotHeight>
+<section class="trakt-grid-list-container">
   <ListHeader {title} {actions} inset="all" />
 
   <div class="trakt-list-item-container trakt-list-items">
