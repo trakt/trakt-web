@@ -139,7 +139,7 @@
       align-items: center;
       justify-content: end;
 
-      @include for-tablet-sm-and-below {
+      @include for-tablet-lg-and-below {
         gap: var(--ni-16);
       }
 

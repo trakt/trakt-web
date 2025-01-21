@@ -20,7 +20,7 @@
 </script>
 
 {#if !isVip}
-  <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
+  <RenderFor audience="authenticated" device={["desktop"]}>
     <Button
       href={UrlBuilder.vip()}
       label={m.get_vip_label()}
@@ -35,7 +35,10 @@
     </Button>
   </RenderFor>
 
-  <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
+  <RenderFor
+    audience="authenticated"
+    device={["mobile", "tablet-sm", "tablet-lg"]}
+  >
     <ActionButton href={UrlBuilder.vip()} label={m.get_vip_label()} color="red">
       <VipIcon />
     </ActionButton>
@@ -50,10 +53,7 @@
   text="capitalize"
   size="small"
 >
-  <RenderFor
-    audience="authenticated"
-    device={["desktop", "tablet-lg", "tablet-sm"]}
-  >
+  <RenderFor audience="authenticated" device={["desktop"]}>
     {$user?.name?.first}
   </RenderFor>
   {#snippet icon()}
