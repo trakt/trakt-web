@@ -3,15 +3,15 @@
    * Card dimensions
    */
   --width-poster-card: var(--ni-136);
-  --height-poster-card: var(--ni-256);
+  --height-poster-card: var(--ni-236);
   --height-poster-card-cover: var(--ni-196);
 
   --width-show-card: var(--ni-212);
-  --height-show-card: var(--ni-176);
+  --height-show-card: var(--ni-160);
   --height-show-card-cover: var(--ni-120);
 
   --width-episode-card: var(--ni-212);
-  --height-episode-card: var(--ni-176);
+  --height-episode-card: var(--ni-172);
   --height-episode-card-cover: var(--ni-120);
 
   --width-person-card: var(--ni-120);

@@ -31,17 +31,20 @@
     justify-content: space-between;
 
     .card-footer-information {
+      width: 100%;
+      margin-top: var(--ni-neg-4);
+      overflow: hidden;
+
       display: flex;
       flex-direction: column;
       gap: var(--ni-4);
-      overflow: hidden;
 
       &:global(:has(> :nth-child(2))) {
         justify-content: center;
       }
 
-      &:global(:has(> :nth-child(1)):not(:has(> :nth-child(2)))) {
-        margin-top: var(--ni-8);
+      &:global(> :nth-child(2)) {
+        max-width: 80%;
       }
     }
 
