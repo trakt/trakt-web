@@ -103,17 +103,17 @@
 
   <SummaryOverview {title} overview={intl.overview ?? media.overview} />
 
-  {#if type === "movie"}
-    <RenderFor audience="authenticated">
-      <SummaryActions>
+  <RenderFor audience="authenticated">
+    <SummaryActions>
+      {#if type === "movie"}
         <RateNowButton {type} id={media.id} />
+      {/if}
 
-        <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
-          {@render mediaActions()}
-        </RenderFor>
-      </SummaryActions>
-    </RenderFor>
-  {/if}
+      <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
+        {@render mediaActions()}
+      </RenderFor>
+    </SummaryActions>
+  </RenderFor>
 </SummaryContainer>
 
 <SummaryContainer>
