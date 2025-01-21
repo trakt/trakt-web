@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
+  import MediaSummaryItem from "$lib/sections/summary/components/media/MediaSummaryItem.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
-  import ListMediaItem from "./ListMediaItem.svelte";
   import { useSearch } from "./useSearch";
 
   const { search, clear, isSearching, results } = useSearch();
@@ -44,7 +44,7 @@
   {#if $results.length > 0}
     <div class="trakt-search-results" use:clearOnClick>
       {#each $results as result}
-        <ListMediaItem media={result} retrigger={false} />
+        <MediaSummaryItem media={result} retrigger={false} />
       {/each}
     </div>
   {/if}

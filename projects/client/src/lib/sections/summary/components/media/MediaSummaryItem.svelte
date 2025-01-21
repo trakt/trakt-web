@@ -5,7 +5,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
+  import type { MediaInput } from "$lib/models/MediaInput";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
 
@@ -13,7 +13,11 @@
     media,
     tags,
     retrigger = true,
-  }: { media: MediaSummary; tags?: Snippet; retrigger?: boolean } = $props();
+  }: {
+    tags?: Snippet<[MediaInput["media"]]>;
+    action?: Snippet;
+    retrigger?: boolean;
+  } & MediaInput = $props();
   const MAX_GENRE_COUNT = 2;
 </script>
 
@@ -22,10 +26,10 @@
   {retrigger}
   color="inherit"
 >
-  <div class="trakt-search-result-item">
+  <div class="trakt-summary-item">
     <CrossOriginImage alt={media.title} src={media.poster.url.thumb} />
-    <div class="trakt-search-result-item-details">
-      <span class="trakt-search-media-title">
+    <div class="trakt-summary-item-details">
+      <span class="trakt-summary-media-title">
         {media.title} ({media.year})
       </span>
       <div class="meta-info">
@@ -38,7 +42,7 @@
             <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
           {/if}
         {:else}
-          {@render tags()}
+          {@render tags(media)}
         {/if}
       </div>
 
@@ -48,7 +52,7 @@
 </Link>
 
 <style>
-  .trakt-search-result-item {
+  .trakt-summary-item {
     padding: var(--ni-8);
     cursor: pointer;
     display: flex;
@@ -62,14 +66,14 @@
       border-radius: var(--border-radius-s);
     }
 
-    .trakt-search-result-item-details {
+    .trakt-summary-item-details {
       display: flex;
       align-items: flex-start;
       flex-direction: column;
       gap: var(--ni-10);
       overflow: hidden;
 
-      .trakt-search-media-title {
+      .trakt-summary-media-title {
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 3;

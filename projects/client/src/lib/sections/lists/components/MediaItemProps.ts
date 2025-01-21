@@ -1,12 +1,13 @@
+import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput';
 import type { MediaType } from '$lib/models/MediaType';
-import type { EpisodeCount } from '$lib/requests/models/EpisodeCount';
-import type { MovieSummary } from '$lib/requests/models/MovieSummary';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary';
 import type { Snippet } from 'svelte';
+import type { MediaStyleProps } from './MediaStyleProps';
 
-export type MediaItemProps<T = MovieSummary | (ShowSummary & EpisodeCount)> = {
-  media: T;
-  type: MediaType;
-  tags?: Snippet<[MediaItemProps['media']]>;
-  action?: Snippet;
-};
+export type MediaItemProps<T = MediaInputDefault> =
+  & {
+    type: MediaType;
+    tags?: Snippet<[MediaInput<T>['media']]>;
+    action?: Snippet;
+  }
+  & MediaInput<T>
+  & MediaStyleProps;
