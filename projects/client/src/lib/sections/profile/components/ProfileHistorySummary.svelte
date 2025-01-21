@@ -45,6 +45,7 @@
     padding: var(--ni-24);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: var(--ni-8);
     box-shadow: 0 var(--ni-4) var(--ni-8) 0 rgba(0, 0, 0, 0.24);
   }
@@ -52,5 +53,15 @@
   .trakt-profile-history-content {
     display: flex;
     justify-content: space-between;
+    gap: var(--ni-8);
+  }
+
+  @include for-mobile {
+    .trakt-profile-history-summary {
+      height: var(--ni-168);
+    }
+    .trakt-profile-history-content {
+      flex-direction: column;
+    }
   }
 </style>
