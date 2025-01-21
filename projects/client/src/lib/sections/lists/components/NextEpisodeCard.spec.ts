@@ -1,4 +1,4 @@
-import NextEpisodeItem from './NextEpisodeItem.svelte';
+import NextEpisodeCard from './NextEpisodeCard.svelte';
 
 import { EpisodeIntlProvider } from '$lib/components/episode/EpisodeIntlProvider.ts';
 import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry.ts';
@@ -16,7 +16,7 @@ import { useMarkAsWatched } from '../../media-actions/mark-as-watched/useMarkAsW
 
 vi.mock('$lib/sections/media-actions/mark-as-watched/useMarkAsWatched.ts');
 
-describe('NextEpisodeItem', () => {
+describe('NextEpisodeCard', () => {
   const defaultProps = {
     episode: {
       number: 1,
@@ -52,7 +52,7 @@ describe('NextEpisodeItem', () => {
 
   test('it renders the basic details', () => {
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: defaultProps,
       },
@@ -69,7 +69,7 @@ describe('NextEpisodeItem', () => {
 
   test('it calls the onclick callback', async () => {
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,
@@ -85,7 +85,7 @@ describe('NextEpisodeItem', () => {
 
   test('it disables the mark as watched button', async () => {
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,
@@ -101,7 +101,7 @@ describe('NextEpisodeItem', () => {
     const episodeType = { type: EpisodeFinaleType.Season };
 
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,
@@ -123,7 +123,7 @@ describe('NextEpisodeItem', () => {
     const episodeType = { type: EpisodeFinaleType.Series };
 
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,
@@ -145,7 +145,7 @@ describe('NextEpisodeItem', () => {
     const episodeType = { type: EpisodeFinaleType.MidSeason };
 
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,
@@ -167,7 +167,7 @@ describe('NextEpisodeItem', () => {
     const episodeType = { type: EpisodePremiereType.Season };
 
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,
@@ -189,7 +189,7 @@ describe('NextEpisodeItem', () => {
     const episodeType = { type: EpisodePremiereType.Series };
 
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,
@@ -211,7 +211,7 @@ describe('NextEpisodeItem', () => {
     const episodeType = { type: EpisodePremiereType.MidSeason };
 
     render(
-      NextEpisodeItem,
+      NextEpisodeCard,
       {
         props: {
           ...defaultProps,

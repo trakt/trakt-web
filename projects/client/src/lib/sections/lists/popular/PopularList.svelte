@@ -2,7 +2,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import PopularMediaItem from "./PopularMediaItem.svelte";
+  import PopularListItem from "./PopularListItem.svelte";
   import { usePopularList } from "./usePopularList";
 
   type PopularListProps = {
@@ -22,6 +22,6 @@
   urlBuilder={UrlBuilder.popular}
 >
   {#snippet item(media)}
-    <PopularMediaItem {type} {media} style="card" />
+    <PopularListItem {type} {media} />
   {/snippet}
 </DrillableMediaList>

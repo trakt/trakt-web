@@ -3,7 +3,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import PopularMediaItem from "./PopularMediaItem.svelte";
+  import PopularListItem from "./PopularListItem.svelte";
   import { usePopularList } from "./usePopularList";
 
   type PopularListProps = {
@@ -14,7 +14,7 @@
   const { title, type }: PopularListProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "list" : "card");
+  const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
 <DrilledMediaList
@@ -24,6 +24,6 @@
   urlBuilder={UrlBuilder.popular}
 >
   {#snippet item(media)}
-    <PopularMediaItem {type} {media} {style} />
+    <PopularListItem {type} {media} {style} />
   {/snippet}
 </DrilledMediaList>

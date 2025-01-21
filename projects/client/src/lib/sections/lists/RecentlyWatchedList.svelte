@@ -2,8 +2,8 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import EpisodeItem from "./components/EpisodeItem.svelte";
-  import MediaItem from "./components/MediaItem.svelte";
+  import EpisodeCard from "./components/EpisodeCard.svelte";
+  import MediaCard from "./components/MediaCard.svelte";
   import { useRecentlyWatchedList } from "./stores/useRecentlyWatchedList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -25,7 +25,7 @@
 >
   {#snippet item(media)}
     {#if media.type === "episode"}
-      <EpisodeItem
+      <EpisodeCard
         episode={media.episode}
         show={media.show}
         context="standalone"
@@ -33,7 +33,7 @@
     {/if}
 
     {#if media.type === "movie"}
-      <MediaItem type={media.type} media={media.movie}>
+      <MediaCard type={media.type} media={media.movie}>
         {#snippet action()}
           <RenderFor audience="authenticated">
             <MarkAsWatchedAction
@@ -44,7 +44,7 @@
             />
           </RenderFor>
         {/snippet}
-      </MediaItem>
+      </MediaCard>
     {/if}
   {/snippet}
 </SectionList>

@@ -6,11 +6,11 @@
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  type CastMemberItemProps = {
+  type CastMemberCardProps = {
     castMember: CastMember;
   };
 
-  const { castMember }: CastMemberItemProps = $props();
+  const { castMember }: CastMemberCardProps = $props();
 </script>
 
 <Link focusable={false} href={UrlBuilder.people(castMember.id)}>

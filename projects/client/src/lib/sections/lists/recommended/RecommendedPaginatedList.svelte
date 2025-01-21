@@ -4,7 +4,7 @@
   import { RECOMMENDED_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import RecommendedMediaItem from "./RecommendedMediaItem.svelte";
+  import RecommendedListItem from "./RecommendedListItem.svelte";
   import { toInMemoryPaginatable } from "./toInMemoryPaginatable";
   import { useRecommendedList } from "./useRecommendedList";
 
@@ -23,7 +23,7 @@
   );
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "list" : "card");
+  const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
 <DrilledMediaList
@@ -33,6 +33,6 @@
   urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
-    <RecommendedMediaItem {type} {media} {style} />
+    <RecommendedListItem {type} {media} {style} />
   {/snippet}
 </DrilledMediaList>

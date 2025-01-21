@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MediaItem from "$lib/sections/lists/components/MediaItem.svelte";
+  import MediaCard from "$lib/sections/lists/components/MediaCard.svelte";
   import { useTrendingItems } from "../useTrendingItems";
   import Phones from "./Phones.svelte";
 
@@ -9,7 +9,7 @@
 <div class="trakt-landing-preview">
   <div class="trakt-landing-media-wrapper">
     {#each $shows as show}
-      <MediaItem type="show" media={show} />
+      <MediaCard type="show" media={show} />
     {/each}
   </div>
   <div class="trakt-landing-phones">
@@ -17,10 +17,10 @@
   </div>
   <div class="trakt-landing-media-wrapper">
     {#if $show}
-      <MediaItem type="show" media={$show} />
+      <MediaCard type="show" media={$show} />
     {/if}
     {#if $movie}
-      <MediaItem type="movie" media={$movie} />
+      <MediaCard type="movie" media={$movie} />
     {/if}
   </div>
 </div>

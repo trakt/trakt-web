@@ -1,3 +1,3 @@
 export type MediaStyleProps = {
-  style: 'card' | 'list';
+  style?: 'cover' | 'summary';
 };

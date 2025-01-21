@@ -3,7 +3,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import AnticipatedMediaItem from "./AnticipatedMediaItem.svelte";
+  import AnticipatedListItem from "./AnticipatedListItem.svelte";
   import { useAnticipatedList } from "./useAnticipatedList";
 
   type AnticipatedListProps = {
@@ -14,7 +14,7 @@
   const { title, type }: AnticipatedListProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const style = $derived($isMobile ? "list" : "card");
+  const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
 <DrilledMediaList
@@ -24,6 +24,6 @@
   urlBuilder={UrlBuilder.anticipated}
 >
   {#snippet item(media)}
-    <AnticipatedMediaItem {type} {media} {style} />
+    <AnticipatedListItem {type} {media} {style} />
   {/snippet}
 </DrilledMediaList>

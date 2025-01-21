@@ -2,7 +2,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import RecommendedMediaItem from "./RecommendedMediaItem.svelte";
+  import RecommendedListItem from "./RecommendedListItem.svelte";
   import { useRecommendedList } from "./useRecommendedList";
 
   type RecommendationListProps = {
@@ -22,6 +22,6 @@
   urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
-    <RecommendedMediaItem {type} {media} style="card" />
+    <RecommendedListItem {type} {media} />
   {/snippet}
 </DrillableMediaList>

@@ -6,16 +6,19 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
 
   import ShowCard from "$lib/components/media/card/ShowCard.svelte";
+  import AirTag from "$lib/components/media/tags/AirTag.svelte";
   import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import type { MediaItemProps } from "./MediaItemProps";
+  import type { MediaCardProps } from "./MediaCardProps";
 
-  const { type, media, tags: externalTags, action }: MediaItemProps = $props();
+  const { type, media, tags: externalTags, action }: MediaCardProps = $props();
 </script>
 
-{#snippet defaultTags(media: MediaItemProps["media"])}
-  {#if "episode" in media}
+{#snippet defaultTags(media: MediaCardProps["media"])}
+  {#if media.airDate > new Date()}
+    <AirTag i18n={TagIntlProvider} year={media.year} airDate={media.airDate} />
+  {:else if "episode" in media}
     <EpisodeTag i18n={TagIntlProvider} count={media.episode.count} />
   {:else if type === "movie"}
     <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />

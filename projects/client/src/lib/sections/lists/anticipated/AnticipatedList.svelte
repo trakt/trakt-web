@@ -2,7 +2,7 @@
   import type { MediaType } from "$lib/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import AnticipatedMediaItem from "./AnticipatedMediaItem.svelte";
+  import AnticipatedListItem from "./AnticipatedListItem.svelte";
   import { useAnticipatedList } from "./useAnticipatedList";
 
   type TrendingListProps = {
@@ -22,6 +22,6 @@
   urlBuilder={UrlBuilder.anticipated}
 >
   {#snippet item(media)}
-    <AnticipatedMediaItem {type} {media} style="card" />
+    <AnticipatedListItem {type} {media} />
   {/snippet}
 </DrillableMediaList>

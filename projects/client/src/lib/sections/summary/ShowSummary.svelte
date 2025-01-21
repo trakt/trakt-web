@@ -7,7 +7,7 @@
   import type { Season } from "$lib/models/Season";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { ShowSummary } from "$lib/requests/models/ShowSummary";
-  import NextEpisodeItem from "$lib/sections/lists/components/NextEpisodeItem.svelte";
+  import NextEpisodeCard from "$lib/sections/lists/components/NextEpisodeCard.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -39,7 +39,7 @@
 {#snippet contextualContent()}
   <RenderFor device={["desktop"]} audience="authenticated">
     {#if $progress}
-      <NextEpisodeItem episode={$progress} show={media} />
+      <NextEpisodeCard episode={$progress} show={media} />
     {/if}
   </RenderFor>
 {/snippet}

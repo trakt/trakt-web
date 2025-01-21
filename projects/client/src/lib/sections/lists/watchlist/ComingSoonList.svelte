@@ -4,7 +4,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import FindMoviesLink from "../components/FindMoviesLink.svelte";
-  import MediaItem from "../components/MediaItem.svelte";
+  import MediaCard from "../components/MediaCard.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import { useComingSoon } from "./useComingSoon";
   import { genreCompareFactory } from "./utils/genreCompareFactory";
@@ -31,7 +31,7 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
-    <MediaItem {type} {media} />
+    <MediaCard {type} {media} />
   {/snippet}
   {#snippet empty()}
     {#if !$isLoading}

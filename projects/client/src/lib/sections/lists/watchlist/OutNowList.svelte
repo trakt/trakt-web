@@ -7,7 +7,7 @@
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import FindMoviesLink from "../components/FindMoviesLink.svelte";
-  import MediaItem from "../components/MediaItem.svelte";
+  import MediaCard from "../components/MediaCard.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import { useOutNow } from "./useOutNow";
   import { genreCompareFactory } from "./utils/genreCompareFactory";
@@ -28,7 +28,7 @@
 </script>
 
 {#snippet item(media: MediaSummary)}
-  <MediaItem type={media.type} {media}>
+  <MediaCard type={media.type} {media}>
     {#snippet action()}
       <RenderFor audience="authenticated">
         <MarkAsWatchedAction
@@ -39,7 +39,7 @@
         />
       </RenderFor>
     {/snippet}
-  </MediaItem>
+  </MediaCard>
 {/snippet}
 
 <SectionList

@@ -9,7 +9,7 @@
   import type { MediaSummary } from "$lib/requests/models/MediaSummary";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { writable } from "svelte/store";
-  import EpisodeItem from "./components/EpisodeItem.svelte";
+  import EpisodeCard from "./components/EpisodeCard.svelte";
   import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";
   import { useUserSeason } from "./stores/useUserSeason";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -47,7 +47,7 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(episode)}
-    <EpisodeItem {episode} {show} />
+    <EpisodeCard {episode} {show} />
   {/snippet}
   {#snippet actions()}
     <RenderFor audience="authenticated">

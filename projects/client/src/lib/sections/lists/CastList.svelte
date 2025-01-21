@@ -1,7 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
-  import CastMemberItem from "./components/CastMemberItem.svelte";
+  import CastMemberCard from "./components/CastMemberCard.svelte";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type CastListProps = {
@@ -20,6 +20,6 @@
   --height-list={mediaListHeightResolver("person")}
 >
   {#snippet item(castMember)}
-    <CastMemberItem {castMember} />
+    <CastMemberCard {castMember} />
   {/snippet}
 </SectionList>
