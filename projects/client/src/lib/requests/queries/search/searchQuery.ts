@@ -8,6 +8,11 @@ export type SearchParams = {
   query: string;
 } & ApiParams;
 
+function isGarbage(value?: MediaSummary): boolean {
+  return value?.year == null ||
+    !value?.genres.length;
+}
+
 function mapToSearchResultEntry(
   item: SearchResultResponse[0],
 ): MediaSummary {
@@ -53,7 +58,8 @@ function searchRequest({
       }
 
       return body
-        .map(mapToSearchResultEntry);
+        .map(mapToSearchResultEntry)
+        .filter((value) => !isGarbage(value));
     });
 }
 
