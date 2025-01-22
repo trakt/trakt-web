@@ -5,14 +5,14 @@ import type {
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
-export type FavoritedMedia = {
+export type UserFavoritedMedia = {
   favoritedAt: Date;
   id: number;
 };
 
 function mapFavoritedMovieResponse(
   entry: FavoritedMoviesResponse,
-): FavoritedMedia {
+): UserFavoritedMedia {
   return {
     id: entry.movie.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
@@ -21,7 +21,7 @@ function mapFavoritedMovieResponse(
 
 const favoritedMoviesRequest = (
   { fetch }: ApiParams,
-): Promise<Map<number, FavoritedMedia>> =>
+): Promise<Map<number, UserFavoritedMedia>> =>
   api({ fetch })
     .users
     .favorites
@@ -48,12 +48,12 @@ const favoritedMoviesRequest = (
           const mapped = mapFavoritedMovieResponse(movie);
           map.set(mapped.id, mapped);
           return map;
-        }, new Map<number, FavoritedMedia>())
+        }, new Map<number, UserFavoritedMedia>())
     );
 
 function mapFavoritedShowResponse(
   entry: FavoritedShowsResponse,
-): FavoritedMedia {
+): UserFavoritedMedia {
   return {
     id: entry.show.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
@@ -62,7 +62,7 @@ function mapFavoritedShowResponse(
 
 const favoritedShowsRequest = (
   { fetch }: ApiParams,
-): Promise<Map<number, FavoritedMedia>> =>
+): Promise<Map<number, UserFavoritedMedia>> =>
   api({ fetch })
     .users
     .favorites
@@ -89,7 +89,7 @@ const favoritedShowsRequest = (
           const mapped = mapFavoritedShowResponse(episode);
           map.set(mapped.id, mapped);
           return map;
-        }, new Map<number, FavoritedMedia>())
+        }, new Map<number, UserFavoritedMedia>())
     );
 
 export const currentUserFavoritesQueryKey = [

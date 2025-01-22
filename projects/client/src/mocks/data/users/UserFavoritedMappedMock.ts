@@ -1,8 +1,8 @@
-import type { FavoritedMedia } from '$lib/features/auth/queries/currentUserFavoritesQuery';
+import type { UserFavoritedMedia } from '$lib/features/auth/queries/currentUserFavoritesQuery';
 
 export const UserFavoritedMappedMock: {
-  movies: Map<number, FavoritedMedia>;
-  shows: Map<number, FavoritedMedia>;
+  movies: Map<number, UserFavoritedMedia>;
+  shows: Map<number, UserFavoritedMedia>;
 } = {
   movies: new Map([
     [916302, {
