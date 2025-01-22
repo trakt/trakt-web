@@ -269,7 +269,10 @@
       margin: var(--ni-neg-2) var(--ni-neg-6);
       transform: scale(calc(var(--scale-factor-button) * 0.9));
       background: transparent;
-      color: color(var(--color-foreground));
+
+      &:not([data-variant="secondary"]) {
+        color: color(var(--color-foreground));
+      }
 
       &[disabled] {
         color: var(--color-foreground-button-disabled);
