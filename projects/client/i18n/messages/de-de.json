@@ -270,5 +270,10 @@
   "rating_bad": "👎 Das war schlecht",
   "rating_good": "👍 Das war gut",
   "rating_great": "❤️ Das war spitze",
+  "add_to_favorites": "Zu Favoriten hinzufügen",
+  "remove_from_favorites": "Von Favoriten entfernen",
+  "add_to_favorites_label": "{title} zu deinen Favoriten hinzufügen",
+  "remove_from_favorites_label": "{title} von deinen Favoriten entfernen",
+  "remove_from_favorites_warning": "Bist du sicher, dass du {title} von deinen Favoriten entfernen möchtest?",
   "watch_title_now_disabled": "Jetzt ansehen ist nur verfügbar, wenn {title} auf einem deiner bevorzugten Streaming-Dienste in deinem Land verfügbar ist. Du kannst diese Einstellungen unter https://trakt.tv/settings ändern"
 }

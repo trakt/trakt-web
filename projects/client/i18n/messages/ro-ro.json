@@ -270,5 +270,10 @@
   "rating_bad": "👎 A fost groaznic",
   "rating_good": "👍 Mi-a plăcut",
   "rating_great": "❤️ A fost genial",
+  "add_to_favorites": "Adaugă la Favorite",
+  "remove_from_favorites": "Șterge din Favorite",
+  "add_to_favorites_label": "Adaugă {title} la Favorite",
+  "remove_from_favorites_label": "Șterge {title} din Favorite",
+  "remove_from_favorites_warning": "Sigur vrei să ștergi {title} din Favorite?",
   "watch_title_now_disabled": "Urmărirea acum este disponibilă doar dacă {title} este disponibil pe una dintre serviciile tale preferate de streaming din țara ta. Poți schimba aceste setări pe https://trakt.tv/settings"
 }

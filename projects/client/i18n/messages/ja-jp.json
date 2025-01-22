@@ -270,5 +270,10 @@
   "rating_bad": "👎 これはイマイチ",
   "rating_good": "👍 これは良かった",
   "rating_great": "❤️ これは最高！",
+  "add_to_favorites": "お気に入りに追加",
+  "remove_from_favorites": "お気に入りから削除",
+  "add_to_favorites_label": "「{title}」をお気に入りに追加",
+  "remove_from_favorites_label": "「{title}」をお気に入りから削除",
+  "remove_from_favorites_warning": "「{title}」をお気に入りから削除してもよろしいですか？",
   "watch_title_now_disabled": "{title}は、お住まいの国の好きなストリーミングサービスで利用できる場合にのみ、今すぐ視聴できます。設定はhttps://trakt.tv/settingsで変更できます"
 }

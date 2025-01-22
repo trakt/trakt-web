@@ -270,5 +270,10 @@
   "rating_bad": "👎 dit was niks",
   "rating_good": "👍 dit was goed",
   "rating_great": "❤️ Ik vond dit geweldig",
+  "add_to_favorites": "Toevoegen aan favorieten",
+  "remove_from_favorites": "Verwijderen uit favorieten",
+  "add_to_favorites_label": "Voeg {title} toe aan je favorieten",
+  "remove_from_favorites_label": "Verwijder {title} uit je favorieten",
+  "remove_from_favorites_warning": "Weet je zeker dat je {title} uit je favorieten wilt verwijderen?",
   "watch_title_now_disabled": "Nu kijken is alleen beschikbaar als {title} beschikbaar is op een van je favoriete streamingdiensten in je land. Je kunt deze instellingen wijzigen op https://trakt.tv/settings"
 }

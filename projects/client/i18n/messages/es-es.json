@@ -270,5 +270,10 @@
   "rating_bad": "👎 Esto fue un desastre",
   "rating_good": "👍 Esto estuvo genial",
   "rating_great": "❤️ ¡Me encantó!",
+  "add_to_favorites": "Añadir a Favoritos",
+  "remove_from_favorites": "Eliminar de Favoritos",
+  "add_to_favorites_label": "Añadir {title} a tus Favoritos",
+  "remove_from_favorites_label": "Eliminar {title} de tus Favoritos",
+  "remove_from_favorites_warning": "¿Seguro que quieres eliminar {title} de tus Favoritos?",
   "watch_title_now_disabled": "Reproducir ahora solo está disponible si {title} está disponible en una de tus plataformas favoritas en tu país. Puedes cambiar estas configuraciones en https://trakt.tv/settings"
 }
