@@ -4,10 +4,10 @@ import type {
   SortDirection,
   WatchAction,
 } from '$lib/api.ts';
+import { api, type ApiParams } from '$lib/requests/_internal/api';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
 export type UserSettings = {
   id: string;

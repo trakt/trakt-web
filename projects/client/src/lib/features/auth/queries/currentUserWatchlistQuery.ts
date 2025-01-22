@@ -2,8 +2,8 @@ import type {
   WatchlistedMoviesResponse,
   WatchlistedShowsResponse,
 } from '$lib/api.ts';
+import { api, type ApiParams } from '$lib/requests/_internal/api';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { api, type ApiParams } from '../../../requests/_internal/api.ts';
 
 type WatchlistedMedia = {
   id: number;
