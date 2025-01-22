@@ -113,7 +113,7 @@ const currentUserRequest = ({ fetch }: ApiParams) =>
     });
 
 export const currentUserQueryKey = ['userSettings'] as const;
-export const currentUserSettingsQuery = await defineQuery({
+export const currentUserSettingsQuery = defineQuery({
   key: 'currentUserSettings',
   invalidations: [],
   dependencies: [],

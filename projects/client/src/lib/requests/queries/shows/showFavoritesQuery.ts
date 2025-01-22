@@ -41,7 +41,7 @@ function mapFavoritedShowResponse(
   };
 }
 
-export const showFavoritesQuery = await defineQuery({
+export const showFavoritesQuery = defineQuery({
   key: 'showFavorites',
   invalidations: [InvalidateAction.Favorited('show')],
   dependencies: () => [],

@@ -51,7 +51,7 @@ const showPopularRequest = (
       return response;
     });
 
-export const showPopularQuery = await defineQuery({
+export const showPopularQuery = defineQuery({
   key: 'showPopular',
   invalidations: [],
   dependencies: (params) => [params.limit, params.page],

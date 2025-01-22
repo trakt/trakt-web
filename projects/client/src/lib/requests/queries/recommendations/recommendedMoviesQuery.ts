@@ -40,7 +40,7 @@ const recommendedMoviesRequest = (
       return body;
     });
 
-export const recommendedMoviesQuery = await defineQuery({
+export const recommendedMoviesQuery = defineQuery({
   key: 'recommendedMovies',
   invalidations: [InvalidateAction.MarkAsWatched('movie')],
   dependencies: (params) => [params.limit],

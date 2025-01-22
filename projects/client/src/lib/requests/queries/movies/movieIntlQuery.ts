@@ -44,7 +44,7 @@ const movieIntlRequest = (
       return response.body;
     });
 
-export const movieIntlQuery = await defineQuery({
+export const movieIntlQuery = defineQuery({
   key: 'movieIntl',
   invalidations: [],
   dependencies: (params) => [

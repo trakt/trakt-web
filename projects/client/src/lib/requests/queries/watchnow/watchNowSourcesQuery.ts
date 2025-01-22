@@ -47,7 +47,7 @@ const watchNowSourcesRequest = (
       return response.body;
     });
 
-export const watchNowSourcesQuery = await defineQuery({
+export const watchNowSourcesQuery = defineQuery({
   key: 'watchNowSources',
   invalidations: [],
   dependencies: () => [],

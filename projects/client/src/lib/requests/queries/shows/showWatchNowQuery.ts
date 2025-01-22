@@ -27,7 +27,7 @@ const showWatchNowRequest = (
       return response.body;
     });
 
-export const showWatchNowQuery = await defineQuery({
+export const showWatchNowQuery = defineQuery({
   key: 'showWatchNow',
   invalidations: [],
   dependencies: (params) => [params.id, params.country],

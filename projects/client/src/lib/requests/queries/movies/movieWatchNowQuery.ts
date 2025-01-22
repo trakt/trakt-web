@@ -27,7 +27,7 @@ const movieWatchNowRequest = (
       return response.body;
     });
 
-export const movieWatchNowQuery = await defineQuery({
+export const movieWatchNowQuery = defineQuery({
   key: 'movieWatchNow',
   invalidations: [],
   dependencies: (params) => [params.id, params.country],

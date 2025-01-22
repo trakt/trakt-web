@@ -48,7 +48,7 @@ const movieTrendingRequest = (
       return response;
     });
 
-export const movieTrendingQuery = await defineQuery({
+export const movieTrendingQuery = defineQuery({
   key: 'movieTrending',
   invalidations: [],
   dependencies: (params) => [params.limit, params.page],

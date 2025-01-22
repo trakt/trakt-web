@@ -24,7 +24,7 @@ export function showWatchersRequest(
     });
 }
 
-export const showWatchersQuery = await defineQuery({
+export const showWatchersQuery = defineQuery({
   key: 'showWatchers',
   request: showWatchersRequest,
   mapper: (watchers) => watchers.map(mapWatcherResponseToActiveWatcher),

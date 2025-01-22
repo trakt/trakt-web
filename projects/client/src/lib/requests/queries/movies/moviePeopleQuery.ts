@@ -28,7 +28,7 @@ const moviePeopleRequest = (
       return response.body;
     });
 
-export const moviePeopleQuery = await defineQuery({
+export const moviePeopleQuery = defineQuery({
   key: 'moviePeople',
   invalidations: [],
   dependencies: (params) => [params.slug],

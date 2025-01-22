@@ -41,7 +41,7 @@ function mapFavoritedMovieResponse(
   };
 }
 
-export const movieFavoritesQuery = await defineQuery({
+export const movieFavoritesQuery = defineQuery({
   key: 'movieFavorites',
   invalidations: [InvalidateAction.Favorited('movie')],
   dependencies: () => [],

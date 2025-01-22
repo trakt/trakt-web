@@ -54,7 +54,7 @@ const showTrendingRequest = (
       return response;
     });
 
-export const showTrendingQuery = await defineQuery({
+export const showTrendingQuery = defineQuery({
   key: 'showTrending',
   invalidations: [],
   dependencies: (params) => [params.limit, params.page],

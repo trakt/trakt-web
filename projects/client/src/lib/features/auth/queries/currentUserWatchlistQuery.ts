@@ -82,7 +82,7 @@ const UserWatchlistSchema = z.object({
 });
 export type UserWatchlist = z.infer<typeof UserWatchlistSchema>;
 
-export const currentUserWatchlistQuery = await defineQuery({
+export const currentUserWatchlistQuery = defineQuery({
   key: 'currentUserWatchlist',
   request: () =>
     Promise.all([

@@ -59,7 +59,7 @@ function mapResponseToHistory(
   };
 }
 
-export const episodeHistoryQuery = await defineQuery({
+export const episodeHistoryQuery = defineQuery({
   key: 'episodeHistory',
   invalidations: [InvalidateAction.MarkAsWatched('episode')],
   dependencies: (params) => [

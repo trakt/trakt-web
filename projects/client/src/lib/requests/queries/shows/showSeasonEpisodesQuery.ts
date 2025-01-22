@@ -30,7 +30,7 @@ const showSeasonEpisodesRequest = (
       return response.body;
     });
 
-export const showSeasonEpisodesQuery = await defineQuery({
+export const showSeasonEpisodesQuery = defineQuery({
   key: 'showSeasonEpisodes',
   invalidations: [],
   dependencies: (params) => [params.slug, params.season],

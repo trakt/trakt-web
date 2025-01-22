@@ -41,7 +41,7 @@ const showRelatedRequest = ({ fetch, slug }: ShowRelatedParams) =>
       return response.body;
     });
 
-export const showRelatedQuery = await defineQuery({
+export const showRelatedQuery = defineQuery({
   key: 'showRelated',
   invalidations: [],
   dependencies: (params) => [params.slug],

@@ -26,7 +26,7 @@ const movieSummaryRequest = (
       return response.body;
     });
 
-export const movieSummaryQuery = await defineQuery({
+export const movieSummaryQuery = defineQuery({
   key: 'movieSummary',
   invalidations: [],
   dependencies: (params) => [params.slug],

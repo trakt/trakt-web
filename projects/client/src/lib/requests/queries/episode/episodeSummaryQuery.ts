@@ -33,7 +33,7 @@ const episodeSummaryRequest = (
       return response.body;
     });
 
-export const episodeSummaryQuery = await defineQuery({
+export const episodeSummaryQuery = defineQuery({
   key: 'episodeSummary',
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],

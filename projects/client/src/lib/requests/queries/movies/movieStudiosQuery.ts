@@ -25,7 +25,7 @@ const movieStudiosRequest = (
       return response.body;
     });
 
-export const movieStudiosQuery = await defineQuery({
+export const movieStudiosQuery = defineQuery({
   key: 'movieStudios',
   invalidations: [],
   dependencies: (params) => [params.slug],

@@ -31,7 +31,7 @@ const moviePopularRequest = (
       return response;
     });
 
-export const moviePopularQuery = await defineQuery({
+export const moviePopularQuery = defineQuery({
   key: 'moviePopular',
   invalidations: [],
   dependencies: (params) => [params.limit, params.page],

@@ -48,7 +48,7 @@ const movieAnticipatedRequest = (
       return response;
     });
 
-export const movieAnticipatedQuery = await defineQuery({
+export const movieAnticipatedQuery = defineQuery({
   key: 'movieAnticipated',
   invalidations: [],
   dependencies: (params) => [params.limit, params.page],

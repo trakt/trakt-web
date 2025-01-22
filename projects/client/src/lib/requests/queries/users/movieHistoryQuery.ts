@@ -52,7 +52,7 @@ const mapResponseToHistory = (
   movie: mapMovieResponseToMovieSummary(historyMovie.movie),
 });
 
-export const movieHistoryQuery = await defineQuery({
+export const movieHistoryQuery = defineQuery({
   key: 'movieHistory',
   invalidations: [InvalidateAction.MarkAsWatched('movie')],
   dependencies: (params: MovieHistoryParams) => [

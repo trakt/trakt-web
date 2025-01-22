@@ -25,7 +25,7 @@ const showStatsRequest = (
       return response.body;
     });
 
-export const showStatsQuery = await defineQuery({
+export const showStatsQuery = defineQuery({
   key: 'showStats',
   invalidations: [],
   dependencies: (params) => [params.slug],

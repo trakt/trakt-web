@@ -86,7 +86,7 @@ const UserFavoritesSchema = z.object({
   shows: z.map(z.number(), UserFavoritedMediaSchema),
 });
 export type UserFavorites = z.infer<typeof UserFavoritesSchema>;
-export const currentUserFavoritesQuery = await defineQuery({
+export const currentUserFavoritesQuery = defineQuery({
   key: 'currentUserFavorites',
   request: () =>
     Promise.all([

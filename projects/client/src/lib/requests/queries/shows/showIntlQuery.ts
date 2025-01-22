@@ -44,7 +44,7 @@ const showIntlRequest = (
       return response.body;
     });
 
-export const showIntlQuery = await defineQuery({
+export const showIntlQuery = defineQuery({
   key: 'showIntl',
   invalidations: [],
   dependencies: (params) => [

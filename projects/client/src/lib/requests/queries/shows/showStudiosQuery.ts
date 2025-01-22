@@ -25,7 +25,7 @@ const showStudiosRequest = (
       return response.body;
     });
 
-export const showStudiosQuery = await defineQuery({
+export const showStudiosQuery = defineQuery({
   key: 'showStudios',
   invalidations: [],
   dependencies: (params) => [params.slug],

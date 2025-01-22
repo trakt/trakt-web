@@ -56,7 +56,7 @@ const mapResponseToHistory = (
   episode: mapEpisodeResponseToEpisodeEntry(historyShow.episode),
 });
 
-export const showHistoryQuery = await defineQuery({
+export const showHistoryQuery = defineQuery({
   key: 'showHistory',
   invalidations: [InvalidateAction.MarkAsWatched('show')],
   dependencies: (params: ShowHistoryParams) => [

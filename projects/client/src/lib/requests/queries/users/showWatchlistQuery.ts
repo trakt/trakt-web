@@ -44,7 +44,7 @@ const mapResponseToWatchlist = (watchlistShow: WatchlistedShowsResponse) => ({
   entry: mapShowResponseToShowSummary(watchlistShow.show),
 });
 
-export const showWatchlistQuery = await defineQuery({
+export const showWatchlistQuery = defineQuery({
   key: 'showWatchlist',
   invalidations: [InvalidateAction.Watchlisted('show')],
   dependencies: (params: ShowWatchlistParams) => [params.sort],

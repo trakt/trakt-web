@@ -57,7 +57,7 @@ const showAnticipatedRequest = (
       return response;
     });
 
-export const showAnticipatedQuery = await defineQuery({
+export const showAnticipatedQuery = defineQuery({
   key: 'showAnticipated',
   invalidations: [],
   dependencies: (params) => [params.limit, params.page],

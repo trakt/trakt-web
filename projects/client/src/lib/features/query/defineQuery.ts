@@ -35,7 +35,7 @@ export const QUERY_ID = 'query';
 export const SCHEMA_ID = 'schema';
 export const DEPENDENCY_ID = 'dependency';
 
-export async function defineQuery<
+export function defineQuery<
   TInput,
   TOutput extends ZodType,
   TError extends Error,
@@ -50,7 +50,7 @@ export async function defineQuery<
   }: DefineQueryProps<TInput, TOutput, TRequestParams>,
 ) {
   const key = `${QUERY_ID}:${params.key}`;
-  const hash = `${SCHEMA_ID}:${await zodToHash(schema)}`;
+  const hash = `${SCHEMA_ID}:${zodToHash(schema)}`;
 
   return (
     requestParams: TRequestParams = {} as TRequestParams,

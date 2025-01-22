@@ -28,7 +28,7 @@ const showPeopleRequest = (
       return response.body;
     });
 
-export const showPeopleQuery = await defineQuery({
+export const showPeopleQuery = defineQuery({
   key: 'showPeople',
   invalidations: [],
   dependencies: (params) => [params.slug],

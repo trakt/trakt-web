@@ -27,7 +27,7 @@ const episodeWatchNowRequest = (
       return response.body;
     });
 
-export const episodeWatchNowQuery = await defineQuery({
+export const episodeWatchNowQuery = defineQuery({
   key: 'episodeWatchNow',
   invalidations: [],
   dependencies: (params) => [params.id, params.country],

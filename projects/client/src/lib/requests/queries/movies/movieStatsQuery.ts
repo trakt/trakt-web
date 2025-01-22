@@ -25,7 +25,7 @@ const movieStatsRequest = (
       return response.body;
     });
 
-export const movieStatsQuery = await defineQuery({
+export const movieStatsQuery = defineQuery({
   key: 'movieStats',
   invalidations: [],
   dependencies: (params) => [params.slug],

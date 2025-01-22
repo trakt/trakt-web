@@ -42,7 +42,7 @@ const recommendedShowsRequest = (
       return body;
     });
 
-export const recommendedShowsQuery = await defineQuery({
+export const recommendedShowsQuery = defineQuery({
   key: 'recommendedShows',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

@@ -47,7 +47,7 @@ const mapPeopleResponseToPersonSummary = (
   };
 };
 
-export const peopleSummaryQuery = await defineQuery({
+export const peopleSummaryQuery = defineQuery({
   key: 'peopleSummary',
   invalidations: [],
   dependencies: (params) => [params.slug],

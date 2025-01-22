@@ -39,7 +39,7 @@ const upcomingEpisodesRequest = (
       return body;
     });
 
-export const upcomingEpisodesQuery = await defineQuery({
+export const upcomingEpisodesQuery = defineQuery({
   key: 'upcomingEpisodes',
   invalidations: [],
   dependencies: (params) => [params.startDate, params.days],

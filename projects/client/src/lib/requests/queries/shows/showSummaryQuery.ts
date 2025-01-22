@@ -26,7 +26,7 @@ const showSummaryRequest = (
       return response.body;
     });
 
-export const showSummaryQuery = await defineQuery({
+export const showSummaryQuery = defineQuery({
   key: 'showSummary',
   invalidations: [],
   dependencies: (params) => [params.slug],

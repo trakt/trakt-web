@@ -33,7 +33,7 @@ const episodeRatingRequest = (
       return response.body;
     });
 
-export const episodeRatingQuery = await defineQuery({
+export const episodeRatingQuery = defineQuery({
   key: 'episodeRating',
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],

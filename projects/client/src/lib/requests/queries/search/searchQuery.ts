@@ -52,7 +52,7 @@ const searchRequest = ({ query, fetch }: SearchParams) =>
       return response.body;
     });
 
-export const searchQuery = await defineQuery({
+export const searchQuery = defineQuery({
   key: 'search',
   invalidations: [],
   dependencies: (params) => [params.query.toLowerCase().trim()],

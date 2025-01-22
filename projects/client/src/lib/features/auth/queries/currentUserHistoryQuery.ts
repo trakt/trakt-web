@@ -101,7 +101,7 @@ const UserHistorySchema = z.object({
 });
 export type UserHistory = z.infer<typeof UserHistorySchema>;
 
-export const currentUserHistoryQuery = await defineQuery({
+export const currentUserHistoryQuery = defineQuery({
   key: 'currentUserHistory',
   request: () =>
     Promise.all([

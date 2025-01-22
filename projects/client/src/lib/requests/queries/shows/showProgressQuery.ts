@@ -66,7 +66,7 @@ function mapShowProgressResponse(
   };
 }
 
-export const showProgressQuery = await defineQuery({
+export const showProgressQuery = defineQuery({
   key: 'showProgress',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

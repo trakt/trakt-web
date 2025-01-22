@@ -53,7 +53,7 @@ const episodeIntlRequest = (
       return response.body;
     });
 
-export const episodeIntlQuery = await defineQuery({
+export const episodeIntlQuery = defineQuery({
   key: 'episodeIntl',
   invalidations: [],
   dependencies: (params) => [

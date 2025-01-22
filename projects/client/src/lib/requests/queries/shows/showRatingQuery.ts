@@ -28,7 +28,7 @@ const showRatingRequest = (
       return response.body;
     });
 
-export const showRatingQuery = await defineQuery({
+export const showRatingQuery = defineQuery({
   key: 'showRating',
   invalidations: [],
   dependencies: (params) => [params.slug],

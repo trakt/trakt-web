@@ -67,7 +67,7 @@ function mapUpNextResponse(item: UpNextResponse[0]): UpNextEntry {
   };
 }
 
-export const upNextQuery = await defineQuery({
+export const upNextQuery = defineQuery({
   key: 'upNext',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

@@ -37,7 +37,7 @@ const mapSeasonResponseToSeason = (item: SeasonsResponse[0]): Season => ({
   },
 });
 
-export const showSeasonsQuery = await defineQuery({
+export const showSeasonsQuery = defineQuery({
   key: 'showSeasons',
   invalidations: [],
   dependencies: (params) => [params.slug],

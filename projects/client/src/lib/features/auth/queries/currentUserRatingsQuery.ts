@@ -64,7 +64,7 @@ const UserRatingsSchema = z.object({
 });
 export type UserRatings = z.infer<typeof UserRatingsSchema>;
 
-export const currentUserRatingsQuery = await defineQuery({
+export const currentUserRatingsQuery = defineQuery({
   key: 'currentUserRatings',
   request: () =>
     Promise.all([
