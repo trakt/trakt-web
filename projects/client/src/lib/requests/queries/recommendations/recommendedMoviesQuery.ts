@@ -1,26 +1,22 @@
-import type { RecommendedMovieResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
-export type RecommendedMovie = MovieEntry;
+export const RecommendedMovieSchema = MovieEntrySchema;
+export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
-type RecommendedMoviesParams = ApiParams & { limit?: number };
+type RecommendedMoviesParams = {
+  limit?: number;
+} & ApiParams;
 
-function mapResponseToRecommendedMovie(
-  movie: RecommendedMovieResponse[0],
-): RecommendedMovie {
-  return {
-    ...mapMovieResponseToMovieSummary(movie),
-  };
-}
-
-function recommendMoviesRequest(
-  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedMoviesParams = {},
-): Promise<RecommendedMovie[]> {
-  return api({ fetch })
+const recommendedMoviesRequest = (
+  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedMoviesParams,
+) =>
+  api({ fetch })
     .recommendations
     .movies
     .recommend({
@@ -41,19 +37,14 @@ function recommendMoviesRequest(
         );
       }
 
-      return body.map(mapResponseToRecommendedMovie);
+      return body;
     });
-}
 
-const recommendedMoviesQueryKey = ({ limit }: RecommendedMoviesParams) =>
-  [
-    'recommendedMovies',
-    InvalidateAction.MarkAsWatched('movie'),
-    limit,
-  ] as const;
-export const recommendedMoviesQuery = (
-  params: RecommendedMoviesParams = {},
-) => ({
-  queryKey: recommendedMoviesQueryKey(params),
-  queryFn: () => recommendMoviesRequest(params),
+export const recommendedMoviesQuery = await defineQuery({
+  key: 'recommendedMovies',
+  invalidations: [InvalidateAction.MarkAsWatched('movie')],
+  dependencies: (params) => [params.limit],
+  request: recommendedMoviesRequest,
+  mapper: (body) => body.map(mapMovieResponseToMovieSummary),
+  schema: RecommendedMovieSchema.array(),
 });

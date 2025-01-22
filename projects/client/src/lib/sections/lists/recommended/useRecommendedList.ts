@@ -21,13 +21,17 @@ type RecommendationListStoreProps = {
 
 function typeToQuery(
   { type, limit }: RecommendationListStoreProps,
-): CreateQueryOptions<RecommendedMediaList> {
+) {
   const props = { limit };
   switch (type) {
     case 'movie':
-      return recommendedMoviesQuery(props);
+      return recommendedMoviesQuery(props) as CreateQueryOptions<
+        RecommendedMediaList
+      >;
     case 'show':
-      return recommendedShowsQuery(props);
+      return recommendedShowsQuery(props) as CreateQueryOptions<
+        RecommendedMediaList
+      >;
   }
 }
 

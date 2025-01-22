@@ -1,32 +1,27 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
-import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
-import type { MediaEntry } from '../../models/MediaEntry.ts';
+import { MediaEntrySchema } from '../../models/MediaEntry.ts';
 
-export type RecommendedShow = MediaEntry & EpisodeCount;
+export const RecommendedShowSchema = MediaEntrySchema.extend({
+  episode: z.object({
+    count: z.number(),
+  }),
+});
+export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
-type RecommendedShowsParams = ApiParams & {
+type RecommendedShowsParams = {
   limit?: number;
-};
+} & ApiParams;
 
-function mapResponseToRecommendedShow(
-  show: RecommendedShowResponse[0],
-): RecommendedShow {
-  return {
-    ...mapShowResponseToShowSummary(show),
-    episode: {
-      count: show.aired_episodes ?? NaN,
-    },
-  };
-}
-
-function recommendShowsRequest(
-  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedShowsParams = {},
-): Promise<RecommendedShow[]> {
-  return api({ fetch })
+const recommendedShowsRequest = (
+  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedShowsParams,
+) =>
+  api({ fetch })
     .recommendations
     .shows
     .recommend({
@@ -44,20 +39,23 @@ function recommendShowsRequest(
         );
       }
 
-      return body.map(mapResponseToRecommendedShow);
+      return body;
     });
-}
 
-const recommendedShowsQueryKey = ({ limit }: RecommendedShowsParams) =>
-  [
-    'recommendedShows',
+export const recommendedShowsQuery = await defineQuery({
+  key: 'recommendedShows',
+  invalidations: [
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),
-    limit,
-  ] as const;
-export const recommendedShowsQuery = (
-  params: RecommendedShowsParams = {},
-) => ({
-  queryKey: recommendedShowsQueryKey(params),
-  queryFn: () => recommendShowsRequest(params),
+  ],
+  dependencies: (params) => [params.limit],
+  request: recommendedShowsRequest,
+  mapper: (body) =>
+    body.map((show: RecommendedShowResponse[0]) => ({
+      ...mapShowResponseToShowSummary(show),
+      episode: {
+        count: show.aired_episodes ?? NaN,
+      },
+    })),
+  schema: RecommendedShowSchema.array(),
 });
