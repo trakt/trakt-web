@@ -10,7 +10,7 @@ export const EpisodeEntrySchema = z.object({
   title: z.string(),
   overview: z.string(),
   cover: z.object({
-    url: HttpsUrlSchema.optional().nullable(),
+    url: HttpsUrlSchema.nullish(),
   }),
   genres: genreOptionSchema.array(),
   airDate: z.date(),
