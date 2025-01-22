@@ -16,7 +16,6 @@ declare global {
   const TRAKT_CLIENT_ID: string;
   const TRAKT_MODE: 'development' | 'production' | 'test';
   const TRAKT_TARGET_ENVIRONMENT: Environment;
-  const TRAKT_QUERY_BUSTER: string;
 
   const FIREBASE_PROJECT_ID: string;
   const FIREBASE_API_KEY: string;

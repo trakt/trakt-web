@@ -32,7 +32,6 @@ const TRAKT_TARGET_ENVIRONMENT = process.env.IS_CONTRIB
 
 export default defineConfig(({ mode }) => ({
   define: {
-    'TRAKT_QUERY_BUSTER': `"${Math.random().toString(36).substring(7)}"`,
     'TRAKT_CLIENT_ID': `"${process.env.TRAKT_CLIENT_ID}"`,
     'TRAKT_MODE': `"${mode}${process.env.IS_PREVIEW ? '-preview' : ''}"`,
     'TRAKT_TARGET_ENVIRONMENT': `"${TRAKT_TARGET_ENVIRONMENT}"`,
