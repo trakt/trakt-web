@@ -278,6 +278,5 @@
   "favorite_movies": "Favoriete films",
   "favorite_shows": "Favoriete series",
   "favorite_movies_empty": "Je lijst met favorieten is leeg.",
-  "favorite_shows_empty": "Je favoriete series lijst is leeg.",
-  "watch_title_now_disabled": "Nu kijken is alleen beschikbaar als {title} beschikbaar is op een van je favoriete streamingdiensten in je land. Je kunt deze instellingen wijzigen op https://trakt.tv/settings"
+  "favorite_shows_empty": "Je favoriete series lijst is leeg."
 }

@@ -278,6 +278,5 @@
   "favorite_movies": "Films préférés",
   "favorite_shows": "Séries préférées",
   "favorite_movies_empty": "Votre liste de favoris est vide.",
-  "favorite_shows_empty": "Votre liste d'émissions favorites est vide.",
-  "watch_title_now_disabled": "Regarder maintenant n'est disponible que si {title} est accessible sur l'un de vos services de diffusion favoris dans votre pays. Vous pouvez modifier ces paramètres sur https://trakt.tv/settings"
+  "favorite_shows_empty": "Votre liste d'émissions favorites est vide."
 }

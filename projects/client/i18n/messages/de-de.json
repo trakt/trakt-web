@@ -278,6 +278,5 @@
   "favorite_movies": "Lieblingsfilme",
   "favorite_shows": "Lieblingsserien",
   "favorite_movies_empty": "Your favorite movies list is empty.",
-  "favorite_shows_empty": "Your favorite shows list is empty.",
-  "watch_title_now_disabled": "Jetzt ansehen ist nur verfügbar, wenn {title} auf einem deiner bevorzugten Streaming-Dienste in deinem Land verfügbar ist. Du kannst diese Einstellungen unter https://trakt.tv/settings ändern"
+  "favorite_shows_empty": "Your favorite shows list is empty."
 }
