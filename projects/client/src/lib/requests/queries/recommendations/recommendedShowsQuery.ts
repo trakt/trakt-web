@@ -1,12 +1,12 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MediaSummary } from '$lib/requests/models/MediaSummary.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import type { MediaEntry } from '../../models/MediaEntry.ts';
 
-export type RecommendedShow = MediaSummary & EpisodeCount;
+export type RecommendedShow = MediaEntry & EpisodeCount;
 
 type RecommendedShowsParams = ApiParams & {
   limit?: number;

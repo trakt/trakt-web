@@ -1,5 +1,5 @@
 import type { SortType } from '$lib/api.ts';
-import type { MediaType } from '$lib/models/MediaType.ts';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import {
   movieWatchlistQuery,
   type WatchlistMovie,
@@ -17,7 +17,7 @@ export type WatchListParams = {
 };
 
 export type WatchlistMediaItem = WatchlistMovie | WatchlistShow;
-export type WatchlistMedia = Array<WatchlistMediaItem>;
+export type WatchlistMediaList = Array<WatchlistMediaItem>;
 
 export type WatchListStoreProps = {
   type: MediaType;
@@ -25,7 +25,7 @@ export type WatchListStoreProps = {
 
 function typeToQuery(
   { type, sort = 'rank' }: WatchListStoreProps,
-): CreateQueryOptions<WatchlistMedia> {
+): CreateQueryOptions<WatchlistMediaList> {
   const params: WatchListParams = {
     sort,
   };

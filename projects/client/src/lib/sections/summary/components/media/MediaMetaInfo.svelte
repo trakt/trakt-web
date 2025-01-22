@@ -4,9 +4,9 @@
   import PlaysTag from "$lib/components/media/tags/PlaysTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RatingList from "$lib/components/summary/RatingList.svelte";
-  import type { ActiveWatcher } from "$lib/models/ActiveWatcher";
-  import type { MediaRating } from "$lib/models/MediaRating";
-  import type { MediaStats } from "$lib/models/MediaStats";
+  import type { ActiveWatcher } from "$lib/requests/models/ActiveWatcher";
+  import type { MediaRating } from "$lib/requests/models/MediaRating";
+  import type { MediaStats } from "$lib/requests/models/MediaStats";
 
   type MediaMetaInfoProps = {
     certification?: string | Nil;

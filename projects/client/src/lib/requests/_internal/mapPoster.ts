@@ -2,13 +2,13 @@ import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants';
 import { findDefined } from '$lib/utils/string/findDefined';
 import { prependHttps } from '$lib/utils/url/prependHttps';
 import type { MovieResponse, ShowResponse } from '@trakt/api';
-import type { MediaSummary } from '../models/MediaSummary';
+import type { MediaEntry } from '../models/MediaEntry';
 import { mediumUrl } from './mediumUrl';
 import { thumbUrl } from './thumbUrl';
 
 export function mapPoster(
   images: ShowResponse['images'] | MovieResponse['images'],
-): MediaSummary['poster'] {
+): MediaEntry['poster'] {
   const posterCandidate = findDefined(
     ...(images?.poster ?? []),
   );

@@ -3,7 +3,7 @@ import * as m from '$lib/features/i18n/messages.ts';
 import {
   EpisodeFinaleType,
   EpisodePremiereType,
-} from '$lib/models/EpisodeType.ts';
+} from '$lib/requests/models/EpisodeType.ts';
 import { toHumanDate } from '../../utils/formatting/date/toHumanDate.ts';
 import { toHumanDuration } from '../../utils/formatting/date/toHumanDuration.ts';
 import type { EpisodeIntl } from './EpisodeIntl.ts';
@@ -11,21 +11,21 @@ import type { EpisodeIntl } from './EpisodeIntl.ts';
 export const EpisodeIntlProvider: EpisodeIntl = {
   premiereText: ({ type }) => {
     switch (type) {
-      case EpisodePremiereType.Season:
+      case EpisodePremiereType.season_premiere:
         return m.season_premiere();
-      case EpisodePremiereType.Series:
+      case EpisodePremiereType.series_premiere:
         return m.series_premiere();
-      case EpisodePremiereType.MidSeason:
+      case EpisodePremiereType.mid_season_premiere:
         return m.mid_season_premiere();
     }
   },
   finaleText: ({ type }) => {
     switch (type) {
-      case EpisodeFinaleType.Season:
+      case EpisodeFinaleType.season_finale:
         return m.season_finale();
-      case EpisodeFinaleType.Series:
+      case EpisodeFinaleType.series_finale:
         return m.series_finale();
-      case EpisodeFinaleType.MidSeason:
+      case EpisodeFinaleType.mid_season_finale:
         return m.mid_season_finale();
     }
   },

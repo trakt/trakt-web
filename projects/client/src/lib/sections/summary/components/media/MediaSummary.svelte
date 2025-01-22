@@ -4,11 +4,11 @@
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaStats } from "$lib/models/MediaStats";
-  import type { MediaStudio } from "$lib/models/MediaStudio";
-  import type { MediaType } from "$lib/models/MediaType";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { MediaStats } from "$lib/requests/models/MediaStats";
+  import type { MediaStudio } from "$lib/requests/models/MediaStudio";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
@@ -34,7 +34,7 @@
     watchers,
     studios,
     crew,
-  }: MediaSummaryProps<MediaSummary> & {
+  }: MediaSummaryProps<MediaEntry> & {
     type: MediaType;
     contextualContent?: Snippet;
     stats: MediaStats;

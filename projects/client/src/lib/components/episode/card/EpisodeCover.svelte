@@ -5,7 +5,7 @@
     EpisodeFinaleType,
     EpisodePremiereType,
     type EpisodeType,
-  } from "$lib/models/EpisodeType";
+  } from "$lib/requests/models/EpisodeType";
   import type { EpisodeIntl } from "../EpisodeIntl";
   import EpisodeStatusTag from "../tags/EpisodeStatusTag.svelte";
 
@@ -24,20 +24,19 @@
   }: EpisodeCoverProps = $props();
 
   const isSeasonPremiere = $derived(
-    [EpisodePremiereType.MidSeason, EpisodePremiereType.Season].includes(
-      type as EpisodePremiereType,
-    ),
+    EpisodePremiereType.mid_season_premiere === (type as EpisodePremiereType) ||
+      EpisodePremiereType.season_premiere === (type as EpisodePremiereType),
   );
 
   const isPremiere = $derived(
-    EpisodePremiereType.Series === (type as EpisodePremiereType),
+    EpisodePremiereType.series_premiere === (type as EpisodePremiereType),
   );
 
   const isFinale = $derived(
     [
-      EpisodeFinaleType.MidSeason,
-      EpisodeFinaleType.Season,
-      EpisodeFinaleType.Series,
+      EpisodeFinaleType.mid_season_finale,
+      EpisodeFinaleType.season_finale,
+      EpisodeFinaleType.series_finale,
     ].includes(type as EpisodeFinaleType),
   );
 

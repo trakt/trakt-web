@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
+import type { MediaType } from '../../../requests/models/MediaType.ts';
 
 export function toMarkAsWatchedPayload(
   type: MediaType | 'episode',

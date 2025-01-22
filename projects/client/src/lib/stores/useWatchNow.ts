@@ -1,13 +1,12 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
-import type { MediaType } from '$lib/models/MediaType.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { episodeWatchNowQuery } from '$lib/requests/queries/episode/episodeWatchNowQuery.ts';
 import { showWatchNowQuery } from '$lib/requests/queries/shows/showWatchNowQuery.ts';
 import { findFavoriteWatchNowService } from '$lib/stores/_internal/findFavoriteWatchNowService.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
-import type { WatchNowServices } from '../requests/models/WatchNowServices.ts';
 import { movieWatchNowQuery } from '../requests/queries/movies/movieWatchNowQuery.ts';
 
 type WatchNowMediaType = MediaType | 'episode';
@@ -21,7 +20,7 @@ function typeToQuery(
   type: WatchNowMediaType,
   id: number,
   country: string,
-): CreateQueryOptions<WatchNowServices> {
+) {
   const params = { id, country };
 
   switch (type) {

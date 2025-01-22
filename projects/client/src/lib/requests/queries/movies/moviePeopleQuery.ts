@@ -1,13 +1,16 @@
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapPeopleResponseToMediaCrew } from '$lib/requests/_internal/mapPeopleResponseToMediaCrew.ts';
-import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
+import { MediaCrewSchema } from '$lib/requests/models/MediaCrew.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
-type MoviePeopleQuery = { slug: string } & ApiParams;
+type MoviePeopleParams = {
+  slug: string;
+} & ApiParams;
 
-export function moviePeopleRequest(
-  { fetch, slug }: MoviePeopleQuery,
-): Promise<MediaCrew> {
-  return api({ fetch })
+const moviePeopleRequest = (
+  { fetch, slug }: MoviePeopleParams,
+) =>
+  api({ fetch })
     .movies
     .people({
       params: {
@@ -17,19 +20,19 @@ export function moviePeopleRequest(
         extended: 'cloud9',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
-        throw new Error('Failed to fetch up movie people');
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error('Failed to fetch movie people');
       }
 
-      return mapPeopleResponseToMediaCrew(body);
+      return response.body;
     });
-}
 
-export const moviePeopleQueryKey = (id: string) => ['moviePeople', id] as const;
-export const moviePeopleQuery = (
-  params: MoviePeopleQuery,
-) => ({
-  queryKey: moviePeopleQueryKey(params.slug),
-  queryFn: () => moviePeopleRequest(params),
+export const moviePeopleQuery = await defineQuery({
+  key: 'moviePeople',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: moviePeopleRequest,
+  mapper: (body) => mapPeopleResponseToMediaCrew(body),
+  schema: MediaCrewSchema,
 });

@@ -5,13 +5,13 @@ import {
 import { findDefined } from '$lib/utils/string/findDefined';
 import { prependHttps } from '$lib/utils/url/prependHttps';
 import type { MovieResponse, ShowResponse } from '@trakt/api';
-import type { MediaSummary } from '../models/MediaSummary';
+import type { MediaEntry } from '../models/MediaEntry';
 import { mediumUrl } from './mediumUrl';
 import { thumbUrl } from './thumbUrl';
 
 export function mapCover(
   images: ShowResponse['images'] | MovieResponse['images'],
-): MediaSummary['cover'] {
+): MediaEntry['cover'] {
   const coverCandidate = findDefined(...(images?.fanart ?? []));
 
   return {

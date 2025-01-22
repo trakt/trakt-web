@@ -1,15 +1,15 @@
 import type { SortType, WatchlistedShowsResponse } from '$lib/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListItem } from '$lib/requests/models/ListItem.ts';
-import { type ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import { type ShowEntry } from '../../models/ShowEntry.ts';
 
 type ShowWatchlistParams = {
   sort: SortType;
 } & ApiParams;
 
-export type WatchlistShow = ListItem<ShowSummary>;
+export type WatchlistShow = ListItem<ShowEntry>;
 
 export function mapResponseToWatchlist(
   watchlistShow: WatchlistedShowsResponse,

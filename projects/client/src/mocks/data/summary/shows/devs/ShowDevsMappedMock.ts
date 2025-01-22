@@ -1,6 +1,6 @@
-import type { ShowSummary } from '$lib/requests/models/ShowSummary';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry';
 
-export const ShowDevsMappedMock: ShowSummary = {
+export const ShowDevsMappedMock: ShowEntry = {
   'id': 147971,
   'slug': 'devs',
   'type': 'show',

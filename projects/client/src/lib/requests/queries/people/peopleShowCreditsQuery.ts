@@ -1,12 +1,12 @@
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 type PeopleShowCreditsParams = { slug: string } & ApiParams;
 
 function peopleShowCreditsRequest(
   { fetch, slug }: PeopleShowCreditsParams,
-): Promise<ShowSummary[]> {
+): Promise<ShowEntry[]> {
   return api({ fetch })
     .people
     .shows({

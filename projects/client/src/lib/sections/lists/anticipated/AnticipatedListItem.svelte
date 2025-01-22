@@ -4,13 +4,13 @@
   import MediaCard from "../components/MediaCard.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
   import type { MediaStyleProps } from "../components/MediaStyleProps";
-  import type { AnticipatedMediaItem } from "./useAnticipatedList";
+  import type { AnticipatedEntry } from "./useAnticipatedList";
 
   const {
     type,
     media,
     style,
-  }: MediaCardProps<AnticipatedMediaItem> & MediaStyleProps = $props();
+  }: MediaCardProps<AnticipatedEntry> & MediaStyleProps = $props();
 </script>
 
 {#snippet tags()}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MediaType } from "$lib/models/MediaType";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { RECOMMENDED_UPPER_LIMIT } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";

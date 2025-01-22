@@ -1,13 +1,13 @@
 <script lang="ts">
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
-  import type { WatchNowService } from "$lib/requests/models/WatchNowServices";
+  import type { WatchNowStreaming } from "$lib/requests/models/WatchNowServices";
   import Button from "../../Button.svelte";
   import type { WatchNowButtonIntl } from "../WatchNowButtonIntl";
   import WatchNowServiceLogo from "./WatchNowServiceLogo.svelte";
 
   type WatchNowButtonProps = {
     mediaTitle: string;
-    favoriteService: WatchNowService;
+    favoriteService: WatchNowStreaming;
     i18n: WatchNowButtonIntl;
     isLoading: boolean;
   };

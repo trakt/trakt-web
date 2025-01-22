@@ -12,7 +12,7 @@ export const WatchlistedMediaSchema = z.object({
   id: z.number(),
   watchlistedAt: z.date(),
 });
-export type WatchlistedMedia = z.infer<typeof WatchlistedMediaSchema>;
+export type WatchlistedEntry = z.infer<typeof WatchlistedMediaSchema>;
 
 const WatchlistedMovieSchema = WatchlistedMediaSchema;
 export type WatchlistedMovie = z.infer<typeof WatchlistedMovieSchema>;

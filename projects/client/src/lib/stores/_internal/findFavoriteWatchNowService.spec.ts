@@ -1,4 +1,4 @@
-import type { WatchNowService } from '$lib/requests/models/WatchNowServices.ts';
+import type { WatchNowStreaming } from '$lib/requests/models/WatchNowServices.ts';
 import { describe, expect, it } from 'vitest';
 import { findFavoriteWatchNowService } from './findFavoriteWatchNowService.ts';
 
@@ -15,7 +15,7 @@ describe('findFavoriteWatchNowService', () => {
     expect(findFavoriteWatchNowService({
       services: {
         streamingServices: [{
-          link: '',
+          link: 'https://www.netflix.com/',
           source: 'netflix',
           is4k: false,
           type: 'streaming',
@@ -28,8 +28,8 @@ describe('findFavoriteWatchNowService', () => {
   });
 
   it('should return the matching service', () => {
-    const subscription: WatchNowService = {
-      link: '',
+    const subscription: WatchNowStreaming = {
+      link: 'https://www.netflix.com/',
       source: 'netflix',
       is4k: false,
       type: 'streaming',

@@ -1,8 +1,8 @@
 import type { Genre } from '$lib/api.ts';
-import type { MediaSummary } from '$lib/requests/models/MediaSummary';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry';
 
 type Direction = 'asc' | 'desc';
-export type MediaSummarySortInfo = Pick<MediaSummary, 'airDate' | 'genres'>;
+export type MediaSummarySortInfo = Pick<MediaEntry, 'airDate' | 'genres'>;
 
 type CompareProps = {
   left: MediaSummarySortInfo;

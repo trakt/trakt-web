@@ -1,15 +1,15 @@
 import type { SortDirection, UpNextResponse } from '$lib/api.ts';
-import type { Paginatable } from '$lib/models/Paginatable.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
-import type { EpisodeProgressEntry } from '../../../models/EpisodeProgressEntry.ts';
+import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
+import type { EpisodeProgressEntry } from '../../models/EpisodeProgressEntry.ts';
 
 export type UpNextEntry = EpisodeProgressEntry & {
-  show: ShowSummary;
+  show: ShowEntry;
 };
 
 type UpNextParams = {

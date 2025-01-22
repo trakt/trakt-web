@@ -1,17 +1,18 @@
-import type { MediaStats } from '$lib/models/MediaStats.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapStatsResponseToMediaStats } from '$lib/requests/_internal/mapStatsResponseToMediaStats.ts';
+import { MediaStatsSchema } from '$lib/requests/models/MediaStats.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
-type EpisodeStatsQueryParams = {
+type EpisodeStatsParams = {
   slug: string;
   season: number;
   episode: number;
 } & ApiParams;
 
-export function episodeStatsRequest(
-  { fetch, slug, season, episode }: EpisodeStatsQueryParams,
-): Promise<MediaStats> {
-  return api({ fetch })
+const episodeStatsRequest = (
+  { fetch, slug, season, episode }: EpisodeStatsParams,
+) =>
+  api({ fetch })
     .shows
     .episode
     .stats({
@@ -21,20 +22,19 @@ export function episodeStatsRequest(
         episode,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch episode stats');
       }
 
-      return mapStatsResponseToMediaStats(body);
+      return response.body;
     });
-}
 
-export const episodeStatsQueryKey = (params: EpisodeStatsQueryParams) =>
-  ['episodeStats', params.slug, params.season, params.episode] as const;
-export const episodeStatsQuery = (
-  params: EpisodeStatsQueryParams,
-) => ({
-  queryKey: episodeStatsQueryKey(params),
-  queryFn: () => episodeStatsRequest(params),
+export const episodeStatsQuery = await defineQuery({
+  key: 'episodeStats',
+  invalidations: [],
+  dependencies: (params) => [params.slug, params.season, params.episode],
+  request: episodeStatsRequest,
+  mapper: mapStatsResponseToMediaStats,
+  schema: MediaStatsSchema,
 });

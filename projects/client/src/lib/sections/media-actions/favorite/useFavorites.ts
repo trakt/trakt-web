@@ -1,6 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import type { MediaType } from '$lib/models/MediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest';
 import { removeFromFavoritesRequest } from '$lib/requests/sync/removeFromFavoritesRequest';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';

@@ -4,7 +4,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import FindMoviesLink from "../components/FindMoviesLink.svelte";
   import MediaCard from "../components/MediaCard.svelte";
@@ -27,7 +27,7 @@
   );
 </script>
 
-{#snippet item(media: MediaSummary)}
+{#snippet item(media: MediaEntry)}
   <MediaCard type={media.type} {media}>
     {#snippet action()}
       <RenderFor audience="authenticated">

@@ -1,14 +1,14 @@
 import { type ShowResponse } from '$lib/api.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
 import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { ShowEntry } from '../models/ShowEntry.ts';
 import { mapCover } from './mapCover.ts';
 import { mapPoster } from './mapPoster.ts';
 
 export function mapShowResponseToShowSummary(
   show: ShowResponse,
-): ShowSummary {
+): ShowEntry {
   const poster = mapPoster(show.images);
   const cover = mapCover(show.images);
 

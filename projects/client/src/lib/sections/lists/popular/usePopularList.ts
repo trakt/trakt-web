@@ -1,17 +1,16 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
-import type { Paginatable } from '$lib/models/Paginatable';
-import { type MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { type MovieEntry } from '$lib/requests/models/MovieEntry';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
 import {
   type PopularShow,
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
+import type { MediaType } from '../../../requests/models/MediaType.ts';
 
-export type PopularMediaItem = PopularShow | MovieSummary;
-export type PopularMedia = Array<PopularMediaItem>;
+export type PopularEntry = PopularShow | MovieEntry;
+export type PopularMediaList = Array<PopularEntry>;
 
 type PopularListStoreProps = {
   type: MediaType;
@@ -21,7 +20,7 @@ type PopularListStoreProps = {
 
 function typeToQuery(
   { type, limit, page }: PopularListStoreProps,
-): CreateQueryOptions<Paginatable<PopularMediaItem>> {
+) {
   const params = {
     limit,
     page,

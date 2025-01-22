@@ -3,8 +3,9 @@ import type {
   AvailableLanguage,
   AvailableRegion,
 } from '$lib/features/i18n/index.ts';
-import type { MediaIntl } from '$lib/models/MediaIntl.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { type MediaIntl, MediaIntlSchema } from '../../models/MediaIntl.ts';
 
 type MovieIntlParams = {
   slug: string;
@@ -12,18 +13,22 @@ type MovieIntlParams = {
   region: AvailableRegion;
 } & ApiParams;
 
-export function mapResponseToMovieIntl(
-  translation: MovieTranslationResponse[0],
-): MediaIntl {
+function mapMovieIntlResponse(
+  translation?: MovieTranslationResponse[0],
+): MediaIntl | undefined {
+  if (!translation) {
+    return undefined;
+  }
+
   return {
     ...translation,
   };
 }
 
-export function movieIntlRequest(
-  { fetch, slug, language, region }: MovieIntlParams,
-): Promise<MediaIntl | Nil> {
-  return api({ fetch })
+const movieIntlRequest = (
+  { fetch, slug, language }: MovieIntlParams,
+) =>
+  api({ fetch })
     .movies
     .translations({
       params: {
@@ -31,29 +36,30 @@ export function movieIntlRequest(
         language,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch movie intl');
       }
 
-      const translation = body.find((translation) =>
+      return response.body;
+    });
+
+export const movieIntlQuery = await defineQuery({
+  key: 'movieIntl',
+  invalidations: [],
+  dependencies: (params) => [
+    params.slug,
+    params.language,
+    params.region,
+  ],
+  request: movieIntlRequest,
+  mapper: (body, { language, region }) =>
+    body
+      .filter((translation) =>
         translation.language === language &&
         translation.country === region
-      );
-
-      return translation
-        ? mapResponseToMovieIntl(
-          translation,
-        )
-        : undefined;
-    });
-}
-
-export const movieIntlQueryKey = (params: MovieIntlParams) =>
-  ['movieIntl', params.slug, params.language, params.region] as const;
-export const movieIntlQuery = (
-  params: MovieIntlParams,
-) => ({
-  queryKey: movieIntlQueryKey(params),
-  queryFn: () => movieIntlRequest(params),
+      )
+      .map(mapMovieIntlResponse)
+      .at(0),
+  schema: MediaIntlSchema.optional(),
 });

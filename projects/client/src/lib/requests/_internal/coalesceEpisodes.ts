@@ -1,4 +1,4 @@
-import { EpisodeComputedType } from '$lib/models/EpisodeType.ts';
+import { EpisodeComputedType } from '../models/EpisodeType.ts';
 import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery.ts';
 
 export function coalesceEpisodes(episodes: UpcomingEpisodeEntry[]) {
@@ -34,7 +34,7 @@ export function coalesceEpisodes(episodes: UpcomingEpisodeEntry[]) {
     if (hasSeasonPremiere && hasSeasonFinale) {
       return [{
         ...episodes[0],
-        type: EpisodeComputedType.FullSeason,
+        type: EpisodeComputedType.full_season,
         season,
         show,
       }];

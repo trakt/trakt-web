@@ -1,4 +1,4 @@
-import type { MediaIntl } from '$lib/models/MediaIntl';
+import type { MediaIntl } from '$lib/requests/models/MediaIntl';
 
 export const ShowSiloJapaneseMappedMock: MediaIntl = {
   'overview':

@@ -1,9 +1,9 @@
-import type { EpisodeEntry } from '$lib/models/EpisodeEntry';
-import { EpisodePremiereType } from '$lib/models/EpisodeType';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
+import { EpisodePremiereType } from '$lib/requests/models/EpisodeType';
 
 export const EpisodeSiloMappedMock: EpisodeEntry = {
   'id': 5165667,
-  'type': EpisodePremiereType.Series,
+  'type': EpisodePremiereType.series_premiere,
   'title': 'Freedom Day',
   'overview':
     "Sheriff Becker's plans for the future are thrown off course after his wife meets a hacker with information about the silo.",

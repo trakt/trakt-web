@@ -1,8 +1,8 @@
 import type { EpisodeCount } from '$lib/requests/models/EpisodeCount';
-import type { MovieSummary } from '$lib/requests/models/MovieSummary';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry';
 
-export type MediaInputDefault = MovieSummary | (ShowSummary & EpisodeCount);
+export type MediaInputDefault = MovieEntry | (ShowEntry & EpisodeCount);
 export type MediaInput<T = MediaInputDefault> = {
   media: T;
 };

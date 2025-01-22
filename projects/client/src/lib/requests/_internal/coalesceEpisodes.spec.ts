@@ -1,4 +1,4 @@
-import { EpisodeComputedType } from '$lib/models/EpisodeType';
+import { EpisodeComputedType } from '$lib/requests/models/EpisodeType';
 import { describe, expect, it } from 'vitest';
 import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery';
 import { coalesceEpisodes } from './coalesceEpisodes';
@@ -28,7 +28,7 @@ describe('coalesceEpisodes', () => {
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
       ...episodes[0],
-      type: EpisodeComputedType.FullSeason,
+      type: EpisodeComputedType.full_season,
       season: 1,
       show,
     });
@@ -196,13 +196,13 @@ describe('coalesceEpisodes', () => {
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
       ...episodes[0],
-      type: EpisodeComputedType.FullSeason,
+      type: EpisodeComputedType.full_season,
       season: 1,
       show: show1,
     });
     expect(result[1]).toEqual({
       ...episodes[1],
-      type: EpisodeComputedType.FullSeason,
+      type: EpisodeComputedType.full_season,
       season: 1,
       show: show2,
     });

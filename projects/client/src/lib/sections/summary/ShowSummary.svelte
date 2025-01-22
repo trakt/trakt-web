@@ -2,11 +2,11 @@
   import * as m from "$lib/features/i18n/messages";
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaStats } from "$lib/models/MediaStats";
-  import type { MediaStudio } from "$lib/models/MediaStudio";
-  import type { Season } from "$lib/models/Season";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import type { ShowSummary } from "$lib/requests/models/ShowSummary";
+  import type { MediaStats } from "$lib/requests/models/MediaStats";
+  import type { MediaStudio } from "$lib/requests/models/MediaStudio";
+  import type { Season } from "$lib/requests/models/Season";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import NextEpisodeCard from "$lib/sections/lists/components/NextEpisodeCard.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
   import CastList from "../lists/CastList.svelte";
@@ -15,7 +15,7 @@
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
 
-  type ShowSummaryProps = MediaSummaryProps<ShowSummary> & {
+  type ShowSummaryProps = MediaSummaryProps<ShowEntry> & {
     stats: MediaStats;
     studios: MediaStudio[];
     crew: MediaCrew;

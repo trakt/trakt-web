@@ -1,49 +1,46 @@
-import type { ShowAnticipatedResponse, ShowResponse } from '$lib/api.ts';
-import type { Paginatable } from '$lib/models/Paginatable.ts';
+import type { ShowAnticipatedResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
-import { type ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
-export type AnticipatedShow =
-  & {
-    score: number;
-  }
-  & ShowSummary
-  & Partial<EpisodeCount>;
+export const AnticipatedShowSchema = ShowEntrySchema
+  .merge(EpisodeCountSchema.partial())
+  .extend({
+    score: z.number(),
+  });
+export type AnticipatedShow = z.infer<typeof AnticipatedShowSchema>;
 
 type ShowAnticipatedParams = {
   page?: number;
   limit?: number;
 } & ApiParams;
 
-function mapShowResponseToEpisodeCount(show: ShowResponse) {
-  const { aired_episodes } = show;
-
-  if (!aired_episodes || aired_episodes === 0) {
-    return {};
-  }
-
-  return { episode: { count: aired_episodes } };
-}
-
-export function mapResponseToAnticipatedShow({
+function mapResponseToAnticipatedShow({
   list_count,
   show,
 }: ShowAnticipatedResponse): AnticipatedShow {
+  const { aired_episodes } = show;
+  const episodeCount = aired_episodes && aired_episodes > 0
+    ? { episode: { count: aired_episodes } }
+    : {};
+
   return {
     score: list_count,
     ...mapShowResponseToShowSummary(show),
-    ...mapShowResponseToEpisodeCount(show),
+    ...episodeCount,
   };
 }
 
-function showAnticipatedRequest(
-  { fetch, page = 1, limit = DEFAULT_PAGE_SIZE }: ShowAnticipatedParams,
-): Promise<Paginatable<AnticipatedShow>> {
-  return api({ fetch })
+const showAnticipatedRequest = (
+  { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: ShowAnticipatedParams,
+) =>
+  api({ fetch })
     .shows
     .anticipated({
       query: {
@@ -52,23 +49,22 @@ function showAnticipatedRequest(
         limit,
       },
     })
-    .then(({ status, body, headers }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch anticipated shows');
       }
 
-      return {
-        entries: body.map(mapResponseToAnticipatedShow),
-        page: extractPageMeta(headers),
-      };
+      return response;
     });
-}
 
-const showAnticipatedQueryKey = (params: ShowAnticipatedParams) =>
-  ['showAnticipated', params.limit, params.page] as const;
-export const showAnticipatedQuery = (
-  params: ShowAnticipatedParams = {},
-) => ({
-  queryKey: showAnticipatedQueryKey(params),
-  queryFn: () => showAnticipatedRequest(params),
+export const showAnticipatedQuery = await defineQuery({
+  key: 'showAnticipated',
+  invalidations: [],
+  dependencies: (params) => [params.limit, params.page],
+  request: showAnticipatedRequest,
+  mapper: (response) => ({
+    entries: response.body.map(mapResponseToAnticipatedShow),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(AnticipatedShowSchema),
 });

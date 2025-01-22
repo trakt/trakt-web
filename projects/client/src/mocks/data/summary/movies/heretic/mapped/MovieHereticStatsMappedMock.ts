@@ -1,4 +1,4 @@
-import type { MediaStats } from '$lib/models/MediaStats';
+import type { MediaStats } from '$lib/requests/models/MediaStats';
 
 export const MovieHereticStatsMappedMock: MediaStats = {
   'watchers': 23206,

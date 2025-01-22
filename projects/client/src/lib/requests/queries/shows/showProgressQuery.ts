@@ -1,49 +1,22 @@
 import type { ShowProgressResponse } from '$lib/api.ts';
-import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/_internal/api';
+import {
+  type EpisodeProgressEntry,
+  EpisodeProgressEntrySchema,
+} from '$lib/requests/models/EpisodeProgressEntry';
 import {
   type EpisodeType,
   EpisodeUnknownType,
-} from '$lib/models/EpisodeType.ts';
+} from '$lib/requests/models/EpisodeType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 
-type ShowProgressParams = { slug: string } & ApiParams;
-
-export function mapResponseToShowProgress(
-  item: ShowProgressResponse,
-): EpisodeProgressEntry {
-  const episode = item.next_episode;
-
-  const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
-
-  return {
-    id: episode.ids.trakt,
-    title: episode.title,
-    season: episode.season,
-    number: episode.number,
-    runtime: episode.runtime,
-    cover: {
-      url: prependHttps(posterCandidate),
-    },
-    airDate: new Date(episode.first_aired),
-    total: item.aired,
-    completed: item.completed,
-    remaining: item.aired - item.completed,
-    minutesLeft: item.stats?.minutes_left ?? 0,
-    type: episode.episode_type as EpisodeType ??
-      EpisodeUnknownType.Unknown,
-    genres: [],
-    overview: episode.overview,
-    year: new Date(episode.first_aired).getFullYear(),
-  };
-}
-
-export function showProgressRequest(
-  { fetch, slug }: ShowProgressParams,
-): Promise<EpisodeProgressEntry> {
-  return api({ fetch })
+const showProgressRequest = (
+  { fetch, slug }: { slug: string } & ApiParams,
+) =>
+  api({ fetch })
     .shows
     .progress
     .watched({
@@ -62,20 +35,45 @@ export function showProgressRequest(
       if (status !== 200) {
         throw new Error('Failed to fetch show progress');
       }
-      return mapResponseToShowProgress(body);
+
+      return body;
     });
+
+function mapShowProgressResponse(
+  item: ShowProgressResponse,
+): EpisodeProgressEntry {
+  const episode = item.next_episode;
+  const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
+
+  return {
+    id: episode.ids.trakt,
+    title: episode.title,
+    season: episode.season,
+    number: episode.number,
+    runtime: episode.runtime,
+    cover: {
+      url: prependHttps(posterCandidate),
+    },
+    airDate: new Date(episode.first_aired),
+    total: item.aired,
+    completed: item.completed,
+    remaining: item.aired - item.completed,
+    minutesLeft: item.stats?.minutes_left ?? 0,
+    type: episode.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
+    genres: [],
+    overview: episode.overview,
+    year: new Date(episode.first_aired).getFullYear(),
+  };
 }
 
-export const showProgressQueryKey = (id: string) =>
-  [
-    'showProgress',
-    id,
+export const showProgressQuery = await defineQuery({
+  key: 'showProgress',
+  invalidations: [
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),
-  ] as const;
-export const showProgressQuery = (
-  params: ShowProgressParams,
-) => ({
-  queryKey: showProgressQueryKey(params.slug),
-  queryFn: () => showProgressRequest(params),
+  ],
+  dependencies: (params) => [params.slug],
+  request: showProgressRequest,
+  mapper: mapShowProgressResponse,
+  schema: EpisodeProgressEntrySchema,
 });

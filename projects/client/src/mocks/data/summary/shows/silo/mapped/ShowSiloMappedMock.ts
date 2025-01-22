@@ -1,6 +1,6 @@
-import type { ShowSummary } from '$lib/requests/models/ShowSummary';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry';
 
-export const ShowSiloMappedMock: ShowSummary = {
+export const ShowSiloMappedMock: ShowEntry = {
   'cover': {
     'url': {
       'medium':

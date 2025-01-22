@@ -1,5 +1,5 @@
 import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput';
-import type { MediaType } from '$lib/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import type { Snippet } from 'svelte';
 import type { MediaStyleProps } from './MediaStyleProps';
 

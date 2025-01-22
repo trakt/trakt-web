@@ -1,15 +1,17 @@
-import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
-import { type MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 type MovieRelatedParams = {
   slug: string;
 } & ApiParams;
 
-function movieRelatedRequest(
+const movieRelatedRequest = (
   { fetch, slug }: MovieRelatedParams,
-): Promise<MovieSummary[]> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .movies
     .related({
       query: {
@@ -19,19 +21,19 @@ function movieRelatedRequest(
         id: slug,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch related movies');
       }
 
-      return body.map(mapMovieResponseToMovieSummary);
+      return response.body;
     });
-}
 
-const movieRelatedQueryKey = (id: string) => ['movieRelated', id] as const;
-export const movieRelatedQuery = (
-  params: MovieRelatedParams,
-) => ({
-  queryKey: movieRelatedQueryKey(params.slug),
-  queryFn: () => movieRelatedRequest(params),
+export const movieRelatedQuery = await defineQuery({
+  key: 'movieRelated',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: movieRelatedRequest,
+  mapper: (response) => response.map(mapMovieResponseToMovieSummary),
+  schema: z.array(MovieEntrySchema),
 });

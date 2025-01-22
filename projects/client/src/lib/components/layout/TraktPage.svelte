@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaType } from "$lib/models/MediaType";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../router/Redirect.svelte";

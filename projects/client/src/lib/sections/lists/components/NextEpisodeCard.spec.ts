@@ -1,15 +1,15 @@
 import NextEpisodeCard from './NextEpisodeCard.svelte';
 
 import { EpisodeIntlProvider } from '$lib/components/episode/EpisodeIntlProvider.ts';
-import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry.ts';
+import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import {
   EpisodeFinaleType,
   EpisodePremiereType,
   EpisodeStandardType,
-} from '$lib/models/EpisodeType.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+} from '$lib/requests/models/EpisodeType.ts';
 import { fireEvent, render, screen, waitFor } from '@testing-library/svelte';
 import { beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
+import type { ShowEntry } from '../../../requests/models/ShowEntry.ts';
 
 import { writable } from 'svelte/store';
 import { useMarkAsWatched } from '../../media-actions/mark-as-watched/useMarkAsWatched.ts';
@@ -29,11 +29,11 @@ describe('NextEpisodeCard', () => {
       total: 20,
       remaining: 20,
       minutesLeft: 77,
-      type: EpisodeStandardType.Standard,
-    } as EpisodeProgressEntry,
+      type: EpisodeStandardType.standard,
+    } as unknown as EpisodeProgressEntry,
     show: {
       title: 'The Eminem Show',
-    } as ShowSummary,
+    } as ShowEntry,
   };
 
   const markAsWatchedSpy = vi.fn();
@@ -98,7 +98,7 @@ describe('NextEpisodeCard', () => {
   });
 
   test('it renders the season finale tag', () => {
-    const episodeType = { type: EpisodeFinaleType.Season };
+    const episodeType = { type: EpisodeFinaleType.season_finale };
 
     render(
       NextEpisodeCard,
@@ -120,7 +120,7 @@ describe('NextEpisodeCard', () => {
   });
 
   test('it renders the series finale tag', () => {
-    const episodeType = { type: EpisodeFinaleType.Series };
+    const episodeType = { type: EpisodeFinaleType.series_finale };
 
     render(
       NextEpisodeCard,
@@ -142,7 +142,7 @@ describe('NextEpisodeCard', () => {
   });
 
   test('it renders the mid season finale tag', () => {
-    const episodeType = { type: EpisodeFinaleType.MidSeason };
+    const episodeType = { type: EpisodeFinaleType.mid_season_finale };
 
     render(
       NextEpisodeCard,
@@ -164,7 +164,7 @@ describe('NextEpisodeCard', () => {
   });
 
   test('it renders the season premiere tag', () => {
-    const episodeType = { type: EpisodePremiereType.Season };
+    const episodeType = { type: EpisodePremiereType.season_premiere };
 
     render(
       NextEpisodeCard,
@@ -186,7 +186,7 @@ describe('NextEpisodeCard', () => {
   });
 
   test('it renders the series premiere tag', () => {
-    const episodeType = { type: EpisodePremiereType.Series };
+    const episodeType = { type: EpisodePremiereType.series_premiere };
 
     render(
       NextEpisodeCard,
@@ -208,7 +208,7 @@ describe('NextEpisodeCard', () => {
   });
 
   test('it renders the mid season premiere tag', () => {
-    const episodeType = { type: EpisodePremiereType.MidSeason };
+    const episodeType = { type: EpisodePremiereType.mid_season_premiere };
 
     render(
       NextEpisodeCard,

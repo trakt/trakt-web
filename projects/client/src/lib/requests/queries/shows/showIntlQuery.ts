@@ -3,8 +3,9 @@ import type {
   AvailableLanguage,
   AvailableRegion,
 } from '$lib/features/i18n/index.ts';
-import type { MediaIntl } from '$lib/models/MediaIntl.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { type MediaIntl, MediaIntlSchema } from '../../models/MediaIntl.ts';
 
 type ShowIntlParams = {
   slug: string;
@@ -12,18 +13,22 @@ type ShowIntlParams = {
   region: AvailableRegion;
 } & ApiParams;
 
-export function mapResponseToShowIntl(
-  translation: ShowTranslationResponse[0],
-): MediaIntl {
+function mapShowIntlResponse(
+  translation?: ShowTranslationResponse[0],
+): MediaIntl | undefined {
+  if (!translation) {
+    return undefined;
+  }
+
   return {
     ...translation,
   };
 }
 
-export function showIntlRequest(
-  { fetch, slug, language, region }: ShowIntlParams,
-): Promise<MediaIntl | Nil> {
-  return api({ fetch })
+const showIntlRequest = (
+  { fetch, slug, language }: ShowIntlParams,
+) =>
+  api({ fetch })
     .shows
     .translations({
       params: {
@@ -31,29 +36,30 @@ export function showIntlRequest(
         language,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch show intl');
       }
 
-      const translation = body.find((translation) =>
+      return response.body;
+    });
+
+export const showIntlQuery = await defineQuery({
+  key: 'showIntl',
+  invalidations: [],
+  dependencies: (params) => [
+    params.slug,
+    params.language,
+    params.region,
+  ],
+  request: showIntlRequest,
+  mapper: (body, { language, region }) =>
+    body
+      .filter((translation) =>
         translation.language === language &&
         translation.country === region
-      );
-
-      return translation
-        ? mapResponseToShowIntl(
-          translation,
-        )
-        : undefined;
-    });
-}
-
-export const showIntlQueryKey = (params: ShowIntlParams) =>
-  ['showIntl', params.slug, params.language, params.region] as const;
-export const showIntlQuery = (
-  params: ShowIntlParams,
-) => ({
-  queryKey: showIntlQueryKey(params),
-  queryFn: () => showIntlRequest(params),
+      )
+      .map(mapShowIntlResponse)
+      .at(0),
+  schema: MediaIntlSchema.optional(),
 });

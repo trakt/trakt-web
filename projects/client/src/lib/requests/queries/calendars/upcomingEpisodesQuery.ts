@@ -1,9 +1,9 @@
-import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
 import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import type { EpisodeEntry } from '../../models/EpisodeEntry.ts';
 
 export type CalendarShowsParams = {
   startDate: string;
@@ -11,7 +11,7 @@ export type CalendarShowsParams = {
 } & ApiParams;
 
 export type UpcomingEpisodeEntry = EpisodeEntry & {
-  show: ShowSummary;
+  show: ShowEntry;
 };
 
 function upcomingEpisodesRequest({

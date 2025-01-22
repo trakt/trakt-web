@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { AbortError, abortRequest } from '$lib/api.ts';
-import type { MediaSummary } from '$lib/requests/models/MediaSummary';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry';
 import {
   searchCancellationId,
   searchQuery,
@@ -14,12 +14,12 @@ import { derived, get, writable } from 'svelte/store';
 
 export function useSearch() {
   type SearchResponse = {
-    items: MediaSummary[];
+    items: MediaEntry[];
     reason: 'initial' | 'result' | 'cancelled';
   };
 
   const results = writable<SearchResponse>({
-    items: [] as MediaSummary[],
+    items: [] as MediaEntry[],
     reason: 'initial',
   });
   const client = browser ? useQueryClient() : undefined;

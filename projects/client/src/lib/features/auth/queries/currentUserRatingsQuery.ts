@@ -10,9 +10,9 @@ export const RatedMediaSchema = z.object({
   ratedAt: z.date(),
   id: z.number(),
 });
-export type RatedMedia = z.infer<typeof RatedMediaSchema>;
+export type RatedEntry = z.infer<typeof RatedMediaSchema>;
 
-function mapRatedMovieResponse(entry: RatedMoviesResponse): RatedMedia {
+function mapRatedMovieResponse(entry: RatedMoviesResponse): RatedEntry {
   return {
     id: entry.movie.ids.trakt,
     rating: entry.rating,
@@ -35,7 +35,7 @@ const currentUserRatedMoviesRequest = ({ fetch }: ApiParams) =>
       return response.body;
     });
 
-function mapRatedEpisodeResponse(entry: RatedEpisodesResponse): RatedMedia {
+function mapRatedEpisodeResponse(entry: RatedEpisodesResponse): RatedEntry {
   return {
     id: entry.episode.ids.trakt,
     rating: entry.rating,

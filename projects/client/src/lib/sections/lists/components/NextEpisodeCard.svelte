@@ -5,8 +5,8 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import type { EpisodeProgressEntry } from "$lib/models/EpisodeProgressEntry";
-  import type { ShowSummary } from "$lib/requests/models/ShowSummary";
+  import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -14,7 +14,7 @@
 
   type UpNextItemProps = {
     episode: EpisodeProgressEntry;
-    show: ShowSummary;
+    show: ShowEntry;
   };
 
   const { episode, show }: UpNextItemProps = $props();

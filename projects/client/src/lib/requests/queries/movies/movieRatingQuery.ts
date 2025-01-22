@@ -1,13 +1,14 @@
-import type { MediaRating } from '$lib/models/MediaRating.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { MediaRatingSchema } from '$lib/requests/models/MediaRating.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapRatingResponseToMediaRating } from '../../_internal/mapRatingResponseToMediaRating.ts';
 
 type MovieRatingParams = { slug: string } & ApiParams;
 
-export function movieRatingRequest(
+const movieRatingRequest = (
   { fetch, slug }: MovieRatingParams,
-): Promise<MediaRating> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .movies
     .ratings({
       params: {
@@ -17,19 +18,19 @@ export function movieRatingRequest(
         extended: 'all',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch movie rating');
       }
 
-      return mapRatingResponseToMediaRating(body);
+      return response.body;
     });
-}
 
-export const movieRatingQueryKey = (id: string) => ['movieRating', id] as const;
-export const movieRatingQuery = (
-  params: MovieRatingParams,
-) => ({
-  queryKey: movieRatingQueryKey(params.slug),
-  queryFn: () => movieRatingRequest(params),
+export const movieRatingQuery = await defineQuery({
+  key: 'movieRating',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: movieRatingRequest,
+  mapper: mapRatingResponseToMediaRating,
+  schema: MediaRatingSchema,
 });

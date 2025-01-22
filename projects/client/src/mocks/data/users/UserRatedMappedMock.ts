@@ -1,8 +1,8 @@
-import type { RatedMedia } from '$lib/features/auth/queries/currentUserRatingsQuery';
+import type { RatedEntry } from '$lib/features/auth/queries/currentUserRatingsQuery';
 
 export const UserRatedMappedMock: {
-  movies: Map<number, RatedMedia>;
-  episodes: Map<number, RatedMedia>;
+  movies: Map<number, RatedEntry>;
+  episodes: Map<number, RatedEntry>;
 } = {
   movies: new Map([
     [916302, {

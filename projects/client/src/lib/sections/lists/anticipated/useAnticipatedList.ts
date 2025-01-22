@@ -1,16 +1,15 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
-import type { Paginatable } from '$lib/models/Paginatable';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import {
   type AnticipatedMovie,
   movieAnticipatedQuery,
 } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
 import { showAnticipatedQuery } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
-export type AnticipatedMediaItem = AnticipatedMovie;
-export type AnticipatedMedia = Array<AnticipatedMediaItem>;
+export type AnticipatedEntry = AnticipatedMovie;
+export type AnticipatedMediaList = Array<AnticipatedEntry>;
 
 type AnticipatedListStoreProps = {
   type: MediaType;
@@ -20,7 +19,7 @@ type AnticipatedListStoreProps = {
 
 function typeToQuery(
   { type, limit, page }: AnticipatedListStoreProps,
-): CreateQueryOptions<Paginatable<AnticipatedMediaItem>> {
+) {
   const params = {
     limit,
     page,

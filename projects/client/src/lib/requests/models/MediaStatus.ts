@@ -1,3 +1,5 @@
-import type { StatusResponse } from '@trakt/api';
+import { mediaStatusSchema } from '@trakt/api';
+import { z } from 'zod';
 
-export type MediaStatus = StatusResponse | 'unknown';
+export const MediaStatusSchema = mediaStatusSchema.or(z.literal('unknown'));
+export type MediaStatus = z.infer<typeof MediaStatusSchema> | 'unknown';

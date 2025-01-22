@@ -1,23 +1,24 @@
 import type { MovieAnticipatedResponse } from '$lib/api.ts';
-import type { Paginatable } from '$lib/models/Paginatable.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import {
-  mapMovieResponseToMovieSummary,
-} from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
-export type AnticipatedMovie = MovieSummary & {
-  score: number;
-};
+export const AnticipatedMovieSchema = MovieEntrySchema.extend({
+  score: z.number(),
+});
+export type AnticipatedMovie = z.infer<typeof AnticipatedMovieSchema>;
 
 type MovieAnticipatedParams = {
   page?: number;
   limit?: number;
 } & ApiParams;
 
-export function mapResponseToAnticipatedMovie({
+function mapResponseToAnticipatedMovie({
   list_count,
   movie,
 }: MovieAnticipatedResponse): AnticipatedMovie {
@@ -27,10 +28,10 @@ export function mapResponseToAnticipatedMovie({
   };
 }
 
-function movieAnticipatedRequest(
+const movieAnticipatedRequest = (
   { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: MovieAnticipatedParams,
-): Promise<Paginatable<AnticipatedMovie>> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .movies
     .anticipated({
       query: {
@@ -39,23 +40,22 @@ function movieAnticipatedRequest(
         limit,
       },
     })
-    .then(({ status, body, headers }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch anticipated movies');
       }
 
-      return {
-        entries: body.map(mapResponseToAnticipatedMovie),
-        page: extractPageMeta(headers),
-      };
+      return response;
     });
-}
 
-const movieAnticipatedQueryKey = (params: MovieAnticipatedParams) =>
-  ['movieAnticipated', params.limit, params.page] as const;
-export const movieAnticipatedQuery = (
-  params: MovieAnticipatedParams = {},
-) => ({
-  queryKey: movieAnticipatedQueryKey(params),
-  queryFn: () => movieAnticipatedRequest(params),
+export const movieAnticipatedQuery = await defineQuery({
+  key: 'movieAnticipated',
+  invalidations: [],
+  dependencies: (params) => [params.limit, params.page],
+  request: movieAnticipatedRequest,
+  mapper: (response) => ({
+    entries: response.body.map(mapResponseToAnticipatedMovie),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(AnticipatedMovieSchema),
 });

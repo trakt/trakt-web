@@ -1,13 +1,17 @@
-import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '../../_internal/mapEpisodeResponseToEpisodeEntry.ts';
 
-type ShowSeasonEpisodeQuery = { slug: string; season: number } & ApiParams;
+type ShowSeasonEpisodeParams = {
+  slug: string;
+  season: number;
+} & ApiParams;
 
-function showSeasonEpisodesRequest(
-  { fetch, slug, season }: ShowSeasonEpisodeQuery,
-): Promise<EpisodeEntry[]> {
-  return api({ fetch })
+const showSeasonEpisodesRequest = (
+  { fetch, slug, season }: ShowSeasonEpisodeParams,
+) =>
+  api({ fetch })
     .shows
     .episodes({
       params: {
@@ -18,20 +22,19 @@ function showSeasonEpisodesRequest(
         extended: 'full,cloud9',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch up season episodes');
       }
 
-      return body.map(mapEpisodeResponseToEpisodeEntry);
+      return response.body;
     });
-}
 
-export const showSeasonEpisodesQueryKey = (params: ShowSeasonEpisodeQuery) =>
-  ['showSeasonEpisodes', params.slug, params.season] as const;
-export const showSeasonEpisodesQuery = (
-  params: ShowSeasonEpisodeQuery,
-) => ({
-  queryKey: showSeasonEpisodesQueryKey(params),
-  queryFn: () => showSeasonEpisodesRequest(params),
+export const showSeasonEpisodesQuery = await defineQuery({
+  key: 'showSeasonEpisodes',
+  invalidations: [],
+  dependencies: (params) => [params.slug, params.season],
+  request: showSeasonEpisodesRequest,
+  mapper: (body) => body.map(mapEpisodeResponseToEpisodeEntry),
+  schema: EpisodeEntrySchema.array(),
 });

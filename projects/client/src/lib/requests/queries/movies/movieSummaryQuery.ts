@@ -1,15 +1,14 @@
-import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import {
-  mapMovieResponseToMovieSummary,
-} from '../../_internal/mapMovieResponseToMovieSummary.ts';
 
 type MovieSummaryParams = { slug: string } & ApiParams;
 
-function movieSummaryRequest(
+const movieSummaryRequest = (
   { fetch, slug }: MovieSummaryParams,
-): Promise<MovieSummary> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .movies
     .summary({
       params: {
@@ -19,20 +18,19 @@ function movieSummaryRequest(
         extended: 'full,cloud9',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch movie summary');
       }
 
-      return mapMovieResponseToMovieSummary(body);
+      return response.body;
     });
-}
 
-export const movieSummaryQueryKey = (id: string) =>
-  ['movieSummary', id] as const;
-export const movieSummaryQuery = (
-  params: MovieSummaryParams,
-) => ({
-  queryKey: movieSummaryQueryKey(params.slug),
-  queryFn: () => movieSummaryRequest(params),
+export const movieSummaryQuery = await defineQuery({
+  key: 'movieSummary',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: movieSummaryRequest,
+  mapper: mapMovieResponseToMovieSummary,
+  schema: MediaEntrySchema,
 });

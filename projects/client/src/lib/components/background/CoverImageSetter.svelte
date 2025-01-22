@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MediaType } from "$lib/models/MediaType";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import { useCover } from "./_internal/useCover";
 
   type ImageBackgroundProps = {

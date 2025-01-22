@@ -1,6 +1,6 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import type { MediaType } from "$lib/models/MediaType";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import MediaCard from "../components/MediaCard.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import { useWatchlistList } from "./useWatchlistList";

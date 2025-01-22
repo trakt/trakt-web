@@ -1,5 +1,5 @@
 import type { MovieStatsResponse, ShowStatsResponse } from '$lib/api.ts';
-import type { MediaStats } from '$lib/models/MediaStats.ts';
+import type { MediaStats } from '../models/MediaStats.ts';
 
 export function mapStatsResponseToMediaStats(
   stats: MovieStatsResponse | ShowStatsResponse,

@@ -1,5 +1,5 @@
 import type { MovieRatingsResponse, ShowRatingsResponse } from '$lib/api.ts';
-import type { MediaRating } from '$lib/models/MediaRating.ts';
+import type { MediaRating } from '../models/MediaRating.ts';
 
 type RatingResponse = MovieRatingsResponse | ShowRatingsResponse;
 

@@ -5,8 +5,8 @@
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { Season } from "$lib/models/Season";
-  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { Season } from "$lib/requests/models/Season";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { writable } from "svelte/store";
   import EpisodeCard from "./components/EpisodeCard.svelte";
@@ -15,7 +15,7 @@
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type SeasonListProps = {
-    show: MediaSummary;
+    show: MediaEntry;
     seasons: Season[];
   };
 

@@ -8,15 +8,15 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { EpisodeEntry } from "$lib/models/EpisodeEntry";
-  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
+  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   type EpisodeProps = {
     episode: EpisodeEntry;
-    show: MediaSummary;
+    show: MediaEntry;
     context?: "show" | "standalone";
   };
 

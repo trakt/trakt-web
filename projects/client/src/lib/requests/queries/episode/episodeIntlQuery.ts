@@ -3,9 +3,12 @@ import type {
   AvailableLanguage,
   AvailableRegion,
 } from '$lib/features/i18n/index.ts';
-import type { EpisodeIntl } from '$lib/models/EpisodeIntl.ts';
-import type { MediaIntl } from '$lib/models/MediaIntl.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import {
+  type EpisodeIntl,
+  EpisodeIntlSchema,
+} from '../../models/EpisodeIntl.ts';
 
 type EpisodeIntlParams = {
   slug: string;
@@ -15,19 +18,23 @@ type EpisodeIntlParams = {
   region: AvailableRegion;
 } & ApiParams;
 
-export function mapResponseToEpisodeIntl(
-  translation: EpisodeTranslationResponse[0],
-): MediaIntl {
+function mapEpisodeIntlResponse(
+  translation?: EpisodeTranslationResponse[0],
+): EpisodeIntl | undefined {
+  if (!translation) {
+    return undefined;
+  }
+
   return {
-    ...translation,
-    tagline: '',
+    title: translation.title,
+    overview: translation.overview,
   };
 }
 
-export function episodeIntlRequest(
-  { fetch, slug, language, region, season, episode }: EpisodeIntlParams,
-): Promise<EpisodeIntl | Nil> {
-  return api({ fetch })
+const episodeIntlRequest = (
+  { fetch, slug, language, season, episode }: EpisodeIntlParams,
+) =>
+  api({ fetch })
     .shows
     .episode
     .translations({
@@ -38,36 +45,32 @@ export function episodeIntlRequest(
         language,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch episode intl');
       }
 
-      const translation = body.find((translation) =>
-        translation.language === language &&
-        translation.country === region
-      );
-
-      return translation
-        ? mapResponseToEpisodeIntl(
-          translation,
-        )
-        : undefined;
+      return response.body;
     });
-}
 
-export const episodeIntlQueryKey = (params: EpisodeIntlParams) =>
-  [
-    'episodeIntl',
+export const episodeIntlQuery = await defineQuery({
+  key: 'episodeIntl',
+  invalidations: [],
+  dependencies: (params) => [
     params.slug,
     params.season,
     params.episode,
     params.language,
     params.region,
-  ] as const;
-export const episodeIntlQuery = (
-  params: EpisodeIntlParams,
-) => ({
-  queryKey: episodeIntlQueryKey(params),
-  queryFn: () => episodeIntlRequest(params),
+  ],
+  request: episodeIntlRequest,
+  mapper: (body, { language, region }) =>
+    body
+      .filter((translation) =>
+        translation.language === language &&
+        translation.country === region
+      )
+      .map(mapEpisodeIntlResponse)
+      .at(0),
+  schema: EpisodeIntlSchema.optional(),
 });

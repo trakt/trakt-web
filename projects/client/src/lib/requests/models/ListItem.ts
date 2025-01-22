@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
+import type { MediaType } from './MediaType.ts';
 
 export type ListItem<TMediaItem> = {
   id: number;

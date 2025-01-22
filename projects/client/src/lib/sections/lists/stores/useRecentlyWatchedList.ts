@@ -1,5 +1,5 @@
-import type { EpisodeEntry } from '$lib/models/EpisodeEntry';
-import type { MediaSummary } from '$lib/requests/models/MediaSummary';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry';
 import { episodeHistoryQuery } from '$lib/requests/queries/users/episodeHistoryQuery';
 import {
   movieHistoryQuery,
@@ -17,14 +17,14 @@ type RecentlyWatchedListStoreProps = {
 
 type WatchedMovie = {
   id: number;
-  movie: MediaSummary;
+  movie: MediaEntry;
   type: 'movie';
 };
 
 type WatchedEpisode = {
   id: number;
   episode: EpisodeEntry;
-  show: MediaSummary;
+  show: MediaEntry;
   type: 'episode';
 };
 

@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
+import type { MediaType } from '$lib/requests/models/MediaType';
 
 export function toWatchlistPayload(
   type: MediaType | 'episode',

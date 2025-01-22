@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MediaType } from "$lib/models/MediaType";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import RecommendedListItem from "./RecommendedListItem.svelte";

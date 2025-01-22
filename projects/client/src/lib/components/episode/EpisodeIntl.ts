@@ -1,7 +1,7 @@
 import {
   EpisodeFinaleType,
   EpisodePremiereType,
-} from '$lib/models/EpisodeType.ts';
+} from '$lib/requests/models/EpisodeType';
 
 export type PremiereMetadata = {
   type: EpisodePremiereType;

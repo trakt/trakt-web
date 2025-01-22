@@ -1,4 +1,4 @@
-import type { PageMeta } from '$lib/models/Paginatable.ts';
+import type { PageMeta } from '../models/Paginatable.ts';
 
 const DEFAULT_PAGE = '0';
 

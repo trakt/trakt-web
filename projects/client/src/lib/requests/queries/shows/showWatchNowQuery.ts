@@ -1,16 +1,17 @@
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNowResponseToWatchNowDetails.ts';
-import type { WatchNowServices } from '../../models/WatchNowServices.ts';
+import { WatchNowServicesSchema } from '../../models/WatchNowServices.ts';
 
 type ShowWatchNowParams = {
   id: number;
   country: string;
 } & ApiParams;
 
-function showWatchNowRequest(
+const showWatchNowRequest = (
   { fetch, id, country }: ShowWatchNowParams,
-): Promise<WatchNowServices> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .shows
     .watchnow({
       params: {
@@ -18,20 +19,20 @@ function showWatchNowRequest(
         country,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch watch now show');
       }
 
-      return mapWatchNowResponseToWatchNowDetails(body, country);
+      return response.body;
     });
-}
 
-const showWatchNowQueryKey = (id: number, country: string) =>
-  ['showWatchNow', id, country] as const;
-export const showWatchNowQuery = (
-  params: ShowWatchNowParams,
-) => ({
-  queryKey: showWatchNowQueryKey(params.id, params.country),
-  queryFn: () => showWatchNowRequest(params),
+export const showWatchNowQuery = await defineQuery({
+  key: 'showWatchNow',
+  invalidations: [],
+  dependencies: (params) => [params.id, params.country],
+  request: showWatchNowRequest,
+  mapper: (response, params) =>
+    mapWatchNowResponseToWatchNowDetails(response, params.country),
+  schema: WatchNowServicesSchema,
 });

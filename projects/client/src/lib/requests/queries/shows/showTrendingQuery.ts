@@ -1,25 +1,27 @@
 import type { ShowTrendingResponse } from '$lib/api.ts';
-import type { Paginatable } from '$lib/models/Paginatable.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
-export type TrendingShow =
-  & {
-    watchers: number;
-  }
-  & ShowSummary
-  & EpisodeCount;
+export const TrendingShowSchema = ShowEntrySchema
+  .merge(EpisodeCountSchema)
+  .extend({
+    watchers: z.number(),
+  });
+export type TrendingShow = z.infer<typeof TrendingShowSchema>;
 
 type ShowTrendingParams = {
   page?: number;
   limit?: number;
 } & ApiParams;
 
-export function mapResponseToTrendingShows({
+function mapResponseToTrendingShow({
   watchers,
   show,
 }: ShowTrendingResponse): TrendingShow {
@@ -32,35 +34,34 @@ export function mapResponseToTrendingShows({
   };
 }
 
-function showTrendingRequest(
-  { fetch, page = 1, limit = DEFAULT_PAGE_SIZE }: ShowTrendingParams,
-): Promise<Paginatable<TrendingShow>> {
-  return api({ fetch })
+const showTrendingRequest = (
+  { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: ShowTrendingParams,
+) =>
+  api({ fetch })
     .shows
     .trending({
       query: {
         extended: 'full,cloud9',
-        limit,
         page,
+        limit,
       },
     })
-    .then(({ status, body, headers }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch trending shows');
       }
 
-      return {
-        entries: body.map(mapResponseToTrendingShows),
-        page: extractPageMeta(headers),
-      };
+      return response;
     });
-}
 
-const showTrendingQueryKey = (params: ShowTrendingParams) =>
-  ['showTrending', params.limit, params.page] as const;
-export const showTrendingQuery = (
-  params: ShowTrendingParams = {},
-) => ({
-  queryKey: showTrendingQueryKey(params),
-  queryFn: () => showTrendingRequest(params),
+export const showTrendingQuery = await defineQuery({
+  key: 'showTrending',
+  invalidations: [],
+  dependencies: (params) => [params.limit, params.page],
+  request: showTrendingRequest,
+  mapper: (response) => ({
+    entries: response.body.map(mapResponseToTrendingShow),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(TrendingShowSchema),
 });

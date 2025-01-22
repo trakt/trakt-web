@@ -1,8 +1,8 @@
 import type { HistoryMoviesResponse } from '$lib/api.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import type { MovieEntry } from '../../models/MovieEntry.ts';
 
 type MovieHistoryParams = {
   startDate: Date;
@@ -13,7 +13,7 @@ type MovieHistoryParams = {
 export type HistoryMovie = {
   id: number;
   watchedAt: Date;
-  movie: MovieSummary;
+  movie: MovieEntry;
 };
 
 export function mapResponseToHistory(

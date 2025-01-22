@@ -1,13 +1,14 @@
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 
 type ShowSummaryParams = { slug: string } & ApiParams;
 
-function showSummaryRequest(
+const showSummaryRequest = (
   { fetch, slug }: ShowSummaryParams,
-): Promise<ShowSummary> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .shows
     .summary({
       params: {
@@ -17,19 +18,19 @@ function showSummaryRequest(
         extended: 'full,cloud9',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch show summary');
       }
 
-      return mapShowResponseToShowSummary(body);
+      return response.body;
     });
-}
 
-export const showSummaryQueryKey = (id: string) => ['showSummary', id] as const;
-export const showSummaryQuery = (
-  params: ShowSummaryParams,
-) => ({
-  queryKey: showSummaryQueryKey(params.slug),
-  queryFn: () => showSummaryRequest(params),
+export const showSummaryQuery = await defineQuery({
+  key: 'showSummary',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: showSummaryRequest,
+  mapper: mapShowResponseToShowSummary,
+  schema: MediaEntrySchema,
 });

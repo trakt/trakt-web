@@ -2,7 +2,7 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import type {
     WatchNowOnDemand,
-    WatchNowService,
+    WatchNowStreaming,
   } from "$lib/requests/models/WatchNowServices";
   import { useWatchNowSources } from "$lib/stores/useWatchNowSources";
   import type { WatchNowButtonIntl } from "../WatchNowButtonIntl";
@@ -10,7 +10,7 @@
   import WatchNowServiceLogo from "./WatchNowServiceLogo.svelte";
 
   type WatchNowDropdownItemProps = {
-    service: WatchNowService | WatchNowOnDemand;
+    service: WatchNowStreaming | WatchNowOnDemand;
     i18n: WatchNowButtonIntl;
   };
 

@@ -1,32 +1,35 @@
-import type { MediaStudio } from '$lib/models/MediaStudio.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { MediaStudioSchema } from '$lib/requests/models/MediaStudio.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapStudioResponseToMediaStudio } from '../../_internal/mapStudioResponseToMediaStudio.ts';
 
-type ShowStudiosQuery = { slug: string } & ApiParams;
+type ShowStudiosParams = {
+  slug: string;
+} & ApiParams;
 
-export function showStudiosRequest(
-  { fetch, slug }: ShowStudiosQuery,
-): Promise<MediaStudio[]> {
-  return api({ fetch })
+const showStudiosRequest = (
+  { fetch, slug }: ShowStudiosParams,
+) =>
+  api({ fetch })
     .shows
     .studios({
       params: {
         id: slug,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch show studios');
       }
 
-      return body.map(mapStudioResponseToMediaStudio);
+      return response.body;
     });
-}
 
-export const showStudiosQueryKey = (id: string) => ['showStudios', id] as const;
-export const showStudiosQuery = (
-  params: ShowStudiosQuery,
-) => ({
-  queryKey: showStudiosQueryKey(params.slug),
-  queryFn: () => showStudiosRequest(params),
+export const showStudiosQuery = await defineQuery({
+  key: 'showStudios',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: showStudiosRequest,
+  mapper: (body) => body.map(mapStudioResponseToMediaStudio),
+  schema: MediaStudioSchema.array(),
 });

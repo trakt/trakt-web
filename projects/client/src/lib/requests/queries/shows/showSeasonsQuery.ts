@@ -1,23 +1,17 @@
 import type { SeasonsResponse } from '$lib/api.ts';
-import type { Season } from '$lib/models/Season.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { type Season, SeasonSchema } from '../../models/Season.ts';
 
-type ShowSeasonsQuery = { slug: string } & ApiParams;
+type ShowSeasonsParams = {
+  slug: string;
+} & ApiParams;
 
-function mapSeasonResponseToSeason(item: SeasonsResponse[0]): Season {
-  return {
-    id: item.ids.trakt,
-    number: item.number,
-    episodes: {
-      count: item.episode_count ?? 0,
-    },
-  };
-}
-
-function showSeasonsRequest(
-  { fetch, slug }: ShowSeasonsQuery,
-): Promise<Season[]> {
-  return api({ fetch })
+const showSeasonsRequest = (
+  { fetch, slug }: ShowSeasonsParams,
+) =>
+  api({ fetch })
     .shows
     .seasons({
       params: {
@@ -27,20 +21,30 @@ function showSeasonsRequest(
         extended: 'full',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
-        throw new Error('Failed to fetch up seasons');
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error('Failed to fetch seasons');
       }
 
-      return body.map(mapSeasonResponseToSeason)
-        .filter((season) => season.episodes.count > 0 && season.number !== 0);
+      return response.body;
     });
-}
 
-export const showSeasonsQueryKey = (id: string) => ['showSeasons', id] as const;
-export const showSeasonsQuery = (
-  params: ShowSeasonsQuery,
-) => ({
-  queryKey: showSeasonsQueryKey(params.slug),
-  queryFn: () => showSeasonsRequest(params),
+const mapSeasonResponseToSeason = (item: SeasonsResponse[0]): Season => ({
+  id: item.ids.trakt,
+  number: item.number,
+  episodes: {
+    count: item.episode_count ?? 0,
+  },
+});
+
+export const showSeasonsQuery = await defineQuery({
+  key: 'showSeasons',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: showSeasonsRequest,
+  mapper: (response) =>
+    response
+      .map(mapSeasonResponseToSeason)
+      .filter((season) => season.episodes.count > 0 && season.number !== 0),
+  schema: z.array(SeasonSchema),
 });

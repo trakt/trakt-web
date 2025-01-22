@@ -1,5 +1,5 @@
-import type { MediaType } from '$lib/models/MediaType';
-import type { MediaSummary } from '$lib/requests/models/MediaSummary';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import { peopleMovieCreditsQuery } from '$lib/requests/queries/people/peopleMovieCreditsQuery';
 import { peopleShowCreditsQuery } from '$lib/requests/queries/people/peopleShowCreditsQuery';
 import { time } from '$lib/utils/timing/time';
@@ -13,7 +13,7 @@ type UseCreditsListProps = {
 
 function typeToQuery(
   { type, slug }: UseCreditsListProps,
-): CreateQueryOptions<MediaSummary[]> {
+): CreateQueryOptions<MediaEntry[]> {
   const params = { slug };
 
   switch (type) {

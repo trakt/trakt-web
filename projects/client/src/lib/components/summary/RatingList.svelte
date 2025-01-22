@@ -2,7 +2,7 @@
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
   import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
   import { languageTag } from "$lib/features/i18n/index.ts";
-  import type { MediaRating } from "$lib/models/MediaRating";
+  import type { MediaRating } from "$lib/requests/models/MediaRating";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import { toRottenTomatoRating } from "$lib/utils/formatting/number/toRottenTomatoRating";
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";

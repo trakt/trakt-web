@@ -1,4 +1,4 @@
-import type { MediaStudio } from '$lib/models/MediaStudio';
+import type { MediaStudio } from '$lib/requests/models/MediaStudio';
 
 export const MovieHereticStudiosMappedMock: MediaStudio[] = [
   {

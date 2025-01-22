@@ -1,12 +1,9 @@
 import type { CalendarShowListResponse, UpNextResponse } from '$lib/api.ts';
-import type { EpisodeEntry } from '$lib/models/EpisodeEntry.ts';
-import {
-  type EpisodeType,
-  EpisodeUnknownType,
-} from '$lib/models/EpisodeType.ts';
 import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
+import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
 
 type EpisodeResponse =
   | UpNextResponse[0]['progress']['next_episode']
@@ -22,7 +19,7 @@ export function mapEpisodeResponseToEpisodeEntry(
   return {
     id: episode.ids.trakt,
     type: episode.episode_type as EpisodeType ??
-      EpisodeUnknownType.Unknown,
+      EpisodeUnknownType.unknown,
     title: episode.title,
     overview: episode.overview,
     season: episode.season,

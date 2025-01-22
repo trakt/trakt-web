@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import {
   type RecommendedMovie,
   recommendedMoviesQuery,
@@ -11,8 +11,8 @@ import { time } from '$lib/utils/timing/time.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
-export type RecommendedMediaItem = RecommendedMovie | RecommendedShow;
-export type RecommendedMedia = Array<RecommendedMediaItem>;
+export type RecommendedEntry = RecommendedMovie | RecommendedShow;
+export type RecommendedMediaList = Array<RecommendedEntry>;
 
 type RecommendationListStoreProps = {
   type: MediaType;
@@ -21,7 +21,7 @@ type RecommendationListStoreProps = {
 
 function typeToQuery(
   { type, limit }: RecommendationListStoreProps,
-): CreateQueryOptions<RecommendedMedia> {
+): CreateQueryOptions<RecommendedMediaList> {
   const props = { limit };
   switch (type) {
     case 'movie':

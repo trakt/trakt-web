@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import type { Readable } from 'svelte/store';
 
 export type PaginatableStore<T> = (

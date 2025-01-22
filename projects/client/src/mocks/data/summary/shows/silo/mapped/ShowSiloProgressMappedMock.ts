@@ -1,5 +1,5 @@
-import type { EpisodeProgressEntry } from '$lib/models/EpisodeProgressEntry';
-import { EpisodeStandardType } from '$lib/models/EpisodeType';
+import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry';
+import { EpisodeStandardType } from '$lib/requests/models/EpisodeType';
 
 export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'id': 12105048,
@@ -19,6 +19,6 @@ export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'completed': 11,
   'remaining': 6,
   'minutesLeft': 301,
-  'type': EpisodeStandardType.Standard,
+  'type': EpisodeStandardType.standard,
   'year': 2024,
 };

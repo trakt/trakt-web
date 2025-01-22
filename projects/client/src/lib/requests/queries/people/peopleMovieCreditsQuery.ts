@@ -1,12 +1,12 @@
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
-import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 type PeopleMovieCreditsParams = { slug: string } & ApiParams;
 
 function peopleMovieCreditsRequest(
   { fetch, slug }: PeopleMovieCreditsParams,
-): Promise<MovieSummary[]> {
+): Promise<MovieEntry[]> {
   return api({ fetch })
     .people
     .movies({

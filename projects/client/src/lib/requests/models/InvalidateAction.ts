@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
+import type { MediaType } from './MediaType.ts';
 
 type ExtendedMediaType = MediaType | 'episode';
 type RateableMediaType = 'movie' | 'episode';

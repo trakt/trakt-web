@@ -1,5 +1,5 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import {
   useWatchlistList,
 } from '$lib/sections/lists/watchlist/useWatchlistList';

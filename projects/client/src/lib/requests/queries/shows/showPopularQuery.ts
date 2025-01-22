@@ -1,65 +1,64 @@
-import { type ShowResponse } from '$lib/api.ts';
-import type { Paginatable } from '$lib/models/Paginatable.ts';
+import type { ShowResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
-export type PopularShow = ShowSummary & Partial<EpisodeCount>;
+export const PopularShowSchema = ShowEntrySchema.merge(
+  EpisodeCountSchema.partial(),
+);
+export type PopularShow = z.infer<typeof PopularShowSchema>;
 
 type ShowPopularParams = {
   page?: number;
   limit?: number;
 } & ApiParams;
 
-function mapShowResponseToEpisodeCount(show: ShowResponse) {
+function mapResponseToPopularShow(show: ShowResponse): PopularShow {
   const { aired_episodes } = show;
+  const episodeCount = aired_episodes && aired_episodes > 0
+    ? { episode: { count: aired_episodes } }
+    : {};
 
-  if (!aired_episodes || aired_episodes === 0) {
-    return {};
-  }
-
-  return { episode: { count: aired_episodes } };
-}
-
-export function mapResponseToPopularShow(show: ShowResponse): PopularShow {
   return {
     ...mapShowResponseToShowSummary(show),
-    ...mapShowResponseToEpisodeCount(show),
+    ...episodeCount,
   };
 }
 
-function showPopularRequest(
-  { fetch, page = 1, limit = DEFAULT_PAGE_SIZE }: ShowPopularParams,
-): Promise<Paginatable<PopularShow>> {
-  return api({ fetch })
+const showPopularRequest = (
+  { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: ShowPopularParams,
+) =>
+  api({ fetch })
     .shows
     .popular({
       query: {
         extended: 'full,cloud9',
-        limit,
         page,
+        limit,
       },
     })
-    .then(({ status, body, headers }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch popular shows');
       }
 
-      return {
-        entries: body.map(mapResponseToPopularShow),
-        page: extractPageMeta(headers),
-      };
+      return response;
     });
-}
 
-const showPopularQueryKey = (params: ShowPopularParams) =>
-  ['showPopular', params.limit, params.page] as const;
-export const showPopularQuery = (
-  params: ShowPopularParams = {},
-) => ({
-  queryKey: showPopularQueryKey(params),
-  queryFn: () => showPopularRequest(params),
+export const showPopularQuery = await defineQuery({
+  key: 'showPopular',
+  invalidations: [],
+  dependencies: (params) => [params.limit, params.page],
+  request: showPopularRequest,
+  mapper: (response) => ({
+    entries: response.body.map(mapResponseToPopularShow),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(PopularShowSchema),
 });

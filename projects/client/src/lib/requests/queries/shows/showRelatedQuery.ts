@@ -1,18 +1,19 @@
 import { type ShowResponse } from '$lib/api.ts';
-import { type EpisodeCount } from '$lib/requests/models/EpisodeCount.ts';
-import type { ShowSummary } from '$lib/requests/models/ShowSummary.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import type { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 type ShowRelatedParams = {
   slug: string;
 } & ApiParams;
 
-export type RelatedShow = ShowSummary & EpisodeCount;
+const RelatedShowSchema = ShowEntrySchema.merge(EpisodeCountSchema);
+export type RelatedShow = z.infer<typeof RelatedShowSchema>;
 
-export function mapResponseToRelatedShow(
-  show: ShowResponse,
-): RelatedShow {
+function mapResponseToRelatedShow(show: ShowResponse) {
   return {
     episode: {
       count: show.aired_episodes ?? NaN,
@@ -21,10 +22,8 @@ export function mapResponseToRelatedShow(
   };
 }
 
-function showRelatedRequest(
-  { fetch, slug }: ShowRelatedParams,
-): Promise<ShowSummary[]> {
-  return api({ fetch })
+const showRelatedRequest = ({ fetch, slug }: ShowRelatedParams) =>
+  api({ fetch })
     .shows
     .related({
       query: {
@@ -34,19 +33,19 @@ function showRelatedRequest(
         id: slug,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch related shows');
       }
 
-      return body.map(mapResponseToRelatedShow);
+      return response.body;
     });
-}
 
-const showRelatedQueryKey = (id: string) => ['showRelated', id] as const;
-export const showRelatedQuery = (
-  params: ShowRelatedParams,
-) => ({
-  queryKey: showRelatedQueryKey(params.slug),
-  queryFn: () => showRelatedRequest(params),
+export const showRelatedQuery = await defineQuery({
+  key: 'showRelated',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: showRelatedRequest,
+  mapper: (body) => body.map(mapResponseToRelatedShow),
+  schema: RelatedShowSchema.array(),
 });

@@ -13,11 +13,11 @@ const UserFavoritedMediaSchema = z.object({
   id: z.number(),
 });
 
-export type UserFavoritedMedia = z.infer<typeof UserFavoritedMediaSchema>;
+export type UserFavoritedEntry = z.infer<typeof UserFavoritedMediaSchema>;
 
 function mapFavoritedMovieResponse(
   entry: FavoritedMoviesResponse,
-): UserFavoritedMedia {
+): UserFavoritedEntry {
   return {
     id: entry.movie.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
@@ -50,7 +50,7 @@ const favoritedMoviesRequest = (
 
 function mapFavoritedShowResponse(
   entry: FavoritedShowsResponse,
-): UserFavoritedMedia {
+): UserFavoritedEntry {
   return {
     id: entry.show.ids.trakt,
     favoritedAt: new Date(entry.listed_at),

@@ -5,14 +5,14 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import EpisodeTimeTag from "$lib/components/episode/tags/EpisodeTimeTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import type { EpisodeEntry } from "$lib/models/EpisodeEntry";
-  import type { MediaSummary } from "$lib/requests/models/MediaSummary";
+  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   type EpisodeProps = {
     episode: EpisodeEntry;
-    show: MediaSummary;
+    show: MediaEntry;
   };
 
   const { show, episode }: EpisodeProps = $props();

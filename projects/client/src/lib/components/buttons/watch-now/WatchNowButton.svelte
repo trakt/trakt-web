@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {
-    WatchNowService,
     WatchNowServices,
+    WatchNowStreaming,
   } from "$lib/requests/models/WatchNowServices";
   import type { WatchNowButtonIntl } from "./WatchNowButtonIntl";
   import { WatchNowButtonIntlProvider } from "./WatchNowButtonIntlProvider";
@@ -11,7 +11,7 @@
   type WatchNowButtonProps = {
     isLoading: boolean;
     mediaTitle: string;
-    favoriteService?: WatchNowService;
+    favoriteService?: WatchNowStreaming;
     services?: WatchNowServices;
     i18n?: WatchNowButtonIntl;
   };

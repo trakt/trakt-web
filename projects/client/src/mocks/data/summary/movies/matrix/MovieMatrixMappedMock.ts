@@ -1,6 +1,6 @@
-import type { MovieSummary } from '$lib/requests/models/MovieSummary';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry';
 
-export const MovieMatrixMappedMock: MovieSummary = {
+export const MovieMatrixMappedMock: MovieEntry = {
   'id': 481,
   'slug': 'the-matrix-1999',
   'type': 'movie',

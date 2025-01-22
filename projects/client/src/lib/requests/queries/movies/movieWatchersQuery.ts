@@ -1,12 +1,13 @@
-import type { ActiveWatcher } from '$lib/models/ActiveWatcher.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapWatcherResponseToActiveWatcher } from '$lib/requests/_internal/mapWatcherResponseToActiveWatcher.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { ActiveWatcherSchema } from '../../models/ActiveWatcher.ts';
 
-type MovieWatchersQuery = { slug: string } & ApiParams;
+type MovieWatchersParams = { slug: string } & ApiParams;
 
 export function movieWatchersRequest(
-  { fetch, slug }: MovieWatchersQuery,
-): Promise<ActiveWatcher[]> {
+  { fetch, slug }: MovieWatchersParams,
+) {
   return api({ fetch })
     .movies
     .watching({
@@ -14,20 +15,20 @@ export function movieWatchersRequest(
         id: slug,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch active movie watchers');
       }
 
-      return body.map(mapWatcherResponseToActiveWatcher);
+      return response.body;
     });
 }
 
-export const movieWatchersQueryKey = (id: string) =>
-  ['movieWatchers', id] as const;
-export const movieWatchersQuery = (
-  params: MovieWatchersQuery,
-) => ({
-  queryKey: movieWatchersQueryKey(params.slug),
-  queryFn: () => movieWatchersRequest(params),
+export const movieWatchersQuery = await defineQuery({
+  key: 'movieWatchers',
+  request: movieWatchersRequest,
+  mapper: (watchers) => watchers.map(mapWatcherResponseToActiveWatcher),
+  dependencies: (params) => [params.slug],
+  invalidations: [],
+  schema: ActiveWatcherSchema.array(),
 });

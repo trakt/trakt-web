@@ -1,21 +1,21 @@
 import type { SearchResultResponse } from '$lib/api.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import type { MediaSummary } from '$lib/requests/models/MediaSummary.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import type { MediaEntry } from '../../models/MediaEntry.ts';
 
 export type SearchParams = {
   query: string;
 } & ApiParams;
 
-function isGarbage(value?: MediaSummary): boolean {
+function isGarbage(value?: MediaEntry): boolean {
   return value?.year == null ||
     !value?.genres.length;
 }
 
 function mapToSearchResultEntry(
   item: SearchResultResponse[0],
-): MediaSummary {
+): MediaEntry {
   const { type } = item;
 
   const summary = (() => {
@@ -36,7 +36,7 @@ export const searchCancellationId = () => 'search_cancellation_token';
 function searchRequest({
   query,
   fetch,
-}: SearchParams): Promise<MediaSummary[]> {
+}: SearchParams): Promise<MediaEntry[]> {
   return api({
     fetch,
     cancellable: true,

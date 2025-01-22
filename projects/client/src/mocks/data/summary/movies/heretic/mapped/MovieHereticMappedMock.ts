@@ -1,6 +1,6 @@
-import type { MovieSummary } from '$lib/requests/models/MovieSummary';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry';
 
-export const MovieHereticMappedMock: MovieSummary = {
+export const MovieHereticMappedMock: MovieEntry = {
   'cover': {
     'url': {
       'medium':

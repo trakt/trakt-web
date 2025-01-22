@@ -1,16 +1,17 @@
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNowResponseToWatchNowDetails.ts';
-import type { WatchNowServices } from '../../models/WatchNowServices.ts';
+import { WatchNowServicesSchema } from '../../models/WatchNowServices.ts';
 
 type MovieWatchNowParams = {
   id: number;
   country: string;
 } & ApiParams;
 
-function movieWatchNowRequest(
+const movieWatchNowRequest = (
   { fetch, id, country }: MovieWatchNowParams,
-): Promise<WatchNowServices> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .movies
     .watchnow({
       params: {
@@ -18,20 +19,20 @@ function movieWatchNowRequest(
         country,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch watch now movie');
       }
 
-      return mapWatchNowResponseToWatchNowDetails(body, country);
+      return response.body;
     });
-}
 
-const movieWatchNowQueryKey = (id: number, country: string) =>
-  ['movieWatchNow', id, country] as const;
-export const movieWatchNowQuery = (
-  params: MovieWatchNowParams,
-) => ({
-  queryKey: movieWatchNowQueryKey(params.id, params.country),
-  queryFn: () => movieWatchNowRequest(params),
+export const movieWatchNowQuery = await defineQuery({
+  key: 'movieWatchNow',
+  invalidations: [],
+  dependencies: (params) => [params.id, params.country],
+  request: movieWatchNowRequest,
+  mapper: (response, params) =>
+    mapWatchNowResponseToWatchNowDetails(response, params.country),
+  schema: WatchNowServicesSchema,
 });

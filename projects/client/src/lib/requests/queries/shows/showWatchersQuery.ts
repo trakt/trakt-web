@@ -1,12 +1,13 @@
-import type { ActiveWatcher } from '$lib/models/ActiveWatcher.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapWatcherResponseToActiveWatcher } from '$lib/requests/_internal/mapWatcherResponseToActiveWatcher.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { ActiveWatcherSchema } from '../../models/ActiveWatcher.ts';
 
-type ShowWatchersQuery = { slug: string } & ApiParams;
+type ShowWatchersParams = { slug: string } & ApiParams;
 
 export function showWatchersRequest(
-  { fetch, slug }: ShowWatchersQuery,
-): Promise<ActiveWatcher[]> {
+  { fetch, slug }: ShowWatchersParams,
+) {
   return api({ fetch })
     .shows
     .watching({
@@ -14,20 +15,20 @@ export function showWatchersRequest(
         id: slug,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch active show watchers');
       }
 
-      return body.map(mapWatcherResponseToActiveWatcher);
+      return response.body;
     });
 }
 
-export const showWatchersQueryKey = (id: string) =>
-  ['showWatchers', id] as const;
-export const showWatchersQuery = (
-  params: ShowWatchersQuery,
-) => ({
-  queryKey: showWatchersQueryKey(params.slug),
-  queryFn: () => showWatchersRequest(params),
+export const showWatchersQuery = await defineQuery({
+  key: 'showWatchers',
+  request: showWatchersRequest,
+  mapper: (watchers) => watchers.map(mapWatcherResponseToActiveWatcher),
+  dependencies: (params) => [params.slug],
+  invalidations: [],
+  schema: ActiveWatcherSchema.array(),
 });

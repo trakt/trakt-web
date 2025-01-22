@@ -1,6 +1,6 @@
 <script lang="ts">
   import FavoriteButton from "$lib/components/buttons/favorite/FavoriteButton.svelte";
-  import type { MediaType } from "$lib/models/MediaType";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import { onMount } from "svelte";
   import { useFavorites } from "./useFavorites";
 

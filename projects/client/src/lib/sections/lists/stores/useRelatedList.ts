@@ -1,16 +1,16 @@
-import type { MediaType } from '$lib/models/MediaType.ts';
-import { type MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { type MovieEntry } from '$lib/requests/models/MovieEntry';
 import { movieRelatedQuery } from '$lib/requests/queries/movies/movieRelatedQuery.ts';
 import {
-  type PopularShow,
-} from '$lib/requests/queries/shows/showPopularQuery.ts';
-import { showRelatedQuery } from '$lib/requests/queries/shows/showRelatedQuery.ts';
+  type RelatedShow,
+  showRelatedQuery,
+} from '$lib/requests/queries/shows/showRelatedQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
+import type { MediaType } from '../../../requests/models/MediaType.ts';
 
-export type RelatedMediaItem = PopularShow | MovieSummary;
-export type RelatedMedia = Array<RelatedMediaItem>;
+export type RelatedEntry = RelatedShow | MovieEntry;
+export type RelatedMediaList = Array<RelatedEntry>;
 
 type PopularListStoreProps = {
   type: MediaType;
@@ -19,14 +19,14 @@ type PopularListStoreProps = {
 
 function typeToQuery(
   { type, slug }: PopularListStoreProps,
-): CreateQueryOptions<RelatedMedia> {
+) {
   const params = { slug };
 
   switch (type) {
     case 'movie':
-      return movieRelatedQuery(params);
+      return movieRelatedQuery(params) as CreateQueryOptions<RelatedMediaList>;
     case 'show':
-      return showRelatedQuery(params);
+      return showRelatedQuery(params) as CreateQueryOptions<RelatedMediaList>;
   }
 }
 

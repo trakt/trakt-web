@@ -1,11 +1,11 @@
 import type { RecommendedMovieResponse } from '$lib/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
 
-export type RecommendedMovie = MovieSummary;
+export type RecommendedMovie = MovieEntry;
 
 type RecommendedMoviesParams = ApiParams & { limit?: number };
 

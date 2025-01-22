@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import { resolve } from '$lib/utils/store/resolve';
 import { readable } from 'svelte/store';
 import { describe, expect, it } from 'vitest';

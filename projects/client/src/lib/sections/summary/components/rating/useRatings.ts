@@ -10,15 +10,15 @@ import type { RatingsRequest } from '@trakt/api';
 import { derived, writable } from 'svelte/store';
 import { SIMPLE_RATINGS } from './constants.ts';
 
-type RatableItem = 'movie' | 'episode';
+type RateableType = 'movie' | 'episode';
 
 export type WatchlistStoreProps = {
-  type: RatableItem;
+  type: RateableType;
   id: number;
 };
 
 function toRatingPayload(
-  type: RatableItem,
+  type: RateableType,
   id: number,
   simpleRating: SimpleRating,
 ): RatingsRequest {

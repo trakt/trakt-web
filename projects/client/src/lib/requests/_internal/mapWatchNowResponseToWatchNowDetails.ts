@@ -1,17 +1,18 @@
 import type { WatchNowResponse, WatchNowServiceResponse } from '$lib/api.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type {
   WatchNowOnDemand,
-  WatchNowService,
   WatchNowServices,
+  WatchNowStreaming,
 } from '../models/WatchNowServices.ts';
 import { sortWatchNowSources } from './sortWatchNowSources.ts';
 
 function mapStreamingService(
   serviceResponse: WatchNowServiceResponse,
-): WatchNowService {
+): WatchNowStreaming {
   return {
     type: 'streaming',
-    link: `https://${serviceResponse.link}`,
+    link: prependHttps(serviceResponse.link),
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
   };
@@ -30,7 +31,7 @@ function mapOnDemandService(
 
   return {
     type: 'on-demand',
-    link: `https://${serviceResponse.link}`,
+    link: prependHttps(serviceResponse.link),
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
     currency: serviceResponse.currency,

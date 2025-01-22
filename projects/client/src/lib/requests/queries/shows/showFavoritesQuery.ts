@@ -1,22 +1,16 @@
 import type { FavoritedShowsResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/_internal/api';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import type { FavoritedMedia } from '$lib/requests/models/FavoritedMedia.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-
-function mapFavoritedShowResponse(
-  entry: FavoritedShowsResponse,
-): FavoritedMedia {
-  return {
-    id: entry.show.ids.trakt,
-    favoritedAt: new Date(entry.listed_at),
-    item: mapShowResponseToShowSummary(entry.show),
-  };
-}
+import {
+  type FavoritedEntry,
+  FavoritedEntrySchema,
+} from '../../models/FavoritedEntry.ts';
 
 const favoritedShowsRequest = (
   { fetch }: ApiParams,
-): Promise<FavoritedMedia[]> =>
+) =>
   api({ fetch })
     .users
     .favorites
@@ -34,14 +28,24 @@ const favoritedShowsRequest = (
         throw new Error('Error fetching user favorited shows.');
       }
 
-      return response.body.map(mapFavoritedShowResponse);
+      return response.body;
     });
 
-export const showFavoritesQueryKey = [
-  'showFavorites',
-  InvalidateAction.Favorited('show'),
-] as const;
-export const showFavoritesQuery = ({ fetch }: ApiParams = {}) => ({
-  queryKey: showFavoritesQueryKey,
-  queryFn: () => favoritedShowsRequest({ fetch }),
+function mapFavoritedShowResponse(
+  entry: FavoritedShowsResponse,
+): FavoritedEntry {
+  return {
+    id: entry.show.ids.trakt,
+    favoritedAt: new Date(entry.listed_at),
+    item: mapShowResponseToShowSummary(entry.show),
+  };
+}
+
+export const showFavoritesQuery = await defineQuery({
+  key: 'showFavorites',
+  invalidations: [InvalidateAction.Favorited('show')],
+  dependencies: () => [],
+  request: favoritedShowsRequest,
+  mapper: (data) => data.map(mapFavoritedShowResponse),
+  schema: FavoritedEntrySchema.array(),
 });

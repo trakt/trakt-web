@@ -1,13 +1,16 @@
-import type { MediaRating } from '$lib/models/MediaRating.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { MediaRatingSchema } from '$lib/requests/models/MediaRating.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapRatingResponseToMediaRating } from '../../_internal/mapRatingResponseToMediaRating.ts';
 
-type ShowRatingParams = { slug: string } & ApiParams;
+type ShowRatingParams = {
+  slug: string;
+} & ApiParams;
 
-export function showRatingRequest(
+const showRatingRequest = (
   { fetch, slug }: ShowRatingParams,
-): Promise<MediaRating> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .shows
     .ratings({
       params: {
@@ -17,19 +20,19 @@ export function showRatingRequest(
         extended: 'all',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch show rating');
       }
 
-      return mapRatingResponseToMediaRating(body);
+      return response.body;
     });
-}
 
-export const showRatingQueryKey = (id: string) => ['showRating', id] as const;
-export const showRatingQuery = (
-  params: ShowRatingParams,
-) => ({
-  queryKey: showRatingQueryKey(params.slug),
-  queryFn: () => showRatingRequest(params),
+export const showRatingQuery = await defineQuery({
+  key: 'showRating',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: showRatingRequest,
+  mapper: mapRatingResponseToMediaRating,
+  schema: MediaRatingSchema,
 });

@@ -1,44 +1,44 @@
-import type { Paginatable } from '$lib/models/Paginatable.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
-import { type MovieSummary } from '$lib/requests/models/MovieSummary.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 type MoviePopularParams = {
   page?: number;
   limit?: number;
 } & ApiParams;
 
-function moviePopularRequest(
+const moviePopularRequest = (
   { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: MoviePopularParams,
-): Promise<Paginatable<MovieSummary>> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .movies
     .popular({
       query: {
         extended: 'full,cloud9',
-        limit,
         page,
+        limit,
       },
     })
-    .then(({ status, body, headers }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch popular movies');
       }
 
-      return {
-        entries: body.map(mapMovieResponseToMovieSummary),
-        page: extractPageMeta(headers),
-      };
+      return response;
     });
-}
 
-const moviePopularQueryKey = (params: MoviePopularParams) =>
-  ['moviePopular', params.limit, params.page] as const;
-export const moviePopularQuery = (
-  params: MoviePopularParams = {},
-) => ({
-  queryKey: moviePopularQueryKey(params),
-  queryFn: () => moviePopularRequest(params),
+export const moviePopularQuery = await defineQuery({
+  key: 'moviePopular',
+  invalidations: [],
+  dependencies: (params) => [params.limit, params.page],
+  request: moviePopularRequest,
+  mapper: (response) => ({
+    entries: response.body.map(mapMovieResponseToMovieSummary),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(MovieEntrySchema),
 });

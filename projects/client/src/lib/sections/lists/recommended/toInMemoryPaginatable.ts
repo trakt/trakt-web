@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType';
 import { derived, readable } from 'svelte/store';
 import type { MediaStore } from '../drilldown/MediaStore';
 import type { PaginatableStore } from '../drilldown/PaginatableStore';
