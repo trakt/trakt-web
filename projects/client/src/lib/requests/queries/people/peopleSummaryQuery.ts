@@ -1,10 +1,10 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PersonSummarySchema } from '$lib/requests/models/PersonSummary.ts';
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { PeopleSummaryResponse } from '@trakt/api';
-import { api, type ApiParams } from '../../_internal/api.ts';
 
 type PersonSummaryParams = { slug: string } & ApiParams;
 

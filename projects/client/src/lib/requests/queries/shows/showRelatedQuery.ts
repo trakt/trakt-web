@@ -1,8 +1,8 @@
 import { type ShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import type { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 

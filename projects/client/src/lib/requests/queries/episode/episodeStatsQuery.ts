@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapStatsResponseToMediaStats } from '$lib/requests/_internal/mapStatsResponseToMediaStats.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaStatsSchema } from '$lib/requests/models/MediaStats.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 
 type EpisodeStatsParams = {
   slug: string;

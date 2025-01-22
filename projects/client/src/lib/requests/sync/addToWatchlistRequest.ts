@@ -1,5 +1,5 @@
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { WatchlistRequest } from '@trakt/api';
-import { api, type ApiParams } from '../_internal/api.ts';
 
 type AddToWatchlistParams = {
   body: WatchlistRequest;

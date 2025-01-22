@@ -1,10 +1,10 @@
 import type { MovieTrendingResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 

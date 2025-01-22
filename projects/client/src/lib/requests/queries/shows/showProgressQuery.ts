@@ -1,6 +1,6 @@
 import type { ShowProgressResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '$lib/requests/_internal/api';
+import { api, type ApiParams } from '$lib/requests/api';
 import {
   type EpisodeProgressEntry,
   EpisodeProgressEntrySchema,

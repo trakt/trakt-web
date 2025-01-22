@@ -1,9 +1,9 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { MediaEntrySchema } from '../../models/MediaEntry.ts';
 

@@ -1,4 +1,4 @@
-import type { ApiParams } from '$lib/requests/_internal/api';
+import type { ApiParams } from '$lib/requests/api';
 import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import type { z, ZodType } from 'zod';

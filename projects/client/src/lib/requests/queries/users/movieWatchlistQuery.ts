@@ -1,10 +1,10 @@
 import type { SortType, WatchlistedMoviesResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry';
 
 type MovieWatchlistParams = {

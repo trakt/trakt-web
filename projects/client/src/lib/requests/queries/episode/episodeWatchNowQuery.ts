@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNowResponseToWatchNowDetails.ts';
 import { WatchNowServicesSchema } from '../../models/WatchNowServices.ts';
 

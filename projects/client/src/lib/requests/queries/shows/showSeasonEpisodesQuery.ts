@@ -1,6 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '../../_internal/mapEpisodeResponseToEpisodeEntry.ts';
 
 type ShowSeasonEpisodeParams = {

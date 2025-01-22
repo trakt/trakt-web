@@ -1,6 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapWatcherResponseToActiveWatcher } from '$lib/requests/_internal/mapWatcherResponseToActiveWatcher.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { ActiveWatcherSchema } from '../../models/ActiveWatcher.ts';
 
 type MovieWatchersParams = { slug: string } & ApiParams;

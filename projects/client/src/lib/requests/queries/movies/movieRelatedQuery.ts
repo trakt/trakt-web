@@ -1,6 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 

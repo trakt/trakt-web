@@ -2,8 +2,8 @@ import type { SearchResultResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
 
 type SearchParams = {

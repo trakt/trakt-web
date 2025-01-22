@@ -2,9 +2,9 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { EpisodeEntrySchema } from '../../models/EpisodeEntry.ts';
 
 export type CalendarShowsParams = {

@@ -1,7 +1,7 @@
 import type { FavoritedShowsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '$lib/requests/_internal/api';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import {
   type FavoritedEntry,

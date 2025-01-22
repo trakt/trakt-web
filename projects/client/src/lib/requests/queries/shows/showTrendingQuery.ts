@@ -1,11 +1,11 @@
 import type { ShowTrendingResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 

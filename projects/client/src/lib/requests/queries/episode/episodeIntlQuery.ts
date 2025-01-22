@@ -4,7 +4,7 @@ import type {
   AvailableRegion,
 } from '$lib/features/i18n/index.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import {
   type EpisodeIntl,
   EpisodeIntlSchema,

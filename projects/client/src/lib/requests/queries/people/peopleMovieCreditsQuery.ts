@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 
 type PeopleMovieCreditsParams = { slug: string } & ApiParams;
 

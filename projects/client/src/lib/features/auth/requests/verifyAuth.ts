@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/private';
-import { api } from '$lib/requests/_internal/api.ts';
+import { api } from '../../../requests/api.ts';
 import type { AuthToken } from '../models/AuthToken';
 import { getGrantTypeAndCode } from './_internal/getGrantTypeAndCode';
 

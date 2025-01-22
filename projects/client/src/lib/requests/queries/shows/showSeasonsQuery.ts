@@ -1,7 +1,7 @@
 import type { SeasonsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { type Season, SeasonSchema } from '../../models/Season.ts';
 
 type ShowSeasonsParams = {

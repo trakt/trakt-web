@@ -1,9 +1,9 @@
 import type { SortDirection, UpNextResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '$lib/requests/_internal/api.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { api, type ApiParams } from '$lib/requests/api';
 import { EpisodeProgressEntrySchema } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable';

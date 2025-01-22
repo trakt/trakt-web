@@ -6,7 +6,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../../requests/_internal/api.ts';
+import { api, type ApiParams } from '../../../requests/api.ts';
 
 export const WatchlistedMediaSchema = z.object({
   id: z.number(),

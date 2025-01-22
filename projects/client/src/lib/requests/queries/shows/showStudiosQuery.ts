@@ -1,6 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaStudioSchema } from '$lib/requests/models/MediaStudio.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapStudioResponseToMediaStudio } from '../../_internal/mapStudioResponseToMediaStudio.ts';
 
 type ShowStudiosParams = {

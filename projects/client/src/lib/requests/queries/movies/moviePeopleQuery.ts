@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapPeopleResponseToMediaCrew } from '$lib/requests/_internal/mapPeopleResponseToMediaCrew.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaCrewSchema } from '$lib/requests/models/MediaCrew.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 
 type MoviePeopleParams = {
   slug: string;

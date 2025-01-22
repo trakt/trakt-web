@@ -1,6 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaRatingSchema } from '$lib/requests/models/MediaRating.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
 import { mapRatingResponseToMediaRating } from '../../_internal/mapRatingResponseToMediaRating.ts';
 
 type EpisodeRatingParams = {

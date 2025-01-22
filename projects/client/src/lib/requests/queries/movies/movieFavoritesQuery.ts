@@ -1,7 +1,7 @@
 import type { FavoritedMoviesResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '$lib/requests/_internal/api';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import {
   type FavoritedEntry,

@@ -1,4 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import {
   type WatchNowSource,
   WatchNowSourceSchema,
@@ -8,7 +9,6 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { WatchNowSourceResponse } from '@trakt/api';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../_internal/api.ts';
 
 type WatchNowSourcesParams = ApiParams;
 const WatchNowSourceListSchema = z.map(
