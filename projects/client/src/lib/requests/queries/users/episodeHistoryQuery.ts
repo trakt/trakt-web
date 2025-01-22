@@ -1,10 +1,12 @@
 import type { HistoryEpisodesResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/_internal/api';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
-import { api, type ApiParams } from '../../_internal/api.ts';
+import { ShowEntrySchema } from '$lib/requests/models/ShowEntry';
+import { z } from 'zod';
 
 type EpisodeHistoryParams = {
   startDate: Date;
@@ -12,27 +14,17 @@ type EpisodeHistoryParams = {
   limit: number;
 } & ApiParams;
 
-export type HistoryEpisode = {
-  id: number;
-  watchedAt: Date;
-  show: ShowEntry;
-  episode: EpisodeEntry;
-};
-
-export function mapResponseToHistory(
-  historyEpisode: HistoryEpisodesResponse,
-): HistoryEpisode {
-  return {
-    id: historyEpisode.id,
-    watchedAt: new Date(historyEpisode.watched_at),
-    show: mapShowResponseToShowSummary(historyEpisode.show),
-    episode: mapEpisodeResponseToEpisodeEntry(historyEpisode.episode),
-  };
-}
+const HistoryEpisodeSchema = z.object({
+  id: z.number(),
+  watchedAt: z.date(),
+  show: ShowEntrySchema,
+  episode: EpisodeEntrySchema,
+});
+type HistoryEpisode = z.infer<typeof HistoryEpisodeSchema>;
 
 function episodeHistoryRequest(
   { fetch, startDate, endDate, limit }: EpisodeHistoryParams,
-): Promise<HistoryEpisode[]> {
+) {
   return api({ fetch })
     .users
     .history
@@ -52,17 +44,30 @@ function episodeHistoryRequest(
         throw new Error('Failed to fetch episodes history');
       }
 
-      return body.map(mapResponseToHistory);
+      return body;
     });
 }
 
-const episodeHistoryQueryKey = [
-  'episodeHistoryQuery',
-  InvalidateAction.MarkAsWatched('episode'),
-] as const;
-export const episodeHistoryQuery = (
-  params: EpisodeHistoryParams,
-) => ({
-  queryKey: episodeHistoryQueryKey,
-  queryFn: () => episodeHistoryRequest(params),
+function mapResponseToHistory(
+  historyEpisode: HistoryEpisodesResponse,
+): HistoryEpisode {
+  return {
+    id: historyEpisode.id,
+    watchedAt: new Date(historyEpisode.watched_at),
+    show: mapShowResponseToShowSummary(historyEpisode.show),
+    episode: mapEpisodeResponseToEpisodeEntry(historyEpisode.episode),
+  };
+}
+
+export const episodeHistoryQuery = await defineQuery({
+  key: 'episodeHistory',
+  invalidations: [InvalidateAction.MarkAsWatched('episode')],
+  dependencies: (params) => [
+    params.startDate,
+    params.endDate,
+    params.limit,
+  ],
+  request: episodeHistoryRequest,
+  mapper: (body) => body.map(mapResponseToHistory),
+  schema: HistoryEpisodeSchema.array(),
 });

@@ -1,10 +1,12 @@
 import type { HistoryShowsResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { EpisodeEntrySchema } from '../../models/EpisodeEntry';
+import { ShowEntrySchema } from '../../models/ShowEntry';
 
 type ShowHistoryParams = {
   startDate: Date;
@@ -12,28 +14,18 @@ type ShowHistoryParams = {
   limit: number;
 } & ApiParams;
 
-export type HistoryShow = {
-  id: number;
-  watchedAt: Date;
-  show: ShowEntry;
-  episode: EpisodeEntry;
-};
+const HistoryShowSchema = z.object({
+  id: z.number(),
+  watchedAt: z.date(),
+  show: ShowEntrySchema,
+  episode: EpisodeEntrySchema,
+});
+export type HistoryShow = z.infer<typeof HistoryShowSchema>;
 
-export function mapResponseToHistory(
-  historyShow: HistoryShowsResponse,
-): HistoryShow {
-  return {
-    id: historyShow.id,
-    watchedAt: new Date(historyShow.watched_at),
-    show: mapShowResponseToShowSummary(historyShow.show),
-    episode: mapEpisodeResponseToEpisodeEntry(historyShow.episode),
-  };
-}
-
-function showHistoryRequest(
+const showHistoryRequest = (
   { fetch, startDate, endDate, limit }: ShowHistoryParams,
-): Promise<HistoryShow[]> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .users
     .history
     .shows({
@@ -52,17 +44,27 @@ function showHistoryRequest(
         throw new Error('Failed to fetch shows history');
       }
 
-      return body.map(mapResponseToHistory);
+      return body;
     });
-}
 
-const showHistoryQueryKey = [
-  'showHistoryQuery',
-  InvalidateAction.MarkAsWatched('show'),
-] as const;
-export const showHistoryQuery = (
-  params: ShowHistoryParams,
+const mapResponseToHistory = (
+  historyShow: HistoryShowsResponse,
 ) => ({
-  queryKey: showHistoryQueryKey,
-  queryFn: () => showHistoryRequest(params),
+  id: historyShow.id,
+  watchedAt: new Date(historyShow.watched_at),
+  show: mapShowResponseToShowSummary(historyShow.show),
+  episode: mapEpisodeResponseToEpisodeEntry(historyShow.episode),
+});
+
+export const showHistoryQuery = await defineQuery({
+  key: 'showHistory',
+  invalidations: [InvalidateAction.MarkAsWatched('show')],
+  dependencies: (params: ShowHistoryParams) => [
+    params.startDate,
+    params.endDate,
+    params.limit,
+  ],
+  request: showHistoryRequest,
+  mapper: (body) => body.map(mapResponseToHistory),
+  schema: HistoryShowSchema.array(),
 });

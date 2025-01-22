@@ -1,10 +1,16 @@
-import type { MediaType } from './MediaType.ts';
+import { z } from 'zod';
+import { MediaTypeSchema } from './MediaType.ts';
 
-export type ListItem<TMediaItem> = {
-  id: number;
-  rank: number;
-  notes: string | Nil;
-  listedAt: Date;
-  type: MediaType;
-  mediaItem: TMediaItem;
-};
+export const ListItemSchemaFactory = <T extends z.ZodType>(entrySchema: T) =>
+  z.object({
+    id: z.number(),
+    rank: z.number(),
+    notes: z.string().nullable(),
+    listedAt: z.date(),
+    type: MediaTypeSchema,
+    entry: entrySchema,
+  });
+
+export type ListItem<TMediaEntry> = z.infer<
+  ReturnType<typeof ListItemSchemaFactory<z.ZodType<TMediaEntry>>>
+>;

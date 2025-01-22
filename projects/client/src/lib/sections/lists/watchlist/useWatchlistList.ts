@@ -9,7 +9,7 @@ import {
   type WatchlistShow,
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export type WatchListParams = {
@@ -25,7 +25,7 @@ export type WatchListStoreProps = {
 
 function typeToQuery(
   { type, sort = 'rank' }: WatchListStoreProps,
-): CreateQueryOptions<WatchlistMediaList> {
+) {
   const params: WatchListParams = {
     sort,
   };
@@ -45,7 +45,7 @@ export function useWatchlistList(params: WatchListStoreProps) {
   });
   const list = derived(
     query,
-    ($query) => ($query.data ?? []).map((item) => item.mediaItem),
+    ($query) => ($query.data ?? []).map((item) => item.entry),
   );
   const isLoading = derived(query, ($query) => $query.isLoading);
 

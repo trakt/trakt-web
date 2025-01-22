@@ -1,33 +1,21 @@
 import type { SortType, WatchlistedMoviesResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { ListItem } from '$lib/requests/models/ListItem.ts';
-import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
+import { MovieEntrySchema } from '../../models/MovieEntry';
 
 type MovieWatchlistParams = {
   sort: SortType;
 } & ApiParams;
 
-export type WatchlistMovie = ListItem<MovieEntry>;
+export const WatchlistMovieSchema = ListItemSchemaFactory(MovieEntrySchema);
+export type WatchlistMovie = z.infer<typeof WatchlistMovieSchema>;
 
-export function mapResponseToWatchlist(
-  watchlistMovie: WatchlistedMoviesResponse,
-): WatchlistMovie {
-  return {
-    id: watchlistMovie.id,
-    rank: watchlistMovie.rank,
-    notes: watchlistMovie.notes,
-    type: 'movie',
-    listedAt: new Date(watchlistMovie.listed_at),
-    mediaItem: mapMovieResponseToMovieSummary(watchlistMovie.movie),
-  };
-}
-
-function watchlistRequest(
-  { fetch, sort }: MovieWatchlistParams,
-): Promise<WatchlistMovie[]> {
-  return api({ fetch })
+const watchlistRequest = ({ fetch, sort }: MovieWatchlistParams) =>
+  api({ fetch })
     .users
     .watchlist
     .movies({
@@ -44,19 +32,23 @@ function watchlistRequest(
         throw new Error('Failed to fetch movies watchlist');
       }
 
-      return body.map(mapResponseToWatchlist);
+      return body;
     });
-}
 
-const movieWatchlistQueryKey = (params: MovieWatchlistParams) =>
-  [
-    'movieWatchlist',
-    InvalidateAction.Watchlisted('movie'),
-    params.sort,
-  ] as const;
-export const movieWatchlistQuery = (
-  params: MovieWatchlistParams,
-) => ({
-  queryKey: movieWatchlistQueryKey(params),
-  queryFn: () => watchlistRequest(params),
+const mapResponseToWatchlist = (watchlistMovie: WatchlistedMoviesResponse) => ({
+  id: watchlistMovie.id,
+  rank: watchlistMovie.rank,
+  notes: watchlistMovie.notes,
+  type: 'movie' as const,
+  listedAt: new Date(watchlistMovie.listed_at),
+  entry: mapMovieResponseToMovieSummary(watchlistMovie.movie),
+});
+
+export const movieWatchlistQuery = await defineQuery({
+  key: 'movieWatchlist',
+  invalidations: [InvalidateAction.Watchlisted('movie')],
+  dependencies: (params: MovieWatchlistParams) => [params.sort],
+  request: watchlistRequest,
+  mapper: (body) => body.map(mapResponseToWatchlist),
+  schema: WatchlistMovieSchema.array(),
 });

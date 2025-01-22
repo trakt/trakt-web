@@ -1,8 +1,10 @@
 import type { HistoryMoviesResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import type { MovieEntry } from '../../models/MovieEntry.ts';
+import { MovieEntrySchema } from '../../models/MovieEntry';
 
 type MovieHistoryParams = {
   startDate: Date;
@@ -10,26 +12,17 @@ type MovieHistoryParams = {
   limit: number;
 } & ApiParams;
 
-export type HistoryMovie = {
-  id: number;
-  watchedAt: Date;
-  movie: MovieEntry;
-};
+const HistoryMovieSchema = z.object({
+  id: z.number(),
+  watchedAt: z.date(),
+  movie: MovieEntrySchema,
+});
+export type HistoryMovie = z.infer<typeof HistoryMovieSchema>;
 
-export function mapResponseToHistory(
-  historyMovie: HistoryMoviesResponse,
-): HistoryMovie {
-  return {
-    id: historyMovie.id,
-    watchedAt: new Date(historyMovie.watched_at),
-    movie: mapMovieResponseToMovieSummary(historyMovie.movie),
-  };
-}
-
-function movieHistoryRequest(
+const movieHistoryRequest = (
   { fetch, startDate, endDate, limit }: MovieHistoryParams,
-): Promise<HistoryMovie[]> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .users
     .history
     .movies({
@@ -48,17 +41,26 @@ function movieHistoryRequest(
         throw new Error('Failed to fetch movies history');
       }
 
-      return body.map(mapResponseToHistory);
+      return body;
     });
-}
 
-const movieHistoryQueryKey = [
-  'movieHistoryQuery',
-  InvalidateAction.MarkAsWatched('movie'),
-] as const;
-export const movieHistoryQuery = (
-  params: MovieHistoryParams,
+const mapResponseToHistory = (
+  historyMovie: HistoryMoviesResponse,
 ) => ({
-  queryKey: movieHistoryQueryKey,
-  queryFn: () => movieHistoryRequest(params),
+  id: historyMovie.id,
+  watchedAt: new Date(historyMovie.watched_at),
+  movie: mapMovieResponseToMovieSummary(historyMovie.movie),
+});
+
+export const movieHistoryQuery = await defineQuery({
+  key: 'movieHistory',
+  invalidations: [InvalidateAction.MarkAsWatched('movie')],
+  dependencies: (params: MovieHistoryParams) => [
+    params.startDate,
+    params.endDate,
+    params.limit,
+  ],
+  request: movieHistoryRequest,
+  mapper: (body) => body.map(mapResponseToHistory),
+  schema: HistoryMovieSchema.array(),
 });

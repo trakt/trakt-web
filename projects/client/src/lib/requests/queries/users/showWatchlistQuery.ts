@@ -1,33 +1,21 @@
 import type { SortType, WatchlistedShowsResponse } from '$lib/api.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { ListItem } from '$lib/requests/models/ListItem.ts';
+import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
-import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
-import { type ShowEntry } from '../../models/ShowEntry.ts';
+import { ShowEntrySchema } from '../../models/ShowEntry';
 
 type ShowWatchlistParams = {
   sort: SortType;
 } & ApiParams;
 
-export type WatchlistShow = ListItem<ShowEntry>;
+export const WatchlistShowSchema = ListItemSchemaFactory(ShowEntrySchema);
+export type WatchlistShow = z.infer<typeof WatchlistShowSchema>;
 
-export function mapResponseToWatchlist(
-  watchlistShow: WatchlistedShowsResponse,
-): WatchlistShow {
-  return {
-    id: watchlistShow.id,
-    rank: watchlistShow.rank,
-    notes: watchlistShow.notes,
-    type: 'show',
-    listedAt: new Date(watchlistShow.listed_at),
-    mediaItem: mapShowResponseToShowSummary(watchlistShow.show),
-  };
-}
-
-function watchlistRequest(
-  { fetch, sort }: ShowWatchlistParams,
-): Promise<WatchlistShow[]> {
-  return api({ fetch })
+const watchlistRequest = ({ fetch, sort }: ShowWatchlistParams) =>
+  api({ fetch })
     .users
     .watchlist
     .shows({
@@ -44,19 +32,23 @@ function watchlistRequest(
         throw new Error('Failed to fetch shows watchlist');
       }
 
-      return body.map(mapResponseToWatchlist);
+      return body;
     });
-}
 
-const showWatchlistQueryKey = (params: ShowWatchlistParams) =>
-  [
-    'showWatchlist',
-    InvalidateAction.Watchlisted('show'),
-    params.sort,
-  ] as const;
-export const showWatchlistQuery = (
-  params: ShowWatchlistParams,
-) => ({
-  queryKey: showWatchlistQueryKey(params),
-  queryFn: () => watchlistRequest(params),
+const mapResponseToWatchlist = (watchlistShow: WatchlistedShowsResponse) => ({
+  id: watchlistShow.id,
+  rank: watchlistShow.rank,
+  notes: watchlistShow.notes,
+  type: 'show' as const,
+  listedAt: new Date(watchlistShow.listed_at),
+  entry: mapShowResponseToShowSummary(watchlistShow.show),
+});
+
+export const showWatchlistQuery = await defineQuery({
+  key: 'showWatchlist',
+  invalidations: [InvalidateAction.Watchlisted('show')],
+  dependencies: (params: ShowWatchlistParams) => [params.sort],
+  request: watchlistRequest,
+  mapper: (body) => body.map(mapResponseToWatchlist),
+  schema: WatchlistShowSchema.array(),
 });
