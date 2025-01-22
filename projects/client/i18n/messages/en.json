@@ -274,5 +274,9 @@
   "remove_from_favorites": "Remove from Favorites",
   "add_to_favorites_label": "Add {title} to your Favorites",
   "remove_from_favorites_label": "Remove {title} from your Favorites",
-  "remove_from_favorites_warning": "Are you sure you want to remove {title} from your Favorites?"
+  "remove_from_favorites_warning": "Are you sure you want to remove {title} from your Favorites?",
+  "favorite_movies": "Favorite Movies",
+  "favorite_shows": "Favorite Shows",
+  "favorite_movies_empty": "Your favorite movies list is empty.",
+  "favorite_shows_empty": "Your favorite shows list is empty."
 }

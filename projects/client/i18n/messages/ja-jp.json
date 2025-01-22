@@ -275,5 +275,9 @@
   "add_to_favorites_label": "「{title}」をお気に入りに追加",
   "remove_from_favorites_label": "「{title}」をお気に入りから削除",
   "remove_from_favorites_warning": "「{title}」をお気に入りから削除してもよろしいですか？",
+  "favorite_movies": "お気に入り作品",
+  "favorite_shows": "お気に入り作品",
+  "favorite_movies_empty": "お気に入りの作品リストは空です。",
+  "favorite_shows_empty": "お気に入りの番組リストは空です。",
   "watch_title_now_disabled": "{title}は、お住まいの国の好きなストリーミングサービスで利用できる場合にのみ、今すぐ視聴できます。設定はhttps://trakt.tv/settingsで変更できます"
 }

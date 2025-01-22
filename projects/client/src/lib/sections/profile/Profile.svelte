@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
+  import FavoritesList from "../lists/FavoritesList.svelte";
   import RecentlyWatchedList from "../lists/RecentlyWatchedList.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
@@ -29,3 +30,14 @@
 
 <RecentlyWatchedList title={m.recently_watched_episodes()} type="episode" />
 <RecentlyWatchedList title={m.recently_watched_movies()} type="movie" />
+
+<FavoritesList
+  type="movie"
+  title={m.favorite_movies()}
+  emptyMessage={m.favorite_movies_empty()}
+/>
+<FavoritesList
+  type="show"
+  title={m.favorite_shows()}
+  emptyMessage={m.favorite_shows_empty()}
+/>

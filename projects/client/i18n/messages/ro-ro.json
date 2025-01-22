@@ -275,5 +275,9 @@
   "add_to_favorites_label": "Adaugă {title} la Favorite",
   "remove_from_favorites_label": "Șterge {title} din Favorite",
   "remove_from_favorites_warning": "Sigur vrei să ștergi {title} din Favorite?",
+  "favorite_movies": "Filme preferate",
+  "favorite_shows": "Seriale preferate",
+  "favorite_movies_empty": "Your favorite movies list is empty.",
+  "favorite_shows_empty": "Your favorite shows list is empty.",
   "watch_title_now_disabled": "Urmărirea acum este disponibilă doar dacă {title} este disponibil pe una dintre serviciile tale preferate de streaming din țara ta. Poți schimba aceste setări pe https://trakt.tv/settings"
 }

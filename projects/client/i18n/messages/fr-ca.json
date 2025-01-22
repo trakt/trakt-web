@@ -275,5 +275,9 @@
   "add_to_favorites_label": "Ajouter {title} à vos favoris",
   "remove_from_favorites_label": "Retirer {title} de vos favoris",
   "remove_from_favorites_warning": "Êtes-vous sûr de vouloir retirer {title} de vos favoris ?",
+  "favorite_movies": "Films préférés",
+  "favorite_shows": "Séries préférées",
+  "favorite_movies_empty": "Votre liste de favoris est vide.",
+  "favorite_shows_empty": "Votre liste d'émissions favorites est vide.",
   "watch_title_now_disabled": "Regarder maintenant n'est disponible que si {title} est accessible sur l'un de vos services de diffusion favoris dans votre pays. Vous pouvez modifier ces paramètres sur https://trakt.tv/settings"
 }

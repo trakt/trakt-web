@@ -275,5 +275,9 @@
   "add_to_favorites_label": "Adicionar {title} aos seus Favoritos",
   "remove_from_favorites_label": "Remover {title} dos seus Favoritos",
   "remove_from_favorites_warning": "Tem certeza que deseja remover {title} dos seus Favoritos?",
+  "favorite_movies": "Filmes Favoritos",
+  "favorite_shows": "Séries Favoritas",
+  "favorite_movies_empty": "Sua lista de favoritos está vazia. Que tal adicionar um clássico?",
+  "favorite_shows_empty": "Sua lista de séries favoritas está vazia. Hora de maratonar algo novo!",
   "watch_title_now_disabled": "Assistir agora só está disponível se {title} estiver disponível em um de seus serviços de streaming favoritos em seu país. Você pode alterar essas configurações em https://trakt.tv/settings"
 }

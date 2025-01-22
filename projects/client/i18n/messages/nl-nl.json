@@ -275,5 +275,9 @@
   "add_to_favorites_label": "Voeg {title} toe aan je favorieten",
   "remove_from_favorites_label": "Verwijder {title} uit je favorieten",
   "remove_from_favorites_warning": "Weet je zeker dat je {title} uit je favorieten wilt verwijderen?",
+  "favorite_movies": "Favoriete films",
+  "favorite_shows": "Favoriete series",
+  "favorite_movies_empty": "Je lijst met favorieten is leeg.",
+  "favorite_shows_empty": "Je favoriete series lijst is leeg.",
   "watch_title_now_disabled": "Nu kijken is alleen beschikbaar als {title} beschikbaar is op een van je favoriete streamingdiensten in je land. Je kunt deze instellingen wijzigen op https://trakt.tv/settings"
 }

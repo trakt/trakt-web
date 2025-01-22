@@ -275,5 +275,9 @@
   "add_to_favorites_label": "Додати {title} до Улюбленого",
   "remove_from_favorites_label": "Видалити {title} з Улюбленого",
   "remove_from_favorites_warning": "Ви впевнені, що хочете видалити {title} з Улюбленого?",
+  "favorite_movies": "Улюблені фільми",
+  "favorite_shows": "Улюблені серіали",
+  "favorite_movies_empty": "Ваш список улюбленого кіно порожній.",
+  "favorite_shows_empty": "Ваш список улюблених серіалів порожній.",
   "watch_title_now_disabled": "Переглянути зараз доступно лише якщо {title} доступний на одному з ваших улюблених потокових сервісів у вашій країні. Ви можете змінити ці налаштування на https://trakt.tv/settings"
 }
