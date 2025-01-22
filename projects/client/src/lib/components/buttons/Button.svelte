@@ -177,7 +177,7 @@
       }
     }
 
-    @each $color in "purple", "red", "blue", "default", "custom" {
+    @each $color in "purple", "red", "blue", "orange", "default", "custom" {
       @include color-styles($color);
     }
 

@@ -112,7 +112,7 @@
 
     transition: background-color var(--transition-increment) ease-in-out;
 
-    @each $color in "purple", "red", "blue", "default" {
+    @each $color in "purple", "red", "blue", "orange", "default" {
       @include color-styles($color);
     }
 
