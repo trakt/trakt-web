@@ -1,13 +1,14 @@
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
+import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 type PeopleShowCreditsParams = { slug: string } & ApiParams;
 
-function peopleShowCreditsRequest(
+const peopleShowCreditsRequest = (
   { fetch, slug }: PeopleShowCreditsParams,
-): Promise<ShowEntry[]> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .people
     .shows({
       params: {
@@ -17,21 +18,20 @@ function peopleShowCreditsRequest(
         extended: 'full,cloud9',
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch person show credits');
       }
 
-      return (body.cast ?? [])
-        .map(({ show }) => mapShowResponseToShowSummary(show));
+      return response.body.cast ?? [];
     });
-}
 
-export const peopleShowCreditsQueryKey = (id: string) =>
-  ['peopleShowCredits', id] as const;
-export const peopleShowCreditsQuery = (
-  params: PeopleShowCreditsParams,
-) => ({
-  queryKey: peopleShowCreditsQueryKey(params.slug),
-  queryFn: () => peopleShowCreditsRequest(params),
+export const peopleShowCreditsQuery = await defineQuery({
+  key: 'peopleShowCredits',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: peopleShowCreditsRequest,
+  mapper: (response) =>
+    response.map(({ show }) => mapShowResponseToShowSummary(show)),
+  schema: ShowEntrySchema.array(),
 });

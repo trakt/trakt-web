@@ -1,9 +1,8 @@
-import type { MediaEntry } from '$lib/requests/models/MediaEntry';
 import type { MediaType } from '$lib/requests/models/MediaType';
 import { peopleMovieCreditsQuery } from '$lib/requests/queries/people/peopleMovieCreditsQuery';
 import { peopleShowCreditsQuery } from '$lib/requests/queries/people/peopleShowCreditsQuery';
 import { time } from '$lib/utils/timing/time';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 type UseCreditsListProps = {
@@ -13,7 +12,7 @@ type UseCreditsListProps = {
 
 function typeToQuery(
   { type, slug }: UseCreditsListProps,
-): CreateQueryOptions<MediaEntry[]> {
+) {
   const params = { slug };
 
   switch (type) {

@@ -1,4 +1,5 @@
-import type { PersonSummary } from '$lib/requests/models/PersonSummary.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { PersonSummarySchema } from '$lib/requests/models/PersonSummary.ts';
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -7,9 +8,30 @@ import { api, type ApiParams } from '../../_internal/api.ts';
 
 type PersonSummaryParams = { slug: string } & ApiParams;
 
-function mapPeopleResponseToPersonSummary(
+const peopleSummaryRequest = (
+  { fetch, slug }: PersonSummaryParams,
+) =>
+  api({ fetch })
+    .people
+    .summary({
+      params: {
+        id: slug,
+      },
+      query: {
+        extended: 'full,cloud9',
+      },
+    })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error('Failed to fetch person summary');
+      }
+
+      return response.body;
+    });
+
+const mapPeopleResponseToPersonSummary = (
   peopleSummaryResponse: PeopleSummaryResponse,
-): PersonSummary {
+) => {
   const headshotCandidate = findDefined(
     ...(peopleSummaryResponse.images?.headshot ?? []),
   );
@@ -23,35 +45,13 @@ function mapPeopleResponseToPersonSummary(
       MEDIA_POSTER_PLACEHOLDER,
     ),
   };
-}
+};
 
-function peopleSummaryRequest(
-  { fetch, slug }: PersonSummaryParams,
-): Promise<PersonSummary> {
-  return api({ fetch })
-    .people
-    .summary({
-      params: {
-        id: slug,
-      },
-      query: {
-        extended: 'full,cloud9',
-      },
-    })
-    .then(({ status, body }) => {
-      if (status !== 200) {
-        throw new Error('Failed to fetch person summary');
-      }
-
-      return mapPeopleResponseToPersonSummary(body);
-    });
-}
-
-export const peopleSummaryQueryKey = (id: string) =>
-  ['peopleSummary', id] as const;
-export const peopleSummaryQuery = (
-  params: PersonSummaryParams,
-) => ({
-  queryKey: peopleSummaryQueryKey(params.slug),
-  queryFn: () => peopleSummaryRequest(params),
+export const peopleSummaryQuery = await defineQuery({
+  key: 'peopleSummary',
+  invalidations: [],
+  dependencies: (params) => [params.slug],
+  request: peopleSummaryRequest,
+  mapper: mapPeopleResponseToPersonSummary,
+  schema: PersonSummarySchema,
 });
