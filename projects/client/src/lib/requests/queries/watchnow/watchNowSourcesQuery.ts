@@ -1,10 +1,20 @@
-import type { WatchNowSource } from '$lib/requests/models/WatchNowSources.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import {
+  type WatchNowSource,
+  WatchNowSourceSchema,
+} from '$lib/requests/models/WatchNowSources.ts';
+import { toMap } from '$lib/utils/array/toMap.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { WatchNowSourceResponse } from '@trakt/api';
+import { z } from 'zod';
 import { api, type ApiParams } from '../../_internal/api.ts';
 
 type WatchNowSourcesParams = ApiParams;
+const WatchNowSourceListSchema = z.map(
+  z.string(),
+  WatchNowSourceSchema.array(),
+);
 
 function mapWatchNowSourceResponse(
   sourceResponse: WatchNowSourceResponse,
@@ -17,33 +27,37 @@ function mapWatchNowSourceResponse(
   };
 }
 
-function watchNowSourcesRequest(
+function extractCountryCode(
+  response: Record<string, unknown>,
+) {
+  return assertDefined(Object.keys(response).at(0));
+}
+
+const watchNowSourcesRequest = (
   { fetch }: WatchNowSourcesParams,
-): Promise<Map<string, WatchNowSource[]>> {
-  return api({ fetch })
+) =>
+  api({ fetch })
     .watchnow
     .sources()
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch watch now sources');
       }
 
-      return body
-        .reduce((map, countryResponse) => {
-          const countryCode = assertDefined(Object.keys(countryResponse).at(0));
-          const countrySources = countryResponse[countryCode];
-          const mapped = countrySources.map(mapWatchNowSourceResponse);
-
-          map.set(countryCode, mapped);
-          return map;
-        }, new Map<string, WatchNowSource[]>());
+      return response.body;
     });
-}
 
-const watchNowSourcesQueryKey = () => ['watchNowSources'] as const;
-export const watchNowSourcesQuery = (
-  params: WatchNowSourcesParams,
-) => ({
-  queryKey: watchNowSourcesQueryKey(),
-  queryFn: () => watchNowSourcesRequest(params),
+export const watchNowSourcesQuery = await defineQuery({
+  key: 'watchNowSources',
+  invalidations: [],
+  dependencies: () => [],
+  request: watchNowSourcesRequest,
+  mapper: (body) =>
+    toMap(body, (response) => {
+      const countryCode = extractCountryCode(response);
+      const countrySources = response[countryCode];
+
+      return countrySources.map(mapWatchNowSourceResponse);
+    }, (_, entry) => extractCountryCode(entry)),
+  schema: WatchNowSourceListSchema,
 });
