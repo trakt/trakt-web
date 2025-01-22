@@ -4,12 +4,14 @@
   type SummaryContainerProps = {
     poster?: Snippet;
     contextualContent?: Snippet;
+    topActions?: Snippet;
   } & ChildrenProps;
 
   const {
     poster,
     contextualContent: content,
     children,
+    topActions: actions,
   }: SummaryContainerProps = $props();
 </script>
 
@@ -19,8 +21,15 @@
       {@render poster()}
     </div>
   {/if}
-  <div class="trakt-summary-children">
-    {@render children()}
+  <div class="trakt-summary-content" class:has-actions={actions}>
+    {#if actions}
+      <div class="trakt-summary-actions">
+        {@render actions()}
+      </div>
+    {/if}
+    <div class="trakt-summary-children">
+      {@render children()}
+    </div>
   </div>
   {#if content}
     <div class="trakt-summary-contextual-content">
@@ -45,7 +54,7 @@
     @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
 
-      .trakt-summary-children {
+      .trakt-summary-content {
         grid-column: 1;
       }
 
@@ -57,11 +66,20 @@
     }
   }
 
-  .trakt-summary-children {
+  .trakt-summary-content {
     grid-column: 2;
     display: flex;
     flex-direction: column;
-    align-self: end;
+    justify-content: end;
+
+    &.has-actions {
+      justify-content: space-between;
+    }
+  }
+
+  .trakt-summary-children {
+    display: flex;
+    flex-direction: column;
     gap: var(--ni-32);
   }
 
@@ -69,5 +87,9 @@
     display: flex;
     justify-content: center;
     align-items: end;
+  }
+
+  .trakt-summary-actions {
+    margin-left: var(--ni-neg-16);
   }
 </style>
