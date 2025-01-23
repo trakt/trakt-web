@@ -8,6 +8,7 @@ import {
   showWatchlistQuery,
   type WatchlistShow,
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
@@ -47,7 +48,10 @@ export function useWatchlistList(params: WatchListStoreProps) {
     query,
     ($query) => ($query.data ?? []).map((item) => item.entry),
   );
-  const isLoading = derived(query, ($query) => $query.isLoading);
+  const isLoading = derived(
+    query,
+    toLoadingState,
+  );
 
   return {
     list,

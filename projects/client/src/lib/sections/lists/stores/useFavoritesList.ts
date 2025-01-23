@@ -1,6 +1,7 @@
 import type { MediaType } from '$lib/requests/models/MediaType';
 import { movieFavoritesQuery } from '$lib/requests/queries/movies/movieFavoritesQuery';
 import { showFavoritesQuery } from '$lib/requests/queries/shows/showFavoritesQuery';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { time } from '$lib/utils/timing/time';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
@@ -30,7 +31,7 @@ export function useFavoritesList({ type }: UseFavoritesProps) {
     list: derived(query, ($query) => $query.data ?? []),
     isLoading: derived(
       query,
-      ($query) => $query.isLoading || $query.isFetching,
+      toLoadingState,
     ),
   };
 }

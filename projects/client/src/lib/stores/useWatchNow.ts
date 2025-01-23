@@ -5,6 +5,7 @@ import type { WatchNowServices } from '$lib/requests/models/WatchNowServices.ts'
 import { episodeWatchNowQuery } from '$lib/requests/queries/episode/episodeWatchNowQuery.ts';
 import { showWatchNowQuery } from '$lib/requests/queries/shows/showWatchNowQuery.ts';
 import { findFavoriteWatchNowService } from '$lib/stores/_internal/findFavoriteWatchNowService.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
@@ -73,7 +74,7 @@ export function useWatchNow({ type, id }: WatchNowStoreProps) {
     ),
     isLoading: derived(
       watchNow,
-      ($watchNow) => $watchNow.isLoading || $watchNow.isFetching,
+      toLoadingState,
     ),
   };
 }

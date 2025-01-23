@@ -1,5 +1,6 @@
 import { upcomingEpisodesQuery } from '$lib/requests/queries/calendars/upcomingEpisodesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
@@ -31,7 +32,10 @@ export function useCalendarEpisodes() {
       }),
   );
 
-  const isLoading = derived(query, ($query) => $query.isLoading);
+  const isLoading = derived(
+    query,
+    toLoadingState,
+  );
 
   return { calendar, isLoading };
 }
