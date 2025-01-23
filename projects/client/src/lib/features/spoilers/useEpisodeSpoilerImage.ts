@@ -1,7 +1,7 @@
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
 import type { ShowEntry as MediaEntry } from '$lib/requests/models/ShowEntry';
 import { derived } from 'svelte/store';
-import { useSpoiler } from './_internal/useSpoiler';
+import { useMediaSpoiler } from './useMediaSpoiler';
 
 type SpoilerImageProps = {
   episode: EpisodeEntry;
@@ -9,9 +9,14 @@ type SpoilerImageProps = {
 };
 
 export function useEpisodeSpoilerImage(props: SpoilerImageProps) {
-  const { isSpoilerHidden } = useSpoiler();
-
   const { episode, show } = props;
+
+  const { isSpoilerHidden } = useMediaSpoiler({
+    episode,
+    show,
+    media: episode,
+    type: 'episode',
+  });
 
   return derived(
     isSpoilerHidden,
