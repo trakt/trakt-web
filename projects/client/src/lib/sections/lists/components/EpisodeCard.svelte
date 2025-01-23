@@ -8,6 +8,7 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -24,6 +25,7 @@
   const { show, episode, context = "show" }: EpisodeProps = $props();
 
   const isFuture = $derived(episode.airDate > new Date());
+  const src = useEpisodeSpoilerImage({ episode, show });
 </script>
 
 <EpisodeCard>
@@ -32,9 +34,7 @@
     href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
   >
     <MediaCover
-      src={episode.cover.url ??
-        show.cover.url.thumb ??
-        EPISODE_COVER_PLACEHOLDER}
+      src={$src ?? EPISODE_COVER_PLACEHOLDER}
       alt={`${episode.title} poster`}
     >
       {#snippet tags()}

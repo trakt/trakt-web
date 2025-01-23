@@ -6,6 +6,7 @@
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -21,6 +22,8 @@
   const { episode, show }: UpNextItemProps = $props();
 
   const isLoading = writable(false);
+
+  const src = useEpisodeSpoilerImage({ episode, show });
 </script>
 
 <EpisodeCard>
@@ -31,7 +34,7 @@
     <EpisodeCover
       i18n={EpisodeIntlProvider}
       type={episode.type}
-      src={`${episode.cover.url ?? show.cover.url.thumb ?? EPISODE_COVER_PLACEHOLDER}`}
+      src={$src ?? EPISODE_COVER_PLACEHOLDER}
       alt={`${show.title} - ${episode.title}`}
       isLoading={$isLoading}
     >

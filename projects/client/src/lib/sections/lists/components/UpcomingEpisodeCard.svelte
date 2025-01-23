@@ -6,6 +6,7 @@
   import EpisodeTimeTag from "$lib/components/episode/tags/EpisodeTimeTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
@@ -17,6 +18,8 @@
   };
 
   const { show, episode }: EpisodeProps = $props();
+
+  const src = useEpisodeSpoilerImage({ episode, show });
 </script>
 
 <EpisodeCard>
@@ -27,7 +30,7 @@
     <EpisodeCover
       i18n={EpisodeIntlProvider}
       type={episode.type}
-      src={`${episode.cover.url ?? show.cover.url.thumb ?? EPISODE_COVER_PLACEHOLDER}`}
+      src={$src ?? EPISODE_COVER_PLACEHOLDER}
       alt={`${show.title} - ${episode.title}`}
     >
       {#snippet tags()}
