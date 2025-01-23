@@ -5,8 +5,8 @@ export function interceptHandleResolveOptions(handle: Handle) {
   return new Promise<ResolveOptions>((resolve) => {
     handle({
       event: mockRequestEvent({ url: 'http://localhost' }),
-      resolve: (_, opts: ResolveOptions) => {
-        resolve(opts);
+      resolve: (_, opts?: ResolveOptions) => {
+        resolve(opts ?? {});
         return Promise.resolve(new Response());
       },
     });
