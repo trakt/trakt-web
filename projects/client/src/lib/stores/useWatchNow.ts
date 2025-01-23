@@ -1,6 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { WatchNowServices } from '$lib/requests/models/WatchNowServices.ts';
 import { episodeWatchNowQuery } from '$lib/requests/queries/episode/episodeWatchNowQuery.ts';
 import { showWatchNowQuery } from '$lib/requests/queries/shows/showWatchNowQuery.ts';
 import { findFavoriteWatchNowService } from '$lib/stores/_internal/findFavoriteWatchNowService.ts';
@@ -33,6 +34,11 @@ function typeToQuery(
   }
 }
 
+function findViablePreferredService(services: WatchNowServices) {
+  // TODO we'll need to revisit and come up with a better heuristic
+  return services.streaming.at(0);
+}
+
 export function useWatchNow({ type, id }: WatchNowStoreProps) {
   const { current } = useUser();
   const { region } = getLanguageAndRegion();
@@ -57,11 +63,11 @@ export function useWatchNow({ type, id }: WatchNowStoreProps) {
           services: {
             ...$watchNow.data,
           },
-          favoriteService: findFavoriteWatchNowService({
+          preferred: findFavoriteWatchNowService({
             services: $watchNow.data,
             favorites: watchNowSettings.favorites ?? [],
             countryCode: country,
-          }),
+          }) ?? findViablePreferredService($watchNow.data),
         };
       },
     ),

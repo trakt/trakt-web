@@ -5,13 +5,13 @@
   } from "$lib/requests/models/WatchNowServices";
   import type { WatchNowButtonIntl } from "./WatchNowButtonIntl";
   import { WatchNowButtonIntlProvider } from "./WatchNowButtonIntlProvider";
-  import WatchNowDirectLinkButton from "./_internal/WatchNowDirectLinkButton.svelte";
-  import WatchNowDropdownButton from "./_internal/WatchNowDropdownButton.svelte";
+  import WatchNowDropdown from "./_internal/WatchNowDropdown.svelte";
+  import WatchNowLink from "./_internal/WatchNowLink.svelte";
 
   type WatchNowButtonProps = {
     isLoading: boolean;
     mediaTitle: string;
-    favoriteService?: WatchNowStreaming;
+    preferred?: WatchNowStreaming;
     services?: WatchNowServices;
     i18n?: WatchNowButtonIntl;
   };
@@ -20,7 +20,7 @@
     isLoading,
     mediaTitle,
     services,
-    favoriteService,
+    preferred,
     i18n = WatchNowButtonIntlProvider,
   }: WatchNowButtonProps = $props();
 
@@ -32,8 +32,8 @@
    */
 </script>
 
-{#if favoriteService}
-  <WatchNowDirectLinkButton {mediaTitle} {favoriteService} {i18n} {isLoading} />
+{#if preferred}
+  <WatchNowLink {mediaTitle} service={preferred} {i18n} {isLoading} />
 {:else}
-  <WatchNowDropdownButton {mediaTitle} {services} {i18n} {isLoading} />
+  <WatchNowDropdown {mediaTitle} {services} {i18n} {isLoading} />
 {/if}

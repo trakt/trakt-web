@@ -7,12 +7,12 @@
 
   type WatchNowButtonProps = {
     mediaTitle: string;
-    favoriteService: WatchNowStreaming;
+    service: WatchNowStreaming;
     i18n: WatchNowButtonIntl;
     isLoading: boolean;
   };
 
-  const { mediaTitle, favoriteService, i18n, isLoading }: WatchNowButtonProps =
+  const { mediaTitle, service, i18n, isLoading }: WatchNowButtonProps =
     $props();
 
   /*
@@ -23,7 +23,7 @@
 
 <Button
   label={i18n.title(mediaTitle)}
-  href={favoriteService.link}
+  href={service.link}
   disabled={isLoading || undefined}
   style="textured"
   color="purple"
@@ -31,7 +31,7 @@
 >
   {i18n.watchNow()}
   {#snippet icon()}
-    <WatchNowServiceLogo source={favoriteService.source} {i18n} />
+    <WatchNowServiceLogo source={service.source} {i18n} />
     <PlayIcon />
   {/snippet}
 </Button>

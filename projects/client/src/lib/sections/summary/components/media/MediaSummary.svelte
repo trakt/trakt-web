@@ -67,7 +67,7 @@
 {#snippet mediaActions()}
   <WatchNowButton
     isLoading={$isLoading}
-    favoriteService={$watchNow?.favoriteService}
+    preferred={$watchNow?.preferred}
     services={$watchNow?.services}
     mediaTitle={media.title}
   />
