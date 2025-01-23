@@ -43,6 +43,7 @@ declare global {
   };
 
   type HTMLImageElementProps = {
+    loading?: 'lazy' | 'eager';
     src: string;
     alt: string;
     onload?: (event: Event) => void;

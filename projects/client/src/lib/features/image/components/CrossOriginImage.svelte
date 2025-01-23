@@ -5,6 +5,7 @@
   const {
     alt,
     src,
+    loading = "lazy",
     animate = true,
     onload: _onload,
     onerror: _onerror,
@@ -15,7 +16,7 @@
 </script>
 
 <img
-  loading="lazy"
+  {loading}
   class:image-loaded={$isImageLoaded}
   class:image-animation-enabled={animate}
   src={$response.uri}

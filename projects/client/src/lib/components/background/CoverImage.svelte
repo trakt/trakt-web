@@ -7,7 +7,11 @@
 
 {#if $state === "ready"}
   <div class="background-cover-image">
-    <CrossOriginImage src={$cover.src} alt={`Background for ${$cover.type}`} />
+    <CrossOriginImage
+      loading="eager"
+      src={$cover.src}
+      alt={`Background for ${$cover.type}`}
+    />
   </div>
 {/if}
 
