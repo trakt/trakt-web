@@ -1,7 +1,7 @@
 import type { WatchNowServices } from '$lib/requests/models/WatchNowServices';
 
 export const MovieHereticWatchedNowMappedMock: WatchNowServices = {
-  'onDemandServices': [
+  'onDemand': [
     {
       'currency': 'usd',
       'is4k': true,
@@ -69,5 +69,5 @@ export const MovieHereticWatchedNowMappedMock: WatchNowServices = {
       'type': 'on-demand',
     },
   ],
-  'streamingServices': [],
+  'streaming': [],
 };

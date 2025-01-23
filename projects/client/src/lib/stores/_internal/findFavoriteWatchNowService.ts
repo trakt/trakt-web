@@ -12,7 +12,7 @@ export function findFavoriteWatchNowService({
   countryCode,
 }: FindFavoriteWatchNowServiceProps) {
   const favoriteSubscriptionMatch = services
-    .streamingServices
+    .streaming
     .find(
       (subscription) =>
         favorites.includes(`${countryCode}-${subscription.source}`),

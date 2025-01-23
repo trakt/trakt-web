@@ -25,7 +25,7 @@ export const WatchNowOnDemandSchema = z.object({
 export type WatchNowOnDemand = z.infer<typeof WatchNowOnDemandSchema>;
 
 export const WatchNowServicesSchema = z.object({
-  streamingServices: WatchNowStreamingSchema.array(),
-  onDemandServices: WatchNowOnDemandSchema.array(),
+  streaming: WatchNowStreamingSchema.array(),
+  onDemand: WatchNowOnDemandSchema.array(),
 });
 export type WatchNowServices = z.infer<typeof WatchNowServicesSchema>;

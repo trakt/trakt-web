@@ -5,7 +5,7 @@ import { findFavoriteWatchNowService } from './findFavoriteWatchNowService.ts';
 describe('findFavoriteWatchNowService', () => {
   it('should return undefined if there are no subscription services', () => {
     expect(findFavoriteWatchNowService({
-      services: { streamingServices: [], onDemandServices: [] },
+      services: { streaming: [], onDemand: [] },
       favorites: ['netflix'],
       countryCode: 'nl',
     })).toBe(undefined);
@@ -14,13 +14,13 @@ describe('findFavoriteWatchNowService', () => {
   it('should return undefined if there are no matching favorite subscriptions', () => {
     expect(findFavoriteWatchNowService({
       services: {
-        streamingServices: [{
+        streaming: [{
           link: 'https://www.netflix.com/',
           source: 'netflix',
           is4k: false,
           type: 'streaming',
         }],
-        onDemandServices: [],
+        onDemand: [],
       },
       favorites: ['us-netflix'],
       countryCode: 'nl',
@@ -37,8 +37,8 @@ describe('findFavoriteWatchNowService', () => {
 
     expect(findFavoriteWatchNowService({
       services: {
-        streamingServices: [subscription],
-        onDemandServices: [],
+        streaming: [subscription],
+        onDemand: [],
       },
       favorites: ['nl-netflix'],
       countryCode: 'nl',

@@ -1,8 +1,8 @@
 import type { WatchNowServices } from '$lib/requests/models/WatchNowServices';
 
 export const ShowSiloWatchNowMappedMock: WatchNowServices = {
-  'onDemandServices': [],
-  'streamingServices': [
+  'onDemand': [],
+  'streaming': [
     {
       'is4k': true,
       'link': 'https://trakt.tv/watchnow/194269876',

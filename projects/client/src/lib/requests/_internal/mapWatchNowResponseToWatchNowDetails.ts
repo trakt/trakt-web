@@ -52,7 +52,7 @@ export function mapWatchNowResponseToWatchNowDetails(
   const purchaseResponse = sortWatchNowSources(data?.purchase ?? []);
 
   return {
-    streamingServices: subscriptionResponse.map(mapStreamingService),
-    onDemandServices: purchaseResponse.map(mapOnDemandService),
+    streaming: subscriptionResponse.map(mapStreamingService),
+    onDemand: purchaseResponse.map(mapOnDemandService),
   };
 }

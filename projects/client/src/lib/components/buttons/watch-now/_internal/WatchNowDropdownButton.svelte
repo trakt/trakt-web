@@ -14,8 +14,8 @@
   const { mediaTitle, services, i18n, isLoading }: WatchNowDropdownButtonProps =
     $props();
 
-  const streamingServices = $derived(services?.streamingServices ?? []);
-  const onDemandServices = $derived(services?.onDemandServices ?? []);
+  const streamingServices = $derived(services?.streaming ?? []);
+  const onDemandServices = $derived(services?.onDemand ?? []);
   const allServices = $derived([...streamingServices, ...onDemandServices]);
 
   const isDisabled = $derived(isLoading || allServices.length === 0);
