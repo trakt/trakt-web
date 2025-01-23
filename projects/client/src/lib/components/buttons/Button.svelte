@@ -217,6 +217,12 @@
       gap: var(--ni-8);
     }
 
+    .button-label {
+      // Needed to make ellipses work with flex
+      // https://css-tricks.com/flexbox-truncated-text/
+      min-width: 0;
+    }
+
     p,
     .button-label,
     .button-icon {
