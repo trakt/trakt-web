@@ -31,7 +31,7 @@ export const UserSettingsSchema = z.object({
       }),
     }),
     watch: z.object({
-      action: z.enum(['now', 'ask', 'released']).optional(),
+      action: z.enum(['now', 'released']),
     }),
   }),
   genres: genreOptionSchema.array(),
@@ -74,7 +74,9 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     isVip: user.vip || user.vip_ep,
     preferences: {
       watch: {
-        action: browsing?.watch_popup_action,
+        action: browsing?.watch_popup_action === 'ask'
+          ? 'now'
+          : browsing?.watch_popup_action ?? 'now',
       },
       progress: {
         sort: {
