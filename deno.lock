@@ -36,7 +36,6 @@
     "npm:firebase@^11.2.0": "11.2.0_@firebase+app@0.10.18_@firebase+app-compat@0.2.48_@firebase+app-types@0.9.3",
     "npm:globals@^15.14.0": "15.14.0",
     "npm:hono@^4.6.16": "4.6.18",
-    "npm:idb-keyval@^6.2.1": "6.2.1",
     "npm:jsdom@26": "26.0.0",
     "npm:msw@^2.7.0": "2.7.0_typescript@5.7.3",
     "npm:prettier-plugin-svelte@^3.3.3": "3.3.3_prettier@3.4.2_svelte@5.19.2__acorn@8.14.0",
@@ -2909,9 +2908,6 @@
         "safer-buffer"
       ]
     },
-    "idb-keyval@6.2.1": {
-      "integrity": "sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg=="
-    },
     "idb@7.1.1": {
       "integrity": "sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ=="
     },
@@ -4426,7 +4422,6 @@
             "npm:eslint@^9.18.0",
             "npm:firebase@^11.2.0",
             "npm:globals@^15.14.0",
-            "npm:idb-keyval@^6.2.1",
             "npm:jsdom@26",
             "npm:msw@^2.7.0",
             "npm:prettier-plugin-svelte@^3.3.3",
