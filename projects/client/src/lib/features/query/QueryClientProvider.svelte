@@ -3,7 +3,7 @@
   import { type QueryClient } from "@tanstack/svelte-query";
   import { PersistQueryClientProvider } from "@tanstack/svelte-query-persist-client";
   import { onMount } from "svelte";
-  import { idbPersisterFactory } from "./idbPersisterFactory";
+  import { createPersister } from "./createPersister";
 
   const { children, client }: ChildrenProps & { client: QueryClient } =
     $props();
@@ -18,7 +18,7 @@
 <PersistQueryClientProvider
   {client}
   persistOptions={{
-    persister: idbPersisterFactory(),
+    persister: createPersister(),
   }}
 >
   {@render children()}

@@ -11,7 +11,7 @@ import { del, get, set } from 'idb-keyval';
  * Creates an Indexed DB persister
  * @see https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
  */
-export function idbPersisterFactory(
+export function createPersister(
   idbValidKey: IDBValidKey = 'trakt-query-client',
 ): Persister {
   if (!browser) {
