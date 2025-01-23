@@ -8,10 +8,6 @@ export function useIsWatched(props: IsWatchedProps) {
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const { history } = useUser();
 
-  /**
-   *  TODO: implement some sort of in-memory cache for result of action response
-   *  that will allow to show optimistic UI updates while history is being updated
-   */
   const isWatched = derived(
     history,
     ($history) => {
@@ -45,5 +41,5 @@ export function useIsWatched(props: IsWatchedProps) {
     },
   );
 
-  return isWatched;
+  return { isWatched };
 }

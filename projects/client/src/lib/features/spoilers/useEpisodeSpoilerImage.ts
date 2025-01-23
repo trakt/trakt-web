@@ -1,7 +1,7 @@
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
 import type { ShowEntry as MediaEntry } from '$lib/requests/models/ShowEntry';
 import { derived } from 'svelte/store';
-import { useSpoiler } from './useSpoiler';
+import { useSpoiler } from './_internal/useSpoiler';
 
 type SpoilerImageProps = {
   episode: EpisodeEntry;

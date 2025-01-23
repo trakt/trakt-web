@@ -1,17 +1,13 @@
 <script lang="ts">
-  import {
-    type IsWatchedProps,
-    useIsWatched,
-  } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
-  import { useSpoilerAction } from "../useSpoilerAction";
+  import { type IsWatchedProps } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
+  import { useSpoilerAction } from "../_internal/useSpoilerAction";
 
-  const { spoiler } = useSpoilerAction();
   const { children, ...rest }: ChildrenProps & IsWatchedProps = $props();
 
-  const isWatched = $derived(useIsWatched(rest));
+  const { spoiler } = useSpoilerAction(rest);
 </script>
 
-<trakt-spoiler use:spoiler={!!$isWatched}>
+<trakt-spoiler use:spoiler>
   {@render children()}
 </trakt-spoiler>
 
