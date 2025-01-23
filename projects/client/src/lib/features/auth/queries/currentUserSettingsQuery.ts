@@ -37,6 +37,7 @@ export const UserSettingsSchema = z.object({
     watch: z.object({
       action: z.enum(['now', 'released']),
     }),
+    isSpoilerHidden: z.boolean().optional(),
   }),
   genres: genreOptionSchema.array(),
   watchNow: z.object({
@@ -88,6 +89,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
           direction: browsing?.progress.on_deck.sort_how,
         },
       },
+      isSpoilerHidden: Object.values(browsing?.spoilers ?? {}).some(Boolean),
     },
     genres: browsing?.genres.favorites ?? [],
     watchNow: {
