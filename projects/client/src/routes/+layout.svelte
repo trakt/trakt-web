@@ -33,15 +33,9 @@
     href="https://walter-r2.trakt.tv"
     crossorigin="anonymous"
   />
-  <!-- https://web.dev/articles/defer-non-critical-css -->
   <link
-    rel="preload"
     href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap"
-    as="style"
-    onload={function () {
-      this.onload = null;
-      this.rel = "stylesheet";
-    }}
+    rel="stylesheet"
   />
   <style>
     html,
