@@ -7,6 +7,7 @@
   import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -53,13 +54,17 @@
       <p class="episode-title small ellipsis">
         {show.title}
       </p>
-      <p class="episode-subtitle small ellipsis">
-        {episode.season}x{episode.number} - {episode.title}
-      </p>
+      <Spoiler media={episode} {show} {episode} type="episode">
+        <p class="episode-subtitle small ellipsis">
+          {episode.season}x{episode.number} - {episode.title}
+        </p>
+      </Spoiler>
     {:else}
-      <p class="episode-title small ellipsis">
-        {episode.title}
-      </p>
+      <Spoiler media={episode} {show} {episode} type="episode">
+        <p class="episode-title small ellipsis">
+          {episode.title}
+        </p>
+      </Spoiler>
       <p class="episode-subtitle small ellipsis">
         {episode.season}x{episode.number}
       </p>

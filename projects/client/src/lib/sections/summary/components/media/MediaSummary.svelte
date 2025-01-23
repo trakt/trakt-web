@@ -3,6 +3,7 @@
   import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -106,7 +107,9 @@
     {watchers}
   />
 
-  <SummaryOverview {title} overview={intl.overview ?? media.overview} />
+  <Spoiler {media} {type}>
+    <SummaryOverview {title} overview={intl.overview ?? media.overview} />
+  </Spoiler>
 
   <RenderFor audience="authenticated">
     <SummaryActions>

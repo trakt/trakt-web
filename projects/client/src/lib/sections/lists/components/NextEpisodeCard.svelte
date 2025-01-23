@@ -5,6 +5,7 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -51,7 +52,10 @@
       <p class="episode-show-title ellipsis">{show.title}</p>
     </Link>
     <p class="episode-title small ellipsis">
-      {episode.season}x{episode.number} - {episode.title}
+      {episode.season}x{episode.number}
+      <Spoiler media={episode} {show} {episode} type="episode"
+        >- {episode.title}</Spoiler
+      >
     </p>
     {#snippet action()}
       <MarkAsWatchedAction

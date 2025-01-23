@@ -1,6 +1,6 @@
+import { useAuth } from '$lib/features/auth/stores/useAuth';
+import { useUser } from '$lib/features/auth/stores/useUser';
 import { derived } from 'svelte/store';
-import { useAuth } from '../auth/stores/useAuth';
-import { useUser } from '../auth/stores/useUser';
 
 export function useSpoiler() {
   const { isAuthorized } = useAuth();

@@ -5,6 +5,7 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import EpisodeTimeTag from "$lib/components/episode/tags/EpisodeTimeTag.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
@@ -41,7 +42,10 @@
       <p class="episode-show-title ellipsis">{show.title}</p>
     </Link>
     <p class="episode-title ellipsis small">
-      {episode.season}x{episode.number} - {episode.title}
+      {episode.season}x{episode.number}
+      <Spoiler media={episode} {show} {episode} type="episode"
+        >- {episode.title}</Spoiler
+      >
     </p>
   </CardFooter>
 </EpisodeCard>

@@ -6,6 +6,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/SeasonList.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -93,7 +94,9 @@
     {watchers}
   />
 
-  <SummaryOverview {title} {overview} />
+  <Spoiler media={episode} {episode} {show} {type}>
+    <SummaryOverview {title} {overview} />
+  </Spoiler>
 
   <RenderFor audience="authenticated">
     <SummaryActions>
