@@ -1,7 +1,7 @@
 import type { LayoutLoad } from './$types';
 
 import { browser } from '$app/environment';
-import { currentUserSettingsQuery } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
+import { currentUserSettingsQuery } from '$lib/features/auth/queries/currentUserSettingsQuery';
 import { QueryClient } from '@tanstack/svelte-query';
 
 export const load: LayoutLoad = async ({ data, fetch }) => {
@@ -9,7 +9,7 @@ export const load: LayoutLoad = async ({ data, fetch }) => {
     defaultOptions: {
       queries: {
         enabled: browser,
-        retry: 0,
+        retry: 5,
         retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
         refetchOnWindowFocus: false,
       },
