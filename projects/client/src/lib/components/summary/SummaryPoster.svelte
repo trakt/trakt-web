@@ -12,8 +12,14 @@
     actions?: Snippet;
   };
 
-  const { src, alt, href, actions, hoverOverlay, target }: SummaryPosterProps =
-    $props();
+  const {
+    src,
+    alt,
+    href,
+    actions,
+    hoverOverlay,
+    target = "_blank",
+  }: SummaryPosterProps = $props();
 </script>
 
 <div class="trakt-summary-poster-container">

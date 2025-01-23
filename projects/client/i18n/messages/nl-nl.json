@@ -278,5 +278,6 @@
   "favorite_movies": "Favoriete films",
   "favorite_shows": "Favoriete series",
   "favorite_movies_empty": "Je lijst met favorieten is leeg.",
-  "favorite_shows_empty": "Je favoriete series lijst is leeg."
+  "favorite_shows_empty": "Je favoriete series lijst is leeg.",
+  "stream_on": "Streamen op"
 }

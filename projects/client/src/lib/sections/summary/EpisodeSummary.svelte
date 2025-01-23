@@ -13,6 +13,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
+  import WatchNowOverlay from "./components/overlay/WatchNowOverlay.svelte";
   import RateNowButton from "./components/rating/RateNowButton.svelte";
   import SummaryActions from "./components/summary/SummaryActions.svelte";
   import SummaryContainer from "./components/summary/SummaryContainer.svelte";
@@ -63,10 +64,13 @@
 <SummaryContainer>
   {#snippet poster()}
     <SummaryPoster
-      href={UrlBuilder.show(show.slug)}
       src={show.poster.url.medium}
       alt={title}
+      href={$watchNow?.preferred?.link}
     >
+      {#snippet hoverOverlay()}
+        <WatchNowOverlay service={$watchNow?.preferred} />
+      {/snippet}
       {#snippet actions()}
         <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
           {@render mediaActions()}

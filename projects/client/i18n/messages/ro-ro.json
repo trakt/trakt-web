@@ -278,5 +278,6 @@
   "favorite_movies": "Filme preferate",
   "favorite_shows": "Seriale preferate",
   "favorite_movies_empty": "Your favorite movies list is empty.",
-  "favorite_shows_empty": "Your favorite shows list is empty."
+  "favorite_shows_empty": "Your favorite shows list is empty.",
+  "stream_on": "Vezi pe platforme"
 }

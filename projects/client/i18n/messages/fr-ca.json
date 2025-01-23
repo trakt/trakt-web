@@ -278,5 +278,6 @@
   "favorite_movies": "Films préférés",
   "favorite_shows": "Séries préférées",
   "favorite_movies_empty": "Votre liste de favoris est vide.",
-  "favorite_shows_empty": "Votre liste d'émissions favorites est vide."
+  "favorite_shows_empty": "Votre liste d'émissions favorites est vide.",
+  "stream_on": "En diffusion sur"
 }

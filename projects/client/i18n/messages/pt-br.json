@@ -278,5 +278,6 @@
   "favorite_movies": "Filmes Favoritos",
   "favorite_shows": "Séries Favoritas",
   "favorite_movies_empty": "Sua lista de favoritos está vazia. Que tal adicionar um clássico?",
-  "favorite_shows_empty": "Sua lista de séries favoritas está vazia. Hora de maratonar algo novo!"
+  "favorite_shows_empty": "Sua lista de séries favoritas está vazia. Hora de maratonar algo novo!",
+  "stream_on": "Assista em"
 }

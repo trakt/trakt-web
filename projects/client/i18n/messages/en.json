@@ -278,5 +278,6 @@
   "favorite_movies": "Favorite Movies",
   "favorite_shows": "Favorite Shows",
   "favorite_movies_empty": "Your favorite movies list is empty.",
-  "favorite_shows_empty": "Your favorite shows list is empty."
+  "favorite_shows_empty": "Your favorite shows list is empty.",
+  "stream_on": "Stream on"
 }
