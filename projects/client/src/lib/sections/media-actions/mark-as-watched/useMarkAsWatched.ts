@@ -5,8 +5,9 @@ import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts
 import { resolveWatchDate } from '$lib/stores/_internal/resolveWatchDate.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { derived, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
+import { useIsWatched } from './useIsWatched.ts';
 
 type ArrayOrSingle<T> = T | T[];
 
@@ -36,45 +37,14 @@ export function useMarkAsWatched(
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const ids = media.map(({ id }) => id);
   const isMarkingAsWatched = writable(false);
-  const { user, history } = useUser();
+  const { user } = useUser();
   const { invalidate } = useInvalidator();
 
   /**
    *  TODO: implement some sort of in-memory cache for result of action response
    *  that will allow to show optimistic UI updates while history is being updated
    */
-  const isWatched = derived(
-    history,
-    ($history) => {
-      if (!$history) {
-        return false;
-      }
-
-      switch (type) {
-        case 'movie':
-          return media.every((m) => $history.movies.has(m.id));
-        case 'episode': {
-          const episodes = Array.isArray(props.episode)
-            ? props.episode
-            : [props.episode];
-
-          const watchedEpisodes = $history.shows.get(props.show.id)?.episodes ??
-            [];
-
-          return episodes.every((episode) =>
-            watchedEpisodes.some((e) =>
-              e.season === episode.season && e.episode === episode.number
-            )
-          );
-        }
-        case 'show': {
-          return media.every((m) =>
-            Boolean($history.shows.get(m.id)?.isWatched)
-          );
-        }
-      }
-    },
-  );
+  const isWatched = useIsWatched(props);
 
   const markAsWatched = async () => {
     const current = await resolve(user);
