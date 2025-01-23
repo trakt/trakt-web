@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { NOOP_FN } from '$lib/utils/constants';
+import { monitor } from '$lib/utils/perf/monitor';
 import type {
   PersistedClient,
   Persister,
@@ -27,14 +28,14 @@ export function idbPersisterFactory(
   };
 
   return {
-    persistClient: async (client: PersistedClient) => {
+    persistClient: monitor(async (client: PersistedClient) => {
       await set(idbValidKey, client)
         .catch(handleError);
-    },
-    restoreClient: async () => {
+    }, 'IDB Persister'),
+    restoreClient: monitor(async () => {
       return await get<PersistedClient>(idbValidKey)
         .catch(handleError);
-    },
+    }, 'IDB Restorer'),
     removeClient: async () => {
       await del(idbValidKey);
     },
