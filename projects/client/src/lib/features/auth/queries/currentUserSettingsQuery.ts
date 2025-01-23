@@ -1,4 +1,8 @@
-import { genreOptionSchema, type SettingsResponse } from '$lib/api.ts';
+import {
+  genreOptionSchema,
+  type SettingsResponse,
+  upNextSortOptionSchema,
+} from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
@@ -26,7 +30,7 @@ export const UserSettingsSchema = z.object({
   preferences: z.object({
     progress: z.object({
       sort: z.object({
-        by: z.string().optional(),
+        by: upNextSortOptionSchema,
         direction: z.enum(['asc', 'desc']).optional(),
       }),
     }),
@@ -80,7 +84,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       },
       progress: {
         sort: {
-          by: browsing?.progress.on_deck.sort,
+          by: 'added',
           direction: browsing?.progress.on_deck.sort_how,
         },
       },
