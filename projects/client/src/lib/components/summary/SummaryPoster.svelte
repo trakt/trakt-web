@@ -20,18 +20,20 @@
     hoverOverlay,
     target = "_blank",
   }: SummaryPosterProps = $props();
+
+  const activeOverlay = $derived(href && hoverOverlay);
 </script>
 
 <div class="trakt-summary-poster-container">
-  <div class="trakt-summary-poster" class:has-active-overlay={hoverOverlay}>
+  <div class="trakt-summary-poster" class:has-active-overlay={activeOverlay}>
     <Link {href} {target}>
       <CrossOriginImage {src} {alt} />
     </Link>
   </div>
 
-  {#if hoverOverlay}
+  {#if activeOverlay}
     <div class="trakt-summary-poster-overlay">
-      {@render hoverOverlay()}
+      {@render activeOverlay()}
     </div>
   {/if}
 
