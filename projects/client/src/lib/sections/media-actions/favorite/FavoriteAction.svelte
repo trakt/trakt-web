@@ -32,11 +32,13 @@
   });
 </script>
 
-<FavoriteButton
-  type={style}
-  {title}
-  isFavorited={$isFavorited}
-  isFavoriteUpdating={$isUpdatingFavorite}
-  onAdd={addToFavorites}
-  onRemove={removeFromFavorites}
-/>
+{#if $isFavorited}
+  <FavoriteButton
+    type={style}
+    {title}
+    isFavorited={$isFavorited}
+    isFavoriteUpdating={$isUpdatingFavorite}
+    onAdd={addToFavorites}
+    onRemove={removeFromFavorites}
+  />
+{/if}
