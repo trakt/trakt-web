@@ -76,6 +76,8 @@ const getFixedUrl = (req) => {
   return url.href;
 };
 
+const INDEX_URL = '/';
+
 /**
  *  @Lifecycle Activate
  *  New one activated when old isnt being used.
@@ -103,6 +105,19 @@ self.addEventListener('install', () => {
  */
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
+  const { request } = event;
+
+  // Handle navigation requests
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      caches.match(INDEX_URL)
+        .then((response) => {
+          return response || fetch(request);
+        })
+        .catch(() => fetch(request))
+    );
+    return;
+  }
 
   // Exclude dev server requests
   if (isLocalhost) {
@@ -138,7 +153,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     Promise.race([fetched.catch((_) => cached), cached])
       .then((resp) => resp || fetched)
-      .catch((_) => {/* eat any errors */}),
+      .catch((_) => {/* eat any errors */ }),
   );
 
   // Update the cache with the version we fetched (only for ok status)
@@ -147,6 +162,6 @@ self.addEventListener('fetch', (event) => {
       .then(([response, cache]) =>
         response.ok && cache.put(event.request, response)
       )
-      .catch((_) => {/* eat any errors */}),
+      .catch((_) => {/* eat any errors */ }),
   );
 });
