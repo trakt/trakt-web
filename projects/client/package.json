@@ -33,6 +33,8 @@
     "@testing-library/svelte": "^5.2.6",
     "@testing-library/user-event": "^14.6.1",
     "@types/eslint": "^9.6.1",
+    "@types/serviceworker": "^0.0.116",
+    "@vite-pwa/sveltekit": "^0.6.7",
     "@vitest/coverage-istanbul": "3.0.3",
     "eslint": "^9.18.0",
     "eslint-plugin-svelte": "^2.46.1",
@@ -47,6 +49,7 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0",
     "vite": "^6.0.11",
+    "vite-plugin-pwa": "^0.21.1",
     "vitest": "3.0.3"
   },
   "dependencies": {
@@ -58,6 +61,10 @@
     "date-fns": "^4.1.0",
     "firebase": "^11.2.0",
     "idb-keyval": "^6.2.1",
+    "workbox-expiration": "^7.3.0",
+    "workbox-precaching": "^7.3.0",
+    "workbox-routing": "^7.3.0",
+    "workbox-strategies": "^7.3.0",
     "zod": "^3.24.1",
     "zod-to-json-schema": "^3.24.1"
   }
