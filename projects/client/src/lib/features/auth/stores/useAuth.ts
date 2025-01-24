@@ -2,6 +2,7 @@ import { AuthEndpoint } from '$lib/features/auth/AuthEndpoint.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { setCacheBuster } from '$lib/utils/url/setCacheBuster';
 import { getContext, setContext } from 'svelte';
 import { type Writable, writable } from 'svelte/store';
 
@@ -40,6 +41,8 @@ export function useAuth() {
     });
     isAuthorized.set(false);
     await invalidate(InvalidateAction.Auth);
+    window.location.href = setCacheBuster(new URL(window.location.origin))
+      .toString();
   };
 
   return {

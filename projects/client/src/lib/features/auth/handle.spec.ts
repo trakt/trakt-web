@@ -31,7 +31,9 @@ describe('handle: auth', () => {
     const response = await handle({ event, resolve: vi.fn() });
 
     expect(response).toBeInstanceOf(Response);
-    expect(response.headers.get('Location')).toBe('http://localhost/');
+    expect(response.headers.get('Location')).toMatch(
+      /^http:\/\/localhost\/\?_cb=\d+$/,
+    );
     expect(response.status).toBe(302);
     expect(event.locals.auth).toEqual({
       ...AuthMappedMock,

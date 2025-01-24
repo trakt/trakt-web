@@ -1,5 +1,6 @@
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttpOrHttps } from '$lib/utils/url/prependHttpOrHttps.ts';
+import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import { key } from './environment.ts';
@@ -86,7 +87,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       status: 302,
       headers: {
         ...Object.fromEntries(headers),
-        Location: url.toString(),
+        Location: setCacheBuster(url).toString(),
       },
     });
   }

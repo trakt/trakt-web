@@ -20,12 +20,8 @@
         style-src 'self' 'unsafe-inline' https://*.googleapis.com https://*.jsdelivr.net;
       "
     >
-
     <!-- PWA -->
-    <!-- TODO: generate manifest for each lang and translate json properties, then serve correct one according to user language -->
-    <link rel="manifest" href="%sveltekit.assets%/manifest.json" />
-    <script src="%sveltekit.assets%/register-worker.js?v=%cache.timestamp%">
-    </script>
+    <link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest">
     <meta name="mobile-web-app-capable" content="yes">
     <meta
       name="apple-mobile-web-app-status-bar-style"
