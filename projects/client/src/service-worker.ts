@@ -8,6 +8,12 @@ import {
 } from 'workbox-strategies';
 import { time } from './lib/utils/timing/time';
 
+declare global {
+  interface ServiceWorkerGlobalScope {
+    __WB_DISABLE_DEV_LOGS: boolean;
+  }
+}
+
 declare let self: ServiceWorkerGlobalScope;
 
 const CACHE_PREFIX = 'trakt-lite';
@@ -17,6 +23,12 @@ const ASSET_PATTERNS = {
   media: /\.(png|jpg|jpeg|gif|svg|webp|ico|woff2?|ttf|eot)$/i,
   documents: /\.(html|htm)$/i,
 };
+
+/**
+ * Disable workbox logs in development.
+ * @see https://developer.chrome.com/docs/workbox/troubleshooting-and-logging#workbox_logging
+ */
+self.__WB_DISABLE_DEV_LOGS = true;
 
 const DOMAINS = {
   fonts: [
