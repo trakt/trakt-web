@@ -4,6 +4,7 @@ import {
   upNextSortOptionSchema,
 } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { error } from '$lib/utils/console/print.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -111,7 +112,7 @@ const currentUserRequest = ({ fetch }: ApiParams) =>
     })
     .then((response) => {
       if (response.status !== 200) {
-        console.error('Error fetching current user', response);
+        error('Error fetching current user', response);
         /**
          * TODO: define error handling strategy/system
          */

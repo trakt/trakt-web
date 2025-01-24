@@ -52,7 +52,7 @@ export function defineQuery<
 ) {
   const key = `${QUERY_ID}:${params.key}`;
   const hash = `${SCHEMA_ID}:${
-    monitor(zodToHash, `Hashing ${params.key}`)(schema)
+    monitor(zodToHash, `${params.key} hashing`)(schema)
   }`;
 
   return (

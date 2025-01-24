@@ -1,3 +1,4 @@
+import { print, PrintTarget } from '$lib/utils/console/print';
 import { IS_PROD } from '../env';
 
 export function monitor<
@@ -19,12 +20,12 @@ export function monitor<
     if (result instanceof Promise) {
       return result.finally(() => {
         const end = performance.now();
-        console.log(`${name} took ${end - start}ms`);
+        print(PrintTarget.Monitor, 'info', `${name} took ${end - start}ms`);
       }) as TReturn;
     }
 
     const end = performance.now();
-    console.log(`${name} took ${end - start}ms`);
+    print(PrintTarget.Monitor, 'info', `${name} took ${end - start}ms`);
     return result;
   };
 }

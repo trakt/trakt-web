@@ -49,7 +49,7 @@ export function print(
   }
 
   const styles = [
-    `background: ${targetToColorMap[target]}`,
+    `background-color: ${targetToColorMap[target]}`,
     'border-radius: 0.5em',
     'color: white',
     'font-weight: bold',

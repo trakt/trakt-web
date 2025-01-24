@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { error } from '$lib/utils/console/print.ts';
 import { NOOP_FN } from '$lib/utils/constants';
 import { monitor } from '$lib/utils/perf/monitor';
 import type {
@@ -22,8 +23,8 @@ export function createPersister(
     };
   }
 
-  const handleError = (error: unknown) => {
-    console.error('IDB Persister Error:', error);
+  const handleError = (e: unknown) => {
+    error('IDB Persister Error:', e);
     return undefined;
   };
 

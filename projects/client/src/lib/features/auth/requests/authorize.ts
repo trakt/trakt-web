@@ -37,7 +37,7 @@ export const authorize = async ({
         return UNAUTHORIZED_PAYLOAD;
       }
 
-      console.error('Error verifying device auth:', error.message);
+      error('Error verifying device auth:', error.message);
 
       throw error;
     });

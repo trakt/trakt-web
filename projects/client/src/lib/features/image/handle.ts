@@ -1,4 +1,5 @@
 import { ImageEndpoint } from '$lib/features/image/ImageEndpoint.ts';
+import { error } from '$lib/utils/console/print.ts';
 import { IS_PROD } from '$lib/utils/env/index.ts';
 import type { Handle } from '@sveltejs/kit';
 import { Buffer } from 'node:buffer';
@@ -26,7 +27,7 @@ const devResolver = async (
   const blob = await response.blob();
   const isImage = blob.type.startsWith('image');
   if (!isImage) {
-    console.error('Unexpected response for:', source);
+    error('Unexpected response for:', source);
     return { uri: '' };
   }
 

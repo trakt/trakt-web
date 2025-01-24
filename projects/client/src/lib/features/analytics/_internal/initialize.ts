@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { browser } from '$app/environment';
+import { error, warn } from '$lib/utils/console/print.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { getAnalytics, logEvent, setUserId } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
@@ -30,7 +31,7 @@ const NOOP_ENGINE: AnalyticsEngine = {
 // Initialize Firebase
 function firebaseDriver() {
   if (!browser) {
-    console.warn(
+    warn(
       'Firebase Analytics is only available in the browser... Skipping...',
     );
     return null;
@@ -40,7 +41,7 @@ function firebaseDriver() {
     const app = initializeApp(firebaseConfig);
     return getAnalytics(app);
   } catch (_) {
-    console.error('Failed to initialize Firebase Analytics');
+    error('Failed to initialize Firebase Analytics');
     return null;
   }
 }

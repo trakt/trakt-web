@@ -8,7 +8,7 @@ describe('monitor', () => {
 
   it('should measure sync function execution time', () => {
     const mockLog = vi.fn();
-    console.log = mockLog;
+    console.info = mockLog;
 
     const testFn = (x: number) => x * 2;
     const monitoredFn = monitor(testFn, 'testFn');
@@ -17,12 +17,16 @@ describe('monitor', () => {
 
     expect(result).toBe(4);
     expect(mockLog).toHaveBeenCalledOnce();
-    expect(mockLog.mock.calls[0][0]).toMatch(/testFn took \d+(\.\d+)?ms/);
+    expect(mockLog.mock.lastCall).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/testFn took \d+(\.\d+)?ms/),
+      ]),
+    );
   });
 
   it('should measure async function execution time', async () => {
     const mockLog = vi.fn();
-    console.log = mockLog;
+    console.info = mockLog;
 
     const testFn = async (x: number) => {
       await new Promise((resolve) => setTimeout(resolve, 10));
@@ -34,12 +38,16 @@ describe('monitor', () => {
 
     expect(result).toBe(4);
     expect(mockLog).toHaveBeenCalledOnce();
-    expect(mockLog.mock.calls[0][0]).toMatch(/testFn took \d+(\.\d+)?ms/);
+    expect(mockLog.mock.lastCall).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/testFn took \d+(\.\d+)?ms/),
+      ]),
+    );
   });
 
   it('should preserve this context', () => {
     const mockLog = vi.fn();
-    console.log = mockLog;
+    console.info = mockLog;
 
     const obj = {
       multiplier: 3,
@@ -58,7 +66,7 @@ describe('monitor', () => {
 
   it('should handle function with multiple arguments', () => {
     const mockLog = vi.fn();
-    console.log = mockLog;
+    console.info = mockLog;
 
     const testFn = (x: number, y: number, z: number) => x * y * z;
     const monitoredFn = monitor(testFn, 'testFn');
@@ -71,19 +79,23 @@ describe('monitor', () => {
 
   it('should handle async function rejection', async () => {
     const mockLog = vi.fn();
-    console.log = mockLog;
+    console.info = mockLog;
 
     const testFn = () => Promise.reject(new Error('Test error'));
     const monitoredFn = monitor(testFn, 'testFn');
 
     await expect(monitoredFn()).rejects.toThrow('Test error');
     expect(mockLog).toHaveBeenCalledOnce();
-    expect(mockLog.mock.calls[0][0]).toMatch(/testFn took \d+(\.\d+)?ms/);
+    expect(mockLog.mock.lastCall).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/testFn took \d+(\.\d+)?ms/),
+      ]),
+    );
   });
 
   it('should preserve async function return type', async () => {
     const mockLog = vi.fn();
-    console.log = mockLog;
+    console.info = mockLog;
 
     const testFn = (): Promise<string> => Promise.resolve('test');
     const monitoredFn = monitor(testFn, 'testFn');

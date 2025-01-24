@@ -5,6 +5,7 @@ import type {
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
+import { error } from '$lib/utils/console/print.ts';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 
@@ -38,7 +39,7 @@ const favoritedMoviesRequest = (
     })
     .then((response) => {
       if (response.status !== 200) {
-        console.error('Error fetching user favorited movies', response);
+        error('Error fetching user favorited movies', response);
         /**
          * TODO: define error handling strategy/system
          */
@@ -71,7 +72,7 @@ const favoritedShowsRequest = (
     })
     .then((response) => {
       if (response.status !== 200) {
-        console.error('Error fetching user favorited shows', response);
+        error('Error fetching user favorited shows', response);
         /**
          * TODO: define error handling strategy/system
          */

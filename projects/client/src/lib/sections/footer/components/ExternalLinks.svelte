@@ -5,6 +5,7 @@
   import InstallIcon from "$lib/components/icons/InstallIcon.svelte";
 
   import Link from "$lib/components/link/Link.svelte";
+  import { print, PrintTarget } from "$lib/utils/console/print";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useInstallPrompt } from "../stores/useInstallPrompt";
 
@@ -16,7 +17,7 @@
     const installed = await install.prompt();
 
     if (installed) {
-      console.log("PWA installed successfully");
+      print(PrintTarget.PWA, "info", "Installation was successful!");
     }
   }
 </script>

@@ -2,6 +2,7 @@ import type { WatchedMoviesResponse, WatchedShowsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
+import { error } from '$lib/utils/console/print.ts';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 
@@ -38,7 +39,7 @@ const currentUserWatchedMoviesRequest = ({ fetch }: ApiParams) =>
     })
     .then((response) => {
       if (response.status !== 200) {
-        console.error('Error fetching user movie history', response);
+        error('Error fetching user movie history', response);
         throw new Error('Error fetching user movie history.');
       }
       return response.body;
@@ -89,7 +90,7 @@ const currentUserWatchedShowsRequest = ({ fetch }: ApiParams) =>
     })
     .then((response) => {
       if (response.status !== 200) {
-        console.error('Error fetching user show history', response);
+        error('Error fetching user show history', response);
         throw new Error('Error fetching user show history.');
       }
       return response.body;
