@@ -6,6 +6,7 @@
     "phoenisx.cssvar",
     "jacobcassidy.css-nesting-syntax-highlighting",
     "svelte.svelte-vscode",
-    "deepsourcecorp.deepsource-vscode"
+    "deepsourcecorp.deepsource-vscode",
+    "ekstasis.vscode-color-picker-hex"
   ]
 }
