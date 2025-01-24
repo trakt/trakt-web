@@ -1,5 +1,6 @@
 import type { ApiParams } from '$lib/requests/api';
 import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction';
+import { monitor } from '$lib/utils/perf/monitor';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import type { z, ZodType } from 'zod';
 import { zodToHash } from './zodToHash';
@@ -50,7 +51,9 @@ export function defineQuery<
   }: DefineQueryProps<TInput, TOutput, TRequestParams>,
 ) {
   const key = `${QUERY_ID}:${params.key}`;
-  const hash = `${SCHEMA_ID}:${zodToHash(schema)}`;
+  const hash = `${SCHEMA_ID}:${
+    monitor(zodToHash, `Hashing ${params.key}`)(schema)
+  }`;
 
   return (
     requestParams: TRequestParams = {} as TRequestParams,
