@@ -4,7 +4,7 @@
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="episode-status-tag">
+<div class="trakt-stem-tag">
   <TagContent>
     <p class="meta-info">
       {@render children()}
@@ -13,10 +13,10 @@
 </div>
 
 <style>
-  .episode-status-tag {
+  .trakt-stem-tag {
     :global(.trakt-tag) {
-      background: var(--color-background-status-tag);
-      color: var(--color-text-status-tag);
+      background: var(--color-background-stem-tag);
+      color: var(--color-text-stem-tag);
     }
   }
 </style>

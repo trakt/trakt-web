@@ -3,19 +3,19 @@
   import type { TagIntl } from "./TagIntl";
 
   const {
-    watchers,
+    count,
     i18n,
   }: {
-    watchers: number;
+    count: number;
     i18n: TagIntl;
   } = $props();
 </script>
 
 <StemTag
-  --color-background-stem-tag="var(--color-background-watchers-tag)"
-  --color-text-stem-tag="var(--color-text-watchers-tag)"
+  --color-background-stem-tag="var(--color-background-episode-count-tag)"
+  --color-text-stem-tag="var(--color-text-episode-count-tag)"
 >
   <p class="meta-info capitalize no-wrap">
-    {i18n.toWatcherCount(watchers)}
+    {i18n.toEpisodeCount(count)}
   </p>
 </StemTag>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TagContent from "$lib/components/tags/TagContent.svelte";
+  import StemTag from "$lib/components/tags/StemTag.svelte";
   import type { TagIntl } from "./TagIntl";
 
   const {
@@ -11,19 +11,11 @@
   } = $props();
 </script>
 
-<div class="trakt-duration-tag">
-  <TagContent>
-    <p class="meta-info capitalize no-wrap">
-      {i18n.toDuration(runtime)}
-    </p>
-  </TagContent>
-</div>
-
-<style>
-  .trakt-duration-tag {
-    :global(.trakt-tag) {
-      background: var(--color-background-duration-tag);
-      color: var(--color-text-duration-tag);
-    }
-  }
-</style>
+<StemTag
+  --color-background-stem-tag="var(--color-background-duration-tag)"
+  --color-text-stem-tag="var(--color-text-duration-tag)"
+>
+  <p class="meta-info capitalize no-wrap">
+    {i18n.toDuration(runtime)}
+  </p>
+</StemTag>

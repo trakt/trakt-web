@@ -7,7 +7,7 @@
   import CardCover from "$lib/components/card/CardCover.svelte";
   import ShowCard from "$lib/components/media/card/ShowCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
-  import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
+  import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaCardProps } from "./MediaCardProps";
@@ -23,7 +23,7 @@
       airDate={media.airDate}
     />
   {:else if "episode" in media}
-    <EpisodeTag i18n={TagIntlProvider} count={media.episode.count} />
+    <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
   {:else if type === "movie"}
     <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
   {/if}

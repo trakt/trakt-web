@@ -1,11 +1,11 @@
 <script lang="ts">
+  import StemTag from "$lib/components/tags/StemTag.svelte";
   import {
     EpisodeFinaleType,
     EpisodePremiereType,
     type EpisodeType,
   } from "$lib/requests/models/EpisodeType";
   import type { EpisodeIntl } from "../EpisodeIntl";
-  import EpisodeTag from "../tags/EpisodeTag.svelte";
 
   type EpisodeCoverProps = {
     i18n: EpisodeIntl;
@@ -35,34 +35,34 @@
 </script>
 
 {#if isFullSeason}
-  <EpisodeTag
-    --color-background-status-tag={"var(--color-background-full-season-tag)"}
-    --color-text-status-tag={"var(--color-text-full-season-tag)"}
+  <StemTag
+    --color-background-stem-tag={"var(--color-background-full-season-tag)"}
+    --color-text-stem-tag={"var(--color-text-full-season-tag)"}
   >
     {i18n.fullSeasonText()}
-  </EpisodeTag>
+  </StemTag>
 {/if}
 {#if isFinale}
-  <EpisodeTag
-    --color-background-status-tag={"var(--color-background-finale-tag)"}
-    --color-text-status-tag={"var(--color-text-finale-tag)"}
+  <StemTag
+    --color-background-stem-tag={"var(--color-background-finale-tag)"}
+    --color-text-stem-tag={"var(--color-text-finale-tag)"}
   >
     {i18n.finaleText({ type: type as EpisodeFinaleType })}
-  </EpisodeTag>
+  </StemTag>
 {/if}
 {#if isPremiere}
-  <EpisodeTag
-    --color-background-status-tag={"var(--color-background-series-premiere-tag)"}
-    --color-text-status-tag={"var(--color-text-series-premiere-tag)"}
+  <StemTag
+    --color-background-stem-tag={"var(--color-background-series-premiere-tag)"}
+    --color-text-stem-tag={"var(--color-text-series-premiere-tag)"}
   >
     {i18n.premiereText({ type: type as EpisodePremiereType })}
-  </EpisodeTag>
+  </StemTag>
 {/if}
 {#if isSeasonPremiere}
-  <EpisodeTag
-    --color-background-status-tag={"var(--color-background-season-premiere-tag)"}
-    --color-text-status-tag={"var(--color-text-season-premiere-tag)"}
+  <StemTag
+    --color-background-stem-tag={"var(--color-background-season-premiere-tag)"}
+    --color-text-stem-tag={"var(--color-text-season-premiere-tag)"}
   >
     {i18n.premiereText({ type: type as EpisodePremiereType })}
-  </EpisodeTag>
+  </StemTag>
 {/if}
