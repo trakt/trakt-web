@@ -29,6 +29,7 @@
         episode={media.episode}
         show={media.show}
         context="standalone"
+        type="default"
       />
     {/if}
 

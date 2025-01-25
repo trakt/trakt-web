@@ -1,10 +1,10 @@
 <script lang="ts">
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import MediaCover from "$lib/components/media/card/MediaCover.svelte";
   import PosterCard from "$lib/components/media/card/PosterCard.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
 
+  import CardCover from "$lib/components/card/CardCover.svelte";
   import ShowCard from "$lib/components/media/card/ShowCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import EpisodeTag from "$lib/components/media/tags/EpisodeTag.svelte";
@@ -31,7 +31,7 @@
 
 {#snippet content(mediaCoverImageUrl: string)}
   <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
-    <MediaCover src={mediaCoverImageUrl} alt={`${media.title} poster`}>
+    <CardCover src={mediaCoverImageUrl} alt={`${media.title} poster`}>
       {#snippet tags()}
         {#if externalTags}
           {@render externalTags(media)}
@@ -39,7 +39,7 @@
           {@render defaultTags(media)}
         {/if}
       {/snippet}
-    </MediaCover>
+    </CardCover>
   </Link>
 
   <CardFooter {action}>

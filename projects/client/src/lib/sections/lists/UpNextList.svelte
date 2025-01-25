@@ -4,8 +4,8 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
   import { onMount } from "svelte";
+  import EpisodeCard from "./components/EpisodeCard.svelte";
   import FindShowsLink from "./components/FindShowsLink.svelte";
-  import NextEpisodeCard from "./components/NextEpisodeCard.svelte";
   import { useStableArray } from "./stores/useStableArray";
   import { useUpNextEpisodes } from "./stores/useUpNextEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -29,7 +29,7 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(episode)}
-    <NextEpisodeCard {episode} show={episode.show} />
+    <EpisodeCard {episode} show={episode.show} type="next" />
   {/snippet}
   {#snippet empty()}
     {#if !$isLoading}

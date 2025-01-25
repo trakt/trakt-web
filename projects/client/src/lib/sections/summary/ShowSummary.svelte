@@ -7,7 +7,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import NextEpisodeCard from "$lib/sections/lists/components/NextEpisodeCard.svelte";
+  import EpisodeCard from "$lib/sections/lists/components/EpisodeCard.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -33,13 +33,13 @@
     seasons,
   }: ShowSummaryProps = $props();
 
-  const { progress } = $derived(useShowProgress(media.slug));
+  const { progress: episode } = $derived(useShowProgress(media.slug));
 </script>
 
 {#snippet contextualContent()}
   <RenderFor device={["desktop"]} audience="authenticated">
-    {#if $progress}
-      <NextEpisodeCard episode={$progress} show={media} />
+    {#if $episode}
+      <EpisodeCard episode={$episode} show={media} type="next" />
     {/if}
   </RenderFor>
 {/snippet}

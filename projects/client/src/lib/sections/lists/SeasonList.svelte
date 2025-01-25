@@ -47,7 +47,7 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(episode)}
-    <EpisodeCard {episode} {show} />
+    <EpisodeCard {episode} {show} type="default" context="show" />
   {/snippet}
   {#snippet actions()}
     <RenderFor audience="authenticated">
