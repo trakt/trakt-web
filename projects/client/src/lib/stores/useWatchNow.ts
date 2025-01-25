@@ -1,3 +1,4 @@
+import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -8,7 +9,7 @@ import { findFavoriteWatchNowService } from '$lib/stores/_internal/findFavoriteW
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { createQuery } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
+import { derived, get, readable } from 'svelte/store';
 import { movieWatchNowQuery } from '../requests/queries/movies/movieWatchNowQuery.ts';
 
 type WatchNowMediaType = MediaType | 'episode';
@@ -41,6 +42,15 @@ function findViablePreferredService(services: WatchNowServices) {
 }
 
 export function useWatchNow({ type, id }: WatchNowStoreProps) {
+  const { isAuthorized } = useAuth();
+
+  if (!get(isAuthorized)) {
+    return {
+      watchNow: undefined,
+      isLoading: readable(false),
+    };
+  }
+
   const { current } = useUser();
   const { region } = getLanguageAndRegion();
 
