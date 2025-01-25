@@ -5,9 +5,8 @@
 import { Environment } from '$lib/api.ts';
 
 declare global {
-  /**
-   * Global This
-   */
+  // Only way to declare globalThis.install
+  // deno-lint-ignore no-var
   var install: BeforeInstallPromptEvent | Nil;
 
   /**

@@ -18,7 +18,7 @@ function getLegacyAuthCookie(event: RequestEvent) {
   try {
     const serializedToken = event.cookies.get(AUTH_COOKIE_NAME) ?? '';
     return JSON.parse(serializedToken) as SerializedAuthResponse;
-  } catch (error) {
+  } catch (_) {
     return null;
   }
 }

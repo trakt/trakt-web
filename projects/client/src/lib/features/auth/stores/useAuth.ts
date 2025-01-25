@@ -41,7 +41,9 @@ export function useAuth() {
     });
     isAuthorized.set(false);
     await invalidate(InvalidateAction.Auth);
-    window.location.href = setCacheBuster(new URL(window.location.origin))
+    globalThis.location.href = setCacheBuster(
+      new URL(globalThis.location.origin),
+    )
       .toString();
   };
 
