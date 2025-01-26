@@ -1,10 +1,10 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
+  import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import UpNextList from "$lib/sections/lists/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ComingSoonList from "$lib/sections/lists/watchlist/ComingSoonList.svelte";

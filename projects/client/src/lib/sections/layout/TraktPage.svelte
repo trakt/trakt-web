@@ -4,7 +4,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import Redirect from "../router/Redirect.svelte";
+  import Redirect from "../../components/router/Redirect.svelte";
 
   type TraktPageProps = {
     title: string | undefined;

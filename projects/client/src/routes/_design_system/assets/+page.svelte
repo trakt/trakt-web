@@ -5,10 +5,10 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
-  import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { resolveEnvironmentUri } from "$lib/features/image/components/resolveEnvironmentUri";
+  import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import { usePopularList } from "$lib/sections/lists/popular/usePopularList";
   import { useTrendingList } from "$lib/sections/lists/trending/useTrendingList";
   import { shuffle } from "$lib/utils/array/shuffle";

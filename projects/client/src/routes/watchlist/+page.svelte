@@ -2,8 +2,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import WatchlistList from "$lib/sections/lists/watchlist/WatchlistList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 

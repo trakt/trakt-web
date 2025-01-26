@@ -1,6 +1,6 @@
 <script>
-  import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import TraktPage from "$lib/sections/layout/TraktPage.svelte";
 
   import RecommendedPaginatedList from "$lib/sections/lists/recommended/RecommendedPaginatedList.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";

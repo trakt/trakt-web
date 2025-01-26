@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import TraktPage from "$lib/components/layout/TraktPage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
   import { useShow } from "../../../../useShow";
   import { useEpisode } from "./useEpisode";
