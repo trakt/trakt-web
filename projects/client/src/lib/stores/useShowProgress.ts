@@ -1,10 +1,10 @@
+import { useQuery } from '$lib/features/query/useQuery';
 import { showProgressQuery } from '$lib/requests/queries/shows/showProgressQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export function useShowProgress(slug: string) {
-  const progress = createQuery({
+  const progress = useQuery({
     ...showProgressQuery({ slug }),
     staleTime: time.days(1),
   });

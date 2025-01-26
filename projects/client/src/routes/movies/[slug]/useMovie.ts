@@ -1,4 +1,5 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
+import { useQuery } from '$lib/features/query/useQuery';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';
@@ -7,44 +8,43 @@ import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuer
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieWatchersQuery } from '$lib/requests/queries/movies/movieWatchersQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export function useMovie(slug: string) {
-  const movie = createQuery({
+  const movie = useQuery({
     ...movieSummaryQuery({
       slug,
     }),
     staleTime: time.days(1),
   });
 
-  const ratings = createQuery({
+  const ratings = useQuery({
     ...movieRatingQuery({
       slug,
     }),
     staleTime: time.days(1),
   });
 
-  const stats = createQuery({
+  const stats = useQuery({
     ...movieStatsQuery({
       slug,
     }),
     staleTime: time.minutes(30),
   });
 
-  const watchers = createQuery({
+  const watchers = useQuery({
     ...movieWatchersQuery({
       slug,
     }),
     staleTime: time.minutes(5),
   });
 
-  const studios = createQuery({
+  const studios = useQuery({
     ...movieStudiosQuery({ slug }),
     staleTime: time.days(1),
   });
 
-  const crew = createQuery({
+  const crew = useQuery({
     ...moviePeopleQuery({ slug }),
     staleTime: time.days(1),
   });
@@ -52,7 +52,7 @@ export function useMovie(slug: string) {
   const locale = languageTag();
 
   const isLocaleSkipped = locale === 'en';
-  const intl = isLocaleSkipped ? movie : createQuery({
+  const intl = isLocaleSkipped ? movie : useQuery({
     ...movieIntlQuery({ slug, ...getLanguageAndRegion() }),
     staleTime: time.days(7),
   });

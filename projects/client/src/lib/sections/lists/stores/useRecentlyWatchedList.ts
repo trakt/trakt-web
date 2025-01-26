@@ -1,3 +1,4 @@
+import { useQuery } from '$lib/features/query/useQuery';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry';
 import { episodeHistoryQuery } from '$lib/requests/queries/users/episodeHistoryQuery';
@@ -6,7 +7,6 @@ import {
 } from '$lib/requests/queries/users/movieHistoryQuery.ts';
 import { getPastMonthRange } from '$lib/utils/date/getPastMonthRange.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived, type Readable } from 'svelte/store';
 
 const HISTORY_LIMIT = 1000;
@@ -40,7 +40,7 @@ function getQueryParams() {
 }
 
 export function useRecentlyWatchedMovies() {
-  const query = createQuery({
+  const query = useQuery({
     ...movieHistoryQuery(getQueryParams()),
     staleTime: time.hours(1),
   });
@@ -60,7 +60,7 @@ export function useRecentlyWatchedMovies() {
 }
 
 export function useRecentlyWatchedEpisodes() {
-  const query = createQuery({
+  const query = useQuery({
     ...episodeHistoryQuery(getQueryParams()),
     staleTime: time.hours(1),
   });

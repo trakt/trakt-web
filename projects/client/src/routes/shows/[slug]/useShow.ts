@@ -1,12 +1,12 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
+import { useQuery } from '$lib/features/query/useQuery';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export function useShow(slug: string) {
-  const show = createQuery({
+  const show = useQuery({
     ...showSummaryQuery({ slug }),
     staleTime: time.days(1),
   });
@@ -14,7 +14,7 @@ export function useShow(slug: string) {
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
 
-  const intl = isLocaleSkipped ? show : createQuery({
+  const intl = isLocaleSkipped ? show : useQuery({
     ...showIntlQuery({ slug, ...getLanguageAndRegion() }),
     staleTime: time.days(7),
   });

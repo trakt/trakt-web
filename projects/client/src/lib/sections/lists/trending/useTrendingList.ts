@@ -1,3 +1,4 @@
+import { useQuery } from '$lib/features/query/useQuery';
 import type { MediaType } from '$lib/requests/models/MediaType';
 import type { Paginatable } from '$lib/requests/models/Paginatable';
 import {
@@ -9,7 +10,7 @@ import {
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export type TrendingEntry = TrendingMovie | TrendingShow;
@@ -43,7 +44,7 @@ function typeToQuery(
 export function useTrendingList(
   { type, limit, page }: TrendingListStoreProps,
 ) {
-  const query = createQuery({
+  const query = useQuery({
     ...typeToQuery({ type, limit, page }),
     staleTime: time.hours(1),
   });

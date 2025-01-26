@@ -1,7 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser';
 import { getLanguageAndRegion } from '$lib/features/i18n';
+import { useQuery } from '$lib/features/query/useQuery';
 import { watchNowSourcesQuery } from '$lib/requests/queries/watchnow/watchNowSourcesQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export function useWatchNowSources() {
@@ -11,7 +11,7 @@ export function useWatchNowSources() {
   const { watchNow: watchNowSettings } = current();
   const country = watchNowSettings.country ?? region;
 
-  const watchNowSources = createQuery({
+  const watchNowSources = useQuery({
     ...watchNowSourcesQuery({}),
     staleTime: Infinity,
   });

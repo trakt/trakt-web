@@ -1,3 +1,4 @@
+import { useQuery } from '$lib/features/query/useQuery';
 import type { MediaType } from '$lib/requests/models/MediaType';
 import {
   type RecommendedMovie,
@@ -8,7 +9,7 @@ import {
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
@@ -38,7 +39,7 @@ function typeToQuery(
 export function useRecommendedList(
   props: RecommendationListStoreProps,
 ) {
-  const query = createQuery({
+  const query = useQuery({
     ...typeToQuery(props),
     staleTime: time.hours(24),
   });

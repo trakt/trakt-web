@@ -1,4 +1,5 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n';
+import { useQuery } from '$lib/features/query/useQuery';
 import { episodeIntlQuery } from '$lib/requests/queries/episode/episodeIntlQuery';
 import { episodeRatingQuery } from '$lib/requests/queries/episode/episodeRatingQuery';
 import { episodeStatsQuery } from '$lib/requests/queries/episode/episodeStatsQuery';
@@ -8,7 +9,6 @@ import {
 } from '$lib/requests/queries/episode/episodeWatchersQuery';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 type UseEpisodeParams = {
@@ -20,27 +20,27 @@ type UseEpisodeParams = {
 export function useEpisode(
   params: UseEpisodeParams,
 ) {
-  const episode = createQuery({
+  const episode = useQuery({
     ...episodeSummaryQuery(params),
     staleTime: time.days(1),
   });
 
-  const seasons = createQuery({
+  const seasons = useQuery({
     ...showSeasonsQuery(params),
     staleTime: time.days(1),
   });
 
-  const ratings = createQuery({
+  const ratings = useQuery({
     ...episodeRatingQuery(params),
     staleTime: time.days(1),
   });
 
-  const stats = createQuery({
+  const stats = useQuery({
     ...episodeStatsQuery(params),
     staleTime: time.minutes(30),
   });
 
-  const watchers = createQuery({
+  const watchers = useQuery({
     ...episodeWatchersQuery(params),
     staleTime: time.minutes(5),
   });
@@ -48,7 +48,7 @@ export function useEpisode(
   const locale = languageTag();
 
   const isLocaleSkipped = locale === 'en';
-  const intl = isLocaleSkipped ? episode : createQuery({
+  const intl = isLocaleSkipped ? episode : useQuery({
     ...episodeIntlQuery({ ...params, ...getLanguageAndRegion() }),
     staleTime: time.days(7),
   });

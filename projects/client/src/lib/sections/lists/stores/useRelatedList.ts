@@ -1,3 +1,4 @@
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry';
 import { movieRelatedQuery } from '$lib/requests/queries/movies/movieRelatedQuery.ts';
 import {
@@ -5,7 +6,7 @@ import {
   showRelatedQuery,
 } from '$lib/requests/queries/shows/showRelatedQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery, type CreateQueryOptions } from '@tanstack/svelte-query';
+import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import type { MediaType } from '../../../requests/models/MediaType.ts';
 
@@ -33,7 +34,7 @@ function typeToQuery(
 export function useRelatedList(
   { type, slug }: PopularListStoreProps,
 ) {
-  const query = createQuery({
+  const query = useQuery({
     ...typeToQuery({ type, slug }),
     staleTime: time.days(7),
   });

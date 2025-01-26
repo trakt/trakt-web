@@ -8,9 +8,9 @@ import { showWatchNowQuery } from '$lib/requests/queries/shows/showWatchNowQuery
 import { findFavoriteWatchNowService } from '$lib/stores/_internal/findFavoriteWatchNowService.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived, get, readable } from 'svelte/store';
 import { movieWatchNowQuery } from '../requests/queries/movies/movieWatchNowQuery.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 
 type WatchNowMediaType = MediaType | 'episode';
 
@@ -57,7 +57,7 @@ export function useWatchNow({ type, id }: WatchNowStoreProps) {
   const { watchNow: watchNowSettings } = current();
   const country = watchNowSettings.country ?? region;
 
-  const watchNow = createQuery({
+  const watchNow = useQuery({
     ...typeToQuery(type, id, country),
     staleTime: time.days(1),
   });

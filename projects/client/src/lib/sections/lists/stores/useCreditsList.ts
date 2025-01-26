@@ -1,8 +1,8 @@
+import { useQuery } from '$lib/features/query/useQuery';
 import type { MediaType } from '$lib/requests/models/MediaType';
 import { peopleMovieCreditsQuery } from '$lib/requests/queries/people/peopleMovieCreditsQuery';
 import { peopleShowCreditsQuery } from '$lib/requests/queries/people/peopleShowCreditsQuery';
 import { time } from '$lib/utils/timing/time';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 type UseCreditsListProps = {
@@ -24,7 +24,7 @@ function typeToQuery(
 }
 
 export function useCreditsList({ type, slug }: UseCreditsListProps) {
-  const query = createQuery({
+  const query = useQuery({
     ...typeToQuery({ type, slug }),
     staleTime: time.days(1),
   });

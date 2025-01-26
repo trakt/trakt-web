@@ -1,3 +1,4 @@
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
 import {
@@ -5,7 +6,6 @@ import {
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import type { MediaType } from '../../../requests/models/MediaType.ts';
 
@@ -37,7 +37,7 @@ function typeToQuery(
 export function usePopularList(
   props: PopularListStoreProps,
 ) {
-  const query = createQuery({
+  const query = useQuery({
     ...typeToQuery(props),
     staleTime: time.hours(1),
   });

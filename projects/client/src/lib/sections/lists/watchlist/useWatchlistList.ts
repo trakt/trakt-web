@@ -1,4 +1,5 @@
 import type { SortType } from '$lib/api.ts';
+import { useQuery } from '$lib/features/query/useQuery';
 import type { MediaType } from '$lib/requests/models/MediaType';
 import {
   movieWatchlistQuery,
@@ -10,7 +11,6 @@ import {
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export type WatchListParams = {
@@ -40,7 +40,7 @@ function typeToQuery(
 }
 
 export function useWatchlistList(params: WatchListStoreProps) {
-  const query = createQuery({
+  const query = useQuery({
     ...typeToQuery(params),
     staleTime: time.hours(1),
   });

@@ -1,10 +1,10 @@
+import { useQuery } from '$lib/features/query/useQuery';
 import { peopleSummaryQuery } from '$lib/requests/queries/people/peopleSummaryQuery';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export function usePerson(slug: string) {
-  const person = createQuery({
+  const person = useQuery({
     ...peopleSummaryQuery({
       slug,
     }),

@@ -1,8 +1,8 @@
+import { useQuery } from '$lib/features/query/useQuery';
 import { movieHistoryQuery } from '$lib/requests/queries/users/movieHistoryQuery.ts';
 import { showHistoryQuery } from '$lib/requests/queries/users/showHistoryQuery.ts';
 import { getPastMonthRange } from '$lib/utils/date/getPastMonthRange.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 // TODO: add fetchAllPages or something
@@ -14,12 +14,12 @@ export function useHistory() {
     ...getPastMonthRange(new Date()),
   };
 
-  const movies = createQuery({
+  const movies = useQuery({
     ...movieHistoryQuery(params),
     staleTime: time.days(1),
   });
 
-  const shows = createQuery({
+  const shows = useQuery({
     ...showHistoryQuery(params),
     staleTime: time.days(1),
   });

@@ -1,5 +1,5 @@
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived, get } from 'svelte/store';
 import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
 import { currentUserHistoryQuery } from '../queries/currentUserHistoryQuery.ts';
@@ -10,27 +10,27 @@ import {
 } from '../queries/currentUserWatchlistQuery.ts';
 
 export function useUser() {
-  const userQueryResponse = createQuery({
+  const userQueryResponse = useQuery({
     ...currentUserSettingsQuery(),
     staleTime: Infinity,
   });
 
-  const historyQueryResponse = createQuery({
+  const historyQueryResponse = useQuery({
     ...currentUserHistoryQuery(),
     staleTime: Infinity,
   });
 
-  const watchlistQueryResponse = createQuery({
+  const watchlistQueryResponse = useQuery({
     ...currentUserWatchlistQuery(),
     staleTime: Infinity,
   });
 
-  const ratingsQueryResponse = createQuery({
+  const ratingsQueryResponse = useQuery({
     ...currentUserRatingsQuery(),
     staleTime: Infinity,
   });
 
-  const favoritesQueryResponse = createQuery({
+  const favoritesQueryResponse = useQuery({
     ...currentUserFavoritesQuery(),
     staleTime: Infinity,
   });

@@ -1,8 +1,8 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { useQuery } from '$lib/features/query/useQuery';
 import { upNextQuery } from '$lib/requests/queries/sync/upNextQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { time } from '$lib/utils/timing/time.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 const UP_NEXT_LIMIT = 100;
@@ -10,7 +10,7 @@ const UP_NEXT_LIMIT = 100;
 export const useUpNextEpisodes = () => {
   const { current: user } = useUser();
 
-  const query = createQuery({
+  const query = useQuery({
     ...upNextQuery({
       limit: UP_NEXT_LIMIT,
       sort: user().preferences.progress.sort,
