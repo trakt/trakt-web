@@ -17,7 +17,6 @@
     actions?: Snippet;
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
-    spacing?: "small" | "large";
   };
 
   const {
@@ -29,7 +28,6 @@
     item,
     actions,
     empty,
-    spacing = "small",
   }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
@@ -96,8 +94,6 @@
           use:scrollTracking={scrollX}
           use:scrollHistory
           class="trakt-list-item-container shadow-list-horizontal-scroll"
-          class:spacing-large={spacing === "large"}
-          class:spacing-small={spacing === "small"}
         >
           {#each items as i (i.id)}
             {@render item(i)}
@@ -114,6 +110,7 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+  @use "../_internal/gap" as *;
 
   .shadow-list-container,
   .shadow-list,
@@ -216,14 +213,8 @@
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x proximity;
-
-    &.spacing-small {
-      gap: var(--gap-xs);
-    }
-
-    &.spacing-large {
-      gap: var(--gap-m);
-    }
+    transition: gap var(--transition-increment) ease-in-out;
+    @include adaptive-gap(gap);
 
     & > :global(:not(svelte-css-wrapper)) {
       scroll-snap-align: start;

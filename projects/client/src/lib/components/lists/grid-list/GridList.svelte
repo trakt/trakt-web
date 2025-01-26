@@ -20,6 +20,7 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+  @use "../_internal/gap" as *;
 
   .trakt-grid-list-container {
     display: flex;
@@ -32,7 +33,9 @@
     grid-template-columns: repeat(auto-fill, var(--width-item));
     /* TODO: investigate how we can better distribute empty spaces (@anodpixels) */
     justify-content: center;
-    grid-column-gap: var(--gap-s);
+    transition: gap var(--transition-increment) ease-in-out;
+    @include adaptive-gap(grid-column-gap);
+
     grid-row-gap: var(--gap-l);
 
     @include for-mobile {

@@ -15,7 +15,6 @@
 <SectionList
   id={`cast-list`}
   items={cast}
-  spacing="large"
   {title}
   --height-list={mediaListHeightResolver("person")}
 >

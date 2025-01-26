@@ -11,7 +11,6 @@
   type SectionListProps<T> = ListProps<T> & {
     id: string;
     empty?: Snippet;
-    spacing?: "small" | "large";
   };
 
   const {
@@ -21,7 +20,6 @@
     item,
     empty,
     actions: externalActions,
-    spacing,
   }: SectionListProps<T> = $props();
 
   const scrollContainer = writable<HTMLDivElement>();
@@ -58,16 +56,7 @@
   const isRightScrollDisabled = $derived($scrollX.right <= 0);
 </script>
 
-<ShadowList
-  {id}
-  {title}
-  {items}
-  {item}
-  {empty}
-  {scrollX}
-  {scrollContainer}
-  {spacing}
->
+<ShadowList {id} {title} {items} {item} {empty} {scrollX} {scrollContainer}>
   {#snippet actions()}
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
       <ActionButton
