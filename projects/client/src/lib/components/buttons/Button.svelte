@@ -4,9 +4,6 @@
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
-  import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
-  import { debounce } from "$lib/utils/timing/debounce";
-  import { time } from "$lib/utils/timing/time";
   import type { TraktButtonProps } from "./TraktButtonProps";
 
   type TraktButtonAnchorProps = HTMLAnchorProps &
@@ -31,39 +28,6 @@
   const href = $derived((props as TraktButtonAnchorProps).href);
   const noscroll = $derived((props as TraktButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
-
-  function snapshotWidth(node: HTMLElement) {
-    const snapshot = debounce<TransitionEvent | UIEvent>(() => {
-      if (size === "normal") {
-        return;
-      }
-
-      const rect = node.getBoundingClientRect();
-      node.style.setProperty(
-        "--button-width",
-        `calc(${rect.width}px * (1 / var(--scale-factor-button)))`,
-      );
-    }, time.fps(60));
-
-    snapshot();
-
-    const destroy = GlobalEventBus.getInstance().register("resize", snapshot);
-    const observer = new MutationObserver(() => {
-      snapshot();
-      observer.disconnect();
-    });
-
-    observer.observe(node, { childList: true, subtree: true });
-    node.addEventListener("transitionend", snapshot);
-
-    return {
-      destroy: () => {
-        destroy();
-        observer.disconnect();
-        node.removeEventListener("transitionend", snapshot);
-      },
-    };
-  }
 </script>
 
 {#snippet contents()}
@@ -92,7 +56,6 @@
     use:clickOutside
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
-    use:snapshotWidth
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
@@ -111,7 +74,6 @@
   <button
     use:disableTransitionOn={"touch"}
     use:clickOutside
-    use:snapshotWidth
     class="trakt-button"
     aria-label={label}
     data-variant={variant}
@@ -207,21 +169,6 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: box-shadow outline padding transform color background;
 
-    margin: calc(
-        (
-            var(--button-height) *
-              var(--scale-factor-button) - var(--button-height)
-          ) /
-          2
-      )
-      calc(
-        (
-            var(--button-width) *
-              var(--scale-factor-button) - var(--button-width)
-          ) /
-          2
-      );
-
     &.trakt-button-link {
       &[data-style="ghost"] {
         &.trakt-link-active {
@@ -244,6 +191,7 @@
 
     &[data-size="small"] {
       --scale-factor-button: 0.75;
+      margin: var(--ni-neg-2) var(--ni-neg-8);
     }
 
     &[data-size="tag"] {
