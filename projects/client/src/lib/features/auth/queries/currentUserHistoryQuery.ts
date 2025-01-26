@@ -120,4 +120,5 @@ export const currentUserHistoryQuery = defineQuery({
     shows: toMap(shows, mapWatchedShowResponse, (entry) => entry.id),
   }),
   schema: UserHistorySchema,
+  ttl: Infinity,
 });

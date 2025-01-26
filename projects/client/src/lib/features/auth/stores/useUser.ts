@@ -10,30 +10,11 @@ import {
 } from '../queries/currentUserWatchlistQuery.ts';
 
 export function useUser() {
-  const userQueryResponse = useQuery({
-    ...currentUserSettingsQuery(),
-    staleTime: Infinity,
-  });
-
-  const historyQueryResponse = useQuery({
-    ...currentUserHistoryQuery(),
-    staleTime: Infinity,
-  });
-
-  const watchlistQueryResponse = useQuery({
-    ...currentUserWatchlistQuery(),
-    staleTime: Infinity,
-  });
-
-  const ratingsQueryResponse = useQuery({
-    ...currentUserRatingsQuery(),
-    staleTime: Infinity,
-  });
-
-  const favoritesQueryResponse = useQuery({
-    ...currentUserFavoritesQuery(),
-    staleTime: Infinity,
-  });
+  const userQueryResponse = useQuery(currentUserSettingsQuery());
+  const historyQueryResponse = useQuery(currentUserHistoryQuery());
+  const watchlistQueryResponse = useQuery(currentUserWatchlistQuery());
+  const ratingsQueryResponse = useQuery(currentUserRatingsQuery());
+  const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
 
   const user = derived(userQueryResponse, ($query) => $query.data);
   const history = derived(historyQueryResponse, ($query) => $query.data);

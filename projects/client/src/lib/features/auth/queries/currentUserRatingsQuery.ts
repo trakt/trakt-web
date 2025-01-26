@@ -82,4 +82,5 @@ export const currentUserRatingsQuery = defineQuery({
     episodes: toMap(episodes, mapRatedEpisodeResponse, (entry) => entry.id),
   }),
   schema: UserRatingsSchema,
+  ttl: Infinity,
 });

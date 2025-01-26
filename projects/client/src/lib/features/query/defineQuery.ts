@@ -30,6 +30,7 @@ type DefineQueryProps<
   request: RequestDefinition<TInput, TRequestParams>;
   mapper: MapperDefinition<TInput, TOutput, TRequestParams>;
   schema: TOutput;
+  ttl?: number;
 };
 
 export const QUERY_ID = 'query';
@@ -76,6 +77,7 @@ export function defineQuery<
       queryFn: () =>
         request(requestParams)
           .then((data) => mapper(data, requestParams)),
+      staleTime: params.ttl,
     };
   };
 }

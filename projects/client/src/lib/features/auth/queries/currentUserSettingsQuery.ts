@@ -134,4 +134,5 @@ export const currentUserSettingsQuery = defineQuery({
   request: currentUserRequest,
   mapper: mapUserSettingsResponse,
   schema: UserSettingsSchema,
+  ttl: Infinity,
 });

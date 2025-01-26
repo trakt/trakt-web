@@ -106,4 +106,5 @@ export const currentUserFavoritesQuery = defineQuery({
     };
   },
   schema: UserFavoritesSchema,
+  ttl: Infinity,
 });

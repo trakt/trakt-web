@@ -101,4 +101,5 @@ export const currentUserWatchlistQuery = defineQuery({
     shows: toMap(shows, mapWatchlistedShowResponse, (entry) => entry.id),
   }),
   schema: UserWatchlistSchema,
+  ttl: Infinity,
 });
