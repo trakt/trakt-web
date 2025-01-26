@@ -1,44 +1,37 @@
 <script lang="ts">
-  import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
+  import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
 
-  import {
-    DEFAULT_COVER,
-    DEFAULT_SHARE_SHOW_COVER,
-  } from "$lib/utils/constants";
-
-  const { current } = useUser();
+  import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/constants";
 
   const type = "show";
-
-  type ShowContentProps = {
-    cover: { url: string };
-    isAuthorized: boolean;
-  };
 </script>
 
-{#snippet content({ cover: { url }, isAuthorized }: ShowContentProps)}
-  <CoverImageSetter src={url} type="main" />
+<TraktPage
+  audience="all"
+  image={DEFAULT_SHARE_SHOW_COVER}
+  title={m.navbar_link_shows()}
+>
+  <TraktPageCoverSetter />
 
   <TrendingList
     title={m.trending_now()}
     drilldownLabel={m.view_all_trending_shows()}
     {type}
   />
-  {#if isAuthorized}
+  <RenderFor audience="authenticated">
     <RecommendedList
       title={m.your_recommendations()}
       drilldownLabel={m.view_all_recommended_shows()}
       {type}
     />
-  {/if}
+  </RenderFor>
   <AnticipatedList
     drilldownLabel={m.view_all_anticipated_shows()}
     title={m.most_anticipated()}
@@ -49,24 +42,4 @@
     title={m.most_popular()}
     {type}
   />
-{/snippet}
-
-<TraktPage
-  audience="all"
-  image={DEFAULT_SHARE_SHOW_COVER}
-  title={m.navbar_link_shows()}
->
-  <RenderFor audience="authenticated">
-    {@render content({
-      ...current(),
-      isAuthorized: true,
-    })}
-  </RenderFor>
-
-  <RenderFor audience="public">
-    {@render content({
-      cover: { url: DEFAULT_COVER },
-      isAuthorized: false,
-    })}
-  </RenderFor>
 </TraktPage>
