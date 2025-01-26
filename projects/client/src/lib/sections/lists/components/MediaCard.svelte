@@ -2,7 +2,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { MediaCardProps } from "./MediaCardProps";
-  import MediaCoverCard from "./MediaCoverCard.svelte";
+  import MediaItemCard from "./MediaItemCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
 
   const {
@@ -26,7 +26,7 @@
 {/snippet}
 
 {#if style === "cover"}
-  <MediaCoverCard
+  <MediaItemCard
     {type}
     {media}
     {tags}
