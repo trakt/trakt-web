@@ -6,9 +6,9 @@
   --height-poster-card: var(--ni-236);
   --height-poster-card-cover: var(--ni-196);
 
-  --width-show-card: var(--ni-212);
-  --height-show-card: var(--ni-160);
-  --height-show-card-cover: var(--ni-120);
+  --width-thumb-card: var(--ni-212);
+  --height-thumb-card: var(--ni-160);
+  --height-thumb-card-cover: var(--ni-120);
 
   --width-episode-card: var(--ni-212);
   --height-episode-card: var(--ni-172);
@@ -26,8 +26,8 @@
     var(--height-episode-card) + var(--layout-distance-scroll-card)
       + var(--layout-scrollbar-width)
   );
-  --height-show-list: calc(
-    var(--height-show-card) + var(--layout-distance-scroll-card)
+  --height-thumb-list: calc(
+    var(--height-thumb-card) + var(--layout-distance-scroll-card)
       + var(--layout-scrollbar-width)
   );
   --height-person-list: calc(

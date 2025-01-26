@@ -5,14 +5,20 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
 
   import CardCover from "$lib/components/card/CardCover.svelte";
-  import ShowCard from "$lib/components/media/card/ShowCard.svelte";
+  import ThumbCard from "$lib/components/media/card/ThumbCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { MediaCardProps } from "./MediaCardProps";
 
-  const { type, media, tags: externalTags, action }: MediaCardProps = $props();
+  const {
+    type,
+    media,
+    tags: externalTags,
+    action,
+    variant = "poster",
+  }: MediaCardProps = $props();
 </script>
 
 {#snippet defaultTags(media: MediaCardProps["media"])}
@@ -51,16 +57,16 @@
   </CardFooter>
 {/snippet}
 
-{#if type === "movie"}
+{#if variant === "poster"}
   <PosterCard>
     {@render content(media.poster.url.thumb)}
   </PosterCard>
 {/if}
 
-{#if type === "show"}
-  <ShowCard>
+{#if variant === "thumb"}
+  <ThumbCard>
     {@render content(media.thumb.url)}
-  </ShowCard>
+  </ThumbCard>
 {/if}
 
 <style>

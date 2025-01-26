@@ -5,8 +5,7 @@ export function mediaCardWidthResolver(
 ) {
   switch (type) {
     case 'movie':
-      return 'var(--width-poster-card)';
     case 'show':
-      return 'var(--width-show-card)';
+      return 'var(--width-poster-card)';
   }
 }

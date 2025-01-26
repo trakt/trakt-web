@@ -5,9 +5,9 @@
 </script>
 
 <Card
-  --width-card="var(--width-show-card)"
-  --height-card="var(--height-show-card)"
-  --height-card-cover="var(--height-show-card-cover)"
+  --width-card="var(--width-thumb-card)"
+  --height-card="var(--height-thumb-card)"
+  --height-card-cover="var(--height-thumb-card-cover)"
 >
   {@render children()}
 </Card>
