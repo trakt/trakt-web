@@ -89,7 +89,11 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
           direction: browsing?.progress.on_deck.sort_how,
         },
       },
-      isSpoilerHidden: Object.values(browsing?.spoilers ?? {})
+      isSpoilerHidden: [
+        browsing?.spoilers.episodes,
+        browsing?.spoilers.movies,
+        browsing?.spoilers.shows,
+      ]
         .some((topic) => topic?.includes('hide')),
     },
     genres: browsing?.genres.favorites ?? [],

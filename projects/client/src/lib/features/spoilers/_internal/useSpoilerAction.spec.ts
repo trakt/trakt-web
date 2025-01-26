@@ -1,0 +1,159 @@
+import { clone } from '$lib/utils/object/clone';
+import { deepAssign } from '$lib/utils/object/deepAssign';
+import { ExtendedUsersResponseMock } from '$mocks/data/users/ExtendedUserSettingsResponseMock';
+import { WatchedMoviesResponseMock } from '$mocks/data/users/WatchedMoviesResponseMock';
+import { server } from '$mocks/server';
+import { renderStore, setAuthorization } from '$test/beds/store/renderStore';
+import { waitFor } from '@testing-library/svelte';
+import { http, HttpResponse } from 'msw';
+import { describe, expect, it } from 'vitest';
+import { useSpoilerAction } from './useSpoilerAction';
+
+describe('action: useSpoilerAction', () => {
+  it('should add spoiler class when isSpoilerHidden is true', async () => {
+    setAuthorization(true);
+
+    const user = deepAssign(
+      clone(ExtendedUsersResponseMock),
+      {
+        browsing: {
+          spoilers: {
+            actors: null,
+            comments: null,
+            episodes: null,
+            movies: null,
+            ratings: null,
+            shows: 'hide_title',
+          },
+        },
+      },
+    );
+
+    server.use(
+      http.get('http://localhost/users/settings', () => {
+        return HttpResponse.json(user);
+      }),
+    );
+
+    const node = document.createElement('div');
+    const { spoiler } = await renderStore(() =>
+      useSpoilerAction({
+        type: 'show',
+        media: { id: 1337 },
+      })
+    );
+
+    spoiler(node);
+
+    await waitFor(() =>
+      expect(node.classList.contains('trakt-spoiler')).toBe(true)
+    );
+  });
+
+  it('should remove spoiler class when isSpoilerHidden is false', async () => {
+    setAuthorization(true);
+
+    const node = document.createElement('div');
+    const { spoiler } = await renderStore(() =>
+      useSpoilerAction({
+        type: 'movie',
+        media: { id: 1337 },
+      })
+    );
+
+    node.classList.add('trakt-spoiler');
+    spoiler(node);
+
+    expect(node.classList.contains('trakt-spoiler')).toBe(false);
+  });
+
+  it('should NOT remove the spoiler class when a show is unwatched', async () => {
+    setAuthorization(true);
+
+    const user = deepAssign(
+      clone(ExtendedUsersResponseMock),
+      {
+        browsing: {
+          spoilers: {
+            actors: null,
+            comments: null,
+            episodes: null,
+            movies: null,
+            ratings: null,
+            shows: 'hide_title',
+          },
+        },
+      },
+    );
+
+    server.use(
+      http.get('http://localhost/users/settings', () => {
+        return HttpResponse.json(user);
+      }),
+    );
+
+    const node = document.createElement('div');
+    const { spoiler } = await renderStore(() =>
+      useSpoilerAction({
+        type: 'show',
+        media: { id: 1337 },
+      })
+    );
+
+    // Attach the spoiler action
+    spoiler(node);
+
+    // Remove the class to the node
+    node.classList.remove('trakt-spoiler');
+
+    // Then verify it is removed
+    await waitFor(
+      () => expect(node.classList.contains('trakt-spoiler')).toBe(true),
+    );
+  });
+
+  it('should remove the spoiler class when a movie is watched', async () => {
+    setAuthorization(true);
+
+    const user = deepAssign(
+      clone(ExtendedUsersResponseMock),
+      {
+        browsing: {
+          spoilers: {
+            actors: null,
+            comments: null,
+            episodes: null,
+            movies: 'hide',
+            ratings: null,
+            shows: null,
+          },
+        },
+      },
+    );
+
+    server.use(
+      http.get('http://localhost/users/settings', () => {
+        return HttpResponse.json(user);
+      }),
+    );
+
+    const node = document.createElement('div');
+    const { spoiler } = await renderStore(() =>
+      useSpoilerAction({
+        type: 'movie',
+        media: { id: WatchedMoviesResponseMock[0].movie.ids.trakt },
+      })
+    );
+
+    // Attach the spoiler action
+    spoiler(node);
+
+    // Add the class to the node
+    node.classList.add('trakt-spoiler');
+
+    // Then verify it is removed
+    await waitFor(
+      () => expect(node.classList.contains('trakt-spoiler')).toBe(false),
+    );
+  });
+});

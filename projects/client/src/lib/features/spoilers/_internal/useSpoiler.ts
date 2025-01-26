@@ -4,14 +4,18 @@ import { derived } from 'svelte/store';
 
 export function useSpoiler() {
   const { isAuthorized } = useAuth();
+  const { user } = useUser();
 
-  const isSpoilerHidden = derived(isAuthorized, ($isAuthorized) => {
-    if (!$isAuthorized) {
-      return false;
-    }
+  const isSpoilerHidden = derived(
+    [isAuthorized, user],
+    ([$isAuthorized, $user]) => {
+      if (!$isAuthorized) {
+        return false;
+      }
 
-    return Boolean(useUser().current().preferences.isSpoilerHidden);
-  });
+      return Boolean($user?.preferences.isSpoilerHidden);
+    },
+  );
 
   return {
     isSpoilerHidden,

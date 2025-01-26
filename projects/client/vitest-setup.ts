@@ -9,9 +9,13 @@ import './test/mocks/navigation.mock.ts';
 import './test/mocks/navigator.mock.ts';
 import './test/mocks/variables.mock.ts';
 
+import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { afterAll, afterEach, beforeAll } from 'vitest';
 import { server } from './src/mocks/server.ts';
 
 beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  server.resetHandlers();
+  setAuthorization(false);
+});
 afterAll(() => server.close());
