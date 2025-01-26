@@ -91,7 +91,6 @@ export const currentUserWatchlistQuery = defineQuery({
       currentUserWatchlistedShowsRequest({ fetch }),
     ]),
   invalidations: [
-    InvalidateAction.Watchlisted('episode'),
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.Watchlisted('movie'),
   ],

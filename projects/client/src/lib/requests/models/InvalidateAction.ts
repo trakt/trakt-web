@@ -3,21 +3,50 @@ import type { MediaType } from './MediaType.ts';
 type ExtendedMediaType = MediaType | 'episode';
 type RateableMediaType = 'movie' | 'episode';
 
+const INVALIDATION_ID = 'invalidate' as const;
+
+type AuthInvalidationTypes = 'auth';
+type RateableInvalidationTypes = 'rated';
+type ExtendedMediaInvalidationTypes = 'mark_as_watched';
+type MediaInvalidationTypes = 'watchlisted' | 'favorited';
+
 export type InvalidateActionOptions =
-  | `invalidate:mark_as_watched:${ExtendedMediaType}`
-  | 'invalidate:auth'
-  | `invalidate:watchlisted:${ExtendedMediaType}`
-  | `invalidate:rated:${RateableMediaType}`
-  | `invalidate:favorited:${MediaType}`;
+  | `${typeof INVALIDATION_ID}:${AuthInvalidationTypes}`
+  | `${typeof INVALIDATION_ID}:${RateableInvalidationTypes}:${RateableMediaType}`
+  | `${typeof INVALIDATION_ID}:${ExtendedMediaInvalidationTypes}:${ExtendedMediaType}`
+  | `${typeof INVALIDATION_ID}:${MediaInvalidationTypes}:${MediaType}`;
+
+type TypeDataMap = {
+  'auth': null;
+  'rated': RateableMediaType;
+  'mark_as_watched': ExtendedMediaType;
+  'watchlisted': MediaType;
+  'favorited': MediaType;
+};
+
+export function invalidationId(key?: string) {
+  return `${INVALIDATION_ID}:${key ?? ''}` as const;
+}
+
+function buildInvalidationKey<T extends keyof TypeDataMap>(
+  key: T,
+  data?: TypeDataMap[T],
+): InvalidateActionOptions {
+  if (data != null) {
+    return invalidationId(`${key}:${data}`) as InvalidateActionOptions;
+  }
+
+  return invalidationId(`${key}`) as InvalidateActionOptions;
+}
 
 export const InvalidateAction = {
-  MarkAsWatched: (type: ExtendedMediaType): InvalidateActionOptions =>
-    `invalidate:mark_as_watched:${type}` as InvalidateActionOptions,
-  Watchlisted: (type: ExtendedMediaType): InvalidateActionOptions =>
-    `invalidate:watchlisted:${type}`,
-  Auth: 'invalidate:auth' as InvalidateActionOptions,
-  Rated: (type: RateableMediaType): InvalidateActionOptions =>
-    `invalidate:rated:${type}`,
-  Favorited: (type: MediaType): InvalidateActionOptions =>
-    `invalidate:favorited:${type}`,
+  Auth: buildInvalidationKey('auth'),
+
+  Rated: (type: RateableMediaType) => buildInvalidationKey('rated', type),
+
+  MarkAsWatched: (type: ExtendedMediaType) =>
+    buildInvalidationKey('mark_as_watched', type),
+
+  Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
+  Favorited: (type: MediaType) => buildInvalidationKey('favorited', type),
 };

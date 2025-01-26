@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { invalidationId } from '$lib/requests/models/InvalidateAction';
 import { time } from '$lib/utils/timing/time';
 import {
   createQuery,
@@ -28,6 +29,14 @@ export function useQuery<
     ) as string | Nil;
 
     if (id == null) {
+      return;
+    }
+
+    const hasInvalidationMarker = props.queryKey.some((key) =>
+      typeof key === 'string' && key.includes(invalidationId(''))
+    );
+
+    if (!hasInvalidationMarker) {
       return;
     }
 
