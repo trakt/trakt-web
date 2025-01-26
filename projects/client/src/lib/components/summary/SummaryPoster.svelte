@@ -45,7 +45,7 @@
     width: var(--ni-320);
     display: flex;
     flex-direction: column;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
     position: relative;
   }
 

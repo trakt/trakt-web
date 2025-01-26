@@ -34,13 +34,13 @@
     display: flex;
 
     align-items: center;
-    gap: var(--ni-4);
+    gap: var(--gap-xxs);
   }
 
   .rating-info {
     display: flex;
     align-items: start;
-    gap: var(--ni-4);
+    gap: var(--gap-xxs);
 
     p {
       line-height: 90%;

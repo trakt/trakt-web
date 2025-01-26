@@ -24,7 +24,7 @@
   .trakt-grid-list-container {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-32);
+    gap: var(--gap-xl);
   }
 
   .trakt-list-items {
@@ -32,8 +32,8 @@
     grid-template-columns: repeat(auto-fill, var(--width-item));
     /* TODO: investigate how we can better distribute empty spaces (@anodpixels) */
     justify-content: center;
-    grid-column-gap: var(--ni-12);
-    grid-row-gap: var(--ni-24);
+    grid-column-gap: var(--gap-s);
+    grid-row-gap: var(--gap-l);
 
     @include for-mobile {
       grid-template-columns: 1fr;

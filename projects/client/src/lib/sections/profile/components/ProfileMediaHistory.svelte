@@ -24,6 +24,6 @@
   .trakt-profile-media-history {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-10);
+    gap: var(--gap-s);
   }
 </style>

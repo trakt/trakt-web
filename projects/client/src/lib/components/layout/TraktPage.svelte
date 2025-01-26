@@ -91,7 +91,7 @@
     @use "$style/scss/mixins/index" as *;
 
     .trakt-content {
-      --content-gap: var(--ni-32);
+      --content-gap: var(--gap-xl);
 
       transition: var(--transition-increment) ease-in-out;
       transition-property: gap margin;
@@ -105,11 +105,11 @@
       }
 
       @include for-tablet-lg-and-below {
-        --content-gap: var(--ni-16);
+        --content-gap: var(--gap-m);
       }
 
       @include for-mobile {
-        --content-gap: var(--ni-8);
+        --content-gap: var(--gap-xs);
 
         &:first-child {
           margin-top: 0;

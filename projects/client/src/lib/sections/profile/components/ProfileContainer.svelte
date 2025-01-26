@@ -35,7 +35,7 @@
 
   .trakt-profile-container {
     display: grid;
-    gap: var(--ni-32);
+    gap: var(--gap-xl);
     grid-template-columns: 1fr 2fr 1fr;
     margin: 0 var(--layout-distance-side);
 

@@ -12,7 +12,7 @@
     display: flex;
     padding: var(--ni-8) var(--ni-12) var(--ni-8) var(--ni-12);
     align-items: center;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
 
     border-radius: var(--border-radius-xl);
     background: var(--color-background-vip-badge);

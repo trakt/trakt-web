@@ -43,7 +43,7 @@
 
   .trakt-summary-container {
     display: grid;
-    gap: var(--ni-32);
+    gap: var(--gap-xl);
     grid-template-columns: minmax(var(--ni-320), 1fr) 2fr 1fr;
     margin: 0 var(--ni-56);
 
@@ -80,7 +80,7 @@
   .trakt-summary-children {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-32);
+    gap: var(--gap-xl);
   }
 
   .trakt-summary-contextual-content {

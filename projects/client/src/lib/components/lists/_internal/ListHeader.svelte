@@ -29,7 +29,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
 
     &.trakt-list-inset-title {
       margin: 0;
@@ -53,7 +53,7 @@
 
     .trakt-list-actions {
       display: flex;
-      gap: var(--ni-8);
+      gap: var(--gap-xs);
       align-items: center;
     }
   }

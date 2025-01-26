@@ -11,7 +11,7 @@
 
   .trakt-summary-actions {
     display: flex;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
     justify-content: flex-end;
     flex-wrap: wrap;
 

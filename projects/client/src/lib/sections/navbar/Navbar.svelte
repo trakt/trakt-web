@@ -119,14 +119,14 @@
     width: calc(100dvw - 2 * var(--layout-distance-side));
 
     align-items: center;
-    gap: var(--ni-24);
+    gap: var(--gap-l);
 
     border-radius: var(--border-radius-l);
     transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
     transition-property: background-color, box-shadow;
 
     @include for-mobile {
-      gap: var(--ni-16);
+      gap: var(--gap-m);
     }
 
     .trakt-navbar-content {
@@ -135,12 +135,12 @@
 
     .trakt-navbar-links {
       display: flex;
-      gap: var(--ni-8);
+      gap: var(--gap-xs);
       align-items: center;
       justify-content: end;
 
       @include for-tablet-lg-and-below {
-        gap: var(--ni-16);
+        gap: var(--gap-m);
       }
 
       /** 

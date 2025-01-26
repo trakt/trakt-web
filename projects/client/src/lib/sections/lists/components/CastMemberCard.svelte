@@ -36,7 +36,7 @@
   .trakt-cast-member {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-4);
+    gap: var(--gap-xxs);
     width: var(--width-person-card);
   }
 

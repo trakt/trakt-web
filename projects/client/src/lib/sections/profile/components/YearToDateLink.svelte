@@ -28,7 +28,7 @@
   .ytd-link-details {
     display: flex;
     align-items: center;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
     text-transform: uppercase;
 
     .ytd-label {
@@ -39,12 +39,12 @@
   .ytd-link-content {
     @media (max-width: 768px) {
       display: flex;
-      gap: var(--ni-16);
+      gap: var(--gap-m);
     }
 
     @media (max-width: 480px) {
       .ytd-link-details {
-        gap: var(--ni-8);
+        gap: var(--gap-xs);
       }
 
       .ytd-year {

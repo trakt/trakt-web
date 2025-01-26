@@ -16,13 +16,13 @@
   .trakt-summary-header {
     display: flex;
     align-items: flex-end;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
     justify-content: space-between;
   }
 
   .trakt-summary-header-children {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
   }
 </style>

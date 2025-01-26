@@ -111,20 +111,20 @@
 
   .trakt-summary-trailers {
     display: flex;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
     flex-direction: column;
   }
 
   .trakt-summary-details {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-24);
+    gap: var(--gap-l);
   }
 
   .trakt-summary-details-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
 
     @include for-mobile {
       grid-template-columns: 1fr;

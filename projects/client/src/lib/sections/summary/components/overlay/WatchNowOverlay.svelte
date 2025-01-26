@@ -45,7 +45,7 @@
     top: 0;
     display: flex;
     align-items: center;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
     text-shadow: var(--source-shadow);
     padding: var(--ni-8);
 

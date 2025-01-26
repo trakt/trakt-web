@@ -98,7 +98,7 @@
 
     .trakt-dropdown-list-icon {
       display: flex;
-      gap: var(--ni-12);
+      gap: var(--gap-s);
     }
 
     :global(.trakt-button[disabled]:active) {

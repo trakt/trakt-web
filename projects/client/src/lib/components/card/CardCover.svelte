@@ -51,7 +51,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    gap: var(--ni-4);
+    gap: var(--gap-xxs);
   }
 
   .card-cover {

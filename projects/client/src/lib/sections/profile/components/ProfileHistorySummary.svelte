@@ -46,14 +46,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
     box-shadow: 0 var(--ni-4) var(--ni-8) 0 rgba(0, 0, 0, 0.24);
   }
 
   .trakt-profile-history-content {
     display: flex;
     justify-content: space-between;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
   }
 
   @include for-mobile {

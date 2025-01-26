@@ -39,7 +39,7 @@
     margin-left: calc(var(--ni-72) + var(--layout-distance-side));
     display: flex;
     align-items: center;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
     transition: var(--transition-increment) ease-in-out;
     transition-property: margin-left scale height;
 
@@ -53,12 +53,12 @@
   .profile-info {
     display: inline-flex;
     flex-direction: column;
-    gap: var(--ni-4);
+    gap: var(--gap-xxs);
 
     .profile-info-primary {
       display: flex;
       align-items: center;
-      gap: var(--ni-8);
+      gap: var(--gap-xs);
     }
 
     .profile-info-location {

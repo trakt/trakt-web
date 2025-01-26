@@ -87,7 +87,7 @@
   :global(.trakt-navbar .trakt-profile-button) {
     display: flex;
     align-items: center;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
   }
 
   :global(.trakt-navbar .trakt-profile-button .profile-image) {

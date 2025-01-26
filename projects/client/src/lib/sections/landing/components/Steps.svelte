@@ -24,7 +24,7 @@
 <style>
   .trakt-landing-steps {
     display: grid;
-    gap: var(--ni-32);
+    gap: var(--gap-xl);
     margin-top: var(--ni-64);
     height: fit-content;
 
@@ -35,7 +35,7 @@
 
   .trakt-landing-join {
     display: grid;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
     padding-left: var(--ni-64);
   }
 </style>

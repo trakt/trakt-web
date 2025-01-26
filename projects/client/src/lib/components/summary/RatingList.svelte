@@ -56,6 +56,6 @@
   .trakt-summary-ratings {
     display: flex;
     align-items: center;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
   }
 </style>

@@ -31,7 +31,7 @@
     grid-template-columns: 1fr minmax(0, 1fr) 1fr;
     position: relative;
     margin-top: var(--ni-112);
-    gap: var(--ni-24);
+    gap: var(--gap-l);
     container-type: inline-size;
 
     .trakt-landing-media-wrapper {
@@ -39,7 +39,7 @@
       display: grid;
       width: 100%;
       justify-content: center;
-      gap: var(--ni-16);
+      gap: var(--gap-m);
 
       :global(.trakt-preview-item:first-child) {
         margin-left: var(--ni-56);

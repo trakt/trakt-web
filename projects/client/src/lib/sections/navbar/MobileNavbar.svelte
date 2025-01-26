@@ -66,7 +66,7 @@
 
     display: flex;
     justify-content: center;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
   }
 
   .trakt-mobile-navbar-link {
@@ -76,7 +76,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--ni-4);
+    gap: var(--gap-xxs);
 
     .ellipsis {
       max-width: 100%;

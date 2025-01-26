@@ -82,7 +82,7 @@
       padding: var(--ni-8) var(--ni-16);
       align-items: center;
       box-sizing: border-box;
-      gap: var(--ni-16);
+      gap: var(--gap-m);
 
       border-radius: var(--border-radius-s);
       border: var(--border-thickness-xs) solid var(--shade-800);

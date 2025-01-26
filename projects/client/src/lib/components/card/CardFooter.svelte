@@ -27,7 +27,7 @@
     box-sizing: border-box;
 
     display: flex;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
     justify-content: space-between;
 
     .card-footer-information {
@@ -37,7 +37,7 @@
 
       display: flex;
       flex-direction: column;
-      gap: var(--ni-4);
+      gap: var(--gap-xxs);
 
       &:global(:has(> :nth-child(2))) {
         justify-content: center;
@@ -53,7 +53,7 @@
       bottom: var(--ni-neg-16);
       right: var(--ni-8);
       display: flex;
-      gap: var(--ni-4);
+      gap: var(--gap-xxs);
     }
   }
 </style>

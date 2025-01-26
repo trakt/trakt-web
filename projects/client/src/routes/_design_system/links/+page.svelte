@@ -219,7 +219,7 @@
   main {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-32);
+    gap: var(--gap-xl);
     padding-top: var(--ni-32);
     align-items: center;
 
@@ -232,14 +232,14 @@
       section {
         display: flex;
         flex-direction: column;
-        gap: var(--ni-16);
+        gap: var(--gap-m);
         align-items: center;
       }
     }
 
     .action-link-variants {
       display: flex;
-      gap: var(--ni-16);
+      gap: var(--gap-m);
     }
   }
 </style>

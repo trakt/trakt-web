@@ -44,11 +44,11 @@
   .trakt-summary-meta {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
   }
 
   .trakt-meta-tags {
     display: flex;
-    gap: var(--ni-8);
+    gap: var(--gap-xs);
   }
 </style>

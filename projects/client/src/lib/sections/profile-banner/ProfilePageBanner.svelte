@@ -37,7 +37,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
   }
 
   .profile-image-container {

@@ -150,7 +150,7 @@
     all: unset;
     display: flex;
     align-items: center;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
     min-width: var(--ni-96);
     padding: var(--ni-16);
     flex-shrink: 0;
@@ -214,7 +214,7 @@
 
     .button-icon {
       display: flex;
-      gap: var(--ni-8);
+      gap: var(--gap-xs);
     }
 
     .button-label {

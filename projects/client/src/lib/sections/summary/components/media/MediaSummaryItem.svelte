@@ -57,7 +57,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
 
     :global(img) {
       height: var(--ni-120);
@@ -70,7 +70,7 @@
       display: flex;
       align-items: flex-start;
       flex-direction: column;
-      gap: var(--ni-10);
+      gap: var(--gap-s);
       overflow: hidden;
 
       .trakt-summary-media-title {
@@ -83,7 +83,7 @@
 
       .meta-info {
         display: flex;
-        gap: var(--ni-4);
+        gap: var(--gap-xxs);
       }
 
       :global(.trakt-summary-genre) {

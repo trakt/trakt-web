@@ -124,11 +124,11 @@
   .shadow-list-container {
     display: flex;
     flex-direction: column;
-    gap: var(--ni-32);
+    gap: var(--gap-xl);
     transition: gap var(--transition-increment) ease-in-out;
 
     @include for-mobile {
-      gap: var(--ni-16);
+      gap: var(--gap-m);
     }
   }
 
@@ -137,7 +137,7 @@
 
     display: flex;
     flex-direction: column;
-    gap: var(--ni-16);
+    gap: var(--gap-m);
     justify-content: center;
     align-items: center;
 
@@ -218,11 +218,11 @@
     scroll-snap-type: x proximity;
 
     &.spacing-small {
-      gap: var(--ni-8);
+      gap: var(--gap-xs);
     }
 
     &.spacing-large {
-      gap: var(--ni-16);
+      gap: var(--gap-m);
     }
 
     & > :global(:not(svelte-css-wrapper)) {

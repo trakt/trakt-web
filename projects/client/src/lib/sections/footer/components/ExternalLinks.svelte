@@ -43,7 +43,7 @@
 <style>
   .trakt-external-links {
     display: flex;
-    gap: var(--ni-24);
+    gap: var(--gap-l);
 
     :global(svg) {
       height: var(--ni-24);
