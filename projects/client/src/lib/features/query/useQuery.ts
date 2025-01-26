@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from '@tanstack/svelte-query';
 import { onMount } from 'svelte';
-import { QUERY_ID } from './defineQuery';
+import { queryId } from './defineQuery';
 
 const INVALIDATION_MAP = new Map<string, number>();
 
@@ -23,21 +23,21 @@ export function useQuery<
       return;
     }
 
-    const queryId = props.queryKey.find((key) =>
-      typeof key === 'string' && key.includes(`${QUERY_ID}:`)
+    const id = props.queryKey.find((key) =>
+      typeof key === 'string' && key.includes(queryId(''))
     ) as string | Nil;
 
-    if (queryId == null) {
+    if (id == null) {
       return;
     }
 
-    const isInvalidatedQueued = INVALIDATION_MAP.has(queryId);
+    const isInvalidatedQueued = INVALIDATION_MAP.has(id);
 
     if (isInvalidatedQueued) {
       return;
     }
 
-    INVALIDATION_MAP.set(queryId, Date.now());
+    INVALIDATION_MAP.set(id, Date.now());
 
     const timeoutId = setTimeout(() => {
       client.invalidateQueries({ queryKey: props.queryKey });

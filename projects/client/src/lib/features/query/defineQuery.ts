@@ -34,9 +34,21 @@ type DefineQueryProps<
   refetchOnWindowFocus?: boolean;
 };
 
-export const QUERY_ID = 'query';
-export const SCHEMA_ID = 'schema';
-export const DEPENDENCY_ID = 'dependency';
+const QUERY_ID = 'query';
+const SCHEMA_ID = 'schema';
+const DEPENDENCY_ID = 'dependency';
+
+export function queryId(key: string) {
+  return `${QUERY_ID}:${key}`;
+}
+
+export function schemaId(key: string) {
+  return `${SCHEMA_ID}:${key}`;
+}
+
+export function dependencyId(key: Dependency) {
+  return `${DEPENDENCY_ID}:${key}`;
+}
 
 export function defineQuery<
   TInput,
@@ -52,10 +64,8 @@ export function defineQuery<
     ...params
   }: DefineQueryProps<TInput, TOutput, TRequestParams>,
 ) {
-  const key = `${QUERY_ID}:${params.key}`;
-  const hash = `${SCHEMA_ID}:${
-    monitor(zodToHash, `${params.key} hashing`)(schema)
-  }`;
+  const key = queryId(params.key);
+  const hash = schemaId(monitor(zodToHash, `${params.key} hashing`)(schema));
 
   return (
     requestParams: TRequestParams = {} as TRequestParams,
@@ -66,7 +76,7 @@ export function defineQuery<
 
     const dependencies = resolved
       .filter((dependency) => dependency != null)
-      .map((dependency) => `${DEPENDENCY_ID}:${dependency}`);
+      .map((dependency) => dependencyId(dependency));
 
     return {
       queryKey: [
