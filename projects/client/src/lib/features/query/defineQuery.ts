@@ -30,7 +30,7 @@ type DefineQueryProps<
   request: RequestDefinition<TInput, TRequestParams>;
   mapper: MapperDefinition<TInput, TOutput, TRequestParams>;
   schema: TOutput;
-  ttl?: number;
+  ttl: number | Nil;
   refetchOnWindowFocus?: boolean;
 };
 
@@ -78,7 +78,7 @@ export function defineQuery<
       queryFn: () =>
         request(requestParams)
           .then((data) => mapper(data, requestParams)),
-      staleTime: params.ttl,
+      staleTime: params.ttl == null ? undefined : params.ttl,
       refetchOnWindowFocus: params.refetchOnWindowFocus,
     };
   };
