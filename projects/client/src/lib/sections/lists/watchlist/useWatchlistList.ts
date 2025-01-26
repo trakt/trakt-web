@@ -10,7 +10,6 @@ import {
   type WatchlistShow,
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState';
-import { time } from '$lib/utils/timing/time.ts';
 import { derived } from 'svelte/store';
 
 export type WatchListParams = {
@@ -40,10 +39,7 @@ function typeToQuery(
 }
 
 export function useWatchlistList(params: WatchListStoreProps) {
-  const query = useQuery({
-    ...typeToQuery(params),
-    staleTime: time.hours(1),
-  });
+  const query = useQuery(typeToQuery(params));
   const list = derived(
     query,
     ($query) => ($query.data ?? []).map((item) => item.entry),

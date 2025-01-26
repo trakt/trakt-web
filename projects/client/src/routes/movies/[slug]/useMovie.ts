@@ -7,55 +7,34 @@ import { movieStatsQuery } from '$lib/requests/queries/movies/movieStatsQuery.ts
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieWatchersQuery } from '$lib/requests/queries/movies/movieWatchersQuery.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { derived } from 'svelte/store';
 
 export function useMovie(slug: string) {
-  const movie = useQuery({
-    ...movieSummaryQuery({
-      slug,
-    }),
-    staleTime: time.days(1),
-  });
+  const movie = useQuery(movieSummaryQuery({
+    slug,
+  }));
 
-  const ratings = useQuery({
-    ...movieRatingQuery({
-      slug,
-    }),
-    staleTime: time.days(1),
-  });
+  const ratings = useQuery(movieRatingQuery({
+    slug,
+  }));
 
-  const stats = useQuery({
-    ...movieStatsQuery({
-      slug,
-    }),
-    staleTime: time.minutes(30),
-  });
+  const stats = useQuery(movieStatsQuery({
+    slug,
+  }));
 
-  const watchers = useQuery({
-    ...movieWatchersQuery({
-      slug,
-    }),
-    staleTime: time.minutes(5),
-  });
+  const watchers = useQuery(movieWatchersQuery({
+    slug,
+  }));
 
-  const studios = useQuery({
-    ...movieStudiosQuery({ slug }),
-    staleTime: time.days(1),
-  });
-
-  const crew = useQuery({
-    ...moviePeopleQuery({ slug }),
-    staleTime: time.days(1),
-  });
+  const studios = useQuery(movieStudiosQuery({ slug }));
+  const crew = useQuery(moviePeopleQuery({ slug }));
 
   const locale = languageTag();
 
   const isLocaleSkipped = locale === 'en';
-  const intl = isLocaleSkipped ? movie : useQuery({
-    ...movieIntlQuery({ slug, ...getLanguageAndRegion() }),
-    staleTime: time.days(7),
-  });
+  const intl = isLocaleSkipped
+    ? movie
+    : useQuery(movieIntlQuery({ slug, ...getLanguageAndRegion() }));
 
   const queries = [movie, ratings, stats, watchers, studios, crew, intl];
 

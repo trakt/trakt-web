@@ -3,7 +3,9 @@ import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { EpisodeEntrySchema } from '../../models/EpisodeEntry.ts';
 
@@ -41,7 +43,7 @@ const upcomingEpisodesRequest = (
 
 export const upcomingEpisodesQuery = defineQuery({
   key: 'upcomingEpisodes',
-  invalidations: [],
+  invalidations: [InvalidateAction.Watchlisted('show')],
   dependencies: (params) => [params.startDate, params.days],
   request: upcomingEpisodesRequest,
   mapper: (response) => {
@@ -53,4 +55,6 @@ export const upcomingEpisodesQuery = defineQuery({
     return coalesceEpisodes(episodes);
   },
   schema: UpcomingEpisodeEntrySchema.array(),
+  ttl: time.minutes(30),
+  refetchOnWindowFocus: true,
 });

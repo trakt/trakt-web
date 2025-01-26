@@ -11,10 +11,7 @@ export function useWatchNowSources() {
   const { watchNow: watchNowSettings } = current();
   const country = watchNowSettings.country ?? region;
 
-  const watchNowSources = useQuery({
-    ...watchNowSourcesQuery({}),
-    staleTime: Infinity,
-  });
+  const watchNowSources = useQuery(watchNowSourcesQuery({}));
 
   return {
     sources: derived(

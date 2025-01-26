@@ -5,7 +5,6 @@ import {
   movieAnticipatedQuery,
 } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
 import { showAnticipatedQuery } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { derived } from 'svelte/store';
 
 export type AnticipatedEntry = AnticipatedMovie;
@@ -36,10 +35,7 @@ function typeToQuery(
 export function useAnticipatedList(
   props: AnticipatedListStoreProps,
 ) {
-  const query = useQuery({
-    ...typeToQuery(props),
-    staleTime: time.hours(1),
-  });
+  const query = useQuery(typeToQuery(props));
 
   return {
     list: derived(query, ($query) => $query.data?.entries ?? []),

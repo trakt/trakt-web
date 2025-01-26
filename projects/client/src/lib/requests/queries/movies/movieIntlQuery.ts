@@ -5,6 +5,7 @@ import type {
 } from '$lib/features/i18n/index.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { type MediaIntl, MediaIntlSchema } from '../../models/MediaIntl.ts';
 
 type MovieIntlParams = {
@@ -62,4 +63,5 @@ export const movieIntlQuery = defineQuery({
       .map(mapMovieIntlResponse)
       .at(0),
   schema: MediaIntlSchema.optional(),
+  ttl: time.days(7),
 });

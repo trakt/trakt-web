@@ -3,7 +3,6 @@ import type { MediaType } from '$lib/requests/models/MediaType';
 import { movieFavoritesQuery } from '$lib/requests/queries/movies/movieFavoritesQuery';
 import { showFavoritesQuery } from '$lib/requests/queries/shows/showFavoritesQuery';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState';
-import { time } from '$lib/utils/timing/time';
 import { derived } from 'svelte/store';
 
 type UseFavoritesProps = {
@@ -22,10 +21,7 @@ function typeToQuery(
 }
 
 export function useFavoritesList({ type }: UseFavoritesProps) {
-  const query = useQuery({
-    ...typeToQuery({ type }),
-    staleTime: time.hours(1),
-  });
+  const query = useQuery(typeToQuery({ type }));
 
   return {
     list: derived(query, ($query) => $query.data ?? []),

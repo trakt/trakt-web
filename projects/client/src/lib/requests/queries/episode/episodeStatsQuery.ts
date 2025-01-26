@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapStatsResponseToMediaStats } from '$lib/requests/_internal/mapStatsResponseToMediaStats.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaStatsSchema } from '$lib/requests/models/MediaStats.ts';
+import { time } from '$lib/utils/timing/time';
 
 type EpisodeStatsParams = {
   slug: string;
@@ -37,4 +38,5 @@ export const episodeStatsQuery = defineQuery({
   request: episodeStatsRequest,
   mapper: mapStatsResponseToMediaStats,
   schema: MediaStatsSchema,
+  ttl: time.minutes(30),
 });

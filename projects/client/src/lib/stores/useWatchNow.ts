@@ -1,16 +1,15 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { WatchNowServices } from '$lib/requests/models/WatchNowServices.ts';
 import { episodeWatchNowQuery } from '$lib/requests/queries/episode/episodeWatchNowQuery.ts';
 import { showWatchNowQuery } from '$lib/requests/queries/shows/showWatchNowQuery.ts';
 import { findFavoriteWatchNowService } from '$lib/stores/_internal/findFavoriteWatchNowService.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { derived, get, readable } from 'svelte/store';
 import { movieWatchNowQuery } from '../requests/queries/movies/movieWatchNowQuery.ts';
-import { useQuery } from '$lib/features/query/useQuery.ts';
 
 type WatchNowMediaType = MediaType | 'episode';
 
@@ -57,10 +56,7 @@ export function useWatchNow({ type, id }: WatchNowStoreProps) {
   const { watchNow: watchNowSettings } = current();
   const country = watchNowSettings.country ?? region;
 
-  const watchNow = useQuery({
-    ...typeToQuery(type, id, country),
-    staleTime: time.days(1),
-  });
+  const watchNow = useQuery(typeToQuery(type, id, country));
 
   return {
     watchNow: derived(

@@ -5,6 +5,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
@@ -61,4 +62,5 @@ export const showPopularQuery = defineQuery({
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(PopularShowSchema),
+  ttl: time.hours(1),
 });

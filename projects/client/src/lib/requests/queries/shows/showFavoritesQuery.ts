@@ -3,6 +3,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import {
   type FavoritedEntry,
   FavoritedEntrySchema,
@@ -48,4 +49,5 @@ export const showFavoritesQuery = defineQuery({
   request: favoritedShowsRequest,
   mapper: (data) => data.map(mapFavoritedShowResponse),
   schema: FavoritedEntrySchema.array(),
+  ttl: time.hours(1),
 });

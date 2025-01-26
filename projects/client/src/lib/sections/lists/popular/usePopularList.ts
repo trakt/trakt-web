@@ -5,7 +5,6 @@ import {
   type PopularShow,
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { derived } from 'svelte/store';
 import type { MediaType } from '../../../requests/models/MediaType.ts';
 
@@ -37,10 +36,7 @@ function typeToQuery(
 export function usePopularList(
   props: PopularListStoreProps,
 ) {
-  const query = useQuery({
-    ...typeToQuery(props),
-    staleTime: time.hours(1),
-  });
+  const query = useQuery(typeToQuery(props));
 
   return {
     list: derived(query, ($query) => $query.data?.entries ?? []),

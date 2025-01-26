@@ -7,7 +7,6 @@ import {
 } from '$lib/requests/queries/search/searchQuery.ts';
 import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { CancelledError, useQueryClient } from '@tanstack/svelte-query';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
@@ -39,12 +38,9 @@ export function useSearch() {
       return;
     }
 
-    const response = await client.fetchQuery({
-      ...searchQuery({
-        query,
-      }),
-      staleTime: time.minutes(5),
-    })
+    const response = await client.fetchQuery(searchQuery({
+      query,
+    }))
       .then((response) => ({
         items: response,
         reason: 'result',

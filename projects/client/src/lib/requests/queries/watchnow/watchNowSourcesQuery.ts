@@ -60,4 +60,5 @@ export const watchNowSourcesQuery = defineQuery({
       return countrySources.map(mapWatchNowSourceResponse);
     }, (_, entry) => extractCountryCode(entry)),
   schema: WatchNowSourceListSchema,
+  ttl: Infinity,
 });

@@ -2,6 +2,7 @@ import { type ShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type { z } from 'zod';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
@@ -48,4 +49,5 @@ export const showRelatedQuery = defineQuery({
   request: showRelatedRequest,
   mapper: (body) => body.map(mapResponseToRelatedShow),
   schema: RelatedShowSchema.array(),
+  ttl: time.days(7),
 });

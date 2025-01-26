@@ -3,6 +3,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PersonSummarySchema } from '$lib/requests/models/PersonSummary.ts';
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
+import { time } from '$lib/utils/timing/time';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { PeopleSummaryResponse } from '@trakt/api';
 
@@ -54,4 +55,5 @@ export const peopleSummaryQuery = defineQuery({
   request: peopleSummaryRequest,
   mapper: mapPeopleResponseToPersonSummary,
   schema: PersonSummarySchema,
+  ttl: time.days(30),
 });

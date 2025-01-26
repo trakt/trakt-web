@@ -11,6 +11,7 @@ import {
 } from '$lib/requests/models/EpisodeType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
+import { time } from '$lib/utils/timing/time';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 
 const showProgressRequest = (
@@ -76,4 +77,5 @@ export const showProgressQuery = defineQuery({
   request: showProgressRequest,
   mapper: mapShowProgressResponse,
   schema: EpisodeProgressEntrySchema,
+  ttl: time.days(1),
 });

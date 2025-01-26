@@ -8,6 +8,7 @@ import { EpisodeProgressEntrySchema } from '$lib/requests/models/EpisodeProgress
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
+import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 
 export const UpNextEntrySchema = EpisodeProgressEntrySchema.merge(z.object({
@@ -82,4 +83,6 @@ export const upNextQuery = defineQuery({
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(UpNextEntrySchema),
+  ttl: time.minutes(30),
+  refetchOnWindowFocus: true,
 });

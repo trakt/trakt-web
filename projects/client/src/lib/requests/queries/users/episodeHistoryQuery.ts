@@ -6,6 +6,7 @@ import { api, type ApiParams } from '$lib/requests/api';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry';
+import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 
 type EpisodeHistoryParams = {
@@ -70,4 +71,5 @@ export const episodeHistoryQuery = defineQuery({
   request: episodeHistoryRequest,
   mapper: (body) => body.map(mapResponseToHistory),
   schema: HistoryEpisodeSchema.array(),
+  ttl: time.hours(1),
 });

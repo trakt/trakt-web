@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '../../_internal/mapEpisodeResponseToEpisodeEntry.ts';
 
 type ShowSeasonEpisodeParams = {
@@ -37,4 +38,5 @@ export const showSeasonEpisodesQuery = defineQuery({
   request: showSeasonEpisodesRequest,
   mapper: (body) => body.map(mapEpisodeResponseToEpisodeEntry),
   schema: EpisodeEntrySchema.array(),
+  ttl: time.hours(6),
 });

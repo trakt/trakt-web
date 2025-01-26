@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapPeopleResponseToMediaCrew } from '$lib/requests/_internal/mapPeopleResponseToMediaCrew.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaCrewSchema } from '$lib/requests/models/MediaCrew.ts';
+import { time } from '$lib/utils/timing/time';
 
 type ShowPeopleParams = {
   slug: string;
@@ -35,4 +36,5 @@ export const showPeopleQuery = defineQuery({
   request: showPeopleRequest,
   mapper: (body) => mapPeopleResponseToMediaCrew(body),
   schema: MediaCrewSchema,
+  ttl: time.days(30),
 });

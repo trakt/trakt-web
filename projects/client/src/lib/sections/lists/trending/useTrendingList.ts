@@ -9,7 +9,6 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -44,10 +43,7 @@ function typeToQuery(
 export function useTrendingList(
   { type, limit, page }: TrendingListStoreProps,
 ) {
-  const query = useQuery({
-    ...typeToQuery({ type, limit, page }),
-    staleTime: time.hours(1),
-  });
+  const query = useQuery(typeToQuery({ type, limit, page }));
 
   return {
     list: derived(query, ($query) => $query.data?.entries ?? []),

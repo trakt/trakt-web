@@ -5,6 +5,7 @@ import type {
 } from '$lib/features/i18n/index.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import {
   type EpisodeIntl,
   EpisodeIntlSchema,
@@ -73,4 +74,5 @@ export const episodeIntlQuery = defineQuery({
       .map(mapEpisodeIntlResponse)
       .at(0),
   schema: EpisodeIntlSchema.optional(),
+  ttl: time.days(7),
 });

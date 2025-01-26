@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapWatcherResponseToActiveWatcher } from '$lib/requests/_internal/mapWatcherResponseToActiveWatcher.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { ActiveWatcherSchema } from '../../models/ActiveWatcher.ts';
 
 type ShowWatchersParams = { slug: string } & ApiParams;
@@ -31,4 +32,5 @@ export const showWatchersQuery = defineQuery({
   dependencies: (params) => [params.slug],
   invalidations: [],
   schema: ActiveWatcherSchema.array(),
+  ttl: time.minutes(15),
 });

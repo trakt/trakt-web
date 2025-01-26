@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type { z } from 'zod';
 import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
@@ -47,4 +48,5 @@ export const recommendedMoviesQuery = defineQuery({
   request: recommendedMoviesRequest,
   mapper: (body) => body.map(mapMovieResponseToMovieSummary),
   schema: RecommendedMovieSchema.array(),
+  ttl: time.hours(24),
 });

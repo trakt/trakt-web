@@ -4,6 +4,7 @@ import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovie
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
+import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry';
 
@@ -51,4 +52,5 @@ export const movieWatchlistQuery = defineQuery({
   request: watchlistRequest,
   mapper: (body) => body.map(mapResponseToWatchlist),
   schema: WatchlistMovieSchema.array(),
+  ttl: time.hours(1),
 });

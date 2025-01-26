@@ -2,7 +2,6 @@ import { useQuery } from '$lib/features/query/useQuery';
 import type { MediaType } from '$lib/requests/models/MediaType';
 import { peopleMovieCreditsQuery } from '$lib/requests/queries/people/peopleMovieCreditsQuery';
 import { peopleShowCreditsQuery } from '$lib/requests/queries/people/peopleShowCreditsQuery';
-import { time } from '$lib/utils/timing/time';
 import { derived } from 'svelte/store';
 
 type UseCreditsListProps = {
@@ -24,10 +23,7 @@ function typeToQuery(
 }
 
 export function useCreditsList({ type, slug }: UseCreditsListProps) {
-  const query = useQuery({
-    ...typeToQuery({ type, slug }),
-    staleTime: time.days(1),
-  });
+  const query = useQuery(typeToQuery({ type, slug }));
 
   const list = derived(query, ($query) => $query.data ?? []);
 

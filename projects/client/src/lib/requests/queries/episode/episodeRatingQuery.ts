@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaRatingSchema } from '$lib/requests/models/MediaRating.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { mapRatingResponseToMediaRating } from '../../_internal/mapRatingResponseToMediaRating.ts';
 
 type EpisodeRatingParams = {
@@ -40,4 +41,5 @@ export const episodeRatingQuery = defineQuery({
   request: episodeRatingRequest,
   mapper: mapRatingResponseToMediaRating,
   schema: MediaRatingSchema,
+  ttl: time.days(1),
 });

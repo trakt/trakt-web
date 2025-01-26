@@ -4,6 +4,7 @@ import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpi
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 import { EpisodeEntrySchema } from '../../models/EpisodeEntry';
 import { ShowEntrySchema } from '../../models/ShowEntry';
@@ -67,4 +68,5 @@ export const showHistoryQuery = defineQuery({
   request: showHistoryRequest,
   mapper: (body) => body.map(mapResponseToHistory),
   schema: HistoryShowSchema.array(),
+  ttl: time.hours(6),
 });

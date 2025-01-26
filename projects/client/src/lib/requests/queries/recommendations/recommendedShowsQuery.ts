@@ -3,6 +3,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { MediaEntrySchema } from '../../models/MediaEntry.ts';
@@ -58,4 +59,5 @@ export const recommendedShowsQuery = defineQuery({
       },
     })),
   schema: RecommendedShowSchema.array(),
+  ttl: time.hours(24),
 });

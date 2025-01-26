@@ -4,6 +4,7 @@ import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovie
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
 
 type SearchParams = {
@@ -62,4 +63,5 @@ export const searchQuery = defineQuery({
       .map(mapToSearchResultEntry)
       .filter((value) => !isGarbage(value)),
   schema: MediaEntrySchema.array(),
+  ttl: time.minutes(30),
 });

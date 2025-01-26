@@ -3,6 +3,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry';
 
@@ -63,4 +64,5 @@ export const movieHistoryQuery = defineQuery({
   request: movieHistoryRequest,
   mapper: (body) => body.map(mapResponseToHistory),
   schema: HistoryMovieSchema.array(),
+  ttl: time.hours(6),
 });

@@ -1,6 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { shuffle } from '$lib/utils/array/shuffle.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { derived } from 'svelte/store';
 import {
   movieTrendingQuery,
@@ -12,15 +11,8 @@ import {
 const RANDOM_SHOW_COUNT = 2;
 
 export function useTrendingItems() {
-  const trendingShows = useQuery({
-    ...showTrendingQuery(),
-    staleTime: time.hours(1),
-  });
-
-  const trendingMovies = useQuery({
-    ...movieTrendingQuery(),
-    staleTime: time.hours(1),
-  });
+  const trendingShows = useQuery(showTrendingQuery());
+  const trendingMovies = useQuery(movieTrendingQuery());
 
   return {
     shows: derived(

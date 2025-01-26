@@ -5,39 +5,15 @@ import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.t
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showWatchersQuery } from '$lib/requests/queries/shows/showWatchersQuery.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { derived } from 'svelte/store';
 
 export function useShowDetails(slug: string) {
-  const ratings = useQuery({
-    ...showRatingQuery({ slug }),
-    staleTime: time.days(1),
-  });
-
-  const stats = useQuery({
-    ...showStatsQuery({ slug }),
-    staleTime: time.minutes(30),
-  });
-
-  const watchers = useQuery({
-    ...showWatchersQuery({ slug }),
-    staleTime: time.minutes(5),
-  });
-
-  const studios = useQuery({
-    ...showStudiosQuery({ slug }),
-    staleTime: time.days(1),
-  });
-
-  const crew = useQuery({
-    ...showPeopleQuery({ slug }),
-    staleTime: time.days(1),
-  });
-
-  const seasons = useQuery({
-    ...showSeasonsQuery({ slug }),
-    staleTime: time.days(1),
-  });
+  const ratings = useQuery(showRatingQuery({ slug }));
+  const seasons = useQuery(showSeasonsQuery({ slug }));
+  const studios = useQuery(showStudiosQuery({ slug }));
+  const crew = useQuery(showPeopleQuery({ slug }));
+  const stats = useQuery(showStatsQuery({ slug }));
+  const watchers = useQuery(showWatchersQuery({ slug }));
 
   const queries = [
     ratings,
