@@ -1,7 +1,7 @@
 <script lang="ts">
-  import WatchNowServiceLogo from "$lib/components/buttons/watch-now/_internal/WatchNowServiceLogo.svelte";
-  import { WatchNowButtonIntlProvider } from "$lib/components/buttons/watch-now/WatchNowButtonIntlProvider";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
+  import WatchNowServiceLogo from "$lib/components/media/watch-now/WatchNowServiceLogo.svelte";
+  import { WatchNowServiceLogoIntlProvider } from "$lib/components/media/watch-now/WatchNowServiceLogoIntlProvider";
   import * as m from "$lib/features/i18n/messages";
   import type { WatchNowStreaming } from "$lib/requests/models/WatchNowServices";
 
@@ -18,7 +18,7 @@
       <h6 class="uppercase">{m.stream_on()}</h6>
       <WatchNowServiceLogo
         source={service.source}
-        i18n={WatchNowButtonIntlProvider}
+        i18n={WatchNowServiceLogoIntlProvider}
       />
     </div>
     <div class="trakt-watch-now-play">

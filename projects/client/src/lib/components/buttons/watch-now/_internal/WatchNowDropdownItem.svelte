@@ -1,5 +1,6 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import WatchNowServiceLogo from "$lib/components/media/watch-now/WatchNowServiceLogo.svelte";
   import type {
     WatchNowOnDemand,
     WatchNowStreaming,
@@ -7,7 +8,6 @@
   import { useWatchNowSources } from "$lib/stores/useWatchNowSources";
   import type { WatchNowButtonIntl } from "../WatchNowButtonIntl";
   import { getMediaCost } from "./getMediaCost";
-  import WatchNowServiceLogo from "./WatchNowServiceLogo.svelte";
 
   type WatchNowDropdownItemProps = {
     service: WatchNowStreaming | WatchNowOnDemand;
