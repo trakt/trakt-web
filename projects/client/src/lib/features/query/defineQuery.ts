@@ -3,7 +3,7 @@ import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAct
 import { monitor } from '$lib/utils/perf/monitor';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import type { z, ZodType } from 'zod';
-import { zodToHash } from './zodToHash';
+import { zodToHash } from './_internal/zodToHash.ts';
 
 type RequestDefinition<TInput, TRequestParams extends ApiParams> = (
   { fetch }: TRequestParams,
