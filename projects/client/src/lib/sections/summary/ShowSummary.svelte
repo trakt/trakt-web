@@ -33,16 +33,10 @@
     seasons,
   }: ShowSummaryProps = $props();
 
-  const { progress: episode } = $derived(useShowProgress(media.slug));
-</script>
+  const { progress } = $derived(useShowProgress(media.slug));
 
-{#snippet contextualContent()}
-  <RenderFor device={["desktop"]} audience="authenticated">
-    {#if $episode}
-      <EpisodeCard episode={$episode} show={media} type="next" />
-    {/if}
-  </RenderFor>
-{/snippet}
+  const episode = $derived($progress);
+</script>
 
 <MediaSummary
   {media}
@@ -53,8 +47,15 @@
   {intl}
   {crew}
   type="show"
-  {contextualContent}
-/>
+>
+  {#snippet contextualContent()}
+    <RenderFor device={["desktop"]} audience="authenticated">
+      {#if episode != null}
+        <EpisodeCard {episode} show={media} type="next" />
+      {/if}
+    </RenderFor>
+  {/snippet}
+</MediaSummary>
 
 <CastList title={m.actors()} cast={crew.cast} />
 

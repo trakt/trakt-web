@@ -17,14 +17,13 @@
   import type { EpisodeCardProps } from "./EpisodeCardProps";
 
   const props: EpisodeCardProps = $props();
-  const { type, show, episode } = props;
 
-  const src = useEpisodeSpoilerImage({ episode, show });
-  const isFuture = $derived(episode.airDate > new Date());
+  const src = $derived(useEpisodeSpoilerImage(props));
+  const isFuture = $derived(props.episode.airDate > new Date());
 
-  const isDefault = $derived(type === "default");
+  const isDefault = $derived(props.type === "default");
   const isShowContext = $derived(
-    type === "default" && props.context === "show",
+    props.type === "default" && props.context === "show",
   );
 </script>
 
@@ -35,38 +34,51 @@
 >
   <Link
     focusable={false}
-    href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
+    href={UrlBuilder.episode(
+      props.show.slug,
+      props.episode.season,
+      props.episode.number,
+    )}
   >
     <CardCover
       src={$src ?? EPISODE_COVER_PLACEHOLDER}
-      alt={`${show.title} - ${episode.title}`}
+      alt={`${props.show.title} - ${props.episode.title}`}
     >
       {#snippet tags()}
         {#if !isDefault}
-          <EpisodeStatusTag i18n={EpisodeIntlProvider} type={episode.type} />
+          <EpisodeStatusTag
+            i18n={EpisodeIntlProvider}
+            type={props.episode.type}
+          />
         {/if}
 
-        {#if type === "default"}
+        {#if props.type === "default"}
           {#if isFuture}
             <EpisodeTimeTag>
-              {EpisodeIntlProvider.timestampText(episode.airDate)}
+              {EpisodeIntlProvider.timestampText(props.episode.airDate)}
             </EpisodeTimeTag>
           {:else}
-            <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
+            <DurationTag
+              i18n={TagIntlProvider}
+              runtime={props.episode.runtime}
+            />
           {/if}
         {/if}
 
-        {#if type === "upcoming"}
+        {#if props.type === "upcoming"}
           <EpisodeTimeTag>
-            {EpisodeIntlProvider.timestampText(episode.airDate)}
+            {EpisodeIntlProvider.timestampText(props.episode.airDate)}
           </EpisodeTimeTag>
         {/if}
 
-        {#if type === "next"}
-          <ShowProgressTag total={episode.total} progress={episode.completed}>
+        {#if props.type === "next"}
+          <ShowProgressTag
+            total={props.episode.total}
+            progress={props.episode.completed}
+          >
             <span class="show-progress-label">
-              {EpisodeIntlProvider.remainingText(episode.remaining)} / {EpisodeIntlProvider.durationText(
-                episode.minutesLeft,
+              {EpisodeIntlProvider.remainingText(props.episode.remaining)} / {EpisodeIntlProvider.durationText(
+                props.episode.minutesLeft,
               )}
             </span>
           </ShowProgressTag>
@@ -78,21 +90,31 @@
   <CardFooter>
     {#if isShowContext}
       <p class="episode-card-title ellipsis">
-        <Spoiler media={episode} {show} {episode} type="episode">
-          {episode.title}
+        <Spoiler
+          media={props.episode}
+          show={props.show}
+          episode={props.episode}
+          type="episode"
+        >
+          {props.episode.title}
         </Spoiler>
       </p>
       <p class="episode-card-subtitle ellipsis small">
-        {episode.season}x{episode.number}
+        {props.episode.season}x{props.episode.number}
       </p>
     {:else}
-      <Link href={UrlBuilder.show(show.slug)}>
-        <p class="episode-card-title ellipsis">{show.title}</p>
+      <Link href={UrlBuilder.show(props.show.slug)}>
+        <p class="episode-card-title ellipsis">{props.show.title}</p>
       </Link>
       <p class="episode-card-subtitle ellipsis small">
-        {episode.season}x{episode.number}
-        <Spoiler media={episode} {show} {episode} type="episode">
-          - {episode.title}
+        {props.episode.season}x{props.episode.number}
+        <Spoiler
+          media={props.episode}
+          show={props.show}
+          episode={props.episode}
+          type="episode"
+        >
+          - {props.episode.title}
         </Spoiler>
       </p>
     {/if}
@@ -102,10 +124,10 @@
         <MarkAsWatchedAction
           style="action"
           type="episode"
-          title={episode.title}
-          media={episode}
-          {episode}
-          {show}
+          title={props.episode.title}
+          media={props.episode}
+          episode={props.episode}
+          show={props.show}
         />
       {/if}
     {/snippet}
