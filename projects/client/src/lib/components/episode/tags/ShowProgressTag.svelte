@@ -10,7 +10,14 @@
   const percentage = $derived((progress / total) * 100);
 </script>
 
-<div class="show-progress-tag" style:--progress-width={`${percentage}%`}>
+<div
+  class="show-progress-tag"
+  style:--progress-width={`${percentage}%`}
+  role="progressbar"
+  aria-valuenow={progress}
+  aria-valuemin={0}
+  aria-valuemax={total}
+>
   <TagContent>
     <p class="meta-info capitalize">
       {@render children()}
