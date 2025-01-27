@@ -18,7 +18,7 @@
   import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
   import WatchNowOverlay from "../overlay/WatchNowOverlay.svelte";
-  import RateNowButton from "../rating/RateNowButton.svelte";
+  import RateNow from "../rating/RateNow.svelte";
   import SummaryActions from "../summary/SummaryActions.svelte";
   import SummaryContainer from "../summary/SummaryContainer.svelte";
   import SummaryHeader from "../summary/SummaryHeader.svelte";
@@ -127,7 +127,7 @@
   <RenderFor audience="authenticated">
     <SummaryActions>
       {#if type === "movie"}
-        <RateNowButton {type} id={media.id} />
+        <RateNow {type} id={media.id} />
       {/if}
 
       <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">

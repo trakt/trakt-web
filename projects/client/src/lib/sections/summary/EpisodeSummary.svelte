@@ -15,7 +15,7 @@
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
   import WatchNowOverlay from "./components/overlay/WatchNowOverlay.svelte";
-  import RateNowButton from "./components/rating/RateNowButton.svelte";
+  import RateNow from "./components/rating/RateNow.svelte";
   import SummaryActions from "./components/summary/SummaryActions.svelte";
   import SummaryContainer from "./components/summary/SummaryContainer.svelte";
   import SummaryHeader from "./components/summary/SummaryHeader.svelte";
@@ -104,7 +104,7 @@
 
   <RenderFor audience="authenticated">
     <SummaryActions>
-      <RateNowButton type="episode" id={episode.id} />
+      <RateNow type="episode" id={episode.id} />
 
       <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
         {@render mediaActions()}
