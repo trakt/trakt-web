@@ -13,6 +13,7 @@
     variant = "primary",
     color = "default",
     size = "normal",
+    style = "flat",
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
@@ -33,6 +34,7 @@
     aria-label={label}
     data-color={color}
     data-variant={variant}
+    data-style={style}
     {...props}
   >
     {@render children()}
@@ -45,6 +47,7 @@
     data-color={color}
     data-variant={variant}
     data-size={size}
+    data-style={style}
     {...props}
   >
     {@render children()}
@@ -141,6 +144,20 @@
     &[data-size="small"] {
       scale: 0.75;
       margin: var(--ni-neg-4);
+    }
+
+    &[data-style="ghost"] {
+      background-color: transparent;
+
+      &:focus-visible {
+        background-color: var(--color-background-action-button);
+      }
+
+      @include for-mouse {
+        &:hover:not([disabled]) {
+          background-color: var(--color-background-action-button);
+        }
+      }
     }
   }
 </style>
