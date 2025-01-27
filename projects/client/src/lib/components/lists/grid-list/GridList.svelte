@@ -34,9 +34,8 @@
     /* TODO: investigate how we can better distribute empty spaces (@anodpixels) */
     justify-content: center;
     transition: gap var(--transition-increment) ease-in-out;
-    @include adaptive-gap(grid-column-gap);
-
     grid-row-gap: var(--gap-l);
+    @include adaptive-gap(grid-column-gap);
 
     @include for-mobile {
       grid-template-columns: 1fr;
