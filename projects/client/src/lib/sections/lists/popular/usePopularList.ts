@@ -5,6 +5,7 @@ import {
   type PopularShow,
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 import type { MediaType } from '../../../requests/models/MediaType.ts';
 
@@ -38,7 +39,13 @@ export function usePopularList(
 ) {
   const query = useQuery(typeToQuery(props));
 
+  const isLoading = derived(
+    query,
+    toLoadingState,
+  );
+
   return {
+    isLoading,
     list: derived(query, ($query) => $query.data?.entries ?? []),
     page: derived(
       query,

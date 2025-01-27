@@ -8,6 +8,7 @@ import {
   type RecommendedShow,
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -40,8 +41,13 @@ export function useRecommendedList(
 ) {
   const query = useQuery(typeToQuery(props));
   const list = derived(query, ($query) => $query.data ?? []);
+  const isLoading = derived(
+    query,
+    toLoadingState,
+  );
 
   return {
     list,
+    isLoading,
   };
 }

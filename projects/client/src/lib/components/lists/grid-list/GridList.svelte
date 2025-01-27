@@ -1,21 +1,37 @@
 <script lang="ts" generics="T extends { id: unknown }">
+  import { onMount, type Snippet } from "svelte";
+  import { writable } from "svelte/store";
   import "../_internal/list.css";
   import ListHeader from "../_internal/ListHeader.svelte";
   import type { ListProps } from "../ListProps";
 
-  type PageListProps<T> = ListProps<T>;
+  type PageListProps<T> = ListProps<T> & {
+    empty?: Snippet;
+  };
 
-  const { items, title, item, actions }: PageListProps<T> = $props();
+  const { items, title, item, actions, empty }: PageListProps<T> = $props();
+
+  const isMounted = writable(false);
+
+  onMount(() => {
+    isMounted.set(true);
+  });
 </script>
 
 <section class="trakt-grid-list-container">
   <ListHeader {title} {actions} inset="all" />
 
-  <div class="trakt-list-item-container trakt-list-items">
-    {#each items as i (i.id)}
-      {@render item(i)}
-    {/each}
-  </div>
+  {#if items.length > 0}
+    <div class="trakt-list-item-container trakt-list-items">
+      {#each items as i (i.id)}
+        {@render item(i)}
+      {/each}
+    </div>
+  {:else if empty != null && $isMounted}
+    <div class="grid-list-empty-state">
+      {@render empty()}
+    </div>
+  {/if}
 </section>
 
 <style lang="scss">
@@ -40,5 +56,12 @@
     @include for-mobile {
       grid-template-columns: 1fr;
     }
+  }
+
+  .grid-list-empty-state {
+    display: flex;
+    justify-content: center;
+
+    padding: 0 var(--layout-distance-side);
   }
 </style>

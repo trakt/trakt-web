@@ -8,18 +8,20 @@
   type DrillableList<T> = DrillListProps<T> & {
     drilldownLabel: string;
     useList: MediaStore<T>;
+    emptyMessage?: string;
   };
 
   const {
     title,
     drilldownLabel,
+    emptyMessage,
     type,
     item,
     useList,
     urlBuilder,
   }: DrillableList<T> = $props();
 
-  const { list } = $derived(useList({ type }));
+  const { list, isLoading } = $derived(useList({ type }));
 </script>
 
 <SectionList
@@ -31,5 +33,13 @@
 >
   {#snippet actions()}
     <ViewAllButton href={urlBuilder({ type })} label={drilldownLabel} />
+  {/snippet}
+
+  {#snippet empty()}
+    {#if !$isLoading && emptyMessage}
+      <p class="small secondary">
+        {emptyMessage}
+      </p>
+    {/if}
   {/snippet}
 </SectionList>

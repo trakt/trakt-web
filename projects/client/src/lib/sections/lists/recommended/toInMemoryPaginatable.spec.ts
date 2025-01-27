@@ -12,6 +12,7 @@ describe('toInMemoryPaginatable', () => {
 
     const mockStore = {
       list: readable(data),
+      isLoading: readable(false),
     };
 
     const paginatable = toInMemoryPaginatable({
@@ -45,6 +46,7 @@ describe('toInMemoryPaginatable', () => {
 
     const store = {
       list: readable(data),
+      isLoading: readable(false),
     };
 
     const paginatable = toInMemoryPaginatable({
@@ -70,6 +72,7 @@ describe('toInMemoryPaginatable', () => {
 
     const store = {
       list: readable(data),
+      isLoading: readable(false),
     };
 
     const paginatable = toInMemoryPaginatable({

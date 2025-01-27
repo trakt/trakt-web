@@ -5,6 +5,7 @@ import {
   movieAnticipatedQuery,
 } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
 import { showAnticipatedQuery } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { derived } from 'svelte/store';
 
 export type AnticipatedEntry = AnticipatedMovie;
@@ -37,7 +38,13 @@ export function useAnticipatedList(
 ) {
   const query = useQuery(typeToQuery(props));
 
+  const isLoading = derived(
+    query,
+    toLoadingState,
+  );
+
   return {
+    isLoading,
     list: derived(query, ($query) => $query.data?.entries ?? []),
     page: derived(
       query,

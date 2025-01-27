@@ -9,6 +9,7 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -44,8 +45,13 @@ export function useTrendingList(
   { type, limit, page }: TrendingListStoreProps,
 ) {
   const query = useQuery(typeToQuery({ type, limit, page }));
+  const isLoading = derived(
+    query,
+    toLoadingState,
+  );
 
   return {
+    isLoading,
     list: derived(query, ($query) => $query.data?.entries ?? []),
     page: derived(
       query,

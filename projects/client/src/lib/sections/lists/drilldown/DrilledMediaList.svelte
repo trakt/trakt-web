@@ -9,16 +9,17 @@
 
   type DrilledMediaListProps = DrillListProps<T> & {
     useList: PaginatableStore<T>;
+    emptyMessage?: string;
   };
 
-  const { title, type, item, useList, urlBuilder }: DrilledMediaListProps =
+  const { title, type, item, useList, emptyMessage }: DrilledMediaListProps =
     $props();
 
   const current = $derived(
     parseInt(pageState.url.searchParams.get("page") ?? "1"),
   );
 
-  const { list, page } = $derived(
+  const { list, page, isLoading } = $derived(
     useList({
       type,
       page: current,
@@ -40,4 +41,12 @@
   items={$list}
   {item}
   --width-item={mediaCardWidthResolver(type)}
-/>
+>
+  {#snippet empty()}
+    {#if !$isLoading && emptyMessage}
+      <p class="small secondary">
+        {emptyMessage}
+      </p>
+    {/if}
+  {/snippet}
+</GridList>

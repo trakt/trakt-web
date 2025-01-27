@@ -6,4 +6,5 @@ export type PaginatableStore<T> = (
 ) => {
   list: Readable<T[]>;
   page: Readable<{ total?: number }>;
+  isLoading: Readable<boolean>;
 };

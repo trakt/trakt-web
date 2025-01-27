@@ -10,7 +10,7 @@ export const toInMemoryPaginatable = <T>(params: {
 }): PaginatableStore<T> => {
   const { total, type, useList } = params;
 
-  const { list: store } = useList({ type, limit: total });
+  const { list: store, isLoading } = useList({ type, limit: total });
 
   return ({ page, limit }) => {
     const from = (page - 1) * limit;
@@ -23,6 +23,7 @@ export const toInMemoryPaginatable = <T>(params: {
 
     return {
       list,
+      isLoading,
       page: readable({ page, total: Math.ceil(total / limit) }),
     };
   };

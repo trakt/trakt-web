@@ -5,4 +5,5 @@ export type MediaStore<T> = (
   params: { type: MediaType; limit?: number },
 ) => {
   list: Readable<T[]>;
+  isLoading: Readable<boolean>;
 };
