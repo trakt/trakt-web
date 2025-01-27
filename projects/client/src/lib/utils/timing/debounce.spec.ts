@@ -58,4 +58,15 @@ describe('debounce', () => {
 
     expect(counter).toBe(1);
   });
+
+  it('should return a promise that resolves with the result of the callback function', async () => {
+    const add = (a: number, b: number) => a + b;
+    const debouncedAdd = debounce(add, 100);
+
+    const resultPromise = debouncedAdd(2, 3);
+    vi.advanceTimersByTime(100);
+    const result = await resultPromise;
+
+    expect(result).toBe(5);
+  });
 });
