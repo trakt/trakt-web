@@ -16,6 +16,7 @@
   import { useWatchNow } from "$lib/stores/useWatchNow";
   import type { Snippet } from "svelte";
   import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
+  import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
   import WatchNowOverlay from "../overlay/WatchNowOverlay.svelte";
   import RateNowButton from "../rating/RateNowButton.svelte";
   import SummaryActions from "../summary/SummaryActions.svelte";
@@ -84,10 +85,14 @@
     <SummaryPoster
       src={media.poster.url.medium}
       alt={title}
-      href={$watchNow?.preferred?.link}
+      href={$watchNow?.preferred?.link ?? media.trailer}
     >
       {#snippet hoverOverlay()}
-        <WatchNowOverlay service={$watchNow?.preferred} />
+        {#if $watchNow?.preferred}
+          <WatchNowOverlay service={$watchNow?.preferred} />
+        {:else}
+          <TrailerOverlay trailer={media.trailer} />
+        {/if}
       {/snippet}
       {#snippet actions()}
         <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
