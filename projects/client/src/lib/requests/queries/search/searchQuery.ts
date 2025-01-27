@@ -34,7 +34,7 @@ const searchRequest = ({ query, fetch }: SearchParams) =>
   api({
     fetch,
     cancellable: true,
-    cancellationId: 'search_cancellation_token',
+    cancellationId: searchCancellationId(),
   })
     .search
     .query({
@@ -64,4 +64,5 @@ export const searchQuery = defineQuery({
       .filter((value) => !isGarbage(value)),
   schema: MediaEntrySchema.array(),
   ttl: time.minutes(30),
+  retry: 0,
 });

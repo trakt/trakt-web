@@ -32,6 +32,7 @@ type DefineQueryProps<
   schema: TOutput;
   ttl: number | Nil;
   refetchOnWindowFocus?: boolean;
+  retry?: number;
 };
 
 const QUERY_ID = 'query';
@@ -90,6 +91,7 @@ export function defineQuery<
           .then((data) => mapper(data, requestParams)),
       staleTime: params.ttl == null ? undefined : params.ttl,
       refetchOnWindowFocus: params.refetchOnWindowFocus,
+      retry: params.retry,
     };
   };
 }
