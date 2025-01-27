@@ -11,7 +11,8 @@
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
   import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
-  import MediaCollapsableValues from "./MediaCollapsableValues.svelte";
+  import CollapsableValues from "./_internal/CollapsableValues.svelte";
+  import DetailsGrid from "./_internal/DetailsGrid.svelte";
 
   export type MediaDetailsProps = {
     media: MediaEntry;
@@ -87,36 +88,17 @@
   ];
 </script>
 
-<div class="trakt-summary-details">
-  <h5>{m.details()}</h5>
-  <div class="trakt-summary-details-content">
-    {#each mediaDetails as { title, values }}
-      {#if values && values.length > 0}
-        <div class="trakt-summary-detail">
-          <p class="meta-info secondary">{title}</p>
-          <MediaCollapsableValues category={title} {values} />
-        </div>
-      {/if}
-    {/each}
-  </div>
-</div>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-summary-details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-l);
-  }
-
-  .trakt-summary-details-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--gap-m);
-
-    @include for-mobile {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+<DetailsGrid title={m.details()}>
+  {#each mediaDetails as { title, values }}
+    {#if values && values.length > 0}
+      <div>
+        <p class="meta-info secondary">{title}</p>
+        <CollapsableValues category={title} {values}>
+          {#snippet value(value)}
+            <p class="small capitalize ellipsis">{value}</p>
+          {/snippet}
+        </CollapsableValues>
+      </div>
+    {/if}
+  {/each}
+</DetailsGrid>
