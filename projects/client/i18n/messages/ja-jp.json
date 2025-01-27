@@ -279,5 +279,9 @@
   "favorite_shows": "お気に入り作品",
   "favorite_movies_empty": "お気に入りの作品リストは空です。",
   "favorite_shows_empty": "お気に入りの番組リストは空です。",
-  "stream_on": "配信で見る"
+  "stream_on": "配信で見る",
+  "your_watchlist_shows": "視聴予定の作品",
+  "your_watchlist_movies": "視聴予定の作品",
+  "view_all_watchlist_movies": "視聴予定の作品をすべて見る",
+  "view_all_watchlist_shows": "視聴予定の作品をすべて見る"
 }

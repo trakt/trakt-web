@@ -5,6 +5,9 @@ import {
 } from '$lib/sections/lists/watchlist/useWatchlistList';
 import { derived } from 'svelte/store';
 
+// TODO use drilledmedia list for this
+const COMING_SOON_LIMIT = 500;
+
 const IN_PROGRESS_STATUSES: MediaStatus[] = [
   'planned',
   'post production',
@@ -16,6 +19,7 @@ export function useComingSoon(type: MediaType) {
   const { list: watchlist, isLoading } = useWatchlistList({
     type,
     sort: 'unreleased',
+    limit: COMING_SOON_LIMIT,
   });
 
   const list = derived(

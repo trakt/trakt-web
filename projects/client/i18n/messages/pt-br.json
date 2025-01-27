@@ -279,5 +279,9 @@
   "favorite_shows": "Séries Favoritas",
   "favorite_movies_empty": "Sua lista de favoritos está vazia. Que tal adicionar um clássico?",
   "favorite_shows_empty": "Sua lista de séries favoritas está vazia. Hora de maratonar algo novo!",
-  "stream_on": "Assista em"
+  "stream_on": "Assista em",
+  "your_watchlist_shows": "Sua Lista para Ver",
+  "your_watchlist_movies": "Sua Lista para Ver",
+  "view_all_watchlist_movies": "Ver tudo para ver",
+  "view_all_watchlist_shows": "Ver tudo para ver"
 }

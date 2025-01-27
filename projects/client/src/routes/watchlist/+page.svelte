@@ -16,12 +16,14 @@
 
   <WatchlistList
     title={m.watchlist_movies()}
+    drilldownLabel={m.view_all_watchlist_movies()}
     emptyMessage={m.watchlist_movies_empty()}
     type="movie"
   />
 
   <WatchlistList
     title={m.watchlist_shows()}
+    drilldownLabel={m.view_all_watchlist_shows()}
     emptyMessage={m.watchlist_shows_empty()}
     type="show"
   />

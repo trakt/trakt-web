@@ -21,12 +21,16 @@ export type WatchlistMediaList = Array<WatchlistMediaItem>;
 
 export type WatchListStoreProps = {
   type: MediaType;
+  limit?: number;
+  page?: number;
 } & Partial<WatchListParams>;
 
 function typeToQuery(
-  { type, sort = 'rank' }: WatchListStoreProps,
+  { type, limit, page, sort = 'rank' }: WatchListStoreProps,
 ) {
-  const params: WatchListParams = {
+  const params = {
+    limit,
+    page,
     sort,
   };
 
@@ -42,8 +46,9 @@ export function useWatchlistList(params: WatchListStoreProps) {
   const query = useQuery(typeToQuery(params));
   const list = derived(
     query,
-    ($query) => ($query.data ?? []).map((item) => item.entry),
+    ($query) => ($query.data?.entries ?? []).map((item) => item.entry),
   );
+
   const isLoading = derived(
     query,
     toLoadingState,
@@ -52,5 +57,9 @@ export function useWatchlistList(params: WatchListStoreProps) {
   return {
     list,
     isLoading,
+    page: derived(
+      query,
+      ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    ),
   };
 }

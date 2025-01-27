@@ -12,7 +12,16 @@ const mediaDrilldownFactory =
     return baseUrl + buildParamString({ page });
   };
 
+const categoryDrilldownFactory =
+  (category: string) => ({ type, page }: PaginatableMediaPageUrl) => {
+    const baseUrl = `/${category}/${type}s`;
+    return baseUrl + buildParamString({ page });
+  };
+
 export const UrlBuilder = {
+  watchlistPage(params: PaginatableMediaPageUrl) {
+    return categoryDrilldownFactory('watchlist')(params);
+  },
   trending(params: PaginatableMediaPageUrl) {
     return mediaDrilldownFactory('trending')(params);
   },

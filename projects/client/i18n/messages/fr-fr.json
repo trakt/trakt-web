@@ -279,5 +279,9 @@
   "favorite_shows": "Séries favorites",
   "favorite_movies_empty": "Votre liste de favoris est vide.",
   "favorite_shows_empty": "Votre liste de séries préférées est vide.",
-  "stream_on": "En streaming sur"
+  "stream_on": "En streaming sur",
+  "your_watchlist_shows": "Vos listes à voir (séries)",
+  "your_watchlist_movies": "Vos listes à voir (films)",
+  "view_all_watchlist_movies": "Voir tous les films à voir",
+  "view_all_watchlist_shows": "Voir toutes les séries à voir"
 }

@@ -279,5 +279,9 @@
   "favorite_shows": "Seriale preferate",
   "favorite_movies_empty": "Your favorite movies list is empty.",
   "favorite_shows_empty": "Your favorite shows list is empty.",
-  "stream_on": "Vezi pe platforme"
+  "stream_on": "Vezi pe platforme",
+  "your_watchlist_shows": "Serialele din lista ta",
+  "your_watchlist_movies": "Filmele din lista ta",
+  "view_all_watchlist_movies": "Vezi toate filmele din lista",
+  "view_all_watchlist_shows": "Vezi toate serialele din listă"
 }

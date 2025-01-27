@@ -1,21 +1,28 @@
 import type { SortType, WatchlistedMoviesResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants';
 import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry';
 
 type MovieWatchlistParams = {
   sort: SortType;
+  page?: number;
+  limit?: number;
 } & ApiParams;
 
 export const WatchlistMovieSchema = ListItemSchemaFactory(MovieEntrySchema);
 export type WatchlistMovie = z.infer<typeof WatchlistMovieSchema>;
 
-const watchlistRequest = ({ fetch, sort }: MovieWatchlistParams) =>
+const watchlistRequest = (
+  { fetch, sort, limit = DEFAULT_PAGE_SIZE, page = 1 }: MovieWatchlistParams,
+) =>
   api({ fetch })
     .users
     .watchlist
@@ -26,14 +33,16 @@ const watchlistRequest = ({ fetch, sort }: MovieWatchlistParams) =>
       },
       query: {
         extended: 'full,cloud9',
+        page,
+        limit,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch movies watchlist');
       }
 
-      return body;
+      return response;
     });
 
 const mapResponseToWatchlist = (watchlistMovie: WatchlistedMoviesResponse) => ({
@@ -48,9 +57,14 @@ const mapResponseToWatchlist = (watchlistMovie: WatchlistedMoviesResponse) => ({
 export const movieWatchlistQuery = defineQuery({
   key: 'movieWatchlist',
   invalidations: [InvalidateAction.Watchlisted('movie')],
-  dependencies: (params: MovieWatchlistParams) => [params.sort],
+  dependencies: (
+    params: MovieWatchlistParams,
+  ) => [params.sort, params.limit, params.page],
   request: watchlistRequest,
-  mapper: (body) => body.map(mapResponseToWatchlist),
-  schema: WatchlistMovieSchema.array(),
+  mapper: (response) => ({
+    entries: response.body.map(mapResponseToWatchlist),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(WatchlistMovieSchema),
   ttl: time.hours(1),
 });
