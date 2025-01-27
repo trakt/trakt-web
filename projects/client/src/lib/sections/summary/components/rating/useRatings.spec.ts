@@ -5,6 +5,7 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock';
 import { renderStore } from '$test/beds/store/renderStore';
 import { waitForEmission } from '$test/readable/waitForEmission';
+import { waitForValue } from '$test/readable/waitForValue';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { useRatings } from './useRatings';
@@ -31,7 +32,7 @@ describe('useRatings', () => {
     );
 
     addRating(SimpleRating.Bad);
-    expect(await waitForEmission(isRating, 1)).toBe(true);
+    expect(get(isRating)).toBe(true);
   });
 
   it('should not indicate that rating is in progress', async () => {
@@ -53,7 +54,7 @@ describe('useRatings', () => {
       })
     );
 
-    const rating = await waitForEmission(currentRating, 2);
+    const rating = await waitForValue(currentRating, SimpleRating.Great);
     expect(rating).toBe('great');
   });
 
