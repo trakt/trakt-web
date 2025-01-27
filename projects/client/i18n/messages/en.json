@@ -281,5 +281,7 @@
   "your_watchlist_shows": "Your Watchlist Shows",
   "your_watchlist_movies": "Your Watchlist Movies",
   "view_all_watchlist_movies": "View all watchlist movies",
-  "view_all_watchlist_shows": "View all watchlist shows"
+  "view_all_watchlist_shows": "View all watchlist shows",
+  "streaming": "Streaming",
+  "on_demand": "On Demand"
 }

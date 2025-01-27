@@ -281,5 +281,7 @@
   "your_watchlist_shows": "視聴予定の作品",
   "your_watchlist_movies": "視聴予定の作品",
   "view_all_watchlist_movies": "視聴予定の作品をすべて見る",
-  "view_all_watchlist_shows": "視聴予定の作品をすべて見る"
+  "view_all_watchlist_shows": "視聴予定の作品をすべて見る",
+  "streaming": "ストリーミング",
+  "on_demand": "オンデマンド"
 }

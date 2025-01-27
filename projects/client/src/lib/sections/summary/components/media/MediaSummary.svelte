@@ -25,6 +25,7 @@
   import SummaryTitle from "../summary/SummaryTitle.svelte";
   import MediaDetails from "./MediaDetails.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
+  import MediaWatchNowServices from "./MediaWatchNowServices.svelte";
 
   const {
     media,
@@ -134,4 +135,8 @@
 
 <SummaryContainer>
   <MediaDetails {media} {studios} {crew} />
+  <MediaWatchNowServices
+    services={$watchNow?.services}
+    preferred={$watchNow?.preferred}
+  />
 </SummaryContainer>

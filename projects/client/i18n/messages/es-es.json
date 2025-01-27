@@ -281,5 +281,7 @@
   "your_watchlist_shows": "Tus listas para ver",
   "your_watchlist_movies": "Tus listas para ver",
   "view_all_watchlist_movies": "Ver todos en lista",
-  "view_all_watchlist_shows": "Ver todos en lista"
+  "view_all_watchlist_shows": "Ver todos en lista",
+  "streaming": "En streaming",
+  "on_demand": "A la carta"
 }

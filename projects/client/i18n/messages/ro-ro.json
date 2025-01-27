@@ -281,5 +281,7 @@
   "your_watchlist_shows": "Serialele din lista ta",
   "your_watchlist_movies": "Filmele din lista ta",
   "view_all_watchlist_movies": "Vezi toate filmele din lista",
-  "view_all_watchlist_shows": "Vezi toate serialele din listă"
+  "view_all_watchlist_shows": "Vezi toate serialele din listă",
+  "streaming": "Streaming",
+  "on_demand": "La cerere"
 }

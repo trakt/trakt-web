@@ -281,5 +281,7 @@
   "your_watchlist_shows": "Vos éléments à voir (séries)",
   "your_watchlist_movies": "Vos éléments à voir (films)",
   "view_all_watchlist_movies": "Voir tous les films à voir",
-  "view_all_watchlist_shows": "Voir toutes les séries à voir"
+  "view_all_watchlist_shows": "Voir toutes les séries à voir",
+  "streaming": "Diffusion",
+  "on_demand": "Sur demande"
 }
