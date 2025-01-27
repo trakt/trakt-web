@@ -76,7 +76,7 @@
     cursor: pointer;
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: background color;
+    transition-property: background, color;
 
     .item-icon {
       display: flex;

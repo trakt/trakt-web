@@ -41,7 +41,7 @@
     align-items: center;
     gap: var(--gap-m);
     transition: var(--transition-increment) ease-in-out;
-    transition-property: margin-left scale height;
+    transition-property: margin-left, scale, height;
 
     @include for-mobile {
       margin-left: var(--ni-neg-16);

@@ -94,7 +94,7 @@
       --content-gap: var(--gap-xl);
 
       transition: var(--transition-increment) ease-in-out;
-      transition-property: gap margin;
+      transition-property: gap, margin;
 
       display: flex;
       flex-direction: column;

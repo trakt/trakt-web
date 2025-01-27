@@ -64,7 +64,7 @@
       align-self: stretch;
       box-shadow: 0px 7.673px 23.02px 0px rgba(0, 0, 0, 0.56);
       transition: var(--transition-increment) ease-in-out;
-      transition-property: filter transform;
+      transition-property: filter, transform;
     }
   }
 

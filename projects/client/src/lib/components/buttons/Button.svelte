@@ -167,7 +167,8 @@
     transform: scale(var(--scale-factor-button));
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: box-shadow outline padding transform color background;
+    transition-property: box-shadow, outline, padding, transform, color,
+      background;
 
     &.trakt-button-link {
       &[data-style="ghost"] {
