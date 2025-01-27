@@ -15,6 +15,7 @@
   target="_blank"
   label={m.watch_the_trailer()}
   color="red"
+  variant="secondary"
 >
   {#if isDefaultTrailer}
     <TrollIcon />

@@ -142,8 +142,6 @@
   "watchlist_shows": "Ваші серіали",
   "watchlist_movies": "Ваші фільми",
   "watch_now": "Дивитися зараз",
-  "watch_on_multiple_services": "Дивитись на {count} сервісах",
-  "watch_on_nowhere": "Недоступно для перегляду",
   "watch_title_now": "Дивитися {title} зараз",
   "watch_now_service_logo": "Логотип {service}",
   "year_to_date": "Рік до дати",

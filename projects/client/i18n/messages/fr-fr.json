@@ -142,8 +142,6 @@
   "watchlist_shows": "Vos séries",
   "watchlist_movies": "Vos films",
   "watch_now": "Regarder maintenant",
-  "watch_on_multiple_services": "Voir sur {count} plateformes",
-  "watch_on_nowhere": "Non disponible",
   "watch_title_now": "Regardez {title} maintenant",
   "watch_now_service_logo": "Logo de {service}",
   "year_to_date": "Année à ce jour",

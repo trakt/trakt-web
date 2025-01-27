@@ -142,8 +142,6 @@
   "watchlist_shows": "Suas Séries",
   "watchlist_movies": "Seus Filmes",
   "watch_now": "Assista agora",
-  "watch_on_multiple_services": "Assista agora em {count} serviços",
-  "watch_on_nowhere": "Não disponível para assistir",
   "watch_title_now": "Assista {title} agora",
   "watch_now_service_logo": "Logo de {service}",
   "year_to_date": "Ano até a data",

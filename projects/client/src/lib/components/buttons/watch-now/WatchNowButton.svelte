@@ -1,28 +1,27 @@
 <script lang="ts">
-  import type {
-    WatchNowServices,
-    WatchNowStreaming,
-  } from "$lib/requests/models/WatchNowServices";
-  import type { WatchNowButtonIntl } from "./WatchNowButtonIntl";
+  import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
+  import { WatchNowServiceLogoIntlProvider } from "$lib/components/media/watch-now/WatchNowServiceLogoIntlProvider";
+  import WatchNowServiceLogo from "../../media/watch-now/WatchNowServiceLogo.svelte";
+  import ActionButton from "../ActionButton.svelte";
+  import Button from "../Button.svelte";
   import { WatchNowButtonIntlProvider } from "./WatchNowButtonIntlProvider";
-  import WatchNowDropdown from "./_internal/WatchNowDropdown.svelte";
-  import WatchNowLink from "./_internal/WatchNowLink.svelte";
-
-  type WatchNowButtonProps = {
-    isLoading: boolean;
-    mediaTitle: string;
-    preferred?: WatchNowStreaming;
-    services?: WatchNowServices;
-    i18n?: WatchNowButtonIntl;
-  };
+  import type { WatchNowButtonProps } from "./WatchNowButtonProps";
 
   const {
-    isLoading,
     mediaTitle,
-    services,
-    preferred,
+    service,
+    style,
     i18n = WatchNowButtonIntlProvider,
+    ...props
   }: WatchNowButtonProps = $props();
+
+  const commonProps: Omit<ButtonProps, "children"> = $derived({
+    label: i18n.title(mediaTitle),
+    color: "purple",
+    variant: "primary",
+    href: service.link,
+    target: "_blank",
+  });
 
   /**
    * TODO: @seferturan
@@ -32,8 +31,40 @@
    */
 </script>
 
-{#if preferred}
-  <WatchNowLink {mediaTitle} service={preferred} {i18n} {isLoading} />
-{:else}
-  <WatchNowDropdown {mediaTitle} {services} {i18n} {isLoading} />
+{#if style === "normal"}
+  <div class="trakt-watch-now-button">
+    <Button {...commonProps} {...props} size="small">
+      {i18n.watchNow()}
+      {#snippet icon()}
+        <WatchNowServiceLogo
+          source={service.source}
+          i18n={WatchNowServiceLogoIntlProvider}
+        />
+        <PlayIcon />
+      {/snippet}
+    </Button>
+  </div>
 {/if}
+
+{#if style === "action"}
+  <ActionButton {...commonProps} {...props} variant="secondary">
+    <PlayIcon />
+  </ActionButton>
+{/if}
+
+<style>
+  .trakt-watch-now-button {
+    :global(.trakt-button) {
+      :global(.trakt-watch-now-service-logo) {
+        transition: transform var(--transition-increment) ease-in-out;
+      }
+
+      &:hover {
+        :global(.trakt-watch-now-service-logo) {
+          filter: drop-shadow(0 var(--ni-40) 0 var(--color-background-purple));
+          transform: translateY(var(--ni-neg-40));
+        }
+      }
+    }
+  }
+</style>

@@ -1,6 +1,5 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
@@ -61,19 +60,13 @@
     media,
   });
 
-  const { watchNow, isLoading } = useWatchNow({
+  const { watchNow } = useWatchNow({
     type,
     id: media.id,
   });
 </script>
 
 {#snippet mediaActions()}
-  <WatchNowButton
-    isLoading={$isLoading}
-    preferred={$watchNow?.preferred}
-    services={$watchNow?.services}
-    mediaTitle={media.title}
-  />
   <WatchlistAction {...watchlistProps} />
   <MarkAsWatchedAction {...markWasWatchedProps} />
 {/snippet}
@@ -115,9 +108,11 @@
     certification={media.certification}
     year={media.year}
     airDate={media.airDate}
+    {media}
     {ratings}
     {stats}
     {watchers}
+    {type}
   />
 
   <Spoiler {media} {type}>

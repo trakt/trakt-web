@@ -2,7 +2,6 @@
   import * as m from "$lib/features/i18n/messages";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
@@ -37,19 +36,13 @@
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
-  const { watchNow, isLoading } = useWatchNow({
+  const { watchNow } = useWatchNow({
     type,
     id: episode.id,
   });
 </script>
 
 {#snippet mediaActions()}
-  <WatchNowButton
-    isLoading={$isLoading}
-    preferred={$watchNow?.preferred}
-    services={$watchNow?.services}
-    mediaTitle={episode.title}
-  />
   <MarkAsWatchedAction
     style="normal"
     {type}
@@ -93,9 +86,11 @@
     certification={show.certification}
     year={episode.year}
     airDate={episode.airDate}
+    media={episode}
     {ratings}
     {stats}
     {watchers}
+    {type}
   />
 
   <Spoiler media={episode} {episode} {show} {type}>
