@@ -164,8 +164,6 @@
     position: relative;
     overflow: hidden;
 
-    transform: scale(var(--scale-factor-button));
-
     transition: var(--transition-increment) ease-in-out;
     transition-property: box-shadow, outline, padding, transform, color,
       background;
@@ -190,15 +188,47 @@
       justify-content: center;
     }
 
+    &[data-size="small"],
+    &[data-size="tag"] {
+      // TODO: revert this once the dynamic scaling is figured out
+
+      .button-label {
+        p:not(.meta-info) {
+          font-size: 0.75rem;
+          font-weight: 600;
+        }
+
+        p.meta-info {
+          font-size: var(--ni-8);
+          font-weight: 400;
+        }
+      }
+
+      .button-icon {
+        :global(img),
+        :global(svg) {
+          width: auto;
+          height: var(--ni-18);
+        }
+      }
+    }
+
     &[data-size="small"] {
-      --scale-factor-button: 0.75;
-      margin: var(--ni-neg-2) var(--ni-neg-8);
+      --button-height: var(--ni-36);
+      border-radius: calc(var(--border-radius-m) * 0.75);
+      padding: var(--ni-12);
+      gap: var(--ni-12);
     }
 
     &[data-size="tag"] {
-      --scale-factor-button: 0.75;
-      --button-height: var(--ni-24);
-      padding: var(--ni-4) var(--ni-10);
+      --button-height: var(--ni-18);
+      padding: var(--ni-2) var(--ni-10);
+      min-width: var(--ni-48);
+      box-sizing: border-box;
+
+      &[data-style="ghost"] {
+        margin: 0;
+      }
     }
 
     &,
