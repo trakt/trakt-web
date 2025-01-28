@@ -6,14 +6,16 @@
   type ViewAllButtonProps = {
     href: string;
     label: string;
+    isDisabled: boolean;
   };
 
-  const { href, label }: ViewAllButtonProps = $props();
+  const { href, label, isDisabled }: ViewAllButtonProps = $props();
 </script>
 
 <Button
   {label}
   {href}
+  disabled={isDisabled || undefined}
   style="flat"
   variant="primary"
   color="purple"

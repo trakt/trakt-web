@@ -22,6 +22,7 @@
   }: DrillableList<T> = $props();
 
   const { list, isLoading } = $derived(useList({ type }));
+  const isEmptyList = $derived(!$isLoading && $list.length === 0);
 </script>
 
 <SectionList
@@ -32,7 +33,11 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet actions()}
-    <ViewAllButton href={urlBuilder({ type })} label={drilldownLabel} />
+    <ViewAllButton
+      href={urlBuilder({ type })}
+      label={drilldownLabel}
+      isDisabled={isEmptyList}
+    />
   {/snippet}
 
   {#snippet empty()}
