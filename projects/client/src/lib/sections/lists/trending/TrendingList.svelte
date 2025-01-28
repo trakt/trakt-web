@@ -15,6 +15,7 @@
 </script>
 
 <DrillableMediaList
+  id="trending-list-{type}"
   {title}
   {drilldownLabel}
   {type}

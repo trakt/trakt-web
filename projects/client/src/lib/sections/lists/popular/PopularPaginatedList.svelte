@@ -18,6 +18,7 @@
 </script>
 
 <DrilledMediaList
+  id="view-all-popular-${type}"
   {title}
   {type}
   useList={usePopularList}

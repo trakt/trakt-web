@@ -18,6 +18,7 @@
 </script>
 
 <DrilledMediaList
+  id="view-all-anticipated-${type}"
   {title}
   {type}
   useList={useAnticipatedList}

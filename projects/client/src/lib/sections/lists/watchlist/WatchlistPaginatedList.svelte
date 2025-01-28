@@ -18,6 +18,7 @@
 </script>
 
 <DrilledMediaList
+  id="view-all-watchlist-${type}"
   {title}
   {type}
   {emptyMessage}

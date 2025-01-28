@@ -15,6 +15,7 @@
 </script>
 
 <DrillableMediaList
+  id="anticipated-list-{type}"
   {title}
   {drilldownLabel}
   {type}

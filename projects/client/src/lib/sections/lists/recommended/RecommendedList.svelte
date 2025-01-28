@@ -15,6 +15,7 @@
 </script>
 
 <DrillableMediaList
+  id="recommended-list-{type}"
   {title}
   {drilldownLabel}
   {type}

@@ -12,8 +12,14 @@
     emptyMessage?: string;
   };
 
-  const { title, type, item, useList, emptyMessage }: DrilledMediaListProps =
-    $props();
+  const {
+    id,
+    title,
+    type,
+    item,
+    useList,
+    emptyMessage,
+  }: DrilledMediaListProps = $props();
 
   const current = $derived(
     parseInt(pageState.url.searchParams.get("page") ?? "1"),
@@ -37,6 +43,7 @@
 </script>
 
 <GridList
+  {id}
   {title}
   items={$list}
   {item}

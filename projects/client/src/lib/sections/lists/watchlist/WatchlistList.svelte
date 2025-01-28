@@ -17,6 +17,7 @@
 </script>
 
 <DrillableMediaList
+  id="watchlist-list-{type}"
   {title}
   {drilldownLabel}
   {type}

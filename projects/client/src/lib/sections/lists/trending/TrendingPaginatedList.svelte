@@ -18,6 +18,7 @@
 </script>
 
 <DrilledMediaList
+  id="view-all-trending-${type}"
   {title}
   {type}
   useList={useTrendingList}

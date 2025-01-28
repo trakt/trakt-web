@@ -27,6 +27,7 @@
 </script>
 
 <DrilledMediaList
+  id="view-all-recommended-${type}"
   {title}
   {type}
   useList={useInMemoryRecommendedList}

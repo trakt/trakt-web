@@ -5,16 +5,12 @@
   import { writable, type Writable } from "svelte/store";
   import "../_internal/list.css";
   import ListHeader from "../_internal/ListHeader.svelte";
+  import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
+  import type { ListProps } from "../ListProps";
   import { scrollTracking } from "./scrollTracking";
-  import { useScrollHistory } from "./useScrollHistory";
 
-  type SectionListProps<T> = {
-    id: string;
-    title: string;
-    items: T[];
-    item: Snippet<[T]>;
+  type SectionListProps<T> = ListProps<T> & {
     empty?: Snippet;
-    actions?: Snippet;
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
   };
@@ -46,33 +42,11 @@
   const isVisible = writable(false);
   const isMounted = writable(false);
 
+  const { scrollHistory } = useScrollHistoryAction(id, "horizontal");
+
   onMount(() => {
     isMounted.set(true);
   });
-
-  const { readScrollState, writeScrollState, event } = useScrollHistory();
-
-  const scrollLeft = writable(0);
-
-  onMount(() => {
-    return event.on("restore", () => {
-      scrollLeft.set(readScrollState(id));
-    });
-  });
-
-  function scrollHistory(container: HTMLDivElement) {
-    onMount(() => {
-      return event.on("snapshot", () => {
-        writeScrollState(id, container.scrollLeft);
-      });
-    });
-
-    return {
-      destroy: scrollLeft.subscribe((left) => {
-        container.scrollLeft = left;
-      }),
-    };
-  }
 </script>
 
 <section

@@ -15,6 +15,7 @@
 </script>
 
 <DrillableMediaList
+  id="popular-list-{type}"
   {title}
   {drilldownLabel}
   {type}

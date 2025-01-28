@@ -1,6 +1,6 @@
 <script lang="ts">
   import { afterNavigate, beforeNavigate } from "$app/navigation";
-  import { useScrollHistory } from "./useScrollHistory";
+  import { useScrollHistory } from "../_internal/useScrollHistory";
 
   const { children }: ChildrenProps = $props();
 
