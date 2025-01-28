@@ -16,7 +16,7 @@
 </Card>
 
 <style>
-  :global(.trakt-card .card-footer) {
+  :global(.trakt-card .trakt-card-footer) {
     padding: 0;
   }
 

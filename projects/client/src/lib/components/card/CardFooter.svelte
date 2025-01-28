@@ -4,22 +4,22 @@
   const { children, action }: CardFooterProps = $props();
 </script>
 
-<div class="card-footer">
+<div class="trakt-card-footer">
   {#if children}
-    <div class="card-footer-information">
+    <div class="trakt-card-footer-information">
       {@render children()}
     </div>
   {/if}
 
   {#if action}
-    <div class="card-footer-action">
+    <div class="trakt-card-footer-action">
       {@render action()}
     </div>
   {/if}
 </div>
 
 <style>
-  .card-footer {
+  .trakt-card-footer {
     position: relative;
 
     height: calc(var(--height-card) - var(--height-card-cover));
@@ -30,7 +30,7 @@
     gap: var(--gap-xs);
     justify-content: space-between;
 
-    .card-footer-information {
+    .trakt-card-footer-information {
       width: 100%;
       margin-top: var(--ni-neg-4);
       overflow: hidden;
@@ -48,7 +48,7 @@
       }
     }
 
-    .card-footer-action {
+    .trakt-card-footer-action {
       position: absolute;
       bottom: var(--ni-neg-16);
       right: var(--ni-8);
