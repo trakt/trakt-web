@@ -24,7 +24,7 @@
 </script>
 
 <div class="trakt-summary-meta">
-  <RatingList {ratings} />
+  <RatingList {ratings} {airDate} />
   <div class="trakt-meta-tags">
     {#if certification}
       <InfoTag>

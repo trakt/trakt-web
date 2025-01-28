@@ -10,14 +10,21 @@
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
   import RatingItem from "./RatingItem.svelte";
+  import { getDisplayableRatings } from "./_internal/getDisplayableRatings";
 
   type RatingListProps = {
     i18n?: RatingIntl;
     ratings: MediaRating;
+    airDate: Date;
   };
 
-  const { i18n = RatingIntlProvider, ratings }: RatingListProps = $props();
-  const { trakt, imdb, rotten } = ratings;
+  const {
+    i18n = RatingIntlProvider,
+    ratings,
+    airDate,
+  }: RatingListProps = $props();
+
+  const { trakt, imdb, rotten } = getDisplayableRatings({ ratings, airDate });
 </script>
 
 <div class="trakt-summary-ratings">
