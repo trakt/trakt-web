@@ -127,7 +127,7 @@
   <RenderFor audience="authenticated">
     <SummaryActions>
       {#if type === "movie"}
-        <RateNow {type} id={media.id} />
+        <RateNow {type} {media} />
       {/if}
 
       <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">

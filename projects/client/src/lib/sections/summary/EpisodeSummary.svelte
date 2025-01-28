@@ -104,7 +104,7 @@
 
   <RenderFor audience="authenticated">
     <SummaryActions>
-      <RateNow type="episode" id={episode.id} />
+      <RateNow type="episode" media={episode} {episode} {show} />
 
       <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
         {@render mediaActions()}
