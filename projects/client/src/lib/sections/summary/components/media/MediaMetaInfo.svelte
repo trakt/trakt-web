@@ -19,6 +19,8 @@
 
   const { certification, year, ratings, stats, airDate }: MediaMetaInfoProps =
     $props();
+
+  const isAiredItem = $derived(airDate < new Date());
 </script>
 
 <div class="trakt-summary-meta">
@@ -36,7 +38,9 @@
 
     <!-- FIXME: re-enable watchers once we have better watching stats -->
 
-    <PlaysTag i18n={TagIntlProvider} plays={stats.plays} />
+    {#if isAiredItem}
+      <PlaysTag i18n={TagIntlProvider} plays={stats.plays} />
+    {/if}
   </div>
 </div>
 
