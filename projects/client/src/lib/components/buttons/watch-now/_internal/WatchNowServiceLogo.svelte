@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useWatchNowSources } from "$lib/stores/useWatchNowSources";
   import type { WatchNowButtonIntl } from "../WatchNowButtonIntl";
 
@@ -11,26 +12,35 @@
   const { source, i18n, style = "white" }: WatchNowServiceLogoProps = $props();
   const { sources } = useWatchNowSources();
 
-  const sourceService = $sources.find((s) => s.source === source);
-  const sourceDisplayName = sourceService?.name ?? "";
+  const service = $derived($sources.find((s) => s.source === source));
+  const displayName = $derived(service?.name ?? "");
 </script>
 
-<img
+<div
   class="trakt-watch-now-service-logo"
   class:is-black-icon={style === "black"}
-  loading="lazy"
-  alt={i18n.logoAlt(sourceDisplayName)}
-  src={sourceService?.logoUrl ?? ""}
-/>
+>
+  <CrossOriginImage
+    src={service?.logoUrl ?? ""}
+    alt={i18n.logoAlt(displayName)}
+  />
+</div>
 
 <style>
   .trakt-watch-now-service-logo {
-    width: auto;
-    height: var(--ni-24);
-    filter: brightness(0) invert(1);
+    display: flex;
+    align-items: center;
+
+    :global(img) {
+      width: auto;
+      height: var(--ni-24);
+      filter: brightness(0) invert(1);
+    }
   }
 
   .is-black-icon {
-    filter: brightness(0);
+    :global(img) {
+      filter: brightness(0);
+    }
   }
 </style>
