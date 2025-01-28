@@ -19,19 +19,26 @@
     ...target
   }: MarkAsWatchedActionProps = $props();
 
-  const { isMarkingAsWatched, isWatched, markAsWatched, removeWatched } =
-    $derived(useMarkAsWatched(target));
+  const {
+    isMarkingAsWatched,
+    isWatched,
+    markAsWatched,
+    removeWatched,
+    isWatchable,
+  } = $derived(useMarkAsWatched(target));
 
   onMount(() => {
     return isMarkingAsWatched.subscribe((value) => onAction?.(value));
   });
 </script>
 
-<MarkAsWatchedButton
-  {style}
-  {title}
-  isWatched={$isWatched}
-  isMarkingAsWatched={$isMarkingAsWatched}
-  onWatch={markAsWatched}
-  onRemove={removeWatched}
-/>
+{#if isWatchable}
+  <MarkAsWatchedButton
+    {style}
+    {title}
+    isWatched={$isWatched}
+    isMarkingAsWatched={$isMarkingAsWatched}
+    onWatch={markAsWatched}
+    onRemove={removeWatched}
+  />
+{/if}

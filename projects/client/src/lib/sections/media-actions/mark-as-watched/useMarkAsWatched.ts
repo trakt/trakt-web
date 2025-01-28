@@ -10,7 +10,8 @@ import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
-export type MarkAsWatchedStoreProps = MediaStoreProps;
+export type MarkAsWatchedStoreProps = MediaStoreProps<{ id: number, airDate: Date}>;
+
 export function useMarkAsWatched(
   props: MarkAsWatchedStoreProps,
 ) {
@@ -64,10 +65,15 @@ export function useMarkAsWatched(
     await invalidate(InvalidateAction.MarkAsWatched(type));
   };
 
+  const isWatchable = media.every((item) => {
+    return item.airDate && item.airDate <= new Date();
+  });
+
   return {
     markAsWatched,
     removeWatched,
     isWatched,
     isMarkingAsWatched,
+    isWatchable,
   };
 }

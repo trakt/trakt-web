@@ -101,7 +101,7 @@ describe('useMarkAsWatched', () => {
   describe('media type: movie', () => {
     const props = {
       type: 'movie' as const,
-      media: { id: 1 },
+      media: { id: 1, airDate: new Date() },
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('movie'));
@@ -118,7 +118,7 @@ describe('useMarkAsWatched', () => {
   describe('media type: show', () => {
     const props = {
       type: 'show' as const,
-      media: { id: 1 },
+      media: { id: 1, airDate: new Date() },
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('show'));
@@ -143,7 +143,7 @@ describe('useMarkAsWatched', () => {
   describe('media type: episode', () => {
     const props = {
       type: 'episode' as const,
-      media: { id: 1 },
+      media: { id: 1, airDate: new Date() },
       episode: { season: 1, number: 1 },
       show: { id: 3 },
     };
@@ -154,7 +154,7 @@ describe('useMarkAsWatched', () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
           ...props,
-          media: { id: 1 },
+          media: { id: 1, airDate: new Date() },
           show: ShowSiloMappedMock,
           episode: { season: 1, number: 1 },
         })
@@ -167,7 +167,7 @@ describe('useMarkAsWatched', () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
           ...props,
-          media: { id: 1 },
+          media: { id: 1, airDate: new Date() },
           show: ShowSiloMappedMock,
           episode: [
             { season: 1, number: 1 },
@@ -186,7 +186,7 @@ describe('useMarkAsWatched', () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
           ...props,
-          media: { id: 1 },
+          media: { id: 1, airDate: new Date() },
           show: ShowSiloMappedMock,
           episode: { season: 1, number: 2 },
         })
