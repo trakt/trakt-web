@@ -7,7 +7,10 @@
   const { media, tags, action }: MediaCardProps = $props();
 </script>
 
-<Card>
+<Card
+  --height-card="var(--height-summary-card)"
+  --width-card="var(--width-summary-card)"
+>
   <MediaSummaryItem {media} {tags} />
   <CardFooter {action} />
 </Card>

@@ -19,6 +19,9 @@
   --height-person-footer: var(--ni-32);
   --height-person-card-cover: var(--ni-176);
 
+  --width-summary-card: 100%;
+  --height-summary-card: var(--ni-148);
+
   /**
    * List dimensions
    */
