@@ -14,3 +14,13 @@
   <MediaSummaryItem {media} {tags} />
   <CardFooter {action} />
 </Card>
+
+<style>
+  :global(.trakt-card .card-footer) {
+    padding: 0;
+  }
+
+  :global(.trakt-card .trakt-summary-item) {
+    padding: var(--ni-12);
+  }
+</style>
