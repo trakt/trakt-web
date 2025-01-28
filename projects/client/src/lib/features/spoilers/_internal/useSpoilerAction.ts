@@ -1,7 +1,9 @@
-import type { IsWatchedProps } from '$lib/sections/media-actions/mark-as-watched/useIsWatched';
+import type { MediaStoreProps } from '$lib/models/MediaStoreProps';
 import { useMediaSpoiler } from '../useMediaSpoiler';
 
-export function useSpoilerAction(rest: IsWatchedProps) {
+type SpoilerActionProps = MediaStoreProps;
+
+export function useSpoilerAction(rest: SpoilerActionProps) {
   const { isSpoilerHidden } = useMediaSpoiler(rest);
 
   function spoiler(node: HTMLElement) {

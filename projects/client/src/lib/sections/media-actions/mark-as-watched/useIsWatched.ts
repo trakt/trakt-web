@@ -1,8 +1,9 @@
 import { useUser } from '$lib/features/auth/stores/useUser';
 import { derived } from 'svelte/store';
-import type { MarkAsWatchedStoreProps } from './useMarkAsWatched';
+import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
-export type IsWatchedProps = MarkAsWatchedStoreProps;
+export type IsWatchedProps = MediaStoreProps;
+
 export function useIsWatched(props: IsWatchedProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];

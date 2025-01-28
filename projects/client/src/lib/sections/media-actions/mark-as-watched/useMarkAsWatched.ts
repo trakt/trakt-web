@@ -6,30 +6,11 @@ import { resolveWatchDate } from '$lib/stores/_internal/resolveWatchDate.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';
+import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
-type ArrayOrSingle<T> = T | T[];
-
-type MarkAsWatchedEpisodeProps = {
-  type: 'episode';
-  media: ArrayOrSingle<{ id: number }>;
-  show: { id: number };
-  episode: ArrayOrSingle<{
-    season: number;
-    number: number;
-  }>;
-};
-
-type MarkAsWatchedMediaProps = {
-  type: 'movie' | 'show';
-  media: ArrayOrSingle<{ id: number }>;
-};
-
-export type MarkAsWatchedStoreProps =
-  | MarkAsWatchedEpisodeProps
-  | MarkAsWatchedMediaProps;
-
+export type MarkAsWatchedStoreProps = MediaStoreProps;
 export function useMarkAsWatched(
   props: MarkAsWatchedStoreProps,
 ) {
