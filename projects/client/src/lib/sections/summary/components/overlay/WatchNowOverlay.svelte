@@ -64,7 +64,7 @@
     text-shadow: var(--source-shadow);
     padding: var(--ni-8);
 
-    :global(.trakt-watch-now-service-logo) {
+    :global(.trakt-watch-now-service-logo img) {
       filter: drop-shadow(var(--source-shadow));
       height: var(--ni-40);
       width: auto;

@@ -28,7 +28,10 @@
   .trakt-watch-now-service-logo {
     display: flex;
     align-items: center;
-    width: var(--ni-36);
-    height: auto;
+
+    :global(img) {
+      width: var(--ni-36);
+      height: auto;
+    }
   }
 </style>
