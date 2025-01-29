@@ -29,12 +29,38 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .rating-item {
     display: flex;
 
     align-items: center;
     gap: var(--gap-xxs);
+
+    p {
+      transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
+    }
+
+    :global(svg) {
+      transition: calc(var(--transition-increment) * 2) ease-in-out;
+      transition-property: width, height;
+    }
+
+    @include for-mobile {
+      :global(svg) {
+        height: var(--ni-12);
+        width: auto;
+      }
+
+      p.large {
+        font-size: var(--ni-12);
+      }
+
+      p.small {
+        font-size: var(--ni-10);
+      }
+    }
   }
 
   .rating-info {
