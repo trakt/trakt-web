@@ -42,6 +42,8 @@
 
 <style>
   .trakt-summary-poster-container {
+    --overlay-border-size: var(--ni-2);
+
     width: var(--ni-320);
     display: flex;
     flex-direction: column;
@@ -62,27 +64,31 @@
   .trakt-summary-poster {
     :global(img) {
       align-self: stretch;
+
       box-shadow: 0px 7.673px 23.02px 0px rgba(0, 0, 0, 0.56);
+      box-sizing: border-box;
+
       transition: var(--transition-increment) ease-in-out;
-      transition-property: filter, transform;
+      transition-property: filter, border;
     }
   }
 
   .trakt-summary-poster-overlay {
     position: absolute;
+    box-sizing: border-box;
 
     opacity: 0;
     transition: opacity var(--transition-increment) ease-in-out;
 
     pointer-events: none;
 
-    border: var(--ni-2) solid var(--color-foreground);
+    border: var(--overlay-border-size) solid var(--color-foreground);
   }
 
   .has-active-overlay:hover {
     :global(img) {
       filter: saturate(30%);
-      transform: scale(1.01);
+      border: var(--overlay-border-size) solid transparent;
     }
 
     & + .trakt-summary-poster-overlay {
