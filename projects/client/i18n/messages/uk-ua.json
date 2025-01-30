@@ -278,6 +278,10 @@
   "favorite_movies_empty": "Ваш список улюбленого кіно порожній.",
   "favorite_shows_empty": "Ваш список улюблених серіалів порожній.",
   "stream_on": "Дивись на",
+  "your_watchlist_shows": "Ваш список перегляду",
+  "your_watchlist_movies": "Ваш список перегляду",
+  "view_all_watchlist_movies": "Усі зі списку до перегляду",
+  "view_all_watchlist_shows": "Усі зі списку до перегляду",
   "streaming": "Онлайн",
   "on_demand": "На вимогу"
 }

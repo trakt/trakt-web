@@ -278,6 +278,10 @@
   "favorite_movies_empty": "Twoja lista ulubionych pozycji jest pusta.",
   "favorite_shows_empty": "Twoja lista ulubionych seriali jest pusta.",
   "stream_on": "Oglądaj na",
+  "your_watchlist_shows": "Twoje seriale na liście do obejrzenia",
+  "your_watchlist_movies": "Twoje filmy na liście do obejrzenia",
+  "view_all_watchlist_movies": "Zobacz wszystkie filmy z listy do obejrzenia",
+  "view_all_watchlist_shows": "Zobacz wszystkie seriale z listy do obejrzenia",
   "streaming": "Streaming",
   "on_demand": "Na życzenie"
 }
