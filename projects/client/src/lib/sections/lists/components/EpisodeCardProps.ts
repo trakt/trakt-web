@@ -10,4 +10,5 @@ export type EpisodeItemVariant =
 
 export type EpisodeCardProps = EpisodeItemVariant & {
   show: ShowEntry | MediaEntry;
+  style?: 'cover' | 'summary';
 };

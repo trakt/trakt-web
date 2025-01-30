@@ -7,5 +7,7 @@ export function mediaCardWidthResolver<M = MediaType>(
     case 'movie':
     case 'show':
       return 'var(--width-poster-card)';
+    case 'episode':
+      return 'var(--width-episode-card)';
   }
 }

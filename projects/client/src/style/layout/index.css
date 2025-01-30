@@ -21,6 +21,7 @@
 
   --width-summary-card: 100%;
   --height-summary-card: var(--ni-148);
+  --height-episode-summary-card: var(--ni-112);
 
   /**
    * List dimensions
