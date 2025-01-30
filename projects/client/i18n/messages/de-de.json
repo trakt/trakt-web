@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Alle Merkliste Filme ansehen",
   "view_all_watchlist_shows": "Alle Merkliste Serien ansehen",
   "streaming": "Streaming",
-  "on_demand": "Auf Abruf"
+  "on_demand": "Auf Abruf",
+  "view_all_recently_watched_movies": "Alle kürzlich gesehenen Filme anzeigen",
+  "view_all_recently_watched_episodes": "Alle kürzlich gesehenen Episoden anzeigen"
 }

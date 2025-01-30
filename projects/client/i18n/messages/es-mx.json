@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Ver todas las pelis 'a ver'",
   "view_all_watchlist_shows": "Ver todas las series 'a ver'",
   "streaming": "En línea",
-  "on_demand": "A la carta"
+  "on_demand": "A la carta",
+  "view_all_recently_watched_movies": "Ver todas las películas vistas recientemente",
+  "view_all_recently_watched_episodes": "Ver todos los episodios vistos recientemente"
 }

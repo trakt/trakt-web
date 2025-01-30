@@ -2,7 +2,7 @@ import type { MediaType } from '$lib/requests/models/MediaType';
 import { buildParamString } from './buildParamString';
 
 type PaginatableMediaPageUrl = {
-  type: MediaType;
+  type: MediaType | 'episode';
   page?: number;
 };
 
@@ -19,6 +19,12 @@ const categoryDrilldownFactory =
   };
 
 export const UrlBuilder = {
+  history: (params: PaginatableMediaPageUrl) => {
+    return categoryDrilldownFactory('history')(params);
+  },
+  watched: (params: PaginatableMediaPageUrl) => {
+    return categoryDrilldownFactory('watched')(params);
+  },
   watchlistPage(params: PaginatableMediaPageUrl) {
     return categoryDrilldownFactory('watchlist')(params);
   },

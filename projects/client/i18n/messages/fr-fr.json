@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Voir tous les films à voir",
   "view_all_watchlist_shows": "Voir toutes les séries à voir",
   "streaming": "Streaming",
-  "on_demand": "À la demande"
+  "on_demand": "À la demande",
+  "view_all_recently_watched_movies": "Voir tous les films récemment vus",
+  "view_all_recently_watched_episodes": "Voir tous les épisodes récemment vus"
 }

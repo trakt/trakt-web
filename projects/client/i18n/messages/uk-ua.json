@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Усі зі списку до перегляду",
   "view_all_watchlist_shows": "Усі зі списку до перегляду",
   "streaming": "Онлайн",
-  "on_demand": "На вимогу"
+  "on_demand": "На вимогу",
+  "view_all_recently_watched_movies": "Переглянути всі нещодавно переглянуті фільми",
+  "view_all_recently_watched_episodes": "Переглянути всі нещодавно переглянуті епізоди"
 }

@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "View all watchlist movies",
   "view_all_watchlist_shows": "View all watchlist shows",
   "streaming": "Streaming",
-  "on_demand": "On Demand"
+  "on_demand": "On Demand",
+  "view_all_recently_watched_movies": "View all recently watched movies",
+  "view_all_recently_watched_episodes": "View all recently watched episodes"
 }

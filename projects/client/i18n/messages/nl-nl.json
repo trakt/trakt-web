@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Bekijk alle films op kijklijst",
   "view_all_watchlist_shows": "Bekijk alle series op kijklijst",
   "streaming": "Streaming",
-  "on_demand": "On Demand"
+  "on_demand": "On Demand",
+  "view_all_recently_watched_movies": "Bekijk alle recent bekeken films",
+  "view_all_recently_watched_episodes": "Bekijk alle recent bekeken afleveringen"
 }

@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Ver tudo para ver",
   "view_all_watchlist_shows": "Ver tudo para ver",
   "streaming": "Streaming",
-  "on_demand": "Sob Demanda"
+  "on_demand": "Sob Demanda",
+  "view_all_recently_watched_movies": "Ver tudo assistido recentemente",
+  "view_all_recently_watched_episodes": "Ver tudo assistido recentemente"
 }

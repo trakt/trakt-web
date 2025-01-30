@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Vezi toate filmele din lista",
   "view_all_watchlist_shows": "Vezi toate serialele din listă",
   "streaming": "Streaming",
-  "on_demand": "La cerere"
+  "on_demand": "La cerere",
+  "view_all_recently_watched_movies": "Vezi toate filmele vizionate recent",
+  "view_all_recently_watched_episodes": "Vezi toate episoadele vizionate recent"
 }

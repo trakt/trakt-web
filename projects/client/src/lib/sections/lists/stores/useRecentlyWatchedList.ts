@@ -21,7 +21,7 @@ type RecentlyWatchedListStoreProps = {
   page?: number;
 };
 
-type HistoryEntry = HistoryMovie | HistoryEpisode;
+export type HistoryEntry = HistoryMovie | HistoryEpisode;
 
 function typeToQuery(
   { type, limit, page }: RecentlyWatchedListStoreProps,

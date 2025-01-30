@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
   import FavoritesList from "../lists/FavoritesList.svelte";
-  import RecentlyWatchedList from "../lists/RecentlyWatchedList.svelte";
+  import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
@@ -28,8 +28,16 @@
   <ProfileHistorySummary movies={$historyMovies} shows={$historyShows} />
 </ProfileContainer>
 
-<RecentlyWatchedList title={m.recently_watched_episodes()} type="episode" />
-<RecentlyWatchedList title={m.recently_watched_movies()} type="movie" />
+<RecentlyWatchedList
+  drilldownLabel={m.view_all_recently_watched_episodes()}
+  title={m.recently_watched_episodes()}
+  type="episode"
+/>
+<RecentlyWatchedList
+  drilldownLabel={m.view_all_recently_watched_movies()}
+  title={m.recently_watched_movies()}
+  type="movie"
+/>
 
 <FavoritesList
   type="movie"

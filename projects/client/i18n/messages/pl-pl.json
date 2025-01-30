@@ -283,5 +283,7 @@
   "view_all_watchlist_movies": "Zobacz wszystkie filmy z listy do obejrzenia",
   "view_all_watchlist_shows": "Zobacz wszystkie seriale z listy do obejrzenia",
   "streaming": "Streaming",
-  "on_demand": "Na życzenie"
+  "on_demand": "Na życzenie",
+  "view_all_recently_watched_movies": "Zobacz wszystkie ostatnio obejrzane produkcje",
+  "view_all_recently_watched_episodes": "Zobacz wszystkie ostatnio obejrzane odcinki"
 }
