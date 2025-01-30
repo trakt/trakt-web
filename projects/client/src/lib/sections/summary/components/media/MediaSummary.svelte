@@ -67,9 +67,15 @@
   });
 </script>
 
-{#snippet mediaActions()}
-  <WatchlistAction {...watchlistProps} />
-  <MarkAsWatchedAction {...markWasWatchedProps} />
+{#snippet mediaActions(device: "mobile" | "other" = "other")}
+  <WatchlistAction
+    {...watchlistProps}
+    style={device === "mobile" ? "action" : "normal"}
+  />
+  <MarkAsWatchedAction
+    {...markWasWatchedProps}
+    size={device === "mobile" ? "small" : "normal"}
+  />
 {/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} {type} />
@@ -122,13 +128,19 @@
 
   <RenderFor audience="authenticated">
     <SummaryActions>
-      {#if type === "movie"}
-        <RateNow {type} {media} />
-      {/if}
-
-      <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
+      <RenderFor device={["tablet-sm"]} audience="authenticated">
         {@render mediaActions()}
       </RenderFor>
+
+      <RenderFor device={["mobile"]} audience="authenticated">
+        {@render mediaActions("mobile")}
+      </RenderFor>
+
+      {#snippet contextualActions()}
+        {#if type === "movie"}
+          <RateNow {type} {media} />
+        {/if}
+      {/snippet}
     </SummaryActions>
   </RenderFor>
 </SummaryContainer>

@@ -10,10 +10,12 @@
     style: "normal" | "action";
     title: string;
     onAction?: (state: boolean) => void;
+    size?: "normal" | "small";
   } & MarkAsWatchedStoreProps;
 
   const {
     style = "action",
+    size = "normal",
     title,
     onAction,
     ...target
@@ -36,6 +38,7 @@
   <MarkAsWatchedButton
     {style}
     {title}
+    {size}
     isWatched={$isWatched}
     isMarkingAsWatched={$isMarkingAsWatched}
     onWatch={markAsWatched}

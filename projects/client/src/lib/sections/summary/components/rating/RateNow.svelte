@@ -57,7 +57,20 @@
   </div>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-rate-now {
+    h6 {
+      transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
+    }
+
+    @include for-mobile {
+      h6 {
+        font-size: var(--ni-12);
+      }
+    }
+  }
   .trakt-rate-now,
   .trakt-rate-actions {
     display: flex;

@@ -6,6 +6,7 @@ export type MarkAsWatchedButtonProps = {
   isMarkingAsWatched: boolean;
   isWatched: boolean;
   style: 'action' | 'normal';
+  size: 'normal' | 'small';
   onWatch: () => void;
   onRemove: () => void;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

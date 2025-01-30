@@ -5,12 +5,14 @@
 
   type WatchlistActionProps = {
     style?: "action" | "normal";
+    size?: "small" | "normal";
     title: string;
     onAction?: (state: boolean) => void;
   } & WatchlistStoreProps;
 
   const {
     style = "action",
+    size = "normal",
     title,
     onAction,
     ...target
@@ -31,6 +33,7 @@
 <WatchlistButton
   type={style}
   {title}
+  {size}
   isWatchlisted={$isWatchlisted}
   isWatchlistUpdating={$isWatchlistUpdating}
   onAdd={addToWatchlist}
