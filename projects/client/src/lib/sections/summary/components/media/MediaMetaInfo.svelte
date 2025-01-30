@@ -37,10 +37,12 @@
     media,
   }: MediaMetaInfoProps = $props();
 
-  const { watchNow } = useWatchNow({
-    type,
-    id: media.id,
-  });
+  const { watchNow } = $derived(
+    useWatchNow({
+      type,
+      id: media.id,
+    }),
+  );
 
   const isAiredItem = $derived(airDate < new Date());
 </script>

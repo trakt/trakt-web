@@ -24,7 +24,9 @@
     airDate,
   }: RatingListProps = $props();
 
-  const { trakt, imdb, rotten } = getDisplayableRatings({ ratings, airDate });
+  const { trakt, imdb, rotten } = $derived(
+    getDisplayableRatings({ ratings, airDate }),
+  );
 </script>
 
 <div class="trakt-summary-ratings">
