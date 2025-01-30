@@ -1,8 +1,10 @@
 import type { HistoryMoviesResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta';
 import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable';
 import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry';
@@ -11,17 +13,19 @@ type MovieHistoryParams = {
   startDate: Date;
   endDate: Date;
   limit: number;
+  page?: number;
 } & ApiParams;
 
 const HistoryMovieSchema = z.object({
   id: z.number(),
   watchedAt: z.date(),
   movie: MovieEntrySchema,
+  type: z.literal('movie'),
 });
 export type HistoryMovie = z.infer<typeof HistoryMovieSchema>;
 
 const movieHistoryRequest = (
-  { fetch, startDate, endDate, limit }: MovieHistoryParams,
+  { fetch, startDate, endDate, limit, page = 1 }: MovieHistoryParams,
 ) =>
   api({ fetch })
     .users
@@ -35,14 +39,15 @@ const movieHistoryRequest = (
         start_at: startDate.toISOString(),
         end_at: endDate.toISOString(),
         limit,
+        page,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch movies history');
       }
 
-      return body;
+      return response;
     });
 
 const mapResponseToHistory = (
@@ -51,6 +56,7 @@ const mapResponseToHistory = (
   id: historyMovie.id,
   watchedAt: new Date(historyMovie.watched_at),
   movie: mapMovieResponseToMovieSummary(historyMovie.movie),
+  type: 'movie' as const,
 });
 
 export const movieHistoryQuery = defineQuery({
@@ -60,9 +66,13 @@ export const movieHistoryQuery = defineQuery({
     params.startDate,
     params.endDate,
     params.limit,
+    params.page,
   ],
   request: movieHistoryRequest,
-  mapper: (body) => body.map(mapResponseToHistory),
-  schema: HistoryMovieSchema.array(),
+  mapper: (response) => ({
+    entries: response.body.map(mapResponseToHistory),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(HistoryMovieSchema),
   ttl: time.hours(6),
 });

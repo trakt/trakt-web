@@ -17,7 +17,7 @@ export function useHistory() {
   const shows = useQuery(showHistoryQuery(params));
 
   return {
-    historyMovies: derived(movies, ($movies) => $movies.data),
-    historyShows: derived(shows, ($shows) => $shows.data),
+    historyMovies: derived(movies, ($movies) => $movies.data?.entries),
+    historyShows: derived(shows, ($shows) => $shows.data?.entries),
   };
 }

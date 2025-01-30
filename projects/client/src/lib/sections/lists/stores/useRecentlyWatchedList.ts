@@ -1,86 +1,67 @@
 import { useQuery } from '$lib/features/query/useQuery';
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry';
-import { episodeHistoryQuery } from '$lib/requests/queries/users/episodeHistoryQuery';
+import type { Paginatable } from '$lib/requests/models/Paginatable';
 import {
+  episodeHistoryQuery,
+  type HistoryEpisode,
+} from '$lib/requests/queries/users/episodeHistoryQuery';
+import {
+  type HistoryMovie,
   movieHistoryQuery,
 } from '$lib/requests/queries/users/movieHistoryQuery.ts';
 import { getPastMonthRange } from '$lib/utils/date/getPastMonthRange.ts';
-import { derived, type Readable } from 'svelte/store';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState';
+import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import { derived } from 'svelte/store';
 
 const HISTORY_LIMIT = 1000;
 
 type RecentlyWatchedListStoreProps = {
   type: 'movie' | 'episode';
+  limit?: number;
+  page?: number;
 };
 
-type WatchedMovie = {
-  id: number;
-  movie: MediaEntry;
-  type: 'movie';
-};
+type HistoryEntry = HistoryMovie | HistoryEpisode;
 
-type WatchedEpisode = {
-  id: number;
-  episode: EpisodeEntry;
-  show: MediaEntry;
-  type: 'episode';
-};
-
-type RecentlyWatched = {
-  list: Readable<(WatchedMovie | WatchedEpisode)[]>;
-};
-
-function getQueryParams() {
-  return {
+function typeToQuery(
+  { type, limit, page }: RecentlyWatchedListStoreProps,
+) {
+  const params = {
     ...getPastMonthRange(new Date()),
-    limit: HISTORY_LIMIT,
+    limit: limit ?? HISTORY_LIMIT,
+    page,
   };
-}
 
-export function useRecentlyWatchedMovies() {
-  const query = useQuery(movieHistoryQuery(getQueryParams()));
-
-  return {
-    list: derived(
-      query,
-      ($query) =>
-        ($query.data ?? [])
-          .map((item): WatchedMovie => ({
-            id: item.id,
-            movie: item.movie,
-            type: 'movie',
-          })),
-    ),
-  };
-}
-
-export function useRecentlyWatchedEpisodes() {
-  const query = useQuery(episodeHistoryQuery(getQueryParams()));
-
-  return {
-    list: derived(
-      query,
-      ($query) => {
-        return ($query.data ?? [])
-          .map((item): WatchedEpisode => ({
-            id: item.id,
-            episode: item.episode,
-            show: item.show,
-            type: 'episode',
-          }));
-      },
-    ),
-  };
+  switch (type) {
+    case 'movie':
+      return movieHistoryQuery(params) as CreateQueryOptions<
+        Paginatable<HistoryEntry>
+      >;
+    case 'episode':
+      return episodeHistoryQuery(params) as CreateQueryOptions<
+        Paginatable<HistoryEntry>
+      >;
+  }
 }
 
 export function useRecentlyWatchedList(
   params: RecentlyWatchedListStoreProps,
-): RecentlyWatched {
-  switch (params.type) {
-    case 'movie':
-      return useRecentlyWatchedMovies();
-    case 'episode':
-      return useRecentlyWatchedEpisodes();
-  }
+) {
+  const query = useQuery(typeToQuery(params));
+  const isLoading = derived(
+    query,
+    toLoadingState,
+  );
+
+  return {
+    isLoading,
+    list: derived(
+      query,
+      ($query) => $query.data?.entries ?? [],
+    ),
+    page: derived(
+      query,
+      ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    ),
+  };
 }

@@ -1,9 +1,11 @@
 import type { HistoryShowsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable';
 import { time } from '$lib/utils/timing/time';
 import { z } from 'zod';
 import { EpisodeEntrySchema } from '../../models/EpisodeEntry';
@@ -13,6 +15,7 @@ type ShowHistoryParams = {
   startDate: Date;
   endDate: Date;
   limit: number;
+  page?: number;
 } & ApiParams;
 
 const HistoryShowSchema = z.object({
@@ -20,11 +23,12 @@ const HistoryShowSchema = z.object({
   watchedAt: z.date(),
   show: ShowEntrySchema,
   episode: EpisodeEntrySchema,
+  type: z.literal('show'),
 });
 export type HistoryShow = z.infer<typeof HistoryShowSchema>;
 
 const showHistoryRequest = (
-  { fetch, startDate, endDate, limit }: ShowHistoryParams,
+  { fetch, startDate, endDate, limit, page = 1 }: ShowHistoryParams,
 ) =>
   api({ fetch })
     .users
@@ -38,14 +42,15 @@ const showHistoryRequest = (
         start_at: startDate.toISOString(),
         end_at: endDate.toISOString(),
         limit,
+        page,
       },
     })
-    .then(({ status, body }) => {
-      if (status !== 200) {
+    .then((response) => {
+      if (response.status !== 200) {
         throw new Error('Failed to fetch shows history');
       }
 
-      return body;
+      return response;
     });
 
 const mapResponseToHistory = (
@@ -55,6 +60,7 @@ const mapResponseToHistory = (
   watchedAt: new Date(historyShow.watched_at),
   show: mapShowResponseToShowSummary(historyShow.show),
   episode: mapEpisodeResponseToEpisodeEntry(historyShow.episode),
+  type: 'show' as const,
 });
 
 export const showHistoryQuery = defineQuery({
@@ -64,9 +70,13 @@ export const showHistoryQuery = defineQuery({
     params.startDate,
     params.endDate,
     params.limit,
+    params.page,
   ],
   request: showHistoryRequest,
-  mapper: (body) => body.map(mapResponseToHistory),
-  schema: HistoryShowSchema.array(),
+  mapper: (response) => ({
+    entries: response.body.map(mapResponseToHistory),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(HistoryShowSchema),
   ttl: time.hours(6),
 });
