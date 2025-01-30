@@ -1,7 +1,7 @@
 import type { MediaType } from '$lib/requests/models/MediaType';
 
-export function mediaCardWidthResolver(
-  type: MediaType,
+export function mediaCardWidthResolver<M = MediaType>(
+  type: M,
 ) {
   switch (type) {
     case 'movie':

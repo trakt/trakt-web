@@ -1,7 +1,7 @@
 import type { MediaType } from '$lib/requests/models/MediaType';
 
-export function mediaListHeightResolver(
-  type: MediaType | 'episode' | 'person',
+export function mediaListHeightResolver<M = MediaType>(
+  type: M,
 ) {
   switch (type) {
     case 'movie':

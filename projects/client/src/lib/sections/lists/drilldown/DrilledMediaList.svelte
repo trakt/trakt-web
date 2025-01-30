@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown }">
+<script lang="ts" generics="T extends { id: unknown }, M">
   import { page as pageState } from "$app/state";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import { DEFAULT_DRILL_SIZE, PAGE_UPPER_LIMIT } from "$lib/utils/constants";
@@ -7,8 +7,8 @@
   import type { DrillListProps } from "./DrillListProps";
   import type { PaginatableStore } from "./PaginatableStore";
 
-  type DrilledMediaListProps = DrillListProps<T> & {
-    useList: PaginatableStore<T>;
+  type DrilledMediaListProps = DrillListProps<T, M> & {
+    useList: PaginatableStore<T, M>;
     emptyMessage?: string;
   };
 

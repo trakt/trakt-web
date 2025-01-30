@@ -1,13 +1,13 @@
-<script lang="ts" generics="T extends { id: unknown }">
+<script lang="ts" generics="T extends { id: unknown }, M">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import ViewAllButton from "../components/ViewAllButton.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import type { DrillListProps } from "./DrillListProps";
   import type { MediaStore } from "./MediaStore";
 
-  type DrillableList<T> = DrillListProps<T> & {
+  type DrillableList<T, M> = DrillListProps<T, M> & {
     drilldownLabel: string;
-    useList: MediaStore<T>;
+    useList: MediaStore<T, M>;
     emptyMessage?: string;
   };
 
@@ -19,7 +19,7 @@
     item,
     useList,
     urlBuilder,
-  }: DrillableList<T> = $props();
+  }: DrillableList<T, M> = $props();
 
   const { list, isLoading } = $derived(useList({ type }));
   const isEmptyList = $derived(!$isLoading && $list.length === 0);
