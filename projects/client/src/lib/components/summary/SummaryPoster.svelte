@@ -69,7 +69,7 @@
       box-sizing: border-box;
 
       transition: var(--transition-increment) ease-in-out;
-      transition-property: filter, border;
+      transition-property: filter, border, opacity;
     }
   }
 
