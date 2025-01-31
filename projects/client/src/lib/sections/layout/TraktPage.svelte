@@ -105,11 +105,11 @@
       }
 
       @include for-tablet-lg-and-below {
-        --content-gap: var(--gap-m);
+        --content-gap: var(--gap-l);
       }
 
       @include for-mobile {
-        --content-gap: var(--gap-xs);
+        --content-gap: var(--gap-m);
 
         &:first-child {
           margin-top: 0;
