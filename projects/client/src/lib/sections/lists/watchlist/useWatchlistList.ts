@@ -26,7 +26,7 @@ export type WatchListStoreProps = {
 } & Partial<WatchListParams>;
 
 function typeToQuery(
-  { type, limit, page, sort = 'rank' }: WatchListStoreProps,
+  { type, limit, page, sort = 'added' }: WatchListStoreProps,
 ) {
   const params = {
     limit,
