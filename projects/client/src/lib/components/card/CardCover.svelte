@@ -1,5 +1,6 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { isImageComplete } from "$lib/utils/image/isImageComplete";
   import type { CardCoverProps } from "./CardCoverProps";
 
   const {
@@ -10,7 +11,7 @@
     style = "gradient",
   }: CardCoverProps = $props();
 
-  let isImagePending = $state(true);
+  let isImagePending = $state(!isImageComplete(src));
   $effect(() => {
     if (!isLoading) {
       return;
