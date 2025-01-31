@@ -16,7 +16,7 @@ const movieRelatedRequest = (
     .movies
     .related({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
       },
       params: {
         id: slug,

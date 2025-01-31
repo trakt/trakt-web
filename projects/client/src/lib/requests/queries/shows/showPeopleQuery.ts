@@ -18,7 +18,7 @@ const showPeopleRequest = (
         id: slug,
       },
       query: {
-        extended: 'cloud9',
+        extended: 'images',
       },
     })
     .then((response) => {

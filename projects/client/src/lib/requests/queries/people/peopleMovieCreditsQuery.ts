@@ -16,7 +16,7 @@ const peopleMovieCreditsRequest = (
         id: slug,
       },
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
       },
     })
     .then((response) => {

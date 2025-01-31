@@ -21,7 +21,7 @@ const favoritedMoviesRequest = (
         sort: 'rank',
       },
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
       },
     })
     .then((response) => {

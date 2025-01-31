@@ -36,7 +36,7 @@ const movieTrendingRequest = (
     .movies
     .trending({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
         page,
         limit,
       },

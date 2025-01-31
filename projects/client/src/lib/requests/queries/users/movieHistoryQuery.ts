@@ -35,7 +35,7 @@ const movieHistoryRequest = (
         id: 'me',
       },
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
         start_at: startDate.toISOString(),
         end_at: endDate.toISOString(),
         limit,

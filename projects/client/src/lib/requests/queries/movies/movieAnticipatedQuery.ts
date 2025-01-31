@@ -36,7 +36,7 @@ const movieAnticipatedRequest = (
     .movies
     .anticipated({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
         page,
         limit,
       },

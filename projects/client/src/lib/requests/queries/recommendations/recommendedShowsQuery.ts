@@ -27,7 +27,7 @@ const recommendedShowsRequest = (
     .shows
     .recommend({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
         ignore_collected: true,
         ignore_watchlisted: true,
         limit,

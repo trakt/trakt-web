@@ -19,7 +19,7 @@ const moviePopularRequest = (
     .movies
     .popular({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
         page,
         limit,
       },

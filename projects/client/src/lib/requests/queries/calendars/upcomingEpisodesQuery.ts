@@ -26,7 +26,7 @@ const upcomingEpisodesRequest = (
     .calendars
     .shows({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
       },
       params: {
         target: 'my',

@@ -44,7 +44,7 @@ const searchRequest = ({ query, fetch }: SearchParams) =>
     .query({
       query: {
         query,
-        extended: 'full,cloud9',
+        extended: 'full,images',
       },
       params: {
         type: 'movie,show',

@@ -39,7 +39,7 @@ const upNextRequest = (params: UpNextParams = {}) => {
     .progress
     .upNext({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
         page,
         limit,
         include_stats: true,

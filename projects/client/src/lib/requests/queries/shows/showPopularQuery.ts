@@ -39,7 +39,7 @@ const showPopularRequest = (
     .shows
     .popular({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
         page,
         limit,
       },

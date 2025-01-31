@@ -28,7 +28,7 @@ const showRelatedRequest = ({ fetch, slug }: ShowRelatedParams) =>
     .shows
     .related({
       query: {
-        extended: 'full,cloud9',
+        extended: 'full,images',
       },
       params: {
         id: slug,

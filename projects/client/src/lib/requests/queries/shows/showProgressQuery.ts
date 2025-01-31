@@ -25,7 +25,7 @@ const showProgressRequest = (
         count_specials: false,
         specials: false,
         hidden: false,
-        extended: 'full,cloud9',
+        extended: 'full,images',
         include_stats: true,
       },
       params: {
