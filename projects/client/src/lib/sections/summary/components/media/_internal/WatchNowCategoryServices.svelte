@@ -22,6 +22,17 @@
       $sources.find((s) => s.source === service.source)?.name ?? service.source
     );
   };
+
+  const hasPrice = (
+    service: WatchNowOnDemand | WatchNowStreaming,
+  ): service is WatchNowOnDemand => {
+    if (service.type === "streaming") {
+      return false;
+    }
+
+    const { rent, purchase } = service.prices;
+    return Boolean(rent || purchase);
+  };
 </script>
 
 <div class="trakt-watch-now-category-services">
@@ -31,7 +42,7 @@
       <Link href={service.link}>
         <p class="small ellipsis">
           {getServiceName(service)}
-          {#if service.type === "on-demand"}
+          {#if hasPrice(service)}
             {`(${getMediaCost(service)})`}
           {/if}
         </p>
