@@ -12,8 +12,12 @@ type SearchParams = {
 } & ApiParams;
 
 function isGarbage(value?: MediaEntry): boolean {
-  return value?.year == null ||
-    !value?.genres.length;
+  const isReleased = value?.status === 'released';
+  const isInvalidRelease = isReleased && value?.year == null;
+  const hasNoGenres = !value?.genres.length;
+
+  return isInvalidRelease ||
+    hasNoGenres;
 }
 
 function mapToSearchResultEntry(item: SearchResultResponse[0]): MediaEntry {
