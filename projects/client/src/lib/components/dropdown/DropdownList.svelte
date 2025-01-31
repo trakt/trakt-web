@@ -87,6 +87,10 @@
         font-size: var(--ni-12);
       }
 
+      :global(.trakt-button) {
+        min-width: fit-content;
+      }
+
       .trakt-dropdown-list-icon {
         :global(.trakt-dropdown-caret) {
           width: var(--ni-12);
