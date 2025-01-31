@@ -40,6 +40,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
+
+    @include for-mobile {
+      gap: var(--gap-s);
+    }
   }
 
   .trakt-summary-details-grid-header {
@@ -78,7 +82,7 @@
 
     @include for-mobile {
       grid-template-columns: 1fr;
-      gap: var(--gap-xs);
+      gap: var(--gap-s);
     }
   }
 </style>

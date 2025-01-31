@@ -25,8 +25,8 @@
 </script>
 
 <div class="trakt-watch-now-category-services">
-  <p class="meta-info secondary">{title}</p>
   <CollapsableValues category="streaming" values={services}>
+    <p class="meta-info secondary">{title}</p>
     {#snippet value(service)}
       <Link href={service.link}>
         <p class="small ellipsis">

@@ -91,14 +91,12 @@
 <DetailsGrid title={m.details()}>
   {#each mediaDetails as { title, values }}
     {#if values && values.length > 0}
-      <div>
+      <CollapsableValues category={title} {values}>
         <p class="meta-info secondary">{title}</p>
-        <CollapsableValues category={title} {values}>
-          {#snippet value(value)}
-            <p class="small capitalize ellipsis">{value}</p>
-          {/snippet}
-        </CollapsableValues>
-      </div>
+        {#snippet value(value)}
+          <p class="small capitalize ellipsis">{value}</p>
+        {/snippet}
+      </CollapsableValues>
     {/if}
   {/each}
 </DetailsGrid>
