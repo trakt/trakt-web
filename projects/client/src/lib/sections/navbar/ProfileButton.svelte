@@ -59,8 +59,8 @@
   {#snippet icon()}
     <div class="profile-icon">
       <ProfileImage
-        --width="var(--ni-24)"
-        --height="var(--ni-24)"
+        --width="var(--ni-16)"
+        --height="var(--ni-16)"
         --border-width="var(--border-thickness-xs)"
       />
       <RenderFor

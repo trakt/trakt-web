@@ -32,6 +32,7 @@
       onclick?.(ev);
     }}
     style="textured"
+    {size}
     {...props}
   >
     {@render children()}
@@ -71,11 +72,30 @@
     }
 
     &[data-size="small"] {
-      transform: scale(0.75);
-      margin: var(--ni-neg-32);
+      // TODO change back to transform scale when scaling is fixed
+      --small-padding: var(--ni-10);
+      padding: var(--small-padding);
+      margin: 0;
+
+      :global(li) {
+        padding: 0 var(--small-padding);
+        height: calc(var(--ni-16) + var(--small-padding) * 2);
+        width: calc(100% - var(--small-padding) * 4);
+      }
 
       :global(li p) {
-        font-size: var(--ni-16);
+        font-size: var(--ni-12);
+      }
+
+      .trakt-dropdown-list-icon {
+        :global(.trakt-dropdown-caret) {
+          width: var(--ni-12);
+          height: var(--ni-12);
+        }
+      }
+
+      .trakt-list .spacer {
+        height: calc(var(--ni-24) + var(--small-padding) * 2);
       }
     }
 
