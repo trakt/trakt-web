@@ -1,4 +1,6 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages";
+
   import Link from "$lib/components/link/Link.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
@@ -30,7 +32,7 @@
     <CrossOriginImage alt={media.title} src={media.poster.url.thumb} />
     <div class="trakt-summary-item-details">
       <span class="trakt-summary-media-title">
-        {media.title} ({media.year})
+        {media.title} ({media.year ?? m.tba_label()})
       </span>
       <div class="meta-info">
         <InfoTag>
