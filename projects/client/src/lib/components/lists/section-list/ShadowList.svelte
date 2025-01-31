@@ -193,19 +193,35 @@
     & > :global(:not(svelte-css-wrapper)) {
       scroll-snap-align: start;
 
+      @include for-mobile() {
+        scroll-snap-align: unset;
+      }
+
       &:first-child,
       &:last-child {
         scroll-snap-align: end;
+
+        @include for-mobile() {
+          scroll-snap-align: unset;
+        }
       }
     }
 
     & > :global(svelte-css-wrapper > *) {
       scroll-snap-align: start;
+
+      @include for-mobile() {
+        scroll-snap-align: unset;
+      }
     }
 
     & > :global(svelte-css-wrapper:first-child > *),
     & > :global(svelte-css-wrapper:last-child > *) {
       scroll-snap-align: end;
+
+      @include for-mobile() {
+        scroll-snap-align: unset;
+      }
     }
   }
 </style>
