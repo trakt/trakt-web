@@ -72,17 +72,20 @@
 
   .trakt-search {
     --search-input-width: clamp(var(--ni-80), 100%, var(--ni-320));
+    --mobile-search-focus-width: 70dvw;
+
+    display: flex;
+    height: var(--ni-48);
+    width: var(--search-input-width);
+    align-items: center;
 
     position: relative;
     .trakt-search-input {
       all: unset;
-
-      display: flex;
-      height: var(--ni-48);
+      height: 100%;
+      width: 100%;
       padding: var(--ni-8) var(--ni-16);
-      align-items: center;
       box-sizing: border-box;
-      gap: var(--gap-m);
 
       border-radius: var(--border-radius-s);
       border: var(--border-thickness-xs) solid var(--shade-800);
@@ -92,13 +95,25 @@
         transparent 10%
       );
       backdrop-filter: blur(var(--ni-8));
-      width: var(--search-input-width);
 
       transition: var(--transition-increment) ease-in-out;
-      transition-property: border-color, background-color;
+      transition-property: border-color, background-color, width, top, left;
+
+      @include for-mobile {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
 
       &:focus-within {
         border-color: var(--purple-600);
+
+        @include for-mobile {
+          left: 0;
+          top: 0;
+          width: var(--mobile-search-focus-width);
+          z-index: 666;
+        }
       }
 
       &::-webkit-search-cancel-button {
@@ -126,12 +141,16 @@
         --search-side-distance: var(--ni-32);
 
         content: "";
+        z-index: 777;
+
         width: calc(var(--search-input-width) - var(--search-side-distance));
+        height: var(--ni-2);
+
         position: absolute;
         bottom: 0;
         left: calc(var(--search-side-distance) / 2);
         right: 0;
-        height: var(--ni-2);
+
         border-radius: 50%;
         background: linear-gradient(
           90deg,
@@ -143,6 +162,16 @@
         background-size: 200% 100%;
         animation: slide-left-to-right calc(var(--transition-increment) * 10)
           linear infinite;
+      }
+
+      @include for-mobile {
+        &:has(input:focus-within) {
+          &::after {
+            width: calc(
+              var(--mobile-search-focus-width) - var(--search-side-distance)
+            );
+          }
+        }
       }
     }
 

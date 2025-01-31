@@ -139,10 +139,6 @@
       align-items: center;
       justify-content: end;
 
-      @include for-tablet-lg-and-below {
-        gap: var(--gap-m);
-      }
-
       /** 
       * Navbar links have custom design,
       * to accommodate the custom cover background
