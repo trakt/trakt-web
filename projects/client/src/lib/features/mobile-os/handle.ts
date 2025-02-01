@@ -1,6 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
 
-const OS_PLACEHOLDER = '%mobile.os%';
+export const OS_PLACEHOLDER = '%mobile.os%';
 function extractMobileOS(agent: string): 'android' | 'ios' | 'unknown' {
   // TODO: @seferturan, check if we can combine this with mobileAppleDeviceTriggerHack
   if (/Android/i.test(agent)) {
