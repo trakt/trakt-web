@@ -5,7 +5,7 @@ import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
 
-const THEME_PLACEHOLDER = '%theme.current%';
+export const THEME_PLACEHOLDER = '%theme.current%';
 
 export type ThemeResponse = { theme: Theme };
 
