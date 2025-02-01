@@ -5,6 +5,7 @@ import {
   es,
   fr,
   frCA,
+  it,
   ja,
   nl,
   pl,
@@ -28,4 +29,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'nl-nl': nl,
   'uk-ua': uk,
   'pl-pl': pl,
+  'it-it': it,
 };
