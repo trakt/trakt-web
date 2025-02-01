@@ -1,4 +1,4 @@
-import { UserHistoryMappedMock } from '$mocks/data/users/UserHistoryMappedMock';
+import { UserHistoryMappedMock } from '$mocks/data/users/mapped/UserHistoryMappedMock';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';

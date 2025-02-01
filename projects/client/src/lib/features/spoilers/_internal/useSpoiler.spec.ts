@@ -1,6 +1,6 @@
 import { clone } from '$lib/utils/object/clone';
 import { deepAssign } from '$lib/utils/object/deepAssign';
-import { ExtendedUsersResponseMock } from '$mocks/data/users/ExtendedUserSettingsResponseMock';
+import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock';
 import { server } from '$mocks/server';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore';
 import { waitForEmission } from '$test/readable/waitForEmission';

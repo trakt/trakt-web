@@ -1,6 +1,6 @@
-import { ExtendedUserMappedMock } from '$mocks/data/users/ExtendedUserSettingsMappedMock.ts';
-import { UserFavoritedMappedMock } from '$mocks/data/users/UserFavoritedMappedMock.ts';
-import { UserRatedMappedMock } from '$mocks/data/users/UserRatedMappedMock.ts';
+import { ExtendedUserMappedMock } from '$mocks/data/users/mapped/ExtendedUserSettingsMappedMock.ts';
+import { UserFavoritedMappedMock } from '$mocks/data/users/mapped/UserFavoritedMappedMock.ts';
+import { UserRatedMappedMock } from '$mocks/data/users/mapped/UserRatedMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
 import { useUser } from './useUser.ts';

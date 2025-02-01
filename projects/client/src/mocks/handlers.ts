@@ -21,15 +21,15 @@ import { ShowSiloSeasonsResponseMock } from './data/summary/shows/silo/response/
 import { ShowSiloStatsResponseMock } from './data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from './data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
 import { ShowSiloWatchNowResponseMock } from './data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
-import { ExtendedUsersResponseMock } from './data/users/ExtendedUserSettingsResponseMock.ts';
-import { FavoritedMoviesResponseMock } from './data/users/FavoritedMoviesResponseMock.ts';
-import { FavoritedShowsResponseMock } from './data/users/FavoritedShowsResponseMock.ts';
-import { RatedEpisodesResponseMock } from './data/users/RatedEpisodesResponseMock.ts';
-import { RatedMoviesResponseMock } from './data/users/RatedMoviesResponseMock.ts';
-import { WatchedMoviesResponseMock } from './data/users/WatchedMoviesResponseMock.ts';
-import { WatchedShowsResponseMock } from './data/users/WatchedShowsResponseMock.ts';
-import { WatchlistMoviesResponseMock } from './data/users/WatchlistMoviesResponseMock.ts';
-import { WatchlistShowsResponseMock } from './data/users/WatchlistShowsResponseMock.ts';
+import { ExtendedUsersResponseMock } from './data/users/response/ExtendedUserSettingsResponseMock.ts';
+import { FavoritedMoviesResponseMock } from './data/users/response/FavoritedMoviesResponseMock.ts';
+import { FavoritedShowsResponseMock } from './data/users/response/FavoritedShowsResponseMock.ts';
+import { RatedEpisodesResponseMock } from './data/users/response/RatedEpisodesResponseMock.ts';
+import { RatedMoviesResponseMock } from './data/users/response/RatedMoviesResponseMock.ts';
+import { WatchedMoviesResponseMock } from './data/users/response/WatchedMoviesResponseMock.ts';
+import { WatchedShowsResponseMock } from './data/users/response/WatchedShowsResponseMock.ts';
+import { WatchlistMoviesResponseMock } from './data/users/response/WatchlistMoviesResponseMock.ts';
+import { WatchlistShowsResponseMock } from './data/users/response/WatchlistShowsResponseMock.ts';
 import { WatchNowSourcesResponseMock } from './data/watchnow/response/WatchNowSourcesResponseMock.ts';
 
 const users = [
