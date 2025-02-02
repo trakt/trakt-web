@@ -1,4 +1,4 @@
-import { EpisodeSiloResponseMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloResponseMock';
+import { EpisodeSiloResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloResponseMock';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock';
 import type { UpNextResponse } from '@trakt/api';
 

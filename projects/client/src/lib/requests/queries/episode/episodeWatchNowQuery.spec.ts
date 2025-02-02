@@ -1,5 +1,5 @@
+import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloMappedMock.ts';
 import { EpisodeSiloWatchNowMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloWatchNowMappedMock.ts';
-import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';

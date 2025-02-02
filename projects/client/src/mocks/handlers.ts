@@ -10,7 +10,10 @@ import { RecommendedMoviesResponseMock } from './data/recommendations/response/R
 import { RecommendedShowsResponseMock } from './data/recommendations/response/RecommendedShowsResponseMock.ts';
 import { SearchHereticResponseMock } from './data/search/response/SearchHereticResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
-import { EpisodeSiloResponseMock } from './data/summary/episodes/silo/mapped/EpisodeSiloResponseMock.ts';
+import { EpisodeSiloLanguageResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloLanguageResponseMock.ts';
+import { EpisodeSiloRatingsResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloRatingsResponseMock.ts';
+import { EpisodeSiloResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
+import { EpisodeSiloStatsResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloStatsResponseMock.ts';
 import { EpisodeSiloWatchNowResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
 import { MovieHereticLanguageResponseMock } from './data/summary/movies/heretic/response/MovieHereticLanguageResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from './data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
@@ -194,6 +197,36 @@ const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.trakt}/watchnow/*`,
     () => {
       return HttpResponse.json(ShowSiloWatchNowResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/watching`,
+    () => {
+      return HttpResponse.json(MediaWatchingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/stats`,
+    () => {
+      return HttpResponse.json(EpisodeSiloStatsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/ratings`,
+    () => {
+      return HttpResponse.json(EpisodeSiloRatingsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/*`,
+    () => {
+      return HttpResponse.json(EpisodeSiloLanguageResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}*`,
+    () => {
+      return HttpResponse.json(EpisodeSiloResponseMock);
     },
   ),
 ];
