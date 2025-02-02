@@ -22,6 +22,7 @@
     "insecurity:generate": "deno run .scripts/generate-insecurity.ts"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
     "@google/generative-ai": "^0.21.0",
     "@playwright/test": "^1.49.1",
     "@sveltejs/adapter-auto": "^4.0.0",
