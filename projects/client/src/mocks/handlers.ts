@@ -24,6 +24,9 @@ import { ShowSiloWatchNowResponseMock } from './data/summary/shows/silo/response
 import { ExtendedUsersResponseMock } from './data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { FavoritedMoviesResponseMock } from './data/users/response/FavoritedMoviesResponseMock.ts';
 import { FavoritedShowsResponseMock } from './data/users/response/FavoritedShowsResponseMock.ts';
+import { HistoryEpisodesResponseMock } from './data/users/response/HistoryEpisodesResponseMock.ts';
+import { HistoryMoviesResponseMock } from './data/users/response/HistoryMoviesResponseMock.ts';
+import { HistoryShowsResponseMock } from './data/users/response/HistoryShowsResponseMock.ts';
 import { RatedEpisodesResponseMock } from './data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from './data/users/response/RatedMoviesResponseMock.ts';
 import { WatchedMoviesResponseMock } from './data/users/response/WatchedMoviesResponseMock.ts';
@@ -42,10 +45,10 @@ const users = [
   http.get('http://localhost/users/me/watched/movies', () => {
     return HttpResponse.json(WatchedMoviesResponseMock);
   }),
-  http.get('http://localhost/users/me/watchlist/movies/rank', () => {
+  http.get('http://localhost/users/me/watchlist/movies/*', () => {
     return HttpResponse.json(WatchlistMoviesResponseMock);
   }),
-  http.get('http://localhost/users/me/watchlist/shows/rank', () => {
+  http.get('http://localhost/users/me/watchlist/shows/*', () => {
     return HttpResponse.json(WatchlistShowsResponseMock);
   }),
   http.get('http://localhost/users/me/ratings/movies', () => {
@@ -59,6 +62,15 @@ const users = [
   }),
   http.get('http://localhost/users/me/favorites/shows/rank', () => {
     return HttpResponse.json(FavoritedShowsResponseMock);
+  }),
+  http.get('http://localhost/users/me/history/shows*', () => {
+    return HttpResponse.json(HistoryShowsResponseMock);
+  }),
+  http.get('http://localhost/users/me/history/movies*', () => {
+    return HttpResponse.json(HistoryMoviesResponseMock);
+  }),
+  http.get('http://localhost/users/me/history/episodes*', () => {
+    return HttpResponse.json(HistoryEpisodesResponseMock);
   }),
 ];
 
