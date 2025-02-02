@@ -1,6 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
 import { AuthResponseMock } from './data/auth/AuthResponseMock.ts';
+import { RecommendedMoviesResponseMock } from './data/recommendations/response/RecommendedMoviesResponseMock.ts';
+import { RecommendedShowsResponseMock } from './data/recommendations/response/RecommendedShowsResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
 import { EpisodeSiloResponseMock } from './data/summary/episodes/silo/mapped/EpisodeSiloResponseMock.ts';
 import { EpisodeSiloWatchNowResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
@@ -297,6 +299,21 @@ const watchNow = [
   ),
 ];
 
+const recommendations = [
+  http.get(
+    'http://localhost/recommendations/shows/*',
+    () => {
+      return HttpResponse.json(RecommendedShowsResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/recommendations/movies/*',
+    () => {
+      return HttpResponse.json(RecommendedMoviesResponseMock);
+    },
+  ),
+];
+
 export const handlers = [
   ...users,
   ...movies,
@@ -306,4 +323,5 @@ export const handlers = [
   ...auth,
   ...people,
   ...watchNow,
+  ...recommendations,
 ];
