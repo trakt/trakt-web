@@ -26,7 +26,7 @@ export const ShowDevsMappedMock: ShowEntry = {
       'medium':
         'https://walter-r2.trakt.tv/images/shows/000/147/971/fanarts/medium/e9507d40da.jpg.webp',
       'thumb':
-        'https://walter-r2.trakt.tv/images/shows/000/147/971/thumbs/medium/7d0e3d4bbc.jpg.webp',
+        'https://walter-r2.trakt.tv/images/shows/000/147/971/fanarts/thumb/e9507d40da.jpg.webp',
     },
   },
   'thumb': {

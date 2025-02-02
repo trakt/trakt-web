@@ -12,6 +12,9 @@ import { PersonGrantResponseMock } from './data/people/response/PersonGrantRespo
 import { RecommendedMoviesResponseMock } from './data/recommendations/response/RecommendedMoviesResponseMock.ts';
 import { RecommendedShowsResponseMock } from './data/recommendations/response/RecommendedShowsResponseMock.ts';
 import { SearchHereticResponseMock } from './data/search/response/SearchHereticResponseMock.ts';
+import { ShowsAnticipatedResponseMock } from './data/shows/response/ShowsAnticipatedResponseMock.ts';
+import { ShowsPopularResponseMock } from './data/shows/response/ShowsPopularResponseMock.ts';
+import { ShowsTrendingResponseMock } from './data/shows/response/ShowsTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
 import { EpisodeSiloLanguageResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloLanguageResponseMock.ts';
 import { EpisodeSiloRatingsResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloRatingsResponseMock.ts';
@@ -30,7 +33,9 @@ import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/response
 import { ShowSiloPeopleResponseMock } from './data/summary/shows/silo/response/ShowSiloPeopleResponseMock.ts';
 import { ShowSiloProgressResponseMock } from './data/summary/shows/silo/response/ShowSiloProgressResponseMock.ts';
 import { ShowSiloRatingsResponseMock } from './data/summary/shows/silo/response/ShowSiloRatingsResponseMock.ts';
+import { ShowSiloRelatedResponseMock } from './data/summary/shows/silo/response/ShowSiloRelatedResponseMock.ts';
 import { ShowSiloResponseMock } from './data/summary/shows/silo/response/ShowSiloResponseMock.ts';
+import { ShowSiloSeasonEpisodesResponseMock } from './data/summary/shows/silo/response/ShowSiloSeasonEpisodesResponseMock.ts';
 import { ShowSiloSeasonsResponseMock } from './data/summary/shows/silo/response/ShowSiloSeasonsResponseMock.ts';
 import { ShowSiloStatsResponseMock } from './data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from './data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
@@ -255,6 +260,38 @@ const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}*`,
     () => {
       return HttpResponse.json(EpisodeSiloResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${
+      ShowSiloSeasonEpisodesResponseMock[0].season
+    }*`,
+    () => {
+      return HttpResponse.json(ShowSiloSeasonEpisodesResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/shows/trending*',
+    () => {
+      return HttpResponse.json(ShowsTrendingResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/shows/popular*',
+    () => {
+      return HttpResponse.json(ShowsPopularResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/shows/anticipated*',
+    () => {
+      return HttpResponse.json(ShowsAnticipatedResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/related*`,
+    () => {
+      return HttpResponse.json(ShowSiloRelatedResponseMock);
     },
   ),
 ];
