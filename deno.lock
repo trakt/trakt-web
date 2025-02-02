@@ -41,6 +41,8 @@
     "npm:idb-keyval@^6.2.1": "6.2.1",
     "npm:jsdom@26": "26.0.0",
     "npm:msw@^2.7.0": "2.7.0_typescript@5.7.3",
+    "npm:playwright@*": "1.50.1",
+    "npm:playwright@^1.50.1": "1.50.1",
     "npm:prettier-plugin-svelte@^3.3.3": "3.3.3_prettier@3.4.2_svelte@5.19.2__acorn@8.14.0",
     "npm:prettier@^3.4.2": "3.4.2",
     "npm:sass-embedded@^1.83.4": "1.83.4",
@@ -2246,7 +2248,7 @@
     "@playwright/test@1.49.1": {
       "integrity": "sha512-Ky+BVzPz8pL6PQxHqNRW1k3mIyv933LML7HktS8uik0bUXNCdPhoS/kLihiO1tMf/egaJb4IutXd7UywvXEW+g==",
       "dependencies": [
-        "playwright"
+        "playwright@1.49.1"
       ]
     },
     "@polka/url@1.0.0-next.28": {
@@ -4811,11 +4813,21 @@
     "playwright-core@1.49.1": {
       "integrity": "sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg=="
     },
+    "playwright-core@1.50.1": {
+      "integrity": "sha512-ra9fsNWayuYumt+NiM069M6OkcRb1FZSK8bgi66AtpFoWkg2+y0bJSNmkFrWhMbEBbVKC/EruAHH3g0zmtwGmQ=="
+    },
     "playwright@1.49.1": {
       "integrity": "sha512-VYL8zLoNTBxVOrJBbDuRgDWa3i+mfQgDTrL8Ah9QXZ7ax4Dsj0MSq5bYgytRnDVVe+njoKnfsYkH3HzqVj5UZA==",
       "dependencies": [
         "fsevents@2.3.2",
-        "playwright-core"
+        "playwright-core@1.49.1"
+      ]
+    },
+    "playwright@1.50.1": {
+      "integrity": "sha512-G8rwsOQJ63XG6BbKj2w5rHeavFjy5zynBA9zsJMMtBoe/Uf757oG12NXz6e6OirF7RCrTVAKFXbLmn1RbL7Qaw==",
+      "dependencies": [
+        "fsevents@2.3.2",
+        "playwright-core@1.50.1"
       ]
     },
     "possible-typed-array-names@1.0.0": {
@@ -6381,6 +6393,7 @@
             "npm:idb-keyval@^6.2.1",
             "npm:jsdom@26",
             "npm:msw@^2.7.0",
+            "npm:playwright@^1.50.1",
             "npm:prettier-plugin-svelte@^3.3.3",
             "npm:prettier@^3.4.2",
             "npm:sass-embedded@^1.83.4",
