@@ -8,6 +8,7 @@ import { PersonGrantMovieCreditsResponseMock } from './data/people/response/Pers
 import { PersonGrantResponseMock } from './data/people/response/PersonGrantResponseMock.ts';
 import { RecommendedMoviesResponseMock } from './data/recommendations/response/RecommendedMoviesResponseMock.ts';
 import { RecommendedShowsResponseMock } from './data/recommendations/response/RecommendedShowsResponseMock.ts';
+import { SearchHereticResponseMock } from './data/search/response/SearchHereticResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
 import { EpisodeSiloResponseMock } from './data/summary/episodes/silo/mapped/EpisodeSiloResponseMock.ts';
 import { EpisodeSiloWatchNowResponseMock } from './data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
@@ -339,6 +340,24 @@ const calendars = [
   ),
 ];
 
+const search = [
+  http.get(
+    'http://localhost/search/*',
+    ({ request }) => {
+      const url = new URL(request.url);
+      const searchQuery = url.searchParams.get('query');
+
+      if (searchQuery === MovieHereticResponseMock.title) {
+        return HttpResponse.json(SearchHereticResponseMock);
+      }
+
+      return new HttpResponse(null, {
+        status: 200,
+      });
+    },
+  ),
+];
+
 export const handlers = [
   ...users,
   ...movies,
@@ -350,4 +369,5 @@ export const handlers = [
   ...watchNow,
   ...recommendations,
   ...calendars,
+  ...search,
 ];
