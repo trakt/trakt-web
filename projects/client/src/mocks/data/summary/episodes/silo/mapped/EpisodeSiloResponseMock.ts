@@ -3,6 +3,7 @@ import type { EpisodeResponse } from '@trakt/api';
 export const EpisodeSiloResponseMock: EpisodeResponse = {
   'season': 1,
   'number': 1,
+  'number_abs': null,
   'title': 'Freedom Day',
   'ids': {
     'trakt': 5165667,

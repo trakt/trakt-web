@@ -21,7 +21,7 @@ export function mapEpisodeResponseToEpisodeEntry(
     type: episode.episode_type as EpisodeType ??
       EpisodeUnknownType.unknown,
     title: episode.title,
-    overview: episode.overview,
+    overview: episode.overview ?? '',
     season: episode.season,
     genres: [],
     number: episode.number,

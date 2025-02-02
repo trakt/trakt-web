@@ -62,7 +62,7 @@ function mapShowProgressResponse(
     minutesLeft: item.stats?.minutes_left ?? 0,
     type: episode.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
     genres: [],
-    overview: episode.overview,
+    overview: episode.overview ?? '',
     year: new Date(episode.first_aired).getFullYear(),
   };
 }
