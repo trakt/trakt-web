@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 import { AuthResponseMock } from './data/auth/AuthResponseMock.ts';
+import { UpcomingEpisodesResponseMock } from './data/calendars/response/UpcomingEpisodesResponseMock.ts';
 import { RecommendedMoviesResponseMock } from './data/recommendations/response/RecommendedMoviesResponseMock.ts';
 import { RecommendedShowsResponseMock } from './data/recommendations/response/RecommendedShowsResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
@@ -314,6 +315,15 @@ const recommendations = [
   ),
 ];
 
+const calendars = [
+  http.get(
+    'http://localhost/calendars/my/shows/*',
+    () => {
+      return HttpResponse.json(UpcomingEpisodesResponseMock);
+    },
+  ),
+];
+
 export const handlers = [
   ...users,
   ...movies,
@@ -324,4 +334,5 @@ export const handlers = [
   ...people,
   ...watchNow,
   ...recommendations,
+  ...calendars,
 ];
