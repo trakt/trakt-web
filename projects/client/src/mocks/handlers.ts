@@ -21,6 +21,7 @@ import { ShowSiloSeasonsResponseMock } from './data/summary/shows/silo/response/
 import { ShowSiloStatsResponseMock } from './data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from './data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
 import { ShowSiloWatchNowResponseMock } from './data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
+import { UpNextResponseMock } from './data/sync/response/UpNextResponseMock.ts';
 import { ExtendedUsersResponseMock } from './data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { FavoritedMoviesResponseMock } from './data/users/response/FavoritedMoviesResponseMock.ts';
 import { FavoritedShowsResponseMock } from './data/users/response/FavoritedShowsResponseMock.ts';
@@ -262,6 +263,12 @@ const sync = [
       return new HttpResponse(null, {
         status: 200,
       });
+    },
+  ),
+  http.get(
+    'http://localhost/sync/progress/up_next*',
+    () => {
+      return HttpResponse.json(UpNextResponseMock);
     },
   ),
 ];
