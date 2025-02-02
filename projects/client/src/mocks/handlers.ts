@@ -2,6 +2,10 @@ import { http, HttpResponse } from 'msw';
 
 import { AuthResponseMock } from './data/auth/AuthResponseMock.ts';
 import { UpcomingEpisodesResponseMock } from './data/calendars/response/UpcomingEpisodesResponseMock.ts';
+import { PersonFergusonResponseMock } from './data/people/response/PersonFergusonResponseMock.ts';
+import { PersonFergusonShowCreditsResponseMock } from './data/people/response/PersonFergusonShowCreditsResponseMock.ts';
+import { PersonGrantMovieCreditsResponseMock } from './data/people/response/PersonGrantMovieCreditsResponseMock.ts';
+import { PersonGrantResponseMock } from './data/people/response/PersonGrantResponseMock.ts';
 import { RecommendedMoviesResponseMock } from './data/recommendations/response/RecommendedMoviesResponseMock.ts';
 import { RecommendedShowsResponseMock } from './data/recommendations/response/RecommendedShowsResponseMock.ts';
 import { MediaWatchingResponseMock } from './data/summary/common/response/MediaWatchingResponseMock.ts';
@@ -16,7 +20,6 @@ import { MovieHereticWatchNowResponseMock } from './data/summary/movies/heretic/
 import { MovieStudiosResponseMock } from './data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
 import { ShowSiloLanguageResponseMock } from './data/summary/shows/silo/response/ShowSiloLanguageResponseMock.ts';
 import { ShowSiloPeopleResponseMock } from './data/summary/shows/silo/response/ShowSiloPeopleResponseMock.ts';
-import { ShowSiloPersonResponseMock } from './data/summary/shows/silo/response/ShowSiloPersonResponseMock.ts';
 import { ShowSiloProgressResponseMock } from './data/summary/shows/silo/response/ShowSiloProgressResponseMock.ts';
 import { ShowSiloRatingsResponseMock } from './data/summary/shows/silo/response/ShowSiloRatingsResponseMock.ts';
 import { ShowSiloResponseMock } from './data/summary/shows/silo/response/ShowSiloResponseMock.ts';
@@ -278,9 +281,21 @@ const sync = [
 
 const people = [
   http.get(
-    `http://localhost/people/${ShowSiloPersonResponseMock.ids.slug}`,
+    `http://localhost/people/${PersonFergusonResponseMock.ids.slug}`,
     () => {
-      return HttpResponse.json(ShowSiloPersonResponseMock);
+      return HttpResponse.json(PersonFergusonResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/people/${PersonFergusonResponseMock.ids.slug}/shows`,
+    () => {
+      return HttpResponse.json(PersonFergusonShowCreditsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/people/${PersonGrantResponseMock.ids.slug}/movies`,
+    () => {
+      return HttpResponse.json(PersonGrantMovieCreditsResponseMock);
     },
   ),
 ];

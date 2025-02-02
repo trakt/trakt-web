@@ -1,5 +1,5 @@
-import { ShowSiloPersonMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPersonMappedMock.js';
-import { ShowSiloPersonResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloPersonResponseMock.js';
+import { PersonFergusonMappedMock } from '$mocks/data/people/mapped/PersonFergusonMappedMock.js';
+import { PersonFergusonResponseMock } from '$mocks/data/people/response/PersonFergusonResponseMock.js';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
@@ -10,11 +10,11 @@ describe('peopleSummaryQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          peopleSummaryQuery({ slug: ShowSiloPersonResponseMock.ids.slug }),
+          peopleSummaryQuery({ slug: PersonFergusonResponseMock.ids.slug }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(ShowSiloPersonMappedMock);
+    expect(result).to.deep.equal(PersonFergusonMappedMock);
   });
 });
