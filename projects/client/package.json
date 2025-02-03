@@ -14,6 +14,7 @@
     "lint": "eslint .",
     "test:unit": "vitest",
     "test:cov": "vitest --coverage",
+    "test:e2e": "cucumber-js -c ./cucumber.mjs",
     "i18n:resolve": "deno run --allow-read --allow-write .scripts/resolve-i18n.ts",
     "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts",
     "i18n:delete": "deno run --allow-read --allow-write --allow-env .scripts/delete-i18n.ts",
