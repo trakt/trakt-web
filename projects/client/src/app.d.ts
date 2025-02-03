@@ -51,6 +51,7 @@ declare global {
 
   type HTMLElementProps = {
     disabled?: boolean;
+    'data-testid'?: string;
 
     /** Keyboard */
     onkeydown?: (event: KeyboardEvent) => void;

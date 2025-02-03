@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { TestId } from "$e2e/models/TestId";
   import Button from "$lib/components/buttons/Button.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import Logo from "$lib/components/logo/Logo.svelte";
@@ -52,6 +53,7 @@
           style="ghost"
           variant="primary"
           color="purple"
+          data-testid={TestId.NavBarHomeButton}
         >
           {m.navbar_link_home()}
         </Button>
@@ -61,6 +63,7 @@
           style="ghost"
           variant="primary"
           color="purple"
+          data-testid={TestId.NavBarShowsButton}
         >
           {m.navbar_link_shows()}
         </Button>
@@ -70,6 +73,7 @@
           style="ghost"
           variant="primary"
           color="purple"
+          data-testid={TestId.NavBarMoviesButton}
         >
           {m.navbar_link_movies()}
         </Button>

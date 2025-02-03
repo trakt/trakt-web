@@ -40,6 +40,7 @@ const config = {
       '$mocks': './src/mocks',
       '$test': './test',
       '$style': 'src/style',
+      '$e2e': './e2e',
     },
   },
 };
