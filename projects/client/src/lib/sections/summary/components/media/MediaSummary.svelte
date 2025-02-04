@@ -23,9 +23,9 @@
   import SummaryHeader from "../summary/SummaryHeader.svelte";
   import SummaryOverview from "../summary/SummaryOverview.svelte";
   import SummaryTitle from "../summary/SummaryTitle.svelte";
-  import MediaDetails from "./MediaDetails.svelte";
+  import MediaDetails from "./_internal/MediaDetails.svelte";
+  import MediaWatchNowServices from "./_internal/MediaWatchNowServices.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
-  import MediaWatchNowServices from "./MediaWatchNowServices.svelte";
 
   const {
     media,

@@ -3,22 +3,15 @@
 
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
   import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
-  import type { CrewMember, MediaCrew } from "$lib/requests/models/MediaCrew";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { MediaStudio } from "$lib/requests/models/MediaStudio";
+  import type { CrewMember } from "$lib/requests/models/MediaCrew";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
   import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
-  import CollapsableValues from "./_internal/CollapsableValues.svelte";
-  import DetailsGrid from "./_internal/DetailsGrid.svelte";
-
-  export type MediaDetailsProps = {
-    media: MediaEntry;
-    studios: MediaStudio[];
-    crew: MediaCrew;
-  };
+  import CollapsableValues from "./CollapsableValues.svelte";
+  import DetailsGrid from "./DetailsGrid.svelte";
+  import type { MediaDetailsProps } from "./MediaDetailsProps";
 
   const { media, studios, crew }: MediaDetailsProps = $props();
 

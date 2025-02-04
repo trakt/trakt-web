@@ -2,10 +2,10 @@ import { MAX_DATE } from '$lib/utils/constants.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
 import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticStudiosMappedMock.ts';
-import MediaDetails, { type MediaDetailsProps } from './MediaDetails.svelte';
-
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
+import MediaDetails from './MediaDetails.svelte';
+import type { MediaDetailsProps } from './MediaDetailsProps.ts';
 
 describe('MediaDetails', () => {
   const defaultProps: MediaDetailsProps = {

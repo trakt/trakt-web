@@ -4,8 +4,8 @@
     WatchNowServices,
     WatchNowStreaming,
   } from "$lib/requests/models/WatchNowServices";
-  import DetailsGrid from "./_internal/DetailsGrid.svelte";
-  import WatchNowCategoryServices from "./_internal/WatchNowCategoryServices.svelte";
+  import DetailsGrid from "./DetailsGrid.svelte";
+  import WatchNowCategoryServices from "./WatchNowCategoryServices.svelte";
 
   type MediaWatchNowSourcesProps = {
     services?: WatchNowServices;
