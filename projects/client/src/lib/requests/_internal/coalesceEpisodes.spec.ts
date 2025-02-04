@@ -1,7 +1,7 @@
-import { EpisodeComputedType } from '$lib/requests/models/EpisodeType';
+import { EpisodeComputedType } from '$lib/requests/models/EpisodeType.ts';
 import { describe, expect, it } from 'vitest';
-import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery';
-import { coalesceEpisodes } from './coalesceEpisodes';
+import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery.ts';
+import { coalesceEpisodes } from './coalesceEpisodes.ts';
 
 describe('coalesceEpisodes', () => {
   it('should coalesce season premiere and finale into full season', () => {

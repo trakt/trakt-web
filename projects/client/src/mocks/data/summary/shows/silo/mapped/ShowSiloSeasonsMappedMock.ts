@@ -1,4 +1,4 @@
-import type { Season } from '$lib/requests/models/Season';
+import type { Season } from '$lib/requests/models/Season.ts';
 
 export const ShowSiloSeasonsMappedMock: Season[] = [
   {

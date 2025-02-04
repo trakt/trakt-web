@@ -1,7 +1,7 @@
-import type { ActiveWatcher } from '$lib/requests/models/ActiveWatcher';
-import type { MediaIntl } from '$lib/requests/models/MediaIntl';
-import type { MediaRating } from '$lib/requests/models/MediaRating';
-import type { MediaStats } from '$lib/requests/models/MediaStats';
+import type { ActiveWatcher } from '$lib/requests/models/ActiveWatcher.ts';
+import type { MediaIntl } from '$lib/requests/models/MediaIntl.ts';
+import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
+import type { MediaStats } from '$lib/requests/models/MediaStats.ts';
 import type { Snippet } from 'svelte';
 
 export type MediaSummaryProps<T> = {

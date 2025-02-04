@@ -1,9 +1,9 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MediaType } from '$lib/requests/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.ts';
 import { removeFromWatchlistRequest } from '$lib/requests/sync/removeFromWatchlistRequest.ts';
-import { toWatchlistPayload } from '$lib/sections/media-actions/watchlist/toWatchlistPayload';
+import { toWatchlistPayload } from '$lib/sections/media-actions/watchlist/toWatchlistPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { derived, writable } from 'svelte/store';
 

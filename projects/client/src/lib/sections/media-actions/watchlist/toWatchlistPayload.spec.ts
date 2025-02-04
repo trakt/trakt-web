@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toWatchlistPayload } from './toWatchlistPayload';
+import { toWatchlistPayload } from './toWatchlistPayload.ts';
 
 describe('toWatchlistPayload', () => {
   it('should create movie watchlist payload', () => {

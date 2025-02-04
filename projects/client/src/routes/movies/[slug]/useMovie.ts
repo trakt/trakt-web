@@ -1,5 +1,5 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
-import { useQuery } from '$lib/features/query/useQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';

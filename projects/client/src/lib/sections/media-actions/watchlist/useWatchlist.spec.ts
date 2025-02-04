@@ -1,13 +1,13 @@
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction';
-import { useInvalidator } from '$lib/stores/useInvalidator';
-import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock';
-import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock';
-import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock';
-import { renderStore } from '$test/beds/store/renderStore';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
+import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
+import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
-import { useWatchlist, type WatchlistStoreProps } from './useWatchlist';
+import { useWatchlist, type WatchlistStoreProps } from './useWatchlist.ts';
 
 vi.mock('$lib/stores/useInvalidator.ts');
 

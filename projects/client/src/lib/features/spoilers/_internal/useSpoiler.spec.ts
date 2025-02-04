@@ -1,13 +1,13 @@
-import { clone } from '$lib/utils/object/clone';
-import { deepAssign } from '$lib/utils/object/deepAssign';
-import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock';
-import { server } from '$mocks/server';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore';
-import { waitForEmission } from '$test/readable/waitForEmission';
-import { waitForValue } from '$test/readable/waitForValue';
+import { clone } from '$lib/utils/object/clone.ts';
+import { deepAssign } from '$lib/utils/object/deepAssign.ts';
+import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
+import { server } from '$mocks/server.ts';
+import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
+import { waitForEmission } from '$test/readable/waitForEmission.ts';
+import { waitForValue } from '$test/readable/waitForValue.ts';
 import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
-import { useSpoiler } from './useSpoiler';
+import { useSpoiler } from './useSpoiler.ts';
 
 describe('store: useSpoiler', () => {
   it('should return false when user is not authorized', async () => {

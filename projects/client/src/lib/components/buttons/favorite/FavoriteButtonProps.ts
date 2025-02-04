@@ -1,4 +1,4 @@
-import type { FavoriteButtonIntl } from './FavoriteButtonIntl';
+import type { FavoriteButtonIntl } from './FavoriteButtonIntl.ts';
 
 export type FavoriteButtonProps = {
   i18n?: FavoriteButtonIntl;

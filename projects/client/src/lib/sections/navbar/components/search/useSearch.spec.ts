@@ -1,7 +1,7 @@
-import { renderStore } from '$test/beds/store/renderStore';
+import { renderStore } from '$test/beds/store/renderStore.ts';
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { useSearch } from './useSearch';
+import { useSearch } from './useSearch.ts';
 
 describe('useSearch', () => {
   it('should initialize with empty results', async () => {

@@ -4,9 +4,9 @@ import type {
   CrewMember,
   MediaCrew,
 } from '$lib/requests/models/MediaCrew.ts';
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants';
-import { findDefined } from '$lib/utils/string/findDefined';
-import { prependHttps } from '$lib/utils/url/prependHttps';
+import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
+import { findDefined } from '$lib/utils/string/findDefined.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 
 function toCrewMember(
   crewResponse: CrewResponse,

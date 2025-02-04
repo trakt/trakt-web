@@ -1,5 +1,5 @@
-import { print, PrintTarget } from '$lib/utils/console/print';
-import { IS_PROD } from '../env';
+import { print, PrintTarget } from '$lib/utils/console/print.ts';
+import { IS_PROD } from '$lib/utils/env/index.ts';
 
 export function monitor<
   TThis = unknown,

@@ -1,5 +1,5 @@
-import { useAuth } from '$lib/features/auth/stores/useAuth';
-import { useUser } from '$lib/features/auth/stores/useUser';
+import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { derived } from 'svelte/store';
 
 export function useSpoiler() {

@@ -1,5 +1,5 @@
-import type { WatchNowStreaming } from '$lib/requests/models/WatchNowServices';
-import type { WatchNowButtonIntl } from './WatchNowButtonIntl';
+import type { WatchNowStreaming } from '$lib/requests/models/WatchNowServices.ts';
+import type { WatchNowButtonIntl } from './WatchNowButtonIntl.ts';
 
 export type WatchNowButtonProps = {
   mediaTitle: string;

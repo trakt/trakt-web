@@ -1,13 +1,13 @@
-import { clone } from '$lib/utils/object/clone';
-import { deepAssign } from '$lib/utils/object/deepAssign';
-import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock';
-import { WatchedMoviesResponseMock } from '$mocks/data/users/response/WatchedMoviesResponseMock';
-import { server } from '$mocks/server';
-import { renderStore, setAuthorization } from '$test/beds/store/renderStore';
+import { clone } from '$lib/utils/object/clone.ts';
+import { deepAssign } from '$lib/utils/object/deepAssign.ts';
+import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
+import { WatchedMoviesResponseMock } from '$mocks/data/users/response/WatchedMoviesResponseMock.ts';
+import { server } from '$mocks/server.ts';
+import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitFor } from '@testing-library/svelte';
 import { http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
-import { useSpoilerAction } from './useSpoilerAction';
+import { useSpoilerAction } from './useSpoilerAction.ts';
 
 describe('action: useSpoilerAction', () => {
   it('should add spoiler class when isSpoilerHidden is true', async () => {

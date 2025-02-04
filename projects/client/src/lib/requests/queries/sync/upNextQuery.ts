@@ -1,14 +1,14 @@
 import type { SortDirection, UpNextResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
-import { api, type ApiParams } from '$lib/requests/api';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeProgressEntrySchema } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
-import { time } from '$lib/utils/timing/time';
+import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
 export const UpNextEntrySchema = EpisodeProgressEntrySchema.merge(z.object({

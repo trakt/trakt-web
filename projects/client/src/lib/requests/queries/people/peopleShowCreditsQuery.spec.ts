@@ -3,7 +3,7 @@ import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { PersonFergusonShowCreditsMappedMock } from '../../../../mocks/data/people/mapped/PersonFergusonShowCreditsMappedMock.js';
-import { peopleShowCreditsQuery } from './peopleShowCreditsQuery';
+import { peopleShowCreditsQuery } from './peopleShowCreditsQuery.ts';
 
 describe('peopleShowCreditsQuery', () => {
   it('should query for show credits', async () => {

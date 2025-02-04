@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildOAuthUrl } from './buildOAuthLink';
+import { buildOAuthUrl } from './buildOAuthLink.ts';
 
 describe('buildOAuthUrl', () => {
   it('should build proper oauth url with https', () => {

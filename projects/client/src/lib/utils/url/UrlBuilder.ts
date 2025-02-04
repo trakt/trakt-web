@@ -1,5 +1,5 @@
-import type { MediaType } from '$lib/requests/models/MediaType';
-import { buildParamString } from './buildParamString';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { buildParamString } from './buildParamString.ts';
 
 type PaginatableMediaPageUrl = {
   type: MediaType | 'episode';

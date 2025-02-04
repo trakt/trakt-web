@@ -4,10 +4,10 @@ import {
   EpisodeComputedType,
   EpisodeFinaleType,
   EpisodePremiereType,
-} from '$lib/requests/models/EpisodeType';
+} from '$lib/requests/models/EpisodeType.ts';
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, test, vi } from 'vitest';
-import { EpisodeIntlProvider } from '../EpisodeIntlProvider';
+import { EpisodeIntlProvider } from '../EpisodeIntlProvider.ts';
 
 vi.mock('$lib/stores/useMarkAsWatched');
 

@@ -1,4 +1,4 @@
-import type { EpisodeIntl } from '$lib/requests/models/EpisodeIntl';
+import type { EpisodeIntl } from '$lib/requests/models/EpisodeIntl.ts';
 
 export const EpisodeSiloLanguageMappedMock: Map<string, EpisodeIntl> = new Map([
   [

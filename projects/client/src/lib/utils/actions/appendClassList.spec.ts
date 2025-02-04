@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { appendClassList } from './appendClassList';
+import { appendClassList } from './appendClassList.ts';
 
 describe('appendClassList', () => {
   let element: HTMLElement;

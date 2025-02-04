@@ -1,5 +1,5 @@
-import { EpisodeSiloResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloResponseMock';
-import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock';
+import { EpisodeSiloResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
+import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
 import type { HistoryEpisodesResponse } from '@trakt/api';
 
 export const HistoryEpisodesResponseMock: HistoryEpisodesResponse[] = [

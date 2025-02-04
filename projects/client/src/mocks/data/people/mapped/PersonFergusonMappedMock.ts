@@ -1,4 +1,4 @@
-import type { PersonSummary } from '$lib/requests/models/PersonSummary';
+import type { PersonSummary } from '$lib/requests/models/PersonSummary.ts';
 
 export const PersonFergusonMappedMock: PersonSummary = {
   biography:

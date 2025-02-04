@@ -1,5 +1,5 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
-import { useQuery } from '$lib/features/query/useQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { derived } from 'svelte/store';

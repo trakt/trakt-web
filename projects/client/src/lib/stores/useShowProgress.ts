@@ -1,4 +1,4 @@
-import { useQuery } from '$lib/features/query/useQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { showProgressQuery } from '$lib/requests/queries/shows/showProgressQuery.ts';
 import { derived } from 'svelte/store';
 

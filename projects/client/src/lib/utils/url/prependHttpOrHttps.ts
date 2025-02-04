@@ -1,4 +1,4 @@
-import { prependHttps } from './prependHttps';
+import { prependHttps } from './prependHttps.ts';
 
 type HttpUrl = `http://${string}`;
 

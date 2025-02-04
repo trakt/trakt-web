@@ -2,7 +2,7 @@ import { AuthEndpoint } from '$lib/features/auth/AuthEndpoint.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { setCacheBuster } from '$lib/utils/url/setCacheBuster';
+import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { getContext, setContext } from 'svelte';
 import { type Writable, writable } from 'svelte/store';
 

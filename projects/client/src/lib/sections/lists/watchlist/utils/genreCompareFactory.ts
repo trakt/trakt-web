@@ -1,5 +1,5 @@
 import type { Genre } from '$lib/api.ts';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 
 type Direction = 'asc' | 'desc';
 export type MediaSummarySortInfo = Pick<MediaEntry, 'airDate' | 'genres'>;

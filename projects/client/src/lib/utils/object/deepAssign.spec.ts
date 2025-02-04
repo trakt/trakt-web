@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deepAssign } from './deepAssign';
+import { deepAssign } from './deepAssign.ts';
 
 describe('deepAssign', () => {
   it('should merge shallow properties', () => {

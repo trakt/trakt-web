@@ -1,7 +1,7 @@
 import { isAuthorized } from '$lib/features/auth/utils/isAuthorized.ts';
 import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
-import { isBotAgent } from '$lib/utils/url/isBotAgent';
-import type { LayoutServerLoad } from './$types';
+import { isBotAgent } from '$lib/utils/url/isBotAgent.ts';
+import type { LayoutServerLoad } from './$types.ts';
 
 export const load: LayoutServerLoad = (
   { request, locals },

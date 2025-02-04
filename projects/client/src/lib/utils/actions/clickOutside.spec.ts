@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { clickOutside } from './clickOutside';
+import { clickOutside } from './clickOutside.ts';
 
 describe('clickOutside', () => {
   let node: HTMLElement;

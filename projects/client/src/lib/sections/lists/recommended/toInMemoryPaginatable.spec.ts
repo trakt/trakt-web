@@ -1,8 +1,8 @@
-import type { MediaType } from '$lib/requests/models/MediaType';
-import { resolve } from '$lib/utils/store/resolve';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { resolve } from '$lib/utils/store/resolve.ts';
 import { readable } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { toInMemoryPaginatable } from './toInMemoryPaginatable';
+import { toInMemoryPaginatable } from './toInMemoryPaginatable.ts';
 
 describe('toInMemoryPaginatable', () => {
   it('should paginate list correctly', async () => {

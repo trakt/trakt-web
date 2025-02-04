@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { computeVariable } from './computeVariable';
+import { computeVariable } from './computeVariable.ts';
 
 describe('computeVariable', () => {
   beforeEach(() => {

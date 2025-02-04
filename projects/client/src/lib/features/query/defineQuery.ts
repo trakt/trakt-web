@@ -1,6 +1,6 @@
-import type { ApiParams } from '$lib/requests/api';
-import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction';
-import { monitor } from '$lib/utils/perf/monitor';
+import type { ApiParams } from '$lib/requests/api.ts';
+import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction.ts';
+import { monitor } from '$lib/utils/perf/monitor.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import type { z, ZodType } from 'zod';
 import { zodToHash } from './_internal/zodToHash.ts';

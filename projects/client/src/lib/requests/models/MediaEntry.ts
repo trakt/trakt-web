@@ -1,8 +1,8 @@
 import { genreOptionSchema } from '@trakt/api';
 import { z } from 'zod';
-import { HttpsUrlSchema } from './HttpsUrlSchema';
-import { MediaStatusSchema } from './MediaStatus';
-import { MediaTypeSchema } from './MediaType';
+import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
+import { MediaStatusSchema } from './MediaStatus.ts';
+import { MediaTypeSchema } from './MediaType.ts';
 
 const ImageUrlsSchema = z.object({
   medium: HttpsUrlSchema,

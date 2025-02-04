@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Readable } from 'svelte/store';
 
 export type MediaStore<T, M = MediaType> = (

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
-import { zodToHash } from './zodToHash';
+import { zodToHash } from './zodToHash.ts';
 
 describe('zodToHash', () => {
   it('should generate consistent hash for same schema', () => {

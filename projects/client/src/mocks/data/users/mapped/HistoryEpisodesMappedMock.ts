@@ -1,6 +1,6 @@
-import type { HistoryEpisode } from '$lib/requests/queries/users/episodeHistoryQuery';
-import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloMappedMock';
-import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock';
+import type { HistoryEpisode } from '$lib/requests/queries/users/episodeHistoryQuery.ts';
+import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloMappedMock.ts';
+import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 
 export const HistoryEpisodesMappedMock: HistoryEpisode[] = [
   {

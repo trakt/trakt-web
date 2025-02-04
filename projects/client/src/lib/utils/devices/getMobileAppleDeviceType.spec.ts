@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getMobileAppleDeviceType } from './getMobileAppleDeviceType';
+import { getMobileAppleDeviceType } from './getMobileAppleDeviceType.ts';
 
 describe('getMobileAppleDeviceType', () => {
   afterEach(() => {

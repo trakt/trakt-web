@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { mobileAppleDeviceTriggerHack } from './mobileAppleDeviceTriggerHack';
+import { mobileAppleDeviceTriggerHack } from './mobileAppleDeviceTriggerHack.ts';
 
 describe('mobileAppleDeviceTriggerHack', () => {
   afterEach(() => {

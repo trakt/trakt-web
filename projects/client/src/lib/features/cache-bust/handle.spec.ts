@@ -1,6 +1,6 @@
-import { interceptHandleResolveOptions } from '$test/resolve/interceptHandleResolveOptions';
+import { interceptHandleResolveOptions } from '$test/resolve/interceptHandleResolveOptions.ts';
 import { describe, expect, it } from 'vitest';
-import { handle, TIMESTAMP_PLACEHOLDER } from './handle';
+import { handle, TIMESTAMP_PLACEHOLDER } from './handle.ts';
 
 describe('handle: cache-bust', () => {
   it('should replace timestamp placeholder with current timestamp', async () => {

@@ -1,11 +1,11 @@
-import * as m from '$lib/features/i18n/messages';
+import * as m from '$lib/features/i18n/messages.ts';
 
-import { getLocale, languageTag } from '$lib/features/i18n';
-import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration';
+import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
+import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 
-import { toHumanETA } from '$lib/utils/formatting/date/toHumanETA';
-import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber';
-import type { TagIntl } from './TagIntl';
+import { toHumanETA } from '$lib/utils/formatting/date/toHumanETA.ts';
+import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
+import type { TagIntl } from './TagIntl.ts';
 
 export const TagIntlProvider: TagIntl = {
   toDuration: (duration) =>

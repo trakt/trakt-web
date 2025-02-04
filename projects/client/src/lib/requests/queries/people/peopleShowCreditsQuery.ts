@@ -2,7 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
-import { time } from '$lib/utils/timing/time';
+import { time } from '$lib/utils/timing/time.ts';
 
 type PeopleShowCreditsParams = { slug: string } & ApiParams;
 

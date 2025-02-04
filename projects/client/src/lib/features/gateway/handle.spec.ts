@@ -1,7 +1,7 @@
-import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock';
-import { mockRequestEvent } from '$test/request/mockRequestEvent';
+import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock.ts';
+import { mockRequestEvent } from '$test/request/mockRequestEvent.ts';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { handle } from './handle';
+import { handle } from './handle.ts';
 
 describe('handle: gateway', () => {
   const fetch = vi.fn();

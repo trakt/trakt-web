@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildParamString } from './buildParamString';
+import { buildParamString } from './buildParamString.ts';
 
 describe('buildParamString', () => {
   it('should build a query string from params object', () => {

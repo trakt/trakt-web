@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { HttpsUrlSchema } from './HttpsUrlSchema';
+import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 
 export const PersonSummarySchema = z.object({
   name: z.string(),

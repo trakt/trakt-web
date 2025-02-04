@@ -1,5 +1,5 @@
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
-import { EpisodePremiereType } from '$lib/requests/models/EpisodeType';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import { EpisodePremiereType } from '$lib/requests/models/EpisodeType.ts';
 
 export const EpisodeSiloMappedMock: EpisodeEntry = {
   'id': 5165667,

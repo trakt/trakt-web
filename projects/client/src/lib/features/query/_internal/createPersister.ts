@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { error } from '$lib/utils/console/print.ts';
-import { NOOP_FN } from '$lib/utils/constants';
-import { monitor } from '$lib/utils/perf/monitor';
+import { NOOP_FN } from '$lib/utils/constants.ts';
+import { monitor } from '$lib/utils/perf/monitor.ts';
 import type {
   PersistedClient,
   Persister,

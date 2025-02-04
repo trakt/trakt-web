@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toMap } from './toMap';
+import { toMap } from './toMap.ts';
 
 describe('toMap', () => {
   it('should convert array to map using mapping function', () => {

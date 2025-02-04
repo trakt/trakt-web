@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toPercentage } from './toPercentage';
+import { toPercentage } from './toPercentage.ts';
 
 describe('toPercentage', () => {
   it('should format decimal to percentage', () => {

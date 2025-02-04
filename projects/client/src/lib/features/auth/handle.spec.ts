@@ -1,12 +1,12 @@
-import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock';
-import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock';
-import { EncryptedExpiredAuthMock } from '$mocks/data/auth/EncryptedExpiredAuthMock';
-import { mockRequestEvent } from '$test/request/mockRequestEvent';
+import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock.ts';
+import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock.ts';
+import { EncryptedExpiredAuthMock } from '$mocks/data/auth/EncryptedExpiredAuthMock.ts';
+import { mockRequestEvent } from '$test/request/mockRequestEvent.ts';
 import { describe, expect, it, vi } from 'vitest';
-import { AuthEndpoint } from './AuthEndpoint';
-import { key } from './environment';
-import { AUTH_COOKIE_NAME, handle } from './handle';
-import { decrypt } from './utils/decrypt';
+import { AuthEndpoint } from './AuthEndpoint.ts';
+import { key } from './environment.ts';
+import { AUTH_COOKIE_NAME, handle } from './handle.ts';
+import { decrypt } from './utils/decrypt.ts';
 
 describe('handle: auth', () => {
   it('should handle logout', async () => {

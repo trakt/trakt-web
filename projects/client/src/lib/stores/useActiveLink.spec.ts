@@ -1,6 +1,6 @@
 import { afterNavigate } from '$app/navigation';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
-import { useActiveLink } from './useActiveLink';
+import { useActiveLink } from './useActiveLink.ts';
 
 vi.mock('$app/state', () => ({
   page: {

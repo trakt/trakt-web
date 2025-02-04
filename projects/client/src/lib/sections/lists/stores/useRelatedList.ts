@@ -1,5 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
-import { type MovieEntry } from '$lib/requests/models/MovieEntry';
+import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import { movieRelatedQuery } from '$lib/requests/queries/movies/movieRelatedQuery.ts';
 import {
   type RelatedShow,

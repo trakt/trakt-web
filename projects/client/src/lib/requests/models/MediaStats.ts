@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { EpisodeStatsSchema } from './EpisodeStats';
+import { EpisodeStatsSchema } from './EpisodeStats.ts';
 
 export const MediaStatsSchema = EpisodeStatsSchema.extend({
   votes: z.number(),

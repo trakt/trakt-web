@@ -1,5 +1,5 @@
-import { useQuery } from '$lib/features/query/useQuery';
-import type { Paginatable } from '$lib/requests/models/Paginatable';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import {
   episodeHistoryQuery,
   type HistoryEpisode,
@@ -9,7 +9,7 @@ import {
   movieHistoryQuery,
 } from '$lib/requests/queries/users/movieHistoryQuery.ts';
 import { getPastMonthRange } from '$lib/utils/date/getPastMonthRange.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 

@@ -1,5 +1,5 @@
-import type { AnticipatedMovie } from '$lib/requests/queries/movies/movieAnticipatedQuery';
-import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock';
+import type { AnticipatedMovie } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
+import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 
 export const MoviesAnticipatedMappedMock: AnticipatedMovie[] = [
   {

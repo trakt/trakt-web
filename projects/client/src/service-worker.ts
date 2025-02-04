@@ -6,7 +6,7 @@ import {
   NetworkFirst,
   StaleWhileRevalidate,
 } from 'workbox-strategies';
-import { time } from './lib/utils/timing/time';
+import { time } from './lib/utils/timing/time.ts';
 
 declare global {
   interface ServiceWorkerGlobalScope {

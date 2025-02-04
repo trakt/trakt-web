@@ -1,4 +1,4 @@
-import type { WatchNowServices } from '$lib/requests/models/WatchNowServices';
+import type { WatchNowServices } from '$lib/requests/models/WatchNowServices.ts';
 
 export const EpisodeSiloWatchNowMappedMock: WatchNowServices = {
   'onDemand': [],

@@ -1,4 +1,4 @@
-import type { MediaIntl } from '$lib/requests/models/MediaIntl';
+import type { MediaIntl } from '$lib/requests/models/MediaIntl.ts';
 
 export const MovieHereticPortugueseMappedMock: MediaIntl = {
   'overview':

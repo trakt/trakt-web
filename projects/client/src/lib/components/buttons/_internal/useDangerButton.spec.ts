@@ -1,8 +1,8 @@
-import { useMedia } from '$lib/stores/css/useMedia';
-import { renderStore } from '$test/beds/store/renderStore';
+import { useMedia } from '$lib/stores/css/useMedia.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
 import { get, writable } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { useDangerButton } from './useDangerButton';
+import { useDangerButton } from './useDangerButton.ts';
 
 vi.mock('$lib/stores/css/useMedia');
 

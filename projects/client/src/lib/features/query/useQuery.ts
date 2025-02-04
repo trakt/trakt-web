@@ -1,13 +1,13 @@
 import { browser } from '$app/environment';
-import { invalidationId } from '$lib/requests/models/InvalidateAction';
-import { time } from '$lib/utils/timing/time';
+import { invalidationId } from '$lib/requests/models/InvalidateAction.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import {
   createQuery,
   type CreateQueryOptions,
   useQueryClient,
 } from '@tanstack/svelte-query';
 import { onMount } from 'svelte';
-import { queryId } from './defineQuery';
+import { queryId } from './defineQuery.ts';
 
 const INVALIDATION_MAP = new Map<string, number>();
 

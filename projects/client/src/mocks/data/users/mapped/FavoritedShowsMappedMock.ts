@@ -1,4 +1,4 @@
-import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry';
+import type { FavoritedEntry } from '$lib/requests/models/FavoritedEntry.ts';
 
 export const FavoritedShowsMappedMock: FavoritedEntry[] = [
   {

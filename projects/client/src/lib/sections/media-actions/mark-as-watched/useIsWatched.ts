@@ -1,4 +1,4 @@
-import { useUser } from '$lib/features/auth/stores/useUser';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { derived } from 'svelte/store';
 import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 

@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { assertDefined } from '$lib/utils/assert/assertDefined';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onDestroy } from 'svelte';
 import { writable } from 'svelte/store';

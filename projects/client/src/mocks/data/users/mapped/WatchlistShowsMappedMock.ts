@@ -1,4 +1,4 @@
-import type { WatchlistShow } from '$lib/requests/queries/users/showWatchlistQuery';
+import type { WatchlistShow } from '$lib/requests/queries/users/showWatchlistQuery.ts';
 
 export const WatchlistShowsMappedMock: WatchlistShow[] = [
   {

@@ -1,4 +1,4 @@
-import type { WatchlistMovie } from '$lib/requests/queries/users/movieWatchlistQuery';
+import type { WatchlistMovie } from '$lib/requests/queries/users/movieWatchlistQuery.ts';
 
 export const WatchlistMoviesMappedMock: WatchlistMovie[] = [
   {

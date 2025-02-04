@@ -1,4 +1,4 @@
-import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse';
+import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
 
 export const AuthMappedMock: SerializedAuthResponse = {
   token: {

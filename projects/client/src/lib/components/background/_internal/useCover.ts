@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { getContext, setContext } from 'svelte';
 import { type Writable, writable } from 'svelte/store';
 

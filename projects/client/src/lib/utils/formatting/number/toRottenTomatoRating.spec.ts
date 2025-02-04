@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toRottenTomatoRating } from './toRottenTomatoRating';
+import { toRottenTomatoRating } from './toRottenTomatoRating.ts';
 
 describe('toRottenTomatoRating', () => {
   it('should return "unrated" when rating is 0', () => {

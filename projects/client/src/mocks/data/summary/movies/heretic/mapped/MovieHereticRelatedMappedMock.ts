@@ -1,5 +1,5 @@
-import type { MovieEntry } from '$lib/requests/models/MovieEntry';
-import { MovieMatrixMappedMock } from '../../matrix/MovieMatrixMappedMock';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import { MovieMatrixMappedMock } from '../../matrix/MovieMatrixMappedMock.ts';
 
 export const MovieHereticRelatedMappedMock: MovieEntry[] = [
   MovieMatrixMappedMock,

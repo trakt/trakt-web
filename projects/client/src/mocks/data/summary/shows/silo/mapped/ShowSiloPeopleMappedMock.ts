@@ -1,4 +1,4 @@
-import type { MediaCrew } from '$lib/requests/models/MediaCrew';
+import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
 
 export const ShowSiloPeopleMappedMock: MediaCrew = {
   'cast': [

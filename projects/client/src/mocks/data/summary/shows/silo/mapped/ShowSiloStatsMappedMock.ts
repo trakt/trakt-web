@@ -1,4 +1,4 @@
-import type { MediaStats } from '$lib/requests/models/MediaStats';
+import type { MediaStats } from '$lib/requests/models/MediaStats.ts';
 
 export const ShowSiloStatsMappedMock: MediaStats = {
   'watchers': 127434,

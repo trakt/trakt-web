@@ -1,4 +1,4 @@
-import type { ShowEntry } from '$lib/requests/models/ShowEntry';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 
 export const ShowDevsMappedMock: ShowEntry = {
   'id': 147971,

@@ -1,4 +1,4 @@
-import type { EpisodeStats } from '$lib/requests/models/EpisodeStats';
+import type { EpisodeStats } from '$lib/requests/models/EpisodeStats.ts';
 
 export const EpisodeSiloStatsMappedMock: EpisodeStats = {
   'watchers': 127434,

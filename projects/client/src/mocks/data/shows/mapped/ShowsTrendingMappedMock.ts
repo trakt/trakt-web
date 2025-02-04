@@ -1,6 +1,6 @@
-import type { TrendingShow } from '$lib/requests/queries/shows/showTrendingQuery';
-import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock';
-import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock';
+import type { TrendingShow } from '$lib/requests/queries/shows/showTrendingQuery.ts';
+import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
+import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 
 export const ShowsTrendingMappedMock: TrendingShow[] = [
   {

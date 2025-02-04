@@ -1,4 +1,4 @@
-import type { WatchNowSource } from '$lib/requests/models/WatchNowSources';
+import type { WatchNowSource } from '$lib/requests/models/WatchNowSources.ts';
 
 export const WatchNowSourcesMappedMock: Map<string, WatchNowSource[]> = new Map(
   [

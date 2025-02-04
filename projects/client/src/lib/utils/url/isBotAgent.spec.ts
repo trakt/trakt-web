@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isBotAgent } from './isBotAgent';
+import { isBotAgent } from './isBotAgent.ts';
 
 describe('isBotAgent', () => {
   it('should return true for known bot user agents', () => {

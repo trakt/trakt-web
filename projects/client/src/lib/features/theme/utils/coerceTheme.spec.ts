@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { Theme } from '../models/Theme';
-import { coerceTheme } from './coerceTheme';
+import { Theme } from '../models/Theme.ts';
+import { coerceTheme } from './coerceTheme.ts';
 
 describe('util: coerceTheme', () => {
   it('should return the default theme', () => {

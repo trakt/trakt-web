@@ -1,4 +1,4 @@
-import { useQuery } from '$lib/features/query/useQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';

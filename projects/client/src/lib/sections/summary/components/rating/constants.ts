@@ -1,4 +1,4 @@
-import { SimpleRating } from '$lib/models/SimpleRating';
+import { SimpleRating } from '$lib/models/SimpleRating.ts';
 
 type SimpleRatingMap = {
   [key in SimpleRating]: number;

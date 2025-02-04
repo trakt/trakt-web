@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { useDebouncedValue } from './useDebouncedValue';
+import { useDebouncedValue } from './useDebouncedValue.ts';
 
 describe('useDebouncedValue', () => {
   beforeEach(() => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { findDefined } from './findDefined';
+import { findDefined } from './findDefined.ts';
 
 describe('findDefined', () => {
   it('should return first non-empty string', () => {

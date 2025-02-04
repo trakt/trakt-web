@@ -1,5 +1,5 @@
-import { NOOP_FN } from '../constants';
-import { getMobileAppleDeviceType } from '../devices/getMobileAppleDeviceType';
+import { NOOP_FN } from '../constants.ts';
+import { getMobileAppleDeviceType } from '../devices/getMobileAppleDeviceType.ts';
 
 export function isMobileAppleDevice() {
   const deviceType = getMobileAppleDeviceType();

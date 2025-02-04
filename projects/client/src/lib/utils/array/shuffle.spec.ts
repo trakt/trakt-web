@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shuffle } from './shuffle';
+import { shuffle } from './shuffle.ts';
 
 describe('shuffle', () => {
   it('returns an array of the same length', () => {

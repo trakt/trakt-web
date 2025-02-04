@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/private';
-import { assertDefined } from '$lib/utils/assert/assertDefined';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 
 export const key = await crypto.subtle.importKey(
   'raw',

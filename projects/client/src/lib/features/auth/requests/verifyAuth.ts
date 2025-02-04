@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/private';
 import { api } from '../../../requests/api.ts';
-import type { AuthToken } from '../models/AuthToken';
-import { getGrantTypeAndCode } from './_internal/getGrantTypeAndCode';
+import type { AuthToken } from '../models/AuthToken.ts';
+import { getGrantTypeAndCode } from './_internal/getGrantTypeAndCode.ts';
 
 export type DeviceAuth = {
   token: {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload';
+import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 
 describe('toMarkAsWatchedPayload', () => {
   const testIds = [1, 2, 3];

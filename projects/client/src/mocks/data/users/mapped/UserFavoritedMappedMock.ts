@@ -1,4 +1,4 @@
-import type { UserFavoritedEntry } from '$lib/features/auth/queries/currentUserFavoritesQuery';
+import type { UserFavoritedEntry } from '$lib/features/auth/queries/currentUserFavoritesQuery.ts';
 
 export const UserFavoritedMappedMock: {
   movies: Map<number, UserFavoritedEntry>;

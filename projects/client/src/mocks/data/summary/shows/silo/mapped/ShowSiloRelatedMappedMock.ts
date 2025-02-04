@@ -1,5 +1,5 @@
-import type { RelatedShow } from '$lib/requests/queries/shows/showRelatedQuery';
-import { ShowDevsMappedMock } from '../../devs/ShowDevsMappedMock';
+import type { RelatedShow } from '$lib/requests/queries/shows/showRelatedQuery.ts';
+import { ShowDevsMappedMock } from '../../devs/ShowDevsMappedMock.ts';
 
 export const ShowSiloRelatedMappedMock: RelatedShow[] = [
   {

@@ -1,8 +1,8 @@
-import { useQuery } from '$lib/features/query/useQuery';
-import type { MediaType } from '$lib/requests/models/MediaType';
-import { movieFavoritesQuery } from '$lib/requests/queries/movies/movieFavoritesQuery';
-import { showFavoritesQuery } from '$lib/requests/queries/shows/showFavoritesQuery';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { movieFavoritesQuery } from '$lib/requests/queries/movies/movieFavoritesQuery.ts';
+import { showFavoritesQuery } from '$lib/requests/queries/shows/showFavoritesQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
 type UseFavoritesProps = {

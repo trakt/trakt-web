@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { attachRemoveWarning } from './attachRemoveWarning';
+import { attachRemoveWarning } from './attachRemoveWarning.ts';
 
 describe('attachRemoveWarning', () => {
   it('should call handler when confirmed', () => {

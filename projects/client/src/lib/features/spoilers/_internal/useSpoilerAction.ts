@@ -1,5 +1,5 @@
-import type { MediaStoreProps } from '$lib/models/MediaStoreProps';
-import { useMediaSpoiler } from '../useMediaSpoiler';
+import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
+import { useMediaSpoiler } from '../useMediaSpoiler.ts';
 
 type SpoilerActionProps = MediaStoreProps;
 

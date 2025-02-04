@@ -1,4 +1,4 @@
-import { assertDefined } from '../assert/assertDefined';
+import { assertDefined } from '../assert/assertDefined.ts';
 
 type EventHandler<T extends Event> = (event: T) => void;
 

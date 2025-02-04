@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { triggerWithKeyboard } from './triggerWithKeyboard';
+import { triggerWithKeyboard } from './triggerWithKeyboard.ts';
 
 describe('triggerWithKeyboard', () => {
   let element: HTMLElement;

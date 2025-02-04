@@ -1,14 +1,14 @@
-import { SimpleRating } from '$lib/models/SimpleRating';
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction';
-import { useInvalidator } from '$lib/stores/useInvalidator';
-import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock';
-import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock';
-import { renderStore } from '$test/beds/store/renderStore';
-import { waitForEmission } from '$test/readable/waitForEmission';
-import { waitForValue } from '$test/readable/waitForValue';
+import { SimpleRating } from '$lib/models/SimpleRating.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { useInvalidator } from '$lib/stores/useInvalidator.ts';
+import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
+import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
+import { renderStore } from '$test/beds/store/renderStore.ts';
+import { waitForEmission } from '$test/readable/waitForEmission.ts';
+import { waitForValue } from '$test/readable/waitForValue.ts';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
-import { useRatings } from './useRatings';
+import { useRatings } from './useRatings.ts';
 
 vi.mock('$lib/stores/useInvalidator.ts');
 

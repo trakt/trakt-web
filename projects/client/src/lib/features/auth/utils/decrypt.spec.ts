@@ -1,8 +1,8 @@
-import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock';
-import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock';
-import { encryptionKeyMock } from '$mocks/data/auth/encryptionKeyMock';
+import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock.ts';
+import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock.ts';
+import { encryptionKeyMock } from '$mocks/data/auth/encryptionKeyMock.ts';
 import { describe, expect, it, vi } from 'vitest';
-import { decrypt } from './decrypt';
+import { decrypt } from './decrypt.ts';
 
 describe('utils: decrypt', () => {
   it('should decrypt', async () => {

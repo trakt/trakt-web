@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { time } from './time';
+import { time } from './time.ts';
 
 describe('time', () => {
   it('should convert seconds to milliseconds', () => {

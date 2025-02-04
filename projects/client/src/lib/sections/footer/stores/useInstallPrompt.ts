@@ -1,4 +1,4 @@
-import { time } from '$lib/utils/timing/time';
+import { time } from '$lib/utils/timing/time.ts';
 import { get, writable } from 'svelte/store';
 
 export function useInstallPrompt() {

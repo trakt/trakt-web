@@ -1,4 +1,4 @@
-import type { RatedEntry } from '$lib/features/auth/queries/currentUserRatingsQuery';
+import type { RatedEntry } from '$lib/features/auth/queries/currentUserRatingsQuery.ts';
 
 export const UserRatedMappedMock: {
   movies: Map<number, RatedEntry>;

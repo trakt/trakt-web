@@ -2,7 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
-import { time } from '$lib/utils/timing/time';
+import { time } from '$lib/utils/timing/time.ts';
 
 type EpisodeSummaryParams = {
   slug: string;

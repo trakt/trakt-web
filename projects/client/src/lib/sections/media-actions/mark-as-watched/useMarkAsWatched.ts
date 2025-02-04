@@ -10,7 +10,9 @@ import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
-export type MarkAsWatchedStoreProps = MediaStoreProps<{ id: number, airDate: Date}>;
+export type MarkAsWatchedStoreProps = MediaStoreProps<
+  { id: number; airDate: Date }
+>;
 
 export function useMarkAsWatched(
   props: MarkAsWatchedStoreProps,

@@ -1,4 +1,4 @@
-import type { MediaRating } from '$lib/requests/models/MediaRating';
+import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
 
 export const MovieHereticRatingsMappedMock: MediaRating = {
   'trakt': {

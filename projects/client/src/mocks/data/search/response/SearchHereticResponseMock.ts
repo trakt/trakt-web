@@ -1,4 +1,4 @@
-import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock';
+import { MovieHereticResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import type { SearchResultResponse } from '@trakt/api';
 
 export const SearchHereticResponseMock: SearchResultResponse = [

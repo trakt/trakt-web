@@ -1,9 +1,9 @@
-import type { MediaStoreProps } from '$lib/models/MediaStoreProps';
+import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import {
   useIsWatched,
 } from '$lib/sections/media-actions/mark-as-watched/useIsWatched';
 import { derived } from 'svelte/store';
-import { useSpoiler } from './_internal/useSpoiler';
+import { useSpoiler } from './_internal/useSpoiler.ts';
 
 export type MediaSpoilerProps = MediaStoreProps;
 

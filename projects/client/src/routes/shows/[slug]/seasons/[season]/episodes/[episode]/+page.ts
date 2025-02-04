@@ -1,6 +1,6 @@
-import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummaryQuery';
-import { assertDefined } from '$lib/utils/assert/assertDefined';
-import type { PageLoad } from './$types';
+import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummaryQuery.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import type { PageLoad } from './$types.ts';
 
 export const load: PageLoad = async ({ parent, params, fetch }) => {
   const { queryClient, isBot } = await parent();

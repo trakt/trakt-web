@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toVotesBasedRating } from './toVotesBasedRating';
+import { toVotesBasedRating } from './toVotesBasedRating.ts';
 
 describe('toVotesBasedRating', () => {
   it('should return "unrated" when votes is 0', () => {

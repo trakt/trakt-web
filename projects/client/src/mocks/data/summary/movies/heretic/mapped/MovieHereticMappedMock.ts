@@ -1,4 +1,4 @@
-import type { MovieEntry } from '$lib/requests/models/MovieEntry';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 
 export const MovieHereticMappedMock: MovieEntry = {
   'cover': {

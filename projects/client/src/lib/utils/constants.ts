@@ -1,6 +1,6 @@
 import { assets } from '$app/paths';
 import { shuffle } from '$lib/utils/array/shuffle.ts';
-import { assertDefined } from './assert/assertDefined';
+import { assertDefined } from './assert/assertDefined.ts';
 
 /**
  * This cover is the Alien Isolation cover.

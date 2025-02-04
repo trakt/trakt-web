@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertDefined } from './assertDefined';
+import { assertDefined } from './assertDefined.ts';
 
 describe('assertDefined', () => {
   it('should return the value if defined', () => {

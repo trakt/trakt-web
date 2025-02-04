@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { resolve } from './resolve';
+import { resolve } from './resolve.ts';
 
 describe('resolve', () => {
   it('should resolve the current value of a store', async () => {

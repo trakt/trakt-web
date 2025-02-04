@@ -1,6 +1,6 @@
-import { NOOP_FN } from '$lib/utils/constants';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import type { Writable } from 'svelte/store';
-import { GlobalEventBus } from '../../utils/events/GlobalEventBus';
+import { GlobalEventBus } from '../../utils/events/GlobalEventBus.ts';
 
 type LineClampProps = {
   lines: number;

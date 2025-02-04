@@ -1,7 +1,7 @@
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
-import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 
 export type EpisodeItemVariant =
   | { type: 'next'; episode: EpisodeProgressEntry }

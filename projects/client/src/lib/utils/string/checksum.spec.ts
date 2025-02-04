@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checksum } from './checksum';
+import { checksum } from './checksum.ts';
 
 describe('checksum', () => {
   it('should generate consistent checksums for same input', () => {

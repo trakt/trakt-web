@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { random } from './random';
+import { random } from './random.ts';
 
 describe('random', () => {
   it('should generate number within range', () => {

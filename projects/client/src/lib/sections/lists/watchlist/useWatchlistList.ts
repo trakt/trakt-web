@@ -1,6 +1,6 @@
 import type { SortType } from '$lib/api.ts';
-import { useQuery } from '$lib/features/query/useQuery';
-import type { MediaType } from '$lib/requests/models/MediaType';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import {
   movieWatchlistQuery,
   type WatchlistMovie,
@@ -9,7 +9,7 @@ import {
   showWatchlistQuery,
   type WatchlistShow,
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
 export type WatchListParams = {

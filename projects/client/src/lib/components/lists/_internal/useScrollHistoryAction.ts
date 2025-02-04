@@ -1,6 +1,6 @@
 import { onMount } from 'svelte';
 import { writable } from 'svelte/store';
-import { useScrollHistory } from './useScrollHistory';
+import { useScrollHistory } from './useScrollHistory.ts';
 
 export function useScrollHistoryAction(
   id: string,

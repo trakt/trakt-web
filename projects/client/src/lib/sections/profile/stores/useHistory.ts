@@ -1,4 +1,4 @@
-import { useQuery } from '$lib/features/query/useQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { movieHistoryQuery } from '$lib/requests/queries/users/movieHistoryQuery.ts';
 import { showHistoryQuery } from '$lib/requests/queries/users/showHistoryQuery.ts';
 import { getPastMonthRange } from '$lib/utils/date/getPastMonthRange.ts';

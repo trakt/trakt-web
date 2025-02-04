@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clone } from './clone';
+import { clone } from './clone.ts';
 
 describe('clone', () => {
   it('should create a deep copy of an object', () => {

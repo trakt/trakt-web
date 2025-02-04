@@ -1,6 +1,6 @@
-import type { WatchNowOnDemand } from '$lib/requests/models/WatchNowServices';
+import type { WatchNowOnDemand } from '$lib/requests/models/WatchNowServices.ts';
 import { describe, expect, it } from 'vitest';
-import { getMediaCost } from './getMediaCost';
+import { getMediaCost } from './getMediaCost.ts';
 
 describe('getMediaCost', () => {
   it('should return an empty string if there are no rent or purchase prices', () => {

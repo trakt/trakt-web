@@ -1,7 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { useQuery } from '$lib/features/query/useQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { upNextQuery } from '$lib/requests/queries/sync/upNextQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
 const UP_NEXT_LIMIT = 100;

@@ -1,3 +1,5 @@
+import { IS_PROD } from '$lib/utils/env/index.ts';
+
 export enum LogLevel {
   Log = 'log',
   Warn = 'warn',
@@ -36,7 +38,7 @@ export function print(
   ...args: unknown[]
 ) {
   // Skip if we're in production
-  if (process.env.NODE_ENV === 'production') {
+  if (IS_PROD) {
     return;
   }
 

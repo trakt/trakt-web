@@ -1,4 +1,4 @@
-import { useAuth } from '$lib/features/auth/stores/useAuth';
+import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { derived, get, writable } from 'svelte/store';
 

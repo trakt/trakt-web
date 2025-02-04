@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
 
 export type DrillListProps<T, M = MediaType> = {

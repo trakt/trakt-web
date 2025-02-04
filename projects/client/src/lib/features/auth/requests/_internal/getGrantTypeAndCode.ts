@@ -1,4 +1,4 @@
-import type { AuthToken } from '../../models/AuthToken';
+import type { AuthToken } from '../../models/AuthToken.ts';
 
 type ExchangeBody = {
   grant_type: 'authorization_code';

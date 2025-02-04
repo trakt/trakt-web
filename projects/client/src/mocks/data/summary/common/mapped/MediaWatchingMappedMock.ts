@@ -1,4 +1,4 @@
-import type { ActiveWatcher } from '$lib/requests/models/ActiveWatcher';
+import type { ActiveWatcher } from '$lib/requests/models/ActiveWatcher.ts';
 
 export const MediaWatchingMappedMock: ActiveWatcher[] = [
   {

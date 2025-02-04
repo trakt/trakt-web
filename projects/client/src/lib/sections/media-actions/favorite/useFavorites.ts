@@ -1,8 +1,8 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest';
-import { removeFromFavoritesRequest } from '$lib/requests/sync/removeFromFavoritesRequest';
+import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest.ts';
+import { removeFromFavoritesRequest } from '$lib/requests/sync/removeFromFavoritesRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { derived, writable } from 'svelte/store';
 

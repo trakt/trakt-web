@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MediaEntrySchema } from './MediaEntry';
+import { MediaEntrySchema } from './MediaEntry.ts';
 
 export const FavoritedEntrySchema = z.object({
   favoritedAt: z.coerce.date(),

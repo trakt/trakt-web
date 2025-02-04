@@ -1,7 +1,7 @@
-import type { MediaType } from '$lib/requests/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { derived, readable } from 'svelte/store';
-import type { MediaStore } from '../drilldown/MediaStore';
-import type { PaginatableStore } from '../drilldown/PaginatableStore';
+import type { MediaStore } from '../drilldown/MediaStore.ts';
+import type { PaginatableStore } from '../drilldown/PaginatableStore.ts';
 
 export const toInMemoryPaginatable = <T>(params: {
   useList: MediaStore<T>;

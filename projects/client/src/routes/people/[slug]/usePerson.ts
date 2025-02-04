@@ -1,5 +1,5 @@
-import { useQuery } from '$lib/features/query/useQuery';
-import { peopleSummaryQuery } from '$lib/requests/queries/people/peopleSummaryQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import { peopleSummaryQuery } from '$lib/requests/queries/people/peopleSummaryQuery.ts';
 import { derived } from 'svelte/store';
 
 export function usePerson(slug: string) {

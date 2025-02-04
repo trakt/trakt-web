@@ -1,7 +1,7 @@
-import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput';
-import type { MediaType } from '$lib/requests/models/MediaType';
+import type { MediaInput, MediaInputDefault } from '$lib/models/MediaInput.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
-import type { MediaStyleProps } from './MediaStyleProps';
+import type { MediaStyleProps } from './MediaStyleProps.ts';
 
 export type MediaCardProps<T = MediaInputDefault> =
   & {

@@ -1,4 +1,4 @@
-import { EpisodeIntlSchema } from '$lib/requests/models/EpisodeIntl';
+import { EpisodeIntlSchema } from '$lib/requests/models/EpisodeIntl.ts';
 import { z } from 'zod';
 
 export const MediaIntlSchema = EpisodeIntlSchema.extend({

@@ -1,8 +1,8 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapStatsResponseToEpisodeStats } from '$lib/requests/_internal/mapStatsResponseToEpisodeStats';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { EpisodeStatsSchema } from '$lib/requests/models/EpisodeStats';
-import { time } from '$lib/utils/timing/time';
+import { EpisodeStatsSchema } from '$lib/requests/models/EpisodeStats.ts';
+import { time } from '$lib/utils/timing/time.ts';
+import { mapStatsResponseToEpisodeStats } from '../../_internal/mapStatsResponseToEpisodeStats.ts';
 
 type EpisodeStatsParams = {
   slug: string;

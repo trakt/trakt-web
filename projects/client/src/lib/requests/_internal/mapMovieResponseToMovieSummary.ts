@@ -2,8 +2,8 @@ import type { MovieCertificationResponse, MovieResponse } from '$lib/api.ts';
 import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { MovieEntry } from '../models/MovieEntry.ts';
-import { mapCover } from './mapCover';
-import { mapPoster } from './mapPoster';
+import { mapCover } from './mapCover.ts';
+import { mapPoster } from './mapPoster.ts';
 
 function mapMovieCertificationResponse(
   certification?: MovieCertificationResponse,

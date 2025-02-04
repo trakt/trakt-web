@@ -1,11 +1,11 @@
-import type { ActiveWatcher } from '$lib/requests/models/ActiveWatcher';
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
-import type { EpisodeIntl } from '$lib/requests/models/EpisodeIntl';
-import type { EpisodeStats } from '$lib/requests/models/EpisodeStats';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry';
-import type { MediaIntl } from '$lib/requests/models/MediaIntl';
-import type { MediaRating } from '$lib/requests/models/MediaRating';
-import type { Season } from '$lib/requests/models/Season';
+import type { ActiveWatcher } from '$lib/requests/models/ActiveWatcher.ts';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import type { EpisodeIntl } from '$lib/requests/models/EpisodeIntl.ts';
+import type { EpisodeStats } from '$lib/requests/models/EpisodeStats.ts';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { MediaIntl } from '$lib/requests/models/MediaIntl.ts';
+import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
+import type { Season } from '$lib/requests/models/Season.ts';
 import type { Snippet } from 'svelte';
 
 export type EpisodeSummaryProps = {

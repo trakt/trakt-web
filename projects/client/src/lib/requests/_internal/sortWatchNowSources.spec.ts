@@ -1,6 +1,6 @@
 import type { WatchNowServiceResponse } from '@trakt/api';
 import { describe, expect, it } from 'vitest';
-import { sortWatchNowSources } from './sortWatchNowSources';
+import { sortWatchNowSources } from './sortWatchNowSources.ts';
 
 describe('sortWatchNowSources', () => {
   const getSource = (sourceName: string): WatchNowServiceResponse => ({

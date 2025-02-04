@@ -1,4 +1,4 @@
-import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 
 export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
   {

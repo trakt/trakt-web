@@ -1,7 +1,10 @@
-import type { MediaRating } from '$lib/requests/models/MediaRating';
-import { time } from '$lib/utils/timing/time';
+import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { describe, expect, it } from 'vitest';
-import { EMPTY_RATINGS, getDisplayableRatings } from './getDisplayableRatings';
+import {
+  EMPTY_RATINGS,
+  getDisplayableRatings,
+} from './getDisplayableRatings.ts';
 
 describe('getDisplayableRatings', () => {
   const ratings: MediaRating = {

@@ -1,6 +1,6 @@
-import { useUser } from '$lib/features/auth/stores/useUser';
-import { getLanguageAndRegion } from '$lib/features/i18n';
-import { useQuery } from '$lib/features/query/useQuery';
+import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { watchNowSourcesQuery } from '$lib/requests/queries/watchnow/watchNowSourcesQuery.ts';
 import { derived } from 'svelte/store';
 

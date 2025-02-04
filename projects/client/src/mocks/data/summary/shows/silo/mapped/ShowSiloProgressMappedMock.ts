@@ -1,5 +1,5 @@
-import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry';
-import { EpisodeStandardType } from '$lib/requests/models/EpisodeType';
+import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
+import { EpisodeStandardType } from '$lib/requests/models/EpisodeType.ts';
 
 export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'id': 12105048,

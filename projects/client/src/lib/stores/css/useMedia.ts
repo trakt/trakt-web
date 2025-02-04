@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
-import { assertDefined } from '$lib/utils/assert/assertDefined';
-import { NOOP_FN } from '$lib/utils/constants';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import {
   breakpointDesktop,
   breakpointMobile,

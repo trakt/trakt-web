@@ -1,8 +1,8 @@
-import { time } from '$lib/utils/timing/time';
+import { time } from '$lib/utils/timing/time.ts';
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import AirDateTag from './AirDateTag.svelte';
-import { TagIntlProvider } from './TagIntlProvider';
+import { TagIntlProvider } from './TagIntlProvider.ts';
 
 describe('AirDateTag', () => {
   it('should display TBA when year is null', () => {

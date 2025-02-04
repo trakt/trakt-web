@@ -1,7 +1,7 @@
-import { useQuery } from '$lib/features/query/useQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
 import { upcomingEpisodesQuery } from '$lib/requests/queries/calendars/upcomingEpisodesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
 const ONE_DAY = 1000 * 60 * 60 * 24;

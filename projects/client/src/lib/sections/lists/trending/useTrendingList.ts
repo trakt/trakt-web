@@ -1,6 +1,6 @@
-import { useQuery } from '$lib/features/query/useQuery';
-import type { MediaType } from '$lib/requests/models/MediaType';
-import type { Paginatable } from '$lib/requests/models/Paginatable';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import {
   movieTrendingQuery,
   type TrendingMovie,
@@ -9,7 +9,7 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 

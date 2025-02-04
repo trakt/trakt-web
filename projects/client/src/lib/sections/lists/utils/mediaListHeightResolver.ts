@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 
 export function mediaListHeightResolver<M = MediaType>(
   type: M,

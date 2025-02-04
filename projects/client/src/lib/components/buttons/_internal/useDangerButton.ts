@@ -1,7 +1,7 @@
-import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia';
+import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
 import { onMount } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
-import type { TraktButtonProps } from '../TraktButtonProps';
+import type { TraktButtonProps } from '../TraktButtonProps.ts';
 
 type ButtonColor = Exclude<TraktButtonProps['color'], Nil>;
 type DangerProps = {

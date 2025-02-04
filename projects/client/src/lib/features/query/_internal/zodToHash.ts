@@ -1,4 +1,4 @@
-import { checksum } from '$lib/utils/string/checksum';
+import { checksum } from '$lib/utils/string/checksum.ts';
 import type { z } from 'zod';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 

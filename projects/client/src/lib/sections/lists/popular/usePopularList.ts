@@ -1,5 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
-import { type MovieEntry } from '$lib/requests/models/MovieEntry';
+import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
 import {
   type PopularShow,

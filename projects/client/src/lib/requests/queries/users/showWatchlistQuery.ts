@@ -1,15 +1,15 @@
 import type { SortType, WatchlistedShowsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
-import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants';
-import { time } from '$lib/utils/timing/time';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
-import { ShowEntrySchema } from '../../models/ShowEntry';
+import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 type ShowWatchlistParams = {
   sort: SortType;

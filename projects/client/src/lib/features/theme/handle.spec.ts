@@ -1,9 +1,9 @@
-import { mockRequestEvent } from '$test/request/mockRequestEvent';
-import { interceptHandleResolveOptions } from '$test/resolve/interceptHandleResolveOptions';
+import { mockRequestEvent } from '$test/request/mockRequestEvent.ts';
+import { interceptHandleResolveOptions } from '$test/resolve/interceptHandleResolveOptions.ts';
 import { describe, expect, it, vi } from 'vitest';
-import { handle, THEME_PLACEHOLDER } from './handle';
-import { ThemeEndpoint } from './ThemeEndpoint';
-import { coerceTheme } from './utils/coerceTheme';
+import { handle, THEME_PLACEHOLDER } from './handle.ts';
+import { ThemeEndpoint } from './ThemeEndpoint.ts';
+import { coerceTheme } from './utils/coerceTheme.ts';
 
 describe('handle: theme', () => {
   it('should replace theme palceholder with the default theme', async () => {

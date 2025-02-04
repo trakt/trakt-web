@@ -1,7 +1,7 @@
-import { useQuery } from '$lib/features/query/useQuery';
-import type { MediaType } from '$lib/requests/models/MediaType';
-import { peopleMovieCreditsQuery } from '$lib/requests/queries/people/peopleMovieCreditsQuery';
-import { peopleShowCreditsQuery } from '$lib/requests/queries/people/peopleShowCreditsQuery';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { peopleMovieCreditsQuery } from '$lib/requests/queries/people/peopleMovieCreditsQuery.ts';
+import { peopleShowCreditsQuery } from '$lib/requests/queries/people/peopleShowCreditsQuery.ts';
 import { derived } from 'svelte/store';
 
 type UseCreditsListProps = {

@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { AbortError, abortRequest } from '$lib/api.ts';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import {
   searchCancellationId,
   searchQuery,

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { monitor } from './monitor';
+import { monitor } from './monitor.ts';
 
 describe('monitor', () => {
   afterEach(() => {
