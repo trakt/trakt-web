@@ -85,6 +85,37 @@ jobs:
         working-directory: projects/api
         run: 'deno task test'
 
+      - name: The Phantom Browsers Materialize aka Install Browsers
+        working-directory: projects/client
+        run: 'deno run -A npm:@playwright/test install chromium'
+
+      - name: Whispers of the Future aka Preview Build
+        working-directory: projects/client
+        run: 'deno task build:preview'
+        env:
+          TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+
+      - name: Witnessing the Premonition ake Run Preview
+        working-directory: projects/client
+        run: |
+          deno task preview &
+          echo $! > server.pid 
+        env:
+          TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+          TRAKT_CLIENT_SECRET: ${{ secrets.TRAKT_CLIENT_SECRET }}
+          TRAKT_SESSION_SECRET: ${{ secrets.TRAKT_SESSION_SECRET }}
+
+      - name: The Verdict on the Interface aka E2E Tests
+        working-directory: projects/client
+        run: 'deno task test:e2e'
+        env:
+          E2E_HEADLESS: 'true'
+          E2E_BASE_URL: 'http://localhost:4173/'
+
+      - name: Witnessing the Premonition's Demise aka Kill Preview
+        working-directory: projects/client
+        run: kill $(cat server.pid)
+
       - name: Trial by Code Climate
         uses: paambaati/codeclimate-action@v9.0.0
         env:
