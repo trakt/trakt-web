@@ -8,6 +8,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { ActiveWatcher } from "$lib/requests/models/ActiveWatcher";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
+  import type { EpisodeStats } from "$lib/requests/models/EpisodeStats";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import type { MediaStats } from "$lib/requests/models/MediaStats";
@@ -21,7 +22,7 @@
     airDate: Date;
     year: number | Nil;
     ratings: MediaRating;
-    stats: MediaStats;
+    stats: MediaStats | EpisodeStats;
     watchers: ActiveWatcher[];
     type: MediaType | "episode";
     media: MediaEntry | EpisodeEntry;

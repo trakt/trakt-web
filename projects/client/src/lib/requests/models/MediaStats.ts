@@ -1,11 +1,7 @@
 import { z } from 'zod';
+import { EpisodeStatsSchema } from './EpisodeStats';
 
-export const MediaStatsSchema = z.object({
-  watchers: z.number(),
-  plays: z.number(),
-  collectors: z.number(),
-  comments: z.number(),
-  lists: z.number(),
+export const MediaStatsSchema = EpisodeStatsSchema.extend({
   votes: z.number(),
   favorited: z.number(),
 });
