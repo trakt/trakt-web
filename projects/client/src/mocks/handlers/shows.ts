@@ -1,0 +1,148 @@
+import { http, HttpResponse } from 'msw';
+
+import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAnticipatedResponseMock.ts';
+import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
+import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
+import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
+import { EpisodeSiloLanguageResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloLanguageResponseMock.ts';
+import { EpisodeSiloRatingsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloRatingsResponseMock.ts';
+import { EpisodeSiloResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
+import { EpisodeSiloStatsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloStatsResponseMock.ts';
+import { ShowSiloLanguageResponseMock } from '../data/summary/shows/silo/response/ShowSiloLanguageResponseMock.ts';
+import { ShowSiloPeopleResponseMock } from '../data/summary/shows/silo/response/ShowSiloPeopleResponseMock.ts';
+import { ShowSiloProgressResponseMock } from '../data/summary/shows/silo/response/ShowSiloProgressResponseMock.ts';
+import { ShowSiloRatingsResponseMock } from '../data/summary/shows/silo/response/ShowSiloRatingsResponseMock.ts';
+import { ShowSiloRelatedResponseMock } from '../data/summary/shows/silo/response/ShowSiloRelatedResponseMock.ts';
+import { ShowSiloResponseMock } from '../data/summary/shows/silo/response/ShowSiloResponseMock.ts';
+import { ShowSiloSeasonEpisodesResponseMock } from '../data/summary/shows/silo/response/ShowSiloSeasonEpisodesResponseMock.ts';
+import { ShowSiloSeasonsResponseMock } from '../data/summary/shows/silo/response/ShowSiloSeasonsResponseMock.ts';
+import { ShowSiloStatsResponseMock } from '../data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
+import { ShowSiloStudiosResponseMock } from '../data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
+import { ShowSiloWatchNowResponseMock } from '../data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
+
+export const shows = [
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}`,
+    () => {
+      return HttpResponse.json(ShowSiloResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/*`,
+    () => {
+      return HttpResponse.json(
+        ShowSiloLanguageResponseMock,
+      );
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/ratings`,
+    () => {
+      return HttpResponse.json(ShowSiloRatingsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/stats`,
+    () => {
+      return HttpResponse.json(ShowSiloStatsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/watching`,
+    () => {
+      return HttpResponse.json(MediaWatchingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/studios`,
+    () => {
+      return HttpResponse.json(ShowSiloStudiosResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/people`,
+    () => {
+      return HttpResponse.json(ShowSiloPeopleResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/progress/watched`,
+    () => {
+      return HttpResponse.json(ShowSiloProgressResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons`,
+    () => {
+      return HttpResponse.json(ShowSiloSeasonsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.trakt}/watchnow/*`,
+    () => {
+      return HttpResponse.json(ShowSiloWatchNowResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/watching`,
+    () => {
+      return HttpResponse.json(MediaWatchingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/stats`,
+    () => {
+      return HttpResponse.json(EpisodeSiloStatsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/ratings`,
+    () => {
+      return HttpResponse.json(EpisodeSiloRatingsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/*`,
+    () => {
+      return HttpResponse.json(EpisodeSiloLanguageResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}*`,
+    () => {
+      return HttpResponse.json(EpisodeSiloResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${
+      ShowSiloSeasonEpisodesResponseMock[0].season
+    }*`,
+    () => {
+      return HttpResponse.json(ShowSiloSeasonEpisodesResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/shows/trending*',
+    () => {
+      return HttpResponse.json(ShowsTrendingResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/shows/popular*',
+    () => {
+      return HttpResponse.json(ShowsPopularResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/shows/anticipated*',
+    () => {
+      return HttpResponse.json(ShowsAnticipatedResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/related*`,
+    () => {
+      return HttpResponse.json(ShowSiloRelatedResponseMock);
+    },
+  ),
+];
