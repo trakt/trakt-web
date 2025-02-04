@@ -2,15 +2,6 @@
   "editor.tabSize": 2,
   "deno.enable": true,
   "deno.lint": true,
-  /*
-  * FIXME: This is a workaround for *.spec.ts files importing Svelte components.
-  * Disable when these issues are resolved:
-  *  - https://github.com/denoland/deno/issues/17248
-  *  - https://github.com/denoland/vscode_deno/issues/834
-  */
-  "deno.disablePaths": [
-    "projects/client/src"
-  ],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always"
