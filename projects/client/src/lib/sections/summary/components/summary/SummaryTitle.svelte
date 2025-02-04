@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { TestId } from "$e2e/models/TestId";
+
   type MediaTitleProps = {
     title: string;
   };
@@ -6,7 +8,11 @@
   const { title }: MediaTitleProps = $props();
 </script>
 
-<h3 class:short-title={title.length < 15} class:long-title={title.length > 25}>
+<h3
+  class:short-title={title.length < 15}
+  class:long-title={title.length > 25}
+  data-testid={TestId.SummaryMediaTitle}
+>
   {title}
 </h3>
 

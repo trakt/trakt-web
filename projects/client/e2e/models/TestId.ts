@@ -8,4 +8,5 @@ export enum TestId {
   NavBarHomeButton = 'nav-bar-home-button',
   NavBarShowsButton = 'nav-bar-shows-button',
   NavBarMoviesButton = 'nav-bar-movies-button',
+  SummaryMediaTitle = 'summary-media-title',
 }
