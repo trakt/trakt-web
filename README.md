@@ -66,8 +66,6 @@ While public applications can be used, they might withhold some of their
 secrets. Think of it as a trial version of an ancient spellbook. Limitations
 include:
 
-- **Missing Image Links:** Alas, the visual delights of posters and banners will
-  remain shrouded in mystery.
 - **"Up Next" Dysfunction:** This powerful prophecy, revealing your future
   viewing pleasures, will be temporarily silenced.
 
