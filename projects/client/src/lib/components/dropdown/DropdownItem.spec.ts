@@ -86,4 +86,36 @@ describe('DropdownItem', () => {
     const listItemElement = screen.getByRole('listitem');
     expect(listItemElement).toHaveAttribute('tabindex', '0');
   });
+
+  it('should render an icon', () => {
+    const iconContent = 'This is an icon';
+    render(DropdownItem, {
+      props: {
+        onclick: () => {},
+        children: createRawSnippet(() => ({
+          render: () => '<span>Item</span>',
+        })),
+        icon: createRawSnippet(() => ({
+          render: () => `<span>${iconContent}</span>`,
+        })),
+      },
+    });
+
+    const iconElement = screen.getByText(iconContent);
+    expect(iconElement).toBeInTheDocument();
+  });
+
+  it('should apply flat style', () => {
+    render(DropdownItem, {
+      props: {
+        style: 'flat',
+        children: createRawSnippet(() => ({
+          render: () => '<span>flat item</span>',
+        })),
+      },
+    });
+
+    const listItemElement = screen.getByRole('listitem');
+    expect(listItemElement).toHaveAttribute('data-style', 'flat');
+  });
 });
