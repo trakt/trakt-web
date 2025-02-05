@@ -4,7 +4,7 @@
   import { useWatchlist, type WatchlistStoreProps } from "./useWatchlist";
 
   type WatchlistActionProps = {
-    style?: "action" | "normal";
+    style?: "action" | "normal" | "dropdown-item";
     size?: "small" | "normal";
     title: string;
     onAction?: (state: boolean) => void;

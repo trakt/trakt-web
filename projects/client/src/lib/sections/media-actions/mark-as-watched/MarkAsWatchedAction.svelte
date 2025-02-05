@@ -7,7 +7,7 @@
   } from "./useMarkAsWatched";
 
   type MarkAsWatchedActionProps = {
-    style: "normal" | "action";
+    style: "normal" | "action" | "dropdown-item";
     title: string;
     onAction?: (state: boolean) => void;
     size?: "normal" | "small";

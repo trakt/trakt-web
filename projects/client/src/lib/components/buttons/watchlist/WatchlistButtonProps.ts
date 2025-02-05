@@ -5,7 +5,7 @@ export type WatchlistButtonProps = {
   title: string;
   isWatchlistUpdating: boolean;
   isWatchlisted: boolean;
-  type: 'action' | 'normal';
+  type: 'action' | 'normal' | 'dropdown-item';
   size: 'small' | 'normal';
   onAdd: () => void;
   onRemove: () => void;

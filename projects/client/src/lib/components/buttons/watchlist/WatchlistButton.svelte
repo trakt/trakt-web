@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import { attachRemoveWarning } from "../_internal/attachRemoveWarning";
@@ -51,4 +52,13 @@
   <ActionButton {...commonProps} {...props}>
     <WatchlistIcon {state} />
   </ActionButton>
+{/if}
+
+{#if type === "dropdown-item"}
+  <DropdownItem {...commonProps} style="flat">
+    {i18n.text({ isWatchlisted, title })}
+    {#snippet icon()}
+      <WatchlistIcon size="small" {state} />
+    {/snippet}
+  </DropdownItem>
 {/if}

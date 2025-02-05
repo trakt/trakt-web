@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
@@ -52,4 +53,13 @@
   <ActionButton {...commonProps} {...props}>
     <MarkAsWatchedIcon {state} />
   </ActionButton>
+{/if}
+
+{#if style === "dropdown-item"}
+  <DropdownItem {...commonProps} style="flat">
+    {i18n.text({ title, isWatched })}
+    {#snippet icon()}
+      <MarkAsWatchedIcon {state} />
+    {/snippet}
+  </DropdownItem>
 {/if}
