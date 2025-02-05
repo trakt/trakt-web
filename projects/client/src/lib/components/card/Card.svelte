@@ -17,6 +17,8 @@
 
 <style>
   .trakt-card {
+    position: relative;
+
     min-width: var(--width-card);
     min-height: var(--height-card);
   }
