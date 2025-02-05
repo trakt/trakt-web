@@ -8,6 +8,7 @@ export type MediaCardProps<T = MediaInputDefault> =
     type: MediaType;
     tags?: Snippet<[MediaInput<T>['media']]>;
     action?: Snippet;
+    popupActions?: Snippet;
   }
   & MediaInput<T>
   & MediaStyleProps;

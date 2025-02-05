@@ -285,5 +285,6 @@
   "streaming": "En streaming",
   "on_demand": "A la carta",
   "view_all_recently_watched_movies": "Ver todo lo que has visto recientemente",
-  "view_all_recently_watched_episodes": "Ver todo lo que has visto recientemente"
+  "view_all_recently_watched_episodes": "Ver todo lo que has visto recientemente",
+  "media_popup_label": "Menú emergente para {title}"
 }

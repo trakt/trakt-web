@@ -1,10 +1,13 @@
 <script lang="ts">
+  import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import Card from "$lib/components/card/Card.svelte";
+  import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import MediaSummaryItem from "$lib/sections/summary/components/media/MediaSummaryItem.svelte";
   import type { MediaCardProps } from "./MediaCardProps";
 
-  const { media, tags, action }: MediaCardProps = $props();
+  const { media, tags, action, popupActions }: MediaCardProps = $props();
 </script>
 
 <trakt-media-summary-card>
@@ -12,6 +15,17 @@
     --height-card="var(--height-summary-card)"
     --width-card="var(--width-summary-card)"
   >
+    {#if popupActions}
+      <CardActionBar>
+        {#snippet actions()}
+          <PopupMenu label={m.media_popup_label({ title: media.title })}>
+            {#snippet items()}
+              {@render popupActions()}
+            {/snippet}
+          </PopupMenu>
+        {/snippet}
+      </CardActionBar>
+    {/if}
     <MediaSummaryItem {media} {tags} />
     <CardFooter {action} />
   </Card>

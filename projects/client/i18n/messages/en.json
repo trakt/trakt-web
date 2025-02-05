@@ -285,5 +285,6 @@
   "streaming": "Streaming",
   "on_demand": "On Demand",
   "view_all_recently_watched_movies": "View all recently watched movies",
-  "view_all_recently_watched_episodes": "View all recently watched episodes"
+  "view_all_recently_watched_episodes": "View all recently watched episodes",
+  "media_popup_label": "Pop up menu for {title}"
 }

@@ -4,12 +4,15 @@
   import PosterCard from "$lib/components/media/card/PosterCard.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
 
+  import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
   import ThumbCard from "$lib/components/media/card/ThumbCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import CardActionBar from "../../../components/card/CardActionBar.svelte";
   import type { MediaCardProps } from "./MediaCardProps";
 
   const {
@@ -18,6 +21,7 @@
     tags: externalTags,
     action,
     variant = "poster",
+    popupActions,
   }: MediaCardProps = $props();
 </script>
 
@@ -36,6 +40,18 @@
 {/snippet}
 
 {#snippet content(mediaCoverImageUrl: string)}
+  {#if popupActions}
+    <CardActionBar>
+      {#snippet actions()}
+        <PopupMenu label={m.media_popup_label({ title: media.title })}>
+          {#snippet items()}
+            {@render popupActions()}
+          {/snippet}
+        </PopupMenu>
+      {/snippet}
+    </CardActionBar>
+  {/if}
+
   <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
     <CardCover src={mediaCoverImageUrl} alt={`${media.title} poster`}>
       {#snippet tags()}

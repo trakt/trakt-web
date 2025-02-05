@@ -285,5 +285,6 @@
   "streaming": "Diffusion",
   "on_demand": "Sur demande",
   "view_all_recently_watched_movies": "Voir tout ce que vous avez regardé récemment",
-  "view_all_recently_watched_episodes": "Voir tous les épisodes regardés récemment"
+  "view_all_recently_watched_episodes": "Voir tous les épisodes regardés récemment",
+  "media_popup_label": "Menu contextuel pour {title}"
 }

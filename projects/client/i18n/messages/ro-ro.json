@@ -285,5 +285,6 @@
   "streaming": "Streaming",
   "on_demand": "La cerere",
   "view_all_recently_watched_movies": "Vezi toate filmele vizionate recent",
-  "view_all_recently_watched_episodes": "Vezi toate episoadele vizionate recent"
+  "view_all_recently_watched_episodes": "Vezi toate episoadele vizionate recent",
+  "media_popup_label": "Meniu pop-up pentru {title}"
 }

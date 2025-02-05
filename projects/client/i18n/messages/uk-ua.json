@@ -285,5 +285,6 @@
   "streaming": "Онлайн",
   "on_demand": "На вимогу",
   "view_all_recently_watched_movies": "Переглянути всі нещодавно переглянуті фільми",
-  "view_all_recently_watched_episodes": "Переглянути всі нещодавно переглянуті епізоди"
+  "view_all_recently_watched_episodes": "Переглянути всі нещодавно переглянуті епізоди",
+  "media_popup_label": "Меню для {title}"
 }
