@@ -36,3 +36,12 @@
     transform: rotate(360deg) scale(0.75);
   }
 }
+
+@keyframes rotate-90 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
