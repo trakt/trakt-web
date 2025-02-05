@@ -8,6 +8,7 @@
     color?: "red" | "purple" | "blue";
     tabindex?: number;
     icon?: Snippet;
+    style?: "ghost" | "flat";
   } & ChildrenProps &
     HTMLElementProps;
 
@@ -15,6 +16,7 @@
 
   const {
     color = "purple",
+    style = "ghost",
     children,
     icon,
     ...props
@@ -39,6 +41,7 @@
   use:mobileAppleDeviceTriggerHack
   tabindex={tabIndex}
   data-color={color}
+  data-style={style}
   {...props}
 >
   {#if href}
@@ -54,6 +57,11 @@
     <p class="small bold uppercase ellipsis">
       {@render text()}
     </p>
+    {#if icon}
+      <div class="item-icon">
+        {@render icon()}
+      </div>
+    {/if}
   {/if}
 </li>
 
@@ -67,11 +75,16 @@
 
     padding: 0 var(--ni-12);
     height: calc(var(--ni-20) + var(--ni-12) * 2);
-    width: calc(100% - var(--ni-48));
+    width: calc(100% - var(--ni-36));
     border-radius: var(--border-radius-m);
 
     align-content: center;
     justify-self: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-s);
 
     cursor: pointer;
 
@@ -91,8 +104,12 @@
       justify-content: space-between;
     }
 
-    @mixin color($color, $hover-bg, $active-bg, $outline-color) {
+    @mixin color($color, $hover-bg, $active-bg, $outline-color, $bg-color) {
       color: $color;
+
+      &[data-style="flat"] {
+        background: $bg-color;
+      }
 
       @include for-mouse {
         &:hover {
@@ -115,7 +132,8 @@
         var(--purple-800),
         var(--purple-100),
         var(--purple-200),
-        var(--purple-800)
+        var(--purple-800),
+        var(--purple-50)
       );
     }
 
@@ -124,7 +142,8 @@
         var(--red-600),
         var(--red-100),
         var(--red-200),
-        var(--red-600)
+        var(--red-600),
+        var(--red-50)
       );
     }
 
@@ -133,7 +152,8 @@
         var(--blue-600),
         var(--blue-100),
         var(--blue-200),
-        var(--blue-600)
+        var(--blue-600),
+        var(--blue-50)
       );
     }
   }
