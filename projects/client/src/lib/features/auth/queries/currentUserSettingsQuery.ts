@@ -12,7 +12,7 @@ import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 
 export const UserSettingsSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   slug: z.string(),
   name: z.object({
     full: z.string(),
@@ -56,7 +56,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const [firstName = '', lastName = ''] = fullName.split(' ');
 
   return {
-    id: user.ids.uuid,
+    id: user.ids.trakt,
     slug: user.ids.slug,
     name: {
       full: fullName,

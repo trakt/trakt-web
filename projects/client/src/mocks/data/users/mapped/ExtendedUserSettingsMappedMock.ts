@@ -1,7 +1,7 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 
 export const ExtendedUserMappedMock: UserSettings = {
-  'id': '938a591b1337dcca76a513377bb25c6646057284',
+  'id': 41152,
   'slug': 'tequila_sunset',
   'avatar': {
     'url':

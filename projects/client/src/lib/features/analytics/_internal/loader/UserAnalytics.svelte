@@ -22,7 +22,7 @@
       if (!user) {
         return;
       }
-      const userId = get(isAuthorized) ? user.id : null;
+      const userId = get(isAuthorized) ? `${user.id}` : null;
 
       onload(userId);
     });
