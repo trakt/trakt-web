@@ -1,19 +1,17 @@
 <script lang="ts">
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { isSupported } from "firebase/analytics";
   import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
-  import { useAuth } from "../auth/stores/useAuth";
-  import { useUser } from "../auth/stores/useUser";
   import type { AnalyticsProps } from "./AnalyticsProps";
-  import { useAnalytics } from "./useAnalytics";
 
   const { onload }: AnalyticsProps = $props();
 
-  const analytics = useAnalytics();
   const { user } = useUser();
   const { isAuthorized } = useAuth();
 
-  let unsubscribe = $state(() => {});
+  let unsubscribe: (() => void) | undefined;
 
   onMount(async () => {
     if (!(await isSupported())) {
@@ -24,14 +22,13 @@
       if (!user) {
         return;
       }
-
       const userId = get(isAuthorized) ? user.id : null;
-      analytics.setUserId(userId);
-      onload(analytics);
+
+      onload(userId);
     });
   });
 
   onDestroy(() => {
-    unsubscribe();
+    unsubscribe?.();
   });
 </script>
