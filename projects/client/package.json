@@ -43,6 +43,7 @@
     "jsdom": "^26.0.0",
     "msw": "^2.7.0",
     "playwright": "^1.50.1",
+    "posthog-js": "^1.215.5",
     "prettier": "^3.4.2",
     "prettier-plugin-svelte": "^3.3.3",
     "sass-embedded": "^1.83.4",
