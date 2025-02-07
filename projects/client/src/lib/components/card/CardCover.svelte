@@ -60,27 +60,6 @@
     border-top-right-radius: var(--border-radius-m);
     overflow: hidden;
     position: relative;
-
-    &::before {
-      z-index: 2;
-      pointer-events: none;
-      content: "";
-
-      border-top-left-radius: var(--border-radius-m);
-      border-top-right-radius: var(--border-radius-m);
-
-      position: absolute;
-      top: 0;
-
-      width: 100%;
-      height: var(--ni-48);
-
-      background: linear-gradient(
-        to bottom,
-        color-mix(in srgb, var(--color-shadow) 70%, transparent 30%),
-        color-mix(in srgb, var(--color-shadow) 0%, transparent 100%)
-      );
-    }
   }
 
   .card-cover-loading {
