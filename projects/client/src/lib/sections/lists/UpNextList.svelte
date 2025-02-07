@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
+  import { page } from "$app/state";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
   import { onMount } from "svelte";
@@ -10,7 +11,11 @@
   import { useUpNextEpisodes } from "./stores/useUpNextEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
-  const { list: unstable, isLoading } = useUpNextEpisodes();
+  const type = $derived(
+    page.url.searchParams.get("up-next") === "nitro" ? "nitro" : "standard",
+  );
+
+  const { list: unstable, isLoading } = $derived(useUpNextEpisodes(type));
   const { list, set } = useStableArray<UpNextEntry>(
     (l, r) => l.show.id === r.show.id,
   );

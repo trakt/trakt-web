@@ -37,7 +37,8 @@ const upNextRequest = (params: UpNextParams = {}) => {
   return api({ fetch })
     .sync
     .progress
-    .upNext({
+    .upNext
+    .standard({
       query: {
         extended: 'full,images',
         page,
@@ -55,7 +56,7 @@ const upNextRequest = (params: UpNextParams = {}) => {
     });
 };
 
-function mapUpNextResponse(item: UpNextResponse[0]): UpNextEntry {
+export function mapUpNextResponse(item: UpNextResponse[0]): UpNextEntry {
   const episode = item.progress.next_episode;
 
   return {
