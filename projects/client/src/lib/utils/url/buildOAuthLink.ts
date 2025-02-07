@@ -13,5 +13,5 @@ export function buildOAuthUrl(clientId: string, origin: string) {
       .replace('apiz.', ''),
   );
 
-  return `${env}/oauth/authorize?client_id=${clientId}&redirect_uri=${origin}&response_type=code`;
+  return `${env}/oauth/authorize?client_id=${clientId}&redirect_uri=${origin}&response_type=code&hide_email_form=true`;
 }

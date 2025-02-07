@@ -6,7 +6,7 @@ describe('buildOAuthUrl', () => {
     const result = buildOAuthUrl('test-client-id', 'http://localhost:5173');
 
     expect(result).toBe(
-      'https://trakt.tv/oauth/authorize?client_id=test-client-id&redirect_uri=http://localhost:5173&response_type=code',
+      'https://trakt.tv/oauth/authorize?client_id=test-client-id&redirect_uri=http://localhost:5173&response_type=code&hide_email_form=true',
     );
   });
 
@@ -14,7 +14,7 @@ describe('buildOAuthUrl', () => {
     const result = buildOAuthUrl('test-client-id', 'https://my-app.com');
 
     expect(result).toBe(
-      'https://trakt.tv/oauth/authorize?client_id=test-client-id&redirect_uri=https://my-app.com&response_type=code',
+      'https://trakt.tv/oauth/authorize?client_id=test-client-id&redirect_uri=https://my-app.com&response_type=code&hide_email_form=true',
     );
   });
 });
