@@ -66,9 +66,20 @@
 
     @include popup-button-style();
 
+    :global(svg) {
+      overflow: visible;
+      :global(circle) {
+        filter: drop-shadow(0px 0px 2px var(--purple-900));
+      }
+    }
+
     &:hover {
       background-color: var(--shade-10);
       color: var(--purple-900);
+
+      :global(svg circle) {
+        filter: none;
+      }
     }
   }
 
