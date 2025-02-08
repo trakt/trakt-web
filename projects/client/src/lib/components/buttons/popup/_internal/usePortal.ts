@@ -1,5 +1,4 @@
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
-import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onMount } from 'svelte';
 import { get, readable, writable } from 'svelte/store';
 import { bodyPortal } from './bodyPortal.ts';
@@ -20,23 +19,11 @@ export function usePortal() {
       targetNode.addEventListener('click', openHandler);
     });
 
-    const unregisterResize = GlobalEventBus.getInstance()
-      .register(
-        'resize',
-        () =>
-          requestAnimationFrame(() => {
-            if (get(isPopupOpen)) {
-              closeHandler();
-            }
-          }),
-      );
-
     return {
       destroy() {
         targetNode.removeEventListener('clickoutside', closeHandler);
         targetNode.removeEventListener('click', openHandler);
         popupContainer?.remove();
-        unregisterResize();
       },
     };
   };
