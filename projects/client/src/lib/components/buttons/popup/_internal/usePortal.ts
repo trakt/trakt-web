@@ -2,14 +2,23 @@ import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
 import { onMount } from 'svelte';
 import { get, readable, writable } from 'svelte/store';
 import { bodyPortal } from './bodyPortal.ts';
+import { createUnderlay } from './createUnderlay.ts';
 
 export function usePortal() {
   let popupTarget: HTMLElement | null = null;
   let popupContainer: HTMLElement | null = null;
+  let underlay: HTMLDivElement | null = null;
 
   const isPopupOpen = writable(false);
-  const closeHandler = () => isPopupOpen.set(false);
-  const openHandler = () => isPopupOpen.set(true);
+  const closeHandler = () => {
+    underlay?.remove();
+    isPopupOpen.set(false);
+  };
+  const openHandler = () => {
+    underlay = createUnderlay();
+    document.body.appendChild(underlay);
+    isPopupOpen.set(true);
+  };
 
   const portalTrigger = (targetNode: HTMLElement) => {
     onMount(() => {
@@ -24,6 +33,7 @@ export function usePortal() {
         targetNode.removeEventListener('clickoutside', closeHandler);
         targetNode.removeEventListener('click', openHandler);
         popupContainer?.remove();
+        underlay?.remove();
       },
     };
   };
