@@ -52,4 +52,28 @@ describe('clickOutside', () => {
 
     expect(eventFired).toBe(false);
   });
+
+  it('should dispatch on a window resize event ', () => {
+    let eventFired = false;
+    node.addEventListener('clickoutside', () => {
+      eventFired = true;
+    });
+
+    clickOutside(node);
+    globalThis.window.dispatchEvent(new Event('resize'));
+
+    expect(eventFired).toBe(true);
+  });
+
+  it('should dispatch on a window scroll event ', () => {
+    let eventFired = false;
+    node.addEventListener('clickoutside', () => {
+      eventFired = true;
+    });
+
+    clickOutside(node);
+    globalThis.window.dispatchEvent(new Event('scroll'));
+
+    expect(eventFired).toBe(true);
+  });
 });
