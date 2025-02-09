@@ -203,6 +203,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
       :global(a.trakt-link) {
+        text-decoration: none;
         transition: background-color var(--transition-increment) ease-in-out;
 
         @include for-mouse {

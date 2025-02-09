@@ -102,6 +102,7 @@
       align-items: center;
       display: flex;
       justify-content: space-between;
+      text-decoration: none;
     }
 
     @mixin color($color, $hover-bg, $active-bg, $outline-color, $bg-color) {

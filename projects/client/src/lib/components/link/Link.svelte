@@ -49,15 +49,19 @@
   .trakt-link {
     -webkit-tap-highlight-color: transparent;
     color: inherit;
-    text-decoration: none;
     cursor: pointer;
-    transition: color var(--transition-increment) ease-in-out;
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: color, text-decoration;
     display: inherit;
 
     :global(p),
     :global(span) {
       color: inherit;
     }
+
+    text-decoration: underline;
+    text-underline-offset: var(--ni-2);
+    text-decoration-thickness: var(--ni-2);
 
     &:focus-visible {
       outline: none;
@@ -79,6 +83,8 @@
     }
 
     &[data-color="default"] {
+      text-decoration-color: var(--color-link-active);
+
       &,
       &:visited {
         color: var(--color-foreground);
@@ -107,15 +113,16 @@
 
     &[data-color="classic"] {
       display: inline;
-      text-decoration: underline;
 
       &:visited {
         color: var(--red-300);
+        text-decoration-color: var(--red-300);
       }
 
       @include for-mouse {
         &:hover {
           color: var(--blue-600);
+          text-decoration-color: var(--blue-300);
         }
       }
     }

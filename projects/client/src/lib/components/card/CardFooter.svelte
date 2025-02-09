@@ -30,6 +30,10 @@
     gap: var(--gap-xs);
     justify-content: space-between;
 
+    :global(.trakt-link) {
+      text-decoration: none;
+    }
+
     .trakt-card-footer-information {
       width: 100%;
       margin-top: var(--ni-neg-4);

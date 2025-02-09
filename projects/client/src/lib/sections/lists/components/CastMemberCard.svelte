@@ -13,26 +13,35 @@
   const { castMember }: CastMemberCardProps = $props();
 </script>
 
-<Link focusable={false} href={UrlBuilder.people(castMember.id)}>
-  <div class="trakt-cast-member">
-    <PersonCard>
-      <CardCover
-        src={castMember.headShotUrl}
-        alt={`${m.person_headshot({ person: castMember.name })}`}
-        style="flat"
-      />
-    </PersonCard>
-    <div class="trakt-cast-member-footer">
-      <p class="secondary ellipsis actor-name">{castMember.name}</p>
-      <p class="small secondary ellipsis">{castMember.characterName}</p>
+<trakt-cast-member>
+  <Link focusable={false} href={UrlBuilder.people(castMember.id)}>
+    <div class="trakt-cast-member">
+      <PersonCard>
+        <CardCover
+          src={castMember.headShotUrl}
+          alt={`${m.person_headshot({ person: castMember.name })}`}
+          style="flat"
+        />
+      </PersonCard>
+      <div class="trakt-cast-member-footer">
+        <p class="secondary ellipsis actor-name">{castMember.name}</p>
+        <p class="small secondary ellipsis">{castMember.characterName}</p>
+      </div>
     </div>
-  </div>
-</Link>
+  </Link>
+</trakt-cast-member>
 
 <style>
+  trakt-cast-member {
+    :global(.trakt-link) {
+      text-decoration: none;
+    }
+  }
+
   .trakt-cast-member-footer {
     height: var(--height-person-footer);
   }
+
   .trakt-cast-member {
     display: flex;
     flex-direction: column;

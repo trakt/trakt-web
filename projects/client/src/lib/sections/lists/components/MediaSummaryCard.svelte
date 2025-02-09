@@ -40,5 +40,9 @@
     :global(.trakt-card .trakt-summary-item) {
       padding: var(--ni-12);
     }
+
+    :global(.trakt-link) {
+      text-decoration: none;
+    }
   }
 </style>

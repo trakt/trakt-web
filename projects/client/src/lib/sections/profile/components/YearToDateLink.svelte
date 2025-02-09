@@ -14,17 +14,25 @@
     : UrlBuilder.og.getVip();
 </script>
 
-<Link {href} target="_blank">
-  <div class="ytd-link-content">
-    <h2 class="ytd-year">{currentYear}</h2>
-    <div class="ytd-link-details">
-      <h5 class="ytd-label">{m.year_to_date()}</h5>
-      <YearToDateArrow />
+<trakt-year-to-date-link>
+  <Link {href} target="_blank">
+    <div class="ytd-link-content">
+      <h2 class="ytd-year">{currentYear}</h2>
+      <div class="ytd-link-details">
+        <h5 class="ytd-label">{m.year_to_date()}</h5>
+        <YearToDateArrow />
+      </div>
     </div>
-  </div>
-</Link>
+  </Link>
+</trakt-year-to-date-link>
 
 <style>
+  trakt-year-to-date-link {
+    :global(.trakt-link) {
+      text-decoration: none;
+    }
+  }
+
   .ytd-link-details {
     display: flex;
     align-items: center;
