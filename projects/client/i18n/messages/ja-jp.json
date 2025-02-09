@@ -273,5 +273,10 @@
   "on_demand": "オンデマンド",
   "view_all_recently_watched_movies": "最近見た作品をすべて表示",
   "view_all_recently_watched_episodes": "最近見たエピソードをすべて表示",
-  "media_popup_label": "{title} のポップアップメニュー"
+  "media_popup_label": "{title} のポップアップメニュー",
+  "popular_lists": "人気のリスト",
+  "no_popular_lists": "{title}は人気のリストには見当たりません。",
+  "by": "作成者",
+  "users_avatar": "{userName}のアバター",
+  "media_poster": "{title}のポスター"
 }

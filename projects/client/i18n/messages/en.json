@@ -273,5 +273,10 @@
   "on_demand": "On Demand",
   "view_all_recently_watched_movies": "View all recently watched movies",
   "view_all_recently_watched_episodes": "View all recently watched episodes",
-  "media_popup_label": "Pop up menu for {title}"
+  "media_popup_label": "Pop up menu for {title}",
+  "popular_lists": "Popular lists",
+  "no_popular_lists": "{title} does not appear on any popular lists.",
+  "by": "by",
+  "users_avatar": "{userName}'s avatar",
+  "media_poster": "{title} poster"
 }

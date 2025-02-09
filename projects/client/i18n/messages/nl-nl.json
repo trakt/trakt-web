@@ -273,5 +273,10 @@
   "on_demand": "On Demand",
   "view_all_recently_watched_movies": "Bekijk alle recent bekeken films",
   "view_all_recently_watched_episodes": "Bekijk alle recent bekeken afleveringen",
-  "media_popup_label": "Pop-upmenu voor {title}"
+  "media_popup_label": "Pop-upmenu voor {title}",
+  "popular_lists": "Populaire lijsten",
+  "no_popular_lists": "{title} staat niet op populaire lijsten.",
+  "by": "door",
+  "users_avatar": "Avatar van {userName}",
+  "media_poster": "{title} poster"
 }

@@ -273,5 +273,10 @@
   "on_demand": "Sur demande",
   "view_all_recently_watched_movies": "Voir tout ce que vous avez regardé récemment",
   "view_all_recently_watched_episodes": "Voir tous les épisodes regardés récemment",
-  "media_popup_label": "Menu contextuel pour {title}"
+  "media_popup_label": "Menu contextuel pour {title}",
+  "popular_lists": "Listes populaires",
+  "no_popular_lists": "{title} ne figure dans aucune liste populaire.",
+  "by": "par",
+  "users_avatar": "Avatar de {userName}",
+  "media_poster": "Affiche de {title}"
 }

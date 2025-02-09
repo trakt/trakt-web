@@ -12,6 +12,7 @@
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/SeasonList.svelte";
+  import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
 
@@ -62,3 +63,6 @@
 <SeasonList show={media} {seasons} />
 
 <RelatedList title={m.related_shows_title()} slug={media.slug} type="show" />
+
+<!-- TODO: move back to designed position when we have faster queries -->
+<Lists slug={media.slug} title={media.title} type="show" />

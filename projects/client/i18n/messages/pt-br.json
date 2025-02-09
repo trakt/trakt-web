@@ -273,5 +273,10 @@
   "on_demand": "Sob Demanda",
   "view_all_recently_watched_movies": "Ver tudo assistido recentemente",
   "view_all_recently_watched_episodes": "Ver tudo assistido recentemente",
-  "media_popup_label": "Menu popup para {title}"
+  "media_popup_label": "Menu popup para {title}",
+  "popular_lists": "Listas populares",
+  "no_popular_lists": "{title} não aparece em nenhuma lista popular.",
+  "by": "de",
+  "users_avatar": "Avatar de {userName}",
+  "media_poster": "Pôster de {title}"
 }

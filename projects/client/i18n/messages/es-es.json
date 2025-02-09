@@ -273,5 +273,10 @@
   "on_demand": "A la carta",
   "view_all_recently_watched_movies": "Ver todo lo que has visto recientemente",
   "view_all_recently_watched_episodes": "Ver todo lo que has visto recientemente",
-  "media_popup_label": "Menú emergente para {title}"
+  "media_popup_label": "Menú emergente para {title}",
+  "popular_lists": "Listas populares",
+  "no_popular_lists": "{title} no aparece en ninguna lista popular.",
+  "by": "por",
+  "users_avatar": "Avatar de {userName}",
+  "media_poster": "Póster de {title}"
 }

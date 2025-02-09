@@ -273,5 +273,10 @@
   "on_demand": "La cerere",
   "view_all_recently_watched_movies": "Vezi toate filmele vizionate recent",
   "view_all_recently_watched_episodes": "Vezi toate episoadele vizionate recent",
-  "media_popup_label": "Meniu pop-up pentru {title}"
+  "media_popup_label": "Meniu pop-up pentru {title}",
+  "popular_lists": "Liste populare",
+  "no_popular_lists": "{title} nu apare în nicio listă populară.",
+  "by": "de",
+  "users_avatar": "Avatarul lui {userName}",
+  "media_poster": "Posterul {title}"
 }

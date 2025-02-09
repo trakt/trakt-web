@@ -273,5 +273,10 @@
   "on_demand": "Na życzenie",
   "view_all_recently_watched_movies": "Zobacz wszystkie ostatnio obejrzane produkcje",
   "view_all_recently_watched_episodes": "Zobacz wszystkie ostatnio obejrzane odcinki",
-  "media_popup_label": "Menu kontekstowe dla {title}"
+  "media_popup_label": "Menu kontekstowe dla {title}",
+  "popular_lists": "Popularne listy",
+  "no_popular_lists": "{title} nie pojawia się na żadnych popularnych listach. Wygląda na to, że nikt nie wpadł na to, żeby go umieścić... jeszcze!",
+  "by": "przez",
+  "users_avatar": "Awatar użytkownika {userName}",
+  "media_poster": "Plakat {title}"
 }

@@ -273,5 +273,10 @@
   "on_demand": "On Demand",
   "view_all_recently_watched_movies": "Visualizza tutti i film guardati di recente",
   "view_all_recently_watched_episodes": "Visualizza tutti gli episodi guardati di recente",
-  "media_popup_label": "Menù a tendina per {title}"
+  "media_popup_label": "Menù a tendina per {title}",
+  "popular_lists": "Liste popolari",
+  "no_popular_lists": "{title} non compare in nessuna lista popolare.",
+  "by": "di",
+  "users_avatar": "Avatar di {userName}",
+  "media_poster": "Locandina di {title}"
 }

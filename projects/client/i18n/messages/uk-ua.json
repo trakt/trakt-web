@@ -273,5 +273,10 @@
   "on_demand": "На вимогу",
   "view_all_recently_watched_movies": "Переглянути всі нещодавно переглянуті фільми",
   "view_all_recently_watched_episodes": "Переглянути всі нещодавно переглянуті епізоди",
-  "media_popup_label": "Меню для {title}"
+  "media_popup_label": "Меню для {title}",
+  "popular_lists": "Популярні списки",
+  "no_popular_lists": "{title} не з'являється в жодному популярному списку.",
+  "by": "від",
+  "users_avatar": "Аватар {userName}",
+  "media_poster": "Постер {title}"
 }
