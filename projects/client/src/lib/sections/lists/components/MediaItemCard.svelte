@@ -53,7 +53,10 @@
   {/if}
 
   <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
-    <CardCover src={mediaCoverImageUrl} alt={`${media.title} poster`}>
+    <CardCover
+      src={mediaCoverImageUrl}
+      alt={m.media_poster({ title: media.title })}
+    >
       {#snippet tags()}
         {#if externalTags}
           {@render externalTags(media)}
