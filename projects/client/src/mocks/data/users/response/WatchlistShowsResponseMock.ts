@@ -1,6 +1,6 @@
-import type { WatchlistedShowsResponse } from '@trakt/api';
+import type { ListedShowResponse } from '@trakt/api';
 
-export const WatchlistShowsResponseMock: WatchlistedShowsResponse[] = [
+export const WatchlistShowsResponseMock: ListedShowResponse[] = [
   {
     'rank': 1,
     'id': 1146015487,

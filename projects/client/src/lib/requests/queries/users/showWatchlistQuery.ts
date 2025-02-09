@@ -1,8 +1,7 @@
-import type { SortType, WatchlistedShowsResponse } from '$lib/api.ts';
+import type { SortType } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapShowResponseToEpisodeCount } from '$lib/requests/_internal/mapShowResponseToEpisodeCount.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapListedShowResponseToListItem } from '$lib/requests/_internal/mapListItemResponseToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -53,20 +52,6 @@ const watchlistRequest = (
       return response;
     });
 
-const mapResponseToWatchlist = (
-  watchlistShow: WatchlistedShowsResponse,
-): WatchlistShow => ({
-  id: watchlistShow.id,
-  rank: watchlistShow.rank,
-  notes: watchlistShow.notes,
-  type: 'show' as const,
-  listedAt: new Date(watchlistShow.listed_at),
-  entry: {
-    ...mapShowResponseToShowSummary(watchlistShow.show),
-    ...mapShowResponseToEpisodeCount(watchlistShow.show),
-  },
-});
-
 export const showWatchlistQuery = defineQuery({
   key: 'showWatchlist',
   invalidations: [InvalidateAction.Watchlisted('show')],
@@ -75,7 +60,7 @@ export const showWatchlistQuery = defineQuery({
   ) => [params.sort, params.limit, params.page],
   request: watchlistRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToWatchlist),
+    entries: response.body.map(mapListedShowResponseToListItem),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(WatchlistShowSchema),

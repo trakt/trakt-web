@@ -1,7 +1,4 @@
-import type {
-  WatchlistedMoviesResponse,
-  WatchlistedShowsResponse,
-} from '$lib/api.ts';
+import type { ListedMovieResponse, ListedShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
@@ -19,7 +16,7 @@ const WatchlistedMovieSchema = WatchlistedMediaSchema;
 export type WatchlistedMovie = z.infer<typeof WatchlistedMovieSchema>;
 
 function mapWatchlistedMovieResponse(
-  entry: WatchlistedMoviesResponse,
+  entry: ListedMovieResponse,
 ): WatchlistedMovie {
   const { listed_at, movie } = entry;
   return {
@@ -50,7 +47,7 @@ const WatchlistedShowSchema = WatchlistedMediaSchema;
 export type WatchlistedShow = z.infer<typeof WatchlistedShowSchema>;
 
 function mapWatchlistedShowResponse(
-  entry: WatchlistedShowsResponse,
+  entry: ListedShowResponse,
 ): WatchlistedShow {
   const { listed_at, show } = entry;
   return {
