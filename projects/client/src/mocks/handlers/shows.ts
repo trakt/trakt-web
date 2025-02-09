@@ -19,6 +19,7 @@ import { ShowSiloSeasonsResponseMock } from '../data/summary/shows/silo/response
 import { ShowSiloStatsResponseMock } from '../data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from '../data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
 import { ShowSiloWatchNowResponseMock } from '../data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
+import { SiloListsResponseMock } from '../data/summary/shows/silo/response/SiloListsResponseMock.ts';
 
 export const shows = [
   http.get(
@@ -143,6 +144,12 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/related*`,
     () => {
       return HttpResponse.json(ShowSiloRelatedResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/lists/all/popular*`,
+    () => {
+      return HttpResponse.json(SiloListsResponseMock);
     },
   ),
 ];

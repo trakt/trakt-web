@@ -4,6 +4,7 @@ import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnt
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
+import { HereticListsResponseMock } from '../data/summary/movies/heretic/response/HereticListsResponseMock.ts';
 import { MovieHereticLanguageResponseMock } from '../data/summary/movies/heretic/response/MovieHereticLanguageResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from '../data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
 import { MovieHereticRatingsResponseMock } from '../data/summary/movies/heretic/response/MovieHereticRatingsResponseMock.ts';
@@ -84,6 +85,12 @@ export const movies = [
     'http://localhost/movies/anticipated*',
     () => {
       return HttpResponse.json(MoviesAnticipatedResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/lists/all/popular*`,
+    () => {
+      return HttpResponse.json(HereticListsResponseMock);
     },
   ),
 ];
