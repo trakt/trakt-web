@@ -156,7 +156,7 @@
 
   @mixin pwa-navbar-shadow($position) {
     content: "";
-    z-index: 3;
+    z-index: var(--layer-floating);
     pointer-events: none;
 
     position: $position;

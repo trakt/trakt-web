@@ -35,7 +35,7 @@
     container-type: inline-size;
 
     .trakt-landing-media-wrapper {
-      z-index: 2;
+      z-index: var(--layer-raised);
       display: grid;
       width: 100%;
       justify-content: center;
@@ -49,7 +49,7 @@
     .trakt-landing-phones {
       display: flex;
       align-items: center;
-      z-index: 1;
+      z-index: var(--layer-base);
     }
   }
 </style>

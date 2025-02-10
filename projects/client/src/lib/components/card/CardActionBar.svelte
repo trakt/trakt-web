@@ -18,7 +18,7 @@
     top: 0;
     right: 0;
     left: 0;
-    z-index: 3;
+    z-index: var(--layer-floating);
 
     :global(.trakt-popup-menu-button) {
       position: absolute;

@@ -13,7 +13,7 @@ export const createUnderlay = () => {
   underlay.style.width = '100%';
   underlay.style.height = '100%';
 
-  underlay.style.zIndex = '777';
+  underlay.style.zIndex = 'calc(var(--layer-menu) - 1)';
 
   return underlay;
 };

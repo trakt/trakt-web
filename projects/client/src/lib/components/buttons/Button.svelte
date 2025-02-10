@@ -257,12 +257,11 @@
     p,
     .button-label,
     .button-icon {
-      z-index: 1;
+      z-index: var(--layer-base);
     }
 
     &::before {
       content: "";
-      z-index: 0;
 
       position: absolute;
       top: 0;

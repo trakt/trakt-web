@@ -26,6 +26,15 @@
   }}
   data-size={size}
 >
+  {#if $isDropdownOpen}
+    <div class="trakt-list" transition:slide={{ duration: 150 }}>
+      <div class="spacer"></div>
+      <ul onclickcapture={() => isDropdownOpen.set(false)}>
+        {@render items()}
+      </ul>
+    </div>
+  {/if}
+
   <Button
     onclick={(ev) => {
       isDropdownOpen.update((state) => !state);
@@ -45,15 +54,6 @@
       </div>
     {/snippet}
   </Button>
-
-  {#if $isDropdownOpen}
-    <div class="trakt-list" transition:slide={{ duration: 150 }}>
-      <div class="spacer"></div>
-      <ul onclickcapture={() => isDropdownOpen.set(false)}>
-        {@render items()}
-      </ul>
-    </div>
-  {/if}
 </div>
 
 <style lang="scss">
@@ -104,19 +104,18 @@
     }
 
     &.is-list-open {
-      z-index: 777;
+      z-index: var(--layer-menu);
 
       :global(.trakt-button) {
-        z-index: 777;
+        z-index: var(--layer-menu);
       }
 
       .trakt-list {
-        z-index: 776;
         opacity: 1;
       }
 
       .trakt-dropdown-list-icon {
-        z-index: 777;
+        z-index: var(--layer-menu);
       }
     }
 
@@ -154,7 +153,7 @@
     .trakt-list {
       --list-padding: var(--ni-12);
 
-      z-index: -1;
+      z-index: var(--layer-background);
       position: absolute;
       width: 100%;
       left: 0;

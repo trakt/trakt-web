@@ -101,7 +101,7 @@
 
     :global(.vip-badge) {
       margin-left: var(--ni-neg-8);
-      z-index: 1;
+      z-index: var(--layer-raised);
     }
   }
 </style>

@@ -112,7 +112,7 @@
           left: 0;
           top: 0;
           width: var(--mobile-search-focus-width);
-          z-index: 666;
+          z-index: var(--layer-top);
         }
       }
 
@@ -141,7 +141,7 @@
         --search-side-distance: var(--ni-32);
 
         content: "";
-        z-index: 777;
+        z-index: var(--layer-overlay);
 
         width: calc(var(--search-input-width) - var(--search-side-distance));
         height: var(--ni-2);
@@ -176,7 +176,7 @@
     }
 
     .trakt-search-results {
-      z-index: 999;
+      z-index: var(--layer-overlay);
 
       position: absolute;
       top: 120%;

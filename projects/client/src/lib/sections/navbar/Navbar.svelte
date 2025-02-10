@@ -114,7 +114,7 @@
   }
 
   .trakt-navbar {
-    z-index: 999;
+    z-index: var(--layer-overlay);
     position: fixed;
     top: 0;
     left: var(--layout-distance-side);

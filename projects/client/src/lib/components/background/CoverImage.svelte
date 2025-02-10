@@ -19,7 +19,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .background-cover-image {
-    z-index: -1;
+    z-index: var(--layer-background);
     position: absolute;
     max-height: 100dvh;
     overflow: hidden;

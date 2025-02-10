@@ -142,7 +142,7 @@
     &::before,
     &::after {
       content: "";
-      z-index: 3;
+      z-index: var(--layer-floating);
       pointer-events: none;
 
       position: absolute;

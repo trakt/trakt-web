@@ -57,7 +57,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: var(--layer-overlay);
 
     background-color: var(--color-background-mobile-navbar);
     box-shadow: 0px -24px 64px 0px

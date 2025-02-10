@@ -46,7 +46,7 @@
     align-items: center;
 
     :global(.trakt-vip-badge) {
-      z-index: 2;
+      z-index: var(--layer-base);
       margin-top: var(--ni-neg-16);
     }
 

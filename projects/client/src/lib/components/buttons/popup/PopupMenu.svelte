@@ -79,7 +79,7 @@
   :global(.trakt-popup-menu-container) {
     --list-padding: var(--ni-8);
 
-    z-index: 777;
+    z-index: var(--layer-menu);
     position: absolute;
 
     min-width: var(--ni-156);

@@ -43,7 +43,7 @@
     position: absolute;
     padding: var(--padding-card-tag);
 
-    z-index: 2;
+    z-index: var(--layer-raised);
     bottom: 0;
     left: 0;
 
@@ -92,7 +92,7 @@
       width: var(--width-card);
       height: var(--ni-40);
       flex-shrink: 0;
-      z-index: 1;
+      z-index: var(--layer-base);
 
       background: linear-gradient(
         180deg,
