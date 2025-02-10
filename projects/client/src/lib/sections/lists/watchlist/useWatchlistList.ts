@@ -1,6 +1,7 @@
 import type { SortType } from '$lib/api.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import {
   movieWatchlistQuery,
   type WatchlistMovie,
@@ -10,6 +11,7 @@ import {
   type WatchlistShow,
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 export type WatchListParams = {
@@ -36,9 +38,13 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return movieWatchlistQuery(params);
+      return movieWatchlistQuery(params) as CreateQueryOptions<
+        Paginatable<WatchlistMediaItem>
+      >;
     case 'show':
-      return showWatchlistQuery(params);
+      return showWatchlistQuery(params) as CreateQueryOptions<
+        Paginatable<WatchlistMediaItem>
+      >;
   }
 }
 

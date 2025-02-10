@@ -8,6 +8,9 @@ export const WatchlistShowsMappedMock: WatchlistShow[] = [
     'rank': 1,
     'type': 'show',
     'entry': {
+      'episode': {
+        'count': 17,
+      },
       'airDate': new Date('9999-12-31T23:59:59.999Z'),
       'certification': undefined,
       'country': undefined,
