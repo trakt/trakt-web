@@ -28,14 +28,6 @@ export const sync = [
     },
   ),
   http.post(
-    'http://localhost/sync/favorites',
-    () => {
-      return new HttpResponse(null, {
-        status: 201,
-      });
-    },
-  ),
-  http.post(
     'http://localhost/sync/history/remove',
     () => {
       return new HttpResponse(null, {
@@ -53,14 +45,6 @@ export const sync = [
   ),
   http.post(
     'http://localhost/sync/ratings/remove',
-    () => {
-      return new HttpResponse(null, {
-        status: 200,
-      });
-    },
-  ),
-  http.post(
-    'http://localhost/sync/favorites/remove',
     () => {
       return new HttpResponse(null, {
         status: 200,

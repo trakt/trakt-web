@@ -1,5 +1,4 @@
 import { ExtendedUserMappedMock } from '$mocks/data/users/mapped/ExtendedUserSettingsMappedMock.ts';
-import { UserFavoritedMappedMock } from '$mocks/data/users/mapped/UserFavoritedMappedMock.ts';
 import { UserRatedMappedMock } from '$mocks/data/users/mapped/UserRatedMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
@@ -20,13 +19,5 @@ describe('store: useUser', () => {
     });
 
     expect(result).to.deep.equal(UserRatedMappedMock);
-  });
-
-  it('should contain the user favorites', async () => {
-    const result = await runQuery({
-      factory: () => useUser().favorites,
-    });
-
-    expect(result).to.deep.equal(UserFavoritedMappedMock);
   });
 });

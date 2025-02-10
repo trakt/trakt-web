@@ -1,6 +1,5 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
-  import FavoritesList from "../lists/FavoritesList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
@@ -37,15 +36,4 @@
   drilldownLabel={m.view_all_recently_watched_movies()}
   title={m.recently_watched_movies()}
   type="movie"
-/>
-
-<FavoritesList
-  type="movie"
-  title={m.favorite_movies()}
-  emptyMessage={m.favorite_movies_empty()}
-/>
-<FavoritesList
-  type="show"
-  title={m.favorite_shows()}
-  emptyMessage={m.favorite_shows_empty()}
 />

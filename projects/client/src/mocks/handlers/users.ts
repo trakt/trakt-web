@@ -1,8 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
-import { FavoritedMoviesResponseMock } from '../data/users/response/FavoritedMoviesResponseMock.ts';
-import { FavoritedShowsResponseMock } from '../data/users/response/FavoritedShowsResponseMock.ts';
 import { HistoryEpisodesResponseMock } from '../data/users/response/HistoryEpisodesResponseMock.ts';
 import { HistoryMoviesResponseMock } from '../data/users/response/HistoryMoviesResponseMock.ts';
 import { HistoryShowsResponseMock } from '../data/users/response/HistoryShowsResponseMock.ts';
@@ -34,12 +32,6 @@ export const users = [
   }),
   http.get('http://localhost/users/me/ratings/episodes', () => {
     return HttpResponse.json(RatedEpisodesResponseMock);
-  }),
-  http.get('http://localhost/users/me/favorites/movies/rank', () => {
-    return HttpResponse.json(FavoritedMoviesResponseMock);
-  }),
-  http.get('http://localhost/users/me/favorites/shows/rank', () => {
-    return HttpResponse.json(FavoritedShowsResponseMock);
   }),
   http.get('http://localhost/users/me/history/shows*', () => {
     return HttpResponse.json(HistoryShowsResponseMock);

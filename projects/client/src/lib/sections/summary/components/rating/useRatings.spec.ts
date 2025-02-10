@@ -70,28 +70,6 @@ describe('useRatings', () => {
     expect(rating).toBeUndefined();
   });
 
-  it('should return if the current item is favorited', async () => {
-    const { isFavorited } = await renderStore(() =>
-      useRatings({
-        type: 'movie',
-        id: MovieHereticMappedMock.id,
-      })
-    );
-
-    expect(await waitForEmission(isFavorited, 2)).toBe(true);
-  });
-
-  it('should return undefined if the current item is not favorited', async () => {
-    const { isFavorited } = await renderStore(() =>
-      useRatings({
-        type: 'movie',
-        id: MovieMatrixMappedMock.id,
-      })
-    );
-
-    expect(await waitForEmission(isFavorited, 2)).toBe(false);
-  });
-
   it('should call invalidate after rating', async () => {
     const { addRating } = await renderStore(() =>
       useRatings({
@@ -103,41 +81,5 @@ describe('useRatings', () => {
     await addRating(SimpleRating.Bad);
     expect(invalidate)
       .toHaveBeenCalledWith(InvalidateAction.Rated('movie'));
-    expect(invalidate)
-      .not.toHaveBeenNthCalledWith(2, InvalidateAction.Favorited('movie'));
-  });
-
-  it('should also invalidate favorite after rating a favorited item to a lower rating', async () => {
-    const { addRating, isFavorited } = await renderStore(() =>
-      useRatings({
-        type: 'movie',
-        id: MovieHereticMappedMock.id,
-      })
-    );
-
-    await waitForEmission(isFavorited, 2);
-    await addRating(SimpleRating.Bad, get(isFavorited));
-
-    expect(invalidate)
-      .toHaveBeenCalledWith(InvalidateAction.Rated('movie'));
-    expect(invalidate)
-      .toHaveBeenNthCalledWith(2, InvalidateAction.Favorited('movie'));
-  });
-
-  it('should also invalidate favorite after rating a non-favorited item with the highest rating', async () => {
-    const { addRating, isFavorited } = await renderStore(() =>
-      useRatings({
-        type: 'movie',
-        id: MovieMatrixMappedMock.id,
-      })
-    );
-
-    await waitForEmission(isFavorited, 2);
-    await addRating(SimpleRating.Great, get(isFavorited));
-
-    expect(invalidate)
-      .toHaveBeenCalledWith(InvalidateAction.Rated('movie'));
-    expect(invalidate)
-      .toHaveBeenNthCalledWith(2, InvalidateAction.Favorited('movie'));
   });
 });

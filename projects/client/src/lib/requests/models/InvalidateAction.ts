@@ -8,7 +8,7 @@ const INVALIDATION_ID = 'invalidate' as const;
 type AuthInvalidationTypes = 'auth';
 type RateableInvalidationTypes = 'rated';
 type ExtendedMediaInvalidationTypes = 'mark_as_watched';
-type MediaInvalidationTypes = 'watchlisted' | 'favorited';
+type MediaInvalidationTypes = 'watchlisted';
 
 export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:${AuthInvalidationTypes}`
@@ -21,7 +21,6 @@ type TypeDataMap = {
   'rated': RateableMediaType;
   'mark_as_watched': ExtendedMediaType;
   'watchlisted': MediaType;
-  'favorited': MediaType;
 };
 
 export function invalidationId(key?: string) {
@@ -48,5 +47,4 @@ export const InvalidateAction = {
     buildInvalidationKey('mark_as_watched', type),
 
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
-  Favorited: (type: MediaType) => buildInvalidationKey('favorited', type),
 };
