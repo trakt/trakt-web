@@ -1,0 +1,24 @@
+:root {
+  /* Base Layers (-1 to 10) */
+  /* for background elements that should be below content */
+  --layer-background: -1;
+
+  /* base layer for most content */
+  --layer-base: 1;
+  /* slightly elevated content */
+  --layer-raised: 2;
+  /* floating elements like sticky headers */
+  --layer-floating: 3;
+
+  /* Interactive Layers (100-800) */
+  /* modal dialogs */
+  --layer-dialog: 666;
+  /* dropdowns, context menus */
+  --layer-menu: 776;
+  /* overlays, popovers */
+  --layer-overlay: 777;
+
+  /* System Layers (900+) */
+  /* toasts, alerts, notifications */
+  --layer-top: 999;
+}
