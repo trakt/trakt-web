@@ -16,8 +16,8 @@
 
 <style>
   .trakt-user-avatar {
-    width: var(--ni-36);
-    height: var(--ni-36);
+    width: var(--ni-44);
+    height: var(--ni-44);
     flex-shrink: 0;
 
     :global(img) {
