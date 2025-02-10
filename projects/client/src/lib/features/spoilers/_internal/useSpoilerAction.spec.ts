@@ -1,3 +1,4 @@
+import { SPOILER_CLASS_NAME } from '$lib/features/spoilers/constants.ts';
 import { clone } from '$lib/utils/object/clone.ts';
 import { deepAssign } from '$lib/utils/object/deepAssign.ts';
 import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
@@ -46,7 +47,7 @@ describe('action: useSpoilerAction', () => {
     spoiler(node);
 
     await waitFor(() =>
-      expect(node.classList.contains('trakt-spoiler')).toBe(true)
+      expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(true)
     );
   });
 
@@ -61,10 +62,10 @@ describe('action: useSpoilerAction', () => {
       })
     );
 
-    node.classList.add('trakt-spoiler');
+    node.classList.add(SPOILER_CLASS_NAME);
     spoiler(node);
 
-    expect(node.classList.contains('trakt-spoiler')).toBe(false);
+    expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false);
   });
 
   it('should NOT remove the spoiler class when a show is unwatched', async () => {
@@ -104,11 +105,11 @@ describe('action: useSpoilerAction', () => {
     spoiler(node);
 
     // Remove the class to the node
-    node.classList.remove('trakt-spoiler');
+    node.classList.remove(SPOILER_CLASS_NAME);
 
     // Then verify it is removed
     await waitFor(
-      () => expect(node.classList.contains('trakt-spoiler')).toBe(true),
+      () => expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(true),
     );
   });
 
@@ -149,11 +150,11 @@ describe('action: useSpoilerAction', () => {
     spoiler(node);
 
     // Add the class to the node
-    node.classList.add('trakt-spoiler');
+    node.classList.add(SPOILER_CLASS_NAME);
 
     // Then verify it is removed
     await waitFor(
-      () => expect(node.classList.contains('trakt-spoiler')).toBe(false),
+      () => expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false),
     );
   });
 });

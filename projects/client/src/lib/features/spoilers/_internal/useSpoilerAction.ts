@@ -1,3 +1,4 @@
+import { SPOILER_CLASS_NAME } from '$lib/features/spoilers/constants.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { useMediaSpoiler } from '../useMediaSpoiler.ts';
 
@@ -8,11 +9,11 @@ export function useSpoilerAction(rest: SpoilerActionProps) {
 
   function spoiler(node: HTMLElement) {
     const add = () => {
-      node.classList.add('trakt-spoiler');
+      node.classList.add(SPOILER_CLASS_NAME);
     };
 
     const remove = () => {
-      node.classList.remove('trakt-spoiler');
+      node.classList.remove(SPOILER_CLASS_NAME);
     };
 
     function applySpoilerStyle(isHidden: boolean) {
@@ -29,7 +30,7 @@ export function useSpoilerAction(rest: SpoilerActionProps) {
     return {
       destroy() {
         unsubscribe();
-        node.classList.remove('trakt-spoiler');
+        node.classList.remove(SPOILER_CLASS_NAME);
       },
     };
   }
