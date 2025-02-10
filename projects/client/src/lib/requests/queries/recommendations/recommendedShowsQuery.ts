@@ -1,6 +1,8 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { mapShowResponseToEpisodeCount } from '$lib/requests/_internal/mapShowResponseToEpisodeCount.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -8,11 +10,7 @@ import { z } from 'zod';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { MediaEntrySchema } from '../../models/MediaEntry.ts';
 
-export const RecommendedShowSchema = MediaEntrySchema.extend({
-  episode: z.object({
-    count: z.number(),
-  }),
-});
+export const RecommendedShowSchema = MediaEntrySchema.merge(EpisodeCountSchema);
 export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
 type RecommendedShowsParams = {
@@ -54,9 +52,7 @@ export const recommendedShowsQuery = defineQuery({
   mapper: (body) =>
     body.map((show: RecommendedShowResponse[0]) => ({
       ...mapShowResponseToShowSummary(show),
-      episode: {
-        count: show.aired_episodes ?? NaN,
-      },
+      ...mapShowResponseToEpisodeCount(show),
     })),
   schema: RecommendedShowSchema.array(),
   ttl: time.hours(24),

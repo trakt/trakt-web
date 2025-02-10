@@ -7,6 +7,7 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
+import { mapShowResponseToEpisodeCount } from '../../_internal/mapShowResponseToEpisodeCount.ts';
 import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
@@ -28,9 +29,7 @@ function mapResponseToTrendingShow({
 }: ShowTrendingResponse): TrendingShow {
   return {
     watchers,
-    episode: {
-      count: show.aired_episodes ?? NaN,
-    },
+    ...mapShowResponseToEpisodeCount(show),
     ...mapShowResponseToShowSummary(show),
   };
 }
