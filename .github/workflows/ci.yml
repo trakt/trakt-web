@@ -133,6 +133,7 @@ jobs:
         run: 'deno task build:preview'
         env:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+          TRAKT_SESSION_SECRET: ${{ secrets.TRAKT_SESSION_SECRET }}
 
       - name: Witnessing the Premonition ake Run Preview
         working-directory: projects/client
@@ -202,6 +203,7 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          TRAKT_SESSION_SECRET: ${{ secrets.TRAKT_SESSION_SECRET }}
 
       - name: Delivering the Goods aka Upload Build
         if: github.ref == 'refs/heads/main'

@@ -18,8 +18,7 @@
     "i18n:resolve": "deno run --allow-read --allow-write .scripts/resolve-i18n.ts",
     "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts",
     "i18n:delete": "deno run --allow-read --allow-write --allow-env .scripts/delete-i18n.ts",
-    "cloudflare:cleanse": "deno run --allow-env --allow-net .scripts/cleanse-cloudflare.ts",
-    "insecurity:generate": "deno run .scripts/generate-insecurity.ts"
+    "cloudflare:cleanse": "deno run --allow-env --allow-net .scripts/cleanse-cloudflare.ts"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.2.0",

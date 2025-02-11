@@ -45,7 +45,6 @@ intone the following incantation:
 # This is required if the secrets are not already set or have changed
 echo "$TRAKT_CLIENT_ID" | npx wrangler pages secret put TRAKT_CLIENT_ID
 echo "$TRAKT_CLIENT_SECRET" | npx wrangler pages secret put TRAKT_CLIENT_SECRET
-echo "$TRAKT_SESSION_SECRET" | npx wrangler pages secret put TRAKT_SESSION_SECRET
 
 # This will build the client and deploy it to Cloudflare Pages
 [deno|npm|bun] task build && npx wrangler pages deploy
