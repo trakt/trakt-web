@@ -2,7 +2,6 @@
   import { setContext } from "svelte";
   import { initialize } from "./_internal/initialize";
   import FirebaseSetup from "./FirebaseSetup.svelte";
-  import PostHogSetup from "./PostHogSetup.svelte";
   import { ANALYTICS_CONTEXT } from "./useAnalytics";
 
   const { children }: ChildrenProps = $props();
@@ -11,7 +10,5 @@
 </script>
 
 <FirebaseSetup>
-  <PostHogSetup>
-    {@render children()}
-  </PostHogSetup>
+  {@render children()}
 </FirebaseSetup>

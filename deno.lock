@@ -43,7 +43,6 @@
     "npm:msw@^2.7.0": "2.7.0_typescript@5.7.3",
     "npm:playwright@*": "1.50.1",
     "npm:playwright@^1.50.1": "1.50.1",
-    "npm:posthog-js@^1.215.6": "1.215.6",
     "npm:prettier-plugin-svelte@^3.3.3": "3.3.3_prettier@3.4.2_svelte@5.19.9__acorn@8.14.0",
     "npm:prettier@^3.4.2": "3.4.2",
     "npm:sass-embedded@^1.83.4": "1.83.4",
@@ -3389,9 +3388,6 @@
         "browserslist"
       ]
     },
-    "core-js@3.40.0": {
-      "integrity": "sha512-7vsMc/Lty6AGnn7uFpYT56QesI5D2Y/UkgKounk87OP9Z2H9Z8kj6jzcSGAxFmUtDOS0ntK6lbQz+Nsa0Jj6mQ=="
-    },
     "core-util-is@1.0.3": {
       "integrity": "sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ=="
     },
@@ -3917,9 +3913,6 @@
       "dependencies": [
         "picomatch@4.0.2"
       ]
-    },
-    "fflate@0.4.8": {
-      "integrity": "sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA=="
     },
     "figures@3.2.0": {
       "integrity": "sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==",
@@ -5178,23 +5171,11 @@
         "source-map-js"
       ]
     },
-    "posthog-js@1.215.6": {
-      "integrity": "sha512-OWfLYXaGNZDfKnNo9h2jifV1rsqhSfZzHw6/W6IOSk8Cq2nidIPUm89mutk7zbzPPmnVTV8eqPCfhFaoHZZKLw==",
-      "dependencies": [
-        "core-js",
-        "fflate",
-        "preact",
-        "web-vitals"
-      ]
-    },
     "posthog-node@4.5.0": {
       "integrity": "sha512-h1WTHYvgOZ7kBGH0XfKVOVsSyFgCEbgzC2RIw7fetsW6RrSvxPYcaycKUDfqa5EGbvU0SYLbqAeeqNZjPDaznA==",
       "dependencies": [
         "axios"
       ]
-    },
-    "preact@10.25.4": {
-      "integrity": "sha512-jLdZDb+Q+odkHJ+MpW/9U5cODzqnB+fy2EiHSZES7ldV5LK7yjlVzTp7R8Xy6W6y75kfK8iWYtFVH7lvjwrCMA=="
     },
     "prelude-ls@1.2.1": {
       "integrity": "sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g=="
@@ -6870,7 +6851,6 @@
             "npm:jsdom@26",
             "npm:msw@^2.7.0",
             "npm:playwright@^1.50.1",
-            "npm:posthog-js@^1.215.6",
             "npm:prettier-plugin-svelte@^3.3.3",
             "npm:prettier@^3.4.2",
             "npm:sass-embedded@^1.83.4",
