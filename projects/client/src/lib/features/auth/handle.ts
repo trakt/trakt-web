@@ -9,12 +9,18 @@ import type {
 } from './models/SerializedAuthResponse.ts';
 import { authorize } from './requests/authorize.ts';
 import { decrypt } from './utils/decrypt.ts';
-import { encrypt } from './utils/encrypt.ts';
 
 export const AUTH_COOKIE_NAME = 'trakt-auth';
 const REFRESH_THRESHOLD_MINUTES = 15;
 
-function getLegacyAuthCookie(event: RequestEvent) {
+async function getEncryptedAuth(
+  event: RequestEvent,
+): Promise<SerializedAuthResponse | Nil> {
+  const encrypted = event.cookies.get(AUTH_COOKIE_NAME);
+  return await decrypt<SerializedAuthResponse>(key, encrypted);
+}
+
+function getAuth(event: RequestEvent): SerializedAuthResponse | null {
   try {
     const serializedToken = event.cookies.get(AUTH_COOKIE_NAME) ?? '';
     return JSON.parse(serializedToken) as SerializedAuthResponse;
@@ -71,7 +77,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (isAuthorized) {
       const cookie = event.cookies.serialize(
         AUTH_COOKIE_NAME,
-        await encrypt(key, result),
+        JSON.stringify(result),
         {
           httpOnly: true,
           secure: true,
@@ -92,18 +98,21 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
-  //TODO: remove this migration after March 1st 2025
-  const legacyAuthCookie = getLegacyAuthCookie(event);
-  if (legacyAuthCookie != null) {
-    setAuth(legacyAuthCookie);
+  const authResponse = getAuth(event);
+
+  // TODO remove this March 31
+  const decryptedAuthResponse = await getEncryptedAuth(event);
+  const isDecryptionFailed = decryptedAuthResponse == null;
+  if (!authResponse && !isDecryptionFailed) {
+    setAuth(decryptedAuthResponse);
 
     event.cookies.set(
       AUTH_COOKIE_NAME,
-      await encrypt(key, legacyAuthCookie),
+      JSON.stringify(decryptedAuthResponse),
       {
         httpOnly: true,
         secure: true,
-        expires: new Date(legacyAuthCookie.expiresAt ?? 0),
+        expires: new Date(decryptedAuthResponse?.expiresAt ?? 0),
         path: '/',
       },
     );
@@ -111,21 +120,17 @@ export const handle: Handle = async ({ event, resolve }) => {
     return await resolve(event);
   }
 
-  const encrypted = event.cookies.get(AUTH_COOKIE_NAME);
-  const decrypted = await decrypt<SerializedAuthResponse>(key, encrypted);
-  const isDecryptionFailed = decrypted == null && encrypted != null;
-
   const minutesToExpiry = Math.floor(
-    (new Date(decrypted?.expiresAt ?? 0).getTime() - Date.now()) /
+    (new Date(authResponse?.expiresAt ?? 0).getTime() - Date.now()) /
       time.minutes(1),
   );
   const shouldRefresh = minutesToExpiry <= REFRESH_THRESHOLD_MINUTES;
 
-  if (shouldRefresh && decrypted?.token.refresh != null) {
+  if (shouldRefresh && authResponse?.token.refresh != null) {
     const result = await authorize({
       token: {
         type: 'refresh',
-        refreshToken: decrypted.token.refresh,
+        refreshToken: authResponse.token.refresh,
       },
       referrer: getReferrer(),
     });
@@ -133,7 +138,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     setAuth(result);
     event.cookies.set(
       AUTH_COOKIE_NAME,
-      await encrypt(key, result),
+      JSON.stringify(result),
       {
         httpOnly: true,
         secure: true,
@@ -145,9 +150,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     return await resolve(event);
   }
 
-  setAuth(decrypted);
+  setAuth(authResponse);
 
-  if (isDecryptionFailed) {
+  if (!authResponse) {
     event.cookies.set(AUTH_COOKIE_NAME, '', {
       httpOnly: true,
       secure: true,

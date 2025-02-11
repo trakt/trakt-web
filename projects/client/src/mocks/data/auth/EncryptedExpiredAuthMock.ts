@@ -1,2 +1,0 @@
-export const EncryptedExpiredAuthMock =
-  'xBfssx5ebZ2pArAkEkekMsbkpZLj+wTC+BNqt2zjWyJpjZ+fat2NDEOltEuB1ZDayMCUpK/lozb+MnraLYz/7oKX3YRdbThfJN0WjJ1oJL+06Nw9iRymTD0JqB4nHeWKHXjENM0X/W/UyU+ZoNoHEvPfgPSybipUlCoo/jqOO7HkrENyIFJAdhOwqABWjWK6UX10uIPxfCkxJ4waolkt7hu5Js5PvA1K0R/u17nOD1/15V9MtOJHW61rJLnDGwALOvGCXdWSGxQgDEGNkrFS2Q/TqldmDA==';

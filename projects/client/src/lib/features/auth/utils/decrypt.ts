@@ -1,5 +1,3 @@
-import { error } from '$lib/utils/console/print.ts';
-
 export async function decrypt<T>(
   key: CryptoKey,
   data: string | Nil,
@@ -28,7 +26,6 @@ export async function decrypt<T>(
 
     return JSON.parse(jsonString);
   } catch (_) {
-    error('Failed to decrypt data', _);
     return null;
   }
 }

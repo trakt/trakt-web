@@ -1,12 +1,11 @@
+import { AuthEndpoint } from '$lib/features/auth/AuthEndpoint.ts';
 import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock.ts';
+import { AuthMock } from '$mocks/data/auth/AuthMock.ts';
 import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock.ts';
-import { EncryptedExpiredAuthMock } from '$mocks/data/auth/EncryptedExpiredAuthMock.ts';
+import { ExpiredAuthMock } from '$mocks/data/auth/ExpiredAuthMock.ts';
 import { mockRequestEvent } from '$test/request/mockRequestEvent.ts';
 import { describe, expect, it, vi } from 'vitest';
-import { AuthEndpoint } from './AuthEndpoint.ts';
-import { key } from './environment.ts';
 import { AUTH_COOKIE_NAME, handle } from './handle.ts';
-import { decrypt } from './utils/decrypt.ts';
 
 describe('handle: auth', () => {
   it('should handle logout', async () => {
@@ -41,7 +40,7 @@ describe('handle: auth', () => {
     });
   });
 
-  it('should handle decryption failure', async () => {
+  it('should handle invalid cookie contents', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost',
       cookieHandler: (key: string) => {
@@ -53,27 +52,19 @@ describe('handle: auth', () => {
       },
     });
 
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     await handle({ event, resolve: vi.fn() });
 
     expect(event.locals.auth).toEqual(null);
     expect(event.cookies.getAll().find((c) => c.name)?.value)
       .toEqual('');
-    expect(consoleSpy).toHaveBeenCalled();
-    consoleSpy.mockRestore();
   });
 
-  it('should handle legacy auth cookie', async () => {
-    const decryptedAuth = await decrypt(
-      key,
-      EncryptedAuthMock,
-    );
-
+  it('should handle auth cookie', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost',
       cookieHandler: (key: string) => {
         if (key === AUTH_COOKIE_NAME) {
-          return JSON.stringify(decryptedAuth);
+          return AuthMock;
         }
 
         return null;
@@ -82,13 +73,10 @@ describe('handle: auth', () => {
 
     await handle({ event, resolve: vi.fn() });
 
-    expect(event.locals.auth).toEqual(decryptedAuth);
-    expect(event.cookies.set).toHaveBeenCalled();
-    expect(event.cookies.getAll().find((c) => c.name)?.value)
-      .toEqual(EncryptedAuthMock);
+    expect(event.locals.auth).toEqual(AuthMappedMock);
   });
 
-  it('should handle encrypted auth cookie', async () => {
+  it('should handle legacy encrypted auth cookie', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost',
       cookieHandler: (key: string) => {
@@ -102,6 +90,9 @@ describe('handle: auth', () => {
 
     await handle({ event, resolve: vi.fn() });
 
+    expect(event.cookies.set).toHaveBeenCalled();
+    expect(event.cookies.getAll().find((c) => c.name)?.value)
+      .toEqual(AuthMock);
     expect(event.locals.auth).toEqual(AuthMappedMock);
   });
 
@@ -110,7 +101,7 @@ describe('handle: auth', () => {
       url: 'http://localhost',
       cookieHandler: (key: string) => {
         if (key === AUTH_COOKIE_NAME) {
-          return EncryptedExpiredAuthMock;
+          return ExpiredAuthMock;
         }
 
         return null;
