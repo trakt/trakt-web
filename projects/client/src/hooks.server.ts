@@ -49,5 +49,5 @@ export const handle: Handle = sequence(
   },
   handleCacheControl,
   handleMobileOperatingSystem,
-  handleGateway,
+  handleGateway, // TODO remove March 31st
 );

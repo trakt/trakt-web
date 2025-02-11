@@ -4,9 +4,9 @@ import type { Handle } from '@sveltejs/kit';
 export const handle: Handle = async ({ event, resolve }) => {
   const url = new URL(event.request.url);
 
-  if (url.pathname.startsWith(ClientEnvironment.svelte)) {
+  if (url.pathname.startsWith(ClientEnvironment.legacy)) {
     const traktUrl = new URL(
-      url.pathname.replace(ClientEnvironment.svelte, ''),
+      url.pathname.replace(ClientEnvironment.legacy, ''),
       TRAKT_TARGET_ENVIRONMENT,
     );
 

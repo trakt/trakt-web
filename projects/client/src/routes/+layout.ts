@@ -2,6 +2,7 @@ import type { LayoutLoad } from './$types.ts';
 
 import { browser } from '$app/environment';
 import { currentUserSettingsQuery } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
+import { setToken } from '$lib/features/auth/token/index.ts';
 import { QueryClient } from '@tanstack/svelte-query';
 
 export const load: LayoutLoad = async ({ data, fetch }) => {
@@ -15,6 +16,8 @@ export const load: LayoutLoad = async ({ data, fetch }) => {
       },
     },
   });
+
+  setToken(data.auth.token);
 
   if (data.auth.isAuthorized) {
     await queryClient.prefetchQuery(currentUserSettingsQuery({ fetch }));

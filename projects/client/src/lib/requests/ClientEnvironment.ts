@@ -1,4 +1,5 @@
 export enum ClientEnvironment {
-  svelte = '/_api/trakt',
+  legacy = '/_api/trakt',
+  development = '/api/trakt',
   test = 'http://localhost',
 }

@@ -1,4 +1,5 @@
 import { AuthEndpoint } from '$lib/features/auth/AuthEndpoint.ts';
+import { setToken } from '$lib/features/auth/token/index.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
@@ -39,6 +40,7 @@ export function useAuth() {
     await fetch(AuthEndpoint.Logout, {
       method: 'POST',
     });
+    setToken(null);
     isAuthorized.set(false);
     await invalidate(InvalidateAction.Auth);
     globalThis.location.href = setCacheBuster(
