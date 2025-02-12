@@ -278,5 +278,9 @@
   "no_popular_lists": "{title} taucht in keinen beliebten Listen auf.",
   "by": "von",
   "users_avatar": "{userName}'s Avatar",
-  "media_poster": "{title} Poster"
+  "media_poster": "{title} Poster",
+  "popular_comments": "Beliebte Kommentare",
+  "no_comments": "Noch keine Kommentare. Sei der/die Erste!",
+  "review_by": "Review von",
+  "shout_by": "Shout von"
 }

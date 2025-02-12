@@ -26,6 +26,9 @@
   --width-list-card: var(--ni-480);
   --height-list-card: var(--ni-256);
 
+  --width-comment-card: var(--ni-480);
+  --height-comment-card: var(--ni-228);
+
   /**
    * List dimensions
    */
@@ -48,6 +51,10 @@
   );
   --height-lists-list: calc(
     var(--height-list-card) + var(--layout-distance-scroll-card)
+      + var(--layout-scrollbar-width)
+  );
+  --height-comments-list: calc(
+    var(--height-comment-card) + var(--layout-distance-scroll-card)
       + var(--layout-scrollbar-width)
   );
 

@@ -278,5 +278,9 @@
   "no_popular_lists": "{title}は人気のリストには見当たりません。",
   "by": "作成者",
   "users_avatar": "{userName}のアバター",
-  "media_poster": "{title}のポスター"
+  "media_poster": "{title}のポスター",
+  "popular_comments": "人気のコメント",
+  "no_comments": "まだコメントはありません。",
+  "review_by": "レビュー:",
+  "shout_by": "シャウト:"
 }

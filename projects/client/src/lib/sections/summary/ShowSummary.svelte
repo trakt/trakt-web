@@ -12,6 +12,7 @@
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/SeasonList.svelte";
+  import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
@@ -61,6 +62,8 @@
 <CastList title={m.actors()} cast={crew.cast} />
 
 <SeasonList show={media} {seasons} />
+
+<Comments {media} />
 
 <RelatedList title={m.related_shows_title()} slug={media.slug} type="show" />
 

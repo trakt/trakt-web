@@ -278,5 +278,9 @@
   "no_popular_lists": "{title} non compare in nessuna lista popolare.",
   "by": "di",
   "users_avatar": "Avatar di {userName}",
-  "media_poster": "Locandina di {title}"
+  "media_poster": "Locandina di {title}",
+  "popular_comments": "Commenti popolari",
+  "no_comments": "Nessun commento per ora.",
+  "review_by": "Recensione di",
+  "shout_by": "Grido di"
 }

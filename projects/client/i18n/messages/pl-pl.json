@@ -278,5 +278,9 @@
   "no_popular_lists": "{title} nie pojawia się na żadnych popularnych listach. Wygląda na to, że nikt nie wpadł na to, żeby go umieścić... jeszcze!",
   "by": "przez",
   "users_avatar": "Awatar użytkownika {userName}",
-  "media_poster": "Plakat {title}"
+  "media_poster": "Plakat {title}",
+  "popular_comments": "Popularne komentarze",
+  "no_comments": "Jeszcze brak komentarzy.",
+  "review_by": "Recenzja od",
+  "shout_by": "Krzyknął"
 }

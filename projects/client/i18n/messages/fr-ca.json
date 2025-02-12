@@ -278,5 +278,9 @@
   "no_popular_lists": "{title} ne figure dans aucune liste populaire.",
   "by": "par",
   "users_avatar": "Avatar de {userName}",
-  "media_poster": "Affiche de {title}"
+  "media_poster": "Affiche de {title}",
+  "popular_comments": "Commentaires populaires",
+  "no_comments": "Aucun commentaire pour l'instant.",
+  "review_by": "Critique par",
+  "shout_by": "Crié par"
 }

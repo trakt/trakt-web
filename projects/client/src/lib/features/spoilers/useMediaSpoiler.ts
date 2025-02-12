@@ -1,7 +1,7 @@
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import {
   useIsWatched,
-} from '$lib/sections/media-actions/mark-as-watched/useIsWatched';
+} from '$lib/sections/media-actions/mark-as-watched/useIsWatched.ts';
 import { derived } from 'svelte/store';
 import { useSpoiler } from './_internal/useSpoiler.ts';
 

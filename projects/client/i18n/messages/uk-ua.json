@@ -278,5 +278,9 @@
   "no_popular_lists": "{title} не з'являється в жодному популярному списку.",
   "by": "від",
   "users_avatar": "Аватар {userName}",
-  "media_poster": "Постер {title}"
+  "media_poster": "Постер {title}",
+  "popular_comments": "Популярні коментарі",
+  "no_comments": "Ще немає коментарів.",
+  "review_by": "Огляд від",
+  "shout_by": "Вигук від"
 }

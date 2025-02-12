@@ -278,5 +278,9 @@
   "no_popular_lists": "{title} staat niet op populaire lijsten.",
   "by": "door",
   "users_avatar": "Avatar van {userName}",
-  "media_poster": "{title} poster"
+  "media_poster": "{title} poster",
+  "popular_comments": "Populaire reacties",
+  "no_comments": "Nog geen reacties.",
+  "review_by": "Review door",
+  "shout_by": "Geschreeuwd door"
 }
