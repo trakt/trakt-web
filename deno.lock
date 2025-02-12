@@ -40,6 +40,7 @@
     "npm:hono@^4.6.16": "4.6.18",
     "npm:idb-keyval@^6.2.1": "6.2.1",
     "npm:jsdom@26": "26.0.0",
+    "npm:marked@^15.0.6": "15.0.6",
     "npm:msw@^2.7.0": "2.7.0_typescript@5.7.3",
     "npm:playwright@*": "1.50.1",
     "npm:playwright@^1.50.1": "1.50.1",
@@ -4802,6 +4803,9 @@
         "semver@7.6.3"
       ]
     },
+    "marked@15.0.6": {
+      "integrity": "sha512-Y07CUOE+HQXbVDCGl3LXggqJDbXDP2pArc2C1N1RRMN0ONiShoSsIInMd5Gsxupe7fKLpgimTV+HOJ9r7bA+pg=="
+    },
     "math-intrinsics@1.1.0": {
       "integrity": "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="
     },
@@ -6849,6 +6853,7 @@
             "npm:globals@^15.14.0",
             "npm:idb-keyval@^6.2.1",
             "npm:jsdom@26",
+            "npm:marked@^15.0.6",
             "npm:msw@^2.7.0",
             "npm:playwright@^1.50.1",
             "npm:prettier-plugin-svelte@^3.3.3",

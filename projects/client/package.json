@@ -41,6 +41,7 @@
     "eslint-plugin-svelte": "^2.46.1",
     "globals": "^15.14.0",
     "jsdom": "^26.0.0",
+    "marked": "^15.0.6",
     "msw": "^2.7.0",
     "playwright": "^1.50.1",
     "prettier": "^3.4.2",
