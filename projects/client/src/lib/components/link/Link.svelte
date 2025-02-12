@@ -83,19 +83,7 @@
     }
 
     &[data-color="default"] {
-      text-decoration-color: var(--color-link-active);
-
-      &,
-      &:visited {
-        color: var(--color-foreground);
-      }
-
-      @include for-mouse {
-        &:hover,
-        &:focus-visible {
-          color: var(--color-link-active);
-        }
-      }
+      @include default-link-style;
 
       &.trakt-link-active {
         &,

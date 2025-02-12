@@ -19,8 +19,7 @@
 }
 
 @mixin for-tablet-sm {
-  @media (min-width: $breakpoint-tablet-sm-min)
-      and (max-width: $breakpoint-tablet-sm-max) {
+  @media (min-width: $breakpoint-tablet-sm-min) and (max-width: $breakpoint-tablet-sm-max) {
     @content;
   }
 }
@@ -32,8 +31,7 @@
 }
 
 @mixin for-tablet-lg {
-  @media (min-width: $breakpoint-tablet-lg-min)
-      and (max-width: $breakpoint-tablet-lg-max) {
+  @media (min-width: $breakpoint-tablet-lg-min) and (max-width: $breakpoint-tablet-lg-max) {
     @content;
   }
 }
@@ -61,5 +59,22 @@
 
   @media (display-mode: minimal-ui) {
     @content;
+  }
+}
+
+@mixin default-link-style {
+  text-decoration-color: var(--color-link-active);
+
+  &,
+  &:visited {
+    color: var(--color-foreground);
+  }
+
+  @include for-mouse {
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-link-active);
+    }
   }
 }
