@@ -22,9 +22,9 @@ composed of multiple interconnected projects:
 - **`playground`:** Our detective's sandbox. This CLI project allows for
   effortless exploration and experimentation with the Trakt API. It's where we
   test our hunches and follow the leads.
-- **`swagger`:** The public notice board. A simple `hono` server that exposes
-  the API contract as an OpenAPI/Swagger definition, providing clear
-  documentation for those who wish to understand our methods.
+- **`openapi`:** The public notice board. A simple `hono` server that exposes
+  the API contract as an OpenAPI definition, providing clear documentation for
+  those who wish to understand our methods.
 - **`client`:** The gleaming chrome of our pursuit. This project houses the
   Trakt Lite client, a sleek and efficient machine built with Deno and
   SvelteKit. It's the polished facade, the fast car we use to chase down those
@@ -92,9 +92,9 @@ please refer to the
 - Playground:
   - Development: `deno task playground:dev`
 
-- Swagger:
-  - Serve: `deno task swagger`
-  - Development: `deno task swagger:dev`
+- OpenAPI:
+  - Serve: `deno task openapi`
+  - Development: `deno task openapi:dev`
 
 - Client:
   - Development: `deno task client:dev`

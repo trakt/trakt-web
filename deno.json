@@ -2,16 +2,16 @@
   "workspace": [
     "./projects/api",
     "./projects/playground",
-    "./projects/swagger",
+    "./projects/openapi",
     "./projects/client"
   ],
   "tasks": {
     "reinstall": "deno install --allow-scripts --reload",
     "install": "deno install --allow-scripts --frozen",
     "format": "deno fmt && deno lint --fix",
-    "swagger": "cd projects/swagger && deno task start",
-    "swagger:dev": "cd projects/swagger && deno task dev",
-    "swagger:validate": "cd projects/swagger && deno task validate",
+    "openapi": "cd projects/openapi && deno task start",
+    "openapi:dev": "cd projects/openapi && deno task dev",
+    "openapi:validate": "cd projects/openapi && deno task validate",
     "playground:dev": "cd projects/playground && deno task dev",
     "client:dev": "cd projects/client && deno task dev",
     "client:dev:contrib": "cd projects/client && deno task dev:contrib",

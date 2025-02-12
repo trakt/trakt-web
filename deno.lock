@@ -6906,7 +6906,7 @@
           "jsr:@std/fs@^1.0.5"
         ]
       },
-      "projects/swagger": {
+      "projects/openapi": {
         "dependencies": [
           "npm:@hono/swagger-ui@0.5",
           "npm:@seriousme/openapi-schema-validator@^2.3.1",
