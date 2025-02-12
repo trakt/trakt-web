@@ -1,4 +1,5 @@
 import type { CommentResponse } from '$lib/api.ts';
+import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 
 export const ShowSiloCommentsResponseMock: CommentResponse[] = [
   {
@@ -18,16 +19,6 @@ export const ShowSiloCommentsResponseMock: CommentResponse[] = [
       'play_count': 11,
       'completed_count': 11,
     },
-    'user': {
-      'username': 'silo_enjoyer',
-      'private': false,
-      'name': 'SiloEnjoyer',
-      'vip': true,
-      'vip_ep': false,
-      'ids': {
-        'slug': 'silo_enjoyer',
-        'trakt': 1337,
-      },
-    },
+    'user': UserProfileHarryResponseMock,
   },
 ];

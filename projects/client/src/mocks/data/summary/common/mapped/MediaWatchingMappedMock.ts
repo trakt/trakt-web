@@ -1,19 +1,18 @@
-import type { ActiveWatcher } from '$lib/requests/models/ActiveWatcher.ts';
+import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
+import { DEFAULT_AVATAR } from '$lib/utils/constants.ts';
+import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 
-export const MediaWatchingMappedMock: ActiveWatcher[] = [
-  {
-    'username': 'harrierdubois',
-    'private': false,
-    'name': 'Harry Du Bois',
-    'isVip': false,
-    'slug': 'harrierdubois',
-  },
+export const MediaWatchingMappedMock: UserProfile[] = [
+  UserProfileHarryMappedMock,
   {
     'username': 'kimkitsuragi',
     'private': false,
     'name': 'Kim Kitsuragi',
     'isVip': false,
     'slug': 'kimkitsuragi',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'klaasje',
@@ -21,6 +20,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Klaasje Amandou',
     'isVip': false,
     'slug': 'klaasje',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'cuno',
@@ -28,6 +30,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Cuno',
     'isVip': false,
     'slug': 'cuno',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'joyce',
@@ -35,6 +40,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Joyce Messier',
     'isVip': false,
     'slug': 'joyce',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'measurehead',
@@ -42,6 +50,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Measurehead',
     'isVip': false,
     'slug': 'measurehead',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'lilian',
@@ -49,6 +60,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Lilian Carter',
     'isVip': false,
     'slug': 'lilian',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'titus',
@@ -56,6 +70,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Titus Hardie',
     'isVip': false,
     'slug': 'titus',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'garte',
@@ -63,6 +80,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Garte',
     'isVip': false,
     'slug': 'garte',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'evrart',
@@ -70,6 +90,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Evrart Claire',
     'isVip': false,
     'slug': 'evrart',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'thepale',
@@ -77,6 +100,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'The Pale',
     'isVip': false,
     'slug': 'thepale',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'lena',
@@ -84,6 +110,9 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Lena',
     'isVip': false,
     'slug': 'lena',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
   {
     'username': 'renee',
@@ -91,5 +120,8 @@ export const MediaWatchingMappedMock: ActiveWatcher[] = [
     'name': 'Renee',
     'isVip': false,
     'slug': 'renee',
+    'avatar': {
+      'url': DEFAULT_AVATAR,
+    },
   },
 ];

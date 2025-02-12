@@ -1,3 +1,4 @@
+import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import { z } from 'zod';
 
 export const MediaCommentSchema = z.object({
@@ -10,13 +11,7 @@ export const MediaCommentSchema = z.object({
   isReview: z.boolean(),
   replyCount: z.number(),
   likeCount: z.number(),
-  user: z.object({
-    userName: z.string(),
-    isVip: z.boolean(),
-    slug: z.string(),
-    avatar: z.object({
-      url: z.string(),
-    }),
+  user: UserProfileSchema.extend({
     stats: z.object({
       rating: z.number().nullable(),
       playCount: z.number(),

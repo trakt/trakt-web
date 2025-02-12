@@ -7,7 +7,7 @@
 </script>
 
 <div class="trakt-list-header">
-  <UserAvatar src={list.user.avatar.url} name={list.user.userName} />
+  <UserAvatar src={list.user.avatar.url} name={list.user.username} />
 
   <div class="list-name-and-creator">
     <p class="secondary bold ellipsis">
@@ -15,7 +15,7 @@
     </p>
     <div class="list-credits">
       <p class="secondary small">{m.by()}</p>
-      <UserProfileLink slug={list.user.slug} name={list.user.userName} />
+      <UserProfileLink slug={list.user.slug} name={list.user.username} />
     </div>
   </div>
 </div>

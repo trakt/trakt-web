@@ -1,5 +1,5 @@
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
-import { DEFAULT_AVATAR } from '$lib/utils/constants.ts';
+import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 
 export const MovieHereticCommentsMappedMock: MediaComment[] = [
   {
@@ -14,17 +14,12 @@ export const MovieHereticCommentsMappedMock: MediaComment[] = [
     'replyCount': 1,
     'updatedAt': new Date('2024-11-08T06:21:26.000Z'),
     'user': {
-      'avatar': {
-        'url': DEFAULT_AVATAR,
-      },
-      'isVip': true,
-      'slug': 'heretic',
+      ...UserProfileHarryMappedMock,
       'stats': {
         'completedCount': 1,
         'playCount': 1,
         'rating': 8,
       },
-      'userName': 'Heretic',
     },
   },
 ];

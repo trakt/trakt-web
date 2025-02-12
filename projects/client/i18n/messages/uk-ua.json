@@ -277,7 +277,7 @@
   "popular_lists": "Популярні списки",
   "no_popular_lists": "{title} не з'являється в жодному популярному списку.",
   "by": "від",
-  "users_avatar": "Аватар {userName}",
+  "users_avatar": "Аватар {username}",
   "media_poster": "Постер {title}",
   "popular_comments": "Популярні коментарі",
   "no_comments": "Ще немає коментарів.",

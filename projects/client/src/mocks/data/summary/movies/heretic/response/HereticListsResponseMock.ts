@@ -1,4 +1,5 @@
 import type { ListResponse } from '$lib/api.ts';
+import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 
 export const HereticListsResponseMock: ListResponse[] = [
   {
@@ -20,22 +21,6 @@ export const HereticListsResponseMock: ListResponse[] = [
       'trakt': 1234,
       'slug': 'heretics-only',
     },
-    'user': {
-      'username': 'harrier_dubois',
-      'private': false,
-      'name': 'Harry Du Bois',
-      'vip': true,
-      'vip_ep': false,
-      'ids': {
-        'slug': 'tequila_sunset',
-        'trakt': 41152,
-      },
-      'images': {
-        'avatar': {
-          'full':
-            'https://walter-r2.trakt.tv/images/users/014/366/083/avatars/large/disco_cop.png',
-        },
-      },
-    },
+    'user': UserProfileHarryResponseMock,
   },
 ];

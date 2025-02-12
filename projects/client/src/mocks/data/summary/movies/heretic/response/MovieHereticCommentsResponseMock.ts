@@ -1,4 +1,5 @@
 import type { CommentResponse } from '$lib/api.ts';
+import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 
 export const MovieHereticCommentsResponseMock: CommentResponse[] = [
   {
@@ -18,16 +19,6 @@ export const MovieHereticCommentsResponseMock: CommentResponse[] = [
       'play_count': 1,
       'completed_count': 1,
     },
-    'user': {
-      'username': 'Heretic',
-      'private': false,
-      'name': 'Heretic',
-      'vip': true,
-      'vip_ep': false,
-      'ids': {
-        'slug': 'heretic',
-        'trakt': 8008135,
-      },
-    },
+    'user': UserProfileHarryResponseMock,
   },
 ];

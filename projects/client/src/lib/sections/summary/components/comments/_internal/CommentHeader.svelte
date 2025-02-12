@@ -29,7 +29,7 @@
 <div class="trakt-comment-header" class:is-vip={comment.user.isVip}>
   <UserAvatar
     src={comment.user.avatar.url}
-    name={comment.user.userName}
+    name={comment.user.username}
     size="small"
   >
     {#snippet icon()}
@@ -44,7 +44,7 @@
       <p class="small secondary">
         {comment.isReview ? m.review_by() : m.shout_by()}
       </p>
-      <UserProfileLink slug={comment.user.slug} name={comment.user.userName} />
+      <UserProfileLink slug={comment.user.slug} name={comment.user.username} />
       {#if comment.user.isVip}
         <VipBadge />
       {/if}

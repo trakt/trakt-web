@@ -14,7 +14,7 @@
   </figcaption>
   <CrossOriginImage
     src={$user?.avatar.url ?? ""}
-    alt={m.users_avatar({ userName: $user?.name.first ?? "" })}
+    alt={m.users_avatar({ username: $user?.name.first ?? "" })}
   />
 </figure>
 

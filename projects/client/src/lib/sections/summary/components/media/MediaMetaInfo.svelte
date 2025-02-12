@@ -6,13 +6,13 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { ActiveWatcher } from "$lib/requests/models/ActiveWatcher";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { EpisodeStats } from "$lib/requests/models/EpisodeStats";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import type { UserProfile } from "$lib/requests/models/UserProfile";
   import type { WatchNowStreaming } from "$lib/requests/models/WatchNowServices";
   import { useWatchNow } from "$lib/stores/useWatchNow";
   import YoutubeButton from "../YoutubeButton.svelte";
@@ -23,7 +23,7 @@
     year: number | Nil;
     ratings: MediaRating;
     stats: MediaStats | EpisodeStats;
-    watchers: ActiveWatcher[];
+    watchers: UserProfile[];
     type: MediaType | "episode";
     media: MediaEntry | EpisodeEntry;
   };

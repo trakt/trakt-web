@@ -1,8 +1,8 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapWatcherResponseToActiveWatcher } from '$lib/requests/_internal/mapWatcherResponseToActiveWatcher.ts';
+import { mapToUserProfile } from '$lib/requests/_internal/mapUserProfile.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { ActiveWatcherSchema } from '../../models/ActiveWatcher.ts';
 
 type EpisodeWatchersParams =
   & { slug: string; season: number; episode: number }
@@ -33,9 +33,9 @@ export function episodeWatchersRequest(
 export const episodeWatchersQuery = defineQuery({
   key: 'episodeWatchers',
   request: episodeWatchersRequest,
-  mapper: (watchers) => watchers.map(mapWatcherResponseToActiveWatcher),
+  mapper: (users) => users.map(mapToUserProfile),
   dependencies: (params) => [params.slug, params.season, params.episode],
   invalidations: [],
-  schema: ActiveWatcherSchema.array(),
+  schema: UserProfileSchema.array(),
   ttl: time.minutes(15),
 });

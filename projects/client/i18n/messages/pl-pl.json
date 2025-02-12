@@ -277,7 +277,7 @@
   "popular_lists": "Popularne listy",
   "no_popular_lists": "{title} nie pojawia się na żadnych popularnych listach. Wygląda na to, że nikt nie wpadł na to, żeby go umieścić... jeszcze!",
   "by": "przez",
-  "users_avatar": "Awatar użytkownika {userName}",
+  "users_avatar": "Awatar użytkownika {username}",
   "media_poster": "Plakat {title}",
   "popular_comments": "Popularne komentarze",
   "no_comments": "Jeszcze brak komentarzy.",

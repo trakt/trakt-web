@@ -277,7 +277,7 @@
   "popular_lists": "Liste populare",
   "no_popular_lists": "{title} nu apare în nicio listă populară.",
   "by": "de",
-  "users_avatar": "Avatarul lui {userName}",
+  "users_avatar": "Avatarul lui {username}",
   "media_poster": "Posterul {title}",
   "popular_comments": "Comentarii populare",
   "no_comments": "Încă nu sunt comentarii.",

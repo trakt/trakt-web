@@ -1,6 +1,6 @@
-import { DEFAULT_AVATAR } from '$lib/utils/constants';
+import { mapToUserProfile } from '$lib/requests/_internal/mapUserProfile.ts';
 import type { CommentResponse } from '@trakt/api';
-import type { MediaComment } from '../models/MediaComment';
+import type { MediaComment } from '../models/MediaComment.ts';
 
 export function mapCommentResponseToMediaComment(
   commentResponse: CommentResponse,
@@ -16,12 +16,7 @@ export function mapCommentResponseToMediaComment(
     replyCount: commentResponse.replies,
     likeCount: commentResponse.likes,
     user: {
-      userName: commentResponse.user.username,
-      isVip: commentResponse.user.vip || commentResponse.user.vip_ep,
-      slug: commentResponse.user.ids.slug,
-      avatar: {
-        url: commentResponse.user.images?.avatar.full ?? DEFAULT_AVATAR,
-      },
+      ...mapToUserProfile(commentResponse.user),
       stats: {
         rating: commentResponse.user_stats.rating,
         playCount: commentResponse.user_stats.play_count,

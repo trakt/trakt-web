@@ -1,3 +1,4 @@
+import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import { z } from 'zod';
 
 export const MediaListSummarySchema = z.object({
@@ -5,14 +6,7 @@ export const MediaListSummarySchema = z.object({
   slug: z.string(),
   name: z.string(),
   description: z.string(),
-  user: z.object({
-    userName: z.string(),
-    isVip: z.boolean(),
-    slug: z.string(),
-    avatar: z.object({
-      url: z.string(),
-    }),
-  }),
+  user: UserProfileSchema,
 });
 
 export type MediaListSummary = z.infer<typeof MediaListSummarySchema>;

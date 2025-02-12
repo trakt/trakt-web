@@ -1,17 +1,8 @@
+import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
 import type { ProfileResponse } from '@trakt/api';
 
 export const MediaWatchingResponseMock: ProfileResponse[] = [
-  {
-    'username': 'harrierdubois',
-    'private': false,
-    'name': 'Harry Du Bois',
-    'vip': false,
-    'vip_ep': false,
-    'ids': {
-      'slug': 'harrierdubois',
-      'trakt': 941917,
-    },
-  },
+  UserProfileHarryResponseMock,
   {
     'username': 'kimkitsuragi',
     'private': false,

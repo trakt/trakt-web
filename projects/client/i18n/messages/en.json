@@ -277,7 +277,7 @@
   "popular_lists": "Popular lists",
   "no_popular_lists": "{title} does not appear on any popular lists.",
   "by": "by",
-  "users_avatar": "{userName}'s avatar",
+  "users_avatar": "{username}'s avatar",
   "media_poster": "{title} poster",
   "popular_comments": "Popular comments",
   "no_comments": "No comments yet.",

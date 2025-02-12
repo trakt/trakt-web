@@ -14,7 +14,7 @@
 </script>
 
 <div class="trakt-user-avatar" data-size={size}>
-  <CrossOriginImage {src} alt={m.users_avatar({ userName: name })} />
+  <CrossOriginImage {src} alt={m.users_avatar({ username: name })} />
 
   {#if icon}
     {@render icon()}
