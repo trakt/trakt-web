@@ -1,6 +1,5 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
-  import RateIcon from "$lib/components/icons/RateIcon.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
@@ -17,14 +16,6 @@
       mapRatingToSimpleRating(comment.user.stats.rating),
   );
 </script>
-
-{#snippet icon()}
-  {#if commenterRating}
-    <div class="trakt-avatar-icon">
-      <RateIcon rating={commenterRating} />
-    </div>
-  {/if}
-{/snippet}
 
 <div class="trakt-comment-header" class:is-vip={comment.user.isVip}>
   <UserAvatar
