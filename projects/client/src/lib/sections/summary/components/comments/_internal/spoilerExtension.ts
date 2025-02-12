@@ -1,5 +1,27 @@
 import type { TokenizerAndRendererExtension } from 'marked';
 
+export function matchSpoilerTagStart(src: string) {
+  return src.match(/\[spoiler\]/)?.index;
+}
+
+export function matchSpoilerTag(src: string) {
+  const rule = /^\[spoiler\](.*?)\[\/spoiler\]/;
+  return rule.exec(src);
+}
+
+export function spoilerRenderer(
+  text: string,
+  isCommentSpoiler: boolean,
+) {
+  if (isCommentSpoiler) {
+    // If the comment itself is already marked as a spoiler,
+    // then parse the individual spoilers as a normal paragraph
+    return `<p>${text}</p>`;
+  }
+
+  return `<p class='trakt-spoiler'>${text}</p>`;
+}
+
 export function spoilerExtension(
   isCommentSpoiler: boolean,
 ): TokenizerAndRendererExtension {
@@ -7,11 +29,10 @@ export function spoilerExtension(
     name: 'spoiler',
     level: 'inline',
     start(src: string) {
-      return src.match(/\[spoiler\]/)?.index;
+      return matchSpoilerTagStart(src);
     },
     tokenizer(src) {
-      const rule = /^\[spoiler\](.*?)\[\/spoiler\]/;
-      const match = rule.exec(src);
+      const match = matchSpoilerTag(src);
       if (match) {
         const token = {
           type: 'spoiler',
@@ -26,13 +47,7 @@ export function spoilerExtension(
       return undefined;
     },
     renderer(token) {
-      if (isCommentSpoiler) {
-        // If the comment itself is already marked as a spoiler,
-        // then parse the individual spoilers as a normal paragraph
-        return `<p'>${token.text}</p>`;
-      }
-
-      return `<p class='trakt-spoiler'>${token.text}</p>`;
+      return spoilerRenderer(token.text, isCommentSpoiler);
     },
   };
 }
