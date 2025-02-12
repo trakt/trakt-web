@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
+import { ShowSiloCommentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloCommentsResponseMock.ts';
 import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAnticipatedResponseMock.ts';
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
 import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
@@ -150,6 +151,12 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/lists/all/popular*`,
     () => {
       return HttpResponse.json(SiloListsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/comments/likes*`,
+    () => {
+      return HttpResponse.json(ShowSiloCommentsResponseMock);
     },
   ),
 ];

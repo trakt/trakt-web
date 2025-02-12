@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
+import { MovieHereticCommentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticCommentsResponseMock.ts';
 import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnticipatedResponseMock.ts';
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
@@ -91,6 +92,12 @@ export const movies = [
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/lists/all/popular*`,
     () => {
       return HttpResponse.json(HereticListsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/comments/likes*`,
+    () => {
+      return HttpResponse.json(MovieHereticCommentsResponseMock);
     },
   ),
 ];
