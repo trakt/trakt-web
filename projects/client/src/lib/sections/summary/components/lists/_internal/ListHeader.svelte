@@ -15,7 +15,7 @@
     </p>
     <div class="list-credits">
       <p class="secondary small">{m.by()}</p>
-      <UserProfileLink slug={list.user.slug} name={list.user.username} />
+      <UserProfileLink user={list.user} />
     </div>
   </div>
 </div>

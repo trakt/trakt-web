@@ -9,6 +9,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Kim Kitsuragi',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'kimkitsuragi',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -19,6 +20,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Klaasje Amandou',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'klaasje',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -29,6 +31,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Cuno',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'cuno',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -39,6 +42,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Joyce Messier',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'joyce',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -49,6 +53,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Measurehead',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'measurehead',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -59,6 +64,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Lilian Carter',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'lilian',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -69,6 +75,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Titus Hardie',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'titus',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -79,6 +86,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Garte',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'garte',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -89,6 +97,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Evrart Claire',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'evrart',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -99,6 +108,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'The Pale',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'thepale',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -109,6 +119,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Lena',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'lena',
     'avatar': {
       'url': DEFAULT_AVATAR,
@@ -119,6 +130,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'private': false,
     'name': 'Renee',
     'isVip': false,
+    'isDeleted': false,
     'slug': 'renee',
     'avatar': {
       'url': DEFAULT_AVATAR,

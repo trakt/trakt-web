@@ -3,6 +3,7 @@ import type { ProfileResponse } from '$lib/api.ts';
 export const UserProfileHarryResponseMock: ProfileResponse = {
   'username': 'harrier_dubois',
   'private': false,
+  'deleted': false,
   'name': 'Harry Du Bois',
   'vip': true,
   'vip_ep': false,

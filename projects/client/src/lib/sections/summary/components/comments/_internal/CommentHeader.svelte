@@ -35,7 +35,7 @@
       <p class="small secondary">
         {comment.isReview ? m.review_by() : m.shout_by()}
       </p>
-      <UserProfileLink slug={comment.user.slug} name={comment.user.username} />
+      <UserProfileLink user={comment.user} />
       {#if comment.user.isVip}
         <VipBadge />
       {/if}
@@ -78,7 +78,7 @@
   .trakt-comment-user {
     display: flex;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: var(--gap-xxs);
 
     height: var(--ni-18);
   }

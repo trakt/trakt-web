@@ -8,6 +8,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Kim Kitsuragi',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'kimkitsuragi',
@@ -19,6 +20,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Klaasje Amandou',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'klaasje',
@@ -30,6 +32,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Cuno',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'cuno',
@@ -41,6 +44,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Joyce Messier',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'joyce',
@@ -52,6 +56,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Measurehead',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'measurehead',
@@ -63,6 +68,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Lilian Carter',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'lilian',
@@ -74,6 +80,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Titus Hardie',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'titus',
@@ -85,6 +92,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Garte',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'garte',
@@ -96,6 +104,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Evrart Claire',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'evrart',
@@ -107,6 +116,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'The Pale',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'thepale',
@@ -118,6 +128,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Lena',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'lena',
@@ -129,6 +140,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'private': false,
     'name': 'Renee',
     'vip': false,
+    'deleted': false,
     'vip_ep': false,
     'ids': {
       'slug': 'renee',

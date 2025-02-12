@@ -8,6 +8,7 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     name: user.name,
     private: user.private,
     isVip: user.vip || user.vip_ep,
+    isDeleted: user.deleted,
     slug: user.ids.slug,
     avatar: {
       url: user.images?.avatar.full ?? DEFAULT_AVATAR,
