@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -32,8 +32,7 @@ export const peopleShowCreditsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleShowCreditsRequest,
-  mapper: (response) =>
-    response.map(({ show }) => mapShowResponseToShowSummary(show)),
+  mapper: (response) => response.map(({ show }) => mapToShowEntry(show)),
   schema: ShowEntrySchema.array(),
   ttl: time.days(7),
 });

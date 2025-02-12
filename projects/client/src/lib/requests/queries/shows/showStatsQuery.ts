@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapStatsResponseToMediaStats } from '$lib/requests/_internal/mapStatsResponseToMediaStats.ts';
+import { mapToMediaStats } from '$lib/requests/_internal/mapToMediaStats.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaStatsSchema } from '$lib/requests/models/MediaStats.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -31,7 +31,7 @@ export const showStatsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showStatsRequest,
-  mapper: mapStatsResponseToMediaStats,
+  mapper: mapToMediaStats,
   schema: MediaStatsSchema,
   ttl: time.minutes(30),
 });

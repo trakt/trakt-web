@@ -2,7 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
-import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 type MovieRelatedParams = {
@@ -35,7 +35,7 @@ export const movieRelatedQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: movieRelatedRequest,
-  mapper: (response) => response.map(mapMovieResponseToMovieSummary),
+  mapper: (response) => response.map(mapToMovieEntry),
   schema: z.array(MovieEntrySchema),
   ttl: time.days(7),
 });

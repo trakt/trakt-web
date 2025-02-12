@@ -2,7 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaRatingSchema } from '$lib/requests/models/MediaRating.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { mapRatingResponseToMediaRating } from '../../_internal/mapRatingResponseToMediaRating.ts';
+import { mapToMediaRating } from '../../_internal/mapToMediaRating.ts';
 
 type EpisodeRatingParams = {
   slug: string;
@@ -39,7 +39,7 @@ export const episodeRatingQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],
   request: episodeRatingRequest,
-  mapper: mapRatingResponseToMediaRating,
+  mapper: mapToMediaRating,
   schema: MediaRatingSchema,
   ttl: time.days(1),
 });

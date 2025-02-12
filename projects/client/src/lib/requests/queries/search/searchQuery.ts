@@ -1,7 +1,7 @@
 import type { SearchResultResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -24,9 +24,9 @@ function mapToSearchResultEntry(item: SearchResultResponse[0]): MediaEntry {
   const { type } = item;
   switch (type) {
     case 'show':
-      return mapShowResponseToShowSummary(item.show);
+      return mapToShowEntry(item.show);
     case 'movie':
-      return mapMovieResponseToMovieSummary(item.movie);
+      return mapToMovieEntry(item.movie);
     default:
       throw new Error(`Unknown type: ${type}`);
   }

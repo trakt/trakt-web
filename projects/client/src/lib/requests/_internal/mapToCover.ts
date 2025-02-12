@@ -9,7 +9,7 @@ import type { MediaEntry } from '../models/MediaEntry.ts';
 import { mediumUrl } from './mediumUrl.ts';
 import { thumbUrl } from './thumbUrl.ts';
 
-export function mapCover(
+export function mapToCover(
   images: ShowResponse['images'] | MovieResponse['images'],
 ): MediaEntry['cover'] {
   const coverCandidate = findDefined(...(images?.fanart ?? []));

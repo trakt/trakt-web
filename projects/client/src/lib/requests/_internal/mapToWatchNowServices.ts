@@ -7,7 +7,7 @@ import type {
 } from '../models/WatchNowServices.ts';
 import { sortWatchNowSources } from './sortWatchNowSources.ts';
 
-function mapStreamingService(
+function mapToWatchNowStreaming(
   serviceResponse: WatchNowServiceResponse,
 ): WatchNowStreaming {
   return {
@@ -18,7 +18,7 @@ function mapStreamingService(
   };
 }
 
-function mapOnDemandService(
+function mapToWatchNowOnDemand(
   serviceResponse: WatchNowServiceResponse,
 ): WatchNowOnDemand {
   const getPrice = (price: string | Nil) => {
@@ -42,7 +42,7 @@ function mapOnDemandService(
   };
 }
 
-export function mapWatchNowResponseToWatchNowDetails(
+export function mapToWatchNowServices(
   response: WatchNowResponse,
   country: string,
 ): WatchNowServices {
@@ -52,7 +52,7 @@ export function mapWatchNowResponseToWatchNowDetails(
   const purchaseResponse = sortWatchNowSources(data?.purchase ?? []);
 
   return {
-    streaming: subscriptionResponse.map(mapStreamingService),
-    onDemand: purchaseResponse.map(mapOnDemandService),
+    streaming: subscriptionResponse.map(mapToWatchNowStreaming),
+    onDemand: purchaseResponse.map(mapToWatchNowOnDemand),
   };
 }

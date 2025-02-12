@@ -1,13 +1,13 @@
 import type { RecommendedShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapShowResponseToEpisodeCount } from '$lib/requests/_internal/mapShowResponseToEpisodeCount.ts';
+import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
-import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { MediaEntrySchema } from '../../models/MediaEntry.ts';
 
 export const RecommendedShowSchema = MediaEntrySchema.merge(EpisodeCountSchema);
@@ -51,8 +51,8 @@ export const recommendedShowsQuery = defineQuery({
   request: recommendedShowsRequest,
   mapper: (body) =>
     body.map((show: RecommendedShowResponse[0]) => ({
-      ...mapShowResponseToShowSummary(show),
-      ...mapShowResponseToEpisodeCount(show),
+      ...mapToShowEntry(show),
+      ...mapToEpisodeCount(show),
     })),
   schema: RecommendedShowSchema.array(),
   ttl: time.hours(24),

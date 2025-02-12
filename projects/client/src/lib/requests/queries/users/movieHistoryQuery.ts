@@ -1,7 +1,7 @@
 import type { HistoryMoviesResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
@@ -55,7 +55,7 @@ const mapResponseToHistory = (
 ) => ({
   id: historyMovie.id,
   watchedAt: new Date(historyMovie.watched_at),
-  movie: mapMovieResponseToMovieSummary(historyMovie.movie),
+  movie: mapToMovieEntry(historyMovie.movie),
   type: 'movie' as const,
 });
 

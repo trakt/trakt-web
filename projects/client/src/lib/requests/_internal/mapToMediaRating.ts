@@ -3,7 +3,7 @@ import type { MediaRating } from '../models/MediaRating.ts';
 
 type RatingResponse = MovieRatingsResponse | ShowRatingsResponse;
 
-export function mapRatingResponseToMediaRating(
+export function mapToMediaRating(
   ratings: RatingResponse,
 ): MediaRating {
   return {

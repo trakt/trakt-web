@@ -35,7 +35,7 @@ function toCastMember(
   });
 }
 
-export function mapPeopleResponseToMediaCrew(
+export function mapToMediaCrew(
   response: PeopleResponse,
 ): MediaCrew {
   return {

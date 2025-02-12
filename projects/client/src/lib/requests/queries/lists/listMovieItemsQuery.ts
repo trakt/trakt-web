@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapListedMovieResponseToListItem } from '$lib/requests/_internal/mapListItemResponseToListItem.ts';
+import { mapToMovieListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
@@ -47,7 +47,7 @@ export const listMovieItemsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.id, params.limit, params.page],
   request: listMovieItemsRequest,
-  mapper: (data) => data.map(mapListedMovieResponseToListItem),
+  mapper: (data) => data.map(mapToMovieListItem),
   schema: ListedMovieSchema.array(),
   ttl: time.minutes(30),
 });

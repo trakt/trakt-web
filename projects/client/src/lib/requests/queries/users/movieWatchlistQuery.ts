@@ -1,7 +1,7 @@
 import type { SortType } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapListedMovieResponseToListItem } from '$lib/requests/_internal/mapListItemResponseToListItem.ts';
+import { mapToMovieListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
@@ -56,7 +56,7 @@ export const movieWatchlistQuery = defineQuery({
   ) => [params.sort, params.limit, params.page],
   request: watchlistRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapListedMovieResponseToListItem),
+    entries: response.body.map(mapToMovieListItem),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(WatchlistMovieSchema),

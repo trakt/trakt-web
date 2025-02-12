@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapToUserProfile } from '$lib/requests/_internal/mapUserProfile.ts';
+import { mapToUserProfile } from '$lib/requests/_internal/mapToUserProfile.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import { time } from '$lib/utils/timing/time.ts';

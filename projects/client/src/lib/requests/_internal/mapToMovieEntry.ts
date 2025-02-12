@@ -2,8 +2,8 @@ import type { MovieCertificationResponse, MovieResponse } from '$lib/api.ts';
 import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { MovieEntry } from '../models/MovieEntry.ts';
-import { mapCover } from './mapCover.ts';
-import { mapPoster } from './mapPoster.ts';
+import { mapToCover } from './mapToCover.ts';
+import { mapToPoster } from './mapToPoster.ts';
 
 function mapMovieCertificationResponse(
   certification?: MovieCertificationResponse,
@@ -16,11 +16,11 @@ function mapMovieCertificationResponse(
   return certification;
 }
 
-export function mapMovieResponseToMovieSummary(
+export function mapToMovieEntry(
   movie: MovieResponse,
 ): MovieEntry {
-  const poster = mapPoster(movie.images);
-  const cover = mapCover(movie.images);
+  const poster = mapToPoster(movie.images);
+  const cover = mapToCover(movie.images);
 
   return {
     id: movie.ids.trakt,

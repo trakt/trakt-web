@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapListedShowResponseToListItem } from '$lib/requests/_internal/mapListItemResponseToListItem.ts';
+import { mapToShowListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
@@ -51,7 +51,7 @@ export const listShowItemsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.id, params.limit, params.page],
   request: listShowItemsRequest,
-  mapper: (data) => data.map(mapListedShowResponseToListItem),
+  mapper: (data) => data.map(mapToShowListItem),
   schema: ListedShowSchema.array(),
   ttl: time.minutes(30),
 });

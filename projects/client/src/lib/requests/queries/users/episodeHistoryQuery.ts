@@ -1,8 +1,8 @@
 import type { HistoryEpisodesResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -60,8 +60,8 @@ function mapResponseToHistory(
   return {
     id: historyEpisode.id,
     watchedAt: new Date(historyEpisode.watched_at),
-    show: mapShowResponseToShowSummary(historyEpisode.show),
-    episode: mapEpisodeResponseToEpisodeEntry(historyEpisode.episode),
+    show: mapToShowEntry(historyEpisode.show),
+    episode: mapToEpisodeEntry(historyEpisode.episode),
     type: 'episode' as const,
   };
 }

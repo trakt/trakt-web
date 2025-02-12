@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapPeopleResponseToMediaCrew } from '$lib/requests/_internal/mapPeopleResponseToMediaCrew.ts';
+import { mapToMediaCrew } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaCrewSchema } from '$lib/requests/models/MediaCrew.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -34,7 +34,7 @@ export const moviePeopleQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: moviePeopleRequest,
-  mapper: (body) => mapPeopleResponseToMediaCrew(body),
+  mapper: (body) => mapToMediaCrew(body),
   schema: MediaCrewSchema,
   ttl: time.days(30),
 });

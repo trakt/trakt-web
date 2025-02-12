@@ -1,7 +1,7 @@
 import type { StudioResponse } from '$lib/api.ts';
 import type { MediaStudio } from '../models/MediaStudio.ts';
 
-export function mapStudioResponseToMediaStudio(
+export function mapToMediaStudio(
   studio: StudioResponse,
 ): MediaStudio {
   return {

@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapCommentResponseToMediaComment } from '$lib/requests/_internal/mapCommentResponseToMediaComment.ts';
+import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -35,7 +35,7 @@ export const showCommentsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showCommentsRequest,
-  mapper: (data) => data.map(mapCommentResponseToMediaComment),
+  mapper: (data) => data.map(mapToMediaComment),
   schema: MediaCommentSchema.array(),
   ttl: time.minutes(30),
 });

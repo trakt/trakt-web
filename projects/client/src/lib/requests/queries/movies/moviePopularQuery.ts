@@ -4,7 +4,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 type MoviePopularParams = {
@@ -38,7 +38,7 @@ export const moviePopularQuery = defineQuery({
   dependencies: (params) => [params.limit, params.page],
   request: moviePopularRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapMovieResponseToMovieSummary),
+    entries: response.body.map(mapToMovieEntry),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(MovieEntrySchema),

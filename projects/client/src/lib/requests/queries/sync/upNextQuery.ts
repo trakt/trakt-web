@@ -1,8 +1,8 @@
 import type { SortDirection, UpNextResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeProgressEntrySchema } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -60,8 +60,8 @@ export function mapUpNextResponse(item: UpNextResponse[0]): UpNextEntry {
   const episode = item.progress.next_episode;
 
   return {
-    show: mapShowResponseToShowSummary(item.show),
-    ...mapEpisodeResponseToEpisodeEntry(episode),
+    show: mapToShowEntry(item.show),
+    ...mapToEpisodeEntry(episode),
     total: item.progress.aired,
     completed: item.progress.completed,
     remaining: item.progress.aired - item.progress.completed,

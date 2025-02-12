@@ -1,12 +1,12 @@
 import type { MovieStatsResponse, ShowStatsResponse } from '$lib/api.ts';
 import type { MediaStats } from '../models/MediaStats.ts';
-import { mapStatsResponseToEpisodeStats } from './mapStatsResponseToEpisodeStats.ts';
+import { mapToEpisodeStats } from './mapToEpisodeStats.ts';
 
-export function mapStatsResponseToMediaStats(
+export function mapToMediaStats(
   stats: MovieStatsResponse | ShowStatsResponse,
 ): MediaStats {
   return {
-    ...mapStatsResponseToEpisodeStats(stats),
+    ...mapToEpisodeStats(stats),
     votes: stats.votes,
     favorited: stats.favorited,
   };

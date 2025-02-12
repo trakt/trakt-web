@@ -9,7 +9,7 @@ type EpisodeResponse =
   | UpNextResponse[0]['progress']['next_episode']
   | CalendarShowListResponse[0]['episode'];
 
-export function mapEpisodeResponseToEpisodeEntry(
+export function mapToEpisodeEntry(
   episode: EpisodeResponse,
 ): EpisodeEntry {
   const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));

@@ -6,7 +6,7 @@ import type { MediaEntry } from '../models/MediaEntry.ts';
 import { mediumUrl } from './mediumUrl.ts';
 import { thumbUrl } from './thumbUrl.ts';
 
-export function mapPoster(
+export function mapToPoster(
   images: ShowResponse['images'] | MovieResponse['images'],
 ): MediaEntry['poster'] {
   const posterCandidate = findDefined(

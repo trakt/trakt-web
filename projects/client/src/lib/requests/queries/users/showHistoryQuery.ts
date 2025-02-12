@@ -1,8 +1,8 @@
 import type { HistoryShowsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
@@ -58,8 +58,8 @@ const mapResponseToHistory = (
 ) => ({
   id: historyShow.id,
   watchedAt: new Date(historyShow.watched_at),
-  show: mapShowResponseToShowSummary(historyShow.show),
-  episode: mapEpisodeResponseToEpisodeEntry(historyShow.episode),
+  show: mapToShowEntry(historyShow.show),
+  episode: mapToEpisodeEntry(historyShow.episode),
   type: 'show' as const,
 });
 

@@ -1,8 +1,8 @@
 import type { ListResponse } from '$lib/api.ts';
-import { mapToUserProfile } from '$lib/requests/_internal/mapUserProfile.ts';
 import type { MediaListSummary } from '../models/MediaListSummary.ts';
+import { mapToUserProfile } from './mapToUserProfile.ts';
 
-export function mapListResponseToMediaListSummary(
+export function mapToMediaListSummary(
   listResponse: ListResponse,
 ): MediaListSummary {
   return {

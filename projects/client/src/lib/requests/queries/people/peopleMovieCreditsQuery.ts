@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -32,8 +32,7 @@ export const peopleMovieCreditsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleMovieCreditsRequest,
-  mapper: (response) =>
-    response.map(({ movie }) => mapMovieResponseToMovieSummary(movie)),
+  mapper: (response) => response.map(({ movie }) => mapToMovieEntry(movie)),
   schema: MediaEntrySchema.array(),
   ttl: time.days(7),
 });

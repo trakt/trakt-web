@@ -6,7 +6,7 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
-import { mapMovieResponseToMovieSummary } from '../../_internal/mapMovieResponseToMovieSummary.ts';
+import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 export const AnticipatedMovieSchema = MovieEntrySchema.extend({
@@ -25,7 +25,7 @@ function mapResponseToAnticipatedMovie({
 }: MovieAnticipatedResponse): AnticipatedMovie {
   return {
     score: list_count,
-    ...mapMovieResponseToMovieSummary(movie),
+    ...mapToMovieEntry(movie),
   };
 }
 

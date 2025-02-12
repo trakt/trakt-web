@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { coalesceEpisodes } from '$lib/requests/_internal/coalesceEpisodes.ts';
-import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
@@ -48,8 +48,8 @@ export const upcomingEpisodesQuery = defineQuery({
   request: upcomingEpisodesRequest,
   mapper: (response) => {
     const episodes = response.map((item) => ({
-      show: mapShowResponseToShowSummary(item.show),
-      ...mapEpisodeResponseToEpisodeEntry(item.episode),
+      show: mapToShowEntry(item.show),
+      ...mapToEpisodeEntry(item.episode),
     }));
 
     return coalesceEpisodes(episodes);

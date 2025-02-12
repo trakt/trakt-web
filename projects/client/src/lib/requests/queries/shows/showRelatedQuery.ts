@@ -1,11 +1,11 @@
 import { type ShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapShowResponseToEpisodeCount } from '$lib/requests/_internal/mapShowResponseToEpisodeCount.ts';
+import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { z } from 'zod';
-import { mapShowResponseToShowSummary } from '../../_internal/mapShowResponseToShowSummary.ts';
+import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 type ShowRelatedParams = {
@@ -17,8 +17,8 @@ export type RelatedShow = z.infer<typeof RelatedShowSchema>;
 
 function mapResponseToRelatedShow(show: ShowResponse) {
   return {
-    ...mapShowResponseToEpisodeCount(show),
-    ...mapShowResponseToShowSummary(show),
+    ...mapToEpisodeCount(show),
+    ...mapToShowEntry(show),
   };
 }
 

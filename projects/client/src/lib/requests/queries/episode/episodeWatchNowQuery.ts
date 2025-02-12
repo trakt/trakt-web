@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { mapWatchNowResponseToWatchNowDetails } from '../../_internal/mapWatchNowResponseToWatchNowDetails.ts';
+import { mapToWatchNowServices } from '../../_internal/mapToWatchNowServices.ts';
 import { WatchNowServicesSchema } from '../../models/WatchNowServices.ts';
 
 type EpisodeWatchNowParams = {
@@ -33,8 +33,7 @@ export const episodeWatchNowQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.id, params.country],
   request: episodeWatchNowRequest,
-  mapper: (response, params) =>
-    mapWatchNowResponseToWatchNowDetails(response, params.country),
+  mapper: (response, params) => mapToWatchNowServices(response, params.country),
   schema: WatchNowServicesSchema,
   ttl: time.days(1),
 });

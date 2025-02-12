@@ -1,8 +1,8 @@
-import { mapToUserProfile } from '$lib/requests/_internal/mapUserProfile.ts';
 import type { CommentResponse } from '@trakt/api';
 import type { MediaComment } from '../models/MediaComment.ts';
+import { mapToUserProfile } from './mapToUserProfile.ts';
 
-export function mapCommentResponseToMediaComment(
+export function mapToMediaComment(
   commentResponse: CommentResponse,
 ): MediaComment {
   return {

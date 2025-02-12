@@ -2,7 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { mapEpisodeResponseToEpisodeEntry } from '../../_internal/mapEpisodeResponseToEpisodeEntry.ts';
+import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 
 type ShowSeasonEpisodeParams = {
   slug: string;
@@ -36,7 +36,7 @@ export const showSeasonEpisodesQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season],
   request: showSeasonEpisodesRequest,
-  mapper: (body) => body.map(mapEpisodeResponseToEpisodeEntry),
+  mapper: (body) => body.map(mapToEpisodeEntry),
   schema: EpisodeEntrySchema.array(),
   ttl: time.hours(6),
 });

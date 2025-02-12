@@ -1,7 +1,7 @@
 import type { EpisodeStatsResponse } from '$lib/api.ts';
 import type { EpisodeStats } from '../models/EpisodeStats.ts';
 
-export function mapStatsResponseToEpisodeStats(
+export function mapToEpisodeStats(
   stats: EpisodeStatsResponse,
 ): EpisodeStats {
   return {

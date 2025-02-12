@@ -3,14 +3,14 @@ import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ShowEntry } from '../models/ShowEntry.ts';
-import { mapCover } from './mapCover.ts';
-import { mapPoster } from './mapPoster.ts';
+import { mapToCover } from './mapToCover.ts';
+import { mapToPoster } from './mapToPoster.ts';
 
-export function mapShowResponseToShowSummary(
+export function mapToShowEntry(
   show: ShowResponse,
 ): ShowEntry {
-  const poster = mapPoster(show.images);
-  const cover = mapCover(show.images);
+  const poster = mapToPoster(show.images);
+  const cover = mapToCover(show.images);
 
   const thumbCandidate = findDefined(
     ...(show.images?.thumb ?? []),

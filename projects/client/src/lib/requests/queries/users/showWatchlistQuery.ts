@@ -1,7 +1,7 @@
 import type { SortType } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { mapListedShowResponseToListItem } from '$lib/requests/_internal/mapListItemResponseToListItem.ts';
+import { mapToShowListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -60,7 +60,7 @@ export const showWatchlistQuery = defineQuery({
   ) => [params.sort, params.limit, params.page],
   request: watchlistRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapListedShowResponseToListItem),
+    entries: response.body.map(mapToShowListItem),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(WatchlistShowSchema),

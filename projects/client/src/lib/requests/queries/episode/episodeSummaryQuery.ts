@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapEpisodeResponseToEpisodeEntry } from '$lib/requests/_internal/mapEpisodeResponseToEpisodeEntry.ts';
+import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeEntrySchema } from '$lib/requests/models/EpisodeEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -39,7 +39,7 @@ export const episodeSummaryQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],
   request: episodeSummaryRequest,
-  mapper: mapEpisodeResponseToEpisodeEntry,
+  mapper: mapToEpisodeEntry,
   schema: EpisodeEntrySchema,
   ttl: time.days(1),
 });
