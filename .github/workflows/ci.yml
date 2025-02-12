@@ -74,10 +74,12 @@ jobs:
         run: deno task openapi:validate
 
       - name: Transcribing the Ancient Knowledge aka Generate OpenAPI
+        if: github.ref == 'refs/heads/main'
         run: deno task generate
         working-directory: projects/openapi
 
       - name: Preserving the Sacred Texts aka Upload Definition
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: openapi
