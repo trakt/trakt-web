@@ -1,3 +1,4 @@
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { EpisodeComputedType } from '../models/EpisodeType.ts';
 import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery.ts';
 
@@ -33,7 +34,7 @@ export function coalesceEpisodes(episodes: UpcomingEpisodeEntry[]) {
 
     if (hasSeasonPremiere && hasSeasonFinale) {
       return [{
-        ...episodes[0],
+        ...assertDefined(episodes[0]),
         type: EpisodeComputedType.full_season,
         season,
         show,
