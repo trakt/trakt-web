@@ -1,8 +1,10 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { useListItems } from "./useListItems.ts";
 
   const { list, type }: { list: MediaListSummary; type: MediaType } = $props();
@@ -11,17 +13,19 @@
 </script>
 
 {#if $items}
-  <div class="trakt-list-posters" style="--poster-count: {$items.length}">
-    {#each $items as item, index}
-      <div class="poster-wrapper" style="--poster-index: {index}">
-        <CrossOriginImage
-          animate={false}
-          src={item.entry.poster.url.medium}
-          alt={m.media_poster({ title: item.entry.title })}
-        />
-      </div>
-    {/each}
-  </div>
+  <Link href={UrlBuilder.users(list.user.slug).lists(list.slug, type)}>
+    <div class="trakt-list-posters" style="--poster-count: {$items.length}">
+      {#each $items as item, index}
+        <div class="poster-wrapper" style="--poster-index: {index}">
+          <CrossOriginImage
+            animate={false}
+            src={item.entry.poster.url.medium}
+            alt={m.media_poster({ title: item.entry.title })}
+          />
+        </div>
+      {/each}
+    </div>
+  </Link>
 {/if}
 
 <style lang="scss">

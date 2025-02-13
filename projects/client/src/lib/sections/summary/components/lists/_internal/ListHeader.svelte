@@ -1,18 +1,24 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
+  import type { MediaType } from "$lib/requests/models/MediaType";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import UserAvatar from "../../_internal/UserAvatar.svelte";
   import UserProfileLink from "../../_internal/UserProfileLink.svelte";
-  const { list }: { list: MediaListSummary } = $props();
+
+  const { list, type }: { list: MediaListSummary; type: MediaType } = $props();
 </script>
 
 <div class="trakt-list-header">
   <UserAvatar user={list.user} />
 
   <div class="list-name-and-creator">
-    <p class="secondary bold ellipsis">
-      {list.name}
-    </p>
+    <Link href={UrlBuilder.users(list.user.slug).lists(list.slug, type)}>
+      <p class="secondary bold ellipsis">
+        {list.name}
+      </p>
+    </Link>
     <div class="list-credits">
       <p class="secondary small">{m.by()}</p>
       <UserProfileLink user={list.user} />

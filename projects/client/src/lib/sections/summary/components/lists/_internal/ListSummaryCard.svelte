@@ -13,7 +13,7 @@
   --height-card="var(--height-list-card)"
 >
   <div class="trakt-list-summary">
-    <ListHeader {list} />
+    <ListHeader {list} {type} />
     <ListPosters {list} {type} />
   </div>
 </Card>

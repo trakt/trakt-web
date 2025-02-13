@@ -60,6 +60,10 @@ export const UrlBuilder = {
     user: (username: string) => `/profile/${username}`,
     me: () => UrlBuilder.profile.user('me'),
   },
+  users: (id: string) => ({
+    lists: (slug: string, type: MediaType) =>
+      `/users/${id}/lists/${slug}?type=${type}`,
+  }),
   app: {
     android: () => 'https://trakt.tv/a/trakt-android',
     ios: () => 'https://trakt.tv/a/trakt-ios',
