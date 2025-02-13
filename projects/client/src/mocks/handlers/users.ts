@@ -1,5 +1,12 @@
 import { http, HttpResponse } from 'msw';
 
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { ListedMoviesResponseMock } from '$mocks/data/lists/response/ListedMoviesResponseMock.ts';
+import { ListedShowsResponseMock } from '$mocks/data/lists/response/ListedShowsResponseMock.ts';
+import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/HereticListsMappedMock.ts';
+import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
+import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/SiloListsResponseMock.ts';
+import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { HistoryEpisodesResponseMock } from '../data/users/response/HistoryEpisodesResponseMock.ts';
 import { HistoryMoviesResponseMock } from '../data/users/response/HistoryMoviesResponseMock.ts';
@@ -46,4 +53,39 @@ export const users = [
   http.get('http://localhost/users/me/following/activities', () => {
     return HttpResponse.json(SocialActivityResponseMock);
   }),
+  http.get(
+    `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
+      assertDefined(SiloListsMappedMock.at(0)).slug
+    }`,
+    () => {
+      return HttpResponse.json(SiloListsResponseMock.at(0));
+    },
+  ),
+  http.get(
+    `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
+      assertDefined(SiloListsMappedMock.at(0)).slug
+    }/items/movie,show*`,
+    () => {
+      return HttpResponse.json([
+        ...ListedShowsResponseMock,
+        ...ListedMoviesResponseMock,
+      ]);
+    },
+  ),
+  http.get(
+    `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
+      assertDefined(SiloListsMappedMock.at(0)).slug
+    }/items/show*`,
+    () => {
+      return HttpResponse.json(ListedShowsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
+      assertDefined(HereticListsMappedMock.at(0)).slug
+    }/items/movie*`,
+    () => {
+      return HttpResponse.json(ListedMoviesResponseMock);
+    },
+  ),
 ];
