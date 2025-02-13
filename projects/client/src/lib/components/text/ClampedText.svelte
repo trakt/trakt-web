@@ -44,6 +44,8 @@
     display: flex;
     align-items: flex-end;
 
+    gap: var(--gap-xs);
+
     @include for-tablet-sm-and-below {
       flex-direction: column;
     }
