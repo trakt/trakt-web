@@ -14,7 +14,7 @@ const genAi = new GoogleGenerativeAI(
 );
 
 const model = genAi.getGenerativeModel({
-  model: 'gemini-2.0-flash-exp',
+  model: 'gemini-1.5-flash-8b',
   generationConfig: {
     responseMimeType: 'application/json',
   },
