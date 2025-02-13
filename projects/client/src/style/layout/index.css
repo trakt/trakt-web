@@ -10,6 +10,10 @@
   --height-thumb-card: var(--ni-160);
   --height-thumb-card-cover: var(--ni-120);
 
+  --width-activity-card: var(--ni-212);
+  --height-activity-card: var(--ni-172);
+  --height-activity-card-cover: var(--ni-120);
+
   --width-episode-card: var(--ni-212);
   --height-episode-card: var(--ni-172);
   --height-episode-card-cover: var(--ni-120);

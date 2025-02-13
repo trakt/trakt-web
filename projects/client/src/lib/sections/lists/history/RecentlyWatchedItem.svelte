@@ -19,7 +19,7 @@
     show={media.show}
     {style}
     context="standalone"
-    type="default"
+    variant="default"
   />
 {/if}
 

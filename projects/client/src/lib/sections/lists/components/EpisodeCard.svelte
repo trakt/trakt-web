@@ -22,15 +22,16 @@
   const src = $derived(useEpisodeSpoilerImage(props));
   const isFuture = $derived(props.episode.airDate > new Date());
 
-  const isDefault = $derived(props.type === "default");
+  const isDefault = $derived(props.variant === "default");
   const isShowContext = $derived(
-    props.type === "default" && props.context === "show",
+    props.variant === "default" && props.context === "show",
   );
+  const isActivity = $derived(props.variant === "activity");
   const style = $derived(props.style ?? "cover");
 </script>
 
 {#snippet action()}
-  {#if !isFuture}
+  {#if !isFuture && !isActivity}
     <MarkAsWatchedAction
       style="action"
       type="episode"
@@ -47,7 +48,7 @@
     <EpisodeStatusTag i18n={EpisodeIntlProvider} type={props.episode.type} />
   {/if}
 
-  {#if props.type === "default"}
+  {#if props.variant === "default"}
     {#if isFuture}
       <EpisodeTimeTag>
         {EpisodeIntlProvider.timestampText(props.episode.airDate)}
@@ -57,13 +58,13 @@
     {/if}
   {/if}
 
-  {#if props.type === "upcoming"}
+  {#if props.variant === "upcoming"}
     <EpisodeTimeTag>
       {EpisodeIntlProvider.timestampText(props.episode.airDate)}
     </EpisodeTimeTag>
   {/if}
 
-  {#if props.type === "next"}
+  {#if props.variant === "next"}
     <ShowProgressTag
       total={props.episode.total}
       progress={props.episode.completed}
@@ -104,7 +105,7 @@
         src={$src ?? EPISODE_COVER_PLACEHOLDER}
         alt={`${props.show.title} - ${props.episode.title}`}
         {tags}
-      ></CardCover>
+      />
     </Link>
 
     <CardFooter {action}>
@@ -122,7 +123,20 @@
         <p class="episode-card-subtitle ellipsis small">
           {props.episode.season}x{props.episode.number}
         </p>
-      {:else}
+      {/if}
+
+      {#if props.variant === "activity"}
+        <Link href={UrlBuilder.show(props.show.slug)}>
+          <p class="episode-card-title ellipsis">
+            {props.episode.season}x{props.episode.number} - {props.show.title}
+          </p>
+        </Link>
+        <p class="episode-card-subtitle ellipsis small">
+          {EpisodeIntlProvider.timestampText(props.date)}
+        </p>
+      {/if}
+
+      {#if !isShowContext && !isActivity}
         <Link href={UrlBuilder.show(props.show.slug)}>
           <p class="episode-card-title ellipsis">{props.show.title}</p>
         </Link>

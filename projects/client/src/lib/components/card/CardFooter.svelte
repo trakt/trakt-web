@@ -47,7 +47,7 @@
         justify-content: center;
       }
 
-      &:global(> :nth-child(2)) {
+      &:global(:has(~ .trakt-card-footer-action:not(:empty)) > :nth-child(2)) {
         max-width: 80%;
       }
     }

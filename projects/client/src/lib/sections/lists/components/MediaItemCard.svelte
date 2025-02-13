@@ -6,11 +6,14 @@
 
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
+  import ActivityCard from "$lib/components/media/card/ActivityCard.svelte";
   import ThumbCard from "$lib/components/media/card/ThumbCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
   import type { MediaCardProps } from "./MediaCardProps";
@@ -20,9 +23,11 @@
     media,
     tags: externalTags,
     action,
-    variant = "poster",
     popupActions,
+    ...rest
   }: MediaCardProps = $props();
+
+  const variant = $derived(rest.variant ?? "poster");
 </script>
 
 {#snippet defaultTags(media: MediaCardProps["media"])}
@@ -34,7 +39,7 @@
     />
   {:else if "episode" in media}
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
-  {:else if type === "movie"}
+  {:else if type === "movie" && variant !== "activity"}
     <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
   {/if}
 {/snippet}
@@ -69,10 +74,15 @@
 
   <CardFooter {action}>
     <Link href={UrlBuilder.media(type, media.slug)}>
-      <p class="recommendation-title small ellipsis">
+      <p class="media-title small ellipsis">
         {media.title}
       </p>
     </Link>
+    {#if rest.variant === "activity"}
+      <p class="media-subtitle small ellipsis">
+        {toHumanDate(new Date(), rest.date, getLocale())}
+      </p>
+    {/if}
   </CardFooter>
 {/snippet}
 
@@ -88,8 +98,23 @@
   </ThumbCard>
 {/if}
 
+{#if variant === "activity"}
+  <ActivityCard>
+    {@render content(media.thumb.url)}
+  </ActivityCard>
+{/if}
+
 <style>
-  .recommendation-title {
+  .media-title {
+    margin: 0;
+    padding: 0;
+
+    color: var(--color-text-secondary);
+
+    font-weight: 500;
+  }
+
+  .media-subtitle {
     margin: 0;
     padding: 0;
 

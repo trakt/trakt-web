@@ -6,61 +6,58 @@
   import MediaItemCard from "./MediaItemCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
 
-  const {
-    type,
-    media,
-    tags,
-    action,
-    style = "cover",
-    popupActions,
-  }: MediaCardProps = $props();
+  const props: MediaCardProps = $props();
+  const style = $derived(props.style ?? "cover");
 </script>
 
 {#snippet defaultAction()}
-  <RenderFor audience="authenticated">
-    <WatchlistAction
-      style="action"
-      title={media.title}
-      type={media.type}
-      {media}
-    />
-  </RenderFor>
+  {#if props.variant !== "activity"}
+    <RenderFor audience="authenticated">
+      <WatchlistAction
+        style="action"
+        title={props.media.title}
+        type={props.media.type}
+        media={props.media}
+      />
+    </RenderFor>
+  {/if}
 {/snippet}
 
 {#snippet defaultPopupActions()}
   <RenderFor audience="authenticated">
     <WatchlistAction
       style="dropdown-item"
-      title={media.title}
-      type={media.type}
-      {media}
+      title={props.media.title}
+      type={props.media.type}
+      media={props.media}
     />
     <MarkAsWatchedAction
       style="dropdown-item"
-      title={media.title}
-      type={media.type}
-      {media}
+      title={props.media.title}
+      type={props.media.type}
+      media={props.media}
     />
   </RenderFor>
 {/snippet}
 
 {#if style === "cover"}
   <MediaItemCard
-    {type}
-    {media}
-    {tags}
+    {...props}
     {style}
-    action={action ?? defaultAction}
-    popupActions={popupActions ?? defaultPopupActions}
+    action={props.action ?? defaultAction}
+    popupActions={props.variant === "activity"
+      ? undefined
+      : defaultPopupActions}
   />
 {/if}
 
 {#if style === "summary"}
   <MediaSummaryCard
-    {type}
-    {media}
-    {tags}
-    popupActions={popupActions ?? defaultPopupActions}
-    action={action ?? defaultAction}
+    {...props}
+    {style}
+    action={props.action ?? defaultAction}
+    popupActions={props.variant === "activity"
+      ? undefined
+      : defaultPopupActions}
   />
 {/if}

@@ -16,7 +16,7 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(entry)}
-    <EpisodeCard episode={entry} show={entry.show} type="upcoming" />
+    <EpisodeCard episode={entry} show={entry.show} variant="upcoming" />
   {/snippet}
   {#snippet empty()}
     {#if !$isLoading}

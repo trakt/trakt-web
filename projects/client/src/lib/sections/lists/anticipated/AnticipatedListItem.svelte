@@ -4,14 +4,9 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import MediaCard from "../components/MediaCard.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
-  import type { MediaStyleProps } from "../components/MediaStyleProps";
   import type { AnticipatedEntry } from "./useAnticipatedList";
 
-  const {
-    type,
-    media,
-    style,
-  }: MediaCardProps<AnticipatedEntry> & MediaStyleProps = $props();
+  const { type, media, style }: MediaCardProps<AnticipatedEntry> = $props();
 </script>
 
 {#snippet tags()}

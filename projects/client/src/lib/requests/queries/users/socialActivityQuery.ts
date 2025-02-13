@@ -71,5 +71,5 @@ export const socialActivityQuery = defineQuery({
   request: socialActivityRequest,
   mapper: (response) => response.map(mapToSocialActivity),
   schema: SocialActivitySchema.array(),
-  ttl: time.minutes(30),
+  ttl: time.minutes(15),
 });

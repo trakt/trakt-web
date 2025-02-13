@@ -4,9 +4,14 @@ import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 
 export type EpisodeItemVariant =
-  | { type: 'next'; episode: EpisodeProgressEntry }
-  | { type: 'upcoming'; episode: EpisodeEntry }
-  | { type: 'default'; episode: EpisodeEntry; context?: 'show' | 'standalone' };
+  | { variant: 'next'; episode: EpisodeProgressEntry }
+  | { variant: 'upcoming'; episode: EpisodeEntry }
+  | {
+    variant: 'default';
+    episode: EpisodeEntry;
+    context?: 'show' | 'standalone';
+  }
+  | { variant: 'activity'; episode: EpisodeEntry; date: Date };
 
 export type EpisodeCardProps = EpisodeItemVariant & {
   show: ShowEntry | MediaEntry;

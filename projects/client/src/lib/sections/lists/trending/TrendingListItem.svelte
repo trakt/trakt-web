@@ -3,14 +3,9 @@
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
   import MediaCard from "../components/MediaCard.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
-  import type { MediaStyleProps } from "../components/MediaStyleProps";
   import type { TrendingEntry } from "./useTrendingList";
 
-  const {
-    type,
-    media,
-    style,
-  }: MediaCardProps<TrendingEntry> & MediaStyleProps = $props();
+  const { type, media, style }: MediaCardProps<TrendingEntry> = $props();
 </script>
 
 {#snippet tags()}
