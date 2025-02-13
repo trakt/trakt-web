@@ -1,4 +1,5 @@
 <script lang="ts">
+  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import MediaSummaryItem from "$lib/sections/summary/components/media/MediaSummaryItem.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
@@ -28,9 +29,26 @@
       },
     };
   }
+
+  function focusOnClick(node: HTMLElement) {
+    const handler = () => {
+      inputElement.focus();
+    };
+
+    node.addEventListener("click", handler);
+
+    return {
+      destroy() {
+        node.removeEventListener("click", handler);
+      },
+    };
+  }
 </script>
 
 <div class="trakt-search" class:search-is-loading={$isSearching}>
+  <div use:focusOnClick class="trakt-search-icon">
+    <SearchIcon />
+  </div>
   <input
     use:clickOutside
     bind:this={inputElement}
@@ -73,6 +91,7 @@
   .trakt-search {
     --search-input-width: clamp(var(--ni-80), 100%, var(--ni-320));
     --mobile-search-focus-width: 70dvw;
+    --search-icon-size: var(--ni-24);
 
     display: flex;
     height: var(--ni-48);
@@ -80,11 +99,20 @@
     align-items: center;
 
     position: relative;
+
+    .trakt-search-icon {
+      position: absolute;
+      z-index: calc(var(--layer-top) + var(--layer-overlay));
+      top: calc(var(--search-icon-size) / 2);
+      left: calc(var(--search-icon-size) / 2);
+    }
+
     .trakt-search-input {
       all: unset;
       height: 100%;
       width: 100%;
       padding: var(--ni-8) var(--ni-16);
+      padding-left: calc(var(--search-icon-size) + var(--ni-16));
       box-sizing: border-box;
 
       border-radius: var(--border-radius-s);
@@ -97,12 +125,18 @@
       backdrop-filter: blur(var(--ni-8));
 
       transition: var(--transition-increment) ease-in-out;
-      transition-property: border-color, background-color, width, top, left;
+      transition-property: border-color, background-color, padding, width, top,
+        left;
 
       @include for-mobile {
+        width: var(--search-icon-size);
         position: absolute;
         top: 0;
         left: 0;
+
+        &:not(:focus-within) {
+          padding: var(--ni-8) var(--ni-22);
+        }
       }
 
       &:focus-within {
