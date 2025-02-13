@@ -17,12 +17,8 @@
   );
 </script>
 
-<div class="trakt-comment-header" class:is-vip={comment.user.isVip}>
-  <UserAvatar
-    src={comment.user.avatar.url}
-    name={comment.user.username}
-    size="small"
-  >
+<div class="trakt-comment-header">
+  <UserAvatar user={comment.user} size="small">
     {#snippet icon()}
       {#if commenterRating}
         <UserRatingIcon rating={commenterRating} />
@@ -52,10 +48,8 @@
     align-items: center;
     gap: var(--gap-s);
 
-    &.is-vip {
-      :global(.trakt-user-avatar img) {
-        border: var(--ni-2) solid var(--color-background-vip-badge);
-      }
+    :global(.trakt-user-avatar) {
+      position: relative;
     }
 
     :global(.trakt-user-rating-icon) {

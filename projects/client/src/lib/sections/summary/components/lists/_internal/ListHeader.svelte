@@ -7,7 +7,7 @@
 </script>
 
 <div class="trakt-list-header">
-  <UserAvatar src={list.user.avatar.url} name={list.user.username} />
+  <UserAvatar user={list.user} />
 
   <div class="list-name-and-creator">
     <p class="secondary bold ellipsis">
