@@ -6,6 +6,7 @@
   const {
     src,
     alt,
+    badges,
     tags,
     isLoading,
     style = "gradient",
@@ -22,9 +23,16 @@
 </script>
 
 <div class="card-cover" class:card-cover-loading={isImagePending || isLoading}>
-  <div class="card-cover-tags">
-    {@render tags?.()}
-  </div>
+  {#if badges}
+    <div class="card-cover-badges">
+      {@render badges()}
+    </div>
+  {/if}
+  {#if tags}
+    <div class="card-cover-tags">
+      {@render tags()}
+    </div>
+  {/if}
   <div class="card-cover-image" class:has-gradient={style === "gradient"}>
     <CrossOriginImage
       animate={false}
@@ -36,36 +44,47 @@
 </div>
 
 <style>
-  .card-cover-tags {
+  .card-cover {
     --padding-card-tag: var(--ni-8);
 
-    width: calc(100% - var(--padding-card-tag) * 2);
-    position: absolute;
-    padding: var(--padding-card-tag);
-
-    z-index: var(--layer-raised);
-    bottom: 0;
-    left: 0;
-
-    box-sizing: border-box;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: var(--gap-xxs);
-  }
-
-  .card-cover {
     border-top-left-radius: var(--border-radius-m);
     border-top-right-radius: var(--border-radius-m);
     overflow: hidden;
     position: relative;
-  }
 
-  .card-cover-loading {
-    .card-cover-image {
-      opacity: 0;
-      filter: blur(var(--ni-4));
+    &.card-cover-loading {
+      .card-cover-image {
+        opacity: 0;
+        filter: blur(var(--ni-4));
+      }
+    }
+
+    .card-cover-badges,
+    .card-cover-tags {
+      z-index: var(--layer-raised);
+
+      position: absolute;
+
+      display: inline-flex;
+      justify-content: flex-end;
+
+      width: 100%;
+      padding: var(--padding-card-tag);
+      box-sizing: border-box;
+    }
+
+    .card-cover-badges {
+      top: 0;
+      left: 0;
+    }
+
+    .card-cover-tags {
+      bottom: 0;
+      left: 0;
+
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--gap-xxs);
     }
   }
 

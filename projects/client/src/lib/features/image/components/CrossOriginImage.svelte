@@ -42,4 +42,8 @@
       opacity: 1;
     }
   }
+
+  img {
+    text-indent: -8008135px;
+  }
 </style>

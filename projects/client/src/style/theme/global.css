@@ -11,6 +11,7 @@
   );
   --color-foreground-navbar: var(--shade-10);
 
+  --color-background-vip-border: var(--red-500);
   --color-background-vip-badge: var(--red-500);
   --color-foreground-vip-badge: var(--shade-10);
 

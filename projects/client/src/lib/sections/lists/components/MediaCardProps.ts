@@ -9,6 +9,7 @@ export type MediaItemVariant<T> =
 
 export type MediaCardProps<T = MediaInputDefault> = MediaItemVariant<T> & {
   type: MediaType;
+  badges?: Snippet<[MediaInput<T>['media']]>;
   tags?: Snippet<[MediaInput<T>['media']]>;
   action?: Snippet;
   popupActions?: Snippet;

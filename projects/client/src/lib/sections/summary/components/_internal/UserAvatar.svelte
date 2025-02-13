@@ -51,7 +51,7 @@
 
     &.trakt-vip-user {
       :global(img) {
-        border: var(--ni-2) solid var(--color-background-vip-badge);
+        border: var(--ni-2) solid var(--color-background-vip-border);
       }
     }
   }

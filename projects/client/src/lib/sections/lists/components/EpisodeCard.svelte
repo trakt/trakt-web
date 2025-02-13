@@ -104,6 +104,7 @@
       <CardCover
         src={$src ?? EPISODE_COVER_PLACEHOLDER}
         alt={`${props.show.title} - ${props.episode.title}`}
+        badges={props.badges}
         {tags}
       />
     </Link>

@@ -21,6 +21,7 @@
   const {
     type,
     media,
+    badges: externalBadges,
     tags: externalTags,
     action,
     popupActions,
@@ -62,6 +63,10 @@
       src={mediaCoverImageUrl}
       alt={m.media_poster({ title: media.title })}
     >
+      {#snippet badges()}
+        {@render externalBadges?.(media)}
+      {/snippet}
+
       {#snippet tags()}
         {#if externalTags}
           {@render externalTags(media)}
