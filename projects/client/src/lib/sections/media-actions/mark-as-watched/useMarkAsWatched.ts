@@ -50,9 +50,9 @@ export function useMarkAsWatched(
       }),
     });
 
-    isMarkingAsWatched.set(false);
-
     await invalidate(InvalidateAction.MarkAsWatched(type));
+
+    isMarkingAsWatched.set(false);
   };
 
   const removeWatched = async () => {
@@ -62,9 +62,10 @@ export function useMarkAsWatched(
         ids,
       }),
     });
-    isMarkingAsWatched.set(false);
 
     await invalidate(InvalidateAction.MarkAsWatched(type));
+
+    isMarkingAsWatched.set(false);
   };
 
   const isWatchable = media.every((item) => {

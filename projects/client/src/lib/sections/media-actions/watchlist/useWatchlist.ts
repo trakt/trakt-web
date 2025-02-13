@@ -38,9 +38,10 @@ export function useWatchlist({ type, media }: WatchlistStoreProps) {
     await addToWatchlistRequest({
       body: toWatchlistPayload(type, [media.id]),
     });
-    isWatchlistUpdating.set(false);
 
     await invalidate(InvalidateAction.Watchlisted(type));
+
+    isWatchlistUpdating.set(false);
   };
 
   const removeFromWatchlist = async () => {
@@ -48,9 +49,10 @@ export function useWatchlist({ type, media }: WatchlistStoreProps) {
     await removeFromWatchlistRequest({
       body: toWatchlistPayload(type, [media.id]),
     });
-    isWatchlistUpdating.set(false);
 
     await invalidate(InvalidateAction.Watchlisted(type));
+
+    isWatchlistUpdating.set(false);
   };
 
   return {
