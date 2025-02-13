@@ -6,6 +6,7 @@ import { HistoryMoviesResponseMock } from '../data/users/response/HistoryMoviesR
 import { HistoryShowsResponseMock } from '../data/users/response/HistoryShowsResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
+import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
 import { WatchedShowsResponseMock } from '../data/users/response/WatchedShowsResponseMock.ts';
 import { WatchlistMoviesResponseMock } from '../data/users/response/WatchlistMoviesResponseMock.ts';
@@ -41,5 +42,8 @@ export const users = [
   }),
   http.get('http://localhost/users/me/history/episodes*', () => {
     return HttpResponse.json(HistoryEpisodesResponseMock);
+  }),
+  http.get('http://localhost/users/me/following/activities', () => {
+    return HttpResponse.json(SocialActivityResponseMock);
   }),
 ];
