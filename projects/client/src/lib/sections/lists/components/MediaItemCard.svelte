@@ -79,7 +79,10 @@
 
   <CardFooter {action}>
     <Link href={UrlBuilder.media(type, media.slug)}>
-      <p class="media-title small ellipsis">
+      <p
+        class="media-title small ellipsis"
+        class:small={rest.variant !== "activity"}
+      >
         {media.title}
       </p>
     </Link>
@@ -116,7 +119,7 @@
 
     color: var(--color-text-secondary);
 
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .media-subtitle {
