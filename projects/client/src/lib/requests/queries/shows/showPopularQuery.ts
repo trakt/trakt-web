@@ -20,7 +20,7 @@ type ShowPopularParams = {
   limit?: number;
 } & ApiParams;
 
-function mapResponseToPopularShow(show: ShowResponse): PopularShow {
+function mapToPopularShow(show: ShowResponse): PopularShow {
   const { aired_episodes } = show;
   const episodeCount = aired_episodes && aired_episodes > 0
     ? { episode: { count: aired_episodes } }
@@ -58,7 +58,7 @@ export const showPopularQuery = defineQuery({
   dependencies: (params) => [params.limit, params.page],
   request: showPopularRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToPopularShow),
+    entries: response.body.map(mapToPopularShow),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(PopularShowSchema),

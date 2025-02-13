@@ -53,7 +53,7 @@ const showHistoryRequest = (
       return response;
     });
 
-const mapResponseToHistory = (
+const mapToHistory = (
   historyShow: HistoryShowsResponse,
 ) => ({
   id: historyShow.id,
@@ -74,7 +74,7 @@ export const showHistoryQuery = defineQuery({
   ],
   request: showHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToHistory),
+    entries: response.body.map(mapToHistory),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(HistoryShowSchema),

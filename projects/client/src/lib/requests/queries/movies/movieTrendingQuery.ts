@@ -19,7 +19,7 @@ type MovieTrendingParams = {
   limit?: number;
 } & ApiParams;
 
-function mapResponseToTrendingMovie({
+function mapToTrendingMovie({
   watchers,
   movie,
 }: MovieTrendingResponse): TrendingMovie {
@@ -55,7 +55,7 @@ export const movieTrendingQuery = defineQuery({
   dependencies: (params) => [params.limit, params.page],
   request: movieTrendingRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToTrendingMovie),
+    entries: response.body.map(mapToTrendingMovie),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(TrendingMovieSchema),

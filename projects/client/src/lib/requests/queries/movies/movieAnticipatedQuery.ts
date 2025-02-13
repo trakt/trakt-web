@@ -19,7 +19,7 @@ type MovieAnticipatedParams = {
   limit?: number;
 } & ApiParams;
 
-function mapResponseToAnticipatedMovie({
+function mapToAnticipatedMovie({
   list_count,
   movie,
 }: MovieAnticipatedResponse): AnticipatedMovie {
@@ -55,7 +55,7 @@ export const movieAnticipatedQuery = defineQuery({
   dependencies: (params) => [params.limit, params.page],
   request: movieAnticipatedRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToAnticipatedMovie),
+    entries: response.body.map(mapToAnticipatedMovie),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(AnticipatedMovieSchema),

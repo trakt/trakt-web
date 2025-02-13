@@ -54,7 +54,7 @@ function episodeHistoryRequest(
     });
 }
 
-function mapResponseToHistory(
+function mapToHistory(
   historyEpisode: HistoryEpisodesResponse,
 ): HistoryEpisode {
   return {
@@ -77,7 +77,7 @@ export const episodeHistoryQuery = defineQuery({
   ],
   request: episodeHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToHistory),
+    entries: response.body.map(mapToHistory),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(HistoryEpisodeSchema),

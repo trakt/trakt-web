@@ -50,7 +50,7 @@ const movieHistoryRequest = (
       return response;
     });
 
-const mapResponseToHistory = (
+const mapToHistory = (
   historyMovie: HistoryMoviesResponse,
 ) => ({
   id: historyMovie.id,
@@ -70,7 +70,7 @@ export const movieHistoryQuery = defineQuery({
   ],
   request: movieHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToHistory),
+    entries: response.body.map(mapToHistory),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(HistoryMovieSchema),

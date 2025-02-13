@@ -23,7 +23,7 @@ type ShowTrendingParams = {
   limit?: number;
 } & ApiParams;
 
-function mapResponseToTrendingShow({
+function mapToTrendingShow({
   watchers,
   show,
 }: ShowTrendingResponse): TrendingShow {
@@ -60,7 +60,7 @@ export const showTrendingQuery = defineQuery({
   dependencies: (params) => [params.limit, params.page],
   request: showTrendingRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToTrendingShow),
+    entries: response.body.map(mapToTrendingShow),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(TrendingShowSchema),

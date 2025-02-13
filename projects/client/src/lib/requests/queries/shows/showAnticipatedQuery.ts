@@ -22,7 +22,7 @@ type ShowAnticipatedParams = {
   limit?: number;
 } & ApiParams;
 
-function mapResponseToAnticipatedShow({
+function mapToAnticipatedShow({
   list_count,
   show,
 }: ShowAnticipatedResponse): AnticipatedShow {
@@ -64,7 +64,7 @@ export const showAnticipatedQuery = defineQuery({
   dependencies: (params) => [params.limit, params.page],
   request: showAnticipatedRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapResponseToAnticipatedShow),
+    entries: response.body.map(mapToAnticipatedShow),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(AnticipatedShowSchema),
