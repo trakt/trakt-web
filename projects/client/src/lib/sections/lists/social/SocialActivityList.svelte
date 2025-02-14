@@ -1,26 +1,28 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
-  import SocialActivityCard from "./SocialActivityCard.svelte";
-  import { useSocialActivity } from "./useSocialActivity";
+  import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import SocialActivityItem from "./SocialActivityItem.svelte";
+  import { useSocialActivityList } from "./useSocialActivityList";
 
-  const { list, isLoading } = useSocialActivity();
+  const { list, isLoading } = useSocialActivityList({});
 
   const hasSocialActivity = $derived(!$isLoading && $list.length > 0);
 </script>
 
 <!-- TODO replace with empty state message when actionable on Trakt Lite -->
 {#if hasSocialActivity}
-  <SectionList
+  <DrillableMediaList
     id="social-activity-list"
-    items={$list}
+    type="episode"
+    useList={useSocialActivityList}
+    urlBuilder={UrlBuilder.social.activity}
+    drilldownLabel={m.view_all_social_activity()}
     title={m.social_activity_title()}
-    --height-list={mediaListHeightResolver("episode")}
   >
-    {#snippet item(entry)}
-      <SocialActivityCard {entry} />
+    {#snippet item(activity)}
+      <SocialActivityItem {activity} />
     {/snippet}
-  </SectionList>
+  </DrillableMediaList>
 {/if}

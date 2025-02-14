@@ -62,7 +62,7 @@
   {#if $results.length > 0}
     <div class="trakt-search-results" use:clearOnClick>
       {#each $results as result}
-        <MediaSummaryItem media={result} retrigger={false} />
+        <MediaSummaryItem media={result} retrigger={false} type={result.type} />
       {/each}
     </div>
   {/if}

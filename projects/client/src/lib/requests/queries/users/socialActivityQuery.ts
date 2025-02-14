@@ -1,10 +1,12 @@
 import type { SocialActivityResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { mapToUserProfile } from '$lib/requests/_internal/mapToUserProfile.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import {
   type SocialActivity,
   SocialActivitySchema,
@@ -61,7 +63,7 @@ const socialActivityRequest = (
         throw new Error('Failed to social activities');
       }
 
-      return response.body;
+      return response;
     });
 
 export const socialActivityQuery = defineQuery({
@@ -69,7 +71,10 @@ export const socialActivityQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.limit, params.page],
   request: socialActivityRequest,
-  mapper: (response) => response.map(mapToSocialActivity),
-  schema: SocialActivitySchema.array(),
+  mapper: (response) => ({
+    entries: response.body.map(mapToSocialActivity),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(SocialActivitySchema),
   ttl: time.minutes(15),
 });

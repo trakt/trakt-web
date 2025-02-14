@@ -56,7 +56,7 @@
         margin: 0;
         font-weight: 500;
 
-        :has(~ .trakt-card-subtitle) {
+        :global(:has(~ .trakt-card-subtitle)) {
           font-weight: 600;
         }
       }

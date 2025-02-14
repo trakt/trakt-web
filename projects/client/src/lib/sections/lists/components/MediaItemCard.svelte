@@ -64,12 +64,12 @@
       alt={m.media_poster({ title: media.title })}
     >
       {#snippet badges()}
-        {@render externalBadges?.(media)}
+        {@render externalBadges?.()}
       {/snippet}
 
       {#snippet tags()}
         {#if externalTags}
-          {@render externalTags(media)}
+          {@render externalTags()}
         {:else}
           {@render defaultTags(media)}
         {/if}

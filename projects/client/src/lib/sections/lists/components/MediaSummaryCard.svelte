@@ -5,20 +5,37 @@
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import MediaSummaryItem from "$lib/sections/summary/components/media/MediaSummaryItem.svelte";
-  import type { MediaCardProps } from "./MediaCardProps";
+  import type { EpisodeCardProps, MediaCardProps } from "./MediaCardProps";
 
-  const { media, tags, action, popupActions }: MediaCardProps = $props();
+  const {
+    tags,
+    action,
+    badges,
+    popupActions,
+    variant = "poster",
+    ...rest
+  }: MediaCardProps | EpisodeCardProps = $props();
+
+  function summaryCardHeightResolver(variant: MediaCardProps["variant"]) {
+    console.log(variant);
+    switch (variant) {
+      case "poster":
+        return "var(--height-summary-card)";
+      default:
+        return "var(--height-episode-summary-card)";
+    }
+  }
 </script>
 
 <trakt-media-summary-card>
   <Card
-    --height-card="var(--height-summary-card)"
+    --height-card={summaryCardHeightResolver(variant)}
     --width-card="var(--width-summary-card)"
   >
     {#if popupActions}
       <CardActionBar>
         {#snippet actions()}
-          <PopupMenu label={m.media_popup_label({ title: media.title })}>
+          <PopupMenu label={m.media_popup_label({ title: rest.media.title })}>
             {#snippet items()}
               {@render popupActions()}
             {/snippet}
@@ -26,7 +43,25 @@
         {/snippet}
       </CardActionBar>
     {/if}
-    <MediaSummaryItem {media} {tags} />
+    {#if rest.type === "episode"}
+      <MediaSummaryItem
+        media={rest.media}
+        episode={rest.episode}
+        {badges}
+        {tags}
+        {variant}
+        type="episode"
+      />
+    {:else}
+      <MediaSummaryItem
+        media={rest.media}
+        {badges}
+        {tags}
+        {variant}
+        type={rest.type}
+      />
+    {/if}
+
     <CardFooter {action} />
   </Card>
 </trakt-media-summary-card>

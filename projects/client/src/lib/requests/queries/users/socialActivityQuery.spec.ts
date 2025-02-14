@@ -11,7 +11,7 @@ describe('socialActivityQuery', () => {
         createQuery(
           socialActivityQuery(),
         ),
-      mapper: (response) => response?.data,
+      mapper: (response) => response?.data?.entries,
     });
 
     expect(result).to.deep.equal(SocialActivityMappedMock);

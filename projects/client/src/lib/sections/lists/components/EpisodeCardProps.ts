@@ -1,7 +1,6 @@
+import type { MediaInputDefault } from '$lib/models/MediaInput.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
-import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import type { Snippet } from 'svelte';
 
 export type EpisodeItemVariant =
@@ -16,6 +15,6 @@ export type EpisodeItemVariant =
 
 export type EpisodeCardProps = EpisodeItemVariant & {
   badges?: Snippet;
-  show: ShowEntry | MediaEntry;
+  show: MediaInputDefault;
   style?: 'cover' | 'summary';
 };

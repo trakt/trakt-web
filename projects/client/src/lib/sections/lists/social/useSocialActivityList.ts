@@ -3,9 +3,14 @@ import { socialActivityQuery } from '$lib/requests/queries/users/socialActivityQ
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
-export function useSocialActivity() {
+type SocialActivityListProps = {
+  limit?: number;
+  page?: number;
+};
+
+export function useSocialActivityList(props: SocialActivityListProps) {
   const query = useQuery(
-    socialActivityQuery(),
+    socialActivityQuery(props),
   );
 
   const isLoading = derived(
@@ -13,10 +18,15 @@ export function useSocialActivity() {
     toLoadingState,
   );
 
-  const list = derived(query, ($query) => $query.data ?? []);
+  const list = derived(query, ($query) => $query.data?.entries ?? []);
+  const page = derived(
+    query,
+    ($query) => $query.data?.page ?? { page: 0, total: 0 },
+  );
 
   return {
     list,
+    page,
     isLoading,
   };
 }

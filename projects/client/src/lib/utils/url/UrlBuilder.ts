@@ -40,6 +40,11 @@ export const UrlBuilder = {
   popular(params: PaginatableMediaPageUrl) {
     return mediaDrilldownFactory('popular')(params);
   },
+  social: {
+    activity: (_: PaginatableMediaPageUrl) => {
+      return '/social/activity';
+    },
+  },
   home: () => '/',
   shows: () => '/shows',
   media: (type: MediaType, id: string) => {
