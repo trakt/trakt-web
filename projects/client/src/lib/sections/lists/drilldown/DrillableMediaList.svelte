@@ -12,6 +12,7 @@
   };
 
   const {
+    id,
     title,
     drilldownLabel,
     emptyMessage,
@@ -26,7 +27,7 @@
 </script>
 
 <SectionList
-  id={`${type}-list`}
+  {id}
   items={$list}
   {item}
   {title}
