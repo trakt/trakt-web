@@ -10,9 +10,9 @@ import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 type MovieHistoryParams = {
-  startDate: Date;
-  endDate: Date;
   limit: number;
+  startDate?: Date;
+  endDate?: Date;
   page?: number;
 } & ApiParams;
 
@@ -36,8 +36,8 @@ const movieHistoryRequest = (
       },
       query: {
         extended: 'full,images',
-        start_at: startDate.toISOString(),
-        end_at: endDate.toISOString(),
+        start_at: startDate?.toISOString(),
+        end_at: endDate?.toISOString(),
         limit,
         page,
       },

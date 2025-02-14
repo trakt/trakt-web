@@ -12,9 +12,9 @@ import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
 type EpisodeHistoryParams = {
-  startDate: Date;
-  endDate: Date;
   limit: number;
+  startDate?: Date;
+  endDate?: Date;
   page?: number;
 } & ApiParams;
 
@@ -39,8 +39,8 @@ function episodeHistoryRequest(
       },
       query: {
         extended: 'full,images',
-        start_at: startDate.toISOString(),
-        end_at: endDate.toISOString(),
+        start_at: startDate?.toISOString(),
+        end_at: endDate?.toISOString(),
         limit,
         page,
       },

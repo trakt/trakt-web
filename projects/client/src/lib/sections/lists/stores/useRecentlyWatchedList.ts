@@ -3,17 +3,16 @@ import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import {
   episodeHistoryQuery,
   type HistoryEpisode,
-} from '$lib/requests/queries/users/episodeHistoryQuery';
+} from '$lib/requests/queries/users/episodeHistoryQuery.ts';
 import {
   type HistoryMovie,
   movieHistoryQuery,
 } from '$lib/requests/queries/users/movieHistoryQuery.ts';
-import { getPastMonthRange } from '$lib/utils/date/getPastMonthRange.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
-const HISTORY_LIMIT = 1000;
+const HISTORY_LIMIT = 25;
 
 type RecentlyWatchedListStoreProps = {
   type: 'movie' | 'episode';
@@ -27,7 +26,6 @@ function typeToQuery(
   { type, limit, page }: RecentlyWatchedListStoreProps,
 ) {
   const params = {
-    ...getPastMonthRange(new Date()),
     limit: limit ?? HISTORY_LIMIT,
     page,
   };
