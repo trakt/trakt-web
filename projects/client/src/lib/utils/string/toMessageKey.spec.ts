@@ -14,6 +14,10 @@ describe('toMessageKey', () => {
     expect(toMessageKey('prefix', 'my-value')).toBe('prefix_my_value');
   });
 
+  it('should replace ampersands with an underscore', () => {
+    expect(toMessageKey('prefix', 'my&value')).toBe('prefix_my_value');
+  });
+
   it('should replace strip quotes and parenthesis', () => {
     expect(toMessageKey('prefix', "My Value ('or not')")).toBe(
       'prefix_my_value_or_not',
