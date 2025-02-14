@@ -1,8 +1,8 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
+import { MediaCreditsSchema } from '$lib/requests/models/MediaCredits.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { mapToMediaCredits } from '../../_internal/mapToMediaCredits.ts';
 
 type PeopleShowCreditsParams = { slug: string } & ApiParams;
 
@@ -24,7 +24,7 @@ const peopleShowCreditsRequest = (
         throw new Error('Failed to fetch person show credits');
       }
 
-      return response.body.cast ?? [];
+      return response.body;
     });
 
 export const peopleShowCreditsQuery = defineQuery({
@@ -32,7 +32,7 @@ export const peopleShowCreditsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleShowCreditsRequest,
-  mapper: (response) => response.map(({ show }) => mapToShowEntry(show)),
-  schema: ShowEntrySchema.array(),
+  mapper: mapToMediaCredits,
+  schema: MediaCreditsSchema,
   ttl: time.days(7),
 });

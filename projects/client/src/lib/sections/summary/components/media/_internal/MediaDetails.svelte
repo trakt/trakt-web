@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
+  import Link from "$lib/components/link/Link.svelte";
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
   import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
   import type { CrewMember } from "$lib/requests/models/MediaCrew";
@@ -9,12 +10,17 @@
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
   import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CollapsableValues from "./CollapsableValues.svelte";
   import DetailsGrid from "./DetailsGrid.svelte";
   import type { MediaDetailsProps } from "./MediaDetailsProps";
 
   const { media, studios, crew }: MediaDetailsProps = $props();
 
+  type MediaDetail = {
+    title: string;
+    values?: Array<string | { label: string; link: string }>;
+  };
   /*TODO:
     -Differentiate between Show and Movie
   */
@@ -28,7 +34,10 @@
 
   const toCrewMemberWithJob = (person: CrewMember) => {
     const jobs = person.jobs.map((job) => toTranslatedValue("job", job));
-    return `${person.name} (${jobs.join(", ")})`;
+    return {
+      label: `${person.name} (${jobs.join(", ")})`,
+      link: UrlBuilder.people(person.id),
+    };
   };
 
   const mainItemDetail = () => {
@@ -46,7 +55,7 @@
     };
   };
 
-  const mediaDetails = [
+  const mediaDetails: MediaDetail[] = [
     mainItemDetail(),
     {
       title: m.runtime(),
@@ -87,7 +96,13 @@
       <CollapsableValues category={title} {values}>
         <p class="meta-info secondary">{title}</p>
         {#snippet value(value)}
-          <p class="small capitalize ellipsis">{value}</p>
+          {#if typeof value === "object"}
+            <Link href={value.link}>
+              <p class="small capitalize ellipsis">{value.label}</p>
+            </Link>
+          {:else}
+            <p class="small capitalize ellipsis">{value}</p>
+          {/if}
         {/snippet}
       </CollapsableValues>
     {/if}

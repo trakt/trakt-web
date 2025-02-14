@@ -22,12 +22,12 @@ function typeToQuery(
   }
 }
 
-export function useCreditsList({ type, slug }: UseCreditsListProps) {
+export function useCreditsList(
+  { type, slug }: UseCreditsListProps,
+) {
   const query = useQuery(typeToQuery({ type, slug }));
 
-  const list = derived(query, ($query) => $query.data ?? []);
-
   return {
-    list,
+    credits: derived(query, ($query) => $query.data),
   };
 }

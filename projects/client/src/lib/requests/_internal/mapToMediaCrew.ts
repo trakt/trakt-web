@@ -14,6 +14,7 @@ function toCrewMember(
   return ({
     jobs: crewResponse.jobs,
     name: crewResponse.person.name,
+    id: crewResponse.person.ids.slug,
   });
 }
 

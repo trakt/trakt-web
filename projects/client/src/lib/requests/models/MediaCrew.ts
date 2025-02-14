@@ -7,6 +7,7 @@ export type Job = z.output<typeof JobSchema>;
 export const CrewMemberSchema = z.object({
   jobs: z.array(z.string()),
   name: z.string(),
+  id: z.string(),
 });
 export type CrewMember = z.infer<typeof CrewMemberSchema>;
 

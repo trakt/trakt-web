@@ -109,25 +109,40 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
   ],
   'directors': [
     {
-      'jobs': ['Director'],
+      'id': 'scott-beck',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Scott Beck',
     },
     {
-      'jobs': ['First Assistant Director'],
+      'id': 'richard-cowan',
+      'jobs': [
+        'First Assistant Director',
+      ],
       'name': 'Richard Cowan',
     },
     {
-      'jobs': ['Director'],
+      'id': 'bryan-woods',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Bryan Woods',
     },
   ],
   'writers': [
     {
-      'jobs': ['Writer'],
+      'id': 'scott-beck',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Scott Beck',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'bryan-woods',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Bryan Woods',
     },
   ],

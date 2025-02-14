@@ -96,89 +96,152 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
   ],
   'directors': [
     {
-      'jobs': ['Script Supervisor'],
+      'id': 'rhiannon-preece-towey',
+      'jobs': [
+        'Script Supervisor',
+      ],
       'name': 'Rhiannon Preece-Towey',
     },
     {
-      'jobs': ['Director'],
+      'id': 'bert',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Bert',
     },
     {
-      'jobs': ['Director'],
+      'id': 'michael-dinner',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Michael Dinner',
     },
     {
-      'jobs': ['Director'],
+      'id': 'morten-tyldum',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Morten Tyldum',
     },
     {
-      'jobs': ['Director'],
+      'id': 'adam-bernstein-5c662b3b-7930-4ca7-82a4-b0342f518e01',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Adam Bernstein',
     },
     {
-      'jobs': ['Director'],
+      'id': 'david-semel',
+      'jobs': [
+        'Director',
+      ],
       'name': 'David Semel',
     },
     {
-      'jobs': ['Director'],
+      'id': 'bertie',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Bertie',
     },
     {
-      'jobs': ['Director'],
+      'id': 'aric-avelino',
+      'jobs': [
+        'Director',
+      ],
       'name': 'Aric Avelino',
     },
   ],
   'writers': [
     {
-      'jobs': ['Book'],
+      'id': 'hugh-howey',
+      'jobs': [
+        'Book',
+      ],
       'name': 'Hugh Howey',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'graham-yost',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Graham Yost',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'cassie-pappas',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Cassie Pappas',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'jessica-blaire-c7557156-391c-48b4-b128-8f7ef2d2a94b',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Jessica Blaire',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'ingrid-escajeda',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Ingrid Escajeda',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'jeffery-wang',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Jeffery Wang',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'fred-golan',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Fred Golan',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'remi-aubuchon',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Remi Aubuchon',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'aric-avelino',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Aric Avelino',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'lekethia-dalcoe',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Lekethia Dalcoe',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'sal-calleros',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Sal Calleros',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'jenny-dearmitt',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Jenny DeArmitt',
     },
     {
-      'jobs': ['Writer'],
+      'id': 'katherine-disavino',
+      'jobs': [
+        'Writer',
+      ],
       'name': 'Katherine DiSavino',
     },
   ],

@@ -1,6 +1,9 @@
-import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { MediaCredits } from '$lib/requests/models/MediaCredits.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 
-export const PersonGrantMovieCreditsMappedMock: MovieEntry[] = [
-  MovieHereticMappedMock,
-];
+export const PersonGrantMovieCreditsMappedMock: MediaCredits = {
+  'cast': [
+    MovieHereticMappedMock,
+  ],
+  'crew': new Map(),
+};

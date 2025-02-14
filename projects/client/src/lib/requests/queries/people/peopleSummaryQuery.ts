@@ -41,6 +41,7 @@ const mapPeopleResponseToPersonSummary = (
     slug: peopleSummaryResponse.ids.slug,
     name: peopleSummaryResponse.name,
     biography: peopleSummaryResponse.biography ?? '',
+    knownFor: peopleSummaryResponse.known_for_department,
     headShotUrl: prependHttps(
       headshotCandidate,
       MEDIA_POSTER_PLACEHOLDER,
