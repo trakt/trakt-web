@@ -111,7 +111,7 @@
 
     <CardFooter {action}>
       {#if isShowContext}
-        <p class="episode-card-title ellipsis">
+        <p class="trakt-card-title ellipsis">
           <Spoiler
             media={props.episode}
             show={props.show}
@@ -121,27 +121,27 @@
             {props.episode.title}
           </Spoiler>
         </p>
-        <p class="episode-card-subtitle ellipsis small">
+        <p class="trakt-card-subtitle ellipsis small">
           {props.episode.season}x{props.episode.number}
         </p>
       {/if}
 
       {#if props.variant === "activity"}
         <Link href={UrlBuilder.show(props.show.slug)}>
-          <p class="episode-card-title ellipsis">
+          <p class="trakt-card-title ellipsis">
             {props.episode.season}x{props.episode.number} - {props.show.title}
           </p>
         </Link>
-        <p class="episode-card-subtitle ellipsis small">
+        <p class="trakt-card-subtitle ellipsis small">
           {EpisodeIntlProvider.timestampText(props.date)}
         </p>
       {/if}
 
       {#if !isShowContext && !isActivity}
         <Link href={UrlBuilder.show(props.show.slug)}>
-          <p class="episode-card-title ellipsis">{props.show.title}</p>
+          <p class="trakt-card-title ellipsis">{props.show.title}</p>
         </Link>
-        <p class="episode-card-subtitle ellipsis small">
+        <p class="trakt-card-subtitle ellipsis small">
           {props.episode.season}x{props.episode.number}
           <Spoiler
             media={props.episode}
@@ -158,18 +158,6 @@
 {/if}
 
 <style>
-  .episode-card-title {
-    color: var(--color-text-primary);
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .episode-card-subtitle {
-    color: var(--color-text-secondary);
-    margin: 0;
-    font-weight: 500;
-  }
-
   .show-progress-label {
     position: relative;
   }

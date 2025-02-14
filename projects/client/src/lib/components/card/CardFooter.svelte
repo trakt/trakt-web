@@ -50,6 +50,22 @@
       &:global(:has(~ .trakt-card-footer-action:not(:empty)) > :nth-child(2)) {
         max-width: 80%;
       }
+
+      :global(.trakt-card-title) {
+        color: var(--color-text-primary);
+        margin: 0;
+        font-weight: 500;
+
+        :has(~ .trakt-card-subtitle) {
+          font-weight: 600;
+        }
+      }
+
+      :global(.trakt-card-subtitle) {
+        color: var(--color-text-secondary);
+        margin: 0;
+        font-weight: 500;
+      }
     }
 
     .trakt-card-footer-action {

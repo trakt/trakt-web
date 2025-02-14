@@ -80,14 +80,14 @@
   <CardFooter {action}>
     <Link href={UrlBuilder.media(type, media.slug)}>
       <p
-        class="media-title small ellipsis"
+        class="trakt-card-title small ellipsis"
         class:small={rest.variant !== "activity"}
       >
         {media.title}
       </p>
     </Link>
     {#if rest.variant === "activity"}
-      <p class="media-subtitle small ellipsis">
+      <p class="trakt-card-subtitle small ellipsis">
         {toHumanDate(new Date(), rest.date, getLocale())}
       </p>
     {/if}
@@ -111,23 +111,3 @@
     {@render content(media.thumb.url)}
   </ActivityCard>
 {/if}
-
-<style>
-  .media-title {
-    margin: 0;
-    padding: 0;
-
-    color: var(--color-text-secondary);
-
-    font-weight: 600;
-  }
-
-  .media-subtitle {
-    margin: 0;
-    padding: 0;
-
-    color: var(--color-text-secondary);
-
-    font-weight: 500;
-  }
-</style>
