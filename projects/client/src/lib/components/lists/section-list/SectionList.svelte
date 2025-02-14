@@ -19,6 +19,7 @@
     title,
     item,
     empty,
+    dynamicActions,
     actions: externalActions,
   }: SectionListProps<T> = $props();
 
@@ -58,6 +59,10 @@
 
 <ShadowList {id} {title} {items} {item} {empty} {scrollX} {scrollContainer}>
   {#snippet actions()}
+    {#if dynamicActions != null}
+      {@render dynamicActions()}
+    {/if}
+
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
       <ActionButton
         onclick={scrollToLeft}

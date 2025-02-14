@@ -6,4 +6,5 @@ export type ListProps<T> = {
   items: T[];
   item: Snippet<[T]>;
   actions?: Snippet;
+  dynamicActions?: Snippet;
 };
