@@ -14,4 +14,16 @@ export const PersonFergusonShowCreditsResponseMock: PeopleShowCreditsResponse =
         'show': ShowSiloResponseMock,
       },
     ],
+    'crew': {
+      'production': [
+        {
+          'job': 'Executive Producer',
+          'jobs': [
+            'Executive Producer',
+          ],
+          'episode_count': 20,
+          'show': ShowSiloResponseMock,
+        },
+      ],
+    },
   };

@@ -5,5 +5,12 @@ export const PersonFergusonShowCreditsMappedMock: MediaCredits = {
   'cast': [
     ShowSiloMappedMock,
   ],
-  'crew': new Map(),
+  'crew': new Map([
+    [
+      'production',
+      [
+        ShowSiloMappedMock,
+      ],
+    ],
+  ]),
 };
