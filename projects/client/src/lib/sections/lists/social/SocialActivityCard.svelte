@@ -37,6 +37,7 @@
 
 <style>
   .user-profile-badge {
+    max-width: calc(100% - var(--ni-32));
     display: flex;
     gap: var(--gap-xs);
     align-items: center;
@@ -45,5 +46,9 @@
     backdrop-filter: blur(var(--ni-8)) contrast(0.6);
     border-radius: var(--border-radius-m);
     overflow: hidden;
+
+    :global(.trakt-link) {
+      max-width: 75%;
+    }
   }
 </style>
