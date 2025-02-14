@@ -285,5 +285,20 @@
   "shout_by": "Вигук від",
   "deleted_user": "Видалено",
   "social_activity_title": "Соціальна активність",
-  "view_all_social_activity": "Переглянути всю соціальну активність"
+  "view_all_social_activity": "Переглянути всю соціальну активність",
+  "position_dropwdown_label": "Посада",
+  "position_acting": "Акторська гра",
+  "position_production": "Виробництво",
+  "position_art": "Образотворче мистецтво",
+  "position_crew": "Команда",
+  "position_costume___make_up": "Костюми та грим",
+  "position_directing": "Режисура",
+  "position_writing": "Написання",
+  "position_sound": "Звук",
+  "position_camera": "Камера",
+  "position_lighting": "Освітлення",
+  "position_visual_effects": "Візуальні ефекти",
+  "position_editing": "Монтаж",
+  "position_creator": "Створено",
+  "position_created_by": "Створено"
 }

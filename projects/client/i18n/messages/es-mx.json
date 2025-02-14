@@ -285,5 +285,20 @@
   "shout_by": "Grito de",
   "deleted_user": "Eliminado",
   "social_activity_title": "Actividad Social",
-  "view_all_social_activity": "Ver toda la actividad social"
+  "view_all_social_activity": "Ver toda la actividad social",
+  "position_dropwdown_label": "Puesto",
+  "position_acting": "Actuación",
+  "position_production": "Producción",
+  "position_art": "Arte",
+  "position_crew": "Equipo",
+  "position_costume___make_up": "Vestuario y Maquillaje",
+  "position_directing": "Dirección",
+  "position_writing": "Escritura",
+  "position_sound": "Sonido",
+  "position_camera": "Cámaras",
+  "position_lighting": "Iluminación",
+  "position_visual_effects": "Efectos Visuales",
+  "position_editing": "Edición",
+  "position_creator": "Creador",
+  "position_created_by": "Creado por"
 }

@@ -285,5 +285,20 @@
   "shout_by": "Krzyknął",
   "deleted_user": "Usunięto",
   "social_activity_title": "Aktywność społeczna",
-  "view_all_social_activity": "Zobacz całą aktywność społeczną"
+  "view_all_social_activity": "Zobacz całą aktywność społeczną",
+  "position_dropwdown_label": "Pozycja",
+  "position_acting": "Aktorski",
+  "position_production": "Produkcja",
+  "position_art": "Sztuka",
+  "position_crew": "Załoga",
+  "position_costume___make_up": "Kostiumy i makijaż",
+  "position_directing": "Reżyseria",
+  "position_writing": "Scenariusz",
+  "position_sound": "Dźwięk",
+  "position_camera": "Kamera",
+  "position_lighting": "Oświetlenie",
+  "position_visual_effects": "Efekty wizualne",
+  "position_editing": "Montaż",
+  "position_creator": "Twórca",
+  "position_created_by": "Utworzony przez"
 }

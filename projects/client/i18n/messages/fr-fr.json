@@ -285,5 +285,20 @@
   "shout_by": "Crié par",
   "deleted_user": "Supprimé",
   "social_activity_title": "Activité Sociale",
-  "view_all_social_activity": "Afficher toute l'activité sociale"
+  "view_all_social_activity": "Afficher toute l'activité sociale",
+  "position_dropwdown_label": "Position",
+  "position_acting": "Acteur",
+  "position_production": "Production",
+  "position_art": "Art",
+  "position_crew": "Équipe",
+  "position_costume___make_up": "Costumes & Maquillage",
+  "position_directing": "Réalisation",
+  "position_writing": "Écriture",
+  "position_sound": "Son",
+  "position_camera": "Caméra",
+  "position_lighting": "Éclairage",
+  "position_visual_effects": "Effets visuels",
+  "position_editing": "Montage",
+  "position_creator": "Créateur",
+  "position_created_by": "Créé par"
 }

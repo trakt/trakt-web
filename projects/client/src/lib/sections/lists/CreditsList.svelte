@@ -1,8 +1,14 @@
 <script lang="ts">
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import * as m from "$lib/features/i18n/messages";
+  import type { CrewPosition } from "$lib/requests/models/CrewPosition";
   import type { MediaCredits } from "$lib/requests/models/MediaCredits";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
+  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { writable } from "svelte/store";
   import MediaCard from "./components/MediaCard.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -15,31 +21,66 @@
 
   const { title, type, person }: CreditsListProps = $props();
 
-  const { credits } = useCreditsList({
-    type,
-    slug: person.slug,
-  });
+  const currentPosition = writable<CrewPosition>(person.knownFor ?? "acting");
+
+  const { credits } = useCreditsList({ type, slug: person.slug });
 
   const getPositionList = (mediaCredits?: MediaCredits) => {
     if (!mediaCredits) return [];
 
-    if (!person.knownFor || person.knownFor === "acting") {
+    if ($currentPosition === "acting") {
       return mediaCredits.cast ?? [];
     }
 
-    return mediaCredits.crew?.get(person.knownFor) ?? [];
+    return mediaCredits.crew?.get($currentPosition) ?? [];
   };
 
+  const getAvailablePositions = (mediaCredits?: MediaCredits) => {
+    if (!mediaCredits) return [];
+
+    const positions = Array.from(mediaCredits.crew?.keys() ?? []);
+    if (mediaCredits.cast?.length) {
+      positions.unshift("acting");
+    }
+
+    return positions;
+  };
+
+  const positions = $derived(getAvailablePositions($credits));
   const list = $derived(getPositionList($credits));
 </script>
 
 <SectionList
-  id={`credits-list-${type}`}
+  id={`credits-list-${type}-${$currentPosition}`}
   items={list}
   {title}
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
     <MediaCard {type} {media} />
+  {/snippet}
+
+  {#snippet dynamicActions()}
+    <DropdownList
+      label={m.position_dropwdown_label()}
+      style="flat"
+      variant="primary"
+      color="blue"
+      text="capitalize"
+      size="small"
+      disabled={positions.length <= 1}
+    >
+      {toTranslatedValue("position", $currentPosition)}
+      {#snippet items()}
+        {#each positions as position}
+          <DropdownItem
+            color="blue"
+            onclick={() => currentPosition.set(position)}
+          >
+            {toTranslatedValue("position", position)}
+          </DropdownItem>
+        {/each}
+      {/snippet}
+    </DropdownList>
   {/snippet}
 </SectionList>

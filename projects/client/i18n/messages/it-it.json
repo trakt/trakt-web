@@ -285,5 +285,20 @@
   "shout_by": "Grido di",
   "deleted_user": "Eliminato",
   "social_activity_title": "Attività Sociale",
-  "view_all_social_activity": "Visualizza tutte le attività social"
+  "view_all_social_activity": "Visualizza tutte le attività social",
+  "position_dropwdown_label": "Poziție",
+  "position_acting": "Recitazione",
+  "position_production": "Produzione",
+  "position_art": "Arte",
+  "position_crew": "Squadra",
+  "position_costume___make_up": "Costumi e Trucco",
+  "position_directing": "Regia",
+  "position_writing": "Scrittura",
+  "position_sound": "Suono",
+  "position_camera": "Fotocamera",
+  "position_lighting": "Illuminazione",
+  "position_visual_effects": "Effetti Vis.",
+  "position_editing": "Montaggio",
+  "position_creator": "Creatore",
+  "position_created_by": "Creato Da"
 }

@@ -285,5 +285,20 @@
   "shout_by": "シャウト:",
   "deleted_user": "削除済み",
   "social_activity_title": "ソーシャルアクティビティ",
-  "view_all_social_activity": "すべてのソーシャルアクティビティを表示"
+  "view_all_social_activity": "すべてのソーシャルアクティビティを表示",
+  "position_dropwdown_label": "役職",
+  "position_acting": "演技",
+  "position_production": "制作",
+  "position_art": "美術",
+  "position_crew": "スタッフ",
+  "position_costume___make_up": "衣装＆メイク",
+  "position_directing": "監督",
+  "position_writing": "脚本",
+  "position_sound": "音響",
+  "position_camera": "カメラ",
+  "position_lighting": "照明",
+  "position_visual_effects": "ビジュアルエフェクト",
+  "position_editing": "編集",
+  "position_creator": "クリエイター",
+  "position_created_by": "制作"
 }

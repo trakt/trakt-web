@@ -285,5 +285,20 @@
   "shout_by": "Geschreeuwd door",
   "deleted_user": "Verwijderd",
   "social_activity_title": "Sociale Activiteit",
-  "view_all_social_activity": "Alle sociale activiteiten bekijken"
+  "view_all_social_activity": "Alle sociale activiteiten bekijken",
+  "position_dropwdown_label": "Functie",
+  "position_acting": "Acteren",
+  "position_production": "Productie",
+  "position_art": "Art",
+  "position_crew": "Crew",
+  "position_costume___make_up": "Kostuum & Make-up",
+  "position_directing": "Regisseren",
+  "position_writing": "Schrijven",
+  "position_sound": "Geluid",
+  "position_camera": "Camera",
+  "position_lighting": "Licht",
+  "position_visual_effects": "Visuele effecten",
+  "position_editing": "Montage",
+  "position_creator": "Creator",
+  "position_created_by": "Gemaakt door"
 }

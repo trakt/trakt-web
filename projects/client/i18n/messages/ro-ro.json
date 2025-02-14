@@ -285,5 +285,20 @@
   "shout_by": "Strigăt de",
   "deleted_user": "Șters",
   "social_activity_title": "Activitate Socială",
-  "view_all_social_activity": "Vezi toate activitățile sociale"
+  "view_all_social_activity": "Vezi toate activitățile sociale",
+  "position_dropwdown_label": "Funcție",
+  "position_acting": "Actor",
+  "position_production": "Producție",
+  "position_art": "Artă",
+  "position_crew": "Echipă",
+  "position_costume___make_up": "Costume și Machiaj",
+  "position_directing": "Regia",
+  "position_writing": "Scriere",
+  "position_sound": "Sunet",
+  "position_camera": "Cameră",
+  "position_lighting": "Iluminat",
+  "position_visual_effects": "Efecte Vizuale",
+  "position_editing": "Montaj",
+  "position_creator": "Creator",
+  "position_created_by": "Creat de"
 }

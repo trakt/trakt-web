@@ -285,5 +285,20 @@
   "shout_by": "Grito por",
   "deleted_user": "Excluído",
   "social_activity_title": "Atividade Social",
-  "view_all_social_activity": "Ver todas as atividades sociais"
+  "view_all_social_activity": "Ver todas as atividades sociais",
+  "position_dropwdown_label": "Cargo",
+  "position_acting": "Ator",
+  "position_production": "Produção",
+  "position_art": "Arte",
+  "position_crew": "Equipe",
+  "position_costume___make_up": "Figurinos e Maquiagem",
+  "position_directing": "Direção",
+  "position_writing": "Roteiro",
+  "position_sound": "Som",
+  "position_camera": "Câmera",
+  "position_lighting": "Iluminação",
+  "position_visual_effects": "Efeitos Visuais",
+  "position_editing": "Edição",
+  "position_creator": "Criador",
+  "position_created_by": "Criado por"
 }
