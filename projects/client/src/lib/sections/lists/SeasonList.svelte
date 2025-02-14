@@ -50,16 +50,6 @@
     <EpisodeCard {episode} {show} variant="default" context="show" />
   {/snippet}
   {#snippet actions()}
-    <RenderFor audience="authenticated">
-      <MarkAsWatchedAction
-        style="action"
-        type="episode"
-        title={m.season_number_label({ number: $active.number })}
-        media={$list}
-        episode={$list}
-        {show}
-      />
-    </RenderFor>
     {#if seasons.length > 1}
       <DropdownList
         label="Seasons"
@@ -79,6 +69,16 @@
         {/snippet}
       </DropdownList>
     {/if}
+    <RenderFor audience="authenticated">
+      <MarkAsWatchedAction
+        style="action"
+        type="episode"
+        title={m.season_number_label({ number: $active.number })}
+        media={$list}
+        episode={$list}
+        {show}
+      />
+    </RenderFor>
   {/snippet}
 </ShadowList>
 
