@@ -42,7 +42,7 @@
     align-items: center;
 
     padding: 0 var(--ni-4);
-    backdrop-filter: blur(var(--ni-8));
+    backdrop-filter: blur(var(--ni-8)) contrast(0.6);
     border-radius: var(--border-radius-m);
     overflow: hidden;
   }
