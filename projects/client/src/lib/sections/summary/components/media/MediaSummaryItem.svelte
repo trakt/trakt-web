@@ -6,9 +6,12 @@
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import GenreList from "$lib/components/summary/GenreList.svelte";
+  import { getLocale } from "$lib/features/i18n";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaInput } from "$lib/models/MediaInput";
+  import type { MediaItemVariant } from "$lib/sections/lists/components/MediaCardProps";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
+  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
 
@@ -17,17 +20,16 @@
     tags,
     badges,
     retrigger = true,
-    variant = "poster",
     ...rest
   }: {
     tags?: Snippet<[MediaInput["media"]]>;
     action?: Snippet;
     badges?: Snippet;
     retrigger?: boolean;
-    variant?: "thumb" | "poster" | "activity";
-  } & MediaInput = $props();
+  } & MediaItemVariant<MediaInput["media"]> = $props();
 
-  const MAX_GENRE_COUNT = variant === "poster" ? 2 : 1;
+  const variant = $derived(rest.variant ?? "poster");
+  const MAX_GENRE_COUNT = $derived(variant === "poster" ? 2 : 1);
 </script>
 
 <Link
@@ -47,7 +49,7 @@
         <CrossOriginImage alt={media.title} src={media.poster.url.thumb} />
       {/if}
 
-      {#if variant === "thumb"}
+      {#if variant === "thumb" || variant === "activity"}
         {#if rest.type === "episode"}
           <CrossOriginImage
             alt={rest.episode.title}
@@ -88,7 +90,13 @@
         {/if}
       </div>
 
-      <GenreList genres={media.genres.slice(0, MAX_GENRE_COUNT)} />
+      {#if rest.variant === "activity"}
+        <p class="trakt-card-subtitle small ellipsis">
+          {toHumanDate(new Date(), rest.date, getLocale())}
+        </p>
+      {:else}
+        <GenreList genres={media.genres.slice(0, MAX_GENRE_COUNT)} />
+      {/if}
     </div>
   </div>
 </Link>
@@ -134,7 +142,8 @@
       border-radius: var(--border-radius-s);
     }
 
-    &[data-variant="thumb"] {
+    &[data-variant="thumb"],
+    &[data-variant="activity"] {
       :global(.trakt-summary-item-image > img) {
         height: var(--ni-88);
         width: var(--ni-156);

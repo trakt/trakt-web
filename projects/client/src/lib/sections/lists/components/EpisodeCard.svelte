@@ -14,8 +14,8 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import EpisodeSummaryCard from "../_internal/EpisodeSummaryCard.svelte";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
+  import MediaSummaryCard from "./MediaSummaryCard.svelte";
 
   const props: EpisodeCardProps = $props();
 
@@ -79,9 +79,9 @@
 {/snippet}
 
 {#if style === "summary"}
-  <EpisodeSummaryCard
+  <MediaSummaryCard
     episode={props.episode}
-    show={{
+    media={{
       ...props.show,
       episode: {
         count: 0,
@@ -89,6 +89,8 @@
     }}
     {tags}
     {action}
+    type="episode"
+    variant="thumb"
   />
 {/if}
 

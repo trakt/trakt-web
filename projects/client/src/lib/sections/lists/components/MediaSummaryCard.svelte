@@ -12,9 +12,10 @@
     action,
     badges,
     popupActions,
-    variant = "poster",
     ...rest
   }: MediaCardProps | EpisodeCardProps = $props();
+
+  const variant = $derived(rest.variant ?? "poster");
 
   function summaryCardHeightResolver(variant: MediaCardProps["variant"]) {
     switch (variant) {
@@ -43,7 +44,7 @@
       </CardActionBar>
     {/if}
 
-    <MediaSummaryItem {...rest} {badges} {tags} {variant} />
+    <MediaSummaryItem {...rest} {badges} {tags} />
 
     <CardFooter {action} />
   </Card>

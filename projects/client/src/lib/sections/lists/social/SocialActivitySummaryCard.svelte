@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import type { Snippet } from "svelte";
-  import EpisodeSummaryCard from "../_internal/EpisodeSummaryCard.svelte";
   import MediaSummaryCard from "../components/MediaSummaryCard.svelte";
 
   type SocialActivityItemProps = {
@@ -13,23 +12,27 @@
 </script>
 
 {#if activity.type === "episode"}
-  <EpisodeSummaryCard
+  <MediaSummaryCard
     {badges}
+    date={activity.activityAt}
     episode={activity.episode}
-    show={{
+    media={{
       ...activity.show,
       episode: {
         count: 0,
       },
     }}
+    type="episode"
+    variant="activity"
   />
 {/if}
 
 {#if activity.type === "movie"}
   <MediaSummaryCard
-    media={activity.movie}
     {badges}
+    date={activity.activityAt}
+    media={activity.movie}
     type="movie"
-    variant="thumb"
+    variant="activity"
   />
 {/if}
