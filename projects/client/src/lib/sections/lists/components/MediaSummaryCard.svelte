@@ -17,7 +17,6 @@
   }: MediaCardProps | EpisodeCardProps = $props();
 
   function summaryCardHeightResolver(variant: MediaCardProps["variant"]) {
-    console.log(variant);
     switch (variant) {
       case "poster":
         return "var(--height-summary-card)";
@@ -43,24 +42,8 @@
         {/snippet}
       </CardActionBar>
     {/if}
-    {#if rest.type === "episode"}
-      <MediaSummaryItem
-        media={rest.media}
-        episode={rest.episode}
-        {badges}
-        {tags}
-        {variant}
-        type="episode"
-      />
-    {:else}
-      <MediaSummaryItem
-        media={rest.media}
-        {badges}
-        {tags}
-        {variant}
-        type={rest.type}
-      />
-    {/if}
+
+    <MediaSummaryItem {...rest} {badges} {tags} {variant} />
 
     <CardFooter {action} />
   </Card>
