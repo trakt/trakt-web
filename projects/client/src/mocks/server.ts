@@ -2,7 +2,6 @@ import { setupServer } from 'msw/node';
 import { auth } from './handlers/auth.ts';
 import { calendars } from './handlers/calendars.ts';
 import { episodes } from './handlers/episodes.ts';
-import { lists } from './handlers/lists.ts';
 import { movies } from './handlers/movies.ts';
 import { people } from './handlers/people.ts';
 import { recommendations } from './handlers/recommendations.ts';
@@ -24,7 +23,6 @@ const handlers = [
   ...recommendations,
   ...calendars,
   ...search,
-  ...lists,
 ];
 
 export const server = setupServer(...handlers);

@@ -6,10 +6,12 @@ import {
   mapToShowListItem,
 } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
-import { ListedMovieSchema } from '$lib/requests/queries/lists/listMovieItemsQuery.ts';
-import { ListedShowSchema } from '$lib/requests/queries/lists/listShowItemsQuery.ts';
+import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
@@ -24,7 +26,15 @@ type ListItemsParams =
   }
   & ApiParams;
 
-const ListedItemSchema = z.union([ListedMovieSchema, ListedShowSchema]);
+const ListedShowEntrySchema = ShowEntrySchema.merge(
+  EpisodeCountSchema,
+);
+
+const ListedItemSchema = ListItemSchemaFactory(
+  z.union([MovieEntrySchema, ListedShowEntrySchema]),
+);
+
+export type ListedItem = z.infer<typeof ListedItemSchema>;
 
 function mapToListItem(
   listedItem: ListedMovieResponse | ListedShowResponse,
