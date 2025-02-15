@@ -124,6 +124,8 @@
         --scaled-width: calc(100% * (1 / var(--scale-factor)));
         --width-difference: calc(100% - var(--scaled-width));
 
+        z-index: var(--layer-raised);
+
         position: absolute;
         display: inline-flex;
         justify-content: flex-end;
