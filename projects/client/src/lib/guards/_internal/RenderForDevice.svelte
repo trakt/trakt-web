@@ -53,7 +53,11 @@
   @use "$style/scss/mixins/index" as *;
 
   trakt-render-for {
-    display: contents;
+    display: none;
+
+    &:not([class*="render-for-"]) {
+      display: contents !important;
+    }
   }
 
   .render-for-mobile {
