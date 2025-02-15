@@ -134,7 +134,6 @@
       );
       border-radius: var(--border-radius-xs);
       backdrop-filter: blur(var(--ni-4));
-      opacity: 0;
     }
 
     :global(:hover::-webkit-scrollbar-thumb) {
