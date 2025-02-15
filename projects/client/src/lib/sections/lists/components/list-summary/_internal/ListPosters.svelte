@@ -7,7 +7,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import { useListItems } from "./useListItems.ts";
 
-  const { list, type }: { list: MediaListSummary; type: MediaType } = $props();
+  const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 
   const { items } = useListItems({
     userId: list.user.slug,

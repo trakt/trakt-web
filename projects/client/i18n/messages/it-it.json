@@ -302,5 +302,7 @@
   "position_creator": "Creatore",
   "position_created_by": "Creato Da",
   "view_all_movies_out_now": "Visualizza tutti i film in uscita",
-  "view_all_movies_coming_soon": "Visualizza tutti i film in arrivo"
+  "view_all_movies_coming_soon": "Visualizza tutti i film in arrivo",
+  "personal_lists": "Liste personale",
+  "collaborations": "Collaborazioni"
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
+  import PersonalLists from "../lists/user/PersonalLists.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
@@ -37,3 +38,6 @@
   title={m.recently_watched_movies()}
   type="movie"
 />
+
+<PersonalLists type="personal" />
+<PersonalLists type="collaboration" />

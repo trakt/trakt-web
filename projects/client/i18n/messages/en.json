@@ -302,5 +302,7 @@
   "position_creator": "Creator",
   "position_created_by": "Created By",
   "view_all_movies_out_now": "View all movies out now",
-  "view_all_movies_coming_soon": "View all movies coming soon"
+  "view_all_movies_coming_soon": "View all movies coming soon",
+  "personal_lists": "Personal lists",
+  "collaborations": "Collaborations"
 }

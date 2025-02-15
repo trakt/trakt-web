@@ -7,7 +7,7 @@
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  const { list, type }: { list: MediaListSummary; type: MediaType } = $props();
+  const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 </script>
 
 <div class="trakt-list-header">
