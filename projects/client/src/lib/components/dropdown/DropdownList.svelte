@@ -111,6 +111,7 @@
       }
 
       .trakt-list {
+        z-index: var(--layer-menu);
         opacity: 1;
       }
 
