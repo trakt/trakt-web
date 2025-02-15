@@ -9,7 +9,11 @@
 
   const { list, type }: { list: MediaListSummary; type: MediaType } = $props();
 
-  const { items } = useListItems({ id: list.id, type });
+  const { items } = useListItems({
+    userId: list.user.slug,
+    listId: list.slug,
+    type,
+  });
 </script>
 
 {#if $items}
@@ -49,11 +53,19 @@
   .poster-wrapper {
     --poster-index: 0;
 
-    position: absolute;
-    left: calc(
-      (100% - var(--poster-width)) / (var(--poster-count) - 1) *
-        var(--poster-index)
+    --poster-overlap: var(--poster-width) / 5;
+    --total-poster-width: calc(
+      (var(--poster-width) - var(--poster-overlap)) * var(--poster-count)
     );
+
+    --poster-spread-width: min(100%, var(--total-poster-width));
+    --poster-offset: calc(
+      (var(--poster-spread-width) - var(--poster-width)) /
+        max(1, var(--poster-count) - 1)
+    );
+
+    position: absolute;
+    left: calc(var(--poster-offset) * var(--poster-index));
 
     height: var(--poster-height);
     width: var(--poster-width);
