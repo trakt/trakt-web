@@ -101,6 +101,8 @@
     position: relative;
 
     .trakt-search-icon {
+      cursor: pointer;
+
       position: absolute;
       z-index: calc(var(--layer-top) + var(--layer-overlay));
       top: calc(var(--search-icon-size) / 2);
@@ -116,17 +118,17 @@
       box-sizing: border-box;
 
       border-radius: var(--border-radius-s);
-      border: var(--border-thickness-xs) solid var(--shade-800);
+      outline: var(--border-thickness-xs) solid var(--shade-700);
       background: color-mix(
         in srgb,
-        var(--color-background) 90%,
-        transparent 10%
+        var(--color-background) 75%,
+        transparent 25%
       );
       backdrop-filter: blur(var(--ni-8));
 
       transition: var(--transition-increment) ease-in-out;
       transition-property: border-color, background-color, padding, width, top,
-        left;
+        left, opacity;
 
       @include for-mobile {
         width: var(--search-icon-size);
@@ -135,12 +137,15 @@
         left: 0;
 
         &:not(:focus-within) {
-          padding: var(--ni-8) var(--ni-22);
+          padding: var(--ni-8) var(--ni-24);
+          outline: none;
+          opacity: 0.75;
         }
       }
 
       &:focus-within {
-        border-color: var(--purple-600);
+        outline-color: var(--purple-600);
+        opacity: 1;
 
         @include for-mobile {
           left: 0;
