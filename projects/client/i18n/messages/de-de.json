@@ -300,5 +300,7 @@
   "position_visual_effects": "Visuelle Effekte",
   "position_editing": "Schnitt",
   "position_creator": "Schöpfer",
-  "position_created_by": "Erstellt von"
+  "position_created_by": "Erstellt von",
+  "view_all_movies_out_now": "Alle Filme jetzt im Kino",
+  "view_all_movies_coming_soon": "Alle Filme bald im Kino"
 }

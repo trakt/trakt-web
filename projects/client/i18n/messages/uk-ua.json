@@ -300,5 +300,7 @@
   "position_visual_effects": "Візуальні ефекти",
   "position_editing": "Монтаж",
   "position_creator": "Створено",
-  "position_created_by": "Створено"
+  "position_created_by": "Створено",
+  "view_all_movies_out_now": "Переглянути всі кіноновинки",
+  "view_all_movies_coming_soon": "Переглянути всі майбутні фільми"
 }

@@ -23,9 +23,9 @@
   <RenderFor audience="authenticated">
     <ProfileBanner />
     <UpNextList />
-    <OutNowList title={m.out_now_title()} />
+    <OutNowList />
     <UpcomingList />
-    <ComingSoonList title={m.coming_soon_title()} />
+    <ComingSoonList />
     <SocialActivityList />
   </RenderFor>
   <RenderFor audience="public">

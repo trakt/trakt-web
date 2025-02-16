@@ -21,7 +21,6 @@
 
   <UserlistList
     title={listName}
-    emptyMessage="nothing in this list"
     userId={page.params.user}
     listId={page.params.list}
     {type}

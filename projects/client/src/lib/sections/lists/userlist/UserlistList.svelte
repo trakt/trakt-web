@@ -6,18 +6,14 @@
 
   type UserlistListProps = {
     title: string;
-    emptyMessage: string;
     userId: string;
     listId: string;
     type?: MediaType;
   };
 
-  const { title, emptyMessage, userId, listId, type }: UserlistListProps =
-    $props();
+  const { title, userId, listId, type }: UserlistListProps = $props();
 
-  const { isLoading, list } = $derived(
-    useUserlistList({ userId, listId, type }),
-  );
+  const { list } = $derived(useUserlistList({ userId, listId, type }));
 </script>
 
 <!-- TODO use drilled media list & fetch rest on scroll -->
@@ -27,13 +23,6 @@
   items={$list}
   --width-item="var(--width-poster-card)"
 >
-  {#snippet empty()}
-    {#if !$isLoading && emptyMessage}
-      <p class="small secondary">
-        {emptyMessage}
-      </p>
-    {/if}
-  {/snippet}
   {#snippet item(media)}
     <MediaCard type={media.type} {media} />
   {/snippet}

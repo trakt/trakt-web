@@ -1,5 +1,6 @@
 <script lang="ts" generics="T extends { id: unknown }, M">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import type { Snippet } from "svelte";
   import ViewAllButton from "../components/ViewAllButton.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import type { DrillListProps } from "./DrillListProps";
@@ -8,14 +9,14 @@
   type DrillableList<T, M> = DrillListProps<T, M> & {
     drilldownLabel: string;
     useList: MediaStore<T, M>;
-    emptyMessage?: string;
+    empty?: Snippet;
   };
 
   const {
     id,
     title,
     drilldownLabel,
-    emptyMessage,
+    empty: externalEmpty,
     type,
     item,
     useList,
@@ -42,10 +43,8 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if !$isLoading && emptyMessage}
-      <p class="small secondary">
-        {emptyMessage}
-      </p>
+    {#if !isLoading && externalEmpty}
+      {@render externalEmpty()}
     {/if}
   {/snippet}
 </SectionList>

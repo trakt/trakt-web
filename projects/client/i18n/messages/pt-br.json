@@ -300,5 +300,7 @@
   "position_visual_effects": "Efeitos Visuais",
   "position_editing": "Edição",
   "position_creator": "Criador",
-  "position_created_by": "Criado por"
+  "position_created_by": "Criado por",
+  "view_all_movies_out_now": "Ver todos os lançamentos",
+  "view_all_movies_coming_soon": "Ver todos os próximos lançamentos"
 }

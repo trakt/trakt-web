@@ -300,5 +300,7 @@
   "position_visual_effects": "Efekty wizualne",
   "position_editing": "Montaż",
   "position_creator": "Twórca",
-  "position_created_by": "Utworzony przez"
+  "position_created_by": "Utworzony przez",
+  "view_all_movies_out_now": "Oglądaj wszystkie filmy teraz",
+  "view_all_movies_coming_soon": "Oglądaj wszystkie filmy wkrótce"
 }

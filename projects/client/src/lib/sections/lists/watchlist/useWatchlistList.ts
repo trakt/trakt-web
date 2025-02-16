@@ -14,6 +14,9 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
+// FIXME remove when sorting is fixed
+const WATCHLIST_LIMIT = 500;
+
 export type WatchListParams = {
   sort: SortType;
 };
@@ -28,10 +31,10 @@ export type WatchListStoreProps = {
 } & Partial<WatchListParams>;
 
 function typeToQuery(
-  { type, limit, page, sort = 'added' }: WatchListStoreProps,
+  { type, page, sort = 'added' }: WatchListStoreProps,
 ) {
   const params = {
-    limit,
+    limit: WATCHLIST_LIMIT,
     page,
     sort,
   };

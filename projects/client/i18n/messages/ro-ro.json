@@ -300,5 +300,7 @@
   "position_visual_effects": "Efecte Vizuale",
   "position_editing": "Montaj",
   "position_creator": "Creator",
-  "position_created_by": "Creat de"
+  "position_created_by": "Creat de",
+  "view_all_movies_out_now": "Vezi toate filmele acum",
+  "view_all_movies_coming_soon": "Vezi toate filmele în curând"
 }

@@ -300,5 +300,7 @@
   "position_visual_effects": "Visuele effecten",
   "position_editing": "Montage",
   "position_creator": "Creator",
-  "position_created_by": "Gemaakt door"
+  "position_created_by": "Gemaakt door",
+  "view_all_movies_out_now": "Bekijk alle films nu",
+  "view_all_movies_coming_soon": "Bekijk alle aankomende films"
 }

@@ -300,5 +300,7 @@
   "position_visual_effects": "ビジュアルエフェクト",
   "position_editing": "編集",
   "position_creator": "クリエイター",
-  "position_created_by": "制作"
+  "position_created_by": "制作",
+  "view_all_movies_out_now": "公開中作品一覧",
+  "view_all_movies_coming_soon": "公開予定作品一覧"
 }
