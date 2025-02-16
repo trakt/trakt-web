@@ -59,8 +59,9 @@
   }
 
   .grid-list-empty-state {
-    display: flex;
+    display: grid;
     justify-content: center;
+    gap: var(--gap-m);
 
     padding: 0 var(--layout-distance-side);
   }

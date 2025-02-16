@@ -4,6 +4,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import MediaCard from "../components/MediaCard.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
   import type { WatchlistStatus } from "./WatchlistStatus";
 
@@ -28,5 +29,9 @@
 >
   {#snippet item(media)}
     <MediaCard {type} {media} {style} />
+  {/snippet}
+
+  {#snippet empty()}
+    <EmptyWatchlist {type} {status} />
   {/snippet}
 </DrilledMediaList>

@@ -43,8 +43,8 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if !isLoading && externalEmpty}
-      {@render externalEmpty()}
+    {#if !$isLoading}
+      {@render externalEmpty?.()}
     {/if}
   {/snippet}
 </SectionList>

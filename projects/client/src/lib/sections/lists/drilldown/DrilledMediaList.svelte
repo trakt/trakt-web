@@ -13,8 +13,14 @@
     empty?: Snippet;
   };
 
-  const { id, title, type, empty, item, useList }: DrilledMediaListProps =
-    $props();
+  const {
+    id,
+    title,
+    type,
+    empty: externalEmpty,
+    item,
+    useList,
+  }: DrilledMediaListProps = $props();
 
   const current = $derived(
     parseInt(pageState.url.searchParams.get("page") ?? "1"),
@@ -40,8 +46,13 @@
 <GridList
   {id}
   {title}
-  {empty}
   items={$list}
   {item}
   --width-item={mediaCardWidthResolver(type)}
-/>
+>
+  {#snippet empty()}
+    {#if !$isLoading}
+      {@render externalEmpty?.()}
+    {/if}
+  {/snippet}
+</GridList>

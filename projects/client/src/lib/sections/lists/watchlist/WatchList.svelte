@@ -1,15 +1,12 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
-
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
-  import FindMoviesLink from "../components/FindMoviesLink.svelte";
-  import FindShowsLink from "../components/FindShowsLink.svelte";
   import MediaCard from "../components/MediaCard.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
 
   type WatchListProps = {
@@ -54,25 +51,6 @@
   {/snippet}
 
   {#snippet empty()}
-    {#if type === "movie"}
-      {#if status === "all"}
-        <p class="small">{m.watchlist_movies_empty()}</p>
-      {/if}
-
-      {#if status === "out-now"}
-        <p class="small">{m.out_now_empty()}</p>
-      {/if}
-
-      {#if status === "coming-soon"}
-        <p class="small">{m.coming_soon_empty()}</p>
-      {/if}
-
-      <FindMoviesLink />
-    {/if}
-
-    {#if type === "show"}
-      <p class="small">{m.watchlist_shows_empty()}</p>
-      <FindShowsLink />
-    {/if}
+    <EmptyWatchlist {type} {status} />
   {/snippet}
 </DrillableMediaList>
