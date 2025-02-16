@@ -51,7 +51,7 @@ function typeToQuery(
   }
 }
 
-export function useWatchlistList(params: WatchListStoreProps) {
+export function useWatchList(params: WatchListStoreProps) {
   const query = useQuery(typeToQuery(params));
   const list = derived(
     query,

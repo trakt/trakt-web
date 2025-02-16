@@ -12,7 +12,7 @@
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { statusToStore } from "./statusToStore";
 
-  type WatchlistListProps = {
+  type WatchListProps = {
     title: string;
     type: MediaType;
     drilldownLabel: string;
@@ -20,13 +20,13 @@
     status: "all" | "out-now" | "coming-soon";
   };
 
-  const { title, type, status, drilldownLabel }: WatchlistListProps = $props();
+  const { title, type, status, drilldownLabel }: WatchListProps = $props();
 
   const useList = $derived.by(() => statusToStore(status));
 </script>
 
 <DrillableMediaList
-  id="watchlist-list-{type}"
+  id="watch-list-{type}"
   {title}
   {drilldownLabel}
   {type}

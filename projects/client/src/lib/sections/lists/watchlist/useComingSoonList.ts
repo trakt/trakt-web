@@ -1,9 +1,9 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 import {
-  useWatchlistList,
+  useWatchList,
   type WatchListStoreProps,
-} from '$lib/sections/lists/watchlist/useWatchlistList.ts';
+} from '$lib/sections/lists/watchlist/useWatchList.ts';
 import { derived, get } from 'svelte/store';
 import { genreCompareFactory } from './utils/genreCompareFactory.ts';
 
@@ -15,7 +15,7 @@ const IN_PROGRESS_STATUSES: MediaStatus[] = [
 ] as const;
 
 export function useComingSoonList(params: Omit<WatchListStoreProps, 'sort'>) {
-  const { list: watchlist, isLoading, page } = useWatchlistList({
+  const { list: watchlist, isLoading, page } = useWatchList({
     ...params,
     sort: 'rank',
   });

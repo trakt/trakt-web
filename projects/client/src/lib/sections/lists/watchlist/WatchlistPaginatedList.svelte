@@ -7,13 +7,13 @@
   import { statusToStore } from "./statusToStore";
   import type { WatchlistStatus } from "./WatchlistStatus";
 
-  type WatchlistListProps = {
+  type WatchListProps = {
     title: string;
     type: MediaType;
     status: WatchlistStatus;
   };
 
-  const { title, type, status }: WatchlistListProps = $props();
+  const { title, type, status }: WatchListProps = $props();
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
   const useList = $derived.by(() => statusToStore(status));
