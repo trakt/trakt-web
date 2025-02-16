@@ -17,6 +17,7 @@
   <WatchlistPaginatedList
     title={m.your_watchlist_movies()}
     emptyMessage={m.watchlist_movies_empty()}
+    category="all"
     type="movie"
   />
 </TraktPage>

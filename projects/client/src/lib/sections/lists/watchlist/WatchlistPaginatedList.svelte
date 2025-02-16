@@ -9,6 +9,7 @@
   type WatchlistListProps = {
     title: string;
     type: MediaType;
+    category: "all" | "released" | "unreleased";
     emptyMessage: string;
   };
 
