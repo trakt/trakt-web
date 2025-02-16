@@ -15,7 +15,7 @@ type UseListItemsProps = {
   type?: MediaType;
 };
 
-export function useUserlistList(props: UseListItemsProps) {
+export function useUserList(props: UseListItemsProps) {
   const query = useQuery(listItemsQuery({
     ...props,
     limit: props.limit ?? LIST_LIMIT,
