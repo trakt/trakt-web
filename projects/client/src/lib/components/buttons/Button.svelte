@@ -28,6 +28,16 @@
   const href = $derived((props as TraktButtonAnchorProps).href);
   const noscroll = $derived((props as TraktButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
+
+  function disableNavigation(node: HTMLElement) {
+    node.addEventListener("click", (ev) => {
+      if (!props.disabled) {
+        return;
+      }
+
+      ev.preventDefault();
+    });
+  }
 </script>
 
 {#snippet contents()}
@@ -56,6 +66,7 @@
     use:clickOutside
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
+    use:disableNavigation
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
@@ -74,6 +85,7 @@
   <button
     use:disableTransitionOn={"touch"}
     use:clickOutside
+    use:disableNavigation
     class="trakt-button"
     aria-label={label}
     data-variant={variant}
