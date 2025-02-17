@@ -9,6 +9,7 @@ import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/S
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 import { CollaborationListsResponseMock } from '$mocks/data/users/response/CollaborationListsResponseMock.ts';
 import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalListsResponseMock.ts';
+import { RatedShowsResponseMock } from '$mocks/data/users/response/RatedShowsResponseMock.ts';
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { HistoryEpisodesResponseMock } from '../data/users/response/HistoryEpisodesResponseMock.ts';
 import { HistoryMoviesResponseMock } from '../data/users/response/HistoryMoviesResponseMock.ts';
@@ -39,6 +40,9 @@ export const users = [
   }),
   http.get('http://localhost/users/me/ratings/movies', () => {
     return HttpResponse.json(RatedMoviesResponseMock);
+  }),
+  http.get('http://localhost/users/me/ratings/shows', () => {
+    return HttpResponse.json(RatedShowsResponseMock);
   }),
   http.get('http://localhost/users/me/ratings/episodes', () => {
     return HttpResponse.json(RatedEpisodesResponseMock);

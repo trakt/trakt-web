@@ -2,6 +2,7 @@ import type { RatedEntry } from '$lib/features/auth/queries/currentUserRatingsQu
 
 export const UserRatedMappedMock: {
   movies: Map<number, RatedEntry>;
+  shows: Map<number, RatedEntry>;
   episodes: Map<number, RatedEntry>;
 } = {
   movies: new Map([
@@ -9,6 +10,13 @@ export const UserRatedMappedMock: {
       'id': 916302,
       'ratedAt': new Date('2025-01-16T17:39:23.000Z'),
       'rating': 10,
+    }],
+  ]),
+  shows: new Map([
+    [180770, {
+      'id': 180770,
+      'ratedAt': new Date('2025-01-16T17:39:23.000Z'),
+      'rating': 9,
     }],
   ]),
   episodes: new Map([
