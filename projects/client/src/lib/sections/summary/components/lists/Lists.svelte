@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import ListSummaryCard from "./_internal/ListSummaryCard.svelte";
+  import ListSummaryCard from "../../../lists/components/list-summary/ListSummaryCard.svelte";
   import { useListSummary } from "./useListSummary.ts";
 
   const MAX_MOBILE_LISTS = 3;
