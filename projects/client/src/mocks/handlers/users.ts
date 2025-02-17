@@ -7,6 +7,8 @@ import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/SiloListsResponseMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
+import { CollaborationListsResponseMock } from '$mocks/data/users/response/CollaborationListsResponseMock.ts';
+import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalListsResponseMock.ts';
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
 import { HistoryEpisodesResponseMock } from '../data/users/response/HistoryEpisodesResponseMock.ts';
 import { HistoryMoviesResponseMock } from '../data/users/response/HistoryMoviesResponseMock.ts';
@@ -52,6 +54,12 @@ export const users = [
   }),
   http.get('http://localhost/users/me/following/activities', () => {
     return HttpResponse.json(SocialActivityResponseMock);
+  }),
+  http.get('http://localhost/users/me/lists/collaborations*', () => {
+    return HttpResponse.json(CollaborationListsResponseMock);
+  }),
+  http.get('http://localhost/users/me/lists*', () => {
+    return HttpResponse.json(PersonalListsResponseMock);
   }),
   http.get(
     `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
