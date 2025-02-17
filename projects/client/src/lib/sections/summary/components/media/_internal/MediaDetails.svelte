@@ -4,7 +4,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
   import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
-  import type { CrewMember } from "$lib/requests/models/MediaCrew";
+  import type { CrewMember, Job } from "$lib/requests/models/MediaCrew.ts";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
@@ -40,6 +40,10 @@
     };
   };
 
+  const filterOnJob = (crewMembers: CrewMember[], job: Job) => {
+    return crewMembers.filter((crewMember) => crewMember.jobs.includes(job));
+  };
+
   const mainItemDetail = () => {
     if (media.year) {
       const isUpcomingItem = media.airDate > new Date();
@@ -63,7 +67,7 @@
     },
     {
       title: m.director(),
-      values: crew.directors.map(toCrewMemberWithJob),
+      values: filterOnJob(crew.directors, "Director").map(toCrewMemberWithJob),
     },
     {
       title: m.writer(),
