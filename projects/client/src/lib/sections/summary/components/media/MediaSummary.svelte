@@ -155,9 +155,7 @@
       </RenderFor>
 
       {#snippet contextualActions()}
-        {#if type === "movie"}
-          <RateNow {type} {media} />
-        {/if}
+        <RateNow {type} {media} />
       {/snippet}
     </SummaryActions>
   </RenderFor>

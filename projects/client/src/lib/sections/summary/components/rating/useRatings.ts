@@ -1,6 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { SimpleRating } from '$lib/models/SimpleRating.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { mapRatingToSimpleRating } from '$lib/sections/summary/components/rating/mapRatingToSimpleRating.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
@@ -8,7 +9,7 @@ import type { RatingsRequest } from '@trakt/api';
 import { derived, writable } from 'svelte/store';
 import { SIMPLE_RATINGS } from './constants.ts';
 
-type RateableType = 'movie' | 'episode';
+type RateableType = MediaType | 'episode';
 
 export type WatchlistStoreProps = {
   type: RateableType;
@@ -29,6 +30,10 @@ function toRatingPayload(
     case 'movie':
       return {
         movies: [ratingPayload],
+      };
+    case 'show':
+      return {
+        shows: [ratingPayload],
       };
     case 'episode':
       return {
@@ -52,6 +57,8 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
       switch (type) {
         case 'movie':
           return $ratings.movies.get(id);
+        case 'show':
+          return $ratings.shows.get(id);
         case 'episode':
           return $ratings.episodes.get(id);
       }

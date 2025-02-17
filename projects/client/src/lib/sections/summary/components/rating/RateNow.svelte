@@ -3,6 +3,7 @@
   import { SimpleRating } from "$lib/models/SimpleRating";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import RateActionButton from "./_internal/RateActionButton.svelte";
   import { useRatings } from "./useRatings";
@@ -14,12 +15,12 @@
     episode: EpisodeEntry;
   };
 
-  type RateableMovie = {
-    type: "movie";
+  type RateableMedia = {
+    type: MediaType;
     media: MediaEntry;
   };
 
-  type RateNowProps = RateableEpisode | RateableMovie;
+  type RateNowProps = RateableEpisode | RateableMedia;
 
   const { ...props }: RateNowProps = $props();
 
