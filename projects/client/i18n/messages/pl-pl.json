@@ -225,7 +225,6 @@
   "expand_media_overview": "Rozwiń podsumowanie {title}",
   "season_episode_number_label": "Sezon {season} • Odcinek {number}",
   "share_title": "Udostępnij {title}",
-  "where_to_watch_on_trakt": "Sprawdź gdzie obejrzeć {title} na Trakt!",
   "status": "Status",
   "status_released": "Wydany",
   "status_planned": "Planowany",
@@ -303,5 +302,9 @@
   "view_all_movies_out_now": "Oglądaj wszystkie filmy teraz",
   "view_all_movies_coming_soon": "Oglądaj wszystkie filmy wkrótce",
   "personal_lists": "Moje listy",
-  "collaborations": "Współprace"
+  "collaborations": "Współprace",
+  "share_movie": "Właśnie odkryłem {title} – musisz to zobaczyć! 🎬",
+  "share_show": "Znaleziono świetny serial: {title}! 📺",
+  "share_episode": "Właśnie obejrzałem {show} S{season}E{episode} - {title}! 🔥",
+  "share_person": "Sprawdź {name} na Trakcie! 🎭"
 }

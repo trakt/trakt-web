@@ -5,10 +5,16 @@
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
 
-  const { title } = $props();
+  type ShareButtonProps = {
+    title: string;
+    textFactory: ({ title }: { title: string }) => string;
+  };
+
+  const { title, textFactory }: ShareButtonProps = $props();
+
   const data = $derived({
     title,
-    text: m.where_to_watch_on_trakt({ title }),
+    text: textFactory({ title }),
     url: page.url.toString(),
   });
 

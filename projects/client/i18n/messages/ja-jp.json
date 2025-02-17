@@ -225,7 +225,6 @@
   "expand_media_overview": "{title} の概要を表示",
   "season_episode_number_label": "シーズン{season}・エピソード{number}",
   "share_title": "{title}を共有する",
-  "where_to_watch_on_trakt": "Traktで{title}を視聴できる場所をチェック！",
   "status": "ステータス",
   "status_released": "公開済",
   "status_planned": "計画中",
@@ -303,5 +302,9 @@
   "view_all_movies_out_now": "公開中作品一覧",
   "view_all_movies_coming_soon": "公開予定作品一覧",
   "personal_lists": "マイリスト",
-  "collaborations": "共同リスト"
+  "collaborations": "共同リスト",
+  "share_movie": "{title}をみつけてしまった！絶対見てほしい！🎬",
+  "share_show": "素晴らしい作品を発見！{title} 📺",
+  "share_episode": "{show} S{season}E{episode} - {title}を視聴！🔥",
+  "share_person": "{name}をTraktでチェック！🎭"
 }

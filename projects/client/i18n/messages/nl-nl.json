@@ -225,7 +225,6 @@
   "expand_media_overview": "Bekijk {title} overzicht",
   "season_episode_number_label": "Seizoen {season} • Aflevering {number}",
   "share_title": "Deel {title}",
-  "where_to_watch_on_trakt": "Bekijk waar je {title} kunt kijken op Trakt!",
   "status": "Status",
   "status_released": "Uitgebracht",
   "status_planned": "Gepland",
@@ -303,5 +302,9 @@
   "view_all_movies_out_now": "Bekijk alle films nu",
   "view_all_movies_coming_soon": "Bekijk alle aankomende films",
   "personal_lists": "Mijn lijsten",
-  "collaborations": "Samenwerkingen"
+  "collaborations": "Samenwerkingen",
+  "share_movie": "Net {title} ontdekt - je moet dit zien! 🎬",
+  "share_show": "Deze geweldige serie gevonden: {title}! 📺",
+  "share_episode": "Zojuist {show} S{season}A{episode} - {title} bekeken! 🔥",
+  "share_person": "Bekijk {name} op Trakt! 🎭"
 }

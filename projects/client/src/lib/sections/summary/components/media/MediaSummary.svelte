@@ -1,4 +1,6 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages";
+
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
@@ -110,7 +112,17 @@
       {#if "trailer" in media}
         <YoutubeButton trailer={media.trailer} />
       {/if}
-      <ShareButton {title} />
+      <ShareButton
+        {title}
+        textFactory={(title) => {
+          switch (type) {
+            case "movie":
+              return m.share_movie({ title });
+            case "show":
+              return m.share_show({ title });
+          }
+        }}
+      />
     {/snippet}
 
     <SummaryTitle {title} />

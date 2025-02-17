@@ -225,7 +225,6 @@
   "expand_media_overview": "Espandi la panoramica di {title}",
   "season_episode_number_label": "Stagione {season} • Episodio {number}",
   "share_title": "Condividi {title}",
-  "where_to_watch_on_trakt": "Vedi dove guardare {title} su Trakt!",
   "status": "Stato",
   "status_released": "Rilasciato",
   "status_planned": "Pianificato",
@@ -303,5 +302,9 @@
   "view_all_movies_out_now": "Visualizza tutti i film in uscita",
   "view_all_movies_coming_soon": "Visualizza tutti i film in arrivo",
   "personal_lists": "Liste personale",
-  "collaborations": "Collaborazioni"
+  "collaborations": "Collaborazioni",
+  "share_movie": "Tocmai am descoperit {title} - trebuie să-l vezi! 🎬",
+  "share_show": "Am găsit un serial grozav: {title}! 📺",
+  "share_episode": "Tocmai am urmărit {show} S{season}E{episode} - {title}! 🔥",
+  "share_person": "Verifică-l pe {name} pe Trakt! 🎭"
 }

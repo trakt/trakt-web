@@ -76,7 +76,16 @@
 
   <SummaryHeader>
     {#snippet headerActions()}
-      <ShareButton {title} />
+      <ShareButton
+        {title}
+        textFactory={(title) =>
+          m.share_episode({
+            title,
+            show: showTitle,
+            season: episode.season,
+            episode: episode.number,
+          })}
+      />
     {/snippet}
     <SummaryTitle {title} />
     <Link href={UrlBuilder.show(show.slug)}>

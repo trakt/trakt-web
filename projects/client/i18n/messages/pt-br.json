@@ -225,7 +225,6 @@
   "expand_media_overview": "Expandir a visão geral de {title}",
   "season_episode_number_label": "Temporada {season} • Episódio {number}",
   "share_title": "Compartilhar {title}",
-  "where_to_watch_on_trakt": "Onde assistir {title} no Trakt!",
   "status": "Status",
   "status_released": "Lançado",
   "status_planned": "Planejado",
@@ -303,5 +302,9 @@
   "view_all_movies_out_now": "Ver todos os lançamentos",
   "view_all_movies_coming_soon": "Ver todos os próximos lançamentos",
   "personal_lists": "Listas pessoais",
-  "collaborations": "Colaborações"
+  "collaborations": "Colaborações",
+  "share_movie": "Acabei de descobrir {title} - precisa ver! 🎬",
+  "share_show": "Encontrei essa série incrível: {title}! 📺",
+  "share_episode": "Acabei de assistir {show} T{season}E{episode} - {title}! 🔥",
+  "share_person": "Confira {name} no Trakt! 🎭"
 }
