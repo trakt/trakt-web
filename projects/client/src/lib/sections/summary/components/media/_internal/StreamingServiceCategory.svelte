@@ -40,7 +40,7 @@
   <CollapsableValues category="streaming" values={services}>
     <p class="meta-info secondary">{title}</p>
     {#snippet value(service)}
-      <Link href={service.link}>
+      <Link href={service.link} target="_blank">
         <p class="small ellipsis">
           {getServiceName(service)}
           {#if hasPrice(service)}
