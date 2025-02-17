@@ -44,6 +44,8 @@ export function mapToMediaCrew(
       .map(toCrewMember),
     writers: (response.crew?.writing ?? [])
       .map(toCrewMember),
+    creators: (response.crew?.['created by'] ?? [])
+      .map(toCrewMember),
     cast: (response.cast ?? [])
       .map(toCastMember),
   };

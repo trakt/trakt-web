@@ -66,6 +66,10 @@
       values: [toHumanDuration({ minutes: media.runtime }, languageTag())],
     },
     {
+      title: m.creator(),
+      values: filterOnJob(crew.creators, "Creator").map(toCrewMemberWithJob),
+    },
+    {
       title: m.director(),
       values: filterOnJob(crew.directors, "Director").map(toCrewMemberWithJob),
     },

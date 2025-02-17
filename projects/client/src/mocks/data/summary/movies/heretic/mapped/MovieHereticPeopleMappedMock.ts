@@ -146,4 +146,5 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
       'name': 'Bryan Woods',
     },
   ],
+  'creators': [],
 };

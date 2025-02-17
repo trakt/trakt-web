@@ -245,4 +245,13 @@ export const ShowSiloPeopleMappedMock: MediaCrew = {
       'name': 'Katherine DiSavino',
     },
   ],
+  'creators': [
+    {
+      'id': 'graham-yost',
+      'jobs': [
+        'Creator',
+      ],
+      'name': 'Graham Yost',
+    },
+  ],
 };
