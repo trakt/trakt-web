@@ -3,9 +3,9 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
+  import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import UserAvatar from "../../_internal/UserAvatar.svelte";
-  import UserProfileLink from "../../_internal/UserProfileLink.svelte";
 
   const { list, type }: { list: MediaListSummary; type: MediaType } = $props();
 </script>

@@ -3,9 +3,9 @@
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
+  import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
+  import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
-  import UserAvatar from "../../_internal/UserAvatar.svelte";
-  import UserProfileLink from "../../_internal/UserProfileLink.svelte";
   import { mapRatingToSimpleRating } from "../../rating/mapRatingToSimpleRating";
   import UserRatingIcon from "./UserRatingIcon.svelte";
 
