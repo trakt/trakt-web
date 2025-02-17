@@ -1,4 +1,8 @@
-import type { RatedEpisodesResponse, RatedMoviesResponse } from '$lib/api.ts';
+import type {
+  RatedEpisodesResponse,
+  RatedMoviesResponse,
+  RatedShowsResponse,
+} from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
@@ -36,6 +40,29 @@ const currentUserRatedMoviesRequest = ({ fetch }: ApiParams) =>
       return response.body;
     });
 
+function mapRatedShowsResponse(entry: RatedShowsResponse): RatedEntry {
+  return {
+    id: entry.show.ids.trakt,
+    rating: entry.rating,
+    ratedAt: new Date(entry.rated_at),
+  };
+}
+
+const currentUserRatedShowsRequest = ({ fetch }: ApiParams) =>
+  api({ fetch })
+    .users
+    .ratings
+    .shows({
+      params: { id: 'me' },
+    })
+    .then((response) => {
+      if (response.status !== 200) {
+        error('Error fetching user rated shows', response);
+        throw new Error('Error fetching user rated shows.');
+      }
+      return response.body;
+    });
+
 function mapRatedEpisodeResponse(entry: RatedEpisodesResponse): RatedEntry {
   return {
     id: entry.episode.ids.trakt,
@@ -61,6 +88,7 @@ const currentUserRatedEpisodesRequest = ({ fetch }: ApiParams) =>
 
 const UserRatingsSchema = z.object({
   movies: z.map(z.number(), RatedMediaSchema),
+  shows: z.map(z.number(), RatedMediaSchema),
   episodes: z.map(z.number(), RatedMediaSchema),
 });
 export type UserRatings = z.infer<typeof UserRatingsSchema>;
@@ -70,15 +98,18 @@ export const currentUserRatingsQuery = defineQuery({
   request: () =>
     Promise.all([
       currentUserRatedMoviesRequest({ fetch }),
+      currentUserRatedShowsRequest({ fetch }),
       currentUserRatedEpisodesRequest({ fetch }),
     ]),
   invalidations: [
     InvalidateAction.Rated('episode'),
+    InvalidateAction.Rated('show'),
     InvalidateAction.Rated('movie'),
   ],
   dependencies: [],
-  mapper: ([movies, episodes]) => ({
+  mapper: ([movies, shows, episodes]) => ({
     movies: toMap(movies, mapRatedMovieResponse, (entry) => entry.id),
+    shows: toMap(shows, mapRatedShowsResponse, (entry) => entry.id),
     episodes: toMap(episodes, mapRatedEpisodeResponse, (entry) => entry.id),
   }),
   schema: UserRatingsSchema,
