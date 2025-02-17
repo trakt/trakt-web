@@ -94,7 +94,10 @@ p {
   &.small {
     font-size: var(--ni-14);
   }
+}
 
+span,
+p {
   &.meta-info {
     font-size: var(--ni-10);
     font-style: normal;

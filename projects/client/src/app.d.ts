@@ -50,6 +50,10 @@ declare global {
     onerror?: (event: Event) => void;
   };
 
+  type HTMLInputElementProps = {
+    value?: string;
+  };
+
   type HTMLElementProps = {
     disabled?: boolean;
     'data-testid'?: string;
@@ -143,6 +147,14 @@ declare global {
     }
     & HTMLElementProps
     & ChildrenProps;
+
+  export type CheckboxProps =
+    & {
+      label: string;
+      checked?: boolean;
+    }
+    & HTMLInputElementProps
+    & HTMLElementProps;
 
   namespace App {
     // interface Error {}

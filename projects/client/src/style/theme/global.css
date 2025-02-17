@@ -80,4 +80,27 @@
   --color-background-orange: var(--orange-300);
   --color-foreground-orange: var(--orange-50);
   --color-background-orange-hover: var(--orange-700);
+
+  /**
+   * Toggle switches
+   */
+  --color-tick-purple: var(--purple-500);
+  --color-switch-foreground-purple: var(--purple-50);
+  --color-switch-background-purple: var(--purple-800);
+
+  --color-tick-red: var(--red-500);
+  --color-switch-foreground-red: var(--red-50);
+  --color-switch-background-red: var(--red-800);
+
+  --color-tick-blue: var(--blue-500);
+  --color-switch-foreground-blue: var(--blue-50);
+  --color-switch-background-blue: var(--blue-800);
+
+  --color-tick-default: var(--shade-500);
+  --color-switch-foreground-default: var(--shade-50);
+  --color-switch-background-default: var(--shade-800);
+
+  --color-tick-orange: var(--orange-500);
+  --color-switch-foreground-orange: var(--orange-50);
+  --color-switch-background-orange: var(--orange-800);
 }
