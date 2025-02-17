@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { EpisodeSiloCommentsResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloCommentsResponseMock.ts';
 import { ShowSiloCommentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloCommentsResponseMock.ts';
 import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAnticipatedResponseMock.ts';
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
@@ -108,6 +109,12 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/*`,
     () => {
       return HttpResponse.json(EpisodeSiloLanguageResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/comments/likes*`,
+    () => {
+      return HttpResponse.json(EpisodeSiloCommentsResponseMock);
     },
   ),
   http.get(
