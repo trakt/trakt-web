@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
@@ -73,7 +74,10 @@
     </SummaryPoster>
   {/snippet}
 
-  <SummaryHeader {title}>
+  <SummaryHeader>
+    {#snippet headerActions()}
+      <ShareButton {title} />
+    {/snippet}
     <SummaryTitle {title} />
     <Link href={UrlBuilder.show(show.slug)}>
       <h6>{showTitle}</h6>

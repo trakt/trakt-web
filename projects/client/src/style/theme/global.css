@@ -73,7 +73,7 @@
   --color-foreground-blue: var(--blue-50);
   --color-background-blue-hover: var(--blue-800);
 
-  --color-background-default: var(--shade-800);
+  --color-background-default: var(--shade-700);
   --color-foreground-default: var(--shade-50);
   --color-background-default-hover: var(--shade-500);
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
   import TrollIcon from "$lib/components/icons/TrollIcon.svelte";
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
   import { DEFAULT_TRAILER } from "$lib/utils/constants";
@@ -10,16 +10,19 @@
   const isDefaultTrailer = $derived(trailer === DEFAULT_TRAILER);
 </script>
 
-<ActionButton
+<Button
   href={trailer}
   target="_blank"
-  label={m.watch_the_trailer()}
-  color="red"
-  variant="secondary"
+  label={"Trailer"}
+  color="default"
+  size="small"
 >
-  {#if isDefaultTrailer}
-    <TrollIcon />
-  {:else}
-    <YouTubeIcon />
-  {/if}
-</ActionButton>
+  {m.watch_the_trailer()}
+  {#snippet icon()}
+    {#if isDefaultTrailer}
+      <TrollIcon />
+    {:else}
+      <YouTubeIcon />
+    {/if}
+  {/snippet}
+</Button>

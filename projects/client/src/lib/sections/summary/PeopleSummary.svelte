@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
@@ -20,7 +21,10 @@
     <SummaryPoster src={person.headShotUrl} alt={person.name} />
   {/snippet}
 
-  <SummaryHeader title={person.name}>
+  <SummaryHeader>
+    {#snippet headerActions()}
+      <ShareButton title={person.name} />
+    {/snippet}
     <SummaryTitle title={person.name} />
   </SummaryHeader>
 

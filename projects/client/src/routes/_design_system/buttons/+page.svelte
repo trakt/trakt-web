@@ -8,7 +8,12 @@
   import type { TraktButtonProps } from "$lib/components/buttons/TraktButtonProps";
 
   const styles: TraktButtonProps["style"][] = ["textured", "flat", "ghost"];
-  const colors: TraktButtonProps["color"][] = ["purple", "red", "blue"];
+  const colors: TraktButtonProps["color"][] = [
+    "purple",
+    "red",
+    "blue",
+    "default",
+  ];
   const variants: NonNullable<TraktButtonProps["variant"]>[] = [
     "primary",
     "secondary",

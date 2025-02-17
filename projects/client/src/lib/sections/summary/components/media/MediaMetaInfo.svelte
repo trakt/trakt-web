@@ -15,7 +15,6 @@
   import type { StreamNow } from "$lib/requests/models/StreamingServiceOptions";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { useStreamOn } from "$lib/stores/useStreamOn";
-  import YoutubeButton from "../YoutubeButton.svelte";
 
   type MediaMetaInfoProps = {
     certification?: string | Nil;
@@ -81,10 +80,6 @@
       <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
         {@render streamNowButton($streamOn?.preferred, "action")}
       </RenderFor>
-    {/if}
-
-    {#if "trailer" in media}
-      <YoutubeButton trailer={media.trailer} />
     {/if}
   </div>
 </div>

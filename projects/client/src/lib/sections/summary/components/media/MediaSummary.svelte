@@ -1,5 +1,6 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
@@ -22,6 +23,7 @@
   import SummaryHeader from "../summary/SummaryHeader.svelte";
   import SummaryOverview from "../summary/SummaryOverview.svelte";
   import SummaryTitle from "../summary/SummaryTitle.svelte";
+  import YoutubeButton from "../YoutubeButton.svelte";
   import MediaDetails from "./_internal/MediaDetails.svelte";
   import MediaStreamingServices from "./_internal/MediaStreamingServices.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
@@ -103,7 +105,14 @@
     </SummaryPoster>
   {/snippet}
 
-  <SummaryHeader {title}>
+  <SummaryHeader>
+    {#snippet headerActions()}
+      {#if "trailer" in media}
+        <YoutubeButton trailer={media.trailer} />
+      {/if}
+      <ShareButton {title} />
+    {/snippet}
+
     <SummaryTitle {title} />
     <GenreList genres={media.genres} />
   </SummaryHeader>

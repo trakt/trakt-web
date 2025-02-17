@@ -34,12 +34,7 @@
 </script>
 
 {#if isShareable}
-  <ActionButton
-    label={m.share_title({ title })}
-    size="small"
-    variant="secondary"
-    onclick={share}
-  >
+  <ActionButton label={m.share_title({ title })} onclick={share}>
     <ShareIcon />
   </ActionButton>
 {/if}
