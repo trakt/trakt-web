@@ -23,7 +23,7 @@
 </script>
 
 {#if hasServices}
-  <DetailsGrid title={m.watch_now()} isCollapsable={true}>
+  <DetailsGrid title={m.stream_on()} isCollapsable={true}>
     {#if streaming.length > 0}
       <WatchNowCategoryServices title={m.streaming()} services={streaming} />
     {/if}

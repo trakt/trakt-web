@@ -3,5 +3,5 @@ import type { WatchNowServiceLogoIntl } from './WatchNowServiceLogoIntl.ts';
 
 export const WatchNowServiceLogoIntlProvider: WatchNowServiceLogoIntl = {
   alt: (serviceName: string) =>
-    m.watch_now_service_logo({ service: serviceName }),
+    m.streaming_service_logo({ service: serviceName }),
 };

@@ -34,7 +34,7 @@
 {#if style === "normal"}
   <div class="trakt-watch-now-button">
     <Button {...commonProps} {...props} size="small">
-      {i18n.watchNow()}
+      {i18n.streamOn()}
       {#snippet icon()}
         <WatchNowServiceLogo
           source={service.source}
