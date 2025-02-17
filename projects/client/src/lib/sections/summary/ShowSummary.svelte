@@ -63,7 +63,7 @@
 
 <SeasonList show={media} {seasons} />
 
-<Comments {media} />
+<Comments {media} type="show" />
 
 <RelatedList title={m.related_shows_title()} slug={media.slug} type="show" />
 

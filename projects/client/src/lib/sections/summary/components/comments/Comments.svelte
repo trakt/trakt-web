@@ -1,16 +1,16 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import CommentCard from "./_internal/CommentCard.svelte";
   import { useComments } from "./_internal/useComments";
+  import type { CommentsProps } from "./CommentsProps";
 
-  const { media }: { media: MediaEntry } = $props();
+  const { media, ...props }: CommentsProps = $props();
 
   const { isLoading, comments } = $derived(
     useComments({
       slug: media.slug,
-      type: media.type,
+      ...props,
     }),
   );
 

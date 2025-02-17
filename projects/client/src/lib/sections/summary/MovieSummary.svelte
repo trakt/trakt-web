@@ -40,7 +40,7 @@
 
 <CastList title={m.actors()} cast={crew.cast} />
 
-<Comments {media} />
+<Comments {media} type="movie" />
 
 <RelatedList title={m.related_movies_title()} slug={media.slug} type="movie" />
 

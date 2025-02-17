@@ -13,6 +13,7 @@
   import { useStreamOn } from "$lib/stores/useStreamOn";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import RelatedList from "../lists/RelatedList.svelte";
+  import Comments from "./components/comments/Comments.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./components/overlay/StreamOnOverlay.svelte";
@@ -123,5 +124,12 @@
 </SummaryContainer>
 
 <SeasonList {show} {seasons} />
+
+<Comments
+  media={show}
+  type="episode"
+  season={episode.season}
+  episode={episode.number}
+/>
 
 <RelatedList title={m.related_shows_title()} slug={show.slug} type="show" />
