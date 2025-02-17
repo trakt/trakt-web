@@ -29,17 +29,22 @@
 
 <header>
   <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
-    <div class="trakt-logo">
-      <Link href={UrlBuilder.home()}>
-        <RenderFor audience="authenticated">
+    <RenderFor
+      audience="authenticated"
+      device={["tablet-sm", "tablet-lg", "desktop"]}
+    >
+      <div class="trakt-logo">
+        <Link href={UrlBuilder.home()}>
           <LogoMark />
           <BetaBadge />
-        </RenderFor>
-        <RenderFor audience="public">
-          <Logo />
-        </RenderFor>
-      </Link>
-    </div>
+        </Link>
+      </div>
+    </RenderFor>
+    <RenderFor audience="public">
+      <div class="trakt-logo">
+        <Logo />
+      </div>
+    </RenderFor>
     <div class="trakt-navbar-content">
       <RenderFor audience="authenticated">
         <SearchInput />
