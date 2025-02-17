@@ -11,6 +11,7 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useStreamOn } from "$lib/stores/useStreamOn";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import RelatedList from "../lists/RelatedList.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./components/overlay/StreamOnOverlay.svelte";
@@ -109,3 +110,5 @@
 </SummaryContainer>
 
 <SeasonList {show} {seasons} />
+
+<RelatedList title={m.related_shows_title()} slug={show.slug} type="show" />
