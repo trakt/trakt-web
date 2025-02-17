@@ -1,6 +1,6 @@
-import type { RatedMoviesResponse } from '@trakt/api';
+import type { RatedItemResponse } from '@trakt/api';
 
-export const RatedMoviesResponseMock: RatedMoviesResponse[] = [
+export const RatedMoviesResponseMock: RatedItemResponse[] = [
   {
     'rated_at': '2025-01-16T17:39:23.000Z',
     'rating': 10,
