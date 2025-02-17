@@ -1,6 +1,6 @@
-import type { WatchNowServices } from '$lib/requests/models/WatchNowServices.ts';
+import type { StreamingServiceOptions } from '../../../../../../lib/requests/models/StreamingServiceOptions.ts';
 
-export const MovieHereticWatchedNowMappedMock: WatchNowServices = {
+export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
   'onDemand': [
     {
       'currency': 'usd',

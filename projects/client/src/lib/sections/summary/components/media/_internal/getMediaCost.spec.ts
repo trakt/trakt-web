@@ -1,10 +1,10 @@
-import type { WatchNowOnDemand } from '$lib/requests/models/WatchNowServices.ts';
+import type { StreamOnDemand } from '$lib/requests/models/StreamingServiceOptions.ts';
 import { describe, expect, it } from 'vitest';
 import { getMediaCost } from './getMediaCost.ts';
 
 describe('getMediaCost', () => {
   it('should return an empty string if there are no rent or purchase prices', () => {
-    const onDemandService: WatchNowOnDemand = {
+    const onDemandService: StreamOnDemand = {
       link: 'https://example.com',
       source: 'source',
       is4k: false,
@@ -17,7 +17,7 @@ describe('getMediaCost', () => {
   });
 
   it('should prioritize the rent price over the purchase price', () => {
-    const onDemandService: WatchNowOnDemand = {
+    const onDemandService: StreamOnDemand = {
       link: 'https://example.com',
       source: 'source',
       is4k: false,
@@ -30,7 +30,7 @@ describe('getMediaCost', () => {
   });
 
   it('should get the purchase price if there is no rent price', () => {
-    const onDemandService: WatchNowOnDemand = {
+    const onDemandService: StreamOnDemand = {
       link: 'https://example.com',
       source: 'source',
       is4k: false,

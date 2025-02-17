@@ -30,7 +30,7 @@ export const ExtendedUserMappedMock: UserSettings = {
     },
     'isSpoilerHidden': false,
   },
-  'watchNow': {
+  'services': {
     'country': 'us',
     'favorites': ['netflix', 'max'],
     'showOnlyFavorites': true,

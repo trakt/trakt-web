@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WatchNowButton from "$lib/components/buttons/watch-now/WatchNowButton.svelte";
+  import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
   import AirDate from "$lib/components/media/tags/AirDateTag.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import PlaysTag from "$lib/components/media/tags/PlaysTag.svelte";
@@ -12,9 +12,9 @@
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import type { StreamNow } from "$lib/requests/models/StreamingServiceOptions";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
-  import type { WatchNowStreaming } from "$lib/requests/models/WatchNowServices";
-  import { useWatchNow } from "$lib/stores/useWatchNow";
+  import { useStreamOn } from "$lib/stores/useStreamOn";
   import YoutubeButton from "../YoutubeButton.svelte";
 
   type MediaMetaInfoProps = {
@@ -38,8 +38,8 @@
     media,
   }: MediaMetaInfoProps = $props();
 
-  const { watchNow } = $derived(
-    useWatchNow({
+  const { streamOn } = $derived(
+    useStreamOn({
       type,
       id: media.id,
     }),
@@ -48,11 +48,8 @@
   const isAiredItem = $derived(airDate < new Date());
 </script>
 
-{#snippet watchNowButton(
-  service: WatchNowStreaming,
-  style: "normal" | "action",
-)}
-  <WatchNowButton mediaTitle={media.title} {service} {style} />
+{#snippet streamNowButton(service: StreamNow, style: "normal" | "action")}
+  <StreamingServiceButton mediaTitle={media.title} {service} {style} />
 {/snippet}
 
 <div class="trakt-summary-meta">
@@ -77,12 +74,12 @@
     </div>
   </div>
   <div class="trakt-summary-watch-container">
-    {#if $watchNow?.preferred}
+    {#if $streamOn?.preferred}
       <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
-        {@render watchNowButton($watchNow?.preferred, "normal")}
+        {@render streamNowButton($streamOn?.preferred, "normal")}
       </RenderFor>
       <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
-        {@render watchNowButton($watchNow?.preferred, "action")}
+        {@render streamNowButton($streamOn?.preferred, "action")}
       </RenderFor>
     {/if}
 

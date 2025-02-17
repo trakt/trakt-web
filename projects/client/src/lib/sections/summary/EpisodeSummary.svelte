@@ -9,11 +9,11 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/SeasonList.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import { useWatchNow } from "$lib/stores/useWatchNow";
+  import { useStreamOn } from "$lib/stores/useStreamOn";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
-  import WatchNowOverlay from "./components/overlay/WatchNowOverlay.svelte";
+  import StreamOnOverlay from "./components/overlay/StreamOnOverlay.svelte";
   import RateNow from "./components/rating/RateNow.svelte";
   import SummaryActions from "./components/summary/SummaryActions.svelte";
   import SummaryContainer from "./components/summary/SummaryContainer.svelte";
@@ -36,7 +36,7 @@
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
-  const { watchNow } = useWatchNow({
+  const { streamOn } = useStreamOn({
     type,
     id: episode.id,
   });
@@ -60,10 +60,10 @@
     <SummaryPoster
       src={show.poster.url.medium}
       alt={title}
-      href={$watchNow?.preferred?.link}
+      href={$streamOn?.preferred?.link}
     >
       {#snippet hoverOverlay()}
-        <WatchNowOverlay service={$watchNow?.preferred} />
+        <StreamOnOverlay service={$streamOn?.preferred} />
       {/snippet}
       {#snippet actions()}
         <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">

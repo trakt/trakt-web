@@ -41,7 +41,7 @@ export const UserSettingsSchema = z.object({
     isSpoilerHidden: z.boolean().optional(),
   }),
   genres: genreOptionSchema.array(),
-  watchNow: z.object({
+  services: z.object({
     country: z.string().optional(),
     favorites: z.array(z.string()).optional(),
     showOnlyFavorites: z.boolean().optional(),
@@ -98,7 +98,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
         .some((topic) => topic?.includes('hide')),
     },
     genres: browsing?.genres.favorites ?? [],
-    watchNow: {
+    services: {
       country: browsing?.watchnow.country,
       favorites: browsing?.watchnow.favorites,
       showOnlyFavorites: browsing?.watchnow.only_favorites,

@@ -11,11 +11,11 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
-  import { useWatchNow } from "$lib/stores/useWatchNow";
+  import { useStreamOn } from "$lib/stores/useStreamOn";
   import type { Snippet } from "svelte";
   import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
+  import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
-  import WatchNowOverlay from "../overlay/WatchNowOverlay.svelte";
   import RateNow from "../rating/RateNow.svelte";
   import SummaryActions from "../summary/SummaryActions.svelte";
   import SummaryContainer from "../summary/SummaryContainer.svelte";
@@ -23,7 +23,7 @@
   import SummaryOverview from "../summary/SummaryOverview.svelte";
   import SummaryTitle from "../summary/SummaryTitle.svelte";
   import MediaDetails from "./_internal/MediaDetails.svelte";
-  import MediaWatchNowServices from "./_internal/MediaWatchNowServices.svelte";
+  import MediaStreamingServices from "./_internal/MediaStreamingServices.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 
   const {
@@ -60,8 +60,8 @@
     media,
   });
 
-  const { watchNow } = $derived(
-    useWatchNow({
+  const { streamOn } = $derived(
+    useStreamOn({
       type,
       id: media.id,
     }),
@@ -86,11 +86,11 @@
     <SummaryPoster
       src={media.poster.url.medium}
       alt={title}
-      href={$watchNow?.preferred?.link ?? media.trailer}
+      href={$streamOn?.preferred?.link ?? media.trailer}
     >
       {#snippet hoverOverlay()}
-        {#if $watchNow?.preferred}
-          <WatchNowOverlay service={$watchNow?.preferred} />
+        {#if $streamOn?.preferred}
+          <StreamOnOverlay service={$streamOn?.preferred} />
         {:else}
           <TrailerOverlay trailer={media.trailer} />
         {/if}
@@ -144,8 +144,8 @@
 
 <SummaryContainer>
   <MediaDetails {media} {studios} {crew} />
-  <MediaWatchNowServices
-    services={$watchNow?.services}
-    preferred={$watchNow?.preferred}
+  <MediaStreamingServices
+    services={$streamOn?.services}
+    preferred={$streamOn?.preferred}
   />
 </SummaryContainer>
