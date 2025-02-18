@@ -15,6 +15,9 @@ export type EpisodeItemVariant =
 
 export type EpisodeCardProps = EpisodeItemVariant & {
   badges?: Snippet;
+  action?: Snippet;
+  tags?: Snippet;
   show: MediaInputDefault;
   style?: 'cover' | 'summary';
+  popupActions?: Snippet;
 };

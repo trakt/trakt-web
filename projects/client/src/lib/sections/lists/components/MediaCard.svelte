@@ -10,7 +10,7 @@
   const style = $derived(props.style ?? "cover");
 </script>
 
-{#snippet defaultPopupActions()}
+{#snippet popupActions()}
   <RenderFor audience="authenticated">
     <WatchlistAction
       style="dropdown-item"
@@ -32,9 +32,7 @@
     {...props}
     {style}
     action={props.action}
-    popupActions={props.variant === "activity"
-      ? undefined
-      : defaultPopupActions}
+    popupActions={props.badges ? undefined : popupActions}
   />
 {/if}
 
@@ -43,8 +41,6 @@
     {...props}
     {style}
     action={props.action}
-    popupActions={props.variant === "activity"
-      ? undefined
-      : defaultPopupActions}
+    popupActions={props.badges ? undefined : popupActions}
   />
 {/if}

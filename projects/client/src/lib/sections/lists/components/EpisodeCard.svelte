@@ -1,31 +1,19 @@
 <script lang="ts">
-  import Card from "$lib/components/card/Card.svelte";
-  import CardCover from "$lib/components/card/CardCover.svelte";
-  import CardFooter from "$lib/components/card/CardFooter.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
   import EpisodeTimeTag from "$lib/components/episode/tags/EpisodeTimeTag.svelte";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
-  import Link from "$lib/components/link/Link.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
-  import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
+  import EpisodeItemCard from "./EpisodeItemCard.svelte";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
 
   const props: EpisodeCardProps = $props();
 
-  const src = $derived(useEpisodeSpoilerImage(props));
   const isFuture = $derived(props.episode.airDate > new Date());
-
   const isDefault = $derived(props.variant === "default");
-  const isShowContext = $derived(
-    props.variant === "default" && props.context === "show",
-  );
   const isActivity = $derived(props.variant === "activity");
   const style = $derived(props.style ?? "cover");
 </script>
@@ -88,6 +76,7 @@
         count: 0,
       },
     }}
+    popupActions={props.popupActions}
     {tags}
     {action}
     type="episode"
@@ -96,73 +85,7 @@
 {/if}
 
 {#if style === "cover"}
-  <Card
-    --width-card="var(--width-episode-card)"
-    --height-card="var(--height-episode-card)"
-    --height-card-cover="var(--height-episode-card-cover)"
-  >
-    <Link
-      focusable={false}
-      href={UrlBuilder.episode(
-        props.show.slug,
-        props.episode.season,
-        props.episode.number,
-      )}
-    >
-      <CardCover
-        src={$src ?? EPISODE_COVER_PLACEHOLDER}
-        alt={`${props.show.title} - ${props.episode.title}`}
-        badges={props.badges}
-        {tags}
-      />
-    </Link>
-
-    <CardFooter {action}>
-      {#if isShowContext}
-        <p class="trakt-card-title ellipsis">
-          <Spoiler
-            media={props.episode}
-            show={props.show}
-            episode={props.episode}
-            type="episode"
-          >
-            {props.episode.title}
-          </Spoiler>
-        </p>
-        <p class="trakt-card-subtitle ellipsis small">
-          {props.episode.season}x{props.episode.number}
-        </p>
-      {/if}
-
-      {#if props.variant === "activity"}
-        <Link href={UrlBuilder.show(props.show.slug)}>
-          <p class="trakt-card-title ellipsis">
-            {props.episode.season}x{props.episode.number} - {props.show.title}
-          </p>
-        </Link>
-        <p class="trakt-card-subtitle ellipsis small">
-          {EpisodeIntlProvider.timestampText(props.date)}
-        </p>
-      {/if}
-
-      {#if !isShowContext && !isActivity}
-        <Link href={UrlBuilder.show(props.show.slug)}>
-          <p class="trakt-card-title ellipsis">{props.show.title}</p>
-        </Link>
-        <p class="trakt-card-subtitle ellipsis small">
-          {props.episode.season}x{props.episode.number}
-          <Spoiler
-            media={props.episode}
-            show={props.show}
-            episode={props.episode}
-            type="episode"
-          >
-            - {props.episode.title}
-          </Spoiler>
-        </p>
-      {/if}
-    </CardFooter>
-  </Card>
+  <EpisodeItemCard {...props} {tags} {action} />
 {/if}
 
 <style>
