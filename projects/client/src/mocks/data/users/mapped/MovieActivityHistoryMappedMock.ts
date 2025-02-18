@@ -1,7 +1,7 @@
-import type { HistoryMovie } from '$lib/requests/queries/users/movieHistoryQuery.ts';
+import type { MovieActivityHistory } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 
-export const HistoryMoviesMappedMock: HistoryMovie[] = [
+export const MovieActivityHistoryMappedMock: MovieActivityHistory[] = [
   {
     'id': 1,
     'movie': MovieHereticMappedMock,

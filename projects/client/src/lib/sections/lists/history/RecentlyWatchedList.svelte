@@ -6,20 +6,23 @@
 
   type RecentlyWatchedListProps = {
     title: string;
-    type: "movie" | "episode";
     drilldownLabel: string;
   };
 
-  const { title, type, drilldownLabel }: RecentlyWatchedListProps = $props();
+  const { title, drilldownLabel }: RecentlyWatchedListProps = $props();
 </script>
 
 <DrillableMediaList
-  id="recently-watched-list-{type}"
+  id="recently-watched-list"
   {title}
   {drilldownLabel}
-  {type}
-  useList={useRecentlyWatchedList}
-  urlBuilder={UrlBuilder.history}
+  type="episode"
+  useList={({ limit }) =>
+    useRecentlyWatchedList({
+      type: "all",
+      limit,
+    })}
+  urlBuilder={UrlBuilder.history.all}
 >
   {#snippet item(media)}
     <RecentlyWatchedItem {media} />

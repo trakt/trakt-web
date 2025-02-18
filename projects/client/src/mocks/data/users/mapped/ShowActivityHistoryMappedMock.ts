@@ -1,13 +1,13 @@
-import type { HistoryEpisode } from '$lib/requests/queries/users/episodeHistoryQuery.ts';
+import type { ShowActivityHistory } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 
-export const HistoryEpisodesMappedMock: HistoryEpisode[] = [
+export const ShowActivityHistoryMappedMock: ShowActivityHistory[] = [
   {
     'id': 1,
     'episode': EpisodeSiloMappedMock,
     'show': ShowSiloMappedMock,
-    'type': 'episode',
+    'type': 'show',
     'watchedAt': new Date('2025-01-31T23:12:41.000Z'),
   },
 ];

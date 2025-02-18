@@ -241,8 +241,6 @@
   "status_upcoming": "Próximamente",
   "status_unknown": "Desconocido",
   "expected_premiere": "Estreno Esperado",
-  "recently_watched_episodes": "Episodios Vistos Recientemente",
-  "recently_watched_movies": "Contenido Visto Recientemente",
   "person_headshot": "Foto de {person}",
   "actors": "Actores",
   "anticipated_count": "{count} con ansias",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Ver todas las series 'a ver'",
   "streaming": "En línea",
   "on_demand": "A la carta",
-  "view_all_recently_watched_movies": "Ver todas las películas vistas recientemente",
-  "view_all_recently_watched_episodes": "Ver todos los episodios vistos recientemente",
   "media_popup_label": "Menú emergente para {title}",
   "popular_lists": "Listas populares",
   "no_popular_lists": "{title} no aparece en ninguna lista popular.",
@@ -308,5 +304,7 @@
   "share_movie": "¡Acabo de descubrir {title} - ¡Tienes que verlo! 🎬",
   "share_show": "¡Encontré esta increíble serie: {title}! 📺",
   "share_episode": "¡Acabo de ver {show} T{season}E{episode} - {title}! 🔥",
-  "share_person": "¡Mira a {name} en Trakt! 🎭"
+  "share_person": "¡Mira a {name} en Trakt! 🎭",
+  "recently_watched": "Recién vistos",
+  "view_all_recently_watched": "Ver todos los recién vistos"
 }

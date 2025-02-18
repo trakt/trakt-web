@@ -241,8 +241,6 @@
   "status_upcoming": "À venir",
   "status_unknown": "Inconnu",
   "expected_premiere": "Première attendue",
-  "recently_watched_episodes": "Épisodes récemment regardés",
-  "recently_watched_movies": "Films récemment regardés",
   "person_headshot": "Portrait de {person}",
   "actors": "Acteurs",
   "anticipated_count": "{count} impatients",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Voir toutes les séries à voir",
   "streaming": "Diffusion",
   "on_demand": "Sur demande",
-  "view_all_recently_watched_movies": "Voir tout ce que vous avez regardé récemment",
-  "view_all_recently_watched_episodes": "Voir tous les épisodes regardés récemment",
   "media_popup_label": "Menu contextuel pour {title}",
   "popular_lists": "Listes populaires",
   "no_popular_lists": "{title} ne figure dans aucune liste populaire.",
@@ -308,5 +304,7 @@
   "share_movie": "Vous venez de découvrir {title} - vous devez absolument le voir! 🎬",
   "share_show": "Voici une série géniale : {title} ! 📺",
   "share_episode": "Venu de {show} S{season}E{episode} - {title} ! 🔥",
-  "share_person": "Découvrez {name} sur Trakt ! 🎭"
+  "share_person": "Découvrez {name} sur Trakt ! 🎭",
+  "recently_watched": "Regarder récemment",
+  "view_all_recently_watched": "Voir tout ce qu'on a regardé récemment"
 }

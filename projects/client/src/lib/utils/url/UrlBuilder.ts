@@ -19,8 +19,13 @@ const categoryDrilldownFactory =
   };
 
 export const UrlBuilder = {
-  history: (params: PaginatableMediaPageUrl) => {
-    return categoryDrilldownFactory('history')(params);
+  history: {
+    category: (params: PaginatableMediaPageUrl) => {
+      return categoryDrilldownFactory('history')(params);
+    },
+    all: ({ page }: PaginatableMediaPageUrl) => {
+      return `/history${buildParamString({ page })}`;
+    },
   },
   watched: (params: PaginatableMediaPageUrl) => {
     return categoryDrilldownFactory('watched')(params);

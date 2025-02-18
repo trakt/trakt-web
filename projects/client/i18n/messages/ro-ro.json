@@ -241,8 +241,6 @@
   "status_upcoming": "Urmează",
   "status_unknown": "Necunoscut",
   "expected_premiere": "Premiera Așteptată",
-  "recently_watched_episodes": "Episoade Văzute Recent",
-  "recently_watched_movies": "Filme Văzute Recent",
   "person_headshot": "Portretul lui {person}",
   "actors": "Actori",
   "anticipated_count": "{count} nerăbdători",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Vezi toate serialele din listă",
   "streaming": "Streaming",
   "on_demand": "La cerere",
-  "view_all_recently_watched_movies": "Vezi toate filmele vizionate recent",
-  "view_all_recently_watched_episodes": "Vezi toate episoadele vizionate recent",
   "media_popup_label": "Meniu pop-up pentru {title}",
   "popular_lists": "Liste populare",
   "no_popular_lists": "{title} nu apare în nicio listă populară.",
@@ -308,5 +304,7 @@
   "share_movie": "Tocmai am descoperit {title} - trebuie să-l vezi! 🎬",
   "share_show": "Am găsit un serial superb: {title}! 📺",
   "share_episode": "Tocmai am urmărit {show} S{season}E{episode} - {title}! 🔥",
-  "share_person": "Verifică {name} pe Trakt! 🎭"
+  "share_person": "Verifică {name} pe Trakt! 🎭",
+  "recently_watched": "Vizionate urmărite recent",
+  "view_all_recently_watched": "Vezi toate urmărite recent"
 }

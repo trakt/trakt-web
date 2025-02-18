@@ -10,12 +10,12 @@ import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfile
 import { CollaborationListsResponseMock } from '$mocks/data/users/response/CollaborationListsResponseMock.ts';
 import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalListsResponseMock.ts';
 import { RatedShowsResponseMock } from '$mocks/data/users/response/RatedShowsResponseMock.ts';
+import { EpisodeActivityHistoryResponseMock } from '../data/users/response/EpisodeActivityHistoryResponseMock.ts';
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
-import { HistoryEpisodesResponseMock } from '../data/users/response/HistoryEpisodesResponseMock.ts';
-import { HistoryMoviesResponseMock } from '../data/users/response/HistoryMoviesResponseMock.ts';
-import { HistoryShowsResponseMock } from '../data/users/response/HistoryShowsResponseMock.ts';
+import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
+import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
 import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
 import { WatchedShowsResponseMock } from '../data/users/response/WatchedShowsResponseMock.ts';
@@ -48,13 +48,13 @@ export const users = [
     return HttpResponse.json(RatedEpisodesResponseMock);
   }),
   http.get('http://localhost/users/me/history/shows*', () => {
-    return HttpResponse.json(HistoryShowsResponseMock);
+    return HttpResponse.json(ShowActivityHistoryResponseMock);
   }),
   http.get('http://localhost/users/me/history/movies*', () => {
-    return HttpResponse.json(HistoryMoviesResponseMock);
+    return HttpResponse.json(MovieActivityHistoryResponseMock);
   }),
   http.get('http://localhost/users/me/history/episodes*', () => {
-    return HttpResponse.json(HistoryEpisodesResponseMock);
+    return HttpResponse.json(EpisodeActivityHistoryResponseMock);
   }),
   http.get('http://localhost/users/me/following/activities', () => {
     return HttpResponse.json(SocialActivityResponseMock);

@@ -4,18 +4,15 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import RecentlyWatchedPaginatedList from "$lib/sections/lists/history/RecentlyWatchedPaginatedList.svelte";
 
-  import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
 
 <TraktPage
   audience="authenticated"
-  image={DEFAULT_SHARE_MOVIE_COVER}
-  title={m.recently_watched_movies()}
+  image={DEFAULT_SHARE_COVER}
+  title={m.recently_watched()}
 >
   <TraktPageCoverSetter />
 
-  <RecentlyWatchedPaginatedList
-    title={m.recently_watched_movies()}
-    type="movie"
-  />
+  <RecentlyWatchedPaginatedList title={m.recently_watched()} />
 </TraktPage>

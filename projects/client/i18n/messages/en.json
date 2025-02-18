@@ -241,8 +241,6 @@
   "status_upcoming": "Upcoming",
   "status_unknown": "Unknown",
   "expected_premiere": "Expected Premiere",
-  "recently_watched_episodes": "Recently Watched Episodes",
-  "recently_watched_movies": "Recently Watched Movies",
   "person_headshot": "Headshot of {person}",
   "actors": "Actors",
   "anticipated_count": "{count} eager",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "View all watchlist shows",
   "streaming": "Streaming",
   "on_demand": "On Demand",
-  "view_all_recently_watched_movies": "View all recently watched movies",
-  "view_all_recently_watched_episodes": "View all recently watched episodes",
   "media_popup_label": "Pop up menu for {title}",
   "popular_lists": "Popular lists",
   "no_popular_lists": "{title} does not appear on any popular lists.",
@@ -308,5 +304,7 @@
   "share_movie": "Just discovered {title} - you need to see this! 🎬",
   "share_show": "Found this awesome show: {title}! 📺",
   "share_episode": "Just watched {show} S{season}E{episode} - {title}! 🔥",
-  "share_person": "Check out {name} on Trakt! 🎭"
+  "share_person": "Check out {name} on Trakt! 🎭",
+  "recently_watched": "Recently Watched",
+  "view_all_recently_watched": "View all recently watched"
 }

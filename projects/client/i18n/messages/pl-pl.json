@@ -241,8 +241,6 @@
   "status_upcoming": "Nadchodzący",
   "status_unknown": "Nieznany",
   "expected_premiere": "Spodziewana premiera",
-  "recently_watched_episodes": "Ostatnio obejrzane odcinki",
-  "recently_watched_movies": "Ostatnio obejrzane filmy",
   "person_headshot": "Zdjęcie {person}",
   "actors": "Aktorzy",
   "anticipated_count": "{count} wyczekujących",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Zobacz wszystkie seriale z listy do obejrzenia",
   "streaming": "Streaming",
   "on_demand": "Na życzenie",
-  "view_all_recently_watched_movies": "Zobacz wszystkie ostatnio obejrzane produkcje",
-  "view_all_recently_watched_episodes": "Zobacz wszystkie ostatnio obejrzane odcinki",
   "media_popup_label": "Menu kontekstowe dla {title}",
   "popular_lists": "Popularne listy",
   "no_popular_lists": "{title} nie pojawia się na żadnych popularnych listach. Wygląda na to, że nikt nie wpadł na to, żeby go umieścić... jeszcze!",
@@ -308,5 +304,7 @@
   "share_movie": "Właśnie odkryłem {title} – musisz to zobaczyć! 🎬",
   "share_show": "Znaleziono świetny serial: {title}! 📺",
   "share_episode": "Właśnie obejrzałem {show} S{season}E{episode} - {title}! 🔥",
-  "share_person": "Sprawdź {name} na Trakcie! 🎭"
+  "share_person": "Sprawdź {name} na Trakcie! 🎭",
+  "recently_watched": "Ostatnio oglądane",
+  "view_all_recently_watched": "Zobacz wszystkie ostatnio oglądane"
 }

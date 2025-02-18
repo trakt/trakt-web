@@ -1,26 +1,27 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
-import {
-  episodeHistoryQuery,
-  type HistoryEpisode,
-} from '$lib/requests/queries/users/episodeHistoryQuery.ts';
-import {
-  type HistoryMovie,
-  movieHistoryQuery,
-} from '$lib/requests/queries/users/movieHistoryQuery.ts';
+import { activityHistoryQuery } from '$lib/requests/queries/users/activityHistoryQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
+import {
+  type EpisodeActivityHistory,
+  episodeActivityHistoryQuery,
+} from '../../../requests/queries/users/episodeActivityHistoryQuery.ts';
+import {
+  type MovieActivityHistory,
+  movieActivityHistoryQuery,
+} from '../../../requests/queries/users/movieActivityHistoryQuery.ts';
 
 const HISTORY_LIMIT = 25;
 
 type RecentlyWatchedListStoreProps = {
-  type: 'movie' | 'episode';
+  type: 'movie' | 'episode' | 'all';
   limit?: number;
   page?: number;
 };
 
-export type HistoryEntry = HistoryMovie | HistoryEpisode;
+export type HistoryEntry = MovieActivityHistory | EpisodeActivityHistory;
 
 function typeToQuery(
   { type, limit, page }: RecentlyWatchedListStoreProps,
@@ -32,11 +33,15 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return movieHistoryQuery(params) as CreateQueryOptions<
+      return movieActivityHistoryQuery(params) as CreateQueryOptions<
         Paginatable<HistoryEntry>
       >;
     case 'episode':
-      return episodeHistoryQuery(params) as CreateQueryOptions<
+      return episodeActivityHistoryQuery(params) as CreateQueryOptions<
+        Paginatable<HistoryEntry>
+      >;
+    case 'all':
+      return activityHistoryQuery(params) as CreateQueryOptions<
         Paginatable<HistoryEntry>
       >;
   }

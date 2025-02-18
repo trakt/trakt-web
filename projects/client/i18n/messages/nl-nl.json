@@ -241,8 +241,6 @@
   "status_upcoming": "Aankomend",
   "status_unknown": "Onbekend",
   "expected_premiere": "Verwachte première",
-  "recently_watched_episodes": "Recentelijk bekeken afleveringen",
-  "recently_watched_movies": "Recentelijk bekeken films",
   "person_headshot": "Hoofdfoto van {person}",
   "actors": "Acteurs",
   "anticipated_count": "{count} zin in",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Bekijk alle series op kijklijst",
   "streaming": "Streaming",
   "on_demand": "On Demand",
-  "view_all_recently_watched_movies": "Bekijk alle recent bekeken films",
-  "view_all_recently_watched_episodes": "Bekijk alle recent bekeken afleveringen",
   "media_popup_label": "Pop-upmenu voor {title}",
   "popular_lists": "Populaire lijsten",
   "no_popular_lists": "{title} staat niet op populaire lijsten.",
@@ -308,5 +304,7 @@
   "share_movie": "Net {title} ontdekt - je moet dit zien! 🎬",
   "share_show": "Deze geweldige serie gevonden: {title}! 📺",
   "share_episode": "Zojuist {show} S{season}A{episode} - {title} bekeken! 🔥",
-  "share_person": "Bekijk {name} op Trakt! 🎭"
+  "share_person": "Bekijk {name} op Trakt! 🎭",
+  "recently_watched": "Onlangs bekeken",
+  "view_all_recently_watched": "Bekijk alles onlangs bekeken"
 }

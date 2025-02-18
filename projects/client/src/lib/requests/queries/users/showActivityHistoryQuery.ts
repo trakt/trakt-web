@@ -1,4 +1,4 @@
-import type { HistoryShowsResponse } from '$lib/api.ts';
+import type { ShowActivityHistoryResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
@@ -11,24 +11,24 @@ import { z } from 'zod';
 import { EpisodeEntrySchema } from '../../models/EpisodeEntry.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
-type ShowHistoryParams = {
+type ShowActivityHistoryParams = {
   startDate: Date;
   endDate: Date;
   limit: number;
   page?: number;
 } & ApiParams;
 
-const HistoryShowSchema = z.object({
+const ShowActivityHistorySchema = z.object({
   id: z.number(),
   watchedAt: z.date(),
   show: ShowEntrySchema,
   episode: EpisodeEntrySchema,
   type: z.literal('show'),
 });
-export type HistoryShow = z.infer<typeof HistoryShowSchema>;
+export type ShowActivityHistory = z.infer<typeof ShowActivityHistorySchema>;
 
 const showHistoryRequest = (
-  { fetch, startDate, endDate, limit, page = 1 }: ShowHistoryParams,
+  { fetch, startDate, endDate, limit, page = 1 }: ShowActivityHistoryParams,
 ) =>
   api({ fetch })
     .users
@@ -53,8 +53,8 @@ const showHistoryRequest = (
       return response;
     });
 
-const mapToHistory = (
-  historyShow: HistoryShowsResponse,
+const mapToShowActivityHistory = (
+  historyShow: ShowActivityHistoryResponse,
 ) => ({
   id: historyShow.id,
   watchedAt: new Date(historyShow.watched_at),
@@ -63,10 +63,13 @@ const mapToHistory = (
   type: 'show' as const,
 });
 
-export const showHistoryQuery = defineQuery({
-  key: 'showHistory',
-  invalidations: [InvalidateAction.MarkAsWatched('show')],
-  dependencies: (params: ShowHistoryParams) => [
+export const showActivityHistoryQuery = defineQuery({
+  key: 'showActivityHistory',
+  invalidations: [
+    InvalidateAction.MarkAsWatched('show'),
+    InvalidateAction.MarkAsWatched('episode'),
+  ],
+  dependencies: (params: ShowActivityHistoryParams) => [
     params.startDate,
     params.endDate,
     params.limit,
@@ -74,9 +77,9 @@ export const showHistoryQuery = defineQuery({
   ],
   request: showHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapToHistory),
+    entries: response.body.map(mapToShowActivityHistory),
     page: extractPageMeta(response.headers),
   }),
-  schema: PaginatableSchemaFactory(HistoryShowSchema),
+  schema: PaginatableSchemaFactory(ShowActivityHistorySchema),
   ttl: time.hours(6),
 });

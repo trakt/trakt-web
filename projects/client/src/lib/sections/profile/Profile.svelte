@@ -29,14 +29,8 @@
 </ProfileContainer>
 
 <RecentlyWatchedList
-  drilldownLabel={m.view_all_recently_watched_episodes()}
-  title={m.recently_watched_episodes()}
-  type="episode"
-/>
-<RecentlyWatchedList
-  drilldownLabel={m.view_all_recently_watched_movies()}
-  title={m.recently_watched_movies()}
-  type="movie"
+  drilldownLabel={m.view_all_recently_watched()}
+  title={m.recently_watched()}
 />
 
 <PersonalLists type="personal" />

@@ -1,4 +1,4 @@
-import type { HistoryMoviesResponse } from '$lib/api.ts';
+import type { MovieActivityHistoryResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
@@ -9,23 +9,23 @@ import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
-type MovieHistoryParams = {
+type MovieActivityHistoryParams = {
   limit: number;
   startDate?: Date;
   endDate?: Date;
   page?: number;
 } & ApiParams;
 
-const HistoryMovieSchema = z.object({
+export const MovieActivityHistorySchema = z.object({
   id: z.number(),
   watchedAt: z.date(),
   movie: MovieEntrySchema,
   type: z.literal('movie'),
 });
-export type HistoryMovie = z.infer<typeof HistoryMovieSchema>;
+export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
-const movieHistoryRequest = (
-  { fetch, startDate, endDate, limit, page = 1 }: MovieHistoryParams,
+const movieActivityHistoryRequest = (
+  { fetch, startDate, endDate, limit, page = 1 }: MovieActivityHistoryParams,
 ) =>
   api({ fetch })
     .users
@@ -50,8 +50,8 @@ const movieHistoryRequest = (
       return response;
     });
 
-const mapToHistory = (
-  historyMovie: HistoryMoviesResponse,
+export const mapToMovieActivityHistory = (
+  historyMovie: MovieActivityHistoryResponse,
 ) => ({
   id: historyMovie.id,
   watchedAt: new Date(historyMovie.watched_at),
@@ -59,20 +59,20 @@ const mapToHistory = (
   type: 'movie' as const,
 });
 
-export const movieHistoryQuery = defineQuery({
-  key: 'movieHistory',
+export const movieActivityHistoryQuery = defineQuery({
+  key: 'movieActivityHistory',
   invalidations: [InvalidateAction.MarkAsWatched('movie')],
-  dependencies: (params: MovieHistoryParams) => [
+  dependencies: (params: MovieActivityHistoryParams) => [
     params.startDate,
     params.endDate,
     params.limit,
     params.page,
   ],
-  request: movieHistoryRequest,
+  request: movieActivityHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapToHistory),
+    entries: response.body.map(mapToMovieActivityHistory),
     page: extractPageMeta(response.headers),
   }),
-  schema: PaginatableSchemaFactory(HistoryMovieSchema),
+  schema: PaginatableSchemaFactory(MovieActivityHistorySchema),
   ttl: time.hours(6),
 });

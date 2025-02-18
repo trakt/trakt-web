@@ -1,4 +1,4 @@
-import type { HistoryEpisodesResponse } from '$lib/api.ts';
+import type { EpisodeActivityHistoryResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
@@ -11,24 +11,26 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
-type EpisodeHistoryParams = {
+type EpisodeActivityHistoryParams = {
   limit: number;
   startDate?: Date;
   endDate?: Date;
   page?: number;
 } & ApiParams;
 
-const HistoryEpisodeSchema = z.object({
+export const EpisodeActivityHistorySchema = z.object({
   id: z.number(),
   watchedAt: z.date(),
   show: ShowEntrySchema,
   episode: EpisodeEntrySchema,
   type: z.literal('episode'),
 });
-export type HistoryEpisode = z.infer<typeof HistoryEpisodeSchema>;
+export type EpisodeActivityHistory = z.infer<
+  typeof EpisodeActivityHistorySchema
+>;
 
-function episodeHistoryRequest(
-  { fetch, startDate, endDate, limit, page = 1 }: EpisodeHistoryParams,
+function episodeActivityHistoryRequest(
+  { fetch, startDate, endDate, limit, page = 1 }: EpisodeActivityHistoryParams,
 ) {
   return api({ fetch })
     .users
@@ -54,9 +56,9 @@ function episodeHistoryRequest(
     });
 }
 
-function mapToHistory(
-  historyEpisode: HistoryEpisodesResponse,
-): HistoryEpisode {
+export function mapToEpisodeActivityHistory(
+  historyEpisode: EpisodeActivityHistoryResponse,
+): EpisodeActivityHistory {
   return {
     id: historyEpisode.id,
     watchedAt: new Date(historyEpisode.watched_at),
@@ -66,20 +68,23 @@ function mapToHistory(
   };
 }
 
-export const episodeHistoryQuery = defineQuery({
+export const episodeActivityHistoryQuery = defineQuery({
   key: 'episodeHistory',
-  invalidations: [InvalidateAction.MarkAsWatched('episode')],
+  invalidations: [
+    InvalidateAction.MarkAsWatched('episode'),
+    InvalidateAction.MarkAsWatched('show'),
+  ],
   dependencies: (params) => [
     params.startDate,
     params.endDate,
     params.limit,
     params.page,
   ],
-  request: episodeHistoryRequest,
+  request: episodeActivityHistoryRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapToHistory),
+    entries: response.body.map(mapToEpisodeActivityHistory),
     page: extractPageMeta(response.headers),
   }),
-  schema: PaginatableSchemaFactory(HistoryEpisodeSchema),
+  schema: PaginatableSchemaFactory(EpisodeActivityHistorySchema),
   ttl: time.hours(1),
 });

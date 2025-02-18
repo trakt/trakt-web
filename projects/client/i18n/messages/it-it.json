@@ -241,8 +241,6 @@
   "status_upcoming": "In arrivo",
   "status_unknown": "Sconosciuto",
   "expected_premiere": "Anteprima prevista",
-  "recently_watched_episodes": "Episodi guardati di recente",
-  "recently_watched_movies": "Film guardati di recente",
   "person_headshot": "Foto ritratto di {person}",
   "actors": "Attori",
   "anticipated_count": "{count} attesi",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Visualizza tutte le serie TV della tua Watchlist",
   "streaming": "Streaming",
   "on_demand": "On Demand",
-  "view_all_recently_watched_movies": "Visualizza tutti i film guardati di recente",
-  "view_all_recently_watched_episodes": "Visualizza tutti gli episodi guardati di recente",
   "media_popup_label": "Menù a tendina per {title}",
   "popular_lists": "Liste popolari",
   "no_popular_lists": "{title} non compare in nessuna lista popolare.",
@@ -308,5 +304,7 @@
   "share_movie": "Tocmai am descoperit {title} - trebuie să-l vezi! 🎬",
   "share_show": "Am găsit un serial grozav: {title}! 📺",
   "share_episode": "Tocmai am urmărit {show} S{season}E{episode} - {title}! 🔥",
-  "share_person": "Verifică-l pe {name} pe Trakt! 🎭"
+  "share_person": "Verifică-l pe {name} pe Trakt! 🎭",
+  "recently_watched": "Recentemente guardati",
+  "view_all_recently_watched": "Vedi tutti i guardati di recente"
 }

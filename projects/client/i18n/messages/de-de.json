@@ -241,8 +241,6 @@
   "status_upcoming": "Demnächst",
   "status_unknown": "Unbekannt",
   "expected_premiere": "Erwartete Premiere",
-  "recently_watched_episodes": "Zuletzt gesehene Folgen",
-  "recently_watched_movies": "Zuletzt gesehene Filme",
   "person_headshot": "Kopfschuss von {person}",
   "actors": "Schauspieler",
   "anticipated_count": "{count} gespannt",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Alle Merkliste Serien ansehen",
   "streaming": "Streaming",
   "on_demand": "Auf Abruf",
-  "view_all_recently_watched_movies": "Alle kürzlich gesehenen Filme anzeigen",
-  "view_all_recently_watched_episodes": "Alle kürzlich gesehenen Episoden anzeigen",
   "media_popup_label": "Menü für {title}",
   "popular_lists": "Beliebte Listen",
   "no_popular_lists": "{title} taucht in keinen beliebten Listen auf.",
@@ -308,5 +304,7 @@
   "share_movie": "{title} entdeckt – unbedingt ansehen! 🎬",
   "share_show": "Ich habe diese tolle Serie gefunden: {title}! 📺",
   "share_episode": "Habe gerade {show} S{season}F{episode} - {title} geschaut! 🔥",
-  "share_person": "Schaut euch {name} auf Trakt an! 🎭"
+  "share_person": "Schaut euch {name} auf Trakt an! 🎭",
+  "recently_watched": "Kürzlich angesehen",
+  "view_all_recently_watched": "Alle kürzlich angesehenen anzeigen"
 }

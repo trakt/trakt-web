@@ -58,7 +58,7 @@
   "genre_donghua": "Donghua",
   "genre_mini_series": "Mini-série",
   "genre_science_fiction": "Science-fiction",
-  "remove_from_watchlist": "Retirer de la liste",
+  "remove_from_watchlist": "Supprimer de la liste",
   "remove_from_watchlist_label": "Retirer {title} de votre liste de visionnage",
   "watch_the_trailer": "Regarder la bande-annonce",
   "search_placeholder": "Prêt à explorer ?",
@@ -241,8 +241,6 @@
   "status_upcoming": "À venir",
   "status_unknown": "Inconnu",
   "expected_premiere": "Première attendue",
-  "recently_watched_episodes": "Derniers épisodes vus",
-  "recently_watched_movies": "Derniers films vus",
   "person_headshot": "Photo de {person}",
   "actors": "Acteurs",
   "anticipated_count": "{count} impatients",
@@ -271,8 +269,6 @@
   "view_all_watchlist_shows": "Voir toutes les séries à voir",
   "streaming": "Streaming",
   "on_demand": "À la demande",
-  "view_all_recently_watched_movies": "Voir tous les films récemment vus",
-  "view_all_recently_watched_episodes": "Voir tous les épisodes récemment vus",
   "media_popup_label": "Menu contextuel pour {title}",
   "popular_lists": "Listes populaires",
   "no_popular_lists": "{title} n'apparaît dans aucune liste populaire.",
@@ -308,5 +304,7 @@
   "share_movie": "Coup de cœur pour {title} ! À voir absolument. 🎬",
   "share_show": "Super série à découvrir : {title} ! 📺",
   "share_episode": "J'ai regardé l'épisode {title} de {show} S{season}E{episode} ! 🔥",
-  "share_person": "Découvrez {name} sur Trakt ! 🎭"
+  "share_person": "Découvrez {name} sur Trakt ! 🎭",
+  "recently_watched": "Récemment visionnés",
+  "view_all_recently_watched": "Voir tout récemment visionné"
 }

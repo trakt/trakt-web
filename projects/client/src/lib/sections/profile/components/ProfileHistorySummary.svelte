@@ -1,12 +1,12 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { HistoryMovie } from "$lib/requests/queries/users/movieHistoryQuery";
-  import type { HistoryShow } from "$lib/requests/queries/users/showHistoryQuery";
+  import type { MovieActivityHistory } from "$lib/requests/queries/users/movieActivityHistoryQuery";
+  import type { ShowActivityHistory } from "$lib/requests/queries/users/showActivityHistoryQuery";
   import ProfileMediaHistory from "./ProfileMediaHistory.svelte";
 
   type ProfileHistorySummaryProps = {
-    movies?: HistoryMovie[];
-    shows?: HistoryShow[];
+    movies?: MovieActivityHistory[];
+    shows?: ShowActivityHistory[];
   };
 
   const { movies, shows }: ProfileHistorySummaryProps = $props();

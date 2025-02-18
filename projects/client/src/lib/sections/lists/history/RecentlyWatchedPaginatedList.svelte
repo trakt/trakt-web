@@ -7,20 +7,23 @@
 
   type RecentlyWatchedPaginatedListProps = {
     title: string;
-    type: "movie" | "episode";
   };
 
-  const { title, type }: RecentlyWatchedPaginatedListProps = $props();
+  const { title }: RecentlyWatchedPaginatedListProps = $props();
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
 <DrilledMediaList
-  id="view-all-watchlist-${type}"
+  id="view-all-recently-watched-list"
   {title}
-  {type}
-  useList={useRecentlyWatchedList}
-  urlBuilder={UrlBuilder.history}
+  type="episode"
+  useList={({ limit }) =>
+    useRecentlyWatchedList({
+      type: "all",
+      limit,
+    })}
+  urlBuilder={UrlBuilder.history.all}
 >
   {#snippet item(media)}
     <RecentlyWatchedItem {media} {style} />
