@@ -42,4 +42,5 @@ export const ShowSiloMappedMock: ShowEntry = {
   'languages': [
     'en',
   ],
+  'votes': 6953,
 };

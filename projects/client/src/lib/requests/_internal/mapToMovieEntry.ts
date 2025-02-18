@@ -46,5 +46,6 @@ export function mapToMovieEntry(
     ),
     airDate: new Date(movie.released ?? MAX_DATE),
     certification: mapMovieCertificationResponse(movie.certification),
+    votes: movie.votes ?? 0,
   };
 }

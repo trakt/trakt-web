@@ -34,6 +34,7 @@ export const MediaEntrySchema = z.object({
   trailer: z.string(),
   airDate: z.date(),
   certification: z.string().optional(),
+  votes: z.number(),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;

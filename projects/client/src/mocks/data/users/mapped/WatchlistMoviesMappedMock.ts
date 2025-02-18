@@ -38,6 +38,7 @@ export const WatchlistMoviesMappedMock: WatchlistMovie[] = [
       'trailer': 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
       'type': 'movie',
       'year': 1999,
+      'votes': 0,
     },
   },
 ];

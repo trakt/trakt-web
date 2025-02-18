@@ -41,6 +41,7 @@ export const WatchlistShowsMappedMock: WatchlistShow[] = [
       'trailer': 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
       'type': 'show',
       'year': 2023,
+      'votes': 0,
     },
   },
 ];

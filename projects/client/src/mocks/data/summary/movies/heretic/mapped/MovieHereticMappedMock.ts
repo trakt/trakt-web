@@ -43,4 +43,5 @@ export const MovieHereticMappedMock: MovieEntry = {
     'da',
     'en',
   ],
+  'votes': 2083,
 };
