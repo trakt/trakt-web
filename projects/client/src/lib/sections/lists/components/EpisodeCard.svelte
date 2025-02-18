@@ -35,6 +35,7 @@
     <MarkAsWatchedAction
       style="action"
       type="episode"
+      size="small"
       title={props.episode.title}
       media={props.episode}
       episode={props.episode}

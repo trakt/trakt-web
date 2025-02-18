@@ -95,6 +95,8 @@
   }
 
   .trakt-action-button {
+    --button-size: var(--ni-36);
+
     all: unset;
 
     cursor: pointer;
@@ -102,8 +104,8 @@
     -webkit-tap-highlight-color: transparent;
 
     display: flex;
-    width: var(--ni-36);
-    height: var(--ni-36);
+    width: var(--button-size);
+    height: var(--button-size);
     padding: var(--ni-6);
     justify-content: center;
     align-items: center;
@@ -142,7 +144,7 @@
     }
 
     &[data-size="small"] {
-      scale: 0.75;
+      scale: 0.7777777778;
       margin: var(--ni-neg-4);
     }
 
