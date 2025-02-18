@@ -28,11 +28,12 @@
   const getPositionList = (mediaCredits?: MediaCredits) => {
     if (!mediaCredits) return [];
 
-    if ($currentPosition === "acting") {
-      return mediaCredits.cast ?? [];
-    }
+    const mediaList =
+      $currentPosition === "acting"
+        ? mediaCredits.cast
+        : mediaCredits.crew?.get($currentPosition);
 
-    return mediaCredits.crew?.get($currentPosition) ?? [];
+    return (mediaList ?? []).sort((a, b) => b.votes - a.votes);
   };
 
   const getAvailablePositions = (mediaCredits?: MediaCredits) => {
