@@ -43,7 +43,8 @@
       flex-direction: column;
       gap: var(--gap-xxs);
 
-      &:global(:has(> :nth-child(2))) {
+      &:global(:has(> :nth-child(2))),
+      &:global(:not(:has(~ .trakt-card-footer-action))) {
         justify-content: center;
       }
 

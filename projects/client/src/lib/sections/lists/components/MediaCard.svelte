@@ -10,19 +10,6 @@
   const style = $derived(props.style ?? "cover");
 </script>
 
-{#snippet defaultAction()}
-  {#if props.variant !== "activity"}
-    <RenderFor audience="authenticated">
-      <WatchlistAction
-        style="action"
-        title={props.media.title}
-        type={props.media.type}
-        media={props.media}
-      />
-    </RenderFor>
-  {/if}
-{/snippet}
-
 {#snippet defaultPopupActions()}
   <RenderFor audience="authenticated">
     <WatchlistAction
@@ -44,7 +31,7 @@
   <MediaItemCard
     {...props}
     {style}
-    action={props.action ?? defaultAction}
+    action={props.action}
     popupActions={props.variant === "activity"
       ? undefined
       : defaultPopupActions}
@@ -55,7 +42,7 @@
   <MediaSummaryCard
     {...props}
     {style}
-    action={props.action ?? defaultAction}
+    action={props.action}
     popupActions={props.variant === "activity"
       ? undefined
       : defaultPopupActions}
