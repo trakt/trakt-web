@@ -163,7 +163,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-m);
-    min-width: var(--ni-96);
+    min-width: var(--ni-48);
     padding: var(--ni-16);
     flex-shrink: 0;
     cursor: pointer;
