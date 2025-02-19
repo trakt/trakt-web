@@ -1,14 +1,15 @@
 <script lang="ts">
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
+  import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
   import { onMount } from "svelte";
-  import { useWatchlist, type WatchlistStoreProps } from "./useWatchlist";
+  import { useWatchlist } from "./useWatchlist";
 
   type WatchlistActionProps = {
     style?: "action" | "normal" | "dropdown-item";
     size?: "small" | "normal";
     title: string;
     onAction?: (state: boolean) => void;
-  } & WatchlistStoreProps;
+  } & MediaStoreProps;
 
   const {
     style = "action",

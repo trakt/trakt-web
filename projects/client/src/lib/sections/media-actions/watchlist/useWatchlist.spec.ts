@@ -1,3 +1,4 @@
+import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
@@ -7,7 +8,7 @@ import { renderStore } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
-import { useWatchlist, type WatchlistStoreProps } from './useWatchlist.ts';
+import { useWatchlist } from './useWatchlist.ts';
 
 vi.mock('$lib/stores/useInvalidator.ts');
 
@@ -22,7 +23,7 @@ describe('useWatchlist', () => {
     });
   });
 
-  const runCommonTests = (props: WatchlistStoreProps, invalidation: string) => {
+  const runCommonTests = (props: MediaStoreProps, invalidation: string) => {
     it('should NOT be updating watchlist when first requested', async () => {
       const { isWatchlistUpdating } = await renderStore(() =>
         useWatchlist(props)
