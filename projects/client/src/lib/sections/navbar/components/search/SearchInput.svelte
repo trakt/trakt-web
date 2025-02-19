@@ -90,7 +90,9 @@
 
   .trakt-search {
     --search-input-width: clamp(var(--ni-80), 100%, var(--ni-320));
-    --mobile-search-focus-width: 70dvw;
+    --mobile-search-focus-width: calc(
+      100dvw - var(--layout-distance-side) * 2 - var(--navbar-side-padding) * 2
+    );
     --search-icon-size: var(--ni-24);
 
     display: flex;

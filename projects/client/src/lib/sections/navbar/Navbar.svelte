@@ -114,8 +114,8 @@
     box-sizing: border-box;
     margin: var(--ni-12) auto;
     margin-top: calc(var(--ni-12) + env(safe-area-inset-top));
-    padding: var(--ni-12) var(--ni-16);
-    height: var(--ni-72);
+    padding: var(--ni-12) var(--navbar-side-padding);
+    height: var(--navbar-height);
   }
 
   .trakt-navbar {
