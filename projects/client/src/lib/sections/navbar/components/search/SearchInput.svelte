@@ -188,7 +188,7 @@
         height: var(--ni-2);
 
         position: absolute;
-        bottom: 0;
+        bottom: var(--ni-neg-2);
         left: calc(var(--search-side-distance) / 2);
         right: 0;
 
@@ -206,6 +206,10 @@
       }
 
       @include for-mobile {
+        &::after {
+          z-index: calc(var(--layer-top) + var(--layer-overlay));
+        }
+
         &:has(input:focus-within) {
           &::after {
             width: calc(
