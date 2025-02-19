@@ -73,7 +73,6 @@
       <MarkAsWatchedAction
         style="action"
         type="episode"
-        size="small"
         title={m.season_number_label({ number: $active.number })}
         media={$list}
         episode={$list}
