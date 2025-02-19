@@ -1,4 +1,4 @@
-import type { ListedItem } from '$lib/requests/queries/users/listItemsQuery.ts';
+import type { ListedItem } from '$lib/requests/queries/users/userListItemsQuery.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 
 export const ListedShowsMappedMock: ListedItem[] = [

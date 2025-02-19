@@ -1,4 +1,4 @@
-import type { ListedItem } from '$lib/requests/queries/users/listItemsQuery.ts';
+import type { ListedItem } from '$lib/requests/queries/users/userListItemsQuery.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 
 export const ListedMoviesMappedMock: ListedItem[] = [

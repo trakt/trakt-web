@@ -7,14 +7,14 @@ import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfile
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
-import { listItemsQuery } from './listItemsQuery.ts';
+import { userListItemsQuery } from './userListItemsQuery.ts';
 
-describe('listItemsQuery', () => {
+describe('userListItemsQuery', () => {
   it('should query list items', async () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          listItemsQuery({
+          userListItemsQuery({
             userId: UserProfileHarryMappedMock.slug,
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
           }),
@@ -32,7 +32,7 @@ describe('listItemsQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          listItemsQuery({
+          userListItemsQuery({
             userId: UserProfileHarryMappedMock.slug,
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
             type: 'show',
@@ -48,7 +48,7 @@ describe('listItemsQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          listItemsQuery({
+          userListItemsQuery({
             userId: UserProfileHarryMappedMock.slug,
             listId: assertDefined(HereticListsMappedMock.at(0)).slug,
             type: 'movie',

@@ -16,7 +16,7 @@ import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
-type ListItemsParams =
+type UserListItemsParams =
   & {
     userId: string;
     listId: string;
@@ -44,7 +44,7 @@ function mapToListItem(
     : mapToShowListItem(listedItem);
 }
 
-const listItemsRequest = (
+const userListItemsRequest = (
   {
     fetch,
     userId,
@@ -52,7 +52,7 @@ const listItemsRequest = (
     limit = DEFAULT_PAGE_SIZE,
     page = 1,
     type = 'movie,show',
-  }: ListItemsParams,
+  }: UserListItemsParams,
 ) =>
   api({ fetch })
     .users
@@ -77,8 +77,8 @@ const listItemsRequest = (
       return response;
     });
 
-export const listItemsQuery = defineQuery({
-  key: 'listItems',
+export const userListItemsQuery = defineQuery({
+  key: 'userListItems',
   invalidations: [],
   dependencies: (
     params,
@@ -89,7 +89,7 @@ export const listItemsQuery = defineQuery({
     params.page,
     params.type,
   ],
-  request: listItemsRequest,
+  request: userListItemsRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToListItem),
     page: extractPageMeta(response.headers),

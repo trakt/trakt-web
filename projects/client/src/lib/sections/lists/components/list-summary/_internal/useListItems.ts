@@ -1,7 +1,7 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 
-import { listItemsQuery } from '$lib/requests/queries/users/listItemsQuery.ts';
+import { userListItemsQuery } from '$lib/requests/queries/users/listItemsQuery.ts';
 import { derived } from 'svelte/store';
 
 const PREVIEW_LIMIT = 8;
@@ -17,7 +17,7 @@ export function useListItems({
   listId,
   type,
 }: UseListItemsProps) {
-  const items = useQuery(listItemsQuery({
+  const items = useQuery(userListItemsQuery({
     userId,
     listId,
     type,
