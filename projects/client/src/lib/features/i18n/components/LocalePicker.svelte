@@ -3,6 +3,8 @@
     type AvailableLocale,
     availableLocales,
   } from "$lib/features/i18n/index.ts";
+  import { WorkerMessage } from "$lib/utils/worker/WorkerMessage";
+  import { workerRequest } from "$lib/utils/worker/workerRequest";
   import { LocaleEndpoint } from "../LocaleEndpoint";
   import { useLocale } from "./useLocale";
 
@@ -18,6 +20,8 @@
       },
       body: JSON.stringify({ locale: value }),
     }).then((res) => res.text() as Promise<AvailableLocale>);
+
+    await workerRequest(WorkerMessage.CacheBust);
   }
 
   const localeToFlag: Record<AvailableLocale, string> = {
