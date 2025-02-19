@@ -75,7 +75,7 @@
       // TODO change back to transform scale when scaling is fixed
       --small-padding: var(--ni-10);
       padding: var(--small-padding);
-      margin: 0;
+      margin: 0 var(--ni-neg-10);
 
       :global(li) {
         padding: 0 var(--small-padding);
