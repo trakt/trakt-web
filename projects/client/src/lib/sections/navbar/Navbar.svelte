@@ -115,7 +115,7 @@
     margin: var(--ni-12) auto;
     margin-top: calc(var(--ni-12) + env(safe-area-inset-top));
     padding: var(--ni-12) var(--ni-16);
-    height: var(--ni-64);
+    height: var(--ni-72);
   }
 
   .trakt-navbar {

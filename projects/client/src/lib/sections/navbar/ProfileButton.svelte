@@ -26,7 +26,6 @@
       label={m.get_vip_label()}
       color="red"
       style="textured"
-      size="small"
     >
       {m.get_vip()}
       {#snippet icon()}
@@ -48,10 +47,10 @@
 <DropdownList
   label={m.user_menu_toggle_label()}
   variant="primary"
-  {style}
-  {color}
   text="capitalize"
   size="small"
+  {style}
+  {color}
 >
   <RenderFor audience="authenticated" device={["desktop"]}>
     {$user?.name?.first}
