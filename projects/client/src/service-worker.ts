@@ -1,3 +1,4 @@
+import { WorkerMessage } from '$lib/utils/worker/WorkerMessage.ts';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
@@ -50,6 +51,16 @@ const CACHE_KEYS = {
   images: `${CACHE_PREFIX}-images`,
 };
 
+function removeNavigationCache() {
+  caches.delete(CACHE_KEYS.navigation);
+}
+
+addEventListener('message', (event) => {
+  if (event.data?.type === WorkerMessage.CacheBust) {
+    removeNavigationCache();
+  }
+});
+
 // Precache static assets
 precacheAndRoute(self.__WB_MANIFEST);
 
@@ -65,7 +76,7 @@ registerRoute(
 
     if (hasCacheParam) {
       // Delete the entire navigation cache
-      await caches.delete(CACHE_KEYS.navigation);
+      removeNavigationCache();
 
       // Remove _cb param and redirect
       url.searchParams.delete('_cb');
