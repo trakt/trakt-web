@@ -25,6 +25,7 @@ const recommendedMoviesRequest = (
         extended: 'full,images',
         ignore_collected: true,
         ignore_watchlisted: true,
+        ignore_watched: true,
         limit,
       },
     })
@@ -43,7 +44,10 @@ const recommendedMoviesRequest = (
 
 export const recommendedMoviesQuery = defineQuery({
   key: 'recommendedMovies',
-  invalidations: [InvalidateAction.MarkAsWatched('movie')],
+  invalidations: [
+    InvalidateAction.Watchlisted('movie'),
+    InvalidateAction.MarkAsWatched('movie'),
+  ],
   dependencies: (params) => [params.limit],
   request: recommendedMoviesRequest,
   mapper: (body) => body.map(mapToMovieEntry),
