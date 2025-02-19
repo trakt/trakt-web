@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { WorkerMessage } from "$lib/utils/worker/WorkerMessage";
+  import { workerRequest } from "$lib/utils/worker/workerRequest";
   import type { ThemeResponse } from "../handle";
   import { Theme } from "../models/Theme";
   import { nextTheme } from "../nextTheme";
@@ -17,6 +19,7 @@
       body: JSON.stringify({ theme: value }),
     }).then((res) => res.json() as Promise<ThemeResponse>);
 
+    await workerRequest(WorkerMessage.CacheBust);
     set(result.theme ?? $theme);
   };
 </script>

@@ -70,6 +70,7 @@ module.exports = {
         'social',
         'spoiler',
         'summary',
+        'theme',
         'toggle',
         'trending',
         'up-next',
