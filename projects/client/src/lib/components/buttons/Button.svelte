@@ -217,7 +217,6 @@
       }
 
       .button-icon {
-        :global(img),
         :global(svg) {
           width: auto;
           height: var(--ni-18);
