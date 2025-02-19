@@ -1,6 +1,7 @@
 <script lang="ts">
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import { onMount } from "svelte";
+  import { useIsWatchlisted } from "../watchlist/useIsWatchlisted";
   import {
     type MarkAsWatchedStoreProps,
     useMarkAsWatched,
@@ -29,6 +30,8 @@
     isWatchable,
   } = $derived(useMarkAsWatched(target));
 
+  const { isWatchlisted } = $derived(useIsWatchlisted(target));
+
   onMount(() => {
     return isMarkingAsWatched.subscribe((value) => onAction?.(value));
   });
@@ -39,7 +42,7 @@
     {style}
     {title}
     {size}
-    isWatched={$isWatched}
+    isWatched={$isWatched && !$isWatchlisted}
     isMarkingAsWatched={$isMarkingAsWatched}
     onWatch={markAsWatched}
     onRemove={removeWatched}
