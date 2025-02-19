@@ -28,6 +28,7 @@ const recommendedShowsRequest = (
         extended: 'full,images',
         ignore_collected: true,
         ignore_watchlisted: true,
+        ignore_watched: true,
         limit,
       },
     })
@@ -45,6 +46,7 @@ export const recommendedShowsQuery = defineQuery({
   key: 'recommendedShows',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
+    InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
   dependencies: (params) => [params.limit],

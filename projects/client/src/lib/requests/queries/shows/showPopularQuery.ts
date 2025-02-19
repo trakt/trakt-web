@@ -3,6 +3,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -40,6 +41,9 @@ const showPopularRequest = (
     .popular({
       query: {
         extended: 'full,images',
+        ignore_collected: true,
+        ignore_watchlisted: true,
+        ignore_watched: true,
         page,
         limit,
       },
@@ -54,7 +58,11 @@ const showPopularRequest = (
 
 export const showPopularQuery = defineQuery({
   key: 'showPopular',
-  invalidations: [],
+  invalidations: [
+    InvalidateAction.MarkAsWatched('show'),
+    InvalidateAction.Watchlisted('show'),
+    InvalidateAction.MarkAsWatched('episode'),
+  ],
   dependencies: (params) => [params.limit, params.page],
   request: showPopularRequest,
   mapper: (response) => ({
