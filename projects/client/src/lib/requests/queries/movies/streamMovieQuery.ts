@@ -5,7 +5,7 @@ import { mapToStreamingServices } from '../../_internal/mapToStreamingServices.t
 import { StreamingServiceOptionsSchema } from '../../models/StreamingServiceOptions.ts';
 
 type StreamMovieParams = {
-  id: number;
+  id: string;
   country: string;
 } & ApiParams;
 

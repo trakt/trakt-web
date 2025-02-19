@@ -3,8 +3,10 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
+  import { useStreamOn } from "$lib/stores/useStreamOn";
   import { useShow } from "./useShow";
   import { useShowDetails } from "./useShowDetails";
+
   const {
     show,
     intl,
@@ -21,7 +23,16 @@
     isLoading: isLoadingDetails,
   } = $derived(useShowDetails(page.params.slug));
 
-  const isLoading = $derived($isLoadingShow || $isLoadingDetails);
+  const { streamOn, isLoading: isLoadingStreamOn } = $derived(
+    useStreamOn({
+      type: "show",
+      id: page.params.slug,
+    }),
+  );
+
+  const isLoading = $derived(
+    $isLoadingStreamOn || $isLoadingShow || $isLoadingDetails,
+  );
 </script>
 
 <TraktPage
@@ -41,6 +52,7 @@
       studios={$studios!}
       crew={$crew!}
       seasons={$seasons!}
+      streamOn={$streamOn}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->

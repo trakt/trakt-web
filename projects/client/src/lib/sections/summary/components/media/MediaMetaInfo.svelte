@@ -11,10 +11,8 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import type { MediaStats } from "$lib/requests/models/MediaStats";
-  import type { MediaType } from "$lib/requests/models/MediaType";
-  import type { StreamNow } from "$lib/requests/models/StreamingServiceOptions";
+  import type { StreamOn } from "$lib/requests/models/StreamOn";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
-  import { useStreamOn } from "$lib/stores/useStreamOn";
 
   type MediaMetaInfoProps = {
     certification?: string | Nil;
@@ -23,8 +21,8 @@
     ratings: MediaRating;
     stats: MediaStats | EpisodeStats;
     watchers: UserProfile[];
-    type: MediaType | "episode";
     media: MediaEntry | EpisodeEntry;
+    streamOn?: StreamOn;
   };
 
   const {
@@ -33,16 +31,9 @@
     ratings,
     stats,
     airDate,
-    type,
     media,
+    streamOn,
   }: MediaMetaInfoProps = $props();
-
-  const { streamOn } = $derived(
-    useStreamOn({
-      type,
-      id: media.id,
-    }),
-  );
 
   const isAiredItem = $derived(airDate < new Date());
 </script>
@@ -71,14 +62,18 @@
         <PlaysTag i18n={TagIntlProvider} plays={stats.plays} />
       {/if}
     </div>
-  </div>
+        <StreamingServiceButton
+          mediaTitle={media.title}
+          service={streamOn.preferred}
+          style="normal"
+        />
   <div class="trakt-summary-watch-container">
-    {#if $streamOn?.preferred}
+    {#if streamOn?.preferred}
       <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
-        {@render streamNowButton($streamOn?.preferred, "normal")}
+        {@render streamNowButton(streamOn.preferred, "normal")}
       </RenderFor>
       <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
-        {@render streamNowButton($streamOn?.preferred, "action")}
+        {@render streamNowButton(streamOn.preferred, "action")}
       </RenderFor>
     {/if}
   </div>

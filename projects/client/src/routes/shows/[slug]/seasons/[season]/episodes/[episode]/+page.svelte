@@ -3,6 +3,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
+  import { useStreamOn } from "$lib/stores/useStreamOn";
+  import { readable } from "svelte/store";
   import { useShow } from "../../../../useShow";
   import { useEpisode } from "./useEpisode";
 
@@ -28,7 +30,18 @@
     isLoading: isShowLoading,
   } = $derived(useShow(page.params.slug));
 
-  const isLoading = $derived($isEpisodeLoading || $isShowLoading);
+  const { streamOn, isLoading: isLoadingStreamOn } = $derived.by(() => {
+    // FIXME: simplify this when we can get services using slug/season/episode
+    if (!$episode?.id) {
+      return { streamOn: readable(undefined), isLoading: readable(false) };
+    }
+
+    return useStreamOn({ id: $episode.id, type: "episode" });
+  });
+
+  const isLoading = $derived(
+    $isEpisodeLoading || $isLoadingStreamOn || $isShowLoading,
+  );
 </script>
 
 <TraktPage
@@ -48,6 +61,7 @@
       ratings={$ratings!}
       stats={$stats!}
       watchers={$watchers!}
+      streamOn={$streamOn}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->

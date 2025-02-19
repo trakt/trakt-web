@@ -14,7 +14,6 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
-  import { useStreamOn } from "$lib/stores/useStreamOn";
   import type { Snippet } from "svelte";
   import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
@@ -40,6 +39,7 @@
     watchers,
     studios,
     crew,
+    streamOn,
   }: MediaSummaryProps<MediaEntry> & {
     type: MediaType;
     contextualContent?: Snippet;
@@ -63,13 +63,6 @@
     type,
     media,
   });
-
-  const { streamOn } = $derived(
-    useStreamOn({
-      type,
-      id: media.id,
-    }),
-  );
 </script>
 
 {#snippet mediaActions(device: "mobile" | "other" = "other")}
@@ -90,11 +83,11 @@
     <SummaryPoster
       src={media.poster.url.medium}
       alt={title}
-      href={$streamOn?.preferred?.link ?? media.trailer}
+      href={streamOn?.preferred?.link ?? media.trailer}
     >
       {#snippet hoverOverlay()}
-        {#if $streamOn?.preferred}
-          <StreamOnOverlay service={$streamOn?.preferred} />
+        {#if streamOn?.preferred}
+          <StreamOnOverlay service={streamOn.preferred} />
         {:else}
           <TrailerOverlay trailer={media.trailer} />
         {/if}
@@ -137,7 +130,7 @@
     {ratings}
     {stats}
     {watchers}
-    {type}
+    {streamOn}
   />
 
   <Spoiler {media} {type}>
@@ -163,8 +156,11 @@
 
 <SummaryContainer>
   <MediaDetails {media} {studios} {crew} />
-  <MediaStreamingServices
-    services={$streamOn?.services}
-    preferred={$streamOn?.preferred}
-  />
+
+  {#if streamOn}
+    <MediaStreamingServices
+      services={streamOn.services}
+      preferred={streamOn.preferred}
+    />
+  {/if}
 </SummaryContainer>

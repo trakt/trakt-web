@@ -1,17 +1,17 @@
 import { z } from 'zod';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 
-export const StreamNowSchema = z.object({
+export const StreamingSubscriptionSchema = z.object({
   link: HttpsUrlSchema,
   source: z.string(),
   is4k: z.boolean(),
   type: z.literal('streaming'),
 });
 export type StreamNow = z.infer<
-  typeof StreamNowSchema
+  typeof StreamingSubscriptionSchema
 >;
 
-export const StreamOnDemandSchema = z.object({
+export const OnDemandStreamingSchema = z.object({
   link: HttpsUrlSchema,
   source: z.string(),
   is4k: z.boolean(),
@@ -22,11 +22,11 @@ export const StreamOnDemandSchema = z.object({
     purchase: z.number().optional(),
   }),
 });
-export type StreamOnDemand = z.infer<typeof StreamOnDemandSchema>;
+export type StreamOnDemand = z.infer<typeof OnDemandStreamingSchema>;
 
 export const StreamingServiceOptionsSchema = z.object({
-  streaming: StreamNowSchema.array(),
-  onDemand: StreamOnDemandSchema.array(),
+  streaming: StreamingSubscriptionSchema.array(),
+  onDemand: OnDemandStreamingSchema.array(),
 });
 
 export type StreamingServiceOption = StreamNow | StreamOnDemand;

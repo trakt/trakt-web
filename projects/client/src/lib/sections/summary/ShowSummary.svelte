@@ -33,6 +33,7 @@
     intl,
     crew,
     seasons,
+    streamOn,
   }: ShowSummaryProps = $props();
 
   const { progress } = $derived(useShowProgress(media.slug));
@@ -48,6 +49,7 @@
   {studios}
   {intl}
   {crew}
+  {streamOn}
   type="show"
 >
   {#snippet contextualContent()}

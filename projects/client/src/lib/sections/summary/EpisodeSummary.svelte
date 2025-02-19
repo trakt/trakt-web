@@ -10,7 +10,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/SeasonList.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import { useStreamOn } from "$lib/stores/useStreamOn";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import RelatedList from "../lists/RelatedList.svelte";
   import Comments from "./components/comments/Comments.svelte";
@@ -33,16 +32,13 @@
     episodeIntl,
     stats,
     watchers,
+    streamOn,
   }: EpisodeSummaryProps = $props();
   const type = "episode";
 
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
-  const { streamOn } = useStreamOn({
-    type,
-    id: episode.id,
-  });
 </script>
 
 {#snippet mediaActions()}
@@ -63,10 +59,10 @@
     <SummaryPoster
       src={show.poster.url.medium}
       alt={title}
-      href={$streamOn?.preferred?.link}
+      href={streamOn?.preferred?.link}
     >
       {#snippet hoverOverlay()}
-        <StreamOnOverlay service={$streamOn?.preferred} />
+        <StreamOnOverlay service={streamOn?.preferred} />
       {/snippet}
       {#snippet actions()}
         <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
@@ -105,7 +101,7 @@
     {ratings}
     {stats}
     {watchers}
-    {type}
+    {streamOn}
   />
 
   <Spoiler media={episode} {episode} {show} {type}>

@@ -3,33 +3,48 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { StreamingServiceOptions } from '$lib/requests/models/StreamingServiceOptions.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived, get, readable } from 'svelte/store';
-import type { StreamingServiceOptions } from '../requests/models/StreamingServiceOptions.ts';
 import { streamEpisodeQuery } from '../requests/queries/episode/streamEpisodeQuery.ts';
 import { streamMovieQuery } from '../requests/queries/movies/streamMovieQuery.ts';
 import { streamShowQuery } from '../requests/queries/shows/streamShowQuery.ts';
 import { findFavoriteStreamingService } from './_internal/findFavoriteStreamingService.ts';
 
-type StreamOnProps = {
-  type: MediaType | 'episode';
+type EpisodeStreamOnProps = {
+  type: 'episode';
   id: number;
 };
 
+type MediaStreamOnProps = {
+  type: MediaType;
+  id: string;
+};
+
+type StreamOnProps = EpisodeStreamOnProps | MediaStreamOnProps;
+
 function typeToQuery(
-  type: StreamOnProps['type'],
-  id: number,
+  props: StreamOnProps,
   country: string,
 ) {
-  const params = { id, country };
+  const commonParams = { country };
 
-  switch (type) {
+  switch (props.type) {
     case 'movie':
-      return streamMovieQuery(params);
+      return streamMovieQuery({
+        id: props.id,
+        ...commonParams,
+      });
     case 'show':
-      return streamShowQuery(params);
+      return streamShowQuery({
+        id: props.id,
+        ...commonParams,
+      });
     case 'episode':
-      return streamEpisodeQuery(params);
+      return streamEpisodeQuery({
+        id: props.id,
+        ...commonParams,
+      });
   }
 }
 
@@ -38,12 +53,12 @@ function findViablePreferredService(services: StreamingServiceOptions) {
   return services.streaming.at(0);
 }
 
-export function useStreamOn({ type, id }: StreamOnProps) {
+export function useStreamOn(props: StreamOnProps) {
   const { isAuthorized } = useAuth();
 
   if (!get(isAuthorized)) {
     return {
-      services: undefined,
+      streamOn: readable(undefined),
       isLoading: readable(false),
     };
   }
@@ -54,7 +69,7 @@ export function useStreamOn({ type, id }: StreamOnProps) {
   const { services } = current();
   const country = services.country ?? region;
 
-  const streamOn = useQuery(typeToQuery(type, id, country));
+  const streamOn = useQuery(typeToQuery(props, country));
 
   return {
     streamOn: derived(

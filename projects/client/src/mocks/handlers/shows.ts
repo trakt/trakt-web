@@ -82,7 +82,7 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.trakt}/watchnow/*`,
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/watchnow/*`,
     () => {
       return HttpResponse.json(ShowSiloWatchNowResponseMock);
     },

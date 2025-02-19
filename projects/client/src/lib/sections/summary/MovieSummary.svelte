@@ -20,6 +20,7 @@
     studios,
     intl,
     crew,
+    streamOn,
   }: MediaSummaryProps<MovieEntry> & {
     stats: MediaStats;
     studios: MediaStudio[];
@@ -35,6 +36,7 @@
   {studios}
   {crew}
   {intl}
+  {streamOn}
   type="movie"
 />
 

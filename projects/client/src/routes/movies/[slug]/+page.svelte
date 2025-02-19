@@ -3,10 +3,28 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import MovieSummary from "$lib/sections/summary/MovieSummary.svelte";
+  import { useStreamOn } from "$lib/stores/useStreamOn";
   import { useMovie } from "./useMovie";
 
-  const { movie, ratings, stats, intl, watchers, studios, crew, isLoading } =
-    $derived(useMovie(page.params.slug));
+  const {
+    movie,
+    ratings,
+    stats,
+    intl,
+    watchers,
+    studios,
+    crew,
+    isLoading: isLoadingMovie,
+  } = $derived(useMovie(page.params.slug));
+
+  const { streamOn, isLoading: isLoadingStreamOn } = $derived(
+    useStreamOn({
+      type: "movie",
+      id: page.params.slug,
+    }),
+  );
+
+  const isLoading = $derived($isLoadingStreamOn || $isLoadingMovie);
 </script>
 
 <TraktPage
@@ -16,7 +34,7 @@
   image={$movie?.poster.url.thumb ?? $movie?.cover.url.thumb}
   type="movie"
 >
-  {#if !$isLoading}
+  {#if !isLoading}
     <MovieSummary
       media={$movie!}
       ratings={$ratings!}
@@ -25,6 +43,7 @@
       studios={$studios!}
       crew={$crew!}
       intl={$intl!}
+      streamOn={$streamOn}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
