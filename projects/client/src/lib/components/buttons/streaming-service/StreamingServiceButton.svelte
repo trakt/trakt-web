@@ -2,7 +2,6 @@
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
   import StreamingServiceLogo from "../../media/streaming-service/StreamingServiceLogo.svelte";
-  import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
   import { StreamingServiceButtonIntlProvider } from "./StreamingServiceButtonIntlProvider";
   import type { StreamingServiceButtonProps } from "./StreamingServiceButtonProps";
@@ -46,10 +45,18 @@
   </div>
 {/if}
 
-{#if style === "action"}
-  <ActionButton {...commonProps} {...props} variant="secondary">
-    <PlayIcon />
-  </ActionButton>
+{#if style === "logo"}
+  <div class="trakt-streaming-service-button">
+    <Button {...commonProps} {...props} size="small">
+      <StreamingServiceLogo
+        source={service.source}
+        i18n={StreamingServiceLogoIntlProvider}
+      />
+      {#snippet icon()}
+        <PlayIcon />
+      {/snippet}
+    </Button>
+  </div>
 {/if}
 
 <style>

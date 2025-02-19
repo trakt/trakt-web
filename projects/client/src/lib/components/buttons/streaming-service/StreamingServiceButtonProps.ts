@@ -4,6 +4,6 @@ import type { StreamingServiceButtonIntl } from './StreamingServiceButtonIntl.ts
 export type StreamingServiceButtonProps = {
   mediaTitle: string;
   service: StreamNow;
-  style: 'action' | 'normal';
+  style: 'logo' | 'normal';
   i18n?: StreamingServiceButtonIntl;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

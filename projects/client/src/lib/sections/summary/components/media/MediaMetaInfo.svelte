@@ -38,10 +38,6 @@
   const isAiredItem = $derived(airDate < new Date());
 </script>
 
-{#snippet streamNowButton(service: StreamNow, style: "normal" | "action")}
-  <StreamingServiceButton mediaTitle={media.title} {service} {style} />
-{/snippet}
-
 <div class="trakt-summary-meta">
   <div class="trakt-summary-meta-container">
     <RatingList {ratings} {airDate} />
@@ -57,23 +53,26 @@
       {/if}
 
       <!-- FIXME: re-enable watchers once we have better watching stats -->
-
       {#if isAiredItem}
         <PlaysTag i18n={TagIntlProvider} plays={stats.plays} />
       {/if}
     </div>
+  </div>
+  <div class="trakt-summary-watch-container">
+    {#if streamOn?.preferred}
+      <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
         <StreamingServiceButton
           mediaTitle={media.title}
           service={streamOn.preferred}
           style="normal"
         />
-  <div class="trakt-summary-watch-container">
-    {#if streamOn?.preferred}
-      <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
-        {@render streamNowButton(streamOn.preferred, "normal")}
       </RenderFor>
       <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
-        {@render streamNowButton(streamOn.preferred, "action")}
+        <StreamingServiceButton
+          mediaTitle={media.title}
+          service={streamOn.preferred}
+          style="logo"
+        />
       </RenderFor>
     {/if}
   </div>
