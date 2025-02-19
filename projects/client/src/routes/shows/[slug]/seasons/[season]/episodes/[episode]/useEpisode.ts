@@ -41,7 +41,7 @@ export function useEpisode(
 
   return {
     isLoading,
-    episode: derived(episode, ($movie) => $movie.data),
+    episode: derived(episode, ($episode) => $episode.data),
     seasons: derived(
       [
         seasons,
@@ -57,7 +57,7 @@ export function useEpisode(
     watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
     intl: derived(
       [episode, intl],
-      ([$movie, $intl]) => {
+      ([$episode, $intl]) => {
         if (isLocaleSkipped) {
           return $intl.data;
         }
@@ -67,8 +67,8 @@ export function useEpisode(
         }
 
         return {
-          title: $intl?.data?.title ?? $movie?.data?.title ?? '',
-          overview: $intl?.data?.overview ?? $movie?.data?.overview ?? '',
+          title: $intl?.data?.title ?? $episode?.data?.title ?? '',
+          overview: $intl?.data?.overview ?? $episode?.data?.overview ?? '',
         };
       },
     ),
