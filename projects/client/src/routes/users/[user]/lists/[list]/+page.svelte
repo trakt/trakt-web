@@ -5,9 +5,9 @@
   import UserList from "$lib/sections/lists/user/UserList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { mapToMediaType } from "./_internal/mapToMediaType";
-  import { useListSummary } from "./useListSummary";
+  import { userListSummary } from "./userListSummary.ts";
 
-  const { list } = useListSummary({
+  const { list } = userListSummary({
     userId: page.params.user,
     listId: page.params.list,
   });

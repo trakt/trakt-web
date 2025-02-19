@@ -4,14 +4,14 @@ import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfile
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
-import { listSummaryQuery } from './listSummaryQuery.ts';
+import { userListSummaryQuery } from './userListSummaryQuery.ts';
 
-describe('listSummaryQuery', () => {
-  it('should query list summary', async () => {
+describe('userListSummaryQuery', () => {
+  it('should query user list summary', async () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          listSummaryQuery({
+          userListSummaryQuery({
             userId: UserProfileHarryMappedMock.slug,
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
           }),

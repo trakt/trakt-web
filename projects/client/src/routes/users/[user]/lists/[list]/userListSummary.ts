@@ -1,14 +1,14 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 
+import { userListSummaryQuery } from '$lib/requests/queries/users/userListSummaryQuery.ts';
 import { derived } from 'svelte/store';
-import { userListSummaryQuery } from '../../../../../lib/requests/queries/users/userListSummaryQuery.ts';
 
-type UseListSummaryProps = {
+type UseUserListSummaryProps = {
   userId: string;
   listId: string;
 };
 
-export function useListSummary(props: UseListSummaryProps) {
+export function userListSummary(props: UseUserListSummaryProps) {
   const query = useQuery(userListSummaryQuery(props));
 
   return {
