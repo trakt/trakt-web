@@ -6,7 +6,6 @@
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import BetaBadge from "$lib/sections/navbar/BetaBadge.svelte";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
@@ -36,7 +35,6 @@
       <div class="trakt-logo">
         <Link href={UrlBuilder.home()}>
           <LogoMark />
-          <BetaBadge />
         </Link>
       </div>
     </RenderFor>
