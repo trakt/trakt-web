@@ -3,7 +3,7 @@ import { derived, get } from 'svelte/store';
 import { useWatchList, type WatchListStoreProps } from './useWatchList.ts';
 import { genreCompareFactory } from './utils/genreCompareFactory.ts';
 
-export function useOutNowList(params: Omit<WatchListStoreProps, 'sort'>) {
+export function useReleasedList(params: Omit<WatchListStoreProps, 'sort'>) {
   const { user } = useUser();
 
   const { list: watchlist, isLoading, page } = useWatchList({

@@ -7,8 +7,8 @@
   import UpNextList from "$lib/sections/lists/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import SocialActivityList from "$lib/sections/lists/social/SocialActivityList.svelte";
-  import ComingSoonList from "$lib/sections/lists/watchlist/ComingSoonList.svelte";
-  import OutNowList from "$lib/sections/lists/watchlist/OutNowList.svelte";
+  import ReleasedList from "$lib/sections/lists/watchlist/ReleasedList.svelte";
+  import UnreleasedList from "$lib/sections/lists/watchlist/UnreleasedList.svelte";
   import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
@@ -23,9 +23,9 @@
   <RenderFor audience="authenticated">
     <ProfileBanner />
     <UpNextList />
-    <OutNowList />
+    <ReleasedList />
     <UpcomingList />
-    <ComingSoonList />
+    <UnreleasedList />
     <SocialActivityList />
   </RenderFor>
   <RenderFor audience="public">

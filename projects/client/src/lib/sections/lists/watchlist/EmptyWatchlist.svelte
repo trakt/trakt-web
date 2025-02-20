@@ -7,7 +7,7 @@
 
   type EmptyWatchListProps = {
     type: MediaType;
-    status: "all" | "out-now" | "coming-soon";
+    status: "all" | "released" | "unreleased";
   };
 
   const { type, status }: EmptyWatchListProps = $props();
@@ -18,12 +18,12 @@
     <p class="small">{m.watchlist_movies_empty()}</p>
   {/if}
 
-  {#if status === "out-now"}
-    <p class="small">{m.out_now_empty()}</p>
+  {#if status === "released"}
+    <p class="small">{m.released_movies_empty()}</p>
   {/if}
 
-  {#if status === "coming-soon"}
-    <p class="small">{m.coming_soon_empty()}</p>
+  {#if status === "unreleased"}
+    <p class="small">{m.unreleased_movies_empty()}</p>
   {/if}
 
   <FindMoviesLink />

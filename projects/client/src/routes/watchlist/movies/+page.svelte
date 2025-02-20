@@ -9,10 +9,10 @@
 
   const status = $derived.by(() => {
     switch (page.url.searchParams.get("status")) {
-      case "out-now":
-        return "out-now";
-      case "coming-soon":
-        return "coming-soon";
+      case "released":
+        return "released";
+      case "unreleased":
+        return "unreleased";
       default:
         return "all";
     }
@@ -20,10 +20,10 @@
 
   const title = $derived.by(() => {
     switch (status) {
-      case "out-now":
-        return m.out_now_title();
-      case "coming-soon":
-        return m.coming_soon_title();
+      case "released":
+        return m.released_movies_title();
+      case "unreleased":
+        return m.unreleased_movies_title();
       default:
         return m.your_watchlist_movies();
     }

@@ -14,7 +14,7 @@ const IN_PROGRESS_STATUSES: MediaStatus[] = [
   'upcoming',
 ] as const;
 
-export function useComingSoonList(params: Omit<WatchListStoreProps, 'sort'>) {
+export function useUnreleasedList(params: Omit<WatchListStoreProps, 'sort'>) {
   const { list: watchlist, isLoading, page } = useWatchList({
     ...params,
     sort: 'rank',

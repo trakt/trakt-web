@@ -5,8 +5,8 @@
 </script>
 
 <WatchList
-  title={m.out_now_title()}
-  drilldownLabel={m.view_all_movies_out_now()}
+  title={m.released_movies_title()}
+  drilldownLabel={m.view_all_released_movies()}
   type="movie"
-  status="out-now"
+  status="released"
 />

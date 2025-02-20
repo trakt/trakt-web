@@ -14,7 +14,7 @@
     type: MediaType;
     drilldownLabel: string;
     empty?: Snippet;
-    status: "all" | "out-now" | "coming-soon";
+    status: "all" | "released" | "unreleased";
   };
 
   const { title, type, status, drilldownLabel }: WatchListProps = $props();
@@ -32,7 +32,7 @@
     `${UrlBuilder.watchlistPage(params)}?status=${status}`}
 >
   {#snippet item(media)}
-    {#if status === "out-now"}
+    {#if status === "released"}
       <MediaCard type={media.type} {media}>
         {#snippet action()}
           <RenderFor audience="authenticated">

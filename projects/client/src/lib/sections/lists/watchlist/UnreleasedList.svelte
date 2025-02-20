@@ -5,8 +5,8 @@
 </script>
 
 <WatchList
-  title={m.coming_soon_title()}
-  drilldownLabel={m.view_all_movies_coming_soon()}
+  title={m.unreleased_movies_title()}
+  drilldownLabel={m.view_all_unreleased_movies()}
   type="movie"
-  status="coming-soon"
+  status="unreleased"
 />
