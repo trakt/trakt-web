@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { useDailyOrderArray } from './useDailyOrderArray.ts';
+import { useDailyOrderedArray } from './useDailyOrderedArray.ts';
 
 // Mock $app/environment browser value
 vi.mock('$app/environment', () => ({
@@ -12,7 +12,7 @@ const item2 = { id: 2, title: 'Item 2' };
 const item3 = { id: 3, title: 'Item 3' };
 const item4 = { id: 4, title: 'Item 4' };
 
-describe('useDailyOrderArray', () => {
+describe('useDailyOrderedArray', () => {
   let TODAY: string;
   let YESTERDAY: string;
 
@@ -36,7 +36,7 @@ describe('useDailyOrderArray', () => {
   });
 
   it('should return an empty array initially', () => {
-    const { list } = useDailyOrderArray({
+    const { list } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -45,7 +45,7 @@ describe('useDailyOrderArray', () => {
   });
 
   it('should save order on first update', () => {
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -65,7 +65,7 @@ describe('useDailyOrderArray', () => {
       JSON.stringify({ [TODAY]: [2, 1] }),
     );
 
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -81,7 +81,7 @@ describe('useDailyOrderArray', () => {
       JSON.stringify({ [TODAY]: [2, 1] }),
     );
 
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -97,7 +97,7 @@ describe('useDailyOrderArray', () => {
       JSON.stringify({ [TODAY]: [3, 2, 1] }),
     );
 
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -113,7 +113,7 @@ describe('useDailyOrderArray', () => {
       JSON.stringify({ [YESTERDAY]: [2, 1] }),
     );
 
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -131,7 +131,7 @@ describe('useDailyOrderArray', () => {
   });
 
   it('should handle empty updates', () => {
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -143,7 +143,7 @@ describe('useDailyOrderArray', () => {
   });
 
   it('should maintain order after multiple updates in same day', () => {
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -163,7 +163,7 @@ describe('useDailyOrderArray', () => {
     const item5 = { id: 5, title: 'Item 5' };
     const item10 = { id: 10, title: 'Item 10' };
 
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });
@@ -193,7 +193,7 @@ describe('useDailyOrderArray', () => {
       }),
     );
 
-    const { list, set } = useDailyOrderArray({
+    const { list, set } = useDailyOrderedArray<{ id: number }>({
       key: 'test',
       getId: (item) => item.id,
     });

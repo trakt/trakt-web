@@ -8,7 +8,7 @@ import {
   type RecommendedShow,
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
-import { useDailyOrderArray } from '$lib/sections/lists/stores/useDailyOrderArray.ts';
+import { useDailyOrderedArray } from '$lib/sections/lists/stores/useDailyOrderedArray.ts';
 import {
   DEFAULT_PAGE_SIZE,
   RECOMMENDED_UPPER_LIMIT,
@@ -52,7 +52,7 @@ export function useRecommendedList(
     toLoadingState,
   );
 
-  const { list, set } = useDailyOrderArray<RecommendedEntry>({
+  const { list, set } = useDailyOrderedArray<RecommendedEntry>({
     key: `recommended-${props.type}-order`,
     getId: (item) => item.id,
   });

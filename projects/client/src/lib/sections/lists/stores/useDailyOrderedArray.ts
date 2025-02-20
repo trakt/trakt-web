@@ -1,7 +1,6 @@
 import { browser } from '$app/environment';
-import { type Writable, writable } from 'svelte/store';
-
-type Identity = string | number;
+import { get } from 'svelte/store';
+import { type Identity, useOrderedArray } from './useOrderedArray.ts';
 
 export type DailyOrderArrayOptions<T> = {
   key: string;
@@ -35,47 +34,31 @@ function saveCachedOrder(key: string, ids: Identity[]) {
   localStorage.setItem(key, JSON.stringify(stored));
 }
 
-export function useDailyOrderArray<T = { id: Identity }>(
+export function useDailyOrderedArray<T>(
   { key, getId }: DailyOrderArrayOptions<T>,
 ) {
-  const list: Writable<Array<T>> = writable([]);
+  const today = getTodayKey();
+  const cached = getCachedOrder(key);
+  const ordered = useOrderedArray({ getId, order: cached[today] });
 
   const set = (update: Array<T>) => {
     if (update.length === 0) {
-      list.set([]);
+      ordered.set([]);
       return;
     }
 
-    const today = getTodayKey();
-    const cached = getCachedOrder(key);
-    const todayOrder = cached[today];
+    const currentList = get(ordered.list);
+    const currentOrder = currentList.length > 0
+      ? currentList.map(getId)
+      : cached[today];
 
-    if (todayOrder == null) {
-      saveCachedOrder(key, update.map(getId));
-      list.set(update);
-      return;
-    }
-
-    const itemMap = new Map(
-      update.map((item) => [getId(item), item]),
-    );
-
-    const orderedItems = todayOrder
-      .map((id) => itemMap.get(id))
-      .filter((item): item is T => item !== undefined);
-
-    const newItems = update.filter(
-      (item) => !todayOrder.includes(getId(item)),
-    );
-
-    const finalList = [...orderedItems, ...newItems];
-
+    ordered.set(update, currentOrder);
+    const finalList = get(ordered.list);
     saveCachedOrder(key, finalList.map(getId));
-    list.set(finalList);
   };
 
   return {
-    list,
+    list: ordered.list,
     set,
   };
 }
