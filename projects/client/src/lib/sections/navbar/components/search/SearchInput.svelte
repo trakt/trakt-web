@@ -175,6 +175,17 @@
         background-size: contain;
         cursor: pointer;
       }
+
+      @include for-mobile {
+        &:not(:focus-within) {
+          &::-webkit-search-cancel-button {
+            all: unset;
+          }
+          &::-moz-search-cancel-button {
+            all: unset;
+          }
+        }
+      }
     }
 
     &.search-is-loading {
