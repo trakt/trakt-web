@@ -156,7 +156,7 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/lists/all/popular*`,
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/lists/personal/popular*`,
     () => {
       return HttpResponse.json(SiloListsResponseMock);
     },

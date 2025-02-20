@@ -89,7 +89,7 @@ export const movies = [
     },
   ),
   http.get(
-    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/lists/all/popular*`,
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/lists/personal/popular*`,
     () => {
       return HttpResponse.json(HereticListsResponseMock);
     },

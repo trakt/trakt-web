@@ -4,17 +4,21 @@ import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
 import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
-type ShowListsParams = { slug: string; limit: number } & ApiParams;
+type ShowListsParams = {
+  slug: string;
+  limit: number;
+  type?: 'official' | 'personal';
+} & ApiParams;
 
 const showListsRequest = (
-  { fetch, slug, limit }: ShowListsParams,
+  { fetch, slug, limit, type }: ShowListsParams,
 ) =>
   api({ fetch })
     .shows
     .lists({
       params: {
         id: slug,
-        type: 'all',
+        type: type ?? 'personal',
         sort: 'popular',
       },
       query: {
@@ -33,7 +37,7 @@ const showListsRequest = (
 export const showListsQuery = defineQuery({
   key: 'showLists',
   invalidations: [],
-  dependencies: (params) => [params.slug],
+  dependencies: (params) => [params.slug, params.limit, params.type],
   request: showListsRequest,
   mapper: (data) => data.map(mapToMediaListSummary),
   schema: MediaListSummarySchema.array(),
