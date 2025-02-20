@@ -24,6 +24,7 @@
     "@cucumber/cucumber": "^11.2.0",
     "@google/generative-ai": "^0.21.0",
     "@playwright/test": "^1.50.1",
+    "@svelte-plugins/tooltips": "^3.0.3",
     "@sveltejs/adapter-auto": "^4.0.0",
     "@sveltejs/adapter-cloudflare": "4.9.0",
     "@sveltejs/enhanced-img": "^0.4.4",
