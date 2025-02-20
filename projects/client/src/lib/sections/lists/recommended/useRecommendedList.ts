@@ -8,8 +8,14 @@ import {
   type RecommendedShow,
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
+import { useDailyOrderArray } from '$lib/sections/lists/stores/useDailyOrderArray.ts';
+import {
+  DEFAULT_PAGE_SIZE,
+  RECOMMENDED_UPPER_LIMIT,
+} from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import { onMount } from 'svelte';
 import { derived } from 'svelte/store';
 
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
@@ -40,15 +46,26 @@ export function useRecommendedList(
   props: RecommendationListStoreProps,
 ) {
   const query = useQuery(typeToQuery(props));
-  const list = derived(query, ($query) => $query.data ?? []);
+  const unstable = derived(query, ($query) => $query.data ?? []);
   const isLoading = derived(
     query,
     toLoadingState,
   );
 
+  const { list, set } = useDailyOrderArray<RecommendedEntry>({
+    key: `recommended-${props.type}-order`,
+    getId: (item) => item.id,
+  });
+
+  onMount(() => {
+    const unsubscribe = unstable.subscribe(set);
+
+    return () => unsubscribe();
+  });
+
   return {
     list: derived(
-    list,
+      list,
       ($list) => $list.slice(0, props.limit ?? DEFAULT_PAGE_SIZE),
     ),
     isLoading,
