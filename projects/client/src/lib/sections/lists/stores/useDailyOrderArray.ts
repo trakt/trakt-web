@@ -1,9 +1,11 @@
 import { browser } from '$app/environment';
 import { type Writable, writable } from 'svelte/store';
 
+type Identity = string | number;
+
 export type DailyOrderArrayOptions<T> = {
   key: string;
-  getId: (item: T) => number;
+  getId: (item: T) => Identity;
 };
 
 function getTodayKey() {
@@ -12,7 +14,7 @@ function getTodayKey() {
   return date.getTime().toString();
 }
 
-function getCachedOrder(key: string): Record<string, number[]> {
+function getCachedOrder(key: string): Record<string, Identity[]> {
   if (!browser) {
     return {};
   }
@@ -21,7 +23,7 @@ function getCachedOrder(key: string): Record<string, number[]> {
   return stored ? JSON.parse(stored) : {};
 }
 
-function saveCachedOrder(key: string, ids: number[]) {
+function saveCachedOrder(key: string, ids: Identity[]) {
   if (!browser) {
     return;
   }
@@ -33,7 +35,7 @@ function saveCachedOrder(key: string, ids: number[]) {
   localStorage.setItem(key, JSON.stringify(stored));
 }
 
-export function useDailyOrderArray<T>(
+export function useDailyOrderArray<T = { id: Identity }>(
   { key, getId }: DailyOrderArrayOptions<T>,
 ) {
   const list: Writable<Array<T>> = writable([]);

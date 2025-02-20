@@ -1,5 +1,5 @@
 import { afterNavigate } from '$app/navigation';
-import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
+import { describe, expect, it, type Mock, vi } from 'vitest';
 import { useActiveLink } from './useActiveLink.ts';
 
 vi.mock('$app/state', () => ({
@@ -11,10 +11,6 @@ vi.mock('$app/state', () => ({
 }));
 
 describe('useActiveLink', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should initialize with correct active state', () => {
     const { isActive } = useActiveLink('/initial');
     let value;

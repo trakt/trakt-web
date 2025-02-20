@@ -1,16 +1,12 @@
 import { useMedia } from '$lib/stores/css/useMedia.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { get, writable } from 'svelte/store';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { useDangerButton } from './useDangerButton.ts';
 
 vi.mock('$lib/stores/css/useMedia');
 
 describe('useDangerButton', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should return red color when active', async () => {
     vi.mocked(useMedia).mockReturnValue(writable(false));
     const button = await renderStore(() =>
