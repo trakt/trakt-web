@@ -12,9 +12,8 @@ import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
-type UserListItemsParams =
+type ListItemsParams =
   & {
-    userId: string;
     listId: string;
     page?: number;
     limit?: number;
@@ -30,25 +29,20 @@ const ListedItemSchema = ListItemSchemaFactory(
   z.union([MovieEntrySchema, ListedShowEntrySchema]),
 );
 
-export type ListedItem = z.infer<typeof ListedItemSchema>;
-
 const userListItemsRequest = (
   {
     fetch,
-    userId,
     listId,
     limit = DEFAULT_PAGE_SIZE,
     page = 1,
     type = 'movie,show',
-  }: UserListItemsParams,
+  }: ListItemsParams,
 ) =>
   api({ fetch })
-    .users
     .lists
     .items({
       params: {
-        id: userId,
-        list_id: listId,
+        id: listId,
         type,
       },
       query: {
@@ -59,19 +53,18 @@ const userListItemsRequest = (
     })
     .then((response) => {
       if (response.status !== 200) {
-        throw new Error('Failed to fetch user list items');
+        throw new Error('Failed to fetch list items');
       }
 
       return response;
     });
 
-export const userListItemsQuery = defineQuery({
-  key: 'userListItems',
+export const listItemsQuery = defineQuery({
+  key: 'listItems',
   invalidations: [],
   dependencies: (
     params,
   ) => [
-    params.userId,
     params.listId,
     params.limit,
     params.page,

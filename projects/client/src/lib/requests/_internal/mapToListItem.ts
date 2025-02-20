@@ -35,3 +35,11 @@ export function mapToMovieListItem(
     entry: mapToMovieEntry(listedMovieResponse.movie),
   };
 }
+
+export function mapToListItem(
+  listedItem: ListedMovieResponse | ListedShowResponse,
+) {
+  return listedItem.type === 'movie'
+    ? mapToMovieListItem(listedItem)
+    : mapToShowListItem(listedItem);
+}
