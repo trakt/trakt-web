@@ -36,7 +36,7 @@
 
     .trakt-card-footer-information {
       width: 100%;
-      margin-top: var(--ni-neg-2);
+      margin-top: var(--ni-neg-4);
       overflow: hidden;
 
       display: flex;

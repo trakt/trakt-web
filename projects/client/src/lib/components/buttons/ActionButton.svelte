@@ -95,7 +95,7 @@
   }
 
   .trakt-action-button {
-    --button-size: var(--ni-36);
+    --button-size: var(--ni-40);
 
     all: unset;
 
@@ -144,8 +144,8 @@
     }
 
     &[data-size="small"] {
-      scale: 0.7777777778;
-      margin: var(--ni-neg-4);
+      scale: 0.8;
+      margin: var(--ni-neg-8);
     }
 
     &[data-style="ghost"] {
