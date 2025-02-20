@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Preview from "$lib/components/badge/Preview.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
@@ -28,5 +29,9 @@
 >
   {#snippet item(media)}
     <MediaCard type={media.type} {media} {style} />
+  {/snippet}
+
+  {#snippet badge()}
+    <Preview />
   {/snippet}
 </GridList>

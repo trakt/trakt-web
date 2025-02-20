@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Preview from "$lib/components/badge/Preview.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CommentCard from "./_internal/CommentCard.svelte";
@@ -33,5 +34,9 @@
     {#if !$isLoading}
       <p class="small">{m.no_comments()}</p>
     {/if}
+  {/snippet}
+
+  {#snippet badge()}
+    <Preview />
   {/snippet}
 </SectionList>
