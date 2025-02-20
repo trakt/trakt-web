@@ -306,5 +306,6 @@
   "view_all_recently_watched": "Переглянути всі нещодавно переглянуті",
   "released_movies_title": "Доступно зараз",
   "view_all_released_movies": "Переглянути всі доступні фільми",
-  "view_all_unreleased_movies": "Переглянути всі фільми, що виходять скоро"
+  "view_all_unreleased_movies": "Переглянути всі фільми, що виходять скоро",
+  "switch_to_og": "Перейти на Trakt.tv"
 }

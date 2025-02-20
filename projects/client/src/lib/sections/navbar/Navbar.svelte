@@ -4,9 +4,11 @@
   import Link from "$lib/components/link/Link.svelte";
   import Logo from "$lib/components/logo/Logo.svelte";
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
+  import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
+  import { navigateToTraktOg } from "$lib/utils/url/navigateToTraktOg";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -26,6 +28,15 @@
   });
 </script>
 
+{#snippet traktSwitch()}
+  <Switch
+    label={m.switch_to_og()}
+    checked={true}
+    innerText="Lite"
+    onclick={navigateToTraktOg}
+  />
+{/snippet}
+
 <header>
   <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
     <RenderFor
@@ -43,11 +54,20 @@
         <Logo />
       </div>
     </RenderFor>
+    <RenderFor
+      audience="authenticated"
+      device={["tablet-sm", "tablet-lg", "desktop"]}
+    >
+      {@render traktSwitch()}
+    </RenderFor>
     <div class="trakt-navbar-content">
       <RenderFor audience="authenticated">
         <SearchInput />
       </RenderFor>
     </div>
+    <RenderFor audience="authenticated" device={["mobile"]}>
+      {@render traktSwitch()}
+    </RenderFor>
     <div class="trakt-navbar-links">
       <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         <Button

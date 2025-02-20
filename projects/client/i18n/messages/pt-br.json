@@ -306,5 +306,6 @@
   "view_all_recently_watched": "Ver todos os assistidos recentemente",
   "released_movies_title": "Disponíveis agora",
   "view_all_released_movies": "Visualizar todos os filmes disponíveis agora",
-  "view_all_unreleased_movies": "Visualizar todos os filmes em breve"
+  "view_all_unreleased_movies": "Visualizar todos os filmes em breve",
+  "switch_to_og": "Ir para Trakt.tv"
 }

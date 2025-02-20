@@ -306,5 +306,6 @@
   "view_all_recently_watched": "View all recently watched",
   "released_movies_title": "Available Now",
   "view_all_released_movies": "View all movies available now",
-  "view_all_unreleased_movies": "View all movies coming soon"
+  "view_all_unreleased_movies": "View all movies coming soon",
+  "switch_to_og": "Switch to Trakt.tv"
 }
