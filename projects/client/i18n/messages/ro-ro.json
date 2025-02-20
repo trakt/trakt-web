@@ -307,5 +307,7 @@
   "released_movies_title": "Disponibil Acum",
   "view_all_released_movies": "Vezi toate filmele disponibile acum",
   "view_all_unreleased_movies": "Vezi toate filmele care vin curând",
-  "switch_to_og": "Comută la Trakt.tv"
+  "switch_to_og": "Comută la Trakt.tv",
+  "preview": "Previzualizare",
+  "preview_description": "Această funcție este încă în curs de finisare, cetățene. Ne străduim din răsputeri să o îmbunătățim, făcându-i interfața de utilizator să funcționeze fluid, fără a provoca groază existențială."
 }

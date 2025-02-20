@@ -307,5 +307,7 @@
   "released_movies_title": "Disponibles maintenant",
   "view_all_released_movies": "Voir tous les films sortis",
   "view_all_unreleased_movies": "Voir tous les films à venir",
-  "switch_to_og": "Passer à Trakt.tv"
+  "switch_to_og": "Passer à Trakt.tv",
+  "preview": "Aperçu",
+  "preview_description": "Cette fonction est en plein rafraîchissement, citoyen. Nous peaufinons l'interface utilisateur, pour qu'elle fonctionne comme un chœur d'anges (ou au moins, sans causer de terreur existentielle)."
 }

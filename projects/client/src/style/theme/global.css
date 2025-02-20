@@ -58,6 +58,9 @@
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--red-500);
 
+  --color-text-preview-tag: var(--shade-10);
+  --color-background-preview-tag: var(--orange-600);
+
   /**
    * Buttons
    */

@@ -307,5 +307,7 @@
   "released_movies_title": "Disponibile ora",
   "view_all_released_movies": "Vezi toate filmele disponibile acum",
   "view_all_unreleased_movies": "Vezi toate filmele ce vin curând",
-  "switch_to_og": "Passa a Trakt.tv"
+  "switch_to_og": "Passa a Trakt.tv",
+  "preview": "Previzualizare",
+  "preview_description": "Această caracteristică mai primește o nouă „înveliș”. Ne străduim pentru o experiență îmbunătățită, ca un cor de îngeri (sau cel puțin, funcționalitate fără teroare existențială)."
 }

@@ -20,6 +20,9 @@
     var(--shade-30) 90%,
     transparent 10%
   );
+
+  --color-tooltip-background: var(--shade-10);
+  --color-tooltip-text: var(--shade-800);
 }
 
 [data-theme='dark'] {
@@ -37,4 +40,7 @@
   --color-link-active: var(--purple-400);
 
   --color-background-mobile-navbar: var(--color-background-navbar);
+
+  --color-tooltip-background: var(--shade-800);
+  --color-tooltip-text: var(--shade-10);
 }
