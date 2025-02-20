@@ -1,4 +1,5 @@
 import { WorkerMessage } from '$lib/utils/worker/WorkerMessage.ts';
+import { WorkerMessage } from '$worker/WorkerMessage.ts';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';

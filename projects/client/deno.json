@@ -2,6 +2,8 @@
   "imports": {
     "$lib": "./src/lib",
     "$lib/": "./src/lib/",
+    "$worker": "./src/worker",
+    "$worker/": "./src/worker/",
     "$mocks": "./src/mocks",
     "$mocks/": "./src/mocks/",
     "$style": "./src/style",

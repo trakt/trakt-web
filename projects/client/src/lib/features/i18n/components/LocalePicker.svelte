@@ -3,8 +3,8 @@
     type AvailableLocale,
     availableLocales,
   } from "$lib/features/i18n/index.ts";
-  import { WorkerMessage } from "$lib/utils/worker/WorkerMessage";
-  import { workerRequest } from "$lib/utils/worker/workerRequest";
+  import { WorkerMessage } from "$worker/WorkerMessage";
+  import { workerRequest } from "$worker/workerRequest";
   import { LocaleEndpoint } from "../LocaleEndpoint";
   import { useLocale } from "./useLocale";
 

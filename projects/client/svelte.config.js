@@ -38,6 +38,7 @@ const config = {
     alias: {
       '@trakt/api': './src/lib/api.ts',
       '$mocks': './src/mocks',
+      '$worker': './src/worker',
       '$test': './test',
       '$style': 'src/style',
       '$e2e': './e2e',

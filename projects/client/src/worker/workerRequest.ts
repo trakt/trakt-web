@@ -1,4 +1,4 @@
-import { WorkerMessage } from '$lib/utils/worker/WorkerMessage.ts';
+import { WorkerMessage } from './WorkerMessage.ts';
 
 export async function workerRequest(type: WorkerMessage) {
   if (!navigator.serviceWorker?.controller) {

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { WorkerMessage } from "$lib/utils/worker/WorkerMessage";
-  import { workerRequest } from "$lib/utils/worker/workerRequest";
+  import { WorkerMessage } from "$worker/WorkerMessage";
+  import { workerRequest } from "$worker/workerRequest";
   import type { ThemeResponse } from "../handle";
   import { Theme } from "../models/Theme";
   import { nextTheme } from "../nextTheme";
