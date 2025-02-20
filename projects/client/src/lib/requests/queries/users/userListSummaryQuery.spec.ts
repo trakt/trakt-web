@@ -12,7 +12,7 @@ describe('userListSummaryQuery', () => {
       factory: () =>
         createQuery(
           userListSummaryQuery({
-            userId: UserProfileHarryMappedMock.slug,
+            userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
           }),
         ),

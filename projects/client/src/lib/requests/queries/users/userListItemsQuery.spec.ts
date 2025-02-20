@@ -15,7 +15,7 @@ describe('userListItemsQuery', () => {
       factory: () =>
         createQuery(
           userListItemsQuery({
-            userId: UserProfileHarryMappedMock.slug,
+            userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
           }),
         ),
@@ -33,7 +33,7 @@ describe('userListItemsQuery', () => {
       factory: () =>
         createQuery(
           userListItemsQuery({
-            userId: UserProfileHarryMappedMock.slug,
+            userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
             type: 'show',
           }),
@@ -49,7 +49,7 @@ describe('userListItemsQuery', () => {
       factory: () =>
         createQuery(
           userListItemsQuery({
-            userId: UserProfileHarryMappedMock.slug,
+            userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(HereticListsMappedMock.at(0)).slug,
             type: 'movie',
           }),
