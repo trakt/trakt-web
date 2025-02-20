@@ -5,7 +5,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { getListUrl } from "./getListUrl";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 </script>
@@ -14,7 +14,7 @@
   <UserAvatar user={list.user} />
 
   <div class="list-name-and-creator">
-    <Link href={UrlBuilder.users(list.user.slug).lists(list.slug, type)}>
+    <Link href={getListUrl(list, type)}>
       <p class="secondary bold ellipsis">
         {list.name}
       </p>

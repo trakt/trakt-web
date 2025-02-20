@@ -76,6 +76,10 @@ export const UrlBuilder = {
         ? `/users/${id}/lists/${slug}?type=${type}`
         : `/users/${id}/lists/${slug}`,
   }),
+  lists: {
+    official: (id: number, type?: MediaType) =>
+      `/lists/official/${id}?type=${type}`,
+  },
   app: {
     android: () => 'https://trakt.tv/a/trakt-android',
     ios: () => 'https://trakt.tv/a/trakt-ios',

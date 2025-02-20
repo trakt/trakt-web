@@ -4,20 +4,16 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import { getListUrl } from "./getListUrl.ts";
   import { useListItems } from "./useListItems.ts";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 
-  const { items } = useListItems({
-    userId: list.user.slug,
-    listId: list.slug,
-    type,
-  });
+  const { items } = useListItems({ list, type });
 </script>
 
 {#if $items}
-  <Link href={UrlBuilder.users(list.user.slug).lists(list.slug, type)}>
+  <Link href={getListUrl(list, type)}>
     <div class="trakt-list-posters" style="--poster-count: {$items.length}">
       {#each $items as item, index}
         <div class="poster-wrapper" style="--poster-index: {index}">

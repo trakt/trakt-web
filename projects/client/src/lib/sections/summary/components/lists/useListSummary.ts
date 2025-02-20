@@ -4,8 +4,7 @@ import { movieListsQuery } from '$lib/requests/queries/movies/movieListsQuery.ts
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 import { showListsQuery } from '../../../../requests/queries/shows/showListsQuery.ts';
-
-const MAX_LISTS = 10;
+import { MAX_LISTS } from './_internal/constants.ts';
 
 type ListSummaryProps = {
   slug: string;
@@ -14,8 +13,9 @@ type ListSummaryProps = {
 
 function typeToQuery(
   { slug, type }: ListSummaryProps,
+  listType: 'official' | 'personal' = 'personal',
 ) {
-  const params = { slug, limit: MAX_LISTS };
+  const params = { slug, type: listType, limit: MAX_LISTS };
 
   switch (type) {
     case 'movie':
@@ -26,15 +26,24 @@ function typeToQuery(
 }
 
 export function useListSummary({ slug, type }: ListSummaryProps) {
-  const lists = useQuery(typeToQuery({ slug, type }));
+  const personalLists = useQuery(typeToQuery({ slug, type }));
+  const officialLists = useQuery(typeToQuery({ slug, type }, 'official'));
 
+  const queries = [personalLists, officialLists];
   const isLoading = derived(
-    lists,
-    toLoadingState,
+    queries,
+    ($queries) => $queries.some(toLoadingState),
   );
 
   return {
     isLoading,
-    lists: derived(lists, ($lists) => $lists.data ?? []),
+    personalLists: derived(
+      personalLists,
+      ($personalLists) => $personalLists.data ?? [],
+    ),
+    officialLists: derived(
+      officialLists,
+      ($officialLists) => $officialLists.data ?? [],
+    ),
   };
 }
