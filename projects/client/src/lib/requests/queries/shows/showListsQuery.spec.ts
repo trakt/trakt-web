@@ -1,3 +1,4 @@
+import { OfficialListsMappedMock } from '$mocks/data/lists/mapped/OfficialListsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
@@ -16,5 +17,21 @@ describe('showListsQuery', () => {
     });
 
     expect(result).to.deep.equal(SiloListsMappedMock);
+  });
+
+  it('should query for official lists that contain Silo (2023)', async () => {
+    const result = await runQuery({
+      factory: () =>
+        createQuery(
+          showListsQuery({
+            slug: ShowSiloMappedMock.slug,
+            limit: 10,
+            type: 'official',
+          }),
+        ),
+      mapper: (response) => response?.data,
+    });
+
+    expect(result).to.deep.equal(OfficialListsMappedMock);
   });
 });
