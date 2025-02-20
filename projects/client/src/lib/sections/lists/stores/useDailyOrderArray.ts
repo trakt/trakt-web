@@ -68,7 +68,10 @@ export function useDailyOrderArray<T = { id: Identity }>(
       (item) => !todayOrder.includes(getId(item)),
     );
 
-    list.set([...orderedItems, ...newItems]);
+    const finalList = [...orderedItems, ...newItems];
+
+    saveCachedOrder(key, finalList.map(getId));
+    list.set(finalList);
   };
 
   return {

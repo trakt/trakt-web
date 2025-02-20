@@ -10,6 +10,7 @@ vi.mock('$app/environment', () => ({
 const item1 = { id: 1, title: 'Item 1' };
 const item2 = { id: 2, title: 'Item 2' };
 const item3 = { id: 3, title: 'Item 3' };
+const item4 = { id: 4, title: 'Item 4' };
 
 describe('useDailyOrderArray', () => {
   let TODAY: string;
@@ -28,6 +29,10 @@ describe('useDailyOrderArray', () => {
 
     TODAY = today.getTime().toString();
     YESTERDAY = yesterday.getTime().toString();
+
+    // Clear localStorage before each test
+    localStorage.clear();
+    vi.clearAllMocks();
   });
 
   it('should return an empty array initially', () => {
@@ -55,7 +60,6 @@ describe('useDailyOrderArray', () => {
   });
 
   it('should maintain order from earlier in the day', () => {
-    // Simulate previous save
     localStorage.setItem(
       'test',
       JSON.stringify({ [TODAY]: [2, 1] }),
@@ -136,5 +140,66 @@ describe('useDailyOrderArray', () => {
 
     expect(get(list)).toEqual([]);
     expect(localStorage.setItem).not.toHaveBeenCalled();
+  });
+
+  it('should maintain order after multiple updates in same day', () => {
+    const { list, set } = useDailyOrderArray({
+      key: 'test',
+      getId: (item) => item.id,
+    });
+
+    set([item1, item2, item3]);
+    set([item2, item3, item1]); // Reorder
+    set([item3, item1, item2]); // Reorder again
+
+    expect(get(list)).toEqual([item1, item2, item3]);
+    expect(localStorage.setItem).toHaveBeenLastCalledWith(
+      'test',
+      JSON.stringify({ [TODAY]: [1, 2, 3] }),
+    );
+  });
+
+  it('should persist order of newly added items during the day', () => {
+    const item5 = { id: 5, title: 'Item 5' };
+    const item10 = { id: 10, title: 'Item 10' };
+
+    const { list, set } = useDailyOrderArray({
+      key: 'test',
+      getId: (item) => item.id,
+    });
+
+    set([item1, item2, item3]);
+    set([item1, item2, item3, item10, item5]);
+    set([item1, item2, item3, item5, item10]);
+
+    expect(get(list)).toEqual([item1, item2, item3, item10, item5]);
+    expect(localStorage.setItem).toHaveBeenLastCalledWith(
+      'test',
+      JSON.stringify({ [TODAY]: [1, 2, 3, 10, 5] }),
+    );
+  });
+
+  it('should handle multiple days of history', () => {
+    const twoDaysAgo = new Date(TODAY);
+    twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+    const TWO_DAYS_AGO = twoDaysAgo.getTime().toString();
+
+    localStorage.setItem(
+      'test',
+      JSON.stringify({
+        [TWO_DAYS_AGO]: [3, 2, 1],
+        [YESTERDAY]: [2, 1, 3],
+        [TODAY]: [1, 3, 2],
+      }),
+    );
+
+    const { list, set } = useDailyOrderArray({
+      key: 'test',
+      getId: (item) => item.id,
+    });
+
+    set([item1, item2, item3, item4]);
+
+    expect(get(list)).toEqual([item1, item3, item2, item4]);
   });
 });
