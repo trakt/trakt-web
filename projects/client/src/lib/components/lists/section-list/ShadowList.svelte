@@ -23,6 +23,7 @@
     scrollContainer = writable(),
     item,
     actions,
+    badge,
     empty,
   }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
@@ -54,7 +55,7 @@
   class="shadow-list-container"
 >
   {#if $isVisible}
-    <ListHeader {title} {actions} inset="title" />
+    <ListHeader {title} {actions} {badge} inset="title" />
     <div
       class="shadow-list"
       class:shadow-list-left-shadow={isLeftShadowVisible}

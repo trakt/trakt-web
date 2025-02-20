@@ -6,7 +6,13 @@
     title,
     inset,
     actions,
-  }: { title: string; actions?: Snippet; inset: "all" | "title" } = $props();
+    badge,
+  }: {
+    title: string;
+    actions?: Snippet;
+    badge?: Snippet;
+    inset: "all" | "title";
+  } = $props();
 </script>
 
 <div
@@ -14,7 +20,12 @@
   class:trakt-list-inset-title={inset === "title"}
   class:trakt-inset-all={inset === "all"}
 >
-  <ListTitle {title} />
+  <div class="trakt-list-title">
+    <ListTitle {title} />
+    {#if badge}
+      {@render badge()}
+    {/if}
+  </div>
   {#if actions != null}
     <div class="trakt-list-actions">
       {@render actions()}
@@ -55,6 +66,17 @@
       display: flex;
       gap: var(--gap-xs);
       align-items: center;
+    }
+
+    .trakt-list-title {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-s);
+
+      :global(.trakt-preview-badge) {
+        // To visually align the badge with the title
+        margin-top: var(--ni-8);
+      }
     }
   }
 </style>

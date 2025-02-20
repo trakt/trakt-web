@@ -9,7 +9,8 @@
     empty?: Snippet;
   };
 
-  const { items, title, item, actions, empty }: PageListProps<T> = $props();
+  const { items, title, item, actions, empty, badge }: PageListProps<T> =
+    $props();
 
   const isMounted = writable(false);
 
@@ -19,7 +20,7 @@
 </script>
 
 <section class="trakt-grid-list-container">
-  <ListHeader {title} {actions} inset="all" />
+  <ListHeader {title} {actions} {badge} inset="all" />
 
   {#if items.length > 0}
     <div class="trakt-list-item-container trakt-list-items">

@@ -21,6 +21,7 @@
     empty,
     dynamicActions,
     actions: externalActions,
+    badge,
   }: SectionListProps<T> = $props();
 
   const scrollContainer = writable<HTMLDivElement>();
@@ -57,7 +58,16 @@
   const isRightScrollDisabled = $derived($scrollX.right <= 0);
 </script>
 
-<ShadowList {id} {title} {items} {item} {empty} {scrollX} {scrollContainer}>
+<ShadowList
+  {id}
+  {title}
+  {items}
+  {item}
+  {empty}
+  {badge}
+  {scrollX}
+  {scrollContainer}
+>
   {#snippet actions()}
     {#if dynamicActions != null}
       {@render dynamicActions()}
