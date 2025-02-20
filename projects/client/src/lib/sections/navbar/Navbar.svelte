@@ -130,7 +130,7 @@
     align-items: center;
     gap: var(--gap-l);
 
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius-m);
     transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
     transition-property: background-color, box-shadow;
 
