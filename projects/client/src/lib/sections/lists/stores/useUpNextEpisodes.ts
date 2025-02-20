@@ -18,7 +18,13 @@ export const useUpNextEpisodes = (type: 'standard' | 'nitro') => {
   );
 
   return {
-    list: derived(query, ($query) => $query.data?.entries ?? []),
+    list: derived(
+      query,
+      ($query) =>
+        ($query.data?.entries ?? []).filter((entry) =>
+          entry.airDate.getTime() < Date.now()
+        ),
+    ),
     isLoading: derived(
       query,
       toLoadingState,

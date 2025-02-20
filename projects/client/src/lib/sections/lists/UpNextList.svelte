@@ -12,7 +12,7 @@
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   const type = $derived(
-    page.url.searchParams.get("up-next") === "nitro" ? "nitro" : "standard",
+    page.url.searchParams.get("up-next") === "nitro" ? "nitro" : "nitro",
   );
 
   const { list: unstable, isLoading } = $derived(useUpNextEpisodes(type));
