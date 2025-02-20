@@ -21,9 +21,9 @@ type RecommendationListStoreProps = {
 };
 
 function typeToQuery(
-  { type, limit }: RecommendationListStoreProps,
+  { type }: RecommendationListStoreProps,
 ) {
-  const props = { limit };
+  const props = { type, limit: RECOMMENDED_UPPER_LIMIT };
   switch (type) {
     case 'movie':
       return recommendedMoviesQuery(props) as CreateQueryOptions<
@@ -47,7 +47,10 @@ export function useRecommendedList(
   );
 
   return {
+    list: derived(
     list,
+      ($list) => $list.slice(0, props.limit ?? DEFAULT_PAGE_SIZE),
+    ),
     isLoading,
   };
 }
