@@ -7,6 +7,7 @@ export const MediaListSummarySchema = z.object({
   name: z.string(),
   description: z.string(),
   user: UserProfileSchema,
+  count: z.number(),
 });
 
 export type MediaListSummary = z.infer<typeof MediaListSummarySchema>;

@@ -8,5 +8,6 @@ export const PersonalListsMappedMock: MediaListSummary[] = [
     'name': 'My personal list',
     'slug': 'my-personal-list',
     'user': UserProfileHarryMappedMock,
+    'count': 1,
   },
 ];

@@ -8,5 +8,6 @@ export const CollaborationListsMappedMock: MediaListSummary[] = [
     'name': 'Our collaborative list',
     'slug': 'our-list',
     'user': UserProfileHarryMappedMock,
+    'count': 1,
   },
 ];

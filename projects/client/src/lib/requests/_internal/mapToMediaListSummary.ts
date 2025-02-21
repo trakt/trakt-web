@@ -11,5 +11,6 @@ export function mapToMediaListSummary(
     name: listResponse.name,
     description: listResponse.description,
     user: mapToUserProfile(listResponse.user),
+    count: listResponse.item_count,
   };
 }

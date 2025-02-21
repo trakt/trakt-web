@@ -9,7 +9,7 @@
   import ViewAllButton from "../ViewAllButton.svelte";
   import { getListUrl } from "./_internal/getListUrl";
 
-  const { list, type }: { list: MediaListSummary; type: MediaType } = $props();
+  const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 
   const { items, isLoading } = useListItems({ list, type });
   const isEmptyList = $derived(!$isLoading && $items.length === 0);
@@ -30,6 +30,6 @@
     />
   {/snippet}
   {#snippet item(media)}
-    <MediaCard {type} media={media.entry} />
+    <MediaCard type={media.entry.type} media={media.entry} />
   {/snippet}
 </SectionList>
