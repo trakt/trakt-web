@@ -27,7 +27,7 @@
   />
   <RenderFor audience="authenticated">
     <RecommendedList
-      title={m.your_recommendations()}
+      title={m.recommendations()}
       drilldownLabel={m.view_all_recommended_shows()}
       {type}
     />
