@@ -311,5 +311,8 @@
   "preview": "Voorbeeld",
   "preview_description": "Deze functie krijgt nog een frisse laag verf, burger. We werken keihard aan de gebruikerservaring, zodat het werkt als een koor van engelen (of in ieder geval soepel zonder existentiële angst op te roepen).",
   "airs": "Zendt",
-  "aired": "Uitgezonden"
+  "aired": "Uitgezonden",
+  "drop_show_warning": "Weet je zeker dat je {title} wilt verwijderen? Dit verwijdert het van je kijklijst.",
+  "drop_show_label": "{title} markeren als verwijderd",
+  "drop_show": "Verwijderen"
 }

@@ -311,5 +311,8 @@
   "preview": "Aperçu",
   "preview_description": "Cette fonction est en plein rafraîchissement, citoyen. Nous peaufinons l'interface utilisateur, pour qu'elle fonctionne comme un chœur d'anges (ou au moins, sans causer de terreur existentielle).",
   "airs": "Diffusé",
-  "aired": "Diffusé"
+  "aired": "Diffusé",
+  "drop_show_warning": "Êtes-vous certain de vouloir abandonner le {title} ? Cela le supprimera de votre liste à venir.",
+  "drop_show_label": "Marquer {title} comme abandonné",
+  "drop_show": "Abandonner"
 }

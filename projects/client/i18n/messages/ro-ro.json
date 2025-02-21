@@ -311,5 +311,8 @@
   "preview": "Previzualizare",
   "preview_description": "Această funcție este încă în curs de finisare, cetățene. Ne străduim din răsputeri să o îmbunătățim, făcându-i interfața de utilizator să funcționeze fluid, fără a provoca groază existențială.",
   "airs": "Se difuzează",
-  "aired": "S-a difuzat"
+  "aired": "S-a difuzat",
+  "drop_show_warning": "Ești sigur că vrei să elimini {title} din lista ta? Aceasta va fi eliminată din următoarele titluri.",
+  "drop_show_label": "Marchează {title} ca eliminat",
+  "drop_show": "Elimină"
 }

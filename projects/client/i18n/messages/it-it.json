@@ -311,5 +311,8 @@
   "preview": "Previzualizare",
   "preview_description": "Această caracteristică mai primește o nouă „înveliș”. Ne străduim pentru o experiență îmbunătățită, ca un cor de îngeri (sau cel puțin, funcționalitate fără teroare existențială).",
   "airs": "Apare",
-  "aired": "Apărut"
+  "aired": "Apărut",
+  "drop_show_warning": "Sei sicuro di voler abbandonare il {titolo} ? Questo lo rimuoverà dalla tua lista prossimi.",
+  "drop_show_label": "Segna {titolo} come abbandonato",
+  "drop_show": "Abbandona"
 }

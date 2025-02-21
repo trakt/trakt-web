@@ -311,5 +311,8 @@
   "preview": "Vista previa",
   "preview_description": "Esta función todavía está recibiendo una capa fresca de pintura, ciudadano. Estamos trabajando duro en la experiencia de usuario, haciéndola funcionar sin problemas, sin inducir miedo existencial.",
   "airs": "Emisas",
-  "aired": "Emitidas"
+  "aired": "Emitidas",
+  "drop_show_warning": "¿Estás seguro de que quieres eliminar {title}? Esto lo eliminará de tu lista de próximos episodios.",
+  "drop_show_label": "Marcar {title} como eliminado",
+  "drop_show": "Eliminar"
 }

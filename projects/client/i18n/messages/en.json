@@ -311,5 +311,8 @@
   "preview": "Preview",
   "preview_description": "This feature's still getting a fresh coat of paint, citizen. We're hammering away at the UX, making it sing like a choir of angels (or at least, function smoothly without inducing existential dread).",
   "airs": "Airs",
-  "aired": "Aired"
+  "aired": "Aired",
+  "drop_show_warning": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
+  "drop_show_label": "Flag show {title} as dropped",
+  "drop_show": "Drop show"
 }

@@ -311,5 +311,8 @@
   "preview": "Vista previa",
   "preview_description": "Esta función todavía está en proceso de actualización, ciudadano. Estamos trabajando duro en la interfaz de usuario para que funcione sin problemas como un coro de ángeles (o al menos, sin provocar angustia existencial).",
   "airs": "Sale",
-  "aired": "Estrenó"
+  "aired": "Estrenó",
+  "drop_show_warning": "¿Estás seguro de que quieres eliminar la serie {title}? Esto lo eliminará de tu lista de próximos episodios.",
+  "drop_show_label": "Marcar la serie {title} como eliminada",
+  "drop_show": "Eliminar serie"
 }

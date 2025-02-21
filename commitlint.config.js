@@ -41,6 +41,7 @@ module.exports = {
         'cover',
         'contrib',
         'ds',
+        'drop',
         'dropdown',
         'e2e',
         'episode',

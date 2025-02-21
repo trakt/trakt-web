@@ -311,5 +311,8 @@
   "preview": "Vorschau",
   "preview_description": "Diese Funktion wird noch frisch gestrichen, Bürger. Wir hämmern an der Benutzerfreundlichkeit, damit sie wie ein Chor von Engeln singt (oder zumindest reibungslos funktioniert, ohne existenzielle Ängste hervorzurufen).",
   "airs": "Läuft",
-  "aired": "Ausgestrahlt"
+  "aired": "Ausgestrahlt",
+  "drop_show_warning": "Sind Sie sicher, dass Sie die {title} entfernen möchten? Dies wird den Titel von Ihrer \"up next\" Liste entfernen.",
+  "drop_show_label": "{title} als abgebrochen markieren",
+  "drop_show": "Abbrechen"
 }

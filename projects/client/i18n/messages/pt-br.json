@@ -311,5 +311,8 @@
   "preview": "Prévia",
   "preview_description": "Este recurso ainda está em fase de aprimoramento, cidadão. Estamos trabalhando duro na experiência do usuário, para que funcione sem causar angústia existencial.",
   "airs": "Estreia",
-  "aired": "Estreou"
+  "aired": "Estreou",
+  "drop_show_warning": "Tem certeza que deseja abandonar {title}? Isso removerá do seu próximo item.",
+  "drop_show_label": "Marcar {title} como abandonado",
+  "drop_show": "Abandonar"
 }

@@ -311,5 +311,8 @@
   "preview": "Aperçu",
   "preview_description": "Cette fonctionnalité est en pleine refonte, futuriste.  Nous travaillons dur sur l'expérience utilisateur pour qu'elle fonctionne sans vous causer trop de problèmes, comme une série télévisée sans spoiler.",
   "airs": "Diffusions",
-  "aired": "Diffusé"
+  "aired": "Diffusé",
+  "drop_show_warning": "Êtes-vous sûr de vouloir supprimer {title} ? Cela le retirera de votre liste prochainement visionné.",
+  "drop_show_label": "Marquer {title} comme abandonné",
+  "drop_show": "Abandonner"
 }

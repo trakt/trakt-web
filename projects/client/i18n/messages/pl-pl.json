@@ -311,5 +311,8 @@
   "preview": "Podgląd",
   "preview_description": "Ta funkcja wciąż dostaje odświeżoną warstwę farby, obywatelu. Pracujemy nad interfejsem użytkownika, aby działał jak chórami aniołów (albo przynajmniej sprawnie bez wywoływania egzystencjalnego strachu).",
   "airs": "Emituje",
-  "aired": "Wyemitowany"
+  "aired": "Wyemitowany",
+  "drop_show_warning": "Czy na pewno chcesz usunąć {title} z kolejki? Zostanie usunięte z twojej listy odtwarzania.",
+  "drop_show_label": "Zaznacz {title} jako usunięty",
+  "drop_show": "Usuń"
 }

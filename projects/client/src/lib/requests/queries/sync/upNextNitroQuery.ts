@@ -6,6 +6,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { mapUpNextResponse } from '$lib/requests/queries/sync/upNextQuery.ts';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
@@ -21,7 +22,7 @@ type UpNextParams = {
 } & ApiParams;
 
 const upNextNitroRequest = (params: UpNextParams = {}) => {
-  const { fetch, page = 1, limit } = params;
+  const { fetch, page = 1, limit = DEFAULT_PAGE_SIZE } = params;
 
   return api({ fetch })
     .sync
@@ -42,11 +43,12 @@ const upNextNitroRequest = (params: UpNextParams = {}) => {
     });
 };
 
-export const upNextQueryNitro = defineQuery({
+export const upNextNitroQuery = defineQuery({
   key: 'upNext',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),
+    InvalidateAction.Drop,
   ],
   dependencies: (
     params: UpNextParams,
