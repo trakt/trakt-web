@@ -134,30 +134,39 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-navbar,
-  .trakt-navbar-spacer {
-    box-sizing: border-box;
-    margin: var(--ni-12) auto;
+  @mixin navbar-spacing($side-margin) {
+    margin: var(--ni-12) $side-margin;
     margin-top: calc(var(--ni-12) + env(safe-area-inset-top));
     padding: var(--ni-12) var(--navbar-side-padding);
+  }
+
+  .trakt-navbar-spacer {
+    box-sizing: border-box;
     height: var(--navbar-height);
+
+    @include navbar-spacing(auto);
   }
 
   .trakt-navbar {
     z-index: var(--layer-overlay);
     position: fixed;
     top: 0;
-    left: var(--layout-distance-side);
+    left: 0;
 
+    box-sizing: border-box;
     display: flex;
-    width: calc(100dvw - 2 * var(--layout-distance-side));
+    width: 100dvw;
+    height: var(--navbar-height);
+
+    margin-top: env(safe-area-inset-top);
+    padding: var(--ni-12) var(--layout-distance-side);
 
     align-items: center;
     gap: var(--gap-l);
 
     border-radius: var(--border-radius-m);
     transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: background-color, box-shadow;
+    transition-property: padding, margin, width, background-color, box-shadow;
 
     @include for-mobile {
       gap: var(--gap-m);
@@ -197,6 +206,12 @@
     backdrop-filter: blur(8px);
 
     color: var(--color-foreground-navbar);
+
+    &.trakt-navbar {
+      width: calc(100dvw - 2 * var(--layout-distance-side));
+
+      @include navbar-spacing(var(--layout-distance-side));
+    }
   }
 
   .trakt-logo {
