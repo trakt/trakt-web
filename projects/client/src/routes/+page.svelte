@@ -9,7 +9,6 @@
   import SocialActivityList from "$lib/sections/lists/social/SocialActivityList.svelte";
   import ReleasedList from "$lib/sections/lists/watchlist/ReleasedList.svelte";
   import UnreleasedList from "$lib/sections/lists/watchlist/UnreleasedList.svelte";
-  import ProfileBanner from "$lib/sections/profile-banner/ProfileBanner.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
 
@@ -21,7 +20,6 @@
   <TraktPageCoverSetter />
 
   <RenderFor audience="authenticated">
-    <ProfileBanner />
     <UpNextList />
     <ReleasedList />
     <UpcomingList />
