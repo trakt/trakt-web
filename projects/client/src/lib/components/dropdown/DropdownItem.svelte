@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
   import type { Snippet } from "svelte";
   import Link from "../link/Link.svelte";
@@ -38,7 +37,6 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <li
   use:triggerWithKeyboard
-  use:mobileAppleDeviceTriggerHack
   tabindex={tabIndex}
   data-color={color}
   data-style={style}

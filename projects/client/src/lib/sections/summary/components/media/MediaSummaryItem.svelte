@@ -19,24 +19,18 @@
     media,
     tags,
     badges,
-    retrigger = true,
     ...rest
   }: {
     tags?: Snippet<[MediaInput["media"]]>;
     action?: Snippet;
     badges?: Snippet;
-    retrigger?: boolean;
   } & MediaItemVariant<MediaInput["media"]> = $props();
 
   const variant = $derived(rest.variant ?? "poster");
   const MAX_GENRE_COUNT = $derived(variant === "poster" ? 2 : 1);
 </script>
 
-<Link
-  href={UrlBuilder.media(media.type, media.slug)}
-  {retrigger}
-  color="inherit"
->
+<Link href={UrlBuilder.media(media.type, media.slug)} color="inherit">
   <div class="trakt-summary-item" data-variant={variant}>
     <div class="trakt-summary-item-image">
       {#if badges}

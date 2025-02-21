@@ -65,6 +65,7 @@ module.exports = {
         'rating',
         'readme',
         'recommended',
+        'safari',
         'search',
         'show',
         'social',

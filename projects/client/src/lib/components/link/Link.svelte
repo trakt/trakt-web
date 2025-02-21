@@ -1,6 +1,5 @@
 <script lang="ts">
   import { useActiveLink } from "$lib/stores/useActiveLink";
-  import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
 
   const {
@@ -9,7 +8,6 @@
     target,
     color = "default",
     focusable = true,
-    retrigger = true,
     noscroll,
     ...props
   }: ChildrenProps &
@@ -17,7 +15,6 @@
     HTMLElementProps & {
       color?: "default" | "classic" | "inherit";
       focusable?: boolean;
-      retrigger?: boolean;
     } = $props();
 
   const { isActive } = $derived(useActiveLink(href));
@@ -27,7 +24,6 @@
   <a
     {href}
     {target}
-    use:mobileAppleDeviceTriggerHack={retrigger}
     use:triggerWithKeyboard
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}

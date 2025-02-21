@@ -1,3 +1,4 @@
+import { beforeNavigate } from '$app/navigation';
 import { NOOP_FN } from '../constants.ts';
 import { getMobileAppleDeviceType } from '../devices/getMobileAppleDeviceType.ts';
 
@@ -14,7 +15,7 @@ export function isMobileAppleDevice() {
  * providing a consistent user experience across different devices.
  */
 export function mobileAppleDeviceTriggerHack(
-  node: HTMLElement,
+  node: HTMLAnchorElement,
   enabled = true,
 ) {
   // TODO(@seferturan): investigate why we need to disable for search items
@@ -25,7 +26,7 @@ export function mobileAppleDeviceTriggerHack(
     };
   }
 
-  const handleTouchEnd = (event: PointerEvent) => {
+  const handleTouchEnd = async (event: PointerEvent) => {
     const isMouse = event.pointerType === 'mouse';
 
     if (!isMobileAppleDevice() || isMouse) {
@@ -37,9 +38,20 @@ export function mobileAppleDeviceTriggerHack(
       return;
     }
 
-    event.preventDefault();
-    event.stopPropagation();
-    event.target.click();
+    const navigationCheck = () =>
+      new Promise<boolean>((resolve) => {
+        beforeNavigate(() => resolve(true));
+        // If no navigation occurs within a frame, resolve with false
+        requestAnimationFrame(() => resolve(false));
+      });
+
+    const didNavigate = await navigationCheck();
+
+    if (!didNavigate) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.target.click();
+    }
   };
 
   node.addEventListener('pointerup', handleTouchEnd);
