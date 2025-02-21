@@ -5,16 +5,15 @@
 
   const eventName = "page_view";
 
-  const analytics = useAnalytics();
+  const { setUser, record } = useAnalytics();
 
-  const record = async (userId: string | Nil) => {
-    analytics.setUserId(userId);
-
-    analytics.record(eventName, {
+  const recordPageView = async (userId: string | Nil) => {
+    setUser(userId);
+    record(eventName, {
       page_location: page.url.href,
       page_path: page.url.pathname,
     });
   };
 </script>
 
-<AnalyticsLoader onload={record} />
+<AnalyticsLoader onload={recordPageView} />

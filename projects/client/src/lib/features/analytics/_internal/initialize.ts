@@ -25,7 +25,7 @@ const firebaseConfig = (() => {
 
 const NOOP_ENGINE: AnalyticsEngine = {
   record: NOOP_FN,
-  setUserId: NOOP_FN,
+  setUser: NOOP_FN,
 };
 
 // Initialize Firebase
@@ -59,6 +59,6 @@ export const initialize = (): AnalyticsEngine => {
     record: (key: string, data: Record<string, string | number | Date>) => {
       logEvent(driver, key, data);
     },
-    setUserId: (userId: string | Nil) => setUserId(driver, userId ?? null),
+    setUser: (userId: string | Nil) => setUserId(driver, userId ?? null),
   };
 };
