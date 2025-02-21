@@ -33,5 +33,5 @@
   title={m.recently_watched()}
 />
 
-<PersonalLists type="personal" />
-<PersonalLists type="collaboration" />
+<PersonalLists type="personal" variant="preview" />
+<PersonalLists type="collaboration" variant="summary" />
