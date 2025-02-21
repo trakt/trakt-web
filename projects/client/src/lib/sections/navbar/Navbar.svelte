@@ -5,6 +5,8 @@
   import Logo from "$lib/components/logo/Logo.svelte";
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
@@ -26,6 +28,8 @@
     handleScroll();
     return GlobalEventBus.getInstance().register("scroll", handleScroll);
   });
+
+  const { track } = useTrack(AnalyticsEvent.LeaveLite, {});
 </script>
 
 {#snippet traktSwitch()}
@@ -33,7 +37,10 @@
     label={m.switch_to_og()}
     checked={true}
     innerText="Lite"
-    onclick={navigateToTraktOg}
+    onclick={() => {
+      track();
+      navigateToTraktOg;
+    }}
   />
 {/snippet}
 

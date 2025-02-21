@@ -1,11 +1,12 @@
 import type { AnalyticsData } from '$lib/features/analytics/AnalyticsData.ts';
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useAnalytics } from '$lib/features/analytics/useAnalytics.ts';
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { get } from 'svelte/store';
 
 /** TODO: define TrackMap to correlate data contracts with action keys */
-export function useAnalyticsAction(key: string, data: AnalyticsData) {
+export function useTrack(key: AnalyticsEvent, data: AnalyticsData) {
   const { isAuthorized } = useAuth();
   const { current } = useUser();
   const { record, setUser } = useAnalytics();
@@ -16,18 +17,5 @@ export function useAnalyticsAction(key: string, data: AnalyticsData) {
     record(key, data);
   }
 
-  function trackOn<K extends keyof HTMLElementEventMap>(
-    node: HTMLElement,
-    action: K,
-  ) {
-    node.addEventListener(action, track);
-
-    return {
-      destroy() {
-        node.removeEventListener(action, track);
-      },
-    };
-  }
-
-  return { trackOn };
+  return { track };
 }
