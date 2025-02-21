@@ -6,19 +6,20 @@ import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQue
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
-const PREVIEW_LIMIT = 8;
+const PREVIEW_LIMIT = 25;
 
 type UseListItemsProps = {
   list: MediaListSummary;
+  limit?: number;
   type?: MediaType;
 };
 
 function listToQuery(
-  { list, type }: UseListItemsProps,
+  { list, type, limit }: UseListItemsProps,
 ) {
   const commonParams = {
     type,
-    limit: PREVIEW_LIMIT,
+    limit: limit ?? PREVIEW_LIMIT,
   };
 
   if (list.user.slug) {
