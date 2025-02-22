@@ -16,10 +16,12 @@
   }: { slug: string; type: MediaType; title: string } = $props();
 
   // Due to slow performance, we fetch the lists here instead of useMovie/useShow
-  const { isLoading, personalLists, officialLists } = useListSummary({
-    slug,
-    type,
-  });
+  const { isLoading, personalLists, officialLists } = $derived(
+    useListSummary({
+      slug,
+      type,
+    }),
+  );
 
   const lists = $derived(
     [...$officialLists, ...$personalLists].slice(0, MAX_LISTS),

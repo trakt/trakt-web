@@ -11,7 +11,7 @@
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 
-  const { items, isLoading } = useListItems({ list, type });
+  const { items, isLoading } = $derived(useListItems({ list, type }));
   const isEmptyList = $derived(!$isLoading && $items.length === 0);
 </script>
 

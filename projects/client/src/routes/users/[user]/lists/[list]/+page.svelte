@@ -7,10 +7,12 @@
   import { mapToMediaType } from "./_internal/mapToMediaType";
   import { userListSummary } from "./userListSummary.ts";
 
-  const { list } = userListSummary({
-    userId: page.params.user,
-    listId: page.params.list,
-  });
+  const { list } = $derived(
+    userListSummary({
+      userId: page.params.user,
+      listId: page.params.list,
+    }),
+  );
 
   const type = $derived(mapToMediaType(page.url.searchParams));
   const listName = $derived($list?.name ?? "");

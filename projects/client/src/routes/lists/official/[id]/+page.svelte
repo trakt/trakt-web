@@ -9,9 +9,11 @@
 
   const type = $derived(mapToMediaType(page.url.searchParams));
 
-  const { list } = useListSummary({
-    listId: page.params.id,
-  });
+  const { list } = $derived(
+    useListSummary({
+      listId: page.params.id,
+    }),
+  );
 
   const listName = $derived($list?.name ?? "");
 </script>
