@@ -82,6 +82,11 @@
 
   :global(.trakt-navbar-scroll) {
     .trakt-search {
+      --mobile-search-focus-width: calc(
+        100dvw - var(--layout-distance-side) * 2 - var(--navbar-side-padding) *
+          2
+      );
+
       .trakt-search-input {
         background: color-mix(in srgb, var(--shade-940) 90%, transparent 10%);
       }
@@ -90,9 +95,7 @@
 
   .trakt-search {
     --search-input-width: clamp(var(--ni-80), 100%, var(--ni-320));
-    --mobile-search-focus-width: calc(
-      100dvw - var(--layout-distance-side) * 2 - var(--navbar-side-padding) * 2
-    );
+    --mobile-search-focus-width: calc(100dvw - var(--layout-distance-side) * 2);
     --search-icon-size: var(--ni-24);
 
     display: flex;
