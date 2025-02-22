@@ -8,14 +8,16 @@ export function bodyPortal(
   function moveNodeToBody() {
     const targetRect = targetNode.getBoundingClientRect();
 
-    document.body.appendChild(node);
-    node.setAttribute('data-popup-direction', 'right');
+    requestAnimationFrame(() => {
+      document.body.appendChild(node);
+      node.setAttribute('data-popup-direction', 'right');
 
-    node.style.position = 'absolute';
-    node.style.left = `${globalThis.window.scrollX + targetRect.left}px`;
-    node.style.top = `${globalThis.window.scrollY + targetRect.top}px`;
+      node.style.position = 'absolute';
+      node.style.left = `${globalThis.window.scrollX + targetRect.left}px`;
+      node.style.top = `${globalThis.window.scrollY + targetRect.top}px`;
 
-    alignPopupContainer(node, targetRect);
+      alignPopupContainer(node, targetRect);
+    });
   }
 
   onMount(moveNodeToBody);

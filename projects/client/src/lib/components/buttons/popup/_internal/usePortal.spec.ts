@@ -23,6 +23,8 @@ describe('action: usePortal', () => {
     targetNode.dispatchEvent(new Event('click'));
     await renderStore(() => portal(popupNode));
 
+    vi.advanceTimersToNextFrame();
+
     expect(document.body.contains(popupNode)).toBe(true);
     component.destroy();
   });
@@ -56,6 +58,8 @@ describe('action: usePortal', () => {
 
     const component = await renderStore(() => portalTrigger(targetNode));
     await renderStore(() => portal(popupNode));
+
+    vi.advanceTimersToNextFrame();
 
     expect(document.body.contains(popupNode)).toBe(false);
     component.destroy();
@@ -91,6 +95,8 @@ describe('action: usePortal', () => {
     const component = await renderStore(() => portalTrigger(targetNode));
     targetNode.dispatchEvent(new Event('click'));
     await renderStore(() => portal(popupNode));
+
+    vi.advanceTimersToNextFrame();
 
     component.destroy();
     expect(document.body.contains(popupNode)).toBe(false);
