@@ -119,6 +119,12 @@ export const shows = [
     },
   ),
   http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/people`,
+    () => {
+      return HttpResponse.json(ShowSiloPeopleResponseMock);
+    },
+  ),
+  http.get(
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}*`,
     () => {
       return HttpResponse.json(EpisodeSiloResponseMock);
