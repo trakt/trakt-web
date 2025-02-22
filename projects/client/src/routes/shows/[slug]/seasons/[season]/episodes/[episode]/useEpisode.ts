@@ -1,6 +1,7 @@
 import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { episodeIntlQuery } from '$lib/requests/queries/episode/episodeIntlQuery.ts';
+import { episodePeopleQuery } from '$lib/requests/queries/episode/episodePeopleQuery.ts';
 import { episodeRatingQuery } from '$lib/requests/queries/episode/episodeRatingQuery.ts';
 import { episodeStatsQuery } from '$lib/requests/queries/episode/episodeStatsQuery.ts';
 import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummaryQuery.ts';
@@ -24,6 +25,7 @@ export function useEpisode(
   const ratings = useQuery(episodeRatingQuery(params));
   const stats = useQuery(episodeStatsQuery(params));
   const watchers = useQuery(episodeWatchersQuery(params));
+  const crew = useQuery(episodePeopleQuery(params));
 
   const locale = languageTag();
 
@@ -32,7 +34,7 @@ export function useEpisode(
     ? episode
     : useQuery(episodeIntlQuery({ ...params, ...getLanguageAndRegion() }));
 
-  const queries = [episode, seasons, ratings, stats, watchers, intl];
+  const queries = [episode, seasons, ratings, stats, watchers, intl, crew];
 
   const isLoading = derived(
     queries,
@@ -55,6 +57,7 @@ export function useEpisode(
     ratings: derived(ratings, ($rating) => $rating.data),
     stats: derived(stats, ($stats) => $stats.data),
     watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
+    crew: derived(crew, ($crew) => $crew.data),
     intl: derived(
       [episode, intl],
       ([$episode, $intl]) => {

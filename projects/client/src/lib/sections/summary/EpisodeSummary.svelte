@@ -11,6 +11,7 @@
   import SeasonList from "$lib/sections/lists/SeasonList.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
@@ -33,6 +34,7 @@
     stats,
     watchers,
     streamOn,
+    crew,
   }: EpisodeSummaryProps = $props();
   const type = "episode";
 
@@ -118,6 +120,8 @@
     </SummaryActions>
   </RenderFor>
 </SummaryContainer>
+
+<CastList title={m.actors()} cast={crew.cast} />
 
 <SeasonList {show} {seasons} />
 

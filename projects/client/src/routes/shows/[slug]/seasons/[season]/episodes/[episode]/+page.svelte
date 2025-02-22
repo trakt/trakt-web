@@ -14,6 +14,7 @@
     ratings,
     stats,
     watchers,
+    crew,
     intl: episodeIntl,
     isLoading: isEpisodeLoading,
   } = $derived(
@@ -62,6 +63,7 @@
       stats={$stats!}
       watchers={$watchers!}
       streamOn={$streamOn}
+      crew={$crew!}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
