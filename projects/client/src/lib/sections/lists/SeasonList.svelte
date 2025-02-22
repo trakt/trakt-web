@@ -8,7 +8,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { Season } from "$lib/requests/models/Season";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import { writable } from "svelte/store";
+  import { get, writable } from "svelte/store";
   import EpisodeCard from "./components/EpisodeCard.svelte";
   import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";
   import { useUserSeason } from "./stores/useUserSeason";
@@ -21,23 +21,16 @@
 
   const { show, seasons }: SeasonListProps = $props();
 
-  const season = useUserSeason(show.id);
-  const active = writable(seasons.at(0));
+  const active = $derived.by(() => {
+    const lastWatchedSeason = useUserSeason(show.id);
+    const season = seasons.find((s) => s.number === get(lastWatchedSeason));
+
+    return writable(season ?? seasons.at(0));
+  });
+
   const { list } = $derived(useSeasonEpisodes(show.slug, $active.number));
 
   const title = $derived(m.season_number_label({ number: $active.number }));
-
-  const seasonUnsubscribe = season.subscribe((seasonNumber) => {
-    const season = seasons.find((s) => s.number === seasonNumber);
-
-    if (season) {
-      active.set(season);
-    }
-
-    if (seasonNumber !== -1) {
-      queueMicrotask(() => seasonUnsubscribe());
-    }
-  });
 </script>
 
 <ShadowList
