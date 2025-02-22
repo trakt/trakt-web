@@ -72,6 +72,7 @@
       display: flex;
       align-items: center;
       gap: var(--gap-s);
+      min-width: 0;
 
       :global(.trakt-preview-badge) {
         // To visually align the badge with the title
