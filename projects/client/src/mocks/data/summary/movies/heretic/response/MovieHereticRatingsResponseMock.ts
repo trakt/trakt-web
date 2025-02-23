@@ -20,16 +20,20 @@ export const MovieHereticRatingsResponseMock: MovieRatingsResponse = {
   'tmdb': {
     'rating': 7.14,
     'votes': 563,
+    'link': 'https://www.themoviedb.org/movie/1138194',
   },
   'imdb': {
     'rating': 7.1,
     'votes': 49905,
+    'link': 'https://www.imdb.com/title/tt28015403',
   },
   'metascore': {
     'rating': 71,
+    'link': 'http://www.imdb.com/title/tt28015403/criticreviews',
   },
   'rotten_tomatoes': {
     'rating': 0,
     'user_rating': 0,
+    'link': 'http://www.rottentomatoes.com/m/heretic_2023',
   },
 };
