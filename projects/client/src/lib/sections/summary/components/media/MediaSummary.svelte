@@ -155,7 +155,7 @@
 </SummaryContainer>
 
 <SummaryContainer>
-  <MediaDetails {media} {studios} {crew} />
+  <MediaDetails {media} {studios} {crew} {type} />
 
   {#if streamOn}
     <MediaStreamingServices

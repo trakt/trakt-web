@@ -12,6 +12,7 @@ describe('MediaDetails', () => {
     media: MovieHereticMappedMock,
     studios: MovieHereticStudiosMappedMock,
     crew: MovieHereticPeopleMappedMock,
+    type: 'movie',
   };
 
   it('should display the media details sections', () => {

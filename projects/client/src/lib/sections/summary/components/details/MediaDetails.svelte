@@ -2,100 +2,14 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import Link from "$lib/components/link/Link.svelte";
-  import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
-  import { getLocale, languageTag } from "$lib/features/i18n/index.ts";
-  import type { CrewMember, Job } from "$lib/requests/models/MediaCrew.ts";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
-  import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
-  import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CollapsableValues from "./_internal/CollapsableValues.svelte";
   import DetailsGrid from "./_internal/DetailsGrid.svelte";
+  import { useMediaDetails } from "./_internal/useMediaDetails";
   import type { MediaDetailsProps } from "./MediaDetailsProps";
 
-  const { media, studios, crew }: MediaDetailsProps = $props();
+  const props: MediaDetailsProps = $props();
 
-  type MediaDetail = {
-    title: string;
-    values?: Array<string | { label: string; link: string }>;
-  };
-  /*TODO:
-    -Differentiate between Show and Movie
-  */
-
-  const genres = media.genres.map(GenreIntlProvider.genre);
-  const studioNames = studios.map((studio) => studio.name);
-
-  const languages = media.languages?.map((language) =>
-    toLanguageName(language, languageTag()),
-  );
-
-  const toCrewMemberWithJob = (person: CrewMember) => {
-    const jobs = person.jobs.map((job) => toTranslatedValue("job", job));
-    return {
-      label: `${person.name} (${jobs.join(", ")})`,
-      link: UrlBuilder.people(person.id),
-    };
-  };
-
-  const filterOnJob = (crewMembers: CrewMember[], job: Job) => {
-    return crewMembers.filter((crewMember) => crewMember.jobs.includes(job));
-  };
-
-  const mainItemDetail = () => {
-    if (media.year) {
-      const isUpcomingItem = media.airDate > new Date();
-      return {
-        title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
-        values: [toHumanDay(media.airDate, getLocale())],
-      };
-    }
-
-    return {
-      title: m.status(),
-      values: [toTranslatedValue("status", media.status)],
-    };
-  };
-
-  const mediaDetails: MediaDetail[] = [
-    mainItemDetail(),
-    {
-      title: m.runtime(),
-      values: [toHumanDuration({ minutes: media.runtime }, languageTag())],
-    },
-    {
-      title: m.creator(),
-      values: filterOnJob(crew.creators, "Creator").map(toCrewMemberWithJob),
-    },
-    {
-      title: m.director(),
-      values: filterOnJob(crew.directors, "Director").map(toCrewMemberWithJob),
-    },
-    {
-      title: m.writer(),
-      values: crew.writers.map(toCrewMemberWithJob),
-    },
-    {
-      title: m.country(),
-      values: media.country
-        ? [toCountryName(media.country, languageTag())]
-        : undefined,
-    },
-    {
-      title: m.language(),
-      values: languages,
-    },
-    {
-      title: m.studio(),
-      values: studioNames,
-    },
-    {
-      title: m.genre(),
-      values: genres,
-    },
-  ];
+  const mediaDetails = $derived(useMediaDetails(props));
 </script>
 
 <DetailsGrid title={m.details()}>
