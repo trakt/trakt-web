@@ -23,7 +23,9 @@ export const EMPTY_RATINGS = Object.freeze({
     rating: 0,
     votes: 0,
   },
-  metacritic: 0,
+  metacritic: {
+    rating: 0,
+  },
 });
 
 export function getDisplayableRatings({

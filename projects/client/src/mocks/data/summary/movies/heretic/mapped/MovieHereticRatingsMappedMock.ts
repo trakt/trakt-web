@@ -20,14 +20,20 @@ export const MovieHereticRatingsMappedMock: MediaRating = {
   'tmdb': {
     'rating': 0.714,
     'votes': 563,
+    'url': undefined,
   },
   'rotten': {
     'critic': 0,
     'audience': 0,
+    'url': undefined,
   },
   'imdb': {
     'rating': 7.1,
     'votes': 49905,
+    'url': undefined,
   },
-  'metacritic': 71,
+  'metacritic': {
+    'rating': 71,
+    'url': undefined,
+  },
 };

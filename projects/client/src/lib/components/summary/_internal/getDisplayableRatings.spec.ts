@@ -25,7 +25,9 @@ describe('getDisplayableRatings', () => {
       rating: 3,
       votes: 5,
     },
-    metacritic: 9,
+    metacritic: {
+      rating: 9,
+    },
   };
 
   it('should get the ratings if it has aired items', () => {

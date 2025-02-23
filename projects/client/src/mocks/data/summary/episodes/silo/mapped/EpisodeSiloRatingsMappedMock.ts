@@ -20,14 +20,20 @@ export const EpisodeSiloRatingsMappedMock: MediaRating = {
   'tmdb': {
     'rating': 0.82,
     'votes': 1181,
+    'url': undefined,
   },
   'rotten': {
     'critic': 92,
     'audience': 64,
+    'url': undefined,
   },
   'imdb': {
     'rating': 8.1,
     'votes': 144574,
+    'url': undefined,
   },
-  'metacritic': 0,
+  'metacritic': {
+    'rating': 0,
+    'url': undefined,
+  },
 };
