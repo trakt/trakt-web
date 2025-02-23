@@ -60,14 +60,14 @@
   </div>
   <div class="trakt-summary-watch-container">
     {#if streamOn?.preferred}
-      <RenderFor device={["tablet-lg", "desktop"]} audience="authenticated">
+      <RenderFor device={["tablet-lg", "desktop"]} audience="all">
         <StreamingServiceButton
           mediaTitle={media.title}
           service={streamOn.preferred}
           style="normal"
         />
       </RenderFor>
-      <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
+      <RenderFor device={["tablet-sm", "mobile"]} audience="all">
         <StreamingServiceButton
           mediaTitle={media.title}
           service={streamOn.preferred}

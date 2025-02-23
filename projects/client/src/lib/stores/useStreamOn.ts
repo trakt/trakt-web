@@ -1,11 +1,10 @@
-import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { getLanguageAndRegion } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { StreamingServiceOptions } from '$lib/requests/models/StreamingServiceOptions.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived, get, readable } from 'svelte/store';
+import { derived, get } from 'svelte/store';
 import { streamEpisodeQuery } from '../requests/queries/episode/streamEpisodeQuery.ts';
 import { streamMovieQuery } from '../requests/queries/movies/streamMovieQuery.ts';
 import { streamShowQuery } from '../requests/queries/shows/streamShowQuery.ts';
@@ -58,20 +57,11 @@ function findViablePreferredService(services: StreamingServiceOptions) {
 }
 
 export function useStreamOn(props: StreamOnProps) {
-  const { isAuthorized } = useAuth();
-
-  if (!get(isAuthorized)) {
-    return {
-      streamOn: readable(undefined),
-      isLoading: readable(false),
-    };
-  }
-
-  const { current } = useUser();
+  const { user } = useUser();
   const { region } = getLanguageAndRegion();
 
-  const { services } = current();
-  const country = services.country ?? region;
+  const services = get(user)?.services;
+  const country = services?.country ?? region;
 
   const streamOn = useQuery(typeToQuery(props, country));
 
@@ -89,7 +79,7 @@ export function useStreamOn(props: StreamOnProps) {
           },
           preferred: findFavoriteStreamingService({
             services: $streamOn.data,
-            favorites: services.favorites ?? [],
+            favorites: services?.favorites ?? [],
             countryCode: country,
           }) ?? findViablePreferredService($streamOn.data),
         };
