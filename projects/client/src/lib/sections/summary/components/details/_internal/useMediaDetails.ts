@@ -1,12 +1,15 @@
+import { GenreIntlProvider } from '$lib/components/summary/GenreIntlProvider.ts';
+import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
-import type { MediaCrew } from '$lib/requests/models/MediaCrew.ts';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import type {
+  CrewMember,
+  Job,
+  MediaCrew,
+} from '$lib/requests/models/MediaCrew.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-
-import { GenreIntlProvider } from '$lib/components/summary/GenreIntlProvider.ts';
-import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
-import type { CrewMember, Job } from '$lib/requests/models/MediaCrew.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
@@ -15,32 +18,37 @@ import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValu
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 
-function releaseAndDurationDetails(media: MediaEntry) {
-  const airDateOrStatus = () => {
-    if (media.year) {
-      const isUpcomingItem = media.airDate > new Date();
-      return {
-        title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
-        values: [toHumanDay(media.airDate, getLocale())],
-      };
-    }
-
+function mediaAirDateOrStatus(media: MediaEntry) {
+  if (media.year) {
+    const isUpcomingItem = media.airDate > new Date();
     return {
-      title: m.status(),
-      values: [toTranslatedValue('status', media.status)],
+      title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
+      values: [toHumanDay(media.airDate, getLocale())],
     };
-  };
+  }
 
-  return [
-    airDateOrStatus(),
-    {
-      title: m.runtime(),
-      values: [toHumanDuration({ minutes: media.runtime }, languageTag())],
-    },
-  ];
+  return {
+    title: m.status(),
+    values: [toTranslatedValue('status', media.status)],
+  };
 }
 
-function mainCreditsDetails(type: MediaType, crew: MediaCrew) {
+function episodeAirDate(episode: EpisodeEntry) {
+  const isUpcomingItem = episode.airDate > new Date();
+  return {
+    title: isUpcomingItem ? m.airs() : m.aired(),
+    values: [toHumanDay(episode.airDate, getLocale())],
+  };
+}
+
+function runtime(entry: MediaEntry | EpisodeEntry) {
+  return {
+    title: m.runtime(),
+    values: [toHumanDuration({ minutes: entry.runtime }, languageTag())],
+  };
+}
+
+function mainCredits(type: MediaType | 'episode', crew: MediaCrew) {
   const toCrewMemberWithJob = (person: CrewMember) => {
     const jobs = person.jobs.map((job) => toTranslatedValue('job', job));
     return {
@@ -49,22 +57,24 @@ function mainCreditsDetails(type: MediaType, crew: MediaCrew) {
     };
   };
 
-  const filterOnJob = (crewMembers: CrewMember[], job: Job) => {
-    return crewMembers.filter((crewMember) => crewMember.jobs.includes(job));
-  };
+  const onJob = (crewMember: CrewMember, job: Job) =>
+    crewMember.jobs.includes(job);
 
   const creatorOrDirector = () => {
     switch (type) {
       case 'movie':
+      case 'episode':
         return {
           title: m.director(),
-          values: filterOnJob(crew.directors, 'Director')
+          values: crew.directors
+            .filter((director) => onJob(director, 'Director'))
             .map(toCrewMemberWithJob),
         };
       case 'show':
         return {
           title: m.creator(),
-          values: filterOnJob(crew.creators, 'Creator')
+          values: crew.creators
+            .filter((creator) => onJob(creator, 'Creator'))
             .map(toCrewMemberWithJob),
         };
     }
@@ -83,13 +93,6 @@ function metaDetails(
   media: MediaEntry,
   studios: MediaStudio[],
 ) {
-  const genres = media.genres.map(GenreIntlProvider.genre);
-  const studioNames = studios.map((studio) => studio.name);
-
-  const languages = media.languages?.map((language) =>
-    toLanguageName(language, languageTag())
-  );
-
   return [
     {
       title: m.country(),
@@ -99,15 +102,17 @@ function metaDetails(
     },
     {
       title: m.language(),
-      values: languages,
+      values: media.languages?.map((language) =>
+        toLanguageName(language, languageTag())
+      ),
     },
     {
       title: m.studio(),
-      values: studioNames,
+      values: studios.map((studio) => studio.name),
     },
     {
       title: m.genre(),
-      values: genres,
+      values: media.genres.map(GenreIntlProvider.genre),
     },
   ];
 }
@@ -117,15 +122,19 @@ type MediaDetail = {
   values?: Array<string | { label: string; link: string }>;
 };
 
-export function useMediaDetails({
-  media,
-  studios,
-  crew,
-  type,
-}: MediaDetailsProps): MediaDetail[] {
+export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
+  if (props.type === 'episode') {
+    return [
+      episodeAirDate(props.episode),
+      runtime(props.episode),
+      ...mainCredits(props.type, props.crew),
+    ];
+  }
+
   return [
-    ...releaseAndDurationDetails(media),
-    ...mainCreditsDetails(type, crew),
-    ...metaDetails(media, studios),
+    mediaAirDateOrStatus(props.media),
+    runtime(props.media),
+    ...mainCredits(props.type, props.crew),
+    ...metaDetails(props.media, props.studios),
   ];
 }

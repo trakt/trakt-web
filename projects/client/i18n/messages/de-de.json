@@ -309,5 +309,7 @@
   "view_all_unreleased_movies": "Alle kommenden Filme",
   "switch_to_og": "Zu Trakt.tv wechseln",
   "preview": "Vorschau",
-  "preview_description": "Diese Funktion wird noch frisch gestrichen, Bürger. Wir hämmern an der Benutzerfreundlichkeit, damit sie wie ein Chor von Engeln singt (oder zumindest reibungslos funktioniert, ohne existenzielle Ängste hervorzurufen)."
+  "preview_description": "Diese Funktion wird noch frisch gestrichen, Bürger. Wir hämmern an der Benutzerfreundlichkeit, damit sie wie ein Chor von Engeln singt (oder zumindest reibungslos funktioniert, ohne existenzielle Ängste hervorzurufen).",
+  "airs": "Läuft",
+  "aired": "Ausgestrahlt"
 }

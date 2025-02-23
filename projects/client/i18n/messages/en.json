@@ -309,5 +309,7 @@
   "view_all_unreleased_movies": "View all movies coming soon",
   "switch_to_og": "Switch to Trakt.tv",
   "preview": "Preview",
-  "preview_description": "This feature's still getting a fresh coat of paint, citizen. We're hammering away at the UX, making it sing like a choir of angels (or at least, function smoothly without inducing existential dread)."
+  "preview_description": "This feature's still getting a fresh coat of paint, citizen. We're hammering away at the UX, making it sing like a choir of angels (or at least, function smoothly without inducing existential dread).",
+  "airs": "Airs",
+  "aired": "Aired"
 }

@@ -309,5 +309,7 @@
   "view_all_unreleased_movies": "Voir tous les films à venir",
   "switch_to_og": "Passer à Trakt.tv",
   "preview": "Aperçu",
-  "preview_description": "Cette fonction est en plein rafraîchissement, citoyen. Nous peaufinons l'interface utilisateur, pour qu'elle fonctionne comme un chœur d'anges (ou au moins, sans causer de terreur existentielle)."
+  "preview_description": "Cette fonction est en plein rafraîchissement, citoyen. Nous peaufinons l'interface utilisateur, pour qu'elle fonctionne comme un chœur d'anges (ou au moins, sans causer de terreur existentielle).",
+  "airs": "Diffusé",
+  "aired": "Diffusé"
 }

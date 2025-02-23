@@ -309,5 +309,7 @@
   "view_all_unreleased_movies": "Vezi toate filmele ce vin curând",
   "switch_to_og": "Passa a Trakt.tv",
   "preview": "Previzualizare",
-  "preview_description": "Această caracteristică mai primește o nouă „înveliș”. Ne străduim pentru o experiență îmbunătățită, ca un cor de îngeri (sau cel puțin, funcționalitate fără teroare existențială)."
+  "preview_description": "Această caracteristică mai primește o nouă „înveliș”. Ne străduim pentru o experiență îmbunătățită, ca un cor de îngeri (sau cel puțin, funcționalitate fără teroare existențială).",
+  "airs": "Apare",
+  "aired": "Apărut"
 }

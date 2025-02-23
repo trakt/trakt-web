@@ -309,5 +309,7 @@
   "view_all_unreleased_movies": "Zobacz wszystkie filmy nadchodzące wkrótce",
   "switch_to_og": "Przełącz na Trakt.tv",
   "preview": "Podgląd",
-  "preview_description": "Ta funkcja wciąż dostaje odświeżoną warstwę farby, obywatelu. Pracujemy nad interfejsem użytkownika, aby działał jak chórami aniołów (albo przynajmniej sprawnie bez wywoływania egzystencjalnego strachu)."
+  "preview_description": "Ta funkcja wciąż dostaje odświeżoną warstwę farby, obywatelu. Pracujemy nad interfejsem użytkownika, aby działał jak chórami aniołów (albo przynajmniej sprawnie bez wywoływania egzystencjalnego strachu).",
+  "airs": "Emituje",
+  "aired": "Wyemitowany"
 }

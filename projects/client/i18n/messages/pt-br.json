@@ -309,5 +309,7 @@
   "view_all_unreleased_movies": "Visualizar todos os filmes em breve",
   "switch_to_og": "Ir para Trakt.tv",
   "preview": "Prévia",
-  "preview_description": "Este recurso ainda está em fase de aprimoramento, cidadão. Estamos trabalhando duro na experiência do usuário, para que funcione sem causar angústia existencial."
+  "preview_description": "Este recurso ainda está em fase de aprimoramento, cidadão. Estamos trabalhando duro na experiência do usuário, para que funcione sem causar angústia existencial.",
+  "airs": "Estreia",
+  "aired": "Estreou"
 }

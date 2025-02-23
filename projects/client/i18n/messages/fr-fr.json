@@ -309,5 +309,7 @@
   "view_all_unreleased_movies": "Voir tous les films à venir",
   "switch_to_og": "Passer à Trakt.tv",
   "preview": "Aperçu",
-  "preview_description": "Cette fonctionnalité est en pleine refonte, futuriste.  Nous travaillons dur sur l'expérience utilisateur pour qu'elle fonctionne sans vous causer trop de problèmes, comme une série télévisée sans spoiler."
+  "preview_description": "Cette fonctionnalité est en pleine refonte, futuriste.  Nous travaillons dur sur l'expérience utilisateur pour qu'elle fonctionne sans vous causer trop de problèmes, comme une série télévisée sans spoiler.",
+  "airs": "Diffusions",
+  "aired": "Diffusé"
 }

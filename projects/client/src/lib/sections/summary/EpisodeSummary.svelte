@@ -14,6 +14,8 @@
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import Comments from "./components/comments/Comments.svelte";
+  import MediaDetails from "./components/details/MediaDetails.svelte";
+  import MediaStreamingServices from "./components/details/MediaStreamingServices.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./components/overlay/StreamOnOverlay.svelte";
@@ -126,6 +128,17 @@
       </RenderFor>
     </SummaryActions>
   </RenderFor>
+</SummaryContainer>
+
+<SummaryContainer>
+  <MediaDetails {episode} {crew} type="episode" />
+
+  {#if streamOn}
+    <MediaStreamingServices
+      services={streamOn.services}
+      preferred={streamOn.preferred}
+    />
+  {/if}
 </SummaryContainer>
 
 <CastList title={m.actors()} cast={crew.cast} />
