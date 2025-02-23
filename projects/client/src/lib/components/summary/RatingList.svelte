@@ -40,7 +40,7 @@
     {/snippet}
   </RatingItem>
 
-  <RatingItem voteCount={imdb.votes}>
+  <RatingItem voteCount={imdb.votes} url={imdb.url}>
     <IMDBIcon style={toVotesBasedRating(imdb.votes)} />
     {#snippet rating()}
       {imdb.rating}
@@ -50,7 +50,7 @@
     {/snippet}
   </RatingItem>
 
-  <RatingItem voteCount={rotten.critic}>
+  <RatingItem voteCount={rotten.critic} url={rotten.url}>
     <RottenIcon style={toRottenTomatoRating(rotten.critic)} />
     {#snippet rating()}
       {rotten.critic}
