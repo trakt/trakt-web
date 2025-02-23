@@ -80,7 +80,7 @@ module.exports = {
         'user',
         'watchlist',
         'watched',
-        'watchnow',
+        'streaming',
         'worker',
         'tags',
         'requests',
