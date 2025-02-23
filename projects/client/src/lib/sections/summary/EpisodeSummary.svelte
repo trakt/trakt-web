@@ -43,7 +43,7 @@
   const showTitle = $derived(showIntl.title ?? show.title);
 </script>
 
-{#snippet mediaActions()}
+{#snippet mediaActions(size: "small" | "normal" = "normal")}
   <MarkAsWatchedAction
     style="normal"
     {type}
@@ -51,6 +51,7 @@
     media={episode}
     {episode}
     {show}
+    {size}
   />
 {/snippet}
 
@@ -112,10 +113,16 @@
 
   <RenderFor audience="authenticated">
     <SummaryActions>
-      <RateNow type="episode" media={episode} {episode} {show} />
+      {#snippet contextualActions()}
+        <RateNow type="episode" media={episode} {episode} {show} />
+      {/snippet}
 
-      <RenderFor device={["mobile", "tablet-sm"]} audience="authenticated">
+      <RenderFor device={["tablet-sm"]} audience="authenticated">
         {@render mediaActions()}
+      </RenderFor>
+
+      <RenderFor device={["mobile"]} audience="authenticated">
+        {@render mediaActions("small")}
       </RenderFor>
     </SummaryActions>
   </RenderFor>

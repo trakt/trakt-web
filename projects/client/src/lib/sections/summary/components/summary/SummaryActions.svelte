@@ -10,8 +10,9 @@
 </script>
 
 <div class="trakt-summary-actions">
-  {@render children()}
-
+  <div class="trakt-summary-main-actions">
+    {@render children()}
+  </div>
   {#if contextualActions}
     <div class="trakt-summary-contextual-actions">
       {@render contextualActions()}
@@ -24,27 +25,28 @@
 
   .trakt-summary-actions {
     display: flex;
-    gap: var(--gap-m);
-    justify-content: flex-end;
-    flex-wrap: wrap;
+    flex-direction: column;
 
-    @include for-tablet-sm {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      gap: var(--gap-xs);
-    }
-
-    @include for-mobile {
+    @include for-tablet-sm-and-below {
       gap: var(--gap-xs);
     }
   }
 
-  .trakt-summary-contextual-actions {
-    justify-self: end;
+  .trakt-summary-main-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--gap-xs);
 
     @include for-tablet-sm {
-      grid-column: span 2;
+      :global(.trakt-button) {
+        flex-basis: calc(50% - var(--gap-xs) / 2);
+      }
     }
+  }
+
+  .trakt-summary-contextual-actions {
+    display: flex;
+    justify-content: flex-end;
   }
 </style>
