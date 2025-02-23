@@ -11,8 +11,8 @@
   import { toLanguageName } from "$lib/utils/formatting/intl/toLanguageName";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import CollapsableValues from "./CollapsableValues.svelte";
-  import DetailsGrid from "./DetailsGrid.svelte";
+  import CollapsableValues from "./_internal/CollapsableValues.svelte";
+  import DetailsGrid from "./_internal/DetailsGrid.svelte";
   import type { MediaDetailsProps } from "./MediaDetailsProps";
 
   const { media, studios, crew }: MediaDetailsProps = $props();

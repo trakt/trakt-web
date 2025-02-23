@@ -36,7 +36,7 @@
   };
 </script>
 
-<div class="trakt-streamin-service-category">
+<div class="trakt-streaming-service-category">
   <CollapsableValues category="streaming" values={services}>
     <p class="meta-info secondary">{title}</p>
     {#snippet value(service)}
@@ -53,7 +53,7 @@
 </div>
 
 <style>
-  .trakt-streamin-service-category {
+  .trakt-streaming-service-category {
     :global(.trakt-link) {
       display: flex;
       align-items: center;

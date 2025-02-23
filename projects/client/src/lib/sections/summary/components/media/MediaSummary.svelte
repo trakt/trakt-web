@@ -15,6 +15,8 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { Snippet } from "svelte";
+  import MediaDetails from "../details/MediaDetails.svelte";
+  import MediaStreamingServices from "../details/MediaStreamingServices.svelte";
   import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
@@ -25,8 +27,6 @@
   import SummaryOverview from "../summary/SummaryOverview.svelte";
   import SummaryTitle from "../summary/SummaryTitle.svelte";
   import YoutubeButton from "../YoutubeButton.svelte";
-  import MediaDetails from "./_internal/MediaDetails.svelte";
-  import MediaStreamingServices from "./_internal/MediaStreamingServices.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 
   const {

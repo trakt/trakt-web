@@ -4,8 +4,8 @@
     StreamNow,
     StreamingServiceOptions,
   } from "$lib/requests/models/StreamingServiceOptions";
-  import DetailsGrid from "./DetailsGrid.svelte";
-  import StreamingServiceCategory from "./StreamingServiceCategory.svelte";
+  import DetailsGrid from "./_internal/DetailsGrid.svelte";
+  import StreamingServiceCategory from "./_internal/StreamingServiceCategory.svelte";
 
   type MediaStreamingServicesProps = {
     services?: StreamingServiceOptions;
