@@ -5,15 +5,20 @@ import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.t
 import { showStatsQuery } from '$lib/requests/queries/shows/showStatsQuery.ts';
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showWatchersQuery } from '$lib/requests/queries/shows/showWatchersQuery.ts';
-import { derived } from 'svelte/store';
+import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts';
+import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
+import { derived, get } from 'svelte/store';
 
 export function useShowDetails(slug: string) {
+  const { country, getPreferred } = useStreamingPreferences();
+
   const ratings = useQuery(showRatingQuery({ slug }));
   const seasons = useQuery(showSeasonsQuery({ slug }));
   const studios = useQuery(showStudiosQuery({ slug }));
   const crew = useQuery(showPeopleQuery({ slug }));
   const stats = useQuery(showStatsQuery({ slug }));
   const watchers = useQuery(showWatchersQuery({ slug }));
+  const streamOn = useQuery(streamShowQuery({ slug, country: get(country) }));
 
   const queries = [
     ratings,
@@ -22,6 +27,7 @@ export function useShowDetails(slug: string) {
     studios,
     crew,
     seasons,
+    streamOn,
   ];
 
   const isLoading = derived(
@@ -36,9 +42,19 @@ export function useShowDetails(slug: string) {
     watchers: derived(watchers, ($watchers) => $watchers.data),
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
-    seasons: derived(
-      seasons,
-      ($seasons) => $seasons.data,
+    seasons: derived(seasons, ($seasons) => $seasons.data),
+    streamOn: derived(
+      streamOn,
+      ($streamOn) => {
+        if (!$streamOn.data) {
+          return;
+        }
+
+        return {
+          services: $streamOn.data,
+          preferred: getPreferred($streamOn.data),
+        };
+      },
     ),
   };
 }

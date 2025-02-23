@@ -5,18 +5,18 @@ import { mapToStreamingServices } from '../../_internal/mapToStreamingServices.t
 import { StreamingServiceOptionsSchema } from '../../models/StreamingServiceOptions.ts';
 
 type StreamMovieParams = {
-  id: string;
+  slug: string;
   country: string;
 } & ApiParams;
 
 const streamMovieRequest = (
-  { fetch, id, country }: StreamMovieParams,
+  { fetch, slug, country }: StreamMovieParams,
 ) =>
   api({ fetch })
     .movies
     .watchnow({
       params: {
-        id,
+        id: slug,
         country,
       },
     })
@@ -31,7 +31,7 @@ const streamMovieRequest = (
 export const streamMovieQuery = defineQuery({
   key: 'streamMovie',
   invalidations: [],
-  dependencies: (params) => [params.id, params.country],
+  dependencies: (params) => [params.slug, params.country],
   request: streamMovieRequest,
   mapper: (response, params) =>
     mapToStreamingServices(response, params.country),

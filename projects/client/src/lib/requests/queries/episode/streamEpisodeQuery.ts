@@ -5,21 +5,21 @@ import { mapToStreamingServices } from '../../_internal/mapToStreamingServices.t
 import { StreamingServiceOptionsSchema } from '../../models/StreamingServiceOptions.ts';
 
 type StreamEpisodeParams = {
-  id: string;
+  slug: string;
   season: number;
   episode: number;
   country: string;
 } & ApiParams;
 
 const streamEpisodeRequest = (
-  { fetch, id, season, episode, country }: StreamEpisodeParams,
+  { fetch, slug, season, episode, country }: StreamEpisodeParams,
 ) =>
   api({ fetch })
     .shows
     .episode
     .watchnow({
       params: {
-        id,
+        id: slug,
         season,
         episode,
         country,
@@ -38,7 +38,7 @@ export const streamEpisodeQuery = defineQuery({
   invalidations: [],
   dependencies: (
     params,
-  ) => [params.id, params.season, params.episode, params.country],
+  ) => [params.slug, params.season, params.episode, params.country],
   request: streamEpisodeRequest,
   mapper: (response, params) =>
     mapToStreamingServices(response, params.country),

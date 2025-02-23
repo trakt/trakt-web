@@ -3,7 +3,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
-  import { useStreamOn } from "$lib/stores/useStreamOn";
   import { useShow } from "../../../../useShow";
   import { useEpisode } from "./useEpisode";
 
@@ -14,6 +13,7 @@
     stats,
     watchers,
     crew,
+    streamOn,
     intl: episodeIntl,
     isLoading: isEpisodeLoading,
   } = $derived(
@@ -30,18 +30,7 @@
     isLoading: isShowLoading,
   } = $derived(useShow(page.params.slug));
 
-  const { streamOn, isLoading: isLoadingStreamOn } = $derived(
-    useStreamOn({
-      id: page.params.slug,
-      season: parseInt(page.params.season),
-      episode: parseInt(page.params.episode),
-      type: "episode",
-    }),
-  );
-
-  const isLoading = $derived(
-    $isEpisodeLoading || $isLoadingStreamOn || $isShowLoading,
-  );
+  const isLoading = $derived($isEpisodeLoading || $isShowLoading);
 </script>
 
 <TraktPage

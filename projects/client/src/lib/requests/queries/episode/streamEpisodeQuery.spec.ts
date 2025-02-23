@@ -12,7 +12,7 @@ describe('streamEpisodeQuery', () => {
       factory: () =>
         createQuery(
           streamEpisodeQuery({
-            id: ShowSiloMappedMock.slug,
+            slug: ShowSiloMappedMock.slug,
             season: EpisodeSiloMappedMock.season,
             episode: EpisodeSiloMappedMock.number,
             country: 'us',

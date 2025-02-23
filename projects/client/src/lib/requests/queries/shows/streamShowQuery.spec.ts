@@ -10,7 +10,7 @@ describe('streamShowQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          streamShowQuery({ id: ShowSiloMappedMock.slug, country: 'us' }),
+          streamShowQuery({ slug: ShowSiloMappedMock.slug, country: 'us' }),
         ),
       mapper: (response) => response?.data,
     });

@@ -8,8 +8,10 @@ import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummar
 import {
   episodeWatchersQuery,
 } from '$lib/requests/queries/episode/episodeWatchersQuery.ts';
+import { streamEpisodeQuery } from '$lib/requests/queries/episode/streamEpisodeQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
-import { derived } from 'svelte/store';
+import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
+import { derived, get } from 'svelte/store';
 
 type UseEpisodeParams = {
   slug: string;
@@ -20,6 +22,8 @@ type UseEpisodeParams = {
 export function useEpisode(
   params: UseEpisodeParams,
 ) {
+  const { country, getPreferred } = useStreamingPreferences();
+
   const episode = useQuery(episodeSummaryQuery(params));
   const seasons = useQuery(showSeasonsQuery(params));
   const ratings = useQuery(episodeRatingQuery(params));
@@ -34,7 +38,21 @@ export function useEpisode(
     ? episode
     : useQuery(episodeIntlQuery({ ...params, ...getLanguageAndRegion() }));
 
-  const queries = [episode, seasons, ratings, stats, watchers, intl, crew];
+  const streamOn = useQuery(streamEpisodeQuery({
+    ...params,
+    country: get(country),
+  }));
+
+  const queries = [
+    episode,
+    seasons,
+    ratings,
+    stats,
+    watchers,
+    intl,
+    crew,
+    streamOn,
+  ];
 
   const isLoading = derived(
     queries,
@@ -72,6 +90,19 @@ export function useEpisode(
         return {
           title: $intl?.data?.title ?? $episode?.data?.title ?? '',
           overview: $intl?.data?.overview ?? $episode?.data?.overview ?? '',
+        };
+      },
+    ),
+    streamOn: derived(
+      streamOn,
+      ($streamOn) => {
+        if (!$streamOn.data) {
+          return;
+        }
+
+        return {
+          services: $streamOn.data,
+          preferred: getPreferred($streamOn.data),
         };
       },
     ),

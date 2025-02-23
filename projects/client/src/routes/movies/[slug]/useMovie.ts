@@ -7,9 +7,13 @@ import { movieStatsQuery } from '$lib/requests/queries/movies/movieStatsQuery.ts
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieWatchersQuery } from '$lib/requests/queries/movies/movieWatchersQuery.ts';
-import { derived } from 'svelte/store';
+import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.ts';
+import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
+import { derived, get } from 'svelte/store';
 
 export function useMovie(slug: string) {
+  const { country, getPreferred } = useStreamingPreferences();
+
   const movie = useQuery(movieSummaryQuery({
     slug,
   }));
@@ -36,7 +40,18 @@ export function useMovie(slug: string) {
     ? movie
     : useQuery(movieIntlQuery({ slug, ...getLanguageAndRegion() }));
 
-  const queries = [movie, ratings, stats, watchers, studios, crew, intl];
+  const streamOn = useQuery(streamMovieQuery({ slug, country: get(country) }));
+
+  const queries = [
+    movie,
+    ratings,
+    stats,
+    watchers,
+    studios,
+    crew,
+    intl,
+    streamOn,
+  ];
 
   const isLoading = derived(
     queries,
@@ -66,6 +81,19 @@ export function useMovie(slug: string) {
           title: $intl?.data?.title ?? $movie?.data?.title ?? '',
           overview: $intl?.data?.overview ?? $movie?.data?.overview ?? '',
           tagline: $intl?.data?.tagline ?? $movie?.data?.tagline ?? '',
+        };
+      },
+    ),
+    streamOn: derived(
+      streamOn,
+      ($streamOn) => {
+        if (!$streamOn.data) {
+          return;
+        }
+
+        return {
+          services: $streamOn.data,
+          preferred: getPreferred($streamOn.data),
         };
       },
     ),

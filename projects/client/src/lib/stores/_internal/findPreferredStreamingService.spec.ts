@@ -1,18 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import type { StreamNow } from '../../requests/models/StreamingServiceOptions.ts';
-import { findFavoriteStreamingService } from './findFavoriteStreamingService.ts';
+import { findPreferredStreamingService } from './findPreferredStreamingService.ts';
 
-describe('findFavoriteStreamingService', () => {
+describe('findPreferredStreamingService', () => {
   it('should return undefined if there are no subscription services', () => {
-    expect(findFavoriteStreamingService({
+    expect(findPreferredStreamingService({
       services: { streaming: [], onDemand: [] },
       favorites: ['netflix'],
       countryCode: 'nl',
     })).toBe(undefined);
   });
 
-  it('should return undefined if there are no matching favorite subscriptions', () => {
-    expect(findFavoriteStreamingService({
+  it('should return the first available if there are no matching favorite subscriptions', () => {
+    expect(findPreferredStreamingService({
       services: {
         streaming: [{
           link: 'https://www.netflix.com/',
@@ -24,7 +24,12 @@ describe('findFavoriteStreamingService', () => {
       },
       favorites: ['us-netflix'],
       countryCode: 'nl',
-    })).toBe(undefined);
+    })).toStrictEqual({
+      'is4k': false,
+      'link': 'https://www.netflix.com/',
+      'source': 'netflix',
+      'type': 'streaming',
+    });
   });
 
   it('should return the matching service', () => {
@@ -35,7 +40,7 @@ describe('findFavoriteStreamingService', () => {
       type: 'streaming',
     };
 
-    expect(findFavoriteStreamingService({
+    expect(findPreferredStreamingService({
       services: {
         streaming: [subscription],
         onDemand: [],

@@ -10,7 +10,10 @@ describe('streamMovieQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          streamMovieQuery({ id: MovieHereticMappedMock.slug, country: 'us' }),
+          streamMovieQuery({
+            slug: MovieHereticMappedMock.slug,
+            country: 'us',
+          }),
         ),
       mapper: (response) => response?.data,
     });
