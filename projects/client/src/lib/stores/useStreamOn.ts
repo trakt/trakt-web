@@ -13,7 +13,9 @@ import { findFavoriteStreamingService } from './_internal/findFavoriteStreamingS
 
 type EpisodeStreamOnProps = {
   type: 'episode';
-  id: number;
+  id: string;
+  season: number;
+  episode: number;
 };
 
 type MediaStreamOnProps = {
@@ -43,6 +45,8 @@ function typeToQuery(
     case 'episode':
       return streamEpisodeQuery({
         id: props.id,
+        season: props.season,
+        episode: props.episode,
         ...commonParams,
       });
   }

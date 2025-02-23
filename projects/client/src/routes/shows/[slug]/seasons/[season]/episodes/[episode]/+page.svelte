@@ -4,7 +4,6 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
   import { useStreamOn } from "$lib/stores/useStreamOn";
-  import { readable } from "svelte/store";
   import { useShow } from "../../../../useShow";
   import { useEpisode } from "./useEpisode";
 
@@ -31,14 +30,14 @@
     isLoading: isShowLoading,
   } = $derived(useShow(page.params.slug));
 
-  const { streamOn, isLoading: isLoadingStreamOn } = $derived.by(() => {
-    // FIXME: simplify this when we can get services using slug/season/episode
-    if (!$episode?.id) {
-      return { streamOn: readable(undefined), isLoading: readable(false) };
-    }
-
-    return useStreamOn({ id: $episode.id, type: "episode" });
-  });
+  const { streamOn, isLoading: isLoadingStreamOn } = $derived(
+    useStreamOn({
+      id: page.params.slug,
+      season: parseInt(page.params.season),
+      episode: parseInt(page.params.episode),
+      type: "episode",
+    }),
+  );
 
   const isLoading = $derived(
     $isEpisodeLoading || $isLoadingStreamOn || $isShowLoading,
