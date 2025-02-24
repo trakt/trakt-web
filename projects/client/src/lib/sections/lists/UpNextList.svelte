@@ -2,8 +2,11 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
   import { onMount } from "svelte";
+  import DropAction from "../media-actions/drop/DropAction.svelte";
+  import MarkAsWatchedAction from "../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeCard from "./components/EpisodeCard.svelte";
   import FindShowsLink from "./components/FindShowsLink.svelte";
   import { useHiddenShows } from "./stores/useHiddenShows";
@@ -39,7 +42,25 @@
       show={episode.show}
       status={$hidden.includes(episode.show.id) ? "hidden" : "watching"}
       variant="next"
-    />
+    >
+      {#snippet popupActions()}
+        <RenderFor audience="authenticated">
+          <MarkAsWatchedAction
+            style="dropdown-item"
+            type="episode"
+            title={episode.title}
+            show={episode.show}
+            {episode}
+            media={episode}
+          />
+          <DropAction
+            style="dropdown-item"
+            title={episode.show.title}
+            id={episode.show.id}
+          />
+        </RenderFor>
+      {/snippet}
+    </EpisodeCard>
   {/snippet}
   {#snippet empty()}
     {#if !$isLoadingEpisodes}

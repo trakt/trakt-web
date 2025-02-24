@@ -4,7 +4,7 @@
   import Link from "../link/Link.svelte";
 
   type DropdownItemProps = {
-    color?: "red" | "purple" | "blue";
+    color?: "red" | "purple" | "blue" | "default";
     tabindex?: number;
     icon?: Snippet;
     style?: "ghost" | "flat";
@@ -153,6 +153,16 @@
         var(--blue-200),
         var(--blue-600),
         var(--blue-50)
+      );
+    }
+
+    &[data-color="default"] {
+      @include color(
+        var(--shade-700),
+        var(--shade-100),
+        var(--shade-200),
+        var(--shade-700),
+        var(--shade-50)
       );
     }
   }
