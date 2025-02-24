@@ -5,6 +5,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
+  import { fade } from "svelte/transition";
   import RateActionButton from "./_internal/RateActionButton.svelte";
   import { useRatings } from "./useRatings";
 
@@ -37,10 +38,10 @@
   );
 </script>
 
-{#if $isWatched}
-  <div class="trakt-rate-now">
+<div class="trakt-rate-now">
+  {#if $isWatched}
     <h6>{m.rate_now()}</h6>
-    <div class="trakt-rate-actions">
+    <div class="trakt-rate-actions" transition:fade={{ duration: 150 }}>
       {#each Object.values(SimpleRating) as simpleRating}
         <RateActionButton
           rating={simpleRating}
@@ -55,13 +56,15 @@
         />
       {/each}
     </div>
-  </div>
-{/if}
+  {/if}
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   .trakt-rate-now {
+    height: var(--ni-40);
+
     h6 {
       transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
     }
