@@ -1,5 +1,5 @@
+import { EpisodeSiloPeopleMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloPeopleMappedMock.ts';
 import { EpisodeSiloResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
-import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
@@ -20,6 +20,6 @@ describe('episodePeopleQuery', () => {
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(ShowSiloPeopleMappedMock);
+    expect(result).to.deep.equal(EpisodeSiloPeopleMappedMock);
   });
 });
