@@ -20,4 +20,8 @@ export type EpisodeCardProps = EpisodeItemVariant & {
   show: MediaInputDefault;
   style?: 'cover' | 'summary';
   popupActions?: Snippet;
+  /**
+   * FIXME: We should migrate these on the backend and remove from the client.
+   */
+  status?: 'watching' | 'hidden';
 };

@@ -5,6 +5,7 @@
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
   import EpisodeItemCard from "./EpisodeItemCard.svelte";
@@ -15,11 +16,12 @@
   const isFuture = $derived(props.episode.airDate > new Date());
   const isDefault = $derived(props.variant === "default");
   const isActivity = $derived(props.variant === "activity");
+  const isHidden = $derived(props.status === "hidden");
   const style = $derived(props.style ?? "cover");
 </script>
 
 {#snippet action()}
-  {#if !isFuture && !isActivity}
+  {#if !isFuture && !isActivity && !isHidden}
     <MarkAsWatchedAction
       style="action"
       type="episode"
@@ -28,6 +30,15 @@
       media={props.episode}
       episode={props.episode}
       show={props.show}
+    />
+  {/if}
+
+  {#if isHidden}
+    <DropAction
+      title={props.show.title}
+      id={props.show.id}
+      style="action"
+      size="small"
     />
   {/if}
 {/snippet}
@@ -67,29 +78,48 @@
   {/if}
 {/snippet}
 
-{#if style === "summary"}
-  <MediaSummaryCard
-    episode={props.episode}
-    media={{
-      ...props.show,
-      episode: {
-        count: 0,
-      },
-    }}
-    popupActions={props.popupActions}
-    {tags}
-    {action}
-    type="episode"
-    variant="thumb"
-  />
-{/if}
+{#snippet card()}
+  {#if style === "summary"}
+    <MediaSummaryCard
+      episode={props.episode}
+      media={{
+        ...props.show,
+        episode: {
+          count: 0,
+        },
+      }}
+      popupActions={props.popupActions}
+      {tags}
+      {action}
+      type="episode"
+      variant="thumb"
+    />
+  {/if}
 
-{#if style === "cover"}
-  <EpisodeItemCard {...props} {tags} {action} />
+  {#if style === "cover"}
+    <EpisodeItemCard {...props} {tags} {action} />
+  {/if}
+{/snippet}
+
+{#if props.status === "hidden"}
+  <trakt-hidden-show>
+    {@render card()}
+  </trakt-hidden-show>
+{:else}
+  {@render card()}
 {/if}
 
 <style>
   .show-progress-label {
     position: relative;
+  }
+
+  trakt-hidden-show {
+    scale: 0.95;
+
+    :global(.trakt-card-footer-information),
+    :global(.card-cover) {
+      filter: contrast(0.65) grayscale(1);
+    }
   }
 </style>

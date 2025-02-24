@@ -1,21 +1,21 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
-  import { page } from "$app/state";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
   import { onMount } from "svelte";
   import EpisodeCard from "./components/EpisodeCard.svelte";
   import FindShowsLink from "./components/FindShowsLink.svelte";
+  import { useHiddenShows } from "./stores/useHiddenShows";
   import { useStableArray } from "./stores/useStableArray";
   import { useUpNextEpisodes } from "./stores/useUpNextEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
-  const type = $derived(
-    page.url.searchParams.get("up-next") === "nitro" ? "nitro" : "nitro",
-  );
+  const { list: unstable, isLoading: isLoadingEpisodes } =
+    $derived(useUpNextEpisodes());
 
-  const { list: unstable, isLoading } = $derived(useUpNextEpisodes(type));
+  const { list: hidden } = $derived(useHiddenShows());
+
   const { list, set } = useStableArray<UpNextEntry>(
     (l, r) => l.show.id === r.show.id,
   );
@@ -34,10 +34,15 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(episode)}
-    <EpisodeCard {episode} show={episode.show} variant="next" />
+    <EpisodeCard
+      {episode}
+      show={episode.show}
+      status={$hidden.includes(episode.show.id) ? "hidden" : "watching"}
+      variant="next"
+    />
   {/snippet}
   {#snippet empty()}
-    {#if !$isLoading}
+    {#if !$isLoadingEpisodes}
       <p class="small">{m.up_next_empty()}</p>
       <FindShowsLink />
     {/if}
