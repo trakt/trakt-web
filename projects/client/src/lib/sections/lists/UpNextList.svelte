@@ -2,9 +2,10 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import Switch from "$lib/components/toggles/Switch.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
-  import { onMount } from "svelte";
+  import { writable } from "svelte/store";
   import DropAction from "../media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeCard from "./components/EpisodeCard.svelte";
@@ -14,19 +15,25 @@
   import { useUpNextEpisodes } from "./stores/useUpNextEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
-  const { list: unstable, isLoading: isLoadingEpisodes } =
-    $derived(useUpNextEpisodes());
+  const isNitro = writable(false);
+
+  const type = $derived($isNitro ? "nitro" : "standard");
+
+  const { list: unstable, isLoading: isLoadingEpisodes } = $derived(
+    useUpNextEpisodes(type),
+  );
 
   const { list: hidden } = $derived(useHiddenShows());
 
-  const { list, set } = useStableArray<UpNextEntry>(
-    (l, r) => l.show.id === r.show.id,
-  );
+  const stableArray = {
+    nitro: useStableArray<UpNextEntry>((l, r) => l.show.id === r.show.id),
+    standard: useStableArray<UpNextEntry>((l, r) => l.show.id === r.show.id),
+  };
 
-  onMount(() => {
-    const unsubscribe = unstable.subscribe(set);
+  const { list, set } = $derived(stableArray[type]);
 
-    return () => unsubscribe();
+  $effect(() => {
+    return unstable.subscribe(set);
   });
 </script>
 
@@ -36,6 +43,15 @@
   title={m.up_next_title()}
   --height-list={mediaListHeightResolver("episode")}
 >
+  {#snippet badge()}
+    <Switch
+      label={m.enable_up_next_nitro_label()}
+      checked={$isNitro}
+      innerText="EXP"
+      color="orange"
+      onclick={() => isNitro.update((prev) => !prev)}
+    />
+  {/snippet}
   {#snippet item(episode)}
     <EpisodeCard
       {episode}

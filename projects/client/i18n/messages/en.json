@@ -314,5 +314,6 @@
   "aired": "Aired",
   "drop_show_warning": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
   "drop_show_label": "Flag show {title} as dropped",
-  "drop_show": "Drop show"
+  "drop_show": "Drop show",
+  "enable_up_next_nitro_label": "Enable Up Next Nitro, the fastest way to watch your shows"
 }

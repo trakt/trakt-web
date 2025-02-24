@@ -314,5 +314,6 @@
   "aired": "Estreou",
   "drop_show_warning": "Tem certeza que deseja abandonar {title}? Isso removerá do seu próximo item.",
   "drop_show_label": "Marcar {title} como abandonado",
-  "drop_show": "Abandonar"
+  "drop_show": "Abandonar",
+  "enable_up_next_nitro_label": "Habilitar Próximo Nitro, o jeito mais rápido de assistir seus programas"
 }

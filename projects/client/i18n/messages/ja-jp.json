@@ -314,5 +314,6 @@
   "aired": "放送済み",
   "drop_show_warning": "{title}の番組を本当に削除してもよろしいですか？これにより、視聴予定リストから削除されます。",
   "drop_show_label": "{title}の番組を視聴済みとしてフラグ付けします",
-  "drop_show": "番組を削除する"
+  "drop_show": "番組を削除する",
+  "enable_up_next_nitro_label": "アップネクスト・ナイトロを有効化して、作品を瞬時に視聴！"
 }

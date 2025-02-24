@@ -314,5 +314,6 @@
   "aired": "Apărut",
   "drop_show_warning": "Sei sicuro di voler abbandonare il {titolo} ? Questo lo rimuoverà dalla tua lista prossimi.",
   "drop_show_label": "Segna {titolo} come abbandonato",
-  "drop_show": "Abbandona"
+  "drop_show": "Abbandona",
+  "enable_up_next_nitro_label": "Abilita Up Next Nitro, il modo più veloce per guardare i tuoi contenuti"
 }

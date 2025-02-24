@@ -314,5 +314,6 @@
   "aired": "Ausgestrahlt",
   "drop_show_warning": "Sind Sie sicher, dass Sie die {title} entfernen möchten? Dies wird den Titel von Ihrer \"up next\" Liste entfernen.",
   "drop_show_label": "{title} als abgebrochen markieren",
-  "drop_show": "Abbrechen"
+  "drop_show": "Abbrechen",
+  "enable_up_next_nitro_label": "Nitro Up Next aktivieren, die schnellste Methode, um Ihre Inhalte anzusehen"
 }

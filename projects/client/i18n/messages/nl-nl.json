@@ -314,5 +314,6 @@
   "aired": "Uitgezonden",
   "drop_show_warning": "Weet je zeker dat je {title} wilt verwijderen? Dit verwijdert het van je kijklijst.",
   "drop_show_label": "{title} markeren als verwijderd",
-  "drop_show": "Verwijderen"
+  "drop_show": "Verwijderen",
+  "enable_up_next_nitro_label": "Schakel Up Next Nitro in, de snelste manier om je series te bekijken"
 }
