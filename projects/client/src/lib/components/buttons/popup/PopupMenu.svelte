@@ -63,6 +63,7 @@
 
   .trakt-popup-menu-button {
     all: unset;
+    position: relative;
 
     @include popup-button-style();
 
@@ -72,6 +73,19 @@
 
       :global(svg circle) {
         filter: none;
+      }
+    }
+    @include for-touch {
+      &::after {
+        position: absolute;
+        content: "";
+        width: 175%;
+        height: 175%;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
       }
     }
   }
