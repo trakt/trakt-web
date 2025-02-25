@@ -10,17 +10,25 @@ export function clickOutside(node: HTMLElement) {
     dispatch();
   }
 
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      dispatch();
+    }
+  }
+
   const instance = GlobalEventBus.getInstance();
 
   const destroyClick = instance.register('click', handleClick);
   const destroyResize = instance.register('resize', dispatch);
   const destroyScroll = instance.register('scroll', dispatch);
+  const destroyKeyPress = instance.register('keydown', handleKeyDown);
 
   return {
     destroy() {
       destroyClick();
       destroyResize();
       destroyScroll();
+      destroyKeyPress();
     },
   };
 }
