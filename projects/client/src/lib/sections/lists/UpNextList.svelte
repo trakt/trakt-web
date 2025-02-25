@@ -5,22 +5,21 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
-  import { writable } from "svelte/store";
   import DropAction from "../media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeCard from "./components/EpisodeCard.svelte";
   import FindShowsLink from "./components/FindShowsLink.svelte";
   import { useHiddenShows } from "./stores/useHiddenShows";
+  import { useNitro } from "./stores/useNitro";
   import { useStableArray } from "./stores/useStableArray";
   import { useUpNextEpisodes } from "./stores/useUpNextEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
-  const isNitro = writable(false);
+  const { type, toggle } = $derived(useNitro());
 
-  const type = $derived($isNitro ? "nitro" : "standard");
-
+  const isNitro = $derived($type === "nitro");
   const { list: unstable, isLoading: isLoadingEpisodes } = $derived(
-    useUpNextEpisodes(type),
+    useUpNextEpisodes($type),
   );
 
   const { list: hidden, isLoading: isLoadingHidden } =
@@ -31,7 +30,7 @@
     standard: useStableArray<UpNextEntry>((l, r) => l.show.id === r.show.id),
   };
 
-  const { list, set } = $derived(stableArray[type]);
+  const { list, set } = $derived(stableArray[$type]);
 
   const hasHidden = $derived(!$isLoadingHidden && $hidden.length > 0);
 
@@ -50,8 +49,8 @@
     <LabSwitch
       tooltip={`${m.lab_up_next_nitro_message()} ${hasHidden ? m.lab_up_next_nitro_hidden_message() : ""}`}
       label={m.lab_up_next_nitro_label()}
-      enabled={$isNitro}
-      onclick={() => isNitro.update((prev) => !prev)}
+      enabled={isNitro}
+      onclick={toggle}
     />
   {/snippet}
   {#snippet item(episode)}
@@ -71,11 +70,13 @@
             {episode}
             media={episode}
           />
-          <DropAction
-            style="dropdown-item"
-            title={episode.show.title}
-            id={episode.show.id}
-          />
+          {#if isNitro}
+            <DropAction
+              style="dropdown-item"
+              title={episode.show.title}
+              id={episode.show.id}
+            />
+          {/if}
         </RenderFor>
       {/snippet}
     </EpisodeCard>

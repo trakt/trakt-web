@@ -2,10 +2,11 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { upNextNitroQuery } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { upNextQuery } from '$lib/requests/queries/sync/upNextQuery.ts';
+import type { UpNextType } from '$lib/sections/lists/stores/useNitro.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
-export const useUpNextEpisodes = (type: 'standard' | 'nitro') => {
+export const useUpNextEpisodes = (type: UpNextType) => {
   const { current: user } = useUser();
 
   const query = useQuery(
