@@ -32,15 +32,6 @@
       show={props.show}
     />
   {/if}
-
-  {#if isHidden}
-    <DropAction
-      title={props.show.title}
-      id={props.show.id}
-      style="action"
-      size="small"
-    />
-  {/if}
 {/snippet}
 
 {#snippet tags()}
