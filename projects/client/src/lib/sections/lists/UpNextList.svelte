@@ -1,8 +1,8 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
+  import LabSwitch from "$lib/components/badge/LabSwitch.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import Switch from "$lib/components/toggles/Switch.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { UpNextEntry } from "$lib/requests/queries/sync/upNextQuery";
   import { writable } from "svelte/store";
@@ -23,7 +23,8 @@
     useUpNextEpisodes(type),
   );
 
-  const { list: hidden } = $derived(useHiddenShows());
+  const { list: hidden, isLoading: isLoadingHidden } =
+    $derived(useHiddenShows());
 
   const stableArray = {
     nitro: useStableArray<UpNextEntry>((l, r) => l.show.id === r.show.id),
@@ -31,6 +32,8 @@
   };
 
   const { list, set } = $derived(stableArray[type]);
+
+  const hasHidden = $derived(!$isLoadingHidden && $hidden.length > 0);
 
   $effect(() => {
     return unstable.subscribe(set);
@@ -44,11 +47,10 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet badge()}
-    <Switch
-      label={m.enable_up_next_nitro_label()}
-      checked={$isNitro}
-      innerText="EXP"
-      color="orange"
+    <LabSwitch
+      tooltip={`${m.lab_up_next_nitro_message()} ${hasHidden ? m.lab_up_next_nitro_hidden_message() : ""}`}
+      label={m.lab_up_next_nitro_label()}
+      enabled={$isNitro}
       onclick={() => isNitro.update((prev) => !prev)}
     />
   {/snippet}

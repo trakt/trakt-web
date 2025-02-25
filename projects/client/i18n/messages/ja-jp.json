@@ -315,5 +315,8 @@
   "drop_show_warning": "{title}の番組を本当に削除してもよろしいですか？これにより、視聴予定リストから削除されます。",
   "drop_show_label": "{title}の番組を視聴済みとしてフラグ付けします",
   "drop_show": "番組を削除する",
-  "enable_up_next_nitro_label": "アップネクスト・ナイトロを有効化して、作品を瞬時に視聴！"
+  "enable_up_next_nitro_label": "アップネクスト・ナイトロを有効化して、作品を瞬時に視聴！",
+  "lab_up_next_nitro_label": "アップ・ネクスト・ニトロ有効化",
+  "lab_up_next_nitro_message": "この実験は、すべてのユーザーの体験を向上させるパフォーマンスアップグレードです。",
+  "lab_up_next_nitro_hidden_message": "以前非表示になっていた番組は、内部デザイン変更によりリストに戻され、迅速に認識できるように白黒のサムネイルが表示されます。非表示解除するか、リストから削除するかを選択できます。"
 }

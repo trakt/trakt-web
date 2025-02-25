@@ -312,8 +312,11 @@
   "preview_description": "Această caracteristică mai primește o nouă „înveliș”. Ne străduim pentru o experiență îmbunătățită, ca un cor de îngeri (sau cel puțin, funcționalitate fără teroare existențială).",
   "airs": "Apare",
   "aired": "Apărut",
-  "drop_show_warning": "Sei sicuro di voler abbandonare il {titolo} ? Questo lo rimuoverà dalla tua lista prossimi.",
-  "drop_show_label": "Segna {titolo} come abbandonato",
+  "drop_show_warning": "Sei sicuro di voler abbandonare il {title} ? Questo lo rimuoverà dalla tua lista prossimi.",
+  "drop_show_label": "Segna {title} come abbandonato",
   "drop_show": "Abbandona",
-  "enable_up_next_nitro_label": "Abilita Up Next Nitro, il modo più veloce per guardare i tuoi contenuti"
+  "enable_up_next_nitro_label": "Abilita Up Next Nitro, il modo più veloce per guardare i tuoi contenuti",
+  "lab_up_next_nitro_label": "Attiva Nitro Prossimo",
+  "lab_up_next_nitro_message": "Questo esperimento è un aggiornamento prestazionale che migliora l'esperienza per tutti gli utenti.",
+  "lab_up_next_nitro_hidden_message": "A causa di modifiche interne, le serie nascoste in precedenza saranno ora visibili nel tuo elenco con un'anteprima in bianco e nero per aiutarti a individuarle rapidamente, con la possibilità di nasconderle di nuovo o rimuoverle dall'elenco."
 }

@@ -315,5 +315,8 @@
   "drop_show_warning": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
   "drop_show_label": "Flag show {title} as dropped",
   "drop_show": "Drop show",
-  "enable_up_next_nitro_label": "Enable Up Next Nitro, the fastest way to watch your shows"
+  "enable_up_next_nitro_label": "Enable Up Next Nitro, the fastest way to watch your shows",
+  "lab_up_next_nitro_label": "Enable Up Next Nitro",
+  "lab_up_next_nitro_message": "This experiment is a performance upgrade which improves experience for all users.",
+  "lab_up_next_nitro_hidden_message": "Due to internal design changes previously hidden shows will now be visible in your list with a black and white thumbnail to help you spot them quickly, with the option to either un-hide them or drop them from the list."
 }

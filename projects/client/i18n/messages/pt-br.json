@@ -315,5 +315,8 @@
   "drop_show_warning": "Tem certeza que deseja abandonar {title}? Isso removerá do seu próximo item.",
   "drop_show_label": "Marcar {title} como abandonado",
   "drop_show": "Abandonar",
-  "enable_up_next_nitro_label": "Habilitar Próximo Nitro, o jeito mais rápido de assistir seus programas"
+  "enable_up_next_nitro_label": "Habilitar Próximo Nitro, o jeito mais rápido de assistir seus programas",
+  "lab_up_next_nitro_label": "Ativar Nitro Próximo",
+  "lab_up_next_nitro_message": "Este experimento é um upgrade de desempenho que melhora a experiência para todos os usuários.",
+  "lab_up_next_nitro_hidden_message": "Devido a mudanças internas no design, programas previamente ocultos agora estarão visíveis na sua lista com uma miniatura em preto e branco para ajudar a identificá-los rapidamente, com a opção de reexibi-los ou removê-los da lista."
 }

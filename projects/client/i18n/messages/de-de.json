@@ -315,5 +315,8 @@
   "drop_show_warning": "Sind Sie sicher, dass Sie die {title} entfernen möchten? Dies wird den Titel von Ihrer \"up next\" Liste entfernen.",
   "drop_show_label": "{title} als abgebrochen markieren",
   "drop_show": "Abbrechen",
-  "enable_up_next_nitro_label": "Nitro Up Next aktivieren, die schnellste Methode, um Ihre Inhalte anzusehen"
+  "enable_up_next_nitro_label": "Nitro Up Next aktivieren, die schnellste Methode, um Ihre Inhalte anzusehen",
+  "lab_up_next_nitro_label": "Nitro Up Next aktivieren",
+  "lab_up_next_nitro_message": "Dieses Experiment ist ein Performance-Upgrade, das die Erfahrung für alle Nutzer verbessert.",
+  "lab_up_next_nitro_hidden_message": "Aufgrund interner Designänderungen werden zuvor versteckte Inhalte jetzt in Ihrer Liste mit einem Schwarz-Weiß-Vorschaubild angezeigt, um sie schnell zu finden. Sie können sie entweder wieder anzeigen lassen oder aus der Liste entfernen."
 }

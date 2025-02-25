@@ -315,5 +315,8 @@
   "drop_show_warning": "¿Estás seguro de que quieres eliminar la serie {title}? Esto lo eliminará de tu lista de próximos episodios.",
   "drop_show_label": "Marcar la serie {title} como eliminada",
   "drop_show": "Eliminar serie",
-  "enable_up_next_nitro_label": "Habilita Up Next Nitro, la forma más veloz de ver tus series"
+  "enable_up_next_nitro_label": "Habilita Up Next Nitro, la forma más veloz de ver tus series",
+  "lab_up_next_nitro_label": "Activa Up Next Nitro",
+  "lab_up_next_nitro_message": "Esta mejora de rendimiento optimiza la experiencia para todos los usuarios.",
+  "lab_up_next_nitro_hidden_message": "Debido a cambios internos, los contenidos previamente ocultos ahora serán visibles en tu lista con una miniatura en blanco y negro para que los identifiques fácilmente, con la opción de mostrarlos o eliminarlos."
 }

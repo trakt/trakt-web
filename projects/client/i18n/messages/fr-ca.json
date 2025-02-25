@@ -315,5 +315,8 @@
   "drop_show_warning": "Êtes-vous certain de vouloir abandonner le {title} ? Cela le supprimera de votre liste à venir.",
   "drop_show_label": "Marquer {title} comme abandonné",
   "drop_show": "Abandonner",
-  "enable_up_next_nitro_label": "Activer Nitro Suivant, la façon la plus rapide de regarder vos contenus."
+  "enable_up_next_nitro_label": "Activer Nitro Suivant, la façon la plus rapide de regarder vos contenus.",
+  "lab_up_next_nitro_label": "Activer Nitro Prochainement",
+  "lab_up_next_nitro_message": "Cette expérience est une mise à niveau de performance qui améliore l'expérience de tous les utilisateurs.",
+  "lab_up_next_nitro_hidden_message": "En raison de modifications de conception internes, les émissions précédemment cachées seront désormais visibles dans votre liste avec une vignette en noir et blanc pour vous aider à les repérer rapidement, avec la possibilité de soit les afficher à nouveau, soit de les supprimer de la liste."
 }

@@ -315,5 +315,8 @@
   "drop_show_warning": "Czy na pewno chcesz usunąć {title} z kolejki? Zostanie usunięte z twojej listy odtwarzania.",
   "drop_show_label": "Zaznacz {title} jako usunięty",
   "drop_show": "Usuń",
-  "enable_up_next_nitro_label": "Włącz Nitro Up Next – najszybszy sposób na oglądanie seriali"
+  "enable_up_next_nitro_label": "Włącz Nitro Up Next – najszybszy sposób na oglądanie seriali",
+  "lab_up_next_nitro_label": "Włącz Nitro dla kolejnego filmu",
+  "lab_up_next_nitro_message": "To eksperymentalne ulepszenie wydajności poprawia komfort użytkowania dla wszystkich.",
+  "lab_up_next_nitro_hidden_message": "W wyniku wewnętrznych zmian w projekcie, wcześniej ukryte pozycje będą teraz widoczne na Twojej liście z czarno-białym miniaturką, abyś mógł je szybko rozpoznać, z opcją ich ukrycia lub usunięcia z listy."
 }

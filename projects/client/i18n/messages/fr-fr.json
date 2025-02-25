@@ -315,5 +315,8 @@
   "drop_show_warning": "Êtes-vous sûr de vouloir supprimer {title} ? Cela le retirera de votre liste prochainement visionné.",
   "drop_show_label": "Marquer {title} comme abandonné",
   "drop_show": "Abandonner",
-  "enable_up_next_nitro_label": "Activer Nitro Prochainement, la méthode la plus rapide pour regarder vos contenus"
+  "enable_up_next_nitro_label": "Activer Nitro Prochainement, la méthode la plus rapide pour regarder vos contenus",
+  "lab_up_next_nitro_label": "Activer Nitro Suivant",
+  "lab_up_next_nitro_message": "Cette expérience est une mise à niveau de performances qui améliore l'expérience pour tous les utilisateurs.",
+  "lab_up_next_nitro_hidden_message": "En raison de modifications de conception internes, les séries précédemment cachées apparaîtront désormais dans votre liste avec une vignette en noir et blanc pour vous aider à les repérer rapidement, avec la possibilité de les afficher à nouveau ou de les supprimer de la liste."
 }

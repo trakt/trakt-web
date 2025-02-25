@@ -5,7 +5,6 @@
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
   import EpisodeItemCard from "./EpisodeItemCard.svelte";
@@ -106,8 +105,6 @@
   }
 
   trakt-hidden-show {
-    scale: 0.95;
-
     :global(.trakt-card-footer-information),
     :global(.card-cover) {
       filter: contrast(0.65) grayscale(1);
