@@ -7,6 +7,7 @@ import {
   type HiddenShow,
   HiddenShowSchema,
 } from '$lib/requests/models/HiddenShow.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
@@ -46,7 +47,7 @@ const hiddenShowsRequest = (
 
 export const hiddenShowsQuery = defineQuery({
   key: 'hiddenShows',
-  invalidations: [],
+  invalidations: [InvalidateAction.Restore],
   dependencies: (
     params: HiddenShowsParams,
   ) => [params.limit, params.page],

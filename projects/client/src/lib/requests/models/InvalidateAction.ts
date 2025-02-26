@@ -4,17 +4,13 @@ type ExtendedMediaType = MediaType | 'episode';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
-type AuthInvalidationTypes = 'auth';
-type RateableInvalidationTypes = 'rated';
-type ExtendedMediaInvalidationTypes = 'mark_as_watched';
-type MediaInvalidationTypes = 'watchlisted';
-
 export type InvalidateActionOptions =
-  | `${typeof INVALIDATION_ID}:${AuthInvalidationTypes}`
-  | `${typeof INVALIDATION_ID}:${RateableInvalidationTypes}:${ExtendedMediaType}`
-  | `${typeof INVALIDATION_ID}:${ExtendedMediaInvalidationTypes}:${ExtendedMediaType}`
-  | `${typeof INVALIDATION_ID}:${MediaInvalidationTypes}:${MediaType}`
-  | `${typeof INVALIDATION_ID}:dropped:show`;
+  | `${typeof INVALIDATION_ID}:auth`
+  | `${typeof INVALIDATION_ID}:rated:${ExtendedMediaType}`
+  | `${typeof INVALIDATION_ID}:mark_as_watched:${ExtendedMediaType}`
+  | `${typeof INVALIDATION_ID}:watchlisted:${MediaType}`
+  | `${typeof INVALIDATION_ID}:dropped:show`
+  | `${typeof INVALIDATION_ID}:restored:show`;
 
 type TypeDataMap = {
   'auth': null;
@@ -22,6 +18,7 @@ type TypeDataMap = {
   'mark_as_watched': ExtendedMediaType;
   'watchlisted': MediaType;
   'dropped': 'show';
+  'restored': 'show';
 };
 
 export function invalidationId(key?: string) {
@@ -50,4 +47,5 @@ export const InvalidateAction = {
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
 
   Drop: buildInvalidationKey('dropped', 'show'),
+  Restore: buildInvalidationKey('restored', 'show'),
 };
