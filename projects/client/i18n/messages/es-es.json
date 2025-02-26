@@ -318,5 +318,8 @@
   "enable_up_next_nitro_label": "Habilita Nitro Próximo para ver tus series más rápido",
   "lab_up_next_nitro_label": "Activar Nitro Próximos",
   "lab_up_next_nitro_message": "Esta función es una mejora de rendimiento que optimiza la experiencia para todos los usuarios.",
-  "lab_up_next_nitro_hidden_message": "Debido a los cambios de diseño internos, las series previamente ocultas ahora serán visibles en tu lista con una miniatura en blanco y negro para ayudarte a identificarlas rápidamente, con la opción de mostrarlas u omitirlas."
+  "lab_up_next_nitro_hidden_message": "Debido a los cambios de diseño internos, las series previamente ocultas ahora serán visibles en tu lista con una miniatura en blanco y negro para ayudarte a identificarlas rápidamente, con la opción de mostrarlas u omitirlas.",
+  "restore_show_warning": "¿Estás seguro de que quieres restaurar la serie {title}? Esto restaurará tu progreso y calendario.",
+  "restore_show_label": "Restaurar serie {title}",
+  "restore_show": "Restaurar serie"
 }

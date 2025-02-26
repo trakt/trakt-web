@@ -318,5 +318,8 @@
   "enable_up_next_nitro_label": "Habilita Up Next Nitro, la forma más veloz de ver tus series",
   "lab_up_next_nitro_label": "Activa Up Next Nitro",
   "lab_up_next_nitro_message": "Esta mejora de rendimiento optimiza la experiencia para todos los usuarios.",
-  "lab_up_next_nitro_hidden_message": "Debido a cambios internos, los contenidos previamente ocultos ahora serán visibles en tu lista con una miniatura en blanco y negro para que los identifiques fácilmente, con la opción de mostrarlos o eliminarlos."
+  "lab_up_next_nitro_hidden_message": "Debido a cambios internos, los contenidos previamente ocultos ahora serán visibles en tu lista con una miniatura en blanco y negro para que los identifiques fácilmente, con la opción de mostrarlos o eliminarlos.",
+  "restore_show_warning": "¿Estás seguro de que quieres restaurar la serie de {title}? Esto restaurará tu progreso y calendario.",
+  "restore_show_label": "Restaurar serie {title}",
+  "restore_show": "Restaurar serie"
 }

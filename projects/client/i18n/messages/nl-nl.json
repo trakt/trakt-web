@@ -318,5 +318,8 @@
   "enable_up_next_nitro_label": "Schakel Up Next Nitro in, de snelste manier om je series te bekijken",
   "lab_up_next_nitro_label": "Activeer Up Next Nitro",
   "lab_up_next_nitro_message": "Deze experiment is een prestatieverbetering die de gebruikerservaring voor iedereen verbetert.",
-  "lab_up_next_nitro_hidden_message": "Door interne ontwerpwijzigingen zullen eerder verborgen series nu zichtbaar zijn in je lijst met een zwart-witte miniaturen zodat je ze snel herkent, met de mogelijkheid ze weer te verbergen of van de lijst te verwijderen."
+  "lab_up_next_nitro_hidden_message": "Door interne ontwerpwijzigingen zullen eerder verborgen series nu zichtbaar zijn in je lijst met een zwart-witte miniaturen zodat je ze snel herkent, met de mogelijkheid ze weer te verbergen of van de lijst te verwijderen.",
+  "restore_show_warning": "Weet je zeker dat je de {title} serie wilt herstellen? Dit herstelt de voortgang en de kalender.",
+  "restore_show_label": "Herstel serie {title}",
+  "restore_show": "Serie herstellen"
 }

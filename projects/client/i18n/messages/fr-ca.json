@@ -318,5 +318,8 @@
   "enable_up_next_nitro_label": "Activer Nitro Suivant, la façon la plus rapide de regarder vos contenus.",
   "lab_up_next_nitro_label": "Activer Nitro Prochainement",
   "lab_up_next_nitro_message": "Cette expérience est une mise à niveau de performance qui améliore l'expérience de tous les utilisateurs.",
-  "lab_up_next_nitro_hidden_message": "En raison de modifications de conception internes, les émissions précédemment cachées seront désormais visibles dans votre liste avec une vignette en noir et blanc pour vous aider à les repérer rapidement, avec la possibilité de soit les afficher à nouveau, soit de les supprimer de la liste."
+  "lab_up_next_nitro_hidden_message": "En raison de modifications de conception internes, les émissions précédemment cachées seront désormais visibles dans votre liste avec une vignette en noir et blanc pour vous aider à les repérer rapidement, avec la possibilité de soit les afficher à nouveau, soit de les supprimer de la liste.",
+  "restore_show_warning": "Êtes-vous certain de vouloir restaurer la série {title} ? Cela restaurera votre progression et votre calendrier.",
+  "restore_show_label": "Restaurer la série {title}",
+  "restore_show": "Restaurer la série"
 }

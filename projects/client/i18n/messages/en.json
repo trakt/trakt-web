@@ -318,5 +318,8 @@
   "enable_up_next_nitro_label": "Enable Up Next Nitro, the fastest way to watch your shows",
   "lab_up_next_nitro_label": "Enable Up Next Nitro",
   "lab_up_next_nitro_message": "This experiment is a performance upgrade which improves experience for all users.",
-  "lab_up_next_nitro_hidden_message": "Due to internal design changes previously hidden shows will now be visible in your list with a black and white thumbnail to help you spot them quickly, with the option to either un-hide them or drop them from the list."
+  "lab_up_next_nitro_hidden_message": "Due to internal design changes previously hidden shows will now be visible in your list with a black and white thumbnail to help you spot them quickly, with the option to either un-hide them or drop them from the list.",
+  "restore_show_warning": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar.",
+  "restore_show_label": "Restore show {title}",
+  "restore_show": "Restore show"
 }

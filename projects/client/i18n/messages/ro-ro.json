@@ -318,5 +318,8 @@
   "enable_up_next_nitro_label": "Activează Nitro Up Next, cel mai rapid mod de a viziona serialele tale",
   "lab_up_next_nitro_label": "Activează Nitro Up Next",
   "lab_up_next_nitro_message": "Acest experiment este o actualizare de performanță care îmbunătățește experiența pentru toți utilizatorii.",
-  "lab_up_next_nitro_hidden_message": "Datorită modificărilor de design interne, filmele ascunse anterior vor fi acum vizibile în lista ta, cu o miniatură alb-negru pentru a le identifica rapid, având opțiunea de a le readuce sau de a le elimina din listă."
+  "lab_up_next_nitro_hidden_message": "Datorită modificărilor de design interne, filmele ascunse anterior vor fi acum vizibile în lista ta, cu o miniatură alb-negru pentru a le identifica rapid, având opțiunea de a le readuce sau de a le elimina din listă.",
+  "restore_show_warning": "Sigur vrei să restaurezi {title}? Acesta va fi restaurat pe progresul și calendarul tău.",
+  "restore_show_label": "Restaurare {title}",
+  "restore_show": "Restaurare"
 }

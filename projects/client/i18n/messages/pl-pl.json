@@ -318,5 +318,8 @@
   "enable_up_next_nitro_label": "Włącz Nitro Up Next – najszybszy sposób na oglądanie seriali",
   "lab_up_next_nitro_label": "Włącz Nitro dla kolejnego filmu",
   "lab_up_next_nitro_message": "To eksperymentalne ulepszenie wydajności poprawia komfort użytkowania dla wszystkich.",
-  "lab_up_next_nitro_hidden_message": "W wyniku wewnętrznych zmian w projekcie, wcześniej ukryte pozycje będą teraz widoczne na Twojej liście z czarno-białym miniaturką, abyś mógł je szybko rozpoznać, z opcją ich ukrycia lub usunięcia z listy."
+  "lab_up_next_nitro_hidden_message": "W wyniku wewnętrznych zmian w projekcie, wcześniej ukryte pozycje będą teraz widoczne na Twojej liście z czarno-białym miniaturką, abyś mógł je szybko rozpoznać, z opcją ich ukrycia lub usunięcia z listy.",
+  "restore_show_warning": "Na pewno chcesz przywrócić {title}? Przywróci to Twoje postępy i kalendarz.",
+  "restore_show_label": "Przywróć {title}",
+  "restore_show": "Przywróć"
 }
