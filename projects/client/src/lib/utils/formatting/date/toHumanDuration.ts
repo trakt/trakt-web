@@ -26,6 +26,10 @@ export function toHumanDuration({
   days += Math.floor(hours / 24);
   hours %= 24;
 
+  const isDaysRange = days > 0;
+  const isHoursRange = hours > 0 && !isDaysRange;
+  const isMinutesRange = minutes > 0 && !isDaysRange;
+
   const formatters = {
     day: new Intl.NumberFormat(locale, {
       style: 'unit',
@@ -45,13 +49,15 @@ export function toHumanDuration({
   };
 
   const parts = [];
-  if (days > 0) {
+  if (isDaysRange) {
     parts.push(formatters.day.format(days));
   }
-  if (hours > 0) {
+
+  if (isHoursRange) {
     parts.push(formatters.hour.format(hours));
   }
-  if (minutes > 0) {
+
+  if (isMinutesRange) {
     parts.push(formatters.minute.format(minutes));
   }
 

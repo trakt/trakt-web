@@ -46,6 +46,7 @@ module.exports = {
         'e2e',
         'episode',
         'favorite',
+        'formatter',
         'footer',
         'guards',
         'i18n',
