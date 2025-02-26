@@ -33,7 +33,22 @@
   {/if}
 {/snippet}
 
-{#snippet tags()}
+{#snippet progressTags()}
+  {#if props.variant === "next"}
+    <ShowProgressTag
+      total={props.episode.total}
+      progress={props.episode.completed}
+    >
+      <span class="show-progress-label">
+        {EpisodeIntlProvider.remainingText(props.episode.remaining)} / {EpisodeIntlProvider.durationText(
+          props.episode.minutesLeft,
+        )}
+      </span>
+    </ShowProgressTag>
+  {/if}
+{/snippet}
+
+{#snippet badges()}
   {#if !isDefault}
     <EpisodeStatusTag i18n={EpisodeIntlProvider} type={props.episode.type} />
   {/if}
@@ -53,19 +68,13 @@
       {EpisodeIntlProvider.timestampText(props.episode.airDate)}
     </EpisodeTimeTag>
   {/if}
+{/snippet}
 
-  {#if props.variant === "next"}
-    <ShowProgressTag
-      total={props.episode.total}
-      progress={props.episode.completed}
-    >
-      <span class="show-progress-label">
-        {EpisodeIntlProvider.remainingText(props.episode.remaining)} / {EpisodeIntlProvider.durationText(
-          props.episode.minutesLeft,
-        )}
-      </span>
-    </ShowProgressTag>
+{#snippet tags()}
+  {#if style === "cover"}
+    {@render badges()}
   {/if}
+  {@render progressTags()}
 {/snippet}
 
 {#snippet card()}
@@ -81,8 +90,10 @@
       popupActions={props.popupActions}
       {tags}
       {action}
+      {badges}
       type="episode"
       variant="thumb"
+      style="summary"
     />
   {/if}
 

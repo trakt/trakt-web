@@ -168,6 +168,8 @@
     }
 
     .trakt-summary-item-details {
+      width: 100%;
+
       display: flex;
       align-items: flex-start;
       flex-direction: column;
@@ -180,6 +182,8 @@
       }
 
       .meta-info {
+        width: 100%;
+
         display: flex;
         gap: var(--gap-xxs);
       }
