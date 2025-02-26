@@ -1,3 +1,4 @@
+import { ShowSiloMinimalResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloMinimalResponseMock.ts';
 import type { ListedShowResponse } from '@trakt/api';
 
 export const WatchlistShowsResponseMock: ListedShowResponse[] = [
@@ -7,17 +8,6 @@ export const WatchlistShowsResponseMock: ListedShowResponse[] = [
     'listed_at': '2024-12-27T21:36:48.000Z',
     'notes': null,
     'type': 'show',
-    'show': {
-      'title': 'Silo',
-      'year': 2023,
-      'ids': {
-        'trakt': 180770,
-        'slug': 'silo',
-        'tvdb': 403245,
-        'imdb': 'tt14688458',
-        'tmdb': 125988,
-      },
-      'aired_episodes': 17,
-    },
+    'show': ShowSiloMinimalResponseMock,
   },
 ];

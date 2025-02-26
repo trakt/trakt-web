@@ -1,3 +1,4 @@
+import { ShowSiloMinimalResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloMinimalResponseMock.ts';
 import type { RatedItemResponse } from '@trakt/api';
 
 export const RatedEpisodesResponseMock: RatedItemResponse[] = [
@@ -16,17 +17,6 @@ export const RatedEpisodesResponseMock: RatedItemResponse[] = [
         'tmdb': 2964686,
       },
     },
-    'show': {
-      'title': 'Silo',
-      'year': 2023,
-      'ids': {
-        'trakt': 180770,
-        'slug': 'silo',
-        'tvdb': 403245,
-        'imdb': 'tt14688458',
-        'tmdb': 125988,
-      },
-      'aired_episodes': 19,
-    },
+    'show': ShowSiloMinimalResponseMock,
   },
 ];
