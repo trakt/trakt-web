@@ -33,11 +33,11 @@
         {episode}
         media={episode}
       />
-      {#if isNitroEnabled}
+      {#if $isNitroEnabled}
         <DropAction style="dropdown-item" title={show.title} id={show.id} />
       {/if}
 
-      {#if isNitroEnabled && isHidden}
+      {#if $isNitroEnabled && isHidden}
         <RestoreAction style="dropdown-item" title={show.title} id={show.id} />
       {/if}
     </RenderFor>
