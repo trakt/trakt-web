@@ -9,7 +9,7 @@
   "mid_season_finale": "Фінал середини сезону",
   "profile_banner_greeting": "Привіт, {name}",
   "up_next_title": "Наступне",
-  "remaining_episodes": "Залишилось {count} епізодів",
+  "remaining_episodes": "{count} епізодів",
   "recommended_movies": "Рекомендовані фільми",
   "recommended_shows": "Рекомендовані серіали",
   "number_of_episodes": "{count} епізодів",
