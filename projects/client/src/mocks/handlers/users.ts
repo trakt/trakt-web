@@ -12,6 +12,7 @@ import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalLi
 import { RatedShowsResponseMock } from '$mocks/data/users/response/RatedShowsResponseMock.ts';
 import { EpisodeActivityHistoryResponseMock } from '../data/users/response/EpisodeActivityHistoryResponseMock.ts';
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
+import { HiddenShowProgressResponseMock } from '../data/users/response/HiddenShowProgressResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
@@ -25,6 +26,9 @@ import { WatchlistShowsResponseMock } from '../data/users/response/WatchlistShow
 export const users = [
   http.get('http://localhost/users/settings', () => {
     return HttpResponse.json(ExtendedUsersResponseMock);
+  }),
+  http.get('http://localhost/users/hidden/progress_watched*', () => {
+    return HttpResponse.json(HiddenShowProgressResponseMock);
   }),
   http.get('http://localhost/users/me/watched/shows', () => {
     return HttpResponse.json(WatchedShowsResponseMock);
