@@ -1,30 +1,29 @@
 <script lang="ts">
   import Preview from "$lib/components/badge/Preview.svelte";
-  import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import MediaCard from "../components/MediaCard.svelte";
-  import { useOfficialList } from "./useOfficialList";
+  import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import { useUserList } from "./useUserList";
 
-  type OfficialListProps = {
+  type UserListProps = {
     title: string;
+    userId: string;
     listId: string;
     type?: MediaType;
   };
 
-  const { title, listId, type }: OfficialListProps = $props();
+  const { title, userId, listId, type }: UserListProps = $props();
 
-  const { list } = $derived(useOfficialList({ listId, type }));
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
 </script>
 
-<!-- TODO use drilled media list & fetch rest on scroll -->
-<GridList
-  id={`official-list-${listId}`}
+<DrilledMediaList
+  id={`userlist-list-${userId}-${listId}`}
   {title}
-  items={$list}
-  --width-item="var(--width-poster-card)"
+  {type}
+  useList={(params) => useUserList({ userId, listId, ...params })}
 >
   {#snippet item(media)}
     <MediaCard type={media.type} {media} {style} />
@@ -33,4 +32,4 @@
   {#snippet badge()}
     <Preview />
   {/snippet}
-</GridList>
+</DrilledMediaList>

@@ -12,13 +12,15 @@ type UseListItemsProps = {
   list: MediaListSummary;
   limit?: number;
   type?: MediaType;
+  page?: number;
 };
 
 function listToQuery(
-  { list, type, limit }: UseListItemsProps,
+  { list, type, limit, page }: UseListItemsProps,
 ) {
   const commonParams = {
     type,
+    page,
     limit: limit ?? PREVIEW_LIMIT,
   };
 
@@ -37,15 +39,19 @@ function listToQuery(
 }
 
 export function useListItems(props: UseListItemsProps) {
-  const items = useQuery(listToQuery(props));
+  const query = useQuery(listToQuery(props));
 
   const isLoading = derived(
-    items,
+    query,
     toLoadingState,
   );
 
   return {
     isLoading,
-    items: derived(items, ($list) => $list.data?.entries ?? []),
+    list: derived(query, ($query) => $query.data?.entries ?? []),
+    page: derived(
+      query,
+      ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    ),
   };
 }

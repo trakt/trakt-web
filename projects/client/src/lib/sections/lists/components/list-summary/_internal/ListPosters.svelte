@@ -10,7 +10,7 @@
   const POSTER_LIMIT = 8;
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 
-  const { items } = useListItems({ list, type, limit: POSTER_LIMIT });
+  const { list: items } = useListItems({ list, type, limit: POSTER_LIMIT });
 </script>
 
 {#if $items}
