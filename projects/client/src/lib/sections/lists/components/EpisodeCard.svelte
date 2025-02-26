@@ -106,7 +106,8 @@
 
   trakt-hidden-show {
     :global(.trakt-card-footer-information),
-    :global(.card-cover) {
+    :global(.card-cover),
+    :global(.trakt-summary-item) {
       filter: contrast(0.65) grayscale(1);
     }
   }
