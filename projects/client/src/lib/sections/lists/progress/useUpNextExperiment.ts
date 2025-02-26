@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { get, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
 
 export type UpNextType = 'standard' | 'nitro';
 
@@ -22,18 +22,15 @@ function saveCachedUpNextType(type: UpNextType) {
   localStorage.setItem(UP_NEXT_STORAGE_KEY, JSON.stringify(type));
 }
 
-export function useNitro() {
+export function useUpNextExperiment() {
   const type = writable(getCachedUpNextType());
-
-  type.subscribe((newType) => {
-    saveCachedUpNextType(newType);
-  });
 
   return {
     type,
+    enabled: derived(type, ($type) => $type === 'nitro'),
     toggle: () => {
       const newType = get(type) === 'standard' ? 'nitro' : 'standard';
-
+      saveCachedUpNextType(newType);
       type.set(newType);
     },
   };

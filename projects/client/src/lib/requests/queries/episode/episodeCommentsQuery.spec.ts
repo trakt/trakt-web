@@ -16,7 +16,6 @@ describe('episodeCommentsQuery', () => {
           episode: EpisodeSiloResponseMock.number,
         })),
       mapper: (response) => {
-        console.log(response.error);
         return response?.data;
       },
     });

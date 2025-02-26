@@ -50,6 +50,7 @@ export const UrlBuilder = {
       return '/social/activity';
     },
   },
+  progress: (user: string) => `/users/${user}/progress`,
   home: () => '/',
   shows: () => '/shows',
   media: (type: MediaType, id: string) => {

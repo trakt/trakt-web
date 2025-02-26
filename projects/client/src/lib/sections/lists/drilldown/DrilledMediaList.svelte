@@ -11,6 +11,7 @@
   type DrilledMediaListProps = DrillListProps<T, M> & {
     useList: PaginatableStore<T, M>;
     empty?: Snippet;
+    badge?: Snippet;
   };
 
   const {
@@ -18,6 +19,7 @@
     title,
     type,
     empty: externalEmpty,
+    badge,
     item,
     useList,
   }: DrilledMediaListProps = $props();
@@ -46,6 +48,7 @@
 <GridList
   {id}
   {title}
+  {badge}
   items={$list}
   {item}
   --width-item={mediaCardWidthResolver(type)}

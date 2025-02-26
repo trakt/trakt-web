@@ -1,6 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { dropShowRequest } from '$lib/requests/queries/users/dropShowQuery.ts';
+import { dropShowRequest } from '$lib/requests/queries/users/dropShowRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';

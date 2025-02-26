@@ -4,9 +4,9 @@
   import Landing from "$lib/sections/landing/Landing.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import UpNextList from "$lib/sections/lists/UpNextList.svelte";
-  import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
+  import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
   import SocialActivityList from "$lib/sections/lists/social/SocialActivityList.svelte";
+  import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ReleasedList from "$lib/sections/lists/watchlist/ReleasedList.svelte";
   import UnreleasedList from "$lib/sections/lists/watchlist/UnreleasedList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";

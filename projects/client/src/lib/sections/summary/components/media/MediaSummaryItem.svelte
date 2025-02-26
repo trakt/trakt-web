@@ -64,9 +64,11 @@
         {/if}
       </span>
       <div class="meta-info">
-        <InfoTag>
-          {media.type}
-        </InfoTag>
+        {#if rest.type !== "episode"}
+          <InfoTag>
+            {media.type}
+          </InfoTag>
+        {/if}
 
         {#if tags == null}
           {#if rest.type !== "episode" && media.runtime != null}

@@ -10,6 +10,7 @@
     drilldownLabel: string;
     useList: MediaStore<T, M>;
     empty?: Snippet;
+    badge?: Snippet;
   };
 
   const {
@@ -17,6 +18,7 @@
     title,
     drilldownLabel,
     empty: externalEmpty,
+    badge,
     type,
     item,
     useList,
@@ -30,6 +32,7 @@
 <SectionList
   {id}
   items={$list}
+  {badge}
   {item}
   {title}
   --height-list={mediaListHeightResolver(type)}
