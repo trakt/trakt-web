@@ -2,28 +2,38 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { Tooltip } from "@svelte-plugins/tooltips";
+  import { onMount } from "svelte";
+  import { writable } from "svelte/store";
   import StemTag from "../tags/StemTag.svelte";
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const tooltipAction = $derived(isMouse ? "hover" : "click");
+
+  const isMounted = writable(false);
+
+  onMount(() => {
+    isMounted.set(true);
+  });
 </script>
 
-<Tooltip
-  content={m.preview_description()}
-  theme="preview-tooltip"
-  hideOnClickOutside={true}
-  action={tooltipAction}
-  maxWidth={300}
->
-  <div class="trakt-preview-badge">
-    <StemTag
-      --color-background-stem-tag={"var(--color-background-preview-tag)"}
-      --color-text-stem-tag={"var(--color-text-preview-tag)"}
-    >
-      {m.preview()}
-    </StemTag>
-  </div>
-</Tooltip>
+{#if $isMounted}
+  <Tooltip
+    content={m.preview_description()}
+    theme="preview-tooltip"
+    hideOnClickOutside={true}
+    action={tooltipAction}
+    maxWidth={300}
+  >
+    <div class="trakt-preview-badge">
+      <StemTag
+        --color-background-stem-tag={"var(--color-background-preview-tag)"}
+        --color-text-stem-tag={"var(--color-text-preview-tag)"}
+      >
+        {m.preview()}
+      </StemTag>
+    </div>
+  </Tooltip>
+{/if}
 
 <style>
   .trakt-preview-badge {
