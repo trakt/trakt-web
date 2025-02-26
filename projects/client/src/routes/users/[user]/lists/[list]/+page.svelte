@@ -23,8 +23,10 @@
 
   <UserListPaginatedList
     title={listName}
-    userId={page.params.user}
-    listId={page.params.list}
+    list={{
+      user: { slug: page.params.user },
+      slug: page.params.list,
+    }}
     {type}
   />
 </TraktPage>

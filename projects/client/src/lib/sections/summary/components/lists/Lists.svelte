@@ -4,8 +4,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import ListPreview from "../../../lists/components/list-summary/ListPreview.svelte";
-  import ListSummaryCard from "../../../lists/components/list-summary/ListSummaryCard.svelte";
+  import ListSummaryCard from "$lib/sections/lists/components/list-summary/ListSummaryCard.svelte";
+  import UserList from "$lib/sections/lists/user/UserList.svelte";
   import { MAX_LISTS } from "./_internal/constants.ts";
   import { useListSummary } from "./useListSummary.ts";
 
@@ -54,6 +54,6 @@
 
 <RenderFor audience="all" device={["mobile"]}>
   {#if topList}
-    <ListPreview list={topList} {type} />
+    <UserList list={topList} {type} />
   {/if}
 </RenderFor>

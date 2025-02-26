@@ -4,29 +4,36 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import MediaCard from "../components/MediaCard.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import { useUserList } from "./useUserList";
+  import { useListItems, type ListParams } from "./useListItems";
 
   type UserListProps = {
     title: string;
-    userId: string;
-    listId: string;
     type?: MediaType;
+    list: ListParams;
   };
 
-  const { title, userId, listId, type }: UserListProps = $props();
+  const { title, type, list }: UserListProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
+
+  const listCacheId = $derived.by(() => {
+    if (list.user?.slug) {
+      return `${list.user.slug}-${list.slug}`;
+    }
+
+    return `${list.id}`;
+  });
 </script>
 
 <DrilledMediaList
-  id={`userlist-list-${userId}-${listId}`}
+  id={`userlist-list-${listCacheId}`}
   {title}
   {type}
-  useList={(params) => useUserList({ userId, listId, ...params })}
+  useList={(params) => useListItems({ list, ...params })}
 >
   {#snippet item(media)}
-    <MediaCard type={media.type} {media} {style} />
+    <MediaCard type={media.type} media={media.entry} {style} />
   {/snippet}
 
   {#snippet badge()}

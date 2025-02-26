@@ -1,10 +1,10 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ListPreview from "../components/list-summary/ListPreview.svelte";
   import ListSummaryCard from "../components/list-summary/ListSummaryCard.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
+  import UserList from "./UserList.svelte";
 
   const {
     type,
@@ -19,7 +19,7 @@
   {#if variant === "preview"}
     {#each $lists as list}
       {#if list.count > 0}
-        <ListPreview {list} />
+        <UserList {list} />
       {/if}
     {/each}
   {/if}

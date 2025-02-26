@@ -2,7 +2,7 @@
   import { page } from "$app/state";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import OfficialListPaginatedList from "$lib/sections/lists/official/OfficialListPaginatedList.svelte";
+  import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { mapToMediaType } from "../../../users/[user]/lists/[list]/_internal/mapToMediaType";
   import { useListSummary } from "./useListSummary";
@@ -21,5 +21,11 @@
 <TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={listName}>
   <TraktPageCoverSetter />
 
-  <OfficialListPaginatedList title={listName} listId={page.params.id} {type} />
+  <UserListPaginatedList
+    title={listName}
+    list={{
+      id: parseInt(page.params.id),
+    }}
+    {type}
+  />
 </TraktPage>

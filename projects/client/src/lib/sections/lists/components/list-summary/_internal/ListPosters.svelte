@@ -4,8 +4,8 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
+  import { useListItems } from "$lib/sections/lists/user/useListItems.ts";
   import { getListUrl } from "./getListUrl.ts";
-  import { useListItems } from "./useListItems.ts";
 
   const POSTER_LIMIT = 8;
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
