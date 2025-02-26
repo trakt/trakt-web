@@ -1,8 +1,8 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import type { HiddenAddRequest } from '@trakt/api';
+import type { HiddenMediaRequest } from '@trakt/api';
 
 type DropShowRequest = {
-  body: HiddenAddRequest;
+  body: HiddenMediaRequest;
 } & ApiParams;
 
 export function dropShowRequest(
