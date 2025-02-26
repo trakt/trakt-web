@@ -2,7 +2,6 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { RECOMMENDED_UPPER_LIMIT } from "$lib/utils/constants";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import RecommendedListItem from "./RecommendedListItem.svelte";
   import { toInMemoryPaginatable } from "./toInMemoryPaginatable";
@@ -31,7 +30,6 @@
   {title}
   {type}
   useList={useInMemoryRecommendedList}
-  urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
     <RecommendedListItem {type} {media} {style} />

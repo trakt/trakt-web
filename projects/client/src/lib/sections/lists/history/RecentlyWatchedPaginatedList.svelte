@@ -1,6 +1,5 @@
 <script lang="ts">
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
@@ -23,7 +22,6 @@
       type: "all",
       limit,
     })}
-  urlBuilder={UrlBuilder.history.all}
 >
   {#snippet item(media)}
     <RecentlyWatchedItem {media} {style} />

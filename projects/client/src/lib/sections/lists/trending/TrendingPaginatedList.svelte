@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import TrendingListItem from "./TrendingListItem.svelte";
   import { useTrendingList } from "./useTrendingList";
@@ -22,7 +21,6 @@
   {title}
   {type}
   useList={useTrendingList}
-  urlBuilder={UrlBuilder.trending}
 >
   {#snippet item(media)}
     <TrendingListItem {type} {media} {style} />

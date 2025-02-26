@@ -8,7 +8,7 @@
   import type { DrillListProps } from "./DrillListProps";
   import type { PaginatableStore } from "./PaginatableStore";
 
-  type DrilledMediaListProps = DrillListProps<T, M> & {
+  type DrilledMediaListProps = Omit<DrillListProps<T, M>, "urlBuilder"> & {
     useList: PaginatableStore<T, M>;
     empty?: Snippet;
     badge?: Snippet;
