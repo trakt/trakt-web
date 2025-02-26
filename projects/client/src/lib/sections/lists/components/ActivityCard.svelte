@@ -1,15 +1,17 @@
 <script lang="ts">
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import type { Snippet } from "svelte";
-  import EpisodeCard from "../components/EpisodeCard.svelte";
-  import MediaCard from "../components/MediaCard.svelte";
+  import type { HistoryEntry } from "../stores/useRecentlyWatchedList";
+  import EpisodeCard from "./EpisodeCard.svelte";
+  import MediaCard from "./MediaCard.svelte";
 
   type SocialActivityCardProps = {
-    activity: SocialActivity;
-    badges: Snippet;
+    activity: SocialActivity | HistoryEntry;
+    activityAt: Date;
+    badges?: Snippet;
   };
 
-  const { activity, badges }: SocialActivityCardProps = $props();
+  const { activity, activityAt, badges }: SocialActivityCardProps = $props();
 </script>
 
 {#if activity.type === "episode"}
@@ -17,7 +19,7 @@
     episode={activity.episode}
     show={activity.show}
     variant="activity"
-    date={activity.activityAt}
+    date={activityAt}
     {badges}
   />
 {/if}
@@ -27,7 +29,7 @@
     media={activity.movie}
     type="movie"
     variant="activity"
-    date={activity.activityAt}
+    date={activityAt}
     {badges}
   />
 {/if}

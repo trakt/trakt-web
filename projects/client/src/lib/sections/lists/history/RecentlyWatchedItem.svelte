@@ -1,8 +1,8 @@
 <script lang="ts">
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import EpisodeCard from "../components/EpisodeCard.svelte";
-  import MediaCard from "../components/MediaCard.svelte";
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
+  import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
+  import ActivityCard from "../components/ActivityCard.svelte";
+  import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/useRecentlyWatchedList";
 
   type RecentlyWatchedItemProps = {
@@ -10,38 +10,20 @@
     style?: "summary" | "cover";
   };
 
-  const { media, style = "cover" }: RecentlyWatchedItemProps = $props();
+  const { media: activity, style = "cover" }: RecentlyWatchedItemProps =
+    $props();
 </script>
 
-{#if media.type === "episode"}
-  <EpisodeCard
-    episode={media.episode}
-    show={media.show}
-    date={media.watchedAt}
-    variant="activity"
-    {style}
-  >
-    {#snippet popupActions()}
-      <RenderFor audience="authenticated">
-        <MarkAsWatchedAction
-          style="dropdown-item"
-          type="episode"
-          title={media.episode.title}
-          show={media.show}
-          episode={media.episode}
-          media={media.episode}
-        />
-      </RenderFor>
-    {/snippet}
-  </EpisodeCard>
+{#snippet badges()}
+  {#if activity.type === "episode"}
+    <EpisodeStatusTag i18n={EpisodeIntlProvider} type={activity.episode.type} />
+  {/if}
+{/snippet}
+
+{#if style === "cover"}
+  <ActivityCard activityAt={activity.watchedAt} {activity} />
 {/if}
 
-{#if media.type === "movie"}
-  <MediaCard
-    type={media.type}
-    media={media.movie}
-    {style}
-    date={media.watchedAt}
-    variant="activity"
-  />
+{#if style === "summary"}
+  <ActivitySummaryCard activityAt={activity.watchedAt} {activity} {badges} />
 {/if}
