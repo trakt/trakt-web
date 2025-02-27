@@ -43,7 +43,7 @@
   const isVisible = writable(false);
   const isMounted = writable(false);
 
-  const { scrollHistory } = useScrollHistoryAction(id, "horizontal");
+  const { scrollHistory } = useScrollHistoryAction("horizontal");
 
   onMount(() => {
     isMounted.set(true);
@@ -67,7 +67,7 @@
         <div
           bind:this={$scrollContainer}
           use:scrollTracking={scrollX}
-          use:scrollHistory
+          use:scrollHistory={id}
           class="trakt-list-item-container shadow-list-horizontal-scroll"
         >
           {#each items as i (i.id)}

@@ -1,27 +1,27 @@
-import { onMount } from 'svelte';
 import { writable } from 'svelte/store';
 import { useScrollHistory } from './useScrollHistory.ts';
 
+type DestroyCallback = () => void;
+
 export function useScrollHistoryAction(
-  id: string,
   type: 'horizontal' | 'vertical' = 'horizontal',
 ) {
   const { readScrollState, writeScrollState, event } = useScrollHistory();
 
-  const scrollPosition = writable(0);
+  function scrollHistory(container: HTMLElement, id: string) {
+    let destroyRestore: DestroyCallback | undefined;
+    let destroySnapshot: DestroyCallback | undefined;
 
-  onMount(() => {
-    return event.on('restore', () => {
-      scrollPosition.set(readScrollState(id));
-    });
-  });
+    const scrollPosition = writable(0);
 
-  function scrollHistory(container: HTMLElement) {
-    const handleSnapshot = () => {
+    const handleRestore = (restoreId: string) =>
+      scrollPosition.set(readScrollState(restoreId));
+
+    const handleSnapshot = (snapshotId: string) => {
       const position = type === 'horizontal'
         ? container.scrollLeft
         : container.scrollTop;
-      writeScrollState(id, position);
+      writeScrollState(snapshotId, position);
     };
 
     const updateScrollPosition = (position: number) => {
@@ -29,10 +29,30 @@ export function useScrollHistoryAction(
       container[scrollProp] = position;
     };
 
-    onMount(() => event.on('snapshot', handleSnapshot));
+    const resetHandlers = (handleId: string) => {
+      destroyRestore?.();
+      destroySnapshot?.();
+
+      destroyRestore = event.on('restore', () => handleRestore(handleId));
+      destroySnapshot = event.on('snapshot', () => handleSnapshot(handleId));
+    };
+
+    resetHandlers(id);
+
+    const ubSubscribeScrollPosition = scrollPosition.subscribe(
+      updateScrollPosition,
+    );
 
     return {
-      destroy: scrollPosition.subscribe(updateScrollPosition),
+      update: (updatedId: string) => {
+        resetHandlers(updatedId);
+      },
+      destroy: () => {
+        destroyRestore?.();
+        destroySnapshot?.();
+
+        ubSubscribeScrollPosition();
+      },
     };
   }
 
