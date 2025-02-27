@@ -52,7 +52,7 @@
 </script>
 
 <SectionList
-  id={`credits-list-${type}-${$currentPosition}`}
+  id={`credits-list-${person.slug}-${type}-${$currentPosition}`}
   items={list}
   {title}
   --height-list={mediaListHeightResolver(type)}

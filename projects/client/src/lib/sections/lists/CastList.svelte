@@ -7,13 +7,14 @@
   type CastListProps = {
     title: string;
     cast: CastMember[];
+    slug: string;
   };
 
-  const { title, cast }: CastListProps = $props();
+  const { title, cast, slug }: CastListProps = $props();
 </script>
 
 <SectionList
-  id={`cast-list`}
+  id={`cast-list-${slug}`}
   items={cast}
   {title}
   --height-list={mediaListHeightResolver("person")}

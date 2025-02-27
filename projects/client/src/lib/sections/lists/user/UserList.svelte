@@ -14,7 +14,7 @@
 
 <DrillableMediaList
   {type}
-  id={`top-list-${type}-${list.id}`}
+  id={`user-list-${type}-${list.id}`}
   drilldownLabel={m.view_all()}
   useList={(params) => useListItems({ list, ...params })}
   urlBuilder={() => getListUrl(list, type)}

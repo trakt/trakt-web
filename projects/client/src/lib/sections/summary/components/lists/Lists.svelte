@@ -31,7 +31,7 @@
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
   <SectionList
-    id={`popular-lists-list`}
+    id={`popular-lists-list-${slug}`}
     items={lists}
     title={m.popular_lists()}
     --height-list="var(--height-lists-list)"

@@ -27,7 +27,7 @@
 </script>
 
 <DrilledMediaList
-  id={`userlist-list-${listCacheId}`}
+  id={`user-paginated-list-${listCacheId}`}
   {title}
   {type}
   useList={(params) => useListItems({ list, ...params })}

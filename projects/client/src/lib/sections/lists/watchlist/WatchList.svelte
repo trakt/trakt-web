@@ -23,7 +23,7 @@
 </script>
 
 <DrillableMediaList
-  id="watch-list-{type}"
+  id="watch-list-{type}-{status}"
   {title}
   {drilldownLabel}
   {type}

@@ -141,7 +141,7 @@
   {/if}
 </SummaryContainer>
 
-<CastList title={m.actors()} cast={crew.cast} />
+<CastList title={m.actors()} cast={crew.cast} slug={show.slug} />
 
 <SeasonList {show} {seasons} />
 

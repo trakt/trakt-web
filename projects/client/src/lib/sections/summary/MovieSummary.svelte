@@ -40,7 +40,7 @@
   type="movie"
 />
 
-<CastList title={m.actors()} cast={crew.cast} />
+<CastList title={m.actors()} cast={crew.cast} slug={media.slug} />
 
 <Comments {media} type="movie" />
 

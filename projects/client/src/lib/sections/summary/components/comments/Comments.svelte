@@ -21,7 +21,7 @@
 </script>
 
 <SectionList
-  id={`cast-list`}
+  id={`comments-list-${media.slug}`}
   items={topLevelComments}
   title={m.popular_comments()}
   --height-list="var(--height-comments-list)"
