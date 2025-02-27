@@ -3,16 +3,15 @@
   import Link from "../link/Link.svelte";
 
   type RatingItemProps = {
-    rating: Snippet;
+    rating?: string | number;
     superscript: Snippet;
-    voteCount: number;
     url?: string | Nil;
   } & ChildrenProps;
 
-  const { children, rating, superscript, voteCount, url }: RatingItemProps =
-    $props();
+  const { children, rating, superscript, url }: RatingItemProps = $props();
 
-  const ratingLink = $derived(voteCount > 0 ? url : undefined);
+  const hasValidRating = $derived(rating !== undefined);
+  const ratingLink = $derived(hasValidRating ? url : undefined);
 </script>
 
 <rating>
@@ -21,13 +20,13 @@
       {@render children()}
       <div class="rating-info">
         <p class="large bold">
-          {#if voteCount === 0}
+          {#if !hasValidRating}
             -
           {:else}
-            {@render rating()}
+            {rating}
           {/if}
         </p>
-        {#if voteCount > 0}
+        {#if hasValidRating}
           <p class="small bold uppercase secondary vote-count">
             {@render superscript()}
           </p>

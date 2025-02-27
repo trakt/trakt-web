@@ -6,6 +6,10 @@ describe('toRottenTomatoRating', () => {
     expect(toRottenTomatoRating(0)).toBe('unrated');
   });
 
+  it('should return "unrated" when there is no rating', () => {
+    expect(toRottenTomatoRating()).toBe('unrated');
+  });
+
   it('should return "rotten" when rating is less than 60', () => {
     expect(toRottenTomatoRating(59)).toBe('rotten');
     expect(toRottenTomatoRating(1)).toBe('rotten');

@@ -12,14 +12,14 @@ export const MediaRatingSchema = z.object({
   }),
   rotten: z.object({
     critic: z.number(),
-    audience: z.number(),
+    audience: z.number().nullable(),
     url: HttpsUrlSchema.nullish(),
-  }),
+  }).optional(),
   imdb: z.object({
     rating: z.number(),
     votes: z.number(),
     url: HttpsUrlSchema.nullish(),
-  }),
+  }).optional(),
 });
 
 export type MediaRating = z.infer<typeof MediaRatingSchema>;

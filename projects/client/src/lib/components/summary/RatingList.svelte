@@ -30,33 +30,24 @@
 </script>
 
 <div class="trakt-summary-ratings">
-  <RatingItem voteCount={trakt.votes}>
+  <RatingItem rating={toPercentage(trakt.rating, languageTag())}>
     <RatingIcon style={toVotesBasedRating(trakt.votes)} />
-    {#snippet rating()}
-      {toPercentage(trakt.rating, languageTag())}
-    {/snippet}
     {#snippet superscript()}
       {i18n.voteText(trakt.votes)}
     {/snippet}
   </RatingItem>
 
-  <RatingItem voteCount={imdb.votes} url={imdb.url}>
-    <IMDBIcon style={toVotesBasedRating(imdb.votes)} />
-    {#snippet rating()}
-      {imdb.rating}
-    {/snippet}
+  <RatingItem rating={imdb?.rating} url={imdb?.url}>
+    <IMDBIcon style={toVotesBasedRating(imdb?.votes)} />
     {#snippet superscript()}
-      {i18n.voteText(imdb.votes)}
+      {i18n.voteText(imdb?.votes ?? 0)}
     {/snippet}
   </RatingItem>
 
-  <RatingItem voteCount={rotten.critic} url={rotten.url}>
-    <RottenIcon style={toRottenTomatoRating(rotten.critic)} />
-    {#snippet rating()}
-      {rotten.critic}
-    {/snippet}
+  <RatingItem rating={rotten?.critic} url={rotten?.url}>
+    <RottenIcon style={toRottenTomatoRating(rotten?.critic)} />
     {#snippet superscript()}
-      {toRottenTomatoRating(rotten.critic)}
+      {toRottenTomatoRating(rotten?.critic ?? 0)}
     {/snippet}
   </RatingItem>
 </div>

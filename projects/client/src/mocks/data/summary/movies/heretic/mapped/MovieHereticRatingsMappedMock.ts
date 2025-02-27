@@ -17,11 +17,7 @@ export const MovieHereticRatingsMappedMock: MediaRating = {
       '10': 262,
     },
   },
-  'rotten': {
-    'critic': 0,
-    'audience': 0,
-    'url': 'https://www.rottentomatoes.com/m/heretic_2023',
-  },
+  'rotten': undefined,
   'imdb': {
     'rating': 7.1,
     'votes': 49905,

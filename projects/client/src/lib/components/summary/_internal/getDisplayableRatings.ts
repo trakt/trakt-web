@@ -11,14 +11,8 @@ export const EMPTY_RATINGS = Object.freeze({
     votes: 0,
     distribution: {},
   },
-  rotten: {
-    critic: 0,
-    audience: 0,
-  },
-  imdb: {
-    rating: 0,
-    votes: 0,
-  },
+  rotten: undefined,
+  imdb: undefined,
 });
 
 export function getDisplayableRatings({

@@ -1,9 +1,9 @@
 export type RottenTomatoRating = 'rotten' | 'fresh' | 'unrated';
 
 export function toRottenTomatoRating(
-  rating: number,
+  rating?: number,
 ): 'rotten' | 'fresh' | 'unrated' {
-  if (rating === 0) {
+  if (!rating) {
     return 'unrated';
   }
 

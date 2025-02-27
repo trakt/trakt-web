@@ -6,6 +6,10 @@ describe('toVotesBasedRating', () => {
     expect(toVotesBasedRating(0)).toBe('unrated');
   });
 
+  it('should return "unrated" when there are no votes', () => {
+    expect(toVotesBasedRating()).toBe('unrated');
+  });
+
   it('should return "rated" when votes is greater than 0', () => {
     expect(toVotesBasedRating(1)).toBe('rated');
     expect(toVotesBasedRating(100)).toBe('rated');
