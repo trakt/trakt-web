@@ -25,15 +25,15 @@ export const ShowSiloRatingsResponseMock: ShowRatingsResponse = {
   'imdb': {
     'rating': 8.1,
     'votes': 144574,
-    'link': 'http://www.imdb.com/title/tt14688458',
+    'link': 'https://www.imdb.com/title/tt14688458',
   },
   'metascore': {
     'rating': null,
-    'link': 'http://www.imdb.com/title/tt14688458/criticreviews',
+    'link': 'https://www.imdb.com/title/tt14688458/criticreviews',
   },
   'rotten_tomatoes': {
     'rating': 92,
     'user_rating': 64,
-    'link': 'http://www.rottentomatoes.com/tv/silo',
+    'link': 'https://www.rottentomatoes.com/tv/silo',
   },
 };

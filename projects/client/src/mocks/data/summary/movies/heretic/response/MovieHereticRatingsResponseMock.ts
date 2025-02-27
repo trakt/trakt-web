@@ -29,11 +29,11 @@ export const MovieHereticRatingsResponseMock: MovieRatingsResponse = {
   },
   'metascore': {
     'rating': 71,
-    'link': 'http://www.imdb.com/title/tt28015403/criticreviews',
+    'link': 'https://www.imdb.com/title/tt28015403/criticreviews',
   },
   'rotten_tomatoes': {
     'rating': 0,
     'user_rating': 0,
-    'link': 'http://www.rottentomatoes.com/m/heretic_2023',
+    'link': 'https://www.rottentomatoes.com/m/heretic_2023',
   },
 };

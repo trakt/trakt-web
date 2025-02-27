@@ -25,11 +25,11 @@ export const EpisodeSiloRatingsResponseMock: ShowRatingsResponse = {
   'imdb': {
     'rating': 8.1,
     'votes': 144574,
-    'link': 'http://www.imdb.com/title/tt14693272',
+    'link': 'https://www.imdb.com/title/tt14693272',
   },
   'metascore': {
     'rating': null,
-    'link': 'http://www.imdb.com/title/tt14693272/criticreviews',
+    'link': 'https://www.imdb.com/title/tt14693272/criticreviews',
   },
   'rotten_tomatoes': {
     'rating': 92,

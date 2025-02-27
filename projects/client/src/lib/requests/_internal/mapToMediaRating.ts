@@ -4,12 +4,6 @@ import type { MediaRating } from '../models/MediaRating.ts';
 
 type RatingResponse = MovieRatingsResponse | ShowRatingsResponse;
 
-// FIXME: remove when server always returns https
-function forceHttps(url: string | Nil): HttpsUrl | Nil {
-  const strippedUrl = url?.replace(/^(http:\/\/)/, '');
-  return prependHttps(strippedUrl);
-}
-
 export function mapToMediaRating(
   ratings: RatingResponse,
 ): MediaRating {
@@ -22,12 +16,12 @@ export function mapToMediaRating(
     rotten: {
       critic: ratings.rotten_tomatoes?.rating ?? 0,
       audience: ratings.rotten_tomatoes?.user_rating ?? 0,
-      url: forceHttps(ratings.rotten_tomatoes?.link),
+      url: prependHttps(ratings.rotten_tomatoes?.link),
     },
     imdb: {
       rating: ratings.imdb?.rating ?? 0,
       votes: ratings.imdb?.votes ?? 0,
-      url: forceHttps(ratings.imdb?.link),
+      url: prependHttps(ratings.imdb?.link),
     },
   };
 }
