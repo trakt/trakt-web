@@ -11,3 +11,11 @@
     #{$property}: var(--gap-xxs);
   }
 }
+
+@mixin adaptive-list-gap($property: gap) {
+  #{$property}: var(--gap-xl);
+
+  @include for-mobile {
+    #{$property}: var(--gap-m);
+  }
+}

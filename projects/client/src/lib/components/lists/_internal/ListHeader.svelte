@@ -41,6 +41,7 @@
     justify-content: space-between;
     align-items: center;
     gap: var(--gap-m);
+    height: var(--ni-40);
 
     &.trakt-list-inset-title {
       margin: 0;

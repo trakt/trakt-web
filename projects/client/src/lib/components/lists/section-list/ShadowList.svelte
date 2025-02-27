@@ -96,12 +96,9 @@
   .shadow-list-container {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xl);
     transition: gap var(--transition-increment) ease-in-out;
 
-    @include for-mobile {
-      gap: var(--gap-m);
-    }
+    @include adaptive-list-gap();
   }
 
   .shadow-list-empty-state {

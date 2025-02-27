@@ -42,7 +42,8 @@
   .trakt-grid-list-container {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xl);
+
+    @include adaptive-list-gap();
   }
 
   .trakt-list-items {
