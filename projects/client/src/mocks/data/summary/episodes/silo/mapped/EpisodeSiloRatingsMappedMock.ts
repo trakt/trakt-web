@@ -17,11 +17,6 @@ export const EpisodeSiloRatingsMappedMock: MediaRating = {
       '10': 1130,
     },
   },
-  'tmdb': {
-    'rating': 0.82,
-    'votes': 1181,
-    'url': 'https://www.themoviedb.org/tv/125988/season/1/episode/1',
-  },
   'rotten': {
     'critic': 92,
     'audience': 64,
@@ -31,9 +26,5 @@ export const EpisodeSiloRatingsMappedMock: MediaRating = {
     'rating': 8.1,
     'votes': 144574,
     'url': 'https://www.imdb.com/title/tt14693272',
-  },
-  'metacritic': {
-    'rating': 0,
-    'url': 'https://www.imdb.com/title/tt14693272/criticreviews',
   },
 };

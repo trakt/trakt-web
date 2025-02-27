@@ -10,11 +10,6 @@ export const MediaRatingSchema = z.object({
       z.number(),
     ),
   }),
-  tmdb: z.object({
-    rating: z.number(),
-    votes: z.number(),
-    url: HttpsUrlSchema.nullish(),
-  }),
   rotten: z.object({
     critic: z.number(),
     audience: z.number(),
@@ -23,10 +18,6 @@ export const MediaRatingSchema = z.object({
   imdb: z.object({
     rating: z.number(),
     votes: z.number(),
-    url: HttpsUrlSchema.nullish(),
-  }),
-  metacritic: z.object({
-    rating: z.number(),
     url: HttpsUrlSchema.nullish(),
   }),
 });

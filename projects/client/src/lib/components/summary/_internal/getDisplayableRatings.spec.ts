@@ -13,10 +13,6 @@ describe('getDisplayableRatings', () => {
       votes: 3,
       distribution: {},
     },
-    tmdb: {
-      rating: 8,
-      votes: 12,
-    },
     rotten: {
       critic: 90,
       audience: 10,
@@ -24,9 +20,6 @@ describe('getDisplayableRatings', () => {
     imdb: {
       rating: 3,
       votes: 5,
-    },
-    metacritic: {
-      rating: 9,
     },
   };
 

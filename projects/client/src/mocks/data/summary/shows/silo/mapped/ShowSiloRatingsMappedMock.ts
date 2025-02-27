@@ -17,11 +17,6 @@ export const ShowSiloRatingsMappedMock: MediaRating = {
       '10': 1130,
     },
   },
-  'tmdb': {
-    'rating': 0.82,
-    'votes': 1181,
-    'url': 'https://www.themoviedb.org/tv/125988',
-  },
   'rotten': {
     'critic': 92,
     'audience': 64,
@@ -31,9 +26,5 @@ export const ShowSiloRatingsMappedMock: MediaRating = {
     'rating': 8.1,
     'votes': 144574,
     'url': 'https://www.imdb.com/title/tt14688458',
-  },
-  'metacritic': {
-    'rating': 0,
-    'url': 'https://www.imdb.com/title/tt14688458/criticreviews',
   },
 };
