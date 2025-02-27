@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MovieActivityHistory } from "$lib/requests/queries/users/movieActivityHistoryQuery";
   import type { ShowActivityHistory } from "$lib/requests/queries/users/showActivityHistoryQuery";
+  import { pluralize } from "$lib/utils/formatting/string/pluralize";
   import ProfileMediaHistory from "./ProfileMediaHistory.svelte";
 
   type ProfileHistorySummaryProps = {
@@ -23,12 +24,12 @@
       <ProfileMediaHistory
         title={m.shows()}
         items={showItems}
-        footer={m.episodes_watched({ count: showItems.length })}
+        footer={pluralize("episodes_watched", showItems.length)}
       />
       <ProfileMediaHistory
         title={m.movies()}
         items={movieItems}
-        footer={m.movies_watched({ count: movieItems.length })}
+        footer={pluralize("movies_watched", movieItems.length)}
       />
     {/if}
   </div>

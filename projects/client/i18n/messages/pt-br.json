@@ -1,4 +1,13 @@
 {
+  "0": {
+    "single_number_of_episodes": "1 episódio"
+  },
+  "1": {
+    "single_episodes_watched": "1 episódio assistido"
+  },
+  "2": {
+    "single_movies_watched": "1 filme assistido"
+  },
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "upcoming_schedule_title": "Programação Futura",
   "season_premiere": "Estreia da Temporada",
@@ -13,6 +22,7 @@
   "recommended_movies": "Recomendados",
   "recommended_shows": "Recomendados",
   "number_of_episodes": "{count} episódios",
+  "single_number_of_episodes": "1 episode",
   "error_404_title": "404: Erro!",
   "error_404_message": "(Não se preocupe, acontece! Até a Força fica desequilibrada às vezes.)",
   "error_404_action": "Voltar para a segurança...",
@@ -124,8 +134,10 @@
   "last_30_days_watched": "Últimos 30 dias assistidos",
   "shows": "Séries",
   "episodes_watched": "{count} episódios assistidos",
+  "single_episodes_watched": "1 episode watched",
   "movies": "Filmes",
   "movies_watched": "{count} filmes assistidos",
+  "single_movies_watched": "1 movie watched",
   "details": "Detalhes",
   "expand_category": "Expandir {category}",
   "and_more": "{count} mais",

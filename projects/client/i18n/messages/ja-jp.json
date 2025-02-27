@@ -1,4 +1,9 @@
 {
+  "0": {
+    "single_number_of_episodes": "エピソード1",
+    "single_episodes_watched": "視聴済みエピソード1",
+    "single_movies_watched": "視聴済み作品1"
+  },
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "upcoming_schedule_title": "次回の予定",
   "season_premiere": "シーズン初公開",
@@ -13,6 +18,7 @@
   "recommended_movies": "おすすめ作品",
   "recommended_shows": "おすすめ番組",
   "number_of_episodes": "全{count}話",
+  "single_number_of_episodes": "1 episode",
   "error_404_title": "404エラー！",
   "error_404_message": "（大丈夫ですよ！フォースも時々乱れますから。）",
   "error_404_action": "安全な場所へ…",
@@ -124,8 +130,10 @@
   "last_30_days_watched": "過去30日間視聴した作品",
   "shows": "番組",
   "episodes_watched": "{count}話視聴済み",
+  "single_episodes_watched": "1 episode watched",
   "movies": "映画",
   "movies_watched": "{count}作品視聴済み",
+  "single_movies_watched": "1 movie watched",
   "details": "詳細",
   "expand_category": "{category}を展開",
   "and_more": "{count} 件もっと",

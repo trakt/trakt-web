@@ -1,4 +1,9 @@
 {
+  "0": {
+    "single_number_of_episodes": "1 odcinek",
+    "single_episodes_watched": "Obejrzałeś 1 odcinek!",
+    "single_movies_watched": "Obejrzany 1 film!"
+  },
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "upcoming_schedule_title": "Nadchodzące",
   "season_premiere": "Premiera sezonu",
@@ -13,6 +18,7 @@
   "recommended_movies": "Polecane filmy",
   "recommended_shows": "Polecane seriale",
   "number_of_episodes": "{count} odcinków",
+  "single_number_of_episodes": "1 episode",
   "error_404_title": "404: Nicość. Pustka.",
   "error_404_message": "(To się zdarza, nie przejmuj się! Nawet Moc się czasem nie ułoży.)",
   "error_404_action": "Powróć do bezpiecznej strefy...",
@@ -124,8 +130,10 @@
   "last_30_days_watched": "Obejrzane przez ostatnie 30 dni",
   "shows": "Seriale",
   "episodes_watched": "{count} obejrzanych odcinków",
+  "single_episodes_watched": "1 episode watched",
   "movies": "Filmy",
   "movies_watched": "{count} obejrzanych filmów",
+  "single_movies_watched": "1 movie watched",
   "details": "Szczegóły",
   "expand_category": "Rozwiń {category}",
   "and_more": "{count} więcej",

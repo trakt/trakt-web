@@ -1,4 +1,9 @@
 {
+  "0": {
+    "single_number_of_episodes": "1 серія",
+    "single_episodes_watched": "Переглянуто 1 серію",
+    "single_movies_watched": "Переглянуто 1 фільм"
+  },
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "upcoming_schedule_title": "Наступний розклад",
   "season_premiere": "Прем'єра сезону",
@@ -13,6 +18,7 @@
   "recommended_movies": "Рекомендовані фільми",
   "recommended_shows": "Рекомендовані серіали",
   "number_of_episodes": "{count} епізодів",
+  "single_number_of_episodes": "1 episode",
   "error_404_title": "404: Ніщо. Пустота.",
   "error_404_message": "(Не хвилюйтесь, буває! Навіть Сила іноді виходить з ладу.)",
   "error_404_action": "Повернутися до безпеки...",
@@ -124,8 +130,10 @@
   "last_30_days_watched": "Переглянуті за останні 30 днів",
   "shows": "Серіали",
   "episodes_watched": "{count} серій переглянуто",
+  "single_episodes_watched": "1 episode watched",
   "movies": "Фільми",
   "movies_watched": "{count} фільмів переглянуто",
+  "single_movies_watched": "1 movie watched",
   "details": "Деталі",
   "expand_category": "Розгорнути {category}",
   "and_more": "{count} ще",

@@ -5,12 +5,13 @@ import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 
 import { toHumanETA } from '$lib/utils/formatting/date/toHumanETA.ts';
 import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
+import { pluralize } from '$lib/utils/formatting/string/pluralize.ts';
 import type { TagIntl } from './TagIntl.ts';
 
 export const TagIntlProvider: TagIntl = {
   toDuration: (duration) =>
     toHumanDuration({ minutes: duration }, languageTag()),
-  toEpisodeCount: (count) => m.number_of_episodes({ count }),
+  toEpisodeCount: (count) => pluralize('number_of_episodes', count),
   toPlayCount: (count) =>
     m.plays({ number: toHumanNumber(count, languageTag()) }),
   toWatcherCount: (count) => m.active_watchers({ count }),
