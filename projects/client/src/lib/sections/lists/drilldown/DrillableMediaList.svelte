@@ -1,53 +1,27 @@
 <script lang="ts" generics="T extends { id: unknown }, M">
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { Snippet } from "svelte";
   import ViewAllButton from "../components/ViewAllButton.svelte";
-  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import type { DrillListProps } from "./DrillListProps";
-  import type { MediaStore } from "./MediaStore";
+  import MediaList from "./MediaList.svelte";
+  import type { MediaListProps } from "./MediaListProps";
 
-  type DrillableList<T, M> = DrillListProps<T, M> & {
-    drilldownLabel: string;
-    useList: MediaStore<T, M>;
-    empty?: Snippet;
-    badge?: Snippet;
-  };
+  type DrillableList<T, M> = MediaListProps<T, M> &
+    DrillListProps<M> & {
+      drilldownLabel: string;
+      empty?: Snippet;
+      badge?: Snippet;
+    };
 
-  const {
-    id,
-    title,
-    drilldownLabel,
-    empty: externalEmpty,
-    badge,
-    type,
-    item,
-    useList,
-    urlBuilder,
-  }: DrillableList<T, M> = $props();
-
-  const { list, isLoading } = $derived(useList({ type }));
-  const isEmptyList = $derived(!$isLoading && $list.length === 0);
+  const { drilldownLabel, urlBuilder, ...props }: DrillableList<T, M> =
+    $props();
 </script>
 
-<SectionList
-  {id}
-  items={$list}
-  {badge}
-  {item}
-  {title}
-  --height-list={mediaListHeightResolver(type)}
->
-  {#snippet actions()}
+<MediaList {...props}>
+  {#snippet actions(items, type)}
     <ViewAllButton
       href={urlBuilder({ type })}
       label={drilldownLabel}
-      isDisabled={isEmptyList}
+      isDisabled={items.length === 0}
     />
   {/snippet}
-
-  {#snippet empty()}
-    {#if !$isLoading}
-      {@render externalEmpty?.()}
-    {/if}
-  {/snippet}
-</SectionList>
+</MediaList>

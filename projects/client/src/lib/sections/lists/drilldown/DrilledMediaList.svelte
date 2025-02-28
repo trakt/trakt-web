@@ -5,10 +5,10 @@
   import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
   import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
-  import type { DrillListProps } from "./DrillListProps";
+  import type { MediaListProps } from "./MediaListProps";
   import type { PaginatableStore } from "./PaginatableStore";
 
-  type DrilledMediaListProps = Omit<DrillListProps<T, M>, "urlBuilder"> & {
+  type DrilledMediaListProps = Omit<MediaListProps<T, M>, "useList"> & {
     useList: PaginatableStore<T, M>;
     empty?: Snippet;
     badge?: Snippet;

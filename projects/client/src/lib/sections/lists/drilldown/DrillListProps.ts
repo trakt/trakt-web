@@ -1,10 +1,5 @@
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import type { Snippet } from 'svelte';
 
-export type DrillListProps<T, M = MediaType> = {
-  id: string;
-  title: string;
-  type: M;
-  item: Snippet<[T]>;
+export type DrillListProps<M = MediaType> = {
   urlBuilder: (params: { type: M } & Record<string, unknown>) => string;
 };

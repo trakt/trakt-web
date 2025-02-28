@@ -5,6 +5,7 @@ import {
   type RelatedShow,
   showRelatedQuery,
 } from '$lib/requests/queries/shows/showRelatedQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import type { MediaType } from '../../../requests/models/MediaType.ts';
@@ -38,5 +39,9 @@ export function useRelatedList(
 
   return {
     list,
+    isLoading: derived(
+      query,
+      toLoadingState,
+    ),
   };
 }

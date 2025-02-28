@@ -1,9 +1,9 @@
 <script lang="ts">
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import MediaList from "$lib/sections/lists/drilldown/MediaList.svelte";
+
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MediaCard from "./components/MediaCard.svelte";
   import { useRelatedList } from "./stores/useRelatedList";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type RelatedListProps = {
     title: string;
@@ -12,17 +12,15 @@
   };
 
   const { title, type, slug }: RelatedListProps = $props();
-
-  const { list } = $derived(useRelatedList({ type, slug }));
 </script>
 
-<SectionList
+<MediaList
   id={`related-list-${type}-${slug}`}
-  items={$list}
+  useList={(params) => useRelatedList({ ...params, slug })}
+  {type}
   {title}
-  --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
     <MediaCard {type} {media} />
   {/snippet}
-</SectionList>
+</MediaList>
