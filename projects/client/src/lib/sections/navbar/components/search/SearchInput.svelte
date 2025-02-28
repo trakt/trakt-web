@@ -245,8 +245,11 @@
       min-height: calc(var(--height-result-item) * 7);
       height: 100vh;
       max-height: 80vh;
-      min-width: var(--ni-280);
-      max-width: var(--ni-480);
+      width: clamp(
+        var(--ni-280),
+        var(--mobile-search-focus-width) - var(--ni-16),
+        var(--ni-480)
+      );
       padding: var(--ni-8);
 
       overflow: hidden;
