@@ -1,5 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import { movieRelatedQuery } from '$lib/requests/queries/movies/movieRelatedQuery.ts';
 import {
   type RelatedShow,
@@ -11,7 +12,7 @@ import { derived } from 'svelte/store';
 import type { MediaType } from '../../../requests/models/MediaType.ts';
 
 export type RelatedEntry = RelatedShow | MovieEntry;
-export type RelatedMediaList = Array<RelatedEntry>;
+export type RelatedMediaList = Paginatable<RelatedEntry>;
 
 type PopularListStoreProps = {
   type: MediaType;
@@ -35,10 +36,15 @@ export function useRelatedList(
   { type, slug }: PopularListStoreProps,
 ) {
   const query = useQuery(typeToQuery({ type, slug }));
-  const list = derived(query, ($query) => $query.data ?? []);
+  const list = derived(query, ($query) => $query.data?.entries ?? []);
+  const page = derived(
+    query,
+    ($query) => $query.data?.page ?? { page: 0, total: 0 },
+  );
 
   return {
     list,
+    page,
     isLoading: derived(
       query,
       toLoadingState,
