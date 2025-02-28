@@ -1,22 +1,19 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
 import {
   type PopularShow,
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
-import type { MediaType } from '../../../requests/models/MediaType.ts';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 
 export type PopularEntry = PopularShow | MovieEntry;
 export type PopularMediaList = Array<PopularEntry>;
 
 type PopularListStoreProps = {
   type: MediaType;
-  limit?: number;
-  page?: number;
-};
+} & PaginationParams;
 
 function typeToQuery(
   { type, limit, page }: PopularListStoreProps,
@@ -37,19 +34,5 @@ function typeToQuery(
 export function usePopularList(
   props: PopularListStoreProps,
 ) {
-  const query = useQuery(typeToQuery(props));
-
-  const isLoading = derived(
-    query,
-    toLoadingState,
-  );
-
-  return {
-    isLoading,
-    list: derived(query, ($query) => $query.data?.entries ?? []),
-    page: derived(
-      query,
-      ($query) => $query.data?.page ?? { page: 0, total: 0 },
-    ),
-  };
+  return usePaginatedListQuery(typeToQuery(props));
 }

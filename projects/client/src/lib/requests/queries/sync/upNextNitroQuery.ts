@@ -4,9 +4,9 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeProgressEntrySchema } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { mapUpNextResponse } from '$lib/requests/queries/sync/upNextQuery.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
@@ -16,13 +16,10 @@ export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
   }),
 );
 
-type UpNextParams = {
-  page?: number;
-  limit?: number;
-} & ApiParams;
+type UpNextParams = PaginationParams & ApiParams;
 
-const upNextNitroRequest = (params: UpNextParams = {}) => {
-  const { fetch, page = 1, limit = DEFAULT_PAGE_SIZE } = params;
+const upNextNitroRequest = (params: UpNextParams) => {
+  const { fetch, limit, page } = params;
 
   return api({ fetch })
     .sync

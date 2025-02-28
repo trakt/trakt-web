@@ -1,44 +1,34 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { upNextNitroQuery } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { upNextQuery } from '$lib/requests/queries/sync/upNextQuery.ts';
 import type { UpNextType } from '$lib/sections/lists/progress/useUpNextExperiment.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 
 export type UpNextStoreProps = {
   type: UpNextType;
-  limit?: number;
-  page?: number;
-};
+} & PaginationParams;
 
-export const useUpNextList = (
-  { type, ...params }: UpNextStoreProps,
-) => {
+function typeToQuery(
+  { type, limit, page }: UpNextStoreProps,
+) {
   const { current: user } = useUser();
-
-  const query = useQuery(
-    (type === 'standard' ? upNextQuery : upNextNitroQuery)({
-      sort: user().preferences.progress.sort,
-      ...params,
-    }),
-  );
-
-  return {
-    list: derived(
-      query,
-      ($query) =>
-        ($query.data?.entries ?? []).filter((entry) =>
-          entry.airDate.getTime() < Date.now()
-        ),
-    ),
-    page: derived(
-      query,
-      ($query) => $query.data?.page ?? { page: 0, total: 0 },
-    ),
-    isLoading: derived(
-      query,
-      toLoadingState,
-    ),
+  const params = {
+    limit,
+    page,
+    sort: user().preferences.progress.sort,
   };
-};
+
+  switch (type) {
+    case 'standard':
+      return upNextQuery(params);
+    case 'nitro':
+      return upNextNitroQuery(params);
+  }
+}
+
+export function useUpNextList(
+  props: UpNextStoreProps,
+) {
+  return usePaginatedListQuery(typeToQuery(props));
+}

@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { LimitParams } from '$lib/requests/models/LimitParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { z } from 'zod';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
@@ -10,12 +10,10 @@ import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 export const RecommendedMovieSchema = MovieEntrySchema;
 export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
-type RecommendedMoviesParams = {
-  limit?: number;
-} & ApiParams;
+type RecommendedMoviesParams = LimitParams & ApiParams;
 
 const recommendedMoviesRequest = (
-  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedMoviesParams,
+  { fetch, limit }: RecommendedMoviesParams,
 ) =>
   api({ fetch })
     .recommendations

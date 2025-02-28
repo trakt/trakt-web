@@ -26,7 +26,8 @@
     useStablePaginated({
       ...params,
       type: "episode",
-      useList: (params) => useUpNextList({ type: $type, limit: params.limit }),
+      useList: (params) =>
+        useUpNextList({ type: $type, limit: params.limit, page: params.page }),
       compareFn: (l, r) => l.show.id === r.show.id,
     })}
   title={m.up_next_title()}

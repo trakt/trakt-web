@@ -6,22 +6,23 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
-type MovieWatchlistParams = {
-  sort: SortType;
-  page?: number;
-  limit?: number;
-} & ApiParams;
+type MovieWatchlistParams =
+  & {
+    sort: SortType;
+  }
+  & PaginationParams
+  & ApiParams;
 
 export const WatchlistMovieSchema = ListItemSchemaFactory(MovieEntrySchema);
 export type WatchlistMovie = z.infer<typeof WatchlistMovieSchema>;
 
 const watchlistRequest = (
-  { fetch, sort, limit = DEFAULT_PAGE_SIZE, page = 1 }: MovieWatchlistParams,
+  { fetch, sort, limit, page }: MovieWatchlistParams,
 ) =>
   api({ fetch })
     .users

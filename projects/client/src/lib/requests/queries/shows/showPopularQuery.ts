@@ -5,7 +5,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
@@ -16,10 +16,7 @@ export const PopularShowSchema = ShowEntrySchema.merge(
 );
 export type PopularShow = z.infer<typeof PopularShowSchema>;
 
-type ShowPopularParams = {
-  page?: number;
-  limit?: number;
-} & ApiParams;
+type ShowPopularParams = PaginationParams & ApiParams;
 
 function mapToPopularShow(show: ShowResponse): PopularShow {
   const { aired_episodes } = show;
@@ -34,7 +31,7 @@ function mapToPopularShow(show: ShowResponse): PopularShow {
 }
 
 const showPopularRequest = (
-  { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: ShowPopularParams,
+  { fetch, limit, page }: ShowPopularParams,
 ) =>
   api({ fetch })
     .shows

@@ -7,16 +7,17 @@ import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
-type ShowWatchlistParams = {
-  sort: SortType;
-  page?: number;
-  limit?: number;
-} & ApiParams;
+type ShowWatchlistParams =
+  & {
+    sort: SortType;
+  }
+  & PaginationParams
+  & ApiParams;
 
 export const WatchlistShowEntrySchema = ShowEntrySchema.merge(
   EpisodeCountSchema,
@@ -28,7 +29,7 @@ export const WatchlistShowSchema = ListItemSchemaFactory(
 export type WatchlistShow = z.infer<typeof WatchlistShowSchema>;
 
 const watchlistRequest = (
-  { fetch, sort, limit = DEFAULT_PAGE_SIZE, page = 1 }: ShowWatchlistParams,
+  { fetch, sort, limit, page }: ShowWatchlistParams,
 ) =>
   api({ fetch })
     .users

@@ -1,6 +1,6 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
   movieTrendingQuery,
   type TrendingMovie,
@@ -9,53 +9,31 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
 
 export type TrendingEntry = TrendingMovie | TrendingShow;
+export type TrendingMediaList = Paginatable<TrendingEntry>;
 
-type TrendingListStoreProps = {
+type TrendingListStoreProps = PaginationParams & {
   type: MediaType;
-  limit?: number;
-  page?: number;
 };
 
 function typeToQuery(
-  { type, limit, page }: TrendingListStoreProps,
+  params: TrendingListStoreProps,
 ) {
-  const params = {
-    limit,
-    page,
-  };
-
-  switch (type) {
+  switch (params.type) {
     case 'movie':
       return movieTrendingQuery(params) as CreateQueryOptions<
-        Paginatable<TrendingEntry>
+        TrendingMediaList
       >;
     case 'show':
-      return showTrendingQuery(params) as CreateQueryOptions<
-        Paginatable<TrendingEntry>
-      >;
+      return showTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>;
   }
 }
 
 export function useTrendingList(
-  { type, limit, page }: TrendingListStoreProps,
+  props: TrendingListStoreProps,
 ) {
-  const query = useQuery(typeToQuery({ type, limit, page }));
-  const isLoading = derived(
-    query,
-    toLoadingState,
-  );
-
-  return {
-    isLoading,
-    list: derived(query, ($query) => $query.data?.entries ?? []),
-    page: derived(
-      query,
-      ($query) => $query.data?.page ?? { page: 0, total: 0 },
-    ),
-  };
+  return usePaginatedListQuery(typeToQuery(props));
 }

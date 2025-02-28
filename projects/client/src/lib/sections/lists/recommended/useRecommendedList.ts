@@ -1,5 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
   type RecommendedMovie,
   recommendedMoviesQuery,
@@ -8,11 +9,9 @@ import {
   type RecommendedShow,
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
+import { toInMemoryPaginatable } from '$lib/sections/lists/recommended/toInMemoryPaginatable.ts';
 import { useDailyOrderedArray } from '$lib/sections/lists/stores/useDailyOrderedArray.ts';
-import {
-  DEFAULT_PAGE_SIZE,
-  RECOMMENDED_UPPER_LIMIT,
-} from '$lib/utils/constants.ts';
+import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { onMount } from 'svelte';
@@ -23,13 +22,14 @@ export type RecommendedMediaList = Array<RecommendedEntry>;
 
 type RecommendationListStoreProps = {
   type: MediaType;
-  limit?: number;
-};
+} & PaginationParams;
 
 function typeToQuery(
-  { type }: RecommendationListStoreProps,
+  { type }: Omit<RecommendationListStoreProps, 'page'>,
 ) {
+  /** Recommendations are calculated daily, so we load all of them. */
   const props = { type, limit: RECOMMENDED_UPPER_LIMIT };
+
   switch (type) {
     case 'movie':
       return recommendedMoviesQuery(props) as CreateQueryOptions<
@@ -42,8 +42,8 @@ function typeToQuery(
   }
 }
 
-export function useRecommendedList(
-  props: RecommendationListStoreProps,
+function useLimitRecommendedList(
+  props: Omit<RecommendationListStoreProps, 'page'>,
 ) {
   const query = useQuery(typeToQuery(props));
   const unstable = derived(query, ($query) => $query.data ?? []);
@@ -66,8 +66,15 @@ export function useRecommendedList(
   return {
     list: derived(
       list,
-      ($list) => $list.slice(0, props.limit ?? DEFAULT_PAGE_SIZE),
+      ($list) => $list.slice(0, props.limit),
     ),
     isLoading,
   };
 }
+
+export const useRecommendedList = (props: RecommendationListStoreProps) =>
+  toInMemoryPaginatable({
+    useList: useLimitRecommendedList,
+    total: props.limit,
+    type: props.type,
+  })({ ...props });

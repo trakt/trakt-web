@@ -5,7 +5,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapToEpisodeCount } from '../../_internal/mapToEpisodeCount.ts';
@@ -19,10 +19,7 @@ export const TrendingShowSchema = ShowEntrySchema
   });
 export type TrendingShow = z.infer<typeof TrendingShowSchema>;
 
-type ShowTrendingParams = {
-  page?: number;
-  limit?: number;
-} & ApiParams;
+type ShowTrendingParams = PaginationParams & ApiParams;
 
 function mapToTrendingShow({
   watchers,
@@ -36,7 +33,7 @@ function mapToTrendingShow({
 }
 
 const showTrendingRequest = (
-  { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: ShowTrendingParams,
+  { fetch, limit, page }: ShowTrendingParams,
 ) =>
   api({ fetch })
     .shows

@@ -7,14 +7,14 @@ import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { mapToUserProfile } from '$lib/requests/_internal/mapToUserProfile.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
   type SocialActivity,
   SocialActivitySchema,
 } from '$lib/requests/models/SocialActivity.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
-type SocialActivityParams = { limit?: number; page?: number } & ApiParams;
+type SocialActivityParams = PaginationParams & ApiParams;
 
 function mapToSocialActivity(
   response: SocialActivityResponse,
@@ -43,7 +43,7 @@ function mapToSocialActivity(
 }
 
 const socialActivityRequest = (
-  { fetch, limit = DEFAULT_PAGE_SIZE, page }: SocialActivityParams,
+  { fetch, limit, page }: SocialActivityParams,
 ) =>
   api({ fetch })
     .users

@@ -1,5 +1,6 @@
 <script lang="ts" generics="T extends { id: unknown }, M">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import type { MediaListProps } from "./MediaListProps";
 
@@ -14,7 +15,9 @@
     useList,
   }: MediaListProps<T, M> = $props();
 
-  const { list, isLoading } = $derived(useList({ type }));
+  const { list, isLoading } = $derived(
+    useList({ type, page: 1, limit: DEFAULT_PAGE_SIZE }),
+  );
 </script>
 
 {#snippet actions()}

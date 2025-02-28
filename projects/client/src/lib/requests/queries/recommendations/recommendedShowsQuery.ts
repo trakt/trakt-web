@@ -4,7 +4,7 @@ import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts'
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { LimitParams } from '$lib/requests/models/LimitParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
@@ -13,12 +13,10 @@ import { MediaEntrySchema } from '../../models/MediaEntry.ts';
 export const RecommendedShowSchema = MediaEntrySchema.merge(EpisodeCountSchema);
 export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
-type RecommendedShowsParams = {
-  limit?: number;
-} & ApiParams;
+type RecommendedShowsParams = LimitParams & ApiParams;
 
 const recommendedShowsRequest = (
-  { fetch, limit = DEFAULT_PAGE_SIZE }: RecommendedShowsParams,
+  { fetch, limit }: RecommendedShowsParams,
 ) =>
   api({ fetch })
     .recommendations

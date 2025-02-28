@@ -17,10 +17,11 @@
   id="view-all-recently-watched-list"
   {title}
   type="episode"
-  useList={({ limit }) =>
+  useList={({ limit, page }) =>
     useRecentlyWatchedList({
       type: "all",
       limit,
+      page,
     })}
 >
   {#snippet item(media)}

@@ -17,10 +17,11 @@
   {title}
   {drilldownLabel}
   type="episode"
-  useList={({ limit }) =>
+  useList={({ limit, page }) =>
     useRecentlyWatchedList({
       type: "all",
       limit,
+      page,
     })}
   urlBuilder={UrlBuilder.history.all}
 >

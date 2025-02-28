@@ -1,7 +1,7 @@
 import type { SortType } from '$lib/api.ts';
-import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
   movieWatchlistQuery,
   type WatchlistMovie,
@@ -10,65 +10,51 @@ import {
   showWatchlistQuery,
   type WatchlistShow,
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
+
+export type WatchlistMediaItem = WatchlistMovie | WatchlistShow;
+export type WatchlistMediaList = WatchlistMediaItem;
 
 // FIXME remove when sorting is fixed
 const WATCHLIST_LIMIT = 500;
 
-export type WatchListParams = {
-  sort: SortType;
+export type WatchListStoreProps = PaginationParams & {
+  type: MediaType;
+  sort?: SortType;
 };
 
-export type WatchlistMediaItem = WatchlistMovie | WatchlistShow;
-export type WatchlistMediaList = Array<WatchlistMediaItem>;
-
-export type WatchListStoreProps = {
-  type: MediaType;
-  limit?: number;
-  page?: number;
-} & Partial<WatchListParams>;
-
-function typeToQuery(
-  { type, page, sort = 'added' }: WatchListStoreProps,
-) {
-  const params = {
+function typeToQuery(params: WatchListStoreProps) {
+  const queryParams = {
     limit: WATCHLIST_LIMIT,
-    page,
-    sort,
+    page: params.page,
+    sort: params.sort ?? 'added',
   };
 
-  switch (type) {
+  switch (params.type) {
     case 'movie':
-      return movieWatchlistQuery(params) as CreateQueryOptions<
-        Paginatable<WatchlistMediaItem>
+      return movieWatchlistQuery(queryParams) as CreateQueryOptions<
+        Paginatable<WatchlistMediaList>
       >;
     case 'show':
-      return showWatchlistQuery(params) as CreateQueryOptions<
-        Paginatable<WatchlistMediaItem>
+      return showWatchlistQuery(queryParams) as CreateQueryOptions<
+        Paginatable<WatchlistMediaList>
       >;
   }
 }
 
 export function useWatchList(params: WatchListStoreProps) {
-  const query = useQuery(typeToQuery(params));
-  const list = derived(
-    query,
-    ($query) => ($query.data?.entries ?? []).map((item) => item.entry),
-  );
-
-  const isLoading = derived(
-    query,
-    toLoadingState,
+  const { isLoading, list: items, page } = usePaginatedListQuery(
+    typeToQuery(params),
   );
 
   return {
-    list,
     isLoading,
-    page: derived(
-      query,
-      ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    list: derived(
+      items,
+      ($items) => $items.map((item) => item.entry),
     ),
+    page,
   };
 }

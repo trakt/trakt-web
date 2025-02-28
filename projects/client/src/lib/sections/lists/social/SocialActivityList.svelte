@@ -6,7 +6,8 @@
   import SocialActivityItem from "./SocialActivityItem.svelte";
   import { useSocialActivityList } from "./useSocialActivityList";
 
-  const { list, isLoading } = useSocialActivityList({});
+  /** once we have a proper social hub we should encourage people to find other users to follow, aka: empty placeholder */
+  const { list, isLoading } = useSocialActivityList({ limit: 1, page: 1 });
 
   const hasSocialActivity = $derived(!$isLoading && $list.length > 0);
 </script>

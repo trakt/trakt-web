@@ -4,7 +4,7 @@ import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
-import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
@@ -15,10 +15,7 @@ export const AnticipatedMovieSchema = MovieEntrySchema.extend({
 });
 export type AnticipatedMovie = z.infer<typeof AnticipatedMovieSchema>;
 
-type MovieAnticipatedParams = {
-  page?: number;
-  limit?: number;
-} & ApiParams;
+type MovieAnticipatedParams = PaginationParams & ApiParams;
 
 function mapToAnticipatedMovie({
   list_count,
@@ -31,7 +28,7 @@ function mapToAnticipatedMovie({
 }
 
 const movieAnticipatedRequest = (
-  { fetch, limit = DEFAULT_PAGE_SIZE, page = 1 }: MovieAnticipatedParams,
+  { fetch, limit, page }: MovieAnticipatedParams,
 ) =>
   api({ fetch })
     .movies

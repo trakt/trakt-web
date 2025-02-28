@@ -1,10 +1,9 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { listItemsQuery } from '$lib/requests/queries/lists/listItemsQuery.ts';
 import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
 
 const LIST_LIMIT = 25;
 
@@ -16,11 +15,9 @@ export type ListParams = {
   id?: number;
 };
 
-type UseListItemsProps = {
+type UseListItemsProps = PaginationParams & {
   list: ListParams;
-  limit?: number;
   type?: MediaType;
-  page?: number;
 };
 
 // FIXME: remove when official lists are sluggable
@@ -62,19 +59,5 @@ function listToQuery(
 }
 
 export function useListItems(props: UseListItemsProps) {
-  const query = useQuery(listToQuery(props));
-
-  const isLoading = derived(
-    query,
-    toLoadingState,
-  );
-
-  return {
-    isLoading,
-    list: derived(query, ($query) => $query.data?.entries ?? []),
-    page: derived(
-      query,
-      ($query) => $query.data?.page ?? { page: 0, total: 0 },
-    ),
-  };
+  return usePaginatedListQuery(listToQuery(props));
 }

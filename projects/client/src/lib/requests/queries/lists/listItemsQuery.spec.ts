@@ -8,6 +8,11 @@ import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { listItemsQuery } from './listItemsQuery.ts';
 
+const PAGINATION_PARAMS = {
+  limit: 10,
+  page: 1,
+};
+
 describe('listItemsQuery', () => {
   it('should query list items', async () => {
     const result = await runQuery({
@@ -15,6 +20,7 @@ describe('listItemsQuery', () => {
         createQuery(
           listItemsQuery({
             listId: `${assertDefined(SiloListsMappedMock.at(0)).id}`,
+            ...PAGINATION_PARAMS,
           }),
         ),
       mapper: (response) => response?.data?.entries,
@@ -33,6 +39,7 @@ describe('listItemsQuery', () => {
           listItemsQuery({
             listId: `${assertDefined(SiloListsMappedMock.at(0)).id}`,
             type: 'show',
+            ...PAGINATION_PARAMS,
           }),
         ),
       mapper: (response) => response?.data?.entries,
@@ -48,6 +55,7 @@ describe('listItemsQuery', () => {
           listItemsQuery({
             listId: `${assertDefined(HereticListsMappedMock.at(0)).id}`,
             type: 'movie',
+            ...PAGINATION_PARAMS,
           }),
         ),
       mapper: (response) => response?.data?.entries,
