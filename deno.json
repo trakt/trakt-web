@@ -37,6 +37,7 @@
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "strictBindCallApply": true,
-    "strict": true
+    "strict": true,
+    "verbatimModuleSyntax": true
   }
 }
