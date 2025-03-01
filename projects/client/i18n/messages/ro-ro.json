@@ -321,5 +321,7 @@
   "lab_up_next_nitro_hidden_message": "Datorită modificărilor de design interne, filmele ascunse anterior vor fi acum vizibile în lista ta, cu o miniatură alb-negru pentru a le identifica rapid, având opțiunea de a le readuce sau de a le elimina din listă.",
   "restore_show_warning": "Sigur vrei să restaurezi {title}? Acesta va fi restaurat pe progresul și calendarul tău.",
   "restore_show_label": "Restaurare {title}",
-  "restore_show": "Restaurare"
+  "restore_show": "Restaurare",
+  "mark_as_watched_show_warning": "Sigur vrei să marchezi {title} ca vizionat? Asta va marca toate episoadele ca vizionate.",
+  "mark_as_watched_multiple_episodes_warning": "Sigur vrei să marchezi {count} episoade ca vizionate?"
 }

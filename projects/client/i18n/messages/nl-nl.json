@@ -321,5 +321,7 @@
   "lab_up_next_nitro_hidden_message": "Door interne ontwerpwijzigingen zullen eerder verborgen series nu zichtbaar zijn in je lijst met een zwart-witte miniatuur zodat je ze snel herkent, met de mogelijkheid ze weer zichtbaar te maken of uit de lijst te verwijderen.",
   "restore_show_warning": "Weet je zeker dat je de {title} serie wilt herstellen? Dit herstelt de voortgang en de kalender.",
   "restore_show_label": "Herstel serie {title}",
-  "restore_show": "Serie herstellen"
+  "restore_show": "Serie herstellen",
+  "mark_as_watched_show_warning": "Weet je zeker dat je {title} als bekeken wilt markeren? Dit markeert alle afleveringen als bekeken.",
+  "mark_as_watched_multiple_episodes_warning": "Weet je zeker dat je {count} afleveringen als bekeken wilt markeren?"
 }

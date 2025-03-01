@@ -3,7 +3,6 @@
   import MarkAsWatchedIcon from "../../icons/MarkAsWatchedIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
   import Button from "../Button.svelte";
-  import { attachRemoveWarning } from "../_internal/attachRemoveWarning";
   import { useDangerButton } from "../_internal/useDangerButton";
   import { MarkAsWatchedButtonIntlProvider } from "./MarkAsWatchedButtonIntlProvider";
   import type { MarkAsWatchedButtonProps } from "./MarkAsWatchedButtonProps";
@@ -19,11 +18,7 @@
     ...props
   }: MarkAsWatchedButtonProps = $props();
 
-  const handler = $derived(
-    isWatched
-      ? attachRemoveWarning(onRemove, i18n.warning({ isWatched, title }))
-      : onWatch,
-  );
+  const handler = $derived(isWatched ? onRemove : onWatch);
 
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: isWatched, color: "purple" }),

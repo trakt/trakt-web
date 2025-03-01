@@ -321,5 +321,7 @@
   "lab_up_next_nitro_hidden_message": "以前非表示になっていた番組は、内部デザイン変更によりリストに戻され、迅速に認識できるように白黒のサムネイルが表示されます。非表示解除するか、リストから削除するかを選択できます。",
   "restore_show_warning": "{title}の番組を復元しますか？これは進行状況とカレンダーで復元されます。",
   "restore_show_label": "{title}の番組を復元",
-  "restore_show": "番組を復元"
+  "restore_show": "番組を復元",
+  "mark_as_watched_show_warning": "{title}を視聴済みにしますか？これにより、全エピソードが視聴済みにマークされます。",
+  "mark_as_watched_multiple_episodes_warning": "{count}エピソードを視聴済みにしますか？"
 }

@@ -321,5 +321,7 @@
   "lab_up_next_nitro_hidden_message": "En raison de modifications de conception internes, les séries précédemment cachées apparaîtront désormais dans votre liste avec une vignette en noir et blanc pour vous aider à les repérer rapidement, avec la possibilité de les afficher à nouveau ou de les supprimer de la liste.",
   "restore_show_warning": "Êtes-vous sûr de vouloir restaurer la série {title} ? Cela restaurera votre progression et votre calendrier.",
   "restore_show_label": "Restaurer la série {title}",
-  "restore_show": "Restaurer la série"
+  "restore_show": "Restaurer la série",
+  "mark_as_watched_show_warning": "Êtes-vous sûr de vouloir marquer {title} comme vu ? Cela marquera tous les épisodes comme vus.",
+  "mark_as_watched_multiple_episodes_warning": "Êtes-vous sûr de vouloir marquer {count} épisodes comme vus ?"
 }

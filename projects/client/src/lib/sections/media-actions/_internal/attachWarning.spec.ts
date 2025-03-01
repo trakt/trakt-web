@@ -1,11 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
-import { attachRemoveWarning } from './attachRemoveWarning.ts';
+import { attachWarning } from './attachWarning.ts';
 
-describe('attachRemoveWarning', () => {
+describe('attachWarning', () => {
   it('should call handler when confirmed', () => {
     const handler = vi.fn();
     const message = 'Are you sure?';
-    const wrappedHandler = attachRemoveWarning(handler, message);
+    const wrappedHandler = attachWarning(handler, message);
 
     vi.spyOn(window, 'confirm').mockImplementation(() => true);
 
@@ -18,7 +18,7 @@ describe('attachRemoveWarning', () => {
   it('should not call handler when canceled', () => {
     const handler = vi.fn();
     const message = 'Are you sure?';
-    const wrappedHandler = attachRemoveWarning(handler, message);
+    const wrappedHandler = attachWarning(handler, message);
 
     vi.spyOn(window, 'confirm').mockImplementation(() => false);
 

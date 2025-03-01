@@ -11,6 +11,4 @@ export const MarkAsWatchedButtonIntlProvider: MarkAsWatchedButtonIntl = {
       : m.mark_as_watched_label({ title }),
   text: ({ isWatched }: MarkAsWatchedButtonMeta) =>
     isWatched ? m.remove_from_watched() : m.mark_as_watched(),
-  warning: ({ title }: MarkAsWatchedButtonMeta) =>
-    m.remove_from_watched_warning({ title }),
 };

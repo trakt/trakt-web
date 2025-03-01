@@ -6,5 +6,4 @@ export type MarkAsWatchedButtonMeta = {
 export type MarkAsWatchedButtonIntl = {
   label: (meta: MarkAsWatchedButtonMeta) => string;
   text: (meta: MarkAsWatchedButtonMeta) => string;
-  warning: (meta: MarkAsWatchedButtonMeta) => string;
 };

@@ -321,5 +321,7 @@
   "lab_up_next_nitro_hidden_message": "W wyniku wewnętrznych zmian w projekcie, wcześniej ukryte pozycje będą teraz widoczne na Twojej liście z czarno-białym miniaturką, abyś mógł je szybko rozpoznać, z opcją ich ukrycia lub usunięcia z listy.",
   "restore_show_warning": "Na pewno chcesz przywrócić {title}? Przywróci to Twoje postępy i kalendarz.",
   "restore_show_label": "Przywróć {title}",
-  "restore_show": "Przywróć"
+  "restore_show": "Przywróć",
+  "mark_as_watched_show_warning": "Na pewno chcesz oznaczyć {title} jako obejrzane? Spowoduje to oznaczenie wszystkich odcinków.",
+  "mark_as_watched_multiple_episodes_warning": "Na pewno chcesz oznaczyć {count} odcinków jako obejrzane?"
 }

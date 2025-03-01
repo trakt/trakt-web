@@ -321,5 +321,7 @@
   "lab_up_next_nitro_hidden_message": "A causa di modifiche interne, le serie nascoste in precedenza saranno ora visibili nel tuo elenco con un'anteprima in bianco e nero per aiutarti a individuarle rapidamente, con la possibilità di nasconderle di nuovo o rimuoverle dall'elenco.",
   "restore_show_warning": "Sei sicuro di voler ripristinare {title}? Questo ripristinerà i tuoi progressi e il calendario.",
   "restore_show_label": "Ripristina {title}",
-  "restore_show": "Ripristina"
+  "restore_show": "Ripristina",
+  "mark_as_watched_show_warning": "Sei sicuro di voler contrassegnare {title} come visto? Verranno contrassegnati come visti tutti gli episodi.",
+  "mark_as_watched_multiple_episodes_warning": "Sei sicuro di voler contrassegnare {count} episodi come visti?"
 }

@@ -321,5 +321,7 @@
   "lab_up_next_nitro_hidden_message": "Devido a mudanças internas no design, programas previamente ocultos agora estarão visíveis na sua lista com uma miniatura em preto e branco para ajudar a identificá-los rapidamente, com a opção de reexibi-los ou removê-los da lista.",
   "restore_show_warning": "Tem certeza que deseja restaurar a série {title}? Isso restaurará seu progresso e calendário.",
   "restore_show_label": "Restaurar série {title}",
-  "restore_show": "Restaurar série"
+  "restore_show": "Restaurar série",
+  "mark_as_watched_show_warning": "Tem certeza que deseja marcar {title} como visto? Isso marcará todos os episódios como vistos.",
+  "mark_as_watched_multiple_episodes_warning": "Tem certeza que deseja marcar {count} episódios como vistos?"
 }
