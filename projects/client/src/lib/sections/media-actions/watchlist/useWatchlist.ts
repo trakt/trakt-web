@@ -2,7 +2,7 @@ import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.ts';
 import { removeFromWatchlistRequest } from '$lib/requests/sync/removeFromWatchlistRequest.ts';
-import { toWatchlistPayload } from '$lib/sections/media-actions/watchlist/toWatchlistPayload.ts';
+import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { writable } from 'svelte/store';
 import { useIsWatchlisted } from './useIsWatchlisted.ts';
@@ -15,6 +15,7 @@ export function useWatchlist(props: MediaStoreProps) {
   const ids = media.map(({ id }) => id);
 
   const { isWatchlisted } = useIsWatchlisted(props);
+  const body = toBulkPayload(type, ids);
 
   const addToWatchlist = async () => {
     if (type === 'episode') {
@@ -23,7 +24,7 @@ export function useWatchlist(props: MediaStoreProps) {
 
     isWatchlistUpdating.set(true);
     await addToWatchlistRequest({
-      body: toWatchlistPayload(type, ids),
+      body,
     });
 
     await invalidate(InvalidateAction.Watchlisted(type));
@@ -38,7 +39,7 @@ export function useWatchlist(props: MediaStoreProps) {
 
     isWatchlistUpdating.set(true);
     await removeFromWatchlistRequest({
-      body: toWatchlistPayload(type, ids),
+      body,
     });
 
     await invalidate(InvalidateAction.Watchlisted(type));

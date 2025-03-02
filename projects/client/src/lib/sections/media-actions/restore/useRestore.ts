@@ -5,7 +5,7 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';
 import { restoreShowProgressRequest } from '../../../requests/queries/users/restoreShowProgressRequest.ts';
-import { toRestorePayload } from './toRestorePayload.ts';
+import { toBulkPayload } from '../_internal/toBulkPayload.ts';
 
 export type RestoreStoreProps = {
   ids: number[];
@@ -29,7 +29,7 @@ export function useRestore(
     isRestoring.set(true);
 
     const payload = {
-      body: toRestorePayload('show', ids),
+      body: toBulkPayload('show', ids),
     };
 
     await Promise.all([

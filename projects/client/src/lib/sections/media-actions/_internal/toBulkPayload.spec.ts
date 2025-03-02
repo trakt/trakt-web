@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { toWatchlistPayload } from './toWatchlistPayload.ts';
+import { toBulkPayload } from './toBulkPayload.ts';
 
-describe('toWatchlistPayload', () => {
+describe('toBulkPayload', () => {
   it('should create movie watchlist payload', () => {
-    const result = toWatchlistPayload('movie', [1, 2, 3]);
+    const result = toBulkPayload('movie', [1, 2, 3]);
 
     expect(result).toEqual({
       movies: [
@@ -15,7 +15,7 @@ describe('toWatchlistPayload', () => {
   });
 
   it('should create show watchlist payload', () => {
-    const result = toWatchlistPayload('show', [4, 5]);
+    const result = toBulkPayload('show', [4, 5]);
 
     expect(result).toEqual({
       shows: [
@@ -26,7 +26,7 @@ describe('toWatchlistPayload', () => {
   });
 
   it('should create episode watchlist payload', () => {
-    const result = toWatchlistPayload('episode', [6]);
+    const result = toBulkPayload('episode', [6]);
 
     expect(result).toEqual({
       episodes: [

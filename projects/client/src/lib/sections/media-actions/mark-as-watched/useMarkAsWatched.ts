@@ -2,6 +2,7 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
+import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { resolveWatchDate } from '$lib/stores/_internal/resolveWatchDate.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
@@ -44,10 +45,7 @@ export function useMarkAsWatched(
     isMarkingAsWatched.set(true);
 
     await markAsWatchedRequest({
-      body: toMarkAsWatchedPayload(type, {
-        ids,
-        watchedAtDate,
-      }),
+      body: toMarkAsWatchedPayload(type, ids, watchedAtDate),
     });
 
     await invalidate(InvalidateAction.MarkAsWatched(type));
@@ -58,9 +56,7 @@ export function useMarkAsWatched(
   const removeWatched = async () => {
     isMarkingAsWatched.set(true);
     await removeWatchedRequest({
-      body: toMarkAsWatchedPayload(type, {
-        ids,
-      }),
+      body: toBulkPayload(type, ids),
     });
 
     await invalidate(InvalidateAction.MarkAsWatched(type));

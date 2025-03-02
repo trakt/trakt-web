@@ -2,10 +2,10 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { dropShowRequest } from '$lib/requests/queries/users/dropShowRequest.ts';
 import { hideShowCalendarRequest } from '$lib/requests/queries/users/hideShowCalendarRequest.ts';
+import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';
-import { toDropPayload } from './toDropPayload.ts';
 
 export type DropShowStoreProps = {
   ids: number[];
@@ -28,7 +28,7 @@ export function useDrop(
 
     isDropping.set(true);
 
-    const body = toDropPayload('show', ids);
+    const body = toBulkPayload('show', ids);
 
     await Promise.all([
       dropShowRequest({ body }),
