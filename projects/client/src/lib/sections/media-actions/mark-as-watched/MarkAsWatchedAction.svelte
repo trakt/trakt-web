@@ -13,6 +13,7 @@
   type MarkAsWatchedActionProps = {
     style: "normal" | "action" | "dropdown-item";
     title: string;
+    isRewatching?: boolean;
     onAction?: (state: boolean) => void;
     size?: "normal" | "small";
   } & MarkAsWatchedStoreProps;
@@ -21,6 +22,7 @@
     style = "action",
     size = "normal",
     title,
+    isRewatching,
     onAction,
     ...target
   }: MarkAsWatchedActionProps = $props();
@@ -71,7 +73,7 @@
     {style}
     {title}
     {size}
-    isWatched={$isWatched && !$isWatchlisted}
+    isWatched={$isWatched && !$isWatchlisted && !isRewatching}
     isMarkingAsWatched={$isMarkingAsWatched}
     onWatch={onWatchHandler}
     onRemove={onRemoveHandler}

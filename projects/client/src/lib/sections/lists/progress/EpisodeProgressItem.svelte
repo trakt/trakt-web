@@ -28,6 +28,7 @@
       <MarkAsWatchedAction
         style="dropdown-item"
         type="episode"
+        isRewatching
         title={episode.title}
         {show}
         {episode}
