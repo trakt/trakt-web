@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
@@ -24,6 +26,7 @@ export function useMarkAsWatched(
   const isMarkingAsWatched = writable(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
+  const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
 
   const { isWatched } = useIsWatched(props);
 
@@ -43,6 +46,7 @@ export function useMarkAsWatched(
     }
 
     isMarkingAsWatched.set(true);
+    track({ action: 'add' });
 
     await markAsWatchedRequest({
       body: toMarkAsWatchedPayload(type, ids, watchedAtDate),
@@ -55,6 +59,8 @@ export function useMarkAsWatched(
 
   const removeWatched = async () => {
     isMarkingAsWatched.set(true);
+    track({ action: 'remove' });
+
     await removeWatchedRequest({
       body: toBulkPayload(type, ids),
     });

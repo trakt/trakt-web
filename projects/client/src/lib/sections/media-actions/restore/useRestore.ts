@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { restoreShowCalendarRequest } from '$lib/requests/queries/users/restoreShowCalendarRequest.ts';
@@ -18,6 +20,7 @@ export function useRestore(
   const isRestoring = writable(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
+  const { track } = useTrack(AnalyticsEvent.Restore);
 
   const restore = async () => {
     const current = await resolve(user);
@@ -27,6 +30,7 @@ export function useRestore(
     }
 
     isRestoring.set(true);
+    track();
 
     const payload = {
       body: toBulkPayload('show', ids),

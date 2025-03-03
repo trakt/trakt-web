@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.ts';
@@ -12,6 +14,8 @@ export function useWatchlist(props: MediaStoreProps) {
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const isWatchlistUpdating = writable(false);
   const { invalidate } = useInvalidator();
+  const { track } = useTrack(AnalyticsEvent.Watchlist);
+
   const ids = media.map(({ id }) => id);
 
   const { isWatchlisted } = useIsWatchlisted(props);
@@ -23,6 +27,8 @@ export function useWatchlist(props: MediaStoreProps) {
     }
 
     isWatchlistUpdating.set(true);
+    track({ action: 'add' });
+
     await addToWatchlistRequest({
       body,
     });
@@ -38,6 +44,8 @@ export function useWatchlist(props: MediaStoreProps) {
     }
 
     isWatchlistUpdating.set(true);
+    track({ action: 'remove' });
+
     await removeFromWatchlistRequest({
       body,
     });

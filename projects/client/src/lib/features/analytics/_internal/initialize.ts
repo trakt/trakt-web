@@ -2,6 +2,7 @@
 import { browser } from '$app/environment';
 import { error, warn } from '$lib/utils/console/print.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
+import { IS_TEST } from '$lib/utils/env/index.ts';
 import { getAnalytics, logEvent, setUserId } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import type { AnalyticsEngine } from './AnalyticsEngine.ts';
@@ -48,8 +49,11 @@ function firebaseDriver() {
 
 // Initialize Analytics
 export const initialize = (): AnalyticsEngine => {
-  const driver = firebaseDriver();
+  if (IS_TEST) {
+    return NOOP_ENGINE;
+  }
 
+  const driver = firebaseDriver();
   if (!driver) {
     return NOOP_ENGINE;
   }

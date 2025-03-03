@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { dropShowRequest } from '$lib/requests/queries/users/dropShowRequest.ts';
@@ -18,6 +20,7 @@ export function useDrop(
   const isDropping = writable(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
+  const { track } = useTrack(AnalyticsEvent.Drop);
 
   const drop = async () => {
     const current = await resolve(user);
@@ -27,6 +30,7 @@ export function useDrop(
     }
 
     isDropping.set(true);
+    track();
 
     const body = toBulkPayload('show', ids);
 
