@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useActiveLink } from "$lib/stores/useActiveLink";
+  import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
 
   const {
@@ -25,6 +26,7 @@
     {href}
     {target}
     use:triggerWithKeyboard
+    use:mobileAppleDeviceTriggerHack
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     tabindex={focusable ? 0 : -1}
