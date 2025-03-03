@@ -30,7 +30,6 @@ module.exports = {
       RuleConfigSeverity.Error,
       'always',
       [
-        'api',
         'anticipated',
         'analytics',
         'auth',
@@ -58,7 +57,6 @@ module.exports = {
         'msw',
         'navbar',
         'out-now',
-        'openapi',
         'profile',
         'pr_gate',
         'popular',

@@ -13,18 +13,8 @@
 ## Project Structure
 
 This [workspace](https://docs.deno.com/runtime/fundamentals/workspaces/) is
-composed of multiple interconnected projects:
+composed the following projects:
 
-- **`api`:** The beating heart of our operation. This project defines the Trakt
-  API interactions using `ts-rest` and `zod` for type-safe communication and
-  validation. Think of it as our precinct's meticulously organized evidence
-  board.
-- **`playground`:** Our detective's sandbox. This CLI project allows for
-  effortless exploration and experimentation with the Trakt API. It's where we
-  test our hunches and follow the leads.
-- **`openapi`:** The public notice board. A simple `hono` server that exposes
-  the API contract as an OpenAPI definition, providing clear documentation for
-  those who wish to understand our methods.
 - **`client`:** The gleaming chrome of our pursuit. This project houses the
   Trakt Lite client, a sleek and efficient machine built with Deno and
   SvelteKit. It's the polished facade, the fast car we use to chase down those
@@ -40,7 +30,6 @@ properly:
 
 - **`TRAKT_CLIENT_ID`:** The client ID for the Trakt API.
 - **`TRAKT_CLIENT_SECRET`:** The client secret for the Trakt API.
-  - Required for the `playground` project.
 
 ### External Contribution - Unleash Your Inner Code Wizard!
 
@@ -86,13 +75,6 @@ please refer to the
 
 - Workspace:
   - Format & Lint: `deno task format`
-
-- Playground:
-  - Development: `deno task playground:dev`
-
-- OpenAPI:
-  - Serve: `deno task openapi`
-  - Development: `deno task openapi:dev`
 
 - Client:
   - Development: `deno task client:dev`

@@ -21,7 +21,6 @@ jobs:
       group: ci-${{ github.ref }}
       cancel-in-progress: true
     outputs:
-      api_source: ${{ steps.changes.outputs.api_source }}
       client_source: ${{ steps.changes.outputs.client_source }}
       workflows: ${{ steps.changes.outputs.workflows }}
     steps:
@@ -33,9 +32,6 @@ jobs:
         id: changes
         with:
           filters: |
-            api_source:
-              - 'projects/api/src/**'
-              - 'projects/api/deno.json'
             client_source:
               - 'projects/client/src/**'
               - 'projects/client/i18n/**'
@@ -47,50 +43,10 @@ jobs:
               - 'projects/client/wrangler.toml'
             workflows:
               - '.github/workflows/**'
-            openapi:
-              - 'projects/openapi/*'
-
-  openapi:
-    needs: files-changed
-    name: The Mystic Documentation Dance (OpenAPI)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Summoning the Ancient Scrolls aka Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Channeling the Digital Spirits aka Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-
-      - name: Gathering the Sacred Artifacts aka Install Dependencies
-        run: 'deno task install'
-
-      - name: The Prophecy's Validation aka Validate OpenAPI
-        if: ${{
-          needs.files-changed.outputs.api_source == 'true' ||
-          needs.files-changed.outputs.openapi == 'true'
-          }}
-        run: deno task openapi:validate
-
-      - name: Transcribing the Ancient Knowledge aka Generate OpenAPI
-        if: github.ref == 'refs/heads/main'
-        run: deno task generate
-        working-directory: projects/openapi
-
-      - name: Preserving the Sacred Texts aka Upload Definition
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4
-        with:
-          name: openapi
-          path: projects/openapi/openapi.json
-          if-no-files-found: error
-          retention-days: 30
 
   test:
     needs: files-changed
     if: ${{
-      needs.files-changed.outputs.api_source == 'true' ||
       needs.files-changed.outputs.client_source == 'true' ||
       needs.files-changed.outputs.workflows == 'true'
       }}
@@ -119,10 +75,6 @@ jobs:
       - name: Consulting the Oracles of Type aka Type Check
         working-directory: projects/client
         run: 'deno task check'
-
-      - name: Probing the API's Mind aka Run Tests
-        working-directory: projects/api
-        run: 'deno task test'
 
       - name: The Phantom Browsers Materialize aka Install Browsers
         working-directory: projects/client

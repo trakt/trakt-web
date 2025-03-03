@@ -29,8 +29,6 @@ paths = [
   "coverage/**",
   ".github/**",
   ".vscode/**",
-  "projects/plaground/**",
-  "projects/swagger/**",
   "projects/client/.scripts/**",
   "projects/client/.vite/**",
   "**/node_modules/**",
