@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import {
     type AvailableLocale,
     availableLocales,
@@ -9,8 +11,10 @@
   import { useLocale } from "./useLocale";
 
   const locale = useLocale();
+  const { track } = useTrack(AnalyticsEvent.Locale);
 
   async function submitLocale(value: string) {
+    track({ locale: value });
     locale.set(value);
 
     await fetch(LocaleEndpoint.Set, {
