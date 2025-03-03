@@ -8,15 +8,16 @@ import { derived, get, writable } from 'svelte/store';
 
 export type UpNextType = 'standard' | 'nitro';
 
-const UP_NEXT_STORAGE_KEY = 'up-next-type';
+const DEFAULT_UP_NEXT_TYPE: UpNextType = 'nitro';
+const UP_NEXT_STORAGE_KEY = 'up-next-type-v2';
 
 function getCachedUpNextType(): UpNextType {
   if (!browser) {
-    return 'standard';
+    return DEFAULT_UP_NEXT_TYPE;
   }
 
   const stored = localStorage.getItem(UP_NEXT_STORAGE_KEY);
-  return stored ? JSON.parse(stored) : 'standard';
+  return stored ? JSON.parse(stored) : DEFAULT_UP_NEXT_TYPE;
 }
 
 function saveCachedUpNextType(type: UpNextType) {
@@ -45,6 +46,11 @@ function updateCachedUpNextType(
   );
 }
 
+const UP_NEXT_TOGGLE_TYPE_MAP = {
+  standard: 'nitro',
+  nitro: 'standard',
+} as const;
+
 export function useUpNextExperiment() {
   const type = writable(getCachedUpNextType());
   const { track } = useTrack(AnalyticsEvent.NitroExperiment);
@@ -56,7 +62,7 @@ export function useUpNextExperiment() {
     enabled: derived(type, ($type) => $type === 'nitro'),
     toggle: () => {
       const oldType = get(type);
-      const newType = oldType === 'standard' ? 'nitro' : 'standard';
+      const newType = UP_NEXT_TOGGLE_TYPE_MAP[oldType];
 
       track({ type: newType });
       /**
