@@ -1,5 +1,5 @@
-import type { WatchAction } from '$lib/api.ts';
 import * as m from '$lib/features/i18n/messages.ts';
+import type { WatchAction } from '@trakt/api';
 
 export function resolveWatchDate(
   action: WatchAction | undefined,

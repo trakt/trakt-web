@@ -1,4 +1,3 @@
-import type { ShowProgressResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import {
@@ -13,6 +12,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { ShowProgressResponse } from '@trakt/api';
 
 const showProgressRequest = (
   { fetch, slug }: { slug: string } & ApiParams,

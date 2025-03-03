@@ -1,10 +1,10 @@
-import type { SearchResultResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { SearchResultResponse } from '@trakt/api';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
 
 type SearchParams = {

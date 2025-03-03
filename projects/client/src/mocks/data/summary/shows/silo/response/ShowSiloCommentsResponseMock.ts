@@ -1,5 +1,5 @@
-import type { CommentResponse } from '$lib/api.ts';
 import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
+import type { CommentResponse } from '@trakt/api';
 
 export const ShowSiloCommentsResponseMock: CommentResponse[] = [
   {

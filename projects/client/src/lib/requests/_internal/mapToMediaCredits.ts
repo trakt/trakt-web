@@ -1,14 +1,14 @@
-import type {
-  MovieResponse,
-  PeopleMovieCreditsResponse,
-  PeopleShowCreditsResponse,
-  ShowResponse,
-} from '$lib/api.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import type { CrewPosition } from '$lib/requests/models/CrewPosition.ts';
 import type { MediaCredits } from '$lib/requests/models/MediaCredits.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type {
+  MovieResponse,
+  PeopleMovieCreditsResponse,
+  PeopleShowCreditsResponse,
+  ShowResponse,
+} from '@trakt/api';
 
 type MediaCreditsResponse =
   | PeopleMovieCreditsResponse

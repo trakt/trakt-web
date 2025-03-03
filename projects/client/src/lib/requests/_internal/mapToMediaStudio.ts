@@ -1,4 +1,4 @@
-import type { StudioResponse } from '$lib/api.ts';
+import type { StudioResponse } from '@trakt/api';
 import type { MediaStudio } from '../models/MediaStudio.ts';
 
 export function mapToMediaStudio(

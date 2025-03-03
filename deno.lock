@@ -14,6 +14,7 @@
     "npm:@google/generative-ai@0.21": "0.21.0",
     "npm:@hono/swagger-ui@0.5": "0.5.0_hono@4.6.18",
     "npm:@inlang/paraglide-sveltekit@~0.15.5": "0.15.5_@sveltejs+kit@2.17.1__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.19.9____acorn@8.14.0___vite@6.1.0____sass-embedded@1.83.4___sass-embedded@1.83.4__svelte@5.19.9___acorn@8.14.0__vite@6.1.0___sass-embedded@1.83.4__sass-embedded@1.83.4_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.19.9___acorn@8.14.0__vite@6.1.0___sass-embedded@1.83.4__sass-embedded@1.83.4_svelte@5.19.9__acorn@8.14.0_vite@6.1.0__sass-embedded@1.83.4_sass-embedded@1.83.4",
+    "npm:@jsr/trakt__api@0.1": "0.1.0_zod@3.24.1",
     "npm:@playwright/test@^1.50.1": "1.50.1",
     "npm:@seriousme/openapi-schema-validator@^2.3.1": "2.3.1_ajv@8.17.1",
     "npm:@svelte-plugins/tooltips@^3.0.3": "3.0.3_svelte@5.19.9__acorn@8.14.0",
@@ -2142,6 +2143,13 @@
       "dependencies": [
         "@jridgewell/resolve-uri",
         "@jridgewell/sourcemap-codec"
+      ]
+    },
+    "@jsr/trakt__api@0.1.0_zod@3.24.1": {
+      "integrity": "sha512-LiXQiKnk4zcuJlJLV+QE4bs9VE7P7E+LWnqs2H7OmU8CPOoGwQiyWl3Q4p7Gyg/WhqJcLPfrPsIoNSvZ/yuCWA==",
+      "dependencies": [
+        "@ts-rest/core",
+        "zod"
       ]
     },
     "@lix-js/client@2.2.1": {
@@ -7006,6 +7014,7 @@
             "npm:@cucumber/cucumber@^11.2.0",
             "npm:@google/generative-ai@0.21",
             "npm:@inlang/paraglide-sveltekit@~0.15.5",
+            "npm:@jsr/trakt__api@0.1",
             "npm:@playwright/test@^1.50.1",
             "npm:@svelte-plugins/tooltips@^3.0.3",
             "npm:@sveltejs/adapter-auto@4",

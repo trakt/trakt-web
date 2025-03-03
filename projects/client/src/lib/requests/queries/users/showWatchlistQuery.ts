@@ -1,4 +1,3 @@
-import type { SortType } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToShowListItem } from '$lib/requests/_internal/mapToListItem.ts';
@@ -9,6 +8,7 @@ import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { SortType } from '@trakt/api';
 import { z } from 'zod';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 

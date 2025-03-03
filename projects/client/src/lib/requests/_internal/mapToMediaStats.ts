@@ -1,4 +1,4 @@
-import type { MovieStatsResponse, ShowStatsResponse } from '$lib/api.ts';
+import type { MovieStatsResponse, ShowStatsResponse } from '@trakt/api';
 import type { MediaStats } from '../models/MediaStats.ts';
 import { mapToEpisodeStats } from './mapToEpisodeStats.ts';
 

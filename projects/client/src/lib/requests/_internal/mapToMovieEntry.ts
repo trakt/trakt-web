@@ -1,6 +1,6 @@
-import type { MovieCertificationResponse, MovieResponse } from '$lib/api.ts';
 import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { MovieCertificationResponse, MovieResponse } from '@trakt/api';
 import type { MovieEntry } from '../models/MovieEntry.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToPoster } from './mapToPoster.ts';

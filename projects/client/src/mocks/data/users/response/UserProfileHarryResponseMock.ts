@@ -1,4 +1,4 @@
-import type { ProfileResponse } from '$lib/api.ts';
+import type { ProfileResponse } from '@trakt/api';
 
 export const UserProfileHarryResponseMock: ProfileResponse = {
   'username': 'harrier_dubois',

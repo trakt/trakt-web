@@ -2,10 +2,10 @@ import { paraglide } from '@inlang/paraglide-sveltekit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
+import { Environment } from '@trakt/api';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
-import { Environment } from './src/lib/api.ts';
 import { manifest } from './src/lib/pwa/manifest.ts';
 
 import fs from 'node:fs';

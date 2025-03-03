@@ -1,4 +1,4 @@
-import type { ListResponse } from '$lib/api.ts';
+import type { ListResponse } from '@trakt/api';
 import type { MediaListSummary } from '../models/MediaListSummary.ts';
 import { mapToUserProfile } from './mapToUserProfile.ts';
 

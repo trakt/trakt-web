@@ -1,4 +1,3 @@
-import type { MovieActivityHistoryResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
@@ -6,6 +5,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { MovieActivityHistoryResponse } from '@trakt/api';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 

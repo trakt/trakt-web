@@ -1,4 +1,3 @@
-import type { MovieTranslationResponse } from '$lib/api.ts';
 import type {
   AvailableLanguage,
   AvailableRegion,
@@ -6,6 +5,7 @@ import type {
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { MovieTranslationResponse } from '@trakt/api';
 import { type MediaIntl, MediaIntlSchema } from '../../models/MediaIntl.ts';
 
 type MovieIntlParams = {

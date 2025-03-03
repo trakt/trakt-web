@@ -1,4 +1,4 @@
-import type { Genre } from '$lib/api.ts';
+import type { Genre } from '@trakt/api';
 import { describe, expect, it } from 'vitest';
 import {
   genreCompareFactory,

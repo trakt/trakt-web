@@ -2,7 +2,7 @@
 // for information about these interfaces
 /// <reference lib="dom" />
 
-import { Environment } from '$lib/api.ts';
+import { Environment } from '@trakt/api';
 
 declare global {
   // Only way to declare globalThis.install

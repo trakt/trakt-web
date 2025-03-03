@@ -1,4 +1,3 @@
-import type { SortType } from '$lib/api.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -12,6 +11,7 @@ import {
 } from '$lib/requests/queries/users/showWatchlistQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import type { SortType } from '@trakt/api';
 import { derived } from 'svelte/store';
 
 export type WatchlistMediaItem = WatchlistMovie | WatchlistShow;

@@ -1,4 +1,3 @@
-import type { ShowTrendingResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -7,6 +6,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { ShowTrendingResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToEpisodeCount } from '../../_internal/mapToEpisodeCount.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';

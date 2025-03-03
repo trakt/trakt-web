@@ -1,7 +1,7 @@
-import type { CalendarShowListResponse, UpNextResponse } from '$lib/api.ts';
 import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { CalendarShowListResponse, UpNextResponse } from '@trakt/api';
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
 

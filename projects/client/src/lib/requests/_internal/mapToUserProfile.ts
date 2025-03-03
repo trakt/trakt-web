@@ -1,6 +1,6 @@
-import type { ProfileResponse } from '$lib/api.ts';
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
 import { DEFAULT_AVATAR } from '$lib/utils/constants.ts';
+import type { ProfileResponse } from '@trakt/api';
 
 export function mapToUserProfile(user: ProfileResponse): UserProfile {
   return {

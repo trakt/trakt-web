@@ -1,4 +1,4 @@
-import type { EpisodeStatsResponse } from '$lib/api.ts';
+import type { EpisodeStatsResponse } from '@trakt/api';
 import type { EpisodeStats } from '../models/EpisodeStats.ts';
 
 export function mapToEpisodeStats(

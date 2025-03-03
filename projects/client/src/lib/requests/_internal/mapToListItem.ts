@@ -1,4 +1,4 @@
-import type { ListedMovieResponse, ListedShowResponse } from '$lib/api.ts';
+import type { ListedMovieResponse, ListedShowResponse } from '@trakt/api';
 import { mapToEpisodeCount } from './mapToEpisodeCount.ts';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
 import { mapToShowEntry } from './mapToShowEntry.ts';

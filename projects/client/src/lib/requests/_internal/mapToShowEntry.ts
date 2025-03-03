@@ -1,7 +1,7 @@
-import { type ShowResponse } from '$lib/api.ts';
 import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import { type ShowResponse } from '@trakt/api';
 import type { ShowEntry } from '../models/ShowEntry.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToPoster } from './mapToPoster.ts';

@@ -1,4 +1,4 @@
-import type { ListResponse } from '$lib/api.ts';
+import type { ListResponse } from '@trakt/api';
 
 export const OfficialListsResponseMock: ListResponse[] = [
   {

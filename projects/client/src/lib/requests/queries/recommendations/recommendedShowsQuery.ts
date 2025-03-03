@@ -1,4 +1,3 @@
-import type { RecommendedShowResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -6,6 +5,7 @@ import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { LimitParams } from '$lib/requests/models/LimitParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { RecommendedShowResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { MediaEntrySchema } from '../../models/MediaEntry.ts';

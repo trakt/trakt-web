@@ -1,5 +1,5 @@
-import type { WatchNowResponse, WatchNowServiceResponse } from '$lib/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { WatchNowResponse, WatchNowServiceResponse } from '@trakt/api';
 import type {
   StreamingServiceOptions,
   StreamNow,

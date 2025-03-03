@@ -1,5 +1,5 @@
-import { crewPositionSchema } from '$lib/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
+import { crewPositionSchema } from '@trakt/api';
 import { z } from 'zod';
 
 export const MediaCreditsSchema = z.object({

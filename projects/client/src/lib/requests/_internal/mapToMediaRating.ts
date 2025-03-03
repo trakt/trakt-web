@@ -1,5 +1,5 @@
-import type { MovieRatingsResponse, ShowRatingsResponse } from '$lib/api.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { MovieRatingsResponse, ShowRatingsResponse } from '@trakt/api';
 import type { MediaRating } from '../models/MediaRating.ts';
 
 type RatingResponse = MovieRatingsResponse | ShowRatingsResponse;

@@ -1,7 +1,7 @@
-import type { SeasonsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { SeasonsResponse } from '@trakt/api';
 import { z } from 'zod';
 import { type Season, SeasonSchema } from '../../models/Season.ts';
 

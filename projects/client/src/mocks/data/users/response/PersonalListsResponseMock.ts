@@ -1,5 +1,5 @@
-import type { ListResponse } from '$lib/api.ts';
 import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
+import type { ListResponse } from '@trakt/api';
 
 export const PersonalListsResponseMock: ListResponse[] = [
   {

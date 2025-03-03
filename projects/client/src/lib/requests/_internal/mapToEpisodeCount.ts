@@ -1,4 +1,4 @@
-import type { ShowResponse } from '$lib/api.ts';
+import type { ShowResponse } from '@trakt/api';
 
 export function mapToEpisodeCount(show: ShowResponse) {
   return {

@@ -1,4 +1,3 @@
-import type { SocialActivityResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
@@ -13,6 +12,7 @@ import {
   SocialActivitySchema,
 } from '$lib/requests/models/SocialActivity.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { SocialActivityResponse } from '@trakt/api';
 
 type SocialActivityParams = PaginationParams & ApiParams;
 

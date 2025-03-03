@@ -1,4 +1,4 @@
-import { crewPositionSchema } from '$lib/api.ts';
+import { crewPositionSchema } from '@trakt/api';
 import { z } from 'zod';
 
 export type CrewPosition = z.infer<typeof crewPositionSchema>;

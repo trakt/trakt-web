@@ -1,8 +1,8 @@
-import type { WatchedMoviesResponse, WatchedShowsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
 import { error } from '$lib/utils/console/print.ts';
+import type { WatchedMoviesResponse, WatchedShowsResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 

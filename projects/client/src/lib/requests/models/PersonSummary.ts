@@ -1,4 +1,4 @@
-import { crewPositionSchema } from '$lib/api.ts';
+import { crewPositionSchema } from '@trakt/api';
 import { z } from 'zod';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 

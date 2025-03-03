@@ -1,5 +1,5 @@
-import type { HiddenShowItemResponse } from '$lib/api.ts';
 import { ShowSiloMinimalResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloMinimalResponseMock.ts';
+import type { HiddenShowItemResponse } from '@trakt/api';
 
 export const HiddenShowProgressResponseMock: HiddenShowItemResponse[] = [
   {

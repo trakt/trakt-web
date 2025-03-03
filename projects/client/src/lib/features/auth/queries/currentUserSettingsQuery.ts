@@ -1,13 +1,13 @@
-import {
-  genreOptionSchema,
-  type SettingsResponse,
-  upNextSortOptionSchema,
-} from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { error } from '$lib/utils/console/print.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import {
+  genreOptionSchema,
+  type SettingsResponse,
+  upNextSortOptionSchema,
+} from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 

@@ -1,5 +1,4 @@
 import { browser } from '$app/environment';
-import { AbortError, abortRequest } from '$lib/api.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import {
   searchCancellationId,
@@ -8,6 +7,7 @@ import {
 import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
 import { CancelledError, useQueryClient } from '@tanstack/svelte-query';
+import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
 

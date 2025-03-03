@@ -1,4 +1,3 @@
-import type { CastResponse, CrewResponse, PeopleResponse } from '$lib/api.ts';
 import type {
   CastMember,
   CrewMember,
@@ -7,6 +6,7 @@ import type {
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
+import type { CastResponse, CrewResponse, PeopleResponse } from '@trakt/api';
 
 function toCrewMember(
   crewResponse: CrewResponse,
