@@ -3,22 +3,13 @@ import { prependHttpOrHttps } from '$lib/utils/url/prependHttpOrHttps.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { AuthEndpoint } from './AuthEndpoint.ts';
-import { key } from './environment.ts';
 import type {
   SerializedAuthResponse,
 } from './models/SerializedAuthResponse.ts';
 import { authorize } from './requests/authorize.ts';
-import { decrypt } from './utils/decrypt.ts';
 
 export const AUTH_COOKIE_NAME = 'trakt-auth';
 const REFRESH_THRESHOLD_MINUTES = 15;
-
-async function getEncryptedAuth(
-  event: RequestEvent,
-): Promise<SerializedAuthResponse | Nil> {
-  const encrypted = event.cookies.get(AUTH_COOKIE_NAME);
-  return await decrypt<SerializedAuthResponse>(key, encrypted);
-}
 
 function getAuth(event: RequestEvent): SerializedAuthResponse | null {
   try {
@@ -99,26 +90,6 @@ export const handle: Handle = async ({ event, resolve }) => {
   }
 
   const authResponse = getAuth(event);
-
-  // TODO remove this March 31
-  const decryptedAuthResponse = await getEncryptedAuth(event);
-  const isDecryptionFailed = decryptedAuthResponse == null;
-  if (!authResponse && !isDecryptionFailed) {
-    setAuth(decryptedAuthResponse);
-
-    event.cookies.set(
-      AUTH_COOKIE_NAME,
-      JSON.stringify(decryptedAuthResponse),
-      {
-        httpOnly: true,
-        secure: true,
-        expires: new Date(decryptedAuthResponse?.expiresAt ?? 0),
-        path: '/',
-      },
-    );
-
-    return await resolve(event);
-  }
 
   const minutesToExpiry = Math.floor(
     (new Date(authResponse?.expiresAt ?? 0).getTime() - Date.now()) /

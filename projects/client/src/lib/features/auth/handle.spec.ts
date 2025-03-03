@@ -1,7 +1,6 @@
 import { AuthEndpoint } from '$lib/features/auth/AuthEndpoint.ts';
 import { AuthMappedMock } from '$mocks/data/auth/AuthMappedMock.ts';
 import { AuthMock } from '$mocks/data/auth/AuthMock.ts';
-import { EncryptedAuthMock } from '$mocks/data/auth/EncryptedAuthMock.ts';
 import { ExpiredAuthMock } from '$mocks/data/auth/ExpiredAuthMock.ts';
 import { mockRequestEvent } from '$test/request/mockRequestEvent.ts';
 import { describe, expect, it, vi } from 'vitest';
@@ -73,26 +72,6 @@ describe('handle: auth', () => {
 
     await handle({ event, resolve: vi.fn() });
 
-    expect(event.locals.auth).toEqual(AuthMappedMock);
-  });
-
-  it('should handle legacy encrypted auth cookie', async () => {
-    const event = mockRequestEvent({
-      url: 'http://localhost',
-      cookieHandler: (key: string) => {
-        if (key === AUTH_COOKIE_NAME) {
-          return EncryptedAuthMock;
-        }
-
-        return null;
-      },
-    });
-
-    await handle({ event, resolve: vi.fn() });
-
-    expect(event.cookies.set).toHaveBeenCalled();
-    expect(event.cookies.getAll().find((c) => c.name)?.value)
-      .toEqual(AuthMock);
     expect(event.locals.auth).toEqual(AuthMappedMock);
   });
 
