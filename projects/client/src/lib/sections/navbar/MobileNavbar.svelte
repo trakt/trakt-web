@@ -4,7 +4,6 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
@@ -13,21 +12,18 @@
   <Link href={UrlBuilder.home()}>
     <div class="trakt-mobile-navbar-link">
       <HomeIcon />
-      <p class="meta-info ellipsis">{m.navbar_link_home()}</p>
     </div>
   </Link>
 
   <Link href={UrlBuilder.shows()}>
     <div class="trakt-mobile-navbar-link">
       <ShowIcon />
-      <p class="meta-info ellipsis">{m.navbar_link_shows()}</p>
     </div>
   </Link>
 
   <Link href={UrlBuilder.movies()}>
     <div class="trakt-mobile-navbar-link">
       <MovieIcon />
-      <p class="meta-info ellipsis">{m.navbar_link_movies()}</p>
     </div>
   </Link>
 
@@ -35,7 +31,6 @@
     <Link href={UrlBuilder.watchlist()}>
       <div class="trakt-mobile-navbar-link">
         <WatchlistIcon />
-        <p class="meta-info ellipsis">{m.navbar_link_watchlist()}</p>
       </div>
     </Link>
   </RenderFor>
@@ -76,11 +71,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-xxs);
-
-    .ellipsis {
-      max-width: 100%;
-    }
+    justify-content: center;
   }
 
   :global(.trakt-link.trakt-link-active) {
