@@ -10,3 +10,13 @@
   </p>
   <p class="secondary meta-info">{m.copyright_crafted_by()}</p>
 </div>
+
+<style>
+  .trakt-copyright {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ni-8);
+
+    width: fit-content;
+  }
+</style>
