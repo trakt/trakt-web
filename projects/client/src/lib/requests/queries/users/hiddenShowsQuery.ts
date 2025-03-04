@@ -21,7 +21,7 @@ function mapToHiddenShowItem(item: HiddenShowItemResponse): HiddenShow {
   };
 }
 
-export const DEFAULT_HIDDEN_PAGE_SIZE = 100;
+export const DEFAULT_HIDDEN_PAGE_SIZE = 1000;
 const hiddenShowsRequest = (
   { fetch, limit = DEFAULT_HIDDEN_PAGE_SIZE, page = 1 }: HiddenShowsParams,
 ) =>
