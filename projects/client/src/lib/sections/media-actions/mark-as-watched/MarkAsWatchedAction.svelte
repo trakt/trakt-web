@@ -2,7 +2,6 @@
   import * as m from "$lib/features/i18n/messages";
 
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
-  import { onMount } from "svelte";
   import { attachWarning } from "../_internal/attachWarning";
   import { useIsWatchlisted } from "../watchlist/useIsWatchlisted";
   import {
@@ -14,7 +13,6 @@
     style: "normal" | "action" | "dropdown-item";
     title: string;
     isRewatching?: boolean;
-    onAction?: (state: boolean) => void;
     size?: "normal" | "small";
   } & MarkAsWatchedStoreProps;
 
@@ -23,7 +21,6 @@
     size = "normal",
     title,
     isRewatching,
-    onAction,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -62,10 +59,6 @@
   const onRemoveHandler = $derived(
     attachWarning(removeWatched, m.remove_from_watched_warning({ title })),
   );
-
-  onMount(() => {
-    return isMarkingAsWatched.subscribe((value) => onAction?.(value));
-  });
 </script>
 
 {#if isWatchable}
