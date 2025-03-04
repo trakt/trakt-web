@@ -6,7 +6,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { ShowTrendingResponse } from '@trakt/api';
+import type { ShowWatchedResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToEpisodeCount } from '../../_internal/mapToEpisodeCount.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
@@ -22,9 +22,9 @@ export type TrendingShow = z.infer<typeof TrendingShowSchema>;
 type ShowTrendingParams = PaginationParams & ApiParams;
 
 function mapToTrendingShow({
-  watchers,
+  watcher_count: watchers,
   show,
-}: ShowTrendingResponse): TrendingShow {
+}: ShowWatchedResponse): TrendingShow {
   return {
     watchers,
     ...mapToEpisodeCount(show),
@@ -35,9 +35,13 @@ function mapToTrendingShow({
 const showTrendingRequest = (
   { fetch, limit, page }: ShowTrendingParams,
 ) =>
+  // FIXME: switch back to trending query when stats are fixed
   api({ fetch })
     .shows
-    .trending({
+    .watched({
+      params: {
+        period: 'daily',
+      },
       query: {
         extended: 'full,images',
         ignore_collected: true,
