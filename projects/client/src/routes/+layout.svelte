@@ -9,6 +9,7 @@
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import AutoSigninProvider from "$lib/features/auto-signin/AutoSigninProvider.svelte";
+  import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -16,9 +17,25 @@
   import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
+  import { WorkerMessage } from "$worker/WorkerMessage";
+  import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
+  import { onMount } from "svelte";
 
   const { data, children } = $props();
+
+  onMount(async () => {
+    const ACTIVE_SHA = TRAKT_GIT_SHA;
+    const DEPLOYED_SHA = await fetch(DeploymentEndpoint.Get).then((res) =>
+      res.text(),
+    );
+
+    if (ACTIVE_SHA === DEPLOYED_SHA) {
+      return;
+    }
+
+    await workerRequest(WorkerMessage.CacheBust);
+  });
 </script>
 
 <svelte:head>

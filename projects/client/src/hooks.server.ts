@@ -1,5 +1,6 @@
 import { handle as handleAuth } from '$lib/features/auth/handle.ts';
 import { handle as handleCacheBust } from '$lib/features/cache-bust/handle.ts';
+import { handle as handleDeployment } from '$lib/features/deployment/handle.ts';
 import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
 import { handle as handleImage } from '$lib/features/image/handle.ts';
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
@@ -48,4 +49,5 @@ export const handle: Handle = sequence(
   },
   handleCacheControl,
   handleMobileOperatingSystem,
+  handleDeployment,
 );

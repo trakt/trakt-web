@@ -16,6 +16,8 @@ declare global {
   const TRAKT_MODE: 'development' | 'production' | 'test';
   const TRAKT_TARGET_ENVIRONMENT: Environment;
 
+  const TRAKT_GIT_SHA: string;
+
   const FIREBASE_PROJECT_ID: string;
   const FIREBASE_API_KEY: string;
   const FIREBASE_APP_ID: string;

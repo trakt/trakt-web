@@ -8,6 +8,7 @@ import { defineConfig } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
 import { manifest } from './src/lib/pwa/manifest.ts';
 
+import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
@@ -26,6 +27,17 @@ function findGitRoot(dir: string): string {
   return findGitRoot(parentDir);
 }
 
+function getGitCommitHash() {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim();
+  } catch (error) {
+    console.warn('Failed to get git commit hash:', error);
+    return 'unknown';
+  }
+}
+
+const GIT_COMMIT_HASH = getGitCommitHash();
+
 const MONOREPO_ROOT = findGitRoot(__dirname);
 
 const TRAKT_TARGET_ENVIRONMENT = process.env.IS_CONTRIB
@@ -43,6 +55,7 @@ export default defineConfig(({ mode }) => ({
     'FIREBASE_MEASUREMENT_ID': `"${process.env.FIREBASE_MEASUREMENT_ID}"`,
     'FIREBASE_MESSAGING_SENDER_ID':
       `"${process.env.FIREBASE_MESSAGING_SENDER_ID}"`,
+    'TRAKT_GIT_SHA': `"${GIT_COMMIT_HASH}"`,
   },
 
   server: {
