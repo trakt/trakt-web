@@ -44,16 +44,16 @@
   --color-background-full-season-tag: var(--purple-500);
 
   --color-text-info-tag: var(--shade-10);
-  --color-background-info-tag: var(--purple-400);
+  --color-background-info-tag: var(--shade-500);
 
   --color-text-air-date-tag: var(--shade-10);
-  --color-background-air-date-tag: var(--purple-400);
+  --color-background-air-date-tag: var(--shade-500);
 
-  --color-text-watchers-tag: var(--shade-900);
-  --color-background-watchers-tag: var(--shade-10);
+  --color-text-watchers-tag: var(--shade-10);
+  --color-background-watchers-tag: var(--shade-500);
 
-  --color-text-plays-tag: var(--shade-900);
-  --color-background-plays-tag: var(--shade-10);
+  --color-text-plays-tag: var(--shade-10);
+  --color-background-plays-tag: var(--shade-500);
 
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--red-500);
