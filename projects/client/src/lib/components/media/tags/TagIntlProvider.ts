@@ -19,4 +19,6 @@ export const TagIntlProvider: TagIntl = {
   tbaLabel: () => m.tba_label(),
   toAnticipatedCount: (count) =>
     m.anticipated_count({ count: toHumanNumber(count, languageTag()) }),
+  watchCountLabel: (isShow) =>
+    isShow ? m.watched_episodes_count_label() : m.watch_count_label(),
 };

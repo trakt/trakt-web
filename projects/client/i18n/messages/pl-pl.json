@@ -325,5 +325,7 @@
   "restore_show_label": "Przywróć {title}",
   "restore_show": "Przywróć",
   "mark_as_watched_show_warning": "Na pewno chcesz oznaczyć {title} jako obejrzane? Spowoduje to oznaczenie wszystkich odcinków.",
-  "mark_as_watched_multiple_episodes_warning": "Na pewno chcesz oznaczyć {count} odcinków jako obejrzane?"
+  "mark_as_watched_multiple_episodes_warning": "Na pewno chcesz oznaczyć {count} odcinków jako obejrzane?",
+  "watch_count_label": "Liczba seansów",
+  "watched_episodes_count_label": "Odcinki obejrzane"
 }

@@ -325,5 +325,7 @@
   "restore_show_label": "Restaurar serie {title}",
   "restore_show": "Restaurar serie",
   "mark_as_watched_show_warning": "¿Estás seguro de que quieres marcar {title} como visto? Esto marcará todos los episodios como vistos.",
-  "mark_as_watched_multiple_episodes_warning": "¿Estás seguro de que quieres marcar {count} episodios como vistos?"
+  "mark_as_watched_multiple_episodes_warning": "¿Estás seguro de que quieres marcar {count} episodios como vistos?",
+  "watch_count_label": "Contador de visualizaciones",
+  "watched_episodes_count_label": "Episodios vistos"
 }

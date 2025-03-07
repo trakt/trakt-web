@@ -325,5 +325,7 @@
   "restore_show_label": "Відновити медіа-контент {title}",
   "restore_show": "Відновити",
   "mark_as_watched_show_warning": "Впевнені, що хочете відмітити {title} як переглянуте? Це відмітить всі серії.",
-  "mark_as_watched_multiple_episodes_warning": "Впевнені, що хочете відмітити {count} серій як переглянуті?"
+  "mark_as_watched_multiple_episodes_warning": "Впевнені, що хочете відмітити {count} серій як переглянуті?",
+  "watch_count_label": "Кількість переглядів",
+  "watched_episodes_count_label": "Переглянуто епізодів"
 }

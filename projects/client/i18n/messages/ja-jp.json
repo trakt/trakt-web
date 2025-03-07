@@ -325,5 +325,7 @@
   "restore_show_label": "{title}の番組を復元",
   "restore_show": "番組を復元",
   "mark_as_watched_show_warning": "{title}を視聴済みにしますか？これにより、全エピソードが視聴済みにマークされます。",
-  "mark_as_watched_multiple_episodes_warning": "{count}エピソードを視聴済みにしますか？"
+  "mark_as_watched_multiple_episodes_warning": "{count}エピソードを視聴済みにしますか？",
+  "watch_count_label": "視聴回数",
+  "watched_episodes_count_label": "視聴済みエピソード"
 }

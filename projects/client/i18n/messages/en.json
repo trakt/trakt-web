@@ -325,5 +325,7 @@
   "restore_show_label": "Restore show {title}",
   "restore_show": "Restore show",
   "mark_as_watched_show_warning": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched.",
-  "mark_as_watched_multiple_episodes_warning": "Are you sure you want to mark {count} episodes as watched?"
+  "mark_as_watched_multiple_episodes_warning": "Are you sure you want to mark {count} episodes as watched?",
+  "watch_count_label": "Watch count",
+  "watched_episodes_count_label": "Watched episodes"
 }

@@ -1,10 +1,12 @@
 <script lang="ts">
   import TagContent from "$lib/components/tags/TagContent.svelte";
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
 
-  const { children }: ChildrenProps = $props();
+  const { children, classList = "" }: { classList?: string } & ChildrenProps =
+    $props();
 </script>
 
-<div class="trakt-stem-tag">
+<div class="trakt-stem-tag" use:appendClassList={classList}>
   <TagContent>
     <p class="meta-info">
       {@render children()}

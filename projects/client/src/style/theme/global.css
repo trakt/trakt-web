@@ -55,6 +55,9 @@
   --color-text-plays-tag: var(--shade-10);
   --color-background-plays-tag: var(--shade-500);
 
+  --color-text-watch-count-tag: var(--shade-10);
+  --color-background-watch-count-tag: var(--purple-500);
+
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--red-500);
 

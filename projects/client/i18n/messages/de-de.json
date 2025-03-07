@@ -325,5 +325,7 @@
   "restore_show_label": "Serie {title} wiederherstellen",
   "restore_show": "Serie wiederherstellen",
   "mark_as_watched_show_warning": "Bist du sicher, dass du {title} als gesehen markieren möchtest? Dadurch werden alle Folgen als gesehen markiert.",
-  "mark_as_watched_multiple_episodes_warning": "Bist du sicher, dass du {count} Episoden als gesehen markieren möchtest?"
+  "mark_as_watched_multiple_episodes_warning": "Bist du sicher, dass du {count} Episoden als gesehen markieren möchtest?",
+  "watch_count_label": "Anzahl gesehen",
+  "watched_episodes_count_label": "Gesehene Episoden"
 }

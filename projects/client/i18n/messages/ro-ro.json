@@ -325,5 +325,7 @@
   "restore_show_label": "Restaurare {title}",
   "restore_show": "Restaurare",
   "mark_as_watched_show_warning": "Sigur vrei să marchezi {title} ca vizionat? Asta va marca toate episoadele ca vizionate.",
-  "mark_as_watched_multiple_episodes_warning": "Sigur vrei să marchezi {count} episoade ca vizionate?"
+  "mark_as_watched_multiple_episodes_warning": "Sigur vrei să marchezi {count} episoade ca vizionate?",
+  "watch_count_label": "Număr de vizionări",
+  "watched_episodes_count_label": "Episoade vizionate"
 }
