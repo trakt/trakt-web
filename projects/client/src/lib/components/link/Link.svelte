@@ -10,6 +10,7 @@
     color = "default",
     focusable = true,
     noscroll,
+    label,
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
@@ -31,6 +32,7 @@
     data-sveltekit-noscroll={noscroll}
     tabindex={focusable ? 0 : -1}
     data-color={color}
+    aria-label={label}
     class="trakt-link"
     class:trakt-link-active={$isActive}
     {...props}

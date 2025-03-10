@@ -136,6 +136,9 @@ declare global {
     href: string | Nil;
     target?: '_blank' | '_self' | '_parent' | '_top';
     noscroll?: boolean;
+
+    // FIXME: make mandatory
+    label?: string;
   };
 
   type AudienceProps = {
