@@ -105,6 +105,10 @@
 
     position: relative;
 
+    @include for-mobile {
+      --search-input-width: var(--ni-48);
+    }
+
     .trakt-search-icon {
       cursor: pointer;
 

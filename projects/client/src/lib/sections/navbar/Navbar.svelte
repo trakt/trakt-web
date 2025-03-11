@@ -61,20 +61,22 @@
         <Logo />
       </div>
     </RenderFor>
-    <RenderFor
-      audience="authenticated"
-      device={["tablet-sm", "tablet-lg", "desktop"]}
-    >
-      {@render traktSwitch()}
-    </RenderFor>
+
     <div class="trakt-navbar-content">
+      <RenderFor
+        audience="authenticated"
+        device={["tablet-sm", "tablet-lg", "desktop"]}
+      >
+        {@render traktSwitch()}
+      </RenderFor>
       <RenderFor audience="authenticated">
         <SearchInput />
       </RenderFor>
+      <RenderFor audience="authenticated" device={["mobile"]}>
+        {@render traktSwitch()}
+      </RenderFor>
     </div>
-    <RenderFor audience="authenticated" device={["mobile"]}>
-      {@render traktSwitch()}
-    </RenderFor>
+
     <div class="trakt-navbar-links">
       <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         <Button
@@ -174,6 +176,10 @@
 
     .trakt-navbar-content {
       width: 100%;
+
+      display: flex;
+      align-items: center;
+      gap: var(--gap-m);
     }
 
     .trakt-navbar-links {
