@@ -222,6 +222,7 @@
   "remove_from_watched": "Rimuovi da guardato",
   "remove_from_watched_label": "Rimuovi {title} dalla tua Watchlist",
   "remove_from_watched_warning": "Sei sicuro di voler rimuovere {title} dalla tua Watchlist? Tutte le visualizzazioni saranno eliminate.",
+  "remove_single_watched_label": "Rimuovi questa visione di {title} dalla lista Visti",
   "season_number_label": "Stagione {number}",
   "expand_media_overview": "Espandi la panoramica di {title}",
   "season_episode_number_label": "Stagione {season} • Episodio {number}",
