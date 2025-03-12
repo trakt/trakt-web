@@ -328,5 +328,6 @@
   "mark_as_watched_show_warning": "Sei sicuro di voler contrassegnare {title} come visto? Verranno contrassegnati come visti tutti gli episodi.",
   "mark_as_watched_multiple_episodes_warning": "Sei sicuro di voler contrassegnare {count} episodi come visti?",
   "watch_count_label": "Conti visualizzazioni",
-  "watched_episodes_count_label": "Episodi visti"
+  "watched_episodes_count_label": "Episodi visti",
+  "empty_media_history_label": "Non hai ancora visto {title}"
 }

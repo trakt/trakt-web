@@ -10,6 +10,7 @@
   import EpisodeCard from "$lib/sections/lists/components/EpisodeCard.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
   import CastList from "../lists/CastList.svelte";
+  import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/SeasonList.svelte";
   import Comments from "./components/comments/Comments.svelte";
@@ -71,3 +72,5 @@
 
 <!-- TODO: move back to designed position when we have faster queries -->
 <Lists slug={media.slug} title={media.title} type="show" />
+
+<MediaWatchHistoryList title={m.recently_watched()} {media} type="show" />

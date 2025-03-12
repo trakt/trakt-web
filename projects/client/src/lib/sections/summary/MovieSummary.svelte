@@ -6,6 +6,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
   import CastList from "../lists/CastList.svelte";
+  import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
@@ -48,3 +49,5 @@
 
 <!-- TODO: move back to designed position when we have faster queries -->
 <Lists slug={media.slug} title={media.title} type="movie" />
+
+<MediaWatchHistoryList title={m.recently_watched()} {media} type="movie" />

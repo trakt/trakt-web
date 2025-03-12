@@ -5,53 +5,53 @@ import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
+import {
+  type EpisodeActivityHistory,
+  EpisodeActivityHistorySchema,
+} from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowActivityHistoryResponse } from '@trakt/api';
-import { z } from 'zod';
-import { EpisodeEntrySchema } from '../../models/EpisodeEntry.ts';
-import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 type ShowActivityHistoryParams = {
-  startDate: Date;
-  endDate: Date;
+  startDate?: Date;
+  endDate?: Date;
   limit: number;
   page?: number;
+  id?: number;
 } & ApiParams;
 
-const ShowActivityHistorySchema = z.object({
-  id: z.number(),
-  watchedAt: z.date(),
-  show: ShowEntrySchema,
-  episode: EpisodeEntrySchema,
-  type: z.literal('show'),
-});
-export type ShowActivityHistory = z.infer<typeof ShowActivityHistorySchema>;
+// Show history responses are per episode
+export type ShowActivityHistory = EpisodeActivityHistory;
 
 const showHistoryRequest = (
-  { fetch, startDate, endDate, limit, page = 1 }: ShowActivityHistoryParams,
-) =>
-  api({ fetch })
-    .users
-    .history
-    .shows({
-      params: {
-        id: 'me',
-      },
-      query: {
-        extended: 'full,images',
-        start_at: startDate.toISOString(),
-        end_at: endDate.toISOString(),
-        limit,
-        page,
-      },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch shows history');
-      }
+  { fetch, startDate, endDate, limit, id, page = 1 }: ShowActivityHistoryParams,
+) => {
+  const queryParams = {
+    extended: 'full,images' as const,
+    start_at: startDate?.toISOString(),
+    end_at: endDate?.toISOString(),
+    limit,
+    page,
+  };
 
-      return response;
+  const request = id
+    ? api({ fetch }).users.history.show({
+      params: { id: 'me', item_id: `${id}` },
+      query: queryParams,
+    })
+    : api({ fetch }).users.history.shows({
+      params: { id: 'me' },
+      query: queryParams,
     });
+
+  return request.then((response) => {
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch shows history');
+    }
+
+    return response;
+  });
+};
 
 const mapToShowActivityHistory = (
   historyShow: ShowActivityHistoryResponse,
@@ -60,7 +60,7 @@ const mapToShowActivityHistory = (
   watchedAt: new Date(historyShow.watched_at),
   show: mapToShowEntry(historyShow.show),
   episode: mapToEpisodeEntry(historyShow.episode),
-  type: 'show' as const,
+  type: 'episode' as const,
 });
 
 export const showActivityHistoryQuery = defineQuery({
@@ -74,12 +74,13 @@ export const showActivityHistoryQuery = defineQuery({
     params.endDate,
     params.limit,
     params.page,
+    params.id,
   ],
   request: showHistoryRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToShowActivityHistory),
     page: extractPageMeta(response.headers),
   }),
-  schema: PaginatableSchemaFactory(ShowActivityHistorySchema),
+  schema: PaginatableSchemaFactory(EpisodeActivityHistorySchema),
   ttl: time.hours(6),
 });

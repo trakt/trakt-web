@@ -328,5 +328,6 @@
   "mark_as_watched_show_warning": "Weet je zeker dat je {title} als bekeken wilt markeren? Dit markeert alle afleveringen als bekeken.",
   "mark_as_watched_multiple_episodes_warning": "Weet je zeker dat je {count} afleveringen als bekeken wilt markeren?",
   "watch_count_label": "Aantal keer bekeken",
-  "watched_episodes_count_label": "Bekeken afleveringen"
+  "watched_episodes_count_label": "Bekeken afleveringen",
+  "empty_media_history_label": "Je hebt {title} nog niet bekeken"
 }

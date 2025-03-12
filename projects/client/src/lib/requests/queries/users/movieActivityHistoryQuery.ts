@@ -14,6 +14,7 @@ type MovieActivityHistoryParams = {
   startDate?: Date;
   endDate?: Date;
   page?: number;
+  id?: number;
 } & ApiParams;
 
 export const MovieActivityHistorySchema = z.object({
@@ -25,30 +26,35 @@ export const MovieActivityHistorySchema = z.object({
 export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
 const movieActivityHistoryRequest = (
-  { fetch, startDate, endDate, limit, page = 1 }: MovieActivityHistoryParams,
-) =>
-  api({ fetch })
-    .users
-    .history
-    .movies({
-      params: {
-        id: 'me',
-      },
-      query: {
-        extended: 'full,images',
-        start_at: startDate?.toISOString(),
-        end_at: endDate?.toISOString(),
-        limit,
-        page,
-      },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movies history');
-      }
+  { fetch, startDate, endDate, limit, id, page = 1 }:
+    MovieActivityHistoryParams,
+) => {
+  const queryParams = {
+    extended: 'full,images' as const,
+    start_at: startDate?.toISOString(),
+    end_at: endDate?.toISOString(),
+    limit,
+    page,
+  };
 
-      return response;
+  const request = id
+    ? api({ fetch }).users.history.movie({
+      params: { id: 'me', item_id: `${id}` },
+      query: queryParams,
+    })
+    : api({ fetch }).users.history.movies({
+      params: { id: 'me' },
+      query: queryParams,
     });
+
+  return request.then((response) => {
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch movies history');
+    }
+
+    return response;
+  });
+};
 
 export const mapToMovieActivityHistory = (
   historyMovie: MovieActivityHistoryResponse,
@@ -67,6 +73,7 @@ export const movieActivityHistoryQuery = defineQuery({
     params.endDate,
     params.limit,
     params.page,
+    params.id,
   ],
   request: movieActivityHistoryRequest,
   mapper: (response) => ({

@@ -7,7 +7,7 @@ export const ShowActivityHistoryMappedMock: ShowActivityHistory[] = [
     'id': 1,
     'episode': EpisodeSiloMappedMock,
     'show': ShowSiloMappedMock,
-    'type': 'show',
+    'type': 'episode',
     'watchedAt': new Date('2025-01-31T23:12:41.000Z'),
   },
 ];

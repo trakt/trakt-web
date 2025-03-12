@@ -13,6 +13,7 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
+  import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import MediaDetails from "./components/details/MediaDetails.svelte";
@@ -157,3 +158,9 @@
 />
 
 <RelatedList title={m.related_shows_title()} slug={show.slug} type="show" />
+
+<MediaWatchHistoryList
+  title={m.recently_watched()}
+  media={episode}
+  type="episode"
+/>

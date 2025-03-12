@@ -16,6 +16,7 @@ type EpisodeActivityHistoryParams = {
   startDate?: Date;
   endDate?: Date;
   page?: number;
+  id?: number;
 } & ApiParams;
 
 export const EpisodeActivityHistorySchema = z.object({
@@ -30,30 +31,34 @@ export type EpisodeActivityHistory = z.infer<
 >;
 
 function episodeActivityHistoryRequest(
-  { fetch, startDate, endDate, limit, page = 1 }: EpisodeActivityHistoryParams,
+  { fetch, startDate, endDate, limit, id, page = 1 }:
+    EpisodeActivityHistoryParams,
 ) {
-  return api({ fetch })
-    .users
-    .history
-    .episodes({
-      params: {
-        id: 'me',
-      },
-      query: {
-        extended: 'full,images',
-        start_at: startDate?.toISOString(),
-        end_at: endDate?.toISOString(),
-        limit,
-        page,
-      },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episodes history');
-      }
+  const queryParams = {
+    extended: 'full,images' as const,
+    start_at: startDate?.toISOString(),
+    end_at: endDate?.toISOString(),
+    limit,
+    page,
+  };
 
-      return response;
+  const request = id
+    ? api({ fetch }).users.history.episode({
+      params: { id: 'me', item_id: `${id}` },
+      query: queryParams,
+    })
+    : api({ fetch }).users.history.episodes({
+      params: { id: 'me' },
+      query: queryParams,
     });
+
+  return request.then((response) => {
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch episodes history');
+    }
+
+    return response;
+  });
 }
 
 export function mapToEpisodeActivityHistory(
@@ -79,6 +84,7 @@ export const episodeActivityHistoryQuery = defineQuery({
     params.endDate,
     params.limit,
     params.page,
+    params.id,
   ],
   request: episodeActivityHistoryRequest,
   mapper: (response) => ({
