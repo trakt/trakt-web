@@ -19,6 +19,7 @@
   "mark_as_watched_ask_prompt": "いつ視聴完了しましたか？(YYYY-MM-DD HH:MM)",
   "add_to_watchlist": "視聴リストに追加",
   "mark_as_watched": "視聴済みにする",
+  "watch_again": "もう一度見る",
   "add_to_watchlist_label": "{title} を視聴リストに追加",
   "mark_as_watched_label": "{title}を視聴済みにする",
   "genre_horror": "ホラー",

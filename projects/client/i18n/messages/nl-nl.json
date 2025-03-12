@@ -19,6 +19,7 @@
   "mark_as_watched_ask_prompt": "Wanneer heb je dit bekeken? (JJJJ-MM-DD HH:MM)",
   "add_to_watchlist": "Aan Watchlist toevoegen",
   "mark_as_watched": "Markeer als bekeken",
+  "watch_again": "Opnieuw bekijken",
   "add_to_watchlist_label": "{title} aan je Watchlist toevoegen",
   "mark_as_watched_label": "Markeer {title} als bekeken",
   "genre_horror": "Horror",

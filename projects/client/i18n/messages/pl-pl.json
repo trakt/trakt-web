@@ -19,6 +19,7 @@
   "mark_as_watched_ask_prompt": "Kiedy skończyłeś to oglądać? (RRRR-MM-DD GG:MM)",
   "add_to_watchlist": "Dodaj do listy do obejrzenia",
   "mark_as_watched": "Oznacz jako obejrzany",
+  "watch_again": "Obejrzyj ponownie",
   "add_to_watchlist_label": "Dodaj {title} do listy do obejrzenia",
   "mark_as_watched_label": "Oznacz {title} jako obejrzany",
   "genre_horror": "Horror",

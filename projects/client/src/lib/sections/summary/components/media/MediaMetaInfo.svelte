@@ -4,6 +4,7 @@
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import PlaysTag from "$lib/components/media/tags/PlaysTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import WatchCountTag from "$lib/components/media/tags/WatchCountTag.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -23,6 +24,7 @@
     watchers: UserProfile[];
     media: MediaEntry | EpisodeEntry;
     streamOn?: StreamOn;
+    watchCount: number;
   };
 
   const {
@@ -33,6 +35,7 @@
     airDate,
     media,
     streamOn,
+    watchCount,
   }: MediaMetaInfoProps = $props();
 
   const isAiredItem = $derived(airDate < new Date());
@@ -42,6 +45,12 @@
   <div class="trakt-summary-meta-container">
     <RatingList {ratings} {airDate} />
     <div class="trakt-meta-tags">
+      <WatchCountTag
+        i18n={TagIntlProvider}
+        count={watchCount}
+        type={media.type}
+      />
+
       {#if certification}
         <InfoTag>
           {certification}

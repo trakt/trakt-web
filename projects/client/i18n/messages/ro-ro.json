@@ -19,6 +19,7 @@
   "mark_as_watched_ask_prompt": "Când ai terminat de urmărit? (AAAA-LL-ZZ HH:MM)",
   "add_to_watchlist": "Adaugă la vizionate",
   "mark_as_watched": "Marchează ca Vizionat",
+  "watch_again": "Revăză",
   "add_to_watchlist_label": "Adaugă {title} la lista ta de vizionat",
   "mark_as_watched_label": "Marchează {title} ca vizionat",
   "genre_horror": "Horror",

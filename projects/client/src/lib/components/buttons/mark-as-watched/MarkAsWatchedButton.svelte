@@ -14,19 +14,21 @@
     onRemove,
     isMarkingAsWatched,
     isWatched,
+    isRewatching,
     style,
     ...props
   }: MarkAsWatchedButtonProps = $props();
 
-  const handler = $derived(isWatched ? onRemove : onWatch);
+  const isRemovable = $derived(isWatched && !isRewatching);
+  const handler = $derived(isRemovable ? onRemove : onWatch);
 
   const { color, variant, ...events } = $derived(
-    useDangerButton({ isActive: isWatched, color: "purple" }),
+    useDangerButton({ isActive: isRemovable, color: "purple" }),
   );
-  const state = $derived(isWatched ? "watched" : "unwatched");
+  const state = $derived(isRemovable ? "watched" : "unwatched");
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
-    label: i18n.label({ title, isWatched }),
+    label: i18n.label({ title, isWatched, isRewatching }),
     color: $color,
     variant: $variant,
     onclick: handler,
@@ -37,7 +39,7 @@
 
 {#if style === "normal"}
   <Button {...commonProps} {...props}>
-    {i18n.text({ title, isWatched })}
+    {i18n.text({ title, isWatched, isRewatching })}
     {#snippet icon()}
       <MarkAsWatchedIcon {state} size="small" />
     {/snippet}
@@ -52,7 +54,7 @@
 
 {#if style === "dropdown-item"}
   <DropdownItem {...commonProps} style="flat">
-    {i18n.text({ title, isWatched })}
+    {i18n.text({ title, isWatched, isRewatching })}
     {#snippet icon()}
       <MarkAsWatchedIcon {state} />
     {/snippet}

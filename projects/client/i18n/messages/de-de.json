@@ -19,6 +19,7 @@
   "mark_as_watched_ask_prompt": "Wann hast du das beendet? (JJJJ-MM-TT HH:MM)",
   "add_to_watchlist": "Zur Wunschliste hinzufügen",
   "mark_as_watched": "Als gesehen markieren",
+  "watch_again": "Erneut ansehen",
   "add_to_watchlist_label": "Füge {title} zu deiner Wunschliste hinzu",
   "mark_as_watched_label": "{title} als gesehen markieren",
   "genre_horror": "Horror",

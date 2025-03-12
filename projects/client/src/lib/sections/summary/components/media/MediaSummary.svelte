@@ -14,6 +14,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import { useWatchCount } from "$lib/stores/useWatchCount";
   import type { Snippet } from "svelte";
   import MediaDetails from "../details/MediaDetails.svelte";
   import MediaStreamingServices from "../details/MediaStreamingServices.svelte";
@@ -49,6 +50,7 @@
   } = $props();
 
   const title = $derived(intl.title ?? media.title);
+  const { watchCount } = useWatchCount({ media, type });
 
   const watchlistProps = $derived({
     style: "normal" as const,
@@ -62,6 +64,7 @@
     title,
     type,
     media,
+    isRewatching: $watchCount > 0,
   });
 </script>
 
@@ -126,6 +129,7 @@
     certification={media.certification}
     year={media.year}
     airDate={media.airDate}
+    watchCount={$watchCount}
     {media}
     {ratings}
     {stats}

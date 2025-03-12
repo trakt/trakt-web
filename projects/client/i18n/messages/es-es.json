@@ -19,6 +19,7 @@
   "mark_as_watched_ask_prompt": "¿Cuándo terminaste de verlo? (AAAA-MM-DD HH:MM)",
   "add_to_watchlist": "Añadir a la lista",
   "mark_as_watched": "Marcar como visto",
+  "watch_again": "Ver de nuevo",
   "add_to_watchlist_label": "Añadir {title} a tu lista",
   "mark_as_watched_label": "Marcar {title} como visto",
   "genre_horror": "Terror",

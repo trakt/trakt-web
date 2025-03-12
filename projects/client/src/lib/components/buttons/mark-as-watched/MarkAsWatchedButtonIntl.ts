@@ -1,6 +1,7 @@
 export type MarkAsWatchedButtonMeta = {
   title: string;
   isWatched: boolean;
+  isRewatching: boolean;
 };
 
 export type MarkAsWatchedButtonIntl = {

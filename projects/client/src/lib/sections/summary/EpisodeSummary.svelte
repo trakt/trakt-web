@@ -10,6 +10,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import SeasonList from "$lib/sections/lists/SeasonList.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import { useWatchCount } from "$lib/stores/useWatchCount";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CastList from "../lists/CastList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -43,6 +44,7 @@
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
+  const { watchCount } = useWatchCount({ show, episode, type });
 </script>
 
 {#snippet mediaActions(size: "small" | "normal" = "normal")}
@@ -54,6 +56,7 @@
     {episode}
     {show}
     {size}
+    isRewatching={$watchCount > 0}
   />
 {/snippet}
 
@@ -103,6 +106,7 @@
     year={episode.year}
     airDate={episode.airDate}
     media={episode}
+    watchCount={$watchCount}
     {ratings}
     {stats}
     {watchers}

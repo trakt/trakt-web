@@ -20,7 +20,7 @@
     style = "action",
     size = "normal",
     title,
-    isRewatching,
+    isRewatching = false,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -66,7 +66,8 @@
     {style}
     {title}
     {size}
-    isWatched={$isWatched && !$isWatchlisted && !isRewatching}
+    isWatched={$isWatched && !$isWatchlisted}
+    {isRewatching}
     isMarkingAsWatched={$isMarkingAsWatched}
     onWatch={onWatchHandler}
     onRemove={onRemoveHandler}

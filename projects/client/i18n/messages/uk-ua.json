@@ -19,6 +19,7 @@
   "mark_as_watched_ask_prompt": "Коли ви подивилися це? (РРРР-ММ-ДД ГГ:ХХ)",
   "add_to_watchlist": "Додати до перегляду",
   "mark_as_watched": "Позначити як переглянуте",
+  "watch_again": "Дивитися знову",
   "add_to_watchlist_label": "Додати {title} до вашого списку перегляду",
   "mark_as_watched_label": "Позначити {title} як переглянуте",
   "genre_horror": "Жахи",
