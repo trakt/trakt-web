@@ -221,7 +221,7 @@
   "job_creator": "Twórca",
   "remove_from_watched": "Usuń z listy obejrzanych",
   "remove_from_watched_label": "Usuń {title} z twojej listy obejrzanych",
-  "remove_from_watched_warning": "Czy na pewno chcesz usunąć {title} z twojej listy obejrzanych?",
+  "remove_from_watched_warning": "Czy na pewno chcesz usunąć {title} z twojej listy obejrzanych? Wszystkie odtworzenia zostaną usunięte.",
   "season_number_label": "Sezon {number}",
   "expand_media_overview": "Rozwiń podsumowanie {title}",
   "season_episode_number_label": "Sezon {season} • Odcinek {number}",

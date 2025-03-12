@@ -221,7 +221,7 @@
   "job_creator": "Creator",
   "remove_from_watched": "Remove from Watched",
   "remove_from_watched_label": "Remove {title} from your Watched list",
-  "remove_from_watched_warning": "Are you sure you want to remove {title} from your Watched list?",
+  "remove_from_watched_warning": "Are you sure you want to remove {title} from your Watched list? All plays will be removed.",
   "season_number_label": "Season {number}",
   "expand_media_overview": "Expand {title} overview",
   "season_episode_number_label": "Season {season} • Episode {number}",

@@ -221,7 +221,7 @@
   "job_creator": "Ersteller",
   "remove_from_watched": "Aus der Favoritenliste entfernen",
   "remove_from_watched_label": "{title} aus Ihrer Favoritenliste entfernen",
-  "remove_from_watched_warning": "Sind Sie sicher, dass Sie {title} von Ihrer Favoritenliste entfernen möchten?",
+  "remove_from_watched_warning": "Sind Sie sicher, dass Sie {title} von Ihrer Favoritenliste entfernen möchten? Alle Wiedergaben werden gelöscht.",
   "season_number_label": "Staffel {number}",
   "expand_media_overview": "Übersicht über {title} erweitern",
   "season_episode_number_label": "Staffel {season} • Folge {number}",

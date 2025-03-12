@@ -221,7 +221,7 @@
   "job_creator": "Maker",
   "remove_from_watched": "Verwijder van Bekeken",
   "remove_from_watched_label": "Verwijder {title} van je Bekeken lijst",
-  "remove_from_watched_warning": "Weet je zeker dat je {title} wilt verwijderen van je Bekeken lijst?",
+  "remove_from_watched_warning": "Weet je zeker dat je {title} wilt verwijderen van je Bekeken lijst? Alle afspeelbeurten worden verwijderd.",
   "season_number_label": "Seizoen {number}",
   "expand_media_overview": "Bekijk {title} overzicht",
   "season_episode_number_label": "Seizoen {season} • Aflevering {number}",

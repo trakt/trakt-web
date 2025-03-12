@@ -221,7 +221,7 @@
   "job_creator": "Створець",
   "remove_from_watched": "Видалити з Переглянутого",
   "remove_from_watched_label": "Видалити {title} зі списку Переглянутого",
-  "remove_from_watched_warning": "Ви впевнені, що хочете видалити {title} зі списку Переглянутого?",
+  "remove_from_watched_warning": "Ви впевнені, що хочете видалити {title} зі списку Переглянутого? Усі перегляди буде видалено.",
   "season_number_label": "Сезон {number}",
   "expand_media_overview": "Розгорнути огляд {title}",
   "season_episode_number_label": "Сезон {season} • Епізод {number}",

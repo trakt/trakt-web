@@ -221,7 +221,7 @@
   "job_creator": "Creador",
   "remove_from_watched": "Quitar de Visto",
   "remove_from_watched_label": "Quitar {title} de tu lista de Visto",
-  "remove_from_watched_warning": "¿Estás seguro de que deseas quitar {title} de tu lista de Visto?",
+  "remove_from_watched_warning": "¿Estás seguro de que deseas quitar {title} de tu lista de Visto? Se borrarán todas las reproducciones.",
   "season_number_label": "Temporada {number}",
   "expand_media_overview": "Expandir descripción de {title}",
   "season_episode_number_label": "Temporada {season} • Episodio {number}",
