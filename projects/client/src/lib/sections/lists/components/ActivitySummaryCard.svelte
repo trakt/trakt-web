@@ -22,6 +22,7 @@
 {#if activity.type === "episode"}
   <MediaSummaryCard
     {badges}
+    {popupActions}
     date={activityAt}
     episode={activity.episode}
     media={{
@@ -37,6 +38,7 @@
 
 {#if activity.type === "movie"}
   <MediaSummaryCard
+    {popupActions}
     {badges}
     date={activityAt}
     media={activity.movie}

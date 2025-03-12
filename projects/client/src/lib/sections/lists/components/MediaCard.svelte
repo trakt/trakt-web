@@ -11,20 +11,24 @@
 </script>
 
 {#snippet popupActions()}
-  <RenderFor audience="authenticated">
-    <WatchlistAction
-      style="dropdown-item"
-      title={props.media.title}
-      type={props.media.type}
-      media={props.media}
-    />
-    <MarkAsWatchedAction
-      style="dropdown-item"
-      title={props.media.title}
-      type={props.media.type}
-      media={props.media}
-    />
-  </RenderFor>
+  {#if props.popupActions}
+    {@render props.popupActions()}
+  {:else}
+    <RenderFor audience="authenticated">
+      <WatchlistAction
+        style="dropdown-item"
+        title={props.media.title}
+        type={props.media.type}
+        media={props.media}
+      />
+      <MarkAsWatchedAction
+        style="dropdown-item"
+        title={props.media.title}
+        type={props.media.type}
+        media={props.media}
+      />
+    </RenderFor>
+  {/if}
 {/snippet}
 
 {#if style === "cover"}
