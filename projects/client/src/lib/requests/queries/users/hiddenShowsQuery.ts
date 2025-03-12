@@ -28,11 +28,11 @@ const hiddenShowsRequest = (
   api({ fetch })
     .users
     .hidden
-    .get
-    .shows({
+    .get({
       query: {
         page,
         limit,
+        type: 'show',
       },
     })
     .then((response) => {
@@ -51,10 +51,7 @@ export const hiddenShowsQuery = defineQuery({
   ) => [params.limit, params.page],
   request: hiddenShowsRequest,
   mapper: (response) => ({
-    entries: response.body
-      // TODO: remove when API type param is fixed
-      .filter((hiddenItem) => hiddenItem.type === 'show')
-      .map(mapToHiddenShowItem),
+    entries: response.body.map(mapToHiddenShowItem),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(HiddenShowSchema),

@@ -1,8 +1,8 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import type { HistoryRequest } from '@trakt/api';
+import type { HistoryRemoveRequest } from '@trakt/api';
 
 type RemoveWatchedParams = {
-  body: HistoryRequest;
+  body: HistoryRemoveRequest;
 } & ApiParams;
 
 export function removeWatchedRequest(

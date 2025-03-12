@@ -1,8 +1,8 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import type { HistoryRequest } from '@trakt/api';
+import type { HistoryAddRequest } from '@trakt/api';
 
 type MarkAsWatchedParams = {
-  body: HistoryRequest;
+  body: HistoryAddRequest;
 } & ApiParams;
 
 export function markAsWatchedRequest(
