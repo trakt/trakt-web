@@ -36,6 +36,7 @@ jobs:
               - 'projects/client/src/**'
               - 'projects/client/i18n/**'
               - 'projects/client/static/**'
+              - 'projects/client/e2e/**'
               - 'projects/client/package.json'
               - 'projects/client/deno.json'
               - 'projects/client/svelte.config.js'
