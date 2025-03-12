@@ -2,7 +2,8 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
+  import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import ActivityCard from "../components/ActivityCard.svelte";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/useRecentlyWatchedList";
@@ -19,20 +20,22 @@
 {#snippet popupActions()}
   <RenderFor audience="authenticated">
     {#if activity.type === "episode"}
-      <MarkAsWatchedAction
+      <RemoveFromHistoryAction
         style="dropdown-item"
-        type={activity.type}
         title={activity.episode.title}
-        show={activity.show}
-        episode={activity.episode}
-        media={activity.episode}
+        entry={activity}
       />
     {:else}
-      <MarkAsWatchedAction
+      <WatchlistAction
         style="dropdown-item"
-        type={activity.type}
         title={activity.movie.title}
+        type={activity.movie.type}
         media={activity.movie}
+      />
+      <RemoveFromHistoryAction
+        style="dropdown-item"
+        title={activity.movie.title}
+        entry={activity}
       />
     {/if}
   </RenderFor>

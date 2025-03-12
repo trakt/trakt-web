@@ -223,6 +223,7 @@
   "remove_from_watched_label": "Usuń {title} z twojej listy obejrzanych",
   "remove_from_watched_warning": "Czy na pewno chcesz usunąć {title} z twojej listy obejrzanych? Wszystkie odtworzenia zostaną usunięte.",
   "remove_single_watched_label": "Usuń odtworzenie {title} z listy Obejrzane",
+  "remove_single_watched_warning": "Na pewno chcesz usunąć to odtworzenie {title} z listy Obejrzanych?",
   "season_number_label": "Sezon {number}",
   "expand_media_overview": "Rozwiń podsumowanie {title}",
   "season_episode_number_label": "Sezon {season} • Odcinek {number}",

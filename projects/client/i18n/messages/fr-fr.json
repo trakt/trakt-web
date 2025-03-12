@@ -223,6 +223,7 @@
   "remove_from_watched_label": "Supprimer {title} de votre liste Visionnés",
   "remove_from_watched_warning": "Êtes-vous sûr de vouloir supprimer {title} de votre liste Visionnés? Toutes les lectures seront supprimées.",
   "remove_single_watched_label": "Supprimer ce visionnage de {title} de votre liste Regardés",
+  "remove_single_watched_warning": "Voulez-vous vraiment supprimer cette lecture de {title} de votre liste Vu ?",
   "season_number_label": "Saison {number}",
   "expand_media_overview": "Découvrir plus sur {title}",
   "season_episode_number_label": "Saison {season} • Épisode {number}",

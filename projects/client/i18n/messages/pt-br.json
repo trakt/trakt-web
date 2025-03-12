@@ -223,6 +223,7 @@
   "remove_from_watched_label": "Remover {title} da sua lista de Assistidos",
   "remove_from_watched_warning": "Tem certeza que deseja remover {title} da sua lista de Assistidos? Todas as reproduções serão removidas.",
   "remove_single_watched_label": "Remover esta exibição de {title} da sua lista de Já Vistos",
+  "remove_single_watched_warning": "Tem certeza de que deseja remover esta reprodução de {title} da sua lista de Vistos?",
   "season_number_label": "Temporada {number}",
   "expand_media_overview": "Expandir a visão geral de {title}",
   "season_episode_number_label": "Temporada {season} • Episódio {number}",

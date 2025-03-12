@@ -223,6 +223,7 @@
   "remove_from_watched_label": "Видалити {title} зі списку Переглянутого",
   "remove_from_watched_warning": "Ви впевнені, що хочете видалити {title} зі списку Переглянутого? Усі перегляди буде видалено.",
   "remove_single_watched_label": "Видалити цей перегляд {title} зі списку Переглянуто",
+  "remove_single_watched_warning": "Ви впевнені, що хочете видалити це відтворення {title} зі списку Переглянуто?",
   "season_number_label": "Сезон {number}",
   "expand_media_overview": "Розгорнути огляд {title}",
   "season_episode_number_label": "Сезон {season} • Епізод {number}",

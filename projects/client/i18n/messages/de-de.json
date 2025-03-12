@@ -223,6 +223,7 @@
   "remove_from_watched_label": "{title} aus Ihrer Favoritenliste entfernen",
   "remove_from_watched_warning": "Sind Sie sicher, dass Sie {title} von Ihrer Favoritenliste entfernen möchten? Alle Wiedergaben werden gelöscht.",
   "remove_single_watched_label": "Diese Wiedergabe von {title} aus deiner Gesehen-Liste entfernen",
+  "remove_single_watched_warning": "Möchtest du diese Wiedergabe von {title} wirklich von deiner Gesehen-Liste entfernen?",
   "season_number_label": "Staffel {number}",
   "expand_media_overview": "Übersicht über {title} erweitern",
   "season_episode_number_label": "Staffel {season} • Folge {number}",

@@ -223,6 +223,7 @@
   "remove_from_watched_label": "視聴済みリストから{title}を削除",
   "remove_from_watched_warning": "{title} を視聴済リストから削除しますか？すべての再生記録が削除されます。",
   "remove_single_watched_label": "{title}の視聴履歴からこの記録を削除",
+  "remove_single_watched_warning": "{title}の視聴記録を視聴済みリストから削除してもよろしいですか？",
   "season_number_label": "第{number}シーズン",
   "expand_media_overview": "{title} の概要を表示",
   "season_episode_number_label": "シーズン{season}・エピソード{number}",
