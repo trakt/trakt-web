@@ -17,6 +17,12 @@ export class TraktWorld extends World {
     this._context = await this._browser.newContext();
     this._page = await this._context.newPage();
 
+    const userAgent = await this._page.evaluate(() => navigator.userAgent);
+    const headlessUserAgent = userAgent.replace(/headless/gi, '');
+    await this._context.setExtraHTTPHeaders({
+      'user-agent': headlessUserAgent,
+    });
+
     await this._page.goto(E2E_BASE_URL);
   }
 
