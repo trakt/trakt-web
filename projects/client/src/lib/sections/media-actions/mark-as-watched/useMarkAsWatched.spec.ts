@@ -10,7 +10,7 @@ import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import {
   type MarkAsWatchedStoreProps,
   useMarkAsWatched,
-} from './useMarkAsWatched';
+} from './useMarkAsWatched.ts';
 
 vi.mock('$lib/stores/useInvalidator.ts');
 

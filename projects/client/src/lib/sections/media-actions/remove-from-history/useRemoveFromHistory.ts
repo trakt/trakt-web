@@ -5,7 +5,7 @@ import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { writable } from 'svelte/store';
 
-type UseRemoveFromHistoryProps = {
+export type UseRemoveFromHistoryProps = {
   id: number;
   type: 'movie' | 'episode';
 };
