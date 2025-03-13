@@ -82,7 +82,7 @@
         <Button
           href={UrlBuilder.home()}
           label={m.navbar_link_home_label()}
-          style="ghost"
+          style="underlined"
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarHomeButton}
@@ -92,7 +92,7 @@
         <Button
           href={UrlBuilder.shows()}
           label={m.navbar_link_shows_label()}
-          style="ghost"
+          style="underlined"
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarShowsButton}
@@ -102,7 +102,7 @@
         <Button
           href={UrlBuilder.movies()}
           label={m.navbar_link_movies_label()}
-          style="ghost"
+          style="underlined"
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarMoviesButton}
@@ -114,7 +114,7 @@
         <Button
           href={UrlBuilder.watchlist()}
           label={m.navbar_link_watchlist_label()}
-          style="ghost"
+          style="underlined"
           variant="primary"
           color="purple"
         >
@@ -187,20 +187,6 @@
       gap: var(--gap-xs);
       align-items: center;
       justify-content: end;
-
-      /** 
-      * Navbar links have custom design,
-      * to accommodate the custom cover background
-      * so we need to override the button styles
-      */
-      :global(.trakt-button.trakt-link-active[data-style="ghost"]) {
-        background: color-mix(
-          in srgb,
-          var(--color-background-button) 70%,
-          transparent 30%
-        );
-        color: var(--color-foreground-button);
-      }
     }
   }
 
@@ -212,6 +198,23 @@
     backdrop-filter: blur(8px);
 
     color: var(--color-foreground-navbar);
+
+    /** 
+      * Navbar links have custom design,
+      * to accommodate the scrolled navbar
+      * we need to override the button styles
+      */
+    :global(.trakt-button[data-style="underlined"]) {
+      color: var(--color-foreground-navbar);
+    }
+
+    @include for-mouse {
+      :global(.trakt-button[data-style="underlined"]) {
+        &:hover:not([disabled]) {
+          text-decoration-color: var(--color-foreground-navbar);
+        }
+      }
+    }
 
     &.trakt-navbar {
       width: calc(100dvw - 2 * var(--layout-distance-side));
