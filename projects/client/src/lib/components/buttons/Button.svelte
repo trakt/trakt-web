@@ -44,7 +44,8 @@
   <div class="button-label">
     <p
       class="ellipsis"
-      class:small={subtitle != null}
+      class:small={subtitle != null || style === "underlined"}
+      class:bold={style === "underlined"}
       class:capitalize={text === "capitalize"}
     >
       {@render children()}
@@ -178,12 +179,33 @@
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: box-shadow, outline, padding, transform, color,
-      background;
+      background, text-decoration;
+
+    &:not([data-style="underlined"]) p:not(.meta-info) {
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    p:not(.meta-info) {
+      text-transform: uppercase;
+    }
 
     &.trakt-button-link {
       &[data-style="ghost"] {
         &.trakt-link-active {
           color: var(--color-background-button);
+        }
+      }
+
+      &[data-style="underlined"] {
+        &.trakt-link-active {
+          text-decoration-color: color-mix(
+            in srgb,
+            var(--color-background-button) 80%,
+            white 20%
+          );
+          text-decoration-line: underline;
         }
       }
     }
@@ -318,7 +340,7 @@
       background: transparent;
 
       &:not([data-variant="secondary"]) {
-        color: color(var(--color-foreground));
+        color: var(--color-foreground);
       }
 
       &[disabled] {
@@ -395,6 +417,38 @@
     &[data-style="flat"] {
       &:active:not([disabled]) {
         transform: scale(calc(var(--scale-factor-button) * 0.97));
+      }
+    }
+
+    &[data-style="underlined"] {
+      --underline-offset: var(--ni-4);
+      --line-thickness: var(--ni-2);
+
+      background: transparent;
+      text-decoration-color: transparent;
+      color: var(--color-foreground);
+
+      text-underline-offset: var(--underline-offset);
+      text-decoration-thickness: var(--line-thickness);
+      line-height: calc(100% + var(--underline-offset) + var(--line-thickness));
+
+      &[disabled] {
+        color: var(--color-foreground-button-disabled);
+      }
+
+      @include for-mouse {
+        &:hover:not([disabled]) {
+          text-decoration-line: underline;
+          text-decoration-color: var(--color-foreground);
+
+          &:not(.trakt-link-active) {
+            color: color-mix(
+              in srgb,
+              var(--color-foreground-button) 80%,
+              white 20%
+            );
+          }
+        }
       }
     }
   }
