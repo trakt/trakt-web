@@ -36,4 +36,5 @@ export const ExtendedUserMappedMock: UserSettings = {
     'showOnlyFavorites': true,
   },
   'genres': [],
+  'permissions': ['comment', 'like', 'follow'],
 };

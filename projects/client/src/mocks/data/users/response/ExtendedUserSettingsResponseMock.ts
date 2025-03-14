@@ -28,6 +28,11 @@ export const ExtendedUsersResponseMock: SettingsResponse = {
     'vip_cover_image': 'whirling_in_rags.jpg',
     'dob': '1977-03-21',
   },
+  'permissions': {
+    'commenting': true,
+    'liking': true,
+    'following': true,
+  },
   'account': {
     'timezone': 'Europe/Amsterdam',
     'date_format': 'dmy',

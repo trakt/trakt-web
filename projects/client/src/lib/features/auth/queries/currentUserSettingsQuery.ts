@@ -1,4 +1,8 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import {
+  type Permission,
+  permissionSchema,
+} from '$lib/requests/models/Permission.ts';
 import { error } from '$lib/utils/console/print.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
@@ -46,9 +50,19 @@ export const UserSettingsSchema = z.object({
     favorites: z.array(z.string()).optional(),
     showOnlyFavorites: z.boolean().optional(),
   }),
+  permissions: permissionSchema.array(),
 });
 
 export type UserSettings = z.infer<typeof UserSettingsSchema>;
+
+const PERMISSIONS_MAP: Record<
+  keyof SettingsResponse['permissions'],
+  Permission
+> = {
+  commenting: 'comment',
+  liking: 'like',
+  following: 'follow',
+};
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
@@ -103,6 +117,9 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       favorites: browsing?.watchnow.favorites,
       showOnlyFavorites: browsing?.watchnow.only_favorites,
     },
+    permissions: Object.entries(response.permissions)
+      .filter(([_, value]) => value)
+      .map(([key]) => PERMISSIONS_MAP[key as keyof typeof PERMISSIONS_MAP]),
   };
 }
 
