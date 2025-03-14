@@ -2,7 +2,6 @@ import { http, HttpResponse } from 'msw';
 
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { OfficialListsResponseMock } from '$mocks/data/lists/response/OfficialListsResponseMock.ts';
-import { ShowsWatchedResponseMock } from '$mocks/data/shows/response/ShowsWatchedResponseMock.ts';
 import { EpisodeSiloCommentsResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloCommentsResponseMock.ts';
 import { EpisodeSiloPeopleResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloPeopleResponseMock.ts';
 import { EpisodeSiloWatchNowResponseMock } from '$mocks/data/summary/episodes/silo/response/EpisodeSiloWatchNowResponseMock.ts';
@@ -151,12 +150,6 @@ export const shows = [
     'http://localhost/shows/trending*',
     () => {
       return HttpResponse.json(ShowsTrendingResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/shows/watched/daily*',
-    () => {
-      return HttpResponse.json(ShowsWatchedResponseMock);
     },
   ),
   http.get(

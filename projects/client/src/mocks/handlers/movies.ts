@@ -1,7 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
 import { OfficialListsResponseMock } from '$mocks/data/lists/response/OfficialListsResponseMock.ts';
-import { MoviesWatchedResponseMock } from '$mocks/data/movies/response/MoviesWatchedResponseMock.ts';
 import { MovieHereticCommentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticCommentsResponseMock.ts';
 import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnticipatedResponseMock.ts';
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
@@ -70,12 +69,6 @@ export const movies = [
     'http://localhost/movies/trending*',
     () => {
       return HttpResponse.json(MoviesTrendingResponseMock);
-    },
-  ),
-  http.get(
-    'http://localhost/movies/watched/daily*',
-    () => {
-      return HttpResponse.json(MoviesWatchedResponseMock);
     },
   ),
   http.get(

@@ -5,7 +5,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { MovieWatchedResponse } from '@trakt/api';
+import type { MovieTrendingResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
@@ -18,9 +18,9 @@ export type TrendingMovie = z.infer<typeof TrendingMovieSchema>;
 type MovieTrendingParams = PaginationParams & ApiParams;
 
 function mapToTrendingMovie({
-  watcher_count: watchers,
+  watchers,
   movie,
-}: MovieWatchedResponse): TrendingMovie {
+}: MovieTrendingResponse): TrendingMovie {
   return {
     watchers,
     ...mapToMovieEntry(movie),
@@ -30,13 +30,9 @@ function mapToTrendingMovie({
 const movieTrendingRequest = (
   { fetch, limit, page }: MovieTrendingParams,
 ) =>
-  // FIXME: switch back to trending query when stats are fixed
   api({ fetch })
     .movies
-    .watched({
-      params: {
-        period: 'daily',
-      },
+    .trending({
       query: {
         extended: 'full,images',
         ignore_collected: true,
