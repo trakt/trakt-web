@@ -10,7 +10,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:mark_as_watched:${ExtendedMediaType}`
   | `${typeof INVALIDATION_ID}:watchlisted:${MediaType}`
   | `${typeof INVALIDATION_ID}:dropped:show`
-  | `${typeof INVALIDATION_ID}:restored:show`;
+  | `${typeof INVALIDATION_ID}:restored:show`
+  | `${typeof INVALIDATION_ID}:like:comment`;
 
 type TypeDataMap = {
   'auth': null;
@@ -19,6 +20,7 @@ type TypeDataMap = {
   'watchlisted': MediaType;
   'dropped': 'show';
   'restored': 'show';
+  'like': 'comment';
 };
 
 export function invalidationId(key?: string) {
@@ -48,4 +50,6 @@ export const InvalidateAction = {
 
   Drop: buildInvalidationKey('dropped', 'show'),
   Restore: buildInvalidationKey('restored', 'show'),
+
+  Like: buildInvalidationKey('like', 'comment'),
 };
