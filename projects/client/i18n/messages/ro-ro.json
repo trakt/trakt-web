@@ -329,5 +329,8 @@
   "mark_as_watched_multiple_episodes_warning": "Sigur vrei să marchezi {count} episoade ca vizionate?",
   "watch_count_label": "Număr de vizionări",
   "watched_episodes_count_label": "Episoade vizionate",
-  "empty_media_history_label": "Încă nu ai urmărit {title}!"
+  "empty_media_history_label": "Încă nu ai urmărit {title}!",
+  "like_comment_label": "Apreciază comentariul",
+  "unlike_comment_label": "Nu aprecia comentariul",
+  "comment_likes": "{count} aprecieri"
 }

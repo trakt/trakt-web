@@ -329,5 +329,8 @@
   "mark_as_watched_multiple_episodes_warning": "Weet je zeker dat je {count} afleveringen als bekeken wilt markeren?",
   "watch_count_label": "Aantal keer bekeken",
   "watched_episodes_count_label": "Bekeken afleveringen",
-  "empty_media_history_label": "Je hebt {title} nog niet bekeken"
+  "empty_media_history_label": "Je hebt {title} nog niet bekeken",
+  "like_comment_label": "Vind ik leuk",
+  "unlike_comment_label": "Vind ik niet leuk",
+  "comment_likes": "{count} likes"
 }

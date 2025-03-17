@@ -329,5 +329,8 @@
   "mark_as_watched_multiple_episodes_warning": "Na pewno chcesz oznaczyć {count} odcinków jako obejrzane?",
   "watch_count_label": "Liczba seansów",
   "watched_episodes_count_label": "Odcinki obejrzane",
-  "empty_media_history_label": "Jeszcze nie widziałeś {title}"
+  "empty_media_history_label": "Jeszcze nie widziałeś {title}",
+  "like_comment_label": "Polub komentarz",
+  "unlike_comment_label": "Przestań lubić komentarz",
+  "comment_likes": "{count} polubień"
 }

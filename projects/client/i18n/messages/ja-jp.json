@@ -329,5 +329,8 @@
   "mark_as_watched_multiple_episodes_warning": "{count}エピソードを視聴済みにしますか？",
   "watch_count_label": "視聴回数",
   "watched_episodes_count_label": "視聴済みエピソード",
-  "empty_media_history_label": "{title} はまだ見ていないよ"
+  "empty_media_history_label": "{title} はまだ見ていないよ",
+  "like_comment_label": "コメントをいいね",
+  "unlike_comment_label": "コメントをいいねしない",
+  "comment_likes": "{count} 件のいいね"
 }

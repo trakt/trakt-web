@@ -329,5 +329,8 @@
   "mark_as_watched_multiple_episodes_warning": "Сигурни ли сте, че искате да отбележите {count} епизоди като гледани?",
   "watch_count_label": "Брой гледания",
   "watched_episodes_count_label": "Гледани епизоди",
-  "empty_media_history_label": "Все още не сте гледали {title}"
+  "empty_media_history_label": "Все още не сте гледали {title}",
+  "like_comment_label": "Харесвам коментара",
+  "unlike_comment_label": "Не харесвам коментара",
+  "comment_likes": "{count} харесвания"
 }

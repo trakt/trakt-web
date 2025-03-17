@@ -329,5 +329,8 @@
   "mark_as_watched_multiple_episodes_warning": "¿Estás seguro de que quieres marcar {count} episodios como vistos?",
   "watch_count_label": "Contador de visualizaciones",
   "watched_episodes_count_label": "Episodios vistos",
-  "empty_media_history_label": "Aún no has visto {title}"
+  "empty_media_history_label": "Aún no has visto {title}",
+  "like_comment_label": "Me gusta el comentario",
+  "unlike_comment_label": "Ya no me gusta el comentario",
+  "comment_likes": "{count} me gusta(n)"
 }

@@ -329,5 +329,8 @@
   "mark_as_watched_multiple_episodes_warning": "Впевнені, що хочете відмітити {count} серій як переглянуті?",
   "watch_count_label": "Кількість переглядів",
   "watched_episodes_count_label": "Переглянуто епізодів",
-  "empty_media_history_label": "Ви ще не дивилися {title}"
+  "empty_media_history_label": "Ви ще не дивилися {title}",
+  "like_comment_label": "Вподобати коментар",
+  "unlike_comment_label": "Не подобається коментар",
+  "comment_likes": "{count} вподобайок"
 }
