@@ -12,7 +12,8 @@
 
 <style>
   .trakt-shadow-wrapper {
-    height: var(--ni-148);
+    flex-grow: 1;
+    overflow: auto;
     position: relative;
 
     &::before {

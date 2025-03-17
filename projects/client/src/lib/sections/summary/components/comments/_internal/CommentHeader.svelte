@@ -47,6 +47,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-s);
+    height: var(--ni-32);
 
     :global(.trakt-user-avatar) {
       position: relative;
