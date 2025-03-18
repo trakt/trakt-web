@@ -12,7 +12,8 @@
   type MarkAsWatchedActionProps = {
     style: "normal" | "action" | "dropdown-item";
     title: string;
-    isRewatching?: boolean;
+    // FIXME: remove prop when we fully split up mark-as-watched and remove
+    allowRewatch?: boolean;
     size?: "normal" | "small";
   } & MarkAsWatchedStoreProps;
 
@@ -20,7 +21,7 @@
     style = "action",
     size = "normal",
     title,
-    isRewatching = false,
+    allowRewatch = false,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -33,6 +34,7 @@
   } = $derived(useMarkAsWatched(target));
 
   const { isWatchlisted } = $derived(useIsWatchlisted(target));
+  const isRewatching = $derived(allowRewatch && $isWatched);
 
   const isShow = $derived(target.type === "show");
   const episodeCount = $derived(

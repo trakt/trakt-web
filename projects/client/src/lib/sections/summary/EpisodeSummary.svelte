@@ -57,7 +57,7 @@
     {episode}
     {show}
     {size}
-    isRewatching={$watchCount > 0}
+    allowRewatch={$watchCount > 0}
   />
 {/snippet}
 

@@ -22,7 +22,7 @@
 {#snippet action()}
   {#if !isFuture && !isActivity && !isHidden}
     <MarkAsWatchedAction
-      isRewatching={props.variant === "next"}
+      allowRewatch={props.variant === "next"}
       style="action"
       type="episode"
       size="small"
