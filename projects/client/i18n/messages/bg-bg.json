@@ -332,5 +332,6 @@
   "empty_media_history_label": "Все още не сте гледали {title}",
   "like_comment_label": "Харесвам коментара",
   "unlike_comment_label": "Не харесвам коментара",
-  "comment_likes": "{count} харесвания"
+  "comment_likes": "{count} харесвания",
+  "close_label": "Затвори"
 }

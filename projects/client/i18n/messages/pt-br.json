@@ -332,5 +332,6 @@
   "empty_media_history_label": "Você ainda não assistiu {title}",
   "like_comment_label": "Curtir comentário",
   "unlike_comment_label": "Descurtir comentário",
-  "comment_likes": "{count} curtidas"
+  "comment_likes": "{count} curtidas",
+  "close_label": "Fechar"
 }

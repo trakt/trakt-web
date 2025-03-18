@@ -332,5 +332,6 @@
   "empty_media_history_label": "{title} はまだ見ていないよ",
   "like_comment_label": "コメントをいいね",
   "unlike_comment_label": "コメントをいいねしない",
-  "comment_likes": "{count} 件のいいね"
+  "comment_likes": "{count} 件のいいね",
+  "close_label": "閉じる"
 }

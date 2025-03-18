@@ -332,5 +332,6 @@
   "empty_media_history_label": "Je hebt {title} nog niet bekeken",
   "like_comment_label": "Vind ik leuk",
   "unlike_comment_label": "Vind ik niet leuk",
-  "comment_likes": "{count} likes"
+  "comment_likes": "{count} likes",
+  "close_label": "Sluiten"
 }

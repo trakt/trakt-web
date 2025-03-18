@@ -332,5 +332,6 @@
   "empty_media_history_label": "Jeszcze nie widziałeś {title}",
   "like_comment_label": "Polub komentarz",
   "unlike_comment_label": "Przestań lubić komentarz",
-  "comment_likes": "{count} polubień"
+  "comment_likes": "{count} polubień",
+  "close_label": "Zamknij"
 }

@@ -332,5 +332,6 @@
   "empty_media_history_label": "Încă nu ai urmărit {title}!",
   "like_comment_label": "Apreciază comentariul",
   "unlike_comment_label": "Nu aprecia comentariul",
-  "comment_likes": "{count} aprecieri"
+  "comment_likes": "{count} aprecieri",
+  "close_label": "Închide"
 }

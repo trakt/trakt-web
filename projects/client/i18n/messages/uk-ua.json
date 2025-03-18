@@ -332,5 +332,6 @@
   "empty_media_history_label": "Ви ще не дивилися {title}",
   "like_comment_label": "Вподобати коментар",
   "unlike_comment_label": "Не подобається коментар",
-  "comment_likes": "{count} вподобайок"
+  "comment_likes": "{count} вподобайок",
+  "close_label": "Закрити"
 }

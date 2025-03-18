@@ -72,6 +72,10 @@
       color: var(--color-foreground);
       font-family: "Spline Sans", Arial, sans-serif;
     }
+
+    body:has(dialog[open]) {
+      overflow: hidden;
+    }
   </style>
 </svelte:head>
 

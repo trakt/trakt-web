@@ -332,5 +332,6 @@
   "empty_media_history_label": "Non hai ancora visto {title}",
   "like_comment_label": "Mi piace commento",
   "unlike_comment_label": "Non mi piace commento",
-  "comment_likes": "{count} mi piace"
+  "comment_likes": "{count} mi piace",
+  "close_label": "Chiudi"
 }
