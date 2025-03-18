@@ -116,29 +116,15 @@
       background: linear-gradient(
         180deg,
         transparent 0%,
-        color-mix(in srgb, var(--color-card-background) 2%, transparent 98%) 5%,
-        color-mix(in srgb, var(--color-card-background) 4%, transparent 96%) 9%,
         color-mix(in srgb, var(--color-card-background) 7%, transparent 93%) 13%,
-        color-mix(in srgb, var(--color-card-background) 10%, transparent 90%)
-          17%,
-        color-mix(in srgb, var(--color-card-background) 14%, transparent 86%)
-          20%,
         color-mix(in srgb, var(--color-card-background) 18%, transparent 82%)
           24%,
-        color-mix(in srgb, var(--color-card-background) 23%, transparent 77%)
-          29%,
         color-mix(in srgb, var(--color-card-background) 29%, transparent 71%)
           34%,
-        color-mix(in srgb, var(--color-card-background) 35%, transparent 65%)
-          40%,
         color-mix(in srgb, var(--color-card-background) 43%, transparent 57%)
           46%,
-        color-mix(in srgb, var(--color-card-background) 52%, transparent 48%)
-          54%,
         color-mix(in srgb, var(--color-card-background) 62%, transparent 38%)
           63%,
-        color-mix(in srgb, var(--color-card-background) 73%, transparent 27%)
-          74%,
         color-mix(in srgb, var(--color-card-background) 86%, transparent 14%)
           86%,
         var(--color-card-background) 100%
