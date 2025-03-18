@@ -39,6 +39,7 @@ module.exports = {
         'coming-soon',
         'cover',
         'contrib',
+        'dialog',
         'ds',
         'drop',
         'dropdown',
