@@ -1,7 +1,7 @@
 import { SPOILER_CLASS_NAME } from '$lib/features/spoilers/constants.ts';
-import { spoilMeAnyway } from '$lib/sections/summary/components/comments/_internal/spoilMeAnyway.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { describe, expect, it } from 'vitest';
+import { spoilMeAnyway } from './spoilMeAnyway.ts';
 
 describe('action: spoilMeAnyway', () => {
   it('should remove spoilers on the entire comment', async () => {

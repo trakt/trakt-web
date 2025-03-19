@@ -1,7 +1,7 @@
 <script lang="ts">
   import { type IsWatchedProps } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
-  import { spoilMeAnyway } from "$lib/sections/summary/components/comments/_internal/spoilMeAnyway";
   import { useSpoilerAction } from "../_internal/useSpoilerAction";
+  import { spoilMeAnyway } from "./spoilMeAnyway";
 
   const { children, ...rest }: ChildrenProps & IsWatchedProps = $props();
 

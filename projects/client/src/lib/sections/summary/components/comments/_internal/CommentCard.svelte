@@ -1,6 +1,7 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
+  import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { Marked } from "marked";
@@ -8,7 +9,6 @@
   import CommentHeader from "./CommentHeader.svelte";
   import ShadowScroller from "./ShadowScroller.svelte";
   import { spoilerExtension } from "./spoilerExtension";
-  import { spoilMeAnyway } from "./spoilMeAnyway";
 
   type CommentProps = {
     comment: MediaComment;
