@@ -1,25 +1,18 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
-  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
-  import { spoilMeAnyway } from "$lib/features/spoilers/components/spoilMeAnyway";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import { Marked } from "marked";
+  import CommentBody from "./CommentBody.svelte";
   import CommentFooter from "./CommentFooter.svelte";
   import CommentHeader from "./CommentHeader.svelte";
-  import ShadowScroller from "./ShadowScroller.svelte";
-  import { spoilerExtension } from "./spoilerExtension";
 
   type CommentProps = {
-    comment: MediaComment;
     media: MediaEntry;
+    comment: MediaComment;
+    onDrilldown?: (id: number) => void;
   };
 
-  const { comment, media }: CommentProps = $props();
-
-  const marked = $derived(
-    new Marked({ extensions: [spoilerExtension(comment.isSpoiler)] }),
-  );
+  const { comment, media, onDrilldown }: CommentProps = $props();
 </script>
 
 <Card
@@ -28,22 +21,8 @@
 >
   <div class="trakt-comment-container">
     <CommentHeader {comment} />
-    <ShadowScroller>
-      <Spoiler {media} type={media.type}>
-        <div
-          class="trakt-comment"
-          class:trakt-spoiler={comment.isSpoiler}
-          use:spoilMeAnyway
-        >
-          <!--
-            -gfm: to enable GitHub Flavored Markdown
-            -breaks: to enable gfm line breaks
-          -->
-          {@html marked.parse(comment.comment, { gfm: true, breaks: true })}
-        </div>
-      </Spoiler>
-    </ShadowScroller>
-    <CommentFooter {comment} />
+    <CommentBody {comment} {media} />
+    <CommentFooter {comment} {onDrilldown} />
   </div>
 </Card>
 
@@ -63,24 +42,6 @@
 
     :global(.trakt-spoiler) {
       cursor: pointer;
-    }
-  }
-
-  .trakt-comment {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xs);
-
-    color: var(--color-text-secondary);
-    font-size: var(--ni-14);
-
-    :global(a) {
-      @include default-link-style;
-    }
-
-    :global(p),
-    :global(li) {
-      font-size: inherit;
     }
   }
 </style>
