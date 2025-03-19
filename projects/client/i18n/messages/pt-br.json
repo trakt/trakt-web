@@ -333,5 +333,7 @@
   "like_comment_label": "Curtir comentário",
   "unlike_comment_label": "Descurtir comentário",
   "comment_likes": "{count} curtidas",
-  "close_label": "Fechar"
+  "close_label": "Fechar",
+  "comment_replies_label": "Respostas",
+  "comment_replies_text": "{count} respostas"
 }

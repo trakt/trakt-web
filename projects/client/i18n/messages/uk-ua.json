@@ -333,5 +333,7 @@
   "like_comment_label": "Вподобати коментар",
   "unlike_comment_label": "Не подобається коментар",
   "comment_likes": "{count} вподобайок",
-  "close_label": "Закрити"
+  "close_label": "Закрити",
+  "comment_replies_label": "Відповіді на коментарі",
+  "comment_replies_text": "{count} відповідей"
 }

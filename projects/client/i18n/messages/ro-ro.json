@@ -333,5 +333,7 @@
   "like_comment_label": "Apreciază comentariul",
   "unlike_comment_label": "Nu aprecia comentariul",
   "comment_likes": "{count} aprecieri",
-  "close_label": "Închide"
+  "close_label": "Închide",
+  "comment_replies_label": "Răspunsuri comentarii",
+  "comment_replies_text": "{count} răspunsuri"
 }

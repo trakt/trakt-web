@@ -2,7 +2,9 @@
   import Preview from "$lib/components/badge/Preview.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import CommentCard from "./_internal/CommentCard.svelte";
+  import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
+  import { writable } from "svelte/store";
+  import CommentsDialog from "./_internal/CommentsDialog.svelte";
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
 
@@ -18,6 +20,14 @@
   const topLevelComments = $derived(
     $comments.filter((comment) => comment.parentId === 0),
   );
+
+  const dialog = writable<HTMLDialogElement>();
+  const sourceId = writable<number | undefined>(undefined);
+
+  const handler = (id: number) => {
+    $dialog.showModal();
+    sourceId.set(id);
+  };
 </script>
 
 <SectionList
@@ -27,7 +37,7 @@
   --height-list="var(--height-comments-list)"
 >
   {#snippet item(comment)}
-    <CommentCard {comment} {media} />
+    <CommentCard {comment} {media} onDrilldown={handler} />
   {/snippet}
 
   {#snippet empty()}
@@ -40,3 +50,5 @@
     <Preview />
   {/snippet}
 </SectionList>
+
+<CommentsDialog sourceId={$sourceId} {dialog} {media} {...props} />

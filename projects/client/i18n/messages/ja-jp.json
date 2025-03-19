@@ -333,5 +333,7 @@
   "like_comment_label": "コメントをいいね",
   "unlike_comment_label": "コメントをいいねしない",
   "comment_likes": "{count} 件のいいね",
-  "close_label": "閉じる"
+  "close_label": "閉じる",
+  "comment_replies_label": "コメント返信",
+  "comment_replies_text": "{count} 件の返信"
 }

@@ -333,5 +333,7 @@
   "like_comment_label": "Polub komentarz",
   "unlike_comment_label": "Przestań lubić komentarz",
   "comment_likes": "{count} polubień",
-  "close_label": "Zamknij"
+  "close_label": "Zamknij",
+  "comment_replies_label": "Odpowiedzi na komentarze",
+  "comment_replies_text": "{count} odpowiedzi"
 }

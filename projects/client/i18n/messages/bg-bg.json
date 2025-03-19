@@ -333,5 +333,7 @@
   "like_comment_label": "Харесвам коментара",
   "unlike_comment_label": "Не харесвам коментара",
   "comment_likes": "{count} харесвания",
-  "close_label": "Затвори"
+  "close_label": "Затвори",
+  "comment_replies_label": "Отговори на коментари",
+  "comment_replies_text": "{count} отговора"
 }

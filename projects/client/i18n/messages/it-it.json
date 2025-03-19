@@ -333,5 +333,7 @@
   "like_comment_label": "Mi piace commento",
   "unlike_comment_label": "Non mi piace commento",
   "comment_likes": "{count} mi piace",
-  "close_label": "Chiudi"
+  "close_label": "Chiudi",
+  "comment_replies_label": "Risposte ai commenti",
+  "comment_replies_text": "{count} risposte"
 }

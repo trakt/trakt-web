@@ -333,5 +333,7 @@
   "like_comment_label": "Vind ik leuk",
   "unlike_comment_label": "Vind ik niet leuk",
   "comment_likes": "{count} likes",
-  "close_label": "Sluiten"
+  "close_label": "Sluiten",
+  "comment_replies_label": "Reacties",
+  "comment_replies_text": "{count} reacties"
 }

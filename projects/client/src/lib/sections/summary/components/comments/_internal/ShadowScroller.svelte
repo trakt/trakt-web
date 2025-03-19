@@ -56,6 +56,9 @@
 
   .trakt-shadow-scroller {
     height: 100%;
+    min-height: var(--ni-24);
+
     overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>
