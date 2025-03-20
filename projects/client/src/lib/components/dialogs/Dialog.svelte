@@ -64,7 +64,7 @@
     }
   }
 
-  dialog:open {
+  dialog[open] {
     display: flex;
 
     animation: dialogOpen var(--transition-duration) ease-in-out;
