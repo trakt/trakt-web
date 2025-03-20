@@ -5,9 +5,6 @@ import type { LikedItemResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 
-// FIXME: remove this when we have min & all query params
-const LIKES_LIMIT = 35000;
-
 const UserLikeSchema = z.object({
   type: z.enum(['comment', 'list']),
   id: z.number(),
@@ -18,9 +15,7 @@ export type UserLike = z.infer<typeof UserLikeSchema>;
 function mapRatedItemResponse(response: LikedItemResponse): UserLike {
   return {
     type: response.type,
-    id: response.type === 'comment'
-      ? response.comment.id
-      : response.list.ids.trakt,
+    id: response.type === 'comment' ? response.comment.id : response.list.id,
   };
 }
 
@@ -32,7 +27,8 @@ const currentUserCommentLikesRequest = ({ fetch }: ApiParams) =>
         type: 'comments',
       },
       query: {
-        limit: LIKES_LIMIT,
+        limit: 'all',
+        extended: 'min',
       },
     })
     .then((response) => {
