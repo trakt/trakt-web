@@ -18,7 +18,7 @@
 </script>
 
 <Card
-  --width-card="min(var(--width-comment-thread-card), 85vw)"
+  --width-card="var(--width-comment-thread-card)"
   --height-card="min(var(--height-comment-thread-card), 65vh)"
 >
   <div class="trakt-comment-thread-container">

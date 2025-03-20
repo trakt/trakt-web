@@ -33,7 +33,7 @@
   --width-comment-card: var(--ni-480);
   --height-comment-card: var(--ni-228);
 
-  --width-comment-thread-card: var(--width-comment-card);
+  --width-comment-thread-card: min(var(--width-comment-card), 85vw);
   --height-comment-thread-card: var(--ni-480);
 
   /**
