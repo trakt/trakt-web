@@ -1,9 +1,9 @@
 <script lang="ts">
   import Dialog from "$lib/components/dialogs/Dialog.svelte";
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { CommentsProps } from "$lib/sections/summary/components/comments/CommentsProps";
   import { onMount } from "svelte";
   import { writable, type Writable } from "svelte/store";
+  import CommentList from "./CommentList.svelte";
   import CommentThreadCard from "./CommentThreadCard.svelte";
   import { useComments } from "./useComments";
 
@@ -32,7 +32,8 @@
 
   function scrollIntoView(node: HTMLElement, isSourceComment: boolean) {
     const update = (isSourceComment: boolean) => {
-      isSourceComment && node.scrollIntoView({ behavior: "smooth" });
+      isSourceComment &&
+        node.scrollIntoView({ behavior: "instant", inline: "center" });
     };
 
     onMount(() => update(isSourceComment));
@@ -42,8 +43,7 @@
 
 <Dialog title="Comments" {dialog}>
   <div class="trakt-comment-threads">
-    <!-- FIXME: replace with centered list -->
-    <SectionList
+    <CommentList
       id={`comment-threads-list-${media.slug}`}
       items={topLevelComments}
       title=""
@@ -54,7 +54,7 @@
           <CommentThreadCard {comment} {media} />
         </comment-thread>
       {/snippet}
-    </SectionList>
+    </CommentList>
   </div>
 </Dialog>
 
