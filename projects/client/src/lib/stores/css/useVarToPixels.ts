@@ -36,23 +36,12 @@ function calculate(value: string) {
   return pixelMeasurementDiv.getBoundingClientRect().width;
 }
 
-const STABLE = [
-  'px',
-  'pt',
-  'cm',
-  'mm',
-  'in',
-  'pc',
-];
-
-export function useVarToPixels(variable: string) {
+export function useVarToPixels(variable: string, isStable = true) {
   const value = writable(0);
 
   if (!browser) return value;
 
   value.set(calculate(variable));
-
-  const isStable = STABLE.some((unit) => variable.includes(unit));
 
   if (isStable) return value;
 
