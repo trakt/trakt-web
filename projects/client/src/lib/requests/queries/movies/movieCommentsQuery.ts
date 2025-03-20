@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
@@ -32,7 +33,7 @@ const movieCommentsRequest = (
 
 export const movieCommentsQuery = defineQuery({
   key: 'movieComments',
-  invalidations: [],
+  invalidations: [InvalidateAction.Like],
   dependencies: (params) => [params.slug],
   request: movieCommentsRequest,
   mapper: (data) => data.map(mapToMediaComment),

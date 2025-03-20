@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
@@ -37,7 +38,7 @@ const showCommentsRequest = (
 
 export const episodeCommentsQuery = defineQuery({
   key: 'episodeComments',
-  invalidations: [],
+  invalidations: [InvalidateAction.Like],
   dependencies: (params) => [params.slug, params.season, params.episode],
   request: showCommentsRequest,
   mapper: (data) => data.map(mapToMediaComment),
