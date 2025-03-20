@@ -13,6 +13,7 @@
     empty?: Snippet;
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
+    variant?: "normal" | "centered";
   };
 
   const {
@@ -25,6 +26,7 @@
     actions,
     badge,
     empty,
+    variant = "normal",
   }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
@@ -68,7 +70,9 @@
           bind:this={$scrollContainer}
           use:scrollTracking={scrollX}
           use:scrollHistory={id}
-          class="trakt-list-item-container shadow-list-horizontal-scroll"
+          class="trakt-list-item-container"
+          class:shadow-list-horizontal-scroll-centered={variant === "centered"}
+          class:shadow-list-horizontal-scroll={variant === "normal"}
         >
           {#each items as i (i.id)}
             {@render item(i)}
@@ -172,13 +176,17 @@
     }
   }
 
+  .shadow-list-horizontal-scroll-centered,
   .shadow-list-horizontal-scroll {
     height: var(--height-list);
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x proximity;
     transition: gap var(--transition-increment) ease-in-out;
     @include adaptive-gap(gap);
+  }
+
+  .shadow-list-horizontal-scroll {
+    scroll-snap-type: x proximity;
 
     & > :global(:not(svelte-css-wrapper)) {
       scroll-snap-align: start;
@@ -212,6 +220,19 @@
       @include for-mobile() {
         scroll-snap-align: unset;
       }
+    }
+  }
+
+  .shadow-list-horizontal-scroll-centered {
+    --center-offset: calc(50% - var(--item-width) / 2);
+
+    scroll-snap-type: x mandatory;
+    padding-left: var(--center-offset);
+    padding-right: var(--center-offset);
+
+    & > :global(:not(svelte-css-wrapper)),
+    & > :global(svelte-css-wrapper > *) {
+      scroll-snap-align: center;
     }
   }
 </style>
