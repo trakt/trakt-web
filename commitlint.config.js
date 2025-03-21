@@ -38,6 +38,7 @@ module.exports = {
         'card',
         'coming-soon',
         'cover',
+        'comment',
         'contrib',
         'dialog',
         'ds',
