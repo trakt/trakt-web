@@ -18,7 +18,7 @@
     i18n = LikeCommentButtonIntlProvider,
   }: LikeCommentButtonProps = $props();
 
-  const { isPermitted } = usePermissions("comment");
+  const { isPermitted } = usePermissions("like");
 
   const handler = $derived(isLiked ? onUnlike : onLike);
   const iconStyle = $derived(isLiked ? "filled" : "open");
