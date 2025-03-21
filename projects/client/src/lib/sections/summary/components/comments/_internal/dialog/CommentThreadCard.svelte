@@ -2,10 +2,10 @@
   import Card from "$lib/components/card/Card.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import CommentBody from "./CommentBody.svelte";
-  import CommentFooter from "./CommentFooter.svelte";
-  import CommentHeader from "./CommentHeader.svelte";
-  import ShadowScroller from "./ShadowScroller.svelte";
+  import CommentBody from "../CommentBody.svelte";
+  import CommentFooter from "../CommentFooter.svelte";
+  import CommentHeader from "../CommentHeader.svelte";
+  import ShadowScroller from "../ShadowScroller.svelte";
   import { useCommentReplies } from "./useCommentReplies";
 
   type CommentThreadCardProps = {
