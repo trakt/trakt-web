@@ -73,7 +73,8 @@
       font-family: "Spline Sans", Arial, sans-serif;
     }
 
-    body:has(dialog[open]) {
+    body:has(dialog[open]),
+    body:has(.dialog-open) {
       overflow: hidden;
     }
   </style>

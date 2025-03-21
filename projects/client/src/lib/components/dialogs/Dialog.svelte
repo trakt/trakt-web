@@ -3,6 +3,7 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable, type Writable } from "svelte/store";
+  import { setDialogState } from "./_internal/setDialogState";
 
   type DialogProps = {
     title: string;
@@ -12,7 +13,7 @@
   const { title, children, dialog = writable() }: DialogProps = $props();
 </script>
 
-<dialog bind:this={$dialog}>
+<dialog bind:this={$dialog} use:setDialogState>
   <div class="trakt-dialog-header">
     <h5 class="secondary">{title}</h5>
     <ActionButton
