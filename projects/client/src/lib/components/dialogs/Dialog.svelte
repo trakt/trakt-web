@@ -8,12 +8,18 @@
   type DialogProps = {
     title: string;
     dialog: Writable<HTMLDialogElement>;
+    onClose?: () => void;
   } & ChildrenProps;
 
-  const { title, children, dialog = writable() }: DialogProps = $props();
+  const {
+    title,
+    children,
+    onClose,
+    dialog = writable(),
+  }: DialogProps = $props();
 </script>
 
-<dialog bind:this={$dialog} use:setDialogState>
+<dialog bind:this={$dialog} use:setDialogState onclose={() => onClose?.()}>
   <div class="trakt-dialog-header">
     <h5 class="secondary">{title}</h5>
     <ActionButton
