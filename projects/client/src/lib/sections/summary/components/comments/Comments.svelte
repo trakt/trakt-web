@@ -4,7 +4,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
   import { writable } from "svelte/store";
-  import CommentsDialog from "./_internal/CommentsDialog.svelte";
+  import CommentsDialog from "./_internal/dialog/CommentsDialog.svelte";
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
 

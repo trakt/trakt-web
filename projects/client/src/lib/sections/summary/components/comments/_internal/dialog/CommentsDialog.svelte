@@ -3,9 +3,9 @@
   import type { CommentsProps } from "$lib/sections/summary/components/comments/CommentsProps";
   import { onMount } from "svelte";
   import { writable, type Writable } from "svelte/store";
+  import { useComments } from "../useComments";
   import CommentList from "./CommentList.svelte";
   import CommentThreadCard from "./CommentThreadCard.svelte";
-  import { useComments } from "./useComments";
 
   type CommentsDialogProps = {
     dialog: Writable<HTMLDialogElement>;
