@@ -84,6 +84,7 @@
     box-sizing: border-box;
 
     margin: var(--ni-12) var(--layout-distance-side);
+    margin-top: calc(var(--ni-12) + env(safe-area-inset-top));
     padding: 0 var(--navbar-side-padding);
   }
 
