@@ -335,5 +335,15 @@
   "comment_likes": "{count} polubień",
   "close_label": "Zamknij",
   "comment_replies_label": "Odpowiedzi na komentarze",
-  "comment_replies_text": "{count} odpowiedzi"
+  "comment_replies_text": "{count} odpowiedzi",
+  "comments": "Komentarze",
+  "comment_reply": "Odpowiedz",
+  "comment_reply_label": "Odpowiedz {user}",
+  "comment_reply_placeholder": "Odpowiedz...",
+  "comment_mark_as_spoiler": "Oznacz jako spoiler",
+  "comment_spoiler": "Spoiler",
+  "comment_close_error_label": "Zamknij błąd",
+  "comment_post_reply_label": "Wyślij odpowiedź",
+  "error_comment_invalid_content": "Komentarze muszą mieć co najmniej 5 słów i być po angielsku.",
+  "error_comment_unknown": "Wystąpił błąd podczas publikowania komentarza. Spróbuj ponownie później."
 }

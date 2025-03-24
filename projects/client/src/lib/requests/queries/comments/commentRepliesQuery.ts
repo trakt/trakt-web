@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -43,7 +44,7 @@ const userCommentRepliesRequest = (
 
 export const commentRepliesQuery = defineQuery({
   key: 'commentReplies',
-  invalidations: [],
+  invalidations: [InvalidateAction.ReplyToComment],
   dependencies: (
     params,
   ) => [

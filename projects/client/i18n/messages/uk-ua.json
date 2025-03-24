@@ -335,5 +335,15 @@
   "comment_likes": "{count} вподобайок",
   "close_label": "Закрити",
   "comment_replies_label": "Відповіді на коментарі",
-  "comment_replies_text": "{count} відповідей"
+  "comment_replies_text": "{count} відповідей",
+  "comments": "Коментарі",
+  "comment_reply": "Відповісти",
+  "comment_reply_label": "Відповісти {user}",
+  "comment_reply_placeholder": "Відповідь...",
+  "comment_mark_as_spoiler": "Позначити як спойлер",
+  "comment_spoiler": "Спойлер",
+  "comment_close_error_label": "Закрити помилку",
+  "comment_post_reply_label": "Надіслати відповідь",
+  "error_comment_invalid_content": "Коментарі повинні містити не менше 5 слів і бути англійською.",
+  "error_comment_unknown": "Виникла помилка під час публікації вашого коментаря. Спробуйте пізніше."
 }

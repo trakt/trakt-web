@@ -1,24 +1,9 @@
 <script lang="ts">
-  import type { MediaComment } from "$lib/requests/models/MediaComment";
-  import LikeCommentAction from "./comment-actions/LikeCommentAction.svelte";
-  import ViewRepliesAction from "./comment-actions/ViewRepliesAction.svelte";
-
-  type CommentFooterProps = {
-    comment: MediaComment;
-    onDrilldown?: (id: number) => void;
-  };
-
-  const { comment, onDrilldown }: CommentFooterProps = $props();
-
-  const isRootComment = $derived(comment.parentId === 0);
+  const { children }: ChildrenProps = $props();
 </script>
 
 <div class="trakt-comment-footer">
-  <LikeCommentAction {comment} />
-
-  {#if isRootComment}
-    <ViewRepliesAction {comment} {onDrilldown} />
-  {/if}
+  {@render children()}
 </div>
 
 <style>
@@ -32,10 +17,11 @@
     :global(.trakt-button) {
       display: flex;
       flex-direction: row-reverse;
+      flex-shrink: 1;
     }
 
     /* To align icons of the first and last ghost buttons */
-    margin-left: var(--ni-neg-18);
-    margin-right: var(--ni-neg-18);
+    margin-left: var(--ni-neg-16);
+    margin-right: var(--ni-neg-16);
   }
 </style>

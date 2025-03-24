@@ -335,5 +335,15 @@
   "comment_likes": "{count} харесвания",
   "close_label": "Затвори",
   "comment_replies_label": "Отговори на коментари",
-  "comment_replies_text": "{count} отговора"
+  "comment_replies_text": "{count} отговора",
+  "comments": "Коментари",
+  "comment_reply": "Отговор",
+  "comment_reply_label": "Отговор на {user}",
+  "comment_reply_placeholder": "Отговор...",
+  "comment_mark_as_spoiler": "Маркирай като спойлер",
+  "comment_spoiler": "Спойлер",
+  "comment_close_error_label": "Затвори грешката",
+  "comment_post_reply_label": "Публикувай отговор",
+  "error_comment_invalid_content": "Коментарите трябва да са поне 5 думи и на английски.",
+  "error_comment_unknown": "Възникна грешка при публикуването на вашия коментар. Моля, опитайте отново по-късно."
 }

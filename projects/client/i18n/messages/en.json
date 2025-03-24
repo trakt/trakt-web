@@ -335,5 +335,15 @@
   "comment_likes": "{count} likes",
   "close_label": "Close",
   "comment_replies_label": "Comment Replies",
-  "comment_replies_text": "{count} replies"
+  "comment_replies_text": "{count} replies",
+  "comments": "Comments",
+  "comment_reply": "Reply",
+  "comment_reply_label": "Reply to {user}",
+  "comment_reply_placeholder": "Reply...",
+  "comment_mark_as_spoiler": "Mark as spoiler",
+  "comment_spoiler": "Spoiler",
+  "comment_close_error_label": "Close error",
+  "comment_post_reply_label": "Post reply",
+  "error_comment_invalid_content": "Comments must be at least 5 words and in English.",
+  "error_comment_unknown": "An error occurred while posting your comment. Please try again later."
 }

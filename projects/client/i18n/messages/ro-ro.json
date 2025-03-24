@@ -335,5 +335,15 @@
   "comment_likes": "{count} aprecieri",
   "close_label": "Închide",
   "comment_replies_label": "Răspunsuri comentarii",
-  "comment_replies_text": "{count} răspunsuri"
+  "comment_replies_text": "{count} răspunsuri",
+  "comments": "Comentarii",
+  "comment_reply": "Răspunde",
+  "comment_reply_label": "Răspunde lui {user}",
+  "comment_reply_placeholder": "Răspunde...",
+  "comment_mark_as_spoiler": "Marchează ca spoiler",
+  "comment_spoiler": "Spoiler",
+  "comment_close_error_label": "Închide eroare",
+  "comment_post_reply_label": "Postează răspuns",
+  "error_comment_invalid_content": "Comentariile trebuie să aibă cel puțin 5 cuvinte și să fie în limba engleză.",
+  "error_comment_unknown": "A apărut o eroare la publicarea comentariului. Vă rugăm să încercați din nou mai târziu."
 }
