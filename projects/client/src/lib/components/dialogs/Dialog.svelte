@@ -3,6 +3,7 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable, type Writable } from "svelte/store";
+  import { mobileAppleVisualViewportHack } from "./_internal/mobileAppleVisualViewportHack";
   import { setDialogState } from "./_internal/setDialogState";
 
   type DialogProps = {
@@ -19,7 +20,12 @@
   }: DialogProps = $props();
 </script>
 
-<dialog bind:this={$dialog} use:setDialogState onclose={() => onClose?.()}>
+<dialog
+  bind:this={$dialog}
+  use:setDialogState
+  use:mobileAppleVisualViewportHack
+  onclose={() => onClose?.()}
+>
   <div class="trakt-dialog-header">
     <h5 class="secondary">{title}</h5>
     <ActionButton
@@ -38,6 +44,8 @@
 
 <style>
   dialog {
+    all: unset;
+
     --transition-duration: calc(var(--transition-increment) * 2);
     border: none;
     outline: none;
@@ -46,13 +54,15 @@
     flex-direction: column;
     overflow: hidden;
 
+    position: fixed;
+    top: 0;
+    left: 0;
+
     width: 100dvw;
-    height: 100dvh;
+    height: var(--dialog-height);
 
     max-width: 100dvw;
-    max-height: 100dvh;
-
-    padding: 0;
+    max-height: var(--dialog-height);
 
     background: rgba(19, 21, 23, 0.88);
     backdrop-filter: blur(var(--ni-8));
