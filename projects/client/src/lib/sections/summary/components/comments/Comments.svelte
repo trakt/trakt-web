@@ -5,6 +5,7 @@
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
   import { writable } from "svelte/store";
   import CommentsDialog from "./_internal/dialog/CommentsDialog.svelte";
+  import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
 
@@ -22,11 +23,11 @@
   );
 
   const dialog = writable<HTMLDialogElement>();
-  const sourceId = writable<number | undefined>(undefined);
+  const drilldownSource = writable<ActiveComment | undefined>(undefined);
 
-  const handler = (id: number) => {
+  const onDrilldown = (comment: ActiveComment) => {
     $dialog.showModal();
-    sourceId.set(id);
+    drilldownSource.set(comment);
   };
 </script>
 
@@ -37,7 +38,7 @@
   --height-list="var(--height-comments-list)"
 >
   {#snippet item(comment)}
-    <CommentCard {comment} {media} onDrilldown={handler} />
+    <CommentCard {comment} {media} {onDrilldown} />
   {/snippet}
 
   {#snippet empty()}
@@ -51,4 +52,4 @@
   {/snippet}
 </SectionList>
 
-<CommentsDialog sourceId={$sourceId} {dialog} {media} {...props} />
+<CommentsDialog source={$drilldownSource} {dialog} {media} {...props} />

@@ -335,5 +335,15 @@
   "comment_likes": "{count} likes",
   "close_label": "Schließen",
   "comment_replies_label": "Kommentar-Antworten",
-  "comment_replies_text": "{count} Antworten"
+  "comment_replies_text": "{count} Antworten",
+  "comments": "Kommentare",
+  "comment_reply": "Antworten",
+  "comment_reply_label": "Antwort an {user}",
+  "comment_reply_placeholder": "Antwort...",
+  "comment_mark_as_spoiler": "Als Spoiler markieren",
+  "comment_spoiler": "Spoiler",
+  "comment_close_error_label": "Fehler schließen",
+  "comment_post_reply_label": "Antwort posten",
+  "error_comment_invalid_content": "Kommentare müssen mindestens 5 Wörter haben und auf Englisch sein.",
+  "error_comment_unknown": "Beim Posten deines Kommentars ist ein Fehler aufgetreten. Versuche es später noch einmal."
 }

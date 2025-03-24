@@ -335,5 +335,15 @@
   "comment_likes": "{count} likes",
   "close_label": "Sluiten",
   "comment_replies_label": "Reacties",
-  "comment_replies_text": "{count} reacties"
+  "comment_replies_text": "{count} reacties",
+  "comments": "Reacties",
+  "comment_reply": "Antwoord",
+  "comment_reply_label": "Reageer op {user}",
+  "comment_reply_placeholder": "Reageren...",
+  "comment_mark_as_spoiler": "Markeren als spoiler",
+  "comment_spoiler": "Spoiler",
+  "comment_close_error_label": "Sluit fout",
+  "comment_post_reply_label": "Plaats antwoord",
+  "error_comment_invalid_content": "Opmerkingen moeten minimaal 5 woorden bevatten en in het Engels zijn.",
+  "error_comment_unknown": "Er is een fout opgetreden bij het plaatsen van je opmerking. Probeer het later opnieuw."
 }

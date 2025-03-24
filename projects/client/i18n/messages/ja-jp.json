@@ -335,5 +335,15 @@
   "comment_likes": "{count} 件のいいね",
   "close_label": "閉じる",
   "comment_replies_label": "コメント返信",
-  "comment_replies_text": "{count} 件の返信"
+  "comment_replies_text": "{count} 件の返信",
+  "comments": "コメント",
+  "comment_reply": "返信する",
+  "comment_reply_label": "{user} に返信する",
+  "comment_reply_placeholder": "返信...",
+  "comment_mark_as_spoiler": "ネタバレとしてマーク",
+  "comment_spoiler": "ネタバレ",
+  "comment_close_error_label": "エラーを閉じる",
+  "comment_post_reply_label": "返信を投稿",
+  "error_comment_invalid_content": "コメントは5語以上、英語で記述してください。",
+  "error_comment_unknown": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。"
 }

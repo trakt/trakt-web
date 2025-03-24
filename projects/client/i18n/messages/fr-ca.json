@@ -335,5 +335,15 @@
   "comment_likes": "{count} j'aime ça",
   "close_label": "Fermer",
   "comment_replies_label": "Réponses aux commentaires",
-  "comment_replies_text": "{count} réponses"
+  "comment_replies_text": "{count} réponses",
+  "comments": "Comments",
+  "comment_reply": "Répondre",
+  "comment_reply_label": "Répondre à {user}",
+  "comment_reply_placeholder": "Réponse...",
+  "comment_mark_as_spoiler": "Marquer comme divulgâcheur",
+  "comment_spoiler": "Divulgâcheur",
+  "comment_close_error_label": "Close error",
+  "comment_post_reply_label": "Post reply",
+  "error_comment_invalid_content": "Les commentaires doivent comporter au moins 5 mots et être en anglais.",
+  "error_comment_unknown": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard."
 }

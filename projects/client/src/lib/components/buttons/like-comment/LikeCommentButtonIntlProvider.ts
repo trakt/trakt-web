@@ -7,7 +7,7 @@ import type {
 export const LikeCommentButtonIntlProvider: LikeCommentButtonIntl = {
   label: ({ isLiked }: LikeCommentButtonMeta) =>
     isLiked ? m.unlike_comment_label() : m.like_comment_label(),
-  text: ({ likeCount }: LikeCommentButtonMeta) => {
-    return m.comment_likes({ count: likeCount });
+  text: ({ likeCount, isMobile }: LikeCommentButtonMeta) => {
+    return isMobile ? `${likeCount}` : m.comment_likes({ count: likeCount });
   },
 };

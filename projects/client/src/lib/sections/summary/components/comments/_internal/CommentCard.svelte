@@ -1,15 +1,20 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import LikeCommentAction from "./comment-actions/LikeCommentAction.svelte";
+  import ReplyButton from "./comment-actions/ReplyButton.svelte";
+  import ViewRepliesAction from "./comment-actions/ViewRepliesAction.svelte";
   import CommentBody from "./CommentBody.svelte";
   import CommentFooter from "./CommentFooter.svelte";
   import CommentHeader from "./CommentHeader.svelte";
+  import type { ActiveComment } from "./models/ActiveComment";
 
   type CommentProps = {
     media: MediaEntry;
     comment: MediaComment;
-    onDrilldown?: (id: number) => void;
+    onDrilldown: (comment: ActiveComment) => void;
   };
 
   const { comment, media, onDrilldown }: CommentProps = $props();
@@ -22,7 +27,13 @@
   <div class="trakt-comment-container">
     <CommentHeader {comment} />
     <CommentBody {comment} {media} />
-    <CommentFooter {comment} {onDrilldown} />
+    <CommentFooter>
+      <LikeCommentAction {comment} />
+      <ViewRepliesAction {comment} {onDrilldown} />
+      <RenderFor audience="authenticated">
+        <ReplyButton {comment} onClick={onDrilldown} />
+      </RenderFor>
+    </CommentFooter>
   </div>
 </Card>
 
