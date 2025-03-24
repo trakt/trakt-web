@@ -74,7 +74,7 @@
     }
 
     body:has(dialog[open]),
-    body:has(.dialog-open) {
+    body.dialog-open {
       overflow: hidden;
     }
   </style>
