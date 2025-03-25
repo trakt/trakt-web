@@ -3,8 +3,10 @@ import {
   type Permission,
   permissionSchema,
 } from '$lib/requests/models/Permission.ts';
+import { UserNameSchema } from '$lib/requests/models/UserName.ts';
 import { error } from '$lib/utils/console/print.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
+import { toUserName } from '$lib/utils/formatting/string/toUserName.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import {
@@ -18,11 +20,7 @@ import { api, type ApiParams } from '../../../requests/api.ts';
 export const UserSettingsSchema = z.object({
   id: z.number(),
   slug: z.string(),
-  name: z.object({
-    full: z.string(),
-    first: z.string(),
-    last: z.string(),
-  }),
+  name: UserNameSchema,
   about: z.string().optional(),
   location: z.string().optional(),
   avatar: z.object({
@@ -66,17 +64,11 @@ const PERMISSIONS_MAP: Record<
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
-  const fullName = user.name ?? '';
-  const [firstName = '', lastName = ''] = fullName.split(' ');
 
   return {
     id: user.ids.trakt,
     slug: user.ids.slug,
-    name: {
-      full: fullName,
-      first: firstName,
-      last: lastName,
-    },
+    name: toUserName(user.name),
     about: user.about,
     location: user.location ?? '',
     avatar: {
