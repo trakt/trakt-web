@@ -1,8 +1,9 @@
+import { UserNameSchema } from '$lib/requests/models/UserName.ts';
 import z from 'zod';
 
 export const UserProfileSchema = z.object({
   username: z.string(),
-  name: z.string().nullable(),
+  name: UserNameSchema,
   private: z.boolean(),
   isVip: z.boolean(),
   isDeleted: z.boolean(),
@@ -11,4 +12,5 @@ export const UserProfileSchema = z.object({
     url: z.string(),
   }),
 });
+
 export type UserProfile = z.infer<typeof UserProfileSchema>;

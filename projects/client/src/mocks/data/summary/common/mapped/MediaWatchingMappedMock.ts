@@ -7,7 +7,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'kimkitsuragi',
     'private': false,
-    'name': 'Kim Kitsuragi',
+    'name': {
+      'full': 'Kim Kitsuragi',
+      'first': 'Kim',
+      'last': 'Kitsuragi',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'kimkitsuragi',
@@ -18,7 +22,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'klaasje',
     'private': false,
-    'name': 'Klaasje Amandou',
+    'name': {
+      'full': 'Klaasje Amandou',
+      'first': 'Klaasje',
+      'last': 'Amandou',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'klaasje',
@@ -29,7 +37,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'cuno',
     'private': false,
-    'name': 'Cuno',
+    'name': {
+      'full': 'Cuno',
+      'first': 'Cuno',
+      'last': '',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'cuno',
@@ -40,7 +52,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'joyce',
     'private': false,
-    'name': 'Joyce Messier',
+    'name': {
+      'full': 'Joyce Messier',
+      'first': 'Joyce',
+      'last': 'Messier',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'joyce',
@@ -51,7 +67,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'measurehead',
     'private': false,
-    'name': 'Measurehead',
+    'name': {
+      'full': 'Measurehead',
+      'first': 'Measurehead',
+      'last': '',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'measurehead',
@@ -62,7 +82,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'lilian',
     'private': false,
-    'name': 'Lilian Carter',
+    'name': {
+      'full': 'Lilian Carter',
+      'first': 'Lilian',
+      'last': 'Carter',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'lilian',
@@ -73,7 +97,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'titus',
     'private': false,
-    'name': 'Titus Hardie',
+    'name': {
+      'full': 'Titus Hardie',
+      'first': 'Titus',
+      'last': 'Hardie',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'titus',
@@ -84,7 +112,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'garte',
     'private': false,
-    'name': 'Garte',
+    'name': {
+      'full': 'Garte',
+      'first': 'Garte',
+      'last': '',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'garte',
@@ -95,7 +127,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'evrart',
     'private': false,
-    'name': 'Evrart Claire',
+    'name': {
+      'full': 'Evrart Claire',
+      'first': 'Evrart',
+      'last': 'Claire',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'evrart',
@@ -106,7 +142,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'thepale',
     'private': false,
-    'name': 'The Pale',
+    'name': {
+      'full': 'The Pale',
+      'first': 'The',
+      'last': 'Pale',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'thepale',
@@ -117,7 +157,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'lena',
     'private': false,
-    'name': 'Lena',
+    'name': {
+      'full': 'Lena',
+      'first': 'Lena',
+      'last': '',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'lena',
@@ -128,7 +172,11 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   {
     'username': 'renee',
     'private': false,
-    'name': 'Renee',
+    'name': {
+      'full': 'Renee',
+      'first': 'Renee',
+      'last': '',
+    },
     'isVip': false,
     'isDeleted': false,
     'slug': 'renee',

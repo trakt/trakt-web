@@ -1,7 +1,11 @@
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
 
 export const UserProfileHarryMappedMock: UserProfile = {
-  'name': 'Harry Du Bois',
+  'name': {
+    'full': 'Harry Du Bois',
+    'first': 'Harry',
+    'last': 'Du',
+  },
   'username': 'harrier_dubois',
   'slug': 'harry_du_bois',
   'avatar': {
