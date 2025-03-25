@@ -11,6 +11,7 @@ import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 type MovieActivityHistoryParams = {
   limit: number;
+  slug: string;
   startDate?: Date;
   endDate?: Date;
   page?: number;
@@ -26,7 +27,7 @@ export const MovieActivityHistorySchema = z.object({
 export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
 const movieActivityHistoryRequest = (
-  { fetch, startDate, endDate, limit, id, page = 1 }:
+  { fetch, slug, startDate, endDate, limit, id, page = 1 }:
     MovieActivityHistoryParams,
 ) => {
   const queryParams = {
@@ -39,11 +40,11 @@ const movieActivityHistoryRequest = (
 
   const request = id
     ? api({ fetch }).users.history.movie({
-      params: { id: 'me', item_id: `${id}` },
+      params: { id: slug, item_id: `${id}` },
       query: queryParams,
     })
     : api({ fetch }).users.history.movies({
-      params: { id: 'me' },
+      params: { id: slug },
       query: queryParams,
     });
 
@@ -74,6 +75,7 @@ export const movieActivityHistoryQuery = defineQuery({
     params.limit,
     params.page,
     params.id,
+    params.slug,
   ],
   request: movieActivityHistoryRequest,
   mapper: (response) => ({

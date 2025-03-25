@@ -7,9 +7,10 @@ import { showActivityHistoryQuery } from '../../../requests/queries/users/showAc
 // TODO: add fetchAllPages or something
 const HISTORY_LIMIT = 1000;
 
-export function useHistory() {
+export function useHistory(slug?: string) {
   const params = {
     limit: HISTORY_LIMIT,
+    slug: slug ?? 'me',
     ...getPastMonthRange(new Date()),
   };
 

@@ -20,6 +20,7 @@ export type RecentlyWatchedType = 'movie' | 'show' | 'episode' | 'all';
 
 type RecentlyWatchedListStoreProps = PaginationParams & {
   type: RecentlyWatchedType;
+  slug?: string;
   id?: number;
 };
 
@@ -29,12 +30,13 @@ export type HistoryEntry =
   | EpisodeActivityHistory;
 
 function typeToQuery(
-  { type, limit, page, id }: RecentlyWatchedListStoreProps,
+  { type, limit, page, id, slug }: RecentlyWatchedListStoreProps,
 ) {
   const params = {
     limit,
     page,
     id,
+    slug: slug ?? 'me',
   };
 
   switch (type) {

@@ -13,6 +13,7 @@ import { z } from 'zod';
 
 type EpisodeActivityHistoryParams = {
   limit: number;
+  slug: string;
   startDate?: Date;
   endDate?: Date;
   page?: number;
@@ -31,7 +32,7 @@ export type EpisodeActivityHistory = z.infer<
 >;
 
 function episodeActivityHistoryRequest(
-  { fetch, startDate, endDate, limit, id, page = 1 }:
+  { fetch, slug, startDate, endDate, limit, id, page = 1 }:
     EpisodeActivityHistoryParams,
 ) {
   const queryParams = {
@@ -44,11 +45,11 @@ function episodeActivityHistoryRequest(
 
   const request = id
     ? api({ fetch }).users.history.episode({
-      params: { id: 'me', item_id: `${id}` },
+      params: { id: slug, item_id: `${id}` },
       query: queryParams,
     })
     : api({ fetch }).users.history.episodes({
-      params: { id: 'me' },
+      params: { id: slug },
       query: queryParams,
     });
 
@@ -85,6 +86,7 @@ export const episodeActivityHistoryQuery = defineQuery({
     params.limit,
     params.page,
     params.id,
+    params.slug,
   ],
   request: episodeActivityHistoryRequest,
   mapper: (response) => ({

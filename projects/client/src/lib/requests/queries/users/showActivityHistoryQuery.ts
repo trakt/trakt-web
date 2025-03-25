@@ -13,9 +13,10 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { ShowActivityHistoryResponse } from '@trakt/api';
 
 type ShowActivityHistoryParams = {
+  limit: number;
+  slug: string;
   startDate?: Date;
   endDate?: Date;
-  limit: number;
   page?: number;
   id?: number;
 } & ApiParams;
@@ -24,7 +25,8 @@ type ShowActivityHistoryParams = {
 export type ShowActivityHistory = EpisodeActivityHistory;
 
 const showHistoryRequest = (
-  { fetch, startDate, endDate, limit, id, page = 1 }: ShowActivityHistoryParams,
+  { fetch, slug, startDate, endDate, limit, id, page = 1 }:
+    ShowActivityHistoryParams,
 ) => {
   const queryParams = {
     extended: 'full,images' as const,
@@ -36,11 +38,11 @@ const showHistoryRequest = (
 
   const request = id
     ? api({ fetch }).users.history.show({
-      params: { id: 'me', item_id: `${id}` },
+      params: { id: slug, item_id: `${id}` },
       query: queryParams,
     })
     : api({ fetch }).users.history.shows({
-      params: { id: 'me' },
+      params: { id: slug },
       query: queryParams,
     });
 
@@ -75,6 +77,7 @@ export const showActivityHistoryQuery = defineQuery({
     params.limit,
     params.page,
     params.id,
+    params.slug,
   ],
   request: showHistoryRequest,
   mapper: (response) => ({

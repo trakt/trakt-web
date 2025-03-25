@@ -17,6 +17,7 @@ import {
 
 type ActivityHistoryParams = {
   limit: number;
+  slug: string;
   startDate?: Date;
   endDate?: Date;
   page?: number;
@@ -29,14 +30,14 @@ const HistorySchema = z.discriminatedUnion('type', [
 export type ActivityHistory = z.infer<typeof HistorySchema>;
 
 function activityHistoryRequest(
-  { fetch, startDate, endDate, limit, page = 1 }: ActivityHistoryParams,
+  { fetch, slug, startDate, endDate, limit, page = 1 }: ActivityHistoryParams,
 ) {
   return api({ fetch })
     .users
     .history
     .all({
       params: {
-        id: 'me',
+        id: slug,
       },
       query: {
         extended: 'full,images',
@@ -78,6 +79,7 @@ export const activityHistoryQuery = defineQuery({
     params.endDate,
     params.limit,
     params.page,
+    params.slug,
   ],
   request: activityHistoryRequest,
   mapper: (response) => ({
