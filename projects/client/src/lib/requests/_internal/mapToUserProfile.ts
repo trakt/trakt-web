@@ -1,9 +1,14 @@
 import type { UserProfile } from '$lib/requests/models/UserProfile.ts';
 import { DEFAULT_AVATAR } from '$lib/utils/constants.ts';
 import { toUserName } from '$lib/utils/formatting/string/toUserName.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ProfileResponse } from '@trakt/api';
 
 export function mapToUserProfile(user: ProfileResponse): UserProfile {
+  const cover = user.vip_cover_image
+    ? { url: prependHttps(user.vip_cover_image) }
+    : undefined;
+
   return {
     username: user.username,
     name: toUserName(user.name),
@@ -14,5 +19,8 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     avatar: {
       url: user.images?.avatar.full ?? DEFAULT_AVATAR,
     },
+    location: user.location,
+    about: user.about,
+    cover,
   };
 }

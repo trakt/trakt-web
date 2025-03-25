@@ -11,6 +11,11 @@ export const UserProfileSchema = z.object({
   avatar: z.object({
     url: z.string(),
   }),
+  location: z.string().optional(),
+  about: z.string().optional(),
+  cover: z.object({
+    url: z.string(),
+  }).optional(),
 });
 
 export type UserProfile = z.infer<typeof UserProfileSchema>;
