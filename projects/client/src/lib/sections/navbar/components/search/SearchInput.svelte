@@ -102,12 +102,13 @@
 
   .trakt-search {
     --search-input-width: clamp(var(--ni-80), 100%, var(--ni-480));
+    --search-input-height: var(--ni-48);
     --mobile-search-focus-width: calc(100dvw - var(--layout-distance-side) * 2);
     --search-icon-size: var(--ni-24);
     --search-icon-offset: calc(var(--search-icon-size) / 2);
 
     display: flex;
-    height: var(--ni-48);
+    height: var(--search-input-height);
     width: var(--search-input-width);
     align-items: center;
 
@@ -252,16 +253,17 @@
     }
 
     .trakt-search-results {
+      --search-results-top: calc(var(--search-input-height) + var(--gap-s));
       z-index: var(--layer-overlay);
 
       position: absolute;
-      top: 120%;
+      top: var(--search-results-top);
       left: 0;
       right: 0;
 
       min-height: calc(var(--height-result-item) * 7);
       height: 100vh;
-      max-height: 80vh;
+      max-height: calc(80dvh - var(--search-results-top));
       width: clamp(
         var(--ni-280),
         var(--mobile-search-focus-width) - var(--ni-16),
