@@ -11,6 +11,7 @@ describe('showActivityHistoryQuery', () => {
       factory: () =>
         createQuery(
           showActivityHistoryQuery({
+            slug: 'me',
             startDate: new Date(Date.now() - time.months(1)),
             endDate: new Date(),
             limit: 10,

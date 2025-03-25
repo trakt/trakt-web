@@ -9,7 +9,7 @@ describe('personalListsQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          personalListsQuery(),
+          personalListsQuery({ slug: 'me' }),
         ),
       mapper: (response) => response?.data,
     });

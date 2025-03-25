@@ -11,6 +11,7 @@ describe('movieActivityHistoryQuery', () => {
       factory: () =>
         createQuery(
           movieActivityHistoryQuery({
+            slug: 'me',
             startDate: new Date(Date.now() - time.months(1)),
             endDate: new Date(),
             limit: 10,

@@ -4,17 +4,17 @@ import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
 import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
-type personalListsParams = ApiParams;
+type PersonalListsParams = { slug: string } & ApiParams;
 
 const personalListsRequest = (
-  { fetch }: personalListsParams,
+  { fetch, slug }: PersonalListsParams,
 ) =>
   api({ fetch })
     .users
     .lists
     .personal({
       params: {
-        id: 'me',
+        id: slug,
       },
       query: {
         extended: 'images',
@@ -31,7 +31,7 @@ const personalListsRequest = (
 export const personalListsQuery = defineQuery({
   key: 'personalLists',
   invalidations: [],
-  dependencies: [],
+  dependencies: (params) => [params.slug],
   request: personalListsRequest,
   mapper: (data) => data.map(mapToMediaListSummary),
   schema: MediaListSummarySchema.array(),

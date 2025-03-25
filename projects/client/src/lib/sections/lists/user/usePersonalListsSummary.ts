@@ -7,19 +7,21 @@ import type { PersonalListType } from './models/PersonalListType.ts';
 
 type PersonalListsParams = {
   type: PersonalListType;
+  slug?: string;
 };
 
-function typeToQuery({ type }: PersonalListsParams) {
+function typeToQuery({ type, slug }: PersonalListsParams) {
+  const userSlug = slug ?? 'me';
   switch (type) {
     case 'personal':
-      return personalListsQuery();
+      return personalListsQuery({ slug: userSlug });
     case 'collaboration':
-      return collaborationListsQuery();
+      return collaborationListsQuery({ slug: userSlug });
   }
 }
 
-export function usePersonalListsSummary({ type }: PersonalListsParams) {
-  const lists = useQuery(typeToQuery({ type }));
+export function usePersonalListsSummary({ type, slug }: PersonalListsParams) {
+  const lists = useQuery(typeToQuery({ type, slug }));
 
   const isLoading = derived(
     lists,

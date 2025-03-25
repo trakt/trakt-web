@@ -9,7 +9,7 @@ describe('collaborationListsQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          collaborationListsQuery(),
+          collaborationListsQuery({ slug: 'me' }),
         ),
       mapper: (response) => response?.data,
     });

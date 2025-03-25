@@ -4,17 +4,17 @@ import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
 import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
-type CollaborationListsParams = ApiParams;
+type CollaborationListsParams = { slug: string } & ApiParams;
 
 const collaborationListsRequest = (
-  { fetch }: CollaborationListsParams,
+  { fetch, slug }: CollaborationListsParams,
 ) =>
   api({ fetch })
     .users
     .lists
     .collaborations({
       params: {
-        id: 'me',
+        id: slug,
       },
       query: {
         extended: 'images',
@@ -31,7 +31,7 @@ const collaborationListsRequest = (
 export const collaborationListsQuery = defineQuery({
   key: 'collaborationLists',
   invalidations: [],
-  dependencies: [],
+  dependencies: (params) => [params.slug],
   request: collaborationListsRequest,
   mapper: (data) => data.map(mapToMediaListSummary),
   schema: MediaListSummarySchema.array(),
