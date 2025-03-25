@@ -16,7 +16,7 @@ export const ExtendedUserMappedMock: UserSettings = {
   'name': {
     'first': 'Harry',
     'full': 'Harry Du Bois',
-    'last': 'Du',
+    'last': 'Du Bois',
   },
   'preferences': {
     'progress': {
