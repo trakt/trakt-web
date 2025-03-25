@@ -109,6 +109,7 @@
   .trakt-meta-tags {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     gap: var(--gap-xs);
   }
