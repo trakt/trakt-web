@@ -4,7 +4,7 @@ export const UserProfileHarryMappedMock: UserProfile = {
   'name': {
     'full': 'Harry Du Bois',
     'first': 'Harry',
-    'last': 'Du',
+    'last': 'Du Bois',
   },
   'username': 'harrier_dubois',
   'slug': 'harry_du_bois',
