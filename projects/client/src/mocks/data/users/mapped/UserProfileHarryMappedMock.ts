@@ -15,4 +15,7 @@ export const UserProfileHarryMappedMock: UserProfile = {
   'private': false,
   'isVip': true,
   'isDeleted': false,
+  'about': undefined,
+  'location': undefined,
+  'cover': undefined,
 };

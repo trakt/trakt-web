@@ -18,6 +18,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'klaasje',
@@ -33,6 +36,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'cuno',
@@ -48,6 +54,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'joyce',
@@ -63,6 +72,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'measurehead',
@@ -78,6 +90,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'lilian',
@@ -93,6 +108,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'titus',
@@ -108,6 +126,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'garte',
@@ -123,6 +144,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'evrart',
@@ -138,6 +162,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'thepale',
@@ -153,6 +180,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'lena',
@@ -168,6 +198,9 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
   {
     'username': 'renee',
@@ -183,5 +216,8 @@ export const MediaWatchingMappedMock: UserProfile[] = [
     'avatar': {
       'url': DEFAULT_AVATAR,
     },
+    'about': undefined,
+    'location': undefined,
+    'cover': undefined,
   },
 ];
