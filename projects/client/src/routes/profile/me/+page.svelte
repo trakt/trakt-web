@@ -16,6 +16,6 @@
 >
   <TraktPageCoverSetter />
   {#if current() != null}
-    <Profile />
+    <Profile profile={current()} slug="me" />
   {/if}
 </TraktPage>

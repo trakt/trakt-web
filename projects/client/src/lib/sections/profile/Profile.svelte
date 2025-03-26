@@ -7,20 +7,23 @@
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfileHistorySummary from "./components/ProfileHistorySummary.svelte";
   import YearToDateLink from "./components/YearToDateLink.svelte";
+  import type { DisplayableProfileProps } from "./DisplayableProfileProps";
   import { useHistory } from "./stores/useHistory";
 
-  const { historyMovies, historyShows } = useHistory();
+  const { profile, slug }: DisplayableProfileProps = $props();
+
+  const { historyMovies, historyShows } = $derived(useHistory(slug));
 </script>
 
 <ProfileContainer>
   {#snippet details()}
-    <ProfilePageBanner />
+    <ProfilePageBanner {profile} {slug} />
   {/snippet}
 
-  <ProfileAbout />
+  <ProfileAbout about={profile.about} />
 
   {#snippet contextualContent()}
-    <YearToDateLink />
+    <YearToDateLink isVip={profile.isVip} {slug} />
   {/snippet}
 </ProfileContainer>
 
@@ -31,7 +34,8 @@
 <RecentlyWatchedList
   drilldownLabel={m.view_all_recently_watched()}
   title={m.recently_watched()}
+  {slug}
 />
 
-<PersonalLists type="personal" variant="preview" />
-<PersonalLists type="collaboration" variant="summary" />
+<PersonalLists {slug} type="personal" variant="preview" />
+<PersonalLists {slug} type="collaboration" variant="summary" />

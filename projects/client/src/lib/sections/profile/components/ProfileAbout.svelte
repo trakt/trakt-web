@@ -1,10 +1,9 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import { shuffle } from "$lib/utils/array/shuffle";
 
-  const { current } = useUser();
+  const { about }: { about?: string } = $props();
 
   const ABOUT_MESSAGES = [
     m.about_placeholder_1(),
@@ -26,5 +25,5 @@
 </script>
 
 <p class="large secondary">
-  {current().about ?? shuffle(ABOUT_MESSAGES).at(0)}
+  {about ?? shuffle(ABOUT_MESSAGES).at(0)}
 </p>
