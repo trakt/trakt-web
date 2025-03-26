@@ -1,35 +1,32 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { useUser } from "../../features/auth/stores/useUser";
+  import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import ProfileImage from "./ProfileImage.svelte";
 
-  const { current } = useUser();
+  const { profile, slug }: DisplayableProfileProps = $props();
 </script>
 
-{#if current() != null}
-  <div class="profile-page-banner-container">
-    <div class="profile-image-container" class:user-is-vip={current().isVip}>
-      <ProfileImage
-        --width="var(--ni-64)"
-        --height="var(--ni-64)"
-        --border-width="var(--border-thickness-s)"
-      />
-      {#if current().isVip}
-        <VipBadge />
-      {/if}
-    </div>
-    <RenderFor audience="authenticated" device={["desktop"]}>
-      <div class="profile-info">
-        <h5>
-          {m.profile_banner_greeting({ name: current().name.first })}
-        </h5>
-        <h6 class="user-location">{current().location}</h6>
-      </div>
-    </RenderFor>
+<div class="profile-page-banner-container">
+  <div class="profile-image-container" class:user-is-vip={profile.isVip}>
+    <ProfileImage
+      --width="var(--ni-64)"
+      --height="var(--ni-64)"
+      --border-width="var(--border-thickness-s)"
+      name={profile.name.first}
+      src={profile.avatar.url}
+    />
+    {#if profile.isVip}
+      <VipBadge />
+    {/if}
   </div>
-{/if}
+  <div class="profile-info">
+    <h5>
+      {m.profile_banner_greeting({ name: profile.name.first })}
+    </h5>
+    <h6 class="user-location">{profile.location}</h6>
+  </div>
+</div>
 
 <style>
   .profile-page-banner-container {

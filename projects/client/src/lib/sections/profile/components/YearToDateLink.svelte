@@ -1,16 +1,15 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import YearToDateArrow from "./YearToDateArrow.svelte";
 
-  const { current } = useUser();
+  const { isVip, slug }: { isVip: boolean; slug: string } = $props();
 
   const currentYear = new Date().getFullYear();
 
-  const href = current().isVip
-    ? UrlBuilder.og.yearToDate(current().slug, currentYear)
+  const href = isVip
+    ? UrlBuilder.og.yearToDate(slug, currentYear)
     : UrlBuilder.og.getVip();
 </script>
 

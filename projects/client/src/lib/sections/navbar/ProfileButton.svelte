@@ -38,6 +38,8 @@
         --width="var(--ni-16)"
         --height="var(--ni-16)"
         --border-width="var(--border-thickness-xs)"
+        name={$user?.name?.first ?? ""}
+        src={$user?.avatar?.url ?? ""}
       />
       <RenderFor
         audience="authenticated"

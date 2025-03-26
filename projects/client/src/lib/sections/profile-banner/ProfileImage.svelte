@@ -2,20 +2,16 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useUser } from "../../features/auth/stores/useUser";
 
-  const { user } = useUser();
+  const { name, src }: { name: string; src: string } = $props();
 </script>
 
 <figure class="profile-image">
   <!-- This should be the first element, else: HierarchyRequestError -->
   <figcaption class="visually-hidden">
-    {m.profile_banner_greeting({ name: $user?.name.first ?? "" })}
+    {m.profile_banner_greeting({ name })}
   </figcaption>
-  <CrossOriginImage
-    src={$user?.avatar.url ?? ""}
-    alt={m.users_avatar({ username: $user?.name.first ?? "" })}
-  />
+  <CrossOriginImage {src} alt={m.users_avatar({ username: name })} />
 </figure>
 
 <style>
