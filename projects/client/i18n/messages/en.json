@@ -345,5 +345,8 @@
   "comment_close_error_label": "Close error",
   "comment_post_reply_label": "Post reply",
   "error_comment_invalid_content": "Comments must be at least 5 words and in English.",
-  "error_comment_unknown": "An error occurred while posting your comment. Please try again later."
+  "error_comment_unknown": "An error occurred while posting your comment. Please try again later.",
+  "profile_page_title": "{username}'s profile",
+  "private_profile": "{username}'s profile is private",
+  "private_profile_description": "As if there wasn't enough hidden already. {username}'s secrets remain their own 🔒"
 }

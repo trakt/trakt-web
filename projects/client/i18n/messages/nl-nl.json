@@ -345,5 +345,8 @@
   "comment_close_error_label": "Sluit fout",
   "comment_post_reply_label": "Plaats antwoord",
   "error_comment_invalid_content": "Opmerkingen moeten minimaal 5 woorden bevatten en in het Engels zijn.",
-  "error_comment_unknown": "Er is een fout opgetreden bij het plaatsen van je opmerking. Probeer het later opnieuw."
+  "error_comment_unknown": "Er is een fout opgetreden bij het plaatsen van je opmerking. Probeer het later opnieuw.",
+  "profile_page_title": "{username}'s profiel",
+  "private_profile": "Het profiel van {username} is privé",
+  "private_profile_description": "Alsof er nog niet genoeg verborgen was. De geheimen van {username} blijven privé 🔒"
 }

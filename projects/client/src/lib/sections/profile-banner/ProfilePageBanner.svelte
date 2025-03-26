@@ -5,6 +5,12 @@
   import ProfileImage from "./ProfileImage.svelte";
 
   const { profile, slug }: DisplayableProfileProps = $props();
+
+  const nameLabel = $derived(
+    slug === "me"
+      ? m.profile_banner_greeting({ name: profile.name.first })
+      : profile.name.first,
+  );
 </script>
 
 <div class="profile-page-banner-container">
@@ -22,7 +28,7 @@
   </div>
   <div class="profile-info">
     <h5>
-      {m.profile_banner_greeting({ name: profile.name.first })}
+      {nameLabel}
     </h5>
     <h6 class="user-location">{profile.location}</h6>
   </div>

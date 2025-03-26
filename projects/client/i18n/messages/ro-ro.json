@@ -345,5 +345,8 @@
   "comment_close_error_label": "Închide eroare",
   "comment_post_reply_label": "Postează răspuns",
   "error_comment_invalid_content": "Comentariile trebuie să aibă cel puțin 5 cuvinte și să fie în limba engleză.",
-  "error_comment_unknown": "A apărut o eroare la publicarea comentariului. Vă rugăm să încercați din nou mai târziu."
+  "error_comment_unknown": "A apărut o eroare la publicarea comentariului. Vă rugăm să încercați din nou mai târziu.",
+  "profile_page_title": "Profilul lui {username}",
+  "private_profile": "Profilul lui {username} este privat",
+  "private_profile_description": "Ca și cum nu era suficient ascuns deja. Secretele lui {username} rămân doar ale lui 🔒"
 }

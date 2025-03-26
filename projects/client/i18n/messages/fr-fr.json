@@ -345,5 +345,8 @@
   "comment_close_error_label": "Fermer l'erreur",
   "comment_post_reply_label": "Poster la réponse",
   "error_comment_invalid_content": "Les commentaires doivent comporter au moins 5 mots et être en anglais.",
-  "error_comment_unknown": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard."
+  "error_comment_unknown": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard.",
+  "profile_page_title": "Profil de {username}",
+  "private_profile": "Profil privé de {username}",
+  "private_profile_description": "Comme s'il n'y avait pas assez de choses cachées. Les secrets de {username} restent les leurs 🔒"
 }
