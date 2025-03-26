@@ -1,6 +1,7 @@
 import type { Locale } from 'date-fns/locale';
 import {
   bg,
+  da,
   de,
   enUS,
   es,
@@ -36,4 +37,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'bg-bg': bg,
   'sv-se': se,
   'nb-no': nb,
+  'da-dk': da,
 };
