@@ -8,6 +8,7 @@ import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloL
 import { SiloListsResponseMock } from '$mocks/data/summary/shows/silo/response/SiloListsResponseMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 import { CollaborationListsResponseMock } from '$mocks/data/users/response/CollaborationListsResponseMock.ts';
+import { ExtendedUserProfileHarryResponseMock } from '$mocks/data/users/response/ExtendedUserProfileHarryResponseMock.ts';
 import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalListsResponseMock.ts';
 import { RatedShowsResponseMock } from '$mocks/data/users/response/RatedShowsResponseMock.ts';
 import { EpisodeActivityHistoryResponseMock } from '../data/users/response/EpisodeActivityHistoryResponseMock.ts';
@@ -27,6 +28,14 @@ export const users = [
   http.get('http://localhost/users/settings', () => {
     return HttpResponse.json(ExtendedUsersResponseMock);
   }),
+  http.get(
+    `http://localhost/users/${
+      assertDefined(ExtendedUserProfileHarryResponseMock.ids.slug)
+    }`,
+    () => {
+      return HttpResponse.json(ExtendedUserProfileHarryResponseMock);
+    },
+  ),
   http.get('http://localhost/users/hidden/progress_watched*', () => {
     return HttpResponse.json(HiddenShowProgressResponseMock);
   }),
