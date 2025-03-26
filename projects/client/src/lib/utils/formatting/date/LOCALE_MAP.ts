@@ -8,6 +8,7 @@ import {
   frCA,
   it,
   ja,
+  nb,
   nl,
   pl,
   ptBR,
@@ -34,4 +35,5 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'it-it': it,
   'bg-bg': bg,
   'sv-se': se,
+  'nb-no': nb,
 };
