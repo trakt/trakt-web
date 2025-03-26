@@ -45,6 +45,7 @@
     "bg-bg": "🇧🇬",
     "sv-se": "🇸🇪",
     "nb-no": "🇳🇴",
+    "da-dk": "🇩🇰",
   };
 
   const localeToTitle: Record<AvailableLocale, string> = {
@@ -64,6 +65,7 @@
     "bg-bg": "Български",
     "sv-se": "Svenska",
     "nb-no": "Norsk (Bokmål)",
+    "da-dk": "Dansk",
   };
 </script>
 
