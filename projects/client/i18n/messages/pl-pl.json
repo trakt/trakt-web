@@ -345,5 +345,8 @@
   "comment_close_error_label": "Zamknij błąd",
   "comment_post_reply_label": "Wyślij odpowiedź",
   "error_comment_invalid_content": "Komentarze muszą mieć co najmniej 5 słów i być po angielsku.",
-  "error_comment_unknown": "Wystąpił błąd podczas publikowania komentarza. Spróbuj ponownie później."
+  "error_comment_unknown": "Wystąpił błąd podczas publikowania komentarza. Spróbuj ponownie później.",
+  "profile_page_title": "Profil {username}",
+  "private_profile": "Profil {username} jest prywatny.",
+  "private_profile_description": "Jakby mało było ukrytego. Sekrety {username} pozostają ich własnością 🔒"
 }

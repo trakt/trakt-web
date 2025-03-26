@@ -345,5 +345,8 @@
   "comment_close_error_label": "Fehler schließen",
   "comment_post_reply_label": "Antwort posten",
   "error_comment_invalid_content": "Kommentare müssen mindestens 5 Wörter haben und auf Englisch sein.",
-  "error_comment_unknown": "Beim Posten deines Kommentars ist ein Fehler aufgetreten. Versuche es später noch einmal."
+  "error_comment_unknown": "Beim Posten deines Kommentars ist ein Fehler aufgetreten. Versuche es später noch einmal.",
+  "profile_page_title": "{username}s Profil",
+  "private_profile": "{username}s Profil ist privat",
+  "private_profile_description": "Als ob es nicht schon genug Verstecktes gäbe. {username}s Geheimnisse bleiben ihre eigenen 🔒"
 }

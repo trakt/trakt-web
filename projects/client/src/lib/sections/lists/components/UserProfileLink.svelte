@@ -31,7 +31,7 @@
 {/if}
 
 {#if displayType === "linkable"}
-  <Link href={UrlBuilder.og.user(assertDefined(user.slug))} target="_blank">
+  <Link href={UrlBuilder.profile.user(assertDefined(user.slug))}>
     {@render username()}
   </Link>
 {/if}

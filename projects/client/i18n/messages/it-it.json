@@ -345,5 +345,8 @@
   "comment_close_error_label": "Chiudi errore",
   "comment_post_reply_label": "Invia risposta",
   "error_comment_invalid_content": "I commenti devono avere almeno 5 parole e in inglese.",
-  "error_comment_unknown": "Si è verificato un errore durante la pubblicazione del commento. Riprova più tardi."
+  "error_comment_unknown": "Si è verificato un errore durante la pubblicazione del commento. Riprova più tardi.",
+  "profile_page_title": "Profilo di {username}",
+  "private_profile": "Il profilo di {username} è privato",
+  "private_profile_description": "Come se non ci fosse già abbastanza nascosto. I segreti di {username} restano tali 🔒"
 }

@@ -8,22 +8,26 @@
 
   const currentYear = new Date().getFullYear();
 
+  const hasYearToDateLink = isVip || slug === "me";
+
   const href = isVip
     ? UrlBuilder.og.yearToDate(slug, currentYear)
     : UrlBuilder.og.getVip();
 </script>
 
-<trakt-year-to-date-link>
-  <Link {href} target="_blank">
-    <div class="ytd-link-content">
-      <h2 class="ytd-year">{currentYear}</h2>
-      <div class="ytd-link-details">
-        <h5 class="ytd-label">{m.year_to_date()}</h5>
-        <YearToDateArrow />
+{#if hasYearToDateLink}
+  <trakt-year-to-date-link>
+    <Link {href} target="_blank">
+      <div class="ytd-link-content">
+        <h2 class="ytd-year">{currentYear}</h2>
+        <div class="ytd-link-details">
+          <h5 class="ytd-label">{m.year_to_date()}</h5>
+          <YearToDateArrow />
+        </div>
       </div>
-    </div>
-  </Link>
-</trakt-year-to-date-link>
+    </Link>
+  </trakt-year-to-date-link>
+{/if}
 
 <style>
   trakt-year-to-date-link {

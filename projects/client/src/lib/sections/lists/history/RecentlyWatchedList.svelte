@@ -1,31 +1,49 @@
 <script lang="ts">
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import MediaList from "../drilldown/MediaList.svelte";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
   import RecentlyWatchedItem from "./RecentlyWatchedItem.svelte";
 
   type RecentlyWatchedListProps = {
     title: string;
     drilldownLabel: string;
+    slug: string;
   };
 
-  const { title, drilldownLabel }: RecentlyWatchedListProps = $props();
+  const { title, drilldownLabel, slug }: RecentlyWatchedListProps = $props();
+
+  // FIXME: add drill down support for other users
+  const isCurrentUser = $derived(slug === "me");
+
+  const commonProps = $derived({
+    title,
+    id: `recently-watched-list-${slug}`,
+    type: "episode" as const,
+    useList: ({ limit, page }: { limit: number; page: number }) =>
+      useRecentlyWatchedList({
+        type: "all",
+        limit,
+        page,
+        slug,
+      }),
+  });
 </script>
 
-<DrillableMediaList
-  id="recently-watched-list"
-  {title}
-  {drilldownLabel}
-  type="episode"
-  useList={({ limit, page }) =>
-    useRecentlyWatchedList({
-      type: "all",
-      limit,
-      page,
-    })}
-  urlBuilder={UrlBuilder.history.all}
->
-  {#snippet item(media)}
-    <RecentlyWatchedItem {media} />
-  {/snippet}
-</DrillableMediaList>
+{#if isCurrentUser}
+  <DrillableMediaList
+    {...commonProps}
+    {drilldownLabel}
+    urlBuilder={UrlBuilder.history.all}
+  >
+    {#snippet item(media)}
+      <RecentlyWatchedItem {media} />
+    {/snippet}
+  </DrillableMediaList>
+{:else}
+  <MediaList {...commonProps}>
+    {#snippet item(media)}
+      <RecentlyWatchedItem {media} />
+    {/snippet}
+  </MediaList>
+{/if}

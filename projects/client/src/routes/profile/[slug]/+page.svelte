@@ -1,0 +1,29 @@
+<script lang="ts">
+  import { page } from "$app/state";
+  import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import TraktPage from "$lib/sections/layout/TraktPage.svelte";
+  import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
+  import Profile from "$lib/sections/profile/Profile.svelte";
+  import { DEFAULT_COVER, DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { useProfile } from "./useProfile";
+
+  const { user, isLoading } = useProfile(page.params.slug);
+
+  const title = $derived(
+    $user?.username
+      ? m.profile_page_title({ username: $user.username })
+      : m.profile(),
+  );
+</script>
+
+<TraktPage audience="all" image={DEFAULT_SHARE_COVER} {title}>
+  {#if !$isLoading && $user}
+    <CoverImageSetter src={$user.cover?.url ?? DEFAULT_COVER} type="main" />
+    {#if $user.private}
+      <PrivateProfile profile={$user} />
+    {:else}
+      <Profile profile={$user} slug={$user.slug ?? ""} />
+    {/if}
+  {/if}
+</TraktPage>

@@ -345,5 +345,8 @@
   "comment_close_error_label": "エラーを閉じる",
   "comment_post_reply_label": "返信を投稿",
   "error_comment_invalid_content": "コメントは5語以上、英語で記述してください。",
-  "error_comment_unknown": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。"
+  "error_comment_unknown": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。",
+  "profile_page_title": "{username}のプロフィール",
+  "private_profile": "{username}さんのプロフィールは非公開です",
+  "private_profile_description": "まるで隠すものが他にもあるかのようですね。{username}さんの秘密は彼/彼女だけのもの 🔒"
 }
