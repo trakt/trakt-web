@@ -98,6 +98,42 @@ describe('MediaDetails', () => {
       const countryLabel = screen.queryByText('Country');
       expect(countryLabel).not.toBeInTheDocument();
     });
+
+    it('should not show the original title if it is equal to the title', () => {
+      render(
+        MediaDetails,
+        {
+          props: {
+            ...props,
+            media: {
+              ...props.media,
+              originalTitle: props.media.title,
+            },
+          },
+        },
+      );
+
+      const originalTitleLabel = screen.queryByText('Original Title');
+      expect(originalTitleLabel).not.toBeInTheDocument();
+    });
+
+    it('should show the original title if it differs from the title', () => {
+      render(
+        MediaDetails,
+        {
+          props: {
+            ...props,
+            media: {
+              ...props.media,
+              originalTitle: 'random media title',
+            },
+          },
+        },
+      );
+
+      const originalTitleLabel = screen.getByText('Original Title');
+      expect(originalTitleLabel).toBeInTheDocument();
+    });
   };
 
   describe('for a movie', () => {
