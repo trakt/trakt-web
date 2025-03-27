@@ -31,7 +31,7 @@
     "npm:eslint@^9.23.0": "9.23.0",
     "npm:firebase@^11.5.0": "11.5.0_@firebase+app@0.11.3_@firebase+app-compat@0.2.52_@firebase+app-types@0.9.3",
     "npm:flowbite-svelte@~0.48.4": "0.48.4_svelte@5.25.3__acorn@8.14.1",
-    "npm:globals@^15.15.0": "15.15.0",
+    "npm:globals@16": "16.0.0",
     "npm:idb-keyval@^6.2.1": "6.2.1",
     "npm:jsdom@26": "26.0.0",
     "npm:marked@^15.0.7": "15.0.7",
@@ -4305,8 +4305,8 @@
     "globals@14.0.0": {
       "integrity": "sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ=="
     },
-    "globals@15.15.0": {
-      "integrity": "sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg=="
+    "globals@16.0.0": {
+      "integrity": "sha512-iInW14XItCXET01CQFqudPOWP2jYMl7T+QRQT+UNcR/iQncN/F0UNpgd76iFkBPgNQb4+X3LV9tLJYzwh+Gl3A=="
     },
     "globalthis@1.0.4": {
       "integrity": "sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==",
@@ -7032,7 +7032,7 @@
             "npm:eslint@^9.23.0",
             "npm:firebase@^11.5.0",
             "npm:flowbite-svelte@~0.48.4",
-            "npm:globals@^15.15.0",
+            "npm:globals@16",
             "npm:idb-keyval@^6.2.1",
             "npm:jsdom@26",
             "npm:marked@^15.0.7",
