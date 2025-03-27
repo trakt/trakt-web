@@ -27,6 +27,7 @@ export function mapToMovieEntry(
     slug: movie.ids.slug,
     type: 'movie',
     title: movie.title,
+    originalTitle: movie.original_title,
     runtime: movie.runtime ?? NaN,
     year: movie.year,
     tagline: movie.tagline ?? '',

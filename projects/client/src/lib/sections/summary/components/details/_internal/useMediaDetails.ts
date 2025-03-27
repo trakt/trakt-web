@@ -18,6 +18,14 @@ import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValu
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 
+function originalTitle(media: MediaEntry) {
+  if (!media.originalTitle || media.originalTitle === media.title) {
+    return;
+  }
+
+  return [media.originalTitle];
+}
+
 function mediaAirDateOrStatus(media: MediaEntry) {
   if (media.year) {
     const isUpcomingItem = media.airDate > new Date();
@@ -105,6 +113,10 @@ function metaDetails(
       values: media.languages?.map((language) =>
         toLanguageName(language, languageTag())
       ),
+    },
+    {
+      title: m.original_title(),
+      values: originalTitle(media),
     },
     {
       title: m.studio(),

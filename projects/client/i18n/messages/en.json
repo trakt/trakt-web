@@ -348,5 +348,6 @@
   "error_comment_unknown": "An error occurred while posting your comment. Please try again later.",
   "profile_page_title": "{username}'s profile",
   "private_profile": "{username}'s profile is private",
-  "private_profile_description": "As if there wasn't enough hidden already. {username}'s secrets remain their own 🔒"
+  "private_profile_description": "As if there wasn't enough hidden already. {username}'s secrets remain their own 🔒",
+  "original_title": "Original Title"
 }

@@ -35,6 +35,7 @@ export const MovieHereticMappedMock: MovieEntry = {
       'https://walter-r2.trakt.tv/images/movies/000/916/302/fanarts/thumb/626327d7b4.jpg.webp',
   },
   'title': 'Heretic',
+  'originalTitle': 'Heretic',
   'trailer': 'https://youtube.com/watch?v=jpWUOxRozZg',
   'airDate': new Date('2024-11-08T00:00:00.000Z'),
   'certification': 'R',

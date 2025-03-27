@@ -348,5 +348,6 @@
   "error_comment_unknown": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。",
   "profile_page_title": "{username}のプロフィール",
   "private_profile": "{username}さんのプロフィールは非公開です",
-  "private_profile_description": "まるで隠すものが他にもあるかのようですね。{username}さんの秘密は彼/彼女だけのもの 🔒"
+  "private_profile_description": "まるで隠すものが他にもあるかのようですね。{username}さんの秘密は彼/彼女だけのもの 🔒",
+  "original_title": "原題"
 }

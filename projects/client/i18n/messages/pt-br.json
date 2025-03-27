@@ -348,5 +348,6 @@
   "error_comment_unknown": "Ocorreu um erro ao postar seu comentário. Tente novamente mais tarde.",
   "profile_page_title": "Perfil de {username}",
   "private_profile": "Perfil de {username} é privado",
-  "private_profile_description": "Como se já não houvesse mistérios. Os segredos de {username} permanecem seus 🔒"
+  "private_profile_description": "Como se já não houvesse mistérios. Os segredos de {username} permanecem seus 🔒",
+  "original_title": "Título Original"
 }

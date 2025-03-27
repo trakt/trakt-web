@@ -2,6 +2,7 @@ import type { ShowResponse } from '@trakt/api';
 
 export const ShowSiloResponseMock: ShowResponse = {
   'title': 'Silo',
+  'original_title': 'Silo',
   'year': 2023,
   'ids': {
     'trakt': 180770,

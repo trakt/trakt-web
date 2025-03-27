@@ -348,5 +348,6 @@
   "error_comment_unknown": "Beim Posten deines Kommentars ist ein Fehler aufgetreten. Versuche es später noch einmal.",
   "profile_page_title": "{username}s Profil",
   "private_profile": "{username}s Profil ist privat",
-  "private_profile_description": "Als ob es nicht schon genug Verstecktes gäbe. {username}s Geheimnisse bleiben ihre eigenen 🔒"
+  "private_profile_description": "Als ob es nicht schon genug Verstecktes gäbe. {username}s Geheimnisse bleiben ihre eigenen 🔒",
+  "original_title": "Originaltitel"
 }

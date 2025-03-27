@@ -29,6 +29,7 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
     'url': '/placeholders/landscape_placeholder.png' as HttpsUrl,
   },
   'title': 'Silo',
+  'originalTitle': undefined,
   'trailer': 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
   'type': 'show',
   'votes': 0,
