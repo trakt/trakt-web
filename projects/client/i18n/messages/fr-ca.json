@@ -348,5 +348,6 @@
   "error_comment_unknown": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard.",
   "profile_page_title": "Profil de {username}",
   "private_profile": "Le profil de {username} est privé",
-  "private_profile_description": "On dirait que tout est secret. Les secrets de {username} restent les leurs 🔒"
+  "private_profile_description": "On dirait que tout est secret. Les secrets de {username} restent les leurs 🔒",
+  "original_title": "Titre original"
 }

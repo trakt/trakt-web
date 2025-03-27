@@ -2,6 +2,7 @@ import type { ShowResponse } from '@trakt/api';
 
 export const ShowDevsResponseMock: ShowResponse = {
   'title': 'Devs',
+  'original_title': 'Devs',
   'year': 2020,
   'ids': {
     'trakt': 147971,

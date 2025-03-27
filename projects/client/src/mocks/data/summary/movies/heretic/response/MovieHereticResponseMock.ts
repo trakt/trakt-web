@@ -2,6 +2,7 @@ import type { MovieResponse } from '@trakt/api';
 
 export const MovieHereticResponseMock: MovieResponse = {
   'title': 'Heretic',
+  'original_title': 'Heretic',
   'year': 2024,
   'ids': {
     'trakt': 916302,

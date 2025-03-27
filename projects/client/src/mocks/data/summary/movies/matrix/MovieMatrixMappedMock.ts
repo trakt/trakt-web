@@ -5,6 +5,7 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'slug': 'the-matrix-1999',
   'type': 'movie',
   'title': 'The Matrix',
+  'originalTitle': 'The Matrix',
   'runtime': 136,
   'year': 1999,
   'tagline': 'The fight for the future begins.',

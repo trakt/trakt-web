@@ -5,6 +5,7 @@ export const ShowDevsMappedMock: ShowEntry = {
   'slug': 'devs',
   'type': 'show',
   'title': 'Devs',
+  'originalTitle': 'Devs',
   'runtime': 52,
   'year': 2020,
   'tagline': 'Reality is stranger than dreams.',

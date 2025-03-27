@@ -21,6 +21,7 @@ export function mapToShowEntry(
     slug: show.ids.slug,
     type: 'show',
     title: show.title,
+    originalTitle: show.original_title,
     runtime: show.runtime ?? NaN,
     year: show.year,
     tagline: show.tagline ?? '',

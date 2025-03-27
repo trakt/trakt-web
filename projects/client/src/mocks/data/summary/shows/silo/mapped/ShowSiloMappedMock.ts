@@ -35,6 +35,7 @@ export const ShowSiloMappedMock: ShowEntry = {
       'https://walter-r2.trakt.tv/images/shows/000/180/770/thumbs/medium/dddaaead2f.jpg.webp',
   },
   'title': 'Silo',
+  'originalTitle': 'Silo',
   'trailer': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
   'airDate': new Date('2023-05-05T01:00:00.000Z'),
   'certification': 'TV-MA',

@@ -16,6 +16,7 @@ export const MediaEntrySchema = z.object({
   year: z.number().nullish(),
   runtime: z.number(),
   title: z.string(),
+  originalTitle: z.string().nullish(),
   tagline: z.string(),
   country: z.string().nullish(),
   languages: z.array(z.string()).nullish(),

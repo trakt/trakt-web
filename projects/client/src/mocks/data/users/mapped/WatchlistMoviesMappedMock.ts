@@ -35,6 +35,7 @@ export const WatchlistMoviesMappedMock: WatchlistMovie[] = [
         'url': '/placeholders/landscape_placeholder.png' as HttpsUrl,
       },
       'title': 'The Matrix',
+      'originalTitle': undefined,
       'trailer': 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
       'type': 'movie',
       'year': 1999,

@@ -348,5 +348,6 @@
   "error_comment_unknown": "En feil oppstod mens kommentaren din ble lagt ut. Vennligst prøv igjen senere.",
   "profile_page_title": "{username}s profil",
   "private_profile": "{username}s profil er privat",
-  "private_profile_description": "Som om det ikke var nok skjult allerede. {username}s hemmeligheter forblir deres egne 🔒"
+  "private_profile_description": "Som om det ikke var nok skjult allerede. {username}s hemmeligheter forblir deres egne 🔒",
+  "original_title": "Originaltittel"
 }

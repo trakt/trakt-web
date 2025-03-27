@@ -2,6 +2,7 @@ import type { MovieResponse } from '@trakt/api';
 
 export const MovieMatrixResponseMock: MovieResponse = {
   'title': 'The Matrix',
+  'original_title': 'The Matrix',
   'year': 1999,
   'ids': {
     'trakt': 481,
