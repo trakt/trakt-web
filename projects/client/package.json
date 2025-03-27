@@ -25,7 +25,7 @@
     "@google/generative-ai": "^0.24.0",
     "@playwright/test": "^1.51.1",
     "@svelte-plugins/tooltips": "^3.0.3",
-    "@sveltejs/adapter-auto": "^4.0.0",
+    "@sveltejs/adapter-auto": "^5.0.0",
     "@sveltejs/adapter-cloudflare": "4.9.0",
     "@sveltejs/enhanced-img": "^0.4.4",
     "@sveltejs/kit": "^2.20.2",
