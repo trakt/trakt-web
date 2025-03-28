@@ -28,9 +28,11 @@ export function coalesceEpisodes(episodes: UpcomingEpisodeEntry[]) {
     { episodes, show, season },
   ) => {
     const hasSeasonPremiere = episodes.some((ep) =>
-      ep.type === 'season_premiere'
+      ['season_premiere', 'series_premiere'].includes(ep.type)
     );
-    const hasSeasonFinale = episodes.some((ep) => ep.type === 'season_finale');
+    const hasSeasonFinale = episodes.some((ep) =>
+      ['season_finale', 'series_finale'].includes(ep.type)
+    );
 
     if (hasSeasonPremiere && hasSeasonFinale) {
       return [{
