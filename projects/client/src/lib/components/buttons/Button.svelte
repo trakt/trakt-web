@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
+  import { disableNavigation } from "$lib/utils/actions/disableNavigation";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
@@ -28,16 +29,6 @@
   const href = $derived((props as TraktButtonAnchorProps).href);
   const noscroll = $derived((props as TraktButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
-
-  function disableNavigation(node: HTMLElement) {
-    node.addEventListener("click", (ev) => {
-      if (!props.disabled) {
-        return;
-      }
-
-      ev.preventDefault();
-    });
-  }
 </script>
 
 {#snippet contents()}
@@ -67,7 +58,7 @@
     use:clickOutside
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
-    use:disableNavigation
+    use:disableNavigation={props}
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
@@ -86,7 +77,7 @@
   <button
     use:disableTransitionOn={"touch"}
     use:clickOutside
-    use:disableNavigation
+    use:disableNavigation={props}
     class="trakt-button"
     aria-label={label}
     data-variant={variant}
@@ -178,8 +169,9 @@
     overflow: hidden;
 
     transition: var(--transition-increment) ease-in-out;
-    transition-property: box-shadow, outline, padding, transform, color,
-      background, text-decoration;
+    transition-property:
+      box-shadow, outline, padding, transform, color, background,
+      text-decoration;
 
     &:not([data-style="underlined"]) p:not(.meta-info) {
       font-size: 1rem;
