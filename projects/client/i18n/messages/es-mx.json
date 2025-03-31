@@ -350,5 +350,7 @@
   "private_profile": "El perfil de {username} es privado",
   "private_profile_description": "Como si no hubiera suficientes misterios ya. Los secretos de {username} son solo suyos 🔒",
   "original_title": "Título original",
-  "view_all_comments": "Ver todos los comentarios"
+  "view_all_comments": "Ver todos los comentarios",
+  "remove_from_list": "Eliminar de la lista",
+  "remove_from_list_label": "Eliminar {title} de la lista"
 }

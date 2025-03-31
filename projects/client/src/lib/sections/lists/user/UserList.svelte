@@ -8,6 +8,7 @@
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import PopupActions from "./_internal/PopupActions.svelte";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 </script>
@@ -22,6 +23,10 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
-    <MediaCard type={media.entry.type} media={media.entry} />
+    <MediaCard type={media.entry.type} media={media.entry}>
+      {#snippet popupActions()}
+        <PopupActions {list} media={media.entry} />
+      {/snippet}
+    </MediaCard>
   {/snippet}
 </DrillableMediaList>

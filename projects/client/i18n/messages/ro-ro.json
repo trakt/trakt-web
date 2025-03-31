@@ -350,5 +350,7 @@
   "private_profile": "Profilul lui {username} este privat",
   "private_profile_description": "Ca și cum nu era suficient ascuns deja. Secretele lui {username} rămân doar ale lui 🔒",
   "original_title": "Titlu original",
-  "view_all_comments": "Vezi toate comentariile"
+  "view_all_comments": "Vezi toate comentariile",
+  "remove_from_list": "Elimină din listă",
+  "remove_from_list_label": "Elimină {title} din listă"
 }
