@@ -349,5 +349,6 @@
   "profile_page_title": "{username}s Profil",
   "private_profile": "{username}s Profil ist privat",
   "private_profile_description": "Als ob es nicht schon genug Verstecktes gäbe. {username}s Geheimnisse bleiben ihre eigenen 🔒",
-  "original_title": "Originaltitel"
+  "original_title": "Originaltitel",
+  "view_all_comments": "Alle Kommentare anzeigen"
 }

@@ -349,5 +349,6 @@
   "profile_page_title": "{username}'s profiel",
   "private_profile": "Het profiel van {username} is privé",
   "private_profile_description": "Alsof er nog niet genoeg verborgen was. De geheimen van {username} blijven privé 🔒",
-  "original_title": "Originele titel"
+  "original_title": "Originele titel",
+  "view_all_comments": "Bekijk alle reacties"
 }

@@ -22,9 +22,11 @@
     ...props
   }: CommentsDialogProps = $props();
 
+  // FIXME: paginate instead of getting all
   const { comments } = $derived(
     useComments({
       slug: media.slug,
+      limit: "all",
       ...props,
     }),
   );
