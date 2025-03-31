@@ -46,6 +46,7 @@ module.exports = {
         'dropdown',
         'e2e',
         'episode',
+        'errors',
         'favorite',
         'formatter',
         'footer',
