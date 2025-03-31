@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { LimitlessParams } from '$lib/requests/models/LimitlessParams.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
@@ -9,10 +10,11 @@ const DEFAULT_COMMENT_SORT = 'likes' as const;
 
 type EpisodeCommentsParams =
   & { slug: string; season: number; episode: number }
-  & ApiParams;
+  & ApiParams
+  & LimitlessParams;
 
 const showCommentsRequest = (
-  { fetch, slug, season, episode }: EpisodeCommentsParams,
+  { fetch, slug, season, episode, limit }: EpisodeCommentsParams,
 ) =>
   api({ fetch })
     .shows
@@ -26,6 +28,7 @@ const showCommentsRequest = (
       },
       query: {
         extended: 'images',
+        limit,
       },
     })
     .then((response) => {
@@ -39,7 +42,9 @@ const showCommentsRequest = (
 export const episodeCommentsQuery = defineQuery({
   key: 'episodeComments',
   invalidations: [InvalidateAction.Like],
-  dependencies: (params) => [params.slug, params.season, params.episode],
+  dependencies: (
+    params,
+  ) => [params.slug, params.season, params.episode, params.limit],
   request: showCommentsRequest,
   mapper: (data) => data.map(mapToMediaComment),
   schema: MediaCommentSchema.array(),

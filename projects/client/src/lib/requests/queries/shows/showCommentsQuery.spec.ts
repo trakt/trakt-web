@@ -9,7 +9,9 @@ describe('showCommentsQuery', () => {
   it('should query for comments on a show', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(showCommentsQuery({ slug: ShowSiloMappedMock.slug })),
+        createQuery(
+          showCommentsQuery({ slug: ShowSiloMappedMock.slug, limit: 10 }),
+        ),
       mapper: (response) => response?.data,
     });
 
