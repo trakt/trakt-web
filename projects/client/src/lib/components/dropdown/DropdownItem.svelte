@@ -14,6 +14,7 @@
 
   type DropdownItemAnchorProps = DropdownItemProps & HTMLAnchorProps;
 
+  // FIXME: add support for variants
   const {
     color = "purple",
     style = "ghost",

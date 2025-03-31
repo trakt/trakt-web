@@ -12,7 +12,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:dropped:show`
   | `${typeof INVALIDATION_ID}:restored:show`
   | `${typeof INVALIDATION_ID}:like:comment`
-  | `${typeof INVALIDATION_ID}:comment:reply`;
+  | `${typeof INVALIDATION_ID}:comment:reply`
+  | `${typeof INVALIDATION_ID}:listed:${MediaType}`;
 
 type TypeDataMap = {
   'auth': null;
@@ -23,12 +24,14 @@ type TypeDataMap = {
   'restored': 'show';
   'like': 'comment';
   'comment': 'reply';
+  'listed': MediaType;
 };
 
 export function invalidationId(key?: string) {
   return `${INVALIDATION_ID}:${key ?? ''}` as const;
 }
 
+// FIXME add support for more targeted invalidations, e.g. list_id:movie
 function buildInvalidationKey<T extends keyof TypeDataMap>(
   key: T,
   data?: TypeDataMap[T],
@@ -49,6 +52,7 @@ export const InvalidateAction = {
     buildInvalidationKey('mark_as_watched', type),
 
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
+  Listed: (type: MediaType) => buildInvalidationKey('listed', type),
 
   Drop: buildInvalidationKey('dropped', 'show'),
   Restore: buildInvalidationKey('restored', 'show'),

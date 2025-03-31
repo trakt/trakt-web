@@ -4,6 +4,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import MediaCard from "../components/MediaCard.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import PopupActions from "./_internal/PopupActions.svelte";
   import { useListItems, type ListParams } from "./useListItems";
 
   type UserListProps = {
@@ -33,7 +34,11 @@
   useList={(params) => useListItems({ list, ...params })}
 >
   {#snippet item(media)}
-    <MediaCard type={media.type} media={media.entry} {style} />
+    <MediaCard type={media.type} media={media.entry} {style}>
+      {#snippet popupActions()}
+        <PopupActions {list} media={media.entry} />
+      {/snippet}
+    </MediaCard>
   {/snippet}
 
   {#snippet badge()}

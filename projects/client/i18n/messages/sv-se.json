@@ -350,5 +350,7 @@
   "private_profile": "{username}'s profil är privat",
   "private_profile_description": "Som om det inte fanns tillräckligt dolt redan. {username}'s hemligheter förblir deras egna 🔒",
   "original_title": "Originaltitel",
-  "view_all_comments": "Visa alla kommentarer"
+  "view_all_comments": "Visa alla kommentarer",
+  "remove_from_list": "Ta bort från listan",
+  "remove_from_list_label": "Ta bort {title} från listan"
 }
