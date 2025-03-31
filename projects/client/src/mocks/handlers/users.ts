@@ -45,10 +45,10 @@ export const users = [
   http.get('http://localhost/users/me/watched/movies', () => {
     return HttpResponse.json(WatchedMoviesResponseMock);
   }),
-  http.get('http://localhost/users/me/watchlist/movies/*', () => {
+  http.get('http://localhost/users/me/watchlist/movies*', () => {
     return HttpResponse.json(WatchlistMoviesResponseMock);
   }),
-  http.get('http://localhost/users/me/watchlist/shows/*', () => {
+  http.get('http://localhost/users/me/watchlist/shows*', () => {
     return HttpResponse.json(WatchlistShowsResponseMock);
   }),
   http.get('http://localhost/users/me/ratings/movies', () => {
