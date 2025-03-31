@@ -9,7 +9,9 @@ describe('movieCommentsQuery', () => {
   it('should query for comments on a movie', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(movieCommentsQuery({ slug: MovieHereticMappedMock.slug })),
+        createQuery(
+          movieCommentsQuery({ slug: MovieHereticMappedMock.slug, limit: 10 }),
+        ),
       mapper: (response) => response?.data,
     });
 

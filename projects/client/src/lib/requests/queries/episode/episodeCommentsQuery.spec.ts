@@ -14,6 +14,7 @@ describe('episodeCommentsQuery', () => {
           slug: ShowSiloMappedMock.slug,
           season: EpisodeSiloResponseMock.season,
           episode: EpisodeSiloResponseMock.number,
+          limit: 10,
         })),
       mapper: (response) => {
         return response?.data;
