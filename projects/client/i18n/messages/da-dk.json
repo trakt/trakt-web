@@ -349,5 +349,6 @@
   "profile_page_title": "{username}'s profil",
   "private_profile": "{username}'s profil er privat",
   "private_profile_description": "Som om der ikke var nok skjult i forvejen. {username}'s hemmeligheder er deres egne 🔒",
-  "original_title": "Original Titel"
+  "original_title": "Original Titel",
+  "view_all_comments": "Se alle kommentarer"
 }

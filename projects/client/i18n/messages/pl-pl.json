@@ -349,5 +349,6 @@
   "profile_page_title": "Profil {username}",
   "private_profile": "Profil {username} jest prywatny.",
   "private_profile_description": "Jakby mało było ukrytego. Sekrety {username} pozostają ich własnością 🔒",
-  "original_title": "Tytuł oryginalny"
+  "original_title": "Tytuł oryginalny",
+  "view_all_comments": "Zobacz wszystkie komentarze"
 }

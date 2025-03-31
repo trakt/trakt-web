@@ -349,5 +349,6 @@
   "profile_page_title": "{username}のプロフィール",
   "private_profile": "{username}さんのプロフィールは非公開です",
   "private_profile_description": "まるで隠すものが他にもあるかのようですね。{username}さんの秘密は彼/彼女だけのもの 🔒",
-  "original_title": "原題"
+  "original_title": "原題",
+  "view_all_comments": "すべてのコメントを表示"
 }

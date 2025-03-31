@@ -13,25 +13,31 @@ import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { onMount } from 'svelte';
 import { derived } from 'svelte/store';
 
+const COMMENT_LIMIT = 10;
+
 type UseCommentsProps = {
   slug: string;
+  limit?: number | 'all';
 } & (MediaCommentProps | EpisodeCommentProps);
 
 function typeToQuery(props: UseCommentsProps) {
-  const slug = props.slug;
+  const commonProps = {
+    slug: props.slug,
+    limit: props.limit ?? COMMENT_LIMIT,
+  };
 
   switch (props.type) {
     case 'movie':
-      return movieCommentsQuery({ slug }) as CreateQueryOptions<
+      return movieCommentsQuery(commonProps) as CreateQueryOptions<
         MediaComment[]
       >;
     case 'show':
-      return showCommentsQuery({ slug }) as CreateQueryOptions<
+      return showCommentsQuery(commonProps) as CreateQueryOptions<
         MediaComment[]
       >;
     case 'episode':
       return episodeCommentsQuery({
-        slug,
+        ...commonProps,
         season: props.season,
         episode: props.episode,
       }) as CreateQueryOptions<

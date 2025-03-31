@@ -1,5 +1,6 @@
 <script lang="ts">
   import Preview from "$lib/components/badge/Preview.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
@@ -25,7 +26,7 @@
   const dialog = writable<HTMLDialogElement>();
   const drilldownSource = writable<ActiveComment | undefined>(undefined);
 
-  const onDrilldown = (comment: ActiveComment) => {
+  const onDrilldown = (comment?: ActiveComment) => {
     $dialog.showModal();
     drilldownSource.set(comment);
   };
@@ -49,6 +50,19 @@
 
   {#snippet badge()}
     <Preview />
+  {/snippet}
+
+  {#snippet actions()}
+    <Button
+      label={m.view_all_comments()}
+      onclick={() => onDrilldown()}
+      style="flat"
+      variant="primary"
+      color="purple"
+      size="small"
+    >
+      {m.view_all()}
+    </Button>
   {/snippet}
 </SectionList>
 
