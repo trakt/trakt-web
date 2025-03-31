@@ -19,7 +19,9 @@
   {/if}
 </main>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .error-page {
     height: 100%;
 
@@ -28,5 +30,27 @@
     align-items: center;
     justify-content: center;
     gap: var(--gap-l);
+
+    text-align: center;
+
+    padding: var(--layout-distance-side);
+
+    h1 {
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: font-size, letter-spacing;
+    }
+
+    @include for-tablet-sm-and-below {
+      h1 {
+        font-size: var(--ni-48);
+      }
+    }
+
+    @include for-mobile {
+      h1 {
+        font-size: var(--ni-24);
+        letter-spacing: 0;
+      }
+    }
   }
 </style>
