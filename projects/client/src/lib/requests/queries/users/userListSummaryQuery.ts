@@ -12,6 +12,7 @@ const userListSummaryRequest = (
   api({ fetch })
     .users
     .lists
+    .list
     .summary({
       params: {
         id: userId,

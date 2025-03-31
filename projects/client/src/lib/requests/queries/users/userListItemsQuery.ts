@@ -44,6 +44,7 @@ const userListItemsRequest = (
   api({ fetch })
     .users
     .lists
+    .list
     .items({
       params: {
         id: userId,
