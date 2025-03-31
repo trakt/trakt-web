@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { disableNavigation } from "$lib/utils/actions/disableNavigation";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
   import type { Snippet } from "svelte";
   import Link from "../link/Link.svelte";
@@ -37,6 +38,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <li
   use:triggerWithKeyboard
+  use:disableNavigation={props}
   tabindex={tabIndex}
   data-color={color}
   data-style={style}
@@ -93,6 +95,14 @@
       display: flex;
     }
 
+    &:active[disabled="true"] {
+      animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle) infinite;
+    }
+
+    &[disabled="true"] {
+      cursor: not-allowed;
+    }
+
     :global(.trakt-link) {
       color: inherit;
       width: 100%;
@@ -123,6 +133,11 @@
       &:focus-visible,
       &:has(> :global(.trakt-link:focus-visible)) {
         outline: var(--border-thickness-xs) solid $outline-color;
+      }
+
+      &[disabled="true"] {
+        background: var(--color-foreground-button-disabled);
+        color: var(--color-surface-button-disabled);
       }
     }
 
