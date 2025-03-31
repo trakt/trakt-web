@@ -3,6 +3,7 @@ import { alignPopupContainer } from './alignPopupContainer.ts';
 
 describe('alignPopupContainer', () => {
   let popupContainer: HTMLDivElement;
+  let targetNode: HTMLDivElement;
 
   function getDomRect(x: number, y: number, size: number): DOMRect {
     return {
@@ -20,6 +21,7 @@ describe('alignPopupContainer', () => {
 
   beforeEach(() => {
     popupContainer = document.createElement('div');
+    targetNode = document.createElement('div');
   });
 
   it('should not move it if there is no space to align it', () => {
@@ -31,10 +33,10 @@ describe('alignPopupContainer', () => {
     vi.spyOn(popupContainer, 'getBoundingClientRect')
       .mockReturnValueOnce(popupRect);
 
-    alignPopupContainer(popupContainer, targetRect);
+    alignPopupContainer({ popupContainer, targetNode, targetRect });
 
     expect(popupContainer.style.left).toEqual('3px');
-    expect(popupContainer).not.toHaveAttribute('data-popup-direction');
+    expect(targetNode).not.toHaveAttribute('data-popup-direction');
   });
 
   it('should align it left of the target if there is space', () => {
@@ -44,12 +46,12 @@ describe('alignPopupContainer', () => {
     vi.spyOn(popupContainer, 'getBoundingClientRect')
       .mockReturnValueOnce(popupRect);
 
-    alignPopupContainer(popupContainer, targetRect);
+    alignPopupContainer({ popupContainer, targetNode, targetRect });
 
     expect(popupContainer.style.left).toEqual(
       `${targetRect.right - popupRect.width}px`,
     );
-    expect(popupContainer).toHaveAttribute('data-popup-direction', 'left');
+    expect(targetNode).toHaveAttribute('data-popup-direction', 'left');
   });
 
   it('should unalign it if there is no space', () => {
@@ -59,8 +61,8 @@ describe('alignPopupContainer', () => {
     vi.spyOn(popupContainer, 'getBoundingClientRect')
       .mockReturnValueOnce(popupRect);
 
-    alignPopupContainer(popupContainer, targetRect);
+    alignPopupContainer({ popupContainer, targetNode, targetRect });
 
-    expect(popupContainer).toHaveAttribute('data-popup-direction', 'unaligned');
+    expect(targetNode).toHaveAttribute('data-popup-direction', 'unaligned');
   });
 });

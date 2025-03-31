@@ -95,7 +95,7 @@
         animation: rotate-90 var(--transition-increment) ease-in;
       }
 
-      &:has(+ .trakt-popup-menu-container[data-popup-direction="unaligned"]) {
+      &:global([data-popup-direction="unaligned"]) {
         display: none;
       }
     }

@@ -10,13 +10,13 @@ export function bodyPortal(
 
     requestAnimationFrame(() => {
       document.body.appendChild(node);
-      node.setAttribute('data-popup-direction', 'right');
+      targetNode.setAttribute('data-popup-direction', 'right');
 
       node.style.position = 'absolute';
       node.style.left = `${globalThis.window.scrollX + targetRect.left}px`;
       node.style.top = `${globalThis.window.scrollY + targetRect.top}px`;
 
-      alignPopupContainer(node, targetRect);
+      alignPopupContainer({ popupContainer: node, targetNode, targetRect });
     });
   }
 
@@ -24,7 +24,7 @@ export function bodyPortal(
 
   const observer = new MutationObserver(() => {
     const targetRect = targetNode.getBoundingClientRect();
-    alignPopupContainer(node, targetRect);
+    alignPopupContainer({ popupContainer: node, targetNode, targetRect });
   });
 
   observer.observe(node, {
