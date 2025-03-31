@@ -25,9 +25,7 @@
     use:portal
     class="trakt-popup-menu-container"
     transition:slide={{ duration: 150 }}
-    onoutrostart={(e) => e.currentTarget.classList.add("removing")}
   >
-    <div class="trakt-popup-menu-button-placeholder"><MoreIcon /></div>
     <div class="spacer"></div>
     <ul>
       {@render items()}
@@ -41,7 +39,10 @@
   $button-size: var(--ni-24);
   $button-padding: var(--ni-4);
 
-  @mixin popup-button-style() {
+  .trakt-popup-menu-button {
+    all: unset;
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,15 +60,13 @@
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-  }
 
-  .trakt-popup-menu-button {
-    all: unset;
-    position: relative;
+    :global(svg) {
+      transition: transform var(--transition-increment) ease-in-out;
+    }
 
-    @include popup-button-style();
-
-    &:hover {
+    &:hover,
+    &[data-popup-state="opened"] {
       background-color: var(--shade-10);
       color: var(--purple-900);
 
@@ -75,6 +74,7 @@
         filter: none;
       }
     }
+
     @include for-touch {
       &::after {
         position: absolute;
@@ -86,6 +86,17 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: -1;
+      }
+    }
+
+    &:global([data-popup-state="opened"]) {
+      :global(svg) {
+        transform: rotate(90deg);
+        animation: rotate-90 var(--transition-increment) ease-in;
+      }
+
+      &:has(+ .trakt-popup-menu-container[data-popup-direction="unaligned"]) {
+        display: none;
       }
     }
   }
@@ -128,38 +139,6 @@
 
     div.spacer {
       height: calc($button-size + $button-padding * 2);
-    }
-
-    .trakt-popup-menu-button-placeholder {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      @include popup-button-style();
-
-      animation: rotate-90 var(--transition-increment) ease-in;
-      transform: rotate(90deg);
-
-      color: var(--purple-900);
-    }
-
-    &:global([data-popup-direction="left"]) {
-      .trakt-popup-menu-button-placeholder {
-        right: 0;
-        left: auto;
-      }
-    }
-
-    &:global([data-popup-direction="unaligned"]) {
-      .trakt-popup-menu-button-placeholder {
-        display: none;
-      }
-    }
-
-    &:global(.removing) {
-      .trakt-popup-menu-button-placeholder {
-        transform: rotate(0deg);
-      }
     }
   }
 </style>
