@@ -48,6 +48,25 @@ describe('action: usePortal', () => {
     component.destroy();
   });
 
+  it('should add a clone of the popup target', async () => {
+    const targetNode = document.createElement('div');
+    const popupNode = document.createElement('div');
+
+    targetNode.appendChild(popupNode);
+
+    const { portalTrigger } = usePortal();
+
+    const component = await renderStore(() => portalTrigger(targetNode));
+    targetNode.dispatchEvent(new Event('click'));
+
+    const clones = document.querySelectorAll('[data-popup-state="opened"]');
+    expect(clones).toHaveLength(1);
+    const clone = assertDefined(clones[0]);
+    expect(document.body.contains(clone)).toBe(true);
+
+    component.destroy();
+  });
+
   it('should not move the node to the body if the popup is not open', async () => {
     const targetNode = document.createElement('div');
     const popupNode = document.createElement('div');
@@ -117,5 +136,22 @@ describe('action: usePortal', () => {
 
     const underlay = document.querySelector(`#${PORTAL_UNDERLAY_ID}`);
     expect(underlay).toBeNull();
+  });
+
+  it('should remove the popup target clone', async () => {
+    const targetNode = document.createElement('div');
+    const popupNode = document.createElement('div');
+
+    targetNode.appendChild(popupNode);
+
+    const { portalTrigger } = usePortal();
+
+    const component = await renderStore(() => portalTrigger(targetNode));
+    targetNode.dispatchEvent(new Event('click'));
+
+    component.destroy();
+
+    const clone = document.querySelector('[data-popup-state="opened"]');
+    expect(clone).toBeNull();
   });
 });
