@@ -1,3 +1,4 @@
+import { clonePopupTarget } from '$lib/components/buttons/popup/_internal/clonePopupTarget.ts';
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
 import { onMount } from 'svelte';
 import { get, readable, writable } from 'svelte/store';
@@ -5,47 +6,57 @@ import { bodyPortal } from './bodyPortal.ts';
 import { createUnderlay } from './createUnderlay.ts';
 
 export function usePortal() {
-  let popupTarget: HTMLElement | null = null;
   let popupContainer: HTMLElement | null = null;
   let underlay: HTMLDivElement | null = null;
+  let targetClone: HTMLElement | null = null;
+
+  const removeHelpers = () => {
+    underlay?.remove();
+    targetClone?.remove();
+  };
 
   const isPopupOpen = writable(false);
   const closeHandler = () => {
-    underlay?.remove();
+    removeHelpers();
     isPopupOpen.set(false);
   };
-  const openHandler = () => {
+  const openHandler = (target: HTMLElement) => {
     underlay = createUnderlay();
+    targetClone = clonePopupTarget(target);
+
     document.body.appendChild(underlay);
+    document.body.appendChild(targetClone);
+
     isPopupOpen.set(true);
   };
 
   const portalTrigger = (targetNode: HTMLElement) => {
+    const openAroundTarget = () => openHandler(targetNode);
+
     onMount(() => {
-      popupTarget = targetNode;
       clickOutside(targetNode);
       targetNode.addEventListener('clickoutside', closeHandler);
-      targetNode.addEventListener('click', openHandler);
+      targetNode.addEventListener('click', openAroundTarget);
     });
 
     return {
       destroy() {
         targetNode.removeEventListener('clickoutside', closeHandler);
-        targetNode.removeEventListener('click', openHandler);
+        targetNode.removeEventListener('click', openAroundTarget);
+        removeHelpers();
         popupContainer?.remove();
-        underlay?.remove();
       },
     };
   };
 
   const portal = (node: HTMLElement) => {
-    if (!popupTarget || !get(isPopupOpen)) {
+    if (!targetClone || !get(isPopupOpen)) {
       return;
     }
 
     popupContainer = node;
 
-    return bodyPortal(node, popupTarget);
+    return bodyPortal(node, targetClone);
   };
 
   return {
