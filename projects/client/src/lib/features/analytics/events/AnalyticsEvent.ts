@@ -20,6 +20,7 @@ export const AnalyticsEvent = {
   Restore: buildEventKey(MEDIA_ACTION_PREFIX, 'restore'),
   MarkAsWatched: buildEventKey(MEDIA_ACTION_PREFIX, 'mark-as-watched'),
   Watchlist: buildEventKey(MEDIA_ACTION_PREFIX, 'watchlist'),
+  List: buildEventKey(MEDIA_ACTION_PREFIX, 'list'),
   RemoveFromHistory: 'remove-from-history',
   LikeComment: buildEventKey(MEDIA_ACTION_PREFIX, 'like-comment'),
 } as const;

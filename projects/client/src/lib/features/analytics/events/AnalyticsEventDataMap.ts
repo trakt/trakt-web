@@ -16,6 +16,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Restore]: never;
   [AnalyticsEvent.MarkAsWatched]: ActionType;
   [AnalyticsEvent.Watchlist]: ActionType;
+  [AnalyticsEvent.List]: ActionType;
   [AnalyticsEvent.RemoveFromHistory]: never;
   [AnalyticsEvent.LikeComment]: ActionType;
 };
