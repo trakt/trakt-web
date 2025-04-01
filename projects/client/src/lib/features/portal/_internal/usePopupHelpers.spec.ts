@@ -37,14 +37,14 @@ describe('usePopupHelpers', () => {
     expect(document.body.appendChild).toHaveBeenCalled();
   });
 
-  it('should remove clonse when removing helpers', () => {
+  it('should remove clone when removing helpers', () => {
     const { addHelpers, removeHelpers, popupTarget } = usePopupHelpers();
     addHelpers(target);
 
     const clone = get(popupTarget);
     vi.spyOn(clone as HTMLElement, 'remove');
 
-    removeHelpers();
+    removeHelpers(null);
 
     expect(clone?.remove).toHaveBeenCalled();
     expect(get(popupTarget)).toBeNull();

@@ -10,29 +10,32 @@ export function usePortal() {
   const isPopupOpen = writable(false);
   const { addHelpers, removeHelpers, popupTarget } = usePopupHelpers();
 
-  const closeHandler = () => {
-    removeHelpers();
+  const closeHandler = (target: HTMLElement) => {
+    target.removeAttribute('data-popup-state');
+    removeHelpers(popupContainer);
     isPopupOpen.set(false);
   };
   const openHandler = (target: HTMLElement) => {
+    target.setAttribute('data-popup-state', 'opened');
     addHelpers(target);
     isPopupOpen.set(true);
   };
 
   const portalTrigger = (targetNode: HTMLElement) => {
+    const closeAroundTarget = () => closeHandler(targetNode);
     const openAroundTarget = () => openHandler(targetNode);
 
     onMount(() => {
       clickOutside(targetNode);
-      targetNode.addEventListener('clickoutside', closeHandler);
+      targetNode.addEventListener('clickoutside', closeAroundTarget);
       targetNode.addEventListener('click', openAroundTarget);
     });
 
     return {
       destroy() {
-        targetNode.removeEventListener('clickoutside', closeHandler);
+        targetNode.removeEventListener('clickoutside', closeAroundTarget);
         targetNode.removeEventListener('click', openAroundTarget);
-        removeHelpers();
+        removeHelpers(null);
         popupContainer?.remove();
       },
     };

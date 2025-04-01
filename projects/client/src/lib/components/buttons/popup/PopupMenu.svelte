@@ -89,7 +89,7 @@
       }
     }
 
-    &:global([data-popup-state="opened"]) {
+    &[data-popup-state="opened"] {
       :global(svg) {
         transform: rotate(90deg);
         animation: rotate-90 var(--transition-increment) ease-in;
