@@ -13,10 +13,10 @@
   /* Interactive Layers (100-800) */
   /* modal dialogs */
   --layer-dialog: 666;
-  /* dropdowns, context menus */
-  --layer-menu: 776;
   /* overlays, popovers */
   --layer-overlay: 777;
+  /* dropdowns, context menus */
+  --layer-menu: 778;
 
   /* System Layers (900+) */
   /* toasts, alerts, notifications */
