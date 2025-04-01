@@ -13,7 +13,9 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import type { MarkAsWatchedActionProps } from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedActionProps";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import type { WatchlistActionProps } from "$lib/sections/media-actions/watchlist/WatchListActionProps";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import type { Snippet } from "svelte";
   import MediaDetails from "../details/MediaDetails.svelte";
@@ -52,14 +54,14 @@
   const title = $derived(intl.title ?? media.title);
   const { watchCount } = useWatchCount({ media, type });
 
-  const watchlistProps = $derived({
+  const watchlistProps = $derived<WatchlistActionProps>({
     style: "normal" as const,
     title,
     type,
     media,
   });
 
-  const markWasWatchedProps = $derived({
+  const markAsWatchedProps = $derived<MarkAsWatchedActionProps>({
     style: "normal" as const,
     title,
     type,
@@ -74,7 +76,7 @@
     style={device === "mobile" ? "action" : "normal"}
   />
   <MarkAsWatchedAction
-    {...markWasWatchedProps}
+    {...markAsWatchedProps}
     size={device === "mobile" ? "small" : "normal"}
   />
 {/snippet}
