@@ -1,70 +1,62 @@
 <script lang="ts">
-  import { clickOutside } from "$lib/utils/actions/clickOutside";
-  import { writable } from "svelte/store";
   import { slide } from "svelte/transition";
+  import { usePortal } from "../../features/portal/usePortal.ts";
   import Button from "../buttons/Button.svelte";
   import DropdownIcon from "./DropdownCaretIcon.svelte";
   import type { TraktDropdownListProps } from "./TraktDropdownListProps.ts";
+  import { useWidthObserver } from "./_internal/useWidthObserver.ts";
 
   const {
-    onclick,
     icon: _icon,
     children,
     items,
     size,
     ...props
   }: TraktDropdownListProps = $props();
-  const isDropdownOpen = writable(false);
+
+  const { portalTrigger, portal, isOpened } = usePortal();
+
+  const { observedWidth, observeWidth } = useWidthObserver();
 </script>
 
 <div
-  class="trakt-dropdown-list-container"
-  class:is-list-open={$isDropdownOpen}
-  use:clickOutside
-  onclickoutside={(e) => {
-    isDropdownOpen.set(false);
-  }}
+  class="trakt-dropdown-wrapper"
+  use:portalTrigger
+  use:observeWidth
   data-size={size}
 >
-  {#if $isDropdownOpen}
-    <div class="trakt-list" transition:slide={{ duration: 150 }}>
-      <div class="spacer"></div>
-      <ul onclickcapture={() => isDropdownOpen.set(false)}>
-        {@render items()}
-      </ul>
-    </div>
-  {/if}
-
-  <Button
-    onclick={(ev) => {
-      isDropdownOpen.update((state) => !state);
-      onclick?.(ev);
-    }}
-    style="textured"
-    {size}
-    {...props}
-  >
+  <Button style="textured" {size} {...props}>
     {@render children()}
     {#snippet icon()}
       <div class="trakt-dropdown-list-icon">
         {#if _icon != null}
           {@render _icon()}
         {/if}
-        <DropdownIcon open={$isDropdownOpen} disabled={props.disabled} />
+        <DropdownIcon open={$isOpened} disabled={props.disabled} />
       </div>
     {/snippet}
   </Button>
 </div>
 
+{#if $isOpened}
+  <div
+    class="trakt-list"
+    data-size={size}
+    style="--button-width: {$observedWidth}px"
+    transition:slide={{ duration: 150 }}
+    use:portal
+  >
+    <div class="spacer"></div>
+    <ul>
+      {@render items()}
+    </ul>
+  </div>
+{/if}
+
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-dropdown-list-container {
-    position: relative;
-    padding: var(--ni-14);
-    margin: var(--ni-neg-14);
-    background: transparent;
-    box-sizing: content-box;
+  .trakt-dropdown-wrapper {
     display: flex;
 
     :global(.trakt-button) {
@@ -72,21 +64,6 @@
     }
 
     &[data-size="small"] {
-      // TODO change back to transform scale when scaling is fixed
-      --small-padding: var(--ni-10);
-      padding: var(--small-padding);
-      margin: 0 var(--ni-neg-10);
-
-      :global(li) {
-        padding: 0 var(--small-padding);
-        height: calc(var(--ni-16) + var(--small-padding) * 2);
-        width: calc(100% - var(--small-padding) * 4);
-      }
-
-      :global(li p) {
-        font-size: var(--ni-12);
-      }
-
       :global(.trakt-button) {
         min-width: fit-content;
       }
@@ -97,26 +74,12 @@
           height: var(--ni-12);
         }
       }
-
-      .trakt-list .spacer {
-        height: calc(var(--ni-24) + var(--small-padding) * 2);
-      }
     }
 
-    &.is-list-open {
-      z-index: var(--layer-menu);
-
-      :global(.trakt-button) {
-        z-index: var(--layer-menu);
-      }
-
-      .trakt-list {
-        z-index: var(--layer-menu);
-        opacity: 1;
-      }
-
-      .trakt-dropdown-list-icon {
-        z-index: var(--layer-menu);
+    &:global([data-popup-state="opened"]) {
+      :global(.trakt-dropdown-caret) {
+        transform: rotate(180deg);
+        animation: rotate-180 var(--transition-increment) ease-in;
       }
     }
 
@@ -129,6 +92,23 @@
       :global(.trakt-dropdown-list-icon .trakt-dropdown-list-caret) {
         animation: loopy-loop var(--animation-duration-loopy-loop) infinite;
       }
+    }
+  }
+
+  .trakt-list {
+    --list-padding: var(--ni-12);
+
+    transform: translateY(calc(-1 * var(--list-padding)))
+      translateX(var(--list-padding));
+
+    min-width: var(--button-width);
+    padding: var(--list-padding);
+
+    border-radius: var(--border-radius-m);
+    background-color: var(--shade-10);
+
+    div.spacer {
+      height: calc(var(--ni-40) + var(--list-padding) * 2);
     }
 
     ul {
@@ -151,25 +131,27 @@
       }
     }
 
-    .trakt-list {
-      --list-padding: var(--ni-12);
+    &[data-size="small"] {
+      // TODO change back to transform scale when scaling is fixed
+      --small-padding: var(--ni-10);
 
-      z-index: var(--layer-background);
-      position: absolute;
-      width: 100%;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      transition: opacity var(--transition-increment) ease-in-out;
+      transform: translateY(calc(-1 * var(--small-padding)))
+        translateX(var(--small-padding));
 
-      padding: var(--list-padding) 0;
-      border-radius: var(--border-radius-m);
-      border-radius: var(--border-radius-m);
+      padding: var(--small-padding);
 
-      background-color: var(--shade-10);
+      :global(li) {
+        padding: 0 var(--small-padding);
+        height: calc(var(--ni-16) + var(--small-padding) * 2);
+        width: calc(100% - var(--small-padding) * 2);
+      }
+
+      :global(li p) {
+        font-size: var(--ni-12);
+      }
 
       div.spacer {
-        height: calc(var(--ni-40) + var(--list-padding) * 2);
+        height: calc(var(--ni-24) + var(--small-padding) * 2);
       }
     }
   }
