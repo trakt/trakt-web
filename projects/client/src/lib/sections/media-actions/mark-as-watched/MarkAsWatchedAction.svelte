@@ -4,18 +4,8 @@
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import { attachWarning } from "../_internal/attachWarning";
   import { useIsWatchlisted } from "../watchlist/useIsWatchlisted";
-  import {
-    type MarkAsWatchedStoreProps,
-    useMarkAsWatched,
-  } from "./useMarkAsWatched";
-
-  type MarkAsWatchedActionProps = {
-    style: "normal" | "action" | "dropdown-item";
-    title: string;
-    // FIXME: remove prop when we fully split up mark-as-watched and remove
-    allowRewatch?: boolean;
-    size?: "normal" | "small";
-  } & MarkAsWatchedStoreProps;
+  import type { MarkAsWatchedActionProps } from "./MarkAsWatchedActionProps";
+  import { useMarkAsWatched } from "./useMarkAsWatched";
 
   const {
     style = "action",
