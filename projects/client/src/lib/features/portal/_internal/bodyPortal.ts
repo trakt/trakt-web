@@ -1,5 +1,5 @@
-import { alignPopupContainer } from '$lib/components/buttons/popup/_internal/alignPopupContainer.ts';
 import { onMount } from 'svelte';
+import { alignPopupContainer } from './alignPopupContainer.ts';
 
 export function bodyPortal(
   node: HTMLElement,

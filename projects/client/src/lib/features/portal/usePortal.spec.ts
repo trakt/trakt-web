@@ -1,9 +1,9 @@
-import { PORTAL_UNDERLAY_ID } from '$lib/components/buttons/popup/_internal/constants.ts';
-import { usePortal } from '$lib/components/buttons/popup/_internal/usePortal.ts';
+import { usePortal } from '$lib/features/portal/usePortal.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { PORTAL_UNDERLAY_ID } from './_internal/constants.ts';
 
 describe('action: usePortal', () => {
   beforeEach(() => {

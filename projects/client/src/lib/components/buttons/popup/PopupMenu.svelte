@@ -1,9 +1,9 @@
 <script lang="ts">
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
+  import { usePortal } from "$lib/features/portal/usePortal";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { slide } from "svelte/transition";
   import type { PopupMenuProps } from "./PopupMenuProps";
-  import { usePortal } from "./_internal/usePortal";
 
   const { items, ...props }: PopupMenuProps = $props();
 
