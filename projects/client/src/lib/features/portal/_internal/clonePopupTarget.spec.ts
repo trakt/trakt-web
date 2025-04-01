@@ -1,5 +1,5 @@
-import { clonePopupTarget } from '$lib/components/buttons/popup/_internal/clonePopupTarget.ts';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { clonePopupTarget } from './clonePopupTarget.ts';
 
 describe('clonePopupTarget', () => {
   beforeEach(() => {

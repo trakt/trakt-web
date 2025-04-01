@@ -1,9 +1,9 @@
-import { clonePopupTarget } from '$lib/components/buttons/popup/_internal/clonePopupTarget.ts';
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
 import { onMount } from 'svelte';
 import { get, readable, writable } from 'svelte/store';
-import { bodyPortal } from './bodyPortal.ts';
-import { createUnderlay } from './createUnderlay.ts';
+import { bodyPortal } from './_internal/bodyPortal.ts';
+import { clonePopupTarget } from './_internal/clonePopupTarget.ts';
+import { createUnderlay } from './_internal/createUnderlay.ts';
 
 export function usePortal() {
   let popupContainer: HTMLElement | null = null;

@@ -1,8 +1,6 @@
-import {
-  PORTAL_UNDERLAY_ID,
-} from '$lib/components/buttons/popup/_internal/constants.ts';
-import { createUnderlay } from '$lib/components/buttons/popup/_internal/createUnderlay.ts';
 import { describe, expect, it } from 'vitest';
+import { PORTAL_UNDERLAY_ID } from './constants.ts';
+import { createUnderlay } from './createUnderlay.ts';
 
 describe('util: createUnderlay', () => {
   it('should create an underlay', () => {

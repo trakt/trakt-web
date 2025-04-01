@@ -1,6 +1,4 @@
-import {
-  PORTAL_UNDERLAY_ID,
-} from '$lib/components/buttons/popup/_internal/constants.ts';
+import { PORTAL_UNDERLAY_ID } from './constants.ts';
 
 export const createUnderlay = () => {
   const underlay = document.createElement('div');
