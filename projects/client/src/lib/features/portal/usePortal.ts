@@ -1,3 +1,5 @@
+import { POPUP_STATE_ATTRIBUTE } from '$lib/features/portal/_internal/constants.ts';
+import { PopupState } from '$lib/features/portal/_internal/models/PopupState.ts';
 import { openPopupContainer } from '$lib/features/portal/_internal/openPopupContainer.ts';
 import { usePopupHelpers } from '$lib/features/portal/_internal/usePopupHelpers.ts';
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
@@ -11,12 +13,12 @@ export function usePortal() {
   const { addHelpers, removeHelpers, popupTarget } = usePopupHelpers();
 
   const closeHandler = (target: HTMLElement) => {
-    target.removeAttribute('data-popup-state');
+    target.removeAttribute(POPUP_STATE_ATTRIBUTE);
     removeHelpers(popupContainer);
     isPopupOpen.set(false);
   };
   const openHandler = (target: HTMLElement) => {
-    target.setAttribute('data-popup-state', 'opened');
+    target.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Opened);
     addHelpers(target);
     isPopupOpen.set(true);
   };
