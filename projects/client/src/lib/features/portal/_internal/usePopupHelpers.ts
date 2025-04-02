@@ -1,5 +1,7 @@
 import { bodyPortal } from '$lib/features/portal/_internal/bodyPortal.ts';
+import { POPUP_STATE_ATTRIBUTE } from '$lib/features/portal/_internal/constants.ts';
 import { createUnderlay } from '$lib/features/portal/_internal/createUnderlay.ts';
+import { PopupState } from '$lib/features/portal/_internal/models/PopupState.ts';
 import { get, writable } from 'svelte/store';
 
 const clearElement = (element: HTMLElement | null) => {
@@ -14,7 +16,7 @@ export function usePopupHelpers() {
   const removeCloneAfterContainer = (popupContainer: HTMLElement) => {
     targetClone.update((element) => {
       element?.style.setProperty('pointer-events', 'none');
-      element?.setAttribute('data-popup-state', 'removing');
+      element?.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Removing);
       return element;
     });
 
@@ -51,7 +53,7 @@ export function usePopupHelpers() {
     targetClone.update(clearElement);
 
     const clone = target.cloneNode(true) as HTMLElement;
-    clone.setAttribute('data-popup-state', 'opened');
+    clone.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Opened);
 
     const targetRect = target.getBoundingClientRect();
     bodyPortal(clone, targetRect);
