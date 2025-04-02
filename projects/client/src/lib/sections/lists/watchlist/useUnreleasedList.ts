@@ -7,11 +7,17 @@ import {
 import { derived, get } from 'svelte/store';
 import { genreCompareFactory } from './utils/genreCompareFactory.ts';
 
-const IN_PROGRESS_STATUSES: MediaStatus[] = [
+/*
+  For unreleased lists, we consider 'released' also.
+  Depending on the region, an item may be released in general,
+  but not yet in a particular region.
+*/
+const VALID_STATUSES: MediaStatus[] = [
   'planned',
   'post production',
   'in production',
   'upcoming',
+  'released',
 ] as const;
 
 export function useUnreleasedList(params: Omit<WatchListStoreProps, 'sort'>) {
@@ -34,9 +40,9 @@ export function useUnreleasedList(params: Omit<WatchListStoreProps, 'sort'>) {
       $watchlist
         .filter((item) => {
           const isUpcomingItem = item.airDate.getTime() > Date.now();
-          const isInProgressItem = IN_PROGRESS_STATUSES.includes(item.status);
+          const hasValidStatus = VALID_STATUSES.includes(item.status);
 
-          return isUpcomingItem && isInProgressItem;
+          return isUpcomingItem && hasValidStatus;
         })
         .sort(compare),
   );
