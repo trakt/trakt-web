@@ -10,6 +10,7 @@
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import AutoSigninProvider from "$lib/features/auto-signin/AutoSigninProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
+  import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -80,42 +81,44 @@
   </style>
 </svelte:head>
 
-<QueryClientProvider client={data.queryClient}>
-  <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
-    <AnalyticsProvider>
-      <AutoSigninProvider>
-        <LocaleProvider>
-          <CoverProvider>
-            <CoverImage />
+<ErrorProvider>
+  <QueryClientProvider client={data.queryClient}>
+    <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
+      <AnalyticsProvider>
+        <AutoSigninProvider>
+          <LocaleProvider>
+            <CoverProvider>
+              <CoverImage />
 
-            <ThemeProvider theme={data.theme}>
-              <ListScrollHistoryProvider>
-                <div class="trakt-layout-wrapper">
-                  <Navbar />
-                  <div class="trakt-layout-content">
-                    {@render children()}
+              <ThemeProvider theme={data.theme}>
+                <ListScrollHistoryProvider>
+                  <div class="trakt-layout-wrapper">
+                    <Navbar />
+                    <div class="trakt-layout-content">
+                      {@render children()}
+                    </div>
+                    <Footer />
                   </div>
-                  <Footer />
-                </div>
-                <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-                  <MobileNavbar />
-                </RenderFor>
-                <SvelteQueryDevtools
-                  buttonPosition="bottom-left"
-                  styleNonce="opacity: 0.5"
-                />
-              </ListScrollHistoryProvider>
-            </ThemeProvider>
-          </CoverProvider>
-        </LocaleProvider>
+                  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+                    <MobileNavbar />
+                  </RenderFor>
+                  <SvelteQueryDevtools
+                    buttonPosition="bottom-left"
+                    styleNonce="opacity: 0.5"
+                  />
+                </ListScrollHistoryProvider>
+              </ThemeProvider>
+            </CoverProvider>
+          </LocaleProvider>
 
-        {#key page.url.pathname}
-          <PageView />
-        {/key}
-      </AutoSigninProvider>
-    </AnalyticsProvider>
-  </AuthProvider>
-</QueryClientProvider>
+          {#key page.url.pathname}
+            <PageView />
+          {/key}
+        </AutoSigninProvider>
+      </AnalyticsProvider>
+    </AuthProvider>
+  </QueryClientProvider>
+</ErrorProvider>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
