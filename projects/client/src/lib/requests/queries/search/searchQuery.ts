@@ -49,12 +49,6 @@ const searchRequest = ({ query, fetch }: SearchParams) =>
       params: {
         type: 'movie,show',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to search');
-      }
-      return response.body;
     });
 
 export const searchQuery = defineQuery({
@@ -62,8 +56,8 @@ export const searchQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.query.toLowerCase().trim()],
   request: searchRequest,
-  mapper: (results) =>
-    results
+  mapper: (response) =>
+    response.body
       .map(mapToSearchResultEntry)
       .filter((value) => !isGarbage(value)),
   schema: MediaEntrySchema.array(),

@@ -25,13 +25,6 @@ const showListsRequest = (
         extended: 'images',
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch show lists');
-      }
-
-      return response.body;
     });
 
 export const showListsQuery = defineQuery({
@@ -39,7 +32,7 @@ export const showListsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.limit, params.type],
   request: showListsRequest,
-  mapper: (data) => data.map(mapToMediaListSummary),
+  mapper: (response) => response.body.map(mapToMediaListSummary),
   schema: MediaListSummarySchema.array(),
   ttl: time.minutes(30),
 });

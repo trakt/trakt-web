@@ -20,13 +20,6 @@ const showPeopleRequest = (
       query: {
         extended: 'images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch show people');
-      }
-
-      return response.body;
     });
 
 export const showPeopleQuery = defineQuery({
@@ -34,7 +27,7 @@ export const showPeopleQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showPeopleRequest,
-  mapper: (body) => mapToMediaCrew(body),
+  mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,
   ttl: time.days(30),
 });

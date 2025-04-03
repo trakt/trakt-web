@@ -44,13 +44,6 @@ const watchlistRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch shows watchlist');
-      }
-
-      return response;
     });
 
 export const showWatchlistQuery = defineQuery({

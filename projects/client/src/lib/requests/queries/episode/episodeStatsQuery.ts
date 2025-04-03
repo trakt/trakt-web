@@ -22,13 +22,6 @@ const episodeStatsRequest = (
         season,
         episode,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episode stats');
-      }
-
-      return response.body;
     });
 
 export const episodeStatsQuery = defineQuery({
@@ -36,7 +29,7 @@ export const episodeStatsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],
   request: episodeStatsRequest,
-  mapper: mapToEpisodeStats,
+  mapper: (response) => mapToEpisodeStats(response.body),
   schema: EpisodeStatsSchema,
   ttl: time.minutes(30),
 });

@@ -25,13 +25,6 @@ const episodeSummaryRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episode summary');
-      }
-
-      return response.body;
     });
 
 export const episodeSummaryQuery = defineQuery({
@@ -39,7 +32,7 @@ export const episodeSummaryQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],
   request: episodeSummaryRequest,
-  mapper: mapToEpisodeEntry,
+  mapper: (response) => mapToEpisodeEntry(response.body),
   schema: EpisodeEntrySchema,
   ttl: time.days(1),
 });

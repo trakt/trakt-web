@@ -38,24 +38,17 @@ const streamingSourcesRequest = (
 ) =>
   api({ fetch })
     .watchnow
-    .sources()
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch streaming sources');
-      }
-
-      return response.body;
-    });
+    .sources();
 
 export const streamingSourcesQuery = defineQuery({
   key: 'streamingSources',
   invalidations: [],
   dependencies: () => [],
   request: streamingSourcesRequest,
-  mapper: (body) =>
-    toMap(body, (response) => {
-      const countryCode = extractCountryCode(response);
-      const countrySources = response[countryCode];
+  mapper: (response) =>
+    toMap(response.body, (data) => {
+      const countryCode = extractCountryCode(data);
+      const countrySources = data[countryCode];
 
       return countrySources?.map(mapStreamingSourceResponse) ?? [];
     }, (_, entry) => extractCountryCode(entry)),

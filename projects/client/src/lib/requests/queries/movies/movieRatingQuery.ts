@@ -18,13 +18,6 @@ const movieRatingRequest = (
       query: {
         extended: 'all',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movie rating');
-      }
-
-      return response.body;
     });
 
 export const movieRatingQuery = defineQuery({
@@ -32,7 +25,7 @@ export const movieRatingQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: movieRatingRequest,
-  mapper: mapToMediaRating,
+  mapper: (response) => mapToMediaRating(response.body),
   schema: MediaRatingSchema,
   ttl: time.days(1),
 });

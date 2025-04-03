@@ -23,13 +23,6 @@ const episodePeopleRequest = (
       query: {
         extended: 'images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episode people');
-      }
-
-      return response.body;
     });
 
 export const episodePeopleQuery = defineQuery({
@@ -37,7 +30,7 @@ export const episodePeopleQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],
   request: episodePeopleRequest,
-  mapper: (body) => mapToMediaCrew(body),
+  mapper: (response) => mapToMediaCrew(response.body),
   schema: MediaCrewSchema,
   ttl: time.days(30),
 });

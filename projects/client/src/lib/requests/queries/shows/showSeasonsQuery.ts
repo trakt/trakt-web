@@ -21,13 +21,6 @@ const showSeasonsRequest = (
       query: {
         extended: 'full',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch seasons');
-      }
-
-      return response.body;
     });
 
 const mapSeasonResponseToSeason = (item: SeasonsResponse[0]): Season => ({
@@ -44,7 +37,7 @@ export const showSeasonsQuery = defineQuery({
   dependencies: (params) => [params.slug],
   request: showSeasonsRequest,
   mapper: (response) =>
-    response
+    response.body
       .map(mapSeasonResponseToSeason)
       .filter((season) => season.episodes.count > 0 && season.number !== 0),
   schema: z.array(SeasonSchema),

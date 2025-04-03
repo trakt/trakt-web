@@ -1,7 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
-import { error } from '$lib/utils/console/print.ts';
 import type { ListedMovieResponse, ListedShowResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
@@ -34,13 +33,6 @@ const currentUserWatchlistedMoviesRequest = ({ fetch }: ApiParams) =>
         id: 'me',
         sort: 'rank',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user movie watchlist', response);
-        throw new Error('Error fetching user movie watchlist.');
-      }
-      return response.body;
     });
 
 const WatchlistedShowSchema = WatchlistedMediaSchema;
@@ -65,13 +57,6 @@ const currentUserWatchlistedShowsRequest = ({ fetch }: ApiParams) =>
         id: 'me',
         sort: 'rank',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user show watchlist', response);
-        throw new Error('Error fetching user show watchlist.');
-      }
-      return response.body;
     });
 
 const UserWatchlistSchema = z.object({
@@ -92,9 +77,17 @@ export const currentUserWatchlistQuery = defineQuery({
     InvalidateAction.Watchlisted('movie'),
   ],
   dependencies: [],
-  mapper: ([movies, shows]) => ({
-    movies: toMap(movies, mapWatchlistedMovieResponse, (entry) => entry.id),
-    shows: toMap(shows, mapWatchlistedShowResponse, (entry) => entry.id),
+  mapper: ([moviesResponse, showsResponse]) => ({
+    movies: toMap(
+      moviesResponse.body,
+      mapWatchlistedMovieResponse,
+      (entry) => entry.id,
+    ),
+    shows: toMap(
+      showsResponse.body,
+      mapWatchlistedShowResponse,
+      (entry) => entry.id,
+    ),
   }),
   schema: UserWatchlistSchema,
   ttl: Infinity,

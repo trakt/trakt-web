@@ -24,13 +24,6 @@ const streamEpisodeRequest = (
         episode,
         country,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episode streaming services');
-      }
-
-      return response.body;
     });
 
 export const streamEpisodeQuery = defineQuery({
@@ -41,7 +34,7 @@ export const streamEpisodeQuery = defineQuery({
   ) => [params.slug, params.season, params.episode, params.country],
   request: streamEpisodeRequest,
   mapper: (response, params) =>
-    mapToStreamingServices(response, params.country),
+    mapToStreamingServices(response.body, params.country),
   schema: StreamingServiceOptionsSchema,
   ttl: time.days(1),
 });

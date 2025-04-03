@@ -46,13 +46,6 @@ function activityHistoryRequest(
         limit,
         page,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episodes history');
-      }
-
-      return response;
     });
 }
 

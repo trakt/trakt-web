@@ -18,13 +18,6 @@ const movieSummaryRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movie summary');
-      }
-
-      return response.body;
     });
 
 export const movieSummaryQuery = defineQuery({
@@ -32,7 +25,7 @@ export const movieSummaryQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: movieSummaryRequest,
-  mapper: mapToMovieEntry,
+  mapper: (response) => mapToMovieEntry(response.body),
   schema: MediaEntrySchema,
   ttl: time.days(1),
 });

@@ -36,7 +36,7 @@ const showHistoryRequest = (
     page,
   };
 
-  const request = id
+  return id
     ? api({ fetch }).users.history.show({
       params: { id: slug, item_id: `${id}` },
       query: queryParams,
@@ -45,14 +45,6 @@ const showHistoryRequest = (
       params: { id: slug },
       query: queryParams,
     });
-
-  return request.then((response) => {
-    if (response.status !== 200) {
-      throw new Error('Failed to fetch shows history');
-    }
-
-    return response;
-  });
 };
 
 const mapToShowActivityHistory = (

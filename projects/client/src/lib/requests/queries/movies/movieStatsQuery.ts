@@ -17,13 +17,6 @@ const movieStatsRequest = (
       params: {
         id: slug,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movie stats');
-      }
-
-      return response.body;
     });
 
 export const movieStatsQuery = defineQuery({
@@ -31,7 +24,7 @@ export const movieStatsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: movieStatsRequest,
-  mapper: mapToMediaStats,
+  mapper: (response) => mapToMediaStats(response.body),
   schema: MediaStatsSchema,
   ttl: time.minutes(30),
 });

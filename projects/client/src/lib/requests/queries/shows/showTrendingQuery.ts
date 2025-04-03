@@ -46,13 +46,6 @@ const showTrendingRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch trending shows');
-      }
-
-      return response;
     });
 
 export const showTrendingQuery = defineQuery({

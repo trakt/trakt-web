@@ -19,13 +19,6 @@ const collaborationListsRequest = (
       query: {
         extended: 'images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch user collaboration lists');
-      }
-
-      return response.body;
     });
 
 export const collaborationListsQuery = defineQuery({
@@ -33,7 +26,7 @@ export const collaborationListsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: collaborationListsRequest,
-  mapper: (data) => data.map(mapToMediaListSummary),
+  mapper: (response) => response.body.map(mapToMediaListSummary),
   schema: MediaListSummarySchema.array(),
   ttl: time.minutes(30),
 });

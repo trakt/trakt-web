@@ -36,13 +36,6 @@ const showIntlRequest = (
         id: slug,
         language,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch show intl');
-      }
-
-      return response.body;
     });
 
 export const showIntlQuery = defineQuery({
@@ -54,8 +47,8 @@ export const showIntlQuery = defineQuery({
     params.region,
   ],
   request: showIntlRequest,
-  mapper: (body, { language, region }) =>
-    body
+  mapper: (response, { language, region }) =>
+    response.body
       .filter((translation) =>
         translation.language === language &&
         translation.country === region

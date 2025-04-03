@@ -21,13 +21,6 @@ const peopleSummaryRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch person summary');
-      }
-
-      return response.body;
     });
 
 const mapPeopleResponseToPersonSummary = (
@@ -54,7 +47,7 @@ export const peopleSummaryQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleSummaryRequest,
-  mapper: mapPeopleResponseToPersonSummary,
+  mapper: (response) => mapPeopleResponseToPersonSummary(response.body),
   schema: PersonSummarySchema,
   ttl: time.days(30),
 });

@@ -30,13 +30,6 @@ const showCommentsRequest = (
         extended: 'images',
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episode comments');
-      }
-
-      return response.body;
     });
 
 export const episodeCommentsQuery = defineQuery({
@@ -46,7 +39,7 @@ export const episodeCommentsQuery = defineQuery({
     params,
   ) => [params.slug, params.season, params.episode, params.limit],
   request: showCommentsRequest,
-  mapper: (data) => data.map(mapToMediaComment),
+  mapper: (response) => response.body.map(mapToMediaComment),
   schema: MediaCommentSchema.array(),
   ttl: time.minutes(30),
 });
