@@ -352,5 +352,9 @@
   "original_title": "Originaltitel",
   "view_all_comments": "Alle Kommentare anzeigen",
   "remove_from_list": "Remove from list",
-  "remove_from_list_label": "Remove {title} from list"
+  "remove_from_list_label": "Remove {title} from list",
+  "error_page_service_title": "Trakt-Dienst nicht erreichbar",
+  "error_page_service_message": "Die Verbindung ist... abwesend. Wie eine vergessene Erinnerung.",
+  "error_page_service_status": "Trakt-Dienststatus",
+  "retry": "Erneut versuchen"
 }

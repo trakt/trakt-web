@@ -352,5 +352,9 @@
   "original_title": "Originaltittel",
   "view_all_comments": "Se alle kommentarer",
   "remove_from_list": "Fjern fra liste",
-  "remove_from_list_label": "Fjern {title} fra listen"
+  "remove_from_list_label": "Fjern {title} fra listen",
+  "error_page_service_title": "Trakt-tjenesten er utilgjengelig",
+  "error_page_service_message": "Tilkoblingen er... fraværende. Som et glemt minne.",
+  "error_page_service_status": "Trakt-tjenestens status",
+  "retry": "Prøv igjen"
 }

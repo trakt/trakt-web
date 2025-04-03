@@ -352,5 +352,9 @@
   "original_title": "Título Original",
   "view_all_comments": "Ver todos os comentários",
   "remove_from_list": "Remover da lista",
-  "remove_from_list_label": "Remover {title} da lista"
+  "remove_from_list_label": "Remover {title} da lista",
+  "error_page_service_title": "Serviço Trakt inacessível",
+  "error_page_service_message": "A conexão está... ausente. Como uma memória esquecida.",
+  "error_page_service_status": "Status do serviço Trakt",
+  "retry": "Tentar novamente"
 }

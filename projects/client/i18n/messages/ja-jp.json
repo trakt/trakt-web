@@ -352,5 +352,9 @@
   "original_title": "原題",
   "view_all_comments": "すべてのコメントを表示",
   "remove_from_list": "Remove from list",
-  "remove_from_list_label": "Remove {title} from list"
+  "remove_from_list_label": "Remove {title} from list",
+  "error_page_service_title": "Traktサービスに接続できません",
+  "error_page_service_message": "接続が…ありません。まるで忘れられた記憶のように。",
+  "error_page_service_status": "Traktサービスの状態",
+  "retry": "再試行"
 }

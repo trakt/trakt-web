@@ -352,5 +352,9 @@
   "original_title": "Оригинално Заглавие",
   "view_all_comments": "Виж всички коментари",
   "remove_from_list": "Премахни от списъка",
-  "remove_from_list_label": "Премахни {title} от списъка"
+  "remove_from_list_label": "Премахни {title} от списъка",
+  "error_page_service_title": "Услугата Trakt е недостъпна",
+  "error_page_service_message": "Връзката... отсъства. Като забравен спомен.",
+  "error_page_service_status": "Състояние на услугата Trakt",
+  "retry": "Опитай отново"
 }
