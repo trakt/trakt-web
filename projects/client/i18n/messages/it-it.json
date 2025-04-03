@@ -352,5 +352,9 @@
   "original_title": "Titolo Originale",
   "view_all_comments": "Vedi tutti i commenti",
   "remove_from_list": "Rimuovi dalla lista",
-  "remove_from_list_label": "Rimuovi {title} dalla lista"
+  "remove_from_list_label": "Rimuovi {title} dalla lista",
+  "error_page_service_title": "Servizio Trakt irraggiungibile",
+  "error_page_service_message": "La connessione è... assente. Come un ricordo svanito.",
+  "error_page_service_status": "Stato del servizio Trakt",
+  "retry": "Riprova"
 }

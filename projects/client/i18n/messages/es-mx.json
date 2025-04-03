@@ -352,5 +352,9 @@
   "original_title": "Título original",
   "view_all_comments": "Ver todos los comentarios",
   "remove_from_list": "Eliminar de la lista",
-  "remove_from_list_label": "Eliminar {title} de la lista"
+  "remove_from_list_label": "Eliminar {title} de la lista",
+  "error_page_service_title": "Servicio Trakt inaccesible",
+  "error_page_service_message": "La conexión... ausente. Como un recuerdo olvidado.",
+  "error_page_service_status": "Estado del servicio Trakt",
+  "retry": "Reintentar"
 }

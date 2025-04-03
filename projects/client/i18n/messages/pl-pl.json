@@ -352,5 +352,9 @@
   "original_title": "Tytuł oryginalny",
   "view_all_comments": "Zobacz wszystkie komentarze",
   "remove_from_list": "Usuń z listy",
-  "remove_from_list_label": "Usuń {title} z listy"
+  "remove_from_list_label": "Usuń {title} z listy",
+  "error_page_service_title": "Usługa Trakt niedostępna",
+  "error_page_service_message": "Połączenie... nie istnieje. Niczym zapomniana scena.",
+  "error_page_service_status": "Status usługi Trakt",
+  "retry": "Spróbuj ponownie"
 }

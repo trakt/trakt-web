@@ -352,5 +352,9 @@
   "original_title": "Original Titel",
   "view_all_comments": "Se alle kommentarer",
   "remove_from_list": "Fjern fra listen",
-  "remove_from_list_label": "Fjern {title} fra listen"
+  "remove_from_list_label": "Fjern {title} fra listen",
+  "error_page_service_title": "Trakt tjeneste utilgængelig",
+  "error_page_service_message": "Forbindelsen er... fraværende. Som en glemt erindring.",
+  "error_page_service_status": "Trakt tjeneste status",
+  "retry": "Prøv igen"
 }

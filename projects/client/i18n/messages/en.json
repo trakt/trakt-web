@@ -352,5 +352,9 @@
   "original_title": "Original Title",
   "view_all_comments": "View all comments",
   "remove_from_list": "Remove from list",
-  "remove_from_list_label": "Remove {title} from list"
+  "remove_from_list_label": "Remove {title} from list",
+  "error_page_service_title": "Trakt service unreachable",
+  "error_page_service_message": "The connection is... absent. Like a forgotten memory.",
+  "error_page_service_status": "Trakt service status",
+  "retry": "Retry"
 }

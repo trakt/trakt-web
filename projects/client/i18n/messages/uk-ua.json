@@ -352,5 +352,9 @@
   "original_title": "Оригінальна назва",
   "view_all_comments": "Переглянути всі коментарі",
   "remove_from_list": "Видалити зі списку",
-  "remove_from_list_label": "Видалити {title} зі списку"
+  "remove_from_list_label": "Видалити {title} зі списку",
+  "error_page_service_title": "Сервіс Trakt недоступний",
+  "error_page_service_message": "З'єднання... відсутнє. Як спогад, що забули.",
+  "error_page_service_status": "Статус сервісу Trakt",
+  "retry": "Спробувати знову"
 }

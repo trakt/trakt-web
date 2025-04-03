@@ -352,5 +352,9 @@
   "original_title": "Originele titel",
   "view_all_comments": "Bekijk alle reacties",
   "remove_from_list": "Verwijder van lijst",
-  "remove_from_list_label": "Verwijder {title} van de lijst"
+  "remove_from_list_label": "Verwijder {title} van de lijst",
+  "error_page_service_title": "Trakt-dienst onbereikbaar",
+  "error_page_service_message": "De verbinding is... afwezig. Als een vergeten herinnering.",
+  "error_page_service_status": "Trakt-dienststatus",
+  "retry": "Opnieuw proberen"
 }

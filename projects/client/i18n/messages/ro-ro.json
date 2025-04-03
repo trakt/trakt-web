@@ -352,5 +352,9 @@
   "original_title": "Titlu original",
   "view_all_comments": "Vezi toate comentariile",
   "remove_from_list": "Elimină din listă",
-  "remove_from_list_label": "Elimină {title} din listă"
+  "remove_from_list_label": "Elimină {title} din listă",
+  "error_page_service_title": "Serviciul Trakt inaccesibil",
+  "error_page_service_message": "Conexiunea... lipsește. Ca o amintire uitată.",
+  "error_page_service_status": "Starea serviciului Trakt",
+  "retry": "Reîncearcă"
 }

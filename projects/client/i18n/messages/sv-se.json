@@ -352,5 +352,9 @@
   "original_title": "Originaltitel",
   "view_all_comments": "Visa alla kommentarer",
   "remove_from_list": "Ta bort från listan",
-  "remove_from_list_label": "Ta bort {title} från listan"
+  "remove_from_list_label": "Ta bort {title} från listan",
+  "error_page_service_title": "Trakt-tjänsten ej tillgänglig",
+  "error_page_service_message": "Anslutningen är... borta. Som ett bortglömt minne.",
+  "error_page_service_status": "Trakt-tjänstens status",
+  "retry": "Försök igen"
 }
