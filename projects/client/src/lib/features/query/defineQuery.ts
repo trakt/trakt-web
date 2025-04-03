@@ -1,3 +1,4 @@
+import { FETCH_ERROR_EVENT } from '$lib/features/errors/constants.ts';
 import type { ApiParams } from '$lib/requests/api.ts';
 import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction.ts';
 import { error as printError } from '$lib/utils/console/print.ts';
@@ -43,6 +44,23 @@ type DefineQueryProps<
   refetchOnWindowFocus?: boolean;
   retry?: number;
 };
+
+// FIXME: extend with error schemas
+class FetchError<TInput> extends Error {
+  constructor(public response: RequestResponse<TInput>, message: string) {
+    super(message);
+
+    printError(message);
+
+    // FIXME: see if we can leverage window.onerror
+    const responses = Array.isArray(response) ? response : [response];
+    responses.forEach(({ status }) => {
+      globalThis.window.dispatchEvent(
+        new CustomEvent(FETCH_ERROR_EVENT, { detail: status }),
+      );
+    });
+  }
+}
 
 const QUERY_ID = 'query';
 const SCHEMA_ID = 'schema';
@@ -106,12 +124,11 @@ export function defineQuery<
       queryFn: () =>
         request(requestParams)
           .then((response) => {
-            if (isSuccessResponse(response)) {
-              return mapper(response, requestParams);
+            if (!isSuccessResponse(response)) {
+              throw new FetchError(response, `Failed to fetch data: ${key}`);
             }
 
-            printError(`Failed to fetch data: ${key}`);
-            throw new Error(`Failed to fetch data: ${key}`);
+            return mapper(response, requestParams);
           }),
       staleTime: params.ttl == null ? undefined : params.ttl,
       refetchOnWindowFocus: params.refetchOnWindowFocus,
