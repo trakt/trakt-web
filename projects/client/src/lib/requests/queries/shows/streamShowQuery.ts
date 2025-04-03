@@ -19,13 +19,6 @@ const showWatchNowRequest = (
         id: slug,
         country,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch show streaming services');
-      }
-
-      return response.body;
     });
 
 export const streamShowQuery = defineQuery({
@@ -34,7 +27,7 @@ export const streamShowQuery = defineQuery({
   dependencies: (params) => [params.slug, params.country],
   request: showWatchNowRequest,
   mapper: (response, params) =>
-    mapToStreamingServices(response, params.country),
+    mapToStreamingServices(response.body, params.country),
   schema: StreamingServiceOptionsSchema,
   ttl: time.days(1),
 });

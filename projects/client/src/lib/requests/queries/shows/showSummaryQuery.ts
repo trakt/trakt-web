@@ -18,13 +18,6 @@ const showSummaryRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch show summary');
-      }
-
-      return response.body;
     });
 
 export const showSummaryQuery = defineQuery({
@@ -32,7 +25,7 @@ export const showSummaryQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showSummaryRequest,
-  mapper: mapToShowEntry,
+  mapper: (response) => mapToShowEntry(response.body),
   schema: MediaEntrySchema,
   ttl: time.days(1),
 });

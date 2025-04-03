@@ -50,13 +50,6 @@ const showAnticipatedRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch anticipated shows');
-      }
-
-      return response;
     });
 
 export const showAnticipatedQuery = defineQuery({

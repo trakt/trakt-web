@@ -49,13 +49,6 @@ const userListItemsRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch list items');
-      }
-
-      return response;
     });
 
 export const listItemsQuery = defineQuery({

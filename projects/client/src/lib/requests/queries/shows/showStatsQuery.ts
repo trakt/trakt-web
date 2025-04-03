@@ -17,13 +17,6 @@ const showStatsRequest = (
       params: {
         id: slug,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch show stats');
-      }
-
-      return response.body;
     });
 
 export const showStatsQuery = defineQuery({
@@ -31,7 +24,7 @@ export const showStatsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showStatsRequest,
-  mapper: mapToMediaStats,
+  mapper: (response) => mapToMediaStats(response.body),
   schema: MediaStatsSchema,
   ttl: time.minutes(30),
 });

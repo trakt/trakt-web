@@ -29,15 +29,6 @@ const recommendedShowsRequest = (
         ignore_watched: true,
         limit,
       },
-    })
-    .then(({ status, body }) => {
-      if (status !== 200) {
-        throw new Error(
-          'The recommended shows, like elusive phantoms, refuse to materialize.',
-        );
-      }
-
-      return body;
     });
 
 export const recommendedShowsQuery = defineQuery({
@@ -49,8 +40,8 @@ export const recommendedShowsQuery = defineQuery({
   ],
   dependencies: (params) => [params.limit],
   request: recommendedShowsRequest,
-  mapper: (body) =>
-    body.map((show: RecommendedShowResponse[0]) => ({
+  mapper: (response) =>
+    response.body.map((show: RecommendedShowResponse[0]) => ({
       ...mapToShowEntry(show),
       ...mapToEpisodeCount(show),
     })),

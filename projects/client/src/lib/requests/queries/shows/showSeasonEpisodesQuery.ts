@@ -22,13 +22,6 @@ const showSeasonEpisodesRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch up season episodes');
-      }
-
-      return response.body;
     });
 
 export const showSeasonEpisodesQuery = defineQuery({
@@ -36,7 +29,7 @@ export const showSeasonEpisodesQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season],
   request: showSeasonEpisodesRequest,
-  mapper: (body) => body.map(mapToEpisodeEntry),
+  mapper: (response) => response.body.map(mapToEpisodeEntry),
   schema: EpisodeEntrySchema.array(),
   ttl: time.hours(6),
 });

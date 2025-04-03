@@ -57,13 +57,6 @@ const socialActivityRequest = (
         limit,
         page,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to social activities');
-      }
-
-      return response;
     });
 
 export const socialActivityQuery = defineQuery({

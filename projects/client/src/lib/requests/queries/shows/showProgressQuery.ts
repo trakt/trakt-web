@@ -3,7 +3,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import {
   type EpisodeProgressEntry,
   EpisodeProgressEntrySchema,
-} from '$lib/requests/models/EpisodeProgressEntry';
+} from '$lib/requests/models/EpisodeProgressEntry.ts';
 import {
   type EpisodeType,
   EpisodeUnknownType,
@@ -31,13 +31,6 @@ const showProgressRequest = (
       params: {
         id: slug,
       },
-    })
-    .then(({ status, body }) => {
-      if (status !== 200) {
-        throw new Error('Failed to fetch show progress');
-      }
-
-      return body;
     });
 
 function mapShowProgressResponse(
@@ -75,7 +68,7 @@ export const showProgressQuery = defineQuery({
   ],
   dependencies: (params) => [params.slug],
   request: showProgressRequest,
-  mapper: mapShowProgressResponse,
+  mapper: (response) => mapShowProgressResponse(response.body),
   schema: EpisodeProgressEntrySchema,
   ttl: time.days(1),
 });

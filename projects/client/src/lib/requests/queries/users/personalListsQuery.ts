@@ -19,13 +19,6 @@ const personalListsRequest = (
       query: {
         extended: 'images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch user lists');
-      }
-
-      return response.body;
     });
 
 export const personalListsQuery = defineQuery({
@@ -33,7 +26,7 @@ export const personalListsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: personalListsRequest,
-  mapper: (data) => data.map(mapToMediaListSummary),
+  mapper: (response) => response.body.map(mapToMediaListSummary),
   schema: MediaListSummarySchema.array(),
   ttl: time.minutes(30),
 });

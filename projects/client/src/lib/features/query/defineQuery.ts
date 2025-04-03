@@ -1,19 +1,28 @@
 import type { ApiParams } from '$lib/requests/api.ts';
 import type { InvalidateActionOptions } from '$lib/requests/models/InvalidateAction.ts';
+import { error as printError } from '$lib/utils/console/print.ts';
 import { monitor } from '$lib/utils/perf/monitor.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
-import type { z, ZodType } from 'zod';
+import { type z, type ZodType } from 'zod';
 import { zodToHash } from './_internal/zodToHash.ts';
+
+type InputWithStatus<TInput, TStatus> = TInput extends readonly [...infer U]
+  ? { [K in keyof U]: U[K] & { status: TStatus } }
+  : TInput & { status: TStatus };
+
+type RequestResponse<TInput> = InputWithStatus<TInput, number>;
+type SuccessResponse<TInput> = InputWithStatus<TInput, 200>;
 
 type RequestDefinition<TInput, TRequestParams extends ApiParams> = (
   { fetch }: TRequestParams,
-) => Promise<TInput>;
+) => Promise<RequestResponse<TInput>>;
+
 type MapperDefinition<
   TInput,
   TOutput extends ZodType,
   TRequestParams extends ApiParams,
 > = (
-  response: TInput,
+  response: SuccessResponse<TInput>,
   params: TRequestParams,
 ) => z.infer<TOutput>;
 
@@ -38,6 +47,14 @@ type DefineQueryProps<
 const QUERY_ID = 'query';
 const SCHEMA_ID = 'schema';
 const DEPENDENCY_ID = 'dependency';
+
+function isSuccessResponse<TInput>(
+  response: RequestResponse<TInput>,
+): response is SuccessResponse<TInput> {
+  return Array.isArray(response)
+    ? response.every((item) => item?.status === 200)
+    : response.status === 200;
+}
 
 export function queryId(key: string) {
   return `${QUERY_ID}:${key}`;
@@ -88,7 +105,14 @@ export function defineQuery<
       ] as const,
       queryFn: () =>
         request(requestParams)
-          .then((data) => mapper(data, requestParams)),
+          .then((response) => {
+            if (isSuccessResponse(response)) {
+              return mapper(response, requestParams);
+            }
+
+            printError(`Failed to fetch data: ${key}`);
+            throw new Error(`Failed to fetch data: ${key}`);
+          }),
       staleTime: params.ttl == null ? undefined : params.ttl,
       refetchOnWindowFocus: params.refetchOnWindowFocus,
       retry: params.retry,

@@ -17,13 +17,6 @@ const showStudiosRequest = (
       params: {
         id: slug,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch show studios');
-      }
-
-      return response.body;
     });
 
 export const showStudiosQuery = defineQuery({
@@ -31,7 +24,7 @@ export const showStudiosQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: showStudiosRequest,
-  mapper: (body) => body.map(mapToMediaStudio),
+  mapper: (response) => response.body.map(mapToMediaStudio),
   schema: MediaStudioSchema.array(),
   ttl: time.days(30),
 });

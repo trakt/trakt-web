@@ -1,7 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
-import { error } from '$lib/utils/console/print.ts';
 import type { RatedItemResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
@@ -44,13 +43,6 @@ const currentUserRatedMoviesRequest = ({ fetch }: ApiParams) =>
     .ratings
     .movies({
       params: { id: 'me' },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user rated movies', response);
-        throw new Error('Error fetching user rated movies.');
-      }
-      return response.body;
     });
 
 const currentUserRatedShowsRequest = ({ fetch }: ApiParams) =>
@@ -59,13 +51,6 @@ const currentUserRatedShowsRequest = ({ fetch }: ApiParams) =>
     .ratings
     .shows({
       params: { id: 'me' },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user rated shows', response);
-        throw new Error('Error fetching user rated shows.');
-      }
-      return response.body;
     });
 
 const currentUserRatedEpisodesRequest = ({ fetch }: ApiParams) =>
@@ -74,13 +59,6 @@ const currentUserRatedEpisodesRequest = ({ fetch }: ApiParams) =>
     .ratings
     .episodes({
       params: { id: 'me' },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user rated episodes', response);
-        throw new Error('Error fetching user rated episodes.');
-      }
-      return response.body;
     });
 
 const UserRatingsSchema = z.object({
@@ -104,10 +82,18 @@ export const currentUserRatingsQuery = defineQuery({
     InvalidateAction.Rated('movie'),
   ],
   dependencies: [],
-  mapper: ([movies, shows, episodes]) => ({
-    movies: toMap(movies, mapRatedItemResponse, (entry) => entry.id),
-    shows: toMap(shows, mapRatedItemResponse, (entry) => entry.id),
-    episodes: toMap(episodes, mapRatedItemResponse, (entry) => entry.id),
+  mapper: ([moviesResponse, showsResponse, episodesResponse]) => ({
+    movies: toMap(
+      moviesResponse.body,
+      mapRatedItemResponse,
+      (entry) => entry.id,
+    ),
+    shows: toMap(showsResponse.body, mapRatedItemResponse, (entry) => entry.id),
+    episodes: toMap(
+      episodesResponse.body,
+      mapRatedItemResponse,
+      (entry) => entry.id,
+    ),
   }),
   schema: UserRatingsSchema,
   ttl: Infinity,

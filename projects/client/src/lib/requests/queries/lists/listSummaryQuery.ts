@@ -15,13 +15,6 @@ const listSummaryRequest = (
       params: {
         id: listId,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to get list summary');
-      }
-
-      return response.body;
     });
 
 export const listSummaryQuery = defineQuery({
@@ -29,7 +22,7 @@ export const listSummaryQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.listId],
   request: listSummaryRequest,
-  mapper: mapToMediaListSummary,
+  mapper: (response) => mapToMediaListSummary(response.body),
   schema: MediaListSummarySchema,
   ttl: time.minutes(30),
 });

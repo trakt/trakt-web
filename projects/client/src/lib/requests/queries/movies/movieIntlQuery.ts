@@ -36,13 +36,6 @@ const movieIntlRequest = (
         id: slug,
         language,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movie intl');
-      }
-
-      return response.body;
     });
 
 export const movieIntlQuery = defineQuery({
@@ -54,8 +47,8 @@ export const movieIntlQuery = defineQuery({
     params.region,
   ],
   request: movieIntlRequest,
-  mapper: (body, { language, region }) =>
-    body
+  mapper: (response, { language, region }) =>
+    response.body
       .filter((translation) =>
         translation.language === language &&
         translation.country === region

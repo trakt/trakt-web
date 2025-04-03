@@ -4,7 +4,6 @@ import {
   permissionSchema,
 } from '$lib/requests/models/Permission.ts';
 import { UserNameSchema } from '$lib/requests/models/UserName.ts';
-import { error } from '$lib/utils/console/print.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { toUserName } from '$lib/utils/formatting/string/toUserName.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
@@ -122,17 +121,6 @@ const currentUserRequest = ({ fetch }: ApiParams) =>
       query: {
         extended: 'browsing',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching current user', response);
-        /**
-         * TODO: define error handling strategy/system
-         */
-        throw new Error('Error fetching current user.');
-      }
-
-      return response.body;
     });
 
 export const currentUserQueryKey = ['userSettings'] as const;
@@ -141,7 +129,7 @@ export const currentUserSettingsQuery = defineQuery({
   invalidations: [],
   dependencies: [],
   request: currentUserRequest,
-  mapper: mapUserSettingsResponse,
+  mapper: (response) => mapUserSettingsResponse(response.body),
   schema: UserSettingsSchema,
   ttl: Infinity,
 });

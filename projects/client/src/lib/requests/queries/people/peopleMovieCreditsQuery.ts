@@ -18,13 +18,6 @@ const peopleMovieCreditsRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch person movie credits');
-      }
-
-      return response.body;
     });
 
 export const peopleMovieCreditsQuery = defineQuery({
@@ -32,7 +25,7 @@ export const peopleMovieCreditsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleMovieCreditsRequest,
-  mapper: mapToMediaCredits,
+  mapper: (response) => mapToMediaCredits(response.body),
   schema: MediaCreditsSchema,
   ttl: time.days(7),
 });

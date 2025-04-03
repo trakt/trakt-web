@@ -1,7 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
-import { error } from '$lib/utils/console/print.ts';
 import type { WatchedMoviesResponse, WatchedShowsResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
@@ -36,13 +35,6 @@ const currentUserWatchedMoviesRequest = ({ fetch }: ApiParams) =>
     .watched
     .movies({
       params: { id: 'me' },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user movie history', response);
-        throw new Error('Error fetching user movie history.');
-      }
-      return response.body;
     });
 
 export const WatchedEpisodeSchema = MediaPlayHistorySchema.extend({
@@ -87,13 +79,6 @@ const currentUserWatchedShowsRequest = ({ fetch }: ApiParams) =>
     .watched
     .shows({
       params: { id: 'me' },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user show history', response);
-        throw new Error('Error fetching user show history.');
-      }
-      return response.body;
     });
 
 const UserHistorySchema = z.object({
@@ -115,9 +100,17 @@ export const currentUserHistoryQuery = defineQuery({
     InvalidateAction.MarkAsWatched('episode'),
   ],
   dependencies: [],
-  mapper: ([movies, shows]) => ({
-    movies: toMap(movies, mapWatchedMovieResponse, (entry) => entry.id),
-    shows: toMap(shows, mapWatchedShowResponse, (entry) => entry.id),
+  mapper: ([moviesResponse, showsResponse]) => ({
+    movies: toMap(
+      moviesResponse.body,
+      mapWatchedMovieResponse,
+      (entry) => entry.id,
+    ),
+    shows: toMap(
+      showsResponse.body,
+      mapWatchedShowResponse,
+      (entry) => entry.id,
+    ),
   }),
   schema: UserHistorySchema,
   ttl: Infinity,

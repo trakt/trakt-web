@@ -41,13 +41,6 @@ const movieTrendingRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch trending movies');
-      }
-
-      return response;
     });
 
 export const movieTrendingQuery = defineQuery({

@@ -26,18 +26,6 @@ const recommendedMoviesRequest = (
         ignore_watched: true,
         limit,
       },
-    })
-    .then(({ status, body }) => {
-      if (status !== 200) {
-        throw new Error(
-          [
-            'The digital projector sputters and dies.',
-            'The recommended movies remain trapped in the celluloid void.',
-          ].join(' '),
-        );
-      }
-
-      return body;
     });
 
 export const recommendedMoviesQuery = defineQuery({
@@ -48,7 +36,7 @@ export const recommendedMoviesQuery = defineQuery({
   ],
   dependencies: (params) => [params.limit],
   request: recommendedMoviesRequest,
-  mapper: (body) => body.map(mapToMovieEntry),
+  mapper: (response) => response.body.map(mapToMovieEntry),
   schema: RecommendedMovieSchema.array(),
   ttl: time.hours(24),
 });

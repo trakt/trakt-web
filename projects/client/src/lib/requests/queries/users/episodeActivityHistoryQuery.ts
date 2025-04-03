@@ -43,7 +43,7 @@ function episodeActivityHistoryRequest(
     page,
   };
 
-  const request = id
+  return id
     ? api({ fetch }).users.history.episode({
       params: { id: slug, item_id: `${id}` },
       query: queryParams,
@@ -52,14 +52,6 @@ function episodeActivityHistoryRequest(
       params: { id: slug },
       query: queryParams,
     });
-
-  return request.then((response) => {
-    if (response.status !== 200) {
-      throw new Error('Failed to fetch episodes history');
-    }
-
-    return response;
-  });
 }
 
 export function mapToEpisodeActivityHistory(

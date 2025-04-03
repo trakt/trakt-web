@@ -24,13 +24,6 @@ const movieCommentsRequest = (
         extended: 'images',
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movie comments');
-      }
-
-      return response.body;
     });
 
 export const movieCommentsQuery = defineQuery({
@@ -38,7 +31,7 @@ export const movieCommentsQuery = defineQuery({
   invalidations: [InvalidateAction.Like],
   dependencies: (params) => [params.slug, params.limit],
   request: movieCommentsRequest,
-  mapper: (data) => data.map(mapToMediaComment),
+  mapper: (response) => response.body.map(mapToMediaComment),
   schema: MediaCommentSchema.array(),
   ttl: time.minutes(30),
 });

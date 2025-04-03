@@ -30,13 +30,6 @@ const upNextNitroRequest = (params: UpNextParams) => {
         page,
         limit,
       },
-    })
-    .then(({ status, body, headers }) => {
-      if (status !== 200) {
-        throw new Error('Failed to fetch up next');
-      }
-
-      return { body, headers };
     });
 };
 

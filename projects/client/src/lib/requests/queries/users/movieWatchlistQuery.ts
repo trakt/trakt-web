@@ -37,13 +37,6 @@ const watchlistRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movies watchlist');
-      }
-
-      return response;
     });
 
 export const movieWatchlistQuery = defineQuery({

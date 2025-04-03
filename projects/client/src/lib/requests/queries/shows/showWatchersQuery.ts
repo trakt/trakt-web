@@ -15,20 +15,13 @@ export function showWatchersRequest(
       params: {
         id: slug,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch active show watchers');
-      }
-
-      return response.body;
     });
 }
 
 export const showWatchersQuery = defineQuery({
   key: 'showWatchers',
   request: showWatchersRequest,
-  mapper: (users) => users.map(mapToUserProfile),
+  mapper: (response) => response.body.map(mapToUserProfile),
   dependencies: (params) => [params.slug],
   invalidations: [],
   schema: UserProfileSchema.array(),

@@ -33,13 +33,6 @@ const userCommentRepliesRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch comment replies');
-      }
-
-      return response;
     });
 
 export const commentRepliesQuery = defineQuery({

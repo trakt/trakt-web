@@ -18,13 +18,6 @@ const userProfileRequest = (
       query: {
         extended: 'full,vip',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch user profile');
-      }
-
-      return response.body;
     });
 
 export const userProfileQuery = defineQuery({
@@ -32,7 +25,7 @@ export const userProfileQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: userProfileRequest,
-  mapper: mapToUserProfile,
+  mapper: (response) => mapToUserProfile(response.body),
   schema: UserProfileSchema,
   ttl: time.minutes(30),
 });

@@ -15,20 +15,13 @@ export function movieWatchersRequest(
       params: {
         id: slug,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch active movie watchers');
-      }
-
-      return response.body;
     });
 }
 
 export const movieWatchersQuery = defineQuery({
   key: 'movieWatchers',
   request: movieWatchersRequest,
-  mapper: (users) => users.map(mapToUserProfile),
+  mapper: (response) => response.body.map(mapToUserProfile),
   dependencies: (params) => [params.slug],
   invalidations: [],
   schema: UserProfileSchema.array(),

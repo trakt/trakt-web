@@ -20,20 +20,13 @@ export function episodeWatchersRequest(
         season,
         episode,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch active episode watchers');
-      }
-
-      return response.body;
     });
 }
 
 export const episodeWatchersQuery = defineQuery({
   key: 'episodeWatchers',
   request: episodeWatchersRequest,
-  mapper: (users) => users.map(mapToUserProfile),
+  mapper: (response) => response.body.map(mapToUserProfile),
   dependencies: (params) => [params.slug, params.season, params.episode],
   invalidations: [],
   schema: UserProfileSchema.array(),

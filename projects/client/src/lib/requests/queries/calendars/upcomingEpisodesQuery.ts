@@ -33,12 +33,6 @@ const upcomingEpisodesRequest = (
         start_date: startDate,
         days,
       },
-    })
-    .then(({ status, body }) => {
-      if (status !== 200) {
-        throw new Error('Failed to fetch calendar');
-      }
-      return body;
     });
 
 export const upcomingEpisodesQuery = defineQuery({
@@ -47,7 +41,7 @@ export const upcomingEpisodesQuery = defineQuery({
   dependencies: (params) => [params.startDate, params.days],
   request: upcomingEpisodesRequest,
   mapper: (response) => {
-    const episodes = response.map((item) => ({
+    const episodes = response.body.map((item) => ({
       show: mapToShowEntry(item.show),
       ...mapToEpisodeEntry(item.episode),
     }));

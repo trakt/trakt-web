@@ -48,13 +48,6 @@ const upNextRequest = (params: UpNextParams) => {
         include_stats: true,
         ...sortQuery,
       },
-    })
-    .then(({ status, body, headers }) => {
-      if (status !== 200) {
-        throw new Error('Failed to fetch up next');
-      }
-
-      return { body, headers };
     });
 };
 

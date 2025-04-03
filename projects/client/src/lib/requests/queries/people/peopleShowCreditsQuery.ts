@@ -18,13 +18,6 @@ const peopleShowCreditsRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch person show credits');
-      }
-
-      return response.body;
     });
 
 export const peopleShowCreditsQuery = defineQuery({
@@ -32,7 +25,7 @@ export const peopleShowCreditsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleShowCreditsRequest,
-  mapper: mapToMediaCredits,
+  mapper: (response) => mapToMediaCredits(response.body),
   schema: MediaCreditsSchema,
   ttl: time.days(7),
 });

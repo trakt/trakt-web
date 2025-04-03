@@ -19,13 +19,6 @@ const streamMovieRequest = (
         id: slug,
         country,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movie streaming services');
-      }
-
-      return response.body;
     });
 
 export const streamMovieQuery = defineQuery({
@@ -34,7 +27,7 @@ export const streamMovieQuery = defineQuery({
   dependencies: (params) => [params.slug, params.country],
   request: streamMovieRequest,
   mapper: (response, params) =>
-    mapToStreamingServices(response, params.country),
+    mapToStreamingServices(response.body, params.country),
   schema: StreamingServiceOptionsSchema,
   ttl: time.days(1),
 });

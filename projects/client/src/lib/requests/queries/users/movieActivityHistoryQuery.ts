@@ -38,7 +38,7 @@ const movieActivityHistoryRequest = (
     page,
   };
 
-  const request = id
+  return id
     ? api({ fetch }).users.history.movie({
       params: { id: slug, item_id: `${id}` },
       query: queryParams,
@@ -47,14 +47,6 @@ const movieActivityHistoryRequest = (
       params: { id: slug },
       query: queryParams,
     });
-
-  return request.then((response) => {
-    if (response.status !== 200) {
-      throw new Error('Failed to fetch movies history');
-    }
-
-    return response;
-  });
 };
 
 export const mapToMovieActivityHistory = (

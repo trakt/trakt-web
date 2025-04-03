@@ -24,13 +24,6 @@ const moviePopularRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch popular movies');
-      }
-
-      return response;
     });
 
 export const moviePopularQuery = defineQuery({

@@ -45,13 +45,6 @@ const episodeIntlRequest = (
         episode,
         language,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episode intl');
-      }
-
-      return response.body;
     });
 
 export const episodeIntlQuery = defineQuery({
@@ -65,8 +58,8 @@ export const episodeIntlQuery = defineQuery({
     params.region,
   ],
   request: episodeIntlRequest,
-  mapper: (body, { language, region }) =>
-    body
+  mapper: (response, { language, region }) =>
+    response.body
       .filter((translation) =>
         translation.language === language &&
         translation.country === region

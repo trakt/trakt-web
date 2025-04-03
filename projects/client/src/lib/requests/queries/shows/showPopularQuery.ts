@@ -44,13 +44,6 @@ const showPopularRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch popular shows');
-      }
-
-      return response;
     });
 
 export const showPopularQuery = defineQuery({

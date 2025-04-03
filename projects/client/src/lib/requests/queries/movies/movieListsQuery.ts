@@ -25,13 +25,6 @@ const movieListsRequest = (
         extended: 'images',
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch movie lists');
-      }
-
-      return response.body;
     });
 
 export const movieListsQuery = defineQuery({
@@ -39,7 +32,7 @@ export const movieListsQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.limit, params.type],
   request: movieListsRequest,
-  mapper: (data) => data.map(mapToMediaListSummary),
+  mapper: (response) => response.body.map(mapToMediaListSummary),
   schema: MediaListSummarySchema.array(),
   ttl: time.minutes(30),
 });

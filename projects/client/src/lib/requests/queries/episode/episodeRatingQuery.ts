@@ -25,13 +25,6 @@ const episodeRatingRequest = (
       query: {
         extended: 'all',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch episode ratings');
-      }
-
-      return response.body;
     });
 
 export const episodeRatingQuery = defineQuery({
@@ -39,7 +32,7 @@ export const episodeRatingQuery = defineQuery({
   invalidations: [],
   dependencies: (params) => [params.slug, params.season, params.episode],
   request: episodeRatingRequest,
-  mapper: mapToMediaRating,
+  mapper: (response) => mapToMediaRating(response.body),
   schema: MediaRatingSchema,
   ttl: time.days(1),
 });

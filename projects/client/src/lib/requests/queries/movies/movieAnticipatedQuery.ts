@@ -41,13 +41,6 @@ const movieAnticipatedRequest = (
         page,
         limit,
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Failed to fetch anticipated movies');
-      }
-
-      return response;
     });
 
 export const movieAnticipatedQuery = defineQuery({
