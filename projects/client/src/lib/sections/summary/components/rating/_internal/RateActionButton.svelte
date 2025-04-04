@@ -19,22 +19,10 @@
   const style = $derived(isCurrentRating ? "flat" : "ghost");
   const variant = $derived(isCurrentRating ? "primary" : "secondary");
 
-  const colorMap: Record<
-    SimpleRating,
-    { backgroundColor: string; foregroundColor: string }
-  > = {
-    [SimpleRating.Great]: {
-      backgroundColor: "var(--red-900)",
-      foregroundColor: "var(--red-500)",
-    },
-    [SimpleRating.Good]: {
-      backgroundColor: "var(--shade-10)",
-      foregroundColor: "var(--shade-500)",
-    },
-    [SimpleRating.Bad]: {
-      backgroundColor: "var(--shade-10)",
-      foregroundColor: "var(--shade-500)",
-    },
+  const colorMap: Record<SimpleRating, "red" | "default"> = {
+    [SimpleRating.Great]: "red",
+    [SimpleRating.Good]: "default",
+    [SimpleRating.Bad]: "default",
   };
 </script>
 
@@ -42,11 +30,9 @@
   disabled={isDisabled}
   label={toTranslatedValue("rating", rating)}
   onclick={() => onAddRating(rating)}
-  color="default"
+  color={colorMap[rating]}
   {style}
   {variant}
-  --color-background-default={colorMap[rating].backgroundColor}
-  --color-foreground-default={colorMap[rating].foregroundColor}
 >
   <RateIcon {rating} />
 </ActionButton>
