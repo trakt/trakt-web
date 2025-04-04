@@ -32,6 +32,7 @@
       onclick={() => $dialog.close()}
       label={m.close_label()}
       style="ghost"
+      --color-foreground-default="var(--color-text-secondary)"
     >
       <CloseIcon />
     </ActionButton>
@@ -64,7 +65,11 @@
     max-width: 100dvw;
     max-height: var(--dialog-height);
 
-    background: rgba(19, 21, 23, 0.88);
+    background: color-mix(
+      in srgb,
+      var(--color-background) 88%,
+      transparent 12%
+    );
     backdrop-filter: blur(var(--ni-8));
 
     opacity: 0;
