@@ -40,7 +40,7 @@
   .trakt-profile-history-summary {
     height: var(--ni-104);
     border-radius: var(--ni-12);
-    color: var(--shade-10);
+    color: var(--color-text-primary);
     background-color: color-mix(in srgb, var(--purple-500), transparent 85%);
     backdrop-filter: blur(var(--ni-16));
     padding: var(--ni-24);
