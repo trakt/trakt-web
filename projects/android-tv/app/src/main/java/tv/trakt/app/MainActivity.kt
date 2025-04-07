@@ -22,12 +22,20 @@ class MainActivity : ComponentActivity() {
 
         webView.webViewClient = WebViewClient()
 
-        // FIXME: change url based on env (dev / prod)
-        // 10.0.2.2 is the alias to host machine's loopback interface
-        webView.loadUrl("http://10.0.2.2:5173/")
+        webView.loadUrl(getBaseUrl())
 
         enableWebViewBackNavigation(webView)
         setContentView(webView)
+    }
+
+    private fun getBaseUrl(): String {
+        val baseUrl = applicationContext
+            .packageManager
+            .getApplicationInfo(packageName, android.content.pm.PackageManager.GET_META_DATA)
+            .metaData
+            .getString("BASE_URL")
+
+        return baseUrl ?: throw IllegalStateException("BASE_URL not defined in manifest")
     }
 
     private fun enableWebViewBackNavigation(webView: WebView) {
