@@ -82,5 +82,6 @@
   "cucumber.glue": [
     "projects/client/e2e/world.ts",
     "projects/client/e2e/support/**/*.ts"
-  ]
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
