@@ -19,10 +19,6 @@
     }),
   );
 
-  const topLevelComments = $derived(
-    $comments.filter((comment) => comment.parentId === 0),
-  );
-
   const dialog = writable<HTMLDialogElement>();
   const drilldownSource = writable<ActiveComment | undefined>(undefined);
 
@@ -34,7 +30,7 @@
 
 <SectionList
   id={`comments-list-${media.slug}`}
-  items={topLevelComments}
+  items={$comments}
   title={m.popular_comments()}
   --height-list="var(--height-comments-list)"
 >
