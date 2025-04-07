@@ -7,4 +7,5 @@ export type TagIntl = {
   tbaLabel: () => string;
   toAnticipatedCount: (count: number) => string;
   watchCountLabel: (isShow: boolean) => string;
+  trendLabel: (delta: number) => string;
 };

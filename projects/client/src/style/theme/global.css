@@ -58,6 +58,11 @@
   --color-text-watch-count-tag: var(--shade-10);
   --color-background-watch-count-tag: var(--purple-500);
 
+  --color-text-trend-tag: var(--shade-10);
+  --color-background-trend-neutral-background-tag: var(--shade-500);
+  --color-background-trend-down-background-tag: var(--red-700);
+  --color-background-trend-up-background-tag: var(--green-700);
+
   --color-border-avatar: var(--shade-50);
   --color-border-vip-avatar: var(--red-500);
 
