@@ -356,5 +356,10 @@
   "error_page_service_title": "Trakt tjeneste utilgængelig",
   "error_page_service_message": "Forbindelsen er... fraværende. Som en glemt erindring.",
   "error_page_service_status": "Trakt tjeneste status",
-  "retry": "Prøv igen"
+  "retry": "Prøv igen",
+  "streaming_picks": "Top streamingvalg",
+  "view_all_streaming_movie_picks": "Se alle top streaming filmvalg",
+  "view_all_streaming_show_picks": "Se alle top streaming serievalg",
+  "streaming_movie_picks": "Top streaming filmvalg",
+  "streaming_show_picks": "Top streaming serievalg"
 }

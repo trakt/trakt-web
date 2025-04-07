@@ -356,5 +356,10 @@
   "error_page_service_title": "Trakt-tjenesten er utilgjengelig",
   "error_page_service_message": "Tilkoblingen er... fraværende. Som et glemt minne.",
   "error_page_service_status": "Trakt-tjenestens status",
-  "retry": "Prøv igjen"
+  "retry": "Prøv igjen",
+  "streaming_picks": "De beste strømmetipsene",
+  "view_all_streaming_movie_picks": "Se alle topp strømmefilmtips",
+  "view_all_streaming_show_picks": "Se alle topp strømmetv-serietips",
+  "streaming_movie_picks": "De beste filmtipsene for strømming",
+  "streaming_show_picks": "De beste serietipsene for strømming"
 }

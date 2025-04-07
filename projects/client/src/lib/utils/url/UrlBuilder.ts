@@ -36,6 +36,9 @@ export const UrlBuilder = {
   trending(params: PaginatableMediaPageUrl) {
     return mediaDrilldownFactory('trending')(params);
   },
+  streaming(params: PaginatableMediaPageUrl) {
+    return mediaDrilldownFactory('streaming')(params);
+  },
   recommended(params: PaginatableMediaPageUrl) {
     return mediaDrilldownFactory('recommended')(params);
   },

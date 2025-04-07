@@ -6,6 +6,7 @@
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
+  import StreamingList from "$lib/sections/lists/streaming/StreamingList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
 
@@ -28,6 +29,11 @@
     <RecommendedList
       drilldownLabel={m.view_all_recommended_movies()}
       title={m.recommendations()}
+      {type}
+    />
+    <StreamingList
+      title={m.streaming_picks()}
+      drilldownLabel={m.view_all_streaming_movie_picks()}
       {type}
     />
   </RenderFor>
