@@ -135,7 +135,7 @@
     }
 
     div.spacer {
-      height: calc($button-size + $button-padding * 2);
+      height: calc($button-size + $button-padding * 2 + var(--list-padding));
     }
   }
 </style>
