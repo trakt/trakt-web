@@ -356,5 +356,10 @@
   "error_page_service_title": "Serviciul Trakt inaccesibil",
   "error_page_service_message": "Conexiunea... lipsește. Ca o amintire uitată.",
   "error_page_service_status": "Starea serviciului Trakt",
-  "retry": "Reîncearcă"
+  "retry": "Reîncearcă",
+  "streaming_picks": "Recomandări streaming",
+  "view_all_streaming_movie_picks": "Vezi toate recomandările de filme pe streaming",
+  "view_all_streaming_show_picks": "Vezi toate recomandările de seriale pe streaming",
+  "streaming_movie_picks": "Recomandări de filme pe streaming",
+  "streaming_show_picks": "Recomandări de seriale pe streaming"
 }

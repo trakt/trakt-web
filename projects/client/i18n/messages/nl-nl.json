@@ -356,5 +356,10 @@
   "error_page_service_title": "Trakt-dienst onbereikbaar",
   "error_page_service_message": "De verbinding is... afwezig. Als een vergeten herinnering.",
   "error_page_service_status": "Trakt-dienststatus",
-  "retry": "Opnieuw proberen"
+  "retry": "Opnieuw proberen",
+  "streaming_picks": "Top streamingkeuzes",
+  "view_all_streaming_movie_picks": "Bekijk alle top streaming filmkeuzes",
+  "view_all_streaming_show_picks": "Bekijk alle top streaming seriekeuzes",
+  "streaming_movie_picks": "Top streaming filmkeuzes",
+  "streaming_show_picks": "Top streaming seriekeuzes"
 }

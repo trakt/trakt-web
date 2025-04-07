@@ -356,5 +356,10 @@
   "error_page_service_title": "Servicio Trakt inaccesible",
   "error_page_service_message": "La conexión... ausente. Como un recuerdo olvidado.",
   "error_page_service_status": "Estado del servicio Trakt",
-  "retry": "Reintentar"
+  "retry": "Reintentar",
+  "streaming_picks": "Lo mejor para streaming",
+  "view_all_streaming_movie_picks": "Ver lo mejor del cine en streaming",
+  "view_all_streaming_show_picks": "Ver lo mejor de TV en streaming",
+  "streaming_movie_picks": "Lo mejor del cine en streaming",
+  "streaming_show_picks": "Lo mejor de TV en streaming"
 }

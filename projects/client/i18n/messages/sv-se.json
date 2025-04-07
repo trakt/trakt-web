@@ -356,5 +356,10 @@
   "error_page_service_title": "Trakt-tjänsten ej tillgänglig",
   "error_page_service_message": "Anslutningen är... borta. Som ett bortglömt minne.",
   "error_page_service_status": "Trakt-tjänstens status",
-  "retry": "Försök igen"
+  "retry": "Försök igen",
+  "streaming_picks": "Toppval för streaming",
+  "view_all_streaming_movie_picks": "Se alla toppval för streaming",
+  "view_all_streaming_show_picks": "Se alla toppval för serier på streaming",
+  "streaming_movie_picks": "Toppval för filmer på streaming",
+  "streaming_show_picks": "Toppval för serier på streaming"
 }

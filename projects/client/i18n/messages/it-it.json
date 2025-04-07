@@ -356,5 +356,10 @@
   "error_page_service_title": "Servizio Trakt irraggiungibile",
   "error_page_service_message": "La connessione è... assente. Come un ricordo svanito.",
   "error_page_service_status": "Stato del servizio Trakt",
-  "retry": "Riprova"
+  "retry": "Riprova",
+  "streaming_picks": "Scelte streaming",
+  "view_all_streaming_movie_picks": "Vedi tutte le scelte streaming",
+  "view_all_streaming_show_picks": "Vedi tutte le scelte serie streaming",
+  "streaming_movie_picks": "Scelte film streaming",
+  "streaming_show_picks": "Scelte serie streaming"
 }

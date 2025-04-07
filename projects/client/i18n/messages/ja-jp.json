@@ -356,5 +356,10 @@
   "error_page_service_title": "Traktサービスに接続できません",
   "error_page_service_message": "接続が…ありません。まるで忘れられた記憶のように。",
   "error_page_service_status": "Traktサービスの状態",
-  "retry": "再試行"
+  "retry": "再試行",
+  "streaming_picks": "注目のストリーミング作品",
+  "view_all_streaming_movie_picks": "トップストリーミング作品をすべて見る",
+  "view_all_streaming_show_picks": "トップストリーミング番組をすべて見る",
+  "streaming_movie_picks": "注目のストリーミング作品",
+  "streaming_show_picks": "注目のストリーミング番組"
 }
