@@ -21,4 +21,6 @@ export const TagIntlProvider: TagIntl = {
     m.anticipated_count({ count: toHumanNumber(count, languageTag()) }),
   watchCountLabel: (isShow) =>
     isShow ? m.watched_episodes_count_label() : m.watch_count_label(),
+  trendLabel: (delta) =>
+    delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
 };
