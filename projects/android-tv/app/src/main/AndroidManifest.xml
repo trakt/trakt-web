@@ -11,15 +11,19 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- FIXME: usesCleartextTraffic only for dev env -->
     <application
         android:allowBackup="true"
         android:banner="@mipmap/ic_launcher"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true" 
+        android:usesCleartextTraffic="${IS_CLEAR_TEXT_TRAFFIC}"
         android:theme="@style/Theme.Trakt">
+
+        <meta-data
+            android:name="BASE_URL"
+            android:value="${BASE_URL}" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -31,5 +35,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
