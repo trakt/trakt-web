@@ -9,6 +9,7 @@
   import CommentFooter from "../CommentFooter.svelte";
   import CommentHeader from "../CommentHeader.svelte";
   import ShadowScroller from "../ShadowScroller.svelte";
+  import UserComment from "../UserComment.svelte";
   import CommentInput from "./CommentInput.svelte";
   import { useCommentReplies } from "./useCommentReplies";
 
@@ -44,11 +45,7 @@
         {#if $list}
           {#each $list as reply}
             <div class="trakt-comment-container">
-              <CommentHeader comment={reply} />
-              <CommentBody comment={reply} {media} />
-              <CommentFooter>
-                <LikeCommentAction {comment} />
-              </CommentFooter>
+              <UserComment comment={reply} {media} />
             </div>
           {/each}
         {/if}
