@@ -10,7 +10,7 @@ export function setScrollInfo(node: HTMLElement) {
     }
 
     const isAtTop = scrollTop === 0;
-    const isAtBottom = scrollHeight - scrollTop === clientHeight;
+    const isAtBottom = scrollHeight - scrollTop <= clientHeight;
 
     node.classList.toggle('scrolled-down', !isAtTop);
     node.classList.toggle('scrolled-up', !isAtBottom);
