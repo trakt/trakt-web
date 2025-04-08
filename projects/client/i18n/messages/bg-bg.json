@@ -361,5 +361,8 @@
   "view_all_streaming_movie_picks": "Виж всички топ предложения (филми)",
   "view_all_streaming_show_picks": "Виж всички топ предложения (сериали)",
   "streaming_movie_picks": "Топ предложения (филми)",
-  "streaming_show_picks": "Топ предложения (сериали)"
+  "streaming_show_picks": "Топ предложения (сериали)",
+  "community_voice": "Гласът на общността",
+  "the_good": "Доброто",
+  "the_bad": "Лошото"
 }

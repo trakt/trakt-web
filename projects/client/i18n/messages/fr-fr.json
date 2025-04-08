@@ -361,5 +361,8 @@
   "view_all_streaming_movie_picks": "Voir tous les meilleurs choix de films en streaming",
   "view_all_streaming_show_picks": "Voir tous les meilleurs choix de séries en streaming",
   "streaming_movie_picks": "Meilleurs films en streaming",
-  "streaming_show_picks": "Meilleures séries en streaming"
+  "streaming_show_picks": "Meilleures séries en streaming",
+  "community_voice": "La voix de la communauté",
+  "the_good": "Le bon",
+  "the_bad": "Le mauvais"
 }

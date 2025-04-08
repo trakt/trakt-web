@@ -361,5 +361,8 @@
   "view_all_streaming_movie_picks": "Se alla toppval för streaming",
   "view_all_streaming_show_picks": "Se alla toppval för serier på streaming",
   "streaming_movie_picks": "Toppval för filmer på streaming",
-  "streaming_show_picks": "Toppval för serier på streaming"
+  "streaming_show_picks": "Toppval för serier på streaming",
+  "community_voice": "Känslan i gemenskapen",
+  "the_good": "Det bra",
+  "the_bad": "Det dåliga"
 }
