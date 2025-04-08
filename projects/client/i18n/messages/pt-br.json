@@ -361,5 +361,8 @@
   "view_all_streaming_movie_picks": "Ver todas as melhores indicações de filmes no streaming",
   "view_all_streaming_show_picks": "Ver todas as melhores indicações de séries no streaming",
   "streaming_movie_picks": "Melhores filmes no streaming",
-  "streaming_show_picks": "Melhores séries no streaming"
+  "streaming_show_picks": "Melhores séries no streaming",
+  "community_voice": "Voz da Comunidade",
+  "the_good": "O bom",
+  "the_bad": "O ruim"
 }

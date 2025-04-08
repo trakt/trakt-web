@@ -8,13 +8,15 @@
   import CommentBody from "../CommentBody.svelte";
   import CommentFooter from "../CommentFooter.svelte";
   import CommentHeader from "../CommentHeader.svelte";
+  import type { Comment } from "../models/Comment";
+  import SentimentComment from "../SentimentComment.svelte";
   import ShadowScroller from "../ShadowScroller.svelte";
   import UserComment from "../UserComment.svelte";
   import CommentInput from "./CommentInput.svelte";
   import { useCommentReplies } from "./useCommentReplies";
 
   type CommentThreadCardProps = {
-    comment: MediaComment;
+    comment: Comment;
     media: MediaEntry;
     reset: () => void;
     isReplying: boolean;
@@ -31,38 +33,48 @@
   const { list } = $derived(useCommentReplies({ id: comment.id }));
 </script>
 
+{#snippet userThread(userComment: MediaComment)}
+  <CommentHeader comment={userComment} />
+
+  <ShadowScroller>
+    <div class="trakt-comment-thread">
+      <CommentBody comment={userComment} {media} />
+
+      {#if $list}
+        {#each $list as reply}
+          <div class="trakt-comment-container">
+            <UserComment comment={reply} {media} />
+          </div>
+        {/each}
+      {/if}
+    </div>
+  </ShadowScroller>
+
+  <CommentFooter>
+    <LikeCommentAction comment={userComment} />
+    <ViewRepliesAction comment={userComment} />
+    <ReplyButton
+      comment={userComment}
+      onClick={() => setReplying(userComment, !isReplying)}
+    />
+  </CommentFooter>
+
+  {#if isReplying}
+    <CommentInput comment={userComment} onCommentPost={reset} />
+  {/if}
+{/snippet}
+
+<!-- FIXME: further reduce duplication, merge with regular CommentCard -->
 <Card
   --width-card="var(--width-comment-thread-card)"
   --height-card="min(var(--height-comment-thread-card), calc(0.65 * var(--dialog-height)))"
 >
   <div class="trakt-comment-thread-container">
-    <CommentHeader {comment} />
-
-    <ShadowScroller>
-      <div class="trakt-comment-thread">
-        <CommentBody {comment} {media} />
-
-        {#if $list}
-          {#each $list as reply}
-            <div class="trakt-comment-container">
-              <UserComment comment={reply} {media} />
-            </div>
-          {/each}
-        {/if}
-      </div>
-    </ShadowScroller>
-
-    <CommentFooter>
-      <LikeCommentAction {comment} />
-      <ViewRepliesAction {comment} />
-      <ReplyButton
-        {comment}
-        onClick={() => setReplying(comment, !isReplying)}
-      />
-    </CommentFooter>
-
-    {#if isReplying}
-      <CommentInput {comment} onCommentPost={reset} />
+    {#if comment.type === "comment"}
+      {@render userThread(comment)}
+    {/if}
+    {#if comment.type === "sentiments"}
+      <SentimentComment {comment} />
     {/if}
   </div>
 </Card>

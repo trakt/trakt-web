@@ -1,13 +1,14 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
-  import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { ActiveComment } from "./models/ActiveComment";
+  import type { Comment } from "./models/Comment";
+  import SentimentComment from "./SentimentComment.svelte";
   import UserComment from "./UserComment.svelte";
 
   type CommentProps = {
     media: MediaEntry;
-    comment: MediaComment;
+    comment: Comment;
     onDrilldown: (comment: ActiveComment) => void;
   };
 
@@ -19,7 +20,12 @@
   --height-card="var(--height-comment-card)"
 >
   <div class="trakt-comment-container">
-    <UserComment {comment} {media} {onDrilldown} />
+    {#if comment.type === "comment"}
+      <UserComment {comment} {media} {onDrilldown} />
+    {/if}
+    {#if comment.type === "sentiments"}
+      <SentimentComment {comment} />
+    {/if}
   </div>
 </Card>
 

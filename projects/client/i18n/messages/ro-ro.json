@@ -361,5 +361,8 @@
   "view_all_streaming_movie_picks": "Vezi toate recomandările de filme pe streaming",
   "view_all_streaming_show_picks": "Vezi toate recomandările de seriale pe streaming",
   "streaming_movie_picks": "Recomandări de filme pe streaming",
-  "streaming_show_picks": "Recomandări de seriale pe streaming"
+  "streaming_show_picks": "Recomandări de seriale pe streaming",
+  "community_voice": "Vocea comunității",
+  "the_good": "Aspecte pozitive",
+  "the_bad": "Aspecte negative"
 }

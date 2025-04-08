@@ -2,16 +2,18 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
 import { episodeCommentsQuery } from '$lib/requests/queries/episode/episodeCommentsQuery.ts';
 import { movieCommentsQuery } from '$lib/requests/queries/movies/movieCommentsQuery.ts';
+import { movieSentimentsQuery } from '$lib/requests/queries/movies/movieSentimentsQuery.ts';
 import { showCommentsQuery } from '$lib/requests/queries/shows/showCommentsQuery.ts';
+import { showSentimentsQuery } from '$lib/requests/queries/shows/showSentimentsQuery.ts';
 import { useStableArray } from '$lib/sections/lists/stores/useStableArray.ts';
 import type {
   EpisodeCommentProps,
   MediaCommentProps,
 } from '$lib/sections/summary/components/comments/CommentsProps.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { onMount } from 'svelte';
-import { derived } from 'svelte/store';
+import { derived, readable } from 'svelte/store';
+import { mergeComments } from './mergeComments.ts';
 
 const COMMENT_LIMIT = 10;
 
@@ -20,7 +22,7 @@ type UseCommentsProps = {
   limit?: number | 'all';
 } & (MediaCommentProps | EpisodeCommentProps);
 
-function typeToQuery(props: UseCommentsProps) {
+function typeToCommentsQuery(props: UseCommentsProps) {
   const commonProps = {
     slug: props.slug,
     limit: props.limit ?? COMMENT_LIMIT,
@@ -46,21 +48,45 @@ function typeToQuery(props: UseCommentsProps) {
   }
 }
 
+function typeToSentimentsQuery(props: UseCommentsProps) {
+  const { slug } = props;
+
+  switch (props.type) {
+    case 'movie':
+      return movieSentimentsQuery({ slug });
+    // FIXME use episode specific sentiments when API is fixed
+    case 'episode':
+    case 'show':
+      return showSentimentsQuery({ slug });
+  }
+}
+
 export function useComments(props: UseCommentsProps) {
-  const query = useQuery(typeToQuery(props));
+  const comments = useQuery(typeToCommentsQuery(props));
+  const sentiments = props.type === 'episode'
+    ? readable({ data: undefined, isPending: false })
+    : useQuery(typeToSentimentsQuery(props));
+
+  const queries = [
+    comments,
+    sentiments,
+  ];
 
   const isLoading = derived(
-    query,
-    toLoadingState,
+    queries,
+    ($queries) => $queries.some((query) => query.isPending),
   );
 
-  const unstable = derived(query, ($query) => $query.data ?? []);
+  const unstable = derived(comments, ($comments) => $comments.data ?? []);
   const { list, set } = useStableArray<MediaComment>((l, r) => l.id === r.id);
 
   onMount(() => unstable.subscribe(set));
 
   return {
     isLoading,
-    comments: list,
+    comments: derived(
+      [list, sentiments],
+      ([$list, $sentiments]) => mergeComments($list, $sentiments.data),
+    ),
   };
 }
