@@ -36,7 +36,6 @@ const movieTrendingRequest = (
       query: {
         extended: 'full,images',
         ignore_collected: true,
-        ignore_watchlisted: true,
         ignore_watched: true,
         page,
         limit,
