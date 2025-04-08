@@ -1,15 +1,9 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import LikeCommentAction from "./comment-actions/LikeCommentAction.svelte";
-  import ReplyButton from "./comment-actions/ReplyButton.svelte";
-  import ViewRepliesAction from "./comment-actions/ViewRepliesAction.svelte";
-  import CommentBody from "./CommentBody.svelte";
-  import CommentFooter from "./CommentFooter.svelte";
-  import CommentHeader from "./CommentHeader.svelte";
   import type { ActiveComment } from "./models/ActiveComment";
+  import UserComment from "./UserComment.svelte";
 
   type CommentProps = {
     media: MediaEntry;
@@ -25,15 +19,7 @@
   --height-card="var(--height-comment-card)"
 >
   <div class="trakt-comment-container">
-    <CommentHeader {comment} />
-    <CommentBody {comment} {media} />
-    <CommentFooter>
-      <LikeCommentAction {comment} />
-      <ViewRepliesAction {comment} {onDrilldown} />
-      <RenderFor audience="authenticated">
-        <ReplyButton {comment} onClick={onDrilldown} />
-      </RenderFor>
-    </CommentFooter>
+    <UserComment {comment} {media} {onDrilldown} />
   </div>
 </Card>
 
