@@ -364,5 +364,13 @@
   "streaming_show_picks": "Top streaming serievalg",
   "community_voice": "Fællesskabets stemme",
   "the_good": "Det gode",
-  "the_bad": "Det dårlige"
+  "the_bad": "Det dårlige",
+  "add_to_list": "Tilføj til liste",
+  "listed": "Tilføjet",
+  "add_remove_from_lists": "Tilføj eller fjern {title} fra lister",
+  "add_to_personal_list": "Tilføj til {list}",
+  "add_to_personal_list_label": "Tilføj {title} til {list}",
+  "remove_from_personal_list": "Fjern fra {list}",
+  "remove_from_personal_list_label": "Fjern {title} fra {list}",
+  "remove_from_personal_list_warning": "Er du sikker på, at du vil fjerne {title} fra {list}?"
 }

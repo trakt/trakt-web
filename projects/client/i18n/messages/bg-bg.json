@@ -364,5 +364,13 @@
   "streaming_show_picks": "Топ предложения (сериали)",
   "community_voice": "Гласът на общността",
   "the_good": "Доброто",
-  "the_bad": "Лошото"
+  "the_bad": "Лошото",
+  "add_to_list": "Добави в списък",
+  "listed": "В списъка",
+  "add_remove_from_lists": "Добави или премахни {title} от списъци",
+  "add_to_personal_list": "Добави в {list}",
+  "add_to_personal_list_label": "Добави {title} в {list}",
+  "remove_from_personal_list": "Премахни от {list}",
+  "remove_from_personal_list_label": "Премахни {title} от {list}",
+  "remove_from_personal_list_warning": "Сигурни ли сте, че искате да премахнете {title} от {list}?"
 }

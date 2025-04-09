@@ -364,5 +364,13 @@
   "streaming_show_picks": "Toppval för serier på streaming",
   "community_voice": "Känslan i gemenskapen",
   "the_good": "Det bra",
-  "the_bad": "Det dåliga"
+  "the_bad": "Det dåliga",
+  "add_to_list": "Lägg till i lista",
+  "listed": "Listad",
+  "add_remove_from_lists": "Lägg till eller ta bort {title} från listor",
+  "add_to_personal_list": "Lägg till i {list}",
+  "add_to_personal_list_label": "Lägg till {title} i {list}",
+  "remove_from_personal_list": "Ta bort från {list}",
+  "remove_from_personal_list_label": "Ta bort {title} från {list}",
+  "remove_from_personal_list_warning": "Är du säker på att du vill ta bort {title} från {list}?"
 }

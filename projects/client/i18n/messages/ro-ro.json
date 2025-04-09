@@ -364,5 +364,13 @@
   "streaming_show_picks": "Recomandări de seriale pe streaming",
   "community_voice": "Vocea comunității",
   "the_good": "Aspecte pozitive",
-  "the_bad": "Aspecte negative"
+  "the_bad": "Aspecte negative",
+  "add_to_list": "Adaugă în listă",
+  "listed": "Listat",
+  "add_remove_from_lists": "Adaugă sau elimină {title} din liste",
+  "add_to_personal_list": "Adaugă la {list}",
+  "add_to_personal_list_label": "Adaugă {title} la {list}",
+  "remove_from_personal_list": "Elimină din {list}",
+  "remove_from_personal_list_label": "Elimină {title} din {list}",
+  "remove_from_personal_list_warning": "Sigur vrei să elimini {title} din {list}?"
 }

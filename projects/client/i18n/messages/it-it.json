@@ -364,5 +364,13 @@
   "streaming_show_picks": "Scelte serie streaming",
   "community_voice": "Voce della Community",
   "the_good": "Il bello",
-  "the_bad": "Il brutto"
+  "the_bad": "Il brutto",
+  "add_to_list": "Aggiungi a lista",
+  "listed": "In lista",
+  "add_remove_from_lists": "Aggiungi o rimuovi {title} dalle liste",
+  "add_to_personal_list": "Aggiungi a {list}",
+  "add_to_personal_list_label": "Aggiungi {title} a {list}",
+  "remove_from_personal_list": "Rimuovi da {list}",
+  "remove_from_personal_list_label": "Rimuovi {title} da {list}",
+  "remove_from_personal_list_warning": "Sei sicuro di voler rimuovere {title} da {list}?"
 }
