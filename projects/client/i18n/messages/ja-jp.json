@@ -364,5 +364,13 @@
   "streaming_show_picks": "注目のストリーミング番組",
   "community_voice": "コミュニティの声",
   "the_good": "良い点",
-  "the_bad": "悪い点"
+  "the_bad": "悪い点",
+  "add_to_list": "リストに追加",
+  "listed": "登録済み",
+  "add_remove_from_lists": "{title} をリストに追加または削除",
+  "add_to_personal_list": "{list} に追加",
+  "add_to_personal_list_label": "{title} を {list} に追加",
+  "remove_from_personal_list": "{list} から削除",
+  "remove_from_personal_list_label": "{title} を {list} から削除",
+  "remove_from_personal_list_warning": "{title} を {list} から削除してもよろしいですか？"
 }

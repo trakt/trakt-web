@@ -39,7 +39,8 @@
     gap: var(--gap-xs);
 
     @include for-tablet-sm {
-      :global(.trakt-button) {
+      :global(.trakt-button),
+      :global(.trakt-dropdown-wrapper) {
         flex-basis: calc(50% - var(--gap-xs) / 2);
       }
     }

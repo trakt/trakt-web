@@ -364,5 +364,13 @@
   "streaming_show_picks": "Recomendaciones de series en streaming",
   "community_voice": "Voz de la comunidad",
   "the_good": "Lo bueno",
-  "the_bad": "Lo malo"
+  "the_bad": "Lo malo",
+  "add_to_list": "Añadir a la lista",
+  "listed": "En lista",
+  "add_remove_from_lists": "Añadir o quitar {title} de las listas",
+  "add_to_personal_list": "Añadir a {list}",
+  "add_to_personal_list_label": "Añadir {title} a {list}",
+  "remove_from_personal_list": "Quitar de {list}",
+  "remove_from_personal_list_label": "Quitar {title} de {list}",
+  "remove_from_personal_list_warning": "¿Seguro que quieres quitar {title} de {list}?"
 }

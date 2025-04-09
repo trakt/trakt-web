@@ -364,5 +364,13 @@
   "streaming_show_picks": "Top streaming show picks",
   "community_voice": "Community Voice",
   "the_good": "Das Gute",
-  "the_bad": "Das Schlechte"
+  "the_bad": "Das Schlechte",
+  "add_to_list": "Zur Liste",
+  "listed": "Gelistet",
+  "add_remove_from_lists": "{title} zu Listen hinzufügen oder entfernen",
+  "add_to_personal_list": "Zu {list} hinzufügen",
+  "add_to_personal_list_label": "{title} zu {list} hinzufügen",
+  "remove_from_personal_list": "Von {list} entfernen",
+  "remove_from_personal_list_label": "{title} von {list} entfernen",
+  "remove_from_personal_list_warning": "Möchtest du {title} wirklich von {list} entfernen?"
 }

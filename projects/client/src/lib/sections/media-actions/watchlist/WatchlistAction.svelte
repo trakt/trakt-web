@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
 
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
+  import { onMount } from "svelte";
   import { attachWarning } from "../_internal/attachWarning";
   import { useWatchlist } from "./useWatchlist";
   import type { WatchlistActionProps } from "./WatchListActionProps";
@@ -10,6 +11,7 @@
     style = "action",
     size = "normal",
     title,
+    isUpdating,
     ...target
   }: WatchlistActionProps = $props();
 
@@ -19,6 +21,20 @@
     isWatchlisted,
     removeFromWatchlist,
   } = $derived(useWatchlist(target));
+
+  onMount(() => {
+    if (!isUpdating) {
+      return;
+    }
+
+    const unsubscribe = isWatchlistUpdating.subscribe((value) => {
+      isUpdating.set(value);
+    });
+
+    return {
+      destroy: unsubscribe,
+    };
+  });
 
   const onRemoveHandler = $derived(
     attachWarning(

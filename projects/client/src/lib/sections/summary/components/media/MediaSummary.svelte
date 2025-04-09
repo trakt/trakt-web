@@ -20,6 +20,9 @@
   import type { Snippet } from "svelte";
   import MediaDetails from "../details/MediaDetails.svelte";
   import MediaStreamingServices from "../details/MediaStreamingServices.svelte";
+  import ListDropdown from "../list-dropdown/ListDropdown.svelte";
+  import type { ListDropdownProps } from "../list-dropdown/ListDropdownProps";
+  import { useAllPersonalLists } from "../list-dropdown/useAllPersonalLists";
   import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
@@ -54,27 +57,35 @@
   const title = $derived(intl.title ?? media.title);
   const { watchCount } = useWatchCount({ media, type });
 
-  const watchlistProps = $derived<WatchlistActionProps>({
+  const commonProps = $derived({
     style: "normal" as const,
     title,
     type,
     media,
   });
 
+  const { lists } = useAllPersonalLists();
+
+  const watchlistProps = $derived<WatchlistActionProps>(commonProps);
+  const listProps = $derived<ListDropdownProps>(commonProps);
   const markAsWatchedProps = $derived<MarkAsWatchedActionProps>({
-    style: "normal" as const,
-    title,
-    type,
-    media,
+    ...commonProps,
     allowRewatch: $watchCount > 0,
   });
 </script>
 
 {#snippet mediaActions(device: "mobile" | "other" = "other")}
-  <WatchlistAction
-    {...watchlistProps}
-    style={device === "mobile" ? "action" : "normal"}
-  />
+  {#if $lists.length === 0}
+    <WatchlistAction
+      {...watchlistProps}
+      style={device === "mobile" ? "action" : "normal"}
+    />
+  {:else}
+    <ListDropdown
+      {...listProps}
+      style={device === "mobile" ? "action" : "normal"}
+    />
+  {/if}
   <MarkAsWatchedAction
     {...markAsWatchedProps}
     size={device === "mobile" ? "small" : "normal"}

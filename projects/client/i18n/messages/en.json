@@ -364,5 +364,13 @@
   "streaming_show_picks": "Top streaming show picks",
   "community_voice": "Community Voice",
   "the_good": "The good",
-  "the_bad": "The bad"
+  "the_bad": "The bad",
+  "add_to_list": "Add to list",
+  "listed": "Listed",
+  "add_remove_from_lists": "Add or remove {title} from lists",
+  "add_to_personal_list": "Add to {list}",
+  "add_to_personal_list_label": "Add {title} to {list}",
+  "remove_from_personal_list": "Remove from {list}",
+  "remove_from_personal_list_label": "Remove {title} from {list}",
+  "remove_from_personal_list_warning": "Are you sure you want to remove {title} from {list}?"
 }

@@ -364,5 +364,13 @@
   "streaming_show_picks": "Найкращі стрімінгові добірки серіалів",
   "community_voice": "Голос спільноти",
   "the_good": "Плюси",
-  "the_bad": "Мінуси"
+  "the_bad": "Мінуси",
+  "add_to_list": "Додати до списку",
+  "listed": "В списку",
+  "add_remove_from_lists": "Додати або видалити {title} зі списків",
+  "add_to_personal_list": "Додати до {list}",
+  "add_to_personal_list_label": "Додати {title} до {list}",
+  "remove_from_personal_list": "Видалити з {list}",
+  "remove_from_personal_list_label": "Видалити {title} з {list}",
+  "remove_from_personal_list_warning": "Ви впевнені, що хочете видалити {title} з {list}?"
 }
