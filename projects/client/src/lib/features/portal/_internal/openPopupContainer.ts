@@ -7,8 +7,6 @@ export function openPopupContainer(node: HTMLElement, targetNode: HTMLElement) {
     const targetRect = targetNode.getBoundingClientRect();
 
     requestAnimationFrame(() => {
-      targetNode.setAttribute('data-popup-direction', 'right');
-
       bodyPortal(node, targetRect);
       alignPopupContainer({ popupContainer: node, targetNode, targetRect });
     });

@@ -53,9 +53,14 @@ export function usePopupHelpers() {
     targetClone.update(clearElement);
 
     const clone = target.cloneNode(true) as HTMLElement;
+    const targetRect = target.getBoundingClientRect();
+
+    clone.style.width = `${targetRect.width}px`;
+    clone.style.height = `${targetRect.height}px`;
+    clone.style.boxSizing = 'border-box';
+
     clone.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Opened);
 
-    const targetRect = target.getBoundingClientRect();
     bodyPortal(clone, targetRect);
 
     /*
