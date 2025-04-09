@@ -95,13 +95,26 @@
     }
   }
 
+  @mixin transform-position($list-padding) {
+    --negative-offset: calc(-1 * #{$list-padding});
+
+    transform: translateY(var(--negative-offset));
+
+    &:global([data-popup-direction="left"]) {
+      transform: translateY(var(--negative-offset)) translateX($list-padding);
+    }
+
+    &:global([data-popup-direction="right"]) {
+      transform: translateY(var(--negative-offset))
+        translateX(var(--negative-offset));
+    }
+  }
+
   .trakt-list {
     --list-padding: var(--ni-12);
+    @include transform-position(var(--list-padding));
 
-    transform: translateY(calc(-1 * var(--list-padding)))
-      translateX(var(--list-padding));
-
-    min-width: var(--button-width);
+    width: var(--button-width);
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
@@ -115,6 +128,9 @@
       all: unset;
 
       display: grid;
+      grid-template-columns: 100%;
+
+      gap: var(--gap-xxs);
       max-height: var(--ni-220);
       overflow-y: auto;
 
@@ -134,9 +150,7 @@
     &[data-size="small"] {
       // TODO change back to transform scale when scaling is fixed
       --small-padding: var(--ni-10);
-
-      transform: translateY(calc(-1 * var(--small-padding)))
-        translateX(var(--small-padding));
+      @include transform-position(var(--small-padding));
 
       padding: var(--small-padding);
 
@@ -151,7 +165,7 @@
       }
 
       div.spacer {
-        height: calc(var(--ni-24) + var(--small-padding) * 2);
+        height: calc(var(--ni-32) + var(--small-padding) * 2);
       }
     }
   }

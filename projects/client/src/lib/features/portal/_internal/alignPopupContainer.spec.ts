@@ -36,7 +36,7 @@ describe('alignPopupContainer', () => {
     alignPopupContainer({ popupContainer, targetNode, targetRect });
 
     expect(popupContainer.style.left).toEqual('3px');
-    expect(targetNode).not.toHaveAttribute('data-popup-direction');
+    expect(targetNode).toHaveAttribute('data-popup-direction', 'right');
   });
 
   it('should align it left of the target if there is space', () => {

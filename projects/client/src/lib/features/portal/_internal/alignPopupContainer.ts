@@ -1,3 +1,6 @@
+import { POPUP_DIRECTION_ATTRIBUTE } from '$lib/features/portal/_internal/constants.ts';
+import { PopupDirection } from '$lib/features/portal/_internal/models/PopupDirection.ts';
+
 type AlignPopupContainerProps = {
   popupContainer: HTMLElement;
   targetNode: HTMLElement;
@@ -8,19 +11,26 @@ type AlignPopupContainerProps = {
 export function alignPopupContainer(
   { popupContainer, targetNode, targetRect }: AlignPopupContainerProps,
 ) {
+  const setDirection = (direction: PopupDirection) => {
+    targetNode.setAttribute(POPUP_DIRECTION_ATTRIBUTE, direction);
+    popupContainer.setAttribute(POPUP_DIRECTION_ATTRIBUTE, direction);
+  };
+
   const popupRect = popupContainer.getBoundingClientRect();
+
+  setDirection(PopupDirection.Right);
 
   const alignedLeft = targetRect.right - popupRect.width;
   if (alignedLeft > 0) {
-    targetNode.setAttribute('data-popup-direction', 'left');
+    setDirection(PopupDirection.Left);
     popupContainer.style.left = `${alignedLeft}px`;
     return;
   }
 
-  if (popupRect.right > globalThis.window.outerWidth) {
-    const unalignedLeft = globalThis.window.outerWidth - popupRect.width;
+  if (popupRect.right > globalThis.window.innerWidth) {
+    const unalignedLeft = globalThis.window.innerWidth - popupRect.width;
 
-    targetNode.setAttribute('data-popup-direction', 'unaligned');
+    setDirection(PopupDirection.Unaligned);
     popupContainer.style.left =
       `calc(${unalignedLeft}px - var(--layout-distance-side))`;
   }
