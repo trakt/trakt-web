@@ -37,4 +37,10 @@ export const ExtendedUserMappedMock: UserSettings = {
   },
   'genres': [],
   'permissions': ['comment', 'like', 'follow'],
+  'limits': {
+    'lists': {
+      'limit': 100,
+      'itemLimit': 1000,
+    },
+  },
 };
