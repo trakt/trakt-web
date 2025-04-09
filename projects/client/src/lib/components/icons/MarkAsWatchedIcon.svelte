@@ -74,6 +74,8 @@
   }
 
   @include for-mouse {
+    :global(li):focus,
+    :global(li):hover,
     :global(button):focus,
     :global(button):hover {
       .icon-state-idle {

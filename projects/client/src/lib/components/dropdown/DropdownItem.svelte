@@ -31,6 +31,8 @@
   const href = $derived((props as DropdownItemAnchorProps).href);
   const noscroll = $derived((props as DropdownItemAnchorProps).noscroll);
   const target = $derived((props as DropdownItemAnchorProps).target);
+
+  // FIXME: use button when not href & update selectors in applicable icons
 </script>
 
 {#snippet text()}
