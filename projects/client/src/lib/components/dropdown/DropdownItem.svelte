@@ -9,15 +9,16 @@
     tabindex?: number;
     icon?: Snippet;
     style?: "ghost" | "flat";
+    variant?: "primary" | "secondary";
   } & ChildrenProps &
     HTMLElementProps;
 
   type DropdownItemAnchorProps = DropdownItemProps & HTMLAnchorProps;
 
-  // FIXME: add support for variants
   const {
     color = "purple",
     style = "ghost",
+    variant = "primary",
     children,
     icon,
     ...props
@@ -43,6 +44,7 @@
   tabindex={tabIndex}
   data-color={color}
   data-style={style}
+  data-variant={variant}
   {...props}
 >
   {#if href}
@@ -114,17 +116,40 @@
       text-decoration: none;
     }
 
-    @mixin color($color, $hover-bg, $active-bg, $outline-color, $bg-color) {
+    @mixin variant($color, $bg-color) {
       color: $color;
 
-      &[data-style="flat"] {
-        background: $bg-color;
+      @include for-mouse {
+        &:hover:not([disabled="true"]) {
+          background: $bg-color;
+        }
       }
 
-      @include for-mouse {
-        &:hover {
-          background: $hover-bg;
+      &[data-style="flat"] {
+        background: $color;
+        color: $bg-color;
+
+        @include for-mouse {
+          &:hover:not([disabled="true"]) {
+            background: $bg-color;
+            color: $color;
+          }
         }
+      }
+
+      &[disabled="true"] {
+        background: var(--color-foreground-button-disabled);
+        color: var(--color-surface-button-disabled);
+      }
+    }
+
+    @mixin color($color, $active-bg, $outline-color, $bg-color) {
+      &[data-variant="primary"] {
+        @include variant($color, $bg-color);
+      }
+
+      &[data-variant="secondary"] {
+        @include variant($bg-color, $color);
       }
 
       &:active {
@@ -135,17 +160,11 @@
       &:has(> :global(.trakt-link:focus-visible)) {
         outline: var(--border-thickness-xs) solid $outline-color;
       }
-
-      &[disabled="true"] {
-        background: var(--color-foreground-button-disabled);
-        color: var(--color-surface-button-disabled);
-      }
     }
 
     &[data-color="purple"] {
       @include color(
         var(--purple-800),
-        var(--purple-100),
         var(--purple-200),
         var(--purple-800),
         var(--purple-50)
@@ -155,7 +174,6 @@
     &[data-color="red"] {
       @include color(
         var(--red-600),
-        var(--red-100),
         var(--red-200),
         var(--red-600),
         var(--red-50)
@@ -165,7 +183,6 @@
     &[data-color="blue"] {
       @include color(
         var(--blue-600),
-        var(--blue-100),
         var(--blue-200),
         var(--blue-600),
         var(--blue-50)
@@ -175,7 +192,6 @@
     &[data-color="default"] {
       @include color(
         var(--shade-700),
-        var(--shade-100),
         var(--shade-200),
         var(--shade-700),
         var(--shade-50)
