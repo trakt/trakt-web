@@ -48,6 +48,12 @@ export const UserSettingsSchema = z.object({
     showOnlyFavorites: z.boolean().optional(),
   }),
   permissions: permissionSchema.array(),
+  limits: z.object({
+    lists: z.object({
+      limit: z.number(),
+      itemLimit: z.number(),
+    }),
+  }),
 });
 
 export type UserSettings = z.infer<typeof UserSettingsSchema>;
@@ -111,6 +117,12 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     permissions: Object.entries(response.permissions)
       .filter(([_, value]) => value)
       .map(([key]) => PERMISSIONS_MAP[key as keyof typeof PERMISSIONS_MAP]),
+    limits: {
+      lists: {
+        limit: response.limits?.list.count ?? 0,
+        itemLimit: response.limits?.list.item_count ?? 0,
+      },
+    },
   };
 }
 

@@ -130,4 +130,16 @@ export const ExtendedUsersResponseMock: SettingsResponse = {
       'only_favorites': true,
     },
   },
+  'limits': {
+    'list': {
+      'count': 100,
+      'item_count': 1000,
+    },
+    'favorites': {
+      'item_count': 100,
+    },
+    'watchlist': {
+      'item_count': 100,
+    },
+  },
 };
