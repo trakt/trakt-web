@@ -16,6 +16,7 @@ export const load: LayoutServerLoad = (
       url: buildOAuthUrl(TRAKT_CLIENT_ID, requestUrl.origin),
       isAuthorized: isAuthorized(locals),
       token: null as string | Nil,
+      expiresAt: null as number | Nil,
     },
     isBot: isBotAgent(request.headers.get('user-agent')),
   };
@@ -27,5 +28,6 @@ export const load: LayoutServerLoad = (
   }
 
   defaultResponse.auth.token = locals.auth.token.access;
+  defaultResponse.auth.expiresAt = locals.auth.expiresAt;
   return defaultResponse;
 };
