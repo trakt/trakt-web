@@ -36,7 +36,8 @@
     align-items: center;
 
     padding: 0 var(--ni-4);
-    backdrop-filter: blur(var(--ni-8)) contrast(0.6);
+    backdrop-filter: blur(var(--ni-8));
+    background: color-mix(in srgb, var(--color-background) 50%, transparent);
     border-radius: var(--border-radius-m);
     overflow: hidden;
 
