@@ -6,6 +6,7 @@ export const UserProfileSchema = z.object({
   name: UserNameSchema,
   private: z.boolean(),
   isVip: z.boolean(),
+  isDirector: z.boolean(),
   isDeleted: z.boolean(),
   slug: z.string().nullable(),
   avatar: z.object({

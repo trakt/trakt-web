@@ -13,6 +13,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': 'Kitsuragi',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'kimkitsuragi',
     'avatar': {
@@ -31,6 +32,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': 'Amandou',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'klaasje',
     'avatar': {
@@ -49,6 +51,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': '',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'cuno',
     'avatar': {
@@ -67,6 +70,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': 'Messier',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'joyce',
     'avatar': {
@@ -85,6 +89,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': '',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'measurehead',
     'avatar': {
@@ -103,6 +108,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': 'Carter',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'lilian',
     'avatar': {
@@ -121,6 +127,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': 'Hardie',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'titus',
     'avatar': {
@@ -139,6 +146,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': '',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'garte',
     'avatar': {
@@ -157,6 +165,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': 'Claire',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'evrart',
     'avatar': {
@@ -175,6 +184,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': 'Pale',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'thepale',
     'avatar': {
@@ -193,6 +203,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': '',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'lena',
     'avatar': {
@@ -211,6 +222,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
       'last': '',
     },
     'isVip': false,
+    'isDirector': false,
     'isDeleted': false,
     'slug': 'renee',
     'avatar': {

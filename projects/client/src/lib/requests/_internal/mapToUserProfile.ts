@@ -14,6 +14,7 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     name: toUserName(user.name),
     private: user.private,
     isVip: user.vip || user.vip_ep,
+    isDirector: user.director,
     isDeleted: user.deleted,
     slug: user.ids.slug,
     avatar: {
