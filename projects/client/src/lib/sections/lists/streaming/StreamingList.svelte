@@ -13,11 +13,9 @@
   };
 
   const { title, drilldownLabel, type }: TrendingListProps = $props();
-  const { current } = useUser();
+  const { user } = useUser();
 
-  const hasFavorites = $derived(
-    (current().services.favorites ?? []).length > 0,
-  );
+  const hasFavorites = $derived(($user?.services.favorites ?? []).length > 0);
 </script>
 
 {#if hasFavorites}
