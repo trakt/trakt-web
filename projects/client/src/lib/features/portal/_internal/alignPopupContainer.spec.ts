@@ -37,6 +37,7 @@ describe('alignPopupContainer', () => {
 
     expect(popupContainer.style.left).toEqual('3px');
     expect(targetNode).toHaveAttribute('data-popup-direction', 'right');
+    expect(popupContainer).toHaveAttribute('data-popup-direction', 'right');
   });
 
   it('should align it left of the target if there is space', () => {
@@ -52,6 +53,7 @@ describe('alignPopupContainer', () => {
       `${targetRect.right - popupRect.width}px`,
     );
     expect(targetNode).toHaveAttribute('data-popup-direction', 'left');
+    expect(popupContainer).toHaveAttribute('data-popup-direction', 'left');
   });
 
   it('should unalign it if there is no space', () => {
@@ -64,5 +66,6 @@ describe('alignPopupContainer', () => {
     alignPopupContainer({ popupContainer, targetNode, targetRect });
 
     expect(targetNode).toHaveAttribute('data-popup-direction', 'unaligned');
+    expect(popupContainer).toHaveAttribute('data-popup-direction', 'unaligned');
   });
 });

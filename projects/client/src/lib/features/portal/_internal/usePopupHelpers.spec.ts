@@ -13,8 +13,8 @@ describe('usePopupHelpers', () => {
       top: 200,
       right: 0,
       bottom: 0,
-      width: 0,
-      height: 0,
+      width: 20,
+      height: 10,
       x: 0,
       y: 0,
       toJSON: () => {},
@@ -34,6 +34,9 @@ describe('usePopupHelpers', () => {
     expect(clone).not.toBeNull();
     expect(clone?.getAttribute('data-popup-state')).toBe('opened');
     expect(clone?.style.zIndex).toBe('calc(var(--layer-menu) + 1)');
+    expect(clone?.style.width).toBe('20px');
+    expect(clone?.style.height).toBe('10px');
+    expect(clone?.style.boxSizing).toBe('border-box');
     expect(document.body.appendChild).toHaveBeenCalled();
   });
 
