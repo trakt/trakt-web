@@ -1,10 +1,13 @@
-<script>
+<script lang="ts">
   import VipIcon from "../icons/VipIcon.svelte";
+
+  const { isDirector = false }: { isDirector?: boolean } = $props();
+  const badgeLabel = isDirector ? "DIRECTOR" : "VIP";
 </script>
 
 <div class="trakt-vip-badge">
   <VipIcon />
-  <p class="small">VIP</p>
+  <p class="small">{badgeLabel}</p>
 </div>
 
 <style>

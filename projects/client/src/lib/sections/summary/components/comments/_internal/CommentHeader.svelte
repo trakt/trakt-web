@@ -33,7 +33,7 @@
       </p>
       <UserProfileLink user={comment.user} />
       {#if comment.user.isVip}
-        <VipBadge />
+        <VipBadge isDirector={comment.user.isDirector} />
       {/if}
     </div>
     <p class="small secondary meta-info">
