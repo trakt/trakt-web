@@ -10,6 +10,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'kimkitsuragi',
       'trakt': 486292,
@@ -22,6 +23,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'klaasje',
       'trakt': 248249,
@@ -34,6 +36,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'cuno',
       'trakt': 4436692,
@@ -46,6 +49,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'joyce',
       'trakt': 793369,
@@ -58,6 +62,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'measurehead',
       'trakt': 12530721,
@@ -70,6 +75,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'lilian',
       'trakt': 13407874,
@@ -82,6 +88,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'titus',
       'trakt': 11467318,
@@ -94,6 +101,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'garte',
       'trakt': 1986881,
@@ -106,6 +114,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'evrart',
       'trakt': 14194266,
@@ -118,6 +127,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'thepale',
       'trakt': 13670159,
@@ -130,6 +140,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'lena',
       'trakt': 10084587,
@@ -142,6 +153,7 @@ export const MediaWatchingResponseMock: ProfileResponse[] = [
     'vip': false,
     'deleted': false,
     'vip_ep': false,
+    'director': false,
     'ids': {
       'slug': 'renee',
       'trakt': 2419555,

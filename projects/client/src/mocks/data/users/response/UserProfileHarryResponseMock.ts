@@ -7,6 +7,7 @@ export const UserProfileHarryResponseMock: ProfileResponse = {
   'name': 'Harry Du Bois',
   'vip': true,
   'vip_ep': false,
+  'director': false,
   'ids': {
     'slug': 'harry_du_bois',
     'trakt': 41152,

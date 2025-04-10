@@ -7,6 +7,7 @@ export const ExtendedUsersResponseMock: SettingsResponse = {
     'name': 'Harry Du Bois',
     'vip': true,
     'vip_ep': true,
+    'director': false,
     'ids': {
       'slug': 'tequila_sunset',
       'trakt': 41152,
