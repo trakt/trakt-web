@@ -132,13 +132,11 @@
     }
 
     &::before {
-      --list-shadow-direction: to left;
-      left: 0;
+      left: calc(var(--list-shadow-width) / 2 * -1);
     }
 
     &::after {
-      --list-shadow-direction: to right;
-      right: 0;
+      right: calc(var(--list-shadow-width) / 2 * -1);
     }
 
     &::before,
@@ -148,31 +146,14 @@
       pointer-events: none;
 
       position: absolute;
-      top: 0;
+      top: var(--ni-neg-16);
 
-      width: var(--ni-56);
-      height: var(--height-list);
+      width: var(--list-shadow-width);
+      height: calc(var(--height-list) + var(--ni-16));
 
       opacity: 0;
 
-      background: linear-gradient(
-        var(--list-shadow-direction),
-        transparent 0%,
-        color-mix(in srgb, var(--color-background) 7%, transparent 93%) 13%,
-        color-mix(in srgb, var(--color-background) 18%, transparent 82%) 24%,
-        color-mix(in srgb, var(--color-background) 29%, transparent 71%) 34%,
-        color-mix(in srgb, var(--color-background) 43%, transparent 57%) 46%,
-        color-mix(in srgb, var(--color-background) 62%, transparent 38%) 63%,
-        color-mix(in srgb, var(--color-background) 86%, transparent 14%) 86%,
-        var(--color-background) 100%
-      );
-
-      mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 1) 0%,
-        rgba(0, 0, 0, 1) 75%,
-        rgba(255, 255, 255, 0) 100%
-      );
+      background: var(--list-shadow);
     }
   }
 
