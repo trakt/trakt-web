@@ -122,6 +122,7 @@
 
   .shadow-list {
     position: relative;
+    overflow: hidden;
 
     &.shadow-list-left-shadow::before {
       opacity: var(--left-shadow-opacity);
