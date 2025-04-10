@@ -29,6 +29,7 @@ export const UserSettingsSchema = z.object({
     url: z.string(),
   }),
   isVip: z.boolean(),
+  isDirector: z.boolean(),
   preferences: z.object({
     progress: z.object({
       sort: z.object({
@@ -89,6 +90,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
       ),
     },
     isVip: user.vip || user.vip_ep,
+    isDirector: user.director,
     preferences: {
       watch: {
         action: browsing?.watch_popup_action === 'ask'

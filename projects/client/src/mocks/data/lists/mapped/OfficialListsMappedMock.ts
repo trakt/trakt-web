@@ -22,6 +22,7 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
       'private': false,
       'isVip': false,
       'isDeleted': false,
+      'isDirector': false,
       'about': undefined,
       'location': undefined,
       'cover': undefined,
