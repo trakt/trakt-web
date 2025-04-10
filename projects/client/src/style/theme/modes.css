@@ -10,7 +10,7 @@
   --color-text-primary: var(--shade-800);
   --color-text-secondary: var(--shade-500);
 
-  --color-card-background: var(--shade-50);
+  --color-card-background: var(--shade-10);
   --card-shadow: linear-gradient(
     180deg,
     transparent 0%,
