@@ -9,6 +9,41 @@
   --color-text-secondary: var(--shade-500);
 
   --color-card-background: var(--shade-50);
+  --card-shadow: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(
+      in srgb,
+      var(--shade-50) 7%,
+      color-mix(in srgb, var(--shade-800) 7%, transparent 93%)
+    ) 13%,
+    color-mix(
+      in srgb,
+      var(--shade-50) 18%,
+      color-mix(in srgb, var(--shade-800) 18%, transparent 82%)
+    ) 24%,
+    color-mix(
+      in srgb,
+      var(--shade-50) 29%,
+      color-mix(in srgb, var(--shade-800) 29%, transparent 71%)
+    ) 34%,
+    color-mix(
+      in srgb,
+      var(--shade-50) 43%,
+      color-mix(in srgb, var(--shade-800) 43%, transparent 57%)
+    ) 46%,
+    color-mix(
+      in srgb,
+      var(--shade-50) 62%,
+      color-mix(in srgb, var(--shade-800) 62%, transparent 38%)
+    ) 63%,
+    color-mix(
+      in srgb,
+      var(--shade-50) 86%,
+      color-mix(in srgb, var(--shade-800) 86%, transparent 14%)
+    ) 86%,
+    var(--shade-50) 100%
+  );
 
   --color-surface-button-disabled: var(--shade-200);
   --color-foreground-button-disabled: var(--shade-600);
@@ -33,6 +68,17 @@
   --color-text-secondary: var(--shade-300);
 
   --color-card-background: var(--shade-920);
+  --card-shadow: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-card-background) 7%, transparent 93%) 13%,
+    color-mix(in srgb, var(--color-card-background) 18%, transparent 82%) 24%,
+    color-mix(in srgb, var(--color-card-background) 29%, transparent 71%) 34%,
+    color-mix(in srgb, var(--color-card-background) 43%, transparent 57%) 46%,
+    color-mix(in srgb, var(--color-card-background) 62%, transparent 38%) 63%,
+    color-mix(in srgb, var(--color-card-background) 86%, transparent 14%) 86%,
+    var(--color-card-background) 100%
+  );
 
   --color-surface-button-disabled: var(--shade-800);
   --color-foreground-button-disabled: var(--shade-400);

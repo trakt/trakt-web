@@ -113,22 +113,7 @@
       flex-shrink: 0;
       z-index: var(--layer-base);
 
-      background: linear-gradient(
-        180deg,
-        transparent 0%,
-        color-mix(in srgb, var(--color-card-background) 7%, transparent 93%) 13%,
-        color-mix(in srgb, var(--color-card-background) 18%, transparent 82%)
-          24%,
-        color-mix(in srgb, var(--color-card-background) 29%, transparent 71%)
-          34%,
-        color-mix(in srgb, var(--color-card-background) 43%, transparent 57%)
-          46%,
-        color-mix(in srgb, var(--color-card-background) 62%, transparent 38%)
-          63%,
-        color-mix(in srgb, var(--color-card-background) 86%, transparent 14%)
-          86%,
-        var(--color-card-background) 100%
-      );
+      background: var(--card-shadow);
     }
   }
 </style>
