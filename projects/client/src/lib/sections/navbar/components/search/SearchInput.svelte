@@ -88,8 +88,12 @@
       );
 
       .trakt-search-input {
-        background: color-mix(in srgb, var(--shade-940) 90%, transparent 10%);
-        outline: var(--border-thickness-xs) solid var(--shade-700);
+        background: color-mix(
+          in srgb,
+          var(--color-background) 75%,
+          transparent 25%
+        );
+        outline: var(--border-thickness-xs) solid var(--shade-600);
 
         @include for-mobile {
           &:not(:focus-within) {
@@ -146,8 +150,8 @@
       backdrop-filter: blur(var(--ni-8));
 
       transition: var(--transition-increment) ease-in-out;
-      transition-property: border-color, background-color, padding, width, top,
-        left, opacity;
+      transition-property:
+        border-color, background-color, padding, width, top, left, opacity;
 
       @include for-mobile {
         width: var(--search-icon-size);
