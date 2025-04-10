@@ -19,6 +19,11 @@
 </div>
 
 <style>
+  :global(.trakt-card-footer-action .trakt-action-button) {
+    box-shadow: 0px 4px 6px
+      color-mix(in srgb, var(--color-shadow) 20%, transparent);
+  }
+
   .trakt-card-footer {
     position: relative;
 
