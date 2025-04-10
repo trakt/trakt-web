@@ -16,6 +16,7 @@
   import type { MarkAsWatchedActionProps } from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedActionProps";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { WatchlistActionProps } from "$lib/sections/media-actions/watchlist/WatchListActionProps";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import type { Snippet } from "svelte";
   import MediaDetails from "../details/MediaDetails.svelte";
@@ -54,11 +55,13 @@
     crew: MediaCrew;
   } = $props();
 
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+
   const title = $derived(intl.title ?? media.title);
   const { watchCount } = useWatchCount({ media, type });
 
   const commonProps = $derived({
-    style: "normal" as const,
+    style: $isMobile ? ("action" as const) : ("normal" as const),
     title,
     type,
     media,
@@ -70,26 +73,19 @@
   const listProps = $derived<ListDropdownProps>(commonProps);
   const markAsWatchedProps = $derived<MarkAsWatchedActionProps>({
     ...commonProps,
+    style: "normal",
+    size: $isMobile ? "small" : "normal",
     allowRewatch: $watchCount > 0,
   });
 </script>
 
-{#snippet mediaActions(device: "mobile" | "other" = "other")}
+{#snippet mediaActions()}
   {#if $lists.length === 0}
-    <WatchlistAction
-      {...watchlistProps}
-      style={device === "mobile" ? "action" : "normal"}
-    />
+    <WatchlistAction {...watchlistProps} />
   {:else}
-    <ListDropdown
-      {...listProps}
-      style={device === "mobile" ? "action" : "normal"}
-    />
+    <ListDropdown {...listProps} />
   {/if}
-  <MarkAsWatchedAction
-    {...markAsWatchedProps}
-    size={device === "mobile" ? "small" : "normal"}
-  />
+  <MarkAsWatchedAction {...markAsWatchedProps} />
 {/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} {type} />
@@ -156,12 +152,8 @@
 
   <RenderFor audience="authenticated">
     <SummaryActions>
-      <RenderFor device={["tablet-sm"]} audience="authenticated">
+      <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
         {@render mediaActions()}
-      </RenderFor>
-
-      <RenderFor device={["mobile"]} audience="authenticated">
-        {@render mediaActions("mobile")}
       </RenderFor>
 
       {#snippet contextualActions()}
