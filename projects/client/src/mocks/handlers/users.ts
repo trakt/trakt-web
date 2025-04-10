@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { AllListedShowsResponseMock } from '$mocks/data/lists/response/AllListedShowsResponseMock.ts';
 import { ListedMoviesResponseMock } from '$mocks/data/lists/response/ListedMoviesResponseMock.ts';
 import { ListedShowsResponseMock } from '$mocks/data/lists/response/ListedShowsResponseMock.ts';
 import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/HereticListsMappedMock.ts';
@@ -101,8 +102,15 @@ export const users = [
     `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
       assertDefined(SiloListsMappedMock.at(0)).slug
     }/items/show*`,
-    () => {
-      return HttpResponse.json(ListedShowsResponseMock);
+    (response) => {
+      const { searchParams } = new URL(response.request.url);
+      const limit = searchParams.get('limit');
+
+      const responseMock = limit === 'all'
+        ? AllListedShowsResponseMock
+        : ListedShowsResponseMock;
+
+      return HttpResponse.json(responseMock);
     },
   ),
   http.get(
