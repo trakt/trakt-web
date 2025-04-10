@@ -4,16 +4,6 @@
    */
 
   /**
-   * Navbar
-   */
-  --color-background-navbar: color-mix(
-    in srgb,
-    var(--shade-920) 90%,
-    transparent 10%
-  );
-  --color-foreground-navbar: var(--shade-10);
-
-  /**
    * Badge
    */
   --color-background-vip-border: var(--red-500);
