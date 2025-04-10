@@ -23,7 +23,7 @@
       src={profile.avatar.url}
     />
     {#if profile.isVip}
-      <VipBadge />
+      <VipBadge isDirector={profile.isDirector} />
     {/if}
   </div>
   <div class="profile-info">
