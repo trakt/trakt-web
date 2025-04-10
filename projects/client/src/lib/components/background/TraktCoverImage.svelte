@@ -6,15 +6,20 @@
 </script>
 
 {#if $state === "ready"}
-  <div class="trakt-footer-bg">
-    <div class="trakt-footer-bg-overlay">
+  <div class="trakt-cover-image">
+    <div class="trakt-cover-image-overlay">
       <CrossOriginImage src={$cover.src} alt={`Background for footer`} />
     </div>
   </div>
 {/if}
 
 <style>
-  .trakt-footer-bg {
+  :global([data-theme="light"] .trakt-cover-image) {
+    filter: grayscale(1);
+    opacity: 0.25;
+  }
+
+  .trakt-cover-image {
     --max-image-height: var(--ni-300);
 
     width: calc(100dvw - 2 * var(--layout-distance-side));
@@ -25,7 +30,7 @@
     justify-content: center;
     align-items: flex-end;
 
-    .trakt-footer-bg-overlay {
+    .trakt-cover-image-overlay {
       display: flex;
       mask-repeat: no-repeat;
       mask-image: url("$lib/components/background/assets/text_logo.svg");

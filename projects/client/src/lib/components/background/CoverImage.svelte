@@ -18,6 +18,10 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  :global([data-theme="light"] .background-cover-image) {
+    filter: grayscale(1);
+  }
+
   .background-cover-image {
     z-index: var(--layer-background);
     position: absolute;
