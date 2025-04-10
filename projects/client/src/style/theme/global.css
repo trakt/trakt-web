@@ -2,6 +2,10 @@
   /**
    * Global variables independent of theme
    */
+
+  /**
+   * Navbar
+   */
   --color-background-navbar: color-mix(
     in srgb,
     var(--shade-920) 90%,
@@ -9,16 +13,16 @@
   );
   --color-foreground-navbar: var(--shade-10);
 
+  /**
+   * Badge
+   */
   --color-background-vip-border: var(--red-500);
   --color-background-vip-badge: var(--red-500);
   --color-foreground-vip-badge: var(--shade-10);
 
-  --color-text-time-tag: var(--shade-800);
-  --color-background-time-tag: var(--shade-10);
-
-  --color-text-duration-tag: var(--shade-800);
-  --color-background-duration-tag: var(--shade-10);
-
+  /**
+   * Tags
+   */
   --color-text-listing-tag: var(--shade-800);
   --color-background-listing-tag: var(--shade-10);
 
@@ -61,11 +65,14 @@
   --color-background-trend-down-background-tag: var(--red-700);
   --color-background-trend-up-background-tag: var(--green-700);
 
-  --color-border-avatar: var(--shade-50);
-  --color-border-vip-avatar: var(--red-500);
-
   --color-text-preview-tag: var(--shade-10);
   --color-background-preview-tag: var(--orange-600);
+
+  /**
+   * Avatar
+   */
+  --color-border-avatar: var(--shade-50);
+  --color-border-vip-avatar: var(--red-500);
 
   /**
    * Buttons

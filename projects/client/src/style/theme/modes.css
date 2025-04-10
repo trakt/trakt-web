@@ -10,6 +10,9 @@
   --color-text-primary: var(--shade-800);
   --color-text-secondary: var(--shade-500);
 
+  /*
+   * Card
+   */
   --color-card-background: var(--shade-10);
   --card-shadow: linear-gradient(
     180deg,
@@ -47,6 +50,9 @@
     var(--shade-50) 100%
   );
 
+  /*
+   * List
+   */
   --list-shadow-width: var(--ni-56);
   --list-shadow: radial-gradient(
     50% 50% at 50% 50%,
@@ -59,19 +65,40 @@
     transparent 100%
   );
 
+  /*
+   * Button
+   */
   --color-surface-button-disabled: var(--shade-200);
   --color-foreground-button-disabled: var(--shade-600);
 
+  /*
+   * Navbar
+   */
   --color-link-active: var(--purple-700);
 
+  /*
+   * Navbar
+   */
   --color-background-mobile-navbar: color-mix(
     in srgb,
     var(--shade-30) 90%,
     transparent 10%
   );
 
+  /*
+   * Tooltip
+   */
   --color-tooltip-background: var(--shade-10);
   --color-tooltip-text: var(--shade-800);
+
+  /**
+   * Tags
+   */
+  --color-text-time-tag: var(--shade-10);
+  --color-background-time-tag: var(--shade-800);
+
+  --color-text-duration-tag: var(--shade-10);
+  --color-background-duration-tag: var(--shade-800);
 }
 
 [data-theme='dark'] {
@@ -83,6 +110,9 @@
   --color-text-primary: var(--shade-10);
   --color-text-secondary: var(--shade-300);
 
+  /*
+   * Card
+   */
   --color-card-background: var(--shade-920);
   --card-shadow: linear-gradient(
     180deg,
@@ -96,6 +126,9 @@
     var(--color-card-background) 100%
   );
 
+  /*
+   * List
+   */
   --list-shadow-width: var(--ni-96);
   --list-shadow: radial-gradient(
     50% 50% at 50% 50%,
@@ -106,13 +139,34 @@
     transparent 100%
   );
 
+  /*
+   * Button
+   */
   --color-surface-button-disabled: var(--shade-800);
   --color-foreground-button-disabled: var(--shade-400);
 
+  /**
+   * Link
+   */
   --color-link-active: var(--purple-400);
 
+  /*
+   * Navbar
+   */
   --color-background-mobile-navbar: var(--color-background-navbar);
 
+  /*
+   * Tooltip
+   */
   --color-tooltip-background: var(--shade-800);
   --color-tooltip-text: var(--shade-10);
+
+  /**
+   * Tags
+   */
+  --color-text-time-tag: var(--shade-800);
+  --color-background-time-tag: var(--shade-10);
+
+  --color-text-duration-tag: var(--shade-800);
+  --color-background-duration-tag: var(--shade-10);
 }
