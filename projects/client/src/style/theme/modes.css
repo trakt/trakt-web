@@ -10,6 +10,16 @@
   --color-text-primary: var(--shade-800);
   --color-text-secondary: var(--shade-500);
 
+  /**
+   * Navbar
+   */
+  --color-background-navbar: color-mix(
+    in srgb,
+    var(--shade-200) 75%,
+    transparent 10%
+  );
+  --color-foreground-navbar: var(--color-foreground);
+
   /*
    * Card
    */
@@ -109,6 +119,16 @@
 
   --color-text-primary: var(--shade-10);
   --color-text-secondary: var(--shade-300);
+
+  /**
+   * Navbar
+   */
+  --color-background-navbar: color-mix(
+    in srgb,
+    var(--shade-920) 90%,
+    transparent 10%
+  );
+  --color-foreground-navbar: var(--shade-10);
 
   /*
    * Card
