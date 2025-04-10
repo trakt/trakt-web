@@ -27,6 +27,7 @@ export const OfficialListsResponseMock: ListResponse[] = [
       'name': null,
       'vip': false,
       'vip_ep': false,
+      'director': false,
       'ids': {
         'slug': null,
         'trakt': 0,
