@@ -2,8 +2,6 @@
   /**
    * Global variables independent of theme
    */
-  --color-shadow: #000;
-
   --color-background-navbar: color-mix(
     in srgb,
     var(--shade-920) 90%,

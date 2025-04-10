@@ -2,6 +2,8 @@
   /**
    * Theme-able variables
    */
+  --color-shadow: var(--shade-800);
+
   --color-foreground: var(--shade-920);
   --color-background: var(--shade-10);
 
@@ -15,34 +17,46 @@
     color-mix(
       in srgb,
       var(--shade-50) 7%,
-      color-mix(in srgb, var(--shade-800) 7%, transparent 93%)
+      color-mix(in srgb, var(--color-shadow) 7%, transparent 93%)
     ) 13%,
     color-mix(
       in srgb,
       var(--shade-50) 18%,
-      color-mix(in srgb, var(--shade-800) 18%, transparent 82%)
+      color-mix(in srgb, var(--color-shadow) 18%, transparent 82%)
     ) 24%,
     color-mix(
       in srgb,
       var(--shade-50) 29%,
-      color-mix(in srgb, var(--shade-800) 29%, transparent 71%)
+      color-mix(in srgb, var(--color-shadow) 29%, transparent 71%)
     ) 34%,
     color-mix(
       in srgb,
       var(--shade-50) 43%,
-      color-mix(in srgb, var(--shade-800) 43%, transparent 57%)
+      color-mix(in srgb, var(--color-shadow) 43%, transparent 57%)
     ) 46%,
     color-mix(
       in srgb,
       var(--shade-50) 62%,
-      color-mix(in srgb, var(--shade-800) 62%, transparent 38%)
+      color-mix(in srgb, var(--color-shadow) 62%, transparent 38%)
     ) 63%,
     color-mix(
       in srgb,
       var(--shade-50) 86%,
-      color-mix(in srgb, var(--shade-800) 86%, transparent 14%)
+      color-mix(in srgb, var(--color-shadow) 86%, transparent 14%)
     ) 86%,
     var(--shade-50) 100%
+  );
+
+  --list-shadow-width: var(--ni-56);
+  --list-shadow: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(in srgb, var(--color-shadow) 86%, transparent) 0%,
+    color-mix(in srgb, var(--color-shadow) 62%, transparent) 24%,
+    color-mix(in srgb, var(--color-shadow) 43%, transparent) 34%,
+    color-mix(in srgb, var(--color-shadow) 29%, transparent) 46%,
+    color-mix(in srgb, var(--color-shadow) 18%, transparent) 63%,
+    color-mix(in srgb, var(--color-shadow) 7%, transparent) 86%,
+    transparent 100%
   );
 
   --color-surface-button-disabled: var(--shade-200);
@@ -61,6 +75,8 @@
 }
 
 [data-theme='dark'] {
+  --color-shadow: var(--shade-940);
+
   --color-foreground: var(--shade-10);
   --color-background: var(--shade-940);
 
@@ -78,6 +94,16 @@
     color-mix(in srgb, var(--color-card-background) 62%, transparent 38%) 63%,
     color-mix(in srgb, var(--color-card-background) 86%, transparent 14%) 86%,
     var(--color-card-background) 100%
+  );
+
+  --list-shadow-width: var(--ni-96);
+  --list-shadow: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(in srgb, var(--color-shadow) 98%, transparent) 0%,
+    color-mix(in srgb, var(--color-shadow) 88%, transparent) 32%,
+    color-mix(in srgb, var(--color-shadow) 70%, transparent) 61%,
+    color-mix(in srgb, var(--color-shadow) 50%, transparent) 80%,
+    transparent 100%
   );
 
   --color-surface-button-disabled: var(--shade-800);
