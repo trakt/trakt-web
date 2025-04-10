@@ -2,15 +2,12 @@ import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
 
-const RELOAD_STATE_KEY = 'has-reloaded';
-
-function handle401(token: string | Nil) {
-  if (!token || sessionStorage.getItem(RELOAD_STATE_KEY)) {
-    return;
+function hasExpiredToken(expiresAt: number | Nil) {
+  if (!expiresAt) {
+    return false;
   }
 
-  sessionStorage.setItem(RELOAD_STATE_KEY, 'true');
-  globalThis.window.location.reload();
+  return new Date(expiresAt).getTime() - Date.now() < 0;
 }
 
 export function createAuthenticatedFetch<
@@ -24,7 +21,7 @@ export function createAuthenticatedFetch<
     const headers = new Headers(modifiedInit?.headers || {});
 
     try {
-      const token = getToken();
+      const { value: token, expiresAt } = getToken();
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -37,14 +34,11 @@ export function createAuthenticatedFetch<
           headers,
         } as Parameters<T>[1],
       ).then((response) => {
-        if (response.status === 401) {
-          handle401(token);
-          return Promise.reject(new Error('Unauthorized request'));
+        if (response.status === 401 && hasExpiredToken(expiresAt)) {
+          globalThis.window.location.reload();
         }
 
         return response;
-      }).finally(() => {
-        sessionStorage.removeItem(RELOAD_STATE_KEY);
       });
     } catch (e) {
       error('Fetch interceptor error:', e);
