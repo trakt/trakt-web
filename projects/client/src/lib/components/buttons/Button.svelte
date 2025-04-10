@@ -349,11 +349,7 @@
           }
 
           &[data-variant="primary"] {
-            background: color-mix(
-              in srgb,
-              var(--color-background-button) 60%,
-              transparent 40%
-            );
+            background: var(--color-background-button);
           }
 
           &[data-variant="secondary"] {
