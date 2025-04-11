@@ -15,9 +15,10 @@
    * Navbar
    */
   --color-background-navbar: color-mix(in srgb,
-      var(--shade-200) 75%,
-      transparent 10%);
+      var(--shade-50) 80%,
+      transparent);
   --color-foreground-navbar: var(--color-foreground);
+  --color-search-input-border: var(--shade-300);
 
   /*
    * Card
@@ -121,6 +122,7 @@
       var(--shade-920) 90%,
       transparent 10%);
   --color-foreground-navbar: var(--shade-10);
+  --color-search-input-border: var(--shade-700);
 
   /*
    * Card
