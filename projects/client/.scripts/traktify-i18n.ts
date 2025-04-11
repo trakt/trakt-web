@@ -3,7 +3,7 @@ import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
 import { availableLocales } from '$lib/features/i18n/index.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { loadLocale, TranslationMap } from './_internal/loadLocale.ts';
+import { loadLocale, type TranslationMap } from './_internal/loadLocale.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
 const genAi = new GoogleGenerativeAI(
@@ -60,6 +60,33 @@ function generatePromptText({
           Here's the JSON to translate: ${JSON.stringify(jsonData)}`;
 }
 
+// Add this function to detect and fix nested keys in the response
+
+// Define an interface for the potential response formats
+interface TranslationResponse {
+  [key: string]: string | TranslationMap;
+}
+
+function normalizeTranslationResponse(
+  response: TranslationResponse,
+): TranslationMap {
+  // Check if the response has numeric keys (like "0") containing the actual translations
+  const keys = Object.keys(response);
+
+  if (keys.length === 1 && keys[0] && /^\d+$/.test(keys[0])) {
+    // We have a nested response under a numeric key
+    console.warn(
+      `⚠️ WARNING: Received nested translation response under key "${
+        keys[0]
+      }". Lifting nested keys.`,
+    );
+    return response[keys[0]] as TranslationMap;
+  }
+
+  return response as TranslationMap;
+}
+
+// Add this additional check to the translateJson function
 async function translateJson(
   jsonData: Record<string, string>,
   targetLocale: string,
@@ -70,7 +97,32 @@ async function translateJson(
     );
 
     const translatedJsonString = result.response.text();
-    return JSON.parse(translatedJsonString);
+    const parsedResponse = JSON.parse(translatedJsonString);
+
+    // Normalize the response to handle nested keys
+    const normalizedResponse = normalizeTranslationResponse(parsedResponse);
+
+    // Verify all expected keys exist in the response
+    const missingKeys = Object.keys(jsonData).filter((key) =>
+      !(key in normalizedResponse)
+    );
+    if (missingKeys.length > 0) {
+      console.warn(
+        `⚠️ WARNING: Missing ${missingKeys.length} keys in translation response for ${targetLocale}: ${
+          missingKeys.join(', ')
+        }`,
+      );
+
+      // Add missing keys back using source values
+      missingKeys.forEach((key) => {
+        normalizedResponse[key] = assertDefined(
+          jsonData[key],
+          `Key ${key} not found in source messages`,
+        );
+      });
+    }
+
+    return normalizedResponse;
   } catch (error) {
     console.error(`Error translating to ${targetLocale}:`, error);
     throw error;
