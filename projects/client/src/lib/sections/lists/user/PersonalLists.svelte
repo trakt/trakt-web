@@ -34,7 +34,7 @@
       --height-list="var(--height-lists-list)"
     >
       {#snippet item(list)}
-        <ListSummaryCard {list} />
+        <ListSummaryCard {list} isOfficial={false} />
       {/snippet}
     </SectionList>
   {/if}

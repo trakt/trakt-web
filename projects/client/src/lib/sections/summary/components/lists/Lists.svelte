@@ -37,7 +37,11 @@
     --height-list="var(--height-lists-list)"
   >
     {#snippet item(list)}
-      <ListSummaryCard {list} {type} />
+      <ListSummaryCard
+        {list}
+        {type}
+        isOfficial={$officialLists.includes(list)}
+      />
     {/snippet}
 
     {#snippet empty()}

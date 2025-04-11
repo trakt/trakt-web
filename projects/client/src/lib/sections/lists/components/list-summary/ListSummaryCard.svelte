@@ -5,14 +5,19 @@
   import ListHeader from "./_internal/ListHeader.svelte";
   import ListPosters from "./_internal/ListPosters.svelte";
 
-  const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
+  const {
+    list,
+    type,
+    isOfficial,
+  }: { list: MediaListSummary; type?: MediaType; isOfficial: boolean } =
+    $props();
 </script>
 
 <Card
   --width-card="min(var(--width-list-card), 85vw)"
   --height-card="var(--height-list-card)"
 >
-  <div class="trakt-list-summary">
+  <div class="trakt-list-summary" class:trakt-list-official={isOfficial}>
     <ListHeader {list} {type} />
     <ListPosters {list} {type} />
   </div>
@@ -32,5 +37,9 @@
       var(--color-background)
     );
     border-radius: var(--border-radius-m);
+
+    &.trakt-list-official {
+      --color-card-background: var(--color-official-list-background);
+    }
   }
 </style>
