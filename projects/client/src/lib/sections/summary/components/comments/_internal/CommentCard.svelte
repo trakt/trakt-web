@@ -33,6 +33,8 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-comment-container {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     gap: var(--gap-m);
