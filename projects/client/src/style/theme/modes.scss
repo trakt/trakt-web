@@ -24,6 +24,8 @@
    * Card
    */
   --color-card-background: var(--shade-10);
+  --color-official-list-background: var(--purple-200);
+  --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
   --card-shadow: linear-gradient(180deg,
       transparent 0%,
       color-mix(in srgb,
@@ -128,6 +130,8 @@
    * Card
    */
   --color-card-background: var(--shade-920);
+  --color-official-list-background: var(--purple-800);
+  --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
   --card-shadow: linear-gradient(180deg,
       transparent 0%,
       color-mix(in srgb, var(--color-card-background) 7%, transparent 93%) 13%,

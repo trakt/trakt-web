@@ -73,7 +73,7 @@
     width: var(--poster-width);
 
     background-color: var(--color-card-background);
-    box-shadow: -16px 0px 16px 0px rgba(0, 0, 0, 0.56);
+    box-shadow: var(--list-poster-shadow);
     border-radius: var(--border-radius-m);
     overflow: hidden;
 
