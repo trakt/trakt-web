@@ -372,5 +372,8 @@
   "add_to_personal_list_label": "Adicionar {title} à {list}",
   "remove_from_personal_list": "Remover da {list}",
   "remove_from_personal_list_label": "Remover {title} da {list}",
-  "remove_from_personal_list_warning": "Tem certeza que deseja remover {title} da {list}?"
+  "remove_from_personal_list_warning": "Tem certeza que deseja remover {title} da {list}?",
+  "theme_light": "Claro",
+  "theme_dark": "Escuro",
+  "theme_system": "Sistema"
 }

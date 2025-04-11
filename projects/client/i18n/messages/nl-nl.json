@@ -372,5 +372,8 @@
   "add_to_personal_list_label": "Voeg {title} toe aan {list}",
   "remove_from_personal_list": "Verwijderen uit {list}",
   "remove_from_personal_list_label": "Verwijder {title} uit {list}",
-  "remove_from_personal_list_warning": "Weet je zeker dat je {title} wilt verwijderen van {list}?"
+  "remove_from_personal_list_warning": "Weet je zeker dat je {title} wilt verwijderen van {list}?",
+  "theme_light": "Licht",
+  "theme_dark": "Donker",
+  "theme_system": "Systeem"
 }

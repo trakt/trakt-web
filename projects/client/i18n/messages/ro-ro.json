@@ -372,5 +372,8 @@
   "add_to_personal_list_label": "Adaugă {title} la {list}",
   "remove_from_personal_list": "Elimină din {list}",
   "remove_from_personal_list_label": "Elimină {title} din {list}",
-  "remove_from_personal_list_warning": "Sigur vrei să elimini {title} din {list}?"
+  "remove_from_personal_list_warning": "Sigur vrei să elimini {title} din {list}?",
+  "theme_light": "Luminos",
+  "theme_dark": "Întunecat",
+  "theme_system": "Sistem"
 }

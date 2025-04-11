@@ -372,5 +372,8 @@
   "add_to_personal_list_label": "{title} を {list} に追加",
   "remove_from_personal_list": "{list} から削除",
   "remove_from_personal_list_label": "{title} を {list} から削除",
-  "remove_from_personal_list_warning": "{title} を {list} から削除してもよろしいですか？"
+  "remove_from_personal_list_warning": "{title} を {list} から削除してもよろしいですか？",
+  "theme_light": "ライト",
+  "theme_dark": "ダーク",
+  "theme_system": "システム"
 }

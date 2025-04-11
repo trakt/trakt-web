@@ -14,11 +14,6 @@
 {/if}
 
 <style>
-  :global([data-theme="light"] .trakt-cover-image) {
-    filter: grayscale(1);
-    opacity: 0.25;
-  }
-
   .trakt-cover-image {
     --max-image-height: var(--ni-300);
 

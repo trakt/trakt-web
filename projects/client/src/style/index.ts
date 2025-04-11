@@ -13,7 +13,7 @@ import './layout/index.css';
 import './transitions/index.css';
 
 import './theme/global.css';
-import './theme/modes.css';
+import './theme/modes.scss';
 
 import './typography/index.css';
 
