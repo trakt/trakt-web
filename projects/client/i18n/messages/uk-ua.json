@@ -372,5 +372,8 @@
   "add_to_personal_list_label": "Додати {title} до {list}",
   "remove_from_personal_list": "Видалити з {list}",
   "remove_from_personal_list_label": "Видалити {title} з {list}",
-  "remove_from_personal_list_warning": "Ви впевнені, що хочете видалити {title} з {list}?"
+  "remove_from_personal_list_warning": "Ви впевнені, що хочете видалити {title} з {list}?",
+  "theme_light": "Світла",
+  "theme_dark": "Темна",
+  "theme_system": "Системна"
 }

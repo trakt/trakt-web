@@ -372,5 +372,8 @@
   "add_to_personal_list_label": "Legg til {title} i {list}",
   "remove_from_personal_list": "Fjern fra {list}",
   "remove_from_personal_list_label": "Fjern {title} fra {list}",
-  "remove_from_personal_list_warning": "Er du sikker på at du vil fjerne {title} fra {list}?"
+  "remove_from_personal_list_warning": "Er du sikker på at du vil fjerne {title} fra {list}?",
+  "theme_light": "Lys",
+  "theme_dark": "Mørk",
+  "theme_system": "System"
 }

@@ -372,5 +372,8 @@
   "add_to_personal_list_label": "Добави {title} в {list}",
   "remove_from_personal_list": "Премахни от {list}",
   "remove_from_personal_list_label": "Премахни {title} от {list}",
-  "remove_from_personal_list_warning": "Сигурни ли сте, че искате да премахнете {title} от {list}?"
+  "remove_from_personal_list_warning": "Сигурни ли сте, че искате да премахнете {title} от {list}?",
+  "theme_light": "Светла",
+  "theme_dark": "Тъмна",
+  "theme_system": "Система"
 }
