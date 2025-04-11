@@ -94,6 +94,12 @@
   --color-text-duration-tag: var(--shade-10);
   --color-background-duration-tag: var(--shade-800);
 
+  /**
+   * Sentiments
+   */
+  --color-text-sentiment-good: var(--purple-700);
+  --color-text-sentiment-bad: var(--red-700);
+
   /*
   * Overrides
   */
@@ -183,6 +189,12 @@
 
   --color-text-duration-tag: var(--shade-800);
   --color-background-duration-tag: var(--shade-10);
+
+  /**
+   * Sentiments
+   */
+  --color-text-sentiment-good: var(--purple-100);
+  --color-text-sentiment-bad: var(--red-100);
 }
 
 // Apply themes to selectors
