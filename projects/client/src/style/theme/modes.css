@@ -29,35 +29,35 @@
     transparent 0%,
     color-mix(
       in srgb,
-      var(--shade-50) 7%,
+      var(--color-card-background) 7%,
       color-mix(in srgb, var(--color-shadow) 7%, transparent 93%)
     ) 13%,
     color-mix(
       in srgb,
-      var(--shade-50) 18%,
+      var(--color-card-background) 18%,
       color-mix(in srgb, var(--color-shadow) 18%, transparent 82%)
     ) 24%,
     color-mix(
       in srgb,
-      var(--shade-50) 29%,
+      var(--color-card-background) 29%,
       color-mix(in srgb, var(--color-shadow) 29%, transparent 71%)
     ) 34%,
     color-mix(
       in srgb,
-      var(--shade-50) 43%,
+      var(--color-card-background) 43%,
       color-mix(in srgb, var(--color-shadow) 43%, transparent 57%)
     ) 46%,
     color-mix(
       in srgb,
-      var(--shade-50) 62%,
+      var(--color-card-background) 62%,
       color-mix(in srgb, var(--color-shadow) 62%, transparent 38%)
     ) 63%,
     color-mix(
       in srgb,
-      var(--shade-50) 86%,
+      var(--color-card-background) 86%,
       color-mix(in srgb, var(--color-shadow) 86%, transparent 14%)
     ) 86%,
-    var(--shade-50) 100%
+    var(--color-card-background) 100%
   );
 
   /*
