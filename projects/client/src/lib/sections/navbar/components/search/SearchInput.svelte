@@ -90,10 +90,11 @@
       .trakt-search-input {
         background: color-mix(
           in srgb,
-          var(--color-background) 75%,
+          var(--color-background-navbar) 75%,
           transparent 25%
         );
-        outline: var(--border-thickness-xs) solid var(--shade-600);
+        outline: var(--border-thickness-xs) solid
+          var(--color-search-input-border);
 
         @include for-mobile {
           &:not(:focus-within) {
