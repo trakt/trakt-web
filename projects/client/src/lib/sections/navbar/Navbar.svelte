@@ -8,6 +8,7 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { navigateToTraktOg } from "$lib/utils/url/navigateToTraktOg";
@@ -45,7 +46,11 @@
 {/snippet}
 
 <header>
-  <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
+  <nav
+    class="trakt-navbar"
+    class:trakt-navbar-scroll={isScrolled}
+    data-dpad-navigation={DpadNavigationType.List}
+  >
     <RenderFor
       audience="authenticated"
       device={["tablet-sm", "tablet-lg", "desktop"]}
@@ -86,6 +91,7 @@
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarHomeButton}
+          navigationType={DpadNavigationType.Item}
         >
           {m.navbar_link_home()}
         </Button>
@@ -96,6 +102,7 @@
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarShowsButton}
+          navigationType={DpadNavigationType.Item}
         >
           {m.navbar_link_shows()}
         </Button>
@@ -106,6 +113,7 @@
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarMoviesButton}
+          navigationType={DpadNavigationType.Item}
         >
           {m.navbar_link_movies()}
         </Button>
@@ -117,6 +125,7 @@
           style="underlined"
           variant="primary"
           color="purple"
+          navigationType={DpadNavigationType.Item}
         >
           {m.navbar_link_watchlist()}
         </Button>

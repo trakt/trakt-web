@@ -1,6 +1,7 @@
 <script lang="ts">
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import StreamingServiceLogo from "../../media/streaming-service/StreamingServiceLogo.svelte";
   import Button from "../Button.svelte";
   import { StreamingServiceButtonIntlProvider } from "./StreamingServiceButtonIntlProvider";
@@ -20,6 +21,7 @@
     variant: "primary",
     href: service.link,
     target: "_blank",
+    navigationType: DpadNavigationType.Item,
   });
 
   /**

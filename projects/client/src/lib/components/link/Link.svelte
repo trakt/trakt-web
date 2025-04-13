@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
@@ -11,12 +12,14 @@
     focusable = true,
     noscroll,
     label,
+    navigationType,
     ...props
   }: ChildrenProps &
     HTMLAnchorProps &
     HTMLElementProps & {
       color?: "default" | "classic" | "inherit";
       focusable?: boolean;
+      navigationType?: DpadNavigationType;
     } = $props();
 
   const { isActive } = $derived(useActiveLink(href));
@@ -35,6 +38,7 @@
     aria-label={label}
     class="trakt-link"
     class:trakt-link-active={$isActive}
+    data-dpad-navigation={navigationType}
     {...props}
   >
     {@render children?.()}

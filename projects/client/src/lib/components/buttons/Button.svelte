@@ -20,6 +20,7 @@
     subtitle,
     size = "normal",
     text = "uppercase",
+    navigationType,
     ...props
   }: TraktButtonProps | TraktButtonAnchorProps = $props();
 
@@ -69,6 +70,7 @@
     data-style={style}
     data-color={color}
     data-size={size}
+    data-dpad-navigation={navigationType}
     {...props}
   >
     {@render contents()}
@@ -85,6 +87,7 @@
     data-style={style}
     data-color={color}
     data-size={size}
+    data-dpad-navigation={navigationType}
     {...props}
   >
     {@render contents()}
