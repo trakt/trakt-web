@@ -60,6 +60,7 @@ module.exports = {
         'movie',
         'msw',
         'navbar',
+        'navigation',
         'out-now',
         'profile',
         'pr_gate',
