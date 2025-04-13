@@ -12,6 +12,7 @@
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
+  import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -87,28 +88,30 @@
       <AnalyticsProvider>
         <AutoSigninProvider>
           <LocaleProvider>
-            <CoverProvider>
-              <CoverImage />
+            <NavigationProvider>
+              <CoverProvider>
+                <CoverImage />
 
-              <ThemeProvider theme={data.theme}>
-                <ListScrollHistoryProvider>
-                  <div class="trakt-layout-wrapper">
-                    <Navbar />
-                    <div class="trakt-layout-content">
-                      {@render children()}
+                <ThemeProvider theme={data.theme}>
+                  <ListScrollHistoryProvider>
+                    <div class="trakt-layout-wrapper">
+                      <Navbar />
+                      <div class="trakt-layout-content">
+                        {@render children()}
+                      </div>
+                      <Footer />
                     </div>
-                    <Footer />
-                  </div>
-                  <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-                    <MobileNavbar />
-                  </RenderFor>
-                  <SvelteQueryDevtools
-                    buttonPosition="bottom-left"
-                    styleNonce="opacity: 0.5"
-                  />
-                </ListScrollHistoryProvider>
-              </ThemeProvider>
-            </CoverProvider>
+                    <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
+                      <MobileNavbar />
+                    </RenderFor>
+                    <SvelteQueryDevtools
+                      buttonPosition="bottom-left"
+                      styleNonce="opacity: 0.5"
+                    />
+                  </ListScrollHistoryProvider>
+                </ThemeProvider>
+              </CoverProvider>
+            </NavigationProvider>
           </LocaleProvider>
 
           {#key page.url.pathname}
