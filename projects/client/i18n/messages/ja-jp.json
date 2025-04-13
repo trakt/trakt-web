@@ -373,5 +373,7 @@
   "remove_from_personal_list_warning": "{title} を {list} から削除してもよろしいですか？",
   "theme_light": "ライト",
   "theme_dark": "ダーク",
-  "theme_system": "システム"
+  "theme_system": "システム",
+  "filter_label": "絞り込み",
+  "filter_reset": "リセット"
 }

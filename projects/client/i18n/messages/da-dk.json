@@ -373,5 +373,7 @@
   "remove_from_personal_list_warning": "Er du sikker på, at du vil fjerne {title} fra {list}?",
   "theme_light": "Lys",
   "theme_dark": "Mørk",
-  "theme_system": "System"
+  "theme_system": "System",
+  "filter_label": "Filtrér",
+  "filter_reset": "Nulstil"
 }

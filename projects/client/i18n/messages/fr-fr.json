@@ -373,5 +373,7 @@
   "remove_from_personal_list_warning": "Êtes-vous sûr de vouloir retirer {title} de {list} ?",
   "theme_light": "Clair",
   "theme_dark": "Sombre",
-  "theme_system": "Système"
+  "theme_system": "Système",
+  "filter_label": "Filtrer",
+  "filter_reset": "Réinitialiser"
 }
