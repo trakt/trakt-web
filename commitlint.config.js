@@ -49,6 +49,7 @@ module.exports = {
         'episode',
         'errors',
         'favorite',
+        'filter',
         'formatter',
         'footer',
         'guards',
