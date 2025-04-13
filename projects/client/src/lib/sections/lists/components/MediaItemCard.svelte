@@ -13,6 +13,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
@@ -46,52 +47,58 @@
 {/snippet}
 
 {#snippet content(mediaCoverImageUrl: string)}
-  {#if popupActions}
-    <CardActionBar>
-      {#snippet actions()}
-        <PopupMenu label={m.media_popup_label({ title: media.title })}>
-          {#snippet items()}
-            {@render popupActions()}
-          {/snippet}
-        </PopupMenu>
-      {/snippet}
-    </CardActionBar>
-  {/if}
-
-  <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
-    <CardCover
-      src={mediaCoverImageUrl}
-      alt={m.media_poster({ title: media.title })}
-    >
-      {#snippet badges()}
-        {@render externalBadges?.()}
-      {/snippet}
-
-      {#snippet tags()}
-        {#if externalTags}
-          {@render externalTags()}
-        {:else}
-          {@render defaultTags(media)}
-        {/if}
-      {/snippet}
-    </CardCover>
-  </Link>
-
-  <CardFooter {action}>
-    <Link href={UrlBuilder.media(type, media.slug)}>
-      <p
-        class="trakt-card-title small ellipsis"
-        class:small={rest.variant !== "activity"}
-      >
-        {media.title}
-      </p>
-    </Link>
-    {#if rest.variant === "activity"}
-      <p class="trakt-card-subtitle small ellipsis">
-        {toHumanDate(new Date(), rest.date, getLocale())}
-      </p>
+  <trakt-media-card-content>
+    {#if popupActions}
+      <CardActionBar>
+        {#snippet actions()}
+          <PopupMenu label={m.media_popup_label({ title: media.title })}>
+            {#snippet items()}
+              {@render popupActions()}
+            {/snippet}
+          </PopupMenu>
+        {/snippet}
+      </CardActionBar>
     {/if}
-  </CardFooter>
+
+    <Link
+      focusable={false}
+      href={UrlBuilder.media(type, media.slug)}
+      navigationType={DpadNavigationType.Item}
+    >
+      <CardCover
+        src={mediaCoverImageUrl}
+        alt={m.media_poster({ title: media.title })}
+      >
+        {#snippet badges()}
+          {@render externalBadges?.()}
+        {/snippet}
+
+        {#snippet tags()}
+          {#if externalTags}
+            {@render externalTags()}
+          {:else}
+            {@render defaultTags(media)}
+          {/if}
+        {/snippet}
+      </CardCover>
+    </Link>
+
+    <CardFooter {action}>
+      <Link href={UrlBuilder.media(type, media.slug)}>
+        <p
+          class="trakt-card-title small ellipsis"
+          class:small={rest.variant !== "activity"}
+        >
+          {media.title}
+        </p>
+      </Link>
+      {#if rest.variant === "activity"}
+        <p class="trakt-card-subtitle small ellipsis">
+          {toHumanDate(new Date(), rest.date, getLocale())}
+        </p>
+      {/if}
+    </CardFooter>
+  </trakt-media-card-content>
 {/snippet}
 
 {#if variant === "poster"}
@@ -111,3 +118,11 @@
     {@render content(media.thumb.url)}
   </ActivityCard>
 {/if}
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  trakt-media-card-content {
+    @include focused-item-style(var(--height-card-cover));
+  }
+</style>

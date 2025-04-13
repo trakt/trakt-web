@@ -3,6 +3,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
   import * as m from "$lib/features/i18n/messages";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
@@ -14,7 +15,11 @@
 </script>
 
 <trakt-cast-member>
-  <Link focusable={false} href={UrlBuilder.people(castMember.id)}>
+  <Link
+    focusable={false}
+    href={UrlBuilder.people(castMember.id)}
+    navigationType={DpadNavigationType.Item}
+  >
     <div class="trakt-cast-member">
       <PersonCard>
         <CardCover
@@ -31,11 +36,17 @@
   </Link>
 </trakt-cast-member>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   trakt-cast-member {
+    position: relative;
+
     :global(.trakt-link) {
       text-decoration: none;
     }
+
+    @include focused-item-style(var(--height-person-card));
   }
 
   .trakt-cast-member-footer {

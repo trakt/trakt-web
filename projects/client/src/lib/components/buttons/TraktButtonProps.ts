@@ -1,3 +1,4 @@
+import type { DpadNavigationType } from '$lib/features/navigation/models/DpadNavigationType.ts';
 import type { Snippet } from 'svelte';
 
 export type TraktButtonProps = ButtonProps & {
@@ -8,4 +9,5 @@ export type TraktButtonProps = ButtonProps & {
   subtitle?: Snippet;
   size?: 'normal' | 'small' | 'tag';
   text?: 'capitalize' | 'uppercase';
+  navigationType?: DpadNavigationType;
 };

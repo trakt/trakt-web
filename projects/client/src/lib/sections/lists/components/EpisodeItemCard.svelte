@@ -7,6 +7,7 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
@@ -36,63 +37,74 @@
   --height-card="var(--height-episode-card)"
   --height-card-cover="var(--height-episode-card-cover)"
 >
-  {#if popupActions}
-    <CardActionBar>
-      {#snippet actions()}
-        <PopupMenu label={m.media_popup_label({ title: episode.title })}>
-          {#snippet items()}
-            {@render popupActions()}
-          {/snippet}
-        </PopupMenu>
-      {/snippet}
-    </CardActionBar>
-  {/if}
-
-  <Link
-    focusable={false}
-    href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
-  >
-    <CardCover
-      src={$src ?? EPISODE_COVER_PLACEHOLDER}
-      alt={`${show.title} - ${episode.title}`}
-      {badges}
-      {tags}
-    />
-  </Link>
-
-  <CardFooter {action}>
-    {#if isShowContext}
-      <p class="trakt-card-title ellipsis">
-        <Spoiler media={episode} {show} {episode} type="episode">
-          {episode.title}
-        </Spoiler>
-      </p>
-      <p class="trakt-card-subtitle ellipsis small">
-        {episode.season}x{episode.number}
-      </p>
+  <trakt-episode-card-content>
+    {#if popupActions}
+      <CardActionBar>
+        {#snippet actions()}
+          <PopupMenu label={m.media_popup_label({ title: episode.title })}>
+            {#snippet items()}
+              {@render popupActions()}
+            {/snippet}
+          </PopupMenu>
+        {/snippet}
+      </CardActionBar>
     {/if}
 
-    {#if rest.variant === "activity"}
-      <Link href={UrlBuilder.show(show.slug)}>
+    <Link
+      focusable={false}
+      href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
+      navigationType={DpadNavigationType.Item}
+    >
+      <CardCover
+        src={$src ?? EPISODE_COVER_PLACEHOLDER}
+        alt={`${show.title} - ${episode.title}`}
+        {badges}
+        {tags}
+      />
+    </Link>
+
+    <CardFooter {action}>
+      {#if isShowContext}
         <p class="trakt-card-title ellipsis">
-          {episode.season}x{episode.number} - {show.title}
+          <Spoiler media={episode} {show} {episode} type="episode">
+            {episode.title}
+          </Spoiler>
         </p>
-      </Link>
-      <p class="trakt-card-subtitle ellipsis small">
-        {EpisodeIntlProvider.timestampText(rest.date)}
-      </p>
-    {/if}
+        <p class="trakt-card-subtitle ellipsis small">
+          {episode.season}x{episode.number}
+        </p>
+      {/if}
 
-    {#if !isShowContext && !isActivity}
-      <Link href={UrlBuilder.show(show.slug)}>
-        <p class="trakt-card-title ellipsis">{show.title}</p>
-      </Link>
-      <p class="trakt-card-subtitle ellipsis small">
-        {episode.season}x{episode.number}
-        <Spoiler media={episode} {show} {episode} type="episode">
-          - {episode.title}
-        </Spoiler>
-      </p>
-    {/if}
-  </CardFooter>
+      {#if rest.variant === "activity"}
+        <Link href={UrlBuilder.show(show.slug)}>
+          <p class="trakt-card-title ellipsis">
+            {episode.season}x{episode.number} - {show.title}
+          </p>
+        </Link>
+        <p class="trakt-card-subtitle ellipsis small">
+          {EpisodeIntlProvider.timestampText(rest.date)}
+        </p>
+      {/if}
+
+      {#if !isShowContext && !isActivity}
+        <Link href={UrlBuilder.show(show.slug)}>
+          <p class="trakt-card-title ellipsis">{show.title}</p>
+        </Link>
+        <p class="trakt-card-subtitle ellipsis small">
+          {episode.season}x{episode.number}
+          <Spoiler media={episode} {show} {episode} type="episode">
+            - {episode.title}
+          </Spoiler>
+        </p>
+      {/if}
+    </CardFooter>
+  </trakt-episode-card-content>
 </Card>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  trakt-episode-card-content {
+    @include focused-item-style(var(--height-card-cover));
+  }
+</style>
