@@ -373,5 +373,7 @@
   "remove_from_personal_list_warning": "Sigur vrei să elimini {title} din {list}?",
   "theme_light": "Luminos",
   "theme_dark": "Întunecat",
-  "theme_system": "Sistem"
+  "theme_system": "Sistem",
+  "filter_label": "Filtru",
+  "filter_reset": "Resetează"
 }

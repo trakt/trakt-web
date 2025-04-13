@@ -373,5 +373,7 @@
   "remove_from_personal_list_warning": "Сигурни ли сте, че искате да премахнете {title} от {list}?",
   "theme_light": "Светла",
   "theme_dark": "Тъмна",
-  "theme_system": "Система"
+  "theme_system": "Система",
+  "filter_label": "Филтър",
+  "filter_reset": "Изчисти"
 }

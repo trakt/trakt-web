@@ -373,5 +373,7 @@
   "remove_from_personal_list_warning": "Weet je zeker dat je {title} wilt verwijderen van {list}?",
   "theme_light": "Licht",
   "theme_dark": "Donker",
-  "theme_system": "Systeem"
+  "theme_system": "Systeem",
+  "filter_label": "Filter",
+  "filter_reset": "Reset"
 }
