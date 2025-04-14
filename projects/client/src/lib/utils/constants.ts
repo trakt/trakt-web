@@ -55,3 +55,8 @@ export const DEFAULT_PAGE_SIZE = 25;
 export const DEFAULT_DRILL_SIZE = 100;
 export const RECOMMENDED_UPPER_LIMIT = DEFAULT_DRILL_SIZE;
 export const PAGE_UPPER_LIMIT = 3;
+/**
+ * This is the default we also have server-side.
+ * We expose it to tinker around and fine-tune the default value.
+ */
+export const RECOMMENDED_DEFAULT_WATCH_WINDOW = 25;

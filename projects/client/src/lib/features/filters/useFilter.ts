@@ -40,7 +40,7 @@ export function useFilter() {
     },
     filterMap: derived(filter, ($filter) => {
       if (!$filter?.value) {
-        return;
+        return {};
       }
 
       return {

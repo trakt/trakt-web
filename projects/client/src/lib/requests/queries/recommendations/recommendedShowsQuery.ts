@@ -40,7 +40,9 @@ export const recommendedShowsQuery = defineQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (params) => [params.limit, params.filter?.genres],
+  dependencies: (
+    params,
+  ) => [params.limit, params.filter?.genres, params.filter?.watch_window],
   request: recommendedShowsRequest,
   mapper: (response) =>
     response.body.map((show: RecommendedShowResponse[0]) => ({

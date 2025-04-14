@@ -36,7 +36,9 @@ export const recommendedMoviesQuery = defineQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (params) => [params.limit, params.filter?.genres],
+  dependencies: (
+    params,
+  ) => [params.limit, params.filter?.genres, params.filter?.watch_window],
   request: recommendedMoviesRequest,
   mapper: (response) => response.body.map(mapToMovieEntry),
   schema: RecommendedMovieSchema.array(),

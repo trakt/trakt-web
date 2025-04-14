@@ -35,6 +35,10 @@ declare global {
 
   type HttpsUrl = `https://${string}`;
 
+  type DeepPartial<T> = {
+    [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : Partial<T[P]>;
+  };
+
   type ChildrenProps = {
     children: import('svelte').Snippet;
   };
