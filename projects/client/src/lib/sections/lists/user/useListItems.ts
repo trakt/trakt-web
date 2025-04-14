@@ -1,3 +1,4 @@
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { listItemsQuery } from '$lib/requests/queries/lists/listItemsQuery.ts';
@@ -15,7 +16,7 @@ export type ListParams = {
   id?: number;
 };
 
-type UseListItemsProps = PaginationParams & {
+type UseListItemsProps = PaginationParams & FilterParams & {
   list: ListParams;
   type?: MediaType;
 };
@@ -35,11 +36,12 @@ function mapListParamsToQueryParams(list: ListParams) {
 }
 
 function listToQuery(
-  { list, limit, type, page }: UseListItemsProps,
+  { list, limit, type, page, filter }: UseListItemsProps,
 ) {
   const commonParams = {
     type,
     page,
+    filter,
     limit: limit ?? LIST_LIMIT,
   };
 

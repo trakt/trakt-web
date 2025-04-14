@@ -10,6 +10,7 @@
 
   const {
     type,
+    filter,
     empty: externalEmpty,
     useList,
     actions: _,
@@ -23,6 +24,7 @@
   const { list, page, isLoading } = $derived(
     useList({
       type,
+      filter,
       page: current,
       limit: DEFAULT_DRILL_SIZE,
     }),

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -12,6 +13,7 @@
   };
 
   const { title, drilldownLabel, type }: PopularListProps = $props();
+  const { filterMap } = useFilter();
 </script>
 
 <DrillableMediaList
@@ -19,6 +21,7 @@
   {title}
   {drilldownLabel}
   {type}
+  filter={$filterMap}
   useList={usePopularList}
   urlBuilder={UrlBuilder.popular}
 >

@@ -1,3 +1,4 @@
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -20,7 +21,7 @@ export type WatchlistMediaList = WatchlistMediaItem;
 // FIXME remove when sorting is fixed
 const WATCHLIST_LIMIT = 500;
 
-export type WatchListStoreProps = PaginationParams & {
+export type WatchListStoreProps = PaginationParams & FilterParams & {
   type: MediaType;
   sort?: SortType;
 };
@@ -30,6 +31,7 @@ function typeToQuery(params: WatchListStoreProps) {
     limit: WATCHLIST_LIMIT,
     page: params.page,
     sort: params.sort ?? 'added',
+    filter: params.filter,
   };
 
   switch (params.type) {

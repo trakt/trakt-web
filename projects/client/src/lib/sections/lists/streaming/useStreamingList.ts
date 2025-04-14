@@ -1,3 +1,4 @@
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -15,7 +16,7 @@ import { type CreateQueryOptions } from '@tanstack/svelte-query';
 export type StreamingEntry = StreamingMovie | StreamingShow;
 export type StreamingMediaList = Paginatable<StreamingEntry>;
 
-type StreamingListStoreProps = PaginationParams & {
+type StreamingListStoreProps = PaginationParams & FilterParams & {
   type: MediaType;
 };
 

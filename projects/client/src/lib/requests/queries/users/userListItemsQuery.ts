@@ -3,6 +3,7 @@ import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -20,7 +21,8 @@ type UserListItemsParams =
     type?: MediaType | 'movie,show';
   }
   & PaginationParams
-  & ApiParams;
+  & ApiParams
+  & FilterParams;
 
 const ListedShowEntrySchema = ShowEntrySchema.merge(
   EpisodeCountSchema,
@@ -39,6 +41,7 @@ const userListItemsRequest = (
     listId,
     limit,
     page,
+    filter,
     type = 'movie,show',
   }: UserListItemsParams,
 ) =>
@@ -56,6 +59,7 @@ const userListItemsRequest = (
         extended: 'full,images',
         page,
         limit,
+        ...filter,
       },
     });
 
@@ -73,6 +77,7 @@ export const userListItemsQuery = defineQuery({
     params.limit,
     params.page,
     params.type,
+    params.filter?.genres,
   ],
   request: userListItemsRequest,
   mapper: (response) => ({

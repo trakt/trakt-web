@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -16,7 +17,7 @@ export const StreamingMovieSchema = MovieEntrySchema.extend({
 });
 export type StreamingMovie = z.infer<typeof StreamingMovieSchema>;
 
-type MovieStreamingParams = PaginationParams & ApiParams;
+type MovieStreamingParams = PaginationParams & ApiParams & FilterParams;
 
 function mapToStreamingMovie({
   rank,
@@ -31,7 +32,7 @@ function mapToStreamingMovie({
 }
 
 const movieStreamingRequest = (
-  { fetch, limit, page }: MovieStreamingParams,
+  { fetch, limit, page, filter }: MovieStreamingParams,
 ) =>
   api({ fetch })
     .movies
@@ -47,6 +48,7 @@ const movieStreamingRequest = (
         ignore_watched: true,
         page,
         limit,
+        ...filter,
       },
     });
 
@@ -56,7 +58,7 @@ export const movieStreamingQuery = defineQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (params) => [params.limit, params.page],
+  dependencies: (params) => [params.limit, params.page, params.filter?.genres],
   request: movieStreamingRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToStreamingMovie),

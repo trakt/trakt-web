@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { LimitParams } from '$lib/requests/models/LimitParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -10,10 +11,10 @@ import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 export const RecommendedMovieSchema = MovieEntrySchema;
 export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
-type RecommendedMoviesParams = LimitParams & ApiParams;
+type RecommendedMoviesParams = LimitParams & ApiParams & FilterParams;
 
 const recommendedMoviesRequest = (
-  { fetch, limit }: RecommendedMoviesParams,
+  { fetch, limit, filter }: RecommendedMoviesParams,
 ) =>
   api({ fetch })
     .recommendations
@@ -25,6 +26,7 @@ const recommendedMoviesRequest = (
         ignore_watchlisted: true,
         ignore_watched: true,
         limit,
+        ...filter,
       },
     });
 
@@ -34,7 +36,7 @@ export const recommendedMoviesQuery = defineQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (params) => [params.limit],
+  dependencies: (params) => [params.limit, params.filter?.genres],
   request: recommendedMoviesRequest,
   mapper: (response) => response.body.map(mapToMovieEntry),
   schema: RecommendedMovieSchema.array(),

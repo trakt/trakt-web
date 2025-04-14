@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -16,7 +17,7 @@ export const PopularShowSchema = ShowEntrySchema.merge(
 );
 export type PopularShow = z.infer<typeof PopularShowSchema>;
 
-type ShowPopularParams = PaginationParams & ApiParams;
+type ShowPopularParams = PaginationParams & ApiParams & FilterParams;
 
 function mapToPopularShow(show: ShowResponse): PopularShow {
   const { aired_episodes } = show;
@@ -31,7 +32,7 @@ function mapToPopularShow(show: ShowResponse): PopularShow {
 }
 
 const showPopularRequest = (
-  { fetch, limit, page }: ShowPopularParams,
+  { fetch, limit, page, filter }: ShowPopularParams,
 ) =>
   api({ fetch })
     .shows
@@ -43,6 +44,7 @@ const showPopularRequest = (
         ignore_watched: true,
         page,
         limit,
+        ...filter,
       },
     });
 
@@ -53,7 +55,7 @@ export const showPopularQuery = defineQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (params) => [params.limit, params.page],
+  dependencies: (params) => [params.limit, params.page, params.filter?.genres],
   request: showPopularRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToPopularShow),

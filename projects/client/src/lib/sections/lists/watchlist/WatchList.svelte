@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useFilter } from "$lib/features/filters/useFilter";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -18,6 +19,7 @@
   };
 
   const { title, type, status, drilldownLabel }: WatchListProps = $props();
+  const { filterMap } = useFilter();
 
   const useList = $derived.by(() => statusToStore(status));
 </script>
@@ -27,6 +29,7 @@
   {title}
   {drilldownLabel}
   {type}
+  filter={$filterMap}
   {useList}
   urlBuilder={(params) =>
     `${UrlBuilder.watchlistPage(params)}?status=${status}`}

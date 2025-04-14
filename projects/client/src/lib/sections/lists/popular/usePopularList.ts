@@ -1,3 +1,4 @@
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -11,16 +12,20 @@ import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedLi
 export type PopularEntry = PopularShow | MovieEntry;
 export type PopularMediaList = Array<PopularEntry>;
 
-type PopularListStoreProps = {
-  type: MediaType;
-} & PaginationParams;
+type PopularListStoreProps =
+  & {
+    type: MediaType;
+  }
+  & PaginationParams
+  & FilterParams;
 
 function typeToQuery(
-  { type, limit, page }: PopularListStoreProps,
+  { type, limit, page, filter }: PopularListStoreProps,
 ) {
   const params = {
     limit,
     page,
+    filter,
   };
 
   switch (type) {

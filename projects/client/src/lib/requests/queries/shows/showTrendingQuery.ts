@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -19,7 +20,7 @@ export const TrendingShowSchema = ShowEntrySchema
   });
 export type TrendingShow = z.infer<typeof TrendingShowSchema>;
 
-type ShowTrendingParams = PaginationParams & ApiParams;
+type ShowTrendingParams = PaginationParams & ApiParams & FilterParams;
 
 function mapToTrendingShow({
   watchers,
@@ -33,9 +34,9 @@ function mapToTrendingShow({
 }
 
 const showTrendingRequest = (
-  { fetch, limit, page }: ShowTrendingParams,
-) =>
-  api({ fetch })
+  { fetch, limit, page, filter }: ShowTrendingParams,
+) => {
+  return api({ fetch })
     .shows
     .trending({
       query: {
@@ -44,8 +45,10 @@ const showTrendingRequest = (
         ignore_watched: true,
         page,
         limit,
+        ...filter,
       },
     });
+};
 
 export const showTrendingQuery = defineQuery({
   key: 'showTrending',
@@ -54,7 +57,7 @@ export const showTrendingQuery = defineQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (params) => [params.limit, params.page],
+  dependencies: (params) => [params.limit, params.page, params.filter?.genres],
   request: showTrendingRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToTrendingShow),
