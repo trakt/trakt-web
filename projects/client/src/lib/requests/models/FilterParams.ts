@@ -1,4 +1,4 @@
-export type FilterParams = Partial<{
+export type FilterParams = DeepPartial<{
   filter: {
     /*
       FIXME:
@@ -6,5 +6,6 @@ export type FilterParams = Partial<{
       -update defineQuery to deal with object dependencies
     */
     genres: string;
+    watch_window: number;
   };
 }>;

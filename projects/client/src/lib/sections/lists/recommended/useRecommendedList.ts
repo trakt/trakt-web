@@ -60,8 +60,15 @@ function useLimitRecommendedList(
     toLoadingState,
   );
 
-  const listKey = props.filter
-    ? `${props.type}-${props.filter.genres}`
+  const filters = props.filter ?? {};
+  const hasFilters = Object.keys(filters).length > 0;
+
+  const listKey = hasFilters
+    ? `${props.type}-${
+      Object.entries(filters)
+        .map(([key, value]) => `${key}-${value}`)
+        .join('-')
+    }`
     : props.type;
 
   const { list, set } = useDailyOrderedArray<RecommendedEntry>({

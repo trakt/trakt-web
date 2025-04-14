@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
   import { useRecommendedList } from "./useRecommendedList";
 
@@ -21,7 +23,10 @@
   {title}
   {drilldownLabel}
   {type}
-  filter={$filterMap}
+  filter={{
+    ...$filterMap,
+    ...extractWatchWindowParam(page.url.searchParams),
+  }}
   useList={useRecommendedList}
   urlBuilder={UrlBuilder.recommended}
 >

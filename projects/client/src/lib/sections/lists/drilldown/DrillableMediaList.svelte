@@ -19,7 +19,7 @@
 <MediaList {...props}>
   {#snippet actions(items, type)}
     <ViewAllButton
-      href={urlBuilder({ type })}
+      href={urlBuilder({ type, ...props.filter })}
       label={drilldownLabel}
       isDisabled={items.length === 0}
     />

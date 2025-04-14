@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
   import { useRecommendedList } from "./useRecommendedList";
 
@@ -22,7 +24,10 @@
   id="view-all-recommended-${type}"
   {title}
   {type}
-  filter={$filterMap}
+  filter={{
+    ...$filterMap,
+    ...extractWatchWindowParam(page.url.searchParams),
+  }}
   useList={useRecommendedList}
 >
   {#snippet item(media)}

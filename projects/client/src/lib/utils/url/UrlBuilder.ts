@@ -1,55 +1,70 @@
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { buildParamString } from './buildParamString.ts';
 
-type PaginatableMediaPageUrl = {
+type TypeParams = {
   type: MediaType | 'episode';
-  page?: number;
 };
 
+type WellKnownQueryParams = {
+  page?: number;
+  watch_window?: number;
+};
+
+type UrlBuilderParams = TypeParams & WellKnownQueryParams;
+
+function sanitizeParams(
+  params: WellKnownQueryParams,
+): WellKnownQueryParams {
+  return {
+    page: params.page,
+    watch_window: params.watch_window,
+  };
+}
+
 const mediaDrilldownFactory =
-  (category: string) => ({ type, page }: PaginatableMediaPageUrl) => {
+  (category: string) => ({ type, ...params }: UrlBuilderParams) => {
     const baseUrl = `/${type}s/${category}`;
-    return baseUrl + buildParamString({ page });
+    return baseUrl + buildParamString(sanitizeParams(params));
   };
 
 const categoryDrilldownFactory =
-  (category: string) => ({ type, page }: PaginatableMediaPageUrl) => {
+  (category: string) => ({ type, page }: UrlBuilderParams) => {
     const baseUrl = `/${category}/${type}s`;
     return baseUrl + buildParamString({ page });
   };
 
 export const UrlBuilder = {
   history: {
-    category: (params: PaginatableMediaPageUrl) => {
+    category: (params: UrlBuilderParams) => {
       return categoryDrilldownFactory('history')(params);
     },
-    all: ({ page }: PaginatableMediaPageUrl) => {
+    all: ({ page }: UrlBuilderParams) => {
       return `/history${buildParamString({ page })}`;
     },
   },
-  watched: (params: PaginatableMediaPageUrl) => {
+  watched: (params: UrlBuilderParams) => {
     return categoryDrilldownFactory('watched')(params);
   },
-  watchlistPage(params: PaginatableMediaPageUrl) {
+  watchlistPage(params: UrlBuilderParams) {
     return categoryDrilldownFactory('watchlist')(params);
   },
-  trending(params: PaginatableMediaPageUrl) {
+  trending(params: UrlBuilderParams) {
     return mediaDrilldownFactory('trending')(params);
   },
-  streaming(params: PaginatableMediaPageUrl) {
+  streaming(params: UrlBuilderParams) {
     return mediaDrilldownFactory('streaming')(params);
   },
-  recommended(params: PaginatableMediaPageUrl) {
+  recommended(params: UrlBuilderParams) {
     return mediaDrilldownFactory('recommended')(params);
   },
-  anticipated(params: PaginatableMediaPageUrl) {
+  anticipated(params: UrlBuilderParams) {
     return mediaDrilldownFactory('anticipated')(params);
   },
-  popular(params: PaginatableMediaPageUrl) {
+  popular(params: UrlBuilderParams) {
     return mediaDrilldownFactory('popular')(params);
   },
   social: {
-    activity: (_: PaginatableMediaPageUrl) => {
+    activity: (_: UrlBuilderParams) => {
       return '/social/activity';
     },
   },
