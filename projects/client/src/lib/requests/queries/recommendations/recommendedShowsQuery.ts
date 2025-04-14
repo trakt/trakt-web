@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { LimitParams } from '$lib/requests/models/LimitParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -13,10 +14,10 @@ import { MediaEntrySchema } from '../../models/MediaEntry.ts';
 export const RecommendedShowSchema = MediaEntrySchema.merge(EpisodeCountSchema);
 export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
-type RecommendedShowsParams = LimitParams & ApiParams;
+type RecommendedShowsParams = LimitParams & ApiParams & FilterParams;
 
 const recommendedShowsRequest = (
-  { fetch, limit }: RecommendedShowsParams,
+  { fetch, limit, filter }: RecommendedShowsParams,
 ) =>
   api({ fetch })
     .recommendations
@@ -28,6 +29,7 @@ const recommendedShowsRequest = (
         ignore_watchlisted: true,
         ignore_watched: true,
         limit,
+        ...filter,
       },
     });
 
@@ -38,7 +40,7 @@ export const recommendedShowsQuery = defineQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (params) => [params.limit],
+  dependencies: (params) => [params.limit, params.filter?.genres],
   request: recommendedShowsRequest,
   mapper: (response) =>
     response.body.map((show: RecommendedShowResponse[0]) => ({

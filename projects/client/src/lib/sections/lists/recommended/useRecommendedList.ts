@@ -1,4 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
@@ -20,15 +21,22 @@ import { derived } from 'svelte/store';
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
 export type RecommendedMediaList = Array<RecommendedEntry>;
 
-type RecommendationListStoreProps = {
-  type: MediaType;
-} & PaginationParams;
+type RecommendationListStoreProps =
+  & {
+    type: MediaType;
+  }
+  & PaginationParams
+  & FilterParams;
 
 function typeToQuery(
-  { type }: Omit<RecommendationListStoreProps, 'page'>,
+  { type, filter }: Omit<RecommendationListStoreProps, 'page'>,
 ) {
   /** Recommendations are calculated daily, so we load all of them. */
-  const props = { type, limit: RECOMMENDED_UPPER_LIMIT };
+  const props = {
+    type,
+    limit: RECOMMENDED_UPPER_LIMIT,
+    filter,
+  };
 
   switch (type) {
     case 'movie':
@@ -52,8 +60,12 @@ function useLimitRecommendedList(
     toLoadingState,
   );
 
+  const listKey = props.filter
+    ? `${props.type}-${props.filter.genres}`
+    : props.type;
+
   const { list, set } = useDailyOrderedArray<RecommendedEntry>({
-    key: `recommended-${props.type}-order`,
+    key: `recommended-${listKey}-order`,
     getId: (item) => item.id,
   });
 
@@ -74,7 +86,11 @@ function useLimitRecommendedList(
 
 export const useRecommendedList = (props: RecommendationListStoreProps) =>
   toInMemoryPaginatable({
-    useList: useLimitRecommendedList,
+    useList: (params) =>
+      useLimitRecommendedList({
+        ...params,
+        filter: props.filter,
+      }),
     total: props.limit,
     type: props.type,
   })({ ...props });

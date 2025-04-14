@@ -1,5 +1,6 @@
 <script lang="ts">
   import Preview from "$lib/components/badge/Preview.svelte";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import MediaCard from "../components/MediaCard.svelte";
@@ -17,6 +18,7 @@
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
+  const { filterMap } = useFilter();
 
   const listCacheId = $derived.by(() => {
     if (list.user?.slug) {
@@ -31,6 +33,7 @@
   id={`user-paginated-list-${listCacheId}`}
   {title}
   {type}
+  filter={$filterMap}
   useList={(params) => useListItems({ list, ...params })}
 >
   {#snippet item(media)}

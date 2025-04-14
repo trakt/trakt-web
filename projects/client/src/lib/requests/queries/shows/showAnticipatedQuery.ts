@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -18,7 +19,7 @@ export const AnticipatedShowSchema = ShowEntrySchema
   });
 export type AnticipatedShow = z.infer<typeof AnticipatedShowSchema>;
 
-type ShowAnticipatedParams = PaginationParams & ApiParams;
+type ShowAnticipatedParams = PaginationParams & ApiParams & FilterParams;
 
 function mapToAnticipatedShow({
   list_count,
@@ -37,7 +38,7 @@ function mapToAnticipatedShow({
 }
 
 const showAnticipatedRequest = (
-  { fetch, limit, page }: ShowAnticipatedParams,
+  { fetch, limit, page, filter }: ShowAnticipatedParams,
 ) =>
   api({ fetch })
     .shows
@@ -49,6 +50,7 @@ const showAnticipatedRequest = (
         ignore_watched: true,
         page,
         limit,
+        ...filter,
       },
     });
 
@@ -59,7 +61,7 @@ export const showAnticipatedQuery = defineQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (params) => [params.limit, params.page],
+  dependencies: (params) => [params.limit, params.page, params.filter?.genres],
   request: showAnticipatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToAnticipatedShow),
