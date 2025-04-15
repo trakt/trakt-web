@@ -22,21 +22,15 @@
         {@render children()}
       </RenderForInput>
     </RenderForDevice>
-  {/if}
-
-  {#if device && !input}
+  {:else if device && !input}
     <RenderForDevice {device}>
       {@render children()}
     </RenderForDevice>
-  {/if}
-
-  {#if input && !device}
+  {:else if input && !device}
     <RenderForInput {input}>
       {@render children()}
     </RenderForInput>
-  {/if}
-
-  {#if !device && !input}
+  {:else if !device && !input}
     {@render children()}
   {/if}
 </RenderForAudience>
