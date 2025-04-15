@@ -158,7 +158,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-m);
-    min-width: var(--ni-48);
+    min-width: var(--ni-40);
     padding: var(--ni-16);
     flex-shrink: 0;
     cursor: pointer;
@@ -175,6 +175,10 @@
     transition-property:
       box-shadow, outline, padding, transform, color, background,
       text-decoration;
+
+    .button-label:has(p:empty) {
+      display: none;
+    }
 
     &:not([data-style="underlined"]) p:not(.meta-info) {
       font-size: 1rem;
