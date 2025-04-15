@@ -7,6 +7,7 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -15,6 +16,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
+  import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import SearchInput from "./components/search/SearchInput.svelte";
   import ProfileButton from "./ProfileButton.svelte";
@@ -32,6 +34,8 @@
   });
 
   const { track } = useTrack(AnalyticsEvent.LeaveLite);
+  const { user } = useUser();
+  const isVip = $derived(!!$user?.isVip);
 </script>
 
 {#snippet traktSwitch()}
@@ -77,9 +81,6 @@
       </RenderFor>
       <RenderFor audience="authenticated">
         <SearchInput />
-      </RenderFor>
-      <RenderFor audience="authenticated" device={["mobile"]}>
-        {@render traktSwitch()}
       </RenderFor>
     </div>
 
@@ -135,6 +136,9 @@
         <JoinTraktButton />
       </RenderFor>
       <RenderFor audience="authenticated">
+        {#if !isVip}
+          <GetVIPLink />
+        {/if}
         <FilterButton />
         <ProfileButton />
       </RenderFor>
@@ -181,10 +185,6 @@
     transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
     transition-property: padding, margin, width, background-color, box-shadow;
 
-    @include for-mobile {
-      gap: var(--gap-m);
-    }
-
     .trakt-navbar-content {
       width: 100%;
 
@@ -198,6 +198,14 @@
       gap: var(--gap-xs);
       align-items: center;
       justify-content: end;
+    }
+
+    @include for-mobile {
+      gap: var(--gap-s);
+
+      .trakt-navbar-content {
+        gap: var(--gap-s);
+      }
     }
   }
 
