@@ -3,6 +3,7 @@
   import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import * as m from "$lib/features/i18n/messages";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
 
   const { url } = useAuth();
 </script>
@@ -12,6 +13,7 @@
   href={$url}
   label={m.join_trakt_button_label()}
   style="flat"
+  navigationType={DpadNavigationType.Item}
 >
   {m.join_trakt_for_free_button()}
   {#snippet icon()}

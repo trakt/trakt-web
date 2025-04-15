@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Steps from "./components/Steps.svelte";
   import TrendingItems from "./components/TrendingItems.svelte";
 </script>
 
-<div class="trakt-landing-container">
+<div
+  class="trakt-landing-container"
+  data-dpad-navigation={DpadNavigationType.List}
+>
   <Steps />
   <!-- TODO: responsive design -->
   <RenderFor device={["desktop"]} audience="public">
