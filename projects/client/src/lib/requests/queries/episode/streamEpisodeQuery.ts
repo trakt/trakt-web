@@ -24,6 +24,9 @@ const streamEpisodeRequest = (
         episode,
         country,
       },
+      query: {
+        links: 'tvos',
+      },
     });
 
 export const streamEpisodeQuery = defineQuery({

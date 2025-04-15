@@ -3,6 +3,7 @@ import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 
 export const StreamingSubscriptionSchema = z.object({
   link: HttpsUrlSchema,
+  deepLink: z.string().nullish(),
   source: z.string(),
   is4k: z.boolean(),
   type: z.literal('streaming'),
@@ -13,6 +14,7 @@ export type StreamNow = z.infer<
 
 export const OnDemandStreamingSchema = z.object({
   link: HttpsUrlSchema,
+  deepLink: z.string().nullish(),
   source: z.string(),
   is4k: z.boolean(),
   type: z.literal('on-demand'),

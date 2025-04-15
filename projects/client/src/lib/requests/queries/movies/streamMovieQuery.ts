@@ -19,6 +19,9 @@ const streamMovieRequest = (
         id: slug,
         country,
       },
+      query: {
+        links: 'tvos',
+      },
     });
 
 export const streamMovieQuery = defineQuery({

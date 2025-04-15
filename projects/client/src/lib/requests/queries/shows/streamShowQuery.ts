@@ -19,6 +19,9 @@ const showWatchNowRequest = (
         id: slug,
         country,
       },
+      query: {
+        links: 'tvos',
+      },
     });
 
 export const streamShowQuery = defineQuery({
