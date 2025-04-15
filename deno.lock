@@ -5,7 +5,7 @@
     "npm:@cucumber/cucumber@^11.2.0": "11.2.0_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.0.2_@cucumber+messages@27.0.2",
     "npm:@google/generative-ai@0.24": "0.24.0",
     "npm:@inlang/paraglide-sveltekit@~0.16.1": "0.16.1_@sveltejs+kit@2.20.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.25.3____acorn@8.14.1___vite@6.2.3____sass-embedded@1.86.0___sass-embedded@1.86.0__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_sass-embedded@1.86.0",
-    "npm:@jsr/trakt__api@~0.1.17": "0.1.17_zod@3.24.1",
+    "npm:@jsr/trakt__api@~0.1.19": "0.1.19_zod@3.24.1",
     "npm:@playwright/test@^1.51.1": "1.51.1",
     "npm:@svelte-plugins/tooltips@^3.0.3": "3.0.3_svelte@5.25.3__acorn@8.14.1",
     "npm:@sveltejs/adapter-auto@5": "5.0.0_@sveltejs+kit@2.20.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.25.3____acorn@8.14.1___vite@6.2.3____sass-embedded@1.86.0___sass-embedded@1.86.0__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_sass-embedded@1.86.0",
@@ -937,9 +937,9 @@
       "dependencies": [
         "@cucumber/ci-environment",
         "@cucumber/cucumber-expressions",
+        "@cucumber/gherkin@30.0.4",
         "@cucumber/gherkin-streams",
         "@cucumber/gherkin-utils",
-        "@cucumber/gherkin@30.0.4",
         "@cucumber/html-formatter",
         "@cucumber/junit-xml-formatter",
         "@cucumber/message-streams",
@@ -2112,12 +2112,12 @@
     "@isaacs/cliui@8.0.2": {
       "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",
       "dependencies": [
-        "string-width-cjs@npm:string-width@4.2.3",
         "string-width@5.1.2",
-        "strip-ansi-cjs@npm:strip-ansi@6.0.1",
+        "string-width-cjs@npm:string-width@4.2.3",
         "strip-ansi@7.1.0",
-        "wrap-ansi-cjs@npm:wrap-ansi@7.0.0",
-        "wrap-ansi@8.1.0"
+        "strip-ansi-cjs@npm:strip-ansi@6.0.1",
+        "wrap-ansi@8.1.0",
+        "wrap-ansi-cjs@npm:wrap-ansi@7.0.0"
       ]
     },
     "@istanbuljs/schema@0.1.3": {
@@ -2161,8 +2161,8 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@jsr/trakt__api@0.1.17_zod@3.24.1": {
-      "integrity": "sha512-IcpV08rxWs4PUmGMYtTHtoIvZ1pp56mtmLncAbywmldlKcU/oVqCqLsNMVdNwoN8pz8KSPJans40/APluH2T7A==",
+    "@jsr/trakt__api@0.1.19_zod@3.24.1": {
+      "integrity": "sha512-Gj2ixCVxdaYEhh7KmZlqhTPNBpfFtKBURH4SpS3A0UQbYdYj63P1nPVdZaEdsLWJmydDpeKA/Gp0FQLyvvGKvQ==",
       "dependencies": [
         "@ts-rest/core",
         "zod@3.24.1"
@@ -3742,15 +3742,15 @@
     "esbuild@0.17.19": {
       "integrity": "sha512-XQ0jAPFkK/u3LcVRcvVHQcTIqD6E2H1fvZMA5dQPSOWb3suUbWbfbRf94pjc0bNzRYLfIrDRQXr7X+LHIm5oHw==",
       "dependencies": [
-        "@esbuild/android-arm64@0.17.19",
         "@esbuild/android-arm@0.17.19",
+        "@esbuild/android-arm64@0.17.19",
         "@esbuild/android-x64@0.17.19",
         "@esbuild/darwin-arm64@0.17.19",
         "@esbuild/darwin-x64@0.17.19",
         "@esbuild/freebsd-arm64@0.17.19",
         "@esbuild/freebsd-x64@0.17.19",
-        "@esbuild/linux-arm64@0.17.19",
         "@esbuild/linux-arm@0.17.19",
+        "@esbuild/linux-arm64@0.17.19",
         "@esbuild/linux-ia32@0.17.19",
         "@esbuild/linux-loong64@0.17.19",
         "@esbuild/linux-mips64el@0.17.19",
@@ -3770,15 +3770,15 @@
       "integrity": "sha512-+9egpBW8I3CD5XPe0n6BfT5fxLzxrlDzqydF3aviG+9ni1lDC/OvMHcxqEFV0+LANZG5R1bFMWfUrjVsdwxJvA==",
       "dependencies": [
         "@esbuild/aix-ppc64@0.24.2",
-        "@esbuild/android-arm64@0.24.2",
         "@esbuild/android-arm@0.24.2",
+        "@esbuild/android-arm64@0.24.2",
         "@esbuild/android-x64@0.24.2",
         "@esbuild/darwin-arm64@0.24.2",
         "@esbuild/darwin-x64@0.24.2",
         "@esbuild/freebsd-arm64@0.24.2",
         "@esbuild/freebsd-x64@0.24.2",
-        "@esbuild/linux-arm64@0.24.2",
         "@esbuild/linux-arm@0.24.2",
+        "@esbuild/linux-arm64@0.24.2",
         "@esbuild/linux-ia32@0.24.2",
         "@esbuild/linux-loong64@0.24.2",
         "@esbuild/linux-mips64el@0.24.2",
@@ -3800,15 +3800,15 @@
       "integrity": "sha512-BGO5LtrGC7vxnqucAe/rmvKdJllfGaYWdyABvyMoXQlfYMb2bbRuReWR5tEGE//4LcNJj9XrkovTqNYRFZHAMQ==",
       "dependencies": [
         "@esbuild/aix-ppc64@0.25.1",
-        "@esbuild/android-arm64@0.25.1",
         "@esbuild/android-arm@0.25.1",
+        "@esbuild/android-arm64@0.25.1",
         "@esbuild/android-x64@0.25.1",
         "@esbuild/darwin-arm64@0.25.1",
         "@esbuild/darwin-x64@0.25.1",
         "@esbuild/freebsd-arm64@0.25.1",
         "@esbuild/freebsd-x64@0.25.1",
-        "@esbuild/linux-arm64@0.25.1",
         "@esbuild/linux-arm@0.25.1",
+        "@esbuild/linux-arm64@0.25.1",
         "@esbuild/linux-ia32@0.25.1",
         "@esbuild/linux-loong64@0.25.1",
         "@esbuild/linux-mips64el@0.25.1",
@@ -3926,16 +3926,16 @@
     "espree@10.3.0_acorn@8.14.1": {
       "integrity": "sha512-0QYC8b24HWY8zjRnDTL6RiHfDbAWn63qb4LMj1Z4b076A4une81+z03Kg7l7mn/48PUTqoLptSXez8oknU8Clg==",
       "dependencies": [
-        "acorn-jsx",
         "acorn@8.14.1",
+        "acorn-jsx",
         "eslint-visitor-keys@4.2.0"
       ]
     },
     "espree@9.6.1_acorn@8.14.1": {
       "integrity": "sha512-oruZaFkjorTpF32kDSI5/75ViwGeZginGGy2NoOSg3Q9bnwlnmDm4HLnkl0RE3n+njDXR037aY1+x58Z/zFdwQ==",
       "dependencies": [
-        "acorn-jsx",
         "acorn@8.14.1",
+        "acorn-jsx",
         "eslint-visitor-keys@3.4.3"
       ]
     },
@@ -4990,8 +4990,8 @@
       "integrity": "sha512-c9QPrgBUFzjL4pYvW6GIUw+NqeYlZGVHASKJqjIXB1WVsl14nYfpfHphYK8tluKaBqwA9NFyO5dC2zatJkC/mA==",
       "dependencies": [
         "@cspotcode/source-map-support",
-        "acorn-walk",
         "acorn@8.14.0",
+        "acorn-walk",
         "exit-hook",
         "glob-to-regexp",
         "stoppable",
@@ -7001,7 +7001,7 @@
             "npm:@cucumber/cucumber@^11.2.0",
             "npm:@google/generative-ai@0.24",
             "npm:@inlang/paraglide-sveltekit@~0.16.1",
-            "npm:@jsr/trakt__api@~0.1.17",
+            "npm:@jsr/trakt__api@~0.1.19",
             "npm:@playwright/test@^1.51.1",
             "npm:@svelte-plugins/tooltips@^3.0.3",
             "npm:@sveltejs/adapter-auto@5",
