@@ -119,7 +119,7 @@
         color-mix(in srgb, var(--color-shadow) 4%, transparent 96%),
       var(--ni-0) var(--ni-60) var(--ni-24) var(--ni-0)
         color-mix(in srgb, var(--color-shadow) 1%, transparent 99%),
-      var(--ni-0) var(--ni-95) var(--ni-32) var(--ni-0)
+      var(--ni-0) var(--ni-96) var(--ni-32) var(--ni-0)
         color-mix(in srgb, var(--color-shadow) 0%, transparent 100%);
 
     ul {
