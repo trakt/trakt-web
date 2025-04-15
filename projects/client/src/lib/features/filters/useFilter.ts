@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import type { GenreFilter } from '$lib/features/filters/models/GenreFilter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
@@ -11,6 +13,8 @@ const FILTER_CONTEXT_KEY = Symbol('filter');
 type FilterContextData = Writable<GenreFilter>;
 
 export function useFilter() {
+  const { track } = useTrack(AnalyticsEvent.Filter);
+
   const filter = getContext<FilterContextData>(FILTER_CONTEXT_KEY) ??
     setContext<FilterContextData>(
       FILTER_CONTEXT_KEY,
@@ -33,10 +37,13 @@ export function useFilter() {
         'Filter has not been initialized',
       )),
     setFilter: (value: Genre | null) => {
-      filter.update((current) => ({
-        ...current,
-        value,
-      }));
+      filter.update((current) => {
+        track({ id: current.key, action: value ? 'set' : 'reset' });
+        return {
+          ...current,
+          value,
+        };
+      });
     },
     filterMap: derived(filter, ($filter) => {
       if (!$filter?.value) {
