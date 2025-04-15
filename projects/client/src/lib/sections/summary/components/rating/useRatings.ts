@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { SimpleRating } from '$lib/models/SimpleRating.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -6,7 +8,7 @@ import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { mapRatingToSimpleRating } from '$lib/sections/summary/components/rating/mapRatingToSimpleRating.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { RatingsRequest } from '@trakt/api';
-import { derived, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
 import { SIMPLE_RATINGS } from './constants.ts';
 
 type RateableType = MediaType | 'episode';
@@ -46,6 +48,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
   const isRating = writable(false);
   const { ratings } = useUser();
   const { invalidate } = useInvalidator();
+  const { track } = useTrack(AnalyticsEvent.Rate);
 
   const rating = derived(
     ratings,
@@ -78,6 +81,11 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
 
   const addRating = async (simpleRating: SimpleRating) => {
     isRating.set(true);
+    track({
+      action: get(currentRating) ? 'changed' : 'added',
+      rating: simpleRating,
+    });
+
     await addRatingRequest({
       body: toRatingPayload(type, id, simpleRating),
     });
