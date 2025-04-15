@@ -6,9 +6,9 @@
 
 <Card
   variant="transparent"
-  --width-card="var(--width-poster-card)"
-  --height-card="var(--height-poster-card)"
-  --height-card-cover="var(--height-poster-card-cover)"
+  --width-card="var(--width-landscape-card)"
+  --height-card="var(--height-landscape-card)"
+  --height-card-cover="var(--height-landscape-card-cover)"
 >
   {@render children()}
 </Card>

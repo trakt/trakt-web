@@ -2,25 +2,16 @@
   /**
    * Card dimensions
    */
-  --width-poster-card: var(--ni-136);
-  --height-poster-card: var(--ni-228);
-  --height-poster-card-cover: var(--ni-196);
+  --width-poster-card: var(--ni-132);
+  --height-poster-card: var(--ni-238);
+  --height-poster-card-cover: var(--ni-198);
 
-  --width-thumb-card: var(--ni-212);
-  --height-thumb-card: var(--ni-160);
-  --height-thumb-card-cover: var(--ni-120);
-
-  --width-activity-card: var(--ni-212);
-  --height-activity-card: var(--ni-172);
-  --height-activity-card-cover: var(--ni-120);
-
-  --width-episode-card: var(--ni-212);
-  --height-episode-card: var(--ni-172);
-  --height-episode-card-cover: var(--ni-120);
+  --width-landscape-card: var(--ni-200);
+  --height-landscape-card: var(--ni-152);
+  --height-landscape-card-cover: var(--ni-112);
 
   --width-person-card: var(--ni-120);
-  --height-person-card: var(--ni-176);
-  --height-person-footer: var(--ni-32);
+  --height-person-card: var(--ni-216);
   --height-person-card-cover: var(--ni-176);
 
   --width-summary-card: 100%;
@@ -39,34 +30,23 @@
   /**
    * List dimensions
    */
-  --height-episode-list: calc(
-    var(--height-episode-card) + var(--layout-distance-scroll-card)
-      + var(--layout-scrollbar-width)
-  );
-  --height-thumb-list: calc(
-    var(--height-thumb-card) + var(--layout-distance-scroll-card)
-      + var(--layout-scrollbar-width)
+  --height-landscape-list: calc(
+    var(--height-landscape-card) + var(--layout-scrollbar-width)
   );
   --height-person-list: calc(
-    var(--height-person-card) + var(--layout-distance-scroll-card)
-      + var(--layout-scrollbar-width)
-      + var(--height-person-footer)
+    var(--height-person-card) + var(--layout-scrollbar-width)
   );
   --height-poster-list: calc(
-    var(--height-poster-card) + var(--layout-distance-scroll-card)
-      + var(--layout-scrollbar-width)
+    var(--height-poster-card) + var(--layout-scrollbar-width)
   );
   --height-lists-list: calc(
-    var(--height-list-card) + var(--layout-distance-scroll-card)
-      + var(--layout-scrollbar-width)
+    var(--height-list-card) + var(--layout-scrollbar-width)
   );
   --height-comments-list: calc(
-    var(--height-comment-card) + var(--layout-distance-scroll-card)
-      + var(--layout-scrollbar-width)
+    var(--height-comment-card) + var(--layout-scrollbar-width)
   );
   --height-comment-thread-list: calc(
-    var(--height-comment-thread-card) + var(--layout-distance-scroll-card)
-      + var(--layout-scrollbar-width)
+    var(--height-comment-thread-card) + var(--layout-scrollbar-width)
   );
 
   /**
@@ -76,6 +56,5 @@
   --navbar-height: var(--ni-72);
 
   --layout-distance-side: var(--ni-24);
-  --layout-distance-scroll-card: var(--ni-24);
   --layout-scrollbar-width: var(--ni-8);
 }

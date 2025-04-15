@@ -35,34 +35,14 @@
 </script>
 
 {#if isFullSeason}
-  <StemTag
-    --color-background-stem-tag={"var(--color-background-full-season-tag)"}
-    --color-text-stem-tag={"var(--color-text-full-season-tag)"}
-  >
-    {i18n.fullSeasonText()}
-  </StemTag>
+  <StemTag text={i18n.fullSeasonText()} />
 {/if}
 {#if isFinale}
-  <StemTag
-    --color-background-stem-tag={"var(--color-background-finale-tag)"}
-    --color-text-stem-tag={"var(--color-text-finale-tag)"}
-  >
-    {i18n.finaleText({ type: type as EpisodeFinaleType })}
-  </StemTag>
+  <StemTag text={i18n.finaleText({ type: type as EpisodeFinaleType })} />
 {/if}
 {#if isPremiere}
-  <StemTag
-    --color-background-stem-tag={"var(--color-background-series-premiere-tag)"}
-    --color-text-stem-tag={"var(--color-text-series-premiere-tag)"}
-  >
-    {i18n.premiereText({ type: type as EpisodePremiereType })}
-  </StemTag>
+  <StemTag text={i18n.premiereText({ type: type as EpisodePremiereType })} />
 {/if}
 {#if isSeasonPremiere}
-  <StemTag
-    --color-background-stem-tag={"var(--color-background-season-premiere-tag)"}
-    --color-text-stem-tag={"var(--color-text-season-premiere-tag)"}
-  >
-    {i18n.premiereText({ type: type as EpisodePremiereType })}
-  </StemTag>
+  <StemTag text={i18n.premiereText({ type: type as EpisodePremiereType })} />
 {/if}

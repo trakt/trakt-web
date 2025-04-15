@@ -2,15 +2,23 @@
   import TagContent from "$lib/components/tags/TagContent.svelte";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
 
-  const { children, classList = "" }: { classList?: string } & ChildrenProps =
-    $props();
+  type StemTagProps = {
+    classList?: string;
+    text?: string;
+  } & Partial<ChildrenProps>;
+
+  const { children, text, classList = "" }: StemTagProps = $props();
 </script>
 
 <div class="trakt-stem-tag" use:appendClassList={classList}>
   <TagContent>
-    <p class="meta-info">
+    {#if children}
       {@render children()}
-    </p>
+    {:else}
+      <p class="meta-info">
+        {text}
+      </p>
+    {/if}
   </TagContent>
 </div>
 
@@ -18,7 +26,7 @@
   .trakt-stem-tag {
     :global(.trakt-tag) {
       background: var(--color-background-stem-tag);
-      color: var(--color-text-stem-tag);
+      color: var(--color-foreground-stem-tag);
     }
   }
 </style>

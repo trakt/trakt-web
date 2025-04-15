@@ -53,6 +53,7 @@
 
       position: relative;
       background: var(--color-background-progress-base-tag);
+      backdrop-filter: blur(var(--ni-16));
       color: var(--color-text-progress-tag);
     }
   }

@@ -11,11 +11,11 @@
     display: flex;
     align-items: center;
 
-    height: var(--ni-14);
-    line-height: var(--ni-14);
+    height: var(--ni-12);
+    line-height: var(--ni-12);
     margin: 0;
-    padding: var(--ni-2) var(--ni-8);
+    padding: var(--ni-4) var(--ni-8);
 
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius-m);
   }
 </style>

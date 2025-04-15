@@ -5,6 +5,7 @@
 </script>
 
 <Card
+  variant="transparent"
   --width-card="var(--width-person-card)"
   --height-card="var(--height-person-card)"
   --height-card-cover="var(--height-person-card-cover)"

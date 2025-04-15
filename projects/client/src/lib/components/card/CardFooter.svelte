@@ -19,9 +19,10 @@
 </div>
 
 <style>
-  :global(.trakt-card-footer-action .trakt-action-button) {
-    box-shadow: 0px 4px 6px
-      color-mix(in srgb, var(--color-shadow) 20%, transparent);
+  :global(.trakt-card-transparent) {
+    .trakt-card-footer {
+      padding: var(--ni-8) 0;
+    }
   }
 
   .trakt-card-footer {
@@ -34,6 +35,7 @@
     display: flex;
     gap: var(--gap-xs);
     justify-content: space-between;
+    align-items: center;
 
     :global(.trakt-link) {
       text-decoration: none;
@@ -41,26 +43,17 @@
 
     .trakt-card-footer-information {
       width: 100%;
-      margin-top: var(--ni-neg-4);
       overflow: hidden;
 
       display: flex;
       flex-direction: column;
       gap: var(--gap-xxs);
 
-      &:global(:has(> :nth-child(2))),
-      &:global(:not(:has(~ .trakt-card-footer-action))) {
-        justify-content: center;
-      }
-
-      &:global(:has(~ .trakt-card-footer-action:not(:empty)) > :nth-child(2)) {
-        max-width: 80%;
-      }
-
       :global(.trakt-card-title) {
         color: var(--color-text-primary);
         margin: 0;
         font-weight: 500;
+        font-size: var(--ni-11);
 
         :global(:has(~ .trakt-card-subtitle)) {
           font-weight: 600;
@@ -71,15 +64,8 @@
         color: var(--color-text-secondary);
         margin: 0;
         font-weight: 500;
+        font-size: var(--ni-11);
       }
-    }
-
-    .trakt-card-footer-action {
-      position: absolute;
-      bottom: var(--ni-neg-16);
-      right: var(--ni-8);
-      display: flex;
-      gap: var(--gap-xxs);
     }
   }
 </style>

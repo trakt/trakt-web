@@ -5,7 +5,7 @@ export function mediaCardWidthResolver<M = MediaType>(
 ) {
   switch (type) {
     case 'episode':
-      return 'var(--width-episode-card)';
+      return 'var(--width-landscape-card)';
     default:
       return 'var(--width-poster-card)';
   }

@@ -71,16 +71,16 @@
       outline: none;
       position: relative;
 
-      &:not(:has(p, span))::after {
+      &:has(:global(.card-cover))::after {
         position: absolute;
         top: 0;
         left: 0;
         content: "";
         width: 100%;
         height: 100%;
-        outline: var(--border-thickness-xs) solid var(--color-link-active);
-        border-radius: var(--border-radius-xs);
-        outline-offset: var(--border-thickness-s);
+        outline: var(--border-thickness-s) solid var(--color-link-active);
+        border-radius: var(--border-radius-m);
+        outline-offset: calc(-1 * var(--border-thickness-s));
 
         transition: border-radius var(--transition-increment) ease-in-out;
       }

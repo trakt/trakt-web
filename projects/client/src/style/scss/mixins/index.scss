@@ -78,20 +78,3 @@
     }
   }
 }
-
-@mixin focused-item-style($height) {
-  &:has(:global(.trakt-link:focus-visible)) {
-    &:after {
-      content: "";
-      width: 100%;
-      height: $height;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border: var(--border-thickness-s) solid var(--color-link-active);
-      border-radius: var(--border-radius-m);
-      box-sizing: border-box;
-      z-index: var(--layer-raised);
-    }
-  }
-}

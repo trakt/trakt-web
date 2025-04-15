@@ -48,7 +48,7 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} {...props}>
+  <ActionButton style="ghost" {...commonProps} {...props}>
     <MarkAsWatchedIcon {state} />
   </ActionButton>
 {/if}
