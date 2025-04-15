@@ -5,6 +5,7 @@ import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
+type FilterType = { id: string; action: 'set' | 'reset' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -13,6 +14,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.Theme]: { theme: Theme };
   [AnalyticsEvent.Locale]: { locale: string };
+  [AnalyticsEvent.Filter]: FilterType;
 
   [AnalyticsEvent.Drop]: never;
   [AnalyticsEvent.Restore]: never;

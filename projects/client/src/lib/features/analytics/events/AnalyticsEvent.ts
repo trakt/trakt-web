@@ -15,6 +15,7 @@ export const AnalyticsEvent = {
 
   Theme: buildEventKey(ACTION_PREFIX, 'theme'),
   Locale: buildEventKey(ACTION_PREFIX, 'locale'),
+  Filter: buildEventKey(ACTION_PREFIX, 'filter'),
 
   Drop: buildEventKey(MEDIA_ACTION_PREFIX, 'drop'),
   Restore: buildEventKey(MEDIA_ACTION_PREFIX, 'restore'),
