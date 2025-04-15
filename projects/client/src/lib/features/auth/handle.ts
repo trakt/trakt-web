@@ -72,7 +72,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         {
           httpOnly: true,
           secure: true,
-          expires: new Date(result.expiresAt ?? 0),
+          maxAge: time.years(1) / time.seconds(1),
           path: '/',
         },
       );
@@ -113,7 +113,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       {
         httpOnly: true,
         secure: true,
-        expires: new Date(result.expiresAt ?? 0),
+        maxAge: time.years(1) / time.seconds(1),
         path: '/',
       },
     );
