@@ -72,7 +72,6 @@
     height: var(--poster-height);
     width: var(--poster-width);
 
-    background-color: var(--color-card-background);
     box-shadow: var(--list-poster-shadow);
     border-radius: var(--border-radius-m);
     overflow: hidden;

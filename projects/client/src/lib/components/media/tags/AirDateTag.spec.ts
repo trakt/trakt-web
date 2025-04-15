@@ -102,19 +102,4 @@ describe('AirDateTag', () => {
 
     expect(screen.getByText(`${currentYear + 1}`)).toBeDefined();
   });
-
-  it('should pass correct CSS variables to StemTag', () => {
-    const { container } = render(AirDateTag, {
-      props: {
-        year: null,
-        airDate: new Date(),
-        i18n: TagIntlProvider,
-      },
-    });
-
-    expect(container.firstElementChild).toHaveStyle({
-      '--color-background-stem-tag': 'var(--color-background-air-date-tag)',
-      '--color-text-stem-tag': 'var(--color-text-air-date-tag)',
-    });
-  });
 });

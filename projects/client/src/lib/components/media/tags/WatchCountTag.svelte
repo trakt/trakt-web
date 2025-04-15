@@ -19,7 +19,7 @@
 <watch-count-tag>
   <StemTag
     --color-background-stem-tag="var(--color-background-watch-count-tag)"
-    --color-text-stem-tag="var(--color-text-watch-count-tag)"
+    --color-foreground-stem-tag="var(--color-text-watch-count-tag)"
     classList="trakt-tag-label"
   >
     <p class="meta-info uppercase no-wrap">
@@ -29,7 +29,7 @@
 
   <StemTag
     --color-background-stem-tag="var(--color-background-watch-count-tag)"
-    --color-text-stem-tag="var(--color-text-watch-count-tag)"
+    --color-foreground-stem-tag="var(--color-text-watch-count-tag)"
     classList="trakt-tag-count"
   >
     {#key count}

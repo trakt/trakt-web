@@ -6,8 +6,7 @@
 
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
-  import ActivityCard from "$lib/components/media/card/ActivityCard.svelte";
-  import ThumbCard from "$lib/components/media/card/ThumbCard.svelte";
+  import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
@@ -47,58 +46,53 @@
 {/snippet}
 
 {#snippet content(mediaCoverImageUrl: string)}
-  <trakt-media-card-content>
-    {#if popupActions}
-      <CardActionBar>
-        {#snippet actions()}
-          <PopupMenu label={m.media_popup_label({ title: media.title })}>
-            {#snippet items()}
-              {@render popupActions()}
-            {/snippet}
-          </PopupMenu>
-        {/snippet}
-      </CardActionBar>
-    {/if}
+  {#if popupActions}
+    <CardActionBar>
+      {#snippet actions()}
+        <PopupMenu label={m.media_popup_label({ title: media.title })}>
+          {#snippet items()}
+            {@render popupActions()}
+          {/snippet}
+        </PopupMenu>
+      {/snippet}
+    </CardActionBar>
+  {/if}
 
-    <Link
-      focusable={false}
-      href={UrlBuilder.media(type, media.slug)}
-      navigationType={DpadNavigationType.Item}
+  <Link
+    focusable={false}
+    href={UrlBuilder.media(type, media.slug)}
+    navigationType={DpadNavigationType.Item}
+  >
+    <CardCover
+      src={mediaCoverImageUrl}
+      alt={m.media_poster({ title: media.title })}
     >
-      <CardCover
-        src={mediaCoverImageUrl}
-        alt={m.media_poster({ title: media.title })}
-      >
-        {#snippet badges()}
-          {@render externalBadges?.()}
-        {/snippet}
+      {#snippet badges()}
+        {@render externalBadges?.()}
+      {/snippet}
+    </CardCover>
+  </Link>
 
-        {#snippet tags()}
-          {#if externalTags}
-            {@render externalTags()}
-          {:else}
-            {@render defaultTags(media)}
-          {/if}
-        {/snippet}
-      </CardCover>
-    </Link>
-
-    <CardFooter {action}>
-      <Link href={UrlBuilder.media(type, media.slug)}>
-        <p
-          class="trakt-card-title small ellipsis"
-          class:small={rest.variant !== "activity"}
-        >
-          {media.title}
-        </p>
-      </Link>
-      {#if rest.variant === "activity"}
-        <p class="trakt-card-subtitle small ellipsis">
-          {toHumanDate(new Date(), rest.date, getLocale())}
-        </p>
+  <CardFooter {action}>
+    <Link href={UrlBuilder.media(type, media.slug)}>
+      {#if externalTags}
+        {@render externalTags()}
+      {:else}
+        {@render defaultTags(media)}
       {/if}
-    </CardFooter>
-  </trakt-media-card-content>
+    </Link>
+    {#if rest.variant === "activity"}
+      <p
+        class="trakt-card-title small ellipsis"
+        class:small={rest.variant !== "activity"}
+      >
+        {media.title}
+      </p>
+      <p class="trakt-card-subtitle small ellipsis">
+        {toHumanDate(new Date(), rest.date, getLocale())}
+      </p>
+    {/if}
+  </CardFooter>
 {/snippet}
 
 {#if variant === "poster"}
@@ -108,21 +102,13 @@
 {/if}
 
 {#if variant === "thumb"}
-  <ThumbCard>
+  <LandscapeCard>
     {@render content(media.thumb.url)}
-  </ThumbCard>
+  </LandscapeCard>
 {/if}
 
 {#if variant === "activity"}
-  <ActivityCard>
+  <LandscapeCard>
     {@render content(media.thumb.url)}
-  </ActivityCard>
+  </LandscapeCard>
 {/if}
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  trakt-media-card-content {
-    @include focused-item-style(var(--height-card-cover));
-  }
-</style>

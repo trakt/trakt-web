@@ -5,7 +5,7 @@ export function mediaListHeightResolver<M = MediaType>(
 ) {
   switch (type) {
     case 'episode':
-      return 'var(--height-episode-list)';
+      return 'var(--height-landscape-list)';
     case 'person':
       return 'var(--height-person-list)';
     default:

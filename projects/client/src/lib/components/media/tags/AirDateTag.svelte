@@ -13,10 +13,7 @@
   } = $props();
 </script>
 
-<StemTag
-  --color-background-stem-tag="var(--color-background-air-date-tag)"
-  --color-text-stem-tag="var(--color-text-air-date-tag)"
->
+<StemTag>
   <p class="meta-info capitalize no-wrap">
     {#if year == null}
       <!-- TODO: investigate if we can determine using airDate -->

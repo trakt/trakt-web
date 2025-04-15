@@ -61,13 +61,13 @@
 
       background: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--color-background) 64%, transparent 36%) 0%,
-        color-mix(in srgb, var(--color-background) 67%, transparent 33%) 13%,
-        color-mix(in srgb, var(--color-background) 70%, transparent 30%) 25%,
-        color-mix(in srgb, var(--color-background) 74%, transparent 26%) 34%,
-        color-mix(in srgb, var(--color-background) 79%, transparent 21%) 46%,
-        color-mix(in srgb, var(--color-background) 86%, transparent 14%) 64%,
-        color-mix(in srgb, var(--color-background) 95%, transparent 5%) 85%,
+        color-mix(in srgb, var(--color-background) 64%, transparent) 0%,
+        color-mix(in srgb, var(--color-background) 67%, transparent) 13%,
+        color-mix(in srgb, var(--color-background) 70%, transparent) 25%,
+        color-mix(in srgb, var(--color-background) 74%, transparent) 34%,
+        color-mix(in srgb, var(--color-background) 79%, transparent) 46%,
+        color-mix(in srgb, var(--color-background) 86%, transparent) 64%,
+        color-mix(in srgb, var(--color-background) 95%, transparent) 85%,
         var(--color-background) 100%
       );
 
@@ -76,7 +76,7 @@
       @include for-tablet-sm-and-below {
         background: linear-gradient(
           180deg,
-          color-mix(in srgb, var(--color-background) 15%, transparent 85%) 0%,
+          color-mix(in srgb, var(--color-background) 15%, transparent) 0%,
           var(--color-background) 100%
         );
       }

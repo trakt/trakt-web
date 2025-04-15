@@ -47,8 +47,8 @@
   .card-cover {
     --padding-card-tag: var(--ni-8);
 
-    border-top-left-radius: var(--border-radius-m);
-    border-top-right-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-m);
+    background-color: var(--color-card-background);
     overflow: hidden;
     position: relative;
 
@@ -100,20 +100,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    &.has-gradient::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: var(--width-card);
-      height: var(--ni-40);
-      flex-shrink: 0;
-      z-index: var(--layer-base);
-
-      background: var(--card-shadow);
     }
   }
 </style>

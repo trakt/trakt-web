@@ -1,6 +1,5 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
-  import EpisodeStatusTag from "$lib/components/episode/tags/EpisodeStatusTag.svelte";
   import EpisodeTimeTag from "$lib/components/episode/tags/EpisodeTimeTag.svelte";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
@@ -50,10 +49,6 @@
 {/snippet}
 
 {#snippet badges()}
-  {#if !isDefault}
-    <EpisodeStatusTag i18n={EpisodeIntlProvider} type={props.episode.type} />
-  {/if}
-
   {#if props.variant === "default"}
     {#if isFuture}
       <EpisodeTimeTag>
@@ -62,12 +57,6 @@
     {:else}
       <DurationTag i18n={TagIntlProvider} runtime={props.episode.runtime} />
     {/if}
-  {/if}
-
-  {#if props.variant === "upcoming"}
-    <EpisodeTimeTag>
-      {EpisodeIntlProvider.timestampText(props.episode.airDate)}
-    </EpisodeTimeTag>
   {/if}
 {/snippet}
 

@@ -62,11 +62,13 @@
       --color-background-action-button: #{$background-color};
       --color-foreground-action-button: #{$foreground-color};
 
-      @include for-mouse {
-        &:hover,
-        &:focus-visible {
-          --color-background-action-button: #{$foreground-color};
-          --color-foreground-action-button: #{$background-color};
+      &:not([data-style="ghost"]) {
+        @include for-mouse {
+          &:hover,
+          &:focus-visible {
+            --color-background-action-button: #{$foreground-color};
+            --color-foreground-action-button: #{$background-color};
+          }
         }
       }
     }
@@ -150,16 +152,8 @@
 
     &[data-style="ghost"] {
       background-color: transparent;
-
-      &:focus-visible {
-        background-color: var(--color-background-action-button);
-      }
-
-      @include for-mouse {
-        &:hover:not([disabled]) {
-          background-color: var(--color-background-action-button);
-        }
-      }
+      /** This is required for improved readability when rendering over a cover image */
+      backdrop-filter: blur(var(--ni-16));
     }
   }
 </style>

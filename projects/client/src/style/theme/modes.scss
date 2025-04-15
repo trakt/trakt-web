@@ -23,7 +23,7 @@
   /*
    * Card
    */
-  --color-card-background: var(--shade-10);
+  --color-card-background: var(--shade-20);
   --color-official-list-background: var(--purple-200);
   --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
   --card-shadow: linear-gradient(180deg,
@@ -84,15 +84,6 @@
    */
   --color-tooltip-background: var(--shade-10);
   --color-tooltip-text: var(--shade-800);
-
-  /*
-   * Tags
-   */
-  --color-text-time-tag: var(--shade-10);
-  --color-background-time-tag: var(--shade-800);
-
-  --color-text-duration-tag: var(--shade-10);
-  --color-background-duration-tag: var(--shade-800);
 
   /**
    * Sentiments

@@ -1,5 +1,6 @@
 <script lang="ts">
   import CardCover from "$lib/components/card/CardCover.svelte";
+  import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
   import * as m from "$lib/features/i18n/messages";
@@ -20,19 +21,17 @@
     href={UrlBuilder.people(castMember.id)}
     navigationType={DpadNavigationType.Item}
   >
-    <div class="trakt-cast-member">
-      <PersonCard>
-        <CardCover
-          src={castMember.headShotUrl}
-          alt={`${m.person_headshot({ person: castMember.name })}`}
-          style="flat"
-        />
-      </PersonCard>
-      <div class="trakt-cast-member-footer">
+    <PersonCard>
+      <CardCover
+        src={castMember.headShotUrl}
+        alt={`${m.person_headshot({ person: castMember.name })}`}
+        style="flat"
+      />
+      <CardFooter>
         <p class="secondary ellipsis actor-name">{castMember.name}</p>
         <p class="small secondary ellipsis">{castMember.characterName}</p>
-      </div>
-    </div>
+      </CardFooter>
+    </PersonCard>
   </Link>
 </trakt-cast-member>
 
@@ -45,19 +44,6 @@
     :global(.trakt-link) {
       text-decoration: none;
     }
-
-    @include focused-item-style(var(--height-person-card));
-  }
-
-  .trakt-cast-member-footer {
-    height: var(--height-person-footer);
-  }
-
-  .trakt-cast-member {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xxs);
-    width: var(--width-person-card);
   }
 
   .actor-name {
