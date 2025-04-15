@@ -6,6 +6,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       'currency': 'usd',
       'is4k': true,
       'link': 'https://trakt.tv/watchnow/189110873',
+      'deepLink': undefined,
       'prices': {
         'purchase': 24.99,
         'rent': 19.99,
@@ -17,6 +18,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       'currency': 'usd',
       'is4k': true,
       'link': 'https://trakt.tv/watchnow/189802504',
+      'deepLink': undefined,
       'prices': {
         'purchase': 19.99,
         'rent': 19.99,
@@ -28,6 +30,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       'currency': 'usd',
       'is4k': true,
       'link': 'https://trakt.tv/watchnow/183946473',
+      'deepLink': undefined,
       'prices': {
         'purchase': 19.99,
         'rent': 19.99,
@@ -39,6 +42,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       'currency': 'usd',
       'is4k': false,
       'link': 'https://trakt.tv/watchnow/189673385',
+      'deepLink': undefined,
       'prices': {
         'purchase': 24.99,
         'rent': 19.99,
@@ -50,6 +54,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       'currency': 'usd',
       'is4k': true,
       'link': 'https://trakt.tv/watchnow/189110875',
+      'deepLink': undefined,
       'prices': {
         'purchase': 19.99,
         'rent': 19.99,
@@ -61,6 +66,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       'currency': 'usd',
       'is4k': false,
       'link': 'https://trakt.tv/watchnow/189673386',
+      'deepLink': undefined,
       'prices': {
         'purchase': 24.99,
         'rent': 19.99,
