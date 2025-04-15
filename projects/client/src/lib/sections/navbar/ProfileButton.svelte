@@ -6,7 +6,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
-  import GetVIPLink from "./components/GetVIPLink.svelte";
   import VipBadge from "./components/VIPBadge.svelte";
 
   const { user } = useUser();
@@ -14,10 +13,6 @@
   const color = $derived(isVip ? "red" : "purple");
   const style = $derived(isVip ? "textured" : "flat");
 </script>
-
-{#if !isVip}
-  <GetVIPLink />
-{/if}
 
 <Button
   size="small"
