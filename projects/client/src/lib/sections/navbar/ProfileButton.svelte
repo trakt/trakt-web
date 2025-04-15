@@ -1,9 +1,8 @@
 <script lang="ts">
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
-  import { useAuth } from "$lib/features/auth/stores/useAuth";
+  import Button from "$lib/components/buttons/Button.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import * as m from "$lib/features/i18n/messages";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
@@ -11,7 +10,6 @@
   import VipBadge from "./components/VIPBadge.svelte";
 
   const { user } = useUser();
-  const { logout } = useAuth();
   const isVip = $derived(!!$user?.isVip);
   const color = $derived(isVip ? "red" : "purple");
   const style = $derived(isVip ? "textured" : "flat");
@@ -21,13 +19,13 @@
   <GetVIPLink />
 {/if}
 
-<DropdownList
-  label={m.user_menu_toggle_label()}
-  variant="primary"
-  text="capitalize"
+<Button
   size="small"
-  {style}
+  href={UrlBuilder.profile.me()}
+  label={m.user_profile_label()}
   {color}
+  {style}
+  navigationType={DpadNavigationType.Item}
 >
   <RenderFor audience="authenticated" device={["desktop"]}>
     {$user?.name?.first}
@@ -51,15 +49,7 @@
       </RenderFor>
     </div>
   {/snippet}
-  {#snippet items()}
-    <DropdownItem href={UrlBuilder.profile.me()}>
-      {m.profile()}
-    </DropdownItem>
-    <DropdownItem color="red" onclick={logout}>
-      {m.logout()}
-    </DropdownItem>
-  {/snippet}
-</DropdownList>
+</Button>
 
 <style>
   :global(.trakt-navbar .trakt-profile-button) {
