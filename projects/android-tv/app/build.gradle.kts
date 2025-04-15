@@ -23,8 +23,6 @@ android {
 
     buildTypes {
         release {
-            // FIXME: proper signing for release builds
-            signingConfig = signingConfigs.getByName("debug")
             manifestPlaceholders["IS_CLEAR_TEXT_TRAFFIC"] = "false"
             manifestPlaceholders["BASE_URL"] = ManifestConstants.PROD_URL
             isMinifyEnabled = false
