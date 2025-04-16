@@ -54,6 +54,13 @@
   trakt-media-summary-card {
     :global(.trakt-card .trakt-card-footer) {
       padding: 0;
+      position: absolute;
+      bottom: var(--ni-neg-8);
+      right: var(--ni-8);
+    }
+
+    :global(.trakt-card .trakt-card-footer .trakt-action-button) {
+      outline: var(--ni-1) solid var(--color-background-purple);
     }
 
     :global(.trakt-card .trakt-summary-item) {
