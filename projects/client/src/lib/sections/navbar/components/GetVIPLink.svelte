@@ -26,7 +26,6 @@
       align-items: center;
       gap: var(--gap-xs);
 
-      padding: var(--ni-4);
       border-radius: var(--border-radius-xxl);
 
       transition: background-color var(--transition-increment) ease-in-out;

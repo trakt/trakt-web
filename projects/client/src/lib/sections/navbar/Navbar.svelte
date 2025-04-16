@@ -82,6 +82,9 @@
       <RenderFor audience="authenticated">
         <SearchInput />
       </RenderFor>
+      <RenderFor audience="authenticated" device={["mobile"]}>
+        {@render traktSwitch()}
+      </RenderFor>
     </div>
 
     <div class="trakt-navbar-links">
