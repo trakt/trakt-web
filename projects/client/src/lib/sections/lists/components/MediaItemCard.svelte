@@ -1,12 +1,12 @@
 <script lang="ts">
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import PosterCard from "$lib/components/media/card/PosterCard.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
 
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
+  import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
@@ -96,9 +96,9 @@
 {/snippet}
 
 {#if variant === "poster"}
-  <PosterCard>
+  <PortraitCard>
     {@render content(media.poster.url.thumb)}
-  </PosterCard>
+  </PortraitCard>
 {/if}
 
 {#if variant === "thumb"}
