@@ -51,7 +51,6 @@
   /*
    * List
    */
-  --list-shadow-width: var(--ni-56);
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
       color-mix(in srgb, var(--color-shadow) 86%, transparent) 0%,
       color-mix(in srgb, var(--color-shadow) 62%, transparent) 24%,
@@ -142,12 +141,11 @@
   /*
    * List
    */
-  --list-shadow-width: var(--ni-96);
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-shadow) 98%, transparent) 0%,
-      color-mix(in srgb, var(--color-shadow) 88%, transparent) 32%,
-      color-mix(in srgb, var(--color-shadow) 70%, transparent) 61%,
-      color-mix(in srgb, var(--color-shadow) 50%, transparent) 80%,
+      color-mix(in srgb, var(--color-shadow) 90%, transparent) 0%,
+      color-mix(in srgb, var(--color-shadow) 45%, transparent) 32%,
+      color-mix(in srgb, var(--color-shadow) 30%, transparent) 61%,
+      color-mix(in srgb, var(--color-shadow) 25%, transparent) 80%,
       transparent 100%);
 
   /*
