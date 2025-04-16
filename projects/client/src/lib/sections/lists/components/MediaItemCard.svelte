@@ -45,6 +45,14 @@
   {/if}
 {/snippet}
 
+{#snippet footerTag()}
+  {#if externalTags}
+    {@render externalTags()}
+  {:else}
+    {@render defaultTags(media)}
+  {/if}
+{/snippet}
+
 {#snippet content(mediaCoverImageUrl: string)}
   {#if popupActions}
     <CardActionBar>
@@ -73,12 +81,7 @@
     </CardCover>
   </Link>
 
-  <CardFooter {action}>
-    {#if externalTags}
-      {@render externalTags()}
-    {:else}
-      {@render defaultTags(media)}
-    {/if}
+  <CardFooter {action} tag={footerTag}>
     {#if rest.variant === "activity"}
       <Link href={UrlBuilder.media(type, media.slug)}>
         <p

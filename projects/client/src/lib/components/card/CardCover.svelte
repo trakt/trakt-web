@@ -22,18 +22,21 @@
   });
 </script>
 
-<div class="card-cover" class:card-cover-loading={isImagePending || isLoading}>
+<div
+  class="trakt-card-cover"
+  class:trakt-card-cover-loading={isImagePending || isLoading}
+>
   {#if badges}
-    <div class="card-cover-badges">
+    <div class="trakt-card-cover-badges">
       {@render badges()}
     </div>
   {/if}
   {#if tags}
-    <div class="card-cover-tags">
+    <div class="trakt-card-cover-tags">
       {@render tags()}
     </div>
   {/if}
-  <div class="card-cover-image" class:has-gradient={style === "gradient"}>
+  <div class="trakt-card-cover-image" class:has-gradient={style === "gradient"}>
     <CrossOriginImage
       animate={false}
       {src}
@@ -44,7 +47,7 @@
 </div>
 
 <style>
-  .card-cover {
+  .trakt-card-cover {
     --padding-card-tag: var(--ni-8);
 
     border-radius: var(--border-radius-m);
@@ -52,15 +55,15 @@
     overflow: hidden;
     position: relative;
 
-    &.card-cover-loading {
-      .card-cover-image {
+    &.trakt-card-cover-loading {
+      .trakt-card-cover-image {
         opacity: 0;
         filter: blur(var(--ni-4));
       }
     }
 
-    .card-cover-badges,
-    .card-cover-tags {
+    .trakt-card-cover-badges,
+    .trakt-card-cover-tags {
       z-index: var(--layer-raised);
 
       position: absolute;
@@ -73,12 +76,12 @@
       box-sizing: border-box;
     }
 
-    .card-cover-badges {
+    .trakt-card-cover-badges {
       top: 0;
       left: 0;
     }
 
-    .card-cover-tags {
+    .trakt-card-cover-tags {
       bottom: 0;
       left: 0;
 
@@ -88,7 +91,7 @@
     }
   }
 
-  .card-cover-image {
+  .trakt-card-cover-image {
     position: relative;
     height: var(--height-card-cover);
     align-self: stretch;

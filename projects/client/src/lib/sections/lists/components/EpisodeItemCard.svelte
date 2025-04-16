@@ -34,6 +34,10 @@
   const isActivity = $derived(rest.variant === "activity");
 </script>
 
+{#snippet activityTag()}
+  <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
+{/snippet}
+
 <LandscapeCard>
   {#if popupActions}
     <CardActionBar>
@@ -60,48 +64,40 @@
     />
   </Link>
 
-  <CardFooter {action}>
-    <trakt-episode-footer>
-      {#if rest.variant !== "activity"}
-        <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
-      {/if}
+  <CardFooter {action} tag={isActivity ? undefined : activityTag}>
+    {#if isShowContext}
+      <p class="trakt-card-title ellipsis">
+        <Spoiler media={episode} {show} {episode} type="episode">
+          {episode.title}
+        </Spoiler>
+      </p>
+      <p class="trakt-card-subtitle ellipsis small">
+        {episode.season}x{episode.number}
+      </p>
+    {/if}
 
-      <div class="trakt-episode-footer-text ellipsis">
-        {#if isShowContext}
-          <p class="trakt-card-title ellipsis">
-            <Spoiler media={episode} {show} {episode} type="episode">
-              {episode.title}
-            </Spoiler>
-          </p>
-          <p class="trakt-card-subtitle ellipsis small">
-            {episode.season}x{episode.number}
-          </p>
-        {/if}
+    {#if rest.variant === "activity"}
+      <Link href={UrlBuilder.show(show.slug)}>
+        <p class="trakt-card-title ellipsis">
+          {episode.season}x{episode.number} - {show.title}
+        </p>
+      </Link>
+      <p class="trakt-card-subtitle ellipsis small">
+        {EpisodeIntlProvider.timestampText(rest.date)}
+      </p>
+    {/if}
 
-        {#if rest.variant === "activity"}
-          <Link href={UrlBuilder.show(show.slug)}>
-            <p class="trakt-card-title ellipsis">
-              {episode.season}x{episode.number} - {show.title}
-            </p>
-          </Link>
-          <p class="trakt-card-subtitle ellipsis small">
-            {EpisodeIntlProvider.timestampText(rest.date)}
-          </p>
-        {/if}
-
-        {#if !isShowContext && !isActivity}
-          <Link href={UrlBuilder.show(show.slug)}>
-            <p class="trakt-card-title ellipsis">{show.title}</p>
-          </Link>
-          <p class="trakt-card-subtitle ellipsis small">
-            {episode.season}x{episode.number}
-            <Spoiler media={episode} {show} {episode} type="episode">
-              - {episode.title}
-            </Spoiler>
-          </p>
-        {/if}
-      </div>
-    </trakt-episode-footer>
+    {#if !isShowContext && !isActivity}
+      <Link href={UrlBuilder.show(show.slug)}>
+        <p class="trakt-card-title ellipsis">{show.title}</p>
+      </Link>
+      <p class="trakt-card-subtitle ellipsis small">
+        {episode.season}x{episode.number}
+        <Spoiler media={episode} {show} {episode} type="episode">
+          - {episode.title}
+        </Spoiler>
+      </p>
+    {/if}
   </CardFooter>
 </LandscapeCard>
 
@@ -112,9 +108,5 @@
     display: flex;
     gap: var(--gap-xs);
     align-items: center;
-
-    .trakt-episode-footer-text {
-      display: block;
-    }
   }
 </style>

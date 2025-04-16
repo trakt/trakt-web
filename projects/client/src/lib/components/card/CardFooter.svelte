@@ -1,10 +1,14 @@
 <script lang="ts">
   import type { CardFooterProps } from "./CardFooterProps";
 
-  const { children, action }: CardFooterProps = $props();
+  const { children, action, tag }: CardFooterProps = $props();
 </script>
 
 <div class="trakt-card-footer">
+  {#if tag}
+    <div class="trakt-card-footer-tag">{@render tag()}</div>
+  {/if}
+
   {#if children}
     <div class="trakt-card-footer-information">
       {@render children()}
@@ -48,6 +52,10 @@
       display: flex;
       flex-direction: column;
       gap: var(--gap-xxs);
+
+      :global(.trakt-card-tag) {
+        display: flex;
+      }
 
       :global(.trakt-card-title) {
         color: var(--color-text-primary);
