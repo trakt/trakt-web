@@ -74,20 +74,20 @@
   </Link>
 
   <CardFooter {action}>
-    <Link href={UrlBuilder.media(type, media.slug)}>
-      {#if externalTags}
-        {@render externalTags()}
-      {:else}
-        {@render defaultTags(media)}
-      {/if}
-    </Link>
+    {#if externalTags}
+      {@render externalTags()}
+    {:else}
+      {@render defaultTags(media)}
+    {/if}
     {#if rest.variant === "activity"}
-      <p
-        class="trakt-card-title small ellipsis"
-        class:small={rest.variant !== "activity"}
-      >
-        {media.title}
-      </p>
+      <Link href={UrlBuilder.media(type, media.slug)}>
+        <p
+          class="trakt-card-title small ellipsis"
+          class:small={rest.variant !== "activity"}
+        >
+          {media.title}
+        </p>
+      </Link>
       <p class="trakt-card-subtitle small ellipsis">
         {toHumanDate(new Date(), rest.date, getLocale())}
       </p>
