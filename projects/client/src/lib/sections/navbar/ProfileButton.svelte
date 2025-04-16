@@ -14,39 +14,51 @@
   const style = $derived(isVip ? "textured" : "flat");
 </script>
 
-<Button
-  size="small"
-  href={UrlBuilder.profile.me()}
-  label={m.user_profile_label()}
-  {color}
-  {style}
-  navigationType={DpadNavigationType.Item}
->
-  <RenderFor audience="authenticated" device={["desktop"]}>
-    {$user?.name?.first}
-  </RenderFor>
-  {#snippet icon()}
-    <div class="profile-icon">
-      <ProfileImage
-        --width="var(--ni-16)"
-        --height="var(--ni-16)"
-        --border-width="var(--border-thickness-xs)"
-        name={$user?.name?.first ?? ""}
-        src={$user?.avatar?.url ?? ""}
-      />
-      <RenderFor
-        audience="authenticated"
-        device={["tablet-sm", "tablet-lg", "desktop"]}
-      >
-        {#if isVip}
-          <VipBadge />
-        {/if}
-      </RenderFor>
-    </div>
-  {/snippet}
-</Button>
+<trakt-profile-button>
+  <Button
+    size="small"
+    href={UrlBuilder.profile.me()}
+    label={m.user_profile_label()}
+    {color}
+    {style}
+    navigationType={DpadNavigationType.Item}
+  >
+    <RenderFor audience="authenticated">
+      {$user?.name?.first}
+    </RenderFor>
+    {#snippet icon()}
+      <div class="profile-icon">
+        <ProfileImage
+          --width="var(--ni-16)"
+          --height="var(--ni-16)"
+          --border-width="var(--border-thickness-xs)"
+          name={$user?.name?.first ?? ""}
+          src={$user?.avatar?.url ?? ""}
+        />
+        <RenderFor
+          audience="authenticated"
+          device={["tablet-sm", "tablet-lg", "desktop"]}
+        >
+          {#if isVip}
+            <VipBadge />
+          {/if}
+        </RenderFor>
+      </div>
+    {/snippet}
+  </Button>
+</trakt-profile-button>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  trakt-profile-button {
+    @include for-mobile {
+      :global(.button-label) {
+        display: none;
+      }
+    }
+  }
+
   .profile-icon {
     display: flex;
     align-items: center;

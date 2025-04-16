@@ -158,7 +158,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-m);
-    min-width: var(--ni-48);
+    min-width: var(--ni-40);
     padding: var(--ni-16);
     flex-shrink: 0;
     cursor: pointer;
