@@ -28,9 +28,7 @@
     {size}
     {...props}
   >
-    {#if style === "normal"}
-      {text}
-    {/if}
+    {text}
 
     {#snippet icon()}
       {#if style === "action"}

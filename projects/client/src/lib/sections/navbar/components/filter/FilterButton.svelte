@@ -4,7 +4,6 @@
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
 
   const { filter, setFilter } = useFilter();
 
@@ -27,9 +26,7 @@
     style="flat"
     {color}
   >
-    <RenderFor audience="authenticated" device={["desktop"]}>
-      {currentLabel}
-    </RenderFor>
+    {currentLabel}
     {#snippet icon()}
       <FilterIcon {state} />
     {/snippet}
