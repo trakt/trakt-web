@@ -21,6 +21,7 @@ class MainActivity : ComponentActivity() {
         }
 
         webView.webViewClient = WebViewClient()
+        webView.addJavascriptInterface(StreamOnInterface(this), "StreamOnAndroid")
 
         webView.loadUrl(getBaseUrl())
 
