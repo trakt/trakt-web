@@ -47,17 +47,6 @@
 </Button>
 
 <style>
-  :global(.trakt-navbar .trakt-profile-button) {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-  }
-
-  :global(.trakt-navbar .trakt-profile-button .profile-image) {
-    width: var(--ni-32);
-    height: var(--ni-32);
-  }
-
   .profile-icon {
     display: flex;
     align-items: center;
