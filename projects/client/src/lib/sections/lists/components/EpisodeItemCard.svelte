@@ -100,13 +100,3 @@
     {/if}
   </CardFooter>
 </LandscapeCard>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  trakt-episode-footer {
-    display: flex;
-    gap: var(--gap-xs);
-    align-items: center;
-  }
-</style>

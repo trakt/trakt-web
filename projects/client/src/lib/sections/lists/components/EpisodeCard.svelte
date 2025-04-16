@@ -1,9 +1,6 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
-  import EpisodeTimeTag from "$lib/components/episode/tags/EpisodeTimeTag.svelte";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
-  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
   import EpisodeItemCard from "./EpisodeItemCard.svelte";
@@ -32,7 +29,7 @@
   {/if}
 {/snippet}
 
-{#snippet progressTags()}
+{#snippet tags()}
   {#if props.variant === "next"}
     <ShowProgressTag
       total={props.episode.total}
@@ -45,25 +42,6 @@
       </span>
     </ShowProgressTag>
   {/if}
-{/snippet}
-
-{#snippet badges()}
-  {#if props.variant === "default"}
-    {#if isFuture}
-      <EpisodeTimeTag>
-        {EpisodeIntlProvider.timestampText(props.episode.airDate)}
-      </EpisodeTimeTag>
-    {:else}
-      <DurationTag i18n={TagIntlProvider} runtime={props.episode.runtime} />
-    {/if}
-  {/if}
-{/snippet}
-
-{#snippet tags()}
-  {#if style === "cover"}
-    {@render badges()}
-  {/if}
-  {@render progressTags()}
 {/snippet}
 
 {#snippet card()}
@@ -79,7 +57,6 @@
       popupActions={props.popupActions}
       {tags}
       {action}
-      {badges}
       type="episode"
       variant="thumb"
       style="summary"
