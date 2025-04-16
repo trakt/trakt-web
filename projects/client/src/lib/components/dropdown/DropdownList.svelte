@@ -24,6 +24,7 @@
   use:portalTrigger
   use:observeWidth
   data-size={size}
+  class:has-external-icon={_icon != null}
 >
   <Button style="textured" {size} {...props}>
     {@render children()}
@@ -61,6 +62,15 @@
 
     :global(.trakt-button) {
       flex-grow: 1;
+    }
+
+    &.has-external-icon {
+      @include for-mobile {
+        :global(.trakt-button .button-label),
+        :global(.trakt-button .trakt-dropdown-caret) {
+          display: none;
+        }
+      }
     }
 
     &[data-size="small"] {
