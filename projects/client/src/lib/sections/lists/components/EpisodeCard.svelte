@@ -12,7 +12,6 @@
   const props: EpisodeCardProps = $props();
 
   const isFuture = $derived(props.episode.airDate > new Date());
-  const isDefault = $derived(props.variant === "default");
   const isActivity = $derived(props.variant === "activity");
   const isHidden = $derived(props.status === "hidden");
   const style = $derived(props.style ?? "cover");

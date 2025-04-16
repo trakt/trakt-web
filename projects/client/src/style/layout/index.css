@@ -35,15 +35,18 @@
   );
   --height-person-list: calc(
     var(--height-person-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
   );
   --height-poster-list: calc(
     var(--height-poster-card) + var(--layout-scrollbar-width)
   );
   --height-lists-list: calc(
     var(--height-list-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
   );
   --height-comments-list: calc(
     var(--height-comment-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
   );
   --height-comment-thread-list: calc(
     var(--height-comment-thread-card) + var(--layout-scrollbar-width)
@@ -56,5 +59,6 @@
   --navbar-height: var(--ni-72);
 
   --layout-distance-side: var(--ni-24);
-  --layout-scrollbar-width: var(--ni-10);
+  --layout-scrollbar-width: var(--ni-8);
+  --layout-footer-less-padding: var(--ni-16);
 }
