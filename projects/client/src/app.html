@@ -13,15 +13,37 @@
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        img-src 'self' data: https://*.trakt.tv https://trakt.tv https://secure.gravatar.com https://i2.wp.com/;
-        script-src 'self' 'unsafe-eval' 'unsafe-inline' https://app.trakt.tv https://*.googletagmanager.com;
-        script-src-elem 'self' 'unsafe-inline' https://*.googletagmanager.com https://*.cloudflareinsights.com https://*.trakt.tv/;
-        connect-src 'self' https://*.jsdelivr.net https://*.googleapis.com https://*.gstatic.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.trakt.tv https://*.posthog.com;
+        img-src 'self' data: https://*.trakt.tv https://trakt.tv https://secure.gravatar.com https://i2.wp.com/ https://*.contentsquare.net;
+        script-src 'self' 'unsafe-eval' 'unsafe-inline' https://app.trakt.tv https://*.googletagmanager.com https://*.contentsquare.net;
+        script-src-elem 'self' 'unsafe-inline' https://*.googletagmanager.com https://*.cloudflareinsights.com https://*.trakt.tv/ https://*.contentsquare.net https://static.hj.contentsquare.net;
+        worker-src 'self' blob:;
+        connect-src 'self' https://*.jsdelivr.net https://*.googleapis.com https://*.gstatic.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.trakt.tv https://*.posthog.com https://*.contentsquare.net https://*.hotjar.com https://*.hotjar.io wss://*.hotjar.com;
         font-src 'self' data: https://fonts.gstatic.com http://fonts.gstatic.com;
         style-src 'self' 'unsafe-inline' https://*.googleapis.com https://*.jsdelivr.net https://*.trakt.tv;
         style-src-elem 'self' 'unsafe-inline' https://*.googleapis.com https://*.jsdelivr.net https://*.trakt.tv;
+        frame-src 'self' https://*.hotjar.com;
       "
     >
+    <!-- HOTJAR -->
+    <script>
+      (function (c, s, q, u, a, r, e) {
+        c.hj = c.hj || function () {
+          (c.hj.q = c.hj.q || []).push(arguments);
+        };
+        c._hjSettings = { hjid: a };
+        r = s.getElementsByTagName('head')[0];
+        e = s.createElement('script');
+        e.async = true;
+        e.src = q + c._hjSettings.hjid + u;
+        r.appendChild(e);
+      })(
+        window,
+        document,
+        'https://static.hj.contentsquare.net/c/csq-',
+        '.js',
+        6374269,
+      );
+    </script>
     <!-- PWA -->
     <link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest">
     <script src="%sveltekit.assets%/register-install.js?v=%cache.timestamp%">
