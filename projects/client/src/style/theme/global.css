@@ -86,4 +86,9 @@
   --color-tick-orange: var(--orange-500);
   --color-switch-foreground-orange: var(--orange-50);
   --color-switch-background-orange: var(--orange-800);
+
+  /**
+   * List
+   */
+  --list-shadow-width: var(--ni-32);
 }
