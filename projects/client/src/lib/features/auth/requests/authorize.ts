@@ -1,5 +1,10 @@
 import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import {
+  error as printError,
+  print,
+  PrintTarget,
+} from '$lib/utils/console/print.ts';
 import type { AuthToken } from '../models/AuthToken.ts';
 import { DeviceUnauthorizedError, verifyAuth } from './verifyAuth.ts';
 
@@ -33,11 +38,13 @@ export const authorize = async ({
 
   const response = await verifyAuth({ referrer, token })
     .catch((error) => {
+      print(PrintTarget.Worker, 'log', { authError: error });
+
       if (error instanceof DeviceUnauthorizedError) {
         return UNAUTHORIZED_PAYLOAD;
       }
 
-      error('Error verifying device auth:', error.message);
+      printError('Error verifying device auth:', error.message);
 
       throw error;
     });
@@ -47,6 +54,7 @@ export const authorize = async ({
     response.expiresAt == null;
 
   if (isEmpty) {
+    print(PrintTarget.Worker, 'log', { emptyResponseToken: response });
     return UNAUTHORIZED_PAYLOAD;
   }
 
