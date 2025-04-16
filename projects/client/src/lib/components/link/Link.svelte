@@ -71,7 +71,7 @@
       outline: none;
       position: relative;
 
-      &:has(:global(.card-cover))::after {
+      &:has(:global(.trakt-card-cover))::after {
         position: absolute;
         top: 0;
         left: 0;

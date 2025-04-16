@@ -36,19 +36,33 @@
     border-radius: var(--border-radius-m);
 
     &.trakt-card-transparent {
-      :global(.card-cover) {
-        box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-          color-mix(in srgb, var(--color-shadow) 25%, transparent 75%);
-
+      :global(.trakt-card-cover) {
         box-shadow:
-          0px 15px 6px 0px
+          0px var(--ni-16) var(--ni-8) 0px
             color-mix(in srgb, var(--color-shadow) 2%, transparent),
-          0px 9px 5px 0px
+          0px var(--ni-8) var(--ni-4) 0px
             color-mix(in srgb, var(--color-shadow) 4%, transparent),
-          0px 4px 4px 0px
+          0px var(--ni-4) var(--ni-4) 0px
             color-mix(in srgb, var(--color-shadow) 8%, transparent),
-          0px 1px 2px 0px
+          0px var(--ni-1) var(--ni-2) 0px
             color-mix(in srgb, var(--color-shadow) 8%, transparent);
+      }
+
+      :global(.trakt-tag) {
+        box-shadow: var(--ni-1) var(--ni-1) var(--ni-4) 0px
+          color-mix(in srgb, var(--color-shadow) 25%, transparent);
+      }
+
+      :global(.trakt-action-button svg) {
+        filter: drop-shadow(
+          var(--ni-2) var(--ni-2) var(--ni-2)
+            color-mix(in srgb, var(--color-shadow) 25%, transparent)
+        );
+      }
+
+      :global(.trakt-card-title, .trakt-card-subtitle) {
+        text-shadow: 0 var(--ni-1) var(--ni-2)
+          color-mix(in srgb, var(--color-shadow) 10%, transparent);
       }
     }
 
