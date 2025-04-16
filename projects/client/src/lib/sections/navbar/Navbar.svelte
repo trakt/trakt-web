@@ -204,10 +204,10 @@
     }
 
     @include for-mobile {
-      gap: var(--gap-s);
+      gap: var(--gap-xs);
 
       .trakt-navbar-content {
-        gap: var(--gap-s);
+        gap: var(--gap-xs);
       }
     }
   }
