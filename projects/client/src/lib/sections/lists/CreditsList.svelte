@@ -9,7 +9,7 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { writable } from "svelte/store";
-  import MediaCard from "./components/MediaCard.svelte";
+  import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -58,7 +58,7 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
-    <MediaCard {type} {media} />
+    <DefaultMediaItem {type} {media} />
   {/snippet}
 
   {#snippet dynamicActions()}

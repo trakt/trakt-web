@@ -36,7 +36,7 @@
   const isActivity = $derived(rest.variant === "activity");
 </script>
 
-{#snippet activityTag()}
+{#snippet nonActivityTag()}
   {#if rest.variant === "upcoming"}
     <AirDateTag
       i18n={TagIntlProvider}
@@ -75,7 +75,7 @@
     />
   </Link>
 
-  <CardFooter {action} tag={isActivity ? undefined : activityTag}>
+  <CardFooter {action} tag={isActivity ? undefined : nonActivityTag}>
     {#if isShowContext}
       <p class="trakt-card-title ellipsis">
         <Spoiler media={episode} {show} {episode} type="episode">

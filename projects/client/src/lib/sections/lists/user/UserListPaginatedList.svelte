@@ -3,8 +3,8 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import MediaCard from "../components/MediaCard.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import PopularListItem from "../popular/PopularListItem.svelte";
   import PopupActions from "./_internal/PopupActions.svelte";
   import { useListItems, type ListParams } from "./useListItems";
 
@@ -37,11 +37,11 @@
   useList={(params) => useListItems({ list, ...params })}
 >
   {#snippet item(media)}
-    <MediaCard type={media.type} media={media.entry} {style}>
+    <PopularListItem type={media.type} media={media.entry} {style}>
       {#snippet popupActions()}
         <PopupActions {list} media={media.entry} />
       {/snippet}
-    </MediaCard>
+    </PopularListItem>
   {/snippet}
 
   {#snippet badge()}

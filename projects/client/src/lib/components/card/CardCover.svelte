@@ -1,5 +1,6 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { PLACEHOLDERS } from "$lib/utils/constants";
   import { isImageComplete } from "$lib/utils/image/isImageComplete";
   import { checksum } from "$lib/utils/string/checksum";
   import type { CardCoverProps } from "./CardCoverProps";
@@ -29,6 +30,7 @@
 <div
   class="trakt-card-cover"
   class:trakt-card-cover-loading={isImagePending || isLoading}
+  class:trakt-card-cover-placeholder={PLACEHOLDERS.includes(src)}
 >
   {#if badges}
     <div class="trakt-card-cover-badges">
@@ -94,6 +96,12 @@
       flex-direction: column;
       align-items: flex-start;
       gap: var(--gap-xxs);
+    }
+
+    &:not(.trakt-card-cover-placeholder) {
+      :global(img) {
+        object-position: top;
+      }
     }
   }
 

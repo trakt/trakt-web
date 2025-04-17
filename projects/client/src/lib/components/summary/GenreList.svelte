@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ActionIcon from "$lib/components/icons/ActionIcon.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import type { GenreIntl } from "./GenreIntl";
   import { GenreIntlProvider } from "./GenreIntlProvider";
 
@@ -8,11 +8,13 @@
     i18n?: GenreIntl;
     genres: string[];
     separator?: string;
+    classList?: string;
   };
   const {
     i18n = GenreIntlProvider,
     genres,
-    separator = "/",
+    separator = " / ",
+    classList = "",
   }: GenreListProps = $props();
 
   const isLargeDisplay = useMedia(WellKnownMediaQuery.desktop);
@@ -20,20 +22,6 @@
   const visibleGenre = $derived(genres.slice(0, genreCount));
 </script>
 
-<div class="trakt-summary-genre">
-  <ActionIcon />
-  {#each visibleGenre as genre}
-    <span class="trakt-genre capitalize">{i18n.genre(genre)}</span>
-    {#if genre !== visibleGenre.at(-1)}
-      <span>{separator}</span>
-    {/if}
-  {/each}
-</div>
-
-<style>
-  .trakt-summary-genre {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-  }
-</style>
+<p class="trakt-summary-genre ellipsis" use:appendClassList={classList}>
+  {visibleGenre.map(i18n.genre).join(separator)}
+</p>

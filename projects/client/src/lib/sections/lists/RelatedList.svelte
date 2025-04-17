@@ -2,7 +2,7 @@
   import MediaList from "$lib/sections/lists/drilldown/MediaList.svelte";
 
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import MediaCard from "./components/MediaCard.svelte";
+  import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useRelatedList } from "./stores/useRelatedList";
 
   type RelatedListProps = {
@@ -21,6 +21,6 @@
   {title}
 >
   {#snippet item(media)}
-    <MediaCard {type} {media} />
+    <DefaultMediaItem {type} {media} />
   {/snippet}
 </MediaList>

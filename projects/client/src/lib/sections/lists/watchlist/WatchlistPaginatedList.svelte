@@ -2,10 +2,10 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import MediaCard from "../components/MediaCard.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
+  import WatchlistItem from "./WatchlistItem.svelte";
   import type { WatchlistStatus } from "./WatchlistStatus";
 
   type WatchListProps = {
@@ -29,7 +29,7 @@
   {useList}
 >
   {#snippet item(media)}
-    <MediaCard {type} {media} {style} />
+    <WatchlistItem {type} {media} {style} />
   {/snippet}
 
   {#snippet empty()}
