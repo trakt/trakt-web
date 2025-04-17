@@ -1,6 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { isImageComplete } from "$lib/utils/image/isImageComplete";
+  import { checksum } from "$lib/utils/string/checksum";
   import type { CardCoverProps } from "./CardCoverProps";
 
   const {
@@ -21,6 +22,8 @@
 
     isImagePending = true;
   });
+
+  const id = $derived(checksum(`${src}-${title}`));
 </script>
 
 <div
@@ -38,12 +41,13 @@
     </div>
   {/if}
   <div class="trakt-card-cover-image" class:has-gradient={style === "gradient"}>
-    <span class="trakt-cover-image-title meta-info">{title}</span>
+    <span {id} class="trakt-cover-image-title meta-info">{title}</span>
     <CrossOriginImage
       animate={false}
       {src}
       {alt}
       onload={() => (isImagePending = false)}
+      aria-labelledby={id}
     />
   </div>
 </div>

@@ -9,6 +9,7 @@
     animate = true,
     onload: _onload,
     onerror: _onerror,
+    ...rest
   }: HTMLImageElementProps & { animate?: boolean } = $props();
 
   const response = $derived(writable({ uri: src }));
@@ -31,6 +32,7 @@
     }, 100);
     _onload?.(ev);
   }}
+  {...rest}
 />
 
 <style>
