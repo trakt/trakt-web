@@ -1,7 +1,8 @@
 <script lang="ts">
   import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
+  import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import MediaSummaryItem from "$lib/sections/summary/components/media/MediaSummaryItem.svelte";
+  import MediaSummaryCard from "$lib/sections/lists/components/MediaSummaryCard.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { useSearch } from "./useSearch";
 
@@ -62,7 +63,13 @@
   {#if $results.length > 0}
     <div class="trakt-search-results" use:clearOnClick>
       {#each $results as result}
-        <MediaSummaryItem media={result} type={result.type} />
+        <MediaSummaryCard media={result} type={result.type}>
+          {#snippet tags()}
+            <InfoTag>
+              {result.type}
+            </InfoTag>
+          {/snippet}
+        </MediaSummaryCard>
       {/each}
     </div>
   {/if}
@@ -266,15 +273,22 @@
       left: 0;
       right: 0;
 
-      min-height: calc(var(--height-result-item) * 7);
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-m);
+
+      padding: var(--ni-16);
+      padding-right: calc(var(--ni-16) - var(--layout-scrollbar-width));
+      @include for-mobile {
+        padding-right: var(--ni-16);
+      }
       height: 100vh;
       max-height: calc(80dvh - var(--search-results-top));
       width: clamp(
         var(--ni-280),
-        var(--mobile-search-focus-width) - var(--ni-16),
-        var(--ni-480)
+        var(--mobile-search-focus-width) - var(--ni-32),
+        var(--ni-380)
       );
-      padding: var(--ni-8);
 
       overflow: hidden;
       overflow-y: scroll;
