@@ -89,7 +89,7 @@
       <AnalyticsProvider>
         <AutoSigninProvider>
           <LocaleProvider>
-            <NavigationProvider>
+            <NavigationProvider device={data.device}>
               <FilterProvider>
                 <CoverProvider>
                   <CoverImage />

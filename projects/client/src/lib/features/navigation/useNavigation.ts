@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { dpadController } from '$lib/features/navigation/_internal/dpadController.ts';
+import type { DeviceType } from '$lib/models/DeviceType.ts';
 
 const PARAM_NAME = 'navigation';
 const DPAD_REF = 'd-pad';
@@ -13,11 +14,16 @@ const navigationControllers: Record<NavigationType, Controller | undefined> = {
   'dpad': dpadController,
 };
 
-export function useNavigation() {
+export function useNavigation(device: DeviceType) {
   const ref = page.url.searchParams.get(PARAM_NAME);
-  const navigationType: NavigationType = ref === DPAD_REF ? 'dpad' : 'default';
+  const hasDpadNavigation = device === 'tv' || ref === DPAD_REF;
+  const navigationType: NavigationType = hasDpadNavigation ? 'dpad' : 'default';
 
   const redirect = () => {
+    if (!page.url.searchParams.get(PARAM_NAME)) {
+      return;
+    }
+
     const url = new URL(page.url);
     url.searchParams.delete(PARAM_NAME);
 
