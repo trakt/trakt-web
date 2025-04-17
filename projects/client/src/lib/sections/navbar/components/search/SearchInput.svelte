@@ -301,24 +301,6 @@
       backdrop-filter: blur(var(--ni-8));
       border-radius: var(--border-radius-l);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-      :global(a.trakt-link) {
-        text-decoration: none;
-        transition: background-color var(--transition-increment) ease-in-out;
-
-        @include for-mouse {
-          &:hover,
-          &:focus-visible {
-            background: var(--purple-900);
-            color: var(--shade-10);
-            border-radius: var(--border-radius-m);
-          }
-        }
-
-        &:active {
-          background: var(--purple-700);
-        }
-      }
     }
   }
 </style>
