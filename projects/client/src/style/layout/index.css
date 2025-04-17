@@ -35,7 +35,6 @@
   );
   --height-person-list: calc(
     var(--height-person-card) + var(--layout-scrollbar-width)
-      + var(--layout-footer-less-padding)
   );
   --height-poster-list: calc(
     var(--height-poster-card) + var(--layout-scrollbar-width)
