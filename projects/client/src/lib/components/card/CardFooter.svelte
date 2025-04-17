@@ -51,7 +51,7 @@
 
       display: flex;
       flex-direction: column;
-      gap: var(--gap-xxs);
+      gap: var(--gap-micro);
 
       :global(.trakt-card-tag) {
         display: flex;
@@ -61,7 +61,7 @@
         color: var(--color-text-primary);
         margin: 0;
         font-weight: 500;
-        font-size: var(--ni-11);
+        font-size: var(--ni-12);
 
         :global(:has(~ .trakt-card-subtitle)) {
           font-weight: 600;
@@ -72,7 +72,7 @@
         color: var(--color-text-secondary);
         margin: 0;
         font-weight: 500;
-        font-size: var(--ni-11);
+        font-size: var(--ni-12);
       }
     }
   }
