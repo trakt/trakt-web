@@ -19,6 +19,7 @@
   --gap-s: var(--ni-12);
   --gap-xs: var(--ni-8);
   --gap-xxs: var(--ni-4);
+  --gap-micro: var(--ni-2);
 
   --dialog-height: 100dvh;
 }
