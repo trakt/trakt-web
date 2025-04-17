@@ -72,6 +72,7 @@
     navigationType={DpadNavigationType.Item}
   >
     <CardCover
+      title={media.title}
       src={mediaCoverImageUrl}
       alt={m.media_poster({ title: media.title })}
     >
