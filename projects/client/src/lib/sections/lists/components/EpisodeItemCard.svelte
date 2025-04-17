@@ -12,6 +12,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
+  import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
@@ -89,9 +90,19 @@
     {/if}
 
     {#if !isShowContext && !isActivity}
-      <Link href={UrlBuilder.show(show.slug)}>
-        <p class="trakt-card-title ellipsis">{show.title}</p>
-      </Link>
+      {#if episode.type === EpisodeComputedType.full_season}
+        <Link href={UrlBuilder.show(show.slug)}>
+          <p class="trakt-card-title uppercase ellipsis">
+            {m.season_number_label({
+              number: episode.season.toString().padStart(2, "0"),
+            })}
+          </p>
+        </Link>
+      {:else}
+        <Link href={UrlBuilder.show(show.slug)}>
+          <p class="trakt-card-title ellipsis">{show.title}</p>
+        </Link>
+      {/if}
       <p class="trakt-card-subtitle ellipsis small">
         {episode.season}x{episode.number}
         <Spoiler media={episode} {show} {episode} type="episode">
