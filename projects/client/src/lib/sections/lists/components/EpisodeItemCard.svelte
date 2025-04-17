@@ -57,6 +57,7 @@
     navigationType={DpadNavigationType.Item}
   >
     <CardCover
+      title={episode.title}
       src={$src ?? EPISODE_COVER_PLACEHOLDER}
       alt={`${show.title} - ${episode.title}`}
       {badges}

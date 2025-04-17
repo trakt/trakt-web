@@ -23,6 +23,7 @@
   >
     <PersonCard>
       <CardCover
+        title={castMember.name}
         src={castMember.headShotUrl}
         alt={`${m.person_headshot({ person: castMember.name })}`}
         style="flat"

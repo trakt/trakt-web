@@ -9,6 +9,7 @@
     badges,
     tags,
     isLoading,
+    title,
     style = "gradient",
   }: CardCoverProps = $props();
 
@@ -37,6 +38,7 @@
     </div>
   {/if}
   <div class="trakt-card-cover-image" class:has-gradient={style === "gradient"}>
+    <span class="trakt-cover-image-title meta-info">{title}</span>
     <CrossOriginImage
       animate={false}
       {src}
@@ -99,7 +101,23 @@
       opacity calc(var(--transition-increment) * 2) ease-in-out,
       filter var(--transition-increment) ease-in-out;
 
+    .trakt-cover-image-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: var(--ni-8);
+
+      text-align: center;
+    }
+
     :global(img) {
+      position: relative;
       width: 100%;
       height: 100%;
       object-fit: cover;
