@@ -26,9 +26,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   };
 
   const getReferrer = () =>
-    event.request.headers.get('referer') ??
-      prependHttpOrHttps(event.request.headers.get('host')) ??
-      '';
+    prependHttpOrHttps(event.request.headers.get('host')) ?? '';
 
   const isLogout = event.url.pathname.startsWith(AuthEndpoint.Logout);
 
