@@ -6,6 +6,7 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
+  import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -36,7 +37,15 @@
 </script>
 
 {#snippet activityTag()}
-  <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
+  {#if rest.variant === "upcoming"}
+    <AirDateTag
+      i18n={TagIntlProvider}
+      airDate={episode.airDate}
+      year={episode.year}
+    />
+  {:else}
+    <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
+  {/if}
 {/snippet}
 
 <LandscapeCard>
