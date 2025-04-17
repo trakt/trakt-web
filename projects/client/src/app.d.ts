@@ -51,6 +51,7 @@ declare global {
     loading?: 'lazy' | 'eager';
     src: string;
     alt: string;
+    'aria-labelledby'?: string;
     onload?: (event: Event) => void;
     onerror?: (event: Event) => void;
   };
