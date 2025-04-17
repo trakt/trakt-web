@@ -1,14 +1,12 @@
 <script lang="ts">
   import { useFilter } from "$lib/features/filters/useFilter";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
-  import MediaCard from "../components/MediaCard.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
+  import WatchlistItem from "./WatchlistItem.svelte";
 
   type WatchListProps = {
     title: string;
@@ -35,23 +33,7 @@
     `${UrlBuilder.watchlistPage(params)}?status=${status}`}
 >
   {#snippet item(media)}
-    {#if status === "released"}
-      <MediaCard type={media.type} {media}>
-        {#snippet action()}
-          <RenderFor audience="authenticated">
-            <MarkAsWatchedAction
-              style="action"
-              size="small"
-              title={media.title}
-              type={media.type}
-              {media}
-            />
-          </RenderFor>
-        {/snippet}
-      </MediaCard>
-    {:else}
-      <MediaCard {type} {media} />
-    {/if}
+    <WatchlistItem {type} {media} />
   {/snippet}
 
   {#snippet empty()}

@@ -5,9 +5,9 @@
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useListItems } from "$lib/sections/lists/user/useListItems";
-  import MediaCard from "../components/MediaCard.svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import PopularListItem from "../popular/PopularListItem.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import PopupActions from "./_internal/PopupActions.svelte";
 
@@ -26,10 +26,10 @@
   --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
-    <MediaCard type={media.entry.type} media={media.entry}>
+    <PopularListItem type={media.entry.type} media={media.entry}>
       {#snippet popupActions()}
         <PopupActions {list} media={media.entry} />
       {/snippet}
-    </MediaCard>
+    </PopularListItem>
   {/snippet}
 </DrillableMediaList>

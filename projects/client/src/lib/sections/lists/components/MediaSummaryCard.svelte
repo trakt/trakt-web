@@ -2,9 +2,17 @@
   import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
   import Card from "$lib/components/card/Card.svelte";
   import CardActionBar from "$lib/components/card/CardActionBar.svelte";
+  import CardCover from "$lib/components/card/CardCover.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
+  import Link from "$lib/components/link/Link.svelte";
+  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import GenreList from "$lib/components/summary/GenreList.svelte";
+  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import MediaSummaryItem from "$lib/sections/summary/components/media/MediaSummaryItem.svelte";
+  import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
+  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps, MediaCardProps } from "./MediaCardProps";
 
   const {
@@ -12,63 +20,97 @@
     action,
     badges,
     popupActions,
+    media,
     ...rest
   }: MediaCardProps | EpisodeCardProps = $props();
-
-  const variant = $derived(rest.variant ?? "poster");
-
-  function summaryCardHeightResolver(variant: MediaCardProps["variant"]) {
-    switch (variant) {
-      case "poster":
-        return "var(--height-summary-card)";
-      default:
-        return "var(--height-episode-summary-card)";
-    }
-  }
 </script>
 
-<trakt-media-summary-card>
-  <Card
-    --height-card={summaryCardHeightResolver(variant)}
-    --width-card="var(--width-summary-card)"
-  >
-    {#if popupActions}
-      <CardActionBar>
-        {#snippet actions()}
-          <PopupMenu label={m.media_popup_label({ title: rest.media.title })}>
-            {#snippet items()}
-              {@render popupActions()}
-            {/snippet}
-          </PopupMenu>
-        {/snippet}
-      </CardActionBar>
+{#snippet footerTag()}
+  {#if rest.type === "episode" && rest.variant !== "activity"}
+    <DurationTag i18n={TagIntlProvider} runtime={rest.episode.runtime} />
+  {:else if tags != null}
+    {@render tags()}
+  {/if}
+{/snippet}
+
+<Card
+  variant="transparent"
+  --height-card="var(--height-summary-card)"
+  --height-card-cover="var(--height-summary-card-cover)"
+  --width-card="var(--width-summary-card)"
+>
+  {#if popupActions}
+    <CardActionBar>
+      {#snippet actions()}
+        <PopupMenu label={m.media_popup_label({ title: media.title })}>
+          {#snippet items()}
+            {@render popupActions()}
+          {/snippet}
+        </PopupMenu>
+      {/snippet}
+    </CardActionBar>
+  {/if}
+
+  <Link href={UrlBuilder.media(media.type, media.slug)} color="inherit">
+    {#if rest.type === "episode"}
+      <CardCover
+        {badges}
+        {tags}
+        title={rest.episode.title}
+        alt={rest.episode.title}
+        src={rest.episode.cover.url ?? EPISODE_COVER_PLACEHOLDER}
+      />
     {/if}
 
-    <MediaSummaryItem {...rest} {badges} {tags} />
+    {#if rest.type === "movie"}
+      <CardCover
+        {badges}
+        title={media.title}
+        alt={media.title}
+        src={media.thumb.url}
+      />
+    {/if}
 
-    <CardFooter {action} />
-  </Card>
-</trakt-media-summary-card>
+    {#if rest.type === "show"}
+      <CardCover
+        {badges}
+        title={media.title}
+        alt={media.title}
+        src={media.cover.url.thumb}
+      />
+    {/if}
+  </Link>
 
-<style>
-  trakt-media-summary-card {
-    :global(.trakt-card .trakt-card-footer) {
-      padding: 0;
-      position: absolute;
-      bottom: var(--ni-neg-8);
-      right: var(--ni-8);
-    }
-
-    :global(.trakt-card .trakt-card-footer .trakt-action-button) {
-      outline: var(--ni-1) solid var(--color-background-purple);
-    }
-
-    :global(.trakt-card .trakt-summary-item) {
-      padding: var(--ni-12);
-    }
-
-    :global(.trakt-link) {
-      text-decoration: none;
-    }
-  }
-</style>
+  <CardFooter {action} tag={footerTag}>
+    {#if rest.variant === "activity"}
+      {#if rest.type === "episode"}
+        <p class="trakt-card-title small ellipsis">
+          {rest.episode.season}x{rest.episode.number} - {media.title}
+        </p>
+      {:else}
+        <p class="trakt-card-title small ellipsis">
+          {media.title}
+        </p>
+      {/if}
+      <p class="trakt-card-subtitle small ellipsis">
+        {toHumanDate(new Date(), rest.date, getLocale())}
+      </p>
+    {:else if rest.type === "episode"}
+      <p class="trakt-card-title small ellipsis">
+        {rest.episode.season}x{rest.episode.number} - {media.title}
+      </p>
+      <p class="trakt-card-subtitle small ellipsis">
+        {rest.episode.title}
+      </p>
+    {:else}
+      <p class="trakt-card-title small ellipsis">
+        {media.title}
+      </p>
+      <GenreList
+        classList="trakt-card-subtitle small ellipsis"
+        separator=", "
+        genres={media.genres}
+      />
+    {/if}
+  </CardFooter>
+</Card>
