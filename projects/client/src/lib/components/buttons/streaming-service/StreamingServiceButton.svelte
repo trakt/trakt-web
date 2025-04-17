@@ -4,6 +4,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import StreamingServiceLogo from "../../media/streaming-service/StreamingServiceLogo.svelte";
   import Button from "../Button.svelte";
+  import { useStreamOnHandler } from "./_internal/useStreamOnHandler";
   import { StreamingServiceButtonIntlProvider } from "./StreamingServiceButtonIntlProvider";
   import type { StreamingServiceButtonProps } from "./StreamingServiceButtonProps";
 
@@ -19,10 +20,11 @@
     label: i18n.title(mediaTitle),
     color: "purple",
     variant: "primary",
-    href: service.link,
     target: "_blank",
     navigationType: DpadNavigationType.Item,
   });
+
+  const handler = $derived(useStreamOnHandler(service));
 
   /**
    * TODO: @seferturan
@@ -34,7 +36,7 @@
 
 {#if style === "normal"}
   <div class="trakt-streaming-service-button">
-    <Button {...commonProps} {...props} size="small">
+    <Button {...commonProps} {...props} {...handler} size="small">
       {i18n.streamOn()}
       {#snippet icon()}
         <StreamingServiceLogo
@@ -49,7 +51,7 @@
 
 {#if style === "logo"}
   <div class="trakt-streaming-service-button">
-    <Button {...commonProps} {...props} size="small">
+    <Button {...commonProps} {...props} {...handler} size="small">
       <StreamingServiceLogo
         source={service.source}
         i18n={StreamingServiceLogoIntlProvider}

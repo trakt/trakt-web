@@ -186,6 +186,12 @@ declare global {
       'onclickoutside'?: (ev: CustomEvent) => void;
     }
   }
+
+  interface StreamOnAndroid {
+    open: (name: string, url: string) => void;
+  }
+
+  const StreamOnAndroid: StreamOnAndroid | Nil;
 }
 
 export {};

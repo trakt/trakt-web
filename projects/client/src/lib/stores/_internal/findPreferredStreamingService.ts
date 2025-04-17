@@ -1,4 +1,8 @@
-import type { StreamingServiceOptions } from '$lib/requests/models/StreamingServiceOptions.ts';
+import { getDeepLinkHandler } from '$lib/features/deep-link/getDeepLinkHandler.ts';
+import type {
+  StreamingServiceOptions,
+  StreamNow,
+} from '$lib/requests/models/StreamingServiceOptions.ts';
 
 type FindPreferredStreamingServiceProps = {
   services: StreamingServiceOptions;
@@ -6,9 +10,9 @@ type FindPreferredStreamingServiceProps = {
   countryCode: string;
 };
 
-function findViablePreferredService(services: StreamingServiceOptions) {
+function findViablePreferredService(services: StreamNow[]) {
   // TODO we'll need to revisit and come up with a better heuristic
-  return services.streaming.at(0);
+  return services.at(0);
 }
 
 export function findPreferredStreamingService({
@@ -16,12 +20,24 @@ export function findPreferredStreamingService({
   favorites,
   countryCode,
 }: FindPreferredStreamingServiceProps) {
-  const favoriteSubscriptionMatch = services
+  const streamNowServices = services
     .streaming
+    .filter(
+      (service) => {
+        if (getDeepLinkHandler()) {
+          return Boolean(service.deepLink);
+        }
+
+        return true;
+      },
+    );
+
+  const favoriteSubscriptionMatch = streamNowServices
     .find(
       (subscription) =>
         favorites.includes(`${countryCode}-${subscription.source}`),
     );
 
-  return favoriteSubscriptionMatch ?? findViablePreferredService(services);
+  return favoriteSubscriptionMatch ??
+    findViablePreferredService(streamNowServices);
 }
