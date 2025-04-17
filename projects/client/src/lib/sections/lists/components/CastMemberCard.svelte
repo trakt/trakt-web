@@ -28,8 +28,12 @@
         style="flat"
       />
       <CardFooter>
-        <p class="secondary ellipsis actor-name">{castMember.name}</p>
-        <p class="small secondary ellipsis">{castMember.characterName}</p>
+        <p class="trakt-card-title ellipsis">
+          {castMember.name}
+        </p>
+        <p class="trakt-card-subtitle ellipsis">
+          {castMember.characterName}
+        </p>
       </CardFooter>
     </PersonCard>
   </Link>
@@ -44,9 +48,5 @@
     :global(.trakt-link) {
       text-decoration: none;
     }
-  }
-
-  .actor-name {
-    font-weight: 700;
   }
 </style>
