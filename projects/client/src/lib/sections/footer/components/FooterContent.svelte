@@ -43,7 +43,9 @@
       <ThemePicker />
     </div>
     <div class="trakt-footer-right">
-      <ExternalLinks />
+      <RenderFor audience="all" navigation="default">
+        <ExternalLinks />
+      </RenderFor>
     </div>
   </FooterBar>
 </div>

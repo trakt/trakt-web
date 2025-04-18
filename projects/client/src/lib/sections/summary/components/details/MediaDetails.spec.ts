@@ -8,7 +8,8 @@ import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/hereti
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
-import { render, screen } from '@testing-library/svelte';
+import { renderComponent } from '$test/beds/component/renderComponent.ts';
+import { screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import MediaDetails from './MediaDetails.svelte';
 import type { MediaDetailsProps } from './MediaDetailsProps.ts';
@@ -16,7 +17,7 @@ import type { MediaDetailsProps } from './MediaDetailsProps.ts';
 describe('MediaDetails', () => {
   const mediaTests = (props: MediaDetailsProps & { type: MediaType }) => {
     it('should display the media details sections', () => {
-      render(
+      renderComponent(
         MediaDetails,
         { props },
       );
@@ -42,7 +43,7 @@ describe('MediaDetails', () => {
       const nextYear = new Date();
       nextYear.setFullYear(nextYear.getFullYear() + 1);
 
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: {
@@ -60,7 +61,7 @@ describe('MediaDetails', () => {
     });
 
     it('should show the status if there is no known year for an item', () => {
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: {
@@ -82,7 +83,7 @@ describe('MediaDetails', () => {
     });
 
     it('should hide undefined values', () => {
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: {
@@ -100,7 +101,7 @@ describe('MediaDetails', () => {
     });
 
     it('should not show the original title if it is equal to the title', () => {
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: {
@@ -118,7 +119,7 @@ describe('MediaDetails', () => {
     });
 
     it('should show the original title if it differs from the title', () => {
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: {
@@ -147,7 +148,7 @@ describe('MediaDetails', () => {
     mediaTests(defaultProps);
 
     it('should display the director instead of creator', () => {
-      render(
+      renderComponent(
         MediaDetails,
         { props: defaultProps },
       );
@@ -171,7 +172,7 @@ describe('MediaDetails', () => {
     mediaTests(defaultProps);
 
     it('should display the creator instead of director', () => {
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: defaultProps,
@@ -194,7 +195,7 @@ describe('MediaDetails', () => {
     };
 
     it('should display the episode details', () => {
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: defaultProps,
@@ -216,7 +217,7 @@ describe('MediaDetails', () => {
       const nextYear = new Date();
       nextYear.setFullYear(nextYear.getFullYear() + 1);
 
-      render(
+      renderComponent(
         MediaDetails,
         {
           props: {

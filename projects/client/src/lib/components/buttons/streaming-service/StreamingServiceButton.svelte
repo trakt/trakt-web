@@ -13,6 +13,7 @@
     service,
     style,
     i18n = StreamingServiceButtonIntlProvider,
+    size = "small",
     ...props
   }: StreamingServiceButtonProps = $props();
 
@@ -35,8 +36,11 @@
 </script>
 
 {#if style === "normal"}
-  <div class="trakt-streaming-service-button">
-    <Button {...commonProps} {...props} {...handler} size="small">
+  <div
+    class="trakt-streaming-service-button"
+    data-dpad-navigation={DpadNavigationType.List}
+  >
+    <Button {...commonProps} {...props} {...handler} {size}>
       {i18n.streamOn()}
       {#snippet icon()}
         <StreamingServiceLogo
@@ -51,7 +55,7 @@
 
 {#if style === "logo"}
   <div class="trakt-streaming-service-button">
-    <Button {...commonProps} {...props} {...handler} size="small">
+    <Button {...commonProps} {...props} {...handler} {size}>
       <StreamingServiceLogo
         source={service.source}
         i18n={StreamingServiceLogoIntlProvider}

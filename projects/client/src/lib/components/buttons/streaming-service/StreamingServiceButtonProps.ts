@@ -6,4 +6,5 @@ export type StreamingServiceButtonProps = {
   service: StreamNow;
   style: 'logo' | 'normal';
   i18n?: StreamingServiceButtonIntl;
+  size?: 'small' | 'normal';
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

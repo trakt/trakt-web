@@ -1,4 +1,5 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import ListTitle from "./ListTitle.svelte";
 
@@ -27,9 +28,11 @@
     {/if}
   </div>
   {#if actions != null}
-    <div class="trakt-list-actions">
-      {@render actions()}
-    </div>
+    <RenderFor audience="all" navigation="default">
+      <div class="trakt-list-actions">
+        {@render actions()}
+      </div>
+    </RenderFor>
   {/if}
 </div>
 

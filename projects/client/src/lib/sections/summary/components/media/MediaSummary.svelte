@@ -3,6 +3,7 @@
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
@@ -80,11 +81,23 @@
 </script>
 
 {#snippet mediaActions()}
-  {#if $lists.length === 0}
-    <WatchlistAction {...watchlistProps} />
-  {:else}
-    <ListDropdown {...listProps} />
-  {/if}
+  <RenderFor audience="authenticated" navigation="default">
+    {#if $lists.length === 0}
+      <WatchlistAction {...watchlistProps} />
+    {:else}
+      <ListDropdown {...listProps} />
+    {/if}
+  </RenderFor>
+  <RenderFor audience="authenticated" navigation="dpad">
+    {#if streamOn?.preferred}
+      <StreamingServiceButton
+        mediaTitle={media.title}
+        service={streamOn.preferred}
+        style="normal"
+        size="normal"
+      />
+    {/if}
+  </RenderFor>
   <MarkAsWatchedAction {...markAsWatchedProps} />
 {/snippet}
 
@@ -167,9 +180,11 @@
   <MediaDetails {media} {studios} {crew} {type} />
 
   {#if streamOn}
-    <MediaStreamingServices
-      services={streamOn.services}
-      preferred={streamOn.preferred}
-    />
+    <RenderFor audience="authenticated" navigation="default">
+      <MediaStreamingServices
+        services={streamOn.services}
+        preferred={streamOn.preferred}
+      />
+    </RenderFor>
   {/if}
 </SummaryContainer>

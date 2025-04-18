@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
@@ -23,7 +24,9 @@
   <ProfileAbout about={profile.about} />
 
   {#snippet contextualContent()}
-    <YearToDateLink isVip={profile.isVip} {slug} />
+    <RenderFor audience="all" navigation="default">
+      <YearToDateLink isVip={profile.isVip} {slug} />
+    </RenderFor>
   {/snippet}
 </ProfileContainer>
 

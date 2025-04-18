@@ -12,6 +12,7 @@
   import AutoMode from "./SystemMode.svelte";
 
   import * as m from "$lib/features/i18n/messages";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
 
   const { set, theme } = useTheme();
   const { track } = useTrack(AnalyticsEvent.Theme);
@@ -50,7 +51,10 @@
       <LightMode />
     {/if}
   </div>
-  <select onchange={(ev) => submitTheme(ev.currentTarget.value as Theme)}>
+  <select
+    onchange={(ev) => submitTheme(ev.currentTarget.value as Theme)}
+    data-dpad-navigation={DpadNavigationType.Item}
+  >
     {#each availableThemes as option}
       <option
         selected={$theme === option}
@@ -71,6 +75,10 @@
     width: var(--ni-48);
     height: var(--ni-48);
     border-radius: 50%;
+
+    &:has(select:focus-visible) {
+      outline: var(--border-thickness-xs) solid var(--purple-500);
+    }
 
     .theme-icon {
       width: calc(var(--ni-32) * 0.9);

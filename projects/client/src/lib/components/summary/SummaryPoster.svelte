@@ -1,5 +1,6 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import Link from "../link/Link.svelte";
 
@@ -32,9 +33,11 @@
   </div>
 
   {#if activeOverlay}
-    <div class="trakt-summary-poster-overlay">
-      {@render activeOverlay()}
-    </div>
+    <RenderFor audience="all" navigation="default">
+      <div class="trakt-summary-poster-overlay">
+        {@render activeOverlay()}
+      </div>
+    </RenderFor>
   {/if}
 
   {@render actions?.()}

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { Snippet } from "svelte";
 
   type SummaryContainerProps = {
@@ -16,10 +15,7 @@
   }: SummaryContainerProps = $props();
 </script>
 
-<div
-  class="trakt-summary-container"
-  data-dpad-navigation={DpadNavigationType.List}
->
+<div class="trakt-summary-container">
   {#if poster}
     <div class="trakt-summary-poster">
       {@render poster()}

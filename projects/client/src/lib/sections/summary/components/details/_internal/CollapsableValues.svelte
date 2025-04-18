@@ -3,6 +3,7 @@
 
   import MoreButton from "$lib/components/buttons/more/MoreButton.svelte";
   import { MoreButtonIntlProvider } from "$lib/components/buttons/more/MoreButtonIntlProvider";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
 
@@ -33,13 +34,15 @@
         {@render value(v)}
 
         {#if omittedValues.length > 0 && index === MAX_ITEMS - 1}
-          <MoreButton
-            i18n={MoreButtonIntlProvider}
-            label="{m.expand_category({ category })}}"
-            count={omittedValues.length}
-            onExpand={() => expanded.set(true)}
-            onCollapse={() => expanded.set(false)}
-          />
+          <RenderFor audience="all" navigation="default">
+            <MoreButton
+              i18n={MoreButtonIntlProvider}
+              label="{m.expand_category({ category })}}"
+              count={omittedValues.length}
+              onExpand={() => expanded.set(true)}
+              onCollapse={() => expanded.set(false)}
+            />
+          </RenderFor>
         {/if}
       </div>
     {/each}

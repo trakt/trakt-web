@@ -1,4 +1,5 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
 
   const {
@@ -9,9 +10,11 @@
 
 <div class="trakt-summary-header">
   {#if headerActions}
-    <div class="trakt-summary-action-header">
-      {@render headerActions()}
-    </div>
+    <RenderFor audience="all" navigation="default">
+      <div class="trakt-summary-action-header">
+        {@render headerActions()}
+      </div>
+    </RenderFor>
   {/if}
   <div class="trakt-summary-header-children">
     {@render children()}
