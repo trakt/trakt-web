@@ -29,7 +29,11 @@
   const topList = $derived(lists.at(0));
 </script>
 
-<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+<RenderFor
+  audience="all"
+  device={["tablet-sm", "tablet-lg", "desktop"]}
+  navigation="default"
+>
   <SectionList
     id={`popular-lists-list-${slug}`}
     items={lists}
@@ -56,7 +60,7 @@
   </SectionList>
 </RenderFor>
 
-<RenderFor audience="all" device={["mobile"]}>
+<RenderFor audience="all" device={["mobile"]} navigation="default">
   {#if topList}
     <UserList list={topList} {type} />
   {/if}

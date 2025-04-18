@@ -76,13 +76,18 @@
       <RenderFor
         audience="authenticated"
         device={["tablet-sm", "tablet-lg", "desktop"]}
+        navigation="default"
       >
         {@render traktSwitch()}
       </RenderFor>
-      <RenderFor audience="authenticated">
+      <RenderFor audience="authenticated" navigation="default">
         <SearchInput />
       </RenderFor>
-      <RenderFor audience="authenticated" device={["mobile"]}>
+      <RenderFor
+        audience="authenticated"
+        device={["mobile"]}
+        navigation="default"
+      >
         {@render traktSwitch()}
       </RenderFor>
     </div>
@@ -142,7 +147,9 @@
         {#if !isVip}
           <GetVIPLink />
         {/if}
-        <FilterButton />
+        <RenderFor audience="authenticated" navigation="default">
+          <FilterButton />
+        </RenderFor>
         <ProfileButton />
       </RenderFor>
     </div>

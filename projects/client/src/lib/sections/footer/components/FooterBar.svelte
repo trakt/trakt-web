@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+
   const { children }: ChildrenProps = $props();
 </script>
 
-<div class="trakt-footer-bar">
+<div class="trakt-footer-bar" data-dpad-navigation={DpadNavigationType.List}>
   {@render children?.()}
 </div>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { CardFooterProps } from "./CardFooterProps";
 
   const { children, action, tag }: CardFooterProps = $props();
@@ -16,9 +17,11 @@
   {/if}
 
   {#if action}
-    <div class="trakt-card-footer-action">
-      {@render action()}
-    </div>
+    <RenderFor audience="all" navigation="default">
+      <div class="trakt-card-footer-action">
+        {@render action()}
+      </div>
+    </RenderFor>
   {/if}
 </div>
 

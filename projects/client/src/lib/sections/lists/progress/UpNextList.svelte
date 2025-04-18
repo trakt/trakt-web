@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -37,7 +38,9 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet badge()}
-    <UpNextLabSwitch />
+    <RenderFor audience="authenticated" navigation="default">
+      <UpNextLabSwitch />
+    </RenderFor>
   {/snippet}
   {#snippet item(episode)}
     <EpisodeProgressItem

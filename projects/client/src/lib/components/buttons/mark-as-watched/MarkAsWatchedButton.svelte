@@ -39,12 +39,18 @@
 </script>
 
 {#if style === "normal"}
-  <Button {...commonProps} {...props} navigationType={DpadNavigationType.Item}>
-    {i18n.text({ title, isWatched, isRewatching })}
-    {#snippet icon()}
-      <MarkAsWatchedIcon {state} size="small" />
-    {/snippet}
-  </Button>
+  <div data-dpad-navigation={DpadNavigationType.List} style="display: contents">
+    <Button
+      {...commonProps}
+      {...props}
+      navigationType={DpadNavigationType.Item}
+    >
+      {i18n.text({ title, isWatched, isRewatching })}
+      {#snippet icon()}
+        <MarkAsWatchedIcon {state} size="small" />
+      {/snippet}
+    </Button>
+  </div>
 {/if}
 
 {#if style === "action"}
