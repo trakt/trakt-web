@@ -67,6 +67,10 @@
     text-underline-offset: var(--ni-2);
     text-decoration-thickness: var(--ni-2);
 
+    :global(.trakt-card-cover) {
+      transition: transform var(--transition-increment) ease-in-out;
+    }
+
     &:focus-visible {
       outline: none;
       position: relative;
@@ -83,6 +87,11 @@
         outline-offset: calc(-1 * var(--border-thickness-s));
 
         transition: border-radius var(--transition-increment) ease-in-out;
+      }
+
+      :global(.trakt-card-cover) {
+        transform: scale(0.9);
+        transform-origin: center;
       }
     }
 
