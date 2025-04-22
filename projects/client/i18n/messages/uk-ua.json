@@ -374,5 +374,6 @@
   "theme_dark": "Темна",
   "theme_system": "Системна",
   "filter_label": "Фільтр",
-  "filter_reset": "Скинути"
+  "filter_reset": "Скинути",
+  "results_for_title": "Результати для {query}"
 }

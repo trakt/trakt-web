@@ -2,9 +2,9 @@
   import "../style";
 
   import { page } from "$app/state";
-  import ListScrollHistoryProvider from "$lib//components/lists/section-list/ListScrollHistoryProvider.svelte";
   import CoverImage from "$lib/components/background/CoverImage.svelte";
   import CoverProvider from "$lib/components/background/CoverProvider.svelte";
+  import ListScrollHistoryProvider from "$lib/components/lists/section-list/ListScrollHistoryProvider.svelte";
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
@@ -15,6 +15,7 @@
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
+  import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
@@ -90,33 +91,35 @@
         <AutoSigninProvider>
           <LocaleProvider>
             <NavigationProvider device={data.device}>
-              <FilterProvider>
-                <CoverProvider>
-                  <CoverImage />
+              <SearchProvider>
+                <FilterProvider>
+                  <CoverProvider>
+                    <CoverImage />
 
-                  <ThemeProvider theme={data.theme}>
-                    <ListScrollHistoryProvider>
-                      <div class="trakt-layout-wrapper">
-                        <Navbar />
-                        <div class="trakt-layout-content">
-                          {@render children()}
+                    <ThemeProvider theme={data.theme}>
+                      <ListScrollHistoryProvider>
+                        <div class="trakt-layout-wrapper">
+                          <Navbar />
+                          <div class="trakt-layout-content">
+                            {@render children()}
+                          </div>
+                          <Footer />
                         </div>
-                        <Footer />
-                      </div>
-                      <RenderFor
-                        audience="all"
-                        device={["mobile", "tablet-sm"]}
-                      >
-                        <MobileNavbar />
-                      </RenderFor>
-                      <SvelteQueryDevtools
-                        buttonPosition="bottom-left"
-                        styleNonce="opacity: 0.5"
-                      />
-                    </ListScrollHistoryProvider>
-                  </ThemeProvider>
-                </CoverProvider>
-              </FilterProvider>
+                        <RenderFor
+                          audience="all"
+                          device={["mobile", "tablet-sm"]}
+                        >
+                          <MobileNavbar />
+                        </RenderFor>
+                        <SvelteQueryDevtools
+                          buttonPosition="bottom-left"
+                          styleNonce="opacity: 0.5"
+                        />
+                      </ListScrollHistoryProvider>
+                    </ThemeProvider>
+                  </CoverProvider>
+                </FilterProvider>
+              </SearchProvider>
             </NavigationProvider>
           </LocaleProvider>
 

@@ -374,5 +374,6 @@
   "theme_dark": "Mörk",
   "theme_system": "System",
   "filter_label": "Filtrera",
-  "filter_reset": "Återställ"
+  "filter_reset": "Återställ",
+  "results_for_title": "Resultat för {query}"
 }

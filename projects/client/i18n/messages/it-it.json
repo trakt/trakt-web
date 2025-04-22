@@ -374,5 +374,6 @@
   "theme_dark": "Scuro",
   "theme_system": "Sistema",
   "filter_label": "Filtra",
-  "filter_reset": "Azzera"
+  "filter_reset": "Azzera",
+  "results_for_title": "Risultati per {query}"
 }

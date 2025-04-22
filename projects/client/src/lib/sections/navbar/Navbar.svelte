@@ -15,10 +15,10 @@
   import { navigateToTraktOg } from "$lib/utils/url/navigateToTraktOg";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
+  import SearchInput from "../../features/search/SearchInput.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
-  import SearchInput from "./components/search/SearchInput.svelte";
   import ProfileButton from "./ProfileButton.svelte";
 
   let windowScrollY = $state(0);

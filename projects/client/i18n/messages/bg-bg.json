@@ -374,5 +374,6 @@
   "theme_dark": "Тъмна",
   "theme_system": "Система",
   "filter_label": "Филтър",
-  "filter_reset": "Изчисти"
+  "filter_reset": "Изчисти",
+  "results_for_title": "Резултати за {query}"
 }
