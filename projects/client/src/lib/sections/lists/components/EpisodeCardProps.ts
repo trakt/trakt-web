@@ -14,9 +14,9 @@ export type EpisodeItemVariant =
   | { variant: 'activity'; episode: EpisodeEntry; date: Date };
 
 export type EpisodeCardProps = EpisodeItemVariant & {
-  badges?: Snippet;
+  badge?: Snippet;
   action?: Snippet;
-  tags?: Snippet;
+  tag?: Snippet;
   show: MediaInputDefault;
   style?: 'cover' | 'summary';
   popupActions?: Snippet;

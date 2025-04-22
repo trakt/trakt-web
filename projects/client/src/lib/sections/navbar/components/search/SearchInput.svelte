@@ -64,7 +64,7 @@
     <div class="trakt-search-results" use:clearOnClick>
       {#each $results as result}
         <MediaSummaryCard media={result} type={result.type}>
-          {#snippet tags()}
+          {#snippet tag()}
             <InfoTag>
               {result.type}
             </InfoTag>

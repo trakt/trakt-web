@@ -36,7 +36,7 @@
     {...props}
     {style}
     action={props.action}
-    popupActions={props.badges ? undefined : popupActions}
+    popupActions={props.badge ? undefined : popupActions}
   />
 {/if}
 
@@ -45,6 +45,6 @@
     {...props}
     {style}
     action={props.action}
-    popupActions={props.badges ? undefined : popupActions}
+    popupActions={props.badge ? undefined : popupActions}
   />
 {/if}

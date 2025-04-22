@@ -16,9 +16,9 @@
   import type { EpisodeCardProps, MediaCardProps } from "./MediaCardProps";
 
   const {
-    tags,
+    tag,
     action,
-    badges,
+    badge,
     popupActions,
     media,
     ...rest
@@ -28,8 +28,8 @@
 {#snippet footerTag()}
   {#if rest.type === "episode" && rest.variant !== "activity"}
     <DurationTag i18n={TagIntlProvider} runtime={rest.episode.runtime} />
-  {:else if tags != null}
-    {@render tags()}
+  {:else if tag != null}
+    {@render tag()}
   {/if}
 {/snippet}
 
@@ -54,8 +54,8 @@
   <Link href={UrlBuilder.media(media.type, media.slug)} color="inherit">
     {#if rest.type === "episode"}
       <CardCover
-        {badges}
-        {tags}
+        {badge}
+        {tag}
         title={rest.episode.title}
         alt={rest.episode.title}
         src={rest.episode.cover.url ?? EPISODE_COVER_PLACEHOLDER}
@@ -64,7 +64,7 @@
 
     {#if rest.type === "movie"}
       <CardCover
-        {badges}
+        {badge}
         title={media.title}
         alt={media.title}
         src={media.thumb.url}
@@ -73,7 +73,7 @@
 
     {#if rest.type === "show"}
       <CardCover
-        {badges}
+        {badge}
         title={media.title}
         alt={media.title}
         src={media.cover.url.thumb}

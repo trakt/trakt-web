@@ -17,8 +17,8 @@
   const {
     type,
     media,
-    badges,
-    tags,
+    badge,
+    tag,
     action,
     popupActions,
     ...rest
@@ -49,11 +49,11 @@
       title={media.title}
       src={mediaCoverImageUrl}
       alt={m.media_poster({ title: media.title })}
-      {badges}
+      {badge}
     />
   </Link>
 
-  <CardFooter {action} tag={tags}>
+  <CardFooter {action} {tag}>
     {#if rest.variant === "activity"}
       <Link href={UrlBuilder.media(type, media.slug)}>
         <p

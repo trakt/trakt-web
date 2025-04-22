@@ -7,21 +7,17 @@
   type SocialActivityItemProps = {
     activity: SocialActivity | HistoryEntry;
     activityAt: Date;
-    badges?: Snippet;
+    badge?: Snippet;
     popupActions?: Snippet;
   };
 
-  const {
-    activity,
-    activityAt,
-    badges,
-    popupActions,
-  }: SocialActivityItemProps = $props();
+  const { activity, activityAt, badge, popupActions }: SocialActivityItemProps =
+    $props();
 </script>
 
 {#if activity.type === "episode"}
   <MediaSummaryCard
-    {badges}
+    {badge}
     {popupActions}
     date={activityAt}
     episode={activity.episode}
@@ -39,7 +35,7 @@
 {#if activity.type === "movie"}
   <MediaSummaryCard
     {popupActions}
-    {badges}
+    {badge}
     date={activityAt}
     media={activity.movie}
     type="movie"
