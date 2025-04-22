@@ -7,6 +7,7 @@
   import { useSearch } from "$lib/features/search/useSearch";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
@@ -36,7 +37,7 @@
       <DefaultMediaItem type={result.type} media={result} {style}>
         {#snippet tag()}
           <InfoTag>
-            {result.type}
+            {toTranslatedValue("type", result.type)}
           </InfoTag>
         {/snippet}
       </DefaultMediaItem>

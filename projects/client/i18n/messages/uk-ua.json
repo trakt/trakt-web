@@ -375,5 +375,7 @@
   "theme_system": "Системна",
   "filter_label": "Фільтр",
   "filter_reset": "Скинути",
-  "results_for_title": "Результати для {query}"
+  "results_for_title": "Результати для {query}",
+  "type_movie": "Фільм",
+  "type_show": "Серіал"
 }

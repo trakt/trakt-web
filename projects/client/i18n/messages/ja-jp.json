@@ -375,5 +375,7 @@
   "theme_system": "システム",
   "filter_label": "絞り込み",
   "filter_reset": "リセット",
-  "results_for_title": "{query} の検索結果"
+  "results_for_title": "{query} の検索結果",
+  "type_movie": "映画",
+  "type_show": "番組"
 }

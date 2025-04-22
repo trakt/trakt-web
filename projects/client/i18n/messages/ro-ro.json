@@ -375,5 +375,7 @@
   "theme_system": "Sistem",
   "filter_label": "Filtru",
   "filter_reset": "Resetează",
-  "results_for_title": "Rezultate pentru {query}"
+  "results_for_title": "Rezultate pentru {query}",
+  "type_movie": "Film",
+  "type_show": "Serial"
 }
