@@ -374,5 +374,6 @@
   "theme_dark": "Întunecat",
   "theme_system": "Sistem",
   "filter_label": "Filtru",
-  "filter_reset": "Resetează"
+  "filter_reset": "Resetează",
+  "results_for_title": "Rezultate pentru {query}"
 }

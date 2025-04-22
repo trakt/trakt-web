@@ -374,5 +374,6 @@
   "theme_dark": "Oscuro",
   "theme_system": "Sistema",
   "filter_label": "Filtrar",
-  "filter_reset": "Restablecer"
+  "filter_reset": "Restablecer",
+  "results_for_title": "Resultados para {query}"
 }

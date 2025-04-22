@@ -1,35 +1,33 @@
 <script lang="ts">
-  import SearchIcon from "$lib/components/icons/SearchIcon.svelte";
-  import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state";
   import * as m from "$lib/features/i18n/messages";
-  import MediaSummaryCard from "$lib/sections/lists/components/MediaSummaryCard.svelte";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
+  import { buildParamString } from "$lib/utils/url/buildParamString";
+  import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
 
-  const { search, clear, isSearching, results } = useSearch();
+  const { clear, isSearching, pathName, exitPathName, query } = useSearch();
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
+    const value = inputElement.value.trim();
 
-    search(inputElement.value);
+    if (value.length === 0) {
+      goto($exitPathName, {
+        replaceState: true,
+        keepFocus: true,
+      });
+      return;
+    }
+
+    goto(`${pathName}${buildParamString({ q: inputElement.value.trim() })}`, {
+      replaceState: page.url.pathname === pathName,
+      keepFocus: true,
+    });
   }
 
   let inputElement: HTMLInputElement;
-
-  function clearOnClick(node: HTMLElement) {
-    const handler = () => {
-      inputElement.value = "";
-      clear();
-    };
-
-    node.addEventListener("click", handler);
-
-    return {
-      destroy() {
-        node.removeEventListener("click", handler);
-      },
-    };
-  }
 
   function focusOnClick(node: HTMLElement) {
     const handler = () => {
@@ -57,22 +55,10 @@
     onclickoutside={() => clear()}
     class="trakt-search-input"
     type="search"
+    defaultValue={$query}
     placeholder={m.search_placeholder()}
     oninput={onSearch}
   />
-  {#if $results.length > 0}
-    <div class="trakt-search-results" use:clearOnClick>
-      {#each $results as result}
-        <MediaSummaryCard media={result} type={result.type}>
-          {#snippet tag()}
-            <InfoTag>
-              {result.type}
-            </InfoTag>
-          {/snippet}
-        </MediaSummaryCard>
-      {/each}
-    </div>
-  {/if}
 </div>
 
 <style lang="scss">
@@ -195,7 +181,7 @@
         -webkit-appearance: none;
         width: var(--ni-16);
         height: var(--ni-16);
-        background-image: url("$lib/sections/navbar/components/search/SearchClearIcon.svg");
+        background-image: url("$lib/features/search/SearchClearIcon.svg");
         background-size: contain;
         cursor: pointer;
       }
@@ -204,7 +190,7 @@
         -moz-appearance: none;
         width: var(--ni-16);
         height: var(--ni-16);
-        background-image: url("$lib/sections/navbar/components/search/SearchClearIcon.svg");
+        background-image: url("$lib/features/search/SearchClearIcon.svg");
         background-size: contain;
         cursor: pointer;
       }
@@ -261,47 +247,6 @@
             );
           }
         }
-      }
-    }
-
-    .trakt-search-results {
-      --search-results-top: calc(var(--search-input-height) + var(--gap-s));
-      z-index: var(--layer-overlay);
-
-      position: absolute;
-      top: var(--search-results-top);
-      left: 0;
-      right: 0;
-
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-m);
-
-      padding: var(--ni-16);
-      padding-right: calc(var(--ni-16) - var(--layout-scrollbar-width));
-
-      height: 100vh;
-      max-height: calc(80dvh - var(--search-results-top));
-      width: clamp(
-        var(--ni-280),
-        var(--mobile-search-focus-width) - var(--ni-32),
-        var(--ni-380)
-      );
-
-      overflow: hidden;
-      overflow-y: scroll;
-
-      background: color-mix(
-        in srgb,
-        var(--color-background) 90%,
-        transparent 10%
-      );
-      backdrop-filter: blur(var(--ni-8));
-      border-radius: var(--border-radius-l);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-      @include for-mobile {
-        padding-right: var(--ni-16);
       }
     }
   }

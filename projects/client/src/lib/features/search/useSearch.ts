@@ -10,6 +10,7 @@ import { CancelledError, useQueryClient } from '@tanstack/svelte-query';
 import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
+import { getSearchContext } from './_internal/getSearchContext.ts';
 
 export function useSearch() {
   type SearchResponse = {
@@ -22,7 +23,7 @@ export function useSearch() {
     reason: 'initial',
   });
   const client = browser ? useQueryClient() : undefined;
-  const isSearching = writable(false);
+  const { isSearching, ...rest } = getSearchContext();
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   async function search(query: string) {
@@ -91,5 +92,6 @@ export function useSearch() {
     clear,
     results: derived(results, ($results) => $results.items ?? []),
     isSearching,
+    ...rest,
   };
 }

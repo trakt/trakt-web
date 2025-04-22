@@ -374,5 +374,6 @@
   "theme_dark": "Donker",
   "theme_system": "Systeem",
   "filter_label": "Filter",
-  "filter_reset": "Reset"
+  "filter_reset": "Reset",
+  "results_for_title": "Resultaten voor {query}"
 }
