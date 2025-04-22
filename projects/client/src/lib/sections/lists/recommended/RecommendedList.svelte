@@ -4,6 +4,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
+  import { extractMinYearParam } from "./extractMinYearParam";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
   import { useRecommendedList } from "./useRecommendedList";
@@ -26,6 +27,7 @@
   filter={{
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
+    ...extractMinYearParam(page.url.searchParams),
   }}
   useList={useRecommendedList}
   urlBuilder={UrlBuilder.recommended}

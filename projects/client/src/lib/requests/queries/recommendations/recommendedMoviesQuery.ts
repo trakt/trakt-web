@@ -38,7 +38,12 @@ export const recommendedMoviesQuery = defineQuery({
   ],
   dependencies: (
     params,
-  ) => [params.limit, params.filter?.genres, params.filter?.watch_window],
+  ) => [
+    params.limit,
+    params.filter?.genres,
+    params.filter?.watch_window,
+    params.filter?.min_year,
+  ],
   request: recommendedMoviesRequest,
   mapper: (response) => response.body.map(mapToMovieEntry),
   schema: RecommendedMovieSchema.array(),

@@ -7,5 +7,6 @@ export type FilterParams = DeepPartial<{
     */
     genres: string;
     watch_window: number;
+    min_year: number;
   };
 }>;

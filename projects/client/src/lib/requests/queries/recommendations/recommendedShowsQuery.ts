@@ -42,7 +42,12 @@ export const recommendedShowsQuery = defineQuery({
   ],
   dependencies: (
     params,
-  ) => [params.limit, params.filter?.genres, params.filter?.watch_window],
+  ) => [
+    params.limit,
+    params.filter?.genres,
+    params.filter?.watch_window,
+    params.filter?.min_year,
+  ],
   request: recommendedShowsRequest,
   mapper: (response) =>
     response.body.map((show: RecommendedShowResponse[0]) => ({
