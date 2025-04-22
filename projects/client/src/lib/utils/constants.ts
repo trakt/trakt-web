@@ -68,3 +68,4 @@ export const PAGE_UPPER_LIMIT = 3;
  * We expose it to tinker around and fine-tune the default value.
  */
 export const RECOMMENDED_DEFAULT_WATCH_WINDOW = 25;
+export const RECOMMENDED_DEFAULT_MIN_YEAR = 1990;

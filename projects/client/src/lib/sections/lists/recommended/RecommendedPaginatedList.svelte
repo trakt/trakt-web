@@ -4,6 +4,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
+  import { extractMinYearParam } from "./extractMinYearParam";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
   import RecommendedListItem from "./RecommendedListItem.svelte";
   import { useRecommendedList } from "./useRecommendedList";
@@ -27,6 +28,7 @@
   filter={{
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
+    ...extractMinYearParam(page.url.searchParams),
   }}
   useList={useRecommendedList}
 >
