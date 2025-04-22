@@ -8,8 +8,8 @@
   const { type, media, style }: MediaCardProps<StreamingEntry> = $props();
 </script>
 
-{#snippet tags()}
+{#snippet tag()}
   <TrendTag i18n={TagIntlProvider} delta={media.delta} />
 {/snippet}
 
-<MediaCard {type} {media} {tags} {style} />
+<MediaCard {type} {media} {tag} {style} />

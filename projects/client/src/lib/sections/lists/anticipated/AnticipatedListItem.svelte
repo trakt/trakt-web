@@ -8,8 +8,8 @@
   const { type, media, style }: MediaCardProps<AnticipatedEntry> = $props();
 </script>
 
-{#snippet tags()}
+{#snippet tag()}
   <AnticipatedTag i18n={TagIntlProvider} score={media.score} />
 {/snippet}
 
-<MediaCard {type} {media} {tags} {style} />
+<MediaCard {type} {media} {tag} {style} />

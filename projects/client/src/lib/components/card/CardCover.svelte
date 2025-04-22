@@ -8,8 +8,8 @@
   const {
     src,
     alt,
-    badges,
-    tags,
+    badge,
+    tag,
     isLoading,
     title,
     style = "gradient",
@@ -32,14 +32,14 @@
   class:trakt-card-cover-loading={isImagePending || isLoading}
   class:trakt-card-cover-placeholder={PLACEHOLDERS.includes(src)}
 >
-  {#if badges}
-    <div class="trakt-card-cover-badges">
-      {@render badges()}
+  {#if badge}
+    <div class="trakt-card-cover-badge">
+      {@render badge()}
     </div>
   {/if}
-  {#if tags}
-    <div class="trakt-card-cover-tags">
-      {@render tags()}
+  {#if tag}
+    <div class="trakt-card-cover-tag">
+      {@render tag()}
     </div>
   {/if}
   <div class="trakt-card-cover-image" class:has-gradient={style === "gradient"}>
@@ -70,8 +70,8 @@
       }
     }
 
-    .trakt-card-cover-badges,
-    .trakt-card-cover-tags {
+    .trakt-card-cover-badge,
+    .trakt-card-cover-tag {
       z-index: var(--layer-raised);
 
       position: absolute;
@@ -84,12 +84,12 @@
       box-sizing: border-box;
     }
 
-    .trakt-card-cover-badges {
+    .trakt-card-cover-badge {
       top: 0;
       left: 0;
     }
 
-    .trakt-card-cover-tags {
+    .trakt-card-cover-tag {
       bottom: 0;
       left: 0;
 

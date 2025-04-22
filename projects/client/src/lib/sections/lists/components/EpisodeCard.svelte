@@ -29,7 +29,7 @@
   {/if}
 {/snippet}
 
-{#snippet tags()}
+{#snippet tag()}
   {#if props.variant === "next"}
     <ShowProgressTag
       total={props.episode.total}
@@ -55,7 +55,7 @@
         },
       }}
       popupActions={props.popupActions}
-      {tags}
+      {tag}
       {action}
       type="episode"
       variant="thumb"
@@ -64,7 +64,7 @@
   {/if}
 
   {#if style === "cover"}
-    <EpisodeItemCard {...props} {tags} {action} />
+    <EpisodeItemCard {...props} {tag} {action} />
   {/if}
 {/snippet}
 

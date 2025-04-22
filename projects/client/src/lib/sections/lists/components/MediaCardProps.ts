@@ -13,8 +13,8 @@ export type MediaItemVariant<T> =
   | { variant: 'activity'; date: Date } & MediaInput<T>;
 
 type BaseItemProps<T> = MediaItemVariant<T> & {
-  badges?: Snippet;
-  tags?: Snippet;
+  badge?: Snippet;
+  tag?: Snippet;
   action?: Snippet;
   popupActions?: Snippet;
   style?: 'cover' | 'summary';

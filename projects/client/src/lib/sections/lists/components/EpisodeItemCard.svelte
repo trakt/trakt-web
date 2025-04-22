@@ -20,9 +20,9 @@
 
   const {
     popupActions,
-    badges,
+    badge,
     action,
-    tags,
+    tag,
     episode,
     show,
     ...rest
@@ -70,8 +70,8 @@
       title={episode.title}
       src={$src ?? EPISODE_COVER_PLACEHOLDER}
       alt={`${show.title} - ${episode.title}`}
-      {badges}
-      {tags}
+      {badge}
+      {tag}
     />
   </Link>
 

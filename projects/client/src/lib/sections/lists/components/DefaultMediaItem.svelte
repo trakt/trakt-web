@@ -16,7 +16,7 @@
   }: MediaCardProps<MediaInputDefault> = $props();
 </script>
 
-{#snippet tags()}
+{#snippet tag()}
   {#if media.airDate > new Date()}
     <AirDateTag
       i18n={TagIntlProvider}
@@ -30,4 +30,4 @@
   {/if}
 {/snippet}
 
-<MediaCard {type} {media} {style} {tags} {...rest} />
+<MediaCard {type} {media} {style} {tag} {...rest} />

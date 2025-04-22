@@ -4,8 +4,8 @@ export type CardCoverProps = {
   src: string;
   alt: string;
   title: string;
-  badges?: Snippet;
-  tags?: Snippet;
+  badge?: Snippet;
+  tag?: Snippet;
   isLoading?: boolean;
   style?: 'flat' | 'gradient';
 };

@@ -13,7 +13,7 @@
   const { activity, style = "cover" }: SocialActivityItemProps = $props();
 </script>
 
-{#snippet badges()}
+{#snippet badge()}
   <div class="user-profile-badge">
     <UserProfileLink user={activity.user} />
     <UserAvatar user={activity.user} size="small" />
@@ -21,11 +21,11 @@
 {/snippet}
 
 {#if style === "cover"}
-  <ActivityCard {activity} activityAt={activity.activityAt} {badges} />
+  <ActivityCard {activity} activityAt={activity.activityAt} {badge} />
 {/if}
 
 {#if style === "summary"}
-  <ActivitySummaryCard {activity} activityAt={activity.activityAt} {badges} />
+  <ActivitySummaryCard {activity} activityAt={activity.activityAt} {badge} />
 {/if}
 
 <style>
