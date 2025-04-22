@@ -3,6 +3,7 @@ import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
+import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
@@ -45,6 +46,7 @@ const searchRequest = ({ query, fetch }: SearchParams) =>
       query: {
         query,
         extended: 'full,images',
+        limit: DEFAULT_SEARCH_LIMIT,
       },
       params: {
         type: 'movie,show',
