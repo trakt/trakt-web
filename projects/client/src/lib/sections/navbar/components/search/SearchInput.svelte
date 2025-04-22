@@ -279,9 +279,7 @@
 
       padding: var(--ni-16);
       padding-right: calc(var(--ni-16) - var(--layout-scrollbar-width));
-      @include for-mobile {
-        padding-right: var(--ni-16);
-      }
+
       height: 100vh;
       max-height: calc(80dvh - var(--search-results-top));
       width: clamp(
@@ -301,6 +299,10 @@
       backdrop-filter: blur(var(--ni-8));
       border-radius: var(--border-radius-l);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      @include for-mobile {
+        padding-right: var(--ni-16);
+      }
     }
   }
 </style>
