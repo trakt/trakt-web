@@ -1,7 +1,7 @@
 <script lang="ts">
   import AnticipatedTag from "$lib/components/media/tags/AnticipatedTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import MediaCard from "../components/MediaCard.svelte";
+  import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
   import type { AnticipatedEntry } from "./useAnticipatedList";
 
@@ -12,4 +12,4 @@
   <AnticipatedTag i18n={TagIntlProvider} score={media.score} />
 {/snippet}
 
-<MediaCard {type} {media} {tag} {style} />
+<DefaultMediaItem {type} {media} {tag} {style} />

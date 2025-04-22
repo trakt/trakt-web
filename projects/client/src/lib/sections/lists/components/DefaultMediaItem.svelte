@@ -3,7 +3,10 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import MediaCard from "../components/MediaCard.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
 
@@ -30,4 +33,25 @@
   {/if}
 {/snippet}
 
-<MediaCard {type} {media} {style} {tag} {...rest} />
+{#snippet popupActions()}
+  {#if rest.popupActions}
+    {@render rest.popupActions()}
+  {:else}
+    <RenderFor audience="authenticated">
+      <WatchlistAction
+        style="dropdown-item"
+        title={media.title}
+        type={media.type}
+        {media}
+      />
+      <MarkAsWatchedAction
+        style="dropdown-item"
+        title={media.title}
+        type={media.type}
+        {media}
+      />
+    </RenderFor>
+  {/if}
+{/snippet}
+
+<MediaCard {type} {media} {style} {tag} {...rest} {popupActions} />

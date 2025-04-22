@@ -1,7 +1,7 @@
 <script lang="ts">
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchersTag from "$lib/components/media/tags/WatchersTag.svelte";
-  import MediaCard from "../components/MediaCard.svelte";
+  import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
   import type { TrendingEntry } from "./useTrendingList";
 
@@ -12,4 +12,4 @@
   <WatchersTag i18n={TagIntlProvider} watchers={media.watchers} />
 {/snippet}
 
-<MediaCard {type} {media} {tag} {style} />
+<DefaultMediaItem {type} {media} {tag} {style} />
