@@ -8,6 +8,7 @@
     "npm:@jsr/trakt__api@~0.1.21": "0.1.21_zod@3.24.1",
     "npm:@playwright/test@^1.51.1": "1.51.1",
     "npm:@svelte-plugins/tooltips@^3.0.3": "3.0.3_svelte@5.25.3__acorn@8.14.1",
+    "npm:@svelte-put/qr@^2.1.0": "2.1.0_svelte@5.25.3__acorn@8.14.1",
     "npm:@sveltejs/adapter-auto@5": "5.0.0_@sveltejs+kit@2.20.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.25.3____acorn@8.14.1___vite@6.2.3____sass-embedded@1.86.0___sass-embedded@1.86.0__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_sass-embedded@1.86.0",
     "npm:@sveltejs/adapter-cloudflare@4.9.0": "4.9.0_@sveltejs+kit@2.20.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.25.3____acorn@8.14.1___vite@6.2.3____sass-embedded@1.86.0___sass-embedded@1.86.0__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_wrangler@3.114.3__@cloudflare+workers-types@4.20250321.0__unenv@2.0.0-rc.14__workerd@1.20250310.0__esbuild@0.17.19_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_@cloudflare+workers-types@4.20250321.0_sass-embedded@1.86.0",
     "npm:@sveltejs/enhanced-img@~0.4.4": "0.4.4_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_sass-embedded@1.86.0",
@@ -2637,6 +2638,13 @@
         "svelte"
       ]
     },
+    "@svelte-put/qr@2.1.0_svelte@5.25.3__acorn@8.14.1": {
+      "integrity": "sha512-7HzQjoNZI9k6J4R6tnMi0ZGtRQKIFmZqzeo2GtkKZkumtPYByuqjGcB/ApFkxfg+J5mARKezWzKiq9EDJ6htRg==",
+      "dependencies": [
+        "headless-qr",
+        "svelte"
+      ]
+    },
     "@sveltejs/acorn-typescript@1.0.5_acorn@8.14.1": {
       "integrity": "sha512-IwQk4yfwLdibDlrXVE04jTZYlLnwsTT2PIOQQGNLWfjavGifnk1JD1LcZjZaBTRcxZu2FfPfNLOE04DSu9lqtQ==",
       "dependencies": [
@@ -4367,6 +4375,9 @@
     },
     "headers-polyfill@4.0.3": {
       "integrity": "sha512-IScLbePpkvO846sIwOtOTDjutRMWdXdJmXdMvk6gCBHxFO8d+QKOQedyZSxFTTFYRSmlgSTDtXqqq4pcenBXLQ=="
+    },
+    "headless-qr@1.0.3": {
+      "integrity": "sha512-HHVwf1i++Ho2vFstHxAdfP0OjB7Di44nGXbh3VXciuzwkuFb1oeFDCrfOLjFgHip/Kbc/wq2GOaSTiKQ81K/Yg=="
     },
     "hosted-git-info@7.0.2": {
       "integrity": "sha512-puUZAUKT5m8Zzvs72XWy3HtvVbTWljRE66cP60bxJzAqf2DgICo7lYTY2IHUmLnNpjYvw5bvmoHvPc0QO2a62w==",
@@ -7004,6 +7015,7 @@
             "npm:@jsr/trakt__api@~0.1.21",
             "npm:@playwright/test@^1.51.1",
             "npm:@svelte-plugins/tooltips@^3.0.3",
+            "npm:@svelte-put/qr@^2.1.0",
             "npm:@sveltejs/adapter-auto@5",
             "npm:@sveltejs/adapter-cloudflare@4.9.0",
             "npm:@sveltejs/enhanced-img@~0.4.4",
