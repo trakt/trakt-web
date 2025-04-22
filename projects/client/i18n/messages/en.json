@@ -375,5 +375,7 @@
   "theme_system": "System",
   "filter_label": "Filter",
   "filter_reset": "Reset",
-  "results_for_title": "Results for {query}"
+  "results_for_title": "Results for {query}",
+  "type_movie": "Movie",
+  "type_show": "Show"
 }

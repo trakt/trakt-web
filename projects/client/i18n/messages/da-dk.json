@@ -375,5 +375,7 @@
   "theme_system": "System",
   "filter_label": "Filtrér",
   "filter_reset": "Nulstil",
-  "results_for_title": "Resultater for {query}"
+  "results_for_title": "Resultater for {query}",
+  "type_movie": "Film",
+  "type_show": "Serie"
 }
