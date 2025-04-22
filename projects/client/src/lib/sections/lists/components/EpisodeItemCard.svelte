@@ -36,16 +36,16 @@
   const isActivity = $derived(rest.variant === "activity");
 </script>
 
-{#snippet nonActivityTag()}
-  {#if rest.variant === "upcoming"}
-    <AirDateTag
-      i18n={TagIntlProvider}
-      airDate={episode.airDate}
-      year={episode.year}
-    />
-  {:else}
-    <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
-  {/if}
+{#snippet upcomingTag()}
+  <AirDateTag
+    i18n={TagIntlProvider}
+    airDate={episode.airDate}
+    year={episode.year}
+  />
+{/snippet}
+
+{#snippet durationTag()}
+  <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
 {/snippet}
 
 <LandscapeCard>
@@ -75,7 +75,20 @@
     />
   </Link>
 
-  <CardFooter {action} tag={isActivity ? undefined : nonActivityTag}>
+  <CardFooter
+    {action}
+    tag={(() => {
+      if (isActivity) {
+        return;
+      }
+
+      if (rest.variant === "upcoming") {
+        return upcomingTag;
+      }
+
+      return durationTag;
+    })()}
+  >
     {#if isShowContext}
       <p class="trakt-card-title ellipsis">
         <Spoiler media={episode} {show} {episode} type="episode">
