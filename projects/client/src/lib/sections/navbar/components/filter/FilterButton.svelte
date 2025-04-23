@@ -13,7 +13,7 @@
 
   const { track } = useTrack(AnalyticsEvent.Filter);
 
-  const isFiltering = $derived($currentValue !== undefined);
+  const isFiltering = $derived(Boolean($currentValue));
 
   const color = $derived(isFiltering ? "blue" : "default");
   const state = $derived(isFiltering ? "filtered" : "unfiltered");
