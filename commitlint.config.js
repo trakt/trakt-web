@@ -64,6 +64,7 @@ module.exports = {
         'navbar',
         'navigation',
         'out-now',
+        'parameter',
         'profile',
         'pr_gate',
         'popular',
