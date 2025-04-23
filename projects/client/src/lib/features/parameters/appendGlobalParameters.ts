@@ -5,7 +5,8 @@ export function appendGlobalParameters(anchor: HTMLAnchorElement) {
   const { search } = useParameters();
 
   const destroy = search.subscribe(($search) => {
-    if (!$search) return;
+    const isExternal = globalThis.window.location.origin !== anchor.origin;
+    if (!$search || isExternal) return;
 
     const url = new URL(anchor.href);
 
