@@ -15,10 +15,12 @@
     {
       sentiments: comment.good,
       rating: SimpleRating.Good,
+      color: "var(--color-text-sentiment-good)",
     },
     {
       sentiments: comment.bad,
       rating: SimpleRating.Bad,
+      color: "var(--color-text-sentiment-bad)",
     },
   ];
 </script>
@@ -26,13 +28,9 @@
 <SentimentHeader {comment} />
 <ShadowScroller>
   <div class="trakt-sentiment-body">
-    {#each mappedSentiments as { rating, sentiments }}
-      <div
-        class="trakt-sentiment-container"
-        class:sentiment-good={rating === SimpleRating.Good}
-        class:sentiment-bad={rating === SimpleRating.Bad}
-      >
-        <RateIcon {rating} />
+    {#each mappedSentiments as { rating, sentiments, color }}
+      <div class="trakt-sentiment-container">
+        <RateIcon {rating} --icon-fill-color={color} />
         <ol>
           {#each sentiments as sentiment}
             <li><p class="small">{sentiment}</p></li>
@@ -65,13 +63,5 @@
   .trakt-sentiment-container {
     display: flex;
     gap: var(--gap-s);
-  }
-
-  .sentiment-good {
-    color: var(--color-text-sentiment-good);
-  }
-
-  .sentiment-bad {
-    color: var(--color-text-sentiment-bad);
   }
 </style>
