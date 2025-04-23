@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { disableNavigation } from "$lib/utils/actions/disableNavigation";
@@ -59,6 +60,7 @@
     use:clickOutside
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
+    use:appendGlobalParameters
     use:disableNavigation={props}
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
