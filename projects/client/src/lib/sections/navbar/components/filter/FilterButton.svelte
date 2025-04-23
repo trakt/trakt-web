@@ -2,49 +2,59 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
+  import GlobalParameterSetter from "$lib/features/parameters/GlobalParameterSetter.svelte";
+  import { buildParamString } from "$lib/utils/url/buildParamString";
 
-  const { filter, setFilter } = useFilter();
+  const { filter, currentValue } = useFilter();
 
-  const currentOption = $derived(
-    $filter.options.find((option) => option.value === $filter.value),
-  );
-  const isFiltering = $derived(currentOption !== undefined);
+  const { track } = useTrack(AnalyticsEvent.Filter);
+
+  const isFiltering = $derived($currentValue !== undefined);
 
   const color = $derived(isFiltering ? "blue" : "default");
   const state = $derived(isFiltering ? "filtered" : "unfiltered");
-  const currentLabel = $derived(currentOption?.label ?? m.filter_label());
+  const currentLabel = $derived($currentValue ?? m.filter_label());
 </script>
 
 <trakt-filter>
-  <DropdownList
-    label={m.filter_label()}
-    variant="secondary"
-    text="capitalize"
-    size="small"
-    style="flat"
-    {color}
-  >
-    {currentLabel}
-    {#snippet icon()}
-      <FilterIcon {state} />
-    {/snippet}
-    {#snippet items()}
-      <DropdownItem color="red" onclick={() => setFilter(null)}>
-        {m.filter_reset()}
-      </DropdownItem>
-      {#each $filter.options as option}
+  <GlobalParameterSetter parameter={$filter.key}>
+    <DropdownList
+      label={m.filter_label()}
+      variant="secondary"
+      text="capitalize"
+      size="small"
+      style="flat"
+      {color}
+    >
+      {currentLabel}
+      {#snippet icon()}
+        <FilterIcon {state} />
+      {/snippet}
+      {#snippet items()}
         <DropdownItem
-          color="blue"
-          disabled={option.value === currentOption?.value}
-          onclick={() => setFilter(option.value)}
+          color="red"
+          href="?"
+          onclick={() => track({ id: $filter.key, action: "reset" })}
         >
-          {option.label}
+          {m.filter_reset()}
         </DropdownItem>
-      {/each}
-    {/snippet}
-  </DropdownList>
+        {#each $filter.options as option}
+          <DropdownItem
+            color="blue"
+            disabled={option.value === $currentValue}
+            href={`${buildParamString({ [$filter.key]: option.value })}`}
+            onclick={() => track({ id: $filter.key, action: "set" })}
+          >
+            {option.label}
+          </DropdownItem>
+        {/each}
+      {/snippet}
+    </DropdownList>
+  </GlobalParameterSetter>
 </trakt-filter>
 
 <style>
