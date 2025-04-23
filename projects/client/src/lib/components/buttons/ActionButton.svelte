@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
@@ -27,6 +28,7 @@
     use:disableTransitionOn={"touch"}
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
+    use:appendGlobalParameters
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-action-button trakt-button-link"
