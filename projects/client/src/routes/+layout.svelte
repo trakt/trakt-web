@@ -14,6 +14,7 @@
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
+  import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -86,49 +87,51 @@
 
 <ErrorProvider>
   <QueryClientProvider client={data.queryClient}>
-    <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
-      <AnalyticsProvider>
-        <AutoSigninProvider>
-          <LocaleProvider>
-            <NavigationProvider device={data.device}>
-              <SearchProvider>
-                <FilterProvider>
-                  <CoverProvider>
-                    <CoverImage />
+    <GlobalParameterProvider>
+      <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
+        <AnalyticsProvider>
+          <AutoSigninProvider>
+            <LocaleProvider>
+              <NavigationProvider device={data.device}>
+                <SearchProvider>
+                  <FilterProvider>
+                    <CoverProvider>
+                      <CoverImage />
 
-                    <ThemeProvider theme={data.theme}>
-                      <ListScrollHistoryProvider>
-                        <div class="trakt-layout-wrapper">
-                          <Navbar />
-                          <div class="trakt-layout-content">
-                            {@render children()}
+                      <ThemeProvider theme={data.theme}>
+                        <ListScrollHistoryProvider>
+                          <div class="trakt-layout-wrapper">
+                            <Navbar />
+                            <div class="trakt-layout-content">
+                              {@render children()}
+                            </div>
+                            <Footer />
                           </div>
-                          <Footer />
-                        </div>
-                        <RenderFor
-                          audience="all"
-                          device={["mobile", "tablet-sm"]}
-                        >
-                          <MobileNavbar />
-                        </RenderFor>
-                        <SvelteQueryDevtools
-                          buttonPosition="bottom-left"
-                          styleNonce="opacity: 0.5"
-                        />
-                      </ListScrollHistoryProvider>
-                    </ThemeProvider>
-                  </CoverProvider>
-                </FilterProvider>
-              </SearchProvider>
-            </NavigationProvider>
-          </LocaleProvider>
+                          <RenderFor
+                            audience="all"
+                            device={["mobile", "tablet-sm"]}
+                          >
+                            <MobileNavbar />
+                          </RenderFor>
+                          <SvelteQueryDevtools
+                            buttonPosition="bottom-left"
+                            styleNonce="opacity: 0.5"
+                          />
+                        </ListScrollHistoryProvider>
+                      </ThemeProvider>
+                    </CoverProvider>
+                  </FilterProvider>
+                </SearchProvider>
+              </NavigationProvider>
+            </LocaleProvider>
 
-          {#key page.url.pathname}
-            <PageView />
-          {/key}
-        </AutoSigninProvider>
-      </AnalyticsProvider>
-    </AuthProvider>
+            {#key page.url.pathname}
+              <PageView />
+            {/key}
+          </AutoSigninProvider>
+        </AnalyticsProvider>
+      </AuthProvider>
+    </GlobalParameterProvider>
   </QueryClientProvider>
 </ErrorProvider>
 
