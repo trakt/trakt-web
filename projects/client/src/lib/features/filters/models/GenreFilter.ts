@@ -8,5 +8,4 @@ type GenreOption = {
 export type GenreFilter = {
   key: 'genres';
   options: Array<GenreOption>;
-  value: Genre | Nil;
 };
