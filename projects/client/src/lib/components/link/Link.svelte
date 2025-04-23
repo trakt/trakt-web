@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
@@ -31,6 +32,7 @@
     {target}
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
+    use:appendGlobalParameters
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     tabindex={focusable ? 0 : -1}
