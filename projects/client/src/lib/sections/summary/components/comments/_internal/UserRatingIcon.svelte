@@ -1,12 +1,12 @@
 <script lang="ts">
-  import RateIcon from "$lib/components/icons/RateIcon.svelte";
-  import type { SimpleRating } from "$lib/models/SimpleRating";
+  import { SimpleRating } from "$lib/models/SimpleRating";
+  import UserRating from "../../rating/UserRating.svelte";
 
   const { rating }: { rating: SimpleRating } = $props();
 </script>
 
 <div class="trakt-user-rating-icon">
-  <RateIcon {rating} />
+  <UserRating {rating} isCurrentRating={true} />
 </div>
 
 <style>
