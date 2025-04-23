@@ -52,11 +52,13 @@ const upNextRequest = (params: UpNextParams) => {
 };
 
 export function mapUpNextResponse(item: UpNextResponse[0]): UpNextEntry {
-  const episode = item.progress.next_episode;
+  const show = mapToShowEntry(item.show);
+  const episode = mapToEpisodeEntry(item.progress.next_episode);
+  episode.runtime ??= show.runtime;
 
   return {
-    show: mapToShowEntry(item.show),
-    ...mapToEpisodeEntry(episode),
+    show,
+    ...episode,
     total: item.progress.aired,
     completed: item.progress.completed,
     remaining: item.progress.aired - item.progress.completed,
