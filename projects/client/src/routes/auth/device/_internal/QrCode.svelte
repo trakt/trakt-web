@@ -1,19 +1,32 @@
 <script lang="ts">
   import SvgQR from "@svelte-put/qr/svg/QR.svelte";
-  import logo_dark from "./assets/logo_dark.svg";
-  import logo_light from "./assets/logo_light.svg";
-
-  import { Theme } from "$lib/features/theme/models/Theme";
-  import { useTheme } from "$lib/features/theme/useTheme";
+  import logo from "./assets/logo.svg";
 
   const { data }: { data: string } = $props();
-  const { theme } = useTheme();
 
-  const logo = $derived($theme === Theme.Light ? logo_light : logo_dark);
+  const FAKE_URL = "data:image/svg+xml,";
+
+  function encodedSvgToNode(encoded: string) {
+    const decoded = decodeURIComponent(encoded.split(",")[1]);
+
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(decoded, "image/svg+xml");
+    return svgDoc.documentElement;
+  }
 </script>
 
 <div class="trakt-qr-code">
-  <SvgQR {data} {logo} shape="circle"></SvgQR>
+  <SvgQR
+    {data}
+    logo={FAKE_URL}
+    shape="circle"
+    onqrinit={(svg) => {
+      const logoElement = encodedSvgToNode(logo);
+
+      const image = svg.querySelector("image");
+      image?.replaceWith(logoElement);
+    }}
+  />
 </div>
 
 <style>
