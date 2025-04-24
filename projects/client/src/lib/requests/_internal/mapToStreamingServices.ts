@@ -13,7 +13,7 @@ function mapToStreamNow(
   return {
     type: 'streaming',
     link: prependHttps(serviceResponse.link),
-    deepLink: serviceResponse.link_tvos,
+    deepLink: serviceResponse.link_direct,
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
   };
@@ -33,7 +33,7 @@ function mapToStreamOnDemand(
   return {
     type: 'on-demand',
     link: prependHttps(serviceResponse.link),
-    deepLink: serviceResponse.link_tvos,
+    deepLink: serviceResponse.link_direct,
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
     currency: serviceResponse.currency,
