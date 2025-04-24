@@ -44,11 +44,11 @@
     ($scrollX.right - $sideDistance) / $windowShadowWidth,
   );
 
-  const isVisible = writable(false);
+  const { navigation } = useNavigation();
+  const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
-  const { navigation } = useNavigation();
 
   onMount(() => {
     isMounted.set(true);
