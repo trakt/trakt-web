@@ -24,6 +24,7 @@
     "npm:@ts-rest/core@^3.52.1": "3.52.1_zod@3.24.1",
     "npm:@types/eslint@^9.6.1": "9.6.1",
     "npm:@types/serviceworker@^0.0.127": "0.0.127",
+    "npm:@use-gesture/vanilla@^10.3.1": "10.3.1",
     "npm:@vite-pwa/sveltekit@~0.6.7": "0.6.7_@sveltejs+kit@2.20.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.25.3____acorn@8.14.1___vite@6.2.3____sass-embedded@1.86.0___sass-embedded@1.86.0__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_vite-plugin-pwa@0.21.2__vite@6.2.3___sass-embedded@1.86.0__workbox-build@7.3.0___ajv@8.17.1___@babel+core@7.26.10___rollup@2.79.2__workbox-window@7.3.0__sass-embedded@1.86.0_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_sass-embedded@1.86.0",
     "npm:@vitest/coverage-istanbul@3.0.9": "3.0.9_vitest@3.0.9__jsdom@26.0.0__msw@2.7.3___typescript@5.8.2__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0__typescript@5.8.2_jsdom@26.0.0_msw@2.7.3__typescript@5.8.2_sass-embedded@1.86.0_typescript@5.8.2",
     "npm:date-fns@^4.1.0": "4.1.0",
@@ -2960,6 +2961,15 @@
       "dependencies": [
         "@typescript-eslint/types",
         "eslint-visitor-keys@4.2.0"
+      ]
+    },
+    "@use-gesture/core@10.3.1": {
+      "integrity": "sha512-WcINiDt8WjqBdUXye25anHiNxPc0VOrlT8F6LLkU6cycrOGUDyY/yyFmsg3k8i5OLvv25llc0QC45GhR/C8llw=="
+    },
+    "@use-gesture/vanilla@10.3.1": {
+      "integrity": "sha512-lT4scGLu59ovA3zmtUonukAGcA0AdOOh+iwNDS05Bsu7Lq9aZToDHhI6D8Q2qvsVraovtsLLYwPrWdG/noMAKw==",
+      "dependencies": [
+        "@use-gesture/core"
       ]
     },
     "@vite-pwa/sveltekit@0.6.7_@sveltejs+kit@2.20.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.25.3____acorn@8.14.1___vite@6.2.3____sass-embedded@1.86.0___sass-embedded@1.86.0__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_vite-plugin-pwa@0.21.2__vite@6.2.3___sass-embedded@1.86.0__workbox-build@7.3.0___ajv@8.17.1___@babel+core@7.26.10___rollup@2.79.2__workbox-window@7.3.0__sass-embedded@1.86.0_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_sass-embedded@1.86.0": {
@@ -7030,6 +7040,7 @@
             "npm:@ts-rest/core@^3.52.1",
             "npm:@types/eslint@^9.6.1",
             "npm:@types/serviceworker@^0.0.127",
+            "npm:@use-gesture/vanilla@^10.3.1",
             "npm:@vite-pwa/sveltekit@~0.6.7",
             "npm:@vitest/coverage-istanbul@3.0.9",
             "npm:date-fns@^4.1.0",
