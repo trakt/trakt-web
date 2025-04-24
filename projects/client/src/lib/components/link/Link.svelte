@@ -69,32 +69,9 @@
     text-underline-offset: var(--ni-2);
     text-decoration-thickness: var(--ni-2);
 
-    :global(.trakt-card-cover) {
-      transition: transform var(--transition-increment) ease-in-out;
-    }
-
     &:focus-visible {
       outline: none;
       position: relative;
-
-      &:has(:global(.trakt-card-cover))::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        outline: var(--border-thickness-s) solid var(--color-link-active);
-        border-radius: var(--border-radius-m);
-        outline-offset: calc(-1 * var(--border-thickness-s));
-
-        transition: border-radius var(--transition-increment) ease-in-out;
-      }
-
-      :global(.trakt-card-cover) {
-        transform: scale(0.9);
-        transform-origin: center;
-      }
     }
 
     &[data-color="default"] {

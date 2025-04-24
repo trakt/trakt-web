@@ -16,12 +16,12 @@
 </script>
 
 <trakt-cast-member>
-  <Link
-    focusable={false}
-    href={UrlBuilder.people(castMember.id)}
-    navigationType={DpadNavigationType.Item}
-  >
-    <PersonCard>
+  <PersonCard>
+    <Link
+      focusable={false}
+      href={UrlBuilder.people(castMember.id)}
+      navigationType={DpadNavigationType.Item}
+    >
       <CardCover
         title={castMember.name}
         src={castMember.headShotUrl}
@@ -36,8 +36,8 @@
           {castMember.characterName}
         </p>
       </CardFooter>
-    </PersonCard>
-  </Link>
+    </Link>
+  </PersonCard>
 </trakt-cast-member>
 
 <style lang="scss">

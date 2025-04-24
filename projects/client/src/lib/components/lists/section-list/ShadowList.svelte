@@ -1,5 +1,6 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { onMount, type Snippet } from "svelte";
@@ -47,6 +48,7 @@
   const isMounted = writable(false);
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
+  const { navigation } = useNavigation();
 
   onMount(() => {
     isMounted.set(true);
@@ -75,6 +77,7 @@
           class:shadow-list-horizontal-scroll-centered={variant === "centered"}
           class:shadow-list-horizontal-scroll={variant === "normal"}
           data-dpad-navigation={DpadNavigationType.List}
+          data-navigation-type={$navigation}
         >
           {#each items as i (i.id)}
             {@render item(i)}
@@ -167,6 +170,10 @@
     overflow-x: auto;
     transition: gap var(--transition-increment) ease-in-out;
     @include adaptive-gap(gap);
+
+    &[data-navigation-type="dpad"] {
+      gap: var(--gap-xxs);
+    }
   }
 
   .shadow-list-horizontal-scroll {
