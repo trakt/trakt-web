@@ -382,5 +382,7 @@
   "code_retry_title": "Noe gikk galt",
   "code_retry_message": "Aktiveringen ble avslått, utløpt eller noe uforutsett skjedde. Prøv igjen.",
   "code_instruction": "Skann QR-koden, eller logg inn på:",
-  "code_label": "og skriv inn følgende kode:"
+  "code_label": "og skriv inn følgende kode:",
+  "filter_all": "Alle",
+  "filters_title": "Filtre"
 }

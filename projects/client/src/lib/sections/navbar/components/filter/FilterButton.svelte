@@ -1,66 +1,51 @@
 <script lang="ts">
-  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import GlobalParameterSetter from "$lib/features/parameters/GlobalParameterSetter.svelte";
-  import { buildParamString } from "$lib/utils/url/buildParamString";
+  import { writable } from "svelte/store";
+  import FilterSidebar from "./FilterSidebar.svelte";
 
-  const { filter, currentValue } = useFilter();
-
-  const { track } = useTrack(AnalyticsEvent.Filter);
+  // TODO add support for multiple filters
+  const { currentValue } = useFilter();
 
   const isFiltering = $derived(Boolean($currentValue));
 
   const color = $derived(isFiltering ? "blue" : "default");
   const state = $derived(isFiltering ? "filtered" : "unfiltered");
-  const currentLabel = $derived($currentValue ?? m.filter_label());
+
+  const isSidebarOpen = writable(false);
 </script>
 
-<trakt-filter>
-  <GlobalParameterSetter parameter={$filter.key}>
-    <DropdownList
-      label={m.filter_label()}
-      variant="secondary"
-      text="capitalize"
-      size="small"
-      style="flat"
-      {color}
-    >
-      {currentLabel}
-      {#snippet icon()}
-        <FilterIcon {state} />
-      {/snippet}
-      {#snippet items()}
-        <DropdownItem
-          color="red"
-          href="?"
-          onclick={() => track({ id: $filter.key, action: "reset" })}
-        >
-          {m.filter_reset()}
-        </DropdownItem>
-        {#each $filter.options as option}
-          <DropdownItem
-            color="blue"
-            disabled={option.value === $currentValue}
-            href={`${buildParamString({ [$filter.key]: option.value })}`}
-            onclick={() => track({ id: $filter.key, action: "set" })}
-          >
-            {option.label}
-          </DropdownItem>
-        {/each}
-      {/snippet}
-    </DropdownList>
-  </GlobalParameterSetter>
-</trakt-filter>
+<div class="trakt-filter-button">
+  <Button
+    style="flat"
+    size="small"
+    label={m.filter_label()}
+    variant="secondary"
+    text="capitalize"
+    {color}
+    onclick={() => {
+      isSidebarOpen.set(true);
+    }}
+  >
+    {m.filter_label()}
+    {#snippet icon()}
+      <FilterIcon {state} />
+    {/snippet}
+  </Button>
+</div>
 
-<style>
-  trakt-filter {
-    :global(.trakt-list) {
-      min-width: var(--ni-176);
+<FilterSidebar isOpen={isSidebarOpen} />
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-filter-button {
+    @include for-mobile {
+      :global(.trakt-button .button-label) {
+        display: none;
+      }
     }
   }
 </style>

@@ -382,5 +382,7 @@
   "code_retry_title": "Algo deu errado",
   "code_retry_message": "A ativação foi negada, expirou ou algo imprevisto aconteceu. Tente novamente.",
   "code_instruction": "Digitalize o código QR ou entre em:",
-  "code_label": "e insira o seguinte código:"
+  "code_label": "e insira o seguinte código:",
+  "filter_all": "Todos",
+  "filters_title": "Filtros"
 }

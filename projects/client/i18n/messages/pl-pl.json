@@ -382,5 +382,7 @@
   "code_retry_title": "Coś poszło nie tak",
   "code_retry_message": "Aktywacja została odrzucona, wygasła lub wydarzyło się coś nieprzewidzianego. Spróbuj ponownie.",
   "code_instruction": "Zeskanuj kod QR lub zaloguj się na:",
-  "code_label": "i wprowadź następujący kod:"
+  "code_label": "i wprowadź następujący kod:",
+  "filter_all": "Wszystko",
+  "filters_title": "Filtry"
 }

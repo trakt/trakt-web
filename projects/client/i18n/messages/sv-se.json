@@ -382,5 +382,7 @@
   "code_retry_title": "Något gick fel",
   "code_retry_message": "Aktiveringen nekades, gick ut eller något oförutsett hände. Försök igen.",
   "code_instruction": "Skanna QR-koden, eller logga in på:",
-  "code_label": "och ange följande kod:"
+  "code_label": "och ange följande kod:",
+  "filter_all": "Alla",
+  "filters_title": "Filter"
 }

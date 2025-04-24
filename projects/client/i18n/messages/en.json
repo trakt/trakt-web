@@ -382,5 +382,7 @@
   "code_retry_title": "Something went wrong",
   "code_retry_message": "The activation was denied, expired, or something unforeseeable happened. Please try again.",
   "code_instruction": "Scan the QR code, or sign in at:",
-  "code_label": "and enter the following code:"
+  "code_label": "and enter the following code:",
+  "filter_all": "All",
+  "filters_title": "Filters"
 }

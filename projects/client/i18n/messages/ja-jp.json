@@ -382,5 +382,7 @@
   "code_retry_title": "問題が発生しました",
   "code_retry_message": "認証が拒否されたか、有効期限が切れたか、予期せぬ事態が発生しました。もう一度お試しください。",
   "code_instruction": "QRコードをスキャンするか、以下からサインインしてください:",
-  "code_label": "以下のコードを入力してください:"
+  "code_label": "以下のコードを入力してください:",
+  "filter_all": "すべて",
+  "filters_title": "フィルター"
 }
