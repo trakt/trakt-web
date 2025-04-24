@@ -1,6 +1,7 @@
 function isAndroidTv(userAgent: string): boolean {
   const agent = userAgent.toLowerCase();
-  return agent.includes('android') && agent.includes('tv');
+  return agent.includes('android') &&
+    (agent.includes('tv') || agent.includes('chromecast'));
 }
 
 export function isTvAgent(userAgent: string | Nil) {
