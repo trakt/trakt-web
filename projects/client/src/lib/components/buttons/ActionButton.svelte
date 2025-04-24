@@ -15,6 +15,7 @@
     color = "default",
     size = "normal",
     style = "flat",
+    navigationType,
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
@@ -37,6 +38,7 @@
     data-color={color}
     data-variant={variant}
     data-style={style}
+    data-dpad-navigation={navigationType}
     {...props}
   >
     {@render children()}
@@ -50,6 +52,7 @@
     data-variant={variant}
     data-size={size}
     data-style={style}
+    data-dpad-navigation={navigationType}
     {...props}
   >
     {@render children()}
@@ -92,7 +95,7 @@
       @include for-mouse {
         &:focus-visible {
           outline: var(--border-thickness-xs) solid
-            var(--color-foreground-action-button);
+            var(--color-background-action-button);
         }
       }
     }
