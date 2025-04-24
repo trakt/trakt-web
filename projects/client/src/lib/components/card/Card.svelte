@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "svelte/store";
 
@@ -8,9 +9,14 @@
   }: ChildrenProps & { variant?: "transparent" | "opaque" } = $props();
 
   const isVisible = writable(false);
+  const { navigation } = useNavigation();
 </script>
 
-<div use:whenInViewport={() => isVisible.set(true)} class="trakt-card">
+<div
+  use:whenInViewport={() => isVisible.set(true)}
+  class="trakt-card"
+  data-navigation-type={$navigation}
+>
   <div
     class="trakt-card-content"
     class:trakt-card-transparent={variant === "transparent"}
@@ -27,6 +33,35 @@
 
     min-width: var(--width-card);
     min-height: var(--height-card);
+  }
+
+  .trakt-card[data-navigation-type="dpad"] {
+    &:has(:global(.trakt-link[data-dpad-navigation="item"])) {
+      transform: scale(0.95);
+      transition: none;
+
+      :global(.trakt-card-cover)::after {
+        transition: var(--transition-increment) ease-in;
+        transition-property: outline, outline-offset;
+        content: "";
+      }
+
+      &:has(:global(.trakt-link:focus-visible)) {
+        transition: transform var(--transition-increment) ease-in;
+        transform: scale(1);
+
+        :global(.trakt-card-cover)::after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          outline: var(--border-thickness-s) solid var(--color-link-active);
+          border-radius: var(--border-radius-m);
+          outline-offset: calc(-1 * var(--border-thickness-s));
+        }
+      }
+    }
   }
 
   .trakt-card-content {
