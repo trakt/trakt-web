@@ -6,7 +6,7 @@ import {
   mapToDeviceAuth,
 } from '$lib/features/auth/requests/_internal/mapToDeviceAuth.ts';
 import { DeviceUnauthorizedError } from '$lib/features/auth/requests/verifyAuth.ts';
-import { print, PrintTarget } from '$lib/utils/console/print.ts';
+import { warn as printWarning } from '$lib/utils/console/print.ts';
 
 export type PollingState = { state: 'pending' };
 type PollingResponse = DeviceAuth | PollingState;
@@ -44,7 +44,7 @@ export async function verifyDeviceCode(
       case 400:
         return { state: 'pending' };
       default: {
-        print(PrintTarget.Worker, 'log', {
+        printWarning('Unauthorized response received:', {
           unauthorizedResponse: tokenResponse,
         });
 

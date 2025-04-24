@@ -8,19 +8,13 @@ import {
   type PollingState,
   verifyDeviceCode,
 } from '$lib/features/auth/requests/verifyDeviceCode.ts';
-import {
-  error as printError,
-  print,
-  PrintTarget,
-} from '$lib/utils/console/print.ts';
+import { error as printError } from '$lib/utils/console/print.ts';
 
 export async function authorizeDeviceCode(
   deviceCode: string,
 ): Promise<SerializedAuthResponse | PollingState> {
   const response = await verifyDeviceCode(deviceCode)
     .catch((error) => {
-      print(PrintTarget.Worker, 'log', { authError: error });
-
       if (error instanceof DeviceUnauthorizedError) {
         return UNAUTHORIZED_PAYLOAD;
       }
