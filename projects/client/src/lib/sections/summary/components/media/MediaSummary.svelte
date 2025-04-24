@@ -99,6 +99,9 @@
     {/if}
   </RenderFor>
   <MarkAsWatchedAction {...markAsWatchedProps} />
+  <RenderFor audience="authenticated" navigation="dpad">
+    <RateNow {type} {media} />
+  </RenderFor>
 {/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} {type} />
@@ -170,7 +173,9 @@
       </RenderFor>
 
       {#snippet contextualActions()}
-        <RateNow {type} {media} />
+        <RenderFor audience="authenticated" navigation="default">
+          <RateNow {type} {media} />
+        </RenderFor>
       {/snippet}
     </SummaryActions>
   </RenderFor>
