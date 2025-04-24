@@ -8,10 +8,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 
 class MainActivity : ComponentActivity() {
+    private lateinit var webView: WebView
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val webView = WebView(this)
+        webView = WebView(this)
 
         webView.settings.apply {
             javaScriptEnabled = true
@@ -24,6 +26,10 @@ class MainActivity : ComponentActivity() {
         webView.addJavascriptInterface(StreamOnInterface(this), "StreamOnAndroid")
 
         webView.loadUrl(getBaseUrl())
+
+        if (savedInstanceState != null) {
+            webView.restoreState(savedInstanceState)
+        }
 
         enableWebViewBackNavigation(webView)
         setContentView(webView)
@@ -53,5 +59,10 @@ class MainActivity : ComponentActivity() {
         }
 
         onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        webView.saveState(outState)
     }
 }
