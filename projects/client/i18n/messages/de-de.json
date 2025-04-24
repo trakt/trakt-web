@@ -377,5 +377,10 @@
   "filter_reset": "Zurücksetzen",
   "results_for_title": "Ergebnisse für {query}",
   "type_movie": "Film",
-  "type_show": "Serie"
+  "type_show": "Serie",
+  "sign_in": "Anmelden",
+  "code_retry_title": "Etwas ist schiefgelaufen",
+  "code_retry_message": "Die Aktivierung wurde abgelehnt, ist abgelaufen oder etwas Unvorhergesehenes ist passiert. Bitte versuchen Sie es erneut.",
+  "code_instruction": "Scannen Sie den QR-Code oder melden Sie sich an unter:",
+  "code_label": "und geben Sie folgenden Code ein:"
 }

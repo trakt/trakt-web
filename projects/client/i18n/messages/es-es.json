@@ -377,5 +377,10 @@
   "filter_reset": "Restablecer",
   "results_for_title": "Resultados para {query}",
   "type_movie": "Película",
-  "type_show": "Serie"
+  "type_show": "Serie",
+  "sign_in": "Iniciar sesión",
+  "code_retry_title": "Algo salió mal",
+  "code_retry_message": "La activación fue denegada, expiró o ocurrió algo imprevisto. Inténtalo de nuevo.",
+  "code_instruction": "Escanea el código QR o inicia sesión en:",
+  "code_label": "e introduce el siguiente código:"
 }

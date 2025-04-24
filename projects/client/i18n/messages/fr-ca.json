@@ -377,5 +377,10 @@
   "filter_reset": "Réinitialiser",
   "results_for_title": "Résultats pour {query}",
   "type_movie": "Film",
-  "type_show": "Série"
+  "type_show": "Série",
+  "sign_in": "Se connecter",
+  "code_retry_title": "Un problème est survenu",
+  "code_retry_message": "L'activation a été refusée, a expiré ou un événement imprévisible s'est produit. Veuillez réessayer.",
+  "code_instruction": "Scannez le code QR, ou connectez-vous sur:",
+  "code_label": "et entrez le code suivant:"
 }

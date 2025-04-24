@@ -377,5 +377,10 @@
   "filter_reset": "Reset",
   "results_for_title": "Resultaten voor {query}",
   "type_movie": "Film",
-  "type_show": "Serie"
+  "type_show": "Serie",
+  "sign_in": "Inloggen",
+  "code_retry_title": "Er ging iets mis",
+  "code_retry_message": "De activatie is geweigerd, verlopen of er is iets onvoorziens gebeurd. Probeer het opnieuw.",
+  "code_instruction": "Scan de QR-code of log in op:",
+  "code_label": "en voer de volgende code in:"
 }

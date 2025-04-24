@@ -377,5 +377,10 @@
   "filter_reset": "Reset",
   "results_for_title": "Results for {query}",
   "type_movie": "Movie",
-  "type_show": "Show"
+  "type_show": "Show",
+  "sign_in": "Sign in",
+  "code_retry_title": "Something went wrong",
+  "code_retry_message": "The activation was denied, expired, or something unforeseeable happened. Please try again.",
+  "code_instruction": "Scan the QR code, or sign in at:",
+  "code_label": "and enter the following code:"
 }

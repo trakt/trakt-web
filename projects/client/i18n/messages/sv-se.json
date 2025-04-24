@@ -377,5 +377,10 @@
   "filter_reset": "Återställ",
   "results_for_title": "Resultat för {query}",
   "type_movie": "Film",
-  "type_show": "Serie"
+  "type_show": "Serie",
+  "sign_in": "Logga in",
+  "code_retry_title": "Något gick fel",
+  "code_retry_message": "Aktiveringen nekades, gick ut eller något oförutsett hände. Försök igen.",
+  "code_instruction": "Skanna QR-koden, eller logga in på:",
+  "code_label": "och ange följande kod:"
 }
