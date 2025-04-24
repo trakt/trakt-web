@@ -377,5 +377,10 @@
   "filter_reset": "Nulstil",
   "results_for_title": "Resultater for {query}",
   "type_movie": "Film",
-  "type_show": "Serie"
+  "type_show": "Serie",
+  "sign_in": "Log ind",
+  "code_retry_title": "Noget gik galt",
+  "code_retry_message": "Aktiveringen blev afvist, udløbet, eller noget uforudsigeligt skete. Prøv igen.",
+  "code_instruction": "Scan QR-koden, eller log ind på:",
+  "code_label": "og indtast følgende kode:"
 }

@@ -377,5 +377,10 @@
   "filter_reset": "Изчисти",
   "results_for_title": "Резултати за {query}",
   "type_movie": "Филм",
-  "type_show": "Сериал"
+  "type_show": "Сериал",
+  "sign_in": "Вход",
+  "code_retry_title": "Нещо се обърка",
+  "code_retry_message": "Активацията беше отказана, изтече или се случи нещо непредвидимо. Моля, опитайте отново.",
+  "code_instruction": "Сканирайте QR кода или влезте в: ",
+  "code_label": "и въведете следния код:"
 }

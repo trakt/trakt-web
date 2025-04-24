@@ -377,5 +377,10 @@
   "filter_reset": "Resetează",
   "results_for_title": "Rezultate pentru {query}",
   "type_movie": "Film",
-  "type_show": "Serial"
+  "type_show": "Serial",
+  "sign_in": "Autentificare",
+  "code_retry_title": "Ceva n-a mers bine",
+  "code_retry_message": "Activarea a fost refuzată, a expirat sau s-a întâmplat ceva neprevăzut. Încearcă din nou.",
+  "code_instruction": "Scanează codul QR sau autentifică-te la:",
+  "code_label": "și introdu următorul cod:"
 }

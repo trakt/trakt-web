@@ -377,5 +377,10 @@
   "filter_reset": "リセット",
   "results_for_title": "{query} の検索結果",
   "type_movie": "映画",
-  "type_show": "番組"
+  "type_show": "番組",
+  "sign_in": "サインイン",
+  "code_retry_title": "問題が発生しました",
+  "code_retry_message": "認証が拒否されたか、有効期限が切れたか、予期せぬ事態が発生しました。もう一度お試しください。",
+  "code_instruction": "QRコードをスキャンするか、以下からサインインしてください:",
+  "code_label": "以下のコードを入力してください:"
 }

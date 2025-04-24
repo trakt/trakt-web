@@ -377,5 +377,10 @@
   "filter_reset": "Redefinir",
   "results_for_title": "Resultados para {query}",
   "type_movie": "Filme",
-  "type_show": "Série"
+  "type_show": "Série",
+  "sign_in": "Entrar",
+  "code_retry_title": "Algo deu errado",
+  "code_retry_message": "A ativação foi negada, expirou ou algo imprevisto aconteceu. Tente novamente.",
+  "code_instruction": "Digitalize o código QR ou entre em:",
+  "code_label": "e insira o seguinte código:"
 }

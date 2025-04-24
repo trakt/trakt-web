@@ -377,5 +377,10 @@
   "filter_reset": "Resetuj",
   "results_for_title": "Wyniki dla {query}",
   "type_movie": "Film",
-  "type_show": "Serial"
+  "type_show": "Serial",
+  "sign_in": "Zaloguj się",
+  "code_retry_title": "Coś poszło nie tak",
+  "code_retry_message": "Aktywacja została odrzucona, wygasła lub wydarzyło się coś nieprzewidzianego. Spróbuj ponownie.",
+  "code_instruction": "Zeskanuj kod QR lub zaloguj się na:",
+  "code_label": "i wprowadź następujący kod:"
 }
