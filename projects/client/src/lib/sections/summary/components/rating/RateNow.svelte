@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { SimpleRating } from "$lib/models/SimpleRating";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -38,7 +39,7 @@
   );
 </script>
 
-<div class="trakt-rate-now">
+<div class="trakt-rate-now" data-dpad-navigation={DpadNavigationType.List}>
   {#if $isWatched}
     <h6>{m.rate_now()}</h6>
     <div class="trakt-rate-actions" transition:fade={{ duration: 150 }}>
@@ -79,6 +80,7 @@
   .trakt-rate-actions {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
   }
 
   .trakt-rate-now {

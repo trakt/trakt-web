@@ -1,5 +1,6 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { SimpleRating } from "$lib/models/SimpleRating";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import UserRating from "../UserRating.svelte";
@@ -24,6 +25,7 @@
     onclick={() => onAddRating(rating)}
     style="flat"
     variant="primary"
+    navigationType={DpadNavigationType.Item}
   >
     <UserRating {rating} {isCurrentRating} />
   </ActionButton>
@@ -34,7 +36,8 @@
     --rating-active-color: var(--shade-400);
 
     :global(.trakt-action-button) {
-      &:hover {
+      &:hover,
+      &:focus-visible {
         background-color: var(--rating-active-color);
       }
     }
