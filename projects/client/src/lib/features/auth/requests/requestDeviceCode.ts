@@ -1,4 +1,4 @@
-import { print, PrintTarget } from '$lib/utils/console/print.ts';
+import { warn as printWarning } from '$lib/utils/console/print.ts';
 import { api } from '../../../requests/api.ts';
 
 import { env } from '$env/dynamic/private';
@@ -28,8 +28,8 @@ export async function requestDeviceCode(): Promise<DeviceCodeResponse> {
     });
 
   if (codeResponse.status !== 200) {
-    print(PrintTarget.Worker, 'log', {
-      rejectedDeviceCodeResponse: codeResponse,
+    printWarning('Error requesting device code:', {
+      rejectedCodeResponse: codeResponse,
     });
 
     return {

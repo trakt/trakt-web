@@ -2,7 +2,7 @@ import type { SerializedAuthResponse } from '$lib/features/auth/models/Serialize
 import type { DeviceAuth } from '$lib/features/auth/requests/_internal/mapToDeviceAuth.ts';
 import { UNAUTHORIZED_PAYLOAD } from '$lib/features/auth/requests/authorize.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { print, PrintTarget } from '$lib/utils/console/print.ts';
+import { warn as printWarning } from '$lib/utils/console/print.ts';
 
 type EmptyAuth = {
   token: {
@@ -20,7 +20,10 @@ export function mapToSerializedAuthResponse(
     deviceAuth.expiresAt == null;
 
   if (isEmpty) {
-    print(PrintTarget.Worker, 'log', { emptyResponseToken: deviceAuth });
+    printWarning(
+      'Empty response received from the server.',
+      { emptyResponseToken: deviceAuth },
+    );
     return UNAUTHORIZED_PAYLOAD;
   }
 

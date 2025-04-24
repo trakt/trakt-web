@@ -3,7 +3,7 @@ import {
   type DeviceAuth,
   mapToDeviceAuth,
 } from '$lib/features/auth/requests/_internal/mapToDeviceAuth.ts';
-import { print, PrintTarget } from '$lib/utils/console/print.ts';
+import { warn as printWarning } from '$lib/utils/console/print.ts';
 import { api } from '../../../requests/api.ts';
 import type { AuthToken } from '../models/AuthToken.ts';
 import { getGrantTypeAndCode } from './_internal/getGrantTypeAndCode.ts';
@@ -46,7 +46,9 @@ export async function verifyAuth({
     });
 
   if (tokenResponse.status !== 200) {
-    print(PrintTarget.Worker, 'log', { unauthorizedResponse: tokenResponse });
+    printWarning('Unauthorized response received:', {
+      unauthorizedResponse: tokenResponse,
+    });
 
     throw new DeviceUnauthorizedError(
       'Access denied. The code holds no sway in this domain.',

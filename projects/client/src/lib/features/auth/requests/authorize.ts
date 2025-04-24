@@ -1,10 +1,6 @@
 import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
 import { mapToSerializedAuthResponse } from '$lib/features/auth/requests/_internal/mapToSerializedAuthResponse.ts';
-import {
-  error as printError,
-  print,
-  PrintTarget,
-} from '$lib/utils/console/print.ts';
+import { error as printError } from '$lib/utils/console/print.ts';
 import type { AuthToken } from '../models/AuthToken.ts';
 import { DeviceUnauthorizedError, verifyAuth } from './verifyAuth.ts';
 
@@ -38,8 +34,6 @@ export const authorize = async ({
 
   const response = await verifyAuth({ referrer, token })
     .catch((error) => {
-      print(PrintTarget.Worker, 'log', { authError: error });
-
       if (error instanceof DeviceUnauthorizedError) {
         return UNAUTHORIZED_PAYLOAD;
       }

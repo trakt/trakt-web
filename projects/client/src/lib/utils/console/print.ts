@@ -10,7 +10,6 @@ export enum LogLevel {
 export enum PrintTarget {
   PWA = 'PWA',
   Monitor = 'Monitor',
-  Worker = 'Worker',
 }
 
 const Colors = {
@@ -29,10 +28,14 @@ const targetToColorMap: Record<LogLevel | PrintTarget, string> = {
   [LogLevel.Error]: Colors.Red,
   [PrintTarget.PWA]: Colors.Blue,
   [PrintTarget.Monitor]: Colors.Green,
-  [PrintTarget.Worker]: Colors.Neutral,
 };
 
 let inGroup = false;
+
+const PRODUCTION_TARGETS: Array<LogLevel | PrintTarget> = [
+  LogLevel.Warn,
+  LogLevel.Error,
+];
 
 export function print(
   target: LogLevel | PrintTarget,
@@ -41,7 +44,7 @@ export function print(
 ) {
   // Skip if we're in production unless we're targeting
   // it specifically
-  if (IS_PROD && target !== PrintTarget.Worker) {
+  if (IS_PROD && !PRODUCTION_TARGETS.includes(target)) {
     return;
   }
 
