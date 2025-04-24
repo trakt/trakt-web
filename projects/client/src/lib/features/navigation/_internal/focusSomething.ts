@@ -6,6 +6,14 @@ export function focusSomething() {
     return;
   }
 
+  const navigableActiveLink = document.querySelector(
+    `.trakt-link-active[data-dpad-navigation="${DpadNavigationType.Item}"]`,
+  );
+  if (navigableActiveLink) {
+    focusAndScrollIntoView(navigableActiveLink);
+    return;
+  }
+
   const firstNavigableElement = document.querySelector(
     `[data-dpad-navigation="${DpadNavigationType.Item}"]`,
   );
