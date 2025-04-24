@@ -1,16 +1,12 @@
 import { env } from '$env/dynamic/private';
+import {
+  type DeviceAuth,
+  mapToDeviceAuth,
+} from '$lib/features/auth/requests/_internal/mapToDeviceAuth.ts';
 import { print, PrintTarget } from '$lib/utils/console/print.ts';
 import { api } from '../../../requests/api.ts';
 import type { AuthToken } from '../models/AuthToken.ts';
 import { getGrantTypeAndCode } from './_internal/getGrantTypeAndCode.ts';
-
-export type DeviceAuth = {
-  token: {
-    access: string;
-    refresh: string;
-  };
-  expiresAt: number;
-};
 
 export class DeviceUnauthorizedError extends Error {}
 
@@ -57,11 +53,5 @@ export async function verifyAuth({
     );
   }
 
-  return {
-    token: {
-      access: tokenResponse.body.access_token,
-      refresh: tokenResponse.body.refresh_token,
-    },
-    expiresAt: Date.now() + tokenResponse.body.expires_in * 1000,
-  };
+  return mapToDeviceAuth(tokenResponse.body);
 }

@@ -1,5 +1,5 @@
 import type { SerializedAuthResponse } from '$lib/features/auth/models/SerializedAuthResponse.ts';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { mapToSerializedAuthResponse } from '$lib/features/auth/requests/_internal/mapToSerializedAuthResponse.ts';
 import {
   error as printError,
   print,
@@ -8,7 +8,7 @@ import {
 import type { AuthToken } from '../models/AuthToken.ts';
 import { DeviceUnauthorizedError, verifyAuth } from './verifyAuth.ts';
 
-const UNAUTHORIZED_PAYLOAD: SerializedAuthResponse = {
+export const UNAUTHORIZED_PAYLOAD: SerializedAuthResponse = {
   isAuthorized: false,
   token: {},
 };
@@ -49,27 +49,5 @@ export const authorize = async ({
       throw error;
     });
 
-  const isEmpty = response.token?.access == null ||
-    response.token?.refresh == null ||
-    response.expiresAt == null;
-
-  if (isEmpty) {
-    print(PrintTarget.Worker, 'log', { emptyResponseToken: response });
-    return UNAUTHORIZED_PAYLOAD;
-  }
-
-  return {
-    token: {
-      access: assertDefined(
-        response.token.access,
-        'Access token should be defined',
-      ),
-      refresh: assertDefined(
-        response.token.refresh,
-        'Refresh token should be defined',
-      ),
-    },
-    isAuthorized: true,
-    expiresAt: response.expiresAt,
-  };
+  return mapToSerializedAuthResponse(response);
 };
