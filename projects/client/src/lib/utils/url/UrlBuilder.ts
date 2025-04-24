@@ -115,4 +115,7 @@ export const UrlBuilder = {
     site: () => 'https://trakt.tv',
     status: () => 'https://status.trakt.tv',
   },
+  login: {
+    activate: () => '/auth/device',
+  },
 };
