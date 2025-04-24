@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 
 class MainActivity : ComponentActivity() {
     private lateinit var webView: WebView
+    private var isAppInBackground = false
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,5 +65,19 @@ class MainActivity : ComponentActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         webView.saveState(outState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (isAppInBackground) {
+            webView.reload()
+            isAppInBackground = false
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isAppInBackground = true
     }
 }
