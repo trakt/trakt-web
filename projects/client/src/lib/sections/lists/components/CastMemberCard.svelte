@@ -4,7 +4,6 @@
   import Link from "$lib/components/link/Link.svelte";
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { CastMember } from "$lib/requests/models/MediaCrew";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
@@ -15,39 +14,21 @@
   const { castMember }: CastMemberCardProps = $props();
 </script>
 
-<trakt-cast-member>
-  <PersonCard>
-    <Link
-      focusable={false}
-      href={UrlBuilder.people(castMember.id)}
-      navigationType={DpadNavigationType.Item}
-    >
-      <CardCover
-        title={castMember.name}
-        src={castMember.headShotUrl}
-        alt={`${m.person_headshot({ person: castMember.name })}`}
-        style="flat"
-      />
-      <CardFooter>
-        <p class="trakt-card-title ellipsis">
-          {castMember.name}
-        </p>
-        <p class="trakt-card-subtitle ellipsis">
-          {castMember.characterName}
-        </p>
-      </CardFooter>
-    </Link>
-  </PersonCard>
-</trakt-cast-member>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  trakt-cast-member {
-    position: relative;
-
-    :global(.trakt-link) {
-      text-decoration: none;
-    }
-  }
-</style>
+<PersonCard>
+  <Link focusable={false} href={UrlBuilder.people(castMember.id)}>
+    <CardCover
+      title={castMember.name}
+      src={castMember.headShotUrl}
+      alt={`${m.person_headshot({ person: castMember.name })}`}
+      style="flat"
+    />
+    <CardFooter>
+      <p class="trakt-card-title ellipsis">
+        {castMember.name}
+      </p>
+      <p class="trakt-card-subtitle ellipsis">
+        {castMember.characterName}
+      </p>
+    </CardFooter>
+  </Link>
+</PersonCard>
