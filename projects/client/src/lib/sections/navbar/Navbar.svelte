@@ -1,9 +1,6 @@
 <script lang="ts">
   import { TestId } from "$e2e/models/TestId";
   import Button from "$lib/components/buttons/Button.svelte";
-  import Link from "$lib/components/link/Link.svelte";
-  import Logo from "$lib/components/logo/Logo.svelte";
-  import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
@@ -19,6 +16,7 @@
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
+  import TraktLogo from "./components/TraktLogo.svelte";
   import ProfileButton from "./ProfileButton.svelte";
 
   let windowScrollY = $state(0);
@@ -56,21 +54,7 @@
     class:trakt-navbar-scroll={isScrolled}
     data-dpad-navigation={DpadNavigationType.List}
   >
-    <RenderFor
-      audience="authenticated"
-      device={["tablet-sm", "tablet-lg", "desktop"]}
-    >
-      <div class="trakt-logo">
-        <Link href={UrlBuilder.home()}>
-          <LogoMark />
-        </Link>
-      </div>
-    </RenderFor>
-    <RenderFor audience="public">
-      <div class="trakt-logo">
-        <Logo />
-      </div>
-    </RenderFor>
+    <TraktLogo />
 
     <div class="trakt-navbar-content">
       <RenderFor
@@ -249,17 +233,6 @@
       width: calc(100dvw - 2 * var(--layout-distance-side));
 
       @include navbar-spacing(var(--layout-distance-side));
-    }
-  }
-
-  .trakt-logo {
-    height: var(--ni-32);
-    display: flex;
-    justify-content: center;
-
-    :global(svg) {
-      /* Safari 🥲 */
-      height: var(--ni-32);
     }
   }
 </style>
