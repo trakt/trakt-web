@@ -69,6 +69,8 @@
 
 <style>
   .trakt-streaming-service-button {
+    display: contents;
+
     :global(.trakt-button) {
       :global(.trakt-streaming-service-logo) {
         transition: transform var(--transition-increment) ease-in-out;
