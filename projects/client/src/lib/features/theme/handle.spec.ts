@@ -6,7 +6,7 @@ import { ThemeEndpoint } from './ThemeEndpoint.ts';
 import { coerceTheme } from './utils/coerceTheme.ts';
 
 describe('handle: theme', () => {
-  it('should replace theme palceholder with the default theme', async () => {
+  it('should replace theme placeholder with the default theme', async () => {
     const html = `<html>${THEME_PLACEHOLDER}</html>`;
 
     const { transformPageChunk } = await interceptHandleResolveOptions(
