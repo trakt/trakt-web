@@ -1,8 +1,8 @@
+import { getRelevantItem } from '$lib/features/navigation/_internal/getRelevantItem.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { focusAndScrollIntoView } from './focusAndScrollIntoView.ts';
 import { getNavigationState } from './getNavigationState.ts';
 import { getNextIndex } from './getNextIndex.ts';
-import { getSelectableItems } from './getSelectableItems.ts';
 
 export const handleListNavigation = (key: 'ArrowUp' | 'ArrowDown') => {
   const { lists, currentListIndex } = getNavigationState();
@@ -14,7 +14,7 @@ export const handleListNavigation = (key: 'ArrowUp' | 'ArrowDown') => {
   );
 
   const targetList = assertDefined(lists[newListIndex], 'No list found');
-  const targetItems = getSelectableItems(targetList);
+  const targetItem = getRelevantItem(targetList);
 
-  focusAndScrollIntoView(targetItems.at(0));
+  focusAndScrollIntoView(targetItem);
 };
