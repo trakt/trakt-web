@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "svelte/store";
+  import { dPadTrigger } from "./_internal/dPadTrigger";
 
   const {
     children,
@@ -14,8 +16,10 @@
 
 <div
   use:whenInViewport={() => isVisible.set(true)}
+  use:dPadTrigger={".trakt-card-content > .trakt-link"}
   class="trakt-card"
   data-navigation-type={$navigation}
+  data-dpad-navigation={DpadNavigationType.Item}
 >
   <div
     class="trakt-card-content"
@@ -29,6 +33,8 @@
 
 <style>
   .trakt-card {
+    all: unset;
+
     position: relative;
 
     min-width: var(--width-card);
@@ -36,7 +42,8 @@
   }
 
   .trakt-card[data-navigation-type="dpad"] {
-    &:has(:global(.trakt-link[data-dpad-navigation="item"])) {
+    &:has(:global(.trakt-link)) {
+      /* TODO: this is broken for personcards now... */
       transform: scale(0.95);
       transition: none;
 
@@ -46,7 +53,7 @@
         content: "";
       }
 
-      &:has(:global(.trakt-link:focus-visible)) {
+      &:focus-visible {
         transition: transform var(--transition-increment) ease-in;
         transform: scale(1);
 

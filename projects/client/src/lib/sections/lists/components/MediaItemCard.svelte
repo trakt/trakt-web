@@ -8,7 +8,6 @@
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
@@ -40,11 +39,7 @@
     </CardActionBar>
   {/if}
 
-  <Link
-    focusable={false}
-    href={UrlBuilder.media(type, media.slug)}
-    navigationType={DpadNavigationType.Item}
-  >
+  <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
     <CardCover
       title={media.title}
       src={mediaCoverImageUrl}

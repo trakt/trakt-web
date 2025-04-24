@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { dpadController } from '$lib/features/navigation/_internal/dpadController.ts';
+import type { NavigationType } from '$lib/features/navigation/models/NavigationType.ts';
 import type { DeviceType } from '$lib/models/DeviceType.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { getContext, setContext } from 'svelte';
@@ -10,7 +11,6 @@ const NAVIGATION_CONTEXT_KEY = Symbol('navigation');
 const PARAM_NAME = 'navigation';
 const DPAD_REF = 'd-pad';
 
-type NavigationType = 'default' | 'dpad';
 type Controller = (node: HTMLElement) => void;
 type NavigationContextData = Readable<NavigationType>;
 

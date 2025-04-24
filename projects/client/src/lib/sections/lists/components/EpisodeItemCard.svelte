@@ -10,7 +10,6 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
@@ -64,7 +63,6 @@
   <Link
     focusable={false}
     href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
-    navigationType={DpadNavigationType.Item}
   >
     <CardCover
       title={episode.title}
