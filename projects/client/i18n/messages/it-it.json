@@ -382,5 +382,7 @@
   "code_retry_title": "Qualcosa è andato storto",
   "code_retry_message": "L'attivazione è stata negata, è scaduta o è successo qualcosa di imprevisto. Riprova.",
   "code_instruction": "Scansiona il codice QR o accedi su:",
-  "code_label": "e inserisci il codice seguente:"
+  "code_label": "e inserisci il codice seguente:",
+  "filter_all": "Tutti",
+  "filters_title": "Filtri"
 }

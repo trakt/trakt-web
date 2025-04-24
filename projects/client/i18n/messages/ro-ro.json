@@ -382,5 +382,7 @@
   "code_retry_title": "Ceva n-a mers bine",
   "code_retry_message": "Activarea a fost refuzată, a expirat sau s-a întâmplat ceva neprevăzut. Încearcă din nou.",
   "code_instruction": "Scanează codul QR sau autentifică-te la:",
-  "code_label": "și introdu următorul cod:"
+  "code_label": "și introdu următorul cod:",
+  "filter_all": "Toate",
+  "filters_title": "Filtre"
 }
