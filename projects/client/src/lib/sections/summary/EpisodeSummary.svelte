@@ -59,6 +59,9 @@
     {size}
     allowRewatch={$watchCount > 0}
   />
+  <RenderFor audience="authenticated" navigation="dpad">
+    <RateNow type="episode" media={episode} {episode} {show} />
+  </RenderFor>
 {/snippet}
 
 <CoverImageSetter src={episode.cover.url ?? ""} type="show" />
@@ -121,7 +124,9 @@
   <RenderFor audience="authenticated">
     <SummaryActions>
       {#snippet contextualActions()}
-        <RateNow type="episode" media={episode} {episode} {show} />
+        <RenderFor audience="authenticated" navigation="default">
+          <RateNow type="episode" media={episode} {episode} {show} />
+        </RenderFor>
       {/snippet}
 
       <RenderFor device={["tablet-sm"]} audience="authenticated">
