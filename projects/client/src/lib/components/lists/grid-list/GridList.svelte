@@ -40,6 +40,7 @@
   @use "../_internal/gap" as *;
 
   .trakt-grid-list-container {
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 

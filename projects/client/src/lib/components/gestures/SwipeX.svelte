@@ -56,6 +56,7 @@
           return;
         }
 
+        node.dataset.state = last ? "idle" : "active";
         node.style.setProperty("--swipe-progress", progress.toString());
         node.style.setProperty("--swipe-x", `${clampedX}px`);
 
@@ -120,6 +121,7 @@
 
 <div
   class="trakt-gesture-container"
+  data-state="idle"
   use:appendClassList={classList}
   use:setupGesture
 >
@@ -136,8 +138,11 @@
     will-change: transform;
 
     transform: translateX(var(--swipe-x));
-    transition: transform var(--transition-increment)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &[data-state="idle"] {
+      transition: transform var(--transition-increment)
+        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
   }
 
   :global(.trakt-gesture-container .trakt-gesture-indicator) {
@@ -151,14 +156,18 @@
 
     background-color: var(--indicator-color, transparent);
     opacity: var(--swipe-progress, 0);
+  }
 
+  :global(
+    .trakt-gesture-container[data-state="idle"] .trakt-gesture-indicator
+  ) {
     transition:
       opacity var(--transition-increment) ease-out,
       width var(--transition-increment) ease-out,
       background-color var(--transition-increment) ease-out,
       left var(--transition-increment) ease-out,
       right var(--transition-increment) ease-out,
-      color var(--transition-increment) ease-in-out,
-      outline-color var(--transition-increment) ease-in-out;
+      color var(--transition-increment) ease-out,
+      outline-color var(--transition-increment) ease-out;
   }
 </style>
