@@ -53,6 +53,7 @@ module.exports = {
         'filter',
         'formatter',
         'footer',
+        'gestures',
         'guards',
         'i18n',
         'landing',
