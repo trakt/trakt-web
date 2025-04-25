@@ -5,6 +5,7 @@
   }: IconProps & {
     state: "watched" | "unwatched";
   } = $props();
+
   const strokeWidth = $derived(size === "small" ? 3 : 2);
 </script>
 
