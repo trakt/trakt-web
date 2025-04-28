@@ -31,7 +31,7 @@
     id="search-grid-list"
     title={m.results_for_title({ query })}
     items={$results}
-    --width-item="var(--width-poster-card)"
+    --width-item="var(--width-portrait-card)"
   >
     {#snippet item(result)}
       <DefaultMediaItem type={result.type} media={result} {style}>
