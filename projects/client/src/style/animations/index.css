@@ -54,3 +54,7 @@
     transform: rotate(180deg);
   }
 }
+
+[data-device='tv'] * {
+  transition: none !important;
+}
