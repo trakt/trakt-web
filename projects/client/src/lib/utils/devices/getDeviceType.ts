@@ -1,6 +1,6 @@
 import type { DeviceType } from '$lib/models/DeviceType.ts';
-import { isTvAgent } from '$lib/utils/url/isTvAgent.ts';
+import { isTV } from './isTV.ts';
 
 export function getDeviceType(agent: string | Nil): DeviceType {
-  return isTvAgent(agent) ? 'tv' : 'unknown';
+  return isTV(agent) ? 'tv' : 'unknown';
 }
