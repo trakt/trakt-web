@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { DeviceType } from "$lib/models/DeviceType";
-  import { onMount } from "svelte";
   import { initializeNavigation } from "./useNavigation";
 
   type NavigationProviderProps = {
@@ -9,15 +8,7 @@
 
   const { children, device }: NavigationProviderProps = $props();
 
-  const { controller, redirect } = $derived(initializeNavigation(device));
-
-  onMount(() => {
-    if (!controller) {
-      return;
-    }
-
-    redirect();
-  });
+  const { controller } = $derived(initializeNavigation(device));
 </script>
 
 {#if controller}

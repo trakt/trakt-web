@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { dpadController } from '$lib/features/navigation/_internal/dpadController.ts';
 import type { NavigationType } from '$lib/features/navigation/models/NavigationType.ts';
@@ -31,23 +30,8 @@ export function initializeNavigation(device: DeviceType) {
         readable(navigationType),
       );
 
-  const redirect = () => {
-    if (!page.url.searchParams.get(PARAM_NAME)) {
-      return;
-    }
-
-    const url = new URL(page.url);
-    url.searchParams.delete(PARAM_NAME);
-
-    goto(url, {
-      replaceState: true,
-      keepFocus: true,
-    });
-  };
-
   return {
     controller: navigationControllers[get(navigation)],
-    redirect,
   };
 }
 
