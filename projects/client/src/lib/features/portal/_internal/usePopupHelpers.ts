@@ -3,6 +3,7 @@ import { POPUP_STATE_ATTRIBUTE } from '$lib/features/portal/_internal/constants.
 import { createUnderlay } from '$lib/features/portal/_internal/createUnderlay.ts';
 import { PopupState } from '$lib/features/portal/_internal/models/PopupState.ts';
 import { get, writable } from 'svelte/store';
+import { createSanitizedClone } from './createSanitizedClone.ts';
 
 const clearElement = (element: HTMLElement | null) => {
   element?.remove();
@@ -52,7 +53,7 @@ export function usePopupHelpers() {
 
     targetClone.update(clearElement);
 
-    const clone = target.cloneNode(true) as HTMLElement;
+    const clone = createSanitizedClone(target);
     const targetRect = target.getBoundingClientRect();
 
     clone.style.width = `${targetRect.width}px`;
