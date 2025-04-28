@@ -25,7 +25,7 @@
     ...rest
   }: MediaCardProps = $props();
 
-  const defaultVariant = $derived(useDefaultCardVariant());
+  const defaultVariant = $derived(useDefaultCardVariant(type));
   const variant = $derived(rest.variant ?? $defaultVariant);
 </script>
 
