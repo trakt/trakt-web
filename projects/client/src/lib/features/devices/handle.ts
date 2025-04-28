@@ -2,7 +2,8 @@ import type { DeviceType } from '$lib/models/DeviceType.ts';
 import { getDeviceType } from '$lib/utils/devices/getDeviceType.ts';
 import type { Handle } from '@sveltejs/kit';
 
-export const INITIAL_SCALE_PLACEHOLDER = '%viewport.initialScale%';
+export const DEVICE_SCALE_PLACEHOLDER = '%device.scale%';
+export const DEVICE_TYPE_PLACEHOLDER = '%device.type%';
 
 const SCALE_MAP: Record<DeviceType, string> = {
   unknown: '1',
@@ -19,7 +20,8 @@ export const handle: Handle = (
     transformPageChunk({ html, done }) {
       if (!done) return html;
       return html
-        .replace(INITIAL_SCALE_PLACEHOLDER, SCALE_MAP[deviceType]);
+        .replace(DEVICE_SCALE_PLACEHOLDER, SCALE_MAP[deviceType])
+        .replace(DEVICE_TYPE_PLACEHOLDER, deviceType);
     },
   });
 };
