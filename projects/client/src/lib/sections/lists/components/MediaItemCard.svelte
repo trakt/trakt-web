@@ -23,7 +23,7 @@
     ...rest
   }: MediaCardProps = $props();
 
-  const variant = $derived(rest.variant ?? "poster");
+  const variant = $derived(rest.variant ?? "portrait");
 </script>
 
 {#snippet content(mediaCoverImageUrl: string)}
@@ -65,13 +65,13 @@
   </CardFooter>
 {/snippet}
 
-{#if variant === "poster"}
+{#if variant === "portrait"}
   <PortraitCard>
     {@render content(media.poster.url.thumb)}
   </PortraitCard>
 {/if}
 
-{#if variant === "thumb"}
+{#if variant === "landscape"}
   <LandscapeCard>
     {@render content(media.thumb.url)}
   </LandscapeCard>

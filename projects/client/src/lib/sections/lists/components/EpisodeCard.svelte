@@ -58,7 +58,7 @@
       {tag}
       {action}
       type="episode"
-      variant="thumb"
+      variant="landscape"
       style="summary"
     />
   {/if}
