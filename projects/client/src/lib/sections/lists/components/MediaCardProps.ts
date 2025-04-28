@@ -8,7 +8,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
 
 export type MediaItemVariant<T> =
-  | { variant?: 'portrait' } & MediaInput<T>
+  | { variant?: 'portrait' | 'landscape' } & MediaInput<T>
   | { variant: 'landscape' } & MediaInput<T>
   | { variant: 'activity'; date: Date } & MediaInput<T>;
 
