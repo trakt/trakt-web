@@ -11,6 +11,7 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "cSpell.words": [
+    "Chromecast",
     "Cromulon",
     "deno",
     "Drillable",
@@ -27,8 +28,8 @@
     "Paginatable",
     "paraglide",
     "posthog",
-    "rewatching",
     "rewatch",
+    "rewatching",
     "tmdb",
     "Watchlist",
     "Watchlisted",

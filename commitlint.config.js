@@ -32,7 +32,7 @@ module.exports = {
       [
         'anticipated',
         'analytics',
-        'android-tv',
+        'tv',
         'auth',
         'badge',
         'button',

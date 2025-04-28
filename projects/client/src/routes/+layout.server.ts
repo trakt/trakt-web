@@ -2,8 +2,8 @@ import { AUTH_COOKIE_NAME } from '$lib/features/auth/handle.ts';
 import { setToken } from '$lib/features/auth/token/index.ts';
 import { isAuthorized } from '$lib/features/auth/utils/isAuthorized.ts';
 import { getDeviceType } from '$lib/utils/devices/getDeviceType.ts';
+import { isBotAgent } from '$lib/utils/devices/isBotAgent.ts';
 import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
-import { isBotAgent } from '$lib/utils/url/isBotAgent.ts';
 
 import type { LayoutServerLoad } from './$types.ts';
 
