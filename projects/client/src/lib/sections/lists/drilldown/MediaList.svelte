@@ -1,5 +1,6 @@
 <script lang="ts" generics="T extends { id: unknown }, M">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import type { MediaListProps } from "./MediaListProps";
@@ -19,6 +20,8 @@
   const { list, isLoading } = $derived(
     useList({ type, page: 1, limit: DEFAULT_PAGE_SIZE, filter }),
   );
+
+  const defaultVariant = useDefaultCardVariant();
 </script>
 
 {#snippet actions()}
@@ -34,7 +37,7 @@
   {item}
   {title}
   actions={externalActions ? actions : undefined}
-  --height-list={mediaListHeightResolver(type)}
+  --height-list={mediaListHeightResolver($defaultVariant)}
 >
   {#snippet empty()}
     {#if !$isLoading}

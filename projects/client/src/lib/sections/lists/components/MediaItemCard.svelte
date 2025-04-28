@@ -6,8 +6,10 @@
   import CardCover from "$lib/components/card/CardCover.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
+  import GenreList from "$lib/components/summary/GenreList.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
@@ -23,7 +25,8 @@
     ...rest
   }: MediaCardProps = $props();
 
-  const variant = $derived(rest.variant ?? "portrait");
+  const defaultVariant = $derived(useDefaultCardVariant());
+  const variant = $derived(rest.variant ?? $defaultVariant);
 </script>
 
 {#snippet content(mediaCoverImageUrl: string)}
@@ -47,13 +50,40 @@
       {badge}
     />
   </Link>
+{/snippet}
 
-  <CardFooter {action} {tag}>
-    {#if rest.variant === "activity"}
+{#if variant === "portrait"}
+  <PortraitCard>
+    {@render content(media.poster.url.thumb)}
+    <CardFooter {action} {tag} />
+  </PortraitCard>
+{/if}
+
+{#if variant === "landscape"}
+  <LandscapeCard>
+    {@render content(media.cover.url.thumb)}
+    <CardFooter {action} {tag}>
+      <Link href={UrlBuilder.media(type, media.slug)}>
+        <p class="trakt-card-title small ellipsis">
+          {media.title}
+        </p>
+      </Link>
+      <GenreList
+        genres={media.genres}
+        classList="trakt-card-subtitle small ellipsis"
+      />
+    </CardFooter>
+  </LandscapeCard>
+{/if}
+
+{#if rest.variant === "activity"}
+  <LandscapeCard>
+    {@render content(media.thumb.url)}
+    <CardFooter {action} {tag}>
       <Link href={UrlBuilder.media(type, media.slug)}>
         <p
           class="trakt-card-title small ellipsis"
-          class:small={rest.variant !== "activity"}
+          class:small={variant !== "activity"}
         >
           {media.title}
         </p>
@@ -61,24 +91,6 @@
       <p class="trakt-card-subtitle small ellipsis">
         {toHumanDate(new Date(), rest.date, getLocale())}
       </p>
-    {/if}
-  </CardFooter>
-{/snippet}
-
-{#if variant === "portrait"}
-  <PortraitCard>
-    {@render content(media.poster.url.thumb)}
-  </PortraitCard>
-{/if}
-
-{#if variant === "landscape"}
-  <LandscapeCard>
-    {@render content(media.thumb.url)}
-  </LandscapeCard>
-{/if}
-
-{#if variant === "activity"}
-  <LandscapeCard>
-    {@render content(media.thumb.url)}
+    </CardFooter>
   </LandscapeCard>
 {/if}
