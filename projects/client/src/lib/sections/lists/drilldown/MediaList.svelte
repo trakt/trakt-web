@@ -21,7 +21,7 @@
     useList({ type, page: 1, limit: DEFAULT_PAGE_SIZE, filter }),
   );
 
-  const defaultVariant = useDefaultCardVariant();
+  const defaultVariant = useDefaultCardVariant(type);
 </script>
 
 {#snippet actions()}
