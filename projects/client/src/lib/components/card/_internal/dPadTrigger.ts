@@ -9,7 +9,7 @@ export function dPadTrigger(
   const { navigation } = useNavigation();
 
   const handler = (event: KeyboardEvent) => {
-    if (event.code !== 'Enter' && event.code !== 'Space') {
+    if (event.key !== 'Enter') {
       return;
     }
 
