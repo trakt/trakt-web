@@ -72,6 +72,8 @@
   }
 
   .trakt-card-content {
+    position: relative;
+
     width: var(--width-card);
     height: var(--height-card);
 
