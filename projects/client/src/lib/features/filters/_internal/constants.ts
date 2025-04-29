@@ -1,7 +1,9 @@
 import { generateDecadeOptions } from '$lib/features/filters/_internal/generateDecadeOptions.ts';
+import { RATINGS } from '$lib/features/filters/_internal/ratings.ts';
 import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
+import { SimpleRating } from '$lib/models/SimpleRating.ts';
 import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
 import { genreOptionSchema } from '@trakt/api';
 
@@ -34,6 +36,16 @@ const STREAMING_FILTER: Filter = {
   ],
 };
 
+const RATINGS_FILTER: Filter = {
+  label: m.ratings(),
+  key: FilterKey.Ratings,
+  type: 'ratings',
+  options: Object.values(SimpleRating).map((rating) => ({
+    rating,
+    value: RATINGS[rating as SimpleRating],
+  })),
+};
+
 const IGNORE_WATCHED_FILTER: Filter = {
   label: m.ignore_watched(),
   key: FilterKey.IgnoreWatched,
@@ -52,6 +64,7 @@ export const FILTERS = [
   GENRE_FILTER,
   STREAMING_FILTER,
   DECADE_FILTER,
+  RATINGS_FILTER,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;

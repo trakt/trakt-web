@@ -1,5 +1,12 @@
+import type { SimpleRating } from '$lib/models/SimpleRating.ts';
+
 export type FilterOption = {
   label: string;
+  value: string;
+};
+
+type RatingOption = {
+  rating: SimpleRating;
   value: string;
 };
 
@@ -9,12 +16,13 @@ export enum FilterKey {
   IgnoreWatchlisted = 'ignore_watchlisted',
   Streaming = 'watchnow',
   Decade = 'years',
+  Ratings = 'ratings',
 }
 
 type BaseFilter = {
   key: FilterKey;
   label: string;
-  type: 'list' | 'toggle';
+  type: 'list' | 'toggle' | 'ratings';
 };
 
 export type ListFilter = BaseFilter & {
@@ -27,4 +35,9 @@ export type ToggleFilter = BaseFilter & {
   defaultValue: 'true' | 'false';
 };
 
-export type Filter = ListFilter | ToggleFilter;
+export type RatingsFilter = BaseFilter & {
+  type: 'ratings';
+  options: Array<RatingOption>;
+};
+
+export type Filter = ListFilter | ToggleFilter | RatingsFilter;
