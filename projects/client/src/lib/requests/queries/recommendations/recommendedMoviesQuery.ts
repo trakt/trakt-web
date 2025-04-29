@@ -1,4 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -23,8 +24,6 @@ const recommendedMoviesRequest = (
       query: {
         extended: 'full,images',
         ignore_collected: true,
-        ignore_watchlisted: true,
-        ignore_watched: true,
         limit,
         ...filter,
       },
@@ -40,9 +39,9 @@ export const recommendedMoviesQuery = defineQuery({
     params,
   ) => [
     params.limit,
-    params.filter?.genres,
     params.filter?.watch_window,
     params.filter?.min_year,
+    ...getGlobalFilterDependencies(params),
   ],
   request: recommendedMoviesRequest,
   mapper: (response) => response.body.map(mapToMovieEntry),

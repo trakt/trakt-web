@@ -1,0 +1,31 @@
+<script lang="ts">
+  import Switch from "$lib/components/toggles/Switch.svelte";
+  import type { ToggleFilter } from "$lib/features/filters/models/Filter";
+  import { useFilter } from "$lib/features/filters/useFilter";
+  import Filter from "./_internal/Filter.svelte";
+  import { useFilterSetter } from "./_internal/useFilterSetter";
+
+  const { filter }: { filter: ToggleFilter } = $props();
+
+  const { gotoFilteredState } = useFilterSetter();
+  const { getFilterValue } = useFilter();
+  const currentValue = getFilterValue(filter.key);
+
+  const handler = () => {
+    const toggledValue = $currentValue === "true" ? "false" : "true";
+
+    gotoFilteredState({
+      key: filter.key,
+      value: toggledValue === filter.defaultValue ? null : toggledValue,
+    });
+  };
+</script>
+
+<Filter title={filter.label}>
+  <Switch
+    label={filter.label}
+    checked={$currentValue === "true"}
+    color="blue"
+    onclick={handler}
+  />
+</Filter>

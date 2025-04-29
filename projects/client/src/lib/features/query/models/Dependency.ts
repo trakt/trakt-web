@@ -1,1 +1,1 @@
-export type Dependency = number | string | Date | Nil;
+export type Dependency = number | string | boolean | Date | Nil;

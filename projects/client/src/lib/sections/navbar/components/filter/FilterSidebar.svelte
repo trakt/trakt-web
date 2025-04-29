@@ -4,6 +4,7 @@
   import type { Writable } from "svelte/store";
   import Sidebar from "./_internal/Sidebar.svelte";
   import ListFilter from "./filters/ListFilter.svelte";
+  import ToggleFilter from "./filters/ToggleFilter.svelte";
 
   const { isOpen }: { isOpen: Writable<boolean> } = $props();
   const { filters } = useFilter();
@@ -13,6 +14,10 @@
   {#each $filters as filter}
     {#if filter.type === "list"}
       <ListFilter {filter} />
+    {/if}
+
+    {#if filter.type === "toggle"}
+      <ToggleFilter {filter} />
     {/if}
   {/each}
 </Sidebar>

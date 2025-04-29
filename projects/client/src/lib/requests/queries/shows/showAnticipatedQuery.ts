@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -46,8 +47,6 @@ const showAnticipatedRequest = (
       query: {
         extended: 'full,images',
         ignore_collected: true,
-        ignore_watchlisted: true,
-        ignore_watched: true,
         page,
         limit,
         ...filter,
@@ -61,7 +60,13 @@ export const showAnticipatedQuery = defineQuery({
     InvalidateAction.Watchlisted('show'),
     InvalidateAction.MarkAsWatched('episode'),
   ],
-  dependencies: (params) => [params.limit, params.page, params.filter?.genres],
+  dependencies: (
+    params,
+  ) => [
+    params.limit,
+    params.page,
+    ...getGlobalFilterDependencies(params),
+  ],
   request: showAnticipatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToAnticipatedShow),

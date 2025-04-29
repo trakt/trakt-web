@@ -1,4 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
@@ -26,8 +27,6 @@ const recommendedShowsRequest = (
       query: {
         extended: 'full,images',
         ignore_collected: true,
-        ignore_watchlisted: true,
-        ignore_watched: true,
         limit,
         ...filter,
       },
@@ -44,9 +43,9 @@ export const recommendedShowsQuery = defineQuery({
     params,
   ) => [
     params.limit,
-    params.filter?.genres,
     params.filter?.watch_window,
     params.filter?.min_year,
+    ...getGlobalFilterDependencies(params),
   ],
   request: recommendedShowsRequest,
   mapper: (response) =>
