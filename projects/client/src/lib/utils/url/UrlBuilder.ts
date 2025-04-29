@@ -8,7 +8,6 @@ type TypeParams = {
 type WellKnownQueryParams = {
   page?: number;
   watch_window?: number;
-  min_year?: number;
 };
 
 type UrlBuilderParams = TypeParams & WellKnownQueryParams;
@@ -19,7 +18,6 @@ function sanitizeParams(
   return {
     page: params.page,
     watch_window: params.watch_window,
-    min_year: params.min_year,
   };
 }
 

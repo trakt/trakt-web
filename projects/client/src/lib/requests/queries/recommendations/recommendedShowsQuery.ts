@@ -44,7 +44,6 @@ export const recommendedShowsQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
-    params.filter?.min_year,
     ...getGlobalFilterDependencies(params),
   ],
   request: recommendedShowsRequest,
