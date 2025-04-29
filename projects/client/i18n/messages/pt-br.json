@@ -386,5 +386,7 @@
   "filter_all": "Todos",
   "filters_title": "Filtros",
   "ignore_watched": "Ignorar Vistos",
-  "ignore_watchlisted": "Ignorar Lista"
+  "ignore_watchlisted": "Ignorar Lista",
+  "watchnow_favorites_only": "Só Favoritos",
+  "watchnow_any_service": "Em qualquer serviço"
 }

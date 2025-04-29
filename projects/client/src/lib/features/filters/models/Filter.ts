@@ -7,6 +7,7 @@ export enum FilterKey {
   Genres = 'genres',
   IgnoreWatched = 'ignore_watched',
   IgnoreWatchlisted = 'ignore_watchlisted',
+  Streaming = 'watchnow',
 }
 
 type BaseFilter = {
