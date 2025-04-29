@@ -384,5 +384,7 @@
   "code_instruction": "Scansiona il codice QR o accedi su:",
   "code_label": "e inserisci il codice seguente:",
   "filter_all": "Tutti",
-  "filters_title": "Filtri"
+  "filters_title": "Filtri",
+  "ignore_watched": "Ignora visti",
+  "ignore_watchlisted": "Ignora da vedere"
 }

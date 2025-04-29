@@ -16,6 +16,22 @@ const GENRE_FILTER: Filter = {
     .sort((a, b) => a.label.localeCompare(b.label, languageTag())),
 };
 
+const IGNORE_WATCHED_FILTER: Filter = {
+  label: m.ignore_watched(),
+  key: 'ignore_watched',
+  type: 'toggle',
+  defaultValue: 'true',
+};
+
+const IGNORE_WATCHLISTED_FILTER: Filter = {
+  label: m.ignore_watchlisted(),
+  key: 'ignore_watchlisted',
+  type: 'toggle',
+  defaultValue: 'true',
+};
+
 export const FILTERS = [
   GENRE_FILTER,
+  IGNORE_WATCHED_FILTER,
+  IGNORE_WATCHLISTED_FILTER,
 ] as const;

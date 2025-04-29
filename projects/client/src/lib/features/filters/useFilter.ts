@@ -10,8 +10,14 @@ export function useFilter() {
   return {
     filters: readable(FILTERS),
     getFilterValue: (key: FilterKey) => {
+      const filter = assertDefined(
+        FILTERS.find((filter) => filter.key === key),
+      );
       return derived(search, ($search) => {
-        return $search.get(key);
+        const defaultValue = filter.type === 'toggle'
+          ? filter.defaultValue
+          : undefined;
+        return $search.get(key) ?? defaultValue;
       });
     },
     hasActiveFilter: derived(search, ($search) => {
@@ -21,12 +27,18 @@ export function useFilter() {
       return FILTERS
         .filter((filter) => {
           const hasParameter = Boolean($search.get(filter.key));
-          return hasParameter;
+          const isToggle = filter.type === 'toggle';
+
+          return hasParameter || isToggle;
         })
         .reduce((filterMap, filter) => {
-          const parameterValue = assertDefined($search.get(filter.key));
+          const parameterValue = $search.get(filter.key);
+          const defaultValue = filter.type === 'toggle'
+            ? filter.defaultValue
+            : '';
+          const value = parameterValue ?? defaultValue;
 
-          filterMap[filter.key] = parameterValue;
+          filterMap[filter.key] = value;
           return filterMap;
         }, {} as Record<string, string>);
     }),

@@ -384,5 +384,7 @@
   "code_instruction": "Scanează codul QR sau autentifică-te la:",
   "code_label": "și introdu următorul cod:",
   "filter_all": "Toate",
-  "filters_title": "Filtre"
+  "filters_title": "Filtre",
+  "ignore_watched": "Ignoră Văzute",
+  "ignore_watchlisted": "Ignoră de Vizionat"
 }

@@ -384,5 +384,7 @@
   "code_instruction": "Scan the QR code, or sign in at:",
   "code_label": "and enter the following code:",
   "filter_all": "All",
-  "filters_title": "Filters"
+  "filters_title": "Filters",
+  "ignore_watched": "Ignore Watched",
+  "ignore_watchlisted": "Ignore Watchlisted"
 }

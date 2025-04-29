@@ -384,5 +384,7 @@
   "code_instruction": "Відскануйте QR-код або увійдіть на сайті:",
   "code_label": "та введіть наступний код:",
   "filter_all": "Всі",
-  "filters_title": "Фільтри"
+  "filters_title": "Фільтри",
+  "ignore_watched": "Ігнорувати переглянуте",
+  "ignore_watchlisted": "Ігнорувати у списку"
 }

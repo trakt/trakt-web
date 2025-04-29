@@ -384,5 +384,7 @@
   "code_instruction": "Digitalize o código QR ou entre em:",
   "code_label": "e insira o seguinte código:",
   "filter_all": "Todos",
-  "filters_title": "Filtros"
+  "filters_title": "Filtros",
+  "ignore_watched": "Ignorar Vistos",
+  "ignore_watchlisted": "Ignorar Lista"
 }

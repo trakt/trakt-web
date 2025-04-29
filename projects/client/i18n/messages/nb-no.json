@@ -384,5 +384,7 @@
   "code_instruction": "Skann QR-koden, eller logg inn på:",
   "code_label": "og skriv inn følgende kode:",
   "filter_all": "Alle",
-  "filters_title": "Filtre"
+  "filters_title": "Filtre",
+  "ignore_watched": "Ignorer sett",
+  "ignore_watchlisted": "Ignorer på huskeliste"
 }
