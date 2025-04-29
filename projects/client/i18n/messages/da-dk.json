@@ -382,5 +382,9 @@
   "code_retry_title": "Noget gik galt",
   "code_retry_message": "Aktiveringen blev afvist, udløbet, eller noget uforudsigeligt skete. Prøv igen.",
   "code_instruction": "Scan QR-koden, eller log ind på:",
-  "code_label": "og indtast følgende kode:"
+  "code_label": "og indtast følgende kode:",
+  "filter_all": "Alle",
+  "filters_title": "Filtre",
+  "ignore_watched": "Ignorer set",
+  "ignore_watchlisted": "Ignorer på listen"
 }

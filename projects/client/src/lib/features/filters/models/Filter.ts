@@ -3,12 +3,12 @@ type FilterOption = {
   value: string;
 };
 
-export type FilterKey = 'genres';
+export type FilterKey = 'genres' | 'ignore_watched' | 'ignore_watchlisted';
 
 type BaseFilter = {
   key: FilterKey;
   label: string;
-  type: 'list';
+  type: 'list' | 'toggle';
 };
 
 export type ListFilter = BaseFilter & {
@@ -16,4 +16,9 @@ export type ListFilter = BaseFilter & {
   options: Array<FilterOption>;
 };
 
-export type Filter = ListFilter;
+export type ToggleFilter = BaseFilter & {
+  type: 'toggle';
+  defaultValue: 'true' | 'false';
+};
+
+export type Filter = ListFilter | ToggleFilter;

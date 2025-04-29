@@ -384,5 +384,7 @@
   "code_instruction": "QRコードをスキャンするか、以下からサインインしてください:",
   "code_label": "以下のコードを入力してください:",
   "filter_all": "すべて",
-  "filters_title": "フィルター"
+  "filters_title": "フィルター",
+  "ignore_watched": "視聴済みを無視",
+  "ignore_watchlisted": "ウォッチリストを無視"
 }

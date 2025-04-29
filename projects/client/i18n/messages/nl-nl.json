@@ -384,5 +384,7 @@
   "code_instruction": "Scan de QR-code of log in op:",
   "code_label": "en voer de volgende code in:",
   "filter_all": "Alles",
-  "filters_title": "Filters"
+  "filters_title": "Filters",
+  "ignore_watched": "Bekeken negeren",
+  "ignore_watchlisted": "Op de lijst negeren"
 }
