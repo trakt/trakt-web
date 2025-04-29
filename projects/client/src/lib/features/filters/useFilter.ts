@@ -2,7 +2,7 @@ import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { derived, readable } from 'svelte/store';
-import { FILTERS } from './constants.ts';
+import { FILTERS } from './_internal/constants.ts';
 
 export function useFilter() {
   const { search } = useParameters();
