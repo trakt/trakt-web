@@ -1,0 +1,55 @@
+<script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import type { RatingsFilter } from "$lib/features/filters/models/Filter";
+  import { useFilter } from "$lib/features/filters/useFilter";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import RateActionButton from "$lib/sections/summary/components/rating/_internal/RateActionButton.svelte";
+  import Filter from "./_internal/Filter.svelte";
+  import { useFilterSetter } from "./_internal/useFilterSetter";
+
+  const { filter }: { filter: RatingsFilter } = $props();
+
+  const { getFilterValue } = useFilter();
+  const { gotoFilteredState } = useFilterSetter();
+
+  const currentValue = getFilterValue(filter.key);
+
+  const handler = (value: string | null) => {
+    gotoFilteredState({
+      key: filter.key,
+      value,
+    });
+  };
+</script>
+
+<Filter title={filter.label}>
+  <div class="trakt-filter-ratings">
+    <ActionButton
+      color="red"
+      variant="secondary"
+      label={m.filter_reset()}
+      onclick={() => handler(null)}
+      style={$currentValue ? "flat" : "ghost"}
+    >
+      <CloseIcon />
+    </ActionButton>
+    {#each filter.options as option}
+      <RateActionButton
+        rating={option.rating}
+        isCurrentRating={$currentValue === option.value}
+        isDisabled={$currentValue === option.value}
+        onAddRating={() => {
+          handler(option.value);
+        }}
+      />
+    {/each}
+  </div>
+</Filter>
+
+<style>
+  .trakt-filter-ratings {
+    display: flex;
+    gap: var(--gap-xs);
+  }
+</style>
