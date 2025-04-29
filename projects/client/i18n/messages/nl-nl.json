@@ -386,5 +386,7 @@
   "filter_all": "Alles",
   "filters_title": "Filters",
   "ignore_watched": "Bekeken negeren",
-  "ignore_watchlisted": "Op de lijst negeren"
+  "ignore_watchlisted": "Op de lijst negeren",
+  "watchnow_favorites_only": "Alleen favorieten",
+  "watchnow_any_service": "Op elke dienst"
 }

@@ -386,5 +386,7 @@
   "filter_all": "Alle",
   "filters_title": "Filtre",
   "ignore_watched": "Ignorer sett",
-  "ignore_watchlisted": "Ignorer på huskeliste"
+  "ignore_watchlisted": "Ignorer på huskeliste",
+  "watchnow_favorites_only": "Kun favoritter",
+  "watchnow_any_service": "På alle tjenester"
 }

@@ -386,5 +386,7 @@
   "filter_all": "Всі",
   "filters_title": "Фільтри",
   "ignore_watched": "Ігнорувати переглянуте",
-  "ignore_watchlisted": "Ігнорувати у списку"
+  "ignore_watchlisted": "Ігнорувати у списку",
+  "watchnow_favorites_only": "Тільки улюблене",
+  "watchnow_any_service": "На будь-якому сервісі"
 }

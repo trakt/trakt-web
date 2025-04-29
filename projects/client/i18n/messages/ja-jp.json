@@ -386,5 +386,7 @@
   "filter_all": "すべて",
   "filters_title": "フィルター",
   "ignore_watched": "視聴済みを無視",
-  "ignore_watchlisted": "ウォッチリストを無視"
+  "ignore_watchlisted": "ウォッチリストを無視",
+  "watchnow_favorites_only": "Favorites only",
+  "watchnow_any_service": "On any service"
 }

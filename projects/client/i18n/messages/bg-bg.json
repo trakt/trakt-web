@@ -386,5 +386,7 @@
   "filter_all": "Всички",
   "filters_title": "Филтри",
   "ignore_watched": "Пренебрегвай гледаното",
-  "ignore_watchlisted": "Пренебрегвай в списъка за гледане"
+  "ignore_watchlisted": "Пренебрегвай в списъка за гледане",
+  "watchnow_favorites_only": "Само любими",
+  "watchnow_any_service": "Навсякъде"
 }

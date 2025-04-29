@@ -16,6 +16,16 @@ const GENRE_FILTER: Filter = {
     .sort((a, b) => a.label.localeCompare(b.label, languageTag())),
 };
 
+const STREAMING_FILTER: Filter = {
+  label: m.streaming(),
+  key: FilterKey.Streaming,
+  type: 'list',
+  options: [
+    { label: m.watchnow_favorites_only(), value: 'favorites' },
+    { label: m.watchnow_any_service(), value: 'any' },
+  ],
+};
+
 const IGNORE_WATCHED_FILTER: Filter = {
   label: m.ignore_watched(),
   key: FilterKey.IgnoreWatched,
@@ -32,6 +42,7 @@ const IGNORE_WATCHLISTED_FILTER: Filter = {
 
 export const FILTERS = [
   GENRE_FILTER,
+  STREAMING_FILTER,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;
