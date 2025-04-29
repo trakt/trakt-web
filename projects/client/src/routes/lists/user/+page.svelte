@@ -10,10 +10,9 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
-  title={m.navbar_link_watchlist()}
+  title={m.navbar_link_lists()}
 >
   <TraktPageCoverSetter />
-
   <WatchList
     title={m.watchlist_movies()}
     drilldownLabel={m.view_all_watchlist_movies()}
