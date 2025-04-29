@@ -1,38 +1,34 @@
-import type { GenreFilter } from '$lib/features/filters/models/GenreFilter.ts';
-import { languageTag } from '$lib/features/i18n/index.ts';
+import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
-import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
-import { genreOptionSchema } from '@trakt/api';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { derived, readable } from 'svelte/store';
-
-const GENRE_FILTER: GenreFilter = {
-  key: 'genres',
-  options: genreOptionSchema.options
-    .map((genre) => ({
-      label: toTranslatedValue('genre', genre),
-      value: genre,
-    }))
-    .sort((a, b) => a.label.localeCompare(b.label, languageTag())),
-};
+import { FILTERS } from './constants.ts';
 
 export function useFilter() {
   const { search } = useParameters();
 
   return {
-    filter: readable(GENRE_FILTER),
-    currentValue: derived(search, ($search) => {
-      return $search.get(GENRE_FILTER.key);
+    filters: readable(FILTERS),
+    getFilterValue: (key: FilterKey) => {
+      return derived(search, ($search) => {
+        return $search.get(key);
+      });
+    },
+    hasActiveFilter: derived(search, ($search) => {
+      return FILTERS.some((filter) => Boolean($search.get(filter.key)));
     }),
     filterMap: derived(search, ($search) => {
-      const value = $search.get(GENRE_FILTER.key);
+      return FILTERS
+        .filter((filter) => {
+          const hasParameter = Boolean($search.get(filter.key));
+          return hasParameter;
+        })
+        .reduce((filterMap, filter) => {
+          const parameterValue = assertDefined($search.get(filter.key));
 
-      if (!value) {
-        return {};
-      }
-
-      return {
-        [GENRE_FILTER.key]: value,
-      };
+          filterMap[filter.key] = parameterValue;
+          return filterMap;
+        }, {} as Record<string, string>);
     }),
   };
 }
