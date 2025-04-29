@@ -3,13 +3,13 @@ import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
-import { genreOptionSchema } from '@trakt/api';
+import { GENRES } from './genres.ts';
 
 const GENRE_FILTER: Filter = {
   label: m.genre(),
   key: FilterKey.Genres,
   type: 'list',
-  options: genreOptionSchema.options
+  options: GENRES
     .map((genre) => ({
       label: toTranslatedValue('genre', genre),
       value: genre,
