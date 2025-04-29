@@ -6,13 +6,10 @@
   import { writable } from "svelte/store";
   import FilterSidebar from "./FilterSidebar.svelte";
 
-  // TODO add support for multiple filters
-  const { currentValue } = useFilter();
+  const { hasActiveFilter } = useFilter();
 
-  const isFiltering = $derived(Boolean($currentValue));
-
-  const color = $derived(isFiltering ? "blue" : "default");
-  const state = $derived(isFiltering ? "filtered" : "unfiltered");
+  const color = $derived($hasActiveFilter ? "blue" : "default");
+  const state = $derived($hasActiveFilter ? "filtered" : "unfiltered");
 
   const isSidebarOpen = writable(false);
 </script>
