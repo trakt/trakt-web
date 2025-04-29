@@ -1,4 +1,4 @@
-import type { Filter } from '$lib/features/filters/models/Filter.ts';
+import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
@@ -6,7 +6,7 @@ import { genreOptionSchema } from '@trakt/api';
 
 const GENRE_FILTER: Filter = {
   label: m.genre(),
-  key: 'genres',
+  key: FilterKey.Genres,
   type: 'list',
   options: genreOptionSchema.options
     .map((genre) => ({
@@ -18,14 +18,14 @@ const GENRE_FILTER: Filter = {
 
 const IGNORE_WATCHED_FILTER: Filter = {
   label: m.ignore_watched(),
-  key: 'ignore_watched',
+  key: FilterKey.IgnoreWatched,
   type: 'toggle',
   defaultValue: 'true',
 };
 
 const IGNORE_WATCHLISTED_FILTER: Filter = {
   label: m.ignore_watchlisted(),
-  key: 'ignore_watchlisted',
+  key: FilterKey.IgnoreWatchlisted,
   type: 'toggle',
   defaultValue: 'true',
 };
