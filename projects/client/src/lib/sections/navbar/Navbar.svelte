@@ -114,14 +114,14 @@
       </RenderFor>
       <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
         <Button
-          href={UrlBuilder.watchlist()}
-          label={m.navbar_link_watchlist_label()}
+          href={UrlBuilder.lists.user()}
+          label={m.navbar_link_lists_label()}
           style="underlined"
           variant="primary"
           color="purple"
           navigationType={DpadNavigationType.Item}
         >
-          {m.navbar_link_watchlist()}
+          {m.navbar_link_lists()}
         </Button>
       </RenderFor>
       <RenderFor audience="public">

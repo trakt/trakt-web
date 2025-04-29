@@ -29,8 +29,7 @@
   {type}
   filter={$filterMap}
   {useList}
-  urlBuilder={(params) =>
-    `${UrlBuilder.watchlistPage(params)}?status=${status}`}
+  urlBuilder={(params) => UrlBuilder.lists.user({ ...params, status })}
 >
   {#snippet item(media)}
     <WatchlistItem {type} {media} />

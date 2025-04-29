@@ -8,6 +8,7 @@ type TypeParams = {
 type WellKnownQueryParams = {
   page?: number;
   watch_window?: number;
+  status?: string;
 };
 
 type UrlBuilderParams = TypeParams & WellKnownQueryParams;
@@ -18,6 +19,7 @@ function sanitizeParams(
   return {
     page: params.page,
     watch_window: params.watch_window,
+    status: params.status,
   };
 }
 
@@ -28,9 +30,9 @@ const mediaDrilldownFactory =
   };
 
 const categoryDrilldownFactory =
-  (category: string) => ({ type, page }: UrlBuilderParams) => {
+  (category: string) => ({ type, ...params }: UrlBuilderParams) => {
     const baseUrl = `/${category}/${type}s`;
-    return baseUrl + buildParamString({ page });
+    return baseUrl + buildParamString(sanitizeParams(params));
   };
 
 export const UrlBuilder = {
@@ -44,9 +46,6 @@ export const UrlBuilder = {
   },
   watched: (params: UrlBuilderParams) => {
     return categoryDrilldownFactory('watched')(params);
-  },
-  watchlistPage(params: UrlBuilderParams) {
-    return categoryDrilldownFactory('watchlist')(params);
   },
   trending(params: UrlBuilderParams) {
     return mediaDrilldownFactory('trending')(params);
@@ -98,6 +97,13 @@ export const UrlBuilder = {
   lists: {
     official: (id: number, type?: MediaType) =>
       `/lists/official/${id}?type=${type}`,
+    user: (params?: UrlBuilderParams) => {
+      if (!params) {
+        return '/lists/user';
+      }
+
+      return categoryDrilldownFactory('lists/user')(params);
+    },
   },
   app: {
     android: () => 'https://trakt.tv/a/trakt-android',
@@ -105,7 +111,6 @@ export const UrlBuilder = {
   },
   github: () => 'https://github.com/trakt/trakt-lite',
   vip: () => 'https://trakt.tv/vip',
-  watchlist: () => '/watchlist',
   og: {
     yearToDate: (slug: string, year: number) =>
       `https://trakt.tv/users/${slug}/year/${year}`,
