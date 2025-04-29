@@ -9,6 +9,5 @@ export type FilterParams = DeepPartial<{
     ignore_watched: boolean;
     ignore_watchlisted: boolean;
     watch_window: number;
-    min_year: number;
   };
 }>;
