@@ -3,7 +3,11 @@ type FilterOption = {
   value: string;
 };
 
-export type FilterKey = 'genres' | 'ignore_watched' | 'ignore_watchlisted';
+export enum FilterKey {
+  Genres = 'genres',
+  IgnoreWatched = 'ignore_watched',
+  IgnoreWatchlisted = 'ignore_watchlisted',
+}
 
 type BaseFilter = {
   key: FilterKey;
