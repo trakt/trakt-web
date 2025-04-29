@@ -61,7 +61,9 @@
         <CloseIcon />
       </ActionButton>
     </div>
-    {@render children()}
+    <div class="trakt-sidebar-content">
+      {@render children()}
+    </div>
   </div>
 {/if}
 
@@ -118,5 +120,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .trakt-sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+
+    overflow-y: auto;
   }
 </style>
