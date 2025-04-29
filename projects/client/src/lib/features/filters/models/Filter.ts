@@ -1,4 +1,4 @@
-type FilterOption = {
+export type FilterOption = {
   label: string;
   value: string;
 };
@@ -8,6 +8,7 @@ export enum FilterKey {
   IgnoreWatched = 'ignore_watched',
   IgnoreWatchlisted = 'ignore_watchlisted',
   Streaming = 'watchnow',
+  Decade = 'years',
 }
 
 type BaseFilter = {

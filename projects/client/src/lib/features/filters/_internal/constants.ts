@@ -1,3 +1,4 @@
+import { generateDecadeOptions } from '$lib/features/filters/_internal/generateDecadeOptions.ts';
 import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
@@ -14,6 +15,13 @@ const GENRE_FILTER: Filter = {
       value: genre,
     }))
     .sort((a, b) => a.label.localeCompare(b.label, languageTag())),
+};
+
+const DECADE_FILTER: Filter = {
+  label: m.decade(),
+  key: FilterKey.Decade,
+  type: 'list',
+  options: generateDecadeOptions(),
 };
 
 const STREAMING_FILTER: Filter = {
@@ -43,6 +51,7 @@ const IGNORE_WATCHLISTED_FILTER: Filter = {
 export const FILTERS = [
   GENRE_FILTER,
   STREAMING_FILTER,
+  DECADE_FILTER,
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;
