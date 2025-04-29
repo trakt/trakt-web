@@ -1,6 +1,6 @@
+import { FilterKey } from '$lib/features/filters/models/Filter.ts';
+
 export const WHITE_LISTED_PARAMS = [
-  'genres',
   'navigation',
-  'ignore_watched',
-  'ignore_watchlisted',
+  ...Object.values(FilterKey),
 ];
