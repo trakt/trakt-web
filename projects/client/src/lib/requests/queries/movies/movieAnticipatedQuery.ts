@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -37,8 +38,6 @@ const movieAnticipatedRequest = (
       query: {
         extended: 'full,images',
         ignore_collected: true,
-        ignore_watchlisted: true,
-        ignore_watched: true,
         page,
         limit,
         ...filter,
@@ -51,7 +50,13 @@ export const movieAnticipatedQuery = defineQuery({
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
   ],
-  dependencies: (params) => [params.limit, params.page, params.filter?.genres],
+  dependencies: (
+    params,
+  ) => [
+    params.limit,
+    params.page,
+    ...getGlobalFilterDependencies(params),
+  ],
   request: movieAnticipatedRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToAnticipatedMovie),
