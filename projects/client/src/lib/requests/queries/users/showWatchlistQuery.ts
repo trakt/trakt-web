@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToShowListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
@@ -56,7 +57,12 @@ export const showWatchlistQuery = defineQuery({
   ],
   dependencies: (
     params: ShowWatchlistParams,
-  ) => [params.sort, params.limit, params.page, params.filter?.genres],
+  ) => [
+    params.sort,
+    params.limit,
+    params.page,
+    ...getGlobalFilterDependencies(params),
+  ],
   request: watchlistRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToShowListItem),

@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
@@ -65,7 +66,7 @@ export const listItemsQuery = defineQuery({
     params.limit,
     params.page,
     params.type,
-    params.filter?.genres,
+    ...getGlobalFilterDependencies(params),
   ],
   request: userListItemsRequest,
   mapper: (response) => ({
