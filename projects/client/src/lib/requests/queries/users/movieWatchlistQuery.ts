@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -50,7 +51,12 @@ export const movieWatchlistQuery = defineQuery({
   ],
   dependencies: (
     params: MovieWatchlistParams,
-  ) => [params.sort, params.limit, params.page, params.filter?.genres],
+  ) => [
+    params.sort,
+    params.limit,
+    params.page,
+    ...getGlobalFilterDependencies(params),
+  ],
   request: watchlistRequest,
   mapper: (response) => ({
     entries: response.body.map(mapToMovieListItem),
