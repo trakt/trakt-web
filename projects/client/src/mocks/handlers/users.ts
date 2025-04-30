@@ -14,6 +14,7 @@ import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalLi
 import { RatedShowsResponseMock } from '$mocks/data/users/response/RatedShowsResponseMock.ts';
 import { EpisodeActivityHistoryResponseMock } from '../data/users/response/EpisodeActivityHistoryResponseMock.ts';
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
+import { FilterResponseMock } from '../data/users/response/FilterResponseMock.ts';
 import { HiddenShowProgressResponseMock } from '../data/users/response/HiddenShowProgressResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
@@ -119,6 +120,14 @@ export const users = [
     }/items/movie*`,
     () => {
       return HttpResponse.json(ListedMoviesResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/users/saved_filters/:section',
+    (req) => {
+      return HttpResponse.json(
+        FilterResponseMock.filter((f) => f.section === req.params.section),
+      );
     },
   ),
 ];

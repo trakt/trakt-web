@@ -10,7 +10,7 @@ export type DefineQueryProps<
   TOutput extends ZodType,
   TRequestParams extends ApiParams,
 > = {
-  key: string;
+  key: string | ((params: TRequestParams) => string);
   invalidations: InvalidateActionOptions[];
   dependencies: Dependency[] | ((params: TRequestParams) => Dependency[]);
   request: RequestDefinition<TInput, TRequestParams>;
