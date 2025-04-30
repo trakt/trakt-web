@@ -60,6 +60,7 @@ module.exports = {
         'layout',
         'link',
         'list',
+        'smart-list',
         'mir',
         'movie',
         'msw',

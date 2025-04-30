@@ -57,12 +57,15 @@ export function defineQuery<
     ...params
   }: DefineQueryProps<TInput, TOutput, TRequestParams>,
 ) {
-  const key = queryId(params.key);
   const hash = schemaId(monitor(zodToHash, `${params.key} hashing`)(schema));
 
   return (
     requestParams: TRequestParams = {} as TRequestParams,
   ): CreateQueryOptions<z.infer<TOutput>, TError> => {
+    const key = queryId(
+      typeof params.key === 'function' ? params.key(requestParams) : params.key,
+    );
+
     const resolved = Array.isArray(params.dependencies)
       ? params.dependencies
       : params.dependencies(requestParams);
