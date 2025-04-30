@@ -43,29 +43,28 @@
 
   .trakt-card[data-navigation-type="dpad"] {
     &:has(:global(.trakt-link)) {
-      /* TODO: this is broken for personcards now... */
-      transform: scale(0.95);
-      transition: none;
-
-      :global(.trakt-card-cover)::after {
-        transition: var(--transition-increment) ease-in;
-        transition-property: outline, outline-offset;
-        content: "";
+      .trakt-card-content {
+        transform: scale(0.95);
+        /* To compensate that we're scaling a non 1:1 aspect ratio element */
+        padding-top: var(--ni-1);
+        box-sizing: border-box;
       }
 
       &:focus-visible {
-        transition: transform var(--transition-increment) ease-in;
-        transform: scale(1);
+        &::after {
+          content: "";
 
-        :global(.trakt-card-cover)::after {
           position: absolute;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
-          outline: var(--border-thickness-s) solid var(--color-link-active);
-          border-radius: var(--border-radius-m);
-          outline-offset: calc(-1 * var(--border-thickness-s));
+
+          width: var(--width-card);
+          height: var(--height-card);
+
+          outline: var(--border-thickness-xs) solid var(--color-link-active);
+          outline-offset: calc(-1 * var(--border-thickness-xs));
+
+          border-radius: var(--border-radius-l);
         }
       }
     }
