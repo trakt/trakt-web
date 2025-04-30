@@ -1,6 +1,6 @@
-import type { ShowTranslationResponse } from '@trakt/api';
+import type { TranslationResponse } from '@trakt/api';
 
-export const ShowSiloLanguageResponseMock: ShowTranslationResponse = [
+export const ShowSiloLanguageResponseMock: TranslationResponse = [
   {
     'title': null,
     'overview':

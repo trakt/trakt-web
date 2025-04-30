@@ -5,7 +5,7 @@ import type {
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { MovieTranslationResponse } from '@trakt/api';
+import type { TranslationResponse } from '@trakt/api';
 import { type MediaIntl, MediaIntlSchema } from '../../models/MediaIntl.ts';
 
 type MovieIntlParams = {
@@ -15,7 +15,7 @@ type MovieIntlParams = {
 } & ApiParams;
 
 function mapMovieIntlResponse(
-  translation?: MovieTranslationResponse[0],
+  translation?: TranslationResponse[0],
 ): MediaIntl | undefined {
   if (!translation) {
     return undefined;
