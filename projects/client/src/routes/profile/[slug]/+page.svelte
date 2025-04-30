@@ -8,7 +8,7 @@
   import { DEFAULT_COVER, DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { useProfile } from "./useProfile";
 
-  const { user, isLoading } = useProfile(page.params.slug);
+  const { user, isLoading } = $derived(useProfile(page.params.slug));
 
   const title = $derived(
     $user?.username
