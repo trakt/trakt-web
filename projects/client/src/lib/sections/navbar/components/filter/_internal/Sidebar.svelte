@@ -83,6 +83,7 @@
 
     width: var(--sidebar-size);
     padding: var(--ni-16);
+    padding-bottom: calc(var(--ni-16) + env(safe-area-inset-bottom, 0));
 
     background: color-mix(
       in srgb,
