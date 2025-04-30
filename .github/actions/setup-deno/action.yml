@@ -1,0 +1,34 @@
+name: Setup Deno Environment
+description: Prepares a Deno development environment with caching and dependencies
+
+inputs:
+  deno-version:
+    description: 'Deno version to install'
+    required: false
+    default: 'v2.x'
+
+runs:
+  using: composite
+  steps:
+    - name: Secure the Evidence aka Checkout Code
+      id: checkout
+      uses: actions/checkout@v4
+
+    - name: Summon the Digital Oracle aka Install Deno
+      uses: denoland/setup-deno@v2
+      with:
+        deno-version: ${{ inputs.deno-version }}
+
+    - name: The Vault of Memories aka Cache Deno Dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/deno
+          ~/.deno
+        key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.json', '**/deno.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-deno-
+
+    - name: Gather the Tools aka Install Dependencies
+      shell: bash
+      run: 'deno task install'
