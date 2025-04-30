@@ -62,7 +62,7 @@ export const showStreamingQuery = defineQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params),
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: showStreamingRequest,
   mapper: (response) => ({

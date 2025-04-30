@@ -1,19 +1,25 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
+import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependencies.ts';
+import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
-import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
-type MoviePopularParams = PaginationParams & ApiParams & FilterParams;
+type MoviePopularParams =
+  & PaginationParams
+  & ApiParams
+  & FilterParams
+  & SearchParams;
 
 const moviePopularRequest = (
-  { fetch, limit, page, filter }: MoviePopularParams,
+  { fetch, limit, page, filter, search }: MoviePopularParams,
 ) =>
   api({ fetch })
     .movies
@@ -24,6 +30,7 @@ const moviePopularRequest = (
         page,
         limit,
         ...filter,
+        ...search,
       },
     });
 
@@ -38,7 +45,8 @@ export const moviePopularQuery = defineQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params),
+    ...getGlobalFilterDependencies(params.filter),
+    ...getRecordDependencies(params.search),
   ],
   request: moviePopularRequest,
   mapper: (response) => ({

@@ -2,6 +2,7 @@ import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
 import {
   type PopularShow,
@@ -17,17 +18,12 @@ type PopularListStoreProps =
     type: MediaType;
   }
   & PaginationParams
-  & FilterParams;
+  & FilterParams
+  & SearchParams;
 
 function typeToQuery(
-  { type, limit, page, filter }: PopularListStoreProps,
+  { type, ...params }: PopularListStoreProps,
 ) {
-  const params = {
-    limit,
-    page,
-    filter,
-  };
-
   switch (type) {
     case 'movie':
       return moviePopularQuery(params);

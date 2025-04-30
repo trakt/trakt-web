@@ -10,9 +10,10 @@
     title: string;
     drilldownLabel: string;
     type: MediaType;
+    search?: Record<string, string>;
   };
 
-  const { title, drilldownLabel, type }: TrendingListProps = $props();
+  const { title, drilldownLabel, type, search }: TrendingListProps = $props();
   const { filterMap } = useFilter();
 </script>
 
@@ -22,8 +23,16 @@
   {drilldownLabel}
   {type}
   filter={$filterMap}
-  useList={useAnticipatedList}
-  urlBuilder={UrlBuilder.anticipated}
+  useList={(params) =>
+    useAnticipatedList({
+      ...params,
+      search,
+    })}
+  urlBuilder={(params) =>
+    UrlBuilder.anticipated({
+      ...params,
+      search,
+    })}
 >
   {#snippet item(media)}
     <AnticipatedListItem {type} {media} />

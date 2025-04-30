@@ -388,5 +388,6 @@
   "watchnow_favorites_only": "Solo favoritos",
   "watchnow_any_service": "En cualquier plataforma",
   "decade": "Década",
-  "ratings": "Calificaciones"
+  "ratings": "Calificaciones",
+  "view_all_items_in": "Ver todos en {title}"
 }

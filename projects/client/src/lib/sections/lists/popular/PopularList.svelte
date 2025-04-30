@@ -10,9 +10,10 @@
     title: string;
     drilldownLabel: string;
     type: MediaType;
+    search?: Record<string, string>;
   };
 
-  const { title, drilldownLabel, type }: PopularListProps = $props();
+  const { title, drilldownLabel, type, search }: PopularListProps = $props();
   const { filterMap } = useFilter();
 </script>
 
@@ -22,8 +23,16 @@
   {drilldownLabel}
   {type}
   filter={$filterMap}
-  useList={usePopularList}
-  urlBuilder={UrlBuilder.popular}
+  useList={(params) =>
+    usePopularList({
+      ...params,
+      search,
+    })}
+  urlBuilder={(params) =>
+    UrlBuilder.popular({
+      ...params,
+      search,
+    })}
 >
   {#snippet item(media)}
     <PopularListItem {type} {media} />

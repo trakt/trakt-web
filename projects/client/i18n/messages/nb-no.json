@@ -388,5 +388,6 @@
   "watchnow_favorites_only": "Kun favoritter",
   "watchnow_any_service": "På alle tjenester",
   "decade": "Tiår",
-  "ratings": "Vurderinger"
+  "ratings": "Vurderinger",
+  "view_all_items_in": "Vis alle i {title}"
 }

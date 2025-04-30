@@ -40,7 +40,7 @@ export const recommendedMoviesQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
-    ...getGlobalFilterDependencies(params),
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: recommendedMoviesRequest,
   mapper: (response) => response.body.map(mapToMovieEntry),

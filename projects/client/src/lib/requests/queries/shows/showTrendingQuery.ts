@@ -1,6 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
-import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -10,8 +9,11 @@ import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts'
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowTrendingResponse } from '@trakt/api';
 import { z } from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import { getRecordDependencies } from '../../_internal/getRecordDependencies.ts';
 import { mapToEpisodeCount } from '../../_internal/mapToEpisodeCount.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
+import type { SearchParams } from '../../models/SearchParams.ts';
 import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 export const TrendingShowSchema = ShowEntrySchema
@@ -21,7 +23,11 @@ export const TrendingShowSchema = ShowEntrySchema
   });
 export type TrendingShow = z.infer<typeof TrendingShowSchema>;
 
-type ShowTrendingParams = PaginationParams & ApiParams & FilterParams;
+type ShowTrendingParams =
+  & PaginationParams
+  & ApiParams
+  & FilterParams
+  & SearchParams;
 
 function mapToTrendingShow({
   watchers,
@@ -35,7 +41,7 @@ function mapToTrendingShow({
 }
 
 const showTrendingRequest = (
-  { fetch, limit, page, filter }: ShowTrendingParams,
+  { fetch, limit, page, filter, search }: ShowTrendingParams,
 ) => {
   return api({ fetch })
     .shows
@@ -46,6 +52,7 @@ const showTrendingRequest = (
         page,
         limit,
         ...filter,
+        ...search,
       },
     });
 };
@@ -62,7 +69,8 @@ export const showTrendingQuery = defineQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params),
+    ...getGlobalFilterDependencies(params.filter),
+    ...getRecordDependencies(params.search),
   ],
   request: showTrendingRequest,
   mapper: (response) => ({

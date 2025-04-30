@@ -3,6 +3,7 @@
 
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import SmartListRenderer from "$lib/sections/lists/smart/SmartListRenderer.svelte";
   import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
@@ -14,6 +15,7 @@
   title={m.navbar_link_lists()}
 >
   <TraktPageCoverSetter />
+
   <WatchList
     title={m.watchlist_movies()}
     drilldownLabel={m.view_all_watchlist_movies()}
@@ -30,4 +32,7 @@
 
   <PersonalLists slug="me" type="personal" variant="preview" />
   <PersonalLists slug="me" type="collaboration" variant="summary" />
+
+  <SmartListRenderer type="movie" />
+  <SmartListRenderer type="show" />
 </TraktPage>

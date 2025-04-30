@@ -55,7 +55,7 @@ export const movieWatchlistQuery = defineQuery({
     params.sort,
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params),
+    ...getGlobalFilterDependencies(params.filter),
   ],
   request: watchlistRequest,
   mapper: (response) => ({

@@ -388,5 +388,6 @@
   "watchnow_favorites_only": "Alleen favorieten",
   "watchnow_any_service": "Op elke dienst",
   "decade": "Decennium",
-  "ratings": "Beoordelingen"
+  "ratings": "Beoordelingen",
+  "view_all_items_in": "Bekijk alle items in {title}"
 }

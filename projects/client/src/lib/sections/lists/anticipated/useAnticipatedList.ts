@@ -1,6 +1,7 @@
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import {
   type AnticipatedMovie,
   movieAnticipatedQuery,
@@ -16,17 +17,12 @@ type AnticipatedListStoreProps =
     type: MediaType;
   }
   & PaginationParams
-  & FilterParams;
+  & FilterParams
+  & SearchParams;
 
 function typeToQuery(
-  { type, limit, page, filter }: AnticipatedListStoreProps,
+  { type, ...params }: AnticipatedListStoreProps,
 ) {
-  const params = {
-    limit,
-    page,
-    filter,
-  };
-
   switch (type) {
     case 'movie':
       return movieAnticipatedQuery(params);
