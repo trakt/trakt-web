@@ -3,6 +3,7 @@
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
@@ -49,6 +50,16 @@
 </script>
 
 {#snippet mediaActions(size: "small" | "normal" = "normal")}
+  <RenderFor audience="authenticated" navigation="dpad">
+    {#if streamOn?.preferred}
+      <StreamingServiceButton
+        mediaTitle={episode.title}
+        service={streamOn.preferred}
+        style="normal"
+        size="normal"
+      />
+    {/if}
+  </RenderFor>
   <MarkAsWatchedAction
     style="normal"
     {type}
