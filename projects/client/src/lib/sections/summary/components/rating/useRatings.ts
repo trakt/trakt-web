@@ -7,7 +7,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { mapRatingToSimpleRating } from '$lib/sections/summary/components/rating/mapRatingToSimpleRating.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import type { RatingsRequest } from '@trakt/api';
+import type { RatingsSyncRequest } from '@trakt/api';
 import { derived, get, writable } from 'svelte/store';
 import { SIMPLE_RATINGS } from './constants.ts';
 
@@ -22,7 +22,7 @@ function toRatingPayload(
   type: RateableType,
   id: number,
   simpleRating: SimpleRating,
-): RatingsRequest {
+): RatingsSyncRequest {
   const ratingPayload = {
     ids: { trakt: id },
     rating: SIMPLE_RATINGS[simpleRating],

@@ -14,6 +14,7 @@ const showSeasonEpisodesRequest = (
 ) =>
   api({ fetch })
     .shows
+    .season
     .episodes({
       params: {
         id: slug,

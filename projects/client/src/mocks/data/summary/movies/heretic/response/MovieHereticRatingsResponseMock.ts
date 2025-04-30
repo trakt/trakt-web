@@ -1,6 +1,6 @@
-import type { MovieRatingsResponse } from '@trakt/api';
+import type { RatingsResponse } from '@trakt/api';
 
-export const MovieHereticRatingsResponseMock: MovieRatingsResponse = {
+export const MovieHereticRatingsResponseMock: RatingsResponse = {
   'trakt': {
     'rating': 7.22561,
     'votes': 3803,

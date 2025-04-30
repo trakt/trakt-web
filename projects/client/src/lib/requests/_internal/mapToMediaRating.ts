@@ -1,11 +1,9 @@
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import type { MovieRatingsResponse, ShowRatingsResponse } from '@trakt/api';
+import type { RatingsResponse } from '@trakt/api';
 import type { MediaRating } from '../models/MediaRating.ts';
 
-type RatingResponse = MovieRatingsResponse | ShowRatingsResponse;
-
 export function mapToMediaRating(
-  ratings: RatingResponse,
+  ratings: RatingsResponse,
 ): MediaRating {
   const mapImdbRating = () => {
     const { imdb } = ratings;

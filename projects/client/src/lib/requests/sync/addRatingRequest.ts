@@ -1,8 +1,8 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import type { RatingsRequest } from '@trakt/api';
+import type { RatingsSyncRequest } from '@trakt/api';
 
 type AddRatingParams = {
-  body: RatingsRequest;
+  body: RatingsSyncRequest;
 } & ApiParams;
 
 export function addRatingRequest(
