@@ -40,5 +40,7 @@
   {slug}
 />
 
-<PersonalLists {slug} type="personal" variant="preview" />
-<PersonalLists {slug} type="collaboration" variant="summary" />
+{#if slug !== "me"}
+  <PersonalLists {slug} type="personal" variant="preview" />
+  <PersonalLists {slug} type="collaboration" variant="summary" />
+{/if}

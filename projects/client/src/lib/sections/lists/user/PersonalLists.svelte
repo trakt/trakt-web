@@ -13,7 +13,9 @@
   }: { type: PersonalListType; variant: "summary" | "preview"; slug: string } =
     $props();
 
-  const { lists, isLoading } = usePersonalListsSummary({ type, slug });
+  const { lists, isLoading } = $derived(
+    usePersonalListsSummary({ type, slug }),
+  );
 </script>
 
 <!-- TODO unhide when lists are actionable -->

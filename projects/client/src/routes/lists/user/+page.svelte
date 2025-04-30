@@ -3,6 +3,7 @@
 
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
+  import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
@@ -26,4 +27,7 @@
     type="show"
     status="all"
   />
+
+  <PersonalLists slug="me" type="personal" variant="preview" />
+  <PersonalLists slug="me" type="collaboration" variant="summary" />
 </TraktPage>
