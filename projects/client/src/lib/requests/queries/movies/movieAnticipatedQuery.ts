@@ -1,11 +1,13 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
+import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependencies.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
+import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { MovieAnticipatedResponse } from '@trakt/api';
 import { z } from 'zod';
@@ -17,7 +19,11 @@ export const AnticipatedMovieSchema = MovieEntrySchema.extend({
 });
 export type AnticipatedMovie = z.infer<typeof AnticipatedMovieSchema>;
 
-type MovieAnticipatedParams = PaginationParams & ApiParams & FilterParams;
+type MovieAnticipatedParams =
+  & PaginationParams
+  & ApiParams
+  & FilterParams
+  & SearchParams;
 
 function mapToAnticipatedMovie({
   list_count,
@@ -30,7 +36,7 @@ function mapToAnticipatedMovie({
 }
 
 const movieAnticipatedRequest = (
-  { fetch, limit, page, filter }: MovieAnticipatedParams,
+  { fetch, limit, page, filter, search }: MovieAnticipatedParams,
 ) =>
   api({ fetch })
     .movies
@@ -41,6 +47,7 @@ const movieAnticipatedRequest = (
         page,
         limit,
         ...filter,
+        ...search,
       },
     });
 
@@ -55,7 +62,8 @@ export const movieAnticipatedQuery = defineQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params),
+    ...getGlobalFilterDependencies(params.filter),
+    ...getRecordDependencies(params.search),
   ],
   request: movieAnticipatedRequest,
   mapper: (response) => ({

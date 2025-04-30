@@ -73,3 +73,5 @@ export const PAGE_UPPER_LIMIT = 3;
  */
 export const RECOMMENDED_DEFAULT_WATCH_WINDOW = 25;
 export const RECOMMENDED_DEFAULT_MIN_YEAR = 1990;
+
+export const DEFAULT_SMART_LIST_LIMIT = 10;

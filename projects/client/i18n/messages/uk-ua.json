@@ -388,5 +388,6 @@
   "watchnow_favorites_only": "Тільки улюблене",
   "watchnow_any_service": "На будь-якому сервісі",
   "decade": "Десятиліття",
-  "ratings": "Оцінки"
+  "ratings": "Оцінки",
+  "view_all_items_in": "Переглянути все у {title}"
 }

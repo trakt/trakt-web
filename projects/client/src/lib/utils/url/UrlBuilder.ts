@@ -1,4 +1,5 @@
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { SearchParams } from '../../requests/models/SearchParams.ts';
 import { buildParamString } from './buildParamString.ts';
 
 type TypeParams = {
@@ -9,24 +10,51 @@ type WellKnownQueryParams = {
   page?: number;
   watch_window?: number;
   status?: string;
+  search?: string;
 };
 
-type UrlBuilderParams = TypeParams & WellKnownQueryParams;
+type UrlBuilderParams =
+  & TypeParams
+  & Omit<WellKnownQueryParams, 'search'>
+  & SearchParams;
+
+function encodeRecord(
+  params?: Record<string, string | number | boolean>,
+): string | undefined {
+  if (!params) {
+    return undefined;
+  }
+
+  return encodeURIComponent(JSON.stringify(params));
+}
+
+export function decodeRecord(
+  params: string,
+): Record<string, string | number | boolean> {
+  try {
+    return JSON.parse(decodeURIComponent(params));
+  } catch (_) {
+    return {};
+  }
+}
 
 function sanitizeParams(
-  params: WellKnownQueryParams,
+  params: Omit<WellKnownQueryParams, 'search'> & SearchParams,
 ): WellKnownQueryParams {
   return {
     page: params.page,
     watch_window: params.watch_window,
     status: params.status,
+    search: encodeRecord(params.search),
   };
 }
 
 const mediaDrilldownFactory =
   (category: string) => ({ type, ...params }: UrlBuilderParams) => {
     const baseUrl = `/${type}s/${category}`;
-    return baseUrl + buildParamString(sanitizeParams(params));
+    return baseUrl + buildParamString({
+      ...sanitizeParams(params),
+    });
   };
 
 const categoryDrilldownFactory =
