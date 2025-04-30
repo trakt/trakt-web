@@ -18,17 +18,25 @@
   <Redirect to={UrlBuilder.home()} />
 </RenderFor>
 
-<TraktPage audience="public" title={m.sign_in()} image={DEFAULT_SHARE_COVER}>
+<TraktPage
+  audience="public"
+  title={m.sign_in()}
+  image={DEFAULT_SHARE_COVER}
+  --authentication-height="var(--ni-320)"
+>
   <TraktPageCoverSetter />
 
-  <div use:authorization>
+  <div use:authorization class="trakt-authorization-container">
     {#if $activation.state === "failed"}
       <RetryAuth />
     {/if}
 
     {#if $activation.state === "polling"}
       <div class="trakt-authorization-codes">
-        <QrCode data={`${$activation.url}/${$activation.code}`} />
+        <QrCode
+          data={`${$activation.url}/${$activation.code}`}
+          --qr-code-size="var(--authentication-height)"
+        />
         <ManualCode url={$activation.url} code={$activation.code} />
       </div>
     {/if}
@@ -36,6 +44,10 @@
 </TraktPage>
 
 <style>
+  .trakt-authorization-container {
+    height: var(--authentication-height);
+  }
+
   .trakt-authorization-codes {
     display: flex;
     align-items: center;
