@@ -99,10 +99,10 @@ export const UrlBuilder = {
       `/lists/official/${id}?type=${type}`,
     user: (params?: UrlBuilderParams) => {
       if (!params) {
-        return '/lists/user';
+        return '/users/me/lists';
       }
 
-      return categoryDrilldownFactory('lists/user')(params);
+      return categoryDrilldownFactory('users/me/lists')(params);
     },
   },
   app: {
