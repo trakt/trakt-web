@@ -97,6 +97,7 @@
         size="normal"
       />
     {/if}
+    <WatchlistAction {...watchlistProps} />
   </RenderFor>
   <MarkAsWatchedAction {...markAsWatchedProps} />
   <RenderFor audience="authenticated" navigation="dpad">
