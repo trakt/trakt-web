@@ -61,13 +61,8 @@ jobs:
       - name: Secure the Evidence aka Checkout Code
         uses: actions/checkout@v4
 
-      - name: Summon the Digital Oracle aka Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-
-      - name: Gather the Tools aka Install Dependencies
-        run: 'deno task install'
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
 
       - name: Probe the Client's Mind aka Run Tests
         working-directory: projects/client
@@ -141,13 +136,8 @@ jobs:
       - name: Secure the Evidence aka Checkout Code
         uses: actions/checkout@v4
 
-      - name: Summon the Digital Oracle aka Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-
-      - name: Gather the Tools aka Install Dependencies
-        run: 'deno task install'
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
 
       - name: Weaving the Digital Tapestry aka Build
         working-directory: projects/client
