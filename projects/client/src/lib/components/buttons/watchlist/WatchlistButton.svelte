@@ -2,6 +2,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import ActionButton from "../ActionButton.svelte";
   import { useDangerButton } from "../_internal/useDangerButton";
   import { WatchlistButtonIntlProvider } from "./WatchlistButtonIntlProvider";
@@ -35,12 +36,18 @@
 </script>
 
 {#if type === "normal"}
-  <Button {...commonProps} {...props}>
-    {i18n.text({ isWatchlisted, title })}
-    {#snippet icon()}
-      <WatchlistIcon size="small" {state} />
-    {/snippet}
-  </Button>
+  <div data-dpad-navigation={DpadNavigationType.List} style="display: contents">
+    <Button
+      {...commonProps}
+      {...props}
+      navigationType={DpadNavigationType.Item}
+    >
+      {i18n.text({ isWatchlisted, title })}
+      {#snippet icon()}
+        <WatchlistIcon size="small" {state} />
+      {/snippet}
+    </Button>
+  </div>
 {/if}
 
 {#if type === "action"}
