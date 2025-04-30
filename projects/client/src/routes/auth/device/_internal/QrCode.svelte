@@ -31,10 +31,8 @@
 
 <style>
   .trakt-qr-code {
-    :global(svg) {
-      width: var(--ni-320);
-      height: var(--ni-320);
-      color: var(--color-text-primary);
-    }
+    width: var(--qr-code-size);
+    height: var(--qr-code-size);
+    color: var(--color-text-primary);
   }
 </style>
