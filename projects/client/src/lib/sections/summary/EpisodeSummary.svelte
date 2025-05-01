@@ -151,16 +151,18 @@
   </RenderFor>
 </SummaryContainer>
 
-<SummaryContainer>
-  <MediaDetails {episode} {crew} type="episode" />
+<RenderFor audience="all" navigation="default">
+  <SummaryContainer>
+    <MediaDetails {episode} {crew} type="episode" />
 
-  {#if streamOn}
-    <MediaStreamingServices
-      services={streamOn.services}
-      preferred={streamOn.preferred}
-    />
-  {/if}
-</SummaryContainer>
+    {#if streamOn}
+      <MediaStreamingServices
+        services={streamOn.services}
+        preferred={streamOn.preferred}
+      />
+    {/if}
+  </SummaryContainer>
+</RenderFor>
 
 <CastList title={m.actors()} cast={crew.cast} slug={show.slug} />
 
