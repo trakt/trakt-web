@@ -1,4 +1,7 @@
-export const focusAndScrollIntoView = (element?: Element | null) => {
+export const focusAndScrollIntoView = (
+  element?: Element | null,
+  behavior?: ScrollBehavior,
+) => {
   if (!element) return;
   if (!(element instanceof HTMLElement)) return;
 
@@ -6,5 +9,6 @@ export const focusAndScrollIntoView = (element?: Element | null) => {
   element.scrollIntoView({
     block: 'center',
     inline: 'center',
+    behavior: behavior ?? 'instant',
   });
 };
