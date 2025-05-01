@@ -1,6 +1,5 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import YearToDateArrow from "../../../components/icons/YearToDateArrow.svelte";
 
@@ -21,7 +20,7 @@
       <div class="ytd-link-content">
         <h2 class="ytd-year">{currentYear}</h2>
         <div class="ytd-link-details">
-          <h5 class="ytd-label">{m.year_to_date()}</h5>
+          <h5 class="ytd-label">Year to date</h5>
           <YearToDateArrow />
         </div>
       </div>
