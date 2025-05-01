@@ -2,7 +2,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import YearToDateArrow from "./YearToDateArrow.svelte";
+  import YearToDateArrow from "../../../components/icons/YearToDateArrow.svelte";
 
   const { isVip, slug }: { isVip: boolean; slug: string } = $props();
 
