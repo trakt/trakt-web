@@ -10,7 +10,8 @@
   const isAvailableForAudience = $derived(
     audience === "all" ||
       (audience === "authenticated" && $isAuthorized && $user != null) ||
-      (audience === "public" && !$isAuthorized),
+      (audience === "public" && !$isAuthorized) ||
+      (audience === "director" && $isAuthorized && $user?.isDirector),
   );
 </script>
 
