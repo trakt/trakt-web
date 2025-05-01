@@ -389,5 +389,7 @@
   "watchnow_any_service": "På alle tjenester",
   "decade": "Tiår",
   "ratings": "Vurderinger",
-  "view_all_items_in": "Vis alle i {title}"
+  "view_all_items_in": "Vis alle i {title}",
+  "filter_reset_all": "Nullstill alt",
+  "filter_reset_all_label": "Nullstill alle filtre"
 }

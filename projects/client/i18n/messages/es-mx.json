@@ -389,5 +389,7 @@
   "watchnow_any_service": "En cualquier plataforma",
   "decade": "Década",
   "ratings": "Calificaciones",
-  "view_all_items_in": "Ver todos en {title}"
+  "view_all_items_in": "Ver todos en {title}",
+  "filter_reset_all": "Restablecer todo",
+  "filter_reset_all_label": "Restablecer todos los filtros"
 }

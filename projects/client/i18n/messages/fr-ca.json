@@ -389,5 +389,7 @@
   "watchnow_any_service": "On any service",
   "decade": "Décennie",
   "ratings": "Cotes",
-  "view_all_items_in": "Voir tous les titres dans {title}"
+  "view_all_items_in": "Voir tous les titres dans {title}",
+  "filter_reset_all": "Réinitialiser tout",
+  "filter_reset_all_label": "Réinitialiser tous les filtres"
 }

@@ -389,5 +389,7 @@
   "watchnow_any_service": "На будь-якому сервісі",
   "decade": "Десятиліття",
   "ratings": "Оцінки",
-  "view_all_items_in": "Переглянути все у {title}"
+  "view_all_items_in": "Переглянути все у {title}",
+  "filter_reset_all": "Скинути все",
+  "filter_reset_all_label": "Скинути всі фільтри"
 }
