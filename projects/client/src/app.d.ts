@@ -147,7 +147,7 @@ declare global {
   };
 
   type AudienceProps = {
-    audience: 'authenticated' | 'public' | 'all' | 'director';
+    audience: 'authenticated' | 'public' | 'all' | 'director' | 'vip';
   };
 
   export type ButtonProps =
