@@ -389,5 +389,7 @@
   "watchnow_any_service": "Op elke dienst",
   "decade": "Decennium",
   "ratings": "Beoordelingen",
-  "view_all_items_in": "Bekijk alle items in {title}"
+  "view_all_items_in": "Bekijk alle items in {title}",
+  "filter_reset_all": "Alles resetten",
+  "filter_reset_all_label": "Alle filters resetten"
 }

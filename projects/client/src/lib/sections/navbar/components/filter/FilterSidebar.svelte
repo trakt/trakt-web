@@ -2,6 +2,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Writable } from "svelte/store";
+  import ResetAllButton from "./_internal/ResetAllButton.svelte";
   import Sidebar from "./_internal/Sidebar.svelte";
   import ListFilter from "./filters/ListFilter.svelte";
   import RatingsFilter from "./filters/RatingsFilter.svelte";
@@ -25,4 +26,6 @@
       <ToggleFilter {filter} />
     {/if}
   {/each}
+
+  <ResetAllButton />
 </Sidebar>

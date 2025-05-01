@@ -132,6 +132,7 @@
     gap: var(--gap-m);
 
     overflow-y: auto;
+    padding-bottom: var(--ni-8);
   }
 
   .trakt-sidebar-header,

@@ -389,5 +389,7 @@
   "watchnow_any_service": "Навсякъде",
   "decade": "Десетилетие",
   "ratings": "Оценки",
-  "view_all_items_in": "Виж всички в {title}"
+  "view_all_items_in": "Виж всички в {title}",
+  "filter_reset_all": "Нулиране на всичко",
+  "filter_reset_all_label": "Нулиране на всички филтри"
 }
