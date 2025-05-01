@@ -3,6 +3,7 @@ import type { UserSettings } from '$lib/features/auth/queries/currentUserSetting
 export const ExtendedUserMappedMock: UserSettings = {
   'id': 41152,
   'slug': 'tequila_sunset',
+  'token': null,
   'avatar': {
     'url':
       'https://walter-r2.trakt.tv/images/users/014/366/083/avatars/large/disco_cop.png',

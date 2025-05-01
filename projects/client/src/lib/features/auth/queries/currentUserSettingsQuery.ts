@@ -19,6 +19,7 @@ import { api, type ApiParams } from '../../../requests/api.ts';
 export const UserSettingsSchema = z.object({
   id: z.number(),
   slug: z.string(),
+  token: z.string().nullish(),
   name: UserNameSchema,
   about: z.string().optional(),
   location: z.string().optional(),
@@ -74,6 +75,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   return {
     id: user.ids.trakt,
     slug: user.ids.slug,
+    token: account.token,
     name: toUserName(user.name),
     about: user.about,
     location: user.location ?? '',
