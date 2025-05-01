@@ -117,6 +117,8 @@ export const UrlBuilder = {
     getVip: () => 'https://trakt.tv/vip',
     site: () => 'https://trakt.tv',
     status: () => 'https://status.trakt.tv',
+    monthInReview: (slug: string, token: string) =>
+      `https://trakt.tv/users/${slug}/mir?slurm=${token}`,
   },
   login: {
     activate: () => '/auth/device',

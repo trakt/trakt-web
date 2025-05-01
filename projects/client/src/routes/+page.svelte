@@ -9,6 +9,7 @@
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ReleasedList from "$lib/sections/lists/watchlist/ReleasedList.svelte";
   import UnreleasedList from "$lib/sections/lists/watchlist/UnreleasedList.svelte";
+  import MonthInReview from "$lib/sections/month-in-review/MonthInReview.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
 
@@ -20,6 +21,7 @@
   <TraktPageCoverSetter />
 
   <RenderFor audience="authenticated">
+    <MonthInReview />
     <UpNextList />
     <ReleasedList />
     <UpcomingList />
