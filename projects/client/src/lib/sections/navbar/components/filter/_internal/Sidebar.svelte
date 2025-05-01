@@ -72,6 +72,7 @@
 
   .trakt-sidebar {
     --sidebar-size: var(--ni-300);
+    --sidebar-padding: var(--ni-16);
 
     z-index: var(--layer-menu);
     position: fixed;
@@ -82,8 +83,10 @@
     right: 0;
 
     width: var(--sidebar-size);
-    padding: var(--ni-16);
-    padding-bottom: calc(var(--ni-16) + env(safe-area-inset-bottom, 0));
+    padding-top: var(--sidebar-padding);
+    padding-bottom: calc(
+      var(--sidebar-padding) + env(safe-area-inset-bottom, 0)
+    );
 
     background: color-mix(
       in srgb,
@@ -129,5 +132,11 @@
     gap: var(--gap-m);
 
     overflow-y: auto;
+  }
+
+  .trakt-sidebar-header,
+  .trakt-sidebar-content {
+    padding-left: var(--sidebar-padding);
+    padding-right: var(--sidebar-padding);
   }
 </style>
