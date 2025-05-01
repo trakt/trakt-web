@@ -25,6 +25,19 @@ describe('focusAndScrollIntoView', () => {
     expect(mockElement.scrollIntoView).toHaveBeenCalledWith({
       block: 'center',
       inline: 'center',
+      behavior: 'instant',
+    });
+  });
+
+  it('should focus and scroll to the element smoothly', () => {
+    focusAndScrollIntoView(mockElement, 'smooth');
+
+    expect(mockElement.focus).toHaveBeenCalledTimes(1);
+    expect(mockElement.scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(mockElement.scrollIntoView).toHaveBeenCalledWith({
+      block: 'center',
+      inline: 'center',
+      behavior: 'smooth',
     });
   });
 
