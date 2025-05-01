@@ -13,7 +13,7 @@
   const token = current().token;
 </script>
 
-<RenderFor audience="authenticated" navigation="default">
+<RenderFor audience="vip" navigation="default">
   {#if isFirstWeek && token}
     <div class="trakt-month-in-review">
       <MonthInReviewLink slug={current().slug} {token} date={previousMonth} />
