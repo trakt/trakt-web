@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
 
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -33,6 +34,8 @@
   <PersonalLists slug="me" type="personal" variant="preview" />
   <PersonalLists slug="me" type="collaboration" variant="summary" />
 
-  <SmartListRenderer type="movie" />
-  <SmartListRenderer type="show" />
+  <RenderFor audience="director">
+    <SmartListRenderer type="movie" />
+    <SmartListRenderer type="show" />
+  </RenderFor>
 </TraktPage>
