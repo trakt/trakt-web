@@ -19,16 +19,6 @@ runs:
       with:
         deno-version: ${{ inputs.deno-version }}
 
-    - name: The Vault of Memories aka Cache Deno Dependencies
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.cache/deno
-          ~/.deno
-        key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.json', '**/deno.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-deno-
-
     - name: Gather the Tools aka Install Dependencies
       shell: bash
       run: 'deno task install'
