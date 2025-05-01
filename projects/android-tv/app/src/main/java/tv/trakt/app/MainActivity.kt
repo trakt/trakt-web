@@ -2,6 +2,7 @@ package tv.trakt.app
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
@@ -21,7 +22,10 @@ class MainActivity : ComponentActivity() {
             domStorageEnabled = true
             useWideViewPort = true
             loadWithOverviewMode = true
+            layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+            cacheMode = WebSettings.LOAD_NO_CACHE
         }
+        webView.setLayerType(WebView.LAYER_TYPE_HARDWARE, null)
 
         webView.webViewClient = WebViewClient()
         webView.addJavascriptInterface(StreamOnInterface(this), "StreamOnAndroid")
