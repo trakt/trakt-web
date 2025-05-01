@@ -182,15 +182,17 @@
   </RenderFor>
 </SummaryContainer>
 
-<SummaryContainer>
-  <MediaDetails {media} {studios} {crew} {type} />
+<RenderFor audience="all" navigation="default">
+  <SummaryContainer>
+    <MediaDetails {media} {studios} {crew} {type} />
 
-  {#if streamOn}
-    <RenderFor audience="authenticated" navigation="default">
-      <MediaStreamingServices
-        services={streamOn.services}
-        preferred={streamOn.preferred}
-      />
-    </RenderFor>
-  {/if}
-</SummaryContainer>
+    {#if streamOn}
+      <RenderFor audience="authenticated" navigation="default">
+        <MediaStreamingServices
+          services={streamOn.services}
+          preferred={streamOn.preferred}
+        />
+      </RenderFor>
+    {/if}
+  </SummaryContainer>
+</RenderFor>
