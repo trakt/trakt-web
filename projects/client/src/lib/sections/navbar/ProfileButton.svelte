@@ -36,12 +36,10 @@
           src={$user?.avatar?.url ?? ""}
         />
         <RenderFor
-          audience="authenticated"
+          audience="vip"
           device={["tablet-sm", "tablet-lg", "desktop"]}
         >
-          {#if isVip}
-            <VipBadge />
-          {/if}
+          <VipBadge />
         </RenderFor>
       </div>
     {/snippet}
