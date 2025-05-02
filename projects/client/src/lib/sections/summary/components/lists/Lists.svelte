@@ -4,7 +4,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import ListSummaryCard from "$lib/sections/lists/components/list-summary/ListSummaryCard.svelte";
+  import ListSummaryItem from "$lib/sections/lists/components/list-summary/ListSummaryItem.svelte";
   import UserList from "$lib/sections/lists/user/UserList.svelte";
   import { MAX_LISTS } from "./_internal/constants.ts";
   import { useListSummary } from "./useListSummary.ts";
@@ -41,7 +41,7 @@
     --height-list="var(--height-lists-list)"
   >
     {#snippet item(list)}
-      <ListSummaryCard
+      <ListSummaryItem
         {list}
         {type}
         isOfficial={$officialLists.includes(list)}

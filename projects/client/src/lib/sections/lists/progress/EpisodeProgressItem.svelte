@@ -8,7 +8,7 @@
   import RestoreAction from "$lib/sections/media-actions/restore/RestoreAction.svelte";
   import DropAction from "../../media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import EpisodeCard from "../components/EpisodeCard.svelte";
+  import EpisodeItem from "../components/EpisodeItem.svelte";
   import { useUpNextExperiment } from "./useUpNextExperiment";
 
   type UpNextEpisodeProps = {
@@ -35,7 +35,7 @@
 </script>
 
 {#snippet card()}
-  <EpisodeCard {episode} {show} {status} {style} variant="next">
+  <EpisodeItem {episode} {show} {status} {style} variant="next">
     {#snippet popupActions()}
       <RenderFor audience="authenticated">
         <MarkAsWatchedAction
@@ -60,7 +60,7 @@
         {/if}
       </RenderFor>
     {/snippet}
-  </EpisodeCard>
+  </EpisodeItem>
 {/snippet}
 
 {#if style === "summary"}

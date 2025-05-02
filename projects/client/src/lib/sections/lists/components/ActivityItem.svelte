@@ -2,8 +2,8 @@
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
   import type { Snippet } from "svelte";
   import type { HistoryEntry } from "../stores/useRecentlyWatchedList";
-  import EpisodeCard from "./EpisodeCard.svelte";
-  import MediaCard from "./MediaCard.svelte";
+  import EpisodeItem from "./EpisodeItem.svelte";
+  import MediaItem from "./MediaItem.svelte";
 
   type SocialActivityCardProps = {
     activity: SocialActivity | HistoryEntry;
@@ -17,7 +17,7 @@
 </script>
 
 {#if activity.type === "episode"}
-  <EpisodeCard
+  <EpisodeItem
     episode={activity.episode}
     show={activity.show}
     variant="activity"
@@ -28,7 +28,7 @@
 {/if}
 
 {#if activity.type === "movie"}
-  <MediaCard
+  <MediaItem
     media={activity.movie}
     type="movie"
     variant="activity"

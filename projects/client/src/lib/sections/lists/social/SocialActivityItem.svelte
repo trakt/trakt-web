@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
-  import ActivityCard from "../components/ActivityCard.svelte";
+  import ActivityItem from "../components/ActivityItem.svelte";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import UserAvatar from "../components/UserAvatar.svelte";
   import UserProfileLink from "../components/UserProfileLink.svelte";
@@ -21,7 +21,7 @@
 {/snippet}
 
 {#if style === "cover"}
-  <ActivityCard {activity} activityAt={activity.activityAt} {badge} />
+  <ActivityItem {activity} activityAt={activity.activityAt} {badge} />
 {/if}
 
 {#if style === "summary"}
