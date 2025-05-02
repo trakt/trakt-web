@@ -6,6 +6,7 @@
     label,
     innerText,
     color = "purple",
+    navigationType,
     ...props
   }: SwitchProps = $props();
 </script>
@@ -16,6 +17,7 @@
     role="switch"
     data-color={color}
     aria-label={label}
+    data-dpad-navigation={navigationType}
     {...props}
   />
 
