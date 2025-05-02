@@ -5,6 +5,7 @@
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
+  import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
@@ -13,6 +14,7 @@
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/SeasonList.svelte";
+  import VideoList from "../lists/VideoList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -23,6 +25,7 @@
     studios: MediaStudio[];
     crew: MediaCrew;
     seasons: Season[];
+    videos: MediaVideo[];
   };
 
   const {
@@ -35,6 +38,7 @@
     crew,
     seasons,
     streamOn,
+    videos,
   }: ShowSummaryProps = $props();
 
   const { progress } = $derived(useShowProgress(media.slug));
@@ -63,6 +67,8 @@
 </MediaSummary>
 
 <CastList title={m.actors()} cast={crew.cast} slug={media.slug} />
+
+<VideoList slug={media.slug} {videos} />
 
 <SeasonList show={media} {seasons} />
 

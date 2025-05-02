@@ -4,28 +4,28 @@ import { MediaVideoSchema } from '$lib/requests/models/MediaVideo.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaVideo } from '../../_internal/mapToMediaVideo.ts';
 
-type MovieVideosParams = {
+type ShowVideosParams = {
   slug: string;
 } & ApiParams;
 
-const movieVideoRequest = (
-  { fetch, slug }: MovieVideosParams,
+const showVideoRequest = (
+  { fetch, slug }: ShowVideosParams,
 ) =>
   api({ fetch })
-    .movies
+    .shows
     .videos({
       params: {
         id: slug,
       },
     });
 
-export const movieVideosQuery = defineQuery({
-  key: 'movieVideos',
+export const showVideosQuery = defineQuery({
+  key: 'showVideos',
   invalidations: [],
   dependencies: (params) => [
     params.slug,
   ],
-  request: movieVideoRequest,
+  request: showVideoRequest,
   mapper: (response) =>
     response.body
       .filter((video) => video.site === 'youtube')

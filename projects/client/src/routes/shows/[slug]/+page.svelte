@@ -21,6 +21,7 @@
     seasons,
     streamOn,
     isLoading: isLoadingDetails,
+    videos,
   } = $derived(useShowDetails(page.params.slug));
 
   const isLoading = $derived($isLoadingShow || $isLoadingDetails);
@@ -44,6 +45,7 @@
       crew={$crew!}
       seasons={$seasons!}
       streamOn={$streamOn}
+      videos={$videos}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->
