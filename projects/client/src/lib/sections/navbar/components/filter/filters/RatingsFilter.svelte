@@ -4,6 +4,7 @@
   import type { RatingsFilter } from "$lib/features/filters/models/Filter";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RateActionButton from "$lib/sections/summary/components/rating/_internal/RateActionButton.svelte";
   import Filter from "./_internal/Filter.svelte";
   import { useFilterSetter } from "./_internal/useFilterSetter";
@@ -31,6 +32,7 @@
       label={m.filter_reset()}
       onclick={() => handler(null)}
       style={$currentValue ? "flat" : "ghost"}
+      navigationType={DpadNavigationType.Item}
     >
       <CloseIcon />
     </ActionButton>

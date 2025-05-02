@@ -131,9 +131,7 @@
         {#if !isVip}
           <GetVIPLink />
         {/if}
-        <RenderFor audience="authenticated" navigation="default">
-          <FilterButton />
-        </RenderFor>
+        <FilterButton />
         <ProfileButton />
       </RenderFor>
     </div>

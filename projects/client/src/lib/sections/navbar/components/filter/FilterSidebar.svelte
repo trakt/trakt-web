@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { Writable } from "svelte/store";
   import ResetAllButton from "./_internal/ResetAllButton.svelte";
   import Sidebar from "./_internal/Sidebar.svelte";
@@ -27,5 +28,10 @@
     {/if}
   {/each}
 
-  <ResetAllButton />
+  <div
+    class="trakt-filter-actions"
+    data-dpad-navigation={DpadNavigationType.List}
+  >
+    <ResetAllButton />
+  </div>
 </Sidebar>
