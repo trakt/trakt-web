@@ -31,4 +31,19 @@ describe('getSelectableItems', () => {
     const items = getSelectableItems(list);
     expect(items).toEqual([item]);
   });
+
+  it('should not get disabled items in a list', () => {
+    const item = document.createElement('button');
+    item.setAttribute('data-dpad-navigation', DpadNavigationType.Item);
+
+    const disabledItem = document.createElement('button');
+    disabledItem.setAttribute('data-dpad-navigation', DpadNavigationType.Item);
+    disabledItem.setAttribute('disabled', 'true');
+
+    list.appendChild(item);
+    list.appendChild(disabledItem);
+
+    const items = getSelectableItems(list);
+    expect(items).toEqual([item]);
+  });
 });

@@ -29,4 +29,26 @@ describe('getAllUsableLists', () => {
     const lists = getAllUsableLists();
     expect(lists).toEqual([list]);
   });
+
+  it('should get lists within the navigation trap', () => {
+    const item = document.createElement('button');
+    item.setAttribute('data-dpad-navigation', DpadNavigationType.Item);
+    list.appendChild(item);
+
+    const trap = document.createElement('div');
+    trap.setAttribute(
+      'data-dpad-navigation',
+      DpadNavigationType.Trap,
+    );
+
+    const trappedList = createList(true);
+    const trappedItem = document.createElement('button');
+
+    trappedItem.setAttribute('data-dpad-navigation', DpadNavigationType.Item);
+    trappedList.appendChild(trappedItem);
+    trap.appendChild(trappedList);
+
+    const lists = getAllUsableLists();
+    expect(lists).toEqual([trappedList]);
+  });
 });
