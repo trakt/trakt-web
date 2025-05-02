@@ -10,6 +10,7 @@
   import ListHeader from "../_internal/ListHeader.svelte";
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
   import type { ListProps } from "../ListProps";
+  import { useCollapsedList } from "./_internal/useCollapsedList";
   import CollapseIcon from "./CollapseIcon.svelte";
   import ExpandIcon from "./ExpandIcon.svelte";
   import { scrollTracking } from "./scrollTracking";
@@ -50,24 +51,18 @@
   const { navigation } = useNavigation();
   const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
-  const isCollapsed = writable(
-    JSON.parse(localStorage.getItem(`list_collapsed_${id}`) ?? "false"),
-  );
+  const { isCollapsed, toggle } = $derived(useCollapsedList(id));
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
   onMount(() => {
     isMounted.set(true);
-
-    return isCollapsed.subscribe((collapsed) => {
-      localStorage.setItem(`list_collapsed_${id}`, JSON.stringify(collapsed));
-    });
   });
 </script>
 
 {#snippet titleAction()}
   <ActionButton
-    onclick={() => isCollapsed.update((prev) => !prev)}
+    onclick={toggle}
     label={$isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
     style="flat"
     color="default"
