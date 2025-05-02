@@ -20,14 +20,17 @@ const model = genAi.getGenerativeModel({
   },
 });
 
-function generatePromptText({
+// Add this function to generate a prompt for multiple locales
+function generateMultiLocalePromptText({
   jsonData,
-  targetLocale,
+  locales,
 }: {
   jsonData: Record<string, string>;
-  targetLocale: string;
+  locales: string[];
 }): string {
-  return `Translate this JSON data to ${targetLocale} for Trakt Lite, a media-centric app for tracking and discovering movies, TV shows, and more.
+  return `Translate this JSON data to multiple languages for Trakt Lite, a media-centric app for tracking and discovering movies, TV shows, and more.
+
+          Target languages: ${locales.join(', ')}
 
           The text should be suitable for users who are interested in tracking and discovering movies, TV shows, and other media content and <3 Trakt!
 
@@ -51,16 +54,20 @@ function generatePromptText({
           *   "Episode": A single episode, like "The Rains of Castamere" (Game of Thrones).
           *   "Watchlist": A user's "must-see" list.
 
-          Provide the translated JSON in a valid format, like this:
+          Provide the translated JSON in a valid format, with a nested object for each language, like this:
 
           {
-            "translation_key": "translated text",
+            "fr": {
+              "translation_key": "translated text in French"
+            },
+            "es": {
+              "translation_key": "translated text in Spanish"
+            }
+            // Additional languages...
           }
 
           Here's the JSON to translate: ${JSON.stringify(jsonData)}`;
 }
-
-// Add this function to detect and fix nested keys in the response
 
 // Define an interface for the potential response formats
 interface TranslationResponse {
@@ -86,66 +93,88 @@ function normalizeTranslationResponse(
   return response as TranslationMap;
 }
 
-// Add this additional check to the translateJson function
-async function translateJson(
+// Add this function to translate to multiple locales at once
+async function translateJsonMultiLocale(
   jsonData: Record<string, string>,
-  targetLocale: string,
-): Promise<Record<string, string>> {
+  locales: string[],
+): Promise<Record<string, TranslationMap>> {
   try {
     const result = await model.generateContent(
-      generatePromptText({ jsonData, targetLocale }),
+      generateMultiLocalePromptText({ jsonData, locales }),
     );
 
     const translatedJsonString = result.response.text();
-    const parsedResponse = JSON.parse(translatedJsonString);
 
-    // Normalize the response to handle nested keys
-    const normalizedResponse = normalizeTranslationResponse(parsedResponse);
+    // Handle the case where response is an array of objects
+    const parsedResponse = (() => {
+      try {
+        const rawParsed = JSON.parse(translatedJsonString);
 
-    // Verify all expected keys exist in the response
-    const missingKeys = Object.keys(jsonData).filter((key) =>
-      !(key in normalizedResponse)
-    );
-    if (missingKeys.length > 0) {
-      console.warn(
-        `⚠️ WARNING: Missing ${missingKeys.length} keys in translation response for ${targetLocale}: ${
-          missingKeys.join(', ')
-        }`,
+        // Check if the response is an array
+        if (Array.isArray(rawParsed) && rawParsed.length > 0) {
+          console.log('Detected array response, extracting first item');
+          // Use the first object in the array
+          return rawParsed[0];
+        } else {
+          // Regular object response
+          return rawParsed;
+        }
+      } catch (error) {
+        console.error('Failed to parse response JSON:', error);
+        throw error;
+      }
+    })();
+
+    const translations: Record<string, TranslationMap> = {};
+
+    // Process each locale in the response
+    for (const locale of locales) {
+      if (!parsedResponse[locale]) {
+        console.warn(
+          `⚠️ WARNING: Missing locale ${locale} in translation response`,
+        );
+        translations[locale] = {};
+        continue;
+      }
+
+      // Normalize the response for this locale
+      const normalizedResponse = normalizeTranslationResponse(
+        parsedResponse[locale],
       );
 
-      // Add missing keys back using source values
-      missingKeys.forEach((key) => {
-        normalizedResponse[key] = assertDefined(
-          jsonData[key],
-          `Key ${key} not found in source messages`,
+      // Verify all expected keys exist in the response
+      const missingKeys = Object.keys(jsonData).filter((key) =>
+        !(key in normalizedResponse)
+      );
+
+      if (missingKeys.length > 0) {
+        console.warn(
+          `⚠️ WARNING: Missing ${missingKeys.length} keys in translation response for ${locale}: ${
+            missingKeys.join(', ')
+          }`,
         );
-      });
+
+        // Add missing keys back using source values
+        missingKeys.forEach((key) => {
+          normalizedResponse[key] = assertDefined(
+            jsonData[key],
+            `Key ${key} not found in source messages`,
+          );
+        });
+      }
+
+      translations[locale] = normalizedResponse;
     }
 
-    return normalizedResponse;
+    return translations;
   } catch (error) {
-    console.error(`Error translating to ${targetLocale}:`, error);
+    console.error('Error translating to multiple locales:', error);
     throw error;
   }
 }
 
 function findNewKeys(source: TranslationMap, target: TranslationMap): string[] {
   return Object.keys(source).filter((key) => !(key in target));
-}
-
-async function bulkTranslateNewKeys(
-  sourceMessages: TranslationMap,
-  newKeys: string[],
-  targetLocale: string,
-): Promise<TranslationMap> {
-  if (newKeys.length === 0) return {};
-
-  const keysToTranslate = newKeys.reduce((acc, key) => {
-    acc[key] = sourceMessages[key] ?? '';
-    return acc;
-  }, {} as TranslationMap);
-
-  return await translateJson(keysToTranslate, targetLocale);
 }
 
 function maintainKeyOrder(
@@ -173,29 +202,63 @@ async function translateAllLocales(): Promise<void> {
     // Load English source
     const sourceMessages = await loadLocale('en');
 
-    // Process each locale
-    for (const locale of availableLocales.filter((l) => l !== 'en')) {
-      console.log(`Processing ${locale}...`);
+    // Get non-English locales
+    const targetLocales = availableLocales.filter((l) => l !== 'en');
 
+    // Find new keys for each locale
+    const localeNewKeys: Record<string, string[]> = {};
+    const allNewKeysSet = new Set<string>();
+
+    for (const locale of targetLocales) {
       // Load existing translations
       const existingTranslations = await loadLocale(locale);
 
       // Find new keys
       const newKeys = findNewKeys(sourceMessages, existingTranslations);
+      localeNewKeys[locale] = newKeys;
 
-      if (newKeys.length === 0) {
-        console.log(`No new keys for ${locale}`);
+      // Add to set of all keys that need translation
+      newKeys.forEach((key) => allNewKeysSet.add(key));
+    }
+
+    const allNewKeys = Array.from(allNewKeysSet);
+
+    if (allNewKeys.length === 0) {
+      console.log('No new keys to translate for any locale');
+      return;
+    }
+
+    // Prepare the data to translate
+    const keysToTranslate = allNewKeys.reduce((acc, key) => {
+      acc[key] = sourceMessages[key] ?? '';
+      return acc;
+    }, {} as TranslationMap);
+
+    console.log(
+      `Translating ${allNewKeys.length} unique keys for ${targetLocales.length} locales`,
+    );
+
+    // Translate all new keys for all locales in one request
+    const allTranslations = await translateJsonMultiLocale(
+      keysToTranslate,
+      targetLocales,
+    );
+
+    // Process and save results for each locale
+    for (const locale of targetLocales) {
+      // Get existing translations
+      const existingTranslations = await loadLocale(locale);
+
+      // Filter translations to only include keys needed for this locale
+      const newTranslations = Object.fromEntries(
+        Object.entries(allTranslations[locale] || {})
+          .filter(([key]) => localeNewKeys[locale]?.includes(key) || false),
+      );
+
+      if (Object.keys(newTranslations).length === 0) {
+        console.log(`No new translations for ${locale}`);
         continue;
       }
-
-      console.log(`Translating ${newKeys.length} new keys for ${locale}`);
-
-      // Translate new keys
-      const newTranslations = await bulkTranslateNewKeys(
-        sourceMessages,
-        newKeys,
-        locale,
-      );
 
       // Merge and save
       const updatedTranslations = maintainKeyOrder(sourceMessages, {
@@ -208,7 +271,11 @@ async function translateAllLocales(): Promise<void> {
         updatedTranslations,
       );
 
-      console.log(`Updated ${locale} with ${newKeys.length} new translations`);
+      console.log(
+        `Updated ${locale} with ${
+          Object.keys(newTranslations).length
+        } new translations`,
+      );
     }
   } catch (error) {
     console.error('Translation error:', error);
