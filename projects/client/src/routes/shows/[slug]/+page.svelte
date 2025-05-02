@@ -5,6 +5,7 @@
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { useShow } from "./useShow";
   import { useShowDetails } from "./useShowDetails";
+  import { useShowVideos } from "./useShowVideos";
 
   const {
     show,
@@ -21,10 +22,15 @@
     seasons,
     streamOn,
     isLoading: isLoadingDetails,
-    videos,
   } = $derived(useShowDetails(page.params.slug));
 
   const isLoading = $derived($isLoadingShow || $isLoadingDetails);
+  const videos = $derived(
+    useShowVideos({
+      slug: page.params.slug,
+      seasons: ($seasons ?? []).map((season) => season.number),
+    }),
+  );
 </script>
 
 <TraktPage

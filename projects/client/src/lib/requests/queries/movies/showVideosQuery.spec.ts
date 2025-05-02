@@ -10,7 +10,10 @@ describe('showVideosQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          showVideosQuery({ slug: ShowSiloResponseMock.ids.slug }),
+          showVideosQuery({
+            slug: ShowSiloResponseMock.ids.slug,
+            seasons: [1],
+          }),
         ),
       mapper: (response) => response?.data,
     });
