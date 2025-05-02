@@ -1,8 +1,6 @@
 import type { VideoResponse } from '@trakt/api';
 
-type FixedVideoResponse = Omit<VideoResponse, 'type'> & { type: string };
-
-export const MovieHereticVideoResponseMock: FixedVideoResponse[] = [
+export const MovieHereticVideoResponseMock: VideoResponse[] = [
   {
     'title': 'Religion is Just a Form of Control',
     'url': 'https://youtube.com/watch?v=72-5rMRKN9s',
