@@ -391,5 +391,11 @@
   "ratings": "Evaluări",
   "view_all_items_in": "Vezi toate în {title}",
   "filter_reset_all": "Resetează tot",
-  "filter_reset_all_label": "Resetează toate filtrele"
+  "filter_reset_all_label": "Resetează toate filtrele",
+  "video_type_trailer": "Trailer",
+  "video_type_clip": "Clip",
+  "video_type_teaser": "Teaser",
+  "video_type_featurette": "Featurette",
+  "video_type_recap": "Recapitulare",
+  "video_type_behind_the_scenes": "Din culise"
 }

@@ -391,5 +391,11 @@
   "ratings": "評価",
   "view_all_items_in": "{title} のアイテムをすべて表示",
   "filter_reset_all": "すべてリセット",
-  "filter_reset_all_label": "すべてのフィルターをリセット"
+  "filter_reset_all_label": "すべてのフィルターをリセット",
+  "video_type_trailer": "予告編",
+  "video_type_clip": "クリップ",
+  "video_type_teaser": "ティザー",
+  "video_type_featurette": "フィーチャレット",
+  "video_type_recap": "前回までのあらすじ",
+  "video_type_behind_the_scenes": "舞台裏"
 }

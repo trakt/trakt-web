@@ -391,5 +391,11 @@
   "ratings": "Оцінки",
   "view_all_items_in": "Переглянути все у {title}",
   "filter_reset_all": "Скинути все",
-  "filter_reset_all_label": "Скинути всі фільтри"
+  "filter_reset_all_label": "Скинути всі фільтри",
+  "video_type_trailer": "Трейлер",
+  "video_type_clip": "Кліп",
+  "video_type_teaser": "Тизер",
+  "video_type_featurette": "Спеціальне відео",
+  "video_type_recap": "Підсумок",
+  "video_type_behind_the_scenes": "За лаштунками"
 }

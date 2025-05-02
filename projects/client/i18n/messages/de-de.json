@@ -391,5 +391,11 @@
   "ratings": "Bewertungen",
   "view_all_items_in": "Alle {title} ansehen",
   "filter_reset_all": "Alles zurücksetzen",
-  "filter_reset_all_label": "Alle Filter zurücksetzen"
+  "filter_reset_all_label": "Alle Filter zurücksetzen",
+  "video_type_trailer": "Trailer",
+  "video_type_clip": "Clip",
+  "video_type_teaser": "Teaser",
+  "video_type_featurette": "Featurette",
+  "video_type_recap": "Rückblick",
+  "video_type_behind_the_scenes": "Hinter den Kulissen"
 }

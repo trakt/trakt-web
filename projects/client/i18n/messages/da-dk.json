@@ -391,5 +391,11 @@
   "ratings": "Bedømmelser",
   "view_all_items_in": "Se alle i {title}",
   "filter_reset_all": "Nulstil alle",
-  "filter_reset_all_label": "Nulstil alle filtre"
+  "filter_reset_all_label": "Nulstil alle filtre",
+  "video_type_trailer": "Trailer",
+  "video_type_clip": "Klip",
+  "video_type_teaser": "Teaser",
+  "video_type_featurette": "Featurette",
+  "video_type_recap": "Resumé",
+  "video_type_behind_the_scenes": "Bag kulisserne"
 }

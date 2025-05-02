@@ -391,5 +391,11 @@
   "ratings": "Cotes",
   "view_all_items_in": "Voir tous les titres dans {title}",
   "filter_reset_all": "Réinitialiser tout",
-  "filter_reset_all_label": "Réinitialiser tous les filtres"
+  "filter_reset_all_label": "Réinitialiser tous les filtres",
+  "video_type_trailer": "Bande-annonce",
+  "video_type_clip": "Extrait",
+  "video_type_teaser": "Teaser",
+  "video_type_featurette": "Reportage",
+  "video_type_recap": "Résumé",
+  "video_type_behind_the_scenes": "Coulisses"
 }

@@ -391,5 +391,11 @@
   "ratings": "Vurderinger",
   "view_all_items_in": "Vis alle i {title}",
   "filter_reset_all": "Nullstill alt",
-  "filter_reset_all_label": "Nullstill alle filtre"
+  "filter_reset_all_label": "Nullstill alle filtre",
+  "video_type_trailer": "Trailer",
+  "video_type_clip": "Klipp",
+  "video_type_teaser": "Teaser",
+  "video_type_featurette": "Featurette",
+  "video_type_recap": "Sammendrag",
+  "video_type_behind_the_scenes": "Bak kulissene"
 }
