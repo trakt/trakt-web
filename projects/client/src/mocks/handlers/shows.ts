@@ -26,6 +26,7 @@ import { ShowSiloSeasonEpisodesResponseMock } from '../data/summary/shows/silo/r
 import { ShowSiloSeasonsResponseMock } from '../data/summary/shows/silo/response/ShowSiloSeasonsResponseMock.ts';
 import { ShowSiloStatsResponseMock } from '../data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from '../data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
+import { ShowSiloVideoResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoResponseMock.ts';
 import { ShowSiloWatchNowResponseMock } from '../data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
 import { SiloListsResponseMock } from '../data/summary/shows/silo/response/SiloListsResponseMock.ts';
 
@@ -200,6 +201,12 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/sentiments`,
     () => {
       return HttpResponse.json(ShowSiloSentimentsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/videos`,
+    () => {
+      return HttpResponse.json(ShowSiloVideoResponseMock);
     },
   ),
 ];
