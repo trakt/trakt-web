@@ -42,7 +42,7 @@
     id={`video-list-${slug}`}
     {items}
     title="Extras"
-    --height-list={mediaListHeightResolver("episode")}
+    --height-list={mediaListHeightResolver("landscape")}
   >
     {#snippet item(video)}
       <VideoItem {video} />
