@@ -24,5 +24,16 @@
     "exclude": [
       ".svelte-kit"
     ]
-  }
+  },
+  "compilerOptions": {
+    "checkJs": true,
+    "strict": true,
+    "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ]
+  },
+  "unstable": [
+    "sloppy-imports"
+  ]
 }
