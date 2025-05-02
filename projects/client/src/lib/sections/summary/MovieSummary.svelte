@@ -4,10 +4,12 @@
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
+  import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
+  import VideoList from "../lists/VideoList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -22,10 +24,12 @@
     intl,
     crew,
     streamOn,
+    videos,
   }: MediaSummaryProps<MovieEntry> & {
     stats: MediaStats;
     studios: MediaStudio[];
     crew: MediaCrew;
+    videos: MediaVideo[];
   } = $props();
 </script>
 
@@ -42,6 +46,8 @@
 />
 
 <CastList title={m.actors()} cast={crew.cast} slug={media.slug} />
+
+<VideoList slug={media.slug} {videos} />
 
 <Comments {media} type="movie" />
 

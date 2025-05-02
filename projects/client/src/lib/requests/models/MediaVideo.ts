@@ -1,0 +1,19 @@
+import { z } from 'zod';
+
+export const MediaVideoType = z.enum([
+  'trailer',
+  'clip',
+  'teaser',
+  'featurette',
+  'recap',
+  'behind the scenes',
+]);
+
+export const MediaVideoSchema = z.object({
+  id: z.string(),
+  type: MediaVideoType,
+  url: z.string().url(),
+  thumbnail: z.string().url(),
+  title: z.string(),
+});
+export type MediaVideo = z.infer<typeof MediaVideoSchema>;

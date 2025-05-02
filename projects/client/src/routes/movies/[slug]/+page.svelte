@@ -15,6 +15,7 @@
     crew,
     streamOn,
     isLoading,
+    videos,
   } = $derived(useMovie(page.params.slug));
 </script>
 
@@ -35,6 +36,7 @@
       crew={$crew!}
       intl={$intl!}
       streamOn={$streamOn}
+      videos={$videos}
     />
   {:else}
     <!-- TODO: remove this when we have empty state, currently prevents content jumps -->

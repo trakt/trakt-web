@@ -6,6 +6,7 @@ import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.
 import { movieStatsQuery } from '$lib/requests/queries/movies/movieStatsQuery.ts';
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
+import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.ts';
 import { movieWatchersQuery } from '$lib/requests/queries/movies/movieWatchersQuery.ts';
 import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
@@ -33,6 +34,10 @@ export function useMovie(slug: string) {
   const studios = useQuery(movieStudiosQuery({ slug }));
   const crew = useQuery(moviePeopleQuery({ slug }));
 
+  const videos = useQuery(movieVideosQuery({
+    slug,
+  }));
+
   const locale = languageTag();
 
   const isLocaleSkipped = locale === 'en';
@@ -51,6 +56,7 @@ export function useMovie(slug: string) {
     crew,
     intl,
     streamOn,
+    videos,
   ];
 
   const isLoading = derived(
@@ -66,6 +72,7 @@ export function useMovie(slug: string) {
     watchers: derived(watchers, ($watchers) => $watchers.data),
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
+    videos: derived(videos, ($videos) => $videos.data ?? []),
     intl: derived(
       [movie, intl],
       ([$movie, $intl]) => {
