@@ -15,6 +15,7 @@ import { MovieHereticRatingsResponseMock } from '../data/summary/movies/heretic/
 import { MovieHereticRelatedResponseMock } from '../data/summary/movies/heretic/response/MovieHereticRelatedResponseMock.ts';
 import { MovieHereticResponseMock } from '../data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import { MovieHereticStatsResponseMock } from '../data/summary/movies/heretic/response/MovieHereticStatsResponseMock.ts';
+import { MovieHereticVideoResponseMock } from '../data/summary/movies/heretic/response/MovieHereticVideoResponseMock.ts';
 import { MovieHereticWatchNowResponseMock } from '../data/summary/movies/heretic/response/MovieHereticWatchNowResponseMock.ts';
 import { MovieStudiosResponseMock } from '../data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
 
@@ -119,6 +120,12 @@ export const movies = [
     `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/sentiments`,
     () => {
       return HttpResponse.json(MovieHereticSentimentsResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/videos`,
+    () => {
+      return HttpResponse.json(MovieHereticVideoResponseMock);
     },
   ),
 ];

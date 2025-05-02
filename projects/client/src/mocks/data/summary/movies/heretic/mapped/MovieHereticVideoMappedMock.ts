@@ -1,0 +1,126 @@
+import type { MediaVideo } from '$lib/requests/models/MediaVideo.ts';
+
+export const MovieHereticVideoMappedMock: MediaVideo[] = [
+  {
+    'id': 'vrlu23ub93cpubuqs4v4kdht0co490li',
+    'title': 'Religion is Just a Form of Control',
+    'type': 'clip',
+    'url': 'https://youtube.com/watch?v=72-5rMRKN9s',
+    'thumbnail': 'https://img.youtube.com/vi/72-5rMRKN9s/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4l333mit5svrd',
+    'title': 'I Can Show You God',
+    'type': 'clip',
+    'url': 'https://youtube.com/watch?v=Sansjt4DiIY',
+    'thumbnail': 'https://img.youtube.com/vi/Sansjt4DiIY/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lms8kjc47iul',
+    'title': 'Mormons Enter Killer’s House',
+    'type': 'clip',
+    'url': 'https://youtube.com/watch?v=nhCGUYhfubA',
+    'thumbnail': 'https://img.youtube.com/vi/nhCGUYhfubA/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4l3jiejts104u',
+    'title': 'Watch At Home Now',
+    'type': 'teaser',
+    'url': 'https://youtube.com/watch?v=Swm7m1xGNwg',
+    'thumbnail': 'https://img.youtube.com/vi/Swm7m1xGNwg/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4ks9na9ull4lp',
+    'title':
+      "'Heretic' With Scott Beck, Bryan Woods, Stacey Sher, and Betsy Heimann | Academy Conversations",
+    'type': 'featurette',
+    'url': 'https://youtube.com/watch?v=IwGYCQvl3Bk',
+    'thumbnail': 'https://img.youtube.com/vi/IwGYCQvl3Bk/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lmu3np70n7vi',
+    'title': 'Hugh Grant VS Two Mormons',
+    'type': 'clip',
+    'url': 'https://youtube.com/watch?v=nk1m1_pigwA',
+    'thumbnail': 'https://img.youtube.com/vi/nk1m1_pigwA/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4kcks9ns30tba',
+    'title': 'Belief or Disbelief?',
+    'type': 'clip',
+    'url': 'https://youtube.com/watch?v=5GulXtPKj10',
+    'thumbnail': 'https://img.youtube.com/vi/5GulXtPKj10/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lojvi7phvhea',
+    'title': 'Hugh Grant Slams Religion',
+    'type': 'clip',
+    'url': 'https://youtube.com/watch?v=r5fW-Qjh_YY',
+    'thumbnail': 'https://img.youtube.com/vi/r5fW-Qjh_YY/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lr7df4up65qv',
+    'title': "The Authenticity of 'Heretic' Raises The Stakes Of The Story",
+    'type': 'featurette',
+    'url': 'https://youtube.com/watch?v=uGh5EZ4mWMA',
+    'thumbnail': 'https://img.youtube.com/vi/uGh5EZ4mWMA/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lgvo3nkn3ol1',
+    'title':
+      'Hugh Grant was excited to be edgy as "f***ed up" horror villain in Heretic | BAFTA',
+    'type': 'featurette',
+    'url': 'https://youtube.com/watch?v=feFiiN82PpA',
+    'thumbnail': 'https://img.youtube.com/vi/feFiiN82PpA/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lpbi85bgkpta',
+    'title': 'UK TV Spot 3',
+    'type': 'teaser',
+    'url': 'https://youtube.com/watch?v=qsqs2WwjYiU',
+    'thumbnail': 'https://img.youtube.com/vi/qsqs2WwjYiU/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lptl1fjgejc6',
+    'title': 'UK TV Spot 2',
+    'type': 'teaser',
+    'url': 'https://youtube.com/watch?v=rmUWhjwIols',
+    'thumbnail': 'https://img.youtube.com/vi/rmUWhjwIols/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4ld082fm72f6m',
+    'title': 'UK TV Spot',
+    'type': 'teaser',
+    'url': 'https://youtube.com/watch?v=aW1o_WvHVtQ',
+    'thumbnail': 'https://img.youtube.com/vi/aW1o_WvHVtQ/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4k9q10kjtie91',
+    'title':
+      'Scott Beck and Bryan Woods Talk About Their New Film Heretic At AFI Fest 2024',
+    'type': 'featurette',
+    'url': 'https://youtube.com/watch?v=0jZP-4pieI4',
+    'thumbnail': 'https://img.youtube.com/vi/0jZP-4pieI4/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4lk5j2pgf99fu',
+    'title': 'Official Trailer 3',
+    'type': 'trailer',
+    'url': 'https://youtube.com/watch?v=jpWUOxRozZg',
+    'thumbnail': 'https://img.youtube.com/vi/jpWUOxRozZg/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4l5lnu5qps8sa',
+    'title': 'Official Trailer 2',
+    'type': 'trailer',
+    'url': 'https://youtube.com/watch?v=WSo0lmONZIU',
+    'thumbnail': 'https://img.youtube.com/vi/WSo0lmONZIU/hqdefault.jpg',
+  },
+  {
+    'id': 'vrlu23ub93cpubuqs4v4kv7mhlirc1de',
+    'title': 'Official Trailer',
+    'type': 'trailer',
+    'url': 'https://youtube.com/watch?v=O9i2vmFhSSY',
+    'thumbnail': 'https://img.youtube.com/vi/O9i2vmFhSSY/hqdefault.jpg',
+  },
+];
