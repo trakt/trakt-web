@@ -2,6 +2,7 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
   import type { ToggleFilter } from "$lib/features/filters/models/Filter";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import Filter from "./_internal/Filter.svelte";
   import { useFilterSetter } from "./_internal/useFilterSetter";
 
@@ -27,5 +28,6 @@
     checked={$currentValue === "true"}
     color="blue"
     onclick={handler}
+    navigationType={DpadNavigationType.Item}
   />
 </Filter>

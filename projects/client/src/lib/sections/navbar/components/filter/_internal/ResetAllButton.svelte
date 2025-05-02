@@ -3,6 +3,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import GlobalParameterEscaper from "$lib/features/parameters/GlobalParameterEscaper.svelte";
 
   const { hasActiveFilter } = useFilter();
@@ -17,6 +18,7 @@
     variant="secondary"
     disabled={!$hasActiveFilter || undefined}
     href={page.url.pathname}
+    navigationType={DpadNavigationType.Item}
   >
     {m.filter_reset_all()}
   </Button>

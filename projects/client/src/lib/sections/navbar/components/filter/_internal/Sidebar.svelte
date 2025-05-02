@@ -2,11 +2,13 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useNavigationTrap } from "$lib/features/navigation/useNavigationTrap";
   import { createUnderlay } from "$lib/features/portal/_internal/createUnderlay";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { onMount } from "svelte";
-  import { type Writable } from "svelte/store";
+  import type { Writable } from "svelte/store";
   import { slide } from "svelte/transition";
 
   type SidebarProps = {
@@ -49,13 +51,18 @@
     class="trakt-sidebar"
     transition:slide={{ duration: 150, axis: slideAxis }}
     use:portal
+    use:useNavigationTrap={".trakt-filter"}
   >
-    <div class="trakt-sidebar-header">
+    <div
+      class="trakt-sidebar-header"
+      data-dpad-navigation={DpadNavigationType.List}
+    >
       {title}
       <ActionButton
         onclick={() => isOpen.set(false)}
         label={m.close_label()}
         style="ghost"
+        navigationType={DpadNavigationType.Item}
         --color-foreground-default="var(--color-text-secondary)"
       >
         <CloseIcon />

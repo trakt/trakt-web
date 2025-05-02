@@ -3,6 +3,7 @@
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { writable } from "svelte/store";
   import FilterSidebar from "./FilterSidebar.svelte";
 
@@ -22,6 +23,7 @@
     variant="secondary"
     text="capitalize"
     {color}
+    navigationType={DpadNavigationType.Item}
     onclick={() => {
       isSidebarOpen.set(true);
     }}

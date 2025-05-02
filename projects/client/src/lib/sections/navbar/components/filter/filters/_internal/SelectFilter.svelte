@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { ListFilterProps } from "../ListFilterProps";
   import { useFilterSetter } from "./useFilterSetter";
 
@@ -27,7 +28,10 @@
   >
     {display}
   </Button>
-  <select onchange={(ev) => handleFilterChange(ev.currentTarget.value)}>
+  <select
+    onchange={(ev) => handleFilterChange(ev.currentTarget.value)}
+    data-dpad-navigation={DpadNavigationType.Item}
+  >
     <option selected={false} value={null} aria-label={m.filter_reset()}>
       {m.filter_reset()}
     </option>
@@ -68,6 +72,12 @@
 
       cursor: pointer;
       opacity: 0;
+    }
+
+    &:has(select:focus-visible) {
+      outline: var(--border-thickness-xs) solid var(--purple-500);
+      outline-offset: var(--border-thickness-xs);
+      border-radius: calc(var(--border-radius-m) * 0.76925);
     }
   }
 </style>
