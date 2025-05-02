@@ -6,11 +6,11 @@ export function useDefaultCardVariant<M>(type: M) {
 
   return derived(navigation, ($navigation) => {
     if (type === 'episode') {
-      return 'landscape';
+      return 'landscape' as const;
     }
 
     const isDPad = $navigation === 'dpad';
 
-    return isDPad ? 'landscape' : 'portrait';
+    return isDPad ? 'landscape' as const : 'portrait' as const;
   });
 }

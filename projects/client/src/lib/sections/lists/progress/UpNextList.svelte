@@ -35,7 +35,7 @@
     })}
   urlBuilder={() => UrlBuilder.progress($user?.slug ?? "")}
   title={m.up_next_title()}
-  --height-list={mediaListHeightResolver("episode")}
+  --height-list={mediaListHeightResolver("landscape")}
 >
   {#snippet badge()}
     <RenderFor audience="authenticated" navigation="default">

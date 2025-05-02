@@ -7,6 +7,7 @@
   import type { MediaCredits } from "$lib/requests/models/MediaCredits";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
+  import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { writable } from "svelte/store";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
@@ -49,13 +50,14 @@
 
   const positions = $derived(getAvailablePositions($credits));
   const list = $derived(getPositionList($credits));
+  const defaultVariant = useDefaultCardVariant(type);
 </script>
 
 <SectionList
   id={`credits-list-${person.slug}-${type}-${$currentPosition}`}
   items={list}
   {title}
-  --height-list={mediaListHeightResolver(type)}
+  --height-list={mediaListHeightResolver($defaultVariant)}
 >
   {#snippet item(media)}
     <DefaultMediaItem {type} {media} />

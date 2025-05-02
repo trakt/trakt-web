@@ -13,7 +13,7 @@
   id="upcoming-list"
   items={$calendar}
   title={m.upcoming_schedule_title()}
-  --height-list={mediaListHeightResolver("episode")}
+  --height-list={mediaListHeightResolver("landscape")}
 >
   {#snippet item(entry)}
     <EpisodeItem episode={entry} show={entry.show} variant="upcoming" />

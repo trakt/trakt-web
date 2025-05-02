@@ -37,7 +37,7 @@
   id={`season-list-${show.slug}`}
   items={$list}
   {title}
-  --height-list={mediaListHeightResolver("episode")}
+  --height-list={mediaListHeightResolver("landscape")}
 >
   {#snippet item(episode)}
     <EpisodeItem {episode} {show} variant="default" context="show" />
