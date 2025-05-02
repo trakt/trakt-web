@@ -7,6 +7,7 @@ export const MediaVideoType = z.enum([
   'featurette',
   'recap',
   'behind the scenes',
+  'opening credits',
 ]);
 
 export const MediaVideoSchema = z.object({
