@@ -1,4 +1,5 @@
 <script lang="ts" generics="T extends { id: unknown }">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
@@ -9,6 +10,8 @@
   import ListHeader from "../_internal/ListHeader.svelte";
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
   import type { ListProps } from "../ListProps";
+  import CollapseIcon from "./CollapseIcon.svelte";
+  import ExpandIcon from "./ExpandIcon.svelte";
   import { scrollTracking } from "./scrollTracking";
 
   type SectionListProps<T> = ListProps<T> & {
@@ -47,20 +50,49 @@
   const { navigation } = useNavigation();
   const isVisible = writable($navigation === "dpad");
   const isMounted = writable(false);
+  const isCollapsed = writable(
+    JSON.parse(localStorage.getItem(`list_collapsed_${id}`) ?? "false"),
+  );
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
   onMount(() => {
     isMounted.set(true);
+
+    return isCollapsed.subscribe((collapsed) => {
+      localStorage.setItem(`list_collapsed_${id}`, JSON.stringify(collapsed));
+    });
   });
 </script>
+
+{#snippet titleAction()}
+  <ActionButton
+    onclick={() => isCollapsed.update((prev) => !prev)}
+    label={$isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
+    style="flat"
+    color="default"
+  >
+    {#if $isCollapsed}
+      <ExpandIcon />
+    {:else}
+      <CollapseIcon />
+    {/if}
+  </ActionButton>
+{/snippet}
 
 <section
   use:whenInViewport={() => isVisible.set(true)}
   class="shadow-list-container"
+  class:shadow-list-container-collapsed={$isMounted && $isCollapsed}
 >
   {#if $isVisible}
-    <ListHeader {title} {actions} {badge} inset="title" />
+    <ListHeader
+      {title}
+      {titleAction}
+      actions={$isCollapsed ? undefined : actions}
+      {badge}
+      inset="title"
+    />
     <div
       class="shadow-list"
       class:shadow-list-left-shadow={isLeftShadowVisible}
@@ -96,18 +128,29 @@
   @use "$style/scss/mixins/index" as *;
   @use "../_internal/gap" as *;
 
-  .shadow-list-container,
-  .shadow-list,
-  .shadow-list-empty-state {
-    min-height: var(--height-list);
+  .shadow-list-container {
+    --height-min-container: var(--ni-40);
+    --height-container: calc(var(--height-list) + var(--ni-40) + var(--gap-xl));
+
+    display: flex;
+    flex-direction: column;
+    transition:
+      gap var(--transition-increment) ease-in-out,
+      height var(--transition-increment) ease-in-out,
+      min-height var(--transition-increment) ease-in-out;
+
+    @include adaptive-list-gap();
   }
 
   .shadow-list-container {
-    display: flex;
-    flex-direction: column;
-    transition: gap var(--transition-increment) ease-in-out;
+    min-height: var(--height-container);
+    height: var(--height-container);
+  }
 
-    @include adaptive-list-gap();
+  .shadow-list,
+  .shadow-list-empty-state {
+    min-height: var(--height-list);
+    height: var(--height-list);
   }
 
   .shadow-list-empty-state {
@@ -128,6 +171,10 @@
   .shadow-list {
     position: relative;
     overflow: hidden;
+
+    transition:
+      height var(--transition-increment) ease-in-out,
+      min-height var(--transition-increment) ease-in-out;
 
     &.shadow-list-left-shadow::before {
       opacity: var(--left-shadow-opacity);
@@ -160,6 +207,18 @@
       opacity: 0;
 
       background: var(--list-shadow);
+    }
+  }
+
+  .shadow-list-container.shadow-list-container-collapsed {
+    min-height: var(--height-min-container);
+    height: 0;
+
+    overflow: hidden;
+
+    .shadow-list {
+      min-height: 0;
+      height: 0;
     }
   }
 

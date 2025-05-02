@@ -6,22 +6,29 @@
   const {
     title,
     inset,
+    titleAction,
     actions,
     badge,
+    ...props
   }: {
     title: string;
+    titleAction?: Snippet;
     actions?: Snippet;
     badge?: Snippet;
     inset: "all" | "title";
-  } = $props();
+  } & HTMLElementProps = $props();
 </script>
 
 <div
   class="trakt-list-header"
   class:trakt-list-inset-title={inset === "title"}
   class:trakt-inset-all={inset === "all"}
+  {...props}
 >
   <div class="trakt-list-title">
+    {#if titleAction}
+      {@render titleAction()}
+    {/if}
     <ListTitle {title} />
     {#if badge}
       {@render badge()}
@@ -45,6 +52,7 @@
     align-items: center;
     gap: var(--gap-m);
     height: var(--ni-40);
+    user-select: none;
 
     &.trakt-list-inset-title {
       margin: 0;
