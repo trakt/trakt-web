@@ -8,7 +8,6 @@
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import PopularListItem from "../popular/PopularListItem.svelte";
-  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import PopupActions from "./_internal/PopupActions.svelte";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
@@ -23,7 +22,6 @@
   useList={(params) => useListItems({ list, ...params })}
   urlBuilder={() => getListUrl(list, type)}
   title={list.name}
-  --height-list={mediaListHeightResolver(type)}
 >
   {#snippet item(media)}
     <PopularListItem type={media.entry.type} media={media.entry}>
