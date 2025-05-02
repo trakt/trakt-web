@@ -31,6 +31,7 @@
   class="trakt-card-cover"
   class:trakt-card-cover-loading={isImagePending || isLoading}
   class:trakt-card-cover-placeholder={PLACEHOLDERS.includes(src)}
+  class:trakt-card-cover-youtube={src.includes("youtube")}
 >
   {#if badge}
     <div class="trakt-card-cover-badge">
@@ -98,7 +99,7 @@
       gap: var(--gap-xxs);
     }
 
-    &:not(.trakt-card-cover-placeholder) {
+    &:not(.trakt-card-cover-placeholder):not(.trakt-card-cover-youtube) {
       :global(img) {
         object-position: top;
       }
