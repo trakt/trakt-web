@@ -391,5 +391,11 @@
   "ratings": "Valutazioni",
   "view_all_items_in": "Vedi tutti gli elementi in {title}",
   "filter_reset_all": "Resetta tutti",
-  "filter_reset_all_label": "Resetta tutti i filtri"
+  "filter_reset_all_label": "Resetta tutti i filtri",
+  "video_type_trailer": "Trailer",
+  "video_type_clip": "Clip",
+  "video_type_teaser": "Teaser",
+  "video_type_featurette": "Featurette",
+  "video_type_recap": "Riassunto",
+  "video_type_behind_the_scenes": "Dietro le quinte"
 }

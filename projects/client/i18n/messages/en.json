@@ -391,5 +391,11 @@
   "ratings": "Ratings",
   "view_all_items_in": "View all items in {title}",
   "filter_reset_all": "Reset all",
-  "filter_reset_all_label": "Reset all filters"
+  "filter_reset_all_label": "Reset all filters",
+  "video_type_trailer": "Trailer",
+  "video_type_clip": "Clip",
+  "video_type_teaser": "Teaser",
+  "video_type_featurette": "Featurette",
+  "video_type_recap": "Recap",
+  "video_type_behind_the_scenes": "Behind the Scenes"
 }
