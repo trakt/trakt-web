@@ -15,10 +15,7 @@ describe('userProfileQuery', () => {
             slug: assertDefined(ExtendedUserProfileHarryResponseMock.ids.slug),
           }),
         ),
-      mapper: (response) => {
-        console.log(response?.error);
-        return response?.data;
-      },
+      mapper: (response) => response?.data,
     });
 
     expect(result).to.deep.equal(ExtendedUserProfileHarryMappedMock);

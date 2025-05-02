@@ -1,5 +1,4 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
-import { showVideosQuery } from '$lib/requests/queries/movies/showVideosQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
@@ -20,9 +19,6 @@ export function useShowDetails(slug: string) {
   const stats = useQuery(showStatsQuery({ slug }));
   const watchers = useQuery(showWatchersQuery({ slug }));
   const streamOn = useQuery(streamShowQuery({ slug, country: get(country) }));
-  const videos = useQuery(showVideosQuery({
-    slug,
-  }));
 
   const queries = [
     ratings,
@@ -47,7 +43,6 @@ export function useShowDetails(slug: string) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     seasons: derived(seasons, ($seasons) => $seasons.data),
-    videos: derived(videos, ($videos) => $videos.data ?? []),
     streamOn: derived(
       streamOn,
       ($streamOn) => {
