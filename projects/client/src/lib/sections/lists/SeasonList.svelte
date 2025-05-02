@@ -9,7 +9,7 @@
   import type { Season } from "$lib/requests/models/Season";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { get, writable } from "svelte/store";
-  import EpisodeCard from "./components/EpisodeCard.svelte";
+  import EpisodeItem from "./components/EpisodeItem.svelte";
   import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";
   import { useUserSeason } from "./stores/useUserSeason";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -40,7 +40,7 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(episode)}
-    <EpisodeCard {episode} {show} variant="default" context="show" />
+    <EpisodeItem {episode} {show} variant="default" context="show" />
   {/snippet}
   {#snippet actions()}
     {#if seasons.length > 1}

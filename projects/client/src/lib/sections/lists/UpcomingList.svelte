@@ -1,7 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import EpisodeCard from "./components/EpisodeCard.svelte";
+  import EpisodeItem from "./components/EpisodeItem.svelte";
   import FindShowsLink from "./components/FindShowsLink.svelte";
   import { useCalendarEpisodes } from "./stores/useCalendarEpisodes";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -16,7 +16,7 @@
   --height-list={mediaListHeightResolver("episode")}
 >
   {#snippet item(entry)}
-    <EpisodeCard episode={entry} show={entry.show} variant="upcoming" />
+    <EpisodeItem episode={entry} show={entry.show} variant="upcoming" />
   {/snippet}
   {#snippet empty()}
     {#if !$isLoading}

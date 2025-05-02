@@ -2,7 +2,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import RemoveFromHistoryAction from "$lib/sections/media-actions/remove-from-history/RemoveFromHistoryAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
-  import ActivityCard from "../components/ActivityCard.svelte";
+  import ActivityItem from "../components/ActivityItem.svelte";
   import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
   import type { HistoryEntry } from "../stores/useRecentlyWatchedList";
 
@@ -40,7 +40,7 @@
 {/snippet}
 
 {#if style === "cover"}
-  <ActivityCard activityAt={activity.watchedAt} {activity} {popupActions} />
+  <ActivityItem activityAt={activity.watchedAt} {activity} {popupActions} />
 {/if}
 
 {#if style === "summary"}

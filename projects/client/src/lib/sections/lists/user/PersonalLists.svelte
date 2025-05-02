@@ -1,7 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import ListSummaryCard from "../components/list-summary/ListSummaryCard.svelte";
+  import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
@@ -36,7 +36,7 @@
       --height-list="var(--height-lists-list)"
     >
       {#snippet item(list)}
-        <ListSummaryCard {list} isOfficial={false} />
+        <ListSummaryItem {list} isOfficial={false} />
       {/snippet}
     </SectionList>
   {/if}

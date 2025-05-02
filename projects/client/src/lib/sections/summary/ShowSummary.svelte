@@ -7,7 +7,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { Season } from "$lib/requests/models/Season";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import EpisodeCard from "$lib/sections/lists/components/EpisodeCard.svelte";
+  import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
@@ -56,7 +56,7 @@
   {#snippet contextualContent()}
     <RenderFor device={["desktop"]} audience="authenticated">
       {#if episode != null}
-        <EpisodeCard {episode} show={media} variant="next" />
+        <EpisodeItem {episode} show={media} variant="next" />
       {/if}
     </RenderFor>
   {/snippet}

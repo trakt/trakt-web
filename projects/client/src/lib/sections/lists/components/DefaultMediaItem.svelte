@@ -7,8 +7,8 @@
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
-  import MediaCard from "../components/MediaCard.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
+  import MediaItem from "./MediaItem.svelte";
 
   const {
     type,
@@ -54,4 +54,4 @@
   {/if}
 {/snippet}
 
-<MediaCard {type} {media} {style} {tag} {...rest} {popupActions} />
+<MediaItem {type} {media} {style} {tag} {...rest} {popupActions} />
