@@ -1,6 +1,7 @@
 import { getRelevantItem } from '$lib/features/navigation/_internal/getRelevantItem.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { focusAndScrollIntoView } from './focusAndScrollIntoView.ts';
+import { getNavigationScope } from './getNavigationScope.ts';
 import { getNavigationState } from './getNavigationState.ts';
 import { getNextIndex } from './getNextIndex.ts';
 
@@ -20,8 +21,12 @@ export const handleListNavigation = (key: 'ArrowUp' | 'ArrowDown') => {
 
   const isFirstList = newListIndex === 0;
   const isLastList = newListIndex === lists.length - 1;
+  const scope = getNavigationScope();
 
-  if (isFirstList || isLastList) {
+  // Trigger scrolling only when the navigation scope is the document.
+  // This ensures that navigating to the first or last list scrolls the page
+  // to the top or bottom, respectively, for a seamless user experience.
+  if (scope === document && (isFirstList || isLastList)) {
     globalThis.window.scrollTo({
       top: isFirstList ? 0 : document.documentElement.scrollHeight,
       behavior: LIST_SCROLL_BEHAVIOR,
