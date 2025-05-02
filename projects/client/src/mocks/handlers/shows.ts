@@ -27,6 +27,8 @@ import { ShowSiloSeasonsResponseMock } from '../data/summary/shows/silo/response
 import { ShowSiloStatsResponseMock } from '../data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from '../data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
 import { ShowSiloVideoResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoResponseMock.ts';
+import { ShowSiloVideoSeason1ResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoSeason1ResponseMock.ts';
+import { ShowSiloVideoSeason2ResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoSeason2ResponseMock.ts';
 import { ShowSiloWatchNowResponseMock } from '../data/summary/shows/silo/response/ShowSiloWatchNowResponseMock.ts';
 import { SiloListsResponseMock } from '../data/summary/shows/silo/response/SiloListsResponseMock.ts';
 
@@ -207,6 +209,24 @@ export const shows = [
     `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/videos`,
     () => {
       return HttpResponse.json(ShowSiloVideoResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/videos`,
+    () => {
+      return HttpResponse.json(ShowSiloVideoResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/1/videos`,
+    () => {
+      return HttpResponse.json(ShowSiloVideoSeason1ResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/2/videos`,
+    () => {
+      return HttpResponse.json(ShowSiloVideoSeason2ResponseMock);
     },
   ),
 ];

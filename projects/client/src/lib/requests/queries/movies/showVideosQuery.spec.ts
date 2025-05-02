@@ -12,7 +12,7 @@ describe('showVideosQuery', () => {
         createQuery(
           showVideosQuery({
             slug: ShowSiloResponseMock.ids.slug,
-            seasons: [1],
+            seasons: [1, 2],
           }),
         ),
       mapper: (response) => response?.data,
