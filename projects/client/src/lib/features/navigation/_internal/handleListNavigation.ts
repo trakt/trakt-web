@@ -1,5 +1,6 @@
 import { getRelevantItem } from '$lib/features/navigation/_internal/getRelevantItem.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { DpadNavigationType } from '../models/DpadNavigationType.ts';
 import { focusAndScrollIntoView } from './focusAndScrollIntoView.ts';
 import { getNavigationScope } from './getNavigationScope.ts';
 import { getNavigationState } from './getNavigationState.ts';
@@ -8,7 +9,9 @@ import { getNextIndex } from './getNextIndex.ts';
 const LIST_SCROLL_BEHAVIOR: ScrollBehavior = 'smooth';
 
 export const handleListNavigation = (key: 'ArrowUp' | 'ArrowDown') => {
-  const { lists, currentListIndex } = getNavigationState();
+  const { lists, currentListIndex } = getNavigationState(
+    DpadNavigationType.List,
+  );
 
   const newListIndex = getNextIndex(
     currentListIndex,
