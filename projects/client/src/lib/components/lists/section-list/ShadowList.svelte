@@ -78,7 +78,8 @@
 <section
   use:whenInViewport={() => isVisible.set(true)}
   class="shadow-list-container"
-  class:shadow-list-container-collapsed={$isMounted && $isCollapsed}
+  class:shadow-list-container-collapsed={$isCollapsed}
+  class:shadow-list-container-mounted={$isMounted}
 >
   {#if $isVisible}
     <ListHeader
@@ -129,12 +130,21 @@
 
     display: flex;
     flex-direction: column;
-    transition:
-      gap var(--transition-increment) ease-in-out,
-      height var(--transition-increment) ease-in-out,
-      min-height var(--transition-increment) ease-in-out;
 
     @include adaptive-list-gap();
+
+    &.shadow-list-container-mounted {
+      transition:
+        gap var(--transition-increment) ease-in-out,
+        height var(--transition-increment) ease-in-out,
+        min-height var(--transition-increment) ease-in-out;
+
+      .shadow-list {
+        transition:
+          height var(--transition-increment) ease-in-out,
+          min-height var(--transition-increment) ease-in-out;
+      }
+    }
   }
 
   .shadow-list-container {
@@ -166,11 +176,6 @@
   .shadow-list {
     position: relative;
     overflow: hidden;
-
-    transition:
-      height var(--transition-increment) ease-in-out,
-      min-height var(--transition-increment) ease-in-out;
-
     &.shadow-list-left-shadow::before {
       opacity: var(--left-shadow-opacity);
     }
