@@ -23,10 +23,12 @@
   </Button>
 {/snippet}
 
-<RenderFor audience="public" navigation="default">
-  {@render joinButton($url)}
-</RenderFor>
+<join-trakt-button>
+  <RenderFor audience="public" navigation="default">
+    {@render joinButton($url)}
+  </RenderFor>
 
-<RenderFor audience="public" navigation="dpad">
-  {@render joinButton(UrlBuilder.login.activate())}
-</RenderFor>
+  <RenderFor audience="public" navigation="dpad">
+    {@render joinButton(UrlBuilder.login.activate())}
+  </RenderFor>
+</join-trakt-button>
