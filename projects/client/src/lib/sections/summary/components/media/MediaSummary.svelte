@@ -34,7 +34,6 @@
   import SummaryHeader from "../summary/SummaryHeader.svelte";
   import SummaryOverview from "../summary/SummaryOverview.svelte";
   import SummaryTitle from "../summary/SummaryTitle.svelte";
-  import YoutubeButton from "../YoutubeButton.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
 
   const {
@@ -131,9 +130,6 @@
 
   <SummaryHeader>
     {#snippet headerActions()}
-      {#if "trailer" in media}
-        <YoutubeButton trailer={media.trailer} />
-      {/if}
       <ShareButton
         {title}
         textFactory={({ title }) => {
