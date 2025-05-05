@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store';
 import { focusAndScrollIntoView } from './_internal/focusAndScrollIntoView.ts';
 import { DpadNavigationType } from './models/DpadNavigationType.ts';
 
-export function useNavigationTrap(
+export function navigationTrap(
   element: HTMLElement,
   itemParentSelector: string,
 ) {
