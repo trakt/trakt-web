@@ -4,7 +4,9 @@ import { getSelectableItems } from '$lib/features/navigation/_internal/getSelect
 import { DpadNavigationType } from '$lib/features/navigation/models/DpadNavigationType.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 
-export function getNavigationState() {
+export function getNavigationState(
+  target: DpadNavigationType.List | DpadNavigationType.Navbar,
+) {
   focusSomething();
 
   const currentItem = assertDefined(
@@ -14,7 +16,7 @@ export function getNavigationState() {
 
   const currentList = assertDefined(
     currentItem.closest(
-      `[data-dpad-navigation="${DpadNavigationType.List}"]`,
+      `[data-dpad-navigation="${target}"]`,
     ),
     'No current list was found',
   );

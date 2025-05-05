@@ -5,7 +5,13 @@ export const getRelevantItem = (target: Document | Element) => {
     `.trakt-link-active[data-dpad-navigation="${DpadNavigationType.Item}"]`,
   );
 
-  return navigableActiveLink ? navigableActiveLink : target.querySelector(
+  const navbarLink = target.querySelector(
+    `[data-dpad-navigation="${DpadNavigationType.Navbar}"] .trakt-link[data-dpad-navigation="${DpadNavigationType.Item}"]`,
+  );
+
+  const item = target.querySelector(
     `[data-dpad-navigation="${DpadNavigationType.Item}"]`,
   );
+
+  return navigableActiveLink ?? navbarLink ?? item;
 };
