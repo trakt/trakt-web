@@ -20,7 +20,7 @@
 </RenderFor>
 
 <RenderFor
-  audience="authenticated"
+  audience="all"
   device={["tablet-sm", "tablet-lg", "desktop"]}
   navigation="dpad"
 >
@@ -33,7 +33,7 @@
   </button>
 </RenderFor>
 
-<RenderFor audience="public">
+<RenderFor audience="public" navigation="default">
   <div class="trakt-logo">
     <Logo />
   </div>

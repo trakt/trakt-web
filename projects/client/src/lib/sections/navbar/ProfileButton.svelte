@@ -38,6 +38,7 @@
         <RenderFor
           audience="vip"
           device={["tablet-sm", "tablet-lg", "desktop"]}
+          navigation="default"
         >
           <VipBadge />
         </RenderFor>

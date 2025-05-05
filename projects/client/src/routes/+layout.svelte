@@ -22,6 +22,7 @@
   import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
+  import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
@@ -82,6 +83,10 @@
     body.dialog-open {
       overflow: hidden;
     }
+
+    body:has(.trakt-side-navbar) {
+      --layout-distance-side: calc(var(--ni-36) + var(--side-navbar-width));
+    }
   </style>
 </svelte:head>
 
@@ -101,7 +106,12 @@
                       <ThemeProvider theme={data.theme}>
                         <ListScrollHistoryProvider>
                           <div class="trakt-layout-wrapper">
-                            <Navbar />
+                            <RenderFor audience="all" navigation="default">
+                              <Navbar />
+                            </RenderFor>
+                            <RenderFor audience="all" navigation="dpad">
+                              <SideNavbar />
+                            </RenderFor>
                             <div class="trakt-layout-content">
                               {@render children()}
                             </div>
@@ -110,6 +120,7 @@
                           <RenderFor
                             audience="all"
                             device={["mobile", "tablet-sm"]}
+                            navigation="default"
                           >
                             <MobileNavbar />
                           </RenderFor>
