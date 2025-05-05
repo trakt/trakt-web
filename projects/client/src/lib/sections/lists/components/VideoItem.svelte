@@ -3,6 +3,7 @@
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
+  import { lineClamp } from "$lib/components/text/lineClamp";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
 
   const { video }: { video: MediaVideo } = $props();
@@ -17,7 +18,10 @@
       style="flat"
     />
     <CardFooter>
-      <p class="trakt-card-title trakt-video-title">
+      <p
+        use:lineClamp={{ lines: 2 }}
+        class="trakt-card-title trakt-video-title"
+      >
         {video.title}
       </p>
     </CardFooter>
