@@ -3,7 +3,7 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { useNavigationTrap } from "$lib/features/navigation/useNavigationTrap";
+  import { navigationTrap } from "$lib/features/navigation/navigationTrap";
   import { createUnderlay } from "$lib/features/portal/_internal/createUnderlay";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
@@ -51,7 +51,7 @@
     class="trakt-sidebar"
     transition:slide={{ duration: 150, axis: slideAxis }}
     use:portal
-    use:useNavigationTrap={".trakt-filter"}
+    use:navigationTrap={".trakt-filter"}
   >
     <div
       class="trakt-sidebar-header"
