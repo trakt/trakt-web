@@ -8,17 +8,24 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { z } from 'zod';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
+import { sourceToMethod } from './_internal/sourceToMethod.ts';
+import type { RecommendationSourceParams } from './RecommendationSourceParams.ts';
 
 export const RecommendedMovieSchema = MovieEntrySchema;
 export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
-type RecommendedMoviesParams = LimitParams & ApiParams & FilterParams;
+type RecommendedMoviesParams =
+  & LimitParams
+  & ApiParams
+  & FilterParams
+  & RecommendationSourceParams;
 
 const recommendedMoviesRequest = (
-  { fetch, limit, filter }: RecommendedMoviesParams,
+  { fetch, limit, filter, source }: RecommendedMoviesParams,
 ) =>
-  api({ fetch })
-    .recommendations
+  api({
+    fetch,
+  })[sourceToMethod({ source })]
     .movies
     .recommend({
       query: {
@@ -30,7 +37,7 @@ const recommendedMoviesRequest = (
     });
 
 export const recommendedMoviesQuery = defineQuery({
-  key: 'recommendedMovies',
+  key: (params) => `${params.source}_recommendedMovies`,
   invalidations: [
     InvalidateAction.Watchlisted('movie'),
     InvalidateAction.MarkAsWatched('movie'),
@@ -40,6 +47,7 @@ export const recommendedMoviesQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
+    params.source,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: recommendedMoviesRequest,
