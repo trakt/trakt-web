@@ -59,7 +59,7 @@
       left: 0;
       position: relative;
 
-      filter: grayscale(0.25);
+      filter: grayscale(0.5);
 
       transition: var(--transition-increment) ease-in-out;
       transition-property: opacity, width, left;
@@ -78,7 +78,7 @@
 
     &:not([data-cover-type="main"]) {
       &::after {
-        backdrop-filter: blur(2px);
+        backdrop-filter: blur(var(--ni-2));
 
         @include for-tablet-sm-and-below {
           backdrop-filter: unset;
@@ -103,7 +103,7 @@
         180deg,
         var(--trakt-cover-primary-color-transparent) 0%,
         var(--trakt-cover-primary-color-transparent) 50%,
-        transparent 100%
+        transparent 80%
       );
 
       pointer-events: none;
@@ -121,12 +121,9 @@
     &::before {
       background: linear-gradient(
         360deg,
-        color-mix(in srgb, var(--color-background) 100%, transparent) 0%,
+        var(--color-background) 0%,
+        color-mix(in srgb, var(--color-background) 60%, transparent) 40%,
         color-mix(in srgb, var(--color-background) 30%, transparent) 50%,
-        color-mix(in srgb, var(--color-background) 15%, transparent) 65%,
-        color-mix(in srgb, var(--color-background) 7.5%, transparent) 75.5%,
-        color-mix(in srgb, var(--color-background) 3.7%, transparent) 82.85%,
-        color-mix(in srgb, var(--color-background) 1.9%, transparent) 88%,
         color-mix(in srgb, var(--color-background) 0%, transparent) 100%
       );
 
