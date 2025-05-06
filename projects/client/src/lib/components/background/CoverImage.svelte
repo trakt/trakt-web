@@ -24,12 +24,16 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-background-cover-image {
-    --color-transparent-background: color-mix(
+    --trakt-cover-primary-color-transparent: color-mix(
       in srgb,
-      var(--color-background) 35%,
+      color-mix(
+          in srgb,
+          var(--color-background) 25%,
+          var(--trakt-cover-primary-color)
+        )
+        50%,
       transparent
     );
-
     z-index: var(--layer-background);
     position: absolute;
     max-height: 100dvh;
@@ -82,7 +86,8 @@
       }
     }
 
-    &::after {
+    &::after,
+    &::before {
       content: "";
       width: 100%;
       height: 100%;
@@ -96,37 +101,9 @@
     &::after {
       background: linear-gradient(
         180deg,
-        color-mix(
-            in srgb,
-            var(--trakt-cover-primary-color) 64%,
-            var(--color-transparent-background)
-          )
-          0%,
-        color-mix(
-            in srgb,
-            var(--trakt-cover-primary-color) 67%,
-            var(--color-transparent-background)
-          )
-          13%,
-        color-mix(
-            in srgb,
-            var(--trakt-cover-primary-color) 70%,
-            var(--color-transparent-background)
-          )
-          25%,
-        color-mix(
-            in srgb,
-            var(--trakt-cover-primary-color) 74%,
-            var(--color-transparent-background)
-          )
-          34%,
-        color-mix(
-            in srgb,
-            var(--trakt-cover-primary-color) 79%,
-            var(--color-transparent-background)
-          )
-          46%,
-        var(--color-background) 100%
+        var(--trakt-cover-primary-color-transparent) 0%,
+        var(--trakt-cover-primary-color-transparent) 50%,
+        transparent 100%
       );
 
       pointer-events: none;
@@ -135,8 +112,26 @@
         background: linear-gradient(
           180deg,
           color-mix(in srgb, var(--color-background) 15%, transparent) 0%,
+          color-mix(in srgb, var(--color-background) 50%, transparent) 30%,
           var(--color-background) 100%
         );
+      }
+    }
+
+    &::before {
+      background: linear-gradient(
+        360deg,
+        color-mix(in srgb, var(--color-background) 100%, transparent) 0%,
+        color-mix(in srgb, var(--color-background) 30%, transparent) 50%,
+        color-mix(in srgb, var(--color-background) 15%, transparent) 65%,
+        color-mix(in srgb, var(--color-background) 7.5%, transparent) 75.5%,
+        color-mix(in srgb, var(--color-background) 3.7%, transparent) 82.85%,
+        color-mix(in srgb, var(--color-background) 1.9%, transparent) 88%,
+        color-mix(in srgb, var(--color-background) 0%, transparent) 100%
+      );
+
+      @include for-tablet-sm-and-below {
+        background: none;
       }
     }
   }
