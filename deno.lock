@@ -40,6 +40,7 @@
     "npm:playwright@^1.51.1": "1.51.1",
     "npm:prettier-plugin-svelte@^3.3.3": "3.3.3_prettier@3.5.3_svelte@5.25.3__acorn@8.14.1",
     "npm:prettier@^3.5.3": "3.5.3",
+    "npm:resolve-accept-language@^3.1.11": "3.1.11",
     "npm:sass-embedded@^1.86.0": "1.86.0",
     "npm:svelte-check@4.1.5": "4.1.5_svelte@5.25.3__acorn@8.14.1_typescript@5.8.2",
     "npm:svelte-check@^4.1.5": "4.1.5_svelte@5.25.3__acorn@8.14.1_typescript@5.8.2",
@@ -5880,6 +5881,9 @@
     "requires-port@1.0.0": {
       "integrity": "sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ=="
     },
+    "resolve-accept-language@3.1.11": {
+      "integrity": "sha512-7YVsTu6c9i/8nm8JUwIa/YGmSf02lhaPQAa+G3baisj/v09/8gEJIF1aRO0bqVy/dQugYJJfqeyxrGBepg/RcQ=="
+    },
     "resolve-from@4.0.0": {
       "integrity": "sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g=="
     },
@@ -7501,6 +7505,7 @@
             "npm:playwright@^1.51.1",
             "npm:prettier-plugin-svelte@^3.3.3",
             "npm:prettier@^3.5.3",
+            "npm:resolve-accept-language@^3.1.11",
             "npm:sass-embedded@^1.86.0",
             "npm:svelte-check@^4.1.5",
             "npm:svelte@^5.25.3",
