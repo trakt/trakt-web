@@ -101,4 +101,10 @@ export const MovieMatrixResponseMock: MovieResponse = {
       'assets.fanart.tv/fanart/movies/603/moviethumb/the-matrix-58678e15757df.jpg',
     ],
   },
+  'colors': {
+    'poster': [
+      '#9AAAB4',
+      '#141A2A',
+    ],
+  },
 };

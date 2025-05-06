@@ -7,6 +7,7 @@ const COVER_CONTEXT_KEY = Symbol('cover');
 type CoverData = {
   src: string;
   type: MediaType | 'main';
+  colors?: [string, string];
 };
 
 type CoverContextData = {

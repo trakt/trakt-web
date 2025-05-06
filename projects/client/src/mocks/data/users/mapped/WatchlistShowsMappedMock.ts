@@ -8,11 +8,13 @@ export const WatchlistShowsMappedMock: WatchlistShow[] = [
     'notes': null,
     'rank': 1,
     'type': 'show',
+
     'entry': {
       'episode': {
         'count': 20,
       },
       ...ShowSiloMinimalMappedMock,
+      'colors': ['transparent', 'transparent'],
     },
   },
 ];

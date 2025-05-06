@@ -73,27 +73,27 @@ export const ShowDevsResponseMock: ShowResponse = {
   'images': {
     'fanart': [
       'walter-r2.trakt.tv/images/shows/000/147/971/fanarts/medium/e9507d40da.jpg.webp',
-      'image.tmdb.org/t/p/w1280/5yf5yfogIxhHhDU7F2Nuk1BsTYQ.jpg',
     ],
     'poster': [
       'walter-r2.trakt.tv/images/shows/000/147/971/posters/thumb/b5fe0d9957.jpg.webp',
-      'image.tmdb.org/t/p/w342/uv63iNWOh69bSJYJQZjiX6n8B3m.jpg',
     ],
     'logo': [
       'walter-r2.trakt.tv/images/shows/000/147/971/logos/medium/409bb7e516.png.webp',
-      'assets.fanart.tv/fanart/tv/364149/hdtvlogo/devs-5e62a65787812.png',
     ],
     'clearart': [
       'walter-r2.trakt.tv/images/shows/000/147/971/cleararts/medium/097852fbfd.png.webp',
-      'assets.fanart.tv/fanart/tv/364149/hdclearart/devs-5e68b13fc11e7.png',
     ],
     'banner': [
       'walter-r2.trakt.tv/images/shows/000/147/971/banners/medium/c26f0754cf.jpg.webp',
-      'assets.fanart.tv/fanart/tv/364149/tvbanner/devs-5e68989a33757.jpg',
     ],
     'thumb': [
       'walter-r2.trakt.tv/images/shows/000/147/971/thumbs/medium/7d0e3d4bbc.jpg.webp',
-      'assets.fanart.tv/fanart/tv/364149/tvthumb/devs-5e68971a85fb4.jpg',
+    ],
+  },
+  'colors': {
+    'poster': [
+      '#BFC8B9',
+      '#516454',
     ],
   },
 };

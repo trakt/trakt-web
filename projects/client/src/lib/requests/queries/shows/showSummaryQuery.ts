@@ -16,7 +16,7 @@ const showSummaryRequest = (
         id: slug,
       },
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
       },
     });
 

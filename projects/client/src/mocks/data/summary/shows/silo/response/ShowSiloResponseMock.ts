@@ -102,7 +102,12 @@ export const ShowSiloResponseMock: ShowResponse = {
     ],
     'thumb': [
       'walter-r2.trakt.tv/images/shows/000/180/770/thumbs/medium/dddaaead2f.jpg.webp',
-      'assets.fanart.tv/fanart/tv/403245/tvthumb/silo-640f444ce6025.jpg',
+    ],
+  },
+  'colors': {
+    'poster': [
+      '#D29D40',
+      '#1E2E2F',
     ],
   },
 };

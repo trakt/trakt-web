@@ -11,6 +11,10 @@ export const ShowDevsMappedMock: ShowEntry = {
   'tagline': 'Reality is stranger than dreams.',
   'country': 'us',
   'status': 'ended',
+  'colors': [
+    '#BFC8B9',
+    '#516454',
+  ],
   'languages': [
     'en',
   ],

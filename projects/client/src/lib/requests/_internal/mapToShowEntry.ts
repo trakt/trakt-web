@@ -3,6 +3,7 @@ import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { type ShowResponse } from '@trakt/api';
 import type { ShowEntry } from '../models/ShowEntry.ts';
+import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToPoster } from './mapToPoster.ts';
 
@@ -29,6 +30,7 @@ export function mapToShowEntry(
     languages: show.languages,
     poster,
     cover,
+    colors: mapToColors(show.colors?.poster),
     thumb: {
       url: prependHttps(
         findDefined(

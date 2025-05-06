@@ -1,4 +1,4 @@
-import { HiddenShowProgressResponseMapped } from '$mocks/data/users/mapped/HiddenShowProgressResponseMapped.ts';
+import { HiddenShowProgressMappedMock } from '$mocks/data/users/mapped/HiddenShowProgressMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
@@ -14,6 +14,6 @@ describe('hiddenShowQuery', () => {
       mapper: (response) => response?.data?.entries,
     });
 
-    expect(result).to.deep.equal(HiddenShowProgressResponseMapped);
+    expect(result).to.deep.equal(HiddenShowProgressMappedMock);
   });
 });

@@ -8,6 +8,7 @@ export const WatchlistMoviesMappedMock: WatchlistMovie[] = [
     'rank': 1,
     'type': 'movie',
     'entry': {
+      'colors': ['transparent', 'transparent'],
       'airDate': new Date('9999-12-31T23:59:59.999Z'),
       'certification': undefined,
       'country': undefined,

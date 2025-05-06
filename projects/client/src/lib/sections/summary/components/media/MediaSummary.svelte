@@ -104,7 +104,7 @@
   </RenderFor>
 {/snippet}
 
-<CoverImageSetter src={media.cover.url.medium} {type} />
+<CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
 
 <SummaryContainer {contextualContent}>
   {#snippet poster()}
