@@ -4,6 +4,7 @@ import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
+import { getDeviceType } from '../../utils/devices/getDeviceType.ts';
 
 export const THEME_PLACEHOLDER = '%theme.current%';
 
@@ -41,7 +42,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     event,
     {
       transformPageChunk: ({ html }) => {
-        const currentTheme = event.locals.theme;
+        const agent = event.request.headers.get('user-agent');
+        const currentTheme = getDeviceType(agent) === 'tv'
+          ? Theme.Dark
+          : event.locals.theme;
         return html.replace(THEME_PLACEHOLDER, `${currentTheme}`);
       },
     },
