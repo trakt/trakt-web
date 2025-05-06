@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Redirect from "$lib/components/router/Redirect.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
@@ -11,6 +12,7 @@
   import UnreleasedList from "$lib/sections/lists/watchlist/UnreleasedList.svelte";
   import MonthInReview from "$lib/sections/month-in-review/MonthInReview.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
 <TraktPage
@@ -28,7 +30,10 @@
     <UnreleasedList />
     <SocialActivityList />
   </RenderFor>
-  <RenderFor audience="public">
+  <RenderFor audience="public" navigation="default">
     <Landing />
+  </RenderFor>
+  <RenderFor audience="public" navigation="dpad">
+    <Redirect to={UrlBuilder.login.activate()} />
   </RenderFor>
 </TraktPage>
