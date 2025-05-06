@@ -35,6 +35,10 @@ function mapToSearchResultEntry(item: SearchResultResponse[0]): MediaEntry {
 
 export const searchCancellationId = () => 'search_cancellation_token';
 
+const EXPERIMENTAL_PARAMS = {
+  engine: 'typesense',
+};
+
 const searchRequest = ({ query, fetch }: SearchParams) =>
   api({
     fetch,
@@ -47,6 +51,7 @@ const searchRequest = ({ query, fetch }: SearchParams) =>
         query,
         extended: 'full,images',
         limit: DEFAULT_SEARCH_LIMIT,
+        ...EXPERIMENTAL_PARAMS,
       },
       params: {
         type: 'movie,show',
