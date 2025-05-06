@@ -115,7 +115,9 @@
                             <div class="trakt-layout-content">
                               {@render children()}
                             </div>
-                            <Footer />
+                            <RenderFor audience="all" navigation="default">
+                              <Footer />
+                            </RenderFor>
                           </div>
                           <RenderFor
                             audience="all"
