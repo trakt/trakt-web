@@ -98,42 +98,45 @@
           <AutoSigninProvider>
             <LocaleProvider>
               <NavigationProvider device={data.device}>
-                <SearchProvider>
-                  <FilterProvider>
-                    <CoverProvider>
-                      <CoverImage />
+                <!-- TODO: coalesce this when we add support for people 'n stuff -->
+                <SearchProvider type="show">
+                  <SearchProvider type="movie">
+                    <FilterProvider>
+                      <CoverProvider>
+                        <CoverImage />
 
-                      <ThemeProvider theme={data.theme}>
-                        <ListScrollHistoryProvider>
-                          <div class="trakt-layout-wrapper">
-                            <RenderFor audience="all" navigation="default">
-                              <Navbar />
-                            </RenderFor>
-                            <RenderFor audience="all" navigation="dpad">
-                              <SideNavbar />
-                            </RenderFor>
-                            <div class="trakt-layout-content">
-                              {@render children()}
+                        <ThemeProvider theme={data.theme}>
+                          <ListScrollHistoryProvider>
+                            <div class="trakt-layout-wrapper">
+                              <RenderFor audience="all" navigation="default">
+                                <Navbar />
+                              </RenderFor>
+                              <RenderFor audience="all" navigation="dpad">
+                                <SideNavbar />
+                              </RenderFor>
+                              <div class="trakt-layout-content">
+                                {@render children()}
+                              </div>
+                              <RenderFor audience="all" navigation="default">
+                                <Footer />
+                              </RenderFor>
                             </div>
-                            <RenderFor audience="all" navigation="default">
-                              <Footer />
+                            <RenderFor
+                              audience="all"
+                              device={["mobile", "tablet-sm"]}
+                              navigation="default"
+                            >
+                              <MobileNavbar />
                             </RenderFor>
-                          </div>
-                          <RenderFor
-                            audience="all"
-                            device={["mobile", "tablet-sm"]}
-                            navigation="default"
-                          >
-                            <MobileNavbar />
-                          </RenderFor>
-                          <SvelteQueryDevtools
-                            buttonPosition="bottom-left"
-                            styleNonce="opacity: 0.5"
-                          />
-                        </ListScrollHistoryProvider>
-                      </ThemeProvider>
-                    </CoverProvider>
-                  </FilterProvider>
+                            <SvelteQueryDevtools
+                              buttonPosition="bottom-left"
+                              styleNonce="opacity: 0.5"
+                            />
+                          </ListScrollHistoryProvider>
+                        </ThemeProvider>
+                      </CoverProvider>
+                    </FilterProvider>
+                  </SearchProvider>
                 </SearchProvider>
               </NavigationProvider>
             </LocaleProvider>

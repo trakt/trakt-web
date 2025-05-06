@@ -13,7 +13,7 @@
 <!-- TODO: add more providers here as we expand test suite -->
 <AuthProvider isAuthorized={$isAuthorized} url="http://localhost:3000">
   <QueryClientProvider client={new QueryClient()}>
-    <SearchProvider>
+    <SearchProvider type="movie">
       <NavigationProvider device="unknown">
         <AnalyticsProvider>
           {@render children()}
