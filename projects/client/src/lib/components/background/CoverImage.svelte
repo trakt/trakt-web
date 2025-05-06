@@ -46,10 +46,6 @@
 
       :global(img) {
         filter: grayscale(1);
-
-        @include for-tablet-sm-and-below {
-          filter: grayscale(0);
-        }
       }
     }
 
