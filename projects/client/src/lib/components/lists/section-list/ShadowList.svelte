@@ -2,6 +2,7 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { onMount, type Snippet } from "svelte";
@@ -61,18 +62,20 @@
 </script>
 
 {#snippet titleAction()}
-  <ActionButton
-    onclick={toggle}
-    label={$isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
-    style="flat"
-    color="default"
-  >
-    {#if $isCollapsed}
-      <ExpandIcon />
-    {:else}
-      <CollapseIcon />
-    {/if}
-  </ActionButton>
+  <RenderFor audience="all" navigation="default">
+    <ActionButton
+      onclick={toggle}
+      label={$isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
+      style="flat"
+      color="default"
+    >
+      {#if $isCollapsed}
+        <ExpandIcon />
+      {:else}
+        <CollapseIcon />
+      {/if}
+    </ActionButton>
+  </RenderFor>
 {/snippet}
 
 <section
