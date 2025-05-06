@@ -6,7 +6,7 @@
 </script>
 
 {#if $state === "ready"}
-  <div class="background-cover-image">
+  <div class="trakt-background-cover-image" data-cover-type={$cover.type}>
     <CrossOriginImage
       loading="eager"
       src={$cover.src}
@@ -18,7 +18,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .background-cover-image {
+  .trakt-background-cover-image {
     z-index: var(--layer-background);
     position: absolute;
     max-height: 100dvh;
@@ -28,6 +28,8 @@
     left: 0;
     width: 100%;
     background: var(--shade-900);
+
+    filter: grayscale(1);
 
     :global(img) {
       width: 100%;
@@ -47,6 +49,16 @@
       @include for-mobile {
         width: 180%;
         left: -40%;
+      }
+    }
+
+    &:not([data-cover-type="main"]) {
+      &::after {
+        backdrop-filter: blur(2px);
+
+        @include for-tablet-sm-and-below {
+          backdrop-filter: unset;
+        }
       }
     }
 
