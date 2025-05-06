@@ -14,6 +14,10 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'languages': [
     'en',
   ],
+  'colors': [
+    '#9AAAB4',
+    '#141A2A',
+  ],
   'poster': {
     'url': {
       'medium':

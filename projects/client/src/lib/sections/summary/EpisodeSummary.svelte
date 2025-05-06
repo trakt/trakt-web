@@ -74,8 +74,16 @@
     <RateNow type="episode" media={episode} {episode} {show} />
   </RenderFor>
 {/snippet}
-
-<CoverImageSetter src={episode.cover.url ?? ""} type="show" />
+<!-- 
+  Episodes don't have their own colors, so we fallback to their show's color
+  if available. This approach ensures visual consistency between a show and its
+  episodes.
+-->
+<CoverImageSetter
+  src={episode.cover.url ?? ""}
+  colors={show.colors}
+  type="show"
+/>
 
 <SummaryContainer>
   {#snippet poster()}

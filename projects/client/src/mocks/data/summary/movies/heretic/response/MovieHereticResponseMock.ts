@@ -84,4 +84,10 @@ export const MovieHereticResponseMock: MovieResponse = {
     ],
     'thumb': [],
   },
+  colors: {
+    'poster': [
+      '#A57B5D',
+      '#1C130C',
+    ],
+  },
 };

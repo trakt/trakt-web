@@ -13,6 +13,10 @@ export const MovieHereticMappedMock: MovieEntry = {
     'horror',
     'thriller',
   ],
+  'colors': [
+    '#A57B5D',
+    '#1C130C',
+  ],
   'status': 'released',
   'id': 916302,
   'overview':

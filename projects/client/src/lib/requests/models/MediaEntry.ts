@@ -36,6 +36,7 @@ export const MediaEntrySchema = z.object({
   airDate: z.date(),
   certification: z.string().optional(),
   votes: z.number(),
+  colors: z.tuple([z.string(), z.string()]),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;

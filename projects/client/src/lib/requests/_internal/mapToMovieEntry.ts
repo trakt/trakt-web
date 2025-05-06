@@ -2,6 +2,7 @@ import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { MovieCertificationResponse, MovieResponse } from '@trakt/api';
 import type { MovieEntry } from '../models/MovieEntry.ts';
+import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToPoster } from './mapToPoster.ts';
 
@@ -33,6 +34,7 @@ export function mapToMovieEntry(
     tagline: movie.tagline ?? '',
     country: movie.country,
     languages: movie.languages,
+    colors: mapToColors(movie.colors?.poster),
     poster,
     cover,
     thumb: {

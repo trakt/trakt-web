@@ -9,6 +9,7 @@ export const ShowSiloMappedMock: ShowEntry = {
         'https://walter-r2.trakt.tv/images/shows/000/180/770/fanarts/thumb/80d39f8578.jpg.webp',
     },
   },
+  colors: ['#D29D40', '#1E2E2F'],
   'genres': [
     'drama',
     'science-fiction',
