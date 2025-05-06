@@ -12,14 +12,16 @@
     title: string;
     drilldownLabel: string;
     type: MediaType;
+    source: "trakt" | "social";
   };
 
-  const { title, drilldownLabel, type }: RecommendationListProps = $props();
+  const { title, drilldownLabel, type, source }: RecommendationListProps =
+    $props();
   const { filterMap } = useFilter();
 </script>
 
 <DrillableMediaList
-  id="recommended-list-{type}"
+  id="recommended-list-{type}-{source}"
   {title}
   {drilldownLabel}
   {type}
@@ -27,7 +29,7 @@
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
   }}
-  useList={useRecommendedList}
+  useList={(props) => useRecommendedList({ ...props, source })}
   urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}

@@ -11,9 +11,10 @@
   type RecommendedListProps = {
     title: string;
     type: MediaType;
+    source: "trakt" | "social";
   };
 
-  const { title, type }: RecommendedListProps = $props();
+  const { title, type, source }: RecommendedListProps = $props();
   const { filterMap } = useFilter();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -28,7 +29,7 @@
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
   }}
-  useList={useRecommendedList}
+  useList={(props) => useRecommendedList({ ...props, source })}
 >
   {#snippet item(media)}
     <RecommendedListItem {type} {media} {style} />

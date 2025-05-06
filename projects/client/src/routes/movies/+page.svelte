@@ -30,7 +30,18 @@
       drilldownLabel={m.view_all_recommended_movies()}
       title={m.recommendations()}
       {type}
+      source="trakt"
     />
+
+    <RenderFor audience="director">
+      <RecommendedList
+        drilldownLabel={m.view_all_recommended_movies()}
+        title={m.social_recommendations()}
+        {type}
+        source="social"
+      />
+    </RenderFor>
+
     <StreamingList
       title={m.streaming_picks()}
       drilldownLabel={m.view_all_streaming_movie_picks()}
