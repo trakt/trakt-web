@@ -10,7 +10,14 @@ describe('handle: i18n', () => {
                   dir="${DIR_PLACEHOLDER}">
                 ></html>`;
 
-    const { transformPageChunk } = await interceptHandleResolveOptions(handle);
+    const { transformPageChunk } = await interceptHandleResolveOptions(
+      handle,
+      new Request('http://localhost', {
+        headers: new Headers({
+          'Accept-Language': 'en-us',
+        }),
+      }),
+    );
 
     const transformed = transformPageChunk?.({ html, done: true });
 

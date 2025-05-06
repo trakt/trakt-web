@@ -1,6 +1,7 @@
 import { LOCALE_COOKIE_NAME } from '$lib/features/i18n/constants.ts';
 import {
   type AvailableLocale,
+  getPreferredLocale,
   getTextDirection,
   setLocale,
 } from '$lib/features/i18n/index.ts';
@@ -35,7 +36,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
-  const locale = setLocale(event.cookies.get(LOCALE_COOKIE_NAME) ?? '');
+  const preferredLocale = getPreferredLocale(event.request.headers);
+  const locale = setLocale(
+    event.cookies.get(LOCALE_COOKIE_NAME) ?? preferredLocale,
+  );
   const direction = getTextDirection(locale);
 
   return resolve(event, {
