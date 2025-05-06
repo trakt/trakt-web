@@ -11,7 +11,7 @@ describe('searchQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          searchQuery({ query: MovieHereticResponseMock.title }),
+          searchQuery({ query: MovieHereticResponseMock.title, type: 'movie' }),
         ),
       mapper: (response) => response?.data,
     });
