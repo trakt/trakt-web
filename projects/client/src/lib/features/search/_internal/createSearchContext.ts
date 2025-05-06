@@ -1,12 +1,12 @@
 import { getContext, setContext } from 'svelte';
 import { writable } from 'svelte/store';
-import { SEARCH_CONTEXT_KEY } from './SEARCH_CONTEXT_KEY.ts';
 import type { SearchContext } from './SearchContext.ts';
+import { searchKeyFactory } from './searchKeyFactory.ts';
 
-export function createSearchContext() {
+export function createSearchContext(type: string) {
   const ctx = setContext(
-    SEARCH_CONTEXT_KEY,
-    getContext<SearchContext>(SEARCH_CONTEXT_KEY) ??
+    searchKeyFactory(type),
+    getContext<SearchContext>(searchKeyFactory(type)) ??
       {
         isSearching: writable(false),
         pathName: '/search',

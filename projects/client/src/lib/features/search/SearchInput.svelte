@@ -7,7 +7,17 @@
   import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
 
-  const { clear, isSearching, pathName, exitPathName, query } = useSearch();
+  /** TODO: refactor system when we add support for people and such */
+  const {
+    clear: clearMovies,
+    isSearching: isSearchingMovies,
+    pathName,
+    exitPathName,
+    query,
+  } = useSearch("movie");
+
+  const { clear: clearShows, isSearching: isSearchingShows } =
+    useSearch("show");
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
@@ -44,7 +54,10 @@
   }
 </script>
 
-<div class="trakt-search" class:search-is-loading={$isSearching}>
+<div
+  class="trakt-search"
+  class:search-is-loading={$isSearchingMovies || $isSearchingShows}
+>
   <div use:focusOnClick class="trakt-search-icon">
     <SearchIcon />
   </div>
@@ -52,7 +65,10 @@
     use:clickOutside
     bind:this={inputElement}
     onclick={onSearch}
-    onclickoutside={() => clear()}
+    onclickoutside={() => {
+      clearMovies();
+      clearShows();
+    }}
     class="trakt-search-input"
     type="search"
     defaultValue={$query}

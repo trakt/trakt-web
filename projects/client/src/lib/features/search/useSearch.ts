@@ -24,7 +24,7 @@ export function useSearch(type: MediaType) {
     reason: 'initial',
   });
   const client = browser ? useQueryClient() : undefined;
-  const { isSearching, ...rest } = getSearchContext();
+  const { isSearching, ...rest } = getSearchContext(type);
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   async function search(query: string) {
