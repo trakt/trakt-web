@@ -9,7 +9,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import FilterButton from "./components/filter/FilterButton.svelte";
-  import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import TraktLogo from "./components/TraktLogo.svelte";
   import ProfileButton from "./ProfileButton.svelte";
 </script>
@@ -59,9 +58,6 @@
     </div>
 
     <div class="trakt-side-navbar-bottom">
-      <RenderFor audience="public">
-        <JoinTraktButton />
-      </RenderFor>
       <RenderFor audience="authenticated">
         <FilterButton />
         <ProfileButton />
@@ -174,15 +170,6 @@
     gap: var(--gap-m);
     transform: scale(0.8);
     transform-origin: bottom left;
-
-    :global(join-trakt-button) {
-      writing-mode: vertical-rl;
-      text-orientation: upright;
-
-      :global(.trakt-button) {
-        height: auto;
-      }
-    }
   }
 
   .trakt-side-navbar-content {
