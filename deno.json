@@ -11,7 +11,8 @@
     "client:i18n:resolve": "cd projects/client && deno task i18n:resolve"
   },
   "unstable": [
-    "broadcast-channel"
+    "broadcast-channel",
+    "sloppy-imports"
   ],
   "nodeModulesDir": "auto",
   "fmt": {
