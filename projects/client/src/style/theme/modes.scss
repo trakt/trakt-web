@@ -1,3 +1,5 @@
+@use "$style/scss/mixins/index" as *;
+
 // Define theme variables for light mode
 @mixin light-theme {
   /**
@@ -93,11 +95,6 @@
   /*
   * Overrides
   */
-  .background-cover-image,
-  .trakt-cover-image {
-    filter: grayscale(1);
-  }
-
   .trakt-cover-image {
     opacity: 0.25;
   }
@@ -184,6 +181,16 @@
    */
   --color-text-sentiment-good: var(--purple-100);
   --color-text-sentiment-bad: var(--red-100);
+
+  /*
+  * Overrides
+  */
+  .trakt-background-cover-image:not([data-cover-type="main"]),
+  .trakt-cover-image:not([data-cover-type="main"]) {
+    @include for-tablet-sm-and-below {
+      filter: grayscale(0) !important;
+    }
+  }
 }
 
 // Apply themes to selectors
