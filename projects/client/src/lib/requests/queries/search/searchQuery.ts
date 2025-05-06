@@ -7,9 +7,11 @@ import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
+import type { MediaType } from '../../models/MediaType.ts';
 
 type SearchParams = {
   query: string;
+  type: MediaType;
 } & ApiParams;
 
 function isGarbage(value?: MediaEntry): boolean {
@@ -33,17 +35,18 @@ function mapToSearchResultEntry(item: SearchResultResponse[0]): MediaEntry {
   }
 }
 
-export const searchCancellationId = () => 'search_cancellation_token';
+export const searchCancellationId = (type: string) =>
+  `${type}_search_cancellation_token`;
 
 const EXPERIMENTAL_PARAMS = {
   engine: 'typesense',
 };
 
-const searchRequest = ({ query, fetch }: SearchParams) =>
+const searchRequest = ({ query, fetch, type }: SearchParams) =>
   api({
     fetch,
     cancellable: true,
-    cancellationId: searchCancellationId(),
+    cancellationId: searchCancellationId(type),
   })
     .search
     .query({
@@ -54,12 +57,12 @@ const searchRequest = ({ query, fetch }: SearchParams) =>
         ...EXPERIMENTAL_PARAMS,
       },
       params: {
-        type: 'movie,show',
+        type,
       },
     });
 
 export const searchQuery = defineQuery({
-  key: 'search',
+  key: ({ type }) => `search_${type}`,
   invalidations: [],
   dependencies: (params) => [params.query.toLowerCase().trim()],
   request: searchRequest,

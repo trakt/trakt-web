@@ -10,9 +10,10 @@ import { CancelledError, useQueryClient } from '@tanstack/svelte-query';
 import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
+import type { MediaType } from '../../requests/models/MediaType.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
 
-export function useSearch() {
+export function useSearch(type: MediaType) {
   type SearchResponse = {
     items: MediaEntry[];
     reason: 'initial' | 'result' | 'cancelled';
@@ -41,6 +42,7 @@ export function useSearch() {
 
     const response = await client.fetchQuery(searchQuery({
       query,
+      type,
     }))
       .then((response) => ({
         items: response,
@@ -78,7 +80,7 @@ export function useSearch() {
 
   function clear() {
     abortRequest(
-      (id) => id.includes(searchCancellationId()),
+      (id) => id.includes(searchCancellationId(type)),
       new CancelledError(),
     );
     results.set({ items: [], reason: 'initial' });
