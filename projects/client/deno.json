@@ -32,8 +32,5 @@
       "vitest/globals",
       "@testing-library/jest-dom"
     ]
-  },
-  "unstable": [
-    "sloppy-imports"
-  ]
+  }
 }
