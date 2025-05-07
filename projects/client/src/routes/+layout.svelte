@@ -91,7 +91,7 @@
 </svelte:head>
 
 <ErrorProvider>
-  <QueryClientProvider client={data.queryClient}>
+  <QueryClientProvider client={data.queryClient} device={data.device}>
     <GlobalParameterProvider>
       <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
         <AnalyticsProvider>
