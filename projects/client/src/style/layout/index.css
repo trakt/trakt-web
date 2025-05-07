@@ -57,6 +57,9 @@
   --navbar-side-padding: var(--ni-16);
   --navbar-height: var(--ni-72);
   --side-navbar-width: var(--ni-66);
+  --footer-height: var(--ni-300);
+  --footer-mobile-height: var(--ni-72);
+  --footer-bar-padding: var(--ni-40);
 
   --layout-distance-side: var(--ni-24);
   --layout-scrollbar-width: var(--ni-8);
