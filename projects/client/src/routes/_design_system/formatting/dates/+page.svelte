@@ -5,6 +5,14 @@
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
+  import {
+    FormatSection,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+  } from "../../_internal/table";
 
   // Svelte 5 runes
   const today = $state(new Date());
@@ -178,189 +186,92 @@
   }
 </script>
 
-<div class="container">
+<div class="trakt-format-section">
   <h1>Date Formatting Examples</h1>
 
-  <section>
-    <h2>Date Formatters</h2>
-    <p>
-      Comparison of different date formatters and how they display the same
-      dates.
-    </p>
-    <table>
-      <thead>
-        <tr>
-          <th>Input Date</th>
-          <th>toHumanDate</th>
-          <th>toHumanDay</th>
-          <th>toHumanMonth</th>
-          <th>toHumanETA</th>
-        </tr>
-      </thead>
-      <tbody>
+  <FormatSection
+    title="Date Formatters"
+    description="Comparison of different date formatters and how they display the same dates."
+  >
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell header>Input Date</TableCell>
+          <TableCell header>toHumanDate</TableCell>
+          <TableCell header>toHumanDay</TableCell>
+          <TableCell header>toHumanMonth</TableCell>
+          <TableCell header>toHumanETA</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
         {#each testDates as date}
-          <tr class={isToday(date) ? "today" : ""}>
-            <td>{getDateLabel(date)}</td>
-            <td>{toHumanDate(today, date, getLocale())}</td>
-            <td>{toHumanDay(date, getLocale())}</td>
-            <td>{toHumanMonth(date, languageTag())}</td>
-            <td>{toHumanETA(today, date, getLocale())}</td>
-          </tr>
+          <TableRow highlight={isToday(date)}>
+            <TableCell>{getDateLabel(date)}</TableCell>
+            <TableCell>{toHumanDate(today, date, getLocale())}</TableCell>
+            <TableCell>{toHumanDay(date, getLocale())}</TableCell>
+            <TableCell>{toHumanMonth(date, languageTag())}</TableCell>
+            <TableCell>{toHumanETA(today, date, getLocale())}</TableCell>
+          </TableRow>
         {/each}
-      </tbody>
-    </table>
-  </section>
+      </TableBody>
+    </Table>
+  </FormatSection>
 
-  <section>
-    <h2>Duration Formatting</h2>
-    <p>
-      Formats time durations with various display options for real-world
-      scenarios.
-    </p>
-    <table>
-      <thead>
-        <tr>
-          <th>Scenario</th>
-          <th>Raw Duration</th>
-          <th>Default</th>
-          <th>Long</th>
-          <th>Short</th>
-          <th>Clamp at Day</th>
-          <th>Clamp at Hour</th>
-        </tr>
-      </thead>
-      <tbody>
+  <FormatSection
+    title="Duration Formatting"
+    description="Formats time durations with various display options for real-world scenarios."
+  >
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell header>Scenario</TableCell>
+          <TableCell header>Raw Duration</TableCell>
+          <TableCell header>Default</TableCell>
+          <TableCell header>Long</TableCell>
+          <TableCell header>Short</TableCell>
+          <TableCell header>Clamp at Day</TableCell>
+          <TableCell header>Clamp at Hour</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
         {#each durations as duration}
-          <tr>
-            <td><strong>{duration.scenario}</strong></td>
-            <td>
+          <TableRow>
+            <TableCell><strong>{duration.scenario}</strong></TableCell>
+            <TableCell>
               {duration.days ? `${duration.days}d ` : ""}
               {duration.hours ? `${duration.hours}h ` : ""}
               {duration.minutes ? `${duration.minutes}m` : ""}
-            </td>
-            <td>{toHumanDuration(duration, languageTag())}</td>
-            <td
-              >{toHumanDuration(
+            </TableCell>
+            <TableCell>{toHumanDuration(duration, languageTag())}</TableCell>
+            <TableCell>
+              {toHumanDuration(
                 { ...duration, unitDisplay: "long" },
                 languageTag(),
-              )}</td
-            >
-            <td
-              >{toHumanDuration(
+              )}
+            </TableCell>
+            <TableCell>
+              {toHumanDuration(
                 { ...duration, unitDisplay: "short" },
                 languageTag(),
-              )}</td
-            >
-            <td
-              >{toHumanDuration(
-                { ...duration, clampAt: "day" },
-                languageTag(),
-              )}</td
-            >
-            <td
-              >{toHumanDuration(
-                { ...duration, clampAt: "hour" },
-                languageTag(),
-              )}</td
-            >
-          </tr>
+              )}
+            </TableCell>
+            <TableCell>
+              {toHumanDuration({ ...duration, clampAt: "day" }, languageTag())}
+            </TableCell>
+            <TableCell>
+              {toHumanDuration({ ...duration, clampAt: "hour" }, languageTag())}
+            </TableCell>
+          </TableRow>
         {/each}
-      </tbody>
-    </table>
-  </section>
+      </TableBody>
+    </Table>
+  </FormatSection>
 </div>
 
 <style>
-  .container {
-    font-family:
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
+  .trakt-format-section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-  }
-
-  section {
-    margin-bottom: 3rem;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 1.5rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--color-text-primary);
-  }
-
-  p {
-    color: var(--color-text-secondary);
-    margin-bottom: 1rem;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-  }
-
-  th,
-  td {
-    padding: 0.75rem;
-    text-align: left;
-    border: 1px solid var(--color-border);
-  }
-
-  th {
-    background-color: var(--color-background);
-    font-weight: 600;
-  }
-
-  tr:nth-child(even) {
-    background-color: color-mix(
-      in srgb,
-      var(--color-background) 97.5%,
-      var(--color-foreground)
-    );
-  }
-
-  tr:nth-child(odd) {
-    background-color: color-mix(
-      in srgb,
-      var(--color-background) 95%,
-      var(--color-foreground)
-    );
-  }
-
-  .today {
-    font-weight: bold;
-  }
-
-  tr.today td {
-    border-top: 2px solid var(--blue-600);
-    border-bottom: 2px solid var(--blue-600);
-    background-color: color-mix(
-      in srgb,
-      var(--color-background) 95%,
-      var(--blue-600)
-    );
-  }
-
-  tr.today td:first-child {
-    border-left: 2px solid var(--blue-600);
-  }
-
-  tr.today td:last-child {
-    border-right: 2px solid var(--blue-600);
   }
 </style>
