@@ -398,5 +398,7 @@
   "video_type_teaser": "Teaser",
   "video_type_featurette": "Featurette",
   "video_type_recap": "Recapitulare",
-  "video_type_behind_the_scenes": "Din culise"
+  "video_type_behind_the_scenes": "Din culise",
+  "now_playing": "Rulează acum",
+  "remaining": "rămase"
 }

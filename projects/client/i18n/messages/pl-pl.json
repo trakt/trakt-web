@@ -398,5 +398,7 @@
   "video_type_teaser": "Teaser",
   "video_type_featurette": "Featurette",
   "video_type_recap": "Streszczenie",
-  "video_type_behind_the_scenes": "Kulisy"
+  "video_type_behind_the_scenes": "Kulisy",
+  "now_playing": "Odtwarzane",
+  "remaining": "pozostało"
 }

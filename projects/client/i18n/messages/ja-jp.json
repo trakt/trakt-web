@@ -398,5 +398,7 @@
   "video_type_teaser": "ティザー",
   "video_type_featurette": "フィーチャレット",
   "video_type_recap": "前回までのあらすじ",
-  "video_type_behind_the_scenes": "舞台裏"
+  "video_type_behind_the_scenes": "舞台裏",
+  "now_playing": "再生中",
+  "remaining": "残り"
 }

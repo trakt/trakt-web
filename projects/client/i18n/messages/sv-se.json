@@ -398,5 +398,7 @@
   "video_type_teaser": "Teaser",
   "video_type_featurette": "Featurette",
   "video_type_recap": "Sammanfattning",
-  "video_type_behind_the_scenes": "Bakom kulisserna"
+  "video_type_behind_the_scenes": "Bakom kulisserna",
+  "now_playing": "Spelas nu",
+  "remaining": "återstår"
 }

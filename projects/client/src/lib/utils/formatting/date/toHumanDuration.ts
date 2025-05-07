@@ -48,7 +48,7 @@ export function toHumanDuration({
     return {
       days: Math.floor(totalHours / 24),
       hours: Math.floor(totalMinutes / 60) % 24,
-      minutes: totalMinutes % 60,
+      minutes: Math.round(totalMinutes % 60),
     };
   };
 

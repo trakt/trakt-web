@@ -398,5 +398,7 @@
   "video_type_teaser": "Тийзър",
   "video_type_featurette": "Фичуретка",
   "video_type_recap": "Резюме",
-  "video_type_behind_the_scenes": "Зад кулисите"
+  "video_type_behind_the_scenes": "Зад кулисите",
+  "now_playing": "В ефир",
+  "remaining": "оставащ"
 }

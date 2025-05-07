@@ -398,5 +398,7 @@
   "video_type_teaser": "Teaser",
   "video_type_featurette": "Featurette",
   "video_type_recap": "Riassunto",
-  "video_type_behind_the_scenes": "Dietro le quinte"
+  "video_type_behind_the_scenes": "Dietro le quinte",
+  "now_playing": "In riproduzione",
+  "remaining": "rimanente"
 }
