@@ -222,6 +222,7 @@
   "remove_from_watched_warning": "Сигурни ли сте, че искате да премахнете {title} от наблюдавани? Всички гледания ще бъдат премахнати.",
   "remove_single_watched_label": "Премахни това гледане на {title} от наблюдавани",
   "remove_single_watched_warning": "Сигурни ли сте, че искате да премахнете това гледне на {title} от наблюдавани?",
+  "seasons_label": "Сезони",
   "season_number_label": "Сезон {number}",
   "expand_media_overview": "Разшири прегледа на {title}",
   "season_episode_number_label": "Сезон {season} • Епизод {number}",

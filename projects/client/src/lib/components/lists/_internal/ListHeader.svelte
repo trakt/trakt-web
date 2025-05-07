@@ -5,6 +5,7 @@
 
   const {
     title,
+    subtitle,
     inset,
     titleAction,
     actions,
@@ -12,6 +13,7 @@
     ...props
   }: {
     title: string;
+    subtitle?: string;
     titleAction?: Snippet;
     actions?: Snippet;
     badge?: Snippet;
@@ -29,7 +31,12 @@
     {#if titleAction}
       {@render titleAction()}
     {/if}
-    <ListTitle {title} />
+    {#if subtitle == null}
+      <ListTitle {title} style="primary" />
+    {:else}
+      <ListTitle {title} style="secondary" />
+      <ListTitle title={`/ ${subtitle}`} style="primary" />
+    {/if}
     {#if badge}
       {@render badge()}
     {/if}

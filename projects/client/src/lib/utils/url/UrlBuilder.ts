@@ -106,7 +106,8 @@ export const UrlBuilder = {
         return UrlBuilder.movie(id);
     }
   },
-  show: (id: string) => `/shows/${id}`,
+  show: (id: string, params: Record<string, string | number> = {}) =>
+    `/shows/${id}${buildParamString(params)}`,
   movies: () => '/movies',
   movie: (id: string) => `/movies/${id}`,
   people: (id: string) => `/people/${id}`,
