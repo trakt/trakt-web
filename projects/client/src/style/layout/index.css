@@ -27,6 +27,9 @@
   --width-comment-thread-card: min(var(--width-comment-card), 85vw);
   --height-comment-thread-card: var(--ni-480);
 
+  --width-now-playing-card: var(--ni-104);
+  --height-now-playing-card: var(--ni-80);
+
   /**
    * List dimensions
    */

@@ -398,5 +398,7 @@
   "video_type_teaser": "Teaser",
   "video_type_featurette": "Featurette",
   "video_type_recap": "Resumen",
-  "video_type_behind_the_scenes": "Detrás de cámaras"
+  "video_type_behind_the_scenes": "Detrás de cámaras",
+  "now_playing": "En emisión",
+  "remaining": "Restante"
 }

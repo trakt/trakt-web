@@ -23,6 +23,7 @@
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
+  import NowPlaying from "$lib/sections/now-playing/NowPlaying.svelte";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
@@ -127,6 +128,12 @@
                               navigation="default"
                             >
                               <MobileNavbar />
+                            </RenderFor>
+                            <RenderFor
+                              audience="authenticated"
+                              navigation="default"
+                            >
+                              <NowPlaying />
                             </RenderFor>
                             <SvelteQueryDevtools
                               buttonPosition="bottom-left"

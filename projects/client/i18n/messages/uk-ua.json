@@ -398,5 +398,7 @@
   "video_type_teaser": "Тизер",
   "video_type_featurette": "Спеціальне відео",
   "video_type_recap": "Підсумок",
-  "video_type_behind_the_scenes": "За лаштунками"
+  "video_type_behind_the_scenes": "За лаштунками",
+  "now_playing": "Зараз в ефірі",
+  "remaining": "залишилось"
 }

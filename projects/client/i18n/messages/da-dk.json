@@ -398,5 +398,7 @@
   "video_type_teaser": "Teaser",
   "video_type_featurette": "Featurette",
   "video_type_recap": "Resumé",
-  "video_type_behind_the_scenes": "Bag kulisserne"
+  "video_type_behind_the_scenes": "Bag kulisserne",
+  "now_playing": "Spiller nu",
+  "remaining": "resterende"
 }

@@ -99,6 +99,14 @@
     opacity: 0.25;
   }
 
+  /**
+   * Now playing
+   */
+  --color-now-playing-background: color-mix(in srgb, var(--shade-100) 70%, transparent 30%);
+  --color-now-playing-border: var(--shade-200);
+  --color-now-playing-progress-bar-background: var(--shade-300);
+  --color-now-playing-progress-bar-progress: var(--shade-500);
+  --color-now-playing-progress-bar-shadow: var(--shade-400);
 }
 
 // Define theme variables for dark mode
@@ -182,6 +190,15 @@
    */
   --color-text-sentiment-good: var(--purple-100);
   --color-text-sentiment-bad: var(--red-100);
+
+  /**
+   * Now playing
+   */
+  --color-now-playing-background: color-mix(in srgb, var(--shade-900) 70%, transparent 30%);
+  --color-now-playing-border: var(--shade-700);
+  --color-now-playing-progress-bar-background: var(--shade-500);
+  --color-now-playing-progress-bar-progress: var(--shade-200);
+  --color-now-playing-progress-bar-shadow: var(--shade-400);
 }
 
 // Apply themes to selectors
