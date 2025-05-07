@@ -222,6 +222,7 @@
   "remove_from_watched_warning": "Er du sikker på at du vil fjerne {title} fra din Sett-liste? Alle visninger vil bli fjernet.",
   "remove_single_watched_label": "Fjern denne visningen av {title} fra din Sett-liste",
   "remove_single_watched_warning": "Er du sikker på at du vil fjerne denne visningen av {title} fra din Sett-liste?",
+  "seasons_label": "Sesonger",
   "season_number_label": "Sesong {number}",
   "expand_media_overview": "Utvid {title} oversikt",
   "season_episode_number_label": "Sesong {season} • Episode {number}",

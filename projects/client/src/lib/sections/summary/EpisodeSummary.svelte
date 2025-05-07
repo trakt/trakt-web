@@ -174,7 +174,7 @@
 
 <CastList title={m.actors()} cast={crew.cast} slug={show.slug} />
 
-<SeasonList {show} {seasons} />
+<SeasonList {show} {seasons} currentSeason={episode.season} />
 
 <Comments
   media={show}

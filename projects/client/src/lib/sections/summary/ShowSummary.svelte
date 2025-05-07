@@ -26,6 +26,7 @@
     crew: MediaCrew;
     seasons: Season[];
     videos: MediaVideo[];
+    currentSeason: number;
   };
 
   const {
@@ -39,6 +40,7 @@
     seasons,
     streamOn,
     videos,
+    currentSeason,
   }: ShowSummaryProps = $props();
 
   const { progress } = $derived(useShowProgress(media.slug));
@@ -70,7 +72,7 @@
 
 <VideoList slug={media.slug} {videos} />
 
-<SeasonList show={media} {seasons} />
+<SeasonList show={media} {seasons} {currentSeason} />
 
 <Comments {media} type="show" />
 

@@ -17,6 +17,7 @@
   import { scrollTracking } from "./scrollTracking";
 
   type SectionListProps<T> = ListProps<T> & {
+    subtitle?: string;
     empty?: Snippet;
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
@@ -27,6 +28,7 @@
     id,
     items,
     title,
+    subtitle,
     scrollX = writable({ left: 0, right: 0 }),
     scrollContainer = writable(),
     item,
@@ -40,6 +42,8 @@
 
   const isLeftShadowVisible = $derived($scrollX.left > $sideDistance);
   const isRightShadowVisible = $derived($scrollX.right > $sideDistance);
+
+  const isHeaderVisible = $derived(Boolean(title));
 
   const leftShadowIntensity = $derived(
     ($scrollX.left - $sideDistance) / $windowShadowWidth,
@@ -83,15 +87,19 @@
   class="shadow-list-container"
   class:shadow-list-container-collapsed={$isCollapsed}
   class:shadow-list-container-mounted={$isMounted}
+  class:shadow-list-container-no-header={!isHeaderVisible}
 >
   {#if $isVisible}
-    <ListHeader
-      {title}
-      {titleAction}
-      actions={$isCollapsed ? undefined : actions}
-      {badge}
-      inset="title"
-    />
+    {#if isHeaderVisible && title}
+      <ListHeader
+        {title}
+        {subtitle}
+        {titleAction}
+        actions={$isCollapsed ? undefined : actions}
+        {badge}
+        inset="title"
+      />
+    {/if}
     <div
       class="shadow-list"
       class:shadow-list-left-shadow={isLeftShadowVisible}
@@ -135,6 +143,12 @@
     flex-direction: column;
 
     @include adaptive-list-gap();
+
+    &.shadow-list-container-no-header {
+      --height-container: var(--height-list);
+      --height-min-container: 0;
+      gap: 0;
+    }
 
     &.shadow-list-container-mounted {
       transition:

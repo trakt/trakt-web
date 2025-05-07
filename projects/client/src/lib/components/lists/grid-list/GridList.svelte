@@ -20,7 +20,9 @@
 </script>
 
 <section class="trakt-grid-list-container">
-  <ListHeader {title} {actions} {badge} inset="all" />
+  {#if title}
+    <ListHeader {title} {actions} {badge} inset="all" />
+  {/if}
 
   {#if items.length > 0}
     <div class="trakt-list-item-container trakt-list-items">
