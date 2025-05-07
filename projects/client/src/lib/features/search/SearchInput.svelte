@@ -102,8 +102,7 @@
           var(--color-background-navbar) 75%,
           transparent 25%
         );
-        outline: var(--border-thickness-xs) solid
-          var(--color-search-input-border);
+        outline: var(--border-thickness-xs) solid var(--color-border);
 
         @include for-mobile {
           &:not(:focus-within) {
