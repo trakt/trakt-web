@@ -12,7 +12,7 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-footer-bar {
-    padding: var(--ni-40);
+    padding: var(--footer-bar-padding);
     display: flex;
     justify-content: space-between;
     align-items: center;
