@@ -43,7 +43,7 @@
   .trakt-mobile-navbar {
     padding: var(--ni-12) 0;
     padding-bottom: calc(var(--ni-12) + env(safe-area-inset-bottom, 0));
-    height: calc(var(--ni-56) + env(safe-area-inset-bottom, 0));
+    height: var(--mobile-navbar-height);
     box-sizing: border-box;
   }
 
