@@ -7,15 +7,18 @@ import type {
   Persister,
 } from '@tanstack/svelte-query-persist-client';
 import { del, get, set } from 'idb-keyval';
+import type { DeviceType } from '../../../models/DeviceType.ts';
+
+const IDB_VALID_KEY = 'trakt-query-client';
 
 /**
  * Creates an Indexed DB persister
  * @see https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
  */
 export function createPersister(
-  idbValidKey: IDBValidKey = 'trakt-query-client',
+  device?: DeviceType,
 ): Persister {
-  if (!browser) {
+  if (!browser || device === 'tv') {
     return {
       persistClient: NOOP_FN,
       restoreClient: () => Promise.resolve(undefined),
@@ -30,15 +33,15 @@ export function createPersister(
 
   return {
     persistClient: monitor(async (client: PersistedClient) => {
-      await set(idbValidKey, client)
+      await set(IDB_VALID_KEY, client)
         .catch(handleError);
     }, 'IDB Persister'),
     restoreClient: monitor(async () => {
-      return await get<PersistedClient>(idbValidKey)
+      return await get<PersistedClient>(IDB_VALID_KEY)
         .catch(handleError);
     }, 'IDB Restorer'),
     removeClient: async () => {
-      await del(idbValidKey);
+      await del(IDB_VALID_KEY);
     },
   };
 }
