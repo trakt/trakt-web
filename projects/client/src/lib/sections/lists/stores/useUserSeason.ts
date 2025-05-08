@@ -1,18 +1,28 @@
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { derived, get, writable } from 'svelte/store';
+import { derived, get, readable } from 'svelte/store';
 
-export function useUserSeason(showId: number) {
+export const EMPTY_SEASON_INFO = { number: -1, episodes: { count: -1 } };
+
+export function useUserSeason(showId: number | Nil) {
+  if (!showId) return readable(EMPTY_SEASON_INFO);
+
   const { isAuthorized } = useAuth();
-  if (!get(isAuthorized)) return writable(0);
+  if (!get(isAuthorized)) return readable(EMPTY_SEASON_INFO);
 
   const { history } = useUser();
 
   return derived(history, ($history) => {
-    if (!$history) return -1;
+    if (!$history) return EMPTY_SEASON_INFO;
 
     const episodes = $history?.shows.get(showId)?.episodes ?? [{ season: 0 }];
+    const season = Math.max(...episodes.map((episode) => episode.season));
 
-    return Math.max(...episodes.map((episode) => episode.season));
+    return {
+      number: season,
+      episodes: {
+        count: episodes.filter((episode) => episode.season === season).length,
+      },
+    };
   });
 }
