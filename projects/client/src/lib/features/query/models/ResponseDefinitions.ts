@@ -4,3 +4,4 @@ export type InputWithStatus<TInput, TStatus> = TInput extends
 
 export type RequestResponse<TInput> = InputWithStatus<TInput, number>;
 export type SuccessResponse<TInput> = InputWithStatus<TInput, 200>;
+export type NoContentResponse<TInput> = InputWithStatus<TInput, 204>;
