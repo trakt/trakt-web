@@ -1,11 +1,11 @@
 import type {
+  NoContentResponse,
   RequestResponse,
-  SuccessResponse,
 } from '../models/ResponseDefinitions.ts';
 import { isStatusResponse } from './isStatusResponse.ts';
 
-export function isSuccessResponse<TInput>(
+export function isNoContentResponse<TInput>(
   response: RequestResponse<TInput>,
-): response is SuccessResponse<TInput> {
-  return isStatusResponse(response, 200);
+): response is NoContentResponse<TInput> {
+  return isStatusResponse(response, 204);
 }

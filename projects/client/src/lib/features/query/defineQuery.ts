@@ -4,6 +4,7 @@ import { error as printError } from '$lib/utils/console/print.ts';
 import { monitor } from '$lib/utils/perf/monitor.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { type z, type ZodType } from 'zod';
+import { isNoContentResponse } from './_internal/isNoContentResponse.ts';
 import { isSuccessResponse } from './_internal/isSuccessResponse.ts';
 import { zodToHash } from './_internal/zodToHash.ts';
 import type { DefineQueryProps } from './models/DefineQueryProps.ts';
@@ -84,11 +85,14 @@ export function defineQuery<
       queryFn: () =>
         request(requestParams)
           .then((response) => {
-            if (!isSuccessResponse(response)) {
+            const isSuccess = isSuccessResponse(response);
+            const isNoContent = isNoContentResponse(response);
+
+            if (!(isSuccess || isNoContent)) {
               throw new FetchError(response, `Failed to fetch data: ${key}`);
             }
 
-            return mapper(response, requestParams);
+            return isNoContent ? null : mapper(response, requestParams);
           }),
       staleTime: params.ttl == null ? undefined : params.ttl,
       refetchOnWindowFocus: params.refetchOnWindowFocus,
