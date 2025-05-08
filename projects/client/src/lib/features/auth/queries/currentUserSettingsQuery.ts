@@ -1,4 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import {
   type Permission,
   permissionSchema,
@@ -14,7 +16,6 @@ import {
   upNextSortOptionSchema,
 } from '@trakt/api';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../../requests/api.ts';
 
 export const UserSettingsSchema = z.object({
   id: z.number(),
@@ -142,7 +143,7 @@ const currentUserRequest = ({ fetch }: ApiParams) =>
 export const currentUserQueryKey = ['userSettings'] as const;
 export const currentUserSettingsQuery = defineQuery({
   key: 'currentUserSettings',
-  invalidations: [],
+  invalidations: [InvalidateAction.User.Avatar],
   dependencies: [],
   request: currentUserRequest,
   mapper: (response) => mapUserSettingsResponse(response.body),

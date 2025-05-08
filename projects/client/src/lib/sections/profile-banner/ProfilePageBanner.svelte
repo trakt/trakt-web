@@ -6,8 +6,9 @@
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
+  const isMe = $derived(slug === "me");
   const nameLabel = $derived(
-    slug === "me"
+    isMe
       ? m.profile_banner_greeting({ name: profile.name.first })
       : profile.name.first,
   );
@@ -16,6 +17,7 @@
 <div class="profile-page-banner-container">
   <div class="profile-image-container" class:user-is-vip={profile.isVip}>
     <ProfileImage
+      isEditable={isMe}
       --width="var(--ni-64)"
       --height="var(--ni-64)"
       --border-width="var(--border-thickness-s)"
