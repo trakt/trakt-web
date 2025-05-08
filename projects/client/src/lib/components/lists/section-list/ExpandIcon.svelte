@@ -1,9 +1,9 @@
 <svg
+  width="17"
+  height="16"
+  viewBox="0 0 17 16"
+  fill="none"
   xmlns="http://www.w3.org/2000/svg"
-  height="24px"
-  viewBox="0 -960 960 960"
-  width="24px"
-  fill="currentColor"
 >
-  <path d="M480-360 280-560h400L480-360Z" />
+  <path d="M1.5 4.5L8.5 11.5L15.5 4.5" stroke="currentColor" stroke-width="2" />
 </svg>
