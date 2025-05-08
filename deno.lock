@@ -5,7 +5,7 @@
     "npm:@cucumber/cucumber@^11.2.0": "11.2.0_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.0.2_@cucumber+messages@27.0.2",
     "npm:@google/generative-ai@0.24": "0.24.0",
     "npm:@inlang/paraglide-sveltekit@~0.16.1": "0.16.1_@sveltejs+kit@2.20.2__@sveltejs+vite-plugin-svelte@5.0.3___svelte@5.25.3____acorn@8.14.1___vite@6.2.3____sass-embedded@1.86.0___sass-embedded@1.86.0__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.25.3___acorn@8.14.1__vite@6.2.3___sass-embedded@1.86.0__sass-embedded@1.86.0_svelte@5.25.3__acorn@8.14.1_vite@6.2.3__sass-embedded@1.86.0_sass-embedded@1.86.0",
-    "npm:@jsr/trakt__api@~0.1.28": "0.1.28_zod@3.24.1",
+    "npm:@jsr/trakt__api@~0.1.29": "0.1.29_zod@3.24.1",
     "npm:@playwright/test@^1.51.1": "1.51.1",
     "npm:@svelte-plugins/tooltips@^3.0.3": "3.0.3_svelte@5.25.3__acorn@8.14.1",
     "npm:@svelte-put/qr@^2.1.0": "2.1.0_svelte@5.25.3__acorn@8.14.1",
@@ -2379,13 +2379,13 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@jsr/trakt__api@0.1.28_zod@3.24.1": {
-      "integrity": "sha512-JihyELOjgm/mrqJO0sJUGbeUmMGyd1p5bohl0CV6wobVEhwIHR2sg1oQDCNpTAjb5kkcAZN05OwhhcfdPyltyw==",
+    "@jsr/trakt__api@0.1.29_zod@3.24.1": {
+      "integrity": "sha512-mnYLGU2WTk1TWxKPbRoiH8O3LN17u4g7mn9Mmg3oC29WosAbafWeExhl2+eBzNAsKKf04QQ9QUWcvcXETbvhdA==",
       "dependencies": [
         "@ts-rest/core",
         "zod@3.24.1"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.1.28.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.1.29.tgz"
     },
     "@lix-js/client@2.2.1": {
       "integrity": "sha512-6DTJdRN2L2a1A8OxW1Wqh3ZOORqq8+YlCALMF5UMoxhfHE4Fcq9FZztMkAV+KwhrDSsp0USWvD9myG0XX+v6QQ==",
@@ -7471,7 +7471,7 @@
             "npm:@cucumber/cucumber@^11.2.0",
             "npm:@google/generative-ai@0.24",
             "npm:@inlang/paraglide-sveltekit@~0.16.1",
-            "npm:@jsr/trakt__api@~0.1.28",
+            "npm:@jsr/trakt__api@~0.1.29",
             "npm:@playwright/test@^1.51.1",
             "npm:@svelte-plugins/tooltips@^3.0.3",
             "npm:@svelte-put/qr@^2.1.0",
