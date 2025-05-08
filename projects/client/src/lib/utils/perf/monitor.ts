@@ -13,6 +13,10 @@ export function monitor<
     return fn;
   }
 
+  if (localStorage.getItem('debug:monitor') !== 'true') {
+    return fn;
+  }
+
   return function (this: TThis, ...args: TArgs): TReturn {
     const start = performance.now();
     const result = fn.apply(this, args);
