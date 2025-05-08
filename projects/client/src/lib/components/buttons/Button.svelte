@@ -67,7 +67,7 @@
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
     use:appendGlobalParameters
-    use:disableNavigation={rest}
+    use:disableNavigation={rest.disabled}
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
@@ -87,7 +87,6 @@
   <button
     use:disableTransitionOn={"touch"}
     use:clickOutside
-    use:disableNavigation={rest}
     class="trakt-button"
     aria-label={label}
     data-variant={variant}

@@ -42,7 +42,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <li
   use:triggerWithKeyboard
-  use:disableNavigation={props}
+  use:disableNavigation={props.disabled}
   tabindex={tabIndex}
   data-color={color}
   data-style={style}

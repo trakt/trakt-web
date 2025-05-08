@@ -1,15 +1,24 @@
-type DisableNavigationProps = { disabled?: boolean };
-
 export function disableNavigation(
   node: HTMLElement,
-  props: DisableNavigationProps,
+  disabled?: boolean,
 ) {
-  node.addEventListener('click', (ev) => {
-    if (!props.disabled) {
+  function handleClick(ev: MouseEvent) {
+    if (!disabled) {
       return;
     }
 
     ev.stopPropagation();
     ev.preventDefault();
-  });
+  }
+
+  node.addEventListener('click', handleClick);
+
+  return {
+    update(updatedState: boolean) {
+      disabled = updatedState;
+    },
+    destroy() {
+      node.removeEventListener('click', handleClick);
+    },
+  };
 }
