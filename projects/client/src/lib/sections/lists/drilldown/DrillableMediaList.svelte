@@ -21,7 +21,7 @@
     <ViewAllButton
       href={urlBuilder({ type, ...props.filter })}
       label={drilldownLabel}
-      isDisabled={items.length === 0}
+      disabled={items.length === 0}
     />
   {/snippet}
 </MediaList>

@@ -70,7 +70,7 @@
     <ActionButton
       onclick={toggle}
       label={$isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}
-      style="flat"
+      style="ghost"
       color="default"
     >
       {#if $isCollapsed}

@@ -78,6 +78,7 @@
         onclick={scrollToLeft}
         label={`Scroll ${title} to the left`}
         color="purple"
+        style="ghost"
         disabled={isLeftScrollDisabled}
       >
         <CaretLeftIcon />
@@ -86,6 +87,7 @@
         onclick={scrollToRight}
         label={`Scroll ${title} to the right`}
         color="purple"
+        style="ghost"
         disabled={isRightScrollDisabled}
       >
         <CaretRightIcon />
