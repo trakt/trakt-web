@@ -1,9 +1,9 @@
 <script lang="ts">
   import Preview from "$lib/components/badge/Preview.svelte";
-  import Button from "$lib/components/buttons/Button.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
   import { writable } from "svelte/store";
   import CommentsDialog from "./_internal/dialog/CommentsDialog.svelte";
@@ -51,16 +51,10 @@
     {/snippet}
 
     {#snippet actions()}
-      <Button
+      <ViewAllButton
         label={m.view_all_comments()}
         onclick={() => onDrilldown()}
-        style="flat"
-        variant="primary"
-        color="purple"
-        size="small"
-      >
-        {m.view_all()}
-      </Button>
+      />
     {/snippet}
   </SectionList>
 

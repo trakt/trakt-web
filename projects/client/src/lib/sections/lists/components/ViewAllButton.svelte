@@ -3,23 +3,20 @@
 
   import Button from "$lib/components/buttons/Button.svelte";
 
-  type ViewAllButtonProps = {
+  type ViewAllLinkProps = {
     href: string;
-    label: string;
-    isDisabled: boolean;
   };
 
-  const { href, label, isDisabled }: ViewAllButtonProps = $props();
+  type ViewAllElementProps = HTMLElementProps;
+
+  type ViewAllButtonProps = { label: string } & (
+    | ViewAllLinkProps
+    | ViewAllElementProps
+  );
+
+  const { label, ...rest }: ViewAllButtonProps = $props();
 </script>
 
-<Button
-  {label}
-  {href}
-  disabled={isDisabled || undefined}
-  style="flat"
-  variant="primary"
-  color="purple"
-  size="small"
->
+<Button {label} {...rest} style="ghost" variant="primary" color="purple">
   {m.view_all()}
 </Button>
