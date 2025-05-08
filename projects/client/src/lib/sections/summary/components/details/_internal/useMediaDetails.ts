@@ -26,18 +26,20 @@ function originalTitle(media: MediaEntry) {
   return [media.originalTitle];
 }
 
-function mediaAirDateOrStatus(media: MediaEntry) {
-  if (media.year) {
-    const isUpcomingItem = media.airDate > new Date();
-    return {
-      title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
-      values: [toHumanDay(media.airDate, getLocale())],
-    };
-  }
+function mediaAirDate(media: MediaEntry) {
+  const isUpcomingItem = media.airDate > new Date();
+  return {
+    title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
+    values: [toHumanDay(media.airDate, getLocale())],
+  };
+}
 
+function mediaStatus(media: MediaEntry) {
   return {
     title: m.status(),
-    values: [toTranslatedValue('status', media.status)],
+    values: media.year && media.type === 'movie'
+      ? undefined
+      : [toTranslatedValue('status', media.status)],
   };
 }
 
@@ -144,7 +146,8 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
   }
 
   return [
-    mediaAirDateOrStatus(props.media),
+    mediaAirDate(props.media),
+    mediaStatus(props.media),
     runtime(props.media),
     ...mainCredits(props.type, props.crew),
     ...metaDetails(props.media, props.studios),
