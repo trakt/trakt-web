@@ -14,7 +14,7 @@ import {
   pl,
   ptBR,
   ro,
-  se,
+  sv,
   uk,
 } from 'date-fns/locale';
 
@@ -35,7 +35,7 @@ export const LOCALE_MAP: Record<AvailableLocale, Locale> = {
   'pl-pl': pl,
   'it-it': it,
   'bg-bg': bg,
-  'sv-se': se,
+  'sv-se': sv,
   'nb-no': nb,
   'da-dk': da,
 };
