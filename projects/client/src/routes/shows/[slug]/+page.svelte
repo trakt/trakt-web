@@ -4,10 +4,13 @@
   import { useParameters } from "$lib/features/parameters/useParameters";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
-  import { useUserSeason } from "$lib/sections/lists/stores/useUserSeason";
+  import {
+    EMPTY_SEASON_INFO,
+    useUserSeason,
+  } from "$lib/sections/lists/stores/useUserSeason";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
+  import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { readable } from "svelte/store";
   import { useShow } from "./useShow";
   import { useShowDetails } from "./useShowDetails";
   import { useShowVideos } from "./useShowVideos";
@@ -41,9 +44,7 @@
     parseInt(page.url.searchParams.get("season") ?? ""),
   );
 
-  const lastWatchedSeason = $derived(
-    $show == null ? readable(-1) : useUserSeason($show.id),
-  );
+  const lastWatchedSeason = $derived(useUserSeason($show?.id));
 
   const { search } = useParameters();
 
@@ -52,12 +53,26 @@
 
     if ($seasons == null) return;
 
-    if ($lastWatchedSeason === -1) return;
+    if ($lastWatchedSeason === EMPTY_SEASON_INFO) return;
 
-    const active = $seasons.find((s) => s.number === $lastWatchedSeason);
+    const active = assertDefined(
+      $seasons.find((s) => s.number === $lastWatchedSeason.number) ??
+        $seasons.at(0),
+      "Active season not found",
+    );
 
-    const activeSeason = active?.number;
-    const firstSeason = $seasons?.at(0)?.number;
+    const isCurrentSeasonFullyWatched =
+      active.episodes.count === $lastWatchedSeason.episodes.count;
+
+    const maxSeason = assertDefined(
+      $seasons.at(-1),
+      "Could not find last season",
+    ).number;
+    const nextSeason = Math.min(active.number + 1, maxSeason);
+
+    const activeSeason = isCurrentSeasonFullyWatched
+      ? nextSeason
+      : active.number;
 
     if ($show == null) return;
 
@@ -68,7 +83,7 @@
      */
     goto(
       UrlBuilder.show($show.slug, {
-        season: activeSeason ?? firstSeason ?? 1,
+        season: activeSeason,
         ...Object.fromEntries($search),
       }),
       {
