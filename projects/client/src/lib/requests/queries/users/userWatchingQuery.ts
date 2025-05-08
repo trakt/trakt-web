@@ -5,6 +5,7 @@ import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { WatchingResponse } from '@trakt/api';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import {
   type NowPlayingItem,
   NowPlayingItemSchema,
@@ -50,7 +51,7 @@ const userWatchingRequest = (
 
 export const userWatchingQuery = defineQuery({
   key: 'userWatching',
-  invalidations: [],
+  invalidations: [InvalidateAction.CheckIn],
   dependencies: (params) => [params.slug],
   request: userWatchingRequest,
   mapper: (response) =>

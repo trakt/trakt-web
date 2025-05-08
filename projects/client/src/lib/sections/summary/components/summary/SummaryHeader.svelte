@@ -29,10 +29,7 @@
 
     display: flex;
     justify-content: flex-end;
-
-    &:global(:has(> :nth-child(n + 2))) {
-      justify-content: space-between;
-    }
+    gap: var(--gap-xs);
   }
 
   .trakt-summary-header-children {
