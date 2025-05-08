@@ -6,6 +6,7 @@ import { AnalyticsEvent } from './AnalyticsEvent.ts';
 type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
 type FilterType = { id: string; action: 'set' | 'reset' };
+type CheckInType = { type: 'episode' | 'movie' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -24,4 +25,5 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.RemoveFromHistory]: never;
   [AnalyticsEvent.LikeComment]: ActionType;
   [AnalyticsEvent.Rate]: RatingType;
+  [AnalyticsEvent.CheckIn]: CheckInType;
 };

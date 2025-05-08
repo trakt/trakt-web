@@ -13,6 +13,7 @@
   import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { MarkAsWatchedActionProps } from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedActionProps";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
@@ -130,6 +131,17 @@
 
   <SummaryHeader>
     {#snippet headerActions()}
+      <RenderFor audience="authenticated" navigation="default">
+        {#if media.type === "movie"}
+          <CheckInAction
+            size="small"
+            style="normal"
+            type="movie"
+            {title}
+            {media}
+          />
+        {/if}
+      </RenderFor>
       <ShareButton
         {title}
         textFactory={({ title }) => {

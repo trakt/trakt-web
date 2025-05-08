@@ -14,7 +14,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:like:comment`
   | `${typeof INVALIDATION_ID}:comment:reply`
   | `${typeof INVALIDATION_ID}:listed:${MediaType}`
-  | `${typeof INVALIDATION_ID}:user:avatar`;
+  | `${typeof INVALIDATION_ID}:user:avatar`
+  | `${typeof INVALIDATION_ID}:check_in`;
 
 type TypeDataMap = {
   'auth': null;
@@ -27,6 +28,7 @@ type TypeDataMap = {
   'comment': 'reply';
   'listed': MediaType;
   'user': 'avatar';
+  'check_in': null;
 };
 
 export function invalidationId(key?: string) {
@@ -66,4 +68,6 @@ export const InvalidateAction = {
   User: {
     Avatar: buildInvalidationKey('user', 'avatar'),
   },
+
+  CheckIn: buildInvalidationKey('check_in'),
 };

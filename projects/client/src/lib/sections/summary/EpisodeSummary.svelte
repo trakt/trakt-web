@@ -16,6 +16,7 @@
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
+  import CheckInAction from "../media-actions/check-in/CheckInAction.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import MediaDetails from "./components/details/MediaDetails.svelte";
   import MediaStreamingServices from "./components/details/MediaStreamingServices.svelte";
@@ -105,6 +106,16 @@
 
   <SummaryHeader>
     {#snippet headerActions()}
+      <RenderFor audience="authenticated" navigation="default">
+        <CheckInAction
+          style="normal"
+          size="small"
+          {title}
+          {type}
+          {show}
+          {episode}
+        />
+      </RenderFor>
       <ShareButton
         {title}
         textFactory={({ title }) =>
