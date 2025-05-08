@@ -79,6 +79,22 @@
           }
         }
       }
+
+      &[data-style="ghost"][data-variant="primary"] {
+        --color-foreground-action-button: color-mix(
+          in srgb,
+          var(--color-foreground) 50%,
+          #{$background-color}
+        );
+      }
+
+      &[data-style="ghost"][data-variant="secondary"] {
+        --color-background-action-button: color-mix(
+          in srgb,
+          var(--color-foreground) 50%,
+          #{$foreground-color}
+        );
+      }
     }
   }
 
@@ -159,7 +175,6 @@
     }
 
     &[data-style="ghost"] {
-      color: var(--color-foreground);
       background-color: transparent;
       /** This is required for improved readability when rendering over a cover image */
       backdrop-filter: blur(var(--ni-16));

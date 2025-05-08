@@ -5,6 +5,7 @@
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
 
+  import type { TraktActionButtonProps } from "$lib/components/buttons/TraktActionButtonProps";
   import type { TraktButtonProps } from "$lib/components/buttons/TraktButtonProps";
 
   const styles: TraktButtonProps["style"][] = [
@@ -13,7 +14,7 @@
     "ghost",
     "underlined",
   ];
-  const colors: TraktButtonProps["color"][] = [
+  const colors: TraktActionButtonProps["color"][] = [
     "purple",
     "red",
     "blue",
@@ -22,6 +23,11 @@
   const variants: NonNullable<TraktButtonProps["variant"]>[] = [
     "primary",
     "secondary",
+  ];
+
+  const actionButtonStyles: TraktActionButtonProps["style"][] = [
+    "flat",
+    "ghost",
   ];
 </script>
 
@@ -96,61 +102,26 @@
     <section>
       <h2>Action</h2>
 
-      <div class="action-button-demo">
-        <ActionButton label="Purple action button" color="purple">
-          <YouTubeIcon />
-        </ActionButton>
+      {#each actionButtonStyles as actionStyle}
+        <h3 class="capitalize">{actionStyle}</h3>
+        {#each colors as color}
+          <div class="action-button-demo">
+            {#each variants as variant}
+              <ActionButton
+                label={`${color} ${actionStyle} action button`}
+                {color}
+                {variant}
+                style={actionStyle}
+              >
+                <YouTubeIcon />
+              </ActionButton>
+            {/each}
 
-        <ActionButton
-          label="Purple action button"
-          color="purple"
-          variant="secondary"
-        >
-          <YouTubeIcon />
-        </ActionButton>
-
-        Variant: purple
-      </div>
-
-      <div class="action-button-demo">
-        <ActionButton label="Red action button" color="red">
-          <YouTubeIcon />
-        </ActionButton>
-
-        <ActionButton label="Red action button" color="red" variant="secondary">
-          <YouTubeIcon />
-        </ActionButton>
-
-        Variant: red
-      </div>
-
-      <div class="action-button-demo">
-        <ActionButton label="Blue action button" color="blue">
-          <YouTubeIcon />
-        </ActionButton>
-
-        <ActionButton
-          label="Blue action button"
-          color="blue"
-          variant="secondary"
-        >
-          <YouTubeIcon />
-        </ActionButton>
-
-        Variant: blue
-      </div>
-
-      <div class="action-button-demo">
-        <ActionButton label="Default action button">
-          <YouTubeIcon />
-        </ActionButton>
-
-        <ActionButton label="Default action button" variant="secondary">
-          <YouTubeIcon />
-        </ActionButton>
-
-        Variant: default
-      </div>
+            Variant: {color}
+            {actionStyle}
+          </div>
+        {/each}
+      {/each}
     </section>
   </div>
 </main>
