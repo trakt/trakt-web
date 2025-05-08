@@ -42,9 +42,20 @@
     />
   {/snippet}
   {#snippet actions()}
-    <RenderFor audience="authenticated">
+    <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
       <MarkAsWatchedAction
         style="normal"
+        type="episode"
+        size="small"
+        title={subtitle}
+        media={episodes}
+        episode={episodes}
+        {show}
+      />
+    </RenderFor>
+    <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
+      <MarkAsWatchedAction
+        style="action"
         type="episode"
         size="small"
         title={subtitle}
