@@ -37,6 +37,7 @@ module.exports = {
         'badge',
         'button',
         'card',
+        'checkin',
         'colors',
         'coming-soon',
         'cover',
