@@ -77,7 +77,7 @@
       <ActionButton
         onclick={scrollToLeft}
         label={`Scroll ${title} to the left`}
-        color="purple"
+        color="default"
         style="ghost"
         disabled={isLeftScrollDisabled}
       >
@@ -86,7 +86,7 @@
       <ActionButton
         onclick={scrollToRight}
         label={`Scroll ${title} to the right`}
-        color="purple"
+        color="default"
         style="ghost"
         disabled={isRightScrollDisabled}
       >
