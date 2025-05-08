@@ -400,5 +400,7 @@
   "video_type_recap": "Підсумок",
   "video_type_behind_the_scenes": "За лаштунками",
   "now_playing": "Зараз в ефірі",
-  "remaining": "залишилось"
+  "remaining": "залишилось",
+  "checkin": "Відмітитися",
+  "checkin_label": "Відмітитися {title}"
 }

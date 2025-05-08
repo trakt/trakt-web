@@ -400,5 +400,7 @@
   "video_type_recap": "Sammendrag",
   "video_type_behind_the_scenes": "Bak kulissene",
   "now_playing": "Spilles nå",
-  "remaining": "gjenstår"
+  "remaining": "gjenstår",
+  "checkin": "Sjekk inn",
+  "checkin_label": "Sjekk inn {title}"
 }

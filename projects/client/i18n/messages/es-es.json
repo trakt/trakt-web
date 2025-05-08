@@ -400,5 +400,7 @@
   "video_type_recap": "Resumen",
   "video_type_behind_the_scenes": "Detrás de cámaras",
   "now_playing": "En emisión",
-  "remaining": "Restante"
+  "remaining": "Restante",
+  "checkin": "Registrarse",
+  "checkin_label": "Registrarse {title}"
 }

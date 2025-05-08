@@ -400,5 +400,7 @@
   "video_type_recap": "Resumé",
   "video_type_behind_the_scenes": "Bag kulisserne",
   "now_playing": "Spiller nu",
-  "remaining": "resterende"
+  "remaining": "resterende",
+  "checkin": "Tjek ind",
+  "checkin_label": "Tjek ind {title}"
 }
