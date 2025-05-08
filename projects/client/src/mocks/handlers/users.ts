@@ -21,6 +21,7 @@ import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesR
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
 import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
+import { UserWatchingResponseMock } from '../data/users/response/UserWatchingResponseMock.ts';
 import { WatchedMoviesResponseMock } from '../data/users/response/WatchedMoviesResponseMock.ts';
 import { WatchedShowsResponseMock } from '../data/users/response/WatchedShowsResponseMock.ts';
 import { WatchlistMoviesResponseMock } from '../data/users/response/WatchlistMoviesResponseMock.ts';
@@ -79,6 +80,9 @@ export const users = [
   }),
   http.get('http://localhost/users/me/lists*', () => {
     return HttpResponse.json(PersonalListsResponseMock);
+  }),
+  http.get('http://localhost/users/me/watching*', () => {
+    return HttpResponse.json(UserWatchingResponseMock);
   }),
   http.get(
     `http://localhost/users/${UserProfileHarryMappedMock.slug}/lists/${
