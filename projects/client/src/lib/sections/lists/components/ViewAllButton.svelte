@@ -3,15 +3,13 @@
 
   import Button from "$lib/components/buttons/Button.svelte";
 
-  type ViewAllLinkProps = {
-    href: string;
-  };
+  type ViewAllLinkProps = HTMLAnchorProps & HTMLElementProps;
 
   type ViewAllElementProps = HTMLElementProps;
 
   type ViewAllButtonProps = { label: string } & (
-    | ViewAllLinkProps
     | ViewAllElementProps
+    | ViewAllLinkProps
   );
 
   const { label, ...rest }: ViewAllButtonProps = $props();

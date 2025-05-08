@@ -22,14 +22,20 @@
     size = "normal",
     text = "uppercase",
     navigationType,
+    disabled,
     ...props
   }: TraktButtonProps | TraktButtonAnchorProps = $props();
+
+  const rest = $derived({
+    ...props,
+    disabled: disabled || undefined,
+  });
 
   const hasIcon = $state(icon != null);
   const isDefaultAlignment = $derived(hasIcon);
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
-  const href = $derived((props as TraktButtonAnchorProps).href);
-  const noscroll = $derived((props as TraktButtonAnchorProps).noscroll);
+  const href = $derived((rest as TraktButtonAnchorProps).href);
+  const noscroll = $derived((rest as TraktButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
 </script>
 
@@ -61,7 +67,7 @@
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
     use:appendGlobalParameters
-    use:disableNavigation={props}
+    use:disableNavigation={rest}
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
@@ -73,7 +79,7 @@
     data-color={color}
     data-size={size}
     data-dpad-navigation={navigationType}
-    {...props}
+    {...rest}
   >
     {@render contents()}
   </a>
@@ -81,7 +87,7 @@
   <button
     use:disableTransitionOn={"touch"}
     use:clickOutside
-    use:disableNavigation={props}
+    use:disableNavigation={rest}
     class="trakt-button"
     aria-label={label}
     data-variant={variant}
@@ -90,7 +96,7 @@
     data-color={color}
     data-size={size}
     data-dpad-navigation={navigationType}
-    {...props}
+    {...rest}
   >
     {@render contents()}
   </button>

@@ -16,11 +16,14 @@
     size = "normal",
     style = "flat",
     navigationType,
+    disabled,
     ...props
   }: TraktActionButtonProps | TraktActionButtonAnchorProps = $props();
 
-  const href = $derived((props as TraktActionButtonAnchorProps).href);
-  const noscroll = $derived((props as TraktActionButtonAnchorProps).noscroll);
+  const rest = $derived({ ...props, disabled: disabled || undefined });
+
+  const href = $derived((rest as TraktActionButtonAnchorProps).href);
+  const noscroll = $derived((rest as TraktActionButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
 </script>
 
@@ -39,7 +42,7 @@
     data-variant={variant}
     data-style={style}
     data-dpad-navigation={navigationType}
-    {...props}
+    {...rest}
   >
     {@render children()}
   </a>
@@ -53,7 +56,7 @@
     data-size={size}
     data-style={style}
     data-dpad-navigation={navigationType}
-    {...props}
+    {...rest}
   >
     {@render children()}
   </button>
