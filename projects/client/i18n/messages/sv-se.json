@@ -400,5 +400,7 @@
   "video_type_recap": "Sammanfattning",
   "video_type_behind_the_scenes": "Bakom kulisserna",
   "now_playing": "Spelas nu",
-  "remaining": "återstår"
+  "remaining": "återstår",
+  "checkin": "Checka in",
+  "checkin_label": "Checka in {title}"
 }

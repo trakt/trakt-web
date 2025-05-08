@@ -400,5 +400,7 @@
   "video_type_recap": "Riassunto",
   "video_type_behind_the_scenes": "Dietro le quinte",
   "now_playing": "In riproduzione",
-  "remaining": "rimanente"
+  "remaining": "rimanente",
+  "checkin": "Registrati",
+  "checkin_label": "Registrati {title}"
 }

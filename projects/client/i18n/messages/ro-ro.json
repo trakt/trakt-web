@@ -400,5 +400,7 @@
   "video_type_recap": "Recapitulare",
   "video_type_behind_the_scenes": "Din culise",
   "now_playing": "Rulează acum",
-  "remaining": "rămase"
+  "remaining": "rămase",
+  "checkin": "Check-in",
+  "checkin_label": "Check-in {title}"
 }
