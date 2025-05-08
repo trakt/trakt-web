@@ -1,7 +1,14 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { monitor } from './monitor.ts';
 
 describe('monitor', () => {
+  beforeEach(() => {
+    localStorage.setItem(
+      'debug:monitor',
+      'true',
+    );
+  });
+
   afterEach(() => {
     vi.restoreAllMocks();
   });
