@@ -13,7 +13,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:restored:show`
   | `${typeof INVALIDATION_ID}:like:comment`
   | `${typeof INVALIDATION_ID}:comment:reply`
-  | `${typeof INVALIDATION_ID}:listed:${MediaType}`;
+  | `${typeof INVALIDATION_ID}:listed:${MediaType}`
+  | `${typeof INVALIDATION_ID}:user:avatar`;
 
 type TypeDataMap = {
   'auth': null;
@@ -25,6 +26,7 @@ type TypeDataMap = {
   'like': 'comment';
   'comment': 'reply';
   'listed': MediaType;
+  'user': 'avatar';
 };
 
 export function invalidationId(key?: string) {
@@ -60,4 +62,8 @@ export const InvalidateAction = {
   Like: buildInvalidationKey('like', 'comment'),
 
   ReplyToComment: buildInvalidationKey('comment', 'reply'),
+
+  User: {
+    Avatar: buildInvalidationKey('user', 'avatar'),
+  },
 };

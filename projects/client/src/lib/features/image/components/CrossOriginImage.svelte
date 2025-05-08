@@ -1,5 +1,6 @@
 <script lang="ts">
   import { writable } from "svelte/store";
+  import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
 
   const {
@@ -10,7 +11,7 @@
     onload: _onload,
     onerror: _onerror,
     ...rest
-  }: HTMLImageElementProps & { animate?: boolean } = $props();
+  }: ImageProps = $props();
 
   const response = $derived(writable({ uri: src }));
   const isImageLoaded = $derived(writable(false));
