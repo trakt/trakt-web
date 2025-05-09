@@ -4,11 +4,11 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { DEFAULT_COVER } from "$lib/utils/constants";
 
-  const { current } = useUser();
+  const { user } = useUser();
 </script>
 
 <RenderFor audience="authenticated">
-  <CoverImageSetter src={current().cover.url} type="main" />
+  <CoverImageSetter src={$user.cover.url} type="main" />
 </RenderFor>
 <RenderFor audience="public">
   <CoverImageSetter src={DEFAULT_COVER} type="main" />

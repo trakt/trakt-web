@@ -1,7 +1,7 @@
 import { currentUserLikesQuery } from '$lib/features/auth/queries/currentUserLikesQuery.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { derived, get } from 'svelte/store';
+import { derived } from 'svelte/store';
 import { currentUserHistoryQuery } from '../queries/currentUserHistoryQuery.ts';
 import { currentUserRatingsQuery } from '../queries/currentUserRatingsQuery.ts';
 import { currentUserSettingsQuery } from '../queries/currentUserSettingsQuery.ts';
@@ -14,7 +14,14 @@ export function useUser() {
   const ratingsQueryResponse = useQuery(currentUserRatingsQuery());
   const likesQueryResponse = useQuery(currentUserLikesQuery());
 
-  const user = derived(userQueryResponse, ($query) => $query.data);
+  const user = derived(
+    userQueryResponse,
+    ($query) =>
+      assertDefined(
+        $query.data,
+        'This hook must be used within a RenderFor guard, target audience = authenticated!',
+      ),
+  );
   const history = derived(historyQueryResponse, ($query) => $query.data);
   const watchlist = derived(
     watchlistQueryResponse,
@@ -29,10 +36,5 @@ export function useUser() {
     watchlist,
     ratings,
     likes,
-    current: () =>
-      assertDefined(
-        get(user),
-        'This hook must be used within a RenderFor guard, target audience = authenticated!',
-      ),
   };
 }

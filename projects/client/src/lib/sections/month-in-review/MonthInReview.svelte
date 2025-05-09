@@ -5,18 +5,18 @@
   import { isFirstWeekOfMonth } from "../../utils/date/isFirstWeekOfMonth";
   import MonthInReviewLink from "./_internal/MonthInReviewLink.svelte";
 
-  const { current } = useUser();
+  const { user } = useUser();
 
   const now = new Date();
   const previousMonth = getPreviousMonth(now);
   const isFirstWeek = isFirstWeekOfMonth(now);
-  const token = current().token;
+  const token = $user.token;
 </script>
 
 <RenderFor audience="vip" navigation="default">
   {#if isFirstWeek && token}
     <div class="trakt-month-in-review">
-      <MonthInReviewLink slug={current().slug} {token} date={previousMonth} />
+      <MonthInReviewLink slug={$user.slug} {token} date={previousMonth} />
     </div>
   {/if}
 </RenderFor>

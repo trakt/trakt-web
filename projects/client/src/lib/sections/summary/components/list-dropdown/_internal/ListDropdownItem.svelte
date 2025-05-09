@@ -19,7 +19,7 @@
     ...target
   }: ListDropdownItemProps & MediaStoreProps = $props();
 
-  const { current } = useUser();
+  const { user } = useUser();
 
   const { addToList, removeFromList, isListUpdating, isListed, itemCount } =
     $derived(
@@ -29,7 +29,7 @@
       }),
     );
 
-  const isBelowLimit = $derived($itemCount < current().limits.lists.itemLimit);
+  const isBelowLimit = $derived($itemCount < $user.limits.lists.itemLimit);
 
   onMount(() => {
     const unsubscribe = isListUpdating.subscribe((value) => {

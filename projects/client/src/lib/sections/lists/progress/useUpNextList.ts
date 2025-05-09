@@ -4,6 +4,7 @@ import { upNextNitroQuery } from '$lib/requests/queries/sync/upNextNitroQuery.ts
 import { upNextQuery } from '$lib/requests/queries/sync/upNextQuery.ts';
 import type { UpNextType } from '$lib/sections/lists/progress/useUpNextExperiment.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
+import { get } from 'svelte/store';
 
 export type UpNextStoreProps = {
   type: UpNextType;
@@ -12,11 +13,11 @@ export type UpNextStoreProps = {
 function typeToQuery(
   { type, limit, page }: UpNextStoreProps,
 ) {
-  const { current: user } = useUser();
+  const { user } = useUser();
   const params = {
     limit,
     page,
-    sort: user().preferences.progress.sort,
+    sort: get(user).preferences.progress.sort,
   };
 
   switch (type) {
