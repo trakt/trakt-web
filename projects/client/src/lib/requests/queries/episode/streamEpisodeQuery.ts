@@ -25,7 +25,7 @@ const streamEpisodeRequest = (
         country,
       },
       query: {
-        links: 'direct',
+        links: 'android',
       },
     });
 
