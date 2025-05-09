@@ -79,4 +79,13 @@
       }
     }
   }
+
+  :global([data-device="tv"]) {
+    .trakt-card-footer .trakt-card-footer-information {
+      :global(.trakt-card-title),
+      :global(.trakt-card-subtitle) {
+        font-size: var(--ni-14);
+      }
+    }
+  }
 </style>
