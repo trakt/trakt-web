@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { extractOS } from "$lib/utils/devices/extractOS.ts";
+  import { getDeviceType } from "$lib/utils/devices/getDeviceType.ts";
   import { slide } from "svelte/transition";
   import { usePortal } from "../../features/portal/usePortal.ts";
   import Button from "../buttons/Button.svelte";
@@ -10,19 +12,99 @@
     icon: _icon,
     children,
     items,
+    preferNative = false,
     size,
     ...props
   }: TraktDropdownListProps = $props();
 
-  const { portalTrigger, portal, isOpened } = usePortal();
+  const isTV = $derived(getDeviceType(navigator.userAgent) === "tv");
+  const isMobile = $derived(
+    ["android", "ios"].includes(extractOS(navigator.userAgent)),
+  );
+  const isNativeTarget = $derived(isTV || isMobile);
+  const isActuallyNative = $derived(preferNative && isNativeTarget);
+
+  const { portalTrigger, portal, isOpened } = $derived(
+    usePortal(isActuallyNative),
+  );
 
   const { observedWidth, observeWidth } = useWidthObserver();
+
+  function buildOptionList(element: HTMLElement) {
+    const list = Array.from(element.querySelectorAll("li"));
+
+    return list.map((item, index) => {
+      item.setAttribute("data-index", index.toString());
+
+      const option = document.createElement("option");
+      option.setAttribute("data-index", index.toString());
+      option.innerText =
+        item.innerText.charAt(0).toUpperCase() +
+        item.innerText.toLowerCase().slice(1);
+
+      return option;
+    });
+  }
+
+  function buildSelect(element: HTMLElement) {
+    const select = document.createElement("select");
+    select.classList.add("trakt-shadow-select");
+    select.setAttribute("tabindex", "-1");
+
+    select.addEventListener("change", (event) => {
+      const selectedIndex = (event.target as HTMLSelectElement).selectedIndex;
+
+      const item = element.querySelector<HTMLElement>(
+        `li[data-index="${selectedIndex}"]`,
+      );
+
+      if (item) {
+        item.click();
+      }
+    });
+
+    return select;
+  }
+
+  function shadowNativeSelect(element: HTMLElement) {
+    const container =
+      element.querySelector<HTMLElement>(`ul.trakt-shadow-list`);
+    if (!container) return;
+
+    const select = buildSelect(container);
+
+    function appendOptions() {
+      select.innerHTML = "";
+      buildOptionList(element).forEach((option) => {
+        select.appendChild(option);
+      });
+    }
+
+    // Initial population
+    appendOptions();
+
+    const observer = new MutationObserver(() => {
+      appendOptions();
+    });
+
+    observer.observe(container, { childList: true, subtree: true });
+
+    element.appendChild(select);
+
+    return {
+      destroy() {
+        observer.disconnect();
+        select.remove();
+      },
+    };
+  }
 </script>
 
 <div
   class="trakt-dropdown-wrapper"
   use:portalTrigger
   use:observeWidth
+  use:shadowNativeSelect
   data-size={size}
   class:has-external-icon={_icon != null}
 >
@@ -37,9 +119,15 @@
       </div>
     {/snippet}
   </Button>
+
+  {#if isActuallyNative}
+    <ul class="trakt-shadow-list">
+      {@render items()}
+    </ul>
+  {/if}
 </div>
 
-{#if $isOpened}
+{#if $isOpened && !isActuallyNative}
   <div
     class="trakt-list"
     data-size={size}
@@ -58,10 +146,32 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-dropdown-wrapper {
+    position: relative;
     display: flex;
 
     :global(.trakt-button) {
       flex-grow: 1;
+    }
+
+    .trakt-shadow-list {
+      display: none;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    :global(.trakt-shadow-select) {
+      z-index: var(--layer-raised);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      border: none;
+      background-color: transparent;
+      appearance: none;
+
+      cursor: pointer;
+      opacity: 0;
     }
 
     &.has-external-icon {

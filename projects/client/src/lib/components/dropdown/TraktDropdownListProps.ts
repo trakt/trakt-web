@@ -3,5 +3,6 @@ import type { Snippet } from 'svelte';
 
 export type TraktDropdownListProps = {
   items: Snippet;
+  preferNative?: boolean;
   style?: Exclude<TraktButtonProps['style'], 'ghost' | 'underlined'>;
 } & Omit<TraktButtonProps, 'style'>;

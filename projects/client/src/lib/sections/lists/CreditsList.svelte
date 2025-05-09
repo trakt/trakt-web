@@ -66,6 +66,7 @@
   {#snippet dynamicActions()}
     <DropdownList
       label={m.position_dropwdown_label()}
+      preferNative
       style="flat"
       variant="primary"
       color="blue"
