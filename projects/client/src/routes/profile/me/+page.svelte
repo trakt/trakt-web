@@ -6,7 +6,7 @@
   import Profile from "$lib/sections/profile/Profile.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 
-  const { current } = useUser();
+  const { user } = useUser();
 </script>
 
 <TraktPage
@@ -15,7 +15,7 @@
   title={m.profile()}
 >
   <TraktPageCoverSetter />
-  {#if current() != null}
-    <Profile profile={current()} slug="me" />
+  {#if $user !== null}
+    <Profile profile={$user} slug="me" />
   {/if}
 </TraktPage>
