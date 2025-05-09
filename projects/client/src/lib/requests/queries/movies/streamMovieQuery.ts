@@ -20,7 +20,7 @@ const streamMovieRequest = (
         country,
       },
       query: {
-        links: 'direct',
+        links: 'android',
       },
     });
 
