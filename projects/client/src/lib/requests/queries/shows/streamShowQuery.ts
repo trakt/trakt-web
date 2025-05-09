@@ -20,7 +20,7 @@ const showWatchNowRequest = (
         country,
       },
       query: {
-        links: 'android',
+        links: 'direct',
       },
     });
 
