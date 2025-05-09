@@ -120,7 +120,11 @@
     &:has(:global(*):focus-visible),
     &:hover {
       width: fit-content;
-      min-width: var(--ni-200);
+
+      &,
+      .trakt-side-navbar-content {
+        min-width: var(--ni-200);
+      }
     }
 
     /** 
