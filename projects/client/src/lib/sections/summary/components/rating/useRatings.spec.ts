@@ -3,7 +3,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
-import { renderStore } from '$test/beds/store/renderStore.ts';
+import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { waitForValue } from '$test/readable/waitForValue.ts';
 import { get } from 'svelte/store';
@@ -16,6 +16,7 @@ describe('useRatings', () => {
   const invalidate = vi.fn(() => {});
 
   beforeEach(() => {
+    setAuthorization(true);
     invalidate.mockReset();
 
     (useInvalidator as Mock)
