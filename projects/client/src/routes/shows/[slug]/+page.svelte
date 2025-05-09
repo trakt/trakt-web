@@ -48,12 +48,31 @@
 
   const { search } = useParameters();
 
+  const goToSeason = (slug: string, season: number) => {
+    /*
+     * TODO: Consider implementing a custom navigation helper within useParameters
+     * to simplify URL management with query parameters, reducing the need for
+     * manual parameter handling throughout the application.
+     */
+    goto(
+      UrlBuilder.show(slug, {
+        season: season,
+        ...Object.fromEntries($search),
+      }),
+      {
+        replaceState: true,
+      },
+    );
+  };
+
   $effect.pre(() => {
     if (currentSeason) return;
 
-    if ($seasons == null) return;
+    if ($seasons == null || $show == null) return;
 
-    if ($lastWatchedSeason === EMPTY_SEASON_INFO) return;
+    if ($lastWatchedSeason === EMPTY_SEASON_INFO) {
+      goToSeason($show.slug, 1);
+    }
 
     const active = assertDefined(
       $seasons.find((s) => s.number === $lastWatchedSeason.number) ??
@@ -74,22 +93,7 @@
       ? nextSeason
       : active.number;
 
-    if ($show == null) return;
-
-    /*
-     * TODO: Consider implementing a custom navigation helper within useParameters
-     * to simplify URL management with query parameters, reducing the need for
-     * manual parameter handling throughout the application.
-     */
-    goto(
-      UrlBuilder.show($show.slug, {
-        season: activeSeason,
-        ...Object.fromEntries($search),
-      }),
-      {
-        replaceState: true,
-      },
-    );
+    goToSeason($show.slug, activeSeason);
   });
 </script>
 
