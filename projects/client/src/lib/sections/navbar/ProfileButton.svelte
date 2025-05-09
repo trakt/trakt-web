@@ -14,7 +14,7 @@
   const style = $derived(isVip ? "textured" : "flat");
 </script>
 
-<trakt-profile-button>
+<trakt-profile-button data-hj-suppress>
   <Button
     size="small"
     href={UrlBuilder.profile.me()}

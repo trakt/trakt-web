@@ -57,6 +57,7 @@
 <div
   class="trakt-search"
   class:search-is-loading={$isSearchingMovies || $isSearchingShows}
+  data-hj-suppress
 >
   <div use:focusOnClick class="trakt-search-icon">
     <SearchIcon />
