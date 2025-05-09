@@ -4,9 +4,22 @@ import { openPopupContainer } from '$lib/features/portal/_internal/openPopupCont
 import { usePopupHelpers } from '$lib/features/portal/_internal/usePopupHelpers.ts';
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
 import { onMount } from 'svelte';
-import { get, readable, writable } from 'svelte/store';
+import { derived, get, readable, writable } from 'svelte/store';
+import { NOOP_FN } from '../../utils/constants.ts';
 
-export function usePortal() {
+export function usePortal(disabled?: boolean) {
+  if (disabled) {
+    return {
+      portalTrigger: () => ({
+        destroy: NOOP_FN,
+      }),
+      portal: () => ({
+        destroy: NOOP_FN,
+      }),
+      isOpened: readable(false),
+    };
+  }
+
   let popupContainer: HTMLElement | null = null;
 
   const isPopupOpen = writable(false);
@@ -56,9 +69,6 @@ export function usePortal() {
   return {
     portalTrigger,
     portal,
-    isOpened: readable(get(isPopupOpen), (isOpened) => {
-      const unsubscribe = isPopupOpen.subscribe(isOpened);
-      return unsubscribe;
-    }),
+    isOpened: derived(isPopupOpen, ($isOpened) => $isOpened),
   };
 }

@@ -51,6 +51,7 @@
     {#snippet actions()}
       {#if types.length > 1}
         <DropdownList
+          preferNative
           label="Seasons"
           style="flat"
           variant="primary"
