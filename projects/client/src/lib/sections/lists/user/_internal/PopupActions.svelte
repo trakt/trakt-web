@@ -9,9 +9,9 @@
   import RemoveFromListAction from "./RemoveFromListAction.svelte";
 
   const { list, media }: { list: ListParams; media: MediaEntry } = $props();
-  const { current } = useUser();
+  const { user } = useUser();
 
-  const isMyList = $derived(list.user?.slug === current().slug);
+  const isMyList = $derived(list.user?.slug === $user.slug);
 </script>
 
 <RenderFor audience="authenticated">

@@ -6,13 +6,13 @@ import type { AnalyticsEventDataMap } from './events/AnalyticsEventDataMap.ts';
 
 export function useTrack<T extends keyof AnalyticsEventDataMap>(key: T) {
   const { isAuthorized } = useAuth();
-  const { current } = useUser();
+  const { user } = useUser();
   const { record, setUser } = useAnalytics();
 
   function track<D extends AnalyticsEventDataMap[T]>(
     ...args: [D] extends [never] ? [] | [D?] : [D]
   ) {
-    const userId = get(isAuthorized) ? current().id.toString() : null;
+    const userId = get(isAuthorized) ? get(user).id.toString() : null;
     setUser(userId);
     record(key, args[0] ?? {});
   }
