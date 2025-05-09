@@ -402,5 +402,8 @@
   "now_playing": "À l'affiche",
   "remaining": "restant",
   "checkin": "S'enregistrer",
-  "checkin_label": "S'enregistrer {title}"
+  "checkin_label": "S'enregistrer {title}",
+  "cookie_notice": "Ce site utilise des témoins pour améliorer votre expérience.",
+  "cookie_more_info": "Plus d'info.",
+  "cookie_accept": "Compris"
 }

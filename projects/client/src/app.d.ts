@@ -172,6 +172,7 @@ declare global {
       auth:
         | import('$lib/features/auth/models/SerializedAuthResponse').SerializedAuthResponse
         | Nil;
+      hasConsent: boolean;
     }
     // interface PageData {}
     // interface PageState {}

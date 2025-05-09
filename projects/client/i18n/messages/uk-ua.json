@@ -402,5 +402,8 @@
   "now_playing": "Зараз в ефірі",
   "remaining": "залишилось",
   "checkin": "Відмітитися",
-  "checkin_label": "Відмітитися {title}"
+  "checkin_label": "Відмітитися {title}",
+  "cookie_notice": "Цей сайт використовує файли cookie для покращення вашого досвіду.",
+  "cookie_more_info": "Детальніше.",
+  "cookie_accept": "Зрозуміло"
 }

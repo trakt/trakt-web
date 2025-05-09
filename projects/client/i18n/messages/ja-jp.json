@@ -402,5 +402,8 @@
   "now_playing": "再生中",
   "remaining": "残り",
   "checkin": "チェックイン",
-  "checkin_label": "チェックイン {title}"
+  "checkin_label": "チェックイン {title}",
+  "cookie_notice": "当サイトでは、お客様のエクスペリエンス向上のためにクッキーを使用しています。",
+  "cookie_more_info": "詳細情報.",
+  "cookie_accept": "OK"
 }

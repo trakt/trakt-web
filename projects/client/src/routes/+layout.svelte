@@ -19,6 +19,7 @@
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import CookieNotice from "$lib/sections/cookie/CookieNotice.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
@@ -135,6 +136,9 @@
                             >
                               <NowPlaying />
                             </RenderFor>
+                            {#if data.device !== "tv"}
+                              <CookieNotice hasConsent={data.hasConsent} />
+                            {/if}
                             <SvelteQueryDevtools
                               buttonPosition="bottom-left"
                               styleNonce="opacity: 0.5"

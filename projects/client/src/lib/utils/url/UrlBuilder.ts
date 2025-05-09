@@ -148,6 +148,7 @@ export const UrlBuilder = {
     status: () => 'https://status.trakt.tv',
     monthInReview: (slug: string, token: string) =>
       `https://trakt.tv/users/${slug}/mir?slurm=${token}`,
+    privacy: () => 'https://trakt.tv/privacy',
   },
   login: {
     activate: () => '/auth/device',

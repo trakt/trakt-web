@@ -402,5 +402,8 @@
   "now_playing": "Rulează acum",
   "remaining": "rămase",
   "checkin": "Check-in",
-  "checkin_label": "Check-in {title}"
+  "checkin_label": "Check-in {title}",
+  "cookie_notice": "Acest site folosește cookie-uri pentru a-ți îmbunătăți experiența.",
+  "cookie_more_info": "Mai multe informații.",
+  "cookie_accept": "Am înțeles"
 }

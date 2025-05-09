@@ -402,5 +402,8 @@
   "now_playing": "Spilles nå",
   "remaining": "gjenstår",
   "checkin": "Sjekk inn",
-  "checkin_label": "Sjekk inn {title}"
+  "checkin_label": "Sjekk inn {title}",
+  "cookie_notice": "Dette nettstedet bruker informasjonskapsler for å forbedre opplevelsen din.",
+  "cookie_more_info": "Mer info.",
+  "cookie_accept": "Forstått"
 }

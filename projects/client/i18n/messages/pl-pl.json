@@ -402,5 +402,8 @@
   "now_playing": "Odtwarzane",
   "remaining": "pozostało",
   "checkin": "Zameldować się",
-  "checkin_label": "Zameldować się {title}"
+  "checkin_label": "Zameldować się {title}",
+  "cookie_notice": "Ta strona używa plików cookie, aby poprawić jakość korzystania.",
+  "cookie_more_info": "Więcej info.",
+  "cookie_accept": "Rozumiem"
 }

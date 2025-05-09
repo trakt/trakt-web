@@ -1,6 +1,8 @@
 Feature: Basic navigation
 
   Scenario: Public pages
+    When I click on the "consent-button" button
+
     When I click on the "nav-bar-home-button" button
     Then I should see "Home" in the page title
 

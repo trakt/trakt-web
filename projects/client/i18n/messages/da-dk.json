@@ -402,5 +402,8 @@
   "now_playing": "Spiller nu",
   "remaining": "resterende",
   "checkin": "Tjek ind",
-  "checkin_label": "Tjek ind {title}"
+  "checkin_label": "Tjek ind {title}",
+  "cookie_notice": "Denne side bruger cookies til at forbedre din oplevelse.",
+  "cookie_more_info": "Mere info.",
+  "cookie_accept": "Okay"
 }

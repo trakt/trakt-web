@@ -107,6 +107,11 @@
   --color-now-playing-progress-bar-background: var(--shade-300);
   --color-now-playing-progress-bar-progress: var(--shade-500);
   --color-now-playing-progress-bar-shadow: var(--shade-400);
+
+  /**
+   * Cookie
+   */
+  --color-cookie-border: var(--shade-100);
 }
 
 // Define theme variables for dark mode
@@ -199,6 +204,11 @@
   --color-now-playing-progress-bar-background: var(--shade-500);
   --color-now-playing-progress-bar-progress: var(--shade-200);
   --color-now-playing-progress-bar-shadow: var(--shade-400);
+
+  /**
+   * Cookie
+   */
+  --color-cookie-border: var(--shade-700);
 }
 
 // Apply themes to selectors
