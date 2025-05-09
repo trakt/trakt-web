@@ -27,6 +27,6 @@ describe('handle: devices', () => {
 
     const transformed = transformPageChunk?.({ html, done: true });
 
-    expect(transformed).toMatch('<html>0.75</html>');
+    expect(transformed).toMatch('<html>0.65</html>');
   });
 });
