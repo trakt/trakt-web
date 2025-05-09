@@ -197,8 +197,11 @@
     }
 
     :global(svg) {
-      width: var(--navbar-item-width);
-      height: var(--navbar-item-width);
+      --icon-padding: var(--ni-4);
+
+      padding: var(--icon-padding);
+      width: calc(var(--navbar-item-width) - var(--icon-padding) * 2);
+      height: calc(var(--navbar-item-width) - var(--icon-padding) * 2);
     }
   }
 </style>
