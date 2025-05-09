@@ -402,5 +402,8 @@
   "now_playing": "Nu bezig",
   "remaining": "resterend",
   "checkin": "Inchecken",
-  "checkin_label": "Inchecken {title}"
+  "checkin_label": "Inchecken {title}",
+  "cookie_notice": "Deze site gebruikt cookies om uw ervaring te verbeteren.",
+  "cookie_more_info": "Meer info.",
+  "cookie_accept": "Begrepen"
 }

@@ -91,4 +91,13 @@
    * List
    */
   --list-shadow-width: var(--ni-32);
+
+  /**
+   * Cookie
+   */
+  --color-cookie-background: color-mix(
+    in srgb,
+    var(--color-background) 70%,
+    transparent 30%
+  );
 }

@@ -402,5 +402,8 @@
   "now_playing": "В ефир",
   "remaining": "оставащ",
   "checkin": "Чекиране",
-  "checkin_label": "Чекиране {title}"
+  "checkin_label": "Чекиране {title}",
+  "cookie_notice": "Този сайт използва бисквитки, за да подобри работата ви.",
+  "cookie_more_info": "Повече инфо.",
+  "cookie_accept": "Разбрах"
 }

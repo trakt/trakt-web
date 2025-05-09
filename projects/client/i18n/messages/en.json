@@ -402,5 +402,8 @@
   "now_playing": "Now Playing",
   "remaining": "remaining",
   "checkin": "Check in",
-  "checkin_label": "Check in {title}"
+  "checkin_label": "Check in {title}",
+  "cookie_notice": "This site uses cookies to enhance your experience.",
+  "cookie_more_info": "More info.",
+  "cookie_accept": "Got it"
 }

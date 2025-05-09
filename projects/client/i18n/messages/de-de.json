@@ -402,5 +402,8 @@
   "now_playing": "Läuft jetzt",
   "remaining": "verbleibend",
   "checkin": "Einchecken",
-  "checkin_label": "Einchecken {title}"
+  "checkin_label": "Einchecken {title}",
+  "cookie_notice": "Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern.",
+  "cookie_more_info": "Mehr Infos.",
+  "cookie_accept": "Verstanden"
 }

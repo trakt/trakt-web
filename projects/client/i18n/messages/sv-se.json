@@ -402,5 +402,8 @@
   "now_playing": "Spelas nu",
   "remaining": "återstår",
   "checkin": "Checka in",
-  "checkin_label": "Checka in {title}"
+  "checkin_label": "Checka in {title}",
+  "cookie_notice": "Denna webbplats använder cookies för att förbättra din upplevelse.",
+  "cookie_more_info": "Mer info.",
+  "cookie_accept": "Okej"
 }

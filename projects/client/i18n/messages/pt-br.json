@@ -402,5 +402,8 @@
   "now_playing": "Em exibição",
   "remaining": "restante",
   "checkin": "Registrar",
-  "checkin_label": "Registrar {title}"
+  "checkin_label": "Registrar {title}",
+  "cookie_notice": "Este site usa cookies para melhorar sua experiência.",
+  "cookie_more_info": "Mais informações.",
+  "cookie_accept": "Entendi"
 }
