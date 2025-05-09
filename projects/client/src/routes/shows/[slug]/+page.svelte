@@ -41,19 +41,43 @@
   );
 
   const currentSeason = $derived(
-    parseInt(page.url.searchParams.get("season") ?? ""),
+    parseInt(page.url.searchParams.get("season") ?? "0", 10),
   );
 
   const lastWatchedSeason = $derived(useUserSeason($show?.id));
 
   const { search } = useParameters();
 
+  const goToSeason = (slug: string, season: number) => {
+    /*
+     * TODO: Consider implementing a custom navigation helper within useParameters
+     * to simplify URL management with query parameters, reducing the need for
+     * manual parameter handling throughout the application.
+     */
+    goto(
+      UrlBuilder.show(slug, {
+        season: season,
+        ...Object.fromEntries($search),
+      }),
+      {
+        replaceState: true,
+      },
+    );
+  };
+
   $effect.pre(() => {
     if (currentSeason) return;
+    if ($seasons == null || $show == null) return;
 
-    if ($seasons == null) return;
+    const maxSeason = assertDefined(
+      $seasons.at(-1),
+      "Could not find last season",
+    ).number;
 
-    if ($lastWatchedSeason === EMPTY_SEASON_INFO) return;
+    if ($lastWatchedSeason === EMPTY_SEASON_INFO) {
+      goToSeason($show.slug, maxSeason);
+      return;
+    }
 
     const active = assertDefined(
       $seasons.find((s) => s.number === $lastWatchedSeason.number) ??
@@ -64,32 +88,13 @@
     const isCurrentSeasonFullyWatched =
       active.episodes.count === $lastWatchedSeason.episodes.count;
 
-    const maxSeason = assertDefined(
-      $seasons.at(-1),
-      "Could not find last season",
-    ).number;
     const nextSeason = Math.min(active.number + 1, maxSeason);
 
     const activeSeason = isCurrentSeasonFullyWatched
       ? nextSeason
       : active.number;
 
-    if ($show == null) return;
-
-    /*
-     * TODO: Consider implementing a custom navigation helper within useParameters
-     * to simplify URL management with query parameters, reducing the need for
-     * manual parameter handling throughout the application.
-     */
-    goto(
-      UrlBuilder.show($show.slug, {
-        season: activeSeason,
-        ...Object.fromEntries($search),
-      }),
-      {
-        replaceState: true,
-      },
-    );
+    goToSeason($show.slug, activeSeason);
   });
 </script>
 
