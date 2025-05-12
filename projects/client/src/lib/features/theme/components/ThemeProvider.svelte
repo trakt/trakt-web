@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-  <meta name="theme-color" content={$color} />
+  <meta name="theme-color" content={$color.navbar} />
 </svelte:head>
 
 {@render children()}

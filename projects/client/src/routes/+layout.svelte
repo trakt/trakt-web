@@ -236,15 +236,10 @@
     height: var(--ni-48);
 
     background: linear-gradient(
-      0deg,
-      transparent 0%,
-      color-mix(in srgb, var(--color-background) 7%, transparent 93%) 13%,
-      color-mix(in srgb, var(--color-background) 18%, transparent 82%) 24%,
-      color-mix(in srgb, var(--color-background) 29%, transparent 71%) 34%,
-      color-mix(in srgb, var(--color-background) 43%, transparent 57%) 46%,
-      color-mix(in srgb, var(--color-background) 62%, transparent 38%) 63%,
-      color-mix(in srgb, var(--color-background) 86%, transparent 14%) 86%,
-      var(--color-background) 100%
+      180deg,
+      var(--color-background-navbar-base) 0%,
+      var(--color-background-navbar-base) 10%,
+      transparent 100%
     );
   }
 
