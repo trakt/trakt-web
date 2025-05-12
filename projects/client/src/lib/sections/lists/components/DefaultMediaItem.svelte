@@ -9,6 +9,7 @@
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
   import MediaItem from "./MediaItem.svelte";
+  import MediaSwipe from "./MediaSwipe.svelte";
 
   const {
     type,
@@ -54,4 +55,6 @@
   {/if}
 {/snippet}
 
-<MediaItem {type} {media} {style} {tag} {...rest} {popupActions} />
+<MediaSwipe {type} {media} {style}>
+  <MediaItem {type} {media} {style} {tag} {...rest} {popupActions} />
+</MediaSwipe>
