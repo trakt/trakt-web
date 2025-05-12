@@ -142,7 +142,7 @@
   @mixin navbar-spacing($side-margin) {
     margin: var(--ni-12) $side-margin;
     margin-top: calc(var(--ni-12) + env(safe-area-inset-top));
-    padding: var(--ni-12) var(--navbar-side-padding);
+    padding: var(--navbar-vertical-padding) var(--navbar-side-padding);
   }
 
   .trakt-navbar-spacer {
@@ -153,6 +153,8 @@
   }
 
   .trakt-navbar {
+    --navbar-vertical-padding: var(--ni-12);
+
     z-index: var(--layer-overlay);
     position: fixed;
     top: 0;
@@ -164,7 +166,7 @@
     height: var(--navbar-height);
 
     margin-top: env(safe-area-inset-top);
-    padding: var(--ni-12) var(--layout-distance-side);
+    padding: var(--navbar-vertical-padding) var(--layout-distance-side);
 
     align-items: center;
     gap: var(--gap-l);
@@ -249,5 +251,15 @@
 
     border-bottom-left-radius: var(--border-radius-m);
     border-bottom-right-radius: var(--border-radius-m);
+  }
+
+  :global([data-mobile-os="ios"]) {
+    .trakt-navbar-pwa {
+      margin-top: 0;
+      padding-top: calc(
+        var(--navbar-vertical-padding) + env(safe-area-inset-top, 0)
+      );
+      height: calc(var(--navbar-height) + env(safe-area-inset-top, 0));
+    }
   }
 </style>
