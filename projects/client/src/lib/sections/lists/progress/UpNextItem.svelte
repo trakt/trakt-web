@@ -6,7 +6,7 @@
   import DropAction from "../../media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeItem from "../components/EpisodeItem.svelte";
-  import EpisodeProgressSwipe from "./EpisodeProgressSwipe.svelte";
+  import UpNextSwipe from "./UpNextSwipe.svelte";
   import { useUpNextExperiment } from "./useUpNextExperiment";
 
   type UpNextEpisodeProps = {
@@ -16,14 +16,14 @@
     style: "cover" | "summary";
   };
 
-  const { enabled: isNitroEnabled } = useUpNextExperiment();
-
   const { episode, show, status, style }: UpNextEpisodeProps = $props();
+
+  const { enabled: isNitroEnabled } = useUpNextExperiment();
 
   const isHidden = $derived(status === "hidden");
 </script>
 
-<EpisodeProgressSwipe {episode} {show} {style}>
+<UpNextSwipe {episode} {show} {style}>
   <EpisodeItem {episode} {show} {status} {style} variant="next">
     {#snippet popupActions()}
       <RenderFor audience="authenticated">
@@ -50,4 +50,4 @@
       </RenderFor>
     {/snippet}
   </EpisodeItem>
-</EpisodeProgressSwipe>
+</UpNextSwipe>
