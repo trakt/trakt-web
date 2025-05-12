@@ -76,16 +76,6 @@
       }
     }
 
-    &:not([data-cover-type="main"]) {
-      &::after {
-        backdrop-filter: blur(var(--ni-2));
-
-        @include for-tablet-sm-and-below {
-          backdrop-filter: unset;
-        }
-      }
-    }
-
     &::after,
     &::before {
       content: "";
@@ -120,15 +110,28 @@
 
     &::before {
       background: linear-gradient(
-        360deg,
-        var(--color-background) 0%,
-        color-mix(in srgb, var(--color-background) 60%, transparent) 40%,
-        color-mix(in srgb, var(--color-background) 30%, transparent) 50%,
-        color-mix(in srgb, var(--color-background) 0%, transparent) 100%
+        180deg,
+        transparent 0%,
+        color-mix(in srgb, var(--color-background) 95%, transparent) 65%,
+        color-mix(in srgb, var(--color-background) 100%, transparent) 100%
       );
+    }
 
-      @include for-tablet-sm-and-below {
-        background: none;
+    &:not([data-cover-type="main"]) {
+      &::after {
+        backdrop-filter: blur(var(--ni-2));
+
+        @include for-tablet-sm-and-below {
+          backdrop-filter: unset;
+        }
+      }
+    }
+
+    &[data-cover-type="main"] {
+      &::before {
+        @include for-mobile {
+          background: none;
+        }
       }
     }
   }
