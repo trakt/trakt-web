@@ -1,22 +1,32 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import YearToDateArrow from "../../../components/icons/YearToDateArrow.svelte";
 
   const { isVip, slug }: { isVip: boolean; slug: string } = $props();
+  const { user } = useUser();
 
   const currentYear = new Date().getFullYear();
 
-  const hasYearToDateLink = isVip || slug === "me";
+  const hasYearToDateLink = $derived(isVip || slug === "me");
 
-  const href = isVip
-    ? UrlBuilder.og.yearToDate(slug, currentYear)
-    : UrlBuilder.og.getVip();
+  const ogHref = $derived(
+    isVip
+      ? UrlBuilder.og.yearToDate(slug, currentYear)
+      : UrlBuilder.og.getVip(),
+  );
+
+  // FIXME: always use iframe route when the kinks are ironed out
+  const target = $derived($user.isDirector ? "_self" : "_blank");
+  const href = $derived(
+    $user.isDirector ? UrlBuilder.users(slug).yearToDate(currentYear) : ogHref,
+  );
 </script>
 
 {#if hasYearToDateLink}
   <trakt-year-to-date-link>
-    <Link {href} target="_blank">
+    <Link {href} {target}>
       <div class="ytd-link-content">
         <h2 class="ytd-year">{currentYear}</h2>
         <div class="ytd-link-details">

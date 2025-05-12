@@ -405,5 +405,7 @@
   "checkin_label": "Tjek ind {title}",
   "cookie_notice": "Denne side bruger cookies til at forbedre din oplevelse.",
   "cookie_more_info": "Mere info.",
-  "cookie_accept": "Okay"
+  "cookie_accept": "Okay",
+  "year_to_date_label": "År til dato",
+  "month_in_review_label": "Månedens overblik"
 }

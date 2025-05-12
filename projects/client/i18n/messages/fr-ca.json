@@ -405,5 +405,7 @@
   "checkin_label": "S'enregistrer {title}",
   "cookie_notice": "Ce site utilise des témoins pour améliorer votre expérience.",
   "cookie_more_info": "Plus d'info.",
-  "cookie_accept": "Compris"
+  "cookie_accept": "Compris",
+  "year_to_date_label": "Année en cours",
+  "month_in_review_label": "Bilan du mois"
 }

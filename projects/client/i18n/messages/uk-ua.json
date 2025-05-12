@@ -405,5 +405,7 @@
   "checkin_label": "Відмітитися {title}",
   "cookie_notice": "Цей сайт використовує файли cookie для покращення вашого досвіду.",
   "cookie_more_info": "Детальніше.",
-  "cookie_accept": "Зрозуміло"
+  "cookie_accept": "Зрозуміло",
+  "year_to_date_label": "З початку року",
+  "month_in_review_label": "Огляд місяця"
 }
