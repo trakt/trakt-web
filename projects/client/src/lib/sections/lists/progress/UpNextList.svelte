@@ -8,7 +8,7 @@
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useStablePaginated } from "../stores/useStablePaginated";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
-  import EpisodeProgressItem from "./EpisodeProgressItem.svelte";
+  import UpNextItem from "./UpNextItem.svelte";
   import UpNextLabSwitch from "./UpNextLabSwitch.svelte";
   import { useHiddenShows } from "./useHiddenShows";
   import { useUpNextExperiment } from "./useUpNextExperiment";
@@ -43,7 +43,7 @@
     </RenderFor>
   {/snippet}
   {#snippet item(episode)}
-    <EpisodeProgressItem
+    <UpNextItem
       style="cover"
       {episode}
       show={episode.show}

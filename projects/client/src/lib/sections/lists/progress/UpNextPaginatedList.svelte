@@ -2,7 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
-  import EpisodeProgressItem from "$lib/sections/lists/progress/EpisodeProgressItem.svelte";
+  import UpNextItem from "$lib/sections/lists/progress/UpNextItem.svelte";
   import UpNextLabSwitch from "$lib/sections/lists/progress/UpNextLabSwitch.svelte";
   import { useHiddenShows } from "$lib/sections/lists/progress/useHiddenShows";
   import { useUpNextExperiment } from "$lib/sections/lists/progress/useUpNextExperiment";
@@ -36,7 +36,7 @@
     <UpNextLabSwitch />
   {/snippet}
   {#snippet item(episode)}
-    <EpisodeProgressItem
+    <UpNextItem
       {episode}
       {style}
       show={episode.show}
