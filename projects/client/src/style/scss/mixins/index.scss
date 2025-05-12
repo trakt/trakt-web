@@ -48,20 +48,6 @@
   }
 }
 
-@mixin for-pwa {
-  @media (display-mode: standalone) {
-    @content;
-  }
-
-  @media (display-mode: fullscreen) {
-    @content;
-  }
-
-  @media (display-mode: minimal-ui) {
-    @content;
-  }
-}
-
 @mixin default-link-style {
   text-decoration-color: var(--color-link-active);
 

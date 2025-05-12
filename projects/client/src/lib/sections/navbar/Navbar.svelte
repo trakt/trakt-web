@@ -199,7 +199,7 @@
       }
     }
 
-    @include for-pwa {
+    &.trakt-navbar-pwa {
       border-radius: 0%;
     }
   }
