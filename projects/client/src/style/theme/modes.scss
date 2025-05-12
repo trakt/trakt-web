@@ -229,3 +229,18 @@
     @include dark-theme();
   }
 }
+
+// For pages that show OG content in an iframe
+[data-theme='light'],
+[data-theme='dark'],
+[data-theme='system'] {
+  &:has(.trakt-og-frame) {
+    @include dark-theme();
+
+    --color-background: rgb(24, 23, 29);
+
+    .trakt-background-cover-image {
+      display: none;
+    }
+  }
+}
