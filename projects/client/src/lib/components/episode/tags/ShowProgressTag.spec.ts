@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import ShowProgressTag from './ShowProgressTag.svelte';
 
 const children = createRawSnippet(() => ({
-  render: () => 'Custom Text',
+  render: () => '<span>Custom Text</span>',
 }));
 
 describe('ShowProgressTag', () => {
