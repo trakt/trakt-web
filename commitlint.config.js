@@ -54,6 +54,7 @@ module.exports = {
         'filter',
         'formatter',
         'footer',
+        'frame',
         'gestures',
         'guards',
         'i18n',
