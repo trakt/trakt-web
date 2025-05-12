@@ -25,6 +25,7 @@
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import NowPlaying from "$lib/sections/now-playing/NowPlaying.svelte";
+  import { isPWA } from "$lib/utils/devices/isPWA.ts";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
@@ -33,6 +34,10 @@
   const { data, children } = $props();
 
   onMount(async () => {
+    if (isPWA()) {
+      document.body.classList.add("trakt-pwa");
+    }
+
     const ACTIVE_SHA = TRAKT_GIT_SHA;
     const DEPLOYED_SHA = await fetch(DeploymentEndpoint.Get).then((res) =>
       res.text(),
@@ -257,11 +262,9 @@
     );
   }
 
-  @include for-pwa {
-    :global([data-mobile-os="android"] body) {
-      &::after {
-        @include pwa-navbar-shadow(fixed);
-      }
+  :global([data-mobile-os="android"] body.trakt-pwa) {
+    &::after {
+      @include pwa-navbar-shadow(fixed);
     }
   }
 </style>
