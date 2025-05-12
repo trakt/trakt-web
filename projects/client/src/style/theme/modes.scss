@@ -16,8 +16,9 @@
   /**
    * Navbar
    */
+  --color-background-navbar-base: var(--shade-50);
   --color-background-navbar: color-mix(in srgb,
-      var(--shade-50) 80%,
+      var(--color-background-navbar-base) 80%,
       transparent);
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-300);
@@ -77,7 +78,7 @@
    * Navbar
    */
   --color-background-mobile-navbar: color-mix(in srgb,
-      var(--shade-30) 90%,
+      var(--color-background) 90%,
       transparent 10%);
 
   /*
@@ -127,8 +128,9 @@
   /**
    * Navbar
    */
+  --color-background-navbar-base: var(--shade-920);
   --color-background-navbar: color-mix(in srgb,
-      var(--shade-920) 90%,
+      var(--color-background-navbar-base) 90%,
       transparent 10%);
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);

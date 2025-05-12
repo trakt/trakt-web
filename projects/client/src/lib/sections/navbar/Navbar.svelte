@@ -7,6 +7,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { isPWA } from "$lib/utils/devices/isPWA";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { navigateToTraktOg } from "$lib/utils/url/navigateToTraktOg";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -48,7 +49,11 @@
 {/snippet}
 
 <header>
-  <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
+  <nav
+    class="trakt-navbar"
+    class:trakt-navbar-scroll={isScrolled}
+    class:trakt-navbar-pwa={isPWA()}
+  >
     <TraktLogo />
 
     <div class="trakt-navbar-content">
@@ -165,8 +170,9 @@
     gap: var(--gap-l);
 
     border-radius: var(--border-radius-m);
-    transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: padding, margin, width, background-color, box-shadow;
+    transition: var(--transition-increment) ease-in-out;
+    transition-property:
+      padding, margin, width, background-color, box-shadow, border-radius;
 
     .trakt-navbar-content {
       width: 100%;
@@ -190,10 +196,19 @@
         gap: var(--gap-xs);
       }
     }
+
+    @include for-pwa {
+      border-radius: 0%;
+    }
   }
 
-  .trakt-navbar-scroll {
+  .trakt-navbar-scroll,
+  .trakt-navbar-pwa {
     background-color: var(--color-background-navbar);
+    backdrop-filter: blur(var(--ni-8));
+  }
+
+  .trakt-navbar-scroll:not(.trakt-navbar-pwa) {
     box-shadow: 0px 24px 64px 0px
       color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
 
@@ -223,5 +238,16 @@
 
       @include navbar-spacing(var(--layout-distance-side));
     }
+  }
+
+  .trakt-navbar-pwa {
+    box-shadow: 0px 12px 32px 0px color-mix(in srgb, var(--color-shadow) 16%);
+  }
+
+  .trakt-navbar-scroll.trakt-navbar-pwa {
+    box-shadow: 0px 24px 64px 0px color-mix(in srgb, var(--color-shadow) 32%);
+
+    border-bottom-left-radius: var(--border-radius-m);
+    border-bottom-right-radius: var(--border-radius-m);
   }
 </style>
