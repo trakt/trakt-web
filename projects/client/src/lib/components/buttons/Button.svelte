@@ -6,6 +6,7 @@
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
+  import { onMount } from "svelte";
   import type { TraktButtonProps } from "./TraktButtonProps";
 
   type TraktButtonAnchorProps = HTMLAnchorProps &
@@ -23,6 +24,7 @@
     text = "uppercase",
     navigationType,
     disabled,
+    "data-testid": dataTestId,
     ...props
   }: TraktButtonProps | TraktButtonAnchorProps = $props();
 
@@ -37,6 +39,13 @@
   const href = $derived((rest as TraktButtonAnchorProps).href);
   const noscroll = $derived((rest as TraktButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
+
+  const appendTestId = $derived((element: HTMLElement) => {
+    onMount(() => {
+      if (!dataTestId) return;
+      element.setAttribute("data-testid", dataTestId);
+    });
+  });
 </script>
 
 {#snippet contents()}
@@ -68,6 +77,7 @@
     use:mobileAppleDeviceTriggerHack
     use:appendGlobalParameters
     use:disableNavigation={rest.disabled}
+    use:appendTestId
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
     class="trakt-button trakt-button-link"
@@ -87,6 +97,7 @@
   <button
     use:disableTransitionOn={"touch"}
     use:clickOutside
+    use:appendTestId
     class="trakt-button"
     aria-label={label}
     data-variant={variant}
