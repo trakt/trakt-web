@@ -405,5 +405,7 @@
   "checkin_label": "Чекиране {title}",
   "cookie_notice": "Този сайт използва бисквитки, за да подобри работата ви.",
   "cookie_more_info": "Повече инфо.",
-  "cookie_accept": "Разбрах"
+  "cookie_accept": "Разбрах",
+  "year_to_date_label": "Година до момента",
+  "month_in_review_label": "Обзор на месеца"
 }

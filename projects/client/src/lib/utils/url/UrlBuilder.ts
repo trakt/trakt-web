@@ -63,6 +63,11 @@ const categoryDrilldownFactory =
     return baseUrl + buildParamString(sanitizeParams(params));
   };
 
+const ogIframeFactory = (url: HttpsUrl, token: string | Nil): HttpsUrl => {
+  const tokenParam = token ? `&slurm=${token}` : '';
+  return `${url}/?standalone_mode=true${tokenParam}`;
+};
+
 export const UrlBuilder = {
   history: {
     category: (params: UrlBuilderParams) => {
@@ -122,6 +127,9 @@ export const UrlBuilder = {
       type
         ? `/users/${id}/lists/${slug}?type=${type}`
         : `/users/${id}/lists/${slug}`,
+    yearToDate: (year: number) => `/users/${id}/year/${year}`,
+    monthInReview: (year: number, month: number) =>
+      `/users/${id}/mir/${year}/${month}`,
   }),
   lists: {
     official: (id: number, type?: MediaType) =>
@@ -149,6 +157,20 @@ export const UrlBuilder = {
     monthInReview: (slug: string, token: string) =>
       `https://trakt.tv/users/${slug}/mir?slurm=${token}`,
     privacy: () => 'https://trakt.tv/privacy',
+    frame: {
+      yearToDate: (slug: string, year: string, token: string | Nil) =>
+        ogIframeFactory(`https://trakt.tv/users/${slug}/year/${year}`, token),
+      monthInReview: (
+        slug: string,
+        year: string,
+        month: string,
+        token: string | Nil,
+      ) =>
+        ogIframeFactory(
+          `https://trakt.tv/users/${slug}/mir/${year}/${month}`,
+          token,
+        ),
+    },
   },
   login: {
     activate: () => '/auth/device',

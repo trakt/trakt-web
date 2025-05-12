@@ -405,5 +405,7 @@
   "checkin_label": "Einchecken {title}",
   "cookie_notice": "Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern.",
   "cookie_more_info": "Mehr Infos.",
-  "cookie_accept": "Verstanden"
+  "cookie_accept": "Verstanden",
+  "year_to_date_label": "Bisheriges Jahr",
+  "month_in_review_label": "Monatsrückblick"
 }

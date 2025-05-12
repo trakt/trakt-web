@@ -405,5 +405,7 @@
   "checkin_label": "Sjekk inn {title}",
   "cookie_notice": "Dette nettstedet bruker informasjonskapsler for å forbedre opplevelsen din.",
   "cookie_more_info": "Mer info.",
-  "cookie_accept": "Forstått"
+  "cookie_accept": "Forstått",
+  "year_to_date_label": "År til dags dato",
+  "month_in_review_label": "Månedens oversikt"
 }

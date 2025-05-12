@@ -405,5 +405,7 @@
   "checkin_label": "Check-in {title}",
   "cookie_notice": "Acest site folosește cookie-uri pentru a-ți îmbunătăți experiența.",
   "cookie_more_info": "Mai multe informații.",
-  "cookie_accept": "Am înțeles"
+  "cookie_accept": "Am înțeles",
+  "year_to_date_label": "Anul curent",
+  "month_in_review_label": "Luna în revistă"
 }

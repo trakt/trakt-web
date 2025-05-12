@@ -405,5 +405,7 @@
   "checkin_label": "チェックイン {title}",
   "cookie_notice": "当サイトでは、お客様のエクスペリエンス向上のためにクッキーを使用しています。",
   "cookie_more_info": "詳細情報.",
-  "cookie_accept": "OK"
+  "cookie_accept": "OK",
+  "year_to_date_label": "今年",
+  "month_in_review_label": "今月のレビュー"
 }

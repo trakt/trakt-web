@@ -405,5 +405,7 @@
   "checkin_label": "Inchecken {title}",
   "cookie_notice": "Deze site gebruikt cookies om uw ervaring te verbeteren.",
   "cookie_more_info": "Meer info.",
-  "cookie_accept": "Begrepen"
+  "cookie_accept": "Begrepen",
+  "year_to_date_label": "Jaar tot nu toe",
+  "month_in_review_label": "Maandoverzicht"
 }

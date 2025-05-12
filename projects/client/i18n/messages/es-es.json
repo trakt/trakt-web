@@ -405,5 +405,7 @@
   "checkin_label": "Registrarse {title}",
   "cookie_notice": "Este sitio utiliza cookies para mejorar tu experiencia.",
   "cookie_more_info": "Más información.",
-  "cookie_accept": "Entendido"
+  "cookie_accept": "Entendido",
+  "year_to_date_label": "Año hasta la fecha",
+  "month_in_review_label": "Mes en revisión"
 }
