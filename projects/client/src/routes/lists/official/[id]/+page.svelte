@@ -18,7 +18,12 @@
   const listName = $derived($list?.name ?? "");
 </script>
 
-<TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={listName}>
+<TraktPage
+  audience="all"
+  image={DEFAULT_SHARE_COVER}
+  title={listName}
+  hasDynamicContent={true}
+>
   <TraktPageCoverSetter />
 
   <UserListPaginatedList

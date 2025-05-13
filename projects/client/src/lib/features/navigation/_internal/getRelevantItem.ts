@@ -1,6 +1,10 @@
 import { DpadNavigationType } from '$lib/features/navigation/models/DpadNavigationType.ts';
 
 export const getRelevantItem = (target: Document | Element) => {
+  const item = target.querySelector(
+    `[data-dpad-navigation="${DpadNavigationType.List}"] [data-dpad-navigation="${DpadNavigationType.Item}"]`,
+  );
+
   const navigableActiveLink = target.querySelector(
     `.trakt-link-active[data-dpad-navigation="${DpadNavigationType.Item}"]`,
   );
@@ -9,9 +13,5 @@ export const getRelevantItem = (target: Document | Element) => {
     `[data-dpad-navigation="${DpadNavigationType.Navbar}"] .trakt-link[data-dpad-navigation="${DpadNavigationType.Item}"]`,
   );
 
-  const item = target.querySelector(
-    `[data-dpad-navigation="${DpadNavigationType.Item}"]`,
-  );
-
-  return navigableActiveLink ?? navbarLink ?? item;
+  return item ?? navigableActiveLink ?? navbarLink;
 };

@@ -103,6 +103,7 @@
   info={$show}
   image={$show?.poster.url.thumb ?? $show?.cover.url.thumb}
   type="show"
+  hasDynamicContent={true}
 >
   {#if !isLoading}
     <ShowSummary

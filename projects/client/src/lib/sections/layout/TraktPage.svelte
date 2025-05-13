@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
@@ -15,6 +16,7 @@
       overview: string;
       runtime: number;
     };
+    hasDynamicContent?: boolean;
   };
 
   const {
@@ -24,6 +26,7 @@
     type = "webpage",
     image = DEFAULT_SHARE_COVER,
     info: _info,
+    hasDynamicContent = false,
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
   const websiteName = "Trakt Lite";
@@ -54,6 +57,14 @@
         }
       : _info,
   );
+
+  const dynamicContentProps = $derived(
+    hasDynamicContent
+      ? {
+          "data-dynamic-selector": `[data-dpad-navigation="${DpadNavigationType.List}"]`,
+        }
+      : {},
+  );
 </script>
 
 <svelte:head>
@@ -83,7 +94,7 @@
 </svelte:head>
 
 <RenderFor {audience}>
-  <div class="trakt-content">
+  <div class="trakt-content" {...dynamicContentProps}>
     {@render children()}
   </div>
 

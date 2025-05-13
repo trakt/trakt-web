@@ -50,5 +50,9 @@ export function useNavbarNavigation() {
   return {
     leaveNavbar,
     enterNavbar,
+    reset: () => {
+      outsideElement.set(null);
+      navbarElement.set(null);
+    },
   };
 }

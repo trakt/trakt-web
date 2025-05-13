@@ -1,3 +1,4 @@
+import { afterNavigate } from '$app/navigation';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onMount } from 'svelte';
 import { useNavbarNavigation } from '../useNavbarNavigation.ts';
@@ -53,10 +54,10 @@ const handler = ({ ev, enterNavbar, leaveNavbar }: HandlerProps) => {
 };
 
 export function dpadController(_: HTMLElement) {
-  const { leaveNavbar, enterNavbar } = useNavbarNavigation();
+  const { leaveNavbar, enterNavbar, reset } = useNavbarNavigation();
 
   onMount(() => {
-    focusSomething();
+    focusSomething(true);
 
     const destroy = GlobalEventBus.getInstance().register('keydown', (ev) => {
       handler({ ev, leaveNavbar, enterNavbar });
@@ -65,5 +66,14 @@ export function dpadController(_: HTMLElement) {
     return {
       destroy,
     };
+  });
+
+  afterNavigate((nav) => {
+    if (!['link', 'popstate'].includes(nav.type) || nav.willUnload) {
+      return;
+    }
+
+    reset();
+    focusSomething(true);
   });
 }
