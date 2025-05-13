@@ -83,6 +83,7 @@ module.exports = {
         'recommended',
         'safari',
         'search',
+        'settings',
         'show',
         'social',
         'spoiler',
