@@ -407,5 +407,8 @@
   "cookie_more_info": "Meer info.",
   "cookie_accept": "Begrepen",
   "year_to_date_label": "Jaar tot nu toe",
-  "month_in_review_label": "Maandoverzicht"
+  "month_in_review_label": "Maandoverzicht",
+  "settings": "Instellingen",
+  "settings_spoilers_title": "Spoilers",
+  "settings_spoilers_label": "Spoilers tonen"
 }

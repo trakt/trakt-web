@@ -407,5 +407,8 @@
   "cookie_more_info": "Più informazioni.",
   "cookie_accept": "Ok",
   "year_to_date_label": "Anno in corso",
-  "month_in_review_label": "Mese in rassegna"
+  "month_in_review_label": "Mese in rassegna",
+  "settings": "Impostazioni",
+  "settings_spoilers_title": "Spoiler",
+  "settings_spoilers_label": "Mostra spoiler"
 }

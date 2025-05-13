@@ -26,4 +26,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.LikeComment]: ActionType;
   [AnalyticsEvent.Rate]: RatingType;
   [AnalyticsEvent.CheckIn]: CheckInType;
+
+  [AnalyticsEvent.Settings]: { settings: string };
 };

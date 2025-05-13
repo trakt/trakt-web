@@ -407,5 +407,8 @@
   "cookie_more_info": "Mehr Infos.",
   "cookie_accept": "Verstanden",
   "year_to_date_label": "Bisheriges Jahr",
-  "month_in_review_label": "Monatsrückblick"
+  "month_in_review_label": "Monatsrückblick",
+  "settings": "Einstellungen",
+  "settings_spoilers_title": "Spoiler",
+  "settings_spoilers_label": "Spoiler anzeigen"
 }
