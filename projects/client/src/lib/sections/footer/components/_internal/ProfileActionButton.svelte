@@ -1,7 +1,15 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import LogoutButton from "./LogoutButton.svelte";
+  import SettingsButton from "./SettingsButton.svelte";
 
   const { size }: { size: "small" | "tag" } = $props();
 </script>
 
-<LogoutButton {size} />
+<RenderFor navigation="default" audience="authenticated">
+  <SettingsButton {size} />
+</RenderFor>
+
+<RenderFor navigation="dpad" audience="authenticated">
+  <LogoutButton {size} />
+</RenderFor>

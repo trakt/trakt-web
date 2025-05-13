@@ -175,4 +175,5 @@ export const UrlBuilder = {
   login: {
     activate: () => '/auth/device',
   },
+  settings: () => '/settings',
 };
