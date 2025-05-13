@@ -1,6 +1,7 @@
 import type { MediaType } from './MediaType.ts';
 
 type ExtendedMediaType = MediaType | 'episode';
+type UserType = 'avatar' | 'settings';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -14,7 +15,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:like:comment`
   | `${typeof INVALIDATION_ID}:comment:reply`
   | `${typeof INVALIDATION_ID}:listed:${MediaType}`
-  | `${typeof INVALIDATION_ID}:user:avatar`
+  | `${typeof INVALIDATION_ID}:user:${UserType}`
   | `${typeof INVALIDATION_ID}:check_in`;
 
 type TypeDataMap = {
@@ -27,7 +28,7 @@ type TypeDataMap = {
   'like': 'comment';
   'comment': 'reply';
   'listed': MediaType;
-  'user': 'avatar';
+  'user': UserType;
   'check_in': null;
 };
 
@@ -67,6 +68,7 @@ export const InvalidateAction = {
 
   User: {
     Avatar: buildInvalidationKey('user', 'avatar'),
+    Settings: buildInvalidationKey('user', 'settings'),
   },
 
   CheckIn: buildInvalidationKey('check_in'),
