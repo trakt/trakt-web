@@ -407,5 +407,8 @@
   "cookie_more_info": "詳細情報.",
   "cookie_accept": "OK",
   "year_to_date_label": "今年",
-  "month_in_review_label": "今月のレビュー"
+  "month_in_review_label": "今月のレビュー",
+  "settings": "設定",
+  "settings_spoilers_title": "ネタバレ",
+  "settings_spoilers_label": "ネタバレを表示"
 }

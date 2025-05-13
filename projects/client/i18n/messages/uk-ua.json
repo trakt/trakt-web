@@ -407,5 +407,8 @@
   "cookie_more_info": "Детальніше.",
   "cookie_accept": "Зрозуміло",
   "year_to_date_label": "З початку року",
-  "month_in_review_label": "Огляд місяця"
+  "month_in_review_label": "Огляд місяця",
+  "settings": "Налаштування",
+  "settings_spoilers_title": "Спойлери",
+  "settings_spoilers_label": "Показати спойлери"
 }

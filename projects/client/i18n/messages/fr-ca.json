@@ -407,5 +407,8 @@
   "cookie_more_info": "Plus d'info.",
   "cookie_accept": "Compris",
   "year_to_date_label": "Année en cours",
-  "month_in_review_label": "Bilan du mois"
+  "month_in_review_label": "Bilan du mois",
+  "settings": "Paramètres",
+  "settings_spoilers_title": "Spoilers",
+  "settings_spoilers_label": "Afficher les spoilers"
 }

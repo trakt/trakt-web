@@ -407,5 +407,8 @@
   "cookie_more_info": "Mai multe informații.",
   "cookie_accept": "Am înțeles",
   "year_to_date_label": "Anul curent",
-  "month_in_review_label": "Luna în revistă"
+  "month_in_review_label": "Luna în revistă",
+  "settings": "Setări",
+  "settings_spoilers_title": "Spoilere",
+  "settings_spoilers_label": "Arată spoilere"
 }

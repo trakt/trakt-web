@@ -407,5 +407,8 @@
   "cookie_more_info": "Mer info.",
   "cookie_accept": "Okej",
   "year_to_date_label": "Hittills i år",
-  "month_in_review_label": "Månadens överblick"
+  "month_in_review_label": "Månadens överblick",
+  "settings": "Inställningar",
+  "settings_spoilers_title": "Spoilers",
+  "settings_spoilers_label": "Visa spoilers"
 }

@@ -407,5 +407,8 @@
   "cookie_more_info": "Повече инфо.",
   "cookie_accept": "Разбрах",
   "year_to_date_label": "Година до момента",
-  "month_in_review_label": "Обзор на месеца"
+  "month_in_review_label": "Обзор на месеца",
+  "settings": "Настройки",
+  "settings_spoilers_title": "Спойлери",
+  "settings_spoilers_label": "Показвай спойлери"
 }
