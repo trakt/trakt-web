@@ -39,6 +39,7 @@
   info={$episode}
   image={$episode?.cover.url}
   type="movie"
+  hasDynamicContent={true}
 >
   {#if !isLoading}
     <EpisodeSummary

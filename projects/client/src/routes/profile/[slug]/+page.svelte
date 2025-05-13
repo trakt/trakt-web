@@ -17,7 +17,12 @@
   );
 </script>
 
-<TraktPage audience="all" image={DEFAULT_SHARE_COVER} {title}>
+<TraktPage
+  audience="all"
+  image={DEFAULT_SHARE_COVER}
+  {title}
+  hasDynamicContent={true}
+>
   {#if !$isLoading && $user}
     <CoverImageSetter src={$user.cover?.url ?? DEFAULT_COVER} type="main" />
     {#if $user.private}

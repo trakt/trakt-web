@@ -16,6 +16,8 @@
   import ExpandIcon from "./ExpandIcon.svelte";
   import { scrollTracking } from "./scrollTracking";
 
+  const EMPTY_STATE_CLASS = "shadow-list-empty-state";
+
   type SectionListProps<T> = ListProps<T> & {
     subtitle?: string;
     empty?: Snippet;
@@ -88,6 +90,7 @@
   class:shadow-list-container-collapsed={$isCollapsed}
   class:shadow-list-container-mounted={$isMounted}
   class:shadow-list-container-no-header={!isHeaderVisible}
+  data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${EMPTY_STATE_CLASS}`}
 >
   {#if $isVisible}
     {#if isHeaderVisible && title}
@@ -123,7 +126,7 @@
           {/each}
         </div>
       {:else if empty != null && $isMounted}
-        <div class="shadow-list-empty-state">
+        <div class={EMPTY_STATE_CLASS}>
           {@render empty()}
         </div>
       {/if}

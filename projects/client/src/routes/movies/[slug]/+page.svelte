@@ -25,6 +25,7 @@
   info={$movie}
   image={$movie?.poster.url.thumb ?? $movie?.cover.url.thumb}
   type="movie"
+  hasDynamicContent={true}
 >
   {#if !$isLoading}
     <MovieSummary

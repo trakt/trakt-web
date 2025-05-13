@@ -13,6 +13,7 @@
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
   title={m.profile()}
+  hasDynamicContent={true}
 >
   <TraktPageCoverSetter />
   {#if $user !== null}

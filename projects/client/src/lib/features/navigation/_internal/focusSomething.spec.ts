@@ -1,19 +1,18 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { DpadNavigationType } from '../models/DpadNavigationType.ts';
 import { focusSomething } from './focusSomething.ts';
+import { createList } from './test/createList.ts';
 
 describe('focusSomething', () => {
-  let element: HTMLButtonElement;
+  let list: HTMLDivElement;
 
   beforeEach(() => {
-    element = document.createElement('button');
-    element.scrollIntoView = vi.fn();
-    element.setAttribute('data-dpad-navigation', DpadNavigationType.Item);
-    document.body.appendChild(element);
+    list = createList();
+    document.body.appendChild(list);
   });
 
   afterEach(() => {
-    element.remove();
+    list.remove();
   });
 
   it('should focus the first navigable element when no element is focused', () => {
@@ -22,7 +21,9 @@ describe('focusSomething', () => {
 
     focusSomething();
 
-    expect(document.activeElement).toBe(element);
+    expect(document.activeElement).toBe(list.querySelector(
+      `[data-dpad-navigation="${DpadNavigationType.Item}"]`,
+    ));
   });
 
   it('should not focus anything if an element is already focused', () => {
@@ -38,7 +39,7 @@ describe('focusSomething', () => {
   });
 
   it('should do nothing when no navigable element is found', () => {
-    document.body.removeChild(element);
+    document.body.removeChild(list);
     document.body.focus();
 
     focusSomething();
