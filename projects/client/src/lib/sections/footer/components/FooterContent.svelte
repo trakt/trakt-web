@@ -8,7 +8,7 @@
   import ExternalLinks from "./ExternalLinks.svelte";
   import FooterBar from "./FooterBar.svelte";
   import FooterLogo from "./FooterLogo.svelte";
-  import LogoutButton from "./LogoutButton.svelte";
+  import ProfileActionButton from "./_internal/ProfileActionButton.svelte";
 
   const isOnProfile = $derived(page.route.id === UrlBuilder.profile.me());
 </script>
@@ -18,7 +18,7 @@
     <FooterBar>
       <FooterLogo />
       {#if isOnProfile}
-        <LogoutButton size="small" />
+        <ProfileActionButton size="small" />
       {/if}
     </FooterBar>
   </RenderFor>
@@ -27,7 +27,7 @@
     <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
       <div class="trakt-footer-logout">
         <FooterBar>
-          <LogoutButton size="tag" />
+          <ProfileActionButton size="tag" />
         </FooterBar>
       </div>
     </RenderFor>
