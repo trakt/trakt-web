@@ -2,8 +2,8 @@ import { time } from '$lib/utils/timing/time.ts';
 import { assertDefined } from '../../../utils/assert/assertDefined.ts';
 import { getNavigationScope } from './getNavigationScope.ts';
 
-const MAX_WAIT_TIME = time.seconds(5);
-const CHECK_INTERVAL = time.fps(30);
+export const MAX_WAIT_TIME = time.seconds(5);
+export const CHECK_INTERVAL = time.fps(30);
 
 export function waitForDynamicContent() {
   const scope = getNavigationScope();
