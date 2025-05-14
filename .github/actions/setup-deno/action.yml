@@ -22,3 +22,16 @@ runs:
     - name: Gather the Tools aka Install Dependencies
       shell: bash
       run: 'deno task install'
+
+    - name: Patch Paraglide.js to Disable PostHog Telemetry
+      shell: bash
+      run: |
+        echo "Patching Paraglide.js to disable PostHog telemetry..."
+
+        # Replace the PostHog proxy with a no-op function
+        find node_modules/.deno -path "*@inlang/paraglide-js*/dist/index.js" -type f -exec sed -i 's/return capture;/return () => { console.log("· · · No telemetry for you! ¯\\\\_(ツ)_/¯"); return Promise.resolve(); };/g' {} \;
+
+        # Also disable telemetry shutdown to prevent timeout errors
+        find node_modules/.deno -path "*@inlang/paraglide-js*/dist/index.js" -type f -exec sed -i 's/telemetry\.shutdown()/console.log("· · · Nothing to shutdown!")/g' {} \;
+
+        echo "Patch applied."

@@ -44,6 +44,7 @@ jobs:
               - 'projects/client/wrangler.toml'
             workflows:
               - '.github/workflows/**'
+              - '.github/actions/**'
 
   test:
     needs: files-changed
