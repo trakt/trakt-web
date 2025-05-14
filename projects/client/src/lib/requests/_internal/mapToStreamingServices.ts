@@ -5,6 +5,7 @@ import type {
   StreamNow,
   StreamOnDemand,
 } from '../models/StreamingServiceOptions.ts';
+import { mapToDirectLink } from './mapToDirectLink.ts';
 import { sortStreamingServices } from './sortStreamingServices.ts';
 
 function mapToStreamNow(
@@ -13,7 +14,7 @@ function mapToStreamNow(
   return {
     type: 'streaming',
     link: prependHttps(serviceResponse.link),
-    deepLink: serviceResponse.link_direct,
+    deepLink: mapToDirectLink(serviceResponse),
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
   };
@@ -33,7 +34,7 @@ function mapToStreamOnDemand(
   return {
     type: 'on-demand',
     link: prependHttps(serviceResponse.link),
-    deepLink: serviceResponse.link_direct,
+    deepLink: mapToDirectLink(serviceResponse),
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
     currency: serviceResponse.currency,
