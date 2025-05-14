@@ -1,4 +1,4 @@
-import { paraglide } from '@inlang/paraglide-sveltekit/vite';
+import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
@@ -74,7 +74,7 @@ export default defineConfig(({ mode }) => ({
 
   plugins: [
     sveltekit(),
-    paraglide({
+    paraglideVitePlugin({
       project: './i18n/project.inlang',
       outdir: './src/lib/paraglide',
     }),

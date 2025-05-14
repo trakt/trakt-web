@@ -1,4 +1,4 @@
-import type { AvailableLanguageTag } from '$lib/paraglide/runtime.js';
+import type { Locale } from '$lib/paraglide/runtime.js';
 import * as runtime from '$lib/paraglide/runtime.js';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { resolveAcceptLanguage } from 'resolve-accept-language';
@@ -11,14 +11,12 @@ type ExtractRegion<T> = T extends 'en' ? 'us'
   : T extends `${string}-${infer Region}` ? Region
   : T;
 
-export type AvailableLocale = AvailableLanguageTag;
+export type AvailableLocale = Locale;
 export type AvailableLanguage = ExtractLanguage<AvailableLocale>;
 export type AvailableRegion = ExtractRegion<AvailableLocale>;
 
-export const isAvailableLocale = runtime.isAvailableLanguageTag;
-export const availableLocales = runtime.availableLanguageTags;
-export const defaultLocale = runtime.sourceLanguageTag;
-export const onLanguageChange = runtime.onSetLanguageTag;
+export const availableLocales = runtime.locales;
+export const defaultLocale = runtime.baseLocale;
 
 function sanitizeLocale(locale: string): AvailableLocale {
   return availableLocales.includes(locale as AvailableLocale)
@@ -26,7 +24,7 @@ function sanitizeLocale(locale: string): AvailableLocale {
     : defaultLocale;
 }
 
-function splitLanguageTag(languageTag: AvailableLanguageTag): {
+function splitLanguageTag(languageTag: Locale): {
   language: AvailableLanguage;
   region: AvailableRegion;
 } {
@@ -48,11 +46,11 @@ function splitLanguageTag(languageTag: AvailableLanguageTag): {
 }
 
 export function getLanguageAndRegion() {
-  return splitLanguageTag(runtime.languageTag());
+  return splitLanguageTag(runtime.getLocale());
 }
 
 export function getLocale() {
-  return runtime.languageTag();
+  return runtime.getLocale();
 }
 
 export function languageTag() {
@@ -62,7 +60,7 @@ export function languageTag() {
 export const setLocale = (locale: string): AvailableLocale => {
   const sanitizedLocale = sanitizeLocale(locale);
 
-  runtime.setLanguageTag(sanitizedLocale);
+  runtime.setLocale(sanitizedLocale, { reload: false });
   return sanitizedLocale;
 };
 
