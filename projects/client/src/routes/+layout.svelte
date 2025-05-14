@@ -9,6 +9,7 @@
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
   import AutoSigninProvider from "$lib/features/auto-signin/AutoSigninProvider.svelte";
+  import CookieConsentProvider from "$lib/features/cookie-consent/CookieConsentProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
@@ -19,7 +20,6 @@
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import CookieNotice from "$lib/sections/cookie/CookieNotice.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
@@ -96,67 +96,66 @@
   <QueryClientProvider client={data.queryClient} device={data.device}>
     <GlobalParameterProvider>
       <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
-        <AnalyticsProvider>
-          <AutoSigninProvider>
-            <LocaleProvider>
-              <NavigationProvider device={data.device}>
-                <!-- TODO: coalesce this when we add support for people 'n stuff -->
-                <SearchProvider type="show">
-                  <SearchProvider type="movie">
-                    <FilterProvider>
-                      <CoverProvider>
-                        <CoverImage />
+        <CookieConsentProvider hasConsent={data.hasConsent}>
+          <AnalyticsProvider>
+            <AutoSigninProvider>
+              <LocaleProvider>
+                <NavigationProvider device={data.device}>
+                  <!-- TODO: coalesce this when we add support for people 'n stuff -->
+                  <SearchProvider type="show">
+                    <SearchProvider type="movie">
+                      <FilterProvider>
+                        <CoverProvider>
+                          <CoverImage />
 
-                        <ThemeProvider theme={data.theme}>
-                          <ListScrollHistoryProvider>
-                            <div class="trakt-layout-wrapper">
-                              <RenderFor audience="all" navigation="default">
-                                <Navbar />
-                              </RenderFor>
-                              <RenderFor audience="all" navigation="dpad">
-                                <SideNavbar />
-                              </RenderFor>
-                              <div class="trakt-layout-content">
-                                {@render children()}
+                          <ThemeProvider theme={data.theme}>
+                            <ListScrollHistoryProvider>
+                              <div class="trakt-layout-wrapper">
+                                <RenderFor audience="all" navigation="default">
+                                  <Navbar />
+                                </RenderFor>
+                                <RenderFor audience="all" navigation="dpad">
+                                  <SideNavbar />
+                                </RenderFor>
+                                <div class="trakt-layout-content">
+                                  {@render children()}
+                                </div>
+                                <RenderFor audience="all" navigation="default">
+                                  <Footer />
+                                </RenderFor>
                               </div>
-                              <RenderFor audience="all" navigation="default">
-                                <Footer />
+                              <RenderFor
+                                audience="all"
+                                device={["mobile", "tablet-sm"]}
+                                navigation="default"
+                              >
+                                <MobileNavbar />
                               </RenderFor>
-                            </div>
-                            <RenderFor
-                              audience="all"
-                              device={["mobile", "tablet-sm"]}
-                              navigation="default"
-                            >
-                              <MobileNavbar />
-                            </RenderFor>
-                            <RenderFor
-                              audience="authenticated"
-                              navigation="default"
-                            >
-                              <NowPlaying />
-                            </RenderFor>
-                            {#if data.device !== "tv"}
-                              <CookieNotice hasConsent={data.hasConsent} />
-                            {/if}
-                            <SvelteQueryDevtools
-                              buttonPosition="bottom-left"
-                              styleNonce="opacity: 0.5"
-                            />
-                          </ListScrollHistoryProvider>
-                        </ThemeProvider>
-                      </CoverProvider>
-                    </FilterProvider>
+                              <RenderFor
+                                audience="authenticated"
+                                navigation="default"
+                              >
+                                <NowPlaying />
+                              </RenderFor>
+                              <SvelteQueryDevtools
+                                buttonPosition="bottom-left"
+                                styleNonce="opacity: 0.5"
+                              />
+                            </ListScrollHistoryProvider>
+                          </ThemeProvider>
+                        </CoverProvider>
+                      </FilterProvider>
+                    </SearchProvider>
                   </SearchProvider>
-                </SearchProvider>
-              </NavigationProvider>
-            </LocaleProvider>
+                </NavigationProvider>
+              </LocaleProvider>
 
-            {#key page.url.pathname}
-              <PageView />
-            {/key}
-          </AutoSigninProvider>
-        </AnalyticsProvider>
+              {#key page.url.pathname}
+                <PageView />
+              {/key}
+            </AutoSigninProvider>
+          </AnalyticsProvider>
+        </CookieConsentProvider>
       </AuthProvider>
     </GlobalParameterProvider>
   </QueryClientProvider>
