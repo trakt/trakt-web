@@ -45,7 +45,9 @@
 
 <style>
   .trakt-authorization-container {
-    height: var(--authentication-height);
+    height: calc(100dvh - var(--content-gap));
+    display: flex;
+    justify-content: center;
   }
 
   .trakt-authorization-codes {
