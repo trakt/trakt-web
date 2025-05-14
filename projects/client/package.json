@@ -58,7 +58,7 @@
     "vitest": "3.0.9"
   },
   "dependencies": {
-    "@inlang/paraglide-sveltekit": "^0.16.1",
+    "@inlang/paraglide-js": "^2.0.12",
     "@tanstack/svelte-query": "^5.69.0",
     "@tanstack/svelte-query-devtools": "^5.69.0",
     "@tanstack/svelte-query-persist-client": "^5.69.0",
