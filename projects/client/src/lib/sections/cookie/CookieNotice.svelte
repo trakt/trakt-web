@@ -3,23 +3,22 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { CookieConsentEndpoint } from "$lib/features/cookie-consent/CookieConsentEndpoint";
+  import { useCookieConsent } from "$lib/features/cookie-consent/useCookieConsent";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { writable } from "svelte/store";
   import { fade, slide } from "svelte/transition";
 
   const NOTICE_TRANSITION_DURATION = 150;
-  const { hasConsent }: { hasConsent: boolean } = $props();
 
-  const showCookieNotice = writable(!hasConsent);
+  const { hasConsent, setConsent } = useCookieConsent();
 
   const consent = async () => {
     await fetch(CookieConsentEndpoint.Consent, { method: "PUT" });
-    showCookieNotice.set(false);
+    setConsent(true);
   };
 </script>
 
-{#if $showCookieNotice}
+{#if !$hasConsent}
   <div
     class="trakt-cookie-underlay"
     transition:fade={{ duration: NOTICE_TRANSITION_DURATION }}
