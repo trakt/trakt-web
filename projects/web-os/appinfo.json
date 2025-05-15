@@ -1,0 +1,10 @@
+{
+  "id": "tv.trakt.app",
+  "version": "0.1",
+  "vendor": "My Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "Trakt.TV",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png"
+}
