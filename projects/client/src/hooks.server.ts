@@ -11,11 +11,20 @@ import { handle as handleTheme } from '$lib/features/theme/handle.ts';
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
+const CHROME_DEV_TOOLS_PATH =
+  '/.well-known/appspecific/com.chrome.devtools.json';
+
 const WHITELISTED_HEADERS = new Set([
   'content-type',
   'x-pagination-page',
   'x-pagination-page-count',
 ]);
+
+const handleChromeDevTools: Handle = async ({ event, resolve }) => {
+  return event.url.pathname.startsWith(CHROME_DEV_TOOLS_PATH)
+    ? new Response(null, { status: 204 })
+    : await resolve(event);
+};
 
 export const handleCacheControl: Handle = async ({ event, resolve }) => {
   const response = await resolve(event);
@@ -54,4 +63,5 @@ export const handle: Handle = sequence(
   handleMobileOperatingSystem,
   handleDeployment,
   handleCookieConsent,
+  handleChromeDevTools,
 );
