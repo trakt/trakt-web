@@ -109,15 +109,6 @@ jobs:
         working-directory: projects/client
         run: kill $(cat server.pid)
 
-      - name: Trial by Code Climate
-        uses: paambaati/codeclimate-action@v9.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          prefix: ${{github.workspace}}
-          coverageLocations: |
-            ${{github.workspace}}/projects/client/coverage/clover.xml:clover
-
       - name: Trial by Deep Source
         uses: deepsourcelabs/test-coverage-action@master
         with:
