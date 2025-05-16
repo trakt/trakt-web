@@ -20,6 +20,12 @@ export function waitForDynamicContent() {
     const intervalId = setInterval(() => {
       elapsed += CHECK_INTERVAL;
 
+      if (dynamicElements.some((element) => !element.isConnected)) {
+        clearInterval(intervalId);
+        resolve(null);
+        return;
+      }
+
       const hasLoadedElements = dynamicElements.every((element) => {
         const selector = assertDefined(
           element.getAttribute('data-dynamic-selector'),
