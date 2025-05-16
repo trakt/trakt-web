@@ -80,6 +80,12 @@ export const showVideosQuery = defineQuery({
         }
         seen.add(video.id);
         return true;
+      })
+      .sort((a, b) => {
+        return (
+          new Date(a.publishedAt).getTime() -
+          new Date(b.publishedAt).getTime()
+        );
       });
   },
   schema: MediaVideoSchema.array(),

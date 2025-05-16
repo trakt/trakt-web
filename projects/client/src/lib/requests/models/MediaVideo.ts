@@ -16,5 +16,6 @@ export const MediaVideoSchema = z.object({
   url: z.string().url(),
   thumbnail: z.string().url(),
   title: z.string(),
+  publishedAt: z.date(),
 });
 export type MediaVideo = z.infer<typeof MediaVideoSchema>;

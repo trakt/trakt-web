@@ -7,6 +7,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=QQ6x6NjVM_E',
     'thumbnail': 'https://img.youtube.com/vi/QQ6x6NjVM_E/hqdefault.jpg',
+    'publishedAt': new Date('2023-06-30T16:59:46.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4koigfptp0usb',
@@ -14,6 +15,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=DsQzTUeLkbA',
     'thumbnail': 'https://img.youtube.com/vi/DsQzTUeLkbA/hqdefault.jpg',
+    'publishedAt': new Date('2023-04-26T14:59:56.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4klee39hiflde',
@@ -21,6 +23,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'opening credits',
     'url': 'https://youtube.com/watch?v=AJlOS6ZeIcA',
     'thumbnail': 'https://img.youtube.com/vi/AJlOS6ZeIcA/hqdefault.jpg',
+    'publishedAt': new Date('2023-04-25T21:00:04.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4kf8bnk17v714',
@@ -28,6 +31,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
     'thumbnail': 'https://img.youtube.com/vi/8ZYhuvIv1pA/hqdefault.jpg',
+    'publishedAt': new Date('2023-04-06T12:59:48.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4ld8dth432lhj',
@@ -35,6 +39,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=bBMajXwi6Cs',
     'thumbnail': 'https://img.youtube.com/vi/bBMajXwi6Cs/hqdefault.jpg',
+    'publishedAt': new Date('2023-03-06T14:00:51.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lc80ejiglkjj',
@@ -42,6 +47,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=_tHrcff6BgI',
     'thumbnail': 'https://img.youtube.com/vi/_tHrcff6BgI/hqdefault.jpg',
+    'publishedAt': new Date('2025-01-28T19:59:52.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4li0g9cfvocft',
@@ -49,6 +55,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=gr9s1ubiH3w',
     'thumbnail': 'https://img.youtube.com/vi/gr9s1ubiH3w/hqdefault.jpg',
+    'publishedAt': new Date('2025-01-15T19:59:59.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4l1soj14rpvuh',
@@ -56,6 +63,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=QlmvFwUlIA4',
     'thumbnail': 'https://img.youtube.com/vi/QlmvFwUlIA4/hqdefault.jpg',
+    'publishedAt': new Date('2024-12-09T20:29:49.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lfhhc18ircb5',
@@ -63,6 +71,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=deWAAmrHvVQ',
     'thumbnail': 'https://img.youtube.com/vi/deWAAmrHvVQ/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-15T17:59:51.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lfrmf7sdmlu5',
@@ -70,6 +79,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=eTGbi_oElCQ',
     'thumbnail': 'https://img.youtube.com/vi/eTGbi_oElCQ/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-14T19:59:49.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4ls7jg7lloocs',
@@ -77,6 +87,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=w5BoJmMt0t4',
     'thumbnail': 'https://img.youtube.com/vi/w5BoJmMt0t4/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-12T17:59:46.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4kc4u6lrihte4',
@@ -84,6 +95,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=3qPZM6S56ww',
     'thumbnail': 'https://img.youtube.com/vi/3qPZM6S56ww/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-11T22:59:52.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4leqai4m226hd',
@@ -91,6 +103,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=ceYm0eDw7tg',
     'thumbnail': 'https://img.youtube.com/vi/ceYm0eDw7tg/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-11T18:04:51.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4ls025968sjp1',
@@ -98,6 +111,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=uiBM-BCgANE',
     'thumbnail': 'https://img.youtube.com/vi/uiBM-BCgANE/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-01T15:00:50.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lqqpustcdkes',
@@ -105,6 +119,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=suP0-oMb9fA',
     'thumbnail': 'https://img.youtube.com/vi/suP0-oMb9fA/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-21T18:59:51.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4kmtme45fmg5t',
@@ -112,6 +127,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=CLJDR-vFUdY',
     'thumbnail': 'https://img.youtube.com/vi/CLJDR-vFUdY/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-14T13:59:46.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4kbote16c5t4g',
@@ -119,6 +135,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=3aPXnDXpdHw',
     'thumbnail': 'https://img.youtube.com/vi/3aPXnDXpdHw/hqdefault.jpg',
+    'publishedAt': new Date('2024-07-30T18:23:01.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4ltf5g6g304fq',
@@ -126,6 +143,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=wiVr54aeXwI',
     'thumbnail': 'https://img.youtube.com/vi/wiVr54aeXwI/hqdefault.jpg',
+    'publishedAt': new Date('2024-07-28T01:29:46.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lf215nj06js1',
@@ -133,5 +151,6 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=e1ajCMLUYHw',
     'thumbnail': 'https://img.youtube.com/vi/e1ajCMLUYHw/hqdefault.jpg',
+    'publishedAt': new Date('2024-07-27T23:59:48.000Z'),
   },
 ];

@@ -7,6 +7,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=72-5rMRKN9s',
     'thumbnail': 'https://img.youtube.com/vi/72-5rMRKN9s/hqdefault.jpg',
+    'publishedAt': new Date('2025-03-19T20:00:03.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4l333mit5svrd',
@@ -14,6 +15,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=Sansjt4DiIY',
     'thumbnail': 'https://img.youtube.com/vi/Sansjt4DiIY/hqdefault.jpg',
+    'publishedAt': new Date('2025-03-18T20:00:24.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lms8kjc47iul',
@@ -21,6 +23,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=nhCGUYhfubA',
     'thumbnail': 'https://img.youtube.com/vi/nhCGUYhfubA/hqdefault.jpg',
+    'publishedAt': new Date('2025-03-17T20:00:26.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4l3jiejts104u',
@@ -28,6 +31,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=Swm7m1xGNwg',
     'thumbnail': 'https://img.youtube.com/vi/Swm7m1xGNwg/hqdefault.jpg',
+    'publishedAt': new Date('2025-01-02T16:31:42.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4ks9na9ull4lp',
@@ -36,6 +40,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=IwGYCQvl3Bk',
     'thumbnail': 'https://img.youtube.com/vi/IwGYCQvl3Bk/hqdefault.jpg',
+    'publishedAt': new Date('2024-12-05T16:00:06.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lmu3np70n7vi',
@@ -43,6 +48,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=nk1m1_pigwA',
     'thumbnail': 'https://img.youtube.com/vi/nk1m1_pigwA/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-20T16:00:51.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4kcks9ns30tba',
@@ -50,6 +56,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=5GulXtPKj10',
     'thumbnail': 'https://img.youtube.com/vi/5GulXtPKj10/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-19T16:00:06.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lojvi7phvhea',
@@ -57,6 +64,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=r5fW-Qjh_YY',
     'thumbnail': 'https://img.youtube.com/vi/r5fW-Qjh_YY/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-18T16:00:48.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lr7df4up65qv',
@@ -64,6 +72,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=uGh5EZ4mWMA',
     'thumbnail': 'https://img.youtube.com/vi/uGh5EZ4mWMA/hqdefault.jpg',
+    'publishedAt': new Date('2024-11-04T16:00:06.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lgvo3nkn3ol1',
@@ -72,6 +81,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=feFiiN82PpA',
     'thumbnail': 'https://img.youtube.com/vi/feFiiN82PpA/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-28T17:00:18.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lpbi85bgkpta',
@@ -79,6 +89,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=qsqs2WwjYiU',
     'thumbnail': 'https://img.youtube.com/vi/qsqs2WwjYiU/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-27T11:52:14.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lptl1fjgejc6',
@@ -86,6 +97,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=rmUWhjwIols',
     'thumbnail': 'https://img.youtube.com/vi/rmUWhjwIols/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-24T09:02:23.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4ld082fm72f6m',
@@ -93,6 +105,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=aW1o_WvHVtQ',
     'thumbnail': 'https://img.youtube.com/vi/aW1o_WvHVtQ/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-15T08:57:58.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4k9q10kjtie91',
@@ -101,6 +114,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=0jZP-4pieI4',
     'thumbnail': 'https://img.youtube.com/vi/0jZP-4pieI4/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-14T19:51:58.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4lk5j2pgf99fu',
@@ -108,6 +122,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=jpWUOxRozZg',
     'thumbnail': 'https://img.youtube.com/vi/jpWUOxRozZg/hqdefault.jpg',
+    'publishedAt': new Date('2024-10-08T12:59:00.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4l5lnu5qps8sa',
@@ -115,6 +130,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=WSo0lmONZIU',
     'thumbnail': 'https://img.youtube.com/vi/WSo0lmONZIU/hqdefault.jpg',
+    'publishedAt': new Date('2024-09-19T12:59:00.000Z'),
   },
   {
     'id': 'vrlu23ub93cpubuqs4v4kv7mhlirc1de',
@@ -122,5 +138,6 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=O9i2vmFhSSY',
     'thumbnail': 'https://img.youtube.com/vi/O9i2vmFhSSY/hqdefault.jpg',
+    'publishedAt': new Date('2024-06-25T13:00:31.000Z'),
   },
 ];
