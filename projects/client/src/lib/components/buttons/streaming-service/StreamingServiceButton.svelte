@@ -76,7 +76,8 @@
         transition: transform var(--transition-increment) ease-in-out;
       }
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         :global(.trakt-streaming-service-logo) {
           filter: drop-shadow(0 var(--ni-40) 0 var(--color-background-purple));
           transform: translateY(var(--ni-neg-40));
