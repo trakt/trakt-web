@@ -108,7 +108,10 @@
   <QueryClientProvider client={data.queryClient} device={data.device}>
     <GlobalParameterProvider>
       <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
-        <CookieConsentProvider hasConsent={data.hasConsent}>
+        <CookieConsentProvider
+          hasConsent={data.hasConsent}
+          device={data.device}
+        >
           <AnalyticsProvider>
             <AutoSigninProvider>
               <LocaleProvider>
