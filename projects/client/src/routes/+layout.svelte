@@ -75,6 +75,18 @@
       height: fill-available;
     }
 
+    html::before {
+      content: "";
+      height: 100vh;
+      width: 100vw;
+      z-index: calc(var(--layer-background) - 1);
+
+      display: block;
+      position: fixed;
+
+      background-color: var(--color-background);
+    }
+
     body {
       background-color: var(--color-background);
       color: var(--color-foreground);
