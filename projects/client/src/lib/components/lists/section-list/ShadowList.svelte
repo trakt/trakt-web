@@ -90,7 +90,7 @@
   class:shadow-list-container-collapsed={$isCollapsed}
   class:shadow-list-container-mounted={$isMounted}
   class:shadow-list-container-no-header={!isHeaderVisible}
-  data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${EMPTY_STATE_CLASS}`}
+  data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${EMPTY_STATE_CLASS}:not(:empty)`}
 >
   {#if $isVisible}
     {#if isHeaderVisible && title}
