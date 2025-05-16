@@ -20,6 +20,7 @@ import {
   currentUserWatchlistQuery,
   type UserWatchlist,
 } from '../queries/currentUserWatchlistQuery.ts';
+import { getToken, setToken } from '../token/index.ts';
 import { useAuth } from './useAuth.ts';
 
 const ANONYMOUS_USER: UserSettings = {
@@ -103,7 +104,17 @@ export function useUser() {
 
   const user = derived(
     userQueryResponse,
-    ($query) => definedData($query.data),
+    ($query) => {
+      /**
+       * FIXME: this is a quick hack to enable hd nitro only for internal testing
+       * remove once the system is tested
+       */
+      setToken({
+        ...getToken(),
+        isDirector: $query.data?.isDirector,
+      });
+      return definedData($query.data);
+    },
   );
   const history = derived(
     historyQueryResponse,
