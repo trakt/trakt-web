@@ -63,4 +63,24 @@ describe('waitForDynamicContent', () => {
 
     await waitFor(() => expect(resolved).toBe(true));
   });
+
+  it('should resolve if the container is removed', async () => {
+    let resolved = false;
+
+    container.setAttribute('data-dynamic-selector', '.dynamic-item');
+
+    const promise = waitForDynamicContent();
+    promise.then(() => {
+      resolved = true;
+    });
+
+    vi.advanceTimersByTime(CHECK_INTERVAL);
+    expect(resolved).toBe(false);
+
+    container.remove();
+
+    vi.advanceTimersByTime(CHECK_INTERVAL);
+
+    await waitFor(() => expect(resolved).toBe(true));
+  });
 });
