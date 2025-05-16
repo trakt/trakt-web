@@ -29,7 +29,13 @@ export const movieVideosQuery = defineQuery({
   mapper: (response) =>
     response.body
       .filter((video) => video.site === 'youtube')
-      .map(mapToMediaVideo),
+      .map(mapToMediaVideo)
+      .sort((a, b) => {
+        return (
+          new Date(a.publishedAt).getTime() -
+          new Date(b.publishedAt).getTime()
+        );
+      }),
   schema: MediaVideoSchema.array(),
   ttl: time.days(7),
 });

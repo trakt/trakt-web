@@ -17,5 +17,6 @@ export function mapToMediaVideo(
     type: video.type,
     url: video.url,
     thumbnail,
+    publishedAt: new Date(video.published_at),
   };
 }

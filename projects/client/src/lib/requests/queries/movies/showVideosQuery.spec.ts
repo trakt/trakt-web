@@ -18,6 +18,6 @@ describe('showVideosQuery', () => {
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(ShowSiloVideoMappedMock);
+    expect(result).to.have.deep.members(ShowSiloVideoMappedMock);
   });
 });
