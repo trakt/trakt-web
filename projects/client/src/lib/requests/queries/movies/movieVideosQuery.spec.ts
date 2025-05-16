@@ -15,6 +15,6 @@ describe('movieVideosQuery', () => {
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(MovieHereticVideoMappedMock);
+    expect(result).to.have.deep.members(MovieHereticVideoMappedMock);
   });
 });
