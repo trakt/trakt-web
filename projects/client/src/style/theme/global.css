@@ -100,4 +100,9 @@
     var(--color-background) 70%,
     transparent 30%
   );
+
+  /**
+   * Poster overlay
+   */
+  --color-overlay-foreground: var(--shade-10);
 }

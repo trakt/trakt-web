@@ -32,6 +32,8 @@
     --source-shadow: var(--ni-2) var(--ni-2) var(--ni-4)
       var(--color-background-purple);
 
+    color: var(--color-overlay-foreground);
+
     width: 100%;
     height: 100%;
     display: flex;
