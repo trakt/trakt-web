@@ -3,47 +3,32 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
-  import { useShow } from "../../../../useShow";
   import { useEpisode } from "./useEpisode";
 
-  const {
-    episode,
-    seasons,
-    crew,
-    streamOn,
-    intl: episodeIntl,
-    isLoading: isEpisodeLoading,
-  } = $derived(
-    useEpisode({
-      slug: page.params.slug,
-      season: parseInt(page.params.season),
-      episode: parseInt(page.params.episode),
-    }),
-  );
-
-  const {
-    show,
-    intl: showIntl,
-    isLoading: isShowLoading,
-  } = $derived(useShow(page.params.slug));
-
-  const isLoading = $derived($isEpisodeLoading || $isShowLoading);
+  const { episode, seasons, crew, streamOn, intl, show, showIntl, isLoading } =
+    $derived(
+      useEpisode({
+        slug: page.params.slug,
+        season: parseInt(page.params.season),
+        episode: parseInt(page.params.episode),
+      }),
+    );
 </script>
 
 <TraktPage
   audience="all"
-  title={$episodeIntl?.title ?? $episode?.title}
+  title={$intl?.title ?? $episode?.title}
   info={$episode}
   image={$episode?.cover.url}
   type="movie"
   hasDynamicContent={true}
 >
-  {#if !isLoading}
+  {#if !$isLoading}
     <EpisodeSummary
       show={$show!}
       showIntl={$showIntl!}
       episode={$episode!}
-      episodeIntl={$episodeIntl!}
+      episodeIntl={$intl!}
       seasons={$seasons!}
       streamOn={$streamOn}
       crew={$crew!}

@@ -7,6 +7,7 @@ import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuer
 import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.ts';
 import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
+import { toMediaIntl } from '$lib/utils/media/toMediaIntl.ts';
 import { derived, get } from 'svelte/store';
 
 export function useMovie(slug: string) {
@@ -52,24 +53,13 @@ export function useMovie(slug: string) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     videos: derived(videos, ($videos) => $videos.data ?? []),
-    intl: derived(
-      [movie, intl],
-      ([$movie, $intl]) => {
-        if (isLocaleSkipped) {
-          return $intl.data;
-        }
+    intl: derived(intl, ($intl) => {
+      if ($intl.isFetching) {
+        return;
+      }
 
-        if ($intl.isFetching) {
-          return;
-        }
-
-        return {
-          title: $intl?.data?.title ?? $movie?.data?.title ?? '',
-          overview: $intl?.data?.overview ?? $movie?.data?.overview ?? '',
-          tagline: $intl?.data?.tagline ?? $movie?.data?.tagline ?? '',
-        };
-      },
-    ),
+      return toMediaIntl($intl?.data);
+    }),
     streamOn: derived(
       streamOn,
       ($streamOn) => {
