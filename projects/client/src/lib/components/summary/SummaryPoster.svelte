@@ -85,7 +85,7 @@
 
     pointer-events: none;
 
-    border: var(--overlay-border-size) solid var(--color-foreground);
+    border: var(--overlay-border-size) solid var(--color-overlay-foreground);
   }
 
   .has-active-overlay:hover {
