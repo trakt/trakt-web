@@ -5,6 +5,14 @@ type UserType = 'avatar' | 'settings';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
+<<<<<<< HEAD
+=======
+type AuthInvalidationTypes = 'auth';
+type RateableInvalidationTypes = 'rated';
+type ExtendedMediaInvalidationTypes = 'mark_as_watched';
+type MediaInvalidationTypes = 'watchlisted' | 'favorited';
+
+>>>>>>> parent of 9259f4bb (chore: remove favorites)
 export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:auth`
   | `${typeof INVALIDATION_ID}:rated:${ExtendedMediaType}`
@@ -23,6 +31,7 @@ type TypeDataMap = {
   'rated': ExtendedMediaType;
   'mark_as_watched': ExtendedMediaType;
   'watchlisted': MediaType;
+<<<<<<< HEAD
   'dropped': 'show';
   'restored': 'show';
   'like': 'comment';
@@ -30,6 +39,9 @@ type TypeDataMap = {
   'listed': MediaType;
   'user': UserType;
   'check_in': null;
+=======
+  'favorited': MediaType;
+>>>>>>> parent of 9259f4bb (chore: remove favorites)
 };
 
 export function invalidationId(key?: string) {
@@ -57,6 +69,7 @@ export const InvalidateAction = {
     buildInvalidationKey('mark_as_watched', type),
 
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
+<<<<<<< HEAD
   Listed: (type: MediaType) => buildInvalidationKey('listed', type),
 
   Drop: buildInvalidationKey('dropped', 'show'),
@@ -72,4 +85,7 @@ export const InvalidateAction = {
   },
 
   CheckIn: buildInvalidationKey('check_in'),
+=======
+  Favorited: (type: MediaType) => buildInvalidationKey('favorited', type),
+>>>>>>> parent of 9259f4bb (chore: remove favorites)
 };
