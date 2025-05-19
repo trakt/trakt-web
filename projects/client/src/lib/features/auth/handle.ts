@@ -29,8 +29,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.auth = auth;
   };
 
-  const getReferrer = () =>
-    prependHttpOrHttps(event.request.headers.get('host')) ?? '';
+  const getReferrer = () => prependHttpOrHttps(event.url.host) ?? '';
 
   const authorizedResponse = (response: SerializedAuthResponse, url: URL) => {
     const { isAuthorized } = response;
