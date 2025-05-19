@@ -144,6 +144,30 @@
       })}
     {/snippet}
   </ShadowList>
+
+  <ShadowList
+    id="assets-logos"
+    title={`Logos (${media.length})`}
+    items={media}
+    --height-list="var(--ni-180)"
+  >
+    {#snippet item(media)}
+      <CrossOriginImage src={media.logo.url.medium} alt={media.title} />
+    {/snippet}
+
+    {#snippet actions()}
+      {@render download(`Download ${type} logos`, () => {
+        media.forEach((media, index) => {
+          setTimeout(() => {
+            downloadImage(
+              media.logo.url.medium,
+              `${type}_${media.title}_logo.webp`,
+            );
+          }, index * 100);
+        });
+      })}
+    {/snippet}
+  </ShadowList>
 </TraktPage>
 
 <style>

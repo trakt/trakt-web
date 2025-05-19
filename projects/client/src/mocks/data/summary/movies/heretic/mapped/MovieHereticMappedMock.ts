@@ -29,6 +29,14 @@ export const MovieHereticMappedMock: MovieEntry = {
         'https://walter-r2.trakt.tv/images/movies/000/916/302/posters/thumb/db9d66deb8.jpg.webp',
     },
   },
+  'logo': {
+    'url': {
+      'medium':
+        'https://walter-r2.trakt.tv/images/movies/000/916/302/logos/medium/36726904e9.png.webp',
+      'thumb':
+        'https://walter-r2.trakt.tv/images/movies/000/916/302/logos/thumb/36726904e9.png.webp',
+    },
+  },
   'year': 2024,
   'type': 'movie',
   'runtime': 111,

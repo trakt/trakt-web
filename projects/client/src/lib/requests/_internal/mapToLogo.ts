@@ -9,19 +9,19 @@ import type { MediaEntry } from '../models/MediaEntry.ts';
 import { mediumUrl } from './mediumUrl.ts';
 import { thumbUrl } from './thumbUrl.ts';
 
-export function mapToCover(
+export function mapToLogo(
   images: ShowResponse['images'] | MovieResponse['images'],
 ): MediaEntry['cover'] {
-  const coverCandidate = findDefined(...(images?.fanart ?? []));
+  const logoCandidate = findDefined(...(images?.logo ?? []));
 
   return {
     url: {
       medium: prependHttps(
-        mediumUrl(coverCandidate),
+        mediumUrl(logoCandidate),
         MEDIA_COVER_LARGE_PLACEHOLDER,
       ),
       thumb: prependHttps(
-        thumbUrl(coverCandidate),
+        thumbUrl(logoCandidate),
         MEDIA_COVER_THUMB_PLACEHOLDER,
       ),
     },

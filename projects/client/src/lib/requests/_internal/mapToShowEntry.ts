@@ -5,6 +5,7 @@ import { type ShowResponse } from '@trakt/api';
 import type { ShowEntry } from '../models/ShowEntry.ts';
 import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
+import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
 
 export function mapToShowEntry(
@@ -12,6 +13,7 @@ export function mapToShowEntry(
 ): ShowEntry {
   const poster = mapToPoster(show.images);
   const cover = mapToCover(show.images);
+  const logo = mapToLogo(show.images);
 
   const thumbCandidate = findDefined(
     ...(show.images?.thumb ?? []),
@@ -30,6 +32,7 @@ export function mapToShowEntry(
     languages: show.languages,
     poster,
     cover,
+    logo,
     colors: mapToColors(show.colors?.poster),
     thumb: {
       url: prependHttps(

@@ -25,6 +25,14 @@ export const ShowSiloMappedMock: ShowEntry = {
         'https://walter-r2.trakt.tv/images/shows/000/180/770/posters/thumb/5312f1d1cf.jpg.webp',
     },
   },
+  'logo': {
+    'url': {
+      'medium':
+        'https://walter-r2.trakt.tv/images/shows/000/180/770/logos/medium/b0c9a10541.png.webp',
+      'thumb':
+        'https://walter-r2.trakt.tv/images/shows/000/180/770/logos/thumb/b0c9a10541.png.webp',
+    },
+  },
   'type': 'show',
   'year': 2023,
   'runtime': 60,

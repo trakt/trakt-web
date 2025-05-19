@@ -34,6 +34,14 @@ export const ShowDevsMappedMock: ShowEntry = {
         'https://walter-r2.trakt.tv/images/shows/000/147/971/fanarts/thumb/e9507d40da.jpg.webp',
     },
   },
+  'logo': {
+    'url': {
+      'medium':
+        'https://walter-r2.trakt.tv/images/shows/000/147/971/logos/medium/409bb7e516.png.webp',
+      'thumb':
+        'https://walter-r2.trakt.tv/images/shows/000/147/971/logos/thumb/409bb7e516.png.webp',
+    },
+  },
   'thumb': {
     'url':
       'https://walter-r2.trakt.tv/images/shows/000/147/971/thumbs/medium/7d0e3d4bbc.jpg.webp',

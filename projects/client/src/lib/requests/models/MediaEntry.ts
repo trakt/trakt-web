@@ -26,6 +26,9 @@ export const MediaEntrySchema = z.object({
   cover: z.object({
     url: ImageUrlsSchema,
   }),
+  logo: z.object({
+    url: ImageUrlsSchema,
+  }),
   thumb: z.object({
     url: HttpsUrlSchema,
   }),

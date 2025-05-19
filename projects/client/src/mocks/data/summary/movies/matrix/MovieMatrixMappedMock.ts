@@ -34,6 +34,14 @@ export const MovieMatrixMappedMock: MovieEntry = {
         'https://walter-r2.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',
     },
   },
+  'logo': {
+    'url': {
+      'medium':
+        'https://walter-r2.trakt.tv/images/movies/000/000/481/logos/medium/f5e05ed291.png.webp',
+      'thumb':
+        'https://walter-r2.trakt.tv/images/movies/000/000/481/logos/thumb/f5e05ed291.png.webp',
+    },
+  },
   'thumb': {
     'url':
       'https://walter-r2.trakt.tv/images/movies/000/000/481/fanarts/thumb/c556867276.jpg.webp',

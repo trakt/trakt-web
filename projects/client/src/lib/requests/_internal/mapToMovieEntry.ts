@@ -4,6 +4,7 @@ import type { MovieCertificationResponse, MovieResponse } from '@trakt/api';
 import type { MovieEntry } from '../models/MovieEntry.ts';
 import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
+import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
 
 function mapMovieCertificationResponse(
@@ -22,6 +23,7 @@ export function mapToMovieEntry(
 ): MovieEntry {
   const poster = mapToPoster(movie.images);
   const cover = mapToCover(movie.images);
+  const logo = mapToLogo(movie.images);
 
   return {
     id: movie.ids.trakt,
@@ -37,6 +39,7 @@ export function mapToMovieEntry(
     colors: mapToColors(movie.colors?.poster),
     poster,
     cover,
+    logo,
     thumb: {
       url: cover.url.thumb,
     },

@@ -11,6 +11,12 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
       'thumb': '/placeholders/landscape_placeholder.png' as HttpsUrl,
     },
   },
+  'logo': {
+    'url': {
+      'medium': '/placeholders/purple_placeholder.png' as HttpsUrl,
+      'thumb': '/placeholders/landscape_placeholder.png' as HttpsUrl,
+    },
+  },
   'genres': [],
   'id': 180770,
   'languages': undefined,
