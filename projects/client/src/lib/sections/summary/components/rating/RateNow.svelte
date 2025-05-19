@@ -31,7 +31,7 @@
   const type = $derived(props.type);
   const id = $derived(props.media.id);
 
-  const { isRating, currentRating, addRating } = $derived(
+  const { isRating, isFavorited, currentRating, addRating } = $derived(
     useRatings({
       type,
       id,
@@ -52,7 +52,7 @@
             if ($currentRating === rating) {
               return;
             }
-            addRating(rating);
+            addRating(rating, $isFavorited);
           }}
         />
       {/each}

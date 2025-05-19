@@ -14,9 +14,17 @@ import { PersonalListsResponseMock } from '$mocks/data/users/response/PersonalLi
 import { RatedShowsResponseMock } from '$mocks/data/users/response/RatedShowsResponseMock.ts';
 import { EpisodeActivityHistoryResponseMock } from '../data/users/response/EpisodeActivityHistoryResponseMock.ts';
 import { ExtendedUsersResponseMock } from '../data/users/response/ExtendedUserSettingsResponseMock.ts';
+<<<<<<< HEAD
 import { FilterResponseMock } from '../data/users/response/FilterResponseMock.ts';
 import { HiddenShowProgressResponseMock } from '../data/users/response/HiddenShowProgressResponseMock.ts';
 import { MovieActivityHistoryResponseMock } from '../data/users/response/MovieActivityHistoryResponseMock.ts';
+=======
+import { FavoritedMoviesResponseMock } from '../data/users/response/FavoritedMoviesResponseMock.ts';
+import { FavoritedShowsResponseMock } from '../data/users/response/FavoritedShowsResponseMock.ts';
+import { HistoryEpisodesResponseMock } from '../data/users/response/HistoryEpisodesResponseMock.ts';
+import { HistoryMoviesResponseMock } from '../data/users/response/HistoryMoviesResponseMock.ts';
+import { HistoryShowsResponseMock } from '../data/users/response/HistoryShowsResponseMock.ts';
+>>>>>>> parent of 9259f4bb (chore: remove favorites)
 import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesResponseMock.ts';
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
@@ -62,6 +70,12 @@ export const users = [
   }),
   http.get('http://localhost/users/me/ratings/episodes', () => {
     return HttpResponse.json(RatedEpisodesResponseMock);
+  }),
+  http.get('http://localhost/users/me/favorites/movies/rank', () => {
+    return HttpResponse.json(FavoritedMoviesResponseMock);
+  }),
+  http.get('http://localhost/users/me/favorites/shows/rank', () => {
+    return HttpResponse.json(FavoritedShowsResponseMock);
   }),
   http.get('http://localhost/users/me/history/shows*', () => {
     return HttpResponse.json(ShowActivityHistoryResponseMock);
