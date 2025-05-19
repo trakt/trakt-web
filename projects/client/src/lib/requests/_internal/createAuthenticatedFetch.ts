@@ -13,7 +13,7 @@ export function createAuthenticatedFetch<
     const headers = new Headers(modifiedInit?.headers || {});
 
     try {
-      const { value: token, isDirector } = getToken();
+      const { value: token } = getToken();
       const url = input.toString();
 
       if (token) {
@@ -21,7 +21,7 @@ export function createAuthenticatedFetch<
 
         const isNitro = url.includes('/sync/progress/up_next_nitro');
         const isApiCall = url.includes('apiz.trakt.tv');
-        if (isNitro && isApiCall && isDirector) {
+        if (isNitro && isApiCall) {
           input = input.toString().replaceAll('apiz.trakt.tv', 'hd.trakt.tv')
             .toString();
         }
