@@ -1,5 +1,6 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { HistoryAddRequest } from '@trakt/api';
+import { setMarker } from '../../utils/date/Marker.ts';
 
 type MarkAsWatchedParams = {
   body: HistoryAddRequest;
@@ -14,5 +15,9 @@ export function markAsWatchedRequest(
     .add({
       body,
     })
-    .then(({ status }) => status === 201);
+    .then(({ status }) => {
+      setMarker();
+
+      return status === 201;
+    });
 }

@@ -9,6 +9,7 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { mapUpNextResponse } from '$lib/requests/queries/sync/upNextQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
+import { getMarker } from '../../../utils/date/Marker.ts';
 
 export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
   z.object({
@@ -29,6 +30,9 @@ const upNextNitroRequest = (params: UpNextParams) => {
       query: {
         page,
         limit,
+        ...{
+          marker: getMarker(),
+        },
       },
     });
 };
