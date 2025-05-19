@@ -12,11 +12,9 @@
 This [workspace](https://docs.deno.com/runtime/fundamentals/workspaces/) is
 composed the following projects:
 
-- **`client`:** The gleaming chrome of our pursuit. This project houses the
-  Trakt Lite client, a sleek and efficient machine built with Deno and
-  SvelteKit. It's the polished facade, the fast car we use to chase down those
-  elusive media insights. (Just try not to crash it into a dumpster fire like
-  last time.)
+- **`client`:** The frontend of our application. This project houses the Trakt
+  Lite client, built with Deno and SvelteKit. It's designed to be efficient and
+  user-friendly, providing quick access to media insights.
 
 ## Environment Variables
 
@@ -28,37 +26,29 @@ properly:
 - **`TRAKT_CLIENT_ID`:** The client ID for the Trakt API.
 - **`TRAKT_CLIENT_SECRET`:** The client secret for the Trakt API.
 
-### External Contribution - Unleash Your Inner Code Wizard!
+### External Contribution - Get Involved!
 
-Want to contribute to Trakt Lite and leave your mark on the digital tapestry of
-media? Excellent! Here's how to tap into your inner code-slinging sorcerer:
+Want to contribute to Trakt Lite? Great! Here's how to get set up:
 
-1. **Summon a Trakt Application:** Venture forth to the
-   [Trakt Settings](https://trakt.tv/oauth/applications) and conjure a new
-   application. It's like creating a digital familiar, ready to do your bidding.
-1. **Set the `Redirect uri:`:** Point this mystical path to
-   `http://localhost:5173/` - the gateway to your local development realm.
-1. **Set the `Javascript (cors) origins:`:** Ensure this incantation also points
-   to `http://localhost:5173/` to allow cross-origin sorcery.
-1. Now that you've forged your Trakt application, it's time to imbue your
-   development environment with the mystical energies of the Client ID and
-   Client Secret.
+1. **Create a Trakt Application:** Go to
+   [Trakt Settings](https://trakt.tv/oauth/applications) and create a new
+   application.
+1. **Set the `Redirect uri:`:** Set this to `http://localhost:5173/` for local
+   development.
+1. **Set the `Javascript (cors) origins:`:** Also set this to
+   `http://localhost:5173/` to allow cross-origin requests.
+1. Use the Client ID and Client Secret in your development environment.
 
-**A Word of Caution, Fellow Traveler:**
+**Important Note:**
 
-While public applications can be used, they might withhold some of their
-secrets. Think of it as a trial version of an ancient spellbook. Limitations
-include:
+Public applications might have some limitations, including:
 
-- **"Up Next" Dysfunction:** This powerful prophecy, revealing your future
-  viewing pleasures, will be temporarily silenced.
+- **"Up Next" Functionality:** This feature showing your future viewing queue
+  may not work properly.
 
-Fear not, for these measures are in place to protect Trakt Lite from the
-nefarious clutches of scrapers and bots. We wouldn't want our precious data to
-fall into the wrong hands, would we?
+These limitations are in place to protect Trakt Lite from scrapers and bots.
 
-Now go forth and code with the fury of a thousand suns! The future of Trakt Lite
-awaits your brilliance. ✨
+Now go ahead and contribute your best work to Trakt Lite! ✨
 
 ## Getting Started
 
@@ -77,66 +67,55 @@ please refer to the
   - Development: `deno task client:dev`
   - Contributors: `deno task client:dev:contrib`
 
-## Client Environment - Traversing the Digital Landscape
+## Client Environment - Development Setup
 
-### Web - Navigating the Browser Realm
+### Web Development
 
-To embark on your web development journey, simply utter the incantation
-`deno task dev` or `deno task dev:contrib` (for external contributors) within
-the hallowed halls of the `projects/client` directory. Then, summon forth the
-browser of your choice, and behold the fruits of your labor.
+For web development, run `deno task dev` or `deno task dev:contrib` (for
+external contributors) in the `projects/client` directory. Then open your
+browser to see your work.
 
-### Android - Taming the Mobile Beast
+### Android Development
 
-Should you seek to venture into the untamed wilds of Android development, this
-guide shall illuminate your path, granting you the power to:
+For Android development, you can:
 
-- **Install Development PWA:** Summon forth a development version of the
-  Progressive Web App, and bind it to your Android device. (Fear not, for the
-  arcane art of remote debugging shall be at your disposal.)
-- **Debug Website Version:** Should you prefer the familiar comforts of the
-  Chrome browser, you may also conjure forth the website version and subject it
-  to your debugging scrutiny.
+- **Install Development PWA:** Install a development version of the Progressive
+  Web App on your Android device with remote debugging capabilities.
+- **Debug Website Version:** Use Chrome browser for debugging the website
+  version.
 
-To embark on this mobile odyssey, consult the Chrome Remote Debugging
-[grimoire](https://developer.chrome.com/docs/devtools/remote-debugging/). Within
-its pages lies the knowledge to establish a connection between your development
-environment and the Android realm.
+To set this up, refer to the Chrome Remote Debugging
+[documentation](https://developer.chrome.com/docs/devtools/remote-debugging/).
+Connect your development environment to Android through the device management
+portal at `chrome://inspect/#devices`. This works with:
 
-The device management portal, accessible via the incantation
-`chrome://inspect/#devices`, shall serve as your gateway to the Android domain.
-It functions with both:
+- **Option 1: Android Studio Emulated Device**
+- **Option 2: Physical Device (USB Connection)**
 
-- **Option 1: Android Studio Emulated Device:** A simulated realm, where digital
-  phantoms mimic the behavior of physical devices.
-- **Option 2: Physical Device (USB Connection):** A tangible device, tethered to
-  your development machine via the umbilical cord of USB.
-
-Once you have established a connection, invoke the following command to
-establish a reverse proxy:
+After connecting, set up a reverse proxy with:
 
 ```bash
 adb reverse tcp:5173 tcp:5173
 ```
 
-### iOS - Conquering the Apple Domain
+### iOS Development
 
 **Coming Soon!**
 
 ## Build Trakt Lite
 
-To build the Trakt Lite client, run the following command:
+To build the Trakt Lite client, run:
 
 ```sh
 cd projects/client/
 [deno|npm|bun] run build
 ```
 
-## Summoning a Production Preview: A How-To Guide
+## Production Preview
 
 ### Vite
 
-Simply run the following command:
+Run the following command:
 
 ```sh
 [deno|npm|bun] run build:preview && [deno|npm|bun] run preview
@@ -179,45 +158,34 @@ For each entry listed as a result:
 1. Test
 1. Commit
 
-## Resolving the Multilingual Mayhem
+## Resolving i18n Conflicts
 
-### A Guide to i18n Conflict Resolution
+### Handling Translation Conflicts
 
-Should the chaotic forces of rebasing leave your `client/i18n/messages` folder
-in a state of disarray, fear not, intrepid developer. For within this document
-lies the knowledge to restore harmony to the realm of translations.
+If rebasing causes conflicts in your `client/i18n/messages` folder, here's how
+to fix them:
 
-When merging your linguistic endeavors with the `main` branch, conflicts may
-arise within the `client/i18n/messages` domain. This is to be expected, for the
-path of internationalization is fraught with peril and unexpected detours.
+When merging your changes with the `main` branch, conflicts may occur in
+translation files. This is normal when multiple people are working on
+internationalization.
 
-To navigate this linguistic labyrinth and emerge victorious, follow these steps:
+To resolve these conflicts:
 
-1. **Ensure the presence of the `deno` CLI:** This digital incantation, a key to
-   unlocking the secrets of conflict resolution, must be present within your
-   development arsenal.
-2. **Invoke the resolution ritual:** From the heart of the project, intone the
-   following command:
+1. **Make sure you have the `deno` CLI installed**
+2. **Run the resolution command** from the project root:
 
    ```bash
    deno task client:i18n:resolve
    ```
 
-   Alternatively, should you find yourself within the `projects/client` domain,
-   utter this incantation:
+   Or if you're in the `projects/client` directory:
 
    ```bash
    deno task i18n:resolve
    ```
 
-These commands, like ancient spells whispered in the dead of night, shall
-resolve the conflicts and restore order to the `i18n/messages/*.json` files. The
-translations, once fragmented and disjointed, shall merge into a harmonious
-symphony of multilingual understanding.
-
-With these tools at your disposal, you shall emerge from the chaos of rebasing
-with your sanity intact and your translations unified. Go forth, and conquer the
-linguistic challenges that lie before you.
+These commands will resolve conflicts in the `i18n/messages/*.json` files and
+merge the translations properly.
 
 For more details about infrastructure, see:
 [INFRASTRUCTURE.md](INFRASTRUCTURE.md).

@@ -16,30 +16,28 @@ properly:
   - Choose the `Trakt` account
   - Copy the account ID from the URL
 
-## Summoning a Production Preview: A How-To Guide
+## Setting Up a Production Preview
 
-### Wrangler (Cloudflare) - Taming the Digital Wild West
+### Wrangler (Cloudflare) Setup
 
-#### Development Preview - A Glimpse Behind the Curtain
+#### Development Preview
 
-To peer into the swirling mists of development, you'll require the arcane power
-of two terminals:
+To run a development preview, you'll need two terminals:
 
-1. In the first, unleash the `Vite Preview` incantations.
-2. In the second, whisper the following command:
+1. In the first terminal, start the `Vite Preview` server.
+2. In the second terminal, run:
 
 ```sh
 [npx|bunx] wrangler pages dev .svelte-kit/cloudflare
 ```
 
-**NOTE:** Deno, in its current form, remains blind to the secrets of VM modules
-([a tale of woe and unfulfilled promises](https://github.com/denoland/deno/issues/26349)).
-Thus, wrangler can only be previewed through the conduits of `npm` or `bun`.
+**NOTE:** Deno currently doesn't support VM modules
+([see issue](https://github.com/denoland/deno/issues/26349)), so wrangler can
+only be previewed using `npm` or `bun`.
 
-#### Production Preview - A Vision of the Future
+#### Production Preview
 
-Ensure your digital presence resides within the `projects/client/` domain, then
-intone the following incantation:
+Navigate to the `projects/client/` directory and run:
 
 ```sh
 # This is required if the secrets are not already set or have changed
@@ -50,9 +48,8 @@ echo "$TRAKT_CLIENT_SECRET" | npx wrangler pages secret put TRAKT_CLIENT_SECRET
 [deno|npm|bun] task build && npx wrangler pages deploy
 ```
 
-**NOTE:** Resist the urge to unleash production deployments from your mortal
-machine unless circumstances are dire. The `CD` pipeline, a tireless automaton,
-stands ready to automatically project the client onto the Cloudflare Pages. This
-command serves as a portal to conjure
-[preview environments](https://developers.cloudflare.com/pages/configuration/preview-deployments/),
-ephemeral realms where your team can witness the unfolding future.
+**NOTE:** Try to avoid running production deployments from your local machine.
+The `CD` pipeline automatically deploys the client to Cloudflare Pages. This
+command is primarily intended for creating
+[preview environments](https://developers.cloudflare.com/pages/configuration/preview-deployments/)
+where your team can review changes before they go live.
