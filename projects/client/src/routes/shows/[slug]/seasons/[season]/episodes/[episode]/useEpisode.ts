@@ -4,8 +4,11 @@ import { episodeIntlQuery } from '$lib/requests/queries/episode/episodeIntlQuery
 import { episodePeopleQuery } from '$lib/requests/queries/episode/episodePeopleQuery.ts';
 import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummaryQuery.ts';
 import { streamEpisodeQuery } from '$lib/requests/queries/episode/streamEpisodeQuery.ts';
+import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
+import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
+import { toMediaIntl } from '$lib/utils/media/toMediaIntl.ts';
 import { derived, get } from 'svelte/store';
 
 type UseEpisodeParams = {
@@ -20,6 +23,7 @@ export function useEpisode(
   const { country, getPreferred } = useStreamingPreferences();
 
   const episode = useQuery(episodeSummaryQuery(params));
+  const show = useQuery(showSummaryQuery({ slug: params.slug }));
   const seasons = useQuery(showSeasonsQuery(params));
   const crew = useQuery(episodePeopleQuery(params));
 
@@ -29,6 +33,9 @@ export function useEpisode(
   const intl = isLocaleSkipped
     ? episode
     : useQuery(episodeIntlQuery({ ...params, ...getLanguageAndRegion() }));
+  const showIntl = isLocaleSkipped
+    ? show
+    : useQuery(showIntlQuery({ slug: params.slug, ...getLanguageAndRegion() }));
 
   const streamOn = useQuery(streamEpisodeQuery({
     ...params,
@@ -37,8 +44,10 @@ export function useEpisode(
 
   const queries = [
     episode,
+    show,
     seasons,
     intl,
+    showIntl,
     crew,
     streamOn,
   ];
@@ -51,6 +60,7 @@ export function useEpisode(
   return {
     isLoading,
     episode: derived(episode, ($episode) => $episode.data),
+    show: derived(show, ($show) => $show.data),
     seasons: derived(
       [
         seasons,
@@ -63,22 +73,25 @@ export function useEpisode(
     ),
     crew: derived(crew, ($crew) => $crew.data),
     intl: derived(
-      [episode, intl],
-      ([$episode, $intl]) => {
-        if (isLocaleSkipped) {
-          return $intl.data;
-        }
-
+      intl,
+      ($intl) => {
         if ($intl.isFetching) {
           return;
         }
 
         return {
-          title: $intl?.data?.title ?? $episode?.data?.title ?? '',
-          overview: $intl?.data?.overview ?? $episode?.data?.overview ?? '',
+          title: $intl?.data?.title ?? '',
+          overview: $intl?.data?.overview ?? '',
         };
       },
     ),
+    showIntl: derived(showIntl, ($showIntl) => {
+      if ($showIntl.isFetching) {
+        return;
+      }
+
+      return toMediaIntl($showIntl?.data);
+    }),
     streamOn: derived(
       streamOn,
       ($streamOn) => {

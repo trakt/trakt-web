@@ -12,24 +12,12 @@
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useShow } from "./useShow";
-  import { useShowDetails } from "./useShowDetails";
   import { useShowVideos } from "./useShowVideos";
 
-  const {
-    show,
-    intl,
-    isLoading: isLoadingShow,
-  } = $derived(useShow(page.params.slug));
+  const { show, intl, studios, crew, seasons, streamOn, isLoading } = $derived(
+    useShow(page.params.slug),
+  );
 
-  const {
-    studios,
-    crew,
-    seasons,
-    streamOn,
-    isLoading: isLoadingDetails,
-  } = $derived(useShowDetails(page.params.slug));
-
-  const isLoading = $derived($isLoadingShow || $isLoadingDetails);
   const videos = $derived(
     useShowVideos({
       slug: page.params.slug,
@@ -102,7 +90,7 @@
   type="show"
   hasDynamicContent={true}
 >
-  {#if !isLoading}
+  {#if !$isLoading}
     <ShowSummary
       media={$show!}
       intl={$intl!}
