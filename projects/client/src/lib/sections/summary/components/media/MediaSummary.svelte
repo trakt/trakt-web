@@ -10,7 +10,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
@@ -39,19 +38,15 @@
 
   const {
     media,
-    ratings,
     type,
     intl,
     contextualContent,
-    stats,
-    watchers,
     studios,
     crew,
     streamOn,
   }: MediaSummaryProps<MediaEntry> & {
     type: MediaType;
     contextualContent?: Snippet;
-    stats: MediaStats;
     studios: MediaStudio[];
     crew: MediaCrew;
   } = $props();
@@ -159,17 +154,7 @@
     <GenreList genres={media.genres} />
   </SummaryHeader>
 
-  <MediaMetaInfo
-    certification={media.certification}
-    year={media.year}
-    airDate={media.airDate}
-    watchCount={$watchCount}
-    {media}
-    {ratings}
-    {stats}
-    {watchers}
-    {streamOn}
-  />
+  <MediaMetaInfo watchCount={$watchCount} {streamOn} {media} {type} />
 
   <Spoiler {media} {type}>
     <SummaryOverview {title} overview={intl.overview ?? media.overview} />

@@ -9,9 +9,6 @@
   const {
     episode,
     seasons,
-    ratings,
-    stats,
-    watchers,
     crew,
     streamOn,
     intl: episodeIntl,
@@ -48,9 +45,6 @@
       episode={$episode!}
       episodeIntl={$episodeIntl!}
       seasons={$seasons!}
-      ratings={$ratings!}
-      stats={$stats!}
-      watchers={$watchers!}
       streamOn={$streamOn}
       crew={$crew!}
     />

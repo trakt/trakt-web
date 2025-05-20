@@ -2,12 +2,7 @@ import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { episodeIntlQuery } from '$lib/requests/queries/episode/episodeIntlQuery.ts';
 import { episodePeopleQuery } from '$lib/requests/queries/episode/episodePeopleQuery.ts';
-import { episodeRatingQuery } from '$lib/requests/queries/episode/episodeRatingQuery.ts';
-import { episodeStatsQuery } from '$lib/requests/queries/episode/episodeStatsQuery.ts';
 import { episodeSummaryQuery } from '$lib/requests/queries/episode/episodeSummaryQuery.ts';
-import {
-  episodeWatchersQuery,
-} from '$lib/requests/queries/episode/episodeWatchersQuery.ts';
 import { streamEpisodeQuery } from '$lib/requests/queries/episode/streamEpisodeQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
@@ -26,9 +21,6 @@ export function useEpisode(
 
   const episode = useQuery(episodeSummaryQuery(params));
   const seasons = useQuery(showSeasonsQuery(params));
-  const ratings = useQuery(episodeRatingQuery(params));
-  const stats = useQuery(episodeStatsQuery(params));
-  const watchers = useQuery(episodeWatchersQuery(params));
   const crew = useQuery(episodePeopleQuery(params));
 
   const locale = languageTag();
@@ -46,9 +38,6 @@ export function useEpisode(
   const queries = [
     episode,
     seasons,
-    ratings,
-    stats,
-    watchers,
     intl,
     crew,
     streamOn,
@@ -72,9 +61,6 @@ export function useEpisode(
           season.number === $episode.data?.season
         ),
     ),
-    ratings: derived(ratings, ($rating) => $rating.data),
-    stats: derived(stats, ($stats) => $stats.data),
-    watchers: derived(watchers, ($watchers) => $watchers.data ?? []),
     crew: derived(crew, ($crew) => $crew.data),
     intl: derived(
       [episode, intl],

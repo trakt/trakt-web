@@ -22,9 +22,6 @@
   } = $derived(useShow(page.params.slug));
 
   const {
-    ratings,
-    stats,
-    watchers,
     studios,
     crew,
     seasons,
@@ -108,9 +105,6 @@
   {#if !isLoading}
     <ShowSummary
       media={$show!}
-      ratings={$ratings!}
-      watchers={$watchers!}
-      stats={$stats!}
       intl={$intl!}
       studios={$studios!}
       crew={$crew!}

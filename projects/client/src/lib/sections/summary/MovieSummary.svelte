@@ -2,7 +2,6 @@
   import * as m from "$lib/features/i18n/messages";
 
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
@@ -17,33 +16,19 @@
 
   const {
     media,
-    ratings,
-    stats,
-    watchers,
     studios,
     intl,
     crew,
     streamOn,
     videos,
   }: MediaSummaryProps<MovieEntry> & {
-    stats: MediaStats;
     studios: MediaStudio[];
     crew: MediaCrew;
     videos: MediaVideo[];
   } = $props();
 </script>
 
-<MediaSummary
-  {media}
-  {ratings}
-  {stats}
-  {watchers}
-  {studios}
-  {crew}
-  {intl}
-  {streamOn}
-  type="movie"
-/>
+<MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
 
 <CastList title={m.actors()} cast={crew.cast} slug={media.slug} />
 
