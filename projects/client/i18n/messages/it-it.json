@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoiler",
   "settings_spoilers_label": "Mostra spoiler",
   "filter_save": "Salva",
-  "filter_save_label": "Salva filtri"
+  "filter_save_label": "Salva filtri",
+  "error_page_locked_account_title": "Account bloccato",
+  "error_page_locked_account_message": "Il tuo account è bloccato, <a>contatta l'assistenza</a> per risolvere il problema."
 }

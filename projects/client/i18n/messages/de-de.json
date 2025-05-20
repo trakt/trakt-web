@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoiler",
   "settings_spoilers_label": "Spoiler anzeigen",
   "filter_save": "Speichern",
-  "filter_save_label": "Filter speichern"
+  "filter_save_label": "Filter speichern",
+  "error_page_locked_account_title": "Konto gesperrt",
+  "error_page_locked_account_message": "Ihr Konto ist gesperrt, <a>wenden Sie sich an den Support</a>, um dieses Problem zu beheben."
 }

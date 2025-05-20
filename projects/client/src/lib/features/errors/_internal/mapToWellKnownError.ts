@@ -7,6 +7,8 @@ export function mapToWellKnownError(
     case 502:
     case 503:
       return WellKnownError.ServerError;
+    case 423:
+      return WellKnownError.LockedAccountError;
     default:
       return;
   }

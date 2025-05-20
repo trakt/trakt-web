@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoilery",
   "settings_spoilers_label": "Pokaż spoilery",
   "filter_save": "Zapisz",
-  "filter_save_label": "Zapisz filtry"
+  "filter_save_label": "Zapisz filtry",
+  "error_page_locked_account_title": "Konto zablokowane",
+  "error_page_locked_account_message": "Twoje konto jest zablokowane, <a>skontaktuj się z pomocą techniczną</a>, aby rozwiązać ten problem."
 }

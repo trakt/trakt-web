@@ -157,6 +157,7 @@ export const UrlBuilder = {
     monthInReview: (slug: string, token: string) =>
       `https://trakt.tv/users/${slug}/mir?slurm=${token}`,
     privacy: () => 'https://trakt.tv/privacy',
+    support: () => 'mailto:support@trakt.tv',
     frame: {
       yearToDate: (slug: string, year: string, token: string | Nil) =>
         ogIframeFactory(`https://trakt.tv/users/${slug}/year/${year}`, token),

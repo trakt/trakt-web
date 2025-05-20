@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoilere",
   "settings_spoilers_label": "Vis spoilers",
   "filter_save": "Gem",
-  "filter_save_label": "Gem filtre"
+  "filter_save_label": "Gem filtre",
+  "error_page_locked_account_title": "Konto blokeret",
+  "error_page_locked_account_message": "Din konto er låst, <a>kontakt support</a> for at løse dette problem."
 }
