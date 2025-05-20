@@ -409,5 +409,7 @@
   "month_in_review_label": "Przegląd miesiąca",
   "settings": "Ustawienia",
   "settings_spoilers_title": "Spoilery",
-  "settings_spoilers_label": "Pokaż spoilery"
+  "settings_spoilers_label": "Pokaż spoilery",
+  "filter_save": "Zapisz",
+  "filter_save_label": "Zapisz filtry"
 }

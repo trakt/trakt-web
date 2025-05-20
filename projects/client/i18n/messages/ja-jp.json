@@ -409,5 +409,7 @@
   "month_in_review_label": "今月のレビュー",
   "settings": "設定",
   "settings_spoilers_title": "ネタバレ",
-  "settings_spoilers_label": "ネタバレを表示"
+  "settings_spoilers_label": "ネタバレを表示",
+  "filter_save": "保存",
+  "filter_save_label": "フィルターを保存"
 }

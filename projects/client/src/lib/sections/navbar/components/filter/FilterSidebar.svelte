@@ -4,6 +4,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { Writable } from "svelte/store";
   import ResetAllButton from "./_internal/ResetAllButton.svelte";
+  import SaveFiltersButton from "./_internal/SaveFiltersButton.svelte";
   import Sidebar from "./_internal/Sidebar.svelte";
   import ListFilter from "./filters/ListFilter.svelte";
   import RatingsFilter from "./filters/RatingsFilter.svelte";
@@ -32,6 +33,18 @@
     class="trakt-filter-actions"
     data-dpad-navigation={DpadNavigationType.List}
   >
+    <SaveFiltersButton />
     <ResetAllButton />
   </div>
 </Sidebar>
+
+<style>
+  .trakt-filter-actions {
+    display: flex;
+    gap: var(--gap-xs);
+
+    :global(.trakt-button) {
+      flex: 1;
+    }
+  }
+</style>

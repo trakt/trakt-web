@@ -409,5 +409,7 @@
   "month_in_review_label": "Månedens overblik",
   "settings": "Indstillinger",
   "settings_spoilers_title": "Spoilere",
-  "settings_spoilers_label": "Vis spoilers"
+  "settings_spoilers_label": "Vis spoilers",
+  "filter_save": "Gem",
+  "filter_save_label": "Gem filtre"
 }

@@ -409,5 +409,7 @@
   "month_in_review_label": "Maandoverzicht",
   "settings": "Instellingen",
   "settings_spoilers_title": "Spoilers",
-  "settings_spoilers_label": "Spoilers tonen"
+  "settings_spoilers_label": "Spoilers tonen",
+  "filter_save": "Opslaan",
+  "filter_save_label": "Filters opslaan"
 }
