@@ -58,7 +58,7 @@
     cursor: pointer;
     transition: var(--transition-increment) ease-in-out;
     transition-property: color, text-decoration;
-    display: inherit;
+    display: inline;
 
     :global(p),
     :global(span) {

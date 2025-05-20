@@ -27,27 +27,24 @@
     class="trakt-cookie-notice"
     transition:slide={{ duration: NOTICE_TRANSITION_DURATION }}
   >
-    <div class="trakt-cookie-notice-text">
-      <p class="meta-info">
-        <MessageWithLink
-          message={m.cookie_notice()}
-          href={UrlBuilder.og.privacy()}
-          target="_blank"
-        />
-      </p>
-    </div>
-    <div class="trakt-cookie-notice-actions">
-      <Button
-        color="default"
-        variant="secondary"
-        size="small"
-        label={m.cookie_accept()}
-        onclick={consent}
-        data-testid={TestId.ConsentButton}
-      >
-        {m.cookie_accept()}
-      </Button>
-    </div>
+    <div class="trakt-cookie">🍪</div>
+    <p class="meta-info">
+      <MessageWithLink
+        message={m.cookie_notice()}
+        href={UrlBuilder.og.privacy()}
+        target="_blank"
+      />
+    </p>
+    <Button
+      color="default"
+      variant="secondary"
+      size="small"
+      label={m.cookie_accept()}
+      onclick={consent}
+      data-testid={TestId.ConsentButton}
+    >
+      {m.cookie_accept()}
+    </Button>
   </div>
 {/if}
 
@@ -55,40 +52,64 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-cookie-notice {
-    --cookie-notice-distance-size: var(--layout-distance-side);
+    --cookie-notice-distance-size: var(--ni-40);
 
     position: fixed;
     z-index: var(--layer-top);
 
+    margin: auto;
+    right: 0;
+    left: 0;
+    bottom: calc(
+      var(--cookie-notice-distance-size) + env(safe-area-inset-bottom, 0)
+    );
+
     display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-m);
 
     border-radius: var(--border-radius-m);
 
     box-sizing: border-box;
-    padding: var(--ni-12);
+    padding: var(--ni-24);
+    padding-left: var(--ni-40);
 
-    width: var(--ni-320);
+    width: min(var(--ni-480), 85%);
 
     backdrop-filter: blur(var(--ni-16));
     background-color: var(--color-cookie-background);
-    border: var(--border-thickness-xxs) solid var(--color-cookie-border);
-
-    bottom: calc(
-      var(--cookie-notice-distance-size) + env(safe-area-inset-bottom, 0)
-    );
-    right: var(--cookie-notice-distance-size);
+    box-shadow:
+      0px 280px 78px 0px color-mix(in srgb, var(--color-shadow) 0%, transparent),
+      0px 179px 72px 0px color-mix(in srgb, var(--color-shadow) 2%, transparent),
+      0px 101px 60px 0px color-mix(in srgb, var(--color-shadow) 8%, transparent),
+      0px 45px 45px 0px color-mix(in srgb, var(--color-shadow) 14%, transparent),
+      0px 11px 25px 0px color-mix(in srgb, var(--color-shadow) 16%, transparent);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: bottom, right, width;
 
-    @include for-tablet-sm-and-below {
-      --cookie-notice-distance-size: var(--ni-8);
+    .trakt-cookie {
+      --cookie-size: var(--ni-60);
+      --cookie-half-size: calc(var(--cookie-size) / 2);
+      --cookie-quarter-size: calc(var(--cookie-size) / 4);
+
+      position: absolute;
+      left: calc(-1 * var(--cookie-half-size));
+      top: var(--cookie-quarter-size);
+
+      font-size: 60px;
+      line-height: 1;
     }
 
     @include for-mobile {
-      width: calc(100% - 2 * var(--cookie-notice-distance-size));
+      padding-left: var(--ni-24);
+      padding-top: var(--ni-40);
+      flex-direction: column;
+
+      .trakt-cookie {
+        position: absolute;
+        left: calc(50% - var(--cookie-half-size));
+        top: calc(-1 * var(--cookie-half-size));
+      }
     }
   }
 
@@ -106,6 +127,10 @@
     bottom: 0;
 
     backdrop-filter: blur(var(--ni-8));
-    background-color: var(--color-cookie-background);
+    background-color: color-mix(
+      in srgb,
+      var(--color-cookie-background) 70%,
+      transparent 30%
+    );
   }
 </style>
