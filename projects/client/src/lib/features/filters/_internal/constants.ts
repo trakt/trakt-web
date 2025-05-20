@@ -68,3 +68,7 @@ export const FILTERS = [
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;
+
+export const DEFAULT_FILTERS = {
+  [FilterKey.Streaming]: 'any',
+} as const;
