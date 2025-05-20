@@ -4,6 +4,8 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { m } from "$lib/paraglide/messages";
 
+  const { onSave }: { onSave: () => void } = $props();
+
   const { saveFilters } = useStoredFilters();
 </script>
 
@@ -14,7 +16,10 @@
   color="default"
   variant="secondary"
   navigationType={DpadNavigationType.Item}
-  onclick={saveFilters}
+  onclick={() => {
+    saveFilters();
+    onSave();
+  }}
 >
   {m.filter_save()}
 </Button>

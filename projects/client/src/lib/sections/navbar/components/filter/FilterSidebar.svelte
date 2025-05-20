@@ -33,7 +33,7 @@
     class="trakt-filter-actions"
     data-dpad-navigation={DpadNavigationType.List}
   >
-    <SaveFiltersButton />
+    <SaveFiltersButton onSave={() => isOpen.set(false)} />
     <ResetAllButton />
   </div>
 </Sidebar>
