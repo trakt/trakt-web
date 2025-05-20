@@ -1,5 +1,7 @@
+import { browser } from '$app/environment';
 import { page } from '$app/state';
 import { get } from 'svelte/store';
+import { NOOP_FN } from '../../utils/constants.ts';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
 import { useParameters } from '../parameters/useParameters.ts';
 import { getDefaultFilters } from './_internal/getDefaultFilters.ts';
@@ -8,6 +10,13 @@ import { processFilterParams } from './_internal/processFilterParams.ts';
 export const STORED_FILTERS_KEY = 'trakt-global-filters' as const;
 
 export function useStoredFilters() {
+  if (!browser) {
+    return {
+      saveFilters: NOOP_FN,
+      restoreFilters: NOOP_FN,
+    };
+  }
+
   const { search } = useParameters();
 
   const saveFilters = () => {
