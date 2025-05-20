@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoilers",
   "settings_spoilers_label": "Visa spoilers",
   "filter_save": "Spara",
-  "filter_save_label": "Spara filter"
+  "filter_save_label": "Spara filter",
+  "error_page_locked_account_title": "Konto låst",
+  "error_page_locked_account_message": "Ditt konto är låst, <a>kontakta supporten</a> för att lösa detta problem."
 }

@@ -6,10 +6,8 @@
   import ErrorPage from "./ErrorPage.svelte";
 </script>
 
-<ErrorPage
-  title={m.error_page_service_title()}
-  message={m.error_page_service_message()}
->
+<ErrorPage title={m.error_page_service_title()}>
+  <p>{m.error_page_service_message()}</p>
   <Link href={UrlBuilder.og.status()} color="classic">
     {m.error_page_service_status()}
   </Link>

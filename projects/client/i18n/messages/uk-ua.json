@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Спойлери",
   "settings_spoilers_label": "Показати спойлери",
   "filter_save": "Зберегти",
-  "filter_save_label": "Зберегти фільтри"
+  "filter_save_label": "Зберегти фільтри",
+  "error_page_locked_account_title": "Обліковий запис заблоковано",
+  "error_page_locked_account_message": "Ваш обліковий запис заблоковано, <a>зв’яжіться з підтримкою</a>, щоб вирішити цю проблему."
 }

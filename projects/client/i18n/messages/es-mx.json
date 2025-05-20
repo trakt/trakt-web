@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoilers",
   "settings_spoilers_label": "Mostrar spoilers",
   "filter_save": "Guardar",
-  "filter_save_label": "Guardar filtros"
+  "filter_save_label": "Guardar filtros",
+  "error_page_locked_account_title": "Cuenta bloqueada",
+  "error_page_locked_account_message": "Tu cuenta está bloqueada, <a>contacta al soporte técnico</a> para resolver este problema."
 }

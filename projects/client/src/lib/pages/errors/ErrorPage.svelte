@@ -1,10 +1,18 @@
 <script lang="ts">
-  type PageErrorProps = {
+  type PageErrorPropsWithMessage = {
     title: string;
     message: string;
-  } & Partial<ChildrenProps>;
+    children?: never;
+  };
 
-  const { title, message, children }: PageErrorProps = $props();
+  type PageErrorPropsWithChildren = {
+    title: string;
+    message?: never;
+  } & ChildrenProps;
+
+  type PageErrorProps = PageErrorPropsWithMessage | PageErrorPropsWithChildren;
+
+  const { title, ...rest }: PageErrorProps = $props();
 </script>
 
 <svelte:head>
@@ -13,9 +21,10 @@
 
 <main class="error-page">
   <h1>{title}</h1>
-  <p>{message}</p>
-  {#if children != null}
-    {@render children()}
+  {#if rest.children}
+    {@render rest.children()}
+  {:else}
+    <p>{rest.message}</p>
   {/if}
 </main>
 

@@ -5,7 +5,8 @@
   import ErrorPage from "./ErrorPage.svelte";
 </script>
 
-<ErrorPage title={m.error_404_title()} message={m.error_404_message()}>
+<ErrorPage title={m.error_404_title()}>
+  <p>m.error_404_message()</p>
   <Link href={UrlBuilder.home()} color="classic">
     {m.error_404_action()}
   </Link>

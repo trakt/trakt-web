@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Спойлери",
   "settings_spoilers_label": "Показвай спойлери",
   "filter_save": "Запази",
-  "filter_save_label": "Запази филтрите"
+  "filter_save_label": "Запази филтрите",
+  "error_page_locked_account_title": "Акаунтът е заключен",
+  "error_page_locked_account_message": "Вашият акаунт е заключен, <a>свържете се с поддръжката</a>, за да разрешите този проблем."
 }

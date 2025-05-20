@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoilers",
   "settings_spoilers_label": "Afficher les spoilers",
   "filter_save": "Sauvegarder",
-  "filter_save_label": "Enregistrer les filtres"
+  "filter_save_label": "Enregistrer les filtres",
+  "error_page_locked_account_title": "Compte verrouillé",
+  "error_page_locked_account_message": "Votre compte est verrouillé, <a>contactez le soutien</a> pour résoudre ce problème."
 }

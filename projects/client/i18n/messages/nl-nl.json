@@ -411,5 +411,7 @@
   "settings_spoilers_title": "Spoilers",
   "settings_spoilers_label": "Spoilers tonen",
   "filter_save": "Opslaan",
-  "filter_save_label": "Filters opslaan"
+  "filter_save_label": "Filters opslaan",
+  "error_page_locked_account_title": "Account vergrendeld",
+  "error_page_locked_account_message": "Uw account is vergrendeld, <a>neem contact op met de ondersteuning</a> om dit probleem op te lossen."
 }

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { afterNavigate } from "$app/navigation";
+  import ErrorLockedAccountPage from "$lib/pages/errors/ErrorLockedAccountPage.svelte";
   import ErrorServicePage from "$lib/pages/errors/ErrorServicePage.svelte";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
@@ -25,6 +26,10 @@
 
   afterNavigate((_) => fetchError.set(undefined));
 </script>
+
+{#if $fetchError === WellKnownError.LockedAccountError}
+  <ErrorLockedAccountPage />
+{/if}
 
 {#if $fetchError === WellKnownError.ServerError}
   <ErrorServicePage />

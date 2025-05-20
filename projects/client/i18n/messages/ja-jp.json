@@ -411,5 +411,7 @@
   "settings_spoilers_title": "ネタバレ",
   "settings_spoilers_label": "ネタバレを表示",
   "filter_save": "保存",
-  "filter_save_label": "フィルターを保存"
+  "filter_save_label": "フィルターを保存",
+  "error_page_locked_account_title": "アカウントがロックされています",
+  "error_page_locked_account_message": "アカウントがロックされています。問題を解決するには、<a>サポートにお問い合わせください</a>。"
 }
