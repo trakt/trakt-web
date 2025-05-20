@@ -409,5 +409,7 @@
   "month_in_review_label": "Månadens överblick",
   "settings": "Inställningar",
   "settings_spoilers_title": "Spoilers",
-  "settings_spoilers_label": "Visa spoilers"
+  "settings_spoilers_label": "Visa spoilers",
+  "filter_save": "Spara",
+  "filter_save_label": "Spara filter"
 }

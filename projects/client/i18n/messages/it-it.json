@@ -409,5 +409,7 @@
   "month_in_review_label": "Mese in rassegna",
   "settings": "Impostazioni",
   "settings_spoilers_title": "Spoiler",
-  "settings_spoilers_label": "Mostra spoiler"
+  "settings_spoilers_label": "Mostra spoiler",
+  "filter_save": "Salva",
+  "filter_save_label": "Salva filtri"
 }

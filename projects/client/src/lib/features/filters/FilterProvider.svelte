@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { useFilter } from "./useFilter";
+  import { useStoredFilters } from "./useStoredFilters";
 
   const { children }: ChildrenProps = $props();
 
-  useFilter();
+  const { restoreFilters } = useStoredFilters();
+  restoreFilters();
 </script>
 
 {@render children()}

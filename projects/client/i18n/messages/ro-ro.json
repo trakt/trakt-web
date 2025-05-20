@@ -409,5 +409,7 @@
   "month_in_review_label": "Luna în revistă",
   "settings": "Setări",
   "settings_spoilers_title": "Spoilere",
-  "settings_spoilers_label": "Arată spoilere"
+  "settings_spoilers_label": "Arată spoilere",
+  "filter_save": "Salvează",
+  "filter_save_label": "Salvează filtrele"
 }

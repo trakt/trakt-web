@@ -409,5 +409,7 @@
   "month_in_review_label": "Обзор на месеца",
   "settings": "Настройки",
   "settings_spoilers_title": "Спойлери",
-  "settings_spoilers_label": "Показвай спойлери"
+  "settings_spoilers_label": "Показвай спойлери",
+  "filter_save": "Запази",
+  "filter_save_label": "Запази филтрите"
 }
