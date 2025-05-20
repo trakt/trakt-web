@@ -113,10 +113,6 @@
     }
   }
 
-  .trakt-cookie-notice-text p {
-    display: inline;
-  }
-
   .trakt-cookie-underlay {
     z-index: calc(var(--layer-top) - 1);
 
