@@ -7,10 +7,14 @@
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import BetaBadge from "./components/BetaBadge.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import TraktLogo from "./components/TraktLogo.svelte";
   import ProfileButton from "./ProfileButton.svelte";
+
+  const isTV = $derived(getDeviceType(navigator.userAgent) === "tv");
 </script>
 
 <header>
@@ -20,6 +24,9 @@
   >
     <div class="trakt-side-navbar-top">
       <TraktLogo />
+      {#if isTV}
+        <BetaBadge />
+      {/if}
     </div>
 
     <div class="trakt-side-navbar-content">
