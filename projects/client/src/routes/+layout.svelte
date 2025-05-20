@@ -114,7 +114,7 @@
     <GlobalParameterProvider>
       <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
         <CookieConsentProvider
-          hasConsent={data.hasConsent}
+          hasConsent={data.hasConsent || data.device === "tv"}
           device={data.device}
         >
           <AnalyticsProvider>
