@@ -1,7 +1,7 @@
 <script lang="ts">
   import { TestId } from "$e2e/models/TestId";
   import Button from "$lib/components/buttons/Button.svelte";
-  import Link from "$lib/components/link/Link.svelte";
+  import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { CookieConsentEndpoint } from "$lib/features/cookie-consent/CookieConsentEndpoint";
   import { useCookieConsent } from "$lib/features/cookie-consent/useCookieConsent";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -29,10 +29,11 @@
   >
     <div class="trakt-cookie-notice-text">
       <p class="meta-info">
-        {m.cookie_notice()}
-        <Link href={UrlBuilder.og.privacy()} target="_blank"
-          >{m.cookie_more_info()}</Link
-        >
+        <MessageWithLink
+          message={m.cookie_notice()}
+          href={UrlBuilder.og.privacy()}
+          target="_blank"
+        />
       </p>
     </div>
     <div class="trakt-cookie-notice-actions">
