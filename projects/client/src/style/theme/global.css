@@ -93,15 +93,6 @@
   --list-shadow-width: var(--ni-32);
 
   /**
-   * Cookie
-   */
-  --color-cookie-background: color-mix(
-    in srgb,
-    var(--color-background) 70%,
-    transparent 30%
-  );
-
-  /**
    * Poster overlay
    */
   --color-overlay-foreground: var(--shade-10);

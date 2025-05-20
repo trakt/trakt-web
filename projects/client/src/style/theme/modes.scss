@@ -112,7 +112,7 @@
   /**
    * Cookie
    */
-  --color-cookie-border: var(--shade-100);
+  --color-cookie-background: var(--shade-10)
 }
 
 // Define theme variables for dark mode
@@ -210,7 +210,7 @@
   /**
    * Cookie
    */
-  --color-cookie-border: var(--shade-700);
+  --color-cookie-background: var(--shade-900)
 }
 
 // Apply themes to selectors
