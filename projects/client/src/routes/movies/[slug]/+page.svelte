@@ -5,18 +5,9 @@
   import MovieSummary from "$lib/sections/summary/MovieSummary.svelte";
   import { useMovie } from "./useMovie";
 
-  const {
-    movie,
-    ratings,
-    stats,
-    intl,
-    watchers,
-    studios,
-    crew,
-    streamOn,
-    isLoading,
-    videos,
-  } = $derived(useMovie(page.params.slug));
+  const { movie, intl, studios, crew, streamOn, isLoading, videos } = $derived(
+    useMovie(page.params.slug),
+  );
 </script>
 
 <TraktPage
@@ -30,9 +21,6 @@
   {#if !$isLoading}
     <MovieSummary
       media={$movie!}
-      ratings={$ratings!}
-      watchers={$watchers!}
-      stats={$stats!}
       studios={$studios!}
       crew={$crew!}
       intl={$intl!}

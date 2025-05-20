@@ -3,7 +3,6 @@
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
@@ -21,7 +20,6 @@
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
 
   type ShowSummaryProps = MediaSummaryProps<ShowEntry> & {
-    stats: MediaStats;
     studios: MediaStudio[];
     crew: MediaCrew;
     seasons: Season[];
@@ -31,9 +29,6 @@
 
   const {
     media,
-    ratings,
-    stats,
-    watchers,
     studios,
     intl,
     crew,
@@ -48,17 +43,7 @@
   const episode = $derived($progress);
 </script>
 
-<MediaSummary
-  {media}
-  {ratings}
-  {stats}
-  {watchers}
-  {studios}
-  {intl}
-  {crew}
-  {streamOn}
-  type="show"
->
+<MediaSummary {media} {studios} {intl} {crew} {streamOn} type="show">
   {#snippet contextualContent()}
     <RenderFor device={["desktop"]} audience="authenticated">
       {#if episode != null}

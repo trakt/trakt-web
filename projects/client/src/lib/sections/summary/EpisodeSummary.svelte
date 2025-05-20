@@ -35,10 +35,7 @@
     show,
     showIntl,
     seasons,
-    ratings,
     episodeIntl,
-    stats,
-    watchers,
     streamOn,
     crew,
   }: EpisodeSummaryProps = $props();
@@ -136,15 +133,11 @@
   </SummaryHeader>
 
   <MediaMetaInfo
-    certification={show.certification}
-    year={episode.year}
-    airDate={episode.airDate}
-    media={episode}
     watchCount={$watchCount}
-    {ratings}
-    {stats}
-    {watchers}
     {streamOn}
+    {type}
+    {episode}
+    media={show}
   />
 
   <Spoiler media={episode} {episode} {show} {type}>

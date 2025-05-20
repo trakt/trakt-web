@@ -7,43 +7,27 @@
   import WatchCountTag from "$lib/components/media/tags/WatchCountTag.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
-  import type { EpisodeStats } from "$lib/requests/models/EpisodeStats";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { MediaRating } from "$lib/requests/models/MediaRating";
-  import type { MediaStats } from "$lib/requests/models/MediaStats";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
-  import type { UserProfile } from "$lib/requests/models/UserProfile";
+  import { useMediaMetaInfo, type MetaInfoProps } from "./useMediaMetaInfo";
 
   type MediaMetaInfoProps = {
-    certification?: string | Nil;
-    airDate: Date;
-    year: number | Nil;
-    ratings: MediaRating;
-    stats: MediaStats | EpisodeStats;
-    watchers: UserProfile[];
-    media: MediaEntry | EpisodeEntry;
-    streamOn?: StreamOn;
     watchCount: number;
-  };
+    streamOn?: StreamOn;
+  } & MetaInfoProps;
 
-  const {
-    certification,
-    year,
-    ratings,
-    stats,
-    airDate,
-    media,
-    streamOn,
-    watchCount,
-  }: MediaMetaInfoProps = $props();
+  const { streamOn, watchCount, ...target }: MediaMetaInfoProps = $props();
 
-  const isAiredItem = $derived(airDate < new Date());
+  const media = $derived(
+    target.type === "episode" ? target.episode : target.media,
+  );
+  const isAiredItem = $derived(media.airDate < new Date());
+
+  const { ratings, plays } = $derived(useMediaMetaInfo(target));
 </script>
 
 <div class="trakt-summary-meta">
   <div class="trakt-summary-meta-container">
-    <RatingList {ratings} {airDate} />
+    <RatingList ratings={$ratings} airDate={media.airDate} />
     <div class="trakt-meta-tags">
       <WatchCountTag
         i18n={TagIntlProvider}
@@ -51,19 +35,23 @@
         type={media.type}
       />
 
-      {#if certification}
+      {#if media.certification}
         <InfoTag>
-          {certification}
+          {media.certification}
         </InfoTag>
       {/if}
 
-      {#if year}
-        <AirDate i18n={TagIntlProvider} {year} {airDate} />
+      {#if media.year}
+        <AirDate
+          i18n={TagIntlProvider}
+          year={media.year}
+          airDate={media.airDate}
+        />
       {/if}
 
       <!-- FIXME: re-enable watchers once we have better watching stats -->
       {#if isAiredItem}
-        <PlaysTag i18n={TagIntlProvider} plays={stats.plays} />
+        <PlaysTag i18n={TagIntlProvider} plays={$plays} />
       {/if}
     </div>
   </div>
