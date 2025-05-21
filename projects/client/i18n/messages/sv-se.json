@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Är du säker på att du vill ta bort den här visningen av {title} från din Sedda-lista?",
   "seasons_label": "Säsonger",
   "season_number_label": "Säsong {number}",
+  "season_specials": "Specialavsnitt",
   "expand_media_overview": "Utvidga {title} översikt",
   "season_episode_number_label": "Säsong {season} • Avsnitt {number}",
   "share_title": "Dela {title}",

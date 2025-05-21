@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Weet je zeker dat je deze afspeelbeurt van {title} uit je Bekeken lijst wilt verwijderen?",
   "seasons_label": "Seizoenen",
   "season_number_label": "Seizoen {number}",
+  "season_specials": "Speciales",
   "expand_media_overview": "Bekijk {title} overzicht",
   "season_episode_number_label": "Seizoen {season} • Aflevering {number}",
   "share_title": "Deel {title}",

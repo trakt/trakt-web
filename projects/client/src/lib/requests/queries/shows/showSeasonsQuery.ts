@@ -41,7 +41,7 @@ export const showSeasonsQuery = defineQuery({
   mapper: (response) =>
     response.body
       .map(mapToSeason)
-      .filter((season) => season.episodes.count > 0 && season.number !== 0),
+      .filter((season) => season.episodes.count > 0),
   schema: z.array(SeasonSchema),
   ttl: time.days(1),
 });

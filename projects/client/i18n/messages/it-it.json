@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Sei sicuro di voler rimuovere questa visione di {title} dalla tua lista Visti?",
   "seasons_label": "Stagioni",
   "season_number_label": "Stagione {number}",
+  "season_specials": "Speciali",
   "expand_media_overview": "Espandi la panoramica di {title}",
   "season_episode_number_label": "Stagione {season} • Episodio {number}",
   "share_title": "Condividi {title}",

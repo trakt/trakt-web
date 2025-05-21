@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Ви впевнені, що хочете видалити це відтворення {title} зі списку Переглянуто?",
   "seasons_label": "Сезони",
   "season_number_label": "Сезон {number}",
+  "season_specials": "Спецвипуски",
   "expand_media_overview": "Розгорнути огляд {title}",
   "season_episode_number_label": "Сезон {season} • Епізод {number}",
   "share_title": "Поділитись {title}",

@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Voulez-vous vraiment supprimer cette lecture de {title} de votre liste Vu ?",
   "seasons_label": "Saisons",
   "season_number_label": "Saison {number}",
+  "season_specials": "Épisodes spéciaux",
   "expand_media_overview": "Découvrir plus sur {title}",
   "season_episode_number_label": "Saison {season} • Épisode {number}",
   "share_title": "Partager {title}",

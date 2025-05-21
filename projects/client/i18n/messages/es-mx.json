@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "¿Estás seguro de que quieres eliminar esta reproducción de {title} de tu lista de Vistos?",
   "seasons_label": "Temporadas",
   "season_number_label": "Temporada {number}",
+  "season_specials": "Especiales",
   "expand_media_overview": "Expandir descripción de {title}",
   "season_episode_number_label": "Temporada {season} • Episodio {number}",
   "share_title": "Comparte {title}",

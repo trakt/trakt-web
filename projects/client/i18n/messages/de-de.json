@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Möchtest du diese Wiedergabe von {title} wirklich von deiner Gesehen-Liste entfernen?",
   "seasons_label": "Staffeln",
   "season_number_label": "Staffel {number}",
+  "season_specials": "Specials",
   "expand_media_overview": "Übersicht über {title} erweitern",
   "season_episode_number_label": "Staffel {season} • Folge {number}",
   "share_title": "Teile {title}",

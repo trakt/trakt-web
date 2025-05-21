@@ -54,7 +54,6 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
   const aired = entry.show.aired_episodes;
 
   const episodes = seasons
-    .filter((season) => season.number !== 0)
     .flatMap((season) =>
       season.episodes.map((episode) => ({
         season: season.number,
@@ -67,7 +66,9 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
   return {
     id: show.ids.trakt,
     watchedAt: new Date(last_watched_at),
-    isWatched: episodes.length === aired,
+    isWatched: episodes
+      .filter(({ season }) => season !== 0)
+      .length === aired,
     plays,
     episodes,
   };
@@ -79,6 +80,7 @@ const currentUserWatchedShowsRequest = ({ fetch }: ApiParams) =>
     .watched
     .shows({
       params: { id: 'me' },
+      query: { specials: true },
     });
 
 const UserHistorySchema = z.object({

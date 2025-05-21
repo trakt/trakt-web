@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Сигурни ли сте, че искате да премахнете това гледне на {title} от наблюдавани?",
   "seasons_label": "Сезони",
   "season_number_label": "Сезон {number}",
+  "season_specials": "Специални",
   "expand_media_overview": "Разшири прегледа на {title}",
   "season_episode_number_label": "Сезон {season} • Епизод {number}",
   "share_title": "Сподели {title}",

@@ -5,7 +5,7 @@
     "npm:@cucumber/cucumber@^11.2.0": "11.2.0_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.0.2_@cucumber+messages@27.0.2",
     "npm:@google/generative-ai@0.24": "0.24.0",
     "npm:@inlang/paraglide-js@^2.0.12": "2.0.12",
-    "npm:@jsr/trakt__api@~0.1.31": "0.1.31_zod@3.24.1",
+    "npm:@jsr/trakt__api@~0.1.36": "0.1.36_zod@3.24.1",
     "npm:@playwright/test@^1.51.1": "1.51.1",
     "npm:@svelte-plugins/tooltips@^3.0.3": "3.0.3_svelte@5.25.3__acorn@8.14.1",
     "npm:@svelte-put/qr@^2.1.0": "2.1.0_svelte@5.25.3__acorn@8.14.1",
@@ -67,6 +67,14 @@
       "dependencies": [
         "@jridgewell/gen-mapping",
         "@jridgewell/trace-mapping@0.3.25"
+      ]
+    },
+    "@anatine/zod-openapi@2.2.8_openapi3-ts@4.4.0_zod@3.24.1": {
+      "integrity": "sha512-iyM8mB556KdiZ6a1GTZ67ACLnJakU1hrzzXoh7PLaReldAdMq88MlZn/Ir/U56/TBuQctBhh/4seo0b0B343uw==",
+      "dependencies": [
+        "openapi3-ts",
+        "ts-deepmerge",
+        "zod@3.24.1"
       ]
     },
     "@apideck/better-ajv-errors@0.3.6_ajv@8.17.1": {
@@ -2181,13 +2189,14 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@jsr/trakt__api@0.1.31_zod@3.24.1": {
-      "integrity": "sha512-GtqYe8pu3yQ2CLUR/vylMFT0qOLHnLc1sdSg9duy0Q77lRyX8gnk1UbWRNyLl3vj/iwqQ3MLe1nROQy/aX7e+Q==",
+    "@jsr/trakt__api@0.1.36_zod@3.24.1": {
+      "integrity": "sha512-ImxkW5DFMIhWZi6c234z7NWPghpwQVglkOUkTO2XO34hfmGh3wQOvEqH62H+MYR1G2KXfb0pDpgZF6lyoPS5Ag==",
       "dependencies": [
+        "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod@3.24.1"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.1.31.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.1.36.tgz"
     },
     "@lix-js/sdk@0.4.7_kysely@0.27.6": {
       "integrity": "sha512-pRbW+joG12L0ULfMiWYosIW0plmW4AsUdiPCp+Z8rAsElJ+wJ6in58zhD3UwUcd4BNcpldEGjg6PdA7e0RgsDQ==",
@@ -4949,6 +4958,12 @@
         "wrappy"
       ]
     },
+    "openapi3-ts@4.4.0": {
+      "integrity": "sha512-9asTNB9IkKEzWMcHmVZE7Ts3kC9G7AFHfs8i7caD8HbI76gEjdkId4z/AkP83xdZsH7PLAnnbl47qZkXuxpArw==",
+      "dependencies": [
+        "yaml@2.7.0"
+      ]
+    },
     "optionator@0.9.4": {
       "integrity": "sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==",
       "dependencies": [
@@ -6164,6 +6179,9 @@
         "typescript"
       ]
     },
+    "ts-deepmerge@6.2.1": {
+      "integrity": "sha512-8CYSLazCyj0DJDpPIxOFzJG46r93uh6EynYjuey+bxcLltBeqZL7DMfaE5ZPzZNFlav7wx+2TDa/mBl8gkTYzw=="
+    },
     "tslib@2.8.1": {
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
     },
@@ -6873,7 +6891,7 @@
             "npm:@cucumber/cucumber@^11.2.0",
             "npm:@google/generative-ai@0.24",
             "npm:@inlang/paraglide-js@^2.0.12",
-            "npm:@jsr/trakt__api@~0.1.31",
+            "npm:@jsr/trakt__api@~0.1.36",
             "npm:@playwright/test@^1.51.1",
             "npm:@svelte-plugins/tooltips@^3.0.3",
             "npm:@svelte-put/qr@^2.1.0",

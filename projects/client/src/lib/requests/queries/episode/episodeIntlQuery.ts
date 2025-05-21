@@ -4,6 +4,7 @@ import type {
 } from '$lib/features/i18n/index.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { EpisodeTranslationResponse } from '@trakt/api';
 import {
@@ -41,7 +42,7 @@ const episodeIntlRequest = (
     .translations({
       params: {
         id: slug,
-        season,
+        season: castNumberAsString(season),
         episode,
         language,
       },

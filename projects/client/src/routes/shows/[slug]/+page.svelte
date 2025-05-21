@@ -51,7 +51,7 @@
   };
 
   $effect.pre(() => {
-    if (currentSeason) return;
+    if (!isNaN(currentSeason)) return;
 
     if ($seasons == null || $show == null) return;
 
@@ -61,7 +61,7 @@
 
     const active = assertDefined(
       $seasons.find((s) => s.number === $lastWatchedSeason.number) ??
-        $seasons.at(0),
+        $seasons.find((s) => s.number === 1),
       "Active season not found",
     );
 

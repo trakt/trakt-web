@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Er du sikker på at du vil fjerne denne visningen av {title} fra din Sett-liste?",
   "seasons_label": "Sesonger",
   "season_number_label": "Sesong {number}",
+  "season_specials": "Spesialer",
   "expand_media_overview": "Utvid {title} oversikt",
   "season_episode_number_label": "Sesong {season} • Episode {number}",
   "share_title": "Del {title}",

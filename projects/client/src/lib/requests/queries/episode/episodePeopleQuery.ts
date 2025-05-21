@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMediaCrew } from '$lib/requests/_internal/mapToMediaCrew.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaCrewSchema } from '$lib/requests/models/MediaCrew.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
 type EpisodePeopleParams =
@@ -17,7 +18,7 @@ const episodePeopleRequest = (
     .people({
       params: {
         id: slug,
-        season,
+        season: castNumberAsString(season),
         episode,
       },
       query: {
