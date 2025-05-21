@@ -1,9 +1,9 @@
-import type { FavoritedShowsResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapShowResponseToShowSummary } from '$lib/requests/_internal/mapShowResponseToShowSummary.ts';
+import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { FavoriteShowResponse } from '@trakt/api';
 import {
   type FavoritedEntry,
   FavoritedEntrySchema,
@@ -23,22 +23,15 @@ const favoritedShowsRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Error fetching user favorited shows.');
-      }
-
-      return response.body;
     });
 
-function mapFavoritedShowResponse(
-  entry: FavoritedShowsResponse,
+function mapToFavoriteShow(
+  entry: FavoriteShowResponse,
 ): FavoritedEntry {
   return {
     id: entry.show.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
-    item: mapShowResponseToShowSummary(entry.show),
+    item: mapToShowEntry(entry.show),
   };
 }
 
@@ -47,7 +40,7 @@ export const showFavoritesQuery = defineQuery({
   invalidations: [InvalidateAction.Favorited('show')],
   dependencies: () => [],
   request: favoritedShowsRequest,
-  mapper: (data) => data.map(mapFavoritedShowResponse),
+  mapper: (response) => response.body.map(mapToFavoriteShow),
   schema: FavoritedEntrySchema.array(),
   ttl: time.hours(1),
 });

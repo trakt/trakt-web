@@ -60,9 +60,9 @@
   --color-foreground-default: var(--shade-50);
   --color-background-default-hover: var(--shade-500);
 
-  --color-background-orange: var(--orange-300);
-  --color-foreground-orange: var(--orange-50);
-  --color-background-orange-hover: var(--orange-700);
+  --color-background-orange: var(--orange-600);
+  --color-foreground-orange: var(--orange-100);
+  --color-background-orange-hover: var(--orange-800);
 
   /**
    * Toggle switches

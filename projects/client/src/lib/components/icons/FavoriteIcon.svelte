@@ -1,16 +1,16 @@
 <script lang="ts">
   type FavoriteIconProps = {
-    style?: "filled" | "open";
+    state?: "filled" | "open";
   };
 
-  const { style = "open" }: FavoriteIconProps = $props();
+  const { state = "open" }: FavoriteIconProps = $props();
 </script>
 
 <svg
   width="24"
   height="23"
   viewBox="0 0 24 23"
-  fill={style === "filled" ? "currentColor" : "none"}
+  fill={state === "filled" ? "currentColor" : "none"}
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
@@ -20,3 +20,9 @@
     stroke-linejoin="bevel"
   />
 </svg>
+
+<style>
+  svg {
+    color: var(--color-background-orange);
+  }
+</style>

@@ -3,7 +3,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import FavoriteAction from "../media-actions/favorite/FavoriteAction.svelte";
-  import MediaCard from "./components/MediaCard.svelte";
+  import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useFavoritesList } from "./stores/useFavoritesList";
 
   const {
@@ -19,19 +19,19 @@
   id={`favorites-list-${type}`}
   items={$list}
   {title}
-  --height-list={mediaListHeightResolver(type)}
+  --height-list={mediaListHeightResolver("portrait")}
 >
   {#snippet item(media)}
-    <MediaCard {type} media={media.item}>
-      {#snippet action()}
+    <DefaultMediaItem {type} media={media.item}>
+      {#snippet popupActions()}
         <FavoriteAction
-          style="action"
+          style="dropdown-item"
           title={media.item.title}
           {type}
           id={media.item.id}
         />
       {/snippet}
-    </MediaCard>
+    </DefaultMediaItem>
   {/snippet}
 
   {#snippet empty()}

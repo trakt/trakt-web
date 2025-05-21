@@ -175,11 +175,8 @@
     }
 
     &.has-external-icon {
-      @include for-mobile {
-        :global(.trakt-button .button-label),
-        :global(.trakt-button .trakt-dropdown-caret) {
-          display: none;
-        }
+      :global(.trakt-button .trakt-dropdown-caret) {
+        display: none;
       }
     }
 

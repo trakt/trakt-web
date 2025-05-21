@@ -1,10 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
-<<<<<<< HEAD
   import RenderFor from "$lib/guards/RenderFor.svelte";
-=======
   import FavoritesList from "../lists/FavoritesList.svelte";
->>>>>>> parent of 9259f4bb (chore: remove favorites)
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
@@ -38,18 +35,6 @@
   <ProfileHistorySummary movies={$historyMovies} shows={$historyShows} />
 </ProfileContainer>
 
-<RecentlyWatchedList
-  drilldownLabel={m.view_all_recently_watched()}
-  title={m.recently_watched()}
-  {slug}
-/>
-
-<<<<<<< HEAD
-{#if slug !== "me"}
-  <PersonalLists {slug} type="personal" variant="preview" />
-  <PersonalLists {slug} type="collaboration" variant="summary" />
-{/if}
-=======
 <FavoritesList
   type="movie"
   title={m.favorite_movies()}
@@ -60,4 +45,14 @@
   title={m.favorite_shows()}
   emptyMessage={m.favorite_shows_empty()}
 />
->>>>>>> parent of 9259f4bb (chore: remove favorites)
+
+<RecentlyWatchedList
+  drilldownLabel={m.view_all_recently_watched()}
+  title={m.recently_watched()}
+  {slug}
+/>
+
+{#if slug !== "me"}
+  <PersonalLists {slug} type="personal" variant="preview" />
+  <PersonalLists {slug} type="collaboration" variant="summary" />
+{/if}

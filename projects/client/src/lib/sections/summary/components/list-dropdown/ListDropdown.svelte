@@ -8,7 +8,7 @@
   import type { ListDropdownProps } from "./ListDropdownProps";
   import { useAllPersonalLists } from "./useAllPersonalLists";
 
-  const { style, title, ...target }: ListDropdownProps = $props();
+  const { size, title, ...target }: ListDropdownProps = $props();
 
   // FIXME: replace this when we store states in session storage
   const isUpdating = writable(false);
@@ -25,7 +25,7 @@
 </script>
 
 <ListDropdownButton
-  {style}
+  {size}
   title={m.add_remove_from_lists({ title })}
   isListed={$isListed}
   disabled={isDisabled}

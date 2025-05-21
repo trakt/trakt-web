@@ -7,12 +7,11 @@
   const {
     title,
     items: externalItems,
-    style = "normal",
+    size,
     isListed,
     ...props
   }: ListDropdownButtonProps = $props();
 
-  const size = $derived(style === "action" ? "small" : "normal");
   const state = $derived(isListed ? "added" : "missing");
   const variant = $derived(isListed ? "primary" : "secondary");
   const text = $derived(isListed ? m.listed() : m.add_to_list());
@@ -31,9 +30,7 @@
     {text}
 
     {#snippet icon()}
-      {#if style === "action"}
-        <WatchlistIcon size="small" {state} />
-      {/if}
+      <WatchlistIcon size="small" {state} />
     {/snippet}
 
     {#snippet items()}

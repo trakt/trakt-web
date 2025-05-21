@@ -5,6 +5,7 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { fade } from "svelte/transition";
   import RateActionButton from "./_internal/RateActionButton.svelte";
@@ -31,7 +32,7 @@
   const type = $derived(props.type);
   const id = $derived(props.media.id);
 
-  const { isRating, isFavorited, currentRating, addRating } = $derived(
+  const { isRating, currentRating, addRating } = $derived(
     useRatings({
       type,
       id,
@@ -52,10 +53,18 @@
             if ($currentRating === rating) {
               return;
             }
-            addRating(rating, $isFavorited);
+            addRating(rating);
           }}
         />
       {/each}
+      {#if props.type !== "episode" && $currentRating !== undefined}
+        <FavoriteAction
+          style="action"
+          title={props.media.title}
+          type={props.type}
+          id={props.media.id}
+        />
+      {/if}
     </div>
   {/if}
 </div>

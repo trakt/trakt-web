@@ -1,6 +1,6 @@
-import type { FavoritedMoviesResponse } from '@trakt/api';
+import type { FavoriteMovieResponse } from '@trakt/api';
 
-export const FavoritedMoviesResponseMock: FavoritedMoviesResponse[] = [
+export const FavoritedMoviesResponseMock: FavoriteMovieResponse[] = [
   {
     'rank': 1,
     'id': 1157183360,
