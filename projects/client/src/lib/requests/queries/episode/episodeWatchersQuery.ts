@@ -2,8 +2,8 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToUserProfile } from '$lib/requests/_internal/mapToUserProfile.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
-
 type EpisodeWatchersParams =
   & { slug: string; season: number; episode: number }
   & ApiParams;
@@ -17,7 +17,7 @@ export function episodeWatchersRequest(
     .watching({
       params: {
         id: slug,
-        season,
+        season: castNumberAsString(season),
         episode,
       },
     });

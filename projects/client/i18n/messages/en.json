@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Are you sure you want to remove this play of {title} from your Watched list?",
   "seasons_label": "Seasons",
   "season_number_label": "Season {number}",
+  "season_specials": "Specials",
   "expand_media_overview": "Expand {title} overview",
   "season_episode_number_label": "Season {season} • Episode {number}",
   "share_title": "Share {title}",

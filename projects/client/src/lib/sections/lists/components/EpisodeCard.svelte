@@ -14,6 +14,7 @@
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
+  import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import { episodeActivityTitle } from "$lib/utils/string/episodeActivityTitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
@@ -114,9 +115,7 @@
       {#if episode.type === EpisodeComputedType.full_season}
         <Link href={UrlBuilder.show(show.slug)}>
           <p class="trakt-card-title uppercase ellipsis">
-            {m.season_number_label({
-              number: episode.season.toString().padStart(2, "0"),
-            })}
+            {seasonLabel(episode.season)}
           </p>
         </Link>
       {:else}

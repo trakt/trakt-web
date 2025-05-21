@@ -1,5 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToStreamingServices } from '../../_internal/mapToStreamingServices.ts';
 import { StreamingServiceOptionsSchema } from '../../models/StreamingServiceOptions.ts';
@@ -20,7 +21,7 @@ const streamEpisodeRequest = (
     .watchnow({
       params: {
         id: slug,
-        season,
+        season: castNumberAsString(season),
         episode,
         country,
       },

@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "{title}の視聴記録を視聴済みリストから削除してもよろしいですか？",
   "seasons_label": "シーズン",
   "season_number_label": "第{number}シーズン",
+  "season_specials": "スペシャル",
   "expand_media_overview": "{title} の概要を表示",
   "season_episode_number_label": "シーズン{season}・エピソード{number}",
   "share_title": "{title}を共有する",

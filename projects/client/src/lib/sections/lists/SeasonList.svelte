@@ -3,6 +3,7 @@
 
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { Season } from "$lib/requests/models/Season";
+  import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import SeasonEpisodeList from "./SeasonEpisodeList.svelte";
   import SeasonPosterList from "./SeasonPosterList.svelte";
   import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";
@@ -20,7 +21,7 @@
   );
 
   const title = m.seasons_label();
-  const subtitle = $derived(m.season_number_label({ number: currentSeason }));
+  const subtitle = $derived(seasonLabel(currentSeason));
 
   const episodeProps = $derived(
     seasons.length === 1 ? { title, subtitle } : {},

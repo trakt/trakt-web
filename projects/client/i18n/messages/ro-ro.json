@@ -224,6 +224,7 @@
   "remove_single_watched_warning": "Sigur vrei să ștergi această vizionare a {title} din lista ta de vizionate?",
   "seasons_label": "Sezoane",
   "season_number_label": "Sezonul {number}",
+  "season_specials": "Episoade speciale",
   "expand_media_overview": "Detaliază prezentarea {title}",
   "season_episode_number_label": "Sezon {season} • Episod {number}",
   "share_title": "Distribuie {title}",

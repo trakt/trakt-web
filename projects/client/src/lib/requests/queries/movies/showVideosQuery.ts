@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaVideoSchema } from '$lib/requests/models/MediaVideo.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { VideoResponse } from '@trakt/api';
 import { mapToMediaVideo } from '../../_internal/mapToMediaVideo.ts';
@@ -28,7 +29,7 @@ const showVideoRequest = (
       .videos({
         params: {
           id: slug,
-          season,
+          season: castNumberAsString(season),
         },
       })
   );

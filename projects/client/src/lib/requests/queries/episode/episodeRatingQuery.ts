@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaRatingSchema } from '$lib/requests/models/MediaRating.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaRating } from '../../_internal/mapToMediaRating.ts';
 
@@ -19,7 +20,7 @@ const episodeRatingRequest = (
     .ratings({
       params: {
         id: slug,
-        season,
+        season: castNumberAsString(season),
         episode,
       },
       query: {

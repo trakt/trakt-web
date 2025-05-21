@@ -1340,22 +1340,6 @@ export const MovieHereticPeopleResponseMock: PeopleResponse = {
     ],
     'camera': [
       {
-        'job': '"A" Camera Operator, Steadicam Operator',
-        'jobs': [
-          '"A" Camera Operator',
-          'Steadicam Operator',
-        ],
-        'person': {
-          'name': 'Sasha Proctor',
-          'ids': {
-            'trakt': 570283,
-            'slug': 'sasha-proctor',
-            'imdb': null,
-            'tmdb': 1580835,
-          },
-        },
-      },
-      {
         'job': 'Director of Photography',
         'jobs': [
           'Director of Photography',

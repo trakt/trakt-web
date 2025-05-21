@@ -15,7 +15,7 @@ export function useUserSeason(showId: number | Nil) {
   return derived(history, ($history) => {
     if (!$history) return EMPTY_SEASON_INFO;
 
-    const episodes = $history?.shows.get(showId)?.episodes ?? [{ season: 0 }];
+    const episodes = $history?.shows.get(showId)?.episodes ?? [{ season: -1 }];
     const season = Math.max(...episodes.map((episode) => episode.season));
 
     return {

@@ -1,6 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeStatsSchema } from '$lib/requests/models/EpisodeStats.ts';
+import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToEpisodeStats } from '../../_internal/mapToEpisodeStats.ts';
 
@@ -19,7 +20,7 @@ const episodeStatsRequest = (
     .stats({
       params: {
         id: slug,
-        season,
+        season: castNumberAsString(season),
         episode,
       },
     });
