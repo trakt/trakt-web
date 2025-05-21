@@ -1,6 +1,6 @@
-import type { FavoritedShowsResponse } from '@trakt/api';
+import type { FavoriteShowResponse } from '@trakt/api';
 
-export const FavoritedShowsResponseMock: FavoritedShowsResponse[] = [
+export const FavoritedShowsResponseMock: FavoriteShowResponse[] = [
   {
     'rank': 4,
     'id': 1157183370,

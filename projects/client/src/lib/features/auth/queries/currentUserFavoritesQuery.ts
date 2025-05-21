@@ -1,11 +1,7 @@
-import type {
-  FavoritedMoviesResponse,
-  FavoritedShowsResponse,
-} from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
-import { error } from '$lib/utils/console/print.ts';
+import type { FavoriteMovieResponse, FavoriteShowResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
 
@@ -16,8 +12,8 @@ const UserFavoritedMediaSchema = z.object({
 
 export type UserFavoritedEntry = z.infer<typeof UserFavoritedMediaSchema>;
 
-function mapFavoritedMovieResponse(
-  entry: FavoritedMoviesResponse,
+function mapMovie(
+  entry: FavoriteMovieResponse,
 ): UserFavoritedEntry {
   return {
     id: entry.movie.ids.trakt,
@@ -36,21 +32,10 @@ const favoritedMoviesRequest = (
         id: 'me',
         sort: 'rank',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user favorited movies', response);
-        /**
-         * TODO: define error handling strategy/system
-         */
-        throw new Error('Error fetching user favorited movies.');
-      }
-
-      return response.body;
     });
 
-function mapFavoritedShowResponse(
-  entry: FavoritedShowsResponse,
+function mapShow(
+  entry: FavoriteShowResponse,
 ): UserFavoritedEntry {
   return {
     id: entry.show.ids.trakt,
@@ -69,17 +54,6 @@ const favoritedShowsRequest = (
         id: 'me',
         sort: 'rank',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        error('Error fetching user favorited shows', response);
-        /**
-         * TODO: define error handling strategy/system
-         */
-        throw new Error('Error fetching user favorited shows.');
-      }
-
-      return response.body;
     });
 
 const UserFavoritesSchema = z.object({
@@ -99,10 +73,18 @@ export const currentUserFavoritesQuery = defineQuery({
     InvalidateAction.Favorited('show'),
   ],
   dependencies: [],
-  mapper: ([movies, shows]) => {
+  mapper: ([movieResponse, showResponse]) => {
     return {
-      movies: toMap(movies, mapFavoritedMovieResponse, (entry) => entry.id),
-      shows: toMap(shows, mapFavoritedShowResponse, (entry) => entry.id),
+      movies: toMap(
+        movieResponse.body,
+        mapMovie,
+        (entry) => entry.id,
+      ),
+      shows: toMap(
+        showResponse.body,
+        mapShow,
+        (entry) => entry.id,
+      ),
     };
   },
   schema: UserFavoritesSchema,

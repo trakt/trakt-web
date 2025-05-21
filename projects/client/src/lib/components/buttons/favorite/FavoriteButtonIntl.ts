@@ -6,5 +6,4 @@ export type FavoriteButtonMeta = {
 export type FavoriteButtonIntl = {
   label: (meta: FavoriteButtonMeta) => string;
   text: (meta: FavoriteButtonMeta) => string;
-  warning: (meta: FavoriteButtonMeta) => string;
 };

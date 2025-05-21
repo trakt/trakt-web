@@ -5,8 +5,6 @@ import { SimpleRating } from '$lib/models/SimpleRating.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
-import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest.ts';
-import { removeFromFavoritesRequest } from '$lib/requests/sync/removeFromFavoritesRequest.ts';
 import { mapRatingToSimpleRating } from '$lib/sections/summary/components/rating/mapRatingToSimpleRating.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { RatingsSyncRequest } from '@trakt/api';
@@ -46,35 +44,11 @@ function toRatingPayload(
   }
 }
 
-function favoriteQueryFactory(
-  simpleRating: SimpleRating,
-  isFavorited: boolean,
-) {
-  if (!isFavorited && simpleRating === SimpleRating.Great) {
-    return addToFavoritesRequest;
-  }
-
-  if (isFavorited && simpleRating !== SimpleRating.Great) {
-    return removeFromFavoritesRequest;
-  }
-}
-
 export function useRatings({ type, id }: WatchlistStoreProps) {
   const isRating = writable(false);
-  const { ratings, favorites } = useUser();
+  const { ratings } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Rate);
-
-  const isFavorited = derived(
-    favorites,
-    ($favorites) => {
-      if (!$favorites || type === 'episode') {
-        return false;
-      }
-
-      return $favorites.movies.has(id);
-    },
-  );
 
   const rating = derived(
     ratings,
@@ -105,7 +79,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     },
   );
 
-  const addRating = async (simpleRating: SimpleRating, isFavorited = false) => {
+  const addRating = async (simpleRating: SimpleRating) => {
     isRating.set(true);
     track({
       action: get(currentRating) ? 'changed' : 'added',
@@ -117,23 +91,11 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     });
     await invalidate(InvalidateAction.Rated(type));
 
-    const favoritesQuery = favoriteQueryFactory(simpleRating, isFavorited);
-    if (type === 'movie' && favoritesQuery) {
-      await favoritesQuery({
-        body: {
-          movies: [{ ids: { trakt: id } }],
-        },
-      });
-
-      await invalidate(InvalidateAction.Favorited(type));
-    }
-
     isRating.set(false);
   };
 
   return {
     isRating,
-    isFavorited,
     currentRating,
     addRating,
   };

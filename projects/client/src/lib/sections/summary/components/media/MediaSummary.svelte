@@ -12,11 +12,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
-<<<<<<< HEAD
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
-=======
-  import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
->>>>>>> parent of 9259f4bb (chore: remove favorites)
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { MarkAsWatchedActionProps } from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedActionProps";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
@@ -61,7 +57,7 @@
   const { watchCount } = useWatchCount({ media, type });
 
   const commonProps = $derived({
-    style: $isMobile ? ("action" as const) : ("normal" as const),
+    size: $isMobile ? ("small" as const) : ("normal" as const),
     title,
     type,
     media,
@@ -74,7 +70,6 @@
   const markAsWatchedProps = $derived<MarkAsWatchedActionProps>({
     ...commonProps,
     style: "normal",
-    size: $isMobile ? "small" : "normal",
     allowRewatch: $watchCount > 0,
   });
 </script>
@@ -128,7 +123,6 @@
     </SummaryPoster>
   {/snippet}
 
-<<<<<<< HEAD
   <SummaryHeader>
     {#snippet headerActions()}
       <RenderFor audience="authenticated" navigation="default">
@@ -155,13 +149,6 @@
       />
     {/snippet}
 
-=======
-  {#snippet topActions()}
-    <FavoriteAction style="normal" title={media.title} {type} id={media.id} />
-  {/snippet}
-
-  <SummaryHeader {title}>
->>>>>>> parent of 9259f4bb (chore: remove favorites)
     <SummaryTitle {title} />
     <GenreList genres={media.genres} />
   </SummaryHeader>

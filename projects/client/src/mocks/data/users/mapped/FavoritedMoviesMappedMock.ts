@@ -24,6 +24,13 @@ export const FavoritedMoviesMappedMock: FavoritedEntry[] = [
           'thumb': '/placeholders/portrait_placeholder.png' as HttpsUrl,
         },
       },
+      'logo': {
+        'url': {
+          'medium': '/placeholders/purple_placeholder.png' as HttpsUrl,
+          'thumb': '/placeholders/landscape_placeholder.png' as HttpsUrl,
+        },
+      },
+      'originalTitle': undefined,
       'runtime': NaN,
       'slug': 'heretic-2024',
       'status': 'unknown',
@@ -35,6 +42,8 @@ export const FavoritedMoviesMappedMock: FavoritedEntry[] = [
       'trailer': 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
       'type': 'movie',
       'year': 2024,
+      'votes': 0,
+      'colors': ['transparent', 'transparent'],
     },
   },
 ];

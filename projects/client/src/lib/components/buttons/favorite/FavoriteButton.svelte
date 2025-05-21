@@ -1,9 +1,8 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import FavoriteIcon from "$lib/components/icons/FavoriteIcon.svelte";
   import ActionButton from "../ActionButton.svelte";
-  import { attachRemoveWarning } from "../_internal/attachRemoveWarning";
-  import { useDangerButton } from "../_internal/useDangerButton";
   import { FavoriteButtonIntlProvider } from "./FavoriteButtonIntlProvider";
   import type { FavoriteButtonProps } from "./FavoriteButtonProps";
 
@@ -12,43 +11,43 @@
     title,
     isFavoriteUpdating,
     isFavorited,
-    type,
+    style,
     onAdd,
     onRemove,
     ...props
   }: FavoriteButtonProps = $props();
 
-  const handler = $derived(
-    isFavorited
-      ? attachRemoveWarning(onRemove, i18n.warning({ isFavorited, title }))
-      : onAdd,
-  );
-  const { color, variant, ...events } = $derived(
-    useDangerButton({ isActive: isFavorited, color: "orange" }),
-  );
-  const style = $derived(isFavorited ? "filled" : "open");
+  const handler = $derived(isFavorited ? onRemove : onAdd);
+  const state = $derived(isFavorited ? "filled" : "open");
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ isFavorited, title }),
-    color: $color,
-    variant: $variant,
+    variant: "primary",
     onclick: handler,
     disabled: isFavoriteUpdating,
-    ...events,
   });
 </script>
 
-{#if type === "normal"}
-  <Button {...commonProps} {...props} style="ghost" variant="secondary">
+{#if style === "normal"}
+  <Button {...commonProps} {...props} style="ghost" color="orange">
     {i18n.text({ isFavorited, title })}
     {#snippet icon()}
-      <FavoriteIcon {style} />
+      <FavoriteIcon {state} />
     {/snippet}
   </Button>
 {/if}
 
-{#if type === "action"}
-  <ActionButton {...commonProps} {...props}>
-    <FavoriteIcon {style} />
+{#if style === "action"}
+  <ActionButton {...commonProps} {...props} style="flat" color="default">
+    <FavoriteIcon {state} />
   </ActionButton>
+{/if}
+
+{#if style === "dropdown-item"}
+  <DropdownItem {...commonProps} style="flat" color="orange">
+    {i18n.text({ isFavorited, title })}
+    {#snippet icon()}
+      <FavoriteIcon {state} />
+    {/snippet}
+  </DropdownItem>
 {/if}

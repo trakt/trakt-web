@@ -3,8 +3,8 @@ import {
   type UserLike,
 } from '$lib/features/auth/queries/currentUserLikesQuery.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
-<<<<<<< HEAD
 import { derived, get, readable } from 'svelte/store';
+import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
 import {
   currentUserHistoryQuery,
   type UserHistory,
@@ -72,17 +72,6 @@ const ANONYMOUS_USER: UserSettings = {
 function definedData<T>(data: T | undefined): T {
   return data as T;
 }
-=======
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { derived, get } from 'svelte/store';
-import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
-import { currentUserHistoryQuery } from '../queries/currentUserHistoryQuery.ts';
-import { currentUserRatingsQuery } from '../queries/currentUserRatingsQuery.ts';
-import { currentUserSettingsQuery } from '../queries/currentUserSettingsQuery.ts';
-import {
-  currentUserWatchlistQuery,
-} from '../queries/currentUserWatchlistQuery.ts';
->>>>>>> parent of 9259f4bb (chore: remove favorites)
 
 export function useUser() {
   const { isAuthorized } = useAuth();
@@ -104,6 +93,10 @@ export function useUser() {
         shows: new Map(),
       }),
       likes: readable<UserLike[]>([]),
+      favorites: readable({
+        movies: new Map(),
+        shows: new Map(),
+      }),
     };
   }
 
@@ -111,11 +104,8 @@ export function useUser() {
   const historyQueryResponse = useQuery(currentUserHistoryQuery());
   const watchlistQueryResponse = useQuery(currentUserWatchlistQuery());
   const ratingsQueryResponse = useQuery(currentUserRatingsQuery());
-<<<<<<< HEAD
   const likesQueryResponse = useQuery(currentUserLikesQuery());
-=======
   const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
->>>>>>> parent of 9259f4bb (chore: remove favorites)
 
   const user = derived(
     userQueryResponse,
@@ -137,29 +127,18 @@ export function useUser() {
     likesQueryResponse,
     ($likes) => definedData($likes.data),
   );
-<<<<<<< HEAD
-=======
-  const ratings = derived(ratingsQueryResponse, ($ratings) => $ratings.data);
+
   const favorites = derived(
     favoritesQueryResponse,
-    ($favorites) => $favorites.data,
+    ($favorites) => definedData($favorites.data),
   );
->>>>>>> parent of 9259f4bb (chore: remove favorites)
 
   return {
     user,
     history,
     watchlist,
     ratings,
-<<<<<<< HEAD
     likes,
-=======
     favorites,
-    current: () =>
-      assertDefined(
-        get(user),
-        'This hook must be used within a RenderFor guard, target audience = authenticated!',
-      ),
->>>>>>> parent of 9259f4bb (chore: remove favorites)
   };
 }

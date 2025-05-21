@@ -5,7 +5,7 @@ export type FavoriteButtonProps = {
   title: string;
   isFavoriteUpdating: boolean;
   isFavorited: boolean;
-  type: 'action' | 'normal';
+  style: 'action' | 'normal' | 'dropdown-item';
   onAdd: () => void;
   onRemove: () => void;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

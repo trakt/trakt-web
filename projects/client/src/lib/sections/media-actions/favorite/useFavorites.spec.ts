@@ -4,7 +4,7 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { MovieMatrixMappedMock } from '$mocks/data/summary/movies/matrix/MovieMatrixMappedMock.ts';
 import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
-import { renderStore } from '$test/beds/store/renderStore.ts';
+import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
@@ -16,6 +16,7 @@ describe('useFavorites', () => {
   const invalidate = vi.fn(() => {});
 
   beforeEach(() => {
+    setAuthorization(true);
     invalidate.mockReset();
 
     (useInvalidator as Mock).mockReturnValueOnce({

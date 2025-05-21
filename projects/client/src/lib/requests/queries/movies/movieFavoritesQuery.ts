@@ -1,9 +1,9 @@
-import type { FavoritedMoviesResponse } from '$lib/api.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapMovieResponseToMovieSummary } from '$lib/requests/_internal/mapMovieResponseToMovieSummary.ts';
+import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import type { FavoriteMovieResponse } from '@trakt/api';
 import {
   type FavoritedEntry,
   FavoritedEntrySchema,
@@ -23,22 +23,15 @@ const favoritedMoviesRequest = (
       query: {
         extended: 'full,images',
       },
-    })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Error fetching user favorited movies.');
-      }
-
-      return response.body;
     });
 
-function mapFavoritedMovieResponse(
-  entry: FavoritedMoviesResponse,
+function mapToFavoriteMovie(
+  entry: FavoriteMovieResponse,
 ): FavoritedEntry {
   return {
     id: entry.movie.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
-    item: mapMovieResponseToMovieSummary(entry.movie),
+    item: mapToMovieEntry(entry.movie),
   };
 }
 
@@ -47,7 +40,7 @@ export const movieFavoritesQuery = defineQuery({
   invalidations: [InvalidateAction.Favorited('movie')],
   dependencies: () => [],
   request: favoritedMoviesRequest,
-  mapper: (data) => data.map(mapFavoritedMovieResponse),
+  mapper: (response) => response.body.map(mapToFavoriteMovie),
   schema: FavoritedEntrySchema.array(),
   ttl: time.hours(1),
 });

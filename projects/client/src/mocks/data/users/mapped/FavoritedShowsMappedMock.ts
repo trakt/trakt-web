@@ -24,6 +24,13 @@ export const FavoritedShowsMappedMock: FavoritedEntry[] = [
           'thumb': '/placeholders/portrait_placeholder.png' as HttpsUrl,
         },
       },
+      'logo': {
+        'url': {
+          'medium': '/placeholders/purple_placeholder.png' as HttpsUrl,
+          'thumb': '/placeholders/landscape_placeholder.png' as HttpsUrl,
+        },
+      },
+      'originalTitle': undefined,
       'runtime': NaN,
       'slug': 'silo',
       'status': 'unknown',
@@ -35,6 +42,8 @@ export const FavoritedShowsMappedMock: FavoritedEntry[] = [
       'trailer': 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
       'type': 'show',
       'year': 2023,
+      'votes': 0,
+      'colors': ['transparent', 'transparent'],
     },
   },
 ];

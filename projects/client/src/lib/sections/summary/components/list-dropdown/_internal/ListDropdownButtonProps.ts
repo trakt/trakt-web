@@ -4,5 +4,5 @@ export type ListDropdownButtonProps = {
   title: string;
   items: Snippet;
   isListed: boolean;
-  style?: 'normal' | 'action';
+  size?: 'small' | 'normal';
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;
