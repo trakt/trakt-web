@@ -65,7 +65,10 @@
 
   const { lists } = useAllPersonalLists();
 
-  const watchlistProps = $derived<WatchlistActionProps>(commonProps);
+  const watchlistProps = $derived<WatchlistActionProps>({
+    ...commonProps,
+    style: "normal",
+  });
   const listProps = $derived<ListDropdownProps>(commonProps);
   const markAsWatchedProps = $derived<MarkAsWatchedActionProps>({
     ...commonProps,

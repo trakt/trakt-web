@@ -44,6 +44,13 @@
         flex-basis: calc(50% - var(--gap-xs) / 2);
       }
     }
+
+    @include for-mobile {
+      :global(.trakt-button),
+      :global(.trakt-dropdown-wrapper) {
+        flex-grow: 1;
+      }
+    }
   }
 
   .trakt-summary-contextual-actions {
