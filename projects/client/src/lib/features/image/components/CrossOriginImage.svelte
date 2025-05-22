@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { writable } from "svelte/store";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
@@ -10,6 +11,7 @@
     animate = true,
     onload: _onload,
     onerror: _onerror,
+    classList = "",
     ...rest
   }: ImageProps = $props();
 
@@ -21,6 +23,7 @@
   {loading}
   class:image-loaded={$isImageLoaded}
   class:image-animation-enabled={animate}
+  use:appendClassList={classList}
   src={$response.uri}
   {alt}
   onerror={(ev) => {

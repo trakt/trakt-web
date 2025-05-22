@@ -1,1 +1,4 @@
-export type ImageProps = HTMLImageElementProps & { animate?: boolean };
+export type ImageProps = HTMLImageElementProps & {
+  animate?: boolean;
+  classList?: string;
+};
