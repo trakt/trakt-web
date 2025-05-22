@@ -6,7 +6,6 @@
   import CardCover from "$lib/components/card/CardCover.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
-  import GenreList from "$lib/components/summary/GenreList.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
@@ -29,7 +28,7 @@
   const variant = $derived(rest.variant ?? $defaultVariant);
 </script>
 
-{#snippet content(mediaCoverImageUrl: string)}
+{#snippet content(mediaCoverImageUrl: string, mediaCoverOverlay?: string)}
   {#if popupActions}
     <CardActionBar>
       {#snippet actions()}
@@ -46,6 +45,7 @@
     <CardCover
       title={media.title}
       src={mediaCoverImageUrl}
+      overlaySrc={mediaCoverOverlay}
       alt={m.media_poster({ title: media.title })}
       {badge}
     />
@@ -61,18 +61,8 @@
 
 {#if variant === "landscape"}
   <LandscapeCard>
-    {@render content(media.cover.url.thumb)}
-    <CardFooter {action} {tag}>
-      <Link href={UrlBuilder.media(type, media.slug)}>
-        <p class="trakt-card-title small ellipsis">
-          {media.title}
-        </p>
-      </Link>
-      <GenreList
-        genres={media.genres}
-        classList="trakt-card-subtitle small ellipsis"
-      />
-    </CardFooter>
+    {@render content(media.cover.url.thumb, media.logo.url.medium)}
+    <CardFooter {action} {tag} />
   </LandscapeCard>
 {/if}
 

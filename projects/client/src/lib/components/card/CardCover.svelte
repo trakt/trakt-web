@@ -7,6 +7,7 @@
 
   const {
     src,
+    overlaySrc,
     alt,
     badge,
     tag,
@@ -43,15 +44,35 @@
       {@render tag()}
     </div>
   {/if}
-  <div class="trakt-card-cover-image" class:has-gradient={style === "gradient"}>
-    <span {id} class="trakt-cover-image-title meta-info">{title}</span>
+  <div
+    class="trakt-card-cover-image"
+    class:has-overlay={overlaySrc}
+    class:has-gradient={style === "gradient"}
+  >
     <CrossOriginImage
+      classList="trakt-card-cover-image"
       animate={false}
       {src}
       {alt}
       onload={() => (isImagePending = false)}
       aria-labelledby={id}
     />
+    {#if overlaySrc && !PLACEHOLDERS.includes(overlaySrc)}
+      <CrossOriginImage
+        classList="trakt-logo-overlay"
+        animate={false}
+        src={overlaySrc}
+        {alt}
+        onload={() => (isImagePending = false)}
+        aria-labelledby={id}
+      />
+    {/if}
+
+    {#if overlaySrc && PLACEHOLDERS.includes(overlaySrc)}
+      <p class="trakt-logo-overlay">
+        {title}
+      </p>
+    {/if}
   </div>
 </div>
 
@@ -100,7 +121,7 @@
     }
 
     &:not(.trakt-card-cover-placeholder):not(.trakt-card-cover-youtube) {
-      :global(img) {
+      :global(img.trakt-card-cover-image) {
         object-position: top;
       }
     }
@@ -114,26 +135,68 @@
       opacity calc(var(--transition-increment) * 2) ease-in-out,
       filter var(--transition-increment) ease-in-out;
 
-    .trakt-cover-image-title {
+    :global(.trakt-logo-overlay) {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
       bottom: 0;
 
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      padding: var(--ni-8);
+      padding-bottom: var(--ni-8);
 
-      text-align: center;
+      z-index: var(--layer-raised);
+
+      filter: drop-shadow(
+        var(--ni-1) var(--ni-1) var(--ni-2) rgba(0, 0, 0, 0.25)
+      );
     }
 
-    :global(img) {
+    :global(img.trakt-card-cover-image) {
       position: relative;
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    :global(img.trakt-logo-overlay) {
+      --logo-width: 60%;
+
+      width: var(--logo-width);
+      height: 100%;
+
+      position: absolute;
+      bottom: 0;
+      left: calc((100% - var(--logo-width)) / 2);
+
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    p.trakt-logo-overlay {
+      width: 100%;
+
+      color: var(--shade-20);
+
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    &.has-overlay::after {
+      content: "";
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 75%;
+
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--shade-900) 100%
+      );
     }
   }
 </style>
