@@ -1,8 +1,8 @@
 import { requestDeviceCode } from '$lib/features/auth/requests/requestDeviceCode.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { prependHttpOrHttps } from '$lib/utils/url/prependHttpOrHttps.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
+import { IS_DEV } from '../../utils/env/index.ts';
 import { AuthDeviceEndpoint } from './AuthDeviceEndpoint.ts';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import type {
@@ -29,7 +29,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.auth = auth;
   };
 
-  const getReferrer = () => prependHttpOrHttps(event.url.host) ?? '';
+  /** FIXME: extract this instead of having it hardcoded */
+  const getReferrer = () =>
+    IS_DEV ? 'http://localhost:5173' : 'https://app.trakt.tv';
 
   const authorizedResponse = (response: SerializedAuthResponse, url: URL) => {
     const { isAuthorized } = response;
