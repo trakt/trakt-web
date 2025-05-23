@@ -4,6 +4,7 @@
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -66,6 +67,7 @@
 
     <div class="trakt-side-navbar-bottom">
       <RenderFor audience="authenticated">
+        <LocalePicker />
         <FilterButton />
         <ProfileButton />
       </RenderFor>
@@ -174,6 +176,7 @@
   .trakt-side-navbar-bottom {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
 
   /* FIXME: temporary overrides until we add new components */

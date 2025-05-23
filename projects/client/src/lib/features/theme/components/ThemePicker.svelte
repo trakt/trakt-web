@@ -72,8 +72,8 @@
 
   .theme-picker-container {
     position: relative;
-    width: var(--ni-48);
-    height: var(--ni-48);
+    width: var(--ni-42);
+    height: var(--ni-42);
     border-radius: 50%;
 
     &:has(select:focus-visible) {
