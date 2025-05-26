@@ -39,7 +39,7 @@ function generateMultiLocalePromptText({
 
           Important: 
 
-          *   Unless the English text value (not JSON key!) explicitly mentions "movie", "show", "episodes", etc avoid using those specific terms in the translation. The context should be inferred.
+          *   Unless the English text value (not JSON key!) explicitly mentions "movie", "show", "episodes", "lists", etc avoid using those specific terms in the translation. The context should be inferred.
           *   Imagine the text might refer to a movie, show, episode, or other media-related term.
           *   When the JSON key starts with 'job_' it relates to a job one can have in the film and TV industry
           *   Refrain from making assumptions of where media content is consumed (e.g., theaters, streaming services) unless explicitly mentioned in the English text.

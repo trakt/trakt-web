@@ -53,6 +53,6 @@
 />
 
 {#if slug !== "me"}
-  <PersonalLists {slug} type="personal" variant="preview" />
-  <PersonalLists {slug} type="collaboration" variant="summary" />
+  <PersonalLists {slug} type="personal" />
+  <PersonalLists {slug} type="collaboration" />
 {/if}

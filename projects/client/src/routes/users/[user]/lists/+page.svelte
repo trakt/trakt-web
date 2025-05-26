@@ -31,8 +31,9 @@
     status="all"
   />
 
-  <PersonalLists slug="me" type="personal" variant="preview" />
-  <PersonalLists slug="me" type="collaboration" variant="summary" />
+  <PersonalLists slug="me" type="personal" />
+  <PersonalLists slug="me" type="liked" />
+  <PersonalLists slug="me" type="collaboration" />
 
   <RenderFor audience="director">
     <SmartListRenderer type="movie" />

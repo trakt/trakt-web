@@ -3,6 +3,7 @@ import { collaborationListsQuery } from '$lib/requests/queries/users/collaborati
 import { personalListsQuery } from '$lib/requests/queries/users/personalListsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
+import { likedListsQuery } from '../../../requests/queries/users/likedListsQuery.ts';
 import type { PersonalListType } from './models/PersonalListType.ts';
 
 type PersonalListsParams = {
@@ -13,6 +14,8 @@ type PersonalListsParams = {
 function typeToQuery({ type, slug }: PersonalListsParams) {
   const userSlug = slug ?? 'me';
   switch (type) {
+    case 'liked':
+      return likedListsQuery();
     case 'personal':
       return personalListsQuery({ slug: userSlug });
     case 'collaboration':
