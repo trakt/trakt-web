@@ -1,6 +1,6 @@
 <script lang="ts">
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
-  import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
+  import ListManagementIcon from "$lib/components/icons/ListManagementIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import type { ListDropdownButtonProps } from "./ListDropdownButtonProps";
 
@@ -14,7 +14,7 @@
 
   const state = $derived(isListed ? "added" : "missing");
   const variant = $derived(isListed ? "primary" : "secondary");
-  const text = $derived(isListed ? m.listed() : m.add_to_list());
+  const text = $derived(isListed ? m.listed() : m.lists_action_label());
 </script>
 
 <list-dropdown>
@@ -30,7 +30,7 @@
     {text}
 
     {#snippet icon()}
-      <WatchlistIcon size="small" {state} />
+      <ListManagementIcon />
     {/snippet}
 
     {#snippet items()}
@@ -38,11 +38,3 @@
     {/snippet}
   </DropdownList>
 </list-dropdown>
-
-<style>
-  list-dropdown {
-    :global(.trakt-list) {
-      min-width: var(--ni-220);
-    }
-  }
-</style>

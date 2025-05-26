@@ -9,8 +9,5 @@ export const ListDropdownItemIntlProvider: ListDropdownItemIntl = {
     isListed
       ? m.remove_from_personal_list_label({ list: listName, title })
       : m.add_to_personal_list_label({ list: listName, title }),
-  text: ({ isListed, listName }: ListDropdownItemMeta) =>
-    isListed
-      ? m.remove_from_personal_list({ list: listName })
-      : m.add_to_personal_list({ list: listName }),
+  text: ({ listName }: ListDropdownItemMeta) => listName,
 };
