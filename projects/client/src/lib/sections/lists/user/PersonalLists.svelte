@@ -6,16 +6,32 @@
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
 
-  const {
-    type,
-    variant,
-    slug,
-  }: { type: PersonalListType; variant: "summary" | "preview"; slug: string } =
-    $props();
+  const { type, slug }: { type: PersonalListType; slug: string } = $props();
 
   const { lists, isLoading } = $derived(
     usePersonalListsSummary({ type, slug }),
   );
+
+  const title = $derived.by(() => {
+    switch (type) {
+      case "personal":
+        return m.personal_lists();
+      case "liked":
+        return m.liked_lists();
+      case "collaboration":
+        return m.collaborative_lists();
+      default:
+        return "";
+    }
+  });
+
+  const variant = $derived.by(() => {
+    if ($lists.length === 1) {
+      return "preview";
+    }
+
+    return "summary";
+  });
 </script>
 
 <!-- TODO unhide when lists are actionable -->
@@ -32,7 +48,7 @@
     <SectionList
       id={`personal-lists-${type}-list`}
       items={$lists}
-      title={type === "personal" ? m.personal_lists() : m.collaborations()}
+      {title}
       --height-list="var(--height-lists-list)"
     >
       {#snippet item(list)}

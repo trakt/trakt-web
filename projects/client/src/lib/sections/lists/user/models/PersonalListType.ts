@@ -1,1 +1,1 @@
-export type PersonalListType = 'personal' | 'collaboration';
+export type PersonalListType = 'personal' | 'collaboration' | 'liked';
