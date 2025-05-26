@@ -106,7 +106,6 @@
   use:observeWidth
   use:shadowNativeSelect
   data-size={size}
-  class:has-external-icon={_icon != null}
 >
   <Button style="textured" {size} {...props}>
     {@render children()}
@@ -114,8 +113,9 @@
       <div class="trakt-dropdown-list-icon">
         {#if _icon != null}
           {@render _icon()}
+        {:else}
+          <DropdownIcon open={$isOpened} disabled={props.disabled} />
         {/if}
-        <DropdownIcon open={$isOpened} disabled={props.disabled} />
       </div>
     {/snippet}
   </Button>
@@ -174,12 +174,6 @@
       opacity: 0;
     }
 
-    &.has-external-icon {
-      :global(.trakt-button .trakt-dropdown-caret) {
-        display: none;
-      }
-    }
-
     &[data-size="small"] {
       :global(.trakt-button) {
         min-width: fit-content;
@@ -231,7 +225,7 @@
     --list-padding: var(--ni-12);
     @include transform-position(var(--list-padding));
 
-    width: var(--button-width);
+    width: max(var(--button-width), var(--ni-180));
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
