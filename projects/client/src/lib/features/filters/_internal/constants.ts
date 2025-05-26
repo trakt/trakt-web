@@ -32,7 +32,11 @@ const STREAMING_FILTER: Filter = {
   type: 'list',
   options: [
     { label: m.watchnow_favorites_only(), value: 'favorites' },
-    { label: m.watchnow_any_service(), value: 'any' },
+    {
+      label: m.watchnow_streaming(),
+      value: 'any_subscriptions',
+    },
+    { label: m.watchnow_digital_release(), value: 'any' },
   ],
 };
 
@@ -69,6 +73,6 @@ export const FILTERS = [
   IGNORE_WATCHLISTED_FILTER,
 ] as const;
 
-export const DEFAULT_FILTERS = {
-  [FilterKey.Streaming]: 'any',
+export const DEFAULT_TV_FILTERS = {
+  [FilterKey.Streaming]: 'any_subscriptions',
 } as const;

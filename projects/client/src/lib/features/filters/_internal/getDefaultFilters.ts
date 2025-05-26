@@ -1,6 +1,6 @@
 import { getDeviceType } from '$lib/utils/devices/getDeviceType.ts';
 import { STORED_FILTERS_KEY } from '../useStoredFilters.ts';
-import { DEFAULT_FILTERS } from './constants.ts';
+import { DEFAULT_TV_FILTERS } from './constants.ts';
 
 export function getDefaultFilters() {
   const savedFilters = localStorage.getItem(STORED_FILTERS_KEY);
@@ -10,6 +10,6 @@ export function getDefaultFilters() {
 
   const isTV = getDeviceType(globalThis.navigator.userAgent) === 'tv';
   if (isTV) {
-    return DEFAULT_FILTERS;
+    return DEFAULT_TV_FILTERS;
   }
 }
