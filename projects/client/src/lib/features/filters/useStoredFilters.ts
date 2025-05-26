@@ -5,6 +5,7 @@ import { NOOP_FN } from '../../utils/constants.ts';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
 import { useParameters } from '../parameters/useParameters.ts';
 import { getDefaultFilters } from './_internal/getDefaultFilters.ts';
+import { hasFilter } from './_internal/hasFilter.ts';
 import { processFilterParams } from './_internal/processFilterParams.ts';
 
 export const STORED_FILTERS_KEY = 'trakt-global-filters' as const;
@@ -34,7 +35,7 @@ export function useStoredFilters() {
   };
 
   const restoreFilters = () => {
-    const hasParams = page.url.searchParams.size > 0;
+    const hasParams = hasFilter(page.url.searchParams);
     const defaultFilters = getDefaultFilters();
 
     if (hasParams || !defaultFilters) {
