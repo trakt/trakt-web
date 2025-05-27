@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
@@ -25,8 +26,10 @@
     }
   });
 
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+
   const variant = $derived.by(() => {
-    if ($lists.length === 1) {
+    if ($lists.length === 1 || $isMobile) {
       return "preview";
     }
 
