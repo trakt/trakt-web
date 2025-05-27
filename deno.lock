@@ -5,7 +5,7 @@
     "npm:@cucumber/cucumber@^11.2.0": "11.2.0_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.0.2_@cucumber+messages@27.0.2",
     "npm:@google/generative-ai@0.24": "0.24.0",
     "npm:@inlang/paraglide-js@^2.0.12": "2.0.12",
-    "npm:@jsr/trakt__api@~0.1.37": "0.1.37_zod@3.24.1",
+    "npm:@jsr/trakt__api@~0.1.38": "0.1.38_zod@3.24.1",
     "npm:@playwright/test@^1.51.1": "1.51.1",
     "npm:@svelte-plugins/tooltips@^3.0.3": "3.0.3_svelte@5.25.3__acorn@8.14.1",
     "npm:@svelte-put/qr@^2.1.0": "2.1.0_svelte@5.25.3__acorn@8.14.1",
@@ -2189,14 +2189,14 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@jsr/trakt__api@0.1.37_zod@3.24.1": {
-      "integrity": "sha512-AqDVLt/j0fGTpLzOhOXBHaa0PeaLvdUTURcT0bXy+unxCWsMLKJMDAxsC/ekjksHs2zDaKDLdTXrZFNjSZjX3g==",
+    "@jsr/trakt__api@0.1.38_zod@3.24.1": {
+      "integrity": "sha512-r8Qq4VXNKVX2q8WllbIW0YsYEpZBalak3zteC7t8Asyr0sE9F9D5Pzft2rvA5rhGoTWdTP5h1yKyVV7X+0nZzQ==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod@3.24.1"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.1.37.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.1.38.tgz"
     },
     "@lix-js/sdk@0.4.7_kysely@0.27.6": {
       "integrity": "sha512-pRbW+joG12L0ULfMiWYosIW0plmW4AsUdiPCp+Z8rAsElJ+wJ6in58zhD3UwUcd4BNcpldEGjg6PdA7e0RgsDQ==",
@@ -6891,7 +6891,7 @@
             "npm:@cucumber/cucumber@^11.2.0",
             "npm:@google/generative-ai@0.24",
             "npm:@inlang/paraglide-js@^2.0.12",
-            "npm:@jsr/trakt__api@~0.1.37",
+            "npm:@jsr/trakt__api@~0.1.38",
             "npm:@playwright/test@^1.51.1",
             "npm:@svelte-plugins/tooltips@^3.0.3",
             "npm:@svelte-put/qr@^2.1.0",
