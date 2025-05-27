@@ -17,7 +17,7 @@ const personalListsRequest = (
         id: slug,
       },
       query: {
-        extended: 'images',
+        extended: 'images,colors',
       },
     });
 

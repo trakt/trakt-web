@@ -32,7 +32,7 @@ const recommendedShowsRequest = (
     .shows
     .recommend({
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
         ignore_collected: true,
         limit,
         ...filter,

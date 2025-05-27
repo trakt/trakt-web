@@ -30,44 +30,7 @@
     transition: opacity var(--transition-increment) ease-in-out;
   }
 
-  .icon-state-idle {
-    opacity: 1;
-  }
-
-  .icon-state-active {
-    opacity: 0;
-  }
-
-  @include for-mouse {
-    :global(li):focus,
-    :global(li):hover,
-    :global(button):focus,
-    :global(button):hover {
-      .icon-state-idle {
-        opacity: 0;
-      }
-
-      .icon-state-active {
-        opacity: 1;
-      }
-    }
-  }
-
   svg[data-size="small"] {
     transform: scale(0.75);
-  }
-
-  @include for-touch {
-    svg {
-      &[data-state="added"] {
-        .icon-state-active {
-          opacity: 1;
-        }
-
-        .icon-state-idle {
-          opacity: 0;
-        }
-      }
-    }
   }
 </style>

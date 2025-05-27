@@ -21,7 +21,7 @@ const favoritedMoviesRequest = (
         sort: 'rank',
       },
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
       },
     });
 

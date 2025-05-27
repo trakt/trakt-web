@@ -21,7 +21,7 @@ const movieRelatedRequest = (
     .movies
     .related({
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
         limit,
         page,
       },

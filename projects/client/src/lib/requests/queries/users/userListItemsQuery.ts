@@ -57,7 +57,7 @@ const userListItemsRequest = (
         type,
       },
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
         page,
         limit,
         ...filter,
