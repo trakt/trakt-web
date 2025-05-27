@@ -36,7 +36,7 @@ const watchlistRequest = (
         sort,
       },
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
         page,
         limit,
         ...filter,

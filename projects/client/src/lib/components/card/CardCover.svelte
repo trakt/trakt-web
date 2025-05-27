@@ -195,7 +195,7 @@
       background: linear-gradient(
         180deg,
         transparent 0%,
-        var(--shade-900) 100%
+        var(--color-card-cover-shadow, var(--shade-900)) 100%
       );
     }
   }

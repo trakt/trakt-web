@@ -42,7 +42,7 @@ const showStreamingRequest = (
         period: 'daily',
       },
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
         watchnow: 'favorites',
         ignore_collected: true,
         page,

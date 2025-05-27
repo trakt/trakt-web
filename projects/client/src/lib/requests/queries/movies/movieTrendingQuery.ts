@@ -42,7 +42,7 @@ const movieTrendingRequest = (
     .movies
     .trending({
       query: {
-        extended: 'full,images',
+        extended: 'full,images,colors',
         ignore_collected: true,
         page,
         limit,
