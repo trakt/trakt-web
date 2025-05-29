@@ -43,7 +43,7 @@ describe('buildPlexLink', () => {
 
     const result = buildPlexLink(target);
     expect(result).toBe(
-      'https://watch.plex.tv/episode/breaking-bad/season/1/episode/5',
+      'https://watch.plex.tv/show/breaking-bad/season/1/episode/5',
     );
   });
 });
