@@ -22,7 +22,7 @@ const movieListsRequest = (
         sort: 'popular',
       },
       query: {
-        extended: 'images,colors',
+        extended: 'images',
         limit,
       },
     });
