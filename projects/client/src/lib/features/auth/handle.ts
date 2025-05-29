@@ -3,12 +3,13 @@ import { time } from '$lib/utils/timing/time.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { IS_DEV } from '../../utils/env/index.ts';
+import { buildOAuthUrl } from '../../utils/url/buildOAuthLink.ts';
 import { AuthDeviceEndpoint } from './AuthDeviceEndpoint.ts';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import type {
   SerializedAuthResponse,
 } from './models/SerializedAuthResponse.ts';
-import { authorize } from './requests/authorize.ts';
+import { authorize, UNAUTHORIZED_PAYLOAD } from './requests/authorize.ts';
 import { authorizeDeviceCode } from './requests/authorizeDeviceCode.ts';
 
 export const AUTH_COOKIE_NAME = 'trakt-auth';
@@ -145,6 +146,24 @@ export const handle: Handle = async ({ event, resolve }) => {
       },
       referrer: getReferrer(),
     });
+
+    if (result === UNAUTHORIZED_PAYLOAD) {
+      const url = buildOAuthUrl(TRAKT_CLIENT_ID, getReferrer());
+
+      setAuth(null);
+      return new Response(null, {
+        status: 307,
+        headers: {
+          Location: url.toString(),
+          'Set-Cookie': event.cookies.serialize(AUTH_COOKIE_NAME, '', {
+            httpOnly: true,
+            secure: true,
+            maxAge: 0,
+            path: '/',
+          }),
+        },
+      });
+    }
 
     setAuth(result);
     event.cookies.set(
