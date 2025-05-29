@@ -11,7 +11,7 @@ describe('findPreferredStreamingService', () => {
     })).toBe(undefined);
   });
 
-  it('should return the first available if there are no matching favorite subscriptions', () => {
+  it('should return undefined if are no matching favorite subscriptions', () => {
     expect(findPreferredStreamingService({
       services: {
         streaming: [{
@@ -24,12 +24,7 @@ describe('findPreferredStreamingService', () => {
       },
       favorites: ['us-netflix'],
       countryCode: 'nl',
-    })).toStrictEqual({
-      'is4k': false,
-      'link': 'https://www.netflix.com/',
-      'source': 'netflix',
-      'type': 'streaming',
-    });
+    })).toBeUndefined();
   });
 
   it('should return the matching service', () => {
