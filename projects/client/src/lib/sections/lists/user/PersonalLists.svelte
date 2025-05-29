@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
@@ -12,6 +13,7 @@
   const { lists, isLoading } = $derived(
     usePersonalListsSummary({ type, slug }),
   );
+  const { navigation } = useNavigation();
 
   const title = $derived.by(() => {
     switch (type) {
@@ -27,9 +29,10 @@
   });
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const isDPad = $navigation === "dpad";
 
   const variant = $derived.by(() => {
-    if ($lists.length === 1 || $isMobile) {
+    if ($lists.length === 1 || $isMobile || isDPad) {
       return "preview";
     }
 
