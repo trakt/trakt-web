@@ -119,8 +119,8 @@
         >
           <AnalyticsProvider>
             <AutoSigninProvider>
-              <LocaleProvider>
-                <NavigationProvider device={data.device}>
+              <NavigationProvider device={data.device}>
+                <LocaleProvider>
                   <!-- TODO: coalesce this when we add support for people 'n stuff -->
                   <SearchProvider type="show">
                     <SearchProvider type="movie">
@@ -167,8 +167,8 @@
                       </FilterProvider>
                     </SearchProvider>
                   </SearchProvider>
-                </NavigationProvider>
-              </LocaleProvider>
+                </LocaleProvider>
+              </NavigationProvider>
 
               {#key page.url.pathname}
                 <PageView />
