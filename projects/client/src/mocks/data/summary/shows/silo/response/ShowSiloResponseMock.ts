@@ -10,6 +10,10 @@ export const ShowSiloResponseMock: ShowResponse = {
     'tvdb': 403245,
     'imdb': 'tt14688458',
     'tmdb': 125988,
+    'plex': {
+      'guid': '23rvas4r3qt3',
+      'slug': 'silo',
+    },
   },
   'aired_episodes': 15,
   'tagline': 'The truth will surface.',

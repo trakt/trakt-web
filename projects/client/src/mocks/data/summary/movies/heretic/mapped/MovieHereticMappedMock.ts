@@ -57,4 +57,5 @@ export const MovieHereticMappedMock: MovieEntry = {
     'en',
   ],
   'votes': 2083,
+  'plexSlug': 'heretic-2024',
 };

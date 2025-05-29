@@ -58,4 +58,5 @@ export const ShowDevsMappedMock: ShowEntry = {
   'airDate': new Date('2020-03-05T05:00:00.000Z'),
   'certification': 'TV-MA',
   'votes': 3522,
+  'plexSlug': 'devs',
 };

@@ -10,6 +10,10 @@ export const ShowDevsResponseMock: ShowResponse = {
     'tvdb': 364149,
     'imdb': 'tt8134186',
     'tmdb': 81349,
+    'plex': {
+      'guid': '23rvas4r3qt3',
+      'slug': 'devs',
+    },
   },
   'aired_episodes': 8,
   'tagline': 'Reality is stranger than dreams.',

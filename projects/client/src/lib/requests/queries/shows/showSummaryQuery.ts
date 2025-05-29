@@ -16,7 +16,7 @@ const showSummaryRequest = (
         id: slug,
       },
       query: {
-        extended: 'full,images,colors',
+        extended: 'full,images,colors,streaming_ids',
       },
     });
 

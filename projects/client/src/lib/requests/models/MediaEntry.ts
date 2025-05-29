@@ -40,6 +40,7 @@ export const MediaEntrySchema = z.object({
   certification: z.string().optional(),
   votes: z.number(),
   colors: z.tuple([z.string(), z.string()]),
+  plexSlug: z.string().optional(),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;

@@ -9,6 +9,10 @@ export const MovieHereticResponseMock: MovieResponse = {
     'slug': 'heretic-2024',
     'imdb': 'tt28015403',
     'tmdb': 1138194,
+    'plex': {
+      'guid': '23rvas4r3qt3',
+      'slug': 'heretic-2024',
+    },
   },
   'tagline': 'Question everything.',
   'overview':
