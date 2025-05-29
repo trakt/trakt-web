@@ -41,4 +41,5 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   'votes': 0,
   'year': 2023,
   'colors': ['#D29D40', '#1E2E2F'],
+  'plexSlug': undefined,
 };

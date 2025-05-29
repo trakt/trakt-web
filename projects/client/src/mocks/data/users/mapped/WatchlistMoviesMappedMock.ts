@@ -47,6 +47,7 @@ export const WatchlistMoviesMappedMock: WatchlistMovie[] = [
       'type': 'movie',
       'year': 1999,
       'votes': 0,
+      'plexSlug': undefined,
     },
   },
 ];

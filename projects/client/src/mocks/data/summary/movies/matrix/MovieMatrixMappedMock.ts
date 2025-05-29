@@ -56,4 +56,5 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'airDate': new Date('1999-03-31T00:00:00.000Z'),
   'certification': 'R',
   'votes': 65943,
+  'plexSlug': 'the-matrix-1999',
 };

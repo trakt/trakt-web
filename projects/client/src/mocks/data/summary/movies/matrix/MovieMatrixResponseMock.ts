@@ -9,6 +9,10 @@ export const MovieMatrixResponseMock: MovieResponse = {
     'slug': 'the-matrix-1999',
     'imdb': 'tt0133093',
     'tmdb': 603,
+    'plex': {
+      'guid': '23rvas4r3qt3',
+      'slug': 'the-matrix-1999',
+    },
   },
   'tagline': 'The fight for the future begins.',
   'overview':
