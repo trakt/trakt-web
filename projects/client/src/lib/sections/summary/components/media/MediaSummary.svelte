@@ -3,7 +3,6 @@
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
@@ -29,6 +28,7 @@
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
   import RateNow from "../rating/RateNow.svelte";
+  import StreamOnButton from "../stream/StreamOnButton.svelte";
   import SummaryActions from "../summary/SummaryActions.svelte";
   import SummaryContainer from "../summary/SummaryContainer.svelte";
   import SummaryHeader from "../summary/SummaryHeader.svelte";
@@ -86,14 +86,7 @@
     {/if}
   </RenderFor>
   <RenderFor audience="authenticated" navigation="dpad">
-    {#if streamOn?.preferred}
-      <StreamingServiceButton
-        mediaTitle={media.title}
-        service={streamOn.preferred}
-        style="normal"
-        size="normal"
-      />
-    {/if}
+    <StreamOnButton {streamOn} {type} {media} style="normal" size="normal" />
     <WatchlistAction {...watchlistProps} />
   </RenderFor>
   <MarkAsWatchedAction {...markAsWatchedProps} />

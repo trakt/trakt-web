@@ -3,7 +3,6 @@
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
@@ -24,6 +23,7 @@
   import MediaMetaInfo from "./components/media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./components/overlay/StreamOnOverlay.svelte";
   import RateNow from "./components/rating/RateNow.svelte";
+  import StreamOnButton from "./components/stream/StreamOnButton.svelte";
   import SummaryActions from "./components/summary/SummaryActions.svelte";
   import SummaryContainer from "./components/summary/SummaryContainer.svelte";
   import SummaryHeader from "./components/summary/SummaryHeader.svelte";
@@ -49,14 +49,14 @@
 
 {#snippet mediaActions(size: "small" | "normal" = "normal")}
   <RenderFor audience="authenticated" navigation="dpad">
-    {#if streamOn?.preferred}
-      <StreamingServiceButton
-        mediaTitle={episode.title}
-        service={streamOn.preferred}
-        style="normal"
-        size="normal"
-      />
-    {/if}
+    <StreamOnButton
+      {streamOn}
+      {type}
+      {episode}
+      media={show}
+      style="normal"
+      size="normal"
+    />
   </RenderFor>
   <MarkAsWatchedAction
     style="normal"

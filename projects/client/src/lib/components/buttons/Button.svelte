@@ -291,6 +291,7 @@
 
     .button-icon {
       display: flex;
+      align-items: center;
       gap: var(--gap-xs);
     }
 

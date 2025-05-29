@@ -1,5 +1,4 @@
 <script lang="ts">
-  import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
   import AirDate from "$lib/components/media/tags/AirDateTag.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import PlaysTag from "$lib/components/media/tags/PlaysTag.svelte";
@@ -8,6 +7,7 @@
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
+  import StreamOnButton from "../stream/StreamOnButton.svelte";
   import { useMediaMetaInfo, type MetaInfoProps } from "./useMediaMetaInfo";
 
   type MediaMetaInfoProps = {
@@ -56,30 +56,20 @@
     </div>
   </div>
   <div class="trakt-summary-watch-container">
-    {#if streamOn?.preferred}
-      <RenderFor
-        device={["tablet-lg", "desktop"]}
-        audience="all"
-        navigation="default"
-      >
-        <StreamingServiceButton
-          mediaTitle={media.title}
-          service={streamOn.preferred}
-          style="normal"
-        />
-      </RenderFor>
-      <RenderFor
-        device={["tablet-sm", "mobile"]}
-        audience="all"
-        navigation="default"
-      >
-        <StreamingServiceButton
-          mediaTitle={media.title}
-          service={streamOn.preferred}
-          style="logo"
-        />
-      </RenderFor>
-    {/if}
+    <RenderFor
+      device={["tablet-lg", "desktop"]}
+      audience="all"
+      navigation="default"
+    >
+      <StreamOnButton {streamOn} {...target} style="normal" />
+    </RenderFor>
+    <RenderFor
+      device={["tablet-sm", "mobile"]}
+      audience="all"
+      navigation="default"
+    >
+      <StreamOnButton {streamOn} {...target} style="logo" />
+    </RenderFor>
   </div>
 </div>
 
