@@ -4,7 +4,7 @@ import {
   mapToDeviceAuth,
 } from '$lib/features/auth/requests/_internal/mapToDeviceAuth.ts';
 import { warn as printWarning } from '$lib/utils/console/print.ts';
-import { api } from '../../../requests/api.ts';
+import { unauthorizedApi } from '../../../requests/api.ts';
 import type { AuthToken } from '../models/AuthToken.ts';
 import { getGrantTypeAndCode } from './_internal/getGrantTypeAndCode.ts';
 
@@ -22,7 +22,7 @@ export async function verifyAuth({
   const client_secret = env.TRAKT_CLIENT_SECRET ?? '';
   const client_id = env.TRAKT_CLIENT_ID ?? '';
 
-  const tokenResponse = await api({
+  const tokenResponse = await unauthorizedApi({
     environment: TRAKT_TARGET_ENVIRONMENT,
   })
     .oauth

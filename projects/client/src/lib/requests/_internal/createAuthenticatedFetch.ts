@@ -2,6 +2,14 @@ import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
 
+function hasExpiredToken(expiresAt: number | Nil) {
+  if (!expiresAt) {
+    return false;
+  }
+
+  return new Date(expiresAt).getTime() - Date.now() < 0;
+}
+
 export function createAuthenticatedFetch<
   T extends typeof fetch,
 >(baseFetch: T): T {
@@ -13,7 +21,7 @@ export function createAuthenticatedFetch<
     const headers = new Headers(modifiedInit?.headers || {});
 
     try {
-      const { value: token } = getToken();
+      const { value: token, expiresAt } = getToken();
       const url = input.toString();
 
       if (token) {
@@ -34,7 +42,7 @@ export function createAuthenticatedFetch<
           headers,
         } as Parameters<T>[1],
       ).then((response) => {
-        if (response.status === 401 && token) {
+        if (response.status === 401 && hasExpiredToken(expiresAt)) {
           globalThis.window.location.reload();
         }
 
