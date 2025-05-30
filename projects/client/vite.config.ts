@@ -40,9 +40,17 @@ const GIT_COMMIT_HASH = getGitCommitHash();
 
 const MONOREPO_ROOT = findGitRoot(__dirname);
 
-const TRAKT_TARGET_ENVIRONMENT = process.env.IS_CONTRIB
-  ? Environment.production
-  : Environment.production_private;
+const TRAKT_TARGET_ENVIRONMENT = (() => {
+  if (process.env.IS_CONTRIB) {
+    return Environment.production;
+  }
+
+  if (process.env.IS_STAGING) {
+    return Environment.staging;
+  }
+
+  return Environment.production_private;
+})();
 
 export default defineConfig(({ mode }) => ({
   define: {
