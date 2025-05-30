@@ -8,7 +8,6 @@
     "svelte.svelte-vscode",
     "deepsourcecorp.deepsource-vscode",
     "ekstasis.vscode-color-picker-hex",
-    "CucumberOpen.cucumber-official",
-    "coderabbit.coderabbit-vscode"
+    "CucumberOpen.cucumber-official"
   ]
 }
