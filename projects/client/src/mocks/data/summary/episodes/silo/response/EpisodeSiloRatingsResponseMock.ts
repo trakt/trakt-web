@@ -35,5 +35,7 @@ export const EpisodeSiloRatingsResponseMock: RatingsResponse = {
     'rating': 92,
     'user_rating': 64,
     'link': null,
+    'state': null,
+    'user_state': null,
   },
 };

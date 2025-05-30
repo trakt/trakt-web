@@ -35,5 +35,7 @@ export const ShowSiloRatingsResponseMock: RatingsResponse = {
     'rating': 92,
     'user_rating': 64,
     'link': 'https://www.rottentomatoes.com/tv/silo',
+    'state': null,
+    'user_state': null,
   },
 };
