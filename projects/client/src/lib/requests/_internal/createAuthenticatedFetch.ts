@@ -2,8 +2,12 @@ import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
 
-function hasExpiredToken(expiresAt: number | Nil) {
-  if (!expiresAt) {
+const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
+
+function shouldReloadPage(expiresAt: number | Nil) {
+  if (
+    !expiresAt || globalThis.sessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY)
+  ) {
     return false;
   }
 
@@ -42,8 +46,16 @@ export function createAuthenticatedFetch<
           headers,
         } as Parameters<T>[1],
       ).then((response) => {
-        if (response.status === 401 && hasExpiredToken(expiresAt)) {
+        if (response.status === 401 && shouldReloadPage(expiresAt)) {
+          globalThis.sessionStorage.setItem(
+            SESSION_STORAGE_REFRESH_KEY,
+            'true',
+          );
           globalThis.window.location.reload();
+        }
+
+        if (response.status !== 401) {
+          globalThis.sessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
         }
 
         return response;
