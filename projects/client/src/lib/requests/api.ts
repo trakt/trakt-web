@@ -32,3 +32,13 @@ export const api = ({
     cancellable,
     cancellationId,
   });
+
+export const unauthorizedApi = ({
+  environment = ENV,
+  fetch = globalThis.fetch,
+}: ApiParams = {}) =>
+  traktApi({
+    apiKey: TRAKT_CLIENT_ID,
+    environment,
+    fetch,
+  });

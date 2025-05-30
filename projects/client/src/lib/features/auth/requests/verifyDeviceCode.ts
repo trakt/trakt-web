@@ -1,4 +1,4 @@
-import { api } from '../../../requests/api.ts';
+import { unauthorizedApi } from '../../../requests/api.ts';
 
 import { env } from '$env/dynamic/private';
 import {
@@ -17,7 +17,7 @@ export async function verifyDeviceCode(
   const client_id = env.TRAKT_CLIENT_ID ?? '';
   const client_secret = env.TRAKT_CLIENT_SECRET ?? '';
 
-  const tokenResponse = await api({
+  const tokenResponse = await unauthorizedApi({
     environment: TRAKT_TARGET_ENVIRONMENT,
   }).oauth
     .device
