@@ -35,5 +35,7 @@ export const MovieHereticRatingsResponseMock: RatingsResponse = {
     'rating': 0,
     'user_rating': 0,
     'link': 'https://www.rottentomatoes.com/m/heretic_2023',
+    'state': null,
+    'user_state': null,
   },
 };
