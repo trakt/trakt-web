@@ -24,8 +24,17 @@ function getAuth(event: RequestEvent): SerializedAuthResponse | null {
   }
 }
 
+function isContentRequest(event: RequestEvent) {
+  const acceptHeader = event.request.headers.get('accept');
+  return acceptHeader?.includes('text/html');
+}
+
 // FIXME: split up this file
 export const handle: Handle = async ({ event, resolve }) => {
+  if (!isContentRequest(event)) {
+    return await resolve(event);
+  }
+
   const setAuth = (auth: SerializedAuthResponse | Nil) => {
     event.locals.auth = auth;
   };

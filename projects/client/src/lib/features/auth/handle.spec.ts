@@ -7,9 +7,16 @@ import { describe, expect, it, vi } from 'vitest';
 import { AUTH_COOKIE_NAME, handle } from './handle.ts';
 
 describe('handle: auth', () => {
+  const request = new Request('http://localhost', {
+    headers: {
+      accept: 'text/html',
+    },
+  });
+
   it('should handle logout', async () => {
     const event = mockRequestEvent({
       url: `http://localhost${AuthEndpoint.Logout}`,
+      request,
     });
 
     const response = await handle({ event, resolve: vi.fn() });
@@ -24,6 +31,7 @@ describe('handle: auth', () => {
   it('should handle auth code exchange', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost?code=test-code',
+      request,
     });
 
     const response = await handle({ event, resolve: vi.fn() });
@@ -42,6 +50,7 @@ describe('handle: auth', () => {
   it('should handle invalid cookie contents', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost',
+      request,
       cookieHandler: (key: string) => {
         if (key === AUTH_COOKIE_NAME) {
           return 'invalid';
@@ -61,6 +70,7 @@ describe('handle: auth', () => {
   it('should handle auth cookie', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost',
+      request,
       cookieHandler: (key: string) => {
         if (key === AUTH_COOKIE_NAME) {
           return AuthMock;
@@ -78,6 +88,7 @@ describe('handle: auth', () => {
   it('should handle expiring cookies', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost',
+      request,
       cookieHandler: (key: string) => {
         if (key === AUTH_COOKIE_NAME) {
           return ExpiredAuthMock;
