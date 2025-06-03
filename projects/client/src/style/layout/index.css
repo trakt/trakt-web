@@ -68,4 +68,8 @@
   --layout-distance-side: var(--ni-24);
   --layout-scrollbar-width: var(--ni-8);
   --layout-footer-less-padding: var(--ni-16);
+
+  @-moz-document url-prefix() {
+    --layout-scrollbar-width: var(--ni-16);
+  }
 }
