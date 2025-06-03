@@ -30,6 +30,6 @@ runs:
     - uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.wranglerArtifact }}
-        path: projects/client/wrangler.toml
+        path: projects/client/wrangler.jsonc
         if-no-files-found: error
         retention-days: 1
