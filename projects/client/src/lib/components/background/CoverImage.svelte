@@ -1,13 +1,36 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
+  import { isPWA } from "$lib/utils/devices/isPWA";
   import { useCover } from "./_internal/useCover";
 
   const { cover, state } = useCover();
+  const { observedDimension, observeDimension } =
+    useDimensionObserver("height");
+
+  const isPwaMode = isPWA();
 </script>
 
 {#if $state === "ready"}
+  {#if isPwaMode}
+    <div
+      class="trakt-background-cover-image-mirrored"
+      data-cover-type={$cover.type}
+      use:observeDimension
+      style:--trakt-cover-primary-color={$cover.colors?.at(0)}
+      style:--trakt-cover-secondary-color={$cover.colors?.at(1)}
+      style:--trakt-cover-height={`${$observedDimension}px`}
+    >
+      <CrossOriginImage
+        loading="eager"
+        src={$cover.src}
+        alt={`Background for ${$cover.type}`}
+      />
+    </div>
+  {/if}
   <div
     class="trakt-background-cover-image"
+    class:trakt-background-pwa={isPwaMode}
     data-cover-type={$cover.type}
     style:--trakt-cover-primary-color={$cover.colors?.at(0)}
     style:--trakt-cover-secondary-color={$cover.colors?.at(1)}
@@ -23,6 +46,7 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
+  .trakt-background-cover-image-mirrored,
   .trakt-background-cover-image {
     --trakt-cover-primary-color-transparent: color-mix(
       in srgb,
@@ -39,11 +63,8 @@
     max-height: 100dvh;
     overflow: hidden;
 
-    top: 0;
-    left: 0;
     width: 100%;
     background: var(--shade-900);
-    z-index: var(--layer-background);
 
     &[data-cover-type="main"] {
       --color-transparent-background: transparent;
@@ -74,6 +95,25 @@
         width: 180%;
         left: -40%;
       }
+    }
+  }
+
+  .trakt-background-pwa,
+  .trakt-background-cover-image-mirrored {
+    --trakt-cover-top: calc(var(--navbar-height) + env(safe-area-inset-top, 0));
+  }
+
+  .trakt-background-cover-image-mirrored {
+    transform: scaleY(-1);
+    top: calc(var(--trakt-cover-height) * -1 + var(--trakt-cover-top));
+  }
+
+  .trakt-background-cover-image {
+    top: 0;
+    left: 0;
+
+    &.trakt-background-pwa {
+      top: var(--trakt-cover-top);
     }
 
     &::after,

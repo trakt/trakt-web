@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver.ts";
   import { extractOS } from "$lib/utils/devices/extractOS.ts";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType.ts";
   import { slide } from "svelte/transition";
@@ -6,7 +7,6 @@
   import Button from "../buttons/Button.svelte";
   import DropdownIcon from "./DropdownCaretIcon.svelte";
   import type { TraktDropdownListProps } from "./TraktDropdownListProps.ts";
-  import { useWidthObserver } from "./_internal/useWidthObserver.ts";
 
   const {
     icon: _icon,
@@ -28,7 +28,7 @@
     usePortal(isActuallyNative),
   );
 
-  const { observedWidth, observeWidth } = useWidthObserver();
+  const { observedDimension, observeDimension } = useDimensionObserver("width");
 
   function buildOptionList(element: HTMLElement) {
     const list = Array.from(element.querySelectorAll("li"));
@@ -103,7 +103,7 @@
 <div
   class="trakt-dropdown-wrapper"
   use:portalTrigger
-  use:observeWidth
+  use:observeDimension
   use:shadowNativeSelect
   data-size={size}
 >
@@ -131,7 +131,7 @@
   <div
     class="trakt-list"
     data-size={size}
-    style="--button-width: {$observedWidth}px"
+    style="--button-width: {$observedDimension}px"
     transition:slide={{ duration: 150 }}
     use:portal
   >
