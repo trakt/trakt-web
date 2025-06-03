@@ -1,4 +1,4 @@
-name: The Trial of Truth aka CI
+name: The Grand Inquisition and Divine Deployment aka CI/CD
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
               - 'projects/client/deno.json'
               - 'projects/client/svelte.config.js'
               - 'projects/client/vite.config.ts'
-              - 'projects/client/wrangler.toml'
+              - 'projects/client/wrangler.jsonc'
             workflows:
               - '.github/workflows/**'
               - '.github/actions/**'
@@ -141,11 +141,23 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
-
-      - name: Delivering the Goods aka Upload Build
+      
+      # Add this new step to copy the .npmrc file
+      - name: The Ancient Scroll of JSR aka Copy .npmrc
+        run: |
+          cp .npmrc projects/client/
+          echo "THE SCROLL OF KNOWLEDGE HAS BEEN TRANSCRIBED:"
+          cat projects/client/.npmrc
+          
+      - name: Invoking the Cloudflare Spirits
         if: github.ref == 'refs/heads/main'
-        uses: ./.github/actions/upload-output
+        uses: cloudflare/wrangler-action@v3
         with:
-          buildArtifact: pandoras-archive
-          cloudflareArtifact: the-edge-awakened
-          wranglerArtifact: the-edge-config
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: projects/client
+          wranglerVersion: latest
+          command: deploy
+          preCommands: |
+            echo "${{ secrets.TRAKT_CLIENT_ID }}" | npx wrangler secret put TRAKT_CLIENT_ID
+            echo "${{ secrets.TRAKT_CLIENT_SECRET }}" | npx wrangler secret put TRAKT_CLIENT_SECRET
