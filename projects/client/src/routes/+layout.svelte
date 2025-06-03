@@ -267,4 +267,9 @@
       @include pwa-navbar-shadow(fixed);
     }
   }
+
+  :global([data-mobile-os="ios"]:has(body.trakt-pwa)),
+  :global([data-mobile-os="ios"] body.trakt-pwa) {
+    overscroll-behavior-y: none;
+  }
 </style>
