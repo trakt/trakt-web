@@ -207,14 +207,14 @@
   .trakt-navbar-scroll,
   .trakt-navbar-pwa {
     background-color: var(--color-background-navbar);
-    backdrop-filter: blur(var(--ni-8));
+    @include backdrop-filter-blur(var(--ni-8));
   }
 
   .trakt-navbar-scroll:not(.trakt-navbar-pwa) {
     box-shadow: 0px 24px 64px 0px
       color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
 
-    backdrop-filter: blur(8px);
+    @include backdrop-filter-blur(8px);
 
     color: var(--color-foreground-navbar);
 

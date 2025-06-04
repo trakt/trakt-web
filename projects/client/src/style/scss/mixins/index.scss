@@ -64,3 +64,7 @@
     }
   }
 }
+
+@mixin backdrop-filter-blur($blur) {
+  backdrop-filter: blur($blur);
+}

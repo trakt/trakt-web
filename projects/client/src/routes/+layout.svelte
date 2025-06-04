@@ -222,7 +222,7 @@
         transparent 100%
       );
       border-radius: var(--border-radius-xs);
-      backdrop-filter: blur(var(--ni-4));
+      @include backdrop-filter-blur(var(--ni-4));
       opacity: 0;
     }
 

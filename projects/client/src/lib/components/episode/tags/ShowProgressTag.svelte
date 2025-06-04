@@ -25,7 +25,9 @@
   </TagContent>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index.scss" as *;
+
   .show-progress-tag {
     width: 100%;
   }
@@ -53,7 +55,7 @@
 
       position: relative;
       background: var(--color-background-progress-base-tag);
-      backdrop-filter: blur(var(--ni-16));
+      @include backdrop-filter-blur(var(--ni-16));
       color: var(--color-text-progress-tag);
     }
   }

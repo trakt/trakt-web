@@ -159,7 +159,7 @@
 
     &:not([data-cover-type="main"]) {
       &::after {
-        backdrop-filter: blur(var(--ni-2));
+        @include backdrop-filter-blur(var(--ni-2));
 
         @include for-tablet-sm-and-below {
           backdrop-filter: unset;
