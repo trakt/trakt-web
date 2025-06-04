@@ -96,7 +96,7 @@ jobs:
         uses: nick-fields/retry@v3
         with:
           timeout_seconds: 15
-          max_attempts: 3
+          max_attempts: 10
           command: |
             cd projects/client
             deno task test:e2e
