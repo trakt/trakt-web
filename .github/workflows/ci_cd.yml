@@ -73,19 +73,46 @@ jobs:
         working-directory: projects/client
         run: 'deno task check'
 
+      - name: Trial by Deep Source
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+          key: javascript
+          coverage-file: ${{github.workspace}}/projects/client/coverage/lcov.info
+          dsn: ${{ secrets.DEEPSOURCE_DSN }}
+
+  e2e:
+    needs: files-changed
+    if: ${{
+      github.ref != 'refs/heads/main' &&
+        (
+          needs.files-changed.outputs.client_source == 'true' ||
+          needs.files-changed.outputs.workflows == 'true'
+        )
+      }}
+    name: The Trials of Interface (E2E)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: e2e-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
       - name: The Phantom Browsers Materialize aka Install Browsers
         working-directory: projects/client
         run: 'deno run -A npm:@playwright/test install chromium'
 
       - name: Whispers of the Future aka Preview Build
         working-directory: projects/client
-        if: github.ref != 'refs/heads/main'
         run: 'deno task build:preview'
         env:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
 
-      - name: Witnessing the Premonition ake Run Preview
-        if: github.ref != 'refs/heads/main'
+      - name: Witnessing the Premonition aka Run Preview
         working-directory: projects/client
         run: |
           deno task preview &
@@ -95,7 +122,6 @@ jobs:
           TRAKT_CLIENT_SECRET: ${{ secrets.TRAKT_CLIENT_SECRET }}
 
       - name: The Verdict on the Interface aka E2E Tests
-        if: github.ref != 'refs/heads/main'
         uses: nick-fields/retry@v3
         with:
           timeout_seconds: 15
@@ -112,20 +138,13 @@ jobs:
         working-directory: projects/client
         run: kill $(cat server.pid)
 
-      - name: Trial by Deep Source
-        uses: deepsourcelabs/test-coverage-action@master
-        with:
-          key: javascript
-          coverage-file: ${{github.workspace}}/projects/client/coverage/lcov.info
-          dsn: ${{ secrets.DEEPSOURCE_DSN }}
-
   build:
     name: The Forge (Build)
     runs-on: ubuntu-latest
     concurrency:
       group: ci-${{ github.ref }}
       cancel-in-progress: true
-    needs: test
+    needs: [test, e2e]
 
     steps:
       - name: Secure the Evidence aka Checkout Code
