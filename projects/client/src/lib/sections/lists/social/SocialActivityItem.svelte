@@ -28,7 +28,9 @@
   <ActivitySummaryCard {activity} activityAt={activity.activityAt} {badge} />
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index.scss" as *;
+
   .user-profile-badge {
     max-width: calc(100% - var(--ni-32));
     display: flex;
@@ -36,7 +38,7 @@
     align-items: center;
 
     padding: 0 var(--ni-4);
-    backdrop-filter: blur(var(--ni-8));
+    @include backdrop-filter-blur(var(--ni-8));
     background: color-mix(in srgb, var(--color-background) 50%, transparent);
     border-radius: var(--border-radius-m);
     overflow: hidden;

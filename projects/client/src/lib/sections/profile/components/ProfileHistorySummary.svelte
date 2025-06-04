@@ -42,7 +42,7 @@
     border-radius: var(--ni-12);
     color: var(--color-text-primary);
     background-color: color-mix(in srgb, var(--purple-500), transparent 85%);
-    backdrop-filter: blur(var(--ni-16));
+    @include backdrop-filter-blur(var(--ni-16));
     padding: var(--ni-24);
     display: flex;
     flex-direction: column;

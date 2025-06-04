@@ -157,7 +157,7 @@
         var(--color-background) 75%,
         transparent 25%
       );
-      backdrop-filter: blur(var(--ni-8));
+      @include backdrop-filter-blur(var(--ni-8));
 
       transition: var(--transition-increment) ease-in-out;
       transition-property:

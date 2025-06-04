@@ -87,7 +87,7 @@
 
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
       color-mix(in srgb, var(--color-shadow) 25%, transparent 75%);
-    backdrop-filter: blur(var(--ni-16));
+    @include backdrop-filter-blur(var(--ni-16));
 
     background-color: var(--color-now-playing-background);
     border: var(--border-thickness-xxs) solid var(--color-now-playing-border);

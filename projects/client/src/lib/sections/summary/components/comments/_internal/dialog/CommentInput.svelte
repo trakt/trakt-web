@@ -74,7 +74,9 @@
   {/if}
 </trakt-comment-input>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index.scss" as *;
+
   trakt-comment-input {
     display: flex;
     flex-direction: column;
@@ -95,7 +97,7 @@
     border-radius: var(--border-radius-s);
     border: var(--ni-2) var(--purple-50) solid;
 
-    backdrop-filter: blur(var(--ni-4));
+    @include backdrop-filter-blur(var(--ni-4));
     color: var(--color-text-primary);
 
     transition: border-color var(--transition-increment) ease-in-out;

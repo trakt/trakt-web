@@ -38,7 +38,9 @@
 
 <div class="trakt-mobile-navbar-spacer"></div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index.scss" as *;
+
   .trakt-mobile-navbar-spacer,
   .trakt-mobile-navbar {
     padding: var(--ni-12) 0;
@@ -57,7 +59,7 @@
     background-color: var(--color-background-mobile-navbar);
     box-shadow: 0px -24px 64px 0px
       color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
-    backdrop-filter: blur(8px);
+    @include backdrop-filter-blur(8px);
 
     display: flex;
     justify-content: center;

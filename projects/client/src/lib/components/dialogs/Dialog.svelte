@@ -43,7 +43,9 @@
   </div>
 </dialog>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index.scss" as *;
+
   dialog {
     all: unset;
 
@@ -70,7 +72,7 @@
       var(--color-background) 88%,
       transparent 12%
     );
-    backdrop-filter: blur(var(--ni-8));
+    @include backdrop-filter-blur(var(--ni-8));
 
     opacity: 0;
   }
