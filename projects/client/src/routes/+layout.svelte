@@ -30,6 +30,7 @@
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
   import { onMount } from "svelte";
+  import FirefoxBlurHack from "./_internal/FirefoxBlurHack.svelte";
 
   const { data, children } = $props();
 
@@ -161,6 +162,7 @@
                                 buttonPosition="bottom-left"
                                 styleNonce="opacity: 0.5"
                               />
+                              <FirefoxBlurHack />
                             </ListScrollHistoryProvider>
                           </ThemeProvider>
                         </CoverProvider>
