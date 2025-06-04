@@ -35,16 +35,12 @@
     {...props}
   />
   <Tooltip
-    open={$isTooltipVisible}
+    isOpen={$isTooltipVisible}
     placement="bottom"
     trigger="click"
-    type="custom"
+    type={undefined}
     class="trakt-tooltip"
-    color="none"
-    shadow={false}
-    rounded={false}
     arrow={false}
-    defaultClass=""
   >
     <p class="small">{tooltip}</p>
   </Tooltip>
@@ -53,6 +49,8 @@
 <style>
   .trakt-lab-switch {
     :global(.trakt-tooltip) {
+      all: unset;
+
       z-index: var(--layer-overlay);
       max-width: var(--ni-276);
 
