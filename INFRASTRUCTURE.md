@@ -41,15 +41,15 @@ Navigate to the `projects/client/` directory and run:
 
 ```sh
 # This is required if the secrets are not already set or have changed
-echo "$TRAKT_CLIENT_ID" | npx wrangler pages secret put TRAKT_CLIENT_ID
-echo "$TRAKT_CLIENT_SECRET" | npx wrangler pages secret put TRAKT_CLIENT_SECRET
+echo "$TRAKT_CLIENT_ID" | npx wrangler secret put TRAKT_CLIENT_ID
+echo "$TRAKT_CLIENT_SECRET" | npx wrangler secret put TRAKT_CLIENT_SECRET
 
-# This will build the client and deploy it to Cloudflare Pages
-[deno|npm|bun] task build && npx wrangler pages deploy
+# This will build the client and deploy it to Cloudflare Workers
+[deno|npm|bun] task build && npx wrangler deploy
 ```
 
 **NOTE:** Try to avoid running production deployments from your local machine.
-The `CD` pipeline automatically deploys the client to Cloudflare Pages. This
-command is primarily intended for creating
+The `CI/CD` pipeline automatically deploys the client to Cloudflare Workers.
+This command is primarily intended for creating
 [preview environments](https://developers.cloudflare.com/pages/configuration/preview-deployments/)
 where your team can review changes before they go live.
