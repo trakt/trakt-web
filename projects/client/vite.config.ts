@@ -81,14 +81,13 @@ export default defineConfig(({ mode }) => ({
   },
 
   plugins: [
-    sveltekit(),
+    enhancedImages(),
     paraglideVitePlugin({
       project: './i18n/project.inlang',
       outdir: './src/lib/paraglide',
     }),
     denoSveltekitExit(),
-    svelteTesting(),
-    enhancedImages(),
+    sveltekit(),
     SvelteKitPWA({
       injectRegister: 'script-defer',
       strategies: 'injectManifest',
@@ -103,6 +102,7 @@ export default defineConfig(({ mode }) => ({
         enabled: true,
       },
     }),
+    svelteTesting(),
   ],
   //TODO enable globals when typings are fixed
   test: {

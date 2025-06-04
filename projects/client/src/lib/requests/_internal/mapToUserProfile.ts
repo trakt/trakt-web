@@ -13,8 +13,8 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     username: user.username,
     name: toUserName(user.name),
     private: user.private,
-    isVip: user.vip || user.vip_ep,
-    isDirector: user.director,
+    isVip: Boolean(user.vip ?? user.vip_ep),
+    isDirector: Boolean(user.director),
     isDeleted: user.deleted,
     slug: user.ids.slug,
     avatar: {

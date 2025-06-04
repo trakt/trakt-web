@@ -1,6 +1,22 @@
 import { type MediaVideo } from '$lib/requests/models/MediaVideo.ts';
 import { checksum } from '$lib/utils/string/checksum.ts';
 import type { VideoResponse } from '@trakt/api';
+
+// FIXME: figure out why the response type is not the enum
+function mapToVideoType(type: string): MediaVideo['type'] {
+  switch (type) {
+    case 'trailer':
+    case 'clip':
+    case 'teaser':
+    case 'featurette':
+    case 'recap':
+    case 'behind the scenes':
+    case 'opening credits':
+      return type as MediaVideo['type'];
+    default:
+      throw new Error(`Unknown video type: ${type}`);
+  }
+}
 export function mapToMediaVideo(
   video: VideoResponse,
 ): MediaVideo {
@@ -14,7 +30,7 @@ export function mapToMediaVideo(
   return {
     id: checksum(video.url),
     title: video.title,
-    type: video.type,
+    type: mapToVideoType(video.type),
     url: video.url,
     thumbnail,
     publishedAt: new Date(video.published_at),
