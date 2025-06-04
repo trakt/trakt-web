@@ -79,11 +79,13 @@ jobs:
 
       - name: Whispers of the Future aka Preview Build
         working-directory: projects/client
+        if: github.ref != 'refs/heads/main'
         run: 'deno task build:preview'
         env:
           TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
 
       - name: Witnessing the Premonition ake Run Preview
+        if: github.ref != 'refs/heads/main'
         working-directory: projects/client
         run: |
           deno task preview &
@@ -93,6 +95,7 @@ jobs:
           TRAKT_CLIENT_SECRET: ${{ secrets.TRAKT_CLIENT_SECRET }}
 
       - name: The Verdict on the Interface aka E2E Tests
+        if: github.ref != 'refs/heads/main'
         uses: nick-fields/retry@v3
         with:
           timeout_seconds: 15
