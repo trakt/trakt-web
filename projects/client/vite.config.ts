@@ -82,12 +82,12 @@ export default defineConfig(({ mode }) => ({
 
   plugins: [
     enhancedImages(),
+    sveltekit(),
     paraglideVitePlugin({
       project: './i18n/project.inlang',
       outdir: './src/lib/paraglide',
     }),
     denoSveltekitExit(),
-    sveltekit(),
     SvelteKitPWA({
       injectRegister: 'script-defer',
       strategies: 'injectManifest',
