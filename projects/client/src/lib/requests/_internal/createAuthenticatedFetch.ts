@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
@@ -54,7 +55,7 @@ export function createAuthenticatedFetch<
           globalThis.window.location.reload();
         }
 
-        if (response.status !== 401) {
+        if (response.status !== 401 && browser) {
           globalThis.sessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
         }
 
