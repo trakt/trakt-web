@@ -1,13 +1,13 @@
-import { browser } from '$app/environment';
 import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
+import { safeSessionStorage } from '../../utils/storage/safeStorage.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
 
 function shouldReloadPage(expiresAt: number | Nil) {
   if (
-    !expiresAt || globalThis.sessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY)
+    !expiresAt || safeSessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY)
   ) {
     return false;
   }
@@ -48,15 +48,15 @@ export function createAuthenticatedFetch<
         } as Parameters<T>[1],
       ).then((response) => {
         if (response.status === 401 && shouldReloadPage(expiresAt)) {
-          globalThis.sessionStorage.setItem(
+          safeSessionStorage.setItem(
             SESSION_STORAGE_REFRESH_KEY,
             'true',
           );
           globalThis.window.location.reload();
         }
 
-        if (response.status !== 401 && browser) {
-          globalThis.sessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
+        if (response.status !== 401) {
+          safeSessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
         }
 
         return response;

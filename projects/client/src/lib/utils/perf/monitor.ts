@@ -1,5 +1,6 @@
 import { print, PrintTarget } from '$lib/utils/console/print.ts';
 import { IS_PROD } from '$lib/utils/env/index.ts';
+import { safeLocalStorage } from '../storage/safeStorage.ts';
 
 export function monitor<
   TThis = unknown,
@@ -13,7 +14,7 @@ export function monitor<
     return fn;
   }
 
-  if (localStorage.getItem('debug:monitor') !== 'true') {
+  if (safeLocalStorage.getItem('debug:monitor') !== 'true') {
     return fn;
   }
 

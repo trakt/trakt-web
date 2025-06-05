@@ -1,4 +1,5 @@
 import { getContext, setContext } from 'svelte';
+import { safeSessionStorage } from '../../../utils/storage/safeStorage.ts';
 
 const SCROLL_HISTORY_CONTEXT_KEY = Symbol('scroll-history');
 
@@ -44,11 +45,12 @@ export function useScrollHistory() {
         {
           readScrollState: (id: string) => {
             return parseInt(
-              sessionStorage.getItem(`${SCROLL_HISTORY_PREFIX}-${id}`) ?? '0',
+              safeSessionStorage.getItem(`${SCROLL_HISTORY_PREFIX}-${id}`) ??
+                '0',
             );
           },
           writeScrollState: (id: string, value: number) => {
-            sessionStorage.setItem(
+            safeSessionStorage.setItem(
               `${SCROLL_HISTORY_PREFIX}-${id}`,
               value.toString(),
             );
