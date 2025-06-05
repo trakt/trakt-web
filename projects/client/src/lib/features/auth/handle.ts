@@ -29,9 +29,18 @@ function isContentRequest(event: RequestEvent) {
   return acceptHeader?.includes('text/html');
 }
 
+function isAuthEndpointRequest(event: RequestEvent) {
+  const authPaths = [
+    ...Object.values(AuthDeviceEndpoint),
+    ...Object.values(AuthEndpoint),
+  ];
+
+  return authPaths.some((path) => event.url.pathname.startsWith(path));
+}
+
 // FIXME: split up this file
 export const handle: Handle = async ({ event, resolve }) => {
-  if (!isContentRequest(event)) {
+  if (!isContentRequest(event) && !isAuthEndpointRequest(event)) {
     return await resolve(event);
   }
 
