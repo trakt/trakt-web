@@ -2,9 +2,9 @@ import { ThemeEndpoint } from '$lib/features/theme/ThemeEndpoint.ts';
 import { THEME_COOKIE_NAME } from '$lib/features/theme/constants.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
+import { getDeviceType } from '$lib/utils/devices/getDeviceType.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
-import { getDeviceType } from '../../utils/devices/getDeviceType.ts';
 
 export const THEME_PLACEHOLDER = '%theme.current%';
 

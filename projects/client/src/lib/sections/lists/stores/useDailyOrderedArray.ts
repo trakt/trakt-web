@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
+import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { get } from 'svelte/store';
-import { safeLocalStorage } from '../../../utils/storage/safeStorage.ts';
 import { type Identity, useOrderedArray } from './useOrderedArray.ts';
 
 export type DailyOrderArrayOptions<T> = {

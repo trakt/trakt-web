@@ -1,6 +1,6 @@
 import { page } from '$app/state';
+import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { get } from 'svelte/store';
-import { safeLocalStorage } from '../../utils/storage/safeStorage.ts';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
 import { useParameters } from '../parameters/useParameters.ts';
 import { getDefaultFilters } from './_internal/getDefaultFilters.ts';

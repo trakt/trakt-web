@@ -1,5 +1,5 @@
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { get, writable } from 'svelte/store';
-import { assertDefined } from '../../utils/assert/assertDefined.ts';
 import { focusAndScrollIntoView } from './_internal/focusAndScrollIntoView.ts';
 import { focusElement } from './_internal/focusElement.ts';
 import { getRelevantItem } from './_internal/getRelevantItem.ts';

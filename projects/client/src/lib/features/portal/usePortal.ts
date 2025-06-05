@@ -3,9 +3,9 @@ import { PopupState } from '$lib/features/portal/_internal/models/PopupState.ts'
 import { openPopupContainer } from '$lib/features/portal/_internal/openPopupContainer.ts';
 import { usePopupHelpers } from '$lib/features/portal/_internal/usePopupHelpers.ts';
 import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { onMount } from 'svelte';
 import { derived, get, readable, writable } from 'svelte/store';
-import { NOOP_FN } from '../../utils/constants.ts';
 
 export function usePortal(disabled?: boolean) {
   if (disabled) {

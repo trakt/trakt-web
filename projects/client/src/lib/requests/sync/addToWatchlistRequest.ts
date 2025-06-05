@@ -1,6 +1,6 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { setMarker } from '$lib/utils/date/Marker.ts';
 import type { WatchlistRequest } from '@trakt/api';
-import { setMarker } from '../../utils/date/Marker.ts';
 
 type AddToWatchlistParams = {
   body: WatchlistRequest;

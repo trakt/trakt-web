@@ -1,5 +1,5 @@
+import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 import { getContext, setContext } from 'svelte';
-import { safeSessionStorage } from '../../../utils/storage/safeStorage.ts';
 
 const SCROLL_HISTORY_CONTEXT_KEY = Symbol('scroll-history');
 

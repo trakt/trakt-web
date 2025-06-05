@@ -3,9 +3,9 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
+import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
-import { safeLocalStorage } from '../../../utils/storage/safeStorage.ts';
 
 export type UpNextType = 'standard' | 'nitro';
 

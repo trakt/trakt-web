@@ -1,8 +1,8 @@
+import { monitor } from '$lib/utils/perf/monitor.ts';
 import type {
   PersistedClient,
   Persister,
 } from '@tanstack/svelte-query-persist-client';
-import { monitor } from '../../../utils/perf/monitor.ts';
 
 /**
  * Creates an in-memory persister without size limits
