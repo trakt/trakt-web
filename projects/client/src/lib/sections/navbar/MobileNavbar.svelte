@@ -59,11 +59,12 @@
     background-color: var(--color-background-mobile-navbar);
     box-shadow: 0px -24px 64px 0px
       color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
-    @include backdrop-filter-blur(8px);
 
     display: flex;
     justify-content: center;
     gap: var(--gap-m);
+
+    @include backdrop-filter-blur(8px);
   }
 
   .trakt-mobile-navbar-link {

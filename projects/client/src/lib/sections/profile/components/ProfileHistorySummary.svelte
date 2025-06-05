@@ -42,13 +42,14 @@
     border-radius: var(--ni-12);
     color: var(--color-text-primary);
     background-color: color-mix(in srgb, var(--purple-500), transparent 85%);
-    @include backdrop-filter-blur(var(--ni-16));
     padding: var(--ni-24);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: var(--gap-xs);
     box-shadow: 0 var(--ni-4) var(--ni-8) 0 rgba(0, 0, 0, 0.24);
+
+    @include backdrop-filter-blur(var(--ni-16));
   }
 
   .trakt-profile-history-content {

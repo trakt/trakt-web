@@ -224,8 +224,9 @@
         transparent 100%
       );
       border-radius: var(--border-radius-xs);
-      @include backdrop-filter-blur(var(--ni-4));
       opacity: 0;
+
+      @include backdrop-filter-blur(var(--ni-4));
     }
 
     :global(:hover::-webkit-scrollbar-thumb) {

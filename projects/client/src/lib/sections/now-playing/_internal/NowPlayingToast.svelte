@@ -87,13 +87,14 @@
 
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
       color-mix(in srgb, var(--color-shadow) 25%, transparent 75%);
-    @include backdrop-filter-blur(var(--ni-16));
 
     background-color: var(--color-now-playing-background);
     border: var(--border-thickness-xxs) solid var(--color-now-playing-border);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: padding, gap;
+
+    @include backdrop-filter-blur(var(--ni-16));
 
     @include for-tablet-sm-and-below {
       --now-playing-bottom-distance: calc(

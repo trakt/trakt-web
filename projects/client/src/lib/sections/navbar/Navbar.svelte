@@ -214,8 +214,6 @@
     box-shadow: 0px 24px 64px 0px
       color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
 
-    @include backdrop-filter-blur(8px);
-
     color: var(--color-foreground-navbar);
 
     /** 
@@ -226,6 +224,8 @@
     :global(.trakt-button[data-style="underlined"]) {
       color: var(--color-foreground-navbar);
     }
+
+    @include backdrop-filter-blur(8px);
 
     @include for-mouse {
       :global(.trakt-button[data-style="underlined"]) {
