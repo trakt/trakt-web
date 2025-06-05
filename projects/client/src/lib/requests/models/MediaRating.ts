@@ -12,7 +12,7 @@ export const MediaRatingSchema = z.object({
   }),
   rotten: z.object({
     critic: z.number(),
-    audience: z.number().nullable(),
+    audience: z.number().nullish(),
     url: HttpsUrlSchema.nullish(),
   }).optional(),
   imdb: z.object({

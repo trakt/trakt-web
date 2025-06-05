@@ -13,7 +13,7 @@ export const MediaCommentSchema = z.object({
   likeCount: z.number(),
   user: UserProfileSchema.extend({
     stats: z.object({
-      rating: z.number().nullable(),
+      rating: z.number().nullish(),
       playCount: z.number(),
       completedCount: z.number(),
     }),

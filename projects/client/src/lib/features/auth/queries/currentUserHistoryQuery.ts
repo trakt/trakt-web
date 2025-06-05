@@ -53,7 +53,7 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
   const { show, last_watched_at, plays, seasons = [] } = entry;
   const aired = entry.show.aired_episodes;
 
-  const episodes = seasons
+  const episodes = (seasons ?? [])
     .flatMap((season) =>
       season.episodes.map((episode) => ({
         season: season.number,

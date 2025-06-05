@@ -37,10 +37,10 @@ export const MediaEntrySchema = z.object({
   overview: z.string(),
   trailer: z.string(),
   airDate: z.date(),
-  certification: z.string().optional(),
+  certification: z.string().nullish(),
   votes: z.number(),
   colors: z.tuple([z.string(), z.string()]),
-  plexSlug: z.string().optional(),
+  plexSlug: z.string().nullish(),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;
