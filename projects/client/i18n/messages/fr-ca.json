@@ -424,5 +424,7 @@
   "filter_save": "Sauvegarder",
   "filter_save_label": "Enregistrer les filtres",
   "error_page_locked_account_title": "Compte verrouillé",
-  "error_page_locked_account_message": "Votre compte est verrouillé, <a>contactez le soutien</a> pour résoudre ce problème."
+  "error_page_locked_account_message": "Votre compte est verrouillé, <a>contactez le soutien</a> pour résoudre ce problème.",
+  "first_play_this_month": "Première lecture ce mois-ci",
+  "shows_watched": "{count} séries visionnées"
 }

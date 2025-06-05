@@ -154,8 +154,10 @@ export const UrlBuilder = {
     getVip: () => 'https://trakt.tv/vip',
     site: () => 'https://trakt.tv',
     status: () => 'https://status.trakt.tv',
-    monthInReview: (slug: string, token: string) =>
-      `https://trakt.tv/users/${slug}/mir?slurm=${token}`,
+    monthInReview: (slug: string, token: string | Nil) => {
+      const url = `https://trakt.tv/users/${slug}/mir`;
+      return token ? `${url}?slurm=${token}` : url;
+    },
     privacy: () => 'https://trakt.tv/privacy',
     support: () => 'mailto:support@trakt.tv',
     frame: {

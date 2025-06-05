@@ -424,5 +424,7 @@
   "filter_save": "Zapisz",
   "filter_save_label": "Zapisz filtry",
   "error_page_locked_account_title": "Konto zablokowane",
-  "error_page_locked_account_message": "Twoje konto jest zablokowane, <a>skontaktuj się z pomocą techniczną</a>, aby rozwiązać ten problem."
+  "error_page_locked_account_message": "Twoje konto jest zablokowane, <a>skontaktuj się z pomocą techniczną</a>, aby rozwiązać ten problem.",
+  "first_play_this_month": "Pierwsze odtworzenie w tym miesiącu",
+  "shows_watched": "{count} obejrzanych seriali"
 }

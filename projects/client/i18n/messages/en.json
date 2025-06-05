@@ -424,5 +424,7 @@
   "filter_save": "Save",
   "filter_save_label": "Save filters",
   "error_page_locked_account_title": "Account locked",
-  "error_page_locked_account_message": "Your account is locked, <a>contact support</a> to resolve this issue."
+  "error_page_locked_account_message": "Your account is locked, <a>contact support</a> to resolve this issue.",
+  "first_play_this_month": "First play this month",
+  "shows_watched": "{count} shows watched"
 }

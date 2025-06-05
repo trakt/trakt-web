@@ -424,5 +424,7 @@
   "filter_save": "Gem",
   "filter_save_label": "Gem filtre",
   "error_page_locked_account_title": "Konto blokeret",
-  "error_page_locked_account_message": "Din konto er låst, <a>kontakt support</a> for at løse dette problem."
+  "error_page_locked_account_message": "Din konto er låst, <a>kontakt support</a> for at løse dette problem.",
+  "first_play_this_month": "Første afspilning denne måned",
+  "shows_watched": "{count} serier set"
 }
