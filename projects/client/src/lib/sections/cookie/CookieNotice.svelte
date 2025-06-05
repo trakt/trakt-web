@@ -74,8 +74,6 @@
     padding-left: var(--ni-40);
 
     width: min(var(--ni-480), 85%);
-
-    @include backdrop-filter-blur(var(--ni-16));
     background-color: var(--color-cookie-background);
     box-shadow:
       0px 280px 78px 0px color-mix(in srgb, var(--color-shadow) 0%, transparent),
@@ -100,6 +98,8 @@
       line-height: 1;
     }
 
+    @include backdrop-filter-blur(var(--ni-16));
+
     @include for-mobile {
       padding-left: var(--ni-24);
       padding-top: var(--ni-40);
@@ -122,11 +122,12 @@
     right: 0;
     bottom: 0;
 
-    @include backdrop-filter-blur(var(--ni-8));
     background-color: color-mix(
       in srgb,
       var(--color-cookie-background) 70%,
       transparent 30%
     );
+
+    @include backdrop-filter-blur(var(--ni-8));
   }
 </style>

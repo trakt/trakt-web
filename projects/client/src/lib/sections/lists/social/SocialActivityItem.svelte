@@ -38,11 +38,11 @@
     align-items: center;
 
     padding: 0 var(--ni-4);
-    @include backdrop-filter-blur(var(--ni-8));
     background: color-mix(in srgb, var(--color-background) 50%, transparent);
     border-radius: var(--border-radius-m);
     overflow: hidden;
 
+    @include backdrop-filter-blur(var(--ni-8));
     :global(.trakt-link) {
       max-width: 75%;
     }

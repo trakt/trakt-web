@@ -97,10 +97,11 @@
     border-radius: var(--border-radius-s);
     border: var(--ni-2) var(--purple-50) solid;
 
-    @include backdrop-filter-blur(var(--ni-4));
     color: var(--color-text-primary);
 
     transition: border-color var(--transition-increment) ease-in-out;
+
+    @include backdrop-filter-blur(var(--ni-4));
 
     textarea {
       all: unset;

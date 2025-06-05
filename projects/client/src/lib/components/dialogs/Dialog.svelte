@@ -72,9 +72,9 @@
       var(--color-background) 88%,
       transparent 12%
     );
-    @include backdrop-filter-blur(var(--ni-8));
-
     opacity: 0;
+
+    @include backdrop-filter-blur(var(--ni-8));
   }
 
   @keyframes dialogOpen {

@@ -157,12 +157,12 @@
         var(--color-background) 75%,
         transparent 25%
       );
-      @include backdrop-filter-blur(var(--ni-8));
 
       transition: var(--transition-increment) ease-in-out;
       transition-property:
         border-color, background-color, padding, width, top, left, opacity;
 
+      @include backdrop-filter-blur(var(--ni-8));
       @include for-mobile {
         width: var(--search-icon-size);
         position: absolute;
