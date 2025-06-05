@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { get } from 'svelte/store';
+import { safeLocalStorage } from '../../../utils/storage/safeStorage.ts';
 import { type Identity, useOrderedArray } from './useOrderedArray.ts';
 
 export type DailyOrderArrayOptions<T> = {
@@ -14,11 +15,7 @@ function getTodayKey() {
 }
 
 function getCachedOrder(key: string): Record<string, Identity[]> {
-  if (!browser) {
-    return {};
-  }
-
-  const stored = localStorage.getItem(key);
+  const stored = safeLocalStorage.getItem(key);
   return stored ? JSON.parse(stored) : {};
 }
 
@@ -29,7 +26,7 @@ function saveCachedOrder(key: string, ids: Identity[]) {
 
   const today = getTodayKey();
 
-  localStorage.setItem(key, JSON.stringify({ [today]: ids }));
+  safeLocalStorage.setItem(key, JSON.stringify({ [today]: ids }));
 }
 
 export function useDailyOrderedArray<T>(

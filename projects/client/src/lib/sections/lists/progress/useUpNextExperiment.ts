@@ -5,6 +5,7 @@ import { NOOP_FN } from '$lib/utils/constants.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
+import { safeLocalStorage } from '../../../utils/storage/safeStorage.ts';
 
 export type UpNextType = 'standard' | 'nitro';
 
@@ -12,11 +13,7 @@ const DEFAULT_UP_NEXT_TYPE: UpNextType = 'nitro';
 const UP_NEXT_STORAGE_KEY = 'up-next-type-v2';
 
 function getCachedUpNextType(): UpNextType {
-  if (!browser) {
-    return DEFAULT_UP_NEXT_TYPE;
-  }
-
-  const stored = localStorage.getItem(UP_NEXT_STORAGE_KEY);
+  const stored = safeLocalStorage.getItem(UP_NEXT_STORAGE_KEY);
   return stored ? JSON.parse(stored) : DEFAULT_UP_NEXT_TYPE;
 }
 
@@ -25,7 +22,7 @@ function saveCachedUpNextType(type: UpNextType) {
     return;
   }
 
-  localStorage.setItem(UP_NEXT_STORAGE_KEY, JSON.stringify(type));
+  safeLocalStorage.setItem(UP_NEXT_STORAGE_KEY, JSON.stringify(type));
 }
 
 function updateCachedUpNextType(
