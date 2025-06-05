@@ -1,7 +1,7 @@
 import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
-import { safeSessionStorage } from '../../utils/storage/safeStorage.ts';
+import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
 

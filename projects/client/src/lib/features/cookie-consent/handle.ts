@@ -1,5 +1,5 @@
+import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
-import { time } from '../../utils/timing/time.ts';
 import { CookieConsentEndpoint } from './CookieConsentEndpoint.ts';
 import { COOKIE_CONSENT_COOKIE_NAME } from './constants.ts';
 

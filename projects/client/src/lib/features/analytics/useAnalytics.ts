@@ -1,8 +1,8 @@
 import type { AnalyticsEngine } from '$lib/features/analytics/_internal/AnalyticsEngine.ts';
 import type { AnalyticsData } from '$lib/features/analytics/AnalyticsData.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { NOOP_FN } from '$lib/utils/constants.ts';
 import { getContext } from 'svelte';
-import { assertDefined } from '../../utils/assert/assertDefined.ts';
-import { NOOP_FN } from '../../utils/constants.ts';
 
 export const ANALYTICS_CONTEXT = Symbol('analytics');
 

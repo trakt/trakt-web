@@ -1,9 +1,9 @@
 import { requestDeviceCode } from '$lib/features/auth/requests/requestDeviceCode.ts';
+import { IS_DEV } from '$lib/utils/env/index.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
-import { IS_DEV } from '../../utils/env/index.ts';
-import { buildOAuthUrl } from '../../utils/url/buildOAuthLink.ts';
 import { AuthDeviceEndpoint } from './AuthDeviceEndpoint.ts';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import type {

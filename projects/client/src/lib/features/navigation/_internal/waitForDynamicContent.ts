@@ -1,5 +1,5 @@
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { assertDefined } from '../../../utils/assert/assertDefined.ts';
 import { getNavigationScope } from './getNavigationScope.ts';
 
 export const MAX_WAIT_TIME = time.seconds(5);
