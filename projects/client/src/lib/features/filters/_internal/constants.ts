@@ -34,7 +34,7 @@ const STREAMING_FILTER: Filter = {
     { label: m.watchnow_favorites_only(), value: 'favorites' },
     {
       label: m.watchnow_streaming(),
-      value: 'any_subscriptions',
+      value: 'subscriptions',
     },
     { label: m.watchnow_digital_release(), value: 'any' },
   ],
