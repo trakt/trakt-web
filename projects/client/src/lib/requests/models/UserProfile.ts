@@ -8,12 +8,12 @@ export const UserProfileSchema = z.object({
   isVip: z.boolean(),
   isDirector: z.boolean(),
   isDeleted: z.boolean(),
-  slug: z.string().nullable(),
+  slug: z.string().nullish(),
   avatar: z.object({
     url: z.string(),
   }),
-  location: z.string().optional(),
-  about: z.string().optional(),
+  location: z.string().nullish(),
+  about: z.string().nullish(),
   cover: z.object({
     url: z.string(),
   }).optional(),

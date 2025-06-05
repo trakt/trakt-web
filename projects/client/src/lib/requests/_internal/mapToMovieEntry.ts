@@ -8,7 +8,7 @@ import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
 
 function mapMovieCertificationResponse(
-  certification?: MovieCertificationResponse,
+  certification: MovieCertificationResponse | Nil,
 ) {
   const hasValidCertification = certification && certification !== 'undefined';
   if (!hasValidCertification) {

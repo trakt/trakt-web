@@ -11,7 +11,7 @@ const LIST_LIMIT = 25;
 export type ListParams = {
   slug?: string;
   user?: {
-    slug: string | Nil;
+    slug?: string | Nil;
   };
   id?: number;
 };

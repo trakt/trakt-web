@@ -5,7 +5,7 @@ export const ListItemSchemaFactory = <T extends z.ZodType>(entrySchema: T) =>
   z.object({
     id: z.number(),
     rank: z.number(),
-    notes: z.string().nullable(),
+    notes: z.string().nullish(),
     listedAt: z.date(),
     type: MediaTypeSchema,
     entry: entrySchema,

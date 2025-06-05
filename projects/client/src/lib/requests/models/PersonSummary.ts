@@ -7,7 +7,7 @@ export const PersonSummarySchema = z.object({
   biography: z.string(),
   headShotUrl: HttpsUrlSchema,
   slug: z.string(),
-  knownFor: crewPositionSchema.optional(),
+  knownFor: crewPositionSchema.nullish(),
 });
 
 export type PersonSummary = z.infer<typeof PersonSummarySchema>;

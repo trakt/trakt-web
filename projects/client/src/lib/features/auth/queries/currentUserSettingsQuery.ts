@@ -22,7 +22,7 @@ export const UserSettingsSchema = z.object({
   slug: z.string(),
   token: z.string().nullish(),
   name: UserNameSchema,
-  about: z.string().optional(),
+  about: z.string().nullish(),
   location: z.string().optional(),
   avatar: z.object({
     url: z.string(),

@@ -3,7 +3,7 @@
 
   import { shuffle } from "$lib/utils/array/shuffle";
 
-  const { about }: { about?: string } = $props();
+  const { about }: { about: string | Nil } = $props();
 
   const ABOUT_MESSAGES = [
     m.about_placeholder_1(),
