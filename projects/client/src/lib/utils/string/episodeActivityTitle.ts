@@ -1,9 +1,15 @@
-import type { EpisodeEntry } from '../../requests/models/EpisodeEntry.ts';
-import type { ShowEntry } from '../../requests/models/ShowEntry.ts';
+type Episode = {
+  season: number;
+  number: number;
+};
+
+type Show = {
+  title: string;
+};
 
 export function episodeActivityTitle(
-  episode: EpisodeEntry,
-  show: ShowEntry,
+  episode: Episode,
+  show: Show,
 ) {
   return `${episode.season}x${episode.number} - ${show.title}`;
 }

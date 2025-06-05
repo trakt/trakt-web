@@ -5,6 +5,7 @@
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
+  import MonthToDate from "./components/MonthToDate.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfileHistorySummary from "./components/ProfileHistorySummary.svelte";
@@ -32,7 +33,11 @@
 </ProfileContainer>
 
 <ProfileContainer>
-  <ProfileHistorySummary movies={$historyMovies} shows={$historyShows} />
+  {#if profile.isVip}
+    <MonthToDate {slug} />
+  {:else}
+    <ProfileHistorySummary movies={$historyMovies} shows={$historyShows} />
+  {/if}
 </ProfileContainer>
 
 <FavoritesList

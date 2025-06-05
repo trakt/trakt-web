@@ -424,5 +424,7 @@
   "filter_save": "Lagre",
   "filter_save_label": "Lagre filtre",
   "error_page_locked_account_title": "Konto låst",
-  "error_page_locked_account_message": "Kontoen din er låst, <a>kontakt support</a> for å løse dette problemet."
+  "error_page_locked_account_message": "Kontoen din er låst, <a>kontakt support</a> for å løse dette problemet.",
+  "first_play_this_month": "Første visning denne måneden",
+  "shows_watched": "{count} serier sett"
 }

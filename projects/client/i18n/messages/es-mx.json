@@ -424,5 +424,7 @@
   "filter_save": "Guardar",
   "filter_save_label": "Guardar filtros",
   "error_page_locked_account_title": "Cuenta bloqueada",
-  "error_page_locked_account_message": "Tu cuenta está bloqueada, <a>contacta al soporte técnico</a> para resolver este problema."
+  "error_page_locked_account_message": "Tu cuenta está bloqueada, <a>contacta al soporte técnico</a> para resolver este problema.",
+  "first_play_this_month": "Primera reproducción este mes",
+  "shows_watched": "{count} series vistas"
 }

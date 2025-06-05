@@ -424,5 +424,7 @@
   "filter_save": "Salvează",
   "filter_save_label": "Salvează filtrele",
   "error_page_locked_account_title": "Cont blocat",
-  "error_page_locked_account_message": "Contul tău este blocat, <a>contactează asistența</a> pentru a rezolva această problemă."
+  "error_page_locked_account_message": "Contul tău este blocat, <a>contactează asistența</a> pentru a rezolva această problemă.",
+  "first_play_this_month": "Prima redare luna aceasta",
+  "shows_watched": "{count} seriale vizionate"
 }

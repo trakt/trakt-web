@@ -424,5 +424,7 @@
   "filter_save": "Speichern",
   "filter_save_label": "Filter speichern",
   "error_page_locked_account_title": "Konto gesperrt",
-  "error_page_locked_account_message": "Ihr Konto ist gesperrt, <a>wenden Sie sich an den Support</a>, um dieses Problem zu beheben."
+  "error_page_locked_account_message": "Ihr Konto ist gesperrt, <a>wenden Sie sich an den Support</a>, um dieses Problem zu beheben.",
+  "first_play_this_month": "Erste Wiedergabe diesen Monat",
+  "shows_watched": "{count} Serien gesehen"
 }

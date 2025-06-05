@@ -424,5 +424,7 @@
   "filter_save": "Opslaan",
   "filter_save_label": "Filters opslaan",
   "error_page_locked_account_title": "Account vergrendeld",
-  "error_page_locked_account_message": "Uw account is vergrendeld, <a>neem contact op met de ondersteuning</a> om dit probleem op te lossen."
+  "error_page_locked_account_message": "Uw account is vergrendeld, <a>neem contact op met de ondersteuning</a> om dit probleem op te lossen.",
+  "first_play_this_month": "Eerste afspeling deze maand",
+  "shows_watched": "{count} series bekeken"
 }
