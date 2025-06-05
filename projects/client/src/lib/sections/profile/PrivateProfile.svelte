@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import ProfileContainer from "./components/ProfileContainer.svelte";
@@ -8,11 +9,17 @@
 </script>
 
 <ProfileContainer>
+  {#snippet details()}
+    <div class="trakt-private-profile-avatar">
+      <CircularLogo variant="flat" />
+      <h5>{profile.username}</h5>
+    </div>
+  {/snippet}
   <div class="trakt-private-profile">
-    <h5>{m.private_profile({ username: profile.username })}</h5>
-    <h6>
+    <p class="uppercase">{m.private_profile()}</p>
+    <p class="small">
       {m.private_profile_description({ username: profile.username })}
-    </h6>
+    </p>
   </div>
 </ProfileContainer>
 
@@ -20,7 +27,39 @@
   .trakt-private-profile {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 
     gap: var(--gap-m);
+    height: var(--ni-232);
+
+    color: var(--shade-10);
+    background-color: var(--shade-600);
+
+    border-radius: var(--border-radius-l);
+    padding: var(--ni-32);
+    box-sizing: border-box;
+
+    p.uppercase {
+      font-weight: 700;
+    }
+
+    p.small {
+      max-width: var(--ni-224);
+      line-height: 150%;
+    }
+  }
+
+  .trakt-private-profile-avatar {
+    margin-left: var(--ni-72);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-m);
+
+    :global(svg) {
+      width: var(--ni-64);
+      height: var(--ni-64);
+    }
   }
 </style>
