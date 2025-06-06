@@ -1,7 +1,7 @@
 import type { MediaType } from './MediaType.ts';
 
 type ExtendedMediaType = MediaType | 'episode';
-type UserType = 'avatar' | 'settings';
+type UserType = 'avatar' | 'settings' | 'follow';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -71,6 +71,7 @@ export const InvalidateAction = {
   User: {
     Avatar: buildInvalidationKey('user', 'avatar'),
     Settings: buildInvalidationKey('user', 'settings'),
+    Follow: buildInvalidationKey('user', 'follow'),
   },
 
   CheckIn: buildInvalidationKey('check_in'),
