@@ -10,6 +10,10 @@ import {
   type UserHistory,
 } from '../queries/currentUserHistoryQuery.ts';
 import {
+  currentUserNetworkQuery,
+  type UserNetwork,
+} from '../queries/currentUserNetworkQuery.ts';
+import {
   currentUserRatingsQuery,
   type UserRatings,
 } from '../queries/currentUserRatingsQuery.ts';
@@ -97,6 +101,9 @@ export function useUser() {
         movies: new Map(),
         shows: new Map(),
       }),
+      network: readable<UserNetwork>({
+        following: [],
+      }),
     };
   }
 
@@ -106,6 +113,7 @@ export function useUser() {
   const ratingsQueryResponse = useQuery(currentUserRatingsQuery());
   const commentLikesQueryResponse = useQuery(currentUserCommentLikesQuery());
   const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
+  const followingQueryResponse = useQuery(currentUserNetworkQuery());
 
   const user = derived(
     userQueryResponse,
@@ -127,10 +135,13 @@ export function useUser() {
     commentLikesQueryResponse,
     ($likes) => definedData($likes.data),
   );
-
   const favorites = derived(
     favoritesQueryResponse,
     ($favorites) => definedData($favorites.data),
+  );
+  const network = derived(
+    followingQueryResponse,
+    ($network) => definedData($network.data),
   );
 
   return {
@@ -140,5 +151,6 @@ export function useUser() {
     ratings,
     likes,
     favorites,
+    network,
   };
 }
