@@ -43,6 +43,7 @@
     text-align: center;
 
     padding: var(--layout-distance-side);
+    box-sizing: border-box;
 
     h1 {
       transition: var(--transition-increment) ease-in-out;
