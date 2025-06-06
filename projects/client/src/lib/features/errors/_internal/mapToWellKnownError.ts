@@ -9,6 +9,8 @@ export function mapToWellKnownError(
       return WellKnownError.ServerError;
     case 423:
       return WellKnownError.LockedAccountError;
+    case 404:
+      return WellKnownError.NotFoundError;
     default:
       return;
   }

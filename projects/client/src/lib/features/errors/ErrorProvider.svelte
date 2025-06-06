@@ -1,5 +1,6 @@
 <script lang="ts">
   import { afterNavigate } from "$app/navigation";
+  import Error404Page from "$lib/pages/errors/Error404Page.svelte";
   import ErrorLockedAccountPage from "$lib/pages/errors/ErrorLockedAccountPage.svelte";
   import ErrorServicePage from "$lib/pages/errors/ErrorServicePage.svelte";
   import { onMount } from "svelte";
@@ -33,6 +34,10 @@
 
 {#if $fetchError === WellKnownError.ServerError}
   <ErrorServicePage />
+{/if}
+
+{#if $fetchError === WellKnownError.NotFoundError}
+  <Error404Page />
 {/if}
 
 {#if !$fetchError}
