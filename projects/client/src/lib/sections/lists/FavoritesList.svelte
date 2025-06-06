@@ -10,9 +10,11 @@
     type,
     title,
     emptyMessage,
-  }: { type: MediaType; title: string; emptyMessage: string } = $props();
+    slug,
+  }: { type: MediaType; title: string; emptyMessage: string; slug: string } =
+    $props();
 
-  const { list, isLoading } = useFavoritesList({ type });
+  const { list, isLoading } = useFavoritesList({ type, slug });
 </script>
 
 <SectionList

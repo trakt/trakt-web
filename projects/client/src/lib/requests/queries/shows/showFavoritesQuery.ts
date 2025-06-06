@@ -9,15 +9,19 @@ import {
   FavoritedEntrySchema,
 } from '../../models/FavoritedEntry.ts';
 
+type FavoriteShowsParams = {
+  slug: string;
+} & ApiParams;
+
 const favoritedShowsRequest = (
-  { fetch }: ApiParams,
+  { fetch, slug }: FavoriteShowsParams,
 ) =>
   api({ fetch })
     .users
     .favorites
     .shows({
       params: {
-        id: 'me',
+        id: slug,
         sort: 'rank',
       },
       query: {
@@ -38,7 +42,7 @@ function mapToFavoriteShow(
 export const showFavoritesQuery = defineQuery({
   key: 'showFavorites',
   invalidations: [InvalidateAction.Favorited('show')],
-  dependencies: () => [],
+  dependencies: (params) => [params.slug],
   request: favoritedShowsRequest,
   mapper: (response) => response.body.map(mapToFavoriteShow),
   schema: FavoritedEntrySchema.array(),

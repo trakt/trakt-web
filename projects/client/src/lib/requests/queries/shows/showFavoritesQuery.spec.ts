@@ -7,7 +7,7 @@ import { showFavoritesQuery } from './showFavoritesQuery.ts';
 describe('showFavoritesQuery', () => {
   it('should query for favorited shows', async () => {
     const result = await runQuery({
-      factory: () => createQuery(showFavoritesQuery()),
+      factory: () => createQuery(showFavoritesQuery({ slug: 'me' })),
       mapper: (response) => response?.data,
     });
 

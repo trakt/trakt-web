@@ -41,11 +41,14 @@
 </ProfileContainer>
 
 <FavoritesList
+  {slug}
   type="movie"
   title={m.favorite_movies()}
   emptyMessage={m.favorite_movies_empty()}
 />
+
 <FavoritesList
+  {slug}
   type="show"
   title={m.favorite_shows()}
   emptyMessage={m.favorite_shows_empty()}
