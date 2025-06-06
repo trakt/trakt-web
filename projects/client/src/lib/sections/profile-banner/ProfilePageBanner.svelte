@@ -46,13 +46,29 @@
   </RenderFor>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .profile-page-banner-container {
     margin-left: var(--ni-72);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: var(--gap-m);
+
+    @include for-tablet-sm-and-below {
+      flex-direction: row;
+      align-items: flex-end;
+
+      position: relative;
+      margin: 0;
+
+      :global(.trakt-button) {
+        position: absolute;
+        top: var(--ni-neg-4);
+        right: 0;
+      }
+    }
   }
 
   .profile-image-container {

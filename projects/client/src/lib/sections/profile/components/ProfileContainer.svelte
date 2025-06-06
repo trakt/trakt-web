@@ -43,10 +43,6 @@
       grid-template-columns: 1fr;
       margin: 0 var(--ni-16);
 
-      .trakt-profile-details {
-        display: none;
-      }
-
       .trakt-profile-content {
         grid-column: 1;
       }
