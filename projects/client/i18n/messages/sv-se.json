@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Konto låst",
   "error_page_locked_account_message": "Ditt konto är låst, <a>kontakta supporten</a> för att lösa detta problem.",
   "first_play_this_month": "Första visningen denna månad",
-  "shows_watched": "{count} serier tittade på"
+  "shows_watched": "{count} serier tittade på",
+  "follow": "Följ",
+  "follow_label": "Följ {username}",
+  "unfollow": "Sluta följ",
+  "unfollow_label": "Sluta följ {username}",
+  "unfollow_warning": "Är du säker på att du vill sluta följa {username}?"
 }

@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "アカウントがロックされています",
   "error_page_locked_account_message": "アカウントがロックされています。問題を解決するには、<a>サポートにお問い合わせください</a>。",
   "first_play_this_month": "今月の初再生",
-  "shows_watched": "{count} 作品を視聴済み"
+  "shows_watched": "{count} 作品を視聴済み",
+  "follow": "フォロー",
+  "follow_label": "{username} をフォロー",
+  "unfollow": "フォロー解除",
+  "unfollow_label": "{username} のフォローを解除",
+  "unfollow_warning": "{username} のフォローを解除してもよろしいですか？"
 }

@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Account locked",
   "error_page_locked_account_message": "Your account is locked, <a>contact support</a> to resolve this issue.",
   "first_play_this_month": "First play this month",
-  "shows_watched": "{count} shows watched"
+  "shows_watched": "{count} shows watched",
+  "follow": "Follow",
+  "follow_label": "Follow {username}",
+  "unfollow": "Unfollow",
+  "unfollow_label": "Unfollow {username}",
+  "unfollow_warning": "Are you sure you want to unfollow {username}?"
 }

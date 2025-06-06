@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Account vergrendeld",
   "error_page_locked_account_message": "Uw account is vergrendeld, <a>neem contact op met de ondersteuning</a> om dit probleem op te lossen.",
   "first_play_this_month": "Eerste afspeling deze maand",
-  "shows_watched": "{count} series bekeken"
+  "shows_watched": "{count} series bekeken",
+  "follow": "Volgen",
+  "follow_label": "{username} volgen",
+  "unfollow": "Ontvolgen",
+  "unfollow_label": "{username} ontvolgen",
+  "unfollow_warning": "Weet je zeker dat je {username} wilt ontvolgen?"
 }

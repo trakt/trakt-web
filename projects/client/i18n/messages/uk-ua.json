@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Обліковий запис заблоковано",
   "error_page_locked_account_message": "Ваш обліковий запис заблоковано, <a>зв’яжіться з підтримкою</a>, щоб вирішити цю проблему.",
   "first_play_this_month": "Перший показ цього місяця",
-  "shows_watched": "{count} переглянуто серіалів"
+  "shows_watched": "{count} переглянуто серіалів",
+  "follow": "Слідкувати",
+  "follow_label": "Слідкувати за {username}",
+  "unfollow": "Відписатися",
+  "unfollow_label": "Відписатися від {username}",
+  "unfollow_warning": "Ви впевнені, що хочете відписатися від {username}?"
 }

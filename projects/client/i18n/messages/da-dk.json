@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Konto blokeret",
   "error_page_locked_account_message": "Din konto er låst, <a>kontakt support</a> for at løse dette problem.",
   "first_play_this_month": "Første afspilning denne måned",
-  "shows_watched": "{count} serier set"
+  "shows_watched": "{count} serier set",
+  "follow": "Følg",
+  "follow_label": "Følg {username}",
+  "unfollow": "Hold op med at følge",
+  "unfollow_label": "Hold op med at følge {username}",
+  "unfollow_warning": "Er du sikker på, at du vil holde op med at følge {username}?"
 }

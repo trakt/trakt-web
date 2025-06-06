@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Cuenta bloqueada",
   "error_page_locked_account_message": "Tu cuenta está bloqueada, <a>contacta al soporte técnico</a> para resolver este problema.",
   "first_play_this_month": "Primera reproducción este mes",
-  "shows_watched": "{count} series vistas"
+  "shows_watched": "{count} series vistas",
+  "follow": "Seguir",
+  "follow_label": "Seguir a {username}",
+  "unfollow": "Dejar de seguir",
+  "unfollow_label": "Dejar de seguir a {username}",
+  "unfollow_warning": "¿Estás seguro de que quieres dejar de seguir a {username}?"
 }

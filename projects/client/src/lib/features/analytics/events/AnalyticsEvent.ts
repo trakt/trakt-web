@@ -1,6 +1,7 @@
 const ACTION_PREFIX = 'action';
 const MEDIA_ACTION_PREFIX = 'media-action';
 const USER_ACTION_PREFIX = 'user-action';
+const FOLLOW_ACTION_PREFIX = 'follow-action';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -29,4 +30,6 @@ export const AnalyticsEvent = {
   CheckIn: buildEventKey(MEDIA_ACTION_PREFIX, 'check-in'),
 
   Settings: buildEventKey(USER_ACTION_PREFIX, 'settings'),
+
+  Follow: buildEventKey(FOLLOW_ACTION_PREFIX, 'follow'),
 } as const;
