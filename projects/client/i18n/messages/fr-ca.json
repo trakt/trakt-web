@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Compte verrouillé",
   "error_page_locked_account_message": "Votre compte est verrouillé, <a>contactez le soutien</a> pour résoudre ce problème.",
   "first_play_this_month": "Première lecture ce mois-ci",
-  "shows_watched": "{count} séries visionnées"
+  "shows_watched": "{count} séries visionnées",
+  "follow": "Suivre",
+  "follow_label": "Suivre {username}",
+  "unfollow": "Ne plus suivre",
+  "unfollow_label": "Ne plus suivre {username}",
+  "unfollow_warning": "Êtes-vous sûr de vouloir ne plus suivre {username} ?"
 }

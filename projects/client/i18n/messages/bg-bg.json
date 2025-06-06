@@ -426,5 +426,10 @@
   "error_page_locked_account_title": "Акаунтът е заключен",
   "error_page_locked_account_message": "Вашият акаунт е заключен, <a>свържете се с поддръжката</a>, за да разрешите този проблем.",
   "first_play_this_month": "Първо пускане този месец",
-  "shows_watched": "{count} гледани сериали"
+  "shows_watched": "{count} гледани сериали",
+  "follow": "Следвай",
+  "follow_label": "Следвай {username}",
+  "unfollow": "Отписване",
+  "unfollow_label": "Отписване от {username}",
+  "unfollow_warning": "Сигурни ли сте, че искате да се отпишете от {username}?"
 }

@@ -7,6 +7,7 @@ type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
 type FilterType = { id: string; action: 'set' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie' };
+type FollowType = { action: 'follow' | 'unfollow' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -28,4 +29,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.CheckIn]: CheckInType;
 
   [AnalyticsEvent.Settings]: { settings: string };
+
+  [AnalyticsEvent.Follow]: FollowType;
 };
