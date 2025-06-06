@@ -6,6 +6,7 @@
   import { episodeActivityTitle } from "$lib/utils/string/episodeActivityTitle";
   import NowPlayingItemCard from "./NowPlayingItemCard.svelte";
   import ProgressBar from "./ProgressBar.svelte";
+  import { useFooterHeight } from "./useFooterHeight";
   import { useNowPlayingProgress } from "./useNowPlayingProgress";
   import { useScrollDistance } from "./useScrollDistance";
 
@@ -16,6 +17,7 @@
   );
 
   const { distanceFromBottom } = useScrollDistance();
+  const { footerHeight } = useFooterHeight();
 
   const title = $derived(
     nowPlaying.type === "movie"
@@ -27,7 +29,7 @@
 {#if $isPlaying}
   <div
     class="trakt-now-playing-toast"
-    style="--distance-from-bottom: {$distanceFromBottom}px"
+    style="--distance-from-bottom: {$distanceFromBottom}px; --footer-height: {$footerHeight}px"
   >
     <NowPlayingItemCard nowPlayingItem={nowPlaying} />
     <div class="trakt-now-playing-content">
@@ -100,8 +102,9 @@
       --now-playing-bottom-distance: calc(
         var(--ni-12) + var(--mobile-navbar-height)
       );
-      --now-playing-footer-offset: var(--mobile-navbar-height) +
-        var(--footer-mobile-height);
+      --now-playing-footer-offset: calc(
+        var(--mobile-navbar-height) + var(--footer-height)
+      );
     }
 
     @include for-mobile {
