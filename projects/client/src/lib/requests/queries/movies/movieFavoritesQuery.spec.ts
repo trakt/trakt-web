@@ -7,7 +7,7 @@ import { movieFavoritesQuery } from './movieFavoritesQuery.ts';
 describe('movieFavoritesQuery', () => {
   it('should query for favorited movies', async () => {
     const result = await runQuery({
-      factory: () => createQuery(movieFavoritesQuery()),
+      factory: () => createQuery(movieFavoritesQuery({ slug: 'me' })),
       mapper: (response) => response?.data,
     });
 
