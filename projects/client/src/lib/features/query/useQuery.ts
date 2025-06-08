@@ -1,16 +1,74 @@
 import { browser } from '$app/environment';
-import { invalidationPredicate } from '$lib/features/query/_internal/invalidationPredicate.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import {
   createQuery,
   type CreateQueryOptions,
   useQueryClient,
 } from '@tanstack/svelte-query';
-import { onMount } from 'svelte';
+import { derived, type Readable } from 'svelte/store';
+import { time } from '../../utils/timing/time.ts';
 import { findInvalidationId } from './_internal/findInvalidationId.ts';
 import { findQueryId } from './_internal/findQueryId.ts';
+import { invalidationPredicate } from './_internal/invalidationPredicate.ts';
 
+/**
+ * Tracks query invalidation requests.
+ * Prevents duplicate invalidations for the same query ID within a session.
+ */
 const INVALIDATION_MAP = new Map<string, number>();
+
+function invalidationHook<T>(
+  queryKey: CreateQueryOptions['queryKey'],
+  stream: Readable<T>,
+) {
+  const client = browser ? useQueryClient() : undefined;
+
+  return derived(stream, (value) => {
+    if (client == null) {
+      return value;
+    }
+
+    const id = findQueryId(queryKey);
+
+    if (id == null) {
+      return value;
+    }
+
+    const hasInvalidationMarker = findInvalidationId(queryKey) != null;
+
+    if (!hasInvalidationMarker) {
+      return value;
+    }
+
+    const isInvalidatedQueued = INVALIDATION_MAP.has(id);
+
+    if (isInvalidatedQueued) {
+      return value;
+    }
+
+    INVALIDATION_MAP.set(id, Date.now());
+
+    (async () => {
+      const isNotReady = () => {
+        const state = client.getQueryState(queryKey);
+
+        return state?.status !== 'success' ||
+          state?.fetchStatus !== 'idle';
+      };
+
+      while (isNotReady()) {
+        await new Promise((resolve) => {
+          setTimeout(resolve, time.seconds(0.1));
+        });
+      }
+
+      client.invalidateQueries({
+        predicate: (query) => invalidationPredicate(query.queryKey, id),
+      });
+    })();
+
+    return value;
+  });
+}
 
 export function useQuery<
   TOutput,
@@ -18,39 +76,5 @@ export function useQuery<
 >(
   props: CreateQueryOptions<TOutput, TError>,
 ) {
-  const client = browser ? useQueryClient() : undefined;
-
-  onMount(() => {
-    if (client == null) {
-      return;
-    }
-
-    const id = findQueryId(props.queryKey);
-
-    if (id == null) {
-      return;
-    }
-
-    const hasInvalidationMarker = findInvalidationId(props.queryKey) != null;
-
-    if (!hasInvalidationMarker) {
-      return;
-    }
-
-    const isInvalidatedQueued = INVALIDATION_MAP.has(id);
-
-    if (isInvalidatedQueued) {
-      return;
-    }
-
-    INVALIDATION_MAP.set(id, Date.now());
-
-    setTimeout(() => {
-      client.invalidateQueries({
-        predicate: (query) => invalidationPredicate(query.queryKey, id),
-      });
-    }, time.seconds(1));
-  });
-
-  return createQuery(props);
+  return invalidationHook(props.queryKey, createQuery(props));
 }
