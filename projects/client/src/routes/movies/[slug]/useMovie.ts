@@ -53,12 +53,12 @@ export function useMovie(slug: string) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     videos: derived(videos, ($videos) => $videos.data ?? []),
-    intl: derived(intl, ($intl) => {
-      if ($intl.isFetching) {
+    intl: derived([intl, movie], ([$intl, $movie]) => {
+      if ($intl.isFetching || $movie.isFetching) {
         return;
       }
 
-      return toMediaIntl($intl?.data);
+      return toMediaIntl($intl?.data, $movie?.data);
     }),
     streamOn: derived(
       streamOn,

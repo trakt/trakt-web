@@ -46,16 +46,13 @@ export function useShow(slug: string) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     seasons: derived(seasons, ($seasons) => $seasons.data),
-    intl: derived(
-      intl,
-      ($intl) => {
-        if ($intl.isFetching) {
-          return;
-        }
+    intl: derived([intl, show], ([$intl, $show]) => {
+      if ($intl.isFetching || $show.isFetching) {
+        return;
+      }
 
-        return toMediaIntl($intl.data);
-      },
-    ),
+      return toMediaIntl($intl?.data, $show?.data);
+    }),
     streamOn: derived(
       streamOn,
       ($streamOn) => {
