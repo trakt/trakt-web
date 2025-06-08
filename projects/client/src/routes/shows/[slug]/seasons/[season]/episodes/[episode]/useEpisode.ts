@@ -85,12 +85,12 @@ export function useEpisode(
         };
       },
     ),
-    showIntl: derived(showIntl, ($showIntl) => {
-      if ($showIntl.isFetching) {
+    showIntl: derived([showIntl, show], ([$showIntl, $show]) => {
+      if ($showIntl.isFetching || $show.isFetching) {
         return;
       }
 
-      return toMediaIntl($showIntl?.data);
+      return toMediaIntl($showIntl?.data, $show?.data);
     }),
     streamOn: derived(
       streamOn,
