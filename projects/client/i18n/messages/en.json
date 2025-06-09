@@ -426,5 +426,8 @@
   "unfollow_label": "Unfollow {username}",
   "unfollow_warning": "Are you sure you want to unfollow {username}?",
   "vip_upsell_title": "Unlock VIP features to enhance your Trakt experience",
-  "vip_upsell_description": "Want to see your month and year in review? And get access to many other features? Sign up for Trakt VIP."
+  "vip_upsell_description": "Want to see your month and year in review? And get access to many other features? Sign up for Trakt VIP.",
+  "following": "Following",
+  "followers": "Followers",
+  "not_following_anyone": "There is no one here (yet)."
 }
