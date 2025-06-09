@@ -83,9 +83,6 @@ export const UrlBuilder = {
   trending(params: UrlBuilderParams) {
     return mediaDrilldownFactory('trending')(params);
   },
-  streaming(params: UrlBuilderParams) {
-    return mediaDrilldownFactory('streaming')(params);
-  },
   recommended(params: UrlBuilderParams) {
     return mediaDrilldownFactory('recommended')(params);
   },
