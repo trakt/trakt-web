@@ -11,24 +11,17 @@ import type { RecommendedShowResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 import { MediaEntrySchema } from '../../models/MediaEntry.ts';
-import { sourceToMethod } from './_internal/sourceToMethod.ts';
-import type { RecommendationSourceParams } from './RecommendationSourceParams.ts';
 
 export const RecommendedShowSchema = MediaEntrySchema.merge(EpisodeCountSchema);
 export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
-type RecommendedShowsParams =
-  & LimitParams
-  & ApiParams
-  & FilterParams
-  & RecommendationSourceParams;
+type RecommendedShowsParams = LimitParams & ApiParams & FilterParams;
 
 const recommendedShowsRequest = (
-  { fetch, limit, filter, source }: RecommendedShowsParams,
+  { fetch, limit, filter }: RecommendedShowsParams,
 ) =>
-  api({
-    fetch,
-  })[sourceToMethod({ source })]
+  api({ fetch })
+    .recommendations
     .shows
     .recommend({
       query: {
@@ -40,7 +33,7 @@ const recommendedShowsRequest = (
     });
 
 export const recommendedShowsQuery = defineQuery({
-  key: (params) => `${params.source}_recommendedShows`,
+  key: 'recommendedShows',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.Watchlisted('show'),
