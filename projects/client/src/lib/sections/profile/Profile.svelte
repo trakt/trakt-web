@@ -8,14 +8,10 @@
   import MonthToDate from "./components/MonthToDate.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
-  import ProfileHistorySummary from "./components/ProfileHistorySummary.svelte";
   import YearToDateLink from "./components/YearToDateLink.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps";
-  import { useHistory } from "./stores/useHistory";
 
   const { profile, slug }: DisplayableProfileProps = $props();
-
-  const { historyMovies, historyShows } = $derived(useHistory(slug));
 </script>
 
 <ProfileContainer>
@@ -35,8 +31,6 @@
 <ProfileContainer>
   {#if profile.isVip}
     <MonthToDate {slug} />
-  {:else}
-    <ProfileHistorySummary movies={$historyMovies} shows={$historyShows} />
   {/if}
 </ProfileContainer>
 
