@@ -424,5 +424,7 @@
   "follow_label": "Слідкувати за {username}",
   "unfollow": "Відписатися",
   "unfollow_label": "Відписатися від {username}",
-  "unfollow_warning": "Ви впевнені, що хочете відписатися від {username}?"
+  "unfollow_warning": "Ви впевнені, що хочете відписатися від {username}?",
+  "vip_upsell_title": "Розблокуйте VIP-функції, щоб покращити свій досвід Trakt",
+  "vip_upsell_description": "Хочете побачити свій місячний та річний огляд? Та отримати доступ до багатьох інших функцій? Підпишіться на Trakt VIP."
 }

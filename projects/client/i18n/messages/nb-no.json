@@ -424,5 +424,7 @@
   "follow_label": "Følg {username}",
   "unfollow": "Slutt å følge",
   "unfollow_label": "Slutt å følge {username}",
-  "unfollow_warning": "Er du sikker på at du vil slutte å følge {username}?"
+  "unfollow_warning": "Er du sikker på at du vil slutte å følge {username}?",
+  "vip_upsell_title": "Lås opp VIP-funksjoner for å forbedre Trakt-opplevelsen din",
+  "vip_upsell_description": "Vil du se din månedlige og årlige gjennomgang? Og få tilgang til mange andre funksjoner? Registrer deg for Trakt VIP."
 }

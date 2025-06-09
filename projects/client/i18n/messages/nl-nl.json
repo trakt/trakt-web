@@ -424,5 +424,7 @@
   "follow_label": "{username} volgen",
   "unfollow": "Ontvolgen",
   "unfollow_label": "{username} ontvolgen",
-  "unfollow_warning": "Weet je zeker dat je {username} wilt ontvolgen?"
+  "unfollow_warning": "Weet je zeker dat je {username} wilt ontvolgen?",
+  "vip_upsell_title": "Ontgrendel VIP-functies om je Trakt-ervaring te verbeteren",
+  "vip_upsell_description": "Wil je je maand- en jaaroverzicht bekijken? En toegang krijgen tot vele andere functies? Meld je aan voor Trakt VIP."
 }

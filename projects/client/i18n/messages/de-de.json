@@ -424,5 +424,7 @@
   "follow_label": "{username} folgen",
   "unfollow": "Entfolgen",
   "unfollow_label": "{username} entfolgen",
-  "unfollow_warning": "Möchtest du {username} wirklich entfolgen?"
+  "unfollow_warning": "Möchtest du {username} wirklich entfolgen?",
+  "vip_upsell_title": "Schalte VIP-Funktionen frei, um dein Trakt-Erlebnis zu verbessern",
+  "vip_upsell_description": "Möchtest du deine Monats- und Jahresübersicht sehen? Und Zugriff auf viele weitere Funktionen erhalten? Melde dich für Trakt VIP an."
 }

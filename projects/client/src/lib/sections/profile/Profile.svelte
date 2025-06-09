@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import FavoritesList from "../lists/FavoritesList.svelte";
@@ -8,10 +9,15 @@
   import MonthToDate from "./components/MonthToDate.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
+  import VipUpsell from "./components/VipUpsell.svelte";
   import YearToDateLink from "./components/YearToDateLink.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps";
 
   const { profile, slug }: DisplayableProfileProps = $props();
+
+  const { user } = useUser();
+  const isMe = $derived(slug === "me" || slug === $user.slug);
+  const hasUpsell = $derived(isMe && !profile.isVip);
 </script>
 
 <ProfileContainer>
@@ -31,6 +37,10 @@
 <ProfileContainer>
   {#if profile.isVip}
     <MonthToDate {slug} />
+  {/if}
+
+  {#if hasUpsell}
+    <VipUpsell />
   {/if}
 </ProfileContainer>
 

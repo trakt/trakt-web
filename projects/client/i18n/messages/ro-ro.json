@@ -424,5 +424,7 @@
   "follow_label": "Urmărește {username}",
   "unfollow": "Nu mai urmări",
   "unfollow_label": "Nu mai urmări {username}",
-  "unfollow_warning": "Sigur dorești să nu mai urmărești pe {username}?"
+  "unfollow_warning": "Sigur dorești să nu mai urmărești pe {username}?",
+  "vip_upsell_title": "Deblocați funcțiile VIP pentru a vă îmbunătăți experiența Trakt",
+  "vip_upsell_description": "Vrei să-ți vezi retrospectiva lunară și anuală? Și să accesezi multe alte funcții? Înscrie-te la Trakt VIP."
 }
