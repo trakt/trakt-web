@@ -2,16 +2,26 @@
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import YearToDateArrow from "$lib/components/icons/YearToDateArrow.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { languageTag } from "$lib/features/i18n";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { getPreviousMonth } from "$lib/utils/date/getPreviousMonth";
+  import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useMonthToDate } from "../stores/useMonthToDate";
   import FirstPlay from "./_internal/FirstPlay.svelte";
   import WatchStats from "./_internal/WatchStats.svelte";
 
   const { slug }: { slug: string } = $props();
 
-  const { monthToDate, monthInReview, isLoading } = $derived(
-    useMonthToDate({ slug }),
+  const mirDate = getPreviousMonth(new Date());
+  const mirHref = $derived(
+    UrlBuilder.users(slug).monthInReview(
+      mirDate.getFullYear(),
+      mirDate.getMonth() + 1,
+    ),
   );
+
+  const { monthToDate, isLoading } = $derived(useMonthToDate({ slug }));
 </script>
 
 <div class="trakt-month-to-date">
@@ -36,14 +46,10 @@
     <WatchStats monthToDate={$monthToDate} />
 
     <div class="trakt-month-in-review-link">
-      <Link
-        href={$monthInReview.href}
-        target={$monthInReview.target}
-        color="inherit"
-      >
+      <Link href={mirHref} color="inherit">
         <YearToDateArrow />
         <div class="trakt-month-in-review-label">
-          <h6 class="uppercase">{$monthInReview.label}</h6>
+          <h6 class="uppercase">{toHumanMonth(mirDate, languageTag())}</h6>
           <h6 class="uppercase">in review</h6>
         </div>
       </Link>

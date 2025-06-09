@@ -65,7 +65,7 @@ const categoryDrilldownFactory =
 
 const ogIframeFactory = (url: HttpsUrl, token: string | Nil): HttpsUrl => {
   const tokenParam = token ? `&slurm=${token}` : '';
-  return `${url}/?standalone_mode=true${tokenParam}`;
+  return `${url}/?embedded_mode=true${tokenParam}`;
 };
 
 export const UrlBuilder = {
@@ -146,15 +146,9 @@ export const UrlBuilder = {
   github: () => 'https://github.com/trakt/trakt-lite',
   vip: () => 'https://trakt.tv/vip',
   og: {
-    yearToDate: (slug: string, year: number) =>
-      `https://trakt.tv/users/${slug}/year/${year}`,
     getVip: () => 'https://trakt.tv/vip',
     site: () => 'https://trakt.tv',
     status: () => 'https://status.trakt.tv',
-    monthInReview: (slug: string, token: string | Nil) => {
-      const url = `https://trakt.tv/users/${slug}/mir`;
-      return token ? `${url}?slurm=${token}` : url;
-    },
     privacy: () => 'https://trakt.tv/privacy',
     support: () => 'mailto:support@trakt.tv',
     frame: {

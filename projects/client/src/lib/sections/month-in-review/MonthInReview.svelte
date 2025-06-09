@@ -10,13 +10,12 @@
   const now = new Date();
   const previousMonth = getPreviousMonth(now);
   const isFirstWeek = isFirstWeekOfMonth(now);
-  const token = $user.token;
 </script>
 
 <RenderFor audience="vip" navigation="default">
-  {#if isFirstWeek && token}
+  {#if isFirstWeek}
     <div class="trakt-month-in-review">
-      <MonthInReviewLink slug={$user.slug} {token} date={previousMonth} />
+      <MonthInReviewLink slug={$user.slug} date={previousMonth} />
     </div>
   {/if}
 </RenderFor>
