@@ -426,5 +426,8 @@
   "unfollow_label": "Dejar de seguir a {username}",
   "unfollow_warning": "¿Seguro que quieres dejar de seguir a {username}?",
   "vip_upsell_title": "Desbloquea funciones VIP para mejorar tu experiencia Trakt",
-  "vip_upsell_description": "¿Quieres ver tu resumen mensual y anual? ¿Y acceder a muchas otras funciones? Regístrate en Trakt VIP."
+  "vip_upsell_description": "¿Quieres ver tu resumen mensual y anual? ¿Y acceder a muchas otras funciones? Regístrate en Trakt VIP.",
+  "following": "Siguiendo",
+  "followers": "Seguidores",
+  "not_following_anyone": "Aquí no hay nadie (todavía)."
 }

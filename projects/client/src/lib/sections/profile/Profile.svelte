@@ -9,12 +9,15 @@
   import MonthToDate from "./components/MonthToDate.svelte";
   import ProfileAbout from "./components/ProfileAbout.svelte";
   import ProfileContainer from "./components/ProfileContainer.svelte";
+  import ProfilesList from "./components/ProfilesList.svelte";
   import VipUpsell from "./components/VipUpsell.svelte";
   import YearToDateLink from "./components/YearToDateLink.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps";
+  import { useFollowing } from "./stores/useFollowing";
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
+  const { following, followers } = $derived(useFollowing(slug));
   const { user } = useUser();
   const isMe = $derived(slug === "me" || slug === $user.slug);
   const hasUpsell = $derived(isMe && !profile.isVip);
@@ -68,3 +71,6 @@
   <PersonalLists {slug} type="personal" />
   <PersonalLists {slug} type="collaboration" />
 {/if}
+
+<ProfilesList {slug} type="following" profiles={$following} />
+<ProfilesList {slug} type="followers" profiles={$followers} />

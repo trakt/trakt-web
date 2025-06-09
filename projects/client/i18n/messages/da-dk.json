@@ -426,5 +426,8 @@
   "unfollow_label": "Hold op med at følge {username}",
   "unfollow_warning": "Er du sikker på, at du vil holde op med at følge {username}?",
   "vip_upsell_title": "Lås VIP-funktioner op for at forbedre din Trakt-oplevelse",
-  "vip_upsell_description": "Vil du se din månedlige og årlige gennemgang? Og få adgang til mange andre funktioner? Tilmeld dig Trakt VIP."
+  "vip_upsell_description": "Vil du se din månedlige og årlige gennemgang? Og få adgang til mange andre funktioner? Tilmeld dig Trakt VIP.",
+  "following": "Følger",
+  "followers": "Følgere",
+  "not_following_anyone": "Der er ingen her (endnu)."
 }
