@@ -2,7 +2,6 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
-import type { RecommendationSourceParams } from '$lib/requests/queries/recommendations/RecommendationSourceParams.ts';
 import {
   type RecommendedMovie,
   recommendedMoviesQuery,
@@ -13,10 +12,7 @@ import {
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
 import { toInMemoryPaginatable } from '$lib/sections/lists/recommended/toInMemoryPaginatable.ts';
 import { useDailyOrderedArray } from '$lib/sections/lists/stores/useDailyOrderedArray.ts';
-import {
-  RECOMMENDED_UPPER_LIMIT,
-  SOCIAL_RECOMMENDED_UPPER_LIMIT,
-} from '$lib/utils/constants.ts';
+import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { onMount } from 'svelte';
@@ -30,20 +26,16 @@ type RecommendationListStoreProps =
     type: MediaType;
   }
   & PaginationParams
-  & FilterParams
-  & RecommendationSourceParams;
+  & FilterParams;
 
 function typeToQuery(
-  { type, filter, source }: Omit<RecommendationListStoreProps, 'page'>,
+  { type, filter }: Omit<RecommendationListStoreProps, 'page'>,
 ) {
   /** Recommendations are calculated daily, so we load all of them. */
   const props = {
     type,
-    limit: source === 'social'
-      ? SOCIAL_RECOMMENDED_UPPER_LIMIT
-      : RECOMMENDED_UPPER_LIMIT,
+    limit: RECOMMENDED_UPPER_LIMIT,
     filter,
-    source,
   };
 
   switch (type) {
@@ -80,7 +72,7 @@ function useLimitRecommendedList(
     : props.type;
 
   const { list, set } = useDailyOrderedArray<RecommendedEntry>({
-    key: `${props.source}-recommended-${listKey}-order`,
+    key: `recommended-${listKey}-order`,
     getId: (item) => item.id,
   });
 
@@ -105,7 +97,6 @@ export const useRecommendedList = (props: RecommendationListStoreProps) =>
       useLimitRecommendedList({
         ...params,
         filter: props.filter,
-        source: props.source,
       }),
     total: props.limit,
     type: props.type,

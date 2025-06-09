@@ -65,7 +65,6 @@ export const DEFAULT_PAGE_SIZE = IS_TV ? 10 : 25;
 
 export const DEFAULT_DRILL_SIZE = 100;
 export const RECOMMENDED_UPPER_LIMIT = DEFAULT_DRILL_SIZE;
-export const SOCIAL_RECOMMENDED_UPPER_LIMIT = 25;
 export const DEFAULT_SEARCH_LIMIT = 50;
 export const PAGE_UPPER_LIMIT = 3;
 /**
