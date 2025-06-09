@@ -40,6 +40,12 @@
   {/if}
 </ProfileContainer>
 
+<RecentlyWatchedList
+  drilldownLabel={m.view_all_recently_watched()}
+  title={m.recently_watched()}
+  {slug}
+/>
+
 <FavoritesList
   {slug}
   type="movie"
@@ -52,12 +58,6 @@
   type="show"
   title={m.favorite_shows()}
   emptyMessage={m.favorite_shows_empty()}
-/>
-
-<RecentlyWatchedList
-  drilldownLabel={m.view_all_recently_watched()}
-  title={m.recently_watched()}
-  {slug}
 />
 
 {#if slug !== "me"}
