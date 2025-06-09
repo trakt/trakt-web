@@ -24,6 +24,16 @@
   ];
 </script>
 
-<p class="large secondary">
+<p class="large secondary trakt-profile-about">
   {about ?? shuffle(ABOUT_MESSAGES).at(0)}
 </p>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-profile-about {
+    @include for-mobile {
+      font-size: var(--ni-16);
+    }
+  }
+</style>
