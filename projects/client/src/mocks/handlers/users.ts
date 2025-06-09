@@ -23,6 +23,7 @@ import { RatedEpisodesResponseMock } from '../data/users/response/RatedEpisodesR
 import { RatedMoviesResponseMock } from '../data/users/response/RatedMoviesResponseMock.ts';
 import { ShowActivityHistoryResponseMock } from '../data/users/response/ShowActivityHistoryResponseMock.ts';
 import { SocialActivityResponseMock } from '../data/users/response/SocialActivityResponseMock.ts';
+import { UserFollowersResponseMock } from '../data/users/response/UserFollowersResponseMock.ts';
 import { UserFollowingResponseMock } from '../data/users/response/UserFollowingResponseMock.ts';
 import { UserMonthInReviewResponseMock } from '../data/users/response/UserMonthInReviewResponseMock.ts';
 import { UserWatchingResponseMock } from '../data/users/response/UserWatchingResponseMock.ts';
@@ -140,6 +141,18 @@ export const users = [
     }/items/movie*`,
     () => {
       return HttpResponse.json(ListedMoviesResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/users/${UserProfileHarryMappedMock.slug}/following`,
+    () => {
+      return HttpResponse.json(UserFollowingResponseMock);
+    },
+  ),
+  http.get(
+    `http://localhost/users/${UserProfileHarryMappedMock.slug}/followers`,
+    () => {
+      return HttpResponse.json(UserFollowersResponseMock);
     },
   ),
   http.get(
