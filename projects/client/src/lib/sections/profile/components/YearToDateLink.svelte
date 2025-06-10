@@ -15,9 +15,9 @@
   <trakt-year-to-date-link>
     <Link {href}>
       <div class="ytd-link-content">
-        <h2 class="ytd-year">{currentYear}</h2>
+        <h4 class="ytd-year uppercase">{currentYear}</h4>
         <div class="ytd-link-details">
-          <h5 class="ytd-label">Year to date</h5>
+          <h6 class="ytd-label uppercase">Year to date</h6>
           <YearToDateArrow />
         </div>
       </div>
@@ -25,10 +25,17 @@
   </trakt-year-to-date-link>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   trakt-year-to-date-link {
     :global(.trakt-link) {
       text-decoration: none;
+
+      display: flex;
+      justify-self: flex-end;
+
+      width: fit-content;
     }
   }
 
@@ -39,33 +46,23 @@
     text-transform: uppercase;
 
     .ytd-label {
-      max-width: var(--ni-112);
+      max-width: var(--ni-72);
+      font-weight: 700;
     }
   }
 
   .ytd-link-content {
-    @media (max-width: 768px) {
-      display: flex;
-      gap: var(--gap-m);
+    display: flex;
+    gap: var(--gap-m);
+
+    :global(svg) {
+      width: var(--ni-28);
+      height: var(--ni-28);
     }
 
-    @media (max-width: 480px) {
+    @include for-mobile {
       .ytd-link-details {
         gap: var(--gap-xs);
-      }
-
-      .ytd-year {
-        font-size: var(--ni-48);
-      }
-
-      .ytd-label {
-        font-size: var(--ni-18);
-        max-width: var(--ni-96);
-      }
-
-      :global(svg) {
-        width: var(--ni-32);
-        height: var(--ni-32);
       }
     }
   }

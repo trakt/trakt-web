@@ -28,16 +28,10 @@
     <ProfilePageBanner {profile} {slug} />
   {/snippet}
 
-  <ProfileAbout about={profile.about} />
+  <RenderFor audience="all" navigation="default">
+    <YearToDateLink isVip={profile.isVip} {slug} />
+  </RenderFor>
 
-  {#snippet contextualContent()}
-    <RenderFor audience="all" navigation="default">
-      <YearToDateLink isVip={profile.isVip} {slug} />
-    </RenderFor>
-  {/snippet}
-</ProfileContainer>
-
-<ProfileContainer>
   {#if profile.isVip}
     <MonthToDate {slug} />
   {/if}
@@ -45,6 +39,8 @@
   {#if hasUpsell}
     <VipUpsell />
   {/if}
+
+  <ProfileAbout about={profile.about} />
 </ProfileContainer>
 
 <RecentlyWatchedList

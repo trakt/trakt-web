@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ClampedText from "$lib/components/text/ClampedText.svelte";
   import * as m from "$lib/features/i18n/messages";
 
   import { shuffle } from "$lib/utils/array/shuffle";
@@ -24,16 +25,6 @@
   ];
 </script>
 
-<p class="large secondary trakt-profile-about">
+<ClampedText classList="trakt-profile-about" label={m.read_more()}>
   {about ?? shuffle(ABOUT_MESSAGES).at(0)}
-</p>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-profile-about {
-    @include for-mobile {
-      font-size: var(--ni-16);
-    }
-  }
-</style>
+</ClampedText>
