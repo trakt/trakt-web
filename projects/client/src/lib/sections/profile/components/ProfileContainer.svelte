@@ -3,17 +3,11 @@
 
   type ProfileContainerProps = {
     details?: Snippet;
-    contextualContent?: Snippet;
   } & ChildrenProps;
 
-  const {
-    details,
-    contextualContent: content,
-    children,
-  }: ProfileContainerProps = $props();
+  const { details, children }: ProfileContainerProps = $props();
 </script>
 
-<!-- TODO extract duplication with summary container -->
 <div class="trakt-profile-container">
   {#if details}
     <div class="trakt-profile-details">
@@ -23,11 +17,6 @@
   <div class="trakt-profile-content">
     {@render children()}
   </div>
-  {#if content}
-    <div class="trakt-profile-contextual-content">
-      {@render content()}
-    </div>
-  {/if}
 </div>
 
 <style lang="scss">
@@ -36,8 +25,12 @@
   .trakt-profile-container {
     display: grid;
     gap: var(--gap-xl);
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 3fr;
     margin: 0 var(--layout-distance-side);
+
+    @include for-desktop {
+      max-width: 75dvw;
+    }
 
     @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
@@ -49,12 +42,9 @@
     }
   }
 
-  .trakt-profile-contextual-content {
-    justify-self: center;
-  }
-
   .trakt-profile-content {
-    align-self: end;
-    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
   }
 </style>

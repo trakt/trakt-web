@@ -120,10 +120,6 @@
     @include for-mobile {
       @include single-column-layout;
     }
-
-    @include for-tablet-lg {
-      @include single-column-layout;
-    }
   }
 
   .trakt-month-to-date-cover-image {
