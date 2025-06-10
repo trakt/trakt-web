@@ -1,5 +1,6 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
+  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -34,16 +35,24 @@
     {/if}
   </div>
   <div class="profile-info" data-hj-suppress>
-    <h5>
-      {nameLabel}
-    </h5>
-    <h6 class="user-location">{profile.location}</h6>
+    <div class="profile-user-details">
+      <h5>
+        {nameLabel}
+      </h5>
+      <h6 class="user-location">{profile.location}</h6>
+    </div>
+    <div class="profile-actions">
+      <RenderFor audience="authenticated">
+        {#if !isMe}
+          <FollowUserButton {profile} {slug} />
+        {/if}
+      </RenderFor>
+      <ShareButton
+        title={profile.name.first}
+        textFactory={({ title: name }) => m.share_person({ name })}
+      />
+    </div>
   </div>
-  <RenderFor audience="authenticated">
-    {#if !isMe}
-      <FollowUserButton {profile} {slug} />
-    {/if}
-  </RenderFor>
 </div>
 
 <style lang="scss">
@@ -60,14 +69,7 @@
       flex-direction: row;
       align-items: flex-end;
 
-      position: relative;
       margin: 0;
-
-      :global(.trakt-button) {
-        position: absolute;
-        top: var(--ni-neg-4);
-        right: 0;
-      }
     }
   }
 
@@ -87,8 +89,33 @@
   }
 
   .profile-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--gap-m);
+
     .user-location {
       color: var(--color-text-secondary);
+    }
+
+    @include for-tablet-sm-and-below {
+      width: 100%;
+      flex-direction: column-reverse;
+
+      gap: 0;
+    }
+  }
+
+  .profile-actions {
+    display: flex;
+    align-items: center;
+
+    gap: var(--gap-s);
+
+    @include for-tablet-sm-and-below {
+      align-self: flex-end;
+
+      gap: var(--gap-xs);
     }
   }
 </style>
