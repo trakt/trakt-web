@@ -4,7 +4,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { writable, type Writable } from "svelte/store";
   import { mobileAppleVisualViewportHack } from "./_internal/mobileAppleVisualViewportHack";
-  import { setDialogState } from "./_internal/setDialogState";
+  import { useDialogState } from "./_internal/useDialogState.ts";
 
   type DialogProps = {
     title: string;
@@ -18,6 +18,8 @@
     onClose,
     dialog = writable(),
   }: DialogProps = $props();
+
+  const { isOpen, setDialogState } = useDialogState();
 </script>
 
 <dialog
@@ -26,21 +28,23 @@
   use:mobileAppleVisualViewportHack
   onclose={() => onClose?.()}
 >
-  <div class="trakt-dialog-header">
-    <h5 class="secondary">{title}</h5>
-    <ActionButton
-      onclick={() => $dialog.close()}
-      label={m.close_label()}
-      style="ghost"
-      --color-foreground-default="var(--color-text-secondary)"
-    >
-      <CloseIcon />
-    </ActionButton>
-  </div>
+  {#if $isOpen}
+    <div class="trakt-dialog-header">
+      <h5 class="secondary">{title}</h5>
+      <ActionButton
+        onclick={() => $dialog.close()}
+        label={m.close_label()}
+        style="ghost"
+        --color-foreground-default="var(--color-text-secondary)"
+      >
+        <CloseIcon />
+      </ActionButton>
+    </div>
 
-  <div class="trakt-dialog-content">
-    {@render children()}
-  </div>
+    <div class="trakt-dialog-content">
+      {@render children()}
+    </div>
+  {/if}
 </dialog>
 
 <style lang="scss">

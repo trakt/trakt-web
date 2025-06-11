@@ -283,7 +283,6 @@
   "by": "af",
   "users_avatar": "{username}'s avatar",
   "media_poster": "{title} poster",
-  "popular_comments": "Populære kommentarer",
   "no_comments": "Ingen kommentarer endnu.",
   "review_by": "Anmeldelse af",
   "shout_by": "Skrig af",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Kommentar Svar",
   "comment_replies_text": "{count} svar",
   "comments": "Kommentarer",
+  "comment": "Kommentar",
   "comment_reply": "Svar",
   "comment_reply_label": "Svar til {user}",
   "comment_reply_placeholder": "Svar...",
+  "comment_post_label": "Tilføj kommentar",
+  "comment_post_placeholder": "Kommentar...",
   "comment_mark_as_spoiler": "Marker som spoiler",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Luk fejl",
@@ -430,5 +432,7 @@
   "following": "Følger",
   "followers": "Følgere",
   "not_following_anyone": "Der er ingen her (endnu).",
-  "read_more": "Læs mere"
+  "read_more": "Læs mere",
+  "add_comment": "Tilføj",
+  "popular_comments": "Populære kommentarer"
 }

@@ -1,4 +1,4 @@
-export const MIN_ROWS = 1;
+export const MIN_ROWS = 1; //TODO no export
 const MAX_ROWS = 5;
 
 function increaseRows(textArea: HTMLTextAreaElement) {
@@ -38,6 +38,7 @@ export function autoResizeArea(textArea: HTMLTextAreaElement) {
     });
   };
 
+  textArea.setAttribute('rows', `${MIN_ROWS}`);
   textArea.addEventListener('input', handler);
 
   return {

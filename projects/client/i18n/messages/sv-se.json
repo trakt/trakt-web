@@ -283,7 +283,6 @@
   "by": "av",
   "users_avatar": "{username}'s avatar",
   "media_poster": "{title} affisch",
-  "popular_comments": "Populära kommentarer",
   "no_comments": "Inga kommentarer än.",
   "review_by": "Recension av",
   "shout_by": "Rop av",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Kommentarsvar",
   "comment_replies_text": "{count} svar",
   "comments": "Kommentarer",
+  "comment": "Kommentar",
   "comment_reply": "Svara",
   "comment_reply_label": "Svara {user}",
   "comment_reply_placeholder": "Svara...",
+  "comment_post_label": "Lägg till kommentar",
+  "comment_post_placeholder": "Kommentar...",
   "comment_mark_as_spoiler": "Markera som spoiler",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Stäng fel",
@@ -430,5 +432,7 @@
   "following": "Följer",
   "followers": "Följare",
   "not_following_anyone": "Ingen här (än).",
-  "read_more": "Läs mer"
+  "read_more": "Läs mer",
+  "add_comment": "Lägg till",
+  "popular_comments": "Populära kommentarer"
 }

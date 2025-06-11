@@ -283,7 +283,6 @@
   "by": "przez",
   "users_avatar": "Awatar użytkownika {username}",
   "media_poster": "Plakat {title}",
-  "popular_comments": "Popularne komentarze",
   "no_comments": "Jeszcze brak komentarzy.",
   "review_by": "Recenzja od",
   "shout_by": "Krzyknął",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Odpowiedzi na komentarze",
   "comment_replies_text": "{count} odpowiedzi",
   "comments": "Komentarze",
+  "comment": "Komentarz",
   "comment_reply": "Odpowiedz",
   "comment_reply_label": "Odpowiedz {user}",
   "comment_reply_placeholder": "Odpowiedz...",
+  "comment_post_label": "Dodaj komentarz",
+  "comment_post_placeholder": "Komentarz...",
   "comment_mark_as_spoiler": "Oznacz jako spoiler",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Zamknij błąd",
@@ -430,5 +432,7 @@
   "following": "Obserwujesz",
   "followers": "Obserwujący",
   "not_following_anyone": "Nikt tu nie zagląda (jeszcze).",
-  "read_more": "Czytaj więcej"
+  "read_more": "Czytaj więcej",
+  "add_comment": "Dodaj",
+  "popular_comments": "Popularne komentarze"
 }

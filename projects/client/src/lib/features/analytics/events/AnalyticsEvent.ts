@@ -26,6 +26,7 @@ export const AnalyticsEvent = {
   List: buildEventKey(MEDIA_ACTION_PREFIX, 'list'),
   RemoveFromHistory: 'remove-from-history',
   LikeComment: buildEventKey(MEDIA_ACTION_PREFIX, 'like-comment'),
+  AddComment: buildEventKey(MEDIA_ACTION_PREFIX, 'add-comment'),
   Rate: buildEventKey(MEDIA_ACTION_PREFIX, 'rate'),
   CheckIn: buildEventKey(MEDIA_ACTION_PREFIX, 'check-in'),
   Extras: buildEventKey(MEDIA_ACTION_PREFIX, 'extras'),

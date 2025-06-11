@@ -283,7 +283,6 @@
   "by": "von",
   "users_avatar": "{username}'s Avatar",
   "media_poster": "{title} Poster",
-  "popular_comments": "Beliebte Kommentare",
   "no_comments": "Noch keine Kommentare. Sei der/die Erste!",
   "review_by": "Review von",
   "shout_by": "Shout von",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Kommentar-Antworten",
   "comment_replies_text": "{count} Antworten",
   "comments": "Kommentare",
+  "comment": "Kommentar",
   "comment_reply": "Antworten",
   "comment_reply_label": "Antwort an {user}",
   "comment_reply_placeholder": "Antwort...",
+  "comment_post_label": "Kommentar hinzufügen",
+  "comment_post_placeholder": "Kommentar...",
   "comment_mark_as_spoiler": "Als Spoiler markieren",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Fehler schließen",
@@ -430,5 +432,7 @@
   "following": "Abonniert",
   "followers": "Follower",
   "not_following_anyone": "Hier ist noch niemand (zumindest noch nicht).",
-  "read_more": "Mehr erfahren"
+  "read_more": "Mehr erfahren",
+  "add_comment": "Hinzufügen",
+  "popular_comments": "Beliebte Kommentare"
 }

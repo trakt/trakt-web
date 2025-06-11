@@ -283,7 +283,6 @@
   "by": "по",
   "users_avatar": "Аватара на {username}",
   "media_poster": "{title} плакат",
-  "popular_comments": "Популярни коментари",
   "no_comments": "Все още няма коментари",
   "review_by": "Прегледай по",
   "shout_by": "Вик от",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Отговори на коментари",
   "comment_replies_text": "{count} отговора",
   "comments": "Коментари",
+  "comment": "Коментар",
   "comment_reply": "Отговор",
   "comment_reply_label": "Отговор на {user}",
   "comment_reply_placeholder": "Отговор...",
+  "comment_post_label": "Добави коментар",
+  "comment_post_placeholder": "Коментар...",
   "comment_mark_as_spoiler": "Маркирай като спойлер",
   "comment_spoiler": "Спойлер",
   "comment_close_error_label": "Затвори грешката",
@@ -430,5 +432,7 @@
   "following": "Следвам",
   "followers": "Последователи",
   "not_following_anyone": "Тук няма никой (още).",
-  "read_more": "Прочети още"
+  "read_more": "Прочети още",
+  "add_comment": "Добави",
+  "popular_comments": "Популярни коментари"
 }

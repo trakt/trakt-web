@@ -185,6 +185,7 @@
   type="episode"
   season={episode.season}
   episode={episode.number}
+  id={episode.id}
 />
 
 <RelatedList title={m.related_shows_title()} slug={show.slug} type="show" />

@@ -283,7 +283,6 @@
   "by": "di",
   "users_avatar": "Avatar di {username}",
   "media_poster": "Locandina di {title}",
-  "popular_comments": "Commenti popolari",
   "no_comments": "Nessun commento per ora.",
   "review_by": "Recensione di",
   "shout_by": "Grido di",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Risposte ai commenti",
   "comment_replies_text": "{count} risposte",
   "comments": "Commenti",
+  "comment": "Commento",
   "comment_reply": "Rispondi",
   "comment_reply_label": "Rispondi a {user}",
   "comment_reply_placeholder": "Rispondi...",
+  "comment_post_label": "Aggiungi un commento",
+  "comment_post_placeholder": "Commento...",
   "comment_mark_as_spoiler": "Segna come spoiler",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Chiudi errore",
@@ -430,5 +432,7 @@
   "following": "Seguiti",
   "followers": "Follower",
   "not_following_anyone": "Non c'è nessuno qui (ancora).",
-  "read_more": "Leggi di più"
+  "read_more": "Leggi di più",
+  "add_comment": "Aggiungi",
+  "popular_comments": "Commenti popolari"
 }

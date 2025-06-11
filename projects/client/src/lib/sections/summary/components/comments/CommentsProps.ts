@@ -5,6 +5,7 @@ export type EpisodeCommentProps = {
   type: 'episode';
   season: number;
   episode: number;
+  id: number;
 };
 
 export type MediaCommentProps = {
