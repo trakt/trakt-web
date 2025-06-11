@@ -1,35 +1,54 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
-  import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaComment } from "$lib/requests/models/MediaComment";
+  import { NOOP_FN } from "$lib/utils/constants";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
-  import { autoResizeArea, MIN_ROWS } from "./autoResizeArea";
+  import type { ActiveComment } from "../models/ActiveComment";
+  import { autoResizeArea as autoResizeAreaFn } from "./autoResizeArea";
   import CommentError from "./CommentError.svelte";
   import SpoilerSwitch from "./SpoilerSwitch.svelte";
   import { toTranslatedError } from "./toTranslatedError";
   import { useContentObserver } from "./useContentObserver";
-  import { useReplyToComment } from "./useReplyToComment";
+  import { usePostComment, type UseAddCommentProps } from "./usePostComment";
 
   type CommentInputProps = {
-    comment: MediaComment;
-    onCommentPost: () => void;
-  };
+    label: string;
+    placeholder: string;
+    onCommentPost: (comment: ActiveComment) => void;
+    sizing?: "normal" | "auto";
+  } & UseAddCommentProps;
+
+  const {
+    label,
+    placeholder,
+    onCommentPost,
+    sizing = "auto",
+    ...props
+  }: CommentInputProps = $props();
 
   let textAreaElement: HTMLTextAreaElement;
 
-  const { comment, onCommentPost }: CommentInputProps = $props();
-
   const { contentObserver, hasContent } = $derived(useContentObserver());
-  const { isPostingReply, replyToComment, isSpoiler, error } =
-    useReplyToComment({
-      id: comment.id,
-    });
+  const { postComment, isCommenting, isSpoiler, error } = usePostComment({
+    ...props,
+  });
 
-  const onReply = async () => {
-    const response = await replyToComment(textAreaElement.value);
-    response.success && onCommentPost();
+  const autoResizeArea = $derived(
+    sizing === "auto" ? autoResizeAreaFn : NOOP_FN,
+  );
+
+  const postCommentHandler = async () => {
+    const response = await postComment(textAreaElement.value);
+    if (!response) {
+      return;
+    }
+
+    textAreaElement.value = "";
+    onCommentPost({
+      id: response.id,
+      isReplying: false,
+    });
   };
 
   onMount(() => {
@@ -41,28 +60,27 @@
   <div class="trakt-comment-reply-box" transition:slide={{ duration: 150 }}>
     <textarea
       bind:this={textAreaElement}
-      use:autoResizeArea
       use:contentObserver
-      disabled={$isPostingReply}
-      rows={MIN_ROWS}
-      placeholder={m.comment_reply_placeholder()}
+      use:autoResizeArea
+      disabled={$isCommenting}
+      {placeholder}
     ></textarea>
 
     <div class="trakt-comment-actions">
       <SpoilerSwitch
-        isReplying={$isPostingReply}
+        isReplying={$isCommenting}
         enabled={$isSpoiler}
         onclick={() => isSpoiler.update((value) => !value)}
       />
 
       <ActionButton
-        onclick={onReply}
-        label={m.comment_post_reply_label()}
+        onclick={postCommentHandler}
+        {label}
         style="ghost"
         color="purple"
         size="small"
         variant="secondary"
-        disabled={$isPostingReply || !$hasContent}
+        disabled={$isCommenting || !$hasContent}
       >
         <PostMessageIcon style={$hasContent ? "filled" : "open"} />
       </ActionButton>

@@ -283,7 +283,6 @@
   "by": "door",
   "users_avatar": "Avatar van {username}",
   "media_poster": "{title} poster",
-  "popular_comments": "Populaire reacties",
   "no_comments": "Nog geen reacties.",
   "review_by": "Review door",
   "shout_by": "Geschreeuwd door",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Reacties",
   "comment_replies_text": "{count} reacties",
   "comments": "Reacties",
+  "comment": "Reactie",
   "comment_reply": "Antwoord",
   "comment_reply_label": "Reageer op {user}",
   "comment_reply_placeholder": "Reageren...",
+  "comment_post_label": "Voeg een reactie toe",
+  "comment_post_placeholder": "Reactie...",
   "comment_mark_as_spoiler": "Markeren als spoiler",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Sluit fout",
@@ -430,5 +432,7 @@
   "following": "Volgend",
   "followers": "Volgers",
   "not_following_anyone": "Hier is nog niemand (nog niet).",
-  "read_more": "Lees meer"
+  "read_more": "Lees meer",
+  "add_comment": "Toevoegen",
+  "popular_comments": "Populaire reacties"
 }

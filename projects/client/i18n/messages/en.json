@@ -283,7 +283,6 @@
   "by": "by",
   "users_avatar": "{username}'s avatar",
   "media_poster": "{title} poster",
-  "popular_comments": "Popular comments",
   "no_comments": "No comments yet.",
   "review_by": "Review by",
   "shout_by": "Shout by",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Comment Replies",
   "comment_replies_text": "{count} replies",
   "comments": "Comments",
+  "comment": "Comment",
   "comment_reply": "Reply",
   "comment_reply_label": "Reply to {user}",
   "comment_reply_placeholder": "Reply...",
+  "comment_post_label": "Add a new comment",
+  "comment_post_placeholder": "Comment...",
   "comment_mark_as_spoiler": "Mark as spoiler",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Close error",
@@ -430,5 +432,6 @@
   "following": "Following",
   "followers": "Followers",
   "not_following_anyone": "There is no one here (yet).",
-  "read_more": "Read more"
+  "read_more": "Read more",
+  "add_comment": "Add Comment"
 }

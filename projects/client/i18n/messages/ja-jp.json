@@ -283,7 +283,6 @@
   "by": "作成者",
   "users_avatar": "{username}のアバター",
   "media_poster": "{title}のポスター",
-  "popular_comments": "人気のコメント",
   "no_comments": "まだコメントはありません。",
   "review_by": "レビュー:",
   "shout_by": "シャウト:",
@@ -344,9 +343,12 @@
   "comment_replies_label": "コメント返信",
   "comment_replies_text": "{count} 件の返信",
   "comments": "コメント",
+  "comment": "コメント",
   "comment_reply": "返信する",
   "comment_reply_label": "{user} に返信する",
   "comment_reply_placeholder": "返信...",
+  "comment_post_label": "コメントを追加",
+  "comment_post_placeholder": "コメント...",
   "comment_mark_as_spoiler": "ネタバレとしてマーク",
   "comment_spoiler": "ネタバレ",
   "comment_close_error_label": "エラーを閉じる",
@@ -430,5 +432,7 @@
   "following": "フォロー中",
   "followers": "フォロワー",
   "not_following_anyone": "まだ誰もいません。",
-  "read_more": "もっと読む"
+  "read_more": "もっと読む",
+  "add_comment": "追加",
+  "popular_comments": "人気のコメント"
 }

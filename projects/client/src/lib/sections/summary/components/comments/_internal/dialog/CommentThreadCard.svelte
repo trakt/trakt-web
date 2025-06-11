@@ -1,5 +1,6 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import LikeCommentAction from "../comment-actions/LikeCommentAction.svelte";
@@ -60,7 +61,13 @@
   </CommentFooter>
 
   {#if isReplying}
-    <CommentInput comment={userComment} onCommentPost={reset} />
+    <CommentInput
+      id={userComment.id}
+      commentType="reply"
+      onCommentPost={reset}
+      placeholder={m.comment_reply_placeholder()}
+      label={m.comment_post_reply_label()}
+    />
   {/if}
 {/snippet}
 

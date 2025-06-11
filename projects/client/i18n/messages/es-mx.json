@@ -283,7 +283,6 @@
   "by": "por",
   "users_avatar": "Avatar de {username}",
   "media_poster": "Póster de {title}",
-  "popular_comments": "Comentarios populares",
   "no_comments": "Aún no hay comentarios.",
   "review_by": "Reseña de",
   "shout_by": "Grito de",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Respuestas",
   "comment_replies_text": "{count} respuestas",
   "comments": "Comentarios",
+  "comment": "Comentario",
   "comment_reply": "Responder",
   "comment_reply_label": "Responder a {user}",
   "comment_reply_placeholder": "Respuesta...",
+  "comment_post_label": "Agregar comentario",
+  "comment_post_placeholder": "Comentario...",
   "comment_mark_as_spoiler": "Marcar como spoiler",
   "comment_spoiler": "¡Spoiler!",
   "comment_close_error_label": "Cerrar error",
@@ -430,5 +432,7 @@
   "following": "Siguiendo",
   "followers": "Seguidores",
   "not_following_anyone": "Aquí no hay nadie (todavía).",
-  "read_more": "Leer más"
+  "read_more": "Leer más",
+  "add_comment": "Agregar",
+  "popular_comments": "Comentarios populares"
 }

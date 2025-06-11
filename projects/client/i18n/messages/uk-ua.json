@@ -283,7 +283,6 @@
   "by": "від",
   "users_avatar": "Аватар {username}",
   "media_poster": "Постер {title}",
-  "popular_comments": "Популярні коментарі",
   "no_comments": "Ще немає коментарів.",
   "review_by": "Огляд від",
   "shout_by": "Вигук від",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Відповіді на коментарі",
   "comment_replies_text": "{count} відповідей",
   "comments": "Коментарі",
+  "comment": "Коментар",
   "comment_reply": "Відповісти",
   "comment_reply_label": "Відповісти {user}",
   "comment_reply_placeholder": "Відповідь...",
+  "comment_post_label": "Додати коментар",
+  "comment_post_placeholder": "Коментар...",
   "comment_mark_as_spoiler": "Позначити як спойлер",
   "comment_spoiler": "Спойлер",
   "comment_close_error_label": "Закрити помилку",
@@ -430,5 +432,7 @@
   "following": "Підписки",
   "followers": "Підписники",
   "not_following_anyone": "Тут нікого немає (поки що).",
-  "read_more": "Читати далі"
+  "read_more": "Читати далі",
+  "add_comment": "Додати",
+  "popular_comments": "Популярні коментарі"
 }

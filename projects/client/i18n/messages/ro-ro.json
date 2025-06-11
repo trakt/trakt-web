@@ -283,7 +283,6 @@
   "by": "de",
   "users_avatar": "Avatarul lui {username}",
   "media_poster": "Posterul {title}",
-  "popular_comments": "Comentarii populare",
   "no_comments": "Încă nu sunt comentarii.",
   "review_by": "Recenzie de",
   "shout_by": "Strigăt de",
@@ -344,9 +343,12 @@
   "comment_replies_label": "Răspunsuri comentarii",
   "comment_replies_text": "{count} răspunsuri",
   "comments": "Comentarii",
+  "comment": "Comentariu",
   "comment_reply": "Răspunde",
   "comment_reply_label": "Răspunde lui {user}",
   "comment_reply_placeholder": "Răspunde...",
+  "comment_post_label": "Adaugă un comentariu",
+  "comment_post_placeholder": "Comentariu...",
   "comment_mark_as_spoiler": "Marchează ca spoiler",
   "comment_spoiler": "Spoiler",
   "comment_close_error_label": "Închide eroare",
@@ -430,5 +432,7 @@
   "following": "Urmărește",
   "followers": "Urmăritori",
   "not_following_anyone": "Nimeni pe aici (încă).",
-  "read_more": "Citește mai mult"
+  "read_more": "Citește mai mult",
+  "add_comment": "Adaugă",
+  "popular_comments": "Comentarii populare"
 }
