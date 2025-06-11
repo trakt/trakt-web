@@ -52,6 +52,7 @@
   );
   --height-comment-thread-list: calc(
     var(--height-comment-thread-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
   );
 
   /**
