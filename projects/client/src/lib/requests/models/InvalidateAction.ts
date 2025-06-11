@@ -31,6 +31,7 @@ type TypeDataMap = {
   'user': UserType;
   'check_in': null;
   'favorited': MediaType;
+  'commented': ExtendedMediaType;
 };
 
 export function invalidationId(key?: string) {
@@ -59,6 +60,8 @@ export const InvalidateAction = {
 
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
   Listed: (type: MediaType) => buildInvalidationKey('listed', type),
+  Commented: (type: ExtendedMediaType) =>
+    buildInvalidationKey('commented', type),
 
   Drop: buildInvalidationKey('dropped', 'show'),
 
