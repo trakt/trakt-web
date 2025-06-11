@@ -1,34 +1,13 @@
-import { useDynamicTextArea } from '$lib/sections/summary/components/comments/_internal/dialog/useDynamicTextArea.ts';
-import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { autoResizeArea } from './autoResizeArea.ts';
 
 describe('action: useDynamicTextArea', () => {
   beforeEach(() => {
     vi.useFakeTimers({ toFake: ['requestAnimationFrame'] });
   });
 
-  it('should initialize with no content', () => {
-    const { hasContent } = useDynamicTextArea();
-    expect(get(hasContent)).toBe(false);
-  });
-
-  it('should detect content when text is added', () => {
-    const textArea = document.createElement('textarea');
-    const { autoResizeArea, hasContent } = useDynamicTextArea();
-    const action = autoResizeArea(textArea);
-
-    textArea.value = 'test';
-    textArea.dispatchEvent(new Event('input'));
-
-    vi.advanceTimersToNextFrame();
-
-    expect(get(hasContent)).toBe(true);
-    action.destroy();
-  });
-
   it('should increase rows when content overflows', () => {
     const textArea = document.createElement('textarea');
-    const { autoResizeArea } = useDynamicTextArea();
     const action = autoResizeArea(textArea);
 
     textArea.rows = 1;
@@ -46,7 +25,6 @@ describe('action: useDynamicTextArea', () => {
 
   it('should not exceed maximum rows', () => {
     const textArea = document.createElement('textarea');
-    const { autoResizeArea } = useDynamicTextArea();
     const action = autoResizeArea(textArea);
 
     textArea.rows = 5;
@@ -64,7 +42,6 @@ describe('action: useDynamicTextArea', () => {
 
   it('should decrease rows when content fits', () => {
     const textArea = document.createElement('textarea');
-    const { autoResizeArea } = useDynamicTextArea();
     const action = autoResizeArea(textArea);
 
     textArea.rows = 3;

@@ -1,5 +1,3 @@
-import { writable } from 'svelte/store';
-
 export const MIN_ROWS = 1;
 const MAX_ROWS = 5;
 
@@ -33,29 +31,18 @@ function resizeTextArea(textArea: HTMLTextAreaElement) {
   decreaseRows(textArea);
 }
 
-export function useDynamicTextArea() {
-  const hasContent = writable(false);
-
-  const autoResizeArea = (textArea: HTMLTextAreaElement) => {
-    const handler = () => {
-      requestAnimationFrame(() => {
-        resizeTextArea(textArea);
-
-        hasContent.set(textArea.value.trim().length > 0);
-      });
-    };
-
-    textArea.addEventListener('input', handler);
-
-    return {
-      destroy() {
-        textArea.removeEventListener('input', handler);
-      },
-    };
+export function autoResizeArea(textArea: HTMLTextAreaElement) {
+  const handler = () => {
+    requestAnimationFrame(() => {
+      resizeTextArea(textArea);
+    });
   };
 
+  textArea.addEventListener('input', handler);
+
   return {
-    autoResizeArea,
-    hasContent,
+    destroy() {
+      textArea.removeEventListener('input', handler);
+    },
   };
 }
