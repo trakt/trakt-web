@@ -1,5 +1,6 @@
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { SimpleRating } from '$lib/models/SimpleRating.ts';
+import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { UpNextType } from '$lib/sections/lists/progress/useUpNextExperiment.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
@@ -8,6 +9,7 @@ type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
 type FilterType = { id: string; action: 'set' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie' };
 type FollowType = { action: 'follow' | 'unfollow' };
+type ExtrasType = { slug: string; type: MediaVideoType };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -27,6 +29,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.LikeComment]: ActionType;
   [AnalyticsEvent.Rate]: RatingType;
   [AnalyticsEvent.CheckIn]: CheckInType;
+  [AnalyticsEvent.Extras]: ExtrasType;
 
   [AnalyticsEvent.Settings]: { settings: string };
 
