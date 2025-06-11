@@ -1,6 +1,7 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
@@ -16,16 +17,18 @@
 
 {#snippet action()}
   {#if !isFuture && !isActivity && !isHidden}
-    <MarkAsWatchedAction
-      allowRewatch={props.variant === "next"}
-      style="action"
-      type="episode"
-      size="small"
-      title={props.episode.title}
-      media={props.episode}
-      episode={props.episode}
-      show={props.show}
-    />
+    <RenderFor audience="authenticated">
+      <MarkAsWatchedAction
+        allowRewatch={props.variant === "next"}
+        style="action"
+        type="episode"
+        size="small"
+        title={props.episode.title}
+        media={props.episode}
+        episode={props.episode}
+        show={props.show}
+      />
+    </RenderFor>
   {/if}
 {/snippet}
 
