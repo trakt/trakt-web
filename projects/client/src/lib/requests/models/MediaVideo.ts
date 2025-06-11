@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const MediaVideoType = z.enum([
+export const MediaVideoTypeSchema = z.enum([
   'trailer',
   'clip',
   'teaser',
@@ -12,10 +12,12 @@ export const MediaVideoType = z.enum([
 
 export const MediaVideoSchema = z.object({
   id: z.string(),
-  type: MediaVideoType,
+  type: MediaVideoTypeSchema,
   url: z.string().url(),
   thumbnail: z.string().url(),
   title: z.string(),
   publishedAt: z.date(),
 });
+
+export type MediaVideoType = z.infer<typeof MediaVideoTypeSchema>;
 export type MediaVideo = z.infer<typeof MediaVideoSchema>;

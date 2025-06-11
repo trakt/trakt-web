@@ -28,6 +28,7 @@ export const AnalyticsEvent = {
   LikeComment: buildEventKey(MEDIA_ACTION_PREFIX, 'like-comment'),
   Rate: buildEventKey(MEDIA_ACTION_PREFIX, 'rate'),
   CheckIn: buildEventKey(MEDIA_ACTION_PREFIX, 'check-in'),
+  Extras: buildEventKey(MEDIA_ACTION_PREFIX, 'extras'),
 
   Settings: buildEventKey(USER_ACTION_PREFIX, 'settings'),
 

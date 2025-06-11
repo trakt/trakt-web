@@ -7,7 +7,11 @@
   import { getDeepLinkHandler } from "$lib/features/deep-link/getDeepLinkHandler";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
 
-  const { video }: { video: MediaVideo } = $props();
+  const {
+    video,
+    trackHandler,
+  }: { video: MediaVideo; trackHandler: () => void } = $props();
+
   const deepLinkHandler = getDeepLinkHandler();
 </script>
 
@@ -17,6 +21,8 @@
     href={video.url}
     target="_blank"
     onclick={(ev) => {
+      trackHandler();
+
       if (!deepLinkHandler) {
         return;
       }

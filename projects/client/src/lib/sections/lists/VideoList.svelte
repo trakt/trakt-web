@@ -2,6 +2,8 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { writable } from "svelte/store";
@@ -14,6 +16,8 @@
   };
 
   const { slug, videos }: VideoListProps = $props();
+
+  const { track } = useTrack(AnalyticsEvent.Extras);
 
   const { record, types } = $derived.by(() => {
     if (!videos.length) return { record: {}, types: [] };
@@ -35,6 +39,8 @@
   const firstType = $derived(types.at(0));
   const active = $derived(writable(firstType));
   const items = $derived(record[$active] ?? []);
+
+  const trackHandler = $derived(() => track({ slug, type: $active }));
 </script>
 
 {#if videos.length > 0}
@@ -45,7 +51,7 @@
     --height-list={mediaListHeightResolver("landscape")}
   >
     {#snippet item(video)}
-      <VideoItem {video} />
+      <VideoItem {video} {trackHandler} />
     {/snippet}
 
     {#snippet actions()}
