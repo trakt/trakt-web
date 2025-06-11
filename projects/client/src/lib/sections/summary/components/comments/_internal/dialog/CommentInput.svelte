@@ -5,10 +5,11 @@
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
+  import { autoResizeArea, MIN_ROWS } from "./autoResizeArea";
   import CommentError from "./CommentError.svelte";
   import SpoilerSwitch from "./SpoilerSwitch.svelte";
   import { toTranslatedError } from "./toTranslatedError";
-  import { MIN_ROWS, useDynamicTextArea } from "./useDynamicTextArea";
+  import { useContentObserver } from "./useContentObserver";
   import { useReplyToComment } from "./useReplyToComment";
 
   type CommentInputProps = {
@@ -20,7 +21,7 @@
 
   const { comment, onCommentPost }: CommentInputProps = $props();
 
-  const { autoResizeArea, hasContent } = $derived(useDynamicTextArea());
+  const { contentObserver, hasContent } = $derived(useContentObserver());
   const { isPostingReply, replyToComment, isSpoiler, error } =
     useReplyToComment({
       id: comment.id,
@@ -41,6 +42,7 @@
     <textarea
       bind:this={textAreaElement}
       use:autoResizeArea
+      use:contentObserver
       disabled={$isPostingReply}
       rows={MIN_ROWS}
       placeholder={m.comment_reply_placeholder()}
