@@ -31,6 +31,7 @@
   <select
     onchange={(ev) => handleFilterChange(ev.currentTarget.value)}
     data-dpad-navigation={DpadNavigationType.Item}
+    id={filter.key}
   >
     <option selected={false} value={null} aria-label={m.filter_reset()}>
       {m.filter_reset()}
