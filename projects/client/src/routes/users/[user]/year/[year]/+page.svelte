@@ -6,10 +6,14 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+
+  const audience = $derived(
+    page.params.user === "me" ? "authenticated" : "all",
+  );
 </script>
 
 <TraktPage
-  audience="all"
+  {audience}
   image={DEFAULT_SHARE_COVER}
   title={m.year_to_date_label()}
 >
