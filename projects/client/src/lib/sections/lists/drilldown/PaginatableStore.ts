@@ -6,6 +6,6 @@ export type PaginatableStore<T, M = MediaType> = (
   params: { type: M; page: number; limit: number } & FilterParams,
 ) => {
   list: Readable<T[]>;
-  page: Readable<{ total?: number }>;
+  page: Readable<{ total?: number; current?: number }>;
   isLoading: Readable<boolean>;
 };
