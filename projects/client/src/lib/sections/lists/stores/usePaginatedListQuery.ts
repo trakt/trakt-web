@@ -18,7 +18,7 @@ export function usePaginatedListQuery<
 
   const page = derived(
     query,
-    ($query) => $query.data?.page ?? { page: 0, total: 0 },
+    ($query) => $query.data?.page ?? { current: 0, total: 0 },
   );
 
   return { list, page, isLoading };
