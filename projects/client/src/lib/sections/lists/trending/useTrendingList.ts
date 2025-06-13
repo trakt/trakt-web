@@ -13,6 +13,7 @@ import {
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import { derived } from 'svelte/store';
 
 export type TrendingEntry = TrendingMovie | TrendingShow;
 export type TrendingMediaList = Paginatable<TrendingEntry>;
@@ -37,5 +38,15 @@ function typeToQuery(
 export function useTrendingList(
   props: TrendingListStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list, page, isLoading } = usePaginatedListQuery(typeToQuery(props));
+
+  // TODO: remove this filter when the server is fixed
+  return {
+    list: derived(
+      list,
+      ($list) => $list.filter((entry) => entry.id !== 0 && entry.slug !== null),
+    ),
+    page,
+    isLoading,
+  };
 }
