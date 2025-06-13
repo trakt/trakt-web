@@ -1,10 +1,11 @@
 <script lang="ts" generics="T extends { id: unknown }, M">
-  import { page as pageState } from "$app/state";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
-  import { DEFAULT_DRILL_SIZE, PAGE_UPPER_LIMIT } from "$lib/utils/constants";
+  import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants";
   import { writable } from "svelte/store";
   import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
   import type { MediaListProps } from "./MediaListProps";
+  import LoadingIndicator from "./_internal/LoadingIndicator.svelte";
+  import { useLazyLoader } from "./_internal/useLazyLoader";
 
   type DrilledMediaListProps = MediaListProps<T, M>;
 
@@ -17,32 +18,52 @@
     ...props
   }: DrilledMediaListProps = $props();
 
-  const current = $derived(
-    parseInt(pageState.url.searchParams.get("page") ?? "1"),
-  );
+  const currentPage = writable(1);
+  const loadedPages = writable<Map<number, T[]>>(new Map());
 
   const { list, page, isLoading } = $derived(
     useList({
       type,
       filter,
-      page: current,
+      page: $currentPage,
       limit: DEFAULT_DRILL_SIZE,
     }),
   );
 
-  const last = writable(Infinity);
-
   $effect(() => {
-    const total = $page?.total;
-    if (!total) return;
-    last.set(Math.min(total, PAGE_UPPER_LIMIT));
+    loadedPages.update((pages) => {
+      pages.set($page.current ?? 1, $list);
+      return pages;
+    });
   });
+
+  const loadMore = () => {
+    const hasMorePages = ($page?.total ?? 1) > $currentPage;
+    const isCurrentPageFetched =
+      $loadedPages.get($page?.current ?? 1) !== undefined;
+
+    if (isCurrentPageFetched && hasMorePages) {
+      currentPage.update((page) => page + 1);
+    }
+  };
+
+  const { observeDimension } = $derived(useLazyLoader({ loadMore }));
+  const allItems = $derived(Array.from($loadedPages.values()).flat());
 </script>
 
-<GridList {...props} items={$list} --width-item={mediaCardWidthResolver(type)}>
+<GridList
+  {...props}
+  items={allItems}
+  dimensionObserver={observeDimension}
+  --width-item={mediaCardWidthResolver(type)}
+>
   {#snippet empty()}
     {#if !$isLoading}
       {@render externalEmpty?.()}
     {/if}
   {/snippet}
 </GridList>
+
+{#if $isLoading}
+  <LoadingIndicator />
+{/if}

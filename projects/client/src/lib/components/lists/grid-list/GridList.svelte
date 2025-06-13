@@ -7,10 +7,20 @@
 
   type PageListProps<T> = ListProps<T> & {
     empty?: Snippet;
+    dimensionObserver?: (node: HTMLElement) => void;
   };
 
-  const { items, title, item, actions, empty, badge }: PageListProps<T> =
-    $props();
+  const {
+    items,
+    title,
+    item,
+    actions,
+    empty,
+    badge,
+    dimensionObserver,
+  }: PageListProps<T> = $props();
+
+  const customAction = (node: HTMLElement) => dimensionObserver?.(node);
 
   const isMounted = writable(false);
 
@@ -25,7 +35,7 @@
   {/if}
 
   {#if items.length > 0}
-    <div class="trakt-list-item-container trakt-list-items">
+    <div class="trakt-list-item-container trakt-list-items" use:customAction>
       {#each items as i (i.id)}
         {@render item(i)}
       {/each}
