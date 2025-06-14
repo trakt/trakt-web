@@ -67,6 +67,7 @@
   .trakt-collapsable-values-content {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 
     gap: var(--gap-xxs);
 
@@ -82,5 +83,9 @@
     gap: var(--gap-xxs);
 
     min-height: var(--ni-18);
+
+    :global(.trakt-link) {
+      min-width: 0;
+    }
   }
 </style>
