@@ -434,5 +434,7 @@
   "not_following_anyone": "Nimeni pe aici (încă).",
   "read_more": "Citește mai mult",
   "add_comment": "Adaugă",
+  "rename_list": "Redenumiți lista",
+  "rename_list_label": "Redenumiți lista {name}",
   "popular_comments": "Comentarii populare"
 }

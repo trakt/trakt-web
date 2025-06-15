@@ -434,5 +434,7 @@
   "not_following_anyone": "Aquí no hay nadie (todavía).",
   "read_more": "Leer más",
   "add_comment": "Agregar",
+  "rename_list": "Renombrar tu lista",
+  "rename_list_label": "Renombrar tu lista {name}",
   "popular_comments": "Comentarios populares"
 }

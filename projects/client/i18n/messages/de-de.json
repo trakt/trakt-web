@@ -434,5 +434,7 @@
   "not_following_anyone": "Hier ist noch niemand (zumindest noch nicht).",
   "read_more": "Mehr erfahren",
   "add_comment": "Hinzufügen",
+  "rename_list": "Liste umbenennen",
+  "rename_list_label": "Liste {name} umbenennen",
   "popular_comments": "Beliebte Kommentare"
 }

@@ -434,5 +434,7 @@
   "not_following_anyone": "まだ誰もいません。",
   "read_more": "もっと読む",
   "add_comment": "追加",
+  "rename_list": "リストの名前を変更",
+  "rename_list_label": "リストの名前を変更 {name}",
   "popular_comments": "人気のコメント"
 }

@@ -434,5 +434,7 @@
   "not_following_anyone": "Тут нікого немає (поки що).",
   "read_more": "Читати далі",
   "add_comment": "Додати",
+  "rename_list": "Перейменувати ваш список",
+  "rename_list_label": "Перейменувати ваш список {name}",
   "popular_comments": "Популярні коментарі"
 }

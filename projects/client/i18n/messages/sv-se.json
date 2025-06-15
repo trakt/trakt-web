@@ -434,5 +434,7 @@
   "not_following_anyone": "Ingen här (än).",
   "read_more": "Läs mer",
   "add_comment": "Lägg till",
+  "rename_list": "Byt namn på din lista",
+  "rename_list_label": "Byt namn på din lista {name}",
   "popular_comments": "Populära kommentarer"
 }
