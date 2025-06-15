@@ -434,5 +434,7 @@
   "not_following_anyone": "Hier is nog niemand (nog niet).",
   "read_more": "Lees meer",
   "add_comment": "Toevoegen",
+  "rename_list": "Hernoem je lijst",
+  "rename_list_label": "Hernoem je lijst {name}",
   "popular_comments": "Populaire reacties"
 }

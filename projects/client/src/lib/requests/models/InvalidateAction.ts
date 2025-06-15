@@ -16,7 +16,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:comment:reply`
   | `${typeof INVALIDATION_ID}:listed:${MediaType}`
   | `${typeof INVALIDATION_ID}:user:${UserType}`
-  | `${typeof INVALIDATION_ID}:check_in`;
+  | `${typeof INVALIDATION_ID}:check_in`
+  | `${typeof INVALIDATION_ID}:list:edited`;
 
 type TypeDataMap = {
   'auth': null;
@@ -32,6 +33,7 @@ type TypeDataMap = {
   'check_in': null;
   'favorited': MediaType;
   'commented': ExtendedMediaType;
+  'list': 'edited';
 };
 
 export function invalidationId(key?: string) {
@@ -80,4 +82,6 @@ export const InvalidateAction = {
   CheckIn: buildInvalidationKey('check_in'),
 
   Favorited: (type: MediaType) => buildInvalidationKey('favorited', type),
+
+  ListRenamed: buildInvalidationKey('list', 'edited'),
 };

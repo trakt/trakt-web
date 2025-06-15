@@ -36,4 +36,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Settings]: { settings: string };
 
   [AnalyticsEvent.Follow]: FollowType;
+
+  [AnalyticsEvent.ListRename]: never;
 };

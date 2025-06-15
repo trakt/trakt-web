@@ -434,5 +434,7 @@
   "not_following_anyone": "Nikt tu nie zagląda (jeszcze).",
   "read_more": "Czytaj więcej",
   "add_comment": "Dodaj",
+  "rename_list": "Zmień nazwę listy",
+  "rename_list_label": "Zmień nazwę listy {name}",
   "popular_comments": "Popularne komentarze"
 }

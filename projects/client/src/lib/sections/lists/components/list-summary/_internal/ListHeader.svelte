@@ -5,6 +5,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
+  import RenameListButton from "$lib/sections/lists/user/RenameListButton.svelte";
   import { getListUrl } from "./getListUrl";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
@@ -24,18 +25,29 @@
       <UserProfileLink user={list.user} />
     </div>
   </div>
+
+  <RenameListButton {list} />
 </div>
 
 <style>
   .trakt-list-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
 
     gap: var(--gap-xs);
   }
 
   .list-name-and-creator {
     display: grid;
+    min-width: 0;
+    flex-grow: 1;
+
+    :global(.trakt-link) {
+      min-width: 0;
+    }
   }
 
   .list-credits {

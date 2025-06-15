@@ -1,6 +1,7 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 
 import { listSummaryQuery } from '$lib/requests/queries/lists/listSummaryQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
 type UseListSummaryProps = {
@@ -12,5 +13,9 @@ export function useListSummary(props: UseListSummaryProps) {
 
   return {
     list: derived(query, ($query) => $query.data),
+    isLoading: derived(
+      query,
+      toLoadingState,
+    ),
   };
 }

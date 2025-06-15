@@ -434,5 +434,7 @@
   "not_following_anyone": "Der er ingen her (endnu).",
   "read_more": "Læs mere",
   "add_comment": "Tilføj",
+  "rename_list": "Omdøb din liste",
+  "rename_list_label": "Omdøb din liste {name}",
   "popular_comments": "Populære kommentarer"
 }

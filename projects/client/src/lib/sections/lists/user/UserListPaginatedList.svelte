@@ -1,17 +1,18 @@
 <script lang="ts">
-  import Preview from "$lib/components/badge/Preview.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import PopularListItem from "../popular/PopularListItem.svelte";
   import PopupActions from "./_internal/PopupActions.svelte";
-  import { useListItems, type ListParams } from "./useListItems";
+  import RenameListButton from "./RenameListButton.svelte";
+  import { useListItems } from "./useListItems";
 
   type UserListProps = {
     title: string;
     type?: MediaType;
-    list: ListParams;
+    list: MediaListSummary;
   };
 
   const { title, type, list }: UserListProps = $props();
@@ -45,6 +46,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <Preview />
+    <RenameListButton {list} />
   {/snippet}
 </DrilledMediaList>

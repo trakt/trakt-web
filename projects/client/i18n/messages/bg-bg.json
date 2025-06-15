@@ -434,5 +434,7 @@
   "not_following_anyone": "Тук няма никой (още).",
   "read_more": "Прочети още",
   "add_comment": "Добави",
+  "rename_list": "Преименувайте списъка си",
+  "rename_list_label": "Преименувайте списъка си {name}",
   "popular_comments": "Популярни коментари"
 }

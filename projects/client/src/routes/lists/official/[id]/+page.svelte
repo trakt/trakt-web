@@ -9,7 +9,7 @@
 
   const type = $derived(mapToMediaType(page.url.searchParams));
 
-  const { list } = $derived(
+  const { list, isLoading } = $derived(
     useListSummary({
       listId: page.params.id,
     }),
@@ -26,11 +26,7 @@
 >
   <TraktPageCoverSetter />
 
-  <UserListPaginatedList
-    title={listName}
-    list={{
-      id: parseInt(page.params.id),
-    }}
-    {type}
-  />
+  {#if !$isLoading}
+    <UserListPaginatedList title={listName} list={$list!} {type} />
+  {/if}
 </TraktPage>

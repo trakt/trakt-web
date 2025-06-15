@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
 type PersonalListsParams = { slug: string } & ApiParams;
@@ -23,7 +24,7 @@ const personalListsRequest = (
 
 export const personalListsQuery = defineQuery({
   key: 'personalLists',
-  invalidations: [],
+  invalidations: [InvalidateAction.ListRenamed],
   dependencies: (params) => [params.slug],
   request: personalListsRequest,
   mapper: (response) => response.body.map(mapToMediaListSummary),
