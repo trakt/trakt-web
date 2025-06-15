@@ -134,6 +134,7 @@
     touch-action: pan-y;
 
     position: relative;
+    min-width: 100%;
 
     will-change: transform;
 
