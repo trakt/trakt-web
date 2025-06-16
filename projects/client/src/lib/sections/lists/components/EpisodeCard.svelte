@@ -112,22 +112,23 @@
     {/if}
 
     {#if !isShowContext && !isActivity}
-      {#if episode.type === EpisodeComputedType.full_season}
-        <Link href={UrlBuilder.show(show.slug)}>
-          <p class="trakt-card-title uppercase ellipsis">
-            {seasonLabel(episode.season)}
-          </p>
-        </Link>
-      {:else}
-        <Link href={UrlBuilder.show(show.slug)}>
-          <p class="trakt-card-title ellipsis">{show.title}</p>
-        </Link>
-      {/if}
+      <Link href={UrlBuilder.show(show.slug)}>
+        <p
+          class="trakt-card-title ellipsis"
+          class:uppercase={episode.type === EpisodeComputedType.full_season}
+        >
+          {show.title}
+        </p>
+      </Link>
       <p class="trakt-card-subtitle ellipsis small">
-        {episode.season}x{episode.number}
-        <Spoiler media={episode} {show} {episode} type="episode">
-          - {episode.title}
-        </Spoiler>
+        {#if episode.type === EpisodeComputedType.full_season}
+          {seasonLabel(episode.season)}
+        {:else}
+          {episode.season}x{episode.number}
+          <Spoiler media={episode} {show} {episode} type="episode">
+            - {episode.title}
+          </Spoiler>
+        {/if}
       </p>
     {/if}
   </CardFooter>
