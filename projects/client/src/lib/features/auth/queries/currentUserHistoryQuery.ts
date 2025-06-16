@@ -46,6 +46,7 @@ export type WatchedEpisode = z.infer<typeof WatchedEpisodeSchema>;
 export const WatchedShowSchema = WatchedMediaSchema.extend({
   episodes: z.array(WatchedEpisodeSchema),
   isWatched: z.boolean(),
+  isPartiallyWatched: z.boolean(),
 });
 export type WatchedShow = z.infer<typeof WatchedShowSchema>;
 
@@ -63,12 +64,15 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
       }))
     );
 
+  const watchedEpisodeCount = episodes
+    .filter(({ season }) => season !== 0)
+    .length;
+
   return {
     id: show.ids.trakt,
     watchedAt: new Date(last_watched_at),
-    isWatched: episodes
-      .filter(({ season }) => season !== 0)
-      .length === aired,
+    isWatched: watchedEpisodeCount === aired,
+    isPartiallyWatched: watchedEpisodeCount > 0,
     plays,
     episodes,
   };
