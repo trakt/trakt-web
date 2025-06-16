@@ -2,6 +2,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
+  import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import FavoriteAction from "../media-actions/favorite/FavoriteAction.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useFavoritesList } from "./stores/useFavoritesList";
@@ -15,13 +16,14 @@
     $props();
 
   const { list, isLoading } = useFavoritesList({ type, slug });
+  const defaultVariant = $derived(useDefaultCardVariant(type));
 </script>
 
 <SectionList
   id={`favorites-list-${type}`}
   items={$list}
   {title}
-  --height-list={mediaListHeightResolver("portrait")}
+  --height-list={mediaListHeightResolver($defaultVariant)}
 >
   {#snippet item(media)}
     <DefaultMediaItem {type} media={media.item}>
