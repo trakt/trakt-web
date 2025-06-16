@@ -6,9 +6,9 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
-  import { useIsWatched } from "$lib/sections/media-actions/mark-as-watched/useIsWatched";
   import { fade } from "svelte/transition";
   import RateActionButton from "./_internal/RateActionButton.svelte";
+  import { useIsRateable } from "./_internal/useIsRateable";
   import { useRatings } from "./useRatings";
 
   type RateableEpisode = {
@@ -27,7 +27,7 @@
 
   const { ...props }: RateNowProps = $props();
 
-  const { isWatched } = $derived(useIsWatched(props));
+  const { isRateable } = $derived(useIsRateable(props));
 
   const type = $derived(props.type);
   const id = $derived(props.media.id);
@@ -41,7 +41,7 @@
 </script>
 
 <div class="trakt-rate-now" data-dpad-navigation={DpadNavigationType.List}>
-  {#if $isWatched}
+  {#if $isRateable}
     <h6>{m.rate_now()}</h6>
     <div class="trakt-rate-actions" transition:fade={{ duration: 150 }}>
       {#each Object.values(SimpleRating) as simpleRating}
