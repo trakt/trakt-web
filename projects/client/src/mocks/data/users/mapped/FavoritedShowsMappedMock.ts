@@ -45,6 +45,9 @@ export const FavoritedShowsMappedMock: FavoritedEntry[] = [
       'votes': 0,
       'colors': ['transparent', 'transparent'],
       'plexSlug': undefined,
+      'episode': {
+        'count': 19,
+      },
     },
   },
 ];
