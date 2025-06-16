@@ -14,12 +14,13 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import { typeToListMethod } from '../../_internal/typeToListMethod.ts';
 
 type UserListItemsParams =
   & {
     userId: string;
     listId: string;
-    type?: MediaType | 'movie,show';
+    type?: MediaType;
   }
   & PaginationParams
   & ApiParams
@@ -43,18 +44,19 @@ const userListItemsRequest = (
     limit,
     page,
     filter,
-    type = 'movie,show',
+    type,
   }: UserListItemsParams,
-) =>
-  api({ fetch })
+) => {
+  const method = typeToListMethod(type);
+
+  return api({ fetch })
     .users
     .lists
     .list
-    .items({
+    .items[method]({
       params: {
         id: userId,
         list_id: listId,
-        type,
       },
       query: {
         extended: 'full,images,colors',
@@ -63,6 +65,7 @@ const userListItemsRequest = (
         ...filter,
       },
     });
+};
 
 export const userListItemsQuery = defineQuery({
   key: 'userListItems',

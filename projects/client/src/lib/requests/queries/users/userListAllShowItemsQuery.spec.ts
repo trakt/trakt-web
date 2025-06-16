@@ -5,17 +5,16 @@ import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfile
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
-import { userListAllItemsQuery } from './userListAllItemsQuery.ts';
+import { userListAllShowItemsQuery } from './userListAllShowItemsQuery.ts';
 
-describe('userListAllItemsQuery', () => {
+describe('userListAllShowItemsQuery', () => {
   it('should query all show list items', async () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          userListAllItemsQuery({
+          userListAllShowItemsQuery({
             userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
-            type: 'show',
           }),
         ),
       mapper: (response) => response?.data,

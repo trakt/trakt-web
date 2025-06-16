@@ -1,11 +1,27 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
-import { userListAllItemsQuery } from '$lib/requests/queries/users/userListAllItemsQuery.ts';
 
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { userListAllMovieItemsQuery } from '$lib/requests/queries/users/userListAllMovieItemsQuery.ts';
+import { userListAllShowItemsQuery } from '$lib/requests/queries/users/userListAllShowItemsQuery.ts';
 import { derived, readable } from 'svelte/store';
 
 type UseIsListedProps = { list: MediaListSummary } & MediaStoreProps;
+
+function typeToQuery(type: MediaType, props: UseIsListedProps) {
+  const params = {
+    userId: props.list.user.slug ?? 'me',
+    listId: props.list.slug,
+  };
+
+  switch (type) {
+    case 'movie':
+      return userListAllMovieItemsQuery(params);
+    case 'show':
+      return userListAllShowItemsQuery(params);
+  }
+}
 
 export function useIsListed(props: UseIsListedProps) {
   if (props.type === 'episode') {
@@ -15,11 +31,7 @@ export function useIsListed(props: UseIsListedProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
 
-  const response = useQuery(userListAllItemsQuery({
-    type: props.type,
-    userId: props.list.user.slug ?? 'me',
-    listId: props.list.slug,
-  }));
+  const response = useQuery(typeToQuery(props.type, props));
 
   const isListed = derived(
     response,
