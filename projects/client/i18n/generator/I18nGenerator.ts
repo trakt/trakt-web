@@ -1,16 +1,35 @@
 /**
  * Generator for creating platform-specific internationalization resources
- * from meta message definitions.
+ * from meta message definitions using a factory pattern.
  */
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import {
   convertToAndroidFormat,
+  convertToIOSFormat,
   escapeXml,
-  generateXCStrings,
   writeFile,
 } from './utils.ts';
+
+export enum Platform {
+  WEB = 'web',
+  ANDROID = 'android',
+  IOS = 'ios',
+}
+
+export interface GenerationResult {
+  platform: Platform;
+  filePath: string;
+  content: string;
+}
+
+export interface PlatformGenerator {
+  generate(
+    metaMessages: MetaMessages[],
+    outputDir: string,
+  ): Promise<GenerationResult[]>;
+}
 
 export interface MetaMessageVariable {
   type: 'string' | 'number' | 'date' | 'time' | 'currency';
@@ -53,217 +72,311 @@ export interface MetaMessages {
   messages: Record<string, string | MetaMessageDefinition>;
 }
 
-export class I18nGenerator {
-  constructor(private _meta: MetaMessages) {}
+/**
+ * Web platform generator
+ */
+class WebGenerator implements PlatformGenerator {
+  async generate(
+    metaMessages: MetaMessages[],
+    outputDir: string,
+  ): Promise<GenerationResult[]> {
+    const results: GenerationResult[] = [];
 
-  /**
-   * Generate Inlang-compatible JSON resource
-   */
-  generateInlang(): Record<string, string> {
+    for (const meta of metaMessages) {
+      const config = meta.meta.generator?.inlang;
+      if (!config?.enabled) {
+        continue;
+      }
+
+      const content = this._generateContent(meta);
+      const filePath = path.resolve(
+        outputDir,
+        config.outputPath.replace('{locale}', meta.meta.locale),
+      );
+
+      await writeFile(filePath, JSON.stringify(content, null, 2));
+      console.log(`Generated Web resource: ${filePath}`);
+
+      results.push({
+        platform: Platform.WEB,
+        filePath,
+        content: JSON.stringify(content, null, 2),
+      });
+    }
+
+    return results;
+  }
+
+  private _generateContent(metaMessages: MetaMessages): Record<string, string> {
     const result: Record<string, string> = {
       $schema: 'https://inlang.com/schema/inlang-message-format',
     };
 
-    for (
-      const [key, definition] of Object.entries(this._meta.messages)
-    ) {
+    for (const [key, definition] of Object.entries(metaMessages.messages)) {
       if (typeof definition === 'string') {
         result[key] = definition;
       } else {
-        // Use the default text (single source of truth)
-        const text = definition.default;
-
-        // Web always uses the original key (web is the leading platform)
-        result[key] = text;
+        result[key] = definition.default;
       }
     }
 
     return result;
   }
+}
 
-  /**
-   * Generate Android XML resource
-   */
-  generateAndroid(): string {
-    const locale = this._meta.meta.locale;
+/**
+ * Android platform generator
+ */
+class AndroidGenerator implements PlatformGenerator {
+  async generate(
+    metaMessages: MetaMessages[],
+    outputDir: string,
+  ): Promise<GenerationResult[]> {
+    const results: GenerationResult[] = [];
 
-    let xml = `<?xml version="1.0" encoding="utf-8"?>\n`;
-    xml += `<!-- Generated from meta messages for locale: ${locale} -->\n`;
-    xml += `<resources>\n`;
+    for (const meta of metaMessages) {
+      const config = meta.meta.generator?.android;
+      if (!config?.enabled) {
+        continue;
+      }
 
-    for (
-      const [key, definition] of Object.entries(this._meta.messages)
-    ) {
+      const content = this._generateContent(meta);
+      const filePath = path.resolve(
+        outputDir,
+        config.outputPath.replace('{locale}', meta.meta.locale),
+      );
+
+      await writeFile(filePath, content);
+      console.log(`Generated Android resource: ${filePath}`);
+
+      results.push({
+        platform: Platform.ANDROID,
+        filePath,
+        content,
+      });
+    }
+
+    return results;
+  }
+
+  private _generateContent(metaMessages: MetaMessages): string {
+    const entries: string[] = [];
+
+    for (const [key, definition] of Object.entries(metaMessages.messages)) {
+      let text: string;
+      let actualKey: string;
+
       if (typeof definition === 'string') {
-        xml += `    <string name="${key}">${escapeXml(definition)}</string>\n`;
+        text = definition;
+        actualKey = key;
       } else {
-        // Use the default text (single source of truth)
-        const text = definition.default;
-        const androidText = convertToAndroidFormat(text, definition.variables);
+        text = definition.default;
+        actualKey = definition.platforms?.android?.key || key;
+      }
 
-        // Use platform-specific key if available, otherwise use original key
-        const androidKey = definition.platforms?.android?.key || key;
+      const androidText = convertToAndroidFormat(
+        text,
+        typeof definition === 'string' ? {} : (definition.variables || {}),
+      );
+      const escapedText = escapeXml(androidText);
+      entries.push(`    <string name="${actualKey}">${escapedText}</string>`);
+    }
 
-        // Add comment with description if available
-        if (definition.description) {
-          xml += `    <!-- ${definition.description} -->\n`;
+    return `<?xml version="1.0" encoding="utf-8"?>
+<resources>
+${entries.join('\n')}
+</resources>`;
+  }
+}
+
+/**
+ * iOS platform generator for generating a single String Catalog with all locales
+ */
+class IOSGenerator implements PlatformGenerator {
+  async generate(
+    metaMessages: MetaMessages[],
+    outputDir: string,
+  ): Promise<GenerationResult[]> {
+    if (metaMessages.length === 0) {
+      return [];
+    }
+
+    const firstMeta = metaMessages[0]!;
+    const iosConfig = firstMeta.meta.generator?.ios;
+    if (!iosConfig?.enabled) {
+      return [];
+    }
+
+    // Create unified catalog structure
+    const unifiedCatalog = {
+      sourceLanguage: 'en',
+      strings: {} as Record<
+        string,
+        {
+          localizations: Record<
+            string,
+            { stringUnit: { state: string; value: string } }
+          >;
+        }
+      >,
+      version: '1.0',
+    };
+
+    // Process all locales
+    for (const meta of metaMessages) {
+      for (const [key, definition] of Object.entries(meta.messages)) {
+        let text: string;
+        let actualKey: string;
+
+        if (typeof definition === 'string') {
+          text = definition;
+          actualKey = key;
+        } else {
+          text = definition.default;
+          actualKey = definition.platforms?.ios?.key || key;
         }
 
-        xml += `    <string name="${androidKey}">${
-          escapeXml(androidText)
-        }</string>\n`;
+        const iosText = convertToIOSFormat(
+          text,
+          typeof definition === 'string' ? {} : (definition.variables || {}),
+        );
+
+        if (!unifiedCatalog.strings[actualKey]) {
+          unifiedCatalog.strings[actualKey] = {
+            localizations: {},
+          };
+        }
+
+        unifiedCatalog.strings[actualKey]!.localizations[meta.meta.locale] = {
+          stringUnit: {
+            state: 'translated',
+            value: iosText,
+          },
+        };
       }
     }
 
-    xml += `</resources>\n`;
-    return xml;
-  }
+    const filePath = path.resolve(outputDir, iosConfig.outputPath);
+    const content = JSON.stringify(unifiedCatalog, null, 2);
+    await writeFile(filePath, content);
+    console.log(`✅ Generated unified iOS String Catalog: ${filePath}`);
 
-  /**
-   * Generate iOS String Catalog (.xcstrings) file
-   */
-  generateIOS(): string {
-    const locale = this._meta.meta.locale;
-
-    // Extract variables for all messages
-    const messageVariables: Record<string, Record<string, { type: string }>> =
-      {};
-    for (const [key, definition] of Object.entries(this._meta.messages)) {
-      if (typeof definition !== 'string' && definition.variables) {
-        messageVariables[key] = definition.variables;
-      }
-    }
-
-    return generateXCStrings(this._meta.messages, locale, messageVariables);
-  }
-
-  /**
-   * Generate all enabled platform resources except iOS (for batch processing)
-   */
-  async generateAllExceptIOS(outputDir: string): Promise<void> {
-    const { generator } = this._meta.meta;
-
-    if (generator?.inlang?.enabled) {
-      const inlangPath = path.resolve(
-        outputDir,
-        generator.inlang.outputPath.replace(
-          '{locale}',
-          this._meta.meta.locale,
-        ),
-      );
-      const inlangContent = JSON.stringify(this.generateInlang(), null, 2);
-      await writeFile(inlangPath, inlangContent);
-      console.log(`Generated Inlang resource: ${inlangPath}`);
-    }
-
-    if (generator?.android?.enabled) {
-      const androidPath = path.resolve(
-        outputDir,
-        generator.android.outputPath.replace(
-          '{locale}',
-          this._meta.meta.locale,
-        ),
-      );
-      const androidContent = this.generateAndroid();
-      await writeFile(androidPath, androidContent);
-      console.log(`Generated Android resource: ${androidPath}`);
-    }
-  }
-
-  /**
-   * Generate all enabled platform resources
-   */
-  async generateAll(outputDir: string): Promise<void> {
-    const { generator } = this._meta.meta;
-
-    if (generator?.inlang?.enabled) {
-      const inlangPath = path.resolve(
-        outputDir,
-        generator.inlang.outputPath.replace(
-          '{locale}',
-          this._meta.meta.locale,
-        ),
-      );
-      const inlangContent = JSON.stringify(this.generateInlang(), null, 2);
-      await writeFile(inlangPath, inlangContent);
-      console.log(`Generated Inlang resource: ${inlangPath}`);
-    }
-
-    if (generator?.android?.enabled) {
-      const androidPath = path.resolve(
-        outputDir,
-        generator.android.outputPath.replace(
-          '{locale}',
-          this._meta.meta.locale,
-        ),
-      );
-      const androidContent = this.generateAndroid();
-      await writeFile(androidPath, androidContent);
-      console.log(`Generated Android resource: ${androidPath}`);
-    }
-
-    if (generator?.ios?.enabled) {
-      const iosPath = path.resolve(
-        outputDir,
-        generator.ios.outputPath.replace(
-          '{locale}',
-          this._meta.meta.locale,
-        ),
-      );
-      const iosContent = this.generateIOS();
-      await writeFile(iosPath, iosContent);
-      console.log(`Generated iOS resource: ${iosPath}`);
-    }
-
-    if (generator?.ios?.enabled) {
-      const iosPath = path.resolve(
-        outputDir,
-        generator.ios.outputPath.replace(
-          '{locale}',
-          this._meta.meta.locale,
-        ),
-      );
-      const iosContent = this.generateIOS();
-      await writeFile(iosPath, iosContent);
-      console.log(`Generated iOS String Catalog: ${iosPath}`);
-    }
+    return [{
+      platform: Platform.IOS,
+      filePath,
+      content,
+    }];
   }
 }
 
 /**
- * CLI function to generate resources from meta files without iOS (for batch processing)
+ * Factory for creating platform-specific generators
  */
-export async function generateFromMetaExceptIOS(
-  metaFilePath: string,
-  outputDir: string,
-): Promise<void> {
-  try {
-    const metaContent = await fs.promises.readFile(metaFilePath, 'utf-8');
-    const metaMessages: MetaMessages = JSON.parse(metaContent);
+export class GeneratorFactory {
+  static create(platform: Platform): PlatformGenerator {
+    switch (platform) {
+      case Platform.WEB:
+        return new WebGenerator();
+      case Platform.ANDROID:
+        return new AndroidGenerator();
+      case Platform.IOS:
+        return new IOSGenerator();
+      default:
+        throw new Error(`Unsupported platform: ${platform}`);
+    }
+  }
 
-    const generator = new I18nGenerator(metaMessages);
-    await generator.generateAllExceptIOS(outputDir);
-  } catch (error) {
-    console.error(`Error generating resources from ${metaFilePath}:`, error);
-    throw error;
+  static getEnabledPlatforms(metaMessages: MetaMessages): Platform[] {
+    const platforms: Platform[] = [];
+    const { generator } = metaMessages.meta;
+
+    if (generator?.inlang?.enabled) {
+      platforms.push(Platform.WEB);
+    }
+    if (generator?.android?.enabled) {
+      platforms.push(Platform.ANDROID);
+    }
+    if (generator?.ios?.enabled) {
+      platforms.push(Platform.IOS);
+    }
+
+    return platforms;
   }
 }
 
 /**
- * CLI function to generate resources from meta files
+ * Main generator class that orchestrates platform-specific generation
+ */
+export class I18nGenerator {
+  constructor(private _metaMessages: MetaMessages[]) {}
+
+  /**
+   * Generate resources for specified platforms
+   */
+  async generatePlatforms(
+    platforms: Platform[],
+    outputDir: string,
+  ): Promise<GenerationResult[]> {
+    const results: GenerationResult[] = [];
+
+    for (const platform of platforms) {
+      const generator = GeneratorFactory.create(platform);
+      const platformResults = await generator.generate(
+        this._metaMessages,
+        outputDir,
+      );
+      results.push(...platformResults);
+    }
+
+    return results;
+  }
+
+  /**
+   * Generate resources for all enabled platforms
+   */
+  generateAll(outputDir: string): Promise<GenerationResult[]> {
+    const enabledPlatforms = GeneratorFactory.getEnabledPlatforms(
+      this._metaMessages[0]!,
+    );
+    return this.generatePlatforms(enabledPlatforms, outputDir);
+  }
+}
+
+/**
+ * High-level API for generating resources from files or directories
  */
 export async function generateFromMeta(
-  metaFilePath: string,
+  input: string,
   outputDir: string,
-): Promise<void> {
-  try {
-    const metaContent = await fs.promises.readFile(metaFilePath, 'utf-8');
-    const metaMessages: MetaMessages = JSON.parse(metaContent);
+  platforms?: Platform[],
+): Promise<GenerationResult[]> {
+  const inputPath = path.resolve(input);
+  const stat = await fs.promises.stat(inputPath);
 
-    const generator = new I18nGenerator(metaMessages);
-    await generator.generateAll(outputDir);
-  } catch (error) {
-    console.error(`Error generating resources from ${metaFilePath}:`, error);
-    throw error;
+  if (!stat.isDirectory()) {
+    throw new Error('Input must be a directory containing meta files');
   }
+
+  const files = await fs.promises.readdir(inputPath);
+  const metaFiles = files.filter((file) => file.endsWith('.json'));
+
+  if (metaFiles.length === 0) {
+    throw new Error(`No JSON files found in directory: ${inputPath}`);
+  }
+
+  // Load all meta files
+  const metaMessagesList: MetaMessages[] = [];
+  for (const file of metaFiles) {
+    const filePath = path.join(inputPath, file);
+    const content = await fs.promises.readFile(filePath, 'utf-8');
+    const metaMessages: MetaMessages = JSON.parse(content);
+    metaMessagesList.push(metaMessages);
+  }
+
+  // Generate for all platforms with all locales
+  const generator = new I18nGenerator(metaMessagesList);
+  const targetPlatforms = platforms ||
+    GeneratorFactory.getEnabledPlatforms(metaMessagesList[0]!);
+
+  return generator.generatePlatforms(targetPlatforms, outputDir);
 }

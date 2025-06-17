@@ -97,12 +97,20 @@ export async function writeFile(
 export function generateXCStrings(
   messages: Record<string, any>,
   locale: string,
-  variables?: Record<string, Record<string, { type: string }>>,
 ): string {
   const stringCatalog = {
     sourceLanguage: locale,
     version: '1.0',
-    strings: {} as Record<string, any>,
+    strings: {} as Record<
+      string,
+      {
+        comment?: string;
+        localizations: Record<
+          string,
+          { stringUnit: { state: string; value: string } }
+        >;
+      }
+    >,
   };
 
   for (const [key, definition] of Object.entries(messages)) {
@@ -120,10 +128,13 @@ export function generateXCStrings(
     }
 
     // Convert to iOS format
-    const messageVariables = variables?.[key];
+    const messageVariables = typeof definition === 'string'
+      ? undefined
+      : definition.variables;
     const iosText = convertToIOSFormat(text, messageVariables);
 
-    const stringEntry: any = {
+    const stringEntry = {
+      comment,
       localizations: {
         [locale]: {
           stringUnit: {
@@ -133,11 +144,6 @@ export function generateXCStrings(
         },
       },
     };
-
-    // Add comment if available
-    if (comment) {
-      stringEntry.comment = comment;
-    }
 
     stringCatalog.strings[actualKey] = stringEntry;
   }
