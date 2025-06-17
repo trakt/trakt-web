@@ -47,7 +47,7 @@
       "action.yml"
     ]
   },
-  "explorer.excludeGitIgnore": true,
+  "explorer.excludeGitIgnore": false,
   "files.insertFinalNewline": true,
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"

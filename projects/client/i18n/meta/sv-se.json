@@ -1,0 +1,1770 @@
+{
+  "$schema": "../schema/meta-messages.schema.json",
+  "meta": {
+    "locale": "sv-se",
+    "direction": "ltr",
+    "generator": {
+      "inlang": {
+        "enabled": true,
+        "outputPath": "./messages/{locale}.json"
+      },
+      "android": {
+        "enabled": true,
+        "outputPath": "./android/values-{locale}/strings.xml",
+        "resourceName": "strings"
+      },
+      "ios": {
+        "enabled": true,
+        "outputPath": "./ios/Localizable.xcstrings"
+      }
+    }
+  },
+  "messages": {
+    "upcoming_schedule_title": {
+      "default": "Kommande schema"
+    },
+    "season_premiere": {
+      "default": "Säsongspremiär"
+    },
+    "series_premiere": {
+      "default": "Seriepremiär"
+    },
+    "mid_season_premiere": {
+      "default": "Mid-Säsongspremiär"
+    },
+    "season_finale": {
+      "default": "Säsongsavslutning"
+    },
+    "series_finale": {
+      "default": "Serieavslutning"
+    },
+    "mid_season_finale": {
+      "default": "Mid-Säsongsavslutning"
+    },
+    "profile_banner_greeting": {
+      "default": "Hej, {name}",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "up_next_title": {
+      "default": "Nästa"
+    },
+    "remaining_episodes": {
+      "default": "{count} kvar",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "recommended_movies": {
+      "default": "Rekommenderade filmer"
+    },
+    "recommended_shows": {
+      "default": "Rekommenderade serier"
+    },
+    "number_of_episodes": {
+      "default": "{count} avsnitt",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "error_404_title": {
+      "default": "404: Ingenting. Tomrummet."
+    },
+    "error_404_message": {
+      "default": "(Oroa dig inte, det händer! Till och med Kraften är ibland ur balans.)"
+    },
+    "error_404_action": {
+      "default": "Tillbaka till säkerheten..."
+    },
+    "mark_as_watched_ask_prompt": {
+      "default": "När slutade du titta på detta? (ÅÅÅÅ-MM-DD TT:MM)"
+    },
+    "watchlist_action_label": {
+      "default": "Att se"
+    },
+    "mark_as_watched": {
+      "default": "Markera som sett"
+    },
+    "mark_as_watched_until": {
+      "default": "Sett hit"
+    },
+    "watch_again": {
+      "default": "Titta igen"
+    },
+    "add_to_watchlist_label": {
+      "default": "Lägg till {title} i din to-watch",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_label": {
+      "default": "Markera {title} som sett",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_until_label": {
+      "default": "Markera {title} som sett hit",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "genre_horror": {
+      "default": "Skräck"
+    },
+    "genre_comedy": {
+      "default": "Komedi"
+    },
+    "genre_action": {
+      "default": "Action"
+    },
+    "genre_adventure": {
+      "default": "Äventyr"
+    },
+    "genre_animation": {
+      "default": "Animation"
+    },
+    "genre_biography": {
+      "default": "Biografi"
+    },
+    "genre_children": {
+      "default": "Barn"
+    },
+    "genre_crime": {
+      "default": "Kriminal"
+    },
+    "genre_documentary": {
+      "default": "Dokumentär"
+    },
+    "genre_drama": {
+      "default": "Drama"
+    },
+    "genre_family": {
+      "default": "Familj"
+    },
+    "genre_fantasy": {
+      "default": "Fantasy"
+    },
+    "genre_game_show": {
+      "default": "Spelprogram"
+    },
+    "genre_history": {
+      "default": "Historia"
+    },
+    "genre_home_and_garden": {
+      "default": "Hem och Trädgård"
+    },
+    "genre_holiday": {
+      "default": "Högtid"
+    },
+    "genre_music": {
+      "default": "Musik"
+    },
+    "genre_musical": {
+      "default": "Musikal"
+    },
+    "genre_mystery": {
+      "default": "Mysterium"
+    },
+    "genre_news": {
+      "default": "Nyheter"
+    },
+    "genre_none": {
+      "default": "Ingen"
+    },
+    "genre_reality": {
+      "default": "Reality"
+    },
+    "genre_romance": {
+      "default": "Romantik"
+    },
+    "genre_short": {
+      "default": "Kortfilm"
+    },
+    "genre_soap": {
+      "default": "Såpa"
+    },
+    "genre_special_interest": {
+      "default": "Specialintresse"
+    },
+    "genre_sporting_event": {
+      "default": "Sportevenemang"
+    },
+    "genre_suspense": {
+      "default": "Spänning"
+    },
+    "genre_talk_show": {
+      "default": "Talkshow"
+    },
+    "genre_thriller": {
+      "default": "Thriller"
+    },
+    "genre_war": {
+      "default": "Krig"
+    },
+    "genre_western": {
+      "default": "Western"
+    },
+    "genre_anime": {
+      "default": "Anime"
+    },
+    "genre_superhero": {
+      "default": "Superhjälte"
+    },
+    "genre_donghua": {
+      "default": "Donghua"
+    },
+    "genre_mini_series": {
+      "default": "Miniserie"
+    },
+    "genre_science_fiction": {
+      "default": "Science Fiction"
+    },
+    "remove_from_watchlist_label": {
+      "default": "Ta bort {title} från din to-watch",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "search_placeholder": {
+      "default": "Sök serier & filmer..."
+    },
+    "join_trakt_button": {
+      "default": "Gå med i Trakt"
+    },
+    "join_trakt_button_label": {
+      "default": "Gå med i trakt.tv för att hålla koll på vad du tittar på"
+    },
+    "copyright_notice": {
+      "default": "Alla rättigheter förbehållna."
+    },
+    "copyright_crafted_by": {
+      "default": "Handgjord runt om i världen"
+    },
+    "join_trakt_for_free_button": {
+      "default": "Gå med i Trakt gratis"
+    },
+    "landing_discover_label": {
+      "default": "Upptäck"
+    },
+    "landing_discover_description": {
+      "default": "Vad som är hett och var man kan streama det."
+    },
+    "landing_track_label": {
+      "default": "Spåra"
+    },
+    "landing_track_description": {
+      "default": "Alla serier och filmer du någonsin har sett."
+    },
+    "landing_share_label": {
+      "default": "Dela"
+    },
+    "landing_share_description": {
+      "default": "Kommentarer, betyg och rekommendationer."
+    },
+    "trending": {
+      "default": "Trendigt"
+    },
+    "recommendations": {
+      "default": "Rekommendationer"
+    },
+    "most_anticipated": {
+      "default": "Mest efterlängtade"
+    },
+    "get": {
+      "default": "Hämta"
+    },
+    "get_vip_label": {
+      "default": "Lås upp VIP-funktioner"
+    },
+    "user_profile_label": {
+      "default": "Användarprofil"
+    },
+    "most_popular": {
+      "default": "Mest populära"
+    },
+    "navbar_link_movies": {
+      "default": "Filmer"
+    },
+    "navbar_link_movies_label": {
+      "default": "Bläddra bland filmer"
+    },
+    "navbar_link_shows": {
+      "default": "Serier"
+    },
+    "navbar_link_shows_label": {
+      "default": "Bläddra bland serier"
+    },
+    "navbar_link_home": {
+      "default": "Hem"
+    },
+    "navbar_link_home_label": {
+      "default": "Gå tillbaka till startsidan"
+    },
+    "watchers": {
+      "default": "Tittare"
+    },
+    "plays": {
+      "default": "{number} visningar",
+      "variables": {
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "lists": {
+      "default": "Listor"
+    },
+    "favorited": {
+      "default": "Favorit"
+    },
+    "profile": {
+      "default": "Profil"
+    },
+    "logout": {
+      "default": "Logga ut"
+    },
+    "unreleased_movies_title": {
+      "default": "Kommer snart"
+    },
+    "tba_label": {
+      "default": "TBA"
+    },
+    "related_movies_title": {
+      "default": "Relaterade filmer"
+    },
+    "related_shows_title": {
+      "default": "Relaterade serier"
+    },
+    "about_placeholder_1": {
+      "default": "Den här användaren är ett mysterium, höljt i gåtor... (eller kanske bara lat? Vem vet, det här är internet.)"
+    },
+    "about_placeholder_2": {
+      "default": "Tydligen är den här användaren för upptagen med att titta på filmer för att skriva om sig själv. (Helt rätt, jag kan relatera.)"
+    },
+    "about_placeholder_3": {
+      "default": "Den här användarens profil är en tom duk, ett informationsvakuum... (ungefär som mitt sociala liv. suck)"
+    },
+    "about_placeholder_4": {
+      "default": "Avslöja hemligheterna bakom den här användarens identitet... (om du vågar)"
+    },
+    "about_placeholder_5": {
+      "default": "Vilka dolda djup ligger under den här tomma profilen? (Sanningen finns där ute...)"
+    },
+    "about_placeholder_6": {
+      "default": "Den här användaren är ett spöke i maskinen, ett digitalt spöke... (eller så glömde de bara att fylla i detta?)"
+    },
+    "about_placeholder_7": {
+      "default": "Hjälp den här användaren! Be dem att fylla i sin profil. (De kanske till och med belönar dig med en virtuell high five!)"
+    },
+    "about_placeholder_8": {
+      "default": "Den här profilen ber om uppmärksamhet. Ge den lite kärlek och be användaren att fylla i den."
+    },
+    "about_placeholder_9": {
+      "default": "Var inte blyg! Uppmuntra den här användaren att dela med sig av sin historia. (Alla har en historia att berätta, även om det bara handlar om deras favoritserie.)"
+    },
+    "about_placeholder_10": {
+      "default": "Den här användaren är som en karaktär i en David Lynch-film: gåtfull, mystisk och möjligen en produkt av sin egen fantasi."
+    },
+    "about_placeholder_11": {
+      "default": "Den här profilen är lika tom som en Blockbuster-videobutik på en fredagskväll. (Kommer ni ihåg dem? Bra tider.)"
+    },
+    "about_placeholder_12": {
+      "default": "Den här användaren kanaliserar sin inre Tyler Durden: avvisar konsumism och omfamnar tomrummet. (Eller så har de bara inte tagit sig tid att fylla i detta ännu.)"
+    },
+    "about_placeholder_13": {
+      "default": "En stiliserad bild: En rolig illustration av en detektiv som kliar sig i huvudet av förvirring, eller en rullande tumbleweed över en tom profilsida."
+    },
+    "about_placeholder_14": {
+      "default": "Ett interaktivt element: En knapp som låter användare skicka en vänlig puff till profilägaren och uppmuntra dem att fylla i sin profil."
+    },
+    "about_placeholder_15": {
+      "default": "Ett personligt meddelande: Om du har någon information om användaren (t.ex. deras visningshistorik), kan du använda den för att generera en mer personlig platshållare, som 'Den här användaren älskar skräckfilmer men hatar att skriva bios. (Kanske gömmer de sig från zombies?)'"
+    },
+    "watchlist_movies_empty": {
+      "default": "Din to-watch är tom. Lägg till filmer för att skapa ditt filmiska mästerverk."
+    },
+    "watchlist_shows_empty": {
+      "default": "Din to-watch är tom. Lägg till serier för att mata din fantasi."
+    },
+    "upcoming_schedule_empty": {
+      "default": "Utforska TV-serier och anpassa ditt schema."
+    },
+    "up_next_empty": {
+      "default": "Börja titta och lägg till serier i din to-watch."
+    },
+    "released_movies_empty": {
+      "default": "Lägg till filmer i din to-watch och missa aldrig en premiär."
+    },
+    "unreleased_movies_empty": {
+      "default": "Lägg till kommande filmer i din to-watch och håll dig uppdaterad."
+    },
+    "find_movies_link": {
+      "default": "Hitta filmer"
+    },
+    "find_shows_link": {
+      "default": "Hitta serier"
+    },
+    "active_watchers": {
+      "default": "{count} tittar",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "shows": {
+      "default": "Serier"
+    },
+    "episodes_watched": {
+      "default": "{count} avsnitt sett",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "movies": {
+      "default": "Filmer"
+    },
+    "movies_watched": {
+      "default": "{count} filmer sedda",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "details": {
+      "default": "Detaljer"
+    },
+    "expand_category": {
+      "default": "Expandera {category}",
+      "variables": {
+        "category": {
+          "type": "string",
+          "description": "Category name"
+        }
+      }
+    },
+    "and_more": {
+      "default": "{count} till",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "premiered": {
+      "default": "Premiär"
+    },
+    "runtime": {
+      "default": "Längd"
+    },
+    "country": {
+      "default": "Land"
+    },
+    "language": {
+      "default": "Språk"
+    },
+    "studio": {
+      "default": "Studio"
+    },
+    "genre": {
+      "default": "Genre"
+    },
+    "navbar_link_lists": {
+      "default": "Listor"
+    },
+    "navbar_link_lists_label": {
+      "default": "Utforska listor"
+    },
+    "watchlist_shows": {
+      "default": "Dina serier"
+    },
+    "watchlist_movies": {
+      "default": "Dina filmer"
+    },
+    "watch_title_now": {
+      "default": "Titta på {title} nu",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "streaming_service_logo": {
+      "default": "{service} logotyp",
+      "variables": {
+        "service": {
+          "type": "string",
+          "description": "Service name"
+        }
+      }
+    },
+    "director": {
+      "default": "Regissör"
+    },
+    "writer": {
+      "default": "Manusförfattare"
+    },
+    "creator": {
+      "default": "Skapare"
+    },
+    "job_action_director": {
+      "default": "Actionregissör"
+    },
+    "job_additional_second_assistant_director": {
+      "default": "Ytterligare andraassistentregissör"
+    },
+    "job_additional_third_assistant_director": {
+      "default": "Ytterligare tredjeassistentregissör"
+    },
+    "job_assistant_director": {
+      "default": "Assistentregissör"
+    },
+    "job_assistant_director_trainee": {
+      "default": "Assistentregissörselev"
+    },
+    "job_co_director": {
+      "default": "Medregissör"
+    },
+    "job_continuity": {
+      "default": "Kontinuitet"
+    },
+    "job_crowd_assistant_director": {
+      "default": "Assistentregissör (publik)"
+    },
+    "job_director": {
+      "default": "Regissör"
+    },
+    "job_field_director": {
+      "default": "Fältregissör"
+    },
+    "job_first_assistant_director": {
+      "default": "Förstaassistentregissör"
+    },
+    "job_first_assistant_director_trainee_prep": {
+      "default": "Förstaassistentregissör (Prep)"
+    },
+    "job_first_assistant_director_trainee": {
+      "default": "Förstaassistentregissörselev"
+    },
+    "job_insert_unit_director": {
+      "default": "Insert Unit-regissör"
+    },
+    "job_insert_unit_first_assistant_director": {
+      "default": "Insert Unit-förstaassistentregissör"
+    },
+    "job_layout": {
+      "default": "Layout"
+    },
+    "job_other": {
+      "default": "Annat"
+    },
+    "job_script_coordinator": {
+      "default": "Manuskoordinator"
+    },
+    "job_script_supervisor": {
+      "default": "Manusövervakare"
+    },
+    "job_second_assistant_director": {
+      "default": "Andraassistentregissör"
+    },
+    "job_second_assistant_director_trainee": {
+      "default": "Andraassistentregissörselev"
+    },
+    "job_second_second_assistant_director": {
+      "default": "Andra andraassistentregissör"
+    },
+    "job_second_unit_director": {
+      "default": "Second Unit-regissör"
+    },
+    "job_second_unit_first_assistant_director": {
+      "default": "Second Unit-förstaassistentregissör"
+    },
+    "job_series_director": {
+      "default": "Serieregissör"
+    },
+    "job_series_guest_director": {
+      "default": "Specialgästregissör"
+    },
+    "job_stage_director": {
+      "default": "Scenregissör"
+    },
+    "job_third_assistant_director": {
+      "default": "Tredjeassistentregissör"
+    },
+    "job_adaptation": {
+      "default": "Adaption"
+    },
+    "job_author": {
+      "default": "Författare"
+    },
+    "job_book": {
+      "default": "Bok"
+    },
+    "job_characters": {
+      "default": "Karaktärer"
+    },
+    "job_co_writer": {
+      "default": "Medförfattare"
+    },
+    "job_comic_book": {
+      "default": "Serietidning"
+    },
+    "job_creative_producer": {
+      "default": "Kreativ producent"
+    },
+    "job_dialogue": {
+      "default": "Dialog"
+    },
+    "job_executive_story_editor": {
+      "default": "Executive Story Editor"
+    },
+    "job_graphic_novel": {
+      "default": "Graphic Novel"
+    },
+    "job_head_of_story": {
+      "default": "Head of Story"
+    },
+    "job_idea": {
+      "default": "Idé"
+    },
+    "job_junior_story_editor": {
+      "default": "Junior Story Editor"
+    },
+    "job_lyricist": {
+      "default": "Textförfattare"
+    },
+    "job_musical": {
+      "default": "Musikal"
+    },
+    "job_novel": {
+      "default": "Roman"
+    },
+    "job_opera": {
+      "default": "Opera"
+    },
+    "job_original_concept": {
+      "default": "Originalkoncept"
+    },
+    "job_original_film_writer": {
+      "default": "Original Film-författare"
+    },
+    "job_original_series_creator": {
+      "default": "Original Serie-skapare"
+    },
+    "job_original_original_story": {
+      "default": "Originalberättelse"
+    },
+    "job_scenario_writer": {
+      "default": "Manusförfattare"
+    },
+    "job_screenplay": {
+      "default": "Filmmanus"
+    },
+    "job_screenstory": {
+      "default": "Screenstory"
+    },
+    "job_script_consultant": {
+      "default": "Manuskonsult"
+    },
+    "job_script_editor": {
+      "default": "Manusredaktör"
+    },
+    "job_senior_story_editor": {
+      "default": "Senior Story Editor"
+    },
+    "job_series_composition": {
+      "default": "Seriens komposition"
+    },
+    "job_short_story": {
+      "default": "Novell"
+    },
+    "job_staff_writer": {
+      "default": "Stabsskribent"
+    },
+    "job_story": {
+      "default": "Berättelse"
+    },
+    "job_story_story_artist": {
+      "default": "Story Artist"
+    },
+    "job_story_story_consultant": {
+      "default": "Story Consultant"
+    },
+    "job_story_story_coordinator": {
+      "default": "Story Coordinator"
+    },
+    "job_story_story_developer": {
+      "default": "Story Developer"
+    },
+    "job_story_story_editor": {
+      "default": "Story Editor"
+    },
+    "job_story_story_manager": {
+      "default": "Story Manager"
+    },
+    "job_story_story_supervisor": {
+      "default": "Story Supervisor"
+    },
+    "job_storyboard": {
+      "default": "Storyboard"
+    },
+    "job_teleplay": {
+      "default": "TV-manus"
+    },
+    "job_texte": {
+      "default": "Texte"
+    },
+    "job_theatre_play": {
+      "default": "Teaterpjäs"
+    },
+    "job_writer": {
+      "default": "Författare"
+    },
+    "job_writers_assistant": {
+      "default": "Författarassistent"
+    },
+    "job_writers_production": {
+      "default": "Författarproduktion"
+    },
+    "job_creator": {
+      "default": "Skapare"
+    },
+    "remove_from_watched": {
+      "default": "Ta bort från sedda"
+    },
+    "remove_from_watched_label": {
+      "default": "Ta bort {title} från din Sedda-lista",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_watched_warning": {
+      "default": "Är du säker på att du vill ta bort {title} från din Sedda-lista? Alla visningar kommer att tas bort.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_single_watched_label": {
+      "default": "Ta bort den här visningen av {title} från din Sedda-lista",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_single_watched_warning": {
+      "default": "Är du säker på att du vill ta bort den här visningen av {title} från din Sedda-lista?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "seasons_label": {
+      "default": "Säsonger"
+    },
+    "season_number_label": {
+      "default": "Säsong {number}",
+      "variables": {
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "season_specials": {
+      "default": "Specialavsnitt"
+    },
+    "expand_media_overview": {
+      "default": "Utvidga {title} översikt",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "season_episode_number_label": {
+      "default": "Säsong {season} • Avsnitt {number}",
+      "variables": {
+        "season": {
+          "type": "string",
+          "description": "Season number"
+        },
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "share_title": {
+      "default": "Dela {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "status": {
+      "default": "Status"
+    },
+    "status_released": {
+      "default": "Släppt"
+    },
+    "status_planned": {
+      "default": "Planerad"
+    },
+    "status_post_production": {
+      "default": "Post-produktion"
+    },
+    "status_canceled": {
+      "default": "Inställd"
+    },
+    "status_in_production": {
+      "default": "Under produktion"
+    },
+    "status_rumored": {
+      "default": "Ryktas"
+    },
+    "status_ended": {
+      "default": "Avslutad"
+    },
+    "status_returning_series": {
+      "default": "Återkommande serie"
+    },
+    "status_pilot": {
+      "default": "Pilot"
+    },
+    "status_continuing": {
+      "default": "Pågående"
+    },
+    "status_upcoming": {
+      "default": "Kommande"
+    },
+    "status_unknown": {
+      "default": "Okänd"
+    },
+    "expected_premiere": {
+      "default": "Förväntad premiär"
+    },
+    "person_headshot": {
+      "default": "Huvudbild på {person}",
+      "variables": {
+        "person": {
+          "type": "string",
+          "description": "Person name"
+        }
+      }
+    },
+    "actors": {
+      "default": "Skådespelare"
+    },
+    "anticipated_count": {
+      "default": "{count} förväntansfulla",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "view_all_trending_movies": {
+      "default": "Se alla trendiga filmer"
+    },
+    "view_all_trending_shows": {
+      "default": "Se alla trendiga serier"
+    },
+    "trending_shows": {
+      "default": "Trendiga serier"
+    },
+    "trending_movies": {
+      "default": "Trendiga filmer"
+    },
+    "view_all": {
+      "default": "Se alla"
+    },
+    "full_season": {
+      "default": "Hela säsongen"
+    },
+    "remove_from_watchlist_warning": {
+      "default": "Är du säker på att du vill ta bort {title} från din to-watch?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "view_all_recommended_movies": {
+      "default": "Se alla rekommenderade filmer"
+    },
+    "view_all_recommended_shows": {
+      "default": "Se alla rekommenderade serier"
+    },
+    "view_all_anticipated_movies": {
+      "default": "Se alla förväntade filmer"
+    },
+    "view_all_anticipated_shows": {
+      "default": "Se alla förväntade serier"
+    },
+    "anticipated_movies": {
+      "default": "Förväntade filmer"
+    },
+    "anticipated_shows": {
+      "default": "Förväntade serier"
+    },
+    "view_all_popular_movies": {
+      "default": "Se alla populära filmer"
+    },
+    "view_all_popular_shows": {
+      "default": "Se alla populära serier"
+    },
+    "popular_movies": {
+      "default": "Populära filmer"
+    },
+    "popular_shows": {
+      "default": "Populära serier"
+    },
+    "rate_now": {
+      "default": "Betygsätt nu"
+    },
+    "add_to_favorites": {
+      "default": "Lägg till i favoriter"
+    },
+    "remove_from_favorites": {
+      "default": "Ta bort från favoriter"
+    },
+    "add_to_favorites_label": {
+      "default": "Lägg till {title} i dina favoriter",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_favorites_label": {
+      "default": "Ta bort {title} från dina favoriter",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_favorites_warning": {
+      "default": "Är du säker på att du vill ta bort {title} från dina favoriter?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "favorite_movies": {
+      "default": "Favoritfilmer"
+    },
+    "favorite_shows": {
+      "default": "Favoritprogram"
+    },
+    "favorite_movies_empty": {
+      "default": "Din favoritfilmlista är tom."
+    },
+    "favorite_shows_empty": {
+      "default": "Din favoritprogramlista är tom."
+    },
+    "stream_on": {
+      "default": "Streama på"
+    },
+    "your_watchlist_shows": {
+      "default": "Dina to-watch-serier"
+    },
+    "your_watchlist_movies": {
+      "default": "Dina to-watch-filmer"
+    },
+    "view_all_watchlist_movies": {
+      "default": "Se alla to-watch-filmer"
+    },
+    "view_all_watchlist_shows": {
+      "default": "Se alla to-watch-serier"
+    },
+    "streaming": {
+      "default": "Streaming"
+    },
+    "on_demand": {
+      "default": "On Demand"
+    },
+    "media_popup_label": {
+      "default": "Popup-meny för {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "popular_lists": {
+      "default": "Populära listor"
+    },
+    "no_popular_lists": {
+      "default": "{title} visas inte på några populära listor.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "by": {
+      "default": "av"
+    },
+    "users_avatar": {
+      "default": "{username}'s avatar",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "media_poster": {
+      "default": "{title} affisch",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "no_comments": {
+      "default": "Inga kommentarer än."
+    },
+    "review_by": {
+      "default": "Recension av"
+    },
+    "shout_by": {
+      "default": "Rop av"
+    },
+    "deleted_user": {
+      "default": "Raderad"
+    },
+    "social_activity_title": {
+      "default": "Social aktivitet"
+    },
+    "view_all_social_activity": {
+      "default": "Se all social aktivitet"
+    },
+    "position_dropwdown_label": {
+      "default": "Position"
+    },
+    "position_acting": {
+      "default": "Skådespeleri"
+    },
+    "position_production": {
+      "default": "Produktion"
+    },
+    "position_art": {
+      "default": "Konst"
+    },
+    "position_crew": {
+      "default": "Team"
+    },
+    "position_costume___make_up": {
+      "default": "Kostym & Smink"
+    },
+    "position_directing": {
+      "default": "Regi"
+    },
+    "position_writing": {
+      "default": "Skrivande"
+    },
+    "position_sound": {
+      "default": "Ljud"
+    },
+    "position_camera": {
+      "default": "Kamera"
+    },
+    "position_lighting": {
+      "default": "Belysning"
+    },
+    "position_visual_effects": {
+      "default": "Visuella effekter"
+    },
+    "position_editing": {
+      "default": "Redigering"
+    },
+    "position_creator": {
+      "default": "Skapare"
+    },
+    "position_created_by": {
+      "default": "Skapad av"
+    },
+    "personal_lists": {
+      "default": "Personliga"
+    },
+    "collaborative_lists": {
+      "default": "Samarbeten"
+    },
+    "liked_lists": {
+      "default": "Gillade"
+    },
+    "share_movie": {
+      "default": "Hittade precis {title} - du måste se den här! 🎬",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_show": {
+      "default": "Hittade den här fantastiska serien: {title}! 📺",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_episode": {
+      "default": "Såg precis {show} S{season}E{episode} - {title}! 🔥",
+      "variables": {
+        "show": {
+          "type": "string",
+          "description": "Show title"
+        },
+        "season": {
+          "type": "string",
+          "description": "Season number"
+        },
+        "episode": {
+          "type": "string",
+          "description": "Episode number"
+        },
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_person": {
+      "default": "Kolla in {name} på Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "recently_watched": {
+      "default": "Nyligen sett"
+    },
+    "view_all_recently_watched": {
+      "default": "Se allt nyligen sett"
+    },
+    "released_movies_title": {
+      "default": "Tillgänglig nu"
+    },
+    "view_all_released_movies": {
+      "default": "Se alla filmer som är tillgängliga nu"
+    },
+    "view_all_unreleased_movies": {
+      "default": "Se alla filmer som kommer snart"
+    },
+    "switch_to_og": {
+      "default": "Byt till Trakt.tv"
+    },
+    "preview": {
+      "default": "Förhandsgranska"
+    },
+    "preview_description": {
+      "default": "Den här funktionen håller fortfarande på att målas om, medborgare. Vi hamrar på UX och får den att sjunga som en kör av änglar (eller åtminstone fungera smidigt utan att framkalla existentiell ångest)."
+    },
+    "airs": {
+      "default": "Sänds"
+    },
+    "aired": {
+      "default": "Sändes"
+    },
+    "drop_show_warning": {
+      "default": "Är du säker på att du vill sluta följa serien {title}? Detta kommer att ta bort den från din nästa-lista.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "drop_show_label": {
+      "default": "Markera serien {title} som avslutad",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "drop_show": {
+      "default": "Sluta följa"
+    },
+    "enable_up_next_nitro_label": {
+      "default": "Aktivera Nästa Nitro, det snabbaste sättet att titta på dina serier"
+    },
+    "lab_up_next_nitro_label": {
+      "default": "Aktivera Nästa Nitro"
+    },
+    "lab_up_next_nitro_message": {
+      "default": "Det här experimentet är en prestandauppgradering som förbättrar upplevelsen för alla användare."
+    },
+    "lab_up_next_nitro_hidden_message": {
+      "default": "På grund av interna designförändringar kommer tidigare dolda serier nu att vara synliga i din lista med en svartvit miniatyrbild för att hjälpa dig att snabbt upptäcka dem, med möjlighet att antingen återskapa dem eller ta bort dem från listan."
+    },
+    "restore_show_warning": {
+      "default": "Är du säker på att du vill återställa serien {title}? Detta kommer att återställa den i dina framsteg och kalender.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "restore_show_label": {
+      "default": "Återställ serien {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "restore_show": {
+      "default": "Återställ serie"
+    },
+    "mark_as_watched_show_warning": {
+      "default": "Är du säker på att du vill markera {title} som sedd? Detta kommer att markera alla avsnitt som sedda.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_show_until_warning": {
+      "default": "Är du säker på att du vill markera alla osedda avsnitt av {title} som sedda fram till avsnitt {episode}? Detta kommer att markera {count} avsnitt som sedda.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "episode": {
+          "type": "string",
+          "description": "Episode number"
+        },
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "mark_as_watched_multiple_episodes_warning": {
+      "default": "Är du säker på att du vill markera {count} avsnitt som sedda?",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "watch_count_label": {
+      "default": "Antal visningar"
+    },
+    "watched_episodes_count_label": {
+      "default": "Visade avsnitt"
+    },
+    "empty_media_history_label": {
+      "default": "Du har inte sett {title} än",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "like_comment_label": {
+      "default": "Gilla kommentar"
+    },
+    "unlike_comment_label": {
+      "default": "Ogilla kommentar"
+    },
+    "comment_likes": {
+      "default": "{count} gillar",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "close_label": {
+      "default": "Stäng"
+    },
+    "comment_replies_label": {
+      "default": "Kommentarsvar"
+    },
+    "comment_replies_text": {
+      "default": "{count} svar",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "comments": {
+      "default": "Kommentarer"
+    },
+    "comment": {
+      "default": "Kommentar"
+    },
+    "comment_reply": {
+      "default": "Svara"
+    },
+    "comment_reply_label": {
+      "default": "Svara {user}",
+      "variables": {
+        "user": {
+          "type": "string",
+          "description": "User reference"
+        }
+      }
+    },
+    "comment_reply_placeholder": {
+      "default": "Svara..."
+    },
+    "comment_post_label": {
+      "default": "Lägg till kommentar"
+    },
+    "comment_post_placeholder": {
+      "default": "Kommentar..."
+    },
+    "comment_mark_as_spoiler": {
+      "default": "Markera som spoiler"
+    },
+    "comment_spoiler": {
+      "default": "Spoiler"
+    },
+    "comment_close_error_label": {
+      "default": "Stäng fel"
+    },
+    "comment_post_reply_label": {
+      "default": "Publicera svar"
+    },
+    "error_comment_invalid_content": {
+      "default": "Kommentarer måste vara minst 5 ord och på engelska."
+    },
+    "error_comment_unknown": {
+      "default": "Ett fel uppstod när du publicerade din kommentar. Försök igen senare."
+    },
+    "profile_page_title": {
+      "default": "{username}'s profil",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "private_profile": {
+      "default": "Denna profil är privat"
+    },
+    "private_profile_description": {
+      "default": "Som om det inte fanns tillräckligt dolt redan. {username}s hemligheter förblir deras egna.",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "original_title": {
+      "default": "Originaltitel"
+    },
+    "view_all_comments": {
+      "default": "Visa alla kommentarer"
+    },
+    "remove_from_list": {
+      "default": "Ta bort från listan"
+    },
+    "remove_from_list_label": {
+      "default": "Ta bort {title} från listan",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "error_page_service_title": {
+      "default": "Trakt-tjänsten ej tillgänglig"
+    },
+    "error_page_service_message": {
+      "default": "Anslutningen är... borta. Som ett bortglömt minne."
+    },
+    "error_page_service_status": {
+      "default": "Trakt-tjänstens status"
+    },
+    "retry": {
+      "default": "Försök igen"
+    },
+    "community_sentiment": {
+      "default": "Samhällsopinion"
+    },
+    "lists_action_label": {
+      "default": "Listor"
+    },
+    "listed": {
+      "default": "Listad"
+    },
+    "add_remove_from_lists": {
+      "default": "Lägg till eller ta bort {title} från listor",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "add_to_personal_list_label": {
+      "default": "Lägg till {title} i {list}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "remove_from_personal_list_label": {
+      "default": "Ta bort {title} från {list}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "remove_from_personal_list_warning": {
+      "default": "Är du säker på att du vill ta bort {title} från {list}?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "theme_light": {
+      "default": "Ljus"
+    },
+    "theme_dark": {
+      "default": "Mörk"
+    },
+    "theme_system": {
+      "default": "System"
+    },
+    "filter_label": {
+      "default": "Filtrera"
+    },
+    "filter_reset": {
+      "default": "Återställ"
+    },
+    "results_for_title": {
+      "default": "Resultat för {query}",
+      "variables": {
+        "query": {
+          "type": "string",
+          "description": "Search query"
+        }
+      }
+    },
+    "type_movie": {
+      "default": "Film"
+    },
+    "type_show": {
+      "default": "Serie"
+    },
+    "sign_in": {
+      "default": "Logga in"
+    },
+    "code_retry_title": {
+      "default": "Något gick fel"
+    },
+    "code_retry_message": {
+      "default": "Aktiveringen nekades, gick ut eller något oförutsett hände. Försök igen."
+    },
+    "code_instruction": {
+      "default": "Skanna QR-koden, eller logga in på:"
+    },
+    "code_label": {
+      "default": "och ange följande kod:"
+    },
+    "filter_all": {
+      "default": "Alla"
+    },
+    "filters_title": {
+      "default": "Filter"
+    },
+    "ignore_watched": {
+      "default": "Ignorera sett"
+    },
+    "ignore_watchlisted": {
+      "default": "Ignorera att se"
+    },
+    "watchnow_filter_label": {
+      "default": "Tillgänglighet"
+    },
+    "watchnow_favorites_only": {
+      "default": "Endast favoriter"
+    },
+    "watchnow_digital_release": {
+      "default": "Alla digitala utgåvor"
+    },
+    "watchnow_streaming": {
+      "default": "Streamar nu"
+    },
+    "decade": {
+      "default": "Årtionde"
+    },
+    "ratings": {
+      "default": "Betyg"
+    },
+    "view_all_items_in": {
+      "default": "Visa alla i {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "filter_reset_all": {
+      "default": "Återställ alla"
+    },
+    "filter_reset_all_label": {
+      "default": "Återställ alla filter"
+    },
+    "video_type_trailer": {
+      "default": "Trailer"
+    },
+    "video_type_clip": {
+      "default": "Klipp"
+    },
+    "video_type_teaser": {
+      "default": "Teaser"
+    },
+    "video_type_featurette": {
+      "default": "Featurette"
+    },
+    "video_type_recap": {
+      "default": "Sammanfattning"
+    },
+    "video_type_behind_the_scenes": {
+      "default": "Bakom kulisserna"
+    },
+    "now_playing": {
+      "default": "Spelas nu"
+    },
+    "remaining": {
+      "default": "återstår"
+    },
+    "checkin": {
+      "default": "Checka in"
+    },
+    "checkin_label": {
+      "default": "Checka in {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "cookie_notice": {
+      "default": "Trakt använder C🍪🍪KIES för att förbättra din upplevelse. Du kan <a>läsa mer information</a> här."
+    },
+    "cookie_accept": {
+      "default": "Okej, kör!"
+    },
+    "year_to_date_label": {
+      "default": "Hittills i år"
+    },
+    "month_in_review_label": {
+      "default": "Månadens överblick"
+    },
+    "settings": {
+      "default": "Inställningar"
+    },
+    "settings_spoilers_title": {
+      "default": "Spoilers"
+    },
+    "settings_spoilers_label": {
+      "default": "Visa spoilers"
+    },
+    "filter_save": {
+      "default": "Spara"
+    },
+    "filter_save_label": {
+      "default": "Spara filter"
+    },
+    "error_page_locked_account_title": {
+      "default": "Konto låst"
+    },
+    "error_page_locked_account_message": {
+      "default": "Ditt konto är låst, <a>kontakta supporten</a> för att lösa detta problem."
+    },
+    "first_play_this_month": {
+      "default": "Första visningen denna månad"
+    },
+    "shows_watched": {
+      "default": "{count} serier tittade på",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "follow": {
+      "default": "Följ"
+    },
+    "follow_label": {
+      "default": "Följ {username}",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "unfollow": {
+      "default": "Sluta följ"
+    },
+    "unfollow_label": {
+      "default": "Sluta följ {username}",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "unfollow_warning": {
+      "default": "Är du säker på att du vill sluta följa {username}?",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "vip_upsell_title": {
+      "default": "Lås upp VIP-funktioner för att förbättra din Trakt-upplevelse"
+    },
+    "vip_upsell_description": {
+      "default": "Vill du se din månads- och årsöversikt? Och få tillgång till många andra funktioner? Registrera dig för Trakt VIP."
+    },
+    "following": {
+      "default": "Följer"
+    },
+    "followers": {
+      "default": "Följare"
+    },
+    "not_following_anyone": {
+      "default": "Ingen här (än)."
+    },
+    "read_more": {
+      "default": "Läs mer"
+    },
+    "add_comment": {
+      "default": "Lägg till"
+    },
+    "rename_list": {
+      "default": "Byt namn på din lista"
+    },
+    "rename_list_label": {
+      "default": "Byt namn på din lista {name}",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "hot": {
+      "default": "Populärt den här månaden"
+    },
+    "hot_movies": {
+      "default": "Populära filmer denna månad"
+    },
+    "hot_shows": {
+      "default": "Populära serier denna månad"
+    },
+    "view_all_hot_shows": {
+      "default": "Se alla populära serier"
+    },
+    "view_all_hot_movies": {
+      "default": "Se alla populära filmer"
+    }
+  }
+}

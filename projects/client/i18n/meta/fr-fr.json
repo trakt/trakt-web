@@ -1,0 +1,1770 @@
+{
+  "$schema": "../schema/meta-messages.schema.json",
+  "meta": {
+    "locale": "fr-fr",
+    "direction": "ltr",
+    "generator": {
+      "inlang": {
+        "enabled": true,
+        "outputPath": "./messages/{locale}.json"
+      },
+      "android": {
+        "enabled": true,
+        "outputPath": "./android/values-{locale}/strings.xml",
+        "resourceName": "strings"
+      },
+      "ios": {
+        "enabled": true,
+        "outputPath": "./ios/Localizable.xcstrings"
+      }
+    }
+  },
+  "messages": {
+    "upcoming_schedule_title": {
+      "default": "Programmation à venir"
+    },
+    "season_premiere": {
+      "default": "Première de la saison"
+    },
+    "series_premiere": {
+      "default": "Première de la série"
+    },
+    "mid_season_premiere": {
+      "default": "Première de mi-saison"
+    },
+    "season_finale": {
+      "default": "Final de la saison"
+    },
+    "series_finale": {
+      "default": "Final de la série"
+    },
+    "mid_season_finale": {
+      "default": "Final de mi-saison"
+    },
+    "profile_banner_greeting": {
+      "default": "Bonjour, {name} !",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "up_next_title": {
+      "default": "À suivre"
+    },
+    "remaining_episodes": {
+      "default": "{count} restant(s)",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "recommended_movies": {
+      "default": "Recommandations"
+    },
+    "recommended_shows": {
+      "default": "Autres recommandations"
+    },
+    "number_of_episodes": {
+      "default": "{count} épisode(s)",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "error_404_title": {
+      "default": "404 : Erreur !"
+    },
+    "error_404_message": {
+      "default": "(Pas de panique, ça arrive ! Même la Force est parfois désalignée.)"
+    },
+    "error_404_action": {
+      "default": "Retour à la sécurité..."
+    },
+    "mark_as_watched_ask_prompt": {
+      "default": "Quand avez-vous terminé de regarder ? (AAAA-MM-JJ HH:MM)"
+    },
+    "watchlist_action_label": {
+      "default": "À regarder"
+    },
+    "mark_as_watched": {
+      "default": "Marquer comme vu"
+    },
+    "mark_as_watched_until": {
+      "default": "Regardé jusqu'ici"
+    },
+    "watch_again": {
+      "default": "Revoir"
+    },
+    "add_to_watchlist_label": {
+      "default": "Ajouter {title} à votre liste de visionnage",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_label": {
+      "default": "Marquer {title} comme vu",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_until_label": {
+      "default": "Marquer {title} comme regardé jusqu'ici",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "genre_horror": {
+      "default": "Horreur"
+    },
+    "genre_comedy": {
+      "default": "Comédie"
+    },
+    "genre_action": {
+      "default": "Action"
+    },
+    "genre_adventure": {
+      "default": "Aventure"
+    },
+    "genre_animation": {
+      "default": "Animation"
+    },
+    "genre_biography": {
+      "default": "Biographie"
+    },
+    "genre_children": {
+      "default": "Enfants"
+    },
+    "genre_crime": {
+      "default": "Policier"
+    },
+    "genre_documentary": {
+      "default": "Documentaire"
+    },
+    "genre_drama": {
+      "default": "Drame"
+    },
+    "genre_family": {
+      "default": "Familial"
+    },
+    "genre_fantasy": {
+      "default": "Fantastique"
+    },
+    "genre_game_show": {
+      "default": "Jeu"
+    },
+    "genre_history": {
+      "default": "Historique"
+    },
+    "genre_home_and_garden": {
+      "default": "Maison et jardin"
+    },
+    "genre_holiday": {
+      "default": "Vacances"
+    },
+    "genre_music": {
+      "default": "Musique"
+    },
+    "genre_musical": {
+      "default": "Musicale"
+    },
+    "genre_mystery": {
+      "default": "Mystère"
+    },
+    "genre_news": {
+      "default": "Actualités"
+    },
+    "genre_none": {
+      "default": "Aucun"
+    },
+    "genre_reality": {
+      "default": "Téléréalité"
+    },
+    "genre_romance": {
+      "default": "Romance"
+    },
+    "genre_short": {
+      "default": "Court-métrage"
+    },
+    "genre_soap": {
+      "default": "Soap opera"
+    },
+    "genre_special_interest": {
+      "default": "Intérêts particuliers"
+    },
+    "genre_sporting_event": {
+      "default": "Événement sportif"
+    },
+    "genre_suspense": {
+      "default": "Suspense"
+    },
+    "genre_talk_show": {
+      "default": "Talk-show"
+    },
+    "genre_thriller": {
+      "default": "Thriller"
+    },
+    "genre_war": {
+      "default": "Guerre"
+    },
+    "genre_western": {
+      "default": "Western"
+    },
+    "genre_anime": {
+      "default": "Anime"
+    },
+    "genre_superhero": {
+      "default": "Super-héros"
+    },
+    "genre_donghua": {
+      "default": "Donghua"
+    },
+    "genre_mini_series": {
+      "default": "Mini-série"
+    },
+    "genre_science_fiction": {
+      "default": "Science-fiction"
+    },
+    "remove_from_watchlist_label": {
+      "default": "Retirer {title} de votre liste de visionnage",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "search_placeholder": {
+      "default": "Rechercher séries & films..."
+    },
+    "join_trakt_button": {
+      "default": "Rejoindre Trakt"
+    },
+    "join_trakt_button_label": {
+      "default": "Rejoignez trakt.tv pour suivre vos visionnages"
+    },
+    "copyright_notice": {
+      "default": "Tous droits réservés."
+    },
+    "copyright_crafted_by": {
+      "default": "Créé avec ❤️ partout dans le monde"
+    },
+    "join_trakt_for_free_button": {
+      "default": "Rejoindre Trakt gratuitement"
+    },
+    "landing_discover_label": {
+      "default": "Découvrir"
+    },
+    "landing_discover_description": {
+      "default": "Ce qui est tendance et où le regarder."
+    },
+    "landing_track_label": {
+      "default": "Suivre"
+    },
+    "landing_track_description": {
+      "default": "Tout ce que vous avez regardé."
+    },
+    "landing_share_label": {
+      "default": "Partager"
+    },
+    "landing_share_description": {
+      "default": "commentaires, notes et recommandations. "
+    },
+    "trending": {
+      "default": "Tendances"
+    },
+    "recommendations": {
+      "default": "Recommandations"
+    },
+    "most_anticipated": {
+      "default": "Les plus attendus"
+    },
+    "get": {
+      "default": "Obtenir"
+    },
+    "get_vip_label": {
+      "default": "Débloquez les fonctionnalités VIP"
+    },
+    "user_profile_label": {
+      "default": "Profil utilisateur"
+    },
+    "most_popular": {
+      "default": "Les plus populaires"
+    },
+    "navbar_link_movies": {
+      "default": "Films"
+    },
+    "navbar_link_movies_label": {
+      "default": "Parcourir les films"
+    },
+    "navbar_link_shows": {
+      "default": "Séries"
+    },
+    "navbar_link_shows_label": {
+      "default": "Parcourir les séries"
+    },
+    "navbar_link_home": {
+      "default": "Accueil"
+    },
+    "navbar_link_home_label": {
+      "default": "Page d'accueil"
+    },
+    "watchers": {
+      "default": "Regardants"
+    },
+    "plays": {
+      "default": "{number} visionnages",
+      "variables": {
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "lists": {
+      "default": "Listes"
+    },
+    "favorited": {
+      "default": "Favori"
+    },
+    "profile": {
+      "default": "Profil"
+    },
+    "logout": {
+      "default": "Déconnexion"
+    },
+    "unreleased_movies_title": {
+      "default": "Bientôt disponible"
+    },
+    "tba_label": {
+      "default": "À venir"
+    },
+    "related_movies_title": {
+      "default": "Films apparentés"
+    },
+    "related_shows_title": {
+      "default": "Séries apparentées"
+    },
+    "about_placeholder_1": {
+      "default": "Cet utilisateur est un mystère, enveloppé d'énigme... (ou peut-être juste paresseux ? Qui sait, c'est internet.)"
+    },
+    "about_placeholder_2": {
+      "default": "Apparemment, cet utilisateur est trop occupé à regarder des contenus pour se présenter. (C'est compréhensible, je peux le comprendre.)"
+    },
+    "about_placeholder_3": {
+      "default": "Le profil de cet utilisateur est une toile vierge, un vide d'informations... (assez semblable à ma vie sociale. Soupir.)"
+    },
+    "about_placeholder_4": {
+      "default": "Dévoilez les secrets de l'identité de cet utilisateur... (si vous osez)"
+    },
+    "about_placeholder_5": {
+      "default": "Quelles profondeurs cachées se trouvent sous ce profil vide ? (La vérité est là-bas...)"
+    },
+    "about_placeholder_6": {
+      "default": "Cet utilisateur est un fantôme dans la machine, un fantôme numérique... (ou peut-être a-t-il simplement oublié de remplir cela ?) "
+    },
+    "about_placeholder_7": {
+      "default": "Aidez cet utilisateur ! Dites-lui de compléter son profil. (Il pourrait même vous récompenser d'un câlin virtuel !) "
+    },
+    "about_placeholder_8": {
+      "default": "Ce profil implore l'attention. Donnez-lui un peu d'amour et dites à l'utilisateur de le remplir."
+    },
+    "about_placeholder_9": {
+      "default": "N'ayez pas peur ! Encouragez cet utilisateur à partager son histoire. (Tout le monde a une histoire à raconter, même si c'est juste celle de sa série télé préférée.)"
+    },
+    "about_placeholder_10": {
+      "default": "Cet utilisateur est comme un personnage d'un film de David Lynch : énigmatique, mystérieux et peut-être un produit de son propre esprit."
+    },
+    "about_placeholder_11": {
+      "default": "Ce profil est aussi vide qu'un magasin de DVD Blockbuster un vendredi soir. (Vous vous souvenez de ça ? De bons souvenirs.)"
+    },
+    "about_placeholder_12": {
+      "default": "Cet utilisateur canalise son Tyler Durden intérieur : rejetant le consumérisme et embrassant le vide. (Ou peut-être n'a-t-il tout simplement pas eu le temps de remplir cela.)"
+    },
+    "about_placeholder_13": {
+      "default": "Une image stylisée : Une illustration amusante d'un détective se grattant la tête, perplexe, ou une touffe de poussière qui traverse une page de profil vide."
+    },
+    "about_placeholder_14": {
+      "default": "Un élément interactif : Un bouton permettant aux utilisateurs d'envoyer un gentil coup de pouce au propriétaire du profil, les encourageant à compléter leur profil."
+    },
+    "about_placeholder_15": {
+      "default": "Un message personnalisé : Si vous avez des informations sur l'utilisateur (par exemple, son historique de visionnage), vous pouvez utiliser cela pour générer un message plus personnalisé, comme \"Cet utilisateur adore les films d'horreur mais déteste rédiger des biographies. (Peut-être qu'il est trop occupé à se cacher des zombies ?)\" "
+    },
+    "watchlist_movies_empty": {
+      "default": "Votre liste est vide. Ajoutez des films pour créer votre chef-d'œuvre cinématographique."
+    },
+    "watchlist_shows_empty": {
+      "default": "Votre liste est vide. Ajoutez des séries pour alimenter votre imagination."
+    },
+    "upcoming_schedule_empty": {
+      "default": "Explorez les séries et personnalisez votre emploi du temps."
+    },
+    "up_next_empty": {
+      "default": "Commencez à regarder et ajoutez des séries à votre liste de visionnage."
+    },
+    "released_movies_empty": {
+      "default": "Ajoutez des films à votre liste de visionnage et ne manquez jamais une première."
+    },
+    "unreleased_movies_empty": {
+      "default": "Ajoutez les films à venir à votre liste de visionnage et restez informé."
+    },
+    "find_movies_link": {
+      "default": "Trouver des films"
+    },
+    "find_shows_link": {
+      "default": "Trouver des séries"
+    },
+    "active_watchers": {
+      "default": "{count} en train de regarder",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "shows": {
+      "default": "Séries"
+    },
+    "episodes_watched": {
+      "default": "{count} épisodes visionnés",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "movies": {
+      "default": "Films"
+    },
+    "movies_watched": {
+      "default": "{count} films visionnés",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "details": {
+      "default": "Détails"
+    },
+    "expand_category": {
+      "default": "Développer {category}",
+      "variables": {
+        "category": {
+          "type": "string",
+          "description": "Category name"
+        }
+      }
+    },
+    "and_more": {
+      "default": "{count} de plus",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "premiered": {
+      "default": "Date de sortie"
+    },
+    "runtime": {
+      "default": "Durée"
+    },
+    "country": {
+      "default": "Pays"
+    },
+    "language": {
+      "default": "Langue"
+    },
+    "studio": {
+      "default": "Studio"
+    },
+    "genre": {
+      "default": "Genre"
+    },
+    "navbar_link_lists": {
+      "default": "Listes"
+    },
+    "navbar_link_lists_label": {
+      "default": "Vos listes"
+    },
+    "watchlist_shows": {
+      "default": "Vos séries"
+    },
+    "watchlist_movies": {
+      "default": "Vos films"
+    },
+    "watch_title_now": {
+      "default": "Regardez {title} maintenant",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "streaming_service_logo": {
+      "default": "Logo de {service}",
+      "variables": {
+        "service": {
+          "type": "string",
+          "description": "Service name"
+        }
+      }
+    },
+    "director": {
+      "default": "Réalisateur"
+    },
+    "writer": {
+      "default": "Scénariste"
+    },
+    "creator": {
+      "default": "Créateur"
+    },
+    "job_action_director": {
+      "default": "Directeur des scènes d'action"
+    },
+    "job_additional_second_assistant_director": {
+      "default": "Assistant réalisateur additionnel second assistant"
+    },
+    "job_additional_third_assistant_director": {
+      "default": "Assistant réalisateur additionnel troisième assistant"
+    },
+    "job_assistant_director": {
+      "default": "Assistant réalisateur"
+    },
+    "job_assistant_director_trainee": {
+      "default": "Assistant réalisateur stagiaire"
+    },
+    "job_co_director": {
+      "default": "Co-réalisateur"
+    },
+    "job_continuity": {
+      "default": "Continuité"
+    },
+    "job_crowd_assistant_director": {
+      "default": "Assistant réalisateur assistant des figurants"
+    },
+    "job_director": {
+      "default": "Réalisateur"
+    },
+    "job_field_director": {
+      "default": "Directeur de tournage"
+    },
+    "job_first_assistant_director": {
+      "default": "Premier assistant réalisateur"
+    },
+    "job_first_assistant_director_trainee_prep": {
+      "default": "Premier assistant réalisateur (préparation)"
+    },
+    "job_first_assistant_director_trainee": {
+      "default": "Premier assistant réalisateur stagiaire"
+    },
+    "job_insert_unit_director": {
+      "default": "Directeur d'unité d'insertion"
+    },
+    "job_insert_unit_first_assistant_director": {
+      "default": "Premier assistant réalisateur d'unité d'insertion"
+    },
+    "job_layout": {
+      "default": "Mise en page"
+    },
+    "job_other": {
+      "default": "Autre"
+    },
+    "job_script_coordinator": {
+      "default": "Coordonnateur de scénario"
+    },
+    "job_script_supervisor": {
+      "default": "Surveillant du scénario"
+    },
+    "job_second_assistant_director": {
+      "default": "Second assistant réalisateur"
+    },
+    "job_second_assistant_director_trainee": {
+      "default": "Second assistant réalisateur stagiaire"
+    },
+    "job_second_second_assistant_director": {
+      "default": "Second second assistant réalisateur"
+    },
+    "job_second_unit_director": {
+      "default": "Directeur de la seconde unité"
+    },
+    "job_second_unit_first_assistant_director": {
+      "default": "Premier assistant réalisateur de la seconde unité"
+    },
+    "job_series_director": {
+      "default": "Directeur de série"
+    },
+    "job_series_guest_director": {
+      "default": "Directeur invité de série"
+    },
+    "job_stage_director": {
+      "default": "Régisseur de plateau"
+    },
+    "job_third_assistant_director": {
+      "default": "Troisième assistant réalisateur"
+    },
+    "job_adaptation": {
+      "default": "Adaptation"
+    },
+    "job_author": {
+      "default": "Auteur"
+    },
+    "job_book": {
+      "default": "Livre"
+    },
+    "job_characters": {
+      "default": "Personnages"
+    },
+    "job_co_writer": {
+      "default": "Co-scénariste"
+    },
+    "job_comic_book": {
+      "default": "Bande dessinée"
+    },
+    "job_creative_producer": {
+      "default": "Producteur créatif"
+    },
+    "job_dialogue": {
+      "default": "Dialogue"
+    },
+    "job_executive_story_editor": {
+      "default": "Rédacteur en chef de l'histoire"
+    },
+    "job_graphic_novel": {
+      "default": "Roman graphique"
+    },
+    "job_head_of_story": {
+      "default": "Chef d'histoire"
+    },
+    "job_idea": {
+      "default": "Idée"
+    },
+    "job_junior_story_editor": {
+      "default": "Rédacteur assistant d'histoire"
+    },
+    "job_lyricist": {
+      "default": "Parolier"
+    },
+    "job_musical": {
+      "default": "Musical"
+    },
+    "job_novel": {
+      "default": "Roman"
+    },
+    "job_opera": {
+      "default": "Opéra"
+    },
+    "job_original_concept": {
+      "default": "Concept original"
+    },
+    "job_original_film_writer": {
+      "default": "Scénariste de film original"
+    },
+    "job_original_series_creator": {
+      "default": "Créateur de série original"
+    },
+    "job_original_original_story": {
+      "default": "Histoire originale"
+    },
+    "job_scenario_writer": {
+      "default": "Scénariste de scénario"
+    },
+    "job_screenplay": {
+      "default": "Scénario"
+    },
+    "job_screenstory": {
+      "default": "Scénographie"
+    },
+    "job_script_consultant": {
+      "default": "Consultant en scénario"
+    },
+    "job_script_editor": {
+      "default": "Rédacteur de scénario"
+    },
+    "job_senior_story_editor": {
+      "default": "Rédacteur en chef d'histoire senior"
+    },
+    "job_series_composition": {
+      "default": "Composition de série"
+    },
+    "job_short_story": {
+      "default": "Nouvelle"
+    },
+    "job_staff_writer": {
+      "default": "Rédacteur du personnel"
+    },
+    "job_story": {
+      "default": "Histoire"
+    },
+    "job_story_story_artist": {
+      "default": "Artiste d'histoire"
+    },
+    "job_story_story_consultant": {
+      "default": "Consultant en histoire"
+    },
+    "job_story_story_coordinator": {
+      "default": "Coordonnateur d'histoire"
+    },
+    "job_story_story_developer": {
+      "default": "Développeur d'histoire"
+    },
+    "job_story_story_editor": {
+      "default": "Rédacteur d'histoire"
+    },
+    "job_story_story_manager": {
+      "default": "Gestionnaire d'histoire"
+    },
+    "job_story_story_supervisor": {
+      "default": "Surveillant d'histoire"
+    },
+    "job_storyboard": {
+      "default": "Storyboard"
+    },
+    "job_teleplay": {
+      "default": "Téléplay"
+    },
+    "job_texte": {
+      "default": "Texte"
+    },
+    "job_theatre_play": {
+      "default": "Pièce de théâtre"
+    },
+    "job_writer": {
+      "default": "Scénariste"
+    },
+    "job_writers_assistant": {
+      "default": "Assistant scénariste"
+    },
+    "job_writers_production": {
+      "default": "Production scénaristique"
+    },
+    "job_creator": {
+      "default": "Créateur"
+    },
+    "remove_from_watched": {
+      "default": "Supprimer de Visionnés"
+    },
+    "remove_from_watched_label": {
+      "default": "Supprimer {title} de votre liste Visionnés",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_watched_warning": {
+      "default": "Êtes-vous sûr de vouloir supprimer {title} de votre liste Visionnés? Toutes les lectures seront supprimées.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_single_watched_label": {
+      "default": "Supprimer ce visionnage de {title} de votre liste Regardés",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_single_watched_warning": {
+      "default": "Voulez-vous vraiment supprimer cette lecture de {title} de votre liste Vu ?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "seasons_label": {
+      "default": "Saisons"
+    },
+    "season_number_label": {
+      "default": "Saison {number}",
+      "variables": {
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "season_specials": {
+      "default": "Épisodes spéciaux"
+    },
+    "expand_media_overview": {
+      "default": "Découvrir plus sur {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "season_episode_number_label": {
+      "default": "Saison {season} • Épisode {number}",
+      "variables": {
+        "season": {
+          "type": "string",
+          "description": "Season number"
+        },
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "share_title": {
+      "default": "Partager {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "status": {
+      "default": "Statut"
+    },
+    "status_released": {
+      "default": "Sorti"
+    },
+    "status_planned": {
+      "default": "Prévu"
+    },
+    "status_post_production": {
+      "default": "Post-production"
+    },
+    "status_canceled": {
+      "default": "Annulé"
+    },
+    "status_in_production": {
+      "default": "En production"
+    },
+    "status_rumored": {
+      "default": "Rumeur"
+    },
+    "status_ended": {
+      "default": "Terminé"
+    },
+    "status_returning_series": {
+      "default": "Série de retour"
+    },
+    "status_pilot": {
+      "default": "Pilote"
+    },
+    "status_continuing": {
+      "default": "En cours"
+    },
+    "status_upcoming": {
+      "default": "À venir"
+    },
+    "status_unknown": {
+      "default": "Inconnu"
+    },
+    "expected_premiere": {
+      "default": "Première attendue"
+    },
+    "person_headshot": {
+      "default": "Photo de {person}",
+      "variables": {
+        "person": {
+          "type": "string",
+          "description": "Person name"
+        }
+      }
+    },
+    "actors": {
+      "default": "Acteurs"
+    },
+    "anticipated_count": {
+      "default": "{count} impatients",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "view_all_trending_movies": {
+      "default": "Voir tous les films populaires"
+    },
+    "view_all_trending_shows": {
+      "default": "Voir toutes les séries populaires"
+    },
+    "trending_shows": {
+      "default": "Séries populaires"
+    },
+    "trending_movies": {
+      "default": "Films populaires"
+    },
+    "view_all": {
+      "default": "Tout voir"
+    },
+    "full_season": {
+      "default": "Saison Complète"
+    },
+    "remove_from_watchlist_warning": {
+      "default": "Êtes-vous sûr de vouloir retirer {title} de votre liste de « à voir » ?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "view_all_recommended_movies": {
+      "default": "Voir tous les films recommandés"
+    },
+    "view_all_recommended_shows": {
+      "default": "Voir toutes les séries recommandées"
+    },
+    "view_all_anticipated_movies": {
+      "default": "Voir tous les films attendus"
+    },
+    "view_all_anticipated_shows": {
+      "default": "Voir toutes les séries attendues"
+    },
+    "anticipated_movies": {
+      "default": "Films attendus"
+    },
+    "anticipated_shows": {
+      "default": "Séries attendues"
+    },
+    "view_all_popular_movies": {
+      "default": "Voir tous les films populaires"
+    },
+    "view_all_popular_shows": {
+      "default": "Voir toutes les séries populaires"
+    },
+    "popular_movies": {
+      "default": "Films populaires"
+    },
+    "popular_shows": {
+      "default": "Séries populaires"
+    },
+    "rate_now": {
+      "default": "Noter maintenant"
+    },
+    "add_to_favorites": {
+      "default": "Ajouter aux favoris"
+    },
+    "remove_from_favorites": {
+      "default": "Supprimer des favoris"
+    },
+    "add_to_favorites_label": {
+      "default": "Ajouter {title} à vos favoris",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_favorites_label": {
+      "default": "Supprimer {title} de vos favoris",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_favorites_warning": {
+      "default": "Êtes-vous sûr de vouloir supprimer {title} de vos favoris ?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "favorite_movies": {
+      "default": "Films favoris"
+    },
+    "favorite_shows": {
+      "default": "Séries favorites"
+    },
+    "favorite_movies_empty": {
+      "default": "Votre liste de films favoris est vide."
+    },
+    "favorite_shows_empty": {
+      "default": "Votre liste de séries favorites est vide."
+    },
+    "stream_on": {
+      "default": "En streaming sur"
+    },
+    "your_watchlist_shows": {
+      "default": "Vos listes à voir (séries)"
+    },
+    "your_watchlist_movies": {
+      "default": "Vos listes à voir (films)"
+    },
+    "view_all_watchlist_movies": {
+      "default": "Voir tous les films à voir"
+    },
+    "view_all_watchlist_shows": {
+      "default": "Voir toutes les séries à voir"
+    },
+    "streaming": {
+      "default": "Streaming"
+    },
+    "on_demand": {
+      "default": "À la demande"
+    },
+    "media_popup_label": {
+      "default": "Menu contextuel pour {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "popular_lists": {
+      "default": "Listes populaires"
+    },
+    "no_popular_lists": {
+      "default": "{title} n'apparaît dans aucune liste populaire.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "by": {
+      "default": "par"
+    },
+    "users_avatar": {
+      "default": "Avatar de {username}",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "media_poster": {
+      "default": "Affiche de {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "no_comments": {
+      "default": "Pas encore de commentaires."
+    },
+    "review_by": {
+      "default": "Critique par"
+    },
+    "shout_by": {
+      "default": "Crié par"
+    },
+    "deleted_user": {
+      "default": "Supprimé"
+    },
+    "social_activity_title": {
+      "default": "Activité Sociale"
+    },
+    "view_all_social_activity": {
+      "default": "Afficher toute l'activité sociale"
+    },
+    "position_dropwdown_label": {
+      "default": "Position"
+    },
+    "position_acting": {
+      "default": "Acteur"
+    },
+    "position_production": {
+      "default": "Production"
+    },
+    "position_art": {
+      "default": "Art"
+    },
+    "position_crew": {
+      "default": "Équipe"
+    },
+    "position_costume___make_up": {
+      "default": "Costumes & Maquillage"
+    },
+    "position_directing": {
+      "default": "Réalisation"
+    },
+    "position_writing": {
+      "default": "Écriture"
+    },
+    "position_sound": {
+      "default": "Son"
+    },
+    "position_camera": {
+      "default": "Caméra"
+    },
+    "position_lighting": {
+      "default": "Éclairage"
+    },
+    "position_visual_effects": {
+      "default": "Effets visuels"
+    },
+    "position_editing": {
+      "default": "Montage"
+    },
+    "position_creator": {
+      "default": "Créateur"
+    },
+    "position_created_by": {
+      "default": "Créé par"
+    },
+    "personal_lists": {
+      "default": "Personnelles"
+    },
+    "collaborative_lists": {
+      "default": "Collaborations"
+    },
+    "liked_lists": {
+      "default": "Aimées"
+    },
+    "share_movie": {
+      "default": "Coup de cœur pour {title} ! À voir absolument. 🎬",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_show": {
+      "default": "Super série à découvrir : {title} ! 📺",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_episode": {
+      "default": "J'ai regardé l'épisode {title} de {show} S{season}E{episode} ! 🔥",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "show": {
+          "type": "string",
+          "description": "Show title"
+        },
+        "season": {
+          "type": "string",
+          "description": "Season number"
+        },
+        "episode": {
+          "type": "string",
+          "description": "Episode number"
+        }
+      }
+    },
+    "share_person": {
+      "default": "Découvrez {name} sur Trakt ! 🎭",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "recently_watched": {
+      "default": "Récemment visionnés"
+    },
+    "view_all_recently_watched": {
+      "default": "Voir tout récemment visionné"
+    },
+    "released_movies_title": {
+      "default": "Disponibles maintenant"
+    },
+    "view_all_released_movies": {
+      "default": "Voir tous les films disponibles"
+    },
+    "view_all_unreleased_movies": {
+      "default": "Voir tous les films à venir"
+    },
+    "switch_to_og": {
+      "default": "Passer à Trakt.tv"
+    },
+    "preview": {
+      "default": "Aperçu"
+    },
+    "preview_description": {
+      "default": "Cette fonctionnalité est en pleine refonte, futuriste.  Nous travaillons dur sur l'expérience utilisateur pour qu'elle fonctionne sans vous causer trop de problèmes, comme une série télévisée sans spoiler."
+    },
+    "airs": {
+      "default": "Diffusions"
+    },
+    "aired": {
+      "default": "Diffusé"
+    },
+    "drop_show_warning": {
+      "default": "Êtes-vous sûr de vouloir supprimer {title} ? Cela le retirera de votre liste prochainement visionné.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "drop_show_label": {
+      "default": "Marquer {title} comme abandonné",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "drop_show": {
+      "default": "Abandonner"
+    },
+    "enable_up_next_nitro_label": {
+      "default": "Activer Nitro Prochainement, la méthode la plus rapide pour regarder vos contenus"
+    },
+    "lab_up_next_nitro_label": {
+      "default": "Activer Nitro Suivant"
+    },
+    "lab_up_next_nitro_message": {
+      "default": "Cette expérience est une mise à niveau de performances qui améliore l'expérience pour tous les utilisateurs."
+    },
+    "lab_up_next_nitro_hidden_message": {
+      "default": "En raison de modifications de conception internes, les séries précédemment cachées apparaîtront désormais dans votre liste avec une vignette en noir et blanc pour vous aider à les repérer rapidement, avec la possibilité de les afficher à nouveau ou de les supprimer de la liste."
+    },
+    "restore_show_warning": {
+      "default": "Êtes-vous sûr de vouloir restaurer la série {title} ? Cela restaurera votre progression et votre calendrier.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "restore_show_label": {
+      "default": "Restaurer la série {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "restore_show": {
+      "default": "Restaurer la série"
+    },
+    "mark_as_watched_show_warning": {
+      "default": "Êtes-vous sûr de vouloir marquer {title} comme vu ? Cela marquera tous les épisodes comme vus.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_show_until_warning": {
+      "default": "Êtes-vous sûr de vouloir marquer tous les épisodes non vus de {title} comme vus jusqu'à l'épisode {episode} ? Cela marquera {count} épisodes comme vus.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "episode": {
+          "type": "string",
+          "description": "Episode number"
+        },
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "mark_as_watched_multiple_episodes_warning": {
+      "default": "Êtes-vous sûr de vouloir marquer {count} épisodes comme vus ?",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "watch_count_label": {
+      "default": "Nombre de visionnages"
+    },
+    "watched_episodes_count_label": {
+      "default": "Épisodes regardés"
+    },
+    "empty_media_history_label": {
+      "default": "Vous n'avez pas encore vu {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "like_comment_label": {
+      "default": "J'aime le commentaire"
+    },
+    "unlike_comment_label": {
+      "default": "Je n'aime pas le commentaire"
+    },
+    "comment_likes": {
+      "default": "{count} j'aime",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "close_label": {
+      "default": "Fermer"
+    },
+    "comment_replies_label": {
+      "default": "Réponses aux commentaires"
+    },
+    "comment_replies_text": {
+      "default": "{count} réponses",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "comments": {
+      "default": "Commentaires"
+    },
+    "comment": {
+      "default": "Commentaire"
+    },
+    "comment_reply": {
+      "default": "Répondre"
+    },
+    "comment_reply_label": {
+      "default": "Répondre à {user}",
+      "variables": {
+        "user": {
+          "type": "string",
+          "description": "User reference"
+        }
+      }
+    },
+    "comment_reply_placeholder": {
+      "default": "Réponse..."
+    },
+    "comment_post_label": {
+      "default": "Ajouter un commentaire"
+    },
+    "comment_post_placeholder": {
+      "default": "Votre commentaire..."
+    },
+    "comment_mark_as_spoiler": {
+      "default": "Marquer comme spoiler"
+    },
+    "comment_spoiler": {
+      "default": "Spoiler"
+    },
+    "comment_close_error_label": {
+      "default": "Fermer l'erreur"
+    },
+    "comment_post_reply_label": {
+      "default": "Poster la réponse"
+    },
+    "error_comment_invalid_content": {
+      "default": "Les commentaires doivent comporter au moins 5 mots et être en anglais."
+    },
+    "error_comment_unknown": {
+      "default": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard."
+    },
+    "profile_page_title": {
+      "default": "Profil de {username}",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "private_profile": {
+      "default": "Ce profil est privé"
+    },
+    "private_profile_description": {
+      "default": "Comme s'il n'y avait pas assez de choses cachées. Les secrets de {username} restent les siens.",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "original_title": {
+      "default": "Titre original"
+    },
+    "view_all_comments": {
+      "default": "Voir tous les commentaires"
+    },
+    "remove_from_list": {
+      "default": "Retirer de la liste"
+    },
+    "remove_from_list_label": {
+      "default": "Retirer {title} de la liste",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "error_page_service_title": {
+      "default": "Service Trakt inaccessible"
+    },
+    "error_page_service_message": {
+      "default": "La connexion est... absente. Tel un souvenir oublié."
+    },
+    "error_page_service_status": {
+      "default": "État du service Trakt"
+    },
+    "retry": {
+      "default": "Réessayer"
+    },
+    "community_sentiment": {
+      "default": "Sentiment de la communauté"
+    },
+    "lists_action_label": {
+      "default": "Listes"
+    },
+    "listed": {
+      "default": "Listé"
+    },
+    "add_remove_from_lists": {
+      "default": "Ajouter ou retirer {title} des listes",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "add_to_personal_list_label": {
+      "default": "Ajouter {title} à {list}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "remove_from_personal_list_label": {
+      "default": "Retirer {title} de {list}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "remove_from_personal_list_warning": {
+      "default": "Êtes-vous sûr de vouloir retirer {title} de {list} ?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "theme_light": {
+      "default": "Clair"
+    },
+    "theme_dark": {
+      "default": "Sombre"
+    },
+    "theme_system": {
+      "default": "Système"
+    },
+    "filter_label": {
+      "default": "Filtrer"
+    },
+    "filter_reset": {
+      "default": "Réinitialiser"
+    },
+    "results_for_title": {
+      "default": "Résultats pour {query}",
+      "variables": {
+        "query": {
+          "type": "string",
+          "description": "Search query"
+        }
+      }
+    },
+    "type_movie": {
+      "default": "Film"
+    },
+    "type_show": {
+      "default": "Série"
+    },
+    "sign_in": {
+      "default": "Se connecter"
+    },
+    "code_retry_title": {
+      "default": "Un problème est survenu"
+    },
+    "code_retry_message": {
+      "default": "L'activation a été refusée, a expiré ou un événement imprévisible s'est produit. Veuillez réessayer."
+    },
+    "code_instruction": {
+      "default": "Scannez le code QR ou connectez-vous à :"
+    },
+    "code_label": {
+      "default": "et entrez le code suivant :"
+    },
+    "filter_all": {
+      "default": "Tous"
+    },
+    "filters_title": {
+      "default": "Filtres"
+    },
+    "ignore_watched": {
+      "default": "Ignorer les vus"
+    },
+    "ignore_watchlisted": {
+      "default": "Ignorer les listés"
+    },
+    "watchnow_filter_label": {
+      "default": "Disponibilité"
+    },
+    "watchnow_favorites_only": {
+      "default": "Favorites only"
+    },
+    "watchnow_digital_release": {
+      "default": "Toutes les sorties numériques"
+    },
+    "watchnow_streaming": {
+      "default": "Diffusion en ce moment"
+    },
+    "decade": {
+      "default": "Décennie"
+    },
+    "ratings": {
+      "default": "Notes"
+    },
+    "view_all_items_in": {
+      "default": "Voir tous les titres dans {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "filter_reset_all": {
+      "default": "Réinitialiser tout"
+    },
+    "filter_reset_all_label": {
+      "default": "Réinitialiser tous les filtres"
+    },
+    "video_type_trailer": {
+      "default": "Bande-annonce"
+    },
+    "video_type_clip": {
+      "default": "Extrait"
+    },
+    "video_type_teaser": {
+      "default": "Teaser"
+    },
+    "video_type_featurette": {
+      "default": "Reportage"
+    },
+    "video_type_recap": {
+      "default": "Résumé"
+    },
+    "video_type_behind_the_scenes": {
+      "default": "Coulisses"
+    },
+    "now_playing": {
+      "default": "En cours"
+    },
+    "remaining": {
+      "default": "restant"
+    },
+    "checkin": {
+      "default": "S'enregistrer"
+    },
+    "checkin_label": {
+      "default": "S'enregistrer {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "cookie_notice": {
+      "default": "Trakt utilise des C🍪🍪KIES pour améliorer votre expérience. Vous pouvez <a>lire plus d'informations</a> ici."
+    },
+    "cookie_accept": {
+      "default": "D'accord, en avant !"
+    },
+    "year_to_date_label": {
+      "default": "Année en cours"
+    },
+    "month_in_review_label": {
+      "default": "Bilan du mois"
+    },
+    "settings": {
+      "default": "Paramètres"
+    },
+    "settings_spoilers_title": {
+      "default": "Spoilers"
+    },
+    "settings_spoilers_label": {
+      "default": "Afficher les spoilers"
+    },
+    "filter_save": {
+      "default": "Sauvegarder"
+    },
+    "filter_save_label": {
+      "default": "Enregistrer les filtres"
+    },
+    "error_page_locked_account_title": {
+      "default": "Compte verrouillé"
+    },
+    "error_page_locked_account_message": {
+      "default": "Votre compte est verrouillé, <a>contactez l'assistance</a> pour résoudre ce problème."
+    },
+    "first_play_this_month": {
+      "default": "Première lecture ce mois-ci"
+    },
+    "shows_watched": {
+      "default": "{count} séries visionnées",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "follow": {
+      "default": "Suivre"
+    },
+    "follow_label": {
+      "default": "Suivre {username}",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "unfollow": {
+      "default": "Ne plus suivre"
+    },
+    "unfollow_label": {
+      "default": "Ne plus suivre {username}",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "unfollow_warning": {
+      "default": "Êtes-vous sûr de vouloir ne plus suivre {username} ?",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "vip_upsell_title": {
+      "default": "Débloquez les fonctionnalités VIP pour améliorer votre expérience Trakt"
+    },
+    "vip_upsell_description": {
+      "default": "Envie de voir votre bilan mensuel et annuel ? Et d'accéder à de nombreuses autres fonctionnalités ? Inscrivez-vous à Trakt VIP."
+    },
+    "following": {
+      "default": "Abonnements"
+    },
+    "followers": {
+      "default": "Abonnés"
+    },
+    "not_following_anyone": {
+      "default": "Personne à suivre ici (pour le moment)."
+    },
+    "read_more": {
+      "default": "Lire plus"
+    },
+    "add_comment": {
+      "default": "Ajouter"
+    },
+    "rename_list": {
+      "default": "Renommer votre liste"
+    },
+    "rename_list_label": {
+      "default": "Renommer votre liste {name}",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "hot": {
+      "default": "Tendances du mois"
+    },
+    "hot_movies": {
+      "default": "Films tendances ce mois-ci"
+    },
+    "hot_shows": {
+      "default": "Séries tendances ce mois-ci"
+    },
+    "view_all_hot_shows": {
+      "default": "Voir toutes les séries populaires"
+    },
+    "view_all_hot_movies": {
+      "default": "Voir tous les films populaires"
+    }
+  }
+}
