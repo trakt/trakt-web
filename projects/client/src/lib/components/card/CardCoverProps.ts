@@ -7,5 +7,4 @@ export type CardCoverProps = {
   title: string;
   badge?: Snippet;
   tag?: Snippet;
-  style?: 'flat' | 'gradient';
 };

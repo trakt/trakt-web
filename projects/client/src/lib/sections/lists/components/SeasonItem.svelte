@@ -17,7 +17,6 @@
       title={seasonLabel(season.number)}
       src={season.poster.url.medium}
       alt="{seasonLabel(season.number)}}"
-      style="flat"
     />
   </Link>
   <CardFooter>

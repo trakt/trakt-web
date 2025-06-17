@@ -30,12 +30,7 @@
       deepLinkHandler.open("YouTube", video.url);
     }}
   >
-    <CardCover
-      title={video.title}
-      src={video.thumbnail}
-      alt={video.title}
-      style="flat"
-    />
+    <CardCover title={video.title} src={video.thumbnail} alt={video.title} />
     <CardFooter>
       <p
         use:lineClamp={{ lines: 2 }}

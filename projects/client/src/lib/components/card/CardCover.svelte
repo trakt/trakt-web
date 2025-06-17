@@ -5,15 +5,7 @@
   import { checksum } from "$lib/utils/string/checksum";
   import type { CardCoverProps } from "./CardCoverProps";
 
-  const {
-    src,
-    overlaySrc,
-    alt,
-    badge,
-    tag,
-    title,
-    style = "gradient",
-  }: CardCoverProps = $props();
+  const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
 
   let isImagePending = $state(!isImageComplete(src));
   const id = $derived(checksum(`${src}-${title}`));
@@ -35,11 +27,7 @@
       {@render tag()}
     </div>
   {/if}
-  <div
-    class="trakt-card-cover-image"
-    class:has-overlay={overlaySrc}
-    class:has-gradient={style === "gradient"}
-  >
+  <div class="trakt-card-cover-image" class:has-overlay={overlaySrc}>
     <CrossOriginImage
       classList="trakt-card-cover-image"
       animate={false}
