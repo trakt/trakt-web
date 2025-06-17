@@ -19,7 +19,7 @@
   aria-valuemax={total}
 >
   <TagContent>
-    <p class="meta-info capitalize">
+    <p class="meta-info capitalize tag-label">
       {@render children()}
     </p>
   </TagContent>
@@ -28,11 +28,14 @@
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
 
-  .show-progress-tag {
+  .tag-label {
     width: 100%;
   }
 
   .show-progress-tag {
+    width: 100%;
+    min-width: 0;
+
     :global(.trakt-tag) {
       overflow: hidden;
 
@@ -54,7 +57,7 @@
       }
 
       position: relative;
-      background: var(--color-background-progress-base-tag);
+      background: var(--color-background-cover-tag);
       color: var(--color-text-progress-tag);
       @include backdrop-filter-blur(var(--ni-16));
     }

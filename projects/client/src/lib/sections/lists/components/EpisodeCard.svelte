@@ -6,9 +6,6 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
-  import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
-  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
@@ -37,18 +34,6 @@
   const isActivity = $derived(rest.variant === "activity");
 </script>
 
-{#snippet upcomingTag()}
-  <AirDateTag
-    i18n={TagIntlProvider}
-    airDate={episode.airDate}
-    year={episode.year}
-  />
-{/snippet}
-
-{#snippet durationTag()}
-  <DurationTag i18n={TagIntlProvider} runtime={episode.runtime} />
-{/snippet}
-
 <LandscapeCard>
   {#if popupActions}
     <CardActionBar>
@@ -75,20 +60,7 @@
     />
   </Link>
 
-  <CardFooter
-    {action}
-    tag={(() => {
-      if (isActivity) {
-        return;
-      }
-
-      if (rest.variant === "upcoming") {
-        return upcomingTag;
-      }
-
-      return durationTag;
-    })()}
-  >
+  <CardFooter {action}>
     {#if isShowContext}
       <p class="trakt-card-title ellipsis">
         <Spoiler media={episode} {show} {episode} type="episode">

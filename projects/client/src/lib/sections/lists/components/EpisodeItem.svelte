@@ -1,6 +1,9 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
+  import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
+  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
+  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
@@ -33,18 +36,35 @@
 {/snippet}
 
 {#snippet tag()}
-  {#if props.variant === "next"}
-    <ShowProgressTag
-      total={props.episode.total}
-      progress={props.episode.completed}
-    >
-      <span class="show-progress-label">
-        {EpisodeIntlProvider.remainingText(props.episode.remaining)} / {EpisodeIntlProvider.durationText(
-          props.episode.minutesLeft,
-        )}
-      </span>
-    </ShowProgressTag>
-  {/if}
+  <div class="trakt-episode-tag">
+    {#if ["next", "default"].includes(props.variant)}
+      <DurationTag i18n={TagIntlProvider} runtime={props.episode.runtime} />
+    {/if}
+
+    {#if props.variant === "next"}
+      <ShowProgressTag
+        total={props.episode.total}
+        progress={props.episode.completed}
+      >
+        <div class="show-progress">
+          <span class="ellipsis">
+            {EpisodeIntlProvider.remainingText(props.episode.remaining)}
+          </span>
+          <span>
+            {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
+          </span>
+        </div>
+      </ShowProgressTag>
+    {/if}
+
+    {#if props.variant === "upcoming"}
+      <AirDateTag
+        i18n={TagIntlProvider}
+        airDate={props.episode.airDate}
+        year={props.episode.year}
+      />
+    {/if}
+  </div>
 {/snippet}
 
 {#snippet card()}
@@ -79,8 +99,16 @@
   {@render card()}
 {/if}
 
-<style>
-  .show-progress-label {
+<style lang="scss">
+  @use "$style/scss/mixins/index.scss" as *;
+
+  .show-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: var(--gap-xs);
+
     position: relative;
   }
 
@@ -89,6 +117,20 @@
     :global(.trakt-card-cover),
     :global(.trakt-summary-item) {
       filter: contrast(0.65) grayscale(1);
+    }
+  }
+
+  .trakt-episode-tag {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: var(--gap-micro);
+
+    :global(.trakt-tag) {
+      background: var(--color-background-cover-tag);
+      @include backdrop-filter-blur(var(--ni-16));
     }
   }
 </style>

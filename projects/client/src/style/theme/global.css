@@ -18,7 +18,7 @@
 
   --color-text-progress-tag: var(--shade-10);
   --color-background-progress-tag: var(--purple-800);
-  --color-background-progress-base-tag: color-mix(
+  --color-background-cover-tag: color-mix(
     in srgb,
     var(--shade-700) 35%,
     transparent

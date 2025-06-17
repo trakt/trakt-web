@@ -5,8 +5,6 @@
   import CardCover from "$lib/components/card/CardCover.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -26,10 +24,8 @@
 </script>
 
 {#snippet footerTag()}
-  {#if rest.type === "episode" && rest.variant !== "activity"}
-    <DurationTag i18n={TagIntlProvider} runtime={rest.episode.runtime} />
-  {:else if tag != null}
-    {@render tag()}
+  {#if rest.type !== "episode"}
+    {@render tag?.()}
   {/if}
 {/snippet}
 
