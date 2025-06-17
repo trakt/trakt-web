@@ -9,6 +9,7 @@ node_modules
 .vercel
 .svelte-kit
 build
+projects/client/i18n/messages
 
 # OS
 .DS_Store
