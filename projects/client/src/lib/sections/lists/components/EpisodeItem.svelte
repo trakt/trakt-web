@@ -130,7 +130,6 @@
 
     :global(.trakt-tag) {
       background: var(--color-background-cover-tag);
-      @include backdrop-filter-blur(var(--ni-16));
     }
   }
 </style>

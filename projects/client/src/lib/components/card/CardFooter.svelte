@@ -78,6 +78,12 @@
         font-size: var(--ni-12);
       }
     }
+
+    .trakt-card-footer-action {
+      :global(.trakt-action-button[data-style="ghost"]) {
+        backdrop-filter: none;
+      }
+    }
   }
 
   :global([data-device="tv"]) {
