@@ -1,0 +1,1770 @@
+{
+  "$schema": "../schema/meta-messages.schema.json",
+  "meta": {
+    "locale": "nl-nl",
+    "direction": "ltr",
+    "generator": {
+      "inlang": {
+        "enabled": true,
+        "outputPath": "./messages/{locale}.json"
+      },
+      "android": {
+        "enabled": true,
+        "outputPath": "./android/values-{locale}/strings.xml",
+        "resourceName": "strings"
+      },
+      "ios": {
+        "enabled": true,
+        "outputPath": "./ios/Localizable.xcstrings"
+      }
+    }
+  },
+  "messages": {
+    "upcoming_schedule_title": {
+      "default": "Komende planning"
+    },
+    "season_premiere": {
+      "default": "Seizoen première"
+    },
+    "series_premiere": {
+      "default": "Serie première"
+    },
+    "mid_season_premiere": {
+      "default": "Middenseizoen première"
+    },
+    "season_finale": {
+      "default": "Seizoensfinale"
+    },
+    "series_finale": {
+      "default": "Seriesfinale"
+    },
+    "mid_season_finale": {
+      "default": "Middenseizoensfinale"
+    },
+    "profile_banner_greeting": {
+      "default": "Hallo, {name}",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "up_next_title": {
+      "default": "Volgende"
+    },
+    "remaining_episodes": {
+      "default": "{count} resterend",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "recommended_movies": {
+      "default": "Aanbevolen films"
+    },
+    "recommended_shows": {
+      "default": "Aanbevolen series"
+    },
+    "number_of_episodes": {
+      "default": "{count} afleveringen",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "error_404_title": {
+      "default": "404: Niets. De leegte."
+    },
+    "error_404_message": {
+      "default": "(Maak je geen zorgen, het gebeurt! Zelfs de kracht is soms niet opgewassen tegen de uitdagingen.)"
+    },
+    "error_404_action": {
+      "default": "Terug naar veiligheid..."
+    },
+    "mark_as_watched_ask_prompt": {
+      "default": "Wanneer heb je dit bekeken? (JJJJ-MM-DD HH:MM)"
+    },
+    "watchlist_action_label": {
+      "default": "Kijken"
+    },
+    "mark_as_watched": {
+      "default": "Markeer als bekeken"
+    },
+    "mark_as_watched_until": {
+      "default": "Bekeken tot hier"
+    },
+    "watch_again": {
+      "default": "Opnieuw bekijken"
+    },
+    "add_to_watchlist_label": {
+      "default": "{title} aan je Watchlist toevoegen",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_label": {
+      "default": "Markeer {title} als bekeken",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_until_label": {
+      "default": "{title} tot hier als bekeken markeren",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "genre_horror": {
+      "default": "Horror"
+    },
+    "genre_comedy": {
+      "default": "Komedie"
+    },
+    "genre_action": {
+      "default": "Actie"
+    },
+    "genre_adventure": {
+      "default": "Avontuur"
+    },
+    "genre_animation": {
+      "default": "Animatie"
+    },
+    "genre_biography": {
+      "default": "Biografie"
+    },
+    "genre_children": {
+      "default": "Kinderen"
+    },
+    "genre_crime": {
+      "default": "Misdaad"
+    },
+    "genre_documentary": {
+      "default": "Documentaire"
+    },
+    "genre_drama": {
+      "default": "Drama"
+    },
+    "genre_family": {
+      "default": "Familie"
+    },
+    "genre_fantasy": {
+      "default": "Fantasie"
+    },
+    "genre_game_show": {
+      "default": "Spelprogramma"
+    },
+    "genre_history": {
+      "default": "Geschiedenis"
+    },
+    "genre_home_and_garden": {
+      "default": "Huis en tuin"
+    },
+    "genre_holiday": {
+      "default": "Vakantie"
+    },
+    "genre_music": {
+      "default": "Muziek"
+    },
+    "genre_musical": {
+      "default": "Musical"
+    },
+    "genre_mystery": {
+      "default": "Thriller"
+    },
+    "genre_news": {
+      "default": "Nieuws"
+    },
+    "genre_none": {
+      "default": "Geen"
+    },
+    "genre_reality": {
+      "default": "Realiteit"
+    },
+    "genre_romance": {
+      "default": "Romance"
+    },
+    "genre_short": {
+      "default": "Kort"
+    },
+    "genre_soap": {
+      "default": "Soap"
+    },
+    "genre_special_interest": {
+      "default": "Speciale belangstelling"
+    },
+    "genre_sporting_event": {
+      "default": "Sportevenement"
+    },
+    "genre_suspense": {
+      "default": "Spanning"
+    },
+    "genre_talk_show": {
+      "default": "Talkshow"
+    },
+    "genre_thriller": {
+      "default": "Thriller"
+    },
+    "genre_war": {
+      "default": "Oorlog"
+    },
+    "genre_western": {
+      "default": "Western"
+    },
+    "genre_anime": {
+      "default": "Anime"
+    },
+    "genre_superhero": {
+      "default": "Superhelden"
+    },
+    "genre_donghua": {
+      "default": "Donghua"
+    },
+    "genre_mini_series": {
+      "default": "Miniserie"
+    },
+    "genre_science_fiction": {
+      "default": "Sciencefiction"
+    },
+    "remove_from_watchlist_label": {
+      "default": "{title} van je Watchlist verwijderen",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "search_placeholder": {
+      "default": "Zoek series & films..."
+    },
+    "join_trakt_button": {
+      "default": "Doe mee met Trakt"
+    },
+    "join_trakt_button_label": {
+      "default": "Doe mee met trakt.tv om bij te houden wat je bekijkt"
+    },
+    "copyright_notice": {
+      "default": "Alle rechten voorbehouden."
+    },
+    "copyright_crafted_by": {
+      "default": "Handgemaakt over de hele wereld"
+    },
+    "join_trakt_for_free_button": {
+      "default": "Doe gratis mee met Trakt"
+    },
+    "landing_discover_label": {
+      "default": "Ontdekken"
+    },
+    "landing_discover_description": {
+      "default": "wat populair is en waar je het kunt streamen."
+    },
+    "landing_track_label": {
+      "default": "Bijhouden"
+    },
+    "landing_track_description": {
+      "default": "alle series en films die je ooit hebt gezien."
+    },
+    "landing_share_label": {
+      "default": "Delen"
+    },
+    "landing_share_description": {
+      "default": "opmerkingen, beoordelingen en aanbevelingen."
+    },
+    "trending": {
+      "default": "Trending"
+    },
+    "recommendations": {
+      "default": "Aanbevelingen"
+    },
+    "most_anticipated": {
+      "default": "Meest verwacht"
+    },
+    "get": {
+      "default": "Word"
+    },
+    "get_vip_label": {
+      "default": "Ontgrendel VIP-functies"
+    },
+    "user_profile_label": {
+      "default": "Gebruikersprofiel"
+    },
+    "most_popular": {
+      "default": "Meest populair"
+    },
+    "navbar_link_movies": {
+      "default": "Films"
+    },
+    "navbar_link_movies_label": {
+      "default": "Films bekijken"
+    },
+    "navbar_link_shows": {
+      "default": "Series"
+    },
+    "navbar_link_shows_label": {
+      "default": "Series bekijken"
+    },
+    "navbar_link_home": {
+      "default": "Thuis"
+    },
+    "navbar_link_home_label": {
+      "default": "Terug naar het startscherm"
+    },
+    "watchers": {
+      "default": "Kijkers"
+    },
+    "plays": {
+      "default": "{number} keer bekeken",
+      "variables": {
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "lists": {
+      "default": "Lijsten"
+    },
+    "favorited": {
+      "default": "Favoriet"
+    },
+    "profile": {
+      "default": "Profiel"
+    },
+    "logout": {
+      "default": "Uitloggen"
+    },
+    "unreleased_movies_title": {
+      "default": "Komende"
+    },
+    "tba_label": {
+      "default": "Nog niet bekend"
+    },
+    "related_movies_title": {
+      "default": "Gerelateerde films"
+    },
+    "related_shows_title": {
+      "default": "Gerelateerde series"
+    },
+    "about_placeholder_1": {
+      "default": "Deze gebruiker is een mysterie, gehuld in een enigma... (of misschien gewoon lui? Wie weet, dit is het internet.)"
+    },
+    "about_placeholder_2": {
+      "default": "Deze gebruiker is blijkbaar te druk met het kijken naar films om iets over zichzelf te vertellen. (Begrijpelijk, ik kan het me voorstellen.)"
+    },
+    "about_placeholder_3": {
+      "default": "Het profiel van deze gebruiker is een leeg canvas, een informatievacuüm... (net als mijn sociale leven. zucht)"
+    },
+    "about_placeholder_4": {
+      "default": "Ontrafel de geheimen achter de identiteit van deze gebruiker... (als je durft)"
+    },
+    "about_placeholder_5": {
+      "default": "Welke verborgen dieptes liggen onder dit lege profiel? (De waarheid is ergens...)"
+    },
+    "about_placeholder_6": {
+      "default": "Deze gebruiker is een geest in de machine, een digitaal spook... (of misschien hebben ze het gewoon vergeten?)"
+    },
+    "about_placeholder_7": {
+      "default": "Help deze gebruiker! Vertel ze om hun profiel aan te vullen. (Ze zouden je misschien zelfs een virtuele high five geven!)"
+    },
+    "about_placeholder_8": {
+      "default": "Dit profiel smeekt om aandacht. Geef het wat liefde en vertel de gebruiker om het in te vullen."
+    },
+    "about_placeholder_9": {
+      "default": "Wees niet verlegen! Moedig deze gebruiker aan om hun verhaal te delen. (Iedereen heeft een verhaal, zelfs als het gaat over hun favoriete serie.)"
+    },
+    "about_placeholder_10": {
+      "default": "Deze gebruiker is als een personage uit een David Lynch film: raadselachtig, mysterieus en misschien wel een figment van hun eigen verbeelding."
+    },
+    "about_placeholder_11": {
+      "default": "Dit profiel is zo leeg als een Blockbuster-videotheek op een vrijdagavond. (Herinner je die nog? Mooie tijden.)"
+    },
+    "about_placeholder_12": {
+      "default": "Deze gebruiker kanaliseert hun innerlijke Tyler Durden: ze verwerpen consumentisme en omarmen het niets. (Of misschien hebben ze het nog niet rondgekregen om dit in te vullen.)"
+    },
+    "about_placeholder_13": {
+      "default": "Een gestileerd beeld: een grappige illustratie van een detective die zich de kop krabt, of een tumbleweed die over een leeg profiel rolt."
+    },
+    "about_placeholder_14": {
+      "default": "Een interactieve element: een knop waarmee gebruikers een vriendelijke nudge kunnen sturen naar de profielhouder, om hun profiel aan te moedigen te voltooien."
+    },
+    "about_placeholder_15": {
+      "default": "Een gepersonaliseerde boodschap: als je informatie hebt over de gebruiker (bijvoorbeeld hun kijkgeschiedenis), kun je een meer gepersonaliseerde placeholder genereren, zoals 'Deze gebruiker houdt van horrorfilms maar haat biografieën schrijven. (Misschien zijn ze te druk met het verbergen voor zombies?)'"
+    },
+    "watchlist_movies_empty": {
+      "default": "Je watchlist is leeg. Voeg films toe om je eigen cinematografische meesterwerk te creëren."
+    },
+    "watchlist_shows_empty": {
+      "default": "Je watchlist is leeg. Voeg series toe om je verbeelding te voeden."
+    },
+    "upcoming_schedule_empty": {
+      "default": "Ontdek tv-series en personaliseer je planning."
+    },
+    "up_next_empty": {
+      "default": "Begin met kijken en voeg series toe aan je kijklijst."
+    },
+    "released_movies_empty": {
+      "default": "Voeg films toe aan je kijklijst en mis nooit een première."
+    },
+    "unreleased_movies_empty": {
+      "default": "Voeg aankomende films toe aan je kijklijst en blijf op de hoogte."
+    },
+    "find_movies_link": {
+      "default": "Films zoeken"
+    },
+    "find_shows_link": {
+      "default": "Series zoeken"
+    },
+    "active_watchers": {
+      "default": "{count} kijken",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "shows": {
+      "default": "Series"
+    },
+    "episodes_watched": {
+      "default": "{count} afleveringen bekeken",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "movies": {
+      "default": "Films"
+    },
+    "movies_watched": {
+      "default": "{count} films bekeken",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "details": {
+      "default": "Details"
+    },
+    "expand_category": {
+      "default": "{category} uitvouwen",
+      "variables": {
+        "category": {
+          "type": "string",
+          "description": "Category name"
+        }
+      }
+    },
+    "and_more": {
+      "default": "{count} meer",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "premiered": {
+      "default": "Première"
+    },
+    "runtime": {
+      "default": "Speelduur"
+    },
+    "country": {
+      "default": "Land"
+    },
+    "language": {
+      "default": "Taal"
+    },
+    "studio": {
+      "default": "Studio"
+    },
+    "genre": {
+      "default": "Genre"
+    },
+    "navbar_link_lists": {
+      "default": "Lijsten"
+    },
+    "navbar_link_lists_label": {
+      "default": "Bekijk lijsten"
+    },
+    "watchlist_shows": {
+      "default": "Je Series"
+    },
+    "watchlist_movies": {
+      "default": "Je Films"
+    },
+    "watch_title_now": {
+      "default": "Bekijk {title} nu",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "streaming_service_logo": {
+      "default": "{service} logo",
+      "variables": {
+        "service": {
+          "type": "string",
+          "description": "Service name"
+        }
+      }
+    },
+    "director": {
+      "default": "Regisseur"
+    },
+    "writer": {
+      "default": "Schrijver"
+    },
+    "creator": {
+      "default": "Makers"
+    },
+    "job_action_director": {
+      "default": "Actie Regisseur"
+    },
+    "job_additional_second_assistant_director": {
+      "default": "Extra Tweede Assistent Regisseur"
+    },
+    "job_additional_third_assistant_director": {
+      "default": "Extra Derde Assistent Regisseur"
+    },
+    "job_assistant_director": {
+      "default": "Assistent Regisseur"
+    },
+    "job_assistant_director_trainee": {
+      "default": "Stagiair Assistent Regisseur"
+    },
+    "job_co_director": {
+      "default": "Co-regisseur"
+    },
+    "job_continuity": {
+      "default": "Continuïteit"
+    },
+    "job_crowd_assistant_director": {
+      "default": "Menigte Assistent Regisseur"
+    },
+    "job_director": {
+      "default": "Regisseur"
+    },
+    "job_field_director": {
+      "default": "Field Regisseur"
+    },
+    "job_first_assistant_director": {
+      "default": "Eerste Assistent Regisseur"
+    },
+    "job_first_assistant_director_trainee_prep": {
+      "default": "Eerste Assistent Regisseur (Voorbereiding)"
+    },
+    "job_first_assistant_director_trainee": {
+      "default": "Stagiair Eerste Assistent Regisseur"
+    },
+    "job_insert_unit_director": {
+      "default": "Insert Unit Regisseur"
+    },
+    "job_insert_unit_first_assistant_director": {
+      "default": "Insert Unit Eerste Assistent Regisseur"
+    },
+    "job_layout": {
+      "default": "Lay-out"
+    },
+    "job_other": {
+      "default": "Anders"
+    },
+    "job_script_coordinator": {
+      "default": "Script Coördinator"
+    },
+    "job_script_supervisor": {
+      "default": "Script Supervisor"
+    },
+    "job_second_assistant_director": {
+      "default": "Tweede Assistent Regisseur"
+    },
+    "job_second_assistant_director_trainee": {
+      "default": "Stagiair Tweede Assistent Regisseur"
+    },
+    "job_second_second_assistant_director": {
+      "default": "Tweede Tweede Assistent Regisseur"
+    },
+    "job_second_unit_director": {
+      "default": "Tweede Unit Regisseur"
+    },
+    "job_second_unit_first_assistant_director": {
+      "default": "Tweede Unit Eerste Assistent Regisseur"
+    },
+    "job_series_director": {
+      "default": "Serie Regisseur"
+    },
+    "job_series_guest_director": {
+      "default": "Speciale Gast Regisseur"
+    },
+    "job_stage_director": {
+      "default": "Podiumbedrijf"
+    },
+    "job_third_assistant_director": {
+      "default": "Derde Assistent Regisseur"
+    },
+    "job_adaptation": {
+      "default": "Verfilming"
+    },
+    "job_author": {
+      "default": "Auteur"
+    },
+    "job_book": {
+      "default": "Boek"
+    },
+    "job_characters": {
+      "default": "Personages"
+    },
+    "job_co_writer": {
+      "default": "Co-auteur"
+    },
+    "job_comic_book": {
+      "default": "Strip"
+    },
+    "job_creative_producer": {
+      "default": "Creatieve Producer"
+    },
+    "job_dialogue": {
+      "default": "Dialoog"
+    },
+    "job_executive_story_editor": {
+      "default": "Uitvoerende Story Editor"
+    },
+    "job_graphic_novel": {
+      "default": "Grafisch Roman"
+    },
+    "job_head_of_story": {
+      "default": "Hoofd van de Story"
+    },
+    "job_idea": {
+      "default": "Idee"
+    },
+    "job_junior_story_editor": {
+      "default": "Junior Story Editor"
+    },
+    "job_lyricist": {
+      "default": "Tekstschrijver (liederen)"
+    },
+    "job_musical": {
+      "default": "Muziek"
+    },
+    "job_novel": {
+      "default": "Roman"
+    },
+    "job_opera": {
+      "default": "Opera"
+    },
+    "job_original_concept": {
+      "default": "Origineel Concept"
+    },
+    "job_original_film_writer": {
+      "default": "Originele Film Schrijver"
+    },
+    "job_original_series_creator": {
+      "default": "Originele Serie Maker"
+    },
+    "job_original_original_story": {
+      "default": "Origineel Verhaal"
+    },
+    "job_scenario_writer": {
+      "default": "Scenario Schrijver"
+    },
+    "job_screenplay": {
+      "default": "Scenario"
+    },
+    "job_screenstory": {
+      "default": "Screenstory"
+    },
+    "job_script_consultant": {
+      "default": "Script Consultant"
+    },
+    "job_script_editor": {
+      "default": "Script Editor"
+    },
+    "job_senior_story_editor": {
+      "default": "Senior Story Editor"
+    },
+    "job_series_composition": {
+      "default": "Serie Compositie"
+    },
+    "job_short_story": {
+      "default": "Korte Verhaal"
+    },
+    "job_staff_writer": {
+      "default": "Staff Schrijver"
+    },
+    "job_story": {
+      "default": "Verhaal"
+    },
+    "job_story_story_artist": {
+      "default": "Story Kunstenaar"
+    },
+    "job_story_story_consultant": {
+      "default": "Story Consultant"
+    },
+    "job_story_story_coordinator": {
+      "default": "Story Coördinator"
+    },
+    "job_story_story_developer": {
+      "default": "Story Ontwikkelaar"
+    },
+    "job_story_story_editor": {
+      "default": "Story Editor"
+    },
+    "job_story_story_manager": {
+      "default": "Story Manager"
+    },
+    "job_story_story_supervisor": {
+      "default": "Story Supervisor"
+    },
+    "job_storyboard": {
+      "default": "Storyboard"
+    },
+    "job_teleplay": {
+      "default": "Teleplay"
+    },
+    "job_texte": {
+      "default": "Tekst"
+    },
+    "job_theatre_play": {
+      "default": "Toneelstuk"
+    },
+    "job_writer": {
+      "default": "Schrijver"
+    },
+    "job_writers_assistant": {
+      "default": "Assistent Schrijver"
+    },
+    "job_writers_production": {
+      "default": "Schrijvers Productie"
+    },
+    "job_creator": {
+      "default": "Maker"
+    },
+    "remove_from_watched": {
+      "default": "Verwijder van Bekeken"
+    },
+    "remove_from_watched_label": {
+      "default": "Verwijder {title} van je Bekeken lijst",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_watched_warning": {
+      "default": "Weet je zeker dat je {title} wilt verwijderen van je Bekeken lijst? Alle afspeelbeurten worden verwijderd.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_single_watched_label": {
+      "default": "Verwijder deze weergave van {title} uit je Bekeken lijst",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_single_watched_warning": {
+      "default": "Weet je zeker dat je deze afspeelbeurt van {title} uit je Bekeken lijst wilt verwijderen?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "seasons_label": {
+      "default": "Seizoenen"
+    },
+    "season_number_label": {
+      "default": "Seizoen {number}",
+      "variables": {
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "season_specials": {
+      "default": "Speciales"
+    },
+    "expand_media_overview": {
+      "default": "Bekijk {title} overzicht",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "season_episode_number_label": {
+      "default": "Seizoen {season} • Aflevering {number}",
+      "variables": {
+        "season": {
+          "type": "string",
+          "description": "Season number"
+        },
+        "number": {
+          "type": "string",
+          "description": "Numeric value"
+        }
+      }
+    },
+    "share_title": {
+      "default": "Deel {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "status": {
+      "default": "Status"
+    },
+    "status_released": {
+      "default": "Uitgebracht"
+    },
+    "status_planned": {
+      "default": "Gepland"
+    },
+    "status_post_production": {
+      "default": "Post-productie"
+    },
+    "status_canceled": {
+      "default": "Geannuleerd"
+    },
+    "status_in_production": {
+      "default": "In productie"
+    },
+    "status_rumored": {
+      "default": "Geruchten"
+    },
+    "status_ended": {
+      "default": "Beëindigd"
+    },
+    "status_returning_series": {
+      "default": "Terugkerende serie"
+    },
+    "status_pilot": {
+      "default": "Pilot"
+    },
+    "status_continuing": {
+      "default": "Lopend"
+    },
+    "status_upcoming": {
+      "default": "Aankomend"
+    },
+    "status_unknown": {
+      "default": "Onbekend"
+    },
+    "expected_premiere": {
+      "default": "Verwachte première"
+    },
+    "person_headshot": {
+      "default": "Hoofdfoto van {person}",
+      "variables": {
+        "person": {
+          "type": "string",
+          "description": "Person name"
+        }
+      }
+    },
+    "actors": {
+      "default": "Acteurs"
+    },
+    "anticipated_count": {
+      "default": "{count} zin in",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "view_all_trending_movies": {
+      "default": "Bekijk alle populaire films"
+    },
+    "view_all_trending_shows": {
+      "default": "Bekijk alle populaire series"
+    },
+    "trending_shows": {
+      "default": "Populaire Series"
+    },
+    "trending_movies": {
+      "default": "Populaire Films"
+    },
+    "view_all": {
+      "default": "Bekijk Alles"
+    },
+    "full_season": {
+      "default": "Volledig Seizoen"
+    },
+    "remove_from_watchlist_warning": {
+      "default": "Weet je zeker dat je {title} van je kijklijst wilt verwijderen?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "view_all_recommended_movies": {
+      "default": "Bekijk alle aanbevolen films"
+    },
+    "view_all_recommended_shows": {
+      "default": "Bekijk alle aanbevolen series"
+    },
+    "view_all_anticipated_movies": {
+      "default": "Bekijk alle verwachte films"
+    },
+    "view_all_anticipated_shows": {
+      "default": "Bekijk alle verwachte series"
+    },
+    "anticipated_movies": {
+      "default": "Verwachte films"
+    },
+    "anticipated_shows": {
+      "default": "Verwachte series"
+    },
+    "view_all_popular_movies": {
+      "default": "Bekijk alle populaire films"
+    },
+    "view_all_popular_shows": {
+      "default": "Bekijk alle populaire series"
+    },
+    "popular_movies": {
+      "default": "Populaire Films"
+    },
+    "popular_shows": {
+      "default": "Populaire Series"
+    },
+    "rate_now": {
+      "default": "Nu beoordelen"
+    },
+    "add_to_favorites": {
+      "default": "Toevoegen aan Favorieten"
+    },
+    "remove_from_favorites": {
+      "default": "Verwijderen uit Favorieten"
+    },
+    "add_to_favorites_label": {
+      "default": "Voeg {title} toe aan je Favorieten",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_favorites_label": {
+      "default": "Verwijder {title} uit je Favorieten",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "remove_from_favorites_warning": {
+      "default": "Weet je zeker dat je {title} uit je Favorieten wilt verwijderen?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "favorite_movies": {
+      "default": "Favoriete Films"
+    },
+    "favorite_shows": {
+      "default": "Favoriete Series"
+    },
+    "favorite_movies_empty": {
+      "default": "Je favoriete filmlijst is leeg."
+    },
+    "favorite_shows_empty": {
+      "default": "Je favoriete serienlijst is leeg."
+    },
+    "stream_on": {
+      "default": "Streamen op"
+    },
+    "your_watchlist_shows": {
+      "default": "Jouw kijklijst series"
+    },
+    "your_watchlist_movies": {
+      "default": "Jouw kijklijst films"
+    },
+    "view_all_watchlist_movies": {
+      "default": "Bekijk alle films op kijklijst"
+    },
+    "view_all_watchlist_shows": {
+      "default": "Bekijk alle series op kijklijst"
+    },
+    "streaming": {
+      "default": "Streaming"
+    },
+    "on_demand": {
+      "default": "Op aanvraag"
+    },
+    "media_popup_label": {
+      "default": "Pop-upmenu voor {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "popular_lists": {
+      "default": "Populaire lijsten"
+    },
+    "no_popular_lists": {
+      "default": "{title} staat niet op populaire lijsten.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "by": {
+      "default": "door"
+    },
+    "users_avatar": {
+      "default": "Avatar van {username}",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "media_poster": {
+      "default": "{title} poster",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "no_comments": {
+      "default": "Nog geen reacties."
+    },
+    "review_by": {
+      "default": "Review door"
+    },
+    "shout_by": {
+      "default": "Geschreeuwd door"
+    },
+    "deleted_user": {
+      "default": "Verwijderd"
+    },
+    "social_activity_title": {
+      "default": "Sociale Activiteit"
+    },
+    "view_all_social_activity": {
+      "default": "Alle sociale activiteiten bekijken"
+    },
+    "position_dropwdown_label": {
+      "default": "Functie"
+    },
+    "position_acting": {
+      "default": "Acteren"
+    },
+    "position_production": {
+      "default": "Productie"
+    },
+    "position_art": {
+      "default": "Art"
+    },
+    "position_crew": {
+      "default": "Crew"
+    },
+    "position_costume___make_up": {
+      "default": "Kostuum & Make-up"
+    },
+    "position_directing": {
+      "default": "Regisseren"
+    },
+    "position_writing": {
+      "default": "Schrijven"
+    },
+    "position_sound": {
+      "default": "Geluid"
+    },
+    "position_camera": {
+      "default": "Camera"
+    },
+    "position_lighting": {
+      "default": "Licht"
+    },
+    "position_visual_effects": {
+      "default": "Visuele effecten"
+    },
+    "position_editing": {
+      "default": "Montage"
+    },
+    "position_creator": {
+      "default": "Creator"
+    },
+    "position_created_by": {
+      "default": "Gemaakt door"
+    },
+    "personal_lists": {
+      "default": "Persoonlijk"
+    },
+    "collaborative_lists": {
+      "default": "Samenwerkingen"
+    },
+    "liked_lists": {
+      "default": "Geliked"
+    },
+    "share_movie": {
+      "default": "Net {title} ontdekt - je moet dit zien! 🎬",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_show": {
+      "default": "Deze geweldige serie gevonden: {title}! 📺",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_episode": {
+      "default": "Zojuist {show} S{season}A{episode} - {title} bekeken! 🔥",
+      "variables": {
+        "show": {
+          "type": "string",
+          "description": "Show title"
+        },
+        "season": {
+          "type": "string",
+          "description": "Season number"
+        },
+        "episode": {
+          "type": "string",
+          "description": "Episode number"
+        },
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "share_person": {
+      "default": "Bekijk {name} op Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "recently_watched": {
+      "default": "Onlangs bekeken"
+    },
+    "view_all_recently_watched": {
+      "default": "Bekijk alles onlangs bekeken"
+    },
+    "released_movies_title": {
+      "default": "Nu beschikbaar"
+    },
+    "view_all_released_movies": {
+      "default": "Bekijk alle films nu"
+    },
+    "view_all_unreleased_movies": {
+      "default": "Bekijk alle aankomende films"
+    },
+    "switch_to_og": {
+      "default": "Overschakelen naar Trakt.tv"
+    },
+    "preview": {
+      "default": "Voorbeeld"
+    },
+    "preview_description": {
+      "default": "Deze functie krijgt nog een frisse laag verf, burger. We werken keihard aan de gebruikerservaring, zodat het werkt als een koor van engelen (of in ieder geval soepel zonder existentiële angst op te roepen)."
+    },
+    "airs": {
+      "default": "Wordt uitgezonden"
+    },
+    "aired": {
+      "default": "Uitgezonden"
+    },
+    "drop_show_warning": {
+      "default": "Weet je zeker dat je {title} wilt verwijderen? Dit verwijdert het van je kijklijst.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "drop_show_label": {
+      "default": "{title} markeren als verwijderd",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "drop_show": {
+      "default": "Verwijderen"
+    },
+    "enable_up_next_nitro_label": {
+      "default": "Schakel Up Next Nitro in, de snelste manier om je series te bekijken"
+    },
+    "lab_up_next_nitro_label": {
+      "default": "Activeer Up Next Nitro"
+    },
+    "lab_up_next_nitro_message": {
+      "default": "Dit experiment is een prestatieverbetering die de gebruikerservaring voor iedereen verbetert."
+    },
+    "lab_up_next_nitro_hidden_message": {
+      "default": "Door interne ontwerpwijzigingen zullen eerder verborgen series nu zichtbaar zijn in je lijst met een zwart-witte miniatuur zodat je ze snel herkent, met de mogelijkheid ze weer zichtbaar te maken of uit de lijst te verwijderen."
+    },
+    "restore_show_warning": {
+      "default": "Weet je zeker dat je de {title} serie wilt herstellen? Dit herstelt de voortgang en de kalender.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "restore_show_label": {
+      "default": "Herstel serie {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "restore_show": {
+      "default": "Serie herstellen"
+    },
+    "mark_as_watched_show_warning": {
+      "default": "Weet je zeker dat je {title} als bekeken wilt markeren? Dit markeert alle afleveringen als bekeken.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "mark_as_watched_show_until_warning": {
+      "default": "Weet je zeker dat je alle onbekeken afleveringen van {title} wilt markeren als bekeken tot aflevering {episode}? Dit markeert {count} afleveringen als bekeken.",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "episode": {
+          "type": "string",
+          "description": "Episode number"
+        },
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "mark_as_watched_multiple_episodes_warning": {
+      "default": "Weet je zeker dat je {count} afleveringen als bekeken wilt markeren?",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "watch_count_label": {
+      "default": "Aantal keer bekeken"
+    },
+    "watched_episodes_count_label": {
+      "default": "Bekeken afleveringen"
+    },
+    "empty_media_history_label": {
+      "default": "Je hebt {title} nog niet bekeken",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "like_comment_label": {
+      "default": "Vind ik leuk"
+    },
+    "unlike_comment_label": {
+      "default": "Vind ik niet leuk"
+    },
+    "comment_likes": {
+      "default": "{count} likes",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "close_label": {
+      "default": "Sluiten"
+    },
+    "comment_replies_label": {
+      "default": "Reacties"
+    },
+    "comment_replies_text": {
+      "default": "{count} reacties",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "comments": {
+      "default": "Reacties"
+    },
+    "comment": {
+      "default": "Reactie"
+    },
+    "comment_reply": {
+      "default": "Antwoord"
+    },
+    "comment_reply_label": {
+      "default": "Reageer op {user}",
+      "variables": {
+        "user": {
+          "type": "string",
+          "description": "User reference"
+        }
+      }
+    },
+    "comment_reply_placeholder": {
+      "default": "Reageren..."
+    },
+    "comment_post_label": {
+      "default": "Voeg een reactie toe"
+    },
+    "comment_post_placeholder": {
+      "default": "Reactie..."
+    },
+    "comment_mark_as_spoiler": {
+      "default": "Markeren als spoiler"
+    },
+    "comment_spoiler": {
+      "default": "Spoiler"
+    },
+    "comment_close_error_label": {
+      "default": "Sluit fout"
+    },
+    "comment_post_reply_label": {
+      "default": "Plaats antwoord"
+    },
+    "error_comment_invalid_content": {
+      "default": "Opmerkingen moeten minimaal 5 woorden bevatten en in het Engels zijn."
+    },
+    "error_comment_unknown": {
+      "default": "Er is een fout opgetreden bij het plaatsen van je opmerking. Probeer het later opnieuw."
+    },
+    "profile_page_title": {
+      "default": "{username}'s profiel",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "private_profile": {
+      "default": "Dit profiel is privé"
+    },
+    "private_profile_description": {
+      "default": "Alsof er nog niet genoeg verborgen was. De geheimen van {username} blijven van hen.",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "original_title": {
+      "default": "Originele titel"
+    },
+    "view_all_comments": {
+      "default": "Bekijk alle reacties"
+    },
+    "remove_from_list": {
+      "default": "Verwijder van lijst"
+    },
+    "remove_from_list_label": {
+      "default": "Verwijder {title} van de lijst",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "error_page_service_title": {
+      "default": "Trakt-dienst onbereikbaar"
+    },
+    "error_page_service_message": {
+      "default": "De verbinding is... afwezig. Als een vergeten herinnering."
+    },
+    "error_page_service_status": {
+      "default": "Trakt-dienststatus"
+    },
+    "retry": {
+      "default": "Opnieuw proberen"
+    },
+    "community_sentiment": {
+      "default": "Sentiment van de community"
+    },
+    "lists_action_label": {
+      "default": "Lijsten"
+    },
+    "listed": {
+      "default": "In lijst"
+    },
+    "add_remove_from_lists": {
+      "default": "{title} toevoegen of verwijderen van lijsten",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "add_to_personal_list_label": {
+      "default": "Voeg {title} toe aan {list}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "remove_from_personal_list_label": {
+      "default": "Verwijder {title} uit {list}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "remove_from_personal_list_warning": {
+      "default": "Weet je zeker dat je {title} wilt verwijderen van {list}?",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        },
+        "list": {
+          "type": "string",
+          "description": "List name"
+        }
+      }
+    },
+    "theme_light": {
+      "default": "Licht"
+    },
+    "theme_dark": {
+      "default": "Donker"
+    },
+    "theme_system": {
+      "default": "Systeem"
+    },
+    "filter_label": {
+      "default": "Filter"
+    },
+    "filter_reset": {
+      "default": "Reset"
+    },
+    "results_for_title": {
+      "default": "Resultaten voor {query}",
+      "variables": {
+        "query": {
+          "type": "string",
+          "description": "Search query"
+        }
+      }
+    },
+    "type_movie": {
+      "default": "Film"
+    },
+    "type_show": {
+      "default": "Serie"
+    },
+    "sign_in": {
+      "default": "Inloggen"
+    },
+    "code_retry_title": {
+      "default": "Er ging iets mis"
+    },
+    "code_retry_message": {
+      "default": "De activatie is geweigerd, verlopen of er is iets onvoorziens gebeurd. Probeer het opnieuw."
+    },
+    "code_instruction": {
+      "default": "Scan de QR-code of log in op:"
+    },
+    "code_label": {
+      "default": "en voer de volgende code in:"
+    },
+    "filter_all": {
+      "default": "Alles"
+    },
+    "filters_title": {
+      "default": "Filters"
+    },
+    "ignore_watched": {
+      "default": "Bekeken negeren"
+    },
+    "ignore_watchlisted": {
+      "default": "Op de lijst negeren"
+    },
+    "watchnow_filter_label": {
+      "default": "Beschikbaarheid"
+    },
+    "watchnow_favorites_only": {
+      "default": "Alleen favorieten"
+    },
+    "watchnow_digital_release": {
+      "default": "Alle digitale releases"
+    },
+    "watchnow_streaming": {
+      "default": "Nu aan het streamen"
+    },
+    "decade": {
+      "default": "Decennium"
+    },
+    "ratings": {
+      "default": "Beoordelingen"
+    },
+    "view_all_items_in": {
+      "default": "Bekijk alle items in {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "filter_reset_all": {
+      "default": "Alles resetten"
+    },
+    "filter_reset_all_label": {
+      "default": "Alle filters resetten"
+    },
+    "video_type_trailer": {
+      "default": "Trailer"
+    },
+    "video_type_clip": {
+      "default": "Clip"
+    },
+    "video_type_teaser": {
+      "default": "Teaser"
+    },
+    "video_type_featurette": {
+      "default": "Featurette"
+    },
+    "video_type_recap": {
+      "default": "Samenvatting"
+    },
+    "video_type_behind_the_scenes": {
+      "default": "Achter de schermen"
+    },
+    "now_playing": {
+      "default": "Nu bezig"
+    },
+    "remaining": {
+      "default": "resterend"
+    },
+    "checkin": {
+      "default": "Inchecken"
+    },
+    "checkin_label": {
+      "default": "Inchecken {title}",
+      "variables": {
+        "title": {
+          "type": "string",
+          "description": "Content title"
+        }
+      }
+    },
+    "cookie_notice": {
+      "default": "Trakt gebruikt C🍪🍪KIES om je algehele ervaring te verbeteren. Je kunt <a>hier meer informatie lezen</a>."
+    },
+    "cookie_accept": {
+      "default": "Begrepen, laten we gaan!"
+    },
+    "year_to_date_label": {
+      "default": "Jaar tot nu toe"
+    },
+    "month_in_review_label": {
+      "default": "Maandoverzicht"
+    },
+    "settings": {
+      "default": "Instellingen"
+    },
+    "settings_spoilers_title": {
+      "default": "Spoilers"
+    },
+    "settings_spoilers_label": {
+      "default": "Spoilers tonen"
+    },
+    "filter_save": {
+      "default": "Opslaan"
+    },
+    "filter_save_label": {
+      "default": "Filters opslaan"
+    },
+    "error_page_locked_account_title": {
+      "default": "Account vergrendeld"
+    },
+    "error_page_locked_account_message": {
+      "default": "Uw account is vergrendeld, <a>neem contact op met de ondersteuning</a> om dit probleem op te lossen."
+    },
+    "first_play_this_month": {
+      "default": "Eerste afspeling deze maand"
+    },
+    "shows_watched": {
+      "default": "{count} series bekeken",
+      "variables": {
+        "count": {
+          "type": "string",
+          "description": "Numeric count"
+        }
+      }
+    },
+    "follow": {
+      "default": "Volgen"
+    },
+    "follow_label": {
+      "default": "{username} volgen",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "unfollow": {
+      "default": "Ontvolgen"
+    },
+    "unfollow_label": {
+      "default": "{username} ontvolgen",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "unfollow_warning": {
+      "default": "Weet je zeker dat je {username} wilt ontvolgen?",
+      "variables": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        }
+      }
+    },
+    "vip_upsell_title": {
+      "default": "Ontgrendel VIP-functies om je Trakt-ervaring te verbeteren"
+    },
+    "vip_upsell_description": {
+      "default": "Wil je je maand- en jaaroverzicht bekijken? En toegang krijgen tot vele andere functies? Meld je aan voor Trakt VIP."
+    },
+    "following": {
+      "default": "Volgend"
+    },
+    "followers": {
+      "default": "Volgers"
+    },
+    "not_following_anyone": {
+      "default": "Hier is nog niemand (nog niet)."
+    },
+    "read_more": {
+      "default": "Lees meer"
+    },
+    "add_comment": {
+      "default": "Toevoegen"
+    },
+    "rename_list": {
+      "default": "Hernoem je lijst"
+    },
+    "rename_list_label": {
+      "default": "Hernoem je lijst {name}",
+      "variables": {
+        "name": {
+          "type": "string",
+          "description": "User or entity name"
+        }
+      }
+    },
+    "hot": {
+      "default": "Populair deze maand"
+    },
+    "hot_movies": {
+      "default": "Populaire films deze maand"
+    },
+    "hot_shows": {
+      "default": "Populaire series deze maand"
+    },
+    "view_all_hot_shows": {
+      "default": "Bekijk alle populaire series"
+    },
+    "view_all_hot_movies": {
+      "default": "Bekijk alle populaire films"
+    }
+  }
+}

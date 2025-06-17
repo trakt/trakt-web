@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Meta Messages Schema",
+  "description": "Schema for platform-agnostic internationalization message definitions",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Schema reference"
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata configuration for the locale",
+      "properties": {
+        "locale": {
+          "type": "string",
+          "description": "Primary locale identifier (e.g., 'en', 'fr-fr')"
+        },
+        "fallbackLocale": {
+          "type": "string",
+          "description": "Fallback locale if translation is missing"
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["ltr", "rtl"],
+          "description": "Text direction for the locale"
+        },
+        "generator": {
+          "type": "object",
+          "description": "Generator configuration",
+          "properties": {
+            "inlang": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "outputPath": { "type": "string" }
+              }
+            },
+            "android": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "outputPath": { "type": "string" },
+                "resourceName": { "type": "string" }
+              }
+            },
+            "ios": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "outputPath": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "required": ["locale"]
+    },
+    "messages": {
+      "type": "object",
+      "description": "Message definitions",
+      "patternProperties": {
+        "^[a-zA-Z][a-zA-Z0-9_]*$": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Simple string message"
+            },
+            {
+              "type": "object",
+              "description": "Complex message definition",
+              "properties": {
+                "default": {
+                  "type": "string",
+                  "description": "Default message text"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the message purpose and context"
+                },
+                "platforms": {
+                  "type": "object",
+                  "description": "Platform-specific key overrides (web uses default key)",
+                  "properties": {
+                    "android": {
+                      "type": "object",
+                      "description": "Android platform overrides",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "description": "Custom key name for Android"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "ios": {
+                      "type": "object",
+                      "description": "iOS platform overrides",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "description": "Custom key name for iOS"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "variables": {
+                  "type": "object",
+                  "description": "Variable definitions used in the message",
+                  "patternProperties": {
+                    "^[a-zA-Z][a-zA-Z0-9_]*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "string",
+                            "number",
+                            "date",
+                            "time",
+                            "currency"
+                          ],
+                          "description": "Variable type"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the variable"
+                        }
+                      },
+                      "required": ["type"]
+                    }
+                  }
+                }
+              },
+              "required": ["default"]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "required": ["meta", "messages"]
+}
