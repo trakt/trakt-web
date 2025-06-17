@@ -59,7 +59,6 @@
       position: relative;
       background: var(--color-background-cover-tag);
       color: var(--color-text-progress-tag);
-      @include backdrop-filter-blur(var(--ni-16));
     }
   }
 </style>
