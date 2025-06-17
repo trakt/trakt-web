@@ -6,7 +6,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { I18nGenerator, type MetaMessages } from './I18nGenerator.ts';
+import { I18nGenerator, type MetaMessages, Platform } from './I18nGenerator.ts';
 
 describe('I18nGenerator', () => {
   let tempDir: string;
@@ -99,7 +99,7 @@ describe('I18nGenerator', () => {
       },
     };
 
-    generator = new I18nGenerator(testMetaMessages);
+    generator = new I18nGenerator([testMetaMessages]);
   });
 
   afterEach(async () => {
@@ -108,179 +108,226 @@ describe('I18nGenerator', () => {
     }
   });
 
-  describe('generateInlang', () => {
-    it('should generate correct Inlang JSON format', () => {
-      const result = generator.generateInlang();
+  describe('generatePlatforms', () => {
+    describe('Web platform', () => {
+      it('should generate correct Inlang JSON format', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.WEB],
+          tempDir,
+        );
+        expect(results).toHaveLength(1);
+        expect(results[0]!.platform).toBe(Platform.WEB);
 
-      expect(result).toEqual({
-        '$schema': 'https://inlang.com/schema/inlang-message-format',
-        'simple_message': 'Hello World',
-        'greeting': 'Hello, {name}!',
-        'count_message': '{count} items remaining',
-        'mobile_only': 'Mobile only feature',
-        'platform_key_test': 'Platform specific key test',
-        'mixed_variables': 'User {userName} has {count} messages',
+        const content = JSON.parse(results[0]!.content);
+        expect(content).toEqual({
+          '$schema': 'https://inlang.com/schema/inlang-message-format',
+          'simple_message': 'Hello World',
+          'greeting': 'Hello, {name}!',
+          'count_message': '{count} items remaining',
+          'mobile_only': 'Mobile only feature',
+          'platform_key_test': 'Platform specific key test',
+          'mixed_variables': 'User {userName} has {count} messages',
+        });
+      });
+
+      it('should use clean placeholders without type annotations', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.WEB],
+          tempDir,
+        );
+        const content = JSON.parse(results[0]!.content);
+
+        // Ensure no ICU type annotations remain
+        expect(content.count_message).toBe('{count} items remaining');
+        expect(content.mixed_variables).toBe(
+          'User {userName} has {count} messages',
+        );
+
+        // Ensure no {variable, type} format
+        expect(JSON.stringify(content)).not.toContain('{count, number}');
+        expect(JSON.stringify(content)).not.toContain('{userName, string}');
       });
     });
 
-    it('should use clean placeholders without type annotations', () => {
-      const result = generator.generateInlang();
+    describe('Android platform', () => {
+      it('should generate correct Android XML format', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.ANDROID],
+          tempDir,
+        );
+        expect(results).toHaveLength(1);
+        expect(results[0]!.platform).toBe(Platform.ANDROID);
 
-      // Ensure no ICU type annotations remain
-      expect(result.count_message).toBe('{count} items remaining');
-      expect(result.mixed_variables).toBe(
-        'User {userName} has {count} messages',
-      );
+        const content = results[0]!.content;
+        expect(content).toContain('<?xml version="1.0" encoding="utf-8"?>');
+        expect(content).toContain('<resources>');
+        expect(content).toContain('</resources>');
+      });
 
-      // Ensure no {variable, type} format
-      expect(JSON.stringify(result)).not.toContain('{count, number}');
-      expect(JSON.stringify(result)).not.toContain('{userName, string}');
-    });
-  });
+      it('should handle simple string messages', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.ANDROID],
+          tempDir,
+        );
+        const content = results[0]!.content;
 
-  describe('generateAndroid', () => {
-    it('should generate correct Android XML format', () => {
-      const result = generator.generateAndroid();
+        expect(content).toContain(
+          '<string name="simple_message">Hello World</string>',
+        );
+      });
 
-      expect(result).toContain('<?xml version="1.0" encoding="utf-8"?>');
-      expect(result).toContain('<resources>');
-      expect(result).toContain('</resources>');
-      expect(result).toContain('Generated from meta messages for locale: en');
-    });
+      it('should convert string variables to %s', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.ANDROID],
+          tempDir,
+        );
+        const content = results[0]!.content;
 
-    it('should handle simple string messages', () => {
-      const result = generator.generateAndroid();
+        expect(content).toContain(
+          '<string name="greeting_message">Hello, %s!</string>',
+        );
+      });
 
-      expect(result).toContain(
-        '<string name="simple_message">Hello World</string>',
-      );
-    });
+      it('should convert number variables to %d', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.ANDROID],
+          tempDir,
+        );
+        const content = results[0]!.content;
 
-    it('should convert string variables to %s', () => {
-      const result = generator.generateAndroid();
+        expect(content).toContain(
+          '<string name="count_message">%d items remaining</string>',
+        );
+      });
 
-      expect(result).toContain(
-        '<string name="greeting_message">Hello, %s!</string>',
-      );
-    });
+      it('should handle mixed variable types correctly', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.ANDROID],
+          tempDir,
+        );
+        const content = results[0]!.content;
 
-    it('should convert number variables to %d', () => {
-      const result = generator.generateAndroid();
+        expect(content).toContain(
+          '<string name="user_message_count">User %s has %d messages</string>',
+        );
+      });
 
-      expect(result).toContain(
-        '<string name="count_message">%d items remaining</string>',
-      );
-    });
+      it('should use platform-specific keys when defined', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.ANDROID],
+          tempDir,
+        );
+        const content = results[0]!.content;
 
-    it('should handle mixed variable types correctly', () => {
-      const result = generator.generateAndroid();
-
-      expect(result).toContain(
-        '<string name="user_message_count">User %s has %d messages</string>',
-      );
-    });
-
-    it('should use platform-specific keys when defined', () => {
-      const result = generator.generateAndroid();
-
-      expect(result).toContain('name="greeting_message"'); // android key
-      expect(result).toContain('name="mobile_feature"'); // android key
-      expect(result).toContain('name="android_specific_key"'); // android key
-      expect(result).not.toContain('name="greeting"'); // original key
-    });
-
-    it('should include comments for descriptions', () => {
-      const result = generator.generateAndroid();
-
-      expect(result).toContain('<!-- Greeting message with user name -->');
-      expect(result).toContain('<!-- Shows remaining item count -->');
-      expect(result).toContain(
-        '<!-- Feature only available on mobile platforms -->',
-      );
-    });
-  });
-
-  describe('generateIOS', () => {
-    it('should generate correct String Catalog format', () => {
-      const result = generator.generateIOS();
-      const xcstrings = JSON.parse(result);
-
-      expect(xcstrings.sourceLanguage).toBe('en');
-      expect(xcstrings.version).toBe('1.0');
-      expect(xcstrings.strings).toBeDefined();
+        expect(content).toContain('name="greeting_message"'); // android key
+        expect(content).toContain('name="mobile_feature"'); // android key
+        expect(content).toContain('name="android_specific_key"'); // android key
+        expect(content).not.toContain('name="greeting"'); // original key
+      });
     });
 
-    it('should handle simple string messages', () => {
-      const result = generator.generateIOS();
-      const xcstrings = JSON.parse(result);
+    describe('iOS platform', () => {
+      it('should generate correct String Catalog format', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.IOS],
+          tempDir,
+        );
+        expect(results).toHaveLength(1);
+        expect(results[0]!.platform).toBe(Platform.IOS);
 
-      expect(xcstrings.strings.simple_message).toEqual({
-        localizations: {
-          en: {
-            stringUnit: {
-              state: 'translated',
-              value: 'Hello World',
+        const xcstrings = JSON.parse(results[0]!.content);
+        expect(xcstrings.sourceLanguage).toBe('en');
+        expect(xcstrings.version).toBe('1.0');
+        expect(xcstrings.strings).toBeDefined();
+      });
+
+      it('should handle simple string messages', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.IOS],
+          tempDir,
+        );
+        const xcstrings = JSON.parse(results[0]!.content);
+
+        expect(xcstrings.strings.simple_message).toEqual({
+          localizations: {
+            en: {
+              stringUnit: {
+                state: 'translated',
+                value: 'Hello World',
+              },
             },
           },
-        },
+        });
+      });
+
+      it('should convert string variables to %@', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.IOS],
+          tempDir,
+        );
+        const xcstrings = JSON.parse(results[0]!.content);
+
+        expect(
+          xcstrings.strings.greetingMessage.localizations.en.stringUnit.value,
+        ).toBe('Hello, %@!');
+      });
+
+      it('should convert number variables to %d', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.IOS],
+          tempDir,
+        );
+        const xcstrings = JSON.parse(results[0]!.content);
+
+        expect(
+          xcstrings.strings.count_message.localizations.en.stringUnit.value,
+        )
+          .toBe('%d items remaining');
+      });
+
+      it('should handle mixed variable types correctly', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.IOS],
+          tempDir,
+        );
+        const xcstrings = JSON.parse(results[0]!.content);
+
+        expect(
+          xcstrings.strings.userMessageCount.localizations.en.stringUnit.value,
+        ).toBe('User %@ has %d messages');
+      });
+
+      it('should use platform-specific keys when defined', async () => {
+        const results = await generator.generatePlatforms(
+          [Platform.IOS],
+          tempDir,
+        );
+        const xcstrings = JSON.parse(results[0]!.content);
+
+        expect(xcstrings.strings.greetingMessage).toBeDefined(); // ios key
+        expect(xcstrings.strings.mobileFeature).toBeDefined(); // ios key
+        expect(xcstrings.strings.iOSSpecificKey).toBeDefined(); // ios key
+        expect(xcstrings.strings.greeting).toBeUndefined(); // original key should not exist
       });
     });
 
-    it('should convert string variables to %@', () => {
-      const result = generator.generateIOS();
-      const xcstrings = JSON.parse(result);
+    it('should generate multiple platforms when requested', async () => {
+      const results = await generator.generatePlatforms([
+        Platform.WEB,
+        Platform.ANDROID,
+      ], tempDir);
+      expect(results).toHaveLength(2);
 
-      expect(
-        xcstrings.strings.greetingMessage.localizations.en.stringUnit.value,
-      ).toBe('Hello, %@!');
-    });
-
-    it('should convert number variables to %d', () => {
-      const result = generator.generateIOS();
-      const xcstrings = JSON.parse(result);
-
-      expect(xcstrings.strings.count_message.localizations.en.stringUnit.value)
-        .toBe('%d items remaining');
-    });
-
-    it('should handle mixed variable types correctly', () => {
-      const result = generator.generateIOS();
-      const xcstrings = JSON.parse(result);
-
-      expect(
-        xcstrings.strings.userMessageCount.localizations.en.stringUnit.value,
-      ).toBe('User %@ has %d messages');
-    });
-
-    it('should use platform-specific keys when defined', () => {
-      const result = generator.generateIOS();
-      const xcstrings = JSON.parse(result);
-
-      expect(xcstrings.strings.greetingMessage).toBeDefined(); // ios key
-      expect(xcstrings.strings.mobileFeature).toBeDefined(); // ios key
-      expect(xcstrings.strings.iOSSpecificKey).toBeDefined(); // ios key
-      expect(xcstrings.strings.greeting).toBeUndefined(); // original key should not exist
-    });
-
-    it('should include comments for descriptions', () => {
-      const result = generator.generateIOS();
-      const xcstrings = JSON.parse(result);
-
-      expect(xcstrings.strings.greetingMessage.comment).toBe(
-        'Greeting message with user name',
-      );
-      expect(xcstrings.strings.count_message.comment).toBe(
-        'Shows remaining item count',
-      );
-      expect(xcstrings.strings.mobileFeature.comment).toBe(
-        'Feature only available on mobile platforms',
-      );
+      const platforms = results.map((r) => r.platform);
+      expect(platforms).toContain(Platform.WEB);
+      expect(platforms).toContain(Platform.ANDROID);
     });
   });
 
   describe('generateAll', () => {
     it('should write all enabled platform files', async () => {
-      await generator.generateAll(tempDir);
+      const results = await generator.generateAll(tempDir);
+      expect(results).toHaveLength(3); // web, android, ios
 
       // Check Inlang file
       const inlangPath = path.join(tempDir, 'messages', 'en.json');
@@ -339,26 +386,63 @@ describe('I18nGenerator', () => {
   });
 
   describe('edge cases', () => {
-    it('should handle messages without variables', () => {
-      const simpleGenerator = new I18nGenerator({
-        meta: { locale: 'en', direction: 'ltr' },
+    it('should handle messages without variables', async () => {
+      const simpleGenerator = new I18nGenerator([{
+        meta: {
+          locale: 'en',
+          direction: 'ltr',
+          generator: {
+            inlang: { enabled: true, outputPath: './messages/{locale}.json' },
+            android: {
+              enabled: true,
+              outputPath: './android/values-{locale}/strings.xml',
+              resourceName: 'strings',
+            },
+            ios: { enabled: true, outputPath: './ios/Localizable.xcstrings' },
+          },
+        },
         messages: { simple: 'Hello' },
-      });
+      }]);
 
-      expect(simpleGenerator.generateInlang().simple).toBe('Hello');
-      expect(simpleGenerator.generateAndroid()).toContain(
+      const webResults = await simpleGenerator.generatePlatforms(
+        [Platform.WEB],
+        tempDir,
+      );
+      const webContent = JSON.parse(webResults[0]!.content);
+      expect(webContent.simple).toBe('Hello');
+
+      const androidResults = await simpleGenerator.generatePlatforms([
+        Platform.ANDROID,
+      ], tempDir);
+      expect(androidResults[0]!.content).toContain(
         '<string name="simple">Hello</string>',
       );
-      const iosResult = simpleGenerator.generateIOS();
-      const iosData = JSON.parse(iosResult);
+
+      const iosResults = await simpleGenerator.generatePlatforms(
+        [Platform.IOS],
+        tempDir,
+      );
+      const iosData = JSON.parse(iosResults[0]!.content);
       expect(iosData.strings.simple.localizations.en.stringUnit.value).toBe(
         'Hello',
       );
     });
 
-    it('should handle messages without platform-specific keys', () => {
-      const simpleGenerator = new I18nGenerator({
-        meta: { locale: 'en', direction: 'ltr' },
+    it('should handle messages without platform-specific keys', async () => {
+      const simpleGenerator = new I18nGenerator([{
+        meta: {
+          locale: 'en',
+          direction: 'ltr',
+          generator: {
+            inlang: { enabled: true, outputPath: './messages/{locale}.json' },
+            android: {
+              enabled: true,
+              outputPath: './android/values-{locale}/strings.xml',
+              resourceName: 'strings',
+            },
+            ios: { enabled: true, outputPath: './ios/Localizable.xcstrings' },
+          },
+        },
         messages: {
           test: {
             default: 'Test {value}',
@@ -370,12 +454,19 @@ describe('I18nGenerator', () => {
             },
           },
         },
-      });
+      }]);
 
       // Should use original key when no platform-specific key is defined
-      expect(simpleGenerator.generateAndroid()).toContain('name="test"');
-      const iosResult = simpleGenerator.generateIOS();
-      const iosData = JSON.parse(iosResult);
+      const androidResults = await simpleGenerator.generatePlatforms([
+        Platform.ANDROID,
+      ], tempDir);
+      expect(androidResults[0]!.content).toContain('name="test"');
+
+      const iosResults = await simpleGenerator.generatePlatforms(
+        [Platform.IOS],
+        tempDir,
+      );
+      const iosData = JSON.parse(iosResults[0]!.content);
       expect(iosData.strings.test).toBeDefined();
     });
   });

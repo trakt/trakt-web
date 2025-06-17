@@ -20,7 +20,6 @@
     "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts",
     "i18n:cleanse": "deno run --allow-read --allow-write --allow-env .scripts/cleanse-i18n.ts",
     "i18n:generate": "deno run --allow-read --allow-write i18n/generator/cli.ts i18n/meta/",
-    "i18n:generate:single": "deno run --allow-read --allow-write i18n/generator/cli.ts",
     "i18n:convert": "deno run --allow-read --allow-write i18n/generator/convert-to-meta.ts i18n/messages i18n/meta"
   },
   "devDependencies": {
