@@ -11,26 +11,17 @@
     alt,
     badge,
     tag,
-    isLoading,
     title,
     style = "gradient",
   }: CardCoverProps = $props();
 
   let isImagePending = $state(!isImageComplete(src));
-  $effect(() => {
-    if (!isLoading) {
-      return;
-    }
-
-    isImagePending = true;
-  });
-
   const id = $derived(checksum(`${src}-${title}`));
 </script>
 
 <div
   class="trakt-card-cover"
-  class:trakt-card-cover-loading={isImagePending || isLoading}
+  class:trakt-card-cover-loading={isImagePending}
   class:trakt-card-cover-placeholder={PLACEHOLDERS.includes(src)}
   class:trakt-card-cover-youtube={src.includes("youtube")}
 >
