@@ -21,7 +21,11 @@
 </script>
 
 <div class="trakt-streaming-service-logo">
-  <CrossOriginImage src={service?.logoUrl ?? ""} alt={i18n.alt(displayName)} />
+  {#if service?.logoUrl}
+    <CrossOriginImage src={service.logoUrl} alt={i18n.alt(displayName)} />
+  {:else}
+    <span class="meta-info uppercase">{displayName}</span>
+  {/if}
 </div>
 
 <style>
