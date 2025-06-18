@@ -43,7 +43,7 @@ export const FavoritedShowsMappedMock: FavoritedEntry[] = [
       'type': 'show',
       'year': 2023,
       'votes': 0,
-      'colors': ['transparent', 'transparent'],
+      'colors': undefined,
       'plexSlug': undefined,
       'episode': {
         'count': 19,

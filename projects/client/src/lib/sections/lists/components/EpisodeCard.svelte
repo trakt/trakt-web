@@ -52,7 +52,7 @@
     href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
   >
     <CardCover
-      title={episode.title}
+      title={show.title}
       src={$src ?? EPISODE_COVER_PLACEHOLDER}
       alt={`${show.title} - ${episode.title}`}
       {badge}

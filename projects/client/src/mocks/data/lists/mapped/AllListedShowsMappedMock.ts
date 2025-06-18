@@ -5,7 +5,7 @@ export const AllListedShowsMappedMock: ListedItem[] = [
   {
     'entry': {
       ...ShowSiloMinimalMappedMock,
-      'colors': ['transparent', 'transparent'],
+      'colors': undefined,
       'episode': {
         'count': 20,
       },

@@ -6,7 +6,7 @@ export const HiddenShowProgressMappedMock: HiddenShow[] = [
     'hiddenAt': new Date('2025-02-26T12:55:10.000Z'),
     'show': {
       ...ShowSiloMinimalMappedMock,
-      'colors': ['transparent', 'transparent'],
+      'colors': undefined,
     },
   },
 ];
