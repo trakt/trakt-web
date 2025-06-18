@@ -24,6 +24,7 @@
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
     variant?: "normal" | "centered";
+    headerNavigationType?: DpadNavigationType;
   };
 
   const {
@@ -37,6 +38,7 @@
     actions,
     badge,
     empty,
+    headerNavigationType,
     variant = "normal",
   }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
@@ -101,6 +103,7 @@
         actions={$isCollapsed ? undefined : actions}
         {badge}
         inset="title"
+        navigationType={headerNavigationType}
       />
     {/if}
     <div

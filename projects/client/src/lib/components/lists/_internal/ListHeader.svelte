@@ -1,5 +1,6 @@
 <script lang="ts">
-  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useNavigation } from "$lib/features/navigation/useNavigation";
   import type { Snippet } from "svelte";
   import ListTitle from "./ListTitle.svelte";
 
@@ -10,6 +11,7 @@
     titleAction,
     actions,
     badge,
+    navigationType,
     ...props
   }: {
     title: string;
@@ -18,7 +20,13 @@
     actions?: Snippet;
     badge?: Snippet;
     inset: "all" | "title";
+    navigationType?: DpadNavigationType;
   } & HTMLElementProps = $props();
+
+  const { navigation } = useNavigation();
+  const hasHiddenActions = $derived(
+    $navigation === "dpad" && !Boolean(navigationType),
+  );
 </script>
 
 <div
@@ -41,12 +49,10 @@
       {@render badge()}
     {/if}
   </div>
-  {#if actions != null}
-    <RenderFor audience="all" navigation="default">
-      <div class="trakt-list-actions">
-        {@render actions()}
-      </div>
-    </RenderFor>
+  {#if actions != null && !hasHiddenActions}
+    <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
+      {@render actions()}
+    </div>
   {/if}
 </div>
 
