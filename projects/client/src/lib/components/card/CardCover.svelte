@@ -3,18 +3,21 @@
   import { PLACEHOLDERS } from "$lib/utils/constants";
   import { isImageComplete } from "$lib/utils/image/isImageComplete";
   import { checksum } from "$lib/utils/string/checksum";
+  import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 
   const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
 
   let isImagePending = $state(!isImageComplete(src));
   const id = $derived(checksum(`${src}-${title}`));
+
+  const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
 </script>
 
 <div
   class="trakt-card-cover"
   class:trakt-card-cover-loading={isImagePending}
-  class:trakt-card-cover-placeholder={PLACEHOLDERS.includes(src)}
+  class:trakt-card-cover-placeholder={isPlaceholder}
   class:trakt-card-cover-youtube={src.includes("youtube")}
 >
   {#if badge}
@@ -27,7 +30,10 @@
       {@render tag()}
     </div>
   {/if}
-  <div class="trakt-card-cover-image" class:has-overlay={overlaySrc}>
+  <div
+    class="trakt-card-cover-image"
+    class:has-overlay={overlaySrc || isPlaceholder}
+  >
     <CrossOriginImage
       classList="trakt-card-cover-image"
       animate={false}
@@ -47,10 +53,12 @@
       />
     {/if}
 
-    {#if overlaySrc && PLACEHOLDERS.includes(overlaySrc)}
-      <p class="trakt-logo-overlay">
-        {title}
-      </p>
+    {#if (overlaySrc && PLACEHOLDERS.includes(overlaySrc)) || isPlaceholder}
+      <div class="trakt-title-overlay" class:has-tag={tag}>
+        <p class="uppercase" use:lineClamp={{ lines: 3 }}>
+          {title}
+        </p>
+      </div>
     {/if}
   </div>
 </div>
@@ -63,6 +71,15 @@
     background-color: var(--color-card-background);
     overflow: hidden;
     position: relative;
+
+    &.trakt-card-cover-placeholder {
+      /* FIXME: use SVG placeholders and remove this */
+      .trakt-card-cover-image {
+        :global(img.trakt-card-cover-image) {
+          object-fit: contain;
+        }
+      }
+    }
 
     &.trakt-card-cover-loading {
       .trakt-card-cover-image {
@@ -148,17 +165,28 @@
       object-position: bottom;
     }
 
-    p.trakt-logo-overlay {
+    .trakt-title-overlay {
+      z-index: var(--layer-raised);
       width: 100%;
 
-      color: var(--shade-20);
+      position: absolute;
+      bottom: 0;
+      left: 0;
 
+      color: var(--color-overlay-foreground);
       text-align: center;
-      text-transform: uppercase;
-      font-weight: bold;
 
-      padding: 8px;
+      padding: var(--ni-8);
       box-sizing: border-box;
+
+      p {
+        font-weight: bold;
+        text-overflow: ellipsis;
+      }
+
+      &.has-tag {
+        bottom: var(--ni-24);
+      }
     }
 
     &.has-overlay::after {
@@ -174,7 +202,7 @@
       background: linear-gradient(
         180deg,
         transparent 0%,
-        var(--color-card-cover-shadow, var(--shade-900)) 100%
+        var(--color-card-cover-shadow, var(--shade-940)) 100%
       );
     }
   }

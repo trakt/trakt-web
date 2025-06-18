@@ -43,7 +43,7 @@ export const FavoritedMoviesMappedMock: FavoritedEntry[] = [
       'type': 'movie',
       'year': 2024,
       'votes': 0,
-      'colors': ['transparent', 'transparent'],
+      'colors': undefined,
       'plexSlug': undefined,
     },
   },

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
+  import { PLACEHOLDERS } from "$lib/utils/constants";
   import { writable } from "svelte/store";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
@@ -17,12 +18,15 @@
 
   const response = $derived(writable({ uri: src }));
   const isImageLoaded = $derived(writable(false));
+
+  const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
 </script>
 
 <img
   {loading}
   class:image-loaded={$isImageLoaded}
   class:image-animation-enabled={animate}
+  class:image-placeholder={isPlaceholder}
   use:appendClassList={classList}
   src={$response.uri}
   {alt}
@@ -51,5 +55,9 @@
 
   img {
     text-indent: -8008135px;
+  }
+
+  img.image-placeholder {
+    background-color: var(--shade-800);
   }
 </style>

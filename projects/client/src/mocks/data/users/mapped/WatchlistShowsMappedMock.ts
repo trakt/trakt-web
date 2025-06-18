@@ -14,7 +14,7 @@ export const WatchlistShowsMappedMock: WatchlistShow[] = [
         'count': 20,
       },
       ...ShowSiloMinimalMappedMock,
-      'colors': ['transparent', 'transparent'],
+      'colors': undefined,
     },
   },
 ];

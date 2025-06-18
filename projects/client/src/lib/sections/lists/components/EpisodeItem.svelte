@@ -78,7 +78,7 @@
         },
       }}
       popupActions={props.popupActions}
-      {tag}
+      tag={props.variant !== "activity" ? tag : undefined}
       {action}
       type="episode"
       variant="landscape"
@@ -87,7 +87,11 @@
   {/if}
 
   {#if style === "cover"}
-    <EpisodeCard {...props} {tag} {action} />
+    <EpisodeCard
+      {...props}
+      tag={props.variant !== "activity" ? tag : undefined}
+      {action}
+    />
   {/if}
 {/snippet}
 

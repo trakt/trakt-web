@@ -47,7 +47,7 @@
       src={mediaCoverImageUrl}
       overlaySrc={mediaCoverOverlay}
       alt={m.media_poster({ title: media.title })}
-      --color-card-cover-shadow={media.colors[1]}
+      --color-card-cover-shadow={media.colors?.[1]}
       {badge}
     />
   </Link>

@@ -39,7 +39,7 @@ export const MediaEntrySchema = z.object({
   airDate: z.date(),
   certification: z.string().nullish(),
   votes: z.number(),
-  colors: z.tuple([z.string(), z.string()]),
+  colors: z.tuple([z.string(), z.string()]).optional(),
   plexSlug: z.string().nullish(),
 });
 

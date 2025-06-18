@@ -3,16 +3,13 @@ import {
   type MovieActivityHistory,
 } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import {
-  DEFAULT_COVER,
-  MEDIA_COVER_THUMB_PLACEHOLDER,
-} from '$lib/utils/constants.ts';
+import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { episodeActivityTitle } from '$lib/utils/string/episodeActivityTitle.ts';
 import type { MonthToDateDetails } from '../../models/MonthToDateDetails.ts';
 
 function mapToCover(activity: MovieActivityHistory | EpisodeActivityHistory) {
   const media = activity.type === 'movie' ? activity.movie : activity.show;
-  return media.cover?.url.thumb || MEDIA_COVER_THUMB_PLACEHOLDER;
+  return media.cover?.url.thumb || DEFAULT_COVER;
 }
 
 function mapToTitle(activity: MovieActivityHistory | EpisodeActivityHistory) {
