@@ -14,6 +14,7 @@
     items,
     preferNative = false,
     size,
+    navigationType,
     ...props
   }: TraktDropdownListProps = $props();
 
@@ -50,6 +51,9 @@
     const select = document.createElement("select");
     select.classList.add("trakt-shadow-select");
     select.setAttribute("tabindex", "-1");
+
+    navigationType &&
+      select.setAttribute("data-dpad-navigation", navigationType);
 
     select.addEventListener("change", (event) => {
       const selectedIndex = (event.target as HTMLSelectElement).selectedIndex;
@@ -98,6 +102,10 @@
       },
     };
   }
+
+  const buttonNavigationType = $derived(
+    !isActuallyNative && navigationType ? navigationType : undefined,
+  );
 </script>
 
 <div
@@ -107,7 +115,12 @@
   use:shadowNativeSelect
   data-size={size}
 >
-  <Button style="textured" {size} {...props}>
+  <Button
+    style="textured"
+    navigationType={buttonNavigationType}
+    {size}
+    {...props}
+  >
     {@render children()}
     {#snippet icon()}
       <div class="trakt-dropdown-list-icon">
@@ -158,6 +171,13 @@
       width: 0;
       height: 0;
       overflow: hidden;
+    }
+
+    //FIXME: merge with SelectFilter
+    &:has(:global(select:focus-visible)) {
+      outline: var(--border-thickness-xs) solid var(--purple-500);
+      outline-offset: var(--border-thickness-xs);
+      border-radius: calc(var(--border-radius-m) * 0.76925);
     }
 
     :global(.trakt-shadow-select) {
