@@ -79,6 +79,7 @@
     "date-fns": "^4.1.0",
     "firebase": "^11.8.1",
     "idb-keyval": "^6.2.2",
+    "oidc-client-ts": "^3.3.0",
     "resolve-accept-language": "^3.1.11",
     "workbox-expiration": "^7.3.0",
     "workbox-precaching": "^7.3.0",

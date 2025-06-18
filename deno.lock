@@ -38,6 +38,7 @@
     "npm:jsdom@26.1.0": "26.1.0",
     "npm:marked@15.0.12": "15.0.12",
     "npm:msw@2.7.3": "2.7.3_typescript@5.8.3",
+    "npm:oidc-client-ts@^3.3.0": "3.3.0",
     "npm:playwright@1.52.0": "1.52.0",
     "npm:prettier-plugin-svelte@3.4.0": "3.4.0_prettier@3.6.0_svelte@5.33.14__acorn@8.15.0",
     "npm:prettier@^3.5.3": "3.6.0",
@@ -4617,6 +4618,9 @@
     "jsonpointer@5.0.1": {
       "integrity": "sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ=="
     },
+    "jwt-decode@4.0.0": {
+      "integrity": "sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA=="
+    },
     "keyv@4.5.4": {
       "integrity": "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==",
       "dependencies": [
@@ -4909,6 +4913,12 @@
     },
     "ohash@2.0.11": {
       "integrity": "sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ=="
+    },
+    "oidc-client-ts@3.3.0": {
+      "integrity": "sha512-t13S540ZwFOEZKLYHJwSfITugupW4uYLwuQSSXyKH/wHwZ+7FvgHE7gnNJh1YQIZ1Yd1hKSRjqeXGSUtS0r9JA==",
+      "dependencies": [
+        "jwt-decode"
+      ]
     },
     "once@1.4.0": {
       "integrity": "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==",
@@ -6828,6 +6838,7 @@
             "npm:jsdom@26.1.0",
             "npm:marked@15.0.12",
             "npm:msw@2.7.3",
+            "npm:oidc-client-ts@^3.3.0",
             "npm:playwright@1.52.0",
             "npm:prettier-plugin-svelte@3.4.0",
             "npm:prettier@^3.5.3",
