@@ -4,6 +4,7 @@
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { writable } from "svelte/store";
@@ -49,6 +50,7 @@
     {items}
     title="Extras"
     --height-list={mediaListHeightResolver("landscape")}
+    headerNavigationType={DpadNavigationType.List}
   >
     {#snippet item(video)}
       <VideoItem {video} {trackHandler} />
@@ -64,6 +66,7 @@
           color="blue"
           text="capitalize"
           size="small"
+          navigationType={DpadNavigationType.Item}
         >
           {toTranslatedValue("video_type", $active)}
           {#snippet items()}
