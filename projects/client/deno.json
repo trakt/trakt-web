@@ -18,7 +18,8 @@
     "$app/environment": "../../node_modules/@sveltejs/kit/types/index.d.ts",
     "$app/navigation": "../../node_modules/@sveltejs/kit/types/index.d.ts",
     "$app/server": "../../node_modules/@sveltejs/kit/types/index.d.ts",
-    "$app/stores": "../../node_modules/@sveltejs/kit/types/index.d.ts"
+    "$app/stores": "../../node_modules/@sveltejs/kit/types/index.d.ts",
+    "@std/cli": "jsr:@std/cli@^1.0.20"
   },
   "lint": {
     "exclude": [
