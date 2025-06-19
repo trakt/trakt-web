@@ -29,8 +29,8 @@
   const isShow = $derived(target.type === "show");
   const episodeCount = $derived(
     target.type === "episode" &&
-      Array.isArray(target.episode) &&
-      target.episode.length,
+      Array.isArray(target.media) &&
+      target.media.length,
   );
 
   const isMultipleEpisodes = $derived(episodeCount && episodeCount > 1);

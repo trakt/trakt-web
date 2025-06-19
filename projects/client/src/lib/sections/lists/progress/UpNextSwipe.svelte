@@ -18,9 +18,8 @@
   const { markAsWatched } = $derived(
     useMarkAsWatched({
       type: "episode",
-      media: [episode],
+      media: episode,
       show: show,
-      episode: episode,
     }),
   );
 

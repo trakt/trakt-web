@@ -63,13 +63,12 @@
     {type}
     {title}
     media={episode}
-    {episode}
     {show}
     {size}
     allowRewatch={$watchCount > 0}
   />
   <RenderFor audience="authenticated" navigation="dpad">
-    <RateNow type="episode" media={episode} {episode} {show} />
+    <RateNow type="episode" media={episode} {show} />
   </RenderFor>
 {/snippet}
 <!-- 
@@ -140,7 +139,7 @@
     media={show}
   />
 
-  <Spoiler media={episode} {episode} {show} {type}>
+  <Spoiler media={episode} {show} {type}>
     <SummaryOverview {title} {overview} />
   </Spoiler>
 
@@ -148,7 +147,7 @@
     <SummaryActions>
       {#snippet contextualActions()}
         <RenderFor audience="authenticated" navigation="default">
-          <RateNow type="episode" media={episode} {episode} {show} />
+          <RateNow type="episode" media={episode} {show} />
         </RenderFor>
       {/snippet}
 

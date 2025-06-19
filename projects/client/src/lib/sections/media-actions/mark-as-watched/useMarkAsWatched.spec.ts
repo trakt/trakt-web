@@ -144,8 +144,7 @@ describe('useMarkAsWatched', () => {
   describe('media type: episode', () => {
     const props = {
       type: 'episode' as const,
-      media: { id: 1, airDate: new Date() },
-      episode: { season: 1, number: 1 },
+      media: { id: 1, season: 1, number: 1, airDate: new Date() },
       show: { id: 3 },
     };
 
@@ -155,9 +154,8 @@ describe('useMarkAsWatched', () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
           ...props,
-          media: { id: 1, airDate: new Date() },
+          media: { id: 1, season: 1, number: 1, airDate: new Date() },
           show: ShowSiloMappedMock,
-          episode: { season: 1, number: 1 },
         })
       );
 
@@ -168,15 +166,14 @@ describe('useMarkAsWatched', () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
           ...props,
-          media: { id: 1, airDate: new Date() },
-          show: ShowSiloMappedMock,
-          episode: [
-            { season: 1, number: 1 },
-            { season: 1, number: 2 },
-            { season: 1, number: 3 },
-            { season: 1, number: 4 },
-            { season: 1, number: 5 },
+          media: [
+            { id: 1, season: 1, number: 1, airDate: new Date() },
+            { id: 2, season: 1, number: 2, airDate: new Date() },
+            { id: 3, season: 1, number: 3, airDate: new Date() },
+            { id: 4, season: 1, number: 4, airDate: new Date() },
+            { id: 5, season: 1, number: 5, airDate: new Date() },
           ],
+          show: ShowSiloMappedMock,
         })
       );
 
@@ -187,9 +184,8 @@ describe('useMarkAsWatched', () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
           ...props,
-          media: { id: 1, airDate: new Date() },
+          media: { id: 1, season: 1, number: 2, airDate: new Date() },
           show: ShowSiloMappedMock,
-          episode: { season: 1, number: 2 },
         })
       );
 
@@ -200,18 +196,17 @@ describe('useMarkAsWatched', () => {
       const { isWatched } = await renderStore(() =>
         useMarkAsWatched({
           ...props,
-          media: ShowDevsMappedMock,
-          show: ShowDevsMappedMock,
-          episode: [
-            { season: 1, number: 1 },
-            { season: 1, number: 2 },
-            { season: 1, number: 3 },
-            { season: 1, number: 4 },
-            { season: 1, number: 5 },
-            { season: 1, number: 6 },
-            { season: 1, number: 7 },
-            { season: 1, number: 8 },
+          media: [
+            { id: 1, season: 1, number: 1, airDate: new Date() },
+            { id: 2, season: 1, number: 2, airDate: new Date() },
+            { id: 3, season: 1, number: 3, airDate: new Date() },
+            { id: 4, season: 1, number: 4, airDate: new Date() },
+            { id: 5, season: 1, number: 5, airDate: new Date() },
+            { id: 6, season: 1, number: 6, airDate: new Date() },
+            { id: 7, season: 1, number: 7, airDate: new Date() },
+            { id: 8, season: 1, number: 8, airDate: new Date() },
           ],
+          show: ShowDevsMappedMock,
         })
       );
 

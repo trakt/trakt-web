@@ -49,7 +49,6 @@
         size="small"
         title={subtitle}
         media={episodes}
-        episode={episodes}
         {show}
       />
     </RenderFor>
@@ -60,7 +59,6 @@
         size="small"
         title={subtitle}
         media={episodes}
-        episode={episodes}
         {show}
       />
     </RenderFor>

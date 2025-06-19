@@ -20,9 +20,9 @@ export function useIsWatched(props: IsWatchedProps) {
         case 'movie':
           return media.every((m) => $history.movies.has(m.id));
         case 'episode': {
-          const episodes = Array.isArray(props.episode)
-            ? props.episode
-            : [props.episode];
+          const episodes = Array.isArray(props.media)
+            ? props.media
+            : [props.media];
 
           const watchedEpisodes = $history.shows.get(props.show.id)?.episodes ??
             [];

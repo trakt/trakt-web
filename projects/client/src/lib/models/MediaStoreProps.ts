@@ -2,12 +2,8 @@ type ArrayOrSingle<T> = T | T[];
 
 type EpisodeProps<T> = {
   type: 'episode';
-  media: ArrayOrSingle<T>;
+  media: ArrayOrSingle<T & { season: number; number: number }>;
   show: { id: number };
-  episode: ArrayOrSingle<{
-    season: number;
-    number: number;
-  }>;
 };
 
 type MediaProps<T> = {
