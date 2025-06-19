@@ -15,7 +15,6 @@
     type: "episode";
     media: EpisodeEntry;
     show: MediaEntry;
-    episode: EpisodeEntry;
   };
 
   type RateableMedia = {

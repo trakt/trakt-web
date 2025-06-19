@@ -28,7 +28,6 @@
         size="small"
         title={props.episode.title}
         media={props.episode}
-        episode={props.episode}
         show={props.show}
       />
     </RenderFor>

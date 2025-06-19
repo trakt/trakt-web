@@ -33,7 +33,6 @@
           allowRewatch
           title={episode.title}
           {show}
-          {episode}
           media={episode}
         />
         {#if $isNitroEnabled}

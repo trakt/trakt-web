@@ -12,7 +12,6 @@ export function useEpisodeSpoilerImage(props: SpoilerImageProps) {
   const { episode, show } = props;
 
   const { isSpoilerHidden } = useMediaSpoiler({
-    episode,
     show,
     media: episode,
     type: 'episode',

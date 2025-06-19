@@ -63,7 +63,7 @@
   <CardFooter {action}>
     {#if isShowContext}
       <p class="trakt-card-title ellipsis">
-        <Spoiler media={episode} {show} {episode} type="episode">
+        <Spoiler media={episode} {show} type="episode">
           {episode.title}
         </Spoiler>
       </p>
@@ -97,7 +97,7 @@
           {seasonLabel(episode.season)}
         {:else}
           {episode.season}x{episode.number}
-          <Spoiler media={episode} {show} {episode} type="episode">
+          <Spoiler media={episode} {show} type="episode">
             - {episode.title}
           </Spoiler>
         {/if}
