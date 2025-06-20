@@ -64,4 +64,35 @@ describe('toMarkAsWatchedPayload', () => {
       })),
     });
   });
+
+  it('should transform partial shows payload correctly', () => {
+    const partialShows = testMedia.map((media, index) => ({
+      id: media.id,
+      seasons: [
+        {
+          number: 1,
+          episodes: [{ number: index + 1 }],
+        },
+      ],
+    }));
+
+    const result = toMarkAsWatchedPayload(
+      {
+        type: 'show' as const,
+        media: partialShows,
+      },
+      testDate,
+    );
+
+    expect(result).toEqual({
+      shows: testIds.map((id, index) => ({
+        ids: { trakt: id },
+        watched_at: undefined,
+        seasons: [{
+          number: 1,
+          episodes: [{ number: index + 1, watched_at: testDate }],
+        }],
+      })),
+    });
+  });
 });
