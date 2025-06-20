@@ -470,4 +470,284 @@ describe('I18nGenerator', () => {
       expect(iosData.strings.test).toBeDefined();
     });
   });
+
+  describe('exclude functionality', () => {
+    let excludeTestMetaMessages: MetaMessages;
+
+    beforeEach(() => {
+      excludeTestMetaMessages = {
+        meta: {
+          locale: 'en',
+          direction: 'ltr',
+          generator: {
+            inlang: {
+              enabled: true,
+              outputPath: './messages/{locale}.json',
+            },
+            android: {
+              enabled: true,
+              outputPath: './android/values-{locale}/strings.xml',
+              resourceName: 'strings',
+            },
+            ios: {
+              enabled: true,
+              outputPath: './ios/Localizable.xcstrings',
+            },
+          },
+        },
+        messages: {
+          common_message: 'Available everywhere',
+          web_only: {
+            default: 'Web only message',
+            exclude: [Platform.ANDROID, Platform.IOS],
+          },
+          android_excluded: {
+            default: 'Not for Android',
+            exclude: [Platform.ANDROID],
+          },
+          ios_excluded: {
+            default: 'Not for iOS',
+            exclude: [Platform.IOS],
+          },
+          web_excluded: {
+            default: 'Not for Web',
+            exclude: [Platform.WEB],
+          },
+        },
+      };
+    });
+
+    it('should exclude messages from Android when exclude contains android', async () => {
+      const generator = new I18nGenerator([excludeTestMetaMessages]);
+      const results = await generator.generatePlatforms(
+        [Platform.ANDROID],
+        tempDir,
+      );
+
+      expect(results).toHaveLength(1);
+      const content = results[0]!.content;
+
+      // Should include common_message and ios_excluded
+      expect(content).toContain(
+        '<string name="common_message">Available everywhere</string>',
+      );
+      expect(content).toContain(
+        '<string name="ios_excluded">Not for iOS</string>',
+      );
+
+      // Should exclude web_only, android_excluded, and web_excluded
+      expect(content).not.toContain('Web only message');
+      expect(content).not.toContain('Not for Android');
+      expect(content).toContain(
+        '<string name="web_excluded">Not for Web</string>',
+      );
+    });
+
+    it('should exclude messages from iOS when exclude contains ios', async () => {
+      const generator = new I18nGenerator([excludeTestMetaMessages]);
+      const results = await generator.generatePlatforms(
+        [Platform.IOS],
+        tempDir,
+      );
+
+      expect(results).toHaveLength(1);
+      const iosData = JSON.parse(results[0]!.content);
+
+      // Should include common_message and android_excluded
+      expect(iosData.strings.common_message).toBeDefined();
+      expect(iosData.strings.android_excluded).toBeDefined();
+      expect(iosData.strings.web_excluded).toBeDefined();
+
+      // Should exclude web_only and ios_excluded
+      expect(iosData.strings.web_only).toBeUndefined();
+      expect(iosData.strings.ios_excluded).toBeUndefined();
+    });
+
+    it('should exclude messages from Web when exclude contains web', async () => {
+      const generator = new I18nGenerator([excludeTestMetaMessages]);
+      const results = await generator.generatePlatforms(
+        [Platform.WEB],
+        tempDir,
+      );
+
+      expect(results).toHaveLength(1);
+      const webData = JSON.parse(results[0]!.content);
+
+      // Should include common_message, android_excluded, ios_excluded, and web_only
+      expect(webData.common_message).toBe('Available everywhere');
+      expect(webData.android_excluded).toBe('Not for Android');
+      expect(webData.ios_excluded).toBe('Not for iOS');
+      expect(webData.web_only).toBe('Web only message');
+
+      // Should exclude web_excluded
+      expect(webData.web_excluded).toBeUndefined();
+    });
+
+    it('should handle simple string messages (no exclude possible)', async () => {
+      const simpleGenerator = new I18nGenerator([{
+        meta: {
+          locale: 'en',
+          direction: 'ltr',
+          generator: {
+            android: {
+              enabled: true,
+              outputPath: './android/values-{locale}/strings.xml',
+              resourceName: 'strings',
+            },
+          },
+        },
+        messages: {
+          simple_string: 'Simple message',
+        },
+      }]);
+
+      const results = await simpleGenerator.generatePlatforms([
+        Platform.ANDROID,
+      ], tempDir);
+      expect(results[0]!.content).toContain(
+        '<string name="simple_string">Simple message</string>',
+      );
+    });
+  });
+
+  describe('Android resource folder naming', () => {
+    it('should use language-only folder for single locale per language', async () => {
+      const singleLocaleGenerator = new I18nGenerator([{
+        meta: {
+          locale: 'es-es',
+          direction: 'ltr',
+          generator: {
+            android: {
+              enabled: true,
+              outputPath: './android/values-{locale}/strings.xml',
+              resourceName: 'strings',
+            },
+          },
+        },
+        messages: { test: 'Prueba' },
+      }]);
+
+      const results = await singleLocaleGenerator.generatePlatforms([
+        Platform.ANDROID,
+      ], tempDir);
+      expect(results[0]!.filePath).toContain('values-es');
+      expect(results[0]!.filePath).not.toContain('values-es-ES');
+    });
+
+    it('should use region-specific folders when multiple locales exist for same language', async () => {
+      const multiLanguageGenerator = new I18nGenerator([
+        {
+          meta: {
+            locale: 'es-es',
+            direction: 'ltr',
+            generator: {
+              android: {
+                enabled: true,
+                outputPath: './android/values-{locale}/strings.xml',
+                resourceName: 'strings',
+              },
+            },
+          },
+          messages: { test: 'Prueba España' },
+        },
+        {
+          meta: {
+            locale: 'es-mx',
+            direction: 'ltr',
+            generator: {
+              android: {
+                enabled: true,
+                outputPath: './android/values-{locale}/strings.xml',
+                resourceName: 'strings',
+              },
+            },
+          },
+          messages: { test: 'Prueba México' },
+        },
+      ]);
+
+      const results = await multiLanguageGenerator.generatePlatforms([
+        Platform.ANDROID,
+      ], tempDir);
+      expect(results).toHaveLength(2);
+
+      const esEsResult = results.find((r) =>
+        r.filePath.includes('values-es-ES')
+      );
+      const esMxResult = results.find((r) =>
+        r.filePath.includes('values-es-MX')
+      );
+
+      expect(esEsResult).toBeDefined();
+      expect(esMxResult).toBeDefined();
+    });
+
+    it('should handle mixed single and multiple language scenarios', async () => {
+      const mixedGenerator = new I18nGenerator([
+        {
+          meta: {
+            locale: 'en-us',
+            direction: 'ltr',
+            generator: {
+              android: {
+                enabled: true,
+                outputPath: './android/values-{locale}/strings.xml',
+                resourceName: 'strings',
+              },
+            },
+          },
+          messages: { test: 'Test US' },
+        },
+        {
+          meta: {
+            locale: 'en-gb',
+            direction: 'ltr',
+            generator: {
+              android: {
+                enabled: true,
+                outputPath: './android/values-{locale}/strings.xml',
+                resourceName: 'strings',
+              },
+            },
+          },
+          messages: { test: 'Test GB' },
+        },
+        {
+          meta: {
+            locale: 'it-it',
+            direction: 'ltr',
+            generator: {
+              android: {
+                enabled: true,
+                outputPath: './android/values-{locale}/strings.xml',
+                resourceName: 'strings',
+              },
+            },
+          },
+          messages: { test: 'Test IT' },
+        },
+      ]);
+
+      const results = await mixedGenerator.generatePlatforms([
+        Platform.ANDROID,
+      ], tempDir);
+      expect(results).toHaveLength(3);
+
+      // English has multiple locales, should use region-specific
+      const enUsResult = results.find((r) =>
+        r.filePath.includes('values-en-US')
+      );
+      const enGbResult = results.find((r) =>
+        r.filePath.includes('values-en-GB')
+      );
+      expect(enUsResult).toBeDefined();
+      expect(enGbResult).toBeDefined();
+
+      // Italian has single locale, should use language-only
+      const itResult = results.find((r) => r.filePath.includes('values-it'));
+      expect(itResult).toBeDefined();
+      expect(results.find((r) => r.filePath.includes('values-it-IT')))
+        .toBeUndefined();
+    });
+  });
 });

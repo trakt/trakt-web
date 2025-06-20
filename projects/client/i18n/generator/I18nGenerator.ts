@@ -9,6 +9,7 @@ import {
   convertToAndroidFormat,
   convertToIOSFormat,
   escapeXml,
+  generateAndroidResourceFolder,
   writeFile,
 } from './utils.ts';
 
@@ -40,6 +41,7 @@ export interface MetaMessageVariable {
 export interface MetaMessageDefinition {
   default: string;
   description?: string;
+  exclude?: Platform[];
   variables?: Record<string, MetaMessageVariable>;
   platforms?: {
     android?: { key?: string };
@@ -113,6 +115,11 @@ class WebGenerator implements PlatformGenerator {
     };
 
     for (const [key, definition] of Object.entries(metaMessages.messages)) {
+      // Check if this message should be excluded from Web
+      if (typeof definition !== 'string' && definition.exclude?.includes(Platform.WEB)) {
+        continue;
+      }
+
       if (typeof definition === 'string') {
         result[key] = definition;
       } else {
@@ -134,6 +141,9 @@ class AndroidGenerator implements PlatformGenerator {
   ): Promise<GenerationResult[]> {
     const results: GenerationResult[] = [];
 
+    // Get all available locales for Android folder naming logic
+    const allLocales = metaMessages.map(meta => meta.meta.locale);
+
     for (const meta of metaMessages) {
       const config = meta.meta.generator?.android;
       if (!config?.enabled) {
@@ -141,9 +151,12 @@ class AndroidGenerator implements PlatformGenerator {
       }
 
       const content = this._generateContent(meta);
+      
+      // Generate Android resource folder name
+      const androidFolder = generateAndroidResourceFolder(meta.meta.locale, allLocales);
       const filePath = path.resolve(
         outputDir,
-        config.outputPath.replace('{locale}', meta.meta.locale),
+        config.outputPath.replace('values-{locale}', androidFolder),
       );
 
       await writeFile(filePath, content);
@@ -163,6 +176,11 @@ class AndroidGenerator implements PlatformGenerator {
     const entries: string[] = [];
 
     for (const [key, definition] of Object.entries(metaMessages.messages)) {
+      // Check if this message should be excluded from Android
+      if (typeof definition !== 'string' && definition.exclude?.includes(Platform.ANDROID)) {
+        continue;
+      }
+
       let text: string;
       let actualKey: string;
 
@@ -225,6 +243,11 @@ class IOSGenerator implements PlatformGenerator {
     // Process all locales
     for (const meta of metaMessages) {
       for (const [key, definition] of Object.entries(meta.messages)) {
+        // Check if this message should be excluded from iOS
+        if (typeof definition !== 'string' && definition.exclude?.includes(Platform.IOS)) {
+          continue;
+        }
+
         let text: string;
         let actualKey: string;
 

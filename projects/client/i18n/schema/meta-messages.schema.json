@@ -78,6 +78,15 @@
                   "type": "string",
                   "description": "Description of the message purpose and context"
                 },
+                "exclude": {
+                  "type": "array",
+                  "description": "Platforms to exclude this message from",
+                  "items": {
+                    "type": "string",
+                    "enum": ["web", "android", "ios"]
+                  },
+                  "uniqueItems": true
+                },
                 "platforms": {
                   "type": "object",
                   "description": "Platform-specific key overrides (web uses default key)",
