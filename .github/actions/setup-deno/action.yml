@@ -5,7 +5,7 @@ inputs:
   deno-version:
     description: 'Deno version to install'
     required: false
-    default: 'v2.3.3'
+    default: 'v2.x'
 
 runs:
   using: composite
