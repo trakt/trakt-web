@@ -6,7 +6,10 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { I18nGenerator, type MetaMessages, Platform } from './I18nGenerator.ts';
+import { firstItem } from '../../../src/lib/utils/assert/firstItem.ts';
+import type { MetaMessages } from '../model/MetaMessages.ts';
+import { Platform } from '../model/Platform.ts';
+import { I18nGenerator } from './I18nGenerator.ts';
 
 describe('I18nGenerator', () => {
   let tempDir: string;
@@ -116,9 +119,9 @@ describe('I18nGenerator', () => {
           tempDir,
         );
         expect(results).toHaveLength(1);
-        expect(results[0]!.platform).toBe(Platform.WEB);
+        expect(firstItem(results).platform).toBe(Platform.WEB);
 
-        const content = JSON.parse(results[0]!.content);
+        const content = JSON.parse(firstItem(results).content);
         expect(content).toEqual({
           '$schema': 'https://inlang.com/schema/inlang-message-format',
           'simple_message': 'Hello World',
@@ -135,7 +138,7 @@ describe('I18nGenerator', () => {
           [Platform.WEB],
           tempDir,
         );
-        const content = JSON.parse(results[0]!.content);
+        const content = JSON.parse(firstItem(results).content);
 
         // Ensure no ICU type annotations remain
         expect(content.count_message).toBe('{count} items remaining');
@@ -156,9 +159,9 @@ describe('I18nGenerator', () => {
           tempDir,
         );
         expect(results).toHaveLength(1);
-        expect(results[0]!.platform).toBe(Platform.ANDROID);
+        expect(firstItem(results).platform).toBe(Platform.ANDROID);
 
-        const content = results[0]!.content;
+        const content = firstItem(results).content;
         expect(content).toContain('<?xml version="1.0" encoding="utf-8"?>');
         expect(content).toContain('<resources>');
         expect(content).toContain('</resources>');
@@ -169,7 +172,7 @@ describe('I18nGenerator', () => {
           [Platform.ANDROID],
           tempDir,
         );
-        const content = results[0]!.content;
+        const content = firstItem(results).content;
 
         expect(content).toContain(
           '<string name="simple_message">Hello World</string>',
@@ -181,7 +184,7 @@ describe('I18nGenerator', () => {
           [Platform.ANDROID],
           tempDir,
         );
-        const content = results[0]!.content;
+        const content = firstItem(results).content;
 
         expect(content).toContain(
           '<string name="greeting_message">Hello, %s!</string>',
@@ -193,7 +196,7 @@ describe('I18nGenerator', () => {
           [Platform.ANDROID],
           tempDir,
         );
-        const content = results[0]!.content;
+        const content = firstItem(results).content;
 
         expect(content).toContain(
           '<string name="count_message">%d items remaining</string>',
@@ -205,7 +208,7 @@ describe('I18nGenerator', () => {
           [Platform.ANDROID],
           tempDir,
         );
-        const content = results[0]!.content;
+        const content = firstItem(results).content;
 
         expect(content).toContain(
           '<string name="user_message_count">User %s has %d messages</string>',
@@ -217,7 +220,7 @@ describe('I18nGenerator', () => {
           [Platform.ANDROID],
           tempDir,
         );
-        const content = results[0]!.content;
+        const content = firstItem(results).content;
 
         expect(content).toContain('name="greeting_message"'); // android key
         expect(content).toContain('name="mobile_feature"'); // android key
@@ -233,9 +236,9 @@ describe('I18nGenerator', () => {
           tempDir,
         );
         expect(results).toHaveLength(1);
-        expect(results[0]!.platform).toBe(Platform.IOS);
+        expect(firstItem(results).platform).toBe(Platform.IOS);
 
-        const xcstrings = JSON.parse(results[0]!.content);
+        const xcstrings = JSON.parse(firstItem(results).content);
         expect(xcstrings.sourceLanguage).toBe('en');
         expect(xcstrings.version).toBe('1.0');
         expect(xcstrings.strings).toBeDefined();
@@ -246,7 +249,7 @@ describe('I18nGenerator', () => {
           [Platform.IOS],
           tempDir,
         );
-        const xcstrings = JSON.parse(results[0]!.content);
+        const xcstrings = JSON.parse(firstItem(results).content);
 
         expect(xcstrings.strings.simple_message).toEqual({
           localizations: {
@@ -265,7 +268,7 @@ describe('I18nGenerator', () => {
           [Platform.IOS],
           tempDir,
         );
-        const xcstrings = JSON.parse(results[0]!.content);
+        const xcstrings = JSON.parse(firstItem(results).content);
 
         expect(
           xcstrings.strings.greetingMessage.localizations.en.stringUnit.value,
@@ -277,7 +280,7 @@ describe('I18nGenerator', () => {
           [Platform.IOS],
           tempDir,
         );
-        const xcstrings = JSON.parse(results[0]!.content);
+        const xcstrings = JSON.parse(firstItem(results).content);
 
         expect(
           xcstrings.strings.count_message.localizations.en.stringUnit.value,
@@ -290,7 +293,7 @@ describe('I18nGenerator', () => {
           [Platform.IOS],
           tempDir,
         );
-        const xcstrings = JSON.parse(results[0]!.content);
+        const xcstrings = JSON.parse(firstItem(results).content);
 
         expect(
           xcstrings.strings.userMessageCount.localizations.en.stringUnit.value,
@@ -302,7 +305,7 @@ describe('I18nGenerator', () => {
           [Platform.IOS],
           tempDir,
         );
-        const xcstrings = JSON.parse(results[0]!.content);
+        const xcstrings = JSON.parse(firstItem(results).content);
 
         expect(xcstrings.strings.greetingMessage).toBeDefined(); // ios key
         expect(xcstrings.strings.mobileFeature).toBeDefined(); // ios key
@@ -408,13 +411,13 @@ describe('I18nGenerator', () => {
         [Platform.WEB],
         tempDir,
       );
-      const webContent = JSON.parse(webResults[0]!.content);
+      const webContent = JSON.parse(firstItem(webResults).content);
       expect(webContent.simple).toBe('Hello');
 
       const androidResults = await simpleGenerator.generatePlatforms([
         Platform.ANDROID,
       ], tempDir);
-      expect(androidResults[0]!.content).toContain(
+      expect(firstItem(androidResults).content).toContain(
         '<string name="simple">Hello</string>',
       );
 
@@ -422,7 +425,7 @@ describe('I18nGenerator', () => {
         [Platform.IOS],
         tempDir,
       );
-      const iosData = JSON.parse(iosResults[0]!.content);
+      const iosData = JSON.parse(firstItem(iosResults).content);
       expect(iosData.strings.simple.localizations.en.stringUnit.value).toBe(
         'Hello',
       );
@@ -460,13 +463,13 @@ describe('I18nGenerator', () => {
       const androidResults = await simpleGenerator.generatePlatforms([
         Platform.ANDROID,
       ], tempDir);
-      expect(androidResults[0]!.content).toContain('name="test"');
+      expect(firstItem(androidResults).content).toContain('name="test"');
 
       const iosResults = await simpleGenerator.generatePlatforms(
         [Platform.IOS],
         tempDir,
       );
-      const iosData = JSON.parse(iosResults[0]!.content);
+      const iosData = JSON.parse(firstItem(iosResults).content);
       expect(iosData.strings.test).toBeDefined();
     });
   });
@@ -525,7 +528,7 @@ describe('I18nGenerator', () => {
       );
 
       expect(results).toHaveLength(1);
-      const content = results[0]!.content;
+      const content = firstItem(results).content;
 
       // Should include common_message and ios_excluded
       expect(content).toContain(
@@ -551,7 +554,7 @@ describe('I18nGenerator', () => {
       );
 
       expect(results).toHaveLength(1);
-      const iosData = JSON.parse(results[0]!.content);
+      const iosData = JSON.parse(firstItem(results).content);
 
       // Should include common_message and android_excluded
       expect(iosData.strings.common_message).toBeDefined();
@@ -571,7 +574,7 @@ describe('I18nGenerator', () => {
       );
 
       expect(results).toHaveLength(1);
-      const webData = JSON.parse(results[0]!.content);
+      const webData = JSON.parse(firstItem(results).content);
 
       // Should include common_message, android_excluded, ios_excluded, and web_only
       expect(webData.common_message).toBe('Available everywhere');
@@ -604,7 +607,7 @@ describe('I18nGenerator', () => {
       const results = await simpleGenerator.generatePlatforms([
         Platform.ANDROID,
       ], tempDir);
-      expect(results[0]!.content).toContain(
+      expect(firstItem(results).content).toContain(
         '<string name="simple_string">Simple message</string>',
       );
     });
@@ -630,8 +633,8 @@ describe('I18nGenerator', () => {
       const results = await singleLocaleGenerator.generatePlatforms([
         Platform.ANDROID,
       ], tempDir);
-      expect(results[0]!.filePath).toContain('values-es');
-      expect(results[0]!.filePath).not.toContain('values-es-ES');
+      expect(firstItem(results).filePath).toContain('values-es');
+      expect(firstItem(results).filePath).not.toContain('values-es-ES');
     });
 
     it('should use region-specific folders when multiple locales exist for same language', async () => {
