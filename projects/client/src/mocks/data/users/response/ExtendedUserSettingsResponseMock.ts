@@ -67,7 +67,7 @@ export const ExtendedUsersResponseMock: SettingsResponse = {
       'start_day': 'today',
       'layout': 'list',
       'image_type': null,
-      'hide_special': false,
+      'hide_specials': false,
       'autoscroll': false,
     },
     'progress': {

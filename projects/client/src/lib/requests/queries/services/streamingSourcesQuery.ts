@@ -38,7 +38,8 @@ const streamingSourcesRequest = (
 ) =>
   api({ fetch })
     .watchnow
-    .sources();
+    .sources
+    .all();
 
 export const streamingSourcesQuery = defineQuery({
   key: 'streamingSources',
