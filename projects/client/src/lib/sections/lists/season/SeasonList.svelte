@@ -26,9 +26,18 @@
   const episodeProps = $derived(
     seasons.length === 1 ? { title, subtitle } : {},
   );
+
+  const previousSeasons = $derived(
+    seasons.filter((s) => s.number > 0 && s.number < currentSeason),
+  );
 </script>
 
 {#if seasons.length > 1}
   <SeasonPosterList {show} {seasons} episodes={$episodes} {title} {subtitle} />
 {/if}
-<SeasonEpisodeList {show} episodes={$episodes} {...episodeProps} />
+<SeasonEpisodeList
+  {show}
+  {previousSeasons}
+  episodes={$episodes}
+  {...episodeProps}
+/>

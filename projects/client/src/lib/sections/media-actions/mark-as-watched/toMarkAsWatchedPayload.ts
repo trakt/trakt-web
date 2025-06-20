@@ -1,25 +1,55 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
 type WatchedPayload = {
   ids: { trakt: number };
   watched_at: string | undefined;
 };
 
-type MediaTypeMap = {
-  movie: { movies: WatchedPayload[] };
-  show: { shows: WatchedPayload[] };
-  episode: { episodes: WatchedPayload[] };
+type WatchedNumberedPayload = {
+  number: number;
+  watched_at?: string;
 };
 
-export function toMarkAsWatchedPayload<T extends MediaType | 'episode'>(
-  type: T,
-  ids: number[],
-  watchedAtDate: string,
-): MediaTypeMap[T] {
-  return {
-    [`${type}s`]: ids.map((id) => ({
-      ids: { trakt: id },
-      watched_at: watchedAtDate,
-    })),
-  } as MediaTypeMap[T];
+type WatchedSeasonsPayload = WatchedNumberedPayload & {
+  episodes?: WatchedNumberedPayload[];
+};
+
+type WatchedShowPayload = WatchedPayload & {
+  seasons?: WatchedSeasonsPayload[];
+};
+
+type MoviesPayload = { movies: WatchedPayload[] };
+type ShowsPayload = { shows: WatchedShowPayload[] };
+type EpisodesPayload = { episodes: WatchedPayload[] };
+
+type MediaTypeMap = MoviesPayload | ShowsPayload | EpisodesPayload;
+
+export function toMarkAsWatchedPayload(
+  target: MediaStoreProps,
+  watchedAtDate?: string,
+): MediaTypeMap {
+  if (target.type === 'show') {
+    const shows = Array.isArray(target.media) ? target.media : [target.media];
+    return {
+      shows: shows.map(({ id, seasons }) => ({
+        ids: { trakt: id },
+        watched_at: !seasons ? watchedAtDate : undefined,
+        seasons: seasons?.map((season) => ({
+          number: season.number,
+          episodes: season.episodes.map((episode) => ({
+            number: episode.number,
+            watched_at: watchedAtDate,
+          })),
+        })),
+      })),
+    };
+  }
+
+  const media = Array.isArray(target.media) ? target.media : [target.media];
+  const payload = media.map(({ id }) => ({
+    ids: { trakt: id },
+    watched_at: watchedAtDate,
+  }));
+
+  return target.type === 'movie' ? { movies: payload } : { episodes: payload };
 }

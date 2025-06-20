@@ -4,7 +4,6 @@ import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
-import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { resolveWatchDate } from '$lib/stores/_internal/resolveWatchDate.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
@@ -22,7 +21,6 @@ export function useMarkAsWatched(
 ) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
-  const ids = media.map(({ id }) => id);
   const isMarkingAsWatched = writable(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
@@ -49,7 +47,7 @@ export function useMarkAsWatched(
     track({ action: 'add' });
 
     await markAsWatchedRequest({
-      body: toMarkAsWatchedPayload(type, ids, watchedAtDate),
+      body: toMarkAsWatchedPayload(props, watchedAtDate),
     });
 
     await invalidate(InvalidateAction.MarkAsWatched(type));
@@ -62,7 +60,7 @@ export function useMarkAsWatched(
     track({ action: 'remove' });
 
     await removeWatchedRequest({
-      body: toBulkPayload(type, ids),
+      body: toMarkAsWatchedPayload(props),
     });
 
     await invalidate(InvalidateAction.MarkAsWatched(type));
