@@ -439,5 +439,10 @@
   "add_comment": "Toevoegen",
   "rename_list": "Hernoem je lijst",
   "rename_list_label": "Hernoem je lijst {name}",
+  "hot": "Populair deze maand",
+  "hot_movies": "Populaire films deze maand",
+  "hot_shows": "Populaire series deze maand",
+  "view_all_hot_shows": "Bekijk alle populaire series",
+  "view_all_hot_movies": "Bekijk alle populaire films",
   "popular_comments": "Populaire reacties"
 }

@@ -439,5 +439,10 @@
   "add_comment": "Adicionar",
   "rename_list": "Renomear sua lista",
   "rename_list_label": "Renomear sua lista {name}",
+  "hot": "Em alta este mês",
+  "hot_movies": "Filmes em alta este mês",
+  "hot_shows": "Séries em alta este mês",
+  "view_all_hot_shows": "Ver todas as séries em alta",
+  "view_all_hot_movies": "Ver todos os filmes em alta",
   "popular_comments": "Comentários populares"
 }

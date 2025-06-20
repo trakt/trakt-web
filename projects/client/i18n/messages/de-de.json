@@ -439,5 +439,10 @@
   "add_comment": "Hinzufügen",
   "rename_list": "Liste umbenennen",
   "rename_list_label": "Liste {name} umbenennen",
+  "hot": "Top des Monats",
+  "hot_movies": "Top Filme diesen Monat",
+  "hot_shows": "Top Serien diesen Monat",
+  "view_all_hot_shows": "Alle Top Serien ansehen",
+  "view_all_hot_movies": "Alle Top Filme ansehen",
   "popular_comments": "Beliebte Kommentare"
 }

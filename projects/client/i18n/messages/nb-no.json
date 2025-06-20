@@ -439,5 +439,10 @@
   "add_comment": "Legg til",
   "rename_list": "Endre navnet på listen din",
   "rename_list_label": "Endre navnet på listen din {name}",
+  "hot": "Populært denne måneden",
+  "hot_movies": "Populære filmer denne måneden",
+  "hot_shows": "Populære serier denne måneden",
+  "view_all_hot_shows": "Se alle populære serier",
+  "view_all_hot_movies": "Se alle populære filmer",
   "popular_comments": "Populære kommentarer"
 }

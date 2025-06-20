@@ -438,5 +438,10 @@
   "read_more": "Read more",
   "add_comment": "Add Comment",
   "rename_list": "Rename your list",
-  "rename_list_label": "Rename your list {name}"
+  "rename_list_label": "Rename your list {name}",
+  "hot": "Hot This Month",
+  "hot_movies": "Hot Movies This Month",
+  "hot_shows": "Hot Shows This Month",
+  "view_all_hot_shows": "View all hot shows",
+  "view_all_hot_movies": "View all hot movies"
 }
