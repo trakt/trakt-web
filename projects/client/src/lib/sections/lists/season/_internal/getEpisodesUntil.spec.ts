@@ -99,4 +99,47 @@ describe('getEpisodesUntil', () => {
       },
     ]);
   });
+
+  it('should exclude seen episodes', () => {
+    const previousSeasons = [
+      { number: 1, episodes: { count: 2 } },
+    ];
+
+    const episode = {
+      season: 2,
+      number: 3,
+    };
+
+    const watchedEpisodes = [
+      {
+        watchedAt: new Date(),
+        plays: 1,
+        season: 1,
+        episode: 1,
+      },
+      {
+        watchedAt: new Date(),
+        plays: 1,
+        season: 1,
+        episode: 2,
+      },
+    ];
+
+    const result = getEpisodesUntil({
+      previousSeasons,
+      episode,
+      watchedEpisodes,
+    });
+
+    expect(result).toEqual([
+      {
+        number: 2,
+        episodes: [
+          { number: 1 },
+          { number: 2 },
+          { number: 3 },
+        ],
+      },
+    ]);
+  });
 });
