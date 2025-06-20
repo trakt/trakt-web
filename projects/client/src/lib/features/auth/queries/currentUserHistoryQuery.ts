@@ -72,7 +72,7 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
     id: show.ids.trakt,
     watchedAt: new Date(last_watched_at),
     isWatched: watchedEpisodeCount === aired,
-    isPartiallyWatched: watchedEpisodeCount > 0,
+    isPartiallyWatched: watchedEpisodeCount > 0 && watchedEpisodeCount < aired,
     plays,
     episodes,
   };

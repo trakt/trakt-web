@@ -19,9 +19,10 @@ export function useIsRateable(props: IsRateableProps) {
             return false;
           }
 
-          return media.every((m) =>
-            Boolean($history.shows.get(m.id)?.isPartiallyWatched)
-          );
+          return media.every((m) => {
+            const show = $history.shows.get(m.id);
+            return Boolean(show?.isPartiallyWatched || show?.isWatched);
+          });
         },
       ),
     };

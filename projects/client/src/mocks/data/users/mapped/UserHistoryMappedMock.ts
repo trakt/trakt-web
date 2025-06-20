@@ -74,7 +74,7 @@ export const UserHistoryMappedMock: {
       ],
       'id': 147971,
       'isWatched': true,
-      'isPartiallyWatched': true,
+      'isPartiallyWatched': false,
       'plays': 8,
       'watchedAt': new Date('2024-12-27T16:28:32.000Z'),
     }],
