@@ -48,6 +48,7 @@ const movieHotRequest = (
         limit,
         ...filter,
         ...search,
+        ...({ start_date: 'lastmonth' }),
       },
     });
 
