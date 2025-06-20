@@ -4,6 +4,7 @@
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import { attachWarning } from "../_internal/attachWarning";
   import { useIsWatchlisted } from "../watchlist/useIsWatchlisted";
+  import { getWarningMessage } from "./_internal/getWarningMessage";
   import type { MarkAsWatchedActionProps } from "./MarkAsWatchedActionProps";
   import { useMarkAsWatched } from "./useMarkAsWatched";
 
@@ -26,26 +27,12 @@
   const { isWatchlisted } = $derived(useIsWatchlisted(target));
   const isRewatching = $derived(allowRewatch && $isWatched);
 
-  const isShow = $derived(target.type === "show");
-  const episodeCount = $derived(
-    target.type === "episode" &&
-      Array.isArray(target.media) &&
-      target.media.length,
-  );
-
-  const isMultipleEpisodes = $derived(episodeCount && episodeCount > 1);
-  const isDangerousAction = $derived(isShow || isMultipleEpisodes);
-
-  const message = $derived.by(() => {
-    if (!isDangerousAction) return "";
-
-    return target.type === "show"
-      ? m.mark_as_watched_show_warning({ title })
-      : m.mark_as_watched_multiple_episodes_warning({ count: episodeCount });
-  });
+  const warningMessage = $derived(getWarningMessage(title, target));
 
   const onWatchHandler = $derived(
-    isDangerousAction ? attachWarning(markAsWatched, message) : markAsWatched,
+    warningMessage
+      ? attachWarning(markAsWatched, warningMessage)
+      : markAsWatched,
   );
 
   const onRemoveHandler = $derived(
