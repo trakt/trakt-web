@@ -29,11 +29,16 @@
 
   const { history } = useUser();
 
-  const isShowPartiallyWatched = $derived(
-    Boolean($history.shows.get(show.id)?.isPartiallyWatched),
+  const showProgress = $derived($history.shows.get(show.id));
+  const watchedEpisodes = $derived(showProgress?.episodes);
+
+  const hasUnseenEpisodes = $derived(
+    Boolean(showProgress?.isPartiallyWatched) &&
+      !Boolean(showProgress?.isWatched),
   );
+
   const hasBulkMarkAsWatched = (episode: EpisodeEntry) =>
-    !isShowPartiallyWatched && episode.airDate && episode.airDate <= new Date();
+    hasUnseenEpisodes && episode.airDate && episode.airDate <= new Date();
 </script>
 
 <ShadowList
@@ -55,7 +60,11 @@
           media={{
             id: show.id,
             airDate: show.airDate,
-            seasons: getEpisodesUntil({ previousSeasons, episode }),
+            seasons: getEpisodesUntil({
+              previousSeasons,
+              episode,
+              watchedEpisodes,
+            }),
           }}
         />
       </RenderFor>

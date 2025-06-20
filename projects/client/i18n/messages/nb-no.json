@@ -334,7 +334,7 @@
   "restore_show_label": "Gjenopprett serien {title}",
   "restore_show": "Gjenopprett serie",
   "mark_as_watched_show_warning": "Er du sikker på at du vil markere {title} som sett? Dette vil markere alle episoder som sett.",
-  "mark_as_watched_show_until_warning": "Er du sikker på at du vil merke {title} som sett til episode {episode}? Dette vil merke {count} episoder som sett.",
+  "mark_as_watched_show_until_warning": "Er du sikker på at du vil merke alle usett episoder av {title} som sett frem til episode {episode}? Dette vil merke {count} episoder som sett.",
   "mark_as_watched_multiple_episodes_warning": "Er du sikker på at du vil markere {count} episoder som sett?",
   "watch_count_label": "Visningsantall",
   "watched_episodes_count_label": "Episoder sett",

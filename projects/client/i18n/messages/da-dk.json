@@ -334,7 +334,7 @@
   "restore_show_label": "Gendan serien {title}",
   "restore_show": "Gendan serie",
   "mark_as_watched_show_warning": "Er du sikker på, at du vil markere {title} som set? Dette vil markere alle afsnit som set.",
-  "mark_as_watched_show_until_warning": "Er du sikker på, at du vil markere {title} som set indtil episode {episode}? Dette vil markere {count} episoder som set.",
+  "mark_as_watched_show_until_warning": "Er du sikker på, at du vil markere alle usete afsnit af {title} som set indtil afsnit {episode}? Dette vil markere {count} afsnit som set.",
   "mark_as_watched_multiple_episodes_warning": "Er du sikker på, at du vil markere {count} afsnit som set?",
   "watch_count_label": "Antal set",
   "watched_episodes_count_label": "Afsnit set",
