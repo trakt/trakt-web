@@ -2,8 +2,8 @@
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import EpisodeItem from "./components/EpisodeItem.svelte";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
+  import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
+  import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
 
   type SeasonEpisodeListProps = {
     show: MediaEntry;

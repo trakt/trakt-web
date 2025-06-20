@@ -3,10 +3,10 @@
 
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { Season } from "$lib/requests/models/Season";
+  import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
-  import SeasonEpisodeList from "./SeasonEpisodeList.svelte";
-  import SeasonPosterList from "./SeasonPosterList.svelte";
-  import { useSeasonEpisodes } from "./stores/useSeasonEpisodes";
+  import SeasonEpisodeList from "./_internal/SeasonEpisodeList.svelte";
+  import SeasonPosterList from "./_internal/SeasonPosterList.svelte";
 
   type SeasonListProps = {
     show: MediaEntry;
@@ -29,13 +29,6 @@
 </script>
 
 {#if seasons.length > 1}
-  <SeasonPosterList
-    {currentSeason}
-    {show}
-    {seasons}
-    episodes={$episodes}
-    {title}
-    {subtitle}
-  />
+  <SeasonPosterList {show} {seasons} episodes={$episodes} {title} {subtitle} />
 {/if}
 <SeasonEpisodeList {show} episodes={$episodes} {...episodeProps} />
