@@ -13,6 +13,7 @@
     size = "normal",
     title,
     allowRewatch = false,
+    i18n,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -45,6 +46,7 @@
     {style}
     {title}
     {size}
+    {i18n}
     isWatched={$isWatched && !$isWatchlisted}
     {isRewatching}
     isMarkingAsWatched={$isMarkingAsWatched}

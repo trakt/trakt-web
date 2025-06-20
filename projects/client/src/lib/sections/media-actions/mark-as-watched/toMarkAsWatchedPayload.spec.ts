@@ -5,10 +5,14 @@ describe('toMarkAsWatchedPayload', () => {
   const testIds = [1, 2, 3];
   const testDate = '2023-01-01T00:00:00.000Z';
 
+  const testMedia = testIds.map((id) => ({ id }));
+
   it('should transform movie payload correctly', () => {
     const result = toMarkAsWatchedPayload(
-      'movie',
-      testIds,
+      {
+        type: 'movie' as const,
+        media: testMedia,
+      },
       testDate,
     );
 
@@ -22,8 +26,10 @@ describe('toMarkAsWatchedPayload', () => {
 
   it('should transform show payload correctly', () => {
     const result = toMarkAsWatchedPayload(
-      'show',
-      testIds,
+      {
+        type: 'show' as const,
+        media: testMedia,
+      },
       testDate,
     );
 
@@ -36,9 +42,18 @@ describe('toMarkAsWatchedPayload', () => {
   });
 
   it('should transform episode payload correctly', () => {
+    const episodes = testMedia.map((media, index) => ({
+      id: media.id,
+      season: 1,
+      number: index + 1,
+    }));
+
     const result = toMarkAsWatchedPayload(
-      'episode',
-      testIds,
+      {
+        type: 'episode' as const,
+        show: { id: 1 },
+        media: episodes,
+      },
       testDate,
     );
 

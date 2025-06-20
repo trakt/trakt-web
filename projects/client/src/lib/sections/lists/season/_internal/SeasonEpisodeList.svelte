@@ -1,18 +1,39 @@
 <script lang="ts">
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { Season } from "$lib/requests/models/Season";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
+  import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import { getEpisodesUntil } from "./getEpisodesUntil";
+  import { WatchedUntilHereIntlProvider } from "./WatchedUntilHereIntlProvider";
 
   type SeasonEpisodeListProps = {
     show: MediaEntry;
+    previousSeasons: Season[];
     episodes: EpisodeEntry[];
     title?: string;
     subtitle?: string;
   };
 
-  const { show, episodes, title, subtitle }: SeasonEpisodeListProps = $props();
+  const {
+    show,
+    previousSeasons,
+    episodes,
+    title,
+    subtitle,
+  }: SeasonEpisodeListProps = $props();
+
+  const { history } = useUser();
+
+  const isShowPartiallyWatched = $derived(
+    Boolean($history.shows.get(show.id)?.isPartiallyWatched),
+  );
+  const hasBulkMarkAsWatched = (episode: EpisodeEntry) =>
+    !isShowPartiallyWatched && episode.airDate && episode.airDate <= new Date();
 </script>
 
 <ShadowList
@@ -23,6 +44,29 @@
   --height-list={mediaListHeightResolver("landscape")}
 >
   {#snippet item(episode)}
-    <EpisodeItem {episode} {show} variant="default" context="show" />
+    {#snippet popupActions()}
+      <RenderFor audience="authenticated">
+        <MarkAsWatchedAction
+          style="dropdown-item"
+          type="show"
+          size="small"
+          i18n={WatchedUntilHereIntlProvider}
+          title={show.title}
+          media={{
+            id: show.id,
+            airDate: show.airDate,
+            seasons: getEpisodesUntil({ previousSeasons, episode }),
+          }}
+        />
+      </RenderFor>
+    {/snippet}
+
+    <EpisodeItem
+      {episode}
+      {show}
+      popupActions={hasBulkMarkAsWatched(episode) ? popupActions : undefined}
+      variant="default"
+      context="show"
+    />
   {/snippet}
 </ShadowList>
