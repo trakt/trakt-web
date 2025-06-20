@@ -334,7 +334,7 @@
   "restore_show_label": "Återställ serien {title}",
   "restore_show": "Återställ serie",
   "mark_as_watched_show_warning": "Är du säker på att du vill markera {title} som sedd? Detta kommer att markera alla avsnitt som sedda.",
-  "mark_as_watched_show_until_warning": "Är du säker på att du vill markera {title} som sett till avsnitt {episode}? Detta kommer att markera {count} avsnitt som sedda.",
+  "mark_as_watched_show_until_warning": "Är du säker på att du vill markera alla osedda avsnitt av {title} som sedda fram till avsnitt {episode}? Detta kommer att markera {count} avsnitt som sedda.",
   "mark_as_watched_multiple_episodes_warning": "Är du säker på att du vill markera {count} avsnitt som sedda?",
   "watch_count_label": "Antal visningar",
   "watched_episodes_count_label": "Visade avsnitt",

@@ -334,7 +334,7 @@
   "restore_show_label": "Restaurer la série {title}",
   "restore_show": "Restaurer la série",
   "mark_as_watched_show_warning": "Êtes-vous certain de vouloir marquer {title} comme visionné? Cela marquera tous les épisodes comme vus.",
-  "mark_as_watched_show_until_warning": "Êtes-vous sûr de vouloir marquer {title} comme vu jusqu'à l'épisode {episode} ? Cela marquera {count} épisodes comme vus.",
+  "mark_as_watched_show_until_warning": "Êtes-vous certain de vouloir marquer tous les épisodes non vus de {title} comme visionnés jusqu'à l'épisode {episode} ? Cela marquera {count} épisodes comme visionnés.",
   "mark_as_watched_multiple_episodes_warning": "Êtes-vous certain de vouloir marquer {count} épisodes comme visionnés?",
   "watch_count_label": "Nombre de visionnements",
   "watched_episodes_count_label": "Épisodes visionnés",
