@@ -13,16 +13,49 @@
 
 <style>
   .trakt-card-action-bar {
+    --height-action-bar: var(--ni-48);
+
     position: absolute;
+    height: var(--height-action-bar);
 
     top: 0;
     right: 0;
     left: 0;
     z-index: var(--layer-floating);
 
+    &::before {
+      content: "";
+
+      width: var(--height-action-bar);
+      height: var(--height-action-bar);
+
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      border-top-right-radius: var(--border-radius-m);
+
+      background-image: radial-gradient(
+        circle at top right,
+        color-mix(in srgb, var(--shade-920) 30%, transparent) 15%,
+        color-mix(in srgb, var(--shade-920) 0%, transparent) 65%
+      );
+    }
+
     :global(.trakt-popup-menu-button) {
       position: absolute;
       right: 0;
+    }
+  }
+
+  :global(.trakt-card):has(:global(.trakt-card-cover-image)) {
+    :global(.trakt-card-action-bar)::before {
+      opacity: 0;
+      transition: opacity var(--transition-increment) ease-in-out;
+    }
+
+    &:has(:global(.image-loaded)) :global(.trakt-card-action-bar)::before {
+      opacity: 1;
     }
   }
 </style>

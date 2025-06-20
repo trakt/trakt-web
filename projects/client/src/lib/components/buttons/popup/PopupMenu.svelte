@@ -17,7 +17,7 @@
   class="trakt-popup-menu-button"
   {...props}
 >
-  <MoreIcon shadowColor="var(--purple-900)" />
+  <MoreIcon />
 </button>
 
 {#if $isOpened}
@@ -69,10 +69,6 @@
     &[data-popup-state="opened"] {
       background-color: var(--shade-10);
       color: var(--purple-900);
-
-      :global(svg circle) {
-        filter: none;
-      }
     }
 
     @include for-touch {
