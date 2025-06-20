@@ -439,5 +439,10 @@
   "add_comment": "Dodaj",
   "rename_list": "Zmień nazwę listy",
   "rename_list_label": "Zmień nazwę listy {name}",
+  "hot": "Gorące w tym miesiącu",
+  "hot_movies": "Gorące filmy w tym miesiącu",
+  "hot_shows": "Gorące seriale w tym miesiącu",
+  "view_all_hot_shows": "Zobacz wszystkie gorące seriale",
+  "view_all_hot_movies": "Zobacz wszystkie gorące filmy",
   "popular_comments": "Popularne komentarze"
 }

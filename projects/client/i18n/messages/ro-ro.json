@@ -439,5 +439,10 @@
   "add_comment": "Adaugă",
   "rename_list": "Redenumiți lista",
   "rename_list_label": "Redenumiți lista {name}",
+  "hot": "În tendințe luna aceasta",
+  "hot_movies": "Filme în tendințe luna aceasta",
+  "hot_shows": "Seriale în tendințe luna aceasta",
+  "view_all_hot_shows": "Vezi toate serialele în tendințe",
+  "view_all_hot_movies": "Vezi toate filmele în tendințe",
   "popular_comments": "Comentarii populare"
 }

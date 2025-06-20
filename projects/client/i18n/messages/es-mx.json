@@ -439,5 +439,10 @@
   "add_comment": "Agregar",
   "rename_list": "Renombrar tu lista",
   "rename_list_label": "Renombrar tu lista {name}",
+  "hot": "Tendencias del mes",
+  "hot_movies": "Películas en tendencia este mes",
+  "hot_shows": "Series en tendencia este mes",
+  "view_all_hot_shows": "Ver todas las series en tendencia",
+  "view_all_hot_movies": "Ver todas las películas en tendencia",
   "popular_comments": "Comentarios populares"
 }
