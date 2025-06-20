@@ -16,6 +16,7 @@ import {
   upNextSortOptionSchema,
 } from '@trakt/api';
 import { z } from 'zod';
+import { assertDefined } from '../../../utils/assert/assertDefined.ts';
 
 export const UserSettingsSchema = z.object({
   id: z.number(),
@@ -46,7 +47,7 @@ export const UserSettingsSchema = z.object({
   }),
   genres: genreOptionSchema.array(),
   services: z.object({
-    country: z.string().optional(),
+    country: z.string().nullish(),
     favorites: z.array(z.string()).optional(),
     showOnlyFavorites: z.boolean().optional(),
   }),
@@ -74,7 +75,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
 
   return {
-    id: user.ids.trakt,
+    id: assertDefined(user.ids.trakt, 'Current user should have a trakt ID'),
     slug: user.ids.slug,
     token: account.token,
     name: toUserName(user.name),
