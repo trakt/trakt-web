@@ -4,13 +4,12 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { Season } from "$lib/requests/models/Season";
+  import SeasonItem from "$lib/sections/lists/components/SeasonItem.svelte";
+  import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import SeasonItem from "./components/SeasonItem.svelte";
-  import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
   type SeasonListProps = {
-    currentSeason: number;
     show: MediaEntry;
     seasons: Season[];
     episodes: EpisodeEntry[];
@@ -18,14 +17,8 @@
     subtitle: string;
   };
 
-  const {
-    currentSeason,
-    show,
-    seasons,
-    episodes,
-    title,
-    subtitle,
-  }: SeasonListProps = $props();
+  const { show, seasons, episodes, title, subtitle }: SeasonListProps =
+    $props();
 </script>
 
 <ShadowList
