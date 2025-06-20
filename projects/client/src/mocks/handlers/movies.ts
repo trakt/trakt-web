@@ -4,6 +4,7 @@ import { OfficialListsResponseMock } from '$mocks/data/lists/response/OfficialLi
 import { MovieHereticCommentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticCommentsResponseMock.ts';
 import { MovieHereticSentimentsResponseMock } from '$mocks/data/summary/movies/heretic/response/MovieHereticSentimentsResponseMock.ts';
 import { MoviesAnticipatedResponseMock } from '../data/movies/response/MoviesAnticipatedResponseMock.ts';
+import { MoviesHotResponseMock } from '../data/movies/response/MoviesHotResponseMock.ts';
 import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopularResponseMock.ts';
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
@@ -89,6 +90,12 @@ export const movies = [
     'http://localhost/movies/anticipated*',
     () => {
       return HttpResponse.json(MoviesAnticipatedResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/movies/hot*',
+    () => {
+      return HttpResponse.json(MoviesHotResponseMock);
     },
   ),
   http.get(

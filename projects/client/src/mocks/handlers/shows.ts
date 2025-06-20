@@ -8,6 +8,7 @@ import { EpisodeSiloWatchNowResponseMock } from '$mocks/data/summary/episodes/si
 import { ShowSiloCommentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloCommentsResponseMock.ts';
 import { ShowSiloSentimentsResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloSentimentsResponseMock.ts';
 import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAnticipatedResponseMock.ts';
+import { ShowsHotResponseMock } from '../data/shows/response/ShowsHotResponseMock.ts';
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
 import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
@@ -166,6 +167,12 @@ export const shows = [
     'http://localhost/shows/anticipated*',
     () => {
       return HttpResponse.json(ShowsAnticipatedResponseMock);
+    },
+  ),
+  http.get(
+    'http://localhost/shows/hot*',
+    () => {
+      return HttpResponse.json(ShowsHotResponseMock);
     },
   ),
   http.get(
