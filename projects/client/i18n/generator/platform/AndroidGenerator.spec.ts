@@ -118,7 +118,7 @@ describe('AndroidGenerator', () => {
         '<string name="android_specific_key">Platform specific key test</string>',
       );
       expect(content).toContain(
-        '<string name="user_message_count">User %s has %d messages</string>',
+        '<string name="user_message_count">User %1$s has %2$d messages</string>',
       );
     });
 
@@ -180,7 +180,7 @@ describe('AndroidGenerator', () => {
 
       // Check that string variables are converted to %s
       expect(content).toContain('Hello, %s!');
-      expect(content).toContain('User %s has %d messages');
+      expect(content).toContain('User %1$s has %2$d messages');
 
       // Check that number variables are converted to %d
       expect(content).toContain('%d items remaining');
