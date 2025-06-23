@@ -19,9 +19,10 @@ describe('useWatchlist', () => {
     setAuthorization(true);
     invalidate.mockReset();
 
-    (useInvalidator as Mock).mockReturnValueOnce({
-      invalidate,
-    });
+    (useInvalidator as Mock)
+      .mockReturnValueOnce({ invalidate }) // 1: in useWatchlist
+      .mockReturnValueOnce({ invalidate }) // 2: in useWatchlist -> useTrack -> useUser
+      .mockReturnValueOnce({ invalidate }); // 3: in useWatchlist -> useIsWatchlisted -> useUser
   });
 
   const runCommonTests = (props: MediaStoreProps, invalidation: string) => {

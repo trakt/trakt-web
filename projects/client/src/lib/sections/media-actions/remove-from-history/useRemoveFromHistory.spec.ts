@@ -16,9 +16,9 @@ describe('useRemoveFromHistory', () => {
   beforeEach(() => {
     invalidate.mockReset();
 
-    (useInvalidator as Mock).mockReturnValueOnce({
-      invalidate,
-    });
+    (useInvalidator as Mock)
+      .mockReturnValueOnce({ invalidate }) // 1: useRemoveFromHistory
+      .mockReturnValueOnce({ invalidate }); // 2: useRemoveFromHistory -> useTrack -> useUser
   });
 
   const runCommonTests = (

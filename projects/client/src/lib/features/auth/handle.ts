@@ -1,11 +1,12 @@
 import { requestDeviceCode } from '$lib/features/auth/requests/requestDeviceCode.ts';
-import { IS_DEV } from '$lib/utils/env/index.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
+import { IS_DEV } from '../../utils/env/index.ts';
+import { time } from '../../utils/timing/time.ts';
 import { AuthDeviceEndpoint } from './AuthDeviceEndpoint.ts';
 import { AuthEndpoint } from './AuthEndpoint.ts';
+import type { OidcAuthToken } from './models/OidcAuthToken.ts';
 import type {
   SerializedAuthResponse,
 } from './models/SerializedAuthResponse.ts';
@@ -13,6 +14,8 @@ import { authorize, UNAUTHORIZED_PAYLOAD } from './requests/authorize.ts';
 import { authorizeDeviceCode } from './requests/authorizeDeviceCode.ts';
 
 export const AUTH_COOKIE_NAME = 'trakt-auth';
+export const OIDC_AUTH_COOKIE_NAME = 'trakt-oidc-auth';
+
 const REFRESH_THRESHOLD_MINUTES = 15;
 
 function getAuth(event: RequestEvent): SerializedAuthResponse | null {
@@ -38,8 +41,24 @@ function isAuthEndpointRequest(event: RequestEvent) {
   return authPaths.some((path) => event.url.pathname.startsWith(path));
 }
 
-// FIXME: split up this file
+function getOidcToken(event: RequestEvent) {
+  try {
+    const oidcTokenCookie = event.cookies.get(OIDC_AUTH_COOKIE_NAME) ?? '';
+    return JSON.parse(oidcTokenCookie) as OidcAuthToken;
+  } catch (_) {
+    return null;
+  }
+}
+
 export const handle: Handle = async ({ event, resolve }) => {
+  const oidcToken = getOidcToken(event);
+  event.locals.oidcAuth = oidcToken;
+
+  // FIXME: clean up anything below as exchange flow and device auth flow are not used anymore
+  if (oidcToken) {
+    return await resolve(event);
+  }
+
   if (!isContentRequest(event) && !isAuthEndpointRequest(event)) {
     return await resolve(event);
   }
@@ -48,7 +67,6 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.locals.auth = auth;
   };
 
-  /** FIXME: extract this instead of having it hardcoded */
   const getReferrer = () =>
     IS_DEV ? 'http://localhost:5173' : 'https://app.trakt.tv';
 
@@ -131,23 +149,6 @@ export const handle: Handle = async ({ event, resolve }) => {
     return authorizedResponse(response, new URL(event.url.origin));
   }
 
-  const code = event.url.searchParams.get('code');
-  const isExchange = code != null;
-
-  if (isExchange) {
-    const result = await authorize({
-      token: {
-        type: 'exchange',
-        code,
-      },
-      referrer: getReferrer(),
-    });
-
-    const url = new URL(event.url);
-    url.searchParams.delete('code');
-    return authorizedResponse(result, url);
-  }
-
   const authResponse = getAuth(event);
 
   const minutesToExpiry = Math.floor(
@@ -207,8 +208,6 @@ export const handle: Handle = async ({ event, resolve }) => {
       maxAge: 0,
       path: '/',
     });
-
-    return await resolve(event);
   }
 
   return await resolve(event);

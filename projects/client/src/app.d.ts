@@ -173,6 +173,9 @@ declare global {
         | import('$lib/features/auth/models/SerializedAuthResponse').SerializedAuthResponse
         | Nil;
       hasConsent: boolean;
+      oidcAuth:
+        | import('$lib/features/auth/models/OidcAuthToken').OidcAuthToken
+        | Nil;
     }
     // interface PageData {}
     // interface PageState {}
