@@ -1,9 +1,9 @@
 import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
 
-import { availableLocales } from '$lib/features/i18n/index.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { loadLocale, type TranslationMap } from './_internal/loadLocale.ts';
+import { locales } from './_internal/locales.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
 const genAi = new GoogleGenerativeAI(
@@ -203,7 +203,7 @@ async function translateAllLocales(): Promise<void> {
     const sourceMessages = await loadLocale('en');
 
     // Get non-English locales
-    const targetLocales = availableLocales.filter((l) => l !== 'en');
+    const targetLocales = locales.filter((l) => l !== 'en');
 
     // Find new keys for each locale
     const localeNewKeys: Record<string, string[]> = {};
