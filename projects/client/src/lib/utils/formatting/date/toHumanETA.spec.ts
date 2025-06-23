@@ -44,7 +44,7 @@ describe('toHumanETA', () => {
     expect(toHumanETA(today, targetDate, 'fr-fr')).toBe('après-demain');
   });
 
-  it('should return "après-demain" for 2 days difference in French', () => {
+  it('should return "poimâine" for 2 days difference in Romanian', () => {
     const targetDate = new Date('2023-01-03');
     expect(toHumanETA(today, targetDate, 'ro-ro')).toBe('poimâine');
   });
@@ -52,5 +52,66 @@ describe('toHumanETA', () => {
   it('should return the year for past dates', () => {
     const targetDate = new Date('2022-12-31');
     expect(toHumanETA(today, targetDate, 'en')).toBe('2022');
+  });
+
+  it('should round up fractional days (2.16 days becomes 3 days)', () => {
+    const today = new Date('2025-06-23T18:51:30.828Z');
+    const targetDate = new Date('2025-06-26T01:00:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 3 days');
+  });
+
+  it('should round up small fractional days when target is after midnight', () => {
+    console.log('Testing small fractional days');
+    const today = new Date('2023-01-01T22:00:00.000Z');
+    const targetDate = new Date('2023-01-02T00:24:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
+  });
+
+  it('should round up fractional days for weeks (7.5 days becomes 8 days, which is still 1 week)', () => {
+    const today = new Date('2023-01-01T00:00:00.000Z');
+    const targetDate = new Date('2023-01-08T12:00:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('next week');
+  });
+
+  it('should handle same day but later time in hours', () => {
+    const today = new Date('2023-01-01T10:00:00.000Z');
+    const targetDate = new Date('2023-01-01T23:59:59.999Z'); // Same day, not after midnight
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 14 hours');
+  });
+
+  it('should return "in 1 hour" for 1 hour difference', () => {
+    const today = new Date('2023-01-01T10:00:00.000Z');
+    const targetDate = new Date('2023-01-01T11:00:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 1 hour');
+  });
+
+  it('should return "in 5 hours" for 5 hour difference', () => {
+    const today = new Date('2023-01-01T10:00:00.000Z');
+    const targetDate = new Date('2023-01-01T15:00:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 5 hours');
+  });
+
+  it('should return "tomorrow" for 23 hour difference when target is after midnight', () => {
+    const today = new Date('2023-01-01T01:00:00.000Z');
+    const targetDate = new Date('2023-01-02T00:00:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
+  });
+
+  it('should round up fractional hours (2.3 hours becomes 3 hours)', () => {
+    const today = new Date('2023-01-01T10:00:00.000Z');
+    const targetDate = new Date('2023-01-01T12:18:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 3 hours');
+  });
+
+  it('should return "in 1 hour" for small fractional hours (0.1 hours)', () => {
+    const today = new Date('2023-01-01T10:00:00.000Z');
+    const targetDate = new Date('2023-01-01T10:06:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 1 hour');
+  });
+
+  it('should switch to days when 24+ hours (25 hours becomes tomorrow)', () => {
+    const today = new Date('2023-01-01T10:00:00.000Z');
+    const targetDate = new Date('2023-01-02T10:00:00.000Z');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
   });
 });
