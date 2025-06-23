@@ -5,14 +5,15 @@ import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependen
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { MovieEntrySchema } from '$lib/requests/models/MovieEntry.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
+import { addYear } from '$lib/utils/date/addYear.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { MovieAnticipatedResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
-import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 export const AnticipatedMovieSchema = MovieEntrySchema.extend({
   score: z.number(),
@@ -48,6 +49,7 @@ const movieAnticipatedRequest = (
         limit,
         ...filter,
         ...search,
+        end_date: addYear(new Date()).toISOString(),
       },
     });
 
