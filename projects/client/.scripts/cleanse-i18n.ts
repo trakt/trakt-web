@@ -1,6 +1,6 @@
-import { availableLocales } from '$lib/features/i18n/index.ts';
 import { I18N_MESSAGES_DIR } from './_internal/constants.ts';
 import { loadLocale } from './_internal/loadLocale.ts';
+import { locales } from './_internal/locales.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
 async function cleanseTranslations(): Promise<void> {
@@ -10,7 +10,7 @@ async function cleanseTranslations(): Promise<void> {
     const validKeys = new Set(Object.keys(enTranslations));
 
     // Process each locale except 'en'
-    for (const locale of availableLocales.filter((l) => l !== 'en')) {
+    for (const locale of locales.filter((l) => l !== 'en')) {
       console.log(`Processing ${locale}...`);
 
       // Load existing translations
