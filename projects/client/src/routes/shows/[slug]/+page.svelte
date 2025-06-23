@@ -80,6 +80,8 @@
 
     goToSeason($show.slug, activeSeason);
   });
+
+  const isReady = $derived(!$isLoading && !isNaN(currentSeason));
 </script>
 
 <TraktPage
@@ -90,7 +92,7 @@
   type="show"
   hasDynamicContent={true}
 >
-  {#if !$isLoading}
+  {#if isReady}
     <ShowSummary
       media={$show!}
       intl={$intl!}
