@@ -20,8 +20,9 @@ describe('useRatings', () => {
     invalidate.mockReset();
 
     (useInvalidator as Mock)
-      .mockReturnValueOnce({ invalidate })
-      .mockReturnValueOnce({ invalidate });
+      .mockReturnValueOnce({ invalidate }) // 1: in useRatings
+      .mockReturnValueOnce({ invalidate }) // 2: in useRatings -> useUser
+      .mockReturnValueOnce({ invalidate }); // 3: in useRatings -> useTrack -> useUser
   });
 
   it('should indicate while rating is in progress', async () => {

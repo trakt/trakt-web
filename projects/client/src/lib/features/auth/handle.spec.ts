@@ -28,25 +28,6 @@ describe('handle: auth', () => {
     );
   });
 
-  it('should handle auth code exchange', async () => {
-    const event = mockRequestEvent({
-      url: 'http://localhost?code=test-code',
-      request,
-    });
-
-    const response = await handle({ event, resolve: vi.fn() });
-
-    expect(response).toBeInstanceOf(Response);
-    expect(response.headers.get('Location')).toMatch(
-      /^http:\/\/localhost\/\?_cb=\d+$/,
-    );
-    expect(response.status).toBe(302);
-    expect(event.locals.auth).toEqual({
-      ...AuthMappedMock,
-      expiresAt: expect.any(Number),
-    });
-  });
-
   it('should handle invalid cookie contents', async () => {
     const event = mockRequestEvent({
       url: 'http://localhost',

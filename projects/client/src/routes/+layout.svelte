@@ -113,7 +113,10 @@
 <ErrorProvider>
   <QueryClientProvider client={data.queryClient} device={data.device}>
     <GlobalParameterProvider>
-      <AuthProvider isAuthorized={data.auth.isAuthorized} url={data.auth.url}>
+      <AuthProvider
+        isAuthorizedLegacy={data.auth.isAuthorized}
+        isAuthorized={data.oidcAuth.isAuthorized}
+      >
         <CookieConsentProvider
           hasConsent={data.hasConsent || data.device === "tv"}
           device={data.device}

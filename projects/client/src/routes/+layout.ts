@@ -17,9 +17,10 @@ export const load: LayoutLoad = async ({ data, fetch }) => {
     },
   });
 
-  setToken({ value: data.auth.token, expiresAt: data.auth.expiresAt });
+  const auth = data.auth.isAuthorized ? data.auth : data.oidcAuth;
+  setToken({ value: auth.token, expiresAt: auth.expiresAt });
 
-  if (data.auth.isAuthorized) {
+  if (auth.isAuthorized) {
     await queryClient.prefetchQuery(currentUserSettingsQuery({ fetch }));
   }
 

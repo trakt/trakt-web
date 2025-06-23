@@ -2,10 +2,16 @@ import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
 import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
+import { getUserManager } from '../../features/auth/stores/userManager.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
 
 function shouldReloadPage(expiresAt: number | Nil) {
+  if (getUserManager()) {
+    // FIXME: completely remove this refresh flow when fully switching to oidc-client-ts
+    return false;
+  }
+
   if (
     !expiresAt || safeSessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY)
   ) {

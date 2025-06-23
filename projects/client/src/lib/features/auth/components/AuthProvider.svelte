@@ -1,16 +1,18 @@
 <script lang="ts">
-  import { provisionAuth } from "../stores/useAuth";
+  import { createAuthContext } from "../stores/createAuthContext";
+  import { initializeUserManager } from "../stores/initializeUserManager";
 
   type AuthProviderProps = {
-    url: string;
+    isAuthorizedLegacy: boolean;
     isAuthorized: boolean;
   } & ChildrenProps;
 
-  const { isAuthorized, url, children }: AuthProviderProps = $props();
-  provisionAuth({
-    isAuthorized,
-    url,
-  });
+  const { children, isAuthorizedLegacy, isAuthorized }: AuthProviderProps =
+    $props();
+
+  createAuthContext({ isAuthorized: isAuthorizedLegacy || isAuthorized });
+
+  initializeUserManager(isAuthorizedLegacy);
 </script>
 
 {@render children()}

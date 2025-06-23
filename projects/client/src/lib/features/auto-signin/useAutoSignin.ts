@@ -9,7 +9,7 @@ const PARAM_NAME = 'ref';
 const AUTO_SIGNIN_REF = 'trakt-og-switch';
 
 export function useAutoSignin() {
-  const { isAuthorized, url: authUrl } = useAuth();
+  const { isAuthorized, login } = useAuth();
   const { track } = useTrack(AnalyticsEvent.EnterLite);
 
   const ref = page.url.searchParams.get(PARAM_NAME);
@@ -19,7 +19,7 @@ export function useAutoSignin() {
     track();
 
     if (!get(isAuthorized)) {
-      globalThis.window.location.assign(get(authUrl));
+      login();
       return;
     }
 

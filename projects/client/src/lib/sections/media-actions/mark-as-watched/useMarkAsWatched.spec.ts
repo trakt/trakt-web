@@ -21,9 +21,11 @@ describe('useMarkAsWatched', () => {
     setAuthorization(true);
     invalidate.mockReset();
 
-    (useInvalidator as Mock).mockReturnValueOnce({
-      invalidate,
-    });
+    (useInvalidator as Mock)
+      .mockReturnValueOnce({ invalidate }) // 1: useMarkAsWatched
+      .mockReturnValueOnce({ invalidate }) // 2: useMarkAsWatched -> useUser
+      .mockReturnValueOnce({ invalidate }) // 3: useMarkAsWatched -> useTrack -> useUser
+      .mockReturnValueOnce({ invalidate }); // 4: useMarkAsWatched -> useIsWatched -> useUser
   });
 
   const runCommonTests = (

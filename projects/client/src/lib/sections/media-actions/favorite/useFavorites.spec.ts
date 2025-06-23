@@ -19,9 +19,9 @@ describe('useFavorites', () => {
     setAuthorization(true);
     invalidate.mockReset();
 
-    (useInvalidator as Mock).mockReturnValueOnce({
-      invalidate,
-    });
+    (useInvalidator as Mock)
+      .mockReturnValueOnce({ invalidate }) // 1: useFavorites
+      .mockReturnValueOnce({ invalidate }); // 2: useFavorites -> useUser
   });
 
   const runCommonTests = (props: FavoritesStoreProps, invalidation: string) => {
