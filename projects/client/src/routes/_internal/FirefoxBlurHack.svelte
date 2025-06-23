@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
+
   const isFirefox = $derived(
-    navigator.userAgent.toLowerCase().includes("firefox"),
+    browser && navigator.userAgent.toLowerCase().includes("firefox"),
   );
 </script>
 
