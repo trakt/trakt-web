@@ -26,5 +26,5 @@ export interface MetaMessages {
       };
     };
   };
-  messages: Record<string, string | MetaMessageDefinition>;
+  messages: Record<string, MetaMessageDefinition>;
 }

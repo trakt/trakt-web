@@ -3,7 +3,8 @@
  */
 
 import { parseArgs } from '@std/cli/parse-args';
-import { generateFromMeta, Platform } from './core/I18nGenerator.ts';
+import { generateFromMeta } from './core/generateFromMeta.ts';
+import { Platform } from './model/Platform.ts';
 
 function showUsage() {
   console.log(
