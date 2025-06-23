@@ -9,16 +9,6 @@ import type { GenerationResult } from '../model/GenerationResult.ts';
 import type { MetaMessages } from '../model/MetaMessages.ts';
 import { Platform } from '../model/Platform.ts';
 
-export { type GenerationResult } from '../model/GenerationResult.ts';
-export { type MetaMessageDefinition } from '../model/MetaMessageDefinition.ts';
-export { type MetaMessages } from '../model/MetaMessages.ts';
-export { type MetaMessageVariable } from '../model/MetaMessageVariable.ts';
-export { Platform } from '../model/Platform.ts';
-export { type PlatformGenerator } from '../model/PlatformGenerator.ts';
-
-export { GeneratorFactory } from '../factory/GeneratorFactory.ts';
-export { generateFromMeta } from './generateFromMeta.ts';
-
 /**
  * Main generator class that orchestrates platform-specific generation
  */
