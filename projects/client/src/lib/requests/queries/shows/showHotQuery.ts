@@ -53,7 +53,7 @@ const showHotRequest = (
         limit,
         ...filter,
         ...search,
-        ...({ start_date: 'lastmonth' }),
+        start_date: 'lastmonth',
       },
     });
 };
