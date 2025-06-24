@@ -1,3 +1,4 @@
+import { stretchedPercentage } from '$lib/utils/number/stretchedPercentage.ts';
 import { render, screen } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
 import { describe, expect, it } from 'vitest';
@@ -27,10 +28,19 @@ describe('ShowProgressTag', () => {
   });
 
   it('should handle decimal progress values', () => {
+    const progress = 33.33;
+    const total = 100;
+
     render(ShowProgressTag, {
-      props: { total: 100, progress: 33.33, children },
+      props: { total, progress, children },
+    });
+    const expectedPercentage = stretchedPercentage({
+      value: progress,
+      total,
     });
     const element = screen.getByRole('progressbar');
-    expect(element.style.getPropertyValue('--progress-width')).toBe('33.33%');
+    expect(element.style.getPropertyValue('--progress-width')).toBe(
+      `${expectedPercentage}%`,
+    );
   });
 });
