@@ -33,20 +33,20 @@ const model = genAi.getGenerativeModel({
 
 // Add this function to generate a prompt for multiple locales with enhanced context
 function generateMultiLocalePromptText({
-  messagesWithContext,
+  messages,
   locales,
 }: {
-  messagesWithContext: Record<string, MetaMessageDefinition>;
+  messages: Record<string, MetaMessageDefinition>;
   locales: string[];
 }): string {
   // Build context information for each message
-  const contextualData = Object.entries(messagesWithContext).map(
-    ([key, messageContext]) => {
-      let contextInfo = `"${key}": "${messageContext.default}"`;
+  const contextualData = Object.entries(messages).map(
+    ([key, message]) => {
+      let contextInfo = `"${key}": "${message.default}"`;
 
       // Add message-level description if available
-      if (messageContext.description) {
-        contextInfo += ` // Context: ${messageContext.description}`;
+      if (message.description) {
+        contextInfo += ` // Context: ${message.description}`;
       }
 
       return contextInfo;
@@ -102,7 +102,7 @@ async function translateMessages(
   locales: string[],
 ): Promise<Record<string, TranslationMap>> {
   const result = await model.generateContent(
-    generateMultiLocalePromptText({ messagesWithContext: messages, locales }),
+    generateMultiLocalePromptText({ messages: messages, locales }),
   );
 
   const response = JSON.parse(result.response.text());
