@@ -37,20 +37,23 @@
     min-width: 0;
 
     :global(.trakt-tag) {
+      --progress-bar-spacing: var(--ni-6);
+      --progress-bar-offset: calc(var(--progress-bar-spacing) / 2);
       overflow: hidden;
+      padding: var(--ni-4) var(--ni-12);
 
       &::before {
         content: "";
         display: block;
         position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
+        left: var(--progress-bar-offset);
+        top: var(--progress-bar-offset);
+        width: calc(100% - var(--progress-bar-spacing));
+        height: calc(100% - var(--progress-bar-spacing));
 
         border-radius: inherit;
 
-        width: var(--progress-width);
+        width: calc(var(--progress-width) - var(--progress-bar-offset));
         background-color: var(--color-background-progress-tag);
 
         transition: width var(--transition-increment) ease-in;
