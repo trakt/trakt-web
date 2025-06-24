@@ -114,6 +114,11 @@
       flex-direction: column;
       align-items: flex-start;
       gap: var(--gap-xxs);
+
+      :global(.trakt-tag) {
+        height: var(--ni-24);
+        box-sizing: border-box;
+      }
     }
 
     &:not(.trakt-card-cover-placeholder):not(.trakt-card-cover-youtube) {
