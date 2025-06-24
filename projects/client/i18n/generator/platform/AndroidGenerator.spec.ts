@@ -35,7 +35,9 @@ describe('AndroidGenerator', () => {
         },
       },
       messages: {
-        simple_message: 'Hello World',
+        simple_message: {
+          default: 'Hello World',
+        },
         greeting: {
           default: 'Hello, {name}!',
           description: 'Greeting message with user name',
@@ -45,7 +47,6 @@ describe('AndroidGenerator', () => {
           variables: {
             name: {
               type: 'string',
-              description: 'User display name',
             },
           },
         },
@@ -55,7 +56,6 @@ describe('AndroidGenerator', () => {
           variables: {
             count: {
               type: 'number',
-              description: 'Number of items',
             },
           },
         },
@@ -75,11 +75,9 @@ describe('AndroidGenerator', () => {
           variables: {
             userName: {
               type: 'string',
-              description: 'The user name',
             },
             count: {
               type: 'number',
-              description: 'Message count',
             },
           },
         },
@@ -135,7 +133,10 @@ describe('AndroidGenerator', () => {
           },
         },
         messages: {
-          special_chars: 'This & that < > "quotes" \'apostrophe\'',
+          special_chars: {
+            default: 'This & that < > "quotes" \'apostrophe\'',
+            description: 'Message with special XML characters',
+          },
         },
       };
 
@@ -201,7 +202,9 @@ describe('AndroidGenerator', () => {
           },
         },
         messages: {
-          included_message: 'This should be included',
+          included_message: {
+            default: 'This should be included',
+          },
           excluded_message: {
             default: 'This should be excluded from Android',
             exclude: [Platform.ANDROID],
@@ -239,7 +242,9 @@ describe('AndroidGenerator', () => {
           },
         },
         messages: {
-          test: 'Test message',
+          test: {
+            default: 'Test message',
+          },
         },
       };
 
@@ -263,7 +268,10 @@ describe('AndroidGenerator', () => {
           },
         },
         messages: {
-          test: 'Test message',
+          test: {
+            default: 'Message de test',
+            description: 'French Canadian test message',
+          },
         },
       };
 
@@ -279,7 +287,10 @@ describe('AndroidGenerator', () => {
           },
         },
         messages: {
-          test: 'Test message',
+          test: {
+            default: 'Message de test',
+            description: 'French test message',
+          },
         },
       };
 
@@ -308,7 +319,10 @@ describe('AndroidGenerator', () => {
           },
         },
         messages: {
-          test: 'Test message',
+          test: {
+            default: '测试消息',
+            description: 'Test message in simplified Chinese',
+          },
         },
       };
 

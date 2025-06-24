@@ -4,6 +4,4 @@
 
 export interface MetaMessageVariable {
   type: 'string' | 'number' | 'date' | 'time' | 'currency';
-  description: string;
-  required?: boolean;
 }

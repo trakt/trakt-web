@@ -45,8 +45,7 @@
       "default": "Hello, {name}",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },
@@ -57,8 +56,7 @@
       "default": "{count} remaining",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -72,8 +70,7 @@
       "default": "{count} episodes",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -105,8 +102,7 @@
       "default": "Add {title} to your Watchlist",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -114,8 +110,7 @@
       "default": "Mark {title} as watched",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -123,8 +118,7 @@
       "default": "Mark {title} as watched until here",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -243,8 +237,7 @@
       "default": "Remove {title} from your Watchlist",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -330,8 +323,7 @@
       "default": "{number} plays",
       "variables": {
         "number": {
-          "type": "number",
-          "description": "Numeric value"
+          "type": "number"
         }
       }
     },
@@ -432,8 +424,7 @@
       "default": "{count} watching",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -444,8 +435,7 @@
       "default": "{count} episodes watched",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -456,8 +446,7 @@
       "default": "{count} movies watched",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -468,8 +457,7 @@
       "default": "Expand {category}",
       "variables": {
         "category": {
-          "type": "string",
-          "description": "Category name"
+          "type": "string"
         }
       }
     },
@@ -477,8 +465,7 @@
       "default": "{count} more",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -516,8 +503,7 @@
       "default": "Watch {title} now",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -525,8 +511,7 @@
       "default": "{service} logo",
       "variables": {
         "service": {
-          "type": "string",
-          "description": "Service name"
+          "type": "string"
         }
       }
     },
@@ -768,8 +753,7 @@
       "default": "Remove {title} from your Watched list",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -777,8 +761,7 @@
       "default": "Are you sure you want to remove {title} from your Watched list? All plays will be removed.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -786,8 +769,7 @@
       "default": "Remove this play of {title} from your Watched list",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -795,8 +777,7 @@
       "default": "Are you sure you want to remove this play of {title} from your Watched list?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -807,8 +788,7 @@
       "default": "Season {number}",
       "variables": {
         "number": {
-          "type": "number",
-          "description": "Numeric value"
+          "type": "number"
         }
       }
     },
@@ -819,8 +799,7 @@
       "default": "Expand {title} overview",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -828,12 +807,10 @@
       "default": "Season {season} • Episode {number}",
       "variables": {
         "season": {
-          "type": "number",
-          "description": "Season number"
+          "type": "number"
         },
         "number": {
-          "type": "number",
-          "description": "Numeric value"
+          "type": "number"
         }
       }
     },
@@ -841,8 +818,7 @@
       "default": "Share {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -892,8 +868,7 @@
       "default": "Headshot of {person}",
       "variables": {
         "person": {
-          "type": "string",
-          "description": "Person name"
+          "type": "string"
         }
       }
     },
@@ -904,8 +879,7 @@
       "default": "{count} eager",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -931,8 +905,7 @@
       "default": "Are you sure you want to remove {title} from your Watchlist?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -979,8 +952,7 @@
       "default": "Add {title} to your Favorites",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -988,8 +960,7 @@
       "default": "Remove {title} from your Favorites",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -997,8 +968,7 @@
       "default": "Are you sure you want to remove {title} from your Favorites?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1039,8 +1009,7 @@
       "default": "Pop up menu for {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1051,8 +1020,7 @@
       "default": "{title} does not appear on any popular lists.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1063,8 +1031,7 @@
       "default": "{username}'s avatar",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1072,8 +1039,7 @@
       "default": "{title} poster",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1153,8 +1119,7 @@
       "default": "Just discovered {title} - you need to see this! 🎬",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1162,8 +1127,7 @@
       "default": "Found this awesome show: {title}! 📺",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1171,20 +1135,16 @@
       "default": "Just watched {show} S{season}E{episode} - {title}! 🔥",
       "variables": {
         "show": {
-          "type": "string",
-          "description": "Show title"
+          "type": "string"
         },
         "season": {
-          "type": "number",
-          "description": "Season number"
+          "type": "number"
         },
         "episode": {
-          "type": "number",
-          "description": "Episode number"
+          "type": "number"
         },
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1192,8 +1152,7 @@
       "default": "Check out {name} on Trakt! 🎭",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },
@@ -1231,8 +1190,7 @@
       "default": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1240,8 +1198,7 @@
       "default": "Flag show {title} as dropped",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1264,8 +1221,7 @@
       "default": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1273,8 +1229,7 @@
       "default": "Restore show {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1285,8 +1240,7 @@
       "default": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1294,16 +1248,13 @@
       "default": "Are you sure you want to mark all unseen episodes of {title} as watched until episode {episode}? This will mark {count} episodes as watched.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "episode": {
-          "type": "number",
-          "description": "Episode number"
+          "type": "number"
         },
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -1311,8 +1262,7 @@
       "default": "Are you sure you want to mark {count} episodes as watched?",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -1326,8 +1276,7 @@
       "default": "You haven't watched {title} yet",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1341,8 +1290,7 @@
       "default": "{count} likes",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -1356,8 +1304,7 @@
       "default": "{count} replies",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -1374,8 +1321,7 @@
       "default": "Reply to {user}",
       "variables": {
         "user": {
-          "type": "string",
-          "description": "User reference"
+          "type": "string"
         }
       }
     },
@@ -1410,8 +1356,7 @@
       "default": "{username}'s profile",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1422,8 +1367,7 @@
       "default": "As if there wasn't enough hidden already. {username}'s secrets remain their own.",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1440,8 +1384,7 @@
       "default": "Remove {title} from list",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1470,8 +1413,7 @@
       "default": "Add or remove {title} from lists",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1479,12 +1421,10 @@
       "default": "Add {title} to {list}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1492,12 +1432,10 @@
       "default": "Remove {title} from {list}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1505,12 +1443,10 @@
       "default": "Are you sure you want to remove {title} from {list}?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1533,8 +1469,7 @@
       "default": "Results for {query}",
       "variables": {
         "query": {
-          "type": "string",
-          "description": "Search query"
+          "type": "string"
         }
       }
     },
@@ -1593,8 +1528,7 @@
       "default": "View all items in {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1635,8 +1569,7 @@
       "default": "Check in {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1680,8 +1613,7 @@
       "default": "{count} shows watched",
       "variables": {
         "count": {
-          "type": "number",
-          "description": "Numeric count"
+          "type": "number"
         }
       }
     },
@@ -1692,8 +1624,7 @@
       "default": "Follow {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1704,8 +1635,7 @@
       "default": "Unfollow {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1713,8 +1643,7 @@
       "default": "Are you sure you want to unfollow {username}?",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1746,8 +1675,7 @@
       "default": "Rename your list {name}",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },

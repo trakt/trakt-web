@@ -32,7 +32,9 @@ describe('IOSGenerator', () => {
         },
       },
       messages: {
-        simple_message: 'Hello World',
+        simple_message: {
+          default: 'Hello World',
+        },
         greeting: {
           default: 'Hello, {name}!',
           description: 'Greeting message with user name',
@@ -42,7 +44,6 @@ describe('IOSGenerator', () => {
           variables: {
             name: {
               type: 'string',
-              description: 'User display name',
             },
           },
         },
@@ -52,7 +53,6 @@ describe('IOSGenerator', () => {
           variables: {
             count: {
               type: 'number',
-              description: 'Number of items',
             },
           },
         },
@@ -72,11 +72,9 @@ describe('IOSGenerator', () => {
           variables: {
             userName: {
               type: 'string',
-              description: 'The user name',
             },
             count: {
               type: 'number',
-              description: 'Message count',
             },
           },
         },
@@ -147,7 +145,9 @@ describe('IOSGenerator', () => {
           },
         },
         messages: {
-          simple_message: 'Hola Mundo',
+          simple_message: {
+            default: 'Hola Mundo',
+          },
           greeting: {
             default: 'Hola, {name}!',
             platforms: {
@@ -156,7 +156,6 @@ describe('IOSGenerator', () => {
             variables: {
               name: {
                 type: 'string',
-                description: 'User display name',
               },
             },
           },
@@ -265,7 +264,9 @@ describe('IOSGenerator', () => {
           },
         },
         messages: {
-          included_message: 'This should be included',
+          included_message: {
+            default: 'This should be included',
+          },
           excluded_message: {
             default: 'This should be excluded from iOS',
             exclude: [Platform.IOS],
@@ -302,7 +303,9 @@ describe('IOSGenerator', () => {
           },
         },
         messages: {
-          included_message: 'Included in English',
+          included_message: {
+            default: 'Included in English',
+          },
           excluded_message: {
             default: 'Excluded from iOS',
             exclude: [Platform.IOS],
@@ -321,7 +324,9 @@ describe('IOSGenerator', () => {
           },
         },
         messages: {
-          included_message: 'Incluido en Español',
+          included_message: {
+            default: 'Incluido en Español',
+          },
           excluded_message: {
             default: 'Excluido de iOS',
             exclude: [Platform.IOS],
