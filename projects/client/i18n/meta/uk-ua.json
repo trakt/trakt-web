@@ -45,8 +45,7 @@
       "default": "Привіт, {name}",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },
@@ -57,8 +56,7 @@
       "default": "{count} епізодів",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -72,8 +70,7 @@
       "default": "{count} епізодів",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -105,8 +102,7 @@
       "default": "Додати {title} до вашого списку перегляду",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -114,8 +110,7 @@
       "default": "Позначити {title} як переглянуте",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -123,8 +118,7 @@
       "default": "Відмітити {title} як переглянуте до цього місця",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -243,8 +237,7 @@
       "default": "Прибрати {title} зі списку перегляду",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -330,8 +323,7 @@
       "default": "{number} переглядів",
       "variables": {
         "number": {
-          "type": "string",
-          "description": "Numeric value"
+          "type": "string"
         }
       }
     },
@@ -432,8 +424,7 @@
       "default": "{count} дивляться",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -444,8 +435,7 @@
       "default": "{count} серій переглянуто",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -456,8 +446,7 @@
       "default": "{count} фільмів переглянуто",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -468,8 +457,7 @@
       "default": "Розгорнути {category}",
       "variables": {
         "category": {
-          "type": "string",
-          "description": "Category name"
+          "type": "string"
         }
       }
     },
@@ -477,8 +465,7 @@
       "default": "{count} ще",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -516,8 +503,7 @@
       "default": "Дивитися {title} зараз",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -525,8 +511,7 @@
       "default": "Логотип {service}",
       "variables": {
         "service": {
-          "type": "string",
-          "description": "Service name"
+          "type": "string"
         }
       }
     },
@@ -768,8 +753,7 @@
       "default": "Видалити {title} зі списку Переглянутого",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -777,8 +761,7 @@
       "default": "Ви впевнені, що хочете видалити {title} зі списку Переглянутого? Усі перегляди буде видалено.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -786,8 +769,7 @@
       "default": "Видалити цей перегляд {title} зі списку Переглянуто",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -795,8 +777,7 @@
       "default": "Ви впевнені, що хочете видалити це відтворення {title} зі списку Переглянуто?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -807,8 +788,7 @@
       "default": "Сезон {number}",
       "variables": {
         "number": {
-          "type": "string",
-          "description": "Numeric value"
+          "type": "string"
         }
       }
     },
@@ -819,8 +799,7 @@
       "default": "Розгорнути огляд {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -828,12 +807,10 @@
       "default": "Сезон {season} • Епізод {number}",
       "variables": {
         "season": {
-          "type": "string",
-          "description": "Season number"
+          "type": "string"
         },
         "number": {
-          "type": "string",
-          "description": "Numeric value"
+          "type": "string"
         }
       }
     },
@@ -841,8 +818,7 @@
       "default": "Поділитись {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -892,8 +868,7 @@
       "default": "Фото {person}",
       "variables": {
         "person": {
-          "type": "string",
-          "description": "Person name"
+          "type": "string"
         }
       }
     },
@@ -904,8 +879,7 @@
       "default": "{count} в очікуванні",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -931,8 +905,7 @@
       "default": "Ви впевнені, що хочете видалити {title} зі свого списку перегляду?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -979,8 +952,7 @@
       "default": "Додати {title} до улюблених",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -988,8 +960,7 @@
       "default": "Видалити {title} з улюблених",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -997,8 +968,7 @@
       "default": "Ви впевнені, що хочете видалити {title} з улюблених?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1039,8 +1009,7 @@
       "default": "Меню для {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1051,8 +1020,7 @@
       "default": "{title} не з'являється в жодному популярному списку.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1063,8 +1031,7 @@
       "default": "Аватар {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1072,8 +1039,7 @@
       "default": "Постер {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1153,8 +1119,7 @@
       "default": "Щойно знайшов {title} – обов'язково подивіться! 🎬",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1162,8 +1127,7 @@
       "default": "Знайшов/Знайшла цей чудовий серіал: {title}! 📺",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1171,20 +1135,16 @@
       "default": "Ось що я щойно подивився/подивилася {show} S{season}E{episode} - {title}! 🔥",
       "variables": {
         "show": {
-          "type": "string",
-          "description": "Show title"
+          "type": "string"
         },
         "season": {
-          "type": "string",
-          "description": "Season number"
+          "type": "string"
         },
         "episode": {
-          "type": "string",
-          "description": "Episode number"
+          "type": "string"
         },
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1192,8 +1152,7 @@
       "default": "Перегляньте {name} на Trakt! 🎭",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },
@@ -1231,8 +1190,7 @@
       "default": "Ви впевнені, що хочете відмовитися від {title} серіалу? Це видалить його з вашого списку наступного перегляду.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1240,8 +1198,7 @@
       "default": "Позначити серіал {title} як відхилений",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1264,8 +1221,7 @@
       "default": "Ви впевнені, що хочете відновити медіа-контент {title}? Це відновить його у вашому прогресі та календарі.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1273,8 +1229,7 @@
       "default": "Відновити медіа-контент {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1285,8 +1240,7 @@
       "default": "Впевнені, що хочете відмітити {title} як переглянуте? Це відмітить всі серії.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1294,16 +1248,13 @@
       "default": "Ви впевнені, що хочете відмітити всі непроглянуті епізоди {title} як переглянуті до епізоду {episode}? Це позначить {count} епізоди як переглянуті.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "episode": {
-          "type": "string",
-          "description": "Episode number"
+          "type": "string"
         },
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1311,8 +1262,7 @@
       "default": "Впевнені, що хочете відмітити {count} серій як переглянуті?",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1326,8 +1276,7 @@
       "default": "Ви ще не дивилися {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1341,8 +1290,7 @@
       "default": "{count} вподобайок",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1356,8 +1304,7 @@
       "default": "{count} відповідей",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1374,8 +1321,7 @@
       "default": "Відповісти {user}",
       "variables": {
         "user": {
-          "type": "string",
-          "description": "User reference"
+          "type": "string"
         }
       }
     },
@@ -1410,8 +1356,7 @@
       "default": "Профіль {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1422,8 +1367,7 @@
       "default": "Ніби й так забагато прихованого. Секрети {username} залишаються їхніми.",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1440,8 +1384,7 @@
       "default": "Видалити {title} зі списку",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1470,8 +1413,7 @@
       "default": "Додати або видалити {title} зі списків",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1479,12 +1421,10 @@
       "default": "Додати {title} до {list}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1492,12 +1432,10 @@
       "default": "Видалити {title} з {list}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1505,12 +1443,10 @@
       "default": "Ви впевнені, що хочете видалити {title} з {list}?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1533,8 +1469,7 @@
       "default": "Результати для {query}",
       "variables": {
         "query": {
-          "type": "string",
-          "description": "Search query"
+          "type": "string"
         }
       }
     },
@@ -1593,8 +1528,7 @@
       "default": "Переглянути все у {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1635,8 +1569,7 @@
       "default": "Відмітитися {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1680,8 +1613,7 @@
       "default": "{count} переглянуто серіалів",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1692,8 +1624,7 @@
       "default": "Слідкувати за {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1704,8 +1635,7 @@
       "default": "Відписатися від {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1713,8 +1643,7 @@
       "default": "Ви впевнені, що хочете відписатися від {username}?",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1746,8 +1675,7 @@
       "default": "Перейменувати ваш список {name}",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },

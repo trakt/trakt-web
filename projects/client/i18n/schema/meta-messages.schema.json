@@ -133,11 +133,8 @@
                             "currency"
                           ],
                           "description": "Variable type"
-                        },
-                        "description": {
-                          "type": "string",
-                          "description": "Description of the variable"
                         }
+
                       },
                       "required": ["type"]
                     }

@@ -45,8 +45,7 @@
       "default": "¡Hola, {name}!",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },
@@ -57,8 +56,7 @@
       "default": "Quedan {count}",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -72,8 +70,7 @@
       "default": "{count} episodios",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -105,8 +102,7 @@
       "default": "Añade {title} a tu Lista",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -114,8 +110,7 @@
       "default": "Marcar {title} como visto",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -123,8 +118,7 @@
       "default": "Marcar {title} como visto hasta aquí",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -243,8 +237,7 @@
       "default": "Quitar {title} de tu Lista",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -330,8 +323,7 @@
       "default": "{number} reproducciones",
       "variables": {
         "number": {
-          "type": "string",
-          "description": "Numeric value"
+          "type": "string"
         }
       }
     },
@@ -432,8 +424,7 @@
       "default": "{count} disfrutando",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -444,8 +435,7 @@
       "default": "{count} episodios vistos",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -456,8 +446,7 @@
       "default": "{count} películas vistas",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -468,8 +457,7 @@
       "default": "Expandir {category}",
       "variables": {
         "category": {
-          "type": "string",
-          "description": "Category name"
+          "type": "string"
         }
       }
     },
@@ -477,8 +465,7 @@
       "default": "{count} más",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -516,8 +503,7 @@
       "default": "Mira {title} ahora",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -525,8 +511,7 @@
       "default": "Logo de {service}",
       "variables": {
         "service": {
-          "type": "string",
-          "description": "Service name"
+          "type": "string"
         }
       }
     },
@@ -768,8 +753,7 @@
       "default": "Quitar {title} de tu lista de Vistos",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -777,8 +761,7 @@
       "default": "¿Estás seguro de que quieres eliminar {title} de tu lista de Vistos? Se eliminarán todas las reproducciones.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -786,8 +769,7 @@
       "default": "Eliminar esta reproducción de {title} de tu lista de Visto",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -795,8 +777,7 @@
       "default": "¿Estás seguro de que quieres eliminar esta reproducción de {title} de tu lista de Vistos?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -807,8 +788,7 @@
       "default": "Temporada {number}",
       "variables": {
         "number": {
-          "type": "string",
-          "description": "Numeric value"
+          "type": "string"
         }
       }
     },
@@ -819,8 +799,7 @@
       "default": "Expandir descripción de {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -828,12 +807,10 @@
       "default": "Temporada {season} • Episodio {number}",
       "variables": {
         "season": {
-          "type": "string",
-          "description": "Season number"
+          "type": "string"
         },
         "number": {
-          "type": "string",
-          "description": "Numeric value"
+          "type": "string"
         }
       }
     },
@@ -841,8 +818,7 @@
       "default": "Comparte {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -892,8 +868,7 @@
       "default": "Foto de {person}",
       "variables": {
         "person": {
-          "type": "string",
-          "description": "Person name"
+          "type": "string"
         }
       }
     },
@@ -904,8 +879,7 @@
       "default": "{count} con ansias",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -931,8 +905,7 @@
       "default": "¿Seguro que quieres quitar {title} de tu lista de pendientes?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -979,8 +952,7 @@
       "default": "Agregar {title} a tus Favoritos",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -988,8 +960,7 @@
       "default": "Quitar {title} de tus Favoritos",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -997,8 +968,7 @@
       "default": "¿Seguro que quieres quitar {title} de tus Favoritos?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1039,8 +1009,7 @@
       "default": "Menú emergente para {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1051,8 +1020,7 @@
       "default": "{title} no aparece en ninguna lista popular.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1063,8 +1031,7 @@
       "default": "Avatar de {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1072,8 +1039,7 @@
       "default": "Póster de {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1153,8 +1119,7 @@
       "default": "¡Acabo de descubrir {title} - ¡Tienes que verlo! 🎬",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1162,8 +1127,7 @@
       "default": "¡Encontré esta increíble serie: {title}! 📺",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1171,20 +1135,16 @@
       "default": "¡Acabo de ver {show} T{season}E{episode} - {title}! 🔥",
       "variables": {
         "show": {
-          "type": "string",
-          "description": "Show title"
+          "type": "string"
         },
         "season": {
-          "type": "string",
-          "description": "Season number"
+          "type": "string"
         },
         "episode": {
-          "type": "string",
-          "description": "Episode number"
+          "type": "string"
         },
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1192,8 +1152,7 @@
       "default": "¡Mira a {name} en Trakt! 🎭",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },
@@ -1231,8 +1190,7 @@
       "default": "¿Estás seguro de que quieres eliminar la serie {title}? Esto lo eliminará de tu lista de próximos episodios.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1240,8 +1198,7 @@
       "default": "Marcar la serie {title} como eliminada",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1264,8 +1221,7 @@
       "default": "¿Estás seguro de que quieres restaurar la serie de {title}? Esto restaurará tu progreso y calendario.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1273,8 +1229,7 @@
       "default": "Restaurar serie {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1285,8 +1240,7 @@
       "default": "¿Estás seguro de que quieres marcar {title} como visto? Esto marcará todos los episodios como vistos.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1294,16 +1248,13 @@
       "default": "¿Estás seguro de que quieres marcar todos los episodios no vistos de {title} como vistos hasta el episodio {episode}? Esto marcará {count} episodios como vistos.",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "episode": {
-          "type": "string",
-          "description": "Episode number"
+          "type": "string"
         },
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1311,8 +1262,7 @@
       "default": "¿Estás seguro de que quieres marcar {count} episodios como vistos?",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1326,8 +1276,7 @@
       "default": "Aún no has visto {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1341,8 +1290,7 @@
       "default": "{count} me gusta(n)",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1356,8 +1304,7 @@
       "default": "{count} respuestas",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1374,8 +1321,7 @@
       "default": "Responder a {user}",
       "variables": {
         "user": {
-          "type": "string",
-          "description": "User reference"
+          "type": "string"
         }
       }
     },
@@ -1410,8 +1356,7 @@
       "default": "Perfil de {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1422,8 +1367,7 @@
       "default": "Como si no hubiera suficiente oculto ya. Los secretos de {username} son solo suyos.",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1440,8 +1384,7 @@
       "default": "Eliminar {title} de la lista",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1470,8 +1413,7 @@
       "default": "Añadir o quitar {title} de listas",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1479,12 +1421,10 @@
       "default": "Añadir {title} a {list}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1492,12 +1432,10 @@
       "default": "Quitar {title} de {list}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1505,12 +1443,10 @@
       "default": "¿Seguro que quieres quitar {title} de {list}?",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         },
         "list": {
-          "type": "string",
-          "description": "List name"
+          "type": "string"
         }
       }
     },
@@ -1533,8 +1469,7 @@
       "default": "Resultados para {query}",
       "variables": {
         "query": {
-          "type": "string",
-          "description": "Search query"
+          "type": "string"
         }
       }
     },
@@ -1593,8 +1528,7 @@
       "default": "Ver todos en {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1635,8 +1569,7 @@
       "default": "Registrarse {title}",
       "variables": {
         "title": {
-          "type": "string",
-          "description": "Content title"
+          "type": "string"
         }
       }
     },
@@ -1680,8 +1613,7 @@
       "default": "{count} series vistas",
       "variables": {
         "count": {
-          "type": "string",
-          "description": "Numeric count"
+          "type": "string"
         }
       }
     },
@@ -1692,8 +1624,7 @@
       "default": "Seguir a {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1704,8 +1635,7 @@
       "default": "Dejar de seguir a {username}",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1713,8 +1643,7 @@
       "default": "¿Estás seguro de que quieres dejar de seguir a {username}?",
       "variables": {
         "username": {
-          "type": "string",
-          "description": "Username"
+          "type": "string"
         }
       }
     },
@@ -1746,8 +1675,7 @@
       "default": "Renombrar tu lista {name}",
       "variables": {
         "name": {
-          "type": "string",
-          "description": "User or entity name"
+          "type": "string"
         }
       }
     },

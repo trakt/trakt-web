@@ -7,9 +7,9 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { firstItem } from '../../../src/lib/utils/assert/firstItem.ts';
-import type { PlatformGenerator } from '../core/I18nGenerator.ts';
 import type { MetaMessages } from '../model/MetaMessages.ts';
 import { Platform } from '../model/Platform.ts';
+import type { PlatformGenerator } from '../model/PlatformGenerator.ts';
 import { WebGenerator } from './WebGenerator.ts';
 
 describe('WebGenerator', () => {
@@ -40,14 +40,16 @@ describe('WebGenerator', () => {
         },
       },
       messages: {
-        simple_message: 'Hello World',
+        simple_message: {
+          default: 'Hello World',
+          description: 'A simple greeting message',
+        },
         greeting: {
           default: 'Hello, {name}!',
           description: 'Greeting message with user name',
           variables: {
             name: {
               type: 'string',
-              description: 'User display name',
             },
           },
         },
@@ -79,7 +81,9 @@ describe('WebGenerator', () => {
         },
       },
       messages: {
-        included_message: 'This should be included',
+        included_message: {
+          default: 'This should be included',
+        },
         excluded_message: {
           default: 'This should be excluded',
           exclude: ['web' as Platform],
@@ -107,7 +111,9 @@ describe('WebGenerator', () => {
         },
       },
       messages: {
-        test: 'Test message',
+        test: {
+          default: 'This message should not be generated',
+        },
       },
     };
 
@@ -128,7 +134,10 @@ describe('WebGenerator', () => {
         },
       },
       messages: {
-        simple: 'Simple message',
+        simple: {
+          default: 'Simple message',
+          description: 'A simple message without variables',
+        },
       },
     };
 
