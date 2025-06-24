@@ -25,6 +25,10 @@
           "enum": ["ltr", "rtl"],
           "description": "Text direction for the locale"
         },
+        "guidance": {
+          "type": "string",
+          "description": "Optional guidance for AI translation specific to this locale. Describes cultural nuances, formality levels, regional preferences, or other language-specific considerations that should be taken into account during translation."
+        },
         "generator": {
           "type": "object",
           "description": "Generator configuration",
@@ -134,7 +138,6 @@
                           ],
                           "description": "Variable type"
                         }
-
                       },
                       "required": ["type"]
                     }
