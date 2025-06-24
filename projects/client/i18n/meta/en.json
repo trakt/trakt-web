@@ -57,7 +57,7 @@
       "default": "{count} remaining",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -72,7 +72,7 @@
       "default": "{count} episodes",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -330,7 +330,7 @@
       "default": "{number} plays",
       "variables": {
         "number": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric value"
         }
       }
@@ -432,7 +432,7 @@
       "default": "{count} watching",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -444,7 +444,7 @@
       "default": "{count} episodes watched",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -456,7 +456,7 @@
       "default": "{count} movies watched",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -477,7 +477,7 @@
       "default": "{count} more",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -807,7 +807,7 @@
       "default": "Season {number}",
       "variables": {
         "number": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric value"
         }
       }
@@ -828,11 +828,11 @@
       "default": "Season {season} • Episode {number}",
       "variables": {
         "season": {
-          "type": "string",
+          "type": "number",
           "description": "Season number"
         },
         "number": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric value"
         }
       }
@@ -904,7 +904,7 @@
       "default": "{count} eager",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -1175,11 +1175,11 @@
           "description": "Show title"
         },
         "season": {
-          "type": "string",
+          "type": "number",
           "description": "Season number"
         },
         "episode": {
-          "type": "string",
+          "type": "number",
           "description": "Episode number"
         },
         "title": {
@@ -1298,11 +1298,11 @@
           "description": "Content title"
         },
         "episode": {
-          "type": "string",
+          "type": "number",
           "description": "Episode number"
         },
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -1311,7 +1311,7 @@
       "default": "Are you sure you want to mark {count} episodes as watched?",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -1341,7 +1341,7 @@
       "default": "{count} likes",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -1356,7 +1356,7 @@
       "default": "{count} replies",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
@@ -1680,7 +1680,7 @@
       "default": "{count} shows watched",
       "variables": {
         "count": {
-          "type": "string",
+          "type": "number",
           "description": "Numeric count"
         }
       }
