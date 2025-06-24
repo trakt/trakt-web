@@ -16,18 +16,11 @@ function generateContent(metaMessages: MetaMessages): Record<string, string> {
 
   for (const [key, definition] of Object.entries(metaMessages.messages)) {
     // Check if this message should be excluded from Web
-    if (
-      typeof definition !== 'string' &&
-      definition.exclude?.includes('web' as Platform)
-    ) {
+    if (definition.exclude?.includes('web' as Platform)) {
       continue;
     }
 
-    if (typeof definition === 'string') {
-      result[key] = definition;
-    } else {
-      result[key] = definition.default;
-    }
+    result[key] = definition.default;
   }
 
   return result;

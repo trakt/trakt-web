@@ -17,27 +17,16 @@ function generateContent(metaMessages: MetaMessages): string {
 
   for (const [key, definition] of Object.entries(metaMessages.messages)) {
     // Check if this message should be excluded from Android
-    if (
-      typeof definition !== 'string' &&
-      definition.exclude?.includes('android' as Platform)
-    ) {
+    if (definition.exclude?.includes('android' as Platform)) {
       continue;
     }
 
-    let text: string;
-    let actualKey: string;
-
-    if (typeof definition === 'string') {
-      text = definition;
-      actualKey = key;
-    } else {
-      text = definition.default;
-      actualKey = definition.platforms?.android?.key || key;
-    }
+    const text = definition.default;
+    const actualKey = definition.platforms?.android?.key || key;
 
     const androidText = convertToAndroidFormat(
       text,
-      typeof definition === 'string' ? {} : (definition.variables || {}),
+      definition.variables,
     );
     const escapedText = escapeXml(androidText);
     entries.push(`    <string name="${actualKey}">${escapedText}</string>`);

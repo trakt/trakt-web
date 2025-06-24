@@ -92,7 +92,7 @@ describe('generateFromMeta', () => {
     });
 
     it('should ignore non-JSON files in directory', async () => {
-      await createMetaFile('en', { hello: 'Hello World' });
+      await createMetaFile('en', { hello: { default: 'Hello World' } });
       await fs.promises.writeFile(
         path.join(metaDir, 'not-json.txt'),
         'ignored',
@@ -106,7 +106,7 @@ describe('generateFromMeta', () => {
   describe('successful generation', () => {
     it('should generate resources for single locale', async () => {
       await createMetaFile('en', {
-        hello: 'Hello World',
+        hello: { default: 'Hello World' },
         greeting: {
           default: 'Hello, {name}!',
           variables: {
@@ -126,12 +126,12 @@ describe('generateFromMeta', () => {
 
     it('should generate resources for multiple locales', async () => {
       await createMetaFile('en', {
-        hello: 'Hello World',
-        goodbye: 'Goodbye',
+        hello: { default: 'Hello World' },
+        goodbye: { default: 'Goodbye' },
       });
       await createMetaFile('es', {
-        hello: 'Hola Mundo',
-        goodbye: 'Adiós',
+        hello: { default: 'Hola Mundo' },
+        goodbye: { default: 'Adiós' },
       });
 
       const results = await generateFromMeta(metaDir, tempDir);
@@ -151,7 +151,7 @@ describe('generateFromMeta', () => {
     });
 
     it('should use specified platforms when provided', async () => {
-      await createMetaFile('en', { hello: 'Hello World' });
+      await createMetaFile('en', { hello: { default: 'Hello World' } });
 
       const results = await generateFromMeta(metaDir, tempDir, [Platform.WEB]);
 
@@ -180,7 +180,7 @@ describe('generateFromMeta', () => {
             },
           },
         },
-        messages: { hello: 'Hello World' },
+        messages: { hello: { default: 'Hello World' } },
       };
 
       await fs.promises.writeFile(
@@ -195,7 +195,7 @@ describe('generateFromMeta', () => {
     });
 
     it('should create output files in correct locations', async () => {
-      await createMetaFile('en', { hello: 'Hello World' });
+      await createMetaFile('en', { hello: { default: 'Hello World' } });
 
       const outputDir = path.join(tempDir, 'output');
       const results = await generateFromMeta(metaDir, outputDir);
@@ -209,7 +209,7 @@ describe('generateFromMeta', () => {
 
     it('should handle complex meta structures', async () => {
       await createMetaFile('en', {
-        simple: 'Simple message',
+        simple: { default: 'Simple message' },
         complex: {
           default: 'Complex {type} with {count} items',
           description: 'A complex message with variables',
