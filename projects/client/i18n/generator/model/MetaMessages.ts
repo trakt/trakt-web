@@ -10,6 +10,7 @@ export interface MetaMessages {
     locale: string;
     fallbackLocale?: string;
     direction?: 'ltr' | 'rtl';
+    guidance?: string;
     generator?: {
       inlang?: {
         enabled: boolean;

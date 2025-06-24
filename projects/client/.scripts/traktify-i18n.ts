@@ -35,9 +35,11 @@ const model = genAi.getGenerativeModel({
 function generateMultiLocalePromptText({
   messages,
   locales,
+  localeInstructions,
 }: {
   messages: Record<string, MetaMessageDefinition>;
   locales: string[];
+  localeInstructions: Record<string, string | undefined>;
 }): string {
   // Build context information for each message
   const contextualData = Object.entries(messages).map(
@@ -53,6 +55,12 @@ function generateMultiLocalePromptText({
     },
   );
 
+  const guidanceInfo = Object.entries(localeInstructions).map((
+    [locale, guidance],
+  ) => guidance ? `For ${locale}: ${guidance}` : '').filter(Boolean).join(
+    '\n          ',
+  );
+
   return `Translate this JSON data to multiple languages for Trakt Lite, a media-centric app for tracking and discovering movies, TV shows, and more.
 
           Target languages: ${locales.join(', ')}
@@ -61,6 +69,8 @@ function generateMultiLocalePromptText({
 
           For short texts (under 50-100 characters), keep the translation concise. 
           For longer texts, sprinkle in some fun movie/show references (not too many!).
+
+          ${guidanceInfo}
 
           Important: 
 
@@ -100,9 +110,14 @@ function generateMultiLocalePromptText({
 async function translateMessages(
   messages: Record<string, MetaMessageDefinition>,
   locales: string[],
+  localeInstructions: Record<string, string | undefined>,
 ): Promise<Record<string, TranslationMap>> {
   const result = await model.generateContent(
-    generateMultiLocalePromptText({ messages: messages, locales }),
+    generateMultiLocalePromptText({
+      messages,
+      locales,
+      localeInstructions,
+    }),
   );
 
   const response = JSON.parse(result.response.text());
@@ -156,11 +171,13 @@ async function translateAllLocales(): Promise<void> {
 
     // Find new keys for each locale
     const localeNewKeys: Record<string, string[]> = {};
+    const localeInstructions: Record<string, string | undefined> = {};
     const allNewKeysSet = new Set<string>();
 
     for (const locale of targetLocales) {
       // Load existing meta file or create template
       const existingMeta = await loadMetaFileOrCreateTemplate(locale);
+      localeInstructions[locale] = existingMeta.meta.guidance;
       const existingTranslations = extractTranslationKeys(
         existingMeta.messages,
       );
@@ -198,6 +215,7 @@ async function translateAllLocales(): Promise<void> {
     const allTranslations = await translateMessages(
       keysToTranslate,
       targetLocales,
+      localeInstructions,
     );
 
     // Process and save results for each locale
