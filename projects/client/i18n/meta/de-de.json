@@ -3,6 +3,7 @@
   "meta": {
     "locale": "de-de",
     "direction": "ltr",
+    "guidance": "Use German film/TV terminology. Prefer 'Film' over 'Movie', 'Serie' for shows. Keep the enthusiasm for cinema culture - Germans love their Kino! Use formal 'Sie' for interface elements but casual tone for community features.",
     "generator": {
       "inlang": {
         "enabled": true,

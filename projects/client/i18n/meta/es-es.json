@@ -3,6 +3,7 @@
   "meta": {
     "locale": "es-es",
     "direction": "ltr",
+    "guidance": "Use Peninsular Spanish conventions and vocabulary. Prefer 'película' over 'filme' and maintain European Spanish formality levels.",
     "generator": {
       "inlang": {
         "enabled": true,
