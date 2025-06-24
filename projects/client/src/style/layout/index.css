@@ -64,7 +64,6 @@
   --mobile-navbar-height: calc(var(--ni-56) + env(safe-area-inset-bottom, 0));
   --footer-bar-padding: var(--ni-40);
 
-  --layout-distance-side: var(--ni-24);
   --layout-scrollbar-width: var(--ni-8);
   --layout-footer-less-padding: var(--ni-16);
 

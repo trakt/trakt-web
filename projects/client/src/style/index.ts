@@ -9,6 +9,7 @@ import './numeric-increments/index.css';
 import './sizing/index.css';
 
 import './layout/index.css';
+import './layout/modes.scss';
 
 import './transitions/index.css';
 
