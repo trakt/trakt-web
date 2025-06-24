@@ -25,7 +25,7 @@ export const IOSGenerator: PlatformGenerator = {
       console.warn('No meta messages provided for iOS generation.');
       return [];
     }
-    
+
     const iosConfig = firstMeta.meta.generator?.ios;
     if (!iosConfig?.enabled) {
       return [];
@@ -50,27 +50,16 @@ export const IOSGenerator: PlatformGenerator = {
     for (const meta of metaMessages) {
       for (const [key, definition] of Object.entries(meta.messages)) {
         // Check if this message should be excluded from iOS
-        if (
-          typeof definition !== 'string' &&
-          definition.exclude?.includes('ios' as Platform)
-        ) {
+        if (definition.exclude?.includes('ios' as Platform)) {
           continue;
         }
 
-        let text: string;
-        let actualKey: string;
-
-        if (typeof definition === 'string') {
-          text = definition;
-          actualKey = key;
-        } else {
-          text = definition.default;
-          actualKey = definition.platforms?.ios?.key || key;
-        }
+        const text = definition.default;
+        const actualKey = definition.platforms?.ios?.key || key;
 
         const iosText = convertToIOSFormat(
           text,
-          typeof definition === 'string' ? {} : (definition.variables || {}),
+          definition.variables || {},
         );
 
         if (!unifiedCatalog.strings[actualKey]) {
@@ -80,8 +69,8 @@ export const IOSGenerator: PlatformGenerator = {
         }
 
         assertDefined(
-          unifiedCatalog.strings[actualKey], 
-          'Catalogue entry not found'
+          unifiedCatalog.strings[actualKey],
+          'Catalogue entry not found',
         ).localizations[meta.meta.locale] = {
           stringUnit: {
             state: 'translated',
@@ -101,5 +90,5 @@ export const IOSGenerator: PlatformGenerator = {
       filePath,
       content,
     }];
-  }
+  },
 };

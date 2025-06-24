@@ -40,7 +40,7 @@ describe('I18nGenerator', () => {
         },
       },
       messages: {
-        simple_message: 'Hello World',
+        simple_message: { default: 'Hello World' },
         greeting: {
           default: 'Hello, {name}!',
           description: 'Greeting message with user name',
@@ -404,7 +404,7 @@ describe('I18nGenerator', () => {
             ios: { enabled: true, outputPath: './ios/Localizable.xcstrings' },
           },
         },
-        messages: { simple: 'Hello' },
+        messages: { simple: { default: 'Hello' } },
       }]);
 
       const webResults = await simpleGenerator.generatePlatforms(
@@ -499,7 +499,7 @@ describe('I18nGenerator', () => {
           },
         },
         messages: {
-          common_message: 'Available everywhere',
+          common_message: { default: 'Available everywhere' },
           web_only: {
             default: 'Web only message',
             exclude: [Platform.ANDROID, Platform.IOS],
@@ -600,7 +600,7 @@ describe('I18nGenerator', () => {
           },
         },
         messages: {
-          simple_string: 'Simple message',
+          simple_string: { default: 'Simple message' },
         },
       }]);
 
@@ -627,7 +627,7 @@ describe('I18nGenerator', () => {
             },
           },
         },
-        messages: { test: 'Prueba' },
+        messages: { test: { default: 'Prueba' } },
       }]);
 
       const results = await singleLocaleGenerator.generatePlatforms([
@@ -651,7 +651,7 @@ describe('I18nGenerator', () => {
               },
             },
           },
-          messages: { test: 'Prueba España' },
+          messages: { test: { default: 'Prueba España' } },
         },
         {
           meta: {
@@ -665,7 +665,7 @@ describe('I18nGenerator', () => {
               },
             },
           },
-          messages: { test: 'Prueba México' },
+          messages: { test: { default: 'Prueba México' } },
         },
       ]);
 
@@ -699,7 +699,7 @@ describe('I18nGenerator', () => {
               },
             },
           },
-          messages: { test: 'Test US' },
+          messages: { test: { default: 'Test US' } },
         },
         {
           meta: {
@@ -713,7 +713,7 @@ describe('I18nGenerator', () => {
               },
             },
           },
-          messages: { test: 'Test GB' },
+          messages: { test: { default: 'Test GB' } },
         },
         {
           meta: {
@@ -727,7 +727,7 @@ describe('I18nGenerator', () => {
               },
             },
           },
-          messages: { test: 'Test IT' },
+          messages: { test: { default: 'Test IT' } },
         },
       ]);
 
