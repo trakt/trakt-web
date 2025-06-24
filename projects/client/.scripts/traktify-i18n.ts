@@ -275,21 +275,33 @@ function updateMetaFileWithTranslations(
 ): MetaMessages {
   const updatedMeta: MetaMessages = {
     ...existingMeta,
-    messages: { ...existingMeta.messages },
+    messages: {},
   };
 
-  for (const [key, translatedValue] of Object.entries(translations)) {
-    const sourceContext = sourceMessagesWithContext[key];
-    if (!sourceContext) continue;
-
-    if (!updatedMeta.messages[key]) {
+  // Iterate through source messages in their original order to preserve key ordering
+  for (
+    const [key, sourceMessage] of Object.entries(sourceMessagesWithContext)
+  ) {
+    if (existingMeta.messages[key]) {
+      // Keep existing message, update with translation if available
       updatedMeta.messages[key] = {
-        default: translatedValue,
-        variables: sourceContext.variables,
-        description: sourceContext.description,
+        ...existingMeta.messages[key],
+        default: translations[key] || existingMeta.messages[key].default,
       };
-    } else {
-      updatedMeta.messages[key].default = translatedValue;
+    } else if (translations[key]) {
+      // Add new translated message
+      updatedMeta.messages[key] = {
+        default: translations[key],
+        variables: sourceMessage.variables,
+        description: sourceMessage.description,
+      };
+    }
+  }
+
+  // Add any existing messages that aren't in the source (shouldn't happen but safety net)
+  for (const [key, existingMessage] of Object.entries(existingMeta.messages)) {
+    if (!updatedMeta.messages[key]) {
+      updatedMeta.messages[key] = existingMessage;
     }
   }
 
