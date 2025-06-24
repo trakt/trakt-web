@@ -10,6 +10,8 @@ node_modules
 .svelte-kit
 build
 projects/client/i18n/messages
+projects/client/i18n/android
+projects/client/i18n/ios
 
 # OS
 .DS_Store
