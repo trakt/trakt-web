@@ -35,20 +35,23 @@
   class:trakt-inset-all={inset === "all"}
   {...props}
 >
-  <div class="trakt-list-title">
-    {#if titleAction}
-      {@render titleAction()}
-    {/if}
-    {#if subtitle == null}
-      <ListTitle {title} style="primary" />
-    {:else}
-      <ListTitle {title} style="secondary" />
-      <ListTitle title={`/ ${subtitle}`} style="primary" />
-    {/if}
+  <div class="trakt-list-title-container">
+    <div class="trakt-list-title">
+      {#if titleAction}
+        {@render titleAction()}
+      {/if}
+      {#if subtitle == null}
+        <ListTitle {title} style="primary" />
+      {:else}
+        <ListTitle {title} style="secondary" />
+        <ListTitle title={`/ ${subtitle}`} style="primary" />
+      {/if}
+    </div>
     {#if badge}
       {@render badge()}
     {/if}
   </div>
+
   {#if actions != null && !hasHiddenActions}
     <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
       {@render actions()}
@@ -69,7 +72,7 @@
 
     &.trakt-list-inset-title {
       margin: 0;
-      margin-left: calc(var(--ni-72) + var(--layout-distance-side));
+      margin-left: var(--layout-distance-side);
       margin-right: var(--layout-distance-side);
       transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
 
@@ -93,16 +96,21 @@
       align-items: center;
     }
 
-    .trakt-list-title {
+    .trakt-list-title,
+    .trakt-list-title-container {
       display: flex;
       align-items: center;
-      gap: var(--gap-s);
+      gap: var(--gap-micro);
       min-width: 0;
 
       :global(.trakt-preview-badge) {
         // To visually align the badge with the title
         margin-top: var(--ni-8);
       }
+    }
+
+    .trakt-list-title-container {
+      gap: var(--gap-s);
     }
   }
 </style>

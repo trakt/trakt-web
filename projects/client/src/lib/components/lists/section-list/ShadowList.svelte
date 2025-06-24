@@ -143,12 +143,14 @@
 
   .shadow-list-container {
     --height-min-container: var(--ni-40);
-    --height-container: calc(var(--height-list) + var(--ni-40) + var(--gap-xl));
+    --height-container: calc(
+      var(--height-list) + var(--ni-40) + var(--list-header-gap)
+    );
 
     display: flex;
     flex-direction: column;
 
-    @include adaptive-list-gap();
+    gap: var(--list-header-gap);
 
     &.shadow-list-container-no-header {
       --height-container: var(--height-list);
@@ -186,7 +188,6 @@
 
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
     justify-content: center;
     align-items: center;
 

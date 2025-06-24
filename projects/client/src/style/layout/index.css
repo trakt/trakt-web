@@ -68,6 +68,8 @@
   --layout-scrollbar-width: var(--ni-8);
   --layout-footer-less-padding: var(--ni-16);
 
+  --list-header-gap: var(--gap-s);
+
   @-moz-document url-prefix() {
     --layout-scrollbar-width: var(--ni-16);
   }

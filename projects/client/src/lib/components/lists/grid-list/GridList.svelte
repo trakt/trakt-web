@@ -56,7 +56,7 @@
     display: flex;
     flex-direction: column;
 
-    @include adaptive-list-gap();
+    gap: var(--list-header-gap);
   }
 
   .trakt-list-items {
