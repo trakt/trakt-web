@@ -1,5 +1,6 @@
 <script lang="ts">
   import TagContent from "$lib/components/tags/TagContent.svelte";
+  import { stretchedPercentage } from "$lib/utils/number/stretchedPercentage";
 
   type ShowProgressTagProps = {
     total: number;
@@ -7,7 +8,7 @@
   } & ChildrenProps;
 
   const { children, total, progress }: ShowProgressTagProps = $props();
-  const percentage = $derived((progress / total) * 100);
+  const percentage = $derived(stretchedPercentage({ value: progress, total }));
 </script>
 
 <div
