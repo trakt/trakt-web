@@ -3,6 +3,7 @@
   "meta": {
     "locale": "es-mx",
     "direction": "ltr",
+    "guidance": "Use Mexican Spanish vocabulary and expressions. Prefer informal 'tú' over formal 'usted' in most contexts, and use Mexican-specific terms for media content.",
     "generator": {
       "inlang": {
         "enabled": true,

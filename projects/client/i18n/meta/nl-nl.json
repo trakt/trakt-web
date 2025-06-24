@@ -3,6 +3,7 @@
   "meta": {
     "locale": "nl-nl",
     "direction": "ltr",
+    "guidance": "Use Dutch with appreciation for both international cinema and Dutch productions. Say 'film' for movies, 'serie' for shows. Keep it straightforward but enthusiastic - Dutch audiences love quality storytelling and aren't afraid to binge-watch!",
     "generator": {
       "inlang": {
         "enabled": true,

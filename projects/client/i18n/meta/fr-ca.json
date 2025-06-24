@@ -3,6 +3,7 @@
   "meta": {
     "locale": "fr-ca",
     "direction": "ltr",
+    "guidance": "Use Quebec French with pride in francophone cinema and TV! Prefer Quebec expressions over European French. Say 'film' for movies, 'série' for shows. Keep it friendly and inclusive - Quebecois love their local productions alongside international hits.",
     "generator": {
       "inlang": {
         "enabled": true,

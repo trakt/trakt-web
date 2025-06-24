@@ -3,6 +3,7 @@
   "meta": {
     "locale": "fr-fr",
     "direction": "ltr",
+    "guidance": "Use formal 'vous' form for politeness and maintain a sophisticated tone. Prefer French film/TV terminology over anglicisms where appropriate.",
     "generator": {
       "inlang": {
         "enabled": true,
