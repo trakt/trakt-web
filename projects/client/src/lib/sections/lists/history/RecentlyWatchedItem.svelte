@@ -8,11 +8,15 @@
 
   type RecentlyWatchedItemProps = {
     media: HistoryEntry;
+    isActionable?: boolean;
     style?: "summary" | "cover";
   };
 
-  const { media: activity, style = "cover" }: RecentlyWatchedItemProps =
-    $props();
+  const {
+    media: activity,
+    style = "cover",
+    isActionable = false,
+  }: RecentlyWatchedItemProps = $props();
 </script>
 
 {#snippet popupActions()}
@@ -40,13 +44,17 @@
 {/snippet}
 
 {#if style === "cover"}
-  <ActivityItem activityAt={activity.watchedAt} {activity} {popupActions} />
+  <ActivityItem
+    activityAt={activity.watchedAt}
+    {activity}
+    popupActions={isActionable ? popupActions : undefined}
+  />
 {/if}
 
 {#if style === "summary"}
   <ActivitySummaryCard
     activityAt={activity.watchedAt}
     {activity}
-    {popupActions}
+    popupActions={isActionable ? popupActions : undefined}
   />
 {/if}
