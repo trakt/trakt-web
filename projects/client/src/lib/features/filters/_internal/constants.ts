@@ -26,8 +26,6 @@ const DECADE_FILTER: Filter = {
   options: generateDecadeOptions(),
 };
 
-// FIXME: add this filter back when filter is fixed server side
-/*
 const STREAMING_FILTER: Filter = {
   label: m.streaming(),
   key: FilterKey.Streaming,
@@ -41,7 +39,6 @@ const STREAMING_FILTER: Filter = {
     { label: m.watchnow_digital_release(), value: 'any' },
   ],
 };
-*/
 
 const RATINGS_FILTER: Filter = {
   label: m.ratings(),
@@ -69,7 +66,7 @@ const IGNORE_WATCHLISTED_FILTER: Filter = {
 
 export const FILTERS = [
   GENRE_FILTER,
-  // STREAMING_FILTER,
+  STREAMING_FILTER,
   DECADE_FILTER,
   RATINGS_FILTER,
   IGNORE_WATCHED_FILTER,
@@ -77,5 +74,5 @@ export const FILTERS = [
 ] as const;
 
 export const DEFAULT_TV_FILTERS = {
-  // [FilterKey.Streaming]: 'any_subscriptions',
+  [FilterKey.Streaming]: 'any_subscriptions',
 } as const;
