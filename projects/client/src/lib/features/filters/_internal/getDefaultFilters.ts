@@ -24,8 +24,7 @@ export function getDefaultFilters() {
   }
 
   const isTV = getDeviceType(globalThis.navigator.userAgent) === 'tv';
-  const hasDefaultFilters = Object.keys(DEFAULT_TV_FILTERS).length > 0;
-  if (isTV && hasDefaultFilters) {
+  if (isTV) {
     return DEFAULT_TV_FILTERS;
   }
 }
