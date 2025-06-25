@@ -31,7 +31,7 @@
       })}
   >
     {#snippet item(media)}
-      <RecentlyWatchedItem {media} />
+      <RecentlyWatchedItem {media} isActionable />
     {/snippet}
 
     {#snippet empty()}

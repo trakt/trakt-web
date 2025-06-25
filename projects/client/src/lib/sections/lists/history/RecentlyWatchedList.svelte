@@ -37,7 +37,7 @@
     urlBuilder={UrlBuilder.history.all}
   >
     {#snippet item(media)}
-      <RecentlyWatchedItem {media} />
+      <RecentlyWatchedItem {media} isActionable />
     {/snippet}
   </DrillableMediaList>
 {:else}

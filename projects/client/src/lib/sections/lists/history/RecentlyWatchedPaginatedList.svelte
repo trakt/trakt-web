@@ -25,6 +25,6 @@
     })}
 >
   {#snippet item(media)}
-    <RecentlyWatchedItem {media} {style} />
+    <RecentlyWatchedItem {media} {style} isActionable />
   {/snippet}
 </DrilledMediaList>
