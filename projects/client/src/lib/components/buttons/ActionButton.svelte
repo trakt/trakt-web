@@ -135,6 +135,7 @@
     width: var(--button-size);
     height: var(--button-size);
     padding: var(--ni-6);
+    box-sizing: border-box;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
