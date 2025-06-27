@@ -311,7 +311,6 @@ function updateMetaFileWithTranslations(
       updatedMeta.messages[key] = {
         default: translations[key],
         variables: sourceMessage.variables,
-        description: sourceMessage.description,
       };
     }
   }
