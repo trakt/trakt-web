@@ -30,15 +30,23 @@
 
 <MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
 
-<CastList title={m.actors()} cast={crew.cast} slug={media.slug} />
+<CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 
 <VideoList slug={media.slug} {videos} />
 
 <Comments {media} type="movie" />
 
-<RelatedList title={m.related_movies_title()} slug={media.slug} type="movie" />
+<RelatedList
+  title={m.list_title_related_movies()}
+  slug={media.slug}
+  type="movie"
+/>
 
 <!-- TODO: move back to designed position when we have faster queries -->
 <Lists slug={media.slug} title={media.title} type="movie" />
 
-<MediaWatchHistoryList title={m.recently_watched()} {media} type="movie" />
+<MediaWatchHistoryList
+  title={m.list_title_recently_watched()}
+  {media}
+  type="movie"
+/>

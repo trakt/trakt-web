@@ -20,7 +20,7 @@
     useList={useSocialActivityList}
     urlBuilder={UrlBuilder.social.activity}
     drilldownLabel={m.view_all_social_activity()}
-    title={m.social_activity_title()}
+    title={m.list_title_social_activity()}
   >
     {#snippet item(activity)}
       <SocialActivityItem {activity} />

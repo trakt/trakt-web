@@ -53,7 +53,7 @@
   {/snippet}
 </MediaSummary>
 
-<CastList title={m.actors()} cast={crew.cast} slug={media.slug} />
+<CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 
 <VideoList slug={media.slug} {videos} />
 
@@ -61,9 +61,17 @@
 
 <Comments {media} type="show" />
 
-<RelatedList title={m.related_shows_title()} slug={media.slug} type="show" />
+<RelatedList
+  title={m.list_title_related_shows()}
+  slug={media.slug}
+  type="show"
+/>
 
 <!-- TODO: move back to designed position when we have faster queries -->
 <Lists slug={media.slug} title={media.title} type="show" />
 
-<MediaWatchHistoryList title={m.recently_watched()} {media} type="show" />
+<MediaWatchHistoryList
+  title={m.list_title_recently_watched()}
+  {media}
+  type="show"
+/>

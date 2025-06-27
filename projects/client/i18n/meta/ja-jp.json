@@ -21,7 +21,7 @@
     }
   },
   "messages": {
-    "upcoming_schedule_title": {
+    "list_title_upcoming_schedule": {
       "default": "次回の予定"
     },
     "season_premiere": {
@@ -50,7 +50,7 @@
         }
       }
     },
-    "up_next_title": {
+    "list_title_up_next": {
       "default": "次に見る作品"
     },
     "remaining_episodes": {
@@ -278,13 +278,13 @@
     "landing_share_description": {
       "default": "コメント、評価、おすすめ情報を共有。"
     },
-    "trending": {
+    "list_title_trending": {
       "default": "話題の作品"
     },
-    "recommendations": {
+    "list_title_recommendations": {
       "default": "おすすめ"
     },
-    "most_anticipated": {
+    "list_title_most_anticipated": {
       "default": "最も期待されている作品"
     },
     "get": {
@@ -296,7 +296,7 @@
     "user_profile_label": {
       "default": "ユーザー情報"
     },
-    "most_popular": {
+    "list_title_most_popular": {
       "default": "最も人気のある作品"
     },
     "navbar_link_movies": {
@@ -340,16 +340,16 @@
     "logout": {
       "default": "ログアウト"
     },
-    "unreleased_movies_title": {
+    "list_title_coming_soon": {
       "default": "もうすぐ公開"
     },
     "tba_label": {
       "default": "未定"
     },
-    "related_movies_title": {
+    "list_title_related_movies": {
       "default": "関連する作品"
     },
-    "related_shows_title": {
+    "list_title_related_shows": {
       "default": "関連する番組"
     },
     "about_placeholder_1": {
@@ -429,7 +429,7 @@
         }
       }
     },
-    "shows": {
+    "list_title_show_credits": {
       "default": "番組"
     },
     "episodes_watched": {
@@ -440,7 +440,7 @@
         }
       }
     },
-    "movies": {
+    "list_title_movie_credits": {
       "default": "映画"
     },
     "movies_watched": {
@@ -494,10 +494,10 @@
     "navbar_link_lists_label": {
       "default": "リスト"
     },
-    "watchlist_shows": {
+    "list_title_watchlist_shows": {
       "default": "あなたの番組"
     },
-    "watchlist_movies": {
+    "list_title_watchlist_movies": {
       "default": "あなたの映画"
     },
     "watch_title_now": {
@@ -782,7 +782,7 @@
         }
       }
     },
-    "seasons_label": {
+    "list_title_seasons": {
       "default": "シーズン"
     },
     "season_number_label": {
@@ -873,7 +873,7 @@
         }
       }
     },
-    "actors": {
+    "list_title_actors": {
       "default": "出演者"
     },
     "anticipated_count": {
@@ -973,10 +973,10 @@
         }
       }
     },
-    "favorite_movies": {
+    "list_title_favorite_movies": {
       "default": "お気に入り映画"
     },
-    "favorite_shows": {
+    "list_title_favorite_shows": {
       "default": "お気に入り番組"
     },
     "favorite_movies_empty": {
@@ -1014,7 +1014,7 @@
         }
       }
     },
-    "popular_lists": {
+    "list_title_popular_lists": {
       "default": "人気のリスト"
     },
     "no_popular_lists": {
@@ -1056,7 +1056,7 @@
     "deleted_user": {
       "default": "削除済み"
     },
-    "social_activity_title": {
+    "list_title_social_activity": {
       "default": "ソーシャルアクティビティ"
     },
     "view_all_social_activity": {
@@ -1107,7 +1107,7 @@
     "position_created_by": {
       "default": "制作"
     },
-    "personal_lists": {
+    "list_title_personal_lists": {
       "default": "個人"
     },
     "collaborative_lists": {
@@ -1157,13 +1157,13 @@
         }
       }
     },
-    "recently_watched": {
+    "list_title_recently_watched": {
       "default": "最近視聴した"
     },
     "view_all_recently_watched": {
       "default": "最近視聴した全てを見る"
     },
-    "released_movies_title": {
+    "list_title_available_now": {
       "default": "今すぐ視聴可能"
     },
     "view_all_released_movies": {
@@ -1309,7 +1309,10 @@
         }
       }
     },
-    "comments": {
+    "list_title_comments": {
+      "default": "コメント"
+    },
+    "dialog_title_comments": {
       "default": "コメント"
     },
     "comment": {
@@ -1654,10 +1657,10 @@
     "vip_upsell_description": {
       "default": "月間と年間のレビューを見たいですか？ 他の多くの機能にもアクセスできます。 Trakt VIPに登録しましょう。"
     },
-    "following": {
+    "list_title_following": {
       "default": "フォロー中"
     },
-    "followers": {
+    "list_title_followers": {
       "default": "フォロワー"
     },
     "not_following_anyone": {
@@ -1680,7 +1683,7 @@
         }
       }
     },
-    "hot": {
+    "list_title_hot": {
       "default": "今月の話題作"
     },
     "hot_movies": {
@@ -1694,6 +1697,9 @@
     },
     "view_all_hot_movies": {
       "default": "人気映画をすべて見る"
+    },
+    "list_title_extras": {
+      "default": "エクストラ"
     }
   }
 }

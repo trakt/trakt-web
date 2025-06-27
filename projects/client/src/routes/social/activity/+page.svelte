@@ -10,9 +10,9 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
-  title={m.social_activity_title()}
+  title={m.list_title_social_activity()}
 >
   <TraktPageCoverSetter />
 
-  <SocialActivityPaginatedList title={m.social_activity_title()} />
+  <SocialActivityPaginatedList title={m.list_title_social_activity()} />
 </TraktPage>

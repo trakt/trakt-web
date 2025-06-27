@@ -19,7 +19,9 @@
     })),
   );
 
-  const title = $derived(type === "following" ? m.following() : m.followers());
+  const title = $derived(
+    type === "following" ? m.list_title_following() : m.list_title_followers(),
+  );
 </script>
 
 <SectionList

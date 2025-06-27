@@ -175,7 +175,7 @@
   </SummaryContainer>
 </RenderFor>
 
-<CastList title={m.actors()} cast={crew.cast} slug={show.slug} />
+<CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
 
 <SeasonList {show} {seasons} currentSeason={episode.season} />
 
@@ -187,10 +187,14 @@
   id={episode.id}
 />
 
-<RelatedList title={m.related_shows_title()} slug={show.slug} type="show" />
+<RelatedList
+  title={m.list_title_related_shows()}
+  slug={show.slug}
+  type="show"
+/>
 
 <MediaWatchHistoryList
-  title={m.recently_watched()}
+  title={m.list_title_recently_watched()}
   media={episode}
   type="episode"
 />

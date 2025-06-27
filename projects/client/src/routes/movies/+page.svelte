@@ -21,26 +21,30 @@
   <TraktPageCoverSetter />
 
   <TrendingList
-    title={m.trending()}
+    title={m.list_title_trending()}
     drilldownLabel={m.view_all_trending_movies()}
     {type}
   />
-  <HotList title={m.hot()} drilldownLabel={m.view_all_hot_movies()} {type} />
+  <HotList
+    title={m.list_title_hot()}
+    drilldownLabel={m.view_all_hot_movies()}
+    {type}
+  />
   <RenderFor audience="authenticated">
     <RecommendedList
       drilldownLabel={m.view_all_recommended_movies()}
-      title={m.recommendations()}
+      title={m.list_title_recommendations()}
       {type}
     />
   </RenderFor>
   <AnticipatedList
     drilldownLabel={m.view_all_anticipated_movies()}
-    title={m.most_anticipated()}
+    title={m.list_title_most_anticipated()}
     {type}
   />
   <PopularList
     drilldownLabel={m.view_all_popular_movies()}
-    title={m.most_popular()}
+    title={m.list_title_most_popular()}
     {type}
   />
 </TraktPage>

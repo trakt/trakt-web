@@ -21,7 +21,7 @@
     }
   },
   "messages": {
-    "upcoming_schedule_title": {
+    "list_title_upcoming_schedule": {
       "default": "Programmation à venir"
     },
     "season_premiere": {
@@ -50,7 +50,7 @@
         }
       }
     },
-    "up_next_title": {
+    "list_title_up_next": {
       "default": "À suivre"
     },
     "remaining_episodes": {
@@ -278,13 +278,13 @@
     "landing_share_description": {
       "default": "commentaires, notes et recommandations. "
     },
-    "trending": {
+    "list_title_trending": {
       "default": "Tendances"
     },
-    "recommendations": {
+    "list_title_recommendations": {
       "default": "Recommandations"
     },
-    "most_anticipated": {
+    "list_title_most_anticipated": {
       "default": "Les plus attendus"
     },
     "get": {
@@ -296,7 +296,7 @@
     "user_profile_label": {
       "default": "Profil utilisateur"
     },
-    "most_popular": {
+    "list_title_most_popular": {
       "default": "Les plus populaires"
     },
     "navbar_link_movies": {
@@ -340,16 +340,16 @@
     "logout": {
       "default": "Déconnexion"
     },
-    "unreleased_movies_title": {
+    "list_title_coming_soon": {
       "default": "Bientôt disponible"
     },
     "tba_label": {
       "default": "À venir"
     },
-    "related_movies_title": {
+    "list_title_related_movies": {
       "default": "Films apparentés"
     },
-    "related_shows_title": {
+    "list_title_related_shows": {
       "default": "Séries apparentées"
     },
     "about_placeholder_1": {
@@ -429,7 +429,7 @@
         }
       }
     },
-    "shows": {
+    "list_title_show_credits": {
       "default": "Séries"
     },
     "episodes_watched": {
@@ -440,7 +440,7 @@
         }
       }
     },
-    "movies": {
+    "list_title_movie_credits": {
       "default": "Films"
     },
     "movies_watched": {
@@ -494,10 +494,10 @@
     "navbar_link_lists_label": {
       "default": "Vos listes"
     },
-    "watchlist_shows": {
+    "list_title_watchlist_shows": {
       "default": "Vos séries"
     },
-    "watchlist_movies": {
+    "list_title_watchlist_movies": {
       "default": "Vos films"
     },
     "watch_title_now": {
@@ -782,7 +782,7 @@
         }
       }
     },
-    "seasons_label": {
+    "list_title_seasons": {
       "default": "Saisons"
     },
     "season_number_label": {
@@ -873,7 +873,7 @@
         }
       }
     },
-    "actors": {
+    "list_title_actors": {
       "default": "Acteurs"
     },
     "anticipated_count": {
@@ -973,10 +973,10 @@
         }
       }
     },
-    "favorite_movies": {
+    "list_title_favorite_movies": {
       "default": "Films favoris"
     },
-    "favorite_shows": {
+    "list_title_favorite_shows": {
       "default": "Séries favorites"
     },
     "favorite_movies_empty": {
@@ -1014,7 +1014,7 @@
         }
       }
     },
-    "popular_lists": {
+    "list_title_popular_lists": {
       "default": "Listes populaires"
     },
     "no_popular_lists": {
@@ -1056,7 +1056,7 @@
     "deleted_user": {
       "default": "Supprimé"
     },
-    "social_activity_title": {
+    "list_title_social_activity": {
       "default": "Activité Sociale"
     },
     "view_all_social_activity": {
@@ -1107,7 +1107,7 @@
     "position_created_by": {
       "default": "Créé par"
     },
-    "personal_lists": {
+    "list_title_personal_lists": {
       "default": "Personnelles"
     },
     "collaborative_lists": {
@@ -1157,13 +1157,13 @@
         }
       }
     },
-    "recently_watched": {
+    "list_title_recently_watched": {
       "default": "Récemment visionnés"
     },
     "view_all_recently_watched": {
       "default": "Voir tout récemment visionné"
     },
-    "released_movies_title": {
+    "list_title_available_now": {
       "default": "Disponibles maintenant"
     },
     "view_all_released_movies": {
@@ -1309,7 +1309,10 @@
         }
       }
     },
-    "comments": {
+    "list_title_comments": {
+      "default": "Commentaires"
+    },
+    "dialog_title_comments": {
       "default": "Commentaires"
     },
     "comment": {
@@ -1654,10 +1657,10 @@
     "vip_upsell_description": {
       "default": "Envie de voir votre bilan mensuel et annuel ? Et d'accéder à de nombreuses autres fonctionnalités ? Inscrivez-vous à Trakt VIP."
     },
-    "following": {
+    "list_title_following": {
       "default": "Abonnements"
     },
-    "followers": {
+    "list_title_followers": {
       "default": "Abonnés"
     },
     "not_following_anyone": {
@@ -1680,7 +1683,7 @@
         }
       }
     },
-    "hot": {
+    "list_title_hot": {
       "default": "Tendances du mois"
     },
     "hot_movies": {
@@ -1694,6 +1697,9 @@
     },
     "view_all_hot_movies": {
       "default": "Voir tous les films populaires"
+    },
+    "list_title_extras": {
+      "default": "Suppléments"
     }
   }
 }

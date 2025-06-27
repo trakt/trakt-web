@@ -34,7 +34,7 @@
       compareFn: (l, r) => l.show.id === r.show.id,
     })}
   urlBuilder={() => UrlBuilder.progress($user?.slug ?? "")}
-  title={m.up_next_title()}
+  title={m.list_title_up_next()}
   --height-list={mediaListHeightResolver("landscape")}
 >
   {#snippet badge()}

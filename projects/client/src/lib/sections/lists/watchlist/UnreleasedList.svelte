@@ -5,7 +5,7 @@
 </script>
 
 <WatchList
-  title={m.unreleased_movies_title()}
+  title={m.list_title_coming_soon()}
   drilldownLabel={m.view_all_unreleased_movies()}
   type="movie"
   status="unreleased"
