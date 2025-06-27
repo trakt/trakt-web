@@ -18,14 +18,14 @@
   <TraktPageCoverSetter />
 
   <WatchList
-    title={m.watchlist_movies()}
+    title={m.list_title_watchlist_movies()}
     drilldownLabel={m.view_all_watchlist_movies()}
     type="movie"
     status="all"
   />
 
   <WatchList
-    title={m.watchlist_shows()}
+    title={m.list_title_watchlist_shows()}
     drilldownLabel={m.view_all_watchlist_shows()}
     type="show"
     status="all"

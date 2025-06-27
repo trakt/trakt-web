@@ -38,7 +38,7 @@
     $activeComment?.id === id && $activeComment?.isReplying;
 </script>
 
-<Dialog title={m.comments()} {dialog} onClose={reset}>
+<Dialog title={m.dialog_title_comments()} {dialog} onClose={reset}>
   <div class="trakt-comment-threads">
     <CommentList
       id={`comment-threads-list-${media.slug}`}

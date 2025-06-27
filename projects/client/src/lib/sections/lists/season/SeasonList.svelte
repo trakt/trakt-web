@@ -20,7 +20,7 @@
     useSeasonEpisodes(show.slug, currentSeason),
   );
 
-  const title = m.seasons_label();
+  const title = m.list_title_seasons();
   const subtitle = $derived(seasonLabel(currentSeason));
 
   const episodeProps = $derived(

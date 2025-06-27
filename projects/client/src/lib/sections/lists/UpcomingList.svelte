@@ -12,7 +12,7 @@
 <SectionList
   id="upcoming-list"
   items={$calendar}
-  title={m.upcoming_schedule_title()}
+  title={m.list_title_upcoming_schedule()}
   --height-list={mediaListHeightResolver("landscape")}
 >
   {#snippet item(entry)}

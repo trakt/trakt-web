@@ -37,7 +37,7 @@
   <SectionList
     id={`popular-lists-list-${slug}`}
     items={lists}
-    title={m.popular_lists()}
+    title={m.list_title_popular_lists()}
     --height-list="var(--height-lists-list)"
   >
     {#snippet item(list)}

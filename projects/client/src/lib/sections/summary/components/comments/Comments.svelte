@@ -35,7 +35,7 @@
   <SectionList
     id={`comments-list-${media.slug}`}
     items={$comments}
-    title={m.comments()}
+    title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
   >
     {#snippet item(comment)}

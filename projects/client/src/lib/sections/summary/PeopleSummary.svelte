@@ -34,5 +34,5 @@
   <SummaryOverview title={person.name} overview={person.biography} />
 </SummaryContainer>
 
-<CreditsList title={m.movies()} type="movie" {person} />
-<CreditsList title={m.shows()} type="show" {person} />
+<CreditsList title={m.list_title_movie_credits()} type="movie" {person} />
+<CreditsList title={m.list_title_show_credits()} type="show" {person} />

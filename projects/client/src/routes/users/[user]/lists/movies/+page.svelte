@@ -21,9 +21,9 @@
   const title = $derived.by(() => {
     switch (status) {
       case "released":
-        return m.released_movies_title();
+        return m.list_title_available_now();
       case "unreleased":
-        return m.unreleased_movies_title();
+        return m.list_title_coming_soon();
       default:
         return m.your_watchlist_movies();
     }

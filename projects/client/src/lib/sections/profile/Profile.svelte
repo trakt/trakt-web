@@ -45,21 +45,21 @@
 
 <RecentlyWatchedList
   drilldownLabel={m.view_all_recently_watched()}
-  title={m.recently_watched()}
+  title={m.list_title_recently_watched()}
   {slug}
 />
 
 <FavoritesList
   {slug}
   type="movie"
-  title={m.favorite_movies()}
+  title={m.list_title_favorite_movies()}
   emptyMessage={m.favorite_movies_empty()}
 />
 
 <FavoritesList
   {slug}
   type="show"
-  title={m.favorite_shows()}
+  title={m.list_title_favorite_shows()}
   emptyMessage={m.favorite_shows_empty()}
 />
 

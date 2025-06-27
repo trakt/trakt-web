@@ -21,7 +21,7 @@
     }
   },
   "messages": {
-    "upcoming_schedule_title": {
+    "list_title_upcoming_schedule": {
       "default": "Kommande schema"
     },
     "season_premiere": {
@@ -50,7 +50,7 @@
         }
       }
     },
-    "up_next_title": {
+    "list_title_up_next": {
       "default": "Nästa"
     },
     "remaining_episodes": {
@@ -278,13 +278,13 @@
     "landing_share_description": {
       "default": "Kommentarer, betyg och rekommendationer."
     },
-    "trending": {
+    "list_title_trending": {
       "default": "Trendigt"
     },
-    "recommendations": {
+    "list_title_recommendations": {
       "default": "Rekommendationer"
     },
-    "most_anticipated": {
+    "list_title_most_anticipated": {
       "default": "Mest efterlängtade"
     },
     "get": {
@@ -296,7 +296,7 @@
     "user_profile_label": {
       "default": "Användarprofil"
     },
-    "most_popular": {
+    "list_title_most_popular": {
       "default": "Mest populära"
     },
     "navbar_link_movies": {
@@ -340,16 +340,16 @@
     "logout": {
       "default": "Logga ut"
     },
-    "unreleased_movies_title": {
+    "list_title_coming_soon": {
       "default": "Kommer snart"
     },
     "tba_label": {
       "default": "TBA"
     },
-    "related_movies_title": {
+    "list_title_related_movies": {
       "default": "Relaterade filmer"
     },
-    "related_shows_title": {
+    "list_title_related_shows": {
       "default": "Relaterade serier"
     },
     "about_placeholder_1": {
@@ -429,7 +429,7 @@
         }
       }
     },
-    "shows": {
+    "list_title_show_credits": {
       "default": "Serier"
     },
     "episodes_watched": {
@@ -440,7 +440,7 @@
         }
       }
     },
-    "movies": {
+    "list_title_movie_credits": {
       "default": "Filmer"
     },
     "movies_watched": {
@@ -494,10 +494,10 @@
     "navbar_link_lists_label": {
       "default": "Utforska listor"
     },
-    "watchlist_shows": {
+    "list_title_watchlist_shows": {
       "default": "Dina serier"
     },
-    "watchlist_movies": {
+    "list_title_watchlist_movies": {
       "default": "Dina filmer"
     },
     "watch_title_now": {
@@ -782,7 +782,7 @@
         }
       }
     },
-    "seasons_label": {
+    "list_title_seasons": {
       "default": "Säsonger"
     },
     "season_number_label": {
@@ -873,7 +873,7 @@
         }
       }
     },
-    "actors": {
+    "list_title_actors": {
       "default": "Skådespelare"
     },
     "anticipated_count": {
@@ -973,10 +973,10 @@
         }
       }
     },
-    "favorite_movies": {
+    "list_title_favorite_movies": {
       "default": "Favoritfilmer"
     },
-    "favorite_shows": {
+    "list_title_favorite_shows": {
       "default": "Favoritprogram"
     },
     "favorite_movies_empty": {
@@ -1014,7 +1014,7 @@
         }
       }
     },
-    "popular_lists": {
+    "list_title_popular_lists": {
       "default": "Populära listor"
     },
     "no_popular_lists": {
@@ -1056,7 +1056,7 @@
     "deleted_user": {
       "default": "Raderad"
     },
-    "social_activity_title": {
+    "list_title_social_activity": {
       "default": "Social aktivitet"
     },
     "view_all_social_activity": {
@@ -1107,7 +1107,7 @@
     "position_created_by": {
       "default": "Skapad av"
     },
-    "personal_lists": {
+    "list_title_personal_lists": {
       "default": "Personliga"
     },
     "collaborative_lists": {
@@ -1157,13 +1157,13 @@
         }
       }
     },
-    "recently_watched": {
+    "list_title_recently_watched": {
       "default": "Nyligen sett"
     },
     "view_all_recently_watched": {
       "default": "Se allt nyligen sett"
     },
-    "released_movies_title": {
+    "list_title_available_now": {
       "default": "Tillgänglig nu"
     },
     "view_all_released_movies": {
@@ -1309,7 +1309,10 @@
         }
       }
     },
-    "comments": {
+    "list_title_comments": {
+      "default": "Kommentarer"
+    },
+    "dialog_title_comments": {
       "default": "Kommentarer"
     },
     "comment": {
@@ -1654,10 +1657,10 @@
     "vip_upsell_description": {
       "default": "Vill du se din månads- och årsöversikt? Och få tillgång till många andra funktioner? Registrera dig för Trakt VIP."
     },
-    "following": {
+    "list_title_following": {
       "default": "Följer"
     },
-    "followers": {
+    "list_title_followers": {
       "default": "Följare"
     },
     "not_following_anyone": {
@@ -1680,7 +1683,7 @@
         }
       }
     },
-    "hot": {
+    "list_title_hot": {
       "default": "Populärt den här månaden"
     },
     "hot_movies": {
@@ -1694,6 +1697,9 @@
     },
     "view_all_hot_movies": {
       "default": "Se alla populära filmer"
+    },
+    "list_title_extras": {
+      "default": "Extramaterial"
     }
   }
 }

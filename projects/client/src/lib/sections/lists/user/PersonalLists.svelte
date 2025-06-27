@@ -18,7 +18,7 @@
   const title = $derived.by(() => {
     switch (type) {
       case "personal":
-        return m.personal_lists();
+        return m.list_title_personal_lists();
       case "liked":
         return m.liked_lists();
       case "collaboration":

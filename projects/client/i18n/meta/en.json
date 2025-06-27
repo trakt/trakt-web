@@ -20,8 +20,9 @@
     }
   },
   "messages": {
-    "upcoming_schedule_title": {
-      "default": "Upcoming Schedule"
+    "list_title_upcoming_schedule": {
+      "default": "Upcoming Schedule",
+      "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible."
     },
     "season_premiere": {
       "default": "Season Premiere"
@@ -49,8 +50,9 @@
         }
       }
     },
-    "up_next_title": {
-      "default": "Up Next"
+    "list_title_up_next": {
+      "default": "Up Next",
+      "description": "Title for lists containing the next episodes to watch of aired episodes. This title should be as short and concise as possible."
     },
     "remaining_episodes": {
       "default": "{count} remaining",
@@ -277,14 +279,17 @@
     "landing_share_description": {
       "default": "comments, ratings and recommendations."
     },
-    "trending": {
-      "default": "Trending"
+    "list_title_trending": {
+      "default": "Trending",
+      "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible."
     },
-    "recommendations": {
-      "default": "Recommendations"
+    "list_title_recommendations": {
+      "default": "Recommendations",
+      "description": "Title for lists containing recommended movies or shows. This title should be as short and concise as possible."
     },
-    "most_anticipated": {
-      "default": "Most Anticipated"
+    "list_title_most_anticipated": {
+      "default": "Most Anticipated",
+      "description": "Title for lists containing most anticipated movies or shows. This title should be as short and concise as possible."
     },
     "get": {
       "default": "Get"
@@ -295,8 +300,9 @@
     "user_profile_label": {
       "default": "User Profile"
     },
-    "most_popular": {
-      "default": "Most Popular"
+    "list_title_most_popular": {
+      "default": "Most Popular",
+      "description": "Title for lists containing most popular movies or shows. This title should be as short and concise as possible."
     },
     "navbar_link_movies": {
       "default": "Movies"
@@ -339,17 +345,20 @@
     "logout": {
       "default": "Logout"
     },
-    "unreleased_movies_title": {
-      "default": "Coming Soon"
+    "list_title_coming_soon": {
+      "default": "Coming Soon",
+      "description": "Title for lists containing watchlisted movies that are coming soon. This title should be as short and concise as possible."
     },
     "tba_label": {
       "default": "TBA"
     },
-    "related_movies_title": {
-      "default": "Related Movies"
+    "list_title_related_movies": {
+      "default": "Related Movies",
+      "description": "Title for lists containing related movies. This title should be as short and concise as possible."
     },
-    "related_shows_title": {
-      "default": "Related Shows"
+    "list_title_related_shows": {
+      "default": "Related Shows",
+      "description": "Title for lists containing related shows. This title should be as short and concise as possible."
     },
     "about_placeholder_1": {
       "default": "This user is a mystery, shrouded in enigma... (or maybe just lazy? Who knows, this is the internet.)"
@@ -428,8 +437,9 @@
         }
       }
     },
-    "shows": {
-      "default": "Shows"
+    "list_title_show_credits": {
+      "default": "Shows",
+      "description": "Title for lists containing shows related to a person's credits. This title should be as short and concise as possible."
     },
     "episodes_watched": {
       "default": "{count} episodes watched",
@@ -439,8 +449,9 @@
         }
       }
     },
-    "movies": {
-      "default": "Movies"
+    "list_title_movie_credits": {
+      "default": "Movies",
+      "description": "Title for lists containing movies related to a person's credits. This title should be as short and concise as possible."
     },
     "movies_watched": {
       "default": "{count} movies watched",
@@ -493,11 +504,13 @@
     "navbar_link_lists_label": {
       "default": "Browse your lists"
     },
-    "watchlist_shows": {
-      "default": "Your Shows"
+    "list_title_watchlist_shows": {
+      "default": "Your Shows",
+      "description": "Title for lists containing shows in the user's watchlist. This title should be as short and concise as possible."
     },
-    "watchlist_movies": {
-      "default": "Your Movies"
+    "list_title_watchlist_movies": {
+      "default": "Your Movies",
+      "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible."
     },
     "watch_title_now": {
       "default": "Watch {title} now",
@@ -781,8 +794,9 @@
         }
       }
     },
-    "seasons_label": {
-      "default": "Seasons"
+    "list_title_seasons": {
+      "default": "Seasons",
+      "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible."
     },
     "season_number_label": {
       "default": "Season {number}",
@@ -872,8 +886,9 @@
         }
       }
     },
-    "actors": {
-      "default": "Actors"
+    "list_title_actors": {
+      "default": "Actors",
+      "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible."
     },
     "anticipated_count": {
       "default": "{count} eager",
@@ -972,11 +987,13 @@
         }
       }
     },
-    "favorite_movies": {
-      "default": "Favorite Movies"
+    "list_title_favorite_movies": {
+      "default": "Favorite Movies",
+      "description": "Title for lists containing a user's favorite movies. This title should be as short and concise as possible."
     },
-    "favorite_shows": {
-      "default": "Favorite Shows"
+    "list_title_favorite_shows": {
+      "default": "Favorite Shows",
+      "description": "Title for lists containing a user's favorite shows. This title should be as short and concise as possible."
     },
     "favorite_movies_empty": {
       "default": "Your favorite movies list is empty."
@@ -1013,8 +1030,9 @@
         }
       }
     },
-    "popular_lists": {
-      "default": "Popular lists"
+    "list_title_popular_lists": {
+      "default": "Popular lists",
+      "description": "Title for lists containing popular lists of movies or shows. This title should be as short and concise as possible."
     },
     "no_popular_lists": {
       "default": "{title} does not appear on any popular lists.",
@@ -1055,8 +1073,9 @@
     "deleted_user": {
       "default": "Deleted"
     },
-    "social_activity_title": {
-      "default": "Social Activity"
+    "list_title_social_activity": {
+      "default": "Social Activity",
+      "description": "Title for lists containing recently watched items of the profiles the user follows. This title should be as short and concise as possible."
     },
     "view_all_social_activity": {
       "default": "View all social activity"
@@ -1106,8 +1125,9 @@
     "position_created_by": {
       "default": "Created By"
     },
-    "personal_lists": {
-      "default": "Personal"
+    "list_title_personal_lists": {
+      "default": "Personal",
+      "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible."
     },
     "collaborative_lists": {
       "default": "Collaborations"
@@ -1156,14 +1176,16 @@
         }
       }
     },
-    "recently_watched": {
-      "default": "Recently Watched"
+    "list_title_recently_watched": {
+      "default": "Recently Watched",
+      "description": "Title for lists containing recently watched movies or episodes. This title should be as short and concise as possible."
     },
     "view_all_recently_watched": {
       "default": "View all recently watched"
     },
-    "released_movies_title": {
-      "default": "Available Now"
+    "list_title_available_now": {
+      "default": "Available Now",
+      "description": "Title for lists containing watchlisted movies that are currently available to watch. This title should be as short and concise as possible."
     },
     "view_all_released_movies": {
       "default": "View all movies available now"
@@ -1308,8 +1330,13 @@
         }
       }
     },
-    "comments": {
-      "default": "Comments"
+    "list_title_comments": {
+      "default": "Comments",
+      "description": "Title for lists containing comments on a movie, show, or episode. This title should be as short and concise as possible."
+    },
+    "dialog_title_comments": {
+      "default": "Comments",
+      "description": "Title for the comments dialog."
     },
     "comment": {
       "default": "Comment"
@@ -1653,11 +1680,13 @@
     "vip_upsell_description": {
       "default": "Want to see your month and year in review? And get access to many other features? Sign up for Trakt VIP."
     },
-    "following": {
-      "default": "Following"
+    "list_title_following": {
+      "default": "Following",
+      "description": "Title for lists containing the profiles the user follows. This title should be as short and concise as possible."
     },
-    "followers": {
-      "default": "Followers"
+    "list_title_followers": {
+      "default": "Followers",
+      "description": "Title for lists containing the profiles following the user. This title should be as short and concise as possible."
     },
     "not_following_anyone": {
       "default": "There is no one here (yet)."
@@ -1679,8 +1708,9 @@
         }
       }
     },
-    "hot": {
-      "default": "Hot This Month"
+    "list_title_hot": {
+      "default": "Hot This Month",
+      "description": "Title for lists containing hot movies or shows this month. This title should be as short and concise as possible."
     },
     "hot_movies": {
       "default": "Hot Movies This Month"
@@ -1693,6 +1723,10 @@
     },
     "view_all_hot_movies": {
       "default": "View all hot movies"
+    },
+    "list_title_extras": {
+      "default": "Extras",
+      "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible."
     }
   }
 }

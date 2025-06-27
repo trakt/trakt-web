@@ -4,6 +4,7 @@
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
@@ -48,7 +49,7 @@
   <ShadowList
     id={`video-list-${slug}`}
     {items}
-    title="Extras"
+    title={m.list_title_extras()}
     --height-list={mediaListHeightResolver("landscape")}
     headerNavigationType={DpadNavigationType.List}
   >

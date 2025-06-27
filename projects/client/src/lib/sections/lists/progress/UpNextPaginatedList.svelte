@@ -30,7 +30,7 @@
         useUpNextList({ type: $type, limit: params.limit, page: params.page }),
       compareFn: (l, r) => l.show.id === r.show.id,
     })}
-  title={m.up_next_title()}
+  title={m.list_title_up_next()}
 >
   {#snippet badge()}
     <UpNextLabSwitch />
