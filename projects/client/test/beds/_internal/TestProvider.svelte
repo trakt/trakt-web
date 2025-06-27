@@ -11,7 +11,7 @@
 </script>
 
 <!-- TODO: add more providers here as we expand test suite -->
-<AuthProvider isAuthorized={false} isAuthorizedLegacy={$isAuthorized}>
+<AuthProvider isAuthorized={$isAuthorized} isAuthorizedLegacy={false}>
   <QueryClientProvider client={new QueryClient()}>
     <SearchProvider type="movie">
       <NavigationProvider device="unknown">
