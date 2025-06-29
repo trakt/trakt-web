@@ -14,5 +14,8 @@
 >
   <TraktPageCoverSetter />
 
-  <RecommendedPaginatedList title={m.recommended_movies()} type="movie" />
+  <RecommendedPaginatedList
+    title={m.list_title_recommended_movies()}
+    type="movie"
+  />
 </TraktPage>

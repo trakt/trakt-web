@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Recomendaciones"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Recomendaciones"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Ver todas las series populares"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Series populares"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Películas populares"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Ver todas las series esperadas"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Películas anticipadas"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Series anticipadas"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Ver todas las series populares"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Películas populares"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Series populares"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Ver en"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "Tus listas para ver"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "Tus listas para ver"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Tendencias del mes"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Películas en tendencia este mes"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Series en tendencia este mes"
     },
     "view_all_hot_shows": {

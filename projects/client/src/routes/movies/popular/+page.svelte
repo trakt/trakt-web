@@ -14,5 +14,5 @@
 >
   <TraktPageCoverSetter />
 
-  <PopularPaginatedList title={m.popular_movies()} type="movie" />
+  <PopularPaginatedList title={m.list_title_popular_movies()} type="movie" />
 </TraktPage>

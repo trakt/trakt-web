@@ -36,7 +36,7 @@
       case "unreleased":
         return m.list_title_coming_soon();
       default:
-        return m.your_watchlist_movies();
+        return m.list_title_your_watchlist_movies();
     }
   });
 </script>

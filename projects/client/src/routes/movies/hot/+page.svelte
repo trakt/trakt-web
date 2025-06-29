@@ -14,5 +14,5 @@
 >
   <TraktPageCoverSetter />
 
-  <HotPaginatedList title={m.hot_movies()} type="movie" />
+  <HotPaginatedList title={m.list_title_hot_movies()} type="movie" />
 </TraktPage>

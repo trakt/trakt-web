@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Polecane filmy"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Polecane seriale"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Zobacz wszystkie popularne seriale"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Popularne seriale"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Popularne filmy"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Zobacz wszystkie wyczekiwane seriale"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Oczekiwane Filmy"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Oczekiwane Seriale"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Zobacz wszystkie popularne seriale"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Popularne filmy"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Popularne seriale"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Oglądaj na"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "Twoje seriale na liście do obejrzenia"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "Twoje filmy na liście do obejrzenia"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Gorące w tym miesiącu"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Gorące filmy w tym miesiącu"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Gorące seriale w tym miesiącu"
     },
     "view_all_hot_shows": {
