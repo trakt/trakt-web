@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Rekommenderade filmer"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Rekommenderade serier"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Se alla trendiga serier"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Trendiga serier"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Trendiga filmer"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Se alla förväntade serier"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Förväntade filmer"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Förväntade serier"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Se alla populära serier"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Populära filmer"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Populära serier"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Streama på"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "Dina to-watch-serier"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "Dina to-watch-filmer"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Populärt den här månaden"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Populära filmer denna månad"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Populära serier denna månad"
     },
     "view_all_hot_shows": {

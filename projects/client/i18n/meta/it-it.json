@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Film raccomandati"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Serie TV raccomandate"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Visualizza tutte le serie TV in tendenza"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Serie TV in tendenza"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Film in tendenza"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Visualizza tutte le serie TV in arrivo"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Film in arrivo"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Serie TV in arrivo"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Visualizza tutte le serie TV popolari"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Film popolari"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Serie TV popolari"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Guarda su"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "La tua Watchlist di serie TV"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "La tua Watchlist di film"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Popolari questo mese"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Film popolari questo mese"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Serie TV popolari questo mese"
     },
     "view_all_hot_shows": {

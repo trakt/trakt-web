@@ -14,5 +14,5 @@
 >
   <TraktPageCoverSetter />
 
-  <TrendingPaginatedList title={m.trending_shows()} type="show" />
+  <TrendingPaginatedList title={m.list_title_trending_shows()} type="show" />
 </TraktPage>

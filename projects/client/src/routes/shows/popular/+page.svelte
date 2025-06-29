@@ -14,5 +14,5 @@
 >
   <TraktPageCoverSetter />
 
-  <PopularPaginatedList title={m.popular_shows()} type="show" />
+  <PopularPaginatedList title={m.list_title_popular_shows()} type="show" />
 </TraktPage>

@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "おすすめ作品"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "おすすめ番組"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "話題のシリーズをすべて見る"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "話題のシリーズ"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "話題の作品"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "近日公開の番組をすべて表示"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "期待の作品"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "期待のシリーズ"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "人気のシリーズをすべて見る"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "人気の作品"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "人気のシリーズ"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "ストリーミング"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "視聴予定の作品"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "視聴予定の作品"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "今月の話題作"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "今月の人気映画"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "今月の人気番組"
     },
     "view_all_hot_shows": {

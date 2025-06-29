@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Препоръчани предавания"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Препоръчани предавания"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Виж всички популярни предавания в момента"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Популярни предавания"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Популярни филми"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Виж всички очаквани предавания"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Очаквани филми"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Очаквани предавания"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Виж всички популярни предаавания"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Популярни филми"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Популярни предавания"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Гледай в"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "Предвания, които наблюдаващ"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "Филми, които наблюдаваш"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Активно този месец"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Активни филми този месец"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Активни сериали този месец"
     },
     "view_all_hot_shows": {

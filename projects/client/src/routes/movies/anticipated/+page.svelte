@@ -14,5 +14,8 @@
 >
   <TraktPageCoverSetter />
 
-  <AnticipatedPaginatedList title={m.anticipated_movies()} type="movie" />
+  <AnticipatedPaginatedList
+    title={m.list_title_anticipated_movies()}
+    type="movie"
+  />
 </TraktPage>

@@ -16,7 +16,7 @@
   <TraktPageCoverSetter />
 
   <WatchlistPaginatedList
-    title={m.your_watchlist_shows()}
+    title={m.list_title_your_watchlist_shows()}
     status="all"
     type="show"
   />

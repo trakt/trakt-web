@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Empfohlene Filme"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Empfohlene Serien"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Alle Trendserien ansehen"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Trendserien"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Trendfilme"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Alle erwarteten Serien anzeigen"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Erwartete Filme"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Erwartete Serien"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Alle beliebten Serien ansehen"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Beliebte Filme"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Beliebte Serien"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Streamen auf"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "Deine Merkliste Serien"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "Deine Merkliste Filme"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Top des Monats"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Top Filme diesen Monat"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Top Serien diesen Monat"
     },
     "view_all_hot_shows": {

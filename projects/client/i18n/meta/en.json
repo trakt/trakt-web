@@ -62,10 +62,11 @@
         }
       }
     },
-    "recommended_movies": {
-      "default": "Recommended Movies"
+    "list_title_recommended_movies": {
+      "default": "Recommended Movies",
+      "description": "Title for lists containing recommended movies. This title should be as short and concise as possible."
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Recommended Shows"
     },
     "number_of_episodes": {
@@ -963,11 +964,13 @@
     "view_all_trending_shows": {
       "default": "View all trending shows"
     },
-    "trending_shows": {
-      "default": "Trending Shows"
+    "list_title_trending_shows": {
+      "default": "Trending Shows",
+      "description": "Title for lists containing trending shows. This title should be as short and concise as possible."
     },
-    "trending_movies": {
-      "default": "Trending Movies"
+    "list_title_trending_movies": {
+      "default": "Trending Movies",
+      "description": "Title for lists containing trending movies. This title should be as short and concise as possible."
     },
     "button_text_view_all": {
       "default": "View All",
@@ -996,11 +999,13 @@
     "view_all_anticipated_shows": {
       "default": "View all anticipated shows"
     },
-    "anticipated_movies": {
-      "default": "Anticipated Movies"
+    "list_title_anticipated_movies": {
+      "default": "Anticipated Movies",
+      "description": "Title for lists containing anticipated movies. This title should be as short and concise as possible."
     },
-    "anticipated_shows": {
-      "default": "Anticipated Shows"
+    "list_title_anticipated_shows": {
+      "default": "Anticipated Shows",
+      "description": "Title for lists containing anticipated shows. This title should be as short and concise as possible."
     },
     "view_all_popular_movies": {
       "default": "View all popular movies"
@@ -1008,11 +1013,13 @@
     "view_all_popular_shows": {
       "default": "View all popular shows"
     },
-    "popular_movies": {
-      "default": "Popular Movies"
+    "list_title_popular_movies": {
+      "default": "Popular Movies",
+      "description": "Title for lists containing popular movies. This title should be as short and concise as possible."
     },
-    "popular_shows": {
-      "default": "Popular Shows"
+    "list_title_popular_shows": {
+      "default": "Popular Shows",
+      "description": "Title for lists containing popular shows. This title should be as short and concise as possible."
     },
     "rate_now": {
       "default": "Rate now"
@@ -1073,11 +1080,13 @@
       "default": "Stream on",
       "description": "Header for the section that shows streaming services for a movie or show."
     },
-    "your_watchlist_shows": {
-      "default": "Your Watchlist Shows"
+    "list_title_your_watchlist_shows": {
+      "default": "Your Watchlist Shows",
+      "description": "Title for lists containing shows in the user's watchlist. This title should be as short and concise as possible."
     },
-    "your_watchlist_movies": {
-      "default": "Your Watchlist Movies"
+    "list_title_your_watchlist_movies": {
+      "default": "Your Watchlist Movies",
+      "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible."
     },
     "view_all_watchlist_movies": {
       "default": "View all watchlist movies"
@@ -1843,11 +1852,13 @@
       "default": "Hot This Month",
       "description": "Title for lists containing hot movies or shows this month. This title should be as short and concise as possible."
     },
-    "hot_movies": {
-      "default": "Hot Movies This Month"
+    "list_title_hot_movies": {
+      "default": "Hot Movies This Month",
+      "description": "Title for lists containing hot movies this month. This title should be as short and concise as possible."
     },
-    "hot_shows": {
-      "default": "Hot Shows This Month"
+    "list_title_hot_shows": {
+      "default": "Hot Shows This Month",
+      "description": "Title for lists containing hot shows this month. This title should be as short and concise as possible."
     },
     "view_all_hot_shows": {
       "default": "View all hot shows"

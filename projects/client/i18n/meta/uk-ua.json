@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Рекомендовані фільми"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Рекомендовані серіали"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Дивитись всі популярні серіали"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Популярні серіали"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Популярні фільми"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Переглянути всі очікувані серіали"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Очікувані фільми"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Очікувані серіали"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Переглянути всі популярні серіали"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Популярні фільми"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Популярні серіали"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Дивитися на"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "Ваш список перегляду"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "Ваш список перегляду"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Гаряче цього місяця"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Найкращі фільми цього місяця"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Найкращі серіали цього місяця"
     },
     "view_all_hot_shows": {

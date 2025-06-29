@@ -61,10 +61,10 @@
         }
       }
     },
-    "recommended_movies": {
+    "list_title_recommended_movies": {
       "default": "Anbefalede film"
     },
-    "recommended_shows": {
+    "list_title_recommended_shows": {
       "default": "Anbefalede serier"
     },
     "number_of_episodes": {
@@ -911,10 +911,10 @@
     "view_all_trending_shows": {
       "default": "Se alle populære serier"
     },
-    "trending_shows": {
+    "list_title_trending_shows": {
       "default": "Populære serier"
     },
-    "trending_movies": {
+    "list_title_trending_movies": {
       "default": "Populære film"
     },
     "button_text_view_all": {
@@ -943,10 +943,10 @@
     "view_all_anticipated_shows": {
       "default": "Se alle forventede serier"
     },
-    "anticipated_movies": {
+    "list_title_anticipated_movies": {
       "default": "Forventede film"
     },
-    "anticipated_shows": {
+    "list_title_anticipated_shows": {
       "default": "Forventede serier"
     },
     "view_all_popular_movies": {
@@ -955,10 +955,10 @@
     "view_all_popular_shows": {
       "default": "Se alle populære serier"
     },
-    "popular_movies": {
+    "list_title_popular_movies": {
       "default": "Populære film"
     },
-    "popular_shows": {
+    "list_title_popular_shows": {
       "default": "Populære serier"
     },
     "rate_now": {
@@ -1012,10 +1012,10 @@
     "header_stream_on": {
       "default": "Stream på"
     },
-    "your_watchlist_shows": {
+    "list_title_your_watchlist_shows": {
       "default": "Dine serier på listen"
     },
-    "your_watchlist_movies": {
+    "list_title_your_watchlist_movies": {
       "default": "Dine film på listen"
     },
     "view_all_watchlist_movies": {
@@ -1731,10 +1731,10 @@
     "list_title_hot": {
       "default": "Populært i denne måned"
     },
-    "hot_movies": {
+    "list_title_hot_movies": {
       "default": "Populære film i denne måned"
     },
-    "hot_shows": {
+    "list_title_hot_shows": {
       "default": "Populære serier i denne måned"
     },
     "view_all_hot_shows": {
