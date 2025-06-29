@@ -39,7 +39,7 @@
 </script>
 
 <DropdownItem {...commonProps} style="flat">
-  {m.remove_from_list()}
+  {m.button_text_remove_from_list()}
 
   {#snippet icon()}
     <WatchlistIcon size="small" state="added" />

@@ -18,7 +18,7 @@
 
 <RenderFor audience="authenticated">
   <Button
-    label={m.comment_reply_label({ user: comment.user.username })}
+    label={m.button_label_comment_reply({ user: comment.user.username })}
     onclick={() => {
       onClick({ id: comment.id, isReplying: true });
     }}
@@ -29,6 +29,6 @@
     {#snippet icon()}
       <ReplyIcon />
     {/snippet}
-    {m.comment_reply()}
+    {m.button_text_comment_reply()}
   </Button>
 </RenderFor>

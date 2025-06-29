@@ -8,7 +8,7 @@
   const { onclick }: { onclick: () => void } = $props();
 
   const commonProps = {
-    label: m.add_comment(),
+    label: m.button_label_add_comment(),
     color: "purple" as const,
     variant: "secondary" as const,
   };
@@ -16,7 +16,7 @@
 
 <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
   <Button size="small" {onclick} {...commonProps}>
-    {m.add_comment()}
+    {m.button_text_add_comment()}
     {#snippet icon()}
       <ReplyIcon />
     {/snippet}

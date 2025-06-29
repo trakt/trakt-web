@@ -12,11 +12,11 @@
 <Button
   {size}
   onclick={logout}
-  label={m.logout()}
+  label={m.button_label_logout()}
   color="red"
   style="flat"
   variant="secondary"
   navigationType={DpadNavigationType.Item}
 >
-  {m.logout()}
+  {m.button_text_logout()}
 </Button>

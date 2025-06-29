@@ -19,11 +19,13 @@
 
   const label = $derived(
     $isFollowed
-      ? m.unfollow_label({ username: profile.name.first })
-      : m.follow_label({ username: profile.name.first }),
+      ? m.button_label_unfollow({ username: profile.name.first })
+      : m.button_label_follow({ username: profile.name.first }),
   );
 
-  const text = $derived($isFollowed ? m.unfollow() : m.follow());
+  const text = $derived(
+    $isFollowed ? m.button_text_unfollow() : m.button_text_follow(),
+  );
 </script>
 
 <Button

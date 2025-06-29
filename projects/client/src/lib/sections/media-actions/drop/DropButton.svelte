@@ -19,7 +19,7 @@
   );
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
-    label: m.drop_show_label({ title }),
+    label: m.button_label_drop_show({ title }),
     color: $color,
     variant: $variant,
     onclick: handler,
@@ -27,7 +27,7 @@
     ...events,
   });
 
-  const text = m.drop_show();
+  const text = m.button_text_drop_show();
 </script>
 
 {#if style === "normal"}

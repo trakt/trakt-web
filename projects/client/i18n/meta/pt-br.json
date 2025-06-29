@@ -87,19 +87,19 @@
     "mark_as_watched_ask_prompt": {
       "default": "Quando você terminou de assistir? (AAAA-MM-DD HH:MM)"
     },
-    "watchlist_action_label": {
+    "button_text_watchlist": {
       "default": "Assistir"
     },
-    "mark_as_watched": {
+    "button_text_mark_as_watched": {
       "default": "Marcar como Assistido"
     },
-    "mark_as_watched_until": {
+    "button_text_watched_until_here": {
       "default": "Assistido até aqui"
     },
-    "watch_again": {
+    "button_text_watch_again": {
       "default": "Rever"
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "Adicionar {title} à sua Lista Para Assistir",
       "variables": {
         "title": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "Marcar {title} como assistido",
       "variables": {
         "title": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "Marcar {title} como assistido até aqui",
       "variables": {
         "title": {
@@ -234,7 +234,7 @@
     "genre_science_fiction": {
       "default": "Ficção Científica"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "Remover {title} da sua Lista Para Assistir",
       "variables": {
         "title": {
@@ -245,10 +245,10 @@
     "search_placeholder": {
       "default": "Busque séries e filmes..."
     },
-    "join_trakt_button": {
+    "button_text_join_trakt": {
       "default": "Junte-se ao Trakt"
     },
-    "join_trakt_button_label": {
+    "button_label_join_trakt": {
       "default": "Junte-se ao trakt.tv para acompanhar o que você assiste"
     },
     "copyright_notice": {
@@ -257,7 +257,7 @@
     "copyright_crafted_by": {
       "default": "Feito com ❤️ ao redor do mundo"
     },
-    "join_trakt_for_free_button": {
+    "button_text_join_trakt_for_free": {
       "default": "Junte-se ao Trakt Grátis"
     },
     "landing_discover_label": {
@@ -287,35 +287,50 @@
     "list_title_most_anticipated": {
       "default": "Mais Esperados"
     },
-    "get": {
+    "button_text_get_vip": {
       "default": "Obter"
     },
-    "get_vip_label": {
+    "link_text_get_vip": {
+      "default": "Obter"
+    },
+    "button_label_get_vip": {
       "default": "Liberar recursos VIP"
     },
-    "user_profile_label": {
+    "link_label_get_vip": {
+      "default": "Desbloquear recursos VIP"
+    },
+    "button_label_user_profile": {
       "default": "Perfil do Usuário"
     },
     "list_title_most_popular": {
       "default": "Mais Populares"
     },
-    "navbar_link_movies": {
+    "button_text_browse_movies": {
       "default": "Filmes"
     },
-    "navbar_link_movies_label": {
+    "button_label_browse_movies": {
       "default": "Navegue pelos Filmes"
     },
-    "navbar_link_shows": {
+    "page_title_movies": {
+      "default": "Filmes"
+    },
+    "button_text_browse_shows": {
       "default": "Séries"
     },
-    "navbar_link_shows_label": {
+    "button_label_browse_shows": {
       "default": "Navegue pelas Séries"
     },
-    "navbar_link_home": {
+    "page_title_shows": {
+      "default": "Séries"
+    },
+    "button_text_home": {
       "default": "Início"
     },
-    "navbar_link_home_label": {
+    "button_label_home": {
       "default": "Página Inicial"
+    },
+    "page_title_home": {
+      "default": "Início"
     },
     "watchers": {
       "default": "Assistidos"
@@ -337,7 +352,10 @@
     "profile": {
       "default": "Perfil"
     },
-    "logout": {
+    "button_text_logout": {
+      "default": "Sair"
+    },
+    "button_label_logout": {
       "default": "Sair"
     },
     "list_title_coming_soon": {
@@ -415,10 +433,10 @@
     "unreleased_movies_empty": {
       "default": "Adicione filmes em breve à sua lista de acompanhamento e fique atualizado."
     },
-    "find_movies_link": {
+    "button_text_find_movies": {
       "default": "Encontre Filmes"
     },
-    "find_shows_link": {
+    "button_text_find_shows": {
       "default": "Encontre Séries"
     },
     "active_watchers": {
@@ -462,7 +480,7 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} mais",
       "variables": {
         "count": {
@@ -488,10 +506,13 @@
     "genre": {
       "default": "Gênero"
     },
-    "navbar_link_lists": {
+    "button_text_browse_lists": {
       "default": "Listas"
     },
-    "navbar_link_lists_label": {
+    "button_label_browse_lists": {
+      "default": "Listas"
+    },
+    "page_title_lists": {
       "default": "Listas"
     },
     "list_title_watchlist_shows": {
@@ -500,7 +521,7 @@
     "list_title_watchlist_movies": {
       "default": "Seus Filmes"
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "Assista {title} agora",
       "variables": {
         "title": {
@@ -747,10 +768,10 @@
     "job_creator": {
       "default": "Criador"
     },
-    "remove_from_watched": {
+    "button_text_remove_from_history": {
       "default": "Remover de Assistidos"
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "Remover {title} da sua lista de Assistidos",
       "variables": {
         "title": {
@@ -766,7 +787,7 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "Remover esta exibição de {title} da sua lista de Já Vistos",
       "variables": {
         "title": {
@@ -896,7 +917,7 @@
     "trending_movies": {
       "default": "Filmes Populares"
     },
-    "view_all": {
+    "button_text_view_all": {
       "default": "Ver Tudo"
     },
     "full_season": {
@@ -943,13 +964,13 @@
     "rate_now": {
       "default": "Avalie agora"
     },
-    "add_to_favorites": {
+    "button_text_add_to_favorites": {
       "default": "Adicionar aos Favoritos"
     },
-    "remove_from_favorites": {
+    "button_text_remove_from_favorites": {
       "default": "Remover dos Favoritos"
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "Adicionar {title} aos seus Favoritos",
       "variables": {
         "title": {
@@ -957,7 +978,7 @@
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "Remover {title} dos seus Favoritos",
       "variables": {
         "title": {
@@ -985,8 +1006,11 @@
     "favorite_shows_empty": {
       "default": "Sua lista de séries favoritas está vazia."
     },
-    "stream_on": {
+    "button_text_stream_on": {
       "default": "Assista em"
+    },
+    "header_stream_on": {
+      "default": "Assistir em"
     },
     "your_watchlist_shows": {
       "default": "Sua Lista para Ver"
@@ -1195,7 +1219,7 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "Marcar {title} como abandonado",
       "variables": {
         "title": {
@@ -1203,7 +1227,7 @@
         }
       }
     },
-    "drop_show": {
+    "button_text_drop_show": {
       "default": "Abandonar"
     },
     "enable_up_next_nitro_label": {
@@ -1226,7 +1250,7 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "Restaurar série {title}",
       "variables": {
         "title": {
@@ -1234,7 +1258,7 @@
         }
       }
     },
-    "restore_show": {
+    "button_text_restore_show": {
       "default": "Restaurar série"
     },
     "mark_as_watched_show_warning": {
@@ -1281,13 +1305,13 @@
         }
       }
     },
-    "like_comment_label": {
+    "button_label_like_comment": {
       "default": "Curtir comentário"
     },
-    "unlike_comment_label": {
+    "button_label_unlike_comment": {
       "default": "Descurtir comentário"
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} curtidas",
       "variables": {
         "count": {
@@ -1298,10 +1322,10 @@
     "close_label": {
       "default": "Fechar"
     },
-    "comment_replies_label": {
+    "button_label_comment_replies": {
       "default": "Respostas"
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} respostas",
       "variables": {
         "count": {
@@ -1318,10 +1342,10 @@
     "comment": {
       "default": "Comentário"
     },
-    "comment_reply": {
+    "button_text_comment_reply": {
       "default": "Responder"
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "Responder para {user}",
       "variables": {
         "user": {
@@ -1381,7 +1405,7 @@
     "view_all_comments": {
       "default": "Ver todos os comentários"
     },
-    "remove_from_list": {
+    "button_text_remove_from_list": {
       "default": "Remover da lista"
     },
     "remove_from_list_label": {
@@ -1401,7 +1425,10 @@
     "error_page_service_status": {
       "default": "Status do serviço Trakt"
     },
-    "retry": {
+    "button_text_retry": {
+      "default": "Tentar novamente"
+    },
+    "button_label_retry": {
       "default": "Tentar novamente"
     },
     "community_sentiment": {
@@ -1463,10 +1490,13 @@
     "theme_system": {
       "default": "Sistema"
     },
-    "filter_label": {
+    "button_text_filters": {
       "default": "Filtrar"
     },
-    "filter_reset": {
+    "button_label_filters": {
+      "default": "Filtrar"
+    },
+    "button_label_reset_filter": {
       "default": "Redefinir"
     },
     "results_for_title": {
@@ -1536,10 +1566,10 @@
         }
       }
     },
-    "filter_reset_all": {
+    "button_text_reset_all_filters": {
       "default": "Limpar tudo"
     },
-    "filter_reset_all_label": {
+    "button_label_reset_all_filters": {
       "default": "Limpar todos os filtros"
     },
     "video_type_trailer": {
@@ -1566,10 +1596,10 @@
     "remaining": {
       "default": "restante"
     },
-    "checkin": {
+    "button_text_checkin": {
       "default": "Registrar"
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "Registrar {title}",
       "variables": {
         "title": {
@@ -1580,7 +1610,10 @@
     "cookie_notice": {
       "default": "Trakt usa C🍪🍪KIES para aprimorar sua experiência geral. Você pode <a>ler mais informações</a> aqui."
     },
-    "cookie_accept": {
+    "button_text_cookie_accept": {
+      "default": "Entendi, vamos nessa!"
+    },
+    "button_label_cookie_accept": {
       "default": "Entendi, vamos nessa!"
     },
     "year_to_date_label": {
@@ -1589,7 +1622,16 @@
     "month_in_review_label": {
       "default": "Resumo do mês"
     },
-    "settings": {
+    "page_title_settings": {
+      "default": "Configurações"
+    },
+    "header_settings": {
+      "default": "Configurações"
+    },
+    "button_text_settings": {
+      "default": "Configurações"
+    },
+    "button_label_settings": {
       "default": "Configurações"
     },
     "settings_spoilers_title": {
@@ -1598,10 +1640,10 @@
     "settings_spoilers_label": {
       "default": "Mostrar spoilers"
     },
-    "filter_save": {
+    "button_text_save_filters": {
       "default": "Salvar"
     },
-    "filter_save_label": {
+    "button_label_save_filters": {
       "default": "Salvar filtros"
     },
     "error_page_locked_account_title": {
@@ -1621,10 +1663,10 @@
         }
       }
     },
-    "follow": {
+    "button_text_follow": {
       "default": "Seguir"
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "Seguir {username}",
       "variables": {
         "username": {
@@ -1632,10 +1674,10 @@
         }
       }
     },
-    "unfollow": {
+    "button_text_unfollow": {
       "default": "Deixar de seguir"
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "Deixar de seguir {username}",
       "variables": {
         "username": {
@@ -1669,8 +1711,11 @@
     "read_more": {
       "default": "Ler mais"
     },
-    "add_comment": {
+    "button_text_add_comment": {
       "default": "Adicionar"
+    },
+    "button_label_add_comment": {
+      "default": "Adicionar comentário"
     },
     "rename_list": {
       "default": "Renomear sua lista"

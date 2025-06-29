@@ -7,8 +7,10 @@ import type {
 export const FavoriteButtonIntlProvider: FavoriteButtonIntl = {
   label: ({ title, isFavorited }: FavoriteButtonMeta) =>
     isFavorited
-      ? m.remove_from_favorites_label({ title })
-      : m.add_to_favorites_label({ title }),
+      ? m.button_label_remove_from_favorites({ title })
+      : m.button_label_add_to_favorites({ title }),
   text: ({ isFavorited }: FavoriteButtonMeta) =>
-    isFavorited ? m.remove_from_favorites() : m.add_to_favorites(),
+    isFavorited
+      ? m.button_text_remove_from_favorites()
+      : m.button_text_add_to_favorites(),
 };

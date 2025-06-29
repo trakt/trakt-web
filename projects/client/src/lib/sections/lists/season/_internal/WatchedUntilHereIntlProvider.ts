@@ -7,8 +7,10 @@ import * as m from '$lib/features/i18n/messages.ts';
 export const WatchedUntilHereIntlProvider: MarkAsWatchedButtonIntl = {
   label: ({ isWatched, title }: MarkAsWatchedButtonMeta) =>
     isWatched
-      ? m.remove_from_watched_label({ title })
-      : m.mark_as_watched_until_label({ title }),
+      ? m.button_label_remove_from_watched({ title })
+      : m.button_label_watched_until_here({ title }),
   text: ({ isWatched }: MarkAsWatchedButtonMeta) =>
-    isWatched ? m.remove_from_watched() : m.mark_as_watched_until(),
+    isWatched
+      ? m.button_text_remove_from_history()
+      : m.button_text_watched_until_here(),
 };

@@ -19,7 +19,7 @@
   );
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
-    label: m.restore_show_label({ title }),
+    label: m.button_label_restore_show({ title }),
     color: $color,
     variant: $variant,
     onclick: handler,
@@ -27,7 +27,7 @@
     ...events,
   });
 
-  const text = m.restore_show();
+  const text = m.button_text_restore_show();
 </script>
 
 {#if style === "normal"}

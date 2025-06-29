@@ -7,7 +7,7 @@ import type {
 export const WatchlistButtonIntlProvider: WatchlistButtonIntl = {
   label: ({ title, isWatchlisted }: WatchlistButtonMeta) =>
     isWatchlisted
-      ? m.remove_from_watchlist_label({ title })
-      : m.add_to_watchlist_label({ title }),
-  text: (_: WatchlistButtonMeta) => m.watchlist_action_label(),
+      ? m.button_label_remove_from_watchlist({ title })
+      : m.button_label_add_to_watchlist({ title }),
+  text: (_: WatchlistButtonMeta) => m.button_text_watchlist(),
 };

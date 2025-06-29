@@ -29,7 +29,7 @@
         href="?"
         onclick={() => track({ id: filter.key, action: "reset" })}
       >
-        {m.filter_reset()}
+        {m.button_label_reset_filter()}
       </DropdownItem>
       {#each filter.options as option}
         <DropdownItem

@@ -16,7 +16,7 @@
 <TraktPage
   audience="all"
   image={DEFAULT_SHARE_MOVIE_COVER}
-  title={m.navbar_link_movies()}
+  title={m.page_title_movies()}
 >
   <TraktPageCoverSetter />
 

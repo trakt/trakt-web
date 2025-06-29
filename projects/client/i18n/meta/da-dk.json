@@ -87,19 +87,19 @@
     "mark_as_watched_ask_prompt": {
       "default": "Hvornår færdiggjorde du dette? (ÅÅÅÅ-MM-DD TT:MM)"
     },
-    "watchlist_action_label": {
+    "button_text_watchlist": {
       "default": "Se"
     },
-    "mark_as_watched": {
+    "button_text_mark_as_watched": {
       "default": "Marker som set"
     },
-    "mark_as_watched_until": {
+    "button_text_watched_until_here": {
       "default": "Set indtil her"
     },
-    "watch_again": {
+    "button_text_watch_again": {
       "default": "Se igen"
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "Tilføj {title} til din liste",
       "variables": {
         "title": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "Marker {title} som set",
       "variables": {
         "title": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "Marker {title} som set indtil her",
       "variables": {
         "title": {
@@ -234,7 +234,7 @@
     "genre_science_fiction": {
       "default": "Science Fiction"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "Fjern {title} fra din liste",
       "variables": {
         "title": {
@@ -245,10 +245,10 @@
     "search_placeholder": {
       "default": "Søg serier og film..."
     },
-    "join_trakt_button": {
+    "button_text_join_trakt": {
       "default": "Tilmeld Trakt"
     },
-    "join_trakt_button_label": {
+    "button_label_join_trakt": {
       "default": "Tilmeld trakt.tv for at holde styr på, hvad du ser"
     },
     "copyright_notice": {
@@ -257,7 +257,7 @@
     "copyright_crafted_by": {
       "default": "Håndlavet verden over"
     },
-    "join_trakt_for_free_button": {
+    "button_text_join_trakt_for_free": {
       "default": "Tilmeld Trakt gratis"
     },
     "landing_discover_label": {
@@ -287,35 +287,50 @@
     "list_title_most_anticipated": {
       "default": "Mest ventede"
     },
-    "get": {
+    "button_text_get_vip": {
       "default": "Hent"
     },
-    "get_vip_label": {
+    "link_text_get_vip": {
+      "default": "Få"
+    },
+    "button_label_get_vip": {
       "default": "Lås VIP-funktioner op"
     },
-    "user_profile_label": {
+    "link_label_get_vip": {
+      "default": "Lås VIP-funktioner op"
+    },
+    "button_label_user_profile": {
       "default": "Brugerprofil"
     },
     "list_title_most_popular": {
       "default": "Mest populære"
     },
-    "navbar_link_movies": {
+    "button_text_browse_movies": {
       "default": "Film"
     },
-    "navbar_link_movies_label": {
+    "button_label_browse_movies": {
       "default": "Gennemse film"
     },
-    "navbar_link_shows": {
+    "page_title_movies": {
+      "default": "Film"
+    },
+    "button_text_browse_shows": {
       "default": "Serier"
     },
-    "navbar_link_shows_label": {
+    "button_label_browse_shows": {
       "default": "Gennemse serier"
     },
-    "navbar_link_home": {
+    "page_title_shows": {
+      "default": "Serier"
+    },
+    "button_text_home": {
       "default": "Hjem"
     },
-    "navbar_link_home_label": {
+    "button_label_home": {
       "default": "Gå tilbage til hjemmesiden"
+    },
+    "page_title_home": {
+      "default": "Hjem"
     },
     "watchers": {
       "default": "Seere"
@@ -337,7 +352,10 @@
     "profile": {
       "default": "Profil"
     },
-    "logout": {
+    "button_text_logout": {
+      "default": "Log ud"
+    },
+    "button_label_logout": {
       "default": "Log ud"
     },
     "list_title_coming_soon": {
@@ -415,10 +433,10 @@
     "unreleased_movies_empty": {
       "default": "Tilføj kommende film til din liste, og hold dig opdateret."
     },
-    "find_movies_link": {
+    "button_text_find_movies": {
       "default": "Find film"
     },
-    "find_shows_link": {
+    "button_text_find_shows": {
       "default": "Find serier"
     },
     "active_watchers": {
@@ -462,7 +480,7 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} mere",
       "variables": {
         "count": {
@@ -488,11 +506,14 @@
     "genre": {
       "default": "Genre"
     },
-    "navbar_link_lists": {
+    "button_text_browse_lists": {
       "default": "Lister"
     },
-    "navbar_link_lists_label": {
+    "button_label_browse_lists": {
       "default": "Gennemse lister"
+    },
+    "page_title_lists": {
+      "default": "Lister"
     },
     "list_title_watchlist_shows": {
       "default": "Dine serier"
@@ -500,7 +521,7 @@
     "list_title_watchlist_movies": {
       "default": "Dine film"
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "Se {title} nu",
       "variables": {
         "title": {
@@ -747,10 +768,10 @@
     "job_creator": {
       "default": "Skaber"
     },
-    "remove_from_watched": {
+    "button_text_remove_from_history": {
       "default": "Fjern fra set"
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "Fjern {title} fra din set-liste",
       "variables": {
         "title": {
@@ -766,7 +787,7 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "Fjern denne afspilning af {title} fra din set-liste",
       "variables": {
         "title": {
@@ -896,7 +917,7 @@
     "trending_movies": {
       "default": "Populære film"
     },
-    "view_all": {
+    "button_text_view_all": {
       "default": "Se alle"
     },
     "full_season": {
@@ -943,13 +964,13 @@
     "rate_now": {
       "default": "Bedøm nu"
     },
-    "add_to_favorites": {
+    "button_text_add_to_favorites": {
       "default": "Tilføj til favoritter"
     },
-    "remove_from_favorites": {
+    "button_text_remove_from_favorites": {
       "default": "Fjern fra favoritter"
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "Tilføj {title} til dine favoritter",
       "variables": {
         "title": {
@@ -957,7 +978,7 @@
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "Fjern {title} fra dine favoritter",
       "variables": {
         "title": {
@@ -985,7 +1006,10 @@
     "favorite_shows_empty": {
       "default": "Din favorit-tv-serieliste er tom."
     },
-    "stream_on": {
+    "button_text_stream_on": {
+      "default": "Stream på"
+    },
+    "header_stream_on": {
       "default": "Stream på"
     },
     "your_watchlist_shows": {
@@ -1195,7 +1219,7 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "Marker serien {title} som droppet",
       "variables": {
         "title": {
@@ -1203,7 +1227,7 @@
         }
       }
     },
-    "drop_show": {
+    "button_text_drop_show": {
       "default": "Drop serie"
     },
     "enable_up_next_nitro_label": {
@@ -1226,7 +1250,7 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "Gendan serien {title}",
       "variables": {
         "title": {
@@ -1234,7 +1258,7 @@
         }
       }
     },
-    "restore_show": {
+    "button_text_restore_show": {
       "default": "Gendan serie"
     },
     "mark_as_watched_show_warning": {
@@ -1281,13 +1305,13 @@
         }
       }
     },
-    "like_comment_label": {
+    "button_label_like_comment": {
       "default": "Synes godt om kommentar"
     },
-    "unlike_comment_label": {
+    "button_label_unlike_comment": {
       "default": "Synes ikke godt om kommentar"
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} synes godt om",
       "variables": {
         "count": {
@@ -1298,10 +1322,10 @@
     "close_label": {
       "default": "Luk"
     },
-    "comment_replies_label": {
+    "button_label_comment_replies": {
       "default": "Kommentar Svar"
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} svar",
       "variables": {
         "count": {
@@ -1318,10 +1342,10 @@
     "comment": {
       "default": "Kommentar"
     },
-    "comment_reply": {
+    "button_text_comment_reply": {
       "default": "Svar"
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "Svar til {user}",
       "variables": {
         "user": {
@@ -1381,7 +1405,7 @@
     "view_all_comments": {
       "default": "Se alle kommentarer"
     },
-    "remove_from_list": {
+    "button_text_remove_from_list": {
       "default": "Fjern fra listen"
     },
     "remove_from_list_label": {
@@ -1401,7 +1425,10 @@
     "error_page_service_status": {
       "default": "Trakt tjeneste status"
     },
-    "retry": {
+    "button_text_retry": {
+      "default": "Prøv igen"
+    },
+    "button_label_retry": {
       "default": "Prøv igen"
     },
     "community_sentiment": {
@@ -1463,10 +1490,13 @@
     "theme_system": {
       "default": "System"
     },
-    "filter_label": {
+    "button_text_filters": {
+      "default": "Filter"
+    },
+    "button_label_filters": {
       "default": "Filtrér"
     },
-    "filter_reset": {
+    "button_label_reset_filter": {
       "default": "Nulstil"
     },
     "results_for_title": {
@@ -1536,10 +1566,10 @@
         }
       }
     },
-    "filter_reset_all": {
+    "button_text_reset_all_filters": {
       "default": "Nulstil alle"
     },
-    "filter_reset_all_label": {
+    "button_label_reset_all_filters": {
       "default": "Nulstil alle filtre"
     },
     "video_type_trailer": {
@@ -1566,10 +1596,10 @@
     "remaining": {
       "default": "resterende"
     },
-    "checkin": {
+    "button_text_checkin": {
       "default": "Tjek ind"
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "Tjek ind {title}",
       "variables": {
         "title": {
@@ -1580,7 +1610,10 @@
     "cookie_notice": {
       "default": "Trakt bruger C🍪🍪KIES for at forbedre din samlede oplevelse. Du kan <a>læse mere information</a> her."
     },
-    "cookie_accept": {
+    "button_text_cookie_accept": {
+      "default": "Okay, lad os komme i gang!"
+    },
+    "button_label_cookie_accept": {
       "default": "Forstået, lad os komme i gang!"
     },
     "year_to_date_label": {
@@ -1589,7 +1622,16 @@
     "month_in_review_label": {
       "default": "Månedens overblik"
     },
-    "settings": {
+    "page_title_settings": {
+      "default": "Indstillinger"
+    },
+    "header_settings": {
+      "default": "Indstillinger"
+    },
+    "button_text_settings": {
+      "default": "Indstillinger"
+    },
+    "button_label_settings": {
       "default": "Indstillinger"
     },
     "settings_spoilers_title": {
@@ -1598,10 +1640,10 @@
     "settings_spoilers_label": {
       "default": "Vis spoilers"
     },
-    "filter_save": {
+    "button_text_save_filters": {
       "default": "Gem"
     },
-    "filter_save_label": {
+    "button_label_save_filters": {
       "default": "Gem filtre"
     },
     "error_page_locked_account_title": {
@@ -1621,10 +1663,10 @@
         }
       }
     },
-    "follow": {
+    "button_text_follow": {
       "default": "Følg"
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "Følg {username}",
       "variables": {
         "username": {
@@ -1632,10 +1674,10 @@
         }
       }
     },
-    "unfollow": {
+    "button_text_unfollow": {
       "default": "Hold op med at følge"
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "Hold op med at følge {username}",
       "variables": {
         "username": {
@@ -1669,8 +1711,11 @@
     "read_more": {
       "default": "Læs mere"
     },
-    "add_comment": {
+    "button_text_add_comment": {
       "default": "Tilføj"
+    },
+    "button_label_add_comment": {
+      "default": "Tilføj kommentar"
     },
     "rename_list": {
       "default": "Omdøb din liste"

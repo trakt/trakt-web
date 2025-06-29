@@ -9,10 +9,10 @@
 <Button
   {size}
   href={UrlBuilder.settings()}
-  label={m.settings()}
+  label={m.button_label_settings()}
   color="default"
   style="flat"
   variant="secondary"
 >
-  {m.settings()}
+  {m.button_text_settings()}
 </Button>

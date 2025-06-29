@@ -21,13 +21,13 @@
 
   <Button
     href={UrlBuilder.movies()}
-    label={m.navbar_link_movies_label()}
+    label={m.button_label_browse_movies()}
     style="flat"
     variant="primary"
     color="purple"
     size="small"
   >
-    {m.find_movies_link()}
+    {m.button_text_find_movies()}
     {#snippet icon()}
       <MovieIcon />
     {/snippet}

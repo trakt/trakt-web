@@ -5,6 +5,6 @@ import type {
 } from './CheckInButtonIntl.ts';
 
 export const CheckInButtonIntlProvider: CheckInButtonIntl = {
-  label: ({ title }: CheckInButtonMeta) => m.checkin_label({ title }),
-  text: () => m.checkin(),
+  label: ({ title }: CheckInButtonMeta) => m.button_label_checkin({ title }),
+  text: () => m.button_text_checkin(),
 };

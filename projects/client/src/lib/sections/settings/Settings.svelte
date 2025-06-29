@@ -8,7 +8,9 @@
 <RenderFor audience="authenticated">
   <div class="trakt-settings">
     <div class="trakt-settings-sidebar">
-      <div class="trakt-settings-sidebar-content"><h4>{m.settings()}</h4></div>
+      <div class="trakt-settings-sidebar-content">
+        <h4>{m.header_settings()}</h4>
+      </div>
       <div class="trakt-settings-footer">
         <LogoutButton />
       </div>

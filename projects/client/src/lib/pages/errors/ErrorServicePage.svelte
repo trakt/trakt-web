@@ -15,8 +15,8 @@
     variant="primary"
     color="purple"
     onclick={() => window.location.reload()}
-    label={m.retry()}
+    label={m.button_label_retry()}
   >
-    {m.retry()}
+    {m.button_text_retry()}
   </Button>
 </ErrorPage>

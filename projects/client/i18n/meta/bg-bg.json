@@ -87,19 +87,19 @@
     "mark_as_watched_ask_prompt": {
       "default": "Кога приключи да гледаш това? (YYYY-MM-DD HH:MM)"
     },
-    "watchlist_action_label": {
+    "button_text_watchlist": {
       "default": "За гледане"
     },
-    "mark_as_watched": {
+    "button_text_mark_as_watched": {
       "default": "Отбележи като гледано"
     },
-    "mark_as_watched_until": {
+    "button_text_watched_until_here": {
       "default": "Гледано дотук"
     },
-    "watch_again": {
+    "button_text_watch_again": {
       "default": "Гледай отново"
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "Добави {title} в наблюдавани",
       "variables": {
         "title": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "Отбележи {title} като гледан",
       "variables": {
         "title": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "Отбележи {title} като гледано дотук",
       "variables": {
         "title": {
@@ -234,7 +234,7 @@
     "genre_science_fiction": {
       "default": "Научнофантастичен"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "Премахни {title} от наблюдавани",
       "variables": {
         "title": {
@@ -245,10 +245,10 @@
     "search_placeholder": {
       "default": "Какво ти се гледа?"
     },
-    "join_trakt_button": {
+    "button_text_join_trakt": {
       "default": "Присъедини се към Trakt"
     },
-    "join_trakt_button_label": {
+    "button_label_join_trakt": {
       "default": "Присъедини се към trakt.tv, за да следиш какво гледаш"
     },
     "copyright_notice": {
@@ -257,7 +257,7 @@
     "copyright_crafted_by": {
       "default": "Направено с любов из различни кътчета на света"
     },
-    "join_trakt_for_free_button": {
+    "button_text_join_trakt_for_free": {
       "default": "Присъедини се към Trakt безплатно"
     },
     "landing_discover_label": {
@@ -287,35 +287,50 @@
     "list_title_most_anticipated": {
       "default": "Най-очаквани"
     },
-    "get": {
+    "button_text_get_vip": {
       "default": "Вземи"
     },
-    "get_vip_label": {
+    "link_text_get_vip": {
+      "default": "Вземи"
+    },
+    "button_label_get_vip": {
       "default": "Отключи VIP функции"
     },
-    "user_profile_label": {
+    "link_label_get_vip": {
+      "default": "Отключи VIP функциите"
+    },
+    "button_label_user_profile": {
       "default": "Потребителски профил"
     },
     "list_title_most_popular": {
       "default": "Най-популярни"
     },
-    "navbar_link_movies": {
+    "button_text_browse_movies": {
       "default": "Филми"
     },
-    "navbar_link_movies_label": {
+    "button_label_browse_movies": {
       "default": "Виж филм"
     },
-    "navbar_link_shows": {
+    "page_title_movies": {
+      "default": "Филми"
+    },
+    "button_text_browse_shows": {
       "default": "Предавания"
     },
-    "navbar_link_shows_label": {
+    "button_label_browse_shows": {
       "default": "Виж предавания"
     },
-    "navbar_link_home": {
+    "page_title_shows": {
+      "default": "Сериали"
+    },
+    "button_text_home": {
       "default": "Начало"
     },
-    "navbar_link_home_label": {
+    "button_label_home": {
       "default": "Върни се на началната страница"
+    },
+    "page_title_home": {
+      "default": "Начало"
     },
     "watchers": {
       "default": "Гледащи"
@@ -337,8 +352,11 @@
     "profile": {
       "default": "Профил"
     },
-    "logout": {
+    "button_text_logout": {
       "default": "Излез"
+    },
+    "button_label_logout": {
+      "default": "Изход"
     },
     "list_title_coming_soon": {
       "default": "Очаквай скоро"
@@ -415,10 +433,10 @@
     "unreleased_movies_empty": {
       "default": "Добавяй предстоящи филми в списъка си за наблюдение и получавай актуална информация."
     },
-    "find_movies_link": {
+    "button_text_find_movies": {
       "default": "Намери филми"
     },
-    "find_shows_link": {
+    "button_text_find_shows": {
       "default": "Намери предавания"
     },
     "active_watchers": {
@@ -462,7 +480,7 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} повече",
       "variables": {
         "count": {
@@ -488,10 +506,13 @@
     "genre": {
       "default": "Жанр"
     },
-    "navbar_link_lists": {
+    "button_text_browse_lists": {
       "default": "Списъци"
     },
-    "navbar_link_lists_label": {
+    "button_label_browse_lists": {
+      "default": "Списъци"
+    },
+    "page_title_lists": {
       "default": "Списъци"
     },
     "list_title_watchlist_shows": {
@@ -500,7 +521,7 @@
     "list_title_watchlist_movies": {
       "default": "Твоите филми"
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "Гледай {title} сега",
       "variables": {
         "title": {
@@ -747,10 +768,10 @@
     "job_creator": {
       "default": "Създател"
     },
-    "remove_from_watched": {
+    "button_text_remove_from_history": {
       "default": "Премахни от наблюдавани"
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "Премахни {title} от наблюдавани",
       "variables": {
         "title": {
@@ -766,7 +787,7 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "Премахни това гледане на {title} от наблюдавани",
       "variables": {
         "title": {
@@ -896,7 +917,7 @@
     "trending_movies": {
       "default": "Популярни филми"
     },
-    "view_all": {
+    "button_text_view_all": {
       "default": "Виж ВСИЧКИ"
     },
     "full_season": {
@@ -943,13 +964,13 @@
     "rate_now": {
       "default": "Оцени сега"
     },
-    "add_to_favorites": {
+    "button_text_add_to_favorites": {
       "default": "Добави в Любими"
     },
-    "remove_from_favorites": {
+    "button_text_remove_from_favorites": {
       "default": "Премахни от Любими"
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "Добави {title} в Любими",
       "variables": {
         "title": {
@@ -957,7 +978,7 @@
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "Премахни {title} от Любими",
       "variables": {
         "title": {
@@ -985,8 +1006,11 @@
     "favorite_shows_empty": {
       "default": "Списъкът с любими сериали е празен."
     },
-    "stream_on": {
+    "button_text_stream_on": {
       "default": "Гледай по"
+    },
+    "header_stream_on": {
+      "default": "Гледай в"
     },
     "your_watchlist_shows": {
       "default": "Предвания, които наблюдаващ"
@@ -1195,7 +1219,7 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "Отбележи {title} като отследвано",
       "variables": {
         "title": {
@@ -1203,7 +1227,7 @@
         }
       }
     },
-    "drop_show": {
+    "button_text_drop_show": {
       "default": "Премахни следването"
     },
     "enable_up_next_nitro_label": {
@@ -1226,7 +1250,7 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "Възстанови {title}",
       "variables": {
         "title": {
@@ -1234,7 +1258,7 @@
         }
       }
     },
-    "restore_show": {
+    "button_text_restore_show": {
       "default": "Възстанови предаване"
     },
     "mark_as_watched_show_warning": {
@@ -1281,13 +1305,13 @@
         }
       }
     },
-    "like_comment_label": {
+    "button_label_like_comment": {
       "default": "Харесвам коментара"
     },
-    "unlike_comment_label": {
+    "button_label_unlike_comment": {
       "default": "Не харесвам коментара"
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} харесвания",
       "variables": {
         "count": {
@@ -1298,10 +1322,10 @@
     "close_label": {
       "default": "Затвори"
     },
-    "comment_replies_label": {
+    "button_label_comment_replies": {
       "default": "Отговори на коментари"
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} отговора",
       "variables": {
         "count": {
@@ -1318,10 +1342,10 @@
     "comment": {
       "default": "Коментар"
     },
-    "comment_reply": {
+    "button_text_comment_reply": {
       "default": "Отговор"
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "Отговор на {user}",
       "variables": {
         "user": {
@@ -1381,7 +1405,7 @@
     "view_all_comments": {
       "default": "Виж всички коментари"
     },
-    "remove_from_list": {
+    "button_text_remove_from_list": {
       "default": "Премахни от списъка"
     },
     "remove_from_list_label": {
@@ -1401,7 +1425,10 @@
     "error_page_service_status": {
       "default": "Състояние на услугата Trakt"
     },
-    "retry": {
+    "button_text_retry": {
+      "default": "Опитай отново"
+    },
+    "button_label_retry": {
       "default": "Опитай отново"
     },
     "community_sentiment": {
@@ -1463,10 +1490,13 @@
     "theme_system": {
       "default": "Система"
     },
-    "filter_label": {
+    "button_text_filters": {
+      "default": "Филтрирай"
+    },
+    "button_label_filters": {
       "default": "Филтър"
     },
-    "filter_reset": {
+    "button_label_reset_filter": {
       "default": "Изчисти"
     },
     "results_for_title": {
@@ -1536,10 +1566,10 @@
         }
       }
     },
-    "filter_reset_all": {
+    "button_text_reset_all_filters": {
       "default": "Нулиране на всичко"
     },
-    "filter_reset_all_label": {
+    "button_label_reset_all_filters": {
       "default": "Нулиране на всички филтри"
     },
     "video_type_trailer": {
@@ -1566,10 +1596,10 @@
     "remaining": {
       "default": "оставащ"
     },
-    "checkin": {
+    "button_text_checkin": {
       "default": "Чекиране"
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "Чекиране {title}",
       "variables": {
         "title": {
@@ -1580,7 +1610,10 @@
     "cookie_notice": {
       "default": "Trakt използва C🍪🍪KIES, за да подобри цялостното ви изживяване. Можете да <a>прочетете повече информация</a> тук."
     },
-    "cookie_accept": {
+    "button_text_cookie_accept": {
+      "default": "Разбрах, да започваме!"
+    },
+    "button_label_cookie_accept": {
       "default": "Разбрах, да тръгваме!"
     },
     "year_to_date_label": {
@@ -1589,7 +1622,16 @@
     "month_in_review_label": {
       "default": "Обзор на месеца"
     },
-    "settings": {
+    "page_title_settings": {
+      "default": "Настройки"
+    },
+    "header_settings": {
+      "default": "Настройки"
+    },
+    "button_text_settings": {
+      "default": "Настройки"
+    },
+    "button_label_settings": {
       "default": "Настройки"
     },
     "settings_spoilers_title": {
@@ -1598,10 +1640,10 @@
     "settings_spoilers_label": {
       "default": "Показвай спойлери"
     },
-    "filter_save": {
+    "button_text_save_filters": {
       "default": "Запази"
     },
-    "filter_save_label": {
+    "button_label_save_filters": {
       "default": "Запази филтрите"
     },
     "error_page_locked_account_title": {
@@ -1621,10 +1663,10 @@
         }
       }
     },
-    "follow": {
+    "button_text_follow": {
       "default": "Следвай"
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "Следвай {username}",
       "variables": {
         "username": {
@@ -1632,10 +1674,10 @@
         }
       }
     },
-    "unfollow": {
+    "button_text_unfollow": {
       "default": "Отписване"
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "Отписване от {username}",
       "variables": {
         "username": {
@@ -1669,8 +1711,11 @@
     "read_more": {
       "default": "Прочети още"
     },
-    "add_comment": {
+    "button_text_add_comment": {
       "default": "Добави"
+    },
+    "button_label_add_comment": {
+      "default": "Добави коментар"
     },
     "rename_list": {
       "default": "Преименувайте списъка си"

@@ -14,11 +14,11 @@
   <Button
     color="purple"
     href={url}
-    label={m.join_trakt_button_label()}
+    label={m.button_label_join_trakt()}
     style="flat"
     navigationType={DpadNavigationType.Item}
   >
-    {m.join_trakt_for_free_button()}
+    {m.button_text_join_trakt_for_free()}
     {#snippet icon()}
       <CaretRightIcon />
     {/snippet}

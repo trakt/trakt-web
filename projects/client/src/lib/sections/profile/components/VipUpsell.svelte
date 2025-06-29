@@ -14,12 +14,12 @@
   </p>
   <Button
     href={UrlBuilder.vip()}
-    label={m.get_vip_label()}
+    label={m.button_label_get_vip()}
     color="red"
     variant="secondary"
     target="_blank"
   >
-    <p class="small bold uppercase">{m.get()}</p>
+    <p class="small bold uppercase">{m.button_text_get_vip()}</p>
     {#snippet icon()}
       <VipBadge />
     {/snippet}

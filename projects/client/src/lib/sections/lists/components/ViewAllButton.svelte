@@ -16,5 +16,5 @@
 </script>
 
 <Button {label} {...rest} style="ghost" variant="primary" color="purple">
-  {m.view_all()}
+  {m.button_text_view_all()}
 </Button>
