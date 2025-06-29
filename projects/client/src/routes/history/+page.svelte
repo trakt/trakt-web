@@ -10,7 +10,7 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
-  title={m.list_title_recently_watched()}
+  title={m.page_title_recently_watched()}
 >
   <TraktPageCoverSetter />
 

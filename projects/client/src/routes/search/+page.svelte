@@ -45,7 +45,7 @@
   <TraktPage
     audience="all"
     image={DEFAULT_SHARE_COVER}
-    title={m.results_for_title({ query })}
+    title={m.page_title_search_results({ query })}
   >
     {#if first}
       <CoverImageSetter src={first.cover.url.medium} type={first.type} />

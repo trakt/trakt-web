@@ -12,7 +12,7 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
-  title={m.profile()}
+  title={m.page_title_profile()}
   hasDynamicContent={true}
 >
   <TraktPageCoverSetter />

@@ -10,7 +10,7 @@
 <TraktPage
   audience="all"
   image={DEFAULT_SHARE_SHOW_COVER}
-  title={m.popular_shows()}
+  title={m.page_title_popular_shows()}
 >
   <TraktPageCoverSetter />
 

@@ -15,7 +15,7 @@
 <TraktPage
   {audience}
   image={DEFAULT_SHARE_COVER}
-  title={m.year_to_date_label()}
+  title={m.page_title_year_to_date()}
 >
   <TraktPageCoverSetter />
 
@@ -24,6 +24,6 @@
     urlBuilder={(slug: string, token: string | Nil) => {
       return UrlBuilder.og.frame.yearToDate(slug, page.params.year, token);
     }}
-    title={m.year_to_date_label()}
+    title={m.page_title_year_to_date()}
   />
 </TraktPage>

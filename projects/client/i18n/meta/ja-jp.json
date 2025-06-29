@@ -75,7 +75,7 @@
         }
       }
     },
-    "error_404_title": {
+    "page_title_error_404": {
       "default": "404エラー！"
     },
     "error_404_message": {
@@ -1380,7 +1380,7 @@
     "error_comment_unknown": {
       "default": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。"
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "{username}のプロフィール",
       "variables": {
         "username": {
@@ -1416,7 +1416,7 @@
         }
       }
     },
-    "error_page_service_title": {
+    "page_title_service_unavailable": {
       "default": "Traktサービスに接続できません"
     },
     "error_page_service_message": {
@@ -1513,7 +1513,7 @@
     "type_show": {
       "default": "番組"
     },
-    "sign_in": {
+    "page_title_sign_in": {
       "default": "サインイン"
     },
     "code_retry_title": {
@@ -1616,10 +1616,10 @@
     "button_label_cookie_accept": {
       "default": "了解、始めましょう！"
     },
-    "year_to_date_label": {
+    "page_title_year_to_date": {
       "default": "今年"
     },
-    "month_in_review_label": {
+    "page_title_month_in_review": {
       "default": "今月のレビュー"
     },
     "page_title_settings": {
@@ -1646,7 +1646,7 @@
     "button_label_save_filters": {
       "default": "フィルターを保存"
     },
-    "error_page_locked_account_title": {
+    "page_title_account_locked": {
       "default": "アカウントがロックされています"
     },
     "error_page_locked_account_message": {
@@ -1745,6 +1745,68 @@
     },
     "list_title_extras": {
       "default": "エクストラ"
+    },
+    "page_title_up_next": {
+      "default": "近日公開"
+    },
+    "page_title_watchlist_shows": {
+      "default": "あなたのドラマリスト"
+    },
+    "page_title_available_now": {
+      "default": "公開中"
+    },
+    "page_title_coming_soon": {
+      "default": "近日公開"
+    },
+    "page_title_watchlist_movies": {
+      "default": "あなたの映画リスト"
+    },
+    "page_title_social_activity": {
+      "default": "ソーシャルアクティビティ"
+    },
+    "page_title_trending_shows": {
+      "default": "話題のドラマ"
+    },
+    "page_title_recommended_shows": {
+      "default": "おすすめドラマ"
+    },
+    "page_title_popular_shows": {
+      "default": "人気のドラマ"
+    },
+    "page_title_hot_shows": {
+      "default": "注目のドラマ"
+    },
+    "page_title_anticipated_shows": {
+      "default": "期待のドラマ"
+    },
+    "page_title_trending_movies": {
+      "default": "話題の映画"
+    },
+    "page_title_recommended_movies": {
+      "default": "おすすめ映画"
+    },
+    "page_title_popular_movies": {
+      "default": "人気の映画"
+    },
+    "page_title_hot_movies": {
+      "default": "注目の映画"
+    },
+    "page_title_anticipated_movies": {
+      "default": "期待の映画"
+    },
+    "page_title_recently_watched": {
+      "default": "最近視聴した作品"
+    },
+    "page_title_profile": {
+      "default": "プロフィール"
+    },
+    "page_title_search_results": {
+      "default": "{query} の検索結果",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }
