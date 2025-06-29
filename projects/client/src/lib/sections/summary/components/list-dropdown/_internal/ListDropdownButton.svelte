@@ -12,7 +12,6 @@
     ...props
   }: ListDropdownButtonProps = $props();
 
-  const state = $derived(isListed ? "added" : "missing");
   const variant = $derived(isListed ? "primary" : "secondary");
   const text = $derived(isListed ? m.listed() : m.lists_action_label());
 </script>
