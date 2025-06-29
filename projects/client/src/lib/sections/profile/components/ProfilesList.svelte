@@ -22,6 +22,12 @@
   const title = $derived(
     type === "following" ? m.list_title_following() : m.list_title_followers(),
   );
+
+  const placeholder = $derived(
+    type === "following"
+      ? m.list_placeholder_following()
+      : m.list_placeholder_followers(),
+  );
 </script>
 
 <SectionList
@@ -31,7 +37,7 @@
   --height-list="var(--height-landscape-list)"
 >
   {#snippet empty()}
-    {m.not_following_anyone()}
+    {placeholder}
   {/snippet}
 
   {#snippet item(profile)}

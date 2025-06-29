@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "パーソナライズされたメッセージ：もし、ユーザーの情報（例えば、視聴履歴）があれば、よりパーソナライズされたプレースホルダーを作成することができます。例えば、『このユーザーはホラー映画が好きですが、自己紹介を書くのが苦手です。（もしかしたら、ゾンビから隠れることに夢中なのかもしれません？）』"
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "視聴リストは空です。映画を追加して、あなたの映画史を完成させましょう！"
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "視聴リストは空です。番組を追加して、想像力を刺激しましょう！"
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "テレビ番組を探索し、スケジュールをパーソナライズしましょう。"
     },
     "up_next_empty": {
       "default": "視聴を開始し、視聴リストに追加しましょう。"
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "映画を視聴リストに追加して、初公開を逃さないでください。"
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "今後の映画を視聴リストに追加して、最新情報をゲット！"
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "お気に入り番組"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "お気に入り映画リストは空です。"
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "お気に入り番組リストは空です。"
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "人気のリスト"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title}は人気のリストには見当たりません。",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "まだコメントはありません。"
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "視聴済みエピソード"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "{title} はまだ見ていないよ",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "フォロワー"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "まだ誰もいません。"
     },
     "read_more": {

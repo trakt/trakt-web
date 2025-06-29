@@ -44,7 +44,7 @@
 
     {#snippet empty()}
       {#if !$isLoading}
-        <p class="small">{m.no_comments()}</p>
+        <p class="small">{m.list_placeholder_comments()}</p>
       {/if}
     {/snippet}
 

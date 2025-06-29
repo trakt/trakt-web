@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "Ett personligt meddelande: Om du har någon information om användaren (t.ex. deras visningshistorik), kan du använda den för att generera en mer personlig platshållare, som 'Den här användaren älskar skräckfilmer men hatar att skriva bios. (Kanske gömmer de sig från zombies?)'"
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "Din to-watch är tom. Lägg till filmer för att skapa ditt filmiska mästerverk."
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "Din to-watch är tom. Lägg till serier för att mata din fantasi."
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "Utforska TV-serier och anpassa ditt schema."
     },
     "up_next_empty": {
       "default": "Börja titta och lägg till serier i din to-watch."
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "Lägg till filmer i din to-watch och missa aldrig en premiär."
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "Lägg till kommande filmer i din to-watch och håll dig uppdaterad."
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "Favoritprogram"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "Din favoritfilmlista är tom."
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "Din favoritprogramlista är tom."
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "Populära listor"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} visas inte på några populära listor.",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "Inga kommentarer än."
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "Visade avsnitt"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "Du har inte sett {title} än",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "Följare"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "Ingen här (än)."
     },
     "read_more": {

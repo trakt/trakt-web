@@ -53,14 +53,14 @@
   {slug}
   type="movie"
   title={m.list_title_favorite_movies()}
-  emptyMessage={m.favorite_movies_empty()}
+  emptyMessage={m.list_placeholder_favorite_movies()}
 />
 
 <FavoritesList
   {slug}
   type="show"
   title={m.list_title_favorite_shows()}
-  emptyMessage={m.favorite_shows_empty()}
+  emptyMessage={m.list_placeholder_favorite_shows()}
 />
 
 {#if slug !== "me"}

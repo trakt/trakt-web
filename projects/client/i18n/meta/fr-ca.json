@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "Un message personnalisé: Si vous avez des informations sur l'utilisateur (par exemple, son historique de visionnage), vous pourriez utiliser ces informations pour générer un message plus personnalisé, comme 'Cet utilisateur adore les films d'horreur mais déteste rédiger des biographies. (Peut-être qu'il est trop occupé à se cacher des zombies?)'"
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "Votre liste est vide. Ajoutez des films pour créer votre chef-d'œuvre cinématographique."
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "Votre liste est vide. Ajoutez des séries pour stimuler votre imagination."
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "Parcourez les séries et personnalisez votre emploi du temps."
     },
     "up_next_empty": {
       "default": "Commencez à regarder et ajoutez des séries à votre liste de visionnement."
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "Ajoutez des films à votre liste de visionnement et ne manquez jamais une première."
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "Ajoutez les films à venir à votre liste de visionnement et restez à jour."
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "Séries favorites"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "Votre liste de films favoris est vide."
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "Votre liste de séries favorites est vide."
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "Listes populaires"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} ne figure dans aucune liste populaire.",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "Aucun commentaire pour l'instant."
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "Épisodes visionnés"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "Vous n'avez pas encore vu {title}",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "Abonnés"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "Personne à suivre ici (pour le moment)."
     },
     "read_more": {

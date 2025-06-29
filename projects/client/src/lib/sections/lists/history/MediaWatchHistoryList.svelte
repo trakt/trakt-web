@@ -35,7 +35,7 @@
     {/snippet}
 
     {#snippet empty()}
-      <p>{m.empty_media_history_label({ title: media.title })}</p>
+      <p>{m.list_placeholder_media_history({ title: media.title })}</p>
     {/snippet}
   </MediaList>
 </RenderFor>

@@ -15,21 +15,21 @@
 
 {#if type === "movie"}
   {#if status === "all"}
-    <p class="small">{m.watchlist_movies_empty()}</p>
+    <p class="small">{m.list_placeholder_watchlist_movies()}</p>
   {/if}
 
   {#if status === "released"}
-    <p class="small">{m.released_movies_empty()}</p>
+    <p class="small">{m.list_placeholder_released_movies()}</p>
   {/if}
 
   {#if status === "unreleased"}
-    <p class="small">{m.unreleased_movies_empty()}</p>
+    <p class="small">{m.list_placeholder_unreleased_movies()}</p>
   {/if}
 
   <FindMoviesLink />
 {/if}
 
 {#if type === "show"}
-  <p class="small">{m.watchlist_shows_empty()}</p>
+  <p class="small">{m.list_placeholder_watchlist_shows()}</p>
   <FindShowsLink />
 {/if}
