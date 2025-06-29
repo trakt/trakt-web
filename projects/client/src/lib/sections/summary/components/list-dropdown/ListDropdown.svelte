@@ -26,7 +26,7 @@
 
 <ListDropdownButton
   {size}
-  title={m.add_remove_from_lists({ title })}
+  title={m.dropdown_label_add_remove_from_lists({ title })}
   isListed={$isListed}
   disabled={isDisabled}
 >

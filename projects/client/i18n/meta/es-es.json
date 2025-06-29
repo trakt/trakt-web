@@ -1086,7 +1086,7 @@
     "view_all_social_activity": {
       "default": "Ver toda la actividad social"
     },
-    "position_dropwdown_label": {
+    "dropdown_label_person_position": {
       "default": "Puesto"
     },
     "position_acting": {
@@ -1440,7 +1440,7 @@
     "listed": {
       "default": "En lista"
     },
-    "add_remove_from_lists": {
+    "dropdown_label_add_remove_from_lists": {
       "default": "Añadir o quitar {title} de las listas",
       "variables": {
         "title": {
