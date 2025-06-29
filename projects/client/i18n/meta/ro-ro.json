@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "Programare Iminentă"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "Premieră de sezon"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "Premieră de serie"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "Premieră de mid-sezon"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "Final de sezon"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "Final de serie"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "Final de mid-sezon"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "Următorul"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "{count} episoade",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "Serii recomandate"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} episoade",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "Urmăritori"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} vizionări",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "Viitoarele premiere"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "Va urma"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "Găsește Serialuri"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} urmăresc",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "Actori"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} nerăbdători",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "Vezi tot"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "Sezon complet"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Comută la Trakt.tv"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "Previzualizare"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "Număr de vizionări"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "Episoade vizionate"
     },
     "empty_media_history_label": {

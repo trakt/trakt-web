@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "次回の予定"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "シーズン初公開"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "シリーズ初公開"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "シーズン中盤初公開"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "シーズン最終回"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "シリーズ最終回"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "シーズン中盤最終回"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "次に見る作品"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "あと{count}話",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "おすすめ番組"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "全{count}話",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "視聴者"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} 回再生",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "もうすぐ公開"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "未定"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "番組を探す"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count}人が視聴中",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "出演者"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} が待ち遠しい",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "すべて表示"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "フルシーズン"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Trakt.tvへ"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "プレビュー"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "視聴回数"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "視聴済みエピソード"
     },
     "empty_media_history_label": {

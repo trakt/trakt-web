@@ -24,23 +24,29 @@
       "default": "Upcoming Schedule",
       "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible."
     },
-    "season_premiere": {
-      "default": "Season Premiere"
+    "tag_text_season_premiere": {
+      "default": "Season Premiere",
+      "description": "Text for the tag that indicates the premiere of a season of a show. This should be as short as possible."
     },
-    "series_premiere": {
-      "default": "Series Premiere"
+    "tag_text_series_premiere": {
+      "default": "Series Premiere",
+      "description": "Text for the tag that indicates the premiere of a series. This should be as short as possible."
     },
-    "mid_season_premiere": {
-      "default": "Mid-Season Premiere"
+    "tag_text_mid_season_premiere": {
+      "default": "Mid-Season Premiere",
+      "description": "Text for the tag that indicates the premiere of a mid-season of a show. This should be as short as possible."
     },
-    "season_finale": {
-      "default": "Season Finale"
+    "tag_text_season_finale": {
+      "default": "Season Finale",
+      "description": "Text for the tag that indicates the finale of a season of a show. This should be as short as possible."
     },
-    "series_finale": {
-      "default": "Series Finale"
+    "tag_text_series_finale": {
+      "default": "Series Finale",
+      "description": "Text for the tag that indicates the finale of a series. This should be as short as possible."
     },
-    "mid_season_finale": {
-      "default": "Mid-Season Finale"
+    "tag_text_mid_season_finale": {
+      "default": "Mid-Season Finale",
+      "description": "Text for the tag that indicates the finale of a mid-season of a show. This should be as short as possible."
     },
     "profile_banner_greeting": {
       "default": "Hello, {name}",
@@ -54,8 +60,9 @@
       "default": "Up Next",
       "description": "Title for lists containing the next episodes to watch of aired episodes. This title should be as short and concise as possible."
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "{count} remaining",
+      "description": "Text for the tag that shows the number of remaining episodes in a show. This should be as short as possible.",
       "variables": {
         "count": {
           "type": "number"
@@ -69,8 +76,9 @@
     "list_title_recommended_shows": {
       "default": "Recommended Shows"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} episodes",
+      "description": "Text for the tag that shows the number of episodes in a show. This should be as short as possible.",
       "variables": {
         "count": {
           "type": "number"
@@ -367,8 +375,9 @@
     "watchers": {
       "default": "Watchers"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} plays",
+      "description": "Text for the tag that shows the number of plays of a movie or episode. This should be as short as possible.",
       "variables": {
         "number": {
           "type": "number"
@@ -396,8 +405,9 @@
       "default": "Coming Soon",
       "description": "Title for lists containing watchlisted movies that are coming soon. This title should be as short and concise as possible."
     },
-    "tba_label": {
-      "default": "TBA"
+    "tag_text_tba": {
+      "default": "TBA",
+      "description": "Text for the tag that indicates that something has no release date yet. This should be as short as possible."
     },
     "list_title_related_movies": {
       "default": "Related Movies",
@@ -478,8 +488,9 @@
       "default": "Find Shows",
       "description": "Text for the button that allows users to find shows. This button is shown in some empty lists."
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} watching",
+      "description": "Text for the tag that shows the number of active watchers of a movie or show. This should be as short as possible.",
       "variables": {
         "count": {
           "type": "number"
@@ -952,8 +963,9 @@
       "default": "Actors",
       "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible."
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} eager",
+      "description": "Text for the tag that shows the number of users who are eagerly anticipating a movie or show. This should be as short as possible.",
       "variables": {
         "count": {
           "type": "number"
@@ -978,8 +990,9 @@
       "default": "View All",
       "description": "Text for the button that allows users to drill down on lists to view all items in it."
     },
-    "full_season": {
-      "default": "Full Season"
+    "tag_text_full_season": {
+      "default": "Full Season",
+      "description": "Text for the tag that indicates the entry is a placeholder for the entire season. This should be as short as possible."
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Are you sure you want to remove {title} from your Watchlist?",
@@ -1278,8 +1291,9 @@
     "switch_to_og": {
       "default": "Switch to Trakt.tv"
     },
-    "preview": {
-      "default": "Preview"
+    "tag_text_preview": {
+      "default": "Preview",
+      "description": "Text for the tag that indicates a preview feature. This should be as short as possible."
     },
     "preview_description": {
       "default": "This feature's still getting a fresh coat of paint, citizen. We're hammering away at the UX, making it sing like a choir of angels (or at least, function smoothly without inducing existential dread)."
@@ -1376,11 +1390,13 @@
         }
       }
     },
-    "watch_count_label": {
-      "default": "Watch count"
+    "tag_text_watch_count": {
+      "default": "Watch count",
+      "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible."
     },
-    "watched_episodes_count_label": {
-      "default": "Watched episodes"
+    "tag_text_watched_episodes": {
+      "default": "Watched episodes",
+      "description": "Text for the tag that is shown before the episode watch count. This should be as short as possible."
     },
     "empty_media_history_label": {
       "default": "You haven't watched {title} yet",

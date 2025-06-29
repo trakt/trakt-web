@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "Наступний розклад"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "Прем'єра сезону"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "Прем'єра серіалу"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "Прем'єра середини сезону"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "Фінал сезону"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "Фінал серіалу"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "Фінал середини сезону"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "Наступне"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "{count} епізодів",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "Рекомендовані серіали"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} епізодів",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "Спостерігачі"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} переглядів",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "Скоро з'явиться"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "Наразі невідомо"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "Знайти серіали"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} дивляться",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "Актори"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} в очікуванні",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "Дивитись все"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "Повний сезон"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Перейти на Trakt.tv"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "Перегляд"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "Кількість переглядів"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "Переглянуто епізодів"
     },
     "empty_media_history_label": {

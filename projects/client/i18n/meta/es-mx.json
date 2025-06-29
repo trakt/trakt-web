@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "Programación próxima"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "Estreno de temporada"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "Estreno de la serie"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "Estreno de mitad de temporada"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "Final de temporada"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "Final de la serie"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "Final de mitad de temporada"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "A continuación"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "Quedan {count}",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "Recomendaciones"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} episodios",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "Espectadores"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} reproducciones",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "Próximamente"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "Pendiente"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "Encuentra Series"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} disfrutando",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "Actores"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} con ansias",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "Ver todo"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "Temporada Completa"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Cambia a Trakt.tv"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "Vista previa"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "Contador de visualizaciones"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "Episodios vistos"
     },
     "empty_media_history_label": {
