@@ -75,7 +75,7 @@
         }
       }
     },
-    "error_404_title": {
+    "page_title_error_404": {
       "default": "404: Nicość. Pustka."
     },
     "error_404_message": {
@@ -1380,7 +1380,7 @@
     "error_comment_unknown": {
       "default": "Wystąpił błąd podczas publikowania komentarza. Spróbuj ponownie później."
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "Profil {username}",
       "variables": {
         "username": {
@@ -1416,7 +1416,7 @@
         }
       }
     },
-    "error_page_service_title": {
+    "page_title_service_unavailable": {
       "default": "Usługa Trakt niedostępna"
     },
     "error_page_service_message": {
@@ -1513,7 +1513,7 @@
     "type_show": {
       "default": "Serial"
     },
-    "sign_in": {
+    "page_title_sign_in": {
       "default": "Zaloguj się"
     },
     "code_retry_title": {
@@ -1616,10 +1616,10 @@
     "button_label_cookie_accept": {
       "default": "Rozumiem, zaczynamy!"
     },
-    "year_to_date_label": {
+    "page_title_year_to_date": {
       "default": "Rok do dziś"
     },
-    "month_in_review_label": {
+    "page_title_month_in_review": {
       "default": "Przegląd miesiąca"
     },
     "page_title_settings": {
@@ -1646,7 +1646,7 @@
     "button_label_save_filters": {
       "default": "Zapisz filtry"
     },
-    "error_page_locked_account_title": {
+    "page_title_account_locked": {
       "default": "Konto zablokowane"
     },
     "error_page_locked_account_message": {
@@ -1745,6 +1745,68 @@
     },
     "list_title_extras": {
       "default": "Dodatki"
+    },
+    "page_title_up_next": {
+      "default": "Następne"
+    },
+    "page_title_watchlist_shows": {
+      "default": "Twoja lista seriali"
+    },
+    "page_title_available_now": {
+      "default": "Dostępne teraz"
+    },
+    "page_title_coming_soon": {
+      "default": "Już wkrótce"
+    },
+    "page_title_watchlist_movies": {
+      "default": "Twoja lista filmów"
+    },
+    "page_title_social_activity": {
+      "default": "Aktywność społeczności"
+    },
+    "page_title_trending_shows": {
+      "default": "Popularne seriale"
+    },
+    "page_title_recommended_shows": {
+      "default": "Polecane seriale"
+    },
+    "page_title_popular_shows": {
+      "default": "Popularne seriale"
+    },
+    "page_title_hot_shows": {
+      "default": "Gorące seriale"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Wyczekiwane seriale"
+    },
+    "page_title_trending_movies": {
+      "default": "Popularne filmy"
+    },
+    "page_title_recommended_movies": {
+      "default": "Polecane filmy"
+    },
+    "page_title_popular_movies": {
+      "default": "Popularne filmy"
+    },
+    "page_title_hot_movies": {
+      "default": "Gorące filmy"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Wyczekiwane filmy"
+    },
+    "page_title_recently_watched": {
+      "default": "Ostatnio oglądane"
+    },
+    "page_title_profile": {
+      "default": "Profil"
+    },
+    "page_title_search_results": {
+      "default": "Wyniki dla {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }

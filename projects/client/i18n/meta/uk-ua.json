@@ -75,7 +75,7 @@
         }
       }
     },
-    "error_404_title": {
+    "page_title_error_404": {
       "default": "404: Ніщо. Пустота."
     },
     "error_404_message": {
@@ -1380,7 +1380,7 @@
     "error_comment_unknown": {
       "default": "Виникла помилка під час публікації вашого коментаря. Спробуйте пізніше."
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "Профіль {username}",
       "variables": {
         "username": {
@@ -1416,7 +1416,7 @@
         }
       }
     },
-    "error_page_service_title": {
+    "page_title_service_unavailable": {
       "default": "Сервіс Trakt недоступний"
     },
     "error_page_service_message": {
@@ -1513,7 +1513,7 @@
     "type_show": {
       "default": "Серіал"
     },
-    "sign_in": {
+    "page_title_sign_in": {
       "default": "Увійти"
     },
     "code_retry_title": {
@@ -1616,10 +1616,10 @@
     "button_label_cookie_accept": {
       "default": "Зрозуміло, поїхали!"
     },
-    "year_to_date_label": {
+    "page_title_year_to_date": {
       "default": "З початку року"
     },
-    "month_in_review_label": {
+    "page_title_month_in_review": {
       "default": "Огляд місяця"
     },
     "page_title_settings": {
@@ -1646,7 +1646,7 @@
     "button_label_save_filters": {
       "default": "Зберегти фільтри"
     },
-    "error_page_locked_account_title": {
+    "page_title_account_locked": {
       "default": "Обліковий запис заблоковано"
     },
     "error_page_locked_account_message": {
@@ -1745,6 +1745,68 @@
     },
     "list_title_extras": {
       "default": "Додаткові матеріали"
+    },
+    "page_title_up_next": {
+      "default": "Найближчим часом"
+    },
+    "page_title_watchlist_shows": {
+      "default": "Ваш список серіалів"
+    },
+    "page_title_available_now": {
+      "default": "Доступно зараз"
+    },
+    "page_title_coming_soon": {
+      "default": "Найближчим часом"
+    },
+    "page_title_watchlist_movies": {
+      "default": "Ваш список фільмів"
+    },
+    "page_title_social_activity": {
+      "default": "Соціальна активність"
+    },
+    "page_title_trending_shows": {
+      "default": "Популярні серіали"
+    },
+    "page_title_recommended_shows": {
+      "default": "Рекомендовані серіали"
+    },
+    "page_title_popular_shows": {
+      "default": "Популярні серіали"
+    },
+    "page_title_hot_shows": {
+      "default": "Гарячі серіали"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Очікувані серіали"
+    },
+    "page_title_trending_movies": {
+      "default": "Популярні фільми"
+    },
+    "page_title_recommended_movies": {
+      "default": "Рекомендовані фільми"
+    },
+    "page_title_popular_movies": {
+      "default": "Популярні фільми"
+    },
+    "page_title_hot_movies": {
+      "default": "Гарячі фільми"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Очікувані фільми"
+    },
+    "page_title_recently_watched": {
+      "default": "Нещодавно переглянуто"
+    },
+    "page_title_profile": {
+      "default": "Профіль"
+    },
+    "page_title_search_results": {
+      "default": "Результати для {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }

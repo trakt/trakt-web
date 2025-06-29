@@ -18,6 +18,17 @@
     }
   });
 
+  const pageTitle = $derived.by(() => {
+    switch (status) {
+      case "released":
+        return m.page_title_available_now();
+      case "unreleased":
+        return m.page_title_coming_soon();
+      default:
+        return m.page_title_watchlist_movies();
+    }
+  });
+
   const title = $derived.by(() => {
     switch (status) {
       case "released":
@@ -30,7 +41,11 @@
   });
 </script>
 
-<TraktPage audience="authenticated" image={DEFAULT_SHARE_MOVIE_COVER} {title}>
+<TraktPage
+  audience="authenticated"
+  image={DEFAULT_SHARE_MOVIE_COVER}
+  title={pageTitle}
+>
   <TraktPageCoverSetter />
 
   <WatchlistPaginatedList {status} {title} type="movie" />

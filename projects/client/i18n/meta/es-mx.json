@@ -75,7 +75,7 @@
         }
       }
     },
-    "error_404_title": {
+    "page_title_error_404": {
       "default": "404: ¡Error!"
     },
     "error_404_message": {
@@ -1380,7 +1380,7 @@
     "error_comment_unknown": {
       "default": "Ocurrió un error al publicar tu comentario. Inténtalo de nuevo más tarde."
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "Perfil de {username}",
       "variables": {
         "username": {
@@ -1416,7 +1416,7 @@
         }
       }
     },
-    "error_page_service_title": {
+    "page_title_service_unavailable": {
       "default": "Servicio Trakt inaccesible"
     },
     "error_page_service_message": {
@@ -1513,7 +1513,7 @@
     "type_show": {
       "default": "Serie"
     },
-    "sign_in": {
+    "page_title_sign_in": {
       "default": "Iniciar sesión"
     },
     "code_retry_title": {
@@ -1616,10 +1616,10 @@
     "button_label_cookie_accept": {
       "default": "¡Entendido, ¡vamos!"
     },
-    "year_to_date_label": {
+    "page_title_year_to_date": {
       "default": "Año hasta la fecha"
     },
-    "month_in_review_label": {
+    "page_title_month_in_review": {
       "default": "Mes en revisión"
     },
     "page_title_settings": {
@@ -1646,7 +1646,7 @@
     "button_label_save_filters": {
       "default": "Guardar filtros"
     },
-    "error_page_locked_account_title": {
+    "page_title_account_locked": {
       "default": "Cuenta bloqueada"
     },
     "error_page_locked_account_message": {
@@ -1745,6 +1745,68 @@
     },
     "list_title_extras": {
       "default": "Extras"
+    },
+    "page_title_up_next": {
+      "default": "Próximamente"
+    },
+    "page_title_watchlist_shows": {
+      "default": "Tus series por ver"
+    },
+    "page_title_available_now": {
+      "default": "Disponible ya"
+    },
+    "page_title_coming_soon": {
+      "default": "Próximamente"
+    },
+    "page_title_watchlist_movies": {
+      "default": "Tus películas por ver"
+    },
+    "page_title_social_activity": {
+      "default": "Actividad social"
+    },
+    "page_title_trending_shows": {
+      "default": "Series en tendencia"
+    },
+    "page_title_recommended_shows": {
+      "default": "Series recomendadas"
+    },
+    "page_title_popular_shows": {
+      "default": "Series populares"
+    },
+    "page_title_hot_shows": {
+      "default": "Series del momento"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Series más esperadas"
+    },
+    "page_title_trending_movies": {
+      "default": "Películas en tendencia"
+    },
+    "page_title_recommended_movies": {
+      "default": "Películas recomendadas"
+    },
+    "page_title_popular_movies": {
+      "default": "Películas populares"
+    },
+    "page_title_hot_movies": {
+      "default": "Películas del momento"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Películas más esperadas"
+    },
+    "page_title_recently_watched": {
+      "default": "Visto recientemente"
+    },
+    "page_title_profile": {
+      "default": "Perfil"
+    },
+    "page_title_search_results": {
+      "default": "Resultados para {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }

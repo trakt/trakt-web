@@ -75,7 +75,7 @@
         }
       }
     },
-    "error_404_title": {
+    "page_title_error_404": {
       "default": "404: Нищото. Празнотата."
     },
     "error_404_message": {
@@ -1380,7 +1380,7 @@
     "error_comment_unknown": {
       "default": "Възникна грешка при публикуването на вашия коментар. Моля, опитайте отново по-късно."
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "Профил на {username}",
       "variables": {
         "username": {
@@ -1416,7 +1416,7 @@
         }
       }
     },
-    "error_page_service_title": {
+    "page_title_service_unavailable": {
       "default": "Услугата Trakt е недостъпна"
     },
     "error_page_service_message": {
@@ -1513,7 +1513,7 @@
     "type_show": {
       "default": "Сериал"
     },
-    "sign_in": {
+    "page_title_sign_in": {
       "default": "Вход"
     },
     "code_retry_title": {
@@ -1616,10 +1616,10 @@
     "button_label_cookie_accept": {
       "default": "Разбрах, да тръгваме!"
     },
-    "year_to_date_label": {
+    "page_title_year_to_date": {
       "default": "Година до момента"
     },
-    "month_in_review_label": {
+    "page_title_month_in_review": {
       "default": "Обзор на месеца"
     },
     "page_title_settings": {
@@ -1646,7 +1646,7 @@
     "button_label_save_filters": {
       "default": "Запази филтрите"
     },
-    "error_page_locked_account_title": {
+    "page_title_account_locked": {
       "default": "Акаунтът е заключен"
     },
     "error_page_locked_account_message": {
@@ -1745,6 +1745,68 @@
     },
     "list_title_extras": {
       "default": "Екстри"
+    },
+    "page_title_up_next": {
+      "default": "Предстоящи"
+    },
+    "page_title_watchlist_shows": {
+      "default": "Вашият списък със сериали"
+    },
+    "page_title_available_now": {
+      "default": "Налично сега"
+    },
+    "page_title_coming_soon": {
+      "default": "Предстоящи"
+    },
+    "page_title_watchlist_movies": {
+      "default": "Вашият списък с филми"
+    },
+    "page_title_social_activity": {
+      "default": "Социална активност"
+    },
+    "page_title_trending_shows": {
+      "default": "Трендиращи сериали"
+    },
+    "page_title_recommended_shows": {
+      "default": "Препоръчани сериали"
+    },
+    "page_title_popular_shows": {
+      "default": "Популярни сериали"
+    },
+    "page_title_hot_shows": {
+      "default": "Активни сериали"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Очаквани сериали"
+    },
+    "page_title_trending_movies": {
+      "default": "Трендиращи филми"
+    },
+    "page_title_recommended_movies": {
+      "default": "Препоръчани филми"
+    },
+    "page_title_popular_movies": {
+      "default": "Популярни филми"
+    },
+    "page_title_hot_movies": {
+      "default": "Активни филми"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Очаквани филми"
+    },
+    "page_title_recently_watched": {
+      "default": "Наскоро гледани"
+    },
+    "page_title_profile": {
+      "default": "Профил"
+    },
+    "page_title_search_results": {
+      "default": "Резултати за {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }

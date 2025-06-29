@@ -15,7 +15,7 @@
 <TraktPage
   {audience}
   image={DEFAULT_SHARE_COVER}
-  title={m.month_in_review_label()}
+  title={m.page_title_month_in_review()}
 >
   <TraktPageCoverSetter />
 
@@ -29,6 +29,6 @@
         token,
       );
     }}
-    title={m.month_in_review_label()}
+    title={m.page_title_month_in_review()}
   />
 </TraktPage>

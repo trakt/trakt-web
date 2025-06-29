@@ -75,7 +75,7 @@
         }
       }
     },
-    "error_404_title": {
+    "page_title_error_404": {
       "default": "404: Nimic. Golul."
     },
     "error_404_message": {
@@ -1380,7 +1380,7 @@
     "error_comment_unknown": {
       "default": "A apărut o eroare la publicarea comentariului. Vă rugăm să încercați din nou mai târziu."
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "Profilul lui {username}",
       "variables": {
         "username": {
@@ -1416,7 +1416,7 @@
         }
       }
     },
-    "error_page_service_title": {
+    "page_title_service_unavailable": {
       "default": "Serviciul Trakt inaccesibil"
     },
     "error_page_service_message": {
@@ -1513,7 +1513,7 @@
     "type_show": {
       "default": "Serial"
     },
-    "sign_in": {
+    "page_title_sign_in": {
       "default": "Autentificare"
     },
     "code_retry_title": {
@@ -1616,10 +1616,10 @@
     "button_label_cookie_accept": {
       "default": "Am înțeles!"
     },
-    "year_to_date_label": {
+    "page_title_year_to_date": {
       "default": "Anul curent"
     },
-    "month_in_review_label": {
+    "page_title_month_in_review": {
       "default": "Luna în revistă"
     },
     "page_title_settings": {
@@ -1646,7 +1646,7 @@
     "button_label_save_filters": {
       "default": "Salvează filtrele"
     },
-    "error_page_locked_account_title": {
+    "page_title_account_locked": {
       "default": "Cont blocat"
     },
     "error_page_locked_account_message": {
@@ -1745,6 +1745,68 @@
     },
     "list_title_extras": {
       "default": "Extra"
+    },
+    "page_title_up_next": {
+      "default": "Urmează"
+    },
+    "page_title_watchlist_shows": {
+      "default": "Seriale pe care le urmărești"
+    },
+    "page_title_available_now": {
+      "default": "Disponibil acum"
+    },
+    "page_title_coming_soon": {
+      "default": "În curând"
+    },
+    "page_title_watchlist_movies": {
+      "default": "Filmele pe care le urmărești"
+    },
+    "page_title_social_activity": {
+      "default": "Activitate socială"
+    },
+    "page_title_trending_shows": {
+      "default": "Seriale în tendințe"
+    },
+    "page_title_recommended_shows": {
+      "default": "Seriale recomandate"
+    },
+    "page_title_popular_shows": {
+      "default": "Seriale populare"
+    },
+    "page_title_hot_shows": {
+      "default": "Seriale la modă"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Seriale așteptate"
+    },
+    "page_title_trending_movies": {
+      "default": "Filme în tendințe"
+    },
+    "page_title_recommended_movies": {
+      "default": "Filme recomandate"
+    },
+    "page_title_popular_movies": {
+      "default": "Filme populare"
+    },
+    "page_title_hot_movies": {
+      "default": "Filme la modă"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Filme așteptate"
+    },
+    "page_title_recently_watched": {
+      "default": "Văzute recent"
+    },
+    "page_title_profile": {
+      "default": "Profil"
+    },
+    "page_title_search_results": {
+      "default": "Rezultate pentru {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }

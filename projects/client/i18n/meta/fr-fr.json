@@ -75,7 +75,7 @@
         }
       }
     },
-    "error_404_title": {
+    "page_title_error_404": {
       "default": "404 : Erreur !"
     },
     "error_404_message": {
@@ -1380,7 +1380,7 @@
     "error_comment_unknown": {
       "default": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard."
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "Profil de {username}",
       "variables": {
         "username": {
@@ -1416,7 +1416,7 @@
         }
       }
     },
-    "error_page_service_title": {
+    "page_title_service_unavailable": {
       "default": "Service Trakt inaccessible"
     },
     "error_page_service_message": {
@@ -1513,7 +1513,7 @@
     "type_show": {
       "default": "Série"
     },
-    "sign_in": {
+    "page_title_sign_in": {
       "default": "Se connecter"
     },
     "code_retry_title": {
@@ -1616,10 +1616,10 @@
     "button_label_cookie_accept": {
       "default": "D'accord, en avant !"
     },
-    "year_to_date_label": {
+    "page_title_year_to_date": {
       "default": "Année en cours"
     },
-    "month_in_review_label": {
+    "page_title_month_in_review": {
       "default": "Bilan du mois"
     },
     "page_title_settings": {
@@ -1646,7 +1646,7 @@
     "button_label_save_filters": {
       "default": "Enregistrer les filtres"
     },
-    "error_page_locked_account_title": {
+    "page_title_account_locked": {
       "default": "Compte verrouillé"
     },
     "error_page_locked_account_message": {
@@ -1745,6 +1745,68 @@
     },
     "list_title_extras": {
       "default": "Suppléments"
+    },
+    "page_title_up_next": {
+      "default": "Prochainement"
+    },
+    "page_title_watchlist_shows": {
+      "default": "Vos séries à suivre"
+    },
+    "page_title_available_now": {
+      "default": "Disponible maintenant"
+    },
+    "page_title_coming_soon": {
+      "default": "Prochainement"
+    },
+    "page_title_watchlist_movies": {
+      "default": "Vos films à voir"
+    },
+    "page_title_social_activity": {
+      "default": "Activité sociale"
+    },
+    "page_title_trending_shows": {
+      "default": "Séries tendances"
+    },
+    "page_title_recommended_shows": {
+      "default": "Séries recommandées"
+    },
+    "page_title_popular_shows": {
+      "default": "Séries populaires"
+    },
+    "page_title_hot_shows": {
+      "default": "Séries en vogue"
+    },
+    "page_title_anticipated_shows": {
+      "default": "Séries attendues"
+    },
+    "page_title_trending_movies": {
+      "default": "Films tendances"
+    },
+    "page_title_recommended_movies": {
+      "default": "Films recommandés"
+    },
+    "page_title_popular_movies": {
+      "default": "Films populaires"
+    },
+    "page_title_hot_movies": {
+      "default": "Films en vogue"
+    },
+    "page_title_anticipated_movies": {
+      "default": "Films attendus"
+    },
+    "page_title_recently_watched": {
+      "default": "Récemment regardé"
+    },
+    "page_title_profile": {
+      "default": "Profil"
+    },
+    "page_title_search_results": {
+      "default": "Résultats pour {query}",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -11,7 +11,7 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_MOVIE_COVER}
-  title={m.your_watchlist_shows()}
+  title={m.page_title_watchlist_shows()}
 >
   <TraktPageCoverSetter />
 

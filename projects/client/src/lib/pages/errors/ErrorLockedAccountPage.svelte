@@ -6,7 +6,7 @@
   import ErrorPage from "./ErrorPage.svelte";
 </script>
 
-<ErrorPage title={m.error_page_locked_account_title()}>
+<ErrorPage title={m.page_title_account_locked()}>
   <p>
     <MessageWithLink
       message={m.error_page_locked_account_message()}

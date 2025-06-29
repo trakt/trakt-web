@@ -20,7 +20,7 @@
 
 <TraktPage
   audience="public"
-  title={m.sign_in()}
+  title={m.page_title_sign_in()}
   image={DEFAULT_SHARE_COVER}
   --authentication-height="var(--ni-320)"
 >

@@ -76,8 +76,9 @@
         }
       }
     },
-    "error_404_title": {
-      "default": "404: Nothingness. The void."
+    "page_title_error_404": {
+      "default": "404: Nothingness. The void.",
+      "description": "Title for the 404 error page."
     },
     "error_404_message": {
       "default": "(Don't worry, it happens! Even the Force is sometimes out of alignment.)"
@@ -1458,8 +1459,9 @@
     "error_comment_unknown": {
       "default": "An error occurred while posting your comment. Please try again later."
     },
-    "profile_page_title": {
+    "page_title_user_profile": {
       "default": "{username}'s profile",
+      "description": "Title for the user profile page.",
       "variables": {
         "username": {
           "type": "string"
@@ -1495,8 +1497,9 @@
         }
       }
     },
-    "error_page_service_title": {
-      "default": "Trakt service unreachable"
+    "page_title_service_unavailable": {
+      "default": "Trakt service unreachable",
+      "description": "Title for the page shown when the Trakt service is unreachable."
     },
     "error_page_service_message": {
       "default": "The connection is... absent. Like a forgotten memory."
@@ -1597,8 +1600,9 @@
     "type_show": {
       "default": "Show"
     },
-    "sign_in": {
-      "default": "Sign in"
+    "page_title_sign_in": {
+      "default": "Sign in",
+      "description": "Title for the sign-in page."
     },
     "code_retry_title": {
       "default": "Something went wrong"
@@ -1706,11 +1710,13 @@
       "default": "Accept the cookies",
       "description": "Aria-label for the button that accepts the cookie notice."
     },
-    "year_to_date_label": {
-      "default": "Year to date"
+    "page_title_year_to_date": {
+      "default": "Year to date",
+      "description": "Title for the year to date page."
     },
-    "month_in_review_label": {
-      "default": "Month in review"
+    "page_title_month_in_review": {
+      "default": "Month in review",
+      "description": "Title for the month in review page."
     },
     "page_title_settings": {
       "default": "Settings",
@@ -1742,8 +1748,9 @@
       "default": "Save filters",
       "description": "Aria-label for the button that saves the current filters as the default filters."
     },
-    "error_page_locked_account_title": {
-      "default": "Account locked"
+    "page_title_account_locked": {
+      "default": "Account locked",
+      "description": "Title for the account locked page."
     },
     "error_page_locked_account_message": {
       "default": "Your account is locked, <a>contact support</a> to resolve this issue."
@@ -1851,6 +1858,87 @@
     "list_title_extras": {
       "default": "Extras",
       "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible."
+    },
+    "page_title_up_next": {
+      "default": "Up Next",
+      "description": "Title for the up next page."
+    },
+    "page_title_watchlist_shows": {
+      "default": "Your Watchlist Shows",
+      "description": "Title for the watchlist shows page."
+    },
+    "page_title_available_now": {
+      "default": "Available Now",
+      "description": "Title for the available now page."
+    },
+    "page_title_coming_soon": {
+      "default": "Coming Soon",
+      "description": "Title for the coming soon page."
+    },
+    "page_title_watchlist_movies": {
+      "default": "Your Watchlist Movies",
+      "description": "Title for the watchlist movies page."
+    },
+    "page_title_social_activity": {
+      "default": "Social activity",
+      "description": "Title for the social activity page."
+    },
+    "page_title_trending_shows": {
+      "default": "Trending Shows",
+      "description": "Title for the trending shows page."
+    },
+    "page_title_recommended_shows": {
+      "default": "Recommended Shows",
+      "description": "Title for the recommended shows page."
+    },
+    "page_title_popular_shows": {
+      "default": "Popular Shows",
+      "description": "Title for the popular shows page."
+    },
+    "page_title_hot_shows": {
+      "default": "Hot Shows",
+      "description": "Title for the hot shows page."
+    },
+    "page_title_anticipated_shows": {
+      "default": "Anticipated Shows",
+      "description": "Title for the anticipated shows page."
+    },
+    "page_title_trending_movies": {
+      "default": "Trending movies",
+      "description": "Title for the trending movies page."
+    },
+    "page_title_recommended_movies": {
+      "default": "Recommended movies",
+      "description": "Title for the recommended movies page."
+    },
+    "page_title_popular_movies": {
+      "default": "Popular movies",
+      "description": "Title for the popular movies page."
+    },
+    "page_title_hot_movies": {
+      "default": "Hot movies",
+      "description": "Title for the hot movies page."
+    },
+    "page_title_anticipated_movies": {
+      "default": "Anticipated movies",
+      "description": "Title for the anticipated movies page."
+    },
+    "page_title_recently_watched": {
+      "default": "Recently Watched",
+      "description": "Title for the recently watched page."
+    },
+    "page_title_profile": {
+      "default": "Profile",
+      "description": "Title for the current users profile page."
+    },
+    "page_title_search_results": {
+      "default": "Results for {query}",
+      "description": "Title for the search results page.",
+      "variables": {
+        "query": {
+          "type": "string"
+        }
+      }
     }
   }
 }

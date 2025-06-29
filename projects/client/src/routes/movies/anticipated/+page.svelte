@@ -10,7 +10,7 @@
 <TraktPage
   audience="all"
   image={DEFAULT_SHARE_MOVIE_COVER}
-  title={m.anticipated_movies()}
+  title={m.page_title_anticipated_movies()}
 >
   <TraktPageCoverSetter />
 

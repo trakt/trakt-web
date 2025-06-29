@@ -12,8 +12,8 @@
 
   const title = $derived(
     $user?.username
-      ? m.profile_page_title({ username: $user.username })
-      : m.profile(),
+      ? m.page_title_user_profile({ username: $user.username })
+      : m.page_title_profile(),
   );
 </script>
 
