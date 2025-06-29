@@ -12,7 +12,7 @@
   const { title, onDrop, isDropping, style, ...props }: DropButtonProps =
     $props();
 
-  const handler = attachWarning(onDrop, m.drop_show_warning({ title }));
+  const handler = attachWarning(onDrop, m.warning_prompt_drop_show({ title }));
 
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: false, color: "default" }),

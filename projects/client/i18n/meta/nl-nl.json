@@ -779,7 +779,7 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "Weet je zeker dat je {title} wilt verwijderen van je Bekeken lijst? Alle afspeelbeurten worden verwijderd.",
       "variables": {
         "title": {
@@ -795,7 +795,7 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "Weet je zeker dat je deze afspeelbeurt van {title} uit je Bekeken lijst wilt verwijderen?",
       "variables": {
         "title": {
@@ -923,7 +923,7 @@
     "full_season": {
       "default": "Volledig Seizoen"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "Weet je zeker dat je {title} van je kijklijst wilt verwijderen?",
       "variables": {
         "title": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "Weet je zeker dat je {title} uit je Favorieten wilt verwijderen?",
       "variables": {
         "title": {
@@ -1211,7 +1211,7 @@
     "aired": {
       "default": "Uitgezonden"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "Weet je zeker dat je {title} wilt verwijderen? Dit verwijdert het van je kijklijst.",
       "variables": {
         "title": {
@@ -1242,7 +1242,7 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "Door interne ontwerpwijzigingen zullen eerder verborgen series nu zichtbaar zijn in je lijst met een zwart-witte miniatuur zodat je ze snel herkent, met de mogelijkheid ze weer zichtbaar te maken of uit de lijst te verwijderen."
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "Weet je zeker dat je de {title} serie wilt herstellen? Dit herstelt de voortgang en de kalender.",
       "variables": {
         "title": {
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "Weet je zeker dat je {title} wilt verwijderen van {list}?",
       "variables": {
         "title": {
@@ -1685,7 +1685,7 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "Weet je zeker dat je {username} wilt ontvolgen?",
       "variables": {
         "username": {

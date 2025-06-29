@@ -13,7 +13,7 @@
   const unfollowHandler = $derived(
     attachWarning(
       unfollowUser,
-      m.unfollow_warning({ username: profile.name.first }),
+      m.warning_prompt_unfollow_user({ username: profile.name.first }),
     ),
   );
 

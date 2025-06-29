@@ -779,7 +779,7 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "{title} を視聴済リストから削除しますか？すべての再生記録が削除されます。",
       "variables": {
         "title": {
@@ -795,7 +795,7 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "{title}の視聴記録を視聴済みリストから削除してもよろしいですか？",
       "variables": {
         "title": {
@@ -923,7 +923,7 @@
     "full_season": {
       "default": "フルシーズン"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "「{title}」をウォッチリストから削除してもよろしいですか？",
       "variables": {
         "title": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "{title}をお気に入りから削除しますか？",
       "variables": {
         "title": {
@@ -1211,7 +1211,7 @@
     "aired": {
       "default": "放送済み"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "{title}の番組を本当に削除してもよろしいですか？これにより、視聴予定リストから削除されます。",
       "variables": {
         "title": {
@@ -1242,7 +1242,7 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "以前非表示になっていた番組は、内部デザイン変更によりリストに戻され、迅速に認識できるように白黒のサムネイルが表示されます。非表示解除するか、リストから削除するかを選択できます。"
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "{title}の番組を復元しますか？これは進行状況とカレンダーで復元されます。",
       "variables": {
         "title": {
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "{title} を {list} から削除してもよろしいですか？",
       "variables": {
         "title": {
@@ -1685,7 +1685,7 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "{username} のフォローを解除してもよろしいですか？",
       "variables": {
         "username": {

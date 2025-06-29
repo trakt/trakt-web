@@ -33,7 +33,7 @@
   const onRemoveHandler = $derived(
     attachWarning(
       removeFromFavorites,
-      m.remove_from_favorites_warning({ title }),
+      m.warning_prompt_remove_from_favorites({ title }),
     ),
   );
 

@@ -779,7 +779,7 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "Ви впевнені, що хочете видалити {title} зі списку Переглянутого? Усі перегляди буде видалено.",
       "variables": {
         "title": {
@@ -795,7 +795,7 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "Ви впевнені, що хочете видалити це відтворення {title} зі списку Переглянуто?",
       "variables": {
         "title": {
@@ -923,7 +923,7 @@
     "full_season": {
       "default": "Повний сезон"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "Ви впевнені, що хочете видалити {title} зі свого списку перегляду?",
       "variables": {
         "title": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "Ви впевнені, що хочете видалити {title} з улюблених?",
       "variables": {
         "title": {
@@ -1211,7 +1211,7 @@
     "aired": {
       "default": "Виходило"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "Ви впевнені, що хочете відмовитися від {title} серіалу? Це видалить його з вашого списку наступного перегляду.",
       "variables": {
         "title": {
@@ -1242,7 +1242,7 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "Через зміни в інтерфейсі, раніше приховані контент будуть тепер видимі у вашому списку з чорно-білою мініатюрою, щоб ви могли швидко їх знайти, та з можливістю або приховати їх знову, або видалити з списку."
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "Ви впевнені, що хочете відновити медіа-контент {title}? Це відновить його у вашому прогресі та календарі.",
       "variables": {
         "title": {
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "Ви впевнені, що хочете видалити {title} з {list}?",
       "variables": {
         "title": {
@@ -1685,7 +1685,7 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "Ви впевнені, що хочете відписатися від {username}?",
       "variables": {
         "username": {

@@ -779,7 +779,7 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "Tem certeza que deseja remover {title} da sua lista de Assistidos? Todas as reproduções serão removidas.",
       "variables": {
         "title": {
@@ -795,7 +795,7 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "Tem certeza de que deseja remover esta reprodução de {title} da sua lista de Vistos?",
       "variables": {
         "title": {
@@ -923,7 +923,7 @@
     "full_season": {
       "default": "Temporada Completa"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "Tem certeza que quer remover {title} da sua lista para ver?",
       "variables": {
         "title": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "Tem certeza que deseja remover {title} dos seus Favoritos?",
       "variables": {
         "title": {
@@ -1211,7 +1211,7 @@
     "aired": {
       "default": "Estreou"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "Tem certeza que deseja abandonar {title}? Isso removerá do seu próximo item.",
       "variables": {
         "title": {
@@ -1242,7 +1242,7 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "Devido a mudanças internas no design, programas previamente ocultos agora estarão visíveis na sua lista com uma miniatura em preto e branco para ajudar a identificá-los rapidamente, com a opção de reexibi-los ou removê-los da lista."
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "Tem certeza que deseja restaurar a série {title}? Isso restaurará seu progresso e calendário.",
       "variables": {
         "title": {
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "Tem certeza que deseja remover {title} da {list}?",
       "variables": {
         "title": {
@@ -1685,7 +1685,7 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "Tem certeza que deseja deixar de seguir {username}?",
       "variables": {
         "username": {

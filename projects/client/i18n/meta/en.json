@@ -829,8 +829,9 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "Are you sure you want to remove {title} from your Watched list? All plays will be removed.",
+      "description": "Warning prompt shown when a user tries to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
           "type": "string"
@@ -846,8 +847,9 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "Are you sure you want to remove this play of {title} from your Watched list?",
+      "description": "Warning prompt shown when a user tries to remove a single play of a movie or episode from their watch history.",
       "variables": {
         "title": {
           "type": "string"
@@ -979,8 +981,9 @@
     "full_season": {
       "default": "Full Season"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "Are you sure you want to remove {title} from your Watchlist?",
+      "description": "Warning prompt shown when a user tries to remove a movie or show from their watchlist.",
       "variables": {
         "title": {
           "type": "string"
@@ -1050,8 +1053,9 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "Are you sure you want to remove {title} from your Favorites?",
+      "description": "Warning prompt shown when a user tries to remove a movie or show from their favorites.",
       "variables": {
         "title": {
           "type": "string"
@@ -1286,8 +1290,9 @@
     "aired": {
       "default": "Aired"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
+      "description": "Warning prompt shown when a user tries to drop a show.",
       "variables": {
         "title": {
           "type": "string"
@@ -1319,8 +1324,9 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "Due to internal design changes previously hidden shows will now be visible in your list with a black and white thumbnail to help you spot them quickly, with the option to either un-hide them or drop them from the list."
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar.",
+      "description": "Warning prompt shown when a user tries to restore a hidden show.",
       "variables": {
         "title": {
           "type": "string"
@@ -1563,8 +1569,9 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "Are you sure you want to remove {title} from {list}?",
+      "description": "Warning prompt shown when a user tries to remove an item from a personal list.",
       "variables": {
         "title": {
           "type": "string"
@@ -1801,8 +1808,9 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "Are you sure you want to unfollow {username}?",
+      "description": "Warning prompt shown when a user tries to unfollow a profile.",
       "variables": {
         "username": {
           "type": "string"

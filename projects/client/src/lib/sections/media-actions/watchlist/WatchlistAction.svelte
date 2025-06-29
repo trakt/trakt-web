@@ -39,7 +39,7 @@
   const onRemoveHandler = $derived(
     attachWarning(
       removeFromWatchlist,
-      m.remove_from_watchlist_warning({ title }),
+      m.warning_prompt_remove_from_watchlist({ title }),
     ),
   );
 </script>
