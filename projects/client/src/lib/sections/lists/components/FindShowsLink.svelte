@@ -16,13 +16,13 @@
 <div class="find-shows-link">
   <Button
     href={UrlBuilder.shows()}
-    label={m.navbar_link_shows_label()}
+    label={m.button_label_browse_shows()}
     style="flat"
     variant="primary"
     color="purple"
     size="small"
   >
-    {m.find_shows_link()}
+    {m.button_text_find_shows()}
     {#snippet icon()}
       <ShowIcon />
     {/snippet}

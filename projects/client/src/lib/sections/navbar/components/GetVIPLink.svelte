@@ -7,9 +7,9 @@
 </script>
 
 <trakt-get-vip-link>
-  <Link href={UrlBuilder.vip()} label={m.get_vip_label()} color="inherit">
+  <Link href={UrlBuilder.vip()} label={m.link_label_get_vip()} color="inherit">
     <RenderFor audience="authenticated" device={["desktop"]}>
-      <p class="small bold uppercase">{m.get()}</p>
+      <p class="small bold uppercase">{m.link_text_get_vip()}</p>
     </RenderFor>
     <VipBadge />
   </Link>

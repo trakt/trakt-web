@@ -11,7 +11,7 @@
 
 <GlobalParameterEscaper enabled>
   <Button
-    label={m.filter_reset_all_label()}
+    label={m.button_label_reset_all_filters()}
     size="small"
     color="red"
     style="flat"
@@ -20,6 +20,6 @@
     href={page.url.pathname}
     navigationType={DpadNavigationType.Item}
   >
-    {m.filter_reset_all()}
+    {m.button_text_reset_all_filters()}
   </Button>
 </GlobalParameterEscaper>

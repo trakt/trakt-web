@@ -15,7 +15,7 @@
 {#if service}
   <div class="trakt-stream-on-overlay">
     <div class="trakt-stream-on-source">
-      <h6 class="uppercase">{m.stream_on()}</h6>
+      <h6 class="uppercase">{m.header_stream_on()}</h6>
       <StreamingServiceLogo
         source={service.source}
         i18n={StreamingServiceLogoIntlProvider}

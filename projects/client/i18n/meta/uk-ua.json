@@ -87,19 +87,19 @@
     "mark_as_watched_ask_prompt": {
       "default": "Коли ви подивилися це? (РРРР-ММ-ДД ГГ:ХХ)"
     },
-    "watchlist_action_label": {
+    "button_text_watchlist": {
       "default": "До перегляду"
     },
-    "mark_as_watched": {
+    "button_text_mark_as_watched": {
       "default": "Позначити як переглянуте"
     },
-    "mark_as_watched_until": {
+    "button_text_watched_until_here": {
       "default": "Переглянуто до цього місця"
     },
-    "watch_again": {
+    "button_text_watch_again": {
       "default": "Дивитися знову"
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "Додати {title} до вашого списку перегляду",
       "variables": {
         "title": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "Позначити {title} як переглянуте",
       "variables": {
         "title": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "Відмітити {title} як переглянуте до цього місця",
       "variables": {
         "title": {
@@ -234,7 +234,7 @@
     "genre_science_fiction": {
       "default": "Наукова фантастика"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "Прибрати {title} зі списку перегляду",
       "variables": {
         "title": {
@@ -245,10 +245,10 @@
     "search_placeholder": {
       "default": "Пошук серіалів та фільмів..."
     },
-    "join_trakt_button": {
+    "button_text_join_trakt": {
       "default": "Приєднатися до Trakt"
     },
-    "join_trakt_button_label": {
+    "button_label_join_trakt": {
       "default": "Приєднайтеся до trakt.tv, щоб відстежувати те, що ви дивитеся"
     },
     "copyright_notice": {
@@ -257,7 +257,7 @@
     "copyright_crafted_by": {
       "default": "Створено по всьому світу"
     },
-    "join_trakt_for_free_button": {
+    "button_text_join_trakt_for_free": {
       "default": "Приєднатися до Trakt безкоштовно"
     },
     "landing_discover_label": {
@@ -287,35 +287,50 @@
     "list_title_most_anticipated": {
       "default": "Найбільш очікувані"
     },
-    "get": {
+    "button_text_get_vip": {
       "default": "Отримати"
     },
-    "get_vip_label": {
+    "link_text_get_vip": {
+      "default": "Отримати"
+    },
+    "button_label_get_vip": {
       "default": "Відкрийте VIP-функції"
     },
-    "user_profile_label": {
+    "link_label_get_vip": {
+      "default": "Відкрити VIP функції"
+    },
+    "button_label_user_profile": {
       "default": "Профіль користувача"
     },
     "list_title_most_popular": {
       "default": "Найпопулярніші"
     },
-    "navbar_link_movies": {
+    "button_text_browse_movies": {
       "default": "Фільми"
     },
-    "navbar_link_movies_label": {
+    "button_label_browse_movies": {
       "default": "Переглянути фільми"
     },
-    "navbar_link_shows": {
+    "page_title_movies": {
+      "default": "Фільми"
+    },
+    "button_text_browse_shows": {
       "default": "Серіали"
     },
-    "navbar_link_shows_label": {
+    "button_label_browse_shows": {
       "default": "Переглянути серіали"
     },
-    "navbar_link_home": {
+    "page_title_shows": {
+      "default": "Серіали"
+    },
+    "button_text_home": {
       "default": "Головна"
     },
-    "navbar_link_home_label": {
+    "button_label_home": {
       "default": "Повернутися на головну сторінку"
+    },
+    "page_title_home": {
+      "default": "Головна"
     },
     "watchers": {
       "default": "Спостерігачі"
@@ -337,7 +352,10 @@
     "profile": {
       "default": "Профіль"
     },
-    "logout": {
+    "button_text_logout": {
+      "default": "Вийти"
+    },
+    "button_label_logout": {
       "default": "Вийти"
     },
     "list_title_coming_soon": {
@@ -415,10 +433,10 @@
     "unreleased_movies_empty": {
       "default": "Додайте майбутні фільми до свого списку переглядів та залишайтеся в курсі."
     },
-    "find_movies_link": {
+    "button_text_find_movies": {
       "default": "Знайти фільми"
     },
-    "find_shows_link": {
+    "button_text_find_shows": {
       "default": "Знайти серіали"
     },
     "active_watchers": {
@@ -462,7 +480,7 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} ще",
       "variables": {
         "count": {
@@ -488,11 +506,14 @@
     "genre": {
       "default": "Жанр"
     },
-    "navbar_link_lists": {
+    "button_text_browse_lists": {
       "default": "Списки"
     },
-    "navbar_link_lists_label": {
+    "button_label_browse_lists": {
       "default": "Переглянути списки"
+    },
+    "page_title_lists": {
+      "default": "Списки"
     },
     "list_title_watchlist_shows": {
       "default": "Ваші серіали"
@@ -500,7 +521,7 @@
     "list_title_watchlist_movies": {
       "default": "Ваші фільми"
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "Дивитися {title} зараз",
       "variables": {
         "title": {
@@ -747,10 +768,10 @@
     "job_creator": {
       "default": "Створець"
     },
-    "remove_from_watched": {
+    "button_text_remove_from_history": {
       "default": "Видалити з Переглянутого"
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "Видалити {title} зі списку Переглянутого",
       "variables": {
         "title": {
@@ -766,7 +787,7 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "Видалити цей перегляд {title} зі списку Переглянуто",
       "variables": {
         "title": {
@@ -896,7 +917,7 @@
     "trending_movies": {
       "default": "Популярні фільми"
     },
-    "view_all": {
+    "button_text_view_all": {
       "default": "Дивитись все"
     },
     "full_season": {
@@ -943,13 +964,13 @@
     "rate_now": {
       "default": "Оцінити зараз"
     },
-    "add_to_favorites": {
+    "button_text_add_to_favorites": {
       "default": "Додати до Улюблених"
     },
-    "remove_from_favorites": {
+    "button_text_remove_from_favorites": {
       "default": "Видалити з Улюблених"
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "Додати {title} до улюблених",
       "variables": {
         "title": {
@@ -957,7 +978,7 @@
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "Видалити {title} з улюблених",
       "variables": {
         "title": {
@@ -985,8 +1006,11 @@
     "favorite_shows_empty": {
       "default": "Ваш список улюблених серіалів порожній."
     },
-    "stream_on": {
+    "button_text_stream_on": {
       "default": "Дивись на"
+    },
+    "header_stream_on": {
+      "default": "Дивитися на"
     },
     "your_watchlist_shows": {
       "default": "Ваш список перегляду"
@@ -1195,7 +1219,7 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "Позначити серіал {title} як відхилений",
       "variables": {
         "title": {
@@ -1203,7 +1227,7 @@
         }
       }
     },
-    "drop_show": {
+    "button_text_drop_show": {
       "default": "Відхилити серіал"
     },
     "enable_up_next_nitro_label": {
@@ -1226,7 +1250,7 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "Відновити медіа-контент {title}",
       "variables": {
         "title": {
@@ -1234,7 +1258,7 @@
         }
       }
     },
-    "restore_show": {
+    "button_text_restore_show": {
       "default": "Відновити"
     },
     "mark_as_watched_show_warning": {
@@ -1281,13 +1305,13 @@
         }
       }
     },
-    "like_comment_label": {
+    "button_label_like_comment": {
       "default": "Вподобати коментар"
     },
-    "unlike_comment_label": {
+    "button_label_unlike_comment": {
       "default": "Не подобається коментар"
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} вподобайок",
       "variables": {
         "count": {
@@ -1298,10 +1322,10 @@
     "close_label": {
       "default": "Закрити"
     },
-    "comment_replies_label": {
+    "button_label_comment_replies": {
       "default": "Відповіді на коментарі"
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} відповідей",
       "variables": {
         "count": {
@@ -1318,10 +1342,10 @@
     "comment": {
       "default": "Коментар"
     },
-    "comment_reply": {
+    "button_text_comment_reply": {
       "default": "Відповісти"
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "Відповісти {user}",
       "variables": {
         "user": {
@@ -1381,7 +1405,7 @@
     "view_all_comments": {
       "default": "Переглянути всі коментарі"
     },
-    "remove_from_list": {
+    "button_text_remove_from_list": {
       "default": "Видалити зі списку"
     },
     "remove_from_list_label": {
@@ -1401,8 +1425,11 @@
     "error_page_service_status": {
       "default": "Статус сервісу Trakt"
     },
-    "retry": {
+    "button_text_retry": {
       "default": "Спробувати знову"
+    },
+    "button_label_retry": {
+      "default": "Спробувати ще раз"
     },
     "community_sentiment": {
       "default": "Думка спільноти"
@@ -1463,10 +1490,13 @@
     "theme_system": {
       "default": "Системна"
     },
-    "filter_label": {
+    "button_text_filters": {
+      "default": "Фільтри"
+    },
+    "button_label_filters": {
       "default": "Фільтр"
     },
-    "filter_reset": {
+    "button_label_reset_filter": {
       "default": "Скинути"
     },
     "results_for_title": {
@@ -1536,10 +1566,10 @@
         }
       }
     },
-    "filter_reset_all": {
+    "button_text_reset_all_filters": {
       "default": "Скинути все"
     },
-    "filter_reset_all_label": {
+    "button_label_reset_all_filters": {
       "default": "Скинути всі фільтри"
     },
     "video_type_trailer": {
@@ -1566,10 +1596,10 @@
     "remaining": {
       "default": "залишилось"
     },
-    "checkin": {
+    "button_text_checkin": {
       "default": "Відмітитися"
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "Відмітитися {title}",
       "variables": {
         "title": {
@@ -1580,7 +1610,10 @@
     "cookie_notice": {
       "default": "Trakt використовує C🍪🍪KIES, щоб покращити ваш загальний досвід. Ви можете <a>прочитати більше інформації</a> тут."
     },
-    "cookie_accept": {
+    "button_text_cookie_accept": {
+      "default": "Зрозуміло, поїхали!"
+    },
+    "button_label_cookie_accept": {
       "default": "Зрозуміло, поїхали!"
     },
     "year_to_date_label": {
@@ -1589,7 +1622,16 @@
     "month_in_review_label": {
       "default": "Огляд місяця"
     },
-    "settings": {
+    "page_title_settings": {
+      "default": "Налаштування"
+    },
+    "header_settings": {
+      "default": "Налаштування"
+    },
+    "button_text_settings": {
+      "default": "Налаштування"
+    },
+    "button_label_settings": {
       "default": "Налаштування"
     },
     "settings_spoilers_title": {
@@ -1598,10 +1640,10 @@
     "settings_spoilers_label": {
       "default": "Показати спойлери"
     },
-    "filter_save": {
+    "button_text_save_filters": {
       "default": "Зберегти"
     },
-    "filter_save_label": {
+    "button_label_save_filters": {
       "default": "Зберегти фільтри"
     },
     "error_page_locked_account_title": {
@@ -1621,10 +1663,10 @@
         }
       }
     },
-    "follow": {
+    "button_text_follow": {
       "default": "Слідкувати"
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "Слідкувати за {username}",
       "variables": {
         "username": {
@@ -1632,10 +1674,10 @@
         }
       }
     },
-    "unfollow": {
+    "button_text_unfollow": {
       "default": "Відписатися"
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "Відписатися від {username}",
       "variables": {
         "username": {
@@ -1669,8 +1711,11 @@
     "read_more": {
       "default": "Читати далі"
     },
-    "add_comment": {
+    "button_text_add_comment": {
       "default": "Додати"
+    },
+    "button_label_add_comment": {
+      "default": "Додати коментар"
     },
     "rename_list": {
       "default": "Перейменувати ваш список"

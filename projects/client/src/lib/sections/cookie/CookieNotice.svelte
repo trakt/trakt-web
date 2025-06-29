@@ -39,11 +39,11 @@
       color="default"
       variant="secondary"
       size="small"
-      label={m.cookie_accept()}
+      label={m.button_label_cookie_accept()}
       onclick={consent}
       data-testid={TestId.ConsentButton}
     >
-      {m.cookie_accept()}
+      {m.button_text_cookie_accept()}
     </Button>
   </div>
 {/if}

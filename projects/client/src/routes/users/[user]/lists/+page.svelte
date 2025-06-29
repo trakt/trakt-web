@@ -13,7 +13,7 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
-  title={m.navbar_link_lists()}
+  title={m.page_title_lists()}
 >
   <TraktPageCoverSetter />
 

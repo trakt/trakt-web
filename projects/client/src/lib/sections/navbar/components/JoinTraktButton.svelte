@@ -12,14 +12,14 @@
 {#snippet joinButton(url: string)}
   <Button
     href={url}
-    label={m.join_trakt_button_label()}
+    label={m.button_label_join_trakt()}
     style="flat"
     size="small"
     color="purple"
     variant="primary"
     navigationType={DpadNavigationType.Item}
   >
-    {m.join_trakt_button()}
+    {m.button_text_join_trakt()}
   </Button>
 {/snippet}
 

@@ -80,44 +80,44 @@
       <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
         <Button
           href={UrlBuilder.home()}
-          label={m.navbar_link_home_label()}
+          label={m.button_label_home()}
           style="underlined"
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarHomeButton}
         >
-          {m.navbar_link_home()}
+          {m.button_text_home()}
         </Button>
         <Button
           href={UrlBuilder.shows()}
-          label={m.navbar_link_shows_label()}
+          label={m.button_label_browse_shows()}
           style="underlined"
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarShowsButton}
         >
-          {m.navbar_link_shows()}
+          {m.button_text_browse_shows()}
         </Button>
         <Button
           href={UrlBuilder.movies()}
-          label={m.navbar_link_movies_label()}
+          label={m.button_label_browse_movies()}
           style="underlined"
           variant="primary"
           color="purple"
           data-testid={TestId.NavBarMoviesButton}
         >
-          {m.navbar_link_movies()}
+          {m.button_text_browse_movies()}
         </Button>
       </RenderFor>
       <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
         <Button
           href={UrlBuilder.lists.user()}
-          label={m.navbar_link_lists_label()}
+          label={m.button_label_browse_lists()}
           style="underlined"
           variant="primary"
           color="purple"
         >
-          {m.navbar_link_lists()}
+          {m.button_text_browse_lists()}
         </Button>
       </RenderFor>
       <RenderFor audience="public">

@@ -19,7 +19,7 @@
   <Button
     style="flat"
     size="small"
-    label={m.filter_label()}
+    label={m.button_label_filters()}
     variant="secondary"
     text="capitalize"
     {color}
@@ -28,7 +28,7 @@
       isSidebarOpen.set(true);
     }}
   >
-    {m.filter_label()}
+    {m.button_text_filters()}
     {#snippet icon()}
       <FilterIcon {state} />
     {/snippet}

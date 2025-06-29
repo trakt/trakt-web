@@ -34,21 +34,21 @@
       <Link href={UrlBuilder.home()} navigationType={DpadNavigationType.Item}>
         <div class="trakt-side-navbar-link">
           <HomeIcon />
-          <h6>{m.navbar_link_home()}</h6>
+          <h6>{m.button_text_home()}</h6>
         </div>
       </Link>
 
       <Link href={UrlBuilder.shows()} navigationType={DpadNavigationType.Item}>
         <div class="trakt-side-navbar-link">
           <ShowIcon />
-          <h6>{m.navbar_link_shows()}</h6>
+          <h6>{m.button_text_browse_shows()}</h6>
         </div>
       </Link>
 
       <Link href={UrlBuilder.movies()} navigationType={DpadNavigationType.Item}>
         <div class="trakt-side-navbar-link">
           <MovieIcon />
-          <h6>{m.navbar_link_movies()}</h6>
+          <h6>{m.button_text_browse_movies()}</h6>
         </div>
       </Link>
 

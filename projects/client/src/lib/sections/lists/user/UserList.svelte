@@ -18,7 +18,7 @@
 <DrillableMediaList
   {type}
   id={`user-list-${type}-${list.id}`}
-  drilldownLabel={m.view_all()}
+  drilldownLabel={m.button_text_view_all()}
   filter={$filterMap}
   useList={(params) => useListItems({ list, ...params })}
   urlBuilder={() => getListUrl(list, type)}

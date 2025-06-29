@@ -87,19 +87,19 @@
     "mark_as_watched_ask_prompt": {
       "default": "いつ視聴完了しましたか？(YYYY-MM-DD HH:MM)"
     },
-    "watchlist_action_label": {
+    "button_text_watchlist": {
       "default": "観たい"
     },
-    "mark_as_watched": {
+    "button_text_mark_as_watched": {
       "default": "視聴済みにする"
     },
-    "mark_as_watched_until": {
+    "button_text_watched_until_here": {
       "default": "ここまで視聴済み"
     },
-    "watch_again": {
+    "button_text_watch_again": {
       "default": "もう一度見る"
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "{title} を視聴リストに追加",
       "variables": {
         "title": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "{title}を視聴済みにする",
       "variables": {
         "title": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "{title}をここまで視聴済みにする",
       "variables": {
         "title": {
@@ -234,7 +234,7 @@
     "genre_science_fiction": {
       "default": "SF"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "{title} を視聴リストから削除",
       "variables": {
         "title": {
@@ -245,10 +245,10 @@
     "search_placeholder": {
       "default": "番組や映像作品を検索..."
     },
-    "join_trakt_button": {
+    "button_text_join_trakt": {
       "default": "Traktに参加"
     },
-    "join_trakt_button_label": {
+    "button_label_join_trakt": {
       "default": "trakt.tvに参加して視聴状況を記録しましょう"
     },
     "copyright_notice": {
@@ -257,7 +257,7 @@
     "copyright_crafted_by": {
       "default": "世界中から愛を込めて制作"
     },
-    "join_trakt_for_free_button": {
+    "button_text_join_trakt_for_free": {
       "default": "Traktに無料登録"
     },
     "landing_discover_label": {
@@ -287,35 +287,50 @@
     "list_title_most_anticipated": {
       "default": "最も期待されている作品"
     },
-    "get": {
+    "button_text_get_vip": {
       "default": "取得"
     },
-    "get_vip_label": {
+    "link_text_get_vip": {
+      "default": "入手"
+    },
+    "button_label_get_vip": {
       "default": "VIP機能をアンロック"
     },
-    "user_profile_label": {
+    "link_label_get_vip": {
+      "default": "VIP機能をアンロック"
+    },
+    "button_label_user_profile": {
       "default": "ユーザー情報"
     },
     "list_title_most_popular": {
       "default": "最も人気のある作品"
     },
-    "navbar_link_movies": {
+    "button_text_browse_movies": {
       "default": "映画"
     },
-    "navbar_link_movies_label": {
+    "button_label_browse_movies": {
       "default": "映画を閲覧"
     },
-    "navbar_link_shows": {
+    "page_title_movies": {
+      "default": "映画"
+    },
+    "button_text_browse_shows": {
       "default": "番組"
     },
-    "navbar_link_shows_label": {
+    "button_label_browse_shows": {
       "default": "番組を閲覧"
     },
-    "navbar_link_home": {
+    "page_title_shows": {
+      "default": "ドラマ"
+    },
+    "button_text_home": {
       "default": "ホーム"
     },
-    "navbar_link_home_label": {
+    "button_label_home": {
       "default": "ホームページ"
+    },
+    "page_title_home": {
+      "default": "ホーム"
     },
     "watchers": {
       "default": "視聴者"
@@ -337,7 +352,10 @@
     "profile": {
       "default": "プロフィール"
     },
-    "logout": {
+    "button_text_logout": {
+      "default": "ログアウト"
+    },
+    "button_label_logout": {
       "default": "ログアウト"
     },
     "list_title_coming_soon": {
@@ -415,10 +433,10 @@
     "unreleased_movies_empty": {
       "default": "今後の映画を視聴リストに追加して、最新情報をゲット！"
     },
-    "find_movies_link": {
+    "button_text_find_movies": {
       "default": "映画を探す"
     },
-    "find_shows_link": {
+    "button_text_find_shows": {
       "default": "番組を探す"
     },
     "active_watchers": {
@@ -462,7 +480,7 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} 件もっと",
       "variables": {
         "count": {
@@ -488,10 +506,13 @@
     "genre": {
       "default": "ジャンル"
     },
-    "navbar_link_lists": {
+    "button_text_browse_lists": {
       "default": "リスト"
     },
-    "navbar_link_lists_label": {
+    "button_label_browse_lists": {
+      "default": "リスト"
+    },
+    "page_title_lists": {
       "default": "リスト"
     },
     "list_title_watchlist_shows": {
@@ -500,7 +521,7 @@
     "list_title_watchlist_movies": {
       "default": "あなたの映画"
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "{title}を今すぐ視聴",
       "variables": {
         "title": {
@@ -747,10 +768,10 @@
     "job_creator": {
       "default": "クリエイター"
     },
-    "remove_from_watched": {
+    "button_text_remove_from_history": {
       "default": "視聴済みから削除"
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "視聴済みリストから{title}を削除",
       "variables": {
         "title": {
@@ -766,7 +787,7 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "{title}の視聴履歴からこの記録を削除",
       "variables": {
         "title": {
@@ -896,7 +917,7 @@
     "trending_movies": {
       "default": "話題の作品"
     },
-    "view_all": {
+    "button_text_view_all": {
       "default": "すべて表示"
     },
     "full_season": {
@@ -943,13 +964,13 @@
     "rate_now": {
       "default": "今すぐ評価"
     },
-    "add_to_favorites": {
+    "button_text_add_to_favorites": {
       "default": "お気に入りに追加"
     },
-    "remove_from_favorites": {
+    "button_text_remove_from_favorites": {
       "default": "お気に入りから削除"
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "{title}をお気に入りに登録",
       "variables": {
         "title": {
@@ -957,7 +978,7 @@
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "{title}をお気に入りから削除",
       "variables": {
         "title": {
@@ -985,8 +1006,11 @@
     "favorite_shows_empty": {
       "default": "お気に入り番組リストは空です。"
     },
-    "stream_on": {
+    "button_text_stream_on": {
       "default": "配信で見る"
+    },
+    "header_stream_on": {
+      "default": "ストリーミング"
     },
     "your_watchlist_shows": {
       "default": "視聴予定の作品"
@@ -1195,7 +1219,7 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "{title}の番組を視聴済みとしてフラグ付けします",
       "variables": {
         "title": {
@@ -1203,7 +1227,7 @@
         }
       }
     },
-    "drop_show": {
+    "button_text_drop_show": {
       "default": "番組を削除する"
     },
     "enable_up_next_nitro_label": {
@@ -1226,7 +1250,7 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "{title}の番組を復元",
       "variables": {
         "title": {
@@ -1234,7 +1258,7 @@
         }
       }
     },
-    "restore_show": {
+    "button_text_restore_show": {
       "default": "番組を復元"
     },
     "mark_as_watched_show_warning": {
@@ -1281,13 +1305,13 @@
         }
       }
     },
-    "like_comment_label": {
+    "button_label_like_comment": {
       "default": "コメントをいいね"
     },
-    "unlike_comment_label": {
+    "button_label_unlike_comment": {
       "default": "コメントをいいねしない"
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} 件のいいね",
       "variables": {
         "count": {
@@ -1298,10 +1322,10 @@
     "close_label": {
       "default": "閉じる"
     },
-    "comment_replies_label": {
+    "button_label_comment_replies": {
       "default": "コメント返信"
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} 件の返信",
       "variables": {
         "count": {
@@ -1318,10 +1342,10 @@
     "comment": {
       "default": "コメント"
     },
-    "comment_reply": {
+    "button_text_comment_reply": {
       "default": "返信する"
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "{user} に返信する",
       "variables": {
         "user": {
@@ -1381,7 +1405,7 @@
     "view_all_comments": {
       "default": "すべてのコメントを表示"
     },
-    "remove_from_list": {
+    "button_text_remove_from_list": {
       "default": "Remove from list"
     },
     "remove_from_list_label": {
@@ -1401,7 +1425,10 @@
     "error_page_service_status": {
       "default": "Traktサービスの状態"
     },
-    "retry": {
+    "button_text_retry": {
+      "default": "再試行"
+    },
+    "button_label_retry": {
       "default": "再試行"
     },
     "community_sentiment": {
@@ -1463,10 +1490,13 @@
     "theme_system": {
       "default": "システム"
     },
-    "filter_label": {
+    "button_text_filters": {
+      "default": "フィルター"
+    },
+    "button_label_filters": {
       "default": "絞り込み"
     },
-    "filter_reset": {
+    "button_label_reset_filter": {
       "default": "リセット"
     },
     "results_for_title": {
@@ -1536,10 +1566,10 @@
         }
       }
     },
-    "filter_reset_all": {
+    "button_text_reset_all_filters": {
       "default": "すべてリセット"
     },
-    "filter_reset_all_label": {
+    "button_label_reset_all_filters": {
       "default": "すべてのフィルターをリセット"
     },
     "video_type_trailer": {
@@ -1566,10 +1596,10 @@
     "remaining": {
       "default": "残り"
     },
-    "checkin": {
+    "button_text_checkin": {
       "default": "チェックイン"
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "チェックイン {title}",
       "variables": {
         "title": {
@@ -1580,7 +1610,10 @@
     "cookie_notice": {
       "default": "Traktは、より良い体験のためにC🍪🍪KIESを使用しています。 <a>詳細はこちら</a>をご覧ください。"
     },
-    "cookie_accept": {
+    "button_text_cookie_accept": {
+      "default": "了解しました！"
+    },
+    "button_label_cookie_accept": {
       "default": "了解、始めましょう！"
     },
     "year_to_date_label": {
@@ -1589,7 +1622,16 @@
     "month_in_review_label": {
       "default": "今月のレビュー"
     },
-    "settings": {
+    "page_title_settings": {
+      "default": "設定"
+    },
+    "header_settings": {
+      "default": "設定"
+    },
+    "button_text_settings": {
+      "default": "設定"
+    },
+    "button_label_settings": {
       "default": "設定"
     },
     "settings_spoilers_title": {
@@ -1598,10 +1640,10 @@
     "settings_spoilers_label": {
       "default": "ネタバレを表示"
     },
-    "filter_save": {
+    "button_text_save_filters": {
       "default": "保存"
     },
-    "filter_save_label": {
+    "button_label_save_filters": {
       "default": "フィルターを保存"
     },
     "error_page_locked_account_title": {
@@ -1621,10 +1663,10 @@
         }
       }
     },
-    "follow": {
+    "button_text_follow": {
       "default": "フォロー"
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "{username} をフォロー",
       "variables": {
         "username": {
@@ -1632,10 +1674,10 @@
         }
       }
     },
-    "unfollow": {
+    "button_text_unfollow": {
       "default": "フォロー解除"
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "{username} のフォローを解除",
       "variables": {
         "username": {
@@ -1669,8 +1711,11 @@
     "read_more": {
       "default": "もっと読む"
     },
-    "add_comment": {
+    "button_text_add_comment": {
       "default": "追加"
+    },
+    "button_label_add_comment": {
+      "default": "コメントを追加"
     },
     "rename_list": {
       "default": "リストの名前を変更"

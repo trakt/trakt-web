@@ -10,7 +10,7 @@
 </script>
 
 <Button
-  label={m.filter_save_label()}
+  label={m.button_label_save_filters()}
   size="small"
   style="flat"
   color="default"
@@ -21,5 +21,5 @@
     onSave();
   }}
 >
-  {m.filter_save()}
+  {m.button_text_save_filters()}
 </Button>

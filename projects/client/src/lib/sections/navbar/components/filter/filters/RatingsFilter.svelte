@@ -29,7 +29,7 @@
     <ActionButton
       color="red"
       variant="secondary"
-      label={m.filter_reset()}
+      label={m.button_label_reset_filter()}
       onclick={() => handler(null)}
       style={$currentValue ? "flat" : "ghost"}
       navigationType={DpadNavigationType.Item}

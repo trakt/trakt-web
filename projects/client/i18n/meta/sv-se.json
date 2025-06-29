@@ -87,19 +87,19 @@
     "mark_as_watched_ask_prompt": {
       "default": "När slutade du titta på detta? (ÅÅÅÅ-MM-DD TT:MM)"
     },
-    "watchlist_action_label": {
+    "button_text_watchlist": {
       "default": "Att se"
     },
-    "mark_as_watched": {
+    "button_text_mark_as_watched": {
       "default": "Markera som sett"
     },
-    "mark_as_watched_until": {
+    "button_text_watched_until_here": {
       "default": "Sett hit"
     },
-    "watch_again": {
+    "button_text_watch_again": {
       "default": "Titta igen"
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "Lägg till {title} i din to-watch",
       "variables": {
         "title": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "Markera {title} som sett",
       "variables": {
         "title": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "Markera {title} som sett hit",
       "variables": {
         "title": {
@@ -234,7 +234,7 @@
     "genre_science_fiction": {
       "default": "Science Fiction"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "Ta bort {title} från din to-watch",
       "variables": {
         "title": {
@@ -245,10 +245,10 @@
     "search_placeholder": {
       "default": "Sök serier & filmer..."
     },
-    "join_trakt_button": {
+    "button_text_join_trakt": {
       "default": "Gå med i Trakt"
     },
-    "join_trakt_button_label": {
+    "button_label_join_trakt": {
       "default": "Gå med i trakt.tv för att hålla koll på vad du tittar på"
     },
     "copyright_notice": {
@@ -257,7 +257,7 @@
     "copyright_crafted_by": {
       "default": "Handgjord runt om i världen"
     },
-    "join_trakt_for_free_button": {
+    "button_text_join_trakt_for_free": {
       "default": "Gå med i Trakt gratis"
     },
     "landing_discover_label": {
@@ -287,35 +287,50 @@
     "list_title_most_anticipated": {
       "default": "Mest efterlängtade"
     },
-    "get": {
+    "button_text_get_vip": {
       "default": "Hämta"
     },
-    "get_vip_label": {
+    "link_text_get_vip": {
+      "default": "Skaffa"
+    },
+    "button_label_get_vip": {
       "default": "Lås upp VIP-funktioner"
     },
-    "user_profile_label": {
+    "link_label_get_vip": {
+      "default": "Lås upp VIP-funktioner"
+    },
+    "button_label_user_profile": {
       "default": "Användarprofil"
     },
     "list_title_most_popular": {
       "default": "Mest populära"
     },
-    "navbar_link_movies": {
+    "button_text_browse_movies": {
       "default": "Filmer"
     },
-    "navbar_link_movies_label": {
+    "button_label_browse_movies": {
       "default": "Bläddra bland filmer"
     },
-    "navbar_link_shows": {
+    "page_title_movies": {
+      "default": "Filmer"
+    },
+    "button_text_browse_shows": {
       "default": "Serier"
     },
-    "navbar_link_shows_label": {
+    "button_label_browse_shows": {
       "default": "Bläddra bland serier"
     },
-    "navbar_link_home": {
+    "page_title_shows": {
+      "default": "Serier"
+    },
+    "button_text_home": {
       "default": "Hem"
     },
-    "navbar_link_home_label": {
+    "button_label_home": {
       "default": "Gå tillbaka till startsidan"
+    },
+    "page_title_home": {
+      "default": "Hem"
     },
     "watchers": {
       "default": "Tittare"
@@ -337,7 +352,10 @@
     "profile": {
       "default": "Profil"
     },
-    "logout": {
+    "button_text_logout": {
+      "default": "Logga ut"
+    },
+    "button_label_logout": {
       "default": "Logga ut"
     },
     "list_title_coming_soon": {
@@ -415,10 +433,10 @@
     "unreleased_movies_empty": {
       "default": "Lägg till kommande filmer i din to-watch och håll dig uppdaterad."
     },
-    "find_movies_link": {
+    "button_text_find_movies": {
       "default": "Hitta filmer"
     },
-    "find_shows_link": {
+    "button_text_find_shows": {
       "default": "Hitta serier"
     },
     "active_watchers": {
@@ -462,7 +480,7 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} till",
       "variables": {
         "count": {
@@ -488,11 +506,14 @@
     "genre": {
       "default": "Genre"
     },
-    "navbar_link_lists": {
+    "button_text_browse_lists": {
       "default": "Listor"
     },
-    "navbar_link_lists_label": {
+    "button_label_browse_lists": {
       "default": "Utforska listor"
+    },
+    "page_title_lists": {
+      "default": "Listor"
     },
     "list_title_watchlist_shows": {
       "default": "Dina serier"
@@ -500,7 +521,7 @@
     "list_title_watchlist_movies": {
       "default": "Dina filmer"
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "Titta på {title} nu",
       "variables": {
         "title": {
@@ -747,10 +768,10 @@
     "job_creator": {
       "default": "Skapare"
     },
-    "remove_from_watched": {
+    "button_text_remove_from_history": {
       "default": "Ta bort från sedda"
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "Ta bort {title} från din Sedda-lista",
       "variables": {
         "title": {
@@ -766,7 +787,7 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "Ta bort den här visningen av {title} från din Sedda-lista",
       "variables": {
         "title": {
@@ -896,7 +917,7 @@
     "trending_movies": {
       "default": "Trendiga filmer"
     },
-    "view_all": {
+    "button_text_view_all": {
       "default": "Se alla"
     },
     "full_season": {
@@ -943,13 +964,13 @@
     "rate_now": {
       "default": "Betygsätt nu"
     },
-    "add_to_favorites": {
+    "button_text_add_to_favorites": {
       "default": "Lägg till i favoriter"
     },
-    "remove_from_favorites": {
+    "button_text_remove_from_favorites": {
       "default": "Ta bort från favoriter"
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "Lägg till {title} i dina favoriter",
       "variables": {
         "title": {
@@ -957,7 +978,7 @@
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "Ta bort {title} från dina favoriter",
       "variables": {
         "title": {
@@ -985,7 +1006,10 @@
     "favorite_shows_empty": {
       "default": "Din favoritprogramlista är tom."
     },
-    "stream_on": {
+    "button_text_stream_on": {
+      "default": "Streama på"
+    },
+    "header_stream_on": {
       "default": "Streama på"
     },
     "your_watchlist_shows": {
@@ -1195,7 +1219,7 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "Markera serien {title} som avslutad",
       "variables": {
         "title": {
@@ -1203,7 +1227,7 @@
         }
       }
     },
-    "drop_show": {
+    "button_text_drop_show": {
       "default": "Sluta följa"
     },
     "enable_up_next_nitro_label": {
@@ -1226,7 +1250,7 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "Återställ serien {title}",
       "variables": {
         "title": {
@@ -1234,7 +1258,7 @@
         }
       }
     },
-    "restore_show": {
+    "button_text_restore_show": {
       "default": "Återställ serie"
     },
     "mark_as_watched_show_warning": {
@@ -1281,13 +1305,13 @@
         }
       }
     },
-    "like_comment_label": {
+    "button_label_like_comment": {
       "default": "Gilla kommentar"
     },
-    "unlike_comment_label": {
+    "button_label_unlike_comment": {
       "default": "Ogilla kommentar"
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} gillar",
       "variables": {
         "count": {
@@ -1298,10 +1322,10 @@
     "close_label": {
       "default": "Stäng"
     },
-    "comment_replies_label": {
+    "button_label_comment_replies": {
       "default": "Kommentarsvar"
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} svar",
       "variables": {
         "count": {
@@ -1318,10 +1342,10 @@
     "comment": {
       "default": "Kommentar"
     },
-    "comment_reply": {
+    "button_text_comment_reply": {
       "default": "Svara"
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "Svara {user}",
       "variables": {
         "user": {
@@ -1381,7 +1405,7 @@
     "view_all_comments": {
       "default": "Visa alla kommentarer"
     },
-    "remove_from_list": {
+    "button_text_remove_from_list": {
       "default": "Ta bort från listan"
     },
     "remove_from_list_label": {
@@ -1401,7 +1425,10 @@
     "error_page_service_status": {
       "default": "Trakt-tjänstens status"
     },
-    "retry": {
+    "button_text_retry": {
+      "default": "Försök igen"
+    },
+    "button_label_retry": {
       "default": "Försök igen"
     },
     "community_sentiment": {
@@ -1463,10 +1490,13 @@
     "theme_system": {
       "default": "System"
     },
-    "filter_label": {
+    "button_text_filters": {
+      "default": "Filter"
+    },
+    "button_label_filters": {
       "default": "Filtrera"
     },
-    "filter_reset": {
+    "button_label_reset_filter": {
       "default": "Återställ"
     },
     "results_for_title": {
@@ -1536,10 +1566,10 @@
         }
       }
     },
-    "filter_reset_all": {
+    "button_text_reset_all_filters": {
       "default": "Återställ alla"
     },
-    "filter_reset_all_label": {
+    "button_label_reset_all_filters": {
       "default": "Återställ alla filter"
     },
     "video_type_trailer": {
@@ -1566,10 +1596,10 @@
     "remaining": {
       "default": "återstår"
     },
-    "checkin": {
+    "button_text_checkin": {
       "default": "Checka in"
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "Checka in {title}",
       "variables": {
         "title": {
@@ -1580,7 +1610,10 @@
     "cookie_notice": {
       "default": "Trakt använder C🍪🍪KIES för att förbättra din upplevelse. Du kan <a>läsa mer information</a> här."
     },
-    "cookie_accept": {
+    "button_text_cookie_accept": {
+      "default": "Okej, kör!"
+    },
+    "button_label_cookie_accept": {
       "default": "Okej, kör!"
     },
     "year_to_date_label": {
@@ -1589,7 +1622,16 @@
     "month_in_review_label": {
       "default": "Månadens överblick"
     },
-    "settings": {
+    "page_title_settings": {
+      "default": "Inställningar"
+    },
+    "header_settings": {
+      "default": "Inställningar"
+    },
+    "button_text_settings": {
+      "default": "Inställningar"
+    },
+    "button_label_settings": {
       "default": "Inställningar"
     },
     "settings_spoilers_title": {
@@ -1598,10 +1640,10 @@
     "settings_spoilers_label": {
       "default": "Visa spoilers"
     },
-    "filter_save": {
+    "button_text_save_filters": {
       "default": "Spara"
     },
-    "filter_save_label": {
+    "button_label_save_filters": {
       "default": "Spara filter"
     },
     "error_page_locked_account_title": {
@@ -1621,10 +1663,10 @@
         }
       }
     },
-    "follow": {
+    "button_text_follow": {
       "default": "Följ"
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "Följ {username}",
       "variables": {
         "username": {
@@ -1632,10 +1674,10 @@
         }
       }
     },
-    "unfollow": {
+    "button_text_unfollow": {
       "default": "Sluta följ"
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "Sluta följ {username}",
       "variables": {
         "username": {
@@ -1669,8 +1711,11 @@
     "read_more": {
       "default": "Läs mer"
     },
-    "add_comment": {
+    "button_text_add_comment": {
       "default": "Lägg till"
+    },
+    "button_label_add_comment": {
+      "default": "Lägg till kommentar"
     },
     "rename_list": {
       "default": "Byt namn på din lista"

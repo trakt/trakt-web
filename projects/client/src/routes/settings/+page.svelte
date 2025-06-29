@@ -9,7 +9,7 @@
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
-  title={m.settings()}
+  title={m.page_title_settings()}
 >
   <TraktPageCoverSetter />
 

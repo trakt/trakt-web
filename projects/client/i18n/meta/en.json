@@ -88,36 +88,43 @@
     "mark_as_watched_ask_prompt": {
       "default": "When did you finish watching this? (YYYY-MM-DD HH:MM)"
     },
-    "watchlist_action_label": {
-      "default": "Watchlist"
+    "button_text_watchlist": {
+      "default": "Watchlist",
+      "description": "Text for the button that allows users to add/remove a movie or show to/from their watchlist."
     },
-    "mark_as_watched": {
-      "default": "Mark as Watched"
+    "button_text_mark_as_watched": {
+      "default": "Mark as Watched",
+      "description": "Text for the button that allows users to mark a movie, episode, or show as watched."
     },
-    "mark_as_watched_until": {
-      "default": "Watched until here"
+    "button_text_watched_until_here": {
+      "default": "Watched until here",
+      "description": "Text for the button that allows users to mark a show as watched until a specific point."
     },
-    "watch_again": {
-      "default": "Watch again"
+    "button_text_watch_again": {
+      "default": "Watch again",
+      "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched."
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "Add {title} to your Watchlist",
+      "description": "Aria-label for the button that adds a movie or show to the user's watchlist.",
       "variables": {
         "title": {
           "type": "string"
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "Mark {title} as watched",
+      "description": "Aria-label for the button that marks a movie, episode, show as watched.",
       "variables": {
         "title": {
           "type": "string"
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "Mark {title} as watched until here",
+      "description": "Aria-label for the button that marks a show as watched until a specific point.",
       "variables": {
         "title": {
           "type": "string"
@@ -235,8 +242,9 @@
     "genre_science_fiction": {
       "default": "Science Fiction"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "Remove {title} from your Watchlist",
+      "description": "Aria-label for the button that removes a movie or show from the user's watchlist.",
       "variables": {
         "title": {
           "type": "string"
@@ -246,11 +254,13 @@
     "search_placeholder": {
       "default": "Search shows & movies..."
     },
-    "join_trakt_button": {
-      "default": "Join Trakt"
+    "button_text_join_trakt": {
+      "default": "Join Trakt",
+      "description": "Text for the button that takes users to the Trakt login page."
     },
-    "join_trakt_button_label": {
-      "default": "Join trakt.tv to keep track of what you're watching"
+    "button_label_join_trakt": {
+      "default": "Join trakt.tv to keep track of what you're watching",
+      "description": "Aria-label for the button that takes users to the Trakt login page."
     },
     "copyright_notice": {
       "default": "All rights reserved."
@@ -258,8 +268,9 @@
     "copyright_crafted_by": {
       "default": "Hand crafted around the world"
     },
-    "join_trakt_for_free_button": {
-      "default": "Join Trakt for Free"
+    "button_text_join_trakt_for_free": {
+      "default": "Join Trakt for Free",
+      "description": "Text for the button that takes users to the Trakt login page."
     },
     "landing_discover_label": {
       "default": "Discover"
@@ -291,36 +302,65 @@
       "default": "Most Anticipated",
       "description": "Title for lists containing most anticipated movies or shows. This title should be as short and concise as possible."
     },
-    "get": {
-      "default": "Get"
+    "button_text_get_vip": {
+      "default": "Get",
+      "description": "Text for the button that takes users to the VIP subscription page."
     },
-    "get_vip_label": {
-      "default": "Unlock VIP features"
+    "link_text_get_vip": {
+      "default": "Get",
+      "description": "Text for the link that takes users to the VIP subscription page."
     },
-    "user_profile_label": {
-      "default": "User Profile"
+    "button_label_get_vip": {
+      "default": "Unlock VIP features",
+      "description": "Aria-label for the button that takes users to the VIP subscription page."
+    },
+    "link_label_get_vip": {
+      "default": "Unlock VIP features",
+      "description": "Aria-label for the link that takes users to the VIP subscription page."
+    },
+    "button_label_user_profile": {
+      "default": "User Profile",
+      "description": "Aria-label for the button that opens the user profile page."
     },
     "list_title_most_popular": {
       "default": "Most Popular",
       "description": "Title for lists containing most popular movies or shows. This title should be as short and concise as possible."
     },
-    "navbar_link_movies": {
-      "default": "Movies"
+    "button_text_browse_movies": {
+      "default": "Movies",
+      "description": "Text for the button that allows users to browse movies."
     },
-    "navbar_link_movies_label": {
-      "default": "Browse Movies"
+    "button_label_browse_movies": {
+      "default": "Browse Movies",
+      "description": "Aria-label for the button that allows users to browse movies."
     },
-    "navbar_link_shows": {
-      "default": "Shows"
+    "page_title_movies": {
+      "default": "Movies",
+      "description": "Title for the movies page."
     },
-    "navbar_link_shows_label": {
-      "default": "Browse Shows"
+    "button_text_browse_shows": {
+      "default": "Shows",
+      "description": "Text for the button that allows users to browse shows."
     },
-    "navbar_link_home": {
-      "default": "Home"
+    "button_label_browse_shows": {
+      "default": "Browse Shows",
+      "description": "Aria-label for the button that allows users to browse shows."
     },
-    "navbar_link_home_label": {
-      "default": "Go back to the homepage"
+    "page_title_shows": {
+      "default": "Shows",
+      "description": "Title for the shows page."
+    },
+    "button_text_home": {
+      "default": "Home",
+      "description": "Text for the button that takes users back to the homepage."
+    },
+    "button_label_home": {
+      "default": "Go back to the homepage",
+      "description": "Aria-label for the button that takes users back to the homepage."
+    },
+    "page_title_home": {
+      "default": "Home",
+      "description": "Title for the homepage."
     },
     "watchers": {
       "default": "Watchers"
@@ -342,8 +382,13 @@
     "profile": {
       "default": "Profile"
     },
-    "logout": {
-      "default": "Logout"
+    "button_text_logout": {
+      "default": "Logout",
+      "description": "Text for the logout button."
+    },
+    "button_label_logout": {
+      "default": "Logout",
+      "description": "Aria-label for the logout button."
     },
     "list_title_coming_soon": {
       "default": "Coming Soon",
@@ -423,11 +468,13 @@
     "unreleased_movies_empty": {
       "default": "Add upcoming movies to your watchlist and stay updated."
     },
-    "find_movies_link": {
-      "default": "Find Movies"
+    "button_text_find_movies": {
+      "default": "Find Movies",
+      "description": "Text for the button that allows users to find movies. This button is shown in some empty lists."
     },
-    "find_shows_link": {
-      "default": "Find Shows"
+    "button_text_find_shows": {
+      "default": "Find Shows",
+      "description": "Text for the button that allows users to find shows. This button is shown in some empty lists."
     },
     "active_watchers": {
       "default": "{count} watching",
@@ -472,8 +519,9 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} more",
+      "description": "Text for the button that shows more items for a section in the interface.",
       "variables": {
         "count": {
           "type": "number"
@@ -498,11 +546,17 @@
     "genre": {
       "default": "Genre"
     },
-    "navbar_link_lists": {
-      "default": "Lists"
+    "button_text_browse_lists": {
+      "default": "Lists",
+      "description": "Text for the button that allows users to browse their (watch) lists."
     },
-    "navbar_link_lists_label": {
-      "default": "Browse your lists"
+    "button_label_browse_lists": {
+      "default": "Browse your lists",
+      "description": "Aria-label for the button that allows users to browse their (watch) lists."
+    },
+    "page_title_lists": {
+      "default": "Lists",
+      "description": "Title for the lists page."
     },
     "list_title_watchlist_shows": {
       "default": "Your Shows",
@@ -512,8 +566,9 @@
       "default": "Your Movies",
       "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible."
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "Watch {title} now",
+      "description": "Aria-label for the button that allows users to stream a movie or show on an external service.",
       "variables": {
         "title": {
           "type": "string"
@@ -759,11 +814,13 @@
     "job_creator": {
       "default": "Creator"
     },
-    "remove_from_watched": {
-      "default": "Remove from Watched"
+    "button_text_remove_from_history": {
+      "default": "Remove from Watched",
+      "description": "Text for the button that allows users to remove a movie or episode from their watch history."
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "Remove {title} from your Watched list",
+      "description": "Aria-label for the button that allows users to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
           "type": "string"
@@ -778,8 +835,9 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "Remove this play of {title} from your Watched list",
+      "description": "Aria-label for the button that allows users to remove a movie or episode from their watch history.",
       "variables": {
         "title": {
           "type": "string"
@@ -910,8 +968,9 @@
     "trending_movies": {
       "default": "Trending Movies"
     },
-    "view_all": {
-      "default": "View All"
+    "button_text_view_all": {
+      "default": "View All",
+      "description": "Text for the button that allows users to drill down on lists to view all items in it."
     },
     "full_season": {
       "default": "Full Season"
@@ -957,22 +1016,26 @@
     "rate_now": {
       "default": "Rate now"
     },
-    "add_to_favorites": {
-      "default": "Add to Favorites"
+    "button_text_add_to_favorites": {
+      "default": "Add to Favorites",
+      "description": "Text for the button that allows users to add a movie or show to their favorites."
     },
-    "remove_from_favorites": {
-      "default": "Remove from Favorites"
+    "button_text_remove_from_favorites": {
+      "default": "Remove from Favorites",
+      "description": "Text for the button that allows users to remove a movie or show from their favorites."
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "Add {title} to your Favorites",
+      "description": "Aria-label for the button that allows users to add a movie or show to their favorites.",
       "variables": {
         "title": {
           "type": "string"
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "Remove {title} from your Favorites",
+      "description": "Aria-label for the button that allows users to remove a movie or show from their favorites.",
       "variables": {
         "title": {
           "type": "string"
@@ -1001,8 +1064,13 @@
     "favorite_shows_empty": {
       "default": "Your favorite shows list is empty."
     },
-    "stream_on": {
-      "default": "Stream on"
+    "button_text_stream_on": {
+      "default": "Stream on",
+      "description": "Text for the button that allows users to stream a movie or show on an external service."
+    },
+    "header_stream_on": {
+      "default": "Stream on",
+      "description": "Header for the section that shows streaming services for a movie or show."
     },
     "your_watchlist_shows": {
       "default": "Your Watchlist Shows"
@@ -1216,16 +1284,18 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "Flag show {title} as dropped",
+      "description": "Aria-label for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show.",
       "variables": {
         "title": {
           "type": "string"
         }
       }
     },
-    "drop_show": {
-      "default": "Drop show"
+    "button_text_drop_show": {
+      "default": "Drop show",
+      "description": "Text for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show."
     },
     "enable_up_next_nitro_label": {
       "default": "Enable Up Next Nitro, the fastest way to watch your shows"
@@ -1247,16 +1317,18 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "Restore show {title}",
+      "description": "Aria-label for the button that restores a hidden show.",
       "variables": {
         "title": {
           "type": "string"
         }
       }
     },
-    "restore_show": {
-      "default": "Restore show"
+    "button_text_restore_show": {
+      "default": "Restore show",
+      "description": "Text for the button that restores a hidden show."
     },
     "mark_as_watched_show_warning": {
       "default": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched.",
@@ -1302,14 +1374,17 @@
         }
       }
     },
-    "like_comment_label": {
-      "default": "Like Comment"
+    "button_label_like_comment": {
+      "default": "Like Comment",
+      "description": "Aria-label for the button that allows users to like a comment."
     },
-    "unlike_comment_label": {
-      "default": "Unlike Comment"
+    "button_label_unlike_comment": {
+      "default": "Unlike Comment",
+      "description": "Aria-label for the button that allows users to unlike a comment."
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} likes",
+      "description": "Text for the button that shows the number of likes a comment has.",
       "variables": {
         "count": {
           "type": "number"
@@ -1319,11 +1394,13 @@
     "close_label": {
       "default": "Close"
     },
-    "comment_replies_label": {
-      "default": "Comment Replies"
+    "button_label_comment_replies": {
+      "default": "Comment Replies",
+      "description": "Aria-label for the button that opens the comment replies dialog."
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} replies",
+      "description": "Text for the button that opens the comment replies dialog.",
       "variables": {
         "count": {
           "type": "number"
@@ -1341,11 +1418,13 @@
     "comment": {
       "default": "Comment"
     },
-    "comment_reply": {
-      "default": "Reply"
+    "button_text_comment_reply": {
+      "default": "Reply",
+      "description": "Text for the button that opens the comment reply dialog."
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "Reply to {user}",
+      "description": "Aria-label for the button that opens the comment reply dialog.",
       "variables": {
         "user": {
           "type": "string"
@@ -1404,8 +1483,9 @@
     "view_all_comments": {
       "default": "View all comments"
     },
-    "remove_from_list": {
-      "default": "Remove from list"
+    "button_text_remove_from_list": {
+      "default": "Remove from list",
+      "description": "Text for the button that allows users to remove a movie or show from a list."
     },
     "remove_from_list_label": {
       "default": "Remove {title} from list",
@@ -1424,8 +1504,13 @@
     "error_page_service_status": {
       "default": "Trakt service status"
     },
-    "retry": {
-      "default": "Retry"
+    "button_text_retry": {
+      "default": "Retry",
+      "description": "Text for the retry button. Used for things like error pages and failed authentications."
+    },
+    "button_label_retry": {
+      "default": "Retry",
+      "description": "Aria-label for the retry button."
     },
     "community_sentiment": {
       "default": "Community Sentiment"
@@ -1486,11 +1571,17 @@
     "theme_system": {
       "default": "System"
     },
-    "filter_label": {
-      "default": "Filter"
+    "button_text_filters": {
+      "default": "Filter",
+      "description": "Text for the button that opens the filters panel."
     },
-    "filter_reset": {
-      "default": "Reset"
+    "button_label_filters": {
+      "default": "Filter",
+      "description": "Aria-label for the button that opens the filters panel."
+    },
+    "button_label_reset_filter": {
+      "default": "Reset",
+      "description": "Aria-label for the button that resets a single filter to its initial value."
     },
     "results_for_title": {
       "default": "Results for {query}",
@@ -1559,11 +1650,13 @@
         }
       }
     },
-    "filter_reset_all": {
-      "default": "Reset all"
+    "button_text_reset_all_filters": {
+      "default": "Reset all",
+      "description": "Text for the button that resets all filters to their initial values."
     },
-    "filter_reset_all_label": {
-      "default": "Reset all filters"
+    "button_label_reset_all_filters": {
+      "default": "Reset all filters",
+      "description": "Aria-label for the button that resets all filters to their initial values."
     },
     "video_type_trailer": {
       "default": "Trailer"
@@ -1589,11 +1682,13 @@
     "remaining": {
       "default": "remaining"
     },
-    "checkin": {
-      "default": "Check in"
+    "button_text_checkin": {
+      "default": "Check in",
+      "description": "Text for the button that allows users to check in to a movie or episode, indicating that a user is starting to watch it."
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "Check in {title}",
+      "description": "Aria-label for the button that allows users to check in to a movie or episode.",
       "variables": {
         "title": {
           "type": "string"
@@ -1603,8 +1698,13 @@
     "cookie_notice": {
       "default": "Trakt uses C🍪🍪KIES in order to enhance your overall experience. You can <a>read more information</a> here."
     },
-    "cookie_accept": {
-      "default": "Got it, let's go!"
+    "button_text_cookie_accept": {
+      "default": "Got it, let's go!",
+      "description": "Text for the button that accepts the cookie notice."
+    },
+    "button_label_cookie_accept": {
+      "default": "Accept the cookies",
+      "description": "Aria-label for the button that accepts the cookie notice."
     },
     "year_to_date_label": {
       "default": "Year to date"
@@ -1612,8 +1712,21 @@
     "month_in_review_label": {
       "default": "Month in review"
     },
-    "settings": {
-      "default": "Settings"
+    "page_title_settings": {
+      "default": "Settings",
+      "description": "Title for the settings page."
+    },
+    "header_settings": {
+      "default": "Settings",
+      "description": "Header for the settings side bar."
+    },
+    "button_text_settings": {
+      "default": "Settings",
+      "description": "Text for the button that opens the settings page."
+    },
+    "button_label_settings": {
+      "default": "Settings",
+      "description": "Aria-label for the button that opens the settings page."
     },
     "settings_spoilers_title": {
       "default": "Spoilers"
@@ -1621,11 +1734,13 @@
     "settings_spoilers_label": {
       "default": "Show spoilers"
     },
-    "filter_save": {
-      "default": "Save"
+    "button_text_save_filters": {
+      "default": "Save",
+      "description": "Text for the button that saves the current filters as the default filters."
     },
-    "filter_save_label": {
-      "default": "Save filters"
+    "button_label_save_filters": {
+      "default": "Save filters",
+      "description": "Aria-label for the button that saves the current filters as the default filters."
     },
     "error_page_locked_account_title": {
       "default": "Account locked"
@@ -1644,22 +1759,26 @@
         }
       }
     },
-    "follow": {
-      "default": "Follow"
+    "button_text_follow": {
+      "default": "Follow",
+      "description": "Text for the button that allows users to follow a profile."
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "Follow {username}",
+      "description": "Aria-label for the button that allows users to follow a profile.",
       "variables": {
         "username": {
           "type": "string"
         }
       }
     },
-    "unfollow": {
-      "default": "Unfollow"
+    "button_text_unfollow": {
+      "default": "Unfollow",
+      "description": "Text for the button that allows users to unfollow a profile."
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "Unfollow {username}",
+      "description": "Aria-label for the button that allows users to unfollow a profile.",
       "variables": {
         "username": {
           "type": "string"
@@ -1694,8 +1813,13 @@
     "read_more": {
       "default": "Read more"
     },
-    "add_comment": {
-      "default": "Add Comment"
+    "button_text_add_comment": {
+      "default": "Add Comment",
+      "description": "Text for the button that allows users to add a new comment."
+    },
+    "button_label_add_comment": {
+      "default": "Add Comment",
+      "description": "Aria-label for the button that allows users to add a new comment."
     },
     "rename_list": {
       "default": "Rename your list"

@@ -18,7 +18,7 @@
   <Button
     size="small"
     href={UrlBuilder.profile.me()}
-    label={m.user_profile_label()}
+    label={m.button_label_user_profile()}
     {color}
     {style}
     navigationType={DpadNavigationType.Item}

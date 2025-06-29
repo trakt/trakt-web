@@ -23,7 +23,7 @@
 </script>
 
 {#if hasServices}
-  <DetailsGrid title={m.stream_on()} isCollapsable={true}>
+  <DetailsGrid title={m.header_stream_on()} isCollapsable={true}>
     {#if streaming.length > 0}
       <StreamingServiceCategory title={m.streaming()} services={streaming} />
     {/if}

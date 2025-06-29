@@ -17,7 +17,7 @@
 <TraktPage
   audience="all"
   image={DEFAULT_SHARE_SHOW_COVER}
-  title={m.navbar_link_shows()}
+  title={m.page_title_shows()}
 >
   <TraktPageCoverSetter />
 

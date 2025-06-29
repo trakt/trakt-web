@@ -7,6 +7,6 @@ import type {
 export const RemoveFromHistoryButtonIntlProvider: RemoveFromHistoryButtonIntl =
   {
     label: ({ title }: RemoveFromHistoryButtonMeta) =>
-      m.remove_single_watched_label({ title }),
-    text: () => m.remove_from_watched(),
+      m.button_label_remove_from_history({ title }),
+    text: () => m.button_text_remove_from_history(),
   };

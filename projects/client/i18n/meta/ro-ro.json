@@ -87,19 +87,19 @@
     "mark_as_watched_ask_prompt": {
       "default": "Când ai terminat de urmărit? (AAAA-LL-ZZ HH:MM)"
     },
-    "watchlist_action_label": {
+    "button_text_watchlist": {
       "default": "De văzut"
     },
-    "mark_as_watched": {
+    "button_text_mark_as_watched": {
       "default": "Marchează ca Vizionat"
     },
-    "mark_as_watched_until": {
+    "button_text_watched_until_here": {
       "default": "Urmărit până aici"
     },
-    "watch_again": {
+    "button_text_watch_again": {
       "default": "Revizionează"
     },
-    "add_to_watchlist_label": {
+    "button_label_add_to_watchlist": {
       "default": "Adaugă {title} la lista ta de vizionat",
       "variables": {
         "title": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "mark_as_watched_label": {
+    "button_label_mark_as_watched": {
       "default": "Marchează {title} ca vizionat",
       "variables": {
         "title": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "mark_as_watched_until_label": {
+    "button_label_watched_until_here": {
       "default": "Marchează {title} ca urmărit până aici",
       "variables": {
         "title": {
@@ -234,7 +234,7 @@
     "genre_science_fiction": {
       "default": "Știință-Fantazie"
     },
-    "remove_from_watchlist_label": {
+    "button_label_remove_from_watchlist": {
       "default": "Șterge {title} din lista ta de vizionat",
       "variables": {
         "title": {
@@ -245,10 +245,10 @@
     "search_placeholder": {
       "default": "Caută seriale & filme..."
     },
-    "join_trakt_button": {
+    "button_text_join_trakt": {
       "default": "Alătură-te Trakt"
     },
-    "join_trakt_button_label": {
+    "button_label_join_trakt": {
       "default": "Alătură-te trakt.tv pentru a urmări ce urmărești"
     },
     "copyright_notice": {
@@ -257,7 +257,7 @@
     "copyright_crafted_by": {
       "default": "Elaborat manual în toată lumea"
     },
-    "join_trakt_for_free_button": {
+    "button_text_join_trakt_for_free": {
       "default": "Alătură-te Trakt gratuit"
     },
     "landing_discover_label": {
@@ -287,35 +287,50 @@
     "list_title_most_anticipated": {
       "default": "Cele mai așteptate"
     },
-    "get": {
+    "button_text_get_vip": {
       "default": "Obține"
     },
-    "get_vip_label": {
+    "link_text_get_vip": {
+      "default": "Obține"
+    },
+    "button_label_get_vip": {
       "default": "Deblochează caracteristici VIP"
     },
-    "user_profile_label": {
+    "link_label_get_vip": {
+      "default": "Deblocați funcțiile VIP"
+    },
+    "button_label_user_profile": {
       "default": "Profil de utilizator"
     },
     "list_title_most_popular": {
       "default": "Cele mai populare"
     },
-    "navbar_link_movies": {
+    "button_text_browse_movies": {
       "default": "Filme"
     },
-    "navbar_link_movies_label": {
+    "button_label_browse_movies": {
       "default": "Răsfoiește Filme"
     },
-    "navbar_link_shows": {
+    "page_title_movies": {
+      "default": "Filme"
+    },
+    "button_text_browse_shows": {
       "default": "Seriale"
     },
-    "navbar_link_shows_label": {
+    "button_label_browse_shows": {
       "default": "Răsfoiește Seriale"
     },
-    "navbar_link_home": {
+    "page_title_shows": {
+      "default": "Seriale"
+    },
+    "button_text_home": {
       "default": "Acasă"
     },
-    "navbar_link_home_label": {
+    "button_label_home": {
       "default": "Întoarcere la pagina de pornire"
+    },
+    "page_title_home": {
+      "default": "Acasă"
     },
     "watchers": {
       "default": "Urmăritori"
@@ -337,7 +352,10 @@
     "profile": {
       "default": "Profil"
     },
-    "logout": {
+    "button_text_logout": {
+      "default": "Deconectare"
+    },
+    "button_label_logout": {
       "default": "Deconectare"
     },
     "list_title_coming_soon": {
@@ -415,10 +433,10 @@
     "unreleased_movies_empty": {
       "default": "Adaugă filmele viitoare în lista ta și rămâi la curent."
     },
-    "find_movies_link": {
+    "button_text_find_movies": {
       "default": "Găsește Filme"
     },
-    "find_shows_link": {
+    "button_text_find_shows": {
       "default": "Găsește Serialuri"
     },
     "active_watchers": {
@@ -462,7 +480,7 @@
         }
       }
     },
-    "and_more": {
+    "button_text_more": {
       "default": "{count} in plus",
       "variables": {
         "count": {
@@ -488,10 +506,13 @@
     "genre": {
       "default": "Gen"
     },
-    "navbar_link_lists": {
+    "button_text_browse_lists": {
       "default": "Liste"
     },
-    "navbar_link_lists_label": {
+    "button_label_browse_lists": {
+      "default": "Liste"
+    },
+    "page_title_lists": {
       "default": "Liste"
     },
     "list_title_watchlist_shows": {
@@ -500,7 +521,7 @@
     "list_title_watchlist_movies": {
       "default": "Filmele tale"
     },
-    "watch_title_now": {
+    "button_label_stream_on": {
       "default": "Urmărește acum {title}",
       "variables": {
         "title": {
@@ -747,10 +768,10 @@
     "job_creator": {
       "default": "Creator"
     },
-    "remove_from_watched": {
+    "button_text_remove_from_history": {
       "default": "Eliminare din Vizionate"
     },
-    "remove_from_watched_label": {
+    "button_label_remove_from_watched": {
       "default": "Eliminare {title} din lista ta de Vizionate",
       "variables": {
         "title": {
@@ -766,7 +787,7 @@
         }
       }
     },
-    "remove_single_watched_label": {
+    "button_label_remove_from_history": {
       "default": "Șterge această vizionare a lui {title} din lista ta de Conținut Văzut",
       "variables": {
         "title": {
@@ -896,7 +917,7 @@
     "trending_movies": {
       "default": "Filme populare"
     },
-    "view_all": {
+    "button_text_view_all": {
       "default": "Vezi tot"
     },
     "full_season": {
@@ -943,13 +964,13 @@
     "rate_now": {
       "default": "Evaluează acum"
     },
-    "add_to_favorites": {
+    "button_text_add_to_favorites": {
       "default": "Adaugă la Favorite"
     },
-    "remove_from_favorites": {
+    "button_text_remove_from_favorites": {
       "default": "Elimină din Favorite"
     },
-    "add_to_favorites_label": {
+    "button_label_add_to_favorites": {
       "default": "Adaugă {title} la Favorite",
       "variables": {
         "title": {
@@ -957,7 +978,7 @@
         }
       }
     },
-    "remove_from_favorites_label": {
+    "button_label_remove_from_favorites": {
       "default": "Elimină {title} din Favorite",
       "variables": {
         "title": {
@@ -985,8 +1006,11 @@
     "favorite_shows_empty": {
       "default": "Lista ta de seriale favorite este goală."
     },
-    "stream_on": {
+    "button_text_stream_on": {
       "default": "Vezi pe platforme"
+    },
+    "header_stream_on": {
+      "default": "Redă pe"
     },
     "your_watchlist_shows": {
       "default": "Serialele din lista ta"
@@ -1195,7 +1219,7 @@
         }
       }
     },
-    "drop_show_label": {
+    "button_label_drop_show": {
       "default": "Marchează {title} ca eliminat",
       "variables": {
         "title": {
@@ -1203,7 +1227,7 @@
         }
       }
     },
-    "drop_show": {
+    "button_text_drop_show": {
       "default": "Elimină"
     },
     "enable_up_next_nitro_label": {
@@ -1226,7 +1250,7 @@
         }
       }
     },
-    "restore_show_label": {
+    "button_label_restore_show": {
       "default": "Restaurare {title}",
       "variables": {
         "title": {
@@ -1234,7 +1258,7 @@
         }
       }
     },
-    "restore_show": {
+    "button_text_restore_show": {
       "default": "Restaurare"
     },
     "mark_as_watched_show_warning": {
@@ -1281,13 +1305,13 @@
         }
       }
     },
-    "like_comment_label": {
+    "button_label_like_comment": {
       "default": "Apreciază comentariul"
     },
-    "unlike_comment_label": {
+    "button_label_unlike_comment": {
       "default": "Nu aprecia comentariul"
     },
-    "comment_likes": {
+    "button_text_comment_likes": {
       "default": "{count} aprecieri",
       "variables": {
         "count": {
@@ -1298,10 +1322,10 @@
     "close_label": {
       "default": "Închide"
     },
-    "comment_replies_label": {
+    "button_label_comment_replies": {
       "default": "Răspunsuri comentarii"
     },
-    "comment_replies_text": {
+    "button_text_comment_replies": {
       "default": "{count} răspunsuri",
       "variables": {
         "count": {
@@ -1318,10 +1342,10 @@
     "comment": {
       "default": "Comentariu"
     },
-    "comment_reply": {
+    "button_text_comment_reply": {
       "default": "Răspunde"
     },
-    "comment_reply_label": {
+    "button_label_comment_reply": {
       "default": "Răspunde lui {user}",
       "variables": {
         "user": {
@@ -1381,7 +1405,7 @@
     "view_all_comments": {
       "default": "Vezi toate comentariile"
     },
-    "remove_from_list": {
+    "button_text_remove_from_list": {
       "default": "Elimină din listă"
     },
     "remove_from_list_label": {
@@ -1401,8 +1425,11 @@
     "error_page_service_status": {
       "default": "Starea serviciului Trakt"
     },
-    "retry": {
+    "button_text_retry": {
       "default": "Reîncearcă"
+    },
+    "button_label_retry": {
+      "default": "Încearcă din nou"
     },
     "community_sentiment": {
       "default": "Părerea comunității"
@@ -1463,10 +1490,13 @@
     "theme_system": {
       "default": "Sistem"
     },
-    "filter_label": {
+    "button_text_filters": {
+      "default": "Filtre"
+    },
+    "button_label_filters": {
       "default": "Filtru"
     },
-    "filter_reset": {
+    "button_label_reset_filter": {
       "default": "Resetează"
     },
     "results_for_title": {
@@ -1536,10 +1566,10 @@
         }
       }
     },
-    "filter_reset_all": {
+    "button_text_reset_all_filters": {
       "default": "Resetează tot"
     },
-    "filter_reset_all_label": {
+    "button_label_reset_all_filters": {
       "default": "Resetează toate filtrele"
     },
     "video_type_trailer": {
@@ -1566,10 +1596,10 @@
     "remaining": {
       "default": "rămase"
     },
-    "checkin": {
+    "button_text_checkin": {
       "default": "Check-in"
     },
-    "checkin_label": {
+    "button_label_checkin": {
       "default": "Check-in {title}",
       "variables": {
         "title": {
@@ -1580,7 +1610,10 @@
     "cookie_notice": {
       "default": "Trakt folosește C🍪🍪KIES pentru a-ți îmbunătăți experiența. Poți <a>citi mai multe informații</a> aici."
     },
-    "cookie_accept": {
+    "button_text_cookie_accept": {
+      "default": "Am înțeles, hai!"
+    },
+    "button_label_cookie_accept": {
       "default": "Am înțeles!"
     },
     "year_to_date_label": {
@@ -1589,7 +1622,16 @@
     "month_in_review_label": {
       "default": "Luna în revistă"
     },
-    "settings": {
+    "page_title_settings": {
+      "default": "Setări"
+    },
+    "header_settings": {
+      "default": "Setări"
+    },
+    "button_text_settings": {
+      "default": "Setări"
+    },
+    "button_label_settings": {
       "default": "Setări"
     },
     "settings_spoilers_title": {
@@ -1598,10 +1640,10 @@
     "settings_spoilers_label": {
       "default": "Arată spoilere"
     },
-    "filter_save": {
+    "button_text_save_filters": {
       "default": "Salvează"
     },
-    "filter_save_label": {
+    "button_label_save_filters": {
       "default": "Salvează filtrele"
     },
     "error_page_locked_account_title": {
@@ -1621,10 +1663,10 @@
         }
       }
     },
-    "follow": {
+    "button_text_follow": {
       "default": "Urmărește"
     },
-    "follow_label": {
+    "button_label_follow": {
       "default": "Urmărește {username}",
       "variables": {
         "username": {
@@ -1632,10 +1674,10 @@
         }
       }
     },
-    "unfollow": {
+    "button_text_unfollow": {
       "default": "Nu mai urmări"
     },
-    "unfollow_label": {
+    "button_label_unfollow": {
       "default": "Nu mai urmări {username}",
       "variables": {
         "username": {
@@ -1669,8 +1711,11 @@
     "read_more": {
       "default": "Citește mai mult"
     },
-    "add_comment": {
+    "button_text_add_comment": {
       "default": "Adaugă"
+    },
+    "button_label_add_comment": {
+      "default": "Adaugă un comentariu"
     },
     "rename_list": {
       "default": "Redenumiți lista"

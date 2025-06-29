@@ -17,7 +17,7 @@
 </script>
 
 <Button
-  label={m.comment_replies_label()}
+  label={m.button_label_comment_replies()}
   onclick={() => onDrilldown?.({ id: comment.id, isReplying: false })}
   style="ghost"
   color="purple"
@@ -28,7 +28,7 @@
   {/snippet}
 
   <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-    {m.comment_replies_text({ count: comment.replyCount })}
+    {m.button_text_comment_replies({ count: comment.replyCount })}
   </RenderFor>
 
   <RenderFor audience="all" device={["mobile"]}>
