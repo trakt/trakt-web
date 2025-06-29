@@ -44,7 +44,7 @@
   const onRemoveHandler = $derived(
     attachWarning(
       removeFromList,
-      m.remove_from_personal_list_warning({ list: list.name, title }),
+      m.warning_prompt_remove_from_personal_list({ list: list.name, title }),
     ),
   );
   const handler = $derived($isListed ? onRemoveHandler : addToList);

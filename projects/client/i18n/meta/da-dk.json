@@ -779,7 +779,7 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "Er du sikker på, at du vil fjerne {title} fra din set-liste? Alle afspilninger vil blive fjernet.",
       "variables": {
         "title": {
@@ -795,7 +795,7 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "Er du sikker på, at du vil fjerne denne afspilning af {title} fra din set-liste?",
       "variables": {
         "title": {
@@ -923,7 +923,7 @@
     "full_season": {
       "default": "Hele sæsonen"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "Er du sikker på, at du vil fjerne {title} fra din liste?",
       "variables": {
         "title": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "Er du sikker på at du vil fjerne {title} fra dine favoritter?",
       "variables": {
         "title": {
@@ -1211,7 +1211,7 @@
     "aired": {
       "default": "Sendt"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "Er du sikker på, at du vil droppe {title} serien? Dette vil fjerne den fra din næste liste.",
       "variables": {
         "title": {
@@ -1242,7 +1242,7 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "På grund af interne designændringer vil tidligere skjulte serier nu være synlige på din liste med et sort/hvidt miniaturebillede for at hjælpe dig med hurtigt at få øje på dem, med mulighed for enten at fjerne dem eller droppe dem fra listen."
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "Er du sikker på, at du vil gendanne {title} serien? Dette vil gendanne den på din fremskridt og kalender.",
       "variables": {
         "title": {
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "Er du sikker på, at du vil fjerne {title} fra {list}?",
       "variables": {
         "title": {
@@ -1685,7 +1685,7 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "Er du sikker på, at du vil holde op med at følge {username}?",
       "variables": {
         "username": {

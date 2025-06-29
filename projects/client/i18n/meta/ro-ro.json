@@ -779,7 +779,7 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "Esti sigur că vrei să elimini {title} din lista ta de Vizionate? Toate vizionările vor fi șterse.",
       "variables": {
         "title": {
@@ -795,7 +795,7 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "Sigur vrei să ștergi această vizionare a {title} din lista ta de vizionate?",
       "variables": {
         "title": {
@@ -923,7 +923,7 @@
     "full_season": {
       "default": "Sezon complet"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "Sigur vrei să elimini {title} din lista ta de vizionat?",
       "variables": {
         "title": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "Sigur dorești să elimini {title} din Favorite?",
       "variables": {
         "title": {
@@ -1211,7 +1211,7 @@
     "aired": {
       "default": "S-a difuzat"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "Ești sigur că vrei să elimini {title} din lista ta? Aceasta va fi eliminată din următoarele titluri.",
       "variables": {
         "title": {
@@ -1242,7 +1242,7 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "Datorită modificărilor de design interne, filmele ascunse anterior vor fi acum vizibile în lista ta, cu o miniatură alb-negru pentru a le identifica rapid, având opțiunea de a le readuce sau de a le elimina din listă."
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "Sigur vrei să restaurezi {title}? Acesta va fi restaurat pe progresul și calendarul tău.",
       "variables": {
         "title": {
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "Sigur vrei să elimini {title} din {list}?",
       "variables": {
         "title": {
@@ -1685,7 +1685,7 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "Sigur dorești să nu mai urmărești pe {username}?",
       "variables": {
         "username": {

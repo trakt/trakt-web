@@ -26,7 +26,7 @@
   const onRemoveHandler = $derived(
     attachWarning(
       removeFromHistory,
-      m.remove_single_watched_warning({ title }),
+      m.warning_prompt_remove_single_watched({ title }),
     ),
   );
 </script>

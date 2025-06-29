@@ -779,7 +779,7 @@
         }
       }
     },
-    "remove_from_watched_warning": {
+    "warning_prompt_remove_from_watched": {
       "default": "Сигурни ли сте, че искате да премахнете {title} от наблюдавани? Всички гледания ще бъдат премахнати.",
       "variables": {
         "title": {
@@ -795,7 +795,7 @@
         }
       }
     },
-    "remove_single_watched_warning": {
+    "warning_prompt_remove_single_watched": {
       "default": "Сигурни ли сте, че искате да премахнете това гледне на {title} от наблюдавани?",
       "variables": {
         "title": {
@@ -923,7 +923,7 @@
     "full_season": {
       "default": "Завършил сезон"
     },
-    "remove_from_watchlist_warning": {
+    "warning_prompt_remove_from_watchlist": {
       "default": "Сигурни ли сте, че искате да премахнете {title} от вашия списък за наблюдение?",
       "variables": {
         "title": {
@@ -986,7 +986,7 @@
         }
       }
     },
-    "remove_from_favorites_warning": {
+    "warning_prompt_remove_from_favorites": {
       "default": "Сигурни ли сте, че искате да премахнете {title} от Любими?",
       "variables": {
         "title": {
@@ -1211,7 +1211,7 @@
     "aired": {
       "default": "Излъчено"
     },
-    "drop_show_warning": {
+    "warning_prompt_drop_show": {
       "default": "Сигурни ли сте, че искате да се откажете от {title} предаване? Това ще го премахне от списъка със следващите.",
       "variables": {
         "title": {
@@ -1242,7 +1242,7 @@
     "lab_up_next_nitro_hidden_message": {
       "default": "Поради вътрешни промени в дизайна, скритите преди това предавания вече ще се виждат в списъка с черно-бяла миниатюра, за да ги откривате бързо, с възможност да ги премахнете или да ги изхвърлите от списъка."
     },
-    "restore_show_warning": {
+    "warning_prompt_restore_show": {
       "default": "Сигурни ли сте, че искате да възстановите {title}? Това ще го възстанови във вашия прогрес и календар.",
       "variables": {
         "title": {
@@ -1470,7 +1470,7 @@
         }
       }
     },
-    "remove_from_personal_list_warning": {
+    "warning_prompt_remove_from_personal_list": {
       "default": "Сигурни ли сте, че искате да премахнете {title} от {list}?",
       "variables": {
         "title": {
@@ -1685,7 +1685,7 @@
         }
       }
     },
-    "unfollow_warning": {
+    "warning_prompt_unfollow_user": {
       "default": "Сигурни ли сте, че искате да се отпишете от {username}?",
       "variables": {
         "username": {

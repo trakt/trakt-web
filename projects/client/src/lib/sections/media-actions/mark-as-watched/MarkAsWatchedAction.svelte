@@ -37,7 +37,10 @@
   );
 
   const onRemoveHandler = $derived(
-    attachWarning(removeWatched, m.remove_from_watched_warning({ title })),
+    attachWarning(
+      removeWatched,
+      m.warning_prompt_remove_from_watched({ title }),
+    ),
   );
 </script>
 

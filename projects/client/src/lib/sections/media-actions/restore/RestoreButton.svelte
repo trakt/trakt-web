@@ -12,7 +12,10 @@
   const { title, onRestore, isRestoring, style, ...props }: RestoreButtonProps =
     $props();
 
-  const handler = attachWarning(onRestore, m.restore_show_warning({ title }));
+  const handler = attachWarning(
+    onRestore,
+    m.warning_prompt_restore_show({ title }),
+  );
 
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: false, color: "default" }),
