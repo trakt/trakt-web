@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "En personlig besked: Hvis du har oplysninger om brugeren (f.eks. deres sehistorik), kan du bruge det til at generere en mere personlig pladsholder, som f.eks. 'Denne bruger elsker gyserfilm, men hader at skrive bioer. (Måske er de for travlt med at gemme sig for zombier?)'"
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "Din liste er tom. Tilføj film for at skabe dit mesterværk."
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "Din liste er tom. Tilføj serier for at give din fantasi brændstof."
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "Udforsk serier, og tilpas din tidsplan."
     },
     "up_next_empty": {
       "default": "Begynd at se, og tilføj serier til din liste."
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "Tilføj film til din liste, og gå aldrig glip af en premiere."
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "Tilføj kommende film til din liste, og hold dig opdateret."
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "Favorit-tv-serier"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "Din favoritfilmliste er tom."
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "Din favorit-tv-serieliste er tom."
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "Populære lister"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} fremgår ikke på nogen populære lister.",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "Ingen kommentarer endnu."
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "Afsnit set"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "Du har ikke set {title} endnu",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "Følgere"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "Der er ingen her (endnu)."
     },
     "read_more": {

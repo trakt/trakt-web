@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "Персоналізоване повідомлення: Якщо у вас є будь-яка інформація про користувача (наприклад, їхня історія переглядів), ви можете використовувати її для створення більш персоналізованого заповнювача, наприклад: \"Ця користувач любить жахи, але ненавидить писати біографії. (Можливо, вони занадто зайняті, щоб ховатися від зомбі?)\""
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "Ваш список перегляду порожній. Додайте фільми, щоб створити свій кіношедевр!"
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "Ваш список перегляду порожній. Додайте серіали, щоб розпалити уяву."
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "Досліджуйте телесеріали та персоналізуйте свій розклад."
     },
     "up_next_empty": {
       "default": "Почніть перегляд та додайте серіали до свого списку переглядів."
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "Додайте фільми до свого списку переглядів і ніколи не пропустіть прем'єри."
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "Додайте майбутні фільми до свого списку переглядів та залишайтеся в курсі."
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "Улюблені серіали"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "Ваш список улюблених фільмів порожній."
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "Ваш список улюблених серіалів порожній."
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "Популярні списки"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} не з'являється в жодному популярному списку.",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "Ще немає коментарів."
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "Переглянуто епізодів"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "Ви ще не дивилися {title}",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "Підписники"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "Тут нікого немає (поки що)."
     },
     "read_more": {

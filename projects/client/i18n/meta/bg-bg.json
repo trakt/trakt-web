@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "Персонализирано съобщение: Ако разполагате с някаква информация за потребителя (напр. историята на гледанията му), можете да я използвате, за да генерирате по-персонализирано съобщение, като например 'Този потребител обича филми на ужасите, но мрази да пише биографии. (Може би е твърде зает да се крие от зомбита?)'"
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "Твоят списък за наблюдение е празен. Добави филми, за да създадеш своя филмов шедьовър."
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "Твоят списък за наблюдение е празен. Добави предавания, за да развихриш въображението си."
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "Разгледай предавания и персонализирай графика си."
     },
     "up_next_empty": {
       "default": "Започни да гледаш и добавяш предавания в списъка си за наблюдение."
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "Добавяй филми в списъка си за гледане и не пропускай нито една премиера."
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "Добавяй предстоящи филми в списъка си за наблюдение и получавай актуална информация."
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "Любими сериали"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "Списъкът с любими филми е празен."
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "Списъкът с любими сериали е празен."
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "Популярни списъци"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} не е в никой популярен списък.",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "Все още няма коментари"
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "Гледани епизоди"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "Все още не сте гледали {title}",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "Последователи"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "Тук няма никой (още)."
     },
     "read_more": {

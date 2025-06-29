@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "Un mesaj personalizat: Dacă ai vreo informație despre utilizator (de exemplu, istoricul lor de vizionare), ai putea folosi aceste informații pentru a genera un placeholder mai personalizat, cum ar fi 'Acest utilizator adoră filmele de groază, dar urăște să scrie biografii. (Poate este prea ocupat să se ascundă de zombi?)'"
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "Lista ta de vizionat este goală. Adaugă filme pentru a-ți crea capodopera cinematografică!"
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "Lista ta de vizionat este goală. Adaugă seriale TV pentru a-ți aprinde imaginația."
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "Explorează seriale TV și personalizează-ți programul."
     },
     "up_next_empty": {
       "default": "Începe să urmărești și adaugă seriale în lista ta de urmărire."
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "Adaugă filme în lista ta și nu rata nicio premieră."
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "Adaugă filmele viitoare în lista ta și rămâi la curent."
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "Seriale favorite"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "Lista ta de filme favorite este goală."
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "Lista ta de seriale favorite este goală."
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "Liste populare"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} nu apare în nicio listă populară.",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "Încă nu sunt comentarii."
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "Episoade vizionate"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "Încă nu ai urmărit {title}!",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "Urmăritori"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "Nimeni pe aici (încă)."
     },
     "read_more": {

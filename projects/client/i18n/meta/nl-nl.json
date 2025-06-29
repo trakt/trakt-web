@@ -415,22 +415,22 @@
     "about_placeholder_15": {
       "default": "Een gepersonaliseerde boodschap: als je informatie hebt over de gebruiker (bijvoorbeeld hun kijkgeschiedenis), kun je een meer gepersonaliseerde placeholder genereren, zoals 'Deze gebruiker houdt van horrorfilms maar haat biografieën schrijven. (Misschien zijn ze te druk met het verbergen voor zombies?)'"
     },
-    "watchlist_movies_empty": {
+    "list_placeholder_watchlist_movies": {
       "default": "Je watchlist is leeg. Voeg films toe om je eigen cinematografische meesterwerk te creëren."
     },
-    "watchlist_shows_empty": {
+    "list_placeholder_watchlist_shows": {
       "default": "Je watchlist is leeg. Voeg series toe om je verbeelding te voeden."
     },
-    "upcoming_schedule_empty": {
+    "list_placeholder_upcoming_schedule": {
       "default": "Ontdek tv-series en personaliseer je planning."
     },
     "up_next_empty": {
       "default": "Begin met kijken en voeg series toe aan je kijklijst."
     },
-    "released_movies_empty": {
+    "list_placeholder_released_movies": {
       "default": "Voeg films toe aan je kijklijst en mis nooit een première."
     },
-    "unreleased_movies_empty": {
+    "list_placeholder_unreleased_movies": {
       "default": "Voeg aankomende films toe aan je kijklijst en blijf op de hoogte."
     },
     "button_text_find_movies": {
@@ -1000,10 +1000,10 @@
     "list_title_favorite_shows": {
       "default": "Favoriete Series"
     },
-    "favorite_movies_empty": {
+    "list_placeholder_favorite_movies": {
       "default": "Je favoriete filmlijst is leeg."
     },
-    "favorite_shows_empty": {
+    "list_placeholder_favorite_shows": {
       "default": "Je favoriete serienlijst is leeg."
     },
     "button_text_stream_on": {
@@ -1041,7 +1041,7 @@
     "list_title_popular_lists": {
       "default": "Populaire lijsten"
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} staat niet op populaire lijsten.",
       "variables": {
         "title": {
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "no_comments": {
+    "list_placeholder_comments": {
       "default": "Nog geen reacties."
     },
     "review_by": {
@@ -1297,7 +1297,7 @@
     "tag_text_watched_episodes": {
       "default": "Bekeken afleveringen"
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "Je hebt {title} nog niet bekeken",
       "variables": {
         "title": {
@@ -1705,7 +1705,7 @@
     "list_title_followers": {
       "default": "Volgers"
     },
-    "not_following_anyone": {
+    "list_placeholder_followers": {
       "default": "Hier is nog niemand (nog niet)."
     },
     "read_more": {

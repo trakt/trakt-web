@@ -462,23 +462,28 @@
     "about_placeholder_15": {
       "default": "A personalized message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalized placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'"
     },
-    "watchlist_movies_empty": {
-      "default": "Your watchlist is empty. Add movies to create your cinematic masterpiece."
+    "list_placeholder_watchlist_movies": {
+      "default": "Your watchlist is empty. Add movies to create your cinematic masterpiece.",
+      "description": "Placeholder text shown when there are no movies in the user's watchlist."
     },
-    "watchlist_shows_empty": {
-      "default": "Your watchlist is empty. Add shows to fuel your imagination."
+    "list_placeholder_watchlist_shows": {
+      "default": "Your watchlist is empty. Add shows to fuel your imagination.",
+      "description": "Placeholder text shown when there are no shows in the user's watchlist."
     },
-    "upcoming_schedule_empty": {
-      "default": "Explore TV series and personalize your schedule."
+    "list_placeholder_upcoming_schedule": {
+      "default": "Explore TV series and personalize your schedule.",
+      "description": "Placeholder text shown when there are no upcoming episodes in the schedule."
     },
     "up_next_empty": {
       "default": "Start watching and add shows to your watchlist."
     },
-    "released_movies_empty": {
-      "default": "Add movies to your watchlist and never miss a premiere."
+    "list_placeholder_released_movies": {
+      "default": "Add movies to your watchlist and never miss a premiere.",
+      "description": "Placeholder text shown when there are no released movies in the user's watchlist."
     },
-    "unreleased_movies_empty": {
-      "default": "Add upcoming movies to your watchlist and stay updated."
+    "list_placeholder_unreleased_movies": {
+      "default": "Add upcoming movies to your watchlist and stay updated.",
+      "description": "Placeholder text shown when there are no unreleased movies in the user's watchlist."
     },
     "button_text_find_movies": {
       "default": "Find Movies",
@@ -1083,11 +1088,13 @@
       "default": "Favorite Shows",
       "description": "Title for lists containing a user's favorite shows. This title should be as short and concise as possible."
     },
-    "favorite_movies_empty": {
-      "default": "Your favorite movies list is empty."
+    "list_placeholder_favorite_movies": {
+      "default": "Your favorite movies list is empty.",
+      "description": "Placeholder text shown when there are no favorite movies in the user's favorites list."
     },
-    "favorite_shows_empty": {
-      "default": "Your favorite shows list is empty."
+    "list_placeholder_favorite_shows": {
+      "default": "Your favorite shows list is empty.",
+      "description": "Placeholder text shown when there are no favorite shows in the user's favorites list."
     },
     "button_text_stream_on": {
       "default": "Stream on",
@@ -1129,8 +1136,9 @@
       "default": "Popular lists",
       "description": "Title for lists containing popular lists of movies or shows. This title should be as short and concise as possible."
     },
-    "no_popular_lists": {
+    "list_placeholder_popular_lists": {
       "default": "{title} does not appear on any popular lists.",
+      "description": "Placeholder text shown when there are no popular lists for a movie or show.",
       "variables": {
         "title": {
           "type": "string"
@@ -1156,8 +1164,9 @@
         }
       }
     },
-    "no_comments": {
-      "default": "No comments yet."
+    "list_placeholder_comments": {
+      "default": "No comments yet.",
+      "description": "Placeholder text shown when there are no comments in a list."
     },
     "review_by": {
       "default": "Review by"
@@ -1398,8 +1407,9 @@
       "default": "Watched episodes",
       "description": "Text for the tag that is shown before the episode watch count. This should be as short as possible."
     },
-    "empty_media_history_label": {
+    "list_placeholder_media_history": {
       "default": "You haven't watched {title} yet",
+      "description": "Placeholder text shown when there is no watch history for a movie, show, or episode.",
       "variables": {
         "title": {
           "type": "string"
@@ -1847,8 +1857,13 @@
       "default": "Followers",
       "description": "Title for lists containing the profiles following the user. This title should be as short and concise as possible."
     },
-    "not_following_anyone": {
-      "default": "There is no one here (yet)."
+    "list_placeholder_followers": {
+      "default": "There is no one here (yet).",
+      "description": "Placeholder text shown when there are no followers for a profile."
+    },
+    "list_placeholder_following": {
+      "default": "There is no one here (yet).",
+      "description": "Placeholder text shown when there are no profiles followed by the user."
     },
     "read_more": {
       "default": "Read more"

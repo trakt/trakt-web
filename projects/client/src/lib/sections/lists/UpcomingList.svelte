@@ -20,7 +20,7 @@
   {/snippet}
   {#snippet empty()}
     {#if !$isLoading}
-      <p class="small">{m.upcoming_schedule_empty()}</p>
+      <p class="small">{m.list_placeholder_upcoming_schedule()}</p>
       <FindShowsLink />
     {/if}
   {/snippet}
