@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "Kommande schema"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "Säsongspremiär"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "Seriepremiär"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "Mid-Säsongspremiär"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "Säsongsavslutning"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "Serieavslutning"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "Mid-Säsongsavslutning"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "Nästa"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "{count} kvar",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "Rekommenderade serier"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} avsnitt",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "Tittare"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} visningar",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "Kommer snart"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "TBA"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "Hitta serier"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} tittar",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "Skådespelare"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} förväntansfulla",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "Se alla"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "Hela säsongen"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Byt till Trakt.tv"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "Förhandsgranska"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "Antal visningar"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "Visade avsnitt"
     },
     "empty_media_history_label": {

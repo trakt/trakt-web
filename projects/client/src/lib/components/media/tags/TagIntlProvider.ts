@@ -10,17 +10,19 @@ import type { TagIntl } from './TagIntl.ts';
 export const TagIntlProvider: TagIntl = {
   toDuration: (duration) =>
     toHumanDuration({ minutes: duration }, languageTag()),
-  toEpisodeCount: (count) => m.number_of_episodes({ count }),
+  toEpisodeCount: (count) => m.tag_text_number_of_episodes({ count }),
   toPlayCount: (count) =>
-    m.plays({ number: toHumanNumber(count, languageTag()) }),
+    m.tag_text_plays({ number: toHumanNumber(count, languageTag()) }),
   toWatcherCount: (count) =>
-    m.active_watchers({ count: toHumanNumber(count, languageTag()) }),
+    m.tag_text_active_watchers({ count: toHumanNumber(count, languageTag()) }),
   toReleaseEstimate: (airDate) => toHumanETA(new Date(), airDate, getLocale()),
-  tbaLabel: () => m.tba_label(),
+  tbaLabel: () => m.tag_text_tba(),
   toAnticipatedCount: (count) =>
-    m.anticipated_count({ count: toHumanNumber(count, languageTag()) }),
+    m.tag_text_anticipated_count({
+      count: toHumanNumber(count, languageTag()),
+    }),
   watchCountLabel: (isShow) =>
-    isShow ? m.watched_episodes_count_label() : m.watch_count_label(),
+    isShow ? m.tag_text_watched_episodes() : m.tag_text_watch_count(),
   trendLabel: (delta) =>
     delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
 };

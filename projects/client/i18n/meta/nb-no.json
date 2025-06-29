@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "Kommende"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "Sesongpremiere"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "Seriepremiere"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "Midt-Sesongpremiere"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "Sesongavslutning"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "Serieavslutning"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "Midt-Sesongavslutning"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "Neste"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "{count} igjen",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "Anbefalte Serier"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} episoder",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "Seere"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} visninger",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "Kommer Snart"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "TBA"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "Finn Serier"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} ser på",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "Skuespillere"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} forventninger",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "Se Alle"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "Full Sesong"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Bytt til Trakt.tv"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "Forhåndsvisning"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "Visningsantall"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "Episoder sett"
     },
     "empty_media_history_label": {

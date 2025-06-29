@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "Prossima programmazione"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "Anteprima della stagione"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "Anteprima di serie"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "Anteprima di metà stagione"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "Finale di stagione"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "Finale di serie"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "Finale di metà stagione"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "Prossimamente"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "{count} rimanenti",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "Serie TV raccomandate"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} episodi",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "Spettatori"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} riproduzioni",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "Prossimamente"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "Da annunciare"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "Trova serie TV"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} stanno guardando",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "Attori"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} attesi",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "Visualizza tutto"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "Stagione completa"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Passa a Trakt.tv"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "Previzualizare"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "Conti visualizzazioni"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "Episodi visti"
     },
     "empty_media_history_label": {

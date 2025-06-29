@@ -24,22 +24,22 @@
     "list_title_upcoming_schedule": {
       "default": "Horaire à venir"
     },
-    "season_premiere": {
+    "tag_text_season_premiere": {
       "default": "Première de saison"
     },
-    "series_premiere": {
+    "tag_text_series_premiere": {
       "default": "Première de la série"
     },
-    "mid_season_premiere": {
+    "tag_text_mid_season_premiere": {
       "default": "Première de mi-saison"
     },
-    "season_finale": {
+    "tag_text_season_finale": {
       "default": "Finale de saison"
     },
-    "series_finale": {
+    "tag_text_series_finale": {
       "default": "Finale de la série"
     },
-    "mid_season_finale": {
+    "tag_text_mid_season_finale": {
       "default": "Finale de mi-saison"
     },
     "profile_banner_greeting": {
@@ -53,7 +53,7 @@
     "list_title_up_next": {
       "default": "Ce qui vous attend"
     },
-    "remaining_episodes": {
+    "tag_text_remaining_episodes": {
       "default": "{count} restant(s)",
       "variables": {
         "count": {
@@ -67,7 +67,7 @@
     "list_title_recommended_shows": {
       "default": "Recommandations"
     },
-    "number_of_episodes": {
+    "tag_text_number_of_episodes": {
       "default": "{count} épisodes",
       "variables": {
         "count": {
@@ -335,7 +335,7 @@
     "watchers": {
       "default": "Regardants"
     },
-    "plays": {
+    "tag_text_plays": {
       "default": "{number} visionnements",
       "variables": {
         "number": {
@@ -361,7 +361,7 @@
     "list_title_coming_soon": {
       "default": "Bientôt disponible"
     },
-    "tba_label": {
+    "tag_text_tba": {
       "default": "À venir"
     },
     "list_title_related_movies": {
@@ -439,7 +439,7 @@
     "button_text_find_shows": {
       "default": "Trouver des séries"
     },
-    "active_watchers": {
+    "tag_text_active_watchers": {
       "default": "{count} en train de regarder",
       "variables": {
         "count": {
@@ -897,7 +897,7 @@
     "list_title_actors": {
       "default": "Acteurs"
     },
-    "anticipated_count": {
+    "tag_text_anticipated_count": {
       "default": "{count} impatients",
       "variables": {
         "count": {
@@ -920,7 +920,7 @@
     "button_text_view_all": {
       "default": "Tout voir"
     },
-    "full_season": {
+    "tag_text_full_season": {
       "default": "Saison complète"
     },
     "warning_prompt_remove_from_watchlist": {
@@ -1199,7 +1199,7 @@
     "switch_to_og": {
       "default": "Passer à Trakt.tv"
     },
-    "preview": {
+    "tag_text_preview": {
       "default": "Aperçu"
     },
     "preview_description": {
@@ -1291,10 +1291,10 @@
         }
       }
     },
-    "watch_count_label": {
+    "tag_text_watch_count": {
       "default": "Nombre de visionnements"
     },
-    "watched_episodes_count_label": {
+    "tag_text_watched_episodes": {
       "default": "Épisodes visionnés"
     },
     "empty_media_history_label": {
