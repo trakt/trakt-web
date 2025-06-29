@@ -1086,7 +1086,7 @@
     "view_all_social_activity": {
       "default": "Alle Aktivitäten anzeigen"
     },
-    "position_dropwdown_label": {
+    "dropdown_label_person_position": {
       "default": "Position"
     },
     "position_acting": {
@@ -1440,7 +1440,7 @@
     "listed": {
       "default": "Gelistet"
     },
-    "add_remove_from_lists": {
+    "dropdown_label_add_remove_from_lists": {
       "default": "{title} zu Listen hinzufügen oder entfernen",
       "variables": {
         "title": {

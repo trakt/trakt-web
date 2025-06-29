@@ -1184,8 +1184,9 @@
     "view_all_social_activity": {
       "default": "View all social activity"
     },
-    "position_dropwdown_label": {
-      "default": "Position"
+    "dropdown_label_person_position": {
+      "default": "Position",
+      "description": "Aria-label for the dropdown that allows users to filter people by their position in a movie or show."
     },
     "position_acting": {
       "default": "Acting"
@@ -1565,8 +1566,9 @@
     "listed": {
       "default": "Listed"
     },
-    "add_remove_from_lists": {
+    "dropdown_label_add_remove_from_lists": {
       "default": "Add or remove {title} from lists",
+      "description": "Aria-label for the dropdown that allows users to add or remove a movie or show from lists.",
       "variables": {
         "title": {
           "type": "string"
@@ -1989,6 +1991,10 @@
           "type": "string"
         }
       }
+    },
+    "dropdown_label_extras": {
+      "default": "Extras",
+      "description": "Aria-label for the dropdown that allows users to filter extras by type, such as trailers, featurettes, etc."
     }
   }
 }

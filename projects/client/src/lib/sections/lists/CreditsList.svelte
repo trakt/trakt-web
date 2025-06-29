@@ -65,7 +65,7 @@
 
   {#snippet dynamicActions()}
     <DropdownList
-      label={m.position_dropwdown_label()}
+      label={m.dropdown_label_person_position()}
       preferNative
       style="flat"
       variant="primary"

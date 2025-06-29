@@ -1086,7 +1086,7 @@
     "view_all_social_activity": {
       "default": "Se all sosial aktivitet"
     },
-    "position_dropwdown_label": {
+    "dropdown_label_person_position": {
       "default": "Posisjon"
     },
     "position_acting": {
@@ -1440,7 +1440,7 @@
     "listed": {
       "default": "Listet"
     },
-    "add_remove_from_lists": {
+    "dropdown_label_add_remove_from_lists": {
       "default": "Legg til eller fjern {title} fra lister",
       "variables": {
         "title": {

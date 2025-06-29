@@ -61,7 +61,7 @@
       {#if types.length > 1}
         <DropdownList
           preferNative
-          label="Seasons"
+          label={m.dropdown_label_extras()}
           style="flat"
           variant="primary"
           color="blue"
