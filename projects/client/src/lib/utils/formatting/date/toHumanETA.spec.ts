@@ -114,4 +114,33 @@ describe('toHumanETA', () => {
     const targetDate = new Date('2023-01-02T10:00:00.000Z');
     expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
   });
+
+  it('should account for weeks overflowing', () => {
+    [
+      {
+        'today': '2025-06-28T10:00:00.000Z',
+        'target': '2025-07-07T10:00:00.000Z',
+        'expected': 'in 2 weeks',
+      },
+      {
+        'today': '2025-06-30T10:00:00.000Z',
+        'target': '2025-07-13T10:00:00.000Z',
+        'expected': 'next week',
+      },
+      {
+        'today': '2025-06-30T10:00:00.000Z',
+        'target': '2025-07-14T10:00:00.000Z',
+        'expected': 'in 2 weeks',
+      },
+      {
+        'today': '2025-06-30T10:00:00.000Z',
+        'target': '2025-07-15T10:00:00.000Z',
+        'expected': 'in 2 weeks',
+      },
+    ].forEach(({ today, target, expected }) => {
+      const todayDate = new Date(today);
+      const targetDate = new Date(target);
+      expect(toHumanETA(todayDate, targetDate, 'en')).toBe(expected);
+    });
+  });
 });

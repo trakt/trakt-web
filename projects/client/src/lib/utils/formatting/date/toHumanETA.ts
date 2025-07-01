@@ -35,7 +35,11 @@ export function toHumanETA(
     return rtf.format(days, 'day');
   }
 
-  const weeks = Math.round(days / 7);
+  const remainingDaysInWeek = days % 7;
+  const exceedsCurrentWeek = today.getUTCDay() + remainingDaysInWeek > 7;
+  const additionalWeek = exceedsCurrentWeek ? 1 : 0;
+
+  const weeks = Math.floor(days / 7) + additionalWeek;
   if (weeks <= 3) {
     return rtf.format(weeks, 'week');
   }
