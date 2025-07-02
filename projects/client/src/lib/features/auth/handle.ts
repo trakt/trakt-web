@@ -33,12 +33,15 @@ function isContentRequest(event: RequestEvent) {
 }
 
 function isAuthEndpointRequest(event: RequestEvent) {
+  const isCacheBust = event.url.searchParams.has('_cb');
+
   const authPaths = [
     ...Object.values(AuthDeviceEndpoint),
     ...Object.values(AuthEndpoint),
   ];
 
-  return authPaths.some((path) => event.url.pathname.startsWith(path));
+  return isCacheBust ||
+    authPaths.some((path) => event.url.pathname.startsWith(path));
 }
 
 function getOidcToken(event: RequestEvent) {
