@@ -8,7 +8,7 @@ import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValu
 import { GENRES } from './genres.ts';
 
 const GENRE_FILTER: Filter = {
-  label: m.genre(),
+  label: m.header_genre(),
   key: FilterKey.Genres,
   type: 'list',
   options: GENRES
@@ -20,28 +20,28 @@ const GENRE_FILTER: Filter = {
 };
 
 const DECADE_FILTER: Filter = {
-  label: m.decade(),
+  label: m.header_decade(),
   key: FilterKey.Decade,
   type: 'list',
   options: generateDecadeOptions(),
 };
 
 const STREAMING_FILTER: Filter = {
-  label: m.streaming(),
+  label: m.header_streaming(),
   key: FilterKey.Streaming,
   type: 'list',
   options: [
-    { label: m.watchnow_favorites_only(), value: 'favorites' },
+    { label: m.option_text_my_favorites(), value: 'favorites' },
     {
-      label: m.watchnow_streaming(),
+      label: m.option_text_streaming_now(),
       value: 'subscriptions',
     },
-    { label: m.watchnow_digital_release(), value: 'any' },
+    { label: m.option_text_all_digital_releases(), value: 'any' },
   ],
 };
 
 const RATINGS_FILTER: Filter = {
-  label: m.ratings(),
+  label: m.header_ratings(),
   key: FilterKey.Ratings,
   type: 'ratings',
   options: Object.values(SimpleRating).map((rating) => ({
@@ -51,14 +51,14 @@ const RATINGS_FILTER: Filter = {
 };
 
 const IGNORE_WATCHED_FILTER: Filter = {
-  label: m.ignore_watched(),
+  label: m.header_ignore_watched(),
   key: FilterKey.IgnoreWatched,
   type: 'toggle',
   defaultValue: 'true',
 };
 
 const IGNORE_WATCHLISTED_FILTER: Filter = {
-  label: m.ignore_watchlisted(),
+  label: m.header_ignore_watchlisted(),
   key: FilterKey.IgnoreWatchlisted,
   type: 'toggle',
   defaultValue: 'true',

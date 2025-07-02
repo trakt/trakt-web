@@ -5,7 +5,7 @@ vi.mock(import('$lib/features/i18n/messages.ts'), async (importOriginal) => {
   return {
     ...originalMessages,
 
-    test_not_translated: () => undefined,
-    test_translated_value: () => 'My Translated Value',
+    translated_value_test_not_translated: () => undefined,
+    translated_value_test_translated_value: () => 'My Translated Value',
   };
 });

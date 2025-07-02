@@ -38,7 +38,7 @@
   {#if popupActions}
     <CardActionBar>
       {#snippet actions()}
-        <PopupMenu label={m.media_popup_label({ title: media.title })}>
+        <PopupMenu label={m.button_label_popup_media({ title: media.title })}>
           {#snippet items()}
             {@render popupActions()}
           {/snippet}

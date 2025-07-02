@@ -23,6 +23,6 @@
   <CardCover
     {title}
     src={$src ?? EPISODE_COVER_PLACEHOLDER}
-    alt={m.media_poster({ title })}
+    alt={m.image_alt_media_poster({ title })}
   />
 </Link>

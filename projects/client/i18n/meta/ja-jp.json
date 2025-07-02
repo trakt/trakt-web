@@ -42,7 +42,7 @@
     "tag_text_mid_season_finale": {
       "default": "シーズン中盤最終回"
     },
-    "profile_banner_greeting": {
+    "header_profile_banner_greeting": {
       "default": "こんにちは、{name}さん！",
       "variables": {
         "name": {
@@ -78,13 +78,13 @@
     "page_title_error_404": {
       "default": "404エラー！"
     },
-    "error_404_message": {
+    "error_text_404": {
       "default": "（大丈夫ですよ！フォースも時々乱れますから。）"
     },
-    "error_404_action": {
+    "link_text_back_to_safety": {
       "default": "安全な場所へ…"
     },
-    "mark_as_watched_ask_prompt": {
+    "input_prompt_mark_as_watched_date": {
       "default": "いつ視聴完了しましたか？(YYYY-MM-DD HH:MM)"
     },
     "button_text_watchlist": {
@@ -123,115 +123,115 @@
         }
       }
     },
-    "genre_horror": {
+    "translated_value_genre_horror": {
       "default": "ホラー"
     },
-    "genre_comedy": {
+    "translated_value_genre_comedy": {
       "default": "コメディ"
     },
-    "genre_action": {
+    "translated_value_genre_action": {
       "default": "アクション"
     },
-    "genre_adventure": {
+    "translated_value_genre_adventure": {
       "default": "冒険"
     },
-    "genre_animation": {
+    "translated_value_genre_animation": {
       "default": "アニメーション"
     },
-    "genre_biography": {
+    "translated_value_genre_biography": {
       "default": "伝記"
     },
-    "genre_children": {
+    "translated_value_genre_children": {
       "default": "子供向け"
     },
-    "genre_crime": {
+    "translated_value_genre_crime": {
       "default": "犯罪"
     },
-    "genre_documentary": {
+    "translated_value_genre_documentary": {
       "default": "ドキュメンタリー"
     },
-    "genre_drama": {
+    "translated_value_genre_drama": {
       "default": "ドラマ"
     },
-    "genre_family": {
+    "translated_value_genre_family": {
       "default": "ファミリー"
     },
-    "genre_fantasy": {
+    "translated_value_genre_fantasy": {
       "default": "ファンタジー"
     },
-    "genre_game_show": {
+    "translated_value_genre_game_show": {
       "default": "ゲームショー"
     },
-    "genre_history": {
+    "translated_value_genre_history": {
       "default": "歴史"
     },
-    "genre_home_and_garden": {
+    "translated_value_genre_home_and_garden": {
       "default": "ホーム＆ガーデン"
     },
-    "genre_holiday": {
+    "translated_value_genre_holiday": {
       "default": "ホリデー"
     },
-    "genre_music": {
+    "translated_value_genre_music": {
       "default": "音楽"
     },
-    "genre_musical": {
+    "translated_value_genre_musical": {
       "default": "ミュージカル"
     },
-    "genre_mystery": {
+    "translated_value_genre_mystery": {
       "default": "ミステリー"
     },
-    "genre_news": {
+    "translated_value_genre_news": {
       "default": "ニュース"
     },
-    "genre_none": {
+    "translated_value_genre_none": {
       "default": "指定なし"
     },
-    "genre_reality": {
+    "translated_value_genre_reality": {
       "default": "リアリティ"
     },
-    "genre_romance": {
+    "translated_value_genre_romance": {
       "default": "ロマンス"
     },
-    "genre_short": {
+    "translated_value_genre_short": {
       "default": "短編"
     },
-    "genre_soap": {
+    "translated_value_genre_soap": {
       "default": "ソープオペラ"
     },
-    "genre_special_interest": {
+    "translated_value_genre_special_interest": {
       "default": "特殊な興味"
     },
-    "genre_sporting_event": {
+    "translated_value_genre_sporting_event": {
       "default": "スポーツイベント"
     },
-    "genre_suspense": {
+    "translated_value_genre_suspense": {
       "default": "サスペンス"
     },
-    "genre_talk_show": {
+    "translated_value_genre_talk_show": {
       "default": "トークショー"
     },
-    "genre_thriller": {
+    "translated_value_genre_thriller": {
       "default": "スリラー"
     },
-    "genre_war": {
+    "translated_value_genre_war": {
       "default": "戦争"
     },
-    "genre_western": {
+    "translated_value_genre_western": {
       "default": "西部劇"
     },
-    "genre_anime": {
+    "translated_value_genre_anime": {
       "default": "アニメ"
     },
-    "genre_superhero": {
+    "translated_value_genre_superhero": {
       "default": "スーパーヒーロー"
     },
-    "genre_donghua": {
+    "translated_value_genre_donghua": {
       "default": "中国アニメ"
     },
-    "genre_mini_series": {
+    "translated_value_genre_mini_series": {
       "default": "ミニシリーズ"
     },
-    "genre_science_fiction": {
+    "translated_value_genre_science_fiction": {
       "default": "SF"
     },
     "button_label_remove_from_watchlist": {
@@ -242,7 +242,7 @@
         }
       }
     },
-    "search_placeholder": {
+    "input_placeholder_search": {
       "default": "番組や映像作品を検索..."
     },
     "button_text_join_trakt": {
@@ -251,31 +251,31 @@
     "button_label_join_trakt": {
       "default": "trakt.tvに参加して視聴状況を記録しましょう"
     },
-    "copyright_notice": {
+    "text_copyright_notice": {
       "default": "全著作権所有。"
     },
-    "copyright_crafted_by": {
+    "text_copyright_crafted_by": {
       "default": "世界中から愛を込めて制作"
     },
     "button_text_join_trakt_for_free": {
       "default": "Traktに無料登録"
     },
-    "landing_discover_label": {
+    "header_landing_discover": {
       "default": "作品を探す"
     },
-    "landing_discover_description": {
+    "text_landing_discover": {
       "default": "話題の作品と配信サービス。"
     },
-    "landing_track_label": {
+    "header_landing_track": {
       "default": "視聴状況を記録"
     },
-    "landing_track_description": {
+    "text_landing_track": {
       "default": "視聴済みの作品をすべて管理。"
     },
-    "landing_share_label": {
+    "header_landing_share": {
       "default": "共有する"
     },
-    "landing_share_description": {
+    "text_landing_share": {
       "default": "コメント、評価、おすすめ情報を共有。"
     },
     "list_title_trending": {
@@ -332,9 +332,6 @@
     "page_title_home": {
       "default": "ホーム"
     },
-    "watchers": {
-      "default": "視聴者"
-    },
     "tag_text_plays": {
       "default": "{number} 回再生",
       "variables": {
@@ -342,15 +339,6 @@
           "type": "string"
         }
       }
-    },
-    "lists": {
-      "default": "リスト"
-    },
-    "favorited": {
-      "default": "お気に入り"
-    },
-    "profile": {
-      "default": "プロフィール"
     },
     "button_text_logout": {
       "default": "ログアウト"
@@ -370,49 +358,49 @@
     "list_title_related_shows": {
       "default": "関連する番組"
     },
-    "about_placeholder_1": {
+    "text_about_placeholder_1": {
       "default": "このユーザーは謎に包まれたミステリー、まるで不可解な存在…（あるいは単に怠けているだけ？誰にも分かりません、インターネットの世界はね。）"
     },
-    "about_placeholder_2": {
+    "text_about_placeholder_2": {
       "default": "どうやら、このユーザーは自己紹介を書くより映画を見ることに夢中なようです。（よく分かります、私も同じです。）"
     },
-    "about_placeholder_3": {
+    "text_about_placeholder_3": {
       "default": "このユーザーのプロファイルは白紙、情報ゼロ…（まるで私の社交生活と同じですね。ため息）"
     },
-    "about_placeholder_4": {
+    "text_about_placeholder_4": {
       "default": "このユーザーの正体を探求してみましょう…（もし、あなたが勇気あるなら）"
     },
-    "about_placeholder_5": {
+    "text_about_placeholder_5": {
       "default": "この空白のプロファイルの下には、どんな秘密が隠されているのでしょうか？（真実が見つかるまで…）"
     },
-    "about_placeholder_6": {
+    "text_about_placeholder_6": {
       "default": "このユーザーは、機械の中の幽霊、デジタルファントム…（あるいは、単に記入を忘れただけ？）"
     },
-    "about_placeholder_7": {
+    "text_about_placeholder_7": {
       "default": "このユーザーを助けてください！プロフィールを埋めるように促しましょう！（もしかしたら、あなたにバーチャルなハイファイブをくれるかもしれません！）"
     },
-    "about_placeholder_8": {
+    "text_about_placeholder_8": {
       "default": "このプロファイルは、注目を求めています。愛を与え、ユーザーにプロフィールを埋めるように促しましょう。"
     },
-    "about_placeholder_9": {
+    "text_about_placeholder_9": {
       "default": "臆することなく！このユーザーに自分の物語を共有するように促しましょう。（誰もが物語を持っているものです。好きなドラマの話でも構いません。）"
     },
-    "about_placeholder_10": {
+    "text_about_placeholder_10": {
       "default": "このユーザーは、デヴィッド・リンチ作品のようなキャラクター：不可解で、神秘的で、もしかしたら、自分自身によるフィクションかもしれません。"
     },
-    "about_placeholder_11": {
+    "text_about_placeholder_11": {
       "default": "このプロファイルは、金曜日の夜、ビデオレンタル店「ブロックバスター」のようにスカスカです。（覚えていますか？良い時代だった。）"
     },
-    "about_placeholder_12": {
+    "text_about_placeholder_12": {
       "default": "このユーザーは、内なるタイラー・ダーデンを体現しています：消費主義を拒否し、無へと向かいます。（あるいは、まだプロフィールに記入する暇がなかっただけかもしれません。）"
     },
-    "about_placeholder_13": {
+    "text_about_placeholder_13": {
       "default": "スタイリッシュな画像：困惑する探偵が頭を掻いている、あるいは空白のプロファイルページの上を転がる tumbleweed のユーモラスなイラスト。"
     },
-    "about_placeholder_14": {
+    "text_about_placeholder_14": {
       "default": "インタラクティブな要素：プロフィール所有者に友好的な促しを送信し、プロフィールを埋めるよう促すボタン。"
     },
-    "about_placeholder_15": {
+    "text_about_placeholder_15": {
       "default": "パーソナライズされたメッセージ：もし、ユーザーの情報（例えば、視聴履歴）があれば、よりパーソナライズされたプレースホルダーを作成することができます。例えば、『このユーザーはホラー映画が好きですが、自己紹介を書くのが苦手です。（もしかしたら、ゾンビから隠れることに夢中なのかもしれません？）』"
     },
     "list_placeholder_watchlist_movies": {
@@ -424,7 +412,7 @@
     "list_placeholder_upcoming_schedule": {
       "default": "テレビ番組を探索し、スケジュールをパーソナライズしましょう。"
     },
-    "up_next_empty": {
+    "list_placeholder_up_next_empty": {
       "default": "視聴を開始し、視聴リストに追加しましょう。"
     },
     "list_placeholder_released_movies": {
@@ -450,7 +438,7 @@
     "list_title_show_credits": {
       "default": "番組"
     },
-    "episodes_watched": {
+    "text_episodes_watched": {
       "default": "{count}話視聴済み",
       "variables": {
         "count": {
@@ -461,7 +449,7 @@
     "list_title_movie_credits": {
       "default": "映画"
     },
-    "movies_watched": {
+    "text_movies_watched": {
       "default": "{count}作品視聴済み",
       "variables": {
         "count": {
@@ -469,10 +457,10 @@
         }
       }
     },
-    "details": {
+    "header_details": {
       "default": "詳細"
     },
-    "expand_category": {
+    "button_label_expand_category": {
       "default": "{category}を展開",
       "variables": {
         "category": {
@@ -488,22 +476,22 @@
         }
       }
     },
-    "premiered": {
+    "header_premiered": {
       "default": "公開日"
     },
-    "runtime": {
+    "header_runtime": {
       "default": "上映時間"
     },
-    "country": {
+    "header_country": {
       "default": "製作国"
     },
-    "language": {
+    "header_language": {
       "default": "言語"
     },
-    "studio": {
+    "header_studio": {
       "default": "製作会社"
     },
-    "genre": {
+    "header_genre": {
       "default": "ジャンル"
     },
     "button_text_browse_lists": {
@@ -529,7 +517,7 @@
         }
       }
     },
-    "streaming_service_logo": {
+    "image_alt_streaming_service_logo": {
       "default": "{service}のロゴ",
       "variables": {
         "service": {
@@ -537,235 +525,235 @@
         }
       }
     },
-    "director": {
+    "header_director": {
       "default": "監督"
     },
-    "writer": {
+    "header_writer": {
       "default": "脚本家"
     },
-    "creator": {
+    "header_creator": {
       "default": "クリエイター"
     },
-    "job_action_director": {
+    "translated_value_job_action_director": {
       "default": "アクション監督"
     },
-    "job_additional_second_assistant_director": {
+    "translated_value_job_additional_second_assistant_director": {
       "default": "追加第2助監督"
     },
-    "job_additional_third_assistant_director": {
+    "translated_value_job_additional_third_assistant_director": {
       "default": "追加第3助監督"
     },
-    "job_assistant_director": {
+    "translated_value_job_assistant_director": {
       "default": "助監督"
     },
-    "job_assistant_director_trainee": {
+    "translated_value_job_assistant_director_trainee": {
       "default": "助監督見習い"
     },
-    "job_co_director": {
+    "translated_value_job_co_director": {
       "default": "共同監督"
     },
-    "job_continuity": {
+    "translated_value_job_continuity": {
       "default": "撮影進行"
     },
-    "job_crowd_assistant_director": {
+    "translated_value_job_crowd_assistant_director": {
       "default": "群衆係"
     },
-    "job_director": {
+    "translated_value_job_director": {
       "default": "監督"
     },
-    "job_field_director": {
+    "translated_value_job_field_director": {
       "default": "現場監督"
     },
-    "job_first_assistant_director": {
+    "translated_value_job_first_assistant_director": {
       "default": "第1助監督"
     },
-    "job_first_assistant_director_trainee_prep": {
+    "translated_value_job_first_assistant_director_trainee_prep": {
       "default": "第1助監督（準備）"
     },
-    "job_first_assistant_director_trainee": {
+    "translated_value_job_first_assistant_director_trainee": {
       "default": "第1助監督見習い"
     },
-    "job_insert_unit_director": {
+    "translated_value_job_insert_unit_director": {
       "default": "挿入撮影監督"
     },
-    "job_insert_unit_first_assistant_director": {
+    "translated_value_job_insert_unit_first_assistant_director": {
       "default": "挿入撮影第1助監督"
     },
-    "job_layout": {
+    "translated_value_job_layout": {
       "default": "レイアウト"
     },
-    "job_other": {
+    "translated_value_job_other": {
       "default": "その他"
     },
-    "job_script_coordinator": {
+    "translated_value_job_script_coordinator": {
       "default": "脚本コーディネーター"
     },
-    "job_script_supervisor": {
+    "translated_value_job_script_supervisor": {
       "default": "脚本監督"
     },
-    "job_second_assistant_director": {
+    "translated_value_job_second_assistant_director": {
       "default": "第2助監督"
     },
-    "job_second_assistant_director_trainee": {
+    "translated_value_job_second_assistant_director_trainee": {
       "default": "第2助監督見習い"
     },
-    "job_second_second_assistant_director": {
+    "translated_value_job_second_second_assistant_director": {
       "default": "第2第2助監督"
     },
-    "job_second_unit_director": {
+    "translated_value_job_second_unit_director": {
       "default": "第2撮影監督"
     },
-    "job_second_unit_first_assistant_director": {
+    "translated_value_job_second_unit_first_assistant_director": {
       "default": "第2撮影第1助監督"
     },
-    "job_series_director": {
+    "translated_value_job_series_director": {
       "default": "シリーズ監督"
     },
-    "job_series_guest_director": {
+    "translated_value_job_series_guest_director": {
       "default": "ゲスト監督"
     },
-    "job_stage_director": {
+    "translated_value_job_stage_director": {
       "default": "舞台監督"
     },
-    "job_third_assistant_director": {
+    "translated_value_job_third_assistant_director": {
       "default": "第3助監督"
     },
-    "job_adaptation": {
+    "translated_value_job_adaptation": {
       "default": "脚色"
     },
-    "job_author": {
+    "translated_value_job_author": {
       "default": "著者"
     },
-    "job_book": {
+    "translated_value_job_book": {
       "default": "書籍"
     },
-    "job_characters": {
+    "translated_value_job_characters": {
       "default": "キャラクター設定"
     },
-    "job_co_writer": {
+    "translated_value_job_co_writer": {
       "default": "共同脚本家"
     },
-    "job_comic_book": {
+    "translated_value_job_comic_book": {
       "default": "コミック"
     },
-    "job_creative_producer": {
+    "translated_value_job_creative_producer": {
       "default": "クリエイティブプロデューサー"
     },
-    "job_dialogue": {
+    "translated_value_job_dialogue": {
       "default": "台詞"
     },
-    "job_executive_story_editor": {
+    "translated_value_job_executive_story_editor": {
       "default": "ストーリー編集長"
     },
-    "job_graphic_novel": {
+    "translated_value_job_graphic_novel": {
       "default": "グラフィックノベル"
     },
-    "job_head_of_story": {
+    "translated_value_job_head_of_story": {
       "default": "ストーリー部長"
     },
-    "job_idea": {
+    "translated_value_job_idea": {
       "default": "アイデア"
     },
-    "job_junior_story_editor": {
+    "translated_value_job_junior_story_editor": {
       "default": "ストーリー編集助手"
     },
-    "job_lyricist": {
+    "translated_value_job_lyricist": {
       "default": "作詞家"
     },
-    "job_musical": {
+    "translated_value_job_musical": {
       "default": "ミュージカル"
     },
-    "job_novel": {
+    "translated_value_job_novel": {
       "default": "小説"
     },
-    "job_opera": {
+    "translated_value_job_opera": {
       "default": "オペラ"
     },
-    "job_original_concept": {
+    "translated_value_job_original_concept": {
       "default": "オリジナルコンセプト"
     },
-    "job_original_film_writer": {
+    "translated_value_job_original_film_writer": {
       "default": "オリジナル脚本家"
     },
-    "job_original_series_creator": {
+    "translated_value_job_original_series_creator": {
       "default": "オリジナルシリーズクリエイター"
     },
-    "job_original_original_story": {
+    "translated_value_job_original_original_story": {
       "default": "オリジナルストーリー"
     },
-    "job_scenario_writer": {
+    "translated_value_job_scenario_writer": {
       "default": "シナリオライター"
     },
-    "job_screenplay": {
+    "translated_value_job_screenplay": {
       "default": "脚本"
     },
-    "job_screenstory": {
+    "translated_value_job_screenstory": {
       "default": "シーンストーリー"
     },
-    "job_script_consultant": {
+    "translated_value_job_script_consultant": {
       "default": "脚本コンサルタント"
     },
-    "job_script_editor": {
+    "translated_value_job_script_editor": {
       "default": "脚本編集者"
     },
-    "job_senior_story_editor": {
+    "translated_value_job_senior_story_editor": {
       "default": "ストーリー編集長補佐"
     },
-    "job_series_composition": {
+    "translated_value_job_series_composition": {
       "default": "シリーズ構成"
     },
-    "job_short_story": {
+    "translated_value_job_short_story": {
       "default": "短編小説"
     },
-    "job_staff_writer": {
+    "translated_value_job_staff_writer": {
       "default": "スタッフ脚本家"
     },
-    "job_story": {
+    "translated_value_job_story": {
       "default": "ストーリー"
     },
-    "job_story_story_artist": {
+    "translated_value_job_story_story_artist": {
       "default": "ストーリーイラストレーター"
     },
-    "job_story_story_consultant": {
+    "translated_value_job_story_story_consultant": {
       "default": "ストーリーコンサルタント"
     },
-    "job_story_story_coordinator": {
+    "translated_value_job_story_story_coordinator": {
       "default": "ストーリーコーディネーター"
     },
-    "job_story_story_developer": {
+    "translated_value_job_story_story_developer": {
       "default": "ストーリー開発者"
     },
-    "job_story_story_editor": {
+    "translated_value_job_story_story_editor": {
       "default": "ストーリー編集者"
     },
-    "job_story_story_manager": {
+    "translated_value_job_story_story_manager": {
       "default": "ストーリーマネージャー"
     },
-    "job_story_story_supervisor": {
+    "translated_value_job_story_story_supervisor": {
       "default": "ストーリースーパーバイザー"
     },
-    "job_storyboard": {
+    "translated_value_job_storyboard": {
       "default": "ストーリーボード"
     },
-    "job_teleplay": {
+    "translated_value_job_teleplay": {
       "default": "テレビ脚本"
     },
-    "job_texte": {
+    "translated_value_job_texte": {
       "default": "テキスト"
     },
-    "job_theatre_play": {
+    "translated_value_job_theatre_play": {
       "default": "戯曲"
     },
-    "job_writer": {
+    "translated_value_job_writer": {
       "default": "脚本家"
     },
-    "job_writers_assistant": {
+    "translated_value_job_writers_assistant": {
       "default": "脚本アシスタント"
     },
-    "job_writers_production": {
+    "translated_value_job_writers_production": {
       "default": "脚本制作担当"
     },
-    "job_creator": {
+    "translated_value_job_creator": {
       "default": "クリエイター"
     },
     "button_text_remove_from_history": {
@@ -806,7 +794,7 @@
     "list_title_seasons": {
       "default": "シーズン"
     },
-    "season_number_label": {
+    "text_season_number": {
       "default": "第{number}シーズン",
       "variables": {
         "number": {
@@ -814,10 +802,10 @@
         }
       }
     },
-    "season_specials": {
+    "text_season_specials": {
       "default": "スペシャル"
     },
-    "expand_media_overview": {
+    "button_label_expand_media_overview": {
       "default": "{title} の概要を表示",
       "variables": {
         "title": {
@@ -825,7 +813,7 @@
         }
       }
     },
-    "season_episode_number_label": {
+    "text_season_episode_number": {
       "default": "シーズン{season}・エピソード{number}",
       "variables": {
         "season": {
@@ -836,7 +824,7 @@
         }
       }
     },
-    "share_title": {
+    "button_label_share": {
       "default": "{title}を共有する",
       "variables": {
         "title": {
@@ -844,49 +832,49 @@
         }
       }
     },
-    "status": {
+    "header_status": {
       "default": "ステータス"
     },
-    "status_released": {
+    "translated_value_status_released": {
       "default": "公開済"
     },
-    "status_planned": {
+    "translated_value_status_planned": {
       "default": "計画中"
     },
-    "status_post_production": {
+    "translated_value_status_post_production": {
       "default": "ポストプロダクション"
     },
-    "status_canceled": {
+    "translated_value_status_canceled": {
       "default": "中止"
     },
-    "status_in_production": {
+    "translated_value_status_in_production": {
       "default": "制作中"
     },
-    "status_rumored": {
+    "translated_value_status_rumored": {
       "default": "噂"
     },
-    "status_ended": {
+    "translated_value_status_ended": {
       "default": "終了"
     },
-    "status_returning_series": {
+    "translated_value_status_returning_series": {
       "default": "継続シリーズ"
     },
-    "status_pilot": {
+    "translated_value_status_pilot": {
       "default": "パイロット版"
     },
-    "status_continuing": {
+    "translated_value_status_continuing": {
       "default": "継続中"
     },
-    "status_upcoming": {
+    "translated_value_status_upcoming": {
       "default": "近日公開"
     },
-    "status_unknown": {
+    "translated_value_status_unknown": {
       "default": "不明"
     },
-    "expected_premiere": {
+    "header_expected_premiere": {
       "default": "公開予定"
     },
-    "person_headshot": {
+    "image_alt_person_headshot": {
       "default": "{person}さんの顔写真",
       "variables": {
         "person": {
@@ -905,10 +893,10 @@
         }
       }
     },
-    "view_all_trending_movies": {
+    "button_label_view_all_trending_movies": {
       "default": "話題の作品をすべて見る"
     },
-    "view_all_trending_shows": {
+    "button_label_view_all_trending_shows": {
       "default": "話題のシリーズをすべて見る"
     },
     "list_title_trending_shows": {
@@ -931,16 +919,16 @@
         }
       }
     },
-    "view_all_recommended_movies": {
+    "button_label_view_all_recommended_movies": {
       "default": "おすすめの作品をすべて見る"
     },
-    "view_all_recommended_shows": {
+    "button_label_view_all_recommended_shows": {
       "default": "おすすめの作品をすべて見る"
     },
-    "view_all_anticipated_movies": {
+    "button_label_view_all_anticipated_movies": {
       "default": "近日公開の映画をすべて表示"
     },
-    "view_all_anticipated_shows": {
+    "button_label_view_all_anticipated_shows": {
       "default": "近日公開の番組をすべて表示"
     },
     "list_title_anticipated_movies": {
@@ -949,10 +937,10 @@
     "list_title_anticipated_shows": {
       "default": "期待のシリーズ"
     },
-    "view_all_popular_movies": {
+    "button_label_view_all_popular_movies": {
       "default": "人気の作品をすべて見る"
     },
-    "view_all_popular_shows": {
+    "button_label_view_all_popular_shows": {
       "default": "人気のシリーズをすべて見る"
     },
     "list_title_popular_movies": {
@@ -961,7 +949,7 @@
     "list_title_popular_shows": {
       "default": "人気のシリーズ"
     },
-    "rate_now": {
+    "header_rate_now": {
       "default": "今すぐ評価"
     },
     "button_text_add_to_favorites": {
@@ -1018,19 +1006,19 @@
     "list_title_your_watchlist_movies": {
       "default": "視聴予定の作品"
     },
-    "view_all_watchlist_movies": {
+    "button_label_view_all_watchlist_movies": {
       "default": "視聴予定の作品をすべて見る"
     },
-    "view_all_watchlist_shows": {
+    "button_label_view_all_watchlist_shows": {
       "default": "視聴予定の作品をすべて見る"
     },
-    "streaming": {
+    "header_streaming": {
       "default": "ストリーミング"
     },
-    "on_demand": {
+    "header_on_demand": {
       "default": "オンデマンド"
     },
-    "media_popup_label": {
+    "button_label_popup_media": {
       "default": "{title} のポップアップメニュー",
       "variables": {
         "title": {
@@ -1049,10 +1037,10 @@
         }
       }
     },
-    "by": {
+    "text_by": {
       "default": "作成者"
     },
-    "users_avatar": {
+    "image_alt_user_avatar": {
       "default": "{username}のアバター",
       "variables": {
         "username": {
@@ -1060,7 +1048,7 @@
         }
       }
     },
-    "media_poster": {
+    "image_alt_media_poster": {
       "default": "{title}のポスター",
       "variables": {
         "title": {
@@ -1071,76 +1059,76 @@
     "list_placeholder_comments": {
       "default": "まだコメントはありません。"
     },
-    "review_by": {
+    "text_review_by": {
       "default": "レビュー:"
     },
-    "shout_by": {
+    "text_shout_by": {
       "default": "シャウト:"
     },
-    "deleted_user": {
+    "text_deleted_username": {
       "default": "削除済み"
     },
     "list_title_social_activity": {
       "default": "ソーシャルアクティビティ"
     },
-    "view_all_social_activity": {
+    "button_label_view_all_social_activity": {
       "default": "すべてのソーシャルアクティビティを表示"
     },
     "dropdown_label_person_position": {
       "default": "役職"
     },
-    "position_acting": {
+    "translated_value_position_acting": {
       "default": "演技"
     },
-    "position_production": {
+    "translated_value_position_production": {
       "default": "制作"
     },
-    "position_art": {
+    "translated_value_position_art": {
       "default": "美術"
     },
-    "position_crew": {
+    "translated_value_position_crew": {
       "default": "スタッフ"
     },
-    "position_costume___make_up": {
+    "translated_value_position_costume___make_up": {
       "default": "衣装＆メイク"
     },
-    "position_directing": {
+    "translated_value_position_directing": {
       "default": "監督"
     },
-    "position_writing": {
+    "translated_value_position_writing": {
       "default": "脚本"
     },
-    "position_sound": {
+    "translated_value_position_sound": {
       "default": "音響"
     },
-    "position_camera": {
+    "translated_value_position_camera": {
       "default": "カメラ"
     },
-    "position_lighting": {
+    "translated_value_position_lighting": {
       "default": "照明"
     },
-    "position_visual_effects": {
+    "translated_value_position_visual_effects": {
       "default": "ビジュアルエフェクト"
     },
-    "position_editing": {
+    "translated_value_position_editing": {
       "default": "編集"
     },
-    "position_creator": {
+    "translated_value_position_creator": {
       "default": "クリエイター"
     },
-    "position_created_by": {
+    "translated_value_position_created_by": {
       "default": "制作"
     },
     "list_title_personal_lists": {
       "default": "個人"
     },
-    "collaborative_lists": {
+    "list_title_collaborative_lists": {
       "default": "コラボレーション"
     },
-    "liked_lists": {
+    "list_title_liked_lists": {
       "default": "いいね！"
     },
-    "share_movie": {
+    "text_share_movie": {
       "default": "{title}をみつけてしまった！絶対見てほしい！🎬",
       "variables": {
         "title": {
@@ -1148,7 +1136,7 @@
         }
       }
     },
-    "share_show": {
+    "text_share_show": {
       "default": "素晴らしい作品を発見！{title} 📺",
       "variables": {
         "title": {
@@ -1156,7 +1144,7 @@
         }
       }
     },
-    "share_episode": {
+    "text_share_episode": {
       "default": "{show} S{season}E{episode} - {title}を視聴！🔥",
       "variables": {
         "show": {
@@ -1173,7 +1161,15 @@
         }
       }
     },
-    "share_person": {
+    "text_share_person": {
+      "default": "{name}をTraktでチェック！🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_profile": {
       "default": "{name}をTraktでチェック！🎭",
       "variables": {
         "name": {
@@ -1184,31 +1180,31 @@
     "list_title_recently_watched": {
       "default": "最近視聴した"
     },
-    "view_all_recently_watched": {
+    "button_label_view_all_recently_watched": {
       "default": "最近視聴した全てを見る"
     },
     "list_title_available_now": {
       "default": "今すぐ視聴可能"
     },
-    "view_all_released_movies": {
+    "button_label_view_all_released_movies": {
       "default": "公開作品を見る"
     },
-    "view_all_unreleased_movies": {
+    "button_label_view_all_unreleased_movies": {
       "default": "公開予定作品を見る"
     },
-    "switch_to_og": {
+    "switch_label_to_og": {
       "default": "Trakt.tvへ"
     },
     "tag_text_preview": {
       "default": "プレビュー"
     },
-    "preview_description": {
+    "tooltip_text_preview_feature": {
       "default": "この機能はまだ完成途上、市民よ。私たちはUXを精査し、天使たちの合唱のように（あるいは、少なくとも、存在の恐怖を引き起こすことなくスムーズに機能するように）仕上げています。"
     },
-    "airs": {
+    "header_airs": {
       "default": "放送中"
     },
-    "aired": {
+    "header_aired": {
       "default": "放送済み"
     },
     "warning_prompt_drop_show": {
@@ -1230,16 +1226,13 @@
     "button_text_drop_show": {
       "default": "番組を削除する"
     },
-    "enable_up_next_nitro_label": {
-      "default": "アップネクスト・ナイトロを有効化して、作品を瞬時に視聴！"
-    },
-    "lab_up_next_nitro_label": {
+    "switch_label_up_next_nitro": {
       "default": "アップ・ネクスト・ニトロ有効化"
     },
-    "lab_up_next_nitro_message": {
+    "tooltip_text_up_next_nitro": {
       "default": "この実験は、すべてのユーザーの体験を向上させるパフォーマンスアップグレードです。"
     },
-    "lab_up_next_nitro_hidden_message": {
+    "tooltip_text_up_next_nitro_hidden": {
       "default": "以前非表示になっていた番組は、内部デザイン変更によりリストに戻され、迅速に認識できるように白黒のサムネイルが表示されます。非表示解除するか、リストから削除するかを選択できます。"
     },
     "warning_prompt_restore_show": {
@@ -1261,7 +1254,7 @@
     "button_text_restore_show": {
       "default": "番組を復元"
     },
-    "mark_as_watched_show_warning": {
+    "warning_prompt_mark_as_watched_show": {
       "default": "{title}を視聴済みにしますか？これにより、全エピソードが視聴済みにマークされます。",
       "variables": {
         "title": {
@@ -1269,7 +1262,7 @@
         }
       }
     },
-    "mark_as_watched_show_until_warning": {
+    "warning_prompt_mark_as_watched_show_until": {
       "default": "{title}の未視聴エピソードをエピソード{episode}まで全て視聴済みにしますか？ {count}エピソードが視聴済みになります。",
       "variables": {
         "title": {
@@ -1283,7 +1276,7 @@
         }
       }
     },
-    "mark_as_watched_multiple_episodes_warning": {
+    "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "{count}エピソードを視聴済みにしますか？",
       "variables": {
         "count": {
@@ -1319,7 +1312,7 @@
         }
       }
     },
-    "close_label": {
+    "button_label_close": {
       "default": "閉じる"
     },
     "button_label_comment_replies": {
@@ -1339,7 +1332,7 @@
     "dialog_title_comments": {
       "default": "コメント"
     },
-    "comment": {
+    "dialog_title_comment": {
       "default": "コメント"
     },
     "button_text_comment_reply": {
@@ -1353,31 +1346,31 @@
         }
       }
     },
-    "comment_reply_placeholder": {
+    "textarea_placeholder_reply": {
       "default": "返信..."
     },
-    "comment_post_label": {
+    "button_label_add_new_comment": {
       "default": "コメントを追加"
     },
-    "comment_post_placeholder": {
+    "textarea_placeholder_comment": {
       "default": "コメント..."
     },
-    "comment_mark_as_spoiler": {
+    "switch_label_mark_as_spoiler": {
       "default": "ネタバレとしてマーク"
     },
-    "comment_spoiler": {
+    "text_spoiler": {
       "default": "ネタバレ"
     },
-    "comment_close_error_label": {
+    "button_label_close_error": {
       "default": "エラーを閉じる"
     },
-    "comment_post_reply_label": {
+    "button_label_post_reply": {
       "default": "返信を投稿"
     },
-    "error_comment_invalid_content": {
+    "translated_value_error_comment_invalid_content": {
       "default": "コメントは5語以上、英語で記述してください。"
     },
-    "error_comment_unknown": {
+    "translated_value_error_comment_unknown": {
       "default": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。"
     },
     "page_title_user_profile": {
@@ -1388,10 +1381,10 @@
         }
       }
     },
-    "private_profile": {
+    "header_private_profile": {
       "default": "このプロフィールは非公開です"
     },
-    "private_profile_description": {
+    "text_private_profile_description": {
       "default": "隠されたものが十分でないかのように。{username} の秘密は彼らだけのものです。",
       "variables": {
         "username": {
@@ -1399,16 +1392,16 @@
         }
       }
     },
-    "original_title": {
+    "header_original_title": {
       "default": "原題"
     },
-    "view_all_comments": {
+    "button_label_view_all_comments": {
       "default": "すべてのコメントを表示"
     },
     "button_text_remove_from_list": {
       "default": "Remove from list"
     },
-    "remove_from_list_label": {
+    "button_label_remove_from_list": {
       "default": "Remove {title} from list",
       "variables": {
         "title": {
@@ -1419,10 +1412,10 @@
     "page_title_service_unavailable": {
       "default": "Traktサービスに接続できません"
     },
-    "error_page_service_message": {
+    "error_text_service_unavailable": {
       "default": "接続が…ありません。まるで忘れられた記憶のように。"
     },
-    "error_page_service_status": {
+    "link_text_service_status": {
       "default": "Traktサービスの状態"
     },
     "button_text_retry": {
@@ -1431,13 +1424,13 @@
     "button_label_retry": {
       "default": "再試行"
     },
-    "community_sentiment": {
+    "header_community_sentiment": {
       "default": "コミュニティの評価"
     },
-    "lists_action_label": {
+    "button_text_lists": {
       "default": "リスト"
     },
-    "listed": {
+    "button_text_listed": {
       "default": "登録済み"
     },
     "dropdown_label_add_remove_from_lists": {
@@ -1448,7 +1441,7 @@
         }
       }
     },
-    "add_to_personal_list_label": {
+    "button_label_add_to_personal_list": {
       "default": "{title} を {list} に追加",
       "variables": {
         "title": {
@@ -1459,7 +1452,7 @@
         }
       }
     },
-    "remove_from_personal_list_label": {
+    "button_label_remove_from_personal_list": {
       "default": "{title} を {list} から削除",
       "variables": {
         "title": {
@@ -1481,13 +1474,13 @@
         }
       }
     },
-    "theme_light": {
+    "option_text_theme_light": {
       "default": "ライト"
     },
-    "theme_dark": {
+    "option_text_theme_dark": {
       "default": "ダーク"
     },
-    "theme_system": {
+    "option_text_theme_system": {
       "default": "システム"
     },
     "button_text_filters": {
@@ -1499,7 +1492,7 @@
     "button_label_reset_filter": {
       "default": "リセット"
     },
-    "results_for_title": {
+    "text_search_results_for": {
       "default": "{query} の検索結果",
       "variables": {
         "query": {
@@ -1507,58 +1500,55 @@
         }
       }
     },
-    "type_movie": {
+    "translated_value_type_movie": {
       "default": "映画"
     },
-    "type_show": {
+    "translated_value_type_show": {
       "default": "番組"
     },
     "page_title_sign_in": {
       "default": "サインイン"
     },
-    "code_retry_title": {
+    "header_device_auth_failed": {
       "default": "問題が発生しました"
     },
-    "code_retry_message": {
+    "header_device_auth_try_again": {
       "default": "認証が拒否されたか、有効期限が切れたか、予期せぬ事態が発生しました。もう一度お試しください。"
     },
-    "code_instruction": {
+    "header_device_auth_qr_instruction": {
       "default": "QRコードをスキャンするか、以下からサインインしてください:"
     },
-    "code_label": {
+    "header_device_auth_code_instruction": {
       "default": "以下のコードを入力してください:"
     },
-    "filter_all": {
+    "option_text_all": {
       "default": "すべて"
     },
-    "filters_title": {
+    "header_filters": {
       "default": "フィルター"
     },
-    "ignore_watched": {
+    "header_ignore_watched": {
       "default": "視聴済みを無視"
     },
-    "ignore_watchlisted": {
+    "header_ignore_watchlisted": {
       "default": "ウォッチリストを無視"
     },
-    "watchnow_filter_label": {
-      "default": "利用可能"
-    },
-    "watchnow_favorites_only": {
+    "option_text_my_favorites": {
       "default": "Favorites only"
     },
-    "watchnow_digital_release": {
+    "option_text_all_digital_releases": {
       "default": "すべてのデジタルリリース"
     },
-    "watchnow_streaming": {
+    "option_text_streaming_now": {
       "default": "現在ストリーミング中"
     },
-    "decade": {
+    "header_decade": {
       "default": "年代"
     },
-    "ratings": {
+    "header_ratings": {
       "default": "評価"
     },
-    "view_all_items_in": {
+    "button_label_view_all_items_in": {
       "default": "{title} のアイテムをすべて表示",
       "variables": {
         "title": {
@@ -1572,28 +1562,28 @@
     "button_label_reset_all_filters": {
       "default": "すべてのフィルターをリセット"
     },
-    "video_type_trailer": {
+    "translated_value_video_type_trailer": {
       "default": "予告編"
     },
-    "video_type_clip": {
+    "translated_value_video_type_clip": {
       "default": "クリップ"
     },
-    "video_type_teaser": {
+    "translated_value_video_type_teaser": {
       "default": "ティザー"
     },
-    "video_type_featurette": {
+    "translated_value_video_type_featurette": {
       "default": "フィーチャレット"
     },
-    "video_type_recap": {
+    "translated_value_video_type_recap": {
       "default": "前回までのあらすじ"
     },
-    "video_type_behind_the_scenes": {
+    "translated_value_video_type_behind_the_scenes": {
       "default": "舞台裏"
     },
-    "now_playing": {
+    "header_now_playing": {
       "default": "再生中"
     },
-    "remaining": {
+    "text_remaining": {
       "default": "残り"
     },
     "button_text_checkin": {
@@ -1607,7 +1597,7 @@
         }
       }
     },
-    "cookie_notice": {
+    "text_cookie_notice": {
       "default": "Traktは、より良い体験のためにC🍪🍪KIESを使用しています。 <a>詳細はこちら</a>をご覧ください。"
     },
     "button_text_cookie_accept": {
@@ -1634,10 +1624,13 @@
     "button_label_settings": {
       "default": "設定"
     },
-    "settings_spoilers_title": {
+    "header_spoilers": {
       "default": "ネタバレ"
     },
-    "settings_spoilers_label": {
+    "text_show_spoilers": {
+      "default": "ネタバレを表示"
+    },
+    "switch_label_spoilers": {
       "default": "ネタバレを表示"
     },
     "button_text_save_filters": {
@@ -1649,13 +1642,13 @@
     "page_title_account_locked": {
       "default": "アカウントがロックされています"
     },
-    "error_page_locked_account_message": {
+    "error_text_locked_account": {
       "default": "アカウントがロックされています。問題を解決するには、<a>サポートにお問い合わせください</a>。"
     },
-    "first_play_this_month": {
+    "text_first_play_this_month": {
       "default": "今月の初再生"
     },
-    "shows_watched": {
+    "text_shows_watched": {
       "default": "{count} 作品を視聴済み",
       "variables": {
         "count": {
@@ -1693,10 +1686,10 @@
         }
       }
     },
-    "vip_upsell_title": {
+    "text_vip_upsell": {
       "default": "Trakt体験を向上させるVIP機能をアンロック"
     },
-    "vip_upsell_description": {
+    "text_vip_upsell_description": {
       "default": "月間と年間のレビューを見たいですか？ 他の多くの機能にもアクセスできます。 Trakt VIPに登録しましょう。"
     },
     "list_title_following": {
@@ -1708,7 +1701,10 @@
     "list_placeholder_followers": {
       "default": "まだ誰もいません。"
     },
-    "read_more": {
+    "list_placeholder_following": {
+      "default": "まだ誰もいません。"
+    },
+    "button_label_read_more": {
       "default": "もっと読む"
     },
     "button_text_add_comment": {
@@ -1717,10 +1713,10 @@
     "button_label_add_comment": {
       "default": "コメントを追加"
     },
-    "rename_list": {
+    "input_prompt_rename_list": {
       "default": "リストの名前を変更"
     },
-    "rename_list_label": {
+    "button_label_rename_list": {
       "default": "リストの名前を変更 {name}",
       "variables": {
         "name": {
@@ -1737,10 +1733,10 @@
     "list_title_hot_shows": {
       "default": "今月の人気番組"
     },
-    "view_all_hot_shows": {
+    "button_label_view_all_hot_shows": {
       "default": "人気番組をすべて見る"
     },
-    "view_all_hot_movies": {
+    "button_label_view_all_hot_movies": {
       "default": "人気映画をすべて見る"
     },
     "list_title_extras": {
@@ -1807,6 +1803,18 @@
           "type": "string"
         }
       }
+    },
+    "dropdown_label_extras": {
+      "default": "エクストラ"
+    },
+    "button_label_rating_bad": {
+      "default": "悪いと評価"
+    },
+    "button_label_rating_good": {
+      "default": "良いと評価"
+    },
+    "button_label_rating_great": {
+      "default": "素晴らしいと評価"
     }
   }
 }

@@ -12,7 +12,7 @@
 <ErrorPage title={m.page_title_account_locked()}>
   <p>
     <MessageWithLink
-      message={m.error_page_locked_account_message()}
+      message={m.error_text_locked_account()}
       href={UrlBuilder.og.support($user.slug)}
       target="_blank"
     />

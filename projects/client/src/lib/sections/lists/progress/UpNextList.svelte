@@ -50,4 +50,7 @@
       status={$hidden.includes(episode.show.id) ? "hidden" : "watching"}
     />
   {/snippet}
+  {#snippet empty()}
+    <p>{m.list_placeholder_up_next_empty()}</p>
+  {/snippet}
 </DrillableMediaList>

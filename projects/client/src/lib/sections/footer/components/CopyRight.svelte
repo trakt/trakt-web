@@ -6,9 +6,9 @@
 
 <div class="trakt-copyright">
   <p class="secondary meta-info">
-    © 2010-{currentYear} trakt, inc. {m.copyright_notice()}
+    © 2010-{currentYear} trakt, inc. {m.text_copyright_notice()}
   </p>
-  <p class="secondary meta-info">{m.copyright_crafted_by()}</p>
+  <p class="secondary meta-info">{m.text_copyright_crafted_by()}</p>
 </div>
 
 <style>

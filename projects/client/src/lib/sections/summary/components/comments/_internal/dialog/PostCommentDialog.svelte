@@ -19,15 +19,15 @@
   }: PostCommentDialogProps = $props();
 </script>
 
-<Dialog title={m.comment()} {dialog}>
+<Dialog title={m.dialog_title_comment()} {dialog}>
   <div class="trakt-comment-container">
     <CommentInput
       {media}
       {...props}
       commentType="post"
       sizing="normal"
-      label={m.comment_post_label()}
-      placeholder={m.comment_post_placeholder()}
+      label={m.button_label_add_new_comment()}
+      placeholder={m.textarea_placeholder_comment()}
       onCommentPost={(comment) => {
         onCommentPost(comment);
         $dialog.close();

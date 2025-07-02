@@ -13,7 +13,7 @@
 
 <ClampedText
   classList="trakt-media-overview secondary"
-  label={m.expand_media_overview({ title })}
+  label={m.button_label_expand_media_overview({ title })}
 >
   {overview}
 </ClampedText>

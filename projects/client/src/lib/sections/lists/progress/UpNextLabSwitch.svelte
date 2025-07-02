@@ -13,8 +13,8 @@
 </script>
 
 <LabSwitch
-  tooltip={`${m.lab_up_next_nitro_message()} ${hasHidden ? m.lab_up_next_nitro_hidden_message() : ""}`}
-  label={m.lab_up_next_nitro_label()}
+  tooltip={`${m.tooltip_text_up_next_nitro()} ${hasHidden ? m.tooltip_text_up_next_nitro_hidden() : ""}`}
+  label={m.switch_label_up_next_nitro()}
   enabled={$enabled}
   onclick={toggle}
 />

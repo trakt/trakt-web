@@ -3,11 +3,14 @@ import { toMessageKey } from '$lib/utils/string/toMessageKey.ts';
 
 type IntlStore = Record<string, (data?: Record<string, unknown>) => string>;
 
+const KEY_PREFIX = 'translated_value';
+
 export function toTranslatedValue(
-  prefix: string,
+  valuePrefix: string,
   value: string,
   data?: Record<string, unknown>,
 ): string {
+  const prefix = `${KEY_PREFIX}_${valuePrefix}`;
   const messages = m as unknown as IntlStore;
   const key = toMessageKey(prefix, value);
 

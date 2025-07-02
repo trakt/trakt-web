@@ -60,7 +60,7 @@
         >
           <div class="trakt-side-navbar-link">
             <WatchlistIcon />
-            <h6>{m.lists()}</h6>
+            <h6>{m.button_text_browse_lists()}</h6>
           </div>
         </Link>
       </RenderFor>

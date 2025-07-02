@@ -42,7 +42,7 @@
     "tag_text_mid_season_finale": {
       "default": "Mid-Säsongsavslutning"
     },
-    "profile_banner_greeting": {
+    "header_profile_banner_greeting": {
       "default": "Hej, {name}",
       "variables": {
         "name": {
@@ -78,13 +78,13 @@
     "page_title_error_404": {
       "default": "404: Ingenting. Tomrummet."
     },
-    "error_404_message": {
+    "error_text_404": {
       "default": "(Oroa dig inte, det händer! Till och med Kraften är ibland ur balans.)"
     },
-    "error_404_action": {
+    "link_text_back_to_safety": {
       "default": "Tillbaka till säkerheten..."
     },
-    "mark_as_watched_ask_prompt": {
+    "input_prompt_mark_as_watched_date": {
       "default": "När slutade du titta på detta? (ÅÅÅÅ-MM-DD TT:MM)"
     },
     "button_text_watchlist": {
@@ -123,115 +123,115 @@
         }
       }
     },
-    "genre_horror": {
+    "translated_value_genre_horror": {
       "default": "Skräck"
     },
-    "genre_comedy": {
+    "translated_value_genre_comedy": {
       "default": "Komedi"
     },
-    "genre_action": {
+    "translated_value_genre_action": {
       "default": "Action"
     },
-    "genre_adventure": {
+    "translated_value_genre_adventure": {
       "default": "Äventyr"
     },
-    "genre_animation": {
+    "translated_value_genre_animation": {
       "default": "Animation"
     },
-    "genre_biography": {
+    "translated_value_genre_biography": {
       "default": "Biografi"
     },
-    "genre_children": {
+    "translated_value_genre_children": {
       "default": "Barn"
     },
-    "genre_crime": {
+    "translated_value_genre_crime": {
       "default": "Kriminal"
     },
-    "genre_documentary": {
+    "translated_value_genre_documentary": {
       "default": "Dokumentär"
     },
-    "genre_drama": {
+    "translated_value_genre_drama": {
       "default": "Drama"
     },
-    "genre_family": {
+    "translated_value_genre_family": {
       "default": "Familj"
     },
-    "genre_fantasy": {
+    "translated_value_genre_fantasy": {
       "default": "Fantasy"
     },
-    "genre_game_show": {
+    "translated_value_genre_game_show": {
       "default": "Spelprogram"
     },
-    "genre_history": {
+    "translated_value_genre_history": {
       "default": "Historia"
     },
-    "genre_home_and_garden": {
+    "translated_value_genre_home_and_garden": {
       "default": "Hem och Trädgård"
     },
-    "genre_holiday": {
+    "translated_value_genre_holiday": {
       "default": "Högtid"
     },
-    "genre_music": {
+    "translated_value_genre_music": {
       "default": "Musik"
     },
-    "genre_musical": {
+    "translated_value_genre_musical": {
       "default": "Musikal"
     },
-    "genre_mystery": {
+    "translated_value_genre_mystery": {
       "default": "Mysterium"
     },
-    "genre_news": {
+    "translated_value_genre_news": {
       "default": "Nyheter"
     },
-    "genre_none": {
+    "translated_value_genre_none": {
       "default": "Ingen"
     },
-    "genre_reality": {
+    "translated_value_genre_reality": {
       "default": "Reality"
     },
-    "genre_romance": {
+    "translated_value_genre_romance": {
       "default": "Romantik"
     },
-    "genre_short": {
+    "translated_value_genre_short": {
       "default": "Kortfilm"
     },
-    "genre_soap": {
+    "translated_value_genre_soap": {
       "default": "Såpa"
     },
-    "genre_special_interest": {
+    "translated_value_genre_special_interest": {
       "default": "Specialintresse"
     },
-    "genre_sporting_event": {
+    "translated_value_genre_sporting_event": {
       "default": "Sportevenemang"
     },
-    "genre_suspense": {
+    "translated_value_genre_suspense": {
       "default": "Spänning"
     },
-    "genre_talk_show": {
+    "translated_value_genre_talk_show": {
       "default": "Talkshow"
     },
-    "genre_thriller": {
+    "translated_value_genre_thriller": {
       "default": "Thriller"
     },
-    "genre_war": {
+    "translated_value_genre_war": {
       "default": "Krig"
     },
-    "genre_western": {
+    "translated_value_genre_western": {
       "default": "Western"
     },
-    "genre_anime": {
+    "translated_value_genre_anime": {
       "default": "Anime"
     },
-    "genre_superhero": {
+    "translated_value_genre_superhero": {
       "default": "Superhjälte"
     },
-    "genre_donghua": {
+    "translated_value_genre_donghua": {
       "default": "Donghua"
     },
-    "genre_mini_series": {
+    "translated_value_genre_mini_series": {
       "default": "Miniserie"
     },
-    "genre_science_fiction": {
+    "translated_value_genre_science_fiction": {
       "default": "Science Fiction"
     },
     "button_label_remove_from_watchlist": {
@@ -242,7 +242,7 @@
         }
       }
     },
-    "search_placeholder": {
+    "input_placeholder_search": {
       "default": "Sök serier & filmer..."
     },
     "button_text_join_trakt": {
@@ -251,31 +251,31 @@
     "button_label_join_trakt": {
       "default": "Gå med i trakt.tv för att hålla koll på vad du tittar på"
     },
-    "copyright_notice": {
+    "text_copyright_notice": {
       "default": "Alla rättigheter förbehållna."
     },
-    "copyright_crafted_by": {
+    "text_copyright_crafted_by": {
       "default": "Handgjord runt om i världen"
     },
     "button_text_join_trakt_for_free": {
       "default": "Gå med i Trakt gratis"
     },
-    "landing_discover_label": {
+    "header_landing_discover": {
       "default": "Upptäck"
     },
-    "landing_discover_description": {
+    "text_landing_discover": {
       "default": "Vad som är hett och var man kan streama det."
     },
-    "landing_track_label": {
+    "header_landing_track": {
       "default": "Spåra"
     },
-    "landing_track_description": {
+    "text_landing_track": {
       "default": "Alla serier och filmer du någonsin har sett."
     },
-    "landing_share_label": {
+    "header_landing_share": {
       "default": "Dela"
     },
-    "landing_share_description": {
+    "text_landing_share": {
       "default": "Kommentarer, betyg och rekommendationer."
     },
     "list_title_trending": {
@@ -332,9 +332,6 @@
     "page_title_home": {
       "default": "Hem"
     },
-    "watchers": {
-      "default": "Tittare"
-    },
     "tag_text_plays": {
       "default": "{number} visningar",
       "variables": {
@@ -342,15 +339,6 @@
           "type": "string"
         }
       }
-    },
-    "lists": {
-      "default": "Listor"
-    },
-    "favorited": {
-      "default": "Favorit"
-    },
-    "profile": {
-      "default": "Profil"
     },
     "button_text_logout": {
       "default": "Logga ut"
@@ -370,49 +358,49 @@
     "list_title_related_shows": {
       "default": "Relaterade serier"
     },
-    "about_placeholder_1": {
+    "text_about_placeholder_1": {
       "default": "Den här användaren är ett mysterium, höljt i gåtor... (eller kanske bara lat? Vem vet, det här är internet.)"
     },
-    "about_placeholder_2": {
+    "text_about_placeholder_2": {
       "default": "Tydligen är den här användaren för upptagen med att titta på filmer för att skriva om sig själv. (Helt rätt, jag kan relatera.)"
     },
-    "about_placeholder_3": {
+    "text_about_placeholder_3": {
       "default": "Den här användarens profil är en tom duk, ett informationsvakuum... (ungefär som mitt sociala liv. suck)"
     },
-    "about_placeholder_4": {
+    "text_about_placeholder_4": {
       "default": "Avslöja hemligheterna bakom den här användarens identitet... (om du vågar)"
     },
-    "about_placeholder_5": {
+    "text_about_placeholder_5": {
       "default": "Vilka dolda djup ligger under den här tomma profilen? (Sanningen finns där ute...)"
     },
-    "about_placeholder_6": {
+    "text_about_placeholder_6": {
       "default": "Den här användaren är ett spöke i maskinen, ett digitalt spöke... (eller så glömde de bara att fylla i detta?)"
     },
-    "about_placeholder_7": {
+    "text_about_placeholder_7": {
       "default": "Hjälp den här användaren! Be dem att fylla i sin profil. (De kanske till och med belönar dig med en virtuell high five!)"
     },
-    "about_placeholder_8": {
+    "text_about_placeholder_8": {
       "default": "Den här profilen ber om uppmärksamhet. Ge den lite kärlek och be användaren att fylla i den."
     },
-    "about_placeholder_9": {
+    "text_about_placeholder_9": {
       "default": "Var inte blyg! Uppmuntra den här användaren att dela med sig av sin historia. (Alla har en historia att berätta, även om det bara handlar om deras favoritserie.)"
     },
-    "about_placeholder_10": {
+    "text_about_placeholder_10": {
       "default": "Den här användaren är som en karaktär i en David Lynch-film: gåtfull, mystisk och möjligen en produkt av sin egen fantasi."
     },
-    "about_placeholder_11": {
+    "text_about_placeholder_11": {
       "default": "Den här profilen är lika tom som en Blockbuster-videobutik på en fredagskväll. (Kommer ni ihåg dem? Bra tider.)"
     },
-    "about_placeholder_12": {
+    "text_about_placeholder_12": {
       "default": "Den här användaren kanaliserar sin inre Tyler Durden: avvisar konsumism och omfamnar tomrummet. (Eller så har de bara inte tagit sig tid att fylla i detta ännu.)"
     },
-    "about_placeholder_13": {
+    "text_about_placeholder_13": {
       "default": "En stiliserad bild: En rolig illustration av en detektiv som kliar sig i huvudet av förvirring, eller en rullande tumbleweed över en tom profilsida."
     },
-    "about_placeholder_14": {
+    "text_about_placeholder_14": {
       "default": "Ett interaktivt element: En knapp som låter användare skicka en vänlig puff till profilägaren och uppmuntra dem att fylla i sin profil."
     },
-    "about_placeholder_15": {
+    "text_about_placeholder_15": {
       "default": "Ett personligt meddelande: Om du har någon information om användaren (t.ex. deras visningshistorik), kan du använda den för att generera en mer personlig platshållare, som 'Den här användaren älskar skräckfilmer men hatar att skriva bios. (Kanske gömmer de sig från zombies?)'"
     },
     "list_placeholder_watchlist_movies": {
@@ -424,7 +412,7 @@
     "list_placeholder_upcoming_schedule": {
       "default": "Utforska TV-serier och anpassa ditt schema."
     },
-    "up_next_empty": {
+    "list_placeholder_up_next_empty": {
       "default": "Börja titta och lägg till serier i din to-watch."
     },
     "list_placeholder_released_movies": {
@@ -450,7 +438,7 @@
     "list_title_show_credits": {
       "default": "Serier"
     },
-    "episodes_watched": {
+    "text_episodes_watched": {
       "default": "{count} avsnitt sett",
       "variables": {
         "count": {
@@ -461,7 +449,7 @@
     "list_title_movie_credits": {
       "default": "Filmer"
     },
-    "movies_watched": {
+    "text_movies_watched": {
       "default": "{count} filmer sedda",
       "variables": {
         "count": {
@@ -469,10 +457,10 @@
         }
       }
     },
-    "details": {
+    "header_details": {
       "default": "Detaljer"
     },
-    "expand_category": {
+    "button_label_expand_category": {
       "default": "Expandera {category}",
       "variables": {
         "category": {
@@ -488,22 +476,22 @@
         }
       }
     },
-    "premiered": {
+    "header_premiered": {
       "default": "Premiär"
     },
-    "runtime": {
+    "header_runtime": {
       "default": "Längd"
     },
-    "country": {
+    "header_country": {
       "default": "Land"
     },
-    "language": {
+    "header_language": {
       "default": "Språk"
     },
-    "studio": {
+    "header_studio": {
       "default": "Studio"
     },
-    "genre": {
+    "header_genre": {
       "default": "Genre"
     },
     "button_text_browse_lists": {
@@ -529,7 +517,7 @@
         }
       }
     },
-    "streaming_service_logo": {
+    "image_alt_streaming_service_logo": {
       "default": "{service} logotyp",
       "variables": {
         "service": {
@@ -537,235 +525,235 @@
         }
       }
     },
-    "director": {
+    "header_director": {
       "default": "Regissör"
     },
-    "writer": {
+    "header_writer": {
       "default": "Manusförfattare"
     },
-    "creator": {
+    "header_creator": {
       "default": "Skapare"
     },
-    "job_action_director": {
+    "translated_value_job_action_director": {
       "default": "Actionregissör"
     },
-    "job_additional_second_assistant_director": {
+    "translated_value_job_additional_second_assistant_director": {
       "default": "Ytterligare andraassistentregissör"
     },
-    "job_additional_third_assistant_director": {
+    "translated_value_job_additional_third_assistant_director": {
       "default": "Ytterligare tredjeassistentregissör"
     },
-    "job_assistant_director": {
+    "translated_value_job_assistant_director": {
       "default": "Assistentregissör"
     },
-    "job_assistant_director_trainee": {
+    "translated_value_job_assistant_director_trainee": {
       "default": "Assistentregissörselev"
     },
-    "job_co_director": {
+    "translated_value_job_co_director": {
       "default": "Medregissör"
     },
-    "job_continuity": {
+    "translated_value_job_continuity": {
       "default": "Kontinuitet"
     },
-    "job_crowd_assistant_director": {
+    "translated_value_job_crowd_assistant_director": {
       "default": "Assistentregissör (publik)"
     },
-    "job_director": {
+    "translated_value_job_director": {
       "default": "Regissör"
     },
-    "job_field_director": {
+    "translated_value_job_field_director": {
       "default": "Fältregissör"
     },
-    "job_first_assistant_director": {
+    "translated_value_job_first_assistant_director": {
       "default": "Förstaassistentregissör"
     },
-    "job_first_assistant_director_trainee_prep": {
+    "translated_value_job_first_assistant_director_trainee_prep": {
       "default": "Förstaassistentregissör (Prep)"
     },
-    "job_first_assistant_director_trainee": {
+    "translated_value_job_first_assistant_director_trainee": {
       "default": "Förstaassistentregissörselev"
     },
-    "job_insert_unit_director": {
+    "translated_value_job_insert_unit_director": {
       "default": "Insert Unit-regissör"
     },
-    "job_insert_unit_first_assistant_director": {
+    "translated_value_job_insert_unit_first_assistant_director": {
       "default": "Insert Unit-förstaassistentregissör"
     },
-    "job_layout": {
+    "translated_value_job_layout": {
       "default": "Layout"
     },
-    "job_other": {
+    "translated_value_job_other": {
       "default": "Annat"
     },
-    "job_script_coordinator": {
+    "translated_value_job_script_coordinator": {
       "default": "Manuskoordinator"
     },
-    "job_script_supervisor": {
+    "translated_value_job_script_supervisor": {
       "default": "Manusövervakare"
     },
-    "job_second_assistant_director": {
+    "translated_value_job_second_assistant_director": {
       "default": "Andraassistentregissör"
     },
-    "job_second_assistant_director_trainee": {
+    "translated_value_job_second_assistant_director_trainee": {
       "default": "Andraassistentregissörselev"
     },
-    "job_second_second_assistant_director": {
+    "translated_value_job_second_second_assistant_director": {
       "default": "Andra andraassistentregissör"
     },
-    "job_second_unit_director": {
+    "translated_value_job_second_unit_director": {
       "default": "Second Unit-regissör"
     },
-    "job_second_unit_first_assistant_director": {
+    "translated_value_job_second_unit_first_assistant_director": {
       "default": "Second Unit-förstaassistentregissör"
     },
-    "job_series_director": {
+    "translated_value_job_series_director": {
       "default": "Serieregissör"
     },
-    "job_series_guest_director": {
+    "translated_value_job_series_guest_director": {
       "default": "Specialgästregissör"
     },
-    "job_stage_director": {
+    "translated_value_job_stage_director": {
       "default": "Scenregissör"
     },
-    "job_third_assistant_director": {
+    "translated_value_job_third_assistant_director": {
       "default": "Tredjeassistentregissör"
     },
-    "job_adaptation": {
+    "translated_value_job_adaptation": {
       "default": "Adaption"
     },
-    "job_author": {
+    "translated_value_job_author": {
       "default": "Författare"
     },
-    "job_book": {
+    "translated_value_job_book": {
       "default": "Bok"
     },
-    "job_characters": {
+    "translated_value_job_characters": {
       "default": "Karaktärer"
     },
-    "job_co_writer": {
+    "translated_value_job_co_writer": {
       "default": "Medförfattare"
     },
-    "job_comic_book": {
+    "translated_value_job_comic_book": {
       "default": "Serietidning"
     },
-    "job_creative_producer": {
+    "translated_value_job_creative_producer": {
       "default": "Kreativ producent"
     },
-    "job_dialogue": {
+    "translated_value_job_dialogue": {
       "default": "Dialog"
     },
-    "job_executive_story_editor": {
+    "translated_value_job_executive_story_editor": {
       "default": "Executive Story Editor"
     },
-    "job_graphic_novel": {
+    "translated_value_job_graphic_novel": {
       "default": "Graphic Novel"
     },
-    "job_head_of_story": {
+    "translated_value_job_head_of_story": {
       "default": "Head of Story"
     },
-    "job_idea": {
+    "translated_value_job_idea": {
       "default": "Idé"
     },
-    "job_junior_story_editor": {
+    "translated_value_job_junior_story_editor": {
       "default": "Junior Story Editor"
     },
-    "job_lyricist": {
+    "translated_value_job_lyricist": {
       "default": "Textförfattare"
     },
-    "job_musical": {
+    "translated_value_job_musical": {
       "default": "Musikal"
     },
-    "job_novel": {
+    "translated_value_job_novel": {
       "default": "Roman"
     },
-    "job_opera": {
+    "translated_value_job_opera": {
       "default": "Opera"
     },
-    "job_original_concept": {
+    "translated_value_job_original_concept": {
       "default": "Originalkoncept"
     },
-    "job_original_film_writer": {
+    "translated_value_job_original_film_writer": {
       "default": "Original Film-författare"
     },
-    "job_original_series_creator": {
+    "translated_value_job_original_series_creator": {
       "default": "Original Serie-skapare"
     },
-    "job_original_original_story": {
+    "translated_value_job_original_original_story": {
       "default": "Originalberättelse"
     },
-    "job_scenario_writer": {
+    "translated_value_job_scenario_writer": {
       "default": "Manusförfattare"
     },
-    "job_screenplay": {
+    "translated_value_job_screenplay": {
       "default": "Filmmanus"
     },
-    "job_screenstory": {
+    "translated_value_job_screenstory": {
       "default": "Screenstory"
     },
-    "job_script_consultant": {
+    "translated_value_job_script_consultant": {
       "default": "Manuskonsult"
     },
-    "job_script_editor": {
+    "translated_value_job_script_editor": {
       "default": "Manusredaktör"
     },
-    "job_senior_story_editor": {
+    "translated_value_job_senior_story_editor": {
       "default": "Senior Story Editor"
     },
-    "job_series_composition": {
+    "translated_value_job_series_composition": {
       "default": "Seriens komposition"
     },
-    "job_short_story": {
+    "translated_value_job_short_story": {
       "default": "Novell"
     },
-    "job_staff_writer": {
+    "translated_value_job_staff_writer": {
       "default": "Stabsskribent"
     },
-    "job_story": {
+    "translated_value_job_story": {
       "default": "Berättelse"
     },
-    "job_story_story_artist": {
+    "translated_value_job_story_story_artist": {
       "default": "Story Artist"
     },
-    "job_story_story_consultant": {
+    "translated_value_job_story_story_consultant": {
       "default": "Story Consultant"
     },
-    "job_story_story_coordinator": {
+    "translated_value_job_story_story_coordinator": {
       "default": "Story Coordinator"
     },
-    "job_story_story_developer": {
+    "translated_value_job_story_story_developer": {
       "default": "Story Developer"
     },
-    "job_story_story_editor": {
+    "translated_value_job_story_story_editor": {
       "default": "Story Editor"
     },
-    "job_story_story_manager": {
+    "translated_value_job_story_story_manager": {
       "default": "Story Manager"
     },
-    "job_story_story_supervisor": {
+    "translated_value_job_story_story_supervisor": {
       "default": "Story Supervisor"
     },
-    "job_storyboard": {
+    "translated_value_job_storyboard": {
       "default": "Storyboard"
     },
-    "job_teleplay": {
+    "translated_value_job_teleplay": {
       "default": "TV-manus"
     },
-    "job_texte": {
+    "translated_value_job_texte": {
       "default": "Texte"
     },
-    "job_theatre_play": {
+    "translated_value_job_theatre_play": {
       "default": "Teaterpjäs"
     },
-    "job_writer": {
+    "translated_value_job_writer": {
       "default": "Författare"
     },
-    "job_writers_assistant": {
+    "translated_value_job_writers_assistant": {
       "default": "Författarassistent"
     },
-    "job_writers_production": {
+    "translated_value_job_writers_production": {
       "default": "Författarproduktion"
     },
-    "job_creator": {
+    "translated_value_job_creator": {
       "default": "Skapare"
     },
     "button_text_remove_from_history": {
@@ -806,7 +794,7 @@
     "list_title_seasons": {
       "default": "Säsonger"
     },
-    "season_number_label": {
+    "text_season_number": {
       "default": "Säsong {number}",
       "variables": {
         "number": {
@@ -814,10 +802,10 @@
         }
       }
     },
-    "season_specials": {
+    "text_season_specials": {
       "default": "Specialavsnitt"
     },
-    "expand_media_overview": {
+    "button_label_expand_media_overview": {
       "default": "Utvidga {title} översikt",
       "variables": {
         "title": {
@@ -825,7 +813,7 @@
         }
       }
     },
-    "season_episode_number_label": {
+    "text_season_episode_number": {
       "default": "Säsong {season} • Avsnitt {number}",
       "variables": {
         "season": {
@@ -836,7 +824,7 @@
         }
       }
     },
-    "share_title": {
+    "button_label_share": {
       "default": "Dela {title}",
       "variables": {
         "title": {
@@ -844,49 +832,49 @@
         }
       }
     },
-    "status": {
+    "header_status": {
       "default": "Status"
     },
-    "status_released": {
+    "translated_value_status_released": {
       "default": "Släppt"
     },
-    "status_planned": {
+    "translated_value_status_planned": {
       "default": "Planerad"
     },
-    "status_post_production": {
+    "translated_value_status_post_production": {
       "default": "Post-produktion"
     },
-    "status_canceled": {
+    "translated_value_status_canceled": {
       "default": "Inställd"
     },
-    "status_in_production": {
+    "translated_value_status_in_production": {
       "default": "Under produktion"
     },
-    "status_rumored": {
+    "translated_value_status_rumored": {
       "default": "Ryktas"
     },
-    "status_ended": {
+    "translated_value_status_ended": {
       "default": "Avslutad"
     },
-    "status_returning_series": {
+    "translated_value_status_returning_series": {
       "default": "Återkommande serie"
     },
-    "status_pilot": {
+    "translated_value_status_pilot": {
       "default": "Pilot"
     },
-    "status_continuing": {
+    "translated_value_status_continuing": {
       "default": "Pågående"
     },
-    "status_upcoming": {
+    "translated_value_status_upcoming": {
       "default": "Kommande"
     },
-    "status_unknown": {
+    "translated_value_status_unknown": {
       "default": "Okänd"
     },
-    "expected_premiere": {
+    "header_expected_premiere": {
       "default": "Förväntad premiär"
     },
-    "person_headshot": {
+    "image_alt_person_headshot": {
       "default": "Huvudbild på {person}",
       "variables": {
         "person": {
@@ -905,10 +893,10 @@
         }
       }
     },
-    "view_all_trending_movies": {
+    "button_label_view_all_trending_movies": {
       "default": "Se alla trendiga filmer"
     },
-    "view_all_trending_shows": {
+    "button_label_view_all_trending_shows": {
       "default": "Se alla trendiga serier"
     },
     "list_title_trending_shows": {
@@ -931,16 +919,16 @@
         }
       }
     },
-    "view_all_recommended_movies": {
+    "button_label_view_all_recommended_movies": {
       "default": "Se alla rekommenderade filmer"
     },
-    "view_all_recommended_shows": {
+    "button_label_view_all_recommended_shows": {
       "default": "Se alla rekommenderade serier"
     },
-    "view_all_anticipated_movies": {
+    "button_label_view_all_anticipated_movies": {
       "default": "Se alla förväntade filmer"
     },
-    "view_all_anticipated_shows": {
+    "button_label_view_all_anticipated_shows": {
       "default": "Se alla förväntade serier"
     },
     "list_title_anticipated_movies": {
@@ -949,10 +937,10 @@
     "list_title_anticipated_shows": {
       "default": "Förväntade serier"
     },
-    "view_all_popular_movies": {
+    "button_label_view_all_popular_movies": {
       "default": "Se alla populära filmer"
     },
-    "view_all_popular_shows": {
+    "button_label_view_all_popular_shows": {
       "default": "Se alla populära serier"
     },
     "list_title_popular_movies": {
@@ -961,7 +949,7 @@
     "list_title_popular_shows": {
       "default": "Populära serier"
     },
-    "rate_now": {
+    "header_rate_now": {
       "default": "Betygsätt nu"
     },
     "button_text_add_to_favorites": {
@@ -1018,19 +1006,19 @@
     "list_title_your_watchlist_movies": {
       "default": "Dina to-watch-filmer"
     },
-    "view_all_watchlist_movies": {
+    "button_label_view_all_watchlist_movies": {
       "default": "Se alla to-watch-filmer"
     },
-    "view_all_watchlist_shows": {
+    "button_label_view_all_watchlist_shows": {
       "default": "Se alla to-watch-serier"
     },
-    "streaming": {
+    "header_streaming": {
       "default": "Streaming"
     },
-    "on_demand": {
+    "header_on_demand": {
       "default": "On Demand"
     },
-    "media_popup_label": {
+    "button_label_popup_media": {
       "default": "Popup-meny för {title}",
       "variables": {
         "title": {
@@ -1049,10 +1037,10 @@
         }
       }
     },
-    "by": {
+    "text_by": {
       "default": "av"
     },
-    "users_avatar": {
+    "image_alt_user_avatar": {
       "default": "{username}'s avatar",
       "variables": {
         "username": {
@@ -1060,7 +1048,7 @@
         }
       }
     },
-    "media_poster": {
+    "image_alt_media_poster": {
       "default": "{title} affisch",
       "variables": {
         "title": {
@@ -1071,76 +1059,76 @@
     "list_placeholder_comments": {
       "default": "Inga kommentarer än."
     },
-    "review_by": {
+    "text_review_by": {
       "default": "Recension av"
     },
-    "shout_by": {
+    "text_shout_by": {
       "default": "Rop av"
     },
-    "deleted_user": {
+    "text_deleted_username": {
       "default": "Raderad"
     },
     "list_title_social_activity": {
       "default": "Social aktivitet"
     },
-    "view_all_social_activity": {
+    "button_label_view_all_social_activity": {
       "default": "Se all social aktivitet"
     },
     "dropdown_label_person_position": {
       "default": "Position"
     },
-    "position_acting": {
+    "translated_value_position_acting": {
       "default": "Skådespeleri"
     },
-    "position_production": {
+    "translated_value_position_production": {
       "default": "Produktion"
     },
-    "position_art": {
+    "translated_value_position_art": {
       "default": "Konst"
     },
-    "position_crew": {
+    "translated_value_position_crew": {
       "default": "Team"
     },
-    "position_costume___make_up": {
+    "translated_value_position_costume___make_up": {
       "default": "Kostym & Smink"
     },
-    "position_directing": {
+    "translated_value_position_directing": {
       "default": "Regi"
     },
-    "position_writing": {
+    "translated_value_position_writing": {
       "default": "Skrivande"
     },
-    "position_sound": {
+    "translated_value_position_sound": {
       "default": "Ljud"
     },
-    "position_camera": {
+    "translated_value_position_camera": {
       "default": "Kamera"
     },
-    "position_lighting": {
+    "translated_value_position_lighting": {
       "default": "Belysning"
     },
-    "position_visual_effects": {
+    "translated_value_position_visual_effects": {
       "default": "Visuella effekter"
     },
-    "position_editing": {
+    "translated_value_position_editing": {
       "default": "Redigering"
     },
-    "position_creator": {
+    "translated_value_position_creator": {
       "default": "Skapare"
     },
-    "position_created_by": {
+    "translated_value_position_created_by": {
       "default": "Skapad av"
     },
     "list_title_personal_lists": {
       "default": "Personliga"
     },
-    "collaborative_lists": {
+    "list_title_collaborative_lists": {
       "default": "Samarbeten"
     },
-    "liked_lists": {
+    "list_title_liked_lists": {
       "default": "Gillade"
     },
-    "share_movie": {
+    "text_share_movie": {
       "default": "Hittade precis {title} - du måste se den här! 🎬",
       "variables": {
         "title": {
@@ -1148,7 +1136,7 @@
         }
       }
     },
-    "share_show": {
+    "text_share_show": {
       "default": "Hittade den här fantastiska serien: {title}! 📺",
       "variables": {
         "title": {
@@ -1156,7 +1144,7 @@
         }
       }
     },
-    "share_episode": {
+    "text_share_episode": {
       "default": "Såg precis {show} S{season}E{episode} - {title}! 🔥",
       "variables": {
         "show": {
@@ -1173,7 +1161,15 @@
         }
       }
     },
-    "share_person": {
+    "text_share_person": {
+      "default": "Kolla in {name} på Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_profile": {
       "default": "Kolla in {name} på Trakt! 🎭",
       "variables": {
         "name": {
@@ -1184,31 +1180,31 @@
     "list_title_recently_watched": {
       "default": "Nyligen sett"
     },
-    "view_all_recently_watched": {
+    "button_label_view_all_recently_watched": {
       "default": "Se allt nyligen sett"
     },
     "list_title_available_now": {
       "default": "Tillgänglig nu"
     },
-    "view_all_released_movies": {
+    "button_label_view_all_released_movies": {
       "default": "Se alla filmer som är tillgängliga nu"
     },
-    "view_all_unreleased_movies": {
+    "button_label_view_all_unreleased_movies": {
       "default": "Se alla filmer som kommer snart"
     },
-    "switch_to_og": {
+    "switch_label_to_og": {
       "default": "Byt till Trakt.tv"
     },
     "tag_text_preview": {
       "default": "Förhandsgranska"
     },
-    "preview_description": {
+    "tooltip_text_preview_feature": {
       "default": "Den här funktionen håller fortfarande på att målas om, medborgare. Vi hamrar på UX och får den att sjunga som en kör av änglar (eller åtminstone fungera smidigt utan att framkalla existentiell ångest)."
     },
-    "airs": {
+    "header_airs": {
       "default": "Sänds"
     },
-    "aired": {
+    "header_aired": {
       "default": "Sändes"
     },
     "warning_prompt_drop_show": {
@@ -1230,16 +1226,13 @@
     "button_text_drop_show": {
       "default": "Sluta följa"
     },
-    "enable_up_next_nitro_label": {
-      "default": "Aktivera Nästa Nitro, det snabbaste sättet att titta på dina serier"
-    },
-    "lab_up_next_nitro_label": {
+    "switch_label_up_next_nitro": {
       "default": "Aktivera Nästa Nitro"
     },
-    "lab_up_next_nitro_message": {
+    "tooltip_text_up_next_nitro": {
       "default": "Det här experimentet är en prestandauppgradering som förbättrar upplevelsen för alla användare."
     },
-    "lab_up_next_nitro_hidden_message": {
+    "tooltip_text_up_next_nitro_hidden": {
       "default": "På grund av interna designförändringar kommer tidigare dolda serier nu att vara synliga i din lista med en svartvit miniatyrbild för att hjälpa dig att snabbt upptäcka dem, med möjlighet att antingen återskapa dem eller ta bort dem från listan."
     },
     "warning_prompt_restore_show": {
@@ -1261,7 +1254,7 @@
     "button_text_restore_show": {
       "default": "Återställ serie"
     },
-    "mark_as_watched_show_warning": {
+    "warning_prompt_mark_as_watched_show": {
       "default": "Är du säker på att du vill markera {title} som sedd? Detta kommer att markera alla avsnitt som sedda.",
       "variables": {
         "title": {
@@ -1269,7 +1262,7 @@
         }
       }
     },
-    "mark_as_watched_show_until_warning": {
+    "warning_prompt_mark_as_watched_show_until": {
       "default": "Är du säker på att du vill markera alla osedda avsnitt av {title} som sedda fram till avsnitt {episode}? Detta kommer att markera {count} avsnitt som sedda.",
       "variables": {
         "title": {
@@ -1283,7 +1276,7 @@
         }
       }
     },
-    "mark_as_watched_multiple_episodes_warning": {
+    "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Är du säker på att du vill markera {count} avsnitt som sedda?",
       "variables": {
         "count": {
@@ -1319,7 +1312,7 @@
         }
       }
     },
-    "close_label": {
+    "button_label_close": {
       "default": "Stäng"
     },
     "button_label_comment_replies": {
@@ -1339,7 +1332,7 @@
     "dialog_title_comments": {
       "default": "Kommentarer"
     },
-    "comment": {
+    "dialog_title_comment": {
       "default": "Kommentar"
     },
     "button_text_comment_reply": {
@@ -1353,31 +1346,31 @@
         }
       }
     },
-    "comment_reply_placeholder": {
+    "textarea_placeholder_reply": {
       "default": "Svara..."
     },
-    "comment_post_label": {
+    "button_label_add_new_comment": {
       "default": "Lägg till kommentar"
     },
-    "comment_post_placeholder": {
+    "textarea_placeholder_comment": {
       "default": "Kommentar..."
     },
-    "comment_mark_as_spoiler": {
+    "switch_label_mark_as_spoiler": {
       "default": "Markera som spoiler"
     },
-    "comment_spoiler": {
+    "text_spoiler": {
       "default": "Spoiler"
     },
-    "comment_close_error_label": {
+    "button_label_close_error": {
       "default": "Stäng fel"
     },
-    "comment_post_reply_label": {
+    "button_label_post_reply": {
       "default": "Publicera svar"
     },
-    "error_comment_invalid_content": {
+    "translated_value_error_comment_invalid_content": {
       "default": "Kommentarer måste vara minst 5 ord och på engelska."
     },
-    "error_comment_unknown": {
+    "translated_value_error_comment_unknown": {
       "default": "Ett fel uppstod när du publicerade din kommentar. Försök igen senare."
     },
     "page_title_user_profile": {
@@ -1388,10 +1381,10 @@
         }
       }
     },
-    "private_profile": {
+    "header_private_profile": {
       "default": "Denna profil är privat"
     },
-    "private_profile_description": {
+    "text_private_profile_description": {
       "default": "Som om det inte fanns tillräckligt dolt redan. {username}s hemligheter förblir deras egna.",
       "variables": {
         "username": {
@@ -1399,16 +1392,16 @@
         }
       }
     },
-    "original_title": {
+    "header_original_title": {
       "default": "Originaltitel"
     },
-    "view_all_comments": {
+    "button_label_view_all_comments": {
       "default": "Visa alla kommentarer"
     },
     "button_text_remove_from_list": {
       "default": "Ta bort från listan"
     },
-    "remove_from_list_label": {
+    "button_label_remove_from_list": {
       "default": "Ta bort {title} från listan",
       "variables": {
         "title": {
@@ -1419,10 +1412,10 @@
     "page_title_service_unavailable": {
       "default": "Trakt-tjänsten ej tillgänglig"
     },
-    "error_page_service_message": {
+    "error_text_service_unavailable": {
       "default": "Anslutningen är... borta. Som ett bortglömt minne."
     },
-    "error_page_service_status": {
+    "link_text_service_status": {
       "default": "Trakt-tjänstens status"
     },
     "button_text_retry": {
@@ -1431,13 +1424,13 @@
     "button_label_retry": {
       "default": "Försök igen"
     },
-    "community_sentiment": {
+    "header_community_sentiment": {
       "default": "Samhällsopinion"
     },
-    "lists_action_label": {
+    "button_text_lists": {
       "default": "Listor"
     },
-    "listed": {
+    "button_text_listed": {
       "default": "Listad"
     },
     "dropdown_label_add_remove_from_lists": {
@@ -1448,7 +1441,7 @@
         }
       }
     },
-    "add_to_personal_list_label": {
+    "button_label_add_to_personal_list": {
       "default": "Lägg till {title} i {list}",
       "variables": {
         "title": {
@@ -1459,7 +1452,7 @@
         }
       }
     },
-    "remove_from_personal_list_label": {
+    "button_label_remove_from_personal_list": {
       "default": "Ta bort {title} från {list}",
       "variables": {
         "title": {
@@ -1481,13 +1474,13 @@
         }
       }
     },
-    "theme_light": {
+    "option_text_theme_light": {
       "default": "Ljus"
     },
-    "theme_dark": {
+    "option_text_theme_dark": {
       "default": "Mörk"
     },
-    "theme_system": {
+    "option_text_theme_system": {
       "default": "System"
     },
     "button_text_filters": {
@@ -1499,7 +1492,7 @@
     "button_label_reset_filter": {
       "default": "Återställ"
     },
-    "results_for_title": {
+    "text_search_results_for": {
       "default": "Resultat för {query}",
       "variables": {
         "query": {
@@ -1507,58 +1500,55 @@
         }
       }
     },
-    "type_movie": {
+    "translated_value_type_movie": {
       "default": "Film"
     },
-    "type_show": {
+    "translated_value_type_show": {
       "default": "Serie"
     },
     "page_title_sign_in": {
       "default": "Logga in"
     },
-    "code_retry_title": {
+    "header_device_auth_failed": {
       "default": "Något gick fel"
     },
-    "code_retry_message": {
+    "header_device_auth_try_again": {
       "default": "Aktiveringen nekades, gick ut eller något oförutsett hände. Försök igen."
     },
-    "code_instruction": {
+    "header_device_auth_qr_instruction": {
       "default": "Skanna QR-koden, eller logga in på:"
     },
-    "code_label": {
+    "header_device_auth_code_instruction": {
       "default": "och ange följande kod:"
     },
-    "filter_all": {
+    "option_text_all": {
       "default": "Alla"
     },
-    "filters_title": {
+    "header_filters": {
       "default": "Filter"
     },
-    "ignore_watched": {
+    "header_ignore_watched": {
       "default": "Ignorera sett"
     },
-    "ignore_watchlisted": {
+    "header_ignore_watchlisted": {
       "default": "Ignorera att se"
     },
-    "watchnow_filter_label": {
-      "default": "Tillgänglighet"
-    },
-    "watchnow_favorites_only": {
+    "option_text_my_favorites": {
       "default": "Endast favoriter"
     },
-    "watchnow_digital_release": {
+    "option_text_all_digital_releases": {
       "default": "Alla digitala utgåvor"
     },
-    "watchnow_streaming": {
+    "option_text_streaming_now": {
       "default": "Streamar nu"
     },
-    "decade": {
+    "header_decade": {
       "default": "Årtionde"
     },
-    "ratings": {
+    "header_ratings": {
       "default": "Betyg"
     },
-    "view_all_items_in": {
+    "button_label_view_all_items_in": {
       "default": "Visa alla i {title}",
       "variables": {
         "title": {
@@ -1572,28 +1562,28 @@
     "button_label_reset_all_filters": {
       "default": "Återställ alla filter"
     },
-    "video_type_trailer": {
+    "translated_value_video_type_trailer": {
       "default": "Trailer"
     },
-    "video_type_clip": {
+    "translated_value_video_type_clip": {
       "default": "Klipp"
     },
-    "video_type_teaser": {
+    "translated_value_video_type_teaser": {
       "default": "Teaser"
     },
-    "video_type_featurette": {
+    "translated_value_video_type_featurette": {
       "default": "Featurette"
     },
-    "video_type_recap": {
+    "translated_value_video_type_recap": {
       "default": "Sammanfattning"
     },
-    "video_type_behind_the_scenes": {
+    "translated_value_video_type_behind_the_scenes": {
       "default": "Bakom kulisserna"
     },
-    "now_playing": {
+    "header_now_playing": {
       "default": "Spelas nu"
     },
-    "remaining": {
+    "text_remaining": {
       "default": "återstår"
     },
     "button_text_checkin": {
@@ -1607,7 +1597,7 @@
         }
       }
     },
-    "cookie_notice": {
+    "text_cookie_notice": {
       "default": "Trakt använder C🍪🍪KIES för att förbättra din upplevelse. Du kan <a>läsa mer information</a> här."
     },
     "button_text_cookie_accept": {
@@ -1634,10 +1624,13 @@
     "button_label_settings": {
       "default": "Inställningar"
     },
-    "settings_spoilers_title": {
+    "header_spoilers": {
       "default": "Spoilers"
     },
-    "settings_spoilers_label": {
+    "text_show_spoilers": {
+      "default": "Visa spoilers"
+    },
+    "switch_label_spoilers": {
       "default": "Visa spoilers"
     },
     "button_text_save_filters": {
@@ -1649,13 +1642,13 @@
     "page_title_account_locked": {
       "default": "Konto låst"
     },
-    "error_page_locked_account_message": {
+    "error_text_locked_account": {
       "default": "Ditt konto är låst, <a>kontakta supporten</a> för att lösa detta problem."
     },
-    "first_play_this_month": {
+    "text_first_play_this_month": {
       "default": "Första visningen denna månad"
     },
-    "shows_watched": {
+    "text_shows_watched": {
       "default": "{count} serier tittade på",
       "variables": {
         "count": {
@@ -1693,10 +1686,10 @@
         }
       }
     },
-    "vip_upsell_title": {
+    "text_vip_upsell": {
       "default": "Lås upp VIP-funktioner för att förbättra din Trakt-upplevelse"
     },
-    "vip_upsell_description": {
+    "text_vip_upsell_description": {
       "default": "Vill du se din månads- och årsöversikt? Och få tillgång till många andra funktioner? Registrera dig för Trakt VIP."
     },
     "list_title_following": {
@@ -1708,7 +1701,10 @@
     "list_placeholder_followers": {
       "default": "Ingen här (än)."
     },
-    "read_more": {
+    "list_placeholder_following": {
+      "default": "Det är ingen här (ännu)."
+    },
+    "button_label_read_more": {
       "default": "Läs mer"
     },
     "button_text_add_comment": {
@@ -1717,10 +1713,10 @@
     "button_label_add_comment": {
       "default": "Lägg till kommentar"
     },
-    "rename_list": {
+    "input_prompt_rename_list": {
       "default": "Byt namn på din lista"
     },
-    "rename_list_label": {
+    "button_label_rename_list": {
       "default": "Byt namn på din lista {name}",
       "variables": {
         "name": {
@@ -1737,10 +1733,10 @@
     "list_title_hot_shows": {
       "default": "Populära serier denna månad"
     },
-    "view_all_hot_shows": {
+    "button_label_view_all_hot_shows": {
       "default": "Se alla populära serier"
     },
-    "view_all_hot_movies": {
+    "button_label_view_all_hot_movies": {
       "default": "Se alla populära filmer"
     },
     "list_title_extras": {
@@ -1807,6 +1803,18 @@
           "type": "string"
         }
       }
+    },
+    "dropdown_label_extras": {
+      "default": "Extramaterial"
+    },
+    "button_label_rating_bad": {
+      "default": "Betygsätt som dålig"
+    },
+    "button_label_rating_good": {
+      "default": "Betygsätt som bra"
+    },
+    "button_label_rating_great": {
+      "default": "Betygsätt som utmärkt"
     }
   }
 }

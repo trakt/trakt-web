@@ -37,7 +37,7 @@
           <RenderFor audience="all" navigation="default">
             <MoreButton
               i18n={MoreButtonIntlProvider}
-              label="{m.expand_category({ category })}}"
+              label="{m.button_label_expand_category({ category })}}"
               count={omittedValues.length}
               onExpand={() => expanded.set(true)}
               onCollapse={() => expanded.set(false)}

@@ -17,7 +17,7 @@
   <ActionButton
     size="small"
     onclick={onDismiss}
-    label={m.comment_close_error_label()}
+    label={m.button_label_close_error()}
     color="red"
     style="ghost"
     variant="secondary"

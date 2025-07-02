@@ -19,7 +19,7 @@
     type="episode"
     useList={useSocialActivityList}
     urlBuilder={UrlBuilder.social.activity}
-    drilldownLabel={m.view_all_social_activity()}
+    drilldownLabel={m.button_label_view_all_social_activity()}
     title={m.list_title_social_activity()}
   >
     {#snippet item(activity)}

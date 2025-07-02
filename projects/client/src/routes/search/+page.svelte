@@ -55,7 +55,9 @@
 
     <SectionList
       id="search-grid-list-movies"
-      title={m.results_for_title({ query: m.type_movie() })}
+      title={m.text_search_results_for({
+        query: m.translated_value_type_movie(),
+      })}
       items={$movies}
       --height-list={mediaListHeightResolver("portrait")}
     >
@@ -66,7 +68,9 @@
 
     <SectionList
       id="search-grid-list-shows"
-      title={m.results_for_title({ query: m.type_show() })}
+      title={m.text_search_results_for({
+        query: m.translated_value_type_show(),
+      })}
       items={$shows}
       --height-list={mediaListHeightResolver("portrait")}
     >

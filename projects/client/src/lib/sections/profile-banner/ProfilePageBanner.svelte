@@ -16,7 +16,7 @@
   const isMe = $derived(slug === "me" || slug === $user.slug);
   const nameLabel = $derived(
     isMe
-      ? m.profile_banner_greeting({ name: profile.name.first })
+      ? m.header_profile_banner_greeting({ name: profile.name.first })
       : profile.name.first,
   );
   const shareableSlug = $derived(isMe ? $user.slug : slug);
@@ -52,7 +52,7 @@
       <ShareButton
         title={profile.name.first}
         urlOverride={UrlBuilder.profile.user(shareableSlug)}
-        textFactory={({ title: name }) => m.share_person({ name })}
+        textFactory={({ title: name }) => m.text_share_profile({ name })}
       />
     </div>
   </div>

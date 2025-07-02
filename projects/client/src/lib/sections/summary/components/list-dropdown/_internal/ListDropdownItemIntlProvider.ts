@@ -7,7 +7,7 @@ import type {
 export const ListDropdownItemIntlProvider: ListDropdownItemIntl = {
   label: ({ title, isListed, listName }: ListDropdownItemMeta) =>
     isListed
-      ? m.remove_from_personal_list_label({ list: listName, title })
-      : m.add_to_personal_list_label({ list: listName, title }),
+      ? m.button_label_remove_from_personal_list({ list: listName, title })
+      : m.button_label_add_to_personal_list({ list: listName, title }),
   text: ({ listName }: ListDropdownItemMeta) => listName,
 };

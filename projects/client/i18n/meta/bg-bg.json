@@ -42,7 +42,7 @@
     "tag_text_mid_season_finale": {
       "default": "Фонал на средата на сезона"
     },
-    "profile_banner_greeting": {
+    "header_profile_banner_greeting": {
       "default": "Здравей, {name}",
       "variables": {
         "name": {
@@ -78,13 +78,13 @@
     "page_title_error_404": {
       "default": "404: Нищото. Празнотата."
     },
-    "error_404_message": {
+    "error_text_404": {
       "default": "(Не се притеснявай, случва се! Дори Силата понякога не е в ред.)"
     },
-    "error_404_action": {
+    "link_text_back_to_safety": {
       "default": "Отново в безопасност..."
     },
-    "mark_as_watched_ask_prompt": {
+    "input_prompt_mark_as_watched_date": {
       "default": "Кога приключи да гледаш това? (YYYY-MM-DD HH:MM)"
     },
     "button_text_watchlist": {
@@ -123,115 +123,115 @@
         }
       }
     },
-    "genre_horror": {
+    "translated_value_genre_horror": {
       "default": "Хорър"
     },
-    "genre_comedy": {
+    "translated_value_genre_comedy": {
       "default": "Комедия"
     },
-    "genre_action": {
+    "translated_value_genre_action": {
       "default": "Екшън"
     },
-    "genre_adventure": {
+    "translated_value_genre_adventure": {
       "default": "Приключенски"
     },
-    "genre_animation": {
+    "translated_value_genre_animation": {
       "default": "Анимация"
     },
-    "genre_biography": {
+    "translated_value_genre_biography": {
       "default": "Биографичен"
     },
-    "genre_children": {
+    "translated_value_genre_children": {
       "default": "Детски"
     },
-    "genre_crime": {
+    "translated_value_genre_crime": {
       "default": "Криминален"
     },
-    "genre_documentary": {
+    "translated_value_genre_documentary": {
       "default": "Документален"
     },
-    "genre_drama": {
+    "translated_value_genre_drama": {
       "default": "Драма"
     },
-    "genre_family": {
+    "translated_value_genre_family": {
       "default": "Семеен"
     },
-    "genre_fantasy": {
+    "translated_value_genre_fantasy": {
       "default": "Фантазия"
     },
-    "genre_game_show": {
+    "translated_value_genre_game_show": {
       "default": "Игрално шоу"
     },
-    "genre_history": {
+    "translated_value_genre_history": {
       "default": "Историчеки"
     },
-    "genre_home_and_garden": {
+    "translated_value_genre_home_and_garden": {
       "default": "Дом и градина"
     },
-    "genre_holiday": {
+    "translated_value_genre_holiday": {
       "default": "Празничен"
     },
-    "genre_music": {
+    "translated_value_genre_music": {
       "default": "Музика"
     },
-    "genre_musical": {
+    "translated_value_genre_musical": {
       "default": "Мюзикъл"
     },
-    "genre_mystery": {
+    "translated_value_genre_mystery": {
       "default": "Мистерия"
     },
-    "genre_news": {
+    "translated_value_genre_news": {
       "default": "Новини"
     },
-    "genre_none": {
+    "translated_value_genre_none": {
       "default": "Липсва"
     },
-    "genre_reality": {
+    "translated_value_genre_reality": {
       "default": "Риалити"
     },
-    "genre_romance": {
+    "translated_value_genre_romance": {
       "default": "Романтика"
     },
-    "genre_short": {
+    "translated_value_genre_short": {
       "default": "Кратък"
     },
-    "genre_soap": {
+    "translated_value_genre_soap": {
       "default": "Сапунка"
     },
-    "genre_special_interest": {
+    "translated_value_genre_special_interest": {
       "default": "Специален интерес"
     },
-    "genre_sporting_event": {
+    "translated_value_genre_sporting_event": {
       "default": "Спортно събитие"
     },
-    "genre_suspense": {
+    "translated_value_genre_suspense": {
       "default": "Съспенс"
     },
-    "genre_talk_show": {
+    "translated_value_genre_talk_show": {
       "default": "Токшоу"
     },
-    "genre_thriller": {
+    "translated_value_genre_thriller": {
       "default": "Трилър"
     },
-    "genre_war": {
+    "translated_value_genre_war": {
       "default": "Военен"
     },
-    "genre_western": {
+    "translated_value_genre_western": {
       "default": "Уестърн"
     },
-    "genre_anime": {
+    "translated_value_genre_anime": {
       "default": "Аниме"
     },
-    "genre_superhero": {
+    "translated_value_genre_superhero": {
       "default": "Супергерои"
     },
-    "genre_donghua": {
+    "translated_value_genre_donghua": {
       "default": "Донгхуа"
     },
-    "genre_mini_series": {
+    "translated_value_genre_mini_series": {
       "default": "Мини-серии"
     },
-    "genre_science_fiction": {
+    "translated_value_genre_science_fiction": {
       "default": "Научнофантастичен"
     },
     "button_label_remove_from_watchlist": {
@@ -242,7 +242,7 @@
         }
       }
     },
-    "search_placeholder": {
+    "input_placeholder_search": {
       "default": "Какво ти се гледа?"
     },
     "button_text_join_trakt": {
@@ -251,31 +251,31 @@
     "button_label_join_trakt": {
       "default": "Присъедини се към trakt.tv, за да следиш какво гледаш"
     },
-    "copyright_notice": {
+    "text_copyright_notice": {
       "default": "Всички права запазени."
     },
-    "copyright_crafted_by": {
+    "text_copyright_crafted_by": {
       "default": "Направено с любов из различни кътчета на света"
     },
     "button_text_join_trakt_for_free": {
       "default": "Присъедини се към Trakt безплатно"
     },
-    "landing_discover_label": {
+    "header_landing_discover": {
       "default": "Октий"
     },
-    "landing_discover_description": {
+    "text_landing_discover": {
       "default": "какво е актуално и къде да го гледаш."
     },
-    "landing_track_label": {
+    "header_landing_track": {
       "default": "Следи"
     },
-    "landing_track_description": {
+    "text_landing_track": {
       "default": "всички предавания и филми, които някога сте гледали.."
     },
-    "landing_share_label": {
+    "header_landing_share": {
       "default": "Сподели"
     },
-    "landing_share_description": {
+    "text_landing_share": {
       "default": "коментари, оценки и препоръки."
     },
     "list_title_trending": {
@@ -332,9 +332,6 @@
     "page_title_home": {
       "default": "Начало"
     },
-    "watchers": {
-      "default": "Гледащи"
-    },
     "tag_text_plays": {
       "default": "{number} гледания",
       "variables": {
@@ -342,15 +339,6 @@
           "type": "string"
         }
       }
-    },
-    "lists": {
-      "default": "списъци"
-    },
-    "favorited": {
-      "default": "Любими"
-    },
-    "profile": {
-      "default": "Профил"
     },
     "button_text_logout": {
       "default": "Излез"
@@ -370,49 +358,49 @@
     "list_title_related_shows": {
       "default": "Подобни предавания"
     },
-    "about_placeholder_1": {
+    "text_about_placeholder_1": {
       "default": "Този потребител е мистерия, обгърната в енигла... (или може би просто е мързелив? Кой знае, това е интернет.)"
     },
-    "about_placeholder_2": {
+    "text_about_placeholder_2": {
       "default": "Явно този потребител е твърде зает да гледа филми, за да пише за себе си. (Разбираемо, и аз съм така.)"
     },
-    "about_placeholder_3": {
+    "text_about_placeholder_3": {
       "default": "Профилът на този потребител е празно платно, празнота от информация... (подобно на моя социален живот. *въздишка*)"
     },
-    "about_placeholder_4": {
+    "text_about_placeholder_4": {
       "default": "Разкрий тайните на самоличността на този потребител... (ако се осмелиш)"
     },
-    "about_placeholder_5": {
+    "text_about_placeholder_5": {
       "default": "Какви скрити дълбини се крият под този празен профил? (Истината е някъде там...)"
     },
-    "about_placeholder_6": {
+    "text_about_placeholder_6": {
       "default": "Този потребител е призрак в машината, цифров фантом... (или може би просто е забравил да попълни това?)"
     },
-    "about_placeholder_7": {
+    "text_about_placeholder_7": {
       "default": "Помогнете на този потребител! Кажете му да попълни профила си. (Той може дори да ви възнагради с виртуално „дай пет“!)"
     },
-    "about_placeholder_8": {
+    "text_about_placeholder_8": {
       "default": "Този профил си проси внимание. Дай му малко любов и кажи на потребителя да го попълни."
     },
-    "about_placeholder_9": {
+    "text_about_placeholder_9": {
       "default": "Не се срамувай! Насърчи този потребител да сподели историята си. (Всеки има какво да разкаже, дори и да е само за любимото му телевизионно шоу.)"
     },
-    "about_placeholder_10": {
+    "text_about_placeholder_10": {
       "default": "Този потребител е като герой от филм на Дейвид Линч: загадъчен, мистериозен и вероятно плод на собственото му въображение."
     },
-    "about_placeholder_11": {
+    "text_about_placeholder_11": {
       "default": "Този профил е празен като видеотека „Блокбъстър“ в петък вечер. (Помните ли ги? Хубави времена.)"
     },
-    "about_placeholder_12": {
+    "text_about_placeholder_12": {
       "default": "Този потребител е насочил своя вътрешен Тайлър Дърдън: отхвърля консуматорството и прегръща празнотата. (А може би просто още не е успял да го попълни.)"
     },
-    "about_placeholder_13": {
+    "text_about_placeholder_13": {
       "default": "Стилизирано изображение: Забавна илюстрация на детектив, който се почесва по главата в недоумение, или на тумбесто дърво, което се търкаля по празна страница на профила."
     },
-    "about_placeholder_14": {
+    "text_about_placeholder_14": {
       "default": "Интерактивен елемент: Бутон, който позволява на потребителите да изпратят приятелски сигнал до собственика на профила, като го насърчат да попълни профила си."
     },
-    "about_placeholder_15": {
+    "text_about_placeholder_15": {
       "default": "Персонализирано съобщение: Ако разполагате с някаква информация за потребителя (напр. историята на гледанията му), можете да я използвате, за да генерирате по-персонализирано съобщение, като например 'Този потребител обича филми на ужасите, но мрази да пише биографии. (Може би е твърде зает да се крие от зомбита?)'"
     },
     "list_placeholder_watchlist_movies": {
@@ -424,7 +412,7 @@
     "list_placeholder_upcoming_schedule": {
       "default": "Разгледай предавания и персонализирай графика си."
     },
-    "up_next_empty": {
+    "list_placeholder_up_next_empty": {
       "default": "Започни да гледаш и добавяш предавания в списъка си за наблюдение."
     },
     "list_placeholder_released_movies": {
@@ -450,7 +438,7 @@
     "list_title_show_credits": {
       "default": "Предавания"
     },
-    "episodes_watched": {
+    "text_episodes_watched": {
       "default": "{count} гледани епизода",
       "variables": {
         "count": {
@@ -461,7 +449,7 @@
     "list_title_movie_credits": {
       "default": "Филми"
     },
-    "movies_watched": {
+    "text_movies_watched": {
       "default": "{count} гледани филми",
       "variables": {
         "count": {
@@ -469,10 +457,10 @@
         }
       }
     },
-    "details": {
+    "header_details": {
       "default": "Подробности"
     },
-    "expand_category": {
+    "button_label_expand_category": {
       "default": "Разшири {category}",
       "variables": {
         "category": {
@@ -488,22 +476,22 @@
         }
       }
     },
-    "premiered": {
+    "header_premiered": {
       "default": "Премиера"
     },
-    "runtime": {
+    "header_runtime": {
       "default": "Времетраене"
     },
-    "country": {
+    "header_country": {
       "default": "Държава"
     },
-    "language": {
+    "header_language": {
       "default": "Език"
     },
-    "studio": {
+    "header_studio": {
       "default": "Студио"
     },
-    "genre": {
+    "header_genre": {
       "default": "Жанр"
     },
     "button_text_browse_lists": {
@@ -529,7 +517,7 @@
         }
       }
     },
-    "streaming_service_logo": {
+    "image_alt_streaming_service_logo": {
       "default": "{service} лого",
       "variables": {
         "service": {
@@ -537,235 +525,235 @@
         }
       }
     },
-    "director": {
+    "header_director": {
       "default": "Режисьор"
     },
-    "writer": {
+    "header_writer": {
       "default": "Сценарист"
     },
-    "creator": {
+    "header_creator": {
       "default": "Създател"
     },
-    "job_action_director": {
+    "translated_value_job_action_director": {
       "default": "Снимачен режисьор"
     },
-    "job_additional_second_assistant_director": {
+    "translated_value_job_additional_second_assistant_director": {
       "default": "Допълнителен втори помощник-режисьор"
     },
-    "job_additional_third_assistant_director": {
+    "translated_value_job_additional_third_assistant_director": {
       "default": "Допълнителен трети помощник-режисьор"
     },
-    "job_assistant_director": {
+    "translated_value_job_assistant_director": {
       "default": "Помощник-режисьор"
     },
-    "job_assistant_director_trainee": {
+    "translated_value_job_assistant_director_trainee": {
       "default": "Стажант помощник-режисьор"
     },
-    "job_co_director": {
+    "translated_value_job_co_director": {
       "default": "Съ-режисьор"
     },
-    "job_continuity": {
+    "translated_value_job_continuity": {
       "default": "Продължителност"
     },
-    "job_crowd_assistant_director": {
+    "translated_value_job_crowd_assistant_director": {
       "default": "Помощник-режисьор масовка"
     },
-    "job_director": {
+    "translated_value_job_director": {
       "default": "Режисьор"
     },
-    "job_field_director": {
+    "translated_value_job_field_director": {
       "default": "Полеви режисьор"
     },
-    "job_first_assistant_director": {
+    "translated_value_job_first_assistant_director": {
       "default": "Първи-помощник режисьор"
     },
-    "job_first_assistant_director_trainee_prep": {
+    "translated_value_job_first_assistant_director_trainee_prep": {
       "default": "Първи помощник-режисьор (подготовка)"
     },
-    "job_first_assistant_director_trainee": {
+    "translated_value_job_first_assistant_director_trainee": {
       "default": "Стажант първи помощник-режисьор"
     },
-    "job_insert_unit_director": {
+    "translated_value_job_insert_unit_director": {
       "default": "Режисьор вмъкване"
     },
-    "job_insert_unit_first_assistant_director": {
+    "translated_value_job_insert_unit_first_assistant_director": {
       "default": "Първи асистент-режисьор на вмъкване"
     },
-    "job_layout": {
+    "translated_value_job_layout": {
       "default": "Оформление"
     },
-    "job_other": {
+    "translated_value_job_other": {
       "default": "Други"
     },
-    "job_script_coordinator": {
+    "translated_value_job_script_coordinator": {
       "default": "Координатор сценарий"
     },
-    "job_script_supervisor": {
+    "translated_value_job_script_supervisor": {
       "default": "Надзорник сценарий"
     },
-    "job_second_assistant_director": {
+    "translated_value_job_second_assistant_director": {
       "default": "Втори помощник-режисьор"
     },
-    "job_second_assistant_director_trainee": {
+    "translated_value_job_second_assistant_director_trainee": {
       "default": "Стажант втори помощник-режисьор"
     },
-    "job_second_second_assistant_director": {
+    "translated_value_job_second_second_assistant_director": {
       "default": "Втори-втори помощник-режисьор"
     },
-    "job_second_unit_director": {
+    "translated_value_job_second_unit_director": {
       "default": "Режисьор, второ звено"
     },
-    "job_second_unit_first_assistant_director": {
+    "translated_value_job_second_unit_first_assistant_director": {
       "default": "Първи асистент-режисьор, второ звено"
     },
-    "job_series_director": {
+    "translated_value_job_series_director": {
       "default": "Режисьор на поредицата"
     },
-    "job_series_guest_director": {
+    "translated_value_job_series_guest_director": {
       "default": "Специален гост режисьор"
     },
-    "job_stage_director": {
+    "translated_value_job_stage_director": {
       "default": "Режисьор сцена"
     },
-    "job_third_assistant_director": {
+    "translated_value_job_third_assistant_director": {
       "default": "Трети помощник-режисьор"
     },
-    "job_adaptation": {
+    "translated_value_job_adaptation": {
       "default": "Екранизация"
     },
-    "job_author": {
+    "translated_value_job_author": {
       "default": "Автор"
     },
-    "job_book": {
+    "translated_value_job_book": {
       "default": "Книга"
     },
-    "job_characters": {
+    "translated_value_job_characters": {
       "default": "Герои"
     },
-    "job_co_writer": {
+    "translated_value_job_co_writer": {
       "default": "Съ-автор"
     },
-    "job_comic_book": {
+    "translated_value_job_comic_book": {
       "default": "Комикс"
     },
-    "job_creative_producer": {
+    "translated_value_job_creative_producer": {
       "default": "Креативен продуцент"
     },
-    "job_dialogue": {
+    "translated_value_job_dialogue": {
       "default": "Диалог"
     },
-    "job_executive_story_editor": {
+    "translated_value_job_executive_story_editor": {
       "default": "Изпълнителен редактор на историята"
     },
-    "job_graphic_novel": {
+    "translated_value_job_graphic_novel": {
       "default": "Графинчна новела"
     },
-    "job_head_of_story": {
+    "translated_value_job_head_of_story": {
       "default": "Ръководител - История"
     },
-    "job_idea": {
+    "translated_value_job_idea": {
       "default": "Идея"
     },
-    "job_junior_story_editor": {
+    "translated_value_job_junior_story_editor": {
       "default": "Младши редактор - История"
     },
-    "job_lyricist": {
+    "translated_value_job_lyricist": {
       "default": "Лирик"
     },
-    "job_musical": {
+    "translated_value_job_musical": {
       "default": "Мюзикъл"
     },
-    "job_novel": {
+    "translated_value_job_novel": {
       "default": "Роман"
     },
-    "job_opera": {
+    "translated_value_job_opera": {
       "default": "Опера"
     },
-    "job_original_concept": {
+    "translated_value_job_original_concept": {
       "default": "Оригинална концепция"
     },
-    "job_original_film_writer": {
+    "translated_value_job_original_film_writer": {
       "default": "Оригинален сценарист на филма"
     },
-    "job_original_series_creator": {
+    "translated_value_job_original_series_creator": {
       "default": "Оригинален сценарист на предаването"
     },
-    "job_original_original_story": {
+    "translated_value_job_original_original_story": {
       "default": "Оригинална история"
     },
-    "job_scenario_writer": {
+    "translated_value_job_scenario_writer": {
       "default": "Автор на сценарии"
     },
-    "job_screenplay": {
+    "translated_value_job_screenplay": {
       "default": "Сценарий"
     },
-    "job_screenstory": {
+    "translated_value_job_screenstory": {
       "default": "Скрийнстори"
     },
-    "job_script_consultant": {
+    "translated_value_job_script_consultant": {
       "default": "Консултант сценарий"
     },
-    "job_script_editor": {
+    "translated_value_job_script_editor": {
       "default": "Редактор сценарий"
     },
-    "job_senior_story_editor": {
+    "translated_value_job_senior_story_editor": {
       "default": "Старши редактор сценарий"
     },
-    "job_series_composition": {
+    "translated_value_job_series_composition": {
       "default": "Сериен състав"
     },
-    "job_short_story": {
+    "translated_value_job_short_story": {
       "default": "Кратка история"
     },
-    "job_staff_writer": {
+    "translated_value_job_staff_writer": {
       "default": "Главен сценарист"
     },
-    "job_story": {
+    "translated_value_job_story": {
       "default": "История"
     },
-    "job_story_story_artist": {
+    "translated_value_job_story_story_artist": {
       "default": "Артист - история"
     },
-    "job_story_story_consultant": {
+    "translated_value_job_story_story_consultant": {
       "default": "Консултант - история"
     },
-    "job_story_story_coordinator": {
+    "translated_value_job_story_story_coordinator": {
       "default": "Координатор - история"
     },
-    "job_story_story_developer": {
+    "translated_value_job_story_story_developer": {
       "default": "Разработил историята"
     },
-    "job_story_story_editor": {
+    "translated_value_job_story_story_editor": {
       "default": "Редактор - история"
     },
-    "job_story_story_manager": {
+    "translated_value_job_story_story_manager": {
       "default": "Ръководител - историята"
     },
-    "job_story_story_supervisor": {
+    "translated_value_job_story_story_supervisor": {
       "default": "Надзорник - историята"
     },
-    "job_storyboard": {
+    "translated_value_job_storyboard": {
       "default": "Сториборд"
     },
-    "job_teleplay": {
+    "translated_value_job_teleplay": {
       "default": "Телесценарий"
     },
-    "job_texte": {
+    "translated_value_job_texte": {
       "default": "Текст"
     },
-    "job_theatre_play": {
+    "translated_value_job_theatre_play": {
       "default": "Театрална пиеса"
     },
-    "job_writer": {
+    "translated_value_job_writer": {
       "default": "Сценарист"
     },
-    "job_writers_assistant": {
+    "translated_value_job_writers_assistant": {
       "default": "Асистент-сценарист"
     },
-    "job_writers_production": {
+    "translated_value_job_writers_production": {
       "default": "Продукция на сценария"
     },
-    "job_creator": {
+    "translated_value_job_creator": {
       "default": "Създател"
     },
     "button_text_remove_from_history": {
@@ -806,7 +794,7 @@
     "list_title_seasons": {
       "default": "Сезони"
     },
-    "season_number_label": {
+    "text_season_number": {
       "default": "Сезон {number}",
       "variables": {
         "number": {
@@ -814,10 +802,10 @@
         }
       }
     },
-    "season_specials": {
+    "text_season_specials": {
       "default": "Специални"
     },
-    "expand_media_overview": {
+    "button_label_expand_media_overview": {
       "default": "Разшири прегледа на {title}",
       "variables": {
         "title": {
@@ -825,7 +813,7 @@
         }
       }
     },
-    "season_episode_number_label": {
+    "text_season_episode_number": {
       "default": "Сезон {season} • Епизод {number}",
       "variables": {
         "season": {
@@ -836,7 +824,7 @@
         }
       }
     },
-    "share_title": {
+    "button_label_share": {
       "default": "Сподели {title}",
       "variables": {
         "title": {
@@ -844,49 +832,49 @@
         }
       }
     },
-    "status": {
+    "header_status": {
       "default": "Статус"
     },
-    "status_released": {
+    "translated_value_status_released": {
       "default": "На екран"
     },
-    "status_planned": {
+    "translated_value_status_planned": {
       "default": "Планиран"
     },
-    "status_post_production": {
+    "translated_value_status_post_production": {
       "default": "Постпродукция"
     },
-    "status_canceled": {
+    "translated_value_status_canceled": {
       "default": "Отменен"
     },
-    "status_in_production": {
+    "translated_value_status_in_production": {
       "default": "В производство"
     },
-    "status_rumored": {
+    "translated_value_status_rumored": {
       "default": "Слух"
     },
-    "status_ended": {
+    "translated_value_status_ended": {
       "default": "Приключил"
     },
-    "status_returning_series": {
+    "translated_value_status_returning_series": {
       "default": "Завръщащо се предаване"
     },
-    "status_pilot": {
+    "translated_value_status_pilot": {
       "default": "Пилотен епизод"
     },
-    "status_continuing": {
+    "translated_value_status_continuing": {
       "default": "Продължаващ"
     },
-    "status_upcoming": {
+    "translated_value_status_upcoming": {
       "default": "Предстои"
     },
-    "status_unknown": {
+    "translated_value_status_unknown": {
       "default": "Непознат"
     },
-    "expected_premiere": {
+    "header_expected_premiere": {
       "default": "Очаквана премиера"
     },
-    "person_headshot": {
+    "image_alt_person_headshot": {
       "default": "Портрет на {person}",
       "variables": {
         "person": {
@@ -905,10 +893,10 @@
         }
       }
     },
-    "view_all_trending_movies": {
+    "button_label_view_all_trending_movies": {
       "default": "Виж всички популярни филми в момента"
     },
-    "view_all_trending_shows": {
+    "button_label_view_all_trending_shows": {
       "default": "Виж всички популярни предавания в момента"
     },
     "list_title_trending_shows": {
@@ -931,16 +919,16 @@
         }
       }
     },
-    "view_all_recommended_movies": {
+    "button_label_view_all_recommended_movies": {
       "default": "Виж всички препоръчани филми"
     },
-    "view_all_recommended_shows": {
+    "button_label_view_all_recommended_shows": {
       "default": "Виж всички препоръчани предавания"
     },
-    "view_all_anticipated_movies": {
+    "button_label_view_all_anticipated_movies": {
       "default": "Виж всички очаквани филми"
     },
-    "view_all_anticipated_shows": {
+    "button_label_view_all_anticipated_shows": {
       "default": "Виж всички очаквани предавания"
     },
     "list_title_anticipated_movies": {
@@ -949,10 +937,10 @@
     "list_title_anticipated_shows": {
       "default": "Очаквани предавания"
     },
-    "view_all_popular_movies": {
+    "button_label_view_all_popular_movies": {
       "default": "Виж всички популярни филми"
     },
-    "view_all_popular_shows": {
+    "button_label_view_all_popular_shows": {
       "default": "Виж всички популярни предаавания"
     },
     "list_title_popular_movies": {
@@ -961,7 +949,7 @@
     "list_title_popular_shows": {
       "default": "Популярни предавания"
     },
-    "rate_now": {
+    "header_rate_now": {
       "default": "Оцени сега"
     },
     "button_text_add_to_favorites": {
@@ -1018,19 +1006,19 @@
     "list_title_your_watchlist_movies": {
       "default": "Филми, които наблюдаваш"
     },
-    "view_all_watchlist_movies": {
+    "button_label_view_all_watchlist_movies": {
       "default": "Виж всички филми, които наблюдаваш"
     },
-    "view_all_watchlist_shows": {
+    "button_label_view_all_watchlist_shows": {
       "default": "Виж всички предавания, които наблюдаваш"
     },
-    "streaming": {
+    "header_streaming": {
       "default": "Стрийминг"
     },
-    "on_demand": {
+    "header_on_demand": {
       "default": "При поискване"
     },
-    "media_popup_label": {
+    "button_label_popup_media": {
       "default": "Изскачащо меню за {title}",
       "variables": {
         "title": {
@@ -1049,10 +1037,10 @@
         }
       }
     },
-    "by": {
+    "text_by": {
       "default": "по"
     },
-    "users_avatar": {
+    "image_alt_user_avatar": {
       "default": "Аватара на {username}",
       "variables": {
         "username": {
@@ -1060,7 +1048,7 @@
         }
       }
     },
-    "media_poster": {
+    "image_alt_media_poster": {
       "default": "{title} плакат",
       "variables": {
         "title": {
@@ -1071,76 +1059,76 @@
     "list_placeholder_comments": {
       "default": "Все още няма коментари"
     },
-    "review_by": {
+    "text_review_by": {
       "default": "Прегледай по"
     },
-    "shout_by": {
+    "text_shout_by": {
       "default": "Вик от"
     },
-    "deleted_user": {
+    "text_deleted_username": {
       "default": "Изтрит"
     },
     "list_title_social_activity": {
       "default": "Социална активност"
     },
-    "view_all_social_activity": {
+    "button_label_view_all_social_activity": {
       "default": "Виж цялата социална активност"
     },
     "dropdown_label_person_position": {
       "default": "Позиция"
     },
-    "position_acting": {
+    "translated_value_position_acting": {
       "default": "Играейки"
     },
-    "position_production": {
+    "translated_value_position_production": {
       "default": "Продукция"
     },
-    "position_art": {
+    "translated_value_position_art": {
       "default": "Изкуство"
     },
-    "position_crew": {
+    "translated_value_position_crew": {
       "default": "Екип"
     },
-    "position_costume___make_up": {
+    "translated_value_position_costume___make_up": {
       "default": "Костюми и грим"
     },
-    "position_directing": {
+    "translated_value_position_directing": {
       "default": "Режисирано от"
     },
-    "position_writing": {
+    "translated_value_position_writing": {
       "default": "Сценарий"
     },
-    "position_sound": {
+    "translated_value_position_sound": {
       "default": "Звук"
     },
-    "position_camera": {
+    "translated_value_position_camera": {
       "default": "Камера"
     },
-    "position_lighting": {
+    "translated_value_position_lighting": {
       "default": "Осветление"
     },
-    "position_visual_effects": {
+    "translated_value_position_visual_effects": {
       "default": "Визуални ефекти"
     },
-    "position_editing": {
+    "translated_value_position_editing": {
       "default": "Редакция"
     },
-    "position_creator": {
+    "translated_value_position_creator": {
       "default": "Създател"
     },
-    "position_created_by": {
+    "translated_value_position_created_by": {
       "default": "Създадено от"
     },
     "list_title_personal_lists": {
       "default": "Лични"
     },
-    "collaborative_lists": {
+    "list_title_collaborative_lists": {
       "default": "Сътрудничества"
     },
-    "liked_lists": {
+    "list_title_liked_lists": {
       "default": "Харесани"
     },
-    "share_movie": {
+    "text_share_movie": {
       "default": "Току-що открих {title} - трябва да видиш това! 🎬",
       "variables": {
         "title": {
@@ -1148,7 +1136,7 @@
         }
       }
     },
-    "share_show": {
+    "text_share_show": {
       "default": "Намерих това страхотно шоу: {title}!📺",
       "variables": {
         "title": {
@@ -1156,7 +1144,7 @@
         }
       }
     },
-    "share_episode": {
+    "text_share_episode": {
       "default": "Току-що гледах {show} S{season}E{episode} - {title}! 🔥",
       "variables": {
         "show": {
@@ -1173,7 +1161,15 @@
         }
       }
     },
-    "share_person": {
+    "text_share_person": {
+      "default": "Виж {name} в Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_profile": {
       "default": "Виж {name} в Trakt! 🎭",
       "variables": {
         "name": {
@@ -1184,31 +1180,31 @@
     "list_title_recently_watched": {
       "default": "Наскоро гледано"
     },
-    "view_all_recently_watched": {
+    "button_label_view_all_recently_watched": {
       "default": "Преглед на всички наскоро гледани"
     },
     "list_title_available_now": {
       "default": "Достъпно сега"
     },
-    "view_all_released_movies": {
+    "button_label_view_all_released_movies": {
       "default": "Виж всички филми, налични сега"
     },
-    "view_all_unreleased_movies": {
+    "button_label_view_all_unreleased_movies": {
       "default": "Виж всички филми, които ще се появят скоро"
     },
-    "switch_to_og": {
+    "switch_label_to_og": {
       "default": "Смени на Trakt.tv"
     },
     "tag_text_preview": {
       "default": "Предварителен преглед"
     },
-    "preview_description": {
+    "tooltip_text_preview_feature": {
       "default": "Тази функция все още се обновява, гражданино. Работим върху потребителския интерфейс, за да го накараме да запее като ангелски хор (или поне да функционира гладко, без да предизвиква екзистенциален ужас)."
     },
-    "airs": {
+    "header_airs": {
       "default": "Излъчва се"
     },
-    "aired": {
+    "header_aired": {
       "default": "Излъчено"
     },
     "warning_prompt_drop_show": {
@@ -1230,16 +1226,13 @@
     "button_text_drop_show": {
       "default": "Премахни следването"
     },
-    "enable_up_next_nitro_label": {
-      "default": "Активирай Up Next Nitro - най-бързият начин да гледате предаванията си"
-    },
-    "lab_up_next_nitro_label": {
+    "switch_label_up_next_nitro": {
       "default": "Активирай Up Next Nitro"
     },
-    "lab_up_next_nitro_message": {
+    "tooltip_text_up_next_nitro": {
       "default": "Този експеримент е надграждане на производителността, което подобрява работата на всички потребители."
     },
-    "lab_up_next_nitro_hidden_message": {
+    "tooltip_text_up_next_nitro_hidden": {
       "default": "Поради вътрешни промени в дизайна, скритите преди това предавания вече ще се виждат в списъка с черно-бяла миниатюра, за да ги откривате бързо, с възможност да ги премахнете или да ги изхвърлите от списъка."
     },
     "warning_prompt_restore_show": {
@@ -1261,7 +1254,7 @@
     "button_text_restore_show": {
       "default": "Възстанови предаване"
     },
-    "mark_as_watched_show_warning": {
+    "warning_prompt_mark_as_watched_show": {
       "default": "Сигурни ли сте, че искате да отбележите {title} като гледан? Това ще отбележи всички епизоди като гледани.",
       "variables": {
         "title": {
@@ -1269,7 +1262,7 @@
         }
       }
     },
-    "mark_as_watched_show_until_warning": {
+    "warning_prompt_mark_as_watched_show_until": {
       "default": "Сигурни ли сте, че искате да маркирате всички невидяни епизоди на {title} като гледани до епизод {episode}? Това ще отбележи {count} епизода като гледани.",
       "variables": {
         "title": {
@@ -1283,7 +1276,7 @@
         }
       }
     },
-    "mark_as_watched_multiple_episodes_warning": {
+    "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Сигурни ли сте, че искате да отбележите {count} епизоди като гледани?",
       "variables": {
         "count": {
@@ -1319,7 +1312,7 @@
         }
       }
     },
-    "close_label": {
+    "button_label_close": {
       "default": "Затвори"
     },
     "button_label_comment_replies": {
@@ -1339,7 +1332,7 @@
     "dialog_title_comments": {
       "default": "Коментари"
     },
-    "comment": {
+    "dialog_title_comment": {
       "default": "Коментар"
     },
     "button_text_comment_reply": {
@@ -1353,31 +1346,31 @@
         }
       }
     },
-    "comment_reply_placeholder": {
+    "textarea_placeholder_reply": {
       "default": "Отговор..."
     },
-    "comment_post_label": {
+    "button_label_add_new_comment": {
       "default": "Добави коментар"
     },
-    "comment_post_placeholder": {
+    "textarea_placeholder_comment": {
       "default": "Коментар..."
     },
-    "comment_mark_as_spoiler": {
+    "switch_label_mark_as_spoiler": {
       "default": "Маркирай като спойлер"
     },
-    "comment_spoiler": {
+    "text_spoiler": {
       "default": "Спойлер"
     },
-    "comment_close_error_label": {
+    "button_label_close_error": {
       "default": "Затвори грешката"
     },
-    "comment_post_reply_label": {
+    "button_label_post_reply": {
       "default": "Публикувай отговор"
     },
-    "error_comment_invalid_content": {
+    "translated_value_error_comment_invalid_content": {
       "default": "Коментарите трябва да са поне 5 думи и на английски."
     },
-    "error_comment_unknown": {
+    "translated_value_error_comment_unknown": {
       "default": "Възникна грешка при публикуването на вашия коментар. Моля, опитайте отново по-късно."
     },
     "page_title_user_profile": {
@@ -1388,10 +1381,10 @@
         }
       }
     },
-    "private_profile": {
+    "header_private_profile": {
       "default": "Този профил е личен"
     },
-    "private_profile_description": {
+    "text_private_profile_description": {
       "default": "Като че ли нямаше достатъчно скрито. Тайните на {username} остават само техни.",
       "variables": {
         "username": {
@@ -1399,16 +1392,16 @@
         }
       }
     },
-    "original_title": {
+    "header_original_title": {
       "default": "Оригинално Заглавие"
     },
-    "view_all_comments": {
+    "button_label_view_all_comments": {
       "default": "Виж всички коментари"
     },
     "button_text_remove_from_list": {
       "default": "Премахни от списъка"
     },
-    "remove_from_list_label": {
+    "button_label_remove_from_list": {
       "default": "Премахни {title} от списъка",
       "variables": {
         "title": {
@@ -1419,10 +1412,10 @@
     "page_title_service_unavailable": {
       "default": "Услугата Trakt е недостъпна"
     },
-    "error_page_service_message": {
+    "error_text_service_unavailable": {
       "default": "Връзката... отсъства. Като забравен спомен."
     },
-    "error_page_service_status": {
+    "link_text_service_status": {
       "default": "Състояние на услугата Trakt"
     },
     "button_text_retry": {
@@ -1431,13 +1424,13 @@
     "button_label_retry": {
       "default": "Опитай отново"
     },
-    "community_sentiment": {
+    "header_community_sentiment": {
       "default": "Обществено мнение"
     },
-    "lists_action_label": {
+    "button_text_lists": {
       "default": "Списъци"
     },
-    "listed": {
+    "button_text_listed": {
       "default": "В списъка"
     },
     "dropdown_label_add_remove_from_lists": {
@@ -1448,7 +1441,7 @@
         }
       }
     },
-    "add_to_personal_list_label": {
+    "button_label_add_to_personal_list": {
       "default": "Добави {title} в {list}",
       "variables": {
         "title": {
@@ -1459,7 +1452,7 @@
         }
       }
     },
-    "remove_from_personal_list_label": {
+    "button_label_remove_from_personal_list": {
       "default": "Премахни {title} от {list}",
       "variables": {
         "title": {
@@ -1481,13 +1474,13 @@
         }
       }
     },
-    "theme_light": {
+    "option_text_theme_light": {
       "default": "Светла"
     },
-    "theme_dark": {
+    "option_text_theme_dark": {
       "default": "Тъмна"
     },
-    "theme_system": {
+    "option_text_theme_system": {
       "default": "Система"
     },
     "button_text_filters": {
@@ -1499,7 +1492,7 @@
     "button_label_reset_filter": {
       "default": "Изчисти"
     },
-    "results_for_title": {
+    "text_search_results_for": {
       "default": "Резултати за {query}",
       "variables": {
         "query": {
@@ -1507,58 +1500,55 @@
         }
       }
     },
-    "type_movie": {
+    "translated_value_type_movie": {
       "default": "Филм"
     },
-    "type_show": {
+    "translated_value_type_show": {
       "default": "Сериал"
     },
     "page_title_sign_in": {
       "default": "Вход"
     },
-    "code_retry_title": {
+    "header_device_auth_failed": {
       "default": "Нещо се обърка"
     },
-    "code_retry_message": {
+    "header_device_auth_try_again": {
       "default": "Активацията беше отказана, изтече или се случи нещо непредвидимо. Моля, опитайте отново."
     },
-    "code_instruction": {
+    "header_device_auth_qr_instruction": {
       "default": "Сканирайте QR кода или влезте в: "
     },
-    "code_label": {
+    "header_device_auth_code_instruction": {
       "default": "и въведете следния код:"
     },
-    "filter_all": {
+    "option_text_all": {
       "default": "Всички"
     },
-    "filters_title": {
+    "header_filters": {
       "default": "Филтри"
     },
-    "ignore_watched": {
+    "header_ignore_watched": {
       "default": "Пренебрегвай гледаното"
     },
-    "ignore_watchlisted": {
+    "header_ignore_watchlisted": {
       "default": "Пренебрегвай в списъка за гледане"
     },
-    "watchnow_filter_label": {
-      "default": "Наличност"
-    },
-    "watchnow_favorites_only": {
+    "option_text_my_favorites": {
       "default": "Само любими"
     },
-    "watchnow_digital_release": {
+    "option_text_all_digital_releases": {
       "default": "Всички цифрови издания"
     },
-    "watchnow_streaming": {
+    "option_text_streaming_now": {
       "default": "Стрийминг в момента"
     },
-    "decade": {
+    "header_decade": {
       "default": "Десетилетие"
     },
-    "ratings": {
+    "header_ratings": {
       "default": "Оценки"
     },
-    "view_all_items_in": {
+    "button_label_view_all_items_in": {
       "default": "Виж всички в {title}",
       "variables": {
         "title": {
@@ -1572,28 +1562,28 @@
     "button_label_reset_all_filters": {
       "default": "Нулиране на всички филтри"
     },
-    "video_type_trailer": {
+    "translated_value_video_type_trailer": {
       "default": "Трейлър"
     },
-    "video_type_clip": {
+    "translated_value_video_type_clip": {
       "default": "Клип"
     },
-    "video_type_teaser": {
+    "translated_value_video_type_teaser": {
       "default": "Тийзър"
     },
-    "video_type_featurette": {
+    "translated_value_video_type_featurette": {
       "default": "Фичуретка"
     },
-    "video_type_recap": {
+    "translated_value_video_type_recap": {
       "default": "Резюме"
     },
-    "video_type_behind_the_scenes": {
+    "translated_value_video_type_behind_the_scenes": {
       "default": "Зад кулисите"
     },
-    "now_playing": {
+    "header_now_playing": {
       "default": "В ефир"
     },
-    "remaining": {
+    "text_remaining": {
       "default": "оставащ"
     },
     "button_text_checkin": {
@@ -1607,7 +1597,7 @@
         }
       }
     },
-    "cookie_notice": {
+    "text_cookie_notice": {
       "default": "Trakt използва C🍪🍪KIES, за да подобри цялостното ви изживяване. Можете да <a>прочетете повече информация</a> тук."
     },
     "button_text_cookie_accept": {
@@ -1634,10 +1624,13 @@
     "button_label_settings": {
       "default": "Настройки"
     },
-    "settings_spoilers_title": {
+    "header_spoilers": {
       "default": "Спойлери"
     },
-    "settings_spoilers_label": {
+    "text_show_spoilers": {
+      "default": "Показвай спойлери"
+    },
+    "switch_label_spoilers": {
       "default": "Показвай спойлери"
     },
     "button_text_save_filters": {
@@ -1649,13 +1642,13 @@
     "page_title_account_locked": {
       "default": "Акаунтът е заключен"
     },
-    "error_page_locked_account_message": {
+    "error_text_locked_account": {
       "default": "Вашият акаунт е заключен, <a>свържете се с поддръжката</a>, за да разрешите този проблем."
     },
-    "first_play_this_month": {
+    "text_first_play_this_month": {
       "default": "Първо пускане този месец"
     },
-    "shows_watched": {
+    "text_shows_watched": {
       "default": "{count} гледани сериали",
       "variables": {
         "count": {
@@ -1693,10 +1686,10 @@
         }
       }
     },
-    "vip_upsell_title": {
+    "text_vip_upsell": {
       "default": "Отключете VIP функции, за да подобрите изживяването си с Trakt"
     },
-    "vip_upsell_description": {
+    "text_vip_upsell_description": {
       "default": "Искате ли да видите своя месечен и годишен преглед? И да получите достъп до много други функции? Регистрирайте се за Trakt VIP."
     },
     "list_title_following": {
@@ -1708,7 +1701,10 @@
     "list_placeholder_followers": {
       "default": "Тук няма никой (още)."
     },
-    "read_more": {
+    "list_placeholder_following": {
+      "default": "Тук (все още) няма никой."
+    },
+    "button_label_read_more": {
       "default": "Прочети още"
     },
     "button_text_add_comment": {
@@ -1717,10 +1713,10 @@
     "button_label_add_comment": {
       "default": "Добави коментар"
     },
-    "rename_list": {
+    "input_prompt_rename_list": {
       "default": "Преименувайте списъка си"
     },
-    "rename_list_label": {
+    "button_label_rename_list": {
       "default": "Преименувайте списъка си {name}",
       "variables": {
         "name": {
@@ -1737,10 +1733,10 @@
     "list_title_hot_shows": {
       "default": "Активни сериали този месец"
     },
-    "view_all_hot_shows": {
+    "button_label_view_all_hot_shows": {
       "default": "Вижте всички активни сериали"
     },
-    "view_all_hot_movies": {
+    "button_label_view_all_hot_movies": {
       "default": "Вижте всички активни филми"
     },
     "list_title_extras": {
@@ -1807,6 +1803,18 @@
           "type": "string"
         }
       }
+    },
+    "dropdown_label_extras": {
+      "default": "Екстри"
+    },
+    "button_label_rating_bad": {
+      "default": "Оцени като лошо"
+    },
+    "button_label_rating_good": {
+      "default": "Оцени като добро"
+    },
+    "button_label_rating_great": {
+      "default": "Оцени като страхотно"
     }
   }
 }

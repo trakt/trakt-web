@@ -18,7 +18,7 @@
 
 {#if $isMounted}
   <Tooltip
-    content={m.preview_description()}
+    content={m.tooltip_text_preview_feature()}
     theme="preview-tooltip"
     hideOnClickOutside={true}
     action={tooltipAction}

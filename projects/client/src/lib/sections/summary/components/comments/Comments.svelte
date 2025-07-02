@@ -58,7 +58,7 @@
 
     {#snippet actions()}
       <ViewAllButton
-        label={m.view_all_comments()}
+        label={m.button_label_view_all_comments()}
         onclick={() => onDrilldown()}
       />
     {/snippet}

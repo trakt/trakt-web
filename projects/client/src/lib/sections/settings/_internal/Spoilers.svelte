@@ -10,12 +10,12 @@
   const innerText = $derived(getSwitchInnerText($spoilers.isHidden));
 </script>
 
-<SettingsBlock title={m.settings_spoilers_title()}>
-  <SettingsRow title={m.settings_spoilers_label()}>
+<SettingsBlock title={m.header_spoilers()}>
+  <SettingsRow title={m.text_show_spoilers()}>
     <Switch
       {innerText}
       color="purple"
-      label={m.settings_spoilers_label()}
+      label={m.switch_label_spoilers()}
       checked={!$spoilers.isHidden}
       onclick={() => $spoilers.set(!$spoilers.isHidden)}
       disabled={$isSavingSettings}

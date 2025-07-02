@@ -19,7 +19,7 @@
     <CardCover
       title={castMember.name}
       src={castMember.headShotUrl}
-      alt={`${m.person_headshot({ person: castMember.name })}`}
+      alt={`${m.image_alt_person_headshot({ person: castMember.name })}`}
     />
     <CardFooter>
       <p class="trakt-card-title ellipsis">

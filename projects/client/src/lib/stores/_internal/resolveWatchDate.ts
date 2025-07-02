@@ -11,7 +11,7 @@ export function resolveWatchDate(
       return 'released';
     case 'ask':
       return prompt(
-        m.mark_as_watched_ask_prompt(),
+        m.input_prompt_mark_as_watched_date(),
         now,
       ) ?? undefined;
     case 'now':

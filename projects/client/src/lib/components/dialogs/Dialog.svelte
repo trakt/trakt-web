@@ -33,7 +33,7 @@
       <h5 class="secondary">{title}</h5>
       <ActionButton
         onclick={() => $dialog.close()}
-        label={m.close_label()}
+        label={m.button_label_close()}
         style="ghost"
         --color-foreground-default="var(--color-text-secondary)"
       >

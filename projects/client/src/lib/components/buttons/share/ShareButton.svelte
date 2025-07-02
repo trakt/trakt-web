@@ -41,7 +41,7 @@
 </script>
 
 {#if isShareable}
-  <ActionButton label={m.share_title({ title })} onclick={share}>
+  <ActionButton label={m.button_label_share({ title })} onclick={share}>
     <ShareIcon />
   </ActionButton>
 {/if}

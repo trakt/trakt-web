@@ -137,9 +137,9 @@
         textFactory={({ title }) => {
           switch (type) {
             case "movie":
-              return m.share_movie({ title });
+              return m.text_share_movie({ title });
             case "show":
-              return m.share_show({ title });
+              return m.text_share_show({ title });
           }
         }}
       />

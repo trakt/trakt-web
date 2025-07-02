@@ -38,7 +38,7 @@
 
 {#snippet traktSwitch()}
   <Switch
-    label={m.switch_to_og()}
+    label={m.switch_label_to_og()}
     checked={true}
     innerText="Lite"
     onclick={() => {

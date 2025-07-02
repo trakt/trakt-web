@@ -6,11 +6,11 @@
 
 <div class="trakt-manual-sign-in">
   <div class="trakt-manual-sign-in-detail">
-    <h5>{m.code_instruction()}</h5>
+    <h5>{m.header_device_auth_qr_instruction()}</h5>
     <h4>{url}</h4>
   </div>
   <div class="trakt-manual-sign-in-detail">
-    <h5>{m.code_label()}</h5>
+    <h5>{m.header_device_auth_code_instruction()}</h5>
     <h1>{code}</h1>
   </div>
 </div>

@@ -12,7 +12,7 @@
   const mediaDetails = $derived(useMediaDetails(props));
 </script>
 
-<DetailsGrid title={m.details()}>
+<DetailsGrid title={m.header_details()}>
   {#each mediaDetails as { title, values }}
     {#if values && values.length > 0}
       <CollapsableValues category={title} {values}>

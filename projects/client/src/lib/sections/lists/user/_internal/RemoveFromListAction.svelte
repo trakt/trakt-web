@@ -24,7 +24,7 @@
   );
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
-    label: m.remove_from_list_label({ title }),
+    label: m.button_label_remove_from_list({ title }),
     color: $color,
     variant: $variant,
     onclick: removeFromList,

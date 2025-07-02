@@ -16,9 +16,9 @@
     </div>
   {/snippet}
   <div class="trakt-private-profile">
-    <p class="uppercase">{m.private_profile()}</p>
+    <p class="uppercase">{m.header_private_profile()}</p>
     <p class="small">
-      {m.private_profile_description({ username: profile.username })}
+      {m.text_private_profile_description({ username: profile.username })}
     </p>
   </div>
 </ProfileContainer>

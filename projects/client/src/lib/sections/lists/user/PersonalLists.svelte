@@ -20,9 +20,9 @@
       case "personal":
         return m.list_title_personal_lists();
       case "liked":
-        return m.liked_lists();
+        return m.list_title_liked_lists();
       case "collaboration":
-        return m.collaborative_lists();
+        return m.list_title_collaborative_lists();
       default:
         return "";
     }
