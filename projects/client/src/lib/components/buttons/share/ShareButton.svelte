@@ -8,14 +8,15 @@
   type ShareButtonProps = {
     title: string;
     textFactory: ({ title }: { title: string }) => string;
+    urlOverride?: string;
   };
 
-  const { title, textFactory }: ShareButtonProps = $props();
+  const { title, textFactory, urlOverride }: ShareButtonProps = $props();
 
   const data = $derived({
     title,
     text: textFactory({ title }),
-    url: page.url.toString(),
+    url: urlOverride ?? page.url.toString(),
   });
 
   const isShareable = $derived(

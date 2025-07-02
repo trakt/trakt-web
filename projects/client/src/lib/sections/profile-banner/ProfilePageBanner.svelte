@@ -4,6 +4,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import FollowUserButton from "./_internal/FollowUserButton.svelte";
   import ProfileImage from "./ProfileImage.svelte";
@@ -18,6 +19,7 @@
       ? m.profile_banner_greeting({ name: profile.name.first })
       : profile.name.first,
   );
+  const shareableSlug = $derived(isMe ? $user.slug : slug);
 </script>
 
 <div class="profile-page-banner-container">
@@ -49,6 +51,7 @@
       </RenderFor>
       <ShareButton
         title={profile.name.first}
+        urlOverride={UrlBuilder.profile.user(shareableSlug)}
         textFactory={({ title: name }) => m.share_person({ name })}
       />
     </div>
