@@ -22,28 +22,28 @@
 
   <TrendingList
     title={m.list_title_trending()}
-    drilldownLabel={m.view_all_trending_movies()}
+    drilldownLabel={m.button_label_view_all_trending_movies()}
     {type}
   />
   <HotList
     title={m.list_title_hot()}
-    drilldownLabel={m.view_all_hot_movies()}
+    drilldownLabel={m.button_label_view_all_hot_movies()}
     {type}
   />
   <RenderFor audience="authenticated">
     <RecommendedList
-      drilldownLabel={m.view_all_recommended_movies()}
+      drilldownLabel={m.button_label_view_all_recommended_movies()}
       title={m.list_title_recommendations()}
       {type}
     />
   </RenderFor>
   <AnticipatedList
-    drilldownLabel={m.view_all_anticipated_movies()}
+    drilldownLabel={m.button_label_view_all_anticipated_movies()}
     title={m.list_title_most_anticipated()}
     {type}
   />
   <PopularList
-    drilldownLabel={m.view_all_popular_movies()}
+    drilldownLabel={m.button_label_view_all_popular_movies()}
     title={m.list_title_most_popular()}
     {type}
   />

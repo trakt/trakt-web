@@ -115,7 +115,7 @@
       <ShareButton
         {title}
         textFactory={({ title }) =>
-          m.share_episode({
+          m.text_share_episode({
             title,
             show: showTitle,
             season: episode.season,
@@ -127,7 +127,7 @@
     <Link href={UrlBuilder.show(show.slug)}>
       <h6>{showTitle}</h6>
     </Link>
-    <p class="meta-info">{m.season_episode_number_label(episode)}</p>
+    <p class="meta-info">{m.text_season_episode_number(episode)}</p>
     <GenreList genres={show.genres} />
   </SummaryHeader>
 

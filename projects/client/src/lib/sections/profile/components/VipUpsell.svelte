@@ -7,10 +7,10 @@
 
 <div class="trakt-vip-upsell">
   <p class="uppercase">
-    {m.vip_upsell_title()}
+    {m.text_vip_upsell()}
   </p>
   <p>
-    {m.vip_upsell_description()}
+    {m.text_vip_upsell_description()}
   </p>
   <Button
     href={UrlBuilder.vip()}

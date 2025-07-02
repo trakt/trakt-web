@@ -41,7 +41,7 @@
 
 <div class="trakt-rate-now" data-dpad-navigation={DpadNavigationType.List}>
   {#if $isRateable}
-    <h6>{m.rate_now()}</h6>
+    <h6>{m.header_rate_now()}</h6>
     <div class="trakt-rate-actions" transition:fade={{ duration: 150 }}>
       {#each Object.values(SimpleRating) as simpleRating}
         <RateActionButton

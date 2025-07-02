@@ -26,7 +26,7 @@
           <CrossOriginImage
             animate={false}
             src={item.entry.poster.url.medium}
-            alt={m.media_poster({ title: item.entry.title })}
+            alt={m.image_alt_media_poster({ title: item.entry.title })}
           />
         </div>
       {/each}

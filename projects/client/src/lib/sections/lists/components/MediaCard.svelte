@@ -32,7 +32,7 @@
   {#if popupActions}
     <CardActionBar>
       {#snippet actions()}
-        <PopupMenu label={m.media_popup_label({ title: media.title })}>
+        <PopupMenu label={m.button_label_popup_media({ title: media.title })}>
           {#snippet items()}
             {@render popupActions()}
           {/snippet}
@@ -46,7 +46,7 @@
       title={media.title}
       src={mediaCoverImageUrl}
       overlaySrc={mediaCoverOverlay}
-      alt={m.media_poster({ title: media.title })}
+      alt={m.image_alt_media_poster({ title: media.title })}
       --color-card-cover-shadow={media.colors?.[1]}
       {badge}
     />

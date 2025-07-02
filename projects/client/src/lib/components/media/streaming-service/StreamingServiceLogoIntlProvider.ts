@@ -3,5 +3,5 @@ import type { StreamingServiceLogoIntl } from './StreamingServiceLogoIntl.ts';
 
 export const StreamingServiceLogoIntlProvider: StreamingServiceLogoIntl = {
   alt: (serviceName: string) =>
-    m.streaming_service_logo({ service: serviceName }),
+    m.image_alt_streaming_service_logo({ service: serviceName }),
 };

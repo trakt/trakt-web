@@ -13,7 +13,9 @@
   }: ListDropdownButtonProps = $props();
 
   const variant = $derived(isListed ? "primary" : "secondary");
-  const text = $derived(isListed ? m.listed() : m.lists_action_label());
+  const text = $derived(
+    isListed ? m.button_text_listed() : m.button_text_lists(),
+  );
 </script>
 
 <list-dropdown>

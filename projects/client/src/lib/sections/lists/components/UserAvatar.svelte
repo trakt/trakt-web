@@ -20,7 +20,7 @@
 >
   <CrossOriginImage
     src={user.avatar.url}
-    alt={m.users_avatar({ username: user.username })}
+    alt={m.image_alt_user_avatar({ username: user.username })}
   />
 
   {#if icon}

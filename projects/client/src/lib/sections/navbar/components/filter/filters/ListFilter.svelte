@@ -18,7 +18,7 @@
   const color = $derived(isFiltering ? "blue" : "default");
   const currentLabel = $derived(
     filter.options.find((option) => option.value === $currentValue)?.label ??
-      m.filter_all(),
+      m.option_text_all(),
   );
 
   const commonProps: ListFilterProps = $derived({

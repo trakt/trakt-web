@@ -28,17 +28,17 @@
 <figure class="profile-image">
   <!-- This should be the first element, else: HierarchyRequestError -->
   <figcaption class="visually-hidden">
-    {m.profile_banner_greeting({ name })}
+    {m.image_alt_user_avatar({ username: name })}
   </figcaption>
 
   {#if isEditable}
     <EditableImage
       {src}
-      alt={m.users_avatar({ username: name })}
+      alt={m.image_alt_user_avatar({ username: name })}
       onchange={handleImageUploaded}
     />
   {:else}
-    <CrossOriginImage {src} alt={m.users_avatar({ username: name })} />
+    <CrossOriginImage {src} alt={m.image_alt_user_avatar({ username: name })} />
   {/if}
 </figure>
 

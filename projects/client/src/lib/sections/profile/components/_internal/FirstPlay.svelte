@@ -8,7 +8,7 @@
 <div class="trakt-month-in-review-stat">
   <PlayIcon />
   <div class="trakt-month-in-review-stat-value">
-    <span class="meta-info">{m.first_play_this_month()}</span>
+    <span class="meta-info">{m.text_first_play_this_month()}</span>
     <h6>{title}</h6>
   </div>
 </div>

@@ -65,8 +65,8 @@
       id={userComment.id}
       commentType="reply"
       onCommentPost={reset}
-      placeholder={m.comment_reply_placeholder()}
-      label={m.comment_post_reply_label()}
+      placeholder={m.textarea_placeholder_reply()}
+      label={m.button_label_post_reply()}
     />
   {/if}
 {/snippet}

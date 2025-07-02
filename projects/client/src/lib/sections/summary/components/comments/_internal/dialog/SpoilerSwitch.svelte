@@ -13,10 +13,10 @@
 
 <div class="trakt-comment-spoiler">
   <p class="secondary meta-info" class:is-spoiler={enabled}>
-    {m.comment_spoiler()}
+    {m.text_spoiler()}
   </p>
   <Switch
-    label={m.comment_mark_as_spoiler()}
+    label={m.switch_label_mark_as_spoiler()}
     color="red"
     disabled={isReplying}
     checked={enabled}

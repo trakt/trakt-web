@@ -22,14 +22,14 @@ function getShowWarningMessage(
     const lastSeason = assertDefined(target.media.seasons.at(-1));
     const lastEpisode = assertDefined(lastSeason.episodes.at(-1));
 
-    return m.mark_as_watched_show_until_warning({
+    return m.warning_prompt_mark_as_watched_show_until({
       title,
       episode: `${lastSeason.number}x${lastEpisode.number}`,
       count: episodeCount,
     });
   }
 
-  return m.mark_as_watched_show_warning({ title });
+  return m.warning_prompt_mark_as_watched_show({ title });
 }
 
 export function getWarningMessage(
@@ -48,6 +48,8 @@ export function getWarningMessage(
   }
 
   return target.type === 'episode'
-    ? m.mark_as_watched_multiple_episodes_warning({ count: episodeCount })
+    ? m.warning_prompt_mark_as_watched_multiple_episodes({
+      count: episodeCount,
+    })
     : getShowWarningMessage(title, target);
 }

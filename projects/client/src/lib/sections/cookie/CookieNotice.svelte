@@ -30,7 +30,7 @@
     <div class="trakt-cookie">🍪</div>
     <p class="meta-info">
       <MessageWithLink
-        message={m.cookie_notice()}
+        message={m.text_cookie_notice()}
         href={UrlBuilder.og.privacy()}
         target="_blank"
       />

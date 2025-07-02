@@ -21,7 +21,7 @@
     {#if isCollapsable}
       <MoreButton
         i18n={MoreButtonIntlProvider}
-        label="{m.expand_category({ category: title })}}"
+        label="{m.button_label_expand_category({ category: title })}}"
         count={undefined}
         onExpand={() => expanded.set(true)}
         onCollapse={() => expanded.set(false)}

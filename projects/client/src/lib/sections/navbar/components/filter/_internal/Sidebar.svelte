@@ -60,7 +60,7 @@
       {title}
       <ActionButton
         onclick={() => isOpen.set(false)}
-        label={m.close_label()}
+        label={m.button_label_close()}
         style="ghost"
         navigationType={DpadNavigationType.Item}
         --color-foreground-default="var(--color-text-secondary)"

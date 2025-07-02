@@ -18,7 +18,7 @@
 <div class="trakt-sentiment-header">
   <CircularLogo variant="gradient" />
   <div class="trakt-sentiment-details">
-    <p>{m.community_sentiment()}</p>
+    <p>{m.header_community_sentiment()}</p>
     <div class="trakt-sentiment-distribution">
       <p class="meta-info sentiment-good">
         {toPercentage(goodFactor, languageTag())}

@@ -5,8 +5,8 @@
 </script>
 
 <div class="trakt-code-retry" data-dpad-navigation={DpadNavigationType.List}>
-  <h4>{m.code_retry_title()}</h4>
-  <h6>{m.code_retry_message()}</h6>
+  <h4>{m.header_device_auth_failed()}</h4>
+  <h6>{m.header_device_auth_try_again()}</h6>
   <Button
     variant="primary"
     color="purple"

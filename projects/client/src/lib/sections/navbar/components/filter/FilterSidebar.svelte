@@ -14,7 +14,7 @@
   const { filters } = useFilter();
 </script>
 
-<Sidebar {isOpen} title={m.filters_title()}>
+<Sidebar {isOpen} title={m.header_filters()}>
   {#each $filters as filter}
     {#if filter.type === "list"}
       <ListFilter {filter} />

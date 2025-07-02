@@ -7,9 +7,9 @@
 </script>
 
 <ErrorPage title={m.page_title_service_unavailable()}>
-  <p>{m.error_page_service_message()}</p>
+  <p>{m.error_text_service_unavailable()}</p>
   <Link href={UrlBuilder.og.status()} color="classic">
-    {m.error_page_service_status()}
+    {m.link_text_service_status()}
   </Link>
   <Button
     variant="primary"

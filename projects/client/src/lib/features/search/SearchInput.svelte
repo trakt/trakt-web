@@ -73,7 +73,7 @@
     class="trakt-search-input"
     type="search"
     defaultValue={$query}
-    placeholder={m.search_placeholder()}
+    placeholder={m.input_placeholder_search()}
     oninput={onSearch}
   />
 </div>

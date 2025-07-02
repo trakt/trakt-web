@@ -11,21 +11,21 @@
   <div class="trakt-watch-stat">
     <ShowIcon />
     <p class="uppercase ellipsis">
-      {m.episodes_watched({ count: monthToDate.episodeCount })}
+      {m.text_episodes_watched({ count: monthToDate.episodeCount })}
     </p>
   </div>
 
   <div class="trakt-watch-stat">
     <ShowIcon />
     <p class="uppercase ellipsis">
-      {m.shows_watched({ count: monthToDate.showCount })}
+      {m.text_shows_watched({ count: monthToDate.showCount })}
     </p>
   </div>
 
   <div class="trakt-watch-stat">
     <MovieIcon />
     <p class="uppercase ellipsis">
-      {m.movies_watched({ count: monthToDate.movieCount })}
+      {m.text_movies_watched({ count: monthToDate.movieCount })}
     </p>
   </div>
 </div>

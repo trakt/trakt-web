@@ -6,8 +6,8 @@
 </script>
 
 <ErrorPage title={m.page_title_error_404()}>
-  <p>{m.error_404_message()}</p>
+  <p>{m.error_text_404()}</p>
   <Link href={UrlBuilder.home()} color="classic">
-    {m.error_404_action()}
+    {m.link_text_back_to_safety()}
   </Link>
 </ErrorPage>

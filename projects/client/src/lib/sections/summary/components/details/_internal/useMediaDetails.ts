@@ -29,14 +29,14 @@ function originalTitle(media: MediaEntry) {
 function mediaAirDate(media: MediaEntry) {
   const isUpcomingItem = media.airDate > new Date();
   return {
-    title: isUpcomingItem ? m.expected_premiere() : m.premiered(),
+    title: isUpcomingItem ? m.header_expected_premiere() : m.header_premiered(),
     values: [toHumanDay(media.airDate, getLocale())],
   };
 }
 
 function mediaStatus(media: MediaEntry) {
   return {
-    title: m.status(),
+    title: m.header_status(),
     values: media.year && media.type === 'movie'
       ? undefined
       : [toTranslatedValue('status', media.status)],
@@ -46,14 +46,14 @@ function mediaStatus(media: MediaEntry) {
 function episodeAirDate(episode: EpisodeEntry) {
   const isUpcomingItem = episode.airDate > new Date();
   return {
-    title: isUpcomingItem ? m.airs() : m.aired(),
+    title: isUpcomingItem ? m.header_airs() : m.header_aired(),
     values: [toHumanDay(episode.airDate, getLocale())],
   };
 }
 
 function runtime(entry: MediaEntry | EpisodeEntry) {
   return {
-    title: m.runtime(),
+    title: m.header_runtime(),
     values: [toHumanDuration({ minutes: entry.runtime }, languageTag())],
   };
 }
@@ -75,14 +75,14 @@ function mainCredits(type: MediaType | 'episode', crew: MediaCrew) {
       case 'movie':
       case 'episode':
         return {
-          title: m.director(),
+          title: m.header_director(),
           values: crew.directors
             .filter((director) => onJob(director, 'Director'))
             .map(toCrewMemberWithJob),
         };
       case 'show':
         return {
-          title: m.creator(),
+          title: m.header_creator(),
           values: crew.creators
             .filter((creator) => onJob(creator, 'Creator'))
             .map(toCrewMemberWithJob),
@@ -93,7 +93,7 @@ function mainCredits(type: MediaType | 'episode', crew: MediaCrew) {
   return [
     creatorOrDirector(),
     {
-      title: m.writer(),
+      title: m.header_writer(),
       values: crew.writers.map(toCrewMemberWithJob),
     },
   ];
@@ -105,27 +105,27 @@ function metaDetails(
 ) {
   return [
     {
-      title: m.country(),
+      title: m.header_country(),
       values: media.country
         ? [toCountryName(media.country, languageTag())]
         : undefined,
     },
     {
-      title: m.language(),
+      title: m.header_language(),
       values: media.languages?.map((language) =>
         toLanguageName(language, languageTag())
       ),
     },
     {
-      title: m.original_title(),
+      title: m.header_original_title(),
       values: originalTitle(media),
     },
     {
-      title: m.studio(),
+      title: m.header_studio(),
       values: studios.map((studio) => studio.name),
     },
     {
-      title: m.genre(),
+      title: m.header_genre(),
       values: media.genres.map(GenreIntlProvider.genre),
     },
   ];

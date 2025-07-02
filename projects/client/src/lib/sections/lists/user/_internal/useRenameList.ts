@@ -18,7 +18,7 @@ export function useRenameList(list: MediaListSummary) {
   const renameList = async () => {
     // skipcq: JS-0052
     const enteredName = prompt(
-      m.rename_list(),
+      m.input_prompt_rename_list(),
       list.name,
     );
 

@@ -29,7 +29,7 @@
   <div class="trakt-comment-details">
     <div class="trakt-comment-user">
       <p class="small secondary">
-        {comment.isReview ? m.review_by() : m.shout_by()}
+        {comment.isReview ? m.text_review_by() : m.text_shout_by()}
       </p>
       <UserProfileLink user={comment.user} />
       {#if comment.user.isVip}

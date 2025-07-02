@@ -1,8 +1,8 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { SimpleRating } from "$lib/models/SimpleRating";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import UserRating from "../UserRating.svelte";
 
   const {
@@ -16,12 +16,23 @@
     isDisabled: boolean;
     onAddRating: (rating: SimpleRating) => void;
   } = $props();
+
+  const label = $derived.by(() => {
+    switch (rating) {
+      case SimpleRating.Bad:
+        return m.button_label_rating_bad();
+      case SimpleRating.Good:
+        return m.button_label_rating_good();
+      case SimpleRating.Great:
+        return m.button_label_rating_great();
+    }
+  });
 </script>
 
 <trakt-rate-button class:is-current-rating={isCurrentRating}>
   <ActionButton
     disabled={isDisabled}
-    label={toTranslatedValue("rating", rating)}
+    {label}
     onclick={() => onAddRating(rating)}
     style="flat"
     variant="primary"

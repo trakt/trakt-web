@@ -23,7 +23,9 @@
     {#if collection.target === "trending"}
       <TrendingList
         title={collection.title}
-        drilldownLabel={m.view_all_items_in({ title: collection.title })}
+        drilldownLabel={m.button_label_view_all_items_in({
+          title: collection.title,
+        })}
         type={collection.type}
         search={collection.params}
       />
@@ -32,7 +34,9 @@
     {#if collection.target === "anticipated"}
       <AnticipatedList
         title={collection.title}
-        drilldownLabel={m.view_all_items_in({ title: collection.title })}
+        drilldownLabel={m.button_label_view_all_items_in({
+          title: collection.title,
+        })}
         type={collection.type}
         search={collection.params}
       />
@@ -41,7 +45,9 @@
     {#if collection.target === "popular"}
       <PopularList
         title={collection.title}
-        drilldownLabel={m.view_all_items_in({ title: collection.title })}
+        drilldownLabel={m.button_label_view_all_items_in({
+          title: collection.title,
+        })}
         type={collection.type}
         search={collection.params}
       />

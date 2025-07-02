@@ -20,9 +20,9 @@
   const availableThemes = [Theme.Light, Theme.Dark, Theme.System];
 
   const themeToTitle: Record<Theme, string> = {
-    [Theme.Light]: m.theme_light(),
-    [Theme.Dark]: m.theme_dark(),
-    [Theme.System]: m.theme_system(),
+    [Theme.Light]: m.option_text_theme_light(),
+    [Theme.Dark]: m.option_text_theme_dark(),
+    [Theme.System]: m.option_text_theme_system(),
   };
 
   async function submitTheme(value: Theme) {

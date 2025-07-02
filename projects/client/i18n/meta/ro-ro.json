@@ -42,7 +42,7 @@
     "tag_text_mid_season_finale": {
       "default": "Final de mid-sezon"
     },
-    "profile_banner_greeting": {
+    "header_profile_banner_greeting": {
       "default": "Salut, {name}",
       "variables": {
         "name": {
@@ -78,13 +78,13 @@
     "page_title_error_404": {
       "default": "404: Nimic. Golul."
     },
-    "error_404_message": {
+    "error_text_404": {
       "default": "(Nu-ți face griji, se întâmplă și celor mai buni. Chiar și zeii digitali greșesc uneori.)"
     },
-    "error_404_action": {
+    "link_text_back_to_safety": {
       "default": "Întoarcere la siguranță..."
     },
-    "mark_as_watched_ask_prompt": {
+    "input_prompt_mark_as_watched_date": {
       "default": "Când ai terminat de urmărit? (AAAA-LL-ZZ HH:MM)"
     },
     "button_text_watchlist": {
@@ -123,115 +123,115 @@
         }
       }
     },
-    "genre_horror": {
+    "translated_value_genre_horror": {
       "default": "Horror"
     },
-    "genre_comedy": {
+    "translated_value_genre_comedy": {
       "default": "Comedie"
     },
-    "genre_action": {
+    "translated_value_genre_action": {
       "default": "Acțiune"
     },
-    "genre_adventure": {
+    "translated_value_genre_adventure": {
       "default": "Aventură"
     },
-    "genre_animation": {
+    "translated_value_genre_animation": {
       "default": "Animație"
     },
-    "genre_biography": {
+    "translated_value_genre_biography": {
       "default": "Biografie"
     },
-    "genre_children": {
+    "translated_value_genre_children": {
       "default": "Copii"
     },
-    "genre_crime": {
+    "translated_value_genre_crime": {
       "default": "Crima"
     },
-    "genre_documentary": {
+    "translated_value_genre_documentary": {
       "default": "Documentar"
     },
-    "genre_drama": {
+    "translated_value_genre_drama": {
       "default": "Dramă"
     },
-    "genre_family": {
+    "translated_value_genre_family": {
       "default": "Familie"
     },
-    "genre_fantasy": {
+    "translated_value_genre_fantasy": {
       "default": "Fantazie"
     },
-    "genre_game_show": {
+    "translated_value_genre_game_show": {
       "default": "Show de jocuri"
     },
-    "genre_history": {
+    "translated_value_genre_history": {
       "default": "Istorie"
     },
-    "genre_home_and_garden": {
+    "translated_value_genre_home_and_garden": {
       "default": "Acasă și grădină"
     },
-    "genre_holiday": {
+    "translated_value_genre_holiday": {
       "default": "Vacanță"
     },
-    "genre_music": {
+    "translated_value_genre_music": {
       "default": "Muzică"
     },
-    "genre_musical": {
+    "translated_value_genre_musical": {
       "default": "Muzical"
     },
-    "genre_mystery": {
+    "translated_value_genre_mystery": {
       "default": "Mister"
     },
-    "genre_news": {
+    "translated_value_genre_news": {
       "default": "Știri"
     },
-    "genre_none": {
+    "translated_value_genre_none": {
       "default": "Niciunul"
     },
-    "genre_reality": {
+    "translated_value_genre_reality": {
       "default": "Realitate"
     },
-    "genre_romance": {
+    "translated_value_genre_romance": {
       "default": "Dragoste"
     },
-    "genre_short": {
+    "translated_value_genre_short": {
       "default": "Scurt"
     },
-    "genre_soap": {
+    "translated_value_genre_soap": {
       "default": "Soap"
     },
-    "genre_special_interest": {
+    "translated_value_genre_special_interest": {
       "default": "Interes Special"
     },
-    "genre_sporting_event": {
+    "translated_value_genre_sporting_event": {
       "default": "Eveniment Sportiv"
     },
-    "genre_suspense": {
+    "translated_value_genre_suspense": {
       "default": "Tensiune"
     },
-    "genre_talk_show": {
+    "translated_value_genre_talk_show": {
       "default": "Show de discuții"
     },
-    "genre_thriller": {
+    "translated_value_genre_thriller": {
       "default": "Thriller"
     },
-    "genre_war": {
+    "translated_value_genre_war": {
       "default": "Război"
     },
-    "genre_western": {
+    "translated_value_genre_western": {
       "default": "Western"
     },
-    "genre_anime": {
+    "translated_value_genre_anime": {
       "default": "Anime"
     },
-    "genre_superhero": {
+    "translated_value_genre_superhero": {
       "default": "Supererou"
     },
-    "genre_donghua": {
+    "translated_value_genre_donghua": {
       "default": "Donghua"
     },
-    "genre_mini_series": {
+    "translated_value_genre_mini_series": {
       "default": "Mini-serie"
     },
-    "genre_science_fiction": {
+    "translated_value_genre_science_fiction": {
       "default": "Știință-Fantazie"
     },
     "button_label_remove_from_watchlist": {
@@ -242,7 +242,7 @@
         }
       }
     },
-    "search_placeholder": {
+    "input_placeholder_search": {
       "default": "Caută seriale & filme..."
     },
     "button_text_join_trakt": {
@@ -251,31 +251,31 @@
     "button_label_join_trakt": {
       "default": "Alătură-te trakt.tv pentru a urmări ce urmărești"
     },
-    "copyright_notice": {
+    "text_copyright_notice": {
       "default": "Toate drepturile rezervate."
     },
-    "copyright_crafted_by": {
+    "text_copyright_crafted_by": {
       "default": "Elaborat manual în toată lumea"
     },
     "button_text_join_trakt_for_free": {
       "default": "Alătură-te Trakt gratuit"
     },
-    "landing_discover_label": {
+    "header_landing_discover": {
       "default": "Descoperă"
     },
-    "landing_discover_description": {
+    "text_landing_discover": {
       "default": "ce este popular și unde îl poți urmări."
     },
-    "landing_track_label": {
+    "header_landing_track": {
       "default": "Urmărește"
     },
-    "landing_track_description": {
+    "text_landing_track": {
       "default": "toate serialele și filmele pe care le-ai urmărit vreodată."
     },
-    "landing_share_label": {
+    "header_landing_share": {
       "default": "Partajează"
     },
-    "landing_share_description": {
+    "text_landing_share": {
       "default": "comentarii, evaluări și recomandări."
     },
     "list_title_trending": {
@@ -332,9 +332,6 @@
     "page_title_home": {
       "default": "Acasă"
     },
-    "watchers": {
-      "default": "Urmăritori"
-    },
     "tag_text_plays": {
       "default": "{number} vizionări",
       "variables": {
@@ -342,15 +339,6 @@
           "type": "string"
         }
       }
-    },
-    "lists": {
-      "default": "Liste"
-    },
-    "favorited": {
-      "default": "Favorit"
-    },
-    "profile": {
-      "default": "Profil"
     },
     "button_text_logout": {
       "default": "Deconectare"
@@ -370,49 +358,49 @@
     "list_title_related_shows": {
       "default": "Seriale asemănătoare"
     },
-    "about_placeholder_1": {
+    "text_about_placeholder_1": {
       "default": "Acest utilizator este un mister, învăluit în enigmă... (sau poate doar leneș? Cine știe, acesta este internetul.)"
     },
-    "about_placeholder_2": {
+    "text_about_placeholder_2": {
       "default": "Se pare că acest utilizator este prea ocupat cu vizionarea de filme pentru a scrie despre el însuși. (Destul de corect, pot să mă raportez.)"
     },
-    "about_placeholder_3": {
+    "text_about_placeholder_3": {
       "default": "Profilul acestui utilizator este o pânză goală, un vid de informații... (la fel ca viața mea socială. of.)"
     },
-    "about_placeholder_4": {
+    "text_about_placeholder_4": {
       "default": "Dezvăluie secretele identității acestui utilizator... (dacă îndrăznești)"
     },
-    "about_placeholder_5": {
+    "text_about_placeholder_5": {
       "default": "Ce adâncimi ascunse se află sub acest profil gol? (Adevărul este acolo...)"
     },
-    "about_placeholder_6": {
+    "text_about_placeholder_6": {
       "default": "Acest utilizator este un fantomă în mașină, un fantomă digitală... (sau poate a uitat pur și simplu să completeze asta?)"
     },
-    "about_placeholder_7": {
+    "text_about_placeholder_7": {
       "default": "Ajută-l pe acest utilizator! Spune-i să își completeze profilul. (Poate chiar te va răsplăti cu o cinci virtuala!)"
     },
-    "about_placeholder_8": {
+    "text_about_placeholder_8": {
       "default": "Acest profil imploră atenție. Dă-i un pic de dragoste și spune utilizatorului să îl completeze."
     },
-    "about_placeholder_9": {
+    "text_about_placeholder_9": {
       "default": "Nu fi timid! Încurajează acest utilizator să își împărtășească povestea. (Toată lumea are o poveste de spus, chiar dacă este doar despre serialul lor preferat.)"
     },
-    "about_placeholder_10": {
+    "text_about_placeholder_10": {
       "default": "Acest utilizator este ca un personaj dintr-un film David Lynch: enigmatic, misterios și, probabil, o creație a propriei imaginații."
     },
-    "about_placeholder_11": {
+    "text_about_placeholder_11": {
       "default": "Acest profil este la fel de gol ca un magazin Blockbuster într-o vineri seara. (V-amintiți? Timpuri frumoase.)"
     },
-    "about_placeholder_12": {
+    "text_about_placeholder_12": {
       "default": "Acest utilizator își canalizează Tyler Durden interior: respingând consumerismul și îmbrățișând vidul. (Sau poate că pur și simplu nu a apucat să completeze acest lucru.)"
     },
-    "about_placeholder_13": {
+    "text_about_placeholder_13": {
       "default": "O imagine stilizată: O ilustrație amuzantă a unui detectiv care își zgârie capul din confuzie, sau o năluci care se rostogolește peste o pagină de profil goală."
     },
-    "about_placeholder_14": {
+    "text_about_placeholder_14": {
       "default": "Un element interactiv: Un buton care permite utilizatorilor să trimită un îndemn prietenos proprietarului profilului, încurajându-l să își completeze profilul."
     },
-    "about_placeholder_15": {
+    "text_about_placeholder_15": {
       "default": "Un mesaj personalizat: Dacă ai vreo informație despre utilizator (de exemplu, istoricul lor de vizionare), ai putea folosi aceste informații pentru a genera un placeholder mai personalizat, cum ar fi 'Acest utilizator adoră filmele de groază, dar urăște să scrie biografii. (Poate este prea ocupat să se ascundă de zombi?)'"
     },
     "list_placeholder_watchlist_movies": {
@@ -424,7 +412,7 @@
     "list_placeholder_upcoming_schedule": {
       "default": "Explorează seriale TV și personalizează-ți programul."
     },
-    "up_next_empty": {
+    "list_placeholder_up_next_empty": {
       "default": "Începe să urmărești și adaugă seriale în lista ta de urmărire."
     },
     "list_placeholder_released_movies": {
@@ -450,7 +438,7 @@
     "list_title_show_credits": {
       "default": "Seriale"
     },
-    "episodes_watched": {
+    "text_episodes_watched": {
       "default": "{count} episoade vizionate",
       "variables": {
         "count": {
@@ -461,7 +449,7 @@
     "list_title_movie_credits": {
       "default": "Filme"
     },
-    "movies_watched": {
+    "text_movies_watched": {
       "default": "{count} filme vizionate",
       "variables": {
         "count": {
@@ -469,10 +457,10 @@
         }
       }
     },
-    "details": {
+    "header_details": {
       "default": "Detalii"
     },
-    "expand_category": {
+    "button_label_expand_category": {
       "default": "Extinde {category}",
       "variables": {
         "category": {
@@ -488,22 +476,22 @@
         }
       }
     },
-    "premiered": {
+    "header_premiered": {
       "default": "A debutat"
     },
-    "runtime": {
+    "header_runtime": {
       "default": "Durata"
     },
-    "country": {
+    "header_country": {
       "default": "Țară"
     },
-    "language": {
+    "header_language": {
       "default": "Limbă"
     },
-    "studio": {
+    "header_studio": {
       "default": "Studiouri"
     },
-    "genre": {
+    "header_genre": {
       "default": "Gen"
     },
     "button_text_browse_lists": {
@@ -529,7 +517,7 @@
         }
       }
     },
-    "streaming_service_logo": {
+    "image_alt_streaming_service_logo": {
       "default": "Sigla {service}",
       "variables": {
         "service": {
@@ -537,235 +525,235 @@
         }
       }
     },
-    "director": {
+    "header_director": {
       "default": "Regizor"
     },
-    "writer": {
+    "header_writer": {
       "default": "Scriitor"
     },
-    "creator": {
+    "header_creator": {
       "default": "Creator"
     },
-    "job_action_director": {
+    "translated_value_job_action_director": {
       "default": "Regizor de acțiune"
     },
-    "job_additional_second_assistant_director": {
+    "translated_value_job_additional_second_assistant_director": {
       "default": "Asistent regizor secundar suplimentar"
     },
-    "job_additional_third_assistant_director": {
+    "translated_value_job_additional_third_assistant_director": {
       "default": "Asistent regizor terțiar suplimentar"
     },
-    "job_assistant_director": {
+    "translated_value_job_assistant_director": {
       "default": "Asistent regizor"
     },
-    "job_assistant_director_trainee": {
+    "translated_value_job_assistant_director_trainee": {
       "default": "Asistent regizor stagiar"
     },
-    "job_co_director": {
+    "translated_value_job_co_director": {
       "default": "Co-regizor"
     },
-    "job_continuity": {
+    "translated_value_job_continuity": {
       "default": "Continuitate"
     },
-    "job_crowd_assistant_director": {
+    "translated_value_job_crowd_assistant_director": {
       "default": "Asistent regizor pentru mulțime"
     },
-    "job_director": {
+    "translated_value_job_director": {
       "default": "Regizor"
     },
-    "job_field_director": {
+    "translated_value_job_field_director": {
       "default": "Regizor de teren"
     },
-    "job_first_assistant_director": {
+    "translated_value_job_first_assistant_director": {
       "default": "Primul asistent regizor"
     },
-    "job_first_assistant_director_trainee_prep": {
+    "translated_value_job_first_assistant_director_trainee_prep": {
       "default": "Primul asistent regizor (pregătire)"
     },
-    "job_first_assistant_director_trainee": {
+    "translated_value_job_first_assistant_director_trainee": {
       "default": "Primul asistent regizor stagiar"
     },
-    "job_insert_unit_director": {
+    "translated_value_job_insert_unit_director": {
       "default": "Regizor unitate insert"
     },
-    "job_insert_unit_first_assistant_director": {
+    "translated_value_job_insert_unit_first_assistant_director": {
       "default": "Primul asistent regizor unitate insert"
     },
-    "job_layout": {
+    "translated_value_job_layout": {
       "default": "Aranjament"
     },
-    "job_other": {
+    "translated_value_job_other": {
       "default": "Altul"
     },
-    "job_script_coordinator": {
+    "translated_value_job_script_coordinator": {
       "default": "Coordonator de script"
     },
-    "job_script_supervisor": {
+    "translated_value_job_script_supervisor": {
       "default": "Supraveghetor script"
     },
-    "job_second_assistant_director": {
+    "translated_value_job_second_assistant_director": {
       "default": "Al doilea asistent regizor"
     },
-    "job_second_assistant_director_trainee": {
+    "translated_value_job_second_assistant_director_trainee": {
       "default": "Al doilea asistent regizor stagiar"
     },
-    "job_second_second_assistant_director": {
+    "translated_value_job_second_second_assistant_director": {
       "default": "Al doilea al doilea asistent regizor"
     },
-    "job_second_unit_director": {
+    "translated_value_job_second_unit_director": {
       "default": "Regizor unitate secundară"
     },
-    "job_second_unit_first_assistant_director": {
+    "translated_value_job_second_unit_first_assistant_director": {
       "default": "Primul asistent regizor unitate secundară"
     },
-    "job_series_director": {
+    "translated_value_job_series_director": {
       "default": "Regizor de serie"
     },
-    "job_series_guest_director": {
+    "translated_value_job_series_guest_director": {
       "default": "Regizor invitat de serie"
     },
-    "job_stage_director": {
+    "translated_value_job_stage_director": {
       "default": "Regizor de scenă"
     },
-    "job_third_assistant_director": {
+    "translated_value_job_third_assistant_director": {
       "default": "Al treilea asistent regizor"
     },
-    "job_adaptation": {
+    "translated_value_job_adaptation": {
       "default": "Adaptare"
     },
-    "job_author": {
+    "translated_value_job_author": {
       "default": "Autor"
     },
-    "job_book": {
+    "translated_value_job_book": {
       "default": "Carte"
     },
-    "job_characters": {
+    "translated_value_job_characters": {
       "default": "Personaje"
     },
-    "job_co_writer": {
+    "translated_value_job_co_writer": {
       "default": "Co-scriitor"
     },
-    "job_comic_book": {
+    "translated_value_job_comic_book": {
       "default": "Carte de benzi desenate"
     },
-    "job_creative_producer": {
+    "translated_value_job_creative_producer": {
       "default": "Producător creativ"
     },
-    "job_dialogue": {
+    "translated_value_job_dialogue": {
       "default": "Dialog"
     },
-    "job_executive_story_editor": {
+    "translated_value_job_executive_story_editor": {
       "default": "Editor executiv de poveste"
     },
-    "job_graphic_novel": {
+    "translated_value_job_graphic_novel": {
       "default": "Roman grafic"
     },
-    "job_head_of_story": {
+    "translated_value_job_head_of_story": {
       "default": "Șef de poveste"
     },
-    "job_idea": {
+    "translated_value_job_idea": {
       "default": "Idee"
     },
-    "job_junior_story_editor": {
+    "translated_value_job_junior_story_editor": {
       "default": "Editor junior de poveste"
     },
-    "job_lyricist": {
+    "translated_value_job_lyricist": {
       "default": "Liric"
     },
-    "job_musical": {
+    "translated_value_job_musical": {
       "default": "Muzical"
     },
-    "job_novel": {
+    "translated_value_job_novel": {
       "default": "Roman"
     },
-    "job_opera": {
+    "translated_value_job_opera": {
       "default": "Operă"
     },
-    "job_original_concept": {
+    "translated_value_job_original_concept": {
       "default": "Concept original"
     },
-    "job_original_film_writer": {
+    "translated_value_job_original_film_writer": {
       "default": "Scriitor de film original"
     },
-    "job_original_series_creator": {
+    "translated_value_job_original_series_creator": {
       "default": "Creator original de serie"
     },
-    "job_original_original_story": {
+    "translated_value_job_original_original_story": {
       "default": "Poveste originală"
     },
-    "job_scenario_writer": {
+    "translated_value_job_scenario_writer": {
       "default": "Scriitor de scenariu"
     },
-    "job_screenplay": {
+    "translated_value_job_screenplay": {
       "default": "Scenariu"
     },
-    "job_screenstory": {
+    "translated_value_job_screenstory": {
       "default": "Screenstory"
     },
-    "job_script_consultant": {
+    "translated_value_job_script_consultant": {
       "default": "Consultant script"
     },
-    "job_script_editor": {
+    "translated_value_job_script_editor": {
       "default": "Editor script"
     },
-    "job_senior_story_editor": {
+    "translated_value_job_senior_story_editor": {
       "default": "Editor senior de poveste"
     },
-    "job_series_composition": {
+    "translated_value_job_series_composition": {
       "default": "Compoziție de serie"
     },
-    "job_short_story": {
+    "translated_value_job_short_story": {
       "default": "Poveste scurtă"
     },
-    "job_staff_writer": {
+    "translated_value_job_staff_writer": {
       "default": "Scriitor angajat"
     },
-    "job_story": {
+    "translated_value_job_story": {
       "default": "Poveste"
     },
-    "job_story_story_artist": {
+    "translated_value_job_story_story_artist": {
       "default": "Artist de poveste"
     },
-    "job_story_story_consultant": {
+    "translated_value_job_story_story_consultant": {
       "default": "Consultant de poveste"
     },
-    "job_story_story_coordinator": {
+    "translated_value_job_story_story_coordinator": {
       "default": "Coordonator de poveste"
     },
-    "job_story_story_developer": {
+    "translated_value_job_story_story_developer": {
       "default": "Dezvoltator de poveste"
     },
-    "job_story_story_editor": {
+    "translated_value_job_story_story_editor": {
       "default": "Editor de poveste"
     },
-    "job_story_story_manager": {
+    "translated_value_job_story_story_manager": {
       "default": "Manager de poveste"
     },
-    "job_story_story_supervisor": {
+    "translated_value_job_story_story_supervisor": {
       "default": "Supraveghetor de poveste"
     },
-    "job_storyboard": {
+    "translated_value_job_storyboard": {
       "default": "Storyboard"
     },
-    "job_teleplay": {
+    "translated_value_job_teleplay": {
       "default": "Teleplay"
     },
-    "job_texte": {
+    "translated_value_job_texte": {
       "default": "Texte"
     },
-    "job_theatre_play": {
+    "translated_value_job_theatre_play": {
       "default": "Spectacol de teatru"
     },
-    "job_writer": {
+    "translated_value_job_writer": {
       "default": "Scriitor"
     },
-    "job_writers_assistant": {
+    "translated_value_job_writers_assistant": {
       "default": "Asistent de scriitor"
     },
-    "job_writers_production": {
+    "translated_value_job_writers_production": {
       "default": "Producție de scriitori"
     },
-    "job_creator": {
+    "translated_value_job_creator": {
       "default": "Creator"
     },
     "button_text_remove_from_history": {
@@ -806,7 +794,7 @@
     "list_title_seasons": {
       "default": "Sezoane"
     },
-    "season_number_label": {
+    "text_season_number": {
       "default": "Sezonul {number}",
       "variables": {
         "number": {
@@ -814,10 +802,10 @@
         }
       }
     },
-    "season_specials": {
+    "text_season_specials": {
       "default": "Episoade speciale"
     },
-    "expand_media_overview": {
+    "button_label_expand_media_overview": {
       "default": "Detaliază prezentarea {title}",
       "variables": {
         "title": {
@@ -825,7 +813,7 @@
         }
       }
     },
-    "season_episode_number_label": {
+    "text_season_episode_number": {
       "default": "Sezon {season} • Episod {number}",
       "variables": {
         "season": {
@@ -836,7 +824,7 @@
         }
       }
     },
-    "share_title": {
+    "button_label_share": {
       "default": "Distribuie {title}",
       "variables": {
         "title": {
@@ -844,49 +832,49 @@
         }
       }
     },
-    "status": {
+    "header_status": {
       "default": "Stare"
     },
-    "status_released": {
+    "translated_value_status_released": {
       "default": "Lansat"
     },
-    "status_planned": {
+    "translated_value_status_planned": {
       "default": "Planificat"
     },
-    "status_post_production": {
+    "translated_value_status_post_production": {
       "default": "Post-producție"
     },
-    "status_canceled": {
+    "translated_value_status_canceled": {
       "default": "Anulat"
     },
-    "status_in_production": {
+    "translated_value_status_in_production": {
       "default": "În producție"
     },
-    "status_rumored": {
+    "translated_value_status_rumored": {
       "default": "Zvonit"
     },
-    "status_ended": {
+    "translated_value_status_ended": {
       "default": "Terminat"
     },
-    "status_returning_series": {
+    "translated_value_status_returning_series": {
       "default": "Serialul revine"
     },
-    "status_pilot": {
+    "translated_value_status_pilot": {
       "default": "Pilot"
     },
-    "status_continuing": {
+    "translated_value_status_continuing": {
       "default": "În desfășurare"
     },
-    "status_upcoming": {
+    "translated_value_status_upcoming": {
       "default": "Urmează"
     },
-    "status_unknown": {
+    "translated_value_status_unknown": {
       "default": "Necunoscut"
     },
-    "expected_premiere": {
+    "header_expected_premiere": {
       "default": "Premiera Așteptată"
     },
-    "person_headshot": {
+    "image_alt_person_headshot": {
       "default": "Portretul lui {person}",
       "variables": {
         "person": {
@@ -905,10 +893,10 @@
         }
       }
     },
-    "view_all_trending_movies": {
+    "button_label_view_all_trending_movies": {
       "default": "Vezi toate filmele populare"
     },
-    "view_all_trending_shows": {
+    "button_label_view_all_trending_shows": {
       "default": "Vezi toate serialele populare"
     },
     "list_title_trending_shows": {
@@ -931,16 +919,16 @@
         }
       }
     },
-    "view_all_recommended_movies": {
+    "button_label_view_all_recommended_movies": {
       "default": "Vezi toate filmele recomandate"
     },
-    "view_all_recommended_shows": {
+    "button_label_view_all_recommended_shows": {
       "default": "Vezi toate serialele recomandate"
     },
-    "view_all_anticipated_movies": {
+    "button_label_view_all_anticipated_movies": {
       "default": "Vezi toate filmele așteptate"
     },
-    "view_all_anticipated_shows": {
+    "button_label_view_all_anticipated_shows": {
       "default": "Vezi toate serialele așteptate"
     },
     "list_title_anticipated_movies": {
@@ -949,10 +937,10 @@
     "list_title_anticipated_shows": {
       "default": "Seriale anticipate"
     },
-    "view_all_popular_movies": {
+    "button_label_view_all_popular_movies": {
       "default": "Vezi toate filmele populare"
     },
-    "view_all_popular_shows": {
+    "button_label_view_all_popular_shows": {
       "default": "Vezi toate serialele populare"
     },
     "list_title_popular_movies": {
@@ -961,7 +949,7 @@
     "list_title_popular_shows": {
       "default": "Seriale populare"
     },
-    "rate_now": {
+    "header_rate_now": {
       "default": "Evaluează acum"
     },
     "button_text_add_to_favorites": {
@@ -1018,19 +1006,19 @@
     "list_title_your_watchlist_movies": {
       "default": "Filmele din lista ta"
     },
-    "view_all_watchlist_movies": {
+    "button_label_view_all_watchlist_movies": {
       "default": "Vezi toate filmele din lista"
     },
-    "view_all_watchlist_shows": {
+    "button_label_view_all_watchlist_shows": {
       "default": "Vezi toate serialele din listă"
     },
-    "streaming": {
+    "header_streaming": {
       "default": "Streaming"
     },
-    "on_demand": {
+    "header_on_demand": {
       "default": "La cerere"
     },
-    "media_popup_label": {
+    "button_label_popup_media": {
       "default": "Meniu pop-up pentru {title}",
       "variables": {
         "title": {
@@ -1049,10 +1037,10 @@
         }
       }
     },
-    "by": {
+    "text_by": {
       "default": "de"
     },
-    "users_avatar": {
+    "image_alt_user_avatar": {
       "default": "Avatarul lui {username}",
       "variables": {
         "username": {
@@ -1060,7 +1048,7 @@
         }
       }
     },
-    "media_poster": {
+    "image_alt_media_poster": {
       "default": "Posterul {title}",
       "variables": {
         "title": {
@@ -1071,76 +1059,76 @@
     "list_placeholder_comments": {
       "default": "Încă nu sunt comentarii."
     },
-    "review_by": {
+    "text_review_by": {
       "default": "Recenzie de"
     },
-    "shout_by": {
+    "text_shout_by": {
       "default": "Strigăt de"
     },
-    "deleted_user": {
+    "text_deleted_username": {
       "default": "Șters"
     },
     "list_title_social_activity": {
       "default": "Activitate Socială"
     },
-    "view_all_social_activity": {
+    "button_label_view_all_social_activity": {
       "default": "Vezi toate activitățile sociale"
     },
     "dropdown_label_person_position": {
       "default": "Funcție"
     },
-    "position_acting": {
+    "translated_value_position_acting": {
       "default": "Actor"
     },
-    "position_production": {
+    "translated_value_position_production": {
       "default": "Producție"
     },
-    "position_art": {
+    "translated_value_position_art": {
       "default": "Artă"
     },
-    "position_crew": {
+    "translated_value_position_crew": {
       "default": "Echipă"
     },
-    "position_costume___make_up": {
+    "translated_value_position_costume___make_up": {
       "default": "Costume și Machiaj"
     },
-    "position_directing": {
+    "translated_value_position_directing": {
       "default": "Regia"
     },
-    "position_writing": {
+    "translated_value_position_writing": {
       "default": "Scriere"
     },
-    "position_sound": {
+    "translated_value_position_sound": {
       "default": "Sunet"
     },
-    "position_camera": {
+    "translated_value_position_camera": {
       "default": "Cameră"
     },
-    "position_lighting": {
+    "translated_value_position_lighting": {
       "default": "Iluminat"
     },
-    "position_visual_effects": {
+    "translated_value_position_visual_effects": {
       "default": "Efecte Vizuale"
     },
-    "position_editing": {
+    "translated_value_position_editing": {
       "default": "Montaj"
     },
-    "position_creator": {
+    "translated_value_position_creator": {
       "default": "Creator"
     },
-    "position_created_by": {
+    "translated_value_position_created_by": {
       "default": "Creat de"
     },
     "list_title_personal_lists": {
       "default": "Personale"
     },
-    "collaborative_lists": {
+    "list_title_collaborative_lists": {
       "default": "Colaborări"
     },
-    "liked_lists": {
+    "list_title_liked_lists": {
       "default": "Apreciate"
     },
-    "share_movie": {
+    "text_share_movie": {
       "default": "Tocmai am descoperit {title} - trebuie să-l vezi! 🎬",
       "variables": {
         "title": {
@@ -1148,7 +1136,7 @@
         }
       }
     },
-    "share_show": {
+    "text_share_show": {
       "default": "Am găsit un serial superb: {title}! 📺",
       "variables": {
         "title": {
@@ -1156,7 +1144,7 @@
         }
       }
     },
-    "share_episode": {
+    "text_share_episode": {
       "default": "Tocmai am urmărit {show} S{season}E{episode} - {title}! 🔥",
       "variables": {
         "show": {
@@ -1173,7 +1161,15 @@
         }
       }
     },
-    "share_person": {
+    "text_share_person": {
+      "default": "Verifică {name} pe Trakt! 🎭",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_profile": {
       "default": "Verifică {name} pe Trakt! 🎭",
       "variables": {
         "name": {
@@ -1184,31 +1180,31 @@
     "list_title_recently_watched": {
       "default": "Vizionate urmărite recent"
     },
-    "view_all_recently_watched": {
+    "button_label_view_all_recently_watched": {
       "default": "Vezi toate urmărite recent"
     },
     "list_title_available_now": {
       "default": "Disponibil Acum"
     },
-    "view_all_released_movies": {
+    "button_label_view_all_released_movies": {
       "default": "Vezi toate filmele disponibile acum"
     },
-    "view_all_unreleased_movies": {
+    "button_label_view_all_unreleased_movies": {
       "default": "Vezi toate filmele care vin curând"
     },
-    "switch_to_og": {
+    "switch_label_to_og": {
       "default": "Comută la Trakt.tv"
     },
     "tag_text_preview": {
       "default": "Previzualizare"
     },
-    "preview_description": {
+    "tooltip_text_preview_feature": {
       "default": "Această funcție este încă în curs de finisare, cetățene. Ne străduim din răsputeri să o îmbunătățim, făcându-i interfața de utilizator să funcționeze fluid, fără a provoca groază existențială."
     },
-    "airs": {
+    "header_airs": {
       "default": "Se difuzează"
     },
-    "aired": {
+    "header_aired": {
       "default": "S-a difuzat"
     },
     "warning_prompt_drop_show": {
@@ -1230,16 +1226,13 @@
     "button_text_drop_show": {
       "default": "Elimină"
     },
-    "enable_up_next_nitro_label": {
-      "default": "Activează Nitro Up Next, cel mai rapid mod de a viziona serialele tale"
-    },
-    "lab_up_next_nitro_label": {
+    "switch_label_up_next_nitro": {
       "default": "Activează Nitro Up Next"
     },
-    "lab_up_next_nitro_message": {
+    "tooltip_text_up_next_nitro": {
       "default": "Acest experiment este o actualizare de performanță care îmbunătățește experiența pentru toți utilizatorii."
     },
-    "lab_up_next_nitro_hidden_message": {
+    "tooltip_text_up_next_nitro_hidden": {
       "default": "Datorită modificărilor de design interne, filmele ascunse anterior vor fi acum vizibile în lista ta, cu o miniatură alb-negru pentru a le identifica rapid, având opțiunea de a le readuce sau de a le elimina din listă."
     },
     "warning_prompt_restore_show": {
@@ -1261,7 +1254,7 @@
     "button_text_restore_show": {
       "default": "Restaurare"
     },
-    "mark_as_watched_show_warning": {
+    "warning_prompt_mark_as_watched_show": {
       "default": "Sigur vrei să marchezi {title} ca vizionat? Asta va marca toate episoadele ca vizionate.",
       "variables": {
         "title": {
@@ -1269,7 +1262,7 @@
         }
       }
     },
-    "mark_as_watched_show_until_warning": {
+    "warning_prompt_mark_as_watched_show_until": {
       "default": "Sigur doriți să marcați toate episoadele nevăzute din {title} ca fiind văzute până la episodul {episode}? Aceasta va marca {count} episoade ca fiind văzute.",
       "variables": {
         "title": {
@@ -1283,7 +1276,7 @@
         }
       }
     },
-    "mark_as_watched_multiple_episodes_warning": {
+    "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Sigur vrei să marchezi {count} episoade ca vizionate?",
       "variables": {
         "count": {
@@ -1319,7 +1312,7 @@
         }
       }
     },
-    "close_label": {
+    "button_label_close": {
       "default": "Închide"
     },
     "button_label_comment_replies": {
@@ -1339,7 +1332,7 @@
     "dialog_title_comments": {
       "default": "Comentarii"
     },
-    "comment": {
+    "dialog_title_comment": {
       "default": "Comentariu"
     },
     "button_text_comment_reply": {
@@ -1353,31 +1346,31 @@
         }
       }
     },
-    "comment_reply_placeholder": {
+    "textarea_placeholder_reply": {
       "default": "Răspunde..."
     },
-    "comment_post_label": {
+    "button_label_add_new_comment": {
       "default": "Adaugă un comentariu"
     },
-    "comment_post_placeholder": {
+    "textarea_placeholder_comment": {
       "default": "Comentariu..."
     },
-    "comment_mark_as_spoiler": {
+    "switch_label_mark_as_spoiler": {
       "default": "Marchează ca spoiler"
     },
-    "comment_spoiler": {
+    "text_spoiler": {
       "default": "Spoiler"
     },
-    "comment_close_error_label": {
+    "button_label_close_error": {
       "default": "Închide eroare"
     },
-    "comment_post_reply_label": {
+    "button_label_post_reply": {
       "default": "Postează răspuns"
     },
-    "error_comment_invalid_content": {
+    "translated_value_error_comment_invalid_content": {
       "default": "Comentariile trebuie să aibă cel puțin 5 cuvinte și să fie în limba engleză."
     },
-    "error_comment_unknown": {
+    "translated_value_error_comment_unknown": {
       "default": "A apărut o eroare la publicarea comentariului. Vă rugăm să încercați din nou mai târziu."
     },
     "page_title_user_profile": {
@@ -1388,10 +1381,10 @@
         }
       }
     },
-    "private_profile": {
+    "header_private_profile": {
       "default": "Acest profil este privat"
     },
-    "private_profile_description": {
+    "text_private_profile_description": {
       "default": "Ca și cum nu ar fi fost deja suficient ascuns. Secretele lui {username} rămân ale lor.",
       "variables": {
         "username": {
@@ -1399,16 +1392,16 @@
         }
       }
     },
-    "original_title": {
+    "header_original_title": {
       "default": "Titlu original"
     },
-    "view_all_comments": {
+    "button_label_view_all_comments": {
       "default": "Vezi toate comentariile"
     },
     "button_text_remove_from_list": {
       "default": "Elimină din listă"
     },
-    "remove_from_list_label": {
+    "button_label_remove_from_list": {
       "default": "Elimină {title} din listă",
       "variables": {
         "title": {
@@ -1419,10 +1412,10 @@
     "page_title_service_unavailable": {
       "default": "Serviciul Trakt inaccesibil"
     },
-    "error_page_service_message": {
+    "error_text_service_unavailable": {
       "default": "Conexiunea... lipsește. Ca o amintire uitată."
     },
-    "error_page_service_status": {
+    "link_text_service_status": {
       "default": "Starea serviciului Trakt"
     },
     "button_text_retry": {
@@ -1431,13 +1424,13 @@
     "button_label_retry": {
       "default": "Încearcă din nou"
     },
-    "community_sentiment": {
+    "header_community_sentiment": {
       "default": "Părerea comunității"
     },
-    "lists_action_label": {
+    "button_text_lists": {
       "default": "Liste"
     },
-    "listed": {
+    "button_text_listed": {
       "default": "Listat"
     },
     "dropdown_label_add_remove_from_lists": {
@@ -1448,7 +1441,7 @@
         }
       }
     },
-    "add_to_personal_list_label": {
+    "button_label_add_to_personal_list": {
       "default": "Adaugă {title} la {list}",
       "variables": {
         "title": {
@@ -1459,7 +1452,7 @@
         }
       }
     },
-    "remove_from_personal_list_label": {
+    "button_label_remove_from_personal_list": {
       "default": "Elimină {title} din {list}",
       "variables": {
         "title": {
@@ -1481,13 +1474,13 @@
         }
       }
     },
-    "theme_light": {
+    "option_text_theme_light": {
       "default": "Luminos"
     },
-    "theme_dark": {
+    "option_text_theme_dark": {
       "default": "Întunecat"
     },
-    "theme_system": {
+    "option_text_theme_system": {
       "default": "Sistem"
     },
     "button_text_filters": {
@@ -1499,7 +1492,7 @@
     "button_label_reset_filter": {
       "default": "Resetează"
     },
-    "results_for_title": {
+    "text_search_results_for": {
       "default": "Rezultate pentru {query}",
       "variables": {
         "query": {
@@ -1507,58 +1500,55 @@
         }
       }
     },
-    "type_movie": {
+    "translated_value_type_movie": {
       "default": "Film"
     },
-    "type_show": {
+    "translated_value_type_show": {
       "default": "Serial"
     },
     "page_title_sign_in": {
       "default": "Autentificare"
     },
-    "code_retry_title": {
+    "header_device_auth_failed": {
       "default": "Ceva n-a mers bine"
     },
-    "code_retry_message": {
+    "header_device_auth_try_again": {
       "default": "Activarea a fost refuzată, a expirat sau s-a întâmplat ceva neprevăzut. Încearcă din nou."
     },
-    "code_instruction": {
+    "header_device_auth_qr_instruction": {
       "default": "Scanează codul QR sau autentifică-te la:"
     },
-    "code_label": {
+    "header_device_auth_code_instruction": {
       "default": "și introdu următorul cod:"
     },
-    "filter_all": {
+    "option_text_all": {
       "default": "Toate"
     },
-    "filters_title": {
+    "header_filters": {
       "default": "Filtre"
     },
-    "ignore_watched": {
+    "header_ignore_watched": {
       "default": "Ignoră Văzute"
     },
-    "ignore_watchlisted": {
+    "header_ignore_watchlisted": {
       "default": "Ignoră de Vizionat"
     },
-    "watchnow_filter_label": {
-      "default": "Disponibilitate"
-    },
-    "watchnow_favorites_only": {
+    "option_text_my_favorites": {
       "default": "Doar favoritele"
     },
-    "watchnow_digital_release": {
+    "option_text_all_digital_releases": {
       "default": "Toate lansările digitale"
     },
-    "watchnow_streaming": {
+    "option_text_streaming_now": {
       "default": "Streaming acum"
     },
-    "decade": {
+    "header_decade": {
       "default": "Deceniu"
     },
-    "ratings": {
+    "header_ratings": {
       "default": "Evaluări"
     },
-    "view_all_items_in": {
+    "button_label_view_all_items_in": {
       "default": "Vezi toate în {title}",
       "variables": {
         "title": {
@@ -1572,28 +1562,28 @@
     "button_label_reset_all_filters": {
       "default": "Resetează toate filtrele"
     },
-    "video_type_trailer": {
+    "translated_value_video_type_trailer": {
       "default": "Trailer"
     },
-    "video_type_clip": {
+    "translated_value_video_type_clip": {
       "default": "Clip"
     },
-    "video_type_teaser": {
+    "translated_value_video_type_teaser": {
       "default": "Teaser"
     },
-    "video_type_featurette": {
+    "translated_value_video_type_featurette": {
       "default": "Featurette"
     },
-    "video_type_recap": {
+    "translated_value_video_type_recap": {
       "default": "Recapitulare"
     },
-    "video_type_behind_the_scenes": {
+    "translated_value_video_type_behind_the_scenes": {
       "default": "Din culise"
     },
-    "now_playing": {
+    "header_now_playing": {
       "default": "Rulează acum"
     },
-    "remaining": {
+    "text_remaining": {
       "default": "rămase"
     },
     "button_text_checkin": {
@@ -1607,7 +1597,7 @@
         }
       }
     },
-    "cookie_notice": {
+    "text_cookie_notice": {
       "default": "Trakt folosește C🍪🍪KIES pentru a-ți îmbunătăți experiența. Poți <a>citi mai multe informații</a> aici."
     },
     "button_text_cookie_accept": {
@@ -1634,10 +1624,13 @@
     "button_label_settings": {
       "default": "Setări"
     },
-    "settings_spoilers_title": {
+    "header_spoilers": {
       "default": "Spoilere"
     },
-    "settings_spoilers_label": {
+    "text_show_spoilers": {
+      "default": "Arată spoilere"
+    },
+    "switch_label_spoilers": {
       "default": "Arată spoilere"
     },
     "button_text_save_filters": {
@@ -1649,13 +1642,13 @@
     "page_title_account_locked": {
       "default": "Cont blocat"
     },
-    "error_page_locked_account_message": {
+    "error_text_locked_account": {
       "default": "Contul tău este blocat, <a>contactează asistența</a> pentru a rezolva această problemă."
     },
-    "first_play_this_month": {
+    "text_first_play_this_month": {
       "default": "Prima redare luna aceasta"
     },
-    "shows_watched": {
+    "text_shows_watched": {
       "default": "{count} seriale vizionate",
       "variables": {
         "count": {
@@ -1693,10 +1686,10 @@
         }
       }
     },
-    "vip_upsell_title": {
+    "text_vip_upsell": {
       "default": "Deblocați funcțiile VIP pentru a vă îmbunătăți experiența Trakt"
     },
-    "vip_upsell_description": {
+    "text_vip_upsell_description": {
       "default": "Vrei să-ți vezi retrospectiva lunară și anuală? Și să accesezi multe alte funcții? Înscrie-te la Trakt VIP."
     },
     "list_title_following": {
@@ -1708,7 +1701,10 @@
     "list_placeholder_followers": {
       "default": "Nimeni pe aici (încă)."
     },
-    "read_more": {
+    "list_placeholder_following": {
+      "default": "Nu este nimeni aici (încă)."
+    },
+    "button_label_read_more": {
       "default": "Citește mai mult"
     },
     "button_text_add_comment": {
@@ -1717,10 +1713,10 @@
     "button_label_add_comment": {
       "default": "Adaugă un comentariu"
     },
-    "rename_list": {
+    "input_prompt_rename_list": {
       "default": "Redenumiți lista"
     },
-    "rename_list_label": {
+    "button_label_rename_list": {
       "default": "Redenumiți lista {name}",
       "variables": {
         "name": {
@@ -1737,10 +1733,10 @@
     "list_title_hot_shows": {
       "default": "Seriale în tendințe luna aceasta"
     },
-    "view_all_hot_shows": {
+    "button_label_view_all_hot_shows": {
       "default": "Vezi toate serialele în tendințe"
     },
-    "view_all_hot_movies": {
+    "button_label_view_all_hot_movies": {
       "default": "Vezi toate filmele în tendințe"
     },
     "list_title_extras": {
@@ -1807,6 +1803,18 @@
           "type": "string"
         }
       }
+    },
+    "dropdown_label_extras": {
+      "default": "Extra"
+    },
+    "button_label_rating_bad": {
+      "default": "Evaluează ca rău"
+    },
+    "button_label_rating_good": {
+      "default": "Evaluează ca bun"
+    },
+    "button_label_rating_great": {
+      "default": "Evaluează ca grozav"
     }
   }
 }

@@ -25,7 +25,7 @@
     {#snippet headerActions()}
       <ShareButton
         title={person.name}
-        textFactory={({ title: name }) => m.share_person({ name })}
+        textFactory={({ title: name }) => m.text_share_person({ name })}
       />
     {/snippet}
     <SummaryTitle title={person.name} />

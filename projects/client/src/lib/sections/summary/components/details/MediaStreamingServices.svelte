@@ -25,10 +25,16 @@
 {#if hasServices}
   <DetailsGrid title={m.header_stream_on()} isCollapsable={true}>
     {#if streaming.length > 0}
-      <StreamingServiceCategory title={m.streaming()} services={streaming} />
+      <StreamingServiceCategory
+        title={m.header_streaming()}
+        services={streaming}
+      />
     {/if}
     {#if onDemand.length > 0}
-      <StreamingServiceCategory title={m.on_demand()} services={onDemand} />
+      <StreamingServiceCategory
+        title={m.header_on_demand()}
+        services={onDemand}
+      />
     {/if}
   </DetailsGrid>
 {/if}

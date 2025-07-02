@@ -33,7 +33,7 @@
   >
     <NowPlayingItemCard nowPlayingItem={nowPlaying} />
     <div class="trakt-now-playing-content">
-      <span class="trakt-now-playing-label">{m.now_playing()}</span>
+      <span class="trakt-now-playing-label">{m.header_now_playing()}</span>
       <div class="trakt-now-playing-status">
         <h5 class="trakt-now-playing-title ellipsis">
           {title}
@@ -42,7 +42,7 @@
           <span class="meta-info">
             {toHumanDuration({ minutes: $remainingMinutes }, languageTag())}
           </span>
-          <span class="meta-info">{m.remaining()}</span>
+          <span class="meta-info">{m.text_remaining()}</span>
         </div>
       </div>
       <ProgressBar progress={$progress} />

@@ -27,7 +27,7 @@
 {/snippet}
 
 {#if displayType === "deleted"}
-  <p class="secondary small trakt-deleted-user">{m.deleted_user()}</p>
+  <p class="secondary small trakt-deleted-user">{m.text_deleted_username()}</p>
 {/if}
 
 {#if displayType === "linkable"}

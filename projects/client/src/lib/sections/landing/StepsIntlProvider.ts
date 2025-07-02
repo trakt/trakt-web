@@ -5,21 +5,21 @@ export const StepsIntlProvider: StepsIntl = {
   label: (step) => {
     switch (step) {
       case LandingStepType.Track:
-        return m.landing_track_label();
+        return m.header_landing_track();
       case LandingStepType.Discover:
-        return m.landing_discover_label();
+        return m.header_landing_discover();
       case LandingStepType.Share:
-        return m.landing_share_label();
+        return m.header_landing_share();
     }
   },
   description: (step) => {
     switch (step) {
       case LandingStepType.Track:
-        return m.landing_track_description();
+        return m.text_landing_track();
       case LandingStepType.Discover:
-        return m.landing_discover_description();
+        return m.text_landing_discover();
       case LandingStepType.Share:
-        return m.landing_share_description();
+        return m.text_landing_share();
     }
   },
 };

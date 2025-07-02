@@ -14,7 +14,7 @@
 <RenderFor audience="authenticated">
   {#if $isEditable}
     <ActionButton
-      label={m.rename_list_label({ name: list.name })}
+      label={m.button_label_rename_list({ name: list.name })}
       onclick={renameList}
       style="ghost"
       disabled={$isRenaming}

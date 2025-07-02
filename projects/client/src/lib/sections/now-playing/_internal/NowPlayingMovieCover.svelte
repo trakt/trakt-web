@@ -12,6 +12,6 @@
   <CardCover
     title={movie.title}
     src={movie.cover.url.thumb}
-    alt={m.media_poster({ title: movie.title })}
+    alt={m.image_alt_media_poster({ title: movie.title })}
   />
 </Link>
