@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
@@ -15,7 +16,7 @@
   import TraktLogo from "./components/TraktLogo.svelte";
   import ProfileButton from "./ProfileButton.svelte";
 
-  const isTV = $derived(getDeviceType(navigator.userAgent) === "tv");
+  const isTV = $derived(browser && getDeviceType(navigator.userAgent) === "tv");
 </script>
 
 <header>
