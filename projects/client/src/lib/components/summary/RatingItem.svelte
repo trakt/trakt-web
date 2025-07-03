@@ -3,7 +3,7 @@
   import Link from "../link/Link.svelte";
 
   type RatingItemProps = {
-    rating?: string | number;
+    rating?: string | number | Nil;
     superscript: Snippet;
     url?: string | Nil;
   } & ChildrenProps;
