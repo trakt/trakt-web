@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import FavoriteButton from "$lib/components/buttons/favorite/FavoriteButton.svelte";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { onMount } from "svelte";
   import { attachWarning } from "../_internal/attachWarning";
@@ -13,6 +14,7 @@
     type: MediaType;
     id: number;
     onAction?: (state: boolean) => void;
+    navigationType?: DpadNavigationType;
   };
 
   const {
@@ -21,6 +23,7 @@
     type,
     id,
     onAction,
+    navigationType,
   }: FavoriteActionProps = $props();
 
   const {
@@ -45,6 +48,7 @@
 <FavoriteButton
   {style}
   {title}
+  {navigationType}
   isFavorited={$isFavorited}
   isFavoriteUpdating={$isUpdatingFavorite}
   onAdd={addToFavorites}

@@ -14,6 +14,7 @@
     style,
     onAdd,
     onRemove,
+    navigationType,
     ...props
   }: FavoriteButtonProps = $props();
 
@@ -25,6 +26,7 @@
     variant: "primary",
     onclick: handler,
     disabled: isFavoriteUpdating,
+    navigationType,
   });
 </script>
 
