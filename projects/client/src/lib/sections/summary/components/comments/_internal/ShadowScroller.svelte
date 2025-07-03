@@ -34,7 +34,7 @@
     &::before,
     &::after {
       content: "";
-      z-index: var(--layer-floating);
+      z-index: var(--layer-raised);
       pointer-events: none;
 
       position: absolute;
