@@ -4,8 +4,12 @@
   import { languageTag } from "$lib/features/i18n/index.ts";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
-  import { toRottenTomatoRating } from "$lib/utils/formatting/number/toRottenTomatoRating";
+  import {
+    toRottenAudienceRating,
+    toRottenCriticRating,
+  } from "$lib/utils/formatting/number/toRottenTomatoRating";
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
+  import PopcornIcon from "../icons/PopcornIcon.svelte";
   import RatingIcon from "../icons/RatingIcon.svelte";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
@@ -45,9 +49,16 @@
   </RatingItem>
 
   <RatingItem rating={rotten?.critic} url={rotten?.url}>
-    <RottenIcon style={toRottenTomatoRating(rotten?.critic)} />
+    <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
     {#snippet superscript()}
-      {toRottenTomatoRating(rotten?.critic ?? 0)}
+      {toRottenCriticRating(rotten?.critic ?? 0)}
+    {/snippet}
+  </RatingItem>
+
+  <RatingItem rating={rotten?.audience} url={rotten?.url}>
+    <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
+    {#snippet superscript()}
+      {toRottenAudienceRating(rotten?.audience ?? 0)}
     {/snippet}
   </RatingItem>
 </div>
