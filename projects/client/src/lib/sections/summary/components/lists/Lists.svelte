@@ -29,6 +29,12 @@
   const topList = $derived(lists.at(0));
 </script>
 
+{#snippet topUserList()}
+  {#if topList}
+    <UserList list={topList} {type} />
+  {/if}
+{/snippet}
+
 <RenderFor
   audience="all"
   device={["tablet-sm", "tablet-lg", "desktop"]}
@@ -61,7 +67,9 @@
 </RenderFor>
 
 <RenderFor audience="all" device={["mobile"]} navigation="default">
-  {#if topList}
-    <UserList list={topList} {type} />
-  {/if}
+  {@render topUserList()}
+</RenderFor>
+
+<RenderFor audience="all" navigation="dpad">
+  {@render topUserList()}
 </RenderFor>
