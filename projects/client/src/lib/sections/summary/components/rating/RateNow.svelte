@@ -62,6 +62,7 @@
           title={props.media.title}
           type={props.type}
           id={props.media.id}
+          navigationType={DpadNavigationType.Item}
         />
       {/if}
     </div>
