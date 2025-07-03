@@ -23,6 +23,8 @@
     left: 0;
     z-index: var(--layer-floating);
 
+    pointer-events: none;
+
     &::before {
       content: "";
 
@@ -45,6 +47,10 @@
     :global(.trakt-popup-menu-button) {
       position: absolute;
       right: 0;
+    }
+
+    :global(> *) {
+      pointer-events: auto;
     }
   }
 
