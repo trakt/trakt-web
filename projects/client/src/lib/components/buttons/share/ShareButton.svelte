@@ -1,8 +1,8 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
+  import { browser } from "$app/environment";
   import { page } from "$app/state";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
+  import * as m from "$lib/features/i18n/messages";
   import ActionButton from "../ActionButton.svelte";
 
   type ShareButtonProps = {
@@ -20,7 +20,7 @@
   });
 
   const isShareable = $derived(
-    !!navigator.canShare && navigator.canShare(data),
+    browser && !!navigator.canShare && navigator.canShare(data),
   );
 
   const share = async () => {

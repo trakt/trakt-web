@@ -1,5 +1,6 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
@@ -15,7 +16,14 @@
   }: { type: MediaType; title: string; emptyMessage: string; slug: string } =
     $props();
 
-  const { list, isLoading } = useFavoritesList({ type, slug });
+  const { filterMap } = useFilter();
+  const { list, isLoading } = $derived(
+    useFavoritesList({
+      type,
+      slug,
+      filter: $filterMap,
+    }),
+  );
   const defaultVariant = $derived(useDefaultCardVariant(type));
 </script>
 
