@@ -2,20 +2,25 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { time } from '$lib/utils/timing/time.ts';
-import type { FavoriteShowResponse } from '@trakt/api';
 import {
   type FavoritedEntry,
   FavoritedEntrySchema,
-} from '../../models/FavoritedEntry.ts';
+} from '$lib/requests/models/FavoritedEntry.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { time } from '$lib/utils/timing/time.ts';
+import type { FavoriteShowResponse } from '@trakt/api';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 
-type FavoriteShowsParams = {
-  slug: string;
-} & ApiParams;
+type FavoriteShowsParams =
+  & {
+    slug: string;
+  }
+  & ApiParams
+  & FilterParams;
 
 const favoritedShowsRequest = (
-  { fetch, slug }: FavoriteShowsParams,
+  { fetch, slug, filter }: FavoriteShowsParams,
 ) =>
   api({ fetch })
     .users
@@ -27,6 +32,7 @@ const favoritedShowsRequest = (
       },
       query: {
         extended: 'full,images,colors',
+        ...filter,
       },
     });
 
@@ -46,7 +52,10 @@ function mapToFavoriteShow(
 export const showFavoritesQuery = defineQuery({
   key: 'showFavorites',
   invalidations: [InvalidateAction.Favorited('show')],
-  dependencies: (params) => [params.slug],
+  dependencies: (params) => [
+    params.slug,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: favoritedShowsRequest,
   mapper: (response) => response.body.map(mapToFavoriteShow),
   schema: FavoritedEntrySchema.array(),

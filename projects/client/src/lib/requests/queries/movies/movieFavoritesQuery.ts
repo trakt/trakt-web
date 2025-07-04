@@ -1,20 +1,25 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { time } from '$lib/utils/timing/time.ts';
-import type { FavoriteMovieResponse } from '@trakt/api';
 import {
   type FavoritedEntry,
   FavoritedEntrySchema,
-} from '../../models/FavoritedEntry.ts';
+} from '$lib/requests/models/FavoritedEntry.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { time } from '$lib/utils/timing/time.ts';
+import type { FavoriteMovieResponse } from '@trakt/api';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 
-type FavoriteMoviesParams = {
-  slug: string;
-} & ApiParams;
+type FavoriteMoviesParams =
+  & {
+    slug: string;
+  }
+  & ApiParams
+  & FilterParams;
 
 const favoritedMoviesRequest = (
-  { fetch, slug }: FavoriteMoviesParams,
+  { fetch, slug, filter }: FavoriteMoviesParams,
 ) =>
   api({ fetch })
     .users
@@ -26,6 +31,7 @@ const favoritedMoviesRequest = (
       },
       query: {
         extended: 'full,images,colors',
+        ...filter,
       },
     });
 
@@ -42,7 +48,10 @@ function mapToFavoriteMovie(
 export const movieFavoritesQuery = defineQuery({
   key: 'movieFavorites',
   invalidations: [InvalidateAction.Favorited('movie')],
-  dependencies: (params) => [params.slug],
+  dependencies: (params) => [
+    params.slug,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: favoritedMoviesRequest,
   mapper: (response) => response.body.map(mapToFavoriteMovie),
   schema: FavoritedEntrySchema.array(),
