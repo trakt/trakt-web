@@ -34,6 +34,7 @@ declare global {
   type Nil = null | undefined;
 
   type HttpsUrl = `https://${string}`;
+  type MailToUrl = `mailto:${string}`;
 
   type DeepPartial<T> = {
     [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : Partial<T[P]>;
