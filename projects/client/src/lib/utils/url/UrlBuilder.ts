@@ -68,6 +68,25 @@ const ogIframeFactory = (url: HttpsUrl, token: string | Nil): HttpsUrl => {
   return `${url}/?embedded_mode=true${tokenParam}`;
 };
 
+const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
+  const page = globalThis.location?.href ?? 'https://app.trakt.tv';
+  const supportSubject = 'Trakt Support Request';
+  const supportBody = 'Please describe your issue...';
+  const supportDetails = username
+    ? `**Username:** ${username}\n**Page:** ${page}`
+    : `Page: ${page}`;
+
+  const encodedBody = encodeURIComponent(
+    `${supportBody}\n\n---\n\n${supportDetails}`,
+  );
+
+  if (!username) {
+    return `mailto:support@trakt.tv?subject=${supportSubject}&body=${encodedBody}`;
+  }
+
+  return `https://forums.trakt.tv/new-message?username=support&title=${supportSubject}&body=${encodedBody}`;
+};
+
 export const UrlBuilder = {
   history: {
     category: (params: UrlBuilderParams) => {
@@ -153,7 +172,7 @@ export const UrlBuilder = {
     site: () => 'https://trakt.tv',
     status: () => 'https://status.trakt.tv',
     privacy: () => 'https://trakt.tv/privacy',
-    support: () => 'mailto:support@trakt.tv',
+    support: (username?: string) => ogSupportFactory(username),
     frame: {
       yearToDate: (slug: string, year: string, token: string | Nil) =>
         ogIframeFactory(`https://trakt.tv/users/${slug}/year/${year}`, token),
