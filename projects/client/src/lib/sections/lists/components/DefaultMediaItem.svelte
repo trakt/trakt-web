@@ -5,6 +5,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
+  import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
@@ -51,6 +52,14 @@
         type={media.type}
         {media}
       />
+      {#if media.type === "movie"}
+        <CheckInAction
+          style="dropdown-item"
+          title={media.title}
+          type={media.type}
+          {media}
+        />
+      {/if}
     </RenderFor>
   {/if}
 {/snippet}
