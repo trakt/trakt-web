@@ -5,6 +5,7 @@ import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { mapToUserProfile } from '$lib/requests/_internal/mapToUserProfile.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
@@ -61,7 +62,7 @@ const socialActivityRequest = (
 
 export const socialActivityQuery = defineQuery({
   key: 'socialActivity',
-  invalidations: [],
+  invalidations: [InvalidateAction.User.Follow],
   dependencies: (params) => [params.limit, params.page],
   request: socialActivityRequest,
   mapper: (response) => ({
