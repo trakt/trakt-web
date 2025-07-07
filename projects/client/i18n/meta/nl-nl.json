@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "Beoordeel als geweldig"
+    },
+    "badge_text_more": {
+      "default": "en {count} meer",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

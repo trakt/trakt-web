@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "Noter comme excellent"
+    },
+    "badge_text_more": {
+      "default": "pis {count} autres",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

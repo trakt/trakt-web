@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "Als großartig bewerten"
+    },
+    "badge_text_more": {
+      "default": "und {count} mehr",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

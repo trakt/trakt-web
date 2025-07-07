@@ -2295,6 +2295,15 @@
     "button_label_rating_great": {
       "default": "Rate as great",
       "description": "Aria-label for the button that allows users to rate a movie, show, or episode as great."
+    },
+    "badge_text_more": {
+      "default": "and {count} more",
+      "description": "Text for badges shown on covers, used when there are more badges than can fit on the cover. This should be as short as possible.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

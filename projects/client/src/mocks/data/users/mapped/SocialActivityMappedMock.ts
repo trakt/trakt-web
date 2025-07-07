@@ -8,14 +8,14 @@ export const SocialActivityMappedMock: SocialActivity[] = [
   {
     id: 1,
     activityAt: new Date('2025-01-31T23:12:41.000Z'),
-    user: UserProfileHarryMappedMock,
+    users: [UserProfileHarryMappedMock],
     type: 'movie',
     movie: MovieHereticMappedMock,
   },
   {
     id: 2,
     activityAt: new Date('2025-01-31T23:12:41.000Z'),
-    user: UserProfileHarryMappedMock,
+    users: [UserProfileHarryMappedMock],
     type: 'episode',
     show: ShowSiloMappedMock,
     episode: EpisodeSiloMappedMock,

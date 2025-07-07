@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "Evaluează ca grozav"
+    },
+    "badge_text_more": {
+      "default": "și încă {count}",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

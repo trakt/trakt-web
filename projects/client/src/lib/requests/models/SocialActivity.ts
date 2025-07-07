@@ -8,7 +8,7 @@ export const SocialActivityMovieSchema = z.object({
   id: z.number(),
   activityAt: z.date(),
   type: z.literal('movie'),
-  user: UserProfileSchema,
+  users: z.array(UserProfileSchema),
   movie: MovieEntrySchema,
 });
 
@@ -16,7 +16,7 @@ export const SocialActivityEpisodeSchema = z.object({
   id: z.number(),
   activityAt: z.date(),
   type: z.literal('episode'),
-  user: UserProfileSchema,
+  users: z.array(UserProfileSchema),
   show: ShowEntrySchema,
   episode: EpisodeEntrySchema,
 });
