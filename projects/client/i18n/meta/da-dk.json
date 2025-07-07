@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "Vurder som fantastisk"
+    },
+    "badge_text_more": {
+      "default": "og {count} mere",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

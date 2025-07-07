@@ -14,6 +14,7 @@ import {
 } from '$lib/requests/models/SocialActivity.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SocialActivityResponse } from '@trakt/api';
+import { coalesceSocialActivities } from '../../_internal/coalesceSocialActivities.ts';
 
 type SocialActivityParams = PaginationParams & ApiParams;
 
@@ -23,7 +24,7 @@ function mapToSocialActivity(
   const common = {
     id: response.id,
     activityAt: new Date(response.activity_at),
-    user: mapToUserProfile(response.user),
+    users: [mapToUserProfile(response.user)],
   };
 
   switch (response.type) {
@@ -65,10 +66,13 @@ export const socialActivityQuery = defineQuery({
   invalidations: [InvalidateAction.User.Follow],
   dependencies: (params) => [params.limit, params.page],
   request: socialActivityRequest,
-  mapper: (response) => ({
-    entries: response.body.map(mapToSocialActivity),
-    page: extractPageMeta(response.headers),
-  }),
+  mapper: (response) => {
+    const activities = response.body.map(mapToSocialActivity);
+    return {
+      entries: coalesceSocialActivities(activities),
+      page: extractPageMeta(response.headers),
+    };
+  },
   schema: PaginatableSchemaFactory(SocialActivitySchema),
   ttl: time.minutes(15),
 });

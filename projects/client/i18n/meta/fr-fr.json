@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "Noter comme excellent"
+    },
+    "badge_text_more": {
+      "default": "et {count} de plus",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

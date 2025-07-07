@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "素晴らしいと評価"
+    },
+    "badge_text_more": {
+      "default": "その他{count}件",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

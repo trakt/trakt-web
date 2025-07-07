@@ -1815,6 +1815,14 @@
     },
     "button_label_rating_great": {
       "default": "Оцінити як чудово"
+    },
+    "badge_text_more": {
+      "default": "та ще {count}",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }
