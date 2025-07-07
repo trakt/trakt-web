@@ -1,6 +1,8 @@
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onMount } from 'svelte';
 
+const SUB_PIXEL_OFFSET = 0.6666666666666666;
+
 export function setScrollInfo(node: HTMLElement) {
   const scrollHandler = () => {
     const { scrollTop, scrollHeight, clientHeight } = node;
@@ -10,7 +12,8 @@ export function setScrollInfo(node: HTMLElement) {
     }
 
     const isAtTop = scrollTop === 0;
-    const isAtBottom = scrollHeight - scrollTop <= clientHeight;
+    const scrollDifference = scrollHeight - scrollTop - clientHeight;
+    const isAtBottom = scrollDifference <= SUB_PIXEL_OFFSET;
 
     node.classList.toggle('scrolled-down', !isAtTop);
     node.classList.toggle('scrolled-up', !isAtBottom);
