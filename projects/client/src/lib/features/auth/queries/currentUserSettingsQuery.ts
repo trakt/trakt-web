@@ -19,7 +19,7 @@ import { z } from 'zod';
 import { assertDefined } from '../../../utils/assert/assertDefined.ts';
 
 export const UserSettingsSchema = z.object({
-  id: z.number(),
+  id: z.union([z.number(), z.string()]),
   slug: z.string(),
   token: z.string().nullish(),
   name: UserNameSchema,
@@ -75,7 +75,10 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
 
   return {
-    id: assertDefined(user.ids.trakt, 'Current user should have a trakt ID'),
+    id: assertDefined(
+      user.ids.trakt ?? user.ids.uuid,
+      'Current user should have a valid ID',
+    ),
     slug: user.ids.slug,
     token: account.token,
     name: toUserName(user.name),
