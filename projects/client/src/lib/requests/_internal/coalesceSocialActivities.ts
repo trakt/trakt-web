@@ -1,7 +1,7 @@
 import { time } from '$lib/utils/timing/time.ts';
 import type { SocialActivity } from '../models/SocialActivity.ts';
 
-const ACTIVITY_COALESCE_WINDOW = time.minutes(10);
+export const ACTIVITY_COALESCE_WINDOW = time.minutes(10);
 
 function isSameMovie(
   activityA: SocialActivity,
