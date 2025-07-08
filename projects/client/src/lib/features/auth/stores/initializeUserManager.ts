@@ -53,8 +53,12 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
     if (user?.expired) {
       isRefreshing.set(true);
 
-      const refreshedUser = await manager.signinSilent();
-      handleUserEvent(refreshedUser);
+      try {
+        const refreshedUser = await manager.signinSilent();
+        handleUserEvent(refreshedUser);
+      } catch (_) {
+        handleUserEvent(null);
+      }
 
       isRefreshing.set(false);
       return;
