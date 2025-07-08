@@ -7,7 +7,7 @@
   onMount(async () => {
     try {
       const userManager = new UserManager({
-        ...getOidcConfig(globalThis.window.location.origin),
+        ...getOidcConfig(),
         automaticSilentRenew: false,
       });
 

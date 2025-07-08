@@ -1,13 +1,24 @@
+import { IS_DEV } from '$lib/utils/env/index.ts';
+import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { type UserManagerSettings, WebStorageStateStore } from 'oidc-client-ts';
 
-const TRAKT_OIDC_AUTHORITY = 'https://trakt.tv';
+function getAuthority() {
+  return prependHttps(
+    TRAKT_TARGET_ENVIRONMENT
+      .replace('api.', '')
+      .replace('apiz.', '')
+      .replace('api-staging.', 'staging.'),
+  );
+}
 
-export function getOidcConfig(origin: string): UserManagerSettings {
+export function getOidcConfig(): UserManagerSettings {
+  const referrer = IS_DEV ? 'http://localhost:5173' : 'https://app.trakt.tv';
+
   return {
-    authority: TRAKT_OIDC_AUTHORITY,
+    authority: getAuthority(),
     client_id: TRAKT_CLIENT_ID,
-    redirect_uri: `${origin}/callback`,
-    silent_redirect_uri: `${origin}/silent-redirect`,
+    redirect_uri: `${referrer}/callback`,
+    silent_redirect_uri: `${referrer}/silent-redirect`,
     response_type: 'code',
     scope: 'public openid profile email',
     automaticSilentRenew: true,
