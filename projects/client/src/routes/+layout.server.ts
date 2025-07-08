@@ -6,7 +6,6 @@ import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
 
 import { AUTH_COOKIE_NAME } from '$lib/features/auth/handle.ts';
 import type { OidcAuthToken } from '$lib/features/auth/models/OidcAuthToken.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import type { LayoutServerLoad } from './$types.ts';
 
 const getAuth = (auth: Nil | OidcAuthToken) => {
@@ -18,12 +17,10 @@ const getAuth = (auth: Nil | OidcAuthToken) => {
     };
   }
 
-  const now = new Date().getTime() / time.seconds(1);
-
   return {
     token: auth.token,
     expiresAt: auth.expiresAt,
-    isAuthorized: auth.expiresAt ? auth.expiresAt > now : false,
+    isAuthorized: true,
   };
 };
 

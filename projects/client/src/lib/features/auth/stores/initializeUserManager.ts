@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { User, UserManager } from 'oidc-client-ts';
+import { derived, readable, writable } from 'svelte/store';
 import { getOidcConfig } from '../getOidcConfig.ts';
 import type { OidcAuthToken } from '../models/OidcAuthToken.ts';
 import { setToken } from '../token/index.ts';
@@ -21,9 +22,12 @@ function postAuth(user: User | null) {
 
 export function initializeUserManager(hasLegacyAuth: boolean) {
   if (!browser || hasLegacyAuth) {
-    return;
+    return {
+      isRefreshing: readable(false),
+    };
   }
 
+  const isRefreshing = writable(false);
   const { isAuthorized } = getAuthContext();
 
   const manager = new UserManager(
@@ -47,8 +51,12 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
 
   const initializeUser = async (user: User | null) => {
     if (user?.expired) {
+      isRefreshing.set(true);
+
       const refreshedUser = await manager.signinSilent();
-      setAuthState(refreshedUser);
+      handleUserEvent(refreshedUser);
+
+      isRefreshing.set(false);
       return;
     }
 
@@ -58,6 +66,11 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
   manager.getUser().then(initializeUser);
   manager.events.addUserLoaded(handleUserEvent);
   manager.events.addUserUnloaded(() => handleUserEvent(null));
+  manager.events.addSilentRenewError(() => handleUserEvent(null));
 
   setUserManager(manager);
+
+  return {
+    isRefreshing: derived(isRefreshing, ($isRefreshing) => $isRefreshing),
+  };
 }
