@@ -12,7 +12,9 @@
 
   createAuthContext({ isAuthorized: isAuthorizedLegacy || isAuthorized });
 
-  initializeUserManager(isAuthorizedLegacy);
+  const { isRefreshing } = initializeUserManager(isAuthorizedLegacy);
 </script>
 
-{@render children()}
+{#if !$isRefreshing}
+  {@render children()}
+{/if}

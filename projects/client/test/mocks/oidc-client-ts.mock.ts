@@ -17,6 +17,7 @@ const mockUserManager = vi.fn(() => ({
   events: {
     addUserLoaded: vi.fn().mockResolvedValue(OidcUserMock),
     addUserUnloaded: vi.fn(),
+    addSilentRenewError: vi.fn(),
   },
 }));
 
