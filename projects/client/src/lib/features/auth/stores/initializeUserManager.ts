@@ -27,7 +27,7 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
   const { isAuthorized } = getAuthContext();
 
   const manager = new UserManager(
-    getOidcConfig(globalThis.window.location.origin),
+    getOidcConfig(),
   );
 
   const setAuthState = (user: User | null) => {
