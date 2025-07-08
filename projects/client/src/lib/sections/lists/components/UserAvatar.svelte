@@ -1,7 +1,9 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
 
   type UserAvatarProps = {
@@ -13,20 +15,30 @@
   const { user, size = "large", icon }: UserAvatarProps = $props();
 </script>
 
-<div
-  class="trakt-user-avatar"
-  class:trakt-vip-user={user.isVip}
-  data-size={size}
->
-  <CrossOriginImage
-    src={user.avatar.url}
-    alt={m.image_alt_user_avatar({ username: user.username })}
-  />
+{#snippet avatar()}
+  <div
+    class="trakt-user-avatar"
+    class:trakt-vip-user={user.isVip}
+    data-size={size}
+  >
+    <CrossOriginImage
+      src={user.avatar.url}
+      alt={m.image_alt_user_avatar({ username: user.username })}
+    />
 
-  {#if icon}
-    {@render icon()}
-  {/if}
-</div>
+    {#if icon}
+      {@render icon()}
+    {/if}
+  </div>
+{/snippet}
+
+{#if user.slug}
+  <Link href={UrlBuilder.profile.user(user.slug)}>
+    {@render avatar()}
+  </Link>
+{:else}
+  {@render avatar()}
+{/if}
 
 <style>
   .trakt-user-avatar {
