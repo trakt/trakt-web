@@ -7,7 +7,7 @@ import { AnalyticsEvent } from './AnalyticsEvent.ts';
 type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
 type FilterType = { id: string; action: 'set' | 'reset' };
-type CheckInType = { type: 'episode' | 'movie' };
+type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };
 type FollowType = { action: 'follow' | 'unfollow' };
 type ExtrasType = { slug: string; type: MediaVideoType };
 type CommentType = { action: 'post' | 'reply' };
