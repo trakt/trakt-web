@@ -1,7 +1,7 @@
+import type { NowPlayingItem } from '$lib/requests/models/NowPlayingItem.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
 import { derived, writable } from 'svelte/store';
-import type { NowPlayingItem } from '../../../requests/models/NowPlayingItem.ts';
 
 const UPDATE_FREQUENCY = time.seconds(1);
 

@@ -2300,6 +2300,19 @@
           "type": "number"
         }
       }
+    },
+    "button_text_stop_playing": {
+      "default": "Stop",
+      "description": "Text for the button that allows users to stop the currently checked in movie or episode. This will result in the now playing toast being hidden."
+    },
+    "button_label_stop_playing": {
+      "default": "Stop the checkin for {title}",
+      "description": "Aria-label for the button that allows users to stop the currently checked in movie or episode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
