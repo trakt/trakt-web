@@ -29,7 +29,9 @@
   <div class="trakt-summary-meta-container">
     <RatingList ratings={$ratings} airDate={media.airDate} />
     <div class="trakt-meta-tags">
-      <WatchCountTag i18n={TagIntlProvider} count={watchCount} />
+      {#if watchCount > 1}
+        <WatchCountTag i18n={TagIntlProvider} count={watchCount} />
+      {/if}
 
       {#if media.certification}
         <InfoTag>
