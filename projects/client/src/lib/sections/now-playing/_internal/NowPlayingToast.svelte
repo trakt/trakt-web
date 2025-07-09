@@ -6,6 +6,7 @@
   import { episodeActivityTitle } from "$lib/utils/string/episodeActivityTitle";
   import NowPlayingItemCard from "./NowPlayingItemCard.svelte";
   import ProgressBar from "./ProgressBar.svelte";
+  import StopButton from "./StopButton.svelte";
   import { useFooterHeight } from "./useFooterHeight";
   import { useNowPlayingProgress } from "./useNowPlayingProgress";
   import { useScrollDistance } from "./useScrollDistance";
@@ -33,7 +34,12 @@
   >
     <NowPlayingItemCard nowPlayingItem={nowPlaying} />
     <div class="trakt-now-playing-content">
-      <span class="trakt-now-playing-label">{m.header_now_playing()}</span>
+      <div class="trakt-now-playing-header">
+        <div class="trakt-now-playing-label">
+          {m.header_now_playing()}
+        </div>
+        <StopButton {nowPlaying} {title} />
+      </div>
       <div class="trakt-now-playing-status">
         <h5 class="trakt-now-playing-title ellipsis">
           {title}
@@ -115,7 +121,6 @@
 
   .trakt-now-playing-content {
     flex: 1;
-    padding-top: var(--ni-8);
     height: calc(100% - var(--ni-8));
 
     display: flex;
@@ -130,6 +135,12 @@
     .trakt-now-playing-label,
     .trakt-now-playing-title {
       transition: font-size var(--transition-increment) ease-in-out;
+    }
+
+    .trakt-now-playing-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     @include for-mobile {
