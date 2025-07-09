@@ -3,20 +3,32 @@ import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts'
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { time } from '$lib/utils/timing/time.ts';
-import type { WatchingResponse } from '@trakt/api';
-import { InvalidateAction } from '../../models/InvalidateAction.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import {
+  type NowPlayingAction,
   type NowPlayingItem,
   NowPlayingItemSchema,
-} from '../../models/NowPlayingItem.ts';
+} from '$lib/requests/models/NowPlayingItem.ts';
+import { time } from '$lib/utils/timing/time.ts';
+import type { WatchingResponse } from '@trakt/api';
 
 type UserProfileParams = { slug: string } & ApiParams;
+
+function mapToActionType(action: string): NowPlayingAction {
+  switch (action) {
+    case 'checkin':
+    case 'scrobble':
+      return action as NowPlayingAction;
+    default:
+      throw new Error(`Unknown action type: ${action}`);
+  }
+}
 
 function mapToNowPlayingItem(response: WatchingResponse): NowPlayingItem {
   const commonProps = {
     startedAt: new Date(response.started_at),
     expiresAt: new Date(response.expires_at),
+    action: mapToActionType(response.action),
   };
 
   if (response.type === 'episode') {

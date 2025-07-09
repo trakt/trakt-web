@@ -6,4 +6,5 @@ export const UserWatchingMappedMock: NowPlayingItem = {
   expiresAt: new Date('2023-10-01T13:00:00.000Z'),
   media: MovieHereticMappedMock,
   type: 'movie',
+  action: 'checkin',
 };
