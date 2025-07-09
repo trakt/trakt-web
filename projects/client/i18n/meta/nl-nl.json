@@ -1287,9 +1287,6 @@
     "tag_text_watch_count": {
       "default": "Aantal keer bekeken"
     },
-    "tag_text_watched_episodes": {
-      "default": "Bekeken afleveringen"
-    },
     "list_placeholder_media_history": {
       "default": "Je hebt {title} nog niet bekeken",
       "variables": {

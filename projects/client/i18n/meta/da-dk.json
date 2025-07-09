@@ -1287,9 +1287,6 @@
     "tag_text_watch_count": {
       "default": "Antal set"
     },
-    "tag_text_watched_episodes": {
-      "default": "Afsnit set"
-    },
     "list_placeholder_media_history": {
       "default": "Du har ikke set {title} endnu",
       "variables": {

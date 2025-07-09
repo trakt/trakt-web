@@ -1,18 +1,11 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
-  import type { EpisodeType } from "$lib/requests/models/EpisodeType";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { linear } from "svelte/easing";
   import { slide } from "svelte/transition";
   import type { TagIntl } from "./TagIntl";
 
-  const {
-    i18n,
-    count,
-    type,
-  }: { i18n: TagIntl; count: number; type: MediaType | EpisodeType } = $props();
+  const { i18n, count }: { i18n: TagIntl; count: number } = $props();
 
-  const isForShow = $derived(type === "show");
   const TRANSITION_DURATION = 300;
 </script>
 
@@ -23,7 +16,7 @@
     classList="trakt-tag-label"
   >
     <p class="meta-info uppercase no-wrap">
-      {i18n.watchCountLabel(isForShow)}
+      {i18n.watchCountLabel()}
     </p>
   </StemTag>
 

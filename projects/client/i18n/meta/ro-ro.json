@@ -1287,9 +1287,6 @@
     "tag_text_watch_count": {
       "default": "Număr de vizionări"
     },
-    "tag_text_watched_episodes": {
-      "default": "Episoade vizionate"
-    },
     "list_placeholder_media_history": {
       "default": "Încă nu ai urmărit {title}!",
       "variables": {
