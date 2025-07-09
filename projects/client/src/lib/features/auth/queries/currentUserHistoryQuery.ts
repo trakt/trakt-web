@@ -51,7 +51,7 @@ export const WatchedShowSchema = WatchedMediaSchema.extend({
 export type WatchedShow = z.infer<typeof WatchedShowSchema>;
 
 function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
-  const { show, last_watched_at, plays, seasons = [] } = entry;
+  const { show, last_watched_at, seasons = [] } = entry;
   const aired = entry.show.aired_episodes;
 
   const episodes = (seasons ?? [])
@@ -64,15 +64,23 @@ function mapWatchedShowResponse(entry: WatchedShowsResponse[0]): WatchedShow {
       }))
     );
 
-  const watchedEpisodeCount = episodes
-    .filter(({ season }) => season !== 0)
-    .length;
+  const regularEpisodes = episodes.filter(
+    ({ season }) => season !== 0,
+  );
+
+  const watchedEpisodeCount = regularEpisodes.length;
+  const isWatched = watchedEpisodeCount >= aired;
+
+  // FIXME: move this logic to the backend
+  const plays = isWatched
+    ? Math.min(...regularEpisodes.map((episode) => episode.plays))
+    : 0;
 
   return {
     id: show.ids.trakt,
     watchedAt: new Date(last_watched_at),
-    isWatched: watchedEpisodeCount === aired,
     isPartiallyWatched: watchedEpisodeCount > 0 && watchedEpisodeCount < aired,
+    isWatched,
     plays,
     episodes,
   };

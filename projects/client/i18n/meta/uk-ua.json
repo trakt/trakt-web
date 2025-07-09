@@ -1287,9 +1287,6 @@
     "tag_text_watch_count": {
       "default": "Кількість переглядів"
     },
-    "tag_text_watched_episodes": {
-      "default": "Переглянуто епізодів"
-    },
     "list_placeholder_media_history": {
       "default": "Ви ще не дивилися {title}",
       "variables": {

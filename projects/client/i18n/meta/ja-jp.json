@@ -1287,9 +1287,6 @@
     "tag_text_watch_count": {
       "default": "視聴回数"
     },
-    "tag_text_watched_episodes": {
-      "default": "視聴済みエピソード"
-    },
     "list_placeholder_media_history": {
       "default": "{title} はまだ見ていないよ",
       "variables": {

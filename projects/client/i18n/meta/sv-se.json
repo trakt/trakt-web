@@ -1287,9 +1287,6 @@
     "tag_text_watch_count": {
       "default": "Antal visningar"
     },
-    "tag_text_watched_episodes": {
-      "default": "Visade avsnitt"
-    },
     "list_placeholder_media_history": {
       "default": "Du har inte sett {title} än",
       "variables": {

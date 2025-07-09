@@ -1627,10 +1627,6 @@
       "default": "Watch count",
       "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible."
     },
-    "tag_text_watched_episodes": {
-      "default": "Watched episodes",
-      "description": "Text for the tag that is shown before the episode watch count. This should be as short as possible."
-    },
     "list_placeholder_media_history": {
       "default": "You haven't watched {title} yet",
       "description": "Placeholder text shown when there is no watch history for a movie, show, or episode.",

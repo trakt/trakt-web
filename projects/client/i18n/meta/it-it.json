@@ -1287,9 +1287,6 @@
     "tag_text_watch_count": {
       "default": "Conti visualizzazioni"
     },
-    "tag_text_watched_episodes": {
-      "default": "Episodi visti"
-    },
     "list_placeholder_media_history": {
       "default": "Non hai ancora visto {title}",
       "variables": {

@@ -6,6 +6,6 @@ export type TagIntl = {
   toReleaseEstimate: (airDate: Date) => string;
   tbaLabel: () => string;
   toAnticipatedCount: (count: number) => string;
-  watchCountLabel: (isShow: boolean) => string;
+  watchCountLabel: () => string;
   trendLabel: (delta: number) => string;
 };
