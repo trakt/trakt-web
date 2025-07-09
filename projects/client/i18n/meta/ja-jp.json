@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "停止"
-    },
     "button_label_stop_playing": {
       "default": "{title} のチェックインを停止",
       "variables": {

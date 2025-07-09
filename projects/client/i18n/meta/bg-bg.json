@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Спри"
-    },
     "button_label_stop_playing": {
       "default": "Спри отбелязването за {title}",
       "variables": {

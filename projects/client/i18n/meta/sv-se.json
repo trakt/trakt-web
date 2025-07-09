@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Sluta"
-    },
     "button_label_stop_playing": {
       "default": "Stoppa incheckningen för {title}",
       "variables": {

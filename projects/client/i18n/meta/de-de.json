@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Stop"
-    },
     "button_label_stop_playing": {
       "default": "Den Check-in für {title} stoppen",
       "variables": {

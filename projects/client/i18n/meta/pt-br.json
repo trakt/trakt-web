@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Parar"
-    },
     "button_label_stop_playing": {
       "default": "Parar o check-in de {title}",
       "variables": {
