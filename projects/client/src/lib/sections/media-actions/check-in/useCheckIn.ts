@@ -65,13 +65,13 @@ export function useCheckIn(props: UseCheckInProps) {
 
     if (type === 'episode') {
       const payload = mapToEpisodePayload(props);
-      track({ type: 'episode' });
+      track({ type: 'episode', action: 'start' });
       await checkinEpisodeRequest({ body: payload });
     }
 
     if (type === 'movie') {
       const payload = mapToMoviePayload(props);
-      track({ type: 'movie' });
+      track({ type: 'movie', action: 'start' });
       await checkinMovieRequest({ body: payload });
     }
 
