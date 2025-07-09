@@ -1,15 +1,15 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { useNowPlaying } from '$lib/features/now-playing/useNowPlaying.ts';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
+import { checkinEpisodeRequest } from '$lib/requests/queries/checkin/checkinEpisodeRequest.ts';
+import { checkinMovieRequest } from '$lib/requests/queries/checkin/checkinMovieRequest.ts';
+import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { MovieCheckinRequest, ShowCheckinRequest } from '@trakt/api';
 import { derived, writable } from 'svelte/store';
-import { AnalyticsEvent } from '../../../features/analytics/events/AnalyticsEvent.ts';
-import { useTrack } from '../../../features/analytics/useTrack.ts';
-import type { EpisodeEntry } from '../../../requests/models/EpisodeEntry.ts';
-import { InvalidateAction } from '../../../requests/models/InvalidateAction.ts';
-import type { MovieEntry } from '../../../requests/models/MovieEntry.ts';
-import type { ShowEntry } from '../../../requests/models/ShowEntry.ts';
-import { checkinEpisodeRequest } from '../../../requests/queries/checkin/checkinEpisodeRequest.ts';
-import { checkinMovieRequest } from '../../../requests/queries/checkin/checkinMovieRequest.ts';
-import { useInvalidator } from '../../../stores/useInvalidator.ts';
-import { useNowPlaying } from '../../now-playing/useNowPlaying.ts';
 
 type EpisodeProps = {
   type: 'episode';

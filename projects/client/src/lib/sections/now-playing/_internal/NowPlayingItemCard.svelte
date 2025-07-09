@@ -4,7 +4,7 @@
   import NowPlayingEpisodeCover from "./NowPlayingEpisodeCover.svelte";
   import NowPlayingMovieCover from "./NowPlayingMovieCover.svelte";
 
-  const { nowPlayingItem }: { nowPlayingItem: NowPlayingItem } = $props();
+  const { nowPlaying }: { nowPlaying: NowPlayingItem } = $props();
 </script>
 
 <Card
@@ -13,14 +13,14 @@
   --height-card="var(--height-now-playing-card)"
   --height-card-cover="var(--height-now-playing-card)"
 >
-  {#if nowPlayingItem.type === "movie"}
-    <NowPlayingMovieCover movie={nowPlayingItem.media} />
+  {#if nowPlaying.type === "movie"}
+    <NowPlayingMovieCover movie={nowPlaying.media} />
   {/if}
 
-  {#if nowPlayingItem.type === "episode"}
+  {#if nowPlaying.type === "episode"}
     <NowPlayingEpisodeCover
-      episode={nowPlayingItem.episode}
-      show={nowPlayingItem.media}
+      episode={nowPlaying.episode}
+      show={nowPlaying.media}
     />
   {/if}
 </Card>

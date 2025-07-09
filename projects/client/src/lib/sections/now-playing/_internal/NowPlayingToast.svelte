@@ -1,44 +1,43 @@
 <script lang="ts">
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem";
+  import { useNowPlaying } from "$lib/features/now-playing/useNowPlaying";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { episodeActivityTitle } from "$lib/utils/string/episodeActivityTitle";
   import NowPlayingItemCard from "./NowPlayingItemCard.svelte";
   import ProgressBar from "./ProgressBar.svelte";
   import StopButton from "./StopButton.svelte";
   import { useFooterHeight } from "./useFooterHeight";
-  import { useNowPlayingProgress } from "./useNowPlayingProgress";
   import { useScrollDistance } from "./useScrollDistance";
 
-  const { nowPlaying }: { nowPlaying: NowPlayingItem } = $props();
-
-  const { isPlaying, remainingMinutes, progress } = $derived(
-    useNowPlayingProgress(nowPlaying),
-  );
+  const { nowPlaying, remainingMinutes, progress } = useNowPlaying();
 
   const { distanceFromBottom } = useScrollDistance();
   const { footerHeight } = useFooterHeight();
 
-  const title = $derived(
-    nowPlaying.type === "movie"
-      ? nowPlaying.media.title
-      : episodeActivityTitle(nowPlaying.episode, nowPlaying.media),
-  );
+  const title = $derived.by(() => {
+    if (!$nowPlaying) {
+      return "";
+    }
+
+    return $nowPlaying.type === "movie"
+      ? $nowPlaying.media.title
+      : episodeActivityTitle($nowPlaying.episode, $nowPlaying.media);
+  });
 </script>
 
-{#if $isPlaying}
+{#if $nowPlaying}
   <div
     class="trakt-now-playing-toast"
     style="--distance-from-bottom: {$distanceFromBottom}px; --footer-height: {$footerHeight}px"
   >
-    <NowPlayingItemCard nowPlayingItem={nowPlaying} />
+    <NowPlayingItemCard nowPlaying={$nowPlaying} />
     <div class="trakt-now-playing-content">
       <div class="trakt-now-playing-header">
         <div class="trakt-now-playing-label">
           {m.header_now_playing()}
         </div>
-        <StopButton {nowPlaying} {title} />
+        <StopButton nowPlaying={$nowPlaying} {title} />
       </div>
       <div class="trakt-now-playing-status">
         <h5 class="trakt-now-playing-title ellipsis">

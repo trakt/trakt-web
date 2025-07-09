@@ -15,6 +15,7 @@
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
+  import NowPlayingProvider from "$lib/features/now-playing/NowPlayingProvider.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
@@ -130,44 +131,52 @@
                     <SearchProvider type="movie">
                       <FilterProvider>
                         <CoverProvider>
-                          <CoverImage />
+                          <NowPlayingProvider>
+                            <CoverImage />
 
-                          <ThemeProvider theme={data.theme}>
-                            <ListScrollHistoryProvider>
-                              <div class="trakt-layout-wrapper">
-                                <RenderFor audience="all" navigation="default">
-                                  <Navbar />
-                                </RenderFor>
-                                <RenderFor audience="all" navigation="dpad">
-                                  <SideNavbar />
-                                </RenderFor>
-                                <div class="trakt-layout-content">
-                                  {@render children()}
+                            <ThemeProvider theme={data.theme}>
+                              <ListScrollHistoryProvider>
+                                <div class="trakt-layout-wrapper">
+                                  <RenderFor
+                                    audience="all"
+                                    navigation="default"
+                                  >
+                                    <Navbar />
+                                  </RenderFor>
+                                  <RenderFor audience="all" navigation="dpad">
+                                    <SideNavbar />
+                                  </RenderFor>
+                                  <div class="trakt-layout-content">
+                                    {@render children()}
+                                  </div>
+                                  <RenderFor
+                                    audience="all"
+                                    navigation="default"
+                                  >
+                                    <Footer />
+                                  </RenderFor>
                                 </div>
-                                <RenderFor audience="all" navigation="default">
-                                  <Footer />
+                                <RenderFor
+                                  audience="all"
+                                  device={["mobile", "tablet-sm"]}
+                                  navigation="default"
+                                >
+                                  <MobileNavbar />
                                 </RenderFor>
-                              </div>
-                              <RenderFor
-                                audience="all"
-                                device={["mobile", "tablet-sm"]}
-                                navigation="default"
-                              >
-                                <MobileNavbar />
-                              </RenderFor>
-                              <RenderFor
-                                audience="authenticated"
-                                navigation="default"
-                              >
-                                <NowPlaying />
-                              </RenderFor>
-                              <SvelteQueryDevtools
-                                buttonPosition="bottom-left"
-                                styleNonce="opacity: 0.5"
-                              />
-                              <FirefoxBlurHack />
-                            </ListScrollHistoryProvider>
-                          </ThemeProvider>
+                                <RenderFor
+                                  audience="authenticated"
+                                  navigation="default"
+                                >
+                                  <NowPlaying />
+                                </RenderFor>
+                                <SvelteQueryDevtools
+                                  buttonPosition="bottom-left"
+                                  styleNonce="opacity: 0.5"
+                                />
+                                <FirefoxBlurHack />
+                              </ListScrollHistoryProvider>
+                            </ThemeProvider>
+                          </NowPlayingProvider>
                         </CoverProvider>
                       </FilterProvider>
                     </SearchProvider>
