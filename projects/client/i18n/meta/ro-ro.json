@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Oprește"
-    },
     "button_label_stop_playing": {
       "default": "Oprește check-in-ul pentru {title}",
       "variables": {

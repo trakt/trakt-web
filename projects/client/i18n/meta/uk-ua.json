@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Зупинити"
-    },
     "button_label_stop_playing": {
       "default": "Зупинити відмітку для {title}",
       "variables": {

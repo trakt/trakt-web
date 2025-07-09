@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Stopp"
-    },
     "button_label_stop_playing": {
       "default": "Stopp innsjekkingen for {title}",
       "variables": {

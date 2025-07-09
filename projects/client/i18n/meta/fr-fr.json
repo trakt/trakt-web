@@ -1821,9 +1821,6 @@
         }
       }
     },
-    "button_text_stop_playing": {
-      "default": "Arrêter"
-    },
     "button_label_stop_playing": {
       "default": "Arrêter l'enregistrement pour {title}",
       "variables": {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import StopIcon from "$lib/components/icons/StopIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem";
@@ -19,16 +19,13 @@
 </script>
 
 {#if isStoppable}
-  <Button
+  <ActionButton
     disabled={$isStopping}
     onclick={stop}
     label={m.button_label_stop_playing({ title })}
     style="ghost"
     size="small"
   >
-    {m.button_text_stop_playing()}
-    {#snippet icon()}
-      <StopIcon />
-    {/snippet}
-  </Button>
+    <StopIcon />
+  </ActionButton>
 {/if}
