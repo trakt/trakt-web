@@ -6,7 +6,7 @@
 
   onMount(() => {
     getUserManager()
-      ?.signinRedirectCallback()
+      ?.signinCallback()
       .then(() => {
         const homeUrl = new URL(
           UrlBuilder.home(),
