@@ -52,14 +52,10 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
       setAuthState(user);
     };
 
-    const initializeUser = async (user: User | null) => {
+    const initializeUser = (user: User | null) => {
       if (user?.expired) {
-        try {
-          const refreshedUser = await manager.signinSilent();
-          handleUserEvent(refreshedUser);
-        } catch (_) {
-          handleUserEvent(null);
-        }
+        manager.signinSilent()
+          .catch(() => handleUserEvent(null));
 
         return;
       }
