@@ -9,37 +9,39 @@ import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSi
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
 import { renderComponent } from '$test/beds/component/renderComponent.ts';
-import { screen } from '@testing-library/svelte';
+import { screen, waitFor } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import MediaDetails from './MediaDetails.svelte';
 import type { MediaDetailsProps } from './MediaDetailsProps.ts';
 
 describe('MediaDetails', () => {
   const mediaTests = (props: MediaDetailsProps & { type: MediaType }) => {
-    it('should display the media details sections', () => {
+    it('should display the media details sections', async () => {
       renderComponent(
         MediaDetails,
         { props },
       );
 
-      const premieredLabel = screen.getByText('Premiered');
-      const runtimeLabel = screen.getByText('Runtime');
-      const writerLabel = screen.getByText('Writer');
-      const countryLabel = screen.getByText('Country');
-      const languageLabel = screen.getByText('Language');
-      const studioLabel = screen.getByText('Studio');
-      const genreLabel = screen.getByText('Genre');
+      await waitFor(() => {
+        const premieredLabel = screen.getByText('Premiered');
+        const runtimeLabel = screen.getByText('Runtime');
+        const writerLabel = screen.getByText('Writer');
+        const countryLabel = screen.getByText('Country');
+        const languageLabel = screen.getByText('Language');
+        const studioLabel = screen.getByText('Studio');
+        const genreLabel = screen.getByText('Genre');
 
-      expect(premieredLabel).toBeInTheDocument();
-      expect(runtimeLabel).toBeInTheDocument();
-      expect(writerLabel).toBeInTheDocument();
-      expect(countryLabel).toBeInTheDocument();
-      expect(languageLabel).toBeInTheDocument();
-      expect(studioLabel).toBeInTheDocument();
-      expect(genreLabel).toBeInTheDocument();
+        expect(premieredLabel).toBeInTheDocument();
+        expect(runtimeLabel).toBeInTheDocument();
+        expect(writerLabel).toBeInTheDocument();
+        expect(countryLabel).toBeInTheDocument();
+        expect(languageLabel).toBeInTheDocument();
+        expect(studioLabel).toBeInTheDocument();
+        expect(genreLabel).toBeInTheDocument();
+      });
     });
 
-    it('should distinguish upcoming items', () => {
+    it('should distinguish upcoming items', async () => {
       const nextYear = new Date();
       nextYear.setFullYear(nextYear.getFullYear() + 1);
 
@@ -56,11 +58,13 @@ describe('MediaDetails', () => {
         },
       );
 
-      const premiereLabel = screen.getByText('Expected Premiere');
-      expect(premiereLabel).toBeInTheDocument();
+      await waitFor(() => {
+        const premiereLabel = screen.getByText('Expected Premiere');
+        expect(premiereLabel).toBeInTheDocument();
+      });
     });
 
-    it('should show the status if there is no known year for an item', () => {
+    it('should show the status if there is no known year for an item', async () => {
       renderComponent(
         MediaDetails,
         {
@@ -75,14 +79,16 @@ describe('MediaDetails', () => {
         },
       );
 
-      const statusLabel = screen.getByText('Status');
-      const premieredLabel = screen.queryByText('Premiered');
+      await waitFor(() => {
+        const statusLabel = screen.getByText('Status');
+        const premieredLabel = screen.queryByText('Premiered');
 
-      expect(statusLabel).toBeInTheDocument();
-      expect(premieredLabel).not.toBeInTheDocument();
+        expect(statusLabel).toBeInTheDocument();
+        expect(premieredLabel).not.toBeInTheDocument();
+      });
     });
 
-    it('should hide undefined values', () => {
+    it('should hide undefined values', async () => {
       renderComponent(
         MediaDetails,
         {
@@ -96,11 +102,13 @@ describe('MediaDetails', () => {
         },
       );
 
-      const countryLabel = screen.queryByText('Country');
-      expect(countryLabel).not.toBeInTheDocument();
+      await waitFor(() => {
+        const countryLabel = screen.queryByText('Country');
+        expect(countryLabel).not.toBeInTheDocument();
+      });
     });
 
-    it('should not show the original title if it is equal to the title', () => {
+    it('should not show the original title if it is equal to the title', async () => {
       renderComponent(
         MediaDetails,
         {
@@ -114,11 +122,13 @@ describe('MediaDetails', () => {
         },
       );
 
-      const originalTitleLabel = screen.queryByText('Original Title');
-      expect(originalTitleLabel).not.toBeInTheDocument();
+      await waitFor(() => {
+        const originalTitleLabel = screen.queryByText('Original Title');
+        expect(originalTitleLabel).not.toBeInTheDocument();
+      });
     });
 
-    it('should show the original title if it differs from the title', () => {
+    it('should show the original title if it differs from the title', async () => {
       renderComponent(
         MediaDetails,
         {
@@ -132,8 +142,10 @@ describe('MediaDetails', () => {
         },
       );
 
-      const originalTitleLabel = screen.getByText('Original Title');
-      expect(originalTitleLabel).toBeInTheDocument();
+      await waitFor(() => {
+        const originalTitleLabel = screen.getByText('Original Title');
+        expect(originalTitleLabel).toBeInTheDocument();
+      });
     });
   };
 
@@ -147,17 +159,19 @@ describe('MediaDetails', () => {
 
     mediaTests(defaultProps);
 
-    it('should display the director instead of creator', () => {
+    it('should display the director instead of creator', async () => {
       renderComponent(
         MediaDetails,
         { props: defaultProps },
       );
 
-      const directorLabel = screen.getByText('Director');
-      const creatorLabel = screen.queryByText('Creator');
+      await waitFor(() => {
+        const directorLabel = screen.getByText('Director');
+        const creatorLabel = screen.queryByText('Creator');
 
-      expect(directorLabel).toBeInTheDocument();
-      expect(creatorLabel).not.toBeInTheDocument();
+        expect(directorLabel).toBeInTheDocument();
+        expect(creatorLabel).not.toBeInTheDocument();
+      });
     });
   });
 
@@ -171,7 +185,7 @@ describe('MediaDetails', () => {
 
     mediaTests(defaultProps);
 
-    it('should display the creator instead of director', () => {
+    it('should display the creator instead of director', async () => {
       renderComponent(
         MediaDetails,
         {
@@ -179,11 +193,13 @@ describe('MediaDetails', () => {
         },
       );
 
-      const directorLabel = screen.queryByText('Director');
-      const creatorLabel = screen.getByText('Creator');
+      await waitFor(() => {
+        const directorLabel = screen.queryByText('Director');
+        const creatorLabel = screen.getByText('Creator');
 
-      expect(directorLabel).not.toBeInTheDocument();
-      expect(creatorLabel).toBeInTheDocument();
+        expect(directorLabel).not.toBeInTheDocument();
+        expect(creatorLabel).toBeInTheDocument();
+      });
     });
   });
 
@@ -194,7 +210,7 @@ describe('MediaDetails', () => {
       type: 'episode',
     };
 
-    it('should display the episode details', () => {
+    it('should display the episode details', async () => {
       renderComponent(
         MediaDetails,
         {
@@ -202,18 +218,20 @@ describe('MediaDetails', () => {
         },
       );
 
-      const directorLabel = screen.getByText('Director');
-      const creatorLabel = screen.queryByText('Creator');
-      const airedLabel = screen.getByText('Aired');
-      const runtimeLabel = screen.getByText('Runtime');
+      await waitFor(() => {
+        const directorLabel = screen.getByText('Director');
+        const creatorLabel = screen.queryByText('Creator');
+        const airedLabel = screen.getByText('Aired');
+        const runtimeLabel = screen.getByText('Runtime');
 
-      expect(directorLabel).toBeInTheDocument();
-      expect(creatorLabel).not.toBeInTheDocument();
-      expect(airedLabel).toBeInTheDocument();
-      expect(runtimeLabel).toBeInTheDocument();
+        expect(directorLabel).toBeInTheDocument();
+        expect(creatorLabel).not.toBeInTheDocument();
+        expect(airedLabel).toBeInTheDocument();
+        expect(runtimeLabel).toBeInTheDocument();
+      });
     });
 
-    it('should distinguish upcoming items', () => {
+    it('should distinguish upcoming items', async () => {
       const nextYear = new Date();
       nextYear.setFullYear(nextYear.getFullYear() + 1);
 
@@ -230,8 +248,10 @@ describe('MediaDetails', () => {
         },
       );
 
-      const airsLabel = screen.getByText('Airs');
-      expect(airsLabel).toBeInTheDocument();
+      await waitFor(() => {
+        const airsLabel = screen.getByText('Airs');
+        expect(airsLabel).toBeInTheDocument();
+      });
     });
   });
 });
