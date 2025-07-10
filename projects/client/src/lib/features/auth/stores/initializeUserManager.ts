@@ -23,11 +23,11 @@ function postAuth(user: User | null) {
 export function initializeUserManager(hasLegacyAuth: boolean) {
   if (!browser || hasLegacyAuth) {
     return {
-      isRefreshing: readable(false),
+      isInitializing: readable(false),
     };
   }
 
-  const isRefreshing = writable(false);
+  const isInitializing = writable(true);
   const { isAuthorized } = getAuthContext();
 
   const manager = new UserManager(
@@ -42,6 +42,7 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
 
     const isExpiredUser = user?.expired ?? true;
     isAuthorized.set(!isExpiredUser);
+    isInitializing.set(false);
   };
 
   const handleUserEvent = (user: User | null) => {
@@ -51,8 +52,6 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
 
   const initializeUser = async (user: User | null) => {
     if (user?.expired) {
-      isRefreshing.set(true);
-
       try {
         const refreshedUser = await manager.signinSilent();
         handleUserEvent(refreshedUser);
@@ -60,7 +59,6 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
         handleUserEvent(null);
       }
 
-      isRefreshing.set(false);
       return;
     }
 
@@ -75,6 +73,9 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
   setUserManager(manager);
 
   return {
-    isRefreshing: derived(isRefreshing, ($isRefreshing) => $isRefreshing),
+    isInitializing: derived(
+      isInitializing,
+      ($isInitializing) => $isInitializing,
+    ),
   };
 }
