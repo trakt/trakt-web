@@ -1,4 +1,4 @@
-type Token = {
+export type Token = {
   value: string | Nil;
   expiresAt: number | Nil;
 };

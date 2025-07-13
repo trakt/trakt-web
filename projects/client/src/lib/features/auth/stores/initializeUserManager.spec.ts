@@ -1,3 +1,4 @@
+import { time } from '$lib/utils/timing/time.ts';
 import { OidcUserMock } from '$mocks/data/auth/OidcUserMock.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { describe, expect, it } from 'vitest';
@@ -9,8 +10,8 @@ describe('initializeUserManager', () => {
     await renderStore(() => initializeUserManager(false));
 
     const token = getToken();
-    expect(token.expiresAt).toBeUndefined();
-    expect(token.value).toBeUndefined();
+    expect(token.expiresAt).toBeNull();
+    expect(token.value).toBeNull();
   });
 
   it('should initialize authorized users', async () => {
@@ -18,7 +19,7 @@ describe('initializeUserManager', () => {
     await renderStore(() => initializeUserManager(false));
 
     const token = getToken();
-    expect(token.expiresAt).toEqual(OidcUserMock.expires_at);
+    expect(token.expiresAt).toEqual(time.seconds(OidcUserMock.expires_at));
     expect(token.value).toEqual(OidcUserMock.access_token);
   });
 });

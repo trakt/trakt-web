@@ -7,7 +7,7 @@ import { json, type RequestHandler } from '@sveltejs/kit';
 export const POST: RequestHandler = async ({ request, cookies }) => {
   const { token, expiresAt }: OidcAuthToken = await request.json();
 
-  const maxAge = expiresAt ? time.years(1) : 0;
+  const maxAge = expiresAt ? time.years(1) / time.seconds(1) : 0;
   const cookieContent = JSON.stringify({ token, expiresAt });
 
   cookies.set(OIDC_AUTH_COOKIE_NAME, cookieContent, {
