@@ -1195,9 +1195,6 @@
     "button_label_view_all_unreleased_movies": {
       "default": "Visualizar todos os filmes em breve"
     },
-    "switch_label_to_og": {
-      "default": "Ir para Trakt.tv"
-    },
     "tag_text_preview": {
       "default": "Prévia"
     },

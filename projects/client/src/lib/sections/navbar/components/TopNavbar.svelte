@@ -1,14 +1,9 @@
 <script lang="ts">
-  import Switch from "$lib/components/toggles/Switch.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import * as m from "$lib/features/i18n/messages";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
-  import { navigateToTraktOg } from "$lib/utils/url/navigateToTraktOg";
   import { onMount } from "svelte";
   import FilterButton from "./filter/FilterButton.svelte";
   import GetVIPLink from "./GetVIPLink.svelte";
@@ -28,22 +23,9 @@
     return GlobalEventBus.getInstance().register("scroll", handleScroll);
   });
 
-  const { track } = useTrack(AnalyticsEvent.LeaveLite);
   const { user } = useUser();
   const isVip = $derived(!!$user?.isVip);
 </script>
-
-{#snippet traktSwitch()}
-  <Switch
-    label={m.switch_label_to_og()}
-    checked={true}
-    innerText="Lite"
-    onclick={() => {
-      track();
-      navigateToTraktOg();
-    }}
-  />
-{/snippet}
 
 <header>
   <nav
@@ -54,22 +36,8 @@
     <TraktLogo />
 
     <div class="trakt-navbar-content">
-      <RenderFor
-        audience="authenticated"
-        device={["tablet-sm"]}
-        navigation="default"
-      >
-        {@render traktSwitch()}
-      </RenderFor>
       <RenderFor audience="authenticated" navigation="default">
         <SearchInput />
-      </RenderFor>
-      <RenderFor
-        audience="authenticated"
-        device={["mobile"]}
-        navigation="default"
-      >
-        {@render traktSwitch()}
       </RenderFor>
     </div>
 

@@ -1518,10 +1518,6 @@
       "default": "View all movies coming soon",
       "description": "Aria-label for the button that allows users to view all movies that are coming soon."
     },
-    "switch_label_to_og": {
-      "default": "Switch to Trakt.tv",
-      "description": "Label for the switch that allows users to switch to the original trakt.tv site."
-    },
     "tag_text_preview": {
       "default": "Preview",
       "description": "Text for the tag that indicates a preview feature. This should be as short as possible."

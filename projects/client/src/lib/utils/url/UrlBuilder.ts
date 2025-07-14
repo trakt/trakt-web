@@ -170,7 +170,6 @@ export const UrlBuilder = {
   vip: () => 'https://trakt.tv/vip',
   og: {
     getVip: () => 'https://trakt.tv/vip',
-    site: () => 'https://trakt.tv',
     status: () => 'https://status.trakt.tv',
     privacy: () => 'https://trakt.tv/privacy',
     support: (username?: string) => ogSupportFactory(username),
