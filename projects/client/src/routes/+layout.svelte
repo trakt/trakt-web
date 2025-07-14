@@ -105,7 +105,7 @@
     }
 
     body:has(.trakt-side-navbar) {
-      --layout-distance-side: calc(var(--ni-36) + var(--side-navbar-width));
+      --layout-sidebar-distance: calc(var(--side-navbar-width) + var(--ni-16));
     }
   </style>
 </svelte:head>
@@ -201,6 +201,9 @@
 
   .trakt-layout-content {
     flex: 1;
+
+    padding-left: var(--layout-sidebar-distance);
+    box-sizing: border-box;
   }
 
   @include for-mouse {

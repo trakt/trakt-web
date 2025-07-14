@@ -293,6 +293,9 @@
     "link_text_get_vip": {
       "default": "入手"
     },
+    "badge_text_get_vip": {
+      "default": "VIPになる"
+    },
     "button_label_get_vip": {
       "default": "VIP機能をアンロック"
     },
@@ -1828,6 +1831,15 @@
           "type": "string"
         }
       }
+    },
+    "link_text_view_profile": {
+      "default": "プロフィールを見る"
+    },
+    "button_text_search": {
+      "default": "検索"
+    },
+    "button_label_search": {
+      "default": "検索"
     }
   }
 }

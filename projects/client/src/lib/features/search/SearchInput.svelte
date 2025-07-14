@@ -2,8 +2,10 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import * as m from "$lib/features/i18n/messages";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { buildParamString } from "$lib/utils/url/buildParamString";
+  import { onMount } from "svelte";
   import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
 
@@ -19,11 +21,23 @@
   const { clear: clearShows, isSearching: isSearchingShows } =
     useSearch("show");
 
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const isTabletLarge = useMedia(WellKnownMediaQuery.desktop);
+  const isOnPageSearch = $derived($isDesktop || $isTabletLarge);
+
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
     const value = inputElement.value.trim();
 
     if (value.length === 0) {
+      if (isOnPageSearch) {
+        goto(pathName, {
+          replaceState: page.url.pathname === pathName,
+          keepFocus: true,
+        });
+        return;
+      }
+
       goto($exitPathName, {
         replaceState: true,
         keepFocus: true,
@@ -52,6 +66,20 @@
       },
     };
   }
+
+  onMount(() => {
+    if (!isOnPageSearch) {
+      return;
+    }
+
+    const length = inputElement.value.length;
+    inputElement.setSelectionRange(length, length);
+    inputElement.focus();
+
+    if (length > 0) {
+      inputElement.click();
+    }
+  });
 </script>
 
 <div

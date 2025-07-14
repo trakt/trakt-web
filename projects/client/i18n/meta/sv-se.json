@@ -293,6 +293,9 @@
     "link_text_get_vip": {
       "default": "Skaffa"
     },
+    "badge_text_get_vip": {
+      "default": "Bli VIP"
+    },
     "button_label_get_vip": {
       "default": "Lås upp VIP-funktioner"
     },
@@ -1828,6 +1831,15 @@
           "type": "string"
         }
       }
+    },
+    "link_text_view_profile": {
+      "default": "Visa profil"
+    },
+    "button_text_search": {
+      "default": "Sök"
+    },
+    "button_label_search": {
+      "default": "Sök"
     }
   }
 }
