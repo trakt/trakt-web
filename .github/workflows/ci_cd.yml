@@ -74,7 +74,7 @@ jobs:
         run: 'deno task check'
 
       - name: Trial by Deep Source
-        uses: deepsourcelabs/test-coverage-action@master
+        uses: seferturan/test-coverage-action@master
         with:
           key: javascript
           coverage-file: ${{github.workspace}}/projects/client/coverage/lcov.info
