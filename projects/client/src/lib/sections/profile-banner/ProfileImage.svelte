@@ -60,6 +60,9 @@
     height: var(--height);
     border-radius: 50%;
 
+    padding: var(--border-width);
+    box-sizing: border-box;
+
     :global(.trakt-editable-image img) {
       transition: outline-color var(--transition-increment) ease-in-out;
     }
