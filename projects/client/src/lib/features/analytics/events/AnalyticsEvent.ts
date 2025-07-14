@@ -13,7 +13,6 @@ function buildEventKey<T extends string, K extends string>(
 
 export const AnalyticsEvent = {
   EnterLite: 'lite-on',
-  LeaveLite: 'lite-off',
   NitroExperiment: 'nitro',
 
   Theme: buildEventKey(ACTION_PREFIX, 'theme'),

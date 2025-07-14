@@ -14,7 +14,6 @@ type CommentType = { action: 'post' | 'reply' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
-  [AnalyticsEvent.LeaveLite]: never;
   [AnalyticsEvent.NitroExperiment]: { type: UpNextType };
 
   [AnalyticsEvent.Theme]: { theme: Theme };

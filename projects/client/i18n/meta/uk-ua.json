@@ -1195,9 +1195,6 @@
     "button_label_view_all_unreleased_movies": {
       "default": "Переглянути всі фільми, що виходять скоро"
     },
-    "switch_label_to_og": {
-      "default": "Перейти на Trakt.tv"
-    },
     "tag_text_preview": {
       "default": "Перегляд"
     },
