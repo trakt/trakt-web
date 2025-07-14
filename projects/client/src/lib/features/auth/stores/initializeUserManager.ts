@@ -66,7 +66,7 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
       }
 
       const token = mapToToken(user);
-      setAuthState({ token, isExpired: Boolean(user?.expired) });
+      setAuthState({ token, isExpired: user?.expired ?? true });
     };
 
     manager.getUser().then(initializeUser);
