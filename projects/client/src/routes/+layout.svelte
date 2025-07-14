@@ -161,7 +161,7 @@
                                   <NowPlaying />
                                 </RenderFor>
                                 <SvelteQueryDevtools
-                                  buttonPosition="bottom-left"
+                                  buttonPosition="bottom-right"
                                   styleNonce="opacity: 0.5"
                                 />
                                 <FirefoxBlurHack />
