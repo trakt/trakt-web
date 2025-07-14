@@ -112,7 +112,11 @@
       gap: var(--content-gap);
 
       &:first-child {
-        margin-top: var(--content-gap);
+        margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
+
+        @include for-tablet-sm-and-below {
+          margin-top: var(--content-gap);
+        }
       }
 
       @include for-tablet-lg-and-below {

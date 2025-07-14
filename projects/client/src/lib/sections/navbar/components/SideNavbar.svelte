@@ -187,11 +187,9 @@
   header {
     --navbar-width: var(--ni-66);
     --navbar-item-width: var(--ni-32);
-    --navbar-margin: var(--ni-12);
-    --navbar-margin-top: calc(var(--navbar-margin) + env(safe-area-inset-top));
-    --navbar-margin-bottom: calc(
-      var(--navbar-margin) + env(safe-area-inset-bottom)
-    );
+    --navbar-margin: var(--gap-s);
+    --navbar-margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
+    --navbar-margin-bottom: calc(var(--gap-m) + env(safe-area-inset-bottom));
     --navbar-padding: calc(
       (var(--navbar-width) - var(--navbar-item-width)) / 2
     );
