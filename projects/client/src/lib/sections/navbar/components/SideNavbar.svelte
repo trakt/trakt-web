@@ -21,10 +21,10 @@
   import { writable } from "svelte/store";
   import BetaBadge from "./BetaBadge.svelte";
   import FilterButton from "./filter/FilterButton.svelte";
+  import GetVIPLink from "./GetVIPLink.svelte";
   import JoinTraktButton from "./JoinTraktButton.svelte";
   import ProfileLink from "./ProfileLink.svelte";
   import TraktLogo from "./TraktLogo.svelte";
-  import VIPUpsellLink from "./VIPUpsellLink.svelte";
 
   const isTV = $derived(browser && getDeviceType(navigator.userAgent) === "tv");
   const { user } = useUser();
@@ -153,7 +153,7 @@
         <FilterButton size="normal" />
         {#if !isVip}
           <RenderFor audience="authenticated" navigation="default">
-            <VIPUpsellLink />
+            <GetVIPLink />
           </RenderFor>
         {/if}
         <ProfileLink />
