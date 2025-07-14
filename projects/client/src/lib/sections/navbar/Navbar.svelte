@@ -16,8 +16,8 @@
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
+  import ProfileButton from "./components/ProfileButton.svelte";
   import TraktLogo from "./components/TraktLogo.svelte";
-  import ProfileButton from "./ProfileButton.svelte";
 
   let windowScrollY = $state(0);
   const isScrolled = $derived(windowScrollY > 0);

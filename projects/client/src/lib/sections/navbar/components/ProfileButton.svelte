@@ -5,8 +5,8 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import ProfileImage from "../profile-banner/ProfileImage.svelte";
-  import VipBadge from "./components/VIPBadge.svelte";
+  import ProfileImage from "../../profile-banner/ProfileImage.svelte";
+  import VipBadge from "./VIPBadge.svelte";
 
   const { user } = useUser();
   const isVip = $derived(!!$user?.isVip);
