@@ -367,10 +367,6 @@
       "default": "Get",
       "description": "Text for the button that takes users to the VIP subscription page."
     },
-    "link_text_get_vip": {
-      "default": "Get",
-      "description": "Text for the link that takes users to the VIP subscription page."
-    },
     "badge_text_get_vip": {
       "default": "Get VIP",
       "description": "Text for the VIP upsell badge. This is shown in a badge and should be as short as possible."
