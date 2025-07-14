@@ -83,8 +83,10 @@
     position: relative;
 
     :global(.vip-badge) {
-      position: absolute;
+      width: var(--ni-24);
+      height: auto;
 
+      position: absolute;
       top: var(--ni-neg-10);
       right: var(--ni-neg-10);
 

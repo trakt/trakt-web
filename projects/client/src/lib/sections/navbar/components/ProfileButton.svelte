@@ -29,8 +29,8 @@
     {#snippet icon()}
       <div class="profile-icon">
         <ProfileImage
-          --width="var(--ni-16)"
-          --height="var(--ni-16)"
+          --width="var(--ni-20)"
+          --height="var(--ni-20)"
           --border-width="var(--border-thickness-xs)"
           name={$user?.name?.first ?? ""}
           src={$user?.avatar?.url ?? ""}
