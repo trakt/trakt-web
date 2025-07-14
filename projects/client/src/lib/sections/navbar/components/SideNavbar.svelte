@@ -11,10 +11,10 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import BetaBadge from "./components/BetaBadge.svelte";
-  import FilterButton from "./components/filter/FilterButton.svelte";
-  import ProfileButton from "./components/ProfileButton.svelte";
-  import TraktLogo from "./components/TraktLogo.svelte";
+  import BetaBadge from "./BetaBadge.svelte";
+  import FilterButton from "./filter/FilterButton.svelte";
+  import ProfileButton from "./ProfileButton.svelte";
+  import TraktLogo from "./TraktLogo.svelte";
 
   const isTV = $derived(browser && getDeviceType(navigator.userAgent) === "tv");
 </script>

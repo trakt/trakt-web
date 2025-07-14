@@ -24,7 +24,6 @@
   import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
-  import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import NowPlaying from "$lib/sections/now-playing/NowPlaying.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
   import { WorkerMessage } from "$worker/WorkerMessage";
@@ -137,15 +136,7 @@
                             <ThemeProvider theme={data.theme}>
                               <ListScrollHistoryProvider>
                                 <div class="trakt-layout-wrapper">
-                                  <RenderFor
-                                    audience="all"
-                                    navigation="default"
-                                  >
-                                    <Navbar />
-                                  </RenderFor>
-                                  <RenderFor audience="all" navigation="dpad">
-                                    <SideNavbar />
-                                  </RenderFor>
+                                  <Navbar />
                                   <div class="trakt-layout-content">
                                     {@render children()}
                                   </div>
