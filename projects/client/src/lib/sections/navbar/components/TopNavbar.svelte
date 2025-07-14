@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { TestId } from "$e2e/models/TestId";
-  import Button from "$lib/components/buttons/Button.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
@@ -11,7 +9,6 @@
   import { isPWA } from "$lib/utils/devices/isPWA";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { navigateToTraktOg } from "$lib/utils/url/navigateToTraktOg";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { onMount } from "svelte";
   import FilterButton from "./filter/FilterButton.svelte";
   import GetVIPLink from "./GetVIPLink.svelte";
@@ -59,7 +56,7 @@
     <div class="trakt-navbar-content">
       <RenderFor
         audience="authenticated"
-        device={["tablet-sm", "tablet-lg", "desktop"]}
+        device={["tablet-sm"]}
         navigation="default"
       >
         {@render traktSwitch()}
@@ -77,57 +74,14 @@
     </div>
 
     <div class="trakt-navbar-links">
-      <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
-        <Button
-          href={UrlBuilder.home()}
-          label={m.button_label_home()}
-          style="underlined"
-          variant="primary"
-          color="purple"
-          data-testid={TestId.NavBarHomeButton}
-        >
-          {m.button_text_home()}
-        </Button>
-        <Button
-          href={UrlBuilder.shows()}
-          label={m.button_label_browse_shows()}
-          style="underlined"
-          variant="primary"
-          color="purple"
-          data-testid={TestId.NavBarShowsButton}
-        >
-          {m.button_text_browse_shows()}
-        </Button>
-        <Button
-          href={UrlBuilder.movies()}
-          label={m.button_label_browse_movies()}
-          style="underlined"
-          variant="primary"
-          color="purple"
-          data-testid={TestId.NavBarMoviesButton}
-        >
-          {m.button_text_browse_movies()}
-        </Button>
-      </RenderFor>
-      <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-        <Button
-          href={UrlBuilder.lists.user()}
-          label={m.button_label_browse_lists()}
-          style="underlined"
-          variant="primary"
-          color="purple"
-        >
-          {m.button_text_browse_lists()}
-        </Button>
-      </RenderFor>
       <RenderFor audience="public">
-        <JoinTraktButton />
+        <JoinTraktButton size="small" />
       </RenderFor>
       <RenderFor audience="authenticated">
         {#if !isVip}
           <GetVIPLink />
         {/if}
-        <FilterButton />
+        <FilterButton size="small" />
         <ProfileButton />
       </RenderFor>
     </div>
@@ -216,24 +170,7 @@
 
     color: var(--color-foreground-navbar);
 
-    /** 
-      * Navbar links have custom design,
-      * to accommodate the scrolled navbar
-      * we need to override the button styles
-      */
-    :global(.trakt-button[data-style="underlined"]) {
-      color: var(--color-foreground-navbar);
-    }
-
     @include backdrop-filter-blur(8px);
-
-    @include for-mouse {
-      :global(.trakt-button[data-style="underlined"]) {
-        &:hover:not([disabled]) {
-          text-decoration-color: var(--color-foreground-navbar);
-        }
-      }
-    }
 
     &.trakt-navbar {
       width: calc(100dvw - 2 * var(--layout-distance-side));

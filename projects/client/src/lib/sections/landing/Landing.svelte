@@ -18,9 +18,11 @@
 
 <style>
   .trakt-landing-container {
-    width: calc(100dvw - 2 * var(--layout-distance-side));
+    width: calc(
+      100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
+    );
     position: relative;
-    left: var(--layout-distance-side);
+    margin-left: var(--layout-distance-side);
     padding: var(--ni-16);
     box-sizing: border-box;
 

@@ -7,14 +7,15 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
-<RenderFor
-  audience="authenticated"
-  device={["tablet-sm", "tablet-lg", "desktop"]}
-  navigation="default"
->
+<RenderFor audience="authenticated" navigation="default">
   <div class="trakt-logo">
     <Link href={UrlBuilder.home()}>
-      <LogoMark />
+      <RenderFor audience="authenticated" device={["tablet-sm"]}>
+        <LogoMark />
+      </RenderFor>
+      <RenderFor audience="authenticated" device={["desktop", "tablet-lg"]}>
+        <Logo />
+      </RenderFor>
     </Link>
   </div>
 </RenderFor>
@@ -25,11 +26,11 @@
   navigation="dpad"
 >
   <button
-    class="trakt-logo-button"
+    class="trakt-logo trakt-logo-button"
     data-dpad-navigation={DpadNavigationType.Item}
     onclick={() => window.location.reload()}
   >
-    <LogoMark />
+    <Logo />
   </button>
 </RenderFor>
 
@@ -50,8 +51,7 @@
     }
   }
 
-  .trakt-logo,
-  .trakt-logo-button {
+  .trakt-logo {
     height: var(--ni-32);
     display: flex;
     justify-content: center;
@@ -59,6 +59,11 @@
     :global(svg) {
       /* Safari 🥲 */
       height: var(--ni-32);
+    }
+
+    :global(.trakt-link.trakt-link-active),
+    :global(.trakt-link.trakt-link-active:visited) {
+      color: var(--color-foreground);
     }
   }
 </style>

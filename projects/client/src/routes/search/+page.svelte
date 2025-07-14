@@ -5,7 +5,9 @@
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
+  import SearchInput from "$lib/features/search/SearchInput.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
@@ -40,6 +42,12 @@
 
   const first = $derived($shows.at(0) ?? $movies.at(0));
 </script>
+
+<RenderFor audience="all" device={["desktop", "tablet-lg"]}>
+  <div class="trakt-search">
+    <SearchInput />
+  </div>
+</RenderFor>
 
 {#if query}
   <TraktPage
@@ -86,3 +94,13 @@
     </SectionList>
   </TraktPage>
 {/if}
+
+<style>
+  .trakt-search {
+    margin: var(--gap-xl) var(--layout-distance-side);
+
+    :global(.trakt-search-icon) {
+      z-index: calc(var(--layer-overlay) - 1);
+    }
+  }
+</style>

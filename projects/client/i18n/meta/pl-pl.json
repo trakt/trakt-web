@@ -293,6 +293,9 @@
     "link_text_get_vip": {
       "default": "Pobierz"
     },
+    "badge_text_get_vip": {
+      "default": "Zostań VIP"
+    },
     "button_label_get_vip": {
       "default": "Odblokuj funkcje VIP"
     },
@@ -1828,6 +1831,15 @@
           "type": "string"
         }
       }
+    },
+    "link_text_view_profile": {
+      "default": "Wyświetl profil"
+    },
+    "button_text_search": {
+      "default": "Szukaj"
+    },
+    "button_label_search": {
+      "default": "Szukaj"
     }
   }
 }

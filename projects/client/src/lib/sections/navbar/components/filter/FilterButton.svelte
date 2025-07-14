@@ -7,6 +7,7 @@
   import { writable } from "svelte/store";
   import FilterSidebar from "./FilterSidebar.svelte";
 
+  const { size }: { size: "small" | "normal" } = $props();
   const { hasActiveFilter } = useFilter();
 
   const color = $derived($hasActiveFilter ? "blue" : "default");
@@ -18,11 +19,11 @@
 <div class="trakt-filter-button">
   <Button
     style="flat"
-    size="small"
     label={m.button_label_filters()}
     variant="secondary"
     text="capitalize"
     {color}
+    {size}
     navigationType={DpadNavigationType.Item}
     onclick={() => {
       isSidebarOpen.set(true);

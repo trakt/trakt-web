@@ -371,6 +371,10 @@
       "default": "Get",
       "description": "Text for the link that takes users to the VIP subscription page."
     },
+    "badge_text_get_vip": {
+      "default": "Get VIP",
+      "description": "Text for the VIP upsell badge. This is shown in a badge and should be as short as possible."
+    },
     "button_label_get_vip": {
       "default": "Unlock VIP features",
       "description": "Aria-label for the button that takes users to the VIP subscription page."
@@ -2309,6 +2313,18 @@
           "type": "string"
         }
       }
+    },
+    "link_text_view_profile": {
+      "default": "View profile",
+      "description": "Text for the link that allows users to view their profile."
+    },
+    "button_text_search": {
+      "default": "Search",
+      "description": "Text for the button that opens the search page."
+    },
+    "button_label_search": {
+      "default": "Search",
+      "description": "Aria-label for the button that opens the search page."
     }
   }
 }

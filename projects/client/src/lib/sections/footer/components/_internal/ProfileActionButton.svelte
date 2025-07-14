@@ -6,7 +6,11 @@
   const { size }: { size: "small" | "tag" } = $props();
 </script>
 
-<RenderFor navigation="default" audience="authenticated">
+<RenderFor
+  navigation="default"
+  audience="authenticated"
+  device={["mobile", "tablet-sm"]}
+>
   <SettingsButton {size} />
 </RenderFor>
 

@@ -293,6 +293,9 @@
     "link_text_get_vip": {
       "default": "Отримати"
     },
+    "badge_text_get_vip": {
+      "default": "Стати VIP"
+    },
     "button_label_get_vip": {
       "default": "Відкрийте VIP-функції"
     },
@@ -1828,6 +1831,15 @@
           "type": "string"
         }
       }
+    },
+    "link_text_view_profile": {
+      "default": "Переглянути профіль"
+    },
+    "button_text_search": {
+      "default": "Пошук"
+    },
+    "button_label_search": {
+      "default": "Пошук"
     }
   }
 }

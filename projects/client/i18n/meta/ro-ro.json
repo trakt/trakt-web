@@ -293,6 +293,9 @@
     "link_text_get_vip": {
       "default": "Obține"
     },
+    "badge_text_get_vip": {
+      "default": "Devino VIP"
+    },
     "button_label_get_vip": {
       "default": "Deblochează caracteristici VIP"
     },
@@ -1828,6 +1831,15 @@
           "type": "string"
         }
       }
+    },
+    "link_text_view_profile": {
+      "default": "Vezi profilul"
+    },
+    "button_text_search": {
+      "default": "Caută"
+    },
+    "button_label_search": {
+      "default": "Caută"
     }
   }
 }

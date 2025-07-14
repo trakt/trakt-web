@@ -130,6 +130,7 @@ export const UrlBuilder = {
         return UrlBuilder.movie(id);
     }
   },
+  search: () => '/search',
   show: (id: string, params: Record<string, string | number> = {}) =>
     `/shows/${id}${buildParamString(params)}`,
   movies: () => '/movies',
