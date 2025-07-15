@@ -18,7 +18,7 @@
       {#each posters as poster, index (`${list.id}_poster_${index}`)}
         <div class="poster-wrapper" style="--poster-index: {index}">
           <CrossOriginImage
-            src={poster.url.medium}
+            src={poster.url.thumb}
             alt={m.image_alt_list_preview_poster({ title: list.name })}
           />
         </div>
