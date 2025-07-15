@@ -1,26 +1,22 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 
-type UpdateListRequest = {
+type DeleteListRequest = {
   userId: string;
   listId: string;
-  name: string;
 } & ApiParams;
 
-export function updateListRequest(
-  { userId, listId, name, fetch }: UpdateListRequest,
+export function deleteListRequest(
+  { userId, listId, fetch }: DeleteListRequest,
 ): Promise<boolean> {
   return api({ fetch })
     .users
     .lists
     .list
-    .update({
+    .delete({
       params: {
         id: userId,
         list_id: listId,
       },
-      body: {
-        name,
-      },
     })
-    .then(({ status }) => status === 200);
+    .then(({ status }) => status === 204);
 }
