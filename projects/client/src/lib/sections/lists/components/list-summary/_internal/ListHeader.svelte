@@ -5,7 +5,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
-  import RenameListButton from "$lib/sections/lists/user/RenameListButton.svelte";
+  import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import { getListUrl } from "./getListUrl";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <RenameListButton {list} />
+  <ListActions {list} />
 </div>
 
 <style>
