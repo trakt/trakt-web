@@ -22,5 +22,19 @@ export const SiloListsResponseMock: ListResponse[] = [
       'slug': 'silos',
     },
     'user': UserProfileHarryResponseMock,
+    'images': {
+      'posters': [
+        'walter-r2.trakt.tv/images/shows/000/173/996/posters/original/f498a2fa2b.jpg',
+        'walter-r2.trakt.tv/images/shows/000/156/110/posters/original/1d002ba117.jpg',
+        'walter-r2.trakt.tv/images/shows/000/126/995/posters/original/55b80503e9.jpg',
+        'walter-r2.trakt.tv/images/shows/000/170/649/posters/original/39eb828a7a.jpg',
+        'walter-r2.trakt.tv/images/shows/000/043/764/posters/original/9ef9162506.jpg',
+        'walter-r2.trakt.tv/images/shows/000/058/454/posters/original/e7ca7525cb.jpg',
+        'walter-r2.trakt.tv/images/shows/000/134/421/posters/original/6295516e91.jpg',
+        'walter-r2.trakt.tv/images/shows/000/001/390/posters/original/93df9cd612.jpg',
+        'walter-r2.trakt.tv/images/shows/000/104/578/posters/original/f43fc7f7db.jpg',
+        'walter-r2.trakt.tv/images/shows/000/191/758/posters/original/3917ba20d9.jpg',
+      ],
+    },
   },
 ];
