@@ -1,23 +1,14 @@
+import { videoTypeSchema } from '@trakt/api';
 import { z } from 'zod';
-
-export const MediaVideoTypeSchema = z.enum([
-  'trailer',
-  'clip',
-  'teaser',
-  'featurette',
-  'recap',
-  'behind the scenes',
-  'opening credits',
-]);
 
 export const MediaVideoSchema = z.object({
   id: z.string(),
-  type: MediaVideoTypeSchema,
+  type: videoTypeSchema,
   url: z.string().url(),
   thumbnail: z.string().url(),
   title: z.string(),
   publishedAt: z.date(),
 });
 
-export type MediaVideoType = z.infer<typeof MediaVideoTypeSchema>;
+export type MediaVideoType = z.infer<typeof videoTypeSchema>;
 export type MediaVideo = z.infer<typeof MediaVideoSchema>;
