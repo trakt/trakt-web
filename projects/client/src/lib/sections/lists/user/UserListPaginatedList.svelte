@@ -6,7 +6,7 @@
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import PopularListItem from "../popular/PopularListItem.svelte";
   import PopupActions from "./_internal/PopupActions.svelte";
-  import RenameListButton from "./RenameListButton.svelte";
+  import ListActions from "./ListActions.svelte";
   import { useListItems } from "./useListItems";
 
   type UserListProps = {
@@ -46,6 +46,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <RenameListButton {list} />
+    <ListActions {list} />
   {/snippet}
 </DrilledMediaList>

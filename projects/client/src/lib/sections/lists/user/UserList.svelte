@@ -9,7 +9,7 @@
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import PopularListItem from "../popular/PopularListItem.svelte";
   import PopupActions from "./_internal/PopupActions.svelte";
-  import RenameListButton from "./RenameListButton.svelte";
+  import ListActions from "./ListActions.svelte";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
   const { filterMap } = useFilter();
@@ -33,6 +33,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <RenameListButton {list} />
+    <ListActions {list} />
   {/snippet}
 </DrillableMediaList>

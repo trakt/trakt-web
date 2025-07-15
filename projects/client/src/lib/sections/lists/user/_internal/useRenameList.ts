@@ -1,6 +1,5 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
@@ -10,7 +9,6 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { derived, writable } from 'svelte/store';
 
 export function useRenameList(list: MediaListSummary) {
-  const { user } = useUser();
   const isRenaming = writable(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.ListRename);
@@ -49,7 +47,6 @@ export function useRenameList(list: MediaListSummary) {
   };
 
   return {
-    isEditable: derived(user, ($user) => $user.slug === list.user.slug),
     isRenaming: derived(isRenaming, ($isRenaming) => $isRenaming),
     renameList,
   };
