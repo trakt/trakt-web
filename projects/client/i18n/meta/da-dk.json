@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Søg"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Plakat for en post i {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

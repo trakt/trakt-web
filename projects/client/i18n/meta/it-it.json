@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Cerca"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Poster per una voce in {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

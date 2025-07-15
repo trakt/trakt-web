@@ -27,5 +27,6 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
       'location': undefined,
       'cover': undefined,
     },
+    'posters': [],
   },
 ];

@@ -9,5 +9,6 @@ export const CollaborationListsMappedMock: MediaListSummary[] = [
     'slug': 'our-list',
     'user': UserProfileHarryMappedMock,
     'count': 1,
+    'posters': [],
   },
 ];

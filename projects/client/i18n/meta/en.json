@@ -2317,6 +2317,15 @@
     "button_label_search": {
       "default": "Search",
       "description": "Aria-label for the button that opens the search page."
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Poster for an entry in {title}",
+      "description": "Alt text for the poster image of a list preview.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

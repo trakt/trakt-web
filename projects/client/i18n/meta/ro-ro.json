@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Caută"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Afiș pentru o intrare în {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

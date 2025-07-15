@@ -1,16 +1,16 @@
 import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import type { MovieResponse, SeasonsResponse, ShowResponse } from '@trakt/api';
 import type { MediaEntry } from '../models/MediaEntry.ts';
 import { mediumUrl } from './mediumUrl.ts';
 import { thumbUrl } from './thumbUrl.ts';
 
+type Images = {
+  poster?: string[];
+};
+
 export function mapToPoster(
-  images:
-    | ShowResponse['images']
-    | MovieResponse['images']
-    | SeasonsResponse[0]['images'],
+  images: Images | Nil,
 ): MediaEntry['poster'] {
   const posterCandidate = findDefined(
     ...(images?.poster ?? []),

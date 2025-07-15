@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Pesquisar"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Pôster para uma entrada em {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

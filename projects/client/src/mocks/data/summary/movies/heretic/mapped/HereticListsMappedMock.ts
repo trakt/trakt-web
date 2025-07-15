@@ -9,5 +9,6 @@ export const HereticListsMappedMock: MediaListSummary[] = [
     'slug': 'heretics-only',
     'user': UserProfileHarryMappedMock,
     'count': 1,
+    'posters': [],
   },
 ];

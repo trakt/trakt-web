@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Søk"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Plakat for en oppføring i {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

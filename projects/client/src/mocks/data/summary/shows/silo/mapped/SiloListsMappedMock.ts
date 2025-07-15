@@ -9,5 +9,6 @@ export const SiloListsMappedMock: MediaListSummary[] = [
     'slug': 'silos',
     'user': UserProfileHarryMappedMock,
     'count': 1,
+    'posters': [],
   },
 ];

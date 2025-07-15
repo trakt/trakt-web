@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Пошук"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Постер для запису в {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

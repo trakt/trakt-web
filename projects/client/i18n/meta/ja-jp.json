@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "検索"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "{title} のリストのエントリのポスター",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
