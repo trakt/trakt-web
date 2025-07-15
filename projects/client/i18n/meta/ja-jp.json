@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "リスト {name} を削除",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "リスト {name} を削除しますか？",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

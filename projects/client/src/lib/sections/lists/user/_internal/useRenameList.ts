@@ -41,7 +41,7 @@ export function useRenameList(list: MediaListSummary) {
       name: newName,
     });
 
-    await invalidate(InvalidateAction.ListRenamed);
+    await invalidate(InvalidateAction.List.Edited);
 
     isRenaming.set(false);
   };

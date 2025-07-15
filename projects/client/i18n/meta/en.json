@@ -2326,6 +2326,24 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Delete your list {name}",
+      "description": "Aria-label for the button that allows users to delete a list.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Are you sure you want to delete the list {name}?",
+      "description": "Warning prompt shown when a user tries to delete a list.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

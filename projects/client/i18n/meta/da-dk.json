@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Slet din liste {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Er du sikker på, at du vil slette listen {name}?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

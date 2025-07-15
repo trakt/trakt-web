@@ -6,7 +6,8 @@
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { useRenameList } from "./useRenameList.ts";
 
-  const { list }: { list: MediaListSummary } = $props();
+  const { list, isDeleting }: { list: MediaListSummary; isDeleting: boolean } =
+    $props();
 
   const { renameList, isRenaming } = $derived(useRenameList(list));
 </script>
@@ -16,7 +17,7 @@
     label={m.button_label_rename_list({ name: list.name })}
     onclick={renameList}
     style="ghost"
-    disabled={$isRenaming}
+    disabled={$isRenaming || isDeleting}
   >
     <RenameIcon />
   </ActionButton>

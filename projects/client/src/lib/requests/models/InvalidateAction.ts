@@ -2,6 +2,7 @@ import type { MediaType } from './MediaType.ts';
 
 type ExtendedMediaType = MediaType | 'episode';
 type UserType = 'avatar' | 'settings' | 'follow';
+type ListType = 'edited' | 'deleted';
 
 const INVALIDATION_ID = 'invalidate' as const;
 
@@ -17,7 +18,7 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:listed:${MediaType}`
   | `${typeof INVALIDATION_ID}:user:${UserType}`
   | `${typeof INVALIDATION_ID}:check_in`
-  | `${typeof INVALIDATION_ID}:list:edited`;
+  | `${typeof INVALIDATION_ID}:list:${ListType}`;
 
 type TypeDataMap = {
   'auth': null;
@@ -33,7 +34,7 @@ type TypeDataMap = {
   'check_in': null;
   'favorited': MediaType;
   'commented': ExtendedMediaType;
-  'list': 'edited';
+  'list': ListType;
 };
 
 export function invalidationId(key?: string) {
@@ -83,5 +84,8 @@ export const InvalidateAction = {
 
   Favorited: (type: MediaType) => buildInvalidationKey('favorited', type),
 
-  ListRenamed: buildInvalidationKey('list', 'edited'),
+  List: {
+    Edited: buildInvalidationKey('list', 'edited'),
+    Deleted: buildInvalidationKey('list', 'deleted'),
+  },
 };

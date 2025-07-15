@@ -46,6 +46,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <ListActions {list} />
+    <ListActions {list} variant="all" />
   {/snippet}
 </DrilledMediaList>

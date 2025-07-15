@@ -23,7 +23,7 @@ const userListSummaryRequest = (
 
 export const userListSummaryQuery = defineQuery({
   key: 'userListSummary',
-  invalidations: [InvalidateAction.ListRenamed],
+  invalidations: [InvalidateAction.List.Edited],
   dependencies: (params) => [params.userId, params.listId],
   request: userListSummaryRequest,
   mapper: (response) => mapToMediaListSummary(response.body),
