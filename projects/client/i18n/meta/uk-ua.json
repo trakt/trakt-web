@@ -1574,6 +1574,9 @@
     "translated_value_video_type_behind_the_scenes": {
       "default": "За лаштунками"
     },
+    "translated_value_video_type_bloopers": {
+      "default": "Перли"
+    },
     "header_now_playing": {
       "default": "Зараз в ефірі"
     },

@@ -1574,6 +1574,9 @@
     "translated_value_video_type_behind_the_scenes": {
       "default": "舞台裏"
     },
+    "translated_value_video_type_bloopers": {
+      "default": "NG集"
+    },
     "header_now_playing": {
       "default": "再生中"
     },

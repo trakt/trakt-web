@@ -1985,6 +1985,10 @@
       "default": "Behind the Scenes",
       "description": "Value for the behind the scenes video type. The value is sent back from the Trakt API."
     },
+    "translated_value_video_type_bloopers": {
+      "default": "Bloopers",
+      "description": "Value for the bloopers video type. The value is sent back from the Trakt API."
+    },
     "header_now_playing": {
       "default": "Now Playing",
       "description": "Header for the 'now playing' toast that shows the movie or episode the user is currently watching."
