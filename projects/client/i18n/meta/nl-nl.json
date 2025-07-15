@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Verwijder je lijst {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Weet je zeker dat je de lijst {name} wilt verwijderen?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

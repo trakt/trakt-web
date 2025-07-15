@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Ta bort din lista {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Är du säker på att du vill ta bort listan {name}?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

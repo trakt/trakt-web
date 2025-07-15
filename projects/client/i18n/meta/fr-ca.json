@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Effacer ta liste {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Êtes-vous sûr de vouloir effacer la liste {name} ?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Видалити ваш список {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Ви впевнені, що хочете видалити список {name}?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

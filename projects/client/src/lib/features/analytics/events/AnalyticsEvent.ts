@@ -36,4 +36,5 @@ export const AnalyticsEvent = {
   Follow: buildEventKey(FOLLOW_ACTION_PREFIX, 'follow'),
 
   ListRename: buildEventKey(LIST_ACTION_PREFIX, 'rename'),
+  ListDelete: buildEventKey(LIST_ACTION_PREFIX, 'delete'),
 } as const;

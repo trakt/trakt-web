@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Usuń swoją listę {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Czy na pewno chcesz usunąć listę {name}?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -1842,6 +1842,22 @@
           "type": "string"
         }
       }
+    },
+    "button_label_delete_list": {
+      "default": "Изтрийте списъка си {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "warning_prompt_delete_list": {
+      "default": "Сигурни ли сте, че искате да изтриете списъка {name}?",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
