@@ -9,7 +9,7 @@ export function mapToMediaListSummary(
     id: listResponse.ids.trakt,
     slug: listResponse.ids.slug,
     name: listResponse.name,
-    description: listResponse.description,
+    description: listResponse.description ?? '',
     user: mapToUserProfile(listResponse.user),
     count: listResponse.item_count,
   };

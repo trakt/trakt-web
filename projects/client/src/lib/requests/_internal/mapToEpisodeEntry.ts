@@ -25,7 +25,7 @@ export function mapToEpisodeEntry(
     season: episode.season,
     genres: [],
     number: episode.number,
-    runtime: episode.runtime,
+    runtime: episode.runtime ?? NaN,
     cover: {
       url: prependHttps(
         thumbUrl(posterCandidate),
