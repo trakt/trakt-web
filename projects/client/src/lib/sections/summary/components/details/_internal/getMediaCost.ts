@@ -4,7 +4,7 @@ import { toHumanCurrency } from '$lib/utils/formatting/currency/toHumanCurrency.
 
 export function getMediaCost(onDemandService: StreamOnDemand) {
   const price = onDemandService.prices.rent ?? onDemandService.prices.purchase;
-  if (!price) {
+  if (!price || !onDemandService.currency) {
     return '';
   }
 

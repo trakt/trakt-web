@@ -5,7 +5,7 @@
     "npm:@cucumber/cucumber@11.3.0": "11.3.0_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0",
     "npm:@google/generative-ai@0.24.1": "0.24.1",
     "npm:@inlang/paraglide-js@^2.0.13": "2.1.0",
-    "npm:@jsr/trakt__api@~0.2.5": "0.2.5_zod@3.25.67",
+    "npm:@jsr/trakt__api@~0.2.7": "0.2.7_zod@3.25.67",
     "npm:@playwright/test@1.52.0": "1.52.0",
     "npm:@svelte-plugins/tooltips@^3.0.3": "3.0.3_svelte@5.33.14__acorn@8.15.0",
     "npm:@svelte-put/qr@^2.1.0": "2.1.0_svelte@5.33.14__acorn@8.15.0",
@@ -74,7 +74,7 @@
         "@jridgewell/trace-mapping@0.3.25"
       ]
     },
-    "@anatine/zod-openapi@2.2.8_openapi3-ts@4.4.0_zod@3.25.67": {
+    "@anatine/zod-openapi@2.2.8_openapi3-ts@4.5.0_zod@3.25.67": {
       "integrity": "sha512-iyM8mB556KdiZ6a1GTZ67ACLnJakU1hrzzXoh7PLaReldAdMq88MlZn/Ir/U56/TBuQctBhh/4seo0b0B343uw==",
       "dependencies": [
         "openapi3-ts",
@@ -2194,14 +2194,14 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@jsr/trakt__api@0.2.5_zod@3.25.67": {
-      "integrity": "sha512-REDv7zcwKYAYl83VDuyP8091BX9+BgQIpPb986Awvspn6oREXJhsTZPiH53e+zqHU4E4FMQ9ILE5vZtG9q3xrg==",
+    "@jsr/trakt__api@0.2.7_zod@3.25.67": {
+      "integrity": "sha512-ZgTkSKsV7FrboRQE0VZgc0/D+S6TpcdI1ylv3bSKAdZx5gq3B8pPvjw63KV3bj1Z0OwLcL1JzCANIK0xlzb0lQ==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod@3.25.67"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.2.5.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.2.7.tgz"
     },
     "@lix-js/sdk@0.4.7_kysely@0.27.6": {
       "integrity": "sha512-pRbW+joG12L0ULfMiWYosIW0plmW4AsUdiPCp+Z8rAsElJ+wJ6in58zhD3UwUcd4BNcpldEGjg6PdA7e0RgsDQ==",
@@ -4926,8 +4926,8 @@
         "wrappy"
       ]
     },
-    "openapi3-ts@4.4.0": {
-      "integrity": "sha512-9asTNB9IkKEzWMcHmVZE7Ts3kC9G7AFHfs8i7caD8HbI76gEjdkId4z/AkP83xdZsH7PLAnnbl47qZkXuxpArw==",
+    "openapi3-ts@4.5.0": {
+      "integrity": "sha512-jaL+HgTq2Gj5jRcfdutgRGLosCy/hT8sQf6VOy+P+g36cZOjI1iukdPnijC+4CmeRzg/jEllJUboEic2FhxhtQ==",
       "dependencies": [
         "yaml@2.8.0"
       ]
@@ -6806,7 +6806,7 @@
             "npm:@cucumber/cucumber@11.3.0",
             "npm:@google/generative-ai@0.24.1",
             "npm:@inlang/paraglide-js@^2.0.13",
-            "npm:@jsr/trakt__api@~0.2.5",
+            "npm:@jsr/trakt__api@~0.2.7",
             "npm:@playwright/test@1.52.0",
             "npm:@svelte-plugins/tooltips@^3.0.3",
             "npm:@svelte-put/qr@^2.1.0",

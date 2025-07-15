@@ -18,7 +18,7 @@ export const OnDemandStreamingSchema = z.object({
   source: z.string(),
   is4k: z.boolean(),
   type: z.literal('on-demand'),
-  currency: z.string(),
+  currency: z.string().nullish(),
   prices: z.object({
     rent: z.number().optional(),
     purchase: z.number().optional(),

@@ -44,7 +44,7 @@ function mapShowProgressResponse(
     title: episode.title,
     season: episode.season,
     number: episode.number,
-    runtime: episode.runtime,
+    runtime: episode.runtime ?? NaN,
     cover: {
       url: prependHttps(posterCandidate),
     },
