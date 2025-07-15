@@ -2,6 +2,7 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaListSummary } from '../../_internal/mapToMediaListSummary.ts';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { MediaListSummarySchema } from '../../models/MediaListSummary.ts';
 
 type CollaborationListsParams = { slug: string } & ApiParams;
@@ -23,7 +24,10 @@ const collaborationListsRequest = (
 
 export const collaborationListsQuery = defineQuery({
   key: 'collaborationLists',
-  invalidations: [],
+  invalidations: [
+    InvalidateAction.Listed('movie'),
+    InvalidateAction.Listed('show'),
+  ],
   dependencies: (params) => [params.slug],
   request: collaborationListsRequest,
   mapper: (response) => response.body.map(mapToMediaListSummary),

@@ -24,7 +24,12 @@ const personalListsRequest = (
 
 export const personalListsQuery = defineQuery({
   key: 'personalLists',
-  invalidations: [InvalidateAction.List.Edited, InvalidateAction.List.Deleted],
+  invalidations: [
+    InvalidateAction.List.Edited,
+    InvalidateAction.List.Deleted,
+    InvalidateAction.Listed('movie'),
+    InvalidateAction.Listed('show'),
+  ],
   dependencies: (params) => [params.slug],
   request: personalListsRequest,
   mapper: (response) => response.body.map(mapToMediaListSummary),
