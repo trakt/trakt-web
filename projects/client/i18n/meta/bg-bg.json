@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Търсене"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Плакат за запис в {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -4,29 +4,22 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { MediaType } from "$lib/requests/models/MediaType.ts";
-  import { useListItems } from "$lib/sections/lists/user/useListItems.ts";
   import { getListUrl } from "./getListUrl.ts";
 
   const POSTER_LIMIT = 8;
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
 
-  const { list: items } = useListItems({
-    list,
-    type,
-    limit: POSTER_LIMIT,
-    page: 1,
-  });
+  const posters = $derived(list.posters.slice(0, POSTER_LIMIT));
 </script>
 
-{#if $items}
+{#if posters}
   <Link href={getListUrl(list, type)}>
-    <div class="trakt-list-posters" style="--poster-count: {$items.length}">
-      {#each $items as item, index}
+    <div class="trakt-list-posters" style="--poster-count: {posters.length}">
+      {#each posters as poster, index (`${list.id}_poster_${index}`)}
         <div class="poster-wrapper" style="--poster-index: {index}">
           <CrossOriginImage
-            animate={false}
-            src={item.entry.poster.url.medium}
-            alt={m.image_alt_media_poster({ title: item.entry.title })}
+            src={poster.url.medium}
+            alt={m.image_alt_list_preview_poster({ title: list.name })}
           />
         </div>
       {/each}

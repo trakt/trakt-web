@@ -1834,6 +1834,14 @@
     },
     "button_label_search": {
       "default": "Szukaj"
+    },
+    "image_alt_list_preview_poster": {
+      "default": "Plakat dla pozycji w {title}",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
