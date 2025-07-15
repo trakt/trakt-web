@@ -1574,6 +1574,9 @@
     "translated_value_video_type_behind_the_scenes": {
       "default": "Detrás de cámaras"
     },
+    "translated_value_video_type_bloopers": {
+      "default": "Errores de grabación"
+    },
     "header_now_playing": {
       "default": "En emisión"
     },
