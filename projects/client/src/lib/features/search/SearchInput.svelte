@@ -22,7 +22,7 @@
     useSearch("show");
 
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-  const isTabletLarge = useMedia(WellKnownMediaQuery.desktop);
+  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
   const isOnPageSearch = $derived($isDesktop || $isTabletLarge);
 
   function onSearch(ev: Event) {
