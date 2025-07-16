@@ -1,6 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { isPWA } from "$lib/utils/devices/isPWA";
   import { useCover } from "./_internal/useCover";
 
@@ -9,10 +10,14 @@
     useDimensionObserver("height");
 
   const isPwaMode = isPWA();
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
+
+  const hasMirrorImage = $derived(isPwaMode && !($isDesktop || $isTabletLarge));
 </script>
 
 {#if $state === "ready"}
-  {#if isPwaMode}
+  {#if hasMirrorImage}
     <div
       class="trakt-background-cover-image-mirrored"
       data-cover-type={$cover.type}
@@ -30,7 +35,7 @@
   {/if}
   <div
     class="trakt-background-cover-image"
-    class:trakt-background-pwa={isPwaMode}
+    class:trakt-background-has-mirror={hasMirrorImage}
     data-cover-type={$cover.type}
     style:--trakt-cover-primary-color={$cover.colors?.at(0)}
     style:--trakt-cover-secondary-color={$cover.colors?.at(1)}
@@ -98,7 +103,7 @@
     }
   }
 
-  .trakt-background-pwa,
+  .trakt-background-has-mirror,
   .trakt-background-cover-image-mirrored {
     --trakt-cover-top: calc(var(--navbar-height) + env(safe-area-inset-top, 0));
   }
@@ -112,7 +117,7 @@
     top: 0;
     left: 0;
 
-    &.trakt-background-pwa {
+    &.trakt-background-has-mirror {
       top: var(--trakt-cover-top);
     }
 
