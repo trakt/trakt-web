@@ -1,7 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import { useNavbarType } from "$lib/sections/navbar/useNavbarType";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { isPWA } from "$lib/utils/devices/isPWA";
   import { useCover } from "./_internal/useCover";
 
@@ -10,10 +10,9 @@
     useDimensionObserver("height");
 
   const isPwaMode = isPWA();
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
+  const { navbarType } = useNavbarType();
 
-  const hasMirrorImage = $derived(isPwaMode && !($isDesktop || $isTabletLarge));
+  const hasMirrorImage = $derived(isPwaMode && $navbarType === "top");
 </script>
 
 {#if $state === "ready"}
