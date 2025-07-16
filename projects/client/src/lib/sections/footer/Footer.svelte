@@ -17,12 +17,12 @@
 
   .trakt-footer {
     height: var(--ni-300);
+
     margin-top: var(--ni-120);
+    margin-left: var(--layout-sidebar-distance);
+
     padding-left: var(--layout-distance-side);
     padding-right: var(--layout-distance-side);
-
-    transition: margin var(--transition-increment) ease-in-out;
-    margin-left: var(--layout-sidebar-distance);
 
     :global(.trakt-cover-image) {
       width: calc(
