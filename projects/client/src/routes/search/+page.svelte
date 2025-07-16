@@ -7,11 +7,11 @@
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
+  import { useNavbarType } from "$lib/sections/navbar/useNavbarType";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
 
@@ -41,13 +41,14 @@
   });
 
   const first = $derived($shows.at(0) ?? $movies.at(0));
+  const { navbarType } = useNavbarType();
 </script>
 
-<RenderFor audience="all" device={["desktop", "tablet-lg"]}>
+{#if $navbarType === "side"}
   <div class="trakt-search">
     <SearchInput />
   </div>
-</RenderFor>
+{/if}
 
 {#if query}
   <TraktPage

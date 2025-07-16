@@ -2,7 +2,7 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import * as m from "$lib/features/i18n/messages";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { useNavbarType } from "$lib/sections/navbar/useNavbarType";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { buildParamString } from "$lib/utils/url/buildParamString";
   import { onMount } from "svelte";
@@ -21,9 +21,8 @@
   const { clear: clearShows, isSearching: isSearchingShows } =
     useSearch("show");
 
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-  const isTabletLarge = useMedia(WellKnownMediaQuery.tabletLarge);
-  const isOnPageSearch = $derived($isDesktop || $isTabletLarge);
+  const { navbarType } = useNavbarType();
+  const isOnPageSearch = $derived($navbarType === "side");
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
