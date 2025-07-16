@@ -3,7 +3,5 @@ export function thumbUrl(url: string | Nil): string | Nil {
     return;
   }
 
-  return url
-    .replace('/medium/', '/thumb/')
-    .replace('/original/', '/thumb/');
+  return url.replace('/medium/', '/thumb/');
 }
