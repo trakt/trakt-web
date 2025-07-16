@@ -1,13 +1,14 @@
 <script lang="ts">
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import SideNavbar from "./components/SideNavbar.svelte";
   import TopNavbar from "./components/TopNavbar.svelte";
-  import { useNavbarType } from "./useNavbarType";
-
-  const { navbarType } = useNavbarType();
+  import { NAVBAR_CONFIG } from "./constants";
 </script>
 
-{#if $navbarType === "side"}
-  <SideNavbar />
-{:else}
+<RenderFor audience="all" device={NAVBAR_CONFIG.top.device}>
   <TopNavbar />
-{/if}
+</RenderFor>
+
+<RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
+  <SideNavbar />
+</RenderFor>
