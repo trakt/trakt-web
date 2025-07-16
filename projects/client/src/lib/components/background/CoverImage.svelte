@@ -1,6 +1,7 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import { useNavbarType } from "$lib/sections/navbar/useNavbarType";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { isPWA } from "$lib/utils/devices/isPWA";
   import { useCover } from "./_internal/useCover";
@@ -10,13 +11,10 @@
     useDimensionObserver("height");
 
   const isPwaMode = isPWA();
-  const { navbarType } = useNavbarType();
-
-  const hasMirrorImage = $derived(isPwaMode && $navbarType === "top");
 </script>
 
-{#if $state === "ready"}
-  {#if hasMirrorImage}
+{#snippet coverImages(isMirrored: boolean)}
+  {#if isMirrored}
     <div
       class="trakt-background-cover-image-mirrored"
       data-cover-type={$cover.type}
@@ -34,7 +32,7 @@
   {/if}
   <div
     class="trakt-background-cover-image"
-    class:trakt-background-has-mirror={hasMirrorImage}
+    class:trakt-background-has-mirror={isMirrored}
     data-cover-type={$cover.type}
     style:--trakt-cover-primary-color={$cover.colors?.at(0)}
     style:--trakt-cover-secondary-color={$cover.colors?.at(1)}
@@ -45,6 +43,15 @@
       alt={`Background for ${$cover.type}`}
     />
   </div>
+{/snippet}
+
+{#if $state === "ready"}
+  <RenderFor audience="all" device={NAVBAR_CONFIG.top.device}>
+    {@render coverImages(isPwaMode)}
+  </RenderFor>
+  <RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
+    {@render coverImages(false)}
+  </RenderFor>
 {/if}
 
 <style lang="scss">

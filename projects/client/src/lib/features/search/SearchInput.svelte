@@ -2,12 +2,13 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import * as m from "$lib/features/i18n/messages";
-  import { useNavbarType } from "$lib/sections/navbar/useNavbarType";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { buildParamString } from "$lib/utils/url/buildParamString";
   import { onMount } from "svelte";
   import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
+
+  const { isInline = true }: { isInline?: boolean } = $props();
 
   /** TODO: refactor system when we add support for people and such */
   const {
@@ -21,15 +22,12 @@
   const { clear: clearShows, isSearching: isSearchingShows } =
     useSearch("show");
 
-  const { navbarType } = useNavbarType();
-  const isOnPageSearch = $derived($navbarType === "side");
-
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
     const value = inputElement.value.trim();
 
     if (value.length === 0) {
-      if (isOnPageSearch) {
+      if (!isInline) {
         goto(pathName, {
           replaceState: page.url.pathname === pathName,
           keepFocus: true,
@@ -67,7 +65,7 @@
   }
 
   onMount(() => {
-    if (!isOnPageSearch) {
+    if (isInline) {
       return;
     }
 
