@@ -1892,6 +1892,12 @@
     },
     "list_title_watch_history": {
       "default": "Historia oglądania"
+    },
+    "link_text_general_settings": {
+      "default": "Ogólne"
+    },
+    "link_text_advanced_settings": {
+      "default": "Zaawansowane"
     }
   }
 }

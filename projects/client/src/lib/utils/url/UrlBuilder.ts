@@ -65,9 +65,19 @@ const categoryDrilldownFactory =
     return baseUrl + buildParamString(sanitizeParams(params));
   };
 
-const ogIframeFactory = (url: HttpsUrl, token: string | Nil): HttpsUrl => {
+const ogIframeFactory = (url: HttpsUrl): HttpsUrl => {
+  return `${url}/?embedded_mode=true`;
+};
+
+const ogIframeSlurmFactory = (url: HttpsUrl, token: string | Nil): HttpsUrl => {
   const tokenParam = token ? `&slurm=${token}` : '';
-  return `${url}/?embedded_mode=true${tokenParam}`;
+  return `${ogIframeFactory(url)}${tokenParam}`;
+};
+
+const ogIframeAccessTokenFactory = (url: HttpsUrl, token: string): HttpsUrl => {
+  return `${
+    ogIframeFactory(url)
+  }&access_token=${token}&client_id=${TRAKT_CLIENT_ID}`;
 };
 
 const ogSupportFactory = (username?: string): HttpsUrl | MailToUrl => {
@@ -181,15 +191,23 @@ export const UrlBuilder = {
     support: (username?: string) => ogSupportFactory(username),
     forums: () => 'https://forums.trakt.tv/c/trakt/trakt-lite/31',
     frame: {
+      settings: (token: string) =>
+        ogIframeAccessTokenFactory(
+          'https://trakt.tv/settings/data',
+          token,
+        ),
       yearToDate: (slug: string, year: string, token: string | Nil) =>
-        ogIframeFactory(`https://trakt.tv/users/${slug}/year/${year}`, token),
+        ogIframeSlurmFactory(
+          `https://trakt.tv/users/${slug}/year/${year}`,
+          token,
+        ),
       monthInReview: (
         slug: string,
         year: string,
         month: string,
         token: string | Nil,
       ) =>
-        ogIframeFactory(
+        ogIframeSlurmFactory(
           `https://trakt.tv/users/${slug}/mir/${year}/${month}`,
           token,
         ),
@@ -198,5 +216,8 @@ export const UrlBuilder = {
   login: {
     activate: () => '/auth/device',
   },
-  settings: () => '/settings',
+  settings: {
+    general: () => '/settings',
+    advanced: () => '/settings/advanced',
+  },
 };

@@ -5323,6 +5323,22 @@
       "exclude": [
         "ios"
       ]
+    },
+    "link_text_general_settings": {
+      "default": "General",
+      "description": "Text for the link to the general settings page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_advanced_settings": {
+      "default": "Advanced",
+      "description": "Text for the link to the advanced settings page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
