@@ -1,31 +1,16 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DangerZone from "./_internal/DangerZone.svelte";
-  import Genres from "./_internal/Genres.svelte";
-  import Profile from "./_internal/Profile.svelte";
-  import Spoilers from "./_internal/Spoilers.svelte";
+  import SettingsNavbar from "./_internal/SettingsNavbar.svelte";
+
+  const { children }: ChildrenProps = $props();
 </script>
 
 <!-- FIXME: make settings page dpad navigate-able -->
 <RenderFor audience="authenticated">
   <div class="trakt-settings">
-    <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-      <div class="trakt-settings-sidebar">
-        <div class="trakt-settings-sidebar-content">
-          <h4>{m.header_settings()}</h4>
-        </div>
-        <DangerZone />
-      </div>
-    </RenderFor>
+    <SettingsNavbar />
     <div class="trakt-settings-content">
-      <Profile />
-      <Spoilers />
-      <Genres />
-
-      <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
-        <DangerZone />
-      </RenderFor>
+      {@render children()}
     </div>
   </div>
 </RenderFor>
@@ -40,8 +25,6 @@
 
     margin: 0 var(--layout-distance-side);
 
-    min-height: var(--ni-120);
-
     transition: var(--transition-increment) ease-in-out;
     transition-property: grid-template-columns, gap;
 
@@ -49,16 +32,6 @@
       &:not(:hover) {
         background-color: transparent;
       }
-    }
-
-    .trakt-settings-content {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gap-xxl);
-
-      min-width: 0;
-      max-width: var(--ni-480);
-      padding: var(--ni-8);
     }
 
     @include for-tablet-lg {
@@ -69,19 +42,6 @@
     @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
       grid-template-rows: auto 1fr;
-
-      .trakt-settings-content {
-        padding: 0;
-        max-width: 100%;
-      }
     }
-  }
-
-  .trakt-settings-sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    gap: var(--gap-s);
   }
 </style>

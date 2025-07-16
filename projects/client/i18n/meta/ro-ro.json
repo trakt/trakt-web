@@ -1892,6 +1892,12 @@
     },
     "list_title_watch_history": {
       "default": "Istoric vizionări"
+    },
+    "link_text_general_settings": {
+      "default": "General"
+    },
+    "link_text_advanced_settings": {
+      "default": "Avansat"
     }
   }
 }

@@ -9,7 +9,7 @@
 
 <ActionButton
   {style}
-  href={UrlBuilder.settings()}
+  href={UrlBuilder.settings.general()}
   label={m.button_label_settings()}
 >
   <GearIcon />

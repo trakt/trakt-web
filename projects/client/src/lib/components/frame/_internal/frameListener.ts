@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
-import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import { onMount } from 'svelte';
+import { UrlBuilder } from '../../../utils/url/UrlBuilder.ts';
 
 const VALID_ORIGINS: string[] = [
   'https://trakt.tv',
@@ -14,6 +14,8 @@ type FrameMessage = {
 } | {
   type: 'embeddedNavigation';
   pathname: string;
+} | {
+  type: 'homeNavigation';
 };
 
 export function frameListener(element: HTMLIFrameElement, slug: string) {
@@ -33,6 +35,12 @@ export function frameListener(element: HTMLIFrameElement, slug: string) {
         : event.data.pathname;
 
       goto(path);
+    }
+
+    if (event.data.type === 'homeNavigation') {
+      goto(UrlBuilder.home(), {
+        replaceState: true,
+      });
     }
   };
 
