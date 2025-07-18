@@ -1801,6 +1801,9 @@
         }
       }
     },
+    "page_title_search": {
+      "default": "Пошук"
+    },
     "dropdown_label_extras": {
       "default": "Додаткові матеріали"
     },
