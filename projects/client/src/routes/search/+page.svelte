@@ -42,26 +42,25 @@
   });
 
   const first = $derived($shows.at(0) ?? $movies.at(0));
+  const pageTitle = $derived(
+    query ? m.page_title_search_results({ query }) : m.page_title_search(),
+  );
 </script>
 
-<RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
-  <div class="trakt-search">
-    <SearchInput isInline={false} />
-  </div>
-</RenderFor>
+<TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={pageTitle}>
+  <RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
+    <div class="trakt-search-container">
+      <SearchInput isInline={false} />
+    </div>
+  </RenderFor>
 
-{#if query}
-  <TraktPage
-    audience="all"
-    image={DEFAULT_SHARE_COVER}
-    title={m.page_title_search_results({ query })}
-  >
-    {#if first}
-      <CoverImageSetter src={first.cover.url.medium} type={first.type} />
-    {:else}
-      <TraktPageCoverSetter />
-    {/if}
+  {#if first}
+    <CoverImageSetter src={first.cover.url.medium} type={first.type} />
+  {:else}
+    <TraktPageCoverSetter />
+  {/if}
 
+  {#if query}
     <SectionList
       id="search-grid-list-movies"
       title={m.text_search_results_for({
@@ -93,12 +92,12 @@
         </DefaultMediaItem>
       {/snippet}
     </SectionList>
-  </TraktPage>
-{/if}
+  {/if}
+</TraktPage>
 
 <style>
-  .trakt-search {
-    margin: var(--gap-xl) var(--layout-distance-side);
+  .trakt-search-container {
+    margin-left: var(--layout-distance-side);
 
     :global(.trakt-search-icon) {
       z-index: calc(var(--layer-overlay) - 1);

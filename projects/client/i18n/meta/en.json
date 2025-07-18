@@ -2276,6 +2276,10 @@
         }
       }
     },
+    "page_title_search": {
+      "default": "Search",
+      "description": "Title for the search page."
+    },
     "dropdown_label_extras": {
       "default": "Extras",
       "description": "Aria-label for the dropdown that allows users to filter extras by type, such as trailers, featurettes, etc."

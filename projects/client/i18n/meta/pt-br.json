@@ -1801,6 +1801,9 @@
         }
       }
     },
+    "page_title_search": {
+      "default": "Busca"
+    },
     "dropdown_label_extras": {
       "default": "Extras"
     },
