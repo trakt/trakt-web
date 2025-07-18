@@ -26,7 +26,6 @@ const moviePopularRequest = (
     .popular({
       query: {
         extended: 'full,images,colors',
-        ignore_collected: true,
         page,
         limit,
         ...filter,

@@ -44,7 +44,6 @@ const movieAnticipatedRequest = (
     .anticipated({
       query: {
         extended: 'full,images,colors',
-        ignore_collected: true,
         page,
         limit,
         ...filter,
