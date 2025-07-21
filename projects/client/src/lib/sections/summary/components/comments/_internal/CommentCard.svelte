@@ -37,7 +37,7 @@
 
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
     justify-content: space-between;
 
     padding: var(--ni-16) var(--ni-20);
