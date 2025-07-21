@@ -166,7 +166,7 @@ export const UrlBuilder = {
     android: () => 'https://trakt.tv/a/trakt-android',
     ios: () => 'https://trakt.tv/a/trakt-ios',
   },
-  github: () => 'https://github.com/trakt/trakt-lite',
+  github: () => 'https://github.com/trakt/trakt-web',
   vip: () => 'https://trakt.tv/vip',
   og: {
     getVip: () => 'https://trakt.tv/vip',

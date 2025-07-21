@@ -62,7 +62,7 @@ function generateMultiLocalePromptText({
     '\n          ',
   );
 
-  return `Translate this JSON data to multiple languages for Trakt Lite, a media-centric app for tracking and discovering movies, TV shows, and more.
+  return `Translate this JSON data to multiple languages for Trakt Web, a media-centric app for tracking and discovering movies, TV shows, and more.
 
           Target languages: ${locales.join(', ')}
 
@@ -85,7 +85,7 @@ function generateMultiLocalePromptText({
           *   Pay attention to context comments that provide additional information about each message.
           *   Variable descriptions explain what dynamic content will be inserted into placeholders.
 
-          Examples in Trakt Lite:
+          Examples in Trakt Web:
 
           *   "Movie": A film like "The Matrix" or "Spirited Away."
           *   "Show": A TV series like "Breaking Bad" or "Stranger Things."

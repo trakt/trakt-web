@@ -53,7 +53,7 @@
 </script>
 
 <svelte:head>
-  <title>Trakt Lite</title>
+  <title>Trakt Web</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     rel="preconnect"

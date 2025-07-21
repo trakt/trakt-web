@@ -29,7 +29,7 @@
     hasDynamicContent = false,
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
-  const websiteName = "Trakt Lite";
+  const websiteName = "Trakt Web";
   const twitterHandle = "@trakt";
   const displayTitle = $derived(
     title != null ? `${websiteName}: ${title}` : `${websiteName}`,
@@ -50,9 +50,9 @@
   const info = $derived(
     type === "webpage"
       ? {
-          title: "Trakt Lite: Track Your Shows & Movies",
+          title: "Trakt Web: Track Your Shows & Movies",
           overview:
-            "Trakt Lite: A new, lightweight way to track your favorite movies and TV shows.",
+            "Trakt Web: A new, lightweight way to track your favorite movies and TV shows.",
           runtime: 0,
         }
       : _info,

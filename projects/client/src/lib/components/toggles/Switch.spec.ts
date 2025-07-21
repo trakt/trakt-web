@@ -22,10 +22,10 @@ describe('Switch', () => {
   it('should render inner text', () => {
     render(Switch, {
       ...defaultProps,
-      innerText: 'Lite',
+      innerText: 'Web',
     });
 
-    const subtitle = screen.getByText('Lite');
+    const subtitle = screen.getByText('Web');
 
     expect(subtitle).toBeInTheDocument();
   });
