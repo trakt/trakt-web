@@ -12,6 +12,7 @@ export const MediaListSummarySchema = z.object({
   posters: z.array(z.object({
     url: ImageUrlsSchema,
   })),
+  updatedAt: z.date(),
 });
 
 export type MediaListSummary = z.infer<typeof MediaListSummarySchema>;

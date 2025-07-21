@@ -1864,6 +1864,21 @@
           "type": "string"
         }
       }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "За още списъци"
+    },
+    "button_text_add_list": {
+      "default": "Добави списък"
+    },
+    "button_label_add_list": {
+      "default": "Добави списък"
+    },
+    "input_prompt_add_list": {
+      "default": "Въведете име за вашия списък"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "Все още няма нищо в този списък."
     }
   }
 }

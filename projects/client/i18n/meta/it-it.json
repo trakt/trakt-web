@@ -1864,6 +1864,21 @@
           "type": "string"
         }
       }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Per più liste"
+    },
+    "button_text_add_list": {
+      "default": "Aggiungi lista"
+    },
+    "button_label_add_list": {
+      "default": "Aggiungi lista"
+    },
+    "input_prompt_add_list": {
+      "default": "Inserisci un nome per la tua lista"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "Non c'è ancora nulla in questa lista."
     }
   }
 }

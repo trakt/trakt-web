@@ -1,9 +1,13 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
+  import AddListAction from "./_internal/AddListAction.svelte";
+  import AddNewListHeader from "./_internal/AddNewListHeader.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
@@ -28,6 +32,7 @@
     }
   });
 
+  const { user } = useUser();
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isDPad = $navigation === "dpad";
 
@@ -38,15 +43,29 @@
 
     return "summary";
   });
+
+  const isMine = $derived(
+    type === "personal" && (slug === "me" || slug === $user.slug),
+  );
+  const isPresentable = $derived(isMine || (!$isLoading && $lists.length > 0));
 </script>
 
-<!-- TODO unhide when lists are actionable -->
-{#if !$isLoading && $lists.length > 0}
+{#snippet empty()}
+  {#if !$isLoading}
+    {m.list_placeholder_personal_list_empty()}
+  {/if}
+{/snippet}
+
+{#if isPresentable}
   {#if variant === "preview"}
-    {#each $lists as list}
-      {#if list.count > 0}
-        <UserList {list} />
-      {/if}
+    {#if isMine}
+      <RenderFor audience="authenticated" navigation="default">
+        <AddNewListHeader />
+      </RenderFor>
+    {/if}
+
+    {#each $lists as list (list.id)}
+      <UserList {list} {empty} />
     {/each}
   {/if}
 
@@ -55,10 +74,17 @@
       id={`personal-lists-${type}-list`}
       items={$lists}
       {title}
+      {empty}
       --height-list="var(--height-lists-list)"
     >
       {#snippet item(list)}
         <ListSummaryItem {list} isOfficial={false} />
+      {/snippet}
+
+      {#snippet dynamicActions()}
+        {#if isMine}
+          <AddListAction />
+        {/if}
       {/snippet}
     </SectionList>
   {/if}

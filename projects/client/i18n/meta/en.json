@@ -2352,6 +2352,26 @@
           "type": "string"
         }
       }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "to add more lists",
+      "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip'."
+    },
+    "button_text_add_list": {
+      "default": "Add list",
+      "description": "Text for the button that allows users to add a new list."
+    },
+    "button_label_add_list": {
+      "default": "Add list",
+      "description": "Aria-label for the button that allows users to add a new list."
+    },
+    "input_prompt_add_list": {
+      "default": "Enter a name for your list",
+      "description": "Message for the prompt that is shown when a user is adding a new list."
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "There is nothing in this list yet.",
+      "description": "Placeholder text shown when there are no shows or movies in a user's personal list."
     }
   }
 }

@@ -1864,6 +1864,21 @@
           "type": "string"
         }
       }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Pentru mai multe liste"
+    },
+    "button_text_add_list": {
+      "default": "Adaugă listă"
+    },
+    "button_label_add_list": {
+      "default": "Adaugă listă"
+    },
+    "input_prompt_add_list": {
+      "default": "Introdu un nume pentru lista ta"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "Nu este nimic în această listă încă."
     }
   }
 }
