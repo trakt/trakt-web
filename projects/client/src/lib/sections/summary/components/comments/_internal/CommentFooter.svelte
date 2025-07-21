@@ -20,8 +20,7 @@
       flex-shrink: 1;
     }
 
-    /* To align icons of the first and last ghost buttons */
-    margin-left: var(--ni-neg-16);
-    margin-right: var(--ni-neg-16);
+    /* To align icons of the ghost buttons */
+    margin: var(--ni-neg-10) var(--ni-neg-16);
   }
 </style>
