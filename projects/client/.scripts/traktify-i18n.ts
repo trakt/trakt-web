@@ -5,6 +5,7 @@ import type { MetaMessages } from '../i18n/generator/model/MetaMessages.ts';
 import { I18N_META_DIR } from './_internal/constants.ts';
 import { loadMetaFile, type TranslationMap } from './_internal/loadMetaFile.ts';
 import { locales } from './_internal/locales.ts';
+import { mapToTranslations } from './_internal/mapToTranslations.ts';
 import { writeJsonFile } from './_internal/writeJsonFile.ts';
 
 function extractTranslationKeys(
@@ -122,42 +123,14 @@ async function translateMessages(
 
   const response = JSON.parse(result.response.text());
 
-  // Handle array responses by taking the first element
-  const normalizedResponse = Array.isArray(response) ? response[0] : response;
+  // Handle responses by normalizing to an array
+  const normalizedResponse = Array.isArray(response) ? response : [response];
 
-  const translations: Record<string, TranslationMap> = {};
-
-  for (const locale of locales) {
-    const localeTranslations = normalizedResponse[locale];
-    if (!localeTranslations) {
-      console.warn(`⚠️ Missing translations for locale: ${locale}`);
-      translations[locale] = {};
-      continue;
-    }
-
-    // Ensure all expected keys are present
-    const expectedKeys = Object.keys(messages);
-    const translatedKeys = Object.keys(localeTranslations);
-    const missingKeys = expectedKeys.filter((key) =>
-      !translatedKeys.includes(key)
-    );
-
-    if (missingKeys.length > 0) {
-      console.warn(
-        `⚠️ Missing ${missingKeys.length} keys for ${locale}: ${
-          missingKeys.join(', ')
-        }`,
-      );
-      // Fill missing keys with original values
-      for (const key of missingKeys) {
-        localeTranslations[key] = messages[key]?.default || '';
-      }
-    }
-
-    translations[locale] = localeTranslations;
-  }
-
-  return translations;
+  return mapToTranslations({
+    messages,
+    locales,
+    response: normalizedResponse,
+  });
 }
 
 async function translateAllLocales(): Promise<void> {
