@@ -116,6 +116,16 @@ export default defineConfig(({ mode }) => ({
     coverage: {
       provider: 'istanbul',
       reporter: ['clover', 'lcov'],
+      exclude: [
+        '.svelte-kit/**',
+        '.vite/**',
+        'e2e/**',
+        'test/**',
+        'static/**',
+        'src/routes/_design_system/**',
+        'src/mocks/**',
+        'src/lib/paraglide/**',
+      ],
     },
     reporters: process.env.GITHUB_ACTIONS ? ['dot', 'github-actions'] : ['dot'],
   },
