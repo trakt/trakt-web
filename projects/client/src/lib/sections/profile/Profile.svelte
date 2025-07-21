@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useUser } from "$lib/features/auth/stores/useUser";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import FavoritesList from "../lists/FavoritesList.svelte";
@@ -18,9 +18,9 @@
   const { profile, slug }: DisplayableProfileProps = $props();
 
   const { following, followers } = $derived(useFollowing(slug));
-  const { user } = useUser();
-  const isMe = $derived(slug === "me" || slug === $user.slug);
-  const hasUpsell = $derived(isMe && !profile.isVip);
+  const { isMe } = $derived(useIsMe(slug));
+
+  const hasUpsell = $derived($isMe && !profile.isVip);
 </script>
 
 <ProfileContainer>

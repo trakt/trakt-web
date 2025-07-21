@@ -1,6 +1,6 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser.ts";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -32,7 +32,7 @@
     }
   });
 
-  const { user } = useUser();
+  const { isMe } = $derived(useIsMe(slug));
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isDPad = $navigation === "dpad";
 
@@ -44,9 +44,7 @@
     return "summary";
   });
 
-  const isMine = $derived(
-    type === "personal" && (slug === "me" || slug === $user.slug),
-  );
+  const isMine = $derived(type === "personal" && $isMe);
   const isPresentable = $derived(isMine || (!$isLoading && $lists.length > 0));
 </script>
 

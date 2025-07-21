@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { frameListener } from "./_internal/frameListener";
 
@@ -11,10 +12,10 @@
   const { slug: userSlug, title, urlBuilder }: FrameProps = $props();
 
   const { user } = useUser();
+  const { isMe } = $derived(useIsMe(userSlug));
 
-  const isMe = $derived(userSlug === "me" || userSlug === $user.slug);
-  const slug = $derived(isMe ? $user.slug : userSlug);
-  const token = $derived(isMe ? $user.token : null);
+  const slug = $derived($isMe ? $user.slug : userSlug);
+  const token = $derived($isMe ? $user.token : null);
 </script>
 
 <iframe

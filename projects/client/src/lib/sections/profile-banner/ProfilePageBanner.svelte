@@ -1,6 +1,7 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -12,20 +13,20 @@
   const { profile, slug }: DisplayableProfileProps = $props();
 
   const { user } = useUser();
+  const { isMe } = $derived(useIsMe(slug));
 
-  const isMe = $derived(slug === "me" || slug === $user.slug);
   const nameLabel = $derived(
-    isMe
+    $isMe
       ? m.header_profile_banner_greeting({ name: profile.name.first })
       : profile.name.first,
   );
-  const shareableSlug = $derived(isMe ? $user.slug : slug);
+  const shareableSlug = $derived($isMe ? $user.slug : slug);
 </script>
 
 <div class="profile-page-banner-container">
   <div class="profile-image-container" class:user-is-vip={profile.isVip}>
     <ProfileImage
-      isEditable={isMe}
+      isEditable={$isMe}
       --width="var(--ni-64)"
       --height="var(--ni-64)"
       --border-width="var(--border-thickness-s)"
@@ -45,7 +46,7 @@
     </div>
     <div class="profile-actions">
       <RenderFor audience="authenticated">
-        {#if !isMe}
+        {#if !$isMe}
           <FollowUserButton {profile} {slug} />
         {/if}
       </RenderFor>
