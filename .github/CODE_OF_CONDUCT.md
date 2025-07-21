@@ -14,5 +14,5 @@ abide by the following code of conduct:
   film enriched by a cast of varied and vibrant characters.
 
 Thank you for joining us on this cinematic journey. Your contributions, whether
-in code or in spirit, are what make trakt-lite a beacon in the night. Let's
+in code or in spirit, are what make trakt-web a beacon in the night. Let's
 create something extraordinary together.

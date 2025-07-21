@@ -1,6 +1,6 @@
-# Contributing to trakt-lite: A Midnight Showing
+# Contributing to trakt-web: A Midnight Showing
 
-Welcome, fellow cinephiles and code conjurers, to the trakt-lite midnight
+Welcome, fellow cinephiles and code conjurers, to the trakt-web midnight
 showing! This document illuminates the path for those who dare to contribute to
 this repository of cinematic secrets. Follow these guidelines, and together
 we'll weave a tapestry of code that captures the essence of film noir and the
@@ -17,14 +17,14 @@ experience.
 ## Feature Requests: Visions in the Smoke
 
 Ah, the allure of new features, like a whispered promise in a smoky bar, hinting
-at untold cinematic possibilities. Have an idea that could elevate trakt-lite to
+at untold cinematic possibilities. Have an idea that could elevate trakt-web to
 new heights of media manipulation? Before you set your fingers to the keyboard,
 open a GitHub discussion to share your vision, explore the potential, and ensure
-your idea aligns with the grand narrative of trakt-lite.
+your idea aligns with the grand narrative of trakt-web.
 
 ## Pull Requests: The Premiere
 
-Ready to unveil your creation, your code that will redefine the trakt-lite
+Ready to unveil your creation, your code that will redefine the trakt-web
 experience? Before you submit your pull request, ensure it adheres to the
 following rules of the game:
 
@@ -40,7 +40,7 @@ following rules of the game:
 In this global village, the language of cinema transcends borders, and so should
 our code. We're open and looking forward to your contributions to our
 internationalization (i18n) efforts. Whether you're fluent in multiple languages
-or just passionate about making trakt-lite accessible to a wider audience, your
+or just passionate about making trakt-web accessible to a wider audience, your
 help is invaluable.
 
 ### How to Contribute to i18n
@@ -56,7 +56,7 @@ help is invaluable.
    nuances you've addressed.
 
 Your contributions will help us create a truly global experience, where users
-from all corners of the world can enjoy trakt-lite in their native language.
+from all corners of the world can enjoy trakt-web in their native language.
 
 ## Code of Conduct: Navigating the Night
 
