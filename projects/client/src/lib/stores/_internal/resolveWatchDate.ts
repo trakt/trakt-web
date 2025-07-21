@@ -10,6 +10,7 @@ export function resolveWatchDate(
     case 'released':
       return 'released';
     case 'ask':
+      // skipcq: JS-0052
       return prompt(
         m.input_prompt_mark_as_watched_date(),
         now,
