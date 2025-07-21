@@ -9,6 +9,7 @@ export const SiloListsMappedMock: MediaListSummary[] = [
     'slug': 'silos',
     'user': UserProfileHarryMappedMock,
     'count': 1,
+    'updatedAt': new Date('2025-02-09T21:39:59.000Z'),
     'posters': [
       {
         'url': {

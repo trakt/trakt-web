@@ -33,6 +33,13 @@ export function usePersonalListsSummary({ type, slug }: PersonalListsParams) {
 
   return {
     isLoading,
-    lists: derived(lists, ($lists) => $lists.data ?? []),
+    lists: derived(
+      lists,
+      ($lists) =>
+        ($lists.data ?? []).sort((a, b) =>
+          // FIXME: update when we add sorting options
+          b.updatedAt.getTime() - a.updatedAt.getTime()
+        ),
+    ),
   };
 }

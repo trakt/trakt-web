@@ -1864,6 +1864,21 @@
           "type": "string"
         }
       }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "For flere lister"
+    },
+    "button_text_add_list": {
+      "default": "Tilføj liste"
+    },
+    "button_label_add_list": {
+      "default": "Tilføj liste"
+    },
+    "input_prompt_add_list": {
+      "default": "Indtast et navn til din liste"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "Der er ikke noget i denne liste endnu."
     }
   }
 }

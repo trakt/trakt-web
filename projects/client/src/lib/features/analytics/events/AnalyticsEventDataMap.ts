@@ -38,4 +38,5 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.ListRename]: never;
   [AnalyticsEvent.ListDelete]: never;
+  [AnalyticsEvent.ListCreate]: never;
 };

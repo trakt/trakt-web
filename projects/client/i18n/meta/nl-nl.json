@@ -1864,6 +1864,21 @@
           "type": "string"
         }
       }
+    },
+    "link_text_vip_list_upsell": {
+      "default": "Voor meer lijsten"
+    },
+    "button_text_add_list": {
+      "default": "Lijst toevoegen"
+    },
+    "button_label_add_list": {
+      "default": "Lijst toevoegen"
+    },
+    "input_prompt_add_list": {
+      "default": "Voer een naam in voor je lijst"
+    },
+    "list_placeholder_personal_list_empty": {
+      "default": "Er staat nog niets in deze lijst."
     }
   }
 }

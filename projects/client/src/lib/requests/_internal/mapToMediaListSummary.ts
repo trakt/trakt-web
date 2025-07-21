@@ -16,6 +16,7 @@ export function mapToMediaListSummary(
     description: listResponse.description ?? '',
     user: mapToUserProfile(listResponse.user),
     count: listResponse.item_count,
+    updatedAt: new Date(listResponse.updated_at),
     posters,
   };
 }

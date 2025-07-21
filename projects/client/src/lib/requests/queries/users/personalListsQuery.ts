@@ -27,6 +27,7 @@ export const personalListsQuery = defineQuery({
   invalidations: [
     InvalidateAction.List.Edited,
     InvalidateAction.List.Deleted,
+    InvalidateAction.List.Created,
     InvalidateAction.Listed('movie'),
     InvalidateAction.Listed('show'),
   ],
