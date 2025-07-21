@@ -6,7 +6,7 @@ changes. Think of it as the film's tagline, enticing viewers to delve deeper. In
 the description, provide a detailed account of the issue you're addressing or
 the feature you're introducing. Be specific, my friend, like a screenwriter
 meticulously crafting each scene. Explain the "why" behind your changes, the
-motivations of your code, and the impact it will have on the trakt-lite
+motivations of your code, and the impact it will have on the trakt-web
 narrative.
 
 ## Show, Don't Tell: Screenshots and Videos
@@ -28,7 +28,7 @@ every line of code is scrutinized and perfected before the final performance.
 
 Be prepared to address feedback from the project maintainers and other
 contributors. Embrace their insights, for they are the seasoned critics of the
-trakt-lite theater. Engage in constructive dialogue, refine your code based on
+trakt-web theater. Engage in constructive dialogue, refine your code based on
 their suggestions, and together we'll ensure your contribution is a cinematic
 masterpiece.
 
@@ -55,7 +55,7 @@ masterpiece.
 - **chore:** Changes to the build process or auxiliary tools and libraries such as documentation generation
 
 By following these guidelines, you'll ensure your pull request is a cinematic
-triumph, a contribution worthy of a place in the trakt-lite hall of fame. Now,
+triumph, a contribution worthy of a place in the trakt-web hall of fame. Now,
 let the show begin!
 -->
 

@@ -1,11 +1,10 @@
-# trakt-lite
+# trakt-web
 
-<a href="https://app.deepsource.com/gh/trakt/trakt-lite/"><img src="https://app.deepsource.com/gh/trakt/trakt-lite.svg/?label=code+coverage&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
-<a href="https://app.deepsource.com/gh/trakt/trakt-lite/"><img src="https://app.deepsource.com/gh/trakt/trakt-lite.svg/?label=active+issues&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
-<a href="https://app.deepsource.com/gh/trakt/trakt-lite/"><img src="https://app.deepsource.com/gh/trakt/trakt-lite.svg/?label=resolved+issues&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
+<a href="https://app.deepsource.com/gh/trakt/trakt-web/"><img src="https://app.deepsource.com/gh/trakt/trakt-web.svg/?label=code+coverage&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
+<a href="https://app.deepsource.com/gh/trakt/trakt-web/"><img src="https://app.deepsource.com/gh/trakt/trakt-web.svg/?label=active+issues&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
+<a href="https://app.deepsource.com/gh/trakt/trakt-web/"><img src="https://app.deepsource.com/gh/trakt/trakt-web.svg/?label=resolved+issues&show_trend=true&token=tiC5fNXEfyZqbFXqMggxzbWT" /></a>
 
-<a href="https://github.com/trakt/trakt-lite/actions/workflows/ci.yml"><img src="https://github.com/trakt/trakt-lite/actions/workflows/ci.yml/badge.svg" /></a>
-<a href="https://github.com/trakt/trakt-lite/actions/workflows/cd.yml"><img src="https://github.com/trakt/trakt-lite/actions/workflows/cd.yml/badge.svg" /></a>
+<a href="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml"><img src="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml/badge.svg" /></a>
 
 ## Project Structure
 
@@ -13,7 +12,7 @@ This [workspace](https://docs.deno.com/runtime/fundamentals/workspaces/) is
 composed the following projects:
 
 - **`client`:** The frontend of our application. This project houses the Trakt
-  Lite client, built with Deno and SvelteKit. It's designed to be efficient and
+  Web client, built with Deno and SvelteKit. It's designed to be efficient and
   user-friendly, providing quick access to media insights.
 
 ## Environment Variables
@@ -28,7 +27,7 @@ properly:
 
 ### External Contribution - Get Involved!
 
-Want to contribute to Trakt Lite? Great! Here's how to get set up:
+Want to contribute to Trakt Web? Great! Here's how to get set up:
 
 1. **Create a Trakt Application:** Go to
    [Trakt Settings](https://trakt.tv/oauth/applications) and create a new
@@ -46,9 +45,9 @@ Public applications might have some limitations, including:
 - **"Up Next" Functionality:** This feature showing your future viewing queue
   may not work properly.
 
-These limitations are in place to protect Trakt Lite from scrapers and bots.
+These limitations are in place to protect Trakt Web from scrapers and bots.
 
-Now go ahead and contribute your best work to Trakt Lite! ✨
+Now go ahead and contribute your best work to Trakt Web! ✨
 
 ## Getting Started
 
@@ -102,9 +101,9 @@ adb reverse tcp:5173 tcp:5173
 
 **Coming Soon!**
 
-## Build Trakt Lite
+## Build Trakt Web
 
-To build the Trakt Lite client, run:
+To build the Trakt Web client, run:
 
 ```sh
 cd projects/client/
