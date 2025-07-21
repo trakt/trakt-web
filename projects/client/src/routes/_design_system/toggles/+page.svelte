@@ -2,7 +2,7 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
 
   const props = [
-    { color: "purple" as const, checked: true, innerText: "Lite" },
+    { color: "purple" as const, checked: true, innerText: "Web" },
     { color: "red" as const, checked: false },
     { color: "blue" as const, checked: true },
     { color: "orange" as const, checked: false },
@@ -24,7 +24,7 @@
         />
       {/each}
       <Switch checked={true} label={`This is the disabled switch`} disabled />
-      <Switch label={`This is the disabled switch`} innerText="Lite" disabled />
+      <Switch label={`This is the disabled switch`} innerText="Web" disabled />
     </section>
   </div>
 </main>

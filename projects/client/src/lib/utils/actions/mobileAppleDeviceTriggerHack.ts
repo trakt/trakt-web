@@ -19,7 +19,7 @@ export function mobileAppleDeviceTriggerHack(
   enabled = true,
 ) {
   // TODO(@seferturan): investigate why we need to disable for search items
-  // relates to https://github.com/trakt/trakt-lite/issues/291
+  // relates to https://github.com/trakt/trakt-web/issues/291
   if (!enabled || !isMobileAppleDevice()) {
     return {
       destroy: NOOP_FN,

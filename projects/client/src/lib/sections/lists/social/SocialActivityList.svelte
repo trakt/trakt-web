@@ -12,7 +12,7 @@
   const hasSocialActivity = $derived(!$isLoading && $list.length > 0);
 </script>
 
-<!-- TODO replace with empty state message when actionable on Trakt Lite -->
+<!-- TODO replace with empty state message when actionable on Trakt Web -->
 {#if hasSocialActivity}
   <DrillableMediaList
     id="social-activity-list"

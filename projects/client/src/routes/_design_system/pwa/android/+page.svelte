@@ -124,8 +124,8 @@
   </div>
   <div class="trakt-pwa-content">
     <iframe
-      class="trakt-lite-android-pwa"
-      title="Trakt Lite Android PWA"
+      class="trakt-web-android-pwa"
+      title="Trakt Web Android PWA"
       onload={setupFrame}
       src="/"
     >
