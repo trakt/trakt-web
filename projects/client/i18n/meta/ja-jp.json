@@ -1868,14 +1868,14 @@
     "link_text_vip_list_upsell": {
       "default": "リスト追加"
     },
-    "button_text_add_list": {
-      "default": "リスト追加"
+    "button_text_create_list": {
+      "default": "リスト"
     },
-    "button_label_add_list": {
-      "default": "リストを追加"
+    "button_label_create_list": {
+      "default": "リストを作成"
     },
-    "input_prompt_add_list": {
-      "default": "リスト名を入力してください"
+    "input_prompt_create_list": {
+      "default": "リストの名前を入力"
     },
     "list_placeholder_personal_list_empty": {
       "default": "このリストにはまだ何もありません。"

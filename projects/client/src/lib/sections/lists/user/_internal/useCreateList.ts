@@ -13,7 +13,7 @@ export function useCreateList() {
 
   const createList = async () => {
     // skipcq: JS-0052
-    const enteredName = prompt(m.input_prompt_add_list());
+    const enteredName = prompt(m.input_prompt_create_list());
     const newName = enteredName?.trim();
 
     if (!newName) {

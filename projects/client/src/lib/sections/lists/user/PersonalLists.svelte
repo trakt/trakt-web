@@ -6,8 +6,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
-  import AddListAction from "./_internal/AddListAction.svelte";
-  import AddNewListHeader from "./_internal/AddNewListHeader.svelte";
+  import CreateListAction from "./_internal/CreateListAction.svelte";
+  import CreateListHeader from "./_internal/CreateListHeader.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
@@ -58,7 +58,7 @@
   {#if variant === "preview"}
     {#if isMine}
       <RenderFor audience="authenticated" navigation="default">
-        <AddNewListHeader />
+        <CreateListHeader />
       </RenderFor>
     {/if}
 
@@ -81,7 +81,7 @@
 
       {#snippet dynamicActions()}
         {#if isMine}
-          <AddListAction />
+          <CreateListAction />
         {/if}
       {/snippet}
     </SectionList>

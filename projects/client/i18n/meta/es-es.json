@@ -1868,13 +1868,13 @@
     "link_text_vip_list_upsell": {
       "default": "Para más listas"
     },
-    "button_text_add_list": {
-      "default": "Añadir lista"
+    "button_text_create_list": {
+      "default": "Lista"
     },
-    "button_label_add_list": {
-      "default": "Añadir lista"
+    "button_label_create_list": {
+      "default": "Crear lista"
     },
-    "input_prompt_add_list": {
+    "input_prompt_create_list": {
       "default": "Introduce un nombre para tu lista"
     },
     "list_placeholder_personal_list_empty": {

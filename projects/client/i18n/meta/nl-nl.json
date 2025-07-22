@@ -1868,13 +1868,13 @@
     "link_text_vip_list_upsell": {
       "default": "Voor meer lijsten"
     },
-    "button_text_add_list": {
-      "default": "Lijst toevoegen"
+    "button_text_create_list": {
+      "default": "Lijst"
     },
-    "button_label_add_list": {
-      "default": "Lijst toevoegen"
+    "button_label_create_list": {
+      "default": "Lijst aanmaken"
     },
-    "input_prompt_add_list": {
+    "input_prompt_create_list": {
       "default": "Voer een naam in voor je lijst"
     },
     "list_placeholder_personal_list_empty": {
