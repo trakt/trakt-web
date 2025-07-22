@@ -2372,6 +2372,22 @@
     "list_placeholder_personal_list_empty": {
       "default": "There is nothing in this list yet.",
       "description": "Placeholder text shown when there are no shows or movies in a user's personal list."
+    },
+    "header_profile": {
+      "default": "Profile",
+      "description": "Header for the section that allows users to change their profile settings."
+    },
+    "text_avatar": {
+      "default": "Avatar",
+      "description": "Text for the section that allows users to change their avatar."
+    },
+    "text_private": {
+      "default": "Private",
+      "description": "Text for the section that allows users to toggle privacy."
+    },
+    "switch_label_private": {
+      "default": "Is profile private",
+      "description": "Aria-label for the switch that allows users to toggle privacy on or off."
     }
   }
 }

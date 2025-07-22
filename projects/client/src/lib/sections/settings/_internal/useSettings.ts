@@ -65,5 +65,21 @@ export function useSettings() {
         });
       },
     })),
+    privacy: derived(user, ($user) => ({
+      isPrivate: Boolean($user.isPrivate),
+      set: async (isPrivate: boolean) => {
+        const payload = {
+          user: {
+            private: isPrivate,
+          },
+        };
+
+        await handleSettingsChange({
+          payload,
+          action: 'privacy',
+          invalidateAction: InvalidateAction.User.Settings,
+        });
+      },
+    })),
   };
 }

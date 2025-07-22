@@ -1879,6 +1879,18 @@
     },
     "list_placeholder_personal_list_empty": {
       "default": "Все още няма нищо в този списък."
+    },
+    "header_profile": {
+      "default": "Профил"
+    },
+    "text_avatar": {
+      "default": "Аватар"
+    },
+    "text_private": {
+      "default": "Лично"
+    },
+    "switch_label_private": {
+      "default": "Профилът е личен?"
     }
   }
 }

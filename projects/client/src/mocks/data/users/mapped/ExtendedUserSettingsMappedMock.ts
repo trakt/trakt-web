@@ -14,6 +14,7 @@ export const ExtendedUserMappedMock: UserSettings = {
   'about': "Sorry about the amnesia. I'm actually a superstar detective.",
   'isVip': true,
   'isDirector': false,
+  'isPrivate': false,
   'location': 'Martinaise, Revachol West',
   'name': {
     'first': 'Harry',

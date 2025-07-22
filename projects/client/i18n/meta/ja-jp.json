@@ -1879,6 +1879,18 @@
     },
     "list_placeholder_personal_list_empty": {
       "default": "このリストにはまだ何もありません。"
+    },
+    "header_profile": {
+      "default": "プロフィール"
+    },
+    "text_avatar": {
+      "default": "アバター"
+    },
+    "text_private": {
+      "default": "非公開"
+    },
+    "switch_label_private": {
+      "default": "プロフィールを非公開にしますか？"
     }
   }
 }
