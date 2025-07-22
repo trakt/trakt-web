@@ -21,6 +21,6 @@
   .trakt-settings-block-content {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xl);
+    gap: var(--gap-m);
   }
 </style>

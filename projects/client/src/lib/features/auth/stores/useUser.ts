@@ -46,6 +46,7 @@ const ANONYMOUS_USER: UserSettings = {
   },
   isVip: false,
   isDirector: false,
+  isPrivate: false,
   preferences: {
     progress: {
       sort: {

@@ -1879,6 +1879,18 @@
     },
     "list_placeholder_personal_list_empty": {
       "default": "Non c'è ancora nulla in questa lista."
+    },
+    "header_profile": {
+      "default": "Profilo"
+    },
+    "text_avatar": {
+      "default": "Avatar"
+    },
+    "text_private": {
+      "default": "Privato"
+    },
+    "switch_label_private": {
+      "default": "Il profilo è privato?"
     }
   }
 }

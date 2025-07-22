@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import LogoutButton from "./_internal/LogoutButton.svelte";
+  import Profile from "./_internal/Profile.svelte";
   import Spoilers from "./_internal/Spoilers.svelte";
 </script>
 
@@ -16,6 +17,7 @@
       </div>
     </div>
     <div class="trakt-settings-content">
+      <Profile />
       <Spoilers />
     </div>
   </div>
@@ -34,6 +36,10 @@
     min-height: var(--ni-120);
 
     .trakt-settings-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-xl);
+
       padding: var(--ni-8);
     }
 
