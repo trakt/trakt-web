@@ -1868,14 +1868,14 @@
     "link_text_vip_list_upsell": {
       "default": "Для більше списків"
     },
-    "button_text_add_list": {
-      "default": "Додати список"
+    "button_text_create_list": {
+      "default": "Список"
     },
-    "button_label_add_list": {
-      "default": "Додати список"
+    "button_label_create_list": {
+      "default": "Створити список"
     },
-    "input_prompt_add_list": {
-      "default": "Введіть назву вашого списку"
+    "input_prompt_create_list": {
+      "default": "Введіть назву для вашого списку"
     },
     "list_placeholder_personal_list_empty": {
       "default": "У цьому списку поки що нічого немає."

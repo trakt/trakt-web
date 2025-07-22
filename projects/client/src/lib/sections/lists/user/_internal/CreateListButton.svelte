@@ -11,7 +11,7 @@
   const { createList, isCreating } = useCreateList();
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
-    label: m.button_label_add_list(),
+    label: m.button_label_create_list(),
     color: "purple",
     variant: "secondary",
     onclick: createList,
@@ -21,7 +21,7 @@
 
 <RenderFor audience="authenticated" device={["mobile", "tablet-lg", "desktop"]}>
   <Button size="small" {...commonProps}>
-    {m.button_text_add_list()}
+    {m.button_text_create_list()}
     {#snippet icon()}
       <PlusIcon />
     {/snippet}

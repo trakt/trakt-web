@@ -1,9 +1,9 @@
 <script>
-  import AddListAction from "./AddListAction.svelte";
+  import CreateListAction from "./CreateListAction.svelte";
 </script>
 
 <div class="trakt-add-new-list-header">
-  <AddListAction />
+  <CreateListAction />
 </div>
 
 <style lang="scss">

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { usePersonalListsSummary } from "../usePersonalListsSummary";
-  import AddNewListButton from "./AddNewListButton.svelte";
+  import AddNewListButton from "./CreateListButton.svelte";
   import ListUpsellLink from "./ListUpsellLink.svelte";
 
   const { user } = useUser();

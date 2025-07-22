@@ -1868,13 +1868,13 @@
     "link_text_vip_list_upsell": {
       "default": "For flere lister"
     },
-    "button_text_add_list": {
-      "default": "Tilføj liste"
+    "button_text_create_list": {
+      "default": "Liste"
     },
-    "button_label_add_list": {
-      "default": "Tilføj liste"
+    "button_label_create_list": {
+      "default": "Opret liste"
     },
-    "input_prompt_add_list": {
+    "input_prompt_create_list": {
       "default": "Indtast et navn til din liste"
     },
     "list_placeholder_personal_list_empty": {

@@ -1868,14 +1868,14 @@
     "link_text_vip_list_upsell": {
       "default": "Pour plus de listes"
     },
-    "button_text_add_list": {
-      "default": "Ajouter une liste"
+    "button_text_create_list": {
+      "default": "Liste"
     },
-    "button_label_add_list": {
-      "default": "Ajouter une liste"
+    "button_label_create_list": {
+      "default": "Créer une liste"
     },
-    "input_prompt_add_list": {
-      "default": "Entrez le nom de votre liste"
+    "input_prompt_create_list": {
+      "default": "Entrez un nom pour votre liste"
     },
     "list_placeholder_personal_list_empty": {
       "default": "Y'a rien dans cette liste pour l'instant."
