@@ -69,23 +69,23 @@
     "vitest": "3.2.1"
   },
   "dependencies": {
-    "@inlang/paraglide-js": "^2.0.13",
-    "@tanstack/svelte-query": "^5.80.2",
-    "@tanstack/svelte-query-devtools": "^5.80.2",
-    "@tanstack/svelte-query-persist-client": "^5.80.2",
+    "@inlang/paraglide-js": "^2.2.0",
+    "@tanstack/svelte-query": "^5.83.0",
+    "@tanstack/svelte-query-devtools": "^5.83.0",
+    "@tanstack/svelte-query-persist-client": "^5.83.0",
     "@trakt/api": "npm:@jsr/trakt__api@^0.2.10",
     "@ts-rest/core": "^3.52.1",
     "@use-gesture/vanilla": "^10.3.1",
     "date-fns": "^4.1.0",
-    "firebase": "^11.8.1",
+    "firebase": "^11.10.0",
     "idb-keyval": "^6.2.2",
     "oidc-client-ts": "^3.3.0",
-    "resolve-accept-language": "^3.1.11",
+    "resolve-accept-language": "^3.1.12",
     "workbox-expiration": "^7.3.0",
     "workbox-precaching": "^7.3.0",
     "workbox-routing": "^7.3.0",
     "workbox-strategies": "^7.3.0",
-    "zod": "^3.24.1",
-    "zod-to-json-schema": "^3.24.5"
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.6"
   }
 }
