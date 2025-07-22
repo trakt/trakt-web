@@ -31,7 +31,7 @@
     "i18n:generate:watch": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/ --watch"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "11.3.0",
+    "@cucumber/cucumber": "12.1.0",
     "@google/generative-ai": "0.24.1",
     "@playwright/test": "1.52.0",
     "@svelte-plugins/tooltips": "^3.0.3",

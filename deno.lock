@@ -2,7 +2,7 @@
   "version": "5",
   "specifiers": {
     "jsr:@std/cli@^1.0.20": "1.0.20",
-    "npm:@cucumber/cucumber@11.3.0": "11.3.0_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0",
+    "npm:@cucumber/cucumber@12.1.0": "12.1.0_@cucumber+gherkin@32.2.0_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0",
     "npm:@google/generative-ai@0.24.1": "0.24.1",
     "npm:@inlang/paraglide-js@^2.2.0": "2.2.0",
     "npm:@jsr/trakt__api@~0.2.10": "0.2.10_zod@3.25.76",
@@ -959,12 +959,12 @@
         "regexp-match-indices"
       ]
     },
-    "@cucumber/cucumber@11.3.0_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0": {
-      "integrity": "sha512-1YGsoAzRfDyVOnRMTSZP/EcFsOBElOKa2r+5nin0DJAeK+Mp0mzjcmSllMgApGtck7Ji87wwy3kFONfHUHMn4g==",
+    "@cucumber/cucumber@12.1.0_@cucumber+gherkin@32.2.0_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0": {
+      "integrity": "sha512-F72uKHUtHFFn4OAw6r6MoS+PWSMomQoIpW4+W/dcwNYY9oAKVAGyGJkEPIDXX00YtZY+EH3RUcNPlkD+f+dI0Q==",
       "dependencies": [
         "@cucumber/ci-environment",
         "@cucumber/cucumber-expressions",
-        "@cucumber/gherkin@30.0.4",
+        "@cucumber/gherkin@32.2.0",
         "@cucumber/gherkin-streams",
         "@cucumber/gherkin-utils",
         "@cucumber/html-formatter",
@@ -980,7 +980,7 @@
         "debug",
         "error-stack-parser",
         "figures",
-        "glob@10.4.5",
+        "glob@11.0.3",
         "has-ansi",
         "indent-string",
         "is-installed-globally",
@@ -994,7 +994,7 @@
         "mz",
         "progress",
         "read-package-up",
-        "semver@7.7.1",
+        "semver@7.7.2",
         "string-argv",
         "supports-color@8.1.1",
         "type-fest@4.41.0",
@@ -1004,10 +1004,10 @@
       ],
       "bin": true
     },
-    "@cucumber/gherkin-streams@5.0.1_@cucumber+gherkin@30.0.4_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0": {
+    "@cucumber/gherkin-streams@5.0.1_@cucumber+gherkin@32.2.0_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0": {
       "integrity": "sha512-/7VkIE/ASxIP/jd4Crlp4JHXqdNFxPGQokqWqsaCCiqBiu5qHoKMxcWNlp9njVL/n9yN4S08OmY3ZR8uC5x74Q==",
       "dependencies": [
-        "@cucumber/gherkin@30.0.4",
+        "@cucumber/gherkin@32.2.0",
         "@cucumber/message-streams",
         "@cucumber/messages@27.2.0",
         "commander@9.1.0",
@@ -1026,20 +1026,20 @@
       ],
       "bin": true
     },
-    "@cucumber/gherkin@30.0.4": {
-      "integrity": "sha512-pb7lmAJqweZRADTTsgnC3F5zbTh3nwOB1M83Q9ZPbUKMb3P76PzK6cTcPTJBHWy3l7isbigIv+BkDjaca6C8/g==",
-      "dependencies": [
-        "@cucumber/messages@26.0.1"
-      ]
-    },
     "@cucumber/gherkin@31.0.0": {
       "integrity": "sha512-wlZfdPif7JpBWJdqvHk1Mkr21L5vl4EfxVUOS4JinWGf3FLRV6IKUekBv5bb5VX79fkDcfDvESzcQ8WQc07Wgw==",
       "dependencies": [
         "@cucumber/messages@26.0.1"
       ]
     },
-    "@cucumber/html-formatter@21.10.1_@cucumber+messages@27.2.0": {
-      "integrity": "sha512-isaaNMNnBYThsvaHy7i+9kkk9V3+rhgdkt0pd6TCY6zY1CSRZQ7tG6ST9pYyRaECyfbCeF7UGH0KpNEnh6UNvQ==",
+    "@cucumber/gherkin@32.2.0": {
+      "integrity": "sha512-X8xuVhSIqlUjxSRifRJ7t0TycVWyX58fygJH3wDNmHINLg9sYEkvQT0SO2G5YlRZnYc11TIFr4YPenscvdlBIw==",
+      "dependencies": [
+        "@cucumber/messages@27.2.0"
+      ]
+    },
+    "@cucumber/html-formatter@21.13.0_@cucumber+messages@27.2.0": {
+      "integrity": "sha512-/zkBZNGZca7AeY4hSMMu3PBqZBZtZ45qhynZC++LAstlyhXQrzl6zmjVLZMX7jIbdF1Lb+TjN4PWiGtS5VOM6g==",
       "dependencies": [
         "@cucumber/messages@27.2.0"
       ]
@@ -1078,16 +1078,16 @@
         "uuid@11.0.5"
       ]
     },
-    "@cucumber/query@13.3.0_@cucumber+messages@27.2.0": {
-      "integrity": "sha512-2hbcQP8R4F1riSEnVsBjhMf2e9rvyUiPBBPVL3khAbtzSPTaekGagxOiSXNFQqdX65zAku83uQrLA8WnIjWqAA==",
+    "@cucumber/query@13.5.0_@cucumber+messages@27.2.0": {
+      "integrity": "sha512-8L/7qMRixZZJl0S+ao4sq7IobLD1gAdr2H0KDVg81r4M063ZeWDNBSXAr2BXSAYL5I7cpNxpfbfU2VgXPaqapA==",
       "dependencies": [
         "@cucumber/messages@27.2.0",
         "@teppeis/multimaps",
         "lodash.sortby"
       ]
     },
-    "@cucumber/tag-expressions@6.1.2": {
-      "integrity": "sha512-xa3pER+ntZhGCxRXSguDTKEHTZpUUsp+RzTRNnit+vi5cqnk6abLdSLg5i3HZXU3c74nQ8afQC6IT507EN74oQ=="
+    "@cucumber/tag-expressions@6.2.0": {
+      "integrity": "sha512-KIF0eLcafHbWOuSDWFw0lMmgJOLdDRWjEL1kfXEWrqHmx2119HxVAr35WuEd9z542d3Yyg+XNqSr+81rIKqEdg=="
     },
     "@emnapi/runtime@1.4.3": {
       "integrity": "sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==",
@@ -2141,6 +2141,15 @@
     },
     "@inquirer/type@3.0.7": {
       "integrity": "sha512-PfunHQcjwnju84L+ycmcMKB/pTPIngjUJvfnRhKY6FKPuYXlM4aQCb/nIdTFR6BEhMjFvngzvng/vBAJMZpLSA=="
+    },
+    "@isaacs/balanced-match@4.0.1": {
+      "integrity": "sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ=="
+    },
+    "@isaacs/brace-expansion@5.0.0": {
+      "integrity": "sha512-ZT55BDLV0yv0RBm2czMiZ+SqCGO7AvmOM3G/w2xhVPH+te0aKgFjmBvGlL1dH+ql2tgGO3MVrbb3jCKyvpgnxA==",
+      "dependencies": [
+        "@isaacs/balanced-match"
+      ]
     },
     "@isaacs/cliui@8.0.2": {
       "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",
@@ -4090,11 +4099,23 @@
       "integrity": "sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==",
       "dependencies": [
         "foreground-child",
-        "jackspeak",
+        "jackspeak@3.4.3",
         "minimatch@9.0.5",
         "minipass",
         "package-json-from-dist",
-        "path-scurry"
+        "path-scurry@1.11.1"
+      ],
+      "bin": true
+    },
+    "glob@11.0.3": {
+      "integrity": "sha512-2Nim7dha1KVkaiF4q6Dj+ngPPMdfvLJEOpZk/jKiUAkqKebpGAWQXAq9z1xu9HKu5lWfqw/FASuccEjyznjPaA==",
+      "dependencies": [
+        "foreground-child",
+        "jackspeak@4.1.1",
+        "minimatch@10.0.3",
+        "minipass",
+        "package-json-from-dist",
+        "path-scurry@2.0.0"
       ],
       "bin": true
     },
@@ -4531,6 +4552,12 @@
         "@pkgjs/parseargs"
       ]
     },
+    "jackspeak@4.1.1": {
+      "integrity": "sha512-zptv57P3GpL+O0I7VdMJNBZCu+BPHVQUk55Ft8/QCJjTVxrnJHuVuX/0Bl2A6/+2oyR/ZMEuFKwmzqqZ/U5nPQ==",
+      "dependencies": [
+        "@isaacs/cliui"
+      ]
+    },
     "jake@10.9.2": {
       "integrity": "sha512-2P4SQ0HrLQ+fw6llpLnOaGAvN2Zu6778SJMrCUwns4fOoG9ayrTiZk3VV8sCPkVZF8ab0zksVpS8FDY5pRCNBA==",
       "dependencies": [
@@ -4700,6 +4727,9 @@
     "lru-cache@10.4.3": {
       "integrity": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="
     },
+    "lru-cache@11.1.0": {
+      "integrity": "sha512-QIXZUBJUx+2zHUdQujWejBkcD9+cs94tLn0+YL8UrCh+D5sCXZ4c7LaEH48pNwRY3MLDgqUFyhlCyjJPf1WP0A=="
+    },
     "lru-cache@5.1.1": {
       "integrity": "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==",
       "dependencies": [
@@ -4784,6 +4814,12 @@
         "zod@3.22.3"
       ],
       "bin": true
+    },
+    "minimatch@10.0.3": {
+      "integrity": "sha512-IPZ167aShDZZUMdRk66cyQAW3qr0WzbHkPdMYa8bzZhlHhO3jALbKdxcaak7W9FfT2rZNpQuUu4Od7ILEpXSaw==",
+      "dependencies": [
+        "@isaacs/brace-expansion"
+      ]
     },
     "minimatch@3.1.2": {
       "integrity": "sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==",
@@ -5011,6 +5047,13 @@
       "integrity": "sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==",
       "dependencies": [
         "lru-cache@10.4.3",
+        "minipass"
+      ]
+    },
+    "path-scurry@2.0.0": {
+      "integrity": "sha512-ypGJsmGtdXUOeM5u93TyeIEfEhM6s+ljAhrk5vAvSx8uyY/02OvrZnA0YNGUrPXfpJMgI1ODd3nwz8Npx4O4cg==",
+      "dependencies": [
+        "lru-cache@11.1.0",
         "minipass"
       ]
     },
@@ -6803,7 +6846,7 @@
         ],
         "packageJson": {
           "dependencies": [
-            "npm:@cucumber/cucumber@11.3.0",
+            "npm:@cucumber/cucumber@12.1.0",
             "npm:@google/generative-ai@0.24.1",
             "npm:@inlang/paraglide-js@^2.2.0",
             "npm:@jsr/trakt__api@~0.2.10",
