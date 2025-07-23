@@ -7,7 +7,11 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
-<RenderFor audience="authenticated" navigation="default">
+<RenderFor
+  audience="authenticated"
+  navigation="default"
+  device={["desktop", "tablet-lg", "tablet-sm"]}
+>
   <div class="trakt-logo">
     <Link href={UrlBuilder.home()}>
       <RenderFor audience="authenticated" device={["tablet-sm"]}>
