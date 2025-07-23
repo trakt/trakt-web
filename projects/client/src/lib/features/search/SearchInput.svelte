@@ -115,7 +115,7 @@
     }
   }
 
-  :global(.trakt-navbar-scroll) {
+  :global(.trakt-navbar-scroll:not(.trakt-navbar-pwa)) {
     .trakt-search {
       --mobile-search-focus-width: calc(
         100dvw - var(--layout-distance-side) * 2 - var(--navbar-side-padding) *
