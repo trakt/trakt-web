@@ -15,12 +15,14 @@ export function toHumanDate(
 ): string {
   const locale = LOCALE_MAP[localeKey] ?? LOCALE_MAP['en'];
 
-  const { days = 0 } = intervalToDuration({
+  const { days = 0, months = 0, years = 0 } = intervalToDuration({
     start: stripTime(today),
     end: stripTime(date),
   });
 
-  const isInRelativeRange = days >= -6 && days <= 6;
+  const isInMonthRange = years === 0 && months === 0;
+  const isInDaysRange = days >= -6 && days <= 6;
+  const isInRelativeRange = isInMonthRange && isInDaysRange;
 
   if (isInRelativeRange) {
     return formatRelative(date, today, {
