@@ -1918,6 +1918,17 @@
     },
     "input_prompt_about": {
       "default": "Erzähl uns etwas über dich."
+    },
+    "header_favorite_genres": {
+      "default": "Lieblingsgenres"
+    },
+    "button_label_toggle_genre": {
+      "default": "Genre {genre} umschalten",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }

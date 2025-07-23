@@ -1918,6 +1918,17 @@
     },
     "input_prompt_about": {
       "default": "Fortell oss litt om deg selv."
+    },
+    "header_favorite_genres": {
+      "default": "Favorittjangre"
+    },
+    "button_label_toggle_genre": {
+      "default": "Veksle sjanger {genre}",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }

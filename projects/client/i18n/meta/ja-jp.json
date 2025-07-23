@@ -1918,6 +1918,17 @@
     },
     "input_prompt_about": {
       "default": "自己紹介をお願いします。"
+    },
+    "header_favorite_genres": {
+      "default": "お気に入りのジャンル"
+    },
+    "button_label_toggle_genre": {
+      "default": "{genre}のジャンルを切り替える",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }

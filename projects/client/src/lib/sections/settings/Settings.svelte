@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import Genres from "./_internal/Genres.svelte";
   import LogoutButton from "./_internal/LogoutButton.svelte";
   import Profile from "./_internal/Profile.svelte";
   import Spoilers from "./_internal/Spoilers.svelte";
@@ -19,6 +20,7 @@
     <div class="trakt-settings-content">
       <Profile />
       <Spoilers />
+      <Genres />
     </div>
   </div>
 </RenderFor>
@@ -40,6 +42,7 @@
       flex-direction: column;
       gap: var(--gap-xxl);
 
+      max-width: var(--ni-640);
       min-width: 0;
       padding: var(--ni-8);
     }

@@ -1918,6 +1918,17 @@
     },
     "input_prompt_about": {
       "default": "Vertel iets over jezelf."
+    },
+    "header_favorite_genres": {
+      "default": "Favoriete genres"
+    },
+    "button_label_toggle_genre": {
+      "default": "Genre {genre} in-/uitschakelen",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }
