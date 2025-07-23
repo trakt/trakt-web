@@ -427,14 +427,6 @@
     "button_text_find_shows": {
       "default": "Series zoeken"
     },
-    "tag_text_active_watchers": {
-      "default": "{count} kijken",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
-    },
     "list_title_show_credits": {
       "default": "Series"
     },
@@ -884,14 +876,6 @@
     },
     "list_title_actors": {
       "default": "Acteurs"
-    },
-    "tag_text_anticipated_count": {
-      "default": "{count} zin in",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
     },
     "button_label_view_all_trending_movies": {
       "default": "Bekijk alle populaire films"

@@ -427,14 +427,6 @@
     "button_text_find_shows": {
       "default": "Găsește Serialuri"
     },
-    "tag_text_active_watchers": {
-      "default": "{count} urmăresc",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
-    },
     "list_title_show_credits": {
       "default": "Seriale"
     },
@@ -884,14 +876,6 @@
     },
     "list_title_actors": {
       "default": "Actori"
-    },
-    "tag_text_anticipated_count": {
-      "default": "{count} nerăbdători",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
     },
     "button_label_view_all_trending_movies": {
       "default": "Vezi toate filmele populare"
