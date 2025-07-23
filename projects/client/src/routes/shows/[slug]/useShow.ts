@@ -8,9 +8,22 @@ import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.t
 import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { toMediaIntl } from '$lib/utils/media/toMediaIntl.ts';
-import { derived, get } from 'svelte/store';
+import { derived, get, readable } from 'svelte/store';
 
-export function useShow(slug: string) {
+export function useShow(slug: string | undefined) {
+  if (!slug) {
+    return {
+      isLoading: readable(true),
+      show: readable(undefined),
+      studios: readable(undefined),
+      crew: readable(undefined),
+      seasons: readable(undefined),
+      videos: readable([]),
+      intl: readable(undefined),
+      streamOn: readable(undefined),
+    };
+  }
+
   const { country, getPreferred } = useStreamingPreferences();
 
   const show = useQuery(showSummaryQuery({ slug }));

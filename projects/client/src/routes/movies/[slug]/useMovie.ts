@@ -8,9 +8,28 @@ import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.
 import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { toMediaIntl } from '$lib/utils/media/toMediaIntl.ts';
-import { derived, get } from 'svelte/store';
+import { derived, get, readable } from 'svelte/store';
 
-export function useMovie(slug: string) {
+/*
+  FIXME: Fix the root cause.
+  Dealing with undefined slug is a temporary solution.
+  The root cause is that one of the components can still handle
+  a subscription/query which makes the page still reactive
+  even when navigating away. Same for useShow.ts & MediaSummary.svelte
+*/
+export function useMovie(slug: string | undefined) {
+  if (!slug) {
+    return {
+      isLoading: readable(true),
+      movie: readable(undefined),
+      studios: readable(undefined),
+      crew: readable(undefined),
+      videos: readable([]),
+      intl: readable(undefined),
+      streamOn: readable(undefined),
+    };
+  }
+
   const { country, getPreferred } = useStreamingPreferences();
 
   const movie = useQuery(movieSummaryQuery({
