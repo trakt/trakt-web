@@ -25,7 +25,7 @@
   ];
 </script>
 
-<SentimentHeader {comment} />
+<SentimentHeader />
 <ShadowScroller>
   <div class="trakt-sentiment-body">
     {#each mappedSentiments as { rating, sentiments, color }}
