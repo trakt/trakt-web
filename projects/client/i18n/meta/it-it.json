@@ -427,14 +427,6 @@
     "button_text_find_shows": {
       "default": "Trova serie TV"
     },
-    "tag_text_active_watchers": {
-      "default": "{count} stanno guardando",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
-    },
     "list_title_show_credits": {
       "default": "Serie TV"
     },
@@ -884,14 +876,6 @@
     },
     "list_title_actors": {
       "default": "Attori"
-    },
-    "tag_text_anticipated_count": {
-      "default": "{count} attesi",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
     },
     "button_label_view_all_trending_movies": {
       "default": "Visualizza tutti i film in tendenza"

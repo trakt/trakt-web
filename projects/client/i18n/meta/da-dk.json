@@ -427,14 +427,6 @@
     "button_text_find_shows": {
       "default": "Find serier"
     },
-    "tag_text_active_watchers": {
-      "default": "{count} ser med",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
-    },
     "list_title_show_credits": {
       "default": "Serier"
     },
@@ -884,14 +876,6 @@
     },
     "list_title_actors": {
       "default": "Skuespillere"
-    },
-    "tag_text_anticipated_count": {
-      "default": "{count} forventningsfulde",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
     },
     "button_label_view_all_trending_movies": {
       "default": "Se alle populære film"

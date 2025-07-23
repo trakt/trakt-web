@@ -427,14 +427,6 @@
     "button_text_find_shows": {
       "default": "Znajdź seriale"
     },
-    "tag_text_active_watchers": {
-      "default": "{count} oglądających",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
-    },
     "list_title_show_credits": {
       "default": "Seriale"
     },
@@ -884,14 +876,6 @@
     },
     "list_title_actors": {
       "default": "Aktorzy"
-    },
-    "tag_text_anticipated_count": {
-      "default": "{count} wyczekujących",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
     },
     "button_label_view_all_trending_movies": {
       "default": "Zobacz wszystkie popularne filmy"

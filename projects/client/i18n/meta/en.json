@@ -548,15 +548,6 @@
       "default": "Find Shows",
       "description": "Text for the button that allows users to find shows. This button is shown in some empty lists."
     },
-    "tag_text_active_watchers": {
-      "default": "{count} watching",
-      "description": "Text for the tag that shows the number of active watchers of a movie or show. This should be as short as possible.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
-    },
     "list_title_show_credits": {
       "default": "Shows",
       "description": "Title for lists containing shows related to a person's credits. This title should be as short and concise as possible."
@@ -1130,15 +1121,6 @@
     "list_title_actors": {
       "default": "Actors",
       "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible."
-    },
-    "tag_text_anticipated_count": {
-      "default": "{count} eager",
-      "description": "Text for the tag that shows the number of users who are eagerly anticipating a movie or show. This should be as short as possible.",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
     },
     "button_label_view_all_trending_movies": {
       "default": "View all trending movies",

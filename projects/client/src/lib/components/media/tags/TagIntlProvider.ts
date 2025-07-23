@@ -13,14 +13,10 @@ export const TagIntlProvider: TagIntl = {
   toEpisodeCount: (count) => m.tag_text_number_of_episodes({ count }),
   toPlayCount: (count) =>
     m.tag_text_plays({ number: toHumanNumber(count, languageTag()) }),
-  toWatcherCount: (count) =>
-    m.tag_text_active_watchers({ count: toHumanNumber(count, languageTag()) }),
+  toWatcherCount: (count) => toHumanNumber(count, languageTag()),
   toReleaseEstimate: (airDate) => toHumanETA(new Date(), airDate, getLocale()),
   tbaLabel: () => m.tag_text_tba(),
-  toAnticipatedCount: (count) =>
-    m.tag_text_anticipated_count({
-      count: toHumanNumber(count, languageTag()),
-    }),
+  toAnticipatedCount: (count) => toHumanNumber(count, languageTag()),
   watchCountLabel: () => m.tag_text_watch_count(),
   trendLabel: (delta) =>
     delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
