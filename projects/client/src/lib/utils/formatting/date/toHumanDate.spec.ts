@@ -88,4 +88,14 @@ describe('toHumanDate', () => {
       'December 13th, 2023 at 8:00 PM',
     );
   });
+
+  it('will display the date in the past if is more than 2 months ago', () => {
+    const wednesday = stripTime(new Date('2023-12-20'));
+
+    const twoMonthAgo = addDays(wednesday, -60);
+
+    expect(toHumanDate(wednesday, twoMonthAgo, 'en')).toBe(
+      'October 21st, 2023 at 12:00 AM',
+    );
+  });
 });
