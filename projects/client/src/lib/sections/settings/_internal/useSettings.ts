@@ -72,5 +72,19 @@ export function useSettings() {
         await handleSettingsChange({ payload, action: 'profile' });
       },
     })),
+    genres: derived(user, ($user) => ({
+      favorites: $user.genres ?? [],
+      set: async (genres: string[]) => {
+        const payload = {
+          browsing: {
+            genres: {
+              favorites: genres,
+            },
+          },
+        };
+
+        await handleSettingsChange({ payload, action: 'genres' });
+      },
+    })),
   };
 }

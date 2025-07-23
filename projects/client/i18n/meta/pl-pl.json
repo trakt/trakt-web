@@ -1902,6 +1902,17 @@
     },
     "input_prompt_about": {
       "default": "Opowiedz nam coś o sobie."
+    },
+    "header_favorite_genres": {
+      "default": "Ulubione gatunki"
+    },
+    "button_label_toggle_genre": {
+      "default": "Przełącz gatunek {genre}",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }

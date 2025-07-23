@@ -2406,6 +2406,19 @@
     "input_prompt_about": {
       "default": "Tell us a bit about yourself.",
       "description": "Message for the prompt that allows users to specify their 'about me' description."
+    },
+    "header_favorite_genres": {
+      "default": "Favorite genres",
+      "description": "Header for the section that allows users to change their favorite genres."
+    },
+    "button_label_toggle_genre": {
+      "default": "Toggle the {genre} genre",
+      "description": "Aria-label for the button that allows users to toggle a genre, for example as a favorite.",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }

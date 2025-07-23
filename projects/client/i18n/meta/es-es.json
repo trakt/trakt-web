@@ -1902,6 +1902,17 @@
     },
     "input_prompt_about": {
       "default": "Cuéntanos un poco sobre ti."
+    },
+    "header_favorite_genres": {
+      "default": "Géneros favoritos"
+    },
+    "button_label_toggle_genre": {
+      "default": "Activar/Desactivar el género {genre}",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }

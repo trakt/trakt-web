@@ -1902,6 +1902,17 @@
     },
     "input_prompt_about": {
       "default": "Разкажете ни малко за себе си."
+    },
+    "header_favorite_genres": {
+      "default": "Любими жанрове"
+    },
+    "button_label_toggle_genre": {
+      "default": "Превключване на жанр {genre}",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }

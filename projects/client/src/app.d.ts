@@ -154,6 +154,7 @@ declare global {
   export type ButtonProps =
     & {
       label: string;
+      'aria-pressed'?: 'true' | 'false' | 'mixed';
     }
     & HTMLElementProps
     & ChildrenProps;

@@ -1902,6 +1902,17 @@
     },
     "input_prompt_about": {
       "default": "Raconte-nous un peu ta vie."
+    },
+    "header_favorite_genres": {
+      "default": "Vos genres préférés"
+    },
+    "button_label_toggle_genre": {
+      "default": "Activer/Désactiver le genre {genre}",
+      "variables": {
+        "genre": {
+          "type": "string"
+        }
+      }
     }
   }
 }
