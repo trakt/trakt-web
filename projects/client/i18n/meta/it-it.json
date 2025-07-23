@@ -1891,6 +1891,33 @@
     },
     "switch_label_private": {
       "default": "Il profilo è privato?"
+    },
+    "text_display_name": {
+      "default": "Nome visualizzato"
+    },
+    "button_label_change_display_name": {
+      "default": "Cambia nome visualizzato"
+    },
+    "text_location": {
+      "default": "Posizione"
+    },
+    "button_label_change_location": {
+      "default": "Cambia posizione"
+    },
+    "text_about": {
+      "default": "Informazioni"
+    },
+    "button_label_change_about": {
+      "default": "Cambia informazioni"
+    },
+    "input_prompt_display_name": {
+      "default": "Come vuoi essere chiamato?"
+    },
+    "input_prompt_location": {
+      "default": "Dove ti trovi?"
+    },
+    "input_prompt_about": {
+      "default": "Raccontaci un po' di te."
     }
   }
 }

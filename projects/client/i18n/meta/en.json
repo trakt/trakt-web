@@ -2388,6 +2388,42 @@
     "switch_label_private": {
       "default": "Is profile private",
       "description": "Aria-label for the switch that allows users to toggle privacy on or off."
+    },
+    "text_display_name": {
+      "default": "Display name",
+      "description": "Text for the section that allows users to change their display name."
+    },
+    "button_label_change_display_name": {
+      "default": "Change display name",
+      "description": "Aria-label for the button that allows users to change their display name."
+    },
+    "text_location": {
+      "default": "Location",
+      "description": "Text for the section that allows users to change their location."
+    },
+    "button_label_change_location": {
+      "default": "Change location",
+      "description": "Aria-label for the button that allows users to change their location."
+    },
+    "text_about": {
+      "default": "About",
+      "description": "Text for the section that allows users to change their 'about me' description."
+    },
+    "button_label_change_about": {
+      "default": "Change about",
+      "description": "Aria-label for the button that allows users to change their 'about me' description."
+    },
+    "input_prompt_display_name": {
+      "default": "What should your display name be?",
+      "description": "Message for the prompt that allows users to specify their display name."
+    },
+    "input_prompt_location": {
+      "default": "Where are you located?",
+      "description": "Message for the prompt that allows users to specify their location."
+    },
+    "input_prompt_about": {
+      "default": "Tell us a bit about yourself.",
+      "description": "Message for the prompt that allows users to specify their 'about me' description."
     }
   }
 }

@@ -1891,6 +1891,33 @@
     },
     "switch_label_private": {
       "default": "Чи профіль приватний?"
+    },
+    "text_display_name": {
+      "default": "Відображуване ім'я"
+    },
+    "button_label_change_display_name": {
+      "default": "Змінити ім'я для відображення"
+    },
+    "text_location": {
+      "default": "Місцезнаходження"
+    },
+    "button_label_change_location": {
+      "default": "Змінити місцезнаходження"
+    },
+    "text_about": {
+      "default": "Про себе"
+    },
+    "button_label_change_about": {
+      "default": "Змінити про себе"
+    },
+    "input_prompt_display_name": {
+      "default": "Як вас відображати?"
+    },
+    "input_prompt_location": {
+      "default": "Де ви знаходитесь?"
+    },
+    "input_prompt_about": {
+      "default": "Розкажіть трохи про себе."
     }
   }
 }

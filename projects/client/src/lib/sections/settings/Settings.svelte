@@ -38,8 +38,9 @@
     .trakt-settings-content {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-xl);
+      gap: var(--gap-xxl);
 
+      min-width: 0;
       padding: var(--ni-8);
     }
 

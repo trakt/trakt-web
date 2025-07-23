@@ -1891,6 +1891,33 @@
     },
     "switch_label_private": {
       "default": "Is profiel privé?"
+    },
+    "text_display_name": {
+      "default": "Weergavenaam"
+    },
+    "button_label_change_display_name": {
+      "default": "Weergavenaam wijzigen"
+    },
+    "text_location": {
+      "default": "Locatie"
+    },
+    "button_label_change_location": {
+      "default": "Locatie wijzigen"
+    },
+    "text_about": {
+      "default": "Over mij"
+    },
+    "button_label_change_about": {
+      "default": "Wijzig 'over mij'"
+    },
+    "input_prompt_display_name": {
+      "default": "Hoe wil je heten?"
+    },
+    "input_prompt_location": {
+      "default": "Waar ben je?"
+    },
+    "input_prompt_about": {
+      "default": "Vertel iets over jezelf."
     }
   }
 }

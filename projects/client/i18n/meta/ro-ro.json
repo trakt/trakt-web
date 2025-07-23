@@ -1891,6 +1891,33 @@
     },
     "switch_label_private": {
       "default": "Profil privat?"
+    },
+    "text_display_name": {
+      "default": "Nume afișat"
+    },
+    "button_label_change_display_name": {
+      "default": "Schimbă numele afișat"
+    },
+    "text_location": {
+      "default": "Locație"
+    },
+    "button_label_change_location": {
+      "default": "Schimbă locația"
+    },
+    "text_about": {
+      "default": "Despre"
+    },
+    "button_label_change_about": {
+      "default": "Schimbă despre"
+    },
+    "input_prompt_display_name": {
+      "default": "Cum vrei să fii afișat?"
+    },
+    "input_prompt_location": {
+      "default": "Unde te afli?"
+    },
+    "input_prompt_about": {
+      "default": "Spune-ne câteva cuvinte despre tine."
     }
   }
 }

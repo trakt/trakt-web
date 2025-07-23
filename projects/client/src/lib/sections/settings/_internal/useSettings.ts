@@ -1,10 +1,7 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import {
-  InvalidateAction,
-  type InvalidateActionOptions,
-} from '$lib/requests/models/InvalidateAction.ts';
+import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { SettingsRequest } from '@trakt/api';
 import { derived, writable } from 'svelte/store';
@@ -13,8 +10,9 @@ import { saveSettingsRequest } from '../../../requests/queries/users/saveSetting
 type HandleSettingsProps = {
   payload: SettingsRequest;
   action: string;
-  invalidateAction: InvalidateActionOptions;
 };
+
+type UserSettingsRequest = SettingsRequest['user'];
 
 export function useSettings() {
   const { user } = useUser();
@@ -23,7 +21,7 @@ export function useSettings() {
   const isSavingSettings = writable(false);
 
   const handleSettingsChange = async (
-    { payload, action, invalidateAction }: HandleSettingsProps,
+    { payload, action }: HandleSettingsProps,
   ) => {
     isSavingSettings.set(true);
 
@@ -34,7 +32,7 @@ export function useSettings() {
     }
 
     track({ settings: action });
-    await invalidate(invalidateAction);
+    await invalidate(InvalidateAction.User.Settings);
     isSavingSettings.set(false);
   };
 
@@ -58,27 +56,20 @@ export function useSettings() {
           },
         };
 
-        await handleSettingsChange({
-          payload,
-          action: 'spoilers',
-          invalidateAction: InvalidateAction.User.Settings,
-        });
+        await handleSettingsChange({ payload, action: 'spoilers' });
       },
     })),
-    privacy: derived(user, ($user) => ({
+    profile: derived(user, ($user) => ({
       isPrivate: Boolean($user.isPrivate),
-      set: async (isPrivate: boolean) => {
-        const payload = {
-          user: {
-            private: isPrivate,
-          },
+      displayName: $user.name.full,
+      location: $user.location ?? '',
+      about: $user.about ?? '',
+      set: async (settings: UserSettingsRequest) => {
+        const payload: SettingsRequest = {
+          user: { ...settings },
         };
 
-        await handleSettingsChange({
-          payload,
-          action: 'privacy',
-          invalidateAction: InvalidateAction.User.Settings,
-        });
+        await handleSettingsChange({ payload, action: 'profile' });
       },
     })),
   };

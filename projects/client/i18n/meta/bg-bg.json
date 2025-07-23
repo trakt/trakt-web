@@ -1891,6 +1891,33 @@
     },
     "switch_label_private": {
       "default": "Профилът е личен?"
+    },
+    "text_display_name": {
+      "default": "Показвано име"
+    },
+    "button_label_change_display_name": {
+      "default": "Промяна на показваното име"
+    },
+    "text_location": {
+      "default": "Местоположение"
+    },
+    "button_label_change_location": {
+      "default": "Промени местоположението"
+    },
+    "text_about": {
+      "default": "За мен"
+    },
+    "button_label_change_about": {
+      "default": "Промени за мен"
+    },
+    "input_prompt_display_name": {
+      "default": "Как искате да се показвате?"
+    },
+    "input_prompt_location": {
+      "default": "Къде се намирате?"
+    },
+    "input_prompt_about": {
+      "default": "Разкажете ни малко за себе си."
     }
   }
 }
