@@ -1875,6 +1875,33 @@
     },
     "switch_label_private": {
       "default": "¿Perfil privado?"
+    },
+    "text_display_name": {
+      "default": "Nombre para mostrar"
+    },
+    "button_label_change_display_name": {
+      "default": "Cambiar nombre para mostrar"
+    },
+    "text_location": {
+      "default": "Ubicación"
+    },
+    "button_label_change_location": {
+      "default": "Cambiar ubicación"
+    },
+    "text_about": {
+      "default": "Acerca de"
+    },
+    "button_label_change_about": {
+      "default": "Cambiar acerca de"
+    },
+    "input_prompt_display_name": {
+      "default": "¿Cómo quieres que te digan?"
+    },
+    "input_prompt_location": {
+      "default": "¿Dónde te encuentras?"
+    },
+    "input_prompt_about": {
+      "default": "Cuéntanos un poco de ti."
     }
   }
 }

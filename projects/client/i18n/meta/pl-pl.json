@@ -1875,6 +1875,33 @@
     },
     "switch_label_private": {
       "default": "Czy profil jest prywatny?"
+    },
+    "text_display_name": {
+      "default": "Nazwa wyświetlana"
+    },
+    "button_label_change_display_name": {
+      "default": "Zmień nazwę wyświetlaną"
+    },
+    "text_location": {
+      "default": "Lokalizacja"
+    },
+    "button_label_change_location": {
+      "default": "Zmień lokalizację"
+    },
+    "text_about": {
+      "default": "O mnie"
+    },
+    "button_label_change_about": {
+      "default": "Zmień o mnie"
+    },
+    "input_prompt_display_name": {
+      "default": "Jak chcesz być wyświetlany?"
+    },
+    "input_prompt_location": {
+      "default": "Gdzie się znajdujesz?"
+    },
+    "input_prompt_about": {
+      "default": "Opowiedz nam coś o sobie."
     }
   }
 }

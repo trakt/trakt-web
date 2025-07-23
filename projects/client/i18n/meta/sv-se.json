@@ -1875,6 +1875,33 @@
     },
     "switch_label_private": {
       "default": "Är profilen privat?"
+    },
+    "text_display_name": {
+      "default": "Visningsnamn"
+    },
+    "button_label_change_display_name": {
+      "default": "Ändra visningsnamn"
+    },
+    "text_location": {
+      "default": "Plats"
+    },
+    "button_label_change_location": {
+      "default": "Ändra plats"
+    },
+    "text_about": {
+      "default": "Om mig"
+    },
+    "button_label_change_about": {
+      "default": "Ändra om mig"
+    },
+    "input_prompt_display_name": {
+      "default": "Vad ska ditt visningsnamn vara?"
+    },
+    "input_prompt_location": {
+      "default": "Var befinner du dig?"
+    },
+    "input_prompt_about": {
+      "default": "Berätta lite om dig själv."
     }
   }
 }

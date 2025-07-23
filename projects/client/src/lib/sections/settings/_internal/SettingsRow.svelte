@@ -16,15 +16,17 @@
     gap: var(--gap-s);
 
     .trakt-settings-row-title {
-      width: var(--ni-200);
+      max-width: var(--ni-200);
+      flex: 1;
     }
+  }
 
-    @include for-tablet-sm-and-below {
-      .trakt-settings-row-title,
-      .trakt-settings-row-content {
-        width: auto;
-        flex: 1;
-      }
-    }
+  .trakt-settings-row-content {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    min-width: 0;
+    flex: 1;
   }
 </style>

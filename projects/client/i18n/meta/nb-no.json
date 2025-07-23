@@ -1875,6 +1875,33 @@
     },
     "switch_label_private": {
       "default": "Er profilen privat?"
+    },
+    "text_display_name": {
+      "default": "Visningsnavn"
+    },
+    "button_label_change_display_name": {
+      "default": "Endre visningsnavn"
+    },
+    "text_location": {
+      "default": "Sted"
+    },
+    "button_label_change_location": {
+      "default": "Endre sted"
+    },
+    "text_about": {
+      "default": "Om"
+    },
+    "button_label_change_about": {
+      "default": "Endre om"
+    },
+    "input_prompt_display_name": {
+      "default": "Hva skal visningsnavnet ditt være?"
+    },
+    "input_prompt_location": {
+      "default": "Hvor er du?"
+    },
+    "input_prompt_about": {
+      "default": "Fortell oss litt om deg selv."
     }
   }
 }

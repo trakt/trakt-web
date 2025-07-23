@@ -1875,6 +1875,33 @@
     },
     "switch_label_private": {
       "default": "プロフィールを非公開にしますか？"
+    },
+    "text_display_name": {
+      "default": "表示名"
+    },
+    "button_label_change_display_name": {
+      "default": "表示名を変更"
+    },
+    "text_location": {
+      "default": "場所"
+    },
+    "button_label_change_location": {
+      "default": "場所を変更"
+    },
+    "text_about": {
+      "default": "自己紹介"
+    },
+    "button_label_change_about": {
+      "default": "自己紹介を変更"
+    },
+    "input_prompt_display_name": {
+      "default": "表示名は？"
+    },
+    "input_prompt_location": {
+      "default": "どこにいますか？"
+    },
+    "input_prompt_about": {
+      "default": "自己紹介をお願いします。"
     }
   }
 }
