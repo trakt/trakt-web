@@ -1,8 +1,4 @@
-import { getDeepLinkHandler } from '$lib/features/deep-link/getDeepLinkHandler.ts';
 import type { StreamNow } from '$lib/requests/models/StreamingServiceOptions.ts';
-import { useStreamingServices } from '$lib/stores/useStreamingServices.ts';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { derived, get } from 'svelte/store';
 
 type StreamOnHandler = {
   href: HttpsUrl;
@@ -10,30 +6,72 @@ type StreamOnHandler = {
   onclick: () => void;
 };
 
-export function useStreamOnHandler(service: StreamNow): StreamOnHandler {
-  const deepLinkHandler = getDeepLinkHandler();
-  if (!deepLinkHandler || !service.deepLink) {
-    return {
-      href: service.link,
-    };
+function getWebOSLinkHandler() {
+  const hasWebOSServiceBridge = typeof WebOSServiceBridge !== 'undefined' &&
+    WebOSServiceBridge;
+
+  if (!hasWebOSServiceBridge) {
+    return;
   }
 
-  const { sources } = useStreamingServices();
-  const source = derived(
-    sources,
-    ($sources) => $sources.find((s) => s.source === service.source),
-  );
+  // TODO only instantiate once
+  const bridge = new WebOSServiceBridge();
+  const url = 'luna://com.webos.service.applicationmanager/launch';
 
-  const handler = () => {
-    const sourceName = get(source)?.name ?? service.source;
+  /*
+    TODO:
+    -deal with youtube
+    -deal with plex
+    -deal with non-existing apps (getAppLoadStatus instead of launch)
+  */
+  const handler = (id: string, target: string) => {
+    const params = JSON.stringify({
+      'id': id,
+      'params': {
+        contentTarget: target,
+      },
+    });
 
-    deepLinkHandler.open(
-      sourceName,
-      assertDefined(service.deepLink, 'Deep link is required'),
-    );
+    bridge.call(url, params);
   };
 
+  return handler;
+}
+
+export function useStreamOnHandler(service: StreamNow): StreamOnHandler {
   return {
-    onclick: handler,
+    onclick: () => {
+      const handler = getWebOSLinkHandler();
+      if (!handler || !service.webosLink) {
+        return;
+      }
+
+      handler(service.webosLink.id, service.webosLink.contentTarget);
+    },
   };
+  // const deepLinkHandler = getDeepLinkHandler();
+  // if (!deepLinkHandler || !service.deepLink) {
+  //   return {
+  //     href: service.link,
+  //   };
+  // }
+
+  // const { sources } = useStreamingServices();
+  // const source = derived(
+  //   sources,
+  //   ($sources) => $sources.find((s) => s.source === service.source),
+  // );
+
+  // const handler = () => {
+  //   const sourceName = get(source)?.name ?? service.source;
+
+  //   deepLinkHandler.open(
+  //     sourceName,
+  //     assertDefined(service.deepLink, 'Deep link is required'),
+  //   );
+  // };
+
+  // return {
+  //   onclick: handler,
+  // };
 }

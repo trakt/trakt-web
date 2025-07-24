@@ -16,7 +16,7 @@
   const isAiredItem = $derived(airDate < new Date());
 </script>
 
-{#if isAiredItem && streamOn?.preferred}
+{#if isAiredItem && streamOn?.preferred?.webosLink}
   <RenderFor audience="authenticated">
     <StreamingServiceButton
       service={streamOn.preferred}

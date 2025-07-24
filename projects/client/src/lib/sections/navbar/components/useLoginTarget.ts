@@ -10,7 +10,7 @@ export function useLoginTarget() {
   return {
     target: derived(navigation, ($navigation) => {
       return $navigation === 'dpad'
-        ? { url: UrlBuilder.login.activate() }
+        ? { href: UrlBuilder.login.activate() }
         : { onclick: login };
     }),
   };

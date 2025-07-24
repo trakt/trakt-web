@@ -24,6 +24,7 @@ export function findPreferredStreamingService({
     .streaming
     .filter(
       (service) => {
+        // TODO webos: filter on webosLink & app availability
         if (getDeepLinkHandler()) {
           return Boolean(service.deepLink);
         }

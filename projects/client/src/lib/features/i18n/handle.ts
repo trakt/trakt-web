@@ -8,6 +8,7 @@ import {
 import { LocaleEndpoint } from '$lib/features/i18n/LocaleEndpoint.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
+import { IS_PROD } from '../../utils/env/index.ts';
 
 export const LANG_PLACEHOLDER = '"%paraglide.lang%"';
 export const DIR_PLACEHOLDER = '"%paraglide.textDirection%"';
@@ -27,7 +28,7 @@ export const handle: Handle = async ({ event, resolve }) => {
           sanitizedLocale,
           {
             httpOnly: true,
-            secure: true,
+            secure: IS_PROD,
             maxAge: time.years(5) / time.seconds(1),
             path: '/',
           },

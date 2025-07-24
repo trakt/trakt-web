@@ -4,6 +4,10 @@ import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 export const StreamingSubscriptionSchema = z.object({
   link: HttpsUrlSchema,
   deepLink: z.string().nullish(),
+  webosLink: z.object({
+    id: z.string(),
+    contentTarget: z.string(),
+  }).nullish(),
   source: z.string(),
   is4k: z.boolean(),
   type: z.literal('streaming'),

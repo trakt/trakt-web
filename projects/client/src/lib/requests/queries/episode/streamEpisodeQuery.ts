@@ -26,7 +26,7 @@ const streamEpisodeRequest = (
         country,
       },
       query: {
-        links: 'direct',
+        links: 'direct,webos',
       },
     });
 

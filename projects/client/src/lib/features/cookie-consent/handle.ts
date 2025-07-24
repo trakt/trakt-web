@@ -1,5 +1,6 @@
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
+import { IS_PROD } from '../../utils/env/index.ts';
 import { CookieConsentEndpoint } from './CookieConsentEndpoint.ts';
 import { COOKIE_CONSENT_COOKIE_NAME } from './constants.ts';
 
@@ -31,7 +32,7 @@ export const handle: Handle = async ({ event, resolve }) => {
             'true',
             {
               httpOnly: true,
-              secure: true,
+              secure: IS_PROD,
               maxAge: time.months(6) / time.seconds(1),
               path: '/',
             },

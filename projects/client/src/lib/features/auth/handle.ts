@@ -2,7 +2,7 @@ import { requestDeviceCode } from '$lib/features/auth/requests/requestDeviceCode
 import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
-import { IS_DEV } from '../../utils/env/index.ts';
+import { IS_DEV, IS_PROD } from '../../utils/env/index.ts';
 import { time } from '../../utils/timing/time.ts';
 import { AuthDeviceEndpoint } from './AuthDeviceEndpoint.ts';
 import { AuthEndpoint } from './AuthEndpoint.ts';
@@ -85,7 +85,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         JSON.stringify(response),
         {
           httpOnly: true,
-          secure: true,
+          secure: IS_PROD,
           maxAge: time.years(1) / time.seconds(1),
           path: '/',
         },
@@ -111,7 +111,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       headers: {
         'Set-Cookie': event.cookies.serialize(AUTH_COOKIE_NAME, '', {
           httpOnly: true,
-          secure: true,
+          secure: IS_PROD,
           maxAge: 0,
           path: '/',
         }),
@@ -179,7 +179,7 @@ export const handle: Handle = async ({ event, resolve }) => {
           Location: url.toString(),
           'Set-Cookie': event.cookies.serialize(AUTH_COOKIE_NAME, '', {
             httpOnly: true,
-            secure: true,
+            secure: IS_PROD,
             maxAge: 0,
             path: '/',
           }),
@@ -193,7 +193,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       JSON.stringify(result),
       {
         httpOnly: true,
-        secure: true,
+        secure: IS_PROD,
         maxAge: time.years(1) / time.seconds(1),
         path: '/',
       },
@@ -207,7 +207,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   if (!authResponse) {
     event.cookies.set(AUTH_COOKIE_NAME, '', {
       httpOnly: true,
-      secure: true,
+      secure: IS_PROD,
       maxAge: 0,
       path: '/',
     });

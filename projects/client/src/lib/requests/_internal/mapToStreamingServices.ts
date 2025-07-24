@@ -10,12 +10,22 @@ import { sortStreamingServices } from './sortStreamingServices.ts';
 function mapToStreamNow(
   serviceResponse: WatchNowServiceResponse,
 ): StreamNow {
+  // TODO extract and move to server?
+  const webosLink = serviceResponse.link_webos &&
+      serviceResponse.link_webos.params.contentTarget !== ''
+    ? {
+      id: serviceResponse.link_webos.id,
+      contentTarget: serviceResponse.link_webos.params.contentTarget,
+    }
+    : undefined;
+
   return {
     type: 'streaming',
     link: prependHttps(serviceResponse.link),
     deepLink: serviceResponse.link_direct,
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
+    webosLink,
   };
 }
 

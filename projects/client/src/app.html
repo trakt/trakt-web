@@ -10,13 +10,13 @@
   <head>
     <meta charset="utf-8" />
     <!-- CSP -->
-    <meta
+    <!-- <meta
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
         img-src 'self' data: https://*.trakt.tv https://trakt.tv https://secure.gravatar.com https://i2.wp.com/ https://*.contentsquare.net https://*.youtube.com;
         script-src 'self' 'unsafe-eval' 'unsafe-inline' https://app.trakt.tv https://*.googletagmanager.com https://*.contentsquare.net http://*.contentsquare.net;
-        script-src-elem 'self' 'unsafe-inline' https://*.googletagmanager.com https://*.cloudflareinsights.com https://*.trakt.tv/ https://*.contentsquare.net https://static.hj.contentsquare.net http://*.contentsquare.net http://t.contentsquare.net;
+        script-src-elem 'self' 'unsafe-inline' https://*.googletagmanager.com https://*.cloudflareinsights.com https://*.trakt.tv/ https://*.contentsquare.net https://static.hj.contentsquare.net http://*.contentsquare.net http://t.contentsquare.net https://static.hj.contentsquare.net;
         worker-src 'self' blob:;
         connect-src 'self' https://*.jsdelivr.net https://*.googleapis.com https://*.gstatic.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://trakt.tv https://*.trakt.tv https://*.posthog.com https://*.contentsquare.net https://*.hotjar.com https://*.hotjar.io wss://*.hotjar.com;
         font-src 'self' data: https://fonts.gstatic.com http://fonts.gstatic.com;
@@ -24,7 +24,13 @@
         style-src-elem 'self' 'unsafe-inline' https://*.googleapis.com https://*.jsdelivr.net https://*.trakt.tv;
         frame-src 'self' https://*.hotjar.com https://trakt.tv http://localhost:3000;
       "
-    >
+    > -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.41.0/minified.js"
+      integrity="sha512-f3bL1m/4b2hewJR1QPHqe1xtK1ch1+p3j/jhWkLbZxG4X8/KPhy4+ynauKz0AwPRITB0qXVVyna23/uKe8B4Ww=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <!-- PWA -->
     <link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest">
     <script src="%sveltekit.assets%/register-install.js?v=%cache.timestamp%">

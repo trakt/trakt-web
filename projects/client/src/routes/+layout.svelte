@@ -99,6 +99,17 @@
       font-family: "Spline Sans", Arial, sans-serif;
     }
 
+    /* 
+      TODO: find a better way to deal with LG inserted css:
+      * {
+        font-family: "LG Display Regular",
+        font-weight: 400 !important;
+      }
+    */
+    * {
+      font-family: "Spline Sans", Arial, sans-serif !important;
+    }
+
     body:has(dialog[open]),
     body.dialog-open {
       overflow: hidden;

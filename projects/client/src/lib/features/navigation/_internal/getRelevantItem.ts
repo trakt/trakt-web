@@ -10,7 +10,7 @@ export const getRelevantItem = (target: Document | Element) => {
   );
 
   const navbarLink = target.querySelector(
-    `[data-dpad-navigation="${DpadNavigationType.Navbar}"] .trakt-link[data-dpad-navigation="${DpadNavigationType.Item}"]`,
+    `[data-dpad-navigation="${DpadNavigationType.Navbar}"] .trakt-button-link[data-dpad-navigation="${DpadNavigationType.Item}"]`,
   );
 
   return item ?? navigableActiveLink ?? navbarLink;

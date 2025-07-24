@@ -198,7 +198,14 @@ declare global {
     open: (name: string, url: string) => void;
   }
 
+  interface WebOSServiceBridge {
+    call: (url: string, params: string) => void;
+  }
+
   const StreamOnAndroid: StreamOnAndroid | Nil;
+  const WebOSServiceBridge: {
+    new (): WebOSServiceBridge;
+  } | Nil;
 }
 
 export {};

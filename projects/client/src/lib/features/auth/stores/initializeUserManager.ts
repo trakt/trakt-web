@@ -1,4 +1,3 @@
-import { browser } from '$app/environment';
 import { time } from '$lib/utils/timing/time.ts';
 import { User, UserManager } from 'oidc-client-ts';
 import { onMount } from 'svelte';
@@ -29,11 +28,11 @@ function postToken({ value, expiresAt }: Token) {
 }
 
 export function initializeUserManager(hasLegacyAuth: boolean) {
-  if (!browser || hasLegacyAuth) {
-    return {
-      isInitializing: readable(false),
-    };
-  }
+  // if (!browser || hasLegacyAuth) {
+  return {
+    isInitializing: readable(false),
+  };
+  // }
 
   const isInitializing = writable(true);
   const { isAuthorized } = getAuthContext();
