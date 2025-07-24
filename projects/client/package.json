@@ -57,6 +57,7 @@
     "marked": "15.0.12",
     "msw": "2.7.3",
     "playwright": "1.52.0",
+    "postcss-nested": "^7.0.2",
     "prettier": "^3.5.3",
     "prettier-plugin-svelte": "3.4.0",
     "sass-embedded": "1.89.1",
