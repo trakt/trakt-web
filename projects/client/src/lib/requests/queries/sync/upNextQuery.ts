@@ -54,7 +54,7 @@ const upNextRequest = (params: UpNextParams) => {
 export function mapUpNextResponse(item: UpNextResponse[0]): UpNextEntry {
   const show = mapToShowEntry(item.show);
   const episode = mapToEpisodeEntry(item.progress.next_episode);
-  episode.runtime ??= show.runtime;
+  episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
 
   return {
     show,
