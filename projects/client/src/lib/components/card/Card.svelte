@@ -103,7 +103,8 @@
         );
       }
 
-      :global(.trakt-card-title, .trakt-card-subtitle) {
+      :global(.trakt-card-title),
+      :global(.trakt-card-subtitle) {
         text-shadow: 0 var(--ni-1) var(--ni-2)
           color-mix(in srgb, var(--color-shadow) 10%, transparent);
       }
