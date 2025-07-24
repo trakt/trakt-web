@@ -95,11 +95,12 @@
       var(--sidebar-padding) + env(safe-area-inset-bottom, 0)
     );
 
-    background: color-mix(
+    background: var(--color-background-navbar);
+    /* background: color-mix(
       in srgb,
       var(--color-background) 88%,
       transparent 12%
-    );
+    ); */
 
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
       color-mix(in srgb, var(--color-shadow) 25%, transparent 75%);

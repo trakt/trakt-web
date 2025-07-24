@@ -59,7 +59,7 @@
 
   .trakt-background-cover-image-mirrored,
   .trakt-background-cover-image {
-    --trakt-cover-primary-color-transparent: color-mix(
+    /* --trakt-cover-primary-color-transparent: color-mix(
       in srgb,
       color-mix(
           in srgb,
@@ -68,7 +68,7 @@
         )
         50%,
       transparent
-    );
+    ); */
     z-index: var(--layer-background);
     position: absolute;
     max-height: 100dvh;
@@ -142,9 +142,14 @@
     &::after {
       background: linear-gradient(
         180deg,
-        var(--trakt-cover-primary-color-transparent) 0%,
-        var(--trakt-cover-primary-color-transparent) 50%,
-        transparent 80%
+        var(--color-background-48) 0%,
+        var(--color-background-51) 13%,
+        var(--color-background-57) 25%,
+        var(--color-background-62) 34%,
+        var(--color-background-70) 46%,
+        var(--color-background-80) 64%,
+        var(--color-background-95) 85%,
+        var(--color-background) 100%
       );
 
       pointer-events: none;
@@ -152,8 +157,13 @@
       @include for-tablet-sm-and-below {
         background: linear-gradient(
           180deg,
-          color-mix(in srgb, var(--color-background) 15%, transparent) 0%,
-          color-mix(in srgb, var(--color-background) 50%, transparent) 30%,
+          var(--color-background-48) 0%,
+          var(--color-background-51) 13%,
+          var(--color-background-57) 25%,
+          var(--color-background-62) 34%,
+          var(--color-background-70) 46%,
+          var(--color-background-80) 64%,
+          var(--color-background-95) 85%,
           var(--color-background) 100%
         );
       }
@@ -162,9 +172,14 @@
     &::before {
       background: linear-gradient(
         180deg,
-        transparent 0%,
-        color-mix(in srgb, var(--color-background) 95%, transparent) 65%,
-        color-mix(in srgb, var(--color-background) 100%, transparent) 100%
+        var(--color-background-48) 0%,
+        var(--color-background-51) 13%,
+        var(--color-background-57) 25%,
+        var(--color-background-62) 34%,
+        var(--color-background-70) 46%,
+        var(--color-background-80) 64%,
+        var(--color-background-95) 85%,
+        var(--color-background) 100%
       );
     }
 

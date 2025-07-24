@@ -9,6 +9,13 @@
 
   --color-foreground: var(--shade-920);
   --color-background: var(--shade-10);
+  --color-background-48: rgba(254, 254, 254, 0.48);
+  --color-background-51: rgba(254, 254, 254, 0.51);
+  --color-background-57: rgba(254, 254, 254, 0.57);
+  --color-background-62: rgba(254, 254, 254, 0.62);
+  --color-background-70: rgba(254, 254, 254, 0.7);
+  --color-background-80: rgba(254, 254, 254, 0.8);
+  --color-background-95: rgba(254, 254, 254, 0.95);
 
   --color-text-primary: var(--shade-800);
   --color-text-secondary: var(--shade-500);
@@ -17,9 +24,7 @@
    * Navbar
    */
   --color-background-navbar-base: var(--shade-50);
-  --color-background-navbar: color-mix(in srgb,
-      var(--color-background-navbar-base) 80%,
-      transparent);
+  --color-background-navbar: rgba(241, 242, 243, 0.8);
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-300);
 
@@ -31,36 +36,24 @@
   --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
   --card-shadow: linear-gradient(180deg,
       transparent 0%,
-      color-mix(in srgb,
-        var(--color-card-background) 7%,
-        color-mix(in srgb, var(--color-shadow) 7%, transparent 93%)) 13%,
-      color-mix(in srgb,
-        var(--color-card-background) 18%,
-        color-mix(in srgb, var(--color-shadow) 18%, transparent 82%)) 24%,
-      color-mix(in srgb,
-        var(--color-card-background) 29%,
-        color-mix(in srgb, var(--color-shadow) 29%, transparent 71%)) 34%,
-      color-mix(in srgb,
-        var(--color-card-background) 43%,
-        color-mix(in srgb, var(--color-shadow) 43%, transparent 57%)) 46%,
-      color-mix(in srgb,
-        var(--color-card-background) 62%,
-        color-mix(in srgb, var(--color-shadow) 62%, transparent 38%)) 63%,
-      color-mix(in srgb,
-        var(--color-card-background) 86%,
-        color-mix(in srgb, var(--color-shadow) 86%, transparent 14%)) 86%,
+      rgba(251, 251, 251, 0.07) 13%,
+      rgba(251, 251, 251, 0.18) 24%,
+      rgba(251, 251, 251, 0.29) 34%,
+      rgba(251, 251, 251, 0.43) 46%,
+      rgba(251, 251, 251, 0.62) 63%,
+      rgba(251, 251, 251, 0.86) 86%,
       var(--color-card-background) 100%);
 
   /*
    * List
    */
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-shadow) 86%, transparent) 0%,
-      color-mix(in srgb, var(--color-shadow) 62%, transparent) 24%,
-      color-mix(in srgb, var(--color-shadow) 43%, transparent) 34%,
-      color-mix(in srgb, var(--color-shadow) 29%, transparent) 46%,
-      color-mix(in srgb, var(--color-shadow) 18%, transparent) 63%,
-      color-mix(in srgb, var(--color-shadow) 7%, transparent) 86%,
+      rgba(61, 67, 72, 0.86) 0%,
+      rgba(61, 67, 72, 0.62) 24%,
+      rgba(61, 67, 72, 0.43) 34%,
+      rgba(61, 67, 72, 0.29) 46%,
+      rgba(61, 67, 72, 0.18) 63%,
+      rgba(61, 67, 72, 0.07) 86%,
       transparent 100%);
 
   /*
@@ -77,9 +70,7 @@
   /*
    * Navbar
    */
-  --color-background-mobile-navbar: color-mix(in srgb,
-      var(--color-background) 90%,
-      transparent 10%);
+  --color-background-mobile-navbar: rgba(254, 254, 254, 0.9);
 
   /*
    * Tooltip
@@ -106,7 +97,7 @@
   /**
    * Now playing
    */
-  --color-now-playing-background: color-mix(in srgb, var(--shade-100) 70%, transparent 30%);
+  --color-now-playing-background: rgba(210, 214, 217, 0.7);
   --color-now-playing-border: var(--shade-200);
   --color-now-playing-progress-bar-background: var(--shade-300);
   --color-now-playing-progress-bar-progress: var(--shade-500);
@@ -124,6 +115,13 @@
 
   --color-foreground: var(--shade-10);
   --color-background: var(--shade-940);
+  --color-background-48: rgba(19, 21, 23, 0.48);
+  --color-background-51: rgba(19, 21, 23, 0.51);
+  --color-background-57: rgba(19, 21, 23, 0.57);
+  --color-background-62: rgba(19, 21, 23, 0.62);
+  --color-background-70: rgba(19, 21, 23, 0.7);
+  --color-background-80: rgba(19, 21, 23, 0.8);
+  --color-background-95: rgba(19, 21, 23, 0.95);
 
   --color-text-primary: var(--shade-10);
   --color-text-secondary: var(--shade-300);
@@ -132,9 +130,7 @@
    * Navbar
    */
   --color-background-navbar-base: var(--shade-920);
-  --color-background-navbar: color-mix(in srgb,
-      var(--color-background-navbar-base) 90%,
-      transparent 10%);
+  --color-background-navbar: rgba(33, 36, 39, 0.9);
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
 
@@ -146,22 +142,22 @@
   --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
   --card-shadow: linear-gradient(180deg,
       transparent 0%,
-      color-mix(in srgb, var(--color-card-background) 7%, transparent 93%) 13%,
-      color-mix(in srgb, var(--color-card-background) 18%, transparent 82%) 24%,
-      color-mix(in srgb, var(--color-card-background) 29%, transparent 71%) 34%,
-      color-mix(in srgb, var(--color-card-background) 43%, transparent 57%) 46%,
-      color-mix(in srgb, var(--color-card-background) 62%, transparent 38%) 63%,
-      color-mix(in srgb, var(--color-card-background) 86%, transparent 14%) 86%,
+      rgba(33, 36, 39, 0.07) 13%,
+      rgba(33, 36, 39, 0.18) 24%,
+      rgba(33, 36, 39, 0.29) 34%,
+      rgba(33, 36, 39, 0.43) 46%,
+      rgba(33, 36, 39, 0.62) 63%,
+      rgba(33, 36, 39, 0.86) 86%,
       var(--color-card-background) 100%);
 
   /*
    * List
    */
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-shadow) 90%, transparent) 0%,
-      color-mix(in srgb, var(--color-shadow) 45%, transparent) 32%,
-      color-mix(in srgb, var(--color-shadow) 30%, transparent) 61%,
-      color-mix(in srgb, var(--color-shadow) 25%, transparent) 80%,
+      rgba(19, 21, 23, 0.9) 0%,
+      rgba(19, 21, 23, 0.45) 32%,
+      rgba(19, 21, 23, 0.3) 61%,
+      rgba(19, 21, 23, 0.25) 80%,
       transparent 100%);
 
   /*
@@ -204,7 +200,7 @@
   /**
    * Now playing
    */
-  --color-now-playing-background: color-mix(in srgb, var(--shade-900) 70%, transparent 30%);
+  --color-now-playing-background: rgba(46, 51, 55, 0.7);
   --color-now-playing-border: var(--shade-700);
   --color-now-playing-progress-bar-background: var(--shade-500);
   --color-now-playing-progress-bar-progress: var(--shade-200);
