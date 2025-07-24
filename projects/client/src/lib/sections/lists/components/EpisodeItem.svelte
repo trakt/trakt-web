@@ -49,7 +49,7 @@
           <span class="ellipsis">
             {EpisodeIntlProvider.remainingText(props.episode.remaining)}
           </span>
-          <span>
+          <span class="no-wrap">
             {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
           </span>
         </div>
