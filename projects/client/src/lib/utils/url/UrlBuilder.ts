@@ -11,6 +11,7 @@ type WellKnownQueryParams = {
   watch_window?: number;
   status?: string;
   search?: string;
+  display?: MediaType;
 };
 
 type UrlBuilderParams =
@@ -46,6 +47,7 @@ function sanitizeParams(
     watch_window: params.watch_window,
     status: params.status,
     search: encodeRecord(params.search),
+    display: params.display,
   };
 }
 
@@ -160,6 +162,9 @@ export const UrlBuilder = {
       }
 
       return categoryDrilldownFactory('users/me/lists')(params);
+    },
+    watchlist: (params: Omit<UrlBuilderParams, 'type'>) => {
+      return `/users/me/watchlist${buildParamString(sanitizeParams(params))}`;
     },
   },
   app: {

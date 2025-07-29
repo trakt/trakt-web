@@ -7,6 +7,6 @@
 <WatchList
   title={m.list_title_coming_soon()}
   drilldownLabel={m.button_label_view_all_unreleased_movies()}
-  type="movie"
+  defaultType="movie"
   status="unreleased"
 />

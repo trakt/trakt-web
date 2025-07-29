@@ -9,34 +9,28 @@
 
   const status = $derived.by(() => {
     switch (page.url.searchParams.get("status")) {
-      case "released":
-        return "released";
       case "unreleased":
         return "unreleased";
       default:
-        return "all";
+        return "released";
     }
   });
 
   const pageTitle = $derived.by(() => {
     switch (status) {
-      case "released":
-        return m.page_title_available_now();
       case "unreleased":
         return m.page_title_coming_soon();
       default:
-        return m.page_title_watchlist_movies();
+        return m.page_title_available_now();
     }
   });
 
   const title = $derived.by(() => {
     switch (status) {
-      case "released":
-        return m.list_title_available_now();
       case "unreleased":
         return m.list_title_coming_soon();
       default:
-        return m.list_title_your_watchlist_movies();
+        return m.list_title_available_now();
     }
   });
 </script>

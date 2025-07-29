@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "パーソナライズされたメッセージ：もし、ユーザーの情報（例えば、視聴履歴）があれば、よりパーソナライズされたプレースホルダーを作成することができます。例えば、『このユーザーはホラー映画が好きですが、自己紹介を書くのが苦手です。（もしかしたら、ゾンビから隠れることに夢中なのかもしれません？）』"
     },
+    "list_placeholder_watchlist": {
+      "default": "あなたのウォッチリストは空です。映画やドラマを追加して、あなただけの傑作を作りましょう！"
+    },
     "list_placeholder_watchlist_movies": {
       "default": "視聴リストは空です。映画を追加して、あなたの映画史を完成させましょう！"
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "ストリーミング"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "視聴予定の作品"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "視聴予定の作品"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "視聴予定の作品をすべて見る"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "視聴予定の作品をすべて見る"
     },
     "header_streaming": {
       "default": "ストリーミング"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "近日公開"
     },
-    "page_title_watchlist_shows": {
-      "default": "あなたのドラマリスト"
-    },
     "page_title_available_now": {
       "default": "公開中"
     },
     "page_title_coming_soon": {
       "default": "近日公開"
-    },
-    "page_title_watchlist_movies": {
-      "default": "あなたの映画リスト"
     },
     "page_title_social_activity": {
       "default": "ソーシャルアクティビティ"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "ウォッチリスト"
+    },
+    "list_title_watchlist": {
+      "default": "ウォッチリスト"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "視聴リストのアイテムをすべて表示"
+    },
+    "button_text_shows": {
+      "default": "ドラマ"
+    },
+    "button_label_shows": {
+      "default": "ドラマ"
+    },
+    "button_text_movies": {
+      "default": "映画"
+    },
+    "button_label_movies": {
+      "default": "映画"
     }
   }
 }

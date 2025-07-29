@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Un mesaj personalizat: Dacă ai vreo informație despre utilizator (de exemplu, istoricul lor de vizionare), ai putea folosi aceste informații pentru a genera un placeholder mai personalizat, cum ar fi 'Acest utilizator adoră filmele de groază, dar urăște să scrie biografii. (Poate este prea ocupat să se ascundă de zombi?)'"
     },
+    "list_placeholder_watchlist": {
+      "default": "Lista ta de urmărire este goală. Adaugă filme sau seriale pentru a-ți crea capodopera cinematografică."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Lista ta de vizionat este goală. Adaugă filme pentru a-ți crea capodopera cinematografică!"
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Redă pe"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Serialele din lista ta"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Filmele din lista ta"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Vezi toate filmele din lista"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Vezi toate serialele din listă"
     },
     "header_streaming": {
       "default": "Streaming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Urmează"
     },
-    "page_title_watchlist_shows": {
-      "default": "Seriale pe care le urmărești"
-    },
     "page_title_available_now": {
       "default": "Disponibil acum"
     },
     "page_title_coming_soon": {
       "default": "În curând"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Filmele pe care le urmărești"
     },
     "page_title_social_activity": {
       "default": "Activitate socială"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "De văzut"
+    },
+    "list_title_watchlist": {
+      "default": "De văzut"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Vezi toate elementele din lista de urmărire"
+    },
+    "button_text_shows": {
+      "default": "Seriale"
+    },
+    "button_label_shows": {
+      "default": "Seriale"
+    },
+    "button_text_movies": {
+      "default": "Filme"
+    },
+    "button_label_movies": {
+      "default": "Filme"
     }
   }
 }

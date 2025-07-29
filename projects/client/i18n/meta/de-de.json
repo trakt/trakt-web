@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Eine personalisierte Nachricht: Wenn Sie Informationen über den Nutzer haben (z. B. seinen Watch-Verlauf), können Sie einen personalisierteren Platzhalter generieren, wie z. B.: „Dieser Nutzer liebt Horrorfilme, aber hasst Bios schreiben. (Vielleicht sind sie zu beschäftigt, sich vor Zombies zu verstecken?)“"
     },
+    "list_placeholder_watchlist": {
+      "default": "Deine Watchlist ist leer. Füge Filme oder Serien hinzu, um dein filmisches Meisterwerk zu erschaffen."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Deine Wunschliste ist leer. Füge Filme hinzu, um dein filmisches Meisterwerk zu erschaffen."
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Streamen auf"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Deine Merkliste Serien"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Deine Merkliste Filme"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Alle Merkliste Filme ansehen"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Alle Merkliste Serien ansehen"
     },
     "header_streaming": {
       "default": "Streaming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Demnächst"
     },
-    "page_title_watchlist_shows": {
-      "default": "Deine Merkliste Serien"
-    },
     "page_title_available_now": {
       "default": "Jetzt verfügbar"
     },
     "page_title_coming_soon": {
       "default": "Demnächst"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Deine Merkliste Filme"
     },
     "page_title_social_activity": {
       "default": "Soziale Aktivität"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "Merkliste"
+    },
+    "list_title_watchlist": {
+      "default": "Merkliste"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Alle Elemente der Merkliste ansehen"
+    },
+    "button_text_shows": {
+      "default": "Serien"
+    },
+    "button_label_shows": {
+      "default": "Serien"
+    },
+    "button_text_movies": {
+      "default": "Filme"
+    },
+    "button_label_movies": {
+      "default": "Filme"
     }
   }
 }

@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Mensaje personalizado: Si tienes alguna información sobre el usuario (por ejemplo, su historial de visionados), podrías usarla para generar un mensaje más personalizado, como 'A este usuario le encantan las películas de terror pero odia escribir biografías. (¿Quizás esté demasiado ocupado escondiéndose de los zombies?)'"
     },
+    "list_placeholder_watchlist": {
+      "default": "Tu lista de seguimiento está vacía. Añade películas o series para crear tu obra maestra cinematográfica."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Tu lista está vacía. ¡Agrega películas para crear tu obra maestra cinematográfica!"
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Ver en"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Tus listas para ver"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Tus listas para ver"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Ver todos en lista"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Ver todos en lista"
     },
     "header_streaming": {
       "default": "En streaming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Próximamente"
     },
-    "page_title_watchlist_shows": {
-      "default": "Tus series pendientes"
-    },
     "page_title_available_now": {
       "default": "Disponible ahora"
     },
     "page_title_coming_soon": {
       "default": "Próximamente"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Tus películas pendientes"
     },
     "page_title_social_activity": {
       "default": "Actividad social"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "Por ver"
+    },
+    "list_title_watchlist": {
+      "default": "Por ver"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Ver todos los elementos de la lista para ver"
+    },
+    "button_text_shows": {
+      "default": "Series"
+    },
+    "button_label_shows": {
+      "default": "Series"
+    },
+    "button_text_movies": {
+      "default": "Películas"
+    },
+    "button_label_movies": {
+      "default": "Películas"
     }
   }
 }
