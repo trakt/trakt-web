@@ -1,20 +1,23 @@
 <script lang="ts" generics="T extends { id: unknown }, M">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants";
+  import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
   import { mediaCardWidthResolver } from "../utils/mediaCardWidthResolver";
   import type { MediaListProps } from "./MediaListProps";
   import LoadingIndicator from "./_internal/LoadingIndicator.svelte";
   import { useLazyLoader } from "./_internal/useLazyLoader";
 
-  type DrilledMediaListProps = MediaListProps<T, M>;
+  type DrilledMediaListProps = MediaListProps<T, M> & {
+    actions?: Snippet<[]>;
+  };
 
   const {
     type,
     filter,
     empty: externalEmpty,
     useList,
-    actions: _,
+    actions,
     ...props
   }: DrilledMediaListProps = $props();
 
@@ -53,6 +56,7 @@
 
 <GridList
   {...props}
+  {actions}
   items={allItems}
   dimensionObserver={observeDimension}
   --width-item={mediaCardWidthResolver(type)}
