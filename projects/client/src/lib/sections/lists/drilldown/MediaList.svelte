@@ -3,6 +3,7 @@
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import LoadingIndicator from "./_internal/LoadingIndicator.svelte";
   import type { MediaListProps } from "./MediaListProps";
 
   const {
@@ -42,6 +43,10 @@
   {#snippet empty()}
     {#if !$isLoading}
       {@render externalEmpty?.()}
+    {/if}
+
+    {#if $isLoading}
+      <LoadingIndicator />
     {/if}
   {/snippet}
 </SectionList>
