@@ -1913,6 +1913,22 @@
           "type": "string"
         }
       }
+    },
+    "text_share_list": {
+      "default": "Sjekk ut denne \"{name}\"-listen på Trakt! 📋",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_top_list": {
+      "default": "Sjekk ut {name} på Trakt! 🔥",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

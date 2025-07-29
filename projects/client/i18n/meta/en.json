@@ -2419,6 +2419,24 @@
           "type": "string"
         }
       }
+    },
+    "text_share_list": {
+      "default": "Check out this \"{name}\" list on Trakt! 📋",
+      "description": "Text shown when sharing a user created list.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_top_list": {
+      "default": "Check out {name} on Trakt! 🔥",
+      "description": "Text shown when sharing the anticipated, hot, popular, or trending list.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

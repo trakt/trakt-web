@@ -1913,6 +1913,22 @@
           "type": "string"
         }
       }
+    },
+    "text_share_list": {
+      "default": "¡Checa esta lista \"{name}\" en Trakt! 📋",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_top_list": {
+      "default": "¡Checa {name} en Trakt! 🔥",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

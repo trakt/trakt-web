@@ -1,6 +1,8 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { decodeRecord } from "$lib/utils/url/UrlBuilder";
@@ -33,5 +35,12 @@
 >
   {#snippet item(media)}
     <PopularListItem {type} {media} {style} />
+  {/snippet}
+
+  {#snippet actions()}
+    <ShareButton
+      {title}
+      textFactory={({ title: name }) => m.text_share_top_list({ name })}
+    />
   {/snippet}
 </DrilledMediaList>

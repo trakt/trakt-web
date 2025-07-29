@@ -1913,6 +1913,22 @@
           "type": "string"
         }
       }
+    },
+    "text_share_list": {
+      "default": "Перегляньте цей список «{name}» на Trakt! 📋",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_share_top_list": {
+      "default": "Перегляньте {name} на Trakt! 🔥",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
