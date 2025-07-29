@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "A personalised message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalised placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'"
     },
+    "list_placeholder_watchlist": {
+      "default": "Your watchlist is looking a bit bare. Time to add some flicks or telly to get things started!"
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Your watchlist is empty, mate. Chuck in a few movies!"
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Stream on"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Your Watchlist Shows"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Your Watchlist Movies"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "View all watchlist movies"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "View all watchlist shows"
     },
     "header_streaming": {
       "default": "Streaming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Up Next"
     },
-    "page_title_watchlist_shows": {
-      "default": "Your Watchlist Shows"
-    },
     "page_title_available_now": {
       "default": "Available Now"
     },
     "page_title_coming_soon": {
       "default": "Coming Soon"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Your Watchlist Movies"
     },
     "page_title_social_activity": {
       "default": "Social activity"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "To Watch"
+    },
+    "list_title_watchlist": {
+      "default": "To Watch"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "View all to-watch items"
+    },
+    "button_text_shows": {
+      "default": "Series"
+    },
+    "button_label_shows": {
+      "default": "Series"
+    },
+    "button_text_movies": {
+      "default": "Films"
+    },
+    "button_label_movies": {
+      "default": "Films"
     }
   }
 }

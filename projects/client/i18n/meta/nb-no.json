@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "En personlig melding: Hvis du har informasjon om brukeren (f.eks. visningshistorikk), kan du bruke den til å generere en mer personlig plassholder, som 'Denne brukeren elsker skrekkfilmer, men hater å skrive bioer. (Kanskje de er for opptatt med å gjemme seg for zombier?)'"
     },
+    "list_placeholder_watchlist": {
+      "default": "Din liste er tom. Legg til filmer eller serier for å skape ditt filmiske mesterverk."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Watchlisten din er tom. Legg til filmer for å lage ditt kinomesterverk."
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Strøm på"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Dine Watchlist Serier"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Dine Watchlist Filmer"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Se alle Watchlist Filmer"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Se alle Watchlist Serier"
     },
     "header_streaming": {
       "default": "Strømming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Snart"
     },
-    "page_title_watchlist_shows": {
-      "default": "Dine serier å se"
-    },
     "page_title_available_now": {
       "default": "Tilgjengelig nå"
     },
     "page_title_coming_soon": {
       "default": "Snart"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Dine filmer å se"
     },
     "page_title_social_activity": {
       "default": "Sosial aktivitet"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "Vil se"
+    },
+    "list_title_watchlist": {
+      "default": "Vil se"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Vis alle elementer på huskelisten"
+    },
+    "button_text_shows": {
+      "default": "Serier"
+    },
+    "button_label_shows": {
+      "default": "Serier"
+    },
+    "button_text_movies": {
+      "default": "Filmer"
+    },
+    "button_label_movies": {
+      "default": "Filmer"
     }
   }
 }

@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Een gepersonaliseerde boodschap: als je informatie hebt over de gebruiker (bijvoorbeeld hun kijkgeschiedenis), kun je een meer gepersonaliseerde placeholder genereren, zoals 'Deze gebruiker houdt van horrorfilms maar haat biografieën schrijven. (Misschien zijn ze te druk met het verbergen voor zombies?)'"
     },
+    "list_placeholder_watchlist": {
+      "default": "Je kijklijst is leeg. Voeg films of series toe om je filmische meesterwerk te creëren."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Je watchlist is leeg. Voeg films toe om je eigen cinematografische meesterwerk te creëren."
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Streamen op"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Jouw kijklijst series"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Jouw kijklijst films"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Bekijk alle films op kijklijst"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Bekijk alle series op kijklijst"
     },
     "header_streaming": {
       "default": "Streaming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Binnenkort"
     },
-    "page_title_watchlist_shows": {
-      "default": "Je volglijst series"
-    },
     "page_title_available_now": {
       "default": "Nu beschikbaar"
     },
     "page_title_coming_soon": {
       "default": "Binnenkort"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Je volglijst films"
     },
     "page_title_social_activity": {
       "default": "Sociale activiteit"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "Te zien"
+    },
+    "list_title_watchlist": {
+      "default": "Te zien"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Bekijk alle items op de kijklijst"
+    },
+    "button_text_shows": {
+      "default": "Series"
+    },
+    "button_label_shows": {
+      "default": "Series"
+    },
+    "button_text_movies": {
+      "default": "Films"
+    },
+    "button_label_movies": {
+      "default": "Films"
     }
   }
 }

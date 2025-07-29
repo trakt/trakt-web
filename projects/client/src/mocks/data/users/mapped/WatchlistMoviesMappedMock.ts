@@ -1,6 +1,6 @@
-import type { WatchlistMovie } from '$lib/requests/queries/users/movieWatchlistQuery.ts';
+import type { WatchlistedItem } from '$lib/requests/queries/users/watchlistQuery.ts';
 
-export const WatchlistMoviesMappedMock: WatchlistMovie[] = [
+export const WatchlistMoviesMappedMock: WatchlistedItem[] = [
   {
     'id': 1146014560,
     'listedAt': new Date('2024-12-27T21:34:14.000Z'),

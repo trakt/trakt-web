@@ -1,54 +1,27 @@
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
-import {
-  movieWatchlistQuery,
-  type WatchlistMovie,
-} from '$lib/requests/queries/users/movieWatchlistQuery.ts';
-import {
-  showWatchlistQuery,
-  type WatchlistShow,
-} from '$lib/requests/queries/users/showWatchlistQuery.ts';
+import { watchlistQuery } from '$lib/requests/queries/users/watchlistQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import type { SortType } from '@trakt/api';
 import { derived } from 'svelte/store';
 
-export type WatchlistMediaItem = WatchlistMovie | WatchlistShow;
-export type WatchlistMediaList = WatchlistMediaItem;
-
-// FIXME remove when sorting is fixed
-const WATCHLIST_LIMIT = 500;
-
 export type WatchListStoreProps = PaginationParams & FilterParams & {
-  type: MediaType;
+  type?: MediaType;
   sort?: SortType;
+  limit?: number;
 };
-
-function typeToQuery(params: WatchListStoreProps) {
-  const queryParams = {
-    limit: WATCHLIST_LIMIT,
-    page: params.page,
-    sort: params.sort ?? 'added',
-    filter: params.filter,
-  };
-
-  switch (params.type) {
-    case 'movie':
-      return movieWatchlistQuery(queryParams) as CreateQueryOptions<
-        Paginatable<WatchlistMediaList>
-      >;
-    case 'show':
-      return showWatchlistQuery(queryParams) as CreateQueryOptions<
-        Paginatable<WatchlistMediaList>
-      >;
-  }
-}
 
 export function useWatchList(params: WatchListStoreProps) {
   const { isLoading, list: items, page } = usePaginatedListQuery(
-    typeToQuery(params),
+    watchlistQuery({
+      limit: params.limit ?? DEFAULT_PAGE_SIZE,
+      type: params.type,
+      page: params.page,
+      sort: params.sort ?? 'added',
+      filter: params.filter,
+    }),
   );
 
   return {

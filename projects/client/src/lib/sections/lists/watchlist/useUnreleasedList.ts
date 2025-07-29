@@ -7,6 +7,9 @@ import {
 import { derived, get } from 'svelte/store';
 import { genreCompareFactory } from './utils/genreCompareFactory.ts';
 
+// FIXME remove when sorting is fixed
+const UNRELEASED_LIST_LIMIT = 500;
+
 /*
   For unreleased lists, we consider 'released' also.
   Depending on the region, an item may be released in general,
@@ -24,6 +27,7 @@ export function useUnreleasedList(params: Omit<WatchListStoreProps, 'sort'>) {
   const { list: watchlist, isLoading, page } = useWatchList({
     ...params,
     sort: 'rank',
+    limit: UNRELEASED_LIST_LIMIT,
   });
 
   const { user } = useUser();

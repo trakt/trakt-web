@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Un messaggio personalizzato: Se si dispone di informazioni sull'utente (ad esempio, la sua cronologia di cosa ha guardato), è possibile utilizzarle per generare un segnaposto più personalizzato, come 'Questo utente ama i film horror ma odia scrivere le biografie. (Forse è troppo impegnato a nascondersi dagli zombie?)'."
     },
+    "list_placeholder_watchlist": {
+      "default": "La tua lista è vuota. Aggiungi film o serie TV per creare il tuo capolavoro cinematografico."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "La tua Watchlist è vuota. Aggiungi film per creare il tuo capolavoro cinematografico."
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Guarda su"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "La tua Watchlist di serie TV"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "La tua Watchlist di film"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Visualizza tutti i film della tua Watchlist"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Visualizza tutte le serie TV della tua Watchlist"
     },
     "header_streaming": {
       "default": "Streaming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Prossimamente"
     },
-    "page_title_watchlist_shows": {
-      "default": "Le tue serie TV da seguire"
-    },
     "page_title_available_now": {
       "default": "Disponibile ora"
     },
     "page_title_coming_soon": {
       "default": "Prossimamente"
-    },
-    "page_title_watchlist_movies": {
-      "default": "I tuoi film da vedere"
     },
     "page_title_social_activity": {
       "default": "Attività social"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "Da vedere"
+    },
+    "list_title_watchlist": {
+      "default": "Da vedere"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Visualizza tutti gli elementi della lista da vedere"
+    },
+    "button_text_shows": {
+      "default": "Serie TV"
+    },
+    "button_label_shows": {
+      "default": "Serie TV"
+    },
+    "button_text_movies": {
+      "default": "Film"
+    },
+    "button_label_movies": {
+      "default": "Film"
     }
   }
 }

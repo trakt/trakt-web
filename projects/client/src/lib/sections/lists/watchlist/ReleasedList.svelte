@@ -7,6 +7,6 @@
 <WatchList
   title={m.list_title_available_now()}
   drilldownLabel={m.button_label_view_all_released_movies()}
-  type="movie"
+  defaultType="movie"
   status="released"
 />

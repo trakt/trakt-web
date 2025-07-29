@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Spersonalizowana wiadomość: Jeśli posiadasz jakiekolwiek informacje o użytkowniku (np. historię obejrzanych przez niego filmów), możesz ich użyć do wygenerowania bardziej spersonalizowanego elementu zastępczego, np. „Ten użytkownik uwielbia horrory, ale nie znosi pisać bio. (Może jest zbyt zajęty ukrywaniem się przed hordą zombie?)”"
     },
+    "list_placeholder_watchlist": {
+      "default": "Twoja lista do obejrzenia jest pusta. Dodaj filmy lub seriale, aby stworzyć swoje kinowe arcydzieło."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Twoja lista do obejrzenia jest pusta. Dodaj filmy i skomponuj swoje kinowe doświadczenia."
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Oglądaj na"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Twoje seriale na liście do obejrzenia"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Twoje filmy na liście do obejrzenia"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Zobacz wszystkie filmy z listy do obejrzenia"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Zobacz wszystkie seriale z listy do obejrzenia"
     },
     "header_streaming": {
       "default": "Streaming"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Następne"
     },
-    "page_title_watchlist_shows": {
-      "default": "Twoja lista seriali"
-    },
     "page_title_available_now": {
       "default": "Dostępne teraz"
     },
     "page_title_coming_soon": {
       "default": "Już wkrótce"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Twoja lista filmów"
     },
     "page_title_social_activity": {
       "default": "Aktywność społeczności"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "Do obejrzenia"
+    },
+    "list_title_watchlist": {
+      "default": "Do obejrzenia"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Zobacz wszystkie elementy listy do obejrzenia"
+    },
+    "button_text_shows": {
+      "default": "Seriale"
+    },
+    "button_label_shows": {
+      "default": "Seriale"
+    },
+    "button_text_movies": {
+      "default": "Filmy"
+    },
+    "button_label_movies": {
+      "default": "Filmy"
     }
   }
 }

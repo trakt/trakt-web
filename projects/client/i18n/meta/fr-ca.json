@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Un message personnalisé: Si vous avez des informations sur l'utilisateur (par exemple, son historique de visionnage), vous pourriez utiliser ces informations pour générer un message plus personnalisé, comme 'Cet utilisateur adore les films d'horreur mais déteste rédiger des biographies. (Peut-être qu'il est trop occupé à se cacher des zombies?)'"
     },
+    "list_placeholder_watchlist": {
+      "default": "Votre liste de visionnement est vide. Ajoutez des films ou des séries pour créer votre chef-d'œuvre cinématographique!"
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Votre liste est vide. Ajoutez des films pour créer votre chef-d'œuvre cinématographique."
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Écouter sur"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Vos éléments à voir (séries)"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Vos éléments à voir (films)"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Voir tous les films à voir"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Voir toutes les séries à voir"
     },
     "header_streaming": {
       "default": "Diffusion"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Prochainement"
     },
-    "page_title_watchlist_shows": {
-      "default": "Tes séries à surveiller"
-    },
     "page_title_available_now": {
       "default": "Dispo maintenant"
     },
     "page_title_coming_soon": {
       "default": "Bientôt à l'affiche"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Tes films à voir"
     },
     "page_title_social_activity": {
       "default": "Activité sociale"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "À regarder"
+    },
+    "list_title_watchlist": {
+      "default": "À regarder"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Voir tous les éléments de la liste à visionner"
+    },
+    "button_text_shows": {
+      "default": "Séries"
+    },
+    "button_label_shows": {
+      "default": "Séries"
+    },
+    "button_text_movies": {
+      "default": "Films"
+    },
+    "button_label_movies": {
+      "default": "Films"
     }
   }
 }

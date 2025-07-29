@@ -516,6 +516,10 @@
       "default": "A personalized message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalized placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'",
       "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
     },
+    "list_placeholder_watchlist": {
+      "default": "Your watchlist is empty. Add movies or shows to create your cinematic masterpiece.",
+      "description": "Placeholder text shown when there are no movies or shows in the user's watchlist."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Your watchlist is empty. Add movies to create your cinematic masterpiece.",
       "description": "Placeholder text shown when there are no movies in the user's watchlist."
@@ -1257,22 +1261,6 @@
     "header_stream_on": {
       "default": "Stream on",
       "description": "Header for the section that shows streaming services for a movie or show."
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Your Watchlist Shows",
-      "description": "Title for lists containing shows in the user's watchlist. This title should be as short and concise as possible."
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Your Watchlist Movies",
-      "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible."
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "View all watchlist movies",
-      "description": "Aria-label for the button that allows users to view all movies in their watchlist."
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "View all watchlist shows",
-      "description": "Aria-label for the button that allows users to view all shows in their watchlist."
     },
     "header_streaming": {
       "default": "Streaming",
@@ -2181,10 +2169,6 @@
       "default": "Up Next",
       "description": "Title for the up next page."
     },
-    "page_title_watchlist_shows": {
-      "default": "Your Watchlist Shows",
-      "description": "Title for the watchlist shows page."
-    },
     "page_title_available_now": {
       "default": "Available Now",
       "description": "Title for the available now page."
@@ -2192,10 +2176,6 @@
     "page_title_coming_soon": {
       "default": "Coming Soon",
       "description": "Title for the coming soon page."
-    },
-    "page_title_watchlist_movies": {
-      "default": "Your Watchlist Movies",
-      "description": "Title for the watchlist movies page."
     },
     "page_title_social_activity": {
       "default": "Social activity",
@@ -2437,6 +2417,34 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "Watchlist",
+      "description": "Title for the user's watchlist page."
+    },
+    "list_title_watchlist": {
+      "default": "Watchlist",
+      "description": "Title for the user's watchlist."
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "View all watchlist items",
+      "description": "Aria-label for the button that allows users to view all watchlist items."
+    },
+    "button_text_shows": {
+      "default": "Shows",
+      "description": "Text for the button that allows users to toggle shows in the watchlist."
+    },
+    "button_label_shows": {
+      "default": "Shows",
+      "description": "Aria-label for the button that allows users to toggle shows in the watchlist."
+    },
+    "button_text_movies": {
+      "default": "Movies",
+      "description": "Text for the button that allows users to toggle movies in the watchlist."
+    },
+    "button_label_movies": {
+      "default": "Movies",
+      "description": "Aria-label for the button that allows users to toggle movies in the watchlist."
     }
   }
 }

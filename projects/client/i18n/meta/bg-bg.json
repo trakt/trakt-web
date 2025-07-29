@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Персонализирано съобщение: Ако разполагате с някаква информация за потребителя (напр. историята на гледанията му), можете да я използвате, за да генерирате по-персонализирано съобщение, като например 'Този потребител обича филми на ужасите, но мрази да пише биографии. (Може би е твърде зает да се крие от зомбита?)'"
     },
+    "list_placeholder_watchlist": {
+      "default": "Списъкът ви е празен. Добавете филми или сериали, за да създадете своя кинематографичен шедьовър."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Твоят списък за наблюдение е празен. Добави филми, за да създадеш своя филмов шедьовър."
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Гледай в"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Предвания, които наблюдаващ"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Филми, които наблюдаваш"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Виж всички филми, които наблюдаваш"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Виж всички предавания, които наблюдаваш"
     },
     "header_streaming": {
       "default": "Стрийминг"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Предстоящи"
     },
-    "page_title_watchlist_shows": {
-      "default": "Вашият списък със сериали"
-    },
     "page_title_available_now": {
       "default": "Налично сега"
     },
     "page_title_coming_soon": {
       "default": "Предстоящи"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Вашият списък с филми"
     },
     "page_title_social_activity": {
       "default": "Социална активност"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "За гледане"
+    },
+    "list_title_watchlist": {
+      "default": "За гледане"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Вижте всички елементи от списъка за гледане"
+    },
+    "button_text_shows": {
+      "default": "Сериали"
+    },
+    "button_label_shows": {
+      "default": "Сериали"
+    },
+    "button_text_movies": {
+      "default": "Филми"
+    },
+    "button_label_movies": {
+      "default": "Филми"
     }
   }
 }

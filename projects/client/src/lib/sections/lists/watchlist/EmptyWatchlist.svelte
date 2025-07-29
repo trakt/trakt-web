@@ -6,7 +6,7 @@
   import FindShowsLink from "../components/FindShowsLink.svelte";
 
   type EmptyWatchListProps = {
-    type: MediaType;
+    type?: MediaType;
     status: "all" | "released" | "unreleased";
   };
 
@@ -32,4 +32,8 @@
 {#if type === "show"}
   <p class="small">{m.list_placeholder_watchlist_shows()}</p>
   <FindShowsLink />
+{/if}
+
+{#if status === "all" && !type}
+  <p class="small">{m.list_placeholder_watchlist()}</p>
 {/if}

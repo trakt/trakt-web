@@ -1,9 +1,9 @@
 <script lang="ts">
   import { GENRES } from "$lib/features/filters/_internal/genres";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ToggleTag from "$lib/sections/components/ToggleTag.svelte";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue.ts";
   import SettingsBlock from "./SettingsBlock.svelte";
-  import ToggleTag from "./ToggleTag.svelte";
   import { useSettings } from "./useSettings";
 
   const { genres, isSavingSettings } = useSettings();

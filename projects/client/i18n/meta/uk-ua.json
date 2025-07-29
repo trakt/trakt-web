@@ -403,6 +403,9 @@
     "text_about_placeholder_15": {
       "default": "Персоналізоване повідомлення: Якщо у вас є будь-яка інформація про користувача (наприклад, їхня історія переглядів), ви можете використовувати її для створення більш персоналізованого заповнювача, наприклад: \"Ця користувач любить жахи, але ненавидить писати біографії. (Можливо, вони занадто зайняті, щоб ховатися від зомбі?)\""
     },
+    "list_placeholder_watchlist": {
+      "default": "Ваш список перегляду порожній. Додайте фільми або серіали, щоб створити свій кінематографічний шедевр."
+    },
     "list_placeholder_watchlist_movies": {
       "default": "Ваш список перегляду порожній. Додайте фільми, щоб створити свій кіношедевр!"
     },
@@ -983,18 +986,6 @@
     },
     "header_stream_on": {
       "default": "Дивитися на"
-    },
-    "list_title_your_watchlist_shows": {
-      "default": "Ваш список перегляду"
-    },
-    "list_title_your_watchlist_movies": {
-      "default": "Ваш список перегляду"
-    },
-    "button_label_view_all_watchlist_movies": {
-      "default": "Усі зі списку до перегляду"
-    },
-    "button_label_view_all_watchlist_shows": {
-      "default": "Усі зі списку до перегляду"
     },
     "header_streaming": {
       "default": "Онлайн"
@@ -1726,17 +1717,11 @@
     "page_title_up_next": {
       "default": "Найближчим часом"
     },
-    "page_title_watchlist_shows": {
-      "default": "Ваш список серіалів"
-    },
     "page_title_available_now": {
       "default": "Доступно зараз"
     },
     "page_title_coming_soon": {
       "default": "Найближчим часом"
-    },
-    "page_title_watchlist_movies": {
-      "default": "Ваш список фільмів"
     },
     "page_title_social_activity": {
       "default": "Соціальна активність"
@@ -1929,6 +1914,27 @@
           "type": "string"
         }
       }
+    },
+    "page_title_watchlist": {
+      "default": "До перегляду"
+    },
+    "list_title_watchlist": {
+      "default": "До перегляду"
+    },
+    "button_label_view_all_watchlist_items": {
+      "default": "Переглянути всі елементи списку перегляду"
+    },
+    "button_text_shows": {
+      "default": "Серіали"
+    },
+    "button_label_shows": {
+      "default": "Серіали"
+    },
+    "button_text_movies": {
+      "default": "Фільми"
+    },
+    "button_label_movies": {
+      "default": "Фільми"
     }
   }
 }
