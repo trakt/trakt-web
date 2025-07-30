@@ -49,4 +49,39 @@ describe('bodyPortal', () => {
     bodyPortal(node, targetRect);
     expect(appendChildSpy).toHaveBeenCalledWith(node);
   });
+
+  it('should append node to open dialog if present', () => {
+    const dialog = document.createElement('dialog');
+    dialog.setAttribute('open', '');
+    document.body.appendChild(dialog);
+
+    vi.spyOn(dialog, 'getBoundingClientRect').mockReturnValue({
+      left: 0,
+      top: 0,
+      right: 0,
+      bottom: 0,
+      width: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+
+    const appendChildSpy = vi.spyOn(dialog, 'appendChild');
+    bodyPortal(node, targetRect);
+    expect(appendChildSpy).toHaveBeenCalledWith(node);
+
+    dialog.remove();
+  });
+
+  it('should not append node to dialog if it is not open', () => {
+    const dialog = document.createElement('dialog');
+    document.body.appendChild(dialog);
+
+    const appendChildSpy = vi.spyOn(document.body, 'appendChild');
+    bodyPortal(node, targetRect);
+    expect(appendChildSpy).toHaveBeenCalledWith(node);
+
+    dialog.remove();
+  });
 });
