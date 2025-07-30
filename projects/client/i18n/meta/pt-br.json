@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Abandonar"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Ativar Nitro Próximo"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Este experimento é um upgrade de desempenho que melhora a experiência para todos os usuários."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "Devido a mudanças internas no design, programas previamente ocultos agora estarão visíveis na sua lista com uma miniatura em preto e branco para ajudar a identificá-los rapidamente, com a opção de reexibi-los ou removê-los da lista."
-    },
     "warning_prompt_restore_show": {
       "default": "Tem certeza que deseja restaurar a série {title}? Isso restaurará seu progresso e calendário.",
       "variables": {

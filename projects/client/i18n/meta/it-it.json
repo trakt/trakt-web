@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Abbandona"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Attiva Nitro Prossimo"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Questo esperimento è un aggiornamento prestazionale che migliora l'esperienza per tutti gli utenti."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "A causa di modifiche interne, le serie nascoste in precedenza saranno ora visibili nel tuo elenco con un'anteprima in bianco e nero per aiutarti a individuarle rapidamente, con la possibilità di nasconderle di nuovo o rimuoverle dall'elenco."
-    },
     "warning_prompt_restore_show": {
       "default": "Sei sicuro di voler ripristinare {title}? Questo ripristinerà i tuoi progressi e il calendario.",
       "variables": {

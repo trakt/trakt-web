@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Elimină"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Activează Nitro Up Next"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Acest experiment este o actualizare de performanță care îmbunătățește experiența pentru toți utilizatorii."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "Datorită modificărilor de design interne, filmele ascunse anterior vor fi acum vizibile în lista ta, cu o miniatură alb-negru pentru a le identifica rapid, având opțiunea de a le readuce sau de a le elimina din listă."
-    },
     "warning_prompt_restore_show": {
       "default": "Sigur vrei să restaurezi {title}? Acesta va fi restaurat pe progresul și calendarul tău.",
       "variables": {

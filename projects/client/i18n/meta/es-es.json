@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Eliminar"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Activar Nitro Próximos"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Esta función es una mejora de rendimiento que optimiza la experiencia para todos los usuarios."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "Debido a los cambios de diseño internos, las series previamente ocultas ahora serán visibles en tu lista con una miniatura en blanco y negro para ayudarte a identificarlas rápidamente, con la opción de mostrarlas u omitirlas."
-    },
     "warning_prompt_restore_show": {
       "default": "¿Estás seguro de que quieres restaurar la serie {title}? Esto restaurará tu progreso y calendario.",
       "variables": {

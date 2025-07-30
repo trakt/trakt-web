@@ -2,19 +2,14 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useStablePaginated } from "../stores/useStablePaginated";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
   import UpNextItem from "./UpNextItem.svelte";
-  import UpNextLabSwitch from "./UpNextLabSwitch.svelte";
   import { useHiddenShows } from "./useHiddenShows";
-  import { useUpNextExperiment } from "./useUpNextExperiment";
   import { useUpNextList } from "./useUpNextList";
-
-  const { type } = useUpNextExperiment();
 
   const { list: hidden } = $derived(useHiddenShows());
 
@@ -30,18 +25,13 @@
       type: "episode",
       page: 1,
       limit: DEFAULT_PAGE_SIZE,
-      useList: (props) => useUpNextList({ ...props, type: $type }),
+      useList: useUpNextList,
       compareFn: (l, r) => l.show.id === r.show.id,
     })}
   urlBuilder={() => UrlBuilder.progress($user?.slug ?? "")}
   title={m.list_title_up_next()}
   --height-list={mediaListHeightResolver("landscape")}
 >
-  {#snippet badge()}
-    <RenderFor audience="authenticated" navigation="default">
-      <UpNextLabSwitch />
-    </RenderFor>
-  {/snippet}
   {#snippet item(episode)}
     <UpNextItem
       style="cover"

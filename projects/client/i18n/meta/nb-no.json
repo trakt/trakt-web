@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Dropp serie"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Aktiver Up Next Nitro"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Dette eksperimentet er en ytelsesoppgradering som forbedrer opplevelsen for alle brukere."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "På grunn av interne designendringer vil tidligere skjulte serier nå være synlige i listen din med en svart-hvitt miniatyrbilde for å hjelpe deg med å oppdage dem raskt, med muligheten til enten å vise dem eller droppe dem fra listen."
-    },
     "warning_prompt_restore_show": {
       "default": "Er du sikker på at du vil gjenopprette {title} serien? Dette vil gjenopprette det på din fremgang og kalender.",
       "variables": {

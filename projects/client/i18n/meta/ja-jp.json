@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "番組を削除する"
     },
-    "switch_label_up_next_nitro": {
-      "default": "アップ・ネクスト・ニトロ有効化"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "この実験は、すべてのユーザーの体験を向上させるパフォーマンスアップグレードです。"
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "以前非表示になっていた番組は、内部デザイン変更によりリストに戻され、迅速に認識できるように白黒のサムネイルが表示されます。非表示解除するか、リストから削除するかを選択できます。"
-    },
     "warning_prompt_restore_show": {
       "default": "{title}の番組を復元しますか？これは進行状況とカレンダーで復元されます。",
       "variables": {

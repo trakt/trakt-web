@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Verwijderen"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Activeer Up Next Nitro"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Dit experiment is een prestatieverbetering die de gebruikerservaring voor iedereen verbetert."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "Door interne ontwerpwijzigingen zullen eerder verborgen series nu zichtbaar zijn in je lijst met een zwart-witte miniatuur zodat je ze snel herkent, met de mogelijkheid ze weer zichtbaar te maken of uit de lijst te verwijderen."
-    },
     "warning_prompt_restore_show": {
       "default": "Weet je zeker dat je de {title} serie wilt herstellen? Dit herstelt de voortgang en de kalender.",
       "variables": {
