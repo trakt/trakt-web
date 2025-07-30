@@ -16,5 +16,8 @@
     &[data-style="secondary"] {
       color: var(--color-text-secondary);
     }
+
+    /** FIXME: remove when we have adaptive typography and updated sizes */
+    font-size: var(--font-size-18);
   }
 </style>
