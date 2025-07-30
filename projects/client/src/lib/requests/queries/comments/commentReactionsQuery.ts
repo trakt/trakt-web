@@ -45,6 +45,9 @@ const commentReactionsRequest = (
       params: {
         id: `${id}`,
       },
+      query: {
+        limit: 'all',
+      },
     });
 
 export const commentReactionsQuery = defineQuery({
