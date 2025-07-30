@@ -3,14 +3,10 @@
 
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
   import UpNextItem from "$lib/sections/lists/progress/UpNextItem.svelte";
-  import UpNextLabSwitch from "$lib/sections/lists/progress/UpNextLabSwitch.svelte";
   import { useHiddenShows } from "$lib/sections/lists/progress/useHiddenShows";
-  import { useUpNextExperiment } from "$lib/sections/lists/progress/useUpNextExperiment";
   import { useUpNextList } from "$lib/sections/lists/progress/useUpNextList";
   import { useStablePaginated } from "$lib/sections/lists/stores/useStablePaginated";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-
-  const { type } = useUpNextExperiment();
 
   const { list: hidden } = $derived(useHiddenShows());
 
@@ -27,14 +23,11 @@
       ...params,
       type: "episode",
       useList: (params) =>
-        useUpNextList({ type: $type, limit: params.limit, page: params.page }),
+        useUpNextList({ limit: params.limit, page: params.page }),
       compareFn: (l, r) => l.show.id === r.show.id,
     })}
   title={m.list_title_up_next()}
 >
-  {#snippet badge()}
-    <UpNextLabSwitch />
-  {/snippet}
   {#snippet item(episode)}
     <UpNextItem
       {episode}

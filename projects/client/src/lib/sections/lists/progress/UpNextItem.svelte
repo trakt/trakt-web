@@ -8,7 +8,6 @@
   import MarkAsWatchedAction from "../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeItem from "../components/EpisodeItem.svelte";
   import UpNextSwipe from "./UpNextSwipe.svelte";
-  import { useUpNextExperiment } from "./useUpNextExperiment";
 
   type UpNextEpisodeProps = {
     episode: EpisodeProgressEntry;
@@ -18,8 +17,6 @@
   };
 
   const { episode, show, status, style }: UpNextEpisodeProps = $props();
-
-  const { enabled: isNitroEnabled } = useUpNextExperiment();
 
   const isHidden = $derived(status === "hidden");
 </script>
@@ -45,11 +42,9 @@
           {episode}
         />
 
-        {#if $isNitroEnabled}
-          <DropAction style="dropdown-item" title={show.title} id={show.id} />
-        {/if}
+        <DropAction style="dropdown-item" title={show.title} id={show.id} />
 
-        {#if $isNitroEnabled && isHidden}
+        {#if isHidden}
           <RestoreAction
             style="dropdown-item"
             title={show.title}

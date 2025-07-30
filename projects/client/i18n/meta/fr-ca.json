@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Abandonner"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Activer Nitro Prochainement"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Cette expérience est une mise à niveau de performance qui améliore l'expérience de tous les utilisateurs."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "En raison de modifications de conception internes, les émissions précédemment cachées seront désormais visibles dans votre liste avec une vignette en noir et blanc pour vous aider à les repérer rapidement, avec la possibilité de soit les afficher à nouveau, soit de les supprimer de la liste."
-    },
     "warning_prompt_restore_show": {
       "default": "Êtes-vous certain de vouloir restaurer la série {title} ? Cela restaurera votre progression et votre calendrier.",
       "variables": {

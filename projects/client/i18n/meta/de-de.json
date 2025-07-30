@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Abbrechen"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Nitro Up Next aktivieren"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Dieses Experiment ist ein Performance-Upgrade, das die Erfahrung für alle Nutzer verbessert."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "Aufgrund interner Designänderungen werden zuvor versteckte Inhalte jetzt in Ihrer Liste mit einem Schwarz-Weiß-Vorschaubild angezeigt, um sie schnell zu finden. Sie können sie entweder wieder anzeigen lassen oder aus der Liste entfernen."
-    },
     "warning_prompt_restore_show": {
       "default": "Bist du sicher, dass du die {title} Serie wiederherstellen möchtest? Dadurch wird der Fortschritt und der Kalender wiederhergestellt.",
       "variables": {

@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Drop serie"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Aktivér Næste Nitro"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Dette eksperiment er en præstationsopgradering, der forbedrer oplevelsen for alle brugere."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "På grund af interne designændringer vil tidligere skjulte serier nu være synlige på din liste med et sort/hvidt miniaturebillede for at hjælpe dig med hurtigt at få øje på dem, med mulighed for enten at fjerne dem eller droppe dem fra listen."
-    },
     "warning_prompt_restore_show": {
       "default": "Er du sikker på, at du vil gendanne {title} serien? Dette vil gendanne den på din fremskridt og kalender.",
       "variables": {

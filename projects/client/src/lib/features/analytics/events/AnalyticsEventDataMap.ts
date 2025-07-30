@@ -1,7 +1,6 @@
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { SimpleRating } from '$lib/models/SimpleRating.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
-import type { UpNextType } from '$lib/sections/lists/progress/useUpNextExperiment.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type ActionType = { action: 'add' | 'remove' };
@@ -14,7 +13,6 @@ type CommentType = { action: 'post' | 'reply' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
-  [AnalyticsEvent.NitroExperiment]: { type: UpNextType };
 
   [AnalyticsEvent.Theme]: { theme: Theme };
   [AnalyticsEvent.Locale]: { locale: string };

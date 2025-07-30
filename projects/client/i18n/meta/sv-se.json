@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Sluta följa"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Aktivera Nästa Nitro"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "Det här experimentet är en prestandauppgradering som förbättrar upplevelsen för alla användare."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "På grund av interna designförändringar kommer tidigare dolda serier nu att vara synliga i din lista med en svartvit miniatyrbild för att hjälpa dig att snabbt upptäcka dem, med möjlighet att antingen återskapa dem eller ta bort dem från listan."
-    },
     "warning_prompt_restore_show": {
       "default": "Är du säker på att du vill återställa serien {title}? Detta kommer att återställa den i dina framsteg och kalender.",
       "variables": {

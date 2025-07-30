@@ -1198,15 +1198,6 @@
     "button_text_drop_show": {
       "default": "Usuń"
     },
-    "switch_label_up_next_nitro": {
-      "default": "Włącz Nitro dla kolejnego filmu"
-    },
-    "tooltip_text_up_next_nitro": {
-      "default": "To eksperymentalne ulepszenie wydajności poprawia komfort użytkowania dla wszystkich."
-    },
-    "tooltip_text_up_next_nitro_hidden": {
-      "default": "W wyniku wewnętrznych zmian w projekcie, wcześniej ukryte pozycje będą teraz widoczne na Twojej liście z czarno-białym miniaturką, abyś mógł je szybko rozpoznać, z opcją ich ukrycia lub usunięcia z listy."
-    },
     "warning_prompt_restore_show": {
       "default": "Na pewno chcesz przywrócić {title}? Przywróci to Twoje postępy i kalendarz.",
       "variables": {
