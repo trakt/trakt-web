@@ -46,6 +46,6 @@
     gap: var(--gap-xxs);
 
     /* To visually align the buttons better with the header */
-    padding-top: var(--ni-4);
+    padding-top: var(--ni-2);
   }
 </style>
