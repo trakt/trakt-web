@@ -115,7 +115,17 @@
   /**
    * Cookie
    */
-  --color-cookie-background: var(--shade-10)
+  --color-cookie-background: var(--shade-10);
+
+  /**
+   * Reactions
+   */
+  --color-reactions-disabled-background: var(--shade-50);
+  --color-reactions-preview-background: var(--shade-100);
+  --color-reactions-preview-hover: var(--shade-200);
+  --color-current-reaction-background: var(--shade-100);
+  --color-current-reaction-hover: var(--red-100);
+  --color-reactions-popup-background: var(--shade-50);
 }
 
 // Define theme variables for dark mode
@@ -213,7 +223,17 @@
   /**
    * Cookie
    */
-  --color-cookie-background: var(--shade-900)
+  --color-cookie-background: var(--shade-900);
+
+  /**
+   * Reactions
+   */
+  --color-reactions-disabled-background: var(--shade-700);
+  --color-reactions-preview-background: var(--shade-800);
+  --color-reactions-preview-hover: var(--shade-700);
+  --color-current-reaction-background: var(--shade-600);
+  --color-current-reaction-hover: var(--red-50);
+  --color-reactions-popup-background: var(--shade-800);
 }
 
 // Apply themes to selectors

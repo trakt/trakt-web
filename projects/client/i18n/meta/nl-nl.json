@@ -1937,6 +1937,41 @@
           "type": "number"
         }
       }
+    },
+    "translated_value_reaction_like": {
+      "default": "Vind ik leuk"
+    },
+    "translated_value_reaction_dislike": {
+      "default": "Vind ik niet leuk"
+    },
+    "translated_value_reaction_love": {
+      "default": "Super!"
+    },
+    "translated_value_reaction_laugh": {
+      "default": "Grappig"
+    },
+    "translated_value_reaction_shocked": {
+      "default": "Geschokt"
+    },
+    "translated_value_reaction_bravo": {
+      "default": "Bravo!"
+    },
+    "translated_value_reaction_spoiler": {
+      "default": "Spoiler"
+    },
+    "button_label_popup_reactions": {
+      "default": "Reacties"
+    },
+    "button_label_react": {
+      "default": "Reageer met {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
+    },
+    "text_zero_reactions": {
+      "default": "0 reacties"
     }
   }
 }

@@ -1937,6 +1937,41 @@
           "type": "number"
         }
       }
+    },
+    "translated_value_reaction_like": {
+      "default": "J'aime"
+    },
+    "translated_value_reaction_dislike": {
+      "default": "J'aime pas"
+    },
+    "translated_value_reaction_love": {
+      "default": "J'adore"
+    },
+    "translated_value_reaction_laugh": {
+      "default": "Haha!"
+    },
+    "translated_value_reaction_shocked": {
+      "default": "Sous le choc"
+    },
+    "translated_value_reaction_bravo": {
+      "default": "Bravo!"
+    },
+    "translated_value_reaction_spoiler": {
+      "default": "Révélation"
+    },
+    "button_label_popup_reactions": {
+      "default": "Réactions"
+    },
+    "button_label_react": {
+      "default": "Réagir avec {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
+    },
+    "text_zero_reactions": {
+      "default": "0 réactions"
     }
   }
 }

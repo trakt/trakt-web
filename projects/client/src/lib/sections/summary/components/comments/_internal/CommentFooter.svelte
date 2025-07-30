@@ -21,6 +21,10 @@
     }
 
     /* To align icons of the ghost buttons */
-    margin: var(--ni-neg-10) var(--ni-neg-16);
+    margin: var(--ni-neg-12) var(--ni-neg-16);
+
+    &:has(> :global(.trakt-reactions-summary)) {
+      margin-left: var(--ni-0);
+    }
   }
 </style>

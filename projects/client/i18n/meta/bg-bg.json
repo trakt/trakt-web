@@ -1937,6 +1937,41 @@
           "type": "number"
         }
       }
+    },
+    "translated_value_reaction_like": {
+      "default": "Харесва ми"
+    },
+    "translated_value_reaction_dislike": {
+      "default": "Не ми харесва"
+    },
+    "translated_value_reaction_love": {
+      "default": "Обичам"
+    },
+    "translated_value_reaction_laugh": {
+      "default": "Смешно"
+    },
+    "translated_value_reaction_shocked": {
+      "default": "Шокиран"
+    },
+    "translated_value_reaction_bravo": {
+      "default": "Браво!"
+    },
+    "translated_value_reaction_spoiler": {
+      "default": "Спойлер"
+    },
+    "button_label_popup_reactions": {
+      "default": "Реакции"
+    },
+    "button_label_react": {
+      "default": "Реагирай с {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
+    },
+    "text_zero_reactions": {
+      "default": "0 реакции"
     }
   }
 }
