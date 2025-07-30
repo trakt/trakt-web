@@ -5,6 +5,7 @@
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { buildParamString } from "$lib/utils/url/buildParamString";
   import { onMount } from "svelte";
+  import { SEARCH_INPUT_FOCUS_EVENT } from "./constants";
   import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
 
@@ -64,11 +65,7 @@
     };
   }
 
-  onMount(() => {
-    if (isInline) {
-      return;
-    }
-
+  const focusSearchInput = () => {
     const length = inputElement.value.length;
     inputElement.setSelectionRange(length, length);
     inputElement.focus();
@@ -76,6 +73,22 @@
     if (length > 0) {
       inputElement.click();
     }
+  };
+
+  onMount(() => {
+    globalThis.window.addEventListener(
+      SEARCH_INPUT_FOCUS_EVENT,
+      focusSearchInput,
+    );
+
+    !isInline && focusSearchInput();
+
+    return () => {
+      globalThis.window.removeEventListener(
+        SEARCH_INPUT_FOCUS_EVENT,
+        focusSearchInput,
+      );
+    };
   });
 </script>
 
@@ -113,6 +126,15 @@
     100% {
       background-position: -200% 0;
     }
+  }
+
+  @mixin visible-background {
+    background: color-mix(
+      in srgb,
+      var(--color-background) 75%,
+      transparent 25%
+    );
+    @include backdrop-filter-blur(var(--ni-8));
   }
 
   :global(.trakt-navbar-scroll:not(.trakt-navbar-pwa)) {
@@ -177,18 +199,18 @@
       box-sizing: border-box;
 
       border-radius: var(--border-radius-s);
-      background: color-mix(
-        in srgb,
-        var(--color-background) 75%,
-        transparent 25%
-      );
+      background: transparent;
 
       transition: var(--transition-increment) ease-in-out;
       transition-property:
         border-color, background-color, padding, width, top, left, opacity;
 
-      @include backdrop-filter-blur(var(--ni-8));
+      @include visible-background;
+
       @include for-mobile {
+        background: transparent;
+        backdrop-filter: none;
+
         width: var(--search-icon-size);
         position: absolute;
         top: 0;
@@ -214,6 +236,8 @@
           top: 0;
           width: var(--mobile-search-focus-width);
           z-index: var(--layer-top);
+
+          @include visible-background;
         }
       }
 
