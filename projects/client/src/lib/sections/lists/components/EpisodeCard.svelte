@@ -96,7 +96,10 @@
         {#if episode.type === EpisodeComputedType.full_season}
           {seasonLabel(episode.season)}
         {:else}
-          {episode.season}x{episode.number}
+          {m.episode_footer_season_episode({
+            seasonNumber: episode.season,
+            episodeNumber: episode.number,
+          })}
           <Spoiler media={episode} {show} type="episode">
             - {episode.title}
           </Spoiler>

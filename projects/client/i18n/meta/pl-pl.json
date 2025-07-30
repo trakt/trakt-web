@@ -51,7 +51,7 @@
       }
     },
     "list_title_up_next": {
-      "default": "Następne"
+      "default": "Kontynuuj oglądanie"
     },
     "tag_text_remaining_episodes": {
       "default": "Pozostało {count}",
@@ -281,8 +281,8 @@
     "list_title_trending": {
       "default": "Teraz popularne"
     },
-    "list_title_recommendations": {
-      "default": "Rekomendacje"
+    "list_title_recommended": {
+      "default": "Polecane"
     },
     "list_title_most_anticipated": {
       "default": "Najbardziej wyczekiwane"
@@ -1453,10 +1453,10 @@
       "default": "System"
     },
     "button_text_filters": {
-      "default": "Filtruj"
+      "default": "Filtry"
     },
     "button_label_filters": {
-      "default": "Filtruj"
+      "default": "Filtry"
     },
     "button_label_reset_filter": {
       "default": "Resetuj"
@@ -1715,7 +1715,7 @@
       "default": "Dodatki"
     },
     "page_title_up_next": {
-      "default": "Następne"
+      "default": "Kontynuuj oglądanie"
     },
     "page_title_available_now": {
       "default": "Dostępne teraz"
@@ -1935,6 +1935,17 @@
     },
     "button_label_movies": {
       "default": "Filmy"
+    },
+    "episode_footer_season_episode": {
+      "default": "S{seasonNumber} · O{episodeNumber}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "episodeNumber": {
+          "type": "number"
+        }
+      }
     }
   }
 }
