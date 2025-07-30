@@ -1,9 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { derived, get, readable } from 'svelte/store';
-import {
-  currentUserCommentLikesQuery,
-  type UserLike,
-} from '../queries/currentUserCommentLikesQuery.ts';
 import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
 import {
   currentUserHistoryQuery,
@@ -97,7 +93,6 @@ export function useUser() {
         movies: new Map(),
         shows: new Map(),
       }),
-      likes: readable<UserLike[]>([]),
       favorites: readable({
         movies: new Map(),
         shows: new Map(),
@@ -112,7 +107,6 @@ export function useUser() {
   const historyQueryResponse = useQuery(currentUserHistoryQuery());
   const watchlistQueryResponse = useQuery(currentUserWatchlistQuery());
   const ratingsQueryResponse = useQuery(currentUserRatingsQuery());
-  const commentLikesQueryResponse = useQuery(currentUserCommentLikesQuery());
   const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
   const followingQueryResponse = useQuery(currentUserNetworkQuery());
 
@@ -132,10 +126,6 @@ export function useUser() {
     ratingsQueryResponse,
     ($ratings) => definedData($ratings.data),
   );
-  const likes = derived(
-    commentLikesQueryResponse,
-    ($likes) => definedData($likes.data),
-  );
   const favorites = derived(
     favoritesQueryResponse,
     ($favorites) => definedData($favorites.data),
@@ -150,7 +140,6 @@ export function useUser() {
     history,
     watchlist,
     ratings,
-    likes,
     favorites,
     network,
   };
