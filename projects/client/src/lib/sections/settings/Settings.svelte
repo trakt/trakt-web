@@ -7,6 +7,7 @@
   import Spoilers from "./_internal/Spoilers.svelte";
 </script>
 
+<!-- FIXME: make settings page dpad navigate-able -->
 <RenderFor audience="authenticated">
   <div class="trakt-settings">
     <div class="trakt-settings-sidebar">

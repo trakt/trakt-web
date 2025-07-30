@@ -3660,14 +3660,6 @@
         "ios"
       ]
     },
-    "button_text_settings": {
-      "default": "Settings",
-      "description": "Text for the button that opens the settings page.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_settings": {
       "default": "Settings",
       "description": "Aria-label for the button that opens the settings page.",
