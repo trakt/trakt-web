@@ -6,6 +6,7 @@
   import { writable } from "svelte/store";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import TypeToggles from "./_internal/TypeToggles.svelte";
+  import WatchlistTag from "./_internal/WatchlistTag.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
   import WatchlistItem from "./WatchlistItem.svelte";
@@ -59,6 +60,10 @@
   {#snippet badge()}
     {#if status === "all" && onTypeChange}
       <TypeToggles types={selectedTypes} />
+    {/if}
+
+    {#if status === "unreleased" || status === "released"}
+      <WatchlistTag {status} />
     {/if}
   {/snippet}
 </DrilledMediaList>

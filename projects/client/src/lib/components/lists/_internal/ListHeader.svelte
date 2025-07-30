@@ -110,7 +110,7 @@
     }
 
     .trakt-list-title-container {
-      gap: var(--gap-s);
+      gap: var(--gap-xs);
 
       @include for-mobile {
         gap: var(--gap-xs);

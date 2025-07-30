@@ -1,4 +1,6 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
+
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
@@ -7,20 +9,19 @@
   import { writable } from "svelte/store";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import TypeToggles from "./_internal/TypeToggles.svelte";
+  import WatchlistTag from "./_internal/WatchlistTag.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
   import WatchlistItem from "./WatchlistItem.svelte";
 
   type WatchListProps = {
-    title: string;
     defaultType?: MediaType;
     drilldownLabel: string;
     empty?: Snippet;
     status: "all" | "released" | "unreleased";
   };
 
-  const { title, defaultType, status, drilldownLabel }: WatchListProps =
-    $props();
+  const { defaultType, status, drilldownLabel }: WatchListProps = $props();
   const { filterMap } = useFilter();
 
   const useList = $derived.by(() => statusToStore(status));
@@ -36,7 +37,7 @@
 
 <DrillableMediaList
   id="watch-list-{type}-{status}"
-  {title}
+  title={m.list_title_watchlist()}
   {drilldownLabel}
   {type}
   filter={$filterMap}
@@ -67,6 +68,10 @@
   {#snippet badge()}
     {#if status === "all"}
       <TypeToggles types={selectedTypes} />
+    {/if}
+
+    {#if status === "unreleased" || status === "released"}
+      <WatchlistTag {status} />
     {/if}
   {/snippet}
 </DrillableMediaList>
