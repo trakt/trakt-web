@@ -3,7 +3,6 @@
   import { TestId } from "$e2e/models/TestId";
   import Button from "$lib/components/buttons/Button.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
-  import GearIcon from "$lib/components/icons/GearIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
@@ -127,21 +126,8 @@
           {/snippet}
         </Button>
       </RenderFor>
-      <!-- FIXME: make settings page dpad navigate-able -->
-      <RenderFor audience="authenticated" navigation="default">
-        <Button
-          href={UrlBuilder.settings()}
-          label={m.button_label_settings()}
-          style="flat"
-          variant="secondary"
-          color="purple"
-          navigationType={DpadNavigationType.Item}
-        >
-          {m.button_text_settings()}
-          {#snippet icon()}
-            <GearIcon />
-          {/snippet}
-        </Button>
+      <RenderFor audience="authenticated">
+        <FilterButton size="normal" />
       </RenderFor>
     </div>
 
@@ -150,7 +136,6 @@
         <RenderFor audience="authenticated" navigation="dpad">
           <LocalePicker />
         </RenderFor>
-        <FilterButton size="normal" />
         {#if !isVip}
           <RenderFor audience="authenticated" navigation="default">
             <GetVIPLink />
@@ -185,15 +170,17 @@
   }
 
   header {
-    --navbar-width: var(--ni-66);
+    --navbar-padding: var(--ni-16);
     --navbar-item-width: var(--ni-32);
+
+    --navbar-width: calc(var(--navbar-item-width) + var(--navbar-padding) * 2);
+    --navbar-expanded-width: var(--ni-224);
+
     --navbar-margin: var(--gap-s);
     --navbar-margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
     --navbar-margin-bottom: calc(var(--gap-m) + env(safe-area-inset-bottom));
-    --navbar-padding: calc(
-      (var(--navbar-width) - var(--navbar-item-width)) / 2
-    );
-    --navbar-expanded-min-width: var(--ni-200);
+
+    --navbar-button-offset: var(--ni-neg-12);
   }
 
   .trakt-side-navbar {
@@ -203,7 +190,6 @@
     left: 0;
 
     width: var(--navbar-width);
-    min-width: var(--navbar-width);
     height: calc(
       100dvh - var(--navbar-margin-top) - var(--navbar-margin-bottom)
     );
@@ -222,8 +208,8 @@
     box-sizing: border-box;
 
     border-radius: var(--border-radius-l);
-    transition: var(--transition-increment) cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: min-width, background-color, box-shadow;
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: width, background-color, box-shadow;
 
     display: flex;
     flex-direction: column;
@@ -243,7 +229,7 @@
     :global(trakt-get-vip-link) {
       display: flex;
       justify-content: center;
-      min-width: var(--navbar-item-width);
+      width: var(--navbar-item-width);
 
       :global(.trakt-vip-badge) {
         padding: var(--ni-8);
@@ -251,18 +237,9 @@
       }
     }
 
-    :global(.trakt-button),
-    :global(trakt-profile-button) {
-      min-width: var(--navbar-expanded-min-width);
-    }
-
-    :global(.trakt-button-link.trakt-link-active) {
-      color: var(--color-foreground-button);
-    }
-
     :global(.trakt-button) {
       flex-direction: row-reverse;
-      margin-left: var(--ni-neg-12);
+      margin-left: var(--navbar-button-offset);
 
       color: var(--color-text-primary);
       background: none;
@@ -279,16 +256,13 @@
   .trakt-side-navbar.can-expand {
     &:has(:global(*):focus-visible),
     &:not(.force-collapse):hover {
-      width: fit-content;
-
-      &,
-      .trakt-side-navbar-content {
-        min-width: var(--navbar-expanded-min-width);
-      }
+      --navbar-width: var(--navbar-expanded-width);
 
       @include collapsed-states(1, initial);
 
       :global(trakt-get-vip-link) {
+        width: fit-content;
+
         :global(.trakt-vip-badge) {
           padding-left: var(--ni-12);
           padding-right: var(--ni-12);
@@ -296,6 +270,11 @@
       }
 
       :global(.trakt-button) {
+        width: calc(
+          var(--navbar-width) - 2 * var(--navbar-padding) - 2 *
+            var(--navbar-button-offset)
+        );
+
         &:focus-visible {
           outline: var(--border-thickness-xs) solid
             var(--color-background-button);
@@ -320,6 +299,8 @@
     align-items: flex-start;
 
     gap: var(--gap-m);
+
+    width: calc(var(--navbar-width) - 2 * var(--navbar-padding));
   }
 
   .trakt-side-navbar-top {
@@ -331,5 +312,9 @@
 
   .trakt-side-navbar-content {
     gap: var(--gap-xs);
+
+    :global(.trakt-button-link.trakt-link-active) {
+      color: var(--color-foreground-button);
+    }
   }
 </style>

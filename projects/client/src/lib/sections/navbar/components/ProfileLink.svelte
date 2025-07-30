@@ -1,4 +1,6 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import GearIcon from "$lib/components/icons/GearIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -31,16 +33,35 @@
     </div>
     <div class="profile-info">
       <p class="profile-name ellipsis">{$user?.name?.first}</p>
-      <p class="meta-info">{m.link_text_view_profile()}</p>
+      <p class="meta-info ellipsis">{m.link_text_view_profile()}</p>
     </div>
   </Link>
+  <RenderFor audience="authenticated" navigation="default">
+    <ActionButton
+      href={UrlBuilder.settings()}
+      label={m.button_label_settings()}
+      style="ghost"
+    >
+      <GearIcon />
+    </ActionButton>
+  </RenderFor>
 </trakt-profile-button>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
   trakt-profile-button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: var(--gap-xxs);
+
     :global(.trakt-link) {
+      height: var(--ni-40);
+
       display: flex;
       align-items: center;
       gap: var(--gap-s);
