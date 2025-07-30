@@ -10,6 +10,7 @@ type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };
 type FollowType = { action: 'follow' | 'unfollow' };
 type ExtrasType = { slug: string; type: MediaVideoType };
 type CommentType = { action: 'post' | 'reply' };
+type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -25,6 +26,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.List]: ActionType;
   [AnalyticsEvent.RemoveFromHistory]: never;
   [AnalyticsEvent.LikeComment]: ActionType;
+  [AnalyticsEvent.React]: ReactionType;
   [AnalyticsEvent.AddComment]: CommentType;
   [AnalyticsEvent.Rate]: RatingType;
   [AnalyticsEvent.CheckIn]: CheckInType;

@@ -1937,6 +1937,41 @@
           "type": "number"
         }
       }
+    },
+    "translated_value_reaction_like": {
+      "default": "Gillar"
+    },
+    "translated_value_reaction_dislike": {
+      "default": "Ogillar"
+    },
+    "translated_value_reaction_love": {
+      "default": "Älskar"
+    },
+    "translated_value_reaction_laugh": {
+      "default": "Roligt"
+    },
+    "translated_value_reaction_shocked": {
+      "default": "Chockad"
+    },
+    "translated_value_reaction_bravo": {
+      "default": "Bravo!"
+    },
+    "translated_value_reaction_spoiler": {
+      "default": "Spoiler"
+    },
+    "button_label_popup_reactions": {
+      "default": "Reaktioner"
+    },
+    "button_label_react": {
+      "default": "Reagera med {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
+    },
+    "text_zero_reactions": {
+      "default": "0 reaktioner"
     }
   }
 }

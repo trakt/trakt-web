@@ -28,6 +28,7 @@ type TypeDataMap = {
   'dropped': 'show';
   'restored': 'show';
   'like': 'comment';
+  'react': 'comment';
   'comment': 'reply';
   'listed': MediaType;
   'user': UserType;
@@ -71,6 +72,7 @@ export const InvalidateAction = {
   Restore: buildInvalidationKey('restored', 'show'),
 
   Like: buildInvalidationKey('like', 'comment'),
+  React: buildInvalidationKey('react', 'comment'),
 
   ReplyToComment: buildInvalidationKey('comment', 'reply'),
 

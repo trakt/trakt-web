@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import LikeCommentAction from "../comment-actions/LikeCommentAction.svelte";
+  import ReactAction from "../comment-actions/ReactAction.svelte";
   import ReplyButton from "../comment-actions/ReplyButton.svelte";
   import ViewRepliesAction from "../comment-actions/ViewRepliesAction.svelte";
   import CommentBody from "../CommentBody.svelte";
@@ -52,7 +52,7 @@
   </ShadowScroller>
 
   <CommentFooter>
-    <LikeCommentAction comment={userComment} />
+    <ReactAction comment={userComment} />
     <ViewRepliesAction comment={userComment} />
     <ReplyButton
       comment={userComment}

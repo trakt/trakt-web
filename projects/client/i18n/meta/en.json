@@ -4481,6 +4481,91 @@
         "android",
         "ios"
       ]
+    },
+    "translated_value_reaction_like": {
+      "default": "Like",
+      "description": "Text for the like reaction. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_reaction_dislike": {
+      "default": "Dislike",
+      "description": "Text for the dislike reaction. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_reaction_love": {
+      "default": "Love",
+      "description": "Text for the love reaction. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_reaction_laugh": {
+      "default": "Laugh",
+      "description": "Text for the laugh reaction. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_reaction_shocked": {
+      "default": "Shocked",
+      "description": "Text for the shocked reaction. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_reaction_bravo": {
+      "default": "Bravo",
+      "description": "Text for the bravo reaction. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_reaction_spoiler": {
+      "default": "Spoiler",
+      "description": "Text for the spoiler reaction. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_popup_reactions": {
+      "default": "Reactions",
+      "description": "Aria-label for the button that opens the reactions popup.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_react": {
+      "default": "React with {reaction}",
+      "description": "Aria-label for the button that allows users to react to a comment with a specific reaction.",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_zero_reactions": {
+      "default": "0 reactions",
+      "description": "Text shown when there are no reactions to a comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
