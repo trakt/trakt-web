@@ -4,11 +4,11 @@
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import LogoutButton from "./_internal/LogoutButton.svelte";
   import CopyRight from "./CopyRight.svelte";
   import ExternalLinks from "./ExternalLinks.svelte";
   import FooterBar from "./FooterBar.svelte";
   import FooterLogo from "./FooterLogo.svelte";
-  import ProfileActionButton from "./_internal/ProfileActionButton.svelte";
 
   const isOnProfile = $derived(page.route.id === UrlBuilder.profile.me());
 </script>
@@ -18,20 +18,12 @@
     <FooterBar>
       <FooterLogo />
       {#if isOnProfile}
-        <ProfileActionButton size="small" />
+        <RenderFor navigation="dpad" audience="authenticated">
+          <LogoutButton size="small" />
+        </RenderFor>
       {/if}
     </FooterBar>
   </RenderFor>
-
-  {#if isOnProfile}
-    <RenderFor device={["tablet-sm", "mobile"]} audience="authenticated">
-      <div class="trakt-footer-logout">
-        <FooterBar>
-          <ProfileActionButton size="tag" />
-        </FooterBar>
-      </div>
-    </RenderFor>
-  {/if}
 
   <FooterBar>
     <!-- TODO: different layout for smaller (or different component for only theme/lang pickers) -->
@@ -63,11 +55,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .trakt-footer-logout {
-    :global(.trakt-footer-bar) {
-      justify-content: flex-end;
-    }
   }
 </style>
