@@ -51,7 +51,7 @@
       }
     },
     "list_title_up_next": {
-      "default": "Próximo"
+      "default": "Continuar Assistindo"
     },
     "tag_text_remaining_episodes": {
       "default": "{count} restantes",
@@ -281,8 +281,8 @@
     "list_title_trending": {
       "default": "Tendências"
     },
-    "list_title_recommendations": {
-      "default": "Recomendações"
+    "list_title_recommended": {
+      "default": "Recomendados"
     },
     "list_title_most_anticipated": {
       "default": "Mais Esperados"
@@ -1453,10 +1453,10 @@
       "default": "Sistema"
     },
     "button_text_filters": {
-      "default": "Filtrar"
+      "default": "Filtros"
     },
     "button_label_filters": {
-      "default": "Filtrar"
+      "default": "Filtros"
     },
     "button_label_reset_filter": {
       "default": "Redefinir"
@@ -1715,7 +1715,7 @@
       "default": "Extras"
     },
     "page_title_up_next": {
-      "default": "Próximos"
+      "default": "Continuar Assistindo"
     },
     "page_title_available_now": {
       "default": "Disponível agora"
@@ -1935,6 +1935,17 @@
     },
     "button_label_movies": {
       "default": "Filmes"
+    },
+    "episode_footer_season_episode": {
+      "default": "T{seasonNumber} · E{episodeNumber}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "episodeNumber": {
+          "type": "number"
+        }
+      }
     }
   }
 }

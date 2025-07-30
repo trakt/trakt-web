@@ -33,7 +33,7 @@
   <RenderFor audience="authenticated">
     <RecommendedList
       drilldownLabel={m.button_label_view_all_recommended_movies()}
-      title={m.list_title_recommendations()}
+      title={m.list_title_recommended()}
       {type}
     />
   </RenderFor>

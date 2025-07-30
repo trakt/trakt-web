@@ -58,8 +58,8 @@
       }
     },
     "list_title_up_next": {
-      "default": "Up Next",
-      "description": "Title for lists containing the next episodes to watch of aired episodes. This title should be as short and concise as possible."
+      "default": "Continue Watching",
+      "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible."
     },
     "tag_text_remaining_episodes": {
       "default": "{count} remaining",
@@ -355,8 +355,8 @@
       "default": "Trending",
       "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible."
     },
-    "list_title_recommendations": {
-      "default": "Recommendations",
+    "list_title_recommended": {
+      "default": "Recommended",
       "description": "Title for lists containing recommended movies or shows. This title should be as short and concise as possible."
     },
     "list_title_most_anticipated": {
@@ -1830,11 +1830,11 @@
       "description": "Text for the system theme option in the theme selection dropdown."
     },
     "button_text_filters": {
-      "default": "Filter",
+      "default": "Filters",
       "description": "Text for the button that opens the filters panel."
     },
     "button_label_filters": {
-      "default": "Filter",
+      "default": "Filters",
       "description": "Aria-label for the button that opens the filters panel."
     },
     "button_label_reset_filter": {
@@ -2166,8 +2166,8 @@
       "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible."
     },
     "page_title_up_next": {
-      "default": "Up Next",
-      "description": "Title for the up next page."
+      "default": "Continue Watching",
+      "description": "Title for the Up Next page, which shows the next movie or episode a user should watch."
     },
     "page_title_available_now": {
       "default": "Available Now",
@@ -2445,6 +2445,18 @@
     "button_label_movies": {
       "default": "Movies",
       "description": "Aria-label for the button that allows users to toggle movies in the watchlist."
+    },
+    "episode_footer_season_episode": {
+      "default": "S{seasonNumber} · E{episodeNumber}",
+      "description": "Footer text for an episode, showing the season and episode number. The text should be as short and concise as possible, wherever possible use only the first letter.",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "episodeNumber": {
+          "type": "number"
+        }
+      }
     }
   }
 }

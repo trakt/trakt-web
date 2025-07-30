@@ -51,7 +51,7 @@
       }
     },
     "list_title_up_next": {
-      "default": "Următorul"
+      "default": "Continuă vizionarea"
     },
     "tag_text_remaining_episodes": {
       "default": "{count} episoade",
@@ -281,8 +281,8 @@
     "list_title_trending": {
       "default": "Trending"
     },
-    "list_title_recommendations": {
-      "default": "Recomandări"
+    "list_title_recommended": {
+      "default": "Recomandate"
     },
     "list_title_most_anticipated": {
       "default": "Cele mai așteptate"
@@ -1456,7 +1456,7 @@
       "default": "Filtre"
     },
     "button_label_filters": {
-      "default": "Filtru"
+      "default": "Filtre"
     },
     "button_label_reset_filter": {
       "default": "Resetează"
@@ -1715,7 +1715,7 @@
       "default": "Extra"
     },
     "page_title_up_next": {
-      "default": "Urmează"
+      "default": "Continuă vizionarea"
     },
     "page_title_available_now": {
       "default": "Disponibil acum"
@@ -1935,6 +1935,17 @@
     },
     "button_label_movies": {
       "default": "Filme"
+    },
+    "episode_footer_season_episode": {
+      "default": "S{seasonNumber} · E{episodeNumber}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "episodeNumber": {
+          "type": "number"
+        }
+      }
     }
   }
 }

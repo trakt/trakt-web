@@ -51,7 +51,7 @@
       }
     },
     "list_title_up_next": {
-      "default": "Up Next"
+      "default": "Keep Watching"
     },
     "tag_text_remaining_episodes": {
       "default": "{count} remaining",
@@ -281,8 +281,8 @@
     "list_title_trending": {
       "default": "Trending"
     },
-    "list_title_recommendations": {
-      "default": "Recommendations"
+    "list_title_recommended": {
+      "default": "Reckon You'd Like"
     },
     "list_title_most_anticipated": {
       "default": "Most Anticipated"
@@ -1453,10 +1453,10 @@
       "default": "System"
     },
     "button_text_filters": {
-      "default": "Filter"
+      "default": "Filters"
     },
     "button_label_filters": {
-      "default": "Filter"
+      "default": "Filters"
     },
     "button_label_reset_filter": {
       "default": "Reset"
@@ -1715,7 +1715,7 @@
       "default": "Extras"
     },
     "page_title_up_next": {
-      "default": "Up Next"
+      "default": "Keep Watching"
     },
     "page_title_available_now": {
       "default": "Available Now"
@@ -1935,6 +1935,17 @@
     },
     "button_label_movies": {
       "default": "Films"
+    },
+    "episode_footer_season_episode": {
+      "default": "S{seasonNumber} · E{episodeNumber}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "episodeNumber": {
+          "type": "number"
+        }
+      }
     }
   }
 }
