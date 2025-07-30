@@ -285,7 +285,7 @@
       "default": "Reckon You'd Like"
     },
     "list_title_most_anticipated": {
-      "default": "Most Anticipated"
+      "default": "Anticipated"
     },
     "button_text_get_vip": {
       "default": "Get"
@@ -303,7 +303,7 @@
       "default": "User Profile"
     },
     "list_title_most_popular": {
-      "default": "Most Popular"
+      "default": "Popular"
     },
     "button_text_browse_movies": {
       "default": "Movies"
@@ -988,7 +988,7 @@
       "default": "Stream on"
     },
     "header_streaming": {
-      "default": "Streaming"
+      "default": "Availability"
     },
     "header_on_demand": {
       "default": "On Demand"

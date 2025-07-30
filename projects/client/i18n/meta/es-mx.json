@@ -285,7 +285,7 @@
       "default": "Recomendaciones"
     },
     "list_title_most_anticipated": {
-      "default": "Los más esperados"
+      "default": "Más esperadas"
     },
     "button_text_get_vip": {
       "default": "Obtener"
@@ -303,7 +303,7 @@
       "default": "Perfil de usuario"
     },
     "list_title_most_popular": {
-      "default": "Lo más popular"
+      "default": "Populares"
     },
     "button_text_browse_movies": {
       "default": "Películas"
@@ -988,7 +988,7 @@
       "default": "Ver en"
     },
     "header_streaming": {
-      "default": "En línea"
+      "default": "Dónde ver"
     },
     "header_on_demand": {
       "default": "A la carta"

@@ -285,7 +285,7 @@
       "default": "Polecane"
     },
     "list_title_most_anticipated": {
-      "default": "Najbardziej wyczekiwane"
+      "default": "Oczekiwane"
     },
     "button_text_get_vip": {
       "default": "Zdobądź"
@@ -303,7 +303,7 @@
       "default": "Profil użytkownika"
     },
     "list_title_most_popular": {
-      "default": "Najpopularniejsze"
+      "default": "Popularne"
     },
     "button_text_browse_movies": {
       "default": "Filmy"
@@ -988,7 +988,7 @@
       "default": "Oglądaj na"
     },
     "header_streaming": {
-      "default": "Streaming"
+      "default": "Gdzie oglądać"
     },
     "header_on_demand": {
       "default": "Na życzenie"

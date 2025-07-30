@@ -285,7 +285,7 @@
       "default": "Recomandate"
     },
     "list_title_most_anticipated": {
-      "default": "Cele mai așteptate"
+      "default": "Așteptate"
     },
     "button_text_get_vip": {
       "default": "Obține"
@@ -303,7 +303,7 @@
       "default": "Profil de utilizator"
     },
     "list_title_most_popular": {
-      "default": "Cele mai populare"
+      "default": "Populare"
     },
     "button_text_browse_movies": {
       "default": "Filme"
@@ -988,7 +988,7 @@
       "default": "Redă pe"
     },
     "header_streaming": {
-      "default": "Streaming"
+      "default": "Unde poți viziona"
     },
     "header_on_demand": {
       "default": "La cerere"

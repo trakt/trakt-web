@@ -285,7 +285,7 @@
       "default": "Aanbevolen"
     },
     "list_title_most_anticipated": {
-      "default": "Meest verwacht"
+      "default": "Verwacht"
     },
     "button_text_get_vip": {
       "default": "Word"
@@ -303,7 +303,7 @@
       "default": "Gebruikersprofiel"
     },
     "list_title_most_popular": {
-      "default": "Meest populair"
+      "default": "Populair"
     },
     "button_text_browse_movies": {
       "default": "Films"
@@ -988,7 +988,7 @@
       "default": "Streamen op"
     },
     "header_streaming": {
-      "default": "Streaming"
+      "default": "Waar te kijken"
     },
     "header_on_demand": {
       "default": "Op aanvraag"
