@@ -48,6 +48,13 @@
       text-decoration: none;
     }
 
+    .trakt-card-footer-tag {
+      width: 100%;
+
+      display: flex;
+      gap: var(--gap-micro);
+    }
+
     .trakt-card-footer-information {
       width: 100%;
       overflow: hidden;
