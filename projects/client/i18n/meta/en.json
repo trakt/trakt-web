@@ -22,31 +22,59 @@
   "messages": {
     "list_title_upcoming_schedule": {
       "default": "Upcoming Schedule",
-      "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible."
+      "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_season_premiere": {
       "default": "Season Premiere",
-      "description": "Text for the tag that indicates the premiere of a season of a show. This should be as short as possible."
+      "description": "Text for the tag that indicates the premiere of a season of a show. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_series_premiere": {
       "default": "Series Premiere",
-      "description": "Text for the tag that indicates the premiere of a series. This should be as short as possible."
+      "description": "Text for the tag that indicates the premiere of a series. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_mid_season_premiere": {
       "default": "Mid-Season Premiere",
-      "description": "Text for the tag that indicates the premiere of a mid-season of a show. This should be as short as possible."
+      "description": "Text for the tag that indicates the premiere of a mid-season of a show. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_season_finale": {
       "default": "Season Finale",
-      "description": "Text for the tag that indicates the finale of a season of a show. This should be as short as possible."
+      "description": "Text for the tag that indicates the finale of a season of a show. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_series_finale": {
       "default": "Series Finale",
-      "description": "Text for the tag that indicates the finale of a series. This should be as short as possible."
+      "description": "Text for the tag that indicates the finale of a series. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_mid_season_finale": {
       "default": "Mid-Season Finale",
-      "description": "Text for the tag that indicates the finale of a mid-season of a show. This should be as short as possible."
+      "description": "Text for the tag that indicates the finale of a mid-season of a show. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_profile_banner_greeting": {
       "default": "Hello, {name}",
@@ -55,11 +83,19 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_up_next": {
       "default": "Continue Watching",
-      "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible."
+      "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_remaining_episodes": {
       "default": "{count} remaining",
@@ -68,15 +104,27 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_recommended_movies": {
       "default": "Recommended Movies",
-      "description": "Title for lists containing recommended movies. This title should be as short and concise as possible."
+      "description": "Title for lists containing recommended movies. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_recommended_shows": {
       "default": "Recommended Shows",
-      "description": "Title for lists containing recommended shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing recommended shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_number_of_episodes": {
       "default": "{count} episodes",
@@ -85,39 +133,75 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_error_404": {
       "default": "404: Nothingness. The void.",
-      "description": "Title for the 404 error page."
+      "description": "Title for the 404 error page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "error_text_404": {
       "default": "(Don't worry, it happens! Even the Force is sometimes out of alignment.)",
-      "description": "Text shown on the 404 error page."
+      "description": "Text shown on the 404 error page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "link_text_back_to_safety": {
       "default": "Back to safety...",
-      "description": "Text for the link that takes users back to the homepage from the 404 error page."
+      "description": "Text for the link that takes users back to the homepage from the 404 error page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "input_prompt_mark_as_watched_date": {
       "default": "When did you finish watching this? (YYYY-MM-DD HH:MM)",
-      "description": "Message for the prompt that allows users to specify the date and time when they finished watching a movie, show, or episode."
+      "description": "Message for the prompt that allows users to specify the date and time when they finished watching a movie, show, or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_watchlist": {
       "default": "Watchlist",
-      "description": "Text for the button that allows users to add/remove a movie or show to/from their watchlist."
+      "description": "Text for the button that allows users to add/remove a movie or show to/from their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_mark_as_watched": {
       "default": "Mark as Watched",
-      "description": "Text for the button that allows users to mark a movie, episode, or show as watched."
+      "description": "Text for the button that allows users to mark a movie, episode, or show as watched.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_watched_until_here": {
       "default": "Watched until here",
-      "description": "Text for the button that allows users to mark a show as watched until a specific point."
+      "description": "Text for the button that allows users to mark a show as watched until a specific point.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_watch_again": {
       "default": "Watch again",
-      "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched."
+      "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_add_to_watchlist": {
       "default": "Add {title} to your Watchlist",
@@ -126,7 +210,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_mark_as_watched": {
       "default": "Mark {title} as watched",
@@ -135,7 +223,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_watched_until_here": {
       "default": "Mark {title} as watched until here",
@@ -144,155 +236,307 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_horror": {
       "default": "Horror",
-      "description": "Text for the horror genre. The value is sent back from the Trakt API."
+      "description": "Text for the horror genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_comedy": {
       "default": "Comedy",
-      "description": "Text for the comedy genre. The value is sent back from the Trakt API."
+      "description": "Text for the comedy genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_action": {
       "default": "Action",
-      "description": "Text for the action genre. The value is sent back from the Trakt API."
+      "description": "Text for the action genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_adventure": {
       "default": "Adventure",
-      "description": "Text for the adventure genre. The value is sent back from the Trakt API."
+      "description": "Text for the adventure genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_animation": {
       "default": "Animation",
-      "description": "Text for the animation genre. The value is sent back from the Trakt API."
+      "description": "Text for the animation genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_biography": {
       "default": "Biography",
-      "description": "Text for the biography genre. The value is sent back from the Trakt API."
+      "description": "Text for the biography genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_children": {
       "default": "Children",
-      "description": "Text for the children genre. The value is sent back from the Trakt API."
+      "description": "Text for the children genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_crime": {
       "default": "Crime",
-      "description": "Text for the crime genre. The value is sent back from the Trakt API."
+      "description": "Text for the crime genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_documentary": {
       "default": "Documentary",
-      "description": "Text for the documentary genre. The value is sent back from the Trakt API."
+      "description": "Text for the documentary genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_drama": {
       "default": "Drama",
-      "description": "Text for the drama genre. The value is sent back from the Trakt API."
+      "description": "Text for the drama genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_family": {
       "default": "Family",
-      "description": "Text for the family genre. The value is sent back from the Trakt API."
+      "description": "Text for the family genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_fantasy": {
       "default": "Fantasy",
-      "description": "Text for the fantasy genre. The value is sent back from the Trakt API."
+      "description": "Text for the fantasy genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_game_show": {
       "default": "Game Show",
-      "description": "Text for the game show genre. The value is sent back from the Trakt API."
+      "description": "Text for the game show genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_history": {
       "default": "History",
-      "description": "Text for the history genre. The value is sent back from the Trakt API."
+      "description": "Text for the history genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_home_and_garden": {
       "default": "Home and Garden",
-      "description": "Text for the home and garden genre. The value is sent back from the Trakt API."
+      "description": "Text for the home and garden genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_holiday": {
       "default": "Holiday",
-      "description": "Text for the holiday genre. The value is sent back from the Trakt API."
+      "description": "Text for the holiday genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_music": {
       "default": "Music",
-      "description": "Text for the music genre. The value is sent back from the Trakt API."
+      "description": "Text for the music genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_musical": {
       "default": "Musical",
-      "description": "Text for the musical genre. The value is sent back from the Trakt API."
+      "description": "Text for the musical genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_mystery": {
       "default": "Mystery",
-      "description": "Text for the mystery genre. The value is sent back from the Trakt API."
+      "description": "Text for the mystery genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_news": {
       "default": "News",
-      "description": "Text for the news genre. The value is sent back from the Trakt API."
+      "description": "Text for the news genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_none": {
       "default": "None",
-      "description": "Text for the none genre. The value is sent back from the Trakt API."
+      "description": "Text for the none genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_reality": {
       "default": "Reality",
-      "description": "Text for the reality genre. The value is sent back from the Trakt API."
+      "description": "Text for the reality genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_romance": {
       "default": "Romance",
-      "description": "Text for the romance genre. The value is sent back from the Trakt API."
+      "description": "Text for the romance genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_short": {
       "default": "Short",
-      "description": "Text for the short genre. The value is sent back from the Trakt API."
+      "description": "Text for the short genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_soap": {
       "default": "Soap",
-      "description": "Text for the soap genre. The value is sent back from the Trakt API."
+      "description": "Text for the soap genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_special_interest": {
       "default": "Special Interest",
-      "description": "Text for the special interest genre. The value is sent back from the Trakt API."
+      "description": "Text for the special interest genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_sporting_event": {
       "default": "Sporting Event",
-      "description": "Text for the sporting event genre. The value is sent back from the Trakt API."
+      "description": "Text for the sporting event genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_suspense": {
       "default": "Suspense",
-      "description": "Text for the suspense genre. The value is sent back from the Trakt API."
+      "description": "Text for the suspense genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_talk_show": {
       "default": "Talk Show",
-      "description": "Text for the talk show genre. The value is sent back from the Trakt API."
+      "description": "Text for the talk show genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_thriller": {
       "default": "Thriller",
-      "description": "Text for the thriller genre. The value is sent back from the Trakt API."
+      "description": "Text for the thriller genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_war": {
       "default": "War",
-      "description": "Text for the war genre. The value is sent back from the Trakt API."
+      "description": "Text for the war genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_western": {
       "default": "Western",
-      "description": "Text for the western genre. The value is sent back from the Trakt API."
+      "description": "Text for the western genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_anime": {
       "default": "Anime",
-      "description": "Text for the anime genre. The value is sent back from the Trakt API."
+      "description": "Text for the anime genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_superhero": {
       "default": "Superhero",
-      "description": "Text for the superhero genre. The value is sent back from the Trakt API."
+      "description": "Text for the superhero genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_donghua": {
       "default": "Donghua",
-      "description": "Text for the donghua genre. The value is sent back from the Trakt API."
+      "description": "Text for the donghua genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_mini_series": {
       "default": "Mini-Series",
-      "description": "Text for the mini-series genre. The value is sent back from the Trakt API."
+      "description": "Text for the mini-series genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_genre_science_fiction": {
       "default": "Science Fiction",
-      "description": "Text for the science fiction genre. The value is sent back from the Trakt API."
+      "description": "Text for the science fiction genre. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_remove_from_watchlist": {
       "default": "Remove {title} from your Watchlist",
@@ -301,127 +545,251 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "input_placeholder_search": {
       "default": "Search shows & movies...",
-      "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for."
+      "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_join_trakt": {
       "default": "Join Trakt",
-      "description": "Text for the button that takes users to the Trakt login page."
+      "description": "Text for the button that takes users to the Trakt login page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_join_trakt": {
       "default": "Join trakt.tv to keep track of what you're watching",
-      "description": "Aria-label for the button that takes users to the Trakt login page."
+      "description": "Aria-label for the button that takes users to the Trakt login page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_copyright_notice": {
       "default": "All rights reserved.",
-      "description": "Text for the copyright notice shown in the footer."
+      "description": "Text for the copyright notice shown in the footer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_copyright_crafted_by": {
       "default": "Hand crafted around the world",
-      "description": "Additional detail for the copyright notice indicating that the project is developed by a global team."
+      "description": "Additional detail for the copyright notice indicating that the project is developed by a global team.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_join_trakt_for_free": {
       "default": "Join Trakt for Free",
-      "description": "Text for the button that takes users to the Trakt login page."
+      "description": "Text for the button that takes users to the Trakt login page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_landing_discover": {
       "default": "Discover",
-      "description": "Header for the discover step."
+      "description": "Header for the discover step.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_landing_discover": {
       "default": "what's hot and where to stream it.",
-      "description": "Description for the discover step. This should be a short and concise message that indicates what users can discover."
+      "description": "Description for the discover step. This should be a short and concise message that indicates what users can discover.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_landing_track": {
       "default": "Track",
-      "description": "Header for the track step."
+      "description": "Header for the track step.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_landing_track": {
       "default": "all the shows and movies you have ever watched.",
-      "description": "Description for the track step. This should be a short and concise message that indicates what users can track."
+      "description": "Description for the track step. This should be a short and concise message that indicates what users can track.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_landing_share": {
       "default": "Share",
-      "description": "Header for the share step."
+      "description": "Header for the share step.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_landing_share": {
       "default": "comments, ratings and recommendations.",
-      "description": "Description for the share step. This should be a short and concise message that indicates what users can share."
+      "description": "Description for the share step. This should be a short and concise message that indicates what users can share.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_trending": {
       "default": "Trending",
-      "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_recommended": {
       "default": "Recommended",
-      "description": "Title for lists containing recommended movies or shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing recommended movies or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_most_anticipated": {
       "default": "Anticipated",
-      "description": "Title for lists containing anticipated movies or shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing anticipated movies or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_get_vip": {
       "default": "Get",
-      "description": "Text for the button that takes users to the VIP subscription page."
+      "description": "Text for the button that takes users to the VIP subscription page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "badge_text_get_vip": {
       "default": "Get VIP",
-      "description": "Text for the VIP upsell badge. This is shown in a badge and should be as short as possible."
+      "description": "Text for the VIP upsell badge. This is shown in a badge and should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_get_vip": {
       "default": "Unlock VIP features",
-      "description": "Aria-label for the button that takes users to the VIP subscription page."
+      "description": "Aria-label for the button that takes users to the VIP subscription page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "link_label_get_vip": {
       "default": "Unlock VIP features",
-      "description": "Aria-label for the link that takes users to the VIP subscription page."
+      "description": "Aria-label for the link that takes users to the VIP subscription page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_user_profile": {
       "default": "User Profile",
-      "description": "Aria-label for the button that opens the user profile page."
+      "description": "Aria-label for the button that opens the user profile page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_most_popular": {
       "default": "Popular",
-      "description": "Title for lists containing popular movies or shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing popular movies or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_browse_movies": {
       "default": "Movies",
-      "description": "Text for the button that allows users to browse movies."
+      "description": "Text for the button that allows users to browse movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_browse_movies": {
       "default": "Browse Movies",
-      "description": "Aria-label for the button that allows users to browse movies."
+      "description": "Aria-label for the button that allows users to browse movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_movies": {
       "default": "Movies",
-      "description": "Title for the movies page."
+      "description": "Title for the movies page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_browse_shows": {
       "default": "Shows",
-      "description": "Text for the button that allows users to browse shows."
+      "description": "Text for the button that allows users to browse shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_browse_shows": {
       "default": "Browse Shows",
-      "description": "Aria-label for the button that allows users to browse shows."
+      "description": "Aria-label for the button that allows users to browse shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_shows": {
       "default": "Shows",
-      "description": "Title for the shows page."
+      "description": "Title for the shows page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_home": {
       "default": "Home",
-      "description": "Text for the button that takes users back to the homepage."
+      "description": "Text for the button that takes users back to the homepage.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_home": {
       "default": "Go back to the homepage",
-      "description": "Aria-label for the button that takes users back to the homepage."
+      "description": "Aria-label for the button that takes users back to the homepage.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_home": {
       "default": "Home",
-      "description": "Title for the homepage."
+      "description": "Title for the homepage.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_plays": {
       "default": "{number} plays",
@@ -430,131 +798,259 @@
         "number": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_logout": {
       "default": "Logout",
-      "description": "Text for the logout button."
+      "description": "Text for the logout button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_logout": {
       "default": "Logout",
-      "description": "Aria-label for the logout button."
+      "description": "Aria-label for the logout button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_coming_soon": {
       "default": "Coming Soon",
-      "description": "Title for lists containing watchlisted movies that are coming soon. This title should be as short and concise as possible."
+      "description": "Title for lists containing watchlisted movies that are coming soon. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_tba": {
       "default": "TBA",
-      "description": "Text for the tag that indicates that something has no release date yet. This should be as short as possible."
+      "description": "Text for the tag that indicates that something has no release date yet. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_related_movies": {
       "default": "Related Movies",
-      "description": "Title for lists containing related movies. This title should be as short and concise as possible."
+      "description": "Title for lists containing related movies. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_related_shows": {
       "default": "Related Shows",
-      "description": "Title for lists containing related shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing related shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_1": {
       "default": "This user is a mystery, shrouded in enigma... (or maybe just lazy? Who knows, this is the internet.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_2": {
       "default": "Apparently, this user is too busy watching movies to write about themselves. (Fair enough, I can relate.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_3": {
       "default": "This user's profile is a blank canvas, a void of information... (much like my social life. sigh)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_4": {
       "default": "Unravel the secrets of this user's identity... (if you dare)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_5": {
       "default": "What hidden depths lie beneath this empty profile? (The truth is out there...)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_6": {
       "default": "This user is a ghost in the machine, a digital phantom... (or maybe they just forgot to fill this out?)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_7": {
       "default": "Help this user out! Tell them to complete their profile. (They might even reward you with a virtual high five!)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_8": {
       "default": "This profile is begging for attention. Give it some love and tell the user to fill it out.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_9": {
       "default": "Don't be shy! Encourage this user to share their story. (Everyone has a story to tell, even if it's just about their favorite TV show.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_10": {
       "default": "This user is like a character in a David Lynch film: enigmatic, mysterious, and possibly a figment of their own imagination.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_11": {
       "default": "This profile is as empty as a Blockbuster video store on a Friday night. (Remember those? Good times.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_12": {
       "default": "This user is channeling their inner Tyler Durden: rejecting consumerism and embracing the void. (Or maybe they just haven't gotten around to filling this out yet.)",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_13": {
       "default": "A stylized image: A funny illustration of a detective scratching their head in confusion, or a tumbleweed rolling across an empty profile page.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_14": {
       "default": "An interactive element: A button that allows users to send a friendly nudge to the profile owner, encouraging them to complete their profile.",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about_placeholder_15": {
       "default": "A personalized message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalized placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'",
-      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging."
+      "description": "Placeholder text shown when a user's profile has no information about them. This should be humorous and engaging.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_watchlist": {
       "default": "Your watchlist is empty. Add movies or shows to create your cinematic masterpiece.",
-      "description": "Placeholder text shown when there are no movies or shows in the user's watchlist."
+      "description": "Placeholder text shown when there are no movies or shows in the user's watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_watchlist_movies": {
       "default": "Your watchlist is empty. Add movies to create your cinematic masterpiece.",
-      "description": "Placeholder text shown when there are no movies in the user's watchlist."
+      "description": "Placeholder text shown when there are no movies in the user's watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_watchlist_shows": {
       "default": "Your watchlist is empty. Add shows to fuel your imagination.",
-      "description": "Placeholder text shown when there are no shows in the user's watchlist."
+      "description": "Placeholder text shown when there are no shows in the user's watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_upcoming_schedule": {
       "default": "Explore TV series and personalize your schedule.",
-      "description": "Placeholder text shown when there are no upcoming episodes in the schedule."
+      "description": "Placeholder text shown when there are no upcoming episodes in the schedule.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_up_next_empty": {
       "default": "Start watching and add shows to your watchlist.",
-      "description": "Placeholder text shown when there are no shows in the user's up next list."
+      "description": "Placeholder text shown when there are no shows in the user's up next list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_released_movies": {
       "default": "Add movies to your watchlist and never miss a premiere.",
-      "description": "Placeholder text shown when there are no released movies in the user's watchlist."
+      "description": "Placeholder text shown when there are no released movies in the user's watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_unreleased_movies": {
       "default": "Add upcoming movies to your watchlist and stay updated.",
-      "description": "Placeholder text shown when there are no unreleased movies in the user's watchlist."
+      "description": "Placeholder text shown when there are no unreleased movies in the user's watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_find_movies": {
       "default": "Find Movies",
-      "description": "Text for the button that allows users to find movies. This button is shown in some empty lists."
+      "description": "Text for the button that allows users to find movies. This button is shown in some empty lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_find_shows": {
       "default": "Find Shows",
-      "description": "Text for the button that allows users to find shows. This button is shown in some empty lists."
+      "description": "Text for the button that allows users to find shows. This button is shown in some empty lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_show_credits": {
       "default": "Shows",
-      "description": "Title for lists containing shows related to a person's credits. This title should be as short and concise as possible."
+      "description": "Title for lists containing shows related to a person's credits. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_episodes_watched": {
       "default": "{count} episodes watched",
@@ -563,11 +1059,19 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_movie_credits": {
       "default": "Movies",
-      "description": "Title for lists containing movies related to a person's credits. This title should be as short and concise as possible."
+      "description": "Title for lists containing movies related to a person's credits. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_movies_watched": {
       "default": "{count} movies watched",
@@ -576,11 +1080,19 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_details": {
       "default": "Details",
-      "description": "Header for a details section."
+      "description": "Header for a details section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_expand_category": {
       "default": "Expand {category}",
@@ -589,7 +1101,11 @@
         "category": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_more": {
       "default": "{count} more",
@@ -598,51 +1114,99 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_premiered": {
       "default": "Premiered",
-      "description": "Header for the premiered section."
+      "description": "Header for the premiered section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_runtime": {
       "default": "Runtime",
-      "description": "Header for the runtime section."
+      "description": "Header for the runtime section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_country": {
       "default": "Country",
-      "description": "Header for the country section."
+      "description": "Header for the country section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_language": {
       "default": "Language",
-      "description": "Header for the language section."
+      "description": "Header for the language section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_studio": {
       "default": "Studio",
-      "description": "Header for the studio section."
+      "description": "Header for the studio section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_genre": {
       "default": "Genre",
-      "description": "Header for the genre section."
+      "description": "Header for the genre section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_browse_lists": {
       "default": "Lists",
-      "description": "Text for the button that allows users to browse their (watch) lists."
+      "description": "Text for the button that allows users to browse their (watch) lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_browse_lists": {
       "default": "Browse your lists",
-      "description": "Aria-label for the button that allows users to browse their (watch) lists."
+      "description": "Aria-label for the button that allows users to browse their (watch) lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_lists": {
       "default": "Lists",
-      "description": "Title for the lists page."
+      "description": "Title for the lists page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_watchlist_shows": {
       "default": "Your Shows",
-      "description": "Title for lists containing shows in the user's watchlist. This title should be as short and concise as possible."
+      "description": "Title for lists containing shows in the user's watchlist. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_watchlist_movies": {
       "default": "Your Movies",
-      "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible."
+      "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_stream_on": {
       "default": "Watch {title} now",
@@ -651,7 +1215,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo",
@@ -660,319 +1228,635 @@
         "service": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_director": {
       "default": "Director",
-      "description": "Header for the director section."
+      "description": "Header for the director section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_writer": {
       "default": "Writer",
-      "description": "Header for the writer section."
+      "description": "Header for the writer section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_creator": {
       "default": "Creator",
-      "description": "Header for the creator section."
+      "description": "Header for the creator section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_action_director": {
       "default": "Action Director",
-      "description": "Job title for the action director. The value is sent back from the Trakt API."
+      "description": "Job title for the action director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_additional_second_assistant_director": {
       "default": "Additional Second Assistant Director",
-      "description": "Job title for the additional second assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the additional second assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_additional_third_assistant_director": {
       "default": "Additional Third Assistant Director",
-      "description": "Job title for the additional third assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the additional third assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_assistant_director": {
       "default": "Assistant Director",
-      "description": "Job title for the assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_assistant_director_trainee": {
       "default": "Assistant Director Trainee",
-      "description": "Job title for the assistant director trainee. The value is sent back from the Trakt API."
+      "description": "Job title for the assistant director trainee. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_co_director": {
       "default": "Co-Director",
-      "description": "Job title for the co-director. The value is sent back from the Trakt API."
+      "description": "Job title for the co-director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_continuity": {
       "default": "Continuity",
-      "description": "Job title for the continuity supervisor. The value is sent back from the Trakt API."
+      "description": "Job title for the continuity supervisor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_crowd_assistant_director": {
       "default": "Crowd Assistant Director",
-      "description": "Job title for the crowd assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the crowd assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_director": {
       "default": "Director",
-      "description": "Job title for the director. The value is sent back from the Trakt API."
+      "description": "Job title for the director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_field_director": {
       "default": "Field Director",
-      "description": "Job title for the field director. The value is sent back from the Trakt API."
+      "description": "Job title for the field director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_first_assistant_director": {
       "default": "First Assistant Director",
-      "description": "Job title for the first assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the first assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_first_assistant_director_trainee_prep": {
       "default": "First Assistant Director (Prep)",
-      "description": "Job title for the first assistant director trainee (prep). The value is sent back from the Trakt API."
+      "description": "Job title for the first assistant director trainee (prep). The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_first_assistant_director_trainee": {
       "default": "First Assistant Director Trainee",
-      "description": "Job title for the first assistant director trainee. The value is sent back from the Trakt API."
+      "description": "Job title for the first assistant director trainee. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_insert_unit_director": {
       "default": "Insert Unit Director",
-      "description": "Job title for the insert unit director. The value is sent back from the Trakt API."
+      "description": "Job title for the insert unit director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_insert_unit_first_assistant_director": {
       "default": "Insert Unit First Assistant Director",
-      "description": "Job title for the insert unit first assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the insert unit first assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_layout": {
       "default": "Layout",
-      "description": "Job title for the layout artist. The value is sent back from the Trakt API."
+      "description": "Job title for the layout artist. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_other": {
       "default": "Other",
-      "description": "Job title that is used when no specific job is known. The value is sent back from the Trakt API."
+      "description": "Job title that is used when no specific job is known. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_script_coordinator": {
       "default": "Script Coordinator",
-      "description": "Job title for the script coordinator. The value is sent back from the Trakt API."
+      "description": "Job title for the script coordinator. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_script_supervisor": {
       "default": "Script Supervisor",
-      "description": "Job title for the script supervisor. The value is sent back from the Trakt API."
+      "description": "Job title for the script supervisor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_second_assistant_director": {
       "default": "Second Assistant Director",
-      "description": "Job title for the second assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the second assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_second_assistant_director_trainee": {
       "default": "Second Assistant Director Trainee",
-      "description": "Job title for the second assistant director trainee. The value is sent back from the Trakt API."
+      "description": "Job title for the second assistant director trainee. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_second_second_assistant_director": {
       "default": "Second Second Assistant Director",
-      "description": "Job title for the second second assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the second second assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_second_unit_director": {
       "default": "Second Unit Director",
-      "description": "Job title for the second unit director. The value is sent back from the Trakt API."
+      "description": "Job title for the second unit director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_second_unit_first_assistant_director": {
       "default": "Second Unit First Assistant Director",
-      "description": "Job title for the second unit first assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the second unit first assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_series_director": {
       "default": "Series Director",
-      "description": "Job title for the series director. The value is sent back from the Trakt API."
+      "description": "Job title for the series director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_series_guest_director": {
       "default": "Special Guest Director",
-      "description": "Job title for the special guest director. The value is sent back from the Trakt API."
+      "description": "Job title for the special guest director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_stage_director": {
       "default": "Stage Director",
-      "description": "Job title for the stage director. The value is sent back from the Trakt API."
+      "description": "Job title for the stage director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_third_assistant_director": {
       "default": "Third Assistant Director",
-      "description": "Job title for the third assistant director. The value is sent back from the Trakt API."
+      "description": "Job title for the third assistant director. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_adaptation": {
       "default": "Adaptation",
-      "description": "Job title for the person who adapted an existing work of literature. The value is sent back from the Trakt API."
+      "description": "Job title for the person who adapted an existing work of literature. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_author": {
       "default": "Author",
-      "description": "Job title for the author. The value is sent back from the Trakt API."
+      "description": "Job title for the author. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_book": {
       "default": "Book",
-      "description": "Job title for the person who wrote the book a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who wrote the book a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_characters": {
       "default": "Characters",
-      "description": "Job title for the person who wrote the characters. The value is sent back from the Trakt API."
+      "description": "Job title for the person who wrote the characters. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_co_writer": {
       "default": "Co-Writer",
-      "description": "Job title for the co-writer. The value is sent back from the Trakt API."
+      "description": "Job title for the co-writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_comic_book": {
       "default": "Comic Book",
-      "description": "Job title for the person who wrote the comic book a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who wrote the comic book a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_creative_producer": {
       "default": "Creative Producer",
-      "description": "Job title for the creative producer. The value is sent back from the Trakt API."
+      "description": "Job title for the creative producer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_dialogue": {
       "default": "Dialogue",
-      "description": "Job title for the dialogue writer. The value is sent back from the Trakt API."
+      "description": "Job title for the dialogue writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_executive_story_editor": {
       "default": "Executive Story Editor",
-      "description": "Job title for the executive story editor. The value is sent back from the Trakt API."
+      "description": "Job title for the executive story editor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_graphic_novel": {
       "default": "Graphic Novel",
-      "description": "Job title for the who wrote the graphic novel a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the who wrote the graphic novel a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_head_of_story": {
       "default": "Head of Story",
-      "description": "Job title for the head of story. The value is sent back from the Trakt API."
+      "description": "Job title for the head of story. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_idea": {
       "default": "Idea",
-      "description": "Job title for the person who's idea a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who's idea a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_junior_story_editor": {
       "default": "Junior Story Editor",
-      "description": "Job title for the junior story editor. The value is sent back from the Trakt API."
+      "description": "Job title for the junior story editor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_lyricist": {
       "default": "Lyricist",
-      "description": "Job title for the lyricist. The value is sent back from the Trakt API."
+      "description": "Job title for the lyricist. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_musical": {
       "default": "Musical",
-      "description": "Job title for the person who made the musical a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who made the musical a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_novel": {
       "default": "Novel",
-      "description": "Job title for the person who wrote the novel a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who wrote the novel a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_opera": {
       "default": "Opera",
-      "description": "Job title for the person who made the opera a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who made the opera a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_original_concept": {
       "default": "Original Concept",
-      "description": "Job title for the person who came up with the original concept. The value is sent back from the Trakt API."
+      "description": "Job title for the person who came up with the original concept. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_original_film_writer": {
       "default": "Original Film Writer",
-      "description": "Job title for the original film writer. The value is sent back from the Trakt API."
+      "description": "Job title for the original film writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_original_series_creator": {
       "default": "Original Series Creator",
-      "description": "Job title for the original series creator. The value is sent back from the Trakt API."
+      "description": "Job title for the original series creator. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_original_original_story": {
       "default": "Original Story",
-      "description": "Job title for the person who's story a media item is originally based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who's story a media item is originally based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_scenario_writer": {
       "default": "Scenario Writer",
-      "description": "Job title for the scenario writer. The value is sent back from the Trakt API."
+      "description": "Job title for the scenario writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_screenplay": {
       "default": "Screenplay",
-      "description": "Job title for the screenplay writer. The value is sent back from the Trakt API."
+      "description": "Job title for the screenplay writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_screenstory": {
       "default": "Screenstory",
-      "description": "Job title for the screenstory writer. The value is sent back from the Trakt API."
+      "description": "Job title for the screenstory writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_script_consultant": {
       "default": "Script Consultant",
-      "description": "Job title for the script consultant. The value is sent back from the Trakt API."
+      "description": "Job title for the script consultant. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_script_editor": {
       "default": "Script Editor",
-      "description": "Job title for the script editor. The value is sent back from the Trakt API."
+      "description": "Job title for the script editor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_senior_story_editor": {
       "default": "Senior Story Editor",
-      "description": "Job title for the senior story editor. The value is sent back from the Trakt API."
+      "description": "Job title for the senior story editor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_series_composition": {
       "default": "Series Composition",
-      "description": "Job title for the person responsible for the series composition. The value is sent back from the Trakt API."
+      "description": "Job title for the person responsible for the series composition. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_short_story": {
       "default": "Short Story",
-      "description": "Job title for the person who's short story a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who's short story a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_staff_writer": {
       "default": "Staff Writer",
-      "description": "Job title for the staff writer. The value is sent back from the Trakt API."
+      "description": "Job title for the staff writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story": {
       "default": "Story",
-      "description": "Job title for the person who wrote the story. The value is sent back from the Trakt API."
+      "description": "Job title for the person who wrote the story. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story_story_artist": {
       "default": "Story Artist",
-      "description": "Job title for the story artist. The value is sent back from the Trakt API."
+      "description": "Job title for the story artist. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story_story_consultant": {
       "default": "Story Consultant",
-      "description": "Job title for the story consultant. The value is sent back from the Trakt API."
+      "description": "Job title for the story consultant. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story_story_coordinator": {
       "default": "Story Coordinator",
-      "description": "Job title for the story coordinator. The value is sent back from the Trakt API."
+      "description": "Job title for the story coordinator. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story_story_developer": {
       "default": "Story Developer",
-      "description": "Job title for the story developer. The value is sent back from the Trakt API."
+      "description": "Job title for the story developer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story_story_editor": {
       "default": "Story Editor",
-      "description": "Job title for the story editor. The value is sent back from the Trakt API."
+      "description": "Job title for the story editor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story_story_manager": {
       "default": "Story Manager",
-      "description": "Job title for the story manager. The value is sent back from the Trakt API."
+      "description": "Job title for the story manager. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_story_story_supervisor": {
       "default": "Story Supervisor",
-      "description": "Job title for the story supervisor. The value is sent back from the Trakt API."
+      "description": "Job title for the story supervisor. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_storyboard": {
       "default": "Storyboard",
-      "description": "Job title for the person who worked on the storyboard. The value is sent back from the Trakt API."
+      "description": "Job title for the person who worked on the storyboard. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_teleplay": {
       "default": "Teleplay",
-      "description": "Job title for the teleplay writer. The value is sent back from the Trakt API."
+      "description": "Job title for the teleplay writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_texte": {
       "default": "Texte",
-      "description": "Job title for the texte. The value is sent back from the Trakt API."
+      "description": "Job title for the texte. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_theatre_play": {
       "default": "Theatre Play",
-      "description": "Job title for the person who created theatre play a media item is based on. The value is sent back from the Trakt API."
+      "description": "Job title for the person who created theatre play a media item is based on. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_writer": {
       "default": "Writer",
-      "description": "Job title for the writer. The value is sent back from the Trakt API."
+      "description": "Job title for the writer. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_writers_assistant": {
       "default": "Writers' Assistant",
-      "description": "Job title for the writers' assistant. The value is sent back from the Trakt API."
+      "description": "Job title for the writers' assistant. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_writers_production": {
       "default": "Writers' Production",
-      "description": "Job title for the writers' production. The value is sent back from the Trakt API."
+      "description": "Job title for the writers' production. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_job_creator": {
       "default": "Creator",
-      "description": "Job title for the creator. The value is sent back from the Trakt API."
+      "description": "Job title for the creator. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_remove_from_history": {
       "default": "Remove from Watched",
-      "description": "Text for the button that allows users to remove a movie or episode from their watch history."
+      "description": "Text for the button that allows users to remove a movie or episode from their watch history.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_remove_from_watched": {
       "default": "Remove {title} from your Watched list",
@@ -981,7 +1865,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_remove_from_watched": {
       "default": "Are you sure you want to remove {title} from your Watched list? All plays will be removed.",
@@ -990,7 +1878,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_remove_from_history": {
       "default": "Remove this play of {title} from your Watched list",
@@ -999,7 +1891,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_remove_single_watched": {
       "default": "Are you sure you want to remove this play of {title} from your Watched list?",
@@ -1008,11 +1904,19 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_seasons": {
       "default": "Seasons",
-      "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible."
+      "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_season_number": {
       "default": "Season {number}",
@@ -1021,11 +1925,19 @@
         "number": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_season_specials": {
       "default": "Specials",
-      "description": "Text for the specials season of a show. This should be as short and concise as possible."
+      "description": "Text for the specials season of a show. This should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_expand_media_overview": {
       "default": "Expand {title} overview",
@@ -1034,7 +1946,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_season_episode_number": {
       "default": "Season {season} • Episode {number}",
@@ -1046,7 +1962,11 @@
         "number": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_share": {
       "default": "Share {title}",
@@ -1055,63 +1975,123 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_status": {
       "default": "Status",
-      "description": "Header for the status section."
+      "description": "Header for the status section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_released": {
       "default": "Released",
-      "description": "Status value for released media items. The value is sent back from the Trakt API."
+      "description": "Status value for released media items. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_planned": {
       "default": "Planned",
-      "description": "Status value for planned media items. The value is sent back from the Trakt API."
+      "description": "Status value for planned media items. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_post_production": {
       "default": "Post-Production",
-      "description": "Status value for media items that are in post-production. The value is sent back from the Trakt API."
+      "description": "Status value for media items that are in post-production. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_canceled": {
       "default": "Canceled",
-      "description": "Status value for canceled media items. The value is sent back from the Trakt API."
+      "description": "Status value for canceled media items. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_in_production": {
       "default": "In Production",
-      "description": "Status value for media items that are currently in production. The value is sent back from the Trakt API."
+      "description": "Status value for media items that are currently in production. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_rumored": {
       "default": "Rumored",
-      "description": "Status value for rumored media items. The value is sent back from the Trakt API."
+      "description": "Status value for rumored media items. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_ended": {
       "default": "Ended",
-      "description": "Status value for ended shows. The value is sent back from the Trakt API."
+      "description": "Status value for ended shows. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_returning_series": {
       "default": "Returning Series",
-      "description": "Status value for returning shows. The value is sent back from the Trakt API."
+      "description": "Status value for returning shows. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_pilot": {
       "default": "Pilot",
-      "description": "Status value for shows that are in the pilot stage. The value is sent back from the Trakt API."
+      "description": "Status value for shows that are in the pilot stage. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_continuing": {
       "default": "Continuing",
-      "description": "Status value shows that are continuing. The value is sent back from the Trakt API."
+      "description": "Status value shows that are continuing. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_upcoming": {
       "default": "Upcoming",
-      "description": "Status value for upcoming media items. The value is sent back from the Trakt API."
+      "description": "Status value for upcoming media items. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_status_unknown": {
       "default": "Unknown",
-      "description": "Status value for media items with an unknown status. The value is sent back from the Trakt API."
+      "description": "Status value for media items with an unknown status. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_expected_premiere": {
       "default": "Expected Premiere",
-      "description": "Header for the expected premiere section."
+      "description": "Header for the expected premiere section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "image_alt_person_headshot": {
       "default": "Headshot of {person}",
@@ -1120,35 +2100,67 @@
         "person": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_actors": {
       "default": "Actors",
-      "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible."
+      "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_trending_movies": {
       "default": "View all trending movies",
-      "description": "Aria-label for the button that allows users to view all trending movies."
+      "description": "Aria-label for the button that allows users to view all trending movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_trending_shows": {
       "default": "View all trending shows",
-      "description": "Aria-label for the button that allows users to view all trending shows."
+      "description": "Aria-label for the button that allows users to view all trending shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_trending_shows": {
       "default": "Trending Shows",
-      "description": "Title for lists containing trending shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing trending shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_trending_movies": {
       "default": "Trending Movies",
-      "description": "Title for lists containing trending movies. This title should be as short and concise as possible."
+      "description": "Title for lists containing trending movies. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_view_all": {
       "default": "View All",
-      "description": "Text for the button that allows users to drill down on lists to view all items in it."
+      "description": "Text for the button that allows users to drill down on lists to view all items in it.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_full_season": {
       "default": "Full Season",
-      "description": "Text for the tag that indicates the entry is a placeholder for the entire season. This should be as short as possible."
+      "description": "Text for the tag that indicates the entry is a placeholder for the entire season. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_remove_from_watchlist": {
       "default": "Are you sure you want to remove {title} from your Watchlist?",
@@ -1157,59 +2169,115 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_recommended_movies": {
       "default": "View all recommended movies",
-      "description": "Aria-label for the button that allows users to view all recommended movies."
+      "description": "Aria-label for the button that allows users to view all recommended movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_recommended_shows": {
       "default": "View all recommended shows",
-      "description": "Aria-label for the button that allows users to view all recommended shows."
+      "description": "Aria-label for the button that allows users to view all recommended shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_anticipated_movies": {
       "default": "View all anticipated movies",
-      "description": "Aria-label for the button that allows users to view all anticipated movies."
+      "description": "Aria-label for the button that allows users to view all anticipated movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_anticipated_shows": {
       "default": "View all anticipated shows",
-      "description": "Aria-label for the button that allows users to view all anticipated shows."
+      "description": "Aria-label for the button that allows users to view all anticipated shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_anticipated_movies": {
       "default": "Anticipated Movies",
-      "description": "Title for lists containing anticipated movies. This title should be as short and concise as possible."
+      "description": "Title for lists containing anticipated movies. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_anticipated_shows": {
       "default": "Anticipated Shows",
-      "description": "Title for lists containing anticipated shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing anticipated shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_popular_movies": {
       "default": "View all popular movies",
-      "description": "Aria-label for the button that allows users to view all popular movies."
+      "description": "Aria-label for the button that allows users to view all popular movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_popular_shows": {
       "default": "View all popular shows",
-      "description": "Aria-label for the button that allows users to view all popular shows."
+      "description": "Aria-label for the button that allows users to view all popular shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_popular_movies": {
       "default": "Popular Movies",
-      "description": "Title for lists containing popular movies. This title should be as short and concise as possible."
+      "description": "Title for lists containing popular movies. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_popular_shows": {
       "default": "Popular Shows",
-      "description": "Title for lists containing popular shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing popular shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_rate_now": {
       "default": "Rate now",
-      "description": "Header for the section that allows users to rate a movie, show, or episode."
+      "description": "Header for the section that allows users to rate a movie, show, or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_add_to_favorites": {
       "default": "Add to Favorites",
-      "description": "Text for the button that allows users to add a movie or show to their favorites."
+      "description": "Text for the button that allows users to add a movie or show to their favorites.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_remove_from_favorites": {
       "default": "Remove from Favorites",
-      "description": "Text for the button that allows users to remove a movie or show from their favorites."
+      "description": "Text for the button that allows users to remove a movie or show from their favorites.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_add_to_favorites": {
       "default": "Add {title} to your Favorites",
@@ -1218,7 +2286,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_remove_from_favorites": {
       "default": "Remove {title} from your Favorites",
@@ -1227,7 +2299,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_remove_from_favorites": {
       "default": "Are you sure you want to remove {title} from your Favorites?",
@@ -1236,39 +2312,75 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_favorite_movies": {
       "default": "Favorite Movies",
-      "description": "Title for lists containing a user's favorite movies. This title should be as short and concise as possible."
+      "description": "Title for lists containing a user's favorite movies. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_favorite_shows": {
       "default": "Favorite Shows",
-      "description": "Title for lists containing a user's favorite shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing a user's favorite shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_favorite_movies": {
       "default": "Your favorite movies list is empty.",
-      "description": "Placeholder text shown when there are no favorite movies in the user's favorites list."
+      "description": "Placeholder text shown when there are no favorite movies in the user's favorites list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_favorite_shows": {
       "default": "Your favorite shows list is empty.",
-      "description": "Placeholder text shown when there are no favorite shows in the user's favorites list."
+      "description": "Placeholder text shown when there are no favorite shows in the user's favorites list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_stream_on": {
       "default": "Stream on",
-      "description": "Text for the button that allows users to stream a movie or show on an external service."
+      "description": "Text for the button that allows users to stream a movie or show on an external service.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_stream_on": {
       "default": "Stream on",
-      "description": "Header for the section that shows streaming services for a movie or show."
+      "description": "Header for the section that shows streaming services for a movie or show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_streaming": {
       "default": "Availability",
-      "description": "Header for the section that shows streaming service availability for a movie, show, or episode."
+      "description": "Header for the section that shows streaming services for a movie, show, or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_on_demand": {
       "default": "On Demand",
-      "description": "Header for the section that shows on-demand services for a movie, show, or episode."
+      "description": "Header for the section that shows on-demand services for a movie, show, or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_popup_media": {
       "default": "Pop up menu for {title}",
@@ -1277,11 +2389,19 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_popular_lists": {
       "default": "Popular lists",
-      "description": "Title for lists containing popular lists of movies or shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing popular lists of movies or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_popular_lists": {
       "default": "{title} does not appear on any popular lists.",
@@ -1290,11 +2410,19 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_by": {
       "default": "by",
-      "description": "Text used to indicate the creator of a list."
+      "description": "Text used to indicate the creator of a list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "image_alt_user_avatar": {
       "default": "{username}'s avatar",
@@ -1303,7 +2431,11 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "image_alt_media_poster": {
       "default": "{title} poster",
@@ -1312,103 +2444,203 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_comments": {
       "default": "No comments yet.",
-      "description": "Placeholder text shown when there are no comments in a list."
+      "description": "Placeholder text shown when there are no comments in a list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_review_by": {
       "default": "Review by",
-      "description": "Text used to indicate the author of a review."
+      "description": "Text used to indicate the author of a review.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_shout_by": {
       "default": "Shout by",
-      "description": "Text used to indicate the author of a shout."
+      "description": "Text used to indicate the author of a shout.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_deleted_username": {
       "default": "Deleted",
-      "description": "Text used to indicate a deleted user."
+      "description": "Text used to indicate a deleted user.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_social_activity": {
       "default": "Social Activity",
-      "description": "Title for lists containing recently watched items of the profiles the user follows. This title should be as short and concise as possible."
+      "description": "Title for lists containing recently watched items of the profiles the user follows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_social_activity": {
       "default": "View all social activity",
-      "description": "Aria-label for the button that allows users to view all social activity of the profiles they follow."
+      "description": "Aria-label for the button that allows users to view all social activity of the profiles they follow.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "dropdown_label_person_position": {
       "default": "Position",
-      "description": "Aria-label for the dropdown that allows users to filter people by their position in a movie or show."
+      "description": "Aria-label for the dropdown that allows users to filter people by their position in a movie or show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_acting": {
       "default": "Acting",
-      "description": "Value for the person who has an acting position in a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who has an acting position in a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_production": {
       "default": "Production",
-      "description": "Value for the person who worked on the production of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked on the production of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_art": {
       "default": "Art",
-      "description": "Value for the person who worked on the art of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked on the art of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_crew": {
       "default": "Crew",
-      "description": "Value for the person who was a member of the crew of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who was a member of the crew of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_costume___make_up": {
       "default": "Costume & Make-Up",
-      "description": "Value for the person who worked in the costume & make-up department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the costume & make-up department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_directing": {
       "default": "Directing",
-      "description": "Value for the person who worked in the directing department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the directing department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_writing": {
       "default": "Writing",
-      "description": "Value for the person who worked in the writing department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the writing department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_sound": {
       "default": "Sound",
-      "description": "Value for the person who worked in the sound department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the sound department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_camera": {
       "default": "Camera",
-      "description": "Value for the person who worked in the camera department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the camera department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_lighting": {
       "default": "Lighting",
-      "description": "Value for the person who worked in the lighting department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the lighting department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_visual_effects": {
       "default": "Visual Effects",
-      "description": "Value for the person who worked in the visual effects department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the visual effects department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_editing": {
       "default": "Editing",
-      "description": "Value for the person who worked in the editing department of a movie or show. The value is sent back from the Trakt API."
+      "description": "Value for the person who worked in the editing department of a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_creator": {
       "default": "Creator",
-      "description": "Value for the person who (co)created a show. The value is sent back from the Trakt API."
+      "description": "Value for the person who (co)created a show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_position_created_by": {
       "default": "Created By",
-      "description": "Value for the person who created a show. The value is sent back from the Trakt API."
+      "description": "Value for the person who created a show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_personal_lists": {
       "default": "Personal",
-      "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible."
+      "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_collaborative_lists": {
       "default": "Collaborations",
-      "description": "Title for lists containing collaborative lists the user is part of. This title should be as short and concise as possible."
+      "description": "Title for lists containing collaborative lists the user is part of. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_liked_lists": {
       "default": "Liked",
-      "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible."
+      "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_share_movie": {
       "default": "Just discovered {title} - you need to see this! 🎬",
@@ -1417,7 +2649,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_share_show": {
       "default": "Found this awesome show: {title}! 📺",
@@ -1426,7 +2662,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_share_episode": {
       "default": "Just watched {show} S{season}E{episode} - {title}! 🔥",
@@ -1444,7 +2684,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_share_person": {
       "default": "Check out {name} on Trakt! 🎭",
@@ -1453,7 +2697,11 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_share_profile": {
       "default": "Check out {name} on Trakt! 🎭",
@@ -1462,43 +2710,83 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_recently_watched": {
       "default": "Recently Watched",
-      "description": "Title for lists containing recently watched movies or episodes. This title should be as short and concise as possible."
+      "description": "Title for lists containing recently watched movies or episodes. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_recently_watched": {
       "default": "View all recently watched",
-      "description": "Aria-label for the button that allows users to view all recently watched movies or episodes."
+      "description": "Aria-label for the button that allows users to view all recently watched movies or episodes.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_available_now": {
       "default": "Available Now",
-      "description": "Title for lists containing watchlisted movies that are currently available to watch. This title should be as short and concise as possible."
+      "description": "Title for lists containing watchlisted movies that are currently available to watch. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_released_movies": {
       "default": "View all movies available now",
-      "description": "Aria-label for the button that allows users to view all movies that are currently available to watch."
+      "description": "Aria-label for the button that allows users to view all movies that are currently available to watch.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_unreleased_movies": {
       "default": "View all movies coming soon",
-      "description": "Aria-label for the button that allows users to view all movies that are coming soon."
+      "description": "Aria-label for the button that allows users to view all movies that are coming soon.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_preview": {
       "default": "Preview",
-      "description": "Text for the tag that indicates a preview feature. This should be as short as possible."
+      "description": "Text for the tag that indicates a preview feature. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tooltip_text_preview_feature": {
       "default": "This feature's still getting a fresh coat of paint, citizen. We're hammering away at the UX, making it sing like a choir of angels (or at least, function smoothly without inducing existential dread).",
-      "description": "Tooltip text for a preview feature, explaining that it is still being worked on and may not be fully polished yet."
+      "description": "Tooltip text for a preview feature, explaining that it is still being worked on and may not be fully polished yet.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_airs": {
       "default": "Airs",
-      "description": "Header for the section that shows when a show airs."
+      "description": "Header for the section that shows when a show airs.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_aired": {
       "default": "Aired",
-      "description": "Header for the section that shows when a show has aired."
+      "description": "Header for the section that shows when a show has aired.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_drop_show": {
       "default": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
@@ -1507,7 +2795,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_drop_show": {
       "default": "Flag show {title} as dropped",
@@ -1516,11 +2808,19 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_drop_show": {
       "default": "Drop show",
-      "description": "Text for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show."
+      "description": "Text for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_restore_show": {
       "default": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar.",
@@ -1529,7 +2829,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_restore_show": {
       "default": "Restore show {title}",
@@ -1538,11 +2842,19 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_restore_show": {
       "default": "Restore show",
-      "description": "Text for the button that restores a hidden show."
+      "description": "Text for the button that restores a hidden show.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_mark_as_watched_show": {
       "default": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched.",
@@ -1551,7 +2863,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_mark_as_watched_show_until": {
       "default": "Are you sure you want to mark all unseen episodes of {title} as watched until episode {episode}? This will mark {count} episodes as watched.",
@@ -1566,7 +2882,11 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Are you sure you want to mark {count} episodes as watched?",
@@ -1575,11 +2895,19 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "tag_text_watch_count": {
       "default": "Watch count",
-      "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible."
+      "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_media_history": {
       "default": "You haven't watched {title} yet",
@@ -1588,15 +2916,27 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_like_comment": {
       "default": "Like Comment",
-      "description": "Aria-label for the button that allows users to like a comment."
+      "description": "Aria-label for the button that allows users to like a comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_unlike_comment": {
       "default": "Unlike Comment",
-      "description": "Aria-label for the button that allows users to unlike a comment."
+      "description": "Aria-label for the button that allows users to unlike a comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_comment_likes": {
       "default": "{count} likes",
@@ -1605,15 +2945,27 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_close": {
       "default": "Close",
-      "description": "Aria-label for close buttons, like dialogs, sidebars, etc."
+      "description": "Aria-label for close buttons, like dialogs, sidebars, etc.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_comment_replies": {
       "default": "Comment Replies",
-      "description": "Aria-label for the button that opens the comment replies dialog."
+      "description": "Aria-label for the button that opens the comment replies dialog.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_comment_replies": {
       "default": "{count} replies",
@@ -1622,23 +2974,43 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_comments": {
       "default": "Comments",
-      "description": "Title for lists containing comments on a movie, show, or episode. This title should be as short and concise as possible."
+      "description": "Title for lists containing comments on a movie, show, or episode. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "dialog_title_comments": {
       "default": "Comments",
-      "description": "Title for the comments dialog, which lists all current comments."
+      "description": "Title for the comments dialog, which lists all current comments.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "dialog_title_comment": {
       "default": "Comment",
-      "description": "Title for the comment dialog, which is used when a user is adding a new comment."
+      "description": "Title for the comment dialog, which is used when a user is adding a new comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_comment_reply": {
       "default": "Reply",
-      "description": "Text for the button that opens the comment reply dialog."
+      "description": "Text for the button that opens the comment reply dialog.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_comment_reply": {
       "default": "Reply to {user}",
@@ -1647,43 +3019,83 @@
         "user": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "textarea_placeholder_reply": {
       "default": "Reply...",
-      "description": "Placeholder text for the reply textarea in the comment dialog."
+      "description": "Placeholder text for the reply textarea in the comment dialog.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_add_new_comment": {
       "default": "Add a new comment",
-      "description": "Aria-label for the button that opens the comment dialog to add a new comment."
+      "description": "Aria-label for the button that opens the comment dialog to add a new comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "textarea_placeholder_comment": {
       "default": "Comment...",
-      "description": "Placeholder text for the comment textarea when adding a new comment."
+      "description": "Placeholder text for the comment textarea when adding a new comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "switch_label_mark_as_spoiler": {
       "default": "Mark as spoiler",
-      "description": "Aria-label for the switch that allows users to mark a comment as a spoiler."
+      "description": "Aria-label for the switch that allows users to mark a comment as a spoiler.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_spoiler": {
       "default": "Spoiler",
-      "description": "Text used to indicate that something is a spoiler."
+      "description": "Text used to indicate that something is a spoiler.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_close_error": {
       "default": "Close error",
-      "description": "Aria-label for the button that closes an error message."
+      "description": "Aria-label for the button that closes an error message.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_post_reply": {
       "default": "Post reply",
-      "description": "Aria-label for the button that posts a reply to a comment."
+      "description": "Aria-label for the button that posts a reply to a comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Comments must be at least 5 words and in English.",
-      "description": "Error message shown when a comment is invalid due to content length or language."
+      "description": "Error message shown when a comment is invalid due to content length or language.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_error_comment_unknown": {
       "default": "An error occurred while posting your comment. Please try again later.",
-      "description": "Generic error message shown when an unknown error occurs while posting a comment."
+      "description": "Generic error message shown when an unknown error occurs while posting a comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_user_profile": {
       "default": "{username}'s profile",
@@ -1692,11 +3104,19 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_private_profile": {
       "default": "This profile is private",
-      "description": "Header for the section that indicates a user's profile is private."
+      "description": "Header for the section that indicates a user's profile is private.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_private_profile_description": {
       "default": "As if there wasn't enough hidden already. {username}'s secrets remain their own.",
@@ -1705,19 +3125,35 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_original_title": {
       "default": "Original Title",
-      "description": "Header for the section that shows the original title of a movie or show"
+      "description": "Header for the section that shows the original title of a movie or show",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_comments": {
       "default": "View all comments",
-      "description": "Aria-label for the button that allows users to view all comments on a movie, show, or episode."
+      "description": "Aria-label for the button that allows users to view all comments on a movie, show, or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_remove_from_list": {
       "default": "Remove from list",
-      "description": "Text for the button that allows users to remove a movie or show from a list."
+      "description": "Text for the button that allows users to remove a movie or show from a list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_remove_from_list": {
       "default": "Remove {title} from list",
@@ -1726,39 +3162,75 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_service_unavailable": {
       "default": "Trakt service unreachable",
-      "description": "Title for the page shown when the Trakt service is unreachable."
+      "description": "Title for the page shown when the Trakt service is unreachable.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "error_text_service_unavailable": {
       "default": "The connection is... absent. Like a forgotten memory.",
-      "description": "Text shown on the error page when the Trakt service is unreachable."
+      "description": "Text shown on the error page when the Trakt service is unreachable.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "link_text_service_status": {
       "default": "Trakt service status",
-      "description": "Text for the link that leads to the Trakt service status page."
+      "description": "Text for the link that leads to the Trakt service status page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_retry": {
       "default": "Retry",
-      "description": "Text for the retry button. Used for things like error pages and failed authentications."
+      "description": "Text for the retry button. Used for things like error pages and failed authentications.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_retry": {
       "default": "Retry",
-      "description": "Aria-label for the retry button."
+      "description": "Aria-label for the retry button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_community_sentiment": {
       "default": "Community Sentiment",
-      "description": "Header for the section that shows the community sentiment for a movie, show, or episode."
+      "description": "Header for the section that shows the community sentiment for a movie, show, or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_lists": {
       "default": "Lists",
-      "description": "Text for the button that opens the lists dropdown. This is shown when a show or movie isn't on any lists."
+      "description": "Text for the button that opens the lists dropdown. This is shown when a show or movie isn't on any lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_listed": {
       "default": "Listed",
-      "description": "Text for the button that opens the lists dropdown. This is shown when a show or movie is on at least one list."
+      "description": "Text for the button that opens the lists dropdown. This is shown when a show or movie is on at least one list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "dropdown_label_add_remove_from_lists": {
       "default": "Add or remove {title} from lists",
@@ -1767,7 +3239,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_add_to_personal_list": {
       "default": "Add {title} to {list}",
@@ -1779,7 +3255,11 @@
         "list": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_remove_from_personal_list": {
       "default": "Remove {title} from {list}",
@@ -1791,7 +3271,11 @@
         "list": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_remove_from_personal_list": {
       "default": "Are you sure you want to remove {title} from {list}?",
@@ -1803,31 +3287,59 @@
         "list": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "option_text_theme_light": {
       "default": "Light",
-      "description": "Text for the light theme option in the theme selection dropdown."
+      "description": "Text for the light theme option in the theme selection dropdown.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "option_text_theme_dark": {
       "default": "Dark",
-      "description": "Text for the dark theme option in the theme selection dropdown."
+      "description": "Text for the dark theme option in the theme selection dropdown.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "option_text_theme_system": {
       "default": "System",
-      "description": "Text for the system theme option in the theme selection dropdown."
+      "description": "Text for the system theme option in the theme selection dropdown.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_filters": {
       "default": "Filters",
-      "description": "Text for the button that opens the filters panel."
+      "description": "Text for the button that opens the filters panel.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_filters": {
       "default": "Filters",
-      "description": "Aria-label for the button that opens the filters panel."
+      "description": "Aria-label for the button that opens the filters panel.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_reset_filter": {
       "default": "Reset",
-      "description": "Aria-label for the button that resets a single filter to its initial value."
+      "description": "Aria-label for the button that resets a single filter to its initial value.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_search_results_for": {
       "default": "Results for {query}",
@@ -1836,71 +3348,139 @@
         "query": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_type_movie": {
       "default": "Movie",
-      "description": "Value for the movie type. The value is sent back from the Trakt API."
+      "description": "Value for the movie type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_type_show": {
       "default": "Show",
-      "description": "Value for the show type. The value is sent back from the Trakt API."
+      "description": "Value for the show type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_sign_in": {
       "default": "Sign in",
-      "description": "Title for the sign-in page."
+      "description": "Title for the sign-in page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_device_auth_failed": {
       "default": "Something went wrong",
-      "description": "Header for the device authentication failed message."
+      "description": "Header for the device authentication failed message.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_device_auth_try_again": {
       "default": "The activation was denied, expired, or something unforeseeable happened. Please try again.",
-      "description": "Header for the device authentication try again message."
+      "description": "Header for the device authentication try again message.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_device_auth_qr_instruction": {
       "default": "Scan the QR code, or sign in at:",
-      "description": "Header for the device authentication QR code instruction message."
+      "description": "Header for the device authentication QR code instruction message.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_device_auth_code_instruction": {
       "default": "and enter the following code:",
-      "description": "Header for the device authentication code instruction message."
+      "description": "Header for the device authentication code instruction message.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "option_text_all": {
       "default": "All",
-      "description": "Text for the 'All' option in dropdowns or filters."
+      "description": "Text for the 'All' option in dropdowns or filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_filters": {
       "default": "Filters",
-      "description": "Header for the filters panel."
+      "description": "Header for the filters panel.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_ignore_watched": {
       "default": "Ignore Watched",
-      "description": "Header for the filter that allows users to ignore watched items in their lists."
+      "description": "Header for the filter that allows users to ignore watched items in their lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_ignore_watchlisted": {
       "default": "Ignore Watchlisted",
-      "description": "Header for the filter that allows users to ignore watchlisted items in their lists."
+      "description": "Header for the filter that allows users to ignore watchlisted items in their lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "option_text_my_favorites": {
       "default": "My favorites",
-      "description": "Text for the option that filters items to show only those that are in the user's favorites."
+      "description": "Text for the option that filters items to show only those that are in the user's favorites.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "option_text_all_digital_releases": {
       "default": "All digital releases",
-      "description": "Text for the option that filters items to show all digital releases."
+      "description": "Text for the option that filters items to show all digital releases.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "option_text_streaming_now": {
       "default": "Streaming now",
-      "description": "Text for the option that filters items to show only those that are currently streaming."
+      "description": "Text for the option that filters items to show only those that are currently streaming.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_decade": {
       "default": "Decade",
-      "description": "Header for the filter that allows users to select a decade."
+      "description": "Header for the filter that allows users to select a decade.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_ratings": {
       "default": "Ratings",
-      "description": "Header for the filter that allows users to select a rating."
+      "description": "Header for the filter that allows users to select a rating.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_items_in": {
       "default": "View all items in {title}",
@@ -1909,55 +3489,107 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_reset_all_filters": {
       "default": "Reset all",
-      "description": "Text for the button that resets all filters to their initial values."
+      "description": "Text for the button that resets all filters to their initial values.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_reset_all_filters": {
       "default": "Reset all filters",
-      "description": "Aria-label for the button that resets all filters to their initial values."
+      "description": "Aria-label for the button that resets all filters to their initial values.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_video_type_trailer": {
       "default": "Trailer",
-      "description": "Value for the trailer video type. The value is sent back from the Trakt API."
+      "description": "Value for the trailer video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_video_type_clip": {
       "default": "Clip",
-      "description": "Value for the clip video type. The value is sent back from the Trakt API."
+      "description": "Value for the clip video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_video_type_teaser": {
       "default": "Teaser",
-      "description": "Value for the teaser video type. The value is sent back from the Trakt API."
+      "description": "Value for the teaser video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_video_type_featurette": {
       "default": "Featurette",
-      "description": "Value for the featurette video type. The value is sent back from the Trakt API."
+      "description": "Value for the featurette video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_video_type_recap": {
       "default": "Recap",
-      "description": "Value for the recap video type. The value is sent back from the Trakt API."
+      "description": "Value for the recap video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_video_type_behind_the_scenes": {
       "default": "Behind the Scenes",
-      "description": "Value for the behind the scenes video type. The value is sent back from the Trakt API."
+      "description": "Value for the behind the scenes video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "translated_value_video_type_bloopers": {
       "default": "Bloopers",
-      "description": "Value for the bloopers video type. The value is sent back from the Trakt API."
+      "description": "Value for the bloopers video type. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_now_playing": {
       "default": "Now Playing",
-      "description": "Header for the 'now playing' toast that shows the movie or episode the user is currently watching."
+      "description": "Header for the 'now playing' toast that shows the movie or episode the user is currently watching.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_remaining": {
       "default": "remaining",
-      "description": "Text used to indicate the remaining time of a movie or episode."
+      "description": "Text used to indicate the remaining time of a movie or episode.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_checkin": {
       "default": "Check in",
-      "description": "Text for the button that allows users to check in to a movie or episode, indicating that a user is starting to watch it."
+      "description": "Text for the button that allows users to check in to a movie or episode, indicating that a user is starting to watch it.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_checkin": {
       "default": "Check in {title}",
@@ -1966,75 +3598,147 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_cookie_notice": {
       "default": "Trakt uses C🍪🍪KIES in order to enhance your overall experience. You can <a>read more information</a> here.",
-      "description": "Text for the cookie notice shown to users when they first visit the site. This should be a short and concise message that informs users about the use of cookies."
+      "description": "Text for the cookie notice shown to users when they first visit the site. This should be a short and concise message that informs users about the use of cookies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_cookie_accept": {
       "default": "Got it, let's go!",
-      "description": "Text for the button that accepts the cookie notice."
+      "description": "Text for the button that accepts the cookie notice.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_cookie_accept": {
       "default": "Accept the cookies",
-      "description": "Aria-label for the button that accepts the cookie notice."
+      "description": "Aria-label for the button that accepts the cookie notice.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_year_to_date": {
       "default": "Year to date",
-      "description": "Title for the year to date page."
+      "description": "Title for the year to date page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_month_in_review": {
       "default": "Month in review",
-      "description": "Title for the month in review page."
+      "description": "Title for the month in review page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_settings": {
       "default": "Settings",
-      "description": "Title for the settings page."
+      "description": "Title for the settings page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_settings": {
       "default": "Settings",
-      "description": "Header for the settings side bar."
+      "description": "Header for the settings side bar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_settings": {
       "default": "Settings",
-      "description": "Text for the button that opens the settings page."
+      "description": "Text for the button that opens the settings page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_settings": {
       "default": "Settings",
-      "description": "Aria-label for the button that opens the settings page."
+      "description": "Aria-label for the button that opens the settings page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_spoilers": {
       "default": "Spoilers",
-      "description": "Header for the section that allows users to toggle spoilers."
+      "description": "Header for the section that allows users to toggle spoilers.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_show_spoilers": {
       "default": "Show spoilers",
-      "description": "Text for the section that allows users to toggle spoilers."
+      "description": "Text for the section that allows users to toggle spoilers.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "switch_label_spoilers": {
       "default": "Show spoilers",
-      "description": "Aria-label for the switch that allows users to toggle spoilers on or off."
+      "description": "Aria-label for the switch that allows users to toggle spoilers on or off.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_save_filters": {
       "default": "Save",
-      "description": "Text for the button that saves the current filters as the default filters."
+      "description": "Text for the button that saves the current filters as the default filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_save_filters": {
       "default": "Save filters",
-      "description": "Aria-label for the button that saves the current filters as the default filters."
+      "description": "Aria-label for the button that saves the current filters as the default filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_account_locked": {
       "default": "Account locked",
-      "description": "Title for the account locked page."
+      "description": "Title for the account locked page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "error_text_locked_account": {
       "default": "Your account is locked, <a>contact support</a> to resolve this issue.",
-      "description": "Text shown on the account locked page, informing the user that their account is locked and providing a link to contact support."
+      "description": "Text shown on the account locked page, informing the user that their account is locked and providing a link to contact support.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_first_play_this_month": {
       "default": "First play this month",
-      "description": "Text shown to indicate the first movie or show a user has watched this month."
+      "description": "Text shown to indicate the first movie or show a user has watched this month.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_shows_watched": {
       "default": "{count} shows watched",
@@ -2043,11 +3747,19 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_follow": {
       "default": "Follow",
-      "description": "Text for the button that allows users to follow a profile."
+      "description": "Text for the button that allows users to follow a profile.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_follow": {
       "default": "Follow {username}",
@@ -2056,11 +3768,19 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_unfollow": {
       "default": "Unfollow",
-      "description": "Text for the button that allows users to unfollow a profile."
+      "description": "Text for the button that allows users to unfollow a profile.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_unfollow": {
       "default": "Unfollow {username}",
@@ -2069,7 +3789,11 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_unfollow_user": {
       "default": "Are you sure you want to unfollow {username}?",
@@ -2078,47 +3802,91 @@
         "username": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_vip_upsell": {
       "default": "Unlock VIP features to enhance your Trakt experience",
-      "description": "Text shown to users who are not Trakt VIP members, encouraging them to sign up for VIP features."
+      "description": "Text shown to users who are not Trakt VIP members, encouraging them to sign up for VIP features.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_vip_upsell_description": {
       "default": "Want to see your month and year in review? And get access to many other features? Sign up for Trakt VIP.",
-      "description": "Description text shown to users who are not Trakt VIP members, explaining the benefits of signing up for VIP features."
+      "description": "Description text shown to users who are not Trakt VIP members, explaining the benefits of signing up for VIP features.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_following": {
       "default": "Following",
-      "description": "Title for lists containing the profiles the user follows. This title should be as short and concise as possible."
+      "description": "Title for lists containing the profiles the user follows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_followers": {
       "default": "Followers",
-      "description": "Title for lists containing the profiles following the user. This title should be as short and concise as possible."
+      "description": "Title for lists containing the profiles following the user. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_followers": {
       "default": "There is no one here (yet).",
-      "description": "Placeholder text shown when there are no followers for a profile."
+      "description": "Placeholder text shown when there are no followers for a profile.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_following": {
       "default": "There is no one here (yet).",
-      "description": "Placeholder text shown when there are no profiles followed by the user."
+      "description": "Placeholder text shown when there are no profiles followed by the user.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_read_more": {
       "default": "Read more",
-      "description": "Aria-label for the button that allows users to read more of description."
+      "description": "Aria-label for the button that allows users to read more of description.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_add_comment": {
       "default": "Add Comment",
-      "description": "Text for the button that allows users to add a new comment."
+      "description": "Text for the button that allows users to add a new comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_add_comment": {
       "default": "Add Comment",
-      "description": "Aria-label for the button that allows users to add a new comment."
+      "description": "Aria-label for the button that allows users to add a new comment.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "input_prompt_rename_list": {
       "default": "Rename your list",
-      "description": "Message for the prompt that is shown when a user is renaming a list."
+      "description": "Message for the prompt that is shown when a user is renaming a list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_rename_list": {
       "default": "Rename your list {name}",
@@ -2127,95 +3895,187 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_hot": {
       "default": "Hot This Month",
-      "description": "Title for lists containing hot movies or shows this month. This title should be as short and concise as possible."
+      "description": "Title for lists containing hot movies or shows this month. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_hot_movies": {
       "default": "Hot Movies This Month",
-      "description": "Title for lists containing hot movies this month. This title should be as short and concise as possible."
+      "description": "Title for lists containing hot movies this month. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_hot_shows": {
       "default": "Hot Shows This Month",
-      "description": "Title for lists containing hot shows this month. This title should be as short and concise as possible."
+      "description": "Title for lists containing hot shows this month. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_hot_shows": {
       "default": "View all hot shows",
-      "description": "Aria-label for the button that allows users to view all hot shows this month."
+      "description": "Aria-label for the button that allows users to view all hot shows this month.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_hot_movies": {
       "default": "View all hot movies",
-      "description": "Aria-label for the button that allows users to view all hot movies this month."
+      "description": "Aria-label for the button that allows users to view all hot movies this month.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_extras": {
       "default": "Extras",
-      "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible."
+      "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_up_next": {
       "default": "Continue Watching",
-      "description": "Title for the Up Next page, which shows the next movie or episode a user should watch."
+      "description": "Title for the Up Next page, which shows the next movie or episode a user should watch.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_available_now": {
       "default": "Available Now",
-      "description": "Title for the available now page."
+      "description": "Title for the available now page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_coming_soon": {
       "default": "Coming Soon",
-      "description": "Title for the coming soon page."
+      "description": "Title for the coming soon page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_social_activity": {
       "default": "Social activity",
-      "description": "Title for the social activity page."
+      "description": "Title for the social activity page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_trending_shows": {
       "default": "Trending Shows",
-      "description": "Title for the trending shows page."
+      "description": "Title for the trending shows page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_recommended_shows": {
       "default": "Recommended Shows",
-      "description": "Title for the recommended shows page."
+      "description": "Title for the recommended shows page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_popular_shows": {
       "default": "Popular Shows",
-      "description": "Title for the popular shows page."
+      "description": "Title for the popular shows page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_hot_shows": {
       "default": "Hot Shows",
-      "description": "Title for the hot shows page."
+      "description": "Title for the hot shows page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_anticipated_shows": {
       "default": "Anticipated Shows",
-      "description": "Title for the anticipated shows page."
+      "description": "Title for the anticipated shows page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_trending_movies": {
       "default": "Trending movies",
-      "description": "Title for the trending movies page."
+      "description": "Title for the trending movies page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_recommended_movies": {
       "default": "Recommended movies",
-      "description": "Title for the recommended movies page."
+      "description": "Title for the recommended movies page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_popular_movies": {
       "default": "Popular movies",
-      "description": "Title for the popular movies page."
+      "description": "Title for the popular movies page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_hot_movies": {
       "default": "Hot movies",
-      "description": "Title for the hot movies page."
+      "description": "Title for the hot movies page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_anticipated_movies": {
       "default": "Anticipated movies",
-      "description": "Title for the anticipated movies page."
+      "description": "Title for the anticipated movies page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_recently_watched": {
       "default": "Recently Watched",
-      "description": "Title for the recently watched page."
+      "description": "Title for the recently watched page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_profile": {
       "default": "Profile",
-      "description": "Title for the current users profile page."
+      "description": "Title for the current users profile page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_search_results": {
       "default": "Results for {query}",
@@ -2224,27 +4084,51 @@
         "query": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_search": {
       "default": "Search",
-      "description": "Title for the search page."
+      "description": "Title for the search page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "dropdown_label_extras": {
       "default": "Extras",
-      "description": "Aria-label for the dropdown that allows users to filter extras by type, such as trailers, featurettes, etc."
+      "description": "Aria-label for the dropdown that allows users to filter extras by type, such as trailers, featurettes, etc.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_rating_bad": {
       "default": "Rate as bad",
-      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as bad."
+      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as bad.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_rating_good": {
       "default": "Rate as good",
-      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as good."
+      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as good.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_rating_great": {
       "default": "Rate as great",
-      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as great."
+      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as great.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "badge_text_more": {
       "default": "and {count} more",
@@ -2253,7 +4137,11 @@
         "count": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_stop_playing": {
       "default": "Stop the checkin for {title}",
@@ -2262,19 +4150,35 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "link_text_view_profile": {
       "default": "View profile",
-      "description": "Text for the link that allows users to view their profile."
+      "description": "Text for the link that allows users to view their profile.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_search": {
       "default": "Search",
-      "description": "Text for the button that opens the search page."
+      "description": "Text for the button that opens the search page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_search": {
       "default": "Search",
-      "description": "Aria-label for the button that opens the search page."
+      "description": "Aria-label for the button that opens the search page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "image_alt_list_preview_poster": {
       "default": "Poster for an entry in {title}",
@@ -2283,7 +4187,11 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_delete_list": {
       "default": "Delete your list {name}",
@@ -2292,7 +4200,11 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "warning_prompt_delete_list": {
       "default": "Are you sure you want to delete the list {name}?",
@@ -2301,83 +4213,163 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "link_text_vip_list_upsell": {
       "default": "to add more lists",
-      "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip'."
+      "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip'.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_create_list": {
       "default": "List",
-      "description": "Text for the button that allows users to create a new list. The text is shown before a 'plus' icon."
+      "description": "Text for the button that allows users to create a new list. The text is shown before a 'plus' icon.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_create_list": {
       "default": "Create list",
-      "description": "Aria-label for the button that allows users to create a new list."
+      "description": "Aria-label for the button that allows users to create a new list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "input_prompt_create_list": {
       "default": "Enter a name for your list",
-      "description": "Message for the prompt that is shown when a user is creating a new list."
+      "description": "Message for the prompt that is shown when a user is creating a new list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_placeholder_personal_list_empty": {
       "default": "There is nothing in this list yet.",
-      "description": "Placeholder text shown when there are no shows or movies in a user's personal list."
+      "description": "Placeholder text shown when there are no shows or movies in a user's personal list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_profile": {
       "default": "Profile",
-      "description": "Header for the section that allows users to change their profile settings."
+      "description": "Header for the section that allows users to change their profile settings.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_avatar": {
       "default": "Avatar",
-      "description": "Text for the section that allows users to change their avatar."
+      "description": "Text for the section that allows users to change their avatar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_private": {
       "default": "Private",
-      "description": "Text for the section that allows users to toggle privacy."
+      "description": "Text for the section that allows users to toggle privacy.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "switch_label_private": {
       "default": "Is profile private",
-      "description": "Aria-label for the switch that allows users to toggle privacy on or off."
+      "description": "Aria-label for the switch that allows users to toggle privacy on or off.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_display_name": {
       "default": "Display name",
-      "description": "Text for the section that allows users to change their display name."
+      "description": "Text for the section that allows users to change their display name.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_change_display_name": {
       "default": "Change display name",
-      "description": "Aria-label for the button that allows users to change their display name."
+      "description": "Aria-label for the button that allows users to change their display name.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_location": {
       "default": "Location",
-      "description": "Text for the section that allows users to change their location."
+      "description": "Text for the section that allows users to change their location.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_change_location": {
       "default": "Change location",
-      "description": "Aria-label for the button that allows users to change their location."
+      "description": "Aria-label for the button that allows users to change their location.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_about": {
       "default": "About",
-      "description": "Text for the section that allows users to change their 'about me' description."
+      "description": "Text for the section that allows users to change their 'about me' description.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_change_about": {
       "default": "Change about",
-      "description": "Aria-label for the button that allows users to change their 'about me' description."
+      "description": "Aria-label for the button that allows users to change their 'about me' description.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "input_prompt_display_name": {
       "default": "What should your display name be?",
-      "description": "Message for the prompt that allows users to specify their display name."
+      "description": "Message for the prompt that allows users to specify their display name.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "input_prompt_location": {
       "default": "Where are you located?",
-      "description": "Message for the prompt that allows users to specify their location."
+      "description": "Message for the prompt that allows users to specify their location.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "input_prompt_about": {
       "default": "Tell us a bit about yourself.",
-      "description": "Message for the prompt that allows users to specify their 'about me' description."
+      "description": "Message for the prompt that allows users to specify their 'about me' description.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "header_favorite_genres": {
       "default": "Favorite genres",
-      "description": "Header for the section that allows users to change their favorite genres."
+      "description": "Header for the section that allows users to change their favorite genres.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_toggle_genre": {
       "default": "Toggle the {genre} genre",
@@ -2386,7 +4378,11 @@
         "genre": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_share_list": {
       "default": "Check out this \"{name}\" list on Trakt! 📋",
@@ -2395,7 +4391,11 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "text_share_top_list": {
       "default": "Check out {name} on Trakt! 🔥",
@@ -2404,35 +4404,67 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "page_title_watchlist": {
       "default": "Watchlist",
-      "description": "Title for the user's watchlist page."
+      "description": "Title for the user's watchlist page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "list_title_watchlist": {
       "default": "Watchlist",
-      "description": "Title for the user's watchlist."
+      "description": "Title for the user's watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_view_all_watchlist_items": {
       "default": "View all watchlist items",
-      "description": "Aria-label for the button that allows users to view all watchlist items."
+      "description": "Aria-label for the button that allows users to view all watchlist items.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_shows": {
       "default": "Shows",
-      "description": "Text for the button that allows users to toggle shows in the watchlist."
+      "description": "Text for the button that allows users to toggle shows in the watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_shows": {
       "default": "Shows",
-      "description": "Aria-label for the button that allows users to toggle shows in the watchlist."
+      "description": "Aria-label for the button that allows users to toggle shows in the watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_text_movies": {
       "default": "Movies",
-      "description": "Text for the button that allows users to toggle movies in the watchlist."
+      "description": "Text for the button that allows users to toggle movies in the watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "button_label_movies": {
       "default": "Movies",
-      "description": "Aria-label for the button that allows users to toggle movies in the watchlist."
+      "description": "Aria-label for the button that allows users to toggle movies in the watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     },
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · E{episodeNumber}",
@@ -2444,7 +4476,11 @@
         "episodeNumber": {
           "type": "number"
         }
-      }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
