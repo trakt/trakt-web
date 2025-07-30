@@ -1,3 +1,4 @@
+import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { get } from 'svelte/store';
@@ -41,7 +42,7 @@ export function useStoredFilters() {
       },
     );
 
-    globalThis.window.history.replaceState({}, '', page.url);
+    goto(page.url, { replaceState: true });
   };
 
   return {
