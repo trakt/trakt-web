@@ -4558,6 +4558,30 @@
         "android",
         "ios"
       ]
+    },
+    "tag_text_movies": {
+      "default": "Movies",
+      "description": "Text for the tag that indicates a movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_released": {
+      "default": "Released",
+      "description": "Text for the tag that indicates a movie or show has been released.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "tag_text_unreleased": {
+      "default": "Unreleased",
+      "description": "Text for the tag that indicates a movie or show has not been released yet.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

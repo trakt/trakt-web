@@ -5,7 +5,6 @@
 </script>
 
 <WatchList
-  title={m.list_title_available_now()}
   drilldownLabel={m.button_label_view_all_released_movies()}
   defaultType="movie"
   status="released"
