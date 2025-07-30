@@ -49,7 +49,10 @@ export function usePopupHelpers() {
   const addHelpers = (target: HTMLElement) => {
     const newUnderlay = createUnderlay();
     underlay.set(newUnderlay);
-    document.body.appendChild(newUnderlay);
+
+    const underlayTarget = document.querySelector('dialog[open]') ??
+      document.body;
+    underlayTarget.appendChild(newUnderlay);
 
     targetClone.update(clearElement);
 
