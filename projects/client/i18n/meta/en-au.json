@@ -3,7 +3,7 @@
   "meta": {
     "locale": "en-au",
     "direction": "ltr",
-    "guidance": "Embrace Australian culture a little, but not too much.",
+    "guidance": "Stay as close to the original English version as possible, except for Australian specific spelling changes. For example, favorite becomes favourite, and references to Movies and Shows should stay the same.",
     "generator": {
       "inlang": {
         "enabled": true,
@@ -404,7 +404,7 @@
       "default": "A personalised message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalised placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'"
     },
     "list_placeholder_watchlist": {
-      "default": "Your watchlist is looking a bit bare. Time to add some flicks or telly to get things started!"
+      "default": "Your watchlist is empty. Add movies or shows to create your cinematic masterpiece."
     },
     "list_placeholder_watchlist_movies": {
       "default": "Your watchlist is empty, mate. Chuck in a few movies!"
@@ -1899,7 +1899,7 @@
       }
     },
     "text_share_top_list": {
-      "default": "Have a gander at {name} on Trakt! 🔥",
+      "default": "Check out {name} on Trakt! 🔥",
       "variables": {
         "name": {
           "type": "string"
@@ -1907,25 +1907,25 @@
       }
     },
     "page_title_watchlist": {
-      "default": "To Watch"
+      "default": "Watchlist"
     },
     "list_title_watchlist": {
-      "default": "To Watch"
+      "default": "Watchlist"
     },
     "button_label_view_all_watchlist_items": {
-      "default": "View all to-watch items"
+      "default": "View all watchlist items"
     },
     "button_text_shows": {
-      "default": "Series"
+      "default": "Shows"
     },
     "button_label_shows": {
-      "default": "Series"
+      "default": "Shows"
     },
     "button_text_movies": {
-      "default": "Films"
+      "default": "Movies"
     },
     "button_label_movies": {
-      "default": "Films"
+      "default": "Movies"
     },
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · E{episodeNumber}",
