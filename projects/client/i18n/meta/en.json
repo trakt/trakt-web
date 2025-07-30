@@ -360,8 +360,8 @@
       "description": "Title for lists containing recommended movies or shows. This title should be as short and concise as possible."
     },
     "list_title_most_anticipated": {
-      "default": "Most Anticipated",
-      "description": "Title for lists containing most anticipated movies or shows. This title should be as short and concise as possible."
+      "default": "Anticipated",
+      "description": "Title for lists containing anticipated movies or shows. This title should be as short and concise as possible."
     },
     "button_text_get_vip": {
       "default": "Get",
@@ -384,8 +384,8 @@
       "description": "Aria-label for the button that opens the user profile page."
     },
     "list_title_most_popular": {
-      "default": "Most Popular",
-      "description": "Title for lists containing most popular movies or shows. This title should be as short and concise as possible."
+      "default": "Popular",
+      "description": "Title for lists containing popular movies or shows. This title should be as short and concise as possible."
     },
     "button_text_browse_movies": {
       "default": "Movies",
@@ -1263,8 +1263,8 @@
       "description": "Header for the section that shows streaming services for a movie or show."
     },
     "header_streaming": {
-      "default": "Streaming",
-      "description": "Header for the section that shows streaming services for a movie, show, or episode."
+      "default": "Availability",
+      "description": "Header for the section that shows streaming service availability for a movie, show, or episode."
     },
     "header_on_demand": {
       "default": "On Demand",

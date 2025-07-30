@@ -285,7 +285,7 @@
       "default": "Препоръчано"
     },
     "list_title_most_anticipated": {
-      "default": "Най-очаквани"
+      "default": "Очаквани"
     },
     "button_text_get_vip": {
       "default": "Вземи"
@@ -303,7 +303,7 @@
       "default": "Потребителски профил"
     },
     "list_title_most_popular": {
-      "default": "Най-популярни"
+      "default": "Популярни"
     },
     "button_text_browse_movies": {
       "default": "Филми"
@@ -988,7 +988,7 @@
       "default": "Гледай в"
     },
     "header_streaming": {
-      "default": "Стрийминг"
+      "default": "Къде да гледате"
     },
     "header_on_demand": {
       "default": "При поискване"

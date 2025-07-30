@@ -303,7 +303,7 @@
       "default": "Perfil do Usuário"
     },
     "list_title_most_popular": {
-      "default": "Mais Populares"
+      "default": "Populares"
     },
     "button_text_browse_movies": {
       "default": "Filmes"
@@ -988,7 +988,7 @@
       "default": "Assistir em"
     },
     "header_streaming": {
-      "default": "Streaming"
+      "default": "Onde Assistir"
     },
     "header_on_demand": {
       "default": "Sob Demanda"

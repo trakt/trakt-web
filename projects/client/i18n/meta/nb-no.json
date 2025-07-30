@@ -285,7 +285,7 @@
       "default": "Anbefalt"
     },
     "list_title_most_anticipated": {
-      "default": "Mest Forventet"
+      "default": "Forventet"
     },
     "button_text_get_vip": {
       "default": "Få"
@@ -303,7 +303,7 @@
       "default": "Brukerprofil"
     },
     "list_title_most_popular": {
-      "default": "Mest Populære"
+      "default": "Populære"
     },
     "button_text_browse_movies": {
       "default": "Filmer"
@@ -988,7 +988,7 @@
       "default": "Strøm på"
     },
     "header_streaming": {
-      "default": "Strømming"
+      "default": "Hvor du kan se"
     },
     "header_on_demand": {
       "default": "On Demand"

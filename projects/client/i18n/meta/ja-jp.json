@@ -285,7 +285,7 @@
       "default": "おすすめ"
     },
     "list_title_most_anticipated": {
-      "default": "最も期待されている作品"
+      "default": "期待"
     },
     "button_text_get_vip": {
       "default": "取得"
@@ -303,7 +303,7 @@
       "default": "ユーザー情報"
     },
     "list_title_most_popular": {
-      "default": "最も人気のある作品"
+      "default": "人気"
     },
     "button_text_browse_movies": {
       "default": "映画"
@@ -988,7 +988,7 @@
       "default": "ストリーミング"
     },
     "header_streaming": {
-      "default": "ストリーミング"
+      "default": "視聴可能"
     },
     "header_on_demand": {
       "default": "オンデマンド"

@@ -303,7 +303,7 @@
       "default": "Профіль користувача"
     },
     "list_title_most_popular": {
-      "default": "Найпопулярніші"
+      "default": "Популярні"
     },
     "button_text_browse_movies": {
       "default": "Фільми"
@@ -988,7 +988,7 @@
       "default": "Дивитися на"
     },
     "header_streaming": {
-      "default": "Онлайн"
+      "default": "Де дивитися"
     },
     "header_on_demand": {
       "default": "На вимогу"
