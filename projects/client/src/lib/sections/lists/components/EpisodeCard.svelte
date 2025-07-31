@@ -11,8 +11,9 @@
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
-  import { episodeActivityTitle } from "$lib/utils/string/episodeActivityTitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
 
@@ -68,7 +69,10 @@
         </Spoiler>
       </p>
       <p class="trakt-card-subtitle ellipsis small">
-        {episode.season}x{episode.number}
+        {episodeNumberLabel({
+          seasonNumber: episode.season,
+          episodeNumber: episode.number,
+        })}
       </p>
     {/if}
 
@@ -96,7 +100,7 @@
         {#if episode.type === EpisodeComputedType.full_season}
           {seasonLabel(episode.season)}
         {:else}
-          {m.episode_footer_season_episode({
+          {episodeNumberLabel({
             seasonNumber: episode.season,
             episodeNumber: episode.number,
           })}

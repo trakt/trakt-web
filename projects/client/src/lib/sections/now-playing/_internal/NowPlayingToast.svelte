@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useNowPlaying } from "$lib/features/now-playing/useNowPlaying";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
-  import { episodeActivityTitle } from "$lib/utils/string/episodeActivityTitle";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import NowPlayingItemCard from "./NowPlayingItemCard.svelte";
   import ProgressBar from "./ProgressBar.svelte";
   import StopButton from "./StopButton.svelte";
