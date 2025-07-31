@@ -1,6 +1,5 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import GearIcon from "$lib/components/icons/GearIcon.svelte";
+  import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -37,13 +36,7 @@
     </div>
   </Link>
   <RenderFor audience="authenticated" navigation="default">
-    <ActionButton
-      href={UrlBuilder.settings()}
-      label={m.button_label_settings()}
-      style="ghost"
-    >
-      <GearIcon />
-    </ActionButton>
+    <SettingsButton style="ghost" />
   </RenderFor>
 </trakt-profile-button>
 

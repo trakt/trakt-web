@@ -1,8 +1,7 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import GearIcon from "$lib/components/icons/GearIcon.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -52,12 +51,7 @@
           <FollowUserButton {profile} {slug} />
         {/if}
         {#if $isMe}
-          <ActionButton
-            href={UrlBuilder.settings()}
-            label={m.button_label_settings()}
-          >
-            <GearIcon />
-          </ActionButton>
+          <SettingsButton />
         {/if}
       </RenderFor>
       <ShareButton
