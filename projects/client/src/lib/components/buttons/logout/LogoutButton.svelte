@@ -8,12 +8,11 @@
 </script>
 
 <Button
+  size="small"
   onclick={logout}
   label={m.button_label_logout()}
   color="red"
   style="flat"
-  variant="primary"
-  size="small"
   navigationType={DpadNavigationType.Item}
 >
   {m.button_text_logout()}

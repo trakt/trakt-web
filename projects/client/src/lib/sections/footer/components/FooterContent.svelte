@@ -1,11 +1,11 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import FeatureFlagTool from "$lib/features/feature-flag/FeatureFlagTool.svelte";
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import LogoutButton from "./_internal/LogoutButton.svelte";
   import CopyRight from "./CopyRight.svelte";
   import ExternalLinks from "./ExternalLinks.svelte";
   import FooterBar from "./FooterBar.svelte";
@@ -20,7 +20,7 @@
       <FooterLogo />
       {#if isOnProfile}
         <RenderFor navigation="dpad" audience="authenticated">
-          <LogoutButton size="small" />
+          <LogoutButton />
         </RenderFor>
       {/if}
     </FooterBar>
