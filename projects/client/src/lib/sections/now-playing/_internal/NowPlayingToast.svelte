@@ -34,9 +34,18 @@
     <NowPlayingItemCard nowPlaying={$nowPlaying} />
     <div class="trakt-now-playing-content">
       <div class="trakt-now-playing-header">
-        <div class="trakt-now-playing-label">
-          {m.header_now_playing()}
-        </div>
+        {#if $nowPlaying.media.creditCookies.length > 0}
+          <div class="trakt-credit-cookies-label">
+            <span class="meta-info credit-cookies-count">
+              {$nowPlaying.media.creditCookies.length}
+            </span>
+            <span class="meta-info">{m.header_credit_cookies()}</span>
+          </div>
+        {:else}
+          <div class="trakt-now-playing-label">
+            {m.header_now_playing()}
+          </div>
+        {/if}
         <StopButton nowPlaying={$nowPlaying} {title} />
       </div>
       <div class="trakt-now-playing-status">
@@ -175,5 +184,22 @@
     @include for-mobile {
       align-items: center;
     }
+  }
+
+  .trakt-credit-cookies-label,
+  .credit-cookies-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--gap-xxs);
+  }
+
+  .credit-cookies-count {
+    width: var(--ni-20);
+    height: var(--ni-20);
+
+    border-radius: 50%;
+    background-color: color-mix(in srgb, var(--shade-10), transparent 65%);
   }
 </style>
