@@ -4,7 +4,7 @@ import {
 } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_COVER } from '$lib/utils/constants.ts';
-import { episodeActivityTitle } from '$lib/utils/string/episodeActivityTitle.ts';
+import { episodeActivityTitle } from '$lib/utils/intl/episodeActivityTitle.ts';
 import type { MonthToDateDetails } from '../../models/MonthToDateDetails.ts';
 
 function mapToCover(activity: MovieActivityHistory | EpisodeActivityHistory) {

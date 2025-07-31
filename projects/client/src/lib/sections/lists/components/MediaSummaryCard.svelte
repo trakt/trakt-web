@@ -10,6 +10,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
+  import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps, MediaCardProps } from "./MediaCardProps";
 
@@ -21,13 +22,15 @@
     media,
     ...rest
   }: MediaCardProps | EpisodeCardProps = $props();
-</script>
 
-{#snippet footerTag()}
-  {#if rest.type !== "episode"}
-    {@render tag?.()}
-  {/if}
-{/snippet}
+  function footerTag() {
+    if (rest.type === "episode") {
+      return tag;
+    }
+
+    return undefined;
+  }
+</script>
 
 <Card
   variant="transparent"
@@ -77,11 +80,14 @@
     {/if}
   </Link>
 
-  <CardFooter {action} tag={footerTag}>
+  <CardFooter {action} tag={footerTag()}>
     {#if rest.variant === "activity"}
       {#if rest.type === "episode"}
         <p class="trakt-card-title small ellipsis">
-          {rest.episode.season}x{rest.episode.number} - {media.title}
+          {episodeNumberLabel({
+            seasonNumber: rest.episode.season,
+            episodeNumber: rest.episode.number,
+          })} - {media.title}
         </p>
       {:else}
         <p class="trakt-card-title small ellipsis">
@@ -93,7 +99,10 @@
       </p>
     {:else if rest.type === "episode"}
       <p class="trakt-card-title small ellipsis">
-        {rest.episode.season}x{rest.episode.number} - {media.title}
+        {episodeNumberLabel({
+          seasonNumber: rest.episode.season,
+          episodeNumber: rest.episode.number,
+        })} - {media.title}
       </p>
       <p class="trakt-card-subtitle small ellipsis">
         {rest.episode.title}

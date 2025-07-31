@@ -6,7 +6,7 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
-  import { episodeActivityTitle } from "$lib/utils/string/episodeActivityTitle";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   const { episode, show }: { episode: EpisodeEntry; show: ShowEntry } =
