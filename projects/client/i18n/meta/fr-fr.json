@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Inédit(e)"
+    },
+    "header_credit_cookies": {
+      "default": "Crédits supplémentaires"
+    },
+    "text_after_credits": {
+      "default": "Après le générique"
+    },
+    "text_during_credits": {
+      "default": "Pendant le générique"
     }
   }
 }

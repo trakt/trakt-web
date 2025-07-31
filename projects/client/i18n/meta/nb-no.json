@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Uutgitt"
+    },
+    "header_credit_cookies": {
+      "default": "Ettertekstscener"
+    },
+    "text_after_credits": {
+      "default": "Etter rulleteksten"
+    },
+    "text_during_credits": {
+      "default": "Under rulleteksten"
     }
   }
 }

@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Nelansat"
+    },
+    "header_credit_cookies": {
+      "default": "Scene suplimentare"
+    },
+    "text_after_credits": {
+      "default": "După credite"
+    },
+    "text_during_credits": {
+      "default": "În timpul creditelor"
     }
   }
 }

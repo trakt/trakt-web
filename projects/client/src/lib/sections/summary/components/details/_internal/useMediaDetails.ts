@@ -58,6 +58,18 @@ function runtime(entry: MediaEntry | EpisodeEntry) {
   };
 }
 
+function creditCookies(entry: MediaEntry | EpisodeEntry) {
+  return {
+    title: m.header_credit_cookies(),
+    values: entry.creditCookies
+      .map((scene) => {
+        return scene === 'during'
+          ? m.text_during_credits()
+          : m.text_after_credits();
+      }),
+  };
+}
+
 function mainCredits(type: MediaType | 'episode', crew: MediaCrew) {
   const toCrewMemberWithJob = (person: CrewMember) => {
     const jobs = person.jobs.map((job) => toTranslatedValue('job', job));
@@ -142,6 +154,7 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
       episodeAirDate(props.episode),
       runtime(props.episode),
       ...mainCredits(props.type, props.crew),
+      creditCookies(props.episode),
     ];
   }
 
@@ -151,5 +164,6 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
     runtime(props.media),
     ...mainCredits(props.type, props.crew),
     ...metaDetails(props.media, props.studios),
+    creditCookies(props.media),
   ];
 }

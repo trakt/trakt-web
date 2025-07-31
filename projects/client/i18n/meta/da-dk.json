@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Ikke udgivet"
+    },
+    "header_credit_cookies": {
+      "default": "Kreditscener"
+    },
+    "text_after_credits": {
+      "default": "Efter rulleteksterne"
+    },
+    "text_during_credits": {
+      "default": "Under rulleteksterne"
     }
   }
 }

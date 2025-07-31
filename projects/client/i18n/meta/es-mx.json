@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Próximamente"
+    },
+    "header_credit_cookies": {
+      "default": "Escenas post-créditos"
+    },
+    "text_after_credits": {
+      "default": "Después de los créditos"
+    },
+    "text_during_credits": {
+      "default": "Durante los créditos"
     }
   }
 }

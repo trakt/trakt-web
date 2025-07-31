@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Nog niet uitgebracht"
+    },
+    "header_credit_cookies": {
+      "default": "Creditscènes"
+    },
+    "text_after_credits": {
+      "default": "Na de credits"
+    },
+    "text_during_credits": {
+      "default": "Tijdens de credits"
     }
   }
 }

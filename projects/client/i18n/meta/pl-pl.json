@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Niewydany"
+    },
+    "header_credit_cookies": {
+      "default": "Sceny po napisach"
+    },
+    "text_after_credits": {
+      "default": "Po napisach"
+    },
+    "text_during_credits": {
+      "default": "W trakcie napisów"
     }
   }
 }

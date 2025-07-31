@@ -4582,6 +4582,30 @@
         "android",
         "ios"
       ]
+    },
+    "header_credit_cookies": {
+      "default": "Credit Cookies",
+      "description": "Header text for the credit cookies section, to either denote the number of post credits scenes, or the types of post credits scenes.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_after_credits": {
+      "default": "After credits",
+      "description": "Text to denote that a movie or episode has a post credits scene.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_during_credits": {
+      "default": "During credits",
+      "description": "Text to denote that a movie or episode has a scene during the credits.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
