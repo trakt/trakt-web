@@ -51,7 +51,7 @@
       }
     },
     "list_title_up_next": {
-      "default": "Keep Watching"
+      "default": "Continue Watching"
     },
     "tag_text_remaining_episodes": {
       "default": "{count} remaining",
