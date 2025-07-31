@@ -282,7 +282,7 @@
       "default": "Trending"
     },
     "list_title_recommended": {
-      "default": "Reckon You'd Like"
+      "default": "Recommended"
     },
     "list_title_most_anticipated": {
       "default": "Anticipated"
@@ -1703,7 +1703,7 @@
       "default": "Extras"
     },
     "page_title_up_next": {
-      "default": "Keep Watching"
+      "default": "Continue Watching"
     },
     "page_title_available_now": {
       "default": "Available Now"
