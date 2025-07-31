@@ -195,6 +195,7 @@
 
 <MediaWatchHistoryList
   title={m.list_title_recently_watched()}
-  media={episode}
+  {episode}
+  {show}
   type="episode"
 />
