@@ -18,5 +18,5 @@ export function episodeActivityTitle(
       seasonNumber: episode.season,
       episodeNumber: episode.number,
     })
-  }} - ${show.title}`;
+  } - ${show.title}`;
 }
