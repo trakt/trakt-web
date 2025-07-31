@@ -44,6 +44,10 @@
   .trakt-summary-container {
     display: grid;
     gap: var(--gap-xl);
+    @include for-mobile {
+      /* Poster is hidden in mobile layout. */
+      gap: initial;
+    }
     grid-template-columns: minmax(var(--ni-320), 1fr) 2fr 1fr;
     margin: 0 var(--layout-distance-side);
 
