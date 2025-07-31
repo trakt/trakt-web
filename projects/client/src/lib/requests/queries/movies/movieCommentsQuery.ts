@@ -28,7 +28,7 @@ const movieCommentsRequest = (
 
 export const movieCommentsQuery = defineQuery({
   key: 'movieComments',
-  invalidations: [InvalidateAction.Commented('movie')],
+  invalidations: [InvalidateAction.Like, InvalidateAction.Commented('movie')],
   dependencies: (params) => [params.slug, params.limit],
   request: movieCommentsRequest,
   mapper: (response) => response.body.map(mapToMediaComment),
