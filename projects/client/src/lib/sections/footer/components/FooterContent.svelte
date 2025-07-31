@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import FeatureFlagTool from "$lib/features/feature-flag/FeatureFlagTool.svelte";
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import ThemePicker from "$lib/features/theme/components/ThemePicker.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -33,6 +34,7 @@
       </RenderFor>
       <LocalePicker />
       <ThemePicker />
+      <FeatureFlagTool />
     </div>
     <div class="trakt-footer-right">
       <RenderFor audience="all" navigation="default">
