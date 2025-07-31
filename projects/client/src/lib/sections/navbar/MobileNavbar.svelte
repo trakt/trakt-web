@@ -1,19 +1,11 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import * as m from "$lib/features/i18n/messages";
-  import { SEARCH_INPUT_FOCUS_EVENT } from "$lib/features/search/constants";
-  import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-
-  const searchTrigger = () => {
-    globalThis.window.dispatchEvent(new CustomEvent(SEARCH_INPUT_FOCUS_EVENT));
-  };
 </script>
 
 <div class="trakt-mobile-navbar">
@@ -41,14 +33,6 @@
         <WatchlistIcon />
       </div>
     </Link>
-
-    <ActionButton
-      label={m.button_label_search()}
-      style="ghost"
-      onclick={searchTrigger}
-    >
-      <SearchIcon />
-    </ActionButton>
   </RenderFor>
 </div>
 
@@ -56,16 +40,6 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
-
-  @mixin base-button-style {
-    width: var(--ni-60);
-    height: var(--ni-32);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
 
   .trakt-mobile-navbar-spacer,
   .trakt-mobile-navbar {
@@ -90,22 +64,17 @@
     justify-content: center;
     gap: var(--gap-m);
 
-    :global(.trakt-action-button) {
-      padding: 0;
-
-      backdrop-filter: none;
-      background-color: transparent;
-
-      @include base-button-style;
-    }
-
     @include backdrop-filter-blur(8px);
   }
 
   .trakt-mobile-navbar-link {
+    width: var(--ni-80);
     transition: color var(--transition-increment) ease-in-out;
 
-    @include base-button-style;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   :global(.trakt-link.trakt-link-active) {
