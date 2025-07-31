@@ -44,12 +44,13 @@
   .trakt-summary-container {
     display: grid;
     gap: var(--gap-xl);
+    grid-template-columns: minmax(var(--ni-320), 1fr) 2fr 1fr;
+    margin: 0 var(--layout-distance-side);
+
     @include for-mobile {
       /* Poster is hidden in mobile layout. */
       gap: initial;
     }
-    grid-template-columns: minmax(var(--ni-320), 1fr) 2fr 1fr;
-    margin: 0 var(--layout-distance-side);
 
     @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
