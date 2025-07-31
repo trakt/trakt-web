@@ -55,7 +55,7 @@
   </RenderFor>
 
   {#if first}
-    <CoverImageSetter src={first.cover.url.medium} type={first.type} />
+    <CoverImageSetter src={first.cover.url.medium} type="main" />
   {:else}
     <TraktPageCoverSetter />
   {/if}

@@ -94,7 +94,7 @@
       filter: grayscale(0.5);
 
       transition: var(--transition-increment) ease-in-out;
-      transition-property: opacity, width, left;
+      transition-property: filter, opacity, width, left;
 
       @include for-tablet-sm-and-below {
         width: 150%;
@@ -169,11 +169,45 @@
     }
 
     &:not([data-cover-type="main"]) {
+      :global(img) {
+        @include for-tablet-sm-and-below {
+          filter: none;
+        }
+      }
+
       &::after {
         @include backdrop-filter-blur(var(--ni-2));
 
         @include for-tablet-sm-and-below {
           backdrop-filter: unset;
+
+          background: linear-gradient(
+            180deg,
+            var(--color-background) 0%,
+            color-mix(in srgb, var(--color-background) 48%, transparent) 10%,
+            transparent 25%,
+            color-mix(in srgb, var(--color-background) 25%, transparent) 45%,
+            color-mix(in srgb, var(--color-background) 88%, transparent) 60%,
+            var(--color-background) 90%
+          );
+        }
+      }
+
+      &::before {
+        @include for-tablet-sm-and-below {
+          background: none;
+        }
+      }
+
+      &.trakt-background-has-mirror {
+        &::after {
+          background: linear-gradient(
+            180deg,
+            transparent 0%,
+            color-mix(in srgb, var(--color-background) 25%, transparent) 45%,
+            color-mix(in srgb, var(--color-background) 88%, transparent) 60%,
+            var(--color-background) 90%
+          );
         }
       }
     }
