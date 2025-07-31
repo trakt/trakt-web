@@ -1969,6 +1969,15 @@
     },
     "text_zero_reactions": {
       "default": "0 реакцій"
+    },
+    "tag_text_movies": {
+      "default": "Фільми"
+    },
+    "tag_text_released": {
+      "default": "Вийшов"
+    },
+    "tag_text_unreleased": {
+      "default": "Не вийшов"
     }
   }
 }

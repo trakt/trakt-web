@@ -1969,6 +1969,15 @@
     },
     "text_zero_reactions": {
       "default": "0 reações"
+    },
+    "tag_text_movies": {
+      "default": "Filmes"
+    },
+    "tag_text_released": {
+      "default": "Lançado(s)"
+    },
+    "tag_text_unreleased": {
+      "default": "Não lançado(s)"
     }
   }
 }

@@ -1969,6 +1969,15 @@
     },
     "text_zero_reactions": {
       "default": "0 reazioni"
+    },
+    "tag_text_movies": {
+      "default": "Film"
+    },
+    "tag_text_released": {
+      "default": "Uscito"
+    },
+    "tag_text_unreleased": {
+      "default": "Inedito"
     }
   }
 }

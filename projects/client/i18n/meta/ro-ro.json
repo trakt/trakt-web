@@ -1969,6 +1969,15 @@
     },
     "text_zero_reactions": {
       "default": "0 reacții"
+    },
+    "tag_text_movies": {
+      "default": "Filme"
+    },
+    "tag_text_released": {
+      "default": "Lansat"
+    },
+    "tag_text_unreleased": {
+      "default": "Nelansat"
     }
   }
 }
