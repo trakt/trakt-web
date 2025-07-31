@@ -1969,6 +1969,15 @@
     },
     "text_zero_reactions": {
       "default": "0 reaksjoner"
+    },
+    "tag_text_movies": {
+      "default": "Filmer"
+    },
+    "tag_text_released": {
+      "default": "Utgitt"
+    },
+    "tag_text_unreleased": {
+      "default": "Uutgitt"
     }
   }
 }

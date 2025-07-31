@@ -1969,6 +1969,15 @@
     },
     "text_zero_reactions": {
       "default": "0 реакции"
+    },
+    "tag_text_movies": {
+      "default": "Филми"
+    },
+    "tag_text_released": {
+      "default": "Излязъл"
+    },
+    "tag_text_unreleased": {
+      "default": "Предстоящ"
     }
   }
 }

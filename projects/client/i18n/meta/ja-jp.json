@@ -1969,6 +1969,15 @@
     },
     "text_zero_reactions": {
       "default": "0 件のリアクション"
+    },
+    "tag_text_movies": {
+      "default": "映画"
+    },
+    "tag_text_released": {
+      "default": "公開済み"
+    },
+    "tag_text_unreleased": {
+      "default": "未公開"
     }
   }
 }
