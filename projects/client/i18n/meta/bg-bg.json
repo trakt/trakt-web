@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Предстоящ"
+    },
+    "header_credit_cookies": {
+      "default": "Сцени след надписите"
+    },
+    "text_after_credits": {
+      "default": "След надписите"
+    },
+    "text_during_credits": {
+      "default": "По време на надписите"
     }
   }
 }

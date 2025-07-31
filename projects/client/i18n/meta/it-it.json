@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Inedito"
+    },
+    "header_credit_cookies": {
+      "default": "Scene post-crediti"
+    },
+    "text_after_credits": {
+      "default": "Dopo i crediti"
+    },
+    "text_during_credits": {
+      "default": "Durante i crediti"
     }
   }
 }

@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "À venir"
+    },
+    "header_credit_cookies": {
+      "default": "Crédits supplémentaires"
+    },
+    "text_after_credits": {
+      "default": "Après les crédits"
+    },
+    "text_during_credits": {
+      "default": "Pendant les crédits"
     }
   }
 }

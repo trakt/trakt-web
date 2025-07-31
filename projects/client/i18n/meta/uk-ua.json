@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Не вийшов"
+    },
+    "header_credit_cookies": {
+      "default": "Сцени після титрів"
+    },
+    "text_after_credits": {
+      "default": "Після титрів"
+    },
+    "text_during_credits": {
+      "default": "Під час титрів"
     }
   }
 }

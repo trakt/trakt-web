@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Unveröffentlicht"
+    },
+    "header_credit_cookies": {
+      "default": "Credits-Szenen"
+    },
+    "text_after_credits": {
+      "default": "Nach dem Abspann"
+    },
+    "text_during_credits": {
+      "default": "Während des Abspanns"
     }
   }
 }

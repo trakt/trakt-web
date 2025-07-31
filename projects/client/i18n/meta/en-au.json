@@ -1978,6 +1978,15 @@
     },
     "tag_text_unreleased": {
       "default": "Unreleased"
+    },
+    "header_credit_cookies": {
+      "default": "Credit Cookies"
+    },
+    "text_after_credits": {
+      "default": "After credits"
+    },
+    "text_during_credits": {
+      "default": "During credits"
     }
   }
 }
