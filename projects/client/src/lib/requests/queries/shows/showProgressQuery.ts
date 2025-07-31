@@ -13,6 +13,7 @@ import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { ShowProgressResponse } from '@trakt/api';
+import { mapToCreditCookies } from '../../_internal/mapToCreditCookies.ts';
 
 const showProgressRequest = (
   { fetch, slug }: { slug: string } & ApiParams,
@@ -57,6 +58,7 @@ function mapShowProgressResponse(
     genres: [],
     overview: episode.overview ?? '',
     year: new Date(episode.first_aired).getFullYear(),
+    creditCookies: mapToCreditCookies(episode),
   };
 }
 

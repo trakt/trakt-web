@@ -17,6 +17,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'Freedom Day',
     'type': 'series_premiere',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-05-05T01:00:00.000Z'),
@@ -34,6 +35,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': "Holston's Pick",
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-05-12T01:00:00.000Z'),
@@ -51,6 +53,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'Machines',
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-05-19T01:00:00.000Z'),
@@ -68,6 +71,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'Truth',
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-05-26T01:00:00.000Z'),
@@ -85,6 +89,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': "The Janitor's Boy",
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-06-02T01:00:00.000Z'),
@@ -102,6 +107,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'The Relic',
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-06-09T01:00:00.000Z'),
@@ -119,6 +125,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'The Flamekeepers',
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-06-16T01:00:00.000Z'),
@@ -136,6 +143,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'Hanna',
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-06-23T01:00:00.000Z'),
@@ -153,6 +161,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'The Getaway',
     'type': 'standard',
     'year': 2023,
+    'creditCookies': [],
   },
   {
     'airDate': new Date('2023-06-30T01:00:00.000Z'),
@@ -170,5 +179,6 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'title': 'Outside',
     'type': 'season_finale',
     'year': 2023,
+    'creditCookies': [],
   },
 ];
