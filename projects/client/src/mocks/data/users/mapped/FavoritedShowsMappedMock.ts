@@ -48,6 +48,7 @@ export const FavoritedShowsMappedMock: FavoritedEntry[] = [
       'episode': {
         'count': 19,
       },
+      'creditCookies': [],
     },
   },
 ];

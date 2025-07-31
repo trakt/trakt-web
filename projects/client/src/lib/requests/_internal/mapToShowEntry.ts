@@ -53,5 +53,6 @@ export function mapToShowEntry(
     certification: show.certification,
     votes: show.votes ?? 0,
     plexSlug: show.ids.plex?.slug,
+    creditCookies: [],
   };
 }

@@ -1,5 +1,6 @@
 import { genreOptionSchema } from '@trakt/api';
 import { z } from 'zod';
+import { CreditCookieSchema } from './CreditCookieSchema.ts';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 import { MediaStatusSchema } from './MediaStatus.ts';
 import { MediaTypeSchema } from './MediaType.ts';
@@ -41,6 +42,7 @@ export const MediaEntrySchema = z.object({
   votes: z.number(),
   colors: z.tuple([z.string(), z.string()]).optional(),
   plexSlug: z.string().nullish(),
+  creditCookies: CreditCookieSchema.array(),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;

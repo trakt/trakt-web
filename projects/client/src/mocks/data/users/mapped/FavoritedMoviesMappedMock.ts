@@ -45,6 +45,7 @@ export const FavoritedMoviesMappedMock: FavoritedEntry[] = [
       'votes': 0,
       'colors': undefined,
       'plexSlug': undefined,
+      'creditCookies': [],
     },
   },
 ];

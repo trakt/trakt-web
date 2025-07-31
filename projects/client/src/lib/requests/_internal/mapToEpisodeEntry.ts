@@ -4,6 +4,7 @@ import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { CalendarShowListResponse, UpNextResponse } from '@trakt/api';
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
+import { mapToCreditCookies } from './mapToCreditCookies.ts';
 
 type EpisodeResponse =
   | UpNextResponse[0]['progress']['next_episode']
@@ -33,5 +34,6 @@ export function mapToEpisodeEntry(
     },
     airDate,
     year: airDate.getFullYear(),
+    creditCookies: mapToCreditCookies(episode),
   };
 }

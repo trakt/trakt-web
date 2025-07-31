@@ -57,4 +57,5 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'certification': 'R',
   'votes': 65943,
   'plexSlug': 'the-matrix-1999',
+  'creditCookies': [],
 };

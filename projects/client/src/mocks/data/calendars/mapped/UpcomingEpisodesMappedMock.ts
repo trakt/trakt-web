@@ -19,5 +19,6 @@ export const UpcomingEpisodesMappedMock: UpcomingEpisodeEntry[] = [
     'type': 'series_premiere',
     'year': 2023,
     'show': ShowSiloMappedMock,
+    'creditCookies': [],
   },
 ];
