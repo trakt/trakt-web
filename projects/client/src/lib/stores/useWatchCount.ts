@@ -5,7 +5,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { derived } from 'svelte/store';
 
-type UseWatchCountProps = {
+export type UseWatchCountProps = {
   type: MediaType;
   media: MediaEntry;
 } | {
