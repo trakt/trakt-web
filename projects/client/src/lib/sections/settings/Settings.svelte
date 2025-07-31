@@ -1,8 +1,8 @@
 <script lang="ts">
+  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Genres from "./_internal/Genres.svelte";
-  import LogoutButton from "./_internal/LogoutButton.svelte";
   import Profile from "./_internal/Profile.svelte";
   import Spoilers from "./_internal/Spoilers.svelte";
 </script>
