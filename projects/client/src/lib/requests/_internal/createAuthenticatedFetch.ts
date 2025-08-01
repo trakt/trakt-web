@@ -28,8 +28,7 @@ export function createAuthenticatedFetch<
     input: Parameters<T>[0],
     init?: Parameters<T>[1],
   ): Promise<Response> {
-    const modifiedInit = { ...init } as Parameters<T>[1];
-    const headers = new Headers(modifiedInit?.headers || {});
+    const headers = new Headers(init?.headers || {});
 
     try {
       const { value: token, expiresAt } = getToken();
@@ -39,8 +38,13 @@ export function createAuthenticatedFetch<
         headers.set('Authorization', `Bearer ${token}`);
 
         const isNitro = url.includes('/sync/progress/up_next_nitro');
+        const isSearch = url.includes('/search');
+
+        const isHDCall = isNitro || isSearch;
+
         const isApiCall = url.includes('apiz.trakt.tv');
-        if (isNitro && isApiCall) {
+
+        if (isHDCall && isApiCall) {
           input = input.toString().replaceAll('apiz.trakt.tv', 'hd.trakt.tv')
             .toString();
         }
@@ -49,7 +53,7 @@ export function createAuthenticatedFetch<
       return baseFetch(
         input,
         {
-          ...modifiedInit,
+          ...init,
           headers,
         } as Parameters<T>[1],
       ).then((response) => {
