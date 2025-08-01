@@ -5,6 +5,7 @@
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
+  import { useUser } from "$lib/features/auth/stores/useUser";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
@@ -75,6 +76,12 @@
     style: "normal",
     allowRewatch: $watchCount > 0,
   });
+
+  const { plexCollection } = useUser();
+  $inspect($plexCollection);
+
+  const isInCollection = $derived($plexCollection.movieIds.includes(media.id));
+  $inspect(isInCollection);
 </script>
 
 {#snippet mediaActions()}

@@ -26,6 +26,9 @@
 
   const plexLink = $derived(buildPlexLink(target));
   const handler = $derived(usePlexHandler(plexLink));
+
+  // TODO feature flag
+  // TODO rename to 'watch on'?
 </script>
 
 {#if style === "normal"}
