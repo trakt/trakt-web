@@ -14,6 +14,10 @@ import {
   type UserNetwork,
 } from '../queries/currentUserNetworkQuery.ts';
 import {
+  currentUserPlexCollectionQuery,
+  type UserPlexCollection,
+} from '../queries/currentUserPlexCollectionQuery.ts';
+import {
   currentUserRatingsQuery,
   type UserRatings,
 } from '../queries/currentUserRatingsQuery.ts';
@@ -105,6 +109,11 @@ export function useUser() {
       network: readable<UserNetwork>({
         following: [],
       }),
+      plexCollection: readable<UserPlexCollection>({
+        movieIds: [],
+        episodeIds: [],
+        showIds: [],
+      }),
     };
   }
 
@@ -115,6 +124,9 @@ export function useUser() {
   const commentLikesQueryResponse = useQuery(currentUserCommentLikesQuery());
   const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
   const followingQueryResponse = useQuery(currentUserNetworkQuery());
+  const plexCollectionQueryResponse = useQuery(
+    currentUserPlexCollectionQuery(),
+  );
 
   const user = derived(
     userQueryResponse,
@@ -144,6 +156,10 @@ export function useUser() {
     followingQueryResponse,
     ($network) => definedData($network.data),
   );
+  const plexCollection = derived(
+    plexCollectionQueryResponse,
+    ($collection) => definedData($collection.data),
+  );
 
   return {
     user,
@@ -153,5 +169,6 @@ export function useUser() {
     likes,
     favorites,
     network,
+    plexCollection,
   };
 }
