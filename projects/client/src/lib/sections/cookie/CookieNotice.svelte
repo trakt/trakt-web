@@ -76,11 +76,11 @@
     width: min(var(--ni-480), 85%);
     background-color: var(--color-cookie-background);
     box-shadow:
-      0px 280px 78px 0px color-mix(in srgb, var(--color-shadow) 0%, transparent),
-      0px 179px 72px 0px color-mix(in srgb, var(--color-shadow) 2%, transparent),
-      0px 101px 60px 0px color-mix(in srgb, var(--color-shadow) 8%, transparent),
-      0px 45px 45px 0px color-mix(in srgb, var(--color-shadow) 14%, transparent),
-      0px 11px 25px 0px color-mix(in srgb, var(--color-shadow) 16%, transparent);
+      0px 280px 78px 0px transparent,
+      0px 179px 72px 0px var(--cm-shadow-2),
+      0px 101px 60px 0px var(--cm-shadow-8),
+      0px 45px 45px 0px var(--cm-shadow-14),
+      0px 11px 25px 0px var(--cm-shadow-16);
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: bottom, right, width;
@@ -122,11 +122,7 @@
     right: 0;
     bottom: 0;
 
-    background-color: color-mix(
-      in srgb,
-      var(--color-cookie-background) 70%,
-      transparent 30%
-    );
+    background-color: var(--cm-background-cookie-notice);
 
     @include backdrop-filter-blur(var(--ni-8));
   }

@@ -68,11 +68,7 @@
     }
 
     :global(.trakt-editable-image.dragover img) {
-      outline-color: color-mix(
-        in srgb,
-        var(--color-border-avatar) 25%,
-        var(--purple-600)
-      );
+      outline-color: var(--purple-500);
     }
 
     :global(img) {

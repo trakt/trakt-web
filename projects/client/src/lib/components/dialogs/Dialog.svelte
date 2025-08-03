@@ -71,11 +71,7 @@
     max-width: 100dvw;
     max-height: var(--dialog-height);
 
-    background: color-mix(
-      in srgb,
-      var(--color-background) 88%,
-      transparent 12%
-    );
+    background: var(--cm-background-88);
     opacity: 0;
 
     @include backdrop-filter-blur(var(--ni-8));

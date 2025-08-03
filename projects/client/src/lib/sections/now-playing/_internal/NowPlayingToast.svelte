@@ -102,7 +102,7 @@
     gap: var(--now-playing-gap);
 
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 25%, transparent 75%);
+      var(--cm-shadow-25);
 
     background-color: var(--color-now-playing-background);
     border: var(--border-thickness-xxs) solid var(--color-now-playing-border);
@@ -200,6 +200,6 @@
     height: var(--ni-20);
 
     border-radius: 50%;
-    background-color: color-mix(in srgb, var(--shade-10), transparent 65%);
+    background-color: rgba(254, 254, 254, 0.35);
   }
 </style>

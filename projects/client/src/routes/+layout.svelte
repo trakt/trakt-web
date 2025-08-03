@@ -218,20 +218,12 @@
     :global(body),
     :global(html) {
       &::-webkit-scrollbar-thumb {
-        background-color: color-mix(
-          in srgb,
-          var(--color-foreground) 30%,
-          transparent 70%
-        );
+        background-color: var(--cm-color-foreground-30);
       }
     }
 
     :global(::-webkit-scrollbar-thumb) {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 0%,
-        transparent 100%
-      );
+      background-color: transparent;
       border-radius: var(--border-radius-xs);
       opacity: 0;
 
@@ -239,19 +231,11 @@
     }
 
     :global(:hover::-webkit-scrollbar-thumb) {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 50%,
-        transparent 50%
-      );
+      background-color: var(--cm-color-foreground-50);
     }
 
     :global(::-webkit-scrollbar-thumb:hover) {
-      background-color: color-mix(
-        in srgb,
-        var(--color-foreground) 100%,
-        transparent 0%
-      );
+      background-color: var(--color-foreground);
     }
   }
 

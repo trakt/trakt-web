@@ -18,11 +18,7 @@
 
   --color-text-progress-tag: var(--shade-10);
   --color-background-progress-tag: var(--purple-700);
-  --color-background-cover-tag: color-mix(
-    in srgb,
-    var(--shade-700) 75%,
-    transparent
-  );
+  --color-background-cover-tag: var(--cm-background-cover-tag);
 
   --color-text-watch-count-tag: var(--shade-10);
   --color-background-watch-count-tag: var(--purple-500);

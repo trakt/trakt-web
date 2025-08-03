@@ -123,11 +123,7 @@
       );
 
       .trakt-search-input {
-        background: color-mix(
-          in srgb,
-          var(--color-background-navbar) 75%,
-          transparent 25%
-        );
+        background: var(--cm-background-search-input);
         outline: var(--border-thickness-xs) solid var(--color-border);
 
         @include for-mobile {
@@ -177,11 +173,7 @@
       box-sizing: border-box;
 
       border-radius: var(--border-radius-s);
-      background: color-mix(
-        in srgb,
-        var(--color-background) 75%,
-        transparent 25%
-      );
+      background: var(--cm-background-25);
 
       transition: var(--transition-increment) ease-in-out;
       transition-property:

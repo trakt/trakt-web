@@ -72,3 +72,11 @@
     backdrop-filter: url('#trakt-firefox-blur')
   }
 }
+
+@mixin color-mix-variable-with-fallback($variable, $value, $fallback) {
+  #{$variable}: $value;
+
+  @supports not (color: color-mix(in srgb, #000 50%, transparent)) {
+    #{$variable}: $fallback;
+  }
+}

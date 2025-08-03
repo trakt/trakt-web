@@ -17,9 +17,7 @@
    * Navbar
    */
   --color-background-navbar-base: var(--shade-50);
-  --color-background-navbar: color-mix(in srgb,
-      var(--color-background-navbar-base) 80%,
-      transparent);
+  --color-background-navbar: var(--cm-background-navbar-90);
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-300);
 
@@ -29,38 +27,17 @@
   --color-card-background: var(--shade-20);
   --color-official-list-background: var(--purple-200);
   --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
-  --card-shadow: linear-gradient(180deg,
-      transparent 0%,
-      color-mix(in srgb,
-        var(--color-card-background) 7%,
-        color-mix(in srgb, var(--color-shadow) 7%, transparent 93%)) 13%,
-      color-mix(in srgb,
-        var(--color-card-background) 18%,
-        color-mix(in srgb, var(--color-shadow) 18%, transparent 82%)) 24%,
-      color-mix(in srgb,
-        var(--color-card-background) 29%,
-        color-mix(in srgb, var(--color-shadow) 29%, transparent 71%)) 34%,
-      color-mix(in srgb,
-        var(--color-card-background) 43%,
-        color-mix(in srgb, var(--color-shadow) 43%, transparent 57%)) 46%,
-      color-mix(in srgb,
-        var(--color-card-background) 62%,
-        color-mix(in srgb, var(--color-shadow) 62%, transparent 38%)) 63%,
-      color-mix(in srgb,
-        var(--color-card-background) 86%,
-        color-mix(in srgb, var(--color-shadow) 86%, transparent 14%)) 86%,
-      var(--color-card-background) 100%);
 
   /*
    * List
    */
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-shadow) 86%, transparent) 0%,
-      color-mix(in srgb, var(--color-shadow) 62%, transparent) 24%,
-      color-mix(in srgb, var(--color-shadow) 43%, transparent) 34%,
-      color-mix(in srgb, var(--color-shadow) 29%, transparent) 46%,
-      color-mix(in srgb, var(--color-shadow) 18%, transparent) 63%,
-      color-mix(in srgb, var(--color-shadow) 7%, transparent) 86%,
+      var(--cm-shadow-86) 0%,
+      var(--cm-shadow-62) 24%,
+      var(--cm-shadow-43) 34%,
+      var(--cm-shadow-29) 46%,
+      var(--cm-shadow-18) 63%,
+      var(--cm-shadow-7) 86%,
       transparent 100%);
 
   /*
@@ -77,9 +54,7 @@
   /*
    * Navbar
    */
-  --color-background-mobile-navbar: color-mix(in srgb,
-      var(--color-background) 90%,
-      transparent 10%);
+  --color-background-mobile-navbar: var(--cm-background-90);
 
   /*
    * Tooltip
@@ -106,7 +81,8 @@
   /**
    * Now playing
    */
-  --color-now-playing-background: color-mix(in srgb, var(--shade-100) 70%, transparent 30%);
+  --color-now-playing-background-base: var(--shade-100);
+  --color-now-playing-background: var(--cm-background-now-playing);
   --color-now-playing-border: var(--shade-200);
   --color-now-playing-progress-bar-background: var(--shade-300);
   --color-now-playing-progress-bar-progress: var(--shade-500);
@@ -142,9 +118,7 @@
    * Navbar
    */
   --color-background-navbar-base: var(--shade-920);
-  --color-background-navbar: color-mix(in srgb,
-      var(--color-background-navbar-base) 90%,
-      transparent 10%);
+  --color-background-navbar: var(--cm-background-navbar-90);
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
 
@@ -154,24 +128,15 @@
   --color-card-background: var(--shade-920);
   --color-official-list-background: var(--purple-800);
   --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
-  --card-shadow: linear-gradient(180deg,
-      transparent 0%,
-      color-mix(in srgb, var(--color-card-background) 7%, transparent 93%) 13%,
-      color-mix(in srgb, var(--color-card-background) 18%, transparent 82%) 24%,
-      color-mix(in srgb, var(--color-card-background) 29%, transparent 71%) 34%,
-      color-mix(in srgb, var(--color-card-background) 43%, transparent 57%) 46%,
-      color-mix(in srgb, var(--color-card-background) 62%, transparent 38%) 63%,
-      color-mix(in srgb, var(--color-card-background) 86%, transparent 14%) 86%,
-      var(--color-card-background) 100%);
 
   /*
    * List
    */
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-shadow) 90%, transparent) 0%,
-      color-mix(in srgb, var(--color-shadow) 45%, transparent) 32%,
-      color-mix(in srgb, var(--color-shadow) 30%, transparent) 61%,
-      color-mix(in srgb, var(--color-shadow) 25%, transparent) 80%,
+      var(--cm-shadow-90) 0%,
+      var(--cm-shadow-45) 32%,
+      var(--cm-shadow-30) 61%,
+      var(--cm-shadow-25) 80%,
       transparent 100%);
 
   /*
@@ -214,7 +179,8 @@
   /**
    * Now playing
    */
-  --color-now-playing-background: color-mix(in srgb, var(--shade-900) 70%, transparent 30%);
+  --color-now-playing-background-base: var(--shade-900);
+  --color-now-playing-background: var(--cm-background-now-playing);
   --color-now-playing-border: var(--shade-700);
   --color-now-playing-progress-bar-background: var(--shade-500);
   --color-now-playing-progress-bar-progress: var(--shade-200);

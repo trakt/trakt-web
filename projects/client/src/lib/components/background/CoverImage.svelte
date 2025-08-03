@@ -59,16 +59,6 @@
 
   .trakt-background-cover-image-mirrored,
   .trakt-background-cover-image {
-    --trakt-cover-primary-color-transparent: color-mix(
-      in srgb,
-      color-mix(
-          in srgb,
-          var(--color-background) 25%,
-          var(--trakt-cover-primary-color)
-        )
-        50%,
-      transparent
-    );
     z-index: var(--layer-background);
     position: absolute;
     max-height: 100dvh;
@@ -76,6 +66,21 @@
 
     width: 100%;
     background: var(--shade-900);
+
+    @include color-mix-variable-with-fallback(
+      --trakt-cover-primary-color-transparent,
+      color-mix(
+        in srgb,
+        color-mix(
+            in srgb,
+            var(--color-background) 25%,
+            var(--trakt-cover-primary-color)
+          )
+          50%,
+        transparent
+      ),
+      var(--cm-background-25)
+    );
 
     &[data-cover-type="main"] {
       --color-transparent-background: transparent;
@@ -146,14 +151,13 @@
         var(--trakt-cover-primary-color-transparent) 50%,
         transparent 80%
       );
-
       pointer-events: none;
 
       @include for-tablet-sm-and-below {
         background: linear-gradient(
           180deg,
-          color-mix(in srgb, var(--color-background) 15%, transparent) 0%,
-          color-mix(in srgb, var(--color-background) 50%, transparent) 30%,
+          var(--cm-background-15) 0%,
+          var(--cm-background-50) 30%,
           var(--color-background) 100%
         );
       }
@@ -163,8 +167,8 @@
       background: linear-gradient(
         180deg,
         transparent 0%,
-        color-mix(in srgb, var(--color-background) 95%, transparent) 65%,
-        color-mix(in srgb, var(--color-background) 100%, transparent) 100%
+        var(--cm-background-95) 65%,
+        var(--color-background) 100%
       );
     }
 
@@ -184,10 +188,10 @@
           background: linear-gradient(
             180deg,
             var(--color-background) 0%,
-            color-mix(in srgb, var(--color-background) 48%, transparent) 10%,
+            var(--cm-background-48) 10%,
             transparent 25%,
-            color-mix(in srgb, var(--color-background) 25%, transparent) 45%,
-            color-mix(in srgb, var(--color-background) 88%, transparent) 60%,
+            var(--cm-background-25) 45%,
+            var(--cm-background-88) 60%,
             var(--color-background) 90%
           );
         }
@@ -204,8 +208,8 @@
           background: linear-gradient(
             180deg,
             transparent 0%,
-            color-mix(in srgb, var(--color-background) 25%, transparent) 45%,
-            color-mix(in srgb, var(--color-background) 88%, transparent) 60%,
+            var(--cm-background-25) 45%,
+            var(--cm-background-88) 60%,
             var(--color-background) 90%
           );
         }

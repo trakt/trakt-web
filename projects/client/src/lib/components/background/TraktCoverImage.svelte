@@ -45,13 +45,13 @@
 
         background: linear-gradient(
           180deg,
-          color-mix(in srgb, var(--color-background) 48%, transparent 52%) 0%,
-          color-mix(in srgb, var(--color-background) 51%, transparent 49%) 13%,
-          color-mix(in srgb, var(--color-background) 57%, transparent 43%) 25%,
-          color-mix(in srgb, var(--color-background) 62%, transparent 38%) 34%,
-          color-mix(in srgb, var(--color-background) 70%, transparent 30%) 46%,
-          color-mix(in srgb, var(--color-background) 80%, transparent 20%) 64%,
-          color-mix(in srgb, var(--color-background) 95%, transparent 5%) 85%,
+          var(--cm-background-48) 0%,
+          var(--cm-background-50) 13%,
+          var(--cm-background-57) 25%,
+          var(--cm-background-62) 34%,
+          var(--cm-background-70) 46%,
+          var(--cm-background-80) 64%,
+          var(--cm-background-95) 85%,
           var(--color-background) 100%
         );
 

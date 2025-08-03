@@ -74,7 +74,7 @@
       align-items: center;
 
       padding: 0 var(--ni-4);
-      background: color-mix(in srgb, var(--color-background) 50%, transparent);
+      background: var(--cm-background-50);
       border-radius: var(--border-radius-m);
       overflow: hidden;
 

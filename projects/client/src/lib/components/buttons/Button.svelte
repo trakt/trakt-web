@@ -169,8 +169,8 @@
       white 65%
     );
 
-    --color-highlight: color-mix(in srgb, white 52%, transparent 48%);
-    --color-shadow: color-mix(in srgb, black 32%, transparent 68%);
+    --color-highlight: rgba(255, 255, 255, 0.52);
+    --color-shadow: rgba(0, 0, 0, 0.32);
 
     all: unset;
     display: flex;
