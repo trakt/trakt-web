@@ -99,7 +99,7 @@
     height: var(--button-height);
 
     box-shadow: var(--ni-0) var(--ni-4) var(--ni-4) var(--ni-0)
-      color-mix(in srgb, var(--shade-940) 24%, transparent 76%) inset;
+      var(--cm-shadow-25) inset;
 
     box-sizing: border-box;
     padding: var(--ni-4);
@@ -215,12 +215,9 @@
         border-radius: 50%;
 
         box-shadow:
-          var(--ni-1) var(--ni-neg-2) var(--ni-4) var(--ni-0)
-            color-mix(in srgb, black 25%, transparent 75%) inset,
-          var(--ni-0) var(--ni-1) var(--ni-2) var(--ni-0)
-            color-mix(in srgb, white 44%, transparent 56%) inset,
-          var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0)
-            color-mix(in srgb, black 16%, transparent 84%);
+          0px -2px 4px 0px rgba(0, 0, 0, 0.25) inset,
+          0px 1px 2px 0px rgba(255, 255, 255, 0.44) inset,
+          var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0) rgba(0, 0, 0, 0.16);
       }
     }
   }

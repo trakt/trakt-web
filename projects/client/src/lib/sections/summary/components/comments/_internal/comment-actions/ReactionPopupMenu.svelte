@@ -128,7 +128,7 @@
     padding: var(--ni-8);
 
     box-shadow: var(--ni-0) var(--ni-4) var(--ni-8) var(--ni-4)
-      color-mix(in srgb, var(--color-shadow) 25%, transparent 75%);
+      var(--cm-shadow-25);
 
     :global(.trakt-action-button) {
       transition: var(--transition-increment) ease-in-out;

@@ -133,8 +133,7 @@
   }
 
   .trakt-navbar-scroll:not(.trakt-navbar-pwa) {
-    box-shadow: 0px 24px 64px 0px
-      color-mix(in srgb, var(--color-shadow) 32%, transparent 68%);
+    box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
 
     color: var(--color-foreground-navbar);
 
@@ -148,11 +147,11 @@
   }
 
   .trakt-navbar-pwa {
-    box-shadow: 0px 12px 32px 0px color-mix(in srgb, var(--color-shadow) 16%);
+    box-shadow: 0px 12px 32px 0px var(--cm-shadow-16);
   }
 
   .trakt-navbar-scroll.trakt-navbar-pwa {
-    box-shadow: 0px 24px 64px 0px color-mix(in srgb, var(--color-shadow) 32%);
+    box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
 
     border-bottom-left-radius: var(--border-radius-m);
     border-bottom-right-radius: var(--border-radius-m);
