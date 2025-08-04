@@ -74,5 +74,5 @@ export const FILTERS = [
 ] as const;
 
 export const DEFAULT_TV_FILTERS = {
-  [FilterKey.Streaming]: 'any_subscriptions',
+  [FilterKey.Streaming]: 'subscriptions',
 } as const;
