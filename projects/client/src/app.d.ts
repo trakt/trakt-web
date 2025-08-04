@@ -194,11 +194,18 @@ declare global {
     }
   }
 
-  interface StreamOnAndroid {
-    open: (name: string, url: string) => void;
+  interface WebOS {
+    service: {
+      request: (
+        url: string,
+        options: Record<string, unknown> & {
+          onFailure?: (error: { errorCode: number; errorText: string }) => void;
+        },
+      ) => void;
+    };
   }
 
-  const StreamOnAndroid: StreamOnAndroid | Nil;
+  const webOS: WebOS | Nil;
 }
 
 export {};

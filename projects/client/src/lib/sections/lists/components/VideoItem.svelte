@@ -4,7 +4,7 @@
   import Link from "$lib/components/link/Link.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp";
-  import { getDeepLinkHandler } from "$lib/features/deep-link/getDeepLinkHandler";
+  import { getWebOSHandler } from "$lib/features/web-os/getWebOSHandler";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
 
   const {
@@ -12,7 +12,7 @@
     trackHandler,
   }: { video: MediaVideo; trackHandler: () => void } = $props();
 
-  const deepLinkHandler = getDeepLinkHandler();
+  const webOSHandler = getWebOSHandler();
 </script>
 
 <LandscapeCard>
@@ -23,11 +23,12 @@
     onclick={(ev) => {
       trackHandler();
 
-      if (!deepLinkHandler) {
+      if (!webOSHandler) {
         return;
       }
+
       ev.preventDefault();
-      deepLinkHandler.open("YouTube", video.url);
+      webOSHandler.youtube(video.url);
     }}
   >
     <CardCover title={video.title} src={video.thumbnail} alt={video.title} />
