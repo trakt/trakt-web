@@ -31,7 +31,13 @@ export function waitForDynamicContent() {
           element.getAttribute('data-dynamic-selector'),
           'Expected data-dynamic-selector attribute to be defined',
         );
-        return element.querySelector(selector) !== null;
+
+        const dynamicContent = element.querySelector(selector);
+        if (!dynamicContent) {
+          return false;
+        }
+
+        return dynamicContent.querySelector('.loading-indicator') === null;
       });
 
       if (hasLoadedElements || elapsed >= MAX_WAIT_TIME) {
