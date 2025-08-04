@@ -235,3 +235,7 @@
     }
   }
 }
+
+[data-device='tv'] {
+  @include dark-theme();
+}

@@ -24,13 +24,13 @@ describe('getDefaultFilters', () => {
 
   it('should return the default filters for tv', () => {
     const platformSpy = vi.spyOn(globalThis.navigator, 'userAgent', 'get');
-    platformSpy.mockReturnValue('android tv');
+    platformSpy.mockReturnValue('webOS');
     expect(getDefaultFilters()).toEqual(DEFAULT_TV_FILTERS);
   });
 
   it('should return user stored values over defaults', () => {
     const platformSpy = vi.spyOn(globalThis.navigator, 'userAgent', 'get');
-    platformSpy.mockReturnValue('android tv');
+    platformSpy.mockReturnValue('webOS');
 
     localStorage.setItem(STORED_FILTERS_KEY, JSON.stringify(filters));
 

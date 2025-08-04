@@ -21,7 +21,7 @@ describe('handle: devices', () => {
     const { transformPageChunk } = await interceptHandleResolveOptions(
       handle,
       new Request('http://localhost', {
-        headers: new Headers({ 'user-agent': 'android tv' }),
+        headers: new Headers({ 'user-agent': 'webos' }),
       }),
     );
 
