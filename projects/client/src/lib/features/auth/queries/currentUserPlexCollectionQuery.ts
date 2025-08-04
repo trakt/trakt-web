@@ -32,7 +32,6 @@ const currentUserPlexCollectionRequest = (
 function toTraktIds(
   collectionResponse: CollectionMinimalResponse | CollectionMinimalShowResponse,
 ): number[] {
-  console.log('Plex collection response:', collectionResponse);
   return Object.keys(collectionResponse).map((key) => parseInt(key, 10));
 }
 
