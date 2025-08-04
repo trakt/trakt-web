@@ -1,5 +1,4 @@
 import { requestDeviceCode } from '$lib/features/auth/requests/requestDeviceCode.ts';
-import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { IS_DEV } from '../../utils/env/index.ts';
@@ -170,21 +169,19 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
 
     if (result === UNAUTHORIZED_PAYLOAD) {
-      const url = buildOAuthUrl(TRAKT_CLIENT_ID, getReferrer());
-
       setAuth(null);
-      return new Response(null, {
-        status: 307,
-        headers: {
-          Location: url.toString(),
-          'Set-Cookie': event.cookies.serialize(AUTH_COOKIE_NAME, '', {
-            httpOnly: true,
-            secure: true,
-            maxAge: 0,
-            path: '/',
-          }),
+      event.cookies.set(
+        AUTH_COOKIE_NAME,
+        JSON.stringify(result),
+        {
+          httpOnly: true,
+          secure: true,
+          maxAge: time.years(1) / time.seconds(1),
+          path: '/',
         },
-      });
+      );
+
+      return await resolve(event);
     }
 
     setAuth(result);

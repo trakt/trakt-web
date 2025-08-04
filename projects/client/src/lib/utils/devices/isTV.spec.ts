@@ -10,19 +10,19 @@ describe('isTV', () => {
     expect(isTV(undefined)).toBe(false);
   });
 
-  it('should return true for Android TV user agents', () => {
-    const androidTvUserAgent =
-      'Mozilla/5.0 (Linux; Android 9; ANDROIDTV DEVICE) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36';
-    expect(isTV(androidTvUserAgent)).toBe(true);
+  it('should return true for simulated webOS user agents', () => {
+    const webOsUserAgent =
+      'Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.211 Safari/537.36 WebAppManager/';
+    expect(isTV(webOsUserAgent)).toBe(true);
   });
 
-  it('should return false for regular Android user agents without TV', () => {
-    const androidUserAgent =
-      'Mozilla/5.0 (Linux; Android 10; SM-A505F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.105 Mobile Safari/537.36';
-    expect(isTV(androidUserAgent)).toBe(false);
+  it('should return true for webOS user agents', () => {
+    const webOsUserAgent =
+      'Mozilla/5.0 (WebOS; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.211 Safari/537.36 WebAppManager/';
+    expect(isTV(webOsUserAgent)).toBe(true);
   });
 
-  it('should return false for non-Android user agents', () => {
+  it('should return false for non-webOS user agents', () => {
     const iosUserAgent =
       'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1';
     const desktopUserAgent =
