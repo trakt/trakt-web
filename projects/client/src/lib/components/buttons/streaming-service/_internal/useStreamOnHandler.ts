@@ -1,4 +1,4 @@
-import { getDeepLinkHandler } from '$lib/features/deep-link/getDeepLinkHandler.ts';
+import { getWebOSHandler } from '$lib/features/web-os/getWebOSHandler.ts';
 import type { StreamNow } from '$lib/requests/models/StreamingServiceOptions.ts';
 import { useStreamingServices } from '$lib/stores/useStreamingServices.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
@@ -11,8 +11,8 @@ type StreamOnHandler = {
 };
 
 export function useStreamOnHandler(service: StreamNow): StreamOnHandler {
-  const deepLinkHandler = getDeepLinkHandler();
-  if (!deepLinkHandler || !service.deepLink) {
+  const webOSHandler = getWebOSHandler();
+  if (!webOSHandler || !service.webOSLink) {
     return {
       href: service.link,
     };
@@ -26,10 +26,9 @@ export function useStreamOnHandler(service: StreamNow): StreamOnHandler {
 
   const handler = () => {
     const sourceName = get(source)?.name ?? service.source;
-
-    deepLinkHandler.open(
+    webOSHandler.launch(
       sourceName,
-      assertDefined(service.deepLink, 'Deep link is required'),
+      assertDefined(service.webOSLink, 'The webOS link is required'),
     );
   };
 

@@ -1,4 +1,4 @@
-import { getDeepLinkHandler } from '$lib/features/deep-link/getDeepLinkHandler.ts';
+import { getWebOSHandler } from '$lib/features/web-os/getWebOSHandler.ts';
 import type {
   StreamingServiceOptions,
   StreamNow,
@@ -24,8 +24,8 @@ export function findPreferredStreamingService({
     .streaming
     .filter(
       (service) => {
-        if (getDeepLinkHandler()) {
-          return Boolean(service.deepLink);
+        if (getWebOSHandler()) {
+          return Boolean(service.webOSLink);
         }
 
         return true;

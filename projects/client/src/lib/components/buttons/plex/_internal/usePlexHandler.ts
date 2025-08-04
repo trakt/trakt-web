@@ -1,4 +1,4 @@
-import { getDeepLinkHandler } from '$lib/features/deep-link/getDeepLinkHandler.ts';
+import { getWebOSHandler } from '$lib/features/web-os/getWebOSHandler.ts';
 
 type PlexHandler = {
   href: HttpsUrl;
@@ -7,14 +7,14 @@ type PlexHandler = {
 };
 
 export function usePlexHandler(link: HttpsUrl): PlexHandler {
-  const deepLinkHandler = getDeepLinkHandler();
-  if (!deepLinkHandler) {
+  const webOSHandler = getWebOSHandler();
+  if (!webOSHandler) {
     return {
       href: link,
     };
   }
 
   return {
-    onclick: () => deepLinkHandler.open('Plex', link),
+    onclick: () => webOSHandler.plex(link),
   };
 }

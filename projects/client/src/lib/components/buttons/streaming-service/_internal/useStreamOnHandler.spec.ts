@@ -1,5 +1,6 @@
 import { useStreamOnHandler } from '$lib/components/buttons/streaming-service/_internal/useStreamOnHandler.ts';
 import type { StreamNow } from '$lib/requests/models/StreamingServiceOptions.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -11,8 +12,10 @@ describe('useStreamOnHandler', () => {
     type: 'streaming',
   };
 
-  const mockStreamOnAndroid = {
-    open: vi.fn(),
+  const mockWebOS = {
+    service: {
+      request: vi.fn(),
+    },
   };
 
   afterEach(() => {
@@ -28,7 +31,7 @@ describe('useStreamOnHandler', () => {
   });
 
   it('should return href when there is no deep link', async () => {
-    vi.stubGlobal('StreamOnAndroid', mockStreamOnAndroid);
+    vi.stubGlobal('webOS', mockWebOS);
     const handler = await renderStore(() => useStreamOnHandler(service));
 
     const href = 'href' in handler ? handler.href : '';
@@ -36,11 +39,14 @@ describe('useStreamOnHandler', () => {
   });
 
   it('should return the deep link handler', async () => {
-    vi.stubGlobal('StreamOnAndroid', mockStreamOnAndroid);
+    vi.stubGlobal('webOS', mockWebOS);
     const handler = await renderStore(() =>
       useStreamOnHandler({
         ...service,
-        deepLink: 'nflx://www.netflix.com/',
+        webOSLink: {
+          id: 'netflix',
+          contentTarget: 'nflx://www.netflix.com/',
+        },
       })
     );
 
@@ -49,19 +55,28 @@ describe('useStreamOnHandler', () => {
   });
 
   it('should call the deep link handler with the correct link', async () => {
-    vi.stubGlobal('StreamOnAndroid', mockStreamOnAndroid);
+    vi.stubGlobal('webOS', mockWebOS);
     const handler = await renderStore(() =>
       useStreamOnHandler({
         ...service,
-        deepLink: 'nflx://www.netflix.com/',
+        webOSLink: {
+          id: 'netflix',
+          contentTarget: 'nflx://www.netflix.com/',
+        },
       })
     );
 
     const onclick = 'onclick' in handler ? handler.onclick : null;
     onclick?.();
-    expect(mockStreamOnAndroid.open).toHaveBeenCalledWith(
-      'netflix',
-      'nflx://www.netflix.com/',
+
+    const [_, { parameters }] = assertDefined(
+      mockWebOS.service.request.mock.calls[0],
     );
+    expect(parameters).toEqual({
+      id: 'netflix',
+      params: {
+        contentTarget: 'nflx://www.netflix.com/',
+      },
+    });
   });
 });
