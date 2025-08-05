@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "W trakcie napisów"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Szukaj mediów"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Media"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Szukaj osób"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Osoby"
+    },
+    "text_search_mode_people": {
+      "default": "Ludzie"
+    },
+    "input_placeholder_search_people": {
+      "default": "Szukaj osób..."
     }
   }
 }

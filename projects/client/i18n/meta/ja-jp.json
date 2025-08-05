@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "エンドロール中"
+    },
+    "button_label_toggle_search_media": {
+      "default": "メディアを検索"
+    },
+    "button_text_toggle_search_media": {
+      "default": "メディア"
+    },
+    "button_label_toggle_search_people": {
+      "default": "人物を検索"
+    },
+    "button_text_toggle_search_people": {
+      "default": "人物"
+    },
+    "text_search_mode_people": {
+      "default": "人々"
+    },
+    "input_placeholder_search_people": {
+      "default": "人を探す..."
     }
   }
 }

@@ -6,11 +6,13 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
+  import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
+  import PersonList from "$lib/sections/lists/PersonList.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
@@ -18,7 +20,7 @@
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { search, clear, results } = useSearch();
+  const { search, clear, results, mode } = useSearch();
 
   $effect(() => {
     if (!query) {
@@ -26,10 +28,22 @@
       return;
     }
 
-    search(query);
+    search(query, $mode);
   });
 
-  const first = $derived($results.show.at(0) ?? $results.movie.at(0));
+  const coverSrc = $derived.by(() => {
+    if (!$results) {
+      return;
+    }
+
+    if ($results.type === "media") {
+      const item = $results.items.movies.at(0) || $results.items.shows.at(0);
+      return item?.cover?.url.medium;
+    }
+
+    return $results.items.at(0)?.headShotUrl;
+  });
+
   const pageTitle = $derived(
     query ? m.page_title_search_results({ query }) : m.page_title_search(),
   );
@@ -42,44 +56,57 @@
     </div>
   </RenderFor>
 
-  {#if first}
-    <CoverImageSetter src={first.cover.url.medium} type="main" />
+  {#if coverSrc}
+    <CoverImageSetter src={coverSrc} type="main" />
   {:else}
     <TraktPageCoverSetter />
   {/if}
 
-  {#if query}
-    <SectionList
-      id="search-grid-list-movies"
-      title={m.text_search_results_for({
-        query: m.translated_value_type_movie(),
-      })}
-      items={$results.movie}
-      --height-list={mediaListHeightResolver("portrait")}
-    >
-      {#snippet item(result)}
-        <DefaultMediaItem type={result.type} media={result} style="cover" />
-      {/snippet}
-    </SectionList>
+  <SearchModeToggles />
 
-    <SectionList
-      id="search-grid-list-shows"
-      title={m.text_search_results_for({
-        query: m.translated_value_type_show(),
-      })}
-      items={$results.show}
-      --height-list={mediaListHeightResolver("portrait")}
-    >
-      {#snippet item(result)}
-        <DefaultMediaItem type={result.type} media={result} style="cover">
-          {#snippet tag()}
-            <InfoTag>
-              {toTranslatedValue("type", result.type)}
-            </InfoTag>
-          {/snippet}
-        </DefaultMediaItem>
-      {/snippet}
-    </SectionList>
+  {#if $results}
+    {#if $results.type === "media"}
+      <SectionList
+        id="search-grid-list-movies"
+        title={m.text_search_results_for({
+          query: m.translated_value_type_movie(),
+        })}
+        items={$results.items.movies}
+        --height-list={mediaListHeightResolver("portrait")}
+      >
+        {#snippet item(result)}
+          <DefaultMediaItem type={result.type} media={result} style="cover" />
+        {/snippet}
+      </SectionList>
+
+      <SectionList
+        id="search-grid-list-shows"
+        title={m.text_search_results_for({
+          query: m.translated_value_type_show(),
+        })}
+        items={$results.items.shows}
+        --height-list={mediaListHeightResolver("portrait")}
+      >
+        {#snippet item(result)}
+          <DefaultMediaItem type={result.type} media={result} style="cover">
+            {#snippet tag()}
+              <InfoTag>
+                {toTranslatedValue("type", result.type)}
+              </InfoTag>
+            {/snippet}
+          </DefaultMediaItem>
+        {/snippet}
+      </SectionList>
+    {/if}
+
+    {#if $results.type === "people"}
+      <PersonList
+        title={m.text_search_results_for({
+          query: m.text_search_mode_people(),
+        })}
+        people={$results.items}
+      />
+    {/if}
   {/if}
 </TraktPage>
 

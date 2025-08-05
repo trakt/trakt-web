@@ -1,20 +1,33 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
+
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
+import z from 'zod';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
 import type { MediaType } from '../../models/MediaType.ts';
+import { EXPERIMENTAL_PARAMS } from './_internal/constants.ts';
+import { searchCancellationId } from './searchCancellationId.ts';
 
 type SearchParams = {
   query: string;
-  type: MediaType;
 } & ApiParams;
 
-function isGarbage(value?: MediaEntry): boolean {
+const MediaSearchResultSchema = z.object({
+  type: z.literal('media'),
+  items: z.object({
+    movies: MediaEntrySchema.array(),
+    shows: MediaEntrySchema.array(),
+  }),
+});
+
+export type MediaSearchResult = z.infer<typeof MediaSearchResultSchema>;
+
+function isGarbage(value: MediaEntry): boolean {
   const isReleased = value?.status === 'released';
   const isInvalidRelease = isReleased && value?.year == null;
   const hasNoGenres = !value?.genres.length;
@@ -23,7 +36,9 @@ function isGarbage(value?: MediaEntry): boolean {
     hasNoGenres;
 }
 
-function mapToSearchResultEntry(item: SearchResultResponse[0]): MediaEntry {
+function mapToSearchResultEntry(
+  item: SearchResultResponse[0],
+): MediaEntry {
   const { type } = item;
   switch (type) {
     case 'show':
@@ -31,18 +46,11 @@ function mapToSearchResultEntry(item: SearchResultResponse[0]): MediaEntry {
     case 'movie':
       return mapToMovieEntry(item.movie);
     default:
-      throw new Error(`Unknown type: ${type}`);
+      throw new Error(`Unsupported type for media search: ${type}`);
   }
 }
 
-export const searchCancellationId = (type: string) =>
-  `${type}_search_cancellation_token`;
-
-const EXPERIMENTAL_PARAMS = {
-  engine: 'typesense',
-};
-
-const searchRequest = ({ query, fetch, type }: SearchParams) =>
+const searchRequest = ({ query, fetch }: SearchParams, type: MediaType) =>
   api({
     fetch,
     cancellable: true,
@@ -61,16 +69,32 @@ const searchRequest = ({ query, fetch, type }: SearchParams) =>
       },
     });
 
-export const searchQuery = defineQuery({
-  key: ({ type }) => `search_${type}`,
+function searchRequests({ query, fetch }: SearchParams) {
+  return Promise.all([
+    searchRequest({ fetch, query }, 'movie'),
+    searchRequest({ fetch, query }, 'show'),
+  ]);
+}
+
+export const searchMediaQuery = defineQuery({
+  key: 'searchMedia',
   invalidations: [],
   dependencies: (params) => [params.query.toLowerCase().trim()],
-  request: searchRequest,
-  mapper: (response) =>
-    response.body
-      .map(mapToSearchResultEntry)
-      .filter((value) => !isGarbage(value)),
-  schema: MediaEntrySchema.array(),
+  request: searchRequests,
+  mapper: ([moviesResponse, showsResponse]) => {
+    return {
+      type: 'media' as const,
+      items: {
+        movies: moviesResponse.body
+          .map(mapToSearchResultEntry)
+          .filter((value) => !isGarbage(value)),
+        shows: showsResponse.body
+          .map(mapToSearchResultEntry)
+          .filter((value) => !isGarbage(value)),
+      },
+    };
+  },
+  schema: MediaSearchResultSchema,
   ttl: time.minutes(30),
   retry: 0,
 });

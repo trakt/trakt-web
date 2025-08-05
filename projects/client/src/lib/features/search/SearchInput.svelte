@@ -10,7 +10,8 @@
 
   const { isInline = true }: { isInline?: boolean } = $props();
 
-  const { clear, isSearching, pathName, exitPathName, query } = useSearch();
+  const { clear, isSearching, pathName, exitPathName, mode, query } =
+    useSearch();
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
@@ -32,7 +33,8 @@
       return;
     }
 
-    goto(`${pathName}${buildParamString({ q: inputElement.value.trim() })}`, {
+    const params = buildParamString({ m: $mode, q: inputElement.value.trim() });
+    goto(`${pathName}${params}`, {
       replaceState: page.url.pathname === pathName,
       keepFocus: true,
     });
@@ -53,6 +55,12 @@
       },
     };
   }
+
+  const placeholder = $derived(
+    $mode === "media"
+      ? m.input_placeholder_search()
+      : m.input_placeholder_search_people(),
+  );
 
   onMount(() => {
     if (isInline) {
@@ -85,7 +93,7 @@
     class="trakt-search-input"
     type="search"
     defaultValue={$query}
-    placeholder={m.input_placeholder_search()}
+    {placeholder}
     oninput={onSearch}
   />
 </div>

@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "Während des Abspanns"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Suche nach Medien"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Medien"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Suche nach Personen"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Personen"
+    },
+    "text_search_mode_people": {
+      "default": "Personen"
+    },
+    "input_placeholder_search_people": {
+      "default": "Nach Personen suchen..."
     }
   }
 }

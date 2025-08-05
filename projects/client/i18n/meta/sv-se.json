@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "Undertexter"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Sök efter media"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Media"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Sök efter personer"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Personer"
+    },
+    "text_search_mode_people": {
+      "default": "Personer"
+    },
+    "input_placeholder_search_people": {
+      "default": "Sök efter personer..."
     }
   }
 }
