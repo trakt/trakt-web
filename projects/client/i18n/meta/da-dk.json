@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "Under rulleteksterne"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Søg efter medier"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Medier"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Søg efter folk"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Folk"
+    },
+    "text_search_mode_people": {
+      "default": "Folk"
+    },
+    "input_placeholder_search_people": {
+      "default": "Søg efter folk..."
     }
   }
 }

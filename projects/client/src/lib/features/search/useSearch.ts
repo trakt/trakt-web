@@ -1,79 +1,106 @@
 import { browser } from '$app/environment';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
+import { searchCancellationId } from '$lib/requests/queries/search/searchCancellationId.ts';
 import {
-  searchCancellationId,
-  searchQuery,
-} from '$lib/requests/queries/search/searchQuery.ts';
+  type MediaSearchResult,
+  searchMediaQuery,
+} from '$lib/requests/queries/search/searchMediaQuery.ts';
+import {
+  type PeopleSearchResult,
+  searchPeopleQuery,
+} from '$lib/requests/queries/search/searchPeopleQuery.ts';
 import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
-import { CancelledError, useQueryClient } from '@tanstack/svelte-query';
+import {
+  CancelledError,
+  type CreateQueryOptions,
+  useQueryClient,
+} from '@tanstack/svelte-query';
 import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
-import type { MediaType } from '../../requests/models/MediaType.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
+import type { SearchResult } from './models/SearchResult.ts';
 
-const emptyResults = {
-  movie: [] as MediaEntry[],
-  show: [] as MediaEntry[],
-};
+type SearchResponse = MediaSearchResult | PeopleSearchResult;
+
+function modeToQuery(query: string, mode: SearchMode) {
+  switch (mode) {
+    case 'media':
+      return searchMediaQuery({ query }) as CreateQueryOptions<
+        SearchResponse
+      >;
+    case 'people':
+      return searchPeopleQuery({ query }) as CreateQueryOptions<
+        SearchResponse
+      >;
+  }
+}
+
+function modeToCancellationIds(mode: SearchMode) {
+  switch (mode) {
+    case 'media':
+      return [
+        searchCancellationId('movie'),
+        searchCancellationId('show'),
+      ];
+    case 'people':
+      return [searchCancellationId('person')];
+  }
+}
 
 export function useSearch() {
-  type SearchResponse = {
-    items: Record<MediaType, MediaEntry[]>;
-    reason: 'initial' | 'result' | 'cancelled';
-  };
+  const client = browser ? useQueryClient() : undefined;
+  const { mode, isSearching, ...rest } = getSearchContext();
+  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
-  const results = writable<SearchResponse>({
-    items: emptyResults,
+  const results = writable<SearchResult>({
+    response: null,
     reason: 'initial',
   });
-  const client = browser ? useQueryClient() : undefined;
-  const { isSearching, ...rest } = getSearchContext();
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
-  const types: MediaType[] = ['movie', 'show'];
 
-  async function search(query: string) {
+  async function search(term: string, mode: SearchMode) {
     if (!client) {
       return;
     }
 
-    if (!query.trim()) {
+    if (!term.trim()) {
       results.set({
-        items: emptyResults,
+        response: null,
         reason: 'initial',
       });
       return;
     }
 
-    const fetches = types.map(async (type) => {
-      try {
-        const res = await client.fetchQuery(searchQuery({ query, type }));
-        return { type, res };
-      } catch (error) {
-        if (error instanceof AbortError || error instanceof CancelledError) {
-          return { type, res: [] };
-        }
-        throw error;
-      }
-    });
+    const query = modeToQuery(term, mode);
 
-    try {
-      const responses = await Promise.all(fetches);
-      const items: Record<MediaType, MediaEntry[]> = { movie: [], show: [] };
-      responses.forEach(({ type, res }) => {
-        items[type] = res;
-      });
-      results.set({
-        items,
+    const response = await client.fetchQuery(query)
+      .then((response) => ({
+        response,
         reason: 'result',
+      }))
+      .catch((error) => {
+        if (error instanceof AbortError) {
+          return Promise.resolve({
+            ...get(results),
+            reason: 'cancelled',
+          });
+        }
+
+        if (error instanceof CancelledError) {
+          return Promise.resolve({
+            response: null,
+            reason: 'cancelled',
+          });
+        }
+
+        return Promise.reject(error);
       });
-    } catch (_) {
-      results.set({
-        items: emptyResults,
-        reason: 'cancelled',
-      });
-    }
+
+    results.set({
+      ...response,
+      reason: 'result',
+    });
   }
 
   const unsubscribeFromResults = results
@@ -82,22 +109,26 @@ export function useSearch() {
   onDestroy(() => unsubscribeFromResults());
 
   function clear() {
-    types.forEach((type) => {
+    const ids = modeToCancellationIds(get(mode));
+
+    ids.forEach((id) => {
       abortRequest(
-        (id) => id.includes(searchCancellationId(type)),
+        (requestId) => requestId.includes(id),
         new CancelledError(),
       );
     });
-    results.set({ items: emptyResults, reason: 'initial' });
+
+    results.set({ response: null, reason: 'initial' });
   }
 
   return {
-    search: (term: string) => {
+    search: (term: string, mode: SearchMode) => {
       isSearching.set(true);
-      debounce(search, get(isDesktop) ? 150 : 250)(term);
+      debounce(() => search(term, mode), get(isDesktop) ? 150 : 250)();
     },
+    results: derived(results, ($results) => $results.response),
     clear,
-    results: derived(results, ($results) => $results.items ?? emptyResults),
+    mode,
     isSearching,
     ...rest,
   };

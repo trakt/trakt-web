@@ -39,8 +39,10 @@ export function createAuthenticatedFetch<
 
         const isNitro = url.includes('/sync/progress/up_next_nitro');
         const isSearch = url.includes('/search');
+        const isPersonSearch = url.includes('/search/person');
 
-        const isHDCall = isNitro || isSearch;
+        const isHDSearch = isSearch && !isPersonSearch;
+        const isHDCall = isNitro || isHDSearch;
 
         const isApiCall = url.includes('apiz.trakt.tv');
 

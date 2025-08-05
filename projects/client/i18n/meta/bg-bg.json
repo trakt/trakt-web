@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "По време на надписите"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Търсене на медия"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Медия"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Търсене на хора"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Хора"
+    },
+    "text_search_mode_people": {
+      "default": "Хора"
+    },
+    "input_placeholder_search_people": {
+      "default": "Търсене на хора..."
     }
   }
 }

@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "Pendant le générique"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Rechercher des contenus"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Contenus"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Rechercher des personnes"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Personnes"
+    },
+    "text_search_mode_people": {
+      "default": "Personnes"
+    },
+    "input_placeholder_search_people": {
+      "default": "Rechercher des personnalités..."
     }
   }
 }

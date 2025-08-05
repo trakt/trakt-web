@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "Під час титрів"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Пошук медіа"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Медіа"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Пошук людей"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Люди"
+    },
+    "text_search_mode_people": {
+      "default": "Люди"
+    },
+    "input_placeholder_search_people": {
+      "default": "Пошук людей..."
     }
   }
 }

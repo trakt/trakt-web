@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "Tijdens de credits"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Zoeken naar media"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Media"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Zoeken naar mensen"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Mensen"
+    },
+    "text_search_mode_people": {
+      "default": "Mensen"
+    },
+    "input_placeholder_search_people": {
+      "default": "Zoek naar personen..."
     }
   }
 }

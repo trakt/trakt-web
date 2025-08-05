@@ -1987,6 +1987,24 @@
     },
     "text_during_credits": {
       "default": "În timpul creditelor"
+    },
+    "button_label_toggle_search_media": {
+      "default": "Caută media"
+    },
+    "button_text_toggle_search_media": {
+      "default": "Media"
+    },
+    "button_label_toggle_search_people": {
+      "default": "Caută persoane"
+    },
+    "button_text_toggle_search_people": {
+      "default": "Persoane"
+    },
+    "text_search_mode_people": {
+      "default": "Persoane"
+    },
+    "input_placeholder_search_people": {
+      "default": "Caută persoane..."
     }
   }
 }

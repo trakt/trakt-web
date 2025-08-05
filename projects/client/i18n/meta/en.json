@@ -4606,6 +4606,54 @@
         "android",
         "ios"
       ]
+    },
+    "button_label_toggle_search_media": {
+      "default": "Search for media",
+      "description": "Aria-label for the button that allows users to toggle the search mode to media.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_toggle_search_media": {
+      "default": "Media",
+      "description": "Text for the button that allows users to toggle the search mode to media.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_toggle_search_people": {
+      "default": "Search for people",
+      "description": "Aria-label for the button that allows users to toggle the search mode to people.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_toggle_search_people": {
+      "default": "People",
+      "description": "Text for the button that allows users to toggle the search mode to people.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_search_mode_people": {
+      "default": "People",
+      "description": "Text for the section that allows users to search for people.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "input_placeholder_search_people": {
+      "default": "Search for people...",
+      "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

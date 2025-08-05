@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 
 export const PersonSummarySchema = z.object({
+  id: z.number(),
   name: z.string(),
   biography: z.string(),
   headShotUrl: HttpsUrlSchema,

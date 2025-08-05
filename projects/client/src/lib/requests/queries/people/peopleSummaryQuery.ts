@@ -1,11 +1,8 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PersonSummarySchema } from '$lib/requests/models/PersonSummary.ts';
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import type { PeopleSummaryResponse } from '@trakt/api';
+import { mapToPersonSummary } from '../../_internal/mapToPersonSummary.ts';
 
 type PersonSummaryParams = { slug: string } & ApiParams;
 
@@ -23,31 +20,12 @@ const peopleSummaryRequest = (
       },
     });
 
-const mapPeopleResponseToPersonSummary = (
-  peopleSummaryResponse: PeopleSummaryResponse,
-) => {
-  const headshotCandidate = findDefined(
-    ...(peopleSummaryResponse.images?.headshot ?? []),
-  );
-
-  return {
-    slug: peopleSummaryResponse.ids.slug,
-    name: peopleSummaryResponse.name,
-    biography: peopleSummaryResponse.biography ?? '',
-    knownFor: peopleSummaryResponse.known_for_department,
-    headShotUrl: prependHttps(
-      headshotCandidate,
-      MEDIA_POSTER_PLACEHOLDER,
-    ),
-  };
-};
-
 export const peopleSummaryQuery = defineQuery({
   key: 'peopleSummary',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleSummaryRequest,
-  mapper: (response) => mapPeopleResponseToPersonSummary(response.body),
+  mapper: (response) => mapToPersonSummary(response.body),
   schema: PersonSummarySchema,
   ttl: time.days(30),
 });

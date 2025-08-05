@@ -8,4 +8,5 @@ export const PersonFergusonMappedMock: PersonSummary = {
   name: 'Rebecca Ferguson',
   slug: 'rebecca-ferguson',
   knownFor: 'acting',
+  id: 447271,
 };

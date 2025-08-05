@@ -8,6 +8,7 @@ export function createSearchContext() {
     searchKeyFactory(),
     getContext<SearchContext>(searchKeyFactory()) ??
       {
+        mode: writable('media'),
         isSearching: writable(false),
         pathName: '/search',
         exitPathName: writable('/'),
