@@ -1,4 +1,5 @@
 import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { CalendarShowListResponse, UpNextResponse } from '@trakt/api';
@@ -15,7 +16,7 @@ export function mapToEpisodeEntry(
 ): EpisodeEntry {
   const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
 
-  const airDate = new Date(episode.first_aired);
+  const airDate = new Date(episode.first_aired ?? MAX_DATE);
 
   return {
     id: episode.ids.trakt,

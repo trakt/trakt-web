@@ -9,6 +9,7 @@ import {
   EpisodeUnknownType,
 } from '$lib/requests/models/EpisodeType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -40,6 +41,8 @@ function mapShowProgressResponse(
   const episode = item.next_episode;
   const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
 
+  const airDate = new Date(episode.first_aired ?? MAX_DATE);
+
   return {
     id: episode.ids.trakt,
     title: episode.title,
@@ -49,7 +52,7 @@ function mapShowProgressResponse(
     cover: {
       url: prependHttps(posterCandidate),
     },
-    airDate: new Date(episode.first_aired),
+    airDate,
     total: item.aired,
     completed: item.completed,
     remaining: item.aired - item.completed,
@@ -57,7 +60,7 @@ function mapShowProgressResponse(
     type: episode.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
     genres: [],
     overview: episode.overview ?? '',
-    year: new Date(episode.first_aired).getFullYear(),
+    year: airDate.getFullYear(),
     creditCookies: mapToCreditCookies(episode),
   };
 }
