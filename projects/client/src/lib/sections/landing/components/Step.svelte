@@ -20,7 +20,26 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-landing-step {
+    h1,
+    span.display-title {
+      transition: font-size var(--transition-increment) ease-in-out;
+    }
+
+    @include for-mobile {
+      h1 {
+        font-size: var(--ni-56);
+      }
+
+      span.display-title {
+        font-size: var(--ni-88);
+      }
+    }
+  }
+
   .trakt-landing-step-label {
     padding-left: var(--ni-64);
 

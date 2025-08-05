@@ -21,15 +21,23 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-landing-steps {
     display: grid;
     gap: var(--gap-xl);
     margin-top: var(--ni-64);
     height: fit-content;
 
+    transition: margin var(--transition-increment) ease-in-out;
+
     :global(.trakt-button) {
       width: fit-content;
+    }
+
+    @include for-tablet-lg-and-below {
+      margin-top: 0;
     }
   }
 
