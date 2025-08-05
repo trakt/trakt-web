@@ -2005,6 +2005,12 @@
     },
     "input_placeholder_search_people": {
       "default": "Buscar personas..."
+    },
+    "link_text_forums": {
+      "default": "Foros"
+    },
+    "link_text_support": {
+      "default": "Soporte"
     }
   }
 }

@@ -10,9 +10,16 @@
   import ExternalLinks from "./ExternalLinks.svelte";
   import FooterBar from "./FooterBar.svelte";
   import FooterLogo from "./FooterLogo.svelte";
+  import PageLinks from "./PageLinks.svelte";
 
   const isOnProfile = $derived(page.route.id === UrlBuilder.profile.me());
 </script>
+
+{#snippet pickers()}
+  <LocalePicker />
+  <ThemePicker />
+  <FeatureFlagTool />
+{/snippet}
 
 <div class="trakt-footer-content">
   <RenderFor device={["tablet-lg", "desktop"]} audience="all">
@@ -23,18 +30,26 @@
           <LogoutButton />
         </RenderFor>
       {/if}
+      <PageLinks />
+    </FooterBar>
+  </RenderFor>
+
+  <RenderFor device={["tablet-sm", "mobile"]} audience="all">
+    <FooterBar>
+      <div class="trakt-footer-pickers">
+        {@render pickers()}
+      </div>
+      <PageLinks />
     </FooterBar>
   </RenderFor>
 
   <FooterBar>
     <!-- TODO: different layout for smaller (or different component for only theme/lang pickers) -->
     <div class="trakt-footer-left">
+      <CopyRight />
       <RenderFor device={["tablet-lg", "desktop"]} audience="all">
-        <CopyRight />
+        {@render pickers()}
       </RenderFor>
-      <LocalePicker />
-      <ThemePicker />
-      <FeatureFlagTool />
     </div>
     <div class="trakt-footer-right">
       <RenderFor audience="all" navigation="default">
@@ -44,18 +59,33 @@
   </FooterBar>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-footer-content {
     height: 100%;
     position: relative;
     display: grid;
     align-content: space-between;
+
+    @include for-mobile {
+      padding-bottom: var(--ni-8);
+    }
   }
 
   .trakt-footer-left,
-  .trakt-footer-right {
+  .trakt-footer-right,
+  .trakt-footer-pickers {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .trakt-footer-pickers {
+    /* 
+      To visually align the icon in the button with
+      the copyright text
+    */
+    margin-left: var(--ni-neg-12);
   }
 </style>

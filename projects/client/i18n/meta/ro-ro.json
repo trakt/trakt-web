@@ -2005,6 +2005,12 @@
     },
     "input_placeholder_search_people": {
       "default": "Caută persoane..."
+    },
+    "link_text_forums": {
+      "default": "Forumuri"
+    },
+    "link_text_support": {
+      "default": "Suport"
     }
   }
 }

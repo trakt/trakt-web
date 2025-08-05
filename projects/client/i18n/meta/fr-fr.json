@@ -2005,6 +2005,12 @@
     },
     "input_placeholder_search_people": {
       "default": "Rechercher des personnalités..."
+    },
+    "link_text_forums": {
+      "default": "Forums"
+    },
+    "link_text_support": {
+      "default": "Support"
     }
   }
 }

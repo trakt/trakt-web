@@ -178,6 +178,7 @@ export const UrlBuilder = {
     status: () => 'https://status.trakt.tv',
     privacy: () => 'https://trakt.tv/privacy',
     support: (username?: string) => ogSupportFactory(username),
+    forums: () => 'https://forums.trakt.tv/c/trakt/trakt-lite/31',
     frame: {
       yearToDate: (slug: string, year: string, token: string | Nil) =>
         ogIframeFactory(`https://trakt.tv/users/${slug}/year/${year}`, token),
