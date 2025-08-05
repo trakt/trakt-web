@@ -1,3 +1,4 @@
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
@@ -5,11 +6,10 @@ import AirDateTag from './AirDateTag.svelte';
 import { TagIntlProvider } from './TagIntlProvider.ts';
 
 describe('AirDateTag', () => {
-  it('should display TBA when year is null', () => {
+  it('should display TBA when date is MAX_DATE', () => {
     render(AirDateTag, {
       props: {
-        year: null,
-        airDate: new Date(),
+        airDate: new Date(MAX_DATE),
         i18n: TagIntlProvider,
       },
     });
@@ -23,7 +23,6 @@ describe('AirDateTag', () => {
 
     render(AirDateTag, {
       props: {
-        year: airDate.getFullYear(),
         airDate,
         i18n: TagIntlProvider,
       },
@@ -37,7 +36,6 @@ describe('AirDateTag', () => {
 
     render(AirDateTag, {
       props: {
-        year: airDate.getFullYear(),
         airDate,
         i18n: TagIntlProvider,
       },
@@ -51,7 +49,6 @@ describe('AirDateTag', () => {
 
     render(AirDateTag, {
       props: {
-        year: airDate.getFullYear(),
         airDate,
         i18n: TagIntlProvider,
       },
@@ -65,7 +62,6 @@ describe('AirDateTag', () => {
 
     render(AirDateTag, {
       props: {
-        year: airDate.getFullYear(),
         airDate,
         i18n: TagIntlProvider,
       },
@@ -79,7 +75,6 @@ describe('AirDateTag', () => {
 
     render(AirDateTag, {
       props: {
-        year: airDate.getFullYear(),
         airDate,
         i18n: TagIntlProvider,
       },
@@ -94,7 +89,6 @@ describe('AirDateTag', () => {
 
     render(AirDateTag, {
       props: {
-        year: airDate.getFullYear(),
         airDate,
         i18n: TagIntlProvider,
       },

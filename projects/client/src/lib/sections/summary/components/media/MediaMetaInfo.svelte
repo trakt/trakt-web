@@ -40,11 +40,7 @@
       {/if}
 
       {#if media.year}
-        <AirDate
-          i18n={TagIntlProvider}
-          year={media.year}
-          airDate={media.airDate}
-        />
+        <AirDate i18n={TagIntlProvider} airDate={media.airDate} />
       {/if}
 
       <!-- FIXME: re-enable watchers once we have better watching stats -->
