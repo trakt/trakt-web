@@ -57,11 +57,7 @@
     {/if}
 
     {#if props.variant === "upcoming"}
-      <AirDateTag
-        i18n={TagIntlProvider}
-        airDate={props.episode.airDate}
-        year={props.episode.year}
-      />
+      <AirDateTag i18n={TagIntlProvider} airDate={props.episode.airDate} />
     {/if}
   </div>
 {/snippet}

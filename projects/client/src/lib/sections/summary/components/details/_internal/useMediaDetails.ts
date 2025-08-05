@@ -10,6 +10,7 @@ import type {
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
@@ -27,6 +28,13 @@ function originalTitle(media: MediaEntry) {
 }
 
 function mediaAirDate(media: MediaEntry) {
+  if (isMaxDate(media.airDate)) {
+    return {
+      title: m.header_expected_premiere(),
+      values: [m.tag_text_tba()],
+    };
+  }
+
   const isUpcomingItem = media.airDate > new Date();
   return {
     title: isUpcomingItem ? m.header_expected_premiere() : m.header_premiered(),

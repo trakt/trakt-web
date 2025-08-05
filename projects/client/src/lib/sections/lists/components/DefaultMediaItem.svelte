@@ -25,11 +25,7 @@
   {#if "episode" in media}
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
   {:else if type === "movie" && variant !== "activity"}
-    <AirDateTag
-      i18n={TagIntlProvider}
-      year={media.year}
-      airDate={media.airDate}
-    />
+    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     {#if media.airDate < new Date()}
       <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
     {/if}

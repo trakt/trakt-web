@@ -1,13 +1,12 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
+  import { isMaxDate } from "$lib/utils/date/isMaxDate";
   import type { TagIntl } from "./TagIntl";
 
   const {
-    year,
     airDate,
     i18n,
   }: {
-    year: number | Nil;
     airDate: Date;
     i18n: TagIntl;
   } = $props();
@@ -15,8 +14,7 @@
 
 <StemTag>
   <p class="meta-info capitalize no-wrap">
-    {#if year == null}
-      <!-- TODO: investigate if we can determine using airDate -->
+    {#if isMaxDate(airDate)}
       {i18n.tbaLabel()}
     {:else}
       {i18n.toReleaseEstimate(airDate)}
