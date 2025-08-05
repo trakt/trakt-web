@@ -18,30 +18,18 @@
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const {
-    search: searchMovies,
-    clear: clearMovies,
-    results: movies,
-  } = useSearch("movie");
-
-  const {
-    search: searchShows,
-    clear: clearShows,
-    results: shows,
-  } = useSearch("show");
+  const { search, clear, results } = useSearch();
 
   $effect(() => {
     if (!query) {
-      clearMovies();
-      clearShows();
+      clear();
       return;
     }
 
-    searchMovies(query);
-    searchShows(query);
+    search(query);
   });
 
-  const first = $derived($shows.at(0) ?? $movies.at(0));
+  const first = $derived($results.show.at(0) ?? $results.movie.at(0));
   const pageTitle = $derived(
     query ? m.page_title_search_results({ query }) : m.page_title_search(),
   );
@@ -66,7 +54,7 @@
       title={m.text_search_results_for({
         query: m.translated_value_type_movie(),
       })}
-      items={$movies}
+      items={$results.movie}
       --height-list={mediaListHeightResolver("portrait")}
     >
       {#snippet item(result)}
@@ -79,7 +67,7 @@
       title={m.text_search_results_for({
         query: m.translated_value_type_show(),
       })}
-      items={$shows}
+      items={$results.show}
       --height-list={mediaListHeightResolver("portrait")}
     >
       {#snippet item(result)}

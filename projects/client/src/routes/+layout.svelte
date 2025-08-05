@@ -143,54 +143,51 @@
             <AutoSigninProvider>
               <NavigationProvider device={data.device}>
                 <LocaleProvider>
-                  <!-- TODO: coalesce this when we add support for people 'n stuff -->
-                  <SearchProvider type="show">
-                    <SearchProvider type="movie">
-                      <FilterProvider>
-                        <FeatureFlagProvider>
-                          <CoverProvider>
-                            <NowPlayingProvider>
-                              <CoverImage />
+                  <SearchProvider>
+                    <FilterProvider>
+                      <FeatureFlagProvider>
+                        <CoverProvider>
+                          <NowPlayingProvider>
+                            <CoverImage />
 
-                              <ThemeProvider theme={data.theme}>
-                                <ListScrollHistoryProvider>
-                                  <div class="trakt-layout-wrapper">
-                                    <Navbar />
-                                    <div class="trakt-layout-content">
-                                      {@render children()}
-                                    </div>
-                                    <RenderFor
-                                      audience="all"
-                                      navigation="default"
-                                    >
-                                      <Footer />
-                                    </RenderFor>
+                            <ThemeProvider theme={data.theme}>
+                              <ListScrollHistoryProvider>
+                                <div class="trakt-layout-wrapper">
+                                  <Navbar />
+                                  <div class="trakt-layout-content">
+                                    {@render children()}
                                   </div>
                                   <RenderFor
                                     audience="all"
-                                    device={["mobile", "tablet-sm"]}
                                     navigation="default"
                                   >
-                                    <MobileNavbar />
+                                    <Footer />
                                   </RenderFor>
-                                  <RenderFor
-                                    audience="authenticated"
-                                    navigation="default"
-                                  >
-                                    <NowPlaying />
-                                  </RenderFor>
-                                  <SvelteQueryDevtools
-                                    buttonPosition="bottom-right"
-                                    styleNonce="opacity: 0.5"
-                                  />
-                                  <FirefoxBlurHack />
-                                </ListScrollHistoryProvider>
-                              </ThemeProvider>
-                            </NowPlayingProvider>
-                          </CoverProvider>
-                        </FeatureFlagProvider>
-                      </FilterProvider>
-                    </SearchProvider>
+                                </div>
+                                <RenderFor
+                                  audience="all"
+                                  device={["mobile", "tablet-sm"]}
+                                  navigation="default"
+                                >
+                                  <MobileNavbar />
+                                </RenderFor>
+                                <RenderFor
+                                  audience="authenticated"
+                                  navigation="default"
+                                >
+                                  <NowPlaying />
+                                </RenderFor>
+                                <SvelteQueryDevtools
+                                  buttonPosition="bottom-right"
+                                  styleNonce="opacity: 0.5"
+                                />
+                                <FirefoxBlurHack />
+                              </ListScrollHistoryProvider>
+                            </ThemeProvider>
+                          </NowPlayingProvider>
+                        </CoverProvider>
+                      </FeatureFlagProvider>
+                    </FilterProvider>
                   </SearchProvider>
                 </LocaleProvider>
               </NavigationProvider>

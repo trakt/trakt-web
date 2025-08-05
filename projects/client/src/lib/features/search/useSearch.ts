@@ -13,19 +13,25 @@ import { derived, get, writable } from 'svelte/store';
 import type { MediaType } from '../../requests/models/MediaType.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
 
-export function useSearch(type: MediaType) {
+const emptyResults = {
+  movie: [] as MediaEntry[],
+  show: [] as MediaEntry[],
+};
+
+export function useSearch() {
   type SearchResponse = {
-    items: MediaEntry[];
+    items: Record<MediaType, MediaEntry[]>;
     reason: 'initial' | 'result' | 'cancelled';
   };
 
   const results = writable<SearchResponse>({
-    items: [] as MediaEntry[],
+    items: emptyResults,
     reason: 'initial',
   });
   const client = browser ? useQueryClient() : undefined;
-  const { isSearching, ...rest } = getSearchContext(type);
+  const { isSearching, ...rest } = getSearchContext();
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const types: MediaType[] = ['movie', 'show'];
 
   async function search(query: string) {
     if (!client) {
@@ -34,43 +40,40 @@ export function useSearch(type: MediaType) {
 
     if (!query.trim()) {
       results.set({
-        items: [],
+        items: emptyResults,
         reason: 'initial',
       });
       return;
     }
 
-    const response = await client.fetchQuery(searchQuery({
-      query,
-      type,
-    }))
-      .then((response) => ({
-        items: response,
-        reason: 'result',
-      } as SearchResponse))
-      .catch((error) => {
-        if (error instanceof AbortError) {
-          return Promise.resolve<SearchResponse>({
-            ...get(results),
-            reason: 'cancelled',
-          });
+    const fetches = types.map(async (type) => {
+      try {
+        const res = await client.fetchQuery(searchQuery({ query, type }));
+        return { type, res };
+      } catch (error) {
+        if (error instanceof AbortError || error instanceof CancelledError) {
+          return { type, res: [] };
         }
-
-        if (error instanceof CancelledError) {
-          return Promise.resolve<SearchResponse>({
-            items: [],
-            reason: 'cancelled',
-          });
-        }
-
-        return Promise.reject(error);
-      });
-
-    results.set({
-      items: response
-        .items,
-      reason: response.reason,
+        throw error;
+      }
     });
+
+    try {
+      const responses = await Promise.all(fetches);
+      const items: Record<MediaType, MediaEntry[]> = { movie: [], show: [] };
+      responses.forEach(({ type, res }) => {
+        items[type] = res;
+      });
+      results.set({
+        items,
+        reason: 'result',
+      });
+    } catch (_) {
+      results.set({
+        items: emptyResults,
+        reason: 'cancelled',
+      });
+    }
   }
 
   const unsubscribeFromResults = results
@@ -79,11 +82,13 @@ export function useSearch(type: MediaType) {
   onDestroy(() => unsubscribeFromResults());
 
   function clear() {
-    abortRequest(
-      (id) => id.includes(searchCancellationId(type)),
-      new CancelledError(),
-    );
-    results.set({ items: [], reason: 'initial' });
+    types.forEach((type) => {
+      abortRequest(
+        (id) => id.includes(searchCancellationId(type)),
+        new CancelledError(),
+      );
+    });
+    results.set({ items: emptyResults, reason: 'initial' });
   }
 
   return {
@@ -92,7 +97,7 @@ export function useSearch(type: MediaType) {
       debounce(search, get(isDesktop) ? 150 : 250)(term);
     },
     clear,
-    results: derived(results, ($results) => $results.items ?? []),
+    results: derived(results, ($results) => $results.items ?? emptyResults),
     isSearching,
     ...rest,
   };
