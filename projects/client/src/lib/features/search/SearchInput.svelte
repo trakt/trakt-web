@@ -10,17 +10,7 @@
 
   const { isInline = true }: { isInline?: boolean } = $props();
 
-  /** TODO: refactor system when we add support for people and such */
-  const {
-    clear: clearMovies,
-    isSearching: isSearchingMovies,
-    pathName,
-    exitPathName,
-    query,
-  } = useSearch("movie");
-
-  const { clear: clearShows, isSearching: isSearchingShows } =
-    useSearch("show");
+  const { clear, isSearching, pathName, exitPathName, query } = useSearch();
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
@@ -81,7 +71,7 @@
 
 <div
   class="trakt-search"
-  class:search-is-loading={$isSearchingMovies || $isSearchingShows}
+  class:search-is-loading={$isSearching}
   data-hj-suppress
 >
   <div use:focusOnClick class="trakt-search-icon">
@@ -91,10 +81,7 @@
     use:clickOutside
     bind:this={inputElement}
     onclick={onSearch}
-    onclickoutside={() => {
-      clearMovies();
-      clearShows();
-    }}
+    onclickoutside={clear}
     class="trakt-search-input"
     type="search"
     defaultValue={$query}

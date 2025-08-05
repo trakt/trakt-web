@@ -13,7 +13,7 @@
 <!-- TODO: add more providers here as we expand test suite -->
 <AuthProvider isAuthorized={$isAuthorized} isAuthorizedLegacy={false}>
   <QueryClientProvider client={new QueryClient()}>
-    <SearchProvider type="movie">
+    <SearchProvider>
       <NavigationProvider device="unknown">
         <AnalyticsProvider>
           {@render children()}

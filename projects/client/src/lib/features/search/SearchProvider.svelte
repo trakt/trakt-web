@@ -1,12 +1,11 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import {} from "svelte";
   import { createSearchContext } from "./_internal/createSearchContext";
 
-  const { children, type }: ChildrenProps & { type: MediaType } = $props();
+  const { children }: ChildrenProps = $props();
 
-  const { pathName, exitPathName, query } = createSearchContext(type);
+  const { pathName, exitPathName, query } = createSearchContext();
 
   $effect(() => {
     if (!page.url.pathname.startsWith(pathName)) {
