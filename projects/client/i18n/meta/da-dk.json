@@ -2005,6 +2005,12 @@
     },
     "input_placeholder_search_people": {
       "default": "Søg efter folk..."
+    },
+    "link_text_forums": {
+      "default": "Forummer"
+    },
+    "link_text_support": {
+      "default": "Support"
     }
   }
 }

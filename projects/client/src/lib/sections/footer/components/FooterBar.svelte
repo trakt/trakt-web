@@ -17,8 +17,10 @@
     justify-content: space-between;
     align-items: center;
 
+    gap: var(--gap-s);
+
     @include for-tablet-sm-and-below {
-      padding: var(--ni-12) var(--ni-16);
+      padding: var(--ni-12);
     }
   }
 </style>

@@ -8,15 +8,25 @@
   <p class="secondary meta-info">
     © 2010-{currentYear} trakt, inc. {m.text_copyright_notice()}
   </p>
-  <p class="secondary meta-info">{m.text_copyright_crafted_by()}</p>
+  <p class="secondary meta-info copyright-crafted-by">
+    {m.text_copyright_crafted_by()}
+  </p>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-copyright {
     display: flex;
     flex-direction: column;
     gap: var(--ni-8);
 
     width: fit-content;
+
+    @include for-mobile {
+      .copyright-crafted-by {
+        display: none;
+      }
+    }
   }
 </style>

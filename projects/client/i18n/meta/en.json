@@ -4654,6 +4654,22 @@
         "android",
         "ios"
       ]
+    },
+    "link_text_forums": {
+      "default": "Forums",
+      "description": "Text for the link that takes users to the forums.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_support": {
+      "default": "Support",
+      "description": "Text for the link that takes users to the support page or triggers a mailto url.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -2005,6 +2005,12 @@
     },
     "input_placeholder_search_people": {
       "default": "人を探す..."
+    },
+    "link_text_forums": {
+      "default": "フォーラム"
+    },
+    "link_text_support": {
+      "default": "サポート"
     }
   }
 }

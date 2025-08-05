@@ -13,7 +13,9 @@
   </div>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-cover-image {
     --max-image-height: var(--ni-300);
 
@@ -66,6 +68,24 @@
       object-position: top;
 
       aspect-ratio: 4.4;
+    }
+
+    @include for-tablet-sm-and-below {
+      --max-image-height: var(--ni-120);
+      position: absolute;
+      bottom: 0;
+    }
+
+    @include for-mobile {
+      opacity: 0.6;
+
+      .trakt-cover-image-overlay {
+        mask-position: bottom center;
+      }
+
+      :global(img) {
+        aspect-ratio: 2.75;
+      }
     }
   }
 </style>
