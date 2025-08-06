@@ -111,8 +111,7 @@
       bottom: 0;
       left: 0;
 
-      flex-direction: column;
-      align-items: flex-start;
+      justify-content: flex-start;
       gap: var(--gap-xxs);
 
       :global(.trakt-tag) {

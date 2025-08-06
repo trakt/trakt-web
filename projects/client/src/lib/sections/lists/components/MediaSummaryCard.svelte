@@ -22,14 +22,6 @@
     media,
     ...rest
   }: MediaCardProps | EpisodeCardProps = $props();
-
-  function footerTag() {
-    if (rest.type === "episode") {
-      return tag;
-    }
-
-    return undefined;
-  }
 </script>
 
 <Card
@@ -64,6 +56,7 @@
     {#if rest.type === "movie"}
       <CardCover
         {badge}
+        {tag}
         title={media.title}
         alt={media.title}
         src={media.thumb.url}
@@ -73,6 +66,7 @@
     {#if rest.type === "show"}
       <CardCover
         {badge}
+        {tag}
         title={media.title}
         alt={media.title}
         src={media.cover.url.thumb}
@@ -80,7 +74,7 @@
     {/if}
   </Link>
 
-  <CardFooter {action} tag={footerTag()}>
+  <CardFooter {action}>
     {#if rest.variant === "activity"}
       {#if rest.type === "episode"}
         <p class="trakt-card-title small ellipsis">
