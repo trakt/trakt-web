@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import type { SearchMode } from "$lib/requests/queries/search/models/SearchMode";
   import {} from "svelte";
   import { createSearchContext } from "./_internal/createSearchContext";
 
@@ -9,7 +8,14 @@
   const { mode, pathName, exitPathName, query } = createSearchContext();
 
   function toSearchMode(value: string | null) {
-    return (value === "people" ? "people" : "media") as SearchMode;
+    switch (value) {
+      case "people":
+        return "people";
+      case "media":
+        return "media";
+      default:
+        return $mode;
+    }
   }
 
   $effect(() => {
@@ -19,6 +25,9 @@
   });
 
   $effect(() => {
+    const m = page.url.searchParams.get("m");
+    mode.set(toSearchMode(m));
+
     if (!page.url.searchParams.has("q")) {
       return;
     }
@@ -28,8 +37,6 @@
       return;
     }
 
-    const m = page.url.searchParams.get("m");
-    mode.set(toSearchMode(m));
     query.set(q);
   });
 </script>
