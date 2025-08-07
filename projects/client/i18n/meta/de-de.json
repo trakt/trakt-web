@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "header_calendar": {
+      "default": "Kalender"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Vorheriger Zeitraum"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Nächster Zeitraum"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Heute"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Heute"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Gehe zu {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Nichts für dich an diesem Tag. Nimm dir frei, genieße das Wetter."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Keine Elemente für dieses Datum gefunden. Vielleicht einen anderen Tag versuchen?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Sieht so aus, als wäre heute nichts geplant. Entspann dich und mach es dir gemütlich."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Dein Kalender ist heute leer. Perfekte Zeit, um dich auszuruhen."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Heute ist alles offen. Vielleicht etwas Neues anfangen?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Keine Pläne hier. Zeit, etwas Spontanes zu tun."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Nichts geplant. Genieße deine Freizeit."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Dein Zeitplan ist frei. Mach das Beste daraus."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Keine Veranstaltungen heute. Vielleicht einen alten Favoriten wiedersehen?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Alles klar. Zeit, etwas anderes zu erkunden."
     }
   }
 }

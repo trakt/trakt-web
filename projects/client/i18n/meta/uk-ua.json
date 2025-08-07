@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Підтримка"
+    },
+    "header_calendar": {
+      "default": "Календар"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Попередній період"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Наступний період"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Сьогодні"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Сьогодні"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Перейти до {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Для вас нічого на цей день. Візьміть вихідний, насолоджуйтесь погодою."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Не знайдено елементів на цю дату. Можливо, спробуйте інший день?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Здається, сьогодні нічого не заплановано. Розслабтеся та не поспішайте."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Ваш календар сьогодні порожній. Ідеальний час, щоб відпочити."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Сьогодні все вільно. Можливо, почніть щось нове?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Тут немає планів. Час зробити щось спонтанне."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Нічого не заплановано. Насолоджуйтесь вільним часом."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Ваш графік вільний. Використовуйте його максимально."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Сьогодні немає подій. Можливо, переглянути старий улюблений фільм?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Все чисто. Час досліджувати щось інше."
     }
   }
 }

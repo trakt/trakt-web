@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "header_calendar": {
+      "default": "Calendrier"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Période précédente"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Période suivante"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Aujourd'hui"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Aujourd'hui"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Aller au {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Rien pour vous ce jour. Prenez une journée de congé, profitez du beau temps."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Aucun élément trouvé pour cette date. Peut-être essayer un autre jour ?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "On dirait qu'il n'y a rien de prévu aujourd'hui. Détendez-vous et prenez-la cool."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Votre calendrier est vide aujourd'hui. Le moment idéal pour vous reposer."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Aujourd'hui est libre. Peut-être commencer quelque chose de nouveau ?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Aucun plan ici. Le moment de faire quelque chose de spontané."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Rien de prévu. Profitez de votre temps libre."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Votre emploi du temps est clair. Profitez-en au maximum."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Aucun événement aujourd'hui. Peut-être revoir un ancien favori."
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Tout est clair. Le moment d'explorer quelque chose de différent."
     }
   }
 }

@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Supporto"
+    },
+    "header_calendar": {
+      "default": "Calendario"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Periodo precedente"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Periodo successivo"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Oggi"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Oggi"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Vai al {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Niente per te oggi. Prenditi un giorno libero, goditi il tempo."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Nessun elemento trovato per questa data. Prova un altro giorno?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Sembra che oggi non ci sia niente in programma. Rilassati e prendila con calma."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Il tuo calendario è vuoto oggi. Momento perfetto per riposare."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Oggi è tutto libero. Forse iniziare qualcosa di nuovo?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Nessun piano qui. Tempo di fare qualcosa di spontaneo."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Niente in programma. Goditi il tempo libero."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Il tuo programma è libero. Approfittane al massimo."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Nessun evento oggi. Magari rivedere un vecchio preferito?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Tutto chiaro. È ora di esplorare qualcosa di diverso."
     }
   }
 }

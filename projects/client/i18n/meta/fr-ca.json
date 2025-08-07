@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Soutien"
+    },
+    "header_calendar": {
+      "default": "Calendrier"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Période précédente"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Période suivante"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Aujourd'hui"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Aujourd'hui"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Aller au {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Rien pour vous aujourd'hui. Prenez une journée, profitez du soleil."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Rien pour cette date. Essayez un autre jour ?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "On dirait qu'y a rien de prévu. Relaxez, prenez ça relax."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Votre calendrier est vide aujourd'hui. Le temps de relaxer un peu."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Aujourd'hui, c'est le grand vide. Peut-être commencer quelque chose de neuf ?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Pas de plans ici. Le temps de faire le fou."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Rien de prévu. Profitez du temps libre."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Votre horaire est vide. Profitez-en."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Pas d'événements aujourd'hui. Peut-être revoir un de vos chouchous."
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Tout est clair. C'est le moment de découvrir quelque chose de différent."
     }
   }
 }

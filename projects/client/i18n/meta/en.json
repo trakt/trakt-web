@@ -4670,6 +4670,139 @@
         "android",
         "ios"
       ]
+    },
+    "header_calendar": {
+      "default": "Calendar",
+      "description": "Header for the calendar section, where users can choose days/weeks to see what movies or episodes are available on their calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Previous period",
+      "description": "Label for the button that navigates to the previous calendar period.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_next_calendar_period": {
+      "default": "Next period",
+      "description": "Label for the button that navigates to the next calendar period.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Today",
+      "description": "Text for the button that resets the calendar view to today.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Today",
+      "description": "Label for the button that resets the calendar view to today.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Go to {day}",
+      "description": "Label for the button that navigates to the selected calendar day.",
+      "variables": {
+        "day": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Nothing for you on this day. Take a day off, enjoy the weather.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_2": {
+      "default": "No items found for this date. Maybe try another day?",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Looks like there's nothing scheduled for today. Relax and take it easy.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Your calendar is empty today. Perfect time to catch up on some rest.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Today is wide open. Maybe start something new?",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_6": {
+      "default": "No plans here. Time to do something spontaneous.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Nothing scheduled. Enjoy some free time.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Your schedule is clear. Make the most of it.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_9": {
+      "default": "No events today. Maybe revisit an old favorite.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_calendar_placeholder_10": {
+      "default": "All clear. Time to explore something different.",
+      "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
