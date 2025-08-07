@@ -50,7 +50,11 @@ export function coalesceSocialActivities(
     );
 
     if (similarActivity) {
-      similarActivity.users = [...activity.users, ...similarActivity.users];
+      const allUsers = [...activity.users, ...similarActivity.users];
+      const uniqueUsers = new Map(
+        allUsers.map((user) => [user.slug, user]),
+      );
+      similarActivity.users = Array.from(uniqueUsers.values());
       return acc;
     }
 
