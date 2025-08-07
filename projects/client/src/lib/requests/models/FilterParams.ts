@@ -6,6 +6,7 @@ export type FilterParams = DeepPartial<{
       -update defineQuery to deal with object dependencies
     */
     genres: string;
+    years: string;
     ignore_watched: boolean;
     ignore_watchlisted: boolean;
     watch_window: number;
