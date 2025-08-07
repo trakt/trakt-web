@@ -35,31 +35,35 @@
 {/snippet}
 
 {#snippet tag()}
-  <div class="trakt-episode-tag">
-    {#if ["next", "default"].includes(props.variant)}
-      <DurationTag i18n={TagIntlProvider} runtime={props.episode.runtime} />
-    {/if}
+  {#if props.tag}
+    {@render props.tag()}
+  {:else}
+    <div class="trakt-episode-tag">
+      {#if ["next", "default"].includes(props.variant)}
+        <DurationTag i18n={TagIntlProvider} runtime={props.episode.runtime} />
+      {/if}
 
-    {#if props.variant === "next"}
-      <ShowProgressTag
-        total={props.episode.total}
-        progress={props.episode.completed}
-      >
-        <div class="show-progress">
-          <span class="ellipsis">
-            {EpisodeIntlProvider.remainingText(props.episode.remaining)}
-          </span>
-          <span class="no-wrap">
-            {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
-          </span>
-        </div>
-      </ShowProgressTag>
-    {/if}
+      {#if props.variant === "next"}
+        <ShowProgressTag
+          total={props.episode.total}
+          progress={props.episode.completed}
+        >
+          <div class="show-progress">
+            <span class="ellipsis">
+              {EpisodeIntlProvider.remainingText(props.episode.remaining)}
+            </span>
+            <span class="no-wrap">
+              {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
+            </span>
+          </div>
+        </ShowProgressTag>
+      {/if}
 
-    {#if props.variant === "upcoming"}
-      <AirDateTag i18n={TagIntlProvider} airDate={props.episode.airDate} />
-    {/if}
-  </div>
+      {#if props.variant === "upcoming"}
+        <AirDateTag i18n={TagIntlProvider} airDate={props.episode.airDate} />
+      {/if}
+    </div>
+  {/if}
 {/snippet}
 
 {#snippet card()}
