@@ -76,4 +76,27 @@ describe('coalesceSocialActivities', () => {
     expect(coalesced.at(0)?.users).toEqual([userA]);
     expect(coalesced.at(1)?.users).toEqual([userB]);
   });
+
+  it('should omit duplicate users', () => {
+    const now = new Date();
+
+    const userA = createUserProfile('user_a');
+
+    const activityA = {
+      ...assertDefined(SocialActivityMappedMock.at(0)),
+      users: [userA],
+      activityAt: now,
+    };
+
+    const activityB = {
+      ...activityA,
+      users: [userA],
+      activityAt: new Date(now.getTime() + ACTIVITY_COALESCE_WINDOW / 2),
+    };
+
+    const coalesced = coalesceSocialActivities([activityA, activityB]);
+
+    expect(coalesced).toHaveLength(1);
+    expect(coalesced.at(0)?.users).toEqual([userA]);
+  });
 });
