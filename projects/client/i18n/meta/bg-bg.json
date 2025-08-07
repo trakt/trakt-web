@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Поддръжка"
+    },
+    "header_calendar": {
+      "default": "Календар"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Предишен период"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Следващ период"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Днес"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Днес"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Отиди на {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Нищо за теб днес. Вземи си почивен ден, наслади се на времето."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Няма намерени елементи за тази дата. Може би опитайте друг ден?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Изглежда, че няма нищо планирано за днес. Отпуснете се и си починете."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Календарът ви е празен днес. Перфектното време да си отдъхнете."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Днес е свободно. Може би започнете нещо ново?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Няма планове тук. Време да направите нещо спонтанно."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Нищо не е планирано. Насладете се на свободното време."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Вашият график е свободен. Възползвайте се максимално."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Няма събития днес. Може би преразгледайте стар любимец?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Всичко е ясно. Време е да проучите нещо различно."
     }
   }
 }

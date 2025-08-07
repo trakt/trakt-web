@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Suport"
+    },
+    "header_calendar": {
+      "default": "Calendar"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Perioada anterioară"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Perioada următoare"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Astăzi"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Astăzi"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Du-te la {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Nimic pentru tine astăzi. Ia o zi liberă, bucură-te de vreme."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Nu s-au găsit elemente pentru această dată. Poate încerci o altă zi?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Se pare că nu e nimic programat pentru astăzi. Relaxați-vă și luați-o ușor."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Calendarul tău este gol astăzi. Momentul perfect pentru a te odihni."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Astăzi este liber. Poate începi ceva nou?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Niciun plan aici. Timp să faci ceva spontan."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Nimic programat. Bucură-te de timpul liber."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Programul tău este clar. Profită la maximum."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Niciun eveniment astăzi. Poate revizitezi un vechi favorit?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Totul e clar. E timpul să explorezi ceva diferit."
     }
   }
 }

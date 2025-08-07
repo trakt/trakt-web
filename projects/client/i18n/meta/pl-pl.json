@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Wsparcie"
+    },
+    "header_calendar": {
+      "default": "Kalendarz"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Poprzedni okres"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Następny okres"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Dzisiaj"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Dzisiaj"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Przejdź do {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Nic dla ciebie w tym dniu. Weź wolne, ciesz się pogodą."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Brak elementów dla tej daty. Może spróbujesz innego dnia?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Wygląda na to, że dzisiaj nic nie jest zaplanowane. Zrelaksuj się i wyluzuj."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Twój kalendarz jest dzisiaj pusty. Idealny czas na odpoczynek."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Dzisiaj jest wolne. Może zacząć coś nowego?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Brak planów na dziś. Czas na spontaniczne działanie."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Nic zaplanowano. Ciesz się wolnym czasem."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Twój harmonogram jest wolny. Wykorzystaj go jak najlepiej."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Brak wydarzeń dzisiaj. Może warto wrócić do ulubionych?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Wszystko jasne. Czas na odkrywanie czegoś innego."
     }
   }
 }

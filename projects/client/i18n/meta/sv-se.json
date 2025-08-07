@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "header_calendar": {
+      "default": "Kalender"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Föregående period"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Nästa period"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "Idag"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "Idag"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Gå till {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Inget för dig idag. Ta en ledig dag, njut av vädret."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Inga objekt hittades för detta datum. Kanske prova en annan dag?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Ser ut som att det inte är något planerat idag. Slappna av och ta det lugnt."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Din kalender är tom idag. Perfekt tid att vila upp dig."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "Idag är det öppet. Kanske börja något nytt?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Inga planer här. Dags att göra något spontant."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Inget planerat. Njut av din fritid."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Ditt schema är tomt. Utnyttja det maximalt."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Inga evenemang idag. Kanske återbesöka en gammal favorit?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Allt klart. Dags att utforska något annorlunda."
     }
   }
 }

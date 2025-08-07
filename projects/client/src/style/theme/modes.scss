@@ -102,6 +102,15 @@
   --color-current-reaction-background: var(--shade-100);
   --color-current-reaction-hover: var(--red-100);
   --color-reactions-popup-background: var(--shade-50);
+
+  /**
+    * Calendar
+    */
+  --color-calendar-background: var(--cm-background-navbar-90);
+  --color-calendar-inactive-background: var(--color-background-navbar-base);
+  --color-calendar-active-background: var(--shade-200);
+  --color-calendar-background-hover: var(--shade-100);
+  --color-calendar-item-indicator: var(--blue-700);
 }
 
 // Define theme variables for dark mode
@@ -200,6 +209,15 @@
   --color-current-reaction-background: var(--shade-600);
   --color-current-reaction-hover: var(--red-50);
   --color-reactions-popup-background: var(--shade-800);
+
+  /**
+    * Calendar
+    */
+  --color-calendar-background: var(--cm-background-navbar-90);
+  --color-calendar-inactive-background: var(--color-background-navbar-base);
+  --color-calendar-active-background: var(--shade-800);
+  --color-calendar-background-hover: var(--shade-700);
+  --color-calendar-item-indicator: var(--blue-500);
 }
 
 // Apply themes to selectors

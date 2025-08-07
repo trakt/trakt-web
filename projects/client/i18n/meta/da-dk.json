@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "Support"
+    },
+    "header_calendar": {
+      "default": "Kalender"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "Forrige periode"
+    },
+    "button_label_next_calendar_period": {
+      "default": "Næste periode"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "I dag"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "I dag"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "Gå til {day}"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "Intet for dig i dag. Tag en fridag, nyd vejret."
+    },
+    "text_calendar_placeholder_2": {
+      "default": "Ingen elementer fundet for denne dato. Måske prøve en anden dag?"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "Ser ud til, at der ikke er noget planlagt i dag. Slap af og tag den med ro."
+    },
+    "text_calendar_placeholder_4": {
+      "default": "Din kalender er tom i dag. Perfekt tidspunkt at slappe af på."
+    },
+    "text_calendar_placeholder_5": {
+      "default": "I dag er det hele åbent. Måske starte noget nyt?"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "Ingen planer her. Tid til at gøre noget spontant."
+    },
+    "text_calendar_placeholder_7": {
+      "default": "Intet planlagt. Nyd din fritid."
+    },
+    "text_calendar_placeholder_8": {
+      "default": "Din tidsplan er klar. Få mest muligt ud af den."
+    },
+    "text_calendar_placeholder_9": {
+      "default": "Ingen begivenheder i dag. Måske gense en gammel favorit?"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "Alt klart. Tid til at udforske noget anderledes."
     }
   }
 }

@@ -1616,6 +1616,54 @@
     },
     "link_text_support": {
       "default": "サポート"
+    },
+    "header_calendar": {
+      "default": "カレンダー"
+    },
+    "button_label_previous_calendar_period": {
+      "default": "前の期間"
+    },
+    "button_label_next_calendar_period": {
+      "default": "次の期間"
+    },
+    "button_text_reset_calendar_period": {
+      "default": "今日"
+    },
+    "button_label_reset_calendar_period": {
+      "default": "今日"
+    },
+    "button_label_go_to_calendar_day": {
+      "default": "{day}へ"
+    },
+    "text_calendar_placeholder_1": {
+      "default": "今日は何もありません。オフにして、天気をお楽しみください。"
+    },
+    "text_calendar_placeholder_2": {
+      "default": "この日付のアイテムは見つかりませんでした。別の日を試してみますか？"
+    },
+    "text_calendar_placeholder_3": {
+      "default": "今日は何も予定がないようです。リラックスして、気楽に過ごしてください。"
+    },
+    "text_calendar_placeholder_4": {
+      "default": "今日のカレンダーは空です。休息をとるのに最適です。"
+    },
+    "text_calendar_placeholder_5": {
+      "default": "今日は空いています。何か新しいことを始めませんか？"
+    },
+    "text_calendar_placeholder_6": {
+      "default": "予定はありません。何か自発的なことをする時間です。"
+    },
+    "text_calendar_placeholder_7": {
+      "default": "何も予定されていません。自由な時間をお楽しみください。"
+    },
+    "text_calendar_placeholder_8": {
+      "default": "スケジュールは空いています。最大限に活用してください。"
+    },
+    "text_calendar_placeholder_9": {
+      "default": "今日はイベントはありません。古いお気に入りを再訪しませんか？"
+    },
+    "text_calendar_placeholder_10": {
+      "default": "すべてクリアです。何か違うものを探求する時間です。"
     }
   }
 }
