@@ -1,6 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import CalendarButton from "./components/CalendarButton.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import EpisodeItem from "./components/EpisodeItem.svelte";
   import FindShowsLink from "./components/FindShowsLink.svelte";
@@ -32,6 +33,12 @@
     {#if !$isLoading}
       <p class="small">{m.list_placeholder_upcoming_schedule()}</p>
       <FindShowsLink />
+    {/if}
+  {/snippet}
+
+  {#snippet actions()}
+    {#if mode === "all"}
+      <CalendarButton />
     {/if}
   {/snippet}
 </SectionList>

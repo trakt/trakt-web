@@ -1,7 +1,9 @@
 <script lang="ts">
   import Redirect from "$lib/components/router/Redirect.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -26,8 +28,16 @@
     <MonthInReview />
     <UpNextList />
     <ReleasedList />
-    <UpcomingList mode="episodes" />
-    <UnreleasedList />
+
+    <RenderForFeature flag={FeatureFlag.Calendar}>
+      {#snippet enabled()}
+        <UpcomingList mode="all" />
+      {/snippet}
+
+      <UpcomingList mode="episodes" />
+      <UnreleasedList />
+    </RenderForFeature>
+
     <SocialActivityList />
   </RenderFor>
   <RenderFor audience="public" navigation="default">
