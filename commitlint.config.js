@@ -36,6 +36,7 @@ module.exports = {
         'auth',
         'badge',
         'button',
+        'calendar',
         'card',
         'checkin',
         'colors',
