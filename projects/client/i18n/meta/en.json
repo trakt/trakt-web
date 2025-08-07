@@ -4811,6 +4811,14 @@
         "android",
         "ios"
       ]
+    },
+    "button_label_calendar": {
+      "default": "Calendar",
+      "description": "Aria-label for the button that opens the calendar page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -1667,6 +1667,9 @@
     },
     "page_title_calendar": {
       "default": "Calendrier"
+    },
+    "button_label_calendar": {
+      "default": "Calendrier"
     }
   }
 }
