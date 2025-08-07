@@ -26,7 +26,7 @@
     <MonthInReview />
     <UpNextList />
     <ReleasedList />
-    <UpcomingList />
+    <UpcomingList mode="episodes" />
     <UnreleasedList />
     <SocialActivityList />
   </RenderFor>
