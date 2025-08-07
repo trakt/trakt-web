@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Allt klart. Dags att utforska något annorlunda."
+    },
+    "page_title_calendar": {
+      "default": "Kalender"
     }
   }
 }

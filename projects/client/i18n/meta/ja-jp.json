@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "すべてクリアです。何か違うものを探求する時間です。"
+    },
+    "page_title_calendar": {
+      "default": "カレンダー"
     }
   }
 }

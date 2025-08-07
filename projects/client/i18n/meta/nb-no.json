@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Alt klart. Tid for å utforske noe annerledes."
+    },
+    "page_title_calendar": {
+      "default": "Kalender"
     }
   }
 }

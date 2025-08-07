@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Wszystko jasne. Czas na odkrywanie czegoś innego."
+    },
+    "page_title_calendar": {
+      "default": "Kalendarz"
     }
   }
 }

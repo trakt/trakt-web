@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Alles is duidelijk. Tijd om iets anders te verkennen."
+    },
+    "page_title_calendar": {
+      "default": "Kalender"
     }
   }
 }

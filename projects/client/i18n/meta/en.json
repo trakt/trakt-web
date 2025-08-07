@@ -4803,6 +4803,14 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_calendar": {
+      "default": "Calendar",
+      "description": "Title for the calendar page, where users can see what movies or episodes are available on their calendar.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

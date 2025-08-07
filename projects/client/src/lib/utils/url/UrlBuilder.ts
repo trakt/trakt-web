@@ -133,6 +133,7 @@ export const UrlBuilder = {
     }
   },
   search: () => '/search',
+  calendar: () => '/calendar',
   show: (id: string, params: Record<string, string | number> = {}) =>
     `/shows/${id}${buildParamString(params)}`,
   movies: () => '/movies',

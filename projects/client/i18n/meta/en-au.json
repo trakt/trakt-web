@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "All clear. Time to explore something different."
+    },
+    "page_title_calendar": {
+      "default": "Calendar"
     }
   }
 }
