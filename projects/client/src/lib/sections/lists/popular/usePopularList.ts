@@ -24,6 +24,11 @@ type PopularListStoreProps =
 function typeToQuery(
   { type, ...params }: PopularListStoreProps,
 ) {
+  // FIXME: remove this when behavior is uplifted to the server
+  params.filter = params.filter ?? {};
+  params.filter.years = params.filter?.years ??
+    new Date().getFullYear().toString();
+
   switch (type) {
     case 'movie':
       return moviePopularQuery(params);
