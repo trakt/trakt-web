@@ -1,6 +1,6 @@
 import { derived, writable } from 'svelte/store';
 
-export type Dimension = 'width' | 'height';
+export type Dimension = 'width' | 'height' | 'bottom';
 
 // Extract dimension getter function
 const getDimension = (node: HTMLElement, dimension: Dimension): number => {
