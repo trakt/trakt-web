@@ -12,19 +12,14 @@
   import MediaItem from "./MediaItem.svelte";
   import MediaSwipe from "./MediaSwipe.svelte";
 
-  const {
-    type,
-    media,
-    style,
-    variant,
-    ...rest
-  }: MediaCardProps<MediaInputDefault> = $props();
+  const { type, media, style, ...rest }: MediaCardProps<MediaInputDefault> =
+    $props();
 </script>
 
 {#snippet tag()}
   {#if "episode" in media}
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
-  {:else if type === "movie" && variant !== "activity"}
+  {:else if type === "movie" && rest.variant !== "activity"}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     {#if media.airDate < new Date()}
       <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
