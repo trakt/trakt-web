@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Всичко е ясно. Време е да проучите нещо различно."
+    },
+    "page_title_calendar": {
+      "default": "Календар"
     }
   }
 }

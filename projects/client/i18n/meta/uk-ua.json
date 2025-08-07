@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Все чисто. Час досліджувати щось інше."
+    },
+    "page_title_calendar": {
+      "default": "Календар"
     }
   }
 }

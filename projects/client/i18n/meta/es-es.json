@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Todo despejado. Es hora de explorar algo diferente."
+    },
+    "page_title_calendar": {
+      "default": "Calendario"
     }
   }
 }

@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Alles klar. Zeit, etwas anderes zu erkunden."
+    },
+    "page_title_calendar": {
+      "default": "Kalender"
     }
   }
 }

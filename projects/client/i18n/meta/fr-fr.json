@@ -1664,6 +1664,9 @@
     },
     "text_calendar_placeholder_10": {
       "default": "Tout est clair. Le moment d'explorer quelque chose de différent."
+    },
+    "page_title_calendar": {
+      "default": "Calendrier"
     }
   }
 }
