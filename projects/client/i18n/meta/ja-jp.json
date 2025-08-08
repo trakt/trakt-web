@@ -90,6 +90,12 @@
     "button_text_watchlist": {
       "default": "観たい"
     },
+    "button_text_add_to_watchlist": {
+      "default": "ウォッチリストに追加"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "ウォッチリストから削除"
+    },
     "button_text_mark_as_watched": {
       "default": "視聴済みにする"
     },

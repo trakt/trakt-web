@@ -135,8 +135,7 @@
         }
       },
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "page_title_error_404": {
@@ -175,16 +174,30 @@
       "default": "Watchlist",
       "description": "Text for the button that allows users to add/remove a movie or show to/from their watchlist.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
+      ]
+    },
+    "button_text_add_to_watchlist": {
+      "default": "Add to Watchlist",
+      "description": "Text for the button that allows users to add a movie or show to their watchlist.",
+      "exclude": [
+        "web",
+        "android"
+      ]
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Remove from Watchlist",
+      "description": "Text for the button that allows users to remove a movie or show from their watchlist.",
+      "exclude": [
+        "web",
+        "android"
       ]
     },
     "button_text_mark_as_watched": {
       "default": "Mark as Watched",
       "description": "Text for the button that allows users to mark a movie, episode, or show as watched.",
       "exclude": [
-        "android",
-        "ios"
+        "android"
       ]
     },
     "button_text_watched_until_here": {

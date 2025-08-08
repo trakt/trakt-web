@@ -90,6 +90,12 @@
     "button_text_watchlist": {
       "default": "За гледане"
     },
+    "button_text_add_to_watchlist": {
+      "default": "Добави в списъка за гледане"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Премахни от списъка за гледане"
+    },
     "button_text_mark_as_watched": {
       "default": "Отбележи като гледано"
     },

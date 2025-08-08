@@ -90,6 +90,12 @@
     "button_text_watchlist": {
       "default": "De văzut"
     },
+    "button_text_add_to_watchlist": {
+      "default": "Adaugă în lista de urmărire"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Elimină din lista de urmărire"
+    },
     "button_text_mark_as_watched": {
       "default": "Marchează ca Vizionat"
     },

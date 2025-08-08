@@ -90,6 +90,12 @@
     "button_text_watchlist": {
       "default": "Ver"
     },
+    "button_text_add_to_watchlist": {
+      "default": "Añadir a la lista"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Eliminar de la lista"
+    },
     "button_text_mark_as_watched": {
       "default": "Marcar como visto"
     },

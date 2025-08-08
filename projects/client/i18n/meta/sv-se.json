@@ -90,6 +90,12 @@
     "button_text_watchlist": {
       "default": "Att se"
     },
+    "button_text_add_to_watchlist": {
+      "default": "Lägg till i listan"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Ta bort från listan"
+    },
     "button_text_mark_as_watched": {
       "default": "Markera som sett"
     },
