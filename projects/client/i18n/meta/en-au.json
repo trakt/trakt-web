@@ -43,23 +43,13 @@
       "default": "Mid-Season Finale"
     },
     "header_profile_banner_greeting": {
-      "default": "Hello, {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Hello, {name}"
     },
     "list_title_up_next": {
       "default": "Continue Watching"
     },
     "tag_text_remaining_episodes": {
-      "default": "{count} remaining",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} remaining"
     },
     "list_title_recommended_movies": {
       "default": "Recommended Movies"
@@ -68,12 +58,7 @@
       "default": "Reccomended Shows"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} episodes",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} episodes"
     },
     "page_title_error_404": {
       "default": "404: Nothingness. The void."
@@ -100,28 +85,13 @@
       "default": "Watch again"
     },
     "button_label_add_to_watchlist": {
-      "default": "Add {title} to your Watchlist",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Add {title} to your Watchlist"
     },
     "button_label_mark_as_watched": {
-      "default": "Mark {title} as watched",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Mark {title} as watched"
     },
     "button_label_watched_until_here": {
-      "default": "Mark {title} as watched until here",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Mark {title} as watched until here"
     },
     "translated_value_genre_horror": {
       "default": "Horror"
@@ -235,12 +205,7 @@
       "default": "Science Fiction"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Remove {title} from your Watchlist",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Remove {title} from your Watchlist"
     },
     "input_placeholder_search": {
       "default": "Search shows & movies..."
@@ -333,12 +298,7 @@
       "default": "Home"
     },
     "tag_text_plays": {
-      "default": "{number} plays",
-      "variables": {
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "{number} plays"
     },
     "button_text_logout": {
       "default": "Logout"
@@ -434,42 +394,22 @@
       "default": "Shows"
     },
     "text_episodes_watched": {
-      "default": "{count} episodes watched",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} episodes watched"
     },
     "list_title_movie_credits": {
       "default": "Movies"
     },
     "text_movies_watched": {
-      "default": "{count} movies watched",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} movies watched"
     },
     "header_details": {
       "default": "Details"
     },
     "button_label_expand_category": {
-      "default": "Expand {category}",
-      "variables": {
-        "category": {
-          "type": "string"
-        }
-      }
+      "default": "Expand {category}"
     },
     "button_text_more": {
-      "default": "{count} more",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} more"
     },
     "header_premiered": {
       "default": "Premiered"
@@ -505,20 +445,10 @@
       "default": "Your Movies"
     },
     "button_label_stream_on": {
-      "default": "Watch {title} now",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Watch {title} now"
     },
     "image_alt_streaming_service_logo": {
-      "default": "{service} logo",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "{service} logo"
     },
     "header_director": {
       "default": "Director"
@@ -755,77 +685,34 @@
       "default": "Remove from Watched"
     },
     "button_label_remove_from_watched": {
-      "default": "Remove {title} from your Watched list",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Remove {title} from your Watched list"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Are you sure you want to remove {title} from your Watched list? All plays will be removed.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to remove {title} from your Watched list? All plays will be removed."
     },
     "button_label_remove_from_history": {
-      "default": "Remove this play of {title} from your Watched list",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Remove this play of {title} from your Watched list"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Are you sure you want to remove this play of {title} from your Watched list?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to remove this play of {title} from your Watched list?"
     },
     "list_title_seasons": {
       "default": "Seasons"
     },
     "text_season_number": {
-      "default": "Season {number}",
-      "variables": {
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "Season {number}"
     },
     "text_season_specials": {
       "default": "Specials"
     },
     "button_label_expand_media_overview": {
-      "default": "Expand {title} overview",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Expand {title} overview"
     },
     "text_season_episode_number": {
-      "default": "Season {season} • Episode {number}",
-      "variables": {
-        "season": {
-          "type": "number"
-        },
-        "number": {
-          "type": "number"
-        }
-      }
+      "default": "Season {season} • Episode {number}"
     },
     "button_label_share": {
-      "default": "Share {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Share {title}"
     },
     "header_status": {
       "default": "Status"
@@ -870,12 +757,7 @@
       "default": "Expected Premiere"
     },
     "image_alt_person_headshot": {
-      "default": "Headshot of {person}",
-      "variables": {
-        "person": {
-          "type": "string"
-        }
-      }
+      "default": "Headshot of {person}"
     },
     "list_title_actors": {
       "default": "Actors"
@@ -899,12 +781,7 @@
       "default": "Full Season"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Are you sure you want to remove {title} from your Watchlist?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to remove {title} from your Watchlist?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "View all recommended movies"
@@ -946,28 +823,13 @@
       "default": "Remove from Favourites"
     },
     "button_label_add_to_favorites": {
-      "default": "Add {title} to your Favourites",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Add {title} to your Favourites"
     },
     "button_label_remove_from_favorites": {
-      "default": "Remove {title} from your Favourites",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Remove {title} from your Favourites"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Are you sure you want to remove {title} from your Favourites?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to remove {title} from your Favourites?"
     },
     "list_title_favorite_movies": {
       "default": "Favourite Movies"
@@ -994,42 +856,22 @@
       "default": "On Demand"
     },
     "button_label_popup_media": {
-      "default": "Pop up menu for {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Pop up menu for {title}"
     },
     "list_title_popular_lists": {
       "default": "Popular lists"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} does not appear on any popular lists.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} does not appear on any popular lists."
     },
     "text_by": {
       "default": "by"
     },
     "image_alt_user_avatar": {
-      "default": "{username}'s avatar",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username}'s avatar"
     },
     "image_alt_media_poster": {
-      "default": "{title} poster",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} poster"
     },
     "list_placeholder_comments": {
       "default": "No comments yet."
@@ -1104,53 +946,19 @@
       "default": "Liked"
     },
     "text_share_movie": {
-      "default": "Just discovered {title} - you need to see this! 🎬",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Just discovered {title} - you need to see this! 🎬"
     },
     "text_share_show": {
-      "default": "Found this awesome show: {title}! 📺",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Found this awesome show: {title}! 📺"
     },
     "text_share_episode": {
-      "default": "Just watched {show} S{season}E{episode} - {title}! 🔥",
-      "variables": {
-        "show": {
-          "type": "string"
-        },
-        "season": {
-          "type": "number"
-        },
-        "episode": {
-          "type": "number"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Just watched {show} S{season}E{episode} - {title}! 🔥"
     },
     "text_share_person": {
-      "default": "Check out {name} on Trakt! 🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Check out {name} on Trakt! 🎭"
     },
     "text_share_profile": {
-      "default": "Check out {name} on Trakt! 🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Check out {name} on Trakt! 🎭"
     },
     "list_title_recently_watched": {
       "default": "Recently Watched"
@@ -1180,83 +988,37 @@
       "default": "Aired"
     },
     "warning_prompt_drop_show": {
-      "default": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to drop {title} show? This will remove it from your up next list."
     },
     "button_label_drop_show": {
-      "default": "Flag show {title} as dropped",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Flag show {title} as dropped"
     },
     "button_text_drop_show": {
       "default": "Drop show"
     },
     "warning_prompt_restore_show": {
-      "default": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar."
     },
     "button_label_restore_show": {
-      "default": "Restore show {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Restore show {title}"
     },
     "button_text_restore_show": {
       "default": "Restore show"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Are you sure you want to mark all unseen episodes of {title} as watched until episode {episode}? This will mark {count} episodes as watched.",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "episode": {
-          "type": "number"
-        },
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Are you sure you want to mark all unseen episodes of {title} as watched until episode {episode}? This will mark {count} episodes as watched."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
-      "default": "Are you sure you want to mark {count} episodes as watched?",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "Are you sure you want to mark {count} episodes as watched?"
     },
     "tag_text_watch_count": {
       "default": "Watch count"
     },
     "list_placeholder_media_history": {
-      "default": "You haven't watched {title} yet",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "You haven't watched {title} yet"
     },
     "button_label_like_comment": {
       "default": "Like Comment"
@@ -1265,12 +1027,7 @@
       "default": "Unlike Comment"
     },
     "button_text_comment_likes": {
-      "default": "{count} likes",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} likes"
     },
     "button_label_close": {
       "default": "Close"
@@ -1279,12 +1036,7 @@
       "default": "Comment Replies"
     },
     "button_text_comment_replies": {
-      "default": "{count} replies",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} replies"
     },
     "list_title_comments": {
       "default": "Comments"
@@ -1299,12 +1051,7 @@
       "default": "Reply"
     },
     "button_label_comment_reply": {
-      "default": "Reply to {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Reply to {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Reply..."
@@ -1334,23 +1081,13 @@
       "default": "An error occurred while posting your comment. Please try again later."
     },
     "page_title_user_profile": {
-      "default": "{username}'s profile",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username}'s profile"
     },
     "header_private_profile": {
       "default": "This profile is private"
     },
     "text_private_profile_description": {
-      "default": "As if there wasn't enough hidden already. {username}'s secrets remain their own.",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "As if there wasn't enough hidden already. {username}'s secrets remain their own."
     },
     "header_original_title": {
       "default": "Original Title"
@@ -1362,12 +1099,7 @@
       "default": "Remove from list"
     },
     "button_label_remove_from_list": {
-      "default": "Remove {title} from list",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Remove {title} from list"
     },
     "page_title_service_unavailable": {
       "default": "Trakt service unreachable"
@@ -1394,45 +1126,16 @@
       "default": "Listed"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Add or remove {title} from lists",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Add or remove {title} from lists"
     },
     "button_label_add_to_personal_list": {
-      "default": "Add {title} to {list}",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Add {title} to {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Remove {title} from {list}",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Remove {title} from {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Are you sure you want to remove {title} from {list}?",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to remove {title} from {list}?"
     },
     "option_text_theme_light": {
       "default": "Light"
@@ -1453,12 +1156,7 @@
       "default": "Reset"
     },
     "text_search_results_for": {
-      "default": "Results for {query}",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "Results for {query}"
     },
     "translated_value_type_movie": {
       "default": "Movie"
@@ -1509,12 +1207,7 @@
       "default": "Ratings"
     },
     "button_label_view_all_items_in": {
-      "default": "View all items in {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "View all items in {title}"
     },
     "button_text_reset_all_filters": {
       "default": "Reset all"
@@ -1553,12 +1246,7 @@
       "default": "Check in"
     },
     "button_label_checkin": {
-      "default": "Check in {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Check in {title}"
     },
     "text_cookie_notice": {
       "default": "Trakt uses C🍪🍪KIES in order to enhance your overall experience. You can <a>read more information</a> here."
@@ -1609,42 +1297,22 @@
       "default": "First play this month"
     },
     "text_shows_watched": {
-      "default": "{count} shows watched",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "{count} shows watched"
     },
     "button_text_follow": {
       "default": "Follow"
     },
     "button_label_follow": {
-      "default": "Follow {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Follow {username}"
     },
     "button_text_unfollow": {
       "default": "Unfollow"
     },
     "button_label_unfollow": {
-      "default": "Unfollow {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Unfollow {username}"
     },
     "warning_prompt_unfollow_user": {
-      "default": "Are you sure you want to unfollow {username}?",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to unfollow {username}?"
     },
     "text_vip_upsell": {
       "default": "Unlock VIP features to enhance your Trakt experience"
@@ -1677,12 +1345,7 @@
       "default": "Rename your list"
     },
     "button_label_rename_list": {
-      "default": "Rename your list {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Rename your list {name}"
     },
     "list_title_hot": {
       "default": "Hot This Month"
@@ -1751,12 +1414,7 @@
       "default": "Profile"
     },
     "page_title_search_results": {
-      "default": "Results for {query}",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "Results for {query}"
     },
     "page_title_search": {
       "default": "Search"
@@ -1774,20 +1432,10 @@
       "default": "Rate as great"
     },
     "badge_text_more": {
-      "default": "and {count} more",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "and {count} more"
     },
     "button_label_stop_playing": {
-      "default": "Stop the checkin for {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Stop the checkin for {title}"
     },
     "link_text_view_profile": {
       "default": "View profile"
@@ -1799,28 +1447,13 @@
       "default": "Search"
     },
     "image_alt_list_preview_poster": {
-      "default": "Poster for an entry in {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Poster for an entry in {title}"
     },
     "button_label_delete_list": {
-      "default": "Delete your list {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Delete your list {name}"
     },
     "warning_prompt_delete_list": {
-      "default": "Are you sure you want to delete the list {name}?",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Are you sure you want to delete the list {name}?"
     },
     "link_text_vip_list_upsell": {
       "default": "to add more lists"
@@ -1880,28 +1513,13 @@
       "default": "Favourite genres"
     },
     "button_label_toggle_genre": {
-      "default": "Toggle the {genre} genre",
-      "variables": {
-        "genre": {
-          "type": "string"
-        }
-      }
+      "default": "Toggle the {genre} genre"
     },
     "text_share_list": {
-      "default": "Check out this \"{name}\" list on Trakt! 📋",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Check out this \"{name}\" list on Trakt! 📋"
     },
     "text_share_top_list": {
-      "default": "Check out {name} on Trakt! 🔥",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Check out {name} on Trakt! 🔥"
     },
     "page_title_watchlist": {
       "default": "Watchlist"
@@ -1925,15 +1543,7 @@
       "default": "Movies"
     },
     "episode_footer_season_episode": {
-      "default": "S{seasonNumber} · E{episodeNumber}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "episodeNumber": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · E{episodeNumber}"
     },
     "translated_value_reaction_like": {
       "default": "Like"
@@ -1960,12 +1570,7 @@
       "default": "Reactions"
     },
     "button_label_react": {
-      "default": "React with {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "React with {reaction}"
     },
     "text_zero_reactions": {
       "default": "0 reactions"
