@@ -24,7 +24,13 @@
   </div>
 
   {#if $isLoading}
-    <LoadingIndicator />
+    <!--
+    Loading indicator is keyed to ensure destruction, since
+    the calendar items depend on accurate element positions onMount
+   -->
+    {#key "calendar-loading"}
+      <LoadingIndicator />
+    {/key}
   {:else}
     <CalendarItems calendar={$calendar} safeAreaOffset={$observedDimension} />
   {/if}
