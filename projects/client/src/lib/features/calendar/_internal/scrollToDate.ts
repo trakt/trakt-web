@@ -22,7 +22,6 @@ export function scrollToDate(activeDate: ActiveDate, offset: number) {
     return;
   }
 
-  // FIXME: on initial load this top is not correct
   const top = element.getBoundingClientRect().top;
   const y = top + globalThis.window.scrollY - offset;
   globalThis.window.scrollTo({ top: y, behavior: 'smooth' });
