@@ -73,7 +73,7 @@ export async function generateFromMeta(
     for (const [key, definition] of Object.entries(metaMessages.messages)) {
       const englishDefinition = englishMeta.messages[key];
       if (englishDefinition && typeof englishDefinition === 'object') {
-        // Copy exclude and platforms configuration from English to this locale
+        // Copy exclude, platforms, and variables configuration from English to this locale
         if (typeof definition === 'object') {
           if (englishDefinition.exclude) {
             definition.exclude = [...englishDefinition.exclude];
@@ -81,6 +81,10 @@ export async function generateFromMeta(
 
           if (englishDefinition.platforms) {
             definition.platforms = { ...englishDefinition.platforms };
+          }
+
+          if (englishDefinition.variables) {
+            definition.variables = { ...englishDefinition.variables };
           }
         }
       }
