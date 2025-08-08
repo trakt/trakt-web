@@ -31,4 +31,14 @@ describe('toHumanMonth', () => {
     const date = new Date('2023-08-31');
     expect(toHumanMonth(date)).toBe('August');
   });
+
+  it('should return the short month name in English', () => {
+    const date = new Date('2023-01-15');
+    expect(toHumanMonth(date, 'en', 'short')).toBe('Jan');
+  });
+
+  it('should return the short month name in other locales', () => {
+    const date = new Date('2023-01-15');
+    expect(toHumanMonth(date, 'es', 'short')).toBe('ene');
+  });
 });
