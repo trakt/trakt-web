@@ -43,23 +43,13 @@
       "default": "Middenseizoensfinale"
     },
     "header_profile_banner_greeting": {
-      "default": "Hallo, {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Hallo, {name}"
     },
     "list_title_up_next": {
       "default": "Verder kijken"
     },
     "tag_text_remaining_episodes": {
-      "default": "{count} resterend",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} resterend"
     },
     "list_title_recommended_movies": {
       "default": "Aanbevolen films"
@@ -68,12 +58,7 @@
       "default": "Aanbevolen series"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} afleveringen",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} afleveringen"
     },
     "page_title_error_404": {
       "default": "404: Niets. De leegte."
@@ -100,28 +85,13 @@
       "default": "Opnieuw bekijken"
     },
     "button_label_add_to_watchlist": {
-      "default": "{title} aan je Watchlist toevoegen",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} aan je Watchlist toevoegen"
     },
     "button_label_mark_as_watched": {
-      "default": "Markeer {title} als bekeken",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Markeer {title} als bekeken"
     },
     "button_label_watched_until_here": {
-      "default": "{title} tot hier als bekeken markeren",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} tot hier als bekeken markeren"
     },
     "translated_value_genre_horror": {
       "default": "Horror"
@@ -235,12 +205,7 @@
       "default": "Sciencefiction"
     },
     "button_label_remove_from_watchlist": {
-      "default": "{title} van je Watchlist verwijderen",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} van je Watchlist verwijderen"
     },
     "input_placeholder_search": {
       "default": "Zoek series & films..."
@@ -333,12 +298,7 @@
       "default": "Start"
     },
     "tag_text_plays": {
-      "default": "{number} keer bekeken",
-      "variables": {
-        "number": {
-          "type": "string"
-        }
-      }
+      "default": "{number} keer bekeken"
     },
     "button_text_logout": {
       "default": "Uitloggen"
@@ -434,42 +394,22 @@
       "default": "Series"
     },
     "text_episodes_watched": {
-      "default": "{count} afleveringen bekeken",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} afleveringen bekeken"
     },
     "list_title_movie_credits": {
       "default": "Films"
     },
     "text_movies_watched": {
-      "default": "{count} films bekeken",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} films bekeken"
     },
     "header_details": {
       "default": "Details"
     },
     "button_label_expand_category": {
-      "default": "{category} uitvouwen",
-      "variables": {
-        "category": {
-          "type": "string"
-        }
-      }
+      "default": "{category} uitvouwen"
     },
     "button_text_more": {
-      "default": "{count} meer",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} meer"
     },
     "header_premiered": {
       "default": "Première"
@@ -505,20 +445,10 @@
       "default": "Je Films"
     },
     "button_label_stream_on": {
-      "default": "Bekijk {title} nu",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Bekijk {title} nu"
     },
     "image_alt_streaming_service_logo": {
-      "default": "{service} logo",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "{service} logo"
     },
     "header_director": {
       "default": "Regisseur"
@@ -755,77 +685,34 @@
       "default": "Verwijder van Bekeken"
     },
     "button_label_remove_from_watched": {
-      "default": "Verwijder {title} van je Bekeken lijst",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Verwijder {title} van je Bekeken lijst"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Weet je zeker dat je {title} wilt verwijderen van je Bekeken lijst? Alle afspeelbeurten worden verwijderd.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {title} wilt verwijderen van je Bekeken lijst? Alle afspeelbeurten worden verwijderd."
     },
     "button_label_remove_from_history": {
-      "default": "Verwijder deze weergave van {title} uit je Bekeken lijst",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Verwijder deze weergave van {title} uit je Bekeken lijst"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Weet je zeker dat je deze afspeelbeurt van {title} uit je Bekeken lijst wilt verwijderen?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je deze afspeelbeurt van {title} uit je Bekeken lijst wilt verwijderen?"
     },
     "list_title_seasons": {
       "default": "Seizoenen"
     },
     "text_season_number": {
-      "default": "Seizoen {number}",
-      "variables": {
-        "number": {
-          "type": "string"
-        }
-      }
+      "default": "Seizoen {number}"
     },
     "text_season_specials": {
       "default": "Speciales"
     },
     "button_label_expand_media_overview": {
-      "default": "Bekijk {title} overzicht",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Bekijk {title} overzicht"
     },
     "text_season_episode_number": {
-      "default": "Seizoen {season} • Aflevering {number}",
-      "variables": {
-        "season": {
-          "type": "string"
-        },
-        "number": {
-          "type": "string"
-        }
-      }
+      "default": "Seizoen {season} • Aflevering {number}"
     },
     "button_label_share": {
-      "default": "Deel {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Deel {title}"
     },
     "header_status": {
       "default": "Status"
@@ -870,12 +757,7 @@
       "default": "Verwachte première"
     },
     "image_alt_person_headshot": {
-      "default": "Hoofdfoto van {person}",
-      "variables": {
-        "person": {
-          "type": "string"
-        }
-      }
+      "default": "Hoofdfoto van {person}"
     },
     "list_title_actors": {
       "default": "Acteurs"
@@ -899,12 +781,7 @@
       "default": "Volledig Seizoen"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Weet je zeker dat je {title} van je kijklijst wilt verwijderen?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {title} van je kijklijst wilt verwijderen?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Bekijk alle aanbevolen films"
@@ -946,28 +823,13 @@
       "default": "Verwijderen uit Favorieten"
     },
     "button_label_add_to_favorites": {
-      "default": "Voeg {title} toe aan je Favorieten",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Voeg {title} toe aan je Favorieten"
     },
     "button_label_remove_from_favorites": {
-      "default": "Verwijder {title} uit je Favorieten",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Verwijder {title} uit je Favorieten"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Weet je zeker dat je {title} uit je Favorieten wilt verwijderen?",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {title} uit je Favorieten wilt verwijderen?"
     },
     "list_title_favorite_movies": {
       "default": "Favoriete Films"
@@ -994,42 +856,22 @@
       "default": "Op aanvraag"
     },
     "button_label_popup_media": {
-      "default": "Pop-upmenu voor {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Pop-upmenu voor {title}"
     },
     "list_title_popular_lists": {
       "default": "Populaire lijsten"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} staat niet op populaire lijsten.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} staat niet op populaire lijsten."
     },
     "text_by": {
       "default": "door"
     },
     "image_alt_user_avatar": {
-      "default": "Avatar van {username}",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Avatar van {username}"
     },
     "image_alt_media_poster": {
-      "default": "{title} poster",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} poster"
     },
     "list_placeholder_comments": {
       "default": "Nog geen reacties."
@@ -1104,53 +946,19 @@
       "default": "Geliked"
     },
     "text_share_movie": {
-      "default": "Net {title} ontdekt - je moet dit zien! 🎬",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Net {title} ontdekt - je moet dit zien! 🎬"
     },
     "text_share_show": {
-      "default": "Deze geweldige serie gevonden: {title}! 📺",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Deze geweldige serie gevonden: {title}! 📺"
     },
     "text_share_episode": {
-      "default": "Zojuist {show} S{season}A{episode} - {title} bekeken! 🔥",
-      "variables": {
-        "show": {
-          "type": "string"
-        },
-        "season": {
-          "type": "string"
-        },
-        "episode": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Zojuist {show} S{season}A{episode} - {title} bekeken! 🔥"
     },
     "text_share_person": {
-      "default": "Bekijk {name} op Trakt! 🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Bekijk {name} op Trakt! 🎭"
     },
     "text_share_profile": {
-      "default": "Bekijk {name} op Trakt! 🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Bekijk {name} op Trakt! 🎭"
     },
     "list_title_recently_watched": {
       "default": "Onlangs bekeken"
@@ -1180,83 +988,37 @@
       "default": "Uitgezonden"
     },
     "warning_prompt_drop_show": {
-      "default": "Weet je zeker dat je {title} wilt verwijderen? Dit verwijdert het van je kijklijst.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {title} wilt verwijderen? Dit verwijdert het van je kijklijst."
     },
     "button_label_drop_show": {
-      "default": "{title} markeren als verwijderd",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} markeren als verwijderd"
     },
     "button_text_drop_show": {
       "default": "Verwijderen"
     },
     "warning_prompt_restore_show": {
-      "default": "Weet je zeker dat je de {title} serie wilt herstellen? Dit herstelt de voortgang en de kalender.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je de {title} serie wilt herstellen? Dit herstelt de voortgang en de kalender."
     },
     "button_label_restore_show": {
-      "default": "Herstel serie {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Herstel serie {title}"
     },
     "button_text_restore_show": {
       "default": "Serie herstellen"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Weet je zeker dat je {title} als bekeken wilt markeren? Dit markeert alle afleveringen als bekeken.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {title} als bekeken wilt markeren? Dit markeert alle afleveringen als bekeken."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Weet je zeker dat je alle onbekeken afleveringen van {title} wilt markeren als bekeken tot aflevering {episode}? Dit markeert {count} afleveringen als bekeken.",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "episode": {
-          "type": "string"
-        },
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je alle onbekeken afleveringen van {title} wilt markeren als bekeken tot aflevering {episode}? Dit markeert {count} afleveringen als bekeken."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
-      "default": "Weet je zeker dat je {count} afleveringen als bekeken wilt markeren?",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {count} afleveringen als bekeken wilt markeren?"
     },
     "tag_text_watch_count": {
       "default": "Aantal keer bekeken"
     },
     "list_placeholder_media_history": {
-      "default": "Je hebt {title} nog niet bekeken",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Je hebt {title} nog niet bekeken"
     },
     "button_label_like_comment": {
       "default": "Vind ik leuk"
@@ -1265,12 +1027,7 @@
       "default": "Vind ik niet leuk"
     },
     "button_text_comment_likes": {
-      "default": "{count} likes",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} likes"
     },
     "button_label_close": {
       "default": "Sluiten"
@@ -1279,12 +1036,7 @@
       "default": "Reacties"
     },
     "button_text_comment_replies": {
-      "default": "{count} reacties",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} reacties"
     },
     "list_title_comments": {
       "default": "Reacties"
@@ -1299,12 +1051,7 @@
       "default": "Antwoord"
     },
     "button_label_comment_reply": {
-      "default": "Reageer op {user}",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "Reageer op {user}"
     },
     "textarea_placeholder_reply": {
       "default": "Reageren..."
@@ -1334,23 +1081,13 @@
       "default": "Er is een fout opgetreden bij het plaatsen van je opmerking. Probeer het later opnieuw."
     },
     "page_title_user_profile": {
-      "default": "{username}'s profiel",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username}'s profiel"
     },
     "header_private_profile": {
       "default": "Dit profiel is privé"
     },
     "text_private_profile_description": {
-      "default": "Alsof er nog niet genoeg verborgen was. De geheimen van {username} blijven van hen.",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Alsof er nog niet genoeg verborgen was. De geheimen van {username} blijven van hen."
     },
     "header_original_title": {
       "default": "Originele titel"
@@ -1362,12 +1099,7 @@
       "default": "Verwijder van lijst"
     },
     "button_label_remove_from_list": {
-      "default": "Verwijder {title} van de lijst",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Verwijder {title} van de lijst"
     },
     "page_title_service_unavailable": {
       "default": "Trakt-dienst onbereikbaar"
@@ -1394,45 +1126,16 @@
       "default": "In lijst"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "{title} toevoegen of verwijderen van lijsten",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} toevoegen of verwijderen van lijsten"
     },
     "button_label_add_to_personal_list": {
-      "default": "Voeg {title} toe aan {list}",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Voeg {title} toe aan {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Verwijder {title} uit {list}",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Verwijder {title} uit {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Weet je zeker dat je {title} wilt verwijderen van {list}?",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {title} wilt verwijderen van {list}?"
     },
     "option_text_theme_light": {
       "default": "Licht"
@@ -1453,12 +1156,7 @@
       "default": "Reset"
     },
     "text_search_results_for": {
-      "default": "Resultaten voor {query}",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "Resultaten voor {query}"
     },
     "translated_value_type_movie": {
       "default": "Film"
@@ -1509,12 +1207,7 @@
       "default": "Beoordelingen"
     },
     "button_label_view_all_items_in": {
-      "default": "Bekijk alle items in {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Bekijk alle items in {title}"
     },
     "button_text_reset_all_filters": {
       "default": "Alles resetten"
@@ -1553,12 +1246,7 @@
       "default": "Inchecken"
     },
     "button_label_checkin": {
-      "default": "Inchecken {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Inchecken {title}"
     },
     "text_cookie_notice": {
       "default": "Trakt gebruikt C🍪🍪KIES om je algehele ervaring te verbeteren. Je kunt <a>hier meer informatie lezen</a>."
@@ -1609,42 +1297,22 @@
       "default": "Eerste afspeling deze maand"
     },
     "text_shows_watched": {
-      "default": "{count} series bekeken",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} series bekeken"
     },
     "button_text_follow": {
       "default": "Volgen"
     },
     "button_label_follow": {
-      "default": "{username} volgen",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username} volgen"
     },
     "button_text_unfollow": {
       "default": "Ontvolgen"
     },
     "button_label_unfollow": {
-      "default": "{username} ontvolgen",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username} ontvolgen"
     },
     "warning_prompt_unfollow_user": {
-      "default": "Weet je zeker dat je {username} wilt ontvolgen?",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je {username} wilt ontvolgen?"
     },
     "text_vip_upsell": {
       "default": "Ontgrendel VIP-functies om je Trakt-ervaring te verbeteren"
@@ -1677,12 +1345,7 @@
       "default": "Hernoem je lijst"
     },
     "button_label_rename_list": {
-      "default": "Hernoem je lijst {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Hernoem je lijst {name}"
     },
     "list_title_hot": {
       "default": "Populair deze maand"
@@ -1751,12 +1414,7 @@
       "default": "Profiel"
     },
     "page_title_search_results": {
-      "default": "Resultaten voor {query}",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "Resultaten voor {query}"
     },
     "page_title_search": {
       "default": "Zoeken"
@@ -1774,20 +1432,10 @@
       "default": "Beoordeel als geweldig"
     },
     "badge_text_more": {
-      "default": "en {count} meer",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "en {count} meer"
     },
     "button_label_stop_playing": {
-      "default": "De check-in voor {title} stoppen",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "De check-in voor {title} stoppen"
     },
     "link_text_view_profile": {
       "default": "Profiel bekijken"
@@ -1799,28 +1447,13 @@
       "default": "Zoeken"
     },
     "image_alt_list_preview_poster": {
-      "default": "Poster voor een item in {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Poster voor een item in {title}"
     },
     "button_label_delete_list": {
-      "default": "Verwijder je lijst {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Verwijder je lijst {name}"
     },
     "warning_prompt_delete_list": {
-      "default": "Weet je zeker dat je de lijst {name} wilt verwijderen?",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Weet je zeker dat je de lijst {name} wilt verwijderen?"
     },
     "link_text_vip_list_upsell": {
       "default": "Voor meer lijsten"
@@ -1880,28 +1513,13 @@
       "default": "Favoriete genres"
     },
     "button_label_toggle_genre": {
-      "default": "Genre {genre} in-/uitschakelen",
-      "variables": {
-        "genre": {
-          "type": "string"
-        }
-      }
+      "default": "Genre {genre} in-/uitschakelen"
     },
     "text_share_list": {
-      "default": "Bekijk deze \"{name}\" lijst op Trakt! 📋",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Bekijk deze \"{name}\" lijst op Trakt! 📋"
     },
     "text_share_top_list": {
-      "default": "Bekijk {name} op Trakt! 🔥",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Bekijk {name} op Trakt! 🔥"
     },
     "page_title_watchlist": {
       "default": "Te zien"
@@ -1925,15 +1543,7 @@
       "default": "Films"
     },
     "episode_footer_season_episode": {
-      "default": "S{seasonNumber} · A{episodeNumber}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "episodeNumber": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · A{episodeNumber}"
     },
     "translated_value_reaction_like": {
       "default": "Vind ik leuk"
@@ -1960,12 +1570,7 @@
       "default": "Reacties"
     },
     "button_label_react": {
-      "default": "Reageer met {reaction}",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "Reageer met {reaction}"
     },
     "text_zero_reactions": {
       "default": "0 reacties"

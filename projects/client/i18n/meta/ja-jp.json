@@ -43,23 +43,13 @@
       "default": "シーズン中盤最終回"
     },
     "header_profile_banner_greeting": {
-      "default": "こんにちは、{name}さん！",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "こんにちは、{name}さん！"
     },
     "list_title_up_next": {
       "default": "視聴を続ける"
     },
     "tag_text_remaining_episodes": {
-      "default": "あと{count}話",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "あと{count}話"
     },
     "list_title_recommended_movies": {
       "default": "おすすめ作品"
@@ -68,12 +58,7 @@
       "default": "おすすめ番組"
     },
     "tag_text_number_of_episodes": {
-      "default": "全{count}話",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "全{count}話"
     },
     "page_title_error_404": {
       "default": "404エラー！"
@@ -100,28 +85,13 @@
       "default": "もう一度見る"
     },
     "button_label_add_to_watchlist": {
-      "default": "{title} を視聴リストに追加",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} を視聴リストに追加"
     },
     "button_label_mark_as_watched": {
-      "default": "{title}を視聴済みにする",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}を視聴済みにする"
     },
     "button_label_watched_until_here": {
-      "default": "{title}をここまで視聴済みにする",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}をここまで視聴済みにする"
     },
     "translated_value_genre_horror": {
       "default": "ホラー"
@@ -235,12 +205,7 @@
       "default": "SF"
     },
     "button_label_remove_from_watchlist": {
-      "default": "{title} を視聴リストから削除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} を視聴リストから削除"
     },
     "input_placeholder_search": {
       "default": "番組や映像作品を検索..."
@@ -333,12 +298,7 @@
       "default": "ホーム"
     },
     "tag_text_plays": {
-      "default": "{number} 回再生",
-      "variables": {
-        "number": {
-          "type": "string"
-        }
-      }
+      "default": "{number} 回再生"
     },
     "button_text_logout": {
       "default": "ログアウト"
@@ -434,42 +394,22 @@
       "default": "番組"
     },
     "text_episodes_watched": {
-      "default": "{count}話視聴済み",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count}話視聴済み"
     },
     "list_title_movie_credits": {
       "default": "映画"
     },
     "text_movies_watched": {
-      "default": "{count}作品視聴済み",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count}作品視聴済み"
     },
     "header_details": {
       "default": "詳細"
     },
     "button_label_expand_category": {
-      "default": "{category}を展開",
-      "variables": {
-        "category": {
-          "type": "string"
-        }
-      }
+      "default": "{category}を展開"
     },
     "button_text_more": {
-      "default": "{count} 件もっと",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} 件もっと"
     },
     "header_premiered": {
       "default": "公開日"
@@ -505,20 +445,10 @@
       "default": "あなたの映画"
     },
     "button_label_stream_on": {
-      "default": "{title}を今すぐ視聴",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}を今すぐ視聴"
     },
     "image_alt_streaming_service_logo": {
-      "default": "{service}のロゴ",
-      "variables": {
-        "service": {
-          "type": "string"
-        }
-      }
+      "default": "{service}のロゴ"
     },
     "header_director": {
       "default": "監督"
@@ -755,77 +685,34 @@
       "default": "視聴済みから削除"
     },
     "button_label_remove_from_watched": {
-      "default": "視聴済みリストから{title}を削除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "視聴済みリストから{title}を削除"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "{title} を視聴済リストから削除しますか？すべての再生記録が削除されます。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} を視聴済リストから削除しますか？すべての再生記録が削除されます。"
     },
     "button_label_remove_from_history": {
-      "default": "{title}の視聴履歴からこの記録を削除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}の視聴履歴からこの記録を削除"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "{title}の視聴記録を視聴済みリストから削除してもよろしいですか？",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}の視聴記録を視聴済みリストから削除してもよろしいですか？"
     },
     "list_title_seasons": {
       "default": "シーズン"
     },
     "text_season_number": {
-      "default": "第{number}シーズン",
-      "variables": {
-        "number": {
-          "type": "string"
-        }
-      }
+      "default": "第{number}シーズン"
     },
     "text_season_specials": {
       "default": "スペシャル"
     },
     "button_label_expand_media_overview": {
-      "default": "{title} の概要を表示",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} の概要を表示"
     },
     "text_season_episode_number": {
-      "default": "シーズン{season}・エピソード{number}",
-      "variables": {
-        "season": {
-          "type": "string"
-        },
-        "number": {
-          "type": "string"
-        }
-      }
+      "default": "シーズン{season}・エピソード{number}"
     },
     "button_label_share": {
-      "default": "{title}を共有する",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}を共有する"
     },
     "header_status": {
       "default": "ステータス"
@@ -870,12 +757,7 @@
       "default": "公開予定"
     },
     "image_alt_person_headshot": {
-      "default": "{person}さんの顔写真",
-      "variables": {
-        "person": {
-          "type": "string"
-        }
-      }
+      "default": "{person}さんの顔写真"
     },
     "list_title_actors": {
       "default": "出演者"
@@ -899,12 +781,7 @@
       "default": "フルシーズン"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "「{title}」をウォッチリストから削除してもよろしいですか？",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "「{title}」をウォッチリストから削除してもよろしいですか？"
     },
     "button_label_view_all_recommended_movies": {
       "default": "おすすめの作品をすべて見る"
@@ -946,28 +823,13 @@
       "default": "お気に入りから削除"
     },
     "button_label_add_to_favorites": {
-      "default": "{title}をお気に入りに登録",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}をお気に入りに登録"
     },
     "button_label_remove_from_favorites": {
-      "default": "{title}をお気に入りから削除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}をお気に入りから削除"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "{title}をお気に入りから削除しますか？",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}をお気に入りから削除しますか？"
     },
     "list_title_favorite_movies": {
       "default": "お気に入り映画"
@@ -994,42 +856,22 @@
       "default": "オンデマンド"
     },
     "button_label_popup_media": {
-      "default": "{title} のポップアップメニュー",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} のポップアップメニュー"
     },
     "list_title_popular_lists": {
       "default": "人気のリスト"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title}は人気のリストには見当たりません。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}は人気のリストには見当たりません。"
     },
     "text_by": {
       "default": "作成者"
     },
     "image_alt_user_avatar": {
-      "default": "{username}のアバター",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username}のアバター"
     },
     "image_alt_media_poster": {
-      "default": "{title}のポスター",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}のポスター"
     },
     "list_placeholder_comments": {
       "default": "まだコメントはありません。"
@@ -1104,53 +946,19 @@
       "default": "いいね！"
     },
     "text_share_movie": {
-      "default": "{title}をみつけてしまった！絶対見てほしい！🎬",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}をみつけてしまった！絶対見てほしい！🎬"
     },
     "text_share_show": {
-      "default": "素晴らしい作品を発見！{title} 📺",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "素晴らしい作品を発見！{title} 📺"
     },
     "text_share_episode": {
-      "default": "{show} S{season}E{episode} - {title}を視聴！🔥",
-      "variables": {
-        "show": {
-          "type": "string"
-        },
-        "season": {
-          "type": "string"
-        },
-        "episode": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{show} S{season}E{episode} - {title}を視聴！🔥"
     },
     "text_share_person": {
-      "default": "{name}をTraktでチェック！🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "{name}をTraktでチェック！🎭"
     },
     "text_share_profile": {
-      "default": "{name}をTraktでチェック！🎭",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "{name}をTraktでチェック！🎭"
     },
     "list_title_recently_watched": {
       "default": "最近視聴した"
@@ -1180,83 +988,37 @@
       "default": "放送済み"
     },
     "warning_prompt_drop_show": {
-      "default": "{title}の番組を本当に削除してもよろしいですか？これにより、視聴予定リストから削除されます。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}の番組を本当に削除してもよろしいですか？これにより、視聴予定リストから削除されます。"
     },
     "button_label_drop_show": {
-      "default": "{title}の番組を視聴済みとしてフラグ付けします",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}の番組を視聴済みとしてフラグ付けします"
     },
     "button_text_drop_show": {
       "default": "番組を削除する"
     },
     "warning_prompt_restore_show": {
-      "default": "{title}の番組を復元しますか？これは進行状況とカレンダーで復元されます。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}の番組を復元しますか？これは進行状況とカレンダーで復元されます。"
     },
     "button_label_restore_show": {
-      "default": "{title}の番組を復元",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}の番組を復元"
     },
     "button_text_restore_show": {
       "default": "番組を復元"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "{title}を視聴済みにしますか？これにより、全エピソードが視聴済みにマークされます。",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title}を視聴済みにしますか？これにより、全エピソードが視聴済みにマークされます。"
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "{title}の未視聴エピソードをエピソード{episode}まで全て視聴済みにしますか？ {count}エピソードが視聴済みになります。",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "episode": {
-          "type": "string"
-        },
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{title}の未視聴エピソードをエピソード{episode}まで全て視聴済みにしますか？ {count}エピソードが視聴済みになります。"
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
-      "default": "{count}エピソードを視聴済みにしますか？",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count}エピソードを視聴済みにしますか？"
     },
     "tag_text_watch_count": {
       "default": "視聴回数"
     },
     "list_placeholder_media_history": {
-      "default": "{title} はまだ見ていないよ",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} はまだ見ていないよ"
     },
     "button_label_like_comment": {
       "default": "コメントをいいね"
@@ -1265,12 +1027,7 @@
       "default": "コメントをいいねしない"
     },
     "button_text_comment_likes": {
-      "default": "{count} 件のいいね",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} 件のいいね"
     },
     "button_label_close": {
       "default": "閉じる"
@@ -1279,12 +1036,7 @@
       "default": "コメント返信"
     },
     "button_text_comment_replies": {
-      "default": "{count} 件の返信",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} 件の返信"
     },
     "list_title_comments": {
       "default": "コメント"
@@ -1299,12 +1051,7 @@
       "default": "返信する"
     },
     "button_label_comment_reply": {
-      "default": "{user} に返信する",
-      "variables": {
-        "user": {
-          "type": "string"
-        }
-      }
+      "default": "{user} に返信する"
     },
     "textarea_placeholder_reply": {
       "default": "返信..."
@@ -1334,23 +1081,13 @@
       "default": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。"
     },
     "page_title_user_profile": {
-      "default": "{username}のプロフィール",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username}のプロフィール"
     },
     "header_private_profile": {
       "default": "このプロフィールは非公開です"
     },
     "text_private_profile_description": {
-      "default": "隠されたものが十分でないかのように。{username} の秘密は彼らだけのものです。",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "隠されたものが十分でないかのように。{username} の秘密は彼らだけのものです。"
     },
     "header_original_title": {
       "default": "原題"
@@ -1362,12 +1099,7 @@
       "default": "Remove from list"
     },
     "button_label_remove_from_list": {
-      "default": "Remove {title} from list",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "Remove {title} from list"
     },
     "page_title_service_unavailable": {
       "default": "Traktサービスに接続できません"
@@ -1394,45 +1126,16 @@
       "default": "登録済み"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "{title} をリストに追加または削除",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} をリストに追加または削除"
     },
     "button_label_add_to_personal_list": {
-      "default": "{title} を {list} に追加",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "{title} を {list} に追加"
     },
     "button_label_remove_from_personal_list": {
-      "default": "{title} を {list} から削除",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "{title} を {list} から削除"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "{title} を {list} から削除してもよろしいですか？",
-      "variables": {
-        "title": {
-          "type": "string"
-        },
-        "list": {
-          "type": "string"
-        }
-      }
+      "default": "{title} を {list} から削除してもよろしいですか？"
     },
     "option_text_theme_light": {
       "default": "ライト"
@@ -1453,12 +1156,7 @@
       "default": "リセット"
     },
     "text_search_results_for": {
-      "default": "{query} の検索結果",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "{query} の検索結果"
     },
     "translated_value_type_movie": {
       "default": "映画"
@@ -1509,12 +1207,7 @@
       "default": "評価"
     },
     "button_label_view_all_items_in": {
-      "default": "{title} のアイテムをすべて表示",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} のアイテムをすべて表示"
     },
     "button_text_reset_all_filters": {
       "default": "すべてリセット"
@@ -1553,12 +1246,7 @@
       "default": "チェックイン"
     },
     "button_label_checkin": {
-      "default": "チェックイン {title}",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "チェックイン {title}"
     },
     "text_cookie_notice": {
       "default": "Traktは、より良い体験のためにC🍪🍪KIESを使用しています。 <a>詳細はこちら</a>をご覧ください。"
@@ -1609,42 +1297,22 @@
       "default": "今月の初再生"
     },
     "text_shows_watched": {
-      "default": "{count} 作品を視聴済み",
-      "variables": {
-        "count": {
-          "type": "string"
-        }
-      }
+      "default": "{count} 作品を視聴済み"
     },
     "button_text_follow": {
       "default": "フォロー"
     },
     "button_label_follow": {
-      "default": "{username} をフォロー",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username} をフォロー"
     },
     "button_text_unfollow": {
       "default": "フォロー解除"
     },
     "button_label_unfollow": {
-      "default": "{username} のフォローを解除",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username} のフォローを解除"
     },
     "warning_prompt_unfollow_user": {
-      "default": "{username} のフォローを解除してもよろしいですか？",
-      "variables": {
-        "username": {
-          "type": "string"
-        }
-      }
+      "default": "{username} のフォローを解除してもよろしいですか？"
     },
     "text_vip_upsell": {
       "default": "Trakt体験を向上させるVIP機能をアンロック"
@@ -1677,12 +1345,7 @@
       "default": "リストの名前を変更"
     },
     "button_label_rename_list": {
-      "default": "リストの名前を変更 {name}",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "リストの名前を変更 {name}"
     },
     "list_title_hot": {
       "default": "今月の話題作"
@@ -1751,12 +1414,7 @@
       "default": "プロフィール"
     },
     "page_title_search_results": {
-      "default": "{query} の検索結果",
-      "variables": {
-        "query": {
-          "type": "string"
-        }
-      }
+      "default": "{query} の検索結果"
     },
     "page_title_search": {
       "default": "検索"
@@ -1774,20 +1432,10 @@
       "default": "素晴らしいと評価"
     },
     "badge_text_more": {
-      "default": "その他{count}件",
-      "variables": {
-        "count": {
-          "type": "number"
-        }
-      }
+      "default": "その他{count}件"
     },
     "button_label_stop_playing": {
-      "default": "{title} のチェックインを停止",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} のチェックインを停止"
     },
     "link_text_view_profile": {
       "default": "プロフィールを見る"
@@ -1799,28 +1447,13 @@
       "default": "検索"
     },
     "image_alt_list_preview_poster": {
-      "default": "{title} のリストのエントリのポスター",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      }
+      "default": "{title} のリストのエントリのポスター"
     },
     "button_label_delete_list": {
-      "default": "リスト {name} を削除",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "リスト {name} を削除"
     },
     "warning_prompt_delete_list": {
-      "default": "リスト {name} を削除しますか？",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "リスト {name} を削除しますか？"
     },
     "link_text_vip_list_upsell": {
       "default": "リスト追加"
@@ -1880,28 +1513,13 @@
       "default": "お気に入りのジャンル"
     },
     "button_label_toggle_genre": {
-      "default": "{genre}のジャンルを切り替える",
-      "variables": {
-        "genre": {
-          "type": "string"
-        }
-      }
+      "default": "{genre}のジャンルを切り替える"
     },
     "text_share_list": {
-      "default": "Trakt でこの「{name}」リストをチェック！ 📋",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Trakt でこの「{name}」リストをチェック！ 📋"
     },
     "text_share_top_list": {
-      "default": "Trakt で {name} をチェック！🔥",
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      }
+      "default": "Trakt で {name} をチェック！🔥"
     },
     "page_title_watchlist": {
       "default": "ウォッチリスト"
@@ -1925,15 +1543,7 @@
       "default": "映画"
     },
     "episode_footer_season_episode": {
-      "default": "S{seasonNumber} · E{episodeNumber}",
-      "variables": {
-        "seasonNumber": {
-          "type": "number"
-        },
-        "episodeNumber": {
-          "type": "number"
-        }
-      }
+      "default": "S{seasonNumber} · E{episodeNumber}"
     },
     "translated_value_reaction_like": {
       "default": "いいね！"
@@ -1960,12 +1570,7 @@
       "default": "リアクション"
     },
     "button_label_react": {
-      "default": "{reaction}でリアクション",
-      "variables": {
-        "reaction": {
-          "type": "string"
-        }
-      }
+      "default": "{reaction}でリアクション"
     },
     "text_zero_reactions": {
       "default": "0 件のリアクション"
