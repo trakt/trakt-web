@@ -5,7 +5,8 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   commitlint:
@@ -24,3 +25,16 @@ jobs:
         uses: vladjerca/no-fixups-action@main
         with:
           skip-checkout: true
+
+  merge:
+    if: github.event.pull_request.draft == false
+    name: The Convergence of Realms (Enable Auto Merge)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unveiling the Repository
+        uses: actions/checkout@v4
+
+      - name: Use the Power of GitHub CLI
+        run: gh pr merge --rebase --auto ${{ github.event.pull_request.number }}
+        env:
+          GH_TOKEN: ${{ github.token }}
