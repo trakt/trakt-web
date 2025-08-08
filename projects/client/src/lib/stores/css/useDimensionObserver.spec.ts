@@ -57,6 +57,25 @@ describe('useDimensionObserver', () => {
     component.destroy();
   });
 
+  it('should observe bottom changes of the node', async () => {
+    const node = document.createElement('div');
+    const { observeDimension, observedDimension } = useDimensionObserver(
+      'bottom',
+    );
+
+    const component = await renderStore(() => observeDimension(node));
+    expect(get(observedDimension)).toBe(0);
+
+    const bottom = 150;
+    vi.spyOn(node, 'getBoundingClientRect')
+      .mockReturnValueOnce({ ...getDomRect(0, 0, 100), bottom });
+    node.setAttribute('style', `bottom: ${bottom}px`);
+
+    expect(await waitForEmission(observedDimension, 2)).toBe(bottom);
+
+    component.destroy();
+  });
+
   it('should cleanup observer on destroy', async () => {
     const node = document.createElement('div');
     const { observeDimension } = useDimensionObserver('width');
