@@ -30,7 +30,7 @@
   }
 
   const localeToFlag: Record<AvailableLocale, string> = {
-    en: "🇬🇧",
+    en: "🇺🇸",
     "en-au": "🇦🇺",
     "fr-fr": "🇫🇷",
     "fr-ca": "🇨🇦",
