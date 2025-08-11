@@ -52,11 +52,18 @@ const TRAKT_TARGET_ENVIRONMENT = (() => {
   return Environment.production_private;
 })();
 
+const TRAKT_TARGET_API_ENVIRONMENT = (() => {
+  const url = new URL(TRAKT_TARGET_ENVIRONMENT);
+  url.hostname = url.hostname.replace('apiz', 'hd');
+  return url.toString();
+})();
+
 export default defineConfig(({ mode }) => ({
   define: {
     'TRAKT_CLIENT_ID': `"${process.env.TRAKT_CLIENT_ID}"`,
     'TRAKT_MODE': `"${mode}${process.env.IS_PREVIEW ? '-preview' : ''}"`,
     'TRAKT_TARGET_ENVIRONMENT': `"${TRAKT_TARGET_ENVIRONMENT}"`,
+    'TRAKT_TARGET_API_ENVIRONMENT': `"${TRAKT_TARGET_API_ENVIRONMENT}"`,
     'FIREBASE_PROJECT_ID': `"${process.env.FIREBASE_PROJECT_ID}"`,
     'FIREBASE_API_KEY': `"${process.env.FIREBASE_API_KEY}"`,
     'FIREBASE_APP_ID': `"${process.env.FIREBASE_APP_ID}"`,
@@ -72,7 +79,7 @@ export default defineConfig(({ mode }) => ({
     },
     proxy: {
       '/api/trakt': {
-        target: TRAKT_TARGET_ENVIRONMENT,
+        target: TRAKT_TARGET_API_ENVIRONMENT,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/trakt/, ''),
       },
