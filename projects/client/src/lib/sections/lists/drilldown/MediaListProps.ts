@@ -7,6 +7,7 @@ export type MediaListProps<T, M> = {
   title: string;
   type: M;
   item: Snippet<[T]>;
+  ctaItem?: Snippet;
   useList: PaginatableStore<T, M>;
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
