@@ -16,7 +16,7 @@
 
 <div
   use:whenInViewport={() => isVisible.set(true)}
-  use:dPadTrigger={".trakt-card-content > .trakt-link"}
+  use:dPadTrigger={".trakt-card-content > .trakt-link, .trakt-button-link"}
   class="trakt-card"
   data-navigation-type={$navigation}
   data-dpad-navigation={DpadNavigationType.Item}
@@ -42,7 +42,8 @@
   }
 
   .trakt-card[data-navigation-type="dpad"] {
-    &:has(:global(.trakt-link)) {
+    &:has(:global(.trakt-link)),
+    &:has(:global(.trakt-button-link)) {
       .trakt-card-content {
         transform: scale(0.95);
         /* To compensate that we're scaling a non 1:1 aspect ratio element */
