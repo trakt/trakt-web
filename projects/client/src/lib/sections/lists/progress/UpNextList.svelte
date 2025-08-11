@@ -4,6 +4,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useStablePaginated } from "../stores/useStablePaginated";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
@@ -40,6 +41,11 @@
       status={$hidden.includes(episode.show.id) ? "hidden" : "watching"}
     />
   {/snippet}
+
+  {#snippet ctaItem()}
+    <CtaItem cta="up-next" />
+  {/snippet}
+
   {#snippet empty()}
     <p>{m.list_placeholder_up_next_empty()}</p>
   {/snippet}

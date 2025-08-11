@@ -1670,6 +1670,45 @@
     },
     "button_label_calendar": {
       "default": "Kalender"
+    },
+    "text_cta_up_next": {
+      "default": "Bekijk je favoriete series verder en ga verder waar je gebleven was. Welke series volg je momenteel?"
+    },
+    "text_cta_watchlist_released": {
+      "default": "Voeg films toe aan je watchlist en begin met het bouwen van een lijst met films die je wilt bekijken."
+    },
+    "text_cta_upcoming": {
+      "default": "Je aankomende schema geeft nieuwe afleveringen weer die binnenkort uitkomen van series die je al volgt."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Voeg aankomende films toe aan je watchlist en bekijk welke binnenkort uitkomen."
+    },
+    "text_cta_activity": {
+      "default": "Maak snel vrienden door het Trakt Team te volgen en te ontdekken wat zij bekijken."
+    },
+    "link_text_browse_shows": {
+      "default": "Series"
+    },
+    "link_text_browse_movies": {
+      "default": "Films"
+    },
+    "link_text_explore_shows": {
+      "default": "Series verkennen"
+    },
+    "link_text_explore_movies": {
+      "default": "Films verkennen"
+    },
+    "link_label_browse_shows": {
+      "default": "Series"
+    },
+    "link_label_browse_movies": {
+      "default": "Films"
+    },
+    "link_label_explore_shows": {
+      "default": "Series verkennen"
+    },
+    "link_label_explore_movies": {
+      "default": "Films verkennen"
     }
   }
 }

@@ -1670,6 +1670,45 @@
     },
     "button_label_calendar": {
       "default": "Calendar"
+    },
+    "text_cta_up_next": {
+      "default": "Continue watching your favourite shows and pick up where you left off anytime. Which shows are you currently following?"
+    },
+    "text_cta_watchlist_released": {
+      "default": "Add films to your watchlist and start building a list of films you want to watch."
+    },
+    "text_cta_upcoming": {
+      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re already following."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Add upcoming films to your watchlist and see which ones are releasing soon."
+    },
+    "text_cta_activity": {
+      "default": "Start making friends quickly by following the Trakt Team and explore what they are watching."
+    },
+    "link_text_browse_shows": {
+      "default": "Browse shows"
+    },
+    "link_text_browse_movies": {
+      "default": "Browse movies"
+    },
+    "link_text_explore_shows": {
+      "default": "Explore shows"
+    },
+    "link_text_explore_movies": {
+      "default": "Explore movies"
+    },
+    "link_label_browse_shows": {
+      "default": "Browse shows"
+    },
+    "link_label_browse_movies": {
+      "default": "Browse movies"
+    },
+    "link_label_explore_shows": {
+      "default": "Explore shows"
+    },
+    "link_label_explore_movies": {
+      "default": "Explore movies"
     }
   }
 }

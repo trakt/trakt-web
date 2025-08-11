@@ -2,6 +2,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CalendarButton from "./components/CalendarButton.svelte";
+  import CtaItem from "./components/cta/CtaItem.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import EpisodeItem from "./components/EpisodeItem.svelte";
   import FindShowsLink from "./components/FindShowsLink.svelte";
@@ -27,6 +28,10 @@
     {#if entry.type === "movie"}
       <DefaultMediaItem media={entry} type="movie" variant="landscape" />
     {/if}
+  {/snippet}
+
+  {#snippet ctaItem()}
+    <CtaItem cta="upcoming" />
   {/snippet}
 
   {#snippet empty()}

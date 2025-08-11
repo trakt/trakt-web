@@ -1670,6 +1670,45 @@
     },
     "button_label_calendar": {
       "default": "Calendar"
+    },
+    "text_cta_up_next": {
+      "default": "Continuați să urmăriți serialele preferate și reluați de unde ați rămas oricând. Ce seriale urmăriți?"
+    },
+    "text_cta_watchlist_released": {
+      "default": "Adăugați filme în lista de urmărire și începeți să creați o listă de filme pe care doriți să le vedeți."
+    },
+    "text_cta_upcoming": {
+      "default": "Programul dvs. viitor listează episoade noi care vor fi lansate în curând pentru serialele pe care le urmăriți deja."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Adăugați filme viitoare în lista de urmărire și vedeți care vor fi lansate în curând."
+    },
+    "text_cta_activity": {
+      "default": "Începeți să vă faceți prieteni rapid urmărind Echipa Trakt și explorați ce urmăresc."
+    },
+    "link_text_browse_shows": {
+      "default": "Răsfoiește seriale"
+    },
+    "link_text_browse_movies": {
+      "default": "Răsfoiește filme"
+    },
+    "link_text_explore_shows": {
+      "default": "Explorează seriale"
+    },
+    "link_text_explore_movies": {
+      "default": "Explorează filme"
+    },
+    "link_label_browse_shows": {
+      "default": "Răsfoiește seriale"
+    },
+    "link_label_browse_movies": {
+      "default": "Răsfoiește filme"
+    },
+    "link_label_explore_shows": {
+      "default": "Explorează seriale"
+    },
+    "link_label_explore_movies": {
+      "default": "Explorează filme"
     }
   }
 }

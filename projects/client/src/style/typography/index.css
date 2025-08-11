@@ -94,6 +94,10 @@ p {
   &.small {
     font-size: var(--ni-14);
   }
+
+  &.smaller {
+    font-size: var(--ni-12);
+  }
 }
 
 span,

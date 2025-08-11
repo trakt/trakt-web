@@ -4819,6 +4819,110 @@
         "android",
         "ios"
       ]
+    },
+    "text_cta_up_next": {
+      "default": "Continue watching your favorite shows and pick up where you left off anytime. Which shows are you currently following?",
+      "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_watchlist_released": {
+      "default": "Add movies to your watchlist and start building a list of movies you want to watch.",
+      "description": "Call to action text shown in the Watchlist Released list, encouraging users to add released movies to their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_upcoming": {
+      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re already following.",
+      "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Add upcoming movies to your watchlist and see which ones are releasing soon.",
+      "description": "Call to action text shown in the Watchlist Unreleased list, encouraging users to add unreleased movies to their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_activity": {
+      "default": "Start making friends quickly by following the Trakt Team and explore what they are watching.",
+      "description": "Call to action text shown in the social activity list, encouraging users to follow members of the Trakt Team.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_browse_shows": {
+      "default": "Browse shows",
+      "description": "Link text for browsing shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_browse_movies": {
+      "default": "Browse movies",
+      "description": "Link text for browsing movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_explore_shows": {
+      "default": "Explore shows",
+      "description": "Link text for exploring shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_text_explore_movies": {
+      "default": "Explore movies",
+      "description": "Link text for exploring movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_label_browse_shows": {
+      "default": "Browse shows",
+      "description": "Aria-label for the link that allows users to browse shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_label_browse_movies": {
+      "default": "Browse movies",
+      "description": "Aria-label for the link that allows users to browse movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_label_explore_shows": {
+      "default": "Explore shows",
+      "description": "Aria-label for the link that allows users to explore shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "link_label_explore_movies": {
+      "default": "Explore movies",
+      "description": "Aria-label for the link that allows users to explore movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
