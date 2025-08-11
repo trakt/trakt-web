@@ -6,6 +6,9 @@ import { getUserManager } from '../../features/auth/stores/userManager.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
 
+const stripHttpsOrHttp = (url: string): string =>
+  url.replace(/^https?:\/\//, '');
+
 function shouldReloadPage(expiresAt: number | Nil) {
   if (getUserManager()) {
     // FIXME: completely remove this refresh flow when fully switching to oidc-client-ts
@@ -32,24 +35,17 @@ export function createAuthenticatedFetch<
 
     try {
       const { value: token, expiresAt } = getToken();
-      const url = input.toString();
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
+      }
 
-        const isNitro = url.includes('/sync/progress/up_next_nitro');
-        const isSearch = url.includes('/search');
-        const isPersonSearch = url.includes('/search/person');
-
-        const isHDSearch = isSearch && !isPersonSearch;
-        const isHDCall = isNitro || isHDSearch;
-
-        const isApiCall = url.includes('apiz.trakt.tv');
-
-        if (isHDCall && isApiCall) {
-          input = input.toString().replaceAll('apiz.trakt.tv', 'hd.trakt.tv')
-            .toString();
-        }
+      if (!input.toString().includes('watchnow')) {
+        input = input.toString()
+          .replaceAll(
+            stripHttpsOrHttp(TRAKT_TARGET_ENVIRONMENT),
+            stripHttpsOrHttp(TRAKT_TARGET_API_ENVIRONMENT),
+          );
       }
 
       return baseFetch(
