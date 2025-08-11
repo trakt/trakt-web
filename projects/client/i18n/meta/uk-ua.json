@@ -1670,6 +1670,45 @@
     },
     "button_label_calendar": {
       "default": "Календар"
+    },
+    "text_cta_up_next": {
+      "default": "Продовжуйте перегляд улюблених серіалів і повертайтеся до перегляду у будь-який час. Які серіали ви зараз дивитеся?"
+    },
+    "text_cta_watchlist_released": {
+      "default": "Додайте фільми до свого списку і почніть складати список фільмів, які хочете переглянути."
+    },
+    "text_cta_upcoming": {
+      "default": "Ваш найближчий графік містить нові епізоди, які незабаром виходять для серіалів, які ви вже дивитеся."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Додайте майбутні фільми до свого списку і дізнайтеся, які з них вийдуть найближчим часом."
+    },
+    "text_cta_activity": {
+      "default": "Почніть швидко заводити друзів, підписавшись на команду Trakt, і дізнайтеся, що вони дивляться."
+    },
+    "link_text_browse_shows": {
+      "default": "Огляд серіалів"
+    },
+    "link_text_browse_movies": {
+      "default": "Огляд фільмів"
+    },
+    "link_text_explore_shows": {
+      "default": "Дослідити серіали"
+    },
+    "link_text_explore_movies": {
+      "default": "Дослідити фільми"
+    },
+    "link_label_browse_shows": {
+      "default": "Огляд серіалів"
+    },
+    "link_label_browse_movies": {
+      "default": "Огляд фільмів"
+    },
+    "link_label_explore_shows": {
+      "default": "Дослідити серіали"
+    },
+    "link_label_explore_movies": {
+      "default": "Дослідити фільми"
     }
   }
 }

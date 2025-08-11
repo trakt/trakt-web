@@ -1670,6 +1670,45 @@
     },
     "button_label_calendar": {
       "default": "Calendrier"
+    },
+    "text_cta_up_next": {
+      "default": "Continuez à regarder vos séries préférées et reprenez où vous en étiez à tout moment. Quelles séries suivez-vous ?"
+    },
+    "text_cta_watchlist_released": {
+      "default": "Ajoutez des films à votre liste et commencez à créer une liste de films que vous voulez voir."
+    },
+    "text_cta_upcoming": {
+      "default": "Votre horaire à venir liste les nouveaux épisodes qui sortent bientôt pour les séries que vous suivez déjà."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Ajoutez des films à venir à votre liste et voyez lesquels sortent bientôt."
+    },
+    "text_cta_activity": {
+      "default": "Commencez à vous faire des amis rapidement en suivant l'équipe Trakt et explorez ce qu'ils regardent."
+    },
+    "link_text_browse_shows": {
+      "default": "Séries"
+    },
+    "link_text_browse_movies": {
+      "default": "Films"
+    },
+    "link_text_explore_shows": {
+      "default": "Explorez séries"
+    },
+    "link_text_explore_movies": {
+      "default": "Explorez films"
+    },
+    "link_label_browse_shows": {
+      "default": "Séries"
+    },
+    "link_label_browse_movies": {
+      "default": "Films"
+    },
+    "link_label_explore_shows": {
+      "default": "Explorez séries"
+    },
+    "link_label_explore_movies": {
+      "default": "Explorez films"
     }
   }
 }

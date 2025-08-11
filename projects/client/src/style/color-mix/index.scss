@@ -43,6 +43,10 @@ $cm-background-navbar-percentages: 80, 90;
       var(--color-background-navbar) 75%,
       transparent 25%);
 
+  --cm-gradient-stop-cta: color-mix(in srgb,
+      var(--purple-500) 80%,
+      transparent);
+
 
   @each $percent in $cm-foreground-percentages {
     --cm-foreground-#{$percent}: color-mix(in srgb,
@@ -79,6 +83,7 @@ $cm-background-navbar-percentages: 80, 90;
     --cm-background-official-list-summary: rgb(46, 27, 57);
     --cm-background-cookie-notice: rgba(32, 36, 38, 0.7);
     --cm-background-search-input: rgba(25, 27, 29, 0.6);
+    --cm-gradient-stop-cta: rgba(159, 66, 198, 0.8);
 
     @each $percent in $cm-foreground-percentages {
       --cm-foreground-#{$percent}: rgba(254, 254, 254, #{math.div($percent, 100)});

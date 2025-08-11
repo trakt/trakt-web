@@ -1670,6 +1670,45 @@
     },
     "button_label_calendar": {
       "default": "Календар"
+    },
+    "text_cta_up_next": {
+      "default": "Продължете да гледате любимите си сериали и да започнете от там, където сте спрели по всяко време. Кои сериали следите?"
+    },
+    "text_cta_watchlist_released": {
+      "default": "Добавете филми към списъка си и започнете да създавате списък с филми, които искате да гледате."
+    },
+    "text_cta_upcoming": {
+      "default": "Предстоящият ви график показва нови епизоди, които ще бъдат публикувани скоро за сериалите, които вече следите."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Добавете предстоящи филми към списъка си и вижте кои ще бъдат публикувани скоро."
+    },
+    "text_cta_activity": {
+      "default": "Започнете да създавате приятели бързо, като следвате екипа на Trakt и проучете какво гледат."
+    },
+    "link_text_browse_shows": {
+      "default": "Разгледайте сериали"
+    },
+    "link_text_browse_movies": {
+      "default": "Разгледайте филми"
+    },
+    "link_text_explore_shows": {
+      "default": "Разгледайте сериали"
+    },
+    "link_text_explore_movies": {
+      "default": "Разгледайте филми"
+    },
+    "link_label_browse_shows": {
+      "default": "Разгледайте сериали"
+    },
+    "link_label_browse_movies": {
+      "default": "Разгледайте филми"
+    },
+    "link_label_explore_shows": {
+      "default": "Разгледайте сериали"
+    },
+    "link_label_explore_movies": {
+      "default": "Разгледайте филми"
     }
   }
 }

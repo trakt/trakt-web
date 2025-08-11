@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import CtaItem from "../components/cta/CtaItem.svelte";
 
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import SocialActivityItem from "./SocialActivityItem.svelte";
@@ -24,6 +25,10 @@
   >
     {#snippet item(activity)}
       <SocialActivityItem {activity} />
+    {/snippet}
+
+    {#snippet ctaItem()}
+      <CtaItem cta="activity" />
     {/snippet}
   </DrillableMediaList>
 {/if}

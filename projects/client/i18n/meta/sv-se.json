@@ -1670,6 +1670,45 @@
     },
     "button_label_calendar": {
       "default": "Kalender"
+    },
+    "text_cta_up_next": {
+      "default": "Fortsätt titta på dina favoritserier och återuppta där du slutade när som helst. Vilka serier följer du?"
+    },
+    "text_cta_watchlist_released": {
+      "default": "Lägg till filmer i din lista och börja bygga en lista över filmer du vill se."
+    },
+    "text_cta_upcoming": {
+      "default": "Ditt kommande schema listar nya avsnitt som släpps snart för serier du redan följer."
+    },
+    "text_cta_watchlist_unreleased": {
+      "default": "Lägg till kommande filmer i din lista och se vilka som släpps snart."
+    },
+    "text_cta_activity": {
+      "default": "Börja få vänner snabbt genom att följa Trakt-teamet och utforska vad de tittar på."
+    },
+    "link_text_browse_shows": {
+      "default": "Bläddra serier"
+    },
+    "link_text_browse_movies": {
+      "default": "Bläddra filmer"
+    },
+    "link_text_explore_shows": {
+      "default": "Utforska serier"
+    },
+    "link_text_explore_movies": {
+      "default": "Utforska filmer"
+    },
+    "link_label_browse_shows": {
+      "default": "Bläddra serier"
+    },
+    "link_label_browse_movies": {
+      "default": "Bläddra filmer"
+    },
+    "link_label_explore_shows": {
+      "default": "Utforska serier"
+    },
+    "link_label_explore_movies": {
+      "default": "Utforska filmer"
     }
   }
 }

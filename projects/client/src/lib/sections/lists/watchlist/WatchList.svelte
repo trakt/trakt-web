@@ -7,6 +7,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
+  import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import TypeToggles from "./_internal/TypeToggles.svelte";
   import WatchlistTag from "./_internal/WatchlistTag.svelte";
@@ -59,6 +60,12 @@
 >
   {#snippet item(media)}
     <WatchlistItem type={media.type} {media} />
+  {/snippet}
+
+  {#snippet ctaItem()}
+    {#if status !== "all"}
+      <CtaItem cta={status} />
+    {/if}
   {/snippet}
 
   {#snippet empty()}
