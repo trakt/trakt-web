@@ -4,4 +4,5 @@ export enum FeatureFlag {
   Plex = 'plex',
   Search = 'search',
   Calendar = 'calendar',
+  Cta = 'cta',
 }

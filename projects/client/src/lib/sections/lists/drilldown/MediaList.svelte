@@ -13,6 +13,7 @@
     badge,
     type,
     item,
+    ctaItem,
     actions: externalActions,
     useList,
     filter,
@@ -36,6 +37,7 @@
   items={$list}
   {badge}
   {item}
+  {ctaItem}
   {title}
   actions={externalActions ? actions : undefined}
   --height-list={mediaListHeightResolver($defaultVariant)}

@@ -5,6 +5,7 @@ export type ListProps<T> = {
   title: string | Nil;
   items: T[];
   item: Snippet<[T]>;
+  ctaItem?: Snippet;
   actions?: Snippet;
   dynamicActions?: Snippet;
   badge?: Snippet;

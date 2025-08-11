@@ -18,6 +18,7 @@
     items,
     title,
     item,
+    ctaItem,
     empty,
     dynamicActions,
     actions: externalActions,
@@ -63,6 +64,7 @@
   {title}
   {items}
   {item}
+  {ctaItem}
   {empty}
   {badge}
   {scrollX}
