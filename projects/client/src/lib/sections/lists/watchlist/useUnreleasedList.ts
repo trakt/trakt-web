@@ -1,11 +1,9 @@
-import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 import {
   useWatchList,
   type WatchListStoreProps,
 } from '$lib/sections/lists/watchlist/useWatchList.ts';
-import { derived, get } from 'svelte/store';
-import { genreCompareFactory } from './utils/genreCompareFactory.ts';
+import { derived } from 'svelte/store';
 
 // FIXME remove when sorting is fixed
 const UNRELEASED_LIST_LIMIT = 500;
@@ -30,14 +28,6 @@ export function useUnreleasedList(params: Omit<WatchListStoreProps, 'sort'>) {
     limit: UNRELEASED_LIST_LIMIT,
   });
 
-  const { user } = useUser();
-
-  const { compare } = genreCompareFactory(
-    get(user)?.genres ?? [],
-    'asc',
-    'year',
-  );
-
   const list = derived(
     watchlist,
     ($watchlist) =>
@@ -47,8 +37,7 @@ export function useUnreleasedList(params: Omit<WatchListStoreProps, 'sort'>) {
           const hasValidStatus = VALID_STATUSES.includes(item.status);
 
           return isUpcomingItem && hasValidStatus;
-        })
-        .sort(compare),
+        }),
   );
 
   return {
