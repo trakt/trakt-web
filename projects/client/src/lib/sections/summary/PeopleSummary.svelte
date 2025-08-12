@@ -18,7 +18,7 @@
 
 <SummaryContainer>
   {#snippet poster()}
-    <SummaryPoster src={person.headShotUrl} alt={person.name} />
+    <SummaryPoster src={person.headshot.url.medium} alt={person.name} />
   {/snippet}
 
   <SummaryHeader>

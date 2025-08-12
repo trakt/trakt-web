@@ -1,5 +1,6 @@
 import { jobOptionSchema } from '@trakt/api';
 import { z } from 'zod';
+import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 const JobSchema = jobOptionSchema;
 export type Job = z.output<typeof JobSchema>;
@@ -15,7 +16,9 @@ export const CastMemberSchema = z.object({
   name: z.string(),
   characterName: z.string(),
   id: z.string(),
-  headShotUrl: z.string().url(),
+  headshot: z.object({
+    url: ImageUrlsSchema,
+  }),
 });
 export type CastMember = z.infer<typeof CastMemberSchema>;
 

@@ -28,7 +28,7 @@
       <Link focusable={false} href={UrlBuilder.people(person.slug)}>
         <CardCover
           title={person.name}
-          src={person.headShotUrl}
+          src={person.headshot.url.thumb}
           alt={`${m.image_alt_person_headshot({ person: person.name })}`}
         />
         <CardFooter>

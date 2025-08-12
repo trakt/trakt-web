@@ -8,7 +8,11 @@
   const { person, isLoading } = $derived(usePerson(page.params.slug));
 </script>
 
-<TraktPage audience="all" title={$person?.name} image={$person?.headShotUrl}>
+<TraktPage
+  audience="all"
+  title={$person?.name}
+  image={$person?.headshot?.url.medium}
+>
   {#if !$isLoading}
     <PeopleSummary person={$person!} />
   {:else}

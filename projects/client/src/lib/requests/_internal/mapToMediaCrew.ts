@@ -3,10 +3,8 @@ import type {
   CrewMember,
   MediaCrew,
 } from '$lib/requests/models/MediaCrew.ts';
-import { MEDIA_POSTER_PLACEHOLDER } from '$lib/utils/constants.ts';
-import { findDefined } from '$lib/utils/string/findDefined.ts';
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { CastResponse, CrewResponse, PeopleResponse } from '@trakt/api';
+import { mapToHeadshot } from './mapToHeadshot.ts';
 
 function toCrewMember(
   crewResponse: CrewResponse,
@@ -21,18 +19,11 @@ function toCrewMember(
 function toCastMember(
   castResponse: CastResponse,
 ): CastMember {
-  const headshotCandidate = findDefined(
-    ...(castResponse.person.images?.headshot ?? []),
-  );
-
   return ({
     name: castResponse.person.name,
     characterName: castResponse.characters.at(0) ?? '',
     id: castResponse.person.ids.slug,
-    headShotUrl: prependHttps(
-      headshotCandidate,
-      MEDIA_POSTER_PLACEHOLDER,
-    ),
+    headshot: mapToHeadshot(castResponse.person.images),
   });
 }
 

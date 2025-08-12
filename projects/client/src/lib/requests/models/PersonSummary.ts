@@ -1,12 +1,14 @@
 import { crewPositionSchema } from '@trakt/api';
 import { z } from 'zod';
-import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
+import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 export const PersonSummarySchema = z.object({
   id: z.number(),
   name: z.string(),
   biography: z.string(),
-  headShotUrl: HttpsUrlSchema,
+  headshot: z.object({
+    url: ImageUrlsSchema,
+  }),
   slug: z.string(),
   knownFor: crewPositionSchema.nullish(),
 });
