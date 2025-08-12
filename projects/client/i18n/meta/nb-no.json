@@ -1347,15 +1347,6 @@
     "button_label_rename_list": {
       "default": "Endre navnet på listen din {name}"
     },
-    "list_title_hot": {
-      "default": "Populært denne måneden"
-    },
-    "list_title_hot_movies": {
-      "default": "Populære filmer denne måneden"
-    },
-    "list_title_hot_shows": {
-      "default": "Populære serier denne måneden"
-    },
     "button_label_view_all_hot_shows": {
       "default": "Se alle populære serier"
     },
@@ -1386,9 +1377,6 @@
     "page_title_popular_shows": {
       "default": "Populære serier"
     },
-    "page_title_hot_shows": {
-      "default": "Hot serier"
-    },
     "page_title_anticipated_shows": {
       "default": "Forventede serier"
     },
@@ -1400,9 +1388,6 @@
     },
     "page_title_popular_movies": {
       "default": "Populære filmer"
-    },
-    "page_title_hot_movies": {
-      "default": "Hot filmer"
     },
     "page_title_anticipated_movies": {
       "default": "Forventede filmer"

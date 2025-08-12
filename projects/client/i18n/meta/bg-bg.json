@@ -1347,15 +1347,6 @@
     "button_label_rename_list": {
       "default": "Преименувайте списъка си {name}"
     },
-    "list_title_hot": {
-      "default": "Активно този месец"
-    },
-    "list_title_hot_movies": {
-      "default": "Активни филми този месец"
-    },
-    "list_title_hot_shows": {
-      "default": "Активни сериали този месец"
-    },
     "button_label_view_all_hot_shows": {
       "default": "Вижте всички активни сериали"
     },
@@ -1386,9 +1377,6 @@
     "page_title_popular_shows": {
       "default": "Популярни сериали"
     },
-    "page_title_hot_shows": {
-      "default": "Активни сериали"
-    },
     "page_title_anticipated_shows": {
       "default": "Очаквани сериали"
     },
@@ -1400,9 +1388,6 @@
     },
     "page_title_popular_movies": {
       "default": "Популярни филми"
-    },
-    "page_title_hot_movies": {
-      "default": "Активни филми"
     },
     "page_title_anticipated_movies": {
       "default": "Очаквани филми"

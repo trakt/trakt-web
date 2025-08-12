@@ -3893,30 +3893,6 @@
         "ios"
       ]
     },
-    "list_title_hot": {
-      "default": "Hot This Month",
-      "description": "Title for lists containing hot movies or shows this month. This title should be as short and concise as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_title_hot_movies": {
-      "default": "Hot Movies This Month",
-      "description": "Title for lists containing hot movies this month. This title should be as short and concise as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_title_hot_shows": {
-      "default": "Hot Shows This Month",
-      "description": "Title for lists containing hot shows this month. This title should be as short and concise as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_view_all_hot_shows": {
       "default": "View all hot shows",
       "description": "Aria-label for the button that allows users to view all hot shows this month.",
@@ -3997,14 +3973,6 @@
         "ios"
       ]
     },
-    "page_title_hot_shows": {
-      "default": "Hot Shows",
-      "description": "Title for the hot shows page.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "page_title_anticipated_shows": {
       "default": "Anticipated Shows",
       "description": "Title for the anticipated shows page.",
@@ -4032,14 +4000,6 @@
     "page_title_popular_movies": {
       "default": "Popular movies",
       "description": "Title for the popular movies page.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "page_title_hot_movies": {
-      "default": "Hot movies",
-      "description": "Title for the hot movies page.",
       "exclude": [
         "android",
         "ios"

@@ -1347,15 +1347,6 @@
     "button_label_rename_list": {
       "default": "Liste {name} umbenennen"
     },
-    "list_title_hot": {
-      "default": "Top des Monats"
-    },
-    "list_title_hot_movies": {
-      "default": "Top Filme diesen Monat"
-    },
-    "list_title_hot_shows": {
-      "default": "Top Serien diesen Monat"
-    },
     "button_label_view_all_hot_shows": {
       "default": "Alle Top Serien ansehen"
     },
@@ -1386,9 +1377,6 @@
     "page_title_popular_shows": {
       "default": "Beliebte Serien"
     },
-    "page_title_hot_shows": {
-      "default": "Aktuelle Serien"
-    },
     "page_title_anticipated_shows": {
       "default": "Erwartete Serien"
     },
@@ -1400,9 +1388,6 @@
     },
     "page_title_popular_movies": {
       "default": "Beliebte Filme"
-    },
-    "page_title_hot_movies": {
-      "default": "Aktuelle Filme"
     },
     "page_title_anticipated_movies": {
       "default": "Erwartete Filme"

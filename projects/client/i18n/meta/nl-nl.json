@@ -1347,15 +1347,6 @@
     "button_label_rename_list": {
       "default": "Hernoem je lijst {name}"
     },
-    "list_title_hot": {
-      "default": "Populair deze maand"
-    },
-    "list_title_hot_movies": {
-      "default": "Populaire films deze maand"
-    },
-    "list_title_hot_shows": {
-      "default": "Populaire series deze maand"
-    },
     "button_label_view_all_hot_shows": {
       "default": "Bekijk alle populaire series"
     },
@@ -1386,9 +1377,6 @@
     "page_title_popular_shows": {
       "default": "Populaire series"
     },
-    "page_title_hot_shows": {
-      "default": "Hot series"
-    },
     "page_title_anticipated_shows": {
       "default": "Verwachte series"
     },
@@ -1400,9 +1388,6 @@
     },
     "page_title_popular_movies": {
       "default": "Populaire films"
-    },
-    "page_title_hot_movies": {
-      "default": "Hot films"
     },
     "page_title_anticipated_movies": {
       "default": "Verwachte films"
