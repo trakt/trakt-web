@@ -6,8 +6,6 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived, type Readable } from 'svelte/store';
 
-const MAX_TEAM_MEMBERS = 5;
-
 // FIXME: move this to the server to have a single source of truth
 const TEAM_SLUGS = [
   'andrei-l-magnea',
@@ -35,7 +33,6 @@ export function useTraktTeam(following: UserProfile[]): TraktTeam {
   );
 
   const queries = shuffle(unfollowedMembers)
-    .slice(0, MAX_TEAM_MEMBERS)
     .map((slug) => userProfileQuery({ slug }))
     .map((query) => useQuery(query));
 

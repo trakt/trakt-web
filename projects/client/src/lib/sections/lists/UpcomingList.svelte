@@ -1,6 +1,8 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import CalendarButton from "./components/CalendarButton.svelte";
   import CtaItem from "./components/cta/CtaItem.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
@@ -31,13 +33,19 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    <CtaItem cta="upcoming" />
+    <CtaItem cta="upcoming" variant="card" />
   {/snippet}
 
   {#snippet empty()}
     {#if !$isLoading}
-      <p class="small">{m.list_placeholder_upcoming_schedule()}</p>
-      <FindShowsLink />
+      <RenderForFeature flag={FeatureFlag.Cta}>
+        {#snippet enabled()}
+          <CtaItem cta="upcoming" variant="placeholder" />
+        {/snippet}
+
+        <p class="small">{m.list_placeholder_upcoming_schedule()}</p>
+        <FindShowsLink />
+      </RenderForFeature>
     {/if}
   {/snippet}
 

@@ -1,0 +1,47 @@
+<svg
+  width="105"
+  height="105"
+  viewBox="0 0 105 105"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    x="8.89966"
+    y="20"
+    width="70"
+    height="16"
+    stroke="currentColor"
+    stroke-width="4"
+  />
+  <rect
+    x="18.8997"
+    y="11"
+    width="2"
+    height="9"
+    stroke="currentColor"
+    stroke-width="4"
+  />
+  <rect
+    x="66.8997"
+    y="11"
+    width="3"
+    height="9"
+    stroke="currentColor"
+    stroke-width="4"
+  />
+  <path
+    d="M36.6269 82H8.89966V36H78.8997V47.96"
+    stroke="currentColor"
+    stroke-width="4"
+  />
+  <rect
+    x="48.8997"
+    y="59.5"
+    width="48"
+    height="29"
+    rx="4"
+    stroke="currentColor"
+    stroke-width="4"
+  />
+  <path d="M50.8997 96.5H76.8997" stroke="currentColor" stroke-width="4" />
+</svg>

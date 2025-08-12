@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
 
@@ -28,7 +30,17 @@
     {/snippet}
 
     {#snippet ctaItem()}
-      <CtaItem cta="activity" />
+      <CtaItem cta="activity" variant="card" />
+    {/snippet}
+
+    {#snippet empty()}
+      <RenderForFeature flag={FeatureFlag.Cta}>
+        {#snippet enabled()}
+          {#if !$isLoading}
+            <CtaItem cta="activity" variant="placeholder" />
+          {/if}
+        {/snippet}
+      </RenderForFeature>
     {/snippet}
   </DrillableMediaList>
 {/if}
