@@ -110,13 +110,13 @@
     }
   }
 
-  :global(.trakt-navbar-scroll:not(.trakt-navbar-pwa)) {
-    .trakt-search {
-      --mobile-search-focus-width: calc(
-        100dvw - var(--layout-distance-side) * 2 - var(--navbar-side-padding) *
-          2
-      );
+  :global(.trakt-navbar-scroll) {
+    &:has(.trakt-search:focus-within) {
+      border-bottom-left-radius: var(--border-radius-m);
+      border-bottom-right-radius: var(--border-radius-m);
+    }
 
+    .trakt-search {
       .trakt-search-input {
         background: var(--cm-background-search-input);
         outline: var(--border-thickness-xs) solid var(--color-border);

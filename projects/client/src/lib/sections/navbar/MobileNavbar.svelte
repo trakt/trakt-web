@@ -61,7 +61,11 @@
 
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: var(--gap-m);
+
+    border-top-left-radius: var(--border-radius-xxl);
+    border-top-right-radius: var(--border-radius-xxl);
 
     @include backdrop-filter-blur(8px);
   }
