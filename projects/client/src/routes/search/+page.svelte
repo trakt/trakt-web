@@ -41,7 +41,7 @@
       return item?.cover?.url.medium;
     }
 
-    return $results.items.at(0)?.headShotUrl;
+    return $results.items.at(0)?.headshot.url.medium;
   });
 
   const pageTitle = $derived(
