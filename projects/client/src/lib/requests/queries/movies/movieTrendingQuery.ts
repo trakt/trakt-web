@@ -10,6 +10,7 @@ import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { MovieTrendingResponse } from '@trakt/api';
 import { z } from 'zod';
+import { getMarker } from '../../../utils/date/Marker.ts';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { getRecordDependencies } from '../../_internal/getRecordDependencies.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
@@ -47,6 +48,9 @@ const movieTrendingRequest = (
         limit,
         ...filter,
         ...search,
+        ...{
+          marker: getMarker(),
+        },
       },
     });
 

@@ -11,6 +11,7 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { getMarker } from '../../../utils/date/Marker.ts';
 
 type MoviePopularParams =
   & PaginationParams
@@ -30,6 +31,9 @@ const moviePopularRequest = (
         limit,
         ...filter,
         ...search,
+        ...{
+          marker: getMarker(),
+        },
       },
     });
 

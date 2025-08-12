@@ -9,6 +9,7 @@ import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts'
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowTrendingResponse } from '@trakt/api';
 import { z } from 'zod';
+import { getMarker } from '../../../utils/date/Marker.ts';
 import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { getRecordDependencies } from '../../_internal/getRecordDependencies.ts';
 import { mapToEpisodeCount } from '../../_internal/mapToEpisodeCount.ts';
@@ -52,6 +53,9 @@ const showTrendingRequest = (
         limit,
         ...filter,
         ...search,
+        ...{
+          marker: getMarker(),
+        },
       },
     });
 };
