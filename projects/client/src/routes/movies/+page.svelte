@@ -4,7 +4,6 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
-  import HotList from "$lib/sections/lists/hot/HotList.svelte";
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
@@ -23,11 +22,6 @@
   <TrendingList
     title={m.list_title_trending()}
     drilldownLabel={m.button_label_view_all_trending_movies()}
-    {type}
-  />
-  <HotList
-    title={m.list_title_hot()}
-    drilldownLabel={m.button_label_view_all_hot_movies()}
     {type}
   />
   <RenderFor audience="authenticated">

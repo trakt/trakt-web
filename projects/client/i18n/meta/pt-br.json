@@ -1347,15 +1347,6 @@
     "button_label_rename_list": {
       "default": "Renomear sua lista {name}"
     },
-    "list_title_hot": {
-      "default": "Em alta este mês"
-    },
-    "list_title_hot_movies": {
-      "default": "Filmes em alta este mês"
-    },
-    "list_title_hot_shows": {
-      "default": "Séries em alta este mês"
-    },
     "button_label_view_all_hot_shows": {
       "default": "Ver todas as séries em alta"
     },
@@ -1386,9 +1377,6 @@
     "page_title_popular_shows": {
       "default": "Séries populares"
     },
-    "page_title_hot_shows": {
-      "default": "Séries bombando"
-    },
     "page_title_anticipated_shows": {
       "default": "Séries aguardadas"
     },
@@ -1400,9 +1388,6 @@
     },
     "page_title_popular_movies": {
       "default": "Filmes populares"
-    },
-    "page_title_hot_movies": {
-      "default": "Filmes bombando"
     },
     "page_title_anticipated_movies": {
       "default": "Filmes aguardados"
