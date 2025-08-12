@@ -10,7 +10,6 @@
   const { size }: { size: "small" | "normal" } = $props();
   const { hasActiveFilter } = useFilter();
 
-  const color = $derived($hasActiveFilter ? "blue" : "default");
   const state = $derived($hasActiveFilter ? "filtered" : "unfiltered");
 
   const isSidebarOpen = writable(false);
@@ -20,14 +19,15 @@
   <Button
     style="flat"
     label={m.button_label_filters()}
-    variant="secondary"
     text="capitalize"
-    {color}
+    color="custom"
     {size}
     navigationType={DpadNavigationType.Item}
     onclick={() => {
       isSidebarOpen.set(true);
     }}
+    --color-background-custom="transparent"
+    --color-foreground-custom="var(--color-foreground)"
   >
     {m.button_text_filters()}
     {#snippet icon()}
@@ -42,9 +42,23 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-filter-button {
-    @include for-mobile {
+    @include for-mouse {
+      :global(.trakt-button) {
+        &:hover,
+        &:focus-visible {
+          --color-background-custom: var(--color-background);
+        }
+      }
+    }
+
+    @include for-tablet-sm-and-below {
       :global(.trakt-button .button-label) {
         display: none;
+      }
+
+      :global(.trakt-button[data-size="small"] .button-icon svg) {
+        width: var(--ni-24);
+        height: var(--ni-24);
       }
     }
   }

@@ -7,7 +7,7 @@
   import FilterButton from "./filter/FilterButton.svelte";
   import GetVIPLink from "./GetVIPLink.svelte";
   import JoinTraktButton from "./JoinTraktButton.svelte";
-  import ProfileButton from "./ProfileButton.svelte";
+  import ProfileLink from "./ProfileLink.svelte";
   import TraktLogo from "./TraktLogo.svelte";
 
   let windowScrollY = $state(0);
@@ -45,7 +45,7 @@
           <GetVIPLink />
         {/if}
         <FilterButton size="small" />
-        <ProfileButton />
+        <ProfileLink />
       </RenderFor>
     </div>
   </nav>
