@@ -1,6 +1,5 @@
 <script lang="ts">
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver.ts";
-  import { extractOS } from "$lib/utils/devices/extractOS.ts";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType.ts";
   import { slide } from "svelte/transition";
   import { usePortal } from "../../features/portal/usePortal.ts";
@@ -18,11 +17,10 @@
     ...props
   }: TraktDropdownListProps = $props();
 
-  const isTV = $derived(getDeviceType(navigator.userAgent) === "tv");
-  const isMobile = $derived(
-    ["android", "ios"].includes(extractOS(navigator.userAgent)),
+  const deviceType = $derived(getDeviceType(navigator.userAgent));
+  const isNativeTarget = $derived(
+    deviceType === "tv" || deviceType === "mobile",
   );
-  const isNativeTarget = $derived(isTV || isMobile);
   const isActuallyNative = $derived(preferNative && isNativeTarget);
 
   const { portalTrigger, portal, isOpened } = $derived(
