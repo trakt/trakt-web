@@ -1,9 +1,8 @@
 <script lang="ts">
   import PlexButton from "$lib/components/buttons/plex/PlexButton.svelte";
   import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import type { StreamOnButtonProps } from "./StreamOnButtonProps";
   import { usePlexCollection } from "./_internal/usePlexCollection";
 
@@ -18,7 +17,13 @@
     target.type === "episode" ? target.episode.airDate : target.media.airDate,
   );
   const isAiredItem = $derived(airDate < new Date());
+
+  const deviceType = $derived(getDeviceType(globalThis.navigator.userAgent));
+
   const { isInCollection } = $derived(usePlexCollection(target));
+  const canHandlePlex = $derived(
+    deviceType === "tv" || deviceType === "mobile",
+  );
 </script>
 
 {#snippet streamOnButton()}
@@ -33,15 +38,9 @@
 {/snippet}
 
 <RenderFor audience="authenticated">
-  <RenderForFeature flag={FeatureFlag.Plex}>
-    {#snippet enabled()}
-      {#if $isInCollection}
-        <PlexButton {style} {size} {target} />
-      {:else}
-        {@render streamOnButton()}
-      {/if}
-    {/snippet}
-
+  {#if canHandlePlex && $isInCollection}
+    <PlexButton {style} {size} {target} />
+  {:else}
     {@render streamOnButton()}
-  </RenderForFeature>
+  {/if}
 </RenderFor>
