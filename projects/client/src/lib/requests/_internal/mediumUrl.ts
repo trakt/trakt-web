@@ -3,5 +3,7 @@ export function mediumUrl(url: string | Nil): string | Nil {
     return;
   }
 
-  return url.replace('/thumb/', '/medium/');
+  return url
+    .replace('/thumb/', '/medium/')
+    .replace('/original/', '/medium/');
 }
