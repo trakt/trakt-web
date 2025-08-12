@@ -52,11 +52,10 @@ const TRAKT_TARGET_ENVIRONMENT = (() => {
   return Environment.production_private;
 })();
 
-const TRAKT_TARGET_API_ENVIRONMENT = (() => {
-  const url = new URL(TRAKT_TARGET_ENVIRONMENT);
-  url.hostname = url.hostname.replace('apiz', 'hd');
-  return url.toString();
-})();
+const TRAKT_TARGET_API_ENVIRONMENT = TRAKT_TARGET_ENVIRONMENT.replace(
+  'apiz',
+  'hd',
+);
 
 export default defineConfig(({ mode }) => ({
   define: {
