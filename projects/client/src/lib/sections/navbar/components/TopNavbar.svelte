@@ -2,7 +2,6 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { isPWA } from "$lib/utils/devices/isPWA";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { onMount } from "svelte";
   import FilterButton from "./filter/FilterButton.svelte";
@@ -28,11 +27,7 @@
 </script>
 
 <header>
-  <nav
-    class="trakt-navbar"
-    class:trakt-navbar-scroll={isScrolled}
-    class:trakt-navbar-pwa={isPWA()}
-  >
+  <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
     <TraktLogo />
 
     <div class="trakt-navbar-content">
@@ -61,17 +56,12 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  @mixin navbar-spacing($side-margin) {
-    margin: var(--ni-12) $side-margin;
-    margin-top: calc(var(--ni-12) + env(safe-area-inset-top));
-    padding: var(--navbar-vertical-padding) var(--navbar-side-padding);
-  }
-
   .trakt-navbar-spacer {
     box-sizing: border-box;
     height: var(--navbar-height);
 
-    @include navbar-spacing(auto);
+    margin-top: env(safe-area-inset-top);
+    margin-bottom: var(--ni-12);
   }
 
   .trakt-navbar {
@@ -93,10 +83,9 @@
     align-items: center;
     gap: var(--gap-l);
 
-    border-radius: var(--border-radius-m);
+    border-radius: 0%;
     transition: var(--transition-increment) ease-in-out;
-    transition-property:
-      padding, margin, width, background-color, box-shadow, border-radius;
+    transition-property: width, background-color, box-shadow, border-radius;
 
     .trakt-navbar-content {
       width: 100%;
@@ -120,50 +109,31 @@
         gap: var(--gap-xs);
       }
     }
-
-    &.trakt-navbar-pwa {
-      border-radius: 0%;
-    }
   }
 
-  .trakt-navbar-scroll,
-  .trakt-navbar-pwa {
+  .trakt-navbar-scroll {
     background-color: var(--color-background-navbar);
+
+    border-bottom-left-radius: var(--border-radius-xxl);
+    border-bottom-right-radius: var(--border-radius-xxl);
+
+    box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
+
     @include backdrop-filter-blur(var(--ni-8));
   }
 
-  .trakt-navbar-scroll:not(.trakt-navbar-pwa) {
-    box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
-
-    color: var(--color-foreground-navbar);
-
-    @include backdrop-filter-blur(8px);
-
-    &.trakt-navbar {
-      width: calc(100dvw - 2 * var(--layout-distance-side));
-
-      @include navbar-spacing(var(--layout-distance-side));
-    }
-  }
-
-  .trakt-navbar-pwa {
-    box-shadow: 0px 12px 32px 0px var(--cm-shadow-16);
-  }
-
-  .trakt-navbar-scroll.trakt-navbar-pwa {
-    box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
-
-    border-bottom-left-radius: var(--border-radius-m);
-    border-bottom-right-radius: var(--border-radius-m);
-  }
-
   :global([data-mobile-os="ios"]) {
-    .trakt-navbar-pwa {
+    .trakt-navbar {
       margin-top: 0;
       padding-top: calc(
         var(--navbar-vertical-padding) + env(safe-area-inset-top, 0)
       );
       height: calc(var(--navbar-height) + env(safe-area-inset-top, 0));
+    }
+
+    .trakt-navbar-spacer {
+      height: calc(var(--navbar-height) + env(safe-area-inset-top, 0));
+      margin-top: 0;
     }
   }
 </style>
