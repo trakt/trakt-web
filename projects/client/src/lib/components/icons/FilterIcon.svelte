@@ -4,16 +4,18 @@
 </script>
 
 <svg
-  xmlns="http://www.w3.org/2000/svg"
+  width="25"
   height="24"
-  width="24"
-  viewBox="0 -960 960 960"
-  fill="currentColor"
+  viewBox="0 0 25 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
 >
   <path
-    d={`
-      M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Z
-      ${state === "unfiltered" ? "m40-308 198-252H282l198 252Zm0 0Z" : ""}
-    `}
+    d="M4.46826 6.94336V3.94336H20.4683V6.94336L14.4683 11.9434V20.9434L10.4683 17.9434V11.9434L4.46826 6.94336Z"
+    stroke="currentColor"
+    fill={state === "filtered" ? "currentColor" : "none"}
+    stroke-width="2"
+    stroke-linecap="square"
+    stroke-linejoin="round"
   />
 </svg>

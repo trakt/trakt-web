@@ -18,7 +18,7 @@
     label={m.button_label_user_profile()}
     navigationType={DpadNavigationType.Item}
   >
-    <div class="profile-icon">
+    <div class="profile-icon" class:is-vip={Boolean($user?.isVip)}>
       <ProfileImage
         --width="var(--ni-32)"
         --height="var(--ni-32)"
@@ -74,6 +74,13 @@
         outline-offset: var(--gap-xs);
       }
     }
+
+    @include for-tablet-sm-and-below {
+      .profile-info,
+      :global(.trakt-action-button) {
+        display: none;
+      }
+    }
   }
 
   .profile-info {
@@ -96,13 +103,17 @@
   .profile-icon {
     position: relative;
 
+    &.is-vip {
+      padding-right: var(--ni-8);
+    }
+
     :global(.vip-badge) {
       width: var(--ni-24);
       height: auto;
 
       position: absolute;
       top: var(--ni-neg-10);
-      right: var(--ni-neg-10);
+      right: var(--ni-neg-4);
 
       z-index: var(--layer-raised);
     }
