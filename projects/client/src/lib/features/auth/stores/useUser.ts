@@ -4,6 +4,10 @@ import {
   currentUserCommentLikesQuery,
   type UserLike,
 } from '../queries/currentUserCommentLikesQuery.ts';
+import {
+  currentUserCommentReactionsQuery,
+  type UserReactions,
+} from '../queries/currentUserCommentReactionsQuery.ts';
 import { currentUserFavoritesQuery } from '../queries/currentUserFavoritesQuery.ts';
 import {
   currentUserHistoryQuery,
@@ -102,6 +106,7 @@ export function useUser() {
         shows: new Map(),
       }),
       likes: readable<UserLike[]>([]),
+      reactions: readable<UserReactions>(new Map()),
       favorites: readable({
         movies: new Map(),
         shows: new Map(),
@@ -122,6 +127,9 @@ export function useUser() {
   const watchlistQueryResponse = useQuery(currentUserWatchlistQuery());
   const ratingsQueryResponse = useQuery(currentUserRatingsQuery());
   const commentLikesQueryResponse = useQuery(currentUserCommentLikesQuery());
+  const commentReactionsQueryResponse = useQuery(
+    currentUserCommentReactionsQuery(),
+  );
   const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
   const followingQueryResponse = useQuery(currentUserNetworkQuery());
   const plexCollectionQueryResponse = useQuery(
@@ -148,6 +156,10 @@ export function useUser() {
     commentLikesQueryResponse,
     ($likes) => definedData($likes.data),
   );
+  const reactions = derived(
+    commentReactionsQueryResponse,
+    ($reactions) => definedData($reactions.data),
+  );
   const favorites = derived(
     favoritesQueryResponse,
     ($favorites) => definedData($favorites.data),
@@ -167,6 +179,7 @@ export function useUser() {
     watchlist,
     ratings,
     likes,
+    reactions,
     favorites,
     network,
     plexCollection,
