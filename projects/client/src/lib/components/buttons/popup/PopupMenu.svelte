@@ -91,7 +91,7 @@
         animation: rotate-90 var(--transition-increment) ease-in;
       }
 
-      &:global([data-popup-direction="unaligned"]) {
+      &:global([data-popup-position="unaligned"]) {
         display: none;
       }
     }

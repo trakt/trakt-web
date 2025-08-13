@@ -1,22 +1,36 @@
+import { getTargetArea } from './getTargetArea.ts';
+import type { PopupPlacement } from './models/PopupPlacement.ts';
+import { positionAroundTarget } from './positionAroundTarget.ts';
+
+export type PortalProps = {
+  node: HTMLElement;
+  targetRect: DOMRect;
+  targetNode: HTMLElement;
+  placement?: PopupPlacement;
+};
+
 export function bodyPortal(
-  node: HTMLElement,
-  targetRect: DOMRect,
+  { node, targetRect, targetNode, placement }: PortalProps,
 ) {
   node.style.position = 'absolute';
   node.style.zIndex = 'var(--layer-menu)';
 
-  const openDialog = document.querySelector('dialog[open]');
-  if (openDialog) {
-    const dialogRect = openDialog.getBoundingClientRect();
+  const targetArea = getTargetArea();
 
-    node.style.left = `${targetRect.left - dialogRect.left}px`;
-    node.style.top = `${targetRect.top - dialogRect.top}px`;
-
-    openDialog.appendChild(node);
+  if (!placement) {
+    node.style.left = `${targetArea.viewport.left + targetRect.left}px`;
+    node.style.top = `${targetArea.viewport.top + targetRect.top}px`;
+    targetArea.target.appendChild(node);
     return;
   }
 
-  node.style.left = `${globalThis.window.scrollX + targetRect.left}px`;
-  node.style.top = `${globalThis.window.scrollY + targetRect.top}px`;
-  document.body.appendChild(node);
+  const target = {
+    targetRect,
+    targetNode,
+    placement,
+    viewport: targetArea.viewport,
+  };
+
+  positionAroundTarget(node, target);
+  targetArea.target.appendChild(node);
 }

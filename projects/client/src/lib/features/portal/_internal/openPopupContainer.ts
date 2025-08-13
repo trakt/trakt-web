@@ -1,14 +1,20 @@
-import { alignPopupContainer } from '$lib/features/portal/_internal/alignPopupContainer.ts';
 import { bodyPortal } from '$lib/features/portal/_internal/bodyPortal.ts';
 import { onMount } from 'svelte';
+import { alignPopupContainer } from './alignPopupContainer.ts';
+import type { PopupPlacement } from './models/PopupPlacement.ts';
 
-export function openPopupContainer(node: HTMLElement, targetNode: HTMLElement) {
+export function openPopupContainer(
+  node: HTMLElement,
+  targetNode: HTMLElement,
+  placement: PopupPlacement,
+) {
   function moveNodeToBody() {
     const targetRect = targetNode.getBoundingClientRect();
 
     requestAnimationFrame(() => {
-      bodyPortal(node, targetRect);
-      alignPopupContainer({ popupContainer: node, targetNode, targetRect });
+      const target = { node, targetRect, targetNode, placement };
+      bodyPortal(target);
+      alignPopupContainer(target);
     });
   }
 
@@ -16,7 +22,7 @@ export function openPopupContainer(node: HTMLElement, targetNode: HTMLElement) {
 
   const observer = new MutationObserver(() => {
     const targetRect = targetNode.getBoundingClientRect();
-    alignPopupContainer({ popupContainer: node, targetNode, targetRect });
+    alignPopupContainer({ node, targetRect, targetNode, placement });
   });
 
   observer.observe(node, {

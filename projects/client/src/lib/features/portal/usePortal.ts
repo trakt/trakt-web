@@ -6,9 +6,20 @@ import { clickOutside } from '$lib/utils/actions/clickOutside.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { onMount } from 'svelte';
 import { derived, get, readable, writable } from 'svelte/store';
+import type { PopupPlacement } from './_internal/models/PopupPlacement.ts';
 
-export function usePortal(disabled?: boolean) {
-  if (disabled) {
+type PortalProps = {
+  disabled?: boolean;
+  placement?: PopupPlacement;
+};
+
+const DEFAULT_PLACEMENT: PopupPlacement = {
+  position: 'left',
+  mode: 'contain',
+};
+
+export function usePortal(props?: PortalProps) {
+  if (props?.disabled) {
     return {
       portalTrigger: () => ({
         destroy: NOOP_FN,
@@ -63,7 +74,11 @@ export function usePortal(disabled?: boolean) {
     }
 
     popupContainer = node;
-    return openPopupContainer(node, target);
+    return openPopupContainer(
+      node,
+      target,
+      props?.placement ?? DEFAULT_PLACEMENT,
+    );
   };
 
   return {

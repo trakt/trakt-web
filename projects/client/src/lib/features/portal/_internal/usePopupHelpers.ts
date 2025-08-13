@@ -65,7 +65,7 @@ export function usePopupHelpers() {
 
     clone.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Opened);
 
-    bodyPortal(clone, targetRect);
+    bodyPortal({ node: clone, targetRect, targetNode: target });
 
     /*
       +1 because the clone should be able to appear
