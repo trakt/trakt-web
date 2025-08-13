@@ -1,37 +1,44 @@
-import { POPUP_DIRECTION_ATTRIBUTE } from '$lib/features/portal/_internal/constants.ts';
-import { PopupDirection } from '$lib/features/portal/_internal/models/PopupDirection.ts';
-
-type AlignPopupContainerProps = {
-  popupContainer: HTMLElement;
-  targetNode: HTMLElement;
-  //We pass in the rect also to avoid unnecessary calls to getBoundingClientRect
-  targetRect: DOMRect;
-};
+import type { PortalProps } from './bodyPortal.ts';
+import { forceOnScreen } from './forceOnScreen.ts';
+import { getOppositePosition } from './getOppositePosition.ts';
+import { getTargetArea } from './getTargetArea.ts';
+import { positionAroundTarget } from './positionAroundTarget.ts';
 
 export function alignPopupContainer(
-  { popupContainer, targetNode, targetRect }: AlignPopupContainerProps,
+  { node, targetRect, targetNode, placement }: PortalProps,
 ) {
-  const setDirection = (direction: PopupDirection) => {
-    targetNode.setAttribute(POPUP_DIRECTION_ATTRIBUTE, direction);
-    popupContainer.setAttribute(POPUP_DIRECTION_ATTRIBUTE, direction);
-  };
-
-  const popupRect = popupContainer.getBoundingClientRect();
-
-  setDirection(PopupDirection.Right);
-
-  const alignedLeft = targetRect.right - popupRect.width;
-  if (alignedLeft > 0) {
-    setDirection(PopupDirection.Left);
-    popupContainer.style.left = `${alignedLeft}px`;
+  if (!placement) {
     return;
   }
 
-  if (popupRect.right > globalThis.window.innerWidth) {
-    const unalignedLeft = globalThis.window.innerWidth - popupRect.width;
+  const popupRect = node.getBoundingClientRect();
+  const { viewport } = getTargetArea();
+  const { position } = placement;
 
-    setDirection(PopupDirection.Unaligned);
-    popupContainer.style.left =
-      `calc(${unalignedLeft}px - var(--layout-distance-side))`;
+  const isOverflowed = (direction: 'horizontal' | 'vertical') =>
+    direction === 'horizontal'
+      ? popupRect.right > viewport.width || popupRect.left < 0
+      : popupRect.bottom > viewport.height || popupRect.top < 0;
+
+  const direction = position === 'left' || position === 'right'
+    ? 'horizontal'
+    : 'vertical';
+
+  if (!isOverflowed(direction)) {
+    forceOnScreen(node, targetNode);
+    return;
   }
+
+  const target = {
+    targetRect,
+    targetNode,
+    placement: {
+      ...placement,
+      position: getOppositePosition(position),
+    },
+    viewport,
+  };
+
+  positionAroundTarget(node, target);
+  forceOnScreen(node, targetNode);
 }

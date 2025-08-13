@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { usePortal } from "$lib/features/portal/usePortal.ts";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver.ts";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType.ts";
   import { slide } from "svelte/transition";
-  import { usePortal } from "../../features/portal/usePortal.ts";
   import Button from "../buttons/Button.svelte";
   import DropdownIcon from "./DropdownCaretIcon.svelte";
   import type { TraktDropdownListProps } from "./TraktDropdownListProps.ts";
@@ -24,7 +24,7 @@
   const isActuallyNative = $derived(preferNative && isNativeTarget);
 
   const { portalTrigger, portal, isOpened } = $derived(
-    usePortal(isActuallyNative),
+    usePortal({ disabled: isActuallyNative }),
   );
 
   const { observedDimension, observeDimension } = useDimensionObserver("width");
@@ -229,11 +229,11 @@
 
     transform: translateY(var(--negative-offset));
 
-    &:global([data-popup-direction="left"]) {
+    &:global([data-popup-position="left"]) {
       transform: translateY(var(--negative-offset)) translateX($list-padding);
     }
 
-    &:global([data-popup-direction="right"]) {
+    &:global([data-popup-position="right"]) {
       transform: translateY(var(--negative-offset))
         translateX(var(--negative-offset));
     }

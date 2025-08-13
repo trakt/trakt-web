@@ -24,48 +24,21 @@ describe('alignPopupContainer', () => {
     targetNode = document.createElement('div');
   });
 
-  it('should not move it if there is no space to align it', () => {
-    popupContainer.style.left = '3px';
-
-    const popupRect = getDomRect(0, 0, 100);
-    const targetRect = getDomRect(10, 10, 50);
-
-    vi.spyOn(popupContainer, 'getBoundingClientRect')
-      .mockReturnValueOnce(popupRect);
-
-    alignPopupContainer({ popupContainer, targetNode, targetRect });
-
-    expect(popupContainer.style.left).toEqual('3px');
-    expect(targetNode).toHaveAttribute('data-popup-direction', 'right');
-    expect(popupContainer).toHaveAttribute('data-popup-direction', 'right');
-  });
-
-  it('should align it left of the target if there is space', () => {
-    const popupRect = getDomRect(0, 0, 100);
-    const targetRect = getDomRect(500, 500, 50);
-
-    vi.spyOn(popupContainer, 'getBoundingClientRect')
-      .mockReturnValueOnce(popupRect);
-
-    alignPopupContainer({ popupContainer, targetNode, targetRect });
-
-    expect(popupContainer.style.left).toEqual(
-      `${targetRect.right - popupRect.width}px`,
-    );
-    expect(targetNode).toHaveAttribute('data-popup-direction', 'left');
-    expect(popupContainer).toHaveAttribute('data-popup-direction', 'left');
-  });
-
-  it('should unalign it if there is no space', () => {
+  it('should flip it if there is no space', () => {
     const popupRect = getDomRect(900, 0, 1000);
     const targetRect = getDomRect(900, 500, 50);
 
     vi.spyOn(popupContainer, 'getBoundingClientRect')
       .mockReturnValueOnce(popupRect);
 
-    alignPopupContainer({ popupContainer, targetNode, targetRect });
+    alignPopupContainer({
+      node: popupContainer,
+      targetNode,
+      targetRect,
+      placement: { position: 'left' },
+    });
 
-    expect(targetNode).toHaveAttribute('data-popup-direction', 'unaligned');
-    expect(popupContainer).toHaveAttribute('data-popup-direction', 'unaligned');
+    expect(targetNode).toHaveAttribute('data-popup-position', 'right');
+    expect(popupContainer).toHaveAttribute('data-popup-position', 'right');
   });
 });
