@@ -4883,6 +4883,30 @@
         "android",
         "ios"
       ]
+    },
+    "header_comment_reactions": {
+      "default": "Comment reactions",
+      "description": "Header for the comment reactions section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_react": {
+      "default": "React",
+      "description": "Button text for reacting to comments.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_close_reaction": {
+      "default": "Close",
+      "description": "Aria-label for the button that closes the comment reaction popup.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

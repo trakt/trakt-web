@@ -1,12 +1,16 @@
-import { UserProfileHarryResponseMock } from '$mocks/data/users/response/UserProfileHarryResponseMock.ts';
-import { type ReactionsResponse } from '@trakt/api';
+import { type ReactionsSummaryResponse } from '@trakt/api';
 
-export const EpisodeSiloCommentReactionsResponseMock: ReactionsResponse[] = [
+export const EpisodeSiloCommentReactionsResponseMock: ReactionsSummaryResponse =
   {
-    'reacted_at': '2023-03-11T06:25:15.000Z',
-    'reaction': {
-      'type': 'like',
+    'reaction_count': 2,
+    'user_count': 2,
+    'distribution': {
+      'like': 0,
+      'dislike': 0,
+      'love': 0,
+      'laugh': 0,
+      'shocked': 1,
+      'bravo': 1,
+      'spoiler': 0,
     },
-    'user': UserProfileHarryResponseMock,
-  },
-];
+  };

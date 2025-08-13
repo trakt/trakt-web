@@ -16,7 +16,7 @@ export const comments = [
     },
   ),
   http.get(
-    'http://localhost/comments/*/reactions',
+    'http://localhost/comments/*/reactions/summary',
     () => {
       return HttpResponse.json(EpisodeSiloCommentReactionsResponseMock);
     },

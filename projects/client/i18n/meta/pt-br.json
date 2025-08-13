@@ -1694,6 +1694,15 @@
     },
     "link_label_explore_movies": {
       "default": "Explorar filmes"
+    },
+    "header_comment_reactions": {
+      "default": "Reações aos comentários"
+    },
+    "button_text_react": {
+      "default": "Reagir"
+    },
+    "button_label_close_reaction": {
+      "default": "Fechar"
     }
   }
 }

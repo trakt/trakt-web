@@ -96,12 +96,12 @@
   /**
    * Reactions
    */
-  --color-reactions-disabled-background: var(--shade-50);
-  --color-reactions-preview-background: var(--shade-100);
-  --color-reactions-preview-hover: var(--shade-200);
-  --color-current-reaction-background: var(--shade-100);
   --color-current-reaction-hover: var(--red-100);
-  --color-reactions-popup-background: var(--shade-50);
+  --color-reaction-disabled-background: var(--shade-300);
+  --color-reaction-background: var(--shade-80);
+  --color-reaction-background-hover: var(--shade-200);
+  --color-current-reaction-background: var(--shade-300);
+
 
   /**
     * Calendar
@@ -203,12 +203,11 @@
   /**
    * Reactions
    */
-  --color-reactions-disabled-background: var(--shade-700);
-  --color-reactions-preview-background: var(--shade-800);
-  --color-reactions-preview-hover: var(--shade-700);
-  --color-current-reaction-background: var(--shade-600);
   --color-current-reaction-hover: var(--red-50);
-  --color-reactions-popup-background: var(--shade-800);
+  --color-reaction-disabled-background: var(--shade-700);
+  --color-reaction-background: var(--shade-800);
+  --color-reaction-background-hover: var(--shade-600);
+  --color-current-reaction-background: var(--shade-940);
 
   /**
     * Calendar
