@@ -223,25 +223,25 @@
       "default": "Handgefertigt auf der ganzen Welt"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Trakt kostenlos beitreten"
+      "default": "Kostenlos dabei"
     },
     "header_landing_discover": {
       "default": "Entdecken"
     },
     "text_landing_discover": {
-      "default": "Finde heraus, was angesagt ist und wo du es streamen kannst."
+      "default": "Filme und Serien, die du lieben wirst, und wo sie gerade gestreamt werden."
     },
     "header_landing_track": {
       "default": "Verfolgen"
     },
     "text_landing_track": {
-      "default": "Verfolge alle Serien und Filme, die du je gesehen hast."
+      "default": "Jeder Film, jede Episode und jede Staffel, die du gesehen hast, an einem Ort."
     },
     "header_landing_share": {
       "default": "Teilen"
     },
     "text_landing_share": {
-      "default": "Teile Kommentare, Bewertungen und Empfehlungen."
+      "default": "Meinungen, Bewertungen und Listen, denen andere gerne folgen werden."
     },
     "list_title_trending": {
       "default": "Angesagt"

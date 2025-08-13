@@ -211,7 +211,7 @@
       "default": "Zoek series & films..."
     },
     "button_text_join_trakt": {
-      "default": "Doe mee met Trakt"
+      "default": "Word lid van Trakt"
     },
     "button_label_join_trakt": {
       "default": "Doe mee met trakt.tv om bij te houden wat je bekijkt"
@@ -223,25 +223,25 @@
       "default": "Handgemaakt over de hele wereld"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Doe gratis mee met Trakt"
+      "default": "Word lid"
     },
     "header_landing_discover": {
       "default": "Ontdekken"
     },
     "text_landing_discover": {
-      "default": "wat populair is en waar je het kunt streamen."
+      "default": "Films en series waar je van gaat houden en waar ze nu te streamen zijn."
     },
     "header_landing_track": {
       "default": "Bijhouden"
     },
     "text_landing_track": {
-      "default": "alle series en films die je ooit hebt gezien."
+      "default": "Elke film, aflevering en seizoen die je hebt gezien, allemaal op één plek."
     },
     "header_landing_share": {
       "default": "Delen"
     },
     "text_landing_share": {
-      "default": "opmerkingen, beoordelingen en aanbevelingen."
+      "default": "Meningen, beoordelingen en lijsten die anderen graag zullen volgen."
     },
     "list_title_trending": {
       "default": "Trending"

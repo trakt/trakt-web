@@ -223,25 +223,25 @@
       "default": "Hecho con ❤️ alrededor del mundo"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Únete a Trakt gratis"
+      "default": "Únete Gratis"
     },
     "header_landing_discover": {
       "default": "Descubre"
     },
     "text_landing_discover": {
-      "default": "Lo más popular y dónde verlo."
+      "default": "Películas y series que te van a encantar y dónde las puedes ver ahora mismo."
     },
     "header_landing_track": {
       "default": "Seguimiento"
     },
     "text_landing_track": {
-      "default": "Todo lo que has visto."
+      "default": "Cada película, episodio y temporada que has visto, todo en un solo lugar."
     },
     "header_landing_share": {
       "default": "Compartir"
     },
     "text_landing_share": {
-      "default": "Comentarios, calificaciones y recomendaciones. ¡Prepárate para un peliculón! <3"
+      "default": "Opiniones, calificaciones y listas que a otros les encantará seguir."
     },
     "list_title_trending": {
       "default": "Tendencias"

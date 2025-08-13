@@ -223,25 +223,25 @@
       "default": "A global Trakt community"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Join Trakt for Free"
+      "default": "Join Free"
     },
     "header_landing_discover": {
       "default": "Discover"
     },
     "text_landing_discover": {
-      "default": "what's hot and where to stream it."
+      "default": "Movies and shows you will love and where they are streaming right now."
     },
     "header_landing_track": {
       "default": "Track"
     },
     "text_landing_track": {
-      "default": "all the shows and movies you have ever watched."
+      "default": "Every movie, episode, and season you’ve seen, all in one place."
     },
     "header_landing_share": {
       "default": "Share"
     },
     "text_landing_share": {
-      "default": "comments, ratings and recommendations."
+      "default": "Opinions, ratings, and lists that others will love to follow."
     },
     "list_title_trending": {
       "default": "Trending"

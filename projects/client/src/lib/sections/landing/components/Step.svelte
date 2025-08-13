@@ -63,6 +63,7 @@
     p {
       margin-left: var(--ni-24);
       max-width: var(--ni-252);
+      text-transform: lowercase;
     }
   }
 </style>

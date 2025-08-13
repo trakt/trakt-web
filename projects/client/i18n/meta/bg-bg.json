@@ -211,7 +211,7 @@
       "default": "Какво ти се гледа?"
     },
     "button_text_join_trakt": {
-      "default": "Присъедини се към Trakt"
+      "default": "Присъединете се към Trakt"
     },
     "button_label_join_trakt": {
       "default": "Присъедини се към trakt.tv, за да следиш какво гледаш"
@@ -223,25 +223,25 @@
       "default": "Направено с любов из различни кътчета на света"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Присъедини се към Trakt безплатно"
+      "default": "Присъединете се безплатно"
     },
     "header_landing_discover": {
       "default": "Октий"
     },
     "text_landing_discover": {
-      "default": "какво е актуално и къде да го гледаш."
+      "default": "Филми и сериали, които ще харесате и къде се стриймват в момента."
     },
     "header_landing_track": {
       "default": "Следи"
     },
     "text_landing_track": {
-      "default": "всички предавания и филми, които някога сте гледали.."
+      "default": "Всеки филм, епизод и сезон, които сте гледали, на едно място."
     },
     "header_landing_share": {
       "default": "Сподели"
     },
     "text_landing_share": {
-      "default": "коментари, оценки и препоръки."
+      "default": "Мнения, оценки и списъци, които другите ще харесат да следят."
     },
     "list_title_trending": {
       "default": "Популярно в моменра"
