@@ -211,7 +211,7 @@
       "default": "Søg serier og film..."
     },
     "button_text_join_trakt": {
-      "default": "Tilmeld Trakt"
+      "default": "Tilmeld dig Trakt"
     },
     "button_label_join_trakt": {
       "default": "Tilmeld trakt.tv for at holde styr på, hvad du ser"
@@ -223,25 +223,25 @@
       "default": "Håndlavet verden over"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Tilmeld Trakt gratis"
+      "default": "Tilmeld dig gratis"
     },
     "header_landing_discover": {
       "default": "Opdag"
     },
     "text_landing_discover": {
-      "default": "Hvad er populært og hvor du kan streame det."
+      "default": "Film og serier du vil elske, og hvor de streamer lige nu."
     },
     "header_landing_track": {
       "default": "Hold styr"
     },
     "text_landing_track": {
-      "default": "Alle serier og film, du nogensinde har set."
+      "default": "Hver film, episode og sæson du har set, alt på ét sted."
     },
     "header_landing_share": {
       "default": "Del"
     },
     "text_landing_share": {
-      "default": "Kommentarer, bedømmelser og anbefalinger."
+      "default": "Meninger, vurderinger og lister, som andre vil elske at følge."
     },
     "list_title_trending": {
       "default": "Populært"

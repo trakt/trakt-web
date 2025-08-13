@@ -561,7 +561,7 @@
     },
     "button_text_join_trakt": {
       "default": "Join Trakt",
-      "description": "Text for the button that takes users to the Trakt login page.",
+      "description": "Text for the Trakt login button. This should be a short and concise message that indicates what users can do.",
       "exclude": [
         "android",
         "ios"
@@ -593,7 +593,7 @@
     },
     "button_text_join_trakt_for_free": {
       "default": "Join Trakt for Free",
-      "description": "Text for the button that takes users to the Trakt login page.",
+      "description": "Text for the button that takes users to the Trakt login page, keep the text as short as possible (always as short or shorter than the english version).",
       "exclude": [
         "android",
         "ios"
@@ -608,7 +608,7 @@
       ]
     },
     "text_landing_discover": {
-      "default": "what's hot and where to stream it.",
+      "default": "movies and shows you will love and where they are streaming right now.",
       "description": "Description for the discover step. This should be a short and concise message that indicates what users can discover.",
       "exclude": [
         "android",
@@ -624,7 +624,7 @@
       ]
     },
     "text_landing_track": {
-      "default": "all the shows and movies you have ever watched.",
+      "default": "every movie, episode, and season you’ve seen, all in one place.",
       "description": "Description for the track step. This should be a short and concise message that indicates what users can track.",
       "exclude": [
         "android",
@@ -640,7 +640,7 @@
       ]
     },
     "text_landing_share": {
-      "default": "comments, ratings and recommendations.",
+      "default": "opinions, ratings, and lists that others will love to follow.",
       "description": "Description for the share step. This should be a short and concise message that indicates what users can share.",
       "exclude": [
         "android",

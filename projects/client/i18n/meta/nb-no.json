@@ -223,25 +223,25 @@
       "default": "Håndlaget rundt om i verden"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Bli med i Trakt gratis"
+      "default": "Bli med gratis"
     },
     "header_landing_discover": {
       "default": "Oppdag"
     },
     "text_landing_discover": {
-      "default": "Hva som er populært og hvor du kan streame det."
+      "default": "Filmer og serier du kommer til å elske og hvor de strømmes akkurat nå."
     },
     "header_landing_track": {
       "default": "Spor"
     },
     "text_landing_track": {
-      "default": "Alle serier og filmer du noen gang har sett."
+      "default": "Hver film, episode og sesong du har sett, alt på ett sted."
     },
     "header_landing_share": {
       "default": "Del"
     },
     "text_landing_share": {
-      "default": "Kommentarer, vurderinger og anbefalinger."
+      "default": "Meninger, vurderinger og lister som andre vil elske å følge."
     },
     "list_title_trending": {
       "default": "Populært"

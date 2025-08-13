@@ -223,25 +223,25 @@
       "default": "Handgjord runt om i världen"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Gå med i Trakt gratis"
+      "default": "Gå med gratis"
     },
     "header_landing_discover": {
       "default": "Upptäck"
     },
     "text_landing_discover": {
-      "default": "Vad som är hett och var man kan streama det."
+      "default": "Filmer och serier du kommer att älska och var de streamas just nu."
     },
     "header_landing_track": {
       "default": "Spåra"
     },
     "text_landing_track": {
-      "default": "Alla serier och filmer du någonsin har sett."
+      "default": "Varje film, avsnitt och säsong du har sett, allt på ett ställe."
     },
     "header_landing_share": {
       "default": "Dela"
     },
     "text_landing_share": {
-      "default": "Kommentarer, betyg och rekommendationer."
+      "default": "Åsikter, betyg och listor som andra kommer att älska att följa."
     },
     "list_title_trending": {
       "default": "Trendigt"

@@ -223,25 +223,25 @@
       "default": "世界中から愛を込めて制作"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Traktに無料登録"
+      "default": "無料で参加"
     },
     "header_landing_discover": {
       "default": "作品を探す"
     },
     "text_landing_discover": {
-      "default": "話題の作品と配信サービス。"
+      "default": "あなたが好きになる映画やドラマ、そして今すぐどこで見られるか。"
     },
     "header_landing_track": {
       "default": "視聴状況を記録"
     },
     "text_landing_track": {
-      "default": "視聴済みの作品をすべて管理。"
+      "default": "見たすべての映画、エピソード、シーズンを、すべて1か所に。"
     },
     "header_landing_share": {
       "default": "共有する"
     },
     "text_landing_share": {
-      "default": "コメント、評価、おすすめ情報を共有。"
+      "default": "他の人がフォローしたくなるような意見、評価、リスト。"
     },
     "list_title_trending": {
       "default": "話題の作品"

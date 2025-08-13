@@ -36,10 +36,5 @@
     @include for-tablet-lg-and-below {
       padding: 0;
     }
-
-    @include for-mobile {
-      grid-template-columns: 1fr;
-      justify-items: center;
-    }
   }
 </style>

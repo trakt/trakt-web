@@ -223,25 +223,25 @@
       "default": "Feito com ❤️ ao redor do mundo"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Junte-se ao Trakt Grátis"
+      "default": "Junte-se Grátis"
     },
     "header_landing_discover": {
       "default": "Descubra"
     },
     "text_landing_discover": {
-      "default": "O que está bombando e onde assistir."
+      "default": "Filmes e séries que você vai amar e onde estão em streaming agora."
     },
     "header_landing_track": {
       "default": "Acompanhe"
     },
     "text_landing_track": {
-      "default": "Tudo o que você assistiu."
+      "default": "Todo filme, episódio e temporada que você assistiu, tudo em um só lugar."
     },
     "header_landing_share": {
       "default": "Compartilhe"
     },
     "text_landing_share": {
-      "default": "Comentários, avaliações e recomendações."
+      "default": "Opiniões, avaliações e listas que outros vão adorar seguir."
     },
     "list_title_trending": {
       "default": "Tendências"

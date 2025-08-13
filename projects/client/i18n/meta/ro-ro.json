@@ -223,25 +223,25 @@
       "default": "Elaborat manual în toată lumea"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Alătură-te Trakt gratuit"
+      "default": "Alătură-te Gratuit"
     },
     "header_landing_discover": {
       "default": "Descoperă"
     },
     "text_landing_discover": {
-      "default": "ce este popular și unde îl poți urmări."
+      "default": "Filme și seriale pe care le vei adora și unde sunt disponibile acum."
     },
     "header_landing_track": {
       "default": "Urmărește"
     },
     "text_landing_track": {
-      "default": "toate serialele și filmele pe care le-ai urmărit vreodată."
+      "default": "Fiecare film, episod și sezon pe care l-ai văzut, într-un singur loc."
     },
     "header_landing_share": {
       "default": "Partajează"
     },
     "text_landing_share": {
-      "default": "comentarii, evaluări și recomandări."
+      "default": "Opinii, evaluări și liste pe care alții le vor adora să le urmărească."
     },
     "list_title_trending": {
       "default": "Trending"

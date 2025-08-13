@@ -223,25 +223,25 @@
       "default": "Dopracowane przez społeczność na całym świecie"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Dołącz do Trakt za darmo"
+      "default": "Dołącz za darmo"
     },
     "header_landing_discover": {
       "default": "Odkrywaj"
     },
     "text_landing_discover": {
-      "default": "co jest na czasie i gdzie można to obejrzeć."
+      "default": "Filmy i seriale, które pokochasz i gdzie są teraz dostępne."
     },
     "header_landing_track": {
       "default": "Śledź"
     },
     "text_landing_track": {
-      "default": "wszystkie seriale i filmy, które kiedykolwiek oglądałeś."
+      "default": "Każdy film, odcinek i sezon, które widziałeś, wszystko w jednym miejscu."
     },
     "header_landing_share": {
       "default": "Dziel się z innymi"
     },
     "text_landing_share": {
-      "default": "komentarze, oceny i rekomendacje."
+      "default": "Opinie, oceny i listy, które inni pokochają obserwować."
     },
     "list_title_trending": {
       "default": "Teraz popularne"

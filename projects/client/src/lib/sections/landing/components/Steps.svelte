@@ -39,6 +39,17 @@
     @include for-tablet-lg-and-below {
       margin-top: 0;
     }
+
+    @include for-mobile {
+      display: flex;
+      gap: unset;
+      flex-direction: column;
+      height: min(
+        calc(95dvh - var(--navbar-height) - var(--mobile-navbar-height)),
+        var(--ni-640)
+      );
+      justify-content: space-between;
+    }
   }
 
   .trakt-landing-join {

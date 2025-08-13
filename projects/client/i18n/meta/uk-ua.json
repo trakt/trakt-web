@@ -223,25 +223,25 @@
       "default": "Створено по всьому світу"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Приєднатися до Trakt безкоштовно"
+      "default": "Приєднатися безкоштовно"
     },
     "header_landing_discover": {
       "default": "Відкрити"
     },
     "text_landing_discover": {
-      "default": "що популярне і де це можна переглянути."
+      "default": "Фільми та серіали, які вам сподобаються, і де їх можна переглянути прямо зараз."
     },
     "header_landing_track": {
       "default": "Відстежувати"
     },
     "text_landing_track": {
-      "default": "усі серіали та фільми, які ви коли-небудь дивились."
+      "default": "Кожен фільм, епізод і сезон, які ви бачили, в одному місці."
     },
     "header_landing_share": {
       "default": "Поділитися"
     },
     "text_landing_share": {
-      "default": "коментарі, оцінки та рекомендації."
+      "default": "Думки, оцінки та списки, які інші захочуть відстежувати."
     },
     "list_title_trending": {
       "default": "Тренди"

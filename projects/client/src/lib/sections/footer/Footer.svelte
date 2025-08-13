@@ -15,7 +15,7 @@
   .trakt-footer {
     height: var(--ni-300);
 
-    margin-top: var(--ni-120);
+    margin-top: var(--gap-xxl);
     margin-left: var(--layout-sidebar-distance);
 
     padding-left: var(--layout-distance-side);

@@ -211,7 +211,7 @@
       "default": "Cerca serie e film..."
     },
     "button_text_join_trakt": {
-      "default": "Iscriviti a Trakt"
+      "default": "Unisciti a Trakt"
     },
     "button_label_join_trakt": {
       "default": "Iscriviti a trakt.tv per tenere traccia di ciò che stai guardando"
@@ -223,25 +223,25 @@
       "default": "Realizzato a mano in tutto il mondo"
     },
     "button_text_join_trakt_for_free": {
-      "default": "Iscriviti a Trakt gratuitamente"
+      "default": "Iscriviti Gratis"
     },
     "header_landing_discover": {
       "default": "Scopri"
     },
     "text_landing_discover": {
-      "default": "cosa c'è di bello e dove guardarlo in streaming."
+      "default": "Film e serie TV che amerai e dove sono in streaming adesso."
     },
     "header_landing_track": {
       "default": "Traccia"
     },
     "text_landing_track": {
-      "default": "tutti i programmi e i film che hai guardato."
+      "default": "Ogni film, episodio e stagione che hai visto, tutto in un unico posto."
     },
     "header_landing_share": {
       "default": "Condividi"
     },
     "text_landing_share": {
-      "default": "commenti, giudizi e raccomandazioni."
+      "default": "Opinioni, valutazioni e liste che gli altri adoreranno seguire."
     },
     "list_title_trending": {
       "default": "Tendenze"
