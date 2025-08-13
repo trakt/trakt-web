@@ -52,4 +52,23 @@ describe('usePopupHelpers', () => {
     expect(clone?.remove).toHaveBeenCalled();
     expect(get(popupTarget)).toBeNull();
   });
+
+  it('should clean up helpers when in an open dialog', () => {
+    const dialog = document.createElement('dialog');
+    dialog.setAttribute('open', '');
+    document.body.appendChild(dialog);
+
+    const { addHelpers, removeHelpers, popupTarget } = usePopupHelpers();
+    addHelpers(target);
+
+    const clone = get(popupTarget);
+    vi.spyOn(clone as HTMLElement, 'remove');
+
+    removeHelpers(null);
+
+    expect(clone?.remove).toHaveBeenCalled();
+    expect(get(popupTarget)).toBeNull();
+
+    dialog.remove();
+  });
 });
