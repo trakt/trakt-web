@@ -1694,6 +1694,15 @@
     },
     "link_label_explore_movies": {
       "default": "映画を探す"
+    },
+    "header_comment_reactions": {
+      "default": "コメントへの反応"
+    },
+    "button_text_react": {
+      "default": "反応"
+    },
+    "button_label_close_reaction": {
+      "default": "閉じる"
     }
   }
 }

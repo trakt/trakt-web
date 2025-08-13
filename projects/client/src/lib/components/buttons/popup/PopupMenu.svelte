@@ -106,12 +106,7 @@
     border-radius: var(--border-radius-m);
     background-color: var(--shade-10);
 
-    box-shadow:
-      var(--ni-0) var(--ni-4) var(--ni-8) var(--ni-0) var(--cm-shadow-8),
-      var(--ni-0) var(--ni-16) var(--ni-16) var(--ni-0) var(--cm-shadow-7),
-      var(--ni-0) var(--ni-32) var(--ni-20) var(--ni-0) var(--cm-shadow-4),
-      var(--ni-0) var(--ni-60) var(--ni-24) var(--ni-0) var(--cm-shadow-1),
-      var(--ni-0) var(--ni-96) var(--ni-32) var(--ni-0) transparent;
+    box-shadow: var(--popup-shadow);
 
     ul {
       all: unset;

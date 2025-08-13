@@ -4,22 +4,31 @@
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import LikeCommentAction from "./LikeCommentAction.svelte";
-  import ReactionPopupMenu from "./ReactionPopupMenu.svelte";
-  import ReactionsSummary from "./ReactionsSummary.svelte";
+  import ReactButton from "./ReactButton.svelte";
+  import ReactionsSummaryButton from "./ReactionsSummaryButton.svelte";
 
   const { comment }: { comment: MediaComment } = $props();
 </script>
 
 <RenderForFeature flag={FeatureFlag.Reactions}>
   {#snippet enabled()}
-    <RenderFor audience="public">
-      <ReactionsSummary {comment} />
-    </RenderFor>
+    <div class="trakt-react-action">
+      <RenderFor audience="authenticated">
+        <ReactButton {comment} />
+      </RenderFor>
 
-    <RenderFor audience="authenticated">
-      <ReactionPopupMenu {comment} />
-    </RenderFor>
+      <ReactionsSummaryButton {comment} />
+    </div>
   {/snippet}
 
   <LikeCommentAction {comment} />
 </RenderForFeature>
+
+<style>
+  .trakt-react-action {
+    display: flex;
+    align-items: center;
+
+    gap: var(--gap-xxs);
+  }
+</style>

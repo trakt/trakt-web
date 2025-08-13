@@ -1,10 +1,14 @@
-import type { UserReaction } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
-import { UserProfileHarryMappedMock } from '../../../../users/mapped/UserProfileHarryMappedMock.ts';
+import type { ReactionsSummary } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
 
-export const EpisodeSiloCommentReactionsMappedMock: UserReaction[] = [
-  {
-    reactedAt: new Date('2023-03-11T06:25:15.000Z'),
-    reaction: 'like',
-    user: UserProfileHarryMappedMock,
+export const EpisodeSiloCommentReactionsMappedMock: ReactionsSummary = {
+  'count': 2,
+  'distribution': {
+    'like': 0,
+    'dislike': 0,
+    'love': 0,
+    'laugh': 0,
+    'shocked': 1,
+    'bravo': 1,
+    'spoiler': 0,
   },
-];
+};

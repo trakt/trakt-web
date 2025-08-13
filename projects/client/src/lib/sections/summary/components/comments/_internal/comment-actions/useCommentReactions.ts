@@ -1,78 +1,52 @@
-import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
-import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
-import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import {
   commentReactionsQuery,
   type Reaction,
 } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
-import { reactCommentRequest } from '$lib/requests/queries/comments/reactCommentRequest.ts';
-import { removeReactionCommentRequest } from '$lib/requests/queries/comments/removeReactionCommentRequest.ts';
-import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived, writable } from 'svelte/store';
-import { getTopReactions } from './getTopReactions.ts';
+import { derived } from 'svelte/store';
 
 type UseCommentReactionsProps = {
   id: number;
 };
 
+const PREVIEW_LIMIT = 3;
+
 export function useCommentReactions({ id }: UseCommentReactionsProps) {
-  const { user } = useUser();
+  const { reactions } = useUser();
 
-  const isReacting = writable(false);
-  const { invalidate } = useInvalidator();
-  const { track } = useTrack(AnalyticsEvent.React);
-
-  const reactions = useQuery(commentReactionsQuery({ id }));
-
-  const remove = async () => {
-    isReacting.set(true);
-    track({ action: 'remove', type: 'comment' });
-
-    await removeReactionCommentRequest({ id });
-    await invalidate(InvalidateAction.React);
-
-    isReacting.set(false);
-  };
-
-  const react = async (reaction: Reaction) => {
-    isReacting.set(true);
-    track({ action: 'add', type: 'comment' });
-
-    await removeReactionCommentRequest({ id });
-    await reactCommentRequest({ id, reaction_type: reaction });
-    await invalidate(InvalidateAction.React);
-
-    isReacting.set(false);
-  };
+  const summary = useQuery(commentReactionsQuery({ id }));
 
   return {
-    isReacting,
-    react,
-    remove,
-    reactions: derived([reactions, user], ([$reactions, $user]) => {
-      const data = $reactions?.data || [];
+    currentReaction: derived(reactions, ($reactions) => {
+      return $reactions?.get(id)?.reaction ?? null;
+    }),
+    summary: derived(summary, ($summary) => {
+      if (!$summary.data) {
+        return {
+          count: 0,
+          topCount: 0,
+          top: [],
+          distribution: {},
+        };
+      }
 
-      // FIXME: relocate to useUser when endpoint is fixed
-      const current = data.find((reaction) =>
-        reaction.user.slug === $user?.slug
-      )?.reaction;
+      const sortedDistribution = Object
+        .entries($summary.data.distribution)
+        .sort(([_key, a], [_key2, b]) => b - a) as Array<[Reaction, number]>;
 
-      const top = getTopReactions(data);
-
-      const restCount = data.length - top.length;
+      const top = sortedDistribution
+        .slice(0, PREVIEW_LIMIT)
+        .filter(([_, count]) => count > 0);
 
       return {
-        current,
+        count: $summary.data.count,
+        distribution: Object.fromEntries(sortedDistribution),
         top,
-        restCount,
+        topCount: top.reduce((sum, [_, count]) => sum + count, 0),
       };
     }),
-    isLoading: derived(
-      reactions,
-      toLoadingState,
-    ),
+    isLoading: derived(summary, toLoadingState),
   };
 }

@@ -1,11 +1,9 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { type ReactionsResponse, reactionsSchema } from '@trakt/api';
+import { reactionsSchema, type ReactionsSummaryResponse } from '@trakt/api';
 import z from 'zod';
-import { mapToUserProfile } from '../../_internal/mapToUserProfile.ts';
 import { InvalidateAction } from '../../models/InvalidateAction.ts';
-import { UserProfileSchema } from '../../models/UserProfile.ts';
 
 type CommentRepliesParams =
   & {
@@ -13,22 +11,20 @@ type CommentRepliesParams =
   }
   & ApiParams;
 
-const ReactionSchema = z.object({
-  reactedAt: z.date(),
-  reaction: reactionsSchema,
-  user: UserProfileSchema,
+const ReactionsSummarySchema = z.object({
+  count: z.number(),
+  distribution: z.record(reactionsSchema, z.number()),
 });
 
 export type Reaction = z.infer<typeof reactionsSchema>;
-export type UserReaction = z.infer<typeof ReactionSchema>;
+export type ReactionsSummary = z.infer<typeof ReactionsSummarySchema>;
 
-function mapToReaction(
-  reactionResponse: ReactionsResponse,
-): UserReaction {
+function mapToReactionsSummary(
+  response: ReactionsSummaryResponse,
+): ReactionsSummary {
   return {
-    reactedAt: new Date(reactionResponse.reacted_at),
-    reaction: reactionResponse.reaction.type,
-    user: mapToUserProfile(reactionResponse.user),
+    count: response.reaction_count,
+    distribution: response.distribution,
   };
 }
 
@@ -41,12 +37,9 @@ const commentReactionsRequest = (
   api({ fetch })
     .comments
     .reactions
-    .all({
+    .summary({
       params: {
         id: `${id}`,
-      },
-      query: {
-        limit: 'all',
       },
     });
 
@@ -55,7 +48,7 @@ export const commentReactionsQuery = defineQuery({
   invalidations: [InvalidateAction.React],
   dependencies: (params) => [params.id],
   request: commentReactionsRequest,
-  mapper: (response) => response.body.map(mapToReaction),
-  schema: z.array(ReactionSchema),
+  mapper: (response) => mapToReactionsSummary(response.body),
+  schema: ReactionsSummarySchema,
   ttl: time.minutes(30),
 });
