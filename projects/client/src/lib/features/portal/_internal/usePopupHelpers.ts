@@ -4,6 +4,7 @@ import { createUnderlay } from '$lib/features/portal/_internal/createUnderlay.ts
 import { PopupState } from '$lib/features/portal/_internal/models/PopupState.ts';
 import { get, writable } from 'svelte/store';
 import { createSanitizedClone } from './createSanitizedClone.ts';
+import { getTargetArea } from './getTargetArea.ts';
 
 const clearElement = (element: HTMLElement | null) => {
   element?.remove();
@@ -13,6 +14,7 @@ const clearElement = (element: HTMLElement | null) => {
 export function usePopupHelpers() {
   const underlay = writable<HTMLElement | null>(null);
   const targetClone = writable<HTMLElement | null>(null);
+  const area = getTargetArea();
 
   const removeCloneAfterContainer = (popupContainer: HTMLElement) => {
     targetClone.update((element) => {
@@ -32,7 +34,7 @@ export function usePopupHelpers() {
       });
     });
 
-    observer.observe(document.body, { childList: true });
+    observer.observe(area.target, { childList: true });
   };
 
   const removeHelpers = (popupContainer: HTMLElement | null) => {
