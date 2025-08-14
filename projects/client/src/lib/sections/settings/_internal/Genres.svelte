@@ -3,13 +3,17 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import ToggleTag from "$lib/sections/components/ToggleTag.svelte";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue.ts";
+  import type { Genre } from "@trakt/api";
   import SettingsBlock from "./SettingsBlock.svelte";
   import { useSettings } from "./useSettings";
+
+  const GENRE_LIMIT = 5;
 
   const { genres, isSavingSettings } = useSettings();
 
   // FIXME: use local writable and allow for faster clicks without disabling
   const favorites = $derived($genres.favorites);
+  const isAtLimit = $derived(favorites.length >= GENRE_LIMIT);
 
   const toggleFavoriteGenre = (genre: string) => {
     if (favorites.includes(genre)) {
@@ -19,13 +23,24 @@
 
     $genres.set([...favorites, genre]);
   };
+
+  const isGenreSelectable = (genre: Genre) => {
+    if ($isSavingSettings) {
+      return false;
+    }
+
+    return favorites.includes(genre) || !isAtLimit;
+  };
 </script>
 
-<SettingsBlock title={m.header_favorite_genres()}>
+<SettingsBlock
+  title={m.header_favorite_genres()}
+  description={m.description_genres({ limit: GENRE_LIMIT })}
+>
   <div class="trakt-genres" role="group">
     {#each GENRES as genre}
       <ToggleTag
-        disabled={$isSavingSettings}
+        disabled={!isGenreSelectable(genre)}
         label={m.button_label_toggle_genre({
           genre: toTranslatedValue("genre", genre),
         })}
@@ -42,9 +57,6 @@
   .trakt-genres {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-
-    padding: var(--ni-8);
 
     gap: var(--gap-xs);
   }

@@ -301,7 +301,7 @@
       "default": "{number} odtworzeń"
     },
     "button_text_logout": {
-      "default": "Wyloguj się"
+      "default": "Wyloguj się z Trakt"
     },
     "button_label_logout": {
       "default": "Wyloguj się"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "W tej liście jeszcze nic nie ma."
     },
-    "header_profile": {
-      "default": "Profil"
-    },
     "text_avatar": {
       "default": "Awatar"
     },
-    "text_private": {
-      "default": "Prywatne"
+    "text_private_account": {
+      "default": "Konto prywatne"
     },
     "switch_label_private": {
       "default": "Czy profil jest prywatny?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Zarządzaj subskrypcją"
+    },
+    "button_label_manage_subscription": {
+      "default": "Zarządzaj subskrypcją"
+    },
+    "header_danger_zone": {
+      "default": "Strefa zagrożenia"
+    },
+    "header_account_details": {
+      "default": "Szczegóły konta"
+    },
+    "description_account_details": {
+      "default": "Zmień swoje zdjęcie, imię i inne dane."
+    },
+    "description_spoilers": {
+      "default": "Nie chcesz widzieć żadnych spoilerów? Nigdzie? W takim razie wyłącz je."
+    },
+    "description_genres": {
+      "default": "Dodaj lub usuń swoje {limit} ulubione gatunki.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Przełącz się na inne konto lub wyloguj z bieżącego."
     }
   }
 }

@@ -301,7 +301,7 @@
       "default": "{number} riproduzioni"
     },
     "button_text_logout": {
-      "default": "Esci"
+      "default": "Esci da Trakt"
     },
     "button_label_logout": {
       "default": "Esci"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Non c'è ancora nulla in questa lista."
     },
-    "header_profile": {
-      "default": "Profilo"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privato"
+    "text_private_account": {
+      "default": "Account privato"
     },
     "switch_label_private": {
       "default": "Il profilo è privato?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Gestisci abbonamento"
+    },
+    "button_label_manage_subscription": {
+      "default": "Gestisci abbonamento"
+    },
+    "header_danger_zone": {
+      "default": "Zona di pericolo"
+    },
+    "header_account_details": {
+      "default": "Dettagli account"
+    },
+    "description_account_details": {
+      "default": "Cambia la tua foto, nome e altri dettagli."
+    },
+    "description_spoilers": {
+      "default": "Non vuoi vedere nessuno spoiler? Da nessuna parte? In tal caso, disattivali."
+    },
+    "description_genres": {
+      "default": "Aggiungi o rimuovi i tuoi {limit} generi preferiti.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Passa a un altro account o esci da quello attuale."
     }
   }
 }

@@ -301,7 +301,7 @@
       "default": "{number} Wiedergaben"
     },
     "button_text_logout": {
-      "default": "Abmelden"
+      "default": "Von Trakt abmelden"
     },
     "button_label_logout": {
       "default": "Abmelden"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "In dieser Liste gibt es noch nichts."
     },
-    "header_profile": {
-      "default": "Profil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privat"
+    "text_private_account": {
+      "default": "Privates Konto"
     },
     "switch_label_private": {
       "default": "Ist das Profil privat?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Abonnement verwalten"
+    },
+    "button_label_manage_subscription": {
+      "default": "Abonnement verwalten"
+    },
+    "header_danger_zone": {
+      "default": "Gefahrenzone"
+    },
+    "header_account_details": {
+      "default": "Kontodetails"
+    },
+    "description_account_details": {
+      "default": "Ändern Sie Ihr Foto, Ihren Namen und andere Details."
+    },
+    "description_spoilers": {
+      "default": "Möchten Sie überhaupt keine Spoiler sehen? Nirgends? Schalten Sie sie in diesem Fall aus."
+    },
+    "description_genres": {
+      "default": "Fügen Sie Ihre {limit} Lieblingsgenres hinzu oder entfernen Sie sie.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Zu einem anderen Konto wechseln oder sich vom aktuellen abmelden."
     }
   }
 }

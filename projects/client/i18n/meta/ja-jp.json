@@ -301,7 +301,7 @@
       "default": "{number} 回再生"
     },
     "button_text_logout": {
-      "default": "ログアウト"
+      "default": "Trakt からログアウト"
     },
     "button_label_logout": {
       "default": "ログアウト"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "このリストにはまだ何もありません。"
     },
-    "header_profile": {
-      "default": "プロフィール"
-    },
     "text_avatar": {
       "default": "アバター"
     },
-    "text_private": {
-      "default": "非公開"
+    "text_private_account": {
+      "default": "プライベートアカウント"
     },
     "switch_label_private": {
       "default": "プロフィールを非公開にしますか？"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "サブスクリプションを管理"
+    },
+    "button_label_manage_subscription": {
+      "default": "サブスクリプションを管理"
+    },
+    "header_danger_zone": {
+      "default": "危険区域"
+    },
+    "header_account_details": {
+      "default": "アカウントの詳細"
+    },
+    "description_account_details": {
+      "default": "写真、名前、その他の詳細を変更します。"
+    },
+    "description_spoilers": {
+      "default": "ネタバレは一切見たくない？どこでも？もしそうなら、オフにしてください。"
+    },
+    "description_genres": {
+      "default": "{limit} 個のお気に入りのジャンルを追加または削除します。",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "別のアカウントに切り替えるか、現在のアカウントからログアウトします。"
     }
   }
 }

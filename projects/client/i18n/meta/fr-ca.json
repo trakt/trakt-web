@@ -301,7 +301,7 @@
       "default": "{number} visionnements"
     },
     "button_text_logout": {
-      "default": "Déconnexion"
+      "default": "Se déconnecter de Trakt"
     },
     "button_label_logout": {
       "default": "Déconnexion"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Y'a rien dans cette liste pour l'instant."
     },
-    "header_profile": {
-      "default": "Profil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privé"
+    "text_private_account": {
+      "default": "Compte privé"
     },
     "switch_label_private": {
       "default": "Profil privé?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Gérer l'abonnement"
+    },
+    "button_label_manage_subscription": {
+      "default": "Gérer l'abonnement"
+    },
+    "header_danger_zone": {
+      "default": "Zone dangereuse"
+    },
+    "header_account_details": {
+      "default": "Détails du compte"
+    },
+    "description_account_details": {
+      "default": "Changez votre photo, votre nom et d'autres détails."
+    },
+    "description_spoilers": {
+      "default": "Vous voulez rien savoir des divulgâcheurs? Nulle part? Dans ce cas, éteignez ça."
+    },
+    "description_genres": {
+      "default": "Ajoutez ou retirez vos {limit} genres favoris.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Changez de compte ou déconnectez-vous du compte actuel."
     }
   }
 }

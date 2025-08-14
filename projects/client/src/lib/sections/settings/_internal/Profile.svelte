@@ -5,8 +5,12 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import VipBadge from "$lib/sections/navbar/components/VIPBadge.svelte";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
+  import ManageSubscriptionButton from "./components/ManageSubscriptionButton.svelte";
   import { getSwitchInnerText } from "./getSwitchInnerText";
+  import LargeSettingsRow from "./LargeSettingsRow.svelte";
   import SettingsBlock from "./SettingsBlock.svelte";
   import SettingsRow from "./SettingsRow.svelte";
   import { useSettings } from "./useSettings";
@@ -54,53 +58,77 @@
 
 {#snippet renameField(field: keyof typeof promptMap)}
   <ActionButton
-    style="ghost"
+    style="flat"
     label={promptMap[field].label}
     onclick={() => handleFieldChange(field)}
     disabled={$isSavingSettings}
+    size="small"
   >
     <RenameIcon />
   </ActionButton>
 {/snippet}
 
-<SettingsBlock title={m.header_profile()}>
+<SettingsBlock
+  title={m.header_account_details()}
+  description={m.description_account_details()}
+>
   <SettingsRow title={m.text_avatar()}>
-    <ProfileImage
-      isEditable
-      --width="var(--ni-32)"
-      --height="var(--ni-32)"
-      --border-width="var(--border-thickness-xs)"
-      name={$user.name.first}
-      src={$user.avatar.url}
-    />
+    <!-- FIXME: merge with the one in ProfileLink -->
+    <div class="profile-image-container">
+      <ProfileImage
+        isEditable
+        --width="var(--ni-52)"
+        --height="var(--ni-52)"
+        --border-width="var(--border-thickness-xs)"
+        name={$user.name.first}
+        src={$user.avatar.url}
+      />
+      <RenderFor audience="vip">
+        <VipBadge style="inverted" />
+      </RenderFor>
+    </div>
   </SettingsRow>
-  <SettingsRow title={m.text_private()}>
-    <Switch
-      {innerText}
-      color="purple"
-      label={m.switch_label_private()}
-      checked={$profile.isPrivate}
-      onclick={() => $profile.set({ private: !$profile.isPrivate })}
-      disabled={$isSavingSettings}
-    />
-  </SettingsRow>
+
   <SettingsRow title={m.text_display_name()}>
-    <p class="ellipsis bold">{$profile.displayName}</p>
-    {@render renameField("name")}
+    <p class="ellipsis">{$profile.displayName}</p>
+    {#snippet action()}
+      {@render renameField("name")}
+    {/snippet}
   </SettingsRow>
+
   <SettingsRow title={m.text_location()}>
-    <p class="ellipsis bold">{$profile.location}</p>
-    {@render renameField("location")}
+    <p class="ellipsis">{$profile.location}</p>
+    {#snippet action()}
+      {@render renameField("location")}
+    {/snippet}
   </SettingsRow>
-  <SettingsRow title={m.text_about()}>
+
+  <LargeSettingsRow title={m.text_about()}>
+    {#snippet action()}
+      {@render renameField("about")}
+    {/snippet}
     <p
-      class="bold trakt-about-text"
+      class="trakt-about-text"
       style="--line-clamp-lines: {ABOUT_LINE_CLAMP}"
       use:lineClamp={{ lines: ABOUT_LINE_CLAMP }}
     >
       {$profile.about}
     </p>
-    {@render renameField("about")}
+  </LargeSettingsRow>
+
+  <ManageSubscriptionButton />
+
+  <SettingsRow title={m.text_private_account()}>
+    {#snippet action()}
+      <Switch
+        {innerText}
+        color="purple"
+        label={m.switch_label_private()}
+        checked={$profile.isPrivate}
+        onclick={() => $profile.set({ private: !$profile.isPrivate })}
+        disabled={$isSavingSettings}
+      />
+    {/snippet}
   </SettingsRow>
 </SettingsBlock>
 
@@ -113,5 +141,20 @@
     display: -webkit-box;
     overflow: hidden;
     line-clamp: var(--line-clamp-lines);
+  }
+
+  .profile-image-container {
+    position: relative;
+
+    :global(.vip-badge) {
+      width: var(--ni-24);
+      height: auto;
+
+      position: absolute;
+      top: var(--ni-neg-10);
+      right: var(--ni-neg-10);
+
+      z-index: var(--layer-raised);
+    }
   }
 </style>

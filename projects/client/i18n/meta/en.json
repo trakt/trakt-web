@@ -805,7 +805,7 @@
       ]
     },
     "button_text_logout": {
-      "default": "Logout",
+      "default": "Log out of Trakt",
       "description": "Text for the logout button.",
       "exclude": [
         "android",
@@ -4211,14 +4211,6 @@
         "ios"
       ]
     },
-    "header_profile": {
-      "default": "Profile",
-      "description": "Header for the section that allows users to change their profile settings.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "text_avatar": {
       "default": "Avatar",
       "description": "Text for the section that allows users to change their avatar.",
@@ -4227,8 +4219,8 @@
         "ios"
       ]
     },
-    "text_private": {
-      "default": "Private",
+    "text_private_account": {
+      "default": "Private account",
       "description": "Text for the section that allows users to toggle privacy.",
       "exclude": [
         "android",
@@ -4916,6 +4908,75 @@
           "type": "string"
         }
       },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_manage_subscription": {
+      "default": "Manage subscription",
+      "description": "Text for the manage subscription button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_manage_subscription": {
+      "default": "Manage subscription",
+      "description": "Aria-label for the manage subscription button.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_danger_zone": {
+      "default": "Danger zone",
+      "description": "Header for the section that allows users to use destructive operations like logging out.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_account_details": {
+      "default": "Account details",
+      "description": "Header for the section that allows users to change their account details.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_account_details": {
+      "default": "Change your photo, name and other details.",
+      "description": "Description for the account details section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_spoilers": {
+      "default": "Don't want to see any spoilers whatsoever? Anywhere? In that case, switch them off.",
+      "description": "Description for the spoilers section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_genres": {
+      "default": "Add or remove your {limit} favorite genres.",
+      "description": "Description for the genres section, indicating that there is a limit.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_danger_zone": {
+      "default": "Switch to another account or log out of the current one.",
+      "description": "Description for the danger zone section.",
       "exclude": [
         "android",
         "ios"
