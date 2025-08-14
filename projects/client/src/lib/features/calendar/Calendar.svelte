@@ -24,14 +24,7 @@
   </div>
 
   {#if $isLoading}
-    <!--
-    Loading indicator is keyed to ensure destruction, since
-    the calendar items depend on accurate element positions onMount
-    FIXME: change the scroll sync to a simpler approach and remove this hack
-   -->
-    {#key "calendar-loading"}
-      <LoadingIndicator />
-    {/key}
+    <LoadingIndicator />
   {:else}
     <CalendarItems calendar={$calendar} safeAreaOffset={$observedDimension} />
   {/if}
