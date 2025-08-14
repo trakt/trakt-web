@@ -29,9 +29,7 @@
 
   const src = $derived(useEpisodeSpoilerImage({ episode, show }));
 
-  const isShowContext = $derived(
-    rest.variant === "default" && rest.context === "show",
-  );
+  const isShowContext = $derived("context" in rest && rest.context === "show");
   const isActivity = $derived(rest.variant === "activity");
 </script>
 
