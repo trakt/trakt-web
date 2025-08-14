@@ -33,7 +33,14 @@
 </script>
 
 {#if seasons.length > 1}
-  <SeasonPosterList {show} {seasons} episodes={$episodes} {title} {subtitle} />
+  <SeasonPosterList
+    {show}
+    {seasons}
+    episodes={$episodes}
+    {title}
+    {subtitle}
+    {currentSeason}
+  />
 {/if}
 <SeasonEpisodeList
   {show}
