@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import LogoutIcon from "$lib/components/icons/LogoutIcon.svelte";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -21,10 +22,14 @@
   <Button
     size="small"
     style="flat"
+    variant="secondary"
     navigationType={DpadNavigationType.Item}
     {...commonProps}
   >
     {m.button_text_logout()}
+    {#snippet icon()}
+      <CloseIcon />
+    {/snippet}
   </Button>
 {/if}
 

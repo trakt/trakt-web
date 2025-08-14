@@ -301,7 +301,7 @@
       "default": "{number} visninger"
     },
     "button_text_logout": {
-      "default": "Logg ut"
+      "default": "Logg ut fra Trakt"
     },
     "button_label_logout": {
       "default": "Logg ut"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Det er ingenting i denne listen ennå."
     },
-    "header_profile": {
-      "default": "Profil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privat"
+    "text_private_account": {
+      "default": "Privat konto"
     },
     "switch_label_private": {
       "default": "Er profilen privat?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Administrer abonnement"
+    },
+    "button_label_manage_subscription": {
+      "default": "Administrer abonnement"
+    },
+    "header_danger_zone": {
+      "default": "Faresone"
+    },
+    "header_account_details": {
+      "default": "Kontodetaljer"
+    },
+    "description_account_details": {
+      "default": "Endre bildet ditt, navnet ditt og andre detaljer."
+    },
+    "description_spoilers": {
+      "default": "Vil du ikke se noen spoilere i det hele tatt? Noensteds? I så fall, slå dem av."
+    },
+    "description_genres": {
+      "default": "Legg til eller fjern dine {limit} favoritt sjangere.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Bytt til en annen konto eller logg ut av den nåværende."
     }
   }
 }

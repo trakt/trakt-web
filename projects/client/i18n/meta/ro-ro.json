@@ -301,7 +301,7 @@
       "default": "{number} vizionări"
     },
     "button_text_logout": {
-      "default": "Deconectare"
+      "default": "Deconecte-te de Trakt"
     },
     "button_label_logout": {
       "default": "Deconectare"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Nu este nimic în această listă încă."
     },
-    "header_profile": {
-      "default": "Profil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privat"
+    "text_private_account": {
+      "default": "Cont privat"
     },
     "switch_label_private": {
       "default": "Profil privat?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Gestionați abonamentul"
+    },
+    "button_label_manage_subscription": {
+      "default": "Gestionați abonamentul"
+    },
+    "header_danger_zone": {
+      "default": "Zonă de pericol"
+    },
+    "header_account_details": {
+      "default": "Detalii cont"
+    },
+    "description_account_details": {
+      "default": "Schimbați-vă fotografia, numele și alte detalii."
+    },
+    "description_spoilers": {
+      "default": "Nu vrei să vezi niciun spoiler? Nicăieri? În acest caz, dezactivează-le."
+    },
+    "description_genres": {
+      "default": "Adăugați sau eliminați cele {limit} genuri preferate.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Treceți la un alt cont sau deconectați-vă de la cel curent."
     }
   }
 }

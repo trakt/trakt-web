@@ -301,7 +301,7 @@
       "default": "{number} afspilninger"
     },
     "button_text_logout": {
-      "default": "Log ud"
+      "default": "Log ud af Trakt"
     },
     "button_label_logout": {
       "default": "Log ud"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Der er ikke noget i denne liste endnu."
     },
-    "header_profile": {
-      "default": "Profil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privat"
+    "text_private_account": {
+      "default": "Privat konto"
     },
     "switch_label_private": {
       "default": "Er profilen privat?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Administrer abonnement"
+    },
+    "button_label_manage_subscription": {
+      "default": "Administrer abonnement"
+    },
+    "header_danger_zone": {
+      "default": "Farezone"
+    },
+    "header_account_details": {
+      "default": "Kontooplysninger"
+    },
+    "description_account_details": {
+      "default": "Skift dit foto, navn og andre detaljer."
+    },
+    "description_spoilers": {
+      "default": "Vil du ikke se nogen spoilers overhovedet? Nogen steder? I så fald skal du slå dem fra."
+    },
+    "description_genres": {
+      "default": "Tilføj eller fjern dine {limit} yndlingsgenrer.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Skift til en anden konto eller log ud af den nuværende."
     }
   }
 }

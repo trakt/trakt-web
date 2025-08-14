@@ -301,7 +301,7 @@
       "default": "{number} reproduções"
     },
     "button_text_logout": {
-      "default": "Sair"
+      "default": "Sair do Trakt"
     },
     "button_label_logout": {
       "default": "Sair"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Não há nada nesta lista ainda."
     },
-    "header_profile": {
-      "default": "Perfil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privado"
+    "text_private_account": {
+      "default": "Conta privada"
     },
     "switch_label_private": {
       "default": "Perfil é privado?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Gerenciar assinatura"
+    },
+    "button_label_manage_subscription": {
+      "default": "Gerenciar assinatura"
+    },
+    "header_danger_zone": {
+      "default": "Zona de perigo"
+    },
+    "header_account_details": {
+      "default": "Detalhes da conta"
+    },
+    "description_account_details": {
+      "default": "Altere sua foto, nome e outros detalhes."
+    },
+    "description_spoilers": {
+      "default": "Não quer ver nenhum spoiler de jeito nenhum? Em lugar nenhum? Nesse caso, desligue-os."
+    },
+    "description_genres": {
+      "default": "Adicione ou remova seus {limit} gêneros favoritos.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Mude para outra conta ou saia da atual."
     }
   }
 }

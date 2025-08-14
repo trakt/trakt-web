@@ -301,7 +301,7 @@
       "default": "{number} reproducciones"
     },
     "button_text_logout": {
-      "default": "Cerrar sesión"
+      "default": "Cerrar sesión de Trakt"
     },
     "button_label_logout": {
       "default": "Cerrar sesión"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Aún no hay nada en esta lista."
     },
-    "header_profile": {
-      "default": "Perfil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privado"
+    "text_private_account": {
+      "default": "Cuenta privada"
     },
     "switch_label_private": {
       "default": "¿Es el perfil privado?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Gestionar suscripción"
+    },
+    "button_label_manage_subscription": {
+      "default": "Gestionar suscripción"
+    },
+    "header_danger_zone": {
+      "default": "Zona de peligro"
+    },
+    "header_account_details": {
+      "default": "Detalles de la cuenta"
+    },
+    "description_account_details": {
+      "default": "Cambia tu foto, nombre y otros detalles."
+    },
+    "description_spoilers": {
+      "default": "¿No quieres ver ningún spoiler en absoluto? ¿En ningún sitio? En ese caso, desactívalos."
+    },
+    "description_genres": {
+      "default": "Añade o elimina tus {limit} géneros favoritos.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Cambia a otra cuenta o cierra la sesión actual."
     }
   }
 }

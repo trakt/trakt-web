@@ -301,7 +301,7 @@
       "default": "{number} переглядів"
     },
     "button_text_logout": {
-      "default": "Вийти"
+      "default": "Вийти з Trakt"
     },
     "button_label_logout": {
       "default": "Вийти"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "У цьому списку поки що нічого немає."
     },
-    "header_profile": {
-      "default": "Профіль"
-    },
     "text_avatar": {
       "default": "Аватар"
     },
-    "text_private": {
-      "default": "Приватне"
+    "text_private_account": {
+      "default": "Приватний акаунт"
     },
     "switch_label_private": {
       "default": "Чи профіль приватний?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Керувати підпискою"
+    },
+    "button_label_manage_subscription": {
+      "default": "Керувати підпискою"
+    },
+    "header_danger_zone": {
+      "default": "Зона ризику"
+    },
+    "header_account_details": {
+      "default": "Деталі облікового запису"
+    },
+    "description_account_details": {
+      "default": "Змініть своє фото, ім'я та інші дані."
+    },
+    "description_spoilers": {
+      "default": "Не хочете бачити спойлери взагалі? Ніде? У такому разі вимкніть їх."
+    },
+    "description_genres": {
+      "default": "Додайте або видаліть ваші {limit} улюблені жанри.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Переключіться на інший обліковий запис або вийдіть з поточного."
     }
   }
 }

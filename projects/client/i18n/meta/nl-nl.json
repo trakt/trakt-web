@@ -301,7 +301,7 @@
       "default": "{number} keer bekeken"
     },
     "button_text_logout": {
-      "default": "Uitloggen"
+      "default": "Uitloggen bij Trakt"
     },
     "button_label_logout": {
       "default": "Uitloggen"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Er staat nog niets in deze lijst."
     },
-    "header_profile": {
-      "default": "Profiel"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privé"
+    "text_private_account": {
+      "default": "Privé account"
     },
     "switch_label_private": {
       "default": "Is profiel privé?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Abonnement beheren"
+    },
+    "button_label_manage_subscription": {
+      "default": "Abonnement beheren"
+    },
+    "header_danger_zone": {
+      "default": "Gevaarlijke zone"
+    },
+    "header_account_details": {
+      "default": "Accountgegevens"
+    },
+    "description_account_details": {
+      "default": "Verander je foto, naam en andere details."
+    },
+    "description_spoilers": {
+      "default": "Wil je helemaal geen spoilers zien? Nergens? Schakel ze dan uit."
+    },
+    "description_genres": {
+      "default": "Voeg je {limit} favoriete genres toe of verwijder ze.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Schakel over naar een ander account of log uit van het huidige account."
     }
   }
 }

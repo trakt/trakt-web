@@ -301,7 +301,7 @@
       "default": "{number} visningar"
     },
     "button_text_logout": {
-      "default": "Logga ut"
+      "default": "Logga ut från Trakt"
     },
     "button_label_logout": {
       "default": "Logga ut"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Det finns inget i den här listan än."
     },
-    "header_profile": {
-      "default": "Profil"
-    },
     "text_avatar": {
       "default": "Avatar"
     },
-    "text_private": {
-      "default": "Privat"
+    "text_private_account": {
+      "default": "Privat konto"
     },
     "switch_label_private": {
       "default": "Är profilen privat?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Hantera prenumeration"
+    },
+    "button_label_manage_subscription": {
+      "default": "Hantera prenumeration"
+    },
+    "header_danger_zone": {
+      "default": "Farlig zon"
+    },
+    "header_account_details": {
+      "default": "Kontouppgifter"
+    },
+    "description_account_details": {
+      "default": "Ändra ditt foto, namn och andra uppgifter."
+    },
+    "description_spoilers": {
+      "default": "Vill du inte se några spoilers alls? Någonstans? Stäng i så fall av dem."
+    },
+    "description_genres": {
+      "default": "Lägg till eller ta bort dina {limit} favoritgenrer.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Byt till ett annat konto eller logga ut från det aktuella."
     }
   }
 }

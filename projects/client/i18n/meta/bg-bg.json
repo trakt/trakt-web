@@ -301,7 +301,7 @@
       "default": "{number} гледания"
     },
     "button_text_logout": {
-      "default": "Излез"
+      "default": "Изход от Trakt"
     },
     "button_label_logout": {
       "default": "Изход"
@@ -1455,14 +1455,11 @@
     "list_placeholder_personal_list_empty": {
       "default": "Все още няма нищо в този списък."
     },
-    "header_profile": {
-      "default": "Профил"
-    },
     "text_avatar": {
       "default": "Аватар"
     },
-    "text_private": {
-      "default": "Лично"
+    "text_private_account": {
+      "default": "Личен акаунт"
     },
     "switch_label_private": {
       "default": "Профилът е личен?"
@@ -1711,6 +1708,35 @@
           "type": "string"
         }
       }
+    },
+    "button_text_manage_subscription": {
+      "default": "Управление на абонамента"
+    },
+    "button_label_manage_subscription": {
+      "default": "Управление на абонамента"
+    },
+    "header_danger_zone": {
+      "default": "Опасна зона"
+    },
+    "header_account_details": {
+      "default": "Данни за профила"
+    },
+    "description_account_details": {
+      "default": "Променете снимката си, името и други данни."
+    },
+    "description_spoilers": {
+      "default": "Не искате да виждате никакви спойлери? Никъде? В този случай ги изключете."
+    },
+    "description_genres": {
+      "default": "Добавете или премахнете своите {limit} любими жанрове.",
+      "variables": {
+        "limit": {
+          "type": "number"
+        }
+      }
+    },
+    "description_danger_zone": {
+      "default": "Превключете към друг профил или излезте от текущия."
     }
   }
 }

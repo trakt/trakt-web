@@ -1,7 +1,7 @@
 <script lang="ts">
-  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import DangerZone from "./_internal/DangerZone.svelte";
   import Genres from "./_internal/Genres.svelte";
   import Profile from "./_internal/Profile.svelte";
   import Spoilers from "./_internal/Spoilers.svelte";
@@ -14,14 +14,12 @@
       <div class="trakt-settings-sidebar-content">
         <h4>{m.header_settings()}</h4>
       </div>
-      <div class="trakt-settings-footer">
-        <LogoutButton />
-      </div>
     </div>
     <div class="trakt-settings-content">
       <Profile />
       <Spoilers />
       <Genres />
+      <DangerZone />
     </div>
   </div>
 </RenderFor>
@@ -38,14 +36,23 @@
 
     min-height: var(--ni-120);
 
+    :global(.trakt-action-button) {
+      &:not(:hover) {
+        background-color: transparent;
+      }
+    }
+
     .trakt-settings-content {
       display: flex;
       flex-direction: column;
       gap: var(--gap-xxl);
 
-      max-width: var(--ni-640);
       min-width: 0;
       padding: var(--ni-8);
+
+      @include for-desktop {
+        max-width: var(--ni-480);
+      }
     }
 
     @include for-tablet-sm-and-below {
@@ -77,6 +84,10 @@
       h4 {
         font-size: var(--ni-24);
       }
+    }
+
+    @include for-mobile {
+      display: none;
     }
   }
 </style>
