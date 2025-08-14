@@ -5,9 +5,8 @@ import type { Snippet } from 'svelte';
 
 export type EpisodeItemVariant =
   | { variant: 'next'; episode: EpisodeProgressEntry }
-  | { variant: 'upcoming'; episode: EpisodeEntry }
   | {
-    variant: 'default';
+    variant: 'default' | 'upcoming';
     episode: EpisodeEntry;
     context?: 'show' | 'standalone';
   }

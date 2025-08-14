@@ -71,7 +71,7 @@
       {episode}
       {show}
       popupActions={hasBulkMarkAsWatched(episode) ? popupActions : undefined}
-      variant="default"
+      variant={episode.airDate > new Date() ? "default" : "default"}
       context="show"
     />
   {/snippet}
