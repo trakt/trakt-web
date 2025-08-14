@@ -15,10 +15,17 @@
     episodes: EpisodeEntry[];
     title: string;
     subtitle: string;
+    currentSeason: number;
   };
 
-  const { show, seasons, episodes, title, subtitle }: SeasonListProps =
-    $props();
+  const {
+    show,
+    seasons,
+    episodes,
+    title,
+    subtitle,
+    currentSeason,
+  }: SeasonListProps = $props();
 </script>
 
 <ShadowList
@@ -31,6 +38,7 @@
   {#snippet item(season)}
     <SeasonItem
       {season}
+      isCurrentSeason={season.number === currentSeason}
       urlBuilder={() => UrlBuilder.show(show.slug, { season: season.number })}
     />
   {/snippet}

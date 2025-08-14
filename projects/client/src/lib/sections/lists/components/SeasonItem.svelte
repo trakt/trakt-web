@@ -7,27 +7,49 @@
   import type { Season } from "$lib/requests/models/Season";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
 
-  const { season, urlBuilder }: { season: Season; urlBuilder: () => string } =
+  const {
+    season,
+    urlBuilder,
+    isCurrentSeason,
+  }: { season: Season; urlBuilder: () => string; isCurrentSeason: boolean } =
     $props();
 </script>
 
-<PortraitCard>
-  <Link focusable={false} href={urlBuilder()} noscroll>
-    <CardCover
-      title={seasonLabel(season.number)}
-      src={season.poster.url.medium}
-      alt="{seasonLabel(season.number)}}"
-    />
-  </Link>
-  <CardFooter>
-    <p use:lineClamp={{ lines: 2 }} class="trakt-card-title trakt-video-title">
-      {seasonLabel(season.number)}
-    </p>
-  </CardFooter>
-</PortraitCard>
+<div class="trakt-season-item" class:is-current-season={isCurrentSeason}>
+  <PortraitCard>
+    <Link focusable={false} href={urlBuilder()} noscroll>
+      <CardCover
+        title={seasonLabel(season.number)}
+        src={season.poster.url.medium}
+        alt={seasonLabel(season.number)}
+      />
+    </Link>
+    <CardFooter>
+      <p
+        use:lineClamp={{ lines: 2 }}
+        class="trakt-season-title"
+        class:trakt-card-title={isCurrentSeason}
+        class:trakt-card-subtitle={!isCurrentSeason}
+      >
+        {seasonLabel(season.number)}
+      </p>
+    </CardFooter>
+  </PortraitCard>
+</div>
 
 <style>
-  .trakt-video-title {
+  .trakt-season-title {
     line-height: var(--ni-16);
+  }
+
+  .trakt-season-item {
+    filter: saturate(0.1) contrast(1.2);
+
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: filter;
+
+    &.is-current-season {
+      filter: saturate(1) contrast(1);
+    }
   }
 </style>
