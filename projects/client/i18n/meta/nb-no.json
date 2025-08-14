@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "Lukk"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Er du sikker på at du vil slutte å se {title}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

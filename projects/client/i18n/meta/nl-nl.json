@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "Sluiten"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Weet je zeker dat je wilt stoppen met kijken naar {title}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

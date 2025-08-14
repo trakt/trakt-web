@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "Închide"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Sigur dorești să oprești vizionarea {title}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

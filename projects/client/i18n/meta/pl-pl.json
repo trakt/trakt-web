@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "Zamknij"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Na pewno chcesz przestać oglądać {title}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

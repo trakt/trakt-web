@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "Закрити"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Ви впевнені, що хочете припинити перегляд {title}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

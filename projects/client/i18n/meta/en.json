@@ -4907,6 +4907,19 @@
         "android",
         "ios"
       ]
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Are you sure you want to stop watching {title}?",
+      "description": "Warning prompt shown when a user stops a manually checked in movie or episode.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

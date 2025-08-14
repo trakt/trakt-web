@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "Stäng"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Är du säker på att du vill sluta titta på {title}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
