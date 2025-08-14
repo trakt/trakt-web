@@ -1666,7 +1666,16 @@
       "default": "Voeg aankomende films toe aan je watchlist en bekijk welke binnenkort uitkomen."
     },
     "text_cta_activity": {
-      "default": "Maak snel vrienden door het Trakt Team te volgen en te ontdekken wat zij bekijken."
+      "default": "Blijf meer toevoegen van ons team."
+    },
+    "text_cta_activity_list": {
+      "default": "Maak snel vrienden door het Trakt-team te volgen en te ontdekken wat ze bekijken."
+    },
+    "link_text_browse_more": {
+      "default": "Meer bekijken"
+    },
+    "link_text_explore_more": {
+      "default": "Meer ontdekken"
     },
     "link_text_browse_shows": {
       "default": "Series"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Films verkennen"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Meest verwachte ontdekken"
     },
     "link_label_browse_shows": {
       "default": "Series"

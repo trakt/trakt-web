@@ -8,14 +8,16 @@
     children,
     action,
     variant,
+    src,
   }: {
     variant: "portrait" | "landscape" | "activity";
     action?: Snippet;
+    src?: string | Nil;
   } & ChildrenProps = $props();
 </script>
 
 {#snippet content()}
-  <CtaContent>
+  <CtaContent {src}>
     {@render children()}
   </CtaContent>
 
@@ -61,11 +63,8 @@
 
 <style>
   .trakt-cta-footer {
-    /* To visually align the icon of the ghost button with the card */
-    margin-right: var(--ni-neg-12);
-
-    :global(.trakt-card-footer) {
-      justify-content: flex-end;
+    :global(.trakt-button) {
+      height: var(--ni-20);
     }
   }
 </style>

@@ -20,13 +20,13 @@ export const CtaItemIntlProvider: CtaItemIntl = {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta) {
         case 'up-next':
-          return m.link_text_browse_shows();
+          return m.link_text_browse_more();
         case 'released':
-          return m.link_text_browse_movies();
+          return m.link_text_browse_more();
         case 'upcoming':
-          return m.link_text_explore_shows();
+          return m.link_text_explore_more();
         case 'unreleased':
-          return m.link_text_explore_movies();
+          return m.link_text_explore_more();
       }
     },
     label: ({ cta }: CtaLinkMeta) => {

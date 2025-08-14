@@ -1666,7 +1666,16 @@
       "default": "近日公開の映画をウォッチリストに追加して、まもなく公開される映画を確認しましょう。"
     },
     "text_cta_activity": {
-      "default": "Trakt チームをフォローして、彼らが何を見ているか調べて、すぐに友達を作りましょう。"
+      "default": "チームのコンテンツをもっと追加しましょう。"
+    },
+    "text_cta_activity_list": {
+      "default": "Traktチームをフォローして、彼らが見ているものを探索して、すぐに友達を作りましょう。"
+    },
+    "link_text_browse_more": {
+      "default": "もっと見る"
+    },
+    "link_text_explore_more": {
+      "default": "もっと探す"
     },
     "link_text_browse_shows": {
       "default": "ドラマを検索"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "映画を探す"
+    },
+    "link_text_explore_anticipated": {
+      "default": "最も期待されているものを探す"
     },
     "link_label_browse_shows": {
       "default": "ドラマを検索"
