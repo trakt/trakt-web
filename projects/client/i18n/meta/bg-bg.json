@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "Затвори"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "Сигурни ли сте, че искате да спрете да гледате {title}?",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

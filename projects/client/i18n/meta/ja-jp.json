@@ -1703,6 +1703,14 @@
     },
     "button_label_close_reaction": {
       "default": "閉じる"
+    },
+    "warning_prompt_stop_checkin": {
+      "default": "{title} の視聴を本当にやめますか？",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
