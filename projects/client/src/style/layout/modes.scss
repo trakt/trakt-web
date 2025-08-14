@@ -2,8 +2,13 @@
 
 :root {
   --layout-distance-side: var(--ni-24);
+  --layout-sidebar-distance: calc(var(--side-navbar-width) + var(--ni-16));
 
   @include for-mobile {
     --layout-distance-side: var(--ni-12);
+  }
+
+  @include for-tablet-sm-and-below {
+    --layout-sidebar-distance: var(--ni-0);
   }
 }
