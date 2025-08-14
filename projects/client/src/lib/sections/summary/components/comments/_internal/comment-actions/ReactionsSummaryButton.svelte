@@ -13,7 +13,7 @@
 
   const { comment }: { comment: MediaComment } = $props();
 
-  const { summary, isLoading, currentReaction } = $derived(
+  const { summary, currentReaction } = $derived(
     useCommentReactions({ id: comment.id }),
   );
 
@@ -24,7 +24,7 @@
   const restCount = $derived($summary.count - $summary.topCount);
 </script>
 
-{#if !$isLoading && $summary.count > 0}
+{#if $summary.count > 0}
   <button class="trakt-reactions-summary" use:portalTrigger>
     {$summary.top.map(([reaction]) => REACTIONS_MAP[reaction]).join(" ")}
     {#if restCount > 0}
