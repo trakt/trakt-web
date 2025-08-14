@@ -1666,7 +1666,16 @@
       "default": "Tilføj kommende film til din liste, og se hvilke der snart udkommer."
     },
     "text_cta_activity": {
-      "default": "Begynd at få venner hurtigt ved at følge Trakt-teamet, og udforsk hvad de ser."
+      "default": "Bliv ved med at tilføje mere fra vores team."
+    },
+    "text_cta_activity_list": {
+      "default": "Begynd at få venner hurtigt ved at følge Trakt-teamet og udforske hvad de ser."
+    },
+    "link_text_browse_more": {
+      "default": "Se mere"
+    },
+    "link_text_explore_more": {
+      "default": "Udforsk mere"
     },
     "link_text_browse_shows": {
       "default": "Gennemse serier"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Udforsk film"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Udforsk mest forventede"
     },
     "link_label_browse_shows": {
       "default": "Gennemse serier"

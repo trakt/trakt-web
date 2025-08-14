@@ -1666,7 +1666,16 @@
       "default": "Додайте майбутні фільми до свого списку і дізнайтеся, які з них вийдуть найближчим часом."
     },
     "text_cta_activity": {
-      "default": "Почніть швидко заводити друзів, підписавшись на команду Trakt, і дізнайтеся, що вони дивляться."
+      "default": "Продовжуйте додавати більше від нашої команди."
+    },
+    "text_cta_activity_list": {
+      "default": "Почніть швидко заводити друзів, слідкуючи за командою Trakt та досліджуйте, що вони дивляться."
+    },
+    "link_text_browse_more": {
+      "default": "Переглянути більше"
+    },
+    "link_text_explore_more": {
+      "default": "Дослідити більше"
     },
     "link_text_browse_shows": {
       "default": "Огляд серіалів"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Дослідити фільми"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Дослідити найбільш очікувані"
     },
     "link_label_browse_shows": {
       "default": "Огляд серіалів"

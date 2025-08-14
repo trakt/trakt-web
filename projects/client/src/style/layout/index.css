@@ -30,16 +30,20 @@
   --width-now-playing-card: var(--ni-104);
   --height-now-playing-card: var(--ni-80);
 
-  --width-cta-landscape-card: var(--ni-240);
+  --width-cta-landscape-card: var(--width-landscape-card);
   --height-cta-landscape-card: var(--height-landscape-card);
   --height-cta-landscape-card-cover: var(--height-landscape-card-cover);
 
-  --width-cta-portrait-card: var(--ni-196);
+  --width-cta-portrait-card: var(--width-portrait-card);
   --height-cta-portrait-card: var(--height-portrait-card);
   --height-cta-portrait-card-cover: var(--height-portrait-card-cover);
 
   --width-cta-activity-card: var(--ni-340);
   --height-cta-activity-card: var(--height-landscape-card-cover);
+
+  --width-cta-list-placeholder-card: calc(
+    100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
+  );
 
   /**
    * List dimensions

@@ -1,33 +1,24 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
-  import type { Snippet } from "svelte";
 
   const {
     children,
-    icon,
-    coverSrc,
+    src,
   }: {
-    icon?: Snippet;
-    coverSrc?: string | Nil;
+    src?: string | Nil;
   } & ChildrenProps = $props();
 </script>
 
-<div class="trakt-cta-container" class:has-icon={Boolean(icon)}>
-  {#if coverSrc}
+<div class="trakt-cta-container">
+  {#if src}
     <div class="trakt-cta-cover">
-      <CrossOriginImage src={coverSrc} alt={`Background`} />
+      <CrossOriginImage {src} alt={`Background`} />
     </div>
   {/if}
 
   <div class="trakt-cta-content">
     {@render children()}
   </div>
-
-  {#if icon}
-    <div class="trakt-cta-icon">
-      {@render icon()}
-    </div>
-  {/if}
 </div>
 
 <style lang="scss">
@@ -65,10 +56,6 @@
       width: fit-content;
     }
 
-    &.has-icon {
-      grid-template-columns: minmax(0, 1fr) auto;
-    }
-
     &:after {
       content: "";
 
@@ -90,7 +77,7 @@
     }
 
     @include for-mobile() {
-      --content-padding: var(--ni-10);
+      --content-padding: var(--ni-12);
     }
   }
 
@@ -111,8 +98,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    left: 0;
-    bottom: 0;
+    width: var(--width-card);
+    height: var(--height-card-cover);
 
     overflow: hidden;
     border-radius: var(--border-radius-m);
@@ -123,20 +110,11 @@
       right: 0;
 
       width: min(100%, var(--ni-640));
-      height: var(--height-card);
+      height: var(--height-card-cover);
 
       object-fit: cover;
 
       mask: linear-gradient(to right, transparent 0%, black 30%);
     }
-  }
-
-  .trakt-cta-icon {
-    display: flex;
-    align-items: center;
-
-    opacity: 0.8;
-
-    z-index: var(--layer-raised);
   }
 </style>

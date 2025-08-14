@@ -1666,7 +1666,16 @@
       "default": "Ajoutez des films à venir à votre liste et voyez lesquels sortent bientôt."
     },
     "text_cta_activity": {
-      "default": "Commencez à vous faire des amis rapidement en suivant l'équipe Trakt et explorez ce qu'ils regardent."
+      "default": "Continuez d'en ajouter de notre équipe."
+    },
+    "text_cta_activity_list": {
+      "default": "Faites-vous vite des amis en suivant l'équipe Trakt et découvrez ce qu'ils regardent."
+    },
+    "link_text_browse_more": {
+      "default": "Voir plus"
+    },
+    "link_text_explore_more": {
+      "default": "Explorer plus"
     },
     "link_text_browse_shows": {
       "default": "Séries"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Explorez films"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Explorer les plus attendus"
     },
     "link_label_browse_shows": {
       "default": "Séries"

@@ -4,6 +4,7 @@
   import type { Cta } from "../models/Cta";
   import CtaCard from "./CtaCard.svelte";
   import MediaCtaButton from "./MediaCtaButton.svelte";
+  import { usePlaceholderCover } from "./usePlaceholderCover";
 
   const {
     cta,
@@ -18,12 +19,13 @@
   );
 
   const defaultVariant = $derived(useDefaultCardVariant(type));
+  const { cover } = $derived(usePlaceholderCover(cta));
 </script>
 
-<CtaCard variant={$defaultVariant}>
+<CtaCard variant={$defaultVariant} src={$cover?.url.medium}>
   <p class="smaller">{intl.text({ cta })}</p>
 
   {#snippet action()}
-    <MediaCtaButton {cta} {intl} style="ghost" />
+    <MediaCtaButton {cta} {intl} size="tag" />
   {/snippet}
 </CtaCard>

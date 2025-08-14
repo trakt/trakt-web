@@ -1,19 +1,23 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { Cta } from "../models/Cta";
 
   const {
     cta,
     intl,
-    style,
+    size,
+    icon,
   }: {
     cta: Exclude<Cta, "activity">;
     intl: CtaItemIntl;
-    style: "ghost" | "flat";
+    size: "small" | "tag";
+    icon?: Snippet;
   } = $props();
+
+  const color = $derived(size === "small" ? "purple" : "default");
 
   const ctaHref = $derived.by(() => {
     switch (cta) {
@@ -32,12 +36,11 @@
 <Button
   href={ctaHref}
   label={intl.cta.label({ cta })}
-  size="small"
-  color="purple"
-  {style}
+  {size}
+  {color}
+  {icon}
+  variant="primary"
+  style="flat"
 >
   {intl.cta.text({ cta })}
-  {#snippet icon()}
-    <SearchIcon />
-  {/snippet}
 </Button>

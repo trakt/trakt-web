@@ -31,7 +31,7 @@
     search(query, $mode);
   });
 
-  const coverSrc = $derived.by(() => {
+  const src = $derived.by(() => {
     if (!$results) {
       return;
     }
@@ -56,8 +56,8 @@
     </div>
   </RenderFor>
 
-  {#if coverSrc}
-    <CoverImageSetter src={coverSrc} type="main" />
+  {#if src}
+    <CoverImageSetter {src} type="main" />
   {:else}
     <TraktPageCoverSetter />
   {/if}

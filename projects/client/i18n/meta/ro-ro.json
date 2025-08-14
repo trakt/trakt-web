@@ -1666,7 +1666,16 @@
       "default": "Adăugați filme viitoare în lista de urmărire și vedeți care vor fi lansate în curând."
     },
     "text_cta_activity": {
-      "default": "Începeți să vă faceți prieteni rapid urmărind Echipa Trakt și explorați ce urmăresc."
+      "default": "Continuați să adăugați mai mult de la echipa noastră."
+    },
+    "text_cta_activity_list": {
+      "default": "Începeți să vă faceți prieteni rapid, urmând Echipa Trakt și explorați ce urmăresc."
+    },
+    "link_text_browse_more": {
+      "default": "Vezi mai mult"
+    },
+    "link_text_explore_more": {
+      "default": "Explorează mai mult"
     },
     "link_text_browse_shows": {
       "default": "Răsfoiește seriale"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Explorează filme"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Explorează cele mai anticipate"
     },
     "link_label_browse_shows": {
       "default": "Răsfoiește seriale"

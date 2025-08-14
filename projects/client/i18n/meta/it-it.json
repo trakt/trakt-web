@@ -1666,7 +1666,16 @@
       "default": "Aggiungi i film in uscita alla tua lista e scopri quali usciranno presto."
     },
     "text_cta_activity": {
+      "default": "Continua ad aggiungere altro dal nostro team."
+    },
+    "text_cta_activity_list": {
       "default": "Inizia a fare amicizia velocemente seguendo il Team Trakt ed esplora cosa stanno guardando."
+    },
+    "link_text_browse_more": {
+      "default": "Sfoglia di più"
+    },
+    "link_text_explore_more": {
+      "default": "Esplora di più"
     },
     "link_text_browse_shows": {
       "default": "Sfoglia serie TV"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Esplora film"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Esplora i più attesi"
     },
     "link_label_browse_shows": {
       "default": "Sfoglia serie TV"

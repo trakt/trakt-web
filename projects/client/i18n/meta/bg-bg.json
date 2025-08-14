@@ -1666,7 +1666,16 @@
       "default": "Добавете предстоящи филми към списъка си и вижте кои ще бъдат публикувани скоро."
     },
     "text_cta_activity": {
-      "default": "Започнете да създавате приятели бързо, като следвате екипа на Trakt и проучете какво гледат."
+      "default": "Продължавайте да добавяте още от нашия екип."
+    },
+    "text_cta_activity_list": {
+      "default": "Започнете бързо да създавате приятели, като следвате екипа на Trakt и разгледайте какво гледат."
+    },
+    "link_text_browse_more": {
+      "default": "Разгледай още"
+    },
+    "link_text_explore_more": {
+      "default": "Разгледай още"
     },
     "link_text_browse_shows": {
       "default": "Разгледайте сериали"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Разгледайте филми"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Разгледай най-очакваното"
     },
     "link_label_browse_shows": {
       "default": "Разгледайте сериали"

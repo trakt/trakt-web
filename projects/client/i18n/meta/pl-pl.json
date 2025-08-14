@@ -1666,7 +1666,16 @@
       "default": "Dodaj nadchodzące filmy do swojej listy i zobacz, które wkrótce się ukażą."
     },
     "text_cta_activity": {
-      "default": "Zacznij szybko poznawać znajomych, śledząc zespół Trakt i odkrywaj, co oglądają."
+      "default": "Dodaj więcej od naszego zespołu."
+    },
+    "text_cta_activity_list": {
+      "default": "Szybko znajdź znajomych, obserwując zespół Trakt i odkrywaj, co oglądają."
+    },
+    "link_text_browse_more": {
+      "default": "Przeglądaj więcej"
+    },
+    "link_text_explore_more": {
+      "default": "Odkrywaj więcej"
     },
     "link_text_browse_shows": {
       "default": "Przeglądaj seriale"
@@ -1679,6 +1688,9 @@
     },
     "link_text_explore_movies": {
       "default": "Odkrywaj filmy"
+    },
+    "link_text_explore_anticipated": {
+      "default": "Odkryj najbardziej oczekiwane"
     },
     "link_label_browse_shows": {
       "default": "Przeglądaj seriale"
