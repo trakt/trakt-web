@@ -3,7 +3,8 @@
   import { fade } from "svelte/transition";
 </script>
 
-<div class="loading-indicator" out:fade={{ duration: 150 }}>
+<!-- FIXME: Add a proper crossfade component -->
+<div class="loading-indicator" in:fade={{ duration: 150 }}>
   <LoaderIcon />
 </div>
 
