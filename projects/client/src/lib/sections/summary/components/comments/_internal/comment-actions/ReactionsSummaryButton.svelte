@@ -62,10 +62,12 @@
 
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--gap-xs);
 
     padding: var(--ni-4) var(--ni-8);
     height: var(--ni-32);
+    min-width: var(--ni-32);
     box-sizing: border-box;
 
     user-select: none;
