@@ -83,6 +83,4 @@
   @-moz-document url-prefix() {
     --layout-scrollbar-width: var(--ni-16);
   }
-
-  --layout-sidebar-distance: var(--ni-0);
 }

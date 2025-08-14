@@ -104,10 +104,6 @@
     body.dialog-open {
       overflow: hidden;
     }
-
-    body:has(.trakt-side-navbar) {
-      --layout-sidebar-distance: calc(var(--side-navbar-width) + var(--ni-16));
-    }
   </style>
 
   {#if data.device === "tv"}
