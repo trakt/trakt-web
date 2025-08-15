@@ -1158,6 +1158,9 @@
     "text_search_results_for": {
       "default": "Резултати за {query}"
     },
+    "list_title_search_results": {
+      "default": "Резултати"
+    },
     "translated_value_type_movie": {
       "default": "Филм"
     },
@@ -1585,9 +1588,6 @@
       "default": "Търсене на хора"
     },
     "button_text_toggle_search_people": {
-      "default": "Хора"
-    },
-    "text_search_mode_people": {
       "default": "Хора"
     },
     "input_placeholder_search_people": {
