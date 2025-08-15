@@ -1,14 +1,19 @@
+import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 import type { SimpleRating } from '$lib/models/SimpleRating.ts';
+
+type FilterValueMapper = {
+  mapper?: (user: UserSettings) => string;
+};
 
 export type FilterOption = {
   label: string;
   value: string;
-};
+} & FilterValueMapper;
 
 type RatingOption = {
   rating: SimpleRating;
   value: string;
-};
+} & FilterValueMapper;
 
 export enum FilterKey {
   Genres = 'genres',

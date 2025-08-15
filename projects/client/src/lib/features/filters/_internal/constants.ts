@@ -1,3 +1,4 @@
+import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 import { generateDecadeOptions } from '$lib/features/filters/_internal/generateDecadeOptions.ts';
 import { RATINGS } from '$lib/features/filters/_internal/ratings.ts';
 import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
@@ -11,12 +12,21 @@ const GENRE_FILTER: Filter = {
   label: m.header_genre(),
   key: FilterKey.Genres,
   type: 'list',
-  options: GENRES
-    .map((genre) => ({
-      label: toTranslatedValue('genre', genre),
-      value: genre,
-    }))
-    .sort((a, b) => a.label.localeCompare(b.label, languageTag())),
+  options: [
+    {
+      label: m.option_text_my_favorites(),
+      value: 'favorites',
+      mapper: (settings: UserSettings) => {
+        return settings.genres.join(',');
+      },
+    },
+    ...GENRES
+      .map((genre) => ({
+        label: toTranslatedValue('genre', genre),
+        value: genre,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label, languageTag())),
+  ],
 };
 
 const DECADE_FILTER: Filter = {
