@@ -21,7 +21,7 @@ import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
 import { getSearchContext } from './_internal/getSearchContext.ts';
-import { mergeMediaResult } from './_internal/mergeMediaResult.ts';
+import { mergeMediaSearchResult } from './_internal/mergeMediaSearchResult.ts';
 import type { SearchResult } from './models/SearchResult.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
@@ -53,7 +53,7 @@ function modeToCancellationIds(mode: SearchMode) {
 
 export function useSearch() {
   const client = browser ? useQueryClient() : undefined;
-  const { mode, isSearching, ...rest } = getSearchContext();
+  const { mode, mediaType, isSearching, ...rest } = getSearchContext();
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   const results = writable<SearchResult>({
@@ -61,8 +61,7 @@ export function useSearch() {
     reason: 'initial',
   });
 
-  // FIXME improve typing, make part of SearchMode and put in search params
-  async function search(term: string, mode: SearchMode, types?: MediaType[]) {
+  async function search(term: string, mode: SearchMode, type?: MediaType) {
     if (!client) {
       return;
     }
@@ -83,7 +82,7 @@ export function useSearch() {
           return {
             response: {
               type: 'media' as const,
-              items: mergeMediaResult(response, types),
+              items: mergeMediaSearchResult(response, type),
             },
             reason: 'result',
           };
@@ -137,13 +136,24 @@ export function useSearch() {
   }
 
   return {
-    search: (term: string, mode: SearchMode, types?: MediaType[]) => {
+    search: (term: string, mode: SearchMode, type?: MediaType) => {
       isSearching.set(true);
-      debounce(() => search(term, mode, types), get(isDesktop) ? 150 : 250)();
+      debounce(() => search(term, mode, type), get(isDesktop) ? 150 : 250)();
     },
     results: derived(results, ($results) => $results.response),
     clear,
     mode,
+    mediaType,
+    targetParams: derived([mode, mediaType], ([$mode, $mediaType]) => {
+      const typeParam = $mode === 'media' && $mediaType
+        ? { t: $mediaType }
+        : {};
+
+      return {
+        m: $mode,
+        ...typeParam,
+      };
+    }),
     isSearching,
     ...rest,
   };
