@@ -15,7 +15,7 @@ export function useScrollDistance() {
   };
 
   onMount(() => {
-    handleScroll();
+    requestAnimationFrame(handleScroll);
 
     const unregisterScroll = GlobalEventBus.getInstance().register(
       'scroll',
