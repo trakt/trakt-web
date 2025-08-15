@@ -7,24 +7,20 @@
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
+  import SearchTypeToggles from "$lib/features/search/SearchTypeToggles.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import PersonList from "$lib/sections/lists/PersonList.svelte";
-  import TypeToggles from "$lib/sections/lists/watchlist/_internal/TypeToggles.svelte";
   import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
-  import { writable } from "svelte/store";
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { search, clear, results, mode } = useSearch();
-
-  const selectedTypes = writable<MediaType[]>(["movie", "show"]);
+  const { search, clear, results, mode, mediaType } = useSearch();
 
   $effect(() => {
     if (!query) {
@@ -32,7 +28,7 @@
       return;
     }
 
-    search(query, $mode, $selectedTypes);
+    search(query, $mode, $mediaType);
   });
 
   const src = $derived.by(() => {
@@ -84,7 +80,7 @@
           --height-list="var(--height-poster-list)"
         >
           {#snippet badge()}
-            <TypeToggles types={selectedTypes} />
+            <SearchTypeToggles />
           {/snippet}
 
           {#snippet item(result)}

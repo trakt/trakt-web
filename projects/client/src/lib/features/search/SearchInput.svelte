@@ -10,8 +10,15 @@
 
   const { isInline = true }: { isInline?: boolean } = $props();
 
-  const { clear, isSearching, pathName, exitPathName, mode, query } =
-    useSearch();
+  const {
+    clear,
+    isSearching,
+    pathName,
+    exitPathName,
+    mode,
+    targetParams,
+    query,
+  } = useSearch();
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
@@ -33,7 +40,10 @@
       return;
     }
 
-    const params = buildParamString({ m: $mode, q: inputElement.value.trim() });
+    const params = buildParamString({
+      ...$targetParams,
+      q: inputElement.value.trim(),
+    });
     goto(`${pathName}${params}`, {
       replaceState: page.url.pathname === pathName,
       keepFocus: true,
