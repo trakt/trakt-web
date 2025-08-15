@@ -1158,6 +1158,9 @@
     "text_search_results_for": {
       "default": "Resultater for {query}"
     },
+    "list_title_search_results": {
+      "default": "Resultater"
+    },
     "translated_value_type_movie": {
       "default": "Film"
     },
@@ -1586,9 +1589,6 @@
     },
     "button_text_toggle_search_people": {
       "default": "Folk"
-    },
-    "text_search_mode_people": {
-      "default": "Personer"
     },
     "input_placeholder_search_people": {
       "default": "Søk etter personer..."

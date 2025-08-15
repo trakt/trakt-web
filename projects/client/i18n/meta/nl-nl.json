@@ -1158,6 +1158,9 @@
     "text_search_results_for": {
       "default": "Resultaten voor {query}"
     },
+    "list_title_search_results": {
+      "default": "Resultaten"
+    },
     "translated_value_type_movie": {
       "default": "Film"
     },
@@ -1585,9 +1588,6 @@
       "default": "Zoeken naar mensen"
     },
     "button_text_toggle_search_people": {
-      "default": "Mensen"
-    },
-    "text_search_mode_people": {
       "default": "Mensen"
     },
     "input_placeholder_search_people": {

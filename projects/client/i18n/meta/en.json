@@ -3354,6 +3354,14 @@
         "ios"
       ]
     },
+    "list_title_search_results": {
+      "default": "Results",
+      "description": "Text shown when displaying search results.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "translated_value_type_movie": {
       "default": "Movie",
       "description": "Value for the movie type. The value is sent back from the Trakt API.",
@@ -4586,14 +4594,6 @@
     "button_text_toggle_search_people": {
       "default": "People",
       "description": "Text for the button that allows users to toggle the search mode to people.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_search_mode_people": {
-      "default": "People",
-      "description": "Text for the section that allows users to search for people.",
       "exclude": [
         "android",
         "ios"

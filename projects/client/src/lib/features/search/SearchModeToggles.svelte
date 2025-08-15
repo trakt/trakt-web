@@ -38,7 +38,9 @@
   </ToggleTag>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .search-mode-toggles {
     display: flex;
     align-items: center;
@@ -48,5 +50,9 @@
     margin-right: var(--layout-distance-side);
 
     gap: var(--gap-xs);
+
+    @include for-tablet-sm-and-below {
+      justify-content: center;
+    }
   }
 </style>
