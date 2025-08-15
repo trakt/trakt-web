@@ -3,7 +3,7 @@
 
   import { page } from "$app/state";
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
@@ -13,7 +13,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
-  import PersonList from "$lib/sections/lists/PersonList.svelte";
+  import DefaultPersonItem from "$lib/sections/lists/components/DefaultPersonItem.svelte";
   import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
@@ -73,11 +73,11 @@
   <div class="trakt-search-results-container">
     {#if $results}
       {#if $results.type === "media"}
-        <SectionList
+        <GridList
           id="search-grid-list-media"
           title={m.list_title_search_results()}
           items={$results.items}
-          --height-list="var(--height-poster-list)"
+          --width-item="var(--width-portrait-card)"
         >
           {#snippet badge()}
             <SearchTypeToggles />
@@ -91,20 +91,28 @@
               tag={result.type === "show" ? showTag : undefined}
             />
           {/snippet}
-        </SectionList>
+        </GridList>
       {/if}
 
       {#if $results.type === "people"}
-        <PersonList
+        <GridList
+          id="search-grid-list-media"
           title={m.list_title_search_results()}
-          people={$results.items}
-        />
+          items={$results.items}
+          --width-item="var(--width-portrait-card)"
+        >
+          {#snippet item(person)}
+            <DefaultPersonItem {person} />
+          {/snippet}
+        </GridList>
       {/if}
     {/if}
   </div>
 </TraktPage>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-search-container {
     margin-left: var(--layout-distance-side);
 
@@ -114,6 +122,10 @@
   }
 
   .trakt-search-results-container {
-    height: var(--height-poster-list);
+    @include for-mobile {
+      :global(.trakt-list-items) {
+        grid-template-columns: repeat(auto-fill, var(--width-item));
+      }
+    }
   }
 </style>
