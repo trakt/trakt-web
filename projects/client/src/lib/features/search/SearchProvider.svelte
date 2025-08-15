@@ -2,21 +2,17 @@
   import { page } from "$app/state";
   import {} from "svelte";
   import { createSearchContext } from "./_internal/createSearchContext";
+  import { toSearchTarget } from "./_internal/toSearchTarget";
 
   const { children }: ChildrenProps = $props();
 
-  const { mode, pathName, exitPathName, query } = createSearchContext();
+  const initialTarget = toSearchTarget(
+    page.url.searchParams.get("m"),
+    page.url.searchParams.get("t"),
+  );
 
-  function toSearchMode(value: string | null) {
-    switch (value) {
-      case "people":
-        return "people";
-      case "media":
-        return "media";
-      default:
-        return $mode;
-    }
-  }
+  const { mode, mediaType, pathName, exitPathName, query } =
+    createSearchContext(initialTarget);
 
   $effect(() => {
     if (!page.url.pathname.startsWith(pathName)) {
@@ -26,7 +22,13 @@
 
   $effect(() => {
     const m = page.url.searchParams.get("m");
-    mode.set(toSearchMode(m));
+    const t = page.url.searchParams.get("t");
+    const target = toSearchTarget(m, t);
+
+    const newMode = target.mode ?? $mode;
+    mode.set(newMode);
+
+    newMode === "media" && mediaType.set(target.mediaType);
 
     if (!page.url.searchParams.has("q")) {
       return;
