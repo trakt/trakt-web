@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import { searchCancellationId } from '$lib/requests/queries/search/searchCancellationId.ts';
 import {
@@ -20,6 +21,7 @@ import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
 import { getSearchContext } from './_internal/getSearchContext.ts';
+import { mergeMediaResult } from './_internal/mergeMediaResult.ts';
 import type { SearchResult } from './models/SearchResult.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
@@ -59,7 +61,8 @@ export function useSearch() {
     reason: 'initial',
   });
 
-  async function search(term: string, mode: SearchMode) {
+  // FIXME improve typing, make part of SearchMode and put in search params
+  async function search(term: string, mode: SearchMode, types?: MediaType[]) {
     if (!client) {
       return;
     }
@@ -75,10 +78,22 @@ export function useSearch() {
     const query = modeToQuery(term, mode);
 
     const response = await client.fetchQuery(query)
-      .then((response) => ({
-        response,
-        reason: 'result',
-      }))
+      .then((response) => {
+        if (response.type === 'media') {
+          return {
+            response: {
+              type: 'media' as const,
+              items: mergeMediaResult(response, types),
+            },
+            reason: 'result',
+          };
+        }
+
+        return {
+          response,
+          reason: 'result',
+        };
+      })
       .catch((error) => {
         if (error instanceof AbortError) {
           return Promise.resolve({
@@ -122,9 +137,9 @@ export function useSearch() {
   }
 
   return {
-    search: (term: string, mode: SearchMode) => {
+    search: (term: string, mode: SearchMode, types?: MediaType[]) => {
       isSearching.set(true);
-      debounce(() => search(term, mode), get(isDesktop) ? 150 : 250)();
+      debounce(() => search(term, mode, types), get(isDesktop) ? 150 : 250)();
     },
     results: derived(results, ($results) => $results.response),
     clear,
