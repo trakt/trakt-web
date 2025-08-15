@@ -1,10 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
   import { useSearch } from "$lib/features/search/useSearch";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import ToggleTag from "$lib/sections/components/ToggleTag.svelte";
   import { buildParamString } from "$lib/utils/url/buildParamString";
 
@@ -23,26 +21,22 @@
   };
 </script>
 
-<RenderForFeature flag={FeatureFlag.Search}>
-  {#snippet enabled()}
-    <div class="search-mode-toggles" role="group">
-      <ToggleTag
-        label={m.button_label_toggle_search_media()}
-        onclick={toggleSearchMode}
-        isPressed={$mode === "media"}
-      >
-        {m.button_text_toggle_search_media()}
-      </ToggleTag>
-      <ToggleTag
-        label={m.button_label_toggle_search_people()}
-        onclick={toggleSearchMode}
-        isPressed={$mode === "people"}
-      >
-        {m.button_text_toggle_search_people()}
-      </ToggleTag>
-    </div>
-  {/snippet}
-</RenderForFeature>
+<div class="search-mode-toggles" role="group">
+  <ToggleTag
+    label={m.button_label_toggle_search_media()}
+    onclick={toggleSearchMode}
+    isPressed={$mode === "media"}
+  >
+    {m.button_text_toggle_search_media()}
+  </ToggleTag>
+  <ToggleTag
+    label={m.button_label_toggle_search_people()}
+    onclick={toggleSearchMode}
+    isPressed={$mode === "people"}
+  >
+    {m.button_text_toggle_search_people()}
+  </ToggleTag>
+</div>
 
 <style>
   .search-mode-toggles {
