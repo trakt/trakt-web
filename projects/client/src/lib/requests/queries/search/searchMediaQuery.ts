@@ -17,14 +17,19 @@ type SearchParams = {
   query: string;
 } & ApiParams;
 
+const MediaResultSchema = z.object({
+  score: z.number(),
+}).merge(MediaEntrySchema);
+
 const MediaSearchResultSchema = z.object({
   type: z.literal('media'),
   items: z.object({
-    movies: MediaEntrySchema.array(),
-    shows: MediaEntrySchema.array(),
+    movies: MediaResultSchema.array(),
+    shows: MediaResultSchema.array(),
   }),
 });
 
+export type MediaResult = z.infer<typeof MediaResultSchema>;
 export type MediaSearchResult = z.infer<typeof MediaSearchResultSchema>;
 
 function isGarbage(value: MediaEntry): boolean {
@@ -38,13 +43,19 @@ function isGarbage(value: MediaEntry): boolean {
 
 function mapToSearchResultEntry(
   item: SearchResultResponse[0],
-): MediaEntry {
+): MediaResult {
   const { type } = item;
   switch (type) {
     case 'show':
-      return mapToShowEntry(item.show);
+      return {
+        score: item.score,
+        ...mapToShowEntry(item.show),
+      };
     case 'movie':
-      return mapToMovieEntry(item.movie);
+      return {
+        score: item.score,
+        ...mapToMovieEntry(item.movie),
+      };
     default:
       throw new Error(`Unsupported type for media search: ${type}`);
   }

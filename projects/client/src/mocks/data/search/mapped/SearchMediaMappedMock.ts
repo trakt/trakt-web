@@ -4,7 +4,9 @@ import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 export const SearchMediaMappedMock: MediaSearchResult = {
   type: 'media',
   items: {
-    movies: [MovieHereticMappedMock],
+    movies: [
+      { ...MovieHereticMappedMock, score: 110.041016 },
+    ],
     shows: [],
   },
 };

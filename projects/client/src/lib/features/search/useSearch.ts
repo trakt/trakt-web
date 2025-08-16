@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import { searchCancellationId } from '$lib/requests/queries/search/searchCancellationId.ts';
 import {
@@ -20,6 +21,7 @@ import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
 import { getSearchContext } from './_internal/getSearchContext.ts';
+import { mergeMediaSearchResult } from './_internal/mergeMediaSearchResult.ts';
 import type { SearchResult } from './models/SearchResult.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
@@ -51,7 +53,7 @@ function modeToCancellationIds(mode: SearchMode) {
 
 export function useSearch() {
   const client = browser ? useQueryClient() : undefined;
-  const { mode, isSearching, ...rest } = getSearchContext();
+  const { mode, mediaType, isSearching, ...rest } = getSearchContext();
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   const results = writable<SearchResult>({
@@ -59,7 +61,7 @@ export function useSearch() {
     reason: 'initial',
   });
 
-  async function search(term: string, mode: SearchMode) {
+  async function search(term: string, mode: SearchMode, type?: MediaType) {
     if (!client) {
       return;
     }
@@ -75,10 +77,22 @@ export function useSearch() {
     const query = modeToQuery(term, mode);
 
     const response = await client.fetchQuery(query)
-      .then((response) => ({
-        response,
-        reason: 'result',
-      }))
+      .then((response) => {
+        if (response.type === 'media') {
+          return {
+            response: {
+              type: 'media' as const,
+              items: mergeMediaSearchResult(response, type),
+            },
+            reason: 'result',
+          };
+        }
+
+        return {
+          response,
+          reason: 'result',
+        };
+      })
       .catch((error) => {
         if (error instanceof AbortError) {
           return Promise.resolve({
@@ -122,13 +136,24 @@ export function useSearch() {
   }
 
   return {
-    search: (term: string, mode: SearchMode) => {
+    search: (term: string, mode: SearchMode, type?: MediaType) => {
       isSearching.set(true);
-      debounce(() => search(term, mode), get(isDesktop) ? 150 : 250)();
+      debounce(() => search(term, mode, type), get(isDesktop) ? 150 : 250)();
     },
     results: derived(results, ($results) => $results.response),
     clear,
     mode,
+    mediaType,
+    targetParams: derived([mode, mediaType], ([$mode, $mediaType]) => {
+      const typeParam = $mode === 'media' && $mediaType
+        ? { t: $mediaType }
+        : {};
+
+      return {
+        m: $mode,
+        ...typeParam,
+      };
+    }),
     isSearching,
     ...rest,
   };

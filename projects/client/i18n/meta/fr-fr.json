@@ -1158,6 +1158,9 @@
     "text_search_results_for": {
       "default": "Résultats pour {query}"
     },
+    "list_title_search_results": {
+      "default": "Résultats"
+    },
     "translated_value_type_movie": {
       "default": "Film"
     },
@@ -1585,9 +1588,6 @@
       "default": "Rechercher des personnes"
     },
     "button_text_toggle_search_people": {
-      "default": "Personnes"
-    },
-    "text_search_mode_people": {
       "default": "Personnes"
     },
     "input_placeholder_search_people": {

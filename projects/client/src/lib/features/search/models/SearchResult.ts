@@ -1,4 +1,6 @@
-import type { MediaSearchResult } from '$lib/requests/queries/search/searchMediaQuery.ts';
+import type {
+  MediaResult,
+} from '$lib/requests/queries/search/searchMediaQuery.ts';
 import type { PeopleSearchResult } from '$lib/requests/queries/search/searchPeopleQuery.ts';
 
 type SearchResultReason = {
@@ -10,7 +12,10 @@ type SearchResultEmpty = {
 };
 
 type SearchResultMedia = {
-  response: MediaSearchResult;
+  response: {
+    type: 'media';
+    items: MediaResult[];
+  };
 };
 
 type SearchResultPeople = {

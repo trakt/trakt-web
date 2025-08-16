@@ -8,12 +8,13 @@
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { pathName, mode } = useSearch();
+  const { pathName, mode, mediaType } = useSearch();
 
   const toggleSearchMode = () => {
     const newMode = $mode === "media" ? "people" : "media";
+    const type = newMode === "media" ? { t: $mediaType } : {};
 
-    const params = buildParamString({ m: newMode, q: query });
+    const params = buildParamString({ m: newMode, ...type, q: query });
     goto(`${pathName}${params}`, {
       replaceState: page.url.pathname === pathName,
       keepFocus: true,
@@ -38,7 +39,9 @@
   </ToggleTag>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .search-mode-toggles {
     display: flex;
     align-items: center;
@@ -48,5 +51,9 @@
     margin-right: var(--layout-distance-side);
 
     gap: var(--gap-xs);
+
+    @include for-tablet-sm-and-below {
+      justify-content: center;
+    }
   }
 </style>
