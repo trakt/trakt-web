@@ -20,16 +20,17 @@
       transition: var(--transition-increment) ease-in-out;
       transition-property: filter, padding;
     }
-  }
-  :global(.trakt-spoiler) {
-    /* Target elements that contain only text */
-    /* Target p and span that don't have button/anchor parents */
-    :global(&:not(:empty):not(:has(*))),
-    :global(p:not(button p):not(a p)),
-    :global(span:not(button span):not(a span)) {
-      --blur-size: calc(var(--ni-2) * 1.5);
-      filter: blur(var(--blur-size));
-      padding: 0 var(--blur-size);
+
+    &:global(.trakt-spoiler) {
+      /* Target elements that contain only text */
+      /* Target p and span that don't have button/anchor parents */
+      :global(&:not(:empty):not(:has(*))),
+      :global(p:not(button p):not(a p)),
+      :global(span:not(button span):not(a span)) {
+        --blur-size: calc(var(--ni-2) * 1.5);
+        filter: blur(var(--blur-size));
+        padding: 0 var(--blur-size);
+      }
     }
   }
 </style>
