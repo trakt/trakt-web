@@ -1456,7 +1456,7 @@
       "default": "Er staat nog niets in deze lijst."
     },
     "text_avatar": {
-      "default": "Avatar"
+      "default": "Profielfoto"
     },
     "text_private_account": {
       "default": "Privé account"
@@ -1737,7 +1737,7 @@
       "default": "Verander je foto, naam en andere details."
     },
     "description_spoilers": {
-      "default": "Wil je helemaal geen spoilers zien? Nergens? Schakel ze dan uit."
+      "default": "Voor degenen die het graag mysterieus houden."
     },
     "description_genres": {
       "default": "Voeg je {limit} favoriete genres toe of verwijder ze.",

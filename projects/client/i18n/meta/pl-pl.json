@@ -1456,7 +1456,7 @@
       "default": "W tej liście jeszcze nic nie ma."
     },
     "text_avatar": {
-      "default": "Awatar"
+      "default": "Zdjęcie profilowe"
     },
     "text_private_account": {
       "default": "Konto prywatne"
@@ -1737,7 +1737,7 @@
       "default": "Zmień swoje zdjęcie, imię i inne dane."
     },
     "description_spoilers": {
-      "default": "Nie chcesz widzieć żadnych spoilerów? Nigdzie? W takim razie wyłącz je."
+      "default": "Dla tych, którzy lubią zachować tajemnicę."
     },
     "description_genres": {
       "default": "Dodaj lub usuń swoje {limit} ulubione gatunki.",

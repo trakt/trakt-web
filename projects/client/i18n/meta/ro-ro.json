@@ -1456,7 +1456,7 @@
       "default": "Nu este nimic în această listă încă."
     },
     "text_avatar": {
-      "default": "Avatar"
+      "default": "Imagine de profil"
     },
     "text_private_account": {
       "default": "Cont privat"
@@ -1737,7 +1737,7 @@
       "default": "Schimbați-vă fotografia, numele și alte detalii."
     },
     "description_spoilers": {
-      "default": "Nu vrei să vezi niciun spoiler? Nicăieri? În acest caz, dezactivează-le."
+      "default": "Pentru cei cărora le place să păstreze misterul."
     },
     "description_genres": {
       "default": "Adăugați sau eliminați cele {limit} genuri preferate.",

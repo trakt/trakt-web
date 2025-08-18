@@ -1456,7 +1456,7 @@
       "default": "Det er ingenting i denne listen ennå."
     },
     "text_avatar": {
-      "default": "Avatar"
+      "default": "Profilbilde"
     },
     "text_private_account": {
       "default": "Privat konto"
@@ -1737,7 +1737,7 @@
       "default": "Endre bildet ditt, navnet ditt og andre detaljer."
     },
     "description_spoilers": {
-      "default": "Vil du ikke se noen spoilere i det hele tatt? Noensteds? I så fall, slå dem av."
+      "default": "For de som liker å holde det hemmelig."
     },
     "description_genres": {
       "default": "Legg til eller fjern dine {limit} favoritt sjangere.",

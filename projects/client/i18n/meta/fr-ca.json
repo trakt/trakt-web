@@ -1456,7 +1456,7 @@
       "default": "Y'a rien dans cette liste pour l'instant."
     },
     "text_avatar": {
-      "default": "Avatar"
+      "default": "Photo de profil"
     },
     "text_private_account": {
       "default": "Compte privé"
@@ -1737,7 +1737,7 @@
       "default": "Changez votre photo, votre nom et d'autres détails."
     },
     "description_spoilers": {
-      "default": "Vous voulez rien savoir des divulgâcheurs? Nulle part? Dans ce cas, éteignez ça."
+      "default": "Pour ceux qui aiment garder le mystère."
     },
     "description_genres": {
       "default": "Ajoutez ou retirez vos {limit} genres favoris.",

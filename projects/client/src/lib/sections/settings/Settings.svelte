@@ -10,16 +10,22 @@
 <!-- FIXME: make settings page dpad navigate-able -->
 <RenderFor audience="authenticated">
   <div class="trakt-settings">
-    <div class="trakt-settings-sidebar">
-      <div class="trakt-settings-sidebar-content">
-        <h4>{m.header_settings()}</h4>
+    <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
+      <div class="trakt-settings-sidebar">
+        <div class="trakt-settings-sidebar-content">
+          <h4>{m.header_settings()}</h4>
+        </div>
+        <DangerZone />
       </div>
-    </div>
+    </RenderFor>
     <div class="trakt-settings-content">
       <Profile />
       <Spoilers />
       <Genres />
-      <DangerZone />
+
+      <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
+        <DangerZone />
+      </RenderFor>
     </div>
   </div>
 </RenderFor>
@@ -30,11 +36,14 @@
   .trakt-settings {
     display: grid;
     grid-template-columns: var(--ni-300) 1fr;
-    gap: var(--gap-s);
+    gap: var(--gap-xxl);
 
     margin: 0 var(--layout-distance-side);
 
     min-height: var(--ni-120);
+
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: grid-template-columns, gap;
 
     :global(.trakt-action-button) {
       &:not(:hover) {
@@ -48,11 +57,13 @@
       gap: var(--gap-xxl);
 
       min-width: 0;
+      max-width: var(--ni-480);
       padding: var(--ni-8);
+    }
 
-      @include for-desktop {
-        max-width: var(--ni-480);
-      }
+    @include for-tablet-lg {
+      grid-template-columns: var(--ni-220) 1fr;
+      gap: var(--gap-l);
     }
 
     @include for-tablet-sm-and-below {
@@ -61,6 +72,7 @@
 
       .trakt-settings-content {
         padding: 0;
+        max-width: 100%;
       }
     }
   }
@@ -71,23 +83,5 @@
     justify-content: space-between;
 
     gap: var(--gap-s);
-
-    h4 {
-      transition: font-size var(--transition-increment) ease-in-out;
-    }
-
-    @include for-tablet-sm-and-below {
-      flex-direction: row;
-      align-items: center;
-      height: fit-content;
-
-      h4 {
-        font-size: var(--ni-24);
-      }
-    }
-
-    @include for-mobile {
-      display: none;
-    }
   }
 </style>

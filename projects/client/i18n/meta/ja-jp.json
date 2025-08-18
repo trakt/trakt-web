@@ -1456,7 +1456,7 @@
       "default": "このリストにはまだ何もありません。"
     },
     "text_avatar": {
-      "default": "アバター"
+      "default": "プロフィール画像"
     },
     "text_private_account": {
       "default": "プライベートアカウント"
@@ -1737,7 +1737,7 @@
       "default": "写真、名前、その他の詳細を変更します。"
     },
     "description_spoilers": {
-      "default": "ネタバレは一切見たくない？どこでも？もしそうなら、オフにしてください。"
+      "default": "ミステリーを保ちたい方のために。"
     },
     "description_genres": {
       "default": "{limit} 個のお気に入りのジャンルを追加または削除します。",

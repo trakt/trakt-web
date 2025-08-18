@@ -1456,7 +1456,7 @@
       "default": "Aún no hay nada en esta lista."
     },
     "text_avatar": {
-      "default": "Avatar"
+      "default": "Imagen de perfil"
     },
     "text_private_account": {
       "default": "Cuenta privada"
@@ -1737,7 +1737,7 @@
       "default": "Cambia tu foto, nombre y otros detalles."
     },
     "description_spoilers": {
-      "default": "¿No quieres ver ningún spoiler en absoluto? ¿En ningún sitio? En ese caso, desactívalos."
+      "default": "Para aquellos que prefieren mantener el misterio."
     },
     "description_genres": {
       "default": "Añade o elimina tus {limit} géneros favoritos.",
