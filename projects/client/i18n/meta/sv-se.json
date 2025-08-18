@@ -1456,7 +1456,7 @@
       "default": "Det finns inget i den här listan än."
     },
     "text_avatar": {
-      "default": "Avatar"
+      "default": "Profilbild"
     },
     "text_private_account": {
       "default": "Privat konto"
@@ -1737,7 +1737,7 @@
       "default": "Ändra ditt foto, namn och andra uppgifter."
     },
     "description_spoilers": {
-      "default": "Vill du inte se några spoilers alls? Någonstans? Stäng i så fall av dem."
+      "default": "För de som gillar att hålla det mystiskt."
     },
     "description_genres": {
       "default": "Lägg till eller ta bort dina {limit} favoritgenrer.",

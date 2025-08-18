@@ -7,7 +7,7 @@
   import { useSettings } from "./useSettings";
 
   const { spoilers, isSavingSettings } = useSettings();
-  const innerText = $derived(getSwitchInnerText($spoilers.isHidden));
+  const innerText = $derived(getSwitchInnerText(!$spoilers.isHidden, "yes-no"));
 </script>
 
 <SettingsBlock

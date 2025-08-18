@@ -4212,7 +4212,7 @@
       ]
     },
     "text_avatar": {
-      "default": "Avatar",
+      "default": "Profile image",
       "description": "Text for the section that allows users to change their avatar.",
       "exclude": [
         "android",
@@ -4986,7 +4986,7 @@
       ]
     },
     "description_spoilers": {
-      "default": "Don't want to see any spoilers whatsoever? Anywhere? In that case, switch them off.",
+      "default": "For those who like to keep it a mystery.",
       "description": "Description for the spoilers section.",
       "exclude": [
         "android",

@@ -15,8 +15,11 @@
 
 <style>
   trakt-danger-zone {
-    :global(p.meta-info) {
+    :global(.trakt-settings-block-header p.meta-info) {
       color: var(--color-background-red);
+
+      font-size: var(--ni-14);
+      text-transform: uppercase;
     }
   }
 </style>

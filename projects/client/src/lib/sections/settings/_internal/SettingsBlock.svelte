@@ -16,7 +16,9 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-settings-block-header {
     display: flex;
     flex-direction: column;
@@ -24,7 +26,16 @@
     gap: var(--gap-xs);
 
     p.meta-info {
-      font-size: var(--ni-14);
+      transition: font-size var(--transition-increment) ease-in-out;
+      text-transform: capitalize;
+      font-size: var(--ni-24);
+    }
+
+    @include for-tablet-sm-and-below {
+      p.meta-info {
+        text-transform: uppercase;
+        font-size: var(--ni-14);
+      }
     }
   }
 
