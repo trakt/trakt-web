@@ -45,7 +45,13 @@ function invalidationHook<T>(
       return value;
     }
 
+    // For anything after setting this map, we assume that the data will be fresh as a result.
     INVALIDATION_MAP.set(id, Date.now());
+
+    const currentState = client.getQueryState(queryKey);
+    if (!currentState || currentState.status !== 'success') {
+      return value;
+    }
 
     (async () => {
       const isNotReady = () => {
