@@ -1,7 +1,9 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@std/cli@*": "1.0.20",
     "jsr:@std/cli@^1.0.20": "1.0.20",
+    "jsr:@std/path@*": "1.1.0",
     "npm:@cucumber/cucumber@12.1.0": "12.1.0_@cucumber+gherkin@32.2.0_@cucumber+message-streams@4.0.1__@cucumber+messages@27.2.0_@cucumber+messages@27.2.0",
     "npm:@google/generative-ai@0.24.1": "0.24.1",
     "npm:@inlang/paraglide-js@^2.2.0": "2.2.0",
@@ -62,6 +64,9 @@
   "jsr": {
     "@std/cli@1.0.20": {
       "integrity": "a8c384a2c98cec6ec6a2055c273a916e2772485eb784af0db004c5ab8ba52333"
+    },
+    "@std/path@1.1.0": {
+      "integrity": "ddc94f8e3c275627281cbc23341df6b8bcc874d70374f75fec2533521e3d6886"
     }
   },
   "npm": {
