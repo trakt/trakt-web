@@ -3,4 +3,5 @@ export enum FeatureFlag {
   Settings = 'settings',
   Calendar = 'calendar',
   Cta = 'cta',
+  SocialNetwork = 'social-network',
 }
