@@ -1158,9 +1158,6 @@
     "text_search_results_for": {
       "default": "Résultats pour {query}"
     },
-    "list_title_search_results": {
-      "default": "Résultats"
-    },
     "translated_value_type_movie": {
       "default": "Film"
     },

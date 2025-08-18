@@ -5,8 +5,9 @@
   import ListHeader from "../_internal/ListHeader.svelte";
   import type { ListProps } from "../ListProps";
 
-  type PageListProps<T> = ListProps<T> & {
+  type PageListProps<T> = Omit<ListProps<T>, "title"> & {
     empty?: Snippet;
+    title?: string;
     dimensionObserver?: (node: HTMLElement) => void;
   };
 
