@@ -3354,14 +3354,6 @@
         "ios"
       ]
     },
-    "list_title_search_results": {
-      "default": "Results",
-      "description": "Text shown when displaying search results.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "translated_value_type_movie": {
       "default": "Movie",
       "description": "Value for the movie type. The value is sent back from the Trakt API.",

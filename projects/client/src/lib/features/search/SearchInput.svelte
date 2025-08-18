@@ -90,6 +90,7 @@
 <div
   class="trakt-search"
   class:search-is-loading={$isSearching}
+  class:is-inline={isInline}
   data-hj-suppress
 >
   <div use:focusOnClick class="trakt-search-icon">
@@ -153,6 +154,17 @@
     align-items: center;
 
     position: relative;
+
+    transition: outline var(--transition-increment) ease-in-out;
+
+    &:not(.is-inline):focus-within {
+      outline: var(--border-thickness-xs) solid var(--purple-500);
+
+      &,
+      .trakt-search-input {
+        border-radius: var(--border-radius-l);
+      }
+    }
 
     @include for-mobile {
       --search-input-width: var(--ni-48);
