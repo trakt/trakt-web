@@ -28,6 +28,7 @@
     "i18n:traktify": "deno run --allow-read --allow-write --allow-net --allow-env .scripts/traktify-i18n.ts",
     "i18n:cleanse": "deno run --allow-read --allow-write --allow-env .scripts/cleanse-i18n.ts",
     "i18n:generate": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/",
+    "i18n:l10n": "deno run --allow-read --allow-write i18n/generator/l10n.ts -i i18n/ios/Localizable.xcstrings -o i18n/ios/L10n.swift",
     "i18n:generate:watch": "deno run --allow-read --allow-write i18n/generator/cli.ts -i i18n/meta/ -o i18n/ --watch"
   },
   "devDependencies": {
