@@ -1,0 +1,46 @@
+name: The Tower of Babel aka i18n Generation
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  i18n-generate:
+    name: The Polyglot's Craft (i18n Generation)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: i18n-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Secure the Evidence aka Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno Environment
+        uses: ./.github/actions/setup-deno
+
+      - name: Forge the Linguistic Tapestry aka Generate i18n
+        working-directory: projects/client
+        run: 'deno task i18n:generate'
+
+      - name: Weave the Swift Incantations aka Generate L10n
+        working-directory: projects/client
+        run: 'deno task i18n:l10n'
+
+      - name: Archive the Android Scriptures
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-i18n-artifacts
+          path: projects/client/i18n/android/
+          retention-days: 30
+
+      - name: Archive the iOS Scrolls
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-i18n-artifacts
+          path: projects/client/i18n/ios/
+          retention-days: 30
