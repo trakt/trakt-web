@@ -110,6 +110,11 @@ export default defineConfig(({ mode }) => ({
     }),
     svelteTesting(),
   ],
+
+  build: {
+    sourcemap: true,
+  },
+
   //TODO enable globals when typings are fixed
   test: {
     include: [
