@@ -51,7 +51,6 @@ describe('I18nGenerator', () => {
           variables: {
             name: {
               type: 'string',
-              description: 'User display name',
             },
           },
         },
@@ -61,7 +60,6 @@ describe('I18nGenerator', () => {
           variables: {
             count: {
               type: 'number',
-              description: 'Number of items',
             },
           },
         },
@@ -91,11 +89,9 @@ describe('I18nGenerator', () => {
           variables: {
             userName: {
               type: 'string',
-              description: 'The user name',
             },
             count: {
               type: 'number',
-              description: 'Message count',
             },
           },
         },
@@ -343,7 +339,7 @@ describe('I18nGenerator', () => {
       const androidPath = path.join(
         tempDir,
         'android',
-        'values-en',
+        'values',
         'strings.xml',
       );
       expect(await fs.promises.access(androidPath)).toBeUndefined();
@@ -373,7 +369,7 @@ describe('I18nGenerator', () => {
       expect(inlangExists).toBe(true);
 
       const androidExists = await fs.promises.access(
-        path.join(tempDir, 'android', 'values-en', 'strings.xml'),
+        path.join(tempDir, 'android', 'values', 'strings.xml'),
       )
         .then(() => true)
         .catch(() => false);
@@ -452,7 +448,6 @@ describe('I18nGenerator', () => {
             variables: {
               value: {
                 type: 'string',
-                description: 'Test value',
               },
             },
           },

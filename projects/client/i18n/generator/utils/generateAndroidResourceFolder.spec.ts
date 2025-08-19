@@ -33,7 +33,7 @@ describe('generateAndroidResourceFolder', () => {
   });
 
   it('should handle pure language codes correctly', () => {
-    expect(generateAndroidResourceFolder('en', ['en', 'fr'])).toBe('values-en');
+    expect(generateAndroidResourceFolder('en', ['en', 'fr'])).toBe('values');
     expect(generateAndroidResourceFolder('fr', ['en', 'fr'])).toBe('values-fr');
   });
 

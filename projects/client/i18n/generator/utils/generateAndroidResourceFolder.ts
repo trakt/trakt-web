@@ -7,6 +7,11 @@ export function generateAndroidResourceFolder(
   locale: string,
   allLocales: string[],
 ): string {
+  if (locale === 'en') {
+    // Special case for English, always use values
+    return 'values';
+  }
+
   const normalizedLocale = locale.toLowerCase();
 
   // Extract language code (first part before hyphen)
