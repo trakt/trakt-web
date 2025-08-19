@@ -1,10 +1,10 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import type { SocialActivity } from "$lib/requests/models/SocialActivity";
-  import ActivityItem from "../components/ActivityItem.svelte";
-  import ActivitySummaryCard from "../components/ActivitySummaryCard.svelte";
-  import UserAvatar from "../components/UserAvatar.svelte";
-  import UserProfileLink from "../components/UserProfileLink.svelte";
+  import ActivityItem from "../../components/ActivityItem.svelte";
+  import ActivitySummaryCard from "../../components/ActivitySummaryCard.svelte";
+  import UserAvatar from "../../components/UserAvatar.svelte";
+  import UserProfileLink from "../../components/UserProfileLink.svelte";
 
   const MAX_USERS = 10;
 

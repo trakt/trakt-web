@@ -34,6 +34,7 @@ module.exports = {
         'analytics',
         'tv',
         'auth',
+        'activity',
         'badge',
         'button',
         'calendar',

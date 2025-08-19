@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "Treceți la un alt cont sau deconectați-vă de la cel curent."
+    },
+    "list_title_activity": {
+      "default": "Activitate"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "Utilizatorii pe care îi urmărești nu au văzut încă nimic. Sau poate nu urmărești pe nimeni încă?"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "Nu ai marcat nimic ca vizionat încă."
+    },
+    "button_text_social": {
+      "default": "Social"
+    },
+    "button_label_social": {
+      "default": "Vezi activitatea socială"
+    },
+    "button_text_personal": {
+      "default": "Personal"
+    },
+    "button_label_personal": {
+      "default": "Vezi activitatea personală"
     }
   }
 }

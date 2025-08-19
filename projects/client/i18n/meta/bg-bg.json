@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "Превключете към друг профил или излезте от текущия."
+    },
+    "list_title_activity": {
+      "default": "Активност"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "Потребителите, които следвате, все още не са гледали нищо. Или може би все още не следвате никого?"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "Все още не сте отбелязали нищо като гледано."
+    },
+    "button_text_social": {
+      "default": "Социално"
+    },
+    "button_label_social": {
+      "default": "Вижте социалната активност"
+    },
+    "button_text_personal": {
+      "default": "Лично"
+    },
+    "button_label_personal": {
+      "default": "Вижте личната активност"
     }
   }
 }

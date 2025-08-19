@@ -7,9 +7,8 @@
   import Landing from "$lib/sections/landing/Landing.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import RecentlyWatchedList from "$lib/sections/lists/history/RecentlyWatchedList.svelte";
+  import ActivityList from "$lib/sections/lists/activity/ActivityList.svelte";
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
-  import SocialActivityList from "$lib/sections/lists/social/SocialActivityList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ReleasedList from "$lib/sections/lists/watchlist/ReleasedList.svelte";
   import UnreleasedList from "$lib/sections/lists/watchlist/UnreleasedList.svelte";
@@ -39,13 +38,7 @@
       <UnreleasedList />
     </RenderForFeature>
 
-    <RecentlyWatchedList
-      drilldownLabel={m.button_label_view_all_recently_watched()}
-      title={m.list_title_recently_watched()}
-      slug="me"
-    />
-
-    <SocialActivityList />
+    <ActivityList />
   </RenderFor>
   <RenderFor audience="public" navigation="default">
     <Landing />

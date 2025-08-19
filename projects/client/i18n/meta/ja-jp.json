@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "別のアカウントに切り替えるか、現在のアカウントからログアウトします。"
+    },
+    "list_title_activity": {
+      "default": "アクティビティ"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "フォローしているユーザーはまだ何も見ていません。または、まだ誰もフォローしていませんか？"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "まだ視聴済みとしてマークしたものはありません。"
+    },
+    "button_text_social": {
+      "default": "ソーシャル"
+    },
+    "button_label_social": {
+      "default": "ソーシャルアクティビティを表示"
+    },
+    "button_text_personal": {
+      "default": "パーソナル"
+    },
+    "button_label_personal": {
+      "default": "パーソナルアクティビティを表示"
     }
   }
 }

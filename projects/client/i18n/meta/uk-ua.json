@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "Переключіться на інший обліковий запис або вийдіть з поточного."
+    },
+    "list_title_activity": {
+      "default": "Активність"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "Користувачі, на яких ви підписані, ще нічого не переглянули. Або, можливо, ви ще ні на кого не підписані?"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "Ви ще нічого не відмітили як переглянуте."
+    },
+    "button_text_social": {
+      "default": "Соціальне"
+    },
+    "button_label_social": {
+      "default": "Переглянути соціальну активність"
+    },
+    "button_text_personal": {
+      "default": "Особисте"
+    },
+    "button_label_personal": {
+      "default": "Переглянути особисту активність"
     }
   }
 }
