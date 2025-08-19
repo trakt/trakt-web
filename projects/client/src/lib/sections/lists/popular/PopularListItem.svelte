@@ -7,4 +7,4 @@
     $props();
 </script>
 
-<DefaultMediaItem {type} {media} {style} {popupActions} />
+<DefaultMediaItem {type} {media} {style} {popupActions} canDeemphasize />

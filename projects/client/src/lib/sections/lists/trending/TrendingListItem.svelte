@@ -12,4 +12,4 @@
   <WatchersTag i18n={TagIntlProvider} watchers={media.watchers} />
 {/snippet}
 
-<DefaultMediaItem {type} {media} {tag} {style} />
+<DefaultMediaItem {type} {media} {tag} {style} canDeemphasize />
