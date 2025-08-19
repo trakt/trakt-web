@@ -16,6 +16,10 @@
   const isActivity = $derived(props.variant === "activity");
   const isHidden = $derived(props.status === "hidden");
   const style = $derived(props.style ?? "cover");
+
+  const runtime = $derived(
+    isNaN(props.episode.runtime) ? props.show.runtime : props.episode.runtime,
+  );
 </script>
 
 {#snippet action()}
@@ -40,7 +44,7 @@
   {:else}
     <div class="trakt-episode-tag">
       {#if ["next", "default"].includes(props.variant)}
-        <DurationTag i18n={TagIntlProvider} runtime={props.episode.runtime} />
+        <DurationTag i18n={TagIntlProvider} {runtime} />
       {/if}
 
       {#if props.variant === "next"}
