@@ -142,35 +142,35 @@ export function useUser() {
   );
   const history = derived(
     historyQueryResponse,
-    ($query) => definedData($query.data),
+    ($query) => $query.data,
   );
   const watchlist = derived(
     watchlistQueryResponse,
-    ($watchlist) => definedData($watchlist.data),
+    ($watchlist) => $watchlist.data,
   );
   const ratings = derived(
     ratingsQueryResponse,
-    ($ratings) => definedData($ratings.data),
+    ($ratings) => $ratings.data,
   );
   const likes = derived(
     commentLikesQueryResponse,
-    ($likes) => definedData($likes.data),
+    ($likes) => $likes.data,
   );
   const reactions = derived(
     commentReactionsQueryResponse,
-    ($reactions) => definedData($reactions.data),
+    ($reactions) => $reactions.data,
   );
   const favorites = derived(
     favoritesQueryResponse,
-    ($favorites) => definedData($favorites.data),
+    ($favorites) => $favorites.data,
   );
   const network = derived(
     followingQueryResponse,
-    ($network) => definedData($network.data),
+    ($network) => $network.data,
   );
   const plexCollection = derived(
     plexCollectionQueryResponse,
-    ($collection) => definedData($collection.data),
+    ($collection) => $collection.data,
   );
 
   return {
