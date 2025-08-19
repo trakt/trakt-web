@@ -14,7 +14,7 @@
 
 <style>
   trakt-spoiler {
-    :global(&:not(:empty):not(:has(*))),
+    &:global(:not(:empty):not(:has(*))),
     :global(p:not(button p):not(a p)),
     :global(span:not(button span):not(a span)) {
       transition: var(--transition-increment) ease-in-out;
@@ -24,7 +24,7 @@
     &:global(.trakt-spoiler) {
       /* Target elements that contain only text */
       /* Target p and span that don't have button/anchor parents */
-      :global(&:not(:empty):not(:has(*))),
+      &:global(:not(:empty):not(:has(*))),
       :global(p:not(button p):not(a p)),
       :global(span:not(button span):not(a span)) {
         --blur-size: calc(var(--ni-2) * 1.5);
