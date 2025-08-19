@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "Schakel over naar een ander account of log uit van het huidige account."
+    },
+    "list_title_activity": {
+      "default": "Activiteit"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "De gebruikers die je volgt hebben nog niets gezien. Of misschien volg je nog niemand?"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "Je hebt nog niets als gezien gemarkeerd."
+    },
+    "button_text_social": {
+      "default": "Sociaal"
+    },
+    "button_label_social": {
+      "default": "Bekijk sociale activiteit"
+    },
+    "button_text_personal": {
+      "default": "Persoonlijk"
+    },
+    "button_label_personal": {
+      "default": "Bekijk persoonlijke activiteit"
     }
   }
 }

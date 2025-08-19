@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "Bytt til en annen konto eller logg ut av den nåværende."
+    },
+    "list_title_activity": {
+      "default": "Aktivitet"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "Brukerne du følger har ikke sett noe ennå. Eller kanskje du ikke følger noen ennå?"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "Du har ikke markert noe som sett ennå."
+    },
+    "button_text_social": {
+      "default": "Sosialt"
+    },
+    "button_label_social": {
+      "default": "Vis sosial aktivitet"
+    },
+    "button_text_personal": {
+      "default": "Personlig"
+    },
+    "button_label_personal": {
+      "default": "Vis personlig aktivitet"
     }
   }
 }

@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "Przełącz się na inne konto lub wyloguj z bieżącego."
+    },
+    "list_title_activity": {
+      "default": "Aktywność"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "Użytkownicy, których obserwujesz, jeszcze nic nie obejrzeli. A może jeszcze nikogo nie obserwujesz?"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "Jeszcze niczego nie oznaczyłeś jako obejrzane."
+    },
+    "button_text_social": {
+      "default": "Społecznościowe"
+    },
+    "button_label_social": {
+      "default": "Wyświetl aktywność społecznościową"
+    },
+    "button_text_personal": {
+      "default": "Osobiste"
+    },
+    "button_label_personal": {
+      "default": "Wyświetl aktywność osobistą"
     }
   }
 }

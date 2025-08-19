@@ -1,8 +1,8 @@
 <script lang="ts">
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import SocialActivityItem from "./SocialActivityItem.svelte";
-  import { useSocialActivityList } from "./useSocialActivityList";
+  import SocialActivityItem from "./_internal/SocialActivityItem.svelte";
+  import { useSocialActivityList } from "./_internal/useSocialActivityList";
 
   type RecommendedListProps = {
     title: string;

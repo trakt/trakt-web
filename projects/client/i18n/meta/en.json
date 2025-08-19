@@ -5005,6 +5005,62 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_activity": {
+      "default": "Activity",
+      "description": "Title for lists containing recently watched items of the profiles the user follows or their own recently watched items. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "The users you follow haven't seen anything yet. Or maybe you're not following anyone yet?",
+      "description": "Placeholder text shown when there are no shows or movies in a user's social activity list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "You haven't marked anything as watched yet.",
+      "description": "Placeholder text shown when a user has no recently watched episodes or movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_social": {
+      "default": "Social",
+      "description": "Text for the button that allows users to view social activity.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_social": {
+      "default": "View social activity",
+      "description": "Aria-label for the button that allows users to view social activity.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_personal": {
+      "default": "Personal",
+      "description": "Text for the button that allows users to view their own activity.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_personal": {
+      "default": "View personal activity",
+      "description": "Aria-label for the button that allows users to view their own activity.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

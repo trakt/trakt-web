@@ -1746,6 +1746,27 @@
     },
     "description_danger_zone": {
       "default": "Zu einem anderen Konto wechseln oder sich vom aktuellen abmelden."
+    },
+    "list_title_activity": {
+      "default": "Aktivität"
+    },
+    "list_placeholder_activity_social_empty": {
+      "default": "Die Nutzer, denen du folgst, haben noch nichts gesehen. Oder vielleicht folgst du noch niemandem?"
+    },
+    "list_placeholder_activity_personal_empty": {
+      "default": "Du hast noch nichts als gesehen markiert."
+    },
+    "button_text_social": {
+      "default": "Sozial"
+    },
+    "button_label_social": {
+      "default": "Soziale Aktivität ansehen"
+    },
+    "button_text_personal": {
+      "default": "Persönlich"
+    },
+    "button_label_personal": {
+      "default": "Persönliche Aktivität ansehen"
     }
   }
 }
