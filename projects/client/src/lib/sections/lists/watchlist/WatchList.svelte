@@ -32,6 +32,7 @@
   const selectedTypes = writable<MediaType[]>(
     defaultType ? [defaultType] : ["movie", "show"],
   );
+  const handleTypeChange = (value: MediaType[]) => selectedTypes.set(value);
 
   const type = $derived(
     $selectedTypes.length === 1 ? $selectedTypes.at(0) : undefined,
@@ -88,7 +89,7 @@
 
   {#snippet badge()}
     {#if status === "all"}
-      <TypeToggles types={selectedTypes} />
+      <TypeToggles value={$selectedTypes} onChange={handleTypeChange} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}

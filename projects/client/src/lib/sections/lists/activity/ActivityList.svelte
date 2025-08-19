@@ -16,7 +16,9 @@
 
   /** once we have a proper social hub we should encourage people to find other users to follow, aka: empty placeholder */
 
-  const selectedType = writable<[ActivityType]>(["social"]);
+  const selectedType = writable<ActivityType[]>(["social"]);
+  const handleTypeChange = (value: ActivityType[]) => selectedType.set(value);
+
   const activityType = $derived(assertDefined($selectedType.at(0)));
 
   const urlBuilder = $derived(
@@ -26,7 +28,7 @@
   );
 
   const cta = $derived(
-    $selectedType === "social" ? "activity" : "personal-activity",
+    activityType === "social" ? "activity" : "personal-activity",
   );
   // FIXME: coalesce on list level & combine drilled down versions
 </script>
@@ -58,7 +60,7 @@
         <CtaItem {cta} variant="placeholder" />
       {/snippet}
 
-      {#if $selectedType === "social"}
+      {#if activityType === "social"}
         {m.list_placeholder_activity_social_empty()}
       {:else}
         {m.list_placeholder_activity_personal_empty()}
@@ -67,6 +69,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <ActivityToggle type={selectedType} />
+    <ActivityToggle value={$selectedType} onChange={handleTypeChange} />
   {/snippet}
 </DrillableMediaList>

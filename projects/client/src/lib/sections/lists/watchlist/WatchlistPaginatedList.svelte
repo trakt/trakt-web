@@ -28,6 +28,7 @@
   const selectedTypes = writable<MediaType[]>(
     type ? [type] : ["movie", "show"],
   );
+  const handleTypeChange = (value: MediaType[]) => selectedTypes.set(value);
 
   onMount(() => {
     if (!onTypeChange) {
@@ -59,7 +60,7 @@
 
   {#snippet badge()}
     {#if status === "all" && onTypeChange}
-      <TypeToggles types={selectedTypes} />
+      <TypeToggles value={$selectedTypes} onChange={handleTypeChange} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}

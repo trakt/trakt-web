@@ -3,36 +3,27 @@
 
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { type Writable } from "svelte/store";
   import type { ActivityType } from "../models/ActivityType";
 
   type ActivityToggleProps = {
-    type: Writable<[ActivityType]>;
+    value: ActivityType[];
+    onChange: (value: ActivityType[]) => void;
   };
 
-  const { type }: ActivityToggleProps = $props();
+  const { value, onChange }: ActivityToggleProps = $props();
 
-  const options: ToggleOption[] = [
+  const options: ToggleOption<ActivityType>[] = [
     {
       value: "social",
-      label: m.button_text_social(),
+      text: m.button_text_social(),
+      label: m.button_label_social(),
     },
     {
       value: "personal",
-      label: m.button_text_personal(),
+      text: m.button_text_personal(),
+      label: m.button_label_personal(),
     },
   ];
 </script>
 
-<Toggler type="radio" value={type} {options} class="activity-type-toggles" />
-
-<style>
-  :global(.activity-type-toggles) {
-    display: flex;
-    justify-content: center;
-    gap: var(--gap-xxs);
-
-    /* To visually align the buttons better with the header */
-    padding-top: var(--ni-2);
-  }
-</style>
+<Toggler type="radio" {value} {onChange} {options} />
