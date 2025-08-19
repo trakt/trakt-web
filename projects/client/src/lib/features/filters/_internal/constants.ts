@@ -64,14 +64,14 @@ const IGNORE_WATCHED_FILTER: Filter = {
   label: m.header_ignore_watched(),
   key: FilterKey.IgnoreWatched,
   type: 'toggle',
-  defaultValue: 'true',
+  defaultValue: 'false',
 };
 
 const IGNORE_WATCHLISTED_FILTER: Filter = {
   label: m.header_ignore_watchlisted(),
   key: FilterKey.IgnoreWatchlisted,
   type: 'toggle',
-  defaultValue: 'true',
+  defaultValue: 'false',
 };
 
 export const FILTERS = [
