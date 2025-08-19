@@ -29,7 +29,7 @@
     </Link>
   {/if}
 
-  <Link href={UrlBuilder.github()} target="_blank">
+  <Link href={UrlBuilder.github.web()} target="_blank">
     <GithubIcon />
   </Link>
   <Link href={UrlBuilder.app.ios()} target="_blank">

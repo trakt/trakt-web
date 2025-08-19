@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "View personal activity"
+    },
+    "page_title_unexpected_error": {
+      "default": "Something went wrong"
+    },
+    "error_text_unexpected_error": {
+      "default": "Uh oh... Something unexpected happened. If this keeps happening, please <a>create a new issue</a>."
     }
   }
 }

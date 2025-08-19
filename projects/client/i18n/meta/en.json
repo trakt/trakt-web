@@ -5061,6 +5061,22 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_unexpected_error": {
+      "default": "Something went wrong",
+      "description": "Title for the unexpected error page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "error_text_unexpected_error": {
+      "default": "Uh oh... Something unexpected happened. If this keeps happening, please <a>create a new issue</a>.",
+      "description": "Text shown on the unexpected error page, informing the user that something went wrong and providing a link to create a new issue.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

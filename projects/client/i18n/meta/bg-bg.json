@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Вижте личната активност"
+    },
+    "page_title_unexpected_error": {
+      "default": "Нещо се обърка"
+    },
+    "error_text_unexpected_error": {
+      "default": "О, не… Нещо неочаквано се случи. Ако това продължава, моля, <a>създайте нов проблем</a>."
     }
   }
 }

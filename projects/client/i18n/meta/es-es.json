@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Ver actividad personal"
+    },
+    "page_title_unexpected_error": {
+      "default": "Algo salió mal"
+    },
+    "error_text_unexpected_error": {
+      "default": "Vaya... Algo inesperado ha sucedido. Si esto sigue ocurriendo, por favor, <a>crea un nuevo informe</a>."
     }
   }
 }

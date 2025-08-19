@@ -193,6 +193,12 @@ declare global {
       'onclickoutside'?: (ev: CustomEvent) => void;
       'onfiles'?: (ev: CustomEvent<{ files: FileList }>) => void;
     }
+
+    interface IntrinsicElements {
+      'svelte:window': {
+        onerror?: (event: ErrorEvent) => void;
+      };
+    }
   }
 
   interface WebOS {

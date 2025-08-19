@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "パーソナルアクティビティを表示"
+    },
+    "page_title_unexpected_error": {
+      "default": "問題が発生しました"
+    },
+    "error_text_unexpected_error": {
+      "default": "おっと…予期せぬことが起きました。もしこれが続くようでしたら、<a>新しい問題を報告してください</a>。"
     }
   }
 }

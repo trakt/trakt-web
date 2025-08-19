@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Переглянути особисту активність"
+    },
+    "page_title_unexpected_error": {
+      "default": "Щось пішло не так"
+    },
+    "error_text_unexpected_error": {
+      "default": "Ой… Сталася неочікувана помилка. Якщо це повторюється, будь ласка, <a>створіть новий запит</a>."
     }
   }
 }

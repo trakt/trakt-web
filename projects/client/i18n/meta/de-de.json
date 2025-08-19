@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Persönliche Aktivität ansehen"
+    },
+    "page_title_unexpected_error": {
+      "default": "Etwas ist schiefgelaufen"
+    },
+    "error_text_unexpected_error": {
+      "default": "Oje... Etwas Unerwartetes ist passiert. Wenn dies weiterhin auftritt, bitte <a>erstelle ein neues Ticket</a>."
     }
   }
 }
