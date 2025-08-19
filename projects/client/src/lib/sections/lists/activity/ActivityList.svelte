@@ -6,6 +6,7 @@
   import { writable } from "svelte/store";
   import CtaItem from "../components/cta/CtaItem.svelte";
 
+  import { assertDefined } from "$lib/utils/assert/assertDefined.ts";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import RecentlyWatchedItem from "../history/RecentlyWatchedItem.svelte";
   import ActivityToggle from "./_internal/ActivityToggle.svelte";
@@ -15,10 +16,11 @@
 
   /** once we have a proper social hub we should encourage people to find other users to follow, aka: empty placeholder */
 
-  const selectedType = writable<ActivityType>("social");
+  const selectedType = writable<[ActivityType]>(["social"]);
+  const activityType = $derived(assertDefined($selectedType.at(0)));
 
   const urlBuilder = $derived(
-    $selectedType === "social"
+    activityType === "social"
       ? UrlBuilder.social.activity
       : UrlBuilder.history.all,
   );
@@ -33,8 +35,7 @@
 <DrillableMediaList
   id={`${$selectedType}-activity-list`}
   type="episode"
-  useList={(params) =>
-    useActivityList({ ...params, activityType: $selectedType })}
+  useList={(params) => useActivityList({ ...params, activityType })}
   {urlBuilder}
   drilldownLabel={m.button_label_view_all_social_activity()}
   title={m.list_title_activity()}
