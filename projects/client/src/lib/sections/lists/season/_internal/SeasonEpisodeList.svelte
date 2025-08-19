@@ -29,7 +29,7 @@
 
   const { history } = useUser();
 
-  const showProgress = $derived($history.shows.get(show.id));
+  const showProgress = $derived($history?.shows.get(show.id));
   const watchedEpisodes = $derived(showProgress?.episodes);
 
   const hasUnseenEpisodes = $derived(!Boolean(showProgress?.isWatched));
