@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Vezi activitatea personală"
+    },
+    "page_title_unexpected_error": {
+      "default": "Ceva n-a mers bine"
+    },
+    "error_text_unexpected_error": {
+      "default": "Oups... S-a întâmplat ceva neașteptat. Dacă asta continuă, te rugăm să <a>creezi o nouă sesizare</a>."
     }
   }
 }

@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Bekijk persoonlijke activiteit"
+    },
+    "page_title_unexpected_error": {
+      "default": "Er is iets misgegaan"
+    },
+    "error_text_unexpected_error": {
+      "default": "Oeps... Er is iets onverwachts gebeurd. Als dit blijft gebeuren, <a>maak dan een nieuw probleem aan</a>."
     }
   }
 }

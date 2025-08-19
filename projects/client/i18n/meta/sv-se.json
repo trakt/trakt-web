@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Visa personlig aktivitet"
+    },
+    "page_title_unexpected_error": {
+      "default": "Något gick fel"
+    },
+    "error_text_unexpected_error": {
+      "default": "Oj då... Något oväntat hände. Om detta fortsätter, vänligen <a>skapa ett nytt ärende</a>."
     }
   }
 }

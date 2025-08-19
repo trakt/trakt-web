@@ -3,6 +3,7 @@
   import Error404Page from "$lib/pages/errors/Error404Page.svelte";
   import ErrorLockedAccountPage from "$lib/pages/errors/ErrorLockedAccountPage.svelte";
   import ErrorServicePage from "$lib/pages/errors/ErrorServicePage.svelte";
+  import UnexpectedErrorPage from "$lib/pages/errors/UnexpectedErrorPage.svelte";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { mapToWellKnownError } from "./_internal/mapToWellKnownError";
@@ -11,6 +12,7 @@
 
   const { children }: ChildrenProps = $props();
   const fetchError = writable<WellKnownError | undefined>(undefined);
+  const unexpectedError = writable<Error | undefined>(undefined);
 
   onMount(() => {
     const handler = (event: Event) => {
@@ -25,8 +27,34 @@
     };
   });
 
-  afterNavigate((_) => fetchError.set(undefined));
+  afterNavigate((_) => {
+    fetchError.set(undefined);
+    unexpectedError.set(undefined);
+  });
+
+  const hasError = $derived($fetchError || $unexpectedError);
 </script>
+
+<svelte:window
+  onerror={(event) => {
+    const error = event.error;
+    if (!(error && error instanceof Error)) {
+      return;
+    }
+
+    // Filter out errors from third-party scripts
+    if (!error.stack?.includes(window.location.hostname)) {
+      return;
+    }
+
+    // FIXME: add sentry
+    unexpectedError.set(error);
+  }}
+/>
+
+{#if $unexpectedError}
+  <UnexpectedErrorPage />
+{/if}
 
 {#if $fetchError === WellKnownError.LockedAccountError}
   <ErrorLockedAccountPage />
@@ -40,6 +68,6 @@
   <Error404Page />
 {/if}
 
-{#if !$fetchError}
+{#if !hasError}
   {@render children()}
 {/if}

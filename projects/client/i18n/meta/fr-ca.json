@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Voir votre activité"
+    },
+    "page_title_unexpected_error": {
+      "default": "Quelque chose s'est mal passé"
+    },
+    "error_text_unexpected_error": {
+      "default": "Oups... Un imprévu est survenu. Si ça continue, merci de <a>signaler un nouveau problème</a>."
     }
   }
 }

@@ -1767,6 +1767,12 @@
     },
     "button_label_personal": {
       "default": "Vis personlig aktivitet"
+    },
+    "page_title_unexpected_error": {
+      "default": "Noget gik galt"
+    },
+    "error_text_unexpected_error": {
+      "default": "Ups... Noget uventet skete. Hvis dette fortsætter, skal du <a>oprette et nyt problem</a>."
     }
   }
 }
