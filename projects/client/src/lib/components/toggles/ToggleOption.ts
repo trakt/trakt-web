@@ -1,7 +1,8 @@
 import type { Snippet } from 'svelte';
 
-export interface ToggleOption {
-  value: string;
+export interface ToggleOption<T> {
+  value: T;
+  text: string;
   label: string;
   content?: Snippet;
 }

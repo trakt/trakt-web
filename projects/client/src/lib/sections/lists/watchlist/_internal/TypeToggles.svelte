@@ -4,35 +4,26 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import { type Writable } from "svelte/store";
 
   type TypeTogglesProps = {
-    types: Writable<MediaType[]>;
+    value: MediaType[];
+    onChange: (value: MediaType[]) => void;
   };
 
-  const { types }: TypeTogglesProps = $props();
+  const { value, onChange }: TypeTogglesProps = $props();
 
-  const options: ToggleOption[] = [
+  const options: ToggleOption<MediaType>[] = [
     {
       value: "movie",
-      label: m.button_text_movies(),
+      text: m.button_text_movies(),
+      label: m.button_label_movies(),
     },
     {
       value: "show",
-      label: m.button_text_shows(),
+      text: m.button_text_shows(),
+      label: m.button_label_shows(),
     },
   ];
 </script>
 
-<Toggler type="combo" value={types} {options} class="watchlist-type-toggles" />
-
-<style>
-  :global(.watchlist-type-toggles) {
-    display: flex;
-    justify-content: center;
-    gap: var(--gap-xxs);
-
-    /* To visually align the buttons better with the header */
-    padding-top: var(--ni-2);
-  }
-</style>
+<Toggler type="combo" {value} {onChange} {options} />
