@@ -68,19 +68,25 @@
   </PortraitCard>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-season-title {
     line-height: var(--ni-16);
   }
 
   .trakt-season-item {
-    filter: saturate(0.1) contrast(1.2);
+    cursor: pointer;
+    transition: opacity var(--transition-increment) ease-in-out;
 
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: filter;
+    &:not(.is-current-season) {
+      opacity: var(--de-emphasized-opacity);
 
-    &.is-current-season {
-      filter: saturate(1) contrast(1);
+      @include for-mouse() {
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 </style>

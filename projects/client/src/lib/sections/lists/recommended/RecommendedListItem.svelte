@@ -6,4 +6,4 @@
   const { type, media, style }: MediaCardProps<RecommendedEntry> = $props();
 </script>
 
-<DefaultMediaItem {type} {media} {style} />
+<DefaultMediaItem {type} {media} {style} canDeemphasize />
