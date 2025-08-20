@@ -8,6 +8,7 @@ import { defineConfig } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
 import { manifest } from './src/lib/pwa/manifest.ts';
 
+import { sentrySvelteKit } from '@sentry/sveltekit';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -88,6 +89,12 @@ export default defineConfig(({ mode }) => ({
 
   plugins: [
     enhancedImages(),
+    sentrySvelteKit({
+      sourceMapsUploadOptions: {
+        org: 'trakt-tv',
+        project: 'trakt-web',
+      },
+    }),
     sveltekit(),
     paraglideVitePlugin({
       project: './i18n/project.inlang',
