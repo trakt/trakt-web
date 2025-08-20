@@ -2120,7 +2120,6 @@
       "default": "View All",
       "description": "Text for the button that allows users to drill down on lists to view all items in it.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
