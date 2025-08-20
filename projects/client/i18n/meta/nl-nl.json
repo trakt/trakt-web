@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "Oeps... Er is iets onverwachts gebeurd. Als dit blijft gebeuren, <a>maak dan een nieuw probleem aan</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Helaas, geen resultaten. Je filter was misschien iets te selectief."
     }
   }
 }

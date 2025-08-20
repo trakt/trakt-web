@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "Oj då... Något oväntat hände. Om detta fortsätter, vänligen <a>skapa ett nytt ärende</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Jaha, inga träffar. Ditt filter kanske var lite för selektivt."
     }
   }
 }

@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "Oups... S-a întâmplat ceva neașteptat. Dacă asta continuă, te rugăm să <a>creezi o nouă sesizare</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Păcat, nicio potrivire. Filtrul tău a fost poate un pic prea selectiv."
     }
   }
 }

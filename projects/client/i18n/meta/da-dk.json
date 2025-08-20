@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "Ups... Noget uventet skete. Hvis dette fortsætter, skal du <a>oprette et nyt problem</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Øv, ingen hits. Dit filter var måske lige en tand for selektivt."
     }
   }
 }
