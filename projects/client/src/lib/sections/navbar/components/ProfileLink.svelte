@@ -12,7 +12,7 @@
   const { user } = useUser();
 </script>
 
-<trakt-profile-button data-hj-suppress>
+<trakt-profile-button data-hj-suppress data-sentry-mask>
   <Link
     href={UrlBuilder.profile.me()}
     label={m.button_label_user_profile()}

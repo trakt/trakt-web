@@ -92,6 +92,7 @@
   class:search-is-loading={$isSearching}
   class:is-inline={isInline}
   data-hj-suppress
+  data-sentry-mask
 >
   <div use:focusOnClick class="trakt-search-icon">
     <SearchIcon />
