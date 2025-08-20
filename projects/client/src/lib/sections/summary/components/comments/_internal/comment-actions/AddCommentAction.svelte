@@ -1,6 +1,5 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import Button from "$lib/components/buttons/Button.svelte";
   import ReplyIcon from "$lib/components/icons/ReplyIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -14,16 +13,7 @@
   };
 </script>
 
-<RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-  <Button size="small" {onclick} {...commonProps}>
-    {m.button_text_add_comment()}
-    {#snippet icon()}
-      <ReplyIcon />
-    {/snippet}
-  </Button>
-</RenderFor>
-
-<RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
+<RenderFor audience="authenticated">
   <ActionButton {onclick} {...commonProps}>
     <ReplyIcon />
   </ActionButton>
