@@ -5048,6 +5048,14 @@
         "ios"
       ]
     },
+    "list_placeholder_no_filter_results": {
+      "default": "Bummer, no hits. Your filter may have been a little too selective.",
+      "description": "Placeholder text shown when there are no results for a filter.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "error_text_unexpected_error_short": {
       "default": "Uh oh… Something unexpected happened. If this keeps happening, please contact Trakt support.",
       "description": "Short text shown on the unexpected error page, informing the user that something went wrong.",
