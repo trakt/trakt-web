@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "今後のスケジュールでは、フォローしているドラマの新しいエピソードが間もなく公開されます。"
     },
+    "text_cta_calendar": {
+      "default": "あなたの今後のスケジュールでは、フォローしているドラマのまもなくリリースされるエピソードと、ウォッチリストから今後の映画がリストされます。"
+    },
     "text_cta_watchlist_unreleased": {
       "default": "近日公開の映画をウォッチリストに追加して、まもなく公開される映画を確認しましょう。"
     },
     "text_cta_activity": {
       "default": "チームのコンテンツをもっと追加しましょう。"
+    },
+    "text_cta_personal_activity": {
+      "default": "視聴済みのエピソードと映画を視聴済みとしてマークし、最近のアクティビティをここで確認してください。"
     },
     "text_cta_activity_list": {
       "default": "Traktチームをフォローして、彼らが見ているものを探索して、すぐに友達を作りましょう。"

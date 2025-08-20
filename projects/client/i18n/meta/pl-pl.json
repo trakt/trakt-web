@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Nadchodzący harmonogram zawiera nowe odcinki, które wkrótce zostaną wydane dla seriali, które już śledzisz."
     },
+    "text_cta_calendar": {
+      "default": "Twój nadchodzący harmonogram wyświetla nowe odcinki, które wkrótce zostaną wydane dla seriali, które śledzisz, oraz nadchodzące filmy z twojej listy."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Dodaj nadchodzące filmy do swojej listy i zobacz, które wkrótce się ukażą."
     },
     "text_cta_activity": {
       "default": "Dodaj więcej od naszego zespołu."
+    },
+    "text_cta_personal_activity": {
+      "default": "Zacznij oznaczać obejrzane odcinki i filmy jako obejrzane i zobacz swoją ostatnią aktywność tutaj."
     },
     "text_cta_activity_list": {
       "default": "Szybko znajdź znajomych, obserwując zespół Trakt i odkrywaj, co oglądają."

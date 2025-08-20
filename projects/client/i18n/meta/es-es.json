@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Su calendario de estrenos muestra los nuevos episodios que se publicarán pronto de las series que ya sigue."
     },
+    "text_cta_calendar": {
+      "default": "Tu calendario muestra los nuevos episodios que se estrenan próximamente de las series que sigues y las películas próximas de tu lista de seguimiento."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Añada películas próximas a su lista de seguimiento y vea cuáles se estrenan pronto."
     },
     "text_cta_activity": {
       "default": "Sigue añadiendo más de nuestro equipo."
+    },
+    "text_cta_personal_activity": {
+      "default": "Comienza a marcar tus episodios y películas vistos como vistos y consulta tu actividad reciente aquí."
     },
     "text_cta_activity_list": {
       "default": "Empieza a hacer amigos rápidamente siguiendo al Equipo Trakt y explora lo que están viendo."

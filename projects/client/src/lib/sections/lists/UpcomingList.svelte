@@ -14,6 +14,7 @@
   const { mode }: { mode: "episodes" | "all" } = $props();
 
   const { upcoming, isLoading } = useUpcomingItems(mode);
+  const cta = $derived(mode === "all" ? "calendar" : "upcoming");
 </script>
 
 <SectionList
@@ -33,14 +34,14 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    <CtaItem cta="upcoming" variant="card" />
+    <CtaItem {cta} variant="card" />
   {/snippet}
 
   {#snippet empty()}
     {#if !$isLoading}
       <RenderForFeature flag={FeatureFlag.Cta}>
         {#snippet enabled()}
-          <CtaItem cta="upcoming" variant="placeholder" />
+          <CtaItem {cta} variant="placeholder" />
         {/snippet}
 
         <p class="small">{m.list_placeholder_upcoming_schedule()}</p>

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { Cta } from "../models/Cta";
   import CtaCard from "./CtaCard.svelte";
   import MediaCtaButton from "./MediaCtaButton.svelte";
+  import { useCtaCardVariant } from "./useCtaCardVariant";
   import { usePlaceholderCover } from "./usePlaceholderCover";
 
   const {
@@ -14,11 +14,7 @@
     intl: CtaItemIntl;
   } = $props();
 
-  const type = $derived(
-    cta === "up-next" || cta === "upcoming" ? "episode" : "movie",
-  );
-
-  const defaultVariant = $derived(useDefaultCardVariant(type));
+  const defaultVariant = $derived(useCtaCardVariant(cta));
   const { cover } = $derived(usePlaceholderCover(cta));
 </script>
 

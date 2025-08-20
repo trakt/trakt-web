@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Programul dvs. viitor listează episoade noi care vor fi lansate în curând pentru serialele pe care le urmăriți deja."
     },
+    "text_cta_calendar": {
+      "default": "Programarea ta viitoare listează noile episoade care vor fi lansate în curând pentru serialele pe care le urmărești și filmele viitoare din lista ta."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Adăugați filme viitoare în lista de urmărire și vedeți care vor fi lansate în curând."
     },
     "text_cta_activity": {
       "default": "Continuați să adăugați mai mult de la echipa noastră."
+    },
+    "text_cta_personal_activity": {
+      "default": "Începe să marchezi episoadele și filmele vizionate ca vizionate și vezi activitatea ta recentă aici."
     },
     "text_cta_activity_list": {
       "default": "Începeți să vă faceți prieteni rapid, urmând Echipa Trakt și explorați ce urmăresc."

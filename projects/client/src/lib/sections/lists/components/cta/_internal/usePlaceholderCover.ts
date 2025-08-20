@@ -36,6 +36,7 @@ function ctaToQuery(cta: Exclude<Cta, 'activity'>) {
 
   switch (cta) {
     case 'up-next':
+    case 'personal-activity':
       return showTrendingQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
       >;
@@ -44,6 +45,7 @@ function ctaToQuery(cta: Exclude<Cta, 'activity'>) {
         PaginatablePreviewItem
       >;
     case 'upcoming':
+    case 'calendar':
       return showAnticipatedQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
       >;
@@ -54,7 +56,9 @@ function ctaToQuery(cta: Exclude<Cta, 'activity'>) {
   }
 }
 
-export function usePlaceholderCover(cta: Exclude<Cta, 'activity'>) {
+export function usePlaceholderCover(
+  cta: Exclude<Cta, 'activity'>,
+) {
   const query = useQuery(ctaToQuery(cta));
 
   return {
