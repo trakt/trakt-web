@@ -7,17 +7,15 @@ import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
 import { handle as handleImage } from '$lib/features/image/handle.ts';
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
-import * as Sentry from '@sentry/sveltekit';
 
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
+import {
+  handleErrorWithSentry,
+  initCloudflareSentryHandle,
+  sentryHandle,
+} from '@sentry/sveltekit';
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
-
-Sentry.init({
-  dsn: SENTRY_DSN,
-  tracesSampleRate: 1,
-  enableLogs: true,
-});
 
 const CHROME_DEV_TOOLS_PATH =
   '/.well-known/appspecific/com.chrome.devtools.json';
@@ -56,7 +54,12 @@ export const handleCacheControl: Handle = async ({ event, resolve }) => {
 };
 
 export const handle: Handle = sequence(
-  Sentry.sentryHandle(),
+  initCloudflareSentryHandle({
+    dsn: SENTRY_DSN,
+    tracesSampleRate: 1,
+    enableLogs: true,
+  }),
+  sentryHandle(),
   handleDevice,
   handleLocale,
   handleTheme,
@@ -75,4 +78,4 @@ export const handle: Handle = sequence(
   handleChromeDevTools,
 );
 
-export const handleError = Sentry.handleErrorWithSentry();
+export const handleError = handleErrorWithSentry();
