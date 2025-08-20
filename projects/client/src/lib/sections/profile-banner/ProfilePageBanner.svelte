@@ -38,7 +38,7 @@
       <VipBadge isDirector={profile.isDirector} />
     {/if}
   </div>
-  <div class="profile-info" data-hj-suppress>
+  <div class="profile-info" data-hj-suppress data-sentry-mask>
     <div class="profile-user-details">
       <h5>
         {nameLabel}

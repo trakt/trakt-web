@@ -25,7 +25,7 @@
   }
 </script>
 
-<figure class="profile-image">
+<figure class="profile-image" data-sentry-block>
   <!-- This should be the first element, else: HierarchyRequestError -->
   <figcaption class="visually-hidden">
     {m.image_alt_user_avatar({ username: name })}
