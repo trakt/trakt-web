@@ -5,19 +5,17 @@ import { CtaItemIntlProvider } from './CtaItemIntlProvider.ts';
 export const CtaPlaceholderIntlProvider: CtaItemIntl = {
   text: ({ cta }: CtaItemMeta) => {
     switch (cta) {
-      case 'up-next':
-      case 'released':
-      case 'upcoming':
-      case 'unreleased':
-        return CtaItemIntlProvider.text({ cta });
       case 'activity':
         return m.text_cta_activity_list();
+      default:
+        return CtaItemIntlProvider.text({ cta });
     }
   },
   cta: {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta) {
         case 'up-next':
+        case 'personal-activity':
           return m.link_text_browse_shows();
         case 'released':
           return m.link_text_browse_movies();
@@ -25,6 +23,8 @@ export const CtaPlaceholderIntlProvider: CtaItemIntl = {
           return m.link_text_explore_shows();
         case 'unreleased':
           return m.link_text_explore_anticipated();
+        case 'calendar':
+          return m.link_text_explore_shows();
       }
     },
     label: CtaItemIntlProvider.cta.label,

@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re already following."
     },
+    "text_cta_calendar": {
+      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re following and upcoming movies from your watchlist."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Add upcoming films to your watchlist and see which ones are releasing soon."
     },
     "text_cta_activity": {
       "default": "Keep adding more from our team."
+    },
+    "text_cta_personal_activity": {
+      "default": "Start marking your watched episodes and movies as watched and see your recent activity here."
     },
     "text_cta_activity_list": {
       "default": "Start making friends quickly by following the Trakt Team and explore what they are watching."

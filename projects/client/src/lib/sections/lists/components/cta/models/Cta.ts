@@ -3,4 +3,6 @@ export type Cta =
   | 'released'
   | 'upcoming'
   | 'unreleased'
-  | 'activity';
+  | 'activity'
+  | 'calendar'
+  | 'personal-activity';

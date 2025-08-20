@@ -22,6 +22,7 @@
   const ctaHref = $derived.by(() => {
     switch (cta) {
       case "up-next":
+      case "personal-activity":
         return UrlBuilder.shows();
       case "released":
         return UrlBuilder.trending({ type: "movie" });

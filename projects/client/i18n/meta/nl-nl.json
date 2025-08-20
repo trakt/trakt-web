@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Je aankomende schema geeft nieuwe afleveringen weer die binnenkort uitkomen van series die je al volgt."
     },
+    "text_cta_calendar": {
+      "default": "Je aankomende schema toont nieuwe afleveringen die binnenkort uitkomen voor series die je volgt en aankomende films van je watchlist."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Voeg aankomende films toe aan je watchlist en bekijk welke binnenkort uitkomen."
     },
     "text_cta_activity": {
       "default": "Blijf meer toevoegen van ons team."
+    },
+    "text_cta_personal_activity": {
+      "default": "Begin met het markeren van je bekeken afleveringen en films als bekeken en bekijk hier je recente activiteit."
     },
     "text_cta_activity_list": {
       "default": "Maak snel vrienden door het Trakt-team te volgen en te ontdekken wat ze bekijken."

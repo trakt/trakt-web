@@ -22,6 +22,10 @@
       ? UrlBuilder.social.activity
       : UrlBuilder.history.all,
   );
+
+  const cta = $derived(
+    $selectedType === "social" ? "activity" : "personal-activity",
+  );
   // FIXME: coalesce on list level & combine drilled down versions
 </script>
 
@@ -44,29 +48,21 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    {#if $selectedType === "social"}
-      <CtaItem cta="activity" variant="card" />
-    {/if}
+    <CtaItem {cta} variant="card" />
   {/snippet}
 
   {#snippet empty()}
-    {#if $selectedType === "personal"}
-      {m.list_placeholder_activity_personal_empty()}
-    {/if}
+    <RenderForFeature flag={FeatureFlag.Cta}>
+      {#snippet enabled()}
+        <CtaItem {cta} variant="placeholder" />
+      {/snippet}
 
-    {#if $selectedType === "social"}
-      <RenderForFeature flag={FeatureFlag.Cta}>
-        {#snippet enabled()}
-          {#if $selectedType === "social"}
-            <CtaItem cta="activity" variant="placeholder" />
-          {/if}
-        {/snippet}
-
-        {#if $selectedType === "social"}
-          {m.list_placeholder_activity_social_empty()}
-        {/if}
-      </RenderForFeature>
-    {/if}
+      {#if $selectedType === "social"}
+        {m.list_placeholder_activity_social_empty()}
+      {:else}
+        {m.list_placeholder_activity_personal_empty()}
+      {/if}
+    </RenderForFeature>
   {/snippet}
 
   {#snippet badge()}

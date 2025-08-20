@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Ditt kommande schema listar nya avsnitt som släpps snart för serier du redan följer."
     },
+    "text_cta_calendar": {
+      "default": "Ditt kommande schema listar nya avsnitt som släpps snart för serier du följer och kommande filmer från din lista."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Lägg till kommande filmer i din lista och se vilka som släpps snart."
     },
     "text_cta_activity": {
       "default": "Fortsätt lägga till mer från vårt team."
+    },
+    "text_cta_personal_activity": {
+      "default": "Börja markera dina visade avsnitt och filmer som visade och se din senaste aktivitet här."
     },
     "text_cta_activity_list": {
       "default": "Börja få vänner snabbt genom att följa Trakt-teamet och utforska vad de tittar på."

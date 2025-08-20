@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Din kommende tidsplan viser nye episoder, der snart udkommer for serier, du allerede følger."
     },
+    "text_cta_calendar": {
+      "default": "Din kommende tidsplan viser nye episoder, der snart udgives for serier, du følger, og kommende film fra din liste."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Tilføj kommende film til din liste, og se hvilke der snart udkommer."
     },
     "text_cta_activity": {
       "default": "Bliv ved med at tilføje mere fra vores team."
+    },
+    "text_cta_personal_activity": {
+      "default": "Begynd at markere dine sete episoder og film som sete, og se din seneste aktivitet her."
     },
     "text_cta_activity_list": {
       "default": "Begynd at få venner hurtigt ved at følge Trakt-teamet og udforske hvad de ser."
