@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "Ah não... Algo inesperado aconteceu. Se isso continuar acontecendo, por favor, <a>crie um novo chamado</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Puxa, nada encontrado. Seu filtro pode ter sido um pouco restritivo demais."
     }
   }
 }

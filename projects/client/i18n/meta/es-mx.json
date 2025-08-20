@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "¡Uy! Algo inesperado pasó. Si esto sigue, por favor, <a>reporta un nuevo problema</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "¡Uy, no hay resultados! Quizás tu filtro fue un poco demasiado específico."
     }
   }
 }

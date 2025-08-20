@@ -5093,6 +5093,14 @@
         "android",
         "ios"
       ]
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Bummer, no hits. Your filter may have been a little too selective.",
+      "description": "Placeholder text shown when there are no results for a filter.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

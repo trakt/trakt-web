@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "Vaya... Algo inesperado ha sucedido. Si esto sigue ocurriendo, por favor, <a>crea un nuevo informe</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Vaya, no hay resultados. Puede que tu filtro haya sido un poco demasiado restrictivo."
     }
   }
 }

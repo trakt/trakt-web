@@ -1779,6 +1779,9 @@
     },
     "error_text_unexpected_error": {
       "default": "Oups... Un imprévu est survenu. Si ça continue, merci de <a>signaler un nouveau problème</a>."
+    },
+    "list_placeholder_no_filter_results": {
+      "default": "Zut, pas de résultat. Ton filtre est peut-être un peu trop pointilleux."
     }
   }
 }
