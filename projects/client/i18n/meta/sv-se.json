@@ -1554,9 +1554,6 @@
     "button_label_react": {
       "default": "Reagera med {reaction}"
     },
-    "text_zero_reactions": {
-      "default": "0 reaktioner"
-    },
     "tag_text_movies": {
       "default": "Filmer"
     },
@@ -1709,9 +1706,6 @@
     },
     "header_comment_reactions": {
       "default": "Kommentarreaktioner"
-    },
-    "button_text_react": {
-      "default": "Reagera"
     },
     "button_label_close_reaction": {
       "default": "Stäng"

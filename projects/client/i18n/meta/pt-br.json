@@ -1554,9 +1554,6 @@
     "button_label_react": {
       "default": "Reagir com {reaction}"
     },
-    "text_zero_reactions": {
-      "default": "0 reações"
-    },
     "tag_text_movies": {
       "default": "Filmes"
     },
@@ -1709,9 +1706,6 @@
     },
     "header_comment_reactions": {
       "default": "Reações aos comentários"
-    },
-    "button_text_react": {
-      "default": "Reagir"
     },
     "button_label_close_reaction": {
       "default": "Fechar"

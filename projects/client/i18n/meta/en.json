@@ -4456,14 +4456,6 @@
         "ios"
       ]
     },
-    "text_zero_reactions": {
-      "default": "0 reactions",
-      "description": "Text shown when there are no reactions to a comment.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "tag_text_movies": {
       "default": "Movies",
       "description": "Text for the tag that indicates a movie.",
@@ -4872,14 +4864,6 @@
     "header_comment_reactions": {
       "default": "Comment reactions",
       "description": "Header for the comment reactions section.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_text_react": {
-      "default": "React",
-      "description": "Button text for reacting to comments.",
       "exclude": [
         "android",
         "ios"

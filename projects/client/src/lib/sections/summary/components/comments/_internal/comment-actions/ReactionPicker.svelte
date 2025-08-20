@@ -1,0 +1,96 @@
+<script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
+  import { NOOP_FN } from "$lib/utils/constants";
+  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { REACTIONS_MAP } from "./constants";
+
+  const {
+    currentReaction,
+    onChange,
+  }: {
+    currentReaction: Reaction | Nil;
+    onChange: (reaction: Reaction) => void;
+  } = $props();
+</script>
+
+<div class="trakt-reaction-picker">
+  <ActionButton
+    label={m.button_label_close_reaction()}
+    onclick={() => NOOP_FN}
+    style="ghost"
+  >
+    <CloseIcon />
+  </ActionButton>
+
+  {#each Object.entries(REACTIONS_MAP) as [reaction, emoji] (reaction)}
+    <div
+      class="trakt-react-button-container"
+      class:is-current={currentReaction === reaction}
+    >
+      <ActionButton
+        label={m.button_label_react({
+          reaction: toTranslatedValue("reaction", reaction),
+        })}
+        onclick={() => onChange(reaction as Reaction)}
+        style="ghost"
+      >
+        {emoji}
+      </ActionButton>
+    </div>
+  {/each}
+</div>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-reaction-picker {
+    display: flex;
+    align-items: center;
+    height: var(--ni-40);
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+
+      color: var(--color-foreground);
+    }
+  }
+
+  .trakt-react-button-container {
+    :global(.trakt-action-button) {
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: font-size, background-color;
+
+      border-radius: 50%;
+
+      background-color: transparent;
+      backdrop-filter: none;
+      font-size: var(--ni-18);
+    }
+  }
+
+  .trakt-react-button-container:not(.is-current) {
+    :global(.trakt-action-button) {
+      &:hover {
+        font-size: var(--ni-24);
+      }
+    }
+  }
+
+  .trakt-react-button-container.is-current {
+    :global(.trakt-action-button) {
+      background-color: var(--color-current-reaction-background);
+
+      @include for-touch {
+        background-color: var(--color-current-reaction-hover);
+      }
+
+      &:hover {
+        background-color: var(--color-current-reaction-hover);
+      }
+    }
+  }
+</style>
