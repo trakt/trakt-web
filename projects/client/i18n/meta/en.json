@@ -670,7 +670,6 @@
       "default": "Get VIP",
       "description": "Text for the VIP upsell badge. This is shown in a badge and should be as short as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
