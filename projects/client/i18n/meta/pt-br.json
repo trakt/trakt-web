@@ -1651,19 +1651,19 @@
       "default": "Calendário"
     },
     "text_cta_up_next": {
-      "default": "Continue assistindo suas séries favoritas e retome de onde parou a qualquer momento. Quais séries você está seguindo?"
+      "default": "Suas séries. Seu ritmo. Volte de onde parou. O que você está assistindo agora?"
     },
     "text_cta_watchlist_released": {
-      "default": "Adicione filmes à sua lista e comece a montar uma lista dos filmes que você quer assistir."
+      "default": "Veja. Salve. Assista depois. Comece a criar sua lista pessoal."
     },
     "text_cta_upcoming": {
-      "default": "Seu cronograma mostra os novos episódios lançando em breve das séries que você já acompanha."
+      "default": "Sua linha do tempo. Veja o que está por vir com uma lista completa dos próximos episódios que você se importa."
     },
     "text_cta_calendar": {
-      "default": "Sua programação mostra os novos episódios lançando em breve das séries que você está seguindo e os filmes futuros da sua lista de interesse."
+      "default": "Seu precioso. Sua linha do tempo. Veja o que está por vir com uma lista completa dos próximos episódios que você se importa."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Adicione filmes em breve à sua lista e veja quais estão lançando em breve."
+      "default": "Luzes, câmera… nada? Adicione títulos à sua lista e deixe a maratona começar!"
     },
     "text_cta_activity": {
       "default": "Continue adicionando mais da nossa equipe."

@@ -1651,19 +1651,19 @@
       "default": "Calendar"
     },
     "text_cta_up_next": {
-      "default": "Continue watching your favourite shows and pick up where you left off anytime. Which shows are you currently following?"
+      "default": "Your shows. Your pace. Jump back in exactly where you left off. What are you currently watching?"
     },
     "text_cta_watchlist_released": {
-      "default": "Add films to your watchlist and start building a list of films you want to watch."
+      "default": "See it. Save it. Watch it later. Start curating your personal movie queue."
     },
     "text_cta_upcoming": {
-      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re already following."
+      "default": "Your timeline. See what's dropping next with a full list of upcoming episodes you care about."
     },
     "text_cta_calendar": {
-      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re following and upcoming movies from your watchlist."
+      "default": "Your precious. Your timeline. See what’s dropping next with a full list of upcoming episodes you care about."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Add upcoming films to your watchlist and see which ones are releasing soon."
+      "default": "Lights, camera… nothing? Add titles to your watchlist and let the binge begin."
     },
     "text_cta_activity": {
       "default": "Keep adding more from our team."

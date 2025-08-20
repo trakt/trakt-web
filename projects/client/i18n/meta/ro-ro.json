@@ -1651,28 +1651,28 @@
       "default": "Calendar"
     },
     "text_cta_up_next": {
-      "default": "Continuați să urmăriți serialele preferate și reluați de unde ați rămas oricând. Ce seriale urmăriți?"
+      "default": "Seriile tale. În ritmul tău. Revino exact de unde ai rămas. Ce urmărești în prezent?"
     },
     "text_cta_watchlist_released": {
-      "default": "Adăugați filme în lista de urmărire și începeți să creați o listă de filme pe care doriți să le vedeți."
+      "default": "Vezi. Salvează. Urmărește mai târziu. Începe să-ți creezi lista personală de filme."
     },
     "text_cta_upcoming": {
-      "default": "Programul dvs. viitor listează episoade noi care vor fi lansate în curând pentru serialele pe care le urmăriți deja."
+      "default": "Cronologia ta. Vezi ce urmează cu o listă completă a episoadelor viitoare care te interesează."
     },
     "text_cta_calendar": {
-      "default": "Programarea ta viitoare listează noile episoade care vor fi lansate în curând pentru serialele pe care le urmărești și filmele viitoare din lista ta."
+      "default": "Prețiosul tău. Cronologia ta. Vezi ce urmează cu o listă completă a episoadelor viitoare care te interesează."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Adăugați filme viitoare în lista de urmărire și vedeți care vor fi lansate în curând."
+      "default": "Lumini, camera… nimic? Adaugă titluri în lista ta și lasă maratonul să înceapă!"
     },
     "text_cta_activity": {
-      "default": "Continuați să adăugați mai mult de la echipa noastră."
+      "default": "Continuă să adaugi mai multe de la echipa noastră."
     },
     "text_cta_personal_activity": {
-      "default": "Începe să marchezi episoadele și filmele vizionate ca vizionate și vezi activitatea ta recentă aici."
+      "default": "Începe să marchezi episoadele și filmele vizionate și vezi activitatea ta recentă aici."
     },
     "text_cta_activity_list": {
-      "default": "Începeți să vă faceți prieteni rapid, urmând Echipa Trakt și explorați ce urmăresc."
+      "default": "Fă-ți prieteni rapid urmărind echipa Trakt și explorează ce urmăresc ei."
     },
     "link_text_browse_more": {
       "default": "Vezi mai mult"

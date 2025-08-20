@@ -1651,28 +1651,28 @@
       "default": "Calendario"
     },
     "text_cta_up_next": {
-      "default": "Continua a guardare le tue serie TV preferite e riprendi da dove eri rimasto in qualsiasi momento. Quali serie stai seguendo?"
+      "default": "Le tue serie TV. Il tuo ritmo. Torna esattamente dove hai interrotto. Cosa stai guardando?"
     },
     "text_cta_watchlist_released": {
-      "default": "Aggiungi film alla tua lista e inizia a creare un elenco di film che vuoi guardare."
+      "default": "Guardalo. Salvalo. Guardalo più tardi. Inizia a curare la tua lista di film personali."
     },
     "text_cta_upcoming": {
-      "default": "Il tuo programma in arrivo elenca i nuovi episodi in uscita a breve per le serie TV che stai già seguendo."
+      "default": "La tua cronologia. Guarda cosa uscirà, con un elenco completo degli episodi in arrivo che ti interessano."
     },
     "text_cta_calendar": {
-      "default": "Il tuo programma mostra i nuovi episodi in uscita a breve delle serie che stai seguendo e i film in arrivo dalla tua lista."
+      "default": "Il tuo tesoro. La tua cronologia. Guarda cosa uscirà, con un elenco completo degli episodi in arrivo che ti interessano."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Aggiungi i film in uscita alla tua lista e scopri quali usciranno presto."
+      "default": "Luci, motore… niente? Aggiungi titoli alla tua lista e che il binge-watching abbia inizio!"
     },
     "text_cta_activity": {
-      "default": "Continua ad aggiungere altro dal nostro team."
+      "default": "Continua ad aggiungere dalla nostra squadra."
     },
     "text_cta_personal_activity": {
-      "default": "Inizia a contrassegnare gli episodi e i film che hai visto come visti e visualizza qui la tua attività recente."
+      "default": "Inizia a contrassegnare gli episodi e i film che hai guardato come visti e vedi qui la tua attività recente."
     },
     "text_cta_activity_list": {
-      "default": "Inizia a fare amicizia velocemente seguendo il Team Trakt ed esplora cosa stanno guardando."
+      "default": "Inizia a fare amicizia velocemente seguendo il team Trakt e scopri cosa stanno guardando."
     },
     "link_text_browse_more": {
       "default": "Sfoglia di più"

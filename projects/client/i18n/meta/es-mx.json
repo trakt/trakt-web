@@ -1651,28 +1651,28 @@
       "default": "Calendario"
     },
     "text_cta_up_next": {
-      "default": "Sigue viendo tus series favoritas y retoma donde te quedaste en cualquier momento. ¿Qué series estás siguiendo?"
+      "default": "Tus series. A tu ritmo. Retoma donde te quedaste. ¿Qué estás viendo ahorita?"
     },
     "text_cta_watchlist_released": {
-      "default": "Añade pelis a tu lista y empieza a armar una lista de pelis que quieres ver."
+      "default": "Mírala. Guárdala. Véela después. Empieza a crear tu lista de películas."
     },
     "text_cta_upcoming": {
-      "default": "Tu calendario de estrenos lista los nuevos episodios que salen pronto de las series que ya sigues."
+      "default": "Tu línea de tiempo. Checa lo que viene con una lista de los episodios que te importan."
     },
     "text_cta_calendar": {
-      "default": "Tu calendario muestra los episodios nuevos que salen pronto de las series que sigues y las películas próximas de tu lista."
+      "default": "Tu tesoro. Tu línea de tiempo. Checa lo que viene con una lista de los episodios que te importan."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Añade las pelis próximas a tu lista y checa cuáles se estrenan pronto."
+      "default": "¡Luces, cámara… nada? Agrega títulos a tu lista y que empiece el maratón."
     },
     "text_cta_activity": {
       "default": "Sigue agregando más de nuestro equipo."
     },
     "text_cta_personal_activity": {
-      "default": "Empieza a marcar tus episodios y películas vistos como vistos y checa tu actividad reciente aquí."
+      "default": "Empieza a marcar tus episodios y películas vistas y ve tu actividad reciente aquí."
     },
     "text_cta_activity_list": {
-      "default": "Haz amigos rápido siguiendo al Equipo Trakt y explora lo que están viendo."
+      "default": "Empieza a hacer amigos rápido siguiendo al equipo Trakt y explora lo que están viendo."
     },
     "link_text_browse_more": {
       "default": "Explorar más"

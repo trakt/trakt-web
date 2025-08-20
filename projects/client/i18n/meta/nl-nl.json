@@ -1651,19 +1651,19 @@
       "default": "Kalender"
     },
     "text_cta_up_next": {
-      "default": "Bekijk je favoriete series verder en ga verder waar je gebleven was. Welke series volg je momenteel?"
+      "default": "Je series. Jouw tempo. Spring terug naar waar je gebleven was. Wat ben je momenteel aan het kijken?"
     },
     "text_cta_watchlist_released": {
-      "default": "Voeg films toe aan je watchlist en begin met het bouwen van een lijst met films die je wilt bekijken."
+      "default": "Bekijk het. Bewaar het. Kijk het later. Begin met het samenstellen van je persoonlijke filmcollectie."
     },
     "text_cta_upcoming": {
-      "default": "Je aankomende schema geeft nieuwe afleveringen weer die binnenkort uitkomen van series die je al volgt."
+      "default": "Je tijdlijn. Bekijk wat er volgende week uitkomt met een complete lijst van komende afleveringen die je interesseren."
     },
     "text_cta_calendar": {
-      "default": "Je aankomende schema toont nieuwe afleveringen die binnenkort uitkomen voor series die je volgt en aankomende films van je watchlist."
+      "default": "Je dierbare. Je tijdlijn. Bekijk wat er volgende week uitkomt met een complete lijst van komende afleveringen die je interesseren."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Voeg aankomende films toe aan je watchlist en bekijk welke binnenkort uitkomen."
+      "default": "Licht, camera… niets? Voeg titels toe aan je lijst en laat de binge beginnen!"
     },
     "text_cta_activity": {
       "default": "Blijf meer toevoegen van ons team."
@@ -1672,7 +1672,7 @@
       "default": "Begin met het markeren van je bekeken afleveringen en films als bekeken en bekijk hier je recente activiteit."
     },
     "text_cta_activity_list": {
-      "default": "Maak snel vrienden door het Trakt-team te volgen en te ontdekken wat ze bekijken."
+      "default": "Maak snel vrienden door het Trakt-team te volgen en te ontdekken wat zij aan het kijken zijn."
     },
     "link_text_browse_more": {
       "default": "Meer bekijken"

@@ -1651,28 +1651,28 @@
       "default": "Kalendarz"
     },
     "text_cta_up_next": {
-      "default": "Kontynuuj oglądanie ulubionych seriali i wznów odtwarzanie w dowolnym momencie. Jakie seriale śledzisz?"
+      "default": "Twoje seriale. Twoje tempo. Wróć dokładnie tam, gdzie skończyłeś. Co aktualnie oglądasz?"
     },
     "text_cta_watchlist_released": {
-      "default": "Dodaj filmy do swojej listy i zacznij budować listę filmów, które chcesz obejrzeć."
+      "default": "Zobacz to. Zapisz to. Obejrzyj później. Zacznij kuratorować swoją osobistą kolejkę filmową."
     },
     "text_cta_upcoming": {
-      "default": "Nadchodzący harmonogram zawiera nowe odcinki, które wkrótce zostaną wydane dla seriali, które już śledzisz."
+      "default": "Twoja oś czasu. Zobacz, co pojawi się w następnej kolejności, z pełną listą nadchodzących odcinków, które Cię interesują."
     },
     "text_cta_calendar": {
-      "default": "Twój nadchodzący harmonogram wyświetla nowe odcinki, które wkrótce zostaną wydane dla seriali, które śledzisz, oraz nadchodzące filmy z twojej listy."
+      "default": "Twój skarb. Twoja oś czasu. Zobacz, co pojawi się w następnej kolejności, z pełną listą nadchodzących odcinków, które Cię interesują."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Dodaj nadchodzące filmy do swojej listy i zobacz, które wkrótce się ukażą."
+      "default": "Światła, kamera… nic? Dodaj tytuły do swojej listy i rozpocznij binge-watching!"
     },
     "text_cta_activity": {
-      "default": "Dodaj więcej od naszego zespołu."
+      "default": "Dodawaj więcej od naszego zespołu."
     },
     "text_cta_personal_activity": {
-      "default": "Zacznij oznaczać obejrzane odcinki i filmy jako obejrzane i zobacz swoją ostatnią aktywność tutaj."
+      "default": "Zacznij oznaczać obejrzane odcinki i filmy jako obejrzane i zobacz tutaj swoją ostatnią aktywność."
     },
     "text_cta_activity_list": {
-      "default": "Szybko znajdź znajomych, obserwując zespół Trakt i odkrywaj, co oglądają."
+      "default": "Zacznij szybko nawiązywać znajomości, obserwując zespół Trakt i odkrywaj, co oglądają."
     },
     "link_text_browse_more": {
       "default": "Przeglądaj więcej"

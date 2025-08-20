@@ -4718,7 +4718,7 @@
       ]
     },
     "text_cta_up_next": {
-      "default": "Continue watching your favorite shows and pick up where you left off anytime. Which shows are you currently following?",
+      "default": "Your shows. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows.",
       "exclude": [
         "android",
@@ -4726,7 +4726,7 @@
       ]
     },
     "text_cta_watchlist_released": {
-      "default": "Add movies to your watchlist and start building a list of movies you want to watch.",
+      "default": "See it. Save it. Watch it later. Start curating your personal movie queue.",
       "description": "Call to action text shown in the Watchlist Released list, encouraging users to add released movies to their watchlist.",
       "exclude": [
         "android",
@@ -4734,7 +4734,7 @@
       ]
     },
     "text_cta_upcoming": {
-      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re already following.",
+      "default": "Your timeline. See what's dropping next with a full list of upcoming episodes you care about.",
       "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes.",
       "exclude": [
         "android",
@@ -4742,7 +4742,7 @@
       ]
     },
     "text_cta_calendar": {
-      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re following and upcoming movies from your watchlist.",
+      "default": "Your precious. Your timeline. See what’s dropping next with a full list of upcoming episodes you care about.",
       "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes and add upcoming movies to their watchlist.",
       "exclude": [
         "android",
@@ -4750,7 +4750,7 @@
       ]
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Add upcoming movies to your watchlist and see which ones are releasing soon.",
+      "default": "Lights, camera… nothing? Add titles to your watchlist and let the binge begin.",
       "description": "Call to action text shown in the Watchlist Unreleased list, encouraging users to add unreleased movies to their watchlist.",
       "exclude": [
         "android",
@@ -4767,7 +4767,7 @@
     },
     "text_cta_personal_activity": {
       "default": "Start marking your watched episodes and movies as watched and see your recent activity here.",
-      "description": "Call to action text shown in the personal activity list, encouraging users to mark their watched content.",
+      "description": "Watch it. Track it. Your viewing history updates in real time, right here.",
       "exclude": [
         "android",
         "ios"

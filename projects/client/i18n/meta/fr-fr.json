@@ -1651,28 +1651,28 @@
       "default": "Calendrier"
     },
     "text_cta_up_next": {
-      "default": "Continuez à regarder vos séries favorites et reprenez là où vous en étiez à tout moment. Quelles séries suivez-vous ?"
+      "default": "Vos séries. Votre rythme. Reprenez là où vous vous êtes arrêté. Que regardez-vous actuellement ?"
     },
     "text_cta_watchlist_released": {
-      "default": "Ajoutez des films à votre liste de souhaits et commencez à constituer une liste de films à voir."
+      "default": "Voyez-le. Enregistrez-le. Regardez-le plus tard. Commencez à créer votre liste de lecture personnelle."
     },
     "text_cta_upcoming": {
-      "default": "Votre programme à venir liste les nouveaux épisodes diffusés prochainement pour les séries que vous suivez déjà."
+      "default": "Votre fil d'actualité. Découvrez les nouveautés avec une liste complète des épisodes à venir qui vous intéressent."
     },
     "text_cta_calendar": {
-      "default": "Votre calendrier affiche les nouveaux épisodes prochainement diffusés des séries que vous suivez et les films à venir de votre liste de suivi."
+      "default": "Votre précieux. Votre fil d'actualité. Découvrez les nouveautés avec une liste complète des épisodes à venir qui vous intéressent."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Ajoutez des films à venir à votre liste de souhaits et découvrez lesquels sortent bientôt."
+      "default": "Moteur, action… rien ? Ajoutez des titres à votre liste de lecture et que le marathon commence !"
     },
     "text_cta_activity": {
-      "default": "Continuez d'ajouter plus de notre équipe."
+      "default": "Continuez à ajouter du contenu de notre équipe."
     },
     "text_cta_personal_activity": {
-      "default": "Commencez à marquer les épisodes et films que vous avez visionnés comme vus et consultez votre activité récente ici."
+      "default": "Commencez à marquer vos épisodes et films regardés et consultez votre activité récente ici."
     },
     "text_cta_activity_list": {
-      "default": "Commencez rapidement à vous faire des amis en suivant l'équipe Trakt et découvrez ce qu'ils regardent."
+      "default": "Commencez à vous faire des amis rapidement en suivant l'équipe Trakt et découvrez ce qu'ils regardent."
     },
     "link_text_browse_more": {
       "default": "Parcourir plus"

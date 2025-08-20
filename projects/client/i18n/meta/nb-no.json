@@ -1651,25 +1651,25 @@
       "default": "Kalender"
     },
     "text_cta_up_next": {
-      "default": "Fortsett å se favorittseriene dine og fortsett der du slapp når som helst. Hvilke serier følger du?"
+      "default": "Dine serier. Ditt tempo. Hopp tilbake akkurat der du slapp. Hva ser du på nå?"
     },
     "text_cta_watchlist_released": {
-      "default": "Legg til filmer på listen din og begynn å bygge en liste over filmer du vil se."
+      "default": "Se det. Lagre det. Se det senere. Begynn å kuratere din personlige filmkø."
     },
     "text_cta_upcoming": {
-      "default": "Din kommende timeplan viser nye episoder som kommer snart for serier du allerede følger."
+      "default": "Din tidslinje. Se hva som kommer neste gang med en full liste over kommende episoder du bryr deg om."
     },
     "text_cta_calendar": {
-      "default": "Din kommende tidsplan viser nye episoder som slippes snart for serier du følger og kommende filmer fra din liste."
+      "default": "Din dyrebar. Din tidslinje. Se hva som kommer neste gang med en full liste over kommende episoder du bryr deg om."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Legg til kommende filmer på listen din og se hvilke som kommer snart."
+      "default": "Lys, kamera… ingenting? Legg til titler i listen din og la bingingen begynne!"
     },
     "text_cta_activity": {
       "default": "Fortsett å legge til mer fra teamet vårt."
     },
     "text_cta_personal_activity": {
-      "default": "Begynn å merke de viste episodene og filmene som sett og se din siste aktivitet her."
+      "default": "Begynn å merke dine sett episoder og filmer som sett og se din siste aktivitet her."
     },
     "text_cta_activity_list": {
       "default": "Begynn å få venner raskt ved å følge Trakt-teamet og utforske hva de ser på."

@@ -1651,28 +1651,28 @@
       "default": "Calendario"
     },
     "text_cta_up_next": {
-      "default": "Continúe viendo sus series favoritas y retome donde lo dejó en cualquier momento. ¿Qué series está siguiendo?"
+      "default": "Tus series. A tu ritmo. Vuelve exactamente donde lo dejaste. ¿Qué estás viendo actualmente?"
     },
     "text_cta_watchlist_released": {
-      "default": "Añada películas a su lista de seguimiento y empiece a crear una lista de películas que quiere ver."
+      "default": "Mírala. Guárdala. Mírala más tarde. Empieza a crear tu lista personal de películas."
     },
     "text_cta_upcoming": {
-      "default": "Su calendario de estrenos muestra los nuevos episodios que se publicarán pronto de las series que ya sigue."
+      "default": "Tu cronología. Ve lo que se estrena a continuación con una lista completa de los episodios próximos que te importan."
     },
     "text_cta_calendar": {
-      "default": "Tu calendario muestra los nuevos episodios que se estrenan próximamente de las series que sigues y las películas próximas de tu lista de seguimiento."
+      "default": "Tu tesoro. Tu cronología. Ve lo que se estrena a continuación con una lista completa de los episodios próximos que te importan."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Añada películas próximas a su lista de seguimiento y vea cuáles se estrenan pronto."
+      "default": "¡Luces, cámara… nada? Añade títulos a tu lista y que empiece el maratón."
     },
     "text_cta_activity": {
       "default": "Sigue añadiendo más de nuestro equipo."
     },
     "text_cta_personal_activity": {
-      "default": "Comienza a marcar tus episodios y películas vistos como vistos y consulta tu actividad reciente aquí."
+      "default": "Empieza a marcar tus episodios y películas vistos y consulta tu actividad reciente aquí."
     },
     "text_cta_activity_list": {
-      "default": "Empieza a hacer amigos rápidamente siguiendo al Equipo Trakt y explora lo que están viendo."
+      "default": "Empieza a hacer amigos rápidamente siguiendo al equipo Trakt y explora lo que están viendo."
     },
     "link_text_browse_more": {
       "default": "Explorar más"

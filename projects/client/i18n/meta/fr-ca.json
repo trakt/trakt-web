@@ -1651,28 +1651,28 @@
       "default": "Calendrier"
     },
     "text_cta_up_next": {
-      "default": "Continuez à regarder vos séries préférées et reprenez où vous en étiez à tout moment. Quelles séries suivez-vous ?"
+      "default": "Vos séries. À votre rythme. Reprenez là où vous avez arrêté. Qu'est-ce que vous regardez en ce moment ?"
     },
     "text_cta_watchlist_released": {
-      "default": "Ajoutez des films à votre liste et commencez à créer une liste de films que vous voulez voir."
+      "default": "Voyez ça. Sauvegardez. Regardez plus tard. Créez votre liste de lecture personnelle."
     },
     "text_cta_upcoming": {
-      "default": "Votre horaire à venir liste les nouveaux épisodes qui sortent bientôt pour les séries que vous suivez déjà."
+      "default": "Votre fil d'actualité. Voyez ce qui s'en vient avec une liste complète des épisodes à venir qui vous intéressent."
     },
     "text_cta_calendar": {
-      "default": "Votre calendrier affiche les nouveaux épisodes des séries que vous suivez et les films à venir de votre liste de visionnement."
+      "default": "Votre précieux. Votre fil d'actualité. Voyez ce qui s'en vient avec une liste complète des épisodes à venir qui vous intéressent."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Ajoutez des films à venir à votre liste et voyez lesquels sortent bientôt."
+      "default": "Moteur, action… rien ? Ajoutez des titres à votre liste et que le visionnement commence !"
     },
     "text_cta_activity": {
-      "default": "Continuez d'en ajouter de notre équipe."
+      "default": "Ajoutez toujours du contenu de notre équipe."
     },
     "text_cta_personal_activity": {
       "default": "Commencez à marquer vos épisodes et films comme vus et consultez votre activité récente ici."
     },
     "text_cta_activity_list": {
-      "default": "Faites-vous vite des amis en suivant l'équipe Trakt et découvrez ce qu'ils regardent."
+      "default": "Faites-vous rapidement des amis en suivant l'équipe Trakt et voyez ce qu'ils regardent."
     },
     "link_text_browse_more": {
       "default": "Voir plus"

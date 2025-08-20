@@ -1651,28 +1651,28 @@
       "default": "Kalender"
     },
     "text_cta_up_next": {
-      "default": "Fortsæt med at se dine yndlingsserier, og fortsæt hvor du slap når som helst. Hvilke serier følger du?"
+      "default": "Dine serier. Dit tempo. Hop tilbage lige præcis hvor du slap. Hvad ser du lige nu?"
     },
     "text_cta_watchlist_released": {
-      "default": "Tilføj film til din liste, og begynd at bygge en liste over film, du vil se."
+      "default": "Se det. Gem det. Se det senere. Begynd at kuratere din personlige filmliste."
     },
     "text_cta_upcoming": {
-      "default": "Din kommende tidsplan viser nye episoder, der snart udkommer for serier, du allerede følger."
+      "default": "Din tidslinje. Se hvad der kommer næste gang med en fuld liste over kommende afsnit, du er interesseret i."
     },
     "text_cta_calendar": {
-      "default": "Din kommende tidsplan viser nye episoder, der snart udgives for serier, du følger, og kommende film fra din liste."
+      "default": "Din skat. Din tidslinje. Se hvad der kommer næste gang med en fuld liste over kommende afsnit, du er interesseret i."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Tilføj kommende film til din liste, og se hvilke der snart udkommer."
+      "default": "Lys, kamera… ingenting? Tilføj titler til din liste, og lad binget begynde!"
     },
     "text_cta_activity": {
       "default": "Bliv ved med at tilføje mere fra vores team."
     },
     "text_cta_personal_activity": {
-      "default": "Begynd at markere dine sete episoder og film som sete, og se din seneste aktivitet her."
+      "default": "Begynd at markere dine sete afsnit og film som sete, og se din seneste aktivitet her."
     },
     "text_cta_activity_list": {
-      "default": "Begynd at få venner hurtigt ved at følge Trakt-teamet og udforske hvad de ser."
+      "default": "Begynd at få venner hurtigt ved at følge Trakt-teamet og udforsk, hvad de ser."
     },
     "link_text_browse_more": {
       "default": "Se mere"

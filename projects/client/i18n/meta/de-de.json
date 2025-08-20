@@ -1651,28 +1651,28 @@
       "default": "Kalender"
     },
     "text_cta_up_next": {
-      "default": "Schau deine Lieblingsserien weiter und setze sie jederzeit dort fort, wo du aufgehört hast. Welche Serien verfolgst du gerade?"
+      "default": "Deine Serien. Dein Tempo. Steig genau dort wieder ein, wo du aufgehört hast. Was schaust du gerade?"
     },
     "text_cta_watchlist_released": {
-      "default": "Füge Filme zu deiner Watchlist hinzu und beginne, eine Liste von Filmen zu erstellen, die du sehen möchtest."
+      "default": "Ansehen. Speichern. Später ansehen. Starte mit der Erstellung deiner persönlichen Filmliste."
     },
     "text_cta_upcoming": {
-      "default": "Dein kommender Zeitplan listet bald erscheinende neue Episoden für Serien auf, denen du bereits folgst."
+      "default": "Deine Chronik. Sieh dir an, was als Nächstes kommt, mit einer vollständigen Liste der kommenden Episoden, die dich interessieren."
     },
     "text_cta_calendar": {
-      "default": "Dein kommender Zeitplan listet neue Episoden auf, die bald für die Serien erscheinen, denen du folgst, sowie kommende Filme von deiner Watchlist."
+      "default": "Dein Schatz. Deine Chronik. Sieh dir an, was als Nächstes kommt, mit einer vollständigen Liste der kommenden Episoden, die dich interessieren."
     },
     "text_cta_watchlist_unreleased": {
-      "default": "Füge kommende Filme zu deiner Watchlist hinzu und sieh, welche bald erscheinen."
+      "default": "Licht, Kamera… nichts? Füge deiner Liste Titel hinzu und lass das Binge-Watching beginnen!"
     },
     "text_cta_activity": {
-      "default": "Füge mehr von unserem Team hinzu."
+      "default": "Füge weiterhin Inhalte von unserem Team hinzu."
     },
     "text_cta_personal_activity": {
-      "default": "Beginne, deine gesehenen Episoden und Filme als gesehen zu markieren und sieh dir hier deine aktuelle Aktivität an."
+      "default": "Beginne, deine gesehenen Episoden und Filme als gesehen zu markieren und sieh dir hier deine aktuellen Aktivitäten an."
     },
     "text_cta_activity_list": {
-      "default": "Finde schnell Freunde, indem du dem Trakt-Team folgst und entdeckst, was sie sehen."
+      "default": "Finde schnell Freunde, indem du dem Trakt-Team folgst und entdeckst, was sie sich ansehen."
     },
     "link_text_browse_more": {
       "default": "Mehr ansehen"
