@@ -3812,14 +3812,6 @@
         "ios"
       ]
     },
-    "button_text_add_comment": {
-      "default": "Add Comment",
-      "description": "Text for the button that allows users to add a new comment.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_add_comment": {
       "default": "Add Comment",
       "description": "Aria-label for the button that allows users to add a new comment.",
