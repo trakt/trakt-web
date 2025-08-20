@@ -24,7 +24,6 @@
       "default": "Upcoming Schedule",
       "description": "Title for lists containing upcoming episodes. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -85,7 +84,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -93,7 +91,6 @@
       "default": "Continue Watching",
       "description": "Title for lists containing the next episodes and in progress movies. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -106,7 +103,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -135,7 +131,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -175,7 +170,6 @@
       "default": "Watchlist",
       "description": "Text for the button that allows users to add/remove a movie or show to/from their watchlist.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -183,7 +177,6 @@
       "default": "Mark as Watched",
       "description": "Text for the button that allows users to mark a movie, episode, or show as watched.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -199,7 +192,6 @@
       "default": "Watch again",
       "description": "Text for the button that allows users to mark a movie, episode, or show as re-watched.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -555,7 +547,6 @@
       "default": "Search shows & movies...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -563,7 +554,6 @@
       "default": "Join Trakt",
       "description": "Text for the Trakt login button. This should be a short and concise message that indicates what users can do.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -651,7 +641,6 @@
       "default": "Trending",
       "description": "Title for lists containing trending movies or shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -659,7 +648,6 @@
       "default": "Recommended",
       "description": "Title for lists containing recommended movies or shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -667,7 +655,6 @@
       "default": "Anticipated",
       "description": "Title for lists containing anticipated movies or shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -715,7 +702,6 @@
       "default": "Popular",
       "description": "Title for lists containing popular movies or shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -739,7 +725,6 @@
       "default": "Movies",
       "description": "Title for the movies page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -763,7 +748,6 @@
       "default": "Shows",
       "description": "Title for the shows page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -787,7 +771,6 @@
       "default": "Home",
       "description": "Title for the homepage.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -808,7 +791,6 @@
       "default": "Log out of Trakt",
       "description": "Text for the logout button.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -824,7 +806,6 @@
       "default": "Coming Soon",
       "description": "Title for lists containing watchlisted movies that are coming soon. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -840,7 +821,6 @@
       "default": "Related Movies",
       "description": "Title for lists containing related movies. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -848,7 +828,6 @@
       "default": "Related Shows",
       "description": "Title for lists containing related shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1188,7 +1167,6 @@
       "default": "Lists",
       "description": "Title for the lists page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1196,7 +1174,6 @@
       "default": "Your Shows",
       "description": "Title for lists containing shows in the user's watchlist. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1204,7 +1181,6 @@
       "default": "Your Movies",
       "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1906,7 +1882,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1914,7 +1889,6 @@
       "default": "Seasons",
       "description": "Title for lists containing seasons of a show. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1927,7 +1901,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1935,7 +1908,6 @@
       "default": "Specials",
       "description": "Text for the specials season of a show. This should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1964,7 +1936,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2110,7 +2081,6 @@
       "default": "Actors",
       "description": "Title for lists containing actors of a movie, show, or episode. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2134,7 +2104,6 @@
       "default": "Trending Shows",
       "description": "Title for lists containing trending shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2142,7 +2111,6 @@
       "default": "Trending Movies",
       "description": "Title for lists containing trending movies. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2322,7 +2290,6 @@
       "default": "Favorite Movies",
       "description": "Title for lists containing a user's favorite movies. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2330,7 +2297,6 @@
       "default": "Favorite Shows",
       "description": "Title for lists containing a user's favorite shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2354,7 +2320,6 @@
       "default": "Stream on",
       "description": "Text for the button that allows users to stream a movie or show on an external service.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2396,10 +2361,9 @@
       ]
     },
     "list_title_popular_lists": {
-      "default": "Popular lists",
+      "default": "Popular Lists",
       "description": "Title for lists containing popular lists of movies or shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2420,7 +2384,6 @@
       "default": "by",
       "description": "Text used to indicate the creator of a list.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2454,7 +2417,6 @@
       "default": "No comments yet.",
       "description": "Placeholder text shown when there are no comments in a list.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2462,7 +2424,6 @@
       "default": "Review by",
       "description": "Text used to indicate the author of a review.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2470,7 +2431,6 @@
       "default": "Shout by",
       "description": "Text used to indicate the author of a shout.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2622,7 +2582,6 @@
       "default": "Personal",
       "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2720,7 +2679,6 @@
       "default": "Recently Watched",
       "description": "Title for lists containing recently watched movies or episodes. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2736,7 +2694,6 @@
       "default": "Available Now",
       "description": "Title for lists containing watchlisted movies that are currently available to watch. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2865,7 +2822,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2905,7 +2861,6 @@
       "default": "Watch count",
       "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2947,7 +2902,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2976,7 +2930,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2984,7 +2937,6 @@
       "default": "Comments",
       "description": "Title for lists containing comments on a movie, show, or episode. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3196,7 +3148,6 @@
       "default": "Retry",
       "description": "Text for the retry button. Used for things like error pages and failed authentications.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3390,7 +3341,6 @@
       "default": "The activation was denied, expired, or something unforeseeable happened. Please try again.",
       "description": "Header for the device authentication try again message.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3398,7 +3348,6 @@
       "default": "Scan the QR code, or sign in at:",
       "description": "Header for the device authentication QR code instruction message.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3406,7 +3355,6 @@
       "default": "and enter the following code:",
       "description": "Header for the device authentication code instruction message.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3913,7 +3861,6 @@
       "default": "Extras",
       "description": "Title for lists containing extras (like trailers) for movies or shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4046,7 +3993,6 @@
       "default": "Search",
       "description": "Title for the search page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4112,7 +4058,6 @@
       "default": "View profile",
       "description": "Text for the link that allows users to view their profile.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5066,7 +5011,6 @@
       "default": "Something went wrong",
       "description": "Title for the unexpected error page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5074,7 +5018,6 @@
       "default": "Uh oh... Something unexpected happened. If this keeps happening, please <a>create a new issue</a>.",
       "description": "Text shown on the unexpected error page, informing the user that something went wrong and providing a link to create a new issue.",
       "exclude": [
-        "android",
         "ios"
       ]
     }
