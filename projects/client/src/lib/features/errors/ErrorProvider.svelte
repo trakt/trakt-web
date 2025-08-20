@@ -4,6 +4,7 @@
   import ErrorLockedAccountPage from "$lib/pages/errors/ErrorLockedAccountPage.svelte";
   import ErrorServicePage from "$lib/pages/errors/ErrorServicePage.svelte";
   import UnexpectedErrorPage from "$lib/pages/errors/UnexpectedErrorPage.svelte";
+  import * as Sentry from "@sentry/sveltekit";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { mapToWellKnownError } from "./_internal/mapToWellKnownError";
@@ -47,7 +48,11 @@
       return;
     }
 
-    // FIXME: add sentry
+    Sentry.captureException(error, {
+      tags: {
+        type: "ErrorProvider",
+      },
+    });
     unexpectedError.set(error);
   }}
 />
