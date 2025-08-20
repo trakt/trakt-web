@@ -9,12 +9,12 @@ import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/h
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
 import * as Sentry from '@sentry/sveltekit';
 
+import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 Sentry.init({
-  dsn:
-    'https://7c03bc5bf58eb8ceb23801702a91954f@o4509870904639488.ingest.de.sentry.io/4509870926463056',
+  dsn: SENTRY_DSN,
   tracesSampleRate: 1,
   enableLogs: true,
 });

@@ -1,9 +1,9 @@
+import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import * as Sentry from '@sentry/sveltekit';
 import { handleErrorWithSentry, replayIntegration } from '@sentry/sveltekit';
 
 Sentry.init({
-  dsn:
-    'https://7c03bc5bf58eb8ceb23801702a91954f@o4509870904639488.ingest.de.sentry.io/4509870926463056',
+  dsn: SENTRY_DSN,
 
   tracesSampleRate: 1.0,
 
