@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Dein kommender Zeitplan listet bald erscheinende neue Episoden für Serien auf, denen du bereits folgst."
     },
+    "text_cta_calendar": {
+      "default": "Dein kommender Zeitplan listet neue Episoden auf, die bald für die Serien erscheinen, denen du folgst, sowie kommende Filme von deiner Watchlist."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Füge kommende Filme zu deiner Watchlist hinzu und sieh, welche bald erscheinen."
     },
     "text_cta_activity": {
       "default": "Füge mehr von unserem Team hinzu."
+    },
+    "text_cta_personal_activity": {
+      "default": "Beginne, deine gesehenen Episoden und Filme als gesehen zu markieren und sieh dir hier deine aktuelle Aktivität an."
     },
     "text_cta_activity_list": {
       "default": "Finde schnell Freunde, indem du dem Trakt-Team folgst und entdeckst, was sie sehen."

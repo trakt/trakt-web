@@ -1,7 +1,6 @@
 <script lang="ts">
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import ReleasedIcon from "../icons/ReleasedIcon.svelte";
   import UnreleasedIcon from "../icons/UnreleasedIcon.svelte";
@@ -10,6 +9,7 @@
   import type { Cta } from "../models/Cta";
   import CtaListCard from "./CtaListCard.svelte";
   import MediaCtaButton from "./MediaCtaButton.svelte";
+  import { useCtaCardVariant } from "./useCtaCardVariant";
   import { usePlaceholderCover } from "./usePlaceholderCover";
 
   const {
@@ -20,17 +20,13 @@
     intl: CtaItemIntl;
   } = $props();
 
-  const type = $derived(
-    cta === "up-next" || cta === "upcoming" ? "episode" : "movie",
-  );
-
-  const defaultVariant = $derived(useDefaultCardVariant(type));
+  const defaultVariant = $derived(useCtaCardVariant(cta));
   const { cover } = $derived(usePlaceholderCover(cta));
 </script>
 
 {#snippet ctaIcon()}
   <div class="trakt-cta-icon">
-    {#if cta === "up-next"}
+    {#if cta === "up-next" || cta === "personal-activity"}
       <UpNextIcon />
     {/if}
 
@@ -38,7 +34,7 @@
       <ReleasedIcon />
     {/if}
 
-    {#if cta === "upcoming"}
+    {#if cta === "upcoming" || cta === "calendar"}
       <UpcomingIcon />
     {/if}
 

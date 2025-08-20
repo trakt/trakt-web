@@ -1659,11 +1659,17 @@
     "text_cta_upcoming": {
       "default": "Il tuo programma in arrivo elenca i nuovi episodi in uscita a breve per le serie TV che stai già seguendo."
     },
+    "text_cta_calendar": {
+      "default": "Il tuo programma mostra i nuovi episodi in uscita a breve delle serie che stai seguendo e i film in arrivo dalla tua lista."
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Aggiungi i film in uscita alla tua lista e scopri quali usciranno presto."
     },
     "text_cta_activity": {
       "default": "Continua ad aggiungere altro dal nostro team."
+    },
+    "text_cta_personal_activity": {
+      "default": "Inizia a contrassegnare gli episodi e i film che hai visto come visti e visualizza qui la tua attività recente."
     },
     "text_cta_activity_list": {
       "default": "Inizia a fare amicizia velocemente seguendo il Team Trakt ed esplora cosa stanno guardando."

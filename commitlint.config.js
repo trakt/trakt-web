@@ -45,6 +45,7 @@ module.exports = {
         'cover',
         'comment',
         'contrib',
+        'cta',
         'dialog',
         'ds',
         'drop',

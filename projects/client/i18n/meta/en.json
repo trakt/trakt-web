@@ -4788,6 +4788,14 @@
         "ios"
       ]
     },
+    "text_cta_calendar": {
+      "default": "Your upcoming schedule lists new episodes releasing soon for shows you’re following and upcoming movies from your watchlist.",
+      "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes and add upcoming movies to their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_cta_watchlist_unreleased": {
       "default": "Add upcoming movies to your watchlist and see which ones are releasing soon.",
       "description": "Call to action text shown in the Watchlist Unreleased list, encouraging users to add unreleased movies to their watchlist.",
@@ -4799,6 +4807,14 @@
     "text_cta_activity": {
       "default": "Keep adding more from our team.",
       "description": "Call to action text shown in the social activity list, encouraging users to follow members of the Trakt Team.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_personal_activity": {
+      "default": "Start marking your watched episodes and movies as watched and see your recent activity here.",
+      "description": "Call to action text shown in the personal activity list, encouraging users to mark their watched content.",
       "exclude": [
         "android",
         "ios"

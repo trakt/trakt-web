@@ -10,20 +10,26 @@ export const CtaItemIntlProvider: CtaItemIntl = {
         return m.text_cta_watchlist_released();
       case 'upcoming':
         return m.text_cta_upcoming();
+      case 'calendar':
+        return m.text_cta_calendar();
       case 'unreleased':
         return m.text_cta_watchlist_unreleased();
       case 'activity':
-        return m.text_cta_activity();
+        return m.text_cta_personal_activity();
+      case 'personal-activity':
+        return m.text_cta_personal_activity();
     }
   },
   cta: {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta) {
         case 'up-next':
+        case 'personal-activity':
           return m.link_text_browse_more();
         case 'released':
           return m.link_text_browse_more();
         case 'upcoming':
+        case 'calendar':
           return m.link_text_explore_more();
         case 'unreleased':
           return m.link_text_explore_more();
@@ -32,10 +38,12 @@ export const CtaItemIntlProvider: CtaItemIntl = {
     label: ({ cta }: CtaLinkMeta) => {
       switch (cta) {
         case 'up-next':
+        case 'personal-activity':
           return m.link_label_browse_shows();
         case 'released':
           return m.link_label_browse_movies();
         case 'upcoming':
+        case 'calendar':
           return m.link_label_explore_shows();
         case 'unreleased':
           return m.link_label_explore_movies();
