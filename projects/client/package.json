@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "@inlang/paraglide-js": "^2.2.0",
+    "@sentry/sveltekit": "^10.5.0",
     "@tanstack/svelte-query": "^5.83.0",
     "@tanstack/svelte-query-devtools": "^5.83.0",
     "@tanstack/svelte-query-persist-client": "^5.83.0",
