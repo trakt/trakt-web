@@ -1551,9 +1551,6 @@
     "button_label_react": {
       "default": "{reaction}でリアクション"
     },
-    "text_zero_reactions": {
-      "default": "0 件のリアクション"
-    },
     "tag_text_movies": {
       "default": "映画"
     },
@@ -1706,9 +1703,6 @@
     },
     "header_comment_reactions": {
       "default": "コメントへの反応"
-    },
-    "button_text_react": {
-      "default": "反応"
     },
     "button_label_close_reaction": {
       "default": "閉じる"

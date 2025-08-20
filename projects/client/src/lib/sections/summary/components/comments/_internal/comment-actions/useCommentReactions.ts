@@ -5,7 +5,9 @@ import {
   type Reaction,
 } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { derived, type Readable } from 'svelte/store';
+import type { ReactionDistribution } from '../models/ReactionDistribution.ts';
+import type { ReactionSummary } from '../models/ReactionSummary.ts';
 
 type UseCommentReactionsProps = {
   id: number;
@@ -13,7 +15,15 @@ type UseCommentReactionsProps = {
 
 const PREVIEW_LIMIT = 3;
 
-export function useCommentReactions({ id }: UseCommentReactionsProps) {
+type CommentReactions = {
+  currentReaction: Readable<Reaction | null>;
+  summary: Readable<ReactionSummary>;
+  isLoading: Readable<boolean>;
+};
+
+export function useCommentReactions(
+  { id }: UseCommentReactionsProps,
+): CommentReactions {
   const { reactions } = useUser();
 
   const summary = useQuery(commentReactionsQuery({ id }));
@@ -26,25 +36,26 @@ export function useCommentReactions({ id }: UseCommentReactionsProps) {
       if (!$summary.data) {
         return {
           count: 0,
-          topCount: 0,
           top: [],
-          distribution: {},
+          distribution: {} as ReactionDistribution,
         };
       }
 
       const sortedDistribution = Object
         .entries($summary.data.distribution)
-        .sort(([_key, a], [_key2, b]) => b - a) as Array<[Reaction, number]>;
+        .sort(([_key, a], [_key2, b]) => b - a);
 
       const top = sortedDistribution
         .slice(0, PREVIEW_LIMIT)
-        .filter(([_, count]) => count > 0);
+        .filter(([_, count]) => count > 0)
+        .map(([reaction]) => reaction) as Array<Reaction>;
 
       return {
         count: $summary.data.count,
-        distribution: Object.fromEntries(sortedDistribution),
+        distribution: Object.fromEntries(
+          sortedDistribution,
+        ) as ReactionDistribution,
         top,
-        topCount: top.reduce((sum, [_, count]) => sum + count, 0),
       };
     }),
     isLoading: derived(summary, toLoadingState),
