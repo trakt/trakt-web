@@ -1171,17 +1171,19 @@
       ]
     },
     "list_title_watchlist_shows": {
-      "default": "Your Shows",
+      "default": "Shows Watchlist",
       "description": "Title for lists containing shows in the user's watchlist. This title should be as short and concise as possible.",
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "list_title_watchlist_movies": {
-      "default": "Your Movies",
+      "default": "Movies Watchlist",
       "description": "Title for lists containing movies in the user's watchlist. This title should be as short and concise as possible.",
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "button_label_stream_on": {
