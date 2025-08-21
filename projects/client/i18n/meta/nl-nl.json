@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Je watchlist is leeg. Voeg series toe om je verbeelding te voeden."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Ontdek tv-series en personaliseer je planning."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Begin met kijken en voeg series toe aan je kijklijst."
-    },
     "list_placeholder_released_movies": {
       "default": "Voeg films toe aan je kijklijst en mis nooit een première."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Activiteit"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "De gebruikers die je volgt hebben nog niets gezien. Of misschien volg je nog niemand?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Je hebt nog niets als gezien gemarkeerd."
     },
     "button_text_social": {
       "default": "Sociaal"

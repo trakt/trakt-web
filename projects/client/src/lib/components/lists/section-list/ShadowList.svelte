@@ -1,10 +1,8 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { onMount, type Snippet } from "svelte";
@@ -133,13 +131,9 @@
           {/each}
 
           {#if ctaItem && items.length <= CTA_CUT_OFF}
-            <RenderForFeature flag={FeatureFlag.Cta}>
-              {#snippet enabled()}
-                {#key `shadow-list-${id}_cta`}
-                  {@render ctaItem()}
-                {/key}
-              {/snippet}
-            </RenderForFeature>
+            {#key `shadow-list-${id}_cta`}
+              {@render ctaItem()}
+            {/key}
           {/if}
         </div>
       {:else if empty != null && $isMounted}

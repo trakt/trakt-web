@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Deine Wunschliste ist leer. Füge Serien hinzu, um deiner Fantasie Flügel zu verleihen."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Entdecke TV-Serien und individualisiere deinen Programm-Plan."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Fang an zu schauen und füge Serien zu deiner Wunschliste hinzu."
-    },
     "list_placeholder_released_movies": {
       "default": "Füge Filme zu deiner Wunschliste hinzu und verpasse keine Premiere mehr."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Aktivität"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Die Nutzer, denen du folgst, haben noch nichts gesehen. Oder vielleicht folgst du noch niemandem?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Du hast noch nichts als gesehen markiert."
     },
     "button_text_social": {
       "default": "Sozial"

@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Din to-watch är tom. Lägg till serier för att mata din fantasi."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Utforska TV-serier och anpassa ditt schema."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Börja titta och lägg till serier i din to-watch."
-    },
     "list_placeholder_released_movies": {
       "default": "Lägg till filmer i din to-watch och missa aldrig en premiär."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Aktivitet"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Användarna du följer har inte sett något än. Eller kanske följer du ingen ännu?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Du har inte markerat något som sett ännu."
     },
     "button_text_social": {
       "default": "Socialt"

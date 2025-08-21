@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Your watchlist is looking a bit bare, mate. Add a show worth a binge!"
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Explore TV series and personalise your schedule."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Start watching and add shows to your watchlist."
-    },
     "list_placeholder_released_movies": {
       "default": "Add movies to your watchlist and never miss a premiere."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Activity"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "The users you follow haven't seen anything yet. Or maybe you're not following anyone yet?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "You haven't marked anything as watched yet."
     },
     "button_text_social": {
       "default": "Social"

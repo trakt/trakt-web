@@ -2,8 +2,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -49,12 +47,6 @@
   {/snippet}
 
   {#snippet empty()}
-    <RenderForFeature flag={FeatureFlag.Cta}>
-      {#snippet enabled()}
-        <CtaItem cta="up-next" variant="placeholder" />
-      {/snippet}
-
-      <p>{m.list_placeholder_up_next_empty()}</p>
-    </RenderForFeature>
+    <CtaItem cta="up-next" variant="placeholder" />
   {/snippet}
 </DrillableMediaList>
