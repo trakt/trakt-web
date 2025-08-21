@@ -849,7 +849,7 @@
     "header_on_demand": {
       "default": "On Demand"
     },
-    "button_label_popup_media": {
+    "button_label_popup_menu": {
       "default": "Popup-meny för {title}"
     },
     "list_title_popular_lists": {
@@ -1338,6 +1338,9 @@
     "input_prompt_rename_list": {
       "default": "Byt namn på din lista"
     },
+    "button_text_rename_list": {
+      "default": "Byt namn"
+    },
     "button_label_rename_list": {
       "default": "Byt namn på din lista {name}"
     },
@@ -1427,6 +1430,9 @@
     },
     "image_alt_list_preview_poster": {
       "default": "Affisch för en post i {title}"
+    },
+    "button_text_delete_list": {
+      "default": "Ta bort"
     },
     "button_label_delete_list": {
       "default": "Ta bort din lista {name}"

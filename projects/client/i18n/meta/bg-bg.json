@@ -849,7 +849,7 @@
     "header_on_demand": {
       "default": "При поискване"
     },
-    "button_label_popup_media": {
+    "button_label_popup_menu": {
       "default": "Изскачащо меню за {title}"
     },
     "list_title_popular_lists": {
@@ -1338,6 +1338,9 @@
     "input_prompt_rename_list": {
       "default": "Преименувайте списъка си"
     },
+    "button_text_rename_list": {
+      "default": "Преименуване"
+    },
     "button_label_rename_list": {
       "default": "Преименувайте списъка си {name}"
     },
@@ -1427,6 +1430,9 @@
     },
     "image_alt_list_preview_poster": {
       "default": "Плакат за запис в {title}"
+    },
+    "button_text_delete_list": {
+      "default": "Изтриване"
     },
     "button_label_delete_list": {
       "default": "Изтрийте списъка си {name}"
