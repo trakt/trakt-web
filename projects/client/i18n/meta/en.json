@@ -2438,7 +2438,6 @@
       "default": "Social Activity",
       "description": "Title for lists containing recently watched items of the profiles the user follows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
