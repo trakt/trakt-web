@@ -2331,9 +2331,9 @@
         "ios"
       ]
     },
-    "button_label_popup_media": {
+    "button_label_popup_menu": {
       "default": "Pop up menu for {title}",
-      "description": "Aria-label for the button that opens a popup menu for a movie, show, or episode.",
+      "description": "Aria-label for the button that opens a popup menu for a movie, show, episode, or list.",
       "variables": {
         "title": {
           "type": "string"
@@ -3811,6 +3811,14 @@
         "ios"
       ]
     },
+    "button_text_rename_list": {
+      "default": "Rename",
+      "description": "Aria-label for the button that allows users to rename a list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_label_rename_list": {
       "default": "Rename your list {name}",
       "description": "Aria-label for the button that allows users to rename a list.",
@@ -4068,6 +4076,14 @@
           "type": "string"
         }
       },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_delete_list": {
+      "default": "Delete",
+      "description": "Aria-label for the button that allows users to delete a list.",
       "exclude": [
         "android",
         "ios"

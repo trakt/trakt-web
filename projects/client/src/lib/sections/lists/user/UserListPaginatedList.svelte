@@ -48,7 +48,7 @@
   {/snippet}
 
   {#snippet badge()}
-    <ListActions {list} variant="all" />
+    <ListActions {list} />
   {/snippet}
 
   {#snippet actions()}

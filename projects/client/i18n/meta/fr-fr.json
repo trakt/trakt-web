@@ -849,7 +849,7 @@
     "header_on_demand": {
       "default": "À la demande"
     },
-    "button_label_popup_media": {
+    "button_label_popup_menu": {
       "default": "Menu contextuel pour {title}"
     },
     "list_title_popular_lists": {
@@ -1338,6 +1338,9 @@
     "input_prompt_rename_list": {
       "default": "Renommer votre liste"
     },
+    "button_text_rename_list": {
+      "default": "Renommer"
+    },
     "button_label_rename_list": {
       "default": "Renommer votre liste {name}"
     },
@@ -1427,6 +1430,9 @@
     },
     "image_alt_list_preview_poster": {
       "default": "Affiche pour une entrée dans {title}"
+    },
+    "button_text_delete_list": {
+      "default": "Supprimer"
     },
     "button_label_delete_list": {
       "default": "Supprimer votre liste {name}"

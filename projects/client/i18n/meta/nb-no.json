@@ -849,7 +849,7 @@
     "header_on_demand": {
       "default": "On Demand"
     },
-    "button_label_popup_media": {
+    "button_label_popup_menu": {
       "default": "Popup-meny for {title}"
     },
     "list_title_popular_lists": {
@@ -1338,6 +1338,9 @@
     "input_prompt_rename_list": {
       "default": "Endre navnet på listen din"
     },
+    "button_text_rename_list": {
+      "default": "Endre navn"
+    },
     "button_label_rename_list": {
       "default": "Endre navnet på listen din {name}"
     },
@@ -1427,6 +1430,9 @@
     },
     "image_alt_list_preview_poster": {
       "default": "Plakat for en oppføring i {title}"
+    },
+    "button_text_delete_list": {
+      "default": "Slett"
     },
     "button_label_delete_list": {
       "default": "Slett listen din {name}"

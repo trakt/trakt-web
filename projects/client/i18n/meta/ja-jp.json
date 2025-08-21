@@ -849,7 +849,7 @@
     "header_on_demand": {
       "default": "オンデマンド"
     },
-    "button_label_popup_media": {
+    "button_label_popup_menu": {
       "default": "{title} のポップアップメニュー"
     },
     "list_title_popular_lists": {
@@ -1338,6 +1338,9 @@
     "input_prompt_rename_list": {
       "default": "リストの名前を変更"
     },
+    "button_text_rename_list": {
+      "default": "名前を変更"
+    },
     "button_label_rename_list": {
       "default": "リストの名前を変更 {name}"
     },
@@ -1427,6 +1430,9 @@
     },
     "image_alt_list_preview_poster": {
       "default": "{title} のリストのエントリのポスター"
+    },
+    "button_text_delete_list": {
+      "default": "削除"
     },
     "button_label_delete_list": {
       "default": "リスト {name} を削除"
