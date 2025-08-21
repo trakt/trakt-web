@@ -876,6 +876,9 @@
     "text_shout_by": {
       "default": "Shout by"
     },
+    "text_reply_by": {
+      "default": "Reply by"
+    },
     "text_deleted_username": {
       "default": "Deleted"
     },
@@ -1770,6 +1773,72 @@
     },
     "list_placeholder_no_filter_results": {
       "default": "Bummer, no hits. Your filter may have been a little too selective."
+    },
+    "error_text_unexpected_error_short": {
+      "default": "Uh oh… Something unexpected happened. If this keeps happening, please contact Trakt support."
+    },
+    "page_title_where_to_watch": {
+      "default": "Where to Watch"
+    },
+    "list_title_streaming_subscription": {
+      "default": "Subscription"
+    },
+    "list_title_streaming_free": {
+      "default": "Free"
+    },
+    "list_title_streaming_purchase": {
+      "default": "Purchase"
+    },
+    "list_title_streaming_rent": {
+      "default": "Rent"
+    },
+    "list_title_streaming_favorite": {
+      "default": "Favourite"
+    },
+    "list_title_recently_searched_shows": {
+      "default": "Recently Searched Shows"
+    },
+    "list_title_recently_searched_movies": {
+      "default": "Recently Searched Movies"
+    },
+    "text_overview_placeholder": {
+      "default": "Overview is not available."
+    },
+    "text_info_signed_in": {
+      "default": "You have been signed in."
+    },
+    "text_info_signed_out": {
+      "default": "You have been signed out."
+    },
+    "text_info_history_added": {
+      "default": "Added to watched history."
+    },
+    "text_info_history_removed": {
+      "default": "Removed from watched history."
+    },
+    "text_info_watchlist_added": {
+      "default": "Added to watchlist."
+    },
+    "text_info_watchlist_removed": {
+      "default": "Removed from watchlist."
+    },
+    "button_text_long_press_for_more": {
+      "default": "Long press for more"
+    },
+    "list_placeholder_empty": {
+      "default": "There is nothing in this list."
+    },
+    "button_text_yes": {
+      "default": "Yes"
+    },
+    "button_text_cancel": {
+      "default": "Cancel"
+    },
+    "button_text_where_to_watch": {
+      "default": "Where to watch"
+    },
+    "button_text_no_services": {
+      "default": "No services"
     }
   }
 }
