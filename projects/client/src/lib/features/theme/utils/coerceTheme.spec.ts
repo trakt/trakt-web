@@ -3,8 +3,12 @@ import { Theme } from '../models/Theme.ts';
 import { coerceTheme } from './coerceTheme.ts';
 
 describe('util: coerceTheme', () => {
+  it('should return the default theme', () => {
+    expect(coerceTheme(undefined)).toBe(Theme.Dark);
+  });
+
   it('should return the system theme', () => {
-    expect(coerceTheme(undefined)).toBe(Theme.System);
+    expect(coerceTheme('system')).toBe(Theme.System);
   });
 
   it('should return the light theme', () => {

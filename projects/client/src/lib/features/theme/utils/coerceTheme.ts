@@ -7,6 +7,7 @@ export const coerceTheme = (theme: string | undefined): Theme => {
     case Theme.System:
       return theme;
     default:
-      return Theme.System;
+      // FIXME: change default to Theme.System when we have a better light mode
+      return Theme.Dark;
   }
 };
