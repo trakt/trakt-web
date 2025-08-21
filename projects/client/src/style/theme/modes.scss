@@ -29,6 +29,16 @@
   --list-poster-shadow: -4px 0px 16px 0px rgba(0, 0, 0, 0.25);
 
   /*
+   * Cta
+   */
+  --color-cta-highlight-color: var(--purple-300);
+  --color-cta-background-gradient: linear-gradient(258.73deg,
+      color-mix(in srgb,
+        var(--cm-gradient-stop-cta) 80%,
+        transparent) 0%,
+      var(--shade-100) 53.05%);
+
+  /*
    * List
    */
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
@@ -75,8 +85,6 @@
   .trakt-cover-image {
     opacity: 0.75;
   }
-
-
 
   /**
    * Now playing
@@ -137,6 +145,16 @@
   --color-card-background: var(--shade-920);
   --color-official-list-background: var(--purple-800);
   --list-poster-shadow: -8px 0px 16px 0px rgba(0, 0, 0, 0.56);
+
+  /*
+   * Cta
+   */
+  --color-cta-highlight-color: var(--purple-500);
+  --color-cta-background-gradient: linear-gradient(258.73deg,
+      color-mix(in srgb,
+        var(--cm-gradient-stop-cta) 80%,
+        transparent) 0%,
+      var(--shade-900) 53.05%);
 
   /*
    * List
