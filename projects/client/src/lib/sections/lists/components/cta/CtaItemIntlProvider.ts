@@ -15,7 +15,7 @@ export const CtaItemIntlProvider: CtaItemIntl = {
       case 'unreleased':
         return m.text_cta_watchlist_unreleased();
       case 'activity':
-        return m.text_cta_personal_activity();
+        return m.text_cta_activity();
       case 'personal-activity':
         return m.text_cta_personal_activity();
     }
