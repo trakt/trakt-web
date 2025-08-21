@@ -876,6 +876,9 @@
     "text_shout_by": {
       "default": "Strigăt de"
     },
+    "text_reply_by": {
+      "default": "Răspuns de"
+    },
     "text_deleted_username": {
       "default": "Șters"
     },
@@ -1770,6 +1773,72 @@
     },
     "list_placeholder_no_filter_results": {
       "default": "Păcat, nicio potrivire. Filtrul tău a fost poate un pic prea selectiv."
+    },
+    "error_text_unexpected_error_short": {
+      "default": "Oops… Ceva neașteptat s-a întâmplat. Dacă se întâmplă în continuare, contactează suportul Trakt."
+    },
+    "page_title_where_to_watch": {
+      "default": "Unde să vezi"
+    },
+    "list_title_streaming_subscription": {
+      "default": "Abonament"
+    },
+    "list_title_streaming_free": {
+      "default": "Gratuit"
+    },
+    "list_title_streaming_purchase": {
+      "default": "Cumpără"
+    },
+    "list_title_streaming_rent": {
+      "default": "Închiriază"
+    },
+    "list_title_streaming_favorite": {
+      "default": "Favorite"
+    },
+    "list_title_recently_searched_shows": {
+      "default": "Seriale căutate recent"
+    },
+    "list_title_recently_searched_movies": {
+      "default": "Filme căutate recent"
+    },
+    "text_overview_placeholder": {
+      "default": "Descrierea nu este disponibilă."
+    },
+    "text_info_signed_in": {
+      "default": "Te-ai autentificat."
+    },
+    "text_info_signed_out": {
+      "default": "Te-ai delogat."
+    },
+    "text_info_history_added": {
+      "default": "Adăugat în istoric."
+    },
+    "text_info_history_removed": {
+      "default": "Eliminat din istoric."
+    },
+    "text_info_watchlist_added": {
+      "default": "Adăugat în lista de urmărire."
+    },
+    "text_info_watchlist_removed": {
+      "default": "Eliminat din lista de urmărire."
+    },
+    "button_text_long_press_for_more": {
+      "default": "Apăsați lung pentru mai multe"
+    },
+    "list_placeholder_empty": {
+      "default": "Nu este nimic în această listă."
+    },
+    "button_text_yes": {
+      "default": "Da"
+    },
+    "button_text_cancel": {
+      "default": "Anulează"
+    },
+    "button_text_where_to_watch": {
+      "default": "Unde să vezi"
+    },
+    "button_text_no_services": {
+      "default": "Fără servicii"
     }
   }
 }

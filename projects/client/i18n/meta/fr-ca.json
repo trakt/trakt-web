@@ -876,6 +876,9 @@
     "text_shout_by": {
       "default": "Crié par"
     },
+    "text_reply_by": {
+      "default": "Réponse de"
+    },
     "text_deleted_username": {
       "default": "Supprimé"
     },
@@ -1770,6 +1773,72 @@
     },
     "list_placeholder_no_filter_results": {
       "default": "Zut, pas de résultat. Ton filtre est peut-être un peu trop pointilleux."
+    },
+    "error_text_unexpected_error_short": {
+      "default": "Oups! Quelque chose d'inattendu est arrivé. Si ça continue, contactez le soutien technique de Trakt!"
+    },
+    "page_title_where_to_watch": {
+      "default": "Où regarder"
+    },
+    "list_title_streaming_subscription": {
+      "default": "Abonnement"
+    },
+    "list_title_streaming_free": {
+      "default": "Gratuit"
+    },
+    "list_title_streaming_purchase": {
+      "default": "Achat"
+    },
+    "list_title_streaming_rent": {
+      "default": "Location"
+    },
+    "list_title_streaming_favorite": {
+      "default": "Préférés"
+    },
+    "list_title_recently_searched_shows": {
+      "default": "Séries recherchées récemment"
+    },
+    "list_title_recently_searched_movies": {
+      "default": "Films recherchés récemment"
+    },
+    "text_overview_placeholder": {
+      "default": "Pas de résumé disponible."
+    },
+    "text_info_signed_in": {
+      "default": "Connecté!"
+    },
+    "text_info_signed_out": {
+      "default": "Déconnecté!"
+    },
+    "text_info_history_added": {
+      "default": "Ajouté à l'historique."
+    },
+    "text_info_history_removed": {
+      "default": "Enlevé de l'historique."
+    },
+    "text_info_watchlist_added": {
+      "default": "Ajouté à la liste «À voir»."
+    },
+    "text_info_watchlist_removed": {
+      "default": "Enlevé de la liste «À voir»."
+    },
+    "button_text_long_press_for_more": {
+      "default": "Appuyer longtemps pour plus"
+    },
+    "list_placeholder_empty": {
+      "default": "Y'a rien ici!"
+    },
+    "button_text_yes": {
+      "default": "Oui"
+    },
+    "button_text_cancel": {
+      "default": "Annuler"
+    },
+    "button_text_where_to_watch": {
+      "default": "Où voir ça"
+    },
+    "button_text_no_services": {
+      "default": "Aucun service"
     }
   }
 }

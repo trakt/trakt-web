@@ -876,6 +876,9 @@
     "text_shout_by": {
       "default": "Skrig af"
     },
+    "text_reply_by": {
+      "default": "Svar fra"
+    },
     "text_deleted_username": {
       "default": "Slettet"
     },
@@ -1770,6 +1773,72 @@
     },
     "list_placeholder_no_filter_results": {
       "default": "Øv, ingen hits. Dit filter var måske lige en tand for selektivt."
+    },
+    "error_text_unexpected_error_short": {
+      "default": "Ups… Noget uventet skete. Hvis det fortsætter, bedes du kontakte Trakt-support."
+    },
+    "page_title_where_to_watch": {
+      "default": "Hvor du kan se"
+    },
+    "list_title_streaming_subscription": {
+      "default": "Abonnement"
+    },
+    "list_title_streaming_free": {
+      "default": "Gratis"
+    },
+    "list_title_streaming_purchase": {
+      "default": "Køb"
+    },
+    "list_title_streaming_rent": {
+      "default": "Leje"
+    },
+    "list_title_streaming_favorite": {
+      "default": "Favoritter"
+    },
+    "list_title_recently_searched_shows": {
+      "default": "Nyligt søgte serier"
+    },
+    "list_title_recently_searched_movies": {
+      "default": "Nyligt søgte film"
+    },
+    "text_overview_placeholder": {
+      "default": "Oversigt ikke tilgængelig."
+    },
+    "text_info_signed_in": {
+      "default": "Du er logget ind."
+    },
+    "text_info_signed_out": {
+      "default": "Du er logget ud."
+    },
+    "text_info_history_added": {
+      "default": "Tilføjet til set-historik."
+    },
+    "text_info_history_removed": {
+      "default": "Fjernet fra set-historik."
+    },
+    "text_info_watchlist_added": {
+      "default": "Tilføjet til liste."
+    },
+    "text_info_watchlist_removed": {
+      "default": "Fjernet fra liste."
+    },
+    "button_text_long_press_for_more": {
+      "default": "Tryk længe for mere"
+    },
+    "list_placeholder_empty": {
+      "default": "Der er intet i denne liste."
+    },
+    "button_text_yes": {
+      "default": "Ja"
+    },
+    "button_text_cancel": {
+      "default": "Annuller"
+    },
+    "button_text_where_to_watch": {
+      "default": "Hvor du kan se"
+    },
+    "button_text_no_services": {
+      "default": "Ingen tjenester"
     }
   }
 }
