@@ -17,15 +17,17 @@
 </script>
 
 {#snippet content()}
-  <CtaContent {src}>
-    {@render children()}
-  </CtaContent>
+  <cta-card-content>
+    <CtaContent {src}>
+      {@render children()}
+    </CtaContent>
 
-  {#if action}
-    <div class="trakt-cta-footer">
-      <CardFooter {action} />
-    </div>
-  {/if}
+    {#if action}
+      <div class="trakt-cta-footer">
+        <CardFooter {action} />
+      </div>
+    {/if}
+  </cta-card-content>
 {/snippet}
 
 {#if variant === "portrait"}
@@ -65,6 +67,21 @@
   .trakt-cta-footer {
     :global(.trakt-button) {
       height: var(--ni-20);
+    }
+  }
+
+  cta-card-content {
+    :global(.trakt-cta-container) {
+      background-color: var(--shade-920);
+      color: var(--shade-10);
+
+      &:after {
+        background: linear-gradient(
+          258.73deg,
+          var(--cm-gradient-stop-cta-dark) 0%,
+          var(--shade-900) 53.05%
+        );
+      }
     }
   }
 </style>
