@@ -31,10 +31,9 @@
   /*
    * Cta
    */
-  --color-cta-highlight-color: var(--purple-300);
   --color-cta-background-gradient: linear-gradient(258.73deg,
       color-mix(in srgb,
-        var(--cm-gradient-stop-cta) 80%,
+        var(--cm-gradient-stop-cta-light) 80%,
         transparent) 0%,
       var(--shade-100) 53.05%);
 
@@ -150,10 +149,9 @@
   /*
    * Cta
    */
-  --color-cta-highlight-color: var(--purple-500);
   --color-cta-background-gradient: linear-gradient(258.73deg,
       color-mix(in srgb,
-        var(--cm-gradient-stop-cta) 80%,
+        var(--cm-gradient-stop-cta-dark) 80%,
         transparent) 0%,
       var(--shade-900) 53.05%);
 
