@@ -80,6 +80,6 @@ export function usePopupHelpers() {
   return {
     addHelpers,
     removeHelpers,
-    popupTarget: targetClone,
+    targetClone,
   };
 }

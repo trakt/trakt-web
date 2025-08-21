@@ -22,14 +22,14 @@ describe('usePopupHelpers', () => {
   });
 
   it('should initialize with null values', () => {
-    const { popupTarget } = usePopupHelpers();
-    expect(get(popupTarget)).toBeNull();
+    const { targetClone } = usePopupHelpers();
+    expect(get(targetClone)).toBeNull();
   });
 
   it('should create a clone of the popup target', () => {
-    const { addHelpers, popupTarget } = usePopupHelpers();
+    const { addHelpers, targetClone } = usePopupHelpers();
     addHelpers(target);
-    const clone = get(popupTarget);
+    const clone = get(targetClone);
 
     expect(clone).not.toBeNull();
     expect(clone?.getAttribute('data-popup-state')).toBe('opened');
@@ -41,16 +41,16 @@ describe('usePopupHelpers', () => {
   });
 
   it('should remove clone when removing helpers', () => {
-    const { addHelpers, removeHelpers, popupTarget } = usePopupHelpers();
+    const { addHelpers, removeHelpers, targetClone } = usePopupHelpers();
     addHelpers(target);
 
-    const clone = get(popupTarget);
+    const clone = get(targetClone);
     vi.spyOn(clone as HTMLElement, 'remove');
 
     removeHelpers(null);
 
     expect(clone?.remove).toHaveBeenCalled();
-    expect(get(popupTarget)).toBeNull();
+    expect(get(targetClone)).toBeNull();
   });
 
   it('should clean up helpers when in an open dialog', () => {
@@ -58,16 +58,16 @@ describe('usePopupHelpers', () => {
     dialog.setAttribute('open', '');
     document.body.appendChild(dialog);
 
-    const { addHelpers, removeHelpers, popupTarget } = usePopupHelpers();
+    const { addHelpers, removeHelpers, targetClone } = usePopupHelpers();
     addHelpers(target);
 
-    const clone = get(popupTarget);
+    const clone = get(targetClone);
     vi.spyOn(clone as HTMLElement, 'remove');
 
     removeHelpers(null);
 
     expect(clone?.remove).toHaveBeenCalled();
-    expect(get(popupTarget)).toBeNull();
+    expect(get(targetClone)).toBeNull();
 
     dialog.remove();
   });
