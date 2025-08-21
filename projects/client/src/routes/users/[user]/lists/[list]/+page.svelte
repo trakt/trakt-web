@@ -7,7 +7,7 @@
   import { mapToMediaType } from "./_internal/mapToMediaType";
   import { userListSummary } from "./userListSummary.ts";
 
-  const { list, isLoading } = $derived(
+  const { list } = $derived(
     userListSummary({
       userId: page.params.user,
       listId: page.params.list,
@@ -26,7 +26,7 @@
 >
   <TraktPageCoverSetter />
 
-  {#if !$isLoading}
-    <UserListPaginatedList title={listName} list={$list!} {type} />
+  {#if $list}
+    <UserListPaginatedList title={listName} list={$list} {type} />
   {/if}
 </TraktPage>
