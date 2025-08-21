@@ -18,7 +18,7 @@ export function appendGlobalParameters(anchor: HTMLAnchorElement) {
       const url = new URL(anchor.href);
 
       const params = [
-        ...url.searchParams.entries()
+        ...Array.from(url.searchParams.entries())
           .filter(([key]) =>
             key === $override || !WHITE_LISTED_PARAMS.includes(key)
           ),
