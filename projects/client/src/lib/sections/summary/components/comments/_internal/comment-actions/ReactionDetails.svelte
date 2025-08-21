@@ -34,12 +34,14 @@
 
     border-radius: var(--border-radius-xxl);
 
+    transition: background-color var(--transition-increment) ease-in-out;
+
     p.small {
       font-weight: 600;
     }
 
     &.is-current {
-      background: var(--color-current-reaction-background);
+      background-color: var(--color-current-reaction-background);
     }
   }
 </style>

@@ -2,6 +2,7 @@
   import ReactionIcon from "$lib/components/icons/ReactionIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
+  import { slide } from "svelte/transition";
   import type { ReactionDistribution } from "../models/ReactionDistribution";
   import { REACTIONS_MAP } from "./constants";
   import ReactionDetails from "./ReactionDetails.svelte";
@@ -9,11 +10,19 @@
   const {
     distribution,
     currentReaction,
-  }: { distribution: ReactionDistribution; currentReaction: Reaction } =
-    $props();
+    isLoading,
+  }: {
+    distribution?: ReactionDistribution;
+    currentReaction: Reaction | Nil;
+    isLoading: boolean;
+  } = $props();
 </script>
 
-<div class="trakt-reactions-distribution">
+<div
+  class="trakt-reactions-distribution"
+  class:is-loading={isLoading}
+  transition:slide={{ duration: 150, axis: "y" }}
+>
   <span class="meta-info secondary trakt-distribution-header">
     <ReactionIcon state="default" />{m.header_comment_reactions()}
   </span>
@@ -21,7 +30,7 @@
     {#each Object.entries(REACTIONS_MAP) as [reaction] (reaction)}
       <ReactionDetails
         reaction={reaction as Reaction}
-        count={distribution[reaction as Reaction] ?? 0}
+        count={distribution?.[reaction as Reaction] ?? 0}
         isCurrent={currentReaction === reaction}
       />
     {/each}
@@ -39,6 +48,12 @@
     border-radius: var(--border-radius-xxl);
 
     padding: var(--ni-16);
+
+    &.is-loading {
+      .trakt-reactions {
+        opacity: 0.5;
+      }
+    }
   }
 
   .trakt-distribution-header {

@@ -3,23 +3,24 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
-  import { NOOP_FN } from "$lib/utils/constants";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { REACTIONS_MAP } from "./constants";
 
   const {
     currentReaction,
     onChange,
+    onClose,
   }: {
     currentReaction: Reaction | Nil;
     onChange: (reaction: Reaction) => void;
+    onClose: () => void;
   } = $props();
 </script>
 
 <div class="trakt-reaction-picker">
   <ActionButton
     label={m.button_label_close_reaction()}
-    onclick={() => NOOP_FN}
+    onclick={onClose}
     style="ghost"
   >
     <CloseIcon />

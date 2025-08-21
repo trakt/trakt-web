@@ -14,8 +14,9 @@
 
   const { comment }: { comment: MediaComment } = $props();
 
-  const { portalTrigger, portal, isOpened } = usePortal({
+  const { portalTrigger, portal, isOpened, close } = usePortal({
     placement: { position: "right", mode: "contain" },
+    type: "persistent",
   });
 
   const { currentReaction, summary } = $derived(
@@ -79,12 +80,14 @@
       <ReactionPicker
         currentReaction={$currentReaction}
         onChange={reactionHandler}
+        onClose={close}
       />
 
-      {#if $currentReaction}
+      {#if $currentReaction ?? $isReacting}
         <ReactionsDistribution
           distribution={$summary.distribution}
           currentReaction={$currentReaction}
+          isLoading={$isReacting}
         />
       {/if}
     </div>
