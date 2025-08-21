@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Lista ta de vizionat este goală. Adaugă seriale TV pentru a-ți aprinde imaginația."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Explorează seriale TV și personalizează-ți programul."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Începe să urmărești și adaugă seriale în lista ta de urmărire."
-    },
     "list_placeholder_released_movies": {
       "default": "Adaugă filme în lista ta și nu rata nicio premieră."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Activitate"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Utilizatorii pe care îi urmărești nu au văzut încă nimic. Sau poate nu urmărești pe nimeni încă?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Nu ai marcat nimic ca vizionat încă."
     },
     "button_text_social": {
       "default": "Social"

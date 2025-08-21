@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Twoja lista do obejrzenia jest pusta. Dodaj seriale i rozpal swoją wyobraźnię."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Odkryj seriale i spersonalizuj co, i kiedy, będziesz oglądać."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Zacznij oglądać i dodaj seriale do swojej listy do obejrzenia."
-    },
     "list_placeholder_released_movies": {
       "default": "Dodaj filmy do swojej listy do obejrzenia i nigdy nie przegap premiery."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Aktywność"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Użytkownicy, których obserwujesz, jeszcze nic nie obejrzeli. A może jeszcze nikogo nie obserwujesz?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Jeszcze niczego nie oznaczyłeś jako obejrzane."
     },
     "button_text_social": {
       "default": "Społecznościowe"

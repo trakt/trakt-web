@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Ваш список перегляду порожній. Додайте серіали, щоб розпалити уяву."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Досліджуйте телесеріали та персоналізуйте свій розклад."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Почніть перегляд та додайте серіали до свого списку переглядів."
-    },
     "list_placeholder_released_movies": {
       "default": "Додайте фільми до свого списку переглядів і ніколи не пропустіть прем'єри."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Активність"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Користувачі, на яких ви підписані, ще нічого не переглянули. Або, можливо, ви ще ні на кого не підписані?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Ви ще нічого не відмітили як переглянуте."
     },
     "button_text_social": {
       "default": "Соціальне"

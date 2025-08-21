@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Твоят списък за наблюдение е празен. Добави предавания, за да развихриш въображението си."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Разгледай предавания и персонализирай графика си."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Започни да гледаш и добавяш предавания в списъка си за наблюдение."
-    },
     "list_placeholder_released_movies": {
       "default": "Добавяй филми в списъка си за гледане и не пропускай нито една премиера."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Активност"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Потребителите, които следвате, все още не са гледали нищо. Или може би все още не следвате никого?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Все още не сте отбелязали нищо като гледано."
     },
     "button_text_social": {
       "default": "Социално"

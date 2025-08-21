@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Tu lista está vacía. ¡Agrega series para alimentar tu imaginación!"
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Descubre series de televisión y personaliza tu agenda."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "¡Comienza a ver y agrega series a tu lista de seguimiento!"
-    },
     "list_placeholder_released_movies": {
       "default": "Agrega películas a tu lista de seguimiento y nunca te pierdas un estreno."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Actividad"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Los usuarios que sigues no han visto nada todavía. ¿O tal vez no sigues a nadie?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "¿Aún no has marcado nada como visto?"
     },
     "button_text_social": {
       "default": "Social"

@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Watchlisten din er tom. Legg til serier for å gi næring til fantasien din."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Utforsk TV-serier og tilpass timeplanen din."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Begynn å se og legg til serier i watchlisten din."
-    },
     "list_placeholder_released_movies": {
       "default": "Legg til filmer i watchlisten din og gå aldri glipp av en premiere."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Aktivitet"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Brukerne du følger har ikke sett noe ennå. Eller kanskje du ikke følger noen ennå?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Du har ikke markert noe som sett ennå."
     },
     "button_text_social": {
       "default": "Sosialt"

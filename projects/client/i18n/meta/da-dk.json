@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "Din liste er tom. Tilføj serier for at give din fantasi brændstof."
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "Udforsk serier, og tilpas din tidsplan."
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "Begynd at se, og tilføj serier til din liste."
-    },
     "list_placeholder_released_movies": {
       "default": "Tilføj film til din liste, og gå aldrig glip af en premiere."
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "Aktivitet"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "Brugerne du følger har ikke set noget endnu. Eller følger du måske ikke nogen endnu?"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "Du har ikke markeret noget som set endnu."
     },
     "button_text_social": {
       "default": "Socialt"

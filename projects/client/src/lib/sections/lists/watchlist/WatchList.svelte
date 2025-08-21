@@ -1,9 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -72,19 +70,13 @@
   {/snippet}
 
   {#snippet empty()}
-    <RenderForFeature flag={FeatureFlag.Cta}>
-      {#snippet enabled()}
-        {#if status !== "all"}
-          <CtaItem cta={status} variant="placeholder" />
-        {/if}
+    {#if status !== "all"}
+      <CtaItem cta={status} variant="placeholder" />
+    {/if}
 
-        {#if status === "all"}
-          <EmptyWatchlist {type} {status} />
-        {/if}
-      {/snippet}
-
+    {#if status === "all"}
       <EmptyWatchlist {type} {status} />
-    </RenderForFeature>
+    {/if}
   {/snippet}
 
   {#snippet badge()}

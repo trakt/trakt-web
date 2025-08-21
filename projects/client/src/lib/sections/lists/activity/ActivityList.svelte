@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -55,17 +53,7 @@
   {/snippet}
 
   {#snippet empty()}
-    <RenderForFeature flag={FeatureFlag.Cta}>
-      {#snippet enabled()}
-        <CtaItem {cta} variant="placeholder" />
-      {/snippet}
-
-      {#if activityType === "social"}
-        {m.list_placeholder_activity_social_empty()}
-      {:else}
-        {m.list_placeholder_activity_personal_empty()}
-      {/if}
-    </RenderForFeature>
+    <CtaItem {cta} variant="placeholder" />
   {/snippet}
 
   {#snippet badge()}

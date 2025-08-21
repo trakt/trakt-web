@@ -372,12 +372,6 @@
     "list_placeholder_watchlist_shows": {
       "default": "視聴リストは空です。番組を追加して、想像力を刺激しましょう！"
     },
-    "list_placeholder_upcoming_schedule": {
-      "default": "テレビ番組を探索し、スケジュールをパーソナライズしましょう。"
-    },
-    "list_placeholder_up_next_empty": {
-      "default": "視聴を開始し、視聴リストに追加しましょう。"
-    },
     "list_placeholder_released_movies": {
       "default": "映画を視聴リストに追加して、初公開を逃さないでください。"
     },
@@ -1755,12 +1749,6 @@
     },
     "list_title_activity": {
       "default": "アクティビティ"
-    },
-    "list_placeholder_activity_social_empty": {
-      "default": "フォローしているユーザーはまだ何も見ていません。または、まだ誰もフォローしていませんか？"
-    },
-    "list_placeholder_activity_personal_empty": {
-      "default": "まだ視聴済みとしてマークしたものはありません。"
     },
     "button_text_social": {
       "default": "ソーシャル"
