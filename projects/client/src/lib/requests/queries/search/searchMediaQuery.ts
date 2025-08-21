@@ -15,6 +15,7 @@ import { searchCancellationId } from './searchCancellationId.ts';
 
 type SearchParams = {
   query: string;
+  type?: MediaType;
 } & ApiParams;
 
 const MediaResultSchema = z.object({
@@ -23,10 +24,7 @@ const MediaResultSchema = z.object({
 
 const MediaSearchResultSchema = z.object({
   type: z.literal('media'),
-  items: z.object({
-    movies: MediaResultSchema.array(),
-    shows: MediaResultSchema.array(),
-  }),
+  items: MediaResultSchema.array(),
 });
 
 export type MediaResult = z.infer<typeof MediaResultSchema>;
@@ -61,11 +59,13 @@ function mapToSearchResultEntry(
   }
 }
 
-const searchRequest = ({ query, fetch }: SearchParams, type: MediaType) =>
+const searchRequest = (
+  { query, fetch, type }: SearchParams,
+) =>
   api({
     fetch,
     cancellable: true,
-    cancellationId: searchCancellationId(type),
+    cancellationId: searchCancellationId('media'),
   })
     .search
     .query({
@@ -76,33 +76,21 @@ const searchRequest = ({ query, fetch }: SearchParams, type: MediaType) =>
         ...EXPERIMENTAL_PARAMS,
       },
       params: {
-        type,
+        type: type ?? 'movie,show',
       },
     });
-
-function searchRequests({ query, fetch }: SearchParams) {
-  return Promise.all([
-    searchRequest({ fetch, query }, 'movie'),
-    searchRequest({ fetch, query }, 'show'),
-  ]);
-}
 
 export const searchMediaQuery = defineQuery({
   key: 'searchMedia',
   invalidations: [],
-  dependencies: (params) => [params.query.toLowerCase().trim()],
-  request: searchRequests,
-  mapper: ([moviesResponse, showsResponse]) => {
+  dependencies: (params) => [params.query.toLowerCase().trim(), params.type],
+  request: searchRequest,
+  mapper: (response) => {
     return {
       type: 'media' as const,
-      items: {
-        movies: moviesResponse.body
-          .map(mapToSearchResultEntry)
-          .filter((value) => !isGarbage(value)),
-        shows: showsResponse.body
-          .map(mapToSearchResultEntry)
-          .filter((value) => !isGarbage(value)),
-      },
+      items: response.body
+        .map(mapToSearchResultEntry)
+        .filter((value) => !isGarbage(value)),
     };
   },
   schema: MediaSearchResultSchema,

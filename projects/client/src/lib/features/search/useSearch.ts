@@ -21,15 +21,14 @@ import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
 import { getSearchContext } from './_internal/getSearchContext.ts';
-import { mergeMediaSearchResult } from './_internal/mergeMediaSearchResult.ts';
 import type { SearchResult } from './models/SearchResult.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
 
-function modeToQuery(query: string, mode: SearchMode) {
+function modeToQuery(query: string, mode: SearchMode, type?: MediaType) {
   switch (mode) {
     case 'media':
-      return searchMediaQuery({ query }) as CreateQueryOptions<
+      return searchMediaQuery({ query, type }) as CreateQueryOptions<
         SearchResponse
       >;
     case 'people':
@@ -74,16 +73,13 @@ export function useSearch() {
       return;
     }
 
-    const query = modeToQuery(term, mode);
+    const query = modeToQuery(term, mode, type);
 
     const response = await client.fetchQuery(query)
       .then((response) => {
         if (response.type === 'media') {
           return {
-            response: {
-              type: 'media' as const,
-              items: mergeMediaSearchResult(response, type),
-            },
+            response,
             reason: 'result',
           };
         }
