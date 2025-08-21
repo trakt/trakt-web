@@ -13,7 +13,7 @@ export function useParameters() {
 
   function update(params: Record<string, ParameterType>) {
     parameters.update((current) => {
-      current.entries()
+      Array.from(current.entries())
         .forEach(([key]) => {
           if (!(key in params)) {
             current.delete(key);
