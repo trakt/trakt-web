@@ -37,7 +37,7 @@
 
     border-radius: var(--border-radius-m);
 
-    background-color: var(--shade-920);
+    background-color: var(--color-card-background);
 
     padding: var(--content-padding);
     box-sizing: border-box;
@@ -49,8 +49,6 @@
       0px var(--ni-1) var(--ni-2) 0px var(--cm-shadow-8);
 
     transition: padding var(--transition-increment) ease-in-out;
-
-    color: var(--shade-10);
 
     :global(.trakt-button) {
       width: fit-content;
@@ -67,11 +65,7 @@
 
       border-radius: var(--border-radius-m);
 
-      background: linear-gradient(
-        258.73deg,
-        var(--cm-gradient-stop-cta) 0%,
-        var(--shade-900) 53.05%
-      );
+      background: var(--color-cta-background-gradient);
 
       opacity: 0.8;
     }
