@@ -4750,8 +4750,8 @@
       ]
     },
     "text_cta_personal_activity": {
-      "default": "Start marking your watched episodes and movies as watched and see your recent activity here.",
-      "description": "Watch it. Track it. Your viewing history updates in real time, right here.",
+      "default": "Watch it. Track it. Your viewing history updates in real time, right here.",
+      "description": "Call to action text shown in the personal activity list, encouraging users to mark their watched content.",
       "exclude": [
         "android",
         "ios"
