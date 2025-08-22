@@ -48,11 +48,12 @@
     flex-direction: column;
     gap: var(--gap-l);
 
-    --card-width: var(--ni-156);
+    --card-width: var(--ni-200);
 
     :global(.trakt-list-item-container) {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
 
       gap: var(--gap-s);
     }
@@ -60,13 +61,18 @@
     :global(.trakt-card) {
       --width-card: var(--card-width);
 
-      &:global(.trakt-card-cover-tag) {
+      :global(.trakt-card-cover-tag) {
         display: none;
       }
     }
 
+    @include for-tablet-sm {
+      --card-width: var(--ni-156);
+    }
+
     @include for-mobile() {
       :global(.trakt-list-item-container) {
+        display: grid;
         grid-template-columns: 1fr 1fr;
       }
 
