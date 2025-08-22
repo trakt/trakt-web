@@ -1,17 +1,22 @@
 import { bodyPortal } from '$lib/features/portal/_internal/bodyPortal.ts';
-import { POPUP_STATE_ATTRIBUTE } from '$lib/features/portal/_internal/constants.ts';
+import {
+  POPUP_CLONE_ATTRIBUTE,
+  POPUP_STATE_ATTRIBUTE,
+} from '$lib/features/portal/_internal/constants.ts';
 import { createUnderlay } from '$lib/features/portal/_internal/createUnderlay.ts';
 import { PopupState } from '$lib/features/portal/_internal/models/PopupState.ts';
 import { get, writable } from 'svelte/store';
 import { createSanitizedClone } from './createSanitizedClone.ts';
 import { getTargetArea } from './getTargetArea.ts';
+import type { PopupPlacement } from './models/PopupPlacement.ts';
 
 const clearElement = (element: HTMLElement | null) => {
   element?.remove();
   return null;
 };
 
-export function usePopupHelpers() {
+export function usePopupHelpers(placement?: PopupPlacement) {
+  const isTargetContained = placement?.mode === 'contain';
   const underlay = writable<HTMLElement | null>(null);
   const targetClone = writable<HTMLElement | null>(null);
   const area = getTargetArea();
@@ -40,6 +45,10 @@ export function usePopupHelpers() {
   const removeHelpers = (popupContainer: HTMLElement | null) => {
     underlay.update(clearElement);
 
+    if (!isTargetContained) {
+      return;
+    }
+
     if (!popupContainer) {
       targetClone.update(clearElement);
       return;
@@ -56,6 +65,10 @@ export function usePopupHelpers() {
       document.body;
     underlayTarget.appendChild(newUnderlay);
 
+    if (!isTargetContained) {
+      return;
+    }
+
     targetClone.update(clearElement);
 
     const clone = createSanitizedClone(target);
@@ -65,6 +78,7 @@ export function usePopupHelpers() {
     clone.style.height = `${targetRect.height}px`;
     clone.style.boxSizing = 'border-box';
 
+    clone.setAttribute(POPUP_CLONE_ATTRIBUTE, 'true');
     clone.setAttribute(POPUP_STATE_ATTRIBUTE, PopupState.Opened);
 
     bodyPortal({ node: clone, targetRect, targetNode: target });
@@ -80,6 +94,5 @@ export function usePopupHelpers() {
   return {
     addHelpers,
     removeHelpers,
-    targetClone,
   };
 }
