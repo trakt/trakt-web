@@ -3,6 +3,7 @@ const MEDIA_ACTION_PREFIX = 'media-action';
 const USER_ACTION_PREFIX = 'user-action';
 const FOLLOW_ACTION_PREFIX = 'follow-action';
 const LIST_ACTION_PREFIX = 'list-action';
+const CALENDAR_ACTION_PREFIX = 'calendar-action';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -39,4 +40,6 @@ export const AnalyticsEvent = {
   ListRename: buildEventKey(LIST_ACTION_PREFIX, 'rename'),
   ListDelete: buildEventKey(LIST_ACTION_PREFIX, 'delete'),
   ListCreate: buildEventKey(LIST_ACTION_PREFIX, 'create'),
+
+  CalendarPeriod: buildEventKey(CALENDAR_ACTION_PREFIX, 'period'),
 } as const;
