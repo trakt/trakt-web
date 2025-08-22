@@ -83,19 +83,11 @@
       }
 
       &[data-style="ghost"][data-variant="primary"] {
-        --color-foreground-action-button: color-mix(
-          in srgb,
-          var(--color-foreground) 50%,
-          #{$background-color}
-        );
+        --color-foreground-action-button: var(--color-foreground);
       }
 
       &[data-style="ghost"][data-variant="secondary"] {
-        --color-background-action-button: color-mix(
-          in srgb,
-          var(--color-foreground) 50%,
-          #{$foreground-color}
-        );
+        --color-background-action-button: var(--color-foreground);
       }
     }
   }
