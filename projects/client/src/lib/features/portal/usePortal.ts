@@ -34,11 +34,13 @@ export function usePortal(props?: PortalProps) {
     };
   }
 
+  const placement = props?.placement ?? DEFAULT_PLACEMENT;
+
   const popupContainer = writable<HTMLElement | null>(null);
   const popupTarget = writable<HTMLElement | null>(null);
   const isPopupOpen = writable(false);
 
-  const { addHelpers, removeHelpers, targetClone } = usePopupHelpers();
+  const { addHelpers, removeHelpers } = usePopupHelpers(placement);
 
   const closeHandler = () => {
     get(popupTarget)?.removeAttribute(POPUP_STATE_ATTRIBUTE);
@@ -81,7 +83,7 @@ export function usePortal(props?: PortalProps) {
   };
 
   const portal = (node: HTMLElement) => {
-    const target = get(targetClone);
+    const target = get(popupTarget);
     if (!target || !get(isPopupOpen)) {
       return;
     }
@@ -90,7 +92,7 @@ export function usePortal(props?: PortalProps) {
     return openPopupContainer(
       node,
       target,
-      props?.placement ?? DEFAULT_PLACEMENT,
+      placement,
     );
   };
 

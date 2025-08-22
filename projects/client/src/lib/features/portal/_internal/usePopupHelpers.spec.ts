@@ -1,9 +1,15 @@
-import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { POPUP_CLONE_ATTRIBUTE } from './constants.ts';
+import type { PopupPlacement } from './models/PopupPlacement.ts';
 import { usePopupHelpers } from './usePopupHelpers.ts';
 
 describe('usePopupHelpers', () => {
   let target: HTMLElement;
+
+  const placement: PopupPlacement = {
+    position: 'top',
+    mode: 'contain',
+  };
 
   beforeEach(() => {
     target = document.createElement('div');
@@ -21,15 +27,29 @@ describe('usePopupHelpers', () => {
     });
   });
 
+  const getTargetClone = () => {
+    const popupClones = Array.from(
+      document.querySelectorAll(`[${POPUP_CLONE_ATTRIBUTE}]`),
+    );
+
+    if (popupClones.length === 0) {
+      return null;
+    }
+
+    return popupClones.at(0) as HTMLElement;
+  };
+
   it('should initialize with null values', () => {
-    const { targetClone } = usePopupHelpers();
-    expect(get(targetClone)).toBeNull();
+    usePopupHelpers();
+
+    expect(getTargetClone()).toBeNull();
   });
 
   it('should create a clone of the popup target', () => {
-    const { addHelpers, targetClone } = usePopupHelpers();
+    const { addHelpers, removeHelpers } = usePopupHelpers(placement);
     addHelpers(target);
-    const clone = get(targetClone);
+
+    const clone = getTargetClone();
 
     expect(clone).not.toBeNull();
     expect(clone?.getAttribute('data-popup-state')).toBe('opened');
@@ -38,19 +58,17 @@ describe('usePopupHelpers', () => {
     expect(clone?.style.height).toBe('10px');
     expect(clone?.style.boxSizing).toBe('border-box');
     expect(document.body.appendChild).toHaveBeenCalled();
+
+    removeHelpers(null);
   });
 
   it('should remove clone when removing helpers', () => {
-    const { addHelpers, removeHelpers, targetClone } = usePopupHelpers();
+    const { addHelpers, removeHelpers } = usePopupHelpers(placement);
+
     addHelpers(target);
-
-    const clone = get(targetClone);
-    vi.spyOn(clone as HTMLElement, 'remove');
-
     removeHelpers(null);
 
-    expect(clone?.remove).toHaveBeenCalled();
-    expect(get(targetClone)).toBeNull();
+    expect(getTargetClone()).toBeNull();
   });
 
   it('should clean up helpers when in an open dialog', () => {
@@ -58,16 +76,12 @@ describe('usePopupHelpers', () => {
     dialog.setAttribute('open', '');
     document.body.appendChild(dialog);
 
-    const { addHelpers, removeHelpers, targetClone } = usePopupHelpers();
+    const { addHelpers, removeHelpers } = usePopupHelpers(placement);
+
     addHelpers(target);
-
-    const clone = get(targetClone);
-    vi.spyOn(clone as HTMLElement, 'remove');
-
     removeHelpers(null);
 
-    expect(clone?.remove).toHaveBeenCalled();
-    expect(get(targetClone)).toBeNull();
+    expect(getTargetClone()).toBeNull();
 
     dialog.remove();
   });
