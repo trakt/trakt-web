@@ -10,6 +10,9 @@
 
 <style>
   .calendar-header {
+    height: var(--ni-40);
+    overflow: hidden;
+
     display: flex;
     align-items: center;
     justify-content: space-between;

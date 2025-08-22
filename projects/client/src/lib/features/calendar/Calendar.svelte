@@ -1,6 +1,7 @@
 <script lang="ts">
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
+  import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarItems from "./_internal/CalendarItems.svelte";
@@ -18,7 +19,11 @@
 </script>
 
 <trakt-calendar>
-  <div class="calendar-navigation" use:observeDimension>
+  <div
+    class="calendar-navigation"
+    use:observeDimension
+    use:trackWindowScroll={"is-scrolled"}
+  >
     <CalendarHeader />
     <CalendarDays calendar={$calendar} />
   </div>
@@ -64,6 +69,23 @@
     background-color: var(--color-calendar-background);
 
     @include backdrop-filter-blur(var(--ni-8));
+
+    @include for-mobile {
+      --sticky-top: calc(env(safe-area-inset-top, 0) + var(--ni-4));
+      transition: gap var(--transition-increment) ease-in-out;
+
+      :global(.calendar-header) {
+        transition: height var(--transition-increment) ease-in-out;
+      }
+
+      &:global(.is-scrolled) {
+        gap: var(--ni-0);
+
+        :global(.calendar-header) {
+          height: var(--ni-0);
+        }
+      }
+    }
 
     @include for-tablet-sm-and-below {
       top: calc(var(--navbar-height) + var(--sticky-top));
