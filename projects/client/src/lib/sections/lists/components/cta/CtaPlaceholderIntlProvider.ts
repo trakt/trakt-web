@@ -19,11 +19,9 @@ export const CtaPlaceholderIntlProvider: CtaItemIntl = {
           return m.link_text_browse_shows();
         case 'released':
           return m.link_text_browse_movies();
-        case 'upcoming':
-          return m.link_text_explore_shows();
         case 'unreleased':
           return m.link_text_explore_anticipated();
-        case 'calendar':
+        case 'upcoming':
           return m.link_text_explore_shows();
       }
     },

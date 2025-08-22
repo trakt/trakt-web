@@ -45,7 +45,6 @@ function ctaToQuery(cta: Exclude<Cta, 'activity'>) {
         PaginatablePreviewItem
       >;
     case 'upcoming':
-    case 'calendar':
       return showAnticipatedQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
       >;

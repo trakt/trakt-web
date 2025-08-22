@@ -4,7 +4,6 @@ import type { Cta } from '../models/Cta.ts';
 const EPISODIC_CTA: Cta[] = [
   'up-next',
   'upcoming',
-  'calendar',
   'personal-activity',
 ] as const;
 

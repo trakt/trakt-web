@@ -10,7 +10,6 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
-type Mode = 'episodes' | 'all';
 type UpcomingList = Array<MediaEntry | UpcomingEpisodeEntry>;
 
 const ONE_DAY = 1000 * 60 * 60 * 24;
@@ -20,33 +19,26 @@ function daysAgo(days: number) {
   return new Date(Date.now() - ONE_DAY * days);
 }
 
-function modeToQueries(startDate: string, mode: Mode) {
+function getUpcomingCalendarQueries(startDate: string) {
   const params = {
     startDate,
     days: DAYS_TO_FETCH,
   };
 
-  switch (mode) {
-    case 'all':
-      return [
-        upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
-        upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>,
-      ];
-    case 'episodes':
-      return [
-        upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
-      ];
-  }
+  return [
+    upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
+    upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>,
+  ];
 }
 
-export function useUpcomingItems(mode: Mode = 'episodes') {
+export function useUpcomingItems() {
   const [YYYY_MM_DD] = daysAgo(0).toISOString().split('T');
   const startDate = assertDefined(
     YYYY_MM_DD,
     'Could not extract current date.',
   );
 
-  const queries = modeToQueries(startDate, mode)
+  const queries = getUpcomingCalendarQueries(startDate)
     .map((query) => useQuery(query));
 
   const isLoading = derived(

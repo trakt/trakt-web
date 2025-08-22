@@ -1656,9 +1656,6 @@
     "text_cta_upcoming": {
       "default": "Votre fil d'actualité. Découvrez les nouveautés avec une liste complète des épisodes à venir qui vous intéressent."
     },
-    "text_cta_calendar": {
-      "default": "Votre précieux. Votre fil d'actualité. Découvrez les nouveautés avec une liste complète des épisodes à venir qui vous intéressent."
-    },
     "text_cta_watchlist_unreleased": {
       "default": "Moteur, action… rien ? Ajoutez des titres à votre liste de lecture et que le marathon commence !"
     },

@@ -34,7 +34,7 @@
       <ReleasedIcon />
     {/if}
 
-    {#if cta === "upcoming" || cta === "calendar"}
+    {#if cta === "upcoming"}
       <UpcomingIcon />
     {/if}
 
