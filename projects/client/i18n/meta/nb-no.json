@@ -1618,13 +1618,13 @@
       "default": "Ingen elementer funnet for denne datoen. Kanskje prøve en annen dag?"
     },
     "text_calendar_placeholder_3": {
-      "default": "Ser ut som det ikke er noe planlagt for i dag. Slapp av og ta det med ro."
+      "default": "Ser ut som det ikke er noe planlagt for denne dagen. Slapp av og ta det med ro."
     },
     "text_calendar_placeholder_4": {
-      "default": "Kalenderen din er tom i dag. Perfekt tid for å slappe av."
+      "default": "Kalenderen din er tom denne dagen. Perfekt tid å slappe av."
     },
     "text_calendar_placeholder_5": {
-      "default": "I dag er det åpent. Kanskje starte noe nytt?"
+      "default": "Denne dagen er helt åpen. Kanskje starte noe nytt?"
     },
     "text_calendar_placeholder_6": {
       "default": "Ingen planer her. Tid for å gjøre noe spontant."
@@ -1636,7 +1636,7 @@
       "default": "Timeplanen din er klar. Få mest mulig ut av den."
     },
     "text_calendar_placeholder_9": {
-      "default": "Ingen arrangementer i dag. Kanskje se en gammel favoritt?"
+      "default": "Ingen hendelser denne dagen. Kanskje se en gammel favoritt på nytt."
     },
     "text_calendar_placeholder_10": {
       "default": "Alt klart. Tid for å utforske noe annerledes."

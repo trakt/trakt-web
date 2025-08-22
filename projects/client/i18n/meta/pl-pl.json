@@ -1618,13 +1618,13 @@
       "default": "Brak elementów dla tej daty. Może spróbujesz innego dnia?"
     },
     "text_calendar_placeholder_3": {
-      "default": "Wygląda na to, że dzisiaj nic nie jest zaplanowane. Zrelaksuj się i wyluzuj."
+      "default": "Wygląda na to, że na ten dzień nic nie jest zaplanowane. Zrelaksuj się i odpocznij."
     },
     "text_calendar_placeholder_4": {
-      "default": "Twój kalendarz jest dzisiaj pusty. Idealny czas na odpoczynek."
+      "default": "Twój kalendarz jest pusty tego dnia. Idealny czas na nadrobienie zaległości."
     },
     "text_calendar_placeholder_5": {
-      "default": "Dzisiaj jest wolne. Może zacząć coś nowego?"
+      "default": "Ten dzień jest wolny. Może zacząć coś nowego?"
     },
     "text_calendar_placeholder_6": {
       "default": "Brak planów na dziś. Czas na spontaniczne działanie."
@@ -1636,7 +1636,7 @@
       "default": "Twój harmonogram jest wolny. Wykorzystaj go jak najlepiej."
     },
     "text_calendar_placeholder_9": {
-      "default": "Brak wydarzeń dzisiaj. Może warto wrócić do ulubionych?"
+      "default": "Brak wydarzeń tego dnia. Może wrócić do starego ulubionego filmu."
     },
     "text_calendar_placeholder_10": {
       "default": "Wszystko jasne. Czas na odkrywanie czegoś innego."
