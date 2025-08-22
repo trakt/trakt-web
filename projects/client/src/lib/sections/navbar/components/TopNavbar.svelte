@@ -2,32 +2,19 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
-  import { onMount } from "svelte";
+  import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import FilterButton from "./filter/FilterButton.svelte";
   import GetVIPLink from "./GetVIPLink.svelte";
   import JoinTraktButton from "./JoinTraktButton.svelte";
   import ProfileLink from "./ProfileLink.svelte";
   import TraktLogo from "./TraktLogo.svelte";
 
-  let windowScrollY = $state(0);
-  const isScrolled = $derived(windowScrollY > 0);
-
-  function handleScroll() {
-    windowScrollY = window.scrollY;
-  }
-
-  onMount(() => {
-    handleScroll();
-    return GlobalEventBus.getInstance().register("scroll", handleScroll);
-  });
-
   const { user } = useUser();
   const isVip = $derived(!!$user?.isVip);
 </script>
 
 <header>
-  <nav class="trakt-navbar" class:trakt-navbar-scroll={isScrolled}>
+  <nav class="trakt-navbar" use:trackWindowScroll={"trakt-navbar-scroll"}>
     <TraktLogo />
 
     <div class="trakt-navbar-content">
@@ -102,6 +89,17 @@
       justify-content: end;
     }
 
+    &:global(.trakt-navbar-scroll) {
+      background-color: var(--color-background-navbar);
+
+      border-bottom-left-radius: var(--border-radius-xxl);
+      border-bottom-right-radius: var(--border-radius-xxl);
+
+      box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
+
+      @include backdrop-filter-blur(var(--ni-8));
+    }
+
     @include for-mobile {
       gap: var(--gap-xs);
 
@@ -109,17 +107,6 @@
         gap: var(--gap-xs);
       }
     }
-  }
-
-  .trakt-navbar-scroll {
-    background-color: var(--color-background-navbar);
-
-    border-bottom-left-radius: var(--border-radius-xxl);
-    border-bottom-right-radius: var(--border-radius-xxl);
-
-    box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
-
-    @include backdrop-filter-blur(var(--ni-8));
   }
 
   :global([data-mobile-os="ios"]) {
