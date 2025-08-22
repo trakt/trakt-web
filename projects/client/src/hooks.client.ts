@@ -26,5 +26,25 @@ Sentry.init({
   })],
 });
 
+// FIXME remove once we have custom paraglide handling for this
+// Remove PARAGLIDE_LOCALE cookie if it appears multiple times
+if (typeof document !== 'undefined') {
+  const cookies = document.cookie.split(';');
+  const localesCookies = cookies.filter((cookie) => {
+    const [name] = cookie.trim().split('=');
+    return name === 'PARAGLIDE_LOCALE';
+  });
+
+  if (localesCookies.length > 1) {
+    // Delete all instances of PARAGLIDE_LOCALE
+    document.cookie =
+      'PARAGLIDE_LOCALE=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    document.cookie =
+      'PARAGLIDE_LOCALE=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.app.trakt.tv';
+    document.cookie =
+      'PARAGLIDE_LOCALE=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=app.trakt.tv';
+  }
+}
+
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
 export const handleError = handleErrorWithSentry();
