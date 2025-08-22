@@ -28,7 +28,7 @@ export function positionAroundTarget(
     top: mode === 'contain' ? targetRect.height : 0,
   };
 
-  setPositionAttributes(node, targetNode, position);
+  setPositionAttributes({ popupContainer: node, targetNode, position });
   resetPosition(node);
 
   const { left, top, right, bottom } = targetRect;
