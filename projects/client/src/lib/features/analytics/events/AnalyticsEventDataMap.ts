@@ -11,6 +11,7 @@ type FollowType = { action: 'follow' | 'unfollow' };
 type ExtrasType = { slug: string; type: MediaVideoType };
 type CommentType = { action: 'post' | 'reply' };
 type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
+type CalendarType = { action: 'reset' | 'next' | 'previous' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -39,4 +40,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.ListRename]: never;
   [AnalyticsEvent.ListDelete]: never;
   [AnalyticsEvent.ListCreate]: never;
+
+  [AnalyticsEvent.CalendarPeriod]: CalendarType;
 };

@@ -4,6 +4,8 @@ import { isCurrentWeek } from '$lib/utils/date/isCurrentWeek.ts';
 import { addWeeks } from 'date-fns/addWeeks';
 import { subWeeks } from 'date-fns/subWeeks';
 import { derived, get } from 'svelte/store';
+import { AnalyticsEvent } from '../../analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '../../analytics/useTrack.ts';
 import { getCalendarContext } from './getCalendarContext.ts';
 
 type Direction = 'next' | 'previous';
@@ -21,8 +23,10 @@ function getNextOrPreviousPeriod(date: Date, direction: Direction) {
 
 export function useCalendarPeriod() {
   const { startDate, activeDate } = getCalendarContext();
+  const { track } = useTrack(AnalyticsEvent.CalendarPeriod);
 
   const switchPeriod = (direction: Direction) => {
+    track({ action: direction });
     startDate.update((date) => {
       const newStart = getNextOrPreviousPeriod(date, direction);
 
@@ -32,6 +36,7 @@ export function useCalendarPeriod() {
   };
 
   const reset = () => {
+    track({ action: 'reset' });
     if (isCurrentWeek(get(startDate), getLocale())) {
       activeDate.set({ date: new Date(), source: 'navigation' });
       return;
