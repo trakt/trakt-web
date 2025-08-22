@@ -1,8 +1,7 @@
 export type Cta =
   | 'up-next'
   | 'released'
-  | 'upcoming'
   | 'unreleased'
   | 'activity'
-  | 'calendar'
+  | 'upcoming'
   | 'personal-activity';

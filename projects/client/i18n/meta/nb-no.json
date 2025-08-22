@@ -1656,9 +1656,6 @@
     "text_cta_upcoming": {
       "default": "Din tidslinje. Se hva som kommer neste gang med en full liste over kommende episoder du bryr deg om."
     },
-    "text_cta_calendar": {
-      "default": "Din dyrebar. Din tidslinje. Se hva som kommer neste gang med en full liste over kommende episoder du bryr deg om."
-    },
     "text_cta_watchlist_unreleased": {
       "default": "Lys, kamera… ingenting? Legg til titler i listen din og la bingingen begynne!"
     },

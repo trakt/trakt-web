@@ -8,10 +8,7 @@
   import { useUpcomingItems } from "./stores/useUpcomingItems";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
-  const { mode }: { mode: "episodes" | "all" } = $props();
-
-  const { upcoming, isLoading } = useUpcomingItems(mode);
-  const cta = $derived(mode === "all" ? "calendar" : "upcoming");
+  const { upcoming, isLoading } = useUpcomingItems();
 </script>
 
 <SectionList
@@ -31,18 +28,16 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    <CtaItem {cta} variant="card" />
+    <CtaItem cta="upcoming" variant="card" />
   {/snippet}
 
   {#snippet empty()}
     {#if !$isLoading}
-      <CtaItem {cta} variant="placeholder" />
+      <CtaItem cta="upcoming" variant="placeholder" />
     {/if}
   {/snippet}
 
   {#snippet actions()}
-    {#if mode === "all"}
-      <CalendarButton />
-    {/if}
+    <CalendarButton />
   {/snippet}
 </SectionList>

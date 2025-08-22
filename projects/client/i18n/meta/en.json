@@ -4724,14 +4724,6 @@
         "ios"
       ]
     },
-    "text_cta_calendar": {
-      "default": "Your precious. Your timeline. See what’s dropping next with a full list of upcoming episodes you care about.",
-      "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes and add upcoming movies to their watchlist.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "text_cta_watchlist_unreleased": {
       "default": "Lights, camera… nothing? Add titles to your watchlist and let the binge begin.",
       "description": "Call to action text shown in the Watchlist Unreleased list, encouraging users to add unreleased movies to their watchlist.",
