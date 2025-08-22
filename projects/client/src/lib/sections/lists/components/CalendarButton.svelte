@@ -8,9 +8,7 @@
 <ActionButton
   href={UrlBuilder.calendar()}
   label={m.button_label_calendar()}
-  style="flat"
-  variant="secondary"
-  color="blue"
+  style="ghost"
 >
   <CalendarIcon />
 </ActionButton>
