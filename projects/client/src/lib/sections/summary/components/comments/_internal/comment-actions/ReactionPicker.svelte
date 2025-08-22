@@ -26,10 +26,11 @@
     <CloseIcon />
   </ActionButton>
 
-  {#each Object.entries(REACTIONS_MAP) as [reaction, emoji] (reaction)}
+  {#each Object.entries(REACTIONS_MAP) as [reaction, emoji], index (reaction)}
     <div
       class="trakt-react-button-container"
       class:is-current={currentReaction === reaction}
+      style="--reaction-index: {index}"
     >
       <ActionButton
         label={m.button_label_react({
@@ -51,6 +52,7 @@
     display: flex;
     align-items: center;
     height: var(--ni-40);
+    margin: var(--ni-8);
 
     :global(svg) {
       width: var(--ni-16);
@@ -61,6 +63,8 @@
   }
 
   .trakt-react-button-container {
+    --animation-duration: calc(var(--transition-increment) * 2);
+
     :global(.trakt-action-button) {
       transition: var(--transition-increment) ease-in-out;
       transition-property: font-size, background-color;
@@ -70,6 +74,12 @@
       background-color: transparent;
       backdrop-filter: none;
       font-size: var(--ni-18);
+
+      opacity: 0;
+
+      --delay-factor: calc(var(--animation-duration) / 6);
+      animation: bump-in var(--animation-duration) ease-in forwards;
+      animation-delay: calc(var(--reaction-index) * var(--delay-factor));
     }
   }
 

@@ -55,6 +55,21 @@
   }
 }
 
+@keyframes bump-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.0);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.75);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 [data-device='tv'] * {
   transition: none !important;
 }

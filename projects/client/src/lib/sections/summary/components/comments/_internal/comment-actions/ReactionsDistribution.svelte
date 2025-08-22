@@ -21,7 +21,7 @@
 <div
   class="trakt-reactions-distribution"
   class:is-loading={isLoading}
-  transition:slide={{ duration: 150, axis: "y" }}
+  out:slide={{ duration: 150, axis: "y" }}
 >
   <span class="meta-info secondary trakt-distribution-header">
     <ReactionIcon state="default" />{m.header_comment_reactions()}
@@ -47,11 +47,26 @@
     background: var(--color-reaction-distribution-background);
     border-radius: var(--border-radius-xxl);
 
-    padding: var(--ni-16);
+    height: 0;
+    opacity: 0;
+
+    overflow: hidden;
+    animation: grow var(--transition-increment) ease-in;
+    animation-delay: calc(var(--transition-increment) / 2);
+    animation-fill-mode: forwards;
 
     &.is-loading {
       .trakt-reactions {
         opacity: 0.5;
+      }
+    }
+
+    @keyframes grow {
+      100% {
+        padding: var(--ni-16);
+        height: var(--ni-104);
+        margin: var(--ni-8);
+        opacity: 1;
       }
     }
   }

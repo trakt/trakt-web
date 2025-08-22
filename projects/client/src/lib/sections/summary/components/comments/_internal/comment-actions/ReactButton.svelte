@@ -5,7 +5,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
-  import { slide } from "svelte/transition";
+  import { scale } from "svelte/transition";
   import ReactionPicker from "./ReactionPicker.svelte";
   import ReactionsDistribution from "./ReactionsDistribution.svelte";
   import ReactionsSummary from "./ReactionsSummary.svelte";
@@ -15,7 +15,7 @@
   const { comment }: { comment: MediaComment } = $props();
 
   const { portalTrigger, portal, isOpened, close } = usePortal({
-    placement: { position: "right", mode: "contain" },
+    placement: { position: "top" },
     type: "persistent",
   });
 
@@ -36,6 +36,7 @@
   }
 
   const isDisabled = $derived($isReacting);
+  const hasDistribution = $derived($currentReaction ?? $isReacting);
 </script>
 
 {#snippet content()}
@@ -72,10 +73,15 @@
 </RenderFor>
 
 {#if $isOpened}
-  <div class="trakt-reaction-popup" use:portal>
+  <div
+    class="trakt-reaction-popup"
+    use:portal
+    class:has-distribution={hasDistribution}
+  >
     <div
       class="transition-wrapper"
-      transition:slide={{ duration: 150, axis: "x" }}
+      in:scale={{ duration: 150 }}
+      out:scale={{ duration: 300 }}
     >
       <ReactionPicker
         currentReaction={$currentReaction}
@@ -83,7 +89,7 @@
         onClose={close}
       />
 
-      {#if $currentReaction ?? $isReacting}
+      {#if hasDistribution}
         <ReactionsDistribution
           distribution={$summary.distribution}
           currentReaction={$currentReaction}
@@ -130,16 +136,11 @@
       padding-right: var(--ni-10);
     }
 
-    &[disabled] {
+    &[disabled]:not([data-popup-state="opened"]) {
       background-color: var(--color-reaction-disabled-background);
       filter: saturate(0.5);
 
       cursor: not-allowed;
-    }
-
-    &:global([data-popup-state="opened"]) {
-      pointer-events: none;
-      opacity: 0;
     }
 
     @include for-mouse {
@@ -155,47 +156,40 @@
   .transition-wrapper {
     width: 100%;
 
+    position: absolute;
     display: flex;
-    flex-direction: column;
-    gap: var(--gap-s);
 
     background-color: var(--color-reaction-background);
     border-radius: var(--border-radius-xxl);
-
-    padding: var(--ni-4);
-    box-sizing: border-box;
 
     box-shadow: var(--popup-shadow);
   }
 
   .trakt-reaction-popup {
-    --popup-offset: var(--ni-neg-10);
     position: relative;
 
     width: var(--ni-340);
+    height: var(--ni-48);
 
-    margin-top: var(--popup-offset);
-    margin-left: var(--popup-offset);
+    &.has-distribution {
+      height: var(--ni-196);
+    }
 
-    &:global([data-popup-position="left"]) {
-      margin-left: 0;
-      margin-right: var(--popup-offset);
-
+    &:global([data-popup-position="top"]) {
       .transition-wrapper {
-        position: absolute;
-        right: 0;
+        transform-origin: calc(50% - var(--alignment-correction, 0px)) bottom;
+        flex-direction: column-reverse;
 
-        :global(.trakt-reaction-picker) {
-          flex-direction: row-reverse;
-        }
+        bottom: 0;
       }
     }
 
-    &:global([data-popup-position="unaligned"]) {
-      margin: 0;
-
+    &:global([data-popup-position="bottom"]) {
       .transition-wrapper {
-        flex-direction: row-reverse;
+        transform-origin: calc(50% - var(--alignment-correction, 0px)) top;
+        flex-direction: column;
+
+        top: 0;
       }
     }
   }
