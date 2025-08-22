@@ -59,6 +59,10 @@
 
     :global(.trakt-card) {
       --width-card: var(--card-width);
+
+      &:global(.trakt-card-cover-tag) {
+        display: none;
+      }
     }
 
     @include for-mobile() {
