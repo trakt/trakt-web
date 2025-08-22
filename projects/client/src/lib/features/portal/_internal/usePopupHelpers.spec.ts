@@ -85,4 +85,26 @@ describe('usePopupHelpers', () => {
 
     dialog.remove();
   });
+
+  it('should have only one clone', () => {
+    const { addHelpers, removeHelpers } = usePopupHelpers(placement);
+    addHelpers(target);
+
+    const popupClones = Array.from(
+      document.querySelectorAll(`[${POPUP_CLONE_ATTRIBUTE}]`),
+    );
+
+    expect(popupClones).toHaveLength(1);
+
+    removeHelpers(null);
+  });
+
+  it('should not add a clone if not needed', () => {
+    const { addHelpers, removeHelpers } = usePopupHelpers();
+    addHelpers(target);
+
+    expect(getTargetClone()).toBeNull();
+
+    removeHelpers(null);
+  });
 });
