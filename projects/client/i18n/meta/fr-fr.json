@@ -1618,13 +1618,13 @@
       "default": "Aucun élément trouvé pour cette date. Peut-être essayer un autre jour ?"
     },
     "text_calendar_placeholder_3": {
-      "default": "On dirait qu'il n'y a rien de prévu aujourd'hui. Détendez-vous et prenez-la cool."
+      "default": "Il semble que rien ne soit prévu pour ce jour. Détendez-vous et prenez les choses simplement."
     },
     "text_calendar_placeholder_4": {
-      "default": "Votre calendrier est vide aujourd'hui. Le moment idéal pour vous reposer."
+      "default": "Votre calendrier est vide ce jour. Le moment idéal pour vous reposer."
     },
     "text_calendar_placeholder_5": {
-      "default": "Aujourd'hui est libre. Peut-être commencer quelque chose de nouveau ?"
+      "default": "Cette journée est totalement libre. Peut-être commencer quelque chose de nouveau ?"
     },
     "text_calendar_placeholder_6": {
       "default": "Aucun plan ici. Le moment de faire quelque chose de spontané."
@@ -1636,7 +1636,7 @@
       "default": "Votre emploi du temps est clair. Profitez-en au maximum."
     },
     "text_calendar_placeholder_9": {
-      "default": "Aucun événement aujourd'hui. Peut-être revoir un ancien favori."
+      "default": "Aucun événement ce jour. Peut-être revisiter un ancien favori."
     },
     "text_calendar_placeholder_10": {
       "default": "Tout est clair. Le moment d'explorer quelque chose de différent."

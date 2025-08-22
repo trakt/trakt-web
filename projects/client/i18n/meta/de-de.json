@@ -1618,13 +1618,13 @@
       "default": "Keine Elemente für dieses Datum gefunden. Vielleicht einen anderen Tag versuchen?"
     },
     "text_calendar_placeholder_3": {
-      "default": "Sieht so aus, als wäre heute nichts geplant. Entspann dich und mach es dir gemütlich."
+      "default": "Anscheinend ist für diesen Tag nichts geplant. Entspannen Sie sich und machen Sie es sich gemütlich."
     },
     "text_calendar_placeholder_4": {
-      "default": "Dein Kalender ist heute leer. Perfekte Zeit, um dich auszuruhen."
+      "default": "Ihr Kalender ist an diesem Tag leer. Der perfekte Zeitpunkt, um sich auszuruhen."
     },
     "text_calendar_placeholder_5": {
-      "default": "Heute ist alles offen. Vielleicht etwas Neues anfangen?"
+      "default": "Dieser Tag ist offen. Vielleicht etwas Neues beginnen?"
     },
     "text_calendar_placeholder_6": {
       "default": "Keine Pläne hier. Zeit, etwas Spontanes zu tun."
@@ -1636,7 +1636,7 @@
       "default": "Dein Zeitplan ist frei. Mach das Beste daraus."
     },
     "text_calendar_placeholder_9": {
-      "default": "Keine Veranstaltungen heute. Vielleicht einen alten Favoriten wiedersehen?"
+      "default": "Keine Veranstaltungen an diesem Tag. Vielleicht einen alten Favoriten wiedersehen."
     },
     "text_calendar_placeholder_10": {
       "default": "Alles klar. Zeit, etwas anderes zu erkunden."

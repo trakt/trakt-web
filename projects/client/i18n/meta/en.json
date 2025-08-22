@@ -4621,7 +4621,7 @@
       ]
     },
     "text_calendar_placeholder_3": {
-      "default": "Looks like there's nothing scheduled for today. Relax and take it easy.",
+      "default": "Looks like there's nothing scheduled for this day. Relax and take it easy.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
         "android",
@@ -4629,7 +4629,7 @@
       ]
     },
     "text_calendar_placeholder_4": {
-      "default": "Your calendar is empty today. Perfect time to catch up on some rest.",
+      "default": "Your calendar is empty on this day. Perfect time to catch up on some rest.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
         "android",
@@ -4637,7 +4637,7 @@
       ]
     },
     "text_calendar_placeholder_5": {
-      "default": "Today is wide open. Maybe start something new?",
+      "default": "This day is wide open. Maybe start something new?",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
         "android",
@@ -4669,7 +4669,7 @@
       ]
     },
     "text_calendar_placeholder_9": {
-      "default": "No events today. Maybe revisit an old favorite.",
+      "default": "No events this day. Maybe revisit an old favorite.",
       "description": "Placeholder text shown when there are no movies or episodes available on a specific day in the calendar.",
       "exclude": [
         "android",

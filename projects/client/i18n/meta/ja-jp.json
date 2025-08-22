@@ -1618,13 +1618,13 @@
       "default": "この日付のアイテムは見つかりませんでした。別の日を試してみますか？"
     },
     "text_calendar_placeholder_3": {
-      "default": "今日は何も予定がないようです。リラックスして、気楽に過ごしてください。"
+      "default": "今日は何も予定がないようです。リラックスして、のんびりしましょう。"
     },
     "text_calendar_placeholder_4": {
-      "default": "今日のカレンダーは空です。休息をとるのに最適です。"
+      "default": "今日のカレンダーは空です。ゆっくり休むのに最適です。"
     },
     "text_calendar_placeholder_5": {
-      "default": "今日は空いています。何か新しいことを始めませんか？"
+      "default": "今日は予定なし！何か新しい作品を始めてみては？"
     },
     "text_calendar_placeholder_6": {
       "default": "予定はありません。何か自発的なことをする時間です。"
@@ -1636,7 +1636,7 @@
       "default": "スケジュールは空いています。最大限に活用してください。"
     },
     "text_calendar_placeholder_9": {
-      "default": "今日はイベントはありません。古いお気に入りを再訪しませんか？"
+      "default": "今日のイベントはありません。昔のお気に入りを再訪するのも良いでしょう。"
     },
     "text_calendar_placeholder_10": {
       "default": "すべてクリアです。何か違うものを探求する時間です。"

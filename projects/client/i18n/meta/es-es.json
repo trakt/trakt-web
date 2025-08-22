@@ -1618,13 +1618,13 @@
       "default": "No se encontraron elementos para esta fecha. ¿Quizá probar otro día?"
     },
     "text_calendar_placeholder_3": {
-      "default": "Parece que no hay nada programado para hoy. Relájate y tómalo con calma."
+      "default": "Parece que no hay nada programado para este día. Relájate y tómalo con calma."
     },
     "text_calendar_placeholder_4": {
-      "default": "Tu calendario está vacío hoy. Momento perfecto para descansar."
+      "default": "Tu calendario está vacío este día. Momento perfecto para descansar."
     },
     "text_calendar_placeholder_5": {
-      "default": "Hoy está despejado. ¿Quizá empezar algo nuevo?"
+      "default": "Este día está completamente libre. ¿Quizás empezar algo nuevo?"
     },
     "text_calendar_placeholder_6": {
       "default": "Sin planes aquí. Hora de hacer algo espontáneo."
@@ -1636,7 +1636,7 @@
       "default": "Tu agenda está libre. Aprovéchalo al máximo."
     },
     "text_calendar_placeholder_9": {
-      "default": "No hay eventos hoy. ¿Quizás revisar un viejo favorito?"
+      "default": "No hay eventos este día. Quizás revisitar un viejo favorito."
     },
     "text_calendar_placeholder_10": {
       "default": "Todo despejado. Es hora de explorar algo diferente."

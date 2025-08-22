@@ -1618,13 +1618,13 @@
       "default": "Geen items gevonden voor deze datum. Misschien een andere dag proberen?"
     },
     "text_calendar_placeholder_3": {
-      "default": "Het lijkt erop dat er vandaag niets gepland staat. Ontspan en doe het rustig aan."
+      "default": "Het lijkt erop dat er niets gepland staat voor deze dag. Ontspan en doe het rustig aan."
     },
     "text_calendar_placeholder_4": {
-      "default": "Je kalender is vandaag leeg. Perfect moment om even uit te rusten."
+      "default": "Je agenda is leeg op deze dag. Perfecte tijd om even uit te rusten."
     },
     "text_calendar_placeholder_5": {
-      "default": "Vandaag is alles open. Misschien iets nieuws beginnen?"
+      "default": "Deze dag staat helemaal open. Misschien iets nieuws beginnen?"
     },
     "text_calendar_placeholder_6": {
       "default": "Geen plannen hier. Tijd om iets spontaans te doen."
@@ -1636,7 +1636,7 @@
       "default": "Je schema is leeg. Haal er het beste uit."
     },
     "text_calendar_placeholder_9": {
-      "default": "Geen evenementen vandaag. Misschien een oude favoriet opnieuw bekijken?"
+      "default": "Geen evenementen vandaag. Misschien een oude favoriet herbekijken."
     },
     "text_calendar_placeholder_10": {
       "default": "Alles is duidelijk. Tijd om iets anders te verkennen."

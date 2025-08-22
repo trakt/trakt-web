@@ -1618,13 +1618,13 @@
       "default": "Inga objekt hittades för detta datum. Kanske prova en annan dag?"
     },
     "text_calendar_placeholder_3": {
-      "default": "Ser ut som att det inte är något planerat idag. Slappna av och ta det lugnt."
+      "default": "Ser ut som att det inte är något inplanerat för den här dagen. Slappna av och ta det lugnt."
     },
     "text_calendar_placeholder_4": {
-      "default": "Din kalender är tom idag. Perfekt tid att vila upp dig."
+      "default": "Din kalender är tom den här dagen. Perfekt tid att ta det lugnt."
     },
     "text_calendar_placeholder_5": {
-      "default": "Idag är det öppet. Kanske börja något nytt?"
+      "default": "Den här dagen är helt öppen. Kanske börja något nytt?"
     },
     "text_calendar_placeholder_6": {
       "default": "Inga planer här. Dags att göra något spontant."
@@ -1636,7 +1636,7 @@
       "default": "Ditt schema är tomt. Utnyttja det maximalt."
     },
     "text_calendar_placeholder_9": {
-      "default": "Inga evenemang idag. Kanske återbesöka en gammal favorit?"
+      "default": "Inga händelser denna dag. Kanske återbesöka en gammal favorit."
     },
     "text_calendar_placeholder_10": {
       "default": "Allt klart. Dags att utforska något annorlunda."

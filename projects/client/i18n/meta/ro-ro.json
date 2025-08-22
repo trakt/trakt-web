@@ -1618,13 +1618,13 @@
       "default": "Nu s-au găsit elemente pentru această dată. Poate încerci o altă zi?"
     },
     "text_calendar_placeholder_3": {
-      "default": "Se pare că nu e nimic programat pentru astăzi. Relaxați-vă și luați-o ușor."
+      "default": "Se pare că nu este nimic programat pentru această zi. Relaxați-vă și luați-o ușor."
     },
     "text_calendar_placeholder_4": {
-      "default": "Calendarul tău este gol astăzi. Momentul perfect pentru a te odihni."
+      "default": "Calendarul tău este gol în această zi. Momentul perfect pentru a te odihni."
     },
     "text_calendar_placeholder_5": {
-      "default": "Astăzi este liber. Poate începi ceva nou?"
+      "default": "Această zi este liberă. Poate începe ceva nou?"
     },
     "text_calendar_placeholder_6": {
       "default": "Niciun plan aici. Timp să faci ceva spontan."
@@ -1636,7 +1636,7 @@
       "default": "Programul tău este clar. Profită la maximum."
     },
     "text_calendar_placeholder_9": {
-      "default": "Niciun eveniment astăzi. Poate revizitezi un vechi favorit?"
+      "default": "Niciun eveniment în această zi. Poate revizitați un vechi favorit."
     },
     "text_calendar_placeholder_10": {
       "default": "Totul e clar. E timpul să explorezi ceva diferit."
