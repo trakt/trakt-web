@@ -25,7 +25,7 @@ export function alignPopupContainer(
     : 'vertical';
 
   if (!isOverflowed(direction)) {
-    forceOnScreen(node, targetNode);
+    forceOnScreen(node, targetNode, position);
     return;
   }
 
@@ -40,5 +40,5 @@ export function alignPopupContainer(
   };
 
   positionAroundTarget(node, target);
-  forceOnScreen(node, targetNode);
+  forceOnScreen(node, targetNode, target.placement.position);
 }

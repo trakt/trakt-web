@@ -1,8 +1,10 @@
+import type { PopupPosition } from './models/PopupPlacement.ts';
 import { setPositionAttributes } from './setPositionAttributes.ts';
 
 export function forceOnScreen(
   popupContainer: HTMLElement,
   targetNode: HTMLElement,
+  position: PopupPosition,
 ) {
   const popupRect = popupContainer.getBoundingClientRect();
 
@@ -14,9 +16,19 @@ export function forceOnScreen(
     return;
   }
 
-  setPositionAttributes(popupContainer, targetNode, 'unaligned');
+  setPositionAttributes({
+    popupContainer,
+    targetNode,
+    position,
+    alignment: 'unaligned',
+  });
 
   if (isLeftOverflow) {
+    const correction = 0 - popupRect.left;
+    popupContainer.style.setProperty(
+      '--alignment-correction',
+      `${correction}px`,
+    );
     popupContainer.style.right = 'initial';
     popupContainer.style.left = '0px';
     return;
@@ -25,4 +37,9 @@ export function forceOnScreen(
   const unalignedLeft = globalThis.window.innerWidth - popupRect.width;
   popupContainer.style.right = 'initial';
   popupContainer.style.left = `${unalignedLeft}px`;
+  const correction = unalignedLeft - popupRect.left;
+  popupContainer.style.setProperty(
+    '--alignment-correction',
+    `${correction}px`,
+  );
 }
