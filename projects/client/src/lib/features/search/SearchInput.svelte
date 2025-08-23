@@ -132,12 +132,6 @@
       .trakt-search-input {
         background: var(--cm-background-search-input);
         outline: var(--border-thickness-xs) solid var(--color-border);
-
-        @include for-mobile {
-          &:not(:focus-within) {
-            opacity: 0;
-          }
-        }
       }
     }
   }
@@ -207,7 +201,7 @@
         &:not(:focus-within) {
           padding: var(--ni-8) var(--ni-24);
           outline: none;
-          opacity: 0.75;
+          opacity: 0;
         }
       }
 
