@@ -44,6 +44,7 @@ export const upNextNitroQuery = defineQuery({
     InvalidateAction.MarkAsWatched('episode'),
     InvalidateAction.Drop,
     InvalidateAction.Restore,
+    InvalidateAction.Watchlisted('show'),
   ],
   dependencies: (
     params: UpNextParams,
