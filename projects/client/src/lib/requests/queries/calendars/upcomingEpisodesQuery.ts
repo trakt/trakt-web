@@ -41,7 +41,12 @@ const upcomingEpisodesRequest = (
 
 export const upcomingEpisodesQuery = defineQuery({
   key: 'upcomingEpisodes',
-  invalidations: [InvalidateAction.Watchlisted('show')],
+  invalidations: [
+    InvalidateAction.Watchlisted('show'),
+    InvalidateAction.MarkAsWatched('episode'),
+    InvalidateAction.MarkAsWatched('show'),
+    InvalidateAction.Drop,
+  ],
   dependencies: (params) => [params.startDate, params.days],
   request: upcomingEpisodesRequest,
   mapper: (response) => {
