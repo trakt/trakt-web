@@ -28,7 +28,10 @@ const upcomingMoviesRequest = (
 
 export const upcomingMoviesQuery = defineQuery({
   key: 'upcomingMovies',
-  invalidations: [InvalidateAction.Watchlisted('movie')],
+  invalidations: [
+    InvalidateAction.Watchlisted('movie'),
+    InvalidateAction.MarkAsWatched('movie'),
+  ],
   dependencies: (params) => [params.startDate, params.days],
   request: upcomingMoviesRequest,
   mapper: (response) =>
