@@ -1833,6 +1833,18 @@
     },
     "button_text_no_services": {
       "default": "サービスなし"
+    },
+    "header_get_trakt_app": {
+      "default": "Traktアプリを入手"
+    },
+    "text_trakt_apps_description": {
+      "default": "ネイティブアプリケーションで、より機能豊富なTraktの世界を探求しましょう！"
+    },
+    "button_label_login": {
+      "default": "ログイン"
+    },
+    "button_text_login": {
+      "default": "ログイン"
     }
   }
 }

@@ -27,6 +27,7 @@
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
   import NowPlaying from "$lib/sections/now-playing/NowPlaying.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
@@ -34,6 +35,8 @@
   import FirefoxBlurHack from "./_internal/FirefoxBlurHack.svelte";
 
   const { data, children } = $props();
+
+  const isOnHomePage = $derived(UrlBuilder.home() === page.url.pathname);
 
   onMount(async () => {
     if (isPWA()) {
@@ -149,23 +152,85 @@
                             <ThemeProvider theme={data.theme}>
                               <ListScrollHistoryProvider>
                                 <div class="trakt-layout-wrapper">
-                                  <Navbar />
+                                  <RenderFor
+                                    audience="all"
+                                    device={[
+                                      "tablet-sm",
+                                      "tablet-lg",
+                                      "desktop",
+                                    ]}
+                                  >
+                                    <Navbar />
+                                  </RenderFor>
+                                  <RenderFor
+                                    audience="authenticated"
+                                    device={["mobile"]}
+                                    navigation="default"
+                                  >
+                                    <Navbar />
+                                  </RenderFor>
+                                  <RenderFor
+                                    audience="public"
+                                    device={["mobile"]}
+                                    navigation="default"
+                                  >
+                                    {#if !isOnHomePage}
+                                      <Navbar />
+                                    {/if}
+                                  </RenderFor>
                                   <div class="trakt-layout-content">
                                     {@render children()}
                                   </div>
                                   <RenderFor
                                     audience="all"
+                                    device={[
+                                      "tablet-sm",
+                                      "tablet-lg",
+                                      "desktop",
+                                    ]}
                                     navigation="default"
                                   >
                                     <Footer />
                                   </RenderFor>
+                                  <RenderFor
+                                    audience="authenticated"
+                                    device={["mobile"]}
+                                    navigation="default"
+                                  >
+                                    <Footer />
+                                  </RenderFor>
+                                  <RenderFor
+                                    audience="public"
+                                    device={["mobile"]}
+                                    navigation="default"
+                                  >
+                                    {#if !isOnHomePage}
+                                      <Footer />
+                                    {/if}
+                                  </RenderFor>
                                 </div>
                                 <RenderFor
                                   audience="all"
-                                  device={["mobile", "tablet-sm"]}
+                                  device={["tablet-sm"]}
                                   navigation="default"
                                 >
                                   <MobileNavbar />
+                                </RenderFor>
+                                <RenderFor
+                                  audience="authenticated"
+                                  device={["mobile"]}
+                                  navigation="default"
+                                >
+                                  <MobileNavbar />
+                                </RenderFor>
+                                <RenderFor
+                                  audience="public"
+                                  device={["mobile"]}
+                                  navigation="default"
+                                >
+                                  {#if !isOnHomePage}
+                                    <MobileNavbar />
+                                  {/if}
                                 </RenderFor>
                                 <RenderFor
                                   audience="authenticated"

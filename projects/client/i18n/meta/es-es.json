@@ -1833,6 +1833,18 @@
     },
     "button_text_no_services": {
       "default": "Sin servicios"
+    },
+    "header_get_trakt_app": {
+      "default": "Descarga la app de Trakt"
+    },
+    "text_trakt_apps_description": {
+      "default": "y explora una experiencia Trakt más completa en nuestras aplicaciones nativas."
+    },
+    "button_label_login": {
+      "default": "Iniciar sesión"
+    },
+    "button_text_login": {
+      "default": "Iniciar sesión"
     }
   }
 }

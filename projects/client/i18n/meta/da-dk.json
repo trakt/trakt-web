@@ -1833,6 +1833,18 @@
     },
     "button_text_no_services": {
       "default": "Ingen tjenester"
+    },
+    "header_get_trakt_app": {
+      "default": "Få Trakt-appen"
+    },
+    "text_trakt_apps_description": {
+      "default": "og udforsk en mere funktionsrig Trakt-oplevelse på vores native applikationer."
+    },
+    "button_label_login": {
+      "default": "Log ind"
+    },
+    "button_text_login": {
+      "default": "Log ind"
     }
   }
 }

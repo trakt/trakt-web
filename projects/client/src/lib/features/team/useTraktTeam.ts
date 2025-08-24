@@ -27,12 +27,16 @@ type TraktTeam = {
   team: Readable<Array<UserProfile>>;
 };
 
-export function useTraktTeam(following: UserProfile[]): TraktTeam {
+export function useTraktTeam(
+  following: UserProfile[],
+  limit?: number,
+): TraktTeam {
   const unfollowedMembers = TEAM_SLUGS.filter(
     (slug) => !following.some((user) => user.username === slug),
   );
 
   const queries = shuffle(unfollowedMembers)
+    .slice(0, limit ?? unfollowedMembers.length)
     .map((slug) => userProfileQuery({ slug }))
     .map((query) => useQuery(query));
 

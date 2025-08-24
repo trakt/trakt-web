@@ -5180,6 +5180,38 @@
         "ios",
         "web"
       ]
+    },
+    "header_get_trakt_app": {
+      "default": "Get the trakt app",
+      "description": "Text for the header that promotes the trakt apps.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "text_trakt_apps_description": {
+      "default": "and explore a more feature rich trakt experience on our native applications",
+      "description": "Text promoting the trakt apps.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "button_label_login": {
+      "default": "Login",
+      "description": "Aria label for the login button.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "button_text_login": {
+      "default": "Login",
+      "description": "Text for the login button.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
     }
   }
 }

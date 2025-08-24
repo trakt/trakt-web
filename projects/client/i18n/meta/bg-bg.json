@@ -1833,6 +1833,18 @@
     },
     "button_text_no_services": {
       "default": "Няма услуги"
+    },
+    "header_get_trakt_app": {
+      "default": "Вземете приложението Trakt"
+    },
+    "text_trakt_apps_description": {
+      "default": "и изследвайте едно по-богато на функции Trakt изживяване в нашите родни приложения."
+    },
+    "button_label_login": {
+      "default": "Вход"
+    },
+    "button_text_login": {
+      "default": "Вход"
     }
   }
 }

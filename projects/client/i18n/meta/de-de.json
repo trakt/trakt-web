@@ -1833,6 +1833,18 @@
     },
     "button_text_no_services": {
       "default": "Keine Angebote"
+    },
+    "header_get_trakt_app": {
+      "default": "Hole dir die Trakt App"
+    },
+    "text_trakt_apps_description": {
+      "default": "und entdecke eine noch funktionsreichere Trakt-Erfahrung auf unseren nativen Anwendungen."
+    },
+    "button_label_login": {
+      "default": "Anmelden"
+    },
+    "button_text_login": {
+      "default": "Anmelden"
     }
   }
 }
