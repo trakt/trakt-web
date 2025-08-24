@@ -1,11 +1,19 @@
 <svg
+  width="33"
+  height="32"
+  viewBox="0 0 33 32"
+  fill="none"
   xmlns="http://www.w3.org/2000/svg"
-  width="24px"
-  height="24px"
-  viewBox="0 -960 960 960"
-  fill="currentColor"
 >
   <path
-    d="M240-40q-33 0-56.5-23.5T160-120v-440q0-33 23.5-56.5T240-640h120v80H240v440h480v-440H600v-80h120q33 0 56.5 23.5T800-560v440q0 33-23.5 56.5T720-40H240Zm200-280v-447l-64 64-56-57 160-160 160 160-56 57-64-64v447h-80Z"
+    d="M8.19727 12L16.1973 4L24.1973 12"
+    stroke="currentColor"
+    stroke-width="2.66667"
+  />
+  <path d="M16.1973 4V20" stroke="currentColor" stroke-width="2.66667" />
+  <path
+    d="M5.53052 16V26.6667H26.8639V16"
+    stroke="currentColor"
+    stroke-width="2.66667"
   />
 </svg>

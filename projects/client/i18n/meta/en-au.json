@@ -1833,6 +1833,18 @@
     },
     "button_text_no_services": {
       "default": "No services"
+    },
+    "header_get_trakt_app": {
+      "default": "Get the trakt app"
+    },
+    "text_trakt_apps_description": {
+      "default": "and explore a more feature rich trakt experience on our native applications"
+    },
+    "button_label_login": {
+      "default": "Login"
+    },
+    "button_text_login": {
+      "default": "Login"
     }
   }
 }

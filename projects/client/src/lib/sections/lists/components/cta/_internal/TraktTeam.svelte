@@ -1,9 +1,9 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { useTraktTeam } from "$lib/features/team/useTraktTeam";
   import VipBadge from "$lib/sections/navbar/components/VIPBadge.svelte";
   import UserAvatar from "../../UserAvatar.svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
-  import { useTraktTeam } from "./useTraktTeam";
 
   const { intl, limit }: { intl: CtaItemIntl; limit?: number } = $props();
 

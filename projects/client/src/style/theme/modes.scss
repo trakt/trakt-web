@@ -119,6 +119,11 @@
   --color-calendar-active-background: var(--shade-200);
   --color-calendar-background-hover: var(--shade-100);
   --color-calendar-item-indicator: var(--blue-700);
+
+  /*
+   * Landing
+   */
+  --color-step-shadow-text: var(--shade-50);
 }
 
 // Define theme variables for dark mode
@@ -235,6 +240,11 @@
   --color-calendar-active-background: var(--shade-800);
   --color-calendar-background-hover: var(--shade-700);
   --color-calendar-item-indicator: var(--blue-500);
+
+  /*
+   * Landing
+   */
+  --color-step-shadow-text: var(--shade-920);
 }
 
 // Apply themes to selectors
