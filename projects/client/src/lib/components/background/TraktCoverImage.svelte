@@ -2,13 +2,13 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useCover } from "./_internal/useCover";
 
-  const { cover, state } = useCover();
+  const { cover } = useCover();
 </script>
 
-{#if $state === "ready"}
-  <div class="trakt-cover-image" data-cover-type={$cover.type}>
+{#if $cover.state === "ready"}
+  <div class="trakt-cover-image" data-cover-type={$cover.data.type}>
     <div class="trakt-cover-image-overlay">
-      <CrossOriginImage src={$cover.src} alt={`Background for footer`} />
+      <CrossOriginImage src={$cover.data.src} alt={`Background for footer`} />
     </div>
   </div>
 {/if}

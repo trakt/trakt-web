@@ -6,7 +6,6 @@ import {
   permissionSchema,
 } from '$lib/requests/models/Permission.ts';
 import { UserNameSchema } from '$lib/requests/models/UserName.ts';
-import { DEFAULT_COVER } from '$lib/utils/constants.ts';
 import { toUserName } from '$lib/utils/formatting/string/toUserName.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -29,7 +28,7 @@ export const UserSettingsSchema = z.object({
     url: z.string(),
   }),
   cover: z.object({
-    url: z.string(),
+    url: z.string().nullish(),
   }),
   isVip: z.boolean(),
   isDirector: z.boolean(),
@@ -94,7 +93,6 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
           user.vip_cover_image,
           account.cover_image,
         ),
-        DEFAULT_COVER,
       ),
     },
     isVip: user.vip || user.vip_ep,

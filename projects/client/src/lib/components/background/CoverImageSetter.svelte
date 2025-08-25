@@ -3,7 +3,7 @@
   import { useCover } from "./_internal/useCover";
 
   type ImageBackgroundProps = {
-    src: string;
+    src?: string | Nil;
     type: MediaType | "main";
     colors?: [string, string];
   };
@@ -14,22 +14,37 @@
     colors = ["var(--color-background)", "var(--color-background)"],
   }: ImageBackgroundProps = $props();
 
-  const { cover, state } = useCover();
+  const { cover } = useCover();
 
   $effect.pre(() => {
-    const current = $cover;
-
-    if (current.src === src && $state !== "loading") {
+    if (!src) {
+      cover.set({
+        data: undefined,
+        state: "no-cover",
+      });
       return;
     }
 
-    cover.set({
+    const current = $cover;
+    if (
+      current.state !== "no-cover" &&
+      current.state !== "loading" &&
+      current.data.src === src
+    ) {
+      return;
+    }
+
+    const data = {
       src,
       type,
       colors,
+    };
+
+    cover.set({
+      data,
+      state: "change",
     });
 
-    state.set("change");
-    queueMicrotask(() => state.set("ready"));
+    queueMicrotask(() => cover.set({ data, state: "ready" }));
   });
 </script>

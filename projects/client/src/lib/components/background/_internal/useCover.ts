@@ -10,21 +10,30 @@ type CoverData = {
   colors?: [string, string];
 };
 
-type CoverContextData = {
-  cover: Writable<CoverData>;
-  state: Writable<'change' | 'ready' | 'loading'>;
+type Cover = {
+  data: CoverData;
+  state: 'change' | 'ready' | 'loading';
+} | {
+  data: undefined;
+  state: 'no-cover';
 };
 
-export function useCover(initial?: CoverData) {
-  const { cover, state } = getContext<CoverContextData>(COVER_CONTEXT_KEY) ??
+type CoverContextData = {
+  cover: Writable<Cover>;
+};
+
+export function useCover() {
+  const { cover } = getContext<CoverContextData>(COVER_CONTEXT_KEY) ??
     setContext(
       COVER_CONTEXT_KEY,
       getContext<CoverContextData>(COVER_CONTEXT_KEY) ??
         {
-          cover: writable(initial),
-          state: writable('loading'),
+          cover: writable({
+            data: undefined,
+            state: 'no-cover',
+          }),
         },
     );
 
-  return { cover, state };
+  return { cover };
 }
