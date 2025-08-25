@@ -24,6 +24,11 @@ Sentry.init({
     maskAllText: false,
     blockAllMedia: false,
   })],
+
+  ignoreErrors: [
+    'CancelledError',
+    'AbortError',
+  ],
 });
 
 // FIXME remove once we have custom paraglide handling for this
