@@ -15,7 +15,7 @@ export const UserProfileSchema = z.object({
   location: z.string().nullish(),
   about: z.string().nullish(),
   cover: z.object({
-    url: z.string(),
+    url: z.string().nullish(),
   }).optional(),
 });
 

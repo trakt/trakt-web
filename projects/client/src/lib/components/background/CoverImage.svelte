@@ -2,20 +2,20 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useCover } from "./_internal/useCover";
 
-  const { cover, state } = useCover();
+  const { cover } = useCover();
 </script>
 
-{#if $state === "ready"}
+{#if $cover.state === "ready"}
   <div
     class="trakt-background-cover-image"
-    data-cover-type={$cover.type}
-    style:--trakt-cover-primary-color={$cover.colors?.at(0)}
-    style:--trakt-cover-secondary-color={$cover.colors?.at(1)}
+    data-cover-type={$cover.data.type}
+    style:--trakt-cover-primary-color={$cover.data.colors?.at(0)}
+    style:--trakt-cover-secondary-color={$cover.data.colors?.at(1)}
   >
     <CrossOriginImage
       loading="eager"
-      src={$cover.src}
-      alt={`Background for ${$cover.type}`}
+      src={$cover.data.src}
+      alt={`Background for ${$cover.data.type}`}
     />
   </div>
 {/if}

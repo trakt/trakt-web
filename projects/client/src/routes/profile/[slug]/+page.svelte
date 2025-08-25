@@ -5,7 +5,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
   import Profile from "$lib/sections/profile/Profile.svelte";
-  import { DEFAULT_COVER, DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { useProfile } from "./useProfile";
 
   const { user, isLoading } = $derived(useProfile(page.params.slug));
@@ -24,7 +24,7 @@
   hasDynamicContent={true}
 >
   {#if !$isLoading && $user}
-    <CoverImageSetter src={$user.cover?.url ?? DEFAULT_COVER} type="main" />
+    <CoverImageSetter src={$user.cover?.url} type="main" />
     {#if $user.private}
       <PrivateProfile profile={$user} />
     {:else}
