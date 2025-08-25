@@ -13,7 +13,6 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowResponse } from '@trakt/api';
 import { z } from 'zod';
-import { getMarker } from '../../../utils/date/Marker.ts';
 import { getRecordDependencies } from '../../_internal/getRecordDependencies.ts';
 
 export const PopularShowSchema = ShowEntrySchema.merge(
@@ -51,9 +50,6 @@ const showPopularRequest = (
         limit,
         ...filter,
         ...search,
-        ...{
-          marker: getMarker(),
-        },
       },
     });
 

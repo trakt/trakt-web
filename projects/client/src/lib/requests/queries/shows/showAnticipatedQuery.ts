@@ -14,7 +14,6 @@ import { addYear } from '$lib/utils/date/addYear.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowAnticipatedResponse } from '@trakt/api';
 import { z } from 'zod';
-import { getMarker } from '../../../utils/date/Marker.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 
 export const AnticipatedShowSchema = ShowEntrySchema
@@ -58,9 +57,6 @@ const showAnticipatedRequest = (
         limit,
         ...filter,
         ...search,
-        ...{
-          marker: getMarker(),
-        },
         end_date: addYear(new Date()).toISOString(),
       },
     });
