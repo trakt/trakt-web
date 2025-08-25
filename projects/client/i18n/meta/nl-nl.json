@@ -1763,13 +1763,13 @@
       "default": "Er is iets misgegaan"
     },
     "error_text_unexpected_error": {
-      "default": "Oeps... Er is iets onverwachts gebeurd. Als dit blijft gebeuren, <a>maak dan een nieuw probleem aan</a>."
+      "default": "Oeps... Dit was niet de bedoeling. Als dit blijft gebeuren, <a>dien dan een nieuw probleem in</a>."
     },
     "list_placeholder_no_filter_results": {
       "default": "Helaas, geen resultaten. Je filter was misschien iets te selectief."
     },
     "error_text_unexpected_error_short": {
-      "default": "Oeps… Er is iets onverwachts gebeurd. Neem contact op met de Trakt-ondersteuning als dit blijft gebeuren."
+      "default": "Oeps... Dit was niet de bedoeling. Als dit blijft gebeuren, neem dan contact op met de Trakt-ondersteuning."
     },
     "page_title_where_to_watch": {
       "default": "Waar te bekijken"

@@ -15,7 +15,7 @@
       <div class="trakt-social-proof-lines">
         <p class="smaller">years of watching together</p>
         <p class="smaller">mil. shows & movie lovers</p>
-        <p class="smaller">mil. minutes tracked daily</p>
+        <p class="smaller">mil. titles tracked weekly</p>
       </div>
     </div>
     <div

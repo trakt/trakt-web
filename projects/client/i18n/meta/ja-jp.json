@@ -1763,13 +1763,13 @@
       "default": "問題が発生しました"
     },
     "error_text_unexpected_error": {
-      "default": "おっと…予期せぬことが起きました。もしこれが続くようでしたら、<a>新しい問題を報告してください</a>。"
+      "default": "おっと… 計画外でした。もしこれが続くようでしたら、<a>新しい問題を報告</a>してください。"
     },
     "list_placeholder_no_filter_results": {
       "default": "残念、ヒットなし。フィルターが少し絞りすぎたかもしれません。"
     },
     "error_text_unexpected_error_short": {
-      "default": "おっと…予期せぬエラーが発生しました。 繰り返し発生する場合は、Traktサポートまでご連絡ください。"
+      "default": "おっと… 計画外でした。もしこれが続くようでしたら、Traktサポートにご連絡ください。"
     },
     "page_title_where_to_watch": {
       "default": "視聴場所"

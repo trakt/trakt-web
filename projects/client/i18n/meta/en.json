@@ -4990,7 +4990,7 @@
       ]
     },
     "error_text_unexpected_error": {
-      "default": "Uh oh... Something unexpected happened. If this keeps happening, please <a>create a new issue</a>.",
+      "default": "Uh oh... this wasn't planned. If this keeps happening, please <a>submit a new issue</a>.",
       "description": "Text shown on the unexpected error page, informing the user that something went wrong and providing a link to create a new issue.",
       "exclude": [
         "android",
@@ -5006,7 +5006,7 @@
       ]
     },
     "error_text_unexpected_error_short": {
-      "default": "Uh oh… Something unexpected happened. If this keeps happening, please contact Trakt support.",
+      "default": "Uh oh... this wasn't planned. If this keeps happening, please contact Trakt support.",
       "description": "Short text shown on the unexpected error page, informing the user that something went wrong.",
       "exclude": [
         "ios",

@@ -1763,13 +1763,13 @@
       "default": "Ceva n-a mers bine"
     },
     "error_text_unexpected_error": {
-      "default": "Oups... S-a întâmplat ceva neașteptat. Dacă asta continuă, te rugăm să <a>creezi o nouă sesizare</a>."
+      "default": "Oups... Asta nu era planificat. Dacă se întâmplă în continuare, vă rugăm să <a>trimiteți o nouă problemă</a>."
     },
     "list_placeholder_no_filter_results": {
       "default": "Păcat, nicio potrivire. Filtrul tău a fost poate un pic prea selectiv."
     },
     "error_text_unexpected_error_short": {
-      "default": "Oops… Ceva neașteptat s-a întâmplat. Dacă se întâmplă în continuare, contactează suportul Trakt."
+      "default": "Oups... Asta nu era planificat. Dacă se întâmplă în continuare, contactați suportul Trakt."
     },
     "page_title_where_to_watch": {
       "default": "Unde să vezi"
