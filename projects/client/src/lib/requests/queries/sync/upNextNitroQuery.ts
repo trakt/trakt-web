@@ -7,7 +7,6 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { mapUpNextResponse } from '$lib/requests/queries/sync/upNextQuery.ts';
-import { getMarker } from '$lib/utils/date/Marker.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 
@@ -30,9 +29,6 @@ const upNextNitroRequest = (params: UpNextParams) => {
       query: {
         page,
         limit,
-        ...{
-          marker: getMarker(),
-        },
       },
     });
 };

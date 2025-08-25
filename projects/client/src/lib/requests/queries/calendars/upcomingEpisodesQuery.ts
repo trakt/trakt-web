@@ -7,7 +7,6 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
-import { getMarker } from '../../../utils/date/Marker.ts';
 import { EpisodeEntrySchema } from '../../models/EpisodeEntry.ts';
 
 export type CalendarShowsParams = {
@@ -28,9 +27,6 @@ const upcomingEpisodesRequest = (
     .shows({
       query: {
         extended: 'full,images',
-        ...{
-          marker: getMarker(),
-        },
       },
       params: {
         target: 'my',

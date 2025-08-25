@@ -10,7 +10,6 @@ import {
 } from '$lib/requests/models/EpisodeType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { MAX_DATE } from '$lib/utils/constants.ts';
-import { getMarker } from '$lib/utils/date/Marker.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -30,9 +29,6 @@ const showProgressRequest = (
         hidden: false,
         extended: 'full,images',
         include_stats: true,
-        ...{
-          marker: getMarker(),
-        },
       },
       params: {
         id: slug,

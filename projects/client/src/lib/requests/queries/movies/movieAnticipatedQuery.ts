@@ -13,7 +13,6 @@ import { addYear } from '$lib/utils/date/addYear.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { MovieAnticipatedResponse } from '@trakt/api';
 import { z } from 'zod';
-import { getMarker } from '../../../utils/date/Marker.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 
 export const AnticipatedMovieSchema = MovieEntrySchema.extend({
@@ -49,9 +48,6 @@ const movieAnticipatedRequest = (
         limit,
         ...filter,
         ...search,
-        ...{
-          marker: getMarker(),
-        },
         end_date: addYear(new Date()).toISOString(),
       },
     });
