@@ -1763,13 +1763,13 @@
       "default": "Coś poszło nie tak"
     },
     "error_text_unexpected_error": {
-      "default": "Ups... Coś niespodziewanego się wydarzyło. Jeśli to się powtarza, proszę <a>zgłosić nowy problem</a>."
+      "default": "Ups... To nie było zaplanowane. Jeśli to się powtarza, <a>zgłoś nowy problem</a>."
     },
     "list_placeholder_no_filter_results": {
       "default": "Szkoda, brak wyników. Twój filtr mógł być nieco zbyt restrykcyjny."
     },
     "error_text_unexpected_error_short": {
-      "default": "Ups… Coś poszło nie tak. Jeśli to się powtarza, skontaktuj się z pomocą techniczną Trakt."
+      "default": "Ups... To nie było zaplanowane. Jeśli to się powtarza, skontaktuj się z pomocą techniczną Trakt."
     },
     "page_title_where_to_watch": {
       "default": "Gdzie oglądać"

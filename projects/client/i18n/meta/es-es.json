@@ -1763,13 +1763,13 @@
       "default": "Algo salió mal"
     },
     "error_text_unexpected_error": {
-      "default": "Vaya... Algo inesperado ha sucedido. Si esto sigue ocurriendo, por favor, <a>crea un nuevo informe</a>."
+      "default": "Vaya... Esto no estaba planeado. Si sigue ocurriendo, por favor, <a>envía un nuevo informe</a>."
     },
     "list_placeholder_no_filter_results": {
       "default": "Vaya, no hay resultados. Puede que tu filtro haya sido un poco demasiado restrictivo."
     },
     "error_text_unexpected_error_short": {
-      "default": "¡Vaya! Algo inesperado ha ocurrido. Si esto persiste, contacta con el soporte de Trakt."
+      "default": "Vaya... Esto no estaba planeado. Si sigue ocurriendo, contacta con el soporte de Trakt."
     },
     "page_title_where_to_watch": {
       "default": "Dónde ver"

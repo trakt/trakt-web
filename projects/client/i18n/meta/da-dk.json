@@ -1763,13 +1763,13 @@
       "default": "Noget gik galt"
     },
     "error_text_unexpected_error": {
-      "default": "Ups... Noget uventet skete. Hvis dette fortsætter, skal du <a>oprette et nyt problem</a>."
+      "default": "Ups... Det var ikke meningen. Hvis det bliver ved, så <a>indsend et nyt problem</a>."
     },
     "list_placeholder_no_filter_results": {
       "default": "Øv, ingen hits. Dit filter var måske lige en tand for selektivt."
     },
     "error_text_unexpected_error_short": {
-      "default": "Ups… Noget uventet skete. Hvis det fortsætter, bedes du kontakte Trakt-support."
+      "default": "Ups... Det var ikke meningen. Hvis det bliver ved, så kontakt Trakt support."
     },
     "page_title_where_to_watch": {
       "default": "Hvor du kan se"

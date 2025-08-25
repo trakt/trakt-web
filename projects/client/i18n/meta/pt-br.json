@@ -1763,13 +1763,13 @@
       "default": "Algo deu errado"
     },
     "error_text_unexpected_error": {
-      "default": "Ah não... Algo inesperado aconteceu. Se isso continuar acontecendo, por favor, <a>crie um novo chamado</a>."
+      "default": "Opa... Isso não era para acontecer. Se continuar acontecendo, por favor, <a>envie um novo problema</a>."
     },
     "list_placeholder_no_filter_results": {
       "default": "Puxa, nada encontrado. Seu filtro pode ter sido um pouco restritivo demais."
     },
     "error_text_unexpected_error_short": {
-      "default": "Ops… Algo inesperado aconteceu. Se isso continuar, entre em contato com o suporte do Trakt."
+      "default": "Opa... Isso não era para acontecer. Se continuar acontecendo, entre em contato com o suporte da Trakt."
     },
     "page_title_where_to_watch": {
       "default": "Onde assistir"

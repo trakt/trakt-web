@@ -1763,13 +1763,13 @@
       "default": "Etwas ist schiefgelaufen"
     },
     "error_text_unexpected_error": {
-      "default": "Oje... Etwas Unerwartetes ist passiert. Wenn dies weiterhin auftritt, bitte <a>erstelle ein neues Ticket</a>."
+      "default": "Hoppla... Das war nicht geplant. Wenn dies weiterhin auftritt, <a>reichen Sie bitte ein neues Problem ein</a>."
     },
     "list_placeholder_no_filter_results": {
       "default": "Mist, keine Treffer. Dein Filter war vielleicht etwas zu wählerisch."
     },
     "error_text_unexpected_error_short": {
-      "default": "Unerwarteter Fehler! Bitte kontaktiere den Trakt-Support, falls dies weiterhin auftritt."
+      "default": "Hoppla... Das war nicht geplant. Wenn dies weiterhin auftritt, wenden Sie sich bitte an den Trakt-Support."
     },
     "page_title_where_to_watch": {
       "default": "Wo schauen"
