@@ -51,6 +51,7 @@
     position: absolute;
 
     opacity: 0.35;
+    filter: blur(var(--ni-4));
 
     z-index: var(--layer-background);
 
