@@ -243,6 +243,7 @@
     --list-padding: var(--ni-12);
     @include transform-position(var(--list-padding));
 
+    position: absolute;
     width: max(var(--button-width), var(--ni-180));
     padding: var(--list-padding);
 
