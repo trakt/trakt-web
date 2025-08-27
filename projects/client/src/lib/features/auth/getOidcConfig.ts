@@ -1,4 +1,4 @@
-import { IS_DEV } from '$lib/utils/env/index.ts';
+import { getReferrer } from '$lib/utils/requests/getReferrer.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { type UserManagerSettings, WebStorageStateStore } from 'oidc-client-ts';
 
@@ -12,7 +12,7 @@ function getAuthority() {
 }
 
 export function getOidcConfig(): UserManagerSettings {
-  const referrer = IS_DEV ? 'http://localhost:5173' : 'https://app.trakt.tv';
+  const referrer = getReferrer();
 
   return {
     authority: getAuthority(),
