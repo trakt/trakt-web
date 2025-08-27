@@ -24,7 +24,7 @@
 
   const currentPosition = writable<CrewPosition>(person.knownFor ?? "acting");
 
-  const { credits } = useCreditsList({ type, slug: person.slug });
+  const { credits } = $derived(useCreditsList({ type, slug: person.slug }));
 
   const getPositionList = (mediaCredits?: MediaCredits) => {
     if (!mediaCredits) return [];
@@ -50,7 +50,7 @@
 
   const positions = $derived(getAvailablePositions($credits));
   const list = $derived(getPositionList($credits));
-  const defaultVariant = useDefaultCardVariant(type);
+  const defaultVariant = $derived(useDefaultCardVariant(type));
 </script>
 
 <SectionList

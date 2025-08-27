@@ -5,7 +5,7 @@
 
   const { children, ...rest }: ChildrenProps & IsWatchedProps = $props();
 
-  const { spoiler } = useSpoilerAction(rest);
+  const { spoiler } = $derived(useSpoilerAction(rest));
 </script>
 
 <trakt-spoiler use:spoiler use:spoilMeAnyway>

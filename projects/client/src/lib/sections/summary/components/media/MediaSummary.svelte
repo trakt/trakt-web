@@ -54,7 +54,7 @@
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
   const title = $derived(intl?.title ?? media?.title ?? "");
-  const { watchCount } = useWatchCount({ media, type });
+  const { watchCount } = $derived(useWatchCount({ media, type }));
 
   const commonProps = $derived({
     size: $isMobile ? ("small" as const) : ("normal" as const),
