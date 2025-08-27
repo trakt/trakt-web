@@ -1,8 +1,8 @@
 import { requestDeviceCode } from '$lib/features/auth/requests/requestDeviceCode.ts';
+import { getReferrer } from '$lib/utils/requests/getReferrer.ts';
+import { time } from '$lib/utils/timing/time.ts';
 import { setCacheBuster } from '$lib/utils/url/setCacheBuster.ts';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
-import { IS_DEV } from '../../utils/env/index.ts';
-import { time } from '../../utils/timing/time.ts';
 import { AuthDeviceEndpoint } from './AuthDeviceEndpoint.ts';
 import { AuthEndpoint } from './AuthEndpoint.ts';
 import type { OidcAuthToken } from './models/OidcAuthToken.ts';
@@ -68,9 +68,6 @@ export const handle: Handle = async ({ event, resolve }) => {
   const setAuth = (auth: SerializedAuthResponse | Nil) => {
     event.locals.auth = auth;
   };
-
-  const getReferrer = () =>
-    IS_DEV ? 'http://localhost:5173' : 'https://app.trakt.tv';
 
   const authorizedResponse = (response: SerializedAuthResponse, url: URL) => {
     const { isAuthorized } = response;
