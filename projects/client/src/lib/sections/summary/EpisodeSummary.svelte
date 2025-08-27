@@ -44,7 +44,7 @@
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
-  const { watchCount } = useWatchCount({ show, episode, type });
+  const { watchCount } = $derived(useWatchCount({ show, episode, type }));
 </script>
 
 {#snippet mediaActions(size: "small" | "normal" = "normal")}
