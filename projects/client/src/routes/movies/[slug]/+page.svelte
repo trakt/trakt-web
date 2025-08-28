@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import MovieSummary from "$lib/sections/summary/MovieSummary.svelte";
+  import type { PageProps } from "./$types";
   import { useMovie } from "./useMovie";
 
+  const { params }: PageProps = $props();
+
   const { movie, intl, studios, crew, streamOn, isLoading, videos } = $derived(
-    useMovie(page.params.slug),
+    useMovie(params.slug),
   );
 </script>
 

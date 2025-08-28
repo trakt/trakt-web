@@ -1,14 +1,16 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
   import Profile from "$lib/sections/profile/Profile.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import type { PageProps } from "./$types";
   import { useProfile } from "./useProfile";
 
-  const { user, isLoading } = $derived(useProfile(page.params.slug));
+  const { params }: PageProps = $props();
+
+  const { user, isLoading } = $derived(useProfile(params.slug));
 
   const title = $derived(
     $user?.username

@@ -5,13 +5,16 @@
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { mapToMediaType } from "../../../users/[user]/lists/[list]/_internal/mapToMediaType";
+  import type { PageProps } from "./$types";
   import { useListSummary } from "./useListSummary";
+
+  const { params }: PageProps = $props();
 
   const type = $derived(mapToMediaType(page.url.searchParams));
 
   const { list, isLoading } = $derived(
     useListSummary({
-      listId: page.params.id,
+      listId: params.id,
     }),
   );
 

@@ -11,16 +11,19 @@
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import type { PageProps } from "./$types";
   import { useShow } from "./useShow";
   import { useShowVideos } from "./useShowVideos";
 
+  const { params }: PageProps = $props();
+
   const { show, intl, studios, crew, seasons, streamOn, isLoading } = $derived(
-    useShow(page.params.slug),
+    useShow(params.slug),
   );
 
   const videos = $derived(
     useShowVideos({
-      slug: page.params.slug,
+      slug: params.slug,
       seasons: ($seasons ?? []).map((season) => season.number),
     }),
   );
