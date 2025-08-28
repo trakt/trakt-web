@@ -12,6 +12,7 @@ import {
   type SocialActivity,
   SocialActivitySchema,
 } from '$lib/requests/models/SocialActivity.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SocialActivityResponse } from '@trakt/api';
 import { coalesceSocialActivities } from '../../_internal/coalesceSocialActivities.ts';
@@ -32,14 +33,14 @@ function mapToSocialActivity(
       return {
         ...common,
         type: 'movie',
-        movie: mapToMovieEntry(response.movie),
+        movie: mapToMovieEntry(assertDefined(response.movie)),
       };
     case 'episode':
       return {
         ...common,
         type: 'episode',
-        show: mapToShowEntry(response.show),
-        episode: mapToEpisodeEntry(response.episode),
+        show: mapToShowEntry(assertDefined(response.show)),
+        episode: mapToEpisodeEntry(assertDefined(response.episode)),
       };
   }
 }

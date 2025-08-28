@@ -1,6 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
@@ -42,7 +42,7 @@ function mapToSearchResultEntry(
   const { type } = item;
   switch (type) {
     case 'person':
-      return mapToPersonSummary(item.person);
+      return mapToPersonSummary(assertDefined(item.person));
     default:
       throw new Error(`Unsupported type for people search: ${type}`);
   }
