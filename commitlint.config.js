@@ -93,6 +93,7 @@ module.exports = {
         'summary',
         'theme',
         'toggle',
+        'tooltip',
         'trending',
         'up-next',
         'upcoming',
