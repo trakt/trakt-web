@@ -82,11 +82,3 @@
     {/snippet}
   </ShadowList>
 {/if}
-
-<style>
-  :global(.shadow-list-container) {
-    :global(.trakt-dropdown-list-container[data-size="small"]) {
-      margin-right: var(--ni-neg-10);
-    }
-  }
-</style>
