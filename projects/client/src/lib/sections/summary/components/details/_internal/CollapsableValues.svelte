@@ -70,8 +70,10 @@
     min-width: 0;
 
     gap: var(--gap-xxs);
+  }
 
-    &.is-hidden {
+  .trakt-collapsable-values-content {
+    .is-hidden {
       display: none;
     }
   }
