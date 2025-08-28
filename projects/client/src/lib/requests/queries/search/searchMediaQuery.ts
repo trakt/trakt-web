@@ -1,9 +1,9 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
-
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
@@ -47,12 +47,12 @@ function mapToSearchResultEntry(
     case 'show':
       return {
         score: item.score,
-        ...mapToShowEntry(item.show),
+        ...mapToShowEntry(assertDefined(item.show)),
       };
     case 'movie':
       return {
         score: item.score,
-        ...mapToMovieEntry(item.movie),
+        ...mapToMovieEntry(assertDefined(item.movie)),
       };
     default:
       throw new Error(`Unsupported type for media search: ${type}`);

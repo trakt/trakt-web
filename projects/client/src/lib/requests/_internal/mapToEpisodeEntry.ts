@@ -2,14 +2,14 @@ import { thumbUrl } from '$lib/requests/_internal/thumbUrl.ts';
 import { MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import type { CalendarShowListResponse, UpNextResponse } from '@trakt/api';
+import type { CalendarShowResponse, UpNextResponse } from '@trakt/api';
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
 import { mapToCreditCookies } from './mapToCreditCookies.ts';
 
 type EpisodeResponse =
   | UpNextResponse[0]['progress']['next_episode']
-  | CalendarShowListResponse[0]['episode'];
+  | CalendarShowResponse['episode'];
 
 export function mapToEpisodeEntry(
   episode: EpisodeResponse,
