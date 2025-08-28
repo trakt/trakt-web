@@ -30,7 +30,6 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
-  import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
   import { onMount } from "svelte";
   import FirefoxBlurHack from "./_internal/FirefoxBlurHack.svelte";
 
@@ -238,10 +237,10 @@
                                 >
                                   <NowPlaying />
                                 </RenderFor>
-                                <SvelteQueryDevtools
+                                <!-- <SvelteQueryDevtools
                                   buttonPosition="bottom-right"
                                   styleNonce="opacity: 0.5"
-                                />
+                                /> -->
                                 <FirefoxBlurHack />
                               </ListScrollHistoryProvider>
                             </ThemeProvider>

@@ -57,9 +57,9 @@
 <TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={pageTitle}>
   <div class="trakt-search-container">
     <RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
-      <SearchInput isInline={false} />
+      <SearchInput />
+      <SearchModeToggles />
     </RenderFor>
-    <SearchModeToggles />
   </div>
 
   {#if src}
