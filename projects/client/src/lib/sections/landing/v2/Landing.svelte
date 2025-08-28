@@ -22,6 +22,7 @@
 
   <TraktApps />
 
+  <!-- svelte-ignore a11y_img_redundant_alt -->
   <enhanced:img src={popcorn} class="trakt-popcorn" alt="Popcorn image" />
 </div>
 
