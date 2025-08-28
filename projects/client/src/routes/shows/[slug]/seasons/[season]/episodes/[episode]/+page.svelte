@@ -1,16 +1,18 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
+  import type { PageProps } from "./$types";
   import { useEpisode } from "./useEpisode";
+
+  const { params }: PageProps = $props();
 
   const { episode, seasons, crew, streamOn, intl, show, showIntl, isLoading } =
     $derived(
       useEpisode({
-        slug: page.params.slug,
-        season: parseInt(page.params.season),
-        episode: parseInt(page.params.episode),
+        slug: params.slug,
+        season: parseInt(params.season),
+        episode: parseInt(params.episode),
       }),
     );
 </script>
