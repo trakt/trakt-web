@@ -35,7 +35,6 @@
     "@cucumber/cucumber": "12.2.0",
     "@google/generative-ai": "0.24.1",
     "@playwright/test": "1.55.0",
-    "@svelte-plugins/tooltips": "3.0.3",
     "@svelte-put/qr": "2.1.0",
     "@sveltejs/adapter-auto": "6.1.0",
     "@sveltejs/adapter-cloudflare": "7.2.3",
