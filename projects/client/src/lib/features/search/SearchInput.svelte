@@ -73,9 +73,9 @@
   );
 
   onMount(() => {
-    if (isInline) {
-      return;
-    }
+    // if (isInline) {
+    //   return;
+    // }
 
     const length = inputElement.value.length;
     inputElement.setSelectionRange(length, length);
@@ -152,7 +152,7 @@
 
     transition: outline var(--transition-increment) ease-in-out;
 
-    &:not(.is-inline):focus-within {
+    &:focus-within {
       outline: var(--border-thickness-xs) solid var(--purple-500);
 
       &,
@@ -161,9 +161,9 @@
       }
     }
 
-    @include for-mobile {
+    /* @include for-mobile {
       --search-input-width: var(--ni-48);
-    }
+    } */
 
     .trakt-search-icon {
       cursor: pointer;
@@ -192,7 +192,7 @@
         border-color, background-color, padding, width, top, left, opacity;
 
       @include backdrop-filter-blur(var(--ni-8));
-      @include for-mobile {
+      /* @include for-mobile {
         width: var(--search-icon-size);
         position: absolute;
         top: 0;
@@ -203,7 +203,7 @@
           outline: none;
           opacity: 0;
         }
-      }
+      } */
 
       &:placeholder-shown {
         text-overflow: ellipsis;
@@ -213,12 +213,12 @@
         outline-color: var(--purple-600);
         opacity: 1;
 
-        @include for-mobile {
+        /* @include for-mobile {
           left: 0;
           top: 0;
           width: var(--mobile-search-focus-width);
           z-index: var(--layer-top);
-        }
+        } */
       }
 
       &::-webkit-search-cancel-button {

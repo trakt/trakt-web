@@ -1,6 +1,5 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import SearchInput from "$lib/features/search/SearchInput.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import FilterButton from "./filter/FilterButton.svelte";
@@ -11,17 +10,18 @@
 
   const { user } = useUser();
   const isVip = $derived(!!$user?.isVip);
+  //TODO transition out on scroll down, transition in on scroll up
 </script>
 
 <header>
   <nav class="trakt-navbar" use:trackWindowScroll={"trakt-navbar-scroll"}>
     <TraktLogo />
 
-    <div class="trakt-navbar-content">
+    <!-- <div class="trakt-navbar-content">
       <RenderFor audience="authenticated" navigation="default">
         <SearchInput />
       </RenderFor>
-    </div>
+    </div> -->
 
     <div class="trakt-navbar-links">
       <RenderFor audience="public">
@@ -61,6 +61,7 @@
 
     box-sizing: border-box;
     display: flex;
+    justify-content: flex-end;
     width: 100dvw;
     height: var(--navbar-height);
 
@@ -74,13 +75,13 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: width, background-color, box-shadow, border-radius;
 
-    .trakt-navbar-content {
+    /* .trakt-navbar-content {
       width: 100%;
 
       display: flex;
       align-items: center;
       gap: var(--gap-m);
-    }
+    } */
 
     .trakt-navbar-links {
       display: flex;
@@ -103,9 +104,9 @@
     @include for-mobile {
       gap: var(--gap-xs);
 
-      .trakt-navbar-content {
+      /* .trakt-navbar-content {
         gap: var(--gap-xs);
-      }
+      } */
     }
   }
 
