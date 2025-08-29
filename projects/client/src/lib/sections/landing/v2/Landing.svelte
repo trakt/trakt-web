@@ -50,13 +50,18 @@
   }
 
   .trakt-landing-content {
+    --safe-height: calc(
+      100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)
+    );
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     gap: var(--gap-m);
 
-    min-height: calc(100dvh - 2 * var(--content-padding));
+    margin-top: env(safe-area-inset-top, 0px);
+    min-height: calc(var(--safe-height) - 2 * var(--content-padding));
   }
 
   .trakt-landing-buttons {
