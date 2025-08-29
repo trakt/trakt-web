@@ -14,7 +14,7 @@
     "broadcast-channel",
     "sloppy-imports"
   ],
-  "nodeModulesDir": "auto",
+  "nodeModulesDir": "manual",
   "fmt": {
     "singleQuote": true,
     "indentWidth": 2
