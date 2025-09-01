@@ -1,6 +1,7 @@
 <script lang="ts">
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { writable } from "svelte/store";
   import { dPadTrigger } from "./_internal/dPadTrigger";
@@ -8,7 +9,11 @@
   const {
     children,
     variant = "opaque",
-  }: ChildrenProps & { variant?: "transparent" | "opaque" } = $props();
+    classList = "",
+  }: ChildrenProps & {
+    variant?: "transparent" | "opaque";
+    classList?: string;
+  } = $props();
 
   const isVisible = writable(false);
   const { navigation } = useNavigation();
@@ -16,10 +21,11 @@
 
 <div
   use:whenInViewport={() => isVisible.set(true)}
-  use:dPadTrigger={".trakt-card-content > .trakt-link, .trakt-button-link"}
+  use:dPadTrigger={".trakt-card-content .trakt-link, .trakt-button-link"}
   class="trakt-card"
   data-navigation-type={$navigation}
   data-dpad-navigation={DpadNavigationType.Item}
+  use:appendClassList={classList}
 >
   <div
     class="trakt-card-content"
