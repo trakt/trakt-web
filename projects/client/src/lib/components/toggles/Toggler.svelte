@@ -1,4 +1,5 @@
 <script lang="ts" generics="T">
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
   import ToggleTag from "$lib/sections/components/ToggleTag.svelte";
   import type { ToggleOption } from "./ToggleOption.ts";
 
@@ -33,9 +34,14 @@
   };
 </script>
 
-<div class="trakt-toggler" role="group">
+<div
+  class="trakt-toggler"
+  role="group"
+  data-dpad-navigation={DpadNavigationType.List}
+>
   {#each options as option (option.value)}
     <ToggleTag
+      navigationType={DpadNavigationType.Item}
       label={option.label}
       onclick={() =>
         type === "combo"
