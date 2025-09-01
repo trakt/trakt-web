@@ -5,7 +5,7 @@
 
   type ToggleTagProps = Pick<
     TraktButtonProps,
-    "disabled" | "label" | "onclick"
+    "disabled" | "label" | "onclick" | "navigationType"
   > & {
     isPressed: boolean;
   };
@@ -16,6 +16,7 @@
     label,
     onclick,
     isPressed,
+    navigationType,
   }: ToggleTagProps & ChildrenProps = $props();
 
   const pressedState = $derived(isPressed ? "true" : "false");
@@ -26,6 +27,7 @@
     {disabled}
     {label}
     {onclick}
+    {navigationType}
     variant={isPressed ? "primary" : "secondary"}
     color="custom"
     size="tag"
