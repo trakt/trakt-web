@@ -28,7 +28,7 @@ const showCommentsRequest = (
 
 export const showCommentsQuery = defineQuery({
   key: 'showComments',
-  invalidations: [InvalidateAction.Like, InvalidateAction.Commented('show')],
+  invalidations: [InvalidateAction.Commented('show')],
   dependencies: (params) => [params.slug, params.limit],
   request: showCommentsRequest,
   mapper: (response) => response.body.map(mapToMediaComment),
