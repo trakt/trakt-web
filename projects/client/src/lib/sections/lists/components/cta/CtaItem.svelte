@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import ActivityCtaCard from "./_internal/ActivityCtaCard.svelte";
   import ActivityCtaPlaceholder from "./_internal/ActivityCtaPlaceholder.svelte";
   import MediaCtaCard from "./_internal/MediaCtaCard.svelte";
@@ -26,11 +27,16 @@
   {/if}
 
   {#if variant === "placeholder"}
-    {#if cta === "activity"}
-      <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} />
-    {:else}
-      <MediaCtaPlaceholder {cta} intl={CtaPlaceholderIntlProvider} />
-    {/if}
+    <div
+      data-dpad-navigation={DpadNavigationType.List}
+      class="trakt-cta-list-placeholder"
+    >
+      {#if cta === "activity"}
+        <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} />
+      {:else}
+        <MediaCtaPlaceholder {cta} intl={CtaPlaceholderIntlProvider} />
+      {/if}
+    </div>
   {/if}
 </div>
 
@@ -45,6 +51,14 @@
     }
     to {
       opacity: 1;
+    }
+  }
+
+  .trakt-cta-list-placeholder {
+    :global(.trakt-card[data-navigation-type="dpad"]) {
+      :global(.trakt-card-content) {
+        transform: none;
+      }
     }
   }
 </style>

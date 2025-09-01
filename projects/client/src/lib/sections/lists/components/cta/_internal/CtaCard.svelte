@@ -1,6 +1,5 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
-  import CardFooter from "$lib/components/card/CardFooter.svelte";
   import type { Snippet } from "svelte";
   import CtaContent from "./CtaContent.svelte";
 
@@ -24,7 +23,7 @@
 
     {#if action}
       <div class="trakt-cta-footer">
-        <CardFooter {action} />
+        {@render action()}
       </div>
     {/if}
   </cta-card-content>
@@ -65,6 +64,13 @@
 
 <style>
   .trakt-cta-footer {
+    display: flex;
+    align-items: center;
+
+    height: calc(var(--height-card) - var(--height-card-cover));
+    padding: var(--ni-8);
+    box-sizing: border-box;
+
     :global(.trakt-button) {
       height: var(--ni-20);
     }
