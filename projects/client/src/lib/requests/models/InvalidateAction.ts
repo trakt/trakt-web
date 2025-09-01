@@ -13,7 +13,6 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:watchlisted:${MediaType}`
   | `${typeof INVALIDATION_ID}:dropped:show`
   | `${typeof INVALIDATION_ID}:restored:show`
-  | `${typeof INVALIDATION_ID}:like:comment`
   | `${typeof INVALIDATION_ID}:comment:reply`
   | `${typeof INVALIDATION_ID}:listed:${MediaType}`
   | `${typeof INVALIDATION_ID}:user:${UserType}`
@@ -27,7 +26,6 @@ type TypeDataMap = {
   'watchlisted': MediaType;
   'dropped': 'show';
   'restored': 'show';
-  'like': 'comment';
   'react': 'comment';
   'comment': 'reply';
   'listed': MediaType;
@@ -71,7 +69,6 @@ export const InvalidateAction = {
 
   Restore: buildInvalidationKey('restored', 'show'),
 
-  Like: buildInvalidationKey('like', 'comment'),
   React: buildInvalidationKey('react', 'comment'),
 
   ReplyToComment: buildInvalidationKey('comment', 'reply'),

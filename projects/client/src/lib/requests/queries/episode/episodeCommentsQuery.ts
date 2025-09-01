@@ -35,7 +35,7 @@ const showCommentsRequest = (
 
 export const episodeCommentsQuery = defineQuery({
   key: 'episodeComments',
-  invalidations: [InvalidateAction.Like, InvalidateAction.Commented('episode')],
+  invalidations: [InvalidateAction.Commented('episode')],
   dependencies: (
     params,
   ) => [params.slug, params.season, params.episode, params.limit],
