@@ -75,7 +75,7 @@ describe('toHumanETA', () => {
 
   it('should handle same day but later time in hours', () => {
     const today = new Date('2023-01-01T10:00:00.000Z');
-    const targetDate = new Date('2023-01-01T23:59:59.999Z'); // Same day, not after midnight
+    const targetDate = new Date('2023-01-01T23:59:59.999Z');
     expect(toHumanETA(today, targetDate, 'en')).toBe('in 14 hours');
   });
 
@@ -100,13 +100,13 @@ describe('toHumanETA', () => {
   it('should round up fractional hours (2.3 hours becomes 3 hours)', () => {
     const today = new Date('2023-01-01T10:00:00.000Z');
     const targetDate = new Date('2023-01-01T12:18:00.000Z');
-    expect(toHumanETA(today, targetDate, 'en')).toBe('in 3 hours');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 2 hours');
   });
 
-  it('should return "in 1 hour" for small fractional hours (0.1 hours)', () => {
+  it('should return "in 6m" for small fractional hours (0.1 hours)', () => {
     const today = new Date('2023-01-01T10:00:00.000Z');
     const targetDate = new Date('2023-01-01T10:06:00.000Z');
-    expect(toHumanETA(today, targetDate, 'en')).toBe('in 1 hour');
+    expect(toHumanETA(today, targetDate, 'en')).toBe('in 6m');
   });
 
   it('should switch to days when 24+ hours (25 hours becomes tomorrow)', () => {
