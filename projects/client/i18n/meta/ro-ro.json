@@ -1044,9 +1044,6 @@
     "dialog_title_comment": {
       "default": "Comentariu"
     },
-    "button_text_comment_reply": {
-      "default": "Răspunde"
-    },
     "button_label_comment_reply": {
       "default": "Răspunde lui {user}"
     },

@@ -1044,9 +1044,6 @@
     "dialog_title_comment": {
       "default": "Komentarz"
     },
-    "button_text_comment_reply": {
-      "default": "Odpowiedz"
-    },
     "button_label_comment_reply": {
       "default": "Odpowiedz {user}"
     },

@@ -1044,9 +1044,6 @@
     "dialog_title_comment": {
       "default": "Reactie"
     },
-    "button_text_comment_reply": {
-      "default": "Antwoord"
-    },
     "button_label_comment_reply": {
       "default": "Reageer op {user}"
     },

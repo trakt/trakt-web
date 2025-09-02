@@ -2947,14 +2947,6 @@
         "ios"
       ]
     },
-    "button_text_comment_reply": {
-      "default": "Reply",
-      "description": "Text for the button that opens the comment reply dialog.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_comment_reply": {
       "default": "Reply to {user}",
       "description": "Aria-label for the button that opens the comment reply dialog.",

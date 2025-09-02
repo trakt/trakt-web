@@ -1044,9 +1044,6 @@
     "dialog_title_comment": {
       "default": "Kommentar"
     },
-    "button_text_comment_reply": {
-      "default": "Svar"
-    },
     "button_label_comment_reply": {
       "default": "Svar til {user}"
     },

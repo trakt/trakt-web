@@ -1044,9 +1044,6 @@
     "dialog_title_comment": {
       "default": "コメント"
     },
-    "button_text_comment_reply": {
-      "default": "返信する"
-    },
     "button_label_comment_reply": {
       "default": "{user} に返信する"
     },
