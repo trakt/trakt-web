@@ -3,13 +3,14 @@
 
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import MediaTypeToggles from "$lib/sections/components/MediaTypeToggles.svelte";
+  import type { MediaToggleType } from "$lib/sections/components/models/MediaToggleType";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import TypeToggles from "./_internal/TypeToggles.svelte";
   import WatchlistTag from "./_internal/WatchlistTag.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
@@ -22,16 +23,16 @@
     status: "all" | "released" | "unreleased";
   };
 
-  type ToggleType = MediaType | "all";
-
   const { defaultType, status, drilldownLabel }: WatchListProps = $props();
   const { filterMap } = useFilter();
 
   const useList = $derived.by(() => statusToStore(status));
 
-  const selectedType = writable<ToggleType>(defaultType ? defaultType : "all");
+  const selectedType = writable<MediaToggleType>(
+    defaultType ? defaultType : "all",
+  );
 
-  const handleTypeChange = (value: ToggleType) => {
+  const handleTypeChange = (value: MediaToggleType) => {
     selectedType.set(value);
   };
 
@@ -82,7 +83,7 @@
 
   {#snippet badge()}
     {#if status === "all"}
-      <TypeToggles value={$selectedType} onChange={handleTypeChange} />
+      <MediaTypeToggles value={$selectedType} onChange={handleTypeChange} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}

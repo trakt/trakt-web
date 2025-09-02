@@ -1,11 +1,12 @@
 <script lang="ts">
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import MediaTypeToggles from "$lib/sections/components/MediaTypeToggles.svelte";
+  import type { MediaToggleType } from "$lib/sections/components/models/MediaToggleType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import TypeToggles from "./_internal/TypeToggles.svelte";
   import WatchlistTag from "./_internal/WatchlistTag.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
@@ -25,11 +26,9 @@
   const useList = $derived.by(() => statusToStore(status));
   const { filterMap } = useFilter();
 
-  type ToggleType = MediaType | "all";
+  const selectedType = writable<MediaToggleType>(type ? type : "all");
 
-  const selectedType = writable<ToggleType>(type ? type : "all");
-
-  const handleTypeChange = (value: ToggleType) => selectedType.set(value);
+  const handleTypeChange = (value: MediaToggleType) => selectedType.set(value);
 
   onMount(() => {
     if (!onTypeChange) {
@@ -68,7 +67,7 @@
 
   {#snippet badge()}
     {#if status === "all" && onTypeChange}
-      <TypeToggles value={$selectedType} onChange={handleTypeChange} />
+      <MediaTypeToggles value={$selectedType} onChange={handleTypeChange} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}
