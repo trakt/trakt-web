@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Пошук серіалів та фільмів..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Пошук фільмів..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Пошук серіалів..."
+    },
     "button_text_join_trakt": {
       "default": "Приєднатися до Trakt"
     },

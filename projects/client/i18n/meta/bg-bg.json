@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Какво ти се гледа?"
     },
+    "input_placeholder_search_movies": {
+      "default": "Търсене на филми..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Търсене на сериали..."
+    },
     "button_text_join_trakt": {
       "default": "Присъединете се към Trakt"
     },

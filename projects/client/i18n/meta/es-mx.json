@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Busca series y pelis..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Busca películas..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Busca series..."
+    },
     "button_text_join_trakt": {
       "default": "Únete a Trakt"
     },

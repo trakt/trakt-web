@@ -1,5 +1,4 @@
 import { browser } from '$app/environment';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import { searchCancellationId } from '$lib/requests/queries/search/searchCancellationId.ts';
 import {
@@ -25,12 +24,16 @@ import type { SearchResult } from './models/SearchResult.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
 
-function modeToQuery(query: string, mode: SearchMode, type?: MediaType) {
+function modeToQuery(query: string, mode: SearchMode) {
   switch (mode) {
     case 'media':
+    case 'movie':
+    case 'show': {
+      const type = mode !== 'media' ? mode : undefined;
       return searchMediaQuery({ query, type }) as CreateQueryOptions<
         SearchResponse
       >;
+    }
     case 'people':
       return searchPeopleQuery({ query }) as CreateQueryOptions<
         SearchResponse
@@ -45,6 +48,10 @@ function modeToCancellationIds(mode: SearchMode) {
         searchCancellationId('movie'),
         searchCancellationId('show'),
       ];
+    case 'movie':
+      return [searchCancellationId('movie')];
+    case 'show':
+      return [searchCancellationId('show')];
     case 'people':
       return [searchCancellationId('person')];
   }
@@ -52,7 +59,7 @@ function modeToCancellationIds(mode: SearchMode) {
 
 export function useSearch() {
   const client = browser ? useQueryClient() : undefined;
-  const { mode, mediaType, isSearching, ...rest } = getSearchContext();
+  const { mode, isSearching, ...rest } = getSearchContext();
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
 
   const results = writable<SearchResult>({
@@ -60,7 +67,7 @@ export function useSearch() {
     reason: 'initial',
   });
 
-  async function search(term: string, mode: SearchMode, type?: MediaType) {
+  async function search(term: string, mode: SearchMode) {
     if (!client) {
       return;
     }
@@ -73,7 +80,7 @@ export function useSearch() {
       return;
     }
 
-    const query = modeToQuery(term, mode, type);
+    const query = modeToQuery(term, mode);
 
     const response = await client.fetchQuery(query)
       .then((response) => {
@@ -132,22 +139,16 @@ export function useSearch() {
   }
 
   return {
-    search: (term: string, mode: SearchMode, type?: MediaType) => {
+    search: (term: string, mode: SearchMode) => {
       isSearching.set(true);
-      debounce(() => search(term, mode, type), get(isDesktop) ? 150 : 250)();
+      debounce(() => search(term, mode), get(isDesktop) ? 150 : 250)();
     },
     results: derived(results, ($results) => $results.response),
     clear,
     mode,
-    mediaType,
-    targetParams: derived([mode, mediaType], ([$mode, $mediaType]) => {
-      const typeParam = $mode === 'media' && $mediaType
-        ? { t: $mediaType }
-        : {};
-
+    targetParams: derived(mode, ($mode) => {
       return {
         m: $mode,
-        ...typeParam,
       };
     }),
     isSearching,

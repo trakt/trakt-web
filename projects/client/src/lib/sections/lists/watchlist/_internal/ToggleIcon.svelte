@@ -1,6 +1,7 @@
 <script lang="ts" generics="T">
   import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
+  import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import SocialIcon from "$lib/components/icons/SocialIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
@@ -40,4 +41,8 @@
     src={$user.avatar.url}
     alt={m.image_alt_user_avatar({ username: $user.name.full })}
   />
+{/if}
+
+{#if option.value === "people"}
+  <PeopleIcon />
 {/if}

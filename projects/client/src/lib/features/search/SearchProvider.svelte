@@ -6,12 +6,9 @@
 
   const { children }: ChildrenProps = $props();
 
-  const initialTarget = toSearchTarget(
-    page.url.searchParams.get("m"),
-    page.url.searchParams.get("t"),
-  );
+  const initialTarget = toSearchTarget(page.url.searchParams.get("m"));
 
-  const { mode, mediaType, pathName, exitPathName, query } =
+  const { mode, pathName, exitPathName, query } =
     createSearchContext(initialTarget);
 
   $effect(() => {
@@ -22,13 +19,10 @@
 
   $effect(() => {
     const m = page.url.searchParams.get("m");
-    const t = page.url.searchParams.get("t");
-    const target = toSearchTarget(m, t);
+    const target = toSearchTarget(m);
 
     const newMode = target.mode ?? $mode;
     mode.set(newMode);
-
-    newMode === "media" && mediaType.set(target.mediaType);
 
     if (!page.url.searchParams.has("q")) {
       return;

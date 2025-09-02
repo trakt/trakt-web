@@ -550,6 +550,20 @@
         "ios"
       ]
     },
+    "input_placeholder_search_movies": {
+      "default": "Search movies...",
+      "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
+      "exclude": [
+        "ios"
+      ]
+    },
+    "input_placeholder_search_shows": {
+      "default": "Search shows...",
+      "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
+      "exclude": [
+        "ios"
+      ]
+    },
     "button_text_join_trakt": {
       "default": "Join Trakt",
       "description": "Text for the Trakt login button. This should be a short and concise message that indicates what users can do.",

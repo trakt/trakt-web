@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Busque séries e filmes..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Pesquisar filmes..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Pesquisar séries..."
+    },
     "button_text_join_trakt": {
       "default": "Junte-se ao Trakt"
     },
@@ -1579,7 +1585,7 @@
       "default": "Pesquisar pessoas"
     },
     "button_text_toggle_search_people": {
-      "default": "Pessoas"
+      "default": "Pessoa"
     },
     "input_placeholder_search_people": {
       "default": "Pesquisar pessoas..."

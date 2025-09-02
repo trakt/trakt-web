@@ -1,93 +1,59 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import LoaderIcon from "$lib/components/icons/LoaderIcon.svelte";
-  import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
-  import * as m from "$lib/features/i18n/messages";
+  import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useSearch } from "$lib/features/search/useSearch";
-  import type { MediaType } from "$lib/requests/models/MediaType";
+  import type { SearchMode } from "$lib/requests/queries/search/models/SearchMode";
+  import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { buildParamString } from "$lib/utils/url/buildParamString";
-  import SearchToggle from "./_internal/SearchToggle.svelte";
+  import { writable } from "svelte/store";
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { pathName, mode, mediaType, targetParams } = useSearch();
+  const { pathName, mode } = useSearch();
 
-  const toggleSearchMode = () => {
-    const newMode = $mode === "media" ? "people" : "media";
-    const type = newMode === "media" ? { t: $mediaType } : {};
+  const selectedType = writable<SearchMode>($mode);
 
-    const params = buildParamString({ m: newMode, ...type, q: query });
-    goto(`${pathName}${params}`, {
-      replaceState: page.url.pathname === pathName,
-      keepFocus: true,
-    });
-  };
+  const onChange = (value: SearchMode) => {
+    selectedType.set(value);
 
-  const setMediaType = (type: MediaType) => {
-    if ($mode !== "media") {
-      return;
-    }
-
-    const toggledType = type === "movie" ? "show" : "movie";
-    const newType = $mediaType ? { t: undefined } : { t: toggledType };
-
-    const params = buildParamString({
-      ...$targetParams,
-      ...newType,
-      q: query,
-    });
+    const newMode = assertDefined(value);
+    const params = buildParamString({ m: newMode, q: query });
 
     goto(`${pathName}${params}`, {
       replaceState: page.url.pathname === pathName,
       keepFocus: true,
     });
   };
+
+  const options: ToggleOption<SearchMode>[] = [
+    {
+      value: "media",
+      text: m.button_text_toggle_search_media(),
+      label: m.button_label_toggle_search_media(),
+    },
+    {
+      value: "show",
+      text: m.button_text_shows(),
+      label: m.button_label_shows(),
+    },
+    {
+      value: "movie",
+      text: m.button_text_movies(),
+      label: m.button_label_movies(),
+    },
+    {
+      value: "people",
+      text: m.button_text_toggle_search_people(),
+      label: m.button_label_toggle_search_people(),
+    },
+  ];
 </script>
 
 <div class="search-mode-toggles" role="group">
-  <div class="search-mode-toggle-group">
-    <SearchToggle
-      label={m.button_label_toggle_search_media()}
-      onclick={toggleSearchMode}
-      isPressed={$mode === "media"}
-    >
-      {m.button_text_toggle_search_media()}
-      {#snippet icon()}
-        <LoaderIcon />
-      {/snippet}
-    </SearchToggle>
-    <SearchToggle
-      label={m.button_label_movies()}
-      onclick={() => setMediaType("movie")}
-      isPressed={$mediaType === "movie" || !$mediaType}
-      disabled={$mode !== "media"}
-      color="blue"
-    >
-      {m.button_text_movies()}
-    </SearchToggle>
-    <SearchToggle
-      label={m.button_label_shows()}
-      onclick={() => setMediaType("show")}
-      isPressed={$mediaType === "show" || !$mediaType}
-      disabled={$mode !== "media"}
-      color="blue"
-    >
-      {m.button_text_shows()}
-    </SearchToggle>
-  </div>
-  <div class="search-mode-toggle-group">
-    <SearchToggle
-      label={m.button_label_toggle_search_people()}
-      onclick={toggleSearchMode}
-      isPressed={$mode === "people"}
-    >
-      {m.button_text_toggle_search_people()}
-      {#snippet icon()}
-        <PeopleIcon />
-      {/snippet}
-    </SearchToggle>
-  </div>
+  <Toggler value={$selectedType} variant="text" {onChange} {options} />
 </div>
 
 <style lang="scss">
@@ -106,23 +72,6 @@
 
     @include for-mobile {
       gap: var(--gap-xs);
-    }
-  }
-
-  .search-mode-toggle-group {
-    display: flex;
-    align-items: center;
-
-    gap: var(--gap-xs);
-    padding: var(--ni-4);
-
-    border-radius: var(--border-radius-xl);
-
-    background-color: transparent;
-    transition: background-color var(--transition-increment) ease-in-out;
-
-    &:global(:has(.trakt-button:not([disabled])[aria-pressed="true"])) {
-      background-color: var(--color-card-background);
     }
   }
 </style>

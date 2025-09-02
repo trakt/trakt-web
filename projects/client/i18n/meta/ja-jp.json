@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "番組や映像作品を検索..."
     },
+    "input_placeholder_search_movies": {
+      "default": "映画を検索..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "ドラマを検索..."
+    },
     "button_text_join_trakt": {
       "default": "Traktに参加"
     },

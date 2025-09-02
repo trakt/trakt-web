@@ -19,7 +19,7 @@
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { search, clear, results, mode, mediaType } = useSearch();
+  const { search, clear, results, mode } = useSearch();
 
   $effect(() => {
     if (!query) {
@@ -27,7 +27,7 @@
       return;
     }
 
-    search(query, $mode, $mediaType);
+    search(query, $mode);
   });
 
   const src = $derived.by(() => {
@@ -35,7 +35,7 @@
       return;
     }
 
-    if ($results.type === "media") {
+    if ($results.type !== "people") {
       const item = $results.items.at(0);
       return item?.cover?.url.medium;
     }

@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Search shows & movies..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Search movies..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Search shows..."
+    },
     "button_text_join_trakt": {
       "default": "Join Trakt"
     },
