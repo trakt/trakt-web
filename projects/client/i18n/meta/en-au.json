@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Favourite Shows"
     },
+    "list_title_favorites": {
+      "default": "Favourites"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Your favourite movies list is empty."
+      "default": "There are no favourite movies here."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Your favourite shows list is empty."
+      "default": "There are no favourite shows here."
+    },
+    "list_placeholder_favorites": {
+      "default": "There are no favourites here."
     },
     "button_text_stream_on": {
       "default": "Stream on"

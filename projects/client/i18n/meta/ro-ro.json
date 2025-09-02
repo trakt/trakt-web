@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Seriale favorite"
     },
+    "list_title_favorites": {
+      "default": "Favorite"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Lista ta de filme favorite este goală."
+      "default": "Nu sunt filme favorite aici."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Lista ta de seriale favorite este goală."
+      "default": "Nu sunt seriale favorite aici."
+    },
+    "list_placeholder_favorites": {
+      "default": "Nu sunt favorite aici."
     },
     "button_text_stream_on": {
       "default": "Vezi pe platforme"

@@ -42,6 +42,7 @@ function mapToFavoriteShow(
   return {
     id: entry.show.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
+    rank: entry.rank,
     item: {
       ...mapToShowEntry(entry.show),
       ...mapToEpisodeCount(entry.show),

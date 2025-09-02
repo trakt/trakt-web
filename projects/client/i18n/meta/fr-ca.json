@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Séries favorites"
     },
+    "list_title_favorites": {
+      "default": "Préférés"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Votre liste de films favoris est vide."
+      "default": "Aucun film préféré ici."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Votre liste de séries favorites est vide."
+      "default": "Aucune série préférée ici."
+    },
+    "list_placeholder_favorites": {
+      "default": "Aucun préféré ici."
     },
     "button_text_stream_on": {
       "default": "En diffusion sur"

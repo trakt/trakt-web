@@ -9,6 +9,7 @@ const FavoritedShowEntrySchema = ShowEntrySchema.merge(
 
 export const FavoritedEntrySchema = z.object({
   favoritedAt: z.coerce.date(),
+  rank: z.number(),
   id: z.number(),
   item: z.union([MovieEntrySchema, FavoritedShowEntrySchema]),
 });

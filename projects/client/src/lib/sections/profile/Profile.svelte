@@ -53,19 +53,7 @@
   />
 {/if}
 
-<FavoritesList
-  {slug}
-  type="movie"
-  title={m.list_title_favorite_movies()}
-  emptyMessage={m.list_placeholder_favorite_movies()}
-/>
-
-<FavoritesList
-  {slug}
-  type="show"
-  title={m.list_title_favorite_shows()}
-  emptyMessage={m.list_placeholder_favorite_shows()}
-/>
+<FavoritesList {slug} title={m.list_title_favorites()} />
 
 {#if slug !== "me"}
   <PersonalLists {slug} type="personal" />

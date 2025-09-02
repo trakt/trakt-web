@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Serie TV preferite"
     },
+    "list_title_favorites": {
+      "default": "Preferiti"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "La tua lista dei film preferiti è vuota."
+      "default": "Non ci sono film preferiti qui."
     },
     "list_placeholder_favorite_shows": {
-      "default": "La tua lista delle serie TV preferite è vuota."
+      "default": "Non ci sono serie TV preferite qui."
+    },
+    "list_placeholder_favorites": {
+      "default": "Non ci sono preferiti qui."
     },
     "button_text_stream_on": {
       "default": "In streaming su"

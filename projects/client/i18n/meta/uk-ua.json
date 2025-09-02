@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Улюблені серіали"
     },
+    "list_title_favorites": {
+      "default": "Улюблене"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Ваш список улюблених фільмів порожній."
+      "default": "Тут немає улюблених фільмів."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Ваш список улюблених серіалів порожній."
+      "default": "Тут немає улюблених серіалів."
+    },
+    "list_placeholder_favorites": {
+      "default": "Тут немає улюбленого."
     },
     "button_text_stream_on": {
       "default": "Дивись на"

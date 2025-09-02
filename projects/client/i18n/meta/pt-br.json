@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Séries Favoritas"
     },
+    "list_title_favorites": {
+      "default": "Favoritos"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Sua lista de filmes favoritos está vazia."
+      "default": "Nenhum filme favorito aqui."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Sua lista de séries favoritas está vazia."
+      "default": "Nenhuma série favorita aqui."
+    },
+    "list_placeholder_favorites": {
+      "default": "Nenhum favorito aqui."
     },
     "button_text_stream_on": {
       "default": "Assista em"
