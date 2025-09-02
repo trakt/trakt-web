@@ -5,25 +5,32 @@
 
   import type { MediaType } from "$lib/requests/models/MediaType";
 
+  type ToggleType = MediaType | "all";
+
   type TypeTogglesProps = {
-    value: MediaType[];
-    onChange: (value: MediaType[]) => void;
+    value: ToggleType;
+    onChange: (value: ToggleType) => void;
   };
 
   const { value, onChange }: TypeTogglesProps = $props();
 
-  const options: ToggleOption<MediaType>[] = [
+  const options: ToggleOption<ToggleType>[] = [
     {
-      value: "movie",
-      text: m.button_text_movies(),
-      label: m.button_label_movies(),
+      value: "all",
+      text: m.button_text_all(),
+      label: m.button_label_all(),
     },
     {
       value: "show",
       text: m.button_text_shows(),
       label: m.button_label_shows(),
     },
+    {
+      value: "movie",
+      text: m.button_text_movies(),
+      label: m.button_label_movies(),
+    },
   ];
 </script>
 
-<Toggler type="combo" {value} {onChange} {options} />
+<Toggler {value} {onChange} {options} />

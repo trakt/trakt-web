@@ -25,17 +25,25 @@
   const useList = $derived.by(() => statusToStore(status));
   const { filterMap } = useFilter();
 
-  const selectedTypes = writable<MediaType[]>(
-    type ? [type] : ["movie", "show"],
-  );
-  const handleTypeChange = (value: MediaType[]) => selectedTypes.set(value);
+  type ToggleType = MediaType | "all";
+
+  const selectedType = writable<ToggleType>(type ? type : "all");
+
+  const handleTypeChange = (value: ToggleType) => selectedType.set(value);
 
   onMount(() => {
     if (!onTypeChange) {
       return;
     }
 
-    const unsubscribe = selectedTypes.subscribe(onTypeChange);
+    const unsubscribe = selectedType.subscribe((value) => {
+      if (value === "all") {
+        onTypeChange(["movie", "show"]);
+        return;
+      }
+
+      onTypeChange([value]);
+    });
 
     return () => {
       unsubscribe();
@@ -60,7 +68,7 @@
 
   {#snippet badge()}
     {#if status === "all" && onTypeChange}
-      <TypeToggles value={$selectedTypes} onChange={handleTypeChange} />
+      <TypeToggles value={$selectedType} onChange={handleTypeChange} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}

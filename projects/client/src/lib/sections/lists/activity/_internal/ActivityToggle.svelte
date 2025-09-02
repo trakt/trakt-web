@@ -6,8 +6,8 @@
   import type { ActivityType } from "../models/ActivityType";
 
   type ActivityToggleProps = {
-    value: ActivityType[];
-    onChange: (value: ActivityType[]) => void;
+    value: ActivityType;
+    onChange: (value: ActivityType) => void;
   };
 
   const { value, onChange }: ActivityToggleProps = $props();
@@ -26,4 +26,4 @@
   ];
 </script>
 
-<Toggler type="radio" {value} {onChange} {options} />
+<Toggler {value} {onChange} {options} />

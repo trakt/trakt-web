@@ -1842,6 +1842,12 @@
     },
     "button_text_login": {
       "default": "Inloggen"
+    },
+    "button_label_all": {
+      "default": "Alles"
+    },
+    "button_text_all": {
+      "default": "Alle"
     }
   }
 }

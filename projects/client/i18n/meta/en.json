@@ -5204,6 +5204,22 @@
         "ios",
         "android"
       ]
+    },
+    "button_label_all": {
+      "default": "All",
+      "description": "Aria-label for the button that allows users to toggle all media types.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_all": {
+      "default": "All",
+      "description": "Aria-label for the button that allows users to toggle all media types.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
