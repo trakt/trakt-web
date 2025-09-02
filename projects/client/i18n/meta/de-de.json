@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Suche nach Serien & Filmen..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Filme suchen..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Serien suchen..."
+    },
     "button_text_join_trakt": {
       "default": "Trakt beitreten"
     },
@@ -1579,7 +1585,7 @@
       "default": "Suche nach Personen"
     },
     "button_text_toggle_search_people": {
-      "default": "Personen"
+      "default": "Leute"
     },
     "input_placeholder_search_people": {
       "default": "Nach Personen suchen..."

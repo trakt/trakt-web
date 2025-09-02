@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Søg serier og film..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Søg film..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Søg serier..."
+    },
     "button_text_join_trakt": {
       "default": "Tilmeld dig Trakt"
     },

@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Caută seriale & filme..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Caută filme..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Caută seriale..."
+    },
     "button_text_join_trakt": {
       "default": "Alătură-te Trakt"
     },
@@ -1579,7 +1585,7 @@
       "default": "Caută persoane"
     },
     "button_text_toggle_search_people": {
-      "default": "Persoane"
+      "default": "Oameni"
     },
     "input_placeholder_search_people": {
       "default": "Caută persoane..."

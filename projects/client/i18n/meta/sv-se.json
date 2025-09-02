@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Sök serier & filmer..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Sök filmer..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Sök serier..."
+    },
     "button_text_join_trakt": {
       "default": "Gå med i Trakt"
     },
@@ -1579,7 +1585,7 @@
       "default": "Sök efter personer"
     },
     "button_text_toggle_search_people": {
-      "default": "Personer"
+      "default": "Folk"
     },
     "input_placeholder_search_people": {
       "default": "Sök efter personer..."

@@ -66,11 +66,18 @@
     };
   }
 
-  const placeholder = $derived(
-    $mode === "media"
-      ? m.input_placeholder_search()
-      : m.input_placeholder_search_people(),
-  );
+  const placeholder = $derived.by(() => {
+    switch ($mode) {
+      case "media":
+        return m.input_placeholder_search();
+      case "movie":
+        return m.input_placeholder_search_movies();
+      case "show":
+        return m.input_placeholder_search_shows();
+      case "people":
+        return m.input_placeholder_search_people();
+    }
+  });
 
   onMount(() => {
     if (isInline) {

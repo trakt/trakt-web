@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Zoek series & films..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Zoek films..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Zoek series..."
+    },
     "button_text_join_trakt": {
       "default": "Word lid van Trakt"
     },

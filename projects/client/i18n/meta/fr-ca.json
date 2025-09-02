@@ -210,6 +210,12 @@
     "input_placeholder_search": {
       "default": "Rechercher séries & films..."
     },
+    "input_placeholder_search_movies": {
+      "default": "Rechercher des films..."
+    },
+    "input_placeholder_search_shows": {
+      "default": "Rechercher des séries..."
+    },
     "button_text_join_trakt": {
       "default": "Joignez-vous à Trakt"
     },
