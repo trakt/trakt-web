@@ -8,8 +8,7 @@
 
   const commonProps = {
     label: m.button_label_add_comment(),
-    color: "purple" as const,
-    variant: "secondary" as const,
+    style: "ghost" as const,
   };
 </script>
 
