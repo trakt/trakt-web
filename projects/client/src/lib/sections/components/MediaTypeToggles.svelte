@@ -3,18 +3,16 @@
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
 
-  import type { MediaType } from "$lib/requests/models/MediaType";
-
-  type ToggleType = MediaType | "all";
+  import type { MediaToggleType } from "./models/MediaToggleType";
 
   type TypeTogglesProps = {
-    value: ToggleType;
-    onChange: (value: ToggleType) => void;
+    value: MediaToggleType;
+    onChange: (value: MediaToggleType) => void;
   };
 
   const { value, onChange }: TypeTogglesProps = $props();
 
-  const options: ToggleOption<ToggleType>[] = [
+  const options: ToggleOption<MediaToggleType>[] = [
     {
       value: "all",
       text: m.button_text_all(),
