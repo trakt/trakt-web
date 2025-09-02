@@ -1,9 +1,10 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import CommentIcon from "$lib/components/icons/CommentIcon.svelte";
+  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
+  import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import type { ActiveComment } from "../models/ActiveComment";
 
   type ViewRepliesActionProps = {
@@ -27,11 +28,5 @@
     <CommentIcon style={iconStyle} />
   {/snippet}
 
-  <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-    {m.button_text_comment_replies({ count: comment.replyCount })}
-  </RenderFor>
-
-  <RenderFor audience="all" device={["mobile"]}>
-    {comment.replyCount}
-  </RenderFor>
+  {toHumanNumber(comment.replyCount, getLocale())}
 </Button>
