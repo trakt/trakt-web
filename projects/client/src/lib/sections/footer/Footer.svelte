@@ -1,10 +1,13 @@
 <script lang="ts">
   import TraktCoverImage from "$lib/components/background/TraktCoverImage.svelte";
+  import { useNowPlaying } from "$lib/features/now-playing/useNowPlaying";
   import FooterContent from "./components/FooterContent.svelte";
   import { FOOTER_CLASS_NAME } from "./constants";
+
+  const { nowPlaying } = useNowPlaying();
 </script>
 
-<footer class={FOOTER_CLASS_NAME}>
+<footer class={FOOTER_CLASS_NAME} class:has-now-playing={$nowPlaying !== null}>
   <TraktCoverImage />
   <FooterContent />
 </footer>
@@ -29,6 +32,10 @@
     }
 
     @include for-tablet-sm-and-below {
+      &.has-now-playing {
+        margin-top: calc(var(--height-now-playing-card) + var(--gap-xxl));
+      }
+
       height: fit-content;
       position: relative;
     }
