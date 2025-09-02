@@ -21,12 +21,6 @@
     }
 
     /* To align icons of the ghost buttons */
-    margin: var(--ni-neg-12) var(--ni-neg-16);
-
-    &:has(> :global(.trakt-react-button)),
-    &:has(> :global(.trakt-react-preview)) {
-      margin-bottom: var(--ni-neg-8);
-      margin-left: var(--ni-0);
-    }
+    margin-bottom: var(--ni-neg-8);
   }
 </style>

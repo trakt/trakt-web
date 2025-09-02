@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import ReplyIcon from "$lib/components/icons/ReplyIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -17,18 +17,15 @@
 </script>
 
 <RenderFor audience="authenticated">
-  <Button
+  <ActionButton
     label={m.button_label_comment_reply({ user: comment.user.username })}
     onclick={() => {
       onClick({ id: comment.id, isReplying: true });
     }}
     style="ghost"
-    color="purple"
     disabled={!$isPermitted}
+    size="small"
   >
-    {#snippet icon()}
-      <ReplyIcon />
-    {/snippet}
-    {m.button_text_comment_reply()}
-  </Button>
+    <ReplyIcon />
+  </ActionButton>
 </RenderFor>
