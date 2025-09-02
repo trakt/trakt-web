@@ -24,8 +24,7 @@
     custom animation functions for use with svelte:animate
   */
   let trackerElement: HTMLDivElement;
-  const handleChange = (index: number, optionValue: T) => {
-    onChange(optionValue);
+  const handleChange = (index: number) => {
     trackerIndex.set(index);
 
     requestAnimationFrame(() => {
@@ -47,11 +46,13 @@
     class:text-variant={variant === "text"}
     ontransitionend={(event) => {
       event.currentTarget.classList.remove("moving");
+      const newValue = options.at($trackerIndex)?.value ?? value;
+      onChange(newValue);
     }}
   ></div>
   {#each options as option, index (option.value)}
     <Toggle
-      onclick={() => handleChange(index, option.value)}
+      onclick={() => handleChange(index)}
       isPressed={$trackerIndex === index}
       {variant}
     >
