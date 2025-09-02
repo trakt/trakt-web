@@ -2100,7 +2100,7 @@
       ]
     },
     "button_text_view_all": {
-      "default": "View All",
+      "default": "More",
       "description": "Text for the button that allows users to drill down on lists to view all items in it.",
       "exclude": [
         "ios"
