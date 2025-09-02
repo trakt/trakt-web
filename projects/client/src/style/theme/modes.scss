@@ -124,6 +124,15 @@
    * Landing
    */
   --color-step-shadow-text: var(--shade-50);
+
+  /*
+   * Toggle
+   */
+  --toggler-background-color: var(--shade-70);
+  --toggler-tracker-color: var(--purple-300);
+  --toggle-background-color: var(--shade-100);
+  --toggle-background-hover-color: var(--shade-200);
+  --toggle-foreground-color: var(--shade-900);
 }
 
 // Define theme variables for dark mode
@@ -245,6 +254,15 @@
    * Landing
    */
   --color-step-shadow-text: var(--shade-920);
+
+  /*
+   * Toggle
+   */
+  --toggler-background-color: var(--shade-900);
+  --toggler-tracker-color: var(--purple-500);
+  --toggle-background-color: var(--shade-700);
+  --toggle-background-hover-color: var(--shade-600);
+  --toggle-foreground-color: var(--shade-50);
 }
 
 // Apply themes to selectors

@@ -4,7 +4,6 @@
   import { writable } from "svelte/store";
   import CtaItem from "../components/cta/CtaItem.svelte";
 
-  import { assertDefined } from "$lib/utils/assert/assertDefined.ts";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import RecentlyWatchedItem from "../history/RecentlyWatchedItem.svelte";
   import ActivityToggle from "./_internal/ActivityToggle.svelte";
@@ -14,28 +13,27 @@
 
   /** once we have a proper social hub we should encourage people to find other users to follow, aka: empty placeholder */
 
-  const selectedType = writable<ActivityType[]>(["social"]);
-  const handleTypeChange = (value: ActivityType[]) => selectedType.set(value);
-
-  const activityType = $derived(assertDefined($selectedType.at(0)));
+  const activityType = writable<ActivityType>("social");
+  const handleTypeChange = (value: ActivityType) => activityType.set(value);
 
   const urlBuilder = $derived(
-    activityType === "social"
+    $activityType === "social"
       ? UrlBuilder.social.activity
       : UrlBuilder.history.all,
   );
 
   const cta = $derived(
-    activityType === "social" ? "activity" : "personal-activity",
+    $activityType === "social" ? "activity" : "personal-activity",
   );
   // FIXME: coalesce on list level & combine drilled down versions
 </script>
 
 <!-- TODO replace with empty state message when actionable on Trakt Web -->
 <DrillableMediaList
-  id={`${$selectedType}-activity-list`}
+  id={`${$activityType}-activity-list`}
   type="episode"
-  useList={(params) => useActivityList({ ...params, activityType })}
+  useList={(params) =>
+    useActivityList({ ...params, activityType: $activityType })}
   {urlBuilder}
   drilldownLabel={m.button_label_view_all_social_activity()}
   title={m.list_title_activity()}
@@ -57,6 +55,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <ActivityToggle value={$selectedType} onChange={handleTypeChange} />
+    <ActivityToggle value={$activityType} onChange={handleTypeChange} />
   {/snippet}
 </DrillableMediaList>

@@ -22,19 +22,20 @@
     status: "all" | "released" | "unreleased";
   };
 
+  type ToggleType = MediaType | "all";
+
   const { defaultType, status, drilldownLabel }: WatchListProps = $props();
   const { filterMap } = useFilter();
 
   const useList = $derived.by(() => statusToStore(status));
 
-  const selectedTypes = writable<MediaType[]>(
-    defaultType ? [defaultType] : ["movie", "show"],
-  );
-  const handleTypeChange = (value: MediaType[]) => selectedTypes.set(value);
+  const selectedType = writable<ToggleType>(defaultType ? defaultType : "all");
 
-  const type = $derived(
-    $selectedTypes.length === 1 ? $selectedTypes.at(0) : undefined,
-  );
+  const handleTypeChange = (value: ToggleType) => {
+    selectedType.set(value);
+  };
+
+  const type = $derived($selectedType === "all" ? undefined : $selectedType);
 </script>
 
 <DrillableMediaList
@@ -81,7 +82,7 @@
 
   {#snippet badge()}
     {#if status === "all"}
-      <TypeToggles value={$selectedTypes} onChange={handleTypeChange} />
+      <TypeToggles value={$selectedType} onChange={handleTypeChange} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}

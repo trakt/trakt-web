@@ -23,4 +23,7 @@
   --gap-micro: var(--ni-2);
 
   --dialog-height: 100dvh;
+
+  --toggle-small-width: var(--ni-30);
+  --toggle-large-width: var(--ni-80);
 }

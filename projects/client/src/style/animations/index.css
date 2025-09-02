@@ -70,6 +70,21 @@
   }
 }
 
+@keyframes scaley-waley {
+  0% {
+    width: var(--scale-full-width, var(--ni-30));
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    width: var(--scale-intermediate-width, var(--ni-30));
+    transform: var(--scale-transform, scale(1.5));
+  }
+  100% {
+    width: var(--scale-full-width, var(--ni-30));
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 [data-device='tv'] * {
   transition: none !important;
 }
