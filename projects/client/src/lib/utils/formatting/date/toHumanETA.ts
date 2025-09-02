@@ -9,34 +9,49 @@ export function toHumanETA(
   const MS_PER_DAY = MS_PER_HOUR * 24;
 
   const timeDiff = targetDate.getTime() - today.getTime();
-  const days = Math.ceil(timeDiff / MS_PER_DAY);
-  const hours = Math.ceil(timeDiff / MS_PER_HOUR);
+  const minutes = Math.round(timeDiff / (1000 * 60));
+  const days = Math.round(timeDiff / MS_PER_DAY);
+  const hours = Math.round(timeDiff / MS_PER_HOUR);
 
   const isPastDate = timeDiff < 0;
+
   const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+  const narrowRtf = new Intl.RelativeTimeFormat(locale, {
+    numeric: 'auto',
+    style: 'narrow',
+  });
+
   const year = targetDate.getFullYear().toString();
 
   if (isPastDate) {
     return year;
   }
 
-  const isTargetAfterMidnight = targetDate.getUTCHours() >= 0 &&
-    targetDate.getUTCHours() < 6;
+  const isTodayAfterMidnight = today.getHours() >= 0 &&
+    today.getHours() < 6;
 
-  const isSameDay = today.getUTCFullYear() === targetDate.getUTCFullYear() &&
-    today.getUTCMonth() === targetDate.getUTCMonth() &&
-    today.getUTCDate() === targetDate.getUTCDate();
+  const isTargetAfterMidnight = targetDate.getHours() >= 0 &&
+    targetDate.getHours() < 6;
 
-  if (isSameDay && !isTargetAfterMidnight) {
+  const isSameDay = today.getFullYear() === targetDate.getFullYear() &&
+    today.getMonth() === targetDate.getMonth() &&
+    today.getDate() === targetDate.getDate();
+
+  if (isSameDay) {
+    if (hours === 0) {
+      return narrowRtf.format(minutes, 'minute');
+    }
+
     return rtf.format(hours, 'hour');
   }
 
   if (days <= 6) {
-    return rtf.format(days, 'day');
+    const modifier = isTargetAfterMidnight && !isTodayAfterMidnight ? 1 : 0;
+    return rtf.format(days + modifier, 'day');
   }
 
   const remainingDaysInWeek = days % 7;
-  const exceedsCurrentWeek = today.getUTCDay() + remainingDaysInWeek > 7;
+  const exceedsCurrentWeek = today.getDay() + remainingDaysInWeek > 7;
   const additionalWeek = exceedsCurrentWeek ? 1 : 0;
 
   const weeks = Math.floor(days / 7) + additionalWeek;
