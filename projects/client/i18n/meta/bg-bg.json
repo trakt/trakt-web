@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Любими сериали"
     },
+    "list_title_favorites": {
+      "default": "Любими"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Списъкът с любими филми е празен."
+      "default": "Няма любими филми тук."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Списъкът с любими сериали е празен."
+      "default": "Няма любими сериали тук."
+    },
+    "list_placeholder_favorites": {
+      "default": "Няма любими тук."
     },
     "button_text_stream_on": {
       "default": "Гледай по"

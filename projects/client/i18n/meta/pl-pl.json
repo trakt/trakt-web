@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Ulubione Seriale"
     },
+    "list_title_favorites": {
+      "default": "Ulubione"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Twoja lista ulubionych filmów jest pusta."
+      "default": "Brak ulubionych filmów."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Twoja lista ulubionych seriali jest pusta."
+      "default": "Brak ulubionych seriali."
+    },
+    "list_placeholder_favorites": {
+      "default": "Brak ulubionych."
     },
     "button_text_stream_on": {
       "default": "Oglądaj na"

@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Favorittserier"
     },
+    "list_title_favorites": {
+      "default": "Favoritter"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Din liste over favorittfilmer er tom."
+      "default": "Ingen favorittfilmer her."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Din liste over favorittserier er tom."
+      "default": "Ingen favorittserier her."
+    },
+    "list_placeholder_favorites": {
+      "default": "Ingen favoritter her."
     },
     "button_text_stream_on": {
       "default": "Strøm på"

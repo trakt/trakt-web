@@ -4,6 +4,7 @@ export const FavoritedShowsMappedMock: FavoritedEntry[] = [
   {
     'favoritedAt': new Date('2025-01-16T17:37:41.000Z'),
     'id': 180770,
+    'rank': 4,
     'item': {
       'airDate': new Date('9999-12-31T23:59:59.999Z'),
       'certification': undefined,

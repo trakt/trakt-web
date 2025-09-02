@@ -2288,18 +2288,28 @@
       "default": "Favorite Movies",
       "description": "Title for lists containing a user's favorite movies. This title should be as short and concise as possible.",
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "list_title_favorite_shows": {
       "default": "Favorite Shows",
       "description": "Title for lists containing a user's favorite shows. This title should be as short and concise as possible.",
       "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "list_title_favorites": {
+      "default": "Favorites",
+      "description": "Title for lists containing a user's favorite movies and/or shows. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
         "ios"
       ]
     },
     "list_placeholder_favorite_movies": {
-      "default": "Your favorite movies list is empty.",
+      "default": "There are no favorite movies here.",
       "description": "Placeholder text shown when there are no favorite movies in the user's favorites list.",
       "exclude": [
         "android",
@@ -2307,8 +2317,16 @@
       ]
     },
     "list_placeholder_favorite_shows": {
-      "default": "Your favorite shows list is empty.",
+      "default": "There are no favorite shows here.",
       "description": "Placeholder text shown when there are no favorite shows in the user's favorites list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_placeholder_favorites": {
+      "default": "There are no favorites here.",
+      "description": "Placeholder text shown when there are no favorites in the user's favorites list.",
       "exclude": [
         "android",
         "ios"

@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "お気に入り番組"
     },
+    "list_title_favorites": {
+      "default": "お気に入り"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "お気に入り映画リストは空です。"
+      "default": "お気に入りの映画はありません。"
     },
     "list_placeholder_favorite_shows": {
-      "default": "お気に入り番組リストは空です。"
+      "default": "お気に入りのドラマはありません。"
+    },
+    "list_placeholder_favorites": {
+      "default": "お気に入りはありません。"
     },
     "button_text_stream_on": {
       "default": "配信で見る"

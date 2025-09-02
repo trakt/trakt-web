@@ -837,11 +837,17 @@
     "list_title_favorite_shows": {
       "default": "Favoriete Series"
     },
+    "list_title_favorites": {
+      "default": "Favorieten"
+    },
     "list_placeholder_favorite_movies": {
-      "default": "Je favoriete filmlijst is leeg."
+      "default": "Geen favoriete films hier."
     },
     "list_placeholder_favorite_shows": {
-      "default": "Je favoriete serienlijst is leeg."
+      "default": "Geen favoriete series hier."
+    },
+    "list_placeholder_favorites": {
+      "default": "Geen favorieten hier."
     },
     "button_text_stream_on": {
       "default": "Streamen op"
