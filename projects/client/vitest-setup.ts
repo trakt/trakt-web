@@ -17,6 +17,8 @@ import { setAuthorization } from '$test/beds/store/renderStore.ts';
 import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import { server } from './src/mocks/server.ts';
 
+process.env.TZ = 'UTC';
+
 beforeAll(() => server.listen());
 afterEach(() => {
   vi.clearAllMocks();
