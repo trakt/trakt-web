@@ -1,8 +1,8 @@
 <script lang="ts" generics="T">
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
-  import ToggleIcon from "$lib/sections/lists/watchlist/_internal/ToggleIcon.svelte";
   import { writable } from "svelte/store";
   import Toggle from "./_internal/Toggle.svelte";
+  import ToggleIcon from "./_internal/ToggleIcon.svelte";
   import type { ToggleOption } from "./ToggleOption.ts";
 
   interface TogglerProps {
