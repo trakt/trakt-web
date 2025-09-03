@@ -161,8 +161,8 @@ export const UrlBuilder = {
 
       return categoryDrilldownFactory('users/me/lists')(params);
     },
-    watchlist: (params: Omit<UrlBuilderParams, 'type'>) => {
-      return `/users/me/watchlist${buildParamString(sanitizeParams(params))}`;
+    watchlist: () => {
+      return '/users/me/watchlist';
     },
   },
   app: {
