@@ -13,9 +13,15 @@
   type SidebarProps = {
     onClose: () => void;
     title: string;
+    hasAutoClose?: boolean;
   } & ChildrenProps;
 
-  const { children, onClose, title }: SidebarProps = $props();
+  const {
+    children,
+    onClose,
+    title,
+    hasAutoClose = true,
+  }: SidebarProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const slideAxis = $derived($isMobile ? "y" : "x");
@@ -23,6 +29,10 @@
   // FIXME extract simplified version from usePortal and re-use here
   const portal = (element: HTMLElement) => {
     onMount(() => {
+      if (!hasAutoClose) {
+        return;
+      }
+
       const instance = GlobalEventBus.getInstance();
       const newUnderlay = createUnderlay();
 
