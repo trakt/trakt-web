@@ -7,15 +7,46 @@
   import type { Season } from "$lib/requests/models/Season";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
 
+  const SCROLL_OFFSET = 8;
+
   const {
     season,
     urlBuilder,
     isCurrentSeason,
   }: { season: Season; urlBuilder: () => string; isCurrentSeason: boolean } =
     $props();
+
+  const scrollToItem = (element: HTMLElement) => {
+    if (!isCurrentSeason) return;
+
+    const parent = element.parentElement;
+    if (!parent) {
+      return;
+    }
+
+    const parentRight = parent.scrollLeft + parent.clientWidth;
+    const elementLeft = element.offsetLeft;
+    const elementRight = elementLeft + element.offsetWidth;
+    const isOutOfView = elementRight > parentRight;
+
+    if (!isOutOfView) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      parent.scrollTo({
+        left: elementLeft - SCROLL_OFFSET,
+        behavior: "instant",
+      });
+    });
+  };
 </script>
 
-<div class="trakt-season-item" class:is-current-season={isCurrentSeason}>
+<div
+  class="trakt-season-item"
+  class:is-current-season={isCurrentSeason}
+  use:scrollToItem
+>
   <PortraitCard>
     <Link focusable={false} href={urlBuilder()} noscroll>
       <CardCover
