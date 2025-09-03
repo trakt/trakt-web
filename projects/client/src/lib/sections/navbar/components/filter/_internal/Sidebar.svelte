@@ -8,25 +8,20 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { GlobalEventBus } from "$lib/utils/events/GlobalEventBus";
   import { onMount } from "svelte";
-  import type { Writable } from "svelte/store";
   import { slide } from "svelte/transition";
 
   type SidebarProps = {
-    isOpen: Writable<boolean>;
+    onClose: () => void;
     title: string;
   } & ChildrenProps;
 
-  const { children, isOpen, title }: SidebarProps = $props();
+  const { children, onClose, title }: SidebarProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const slideAxis = $derived($isMobile ? "y" : "x");
 
   // FIXME extract simplified version from usePortal and re-use here
   const portal = (element: HTMLElement) => {
-    const closeSidebar = () => {
-      isOpen.set(false);
-    };
-
     onMount(() => {
       const instance = GlobalEventBus.getInstance();
       const newUnderlay = createUnderlay();
@@ -34,45 +29,44 @@
       document.body.appendChild(newUnderlay);
       document.body.appendChild(element);
 
-      newUnderlay.addEventListener("click", closeSidebar);
-      const destroyScroll = instance.register("scroll", closeSidebar);
+      newUnderlay.addEventListener("click", onClose);
+      const destroyScroll = instance.register("scroll", onClose);
 
       return () => {
-        newUnderlay.removeEventListener("click", closeSidebar);
+        newUnderlay.removeEventListener("click", onClose);
         destroyScroll();
         newUnderlay.remove();
+        element.remove();
       };
     });
   };
 </script>
 
-{#if $isOpen}
+<div
+  class="trakt-sidebar"
+  transition:slide={{ duration: 150, axis: slideAxis }}
+  use:portal
+  use:navigationTrap={".trakt-filter"}
+>
   <div
-    class="trakt-sidebar"
-    transition:slide={{ duration: 150, axis: slideAxis }}
-    use:portal
-    use:navigationTrap={".trakt-filter"}
+    class="trakt-sidebar-header"
+    data-dpad-navigation={DpadNavigationType.List}
   >
-    <div
-      class="trakt-sidebar-header"
-      data-dpad-navigation={DpadNavigationType.List}
+    {title}
+    <ActionButton
+      onclick={onClose}
+      label={m.button_label_close()}
+      style="ghost"
+      navigationType={DpadNavigationType.Item}
+      --color-foreground-default="var(--color-text-secondary)"
     >
-      {title}
-      <ActionButton
-        onclick={() => isOpen.set(false)}
-        label={m.button_label_close()}
-        style="ghost"
-        navigationType={DpadNavigationType.Item}
-        --color-foreground-default="var(--color-text-secondary)"
-      >
-        <CloseIcon />
-      </ActionButton>
-    </div>
-    <div class="trakt-sidebar-content">
-      {@render children()}
-    </div>
+      <CloseIcon />
+    </ActionButton>
   </div>
-{/if}
+  <div class="trakt-sidebar-content">
+    {@render children()}
+  </div>
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

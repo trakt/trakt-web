@@ -24,6 +24,7 @@
   };
 
   const isOpen = writable(false);
+  const onClose = () => isOpen.set(false);
 </script>
 
 <RenderFor audience="director">
@@ -35,20 +36,22 @@
     <CircularLogo variant="flat" />
   </ActionButton>
 
-  <Sidebar {isOpen} title="Feature Flags">
-    {#each Object.entries($flags) as [key, value]}
-      <div class="feature-flag-item">
-        <span class="meta-info">{key}</span>
-        <Switch
-          color="orange"
-          label={key}
-          checked={value}
-          innerText={value ? "on" : "off"}
-          onclick={() => setFlag(key as FeatureFlag, !value)}
-        />
-      </div>
-    {/each}
-  </Sidebar>
+  {#if $isOpen}
+    <Sidebar {onClose} title="Feature Flags">
+      {#each Object.entries($flags) as [key, value]}
+        <div class="feature-flag-item">
+          <span class="meta-info">{key}</span>
+          <Switch
+            color="orange"
+            label={key}
+            checked={value}
+            innerText={value ? "on" : "off"}
+            onclick={() => setFlag(key as FeatureFlag, !value)}
+          />
+        </div>
+      {/each}
+    </Sidebar>
+  {/if}
 </RenderFor>
 
 <style>
