@@ -1,11 +1,9 @@
 <script lang="ts">
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import MediaTypeToggles from "$lib/sections/components/MediaTypeToggles.svelte";
-  import type { MediaToggleType } from "$lib/sections/components/models/MediaToggleType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { onMount } from "svelte";
-  import { writable } from "svelte/store";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import WatchlistTag from "./_internal/WatchlistTag.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
@@ -17,36 +15,22 @@
     title: string;
     type?: MediaType;
     status: WatchlistStatus;
-    onTypeChange?: (types: MediaType[]) => void;
   };
 
-  const { title, type, status, onTypeChange }: WatchListProps = $props();
+  const { title, type: externalType, status }: WatchListProps = $props();
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
   const useList = $derived.by(() => statusToStore(status));
   const { filterMap } = useFilter();
 
-  const selectedType = writable<MediaToggleType>(type ? type : "all");
+  const { current: selectedType, set, options } = useToggler("media");
 
-  const handleTypeChange = (value: MediaToggleType) => selectedType.set(value);
-
-  onMount(() => {
-    if (!onTypeChange) {
-      return;
+  const type = $derived.by(() => {
+    if (externalType) {
+      return externalType;
     }
 
-    const unsubscribe = selectedType.subscribe((value) => {
-      if (value === "all") {
-        onTypeChange(["movie", "show"]);
-        return;
-      }
-
-      onTypeChange([value]);
-    });
-
-    return () => {
-      unsubscribe();
-    };
+    return $selectedType === "all" ? undefined : $selectedType;
   });
 </script>
 
@@ -66,8 +50,8 @@
   {/snippet}
 
   {#snippet badge()}
-    {#if status === "all" && onTypeChange}
-      <MediaTypeToggles value={$selectedType} onChange={handleTypeChange} />
+    {#if status === "all"}
+      <Toggler value={$selectedType} onChange={set} {options} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}

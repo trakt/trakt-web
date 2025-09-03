@@ -1,23 +1,18 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
-  import { writable } from "svelte/store";
-  import MediaTypeToggles from "../components/MediaTypeToggles.svelte";
-  import type { MediaToggleType } from "../components/models/MediaToggleType";
   import FavoriteAction from "../media-actions/favorite/FavoriteAction.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useFavoritesList } from "./stores/useFavoritesList";
 
   const { title, slug }: { title: string; slug: string } = $props();
 
-  const selectedType = writable<MediaToggleType>("all");
-
-  const handleTypeChange = (value: MediaToggleType) => {
-    selectedType.set(value);
-  };
+  const { current: selectedType, set, options } = useToggler("media");
 
   const type = $derived($selectedType === "all" ? undefined : $selectedType);
 
@@ -71,6 +66,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <MediaTypeToggles value={$selectedType} onChange={handleTypeChange} />
+    <Toggler value={$selectedType} onChange={set} {options} />
   {/snippet}
 </SectionList>

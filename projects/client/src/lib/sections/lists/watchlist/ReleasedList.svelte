@@ -6,6 +6,6 @@
 
 <WatchList
   drilldownLabel={m.button_label_view_all_released_movies()}
-  defaultType="movie"
+  type="movie"
   status="released"
 />

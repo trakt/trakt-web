@@ -1,14 +1,13 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler";
   import { useFilter } from "$lib/features/filters/useFilter";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import MediaTypeToggles from "$lib/sections/components/MediaTypeToggles.svelte";
-  import type { MediaToggleType } from "$lib/sections/components/models/MediaToggleType";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
-  import { writable } from "svelte/store";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import WatchlistTag from "./_internal/WatchlistTag.svelte";
@@ -17,26 +16,30 @@
   import WatchlistItem from "./WatchlistItem.svelte";
 
   type WatchListProps = {
-    defaultType?: MediaType;
+    type?: MediaType;
     drilldownLabel: string;
     empty?: Snippet;
     status: "all" | "released" | "unreleased";
   };
 
-  const { defaultType, status, drilldownLabel }: WatchListProps = $props();
+  const {
+    type: externalType,
+    status,
+    drilldownLabel,
+  }: WatchListProps = $props();
   const { filterMap } = useFilter();
 
   const useList = $derived.by(() => statusToStore(status));
 
-  const selectedType = writable<MediaToggleType>(
-    defaultType ? defaultType : "all",
-  );
+  const { current: selectedType, set, options } = useToggler("media");
 
-  const handleTypeChange = (value: MediaToggleType) => {
-    selectedType.set(value);
-  };
+  const type = $derived.by(() => {
+    if (externalType) {
+      return externalType;
+    }
 
-  const type = $derived($selectedType === "all" ? undefined : $selectedType);
+    return $selectedType === "all" ? undefined : $selectedType;
+  });
 </script>
 
 <DrillableMediaList
@@ -48,10 +51,7 @@
   {useList}
   urlBuilder={({ type, ...rest }) => {
     if (status === "all") {
-      return UrlBuilder.lists.watchlist({
-        ...rest,
-        display: type,
-      });
+      return UrlBuilder.lists.watchlist();
     }
 
     return UrlBuilder.lists.user({
@@ -83,7 +83,7 @@
 
   {#snippet badge()}
     {#if status === "all"}
-      <MediaTypeToggles value={$selectedType} onChange={handleTypeChange} />
+      <Toggler value={$selectedType} onChange={set} {options} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}
