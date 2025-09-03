@@ -13,6 +13,7 @@
   const state = $derived($hasActiveFilter ? "filtered" : "unfiltered");
 
   const isSidebarOpen = writable(false);
+  const onClose = () => isSidebarOpen.set(false);
 </script>
 
 <div class="trakt-filter-button">
@@ -36,7 +37,9 @@
   </Button>
 </div>
 
-<FilterSidebar isOpen={isSidebarOpen} />
+{#if $isSidebarOpen}
+  <FilterSidebar {onClose} />
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
