@@ -37,7 +37,7 @@
   </ActionButton>
 
   {#if $isOpen}
-    <Sidebar {onClose} title="Feature Flags">
+    <Sidebar {onClose} title="Feature Flags" hasAutoClose={false}>
       {#each Object.entries($flags) as [key, value]}
         <div class="feature-flag-item">
           <span class="meta-info">{key}</span>
