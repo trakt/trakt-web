@@ -12,6 +12,7 @@ type ExtrasType = { slug: string; type: MediaVideoType };
 type CommentType = { action: 'post' | 'reply' };
 type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
 type CalendarType = { action: 'reset' | 'next' | 'previous' };
+type StreamOnType = { source: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -31,6 +32,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Rate]: RatingType;
   [AnalyticsEvent.CheckIn]: CheckInType;
   [AnalyticsEvent.Extras]: ExtrasType;
+  [AnalyticsEvent.StreamOn]: StreamOnType;
 
   [AnalyticsEvent.Settings]: { settings: string };
 
