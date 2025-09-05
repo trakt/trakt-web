@@ -5,8 +5,6 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import VipBadge from "$lib/sections/navbar/components/VIPBadge.svelte";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
   import ManageSubscriptionButton from "./components/ManageSubscriptionButton.svelte";
   import { getSwitchInnerText } from "./getSwitchInnerText";
@@ -73,20 +71,15 @@
   description={m.description_account_details()}
 >
   <SettingsRow title={m.text_avatar()}>
-    <!-- FIXME: merge with the one in ProfileLink -->
-    <div class="profile-image-container">
-      <ProfileImage
-        isEditable
-        --width="var(--ni-52)"
-        --height="var(--ni-52)"
-        --border-width="var(--border-thickness-xs)"
-        name={$user.name.first}
-        src={$user.avatar.url}
-      />
-      <RenderFor audience="vip">
-        <VipBadge style="inverted" />
-      </RenderFor>
-    </div>
+    <ProfileImage
+      isEditable
+      --width="var(--ni-52)"
+      --height="var(--ni-52)"
+      --border-width="var(--border-thickness-xs)"
+      name={$user.name.first}
+      src={$user.avatar.url}
+      isVip={$user.isVip}
+    />
   </SettingsRow>
 
   <SettingsRow title={m.text_display_name()}>
@@ -141,20 +134,5 @@
     display: -webkit-box;
     overflow: hidden;
     line-clamp: var(--line-clamp-lines);
-  }
-
-  .profile-image-container {
-    position: relative;
-
-    :global(.vip-badge) {
-      width: var(--ni-24);
-      height: auto;
-
-      position: absolute;
-      top: var(--ni-neg-10);
-      right: var(--ni-neg-10);
-
-      z-index: var(--layer-raised);
-    }
   }
 </style>

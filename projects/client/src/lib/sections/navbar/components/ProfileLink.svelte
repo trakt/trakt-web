@@ -7,7 +7,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../../profile-banner/ProfileImage.svelte";
-  import VipBadge from "./VIPBadge.svelte";
 
   const { user } = useUser();
 </script>
@@ -18,18 +17,14 @@
     label={m.button_label_user_profile()}
     navigationType={DpadNavigationType.Item}
   >
-    <div class="profile-icon" class:is-vip={Boolean($user?.isVip)}>
-      <ProfileImage
-        --width="var(--ni-32)"
-        --height="var(--ni-32)"
-        --border-width="var(--border-thickness-xs)"
-        name={$user?.name?.first ?? ""}
-        src={$user?.avatar?.url ?? ""}
-      />
-      <RenderFor audience="vip">
-        <VipBadge style="inverted" />
-      </RenderFor>
-    </div>
+    <ProfileImage
+      --width="var(--ni-32)"
+      --height="var(--ni-32)"
+      --border-width="var(--border-thickness-xs)"
+      name={$user?.name?.first ?? ""}
+      src={$user?.avatar?.url ?? ""}
+      isVip={Boolean($user?.isVip)}
+    />
     <div class="profile-info">
       <p class="profile-name ellipsis">{$user?.name?.first}</p>
       <p class="meta-info ellipsis">{m.link_text_view_profile()}</p>
@@ -75,6 +70,11 @@
       }
     }
 
+    :global(.profile-image-container .vip-badge) {
+      top: var(--ni-neg-10);
+      right: var(--ni-neg-10);
+    }
+
     @include for-tablet-sm-and-below {
       .profile-info,
       :global(.trakt-action-button) {
@@ -97,25 +97,6 @@
 
       line-height: 90%;
       color: var(--color-text-secondary);
-    }
-  }
-
-  .profile-icon {
-    position: relative;
-
-    &.is-vip {
-      padding-right: var(--ni-8);
-    }
-
-    :global(.vip-badge) {
-      width: var(--ni-24);
-      height: auto;
-
-      position: absolute;
-      top: var(--ni-neg-10);
-      right: var(--ni-neg-4);
-
-      z-index: var(--layer-raised);
     }
   }
 </style>
