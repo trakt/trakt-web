@@ -1,3 +1,5 @@
+import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { getWebOSHandler } from '$lib/features/web-os/getWebOSHandler.ts';
 import type { StreamNow } from '$lib/requests/models/StreamingServiceOptions.ts';
 import { useStreamingServices } from '$lib/stores/useStreamingServices.ts';
@@ -6,15 +8,21 @@ import { derived, get } from 'svelte/store';
 
 type StreamOnHandler = {
   href: HttpsUrl;
+  onclick: () => void;
 } | {
   onclick: () => void;
 };
 
 export function useStreamOnHandler(service: StreamNow): StreamOnHandler {
+  const { track } = useTrack(AnalyticsEvent.StreamOn);
+
+  const trackSource = () => track({ source: service.source });
+
   const webOSHandler = getWebOSHandler();
   if (!webOSHandler || !service.webOSLink) {
     return {
       href: service.link,
+      onclick: trackSource,
     };
   }
 
@@ -25,6 +33,8 @@ export function useStreamOnHandler(service: StreamNow): StreamOnHandler {
   );
 
   const handler = () => {
+    trackSource();
+
     const sourceName = get(source)?.name ?? service.source;
     webOSHandler.launch(
       sourceName,
