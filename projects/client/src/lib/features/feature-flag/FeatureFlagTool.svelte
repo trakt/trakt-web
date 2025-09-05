@@ -25,6 +25,8 @@
 
   const isOpen = writable(false);
   const onClose = () => isOpen.set(false);
+
+  const hasFlags = $derived(Object.keys($flags).length > 0);
 </script>
 
 <RenderFor audience="director">
@@ -38,18 +40,22 @@
 
   {#if $isOpen}
     <Sidebar {onClose} title="Feature Flags" hasAutoClose={false}>
-      {#each Object.entries($flags) as [key, value]}
-        <div class="feature-flag-item">
-          <span class="meta-info">{key}</span>
-          <Switch
-            color="orange"
-            label={key}
-            checked={value}
-            innerText={value ? "on" : "off"}
-            onclick={() => setFlag(key as FeatureFlag, !value)}
-          />
-        </div>
-      {/each}
+      {#if hasFlags}
+        {#each Object.entries($flags) as [key, value]}
+          <div class="feature-flag-item">
+            <span class="meta-info">{key}</span>
+            <Switch
+              color="orange"
+              label={key}
+              checked={value}
+              innerText={value ? "on" : "off"}
+              onclick={() => setFlag(key as unknown as FeatureFlag, !value)}
+            />
+          </div>
+        {/each}
+      {:else}
+        <p class="meta-info">Currently there aren't any feature flags 🎉</p>
+      {/if}
     </Sidebar>
   {/if}
 </RenderFor>
