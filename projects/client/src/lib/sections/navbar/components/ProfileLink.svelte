@@ -72,7 +72,11 @@
 
     :global(.profile-image-container .vip-badge) {
       top: var(--ni-neg-10);
-      right: var(--ni-neg-10);
+      right: var(--ni-neg-4);
+    }
+
+    :global(.profile-image-container.is-vip) {
+      padding-right: var(--ni-8);
     }
 
     @include for-tablet-sm-and-below {
