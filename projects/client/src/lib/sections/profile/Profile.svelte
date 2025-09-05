@@ -1,9 +1,7 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import FavoritesList from "../lists/FavoritesList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
@@ -65,8 +63,4 @@
   <PersonalLists {slug} type="collaboration" />
 {/if}
 
-<RenderForFeature flag={FeatureFlag.SocialNetwork}>
-  {#snippet enabled()}
-    <ProfilesList {slug} {network} />
-  {/snippet}
-</RenderForFeature>
+<ProfilesList {slug} {network} />
