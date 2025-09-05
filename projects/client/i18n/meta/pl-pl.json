@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Chcesz zobaczyć podsumowanie miesiąca i roku? I uzyskać dostęp do wielu innych funkcji? Zapisz się do Trakt VIP."
     },
-    "list_title_following": {
-      "default": "Obserwujesz"
-    },
-    "list_title_followers": {
-      "default": "Obserwujący"
+    "list_title_social": {
+      "default": "Społecznościowe"
     },
     "list_placeholder_followers": {
       "default": "Nikt tu nie zagląda (jeszcze)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Wszystko"
+    },
+    "button_label_following": {
+      "default": "Obserwujesz"
+    },
+    "button_text_following": {
+      "default": "Obserwujesz"
+    },
+    "button_label_followers": {
+      "default": "Obserwujący"
+    },
+    "button_text_followers": {
+      "default": "Obserwujący"
     }
   }
 }

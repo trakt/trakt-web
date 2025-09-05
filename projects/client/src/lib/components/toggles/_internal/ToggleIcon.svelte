@@ -1,4 +1,6 @@
 <script lang="ts" generics="T">
+  import FollowersIcon from "$lib/components/icons/FollowersIcon.svelte";
+  import FollowingIcon from "$lib/components/icons/FollowingIcon.svelte";
   import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
@@ -45,4 +47,12 @@
 
 {#if option.value === "people"}
   <PeopleIcon />
+{/if}
+
+{#if option.value === "following"}
+  <FollowingIcon />
+{/if}
+
+{#if option.value === "followers"}
+  <FollowersIcon />
 {/if}

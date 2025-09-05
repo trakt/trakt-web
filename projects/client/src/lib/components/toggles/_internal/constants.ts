@@ -3,9 +3,10 @@ import type { MediaType } from '../../../requests/models/MediaType.ts';
 import type { ActivityType } from '../../../sections/lists/activity/models/ActivityType.ts';
 import type { ToggleOption } from '../ToggleOption.ts';
 
-export type TogglerId = 'activity' | 'media';
+export type TogglerId = 'activity' | 'media' | 'social';
 
 type MediaToggleType = MediaType | 'all';
+type SocialToggleType = 'following' | 'followers';
 
 type Toggler<T, K> = {
   id: T;
@@ -16,6 +17,7 @@ type Toggler<T, K> = {
 export type TogglerValueMap = {
   activity: ActivityType;
   media: MediaToggleType;
+  social: SocialToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -59,9 +61,27 @@ const media: ToggleDefinition<'media'> = {
   ],
 };
 
+const social: ToggleDefinition<'social'> = {
+  id: 'social',
+  default: 'following',
+  options: [
+    {
+      value: 'following',
+      text: m.button_text_following(),
+      label: m.button_label_following(),
+    },
+    {
+      value: 'followers',
+      text: m.button_text_followers(),
+      label: m.button_label_followers(),
+    },
+  ],
+};
+
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
   activity,
   media,
+  social,
 } as const;

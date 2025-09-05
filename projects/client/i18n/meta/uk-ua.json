@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Хочете побачити свій місячний та річний огляд? Та отримати доступ до багатьох інших функцій? Підпишіться на Trakt VIP."
     },
-    "list_title_following": {
-      "default": "Підписки"
-    },
-    "list_title_followers": {
-      "default": "Підписники"
+    "list_title_social": {
+      "default": "Соціальне"
     },
     "list_placeholder_followers": {
       "default": "Тут нікого немає (поки що)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Усі"
+    },
+    "button_label_following": {
+      "default": "Підписки"
+    },
+    "button_text_following": {
+      "default": "Підписки"
+    },
+    "button_label_followers": {
+      "default": "Підписники"
+    },
+    "button_text_followers": {
+      "default": "Підписники"
     }
   }
 }

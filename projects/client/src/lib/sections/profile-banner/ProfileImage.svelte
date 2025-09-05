@@ -105,7 +105,10 @@
     margin: 0;
     width: var(--width);
     height: var(--height);
+
     border-radius: 50%;
+    outline: var(--border-width) solid var(--color-border-avatar);
+    outline-offset: calc(-1 * var(--border-width));
 
     padding: var(--border-width);
     box-sizing: border-box;
@@ -122,7 +125,6 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      outline: var(--border-width) solid var(--color-border-avatar);
     }
   }
 </style>

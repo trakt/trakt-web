@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Искате ли да видите своя месечен и годишен преглед? И да получите достъп до много други функции? Регистрирайте се за Trakt VIP."
     },
-    "list_title_following": {
-      "default": "Следвам"
-    },
-    "list_title_followers": {
-      "default": "Последователи"
+    "list_title_social": {
+      "default": "Социални"
     },
     "list_placeholder_followers": {
       "default": "Тук няма никой (още)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Всички"
+    },
+    "button_label_following": {
+      "default": "Последвани"
+    },
+    "button_text_following": {
+      "default": "Последвани"
+    },
+    "button_label_followers": {
+      "default": "Последователи"
+    },
+    "button_text_followers": {
+      "default": "Последователи"
     }
   }
 }

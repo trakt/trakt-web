@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Vrei să-ți vezi retrospectiva lunară și anuală? Și să accesezi multe alte funcții? Înscrie-te la Trakt VIP."
     },
-    "list_title_following": {
-      "default": "Urmărește"
-    },
-    "list_title_followers": {
-      "default": "Urmăritori"
+    "list_title_social": {
+      "default": "Social"
     },
     "list_placeholder_followers": {
       "default": "Nimeni pe aici (încă)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Toate"
+    },
+    "button_label_following": {
+      "default": "Urmărește"
+    },
+    "button_text_following": {
+      "default": "Urmărește"
+    },
+    "button_label_followers": {
+      "default": "Urmăritori"
+    },
+    "button_text_followers": {
+      "default": "Urmăritori"
     }
   }
 }

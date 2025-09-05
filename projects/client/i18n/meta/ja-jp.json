@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "月間と年間のレビューを見たいですか？ 他の多くの機能にもアクセスできます。 Trakt VIPに登録しましょう。"
     },
-    "list_title_following": {
-      "default": "フォロー中"
-    },
-    "list_title_followers": {
-      "default": "フォロワー"
+    "list_title_social": {
+      "default": "ソーシャル"
     },
     "list_placeholder_followers": {
       "default": "まだ誰もいません。"
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "すべて"
+    },
+    "button_label_following": {
+      "default": "フォロー中"
+    },
+    "button_text_following": {
+      "default": "フォロー中"
+    },
+    "button_label_followers": {
+      "default": "フォロワー"
+    },
+    "button_text_followers": {
+      "default": "フォロワー"
     }
   }
 }

@@ -45,6 +45,9 @@
     100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
   );
 
+  --width-profile-item: var(--ni-80);
+  --height-profile-item: var(--ni-96);
+
   /**
    * List dimensions
    */
@@ -68,6 +71,9 @@
   --height-comment-thread-list: calc(
     var(--height-comment-thread-card) + var(--layout-scrollbar-width)
       + var(--layout-footer-less-padding)
+  );
+  --height-profile-list: calc(
+    var(--height-profile-item) + var(--layout-scrollbar-width)
   );
 
   /**

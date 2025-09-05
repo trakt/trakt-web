@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Wil je je maand- en jaaroverzicht bekijken? En toegang krijgen tot vele andere functies? Meld je aan voor Trakt VIP."
     },
-    "list_title_following": {
-      "default": "Volgend"
-    },
-    "list_title_followers": {
-      "default": "Volgers"
+    "list_title_social": {
+      "default": "Sociaal"
     },
     "list_placeholder_followers": {
       "default": "Hier is nog niemand (nog niet)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Alle"
+    },
+    "button_label_following": {
+      "default": "Volgend"
+    },
+    "button_text_following": {
+      "default": "Volgend"
+    },
+    "button_label_followers": {
+      "default": "Volgers"
+    },
+    "button_text_followers": {
+      "default": "Volgers"
     }
   }
 }
