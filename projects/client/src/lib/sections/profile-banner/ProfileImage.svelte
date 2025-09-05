@@ -5,12 +5,22 @@
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction";
   import { uploadAvatarRequest } from "$lib/requests/queries/users/uploadAvatarRequest";
   import { useInvalidator } from "$lib/stores/useInvalidator";
+  import type { Snippet } from "svelte";
+  import VipBadge from "../navbar/components/VIPBadge.svelte";
 
   const {
     name,
     src,
     isEditable = false,
-  }: { name: string; src: string; isEditable?: boolean } = $props();
+    isVip = false,
+    badge: externalBadge,
+  }: {
+    name: string;
+    src: string;
+    isVip?: boolean;
+    isEditable?: boolean;
+    badge?: Snippet;
+  } = $props();
 
   const { invalidate } = useInvalidator();
 
@@ -25,22 +35,39 @@
   }
 </script>
 
-<figure class="profile-image" data-sentry-block>
-  <!-- This should be the first element, else: HierarchyRequestError -->
-  <figcaption class="visually-hidden">
-    {m.image_alt_user_avatar({ username: name })}
-  </figcaption>
-
-  {#if isEditable}
-    <EditableImage
-      {src}
-      alt={m.image_alt_user_avatar({ username: name })}
-      onchange={handleImageUploaded}
-    />
+{#snippet badge()}
+  {#if externalBadge}
+    {@render externalBadge()}
   {:else}
-    <CrossOriginImage {src} alt={m.image_alt_user_avatar({ username: name })} />
+    <VipBadge style="inverted" />
   {/if}
-</figure>
+{/snippet}
+
+<div class="profile-image-container" class:is-vip={isVip}>
+  <figure class="profile-image" data-sentry-block>
+    <!-- This should be the first element, else: HierarchyRequestError -->
+    <figcaption class="visually-hidden">
+      {m.image_alt_user_avatar({ username: name })}
+    </figcaption>
+
+    {#if isEditable}
+      <EditableImage
+        {src}
+        alt={m.image_alt_user_avatar({ username: name })}
+        onchange={handleImageUploaded}
+      />
+    {:else}
+      <CrossOriginImage
+        {src}
+        alt={m.image_alt_user_avatar({ username: name })}
+      />
+    {/if}
+  </figure>
+
+  {#if isVip}
+    {@render badge()}
+  {/if}
+</div>
 
 <style>
   .visually-hidden {
@@ -52,6 +79,26 @@
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+  }
+
+  .profile-image-container {
+    position: relative;
+
+    &.is-vip {
+      --color-border-avatar: var(--color-border-vip-avatar);
+    }
+
+    :global(.vip-badge) {
+      position: absolute;
+
+      width: var(--ni-24);
+      height: var(--ni-24);
+
+      top: var(--ni-neg-8);
+      right: var(--ni-neg-8);
+
+      z-index: var(--layer-raised);
+    }
   }
 
   .profile-image {

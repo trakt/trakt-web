@@ -25,19 +25,21 @@
 </script>
 
 <div class="profile-page-banner-container">
-  <div class="profile-image-container" class:user-is-vip={profile.isVip}>
-    <ProfileImage
-      isEditable={$isMe}
-      --width="var(--ni-64)"
-      --height="var(--ni-64)"
-      --border-width="var(--border-thickness-s)"
-      name={profile.name.first}
-      src={profile.avatar.url}
-    />
-    {#if profile.isVip}
-      <VipBadge isDirector={profile.isDirector} />
-    {/if}
-  </div>
+  <ProfileImage
+    isEditable={$isMe}
+    --width="var(--ni-64)"
+    --height="var(--ni-64)"
+    --border-width="var(--border-thickness-s)"
+    name={profile.name.first}
+    src={profile.avatar.url}
+    isVip={profile.isVip}
+  >
+    {#snippet badge()}
+      {#if profile.isVip}
+        <VipBadge isDirector={profile.isDirector} />
+      {/if}
+    {/snippet}
+  </ProfileImage>
   <div class="profile-info" data-hj-suppress data-sentry-mask>
     <div class="profile-user-details">
       <h5>
@@ -72,26 +74,22 @@
     align-items: flex-start;
     gap: var(--gap-m);
 
+    :global(.profile-image-container) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      :global(.trakt-vip-badge) {
+        z-index: var(--layer-base);
+        margin-top: var(--ni-neg-16);
+      }
+    }
+
     @include for-tablet-sm-and-below {
       flex-direction: row;
       align-items: flex-end;
 
       margin: 0;
-    }
-  }
-
-  .profile-image-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    :global(.trakt-vip-badge) {
-      z-index: var(--layer-base);
-      margin-top: var(--ni-neg-16);
-    }
-
-    &.user-is-vip {
-      --color-border-avatar: var(--color-border-vip-avatar);
     }
   }
 
