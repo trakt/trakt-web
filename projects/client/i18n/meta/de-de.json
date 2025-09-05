@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Möchtest du deine Monats- und Jahresübersicht sehen? Und Zugriff auf viele weitere Funktionen erhalten? Melde dich für Trakt VIP an."
     },
-    "list_title_following": {
-      "default": "Abonniert"
-    },
-    "list_title_followers": {
-      "default": "Follower"
+    "list_title_social": {
+      "default": "Social"
     },
     "list_placeholder_followers": {
       "default": "Hier ist noch niemand (zumindest noch nicht)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Alle"
+    },
+    "button_label_following": {
+      "default": "Abonniert"
+    },
+    "button_text_following": {
+      "default": "Abonniert"
+    },
+    "button_label_followers": {
+      "default": "Follower"
+    },
+    "button_text_followers": {
+      "default": "Follower"
     }
   }
 }

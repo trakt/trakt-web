@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Vil du se din månedlige og årlige gjennomgang? Og få tilgang til mange andre funksjoner? Registrer deg for Trakt VIP."
     },
-    "list_title_following": {
-      "default": "Følger"
-    },
-    "list_title_followers": {
-      "default": "Følgere"
+    "list_title_social": {
+      "default": "Sosialt"
     },
     "list_placeholder_followers": {
       "default": "Ingen her (enda)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Alle"
+    },
+    "button_label_following": {
+      "default": "Følger"
+    },
+    "button_text_following": {
+      "default": "Følger"
+    },
+    "button_label_followers": {
+      "default": "Følgere"
+    },
+    "button_text_followers": {
+      "default": "Følgere"
     }
   }
 }

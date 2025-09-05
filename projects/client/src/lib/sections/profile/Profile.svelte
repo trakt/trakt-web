@@ -23,6 +23,11 @@
   const { isMe } = $derived(useIsMe(slug));
 
   const hasUpsell = $derived($isMe && !profile.isVip);
+
+  const network = $derived({
+    followers: $followers,
+    following: $following,
+  });
 </script>
 
 <ProfileContainer>
@@ -62,7 +67,6 @@
 
 <RenderForFeature flag={FeatureFlag.SocialNetwork}>
   {#snippet enabled()}
-    <ProfilesList {slug} type="following" profiles={$following} />
-    <ProfilesList {slug} type="followers" profiles={$followers} />
+    <ProfilesList {slug} {network} />
   {/snippet}
 </RenderForFeature>

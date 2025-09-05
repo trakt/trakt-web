@@ -3779,17 +3779,9 @@
         "ios"
       ]
     },
-    "list_title_following": {
-      "default": "Following",
-      "description": "Title for lists containing the profiles the user follows. This title should be as short and concise as possible.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_title_followers": {
-      "default": "Followers",
-      "description": "Title for lists containing the profiles following the user. This title should be as short and concise as possible.",
+    "list_title_social": {
+      "default": "Social",
+      "description": "Title for lists containing the profiles the user follows or profiles that follow the user. This title should be as short and concise as possible.",
       "exclude": [
         "android",
         "ios"
@@ -5248,6 +5240,38 @@
     "button_text_all": {
       "default": "All",
       "description": "Aria-label for the button that allows users to toggle all media types.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_following": {
+      "default": "Following",
+      "description": "Aria-label for the button that allows users to toggle the social list to view who they follow.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_following": {
+      "default": "Following",
+      "description": "Aria-label for the button that allows users to toggle the social list to view who they follow.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_followers": {
+      "default": "Followers",
+      "description": "Aria-label for the button that allows users to toggle the social list to view who their followers are.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_followers": {
+      "default": "Followers",
+      "description": "Aria-label for the button that allows users to toggle the social list to view who their followers are.",
       "exclude": [
         "android",
         "ios"

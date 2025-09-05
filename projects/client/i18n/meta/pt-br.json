@@ -1326,11 +1326,8 @@
     "text_vip_upsell_description": {
       "default": "Quer ver sua análise mensal e anual? E ter acesso a muitos outros recursos? Assine o Trakt VIP."
     },
-    "list_title_following": {
-      "default": "Seguindo"
-    },
-    "list_title_followers": {
-      "default": "Seguidores"
+    "list_title_social": {
+      "default": "Social"
     },
     "list_placeholder_followers": {
       "default": "Ninguém por aqui (ainda)."
@@ -1860,6 +1857,18 @@
     },
     "button_text_all": {
       "default": "Tudo"
+    },
+    "button_label_following": {
+      "default": "Seguindo"
+    },
+    "button_text_following": {
+      "default": "Seguindo"
+    },
+    "button_label_followers": {
+      "default": "Seguidores"
+    },
+    "button_text_followers": {
+      "default": "Seguidores"
     }
   }
 }
