@@ -21,7 +21,7 @@
   --color-background-cover-tag: var(--cm-background-cover-tag);
 
   --color-text-watch-count-tag: var(--shade-10);
-  --color-background-watch-count-tag: var(--purple-500);
+  --color-background-watch-count-tag: var(--shade-800);
 
   --color-text-trend-tag: var(--shade-10);
   --color-background-trend-neutral-background-tag: var(--shade-500);

@@ -1,5 +1,5 @@
 import { bodyPortal } from '$lib/features/portal/_internal/bodyPortal.ts';
-import { onMount } from 'svelte';
+// import { onMount } from 'svelte';
 import { alignPopupContainer } from './alignPopupContainer.ts';
 import type { PopupPlacement } from './models/PopupPlacement.ts';
 
@@ -18,7 +18,8 @@ export function openPopupContainer(
     });
   }
 
-  onMount(moveNodeToBody);
+  moveNodeToBody();
+  // onMount(moveNodeToBody);
 
   const observer = new MutationObserver(() => {
     const targetRect = targetNode.getBoundingClientRect();

@@ -104,14 +104,14 @@
       );
       pointer-events: none;
 
-      @include for-tablet-sm-and-below {
+      /* @include for-tablet-sm-and-below {
         background: linear-gradient(
           180deg,
           var(--cm-background-15) 0%,
           var(--cm-background-50) 30%,
           var(--color-background) 100%
         );
-      }
+      } */
     }
 
     &::before {
@@ -133,7 +133,7 @@
       &::after {
         @include backdrop-filter-blur(var(--ni-2));
 
-        @include for-tablet-sm-and-below {
+        /* @include for-tablet-sm-and-below {
           backdrop-filter: unset;
 
           background: linear-gradient(
@@ -145,21 +145,21 @@
             var(--cm-background-88) 60%,
             var(--color-background) 90%
           );
-        }
+        } */
       }
 
       &::before {
-        @include for-tablet-sm-and-below {
+        /* @include for-tablet-sm-and-below {
           background: none;
-        }
+        } */
       }
     }
 
     &[data-cover-type="main"] {
       &::before {
-        @include for-mobile {
+        /* @include for-mobile {
           background: none;
-        }
+        } */
       }
     }
   }
