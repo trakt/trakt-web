@@ -50,6 +50,8 @@
     &[data-cover-type="main"] {
       --color-transparent-background: transparent;
 
+      opacity: 0.5;
+
       :global(img) {
         filter: grayscale(1);
       }
