@@ -15,6 +15,7 @@
   import DefaultPersonItem from "$lib/sections/lists/components/DefaultPersonItem.svelte";
   import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+  import { isMobileAppleDevice } from "$lib/utils/devices/isMobileAppleDevice";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
@@ -46,6 +47,9 @@
   const pageTitle = $derived(
     query ? m.page_title_search_results({ query }) : m.page_title_search(),
   );
+
+  // FIXME: deal with ios onscreen keyboard and move to mobile navbar
+  const showOnPageSearch = isMobileAppleDevice();
 </script>
 
 {#snippet showTag()}
@@ -54,13 +58,21 @@
   </InfoTag>
 {/snippet}
 
-<TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={pageTitle}>
+{#snippet searchControls()}
   <div class="trakt-search-container">
-    <RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
-      <SearchInput isInline={false} />
-    </RenderFor>
+    <SearchInput />
     <SearchModeToggles />
   </div>
+{/snippet}
+
+<TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={pageTitle}>
+  <RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
+    {@render searchControls()}
+  </RenderFor>
+
+  {#if showOnPageSearch}
+    {@render searchControls()}
+  {/if}
 
   {#if src}
     <CoverImageSetter {src} type="main" />
@@ -124,7 +136,8 @@
     }
 
     @include for-tablet-sm-and-below {
-      padding: 0;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 

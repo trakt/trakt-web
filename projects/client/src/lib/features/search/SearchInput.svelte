@@ -8,36 +8,18 @@
   import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
 
-  const { isInline = true }: { isInline?: boolean } = $props();
-
-  const {
-    clear,
-    isSearching,
-    pathName,
-    exitPathName,
-    mode,
-    targetParams,
-    query,
-  } = useSearch();
+  const { clear, isSearching, pathName, mode, targetParams, query } =
+    useSearch();
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
     const value = inputElement.value.trim();
 
     if (value.length === 0) {
-      if (!isInline) {
-        goto(pathName, {
-          replaceState: page.url.pathname === pathName,
-          keepFocus: true,
-        });
-        return;
-      }
-
-      goto($exitPathName, {
-        replaceState: true,
+      goto(pathName, {
+        replaceState: page.url.pathname === pathName,
         keepFocus: true,
       });
-      return;
     }
 
     const params = buildParamString({
@@ -80,10 +62,6 @@
   });
 
   onMount(() => {
-    if (isInline) {
-      return;
-    }
-
     const length = inputElement.value.length;
     inputElement.setSelectionRange(length, length);
     inputElement.focus();
@@ -97,7 +75,6 @@
 <div
   class="trakt-search"
   class:search-is-loading={$isSearching}
-  class:is-inline={isInline}
   data-hj-suppress
   data-sentry-mask
 >
@@ -129,20 +106,6 @@
     }
   }
 
-  :global(.trakt-navbar-scroll) {
-    &:has(.trakt-search:focus-within) {
-      border-bottom-left-radius: var(--border-radius-m);
-      border-bottom-right-radius: var(--border-radius-m);
-    }
-
-    .trakt-search {
-      .trakt-search-input {
-        background: var(--cm-background-search-input);
-        outline: var(--border-thickness-xs) solid var(--color-border);
-      }
-    }
-  }
-
   .trakt-search {
     --search-input-width: clamp(var(--ni-80), 100%, var(--ni-480));
     --search-input-height: var(--ni-48);
@@ -159,17 +122,13 @@
 
     transition: outline var(--transition-increment) ease-in-out;
 
-    &:not(.is-inline):focus-within {
+    &:focus-within {
       outline: var(--border-thickness-xs) solid var(--purple-500);
 
       &,
       .trakt-search-input {
         border-radius: var(--border-radius-l);
       }
-    }
-
-    @include for-mobile {
-      --search-input-width: var(--ni-48);
     }
 
     .trakt-search-icon {
@@ -191,7 +150,7 @@
       );
       box-sizing: border-box;
 
-      border-radius: var(--border-radius-s);
+      border-radius: var(--border-radius-l);
       background: var(--cm-background-25);
 
       transition: var(--transition-increment) ease-in-out;
@@ -199,18 +158,6 @@
         border-color, background-color, padding, width, top, left, opacity;
 
       @include backdrop-filter-blur(var(--ni-8));
-      @include for-mobile {
-        width: var(--search-icon-size);
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        &:not(:focus-within) {
-          padding: var(--ni-8) var(--ni-24);
-          outline: none;
-          opacity: 0;
-        }
-      }
 
       &:placeholder-shown {
         text-overflow: ellipsis;
@@ -219,13 +166,6 @@
       &:focus-within {
         outline-color: var(--purple-600);
         opacity: 1;
-
-        @include for-mobile {
-          left: 0;
-          top: 0;
-          width: var(--mobile-search-focus-width);
-          z-index: var(--layer-top);
-        }
       }
 
       &::-webkit-search-cancel-button {

@@ -2,6 +2,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import { getContext, setContext } from 'svelte';
 import { writable } from 'svelte/store';
+import { UrlBuilder } from '../../../utils/url/UrlBuilder.ts';
 import type { SearchContext } from './SearchContext.ts';
 import { searchKeyFactory } from './searchKeyFactory.ts';
 
@@ -18,8 +19,7 @@ export function createSearchContext({ mode, mediaType }: SearchContextProps) {
         mode: writable(mode ?? 'media'),
         mediaType: writable(mediaType),
         isSearching: writable(false),
-        pathName: '/search',
-        exitPathName: writable('/'),
+        pathName: UrlBuilder.search(),
         query: writable(''),
       },
   );
