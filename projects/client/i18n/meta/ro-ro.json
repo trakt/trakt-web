@@ -1869,6 +1869,18 @@
     },
     "button_text_followers": {
       "default": "Urmăritori"
+    },
+    "text_good_morning": {
+      "default": "Bună dimineața"
+    },
+    "text_good_afternoon": {
+      "default": "Bună ziua"
+    },
+    "text_good_evening": {
+      "default": "Bună seara"
+    },
+    "text_good_night": {
+      "default": "Noapte bună"
     }
   }
 }

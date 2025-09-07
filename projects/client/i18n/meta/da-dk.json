@@ -1869,6 +1869,18 @@
     },
     "button_text_followers": {
       "default": "Følgere"
+    },
+    "text_good_morning": {
+      "default": "Godmorgen"
+    },
+    "text_good_afternoon": {
+      "default": "God eftermiddag"
+    },
+    "text_good_evening": {
+      "default": "God aften"
+    },
+    "text_good_night": {
+      "default": "Godnat"
     }
   }
 }

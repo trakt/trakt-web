@@ -1869,6 +1869,18 @@
     },
     "button_text_followers": {
       "default": "Seguidores"
+    },
+    "text_good_morning": {
+      "default": "Bom dia"
+    },
+    "text_good_afternoon": {
+      "default": "Boa tarde"
+    },
+    "text_good_evening": {
+      "default": "Boa noite"
+    },
+    "text_good_night": {
+      "default": "Boa noite"
     }
   }
 }

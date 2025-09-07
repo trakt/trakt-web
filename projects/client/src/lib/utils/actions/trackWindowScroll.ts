@@ -1,4 +1,3 @@
-import { onMount } from 'svelte';
 import { GlobalEventBus } from '../events/GlobalEventBus.ts';
 
 export function trackWindowScroll(node: HTMLElement, className: string) {
@@ -7,9 +6,16 @@ export function trackWindowScroll(node: HTMLElement, className: string) {
     node.classList.toggle(className, isScrolled);
   }
 
-  onMount(() => {
-    handleScroll();
+  handleScroll();
 
-    return GlobalEventBus.getInstance().register('scroll', handleScroll);
-  });
+  const unregister = GlobalEventBus.getInstance().register(
+    'scroll',
+    handleScroll,
+  );
+
+  return {
+    destroy() {
+      unregister();
+    },
+  };
 }
