@@ -1869,6 +1869,18 @@
     },
     "button_text_followers": {
       "default": "フォロワー"
+    },
+    "text_good_morning": {
+      "default": "おはようございます"
+    },
+    "text_good_afternoon": {
+      "default": "こんにちは"
+    },
+    "text_good_evening": {
+      "default": "こんばんは"
+    },
+    "text_good_night": {
+      "default": "おやすみ"
     }
   }
 }

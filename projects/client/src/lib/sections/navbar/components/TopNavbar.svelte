@@ -1,29 +1,36 @@
 <script lang="ts">
-  import { useUser } from "$lib/features/auth/stores/useUser";
+  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
+  import { trackWindowScrollDirection } from "$lib/utils/actions/trackWindowScrollDirection";
+  import Greeting from "./_internal/Greeting.svelte";
   import FilterButton from "./filter/FilterButton.svelte";
-  import GetVIPLink from "./GetVIPLink.svelte";
   import JoinTraktButton from "./JoinTraktButton.svelte";
   import ProfileLink from "./ProfileLink.svelte";
-  import TraktLogo from "./TraktLogo.svelte";
-
-  const { user } = useUser();
-  const isVip = $derived(!!$user?.isVip);
 </script>
 
 <header>
-  <nav class="trakt-navbar" use:trackWindowScroll={"trakt-navbar-scroll"}>
-    <TraktLogo />
+  <nav
+    class="trakt-navbar"
+    use:trackWindowScroll={"trakt-navbar-scroll"}
+    use:trackWindowScrollDirection={{
+      up: "trakt-navbar-scroll-up",
+      down: "trakt-navbar-scroll-down",
+    }}
+  >
+    <div class="trakt-navbar-content">
+      <Greeting />
+    </div>
 
     <div class="trakt-navbar-links">
       <RenderFor audience="public">
-        <JoinTraktButton size="small" />
+        <JoinTraktButton size="small">
+          {#snippet icon()}
+            <PlusIcon />
+          {/snippet}
+        </JoinTraktButton>
       </RenderFor>
       <RenderFor audience="authenticated">
-        {#if !isVip}
-          <GetVIPLink />
-        {/if}
         <FilterButton size="small" />
         <ProfileLink />
       </RenderFor>
@@ -46,6 +53,9 @@
 
   .trakt-navbar {
     --navbar-vertical-padding: var(--ni-12);
+    --offscreen-top: calc(
+      -1 * (var(--navbar-height) + env(safe-area-inset-top, 0))
+    );
 
     z-index: var(--layer-overlay);
     position: fixed;
@@ -54,6 +64,8 @@
 
     box-sizing: border-box;
     display: flex;
+    justify-content: space-between;
+
     width: 100dvw;
     height: var(--navbar-height);
 
@@ -64,8 +76,11 @@
     gap: var(--gap-l);
 
     border-radius: 0%;
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: width, background-color, box-shadow, border-radius;
+    border-bottom-left-radius: var(--border-radius-xxl);
+    border-bottom-right-radius: var(--border-radius-xxl);
+
+    transition: calc(2 * var(--transition-increment)) ease-in-out;
+    transition-property: width, background-color, box-shadow, top, opacity;
 
     .trakt-navbar-links {
       display: flex;
@@ -76,21 +91,24 @@
 
     &:global(.trakt-navbar-scroll) {
       background-color: var(--color-background-navbar);
-
-      border-bottom-left-radius: var(--border-radius-xxl);
-      border-bottom-right-radius: var(--border-radius-xxl);
-
       box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
 
       @include backdrop-filter-blur(var(--ni-8));
     }
 
+    &:global(.trakt-navbar-scroll),
+    &:global(.trakt-navbar-scroll-down) {
+      top: var(--offscreen-top);
+      opacity: 0;
+    }
+
+    &:global(.trakt-navbar-scroll-up) {
+      top: 0;
+      opacity: 1;
+    }
+
     @include for-mobile {
       gap: var(--gap-xs);
-
-      .trakt-navbar-content {
-        gap: var(--gap-xs);
-      }
     }
   }
 
