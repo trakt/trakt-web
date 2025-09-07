@@ -5,6 +5,5 @@ export type SearchContext = {
   mode: Writable<SearchMode>;
   isSearching: Writable<boolean>;
   pathName: string;
-  exitPathName: Writable<string>;
   query: Writable<string>;
 };

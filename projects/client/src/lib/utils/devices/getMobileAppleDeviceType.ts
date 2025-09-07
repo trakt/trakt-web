@@ -1,3 +1,5 @@
+import { browser } from '$app/environment';
+
 type AppleMobileDevice = 'iphone' | 'ipad' | 'none';
 
 /*
@@ -6,6 +8,10 @@ type AppleMobileDevice = 'iphone' | 'ipad' | 'none';
   https://developer.mozilla.org/en-US/docs/Web/API/Navigator/platform
 */
 export function getMobileAppleDeviceType(): AppleMobileDevice {
+  if (!browser) {
+    return 'none';
+  }
+
   // Respected by browsers (Safari, Chrome, Edge, Firefox)
   const isIphone = navigator.platform === 'iPhone';
   if (isIphone) {

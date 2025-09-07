@@ -8,14 +8,7 @@
 
   const initialTarget = toSearchTarget(page.url.searchParams.get("m"));
 
-  const { mode, pathName, exitPathName, query } =
-    createSearchContext(initialTarget);
-
-  $effect(() => {
-    if (!page.url.pathname.startsWith(pathName)) {
-      exitPathName.set(page.url.pathname);
-    }
-  });
+  const { mode, query } = createSearchContext(initialTarget);
 
   $effect(() => {
     const m = page.url.searchParams.get("m");
@@ -30,6 +23,7 @@
 
     const q = page.url.searchParams.get("q");
     if (!q?.trim()) {
+      query.set("");
       return;
     }
 

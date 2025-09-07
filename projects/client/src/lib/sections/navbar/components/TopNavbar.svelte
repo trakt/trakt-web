@@ -1,6 +1,5 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import SearchInput from "$lib/features/search/SearchInput.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import FilterButton from "./filter/FilterButton.svelte";
@@ -16,12 +15,6 @@
 <header>
   <nav class="trakt-navbar" use:trackWindowScroll={"trakt-navbar-scroll"}>
     <TraktLogo />
-
-    <div class="trakt-navbar-content">
-      <RenderFor audience="authenticated" navigation="default">
-        <SearchInput />
-      </RenderFor>
-    </div>
 
     <div class="trakt-navbar-links">
       <RenderFor audience="public">
@@ -73,14 +66,6 @@
     border-radius: 0%;
     transition: var(--transition-increment) ease-in-out;
     transition-property: width, background-color, box-shadow, border-radius;
-
-    .trakt-navbar-content {
-      width: 100%;
-
-      display: flex;
-      align-items: center;
-      gap: var(--gap-m);
-    }
 
     .trakt-navbar-links {
       display: flex;
