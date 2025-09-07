@@ -1,5 +1,5 @@
-import { isMobileAppleDevice } from '$lib/utils/actions/mobileAppleDeviceTriggerHack.ts';
 import { NOOP_FN } from '$lib/utils/constants.ts';
+import { isMobileAppleDevice } from '$lib/utils/devices/isMobileAppleDevice.ts';
 
 function setGlobalDialogHeight(height: string) {
   document.documentElement.style.setProperty(

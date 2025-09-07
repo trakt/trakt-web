@@ -1,11 +1,5 @@
 import { NOOP_FN } from '../constants.ts';
-import { getMobileAppleDeviceType } from '../devices/getMobileAppleDeviceType.ts';
-
-export function isMobileAppleDevice() {
-  const deviceType = getMobileAppleDeviceType();
-
-  return deviceType === 'iphone' || deviceType === 'ipad';
-}
+import { isMobileAppleDevice } from '../devices/isMobileAppleDevice.ts';
 
 /**
  * This function is needed to handle touch events on mobile Apple devices.
