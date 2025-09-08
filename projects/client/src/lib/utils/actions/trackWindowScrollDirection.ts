@@ -1,24 +1,32 @@
+import { useVarToPixels } from '../../stores/css/useVarToPixels.ts';
 import { GlobalEventBus } from '../events/GlobalEventBus.ts';
 
 const SCROLL_THRESHOLD = 10;
 
 export function trackWindowScrollDirection(
   node: HTMLElement,
-  classNames: {
-    up: string;
-    down: string;
+  props: {
+    upClassName: string;
+    downClassName: string;
+    offsetVar: string;
   },
 ) {
   let lastScrollY = 0;
 
+  const offset = useVarToPixels(props.offsetVar);
+  let offsetValue = 0;
+  const unsubscribe = offset.subscribe((value) => {
+    offsetValue = value;
+  });
+
   function reset() {
     lastScrollY = 0;
-    node.classList.remove(classNames.up, classNames.down);
+    node.classList.remove(props.upClassName, props.downClassName);
   }
 
   function handleScroll() {
     const currentScrollY = globalThis.window.scrollY;
-    if (currentScrollY === 0) {
+    if (currentScrollY <= offsetValue) {
       reset();
       return;
     }
@@ -31,8 +39,8 @@ export function trackWindowScrollDirection(
     const isScrollingDown = currentScrollY > lastScrollY;
     const isScrollingUp = currentScrollY < lastScrollY;
 
-    node.classList.toggle(classNames.up, isScrollingUp);
-    node.classList.toggle(classNames.down, isScrollingDown);
+    node.classList.toggle(props.upClassName, isScrollingUp);
+    node.classList.toggle(props.downClassName, isScrollingDown);
 
     lastScrollY = currentScrollY;
   }
@@ -47,6 +55,7 @@ export function trackWindowScrollDirection(
 
   return {
     destroy() {
+      unsubscribe();
       unregister();
     },
   };

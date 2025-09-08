@@ -14,8 +14,9 @@
     class="trakt-navbar"
     use:trackWindowScroll={"trakt-navbar-scroll"}
     use:trackWindowScrollDirection={{
-      up: "trakt-navbar-scroll-up",
-      down: "trakt-navbar-scroll-down",
+      upClassName: "trakt-navbar-scroll-up",
+      downClassName: "trakt-navbar-scroll-down",
+      offsetVar: "var(--navbar-height)",
     }}
   >
     <div class="trakt-navbar-content">
@@ -96,7 +97,6 @@
       @include backdrop-filter-blur(var(--ni-8));
     }
 
-    &:global(.trakt-navbar-scroll),
     &:global(.trakt-navbar-scroll-down) {
       top: var(--offscreen-top);
       opacity: 0;
