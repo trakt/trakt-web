@@ -2,14 +2,21 @@
   import { getLocale } from "$lib/features/i18n";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
   import type { ReactionSummary } from "../models/ReactionSummary";
-  import { REACTIONS_MAP } from "./constants";
+  import ReactionEmoji from "./ReactionEmoji.svelte";
+  import { REACTIONS_CODE_MAP } from "./constants";
 
   const { summary }: { summary: ReactionSummary } = $props();
 </script>
 
 <div class="trakt-reactions-summary">
   <div class="trakt-reaction-emojis">
-    {summary.top.map((reaction) => REACTIONS_MAP[reaction]).join(" ")}
+    {#each summary.top as reaction, index}
+      <ReactionEmoji
+        code={REACTIONS_CODE_MAP[reaction]}
+        label={reaction}
+        {index}
+      />
+    {/each}
   </div>
 
   {#if summary.count > 0}
