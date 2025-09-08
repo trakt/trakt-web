@@ -4,7 +4,7 @@
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { slide } from "svelte/transition";
   import type { ReactionDistribution } from "../models/ReactionDistribution";
-  import { REACTIONS_MAP } from "./constants";
+  import { REACTIONS_CODE_MAP } from "./constants";
   import ReactionDetails from "./ReactionDetails.svelte";
 
   const {
@@ -27,11 +27,12 @@
     <ReactionIcon state="default" />{m.header_comment_reactions()}
   </span>
   <div class="trakt-reactions">
-    {#each Object.entries(REACTIONS_MAP) as [reaction] (reaction)}
+    {#each Object.entries(REACTIONS_CODE_MAP) as [reaction], index (reaction)}
       <ReactionDetails
         reaction={reaction as Reaction}
         count={distribution?.[reaction as Reaction] ?? 0}
         isCurrent={currentReaction === reaction}
+        {index}
       />
     {/each}
   </div>

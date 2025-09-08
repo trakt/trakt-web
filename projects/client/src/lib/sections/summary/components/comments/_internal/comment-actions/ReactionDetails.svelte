@@ -2,17 +2,25 @@
   import { getLocale } from "$lib/features/i18n";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { toHumanNumber } from "$lib/utils/formatting/number/toHumanNumber";
-  import { REACTIONS_MAP } from "./constants";
+  import ReactionEmoji from "./ReactionEmoji.svelte";
+  import { REACTIONS_CODE_MAP } from "./constants";
 
   const {
     reaction,
     count,
     isCurrent,
-  }: { reaction: Reaction; count: number; isCurrent: boolean } = $props();
+    index,
+  }: { reaction: Reaction; count: number; isCurrent: boolean; index: number } =
+    $props();
 </script>
 
 <div class="trakt-reaction-details" class:is-current={isCurrent}>
-  {REACTIONS_MAP[reaction]}
+  <ReactionEmoji
+    code={REACTIONS_CODE_MAP[reaction]}
+    label={reaction}
+    animation={isCurrent ? "infinite" : "none"}
+    {index}
+  />
   <p class="small">{toHumanNumber(count, getLocale())}</p>
 </div>
 
@@ -26,7 +34,6 @@
     min-width: var(--ni-66);
     height: var(--ni-30);
 
-    font-size: var(--ni-18);
     color: var(--color-foreground);
 
     box-sizing: border-box;

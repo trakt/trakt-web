@@ -4,7 +4,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Reaction } from "$lib/requests/queries/comments/commentReactionsQuery";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
-  import { REACTIONS_MAP } from "./constants";
+  import ReactionEmoji from "./ReactionEmoji.svelte";
+  import { REACTIONS_CODE_MAP } from "./constants";
 
   const {
     currentReaction,
@@ -26,7 +27,7 @@
     <CloseIcon />
   </ActionButton>
 
-  {#each Object.entries(REACTIONS_MAP) as [reaction, emoji], index (reaction)}
+  {#each Object.entries(REACTIONS_CODE_MAP) as [reaction, code], index (reaction)}
     <div
       class="trakt-react-button-container"
       class:is-current={currentReaction === reaction}
@@ -39,7 +40,7 @@
         onclick={() => onChange(reaction as Reaction)}
         style="ghost"
       >
-        {emoji}
+        <ReactionEmoji {code} label={reaction} {index} animation="initial" />
       </ActionButton>
     </div>
   {/each}
@@ -67,27 +68,18 @@
 
     :global(.trakt-action-button) {
       transition: var(--transition-increment) ease-in-out;
-      transition-property: font-size, background-color;
+      transition-property: background-color;
 
       border-radius: 50%;
 
       background-color: transparent;
       backdrop-filter: none;
-      font-size: var(--ni-18);
 
       opacity: 0;
 
       --delay-factor: calc(var(--animation-duration) / 6);
       animation: bump-in var(--animation-duration) ease-in forwards;
       animation-delay: calc(var(--reaction-index) * var(--delay-factor));
-    }
-  }
-
-  .trakt-react-button-container:not(.is-current) {
-    :global(.trakt-action-button) {
-      &:hover {
-        font-size: var(--ni-24);
-      }
     }
   }
 
