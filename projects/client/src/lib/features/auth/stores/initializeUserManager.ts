@@ -69,14 +69,26 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
       setAuthState({ token, isExpired: user?.expired ?? true });
     };
 
+    const checkTokenOnFocus = async () => {
+      const user = await manager.getUser();
+      if (!user?.expired) {
+        return;
+      }
+
+      manager.signinSilent().catch(() => handleUserEvent(null));
+    };
+
     manager.getUser().then(initializeUser);
     manager.events.addUserLoaded(handleUserEvent);
     manager.events.addUserUnloaded(() => handleUserEvent(null));
     manager.events.addSilentRenewError(() => handleUserEvent(null));
 
+    globalThis.window.addEventListener('focus', checkTokenOnFocus);
+
     setUserManager(manager);
 
     return () => {
+      globalThis.window.removeEventListener('focus', checkTokenOnFocus);
       setUserManager(null);
     };
   });
