@@ -3,29 +3,17 @@
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { UserProfile } from "$lib/requests/models/UserProfile";
+  import { useFollowing } from "../stores/useFollowing";
   import ProfileItem from "./ProfileItem.svelte";
 
   const {
-    network,
     slug,
   }: {
-    network: { following: UserProfile[]; followers: UserProfile[] };
     slug: string;
   } = $props();
 
   const { current, set, options } = useToggler("social");
-
-  const profiles = $derived(
-    $current === "following" ? network.following : network.followers,
-  );
-
-  const sluggedProfiles = $derived(
-    profiles.map((profile) => ({
-      ...profile,
-      id: profile.slug,
-    })),
-  );
+  const { profiles, isLoading } = $derived(useFollowing(slug, $current));
 
   const placeholder = $derived(
     $current === "following"
@@ -37,12 +25,14 @@
 <div class="trakt-profiles-list">
   <SectionList
     id={`profiles-list-${slug}-${$current}`}
-    items={sluggedProfiles}
+    items={$profiles}
     title={m.list_title_social()}
     --height-list="var(--height-profile-list)"
   >
     {#snippet empty()}
-      {placeholder}
+      {#if !$isLoading}
+        {placeholder}
+      {/if}
     {/snippet}
 
     {#snippet item(profile)}
