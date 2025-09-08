@@ -13,19 +13,12 @@
   import VipUpsell from "./components/VipUpsell.svelte";
   import YearToDateLink from "./components/YearToDateLink.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps";
-  import { useFollowing } from "./stores/useFollowing";
 
   const { profile, slug }: DisplayableProfileProps = $props();
 
-  const { following, followers } = $derived(useFollowing(slug));
   const { isMe } = $derived(useIsMe(slug));
 
   const hasUpsell = $derived($isMe && !profile.isVip);
-
-  const network = $derived({
-    followers: $followers,
-    following: $following,
-  });
 </script>
 
 <ProfileContainer>
@@ -63,4 +56,4 @@
   <PersonalLists {slug} type="collaboration" />
 {/if}
 
-<ProfilesList {slug} {network} />
+<ProfilesList {slug} />
