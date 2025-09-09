@@ -3,8 +3,8 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
+  import SkeletonList from "../../../components/lists/SkeletonList.svelte";
   import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
-  import LoadingIndicator from "./_internal/LoadingIndicator.svelte";
   import NoFilterResultsPlaceholder from "./_internal/NoFilterResultsPlaceholder.svelte";
   import type { MediaListProps } from "./MediaListProps";
 
@@ -47,7 +47,7 @@
 >
   {#snippet empty()}
     {#if $isLoading}
-      <LoadingIndicator />
+      <SkeletonList {id} variant={$defaultVariant} />
     {:else if $hasActiveFilter}
       <NoFilterResultsPlaceholder />
     {:else}

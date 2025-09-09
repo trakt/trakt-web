@@ -199,7 +199,7 @@
     height: var(--height-list);
   }
 
-  .shadow-list-empty-state {
+  .shadow-list-empty-state:not(:has(:global(.trakt-skeleton-list))) {
     width: calc(
       100dvw - var(--layout-distance-side) * 2 - var(--layout-sidebar-distance)
     );
@@ -268,7 +268,8 @@
   }
 
   .shadow-list-horizontal-scroll-centered,
-  .shadow-list-horizontal-scroll {
+  .shadow-list-horizontal-scroll,
+  :global(.trakt-skeleton-list) {
     height: var(--height-list);
     display: flex;
     overflow-x: auto;
@@ -280,7 +281,8 @@
     }
   }
 
-  .shadow-list-horizontal-scroll {
+  .shadow-list-horizontal-scroll,
+  :global(.trakt-skeleton-list) {
     scroll-snap-type: x proximity;
 
     & > :global(:not(svelte-css-wrapper)) {
