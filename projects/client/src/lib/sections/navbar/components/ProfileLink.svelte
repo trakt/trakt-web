@@ -5,6 +5,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../../profile-banner/ProfileImage.svelte";
 
@@ -26,7 +27,7 @@
       isVip={Boolean($user?.isVip)}
     />
     <div class="profile-info">
-      <p class="profile-name ellipsis">{$user?.name?.first}</p>
+      <p class="profile-name ellipsis">{toDisplayableName($user)}</p>
       <p class="meta-info ellipsis">{m.link_text_view_profile()}</p>
     </div>
   </Link>

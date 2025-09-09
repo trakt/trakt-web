@@ -5,6 +5,7 @@
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import ProfileImage from "$lib/sections/profile-banner/ProfileImage.svelte";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   const { profile }: { profile: UserProfile } = $props();
@@ -34,7 +35,7 @@
     />
   </Link>
   <div class="profile-footer">
-    <p class="meta-info ellipsis">{profile.username}</p>
+    <p class="meta-info ellipsis">{toDisplayableName(profile)}</p>
   </div>
 </div>
 

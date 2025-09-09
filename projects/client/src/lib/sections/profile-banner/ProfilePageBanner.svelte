@@ -6,6 +6,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import FollowUserButton from "./_internal/FollowUserButton.svelte";
@@ -18,8 +19,8 @@
 
   const nameLabel = $derived(
     $isMe
-      ? m.header_profile_banner_greeting({ name: profile.name.first })
-      : profile.name.first,
+      ? m.header_profile_banner_greeting({ name: toDisplayableName(profile) })
+      : toDisplayableName(profile),
   );
   const shareableSlug = $derived($isMe ? $user.slug : slug);
 </script>

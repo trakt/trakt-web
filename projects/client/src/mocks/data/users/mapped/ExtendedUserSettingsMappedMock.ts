@@ -3,6 +3,7 @@ import type { UserSettings } from '$lib/features/auth/queries/currentUserSetting
 export const ExtendedUserMappedMock: UserSettings = {
   'id': 41152,
   'slug': 'tequila_sunset',
+  'username': 'harrier_dubois',
   'token': null,
   'avatar': {
     'url':

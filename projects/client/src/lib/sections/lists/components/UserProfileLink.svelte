@@ -3,6 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { UserProfile } from "$lib/requests/models/UserProfile";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
+  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   const { user }: { user: UserProfile } = $props();
@@ -22,7 +23,7 @@
 
 {#snippet username()}
   <p class="secondary small ellipsis">
-    {user.username}
+    {toDisplayableName(user)}
   </p>
 {/snippet}
 
