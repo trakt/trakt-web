@@ -15,7 +15,7 @@ import { useDailyOrderedArray } from '$lib/sections/lists/stores/useDailyOrdered
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { onMount } from 'svelte';
+import { onDestroy } from 'svelte';
 import { derived } from 'svelte/store';
 
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
@@ -76,10 +76,10 @@ function useLimitRecommendedList(
     getId: (item) => item.id,
   });
 
-  onMount(() => {
-    const unsubscribe = unstable.subscribe(set);
-
-    return () => unsubscribe();
+  // FIXME: refactor this to not subscribe on unstable
+  const unsubscribe = unstable.subscribe(set);
+  onDestroy(() => {
+    unsubscribe();
   });
 
   return {
