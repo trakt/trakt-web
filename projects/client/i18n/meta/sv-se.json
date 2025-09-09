@@ -58,7 +58,12 @@
       "default": "Rekommenderade serier"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} avsnitt"
+      "default": "{count} avsn.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "page_title_error_404": {
       "default": "404: Ingenting. Tomrummet."

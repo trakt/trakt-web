@@ -58,7 +58,12 @@
       "default": "Recomendados"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} episódios"
+      "default": "{count} eps.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "page_title_error_404": {
       "default": "404: Erro!"

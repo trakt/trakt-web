@@ -58,7 +58,12 @@
       "default": "Anbefalede serier"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} afsnit"
+      "default": "{count} afsn.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "page_title_error_404": {
       "default": "404: Intetheden. Tomrummet."

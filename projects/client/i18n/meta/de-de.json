@@ -58,7 +58,12 @@
       "default": "Empfohlene Serien"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} Folgen"
+      "default": "{count} Folgen",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "page_title_error_404": {
       "default": "404: Nichts. Die Leere."

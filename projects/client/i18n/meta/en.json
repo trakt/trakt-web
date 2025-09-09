@@ -123,8 +123,8 @@
       ]
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} episodes",
-      "description": "Text for the tag that shows the number of episodes in a show. This should be as short as possible.",
+      "default": "{count} eps.",
+      "description": "Text for the tag that shows the number of episodes in a show. This should be as short as possible. And keep episodes abbreviated in the translation.",
       "variables": {
         "count": {
           "type": "number"

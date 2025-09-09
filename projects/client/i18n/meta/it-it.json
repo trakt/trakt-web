@@ -58,7 +58,12 @@
       "default": "Serie TV raccomandate"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} episodi"
+      "default": "{count} ep.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "page_title_error_404": {
       "default": "404: Il nulla. Il vuoto."
