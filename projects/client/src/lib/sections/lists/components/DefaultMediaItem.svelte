@@ -23,6 +23,7 @@
 
 {#snippet defaultTag()}
   {#if "episode" in media}
+    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
   {:else if type === "movie" && rest.variant !== "activity"}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
