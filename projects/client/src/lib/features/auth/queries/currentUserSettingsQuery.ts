@@ -22,6 +22,7 @@ export const UserSettingsSchema = z.object({
   slug: z.string(),
   token: z.string().nullish(),
   name: UserNameSchema,
+  username: z.string(),
   about: z.string().nullish(),
   location: z.string().optional(),
   avatar: z.object({
@@ -82,6 +83,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     slug: user.ids.slug,
     token: account.token,
     name: toUserName(user.name),
+    username: user.username,
     about: user.about,
     location: user.location ?? '',
     avatar: {
