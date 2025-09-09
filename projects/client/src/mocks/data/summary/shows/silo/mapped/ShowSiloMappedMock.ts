@@ -55,4 +55,7 @@ export const ShowSiloMappedMock: ShowEntry = {
   'votes': 6953,
   'plexSlug': 'silo',
   'creditCookies': [],
+  'episode': {
+    'count': 15,
+  },
 };

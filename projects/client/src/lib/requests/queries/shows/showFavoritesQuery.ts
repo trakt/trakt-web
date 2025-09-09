@@ -1,5 +1,4 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { mapToEpisodeCount } from '$lib/requests/_internal/mapToEpisodeCount.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import {
@@ -43,10 +42,7 @@ function mapToFavoriteShow(
     id: entry.show.ids.trakt,
     favoritedAt: new Date(entry.listed_at),
     rank: entry.rank,
-    item: {
-      ...mapToShowEntry(entry.show),
-      ...mapToEpisodeCount(entry.show),
-    },
+    item: mapToShowEntry(entry.show),
   };
 }
 

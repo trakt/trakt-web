@@ -43,4 +43,7 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   'colors': ['#D29D40', '#1E2E2F'],
   'plexSlug': undefined,
   'creditCookies': [],
+  'episode': {
+    'count': 20,
+  },
 };

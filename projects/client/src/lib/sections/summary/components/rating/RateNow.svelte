@@ -5,6 +5,7 @@
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import { fade } from "svelte/transition";
   import RateActionButton from "./_internal/RateActionButton.svelte";
@@ -14,7 +15,7 @@
   type RateableEpisode = {
     type: "episode";
     media: EpisodeEntry;
-    show: MediaEntry;
+    show: ShowEntry;
   };
 
   type RateableMedia = {

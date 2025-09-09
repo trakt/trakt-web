@@ -10,9 +10,6 @@ export const WatchlistShowsMappedMock: WatchlistedItem[] = [
     'type': 'show',
 
     'entry': {
-      'episode': {
-        'count': 20,
-      },
       ...ShowSiloMinimalMappedMock,
       'colors': undefined,
     },

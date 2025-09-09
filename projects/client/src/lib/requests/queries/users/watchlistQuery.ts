@@ -3,7 +3,6 @@ import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
@@ -25,12 +24,8 @@ type WatchlistParams =
   & ApiParams
   & FilterParams;
 
-const WatchlistShowEntrySchema = ShowEntrySchema.merge(
-  EpisodeCountSchema,
-);
-
 const WatchlistItemSchema = ListItemSchemaFactory(
-  z.union([MovieEntrySchema, WatchlistShowEntrySchema]),
+  z.union([MovieEntrySchema, ShowEntrySchema]),
 );
 export type WatchlistedItem = z.infer<typeof WatchlistItemSchema>;
 

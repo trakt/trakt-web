@@ -2,7 +2,6 @@ import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { ListItemSchemaFactory } from '$lib/requests/models/ListItem.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -24,12 +23,8 @@ type ListItemsParams =
   & ApiParams
   & FilterParams;
 
-const ListedShowEntrySchema = ShowEntrySchema.merge(
-  EpisodeCountSchema,
-);
-
 const ListedItemSchema = ListItemSchemaFactory(
-  z.union([MovieEntrySchema, ListedShowEntrySchema]),
+  z.union([MovieEntrySchema, ShowEntrySchema]),
 );
 
 const userListItemsRequest = (

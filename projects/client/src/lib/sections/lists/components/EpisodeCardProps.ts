@@ -1,4 +1,4 @@
-import type { MediaInputDefault } from '$lib/models/MediaInput.ts';
+import type { ShowInput } from '$lib/models/MediaInput.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import type { Snippet } from 'svelte';
@@ -16,7 +16,7 @@ export type EpisodeCardProps = EpisodeItemVariant & {
   badge?: Snippet;
   action?: Snippet;
   tag?: Snippet;
-  show: MediaInputDefault;
+  show: ShowInput;
   style?: 'cover' | 'summary';
   popupActions?: Snippet;
   /**

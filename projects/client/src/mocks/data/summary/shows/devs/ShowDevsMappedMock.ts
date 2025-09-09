@@ -60,4 +60,7 @@ export const ShowDevsMappedMock: ShowEntry = {
   'votes': 3522,
   'plexSlug': 'devs',
   'creditCookies': [],
+  'episode': {
+    'count': 8,
+  },
 };

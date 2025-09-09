@@ -3,8 +3,8 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { Season } from "$lib/requests/models/Season";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -12,7 +12,7 @@
   import { WatchedUntilHereIntlProvider } from "./WatchedUntilHereIntlProvider";
 
   type SeasonEpisodeListProps = {
-    show: MediaEntry;
+    show: ShowEntry;
     previousSeasons: Season[];
     episodes: EpisodeEntry[];
     title?: string;
