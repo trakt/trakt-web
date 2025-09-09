@@ -58,7 +58,12 @@
       "default": "Рекомендовані серіали"
     },
     "tag_text_number_of_episodes": {
-      "default": "{count} епізодів"
+      "default": "{count} сер.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "page_title_error_404": {
       "default": "404: Ніщо. Пустота."
