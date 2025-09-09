@@ -1,5 +1,6 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import Crossfade from "$lib/components/Crossfade.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -115,32 +116,39 @@
       style:--left-shadow-opacity={leftShadowIntensity}
       style:--right-shadow-opacity={rightShadowIntensity}
     >
-      {#if items.length > 0}
-        <div
-          bind:this={$scrollContainer}
-          use:scrollTracking={scrollX}
-          use:scrollHistory={id}
-          class="trakt-list-item-container"
-          class:shadow-list-horizontal-scroll-centered={variant === "centered"}
-          class:shadow-list-horizontal-scroll={variant === "normal"}
-          data-dpad-navigation={DpadNavigationType.List}
-          data-navigation-type={$navigation}
-        >
-          {#each items as i (`${items.length}_${i.id}`)}
-            {@render item(i)}
-          {/each}
+      <Crossfade showA={items.length > 0}>
+        {#snippet childrenA()}
+          <div
+            bind:this={$scrollContainer}
+            use:scrollTracking={scrollX}
+            use:scrollHistory={id}
+            class="trakt-list-item-container"
+            class:shadow-list-horizontal-scroll-centered={variant ===
+              "centered"}
+            class:shadow-list-horizontal-scroll={variant === "normal"}
+            data-dpad-navigation={DpadNavigationType.List}
+            data-navigation-type={$navigation}
+          >
+            {#each items as i (`${items.length}_${i.id}`)}
+              {@render item(i)}
+            {/each}
 
-          {#if ctaItem && items.length <= CTA_CUT_OFF}
-            {#key `shadow-list-${id}_cta`}
-              {@render ctaItem()}
-            {/key}
+            {#if ctaItem && items.length <= CTA_CUT_OFF}
+              {#key `shadow-list-${id}_cta`}
+                {@render ctaItem()}
+              {/key}
+            {/if}
+          </div>
+        {/snippet}
+
+        {#snippet childrenB()}
+          {#if empty != null && $isMounted}
+            <div class={EMPTY_STATE_CLASS}>
+              {@render empty()}
+            </div>
           {/if}
-        </div>
-      {:else if empty != null && $isMounted}
-        <div class={EMPTY_STATE_CLASS}>
-          {@render empty()}
-        </div>
-      {/if}
+        {/snippet}
+      </Crossfade>
     </div>
   {/if}
 </section>
