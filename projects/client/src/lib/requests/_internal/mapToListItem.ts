@@ -1,5 +1,4 @@
 import type { ListedMovieResponse, ListedShowResponse } from '@trakt/api';
-import { mapToEpisodeCount } from './mapToEpisodeCount.ts';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
 import { mapToShowEntry } from './mapToShowEntry.ts';
 
@@ -20,10 +19,7 @@ export function mapToShowListItem(
 ) {
   return {
     ...mapListDetails(listedShowResponse),
-    entry: {
-      ...mapToShowEntry(listedShowResponse.show),
-      ...mapToEpisodeCount(listedShowResponse.show),
-    },
+    entry: mapToShowEntry(listedShowResponse.show),
   };
 }
 

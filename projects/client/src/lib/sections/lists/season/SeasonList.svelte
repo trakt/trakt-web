@@ -1,15 +1,15 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { Season } from "$lib/requests/models/Season";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import { useSeasonEpisodes } from "$lib/sections/lists/stores/useSeasonEpisodes";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
   import SeasonEpisodeList from "./_internal/SeasonEpisodeList.svelte";
   import SeasonPosterList from "./_internal/SeasonPosterList.svelte";
 
   type SeasonListProps = {
-    show: MediaEntry;
+    show: ShowEntry;
     seasons: Season[];
     currentSeason: number;
   };

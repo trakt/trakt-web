@@ -1,8 +1,8 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { ShowEntrySchema } from '../../models/ShowEntry.ts';
 
 type ShowSummaryParams = { slug: string } & ApiParams;
 
@@ -26,6 +26,6 @@ export const showSummaryQuery = defineQuery({
   dependencies: (params) => [params.slug],
   request: showSummaryRequest,
   mapper: (response) => mapToShowEntry(response.body),
-  schema: MediaEntrySchema,
+  schema: ShowEntrySchema,
   ttl: time.days(1),
 });

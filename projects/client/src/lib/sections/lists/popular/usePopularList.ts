@@ -1,16 +1,18 @@
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { moviePopularQuery } from '$lib/requests/queries/movies/moviePopularQuery.ts';
 import {
-  type PopularShow,
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
+import type { CreateQueryOptions } from '@tanstack/svelte-query';
 
-export type PopularEntry = PopularShow | MovieEntry;
+export type PopularEntry = ShowEntry | MovieEntry;
 export type PopularMediaList = Array<PopularEntry>;
 
 type PopularListStoreProps =
@@ -31,9 +33,13 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return moviePopularQuery(params);
+      return moviePopularQuery(params) as CreateQueryOptions<
+        Paginatable<PopularEntry>
+      >;
     case 'show':
-      return showPopularQuery(params);
+      return showPopularQuery(params) as CreateQueryOptions<
+        Paginatable<PopularEntry>
+      >;
   }
 }
 

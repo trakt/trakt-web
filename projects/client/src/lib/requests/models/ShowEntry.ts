@@ -1,4 +1,6 @@
-import { type MediaEntry, MediaEntrySchema } from './MediaEntry.ts';
+import type z from 'zod';
+import { EpisodeCountSchema } from './EpisodeCount.ts';
+import { MediaEntrySchema } from './MediaEntry.ts';
 
-export const ShowEntrySchema = MediaEntrySchema;
-export type ShowEntry = MediaEntry;
+export const ShowEntrySchema = MediaEntrySchema.merge(EpisodeCountSchema);
+export type ShowEntry = z.infer<typeof ShowEntrySchema>;

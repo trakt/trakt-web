@@ -1,11 +1,11 @@
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
-import type { ShowEntry as MediaEntry } from '$lib/requests/models/ShowEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { derived } from 'svelte/store';
 import { useMediaSpoiler } from './useMediaSpoiler.ts';
 
 type SpoilerImageProps = {
   episode: EpisodeEntry;
-  show: MediaEntry;
+  show: ShowEntry;
 };
 
 export function useEpisodeSpoilerImage(props: SpoilerImageProps) {

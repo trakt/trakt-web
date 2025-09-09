@@ -54,5 +54,8 @@ export function mapToShowEntry(
     votes: show.votes ?? 0,
     plexSlug: show.ids.plex?.slug,
     creditCookies: [],
+    episode: {
+      count: show.aired_episodes ?? NaN,
+    },
   };
 }

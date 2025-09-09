@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { EpisodeEntrySchema } from './EpisodeEntry.ts';
-import { MediaEntrySchema } from './MediaEntry.ts';
+import { MovieEntrySchema } from './MovieEntry.ts';
+import { ShowEntrySchema } from './ShowEntry.ts';
 
 const NowPlayingActionSchema = z.enum([
   'checkin',
@@ -8,7 +9,6 @@ const NowPlayingActionSchema = z.enum([
 ]);
 
 const NowPlayingBaseSchema = z.object({
-  media: MediaEntrySchema,
   startedAt: z.date(),
   expiresAt: z.date(),
   action: NowPlayingActionSchema,
@@ -17,10 +17,12 @@ const NowPlayingBaseSchema = z.object({
 const NowPlayingEpisodeSchema = NowPlayingBaseSchema.extend({
   type: z.literal('episode'),
   episode: EpisodeEntrySchema,
+  media: ShowEntrySchema,
 });
 
 const NowPlayingMovieSchema = NowPlayingBaseSchema.extend({
   type: z.literal('movie'),
+  media: MovieEntrySchema,
 });
 
 export const NowPlayingItemSchema = z.discriminatedUnion('type', [

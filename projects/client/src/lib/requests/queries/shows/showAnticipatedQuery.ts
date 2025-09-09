@@ -3,7 +3,6 @@ import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependencies.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { EpisodeCountSchema } from '$lib/requests/models/EpisodeCount.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
@@ -17,7 +16,6 @@ import { z } from 'zod';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 
 export const AnticipatedShowSchema = ShowEntrySchema
-  .merge(EpisodeCountSchema.partial())
   .extend({
     score: z.number(),
   });
