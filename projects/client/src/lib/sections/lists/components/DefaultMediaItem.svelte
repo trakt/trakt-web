@@ -91,14 +91,15 @@
 
   trakt-default-media-item {
     &.is-deemphasized {
-      :global(.trakt-card) {
+      /* FIXME: find the root cause why on safari this does not work on .trakt-card */
+      :global(.trakt-card-content) {
         transition: opacity var(--transition-increment) ease-in-out;
         opacity: var(--de-emphasized-opacity);
       }
 
       @include for-mouse() {
         &:hover {
-          :global(.trakt-card) {
+          :global(.trakt-card-content) {
             opacity: 1;
           }
         }
