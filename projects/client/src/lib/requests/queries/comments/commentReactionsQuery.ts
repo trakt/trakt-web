@@ -41,6 +41,18 @@ const commentReactionsRequest = (
       params: {
         id: `${id}`,
       },
+    })
+    .then((res) => {
+      if (res.status === 404) {
+        res.status = 201;
+        res.body = {
+          distribution: {},
+          reaction_count: 0,
+          user_count: 0,
+        } as ReactionsSummaryResponse;
+      }
+
+      return res;
     });
 
 export const commentReactionsQuery = defineQuery({
