@@ -1886,6 +1886,9 @@
     },
     "text_good_night": {
       "default": "Godnat"
+    },
+    "button_label_dismiss": {
+      "default": "Afvis"
     }
   }
 }

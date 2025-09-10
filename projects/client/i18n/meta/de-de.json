@@ -1886,6 +1886,9 @@
     },
     "text_good_night": {
       "default": "Gute Nacht"
+    },
+    "button_label_dismiss": {
+      "default": "Ablehnen"
     }
   }
 }

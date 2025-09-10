@@ -1886,6 +1886,9 @@
     },
     "text_good_night": {
       "default": "God natt"
+    },
+    "button_label_dismiss": {
+      "default": "Avvis"
     }
   }
 }
