@@ -94,7 +94,7 @@
 
     .profile-name {
       line-height: 150%;
-      max-width: var(--ni-300);
+      max-width: var(--ni-96);
     }
 
     .meta-info {
