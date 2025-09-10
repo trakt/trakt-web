@@ -2222,7 +2222,7 @@
       ]
     },
     "header_rate_now": {
-      "default": "Rate now",
+      "default": "Rate",
       "description": "Header for the section that allows users to rate a movie, show, or episode.",
       "exclude": [
         "android",
