@@ -86,14 +86,14 @@
   }
 
   /**
-   * Now playing
+   * Toasts
    */
-  --color-now-playing-background-base: var(--shade-100);
-  --color-now-playing-background: var(--cm-background-now-playing);
-  --color-now-playing-border: var(--shade-200);
-  --color-now-playing-progress-bar-background: var(--shade-300);
-  --color-now-playing-progress-bar-progress: var(--shade-500);
-  --color-now-playing-progress-bar-shadow: var(--shade-400);
+  --color-toast-background-base: var(--shade-100);
+  --color-toast-background: var(--cm-background-now-playing);
+  --color-toast-border: var(--shade-200);
+  --color-toast-progress-bar-background: var(--shade-300);
+  --color-toast-progress-bar-progress: var(--shade-500);
+  --color-toast-progress-bar-shadow: var(--shade-400);
 
   /**
    * Cookie
@@ -217,14 +217,14 @@
   --color-text-sentiment-bad: var(--red-100);
 
   /**
-   * Now playing
+   * Toasts
    */
-  --color-now-playing-background-base: var(--shade-900);
-  --color-now-playing-background: var(--cm-background-now-playing);
-  --color-now-playing-border: var(--shade-700);
-  --color-now-playing-progress-bar-background: var(--shade-500);
-  --color-now-playing-progress-bar-progress: var(--shade-200);
-  --color-now-playing-progress-bar-shadow: var(--shade-400);
+  --color-toast-background-base: var(--shade-900);
+  --color-toast-background: var(--cm-background-now-playing);
+  --color-toast-border: var(--shade-700);
+  --color-toast-progress-bar-background: var(--shade-500);
+  --color-toast-progress-bar-progress: var(--shade-200);
+  --color-toast-progress-bar-shadow: var(--shade-400);
 
   /**
    * Cookie

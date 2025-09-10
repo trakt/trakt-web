@@ -1,12 +1,12 @@
 import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
 import { derived } from 'svelte/store';
-import { getNowPlayingContext } from './_internal/getNowPlayingContext.ts';
+import { getToastContext } from './_internal/getToastContext.ts';
 
 const UPDATE_FREQUENCY = time.seconds(1);
 
 export function useNowPlaying() {
-  const { nowPlaying, progress, remainingMinutes } = getNowPlayingContext();
+  const { nowPlaying, progress, remainingMinutes } = getToastContext();
 
   onMount(() => {
     let timer: NodeJS.Timeout;

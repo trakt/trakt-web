@@ -1,10 +1,10 @@
 <script lang="ts">
   import {} from "svelte";
-  import { createNowPlayingContext } from "./_internal/createNowPlayingContext";
+  import { createToastContext } from "./_internal/createToastContext";
 
   const { children }: ChildrenProps = $props();
 
-  createNowPlayingContext();
+  createToastContext();
 </script>
 
 {@render children()}

@@ -1,6 +1,6 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
-import { useNowPlaying } from '$lib/features/now-playing/useNowPlaying.ts';
+import { useNowPlaying } from '$lib/features/toast/useNowPlaying.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';

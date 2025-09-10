@@ -16,16 +16,16 @@
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
-  import NowPlayingProvider from "$lib/features/now-playing/NowPlayingProvider.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
+  import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import Navbar from "$lib/sections/navbar/Navbar.svelte";
-  import NowPlaying from "$lib/sections/now-playing/NowPlaying.svelte";
+  import Toast from "$lib/sections/toast/Toast.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { WorkerMessage } from "$worker/WorkerMessage";
@@ -146,7 +146,7 @@
                     <FilterProvider>
                       <FeatureFlagProvider>
                         <CoverProvider>
-                          <NowPlayingProvider>
+                          <ToastProvider>
                             <CoverImage />
 
                             <ThemeProvider theme={data.theme}>
@@ -236,7 +236,7 @@
                                   audience="authenticated"
                                   navigation="default"
                                 >
-                                  <NowPlaying />
+                                  <Toast />
                                 </RenderFor>
                                 <SvelteQueryDevtools
                                   buttonPosition="bottom-right"
@@ -245,7 +245,7 @@
                                 <FirefoxBlurHack />
                               </ListScrollHistoryProvider>
                             </ThemeProvider>
-                          </NowPlayingProvider>
+                          </ToastProvider>
                         </CoverProvider>
                       </FeatureFlagProvider>
                     </FilterProvider>

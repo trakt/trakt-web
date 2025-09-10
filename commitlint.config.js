@@ -92,6 +92,7 @@ module.exports = {
         'spoiler',
         'summary',
         'theme',
+        'toast',
         'toggle',
         'tooltip',
         'trending',
