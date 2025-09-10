@@ -1889,6 +1889,9 @@
     },
     "button_label_dismiss": {
       "default": "Afwijzen"
+    },
+    "list_title_watch_history": {
+      "default": "Kijkgeschiedenis"
     }
   }
 }

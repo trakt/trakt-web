@@ -71,7 +71,7 @@
 <Lists slug={media.slug} title={media.title} type="show" />
 
 <MediaWatchHistoryList
-  title={m.list_title_recently_watched()}
+  title={m.list_title_watch_history()}
   {media}
   type="show"
 />
