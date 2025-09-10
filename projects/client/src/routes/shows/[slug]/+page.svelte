@@ -35,7 +35,6 @@
   const lastWatchedSeason = $derived(useUserSeason($show?.id));
 
   const { search } = useParameters();
-
   const goToSeason = (slug: string, season: number) => {
     /*
      * TODO: Consider implementing a custom navigation helper within useParameters
@@ -64,12 +63,13 @@
 
     const active = assertDefined(
       $seasons.find((s) => s.number === $lastWatchedSeason.number) ??
-        $seasons.find((s) => s.number === 1),
+        $seasons.find((s) => s.number === 1) ??
+        $seasons.find((s) => s.number !== 0),
       "Active season not found",
     );
-
     const isCurrentSeasonFullyWatched =
-      active.episodes.count === $lastWatchedSeason.episodes.count;
+      active.episodes.count === $lastWatchedSeason.episodes.count &&
+      active.number === $lastWatchedSeason.number;
 
     const maxSeason = assertDefined(
       $seasons.at(-1),
