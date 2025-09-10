@@ -1,6 +1,7 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { useLastWatched } from '$lib/features/toast/useLastWatched.ts';
 import { SimpleRating } from '$lib/models/SimpleRating.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -49,6 +50,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
   const { ratings } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Rate);
+  const { dismiss } = useLastWatched();
 
   const rating = derived(
     ratings,
@@ -92,6 +94,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     await invalidate(InvalidateAction.Rated(type));
 
     isRating.set(false);
+    dismiss(id, type);
   };
 
   return {

@@ -1,13 +1,17 @@
 <script lang="ts">
   import TraktCoverImage from "$lib/components/background/TraktCoverImage.svelte";
-  import { useNowPlaying } from "$lib/features/now-playing/useNowPlaying";
+  import { useLastWatched } from "$lib/features/toast/useLastWatched";
+  import { useNowPlaying } from "$lib/features/toast/useNowPlaying";
   import FooterContent from "./components/FooterContent.svelte";
   import { FOOTER_CLASS_NAME } from "./constants";
 
   const { nowPlaying } = useNowPlaying();
+  const { lastWatched } = useLastWatched();
+
+  const hasToast = $derived(Boolean($nowPlaying || $lastWatched));
 </script>
 
-<footer class={FOOTER_CLASS_NAME} class:has-now-playing={$nowPlaying !== null}>
+<footer class={FOOTER_CLASS_NAME} class:has-toast={hasToast}>
   <TraktCoverImage />
   <FooterContent />
 </footer>
@@ -32,8 +36,8 @@
     }
 
     @include for-tablet-sm-and-below {
-      &.has-now-playing {
-        margin-top: calc(var(--height-now-playing-card) + var(--gap-xxl));
+      &.has-toast {
+        margin-top: calc(var(--height-toast-card) + var(--gap-xxl));
       }
 
       height: fit-content;

@@ -10,11 +10,13 @@
     isCurrentRating,
     isDisabled,
     onAddRating,
+    style = "flat",
   }: {
     rating: SimpleRating;
     isCurrentRating: boolean;
     isDisabled: boolean;
     onAddRating: (rating: SimpleRating) => void;
+    style?: "flat" | "ghost";
   } = $props();
 
   const label = $derived.by(() => {
@@ -34,7 +36,7 @@
     disabled={isDisabled}
     {label}
     onclick={() => onAddRating(rating)}
-    style="flat"
+    {style}
     variant="primary"
     navigationType={DpadNavigationType.Item}
   >

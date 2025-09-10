@@ -5308,6 +5308,14 @@
         "android",
         "ios"
       ]
+    },
+    "button_label_dismiss": {
+      "default": "Dismiss",
+      "description": "Aria-label for the button that allows users to dismiss prompts and toasts.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

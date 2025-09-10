@@ -16,8 +16,8 @@ const NowPlayingBaseSchema = z.object({
 
 const NowPlayingEpisodeSchema = NowPlayingBaseSchema.extend({
   type: z.literal('episode'),
-  episode: EpisodeEntrySchema,
-  media: ShowEntrySchema,
+  media: EpisodeEntrySchema,
+  show: ShowEntrySchema,
 });
 
 const NowPlayingMovieSchema = NowPlayingBaseSchema.extend({

@@ -1886,6 +1886,9 @@
     },
     "text_good_night": {
       "default": "おやすみ"
+    },
+    "button_label_dismiss": {
+      "default": "閉じる"
     }
   }
 }

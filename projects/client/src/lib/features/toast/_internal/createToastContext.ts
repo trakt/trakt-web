@@ -12,6 +12,7 @@ export function createToastContext() {
         nowPlaying: writable(null),
         remainingMinutes: writable(0),
         progress: writable(0),
+        lastWatched: writable(null),
       },
   );
 

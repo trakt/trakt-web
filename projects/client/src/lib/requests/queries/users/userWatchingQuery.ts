@@ -34,8 +34,8 @@ function mapToNowPlayingItem(response: WatchingResponse): NowPlayingItem {
   if (response.type === 'episode') {
     return {
       ...commonProps,
-      media: mapToShowEntry(response.show),
-      episode: mapToEpisodeEntry(response.episode),
+      show: mapToShowEntry(response.show),
+      media: mapToEpisodeEntry(response.episode),
       type: 'episode',
     };
   }
