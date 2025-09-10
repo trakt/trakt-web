@@ -3,9 +3,9 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { DismissedItem } from '$lib/features/toast/models/DismissedItem.ts';
 import { useDismissals } from '$lib/features/toast/useDismissals.ts';
 import {
-  type ActivityHistory,
-  activityHistoryQuery,
-} from '$lib/requests/queries/users/activityHistoryQuery.ts';
+  type MovieActivityHistory,
+  movieActivityHistoryQuery,
+} from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
@@ -14,21 +14,12 @@ import { derived, writable } from 'svelte/store';
 const RECENTLY_WATCHED_WINDOW = time.days(1);
 
 function toLastWatchedMedia(
-  activity: ActivityHistory,
+  activity: MovieActivityHistory,
 ) {
-  switch (activity.type) {
-    case 'episode':
-      return {
-        type: 'episode' as const,
-        media: activity.episode,
-        show: activity.show,
-      };
-    case 'movie':
-      return {
-        type: 'movie' as const,
-        media: activity.movie,
-      };
-  }
+  return {
+    type: 'movie' as const,
+    media: activity.movie,
+  };
 }
 
 export function useCurrentUserLastWatched() {
@@ -37,7 +28,7 @@ export function useCurrentUserLastWatched() {
   const { ratings } = useUser();
   const { latest, wasDismissed } = useDismissals();
 
-  const query = useQuery(activityHistoryQuery({
+  const query = useQuery(movieActivityHistoryQuery({
     slug: 'me',
     startDate: new Date(Date.now() - RECENTLY_WATCHED_WINDOW),
     limit: DEFAULT_PAGE_SIZE,
@@ -70,8 +61,6 @@ export function useCurrentUserLastWatched() {
           }
 
           switch (activity.type) {
-            case 'episode':
-              return !$ratings.episodes.has(activity.episode.id);
             case 'movie':
               return !$ratings.movies.has(activity.movie.id);
             default:
