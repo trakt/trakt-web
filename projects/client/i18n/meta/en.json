@@ -5316,6 +5316,13 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_watch_history": {
+      "default": "Watch history",
+      "description": "Title for lists containing the watch history of movies or episodes. This title should be as short and concise as possible.",
+      "exclude": [
+        "ios"
+      ]
     }
   }
 }

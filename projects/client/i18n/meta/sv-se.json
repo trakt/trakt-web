@@ -1889,6 +1889,9 @@
     },
     "button_label_dismiss": {
       "default": "Avvisa"
+    },
+    "list_title_watch_history": {
+      "default": "Tittarhistorik"
     }
   }
 }
