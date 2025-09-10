@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { useNowPlaying } from "$lib/features/now-playing/useNowPlaying";
+  import { useNowPlaying } from "$lib/features/toast/useNowPlaying";
   import { onMount } from "svelte";
   import NowPlayingToast from "./_internal/NowPlayingToast.svelte";
   import { useCurrentUserNowWatching } from "./_internal/useCurrentUserNowWatching";
 
   const { nowWatching } = useCurrentUserNowWatching();
+
   const { nowPlaying } = useNowPlaying();
 
   onMount(() => {
@@ -16,4 +17,6 @@
   });
 </script>
 
-<NowPlayingToast />
+{#if $nowPlaying}
+  <NowPlayingToast />
+{/if}

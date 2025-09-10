@@ -1,6 +1,6 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import StopIcon from "$lib/components/icons/StopIcon.svelte";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem";
   import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
@@ -31,6 +31,6 @@
     style="ghost"
     size="small"
   >
-    <StopIcon />
+    <CloseIcon />
   </ActionButton>
 {/if}

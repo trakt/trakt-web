@@ -18,9 +18,8 @@
 
     box-sizing: border-box;
 
-    background-color: var(--color-now-playing-progress-bar-background);
-    box-shadow: inset 0 0 0 var(--ni-1)
-      var(--color-now-playing-progress-bar-shadow);
+    background-color: var(--color-toast-progress-bar-background);
+    box-shadow: inset 0 0 0 var(--ni-1) var(--color-toast-progress-bar-shadow);
 
     &::before {
       content: "";
@@ -29,7 +28,7 @@
       left: 0;
       height: 100%;
       width: var(--play-progress);
-      background-color: var(--color-now-playing-progress-bar-progress);
+      background-color: var(--color-toast-progress-bar-progress);
       border-radius: var(--progress-bar-border-radius);
       transition: width var(--transition-increment) ease-in-out;
     }

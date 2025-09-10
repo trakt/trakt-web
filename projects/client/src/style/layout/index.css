@@ -27,8 +27,8 @@
   --width-comment-thread-card: min(var(--width-comment-card), 85vw);
   --height-comment-thread-card: var(--ni-480);
 
-  --width-now-playing-card: var(--ni-104);
-  --height-now-playing-card: var(--ni-80);
+  --width-toast-card: var(--ni-104);
+  --height-toast-card: var(--ni-80);
 
   --width-cta-landscape-card: var(--width-landscape-card);
   --height-cta-landscape-card: var(--height-landscape-card);
