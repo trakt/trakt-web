@@ -2,21 +2,31 @@
   /**
    * Card dimensions
    */
+  --height-card-footer: var(--ni-40);
+
   --width-portrait-card: var(--ni-132);
-  --height-portrait-card: var(--ni-238);
   --height-portrait-card-cover: var(--ni-198);
+  --height-portrait-card: calc(
+    var(--height-portrait-card-cover) + var(--height-card-footer)
+  );
 
   --width-landscape-card: var(--ni-200);
-  --height-landscape-card: var(--ni-152);
   --height-landscape-card-cover: var(--ni-112);
+  --height-landscape-card: calc(
+    var(--height-landscape-card-cover) + var(--height-card-footer)
+  );
 
   --width-person-card: var(--ni-120);
-  --height-person-card: var(--ni-216);
   --height-person-card-cover: var(--ni-176);
+  --height-person-card: calc(
+    var(--height-person-card-cover) + var(--height-card-footer)
+  );
 
   --width-summary-card: 100%;
-  --height-summary-card: var(--ni-188);
   --height-summary-card-cover: var(--ni-148);
+  --height-summary-card: calc(
+    var(--height-summary-card-cover) + var(--height-card-footer)
+  );
 
   --width-list-card: var(--ni-480);
   --height-list-card: var(--ni-256);
