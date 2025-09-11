@@ -76,6 +76,8 @@
   }
 
   .trakt-season-item {
+    -webkit-tap-highlight-color: transparent;
+
     cursor: pointer;
     transition: opacity var(--transition-increment) ease-in-out;
 
