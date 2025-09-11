@@ -129,7 +129,7 @@
 
   .trakt-card-cover-image {
     position: relative;
-    height: var(--height-card-cover);
+    height: var(--height-override-card-cover, var(--height-card-cover));
     align-self: stretch;
     transition:
       opacity calc(var(--transition-increment) * 2) ease-in-out,

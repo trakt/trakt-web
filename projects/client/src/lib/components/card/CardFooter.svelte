@@ -35,7 +35,10 @@
   .trakt-card-footer {
     position: relative;
 
-    height: calc(var(--height-card) - var(--height-card-cover));
+    --card-height: var(--height-override-card, var(--height-card));
+    --cover-height: var(--height-override-card-cover, var(--height-card-cover));
+
+    height: calc(var(--card-height) - var(--cover-height));
     padding: var(--ni-8);
     box-sizing: border-box;
 
