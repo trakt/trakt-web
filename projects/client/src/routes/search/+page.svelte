@@ -102,7 +102,7 @@
         <GridList
           id="search-grid-list-media"
           items={$results.items}
-          --width-item="var(--width-portrait-card)"
+          --width-item="var(--width-override-card, var(--width-portrait-card))"
         >
           {#snippet item(result)}
             {#snippet mediaResultTag()}
@@ -163,6 +163,25 @@
 
   .trakt-search-results-container {
     @include for-mobile {
+      --column-count: 3;
+      --card-aspect-ratio: calc(
+        var(--height-portrait-card) / var(--width-portrait-card)
+      );
+
+      --container-width: calc(
+        100dvw - var(--layout-distance-side) * 2 - var(--layout-scrollbar-width)
+      );
+      --total-gap-width: calc(var(--gap-xxs) * (var(--column-count) - 1));
+      --available-width: calc(var(--container-width) - var(--total-gap-width));
+
+      --width-override-card: calc(var(--available-width) / var(--column-count));
+      --height-override-card-cover: calc(
+        var(--width-override-card) * var(--card-aspect-ratio)
+      );
+      --height-override-card: calc(
+        var(--height-override-card-cover) + var(--height-card-footer)
+      );
+
       :global(.trakt-list-items) {
         grid-template-columns: repeat(auto-fill, var(--width-item));
       }
