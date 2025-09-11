@@ -56,7 +56,7 @@
 
 {#snippet renameField(field: keyof typeof promptMap)}
   <ActionButton
-    style="flat"
+    style="ghost"
     label={promptMap[field].label}
     onclick={() => handleFieldChange(field)}
     disabled={$isSavingSettings}
