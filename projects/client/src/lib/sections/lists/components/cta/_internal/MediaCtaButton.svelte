@@ -1,5 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
@@ -17,6 +19,7 @@
     icon?: Snippet;
   } = $props();
 
+  const { track } = useTrack(AnalyticsEvent.Cta);
   const color = $derived(size === "small" ? "purple" : "default");
 
   const ctaHref = $derived.by(() => {
@@ -37,6 +40,7 @@
 <Button
   href={ctaHref}
   label={intl.cta.label({ cta })}
+  onclick={() => track({ type: cta })}
   {size}
   {color}
   {icon}

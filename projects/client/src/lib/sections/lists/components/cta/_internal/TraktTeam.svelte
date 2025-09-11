@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam";
   import VipBadge from "$lib/sections/navbar/components/VIPBadge.svelte";
@@ -7,6 +9,7 @@
 
   const { intl, limit }: { intl: CtaItemIntl; limit?: number } = $props();
 
+  const { track } = useTrack(AnalyticsEvent.Cta);
   const { network } = useUser();
   const { isLoading, team } = $derived(useTraktTeam($network?.following ?? []));
 </script>
@@ -19,7 +22,7 @@
     {#if !$isLoading}
       {#each $team.slice(0, limit ?? $team.length) as member (member.username)}
         <div class="trakt-team-member">
-          <UserAvatar user={member}>
+          <UserAvatar user={member} onClick={() => track({ type: "activity" })}>
             {#snippet icon()}
               <VipBadge style="inverted" />
             {/snippet}

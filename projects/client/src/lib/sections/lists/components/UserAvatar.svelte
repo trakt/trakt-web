@@ -10,9 +10,10 @@
     user: UserProfile;
     size?: "small" | "large";
     icon?: Snippet;
+    onClick?: () => void;
   };
 
-  const { user, size = "large", icon }: UserAvatarProps = $props();
+  const { user, size = "large", icon, onClick }: UserAvatarProps = $props();
 </script>
 
 {#snippet avatar()}
@@ -33,7 +34,7 @@
 {/snippet}
 
 {#if user.slug}
-  <Link href={UrlBuilder.profile.user(user.slug)}>
+  <Link href={UrlBuilder.profile.user(user.slug)} onclick={onClick}>
     {@render avatar()}
   </Link>
 {:else}
