@@ -43,8 +43,8 @@
 
     position: relative;
 
-    min-width: var(--width-card);
-    min-height: var(--height-card);
+    min-width: var(--width-override-card, var(--width-card));
+    min-height: var(--height-override-card, var(--height-card));
   }
 
   .trakt-card[data-navigation-type="dpad"] {
@@ -65,8 +65,8 @@
           top: 0;
           left: 0;
 
-          width: var(--width-card);
-          height: var(--height-card);
+          width: var(--width-override-card, var(--width-card));
+          height: var(--height-override-card, var(--height-card));
 
           outline: var(--border-thickness-xs) solid var(--color-link-active);
           outline-offset: calc(-1 * var(--border-thickness-xs));
@@ -80,8 +80,8 @@
   .trakt-card-content {
     position: relative;
 
-    width: var(--width-card);
-    height: var(--height-card);
+    width: var(--width-override-card, var(--width-card));
+    height: var(--height-override-card, var(--height-card));
 
     border-radius: var(--border-radius-m);
 
