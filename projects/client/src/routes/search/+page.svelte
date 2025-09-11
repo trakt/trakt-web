@@ -165,7 +165,7 @@
     @include for-mobile {
       --column-count: 3;
       --card-aspect-ratio: calc(
-        var(--height-portrait-card) / var(--width-portrait-card)
+        var(--height-portrait-card-cover) / var(--width-portrait-card)
       );
 
       --container-width: calc(
