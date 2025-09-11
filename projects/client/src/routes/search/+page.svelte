@@ -123,7 +123,7 @@
         <GridList
           id="search-grid-list-people"
           items={$results.items}
-          --width-item="var(--width-portrait-card)"
+          --width-item="var(--width-override-card, var(--width-person-card))"
         >
           {#snippet item(person)}
             <DefaultPersonItem {person} />
