@@ -2,8 +2,10 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages";
+  import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import FavoriteAction from "../media-actions/favorite/FavoriteAction.svelte";
@@ -36,6 +38,9 @@
         return m.list_placeholder_favorites();
     }
   });
+
+  const { isMe } = $derived(useIsMe(slug));
+  const cta = $derived({ type: "favorites" as const, mediaType: type });
 </script>
 
 <SectionList
@@ -57,11 +62,21 @@
     </DefaultMediaItem>
   {/snippet}
 
+  {#snippet ctaItem()}
+    {#if $isMe}
+      <CtaItem {cta} variant="card" />
+    {/if}
+  {/snippet}
+
   {#snippet empty()}
     {#if !$isLoading}
-      <p class="small secondary">
-        {placeholderMessage}
-      </p>
+      {#if $isMe}
+        <CtaItem {cta} variant="placeholder" />
+      {:else}
+        <p class="small secondary">
+          {placeholderMessage}
+        </p>
+      {/if}
     {/if}
   {/snippet}
 

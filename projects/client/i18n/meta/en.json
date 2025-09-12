@@ -4772,6 +4772,78 @@
         "ios"
       ]
     },
+    "text_cta_watchlist": {
+      "default": "See it. Save it. Watch it later. Start curating your personal watchlist.",
+      "description": "Call to action text shown in the Watchlist, encouraging users to add movies and shows to their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_watchlist_movies": {
+      "default": "See it. Save it. Watch it later. Start curating your personal movie queue.",
+      "description": "Call to action text shown in the Watchlist, encouraging users to add movies to their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_watchlist_shows": {
+      "default": "See it. Save it. Watch it later. Start curating your personal show queue.",
+      "description": "Call to action text shown in the Watchlist, encouraging users to add shows to their watchlist.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_favorites": {
+      "default": "Your faves. Your story. Spotlight the movies and shows that left a mark.",
+      "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies and shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_favorites_movies": {
+      "default": "Your faves. Your story. Spotlight the movies that left a mark.",
+      "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_favorites_shows": {
+      "default": "Your faves. Your story. Spotlight the shows that left a mark.",
+      "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_favorites_list": {
+      "default": "Your faves. Your playlist. Spotlight the movies and shows that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favorites, saved for every mood and moment.",
+      "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies and shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Your faves. Your playlist. Spotlight the movies that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favorites, saved for every mood and moment.",
+      "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Your faves. Your playlist. Spotlight the shows that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favorites, saved for every mood and moment.",
+      "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "link_text_browse_more": {
       "default": "Browse more",
       "description": "Link text for browsing more content. Meant for content that is available.",

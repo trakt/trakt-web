@@ -19,8 +19,8 @@
 
 <div class="trakt-cta-item">
   {#if variant === "card"}
-    {#if cta === "activity"}
-      <ActivityCtaCard intl={CtaItemIntlProvider} />
+    {#if cta.type === "activity" || cta.type === "social"}
+      <ActivityCtaCard intl={CtaItemIntlProvider} {cta} />
     {:else}
       <MediaCtaCard {cta} intl={CtaItemIntlProvider} />
     {/if}
@@ -31,8 +31,8 @@
       data-dpad-navigation={DpadNavigationType.List}
       class="trakt-cta-list-placeholder"
     >
-      {#if cta === "activity"}
-        <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} />
+      {#if cta.type === "activity" || cta.type === "social"}
+        <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
       {:else}
         <MediaCtaPlaceholder {cta} intl={CtaPlaceholderIntlProvider} />
       {/if}

@@ -21,7 +21,9 @@
   );
 
   const cta = $derived(
-    $activityType === "social" ? "activity" : "personal-activity",
+    $activityType === "social"
+      ? { type: "activity" as const }
+      : { type: "personal-activity" as const },
   );
   // FIXME: coalesce on list level & combine drilled down versions
 </script>

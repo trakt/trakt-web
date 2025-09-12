@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Finde schnell Freunde, indem du dem Trakt-Team folgst und entdeckst, was sie sich ansehen."
     },
+    "text_cta_watchlist": {
+      "default": "Anschauen. Speichern. Später ansehen. Beginne, deine persönliche Watchlist zu erstellen."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Anschauen. Speichern. Später ansehen. Beginne, deine persönliche Filmliste zu erstellen."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Anschauen. Speichern. Später ansehen. Beginne, deine persönliche Serienliste zu erstellen."
+    },
+    "text_cta_favorites": {
+      "default": "Deine Favoriten. Deine Geschichte. Präsentiere die Filme und Serien, die dich geprägt haben."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Deine Favoriten. Deine Geschichte. Präsentiere die Filme, die dich geprägt haben."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Deine Favoriten. Deine Geschichte. Präsentiere die Serien, die dich geprägt haben."
+    },
+    "text_cta_favorites_list": {
+      "default": "Deine Favoriten. Deine Playlist. Präsentiere die Filme und Serien, die dich geprägt haben. Diejenigen, die dich zum Lachen, Weinen oder zum Umdenken gebracht haben. Deine Allzeit-Favoriten, gespeichert für jede Stimmung und jeden Moment."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Deine Favoriten. Deine Playlist. Präsentiere die Filme, die dich geprägt haben. Diejenigen, die dich zum Lachen, Weinen oder zum Umdenken gebracht haben. Deine Allzeit-Favoriten, gespeichert für jede Stimmung und jeden Moment."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Deine Favoriten. Deine Playlist. Präsentiere die Serien, die dich geprägt haben. Diejenigen, die dich zum Lachen, Weinen oder zum Umdenken gebracht haben. Deine Allzeit-Favoriten, gespeichert für jede Stimmung und jeden Moment."
+    },
     "link_text_browse_more": {
       "default": "Mehr ansehen"
     },

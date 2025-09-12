@@ -3,22 +3,23 @@
   import { DEFAULT_COVER } from "$lib/utils/constants";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import ActivityIcon from "../icons/ActivityIcon.svelte";
+  import type { SocialCta } from "../models/Cta";
   import CtaListCard from "./CtaListCard.svelte";
   import TraktTeam from "./TraktTeam.svelte";
 
-  const { intl }: { intl: CtaItemIntl } = $props();
+  const { intl, cta }: { intl: CtaItemIntl; cta: SocialCta } = $props();
 </script>
 
 <CtaListCard variant="landscape" src={DEFAULT_COVER}>
   <div class="trakt-cta-activity">
     <RenderFor audience="all" device={["mobile", "tablet-sm"]}>
-      <TraktTeam {intl} limit={5} />
+      <TraktTeam {intl} {cta} limit={5} />
     </RenderFor>
     <RenderFor audience="all" device={["tablet-lg"]}>
-      <TraktTeam {intl} limit={8} />
+      <TraktTeam {intl} {cta} limit={8} />
     </RenderFor>
     <RenderFor audience="all" device={["desktop"]}>
-      <TraktTeam {intl} />
+      <TraktTeam {intl} {cta} />
     </RenderFor>
 
     <RenderFor

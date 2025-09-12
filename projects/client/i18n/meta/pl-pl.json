@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Zacznij szybko nawiązywać znajomości, obserwując zespół Trakt i odkrywaj, co oglądają."
     },
+    "text_cta_watchlist": {
+      "default": "Zobacz to. Zapisz to. Obejrzyj później. Zacznij kuratorować swoją osobistą listę."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Zobacz to. Zapisz to. Obejrzyj później. Zacznij kuratorować swoją osobistą listę filmów."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Zobacz to. Zapisz to. Obejrzyj później. Zacznij kuratorować swoją osobistą listę seriali."
+    },
+    "text_cta_favorites": {
+      "default": "Twoi ulubieńcy. Twoja historia. Pokaż filmy i seriale, które zrobiły wrażenie."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Twoi ulubieńcy. Twoja historia. Pokaż filmy, które zrobiły wrażenie."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Twoi ulubieńcy. Twoja historia. Pokaż seriale, które zrobiły wrażenie."
+    },
+    "text_cta_favorites_list": {
+      "default": "Twoi ulubieńcy. Twoja lista odtwarzania. Pokaż filmy i seriale, które zrobiły wrażenie. Te, które sprawiły, że się śmiałeś, płakałeś lub przemyślałeś wszystko. Twoi ulubieńcy wszech czasów, zapisani na każdy nastrój i moment."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Twoi ulubieńcy. Twoja lista odtwarzania. Pokaż filmy, które zrobiły wrażenie. Te, które sprawiły, że się śmiałeś, płakałeś lub przemyślałeś wszystko. Twoi ulubieńcy wszech czasów, zapisani na każdy nastrój i moment."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Twoi ulubieńcy. Twoja lista odtwarzania. Pokaż seriale, które zrobiły wrażenie. Te, które sprawiły, że się śmiałeś, płakałeś lub przemyślałeś wszystko. Twoi ulubieńcy wszech czasów, zapisani na każdy nastrój i moment."
+    },
     "link_text_browse_more": {
       "default": "Przeglądaj więcej"
     },

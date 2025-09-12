@@ -6,7 +6,7 @@
   import UnreleasedIcon from "../icons/UnreleasedIcon.svelte";
   import UpcomingIcon from "../icons/UpcomingIcon.svelte";
   import UpNextIcon from "../icons/UpNextIcon.svelte";
-  import type { Cta } from "../models/Cta";
+  import type { MediaCta } from "../models/Cta";
   import CtaListCard from "./CtaListCard.svelte";
   import MediaCtaButton from "./MediaCtaButton.svelte";
   import { useCtaCardVariant } from "./useCtaCardVariant";
@@ -16,7 +16,7 @@
     cta,
     intl,
   }: {
-    cta: Exclude<Cta, "activity">;
+    cta: MediaCta;
     intl: CtaItemIntl;
   } = $props();
 
@@ -26,19 +26,19 @@
 
 {#snippet ctaIcon()}
   <div class="trakt-cta-icon">
-    {#if cta === "up-next" || cta === "personal-activity"}
+    {#if cta.type === "up-next" || cta.type === "personal-activity"}
       <UpNextIcon />
     {/if}
 
-    {#if cta === "released"}
+    {#if cta.type === "released" || cta.type === "watchlist" || cta.type === "favorites"}
       <ReleasedIcon />
     {/if}
 
-    {#if cta === "upcoming"}
+    {#if cta.type === "upcoming"}
       <UpcomingIcon />
     {/if}
 
-    {#if cta === "unreleased"}
+    {#if cta.type === "unreleased"}
       <UnreleasedIcon />
     {/if}
   </div>

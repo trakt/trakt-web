@@ -2,7 +2,9 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages.ts";
+  import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { useFollowing } from "../stores/useFollowing";
   import ProfileItem from "./ProfileItem.svelte";
 
@@ -20,6 +22,8 @@
       ? m.list_placeholder_following()
       : m.list_placeholder_followers(),
   );
+
+  const { isMe } = $derived(useIsMe(slug));
 </script>
 
 <div class="trakt-profiles-list">
@@ -31,7 +35,11 @@
   >
     {#snippet empty()}
       {#if !$isLoading}
-        {placeholder}
+        {#if $isMe && $current === "following"}
+          <CtaItem cta={{ type: "social" }} variant="placeholder" />
+        {:else}
+          {placeholder}
+        {/if}
       {/if}
     {/snippet}
 
@@ -49,6 +57,11 @@
   .trakt-profiles-list {
     :global(.trakt-list-item-container) {
       gap: var(--ni-0);
+    }
+
+    :global(.trakt-cta-list-card) {
+      --height-override-card: var(--height-list);
+      --height-override-card-cover: var(--height-list);
     }
   }
 </style>

@@ -43,10 +43,10 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    <CtaItem cta="up-next" variant="card" />
+    <CtaItem cta={{ type: "up-next" }} variant="card" />
   {/snippet}
 
   {#snippet empty()}
-    <CtaItem cta="up-next" variant="placeholder" />
+    <CtaItem cta={{ type: "up-next" }} variant="placeholder" />
   {/snippet}
 </DrillableMediaList>

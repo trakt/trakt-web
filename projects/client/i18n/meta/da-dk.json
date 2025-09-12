@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Begynd at få venner hurtigt ved at følge Trakt-teamet og udforsk, hvad de ser."
     },
+    "text_cta_watchlist": {
+      "default": "Se det. Gem det. Se det senere. Begynd at kuratere din personlige liste."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Se det. Gem det. Se det senere. Begynd at kuratere din personlige filmliste."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Se det. Gem det. Se det senere. Begynd at kuratere din personlige serieliste."
+    },
+    "text_cta_favorites": {
+      "default": "Dine favoritter. Din historie. Fremhæv de film og serier, der satte et præg."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Dine favoritter. Din historie. Fremhæv de film, der satte et præg."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Dine favoritter. Din historie. Fremhæv de serier, der satte et præg."
+    },
+    "text_cta_favorites_list": {
+      "default": "Dine favoritter. Din playliste. Fremhæv de film og serier, der satte et præg. Dem, der fik dig til at grine, græde eller tænke det hele igennem. Dine favoritter gennem tiderne, gemt til ethvert humør og øjeblik."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Dine favoritter. Din playliste. Fremhæv de film, der satte et præg. Dem, der fik dig til at grine, græde eller tænke det hele igennem. Dine favoritter gennem tiderne, gemt til ethvert humør og øjeblik."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Dine favoritter. Din playliste. Fremhæv de serier, der satte et præg. Dem, der fik dig til at grine, græde eller tænke det hele igennem. Dine favoritter gennem tiderne, gemt til ethvert humør og øjeblik."
+    },
     "link_text_browse_more": {
       "default": "Se mere"
     },

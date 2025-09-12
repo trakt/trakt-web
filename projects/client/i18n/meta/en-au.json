@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Start making friends quickly by following the Trakt Team and explore what they are watching."
     },
+    "text_cta_watchlist": {
+      "default": "See it. Save it. Watch it later. Start curating your personal watchlist."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "See it. Save it. Watch it later. Start curating your personal movie queue."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "See it. Save it. Watch it later. Start curating your personal show queue."
+    },
+    "text_cta_favorites": {
+      "default": "Your faves. Your story. Spotlight the movies and shows that left a mark."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Your faves. Your story. Spotlight the movies that left a mark."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Your faves. Your story. Spotlight the shows that left a mark."
+    },
+    "text_cta_favorites_list": {
+      "default": "Your faves. Your playlist. Spotlight the movies and shows that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favourites, saved for every mood and moment."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Your faves. Your playlist. Spotlight the movies that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favourites, saved for every mood and moment."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Your faves. Your playlist. Spotlight the shows that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favourites, saved for every mood and moment."
+    },
     "link_text_browse_more": {
       "default": "Browse more"
     },

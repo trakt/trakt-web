@@ -5,7 +5,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
-  import type { Cta } from "../models/Cta";
+  import type { MediaCta } from "../models/Cta";
 
   const {
     cta,
@@ -13,7 +13,7 @@
     size,
     icon,
   }: {
-    cta: Exclude<Cta, "activity">;
+    cta: MediaCta;
     intl: CtaItemIntl;
     size: "small" | "tag";
     icon?: Snippet;
@@ -23,16 +23,20 @@
   const color = $derived(size === "small" ? "purple" : "default");
 
   const ctaHref = $derived.by(() => {
-    switch (cta) {
+    switch (cta.type) {
       case "up-next":
       case "personal-activity":
+      case "upcoming":
         return UrlBuilder.shows();
       case "released":
         return UrlBuilder.trending({ type: "movie" });
-      case "upcoming":
-        return UrlBuilder.shows();
       case "unreleased":
         return UrlBuilder.anticipated({ type: "movie" });
+      case "watchlist":
+      case "favorites":
+        return cta.mediaType === "show"
+          ? UrlBuilder.shows()
+          : UrlBuilder.movies();
     }
   });
 </script>
@@ -40,7 +44,7 @@
 <Button
   href={ctaHref}
   label={intl.cta.label({ cta })}
-  onclick={() => track({ type: cta })}
+  onclick={() => track({ type: cta.type })}
   {size}
   {color}
   {icon}

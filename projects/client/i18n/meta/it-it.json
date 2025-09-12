@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Inizia a fare amicizia velocemente seguendo il team Trakt e scopri cosa stanno guardando."
     },
+    "text_cta_watchlist": {
+      "default": "Guardalo. Salvalo. Guardalo più tardi. Inizia a curare la tua lista personale."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Guardalo. Salvalo. Guardalo più tardi. Inizia a curare la tua lista di film."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Guardalo. Salvalo. Guardalo più tardi. Inizia a curare la tua lista di serie TV."
+    },
+    "text_cta_favorites": {
+      "default": "I tuoi preferiti. La tua storia. Metti in risalto i film e le serie TV che ti hanno colpito."
+    },
+    "text_cta_favorites_movies": {
+      "default": "I tuoi preferiti. La tua storia. Metti in risalto i film che ti hanno colpito."
+    },
+    "text_cta_favorites_shows": {
+      "default": "I tuoi preferiti. La tua storia. Metti in risalto le serie TV che ti hanno colpito."
+    },
+    "text_cta_favorites_list": {
+      "default": "I tuoi preferiti. La tua playlist. Metti in risalto i film e le serie TV che ti hanno colpito. Quelli che ti hanno fatto ridere, piangere o ripensare a tutto. I tuoi preferiti di sempre, salvati per ogni umore e momento."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "I tuoi preferiti. La tua playlist. Metti in risalto i film che ti hanno colpito. Quelli che ti hanno fatto ridere, piangere o ripensare a tutto. I tuoi preferiti di sempre, salvati per ogni umore e momento."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "I tuoi preferiti. La tua playlist. Metti in risalto le serie TV che ti hanno colpito. Quelli che ti hanno fatto ridere, piangere o ripensare a tutto. I tuoi preferiti di sempre, salvati per ogni umore e momento."
+    },
     "link_text_browse_more": {
       "default": "Sfoglia di più"
     },

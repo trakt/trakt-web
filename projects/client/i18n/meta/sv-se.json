@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Börja skaffa vänner snabbt genom att följa Trakt-teamet och utforska vad de tittar på."
     },
+    "text_cta_watchlist": {
+      "default": "Se det. Spara det. Titta senare. Börja kurera din personliga lista."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Se det. Spara det. Titta senare. Börja kurera din personliga filmlista."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Se det. Spara det. Titta senare. Börja kurera din personliga serie lista."
+    },
+    "text_cta_favorites": {
+      "default": "Dina favoriter. Din historia. Spotlights de filmer och serier som gjort ett avtryck."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Dina favoriter. Din historia. Spotlights de filmer som gjort ett avtryck."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Dina favoriter. Din historia. Spotlights de serier som gjort ett avtryck."
+    },
+    "text_cta_favorites_list": {
+      "default": "Dina favoriter. Din spellista. Spotlights de filmer och serier som gjort ett avtryck. De som fick dig att skratta, gråta eller tänka om allt. Dina favoriter genom tiderna, sparade för varje humör och ögonblick."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Dina favoriter. Din spellista. Spotlights de filmer som gjort ett avtryck. De som fick dig att skratta, gråta eller tänka om allt. Dina favoriter genom tiderna, sparade för varje humör och ögonblick."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Dina favoriter. Din spellista. Spotlights de serier som gjort ett avtryck. De som fick dig att skratta, gråta eller tänka om allt. Dina favoriter genom tiderna, sparade för varje humör och ögonblick."
+    },
     "link_text_browse_more": {
       "default": "Utforska mer"
     },
