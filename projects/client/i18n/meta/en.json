@@ -5339,6 +5339,38 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_most_searched_media": {
+      "default": "Most searched media",
+      "description": "Title for lists containing the most searched media.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_title_most_searched_movies": {
+      "default": "Most searched movies",
+      "description": "Title for lists containing the most searched movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_title_most_searched_shows": {
+      "default": "Most searched shows",
+      "description": "Title for lists containing the most searched shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_title_birthdays_this_month": {
+      "default": "Birthdays this month",
+      "description": "Title for lists containing the birthdays this month.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

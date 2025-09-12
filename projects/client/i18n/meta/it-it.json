@@ -1898,6 +1898,18 @@
     },
     "link_text_advanced_settings": {
       "default": "Avanzate"
+    },
+    "list_title_most_searched_media": {
+      "default": "Media più cercati"
+    },
+    "list_title_most_searched_movies": {
+      "default": "Film più cercati"
+    },
+    "list_title_most_searched_shows": {
+      "default": "Serie TV più cercate"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "Compleanni questo mese"
     }
   }
 }
