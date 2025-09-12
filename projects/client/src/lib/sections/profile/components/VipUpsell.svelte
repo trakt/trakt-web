@@ -19,7 +19,7 @@
     variant="secondary"
     target="_blank"
   >
-    <p class="small bold uppercase">{m.button_text_get_vip()}</p>
+    {m.button_text_get_vip()}
     {#snippet icon()}
       <VipBadge />
     {/snippet}
