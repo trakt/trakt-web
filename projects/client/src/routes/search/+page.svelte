@@ -3,25 +3,16 @@
 
   import { page } from "$app/state";
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
-  import GridList from "$lib/components/lists/grid-list/GridList.svelte";
-  import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
-  import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
-  import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
+  import SearchResultsGrid from "$lib/features/search/SearchResultsGrid.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { type MediaEntry } from "$lib/requests/models/MediaEntry";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
-  import DefaultPersonItem from "$lib/sections/lists/components/DefaultPersonItem.svelte";
   import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { isMobileAppleDevice } from "$lib/utils/devices/isMobileAppleDevice";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
@@ -57,23 +48,6 @@
   const showOnPageSearch = isMobileAppleDevice();
 </script>
 
-{#snippet mediaTag(item: MediaEntry)}
-  <InfoTag>
-    {#snippet icon()}
-      {#if item.type === "movie"}
-        <MovieIcon />
-      {/if}
-
-      {#if item.type === "show"}
-        <ShowIcon />
-      {/if}
-    {/snippet}
-    {toTranslatedValue("type", item.type)}
-  </InfoTag>
-
-  <AirDateTag i18n={TagIntlProvider} airDate={item.airDate} />
-{/snippet}
-
 {#snippet searchControls()}
   <div class="trakt-search-container">
     <SearchInput />
@@ -98,38 +72,7 @@
 
   <div class="trakt-search-results-container">
     {#if $results}
-      {#if $results.type === "media"}
-        <GridList
-          id="search-grid-list-media"
-          items={$results.items}
-          --width-item="var(--width-override-card, var(--width-portrait-card))"
-        >
-          {#snippet item(result)}
-            {#snippet mediaResultTag()}
-              {@render mediaTag(result)}
-            {/snippet}
-
-            <DefaultMediaItem
-              type={result.type}
-              media={result}
-              style="cover"
-              tag={$mode === "media" ? mediaResultTag : undefined}
-            />
-          {/snippet}
-        </GridList>
-      {/if}
-
-      {#if $results.type === "people"}
-        <GridList
-          id="search-grid-list-people"
-          items={$results.items}
-          --width-item="var(--width-override-card, var(--width-person-card))"
-        >
-          {#snippet item(person)}
-            <DefaultPersonItem {person} />
-          {/snippet}
-        </GridList>
-      {/if}
+      <SearchResultsGrid items={$results.items} />
     {/if}
   </div>
 </TraktPage>
@@ -158,33 +101,6 @@
     @include for-tablet-sm-and-below {
       padding-top: 0;
       padding-bottom: 0;
-    }
-  }
-
-  .trakt-search-results-container {
-    @include for-mobile {
-      --column-count: 3;
-      --card-aspect-ratio: calc(
-        var(--height-portrait-card-cover) / var(--width-portrait-card)
-      );
-
-      --container-width: calc(
-        100dvw - var(--layout-distance-side) * 2 - var(--layout-scrollbar-width)
-      );
-      --total-gap-width: calc(var(--gap-xxs) * (var(--column-count) - 1));
-      --available-width: calc(var(--container-width) - var(--total-gap-width));
-
-      --width-override-card: calc(var(--available-width) / var(--column-count));
-      --height-override-card-cover: calc(
-        var(--width-override-card) * var(--card-aspect-ratio)
-      );
-      --height-override-card: calc(
-        var(--height-override-card-cover) + var(--height-card-footer)
-      );
-
-      :global(.trakt-list-items) {
-        grid-template-columns: repeat(auto-fill, var(--width-item));
-      }
     }
   }
 </style>
