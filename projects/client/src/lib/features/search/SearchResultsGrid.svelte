@@ -5,10 +5,12 @@
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import { getLocale } from "$lib/features/i18n";
   import { type MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import DefaultPersonItem from "$lib/sections/lists/components/DefaultPersonItem.svelte";
+  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import type { Snippet } from "svelte";
   import { useSearch } from "./useSearch";
@@ -67,7 +69,12 @@
           tag={$mode === "media" ? mediaResultTag : undefined}
         />
       {:else}
-        <DefaultPersonItem person={item} />
+        <DefaultPersonItem
+          person={item}
+          subtitle={item.birthday
+            ? toHumanDay(item.birthday, getLocale(), "short")
+            : undefined}
+        />
       {/if}
     {/snippet}
   </GridList>

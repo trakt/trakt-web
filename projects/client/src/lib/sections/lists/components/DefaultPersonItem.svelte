@@ -8,7 +8,8 @@
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  const { person }: { person: PersonSummary } = $props();
+  const { person, subtitle }: { person: PersonSummary; subtitle?: string } =
+    $props();
 </script>
 
 <PersonCard>
@@ -24,7 +25,7 @@
       </p>
       {#if person.knownFor}
         <p class="trakt-card-subtitle ellipsis">
-          {toTranslatedValue("position", person.knownFor)}
+          {subtitle ?? toTranslatedValue("position", person.knownFor)}
         </p>
       {/if}
     </CardFooter>
