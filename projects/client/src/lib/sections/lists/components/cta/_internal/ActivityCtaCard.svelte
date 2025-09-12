@@ -1,15 +1,16 @@
 <script lang="ts">
   import { DEFAULT_COVER } from "$lib/utils/constants";
   import type { CtaItemIntl } from "../CtaItemIntl";
+  import type { SocialCta } from "../models/Cta";
   import CtaCard from "./CtaCard.svelte";
   import TraktTeam from "./TraktTeam.svelte";
 
-  const { intl }: { intl: CtaItemIntl } = $props();
+  const { intl, cta }: { intl: CtaItemIntl; cta: SocialCta } = $props();
 </script>
 
 <CtaCard variant="activity" src={DEFAULT_COVER}>
   <div class="trakt-team-content">
-    <TraktTeam {intl} limit={5} />
+    <TraktTeam {intl} {cta} limit={5} />
   </div>
 </CtaCard>
 

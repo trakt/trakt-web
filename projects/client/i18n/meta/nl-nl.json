@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Maak snel vrienden door het Trakt-team te volgen en te ontdekken wat zij aan het kijken zijn."
     },
+    "text_cta_watchlist": {
+      "default": "Bekijk het. Sla het op. Kijk het later. Begin met het samenstellen van je persoonlijke watchlist."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Bekijk het. Sla het op. Kijk het later. Begin met het samenstellen van je persoonlijke film watchlist."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Bekijk het. Sla het op. Kijk het later. Begin met het samenstellen van je persoonlijke serie watchlist."
+    },
+    "text_cta_favorites": {
+      "default": "Je favorieten. Jouw verhaal. Zet de films en series in de schijnwerpers die indruk hebben gemaakt."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Je favorieten. Jouw verhaal. Zet de films in de schijnwerpers die indruk hebben gemaakt."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Je favorieten. Jouw verhaal. Zet de series in de schijnwerpers die indruk hebben gemaakt."
+    },
+    "text_cta_favorites_list": {
+      "default": "Je favorieten. Je afspeellijst. Zet de films en series in de schijnwerpers die indruk hebben gemaakt. Degene die je aan het lachen maakten, lieten huilen of je alles lieten heroverwegen. Je favorieten aller tijden, bewaard voor elke stemming en elk moment."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Je favorieten. Je afspeellijst. Zet de films in de schijnwerpers die indruk hebben gemaakt. Degene die je aan het lachen maakten, lieten huilen of je alles lieten heroverwegen. Je favorieten aller tijden, bewaard voor elke stemming en elk moment."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Je favorieten. Je afspeellijst. Zet de series in de schijnwerpers die indruk hebben gemaakt. Degene die je aan het lachen maakten, lieten huilen of je alles lieten heroverwegen. Je favorieten aller tijden, bewaard voor elke stemming en elk moment."
+    },
     "link_text_browse_more": {
       "default": "Meer bekijken"
     },

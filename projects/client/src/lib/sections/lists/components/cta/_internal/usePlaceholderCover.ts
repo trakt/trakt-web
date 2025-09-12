@@ -18,7 +18,7 @@ import {
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
-import type { Cta } from '../models/Cta.ts';
+import type { MediaCta } from '../models/Cta.ts';
 
 type PreviewItem =
   | TrendingShow
@@ -28,18 +28,20 @@ type PreviewItem =
 
 type PaginatablePreviewItem = Paginatable<PreviewItem>;
 
-function ctaToQuery(cta: Exclude<Cta, 'activity'>) {
+function ctaToQuery(cta: MediaCta) {
   const params = {
     page: 1,
     limit: 1,
   };
 
-  switch (cta) {
+  switch (cta.type) {
     case 'up-next':
     case 'personal-activity':
       return showTrendingQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
       >;
+    case 'watchlist':
+    case 'favorites':
     case 'released':
       return movieTrendingQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
@@ -56,7 +58,7 @@ function ctaToQuery(cta: Exclude<Cta, 'activity'>) {
 }
 
 export function usePlaceholderCover(
-  cta: Exclude<Cta, 'activity'>,
+  cta: MediaCta,
 ) {
   const query = useQuery(ctaToQuery(cta));
 

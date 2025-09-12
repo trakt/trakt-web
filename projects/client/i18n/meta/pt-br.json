@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Comece a fazer amigos rapidamente seguindo a Equipe Trakt e explore o que eles estão assistindo."
     },
+    "text_cta_watchlist": {
+      "default": "Veja. Salve. Assista depois. Comece a criar sua lista pessoal."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Veja. Salve. Assista depois. Comece a criar sua lista de filmes."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Veja. Salve. Assista depois. Comece a criar sua lista de séries."
+    },
+    "text_cta_favorites": {
+      "default": "Seus favoritos. Sua história. Destaque os filmes e séries que te marcaram."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Seus favoritos. Sua história. Destaque os filmes que te marcaram."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Seus favoritos. Sua história. Destaque as séries que te marcaram."
+    },
+    "text_cta_favorites_list": {
+      "default": "Seus favoritos. Sua playlist. Destaque os filmes e séries que te marcaram. Aqueles que te fizeram rir, chorar ou repensar tudo. Seus favoritos de todos os tempos, salvos para cada humor e momento."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Seus favoritos. Sua playlist. Destaque os filmes que te marcaram. Aqueles que te fizeram rir, chorar ou repensar tudo. Seus favoritos de todos os tempos, salvos para cada humor e momento."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Seus favoritos. Sua playlist. Destaque as séries que te marcaram. Aquelas que te fizeram rir, chorar ou repensar tudo. Seus favoritos de todos os tempos, salvos para cada humor e momento."
+    },
     "link_text_browse_more": {
       "default": "Explorar mais"
     },

@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Empieza a hacer amigos rápido siguiendo al equipo Trakt y explora lo que están viendo."
     },
+    "text_cta_watchlist": {
+      "default": "Mírala. Guárdala. Velá después. Comienza a crear tu lista de pendientes."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Mírala. Guárdala. Velá después. Comienza a crear tu lista de películas."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Mírala. Guárdala. Velá después. Comienza a crear tu lista de series."
+    },
+    "text_cta_favorites": {
+      "default": "Tus favs. Tu historia. Destaca las películas y series que te volaron la cabeza."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Tus favs. Tu historia. Destaca las películas que te volaron la cabeza."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Tus favs. Tu historia. Destaca las series que te volaron la cabeza."
+    },
+    "text_cta_favorites_list": {
+      "default": "Tus favs. Tu playlist. Destaca las películas y series que te volaron la cabeza. Esas que te hicieron reír, llorar o replantearte todo. Tus favoritas de siempre, guardadas para cada mood y momento."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Tus favs. Tu playlist. Destaca las películas que te volaron la cabeza. Esas que te hicieron reír, llorar o replantearte todo. Tus favoritas de siempre, guardadas para cada mood y momento."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Tus favs. Tu playlist. Destaca las series que te volaron la cabeza. Esas que te hicieron reír, llorar o replantearte todo. Tus favoritas de siempre, guardadas para cada mood y momento."
+    },
     "link_text_browse_more": {
       "default": "Explorar más"
     },

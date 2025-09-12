@@ -28,12 +28,12 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    <CtaItem cta="upcoming" variant="card" />
+    <CtaItem cta={{ type: "upcoming" }} variant="card" />
   {/snippet}
 
   {#snippet empty()}
     {#if !$isLoading}
-      <CtaItem cta="upcoming" variant="placeholder" />
+      <CtaItem cta={{ type: "upcoming" }} variant="placeholder" />
     {/if}
   {/snippet}
 

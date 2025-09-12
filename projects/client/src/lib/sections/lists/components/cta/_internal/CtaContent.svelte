@@ -26,14 +26,19 @@
 
   .trakt-cta-container {
     --content-padding: var(--ni-16);
+    --content-width: var(--width-override-card, var(--width-card));
+    --content-height: var(
+      --height-override-card-cover,
+      var(--height-card-cover)
+    );
 
     display: grid;
     grid-template-columns: 1fr;
 
     gap: var(--gap-s);
 
-    width: var(--width-card);
-    height: var(--height-card-cover);
+    width: var(--content-width);
+    height: var(--content-height);
 
     border-radius: var(--border-radius-m);
 
@@ -60,8 +65,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: var(--width-card);
-      height: var(--height-card-cover);
+      width: var(--content-width);
+      height: var(--content-height);
 
       border-radius: var(--border-radius-m);
 
@@ -82,8 +87,8 @@
 
     gap: var(--gap-xs);
 
-    width: calc(var(--width-card) - 2 * var(--content-padding));
-    height: calc(var(--height-card-cover) - 2 * var(--content-padding));
+    width: calc(var(--content-width) - 2 * var(--content-padding));
+    height: calc(var(--content-height) - 2 * var(--content-padding));
 
     z-index: var(--layer-raised);
   }
@@ -92,8 +97,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: var(--width-card);
-    height: var(--height-card-cover);
+    width: var(--content-width);
+    height: var(--content-height);
 
     overflow: hidden;
     border-radius: var(--border-radius-m);
@@ -104,7 +109,7 @@
       right: 0;
 
       width: min(100%, var(--ni-640));
-      height: var(--height-card-cover);
+      height: var(--content-height);
 
       object-fit: cover;
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { CtaItemIntl } from "../CtaItemIntl";
-  import type { Cta } from "../models/Cta";
+  import type { MediaCta } from "../models/Cta";
   import CtaCard from "./CtaCard.svelte";
   import MediaCtaButton from "./MediaCtaButton.svelte";
   import { useCtaCardVariant } from "./useCtaCardVariant";
@@ -10,7 +10,7 @@
     cta,
     intl,
   }: {
-    cta: Exclude<Cta, "activity">;
+    cta: MediaCta;
     intl: CtaItemIntl;
   } = $props();
 

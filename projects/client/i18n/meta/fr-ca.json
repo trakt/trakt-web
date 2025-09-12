@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Faites-vous rapidement des amis en suivant l'équipe Trakt et voyez ce qu'ils regardent."
     },
+    "text_cta_watchlist": {
+      "default": "Voyez ça. Gardez ça. Regardez ça plus tard. Commencez à organiser votre liste de trucs à voir."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Voyez ça. Gardez ça. Regardez ça plus tard. Commencez à organiser votre liste de films."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Voyez ça. Gardez ça. Regardez ça plus tard. Commencez à organiser votre liste de séries."
+    },
+    "text_cta_favorites": {
+      "default": "Vos préférés. Votre histoire. Mettez en vedette les films et séries qui vous ont touché."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Vos préférés. Votre histoire. Mettez en vedette les films qui vous ont touché."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Vos préférés. Votre histoire. Mettez en vedette les séries qui vous ont touché."
+    },
+    "text_cta_favorites_list": {
+      "default": "Vos préférés. Votre playlist. Mettez en vedette les films et séries qui vous ont touché. Ceux qui vous ont fait rire, pleurer ou tout remettre en question. Vos préférés, gardés pour chaque humeur et chaque moment."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Vos préférés. Votre playlist. Mettez en vedette les films qui vous ont touché. Ceux qui vous ont fait rire, pleurer ou tout remettre en question. Vos préférés, gardés pour chaque humeur et chaque moment."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Vos préférés. Votre playlist. Mettez en vedette les séries qui vous ont touché. Ceux qui vous ont fait rire, pleurer ou tout remettre en question. Vos préférés, gardés pour chaque humeur et chaque moment."
+    },
     "link_text_browse_more": {
       "default": "Voir plus"
     },

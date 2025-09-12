@@ -6,8 +6,13 @@
   import VipBadge from "$lib/sections/navbar/components/VIPBadge.svelte";
   import UserAvatar from "../../UserAvatar.svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
+  import type { SocialCta } from "../models/Cta";
 
-  const { intl, limit }: { intl: CtaItemIntl; limit?: number } = $props();
+  const {
+    intl,
+    limit,
+    cta,
+  }: { intl: CtaItemIntl; limit?: number; cta: SocialCta } = $props();
 
   const { track } = useTrack(AnalyticsEvent.Cta);
   const { network } = useUser();
@@ -16,13 +21,13 @@
 
 <div class="trakt-team">
   <p class="smaller">
-    {intl.text({ cta: "activity" })}
+    {intl.text({ cta })}
   </p>
   <div class="trakt-team-list">
     {#if !$isLoading}
       {#each $team.slice(0, limit ?? $team.length) as member (member.username)}
         <div class="trakt-team-member">
-          <UserAvatar user={member} onClick={() => track({ type: "activity" })}>
+          <UserAvatar user={member} onClick={() => track({ type: cta.type })}>
             {#snippet icon()}
               <VipBadge style="inverted" />
             {/snippet}

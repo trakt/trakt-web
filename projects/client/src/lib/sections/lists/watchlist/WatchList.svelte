@@ -11,7 +11,6 @@
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import WatchlistTag from "./_internal/WatchlistTag.svelte";
-  import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
   import WatchlistItem from "./WatchlistItem.svelte";
 
@@ -40,6 +39,12 @@
 
     return $selectedType === "all" ? undefined : $selectedType;
   });
+
+  const cta = $derived(
+    status === "all"
+      ? { type: "watchlist" as const, mediaType: type }
+      : { type: status },
+  );
 </script>
 
 <DrillableMediaList
@@ -66,19 +71,11 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    {#if status !== "all"}
-      <CtaItem cta={status} variant="card" />
-    {/if}
+    <CtaItem {cta} variant="card" />
   {/snippet}
 
   {#snippet empty()}
-    {#if status !== "all"}
-      <CtaItem cta={status} variant="placeholder" />
-    {/if}
-
-    {#if status === "all"}
-      <EmptyWatchlist {type} {status} />
-    {/if}
+    <CtaItem {cta} variant="placeholder" />
   {/snippet}
 
   {#snippet badge()}

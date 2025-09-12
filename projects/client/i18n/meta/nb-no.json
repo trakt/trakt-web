@@ -1679,6 +1679,33 @@
     "text_cta_activity_list": {
       "default": "Begynn å få venner raskt ved å følge Trakt-teamet og utforske hva de ser på."
     },
+    "text_cta_watchlist": {
+      "default": "Se det. Lagre det. Se det senere. Begynn å kuratere din personlige liste."
+    },
+    "text_cta_watchlist_movies": {
+      "default": "Se det. Lagre det. Se det senere. Begynn å kuratere din personlige filmliste."
+    },
+    "text_cta_watchlist_shows": {
+      "default": "Se det. Lagre det. Se det senere. Begynn å kuratere din personlige serieliste."
+    },
+    "text_cta_favorites": {
+      "default": "Dine favoritter. Din historie. Sett søkelyset på filmene og seriene som gjorde et inntrykk."
+    },
+    "text_cta_favorites_movies": {
+      "default": "Dine favoritter. Din historie. Sett søkelyset på filmene som gjorde et inntrykk."
+    },
+    "text_cta_favorites_shows": {
+      "default": "Dine favoritter. Din historie. Sett søkelyset på seriene som gjorde et inntrykk."
+    },
+    "text_cta_favorites_list": {
+      "default": "Dine favoritter. Din spilleliste. Sett søkelyset på filmene og seriene som gjorde et inntrykk. De som fikk deg til å le, gråte eller tenke over alt. Dine favoritter gjennom tidene, lagret for hvert humør og øyeblikk."
+    },
+    "text_cta_favorites_list_movies": {
+      "default": "Dine favoritter. Din spilleliste. Sett søkelyset på filmene som gjorde et inntrykk. De som fikk deg til å le, gråte eller tenke over alt. Dine favoritter gjennom tidene, lagret for hvert humør og øyeblikk."
+    },
+    "text_cta_favorites_list_shows": {
+      "default": "Dine favoritter. Din spilleliste. Sett søkelyset på seriene som gjorde et inntrykk. De som fikk deg til å le, gråte eller tenke over alt. Dine favoritter gjennom tidene, lagret for hvert humør og øyeblikk."
+    },
     "link_text_browse_more": {
       "default": "Utforsk mer"
     },
