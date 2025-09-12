@@ -5,10 +5,12 @@ import { format } from 'date-fns/format';
 export function toHumanDay(
   date: Date,
   localeKey: AvailableLocale,
+  formatOption: 'short' | 'long' = 'long',
 ): string {
   const locale = LOCALE_MAP[localeKey] ?? LOCALE_MAP['en'];
+  const formatString = formatOption === 'short' ? 'PP' : 'PPP';
 
-  return format(date, 'PPP', {
+  return format(date, formatString, {
     locale,
   });
 }
