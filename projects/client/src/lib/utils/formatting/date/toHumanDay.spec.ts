@@ -19,4 +19,10 @@ describe('toHumanDay', () => {
 
     expect(toHumanDay(day, 'en')).toBe('December 17th, 1995');
   });
+
+  it('will display September 19th, 2023', () => {
+    const day = new Date('2023-09-19');
+
+    expect(toHumanDay(day, 'en', 'short')).toBe('Sep 19, 2023');
+  });
 });
