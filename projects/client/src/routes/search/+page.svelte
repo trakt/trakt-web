@@ -5,6 +5,7 @@
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
+  import SearchPlaceHolder from "$lib/features/search/SearchPlaceHolder.svelte";
   import SearchResultsGrid from "$lib/features/search/SearchResultsGrid.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -73,6 +74,8 @@
   <div class="trakt-search-results-container">
     {#if $results}
       <SearchResultsGrid items={$results.items} />
+    {:else if !query}
+      <SearchPlaceHolder />
     {/if}
   </div>
 </TraktPage>

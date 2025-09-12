@@ -1898,6 +1898,18 @@
     },
     "link_text_advanced_settings": {
       "default": "Advanced"
+    },
+    "list_title_most_searched_media": {
+      "default": "Most searched media"
+    },
+    "list_title_most_searched_movies": {
+      "default": "Most searched movies"
+    },
+    "list_title_most_searched_shows": {
+      "default": "Most searched shows"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "Birthdays this month"
     }
   }
 }

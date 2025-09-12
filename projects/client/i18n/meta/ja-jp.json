@@ -1898,6 +1898,18 @@
     },
     "link_text_advanced_settings": {
       "default": "詳細"
+    },
+    "list_title_most_searched_media": {
+      "default": "最も検索されたメディア"
+    },
+    "list_title_most_searched_movies": {
+      "default": "最も検索された映画"
+    },
+    "list_title_most_searched_shows": {
+      "default": "最も検索されたドラマ"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "今月の誕生日"
     }
   }
 }

@@ -1898,6 +1898,18 @@
     },
     "link_text_advanced_settings": {
       "default": "Разширени"
+    },
+    "list_title_most_searched_media": {
+      "default": "Най-търсени медии"
+    },
+    "list_title_most_searched_movies": {
+      "default": "Най-търсени филми"
+    },
+    "list_title_most_searched_shows": {
+      "default": "Най-търсени сериали"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "Рождени дни този месец"
     }
   }
 }

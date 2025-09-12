@@ -1898,6 +1898,18 @@
     },
     "link_text_advanced_settings": {
       "default": "Avansert"
+    },
+    "list_title_most_searched_media": {
+      "default": "Mest søkte medier"
+    },
+    "list_title_most_searched_movies": {
+      "default": "Mest søkte filmer"
+    },
+    "list_title_most_searched_shows": {
+      "default": "Mest søkte serier"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "Bursdager denne måneden"
     }
   }
 }

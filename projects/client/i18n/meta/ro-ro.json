@@ -1898,6 +1898,18 @@
     },
     "link_text_advanced_settings": {
       "default": "Avansat"
+    },
+    "list_title_most_searched_media": {
+      "default": "Media cele mai căutate"
+    },
+    "list_title_most_searched_movies": {
+      "default": "Filmele cele mai căutate"
+    },
+    "list_title_most_searched_shows": {
+      "default": "Seriale cele mai căutate"
+    },
+    "list_title_birthdays_this_month": {
+      "default": "Zile de naștere luna aceasta"
     }
   }
 }
