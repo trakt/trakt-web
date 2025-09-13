@@ -11,6 +11,7 @@ export const PersonSummarySchema = z.object({
   }),
   slug: z.string(),
   knownFor: crewPositionSchema.nullish(),
+  birthday: z.date().nullish(),
 });
 
 export type PersonSummary = z.infer<typeof PersonSummarySchema>;

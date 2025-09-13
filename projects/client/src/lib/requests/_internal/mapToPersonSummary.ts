@@ -11,5 +11,6 @@ export const mapToPersonSummary = (
     biography: response.biography ?? '',
     knownFor: response.known_for_department,
     headshot: mapToHeadshot(response.images),
+    birthday: response.birthday && new Date(response.birthday),
   };
 };
