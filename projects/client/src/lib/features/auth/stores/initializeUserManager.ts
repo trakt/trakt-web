@@ -36,7 +36,7 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
   }
 
   const isInitializing = writable(true);
-  const { isAuthorized } = getAuthContext();
+  const ctx = getAuthContext();
 
   onMount(() => {
     const manager = new UserManager(
@@ -47,7 +47,9 @@ export function initializeUserManager(hasLegacyAuth: boolean) {
       { token, isExpired }: { token: Token; isExpired: boolean },
     ) => {
       setToken(token);
-      isAuthorized.set(!isExpired);
+      ctx.token.set(token);
+
+      ctx.isAuthorized.set(!isExpired);
       isInitializing.set(false);
     };
 
