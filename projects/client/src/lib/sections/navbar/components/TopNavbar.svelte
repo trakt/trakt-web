@@ -94,7 +94,7 @@
       background-color: var(--color-background-navbar);
       box-shadow: 0px 24px 64px 0px var(--cm-shadow-32);
 
-      @include backdrop-filter-blur(var(--ni-8));
+      backdrop-filter: blur(var(--ni-8));
     }
 
     &:global(.trakt-navbar-scroll-down) {

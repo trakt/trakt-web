@@ -32,7 +32,6 @@
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
   import { onMount } from "svelte";
-  import FirefoxBlurHack from "./_internal/FirefoxBlurHack.svelte";
 
   const { data, children } = $props();
 
@@ -242,7 +241,6 @@
                                   buttonPosition="bottom-right"
                                   styleNonce="opacity: 0.5"
                                 />
-                                <FirefoxBlurHack />
                               </ListScrollHistoryProvider>
                             </ThemeProvider>
                           </ToastProvider>
@@ -302,7 +300,7 @@
       border-radius: var(--border-radius-xs);
       opacity: 0;
 
-      @include backdrop-filter-blur(var(--ni-4));
+      backdrop-filter: blur(var(--ni-4));
     }
 
     :global(:hover::-webkit-scrollbar-thumb) {

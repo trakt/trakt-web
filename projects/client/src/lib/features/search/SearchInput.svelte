@@ -157,7 +157,7 @@
       transition-property:
         border-color, background-color, padding, width, top, left, opacity;
 
-      @include backdrop-filter-blur(var(--ni-8));
+      backdrop-filter: blur(var(--ni-8));
 
       &:placeholder-shown {
         text-overflow: ellipsis;

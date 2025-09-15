@@ -69,7 +69,7 @@
   backdrop-filter: blur($blur);
 
   @-moz-document url-prefix() {
-    backdrop-filter: url('#trakt-firefox-blur')
+    backdrop-filter: url('#trakt-firefox-blur');
   }
 }
 

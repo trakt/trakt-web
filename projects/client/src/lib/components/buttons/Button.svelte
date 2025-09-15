@@ -353,7 +353,7 @@
       transform: scale(calc(var(--scale-factor-button) * 0.76925));
       background: transparent;
       /** This is required for improved readability when rendering over a cover image */
-      @include backdrop-filter-blur(var(--ni-16));
+      backdrop-filter: blur(var(--ni-16));
 
       &:not([data-variant="secondary"]) {
         color: var(--color-foreground);

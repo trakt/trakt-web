@@ -171,7 +171,7 @@
       background-color: transparent;
 
       /** This is required for improved readability when rendering over a cover image */
-      @include backdrop-filter-blur(var(--ni-16));
+      backdrop-filter: blur(var(--ni-16));
 
       @include for-mouse {
         &:hover {

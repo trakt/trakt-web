@@ -65,7 +65,7 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: padding, gap;
 
-    @include backdrop-filter-blur(var(--ni-16));
+    backdrop-filter: blur(var(--ni-16));
 
     @include for-tablet-sm-and-below {
       --toast-bottom-distance: calc(var(--ni-12) + var(--mobile-navbar-height));

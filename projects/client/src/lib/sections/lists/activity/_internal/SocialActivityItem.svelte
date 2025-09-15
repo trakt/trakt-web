@@ -78,7 +78,7 @@
       border-radius: var(--border-radius-m);
       overflow: hidden;
 
-      @include backdrop-filter-blur(var(--ni-8));
+      backdrop-filter: blur(var(--ni-8));
     }
 
     :global(.trakt-link) {
