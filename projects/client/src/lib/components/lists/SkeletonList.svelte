@@ -10,7 +10,7 @@
   const randomListIndex = Math.floor(Math.random() * 6) + 1;
 </script>
 
-<div class="trakt-skeleton-list trakt-list-item-container">
+<div class="trakt-skeleton-list">
   {#each Array(DEFAULT_PAGE_SIZE) as _, index (`skeleton_${id}_${index}`)}
     <SkeletonCard {variant} {index} listIndex={randomListIndex} />
   {/each}
