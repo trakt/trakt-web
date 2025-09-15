@@ -203,9 +203,6 @@
     width: calc(
       100dvw - var(--layout-distance-side) * 2 - var(--layout-sidebar-distance)
     );
-    padding-left: calc(
-      var(--layout-distance-side) + var(--layout-sidebar-distance)
-    );
 
     display: flex;
     flex-direction: column;
