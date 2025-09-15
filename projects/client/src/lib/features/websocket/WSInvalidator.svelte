@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getAuthContext } from "$lib/features/auth/stores/getAuthContext.ts";
+  import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import { LogLevel, print } from "$lib/utils/console/print";
   import { setMarker } from "$lib/utils/date/Marker";
@@ -20,22 +21,22 @@
 
       switch (data.key) {
         case "show:watchlist":
-          return invalidate("invalidate:watchlisted:show");
+          return invalidate(InvalidateAction.Watchlisted("show"));
         case "movie:watchlist":
-          return invalidate("invalidate:watchlisted:movie");
+          return invalidate(InvalidateAction.Watchlisted("movie"));
         case "episode:watched":
           /**
            * FIXME: add specific check-in invalidation when we have a proper marker for it
            */
-          invalidate("invalidate:check_in");
-          invalidate("invalidate:mark_as_watched:episode");
+          invalidate(InvalidateAction.CheckIn);
+          invalidate(InvalidateAction.MarkAsWatched("episode"));
           break;
         case "movie:watched":
           /**
            * FIXME: add specific check-in invalidation when we have a proper marker for it
            */
-          invalidate("invalidate:check_in");
-          invalidate("invalidate:mark_as_watched:movie");
+          invalidate(InvalidateAction.CheckIn);
+          invalidate(InvalidateAction.MarkAsWatched("movie"));
           break;
         default:
           print(LogLevel.Log, "warn", "WS Warning: Unknown key", data.key);
