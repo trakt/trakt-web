@@ -20,9 +20,22 @@
 
       switch (data.key) {
         case "show:watchlist":
-          invalidate("invalidate:watchlisted:show");
+          return invalidate("invalidate:watchlisted:show");
         case "movie:watchlist":
-          invalidate("invalidate:watchlisted:movie");
+          return invalidate("invalidate:watchlisted:movie");
+        case "episode:watched":
+          /**
+           * FIXME: add specific check-in invalidation when we have a proper marker for it
+           */
+          invalidate("invalidate:check_in");
+          invalidate("invalidate:mark_as_watched:episode");
+          break;
+        case "movie:watched":
+          /**
+           * FIXME: add specific check-in invalidation when we have a proper marker for it
+           */
+          invalidate("invalidate:check_in");
+          invalidate("invalidate:mark_as_watched:movie");
           break;
         default:
           print(LogLevel.Log, "warn", "WS Warning: Unknown key", data.key);
