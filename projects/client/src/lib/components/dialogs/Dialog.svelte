@@ -74,7 +74,7 @@
     background: var(--cm-background-88);
     opacity: 0;
 
-    @include backdrop-filter-blur(var(--ni-8));
+    backdrop-filter: blur(var(--ni-8));
   }
 
   @keyframes dialogOpen {

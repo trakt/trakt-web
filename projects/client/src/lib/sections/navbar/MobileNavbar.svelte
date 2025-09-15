@@ -97,7 +97,7 @@
       height: calc(var(--mobile-navbar-height) + var(--search-height));
     }
 
-    @include backdrop-filter-blur(8px);
+    backdrop-filter: blur(var(--ni-8));
   }
 
   .trakt-mobile-navbar-links {

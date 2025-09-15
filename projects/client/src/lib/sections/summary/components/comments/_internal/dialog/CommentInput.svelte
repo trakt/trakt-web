@@ -121,7 +121,7 @@
 
     transition: border-color var(--transition-increment) ease-in-out;
 
-    @include backdrop-filter-blur(var(--ni-4));
+    backdrop-filter: blur(var(--ni-4));
 
     textarea {
       all: unset;

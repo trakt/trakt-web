@@ -98,7 +98,7 @@
       line-height: 1;
     }
 
-    @include backdrop-filter-blur(var(--ni-16));
+    backdrop-filter: blur(var(--ni-16));
 
     @include for-mobile {
       padding-left: var(--ni-24);
@@ -123,7 +123,6 @@
     bottom: 0;
 
     background-color: var(--cm-background-cookie-notice);
-
-    @include backdrop-filter-blur(var(--ni-8));
+    backdrop-filter: blur(var(--ni-8));
   }
 </style>

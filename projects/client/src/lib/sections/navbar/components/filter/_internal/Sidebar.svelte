@@ -111,7 +111,7 @@
     border-top-left-radius: var(--border-radius-m);
     border-bottom-left-radius: var(--border-radius-m);
 
-    @include backdrop-filter-blur(var(--ni-12));
+    backdrop-filter: blur(var(--ni-12));
 
     @include for-mobile {
       top: initial;

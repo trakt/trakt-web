@@ -274,7 +274,7 @@
         &::-webkit-scrollbar-thumb {
           background-color: var(--shade-300);
           border-radius: var(--border-radius-xs);
-          @include backdrop-filter-blur(var(--ni-4));
+          backdrop-filter: blur(var(--ni-4));
         }
       }
     }
