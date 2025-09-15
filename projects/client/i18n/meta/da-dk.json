@@ -1926,14 +1926,8 @@
     "link_text_advanced_settings": {
       "default": "Avanceret"
     },
-    "list_title_most_searched_media": {
-      "default": "Mest søgte medier"
-    },
-    "list_title_most_searched_movies": {
-      "default": "Mest søgte film"
-    },
-    "list_title_most_searched_shows": {
-      "default": "Mest søgte serier"
+    "list_title_most_popular_searches": {
+      "default": "Mest populære søgninger"
     },
     "list_title_birthdays_this_month": {
       "default": "Fødselsdage denne måned"

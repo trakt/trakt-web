@@ -5412,32 +5412,15 @@
         "ios"
       ]
     },
-    "list_title_most_searched_media": {
-      "default": "Most searched media",
-      "description": "Title for lists containing the most searched media.",
+    "list_title_most_popular_searches": {
+      "default": "Most Popular Searches",
+      "description": "Title for lists containing the most popular media, movies, or show searches.",
       "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_title_most_searched_movies": {
-      "default": "Most searched movies",
-      "description": "Title for lists containing the most searched movies.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_title_most_searched_shows": {
-      "default": "Most searched shows",
-      "description": "Title for lists containing the most searched shows.",
-      "exclude": [
-        "android",
         "ios"
       ]
     },
     "list_title_birthdays_this_month": {
-      "default": "Birthdays this month",
+      "default": "Birthdays This Month",
       "description": "Title for lists containing the birthdays this month.",
       "exclude": [
         "android",
