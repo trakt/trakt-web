@@ -101,6 +101,7 @@ module.exports = {
         'user',
         'watchlist',
         'watched',
+        'ws',
         'streaming',
         'worker',
         'tags',

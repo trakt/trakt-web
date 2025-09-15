@@ -21,6 +21,7 @@
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
+  import WSInvalidator from "$lib/features/websocket/WSInvalidator.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
@@ -133,6 +134,7 @@
         isAuthorizedLegacy={data.auth.isAuthorized}
         isAuthorized={data.oidcAuth.isAuthorized}
       >
+        <WSInvalidator />
         <CookieConsentProvider
           hasConsent={data.hasConsent || data.device === "tv"}
           device={data.device}

@@ -10,7 +10,10 @@
   const { children, isAuthorizedLegacy, isAuthorized }: AuthProviderProps =
     $props();
 
-  createAuthContext({ isAuthorized: isAuthorizedLegacy || isAuthorized });
+  createAuthContext({
+    isAuthorized: isAuthorizedLegacy || isAuthorized,
+    token: null,
+  });
 
   const { isInitializing } = initializeUserManager(isAuthorizedLegacy);
 </script>
