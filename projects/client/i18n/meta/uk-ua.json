@@ -1926,14 +1926,8 @@
     "link_text_advanced_settings": {
       "default": "Розширене"
     },
-    "list_title_most_searched_media": {
-      "default": "Найпопулярніші медіа"
-    },
-    "list_title_most_searched_movies": {
-      "default": "Найпопулярніші фільми"
-    },
-    "list_title_most_searched_shows": {
-      "default": "Найпопулярніші серіали"
+    "list_title_most_popular_searches": {
+      "default": "Найпопулярніші пошуки"
     },
     "list_title_birthdays_this_month": {
       "default": "Дні народження цього місяця"

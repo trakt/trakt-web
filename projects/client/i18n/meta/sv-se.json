@@ -1926,17 +1926,11 @@
     "link_text_advanced_settings": {
       "default": "Avancerat"
     },
-    "list_title_most_searched_media": {
-      "default": "Mest sökta media"
-    },
-    "list_title_most_searched_movies": {
-      "default": "Mest sökta filmer"
-    },
-    "list_title_most_searched_shows": {
-      "default": "Mest sökta serier"
+    "list_title_most_popular_searches": {
+      "default": "Mest populära sökningar"
     },
     "list_title_birthdays_this_month": {
-      "default": "Födelsedagar den här månaden"
+      "default": "Födelsedagar denna månad"
     }
   }
 }

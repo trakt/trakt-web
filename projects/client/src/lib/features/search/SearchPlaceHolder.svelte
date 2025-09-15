@@ -10,14 +10,10 @@
 
   const title = $derived.by(() => {
     switch ($mode) {
-      case "media":
-        return m.list_title_most_searched_media();
-      case "movie":
-        return m.list_title_most_searched_movies();
-      case "show":
-        return m.list_title_most_searched_shows();
       case "people":
         return m.list_title_birthdays_this_month();
+      default:
+        return m.list_title_most_popular_searches();
     }
   });
 </script>
