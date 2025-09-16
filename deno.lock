@@ -46,6 +46,7 @@
     "npm:sass-embedded@1.91.0": "1.91.0",
     "npm:svelte-check@4.3.1": "4.3.1_svelte@5.38.6__acorn@8.15.0_typescript@5.8.3",
     "npm:svelte@5.38.6": "5.38.6_acorn@8.15.0",
+    "npm:ts-retry@6": "6.0.0",
     "npm:typescript-eslint@8.41.0": "8.41.0_eslint@9.34.0_typescript@5.8.3_@typescript-eslint+parser@8.41.0__eslint@9.34.0__typescript@5.8.3",
     "npm:typescript@5.8.3": "5.8.3",
     "npm:vite-plugin-pwa@1.0.3": "1.0.3_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_workbox-build@7.3.0__ajv@8.17.1__@babel+core@7.28.3__rollup@2.79.2_workbox-window@7.3.0_sass-embedded@1.91.0",
@@ -7060,6 +7061,9 @@
     "ts-deepmerge@6.2.1": {
       "integrity": "sha512-8CYSLazCyj0DJDpPIxOFzJG46r93uh6EynYjuey+bxcLltBeqZL7DMfaE5ZPzZNFlav7wx+2TDa/mBl8gkTYzw=="
     },
+    "ts-retry@6.0.0": {
+      "integrity": "sha512-WsVRE/P+VNYbiQC3E6TeIXBRCQj7vzjN4MlXd84AC88K7WwuWShN7A3Q/QSV/yd1hjO8qn2Cevdqny2HMwKUaA=="
+    },
     "tslib@2.8.1": {
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
     },
@@ -7856,6 +7860,7 @@
             "npm:sass-embedded@1.91.0",
             "npm:svelte-check@4.3.1",
             "npm:svelte@5.38.6",
+            "npm:ts-retry@6",
             "npm:typescript-eslint@8.41.0",
             "npm:typescript@5.8.3",
             "npm:vite-plugin-pwa@1.0.3",
