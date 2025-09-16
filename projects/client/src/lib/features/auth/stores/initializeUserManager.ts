@@ -5,6 +5,7 @@ import { onMount } from 'svelte';
 import { derived, readable, writable } from 'svelte/store';
 import { getOidcConfig } from '../getOidcConfig.ts';
 import { setToken, type Token } from '../token/index.ts';
+import { postToken } from './_internal/postToken.ts';
 import { getAuthContext } from './getAuthContext.ts';
 import { setUserManager } from './userManager.ts';
 
@@ -15,17 +16,6 @@ function mapToToken(user: User | null): Token {
     value: user?.access_token ?? null,
     expiresAt,
   };
-}
-
-function postToken({ value, expiresAt }: Token) {
-  fetch('/api/store-token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      token: value,
-      expiresAt,
-    }),
-  });
 }
 
 export function initializeUserManager(hasLegacyAuth: boolean) {
