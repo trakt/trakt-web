@@ -3,6 +3,7 @@ import {
   EpisodeFinaleType,
   EpisodePremiereType,
 } from '$lib/requests/models/EpisodeType.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { describe, expect, it } from 'vitest';
 import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery.ts';
 import { coalesceEpisodes } from './coalesceEpisodes.ts';
@@ -189,8 +190,8 @@ describe('coalesceEpisodes', () => {
 
     const result = coalesceEpisodes(episodes);
 
-    expect(result[0].airDate).toEqual(new Date('2024-01-01'));
-    expect(result[1].airDate).toEqual(new Date('2024-01-08'));
+    expect(assertDefined(result[0]).airDate).toEqual(new Date('2024-01-01'));
+    expect(assertDefined(result[1]).airDate).toEqual(new Date('2024-01-08'));
   });
 
   describe('coalesce: season premiere and season finale', () => {
@@ -207,5 +208,36 @@ describe('coalesceEpisodes', () => {
 
   describe('coalesce: series premiere and season finale', () => {
     runCommonTests('series_premiere', 'season_finale');
+  });
+
+  it('should coalesce multiple episodes', () => {
+    const show = { id: 1, title: 'Test Show' };
+    const episodes = [
+      {
+        show,
+        season: 1,
+        episode: 1,
+        type: 'season_premiere',
+        airDate: new Date('2024-01-01'),
+      } as unknown as UpcomingEpisodeEntry,
+      {
+        show,
+        season: 1,
+        episode: 2,
+        type: 'standard',
+        airDate: new Date('2024-01-01'),
+      } as unknown as UpcomingEpisodeEntry,
+    ];
+
+    const result = coalesceEpisodes(episodes);
+
+    expect(result).toHaveLength(1);
+    expect(result[0]).toEqual({
+      ...episodes[0],
+      episodes,
+      type: EpisodeComputedType.multiple_episodes,
+      season: 1,
+      show,
+    });
   });
 });
