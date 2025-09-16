@@ -200,4 +200,37 @@ describe('coalesceBinges', () => {
     expect(activity.type).toBe('episode');
     expect(activity.episode.id).toBe(1);
   });
+
+  it('should sort coalesced binges', () => {
+    const activities = [
+      makeEpisodeActivity({
+        id: 1,
+        showId: 1,
+        episodeId: 3,
+        userSlugs: [USER_SLUG_ALICE],
+        activityAt: new Date('2024-01-01T05:00:00'),
+      }),
+      makeEpisodeActivity({
+        id: 2,
+        showId: 1,
+        episodeId: 2,
+        userSlugs: [USER_SLUG_ALICE],
+        activityAt: new Date('2024-01-01T04:00:00'),
+      }),
+      makeEpisodeActivity({
+        id: 3,
+        showId: 1,
+        episodeId: 1,
+        userSlugs: [USER_SLUG_ALICE],
+        activityAt: new Date('2024-01-01T03:00:00'),
+      }),
+    ];
+
+    const result = coalesceBinges(activities);
+    const activity = assertDefined(result[0]) as EpisodeActivity;
+    const coalescedEpisodes = assertDefined(activity.episode.episodes);
+
+    const episodeNumbers = coalescedEpisodes.map((ep) => ep.number);
+    expect(episodeNumbers).toEqual([1, 2, 3]);
+  });
 });
