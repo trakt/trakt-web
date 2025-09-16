@@ -10,7 +10,7 @@ function groupEpisodeActivities(activities: EpisodeActivity[]) {
   return activities.reduce((acc, activity) => {
     const userKey = activity.users.map((u) => u.slug).join(',');
     const dayKey = getDayKey(activity.activityAt);
-    const key = `${activity.episode.show.id}_${userKey}_${dayKey}`;
+    const key = `${activity.show.id}_${userKey}_${dayKey}`;
 
     acc[key] = acc[key] ? [...acc[key], activity] : [activity];
     return acc;
@@ -33,7 +33,10 @@ export function coalesceBinges(activities: SocialActivity[]): SocialActivity[] {
       const groupActivity = assertDefined(group.at(0));
       const episodesInGroup = group
         .sort((a, b) => a.activityAt.getTime() - b.activityAt.getTime())
-        .map((activity) => activity.episode);
+        .map((activity) => ({
+          ...activity.episode,
+          show: activity.show,
+        }));
 
       const coalesced = coalesceEpisodes(
         episodesInGroup,

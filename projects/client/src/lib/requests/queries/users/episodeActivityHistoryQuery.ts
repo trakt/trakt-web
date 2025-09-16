@@ -23,9 +23,8 @@ type EpisodeActivityHistoryParams = {
 export const EpisodeActivityHistorySchema = z.object({
   id: z.number(),
   watchedAt: z.date(),
-  episode: EpisodeEntrySchema.merge(z.object({
-    show: ShowEntrySchema,
-  })),
+  episode: EpisodeEntrySchema,
+  show: ShowEntrySchema,
   type: z.literal('episode'),
 });
 export type EpisodeActivityHistory = z.infer<
@@ -61,10 +60,8 @@ export function mapToEpisodeActivityHistory(
   return {
     id: historyEpisode.id,
     watchedAt: new Date(historyEpisode.watched_at),
-    episode: {
-      ...mapToEpisodeEntry(historyEpisode.episode),
-      show: mapToShowEntry(historyEpisode.show),
-    },
+    episode: mapToEpisodeEntry(historyEpisode.episode),
+    show: mapToShowEntry(historyEpisode.show),
     type: 'episode' as const,
   };
 }

@@ -23,7 +23,7 @@ function isSameEpisode(
     return false;
   }
 
-  return activityA.episode.show.id === activityB.episode.show.id &&
+  return activityA.show.id === activityB.show.id &&
     activityA.episode.id === activityB.episode.id;
 }
 
