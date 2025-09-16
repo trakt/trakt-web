@@ -2,6 +2,7 @@ import { bodyPortal } from '$lib/features/portal/_internal/bodyPortal.ts';
 import { onMount } from 'svelte';
 import { alignPopupContainer } from './alignPopupContainer.ts';
 import type { PopupPlacement } from './models/PopupPlacement.ts';
+import { resetPositionAttributes } from './resetPositionAttributes.ts';
 
 export function openPopupContainer(
   node: HTMLElement,
@@ -32,6 +33,7 @@ export function openPopupContainer(
 
   return {
     destroy() {
+      resetPositionAttributes(targetNode);
       observer.disconnect();
     },
   };
