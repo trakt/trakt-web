@@ -52,10 +52,8 @@ const mapToShowActivityHistory = (
 ) => ({
   id: historyShow.id,
   watchedAt: new Date(historyShow.watched_at),
-  episode: {
-    ...mapToEpisodeEntry(historyShow.episode),
-    show: mapToShowEntry(historyShow.show),
-  },
+  episode: mapToEpisodeEntry(historyShow.episode),
+  show: mapToShowEntry(historyShow.show),
   type: 'episode' as const,
 });
 

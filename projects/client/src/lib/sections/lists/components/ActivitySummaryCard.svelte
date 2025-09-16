@@ -22,7 +22,7 @@
     date={activityAt}
     episode={activity.episode}
     media={{
-      ...activity.episode.show,
+      ...activity.show,
       episode: {
         count: 0,
       },

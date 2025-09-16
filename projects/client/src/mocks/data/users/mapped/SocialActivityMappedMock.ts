@@ -17,9 +17,7 @@ export const SocialActivityMappedMock: SocialActivity[] = [
     activityAt: new Date('2025-01-31T23:12:41.000Z'),
     users: [UserProfileHarryMappedMock],
     type: 'episode',
-    episode: {
-      ...EpisodeSiloMappedMock,
-      show: ShowSiloMappedMock,
-    },
+    episode: EpisodeSiloMappedMock,
+    show: ShowSiloMappedMock,
   },
 ];

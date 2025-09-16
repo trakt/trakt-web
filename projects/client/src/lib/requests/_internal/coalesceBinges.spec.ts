@@ -51,9 +51,9 @@ describe('coalesceBinges', () => {
         season: 1,
         number: episodeId,
         type: 'standard',
-        show: {
-          id: showId,
-        },
+      },
+      show: {
+        id: showId,
       },
     } as EpisodeActivity;
   }

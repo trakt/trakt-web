@@ -39,10 +39,8 @@ function mapToSocialActivity(
       return {
         ...common,
         type: 'episode',
-        episode: {
-          ...mapToEpisodeEntry(assertDefined(response.episode)),
-          show: mapToShowEntry(assertDefined(response.show)),
-        },
+        episode: mapToEpisodeEntry(assertDefined(response.episode)),
+        show: mapToShowEntry(assertDefined(response.show)),
       };
   }
 }
