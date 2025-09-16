@@ -1538,6 +1538,20 @@
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · E{episodeNumber}"
     },
+    "episode_footer_season_episode_range": {
+      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      }
+    },
     "translated_value_reaction_like": {
       "default": "Kan lide"
     },
@@ -1931,6 +1945,33 @@
     },
     "list_title_birthdays_this_month": {
       "default": "Fødselsdage denne måned"
+    },
+    "text_season_activity": {
+      "default": "{rangeLabel} af {title}",
+      "variables": {
+        "rangeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_last_day": {
+      "default": "sidste {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "text_next_day": {
+      "default": "næste {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
     }
   }
 }

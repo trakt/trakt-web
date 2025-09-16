@@ -5,6 +5,7 @@
 
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
+  import { DEFAULT_ACTIVITY_PAGE_SIZE } from "$lib/utils/constants.ts";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import RecentlyWatchedItem from "../history/RecentlyWatchedItem.svelte";
   import SocialActivityItem from "./_internal/SocialActivityItem.svelte";
@@ -33,7 +34,11 @@
   id={`${$activityType}-activity-list`}
   type="episode"
   useList={(params) =>
-    useActivityList({ ...params, activityType: $activityType })}
+    useActivityList({
+      ...params,
+      limit: DEFAULT_ACTIVITY_PAGE_SIZE,
+      activityType: $activityType,
+    })}
   {urlBuilder}
   drilldownLabel={m.button_label_view_all_social_activity()}
   title={m.list_title_activity()}

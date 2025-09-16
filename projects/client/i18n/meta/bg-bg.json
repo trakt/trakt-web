@@ -1538,6 +1538,20 @@
     "episode_footer_season_episode": {
       "default": "C{seasonNumber} · E{episodeNumber}"
     },
+    "episode_footer_season_episode_range": {
+      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      }
+    },
     "translated_value_reaction_like": {
       "default": "Харесва ми"
     },
@@ -1931,6 +1945,33 @@
     },
     "list_title_birthdays_this_month": {
       "default": "Рождени дни този месец"
+    },
+    "text_season_activity": {
+      "default": "{rangeLabel} на {title}",
+      "variables": {
+        "rangeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_last_day": {
+      "default": "миналия {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "text_next_day": {
+      "default": "следващия {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
     }
   }
 }

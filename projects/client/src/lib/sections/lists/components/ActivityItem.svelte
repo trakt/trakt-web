@@ -19,7 +19,7 @@
 {#if activity.type === "episode"}
   <EpisodeItem
     episode={activity.episode}
-    show={activity.show}
+    show={activity.episode.show}
     variant="activity"
     date={activityAt}
     {badge}

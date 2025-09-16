@@ -4,7 +4,7 @@ import { CreditCookieSchema } from './CreditCookieSchema.ts';
 import { EpisodeTypeSchema } from './EpisodeType.ts';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 
-export const EpisodeEntrySchema = z.object({
+const BaseEpisodeEntrySchema = z.object({
   id: z.number(),
   season: z.number(),
   number: z.number(),
@@ -20,6 +20,11 @@ export const EpisodeEntrySchema = z.object({
   year: z.number(),
   certification: z.null().optional(),
   creditCookies: CreditCookieSchema.array(),
+});
+
+// FIXME: discriminated union; only for computed types
+export const EpisodeEntrySchema = BaseEpisodeEntrySchema.extend({
+  episodes: BaseEpisodeEntrySchema.array().nullish(),
 });
 
 export type EpisodeEntry = z.infer<typeof EpisodeEntrySchema>;

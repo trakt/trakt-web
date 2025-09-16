@@ -8,14 +8,16 @@ import { episodeActivityTitle } from '$lib/utils/intl/episodeActivityTitle.ts';
 import type { MonthToDateDetails } from '../../models/MonthToDateDetails.ts';
 
 function mapToCover(activity: MovieActivityHistory | EpisodeActivityHistory) {
-  const media = activity.type === 'movie' ? activity.movie : activity.show;
+  const media = activity.type === 'movie'
+    ? activity.movie
+    : activity.episode.show;
   return media.cover?.url.thumb || DEFAULT_COVER;
 }
 
 function mapToTitle(activity: MovieActivityHistory | EpisodeActivityHistory) {
   return activity.type === 'movie'
     ? activity.movie.title
-    : episodeActivityTitle(activity.episode, activity.show);
+    : episodeActivityTitle(activity.episode, activity.episode.show);
 }
 
 const NOTHING_WATCHED_DETAILS: MonthToDateDetails = {
@@ -40,7 +42,8 @@ export function mapToMonthToDateDetails(
 
   const movieCount = movies.length;
   const episodeCount = episodes.length;
-  const showCount = new Set(episodes.map((e) => e.show.slug)).size;
+  const showCount =
+    new Set(episodes.map((activity) => activity.episode.show.slug)).size;
 
   const firstWatchActivity = assertDefined(allActivity.at(0));
   return {
