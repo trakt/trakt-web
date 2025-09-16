@@ -1688,6 +1688,9 @@
     "text_cta_watchlist_shows": {
       "default": "Se det. Lagre det. Se det senere. Begynn å kuratere din personlige serieliste."
     },
+    "text_cta_personal_lists": {
+      "default": "Dine lister. Dine regler. Samle og organiser filmer og serier på din måte."
+    },
     "text_cta_favorites": {
       "default": "Dine favoritter. Din historie. Sett søkelyset på filmene og seriene som gjorde et inntrykk."
     },

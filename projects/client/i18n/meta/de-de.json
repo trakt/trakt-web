@@ -1688,6 +1688,9 @@
     "text_cta_watchlist_shows": {
       "default": "Anschauen. Speichern. Später ansehen. Beginne, deine persönliche Serienliste zu erstellen."
     },
+    "text_cta_personal_lists": {
+      "default": "Deine Listen. Deine Regeln. Sammle und organisiere Filme und Serien ganz nach deinem Geschmack."
+    },
     "text_cta_favorites": {
       "default": "Deine Favoriten. Deine Geschichte. Präsentiere die Filme und Serien, die dich geprägt haben."
     },

@@ -1688,6 +1688,9 @@
     "text_cta_watchlist_shows": {
       "default": "見る。保存する。後で見る。あなただけのドラマリストを作り始めましょう。"
     },
+    "text_cta_personal_lists": {
+      "default": "あなたのリスト。あなたのルール。映画やドラマを思い通りに収集・整理しましょう。"
+    },
     "text_cta_favorites": {
       "default": "あなたの好き。あなたの物語。心に残った映画やドラマをスポットライト。"
     },

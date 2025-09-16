@@ -1688,6 +1688,9 @@
     "text_cta_watchlist_shows": {
       "default": "Bekijk het. Sla het op. Kijk het later. Begin met het samenstellen van je persoonlijke serie watchlist."
     },
+    "text_cta_personal_lists": {
+      "default": "Jouw lijsten. Jouw regels. Verzamel en organiseer films en series op jouw manier."
+    },
     "text_cta_favorites": {
       "default": "Je favorieten. Jouw verhaal. Zet de films en series in de schijnwerpers die indruk hebben gemaakt."
     },

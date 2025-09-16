@@ -4796,6 +4796,13 @@
         "ios"
       ]
     },
+    "text_cta_personal_lists": {
+      "default": "Your lists. Your rules. Collect and organize movies and shows your way.",
+      "description": "Call to action text shown in the empty personal lists screen, encouraging users to create a custom list for organizing their shows and movies.",
+      "exclude": [
+        "ios"
+      ]
+    },
     "text_cta_favorites": {
       "default": "Your faves. Your story. Spotlight the movies and shows that left a mark.",
       "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies and shows.",
