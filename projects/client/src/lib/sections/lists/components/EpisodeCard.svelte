@@ -13,7 +13,7 @@
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
-  import { seasonLabel } from "$lib/utils/intl/seasonLabel";
+  import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps } from "./EpisodeCardProps";
 
@@ -27,10 +27,10 @@
     ...rest
   }: EpisodeCardProps = $props();
 
-  const src = $derived(useEpisodeSpoilerImage({ episode, show }));
-
   const isShowContext = $derived("context" in rest && rest.context === "show");
   const isActivity = $derived(rest.variant === "activity");
+
+  const src = useEpisodeSpoilerImage({ episode, show });
 </script>
 
 <LandscapeCard>
@@ -81,7 +81,10 @@
         </p>
       </Link>
       <p class="trakt-card-subtitle ellipsis small">
-        {EpisodeIntlProvider.timestampText(rest.date)}
+        {EpisodeIntlProvider.timestampText({
+          type: episode.type,
+          date: rest.date,
+        })}
       </p>
     {/if}
 
@@ -95,13 +98,8 @@
         </p>
       </Link>
       <p class="trakt-card-subtitle ellipsis small">
-        {#if episode.type === EpisodeComputedType.full_season}
-          {seasonLabel(episode.season)}
-        {:else}
-          {episodeNumberLabel({
-            seasonNumber: episode.season,
-            episodeNumber: episode.number,
-          })}
+        {episodeSubtitle(episode)}
+        {#if !["multiple_episodes", "full_season"].includes(episode.type)}
           <Spoiler media={episode} {show} type="episode">
             - {episode.title}
           </Spoiler>

@@ -4386,6 +4386,25 @@
         "ios"
       ]
     },
+    "episode_footer_season_episode_range": {
+      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}",
+      "description": "Footer text for an episode, showing the season and episode range. The text should be as short and concise as possible, wherever possible use only the first letter.",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "translated_value_reaction_like": {
       "default": "Like",
       "description": "Text for the like reaction. The value is sent back from the Trakt API.",
@@ -5422,6 +5441,48 @@
     "list_title_birthdays_this_month": {
       "default": "Birthdays This Month",
       "description": "Title for lists containing the birthdays this month.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_season_activity": {
+      "default": "{rangeLabel} of {title}",
+      "description": "Text to indicate the season or range of a show in activity lists, e.g. 'Season 1 of Friends' or 'S1 · E1-E3 of Friends'.",
+      "variables": {
+        "rangeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_last_day": {
+      "default": "last {day}",
+      "description": "Text to indicate that something happened in the past, e.g. 'last Thursday'.",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_next_day": {
+      "default": "next {day}",
+      "description": "Text to indicate that something will happen in the future, e.g. 'next Thursday'.",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      },
       "exclude": [
         "android",
         "ios"

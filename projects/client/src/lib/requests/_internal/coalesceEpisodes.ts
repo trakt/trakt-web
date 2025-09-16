@@ -1,11 +1,19 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { getDayKey } from '$lib/utils/date/getDayKey.ts';
+import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { EpisodeComputedType } from '../models/EpisodeType.ts';
 import type { UpcomingEpisodeEntry } from '../queries/calendars/upcomingEpisodesQuery.ts';
 
-export function coalesceEpisodes(episodes: UpcomingEpisodeEntry[]) {
+export function coalesceEpisodes(
+  episodes: UpcomingEpisodeEntry[],
+  dateKeyFn?: (episode: EpisodeEntry) => string,
+) {
   const grouped = episodes.reduce(
     (acc, episode) => {
-      const key = `${episode.show.id}-${episode.season}`;
+      const dateKey = dateKeyFn
+        ? dateKeyFn(episode)
+        : getDayKey(episode.airDate);
+      const key = `${episode.show.id}-${episode.season}-${dateKey}`;
       acc[key] ??= {
         episodes: [],
         show: episode.show,
@@ -40,6 +48,17 @@ export function coalesceEpisodes(episodes: UpcomingEpisodeEntry[]) {
         type: EpisodeComputedType.full_season,
         season,
         show,
+      }];
+    }
+
+    // FIXME: add support for multiple episodes over multiple seasons
+    if (episodes.length > 1) {
+      return [{
+        ...assertDefined(episodes[0]),
+        type: EpisodeComputedType.multiple_episodes,
+        season,
+        show,
+        episodes,
       }];
     }
 

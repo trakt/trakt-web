@@ -4,12 +4,16 @@
   import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
+  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
+  import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
+  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { EpisodeCardProps, MediaCardProps } from "./MediaCardProps";
@@ -22,6 +26,16 @@
     media,
     ...rest
   }: MediaCardProps | EpisodeCardProps = $props();
+
+  const toEpisodeCover = (episode: EpisodeEntry) => {
+    switch (episode.type) {
+      case EpisodeComputedType.full_season:
+      case EpisodeComputedType.multiple_episodes:
+        return media.thumb.url;
+      default:
+        return episode.cover.url;
+    }
+  };
 </script>
 
 <Card
@@ -49,7 +63,7 @@
         {tag}
         title={rest.episode.title}
         alt={rest.episode.title}
-        src={rest.episode.cover.url ?? EPISODE_COVER_PLACEHOLDER}
+        src={toEpisodeCover(rest.episode) ?? EPISODE_COVER_PLACEHOLDER}
       />
     {/if}
 
@@ -78,10 +92,7 @@
     {#if rest.variant === "activity"}
       {#if rest.type === "episode"}
         <p class="trakt-card-title small ellipsis">
-          {episodeNumberLabel({
-            seasonNumber: rest.episode.season,
-            episodeNumber: rest.episode.number,
-          })} - {media.title}
+          {episodeActivityTitle(rest.episode, media)}
         </p>
       {:else}
         <p class="trakt-card-title small ellipsis">
@@ -89,7 +100,14 @@
         </p>
       {/if}
       <p class="trakt-card-subtitle small ellipsis">
-        {toHumanDate(new Date(), rest.date, getLocale())}
+        {#if rest.type === "episode"}
+          {EpisodeIntlProvider.timestampText({
+            type: rest.episode.type,
+            date: rest.date,
+          })}
+        {:else}
+          {toHumanDate(new Date(), rest.date, getLocale())}
+        {/if}
       </p>
     {:else if rest.type === "episode"}
       <p class="trakt-card-title small ellipsis">

@@ -4,29 +4,19 @@ import { episodeNumberLabel } from './episodeNumberLabel.ts';
 import { multiEpisodeLabel } from './multiEpisodeLabel.ts';
 import { seasonLabel } from './seasonLabel.ts';
 
-type Show = {
-  title: string;
-};
-
-export function episodeActivityTitle(
-  episode: EpisodeEntry,
-  show: Show,
-) {
+export function episodeSubtitle(episode: EpisodeEntry) {
   switch (episode.type) {
     case EpisodeComputedType.full_season:
-      return seasonLabel(episode.season, show.title);
+      return seasonLabel(episode.season);
     case EpisodeComputedType.multiple_episodes:
       return multiEpisodeLabel(
         episode.episodes ?? [],
         episode.season,
-        show.title,
       );
     default:
-      return `${
-        episodeNumberLabel({
-          seasonNumber: episode.season,
-          episodeNumber: episode.number,
-        })
-      } - ${show.title}`;
+      return episodeNumberLabel({
+        seasonNumber: episode.season,
+        episodeNumber: episode.number,
+      });
   }
 }

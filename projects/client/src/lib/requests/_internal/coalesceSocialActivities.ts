@@ -1,5 +1,6 @@
 import { time } from '$lib/utils/timing/time.ts';
 import type { SocialActivity } from '../models/SocialActivity.ts';
+import { coalesceBinges } from './coalesceBinges.ts';
 
 export const ACTIVITY_COALESCE_WINDOW = time.minutes(10);
 
@@ -22,7 +23,7 @@ function isSameEpisode(
     return false;
   }
 
-  return activityA.show.id === activityB.show.id &&
+  return activityA.episode.show.id === activityB.episode.show.id &&
     activityA.episode.id === activityB.episode.id;
 }
 
@@ -44,7 +45,9 @@ function isSimilarActivity(
 export function coalesceSocialActivities(
   activities: SocialActivity[],
 ): SocialActivity[] {
-  return activities.reduce((acc, activity) => {
+  const coalescedActivities = coalesceBinges(activities);
+
+  return coalescedActivities.reduce((acc, activity) => {
     const similarActivity = acc.find((currentActivity) =>
       isSimilarActivity(currentActivity, activity)
     );

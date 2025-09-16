@@ -1538,6 +1538,20 @@
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · É{episodeNumber}"
     },
+    "episode_footer_season_episode_range": {
+      "default": "S{seasonNumber} · É{startEpisode}-{endEpisode}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      }
+    },
     "translated_value_reaction_like": {
       "default": "J'aime"
     },
@@ -1931,6 +1945,33 @@
     },
     "list_title_birthdays_this_month": {
       "default": "Anniversaires ce mois-ci"
+    },
+    "text_season_activity": {
+      "default": "{rangeLabel} de {title}",
+      "variables": {
+        "rangeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_last_day": {
+      "default": "dernier {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "text_next_day": {
+      "default": "prochain {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
     }
   }
 }

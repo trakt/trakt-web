@@ -12,7 +12,7 @@ const EpisodePremiereTypeSchema = z.enum([
 ]);
 const EpisodeUnknownTypeSchema = z.enum(['unknown']);
 const EpisodeStandardTypeSchema = z.enum(['standard']);
-const EpisodeComputedTypeSchema = z.enum(['full_season']);
+const EpisodeComputedTypeSchema = z.enum(['full_season', 'multiple_episodes']);
 
 export const EpisodeTypeSchema = z.union([
   EpisodeFinaleTypeSchema,

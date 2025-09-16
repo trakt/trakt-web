@@ -49,7 +49,8 @@ describe('coalesceSocialActivities', () => {
     const coalesced = coalesceSocialActivities([activityA, activityB]);
 
     expect(coalesced).toHaveLength(1);
-    expect(coalesced.at(0)?.users).toEqual([userB, userA]);
+    expect(coalesced.at(0)?.users).toContain(userA);
+    expect(coalesced.at(0)?.users).toContain(userB);
   });
 
   it('should not coalesce activities that are too far apart', () => {
@@ -67,7 +68,7 @@ describe('coalesceSocialActivities', () => {
     const activityB = {
       ...activityA,
       users: [userB],
-      activityAt: new Date(now.getTime() + ACTIVITY_COALESCE_WINDOW * 2),
+      activityAt: new Date(now.getTime() - ACTIVITY_COALESCE_WINDOW * 2),
     };
 
     const coalesced = coalesceSocialActivities([activityA, activityB]);

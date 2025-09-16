@@ -17,12 +17,14 @@ export const SocialActivityEpisodeSchema = z.object({
   activityAt: z.date(),
   type: z.literal('episode'),
   users: z.array(UserProfileSchema),
-  show: ShowEntrySchema,
-  episode: EpisodeEntrySchema,
+  episode: EpisodeEntrySchema.merge(z.object({
+    show: ShowEntrySchema,
+  })),
 });
 
 export const SocialActivitySchema = z.discriminatedUnion('type', [
   SocialActivityMovieSchema,
   SocialActivityEpisodeSchema,
 ]);
+export type EpisodeActivity = z.infer<typeof SocialActivityEpisodeSchema>;
 export type SocialActivity = z.infer<typeof SocialActivitySchema>;

@@ -27,7 +27,7 @@ describe('coalesceEpisodes', () => {
           season: 1,
           episode: 10,
           type: finaleType,
-          airDate: new Date('2024-03-01'),
+          airDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
       ];
 
@@ -114,14 +114,14 @@ describe('coalesceEpisodes', () => {
           season: 1,
           episode: 10,
           type: finaleType,
-          airDate: new Date('2024-03-01'),
+          airDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
         {
           show: show2,
           season: 1,
           episode: 10,
           type: finaleType,
-          airDate: new Date('2024-03-01'),
+          airDate: new Date('2024-01-01'),
         } as unknown as UpcomingEpisodeEntry,
       ];
 

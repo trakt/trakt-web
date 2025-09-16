@@ -39,8 +39,10 @@ function mapToSocialActivity(
       return {
         ...common,
         type: 'episode',
-        show: mapToShowEntry(assertDefined(response.show)),
-        episode: mapToEpisodeEntry(assertDefined(response.episode)),
+        episode: {
+          ...mapToEpisodeEntry(assertDefined(response.episode)),
+          show: mapToShowEntry(assertDefined(response.show)),
+        },
       };
   }
 }
@@ -68,6 +70,7 @@ export const socialActivityQuery = defineQuery({
   dependencies: (params) => [params.limit, params.page],
   request: socialActivityRequest,
   mapper: (response) => {
+    // FIXME: automatically fetch more if coalesced
     const activities = response.body.map(mapToSocialActivity);
     return {
       entries: coalesceSocialActivities(activities),

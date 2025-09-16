@@ -1538,6 +1538,20 @@
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · A{episodeNumber}"
     },
+    "episode_footer_season_episode_range": {
+      "default": "S{seasonNumber} · A{startEpisode}-{endEpisode}",
+      "variables": {
+        "seasonNumber": {
+          "type": "number"
+        },
+        "startEpisode": {
+          "type": "number"
+        },
+        "endEpisode": {
+          "type": "number"
+        }
+      }
+    },
     "translated_value_reaction_like": {
       "default": "Gillar"
     },
@@ -1931,6 +1945,33 @@
     },
     "list_title_birthdays_this_month": {
       "default": "Födelsedagar denna månad"
+    },
+    "text_season_activity": {
+      "default": "{rangeLabel} av {title}",
+      "variables": {
+        "rangeLabel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "text_last_day": {
+      "default": "senaste {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
+    },
+    "text_next_day": {
+      "default": "nästa {day}",
+      "variables": {
+        "day": {
+          "type": "string"
+        }
+      }
     }
   }
 }
