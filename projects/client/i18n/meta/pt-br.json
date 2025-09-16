@@ -1702,6 +1702,9 @@
     "text_cta_watchlist_shows": {
       "default": "Veja. Salve. Assista depois. Comece a criar sua lista de séries."
     },
+    "text_cta_personal_lists": {
+      "default": "Suas listas. Suas regras. Colecione e organize filmes e séries do seu jeito!"
+    },
     "text_cta_favorites": {
       "default": "Seus favoritos. Sua história. Destaque os filmes e séries que te marcaram."
     },

@@ -1702,6 +1702,9 @@
     "text_cta_watchlist_shows": {
       "default": "See it. Save it. Watch it later. Start curating your personal show queue."
     },
+    "text_cta_personal_lists": {
+      "default": "Your lists. Your rules. Collect and organise movies and shows your way."
+    },
     "text_cta_favorites": {
       "default": "Your faves. Your story. Spotlight the movies and shows that left a mark."
     },

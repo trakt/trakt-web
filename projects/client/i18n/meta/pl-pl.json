@@ -1702,6 +1702,9 @@
     "text_cta_watchlist_shows": {
       "default": "Zobacz to. Zapisz to. Obejrzyj później. Zacznij kuratorować swoją osobistą listę seriali."
     },
+    "text_cta_personal_lists": {
+      "default": "Twoje listy. Twoje zasady. Zbieraj i organizuj filmy i seriale po swojemu."
+    },
     "text_cta_favorites": {
       "default": "Twoi ulubieńcy. Twoja historia. Pokaż filmy i seriale, które zrobiły wrażenie."
     },

@@ -1702,6 +1702,9 @@
     "text_cta_watchlist_shows": {
       "default": "Vezi. Salvează. Uită-te mai târziu. Începe să-ți creezi lista de seriale."
     },
+    "text_cta_personal_lists": {
+      "default": "Listele tale. Regulile tale. Colecționează și organizează filmele și serialele așa cum dorești."
+    },
     "text_cta_favorites": {
       "default": "Preferatele tale. Povestea ta. Pune în lumina reflectoarelor filmele și serialele care te-au marcat."
     },

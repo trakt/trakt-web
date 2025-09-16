@@ -1702,6 +1702,9 @@
     "text_cta_watchlist_shows": {
       "default": "Véala. Guárdela. Mírela más tarde. Empieza a crear tu lista de series personal."
     },
+    "text_cta_personal_lists": {
+      "default": "Tus listas. Tus reglas. Colecciona y organiza películas y series a tu manera."
+    },
     "text_cta_favorites": {
       "default": "Tus favoritos. Tu historia. Destaca las películas y series que te han marcado."
     },
