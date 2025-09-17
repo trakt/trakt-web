@@ -1,13 +1,12 @@
 <script lang="ts">
-  import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import CreditsList from "../lists/CreditsList.svelte";
-  import SummaryContainer from "./components/summary/SummaryContainer.svelte";
-  import SummaryHeader from "./components/summary/SummaryHeader.svelte";
-  import SummaryOverview from "./components/summary/SummaryOverview.svelte";
-  import SummaryTitle from "./components/summary/SummaryTitle.svelte";
+  import PeopleSummary from "./components/people/PeopleSummary.svelte";
+  import PeopleSummaryV2 from "./components/people/v2/PeopleSummary.svelte";
 
   const {
     person,
@@ -16,23 +15,19 @@
   } = $props();
 </script>
 
-<SummaryContainer>
-  {#snippet poster()}
-    <SummaryPoster src={person.headshot.url.medium} alt={person.name} />
-  {/snippet}
-
-  <SummaryHeader>
-    {#snippet headerActions()}
-      <ShareButton
-        title={person.name}
-        textFactory={({ title: name }) => m.text_share_person({ name })}
-      />
+<RenderFor audience="all" device={["mobile"]}>
+  <RenderForFeature flag={FeatureFlag.SummaryV2}>
+    {#snippet enabled()}
+      <PeopleSummaryV2 {person} />
     {/snippet}
-    <SummaryTitle title={person.name} />
-  </SummaryHeader>
 
-  <SummaryOverview title={person.name} overview={person.biography} />
-</SummaryContainer>
+    <PeopleSummary {person} />
+  </RenderForFeature>
+</RenderFor>
+
+<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+  <PeopleSummary {person} />
+</RenderFor>
 
 <CreditsList title={m.list_title_movie_credits()} type="movie" {person} />
 <CreditsList title={m.list_title_show_credits()} type="show" {person} />
