@@ -7,6 +7,7 @@
   import {
     toRottenAudienceRating,
     toRottenCriticRating,
+    toRottenPercentage,
   } from "$lib/utils/formatting/number/toRottenTomatoRating";
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
   import PopcornIcon from "../icons/PopcornIcon.svelte";
@@ -48,14 +49,14 @@
     {/snippet}
   </RatingItem>
 
-  <RatingItem rating={rotten?.critic} url={rotten?.url}>
+  <RatingItem rating={toRottenPercentage(rotten?.critic)} url={rotten?.url}>
     <RottenIcon style={toRottenCriticRating(rotten?.critic)} />
     {#snippet superscript()}
       {toRottenCriticRating(rotten?.critic ?? 0)}
     {/snippet}
   </RatingItem>
 
-  <RatingItem rating={rotten?.audience} url={rotten?.url}>
+  <RatingItem rating={toRottenPercentage(rotten?.audience)} url={rotten?.url}>
     <PopcornIcon style={toRottenAudienceRating(rotten?.audience)} />
     {#snippet superscript()}
       {toRottenAudienceRating(rotten?.audience ?? 0)}

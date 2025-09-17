@@ -25,8 +25,8 @@ export function mapToMediaRating(
     }
 
     return {
-      critic: rotten.rating,
-      audience: rotten.user_rating,
+      critic: rotten.rating / 100,
+      audience: rotten.user_rating && rotten.user_rating / 100,
       url: prependHttps(rotten.link),
     };
   };
