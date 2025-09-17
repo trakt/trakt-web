@@ -1,60 +1,40 @@
-<script>
+<script lang="ts">
+  import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
+  import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
+  import TrackIcon from "$lib/components/TrackIcon.svelte";
   import { LandingStepType } from "../StepsIntl";
-  import { StepsIntlProvider } from "../StepsIntlProvider";
-  import JoinForFreeButton from "./JoinForFreeButton.svelte";
   import Step from "./Step.svelte";
-
-  const steps = [
-    LandingStepType.Discover,
-    LandingStepType.Track,
-    LandingStepType.Share,
-  ];
 </script>
 
 <div class="trakt-landing-steps">
-  {#each steps as step, index}
-    <Step {step} i18n={StepsIntlProvider} number={index + 1} />
-  {/each}
-  <div class="trakt-landing-join">
-    <JoinForFreeButton />
-    <p class="meta-info secondary">*trakt does not provide streaming</p>
-  </div>
+  <Step step={LandingStepType.Discover}>
+    {#snippet icon()}
+      <DiscoverIcon />
+    {/snippet}
+  </Step>
+  <Step step={LandingStepType.Track}>
+    {#snippet icon()}
+      <TrackIcon />
+    {/snippet}
+  </Step>
+  <Step step={LandingStepType.Share}>
+    {#snippet icon()}
+      <ShareIcon />
+    {/snippet}
+  </Step>
 </div>
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
+<style>
   .trakt-landing-steps {
-    display: grid;
-    gap: var(--gap-xl);
-    margin-top: var(--ni-64);
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 
-    transition: margin var(--transition-increment) ease-in-out;
+    max-height: var(--ni-520);
 
-    :global(.trakt-button) {
-      width: fit-content;
-    }
+    gap: var(--gap-s);
 
-    @include for-tablet-lg-and-below {
-      margin-top: 0;
-    }
-
-    @include for-mobile {
-      display: flex;
-      gap: unset;
-      flex-direction: column;
-      height: min(
-        calc(95dvh - var(--navbar-height) - var(--mobile-navbar-height)),
-        var(--ni-640)
-      );
-      justify-content: space-between;
-    }
-  }
-
-  .trakt-landing-join {
-    display: grid;
-    gap: var(--gap-m);
-    padding-left: var(--ni-64);
+    margin-top: calc(-1 * var(--gap-s));
   }
 </style>

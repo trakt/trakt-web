@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
-  import LandingV2 from "$lib/sections/landing/v2/Landing.svelte";
+  import MobileLanding from "$lib/sections/landing/MobileLanding.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import ActivityList from "$lib/sections/lists/activity/ActivityList.svelte";
@@ -29,14 +29,18 @@
     <UpcomingList />
     <ActivityList />
   </RenderFor>
-  <RenderFor audience="public" navigation="default">
-    <RenderFor audience="public" device={["tablet-sm", "tablet-lg", "desktop"]}>
-      <Landing />
-    </RenderFor>
-    <RenderFor audience="public" device={["mobile"]}>
-      <LandingV2 />
-    </RenderFor>
+
+  <RenderFor
+    audience="public"
+    navigation="default"
+    device={["tablet-sm", "tablet-lg", "desktop"]}
+  >
+    <Landing />
   </RenderFor>
+  <RenderFor audience="public" navigation="default" device={["mobile"]}>
+    <MobileLanding />
+  </RenderFor>
+
   <RenderFor audience="public" navigation="dpad">
     <Redirect to={UrlBuilder.login.activate()} />
   </RenderFor>

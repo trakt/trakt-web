@@ -1,55 +1,89 @@
 <script lang="ts">
+  import Crossfade from "$lib/components/Crossfade.svelte";
+  import type { MediaType } from "$lib/requests/models/MediaType";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
-  import { useTrendingItems } from "../useTrendingItems";
-  import Phones from "./Phones.svelte";
+  import SkeletonCard from "$lib/sections/lists/components/SkeletonCard.svelte";
+  import { RANDOM_ITEM_COUNT, useTrendingItems } from "../useTrendingItems";
 
-  const { shows, movie, show } = $derived(useTrendingItems());
+  const { type, children }: { type: MediaType } & ChildrenProps = $props();
+
+  const { list } = $derived(useTrendingItems(type));
+
+  function isOddColumn(index: number): boolean {
+    return Math.floor(index / 2) % 2 === 0;
+  }
 </script>
 
-<div class="trakt-landing-preview">
-  <div class="trakt-landing-media-wrapper">
-    {#each $shows as show}
-      <DefaultMediaItem type="show" media={show} />
-    {/each}
+<div class="trakt-landing-items">
+  <div class="trakt-landing-items-header">
+    {@render children()}
   </div>
-  <div class="trakt-landing-phones">
-    <Phones />
-  </div>
-  <div class="trakt-landing-media-wrapper">
-    {#if $show}
-      <DefaultMediaItem type="show" media={$show} />
-    {/if}
-    {#if $movie}
-      <DefaultMediaItem type="movie" media={$movie} />
-    {/if}
-  </div>
+
+  <Crossfade showA={$list.length > 0}>
+    {#snippet childrenA()}
+      <div class="trakt-landing-trending-items">
+        {#each $list as item, index (item.id)}
+          <div
+            class="trakt-item-wrapper"
+            class:has-offset={!isOddColumn(index)}
+          >
+            <DefaultMediaItem {type} media={item} />
+          </div>
+        {/each}
+      </div>
+    {/snippet}
+
+    {#snippet childrenB()}
+      <div class="trakt-landing-trending-items">
+        {#each Array(RANDOM_ITEM_COUNT) as _, index (`skeleton_${index}`)}
+          <div
+            class="trakt-item-wrapper"
+            class:has-offset={!isOddColumn(index)}
+          >
+            <SkeletonCard variant="portrait" index={0} listIndex={10} />
+          </div>
+        {/each}
+      </div>
+    {/snippet}
+  </Crossfade>
 </div>
 
 <style>
-  .trakt-landing-preview {
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 1fr) 1fr;
-    position: relative;
-    margin-top: var(--ni-112);
+  .trakt-landing-items {
+    display: flex;
+    flex-direction: column;
+
     gap: var(--gap-l);
-    container-type: inline-size;
+  }
 
-    .trakt-landing-media-wrapper {
-      z-index: var(--layer-raised);
-      display: grid;
-      width: 100%;
-      justify-content: center;
-      gap: var(--gap-m);
+  .trakt-landing-items-header {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-m);
 
-      :global(.trakt-preview-item:first-child) {
-        margin-left: var(--ni-56);
-      }
+    :global(svg) {
+      width: var(--ni-40);
+      height: var(--ni-40);
+      flex-shrink: 0;
+
+      color: var(--purple-500);
     }
+  }
 
-    .trakt-landing-phones {
-      display: flex;
-      align-items: center;
-      z-index: var(--layer-base);
-    }
+  .trakt-landing-trending-items {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-flow: column;
+
+    justify-items: start;
+    justify-content: start;
+
+    gap: var(--gap-l);
+
+    height: calc(2 * var(--height-portrait-card) + var(--gap-l));
+  }
+
+  .trakt-item-wrapper.has-offset {
+    transform: translateY(var(--ni-32));
   }
 </style>

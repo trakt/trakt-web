@@ -153,28 +153,10 @@
                             <ThemeProvider theme={data.theme}>
                               <ListScrollHistoryProvider>
                                 <div class="trakt-layout-wrapper">
-                                  <RenderFor
-                                    audience="all"
-                                    device={[
-                                      "tablet-sm",
-                                      "tablet-lg",
-                                      "desktop",
-                                    ]}
-                                  >
+                                  <RenderFor audience="authenticated">
                                     <Navbar />
                                   </RenderFor>
-                                  <RenderFor
-                                    audience="authenticated"
-                                    device={["mobile"]}
-                                    navigation="default"
-                                  >
-                                    <Navbar />
-                                  </RenderFor>
-                                  <RenderFor
-                                    audience="public"
-                                    device={["mobile"]}
-                                    navigation="default"
-                                  >
+                                  <RenderFor audience="public">
                                     {#if !isOnHomePage}
                                       <Navbar />
                                     {/if}
@@ -182,52 +164,24 @@
                                   <div class="trakt-layout-content">
                                     {@render children()}
                                   </div>
-                                  <RenderFor
-                                    audience="all"
-                                    device={[
-                                      "tablet-sm",
-                                      "tablet-lg",
-                                      "desktop",
-                                    ]}
-                                    navigation="default"
-                                  >
+                                  <RenderFor audience="authenticated">
                                     <Footer />
                                   </RenderFor>
-                                  <RenderFor
-                                    audience="authenticated"
-                                    device={["mobile"]}
-                                    navigation="default"
-                                  >
-                                    <Footer />
-                                  </RenderFor>
-                                  <RenderFor
-                                    audience="public"
-                                    device={["mobile"]}
-                                    navigation="default"
-                                  >
+                                  <RenderFor audience="public">
                                     {#if !isOnHomePage}
                                       <Footer />
                                     {/if}
                                   </RenderFor>
                                 </div>
                                 <RenderFor
-                                  audience="all"
-                                  device={["tablet-sm"]}
-                                  navigation="default"
-                                >
-                                  <MobileNavbar />
-                                </RenderFor>
-                                <RenderFor
                                   audience="authenticated"
-                                  device={["mobile"]}
-                                  navigation="default"
+                                  device={["mobile", "tablet-sm"]}
                                 >
                                   <MobileNavbar />
                                 </RenderFor>
                                 <RenderFor
                                   audience="public"
-                                  device={["mobile"]}
-                                  navigation="default"
+                                  device={["mobile", "tablet-sm"]}
                                 >
                                   {#if !isOnHomePage}
                                     <MobileNavbar />

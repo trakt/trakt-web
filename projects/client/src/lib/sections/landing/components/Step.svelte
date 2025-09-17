@@ -1,69 +1,66 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import type { LandingStepType, StepsIntl } from "../StepsIntl";
+  import { StepsIntlProvider } from "../StepsIntlProvider";
 
-  type StepProps = {
-    step: LandingStepType;
-    i18n: StepsIntl;
-    number: number;
-  };
-
-  const { step, i18n, number }: StepProps = $props();
+  const {
+    step,
+    icon,
+    i18n = StepsIntlProvider,
+  }: { icon: Snippet; step: LandingStepType; i18n?: StepsIntl } = $props();
 </script>
 
+{#snippet label()}
+  <h2 class="trakt-landing-step-label-shadow">{i18n.label(step)}</h2>
+  <h2 class="trakt-landing-step-label">{i18n.label(step)}</h2>
+{/snippet}
+
 <div class="trakt-landing-step">
-  <div class="trakt-landing-step-label">
-    <h1>{i18n.label(step)}</h1>
-  </div>
-  <div class="trakt-landing-step-description">
-    <span class="display-title">{number}</span>
-    <p class="large">{i18n.description(step)}</p>
-  </div>
+  {@render icon()}
+  {@render label()}
+  <p class="trakt-landing-step-description small">{i18n.description(step)}</p>
 </div>
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
+<style>
   .trakt-landing-step {
-    h1,
-    span.display-title {
-      transition: font-size var(--transition-increment) ease-in-out;
-    }
+    position: relative;
 
-    @include for-mobile {
-      h1 {
-        font-size: var(--ni-56);
-      }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-      span.display-title {
-        font-size: var(--ni-88);
-      }
+    gap: var(--gap-xxs);
+
+    :global(svg) {
+      color: var(--purple-500);
     }
   }
 
-  .trakt-landing-step-label {
-    padding-left: var(--ni-64);
+  .trakt-landing-step-label,
+  .trakt-landing-step-label-shadow {
+    font-size: var(--ni-52);
+    text-transform: lowercase;
+  }
 
-    h1:after {
-      content: ".";
-      color: var(--purple-500);
-    }
+  .trakt-landing-step-label::after {
+    content: ".";
+    color: var(--purple-500);
+  }
+
+  .trakt-landing-step-label-shadow {
+    position: absolute;
+
+    opacity: 0.35;
+    filter: blur(var(--ni-4));
+
+    z-index: var(--layer-background);
+
+    color: var(--color-step-shadow-text);
+    font-size: var(--ni-96);
   }
 
   .trakt-landing-step-description {
-    display: flex;
-    padding-left: var(--ni-12);
-
-    span {
-      color: var(--purple-500);
-      opacity: 0.5;
-      transform: rotate(-90deg);
-      line-height: var(--ni-52);
-    }
-
-    p {
-      margin-left: var(--ni-24);
-      max-width: var(--ni-252);
-      text-transform: lowercase;
-    }
+    max-width: var(--ni-320);
+    text-align: center;
   }
 </style>
