@@ -18,8 +18,8 @@ export const EpisodeSiloRatingsMappedMock: MediaRating = {
     },
   },
   'rotten': {
-    'critic': 92,
-    'audience': 64,
+    'critic': 0.92,
+    'audience': 0.64,
     'url': undefined,
   },
   'imdb': {
