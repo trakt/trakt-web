@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
@@ -18,6 +20,7 @@
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
+  import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
 
   type ShowSummaryProps = MediaSummaryProps<ShowEntry> & {
     studios: MediaStudio[];
@@ -43,15 +46,27 @@
   const episode = $derived($progress);
 </script>
 
-<MediaSummary {media} {studios} {intl} {crew} {streamOn} type="show">
-  {#snippet contextualContent()}
-    <RenderFor device={["desktop"]} audience="authenticated">
-      {#if episode != null}
-        <EpisodeItem {episode} show={media} variant="next" />
-      {/if}
-    </RenderFor>
-  {/snippet}
-</MediaSummary>
+<RenderFor audience="all" device={["mobile"]}>
+  <RenderForFeature flag={FeatureFlag.SummaryV2}>
+    {#snippet enabled()}
+      <MediaSummaryV2 {media} {studios} {intl} {crew} {streamOn} type="show" />
+    {/snippet}
+
+    <MediaSummary {media} {studios} {intl} {crew} {streamOn} type="show" />
+  </RenderForFeature>
+</RenderFor>
+
+<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+  <MediaSummary {media} {studios} {intl} {crew} {streamOn} type="show">
+    {#snippet contextualContent()}
+      <RenderFor device={["desktop"]} audience="authenticated">
+        {#if episode != null}
+          <EpisodeItem {episode} show={media} variant="next" />
+        {/if}
+      </RenderFor>
+    {/snippet}
+  </MediaSummary>
+</RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 
