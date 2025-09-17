@@ -2,7 +2,6 @@
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
-  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -10,11 +9,11 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import Summary from "../../_internal/Summary.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
-  import SummaryOverview from "../../summary/SummaryOverview.svelte";
   import type { MediaSummaryProps } from "../MediaSummaryProps";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
   import SideActions from "./_internal/SideActions.svelte";
+  import SpoilerSection from "./_internal/SpoilerSection.svelte";
   import SummaryTitle from "./_internal/SummaryTitle.svelte";
 
   const {
@@ -58,9 +57,9 @@
     </RenderFor>
   {/snippet}
 
-  <Spoiler {media} {type}>
-    <SummaryOverview {title} overview={intl.overview ?? media.overview} />
-  </Spoiler>
+  <SpoilerSection {media} title="description">
+    {intl.overview ?? media.overview}
+  </SpoilerSection>
 
   <MediaDetails {media} {studios} {crew} {type} />
 </Summary>
