@@ -1,33 +1,50 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
-import { shuffle } from '$lib/utils/array/shuffle.ts';
-import { derived } from 'svelte/store';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import {
   movieTrendingQuery,
-} from '../../requests/queries/movies/movieTrendingQuery.ts';
+} from '$lib/requests/queries/movies/movieTrendingQuery.ts';
 import {
   showTrendingQuery,
-} from '../../requests/queries/shows/showTrendingQuery.ts';
+} from '$lib/requests/queries/shows/showTrendingQuery.ts';
+import { type CreateQueryOptions } from '@tanstack/svelte-query';
+import { derived } from 'svelte/store';
+import { dailyShuffle } from '../../utils/array/dailyShuffle.ts';
+import type { TrendingMediaList } from '../lists/trending/useTrendingList.ts';
 
-const RANDOM_SHOW_COUNT = 2;
+export const RANDOM_ITEM_COUNT = 12;
 
-export function useTrendingItems() {
-  const trendingShows = useQuery(showTrendingQuery());
-  const trendingMovies = useQuery(movieTrendingQuery());
+function typeToQuery(type: MediaType) {
+  const params = {
+    page: 1,
+    limit: RANDOM_ITEM_COUNT * 2,
+  };
+
+  switch (type) {
+    case 'movie':
+      return movieTrendingQuery(params) as CreateQueryOptions<
+        TrendingMediaList
+      >;
+    case 'show':
+      return showTrendingQuery(params) as CreateQueryOptions<
+        TrendingMediaList
+      >;
+  }
+}
+
+export function useTrendingItems(type: MediaType) {
+  const query = useQuery(typeToQuery(type));
 
   return {
-    shows: derived(
-      trendingShows,
-      ($shows) =>
-        shuffle($shows.data?.entries ?? []).slice(0, RANDOM_SHOW_COUNT),
-    ),
-    //TODO replace with episode
-    show: derived(
-      trendingShows,
-      ($shows) => shuffle($shows.data?.entries ?? []).at(0),
-    ),
-    movie: derived(
-      trendingMovies,
-      ($movies) => shuffle($movies.data?.entries ?? []).at(0),
-    ),
+    list: derived(query, ($query) => {
+      const entries = $query.data?.entries;
+      if (!entries) {
+        return [];
+      }
+
+      return dailyShuffle(entries).slice(
+        0,
+        RANDOM_ITEM_COUNT,
+      );
+    }),
   };
 }

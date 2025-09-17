@@ -5,11 +5,11 @@ export const StepsIntlProvider: StepsIntl = {
   label: (step) => {
     switch (step) {
       case LandingStepType.Track:
-        return m.header_landing_track();
+        return 'Track';
       case LandingStepType.Discover:
-        return m.header_landing_discover();
+        return 'Discover';
       case LandingStepType.Share:
-        return m.header_landing_share();
+        return 'Share';
     }
   },
   description: (step) => {

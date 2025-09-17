@@ -39,13 +39,15 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-join-for-free {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: var(--gap-m);
 
-    padding: var(--ni-12);
+    padding: var(--ni-24);
     border-radius: var(--border-radius-xxl);
 
     background-color: color-mix(
@@ -53,6 +55,11 @@
       var(--purple-400) 10%,
       transparent 90%
     );
+
+    @include for-tablet-lg-and-below() {
+      gap: var(--gap-s);
+      padding: var(--ni-12);
+    }
   }
 
   .trakt-landing-social-proof {
@@ -112,11 +119,15 @@
   .trakt-join-for-free-button {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xxs);
+    gap: var(--gap-s);
 
     span.meta-info {
       letter-spacing: 0.015rem;
       align-self: center;
+    }
+
+    @include for-tablet-lg-and-below() {
+      gap: var(--gap-xxs);
     }
   }
 </style>

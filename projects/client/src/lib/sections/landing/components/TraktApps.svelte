@@ -1,6 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import AppStoreBadge from "../assets/AppStoreBadge.svelte";
   import GooglePlayBadge from "../assets/GooglePlayBadge.svelte";
@@ -11,14 +12,16 @@
     <h4>{m.header_get_trakt_app()}</h4>
     <p>{m.text_trakt_apps_description()}</p>
   </div>
-  <div class="trakt-apps-links">
-    <Link href={UrlBuilder.app.ios()} target="_blank">
-      <AppStoreBadge />
-    </Link>
-    <Link href={UrlBuilder.app.android()} target="_blank">
-      <GooglePlayBadge />
-    </Link>
-  </div>
+  <RenderFor audience="public" device={["mobile", "tablet-sm"]}>
+    <div class="trakt-apps-links">
+      <Link href={UrlBuilder.app.ios()} target="_blank">
+        <AppStoreBadge />
+      </Link>
+      <Link href={UrlBuilder.app.android()} target="_blank">
+        <GooglePlayBadge />
+      </Link>
+    </div>
+  </RenderFor>
 </div>
 
 <style>
