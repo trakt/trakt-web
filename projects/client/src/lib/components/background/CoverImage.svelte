@@ -1,24 +1,37 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useCover } from "./_internal/useCover";
 
   const { cover } = useCover();
 </script>
 
-{#if $cover.state === "ready"}
-  <div
-    class="trakt-background-cover-image"
-    data-cover-type={$cover.data.type}
-    style:--trakt-cover-primary-color={$cover.data.colors?.at(0)}
-    style:--trakt-cover-secondary-color={$cover.data.colors?.at(1)}
-  >
-    <CrossOriginImage
-      loading="eager"
-      src={$cover.data.src}
-      alt={`Background for ${$cover.data.type}`}
-    />
-  </div>
-{/if}
+{#snippet coverImage(hasClearMobileImage: boolean)}
+  {#if $cover.state === "ready"}
+    <div
+      class="trakt-background-cover-image"
+      class:has-clear-mobile-image={hasClearMobileImage}
+      data-cover-type={$cover.data.type}
+      style:--trakt-cover-primary-color={$cover.data.colors?.at(0)}
+      style:--trakt-cover-secondary-color={$cover.data.colors?.at(1)}
+    >
+      <CrossOriginImage
+        loading="eager"
+        src={$cover.data.src}
+        alt={`Background for ${$cover.data.type}`}
+      />
+    </div>
+  {/if}
+{/snippet}
+
+<RenderForFeature flag={FeatureFlag.SummaryV2}>
+  {#snippet enabled()}
+    {@render coverImage(false)}
+  {/snippet}
+
+  {@render coverImage(true)}
+</RenderForFeature>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -105,15 +118,6 @@
         transparent 80%
       );
       pointer-events: none;
-
-      @include for-tablet-sm-and-below {
-        background: linear-gradient(
-          180deg,
-          var(--cm-background-15) 0%,
-          var(--cm-background-50) 30%,
-          var(--color-background) 100%
-        );
-      }
     }
 
     &::before {
@@ -134,7 +138,24 @@
 
       &::after {
         backdrop-filter: blur(var(--ni-2));
+      }
+    }
+  }
 
+  .trakt-background-cover-image.has-clear-mobile-image {
+    &::after {
+      @include for-tablet-sm-and-below {
+        background: linear-gradient(
+          180deg,
+          var(--cm-background-15) 0%,
+          var(--cm-background-50) 30%,
+          var(--color-background) 100%
+        );
+      }
+    }
+
+    &:not([data-cover-type="main"]) {
+      &::after {
         @include for-tablet-sm-and-below {
           backdrop-filter: unset;
 
