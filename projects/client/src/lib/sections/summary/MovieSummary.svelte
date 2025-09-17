@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
 
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
@@ -13,6 +16,7 @@
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
+  import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
 
   const {
     media,
@@ -28,7 +32,19 @@
   } = $props();
 </script>
 
-<MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
+<RenderFor audience="all" device={["mobile"]}>
+  <RenderForFeature flag={FeatureFlag.SummaryV2}>
+    {#snippet enabled()}
+      <MediaSummaryV2 {media} {studios} {crew} {intl} {streamOn} type="movie" />
+    {/snippet}
+
+    <MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
+  </RenderForFeature>
+</RenderFor>
+
+<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+  <MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
+</RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 

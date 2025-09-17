@@ -9,9 +9,15 @@
     title: string;
     textFactory: ({ title }: { title: string }) => string;
     urlOverride?: string;
+    style?: "flat" | "ghost";
   };
 
-  const { title, textFactory, urlOverride }: ShareButtonProps = $props();
+  const {
+    title,
+    textFactory,
+    urlOverride,
+    style = "flat",
+  }: ShareButtonProps = $props();
 
   const data = $derived({
     title,
@@ -41,7 +47,7 @@
 </script>
 
 {#if isShareable}
-  <ActionButton label={m.button_label_share({ title })} onclick={share}>
+  <ActionButton label={m.button_label_share({ title })} {style} onclick={share}>
     <ShareIcon />
   </ActionButton>
 {/if}
