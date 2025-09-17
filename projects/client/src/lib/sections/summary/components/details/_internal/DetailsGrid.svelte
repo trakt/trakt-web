@@ -76,12 +76,7 @@
       display: none;
     }
 
-    @include for-tablet-lg {
-      grid-template-columns: 1fr;
-    }
-
     @include for-mobile {
-      grid-template-columns: 1fr;
       gap: var(--gap-s);
     }
   }
