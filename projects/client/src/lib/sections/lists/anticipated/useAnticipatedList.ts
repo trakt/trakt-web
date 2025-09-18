@@ -13,6 +13,7 @@ import {
 } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import { addYear } from '../../../utils/date/addYear.ts';
 
 export type AnticipatedEntry = AnticipatedMovie | AnticipatedShow;
 export type AnticipatedMediaList = Array<AnticipatedEntry>;
@@ -28,6 +29,14 @@ type AnticipatedListStoreProps =
 function typeToQuery(
   { type, ...params }: AnticipatedListStoreProps,
 ) {
+  if (!params.filter?.years) {
+    // FIXME: remove this when behavior is uplifted to the server
+    params.filter = params.filter ?? {};
+    // @ts-expect-error we are extending the object to dedupe
+    params.filter.end_date = params.filter?.end_date ??
+      addYear(new Date(), 1).toISOString();
+  }
+
   switch (type) {
     case 'movie':
       return movieAnticipatedQuery(params) as CreateQueryOptions<

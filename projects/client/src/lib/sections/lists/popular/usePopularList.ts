@@ -11,6 +11,7 @@ import {
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import { addYear } from '../../../utils/date/addYear.ts';
 
 export type PopularEntry = ShowEntry | MovieEntry;
 export type PopularMediaList = Array<PopularEntry>;
@@ -26,10 +27,16 @@ type PopularListStoreProps =
 function typeToQuery(
   { type, ...params }: PopularListStoreProps,
 ) {
-  // FIXME: remove this when behavior is uplifted to the server
-  params.filter = params.filter ?? {};
-  params.filter.years = params.filter?.years ??
-    new Date().getFullYear().toString();
+  if (!params.filter?.years) {
+    // FIXME: remove this when behavior is uplifted to the server
+    params.filter = params.filter ?? {};
+    // @ts-expect-error we are extending the object to dedupe
+    params.filter.start_date = params.filter?.start_date ??
+      addYear(new Date(), -1).toISOString();
+    // @ts-expect-error we are extending the object to dedupe
+    params.filter.end_date = params.filter?.end_date ??
+      addYear(new Date(), 0).toISOString();
+  }
 
   switch (type) {
     case 'movie':
