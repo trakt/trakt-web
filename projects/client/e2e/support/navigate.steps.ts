@@ -35,6 +35,13 @@ When(
   },
 );
 
+When(
+  'I open the shows section',
+  async function (this: TraktWorld) {
+    await this.page.goto(TestUrlBuilder.shows());
+  },
+);
+
 Then(
   'I should see the {string} element on the page',
   async function (this: TraktWorld, testId: TestId) {
