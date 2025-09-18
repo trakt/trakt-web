@@ -1,12 +1,13 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import Button from "$lib/components/buttons/Button.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import { useStoredFilters } from "$lib/features/filters/useStoredFilters";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import GlobalParameterEscaper from "$lib/features/parameters/GlobalParameterEscaper.svelte";
 
   const { hasActiveFilter } = useFilter();
+  const { resetFilters } = useStoredFilters();
 </script>
 
 <GlobalParameterEscaper enabled>
@@ -17,7 +18,7 @@
     style="flat"
     variant="secondary"
     disabled={!$hasActiveFilter || undefined}
-    href={page.url.pathname}
+    onclick={resetFilters}
     navigationType={DpadNavigationType.Item}
   >
     {m.button_text_reset_all_filters()}
