@@ -4,11 +4,14 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { derived, readable } from 'svelte/store';
 import { useUser } from '../auth/stores/useUser.ts';
 import { FILTERS } from './_internal/constants.ts';
+import { isDifferentFilterSet } from './_internal/isDifferentFilterSet.ts';
 import { mapToSearchParamValue } from './_internal/mapToSearchParamValue.ts';
+import { useStoredFilters } from './useStoredFilters.ts';
 
 export function useFilter() {
   const { search } = useParameters();
   const { user } = useUser();
+  const { storedFilters } = useStoredFilters();
 
   return {
     filters: readable(FILTERS),
@@ -23,9 +26,13 @@ export function useFilter() {
         return $search.get(key) ?? defaultValue;
       });
     },
-    hasActiveFilter: derived(search, ($search) => {
-      return FILTERS.some((filter) => Boolean($search.get(filter.key)));
-    }),
+    hasActiveFilter: derived(
+      [search, storedFilters],
+      ([$search, $storedFilters]) => {
+        const defaultFilters = $storedFilters ?? {};
+        return isDifferentFilterSet(defaultFilters, $search);
+      },
+    ),
     filterMap: derived([search, user], ([$search, $user]) => {
       return FILTERS
         .filter((filter) => {

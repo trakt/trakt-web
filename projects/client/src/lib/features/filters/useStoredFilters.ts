@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { get } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
 import { useParameters } from '../parameters/useParameters.ts';
 import { FILTERS } from './_internal/constants.ts';
@@ -11,7 +11,9 @@ import { processFilterParams } from './_internal/processFilterParams.ts';
 
 export const STORED_FILTERS_KEY = 'trakt-global-filters' as const;
 
-type StoredFilter = Record<string, ParameterType>;
+export type StoredFilter = Record<string, ParameterType>;
+
+const storedFilters = writable<StoredFilter | null>(getDefaultFilters());
 
 export function useStoredFilters() {
   const { search } = useParameters();
@@ -38,6 +40,7 @@ export function useStoredFilters() {
       },
     );
 
+    storedFilters.set(filtersObject);
     safeLocalStorage.setItem(STORED_FILTERS_KEY, JSON.stringify(filtersObject));
   };
 
@@ -67,5 +70,6 @@ export function useStoredFilters() {
     saveFilters,
     restoreFilters,
     resetFilters,
+    storedFilters: derived(storedFilters, ($storedFilters) => $storedFilters),
   };
 }
