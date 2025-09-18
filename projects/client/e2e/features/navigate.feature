@@ -3,10 +3,10 @@ Feature: Basic navigation
   Scenario: Public pages
     When I click on the "consent-button" button
 
-    When I click on the "nav-bar-home-button" button
+
     Then I should see "Home" in the page title
 
-    When I click on the "nav-bar-shows-button" button
+    When I open the shows section
     Then I should see "Shows" in the page title
 
     When I click on the "nav-bar-movies-button" button

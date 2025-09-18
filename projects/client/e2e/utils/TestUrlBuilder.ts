@@ -5,7 +5,7 @@ export function prefixBuilderPaths<
   T extends Record<string, (arg: string) => string>,
 >(
   builder: T,
-): { [K in keyof T]: (arg: string) => string } {
+): { [K in keyof T]: (arg?: string) => string } {
   return Object.fromEntries(
     Object.entries(builder).map(([key, fn]) => [
       key,
@@ -17,6 +17,7 @@ export function prefixBuilderPaths<
 const builder = {
   movieSummary: (slug: string) => UrlBuilder.movie(slug),
   showSummary: (slug: string) => UrlBuilder.show(slug),
+  shows: () => UrlBuilder.shows(),
 };
 
 export const TestUrlBuilder = prefixBuilderPaths(builder);
