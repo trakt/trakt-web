@@ -7,7 +7,7 @@ export function processFilterParams(
     | URLSearchParamsIterator<[string, ParameterType]>,
   callback: (key: string, value: ParameterType) => void,
 ) {
-  params.forEach(([key, value]) => {
+  Array.from(params).forEach(([key, value]) => {
     const isValidKey = FILTERS.some((filter) => filter.key === key);
     isValidKey && callback(key, value);
   });
