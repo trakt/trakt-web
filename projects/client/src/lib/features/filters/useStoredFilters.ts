@@ -4,18 +4,32 @@ import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { get } from 'svelte/store';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
 import { useParameters } from '../parameters/useParameters.ts';
+import { FILTERS } from './_internal/constants.ts';
 import { getDefaultFilters } from './_internal/getDefaultFilters.ts';
 import { hasFilter } from './_internal/hasFilter.ts';
 import { processFilterParams } from './_internal/processFilterParams.ts';
 
 export const STORED_FILTERS_KEY = 'trakt-global-filters' as const;
 
+type StoredFilter = Record<string, ParameterType>;
+
 export function useStoredFilters() {
   const { search } = useParameters();
 
+  const goToStoredFilters = (filters: StoredFilter) => {
+    processFilterParams(
+      Object.entries(filters),
+      (key, value) => {
+        page.url.searchParams.set(key, String(value));
+      },
+    );
+
+    goto(page.url, { replaceState: true });
+  };
+
   const saveFilters = () => {
     const searchParams = get(search);
-    const filtersObject: Record<string, ParameterType> = {};
+    const filtersObject: StoredFilter = {};
 
     processFilterParams(
       searchParams.entries(),
@@ -35,18 +49,23 @@ export function useStoredFilters() {
       return;
     }
 
-    processFilterParams(
-      Object.entries(defaultFilters),
-      (key, value) => {
-        page.url.searchParams.set(key, String(value));
-      },
-    );
+    goToStoredFilters(defaultFilters);
+  };
 
-    goto(page.url, { replaceState: true });
+  const resetFilters = () => {
+    const defaultFilters = getDefaultFilters();
+    if (!defaultFilters) {
+      goto(page.url.pathname, { replaceState: true });
+      return;
+    }
+
+    FILTERS.forEach((filter) => page.url.searchParams.delete(filter.key));
+    goToStoredFilters(defaultFilters);
   };
 
   return {
     saveFilters,
     restoreFilters,
+    resetFilters,
   };
 }
