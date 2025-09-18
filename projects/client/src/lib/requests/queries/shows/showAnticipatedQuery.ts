@@ -9,7 +9,6 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
-import { addYear } from '$lib/utils/date/addYear.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowAnticipatedResponse } from '@trakt/api';
 import { z } from 'zod';
@@ -55,7 +54,6 @@ const showAnticipatedRequest = (
         limit,
         ...filter,
         ...search,
-        end_date: addYear(new Date()).toISOString(),
       },
     });
 
