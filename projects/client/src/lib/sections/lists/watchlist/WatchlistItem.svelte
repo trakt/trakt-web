@@ -25,4 +25,5 @@
   {media}
   {style}
   action={media.status === "released" ? action : undefined}
+  source="watchlist"
 />

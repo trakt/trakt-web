@@ -60,7 +60,7 @@
   --height-list={mediaListHeightResolver($defaultVariant)}
 >
   {#snippet item(media)}
-    <DefaultMediaItem {type} {media} />
+    <DefaultMediaItem {type} {media} source="credits" />
   {/snippet}
 
   {#snippet dynamicActions()}

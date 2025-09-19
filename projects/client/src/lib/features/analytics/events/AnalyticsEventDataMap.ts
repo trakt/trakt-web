@@ -29,6 +29,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Filter]: FilterType;
   [AnalyticsEvent.Filters]: FiltersType;
   [AnalyticsEvent.Drilldown]: DrilldownType;
+  [AnalyticsEvent.SummaryDrilldown]: DrilldownType;
   [AnalyticsEvent.Search]: SearchType;
 
   [AnalyticsEvent.Drop]: never;

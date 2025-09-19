@@ -6,6 +6,8 @@
   import CardCover from "$lib/components/card/CardCover.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
@@ -21,8 +23,11 @@
     tag,
     action,
     popupActions,
+    source,
     ...rest
   }: MediaCardProps = $props();
+
+  const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
   const defaultVariant = $derived(useDefaultCardVariant(type));
   const variant = $derived(rest.variant ?? $defaultVariant);
@@ -41,7 +46,11 @@
     </CardActionBar>
   {/if}
 
-  <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
+  <Link
+    focusable={false}
+    href={UrlBuilder.media(type, media.slug)}
+    onclick={() => source && track({ source, type: media.type })}
+  >
     <CardCover
       title={media.title}
       src={mediaCoverImageUrl}

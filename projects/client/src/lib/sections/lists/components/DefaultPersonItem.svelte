@@ -3,17 +3,28 @@
   import CardFooter from "$lib/components/card/CardFooter.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
-  const { person, subtitle }: { person: PersonSummary; subtitle?: string } =
-    $props();
+  const {
+    person,
+    subtitle,
+    source,
+  }: { person: PersonSummary; subtitle?: string; source?: string } = $props();
+
+  const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 </script>
 
 <PersonCard>
-  <Link focusable={false} href={UrlBuilder.people(person.slug)}>
+  <Link
+    focusable={false}
+    href={UrlBuilder.people(person.slug)}
+    onclick={() => source && track({ source, type: "person" })}
+  >
     <CardCover
       title={person.name}
       src={person.headshot.url.thumb}

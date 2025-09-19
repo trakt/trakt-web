@@ -12,4 +12,11 @@
   <AnticipatedTag i18n={TagIntlProvider} score={media.score} />
 {/snippet}
 
-<DefaultMediaItem {type} {media} {tag} {style} canDeemphasize />
+<DefaultMediaItem
+  {type}
+  {media}
+  {tag}
+  {style}
+  source="anticipated"
+  canDeemphasize
+/>

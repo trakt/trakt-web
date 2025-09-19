@@ -50,7 +50,11 @@
   --height-list={mediaListHeightResolver($defaultVariant)}
 >
   {#snippet item(media)}
-    <DefaultMediaItem type={media.item.type} media={media.item}>
+    <DefaultMediaItem
+      type={media.item.type}
+      media={media.item}
+      source="favorites"
+    >
       {#snippet popupActions()}
         <FavoriteAction
           style="dropdown-item"
