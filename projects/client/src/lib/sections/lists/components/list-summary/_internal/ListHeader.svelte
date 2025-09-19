@@ -1,5 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import type { MediaType } from "$lib/requests/models/MediaType";
@@ -9,13 +11,19 @@
   import { getListUrl } from "./getListUrl";
 
   const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
+
+  // In list summaries, clicking on the header is considered a drilldown action
+  const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
 
 <div class="trakt-list-header">
   <UserAvatar user={list.user} />
 
   <div class="list-name-and-creator">
-    <Link href={getListUrl(list, type)}>
+    <Link
+      href={getListUrl(list, type)}
+      onclick={() => track({ source: "list-summary" })}
+    >
       <p class="secondary bold ellipsis">
         {list.name}
       </p>

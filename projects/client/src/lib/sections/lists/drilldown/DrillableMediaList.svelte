@@ -22,6 +22,7 @@
       href={urlBuilder({ type, ...props.filter })}
       label={drilldownLabel}
       disabled={items.length === 0}
+      id={props.id}
     />
   {/snippet}
 </MediaList>
