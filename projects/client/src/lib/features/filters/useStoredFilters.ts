@@ -2,6 +2,8 @@ import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { derived, get, writable } from 'svelte/store';
+import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '../analytics/useTrack.ts';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
 import { useParameters } from '../parameters/useParameters.ts';
 import { FILTERS } from './_internal/constants.ts';
@@ -17,6 +19,7 @@ const storedFilters = writable<StoredFilter | null>(getDefaultFilters());
 
 export function useStoredFilters() {
   const { search } = useParameters();
+  const { track } = useTrack(AnalyticsEvent.Filters);
 
   const goToStoredFilters = (filters: StoredFilter) => {
     processFilterParams(
@@ -30,6 +33,8 @@ export function useStoredFilters() {
   };
 
   const saveFilters = () => {
+    track({ action: 'save' });
+
     const searchParams = get(search);
     const filtersObject: StoredFilter = {};
 
@@ -56,6 +61,8 @@ export function useStoredFilters() {
   };
 
   const resetFilters = () => {
+    track({ action: 'reset' });
+
     const defaultFilters = getDefaultFilters();
     if (!defaultFilters) {
       goto(page.url.pathname, { replaceState: true });

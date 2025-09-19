@@ -7,6 +7,7 @@ import { AnalyticsEvent } from './AnalyticsEvent.ts';
 type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
 type FilterType = { id: string; action: 'set' | 'reset' };
+type FiltersType = { action: 'save' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };
 type FollowType = { action: 'follow' | 'unfollow' };
 type ExtrasType = { slug: string; type: MediaVideoType };
@@ -23,6 +24,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Theme]: { theme: Theme };
   [AnalyticsEvent.Locale]: { locale: string };
   [AnalyticsEvent.Filter]: FilterType;
+  [AnalyticsEvent.Filters]: FiltersType;
 
   [AnalyticsEvent.Drop]: never;
   [AnalyticsEvent.Restore]: never;
