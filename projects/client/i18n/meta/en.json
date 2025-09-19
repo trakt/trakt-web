@@ -5494,6 +5494,14 @@
         "android",
         "ios"
       ]
+    },
+    "filter_label_this_year": {
+      "default": "This year",
+      "description": "Label for the 'this year' filter which filters items to only show those from the current year.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
