@@ -10,10 +10,15 @@
       drilldownLabel: string;
       empty?: Snippet;
       badge?: Snippet;
+      sourceId?: string;
     };
 
-  const { drilldownLabel, urlBuilder, ...props }: DrillableList<T, M> =
-    $props();
+  const {
+    drilldownLabel,
+    sourceId,
+    urlBuilder,
+    ...props
+  }: DrillableList<T, M> = $props();
 </script>
 
 <MediaList {...props}>
@@ -22,7 +27,7 @@
       href={urlBuilder({ type, ...props.filter })}
       label={drilldownLabel}
       disabled={items.length === 0}
-      id={props.id}
+      id={sourceId ?? props.id}
     />
   {/snippet}
 </MediaList>

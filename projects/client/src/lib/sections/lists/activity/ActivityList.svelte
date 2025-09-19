@@ -31,7 +31,7 @@
 
 <!-- TODO replace with empty state message when actionable on Trakt Web -->
 <DrillableMediaList
-  id={`${$activityType}-activity-list`}
+  id={`activity-list-${$activityType}`}
   type="episode"
   useList={(params) =>
     useActivityList({
