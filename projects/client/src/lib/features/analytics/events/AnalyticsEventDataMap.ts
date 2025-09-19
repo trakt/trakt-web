@@ -17,7 +17,7 @@ type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
 type CalendarType = { action: 'reset' | 'next' | 'previous' };
 type StreamOnType = { source: string };
 type CtaDataType = { type: CtaType };
-type DrilldownType = { source: string };
+type DrilldownType = { source: string; type?: string };
 type SearchType = { mode: SearchMode };
 
 export type AnalyticsEventDataMap = {

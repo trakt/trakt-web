@@ -34,6 +34,7 @@
   <DrillableMediaList
     {...commonProps}
     {drilldownLabel}
+    source={{ id: "recently-watched" }}
     urlBuilder={UrlBuilder.history.all}
   >
     {#snippet item(media)}

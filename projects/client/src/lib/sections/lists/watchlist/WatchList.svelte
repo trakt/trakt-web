@@ -49,6 +49,7 @@
 
 <DrillableMediaList
   id={`watch-list-${type ?? "media"}-${status}`}
+  source={{ id: "watchlist", type }}
   title={m.list_title_watchlist()}
   {drilldownLabel}
   {type}

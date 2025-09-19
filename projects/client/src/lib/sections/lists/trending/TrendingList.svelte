@@ -19,6 +19,7 @@
 
 <DrillableMediaList
   id="trending-list-{type}"
+  source={{ id: "trending", type }}
   {title}
   {drilldownLabel}
   {type}

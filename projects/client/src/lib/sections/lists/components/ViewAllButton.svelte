@@ -4,19 +4,20 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import type { DrilldownSource } from "./models/DrilldownSource";
 
   type ViewAllLinkProps = HTMLAnchorProps & HTMLElementProps;
 
   type ViewAllElementProps = HTMLElementProps;
 
-  type ViewAllButtonProps = { label: string; id: string } & (
+  type ViewAllButtonProps = { label: string; source: DrilldownSource } & (
     | ViewAllElementProps
     | ViewAllLinkProps
   );
 
   const {
     label,
-    id,
+    source,
     onclick: externalOnclick,
     ...rest
   }: ViewAllButtonProps = $props();
@@ -28,7 +29,7 @@
   {label}
   {...rest}
   onclick={(e) => {
-    track({ source: id });
+    track({ source: source.id, type: source.type });
     externalOnclick?.(e);
   }}
   style="ghost"

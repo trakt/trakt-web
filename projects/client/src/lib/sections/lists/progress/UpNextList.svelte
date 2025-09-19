@@ -20,6 +20,7 @@
 <DrillableMediaList
   type="episode"
   id="up-next-list"
+  source={{ id: "continue-watching" }}
   drilldownLabel={"drill label"}
   useList={() =>
     useStablePaginated({
