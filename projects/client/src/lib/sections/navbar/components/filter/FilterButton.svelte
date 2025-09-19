@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import Button from "$lib/components/buttons/Button.svelte";
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
@@ -8,21 +9,24 @@
   import FilterSidebar from "./FilterSidebar.svelte";
 
   const { size }: { size: "small" | "normal" } = $props();
-  const { hasActiveFilter } = useFilter();
+  const { hasActiveFilter, hasFilterSupport } = useFilter();
 
   const state = $derived($hasActiveFilter ? "filtered" : "unfiltered");
 
   const isSidebarOpen = writable(false);
   const onClose = () => isSidebarOpen.set(false);
+
+  const isDisabled = $derived(!hasFilterSupport(page.route.id ?? ""));
 </script>
 
-<div class="trakt-filter-button">
+<div class="trakt-filter-button" class:has-filter-support={!isDisabled}>
   <Button
     style="flat"
     label={m.button_label_filters()}
     text="capitalize"
     color="custom"
     {size}
+    disabled={isDisabled}
     navigationType={DpadNavigationType.Item}
     onclick={() => {
       isSidebarOpen.set(true);
@@ -45,6 +49,17 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-filter-button {
+    opacity: 0.25;
+    transition: opacity var(--transition-increment) ease-in-out;
+
+    &.has-filter-support {
+      opacity: 1;
+    }
+
+    :global(.trakt-button[disabled]) {
+      background: transparent;
+    }
+
     @include for-mouse {
       :global(.trakt-button) {
         &:hover,
