@@ -60,7 +60,7 @@
       <ViewAllButton
         label={m.button_label_view_all_comments()}
         onclick={() => onDrilldown()}
-        id="comments"
+        source={{ id: "comments" }}
       />
     {/snippet}
   </SectionList>

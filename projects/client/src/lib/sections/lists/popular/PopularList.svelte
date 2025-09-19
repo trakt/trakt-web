@@ -19,6 +19,7 @@
 
 <DrillableMediaList
   id="popular-list-{type}"
+  source={{ id: "popular", type }}
   {title}
   {drilldownLabel}
   {type}

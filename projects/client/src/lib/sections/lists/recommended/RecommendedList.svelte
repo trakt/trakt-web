@@ -20,6 +20,7 @@
 
 <DrillableMediaList
   id="recommended-list-{type}"
+  source={{ id: "recommended", type }}
   {title}
   {drilldownLabel}
   {type}
