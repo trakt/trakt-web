@@ -19,6 +19,8 @@ import {
 import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
+import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
+import { useTrack } from '../analytics/useTrack.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
 import type { SearchResult } from './models/SearchResult.ts';
 
@@ -61,6 +63,7 @@ export function useSearch() {
   const client = browser ? useQueryClient() : undefined;
   const { mode, isSearching, ...rest } = getSearchContext();
   const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const { track } = useTrack(AnalyticsEvent.Search);
 
   const results = writable<SearchResult>({
     response: null,
@@ -84,6 +87,8 @@ export function useSearch() {
 
     const response = await client.fetchQuery(query)
       .then((response) => {
+        track({ mode });
+
         if (response.type === 'media') {
           return {
             response,
