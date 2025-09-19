@@ -20,6 +20,7 @@ export const AnalyticsEvent = {
   Locale: buildEventKey(ACTION_PREFIX, 'locale'),
   Filter: buildEventKey(ACTION_PREFIX, 'filter'),
   Filters: buildEventKey(ACTION_PREFIX, 'filters'),
+  Drilldown: buildEventKey(ACTION_PREFIX, 'drilldown'),
 
   Drop: buildEventKey(MEDIA_ACTION_PREFIX, 'drop'),
   Restore: buildEventKey(MEDIA_ACTION_PREFIX, 'restore'),

@@ -16,6 +16,7 @@ type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
 type CalendarType = { action: 'reset' | 'next' | 'previous' };
 type StreamOnType = { source: string };
 type CtaDataType = { type: CtaType };
+type DrilldownType = { source: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -25,6 +26,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Locale]: { locale: string };
   [AnalyticsEvent.Filter]: FilterType;
   [AnalyticsEvent.Filters]: FiltersType;
+  [AnalyticsEvent.Drilldown]: DrilldownType;
 
   [AnalyticsEvent.Drop]: never;
   [AnalyticsEvent.Restore]: never;
