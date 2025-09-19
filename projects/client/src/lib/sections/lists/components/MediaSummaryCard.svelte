@@ -7,6 +7,8 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -24,8 +26,11 @@
     badge,
     popupActions,
     media,
+    source,
     ...rest
   }: MediaCardProps | EpisodeCardProps = $props();
+
+  const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
   const toEpisodeCover = (episode: EpisodeEntry) => {
     switch (episode.type) {
@@ -56,7 +61,11 @@
     </CardActionBar>
   {/if}
 
-  <Link href={UrlBuilder.media(media.type, media.slug)} color="inherit">
+  <Link
+    href={UrlBuilder.media(media.type, media.slug)}
+    color="inherit"
+    onclick={() => source && track({ source, type: media.type })}
+  >
     {#if rest.type === "episode"}
       <CardCover
         {badge}

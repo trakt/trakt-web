@@ -66,11 +66,13 @@
           type={item.type}
           media={item}
           style="cover"
+          source="search"
           tag={$mode === "media" ? mediaResultTag : undefined}
         />
       {:else}
         <DefaultPersonItem
           person={item}
+          source="search"
           subtitle={item.birthday
             ? toHumanDay(item.birthday, getLocale(), "short")
             : undefined}

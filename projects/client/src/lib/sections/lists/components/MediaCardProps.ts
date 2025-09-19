@@ -18,6 +18,7 @@ type BaseItemProps<T> = MediaItemVariant<T> & {
   action?: Snippet;
   popupActions?: Snippet;
   style?: 'cover' | 'summary';
+  source?: string;
 };
 
 export type MediaCardProps<T = MediaInputDefault> = BaseItemProps<T> & {

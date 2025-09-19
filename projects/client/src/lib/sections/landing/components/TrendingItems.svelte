@@ -27,7 +27,7 @@
             class="trakt-item-wrapper"
             class:has-offset={!isOddColumn(index)}
           >
-            <DefaultMediaItem {type} media={item} />
+            <DefaultMediaItem {type} media={item} source="trending" />
           </div>
         {/each}
       </div>

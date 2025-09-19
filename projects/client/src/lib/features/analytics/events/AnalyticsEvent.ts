@@ -21,6 +21,7 @@ export const AnalyticsEvent = {
   Filter: buildEventKey(ACTION_PREFIX, 'filter'),
   Filters: buildEventKey(ACTION_PREFIX, 'filters'),
   Drilldown: buildEventKey(ACTION_PREFIX, 'drilldown'),
+  SummaryDrilldown: buildEventKey(ACTION_PREFIX, 'summary-drilldown'),
   Search: buildEventKey(ACTION_PREFIX, 'search'),
 
   Drop: buildEventKey(MEDIA_ACTION_PREFIX, 'drop'),
