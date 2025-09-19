@@ -1,6 +1,7 @@
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { SimpleRating } from '$lib/models/SimpleRating.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
+import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
@@ -17,6 +18,7 @@ type CalendarType = { action: 'reset' | 'next' | 'previous' };
 type StreamOnType = { source: string };
 type CtaDataType = { type: CtaType };
 type DrilldownType = { source: string };
+type SearchType = { mode: SearchMode };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -27,6 +29,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Filter]: FilterType;
   [AnalyticsEvent.Filters]: FiltersType;
   [AnalyticsEvent.Drilldown]: DrilldownType;
+  [AnalyticsEvent.Search]: SearchType;
 
   [AnalyticsEvent.Drop]: never;
   [AnalyticsEvent.Restore]: never;
