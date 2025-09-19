@@ -18,12 +18,15 @@
     empty,
   }: { list: MediaListSummary; type?: MediaType; empty?: Snippet } = $props();
   const { filterMap } = useFilter();
+
+  const sourceId = $derived(`user-list-${type ?? "media"}`);
 </script>
 
 <DrillableMediaList
   {type}
   {empty}
-  id={`user-list-${type}-${list.id}`}
+  {sourceId}
+  id={`${sourceId}-${list.id}`}
   drilldownLabel={m.button_text_view_all()}
   filter={$filterMap}
   useList={(params) => useListItems({ list, ...params })}

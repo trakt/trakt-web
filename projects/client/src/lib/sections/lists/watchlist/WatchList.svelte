@@ -48,7 +48,7 @@
 </script>
 
 <DrillableMediaList
-  id="watch-list-{type}-{status}"
+  id={`watch-list-${type ?? "media"}-${status}`}
   title={m.list_title_watchlist()}
   {drilldownLabel}
   {type}
