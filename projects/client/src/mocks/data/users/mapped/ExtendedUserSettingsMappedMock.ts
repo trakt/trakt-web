@@ -5,6 +5,7 @@ export const ExtendedUserMappedMock: UserSettings = {
   'slug': 'tequila_sunset',
   'username': 'harrier_dubois',
   'token': null,
+  'joinedAt': new Date('2021-03-15T08:00:00.000Z'),
   'avatar': {
     'url':
       'https://walter-r2.trakt.tv/images/users/014/366/083/avatars/large/disco_cop.png',
