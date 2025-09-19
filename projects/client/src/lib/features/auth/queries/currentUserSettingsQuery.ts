@@ -25,6 +25,7 @@ export const UserSettingsSchema = z.object({
   username: z.string(),
   about: z.string().nullish(),
   location: z.string().optional(),
+  joinedAt: z.date().optional(),
   avatar: z.object({
     url: z.string(),
   }),
@@ -86,6 +87,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     username: user.username,
     about: user.about,
     location: user.location ?? '',
+    joinedAt: new Date(user.joined_at),
     avatar: {
       url: user.images.avatar.full,
     },
