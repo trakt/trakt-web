@@ -6,6 +6,8 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
@@ -24,6 +26,7 @@
     tag,
     episode,
     show,
+    source,
     ...rest
   }: EpisodeCardProps = $props();
 
@@ -31,6 +34,8 @@
   const isActivity = $derived(rest.variant === "activity");
 
   const src = useEpisodeSpoilerImage({ episode, show });
+
+  const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 </script>
 
 <LandscapeCard>
@@ -49,6 +54,7 @@
   <Link
     focusable={false}
     href={UrlBuilder.episode(show.slug, episode.season, episode.number)}
+    onclick={() => source && track({ source, type: "episode" })}
   >
     <CardCover
       title={show.title}

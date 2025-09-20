@@ -64,7 +64,7 @@
   <Link
     href={UrlBuilder.media(media.type, media.slug)}
     color="inherit"
-    onclick={() => source && track({ source, type: media.type })}
+    onclick={() => source && track({ source, type: rest.type })}
   >
     {#if rest.type === "episode"}
       <CardCover

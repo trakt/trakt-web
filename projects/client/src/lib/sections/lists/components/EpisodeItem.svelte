@@ -74,6 +74,7 @@
   {#if style === "summary"}
     <MediaSummaryCard
       episode={props.episode}
+      source={props.source}
       media={{
         ...props.show,
         episode: {
