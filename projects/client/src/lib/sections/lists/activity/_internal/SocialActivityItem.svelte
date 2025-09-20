@@ -83,9 +83,9 @@
       gap: var(--gap-xs);
       align-items: center;
 
-      padding: 0 var(--ni-4);
+      padding-left: var(--ni-12);
       background: var(--cm-background-50);
-      border-radius: var(--border-radius-m);
+      border-radius: var(--border-radius-l);
       overflow: hidden;
 
       backdrop-filter: blur(var(--ni-8));
