@@ -44,11 +44,21 @@
 {/snippet}
 
 {#if style === "cover"}
-  <ActivityItem {activity} activityAt={activity.activityAt} {badge} />
+  <ActivityItem
+    {activity}
+    activityAt={activity.activityAt}
+    {badge}
+    source="social-activity"
+  />
 {/if}
 
 {#if style === "summary"}
-  <ActivitySummaryCard {activity} activityAt={activity.activityAt} {badge} />
+  <ActivitySummaryCard
+    {activity}
+    activityAt={activity.activityAt}
+    {badge}
+    source="social-activity"
+  />
 {/if}
 
 <style lang="scss">
