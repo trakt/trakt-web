@@ -23,10 +23,8 @@
   );
 
   --width-summary-card: 100%;
-  --height-summary-card-cover: var(--ni-148);
-  --height-summary-card: calc(
-    var(--height-summary-card-cover) + var(--height-card-footer)
-  );
+  --height-summary-card-cover: var(--ni-132);
+  --height-summary-card: var(--height-summary-card-cover);
 
   --width-list-card: var(--ni-480);
   --height-list-card: var(--ni-256);

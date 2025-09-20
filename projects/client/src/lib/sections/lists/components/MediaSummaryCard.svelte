@@ -3,7 +3,6 @@
   import Card from "$lib/components/card/Card.svelte";
   import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
-  import CardFooter from "$lib/components/card/CardFooter.svelte";
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
@@ -11,13 +10,15 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
-  import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
   import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import SummaryCardBackgroundImage from "./_internal/SummaryCardBackgroundImage.svelte";
+  import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
+  import SummaryCardDetails from "./_internal/SummaryCardDetails.svelte";
+  import SummaryCardRating from "./_internal/SummaryCardRating.svelte";
   import type { EpisodeCardProps, MediaCardProps } from "./MediaCardProps";
 
   const {
@@ -32,22 +33,22 @@
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
-  const toEpisodeCover = (episode: EpisodeEntry) => {
-    switch (episode.type) {
-      case EpisodeComputedType.full_season:
-      case EpisodeComputedType.multiple_episodes:
-        return media.thumb.url;
-      default:
-        return episode.cover.url;
-    }
-  };
+  const coverData = $derived({
+    background:
+      rest.type === "episode"
+        ? (rest.episode.cover.url ?? EPISODE_COVER_PLACEHOLDER)
+        : media.cover.url.thumb,
+    poster: media.poster.url.thumb,
+    title: rest.type === "episode" ? rest.episode.title : media.title,
+  });
 </script>
 
 <Card
-  variant="transparent"
+  classList="trakt-summary-card"
   --height-card="var(--height-summary-card)"
   --height-card-cover="var(--height-summary-card-cover)"
   --width-card="var(--width-summary-card)"
+  --poster-aspect-ratio="0.6667"
 >
   {#if popupActions}
     <CardActionBar>
@@ -61,82 +62,115 @@
     </CardActionBar>
   {/if}
 
+  <SummaryCardBackgroundImage
+    src={coverData.background}
+    alt={`Background for ${coverData.title}`}
+  />
+
   <Link
     href={UrlBuilder.media(media.type, media.slug)}
-    color="inherit"
     onclick={() => source && track({ source, type: rest.type })}
   >
-    {#if rest.type === "episode"}
+    <div class="trakt-summary-poster">
       <CardCover
-        {badge}
-        {tag}
-        title={rest.episode.title}
-        alt={rest.episode.title}
-        src={toEpisodeCover(rest.episode) ?? EPISODE_COVER_PLACEHOLDER}
+        title={coverData.title}
+        alt={`Poster for ${coverData.title}`}
+        src={coverData.poster}
       />
-    {/if}
+    </div>
 
-    {#if rest.type === "movie"}
-      <CardCover
-        {badge}
-        {tag}
-        title={media.title}
-        alt={media.title}
-        src={media.thumb.url}
-      />
-    {/if}
-
-    {#if rest.type === "show"}
-      <CardCover
-        {badge}
-        {tag}
-        title={media.title}
-        alt={media.title}
-        src={media.cover.url.thumb}
-      />
-    {/if}
-  </Link>
-
-  <CardFooter {action}>
-    {#if rest.variant === "activity"}
-      {#if rest.type === "episode"}
-        <p class="trakt-card-title small ellipsis">
-          {episodeActivityTitle(rest.episode, media)}
+    <SummaryCardDetails>
+      {#if rest.variant === "activity"}
+        {#if rest.type === "episode"}
+          <p class="trakt-card-title ellipsis">
+            {episodeActivityTitle(rest.episode, media)}
+          </p>
+        {:else}
+          <p class="trakt-card-title ellipsis">
+            {media.title}
+          </p>
+        {/if}
+        <p class="trakt-card-subtitle small secondary ellipsis">
+          {#if rest.type === "episode"}
+            {EpisodeIntlProvider.timestampText({
+              type: rest.episode.type,
+              date: rest.date,
+            })}
+          {:else}
+            {toHumanDate(new Date(), rest.date, getLocale())}
+          {/if}
+        </p>
+      {:else if rest.type === "episode"}
+        <p class="trakt-card-title ellipsis">
+          {episodeNumberLabel({
+            seasonNumber: rest.episode.season,
+            episodeNumber: rest.episode.number,
+          })} - {media.title}
+        </p>
+        <p class="trakt-card-subtitle small secondary ellipsis">
+          {rest.episode.title}
         </p>
       {:else}
-        <p class="trakt-card-title small ellipsis">
+        <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
+        <GenreList
+          classList="trakt-card-subtitle smaller ellipsis secondary"
+          separator=", "
+          genres={media.genres}
+        />
       {/if}
-      <p class="trakt-card-subtitle small ellipsis">
-        {#if rest.type === "episode"}
-          {EpisodeIntlProvider.timestampText({
-            type: rest.episode.type,
-            date: rest.date,
-          })}
-        {:else}
-          {toHumanDate(new Date(), rest.date, getLocale())}
-        {/if}
-      </p>
-    {:else if rest.type === "episode"}
-      <p class="trakt-card-title small ellipsis">
-        {episodeNumberLabel({
-          seasonNumber: rest.episode.season,
-          episodeNumber: rest.episode.number,
-        })} - {media.title}
-      </p>
-      <p class="trakt-card-subtitle small ellipsis">
-        {rest.episode.title}
-      </p>
-    {:else}
-      <p class="trakt-card-title small ellipsis">
-        {media.title}
-      </p>
-      <GenreList
-        classList="trakt-card-subtitle small ellipsis"
-        separator=", "
-        genres={media.genres}
+    </SummaryCardDetails>
+  </Link>
+
+  <SummaryCardBottomBar>
+    <div class="trakt-summary-card-tags">
+      {@render tag?.()}
+    </div>
+
+    {#if action}
+      {@render action()}
+    {/if}
+
+    {#if badge}
+      {@render badge()}
+    {/if}
+
+    {#if !action && rest.variant !== "activity"}
+      <SummaryCardRating
+        item={rest.type === "episode" ? rest.episode : media}
       />
     {/if}
-  </CardFooter>
+  </SummaryCardBottomBar>
 </Card>
+
+<style>
+  :global(.trakt-summary-card) {
+    :global(p.trakt-card-subtitle) {
+      color: var(--color-text-secondary);
+    }
+
+    :global(.trakt-card-content),
+    :global(.trakt-card-content > .trakt-link) {
+      display: flex;
+      flex-grow: 1;
+      text-decoration: none;
+      overflow: hidden;
+    }
+  }
+
+  .trakt-summary-poster {
+    height: var(--height-summary-card-cover);
+    width: calc(var(--height-summary-card-cover) * var(--poster-aspect-ratio));
+
+    flex-shrink: 0;
+  }
+
+  .trakt-summary-card-tags {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    flex-grow: 1;
+  }
+</style>
