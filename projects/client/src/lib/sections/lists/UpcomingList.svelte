@@ -1,10 +1,9 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
-  import CalendarMediaCard from "$lib/features/calendar/CalendarMediaCard.svelte";
+  import CalendarItem from "$lib/features/calendar/CalendarItem.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import CalendarButton from "./components/CalendarButton.svelte";
   import CtaItem from "./components/cta/CtaItem.svelte";
-  import EpisodeItem from "./components/EpisodeItem.svelte";
   import { useUpcomingItems } from "./stores/useUpcomingItems";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -18,13 +17,7 @@
   --height-list={mediaListHeightResolver("landscape")}
 >
   {#snippet item(entry)}
-    {#if "show" in entry}
-      <EpisodeItem episode={entry} show={entry.show} variant="upcoming" />
-    {/if}
-
-    {#if entry.type === "movie"}
-      <CalendarMediaCard media={entry} type="movie" />
-    {/if}
+    <CalendarItem item={entry} />
   {/snippet}
 
   {#snippet ctaItem()}

@@ -16,8 +16,12 @@
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { AnalyticsEvent } from "../analytics/events/AnalyticsEvent";
+  import { useTrack } from "../analytics/useTrack";
 
   const { type, media }: Pick<MediaCardProps, "type" | "media"> = $props();
+
+  const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 
   /*
     FIXME:
@@ -62,7 +66,11 @@
     </CardActionBar>
   </RenderFor>
 
-  <Link focusable={false} href={UrlBuilder.media(type, media.slug)}>
+  <Link
+    focusable={false}
+    href={UrlBuilder.media(type, media.slug)}
+    onclick={() => track({ source: "calendar", type })}
+  >
     <CardCover
       title={media.title}
       src={media.cover.url.thumb}
