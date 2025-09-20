@@ -18,6 +18,7 @@ export type EpisodeCardProps = EpisodeItemVariant & {
   tag?: Snippet;
   show: ShowInput;
   style?: 'cover' | 'summary';
+  source?: string;
   popupActions?: Snippet;
   /**
    * FIXME: We should migrate these on the backend and remove from the client.

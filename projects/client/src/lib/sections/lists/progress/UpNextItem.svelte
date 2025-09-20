@@ -22,7 +22,14 @@
 </script>
 
 <UpNextSwipe {episode} {show} {style}>
-  <EpisodeItem {episode} {show} {status} {style} variant="next">
+  <EpisodeItem
+    {episode}
+    {show}
+    {status}
+    {style}
+    source="continue-watching"
+    variant="next"
+  >
     {#snippet popupActions()}
       <RenderFor audience="authenticated">
         <MarkAsWatchedAction
