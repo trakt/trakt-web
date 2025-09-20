@@ -2,8 +2,8 @@
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import { getLocale } from "$lib/features/i18n";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
+  import CalendarItem from "../CalendarItem.svelte";
   import type { CalendarEntry } from "../models/CalendarEntry";
-  import CalendarItem from "./CalendarItem.svelte";
   import { dateKey } from "./dateKey";
   import NoItems from "./NoItems.svelte";
   import { syncScroll } from "./syncScroll";
