@@ -48,6 +48,7 @@
     activityAt={activity.watchedAt}
     {activity}
     popupActions={isActionable ? popupActions : undefined}
+    source="watch-history"
   />
 {/if}
 
@@ -56,5 +57,6 @@
     activityAt={activity.watchedAt}
     {activity}
     popupActions={isActionable ? popupActions : undefined}
+    source="watch-history"
   />
 {/if}
