@@ -20,6 +20,7 @@ const BaseEpisodeEntrySchema = z.object({
   year: z.number(),
   certification: z.null().optional(),
   creditCookies: CreditCookieSchema.array(),
+  rating: z.number().nullish(),
 });
 
 // FIXME: discriminated union; only for computed types

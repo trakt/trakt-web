@@ -30,6 +30,7 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   'runtime': NaN,
   'slug': 'silo',
   'status': 'unknown',
+  'rating': undefined,
   'tagline': '',
   'thumb': {
     'url': '/placeholders/landscape_placeholder.png' as HttpsUrl,

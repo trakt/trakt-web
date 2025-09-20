@@ -1,4 +1,5 @@
 import type { ListedMovieResponse } from '@trakt/api';
+import { MovieMatrixResponseMock } from '../../summary/movies/matrix/MovieMatrixResponseMock.ts';
 
 export const WatchlistMoviesResponseMock: ListedMovieResponse[] = [
   {
@@ -7,15 +8,6 @@ export const WatchlistMoviesResponseMock: ListedMovieResponse[] = [
     'listed_at': '2024-12-27T21:34:14.000Z',
     'notes': null,
     'type': 'movie',
-    'movie': {
-      'title': 'The Matrix',
-      'year': 1999,
-      'ids': {
-        'trakt': 481,
-        'slug': 'the-matrix-1999',
-        'imdb': 'tt0133093',
-        'tmdb': 603,
-      },
-    },
+    'movie': MovieMatrixResponseMock,
   },
 ];

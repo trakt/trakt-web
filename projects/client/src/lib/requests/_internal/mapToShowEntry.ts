@@ -7,6 +7,7 @@ import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
 import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
+import { mapToTraktRating } from './mapToTraktRating.ts';
 
 export function mapToShowEntry(
   show: ShowResponse,
@@ -57,5 +58,6 @@ export function mapToShowEntry(
     episode: {
       count: show.aired_episodes ?? NaN,
     },
+    rating: mapToTraktRating(show.rating),
   };
 }

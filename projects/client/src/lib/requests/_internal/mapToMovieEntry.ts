@@ -7,6 +7,7 @@ import { mapToCover } from './mapToCover.ts';
 import { mapToCreditCookies } from './mapToCreditCookies.ts';
 import { mapToLogo } from './mapToLogo.ts';
 import { mapToPoster } from './mapToPoster.ts';
+import { mapToTraktRating } from './mapToTraktRating.ts';
 
 function mapMovieCertificationResponse(
   certification: MovieCertificationResponse | Nil,
@@ -56,5 +57,6 @@ export function mapToMovieEntry(
     votes: movie.votes ?? 0,
     plexSlug: movie.ids.plex?.slug,
     creditCookies: mapToCreditCookies(movie),
+    rating: mapToTraktRating(movie.rating),
   };
 }

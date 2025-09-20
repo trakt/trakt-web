@@ -38,6 +38,7 @@ export const ShowSiloMappedMock: ShowEntry = {
   'runtime': 60,
   'slug': 'silo',
   'status': 'returning series',
+  'rating': 0.8161,
   'tagline': 'The truth will surface.',
   'thumb': {
     'url':

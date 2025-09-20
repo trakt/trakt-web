@@ -2,7 +2,7 @@ import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
 
 export const MovieHereticRatingsMappedMock: MediaRating = {
   'trakt': {
-    'rating': 0.722561,
+    'rating': 0.7226,
     'votes': 3803,
     'distribution': {
       '1': 22,
