@@ -11,6 +11,7 @@ export const EpisodeSiloMappedMock: EpisodeEntry = {
   'genres': [],
   'number': 1,
   'runtime': 60,
+  'rating': 0.7753,
   'cover': {
     'url':
       'https://walter-r2.trakt.tv/images/episodes/005/165/667/screenshots/thumb/e035db5f06.jpg.webp',

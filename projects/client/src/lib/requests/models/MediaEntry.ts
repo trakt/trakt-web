@@ -43,6 +43,7 @@ export const MediaEntrySchema = z.object({
   colors: z.tuple([z.string(), z.string()]).optional(),
   plexSlug: z.string().nullish(),
   creditCookies: CreditCookieSchema.array(),
+  rating: z.number().nullish(),
 });
 
 export type MediaEntry = z.infer<typeof MediaEntrySchema>;

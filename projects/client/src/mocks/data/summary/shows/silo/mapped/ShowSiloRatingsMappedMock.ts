@@ -2,7 +2,7 @@ import type { MediaRating } from '$lib/requests/models/MediaRating.ts';
 
 export const ShowSiloRatingsMappedMock: MediaRating = {
   'trakt': {
-    'rating': 0.815357,
+    'rating': 0.8154,
     'votes': 7241,
     'distribution': {
       '1': 40,

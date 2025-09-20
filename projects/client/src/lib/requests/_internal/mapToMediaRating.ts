@@ -1,6 +1,7 @@
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { RatingsResponse } from '@trakt/api';
 import type { MediaRating } from '../models/MediaRating.ts';
+import { mapToTraktRating } from './mapToTraktRating.ts';
 
 export function mapToMediaRating(
   ratings: RatingsResponse,
@@ -33,7 +34,7 @@ export function mapToMediaRating(
 
   return {
     trakt: {
-      rating: ratings.trakt.rating / 10,
+      rating: mapToTraktRating(ratings.trakt.rating),
       votes: ratings.trakt.votes,
       distribution: ratings.trakt.distribution,
     },

@@ -1,4 +1,5 @@
 import type { FavoriteShowResponse } from '@trakt/api';
+import { ShowSiloResponseMock } from '../../summary/shows/silo/response/ShowSiloResponseMock.ts';
 
 export const FavoritedShowsResponseMock: FavoriteShowResponse[] = [
   {
@@ -7,17 +8,6 @@ export const FavoritedShowsResponseMock: FavoriteShowResponse[] = [
     'listed_at': '2025-01-16T17:37:41.000Z',
     'notes': null,
     'type': 'show',
-    'show': {
-      'title': 'Silo',
-      'year': 2023,
-      'ids': {
-        'trakt': 180770,
-        'slug': 'silo',
-        'tvdb': 403245,
-        'imdb': 'tt14688458',
-        'tmdb': 125988,
-      },
-      'aired_episodes': 19,
-    },
+    'show': ShowSiloResponseMock,
   },
 ];

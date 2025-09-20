@@ -11,6 +11,7 @@ export const MovieMatrixMappedMock: MovieEntry = {
   'tagline': 'The fight for the future begins.',
   'country': 'us',
   'status': 'released',
+  'rating': 0.8755,
   'languages': [
     'en',
   ],

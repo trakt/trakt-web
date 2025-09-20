@@ -1,4 +1,5 @@
 import type { FavoriteMovieResponse } from '@trakt/api';
+import { MovieHereticResponseMock } from '../../summary/movies/heretic/response/MovieHereticResponseMock.ts';
 
 export const FavoritedMoviesResponseMock: FavoriteMovieResponse[] = [
   {
@@ -7,15 +8,6 @@ export const FavoritedMoviesResponseMock: FavoriteMovieResponse[] = [
     'listed_at': '2025-01-16T17:37:18.000Z',
     'notes': null,
     'type': 'movie',
-    'movie': {
-      'title': 'Heretic',
-      'year': 2024,
-      'ids': {
-        'trakt': 916302,
-        'slug': 'heretic-2024',
-        'imdb': 'tt28015403',
-        'tmdb': 1138194,
-      },
-    },
+    'movie': MovieHereticResponseMock,
   },
 ];

@@ -9,9 +9,11 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 5165667,
+
     'number': 1,
     'overview':
       "Sheriff Becker's plans for the future are thrown off course after his wife meets a hacker with information about the silo.",
+    'rating': 0.776,
     'runtime': 60,
     'season': 1,
     'title': 'Freedom Day',
@@ -30,6 +32,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 2,
     'overview':
       "Juliette, an engineer, pieces together what might have led to a co-worker's mysterious death.",
+    'rating': 0.7686,
     'runtime': 48,
     'season': 1,
     'title': "Holston's Pick",
@@ -48,6 +51,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 3,
     'overview':
       'In her hunt for a new sheriff, Mayor Jahns clashes with Bernard. Juliette strikes a deal to keep the generator running.',
+    'rating': 0.7822,
     'runtime': 62,
     'season': 1,
     'title': 'Machines',
@@ -66,6 +70,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 4,
     'overview':
       'Juliette tries gaining the trust of Deputy Marnes as they work to uncover the truth about recent tragedies.',
+    'rating': 0.7509,
     'runtime': 46,
     'season': 1,
     'title': 'Truth',
@@ -84,6 +89,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 5,
     'overview':
       'Sims appoints Billings as chief deputy to keep tabs on Juliette, whose efforts to solve two murders lead to a showdown.',
+    'rating': 0.7502,
     'runtime': 51,
     'season': 1,
     'title': "The Janitor's Boy",
@@ -102,6 +108,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 6,
     'overview':
       'During her investigation, Juliette uncovers disturbing secrets about someone she thought she knew.',
+    'rating': 0.7616,
     'runtime': 51,
     'season': 1,
     'title': 'The Relic',
@@ -120,6 +127,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 7,
     'overview':
       "Bernard seeks Juliette's cooperation as he grows increasingly concerned about the silo's security. Juliette asks her father for a favor.",
+    'rating': 0.7815,
     'runtime': 48,
     'season': 1,
     'title': 'The Flamekeepers',
@@ -138,6 +146,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 8,
     'overview':
       "New information causes Juliette to see her family's past differently—and she finally gains access to the silo's biggest secrets.",
+    'rating': 0.7918,
     'runtime': 44,
     'season': 1,
     'title': 'Hanna',
@@ -156,6 +165,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 9,
     'overview':
       'Racked with guilt, Billings sets off on a personal mission, only to discover a mind-blowing clue from Juliette.',
+    'rating': 0.7981,
     'runtime': 44,
     'season': 1,
     'title': 'The Getaway',
@@ -174,6 +184,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     'number': 10,
     'overview':
       "Juliette's fate seems sealed when certain truths finally come to light.",
+    'rating': 0.8318,
     'runtime': 45,
     'season': 1,
     'title': 'Outside',

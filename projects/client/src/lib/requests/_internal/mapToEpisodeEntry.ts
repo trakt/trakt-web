@@ -6,6 +6,7 @@ import type { CalendarShowResponse, UpNextResponse } from '@trakt/api';
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
 import { mapToCreditCookies } from './mapToCreditCookies.ts';
+import { mapToTraktRating } from './mapToTraktRating.ts';
 
 type EpisodeResponse =
   | UpNextResponse[0]['progress']['next_episode']
@@ -36,5 +37,6 @@ export function mapToEpisodeEntry(
     airDate,
     year: airDate.getFullYear(),
     creditCookies: mapToCreditCookies(episode),
+    rating: mapToTraktRating(episode.rating),
   };
 }
