@@ -121,6 +121,7 @@
             season: episode.season,
             episode: episode.number,
           })}
+        source={{ id: "episode" }}
       />
     {/snippet}
     <SummaryTitle {title} />
