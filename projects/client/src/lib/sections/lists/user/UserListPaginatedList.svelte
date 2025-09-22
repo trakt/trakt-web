@@ -55,6 +55,7 @@
     <ShareButton
       {title}
       textFactory={({ title: name }) => m.text_share_list({ name })}
+      source={{ id: "user-list", type }}
     />
   {/snippet}
 </DrilledMediaList>

@@ -142,6 +142,7 @@
               return m.text_share_show({ title });
           }
         }}
+        source={{ id: "media", type }}
       />
     {/snippet}
 

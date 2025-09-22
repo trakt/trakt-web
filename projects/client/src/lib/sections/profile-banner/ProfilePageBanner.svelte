@@ -61,6 +61,7 @@
         title={profile.name.first}
         urlOverride={UrlBuilder.profile.user(shareableSlug)}
         textFactory={({ title: name }) => m.text_share_profile({ name })}
+        source={{ id: "profile", type: $isMe ? "own" : "other" }}
       />
     </div>
   </div>

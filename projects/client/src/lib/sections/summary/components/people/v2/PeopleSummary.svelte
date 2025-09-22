@@ -20,6 +20,7 @@
       title={person.name}
       textFactory={({ title: name }) => m.text_share_person({ name })}
       style="ghost"
+      source={{ id: "person" }}
     />
   {/snippet}
 

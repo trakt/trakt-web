@@ -41,6 +41,7 @@
     <ShareButton
       {title}
       textFactory={({ title: name }) => m.text_share_top_list({ name })}
+      source={{ id: "popular", type }}
     />
   {/snippet}
 </DrilledMediaList>

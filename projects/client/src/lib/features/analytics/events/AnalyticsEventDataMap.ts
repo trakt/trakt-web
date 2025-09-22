@@ -5,6 +5,8 @@ import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
+type SourceType = { source: string };
+
 type ActionType = { action: 'add' | 'remove' };
 type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
 type FilterType = { id: string; action: 'set' | 'reset' };
@@ -15,10 +17,11 @@ type ExtrasType = { slug: string; type: MediaVideoType };
 type CommentType = { action: 'post' | 'reply' };
 type ReactionType = { action: 'add' | 'remove'; type: 'comment' };
 type CalendarType = { action: 'reset' | 'next' | 'previous' };
-type StreamOnType = { source: string };
+type StreamOnType = SourceType;
 type CtaDataType = { type: CtaType };
-type DrilldownType = { source: string; type?: string };
+type DrilldownType = SourceType & { type?: string };
 type SearchType = { mode: SearchMode };
+type ShareType = DrilldownType;
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -31,6 +34,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Drilldown]: DrilldownType;
   [AnalyticsEvent.SummaryDrilldown]: DrilldownType;
   [AnalyticsEvent.Search]: SearchType;
+  [AnalyticsEvent.Share]: ShareType;
 
   [AnalyticsEvent.Drop]: never;
   [AnalyticsEvent.Restore]: never;

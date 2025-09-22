@@ -2,7 +2,10 @@
   import { browser } from "$app/environment";
   import { page } from "$app/state";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages";
+  import type { DrilldownSource } from "$lib/sections/lists/components/models/DrilldownSource";
   import ActionButton from "../ActionButton.svelte";
 
   type ShareButtonProps = {
@@ -10,6 +13,7 @@
     textFactory: ({ title }: { title: string }) => string;
     urlOverride?: string;
     style?: "flat" | "ghost";
+    source: DrilldownSource;
   };
 
   const {
@@ -17,7 +21,10 @@
     textFactory,
     urlOverride,
     style = "flat",
+    source,
   }: ShareButtonProps = $props();
+
+  const { track } = useTrack(AnalyticsEvent.Share);
 
   const data = $derived({
     title,
@@ -35,6 +42,7 @@
     }
 
     try {
+      track({ source: source.id, type: source.type });
       await navigator.share(data);
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
