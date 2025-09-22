@@ -1,6 +1,6 @@
 {
   "id": "tv.trakt.app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "vendor": "Trakt Inc.",
   "type": "web",
   "main": "index.html",
