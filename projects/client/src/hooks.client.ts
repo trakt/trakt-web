@@ -24,11 +24,29 @@ Sentry.init({
     maskAllText: false,
     blockAllMedia: false,
   })],
-
+  // Strings for partial matches. Regex patterns for exact matches.
   ignoreErrors: [
     'CancelledError',
     'AbortError',
+    'Failed to register a ServiceWorker',
+    'service-worker.js load failed',
   ],
+  beforeSend(event) {
+    const isWellKnownRejection = event.exception?.values?.some(
+      ({ type, value, stacktrace }) => {
+        const isRejected = type === 'Rejected' || value === 'Rejected';
+        const isServiceWorker = stacktrace?.frames?.some(
+          (frame) =>
+            frame.filename?.includes('service-worker') ||
+            frame.function?.includes('navigator.serviceWorker.register'),
+        );
+
+        return isRejected && isServiceWorker;
+      },
+    );
+
+    return isWellKnownRejection ? null : event;
+  },
 });
 
 // FIXME remove once we have custom paraglide handling for this
