@@ -164,10 +164,16 @@
                                   <div class="trakt-layout-content">
                                     {@render children()}
                                   </div>
-                                  <RenderFor audience="authenticated">
+                                  <RenderFor
+                                    audience="authenticated"
+                                    navigation="default"
+                                  >
                                     <Footer />
                                   </RenderFor>
-                                  <RenderFor audience="public">
+                                  <RenderFor
+                                    audience="public"
+                                    navigation="default"
+                                  >
                                     {#if !isOnHomePage}
                                       <Footer />
                                     {/if}
