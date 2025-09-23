@@ -7,6 +7,7 @@ function getAuthority() {
     TRAKT_TARGET_ENVIRONMENT
       .replace('api.', '')
       .replace('apiz.', '')
+      .replace('hd.', '')
       .replace('api-staging.', 'staging.'),
   );
 }

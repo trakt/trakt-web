@@ -7,9 +7,6 @@ import { getMarker } from '../../utils/date/Marker.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
 
-const stripHttpsOrHttp = (url: string): string =>
-  url.replace(/^https?:\/\//, '');
-
 function shouldReloadPage(expiresAt: number | Nil) {
   if (getUserManager()) {
     // FIXME: completely remove this refresh flow when fully switching to oidc-client-ts
@@ -40,12 +37,6 @@ export function createAuthenticatedFetch<
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
-
-      input = input.toString()
-        .replaceAll(
-          stripHttpsOrHttp(TRAKT_TARGET_ENVIRONMENT),
-          stripHttpsOrHttp(TRAKT_TARGET_API_ENVIRONMENT),
-        );
 
       const method = init?.method?.toUpperCase();
       const marker = getMarker();
