@@ -41,12 +41,6 @@ export function createAuthenticatedFetch<
         headers.set('Authorization', `Bearer ${token}`);
       }
 
-      input = input.toString()
-        .replaceAll(
-          stripHttpsOrHttp(TRAKT_TARGET_ENVIRONMENT),
-          stripHttpsOrHttp(TRAKT_TARGET_API_ENVIRONMENT),
-        );
-
       const method = init?.method?.toUpperCase();
       const marker = getMarker();
 

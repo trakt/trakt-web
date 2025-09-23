@@ -10,7 +10,8 @@ export function buildOAuthUrl(clientId: string, origin: string) {
   const env = prependHttps(
     TRAKT_TARGET_ENVIRONMENT
       .replace('api.', '')
-      .replace('apiz.', ''),
+      .replace('apiz.', '')
+      .replace('hd.', ''),
   );
 
   return `${env}/oauth/authorize?client_id=${clientId}&redirect_uri=${origin}&response_type=code&hide_email_form=true`;

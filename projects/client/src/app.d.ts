@@ -15,7 +15,6 @@ declare global {
   const TRAKT_CLIENT_ID: string;
   const TRAKT_MODE: 'development' | 'production' | 'test';
   const TRAKT_TARGET_ENVIRONMENT: Environment;
-  const TRAKT_TARGET_API_ENVIRONMENT: Environment;
 
   const TRAKT_GIT_SHA: string;
 
