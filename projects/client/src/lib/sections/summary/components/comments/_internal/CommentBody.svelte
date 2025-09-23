@@ -5,7 +5,10 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { Marked } from "marked";
   import ShadowScroller from "./ShadowScroller.svelte";
-  import { spoilerExtension } from "./spoilerExtension";
+  import {
+    createParagraphSpoilerRenderer,
+    spoilerExtension,
+  } from "./spoilerExtension";
 
   type CommentBodyProps = {
     media: MediaEntry;
@@ -15,7 +18,12 @@
   const { comment, media }: CommentBodyProps = $props();
 
   const marked = $derived(
-    new Marked({ extensions: [spoilerExtension(comment.isSpoiler)] }),
+    new Marked({
+      extensions: [spoilerExtension()],
+      renderer: {
+        paragraph: createParagraphSpoilerRenderer(comment.isSpoiler),
+      },
+    }),
   );
 </script>
 
