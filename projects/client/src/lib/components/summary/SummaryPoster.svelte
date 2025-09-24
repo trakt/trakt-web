@@ -2,6 +2,7 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
+  import { fade } from "svelte/transition";
   import Link from "../link/Link.svelte";
 
   type SummaryPosterProps = {
@@ -11,6 +12,7 @@
     target?: "_blank" | "_self" | "_parent" | "_top";
     hoverOverlay?: Snippet;
     actions?: Snippet;
+    tags?: Snippet;
   };
 
   const {
@@ -20,6 +22,7 @@
     actions,
     hoverOverlay,
     target = "_blank",
+    tags,
   }: SummaryPosterProps = $props();
 
   const activeOverlay = $derived(href && hoverOverlay);
@@ -41,6 +44,12 @@
   {/if}
 
   {@render actions?.()}
+
+  {#if tags}
+    <div class="trakt-summary-poster-tags" transition:fade={{ duration: 150 }}>
+      {@render tags()}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -52,6 +61,8 @@
     flex-direction: column;
     gap: var(--gap-m);
     position: relative;
+
+    padding-bottom: var(--ni-12);
   }
 
   .trakt-summary-poster :global(img),
@@ -99,5 +110,19 @@
     & + .trakt-summary-poster-overlay {
       opacity: 1;
     }
+  }
+
+  .trakt-summary-poster-tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-xs);
+
+    position: absolute;
+    z-index: var(--layer-raised);
+
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 </style>

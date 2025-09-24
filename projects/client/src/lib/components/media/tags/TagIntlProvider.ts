@@ -20,4 +20,6 @@ export const TagIntlProvider: TagIntl = {
   watchCountLabel: () => m.tag_text_watch_count(),
   trendLabel: (delta) =>
     delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
+  postCredits: (count) =>
+    `${m.header_post_credits()} · ${toHumanNumber(count, languageTag())}`,
 };

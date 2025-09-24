@@ -7,8 +7,10 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
+  import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
   import type { MediaSummaryProps } from "../MediaSummaryProps";
@@ -32,6 +34,8 @@
 
   const { ratings } = $derived(useMediaMetaInfo({ media, type }));
   const title = $derived(intl?.title ?? media?.title ?? "");
+  const { watchCount } = $derived(useWatchCount({ media, type: media.type }));
+  const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 </script>
 
 <CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
@@ -42,7 +46,11 @@
       src={media.poster.url.medium}
       alt={title}
       href={streamOn?.preferred?.link ?? media.trailer}
-    />
+    >
+      {#snippet tags()}
+        <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+      {/snippet}
+    </SummaryPoster>
   {/snippet}
 
   {#snippet sideActions()}
