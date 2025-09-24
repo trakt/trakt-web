@@ -5,7 +5,13 @@
   import { slide } from "svelte/transition";
   import type { PopupMenuProps } from "./PopupMenuProps";
 
-  const { items, mode = "overlay", icon, ...props }: PopupMenuProps = $props();
+  const {
+    items,
+    mode = "overlay",
+    size = "small",
+    icon,
+    ...props
+  }: PopupMenuProps = $props();
 
   const { portalTrigger, portal, isOpened } = usePortal();
 </script>
@@ -16,6 +22,7 @@
   aria-haspopup="true"
   class="trakt-popup-menu-button"
   data-mode={mode}
+  data-size={size}
   class:has-custom-icon={!!icon}
   {...props}
 >
@@ -74,6 +81,11 @@
 
     &[data-mode="standalone"] {
       color: var(--color-text-primary);
+    }
+
+    &[data-size="normal"] {
+      width: var(--ni-32);
+      height: var(--ni-32);
     }
 
     &[disabled] {

@@ -722,6 +722,9 @@
     "button_text_share": {
       "default": "Compartilhar"
     },
+    "button_text_trailer": {
+      "default": "Trailer"
+    },
     "header_status": {
       "default": "Status"
     },

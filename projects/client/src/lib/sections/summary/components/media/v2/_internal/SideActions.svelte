@@ -1,21 +1,28 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages";
 
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import TrailerButton from "./TrailerButton.svelte";
 
   const {
     title,
     type,
     trailer,
-  }: { title: string; type: MediaType; trailer: string } = $props();
+    style = "action",
+    slug,
+  }: {
+    title: string;
+    type: MediaType;
+    trailer: string;
+    style?: "action" | "dropdown-item";
+    slug: string;
+  } = $props();
 </script>
 
 <ShareButton
   {title}
-  style="ghost"
+  {style}
   textFactory={({ title }) => {
     switch (type) {
       case "movie":
@@ -27,10 +34,4 @@
   source={{ id: "media", type }}
 />
 
-<ActionButton
-  style="ghost"
-  href={trailer}
-  label={m.translated_value_video_type_trailer()}
->
-  <YouTubeIcon />
-</ActionButton>
+<TrailerButton {trailer} {style} {slug} />

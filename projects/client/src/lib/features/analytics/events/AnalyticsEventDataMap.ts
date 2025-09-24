@@ -47,6 +47,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Rate]: RatingType;
   [AnalyticsEvent.CheckIn]: CheckInType;
   [AnalyticsEvent.Extras]: ExtrasType;
+  [AnalyticsEvent.Trailer]: { slug: string };
   [AnalyticsEvent.StreamOn]: StreamOnType;
 
   [AnalyticsEvent.Settings]: { settings: string };
