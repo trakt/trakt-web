@@ -5,7 +5,7 @@
   import { slide } from "svelte/transition";
   import type { PopupMenuProps } from "./PopupMenuProps";
 
-  const { items, mode = "overlay", ...props }: PopupMenuProps = $props();
+  const { items, mode = "overlay", icon, ...props }: PopupMenuProps = $props();
 
   const { portalTrigger, portal, isOpened } = usePortal();
 </script>
@@ -16,9 +16,14 @@
   aria-haspopup="true"
   class="trakt-popup-menu-button"
   data-mode={mode}
+  class:has-custom-icon={!!icon}
   {...props}
 >
-  <MoreIcon />
+  {#if icon}
+    {@render icon()}
+  {:else}
+    <MoreIcon />
+  {/if}
 </button>
 
 {#if $isOpened}
@@ -71,10 +76,24 @@
       color: var(--color-text-primary);
     }
 
-    &:hover,
-    &[data-popup-state="opened"] {
-      background-color: var(--shade-10);
-      color: var(--purple-900);
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
+
+    &:not(:disabled) {
+      &:hover,
+      &[data-popup-state="opened"] {
+        background-color: var(--shade-10);
+        color: var(--purple-900);
+      }
+    }
+
+    &:active {
+      &[disabled] {
+        animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle)
+          infinite;
+      }
     }
 
     @include for-touch {
@@ -91,7 +110,7 @@
       }
     }
 
-    &[data-popup-state="opened"] {
+    &:not(.has-custom-icon)[data-popup-state="opened"] {
       :global(svg) {
         transform: rotate(90deg);
         animation: rotate-90 var(--transition-increment) ease-in;
