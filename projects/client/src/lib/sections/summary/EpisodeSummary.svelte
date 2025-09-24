@@ -2,12 +2,16 @@
   import * as m from "$lib/features/i18n/messages";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import SeasonList from "$lib/sections/lists/season/SeasonList.svelte";
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import EpisodeSummary from "./components/episode/EpisodeSummary.svelte";
+  import EpisodeSummaryV2 from "./components/episode/v2/EpisodeSummary.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
 
   const {
@@ -32,7 +36,33 @@
   type="show"
 />
 
-<EpisodeSummary {episode} {show} {showIntl} {episodeIntl} {streamOn} {crew} />
+<RenderFor audience="all" device={["mobile"]}>
+  <RenderForFeature flag={FeatureFlag.SummaryV2}>
+    {#snippet enabled()}
+      <EpisodeSummaryV2
+        {episode}
+        {show}
+        {showIntl}
+        {episodeIntl}
+        {streamOn}
+        {crew}
+      />
+    {/snippet}
+
+    <EpisodeSummary
+      {episode}
+      {show}
+      {showIntl}
+      {episodeIntl}
+      {streamOn}
+      {crew}
+    />
+  </RenderForFeature>
+</RenderFor>
+
+<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+  <EpisodeSummary {episode} {show} {showIntl} {episodeIntl} {streamOn} {crew} />
+</RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
 
