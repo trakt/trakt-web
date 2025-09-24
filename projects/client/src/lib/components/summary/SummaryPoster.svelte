@@ -62,6 +62,8 @@
 
     width: var(--ni-320);
     height: var(--ni-480);
+
+    object-fit: cover;
   }
 
   .trakt-summary-poster {
