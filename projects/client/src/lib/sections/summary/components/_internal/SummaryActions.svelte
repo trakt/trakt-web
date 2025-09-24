@@ -25,13 +25,6 @@
     border-radius: var(--border-radius-l);
     box-shadow: var(--popup-shadow);
 
-    :global(.trakt-button) {
-      flex-grow: 1;
-
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-    }
-
     :global(.trakt-popup-menu-button) {
       color: var(--color-text-primary);
     }
