@@ -18,7 +18,7 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     isDeleted: user.deleted,
     slug: user.ids.slug,
     avatar: {
-      url: user.images?.avatar.full ?? DEFAULT_AVATAR,
+      url: prependHttps(user.images?.avatar.full, DEFAULT_AVATAR),
     },
     location: user.location,
     about: user.about,

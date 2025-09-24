@@ -35,7 +35,7 @@ export const OfficialListsResponseMock: ListResponse[] = [
       'images': {
         'avatar': {
           'full':
-            'https://trakt.tv/assets/logos/logomark.circle.gradient-cb51d322e6bc3be6370499c6b61a906f8ef49c42a75e5e6d71aaeab2c6689061.svg',
+            'trakt.tv/assets/logos/logomark.circle.gradient-cb51d322e6bc3be6370499c6b61a906f8ef49c42a75e5e6d71aaeab2c6689061.svg',
         },
       },
     },
