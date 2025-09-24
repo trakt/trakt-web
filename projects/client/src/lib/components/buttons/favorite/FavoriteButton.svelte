@@ -40,7 +40,7 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton {...commonProps} {...props} style="flat" color="default">
+  <ActionButton {...commonProps} {...props} style="ghost" color="default">
     <FavoriteIcon {state} />
   </ActionButton>
 {/if}

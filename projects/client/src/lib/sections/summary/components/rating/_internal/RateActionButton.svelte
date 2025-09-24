@@ -44,20 +44,23 @@
   </ActionButton>
 </trakt-rate-button>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   trakt-rate-button {
     --rating-active-color: var(--shade-400);
 
     :global(.trakt-action-button) {
-      &:hover,
-      &:focus-visible {
-        background-color: var(--rating-active-color);
+      @include for-mouse() {
+        &:hover,
+        &:focus-visible {
+          background-color: var(--rating-active-color);
+        }
       }
     }
 
     &.is-current-rating {
       :global(.trakt-action-button) {
-        background-color: var(--rating-active-color);
         cursor: default;
         pointer-events: none;
       }

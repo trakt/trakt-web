@@ -54,7 +54,7 @@
           <FollowUserButton {profile} {slug} />
         {/if}
         {#if $isMe}
-          <SettingsButton />
+          <SettingsButton style="ghost" />
         {/if}
       </RenderFor>
       <ShareButton

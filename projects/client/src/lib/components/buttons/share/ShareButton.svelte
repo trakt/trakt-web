@@ -12,17 +12,11 @@
     title: string;
     textFactory: ({ title }: { title: string }) => string;
     urlOverride?: string;
-    style?: "flat" | "ghost";
     source: DrilldownSource;
   };
 
-  const {
-    title,
-    textFactory,
-    urlOverride,
-    style = "flat",
-    source,
-  }: ShareButtonProps = $props();
+  const { title, textFactory, urlOverride, source }: ShareButtonProps =
+    $props();
 
   const { track } = useTrack(AnalyticsEvent.Share);
 
@@ -55,7 +49,11 @@
 </script>
 
 {#if isShareable}
-  <ActionButton label={m.button_label_share({ title })} {style} onclick={share}>
+  <ActionButton
+    label={m.button_label_share({ title })}
+    style="ghost"
+    onclick={share}
+  >
     <ShareIcon />
   </ActionButton>
 {/if}
