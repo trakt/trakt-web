@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "À venir"
     },
-    "header_credit_cookies": {
-      "default": "Crédits supplémentaires"
+    "header_post_credits": {
+      "default": "Scènes post-générique"
     },
     "text_after_credits": {
       "default": "Après les crédits"

@@ -1594,7 +1594,7 @@
     "tag_text_unreleased": {
       "default": "No estrenada"
     },
-    "header_credit_cookies": {
+    "header_post_credits": {
       "default": "Escenas post-créditos"
     },
     "text_after_credits": {

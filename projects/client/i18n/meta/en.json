@@ -4522,9 +4522,9 @@
         "ios"
       ]
     },
-    "header_credit_cookies": {
-      "default": "Credit Cookies",
-      "description": "Header text for the credit cookies section, to either denote the number of post credits scenes, or the types of post credits scenes.",
+    "header_post_credits": {
+      "default": "Post Credits",
+      "description": "Header text for the post credits section, to either denote the number of post credits scenes, or the types of post credits scenes.",
       "exclude": [
         "android",
         "ios"

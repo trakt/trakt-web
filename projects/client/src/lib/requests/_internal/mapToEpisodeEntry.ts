@@ -5,7 +5,7 @@ import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { CalendarShowResponse, UpNextResponse } from '@trakt/api';
 import type { EpisodeEntry } from '../models/EpisodeEntry.ts';
 import { type EpisodeType, EpisodeUnknownType } from '../models/EpisodeType.ts';
-import { mapToCreditCookies } from './mapToCreditCookies.ts';
+import { mapToPostCredits } from './mapToPostCredits.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
 type EpisodeResponse =
@@ -36,7 +36,7 @@ export function mapToEpisodeEntry(
     },
     airDate,
     year: airDate.getFullYear(),
-    creditCookies: mapToCreditCookies(episode),
+    postCredits: mapToPostCredits(episode),
     rating: mapToTraktRating(episode.rating),
   };
 }

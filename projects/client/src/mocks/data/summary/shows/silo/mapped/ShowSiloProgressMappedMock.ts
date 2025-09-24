@@ -21,5 +21,5 @@ export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'minutesLeft': 301,
   'type': EpisodeStandardType.standard,
   'year': 2024,
-  'creditCookies': [],
+  'postCredits': [],
 };

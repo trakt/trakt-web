@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "Nog niet uitgebracht"
     },
-    "header_credit_cookies": {
-      "default": "Creditscènes"
+    "header_post_credits": {
+      "default": "Nacreditscènes"
     },
     "text_after_credits": {
       "default": "Na de credits"

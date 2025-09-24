@@ -1594,7 +1594,7 @@
     "tag_text_unreleased": {
       "default": "Inedito"
     },
-    "header_credit_cookies": {
+    "header_post_credits": {
       "default": "Scene post-crediti"
     },
     "text_after_credits": {

@@ -59,5 +59,5 @@ export const MovieHereticMappedMock: MovieEntry = {
   ],
   'votes': 2083,
   'plexSlug': 'heretic-2024',
-  'creditCookies': [],
+  'postCredits': [],
 };

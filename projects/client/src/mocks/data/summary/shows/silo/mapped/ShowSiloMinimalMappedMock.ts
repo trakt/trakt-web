@@ -43,7 +43,7 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   'year': 2023,
   'colors': ['#D29D40', '#1E2E2F'],
   'plexSlug': undefined,
-  'creditCookies': [],
+  'postCredits': [],
   'episode': {
     'count': 20,
   },

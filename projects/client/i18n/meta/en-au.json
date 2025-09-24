@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "Unreleased"
     },
-    "header_credit_cookies": {
-      "default": "Credit Cookies"
+    "header_post_credits": {
+      "default": "Post Credits"
     },
     "text_after_credits": {
       "default": "After credits"

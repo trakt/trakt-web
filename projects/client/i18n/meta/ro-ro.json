@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "Nelansat"
     },
-    "header_credit_cookies": {
-      "default": "Scene suplimentare"
+    "header_post_credits": {
+      "default": "Scene post-credite"
     },
     "text_after_credits": {
       "default": "După credite"

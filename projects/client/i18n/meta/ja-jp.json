@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "未公開"
     },
-    "header_credit_cookies": {
-      "default": "クレジット後のシーン"
+    "header_post_credits": {
+      "default": "ポストクレジット"
     },
     "text_after_credits": {
       "default": "エンドロール後"

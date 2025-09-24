@@ -1594,7 +1594,7 @@
     "tag_text_unreleased": {
       "default": "Не вийшов"
     },
-    "header_credit_cookies": {
+    "header_post_credits": {
       "default": "Сцени після титрів"
     },
     "text_after_credits": {
