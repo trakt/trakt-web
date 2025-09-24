@@ -36,6 +36,7 @@ export const AnalyticsEvent = {
   Rate: buildEventKey(MEDIA_ACTION_PREFIX, 'rate'),
   CheckIn: buildEventKey(MEDIA_ACTION_PREFIX, 'check-in'),
   Extras: buildEventKey(MEDIA_ACTION_PREFIX, 'extras'),
+  Trailer: buildEventKey(MEDIA_ACTION_PREFIX, 'trailer'),
   StreamOn: buildEventKey(MEDIA_ACTION_PREFIX, 'stream-on'),
 
   Settings: buildEventKey(USER_ACTION_PREFIX, 'settings'),

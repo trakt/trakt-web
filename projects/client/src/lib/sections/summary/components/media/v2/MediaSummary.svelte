@@ -9,6 +9,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import Summary from "../../_internal/Summary.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
+  import RateNow from "../../rating/RateNow.svelte";
   import type { MediaSummaryProps } from "../MediaSummaryProps";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
@@ -45,7 +46,7 @@
   {/snippet}
 
   {#snippet sideActions()}
-    <SideActions {title} {type} trailer={media.trailer} />
+    <SideActions {title} {type} trailer={media.trailer} slug={media.slug} />
   {/snippet}
 
   {#snippet meta()}
@@ -53,7 +54,11 @@
     <SummaryTitle {title} genres={media.genres} year={media.year} />
 
     <RenderFor audience="authenticated">
-      <MediaActions {media} />
+      <MediaActions {media} {streamOn} {title} />
+
+      <div class="trakt-summary-rate-now">
+        <RateNow {type} {media} isAlwaysVisible />
+      </div>
     </RenderFor>
   {/snippet}
 
@@ -63,3 +68,25 @@
 
   <MediaDetails {media} {studios} {crew} {type} />
 </Summary>
+
+<style>
+  /* FIXME: When ratings are redesigned, remove this */
+  .trakt-summary-rate-now {
+    :global(h6) {
+      display: none;
+    }
+
+    :global(svg) {
+      --icon-color: var(--color-text-primary);
+    }
+
+    :global(.is-current-rating svg) {
+      --icon-fill-color: var(--color-text-primary);
+    }
+
+    :global(.trakt-action-button[disabled]) {
+      background-color: transparent;
+      opacity: 0.3;
+    }
+  }
+</style>

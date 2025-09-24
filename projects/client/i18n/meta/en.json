@@ -1959,6 +1959,14 @@
         "ios"
       ]
     },
+    "button_text_trailer": {
+      "default": "Trailer",
+      "description": "Text for the button that allows users to watch a movie or show trailer.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "header_status": {
       "default": "Status",
       "description": "Header for the status section.",
