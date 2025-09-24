@@ -6,6 +6,8 @@ import {
   permissionSchema,
 } from '$lib/requests/models/Permission.ts';
 import { UserNameSchema } from '$lib/requests/models/UserName.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { DEFAULT_AVATAR } from '$lib/utils/constants.ts';
 import { toUserName } from '$lib/utils/formatting/string/toUserName.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
@@ -15,7 +17,6 @@ import {
   upNextSortOptionSchema,
 } from '@trakt/api';
 import { z } from 'zod';
-import { assertDefined } from '../../../utils/assert/assertDefined.ts';
 
 export const UserSettingsSchema = z.object({
   id: z.union([z.number(), z.string()]),
@@ -89,7 +90,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
     location: user.location ?? '',
     joinedAt: new Date(user.joined_at),
     avatar: {
-      url: user.images.avatar.full,
+      url: prependHttps(user.images.avatar.full, DEFAULT_AVATAR),
     },
     cover: {
       url: prependHttps(
