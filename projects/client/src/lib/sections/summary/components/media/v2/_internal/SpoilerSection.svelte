@@ -1,7 +1,5 @@
 <script lang="ts">
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
-  import ClampedText from "$lib/components/text/ClampedText.svelte";
-  import * as m from "$lib/features/i18n/messages";
   import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import { writable } from "svelte/store";
@@ -42,9 +40,7 @@
         class="trakt-spoiler-section-content"
         transition:slide={{ duration: 150, axis: "y" }}
       >
-        <p class="secondary">
-          {@render children()}
-        </p>
+        {@render children()}
       </div>
     {/if}
   </button>
@@ -53,12 +49,7 @@
 {#if $isSpoilerHidden}
   {@render spoiler()}
 {:else}
-  <ClampedText
-    classList="secondary"
-    label={m.button_label_expand_media_overview({ title })}
-  >
-    {@render children()}
-  </ClampedText>
+  {@render children()}
 {/if}
 
 <style>

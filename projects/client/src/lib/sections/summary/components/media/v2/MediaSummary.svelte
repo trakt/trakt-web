@@ -58,7 +58,7 @@
   {/snippet}
 
   <SpoilerSection {media} title="description">
-    {intl.overview ?? media.overview}
+    <p class="secondary">{intl.overview ?? media.overview}</p>
   </SpoilerSection>
 
   <MediaDetails {media} {studios} {crew} {type} />
