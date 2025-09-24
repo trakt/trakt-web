@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "Unveröffentlicht"
     },
-    "header_credit_cookies": {
-      "default": "Credits-Szenen"
+    "header_post_credits": {
+      "default": "Post-Credit-Szenen"
     },
     "text_after_credits": {
       "default": "Nach dem Abspann"

@@ -66,10 +66,10 @@ function runtime(entry: MediaEntry | EpisodeEntry) {
   };
 }
 
-function creditCookies(entry: MediaEntry | EpisodeEntry) {
+function postCredits(entry: MediaEntry | EpisodeEntry) {
   return {
-    title: m.header_credit_cookies(),
-    values: entry.creditCookies
+    title: m.header_post_credits(),
+    values: entry.postCredits
       .map((scene) => {
         return scene === 'during'
           ? m.text_during_credits()
@@ -162,7 +162,7 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
       episodeAirDate(props.episode),
       runtime(props.episode),
       ...mainCredits(props.type, props.crew),
-      creditCookies(props.episode),
+      postCredits(props.episode),
     ];
   }
 
@@ -172,6 +172,6 @@ export function useMediaDetails(props: MediaDetailsProps): MediaDetail[] {
     runtime(props.media),
     ...mainCredits(props.type, props.crew),
     ...metaDetails(props.media, props.studios),
-    creditCookies(props.media),
+    postCredits(props.media),
   ];
 }

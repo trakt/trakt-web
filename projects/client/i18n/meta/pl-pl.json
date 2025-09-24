@@ -1594,7 +1594,7 @@
     "tag_text_unreleased": {
       "default": "Niewydany"
     },
-    "header_credit_cookies": {
+    "header_post_credits": {
       "default": "Sceny po napisach"
     },
     "text_after_credits": {

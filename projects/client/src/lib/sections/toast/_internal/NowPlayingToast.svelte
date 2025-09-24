@@ -16,12 +16,12 @@
 {#if $nowPlaying}
   <ToastBase item={$nowPlaying}>
     <div class="trakt-now-playing-header">
-      {#if $nowPlaying.media.creditCookies.length > 0}
-        <div class="trakt-credit-cookies-label">
-          <span class="meta-info credit-cookies-count">
-            {$nowPlaying.media.creditCookies.length}
+      {#if $nowPlaying.media.postCredits.length > 0}
+        <div class="trakt-post-credits-label">
+          <span class="meta-info post-credits-count">
+            {$nowPlaying.media.postCredits.length}
           </span>
-          <span class="meta-info">{m.header_credit_cookies()}</span>
+          <span class="meta-info">{m.header_post_credits()}</span>
         </div>
       {:else}
         <div class="trakt-now-playing-label">
@@ -95,8 +95,8 @@
     }
   }
 
-  .trakt-credit-cookies-label,
-  .credit-cookies-count {
+  .trakt-post-credits-label,
+  .post-credits-count {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,7 +104,7 @@
     gap: var(--gap-xxs);
   }
 
-  .credit-cookies-count {
+  .post-credits-count {
     width: var(--ni-20);
     height: var(--ni-20);
 

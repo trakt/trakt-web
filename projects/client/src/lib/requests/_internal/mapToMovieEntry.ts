@@ -4,8 +4,8 @@ import type { MovieCertificationResponse, MovieResponse } from '@trakt/api';
 import type { MovieEntry } from '../models/MovieEntry.ts';
 import { mapToColors } from './mapToColors.ts';
 import { mapToCover } from './mapToCover.ts';
-import { mapToCreditCookies } from './mapToCreditCookies.ts';
 import { mapToLogo } from './mapToLogo.ts';
+import { mapToPostCredits } from './mapToPostCredits.ts';
 import { mapToPoster } from './mapToPoster.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
@@ -56,7 +56,7 @@ export function mapToMovieEntry(
     certification: mapMovieCertificationResponse(movie.certification),
     votes: movie.votes ?? 0,
     plexSlug: movie.ids.plex?.slug,
-    creditCookies: mapToCreditCookies(movie),
+    postCredits: mapToPostCredits(movie),
     rating: mapToTraktRating(movie.rating),
   };
 }

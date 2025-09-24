@@ -1,9 +1,9 @@
 import { genreOptionSchema } from '@trakt/api';
 import { z } from 'zod';
-import { CreditCookieSchema } from './CreditCookieSchema.ts';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 import { MediaStatusSchema } from './MediaStatus.ts';
 import { MediaTypeSchema } from './MediaType.ts';
+import { PostCreditsSchema } from './PostCreditsSchema.ts';
 
 const ImageUrlsSchema = z.object({
   medium: HttpsUrlSchema,
@@ -42,7 +42,7 @@ export const MediaEntrySchema = z.object({
   votes: z.number(),
   colors: z.tuple([z.string(), z.string()]).optional(),
   plexSlug: z.string().nullish(),
-  creditCookies: CreditCookieSchema.array(),
+  postCredits: PostCreditsSchema.array(),
   rating: z.number().nullish(),
 });
 

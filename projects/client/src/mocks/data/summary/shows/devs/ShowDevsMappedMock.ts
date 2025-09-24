@@ -60,7 +60,7 @@ export const ShowDevsMappedMock: ShowEntry = {
   'certification': 'TV-MA',
   'votes': 3522,
   'plexSlug': 'devs',
-  'creditCookies': [],
+  'postCredits': [],
   'episode': {
     'count': 8,
   },

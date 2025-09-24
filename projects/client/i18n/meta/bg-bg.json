@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "Предстоящ"
     },
-    "header_credit_cookies": {
-      "default": "Сцени след надписите"
+    "header_post_credits": {
+      "default": "Сцени след кредити"
     },
     "text_after_credits": {
       "default": "След надписите"

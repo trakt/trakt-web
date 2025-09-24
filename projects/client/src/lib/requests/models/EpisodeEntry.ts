@@ -1,8 +1,8 @@
 import { genreOptionSchema } from '@trakt/api';
 import { z } from 'zod';
-import { CreditCookieSchema } from './CreditCookieSchema.ts';
 import { EpisodeTypeSchema } from './EpisodeType.ts';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
+import { PostCreditsSchema } from './PostCreditsSchema.ts';
 
 const BaseEpisodeEntrySchema = z.object({
   id: z.number(),
@@ -19,7 +19,7 @@ const BaseEpisodeEntrySchema = z.object({
   runtime: z.number(),
   year: z.number(),
   certification: z.null().optional(),
-  creditCookies: CreditCookieSchema.array(),
+  postCredits: PostCreditsSchema.array(),
   rating: z.number().nullish(),
 });
 

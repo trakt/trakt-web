@@ -1594,7 +1594,7 @@
     "tag_text_unreleased": {
       "default": "Uutgitt"
     },
-    "header_credit_cookies": {
+    "header_post_credits": {
       "default": "Ettertekstscener"
     },
     "text_after_credits": {

@@ -1594,8 +1594,8 @@
     "tag_text_unreleased": {
       "default": "Não lançado(s)"
     },
-    "header_credit_cookies": {
-      "default": "Cenas pós-créditos"
+    "header_post_credits": {
+      "default": "Pós-créditos"
     },
     "text_after_credits": {
       "default": "Após os créditos"

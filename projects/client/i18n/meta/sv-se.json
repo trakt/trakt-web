@@ -1594,7 +1594,7 @@
     "tag_text_unreleased": {
       "default": "Ej släppt"
     },
-    "header_credit_cookies": {
+    "header_post_credits": {
       "default": "Eftertexter"
     },
     "text_after_credits": {
