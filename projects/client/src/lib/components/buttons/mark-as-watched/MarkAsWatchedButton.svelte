@@ -17,6 +17,7 @@
     isWatched,
     isRewatching,
     style,
+    isWatchable,
     ...props
   }: MarkAsWatchedButtonProps = $props();
 
@@ -33,7 +34,7 @@
     color: $color,
     variant: $variant,
     onclick: handler,
-    disabled: isMarkingAsWatched,
+    disabled: isMarkingAsWatched || !isWatchable,
     ...events,
   });
 </script>

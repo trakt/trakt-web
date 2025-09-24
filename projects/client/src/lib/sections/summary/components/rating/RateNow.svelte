@@ -25,7 +25,12 @@
 
   type RateNowProps = RateableEpisode | RateableMedia;
 
-  const { ...props }: {} & RateNowProps = $props();
+  const {
+    isAlwaysVisible = false,
+    ...props
+  }: {
+    isAlwaysVisible?: boolean;
+  } & RateNowProps = $props();
 
   const { isRateable } = $derived(useIsRateable(props));
 
@@ -41,7 +46,7 @@
 </script>
 
 <div class="trakt-rate-now" data-dpad-navigation={DpadNavigationType.List}>
-  {#if $isRateable}
+  {#if $isRateable || isAlwaysVisible}
     <h6>{m.header_rate_now()}</h6>
     <div class="trakt-rate-actions" transition:fade={{ duration: 150 }}>
       {#each Object.values(SimpleRating) as simpleRating}
@@ -49,7 +54,7 @@
           style="ghost"
           rating={simpleRating}
           isCurrentRating={$currentRating === simpleRating}
-          isDisabled={$isRating}
+          isDisabled={$isRating || !$isRateable}
           onAddRating={(rating: SimpleRating) => {
             if ($currentRating === rating) {
               return;
