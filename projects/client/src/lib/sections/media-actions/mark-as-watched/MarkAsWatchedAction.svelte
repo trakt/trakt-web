@@ -14,7 +14,6 @@
     title,
     allowRewatch = false,
     i18n,
-    isAlwaysVisible = false,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -45,7 +44,7 @@
   );
 </script>
 
-{#if isWatchable || isAlwaysVisible}
+{#if isWatchable}
   <MarkAsWatchedButton
     {style}
     {title}
@@ -56,6 +55,5 @@
     isMarkingAsWatched={$isMarkingAsWatched}
     onWatch={onWatchHandler}
     onRemove={onRemoveHandler}
-    {isWatchable}
   />
 {/if}
