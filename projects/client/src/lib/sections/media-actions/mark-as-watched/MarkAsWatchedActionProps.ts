@@ -8,4 +8,5 @@ export type MarkAsWatchedActionProps = {
   allowRewatch?: boolean;
   size?: 'normal' | 'small';
   i18n?: MarkAsWatchedButtonIntl;
+  isAlwaysVisible?: boolean;
 } & MarkAsWatchedStoreProps;
