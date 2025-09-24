@@ -107,18 +107,23 @@
     --list-padding: var(--ni-8);
 
     min-width: var(--ni-156);
+    max-width: var(--ni-240);
     padding: var(--list-padding);
 
     border-radius: var(--border-radius-m);
     background-color: var(--shade-10);
 
+    position: absolute;
     box-shadow: var(--popup-shadow);
 
     ul {
       all: unset;
 
       display: grid;
+      grid-template-columns: 100%;
       gap: var(--gap-xxs);
+      max-height: var(--ni-220);
+      overflow-y: auto;
 
       :global(li) {
         width: 100%;
