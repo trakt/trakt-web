@@ -5,6 +5,7 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
+  import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
   import { useMediaMetaInfo } from "../../media/useMediaMetaInfo";
@@ -28,6 +29,8 @@
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
   const { watchCount } = $derived(useWatchCount({ show, episode, type }));
+  const postCreditsCount = $derived(episode.postCredits?.length ?? 0);
+
   const { ratings } = $derived(
     useMediaMetaInfo({ type, episode, media: show }),
   );
@@ -39,7 +42,11 @@
       src={show.poster.url.medium}
       alt={title}
       href={streamOn?.preferred?.link}
-    />
+    >
+      {#snippet tags()}
+        <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+      {/snippet}
+    </SummaryPoster>
   {/snippet}
 
   {#snippet sideActions()}

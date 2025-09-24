@@ -8,4 +8,5 @@ export type TagIntl = {
   toAnticipatedCount: (count: number) => string;
   watchCountLabel: () => string;
   trendLabel: (delta: number) => string;
+  postCredits: (count: number) => string;
 };
