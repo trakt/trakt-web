@@ -1,19 +1,17 @@
 <script lang="ts">
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
   import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
   import { writable } from "svelte/store";
   import { slide } from "svelte/transition";
 
   const {
-    media,
     title,
     children,
-  }: { media: MediaEntry; title: string } & ChildrenProps = $props();
+    ...target
+  }: { title: string } & ChildrenProps & MediaStoreProps = $props();
 
-  const { isSpoilerHidden } = $derived(
-    useMediaSpoiler({ media, type: media.type }),
-  );
+  const { isSpoilerHidden } = $derived(useMediaSpoiler(target));
   const isExpanded = writable(false);
 
   // FIXME: i18n as design is finalized
