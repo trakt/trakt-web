@@ -2,28 +2,12 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { SimpleRating } from "$lib/models/SimpleRating";
-  import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { MediaType } from "$lib/requests/models/MediaType";
-  import type { ShowEntry } from "$lib/requests/models/ShowEntry.ts";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import { fade } from "svelte/transition";
   import RateActionButton from "./_internal/RateActionButton.svelte";
   import { useIsRateable } from "./_internal/useIsRateable";
+  import type { RateNowProps } from "./models/RateNowProps";
   import { useRatings } from "./useRatings";
-
-  type RateableEpisode = {
-    type: "episode";
-    media: EpisodeEntry;
-    show: ShowEntry;
-  };
-
-  type RateableMedia = {
-    type: MediaType;
-    media: MediaEntry;
-  };
-
-  type RateNowProps = RateableEpisode | RateableMedia;
 
   const {
     isAlwaysVisible = false,

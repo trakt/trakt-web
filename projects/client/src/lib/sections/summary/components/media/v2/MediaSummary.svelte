@@ -7,14 +7,14 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
+  import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
-  import RateNow from "../../rating/RateNow.svelte";
   import type { MediaSummaryProps } from "../MediaSummaryProps";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
   import SideActions from "./_internal/SideActions.svelte";
-  import SpoilerSection from "./_internal/SpoilerSection.svelte";
   import SummaryTitle from "./_internal/SummaryTitle.svelte";
 
   const {
@@ -56,37 +56,13 @@
     <RenderFor audience="authenticated">
       <MediaActions {media} {streamOn} {title} />
 
-      <div class="trakt-summary-rate-now">
-        <RateNow {type} {media} isAlwaysVisible />
-      </div>
+      <SummaryRateNow {type} {media} />
     </RenderFor>
   {/snippet}
 
-  <SpoilerSection {media} title="description">
+  <SpoilerSection {media} type={media.type} title="description">
     <p class="secondary">{intl.overview ?? media.overview}</p>
   </SpoilerSection>
 
   <MediaDetails {media} {studios} {crew} {type} />
 </Summary>
-
-<style>
-  /* FIXME: When ratings are redesigned, remove this */
-  .trakt-summary-rate-now {
-    :global(h6) {
-      display: none;
-    }
-
-    :global(svg) {
-      --icon-color: var(--color-text-primary);
-    }
-
-    :global(.is-current-rating svg) {
-      --icon-fill-color: var(--color-text-primary);
-    }
-
-    :global(.trakt-action-button[disabled]) {
-      background-color: transparent;
-      opacity: 0.3;
-    }
-  }
-</style>
