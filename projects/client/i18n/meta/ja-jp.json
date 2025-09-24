@@ -719,6 +719,9 @@
     "button_label_share": {
       "default": "{title}を共有する"
     },
+    "button_text_share": {
+      "default": "共有"
+    },
     "header_status": {
       "default": "ステータス"
     },

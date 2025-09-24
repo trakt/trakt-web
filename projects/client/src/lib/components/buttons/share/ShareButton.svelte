@@ -1,6 +1,7 @@
 <script lang="ts">
   import { browser } from "$app/environment";
   import { page } from "$app/state";
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import ShareIcon from "$lib/components/icons/ShareIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
@@ -12,11 +13,17 @@
     title: string;
     textFactory: ({ title }: { title: string }) => string;
     urlOverride?: string;
+    style?: "action" | "dropdown-item";
     source: DrilldownSource;
   };
 
-  const { title, textFactory, urlOverride, source }: ShareButtonProps =
-    $props();
+  const {
+    title,
+    textFactory,
+    urlOverride,
+    source,
+    style = "action",
+  }: ShareButtonProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.Share);
 
@@ -49,11 +56,27 @@
 </script>
 
 {#if isShareable}
-  <ActionButton
-    label={m.button_label_share({ title })}
-    style="ghost"
-    onclick={share}
-  >
-    <ShareIcon />
-  </ActionButton>
+  {#if style === "action"}
+    <ActionButton
+      label={m.button_label_share({ title })}
+      style="ghost"
+      onclick={share}
+    >
+      <ShareIcon />
+    </ActionButton>
+  {/if}
+
+  {#if style === "dropdown-item"}
+    <DropdownItem
+      color="default"
+      variant="secondary"
+      style="flat"
+      onclick={share}
+    >
+      {m.button_text_share()}
+      {#snippet icon()}
+        <ShareIcon />
+      {/snippet}
+    </DropdownItem>
+  {/if}
 {/if}

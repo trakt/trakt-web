@@ -719,6 +719,9 @@
     "button_label_share": {
       "default": "Partager {title}"
     },
+    "button_text_share": {
+      "default": "Partager"
+    },
     "header_status": {
       "default": "Statut"
     },

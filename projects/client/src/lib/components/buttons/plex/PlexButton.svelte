@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
@@ -49,6 +50,15 @@
       {/snippet}
     </Button>
   </div>
+{/if}
+
+{#if style === "dropdown-item"}
+  <DropdownItem {...commonProps} style="flat">
+    <PlexLogo />
+    {#snippet icon()}
+      <PlayIcon />
+    {/snippet}
+  </DropdownItem>
 {/if}
 
 <style>
