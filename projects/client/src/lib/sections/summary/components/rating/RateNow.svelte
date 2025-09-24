@@ -25,12 +25,7 @@
 
   type RateNowProps = RateableEpisode | RateableMedia;
 
-  const {
-    style = "flat",
-    ...props
-  }: {
-    style?: "flat" | "ghost";
-  } & RateNowProps = $props();
+  const { ...props }: {} & RateNowProps = $props();
 
   const { isRateable } = $derived(useIsRateable(props));
 
@@ -51,7 +46,7 @@
     <div class="trakt-rate-actions" transition:fade={{ duration: 150 }}>
       {#each Object.values(SimpleRating) as simpleRating}
         <RateActionButton
-          {style}
+          style="ghost"
           rating={simpleRating}
           isCurrentRating={$currentRating === simpleRating}
           isDisabled={$isRating}

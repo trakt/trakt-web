@@ -31,7 +31,7 @@
       </ActionButton>
     </div>
     <div class="trakt-rate-now-container">
-      <RateNow style="ghost" {...lastWatched} />
+      <RateNow {...lastWatched} />
     </div>
   </ToastBase>
 {/if}
