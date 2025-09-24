@@ -719,6 +719,9 @@
     "button_label_share": {
       "default": "Deel {title}"
     },
+    "button_text_share": {
+      "default": "Delen"
+    },
     "header_status": {
       "default": "Status"
     },

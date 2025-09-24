@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
@@ -65,6 +66,18 @@
       {/snippet}
     </Button>
   </div>
+{/if}
+
+{#if style === "dropdown-item"}
+  <DropdownItem {...commonProps} style="flat">
+    <StreamingServiceLogo
+      source={service.source}
+      i18n={StreamingServiceLogoIntlProvider}
+    />
+    {#snippet icon()}
+      <PlayIcon />
+    {/snippet}
+  </DropdownItem>
 {/if}
 
 <style>

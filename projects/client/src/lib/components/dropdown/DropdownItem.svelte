@@ -98,6 +98,11 @@
 
     .item-icon {
       display: flex;
+
+      :global(svg) {
+        width: var(--ni-24);
+        height: var(--ni-24);
+      }
     }
 
     &:active[disabled="true"] {

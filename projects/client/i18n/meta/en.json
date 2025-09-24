@@ -1951,6 +1951,14 @@
         "ios"
       ]
     },
+    "button_text_share": {
+      "default": "Share",
+      "description": "Text for the button that allows users to share a movie, show, episode, person, profile, etc.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "header_status": {
       "default": "Status",
       "description": "Header for the status section.",

@@ -719,6 +719,9 @@
     "button_label_share": {
       "default": "Dela {title}"
     },
+    "button_text_share": {
+      "default": "Dela"
+    },
     "header_status": {
       "default": "Status"
     },

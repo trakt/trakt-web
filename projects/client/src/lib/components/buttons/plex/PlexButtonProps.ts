@@ -4,7 +4,7 @@ import type { StreamingServiceButtonIntl } from '../streaming-service/StreamingS
 export type PlexButtonProps =
   & {
     target: MetaInfoProps;
-    style: 'logo' | 'normal';
+    style: 'logo' | 'normal' | 'dropdown-item';
     size?: 'small' | 'normal';
     i18n?: StreamingServiceButtonIntl;
   }
