@@ -137,7 +137,7 @@
       @include color-styles($color);
     }
 
-    &[disabled]:not([disabled="false"]) {
+    &[disabled] {
       cursor: not-allowed;
       color: var(--color-foreground-button-disabled);
       background: var(
@@ -153,7 +153,7 @@
     &:active {
       transform: scale(0.95);
 
-      &[disabled]:not([disabled="false"]) {
+      &[disabled] {
         animation: jiggle-wiggle var(--animation-duration-jiggle-wiggle)
           infinite;
       }
