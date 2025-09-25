@@ -36,7 +36,13 @@
   const title = $derived(intl?.title ?? media?.title ?? "");
   const { watchCount } = $derived(useWatchCount({ media, type: media.type }));
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
+
+  const hasTags = $derived(postCreditsCount > 0 || $watchCount > 0);
 </script>
+
+{#snippet tags()}
+  <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+{/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
 
@@ -46,11 +52,8 @@
       src={media.poster.url.medium}
       alt={title}
       href={streamOn?.preferred?.link ?? media.trailer}
-    >
-      {#snippet tags()}
-        <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
-      {/snippet}
-    </SummaryPoster>
+      tags={hasTags ? tags : undefined}
+    />
   {/snippet}
 
   {#snippet sideActions()}
