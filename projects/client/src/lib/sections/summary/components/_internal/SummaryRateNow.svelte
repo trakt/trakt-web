@@ -6,7 +6,7 @@
 </script>
 
 <div class="trakt-summary-rate-now">
-  <RateNow {...target} isAlwaysVisible />
+  <RateNow {...target} />
 </div>
 
 <style>
