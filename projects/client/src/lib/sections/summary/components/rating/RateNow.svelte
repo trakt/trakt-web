@@ -3,18 +3,13 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { SimpleRating } from "$lib/models/SimpleRating";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
-  import { fade } from "svelte/transition";
+  import { fade, slide } from "svelte/transition";
   import RateActionButton from "./_internal/RateActionButton.svelte";
   import { useIsRateable } from "./_internal/useIsRateable";
   import type { RateNowProps } from "./models/RateNowProps";
   import { useRatings } from "./useRatings";
 
-  const {
-    isAlwaysVisible = false,
-    ...props
-  }: {
-    isAlwaysVisible?: boolean;
-  } & RateNowProps = $props();
+  const { ...props }: RateNowProps = $props();
 
   const { isRateable } = $derived(useIsRateable(props));
 
@@ -29,10 +24,17 @@
   );
 </script>
 
-<div class="trakt-rate-now" data-dpad-navigation={DpadNavigationType.List}>
-  {#if $isRateable || isAlwaysVisible}
+{#if $isRateable}
+  <div
+    class="trakt-rate-now"
+    data-dpad-navigation={DpadNavigationType.List}
+    transition:slide={{ duration: 150 }}
+  >
     <h6>{m.header_rate_now()}</h6>
-    <div class="trakt-rate-actions" transition:fade={{ duration: 150 }}>
+    <div
+      class="trakt-rate-actions"
+      transition:fade={{ duration: 150, delay: 150 }}
+    >
       {#each Object.values(SimpleRating) as simpleRating}
         <RateActionButton
           style="ghost"
@@ -57,8 +59,8 @@
         />
       {/if}
     </div>
-  {/if}
-</div>
+  </div>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
