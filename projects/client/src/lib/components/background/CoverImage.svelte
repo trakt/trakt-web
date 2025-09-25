@@ -88,8 +88,8 @@
       }
 
       @include for-mobile {
-        width: 180%;
-        left: -40%;
+        width: 220%;
+        left: -60%;
       }
     }
   }
@@ -117,6 +117,16 @@
         var(--trakt-cover-primary-color-transparent) 50%,
         transparent 80%
       );
+
+      @include for-mobile {
+        background: linear-gradient(
+          180deg,
+          var(--trakt-cover-primary-color-transparent) 0%,
+          var(--trakt-cover-primary-color-transparent) 75%,
+          transparent 100%
+        );
+      }
+
       pointer-events: none;
     }
 
