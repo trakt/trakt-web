@@ -11,7 +11,12 @@
   import type { ListDropdownProps } from "./ListDropdownProps";
   import { useAllPersonalLists } from "./useAllPersonalLists";
 
-  const { size, style, title, ...target }: ListDropdownProps = $props();
+  const {
+    size,
+    style = "normal",
+    title,
+    ...target
+  }: ListDropdownProps = $props();
 
   // FIXME: replace this when we store states in session storage
   const isUpdating = writable(false);
