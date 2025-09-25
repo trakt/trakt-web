@@ -94,10 +94,19 @@
     }
 
     &:not(:disabled) {
-      &:hover,
+      --active-background-color: var(--shade-10);
+      --active-color: var(--purple-900);
+
       &[data-popup-state="opened"] {
-        background-color: var(--shade-10);
-        color: var(--purple-900);
+        background-color: var(--active-background-color);
+        color: var(--active-color);
+      }
+
+      @include for-mouse() {
+        &:hover {
+          background-color: var(--active-background-color);
+          color: var(--active-color);
+        }
       }
     }
 
