@@ -17,18 +17,22 @@
   >
     <CheckIcon />
 
-    {#key count}
-      <p
-        class="meta-info uppercase no-wrap counter"
-        transition:slide={{
-          easing: linear,
-          axis: "y",
-          duration: TRANSITION_DURATION,
-        }}
-      >
-        {count}
-      </p>
-    {/key}
+    {#if count > 1}
+      <div transition:slide={{ axis: "x", duration: 150 }}>
+        {#key count}
+          <p
+            class="meta-info uppercase no-wrap counter"
+            transition:slide={{
+              easing: linear,
+              axis: "y",
+              duration: TRANSITION_DURATION,
+            }}
+          >
+            {count}
+          </p>
+        {/key}
+      </div>
+    {/if}
   </StemTag>
 </watch-count-tag>
 
