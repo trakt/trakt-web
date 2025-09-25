@@ -64,10 +64,16 @@
   </RatingItem>
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-summary-ratings {
     display: flex;
     align-items: center;
     gap: var(--gap-m);
+
+    @include for-mobile() {
+      gap: var(--gap-s);
+    }
   }
 </style>
