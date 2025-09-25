@@ -62,7 +62,9 @@
   </RenderFor>
 
   {#if showOnPageSearch}
-    {@render searchControls()}
+    <RenderFor audience="all" device={NAVBAR_CONFIG.top.device}>
+      {@render searchControls()}
+    </RenderFor>
   {/if}
 
   {#if src}
