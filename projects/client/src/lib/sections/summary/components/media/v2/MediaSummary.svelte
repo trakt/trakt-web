@@ -13,6 +13,7 @@
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
+  import MediaStreamingServices from "../../details/MediaStreamingServices.svelte";
   import type { MediaSummaryProps } from "../MediaSummaryProps";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
@@ -76,4 +77,13 @@
   </SpoilerSection>
 
   <MediaDetails {media} {studios} {crew} {type} />
+
+  {#if streamOn}
+    <RenderFor audience="authenticated">
+      <MediaStreamingServices
+        services={streamOn.services}
+        preferred={streamOn.preferred}
+      />
+    </RenderFor>
+  {/if}
 </Summary>
