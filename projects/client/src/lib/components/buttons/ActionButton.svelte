@@ -2,7 +2,6 @@
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { disableNavigation } from "$lib/utils/actions/disableNavigation";
-  import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
   import type { TraktActionButtonProps } from "./TraktActionButtonProps";
@@ -30,7 +29,6 @@
 
 {#if href != null}
   <a
-    use:disableTransitionOn={"touch"}
     use:triggerWithKeyboard
     use:mobileAppleDeviceTriggerHack
     use:appendGlobalParameters
@@ -50,7 +48,6 @@
   </a>
 {:else}
   <button
-    use:disableTransitionOn={"touch"}
     class="trakt-action-button trakt-button-link"
     aria-label={label}
     data-color={color}
