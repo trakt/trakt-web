@@ -34,7 +34,13 @@
   const { ratings } = $derived(
     useMediaMetaInfo({ type, episode, media: show }),
   );
+
+  const hasTags = $derived(postCreditsCount > 0 || $watchCount > 0);
 </script>
+
+{#snippet tags()}
+  <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+{/snippet}
 
 <Summary>
   {#snippet poster()}
@@ -42,11 +48,8 @@
       src={show.poster.url.medium}
       alt={title}
       href={streamOn?.preferred?.link}
-    >
-      {#snippet tags()}
-        <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
-      {/snippet}
-    </SummaryPoster>
+      tags={hasTags ? tags : undefined}
+    />
   {/snippet}
 
   {#snippet sideActions()}
