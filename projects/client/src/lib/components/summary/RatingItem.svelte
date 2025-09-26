@@ -1,5 +1,6 @@
 <script lang="ts" generics="T extends { id: unknown }">
   import { type Snippet } from "svelte";
+  import { fade, slide } from "svelte/transition";
   import Link from "../link/Link.svelte";
 
   type RatingItemProps = {
@@ -16,16 +17,20 @@
 
 <rating>
   <Link href={ratingLink} target="_blank">
-    <div class="rating-item">
+    <div class="rating-item" class:has-valid-rating={hasValidRating}>
       {@render children()}
       <div class="rating-info">
-        <p class="large bold">
+        <div class="rating-value">
           {#if !hasValidRating}
-            -
+            <p class="large bold" out:slide={{ duration: 150, axis: "x" }}>-</p>
           {:else}
-            {rating}
+            <div in:fade={{ delay: 150, duration: 150 }}>
+              <p class="large bold" in:slide={{ duration: 150, axis: "x" }}>
+                {rating}
+              </p>
+            </div>
           {/if}
-        </p>
+        </div>
         {#if hasValidRating}
           <p class="small bold uppercase secondary vote-count">
             {@render superscript()}
@@ -60,11 +65,6 @@
         }
       }
 
-      :global(svg) {
-        transition: transform calc(var(--transition-increment) * 2)
-          cubic-bezier(0.5, 2, 0.3, -0.35);
-      }
-
       &:hover {
         :global(svg) {
           transform: scale(1.15);
@@ -85,7 +85,15 @@
 
     :global(svg) {
       transition: calc(var(--transition-increment) * 2) ease-in-out;
-      transition-property: width, height;
+
+      transition-property: width, height, transform, filter;
+      filter: grayscale(1);
+    }
+
+    &.has-valid-rating {
+      :global(svg) {
+        filter: grayscale(0);
+      }
     }
 
     @include for-mobile {
@@ -111,6 +119,15 @@
 
     p {
       line-height: 90%;
+    }
+
+    .rating-value {
+      position: relative;
+      min-width: var(--ni-6);
+
+      :global(p[inert]) {
+        position: absolute;
+      }
     }
   }
 </style>
