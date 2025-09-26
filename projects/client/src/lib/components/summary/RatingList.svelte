@@ -1,7 +1,6 @@
 <script lang="ts">
   import IMDBIcon from "$lib/components/icons/IMDBIcon.svelte";
-  import RottenIcon from "$lib/components/icons/RottenIcon.svelte";
-  import { languageTag } from "$lib/features/i18n/index.ts";
+  import { languageTag } from "$lib/features/i18n";
   import type { MediaRating } from "$lib/requests/models/MediaRating";
   import { toPercentage } from "$lib/utils/formatting/number/toPercentage";
   import {
@@ -12,6 +11,7 @@
   import { toVotesBasedRating } from "$lib/utils/formatting/number/toVotesBasedRating";
   import PopcornIcon from "../icons/PopcornIcon.svelte";
   import RatingIcon from "../icons/RatingIcon.svelte";
+  import RottenIcon from "../icons/RottenIcon.svelte";
   import type { RatingIntl } from "./RatingIntl";
   import { RatingIntlProvider } from "./RatingIntlProvider";
   import RatingItem from "./RatingItem.svelte";
@@ -35,10 +35,12 @@
 </script>
 
 <div class="trakt-summary-ratings">
-  <RatingItem rating={toPercentage(trakt.rating, languageTag())}>
-    <RatingIcon style={toVotesBasedRating(trakt.votes)} />
+  <RatingItem
+    rating={trakt?.rating && toPercentage(trakt.rating, languageTag())}
+  >
+    <RatingIcon style={toVotesBasedRating(trakt?.votes)} />
     {#snippet superscript()}
-      {i18n.voteText(trakt.votes)}
+      {i18n.voteText(trakt?.votes ?? 0)}
     {/snippet}
   </RatingItem>
 
