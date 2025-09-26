@@ -1,8 +1,12 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { MovieTrendingResponse, ShowTrendingResponse } from '@trakt/api';
+import type {
+  TrendingSearchMovieResultResponse,
+  TrendingSearchShowResultResponse,
+} from '@trakt/api';
 import z from 'zod';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
@@ -19,34 +23,37 @@ type TrendingSearchEntry = z.infer<typeof TrendingSearchEntrySchema>;
 type SearchTrendingParams = { limit: number } & ApiParams;
 
 function mapToTrendingSearchedMovie({
-  watchers,
+  count,
   movie,
-}: MovieTrendingResponse): TrendingSearchEntry {
+}: TrendingSearchMovieResultResponse): TrendingSearchEntry {
   return {
-    score: watchers,
-    ...mapToMovieEntry(movie),
+    score: count,
+    ...mapToMovieEntry(assertDefined(movie)),
   };
 }
 
 function mapToTrendingSearchedShow({
-  watchers,
+  count,
   show,
-}: ShowTrendingResponse): TrendingSearchEntry {
+}: TrendingSearchShowResultResponse): TrendingSearchEntry {
   return {
-    score: watchers,
-    ...mapToShowEntry(show),
+    score: count,
+    ...mapToShowEntry(assertDefined(show)),
   };
 }
 
-// FIXME: replace with search data endpoint when available
 const searchTrendingRequest = (
   { fetch, limit }: SearchTrendingParams,
   type: 'movies' | 'shows',
 ) =>
-  api({ fetch })[type]
+  api({ fetch })
+    .search
     .trending({
+      params: {
+        type,
+      },
       query: {
-        extended: 'full,images,colors',
+        extended: 'full,images',
         page: 1,
         limit,
       },
@@ -63,11 +70,15 @@ export const searchTrendingQuery = defineQuery({
     ]),
   mapper: ([moviesResponse, showsResponse]) => {
     const data = [...moviesResponse.body, ...showsResponse.body];
-    const allItems = data.map((item) =>
-      'show' in item
+    const allItems = data.map((item) => {
+      if (item.type === 'person') {
+        throw new Error('Unsupported type for trending media search');
+      }
+
+      return item.type === 'show'
         ? mapToTrendingSearchedShow(item)
-        : mapToTrendingSearchedMovie(item)
-    );
+        : mapToTrendingSearchedMovie(item);
+    });
 
     const items = allItems
       .filter((item) => item.id !== 0 && item.slug !== null)
