@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import CreditsList from "../lists/CreditsList.svelte";
   import PeopleSummary from "./components/people/PeopleSummary.svelte";
@@ -16,13 +14,7 @@
 </script>
 
 <RenderFor audience="all" device={["mobile"]}>
-  <RenderForFeature flag={FeatureFlag.SummaryV2}>
-    {#snippet enabled()}
-      <PeopleSummaryV2 {person} />
-    {/snippet}
-
-    <PeopleSummary {person} />
-  </RenderForFeature>
+  <PeopleSummaryV2 {person} />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>

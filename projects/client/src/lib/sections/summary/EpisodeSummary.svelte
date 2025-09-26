@@ -2,9 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import SeasonList from "$lib/sections/lists/season/SeasonList.svelte";
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
@@ -37,27 +35,14 @@
 />
 
 <RenderFor audience="all" device={["mobile"]}>
-  <RenderForFeature flag={FeatureFlag.SummaryV2}>
-    {#snippet enabled()}
-      <EpisodeSummaryV2
-        {episode}
-        {show}
-        {showIntl}
-        {episodeIntl}
-        {streamOn}
-        {crew}
-      />
-    {/snippet}
-
-    <EpisodeSummary
-      {episode}
-      {show}
-      {showIntl}
-      {episodeIntl}
-      {streamOn}
-      {crew}
-    />
-  </RenderForFeature>
+  <EpisodeSummaryV2
+    {episode}
+    {show}
+    {showIntl}
+    {episodeIntl}
+    {streamOn}
+    {crew}
+  />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
