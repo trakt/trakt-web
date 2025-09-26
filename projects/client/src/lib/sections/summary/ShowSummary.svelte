@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
@@ -47,13 +45,7 @@
 </script>
 
 <RenderFor audience="all" device={["mobile"]}>
-  <RenderForFeature flag={FeatureFlag.SummaryV2}>
-    {#snippet enabled()}
-      <MediaSummaryV2 {media} {studios} {intl} {crew} {streamOn} type="show" />
-    {/snippet}
-
-    <MediaSummary {media} {studios} {intl} {crew} {streamOn} type="show" />
-  </RenderForFeature>
+  <MediaSummaryV2 {media} {studios} {intl} {crew} {streamOn} type="show" />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
