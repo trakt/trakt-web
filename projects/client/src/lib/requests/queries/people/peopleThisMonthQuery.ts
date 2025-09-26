@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import type { PeopleSummaryResponse } from '@trakt/api';
+import type { PersonResponse } from '@trakt/api';
 import z from 'zod';
 import { mapToPersonSummary } from '../../_internal/mapToPersonSummary.ts';
 
@@ -19,7 +19,7 @@ const peopleThisMonthRequest = async (
   const body = response.ok ? await response.json() : [];
 
   return {
-    body: body as PeopleSummaryResponse[],
+    body: body as PersonResponse[],
     status: response.status,
   };
 };

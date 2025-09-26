@@ -1,6 +1,6 @@
-import type { PeopleSummaryResponse } from '@trakt/api';
+import type { PersonResponse } from '@trakt/api';
 
-export const PersonFergusonResponseMock: PeopleSummaryResponse = {
+export const PersonFergusonResponseMock: PersonResponse = {
   'name': 'Rebecca Ferguson',
   'ids': {
     'trakt': 447271,

@@ -5,7 +5,7 @@
     "npm:@cucumber/cucumber@12.2.0": "12.2.0_@cucumber+gherkin@34.0.0_@cucumber+message-streams@4.0.1__@cucumber+messages@28.1.0_@cucumber+messages@28.1.0",
     "npm:@google/generative-ai@0.24.1": "0.24.1",
     "npm:@inlang/paraglide-js@2.2.0": "2.2.0",
-    "npm:@jsr/trakt__api@0.2.20": "0.2.20_zod@3.25.76",
+    "npm:@jsr/trakt__api@0.2.32": "0.2.32_zod@3.25.76",
     "npm:@playwright/test@1.55.0": "1.55.0",
     "npm:@sentry/sveltekit@10.7.0": "10.7.0_@sveltejs+kit@2.37.0__@sveltejs+vite-plugin-svelte@5.1.1___svelte@5.38.6____acorn@8.15.0___vite@6.3.5____sass-embedded@1.91.0____picomatch@4.0.3___sass-embedded@1.91.0__svelte@5.38.6___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.91.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_svelte@5.38.6__acorn@8.15.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.38.6___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_sass-embedded@1.91.0",
     "npm:@svelte-put/qr@2.1.0": "2.1.0_svelte@5.38.6__acorn@8.15.0",
@@ -2253,14 +2253,14 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@jsr/trakt__api@0.2.20_zod@3.25.76": {
-      "integrity": "sha512-Fhpu5/knZtSBiOZBkc18LLgnHtXrY8eafGqBZ6otckH1ZTtSerFEaTVDjRYNBamc89CG6ihKQQ2TpQFCIFEl0g==",
+    "@jsr/trakt__api@0.2.32_zod@3.25.76": {
+      "integrity": "sha512-Jc6ktROi6+i72ktOLsdfTwV631QJqm10aJQHnvw5FpOlZy46PVjzB32VHuBLZHIuZuBOPSskbO0Yn7NNuymMIg==",
       "dependencies": [
         "@anatine/zod-openapi",
         "@ts-rest/core",
         "zod@3.25.76"
       ],
-      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.2.20.tgz"
+      "tarball": "https://npm.jsr.io/~/11/@jsr/trakt__api/0.2.32.tgz"
     },
     "@lix-js/sdk@0.4.7_kysely@0.27.6": {
       "integrity": "sha512-pRbW+joG12L0ULfMiWYosIW0plmW4AsUdiPCp+Z8rAsElJ+wJ6in58zhD3UwUcd4BNcpldEGjg6PdA7e0RgsDQ==",
@@ -7819,7 +7819,7 @@
             "npm:@cucumber/cucumber@12.2.0",
             "npm:@google/generative-ai@0.24.1",
             "npm:@inlang/paraglide-js@2.2.0",
-            "npm:@jsr/trakt__api@0.2.20",
+            "npm:@jsr/trakt__api@0.2.32",
             "npm:@playwright/test@1.55.0",
             "npm:@sentry/sveltekit@10.7.0",
             "npm:@svelte-put/qr@2.1.0",

@@ -1,9 +1,9 @@
-import type { PeopleSummaryResponse } from '@trakt/api';
+import type { PersonResponse } from '@trakt/api';
 import type { PersonSummary } from '../models/PersonSummary.ts';
 import { mapToHeadshot } from './mapToHeadshot.ts';
 
 export const mapToPersonSummary = (
-  response: PeopleSummaryResponse,
+  response: PersonResponse,
 ): PersonSummary => {
   return {
     id: response.ids.trakt,

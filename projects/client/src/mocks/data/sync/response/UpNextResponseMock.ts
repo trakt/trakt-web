@@ -2,7 +2,7 @@ import { EpisodeSiloResponseMock } from '$mocks/data/summary/episodes/silo/respo
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
 import type { UpNextResponse } from '@trakt/api';
 
-export const UpNextResponseMock: UpNextResponse = [
+export const UpNextResponseMock: UpNextResponse[] = [
   {
     show: ShowSiloResponseMock,
     progress: {

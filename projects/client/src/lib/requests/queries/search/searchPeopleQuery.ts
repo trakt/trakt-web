@@ -37,7 +37,7 @@ function isGarbage(value?: PersonSummary): boolean {
 }
 
 function mapToSearchResultEntry(
-  item: SearchResultResponse[0],
+  item: SearchResultResponse,
 ): PersonSummary {
   const { type } = item;
   switch (type) {
