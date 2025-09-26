@@ -105,6 +105,8 @@
         transparent 80%
       );
 
+      pointer-events: none;
+
       @include for-mobile {
         background: linear-gradient(
           180deg,
@@ -113,8 +115,6 @@
           transparent 100%
         );
       }
-
-      pointer-events: none;
     }
 
     &::before {
