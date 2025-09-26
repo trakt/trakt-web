@@ -48,7 +48,6 @@
     <SummaryPoster
       src={show.poster.url.medium}
       alt={title}
-      href={streamOn?.preferred?.link}
       tags={hasTags ? tags : undefined}
     />
   {/snippet}

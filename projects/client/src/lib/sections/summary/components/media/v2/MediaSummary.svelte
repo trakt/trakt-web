@@ -52,7 +52,6 @@
     <SummaryPoster
       src={media.poster.url.medium}
       alt={title}
-      href={streamOn?.preferred?.link ?? media.trailer}
       tags={hasTags ? tags : undefined}
     />
   {/snippet}
