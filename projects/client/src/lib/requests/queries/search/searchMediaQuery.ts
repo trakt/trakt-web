@@ -40,7 +40,7 @@ function isGarbage(value: MediaEntry): boolean {
 }
 
 function mapToSearchResultEntry(
-  item: SearchResultResponse[0],
+  item: SearchResultResponse,
 ): MediaResult {
   const { type } = item;
   switch (type) {

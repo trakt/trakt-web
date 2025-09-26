@@ -1,9 +1,7 @@
-import { jobOptionSchema } from '@trakt/api';
 import { z } from 'zod';
 import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
-const JobSchema = jobOptionSchema;
-export type Job = z.output<typeof JobSchema>;
+export type Job = string;
 
 export const CrewMemberSchema = z.object({
   jobs: z.array(z.string()),

@@ -9,7 +9,7 @@ import { mapToPostCredits } from './mapToPostCredits.ts';
 import { mapToTraktRating } from './mapToTraktRating.ts';
 
 type EpisodeResponse =
-  | UpNextResponse[0]['progress']['next_episode']
+  | UpNextResponse['progress']['next_episode']
   | CalendarShowResponse['episode'];
 
 export function mapToEpisodeEntry(
