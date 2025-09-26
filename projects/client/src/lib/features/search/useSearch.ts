@@ -22,6 +22,7 @@ import { derived, get, writable } from 'svelte/store';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
+import { postRecentSearch } from './_internal/postRecentSearch.ts';
 import type { SearchResult } from './models/SearchResult.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
@@ -144,6 +145,7 @@ export function useSearch() {
   }
 
   return {
+    postRecentSearch,
     search: (term: string, mode: SearchMode) => {
       isSearching.set(true);
       debounce(() => search(term, mode), get(isDesktop) ? 150 : 250)();

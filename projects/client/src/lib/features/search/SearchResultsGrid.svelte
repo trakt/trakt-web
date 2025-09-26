@@ -19,9 +19,10 @@
     title?: string;
     empty?: Snippet;
     items: Array<PersonSummary | MediaEntry>;
+    onclick?: (item: PersonSummary | MediaEntry) => void;
   };
 
-  const { title, items, empty }: SearchResultsGridProps = $props();
+  const { title, items, empty, onclick }: SearchResultsGridProps = $props();
 
   const { mode } = useSearch();
 
@@ -68,6 +69,7 @@
           style="cover"
           source="search"
           tag={$mode === "media" ? mediaResultTag : undefined}
+          {onclick}
         />
       {:else}
         <DefaultPersonItem
@@ -76,6 +78,7 @@
           subtitle={item.birthday
             ? toHumanDay(item.birthday, getLocale(), "short")
             : undefined}
+          {onclick}
         />
       {/if}
     {/snippet}

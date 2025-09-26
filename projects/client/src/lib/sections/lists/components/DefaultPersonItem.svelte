@@ -14,7 +14,13 @@
     person,
     subtitle,
     source,
-  }: { person: PersonSummary; subtitle?: string; source?: string } = $props();
+    onclick,
+  }: {
+    person: PersonSummary;
+    subtitle?: string;
+    source?: string;
+    onclick?: (item: PersonSummary) => void;
+  } = $props();
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 </script>
@@ -23,7 +29,10 @@
   <Link
     focusable={false}
     href={UrlBuilder.people(person.slug)}
-    onclick={() => source && track({ source, type: "person" })}
+    onclick={() => {
+      onclick?.(person);
+      source && track({ source, type: "person" });
+    }}
   >
     <CardCover
       title={person.name}
