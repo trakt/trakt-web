@@ -9,7 +9,7 @@ export const MediaRatingSchema = z.object({
       z.enum(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
       z.number(),
     ),
-  }),
+  }).optional(),
   rotten: z.object({
     critic: z.number(),
     audience: z.number().nullish(),

@@ -6,11 +6,7 @@ type GetDisplayableRatingsProps = {
 };
 
 export const EMPTY_RATINGS = Object.freeze({
-  trakt: {
-    rating: 0,
-    votes: 0,
-    distribution: {},
-  },
+  trakt: undefined,
   rotten: undefined,
   imdb: undefined,
 });
