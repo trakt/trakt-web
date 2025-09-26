@@ -26,28 +26,25 @@
   const { isActive } = $derived(useActiveLink(href));
 </script>
 
-{#if href}
-  <a
-    {href}
-    {target}
-    use:triggerWithKeyboard
-    use:mobileAppleDeviceTriggerHack
-    use:appendGlobalParameters
-    data-sveltekit-keepfocus
-    data-sveltekit-noscroll={noscroll}
-    tabindex={focusable ? 0 : -1}
-    data-color={color}
-    aria-label={label}
-    class="trakt-link"
-    class:trakt-link-active={$isActive}
-    data-dpad-navigation={navigationType}
-    {...props}
-  >
-    {@render children?.()}
-  </a>
-{:else}
+<a
+  {href}
+  {target}
+  use:triggerWithKeyboard
+  use:mobileAppleDeviceTriggerHack
+  use:appendGlobalParameters
+  data-sveltekit-keepfocus
+  data-sveltekit-noscroll={noscroll}
+  tabindex={focusable ? 0 : -1}
+  data-color={color}
+  aria-label={label}
+  class:trakt-link={!!href}
+  class:trakt-link-active={$isActive}
+  data-dpad-navigation={navigationType}
+  class:trakt-no-link={!href}
+  {...props}
+>
   {@render children?.()}
-{/if}
+</a>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -106,5 +103,9 @@
         }
       }
     }
+  }
+
+  .trakt-no-link {
+    all: unset;
   }
 </style>
