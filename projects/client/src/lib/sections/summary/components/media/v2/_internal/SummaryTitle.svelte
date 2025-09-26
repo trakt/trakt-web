@@ -30,7 +30,11 @@
 </script>
 
 <div class="trakt-summary-title">
-  <h2 data-testid={TestId.SummaryMediaTitle}>
+  <h2
+    data-testid={TestId.SummaryMediaTitle}
+    class:short-title={title.length < 15}
+    class:long-title={title.length > 25}
+  >
     {title}
   </h2>
 
@@ -47,7 +51,17 @@
   }
 
   h2 {
-    font-size: var(--ni-32);
+    --text-size: 7cqi;
+
+    &.short-title {
+      --text-size: 10cqi;
+    }
+
+    &.long-title {
+      --text-size: 2.5cqi;
+    }
+
+    font-size: clamp(var(--ni-24), var(--text-size), var(--ni-32));
     text-align: center;
   }
 </style>
