@@ -49,7 +49,10 @@
   <Link
     focusable={false}
     href={UrlBuilder.media(type, media.slug)}
-    onclick={() => source && track({ source, type: media.type })}
+    onclick={() => {
+      rest.onclick?.(media);
+      source && track({ source, type: media.type });
+    }}
   >
     <CardCover
       title={media.title}

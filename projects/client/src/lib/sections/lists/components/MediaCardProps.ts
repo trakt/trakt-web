@@ -19,6 +19,7 @@ type BaseItemProps<T> = MediaItemVariant<T> & {
   popupActions?: Snippet;
   style?: 'cover' | 'summary';
   source?: string;
+  onclick?: (item: T) => void;
 };
 
 export type MediaCardProps<T = MediaInputDefault> = BaseItemProps<T> & {

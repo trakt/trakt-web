@@ -9,6 +9,8 @@
   import SearchResultsGrid from "$lib/features/search/SearchResultsGrid.svelte";
   import { useSearch } from "$lib/features/search/useSearch";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
@@ -17,7 +19,7 @@
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
-  const { search, clear, results, mode } = useSearch();
+  const { search, clear, results, mode, postRecentSearch } = useSearch();
 
   $effect(() => {
     if (!query) {
@@ -47,6 +49,14 @@
 
   // FIXME: deal with ios onscreen keyboard and move to mobile navbar
   const showOnPageSearch = isMobileAppleDevice();
+
+  const onResultClick = (item: PersonSummary | MediaEntry) => {
+    if (!query) {
+      return;
+    }
+
+    postRecentSearch(item, query);
+  };
 </script>
 
 {#snippet searchControls()}
@@ -75,7 +85,7 @@
 
   <div class="trakt-search-results-container">
     {#if $results}
-      <SearchResultsGrid items={$results.items} />
+      <SearchResultsGrid items={$results.items} onclick={onResultClick} />
     {:else if !query}
       <SearchPlaceHolder />
     {/if}
