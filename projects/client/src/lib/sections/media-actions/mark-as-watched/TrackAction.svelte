@@ -34,7 +34,7 @@
   );
 </script>
 
-<trakt-track-action>
+<trakt-track-action class:is-watchable={isWatchable}>
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
     label={i18n.label({ title, isWatched: false, isRewatching: false })}
@@ -59,9 +59,11 @@
       }
     }
 
-    :global(.trakt-action-button[disabled]) {
-      background-color: var(--color-foreground-action-button);
-      color: var(--color-background-action-button);
+    &.is-watchable {
+      :global(.trakt-action-button[disabled]) {
+        background-color: var(--color-foreground-action-button);
+        color: var(--color-background-action-button);
+      }
     }
   }
 </style>
