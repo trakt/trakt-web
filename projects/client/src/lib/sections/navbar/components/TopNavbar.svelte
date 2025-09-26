@@ -59,6 +59,7 @@
     transition: height calc(2 * var(--transition-increment)) ease-in-out;
 
     &.is-hidden {
+      margin: 0;
       height: calc(var(--gap-m) + env(safe-area-inset-top));
     }
   }
