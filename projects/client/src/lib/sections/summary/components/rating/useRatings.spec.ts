@@ -26,7 +26,7 @@ describe('useRatings', () => {
   });
 
   it('should indicate while rating is in progress', async () => {
-    const { isRating, addRating } = await renderStore(() =>
+    const { pendingRating, addRating } = await renderStore(() =>
       useRatings({
         type: 'movie',
         id: MovieHereticMappedMock.id,
@@ -34,18 +34,18 @@ describe('useRatings', () => {
     );
 
     addRating(SimpleRating.Bad);
-    expect(get(isRating)).toBe(true);
+    expect(get(pendingRating)).toBe(SimpleRating.Bad);
   });
 
   it('should not indicate that rating is in progress', async () => {
-    const { isRating } = await renderStore(() =>
+    const { pendingRating } = await renderStore(() =>
       useRatings({
         type: 'movie',
         id: MovieHereticMappedMock.id,
       })
     );
 
-    expect(get(isRating)).toBe(false);
+    expect(get(pendingRating)).toBe(null);
   });
 
   it('should return the current rating', async () => {

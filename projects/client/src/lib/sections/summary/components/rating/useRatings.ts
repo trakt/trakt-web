@@ -46,7 +46,7 @@ function toRatingPayload(
 }
 
 export function useRatings({ type, id }: WatchlistStoreProps) {
-  const isRating = writable(false);
+  const pendingRating = writable<null | SimpleRating>(null);
   const { ratings } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Rate);
@@ -82,7 +82,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
   );
 
   const addRating = async (simpleRating: SimpleRating) => {
-    isRating.set(true);
+    pendingRating.set(simpleRating);
     track({
       action: get(currentRating) ? 'changed' : 'added',
       rating: simpleRating,
@@ -93,12 +93,12 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     });
     await invalidate(InvalidateAction.Rated(type));
 
-    isRating.set(false);
+    pendingRating.set(null);
     dismiss(id, type);
   };
 
   return {
-    isRating,
+    pendingRating,
     currentRating,
     addRating,
   };
