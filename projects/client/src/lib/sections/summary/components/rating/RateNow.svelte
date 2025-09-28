@@ -16,7 +16,7 @@
   const type = $derived(props.type);
   const id = $derived(props.media.id);
 
-  const { isRating, currentRating, addRating } = $derived(
+  const { pendingRating, currentRating, addRating } = $derived(
     useRatings({
       type,
       id,
@@ -39,8 +39,10 @@
         <RateActionButton
           style="ghost"
           rating={simpleRating}
-          isCurrentRating={$currentRating === simpleRating}
-          isDisabled={$isRating || !$isRateable}
+          isCurrentRating={$pendingRating
+            ? $pendingRating === simpleRating
+            : $currentRating === simpleRating}
+          isDisabled={Boolean($pendingRating) || !$isRateable}
           onAddRating={(rating: SimpleRating) => {
             if ($currentRating === rating) {
               return;
