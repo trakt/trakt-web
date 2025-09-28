@@ -10,7 +10,7 @@
   const iconColor = $derived(
     rating === SimpleRating.Great ? "var(--red-500)" : "var(--shade-10)",
   );
-  const iconFillColor = $derived(isCurrentRating ? iconColor : "none");
+  const iconFillColor = $derived(isCurrentRating ? iconColor : "transparent");
 </script>
 
 <RateIcon {rating} --icon-color={iconColor} --icon-fill-color={iconFillColor} />
