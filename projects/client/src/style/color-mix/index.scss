@@ -21,7 +21,7 @@ $cm-background-navbar-percentages: 80, 90;
       var(--shade-700) 75%,
       transparent);
 
-  --cm-background-now-playing: color-mix(in srgb, var(--color-now-playing-background-base) 70%, transparent 30%);
+  --cm-background-now-playing: color-mix(in srgb, var(--color-toast-background-base) 70%, transparent 30%);
 
   --cm-inactive-gesture: color-mix(in srgb,
       var(--color-foreground) 35%,
