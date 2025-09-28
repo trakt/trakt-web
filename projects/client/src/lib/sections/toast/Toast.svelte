@@ -25,7 +25,7 @@
 </script>
 
 {#if $nowPlaying}
-  <NowPlayingToast />
+  <NowPlayingToast nowPlaying={$nowPlaying} />
 {:else if $lastWatched}
   <RateNowToast lastWatched={$lastWatched} />
 {/if}
