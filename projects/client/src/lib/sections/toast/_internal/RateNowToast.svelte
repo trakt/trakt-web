@@ -4,7 +4,6 @@
   import * as m from "$lib/features/i18n/messages";
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
-  import { useIsRateable } from "$lib/sections/summary/components/rating/_internal/useIsRateable";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
   import { getToastTitle } from "./getToastTitle";
   import ToastBase from "./ToastBase.svelte";
@@ -14,27 +13,24 @@
   const { dismiss } = useLastWatched();
 
   const title = $derived(getToastTitle(lastWatched));
-  const { isRateable } = $derived(useIsRateable(lastWatched));
 </script>
 
-{#if $isRateable}
-  <ToastBase item={lastWatched}>
-    <div class="trakt-rate-now-header">
-      <p class="smaller ellipsis">{title}</p>
-      <ActionButton
-        onclick={() => dismiss(lastWatched.media.id, lastWatched.type)}
-        label={m.button_label_dismiss()}
-        style="ghost"
-        size="small"
-      >
-        <CloseIcon />
-      </ActionButton>
-    </div>
-    <div class="trakt-rate-now-container">
-      <RateNow {...lastWatched} />
-    </div>
-  </ToastBase>
-{/if}
+<ToastBase item={lastWatched}>
+  <div class="trakt-rate-now-header">
+    <p class="smaller ellipsis">{title}</p>
+    <ActionButton
+      onclick={() => dismiss(lastWatched.media.id, lastWatched.type)}
+      label={m.button_label_dismiss()}
+      style="ghost"
+      size="small"
+    >
+      <CloseIcon />
+    </ActionButton>
+  </div>
+  <div class="trakt-rate-now-container">
+    <RateNow {...lastWatched} />
+  </div>
+</ToastBase>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -61,6 +57,10 @@
 
     :global(svg) {
       --icon-color: var(--color-foreground);
+    }
+
+    :global(.is-current-rating svg) {
+      --icon-fill-color: var(--color-foreground);
     }
   }
 </style>

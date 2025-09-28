@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { LastWatchedItem } from "$lib/features/toast/models/LastWatchedItem";
   import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem";
+  import { fade } from "svelte/transition";
   import ToastItemCard from "./ToastItemCard.svelte";
   import { useFooterHeight } from "./useFooterHeight";
   import { useScrollDistance } from "./useScrollDistance";
@@ -16,6 +17,7 @@
 <div
   class="trakt-toast-base"
   style="--distance-from-bottom: {$distanceFromBottom}px; --footer-height: {$footerHeight}px"
+  transition:fade={{ duration: 300 }}
 >
   <ToastItemCard {item} />
   <div class="trakt-toast-content">
