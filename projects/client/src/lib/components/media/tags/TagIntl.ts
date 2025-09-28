@@ -4,6 +4,7 @@ export type TagIntl = {
   toPlayCount: (count: number) => string;
   toWatcherCount: (count: number) => string;
   toReleaseEstimate: (airDate: Date) => string;
+  toActivityDate: (activityDate: Date) => string;
   tbaLabel: () => string;
   toAnticipatedCount: (count: number) => string;
   watchCountLabel: () => string;

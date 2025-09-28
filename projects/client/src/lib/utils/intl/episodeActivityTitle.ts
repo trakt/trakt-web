@@ -10,16 +10,16 @@ type Show = {
 
 export function episodeActivityTitle(
   episode: EpisodeEntry,
-  show: Show,
+  show?: Show,
 ) {
   switch (episode.type) {
     case EpisodeComputedType.full_season:
-      return seasonLabel(episode.season, show.title);
+      return seasonLabel(episode.season, show?.title);
     case EpisodeComputedType.multiple_episodes:
       return multiEpisodeLabel(
         episode.episodes ?? [],
         episode.season,
-        show.title,
+        show?.title,
       );
     default:
       return `${
@@ -27,6 +27,6 @@ export function episodeActivityTitle(
           seasonNumber: episode.season,
           episodeNumber: episode.number,
         })
-      } - ${show.title}`;
+      } - ${show?.title ?? episode.title}`;
   }
 }
