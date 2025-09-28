@@ -8,10 +8,9 @@
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
-  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
+  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
   import type { MediaCardProps } from "./MediaCardProps";
@@ -21,6 +20,7 @@
     media,
     badge,
     tag,
+    coverTag,
     action,
     popupActions,
     source,
@@ -61,6 +61,7 @@
       alt={m.image_alt_media_poster({ title: media.title })}
       --color-card-cover-shadow={media.colors?.[1]}
       {badge}
+      tag={coverTag}
     />
   </Link>
 {/snippet}
@@ -92,7 +93,7 @@
         </p>
       </Link>
       <p class="trakt-card-subtitle small ellipsis">
-        {toHumanDate(new Date(), rest.date, getLocale())}
+        {toTranslatedValue("type", media.type)}
       </p>
     </CardFooter>
   </LandscapeCard>

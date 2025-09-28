@@ -1,6 +1,7 @@
 <script lang="ts">
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import ShowProgressTag from "$lib/components/episode/tags/ShowProgressTag.svelte";
+  import ActivityTag from "$lib/components/media/tags/ActivityTag.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
@@ -66,6 +67,10 @@
       {#if props.variant === "upcoming"}
         <AirDateTag i18n={TagIntlProvider} airDate={props.episode.airDate} />
       {/if}
+
+      {#if props.variant === "activity"}
+        <ActivityTag i18n={TagIntlProvider} activityDate={props.date} />
+      {/if}
     </div>
   {/if}
 {/snippet}
@@ -82,7 +87,7 @@
         },
       }}
       popupActions={props.popupActions}
-      tag={props.variant !== "activity" ? tag : undefined}
+      {tag}
       {action}
       type="episode"
       variant="landscape"
@@ -91,11 +96,7 @@
   {/if}
 
   {#if style === "cover"}
-    <EpisodeCard
-      {...props}
-      tag={props.variant !== "activity" ? tag : undefined}
-      {action}
-    />
+    <EpisodeCard {...props} {tag} {action} />
   {/if}
 {/snippet}
 

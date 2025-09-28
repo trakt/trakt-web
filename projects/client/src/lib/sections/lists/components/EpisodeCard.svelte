@@ -3,7 +3,6 @@
   import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
   import CardFooter from "$lib/components/card/CardFooter.svelte";
-  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
@@ -83,14 +82,11 @@
     {#if rest.variant === "activity"}
       <Link href={UrlBuilder.show(show.slug)}>
         <p class="trakt-card-title ellipsis">
-          {episodeActivityTitle(episode, show)}
+          {show.title}
         </p>
       </Link>
       <p class="trakt-card-subtitle ellipsis small">
-        {EpisodeIntlProvider.timestampText({
-          type: episode.type,
-          date: rest.date,
-        })}
+        {episodeActivityTitle(episode)}
       </p>
     {/if}
 

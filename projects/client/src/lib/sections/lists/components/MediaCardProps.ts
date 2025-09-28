@@ -15,6 +15,7 @@ export type MediaItemVariant<T> =
 type BaseItemProps<T> = MediaItemVariant<T> & {
   badge?: Snippet;
   tag?: Snippet;
+  coverTag?: Snippet;
   action?: Snippet;
   popupActions?: Snippet;
   style?: 'cover' | 'summary';
