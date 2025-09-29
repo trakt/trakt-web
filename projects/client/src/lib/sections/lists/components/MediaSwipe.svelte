@@ -1,6 +1,8 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import type { MediaInput } from "$lib/models/MediaInput";
+  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
+  import { getWarningMessage } from "$lib/sections/media-actions/mark-as-watched/_internal/getWarningMessage";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
@@ -17,11 +19,19 @@
     throw new Error("MediaSwipe does not support episode type");
   }
 
-  const { markAsWatched } = $derived(
-    useMarkAsWatched({
-      type,
-      media,
-    }),
+  const target = $derived({ type, media });
+
+  const { markAsWatched } = $derived(useMarkAsWatched(target));
+
+  const warningMessage = $derived(getWarningMessage(media.title, target));
+
+  /**
+   * TODO: @seferturan Single source of truth for warning messages
+   */
+  const onWatchHandler = $derived(
+    warningMessage
+      ? attachWarning(markAsWatched, warningMessage)
+      : markAsWatched,
   );
 
   const { addToWatchlist, isWatchlisted } = $derived(
@@ -39,7 +49,7 @@
     classList="trakt-up-next-episode"
     onSwipe={(state) => {
       if (state.direction === "left") {
-        markAsWatched();
+        onWatchHandler();
       }
 
       if (state.direction === "right") {
