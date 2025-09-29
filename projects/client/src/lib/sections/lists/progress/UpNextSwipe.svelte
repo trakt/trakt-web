@@ -1,7 +1,10 @@
 <script lang="ts">
+  import * as m from "$lib/features/i18n/messages";
+
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
+  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
   import DropSwipeIndicator from "$lib/sections/media-actions/drop/DropSwipeIndicator.svelte";
   import { useDrop } from "$lib/sections/media-actions/drop/useDrop";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
@@ -28,6 +31,13 @@
       ids: [show.id],
     }),
   );
+
+  /**
+   * TODO: @seferturan Single source of truth for warning messages
+   */
+  const onDropHandler = $derived(
+    attachWarning(drop, m.warning_prompt_drop_show({ title: show.title })),
+  );
 </script>
 
 {#if style === "summary"}
@@ -41,7 +51,7 @@
       }
 
       if (state.direction === "right") {
-        drop();
+        onDropHandler();
       }
     }}
     --indicator-height="var(--height-summary-card-cover)"
