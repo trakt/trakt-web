@@ -196,7 +196,7 @@
       ]
     },
     "button_label_add_to_watchlist": {
-      "default": "Add {title} to your Watchlist",
+      "default": "Add \"{title}\" to your Watchlist",
       "description": "Aria-label for the button that adds a movie or show to the user's watchlist.",
       "variables": {
         "title": {
@@ -209,7 +209,7 @@
       ]
     },
     "button_label_mark_as_watched": {
-      "default": "Mark {title} as watched",
+      "default": "Mark \"{title}\" as watched",
       "description": "Aria-label for the button that marks a movie, episode, show as watched.",
       "variables": {
         "title": {
@@ -222,7 +222,7 @@
       ]
     },
     "button_label_watched_until_here": {
-      "default": "Mark {title} as watched until here",
+      "default": "Mark \"{title}\" as watched until here",
       "description": "Aria-label for the button that marks a show as watched until a specific point.",
       "variables": {
         "title": {
@@ -531,7 +531,7 @@
       ]
     },
     "button_label_remove_from_watchlist": {
-      "default": "Remove {title} from your Watchlist",
+      "default": "Remove \"{title}\" from your Watchlist",
       "description": "Aria-label for the button that removes a movie or show from the user's watchlist.",
       "variables": {
         "title": {
@@ -1184,7 +1184,7 @@
       ]
     },
     "button_label_stream_on": {
-      "default": "Watch {title} now",
+      "default": "Watch \"{title}\" now",
       "description": "Aria-label for the button that allows users to stream a movie or show on an external service.",
       "variables": {
         "title": {
@@ -1834,7 +1834,7 @@
       ]
     },
     "button_label_remove_from_watched": {
-      "default": "Remove {title} from your Watched list",
+      "default": "Remove \"{title}\" from your Watched list",
       "description": "Aria-label for the button that allows users to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
@@ -1847,7 +1847,7 @@
       ]
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Are you sure you want to remove {title} from your Watched list? All plays will be removed.",
+      "default": "Are you sure you want to remove \"{title}\" from your Watched list? All plays will be removed.",
       "description": "Warning prompt shown when a user tries to remove a movie, show, or episode from their watch history.",
       "variables": {
         "title": {
@@ -1860,7 +1860,7 @@
       ]
     },
     "button_label_remove_from_history": {
-      "default": "Remove this play of {title} from your Watched list",
+      "default": "Remove this play of \"{title}\" from your Watched list",
       "description": "Aria-label for the button that allows users to remove a movie or episode from their watch history.",
       "variables": {
         "title": {
@@ -1873,7 +1873,7 @@
       ]
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Are you sure you want to remove this play of {title} from your Watched list?",
+      "default": "Are you sure you want to remove this play of \"{title}\" from your Watched list?",
       "description": "Warning prompt shown when a user tries to remove a single play of a movie or episode from their watch history.",
       "variables": {
         "title": {
@@ -1911,7 +1911,7 @@
       ]
     },
     "button_label_expand_media_overview": {
-      "default": "Expand {title} overview",
+      "default": "Expand \"{title}\" overview",
       "description": "Aria-label for the button that expands the overview section for shows, movies, episodes, and people.",
       "variables": {
         "title": {
@@ -1939,7 +1939,7 @@
       ]
     },
     "button_label_share": {
-      "default": "Share {title}",
+      "default": "Share \"{title}\"",
       "description": "Aria-label for the button that allows users to share a movie, show, episode, person, profile, etc.",
       "variables": {
         "title": {
@@ -2145,7 +2145,7 @@
       ]
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Are you sure you want to remove {title} from your Watchlist?",
+      "default": "Are you sure you want to remove \"{title}\" from your Watchlist?",
       "description": "Warning prompt shown when a user tries to remove a movie or show from their watchlist.",
       "variables": {
         "title": {
@@ -2262,7 +2262,7 @@
       ]
     },
     "button_label_add_to_favorites": {
-      "default": "Add {title} to your Favorites",
+      "default": "Add \"{title}\" to your Favorites",
       "description": "Aria-label for the button that allows users to add a movie or show to their favorites.",
       "variables": {
         "title": {
@@ -2275,7 +2275,7 @@
       ]
     },
     "button_label_remove_from_favorites": {
-      "default": "Remove {title} from your Favorites",
+      "default": "Remove \"{title}\" from your Favorites",
       "description": "Aria-label for the button that allows users to remove a movie or show from their favorites.",
       "variables": {
         "title": {
@@ -2288,7 +2288,7 @@
       ]
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Are you sure you want to remove {title} from your Favorites?",
+      "default": "Are you sure you want to remove \"{title}\" from your Favorites?",
       "description": "Warning prompt shown when a user tries to remove a movie or show from their favorites.",
       "variables": {
         "title": {
@@ -2380,7 +2380,7 @@
       ]
     },
     "button_label_popup_menu": {
-      "default": "Pop up menu for {title}",
+      "default": "Pop up menu for \"{title}\"",
       "description": "Aria-label for the button that opens a popup menu for a movie, show, episode, or list.",
       "variables": {
         "title": {
@@ -2400,7 +2400,7 @@
       ]
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} does not appear on any popular lists.",
+      "default": "\"{title}\" does not appear on any popular lists.",
       "description": "Placeholder text shown when there are no popular lists for a movie or show.",
       "variables": {
         "title": {
@@ -2433,7 +2433,7 @@
       ]
     },
     "image_alt_media_poster": {
-      "default": "{title} poster",
+      "default": "\"{title}\" poster",
       "description": "Alt text for a movie, show, or episode's poster image.",
       "variables": {
         "title": {
@@ -2641,7 +2641,7 @@
       ]
     },
     "text_share_movie": {
-      "default": "Just discovered {title} - you need to see this! 🎬",
+      "default": "Just discovered \"{title}\" - you need to see this! 🎬",
       "description": "Text for sharing a movie.",
       "variables": {
         "title": {
@@ -2785,7 +2785,7 @@
       ]
     },
     "warning_prompt_drop_show": {
-      "default": "Are you sure you want to drop {title} show? This will remove it from your up next list.",
+      "default": "Are you sure you want to drop \"{title}\" show? This will remove it from your up next list.",
       "description": "Warning prompt shown when a user tries to drop a show.",
       "variables": {
         "title": {
@@ -2798,7 +2798,7 @@
       ]
     },
     "button_label_drop_show": {
-      "default": "Flag show {title} as dropped",
+      "default": "Flag show \"{title}\" as dropped",
       "description": "Aria-label for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show.",
       "variables": {
         "title": {
@@ -2819,7 +2819,7 @@
       ]
     },
     "warning_prompt_restore_show": {
-      "default": "Are you sure you want to restore {title} show? This will restore it on your progress and calendar.",
+      "default": "Are you sure you want to restore \"{title}\" show? This will restore it on your progress and calendar.",
       "description": "Warning prompt shown when a user tries to restore a hidden show.",
       "variables": {
         "title": {
@@ -2832,7 +2832,7 @@
       ]
     },
     "button_label_restore_show": {
-      "default": "Restore show {title}",
+      "default": "Restore show \"{title}\"",
       "description": "Aria-label for the button that restores a hidden show.",
       "variables": {
         "title": {
@@ -2853,7 +2853,7 @@
       ]
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Are you sure you want to mark {title} as watched? This will mark all episodes as watched.",
+      "default": "Are you sure you want to mark \"{title}\" as watched? This will mark all episodes as watched.",
       "description": "Warning prompt shown when a user tries to mark a show as watched.",
       "variables": {
         "title": {
@@ -2865,7 +2865,7 @@
       ]
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Are you sure you want to mark all unseen episodes of {title} as watched until episode {episode}? This will mark {count} episodes as watched.",
+      "default": "Are you sure you want to mark all unseen episodes of \"{title}\" as watched until episode {episode}? This will mark {count} episodes as watched.",
       "description": "Warning prompt shown when a user tries to mark a show as watched until a specific episode.",
       "variables": {
         "title": {
@@ -2904,7 +2904,7 @@
       ]
     },
     "list_placeholder_media_history": {
-      "default": "You haven't watched {title} yet",
+      "default": "You haven't watched \"{title}\" yet",
       "description": "Placeholder text shown when there is no watch history for a movie, show, or episode.",
       "variables": {
         "title": {
@@ -3139,7 +3139,7 @@
       ]
     },
     "button_label_remove_from_list": {
-      "default": "Remove {title} from list",
+      "default": "Remove \"{title}\" from list",
       "description": "Aria-label for the button that allows users to remove a movie or show from a list.",
       "variables": {
         "title": {
@@ -3215,7 +3215,7 @@
       ]
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Add or remove {title} from lists",
+      "default": "Add or remove \"{title}\" from lists",
       "description": "Aria-label for the dropdown that allows users to add or remove a movie or show from lists.",
       "variables": {
         "title": {
@@ -3228,7 +3228,7 @@
       ]
     },
     "button_label_add_to_personal_list": {
-      "default": "Add {title} to {list}",
+      "default": "Add \"{title}\" to {list}",
       "description": "Aria-label for the button that allows users to add a movie or show to a personal list.",
       "variables": {
         "title": {
@@ -3244,7 +3244,7 @@
       ]
     },
     "button_label_remove_from_personal_list": {
-      "default": "Remove {title} from {list}",
+      "default": "Remove \"{title}\" from {list}",
       "description": "Aria-label for the button that allows users to remove a movie or show from a personal list.",
       "variables": {
         "title": {
@@ -3260,7 +3260,7 @@
       ]
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Are you sure you want to remove {title} from {list}?",
+      "default": "Are you sure you want to remove \"{title}\" from {list}?",
       "description": "Warning prompt shown when a user tries to remove an item from a personal list.",
       "variables": {
         "title": {
@@ -3462,7 +3462,7 @@
       ]
     },
     "button_label_view_all_items_in": {
-      "default": "View all items in {title}",
+      "default": "View all items in \"{title}\"",
       "description": "Aria-label for the button that allows users to view all items in a specific category or list.",
       "variables": {
         "title": {
@@ -3571,7 +3571,7 @@
       ]
     },
     "button_label_checkin": {
-      "default": "Check in {title}",
+      "default": "Check in \"{title}\"",
       "description": "Aria-label for the button that allows users to check in to a movie or episode.",
       "variables": {
         "title": {
@@ -4065,7 +4065,7 @@
       ]
     },
     "button_label_stop_playing": {
-      "default": "Stop the checkin for {title}",
+      "default": "Stop the checkin for \"{title}\"",
       "description": "Aria-label for the button that allows users to stop the currently checked in movie or episode.",
       "variables": {
         "title": {
@@ -4991,7 +4991,7 @@
       ]
     },
     "warning_prompt_stop_checkin": {
-      "default": "Are you sure you want to stop watching {title}?",
+      "default": "Are you sure you want to stop watching \"{title}\"?",
       "description": "Warning prompt shown when a user stops a manually checked in movie or episode.",
       "variables": {
         "title": {
