@@ -10,21 +10,21 @@ describe('escapeXml', () => {
     expect(escapeXml('&')).toBe('&amp;');
     expect(escapeXml('<')).toBe('&lt;');
     expect(escapeXml('>')).toBe('&gt;');
-    expect(escapeXml('"')).toBe('&quot;');
+    expect(escapeXml('"')).toBe('\\"');
     expect(escapeXml("'")).toBe('&apos;');
   });
 
   it('should escape multiple characters in sequence', () => {
     expect(escapeXml('&lt;tag&gt;')).toBe('&amp;lt;tag&amp;gt;');
     expect(escapeXml('<tag attr="value">')).toBe(
-      '&lt;tag attr=&quot;value&quot;&gt;',
+      '&lt;tag attr=\\"value\\"&gt;',
     );
   });
 
   it('should handle complex text with mixed special characters', () => {
     const input = `Text with "quotes" & <tags> and 'apostrophes'`;
     const expected =
-      'Text with &quot;quotes&quot; &amp; &lt;tags&gt; and &apos;apostrophes&apos;';
+      'Text with \\"quotes\\" &amp; &lt;tags&gt; and &apos;apostrophes&apos;';
     expect(escapeXml(input)).toBe(expected);
   });
 

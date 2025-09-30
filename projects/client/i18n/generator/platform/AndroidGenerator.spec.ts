@@ -143,7 +143,7 @@ describe('AndroidGenerator', () => {
       const results = await generator.generate([metaWithSpecialChars], tempDir);
       const content = firstItem(results).content;
       expect(content).toContain(
-        '<string name="special_chars">This &amp; that &lt; &gt; &quot;quotes&quot; &apos;apostrophe&apos;</string>',
+        '<string name="special_chars">This &amp; that &lt; &gt; \\"quotes\\" &apos;apostrophe&apos;</string>',
       );
     });
 
