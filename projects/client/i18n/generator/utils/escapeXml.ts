@@ -8,6 +8,6 @@ export function escapeXml(text: string): string {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '\\"')
-    .replace(/'/g, '&apos;')
+    .replace(/'/g, "\\'")
     .replace(/\.{3}/g, '…');
 }

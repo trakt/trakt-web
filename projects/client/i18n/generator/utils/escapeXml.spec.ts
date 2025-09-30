@@ -11,7 +11,7 @@ describe('escapeXml', () => {
     expect(escapeXml('<')).toBe('&lt;');
     expect(escapeXml('>')).toBe('&gt;');
     expect(escapeXml('"')).toBe('\\"');
-    expect(escapeXml("'")).toBe('&apos;');
+    expect(escapeXml("'")).toBe("\\'");
   });
 
   it('should escape multiple characters in sequence', () => {
@@ -24,7 +24,7 @@ describe('escapeXml', () => {
   it('should handle complex text with mixed special characters', () => {
     const input = `Text with "quotes" & <tags> and 'apostrophes'`;
     const expected =
-      'Text with \\"quotes\\" &amp; &lt;tags&gt; and &apos;apostrophes&apos;';
+      "Text with \\\"quotes\\\" &amp; &lt;tags&gt; and \\'apostrophes\\'";
     expect(escapeXml(input)).toBe(expected);
   });
 
