@@ -90,13 +90,13 @@
       "default": "Se igjen"
     },
     "button_label_add_to_watchlist": {
-      "default": "Legg {title} til i din Watchlist"
+      "default": "Legg \"{title}\" til i din Watchlist"
     },
     "button_label_mark_as_watched": {
-      "default": "Merk {title} som sett"
+      "default": "Merk \"{title}\" som sett"
     },
     "button_label_watched_until_here": {
-      "default": "Merk {title} som sett hit"
+      "default": "Merk \"{title}\" som sett hit"
     },
     "translated_value_genre_horror": {
       "default": "Skrekk"
@@ -210,7 +210,7 @@
       "default": "Science Fiction"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Fjern {title} fra din Watchlist"
+      "default": "Fjern \"{title}\" fra din Watchlist"
     },
     "input_placeholder_search": {
       "default": "Søk etter serier og filmer..."
@@ -450,7 +450,7 @@
       "default": "Dine Filmer"
     },
     "button_label_stream_on": {
-      "default": "Se {title} nå"
+      "default": "Se \"{title}\" nå"
     },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo"
@@ -690,16 +690,16 @@
       "default": "Fjern fra Sett"
     },
     "button_label_remove_from_watched": {
-      "default": "Fjern {title} fra din Sett-liste"
+      "default": "Fjern \"{title}\" fra din Sett-liste"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Er du sikker på at du vil fjerne {title} fra din Sett-liste? Alle visninger vil bli fjernet."
+      "default": "Er du sikker på at du vil fjerne \"{title}\" fra din Sett-liste? Alle visninger vil bli fjernet."
     },
     "button_label_remove_from_history": {
-      "default": "Fjern denne visningen av {title} fra din Sett-liste"
+      "default": "Fjern denne visningen av \"{title}\" fra din Sett-liste"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Er du sikker på at du vil fjerne denne visningen av {title} fra din Sett-liste?"
+      "default": "Er du sikker på at du vil fjerne denne visningen av \"{title}\" fra din Sett-liste?"
     },
     "list_title_seasons": {
       "default": "Sesonger"
@@ -711,13 +711,13 @@
       "default": "Spesialer"
     },
     "button_label_expand_media_overview": {
-      "default": "Utvid {title} oversikt"
+      "default": "Utvid \"{title}\" oversikt"
     },
     "text_season_episode_number": {
       "default": "Sesong {season} • Episode {number}"
     },
     "button_label_share": {
-      "default": "Del {title}"
+      "default": "Del \"{title}\""
     },
     "button_text_share": {
       "default": "Del"
@@ -792,7 +792,7 @@
       "default": "Full Sesong"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Er du sikker på at du vil fjerne {title} fra din Watchlist?"
+      "default": "Er du sikker på at du vil fjerne \"{title}\" fra din Watchlist?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Se alle anbefalte filmer"
@@ -834,13 +834,13 @@
       "default": "Fjern fra favoritter"
     },
     "button_label_add_to_favorites": {
-      "default": "Legg til {title} i dine favoritter"
+      "default": "Legg til \"{title}\" i dine favoritter"
     },
     "button_label_remove_from_favorites": {
-      "default": "Fjern {title} fra dine favoritter"
+      "default": "Fjern \"{title}\" fra dine favoritter"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Er du sikker på at du vil fjerne {title} fra favorittene dine?"
+      "default": "Er du sikker på at du vil fjerne \"{title}\" fra favorittene dine?"
     },
     "list_title_favorite_movies": {
       "default": "Favorittfilmer"
@@ -873,13 +873,13 @@
       "default": "On Demand"
     },
     "button_label_popup_menu": {
-      "default": "Popup-meny for {title}"
+      "default": "Popup-meny for \"{title}\""
     },
     "list_title_popular_lists": {
       "default": "Populære lister"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} vises ikke på noen populære lister."
+      "default": "\"{title}\" vises ikke på noen populære lister."
     },
     "text_by": {
       "default": "av"
@@ -888,7 +888,7 @@
       "default": "{username}s avatar"
     },
     "image_alt_media_poster": {
-      "default": "{title} poster"
+      "default": "\"{title}\" poster"
     },
     "list_placeholder_comments": {
       "default": "Ingen kommentarer ennå."
@@ -966,7 +966,7 @@
       "default": "Likte"
     },
     "text_share_movie": {
-      "default": "Akkurat oppdaget {title} - du må se dette! 🎬"
+      "default": "Akkurat oppdaget \"{title}\" - du må se dette! 🎬"
     },
     "text_share_show": {
       "default": "Fant denne fantastiske serien: {title}! 📺"
@@ -1008,28 +1008,28 @@
       "default": "Sendt"
     },
     "warning_prompt_drop_show": {
-      "default": "Er du sikker på at du vil droppe {title} serien? Dette vil fjerne den fra din Neste-liste."
+      "default": "Er du sikker på at du vil droppe \"{title}\" serien? Dette vil fjerne den fra din Neste-liste."
     },
     "button_label_drop_show": {
-      "default": "Merk serien {title} som droppet"
+      "default": "Merk serien \"{title}\" som droppet"
     },
     "button_text_drop_show": {
       "default": "Dropp serie"
     },
     "warning_prompt_restore_show": {
-      "default": "Er du sikker på at du vil gjenopprette {title} serien? Dette vil gjenopprette det på din fremgang og kalender."
+      "default": "Er du sikker på at du vil gjenopprette \"{title}\" serien? Dette vil gjenopprette det på din fremgang og kalender."
     },
     "button_label_restore_show": {
-      "default": "Gjenopprett serien {title}"
+      "default": "Gjenopprett serien \"{title}\""
     },
     "button_text_restore_show": {
       "default": "Gjenopprett serie"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Er du sikker på at du vil markere {title} som sett? Dette vil markere alle episoder som sett."
+      "default": "Er du sikker på at du vil markere \"{title}\" som sett? Dette vil markere alle episoder som sett."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Er du sikker på at du vil merke alle usett episoder av {title} som sett frem til episode {episode}? Dette vil merke {count} episoder som sett."
+      "default": "Er du sikker på at du vil merke alle usett episoder av \"{title}\" som sett frem til episode {episode}? Dette vil merke {count} episoder som sett."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Er du sikker på at du vil markere {count} episoder som sett?"
@@ -1038,7 +1038,7 @@
       "default": "Visningsantall"
     },
     "list_placeholder_media_history": {
-      "default": "Du har ikke sett {title} ennå"
+      "default": "Du har ikke sett \"{title}\" ennå"
     },
     "button_label_like_comment": {
       "default": "Lik kommentar"
@@ -1116,7 +1116,7 @@
       "default": "Fjern fra liste"
     },
     "button_label_remove_from_list": {
-      "default": "Fjern {title} fra listen"
+      "default": "Fjern \"{title}\" fra listen"
     },
     "page_title_service_unavailable": {
       "default": "Trakt-tjenesten er utilgjengelig"
@@ -1143,16 +1143,16 @@
       "default": "Listet"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Legg til eller fjern {title} fra lister"
+      "default": "Legg til eller fjern \"{title}\" fra lister"
     },
     "button_label_add_to_personal_list": {
-      "default": "Legg til {title} i {list}"
+      "default": "Legg til \"{title}\" i {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Fjern {title} fra {list}"
+      "default": "Fjern \"{title}\" fra {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Er du sikker på at du vil fjerne {title} fra {list}?"
+      "default": "Er du sikker på at du vil fjerne \"{title}\" fra {list}?"
     },
     "option_text_theme_light": {
       "default": "Lys"
@@ -1224,7 +1224,7 @@
       "default": "Vurderinger"
     },
     "button_label_view_all_items_in": {
-      "default": "Vis alle i {title}"
+      "default": "Vis alle i \"{title}\""
     },
     "button_text_reset_all_filters": {
       "default": "Nullstill alt"
@@ -1263,7 +1263,7 @@
       "default": "Sjekk inn"
     },
     "button_label_checkin": {
-      "default": "Sjekk inn {title}"
+      "default": "Sjekk inn \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt bruker C🍪🍪KIES for å forbedre din totale opplevelse. Du kan <a>lese mer informasjon</a> her."
@@ -1434,7 +1434,7 @@
       "default": "og {count} til"
     },
     "button_label_stop_playing": {
-      "default": "Stopp innsjekkingen for {title}"
+      "default": "Stopp innsjekkingen for \"{title}\""
     },
     "link_text_view_profile": {
       "default": "Vis profil"
@@ -1769,7 +1769,7 @@
       "default": "Lukk"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Er du sikker på at du vil slutte å se {title}?",
+      "default": "Er du sikker på at du vil slutte å se \"{title}\"?",
       "variables": {
         "title": {
           "type": "string"

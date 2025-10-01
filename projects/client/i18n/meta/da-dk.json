@@ -90,13 +90,13 @@
       "default": "Se igen"
     },
     "button_label_add_to_watchlist": {
-      "default": "Tilføj {title} til din liste"
+      "default": "Tilføj \"{title}\" til din liste"
     },
     "button_label_mark_as_watched": {
-      "default": "Marker {title} som set"
+      "default": "Marker \"{title}\" som set"
     },
     "button_label_watched_until_here": {
-      "default": "Marker {title} som set indtil her"
+      "default": "Marker \"{title}\" som set indtil her"
     },
     "translated_value_genre_horror": {
       "default": "Gyser"
@@ -210,7 +210,7 @@
       "default": "Science Fiction"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Fjern {title} fra din liste"
+      "default": "Fjern \"{title}\" fra din liste"
     },
     "input_placeholder_search": {
       "default": "Søg serier og film..."
@@ -450,7 +450,7 @@
       "default": "Dine film"
     },
     "button_label_stream_on": {
-      "default": "Se {title} nu"
+      "default": "Se \"{title}\" nu"
     },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo"
@@ -690,16 +690,16 @@
       "default": "Fjern fra set"
     },
     "button_label_remove_from_watched": {
-      "default": "Fjern {title} fra din set-liste"
+      "default": "Fjern \"{title}\" fra din set-liste"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Er du sikker på, at du vil fjerne {title} fra din set-liste? Alle afspilninger vil blive fjernet."
+      "default": "Er du sikker på, at du vil fjerne \"{title}\" fra din set-liste? Alle afspilninger vil blive fjernet."
     },
     "button_label_remove_from_history": {
-      "default": "Fjern denne afspilning af {title} fra din set-liste"
+      "default": "Fjern denne afspilning af \"{title}\" fra din set-liste"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Er du sikker på, at du vil fjerne denne afspilning af {title} fra din set-liste?"
+      "default": "Er du sikker på, at du vil fjerne denne afspilning af \"{title}\" fra din set-liste?"
     },
     "list_title_seasons": {
       "default": "Sæsoner"
@@ -711,13 +711,13 @@
       "default": "Specials"
     },
     "button_label_expand_media_overview": {
-      "default": "Udvid {title} oversigt"
+      "default": "Udvid \"{title}\" oversigt"
     },
     "text_season_episode_number": {
       "default": "Sæson {season} • Afsnit {number}"
     },
     "button_label_share": {
-      "default": "Del {title}"
+      "default": "Del \"{title}\""
     },
     "button_text_share": {
       "default": "Del"
@@ -792,7 +792,7 @@
       "default": "Hele sæsonen"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Er du sikker på, at du vil fjerne {title} fra din liste?"
+      "default": "Er du sikker på, at du vil fjerne \"{title}\" fra din liste?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Se alle anbefalede film"
@@ -834,13 +834,13 @@
       "default": "Fjern fra favoritter"
     },
     "button_label_add_to_favorites": {
-      "default": "Tilføj {title} til dine favoritter"
+      "default": "Tilføj \"{title}\" til dine favoritter"
     },
     "button_label_remove_from_favorites": {
-      "default": "Fjern {title} fra dine favoritter"
+      "default": "Fjern \"{title}\" fra dine favoritter"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Er du sikker på at du vil fjerne {title} fra dine favoritter?"
+      "default": "Er du sikker på at du vil fjerne \"{title}\" fra dine favoritter?"
     },
     "list_title_favorite_movies": {
       "default": "Favoritfilm"
@@ -873,13 +873,13 @@
       "default": "On Demand"
     },
     "button_label_popup_menu": {
-      "default": "Pop op-menu for {title}"
+      "default": "Pop op-menu for \"{title}\""
     },
     "list_title_popular_lists": {
       "default": "Populære lister"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} fremgår ikke på nogen populære lister."
+      "default": "\"{title}\" fremgår ikke på nogen populære lister."
     },
     "text_by": {
       "default": "af"
@@ -888,7 +888,7 @@
       "default": "{username}'s avatar"
     },
     "image_alt_media_poster": {
-      "default": "{title} poster"
+      "default": "\"{title}\" poster"
     },
     "list_placeholder_comments": {
       "default": "Ingen kommentarer endnu."
@@ -966,7 +966,7 @@
       "default": "Synes godt om"
     },
     "text_share_movie": {
-      "default": "Opdagede lige {title} - du skal se den her! 🎬"
+      "default": "Opdagede lige \"{title}\" - du skal se den her! 🎬"
     },
     "text_share_show": {
       "default": "Fandt denne fantastiske serie: {title}! 📺"
@@ -1008,28 +1008,28 @@
       "default": "Sendt"
     },
     "warning_prompt_drop_show": {
-      "default": "Er du sikker på, at du vil droppe {title} serien? Dette vil fjerne den fra din næste liste."
+      "default": "Er du sikker på, at du vil droppe \"{title}\" serien? Dette vil fjerne den fra din næste liste."
     },
     "button_label_drop_show": {
-      "default": "Marker serien {title} som droppet"
+      "default": "Marker serien \"{title}\" som droppet"
     },
     "button_text_drop_show": {
       "default": "Drop serie"
     },
     "warning_prompt_restore_show": {
-      "default": "Er du sikker på, at du vil gendanne {title} serien? Dette vil gendanne den på din fremskridt og kalender."
+      "default": "Er du sikker på, at du vil gendanne \"{title}\" serien? Dette vil gendanne den på din fremskridt og kalender."
     },
     "button_label_restore_show": {
-      "default": "Gendan serien {title}"
+      "default": "Gendan serien \"{title}\""
     },
     "button_text_restore_show": {
       "default": "Gendan serie"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Er du sikker på, at du vil markere {title} som set? Dette vil markere alle afsnit som set."
+      "default": "Er du sikker på, at du vil markere \"{title}\" som set? Dette vil markere alle afsnit som set."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Er du sikker på, at du vil markere alle usete afsnit af {title} som set indtil afsnit {episode}? Dette vil markere {count} afsnit som set."
+      "default": "Er du sikker på, at du vil markere alle usete afsnit af \"{title}\" som set indtil afsnit {episode}? Dette vil markere {count} afsnit som set."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Er du sikker på, at du vil markere {count} afsnit som set?"
@@ -1038,7 +1038,7 @@
       "default": "Antal set"
     },
     "list_placeholder_media_history": {
-      "default": "Du har ikke set {title} endnu"
+      "default": "Du har ikke set \"{title}\" endnu"
     },
     "button_label_like_comment": {
       "default": "Synes godt om kommentar"
@@ -1116,7 +1116,7 @@
       "default": "Fjern fra listen"
     },
     "button_label_remove_from_list": {
-      "default": "Fjern {title} fra listen"
+      "default": "Fjern \"{title}\" fra listen"
     },
     "page_title_service_unavailable": {
       "default": "Trakt tjeneste utilgængelig"
@@ -1143,16 +1143,16 @@
       "default": "Tilføjet"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Tilføj eller fjern {title} fra lister"
+      "default": "Tilføj eller fjern \"{title}\" fra lister"
     },
     "button_label_add_to_personal_list": {
-      "default": "Tilføj {title} til {list}"
+      "default": "Tilføj \"{title}\" til {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Fjern {title} fra {list}"
+      "default": "Fjern \"{title}\" fra {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Er du sikker på, at du vil fjerne {title} fra {list}?"
+      "default": "Er du sikker på, at du vil fjerne \"{title}\" fra {list}?"
     },
     "option_text_theme_light": {
       "default": "Lys"
@@ -1224,7 +1224,7 @@
       "default": "Bedømmelser"
     },
     "button_label_view_all_items_in": {
-      "default": "Se alle i {title}"
+      "default": "Se alle i \"{title}\""
     },
     "button_text_reset_all_filters": {
       "default": "Nulstil alle"
@@ -1263,7 +1263,7 @@
       "default": "Tjek ind"
     },
     "button_label_checkin": {
-      "default": "Tjek ind {title}"
+      "default": "Tjek ind \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt bruger C🍪🍪KIES for at forbedre din samlede oplevelse. Du kan <a>læse mere information</a> her."
@@ -1434,7 +1434,7 @@
       "default": "og {count} mere"
     },
     "button_label_stop_playing": {
-      "default": "Stop check-in for {title}"
+      "default": "Stop check-in for \"{title}\""
     },
     "link_text_view_profile": {
       "default": "Se profil"
@@ -1769,7 +1769,7 @@
       "default": "Luk"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Er du sikker på, at du vil stoppe med at se {title}?",
+      "default": "Er du sikker på, at du vil stoppe med at se \"{title}\"?",
       "variables": {
         "title": {
           "type": "string"
