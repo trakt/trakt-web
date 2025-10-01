@@ -53,3 +53,17 @@ The `CI/CD` pipeline automatically deploys the client to Cloudflare Workers.
 This command is primarily intended for creating
 [preview environments](https://developers.cloudflare.com/pages/configuration/preview-deployments/)
 where your team can review changes before they go live.
+
+### Typesense
+
+To take advantage of client-side search functionality, you need to configure the
+following environment variables:
+
+This handler requires the following environment variables to be configured:
+
+- **`TYPESENSE_CLIENT_KEY`**: The API key used to authenticate with the
+  Typesense search server. This key is used to generate scoped search keys for
+  both media and people searches.
+- **`TYPESENSE_SERVER`**: The URL of the Typesense server endpoint (e.g.,
+  `https://your-typesense-server.com`). This specifies which Typesense instance
+  to connect to for search operations.
