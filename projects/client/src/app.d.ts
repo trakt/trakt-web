@@ -167,6 +167,14 @@ declare global {
     & HTMLInputElementProps
     & HTMLElementProps;
 
+  export type TypesenseConfig = {
+    keys: {
+      media: string;
+      people: string;
+    };
+    server: string;
+  };
+
   namespace App {
     // interface Error {}
     interface Locals {
@@ -178,6 +186,7 @@ declare global {
       oidcAuth:
         | import('$lib/features/auth/models/OidcAuthToken').OidcAuthToken
         | Nil;
+      typesense: TypesenseConfig;
     }
     // interface PageData {}
     // interface PageState {}

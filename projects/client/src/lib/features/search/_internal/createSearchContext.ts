@@ -9,9 +9,12 @@ import { searchKeyFactory } from './searchKeyFactory.ts';
 type SearchContextProps = {
   mode?: SearchMode;
   mediaType?: MediaType;
+  config: TypesenseConfig;
 };
 
-export function createSearchContext({ mode, mediaType }: SearchContextProps) {
+export function createSearchContext(
+  { mode, mediaType, config }: SearchContextProps,
+) {
   const ctx = setContext(
     searchKeyFactory(),
     getContext<SearchContext>(searchKeyFactory()) ??
@@ -21,6 +24,7 @@ export function createSearchContext({ mode, mediaType }: SearchContextProps) {
         isSearching: writable(false),
         pathName: UrlBuilder.search(),
         query: writable(''),
+        config,
       },
   );
 

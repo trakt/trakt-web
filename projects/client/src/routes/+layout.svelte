@@ -143,7 +143,7 @@
             <AutoSigninProvider>
               <NavigationProvider device={data.device}>
                 <LocaleProvider>
-                  <SearchProvider>
+                  <SearchProvider config={data.typesense}>
                     <FilterProvider>
                       <FeatureFlagProvider>
                         <CoverProvider>

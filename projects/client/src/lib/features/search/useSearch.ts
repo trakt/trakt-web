@@ -9,7 +9,6 @@ import {
   type PeopleSearchResult,
   searchPeopleQuery,
 } from '$lib/requests/queries/search/searchPeopleQuery.ts';
-import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
 import {
   CancelledError,
@@ -27,20 +26,22 @@ import type { SearchResult } from './models/SearchResult.ts';
 
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
 
-function modeToQuery(query: string, mode: SearchMode) {
+function modeToQuery(query: string, mode: SearchMode, config: TypesenseConfig) {
   switch (mode) {
     case 'media':
     case 'movie':
     case 'show': {
       const type = mode !== 'media' ? mode : undefined;
-      return searchMediaQuery({ query, type }) as CreateQueryOptions<
+      return searchMediaQuery({ query, type, config }) as CreateQueryOptions<
         SearchResponse
       >;
     }
     case 'people':
-      return searchPeopleQuery({ query }) as CreateQueryOptions<
+      return searchPeopleQuery({ query, config }) as CreateQueryOptions<
         SearchResponse
       >;
+    default:
+      throw new Error(`Unsupported search mode: ${mode}`);
   }
 }
 
@@ -57,13 +58,14 @@ function modeToCancellationIds(mode: SearchMode) {
       return [searchCancellationId('show')];
     case 'people':
       return [searchCancellationId('person')];
+    default:
+      throw new Error(`Unsupported search mode: ${mode}`);
   }
 }
 
 export function useSearch() {
   const client = browser ? useQueryClient() : undefined;
-  const { mode, isSearching, ...rest } = getSearchContext();
-  const isDesktop = useMedia(WellKnownMediaQuery.desktop);
+  const { mode, isSearching, config, ...rest } = getSearchContext();
   const { track } = useTrack(AnalyticsEvent.Search);
 
   const results = writable<SearchResult>({
@@ -84,7 +86,7 @@ export function useSearch() {
       return;
     }
 
-    const query = modeToQuery(term, mode);
+    const query = modeToQuery(term, mode, config);
 
     const response = await client.fetchQuery(query)
       .then((response) => {
@@ -144,11 +146,15 @@ export function useSearch() {
     results.set({ response: null, reason: 'initial' });
   }
 
+  const debouncedSearch = debounce((term: string, mode: string) => {
+    search(term, mode as SearchMode);
+  }, 150);
+
   return {
     postRecentSearch,
     search: (term: string, mode: SearchMode) => {
       isSearching.set(true);
-      debounce(() => search(term, mode), get(isDesktop) ? 150 : 250)();
+      debouncedSearch(term, mode);
     },
     results: derived(results, ($results) => $results.response),
     clear,
