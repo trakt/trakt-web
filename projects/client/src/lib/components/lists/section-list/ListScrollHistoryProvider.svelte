@@ -15,15 +15,18 @@
     isNavigationToAnotherPage && event.emit("snapshot", undefined);
   });
 
+  const debouncedEmit = debounce(
+    (isHistoryNavigation: boolean) =>
+      isHistoryNavigation && event.emit("restore", undefined),
+    time.fps(30),
+  );
+
   afterNavigate((nav) => {
     const isHistoryNavigation =
       nav.type === "popstate" && nav.willUnload === false;
 
     // FIXME: see if we can do this without the debounce
-    debounce(
-      () => isHistoryNavigation && event.emit("restore", undefined),
-      time.fps(30),
-    )();
+    debouncedEmit(isHistoryNavigation);
   });
 </script>
 
