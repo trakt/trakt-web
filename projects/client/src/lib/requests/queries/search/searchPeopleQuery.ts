@@ -1,5 +1,5 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { type ApiParams } from '$lib/requests/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
@@ -11,9 +11,11 @@ import {
   PersonSummarySchema,
 } from '../../models/PersonSummary.ts';
 import { getPeople } from './getPeople.ts';
+import { searchCancellationId } from './searchCancellationId.ts';
 
 type SearchParams = {
   query: string;
+  limit: number;
   config: TypesenseConfig;
 } & ApiParams;
 
@@ -51,27 +53,51 @@ function mapToSearchResultEntry(
 }
 
 const searchRequest = async (
-  { query, config }: SearchParams,
+  { query, config, limit }: SearchParams,
 ) => {
-  const response = await getPeople({
+  const queryParams = {
     query,
-    config,
-  });
+    limit,
+  };
 
-  return response.map((item) => ({
-    ...item,
-    status: 200,
-  }));
+  const response = await getPeople({
+    ...queryParams,
+    config,
+  })
+    .then((body) => ({
+      body,
+      status: 200,
+    }))
+    .catch(() =>
+      api({
+        fetch,
+        cancellable: true,
+        cancellationId: searchCancellationId('person'),
+      })
+        .search
+        .query({
+          query: {
+            ...queryParams,
+            extended: 'full,images',
+          },
+          params: {
+            type: 'person',
+          },
+        })
+    );
+
+  return response;
 };
 
 export const searchPeopleQuery = defineQuery({
   key: 'searchPeople',
   invalidations: [],
-  dependencies: (params) => [params.query.toLowerCase().trim()],
+  dependencies: (params) => [params.query.toLowerCase().trim(), params.limit],
   request: searchRequest,
   mapper: (response) => ({
     type: 'people' as const,
     items: response
+      .body
       .map(mapToSearchResultEntry)
       .filter((value) => !isGarbage(value)),
   }),

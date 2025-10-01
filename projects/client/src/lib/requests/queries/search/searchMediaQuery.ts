@@ -1,7 +1,7 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
-import { type ApiParams } from '$lib/requests/api.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
@@ -10,10 +10,12 @@ import z from 'zod';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
 import type { MediaType } from '../../models/MediaType.ts';
 import { getMedia } from './getMedia.ts';
+import { searchCancellationId } from './searchCancellationId.ts';
 
 type SearchParams = {
   query: string;
   config: TypesenseConfig;
+  limit: number;
   type?: MediaType;
 } & ApiParams;
 
@@ -59,29 +61,57 @@ function mapToSearchResultEntry(
 }
 
 const searchRequest = async (
-  { query, type, config }: SearchParams,
+  { query, type, config, limit }: SearchParams,
 ) => {
-  const response = await getMedia({
+  const queryParams = {
     query,
-    config,
-    types: type ? [type] : ['movie', 'show'],
-  });
+    limit,
+  };
 
-  return response.map((item) => ({
-    ...item,
-    status: 200,
-  }));
+  const types = type ?? 'movie,show';
+
+  const response = await getMedia({
+    ...queryParams,
+    config,
+    types: types.split(',') as MediaType[],
+  })
+    .then((body) => ({
+      body,
+      status: 200,
+    }))
+    .catch(() =>
+      api({
+        fetch,
+        cancellable: true,
+        cancellationId: searchCancellationId('media'),
+      })
+        .search
+        .query({
+          query: {
+            ...queryParams,
+            extended: 'full,images',
+          },
+          params: {
+            type: types,
+          },
+        })
+    );
+
+  return response;
 };
 
 export const searchMediaQuery = defineQuery({
   key: 'searchMedia',
   invalidations: [],
-  dependencies: (params) => [params.query.toLowerCase().trim(), params.type],
+  dependencies: (
+    params,
+  ) => [params.query.toLowerCase().trim(), params.type, params.limit],
   request: searchRequest,
   mapper: (response) => {
     return {
       type: 'media' as const,
       items: response
+        .body
         .map(mapToSearchResultEntry)
         .filter((value) => !isGarbage(value)),
     };

@@ -18,6 +18,7 @@ import {
 import { AbortError, abortRequest } from '@trakt/api';
 import { onDestroy } from 'svelte';
 import { derived, get, writable } from 'svelte/store';
+import { DEFAULT_SEARCH_LIMIT } from '../../utils/constants.ts';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import { getSearchContext } from './_internal/getSearchContext.ts';
@@ -27,17 +28,24 @@ import type { SearchResult } from './models/SearchResult.ts';
 type SearchResponse = MediaSearchResult | PeopleSearchResult;
 
 function modeToQuery(query: string, mode: SearchMode, config: TypesenseConfig) {
+  const limit = DEFAULT_SEARCH_LIMIT;
+
   switch (mode) {
     case 'media':
     case 'movie':
     case 'show': {
       const type = mode !== 'media' ? mode : undefined;
-      return searchMediaQuery({ query, type, config }) as CreateQueryOptions<
+      return searchMediaQuery({
+        query,
+        type,
+        config,
+        limit,
+      }) as CreateQueryOptions<
         SearchResponse
       >;
     }
     case 'people':
-      return searchPeopleQuery({ query, config }) as CreateQueryOptions<
+      return searchPeopleQuery({ query, config, limit }) as CreateQueryOptions<
         SearchResponse
       >;
     default:

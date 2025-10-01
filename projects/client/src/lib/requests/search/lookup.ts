@@ -1,4 +1,3 @@
-import { DEFAULT_SEARCH_LIMIT } from '../../utils/constants.ts';
 import type { MediaType } from '../models/MediaType.ts';
 import { createSearcher } from './createSearcher.ts';
 import type { MovieSchema } from './schema/MovieSchema.ts';
@@ -17,6 +16,7 @@ type SearchParams<T extends SearchCategory> = {
   key: string;
   server: string;
   query: string;
+  limit: number;
   types: T[];
 };
 
@@ -30,6 +30,7 @@ export function lookup<T extends SearchCategory>({
   key,
   server,
   query: q,
+  limit,
   types,
 }: SearchParams<T>) {
   return createSearcher({
@@ -45,7 +46,7 @@ export function lookup<T extends SearchCategory>({
     }, {
       q,
       prioritize_exact_match: false,
-      limit: DEFAULT_SEARCH_LIMIT,
+      limit,
     })
     .then(({ hits, found }) => ({
       hits: hits ?? [],
