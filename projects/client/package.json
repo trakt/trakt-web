@@ -84,6 +84,7 @@
     "idb-keyval": "6.2.2",
     "oidc-client-ts": "3.3.0",
     "resolve-accept-language": "3.1.13",
+    "typesense": "^2.1.0",
     "workbox-expiration": "7.3.0",
     "workbox-precaching": "7.3.0",
     "workbox-routing": "7.3.0",
