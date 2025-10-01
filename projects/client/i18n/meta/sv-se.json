@@ -90,13 +90,13 @@
       "default": "Titta igen"
     },
     "button_label_add_to_watchlist": {
-      "default": "Lägg till {title} i din to-watch"
+      "default": "Lägg till \"{title}\" i din to-watch"
     },
     "button_label_mark_as_watched": {
-      "default": "Markera {title} som sett"
+      "default": "Markera \"{title}\" som sett"
     },
     "button_label_watched_until_here": {
-      "default": "Markera {title} som sett hit"
+      "default": "Markera \"{title}\" som sett hit"
     },
     "translated_value_genre_horror": {
       "default": "Skräck"
@@ -210,7 +210,7 @@
       "default": "Science Fiction"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Ta bort {title} från din to-watch"
+      "default": "Ta bort \"{title}\" från din to-watch"
     },
     "input_placeholder_search": {
       "default": "Sök serier & filmer..."
@@ -450,7 +450,7 @@
       "default": "Dina filmer"
     },
     "button_label_stream_on": {
-      "default": "Titta på {title} nu"
+      "default": "Titta på \"{title}\" nu"
     },
     "image_alt_streaming_service_logo": {
       "default": "{service} logotyp"
@@ -690,16 +690,16 @@
       "default": "Ta bort från sedda"
     },
     "button_label_remove_from_watched": {
-      "default": "Ta bort {title} från din Sedda-lista"
+      "default": "Ta bort \"{title}\" från din Sedda-lista"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Är du säker på att du vill ta bort {title} från din Sedda-lista? Alla visningar kommer att tas bort."
+      "default": "Är du säker på att du vill ta bort \"{title}\" från din Sedda-lista? Alla visningar kommer att tas bort."
     },
     "button_label_remove_from_history": {
-      "default": "Ta bort den här visningen av {title} från din Sedda-lista"
+      "default": "Ta bort den här visningen av \"{title}\" från din Sedda-lista"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Är du säker på att du vill ta bort den här visningen av {title} från din Sedda-lista?"
+      "default": "Är du säker på att du vill ta bort den här visningen av \"{title}\" från din Sedda-lista?"
     },
     "list_title_seasons": {
       "default": "Säsonger"
@@ -711,13 +711,13 @@
       "default": "Specialavsnitt"
     },
     "button_label_expand_media_overview": {
-      "default": "Utvidga {title} översikt"
+      "default": "Utvidga \"{title}\" översikt"
     },
     "text_season_episode_number": {
       "default": "Säsong {season} • Avsnitt {number}"
     },
     "button_label_share": {
-      "default": "Dela {title}"
+      "default": "Dela \"{title}\""
     },
     "button_text_share": {
       "default": "Dela"
@@ -792,7 +792,7 @@
       "default": "Hela säsongen"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Är du säker på att du vill ta bort {title} från din to-watch?"
+      "default": "Är du säker på att du vill ta bort \"{title}\" från din to-watch?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Se alla rekommenderade filmer"
@@ -834,13 +834,13 @@
       "default": "Ta bort från favoriter"
     },
     "button_label_add_to_favorites": {
-      "default": "Lägg till {title} i dina favoriter"
+      "default": "Lägg till \"{title}\" i dina favoriter"
     },
     "button_label_remove_from_favorites": {
-      "default": "Ta bort {title} från dina favoriter"
+      "default": "Ta bort \"{title}\" från dina favoriter"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Är du säker på att du vill ta bort {title} från dina favoriter?"
+      "default": "Är du säker på att du vill ta bort \"{title}\" från dina favoriter?"
     },
     "list_title_favorite_movies": {
       "default": "Favoritfilmer"
@@ -873,13 +873,13 @@
       "default": "On Demand"
     },
     "button_label_popup_menu": {
-      "default": "Popup-meny för {title}"
+      "default": "Popup-meny för \"{title}\""
     },
     "list_title_popular_lists": {
       "default": "Populära listor"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} visas inte på några populära listor."
+      "default": "\"{title}\" visas inte på några populära listor."
     },
     "text_by": {
       "default": "av"
@@ -888,7 +888,7 @@
       "default": "{username}'s avatar"
     },
     "image_alt_media_poster": {
-      "default": "{title} affisch"
+      "default": "\"{title}\" affisch"
     },
     "list_placeholder_comments": {
       "default": "Inga kommentarer än."
@@ -966,7 +966,7 @@
       "default": "Gillade"
     },
     "text_share_movie": {
-      "default": "Hittade precis {title} - du måste se den här! 🎬"
+      "default": "Hittade precis \"{title}\" - du måste se den här! 🎬"
     },
     "text_share_show": {
       "default": "Hittade den här fantastiska serien: {title}! 📺"
@@ -1008,28 +1008,28 @@
       "default": "Sändes"
     },
     "warning_prompt_drop_show": {
-      "default": "Är du säker på att du vill sluta följa serien {title}? Detta kommer att ta bort den från din nästa-lista."
+      "default": "Är du säker på att du vill sluta följa serien \"{title}\"? Detta kommer att ta bort den från din nästa-lista."
     },
     "button_label_drop_show": {
-      "default": "Markera serien {title} som avslutad"
+      "default": "Markera serien \"{title}\" som avslutad"
     },
     "button_text_drop_show": {
       "default": "Sluta följa"
     },
     "warning_prompt_restore_show": {
-      "default": "Är du säker på att du vill återställa serien {title}? Detta kommer att återställa den i dina framsteg och kalender."
+      "default": "Är du säker på att du vill återställa serien \"{title}\"? Detta kommer att återställa den i dina framsteg och kalender."
     },
     "button_label_restore_show": {
-      "default": "Återställ serien {title}"
+      "default": "Återställ serien \"{title}\""
     },
     "button_text_restore_show": {
       "default": "Återställ serie"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Är du säker på att du vill markera {title} som sedd? Detta kommer att markera alla avsnitt som sedda."
+      "default": "Är du säker på att du vill markera \"{title}\" som sedd? Detta kommer att markera alla avsnitt som sedda."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Är du säker på att du vill markera alla osedda avsnitt av {title} som sedda fram till avsnitt {episode}? Detta kommer att markera {count} avsnitt som sedda."
+      "default": "Är du säker på att du vill markera alla osedda avsnitt av \"{title}\" som sedda fram till avsnitt {episode}? Detta kommer att markera {count} avsnitt som sedda."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Är du säker på att du vill markera {count} avsnitt som sedda?"
@@ -1038,7 +1038,7 @@
       "default": "Antal visningar"
     },
     "list_placeholder_media_history": {
-      "default": "Du har inte sett {title} än"
+      "default": "Du har inte sett \"{title}\" än"
     },
     "button_label_like_comment": {
       "default": "Gilla kommentar"
@@ -1116,7 +1116,7 @@
       "default": "Ta bort från listan"
     },
     "button_label_remove_from_list": {
-      "default": "Ta bort {title} från listan"
+      "default": "Ta bort \"{title}\" från listan"
     },
     "page_title_service_unavailable": {
       "default": "Trakt-tjänsten ej tillgänglig"
@@ -1143,16 +1143,16 @@
       "default": "Listad"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Lägg till eller ta bort {title} från listor"
+      "default": "Lägg till eller ta bort \"{title}\" från listor"
     },
     "button_label_add_to_personal_list": {
-      "default": "Lägg till {title} i {list}"
+      "default": "Lägg till \"{title}\" i {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Ta bort {title} från {list}"
+      "default": "Ta bort \"{title}\" från {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Är du säker på att du vill ta bort {title} från {list}?"
+      "default": "Är du säker på att du vill ta bort \"{title}\" från {list}?"
     },
     "option_text_theme_light": {
       "default": "Ljus"
@@ -1224,7 +1224,7 @@
       "default": "Betyg"
     },
     "button_label_view_all_items_in": {
-      "default": "Visa alla i {title}"
+      "default": "Visa alla i \"{title}\""
     },
     "button_text_reset_all_filters": {
       "default": "Återställ alla"
@@ -1263,7 +1263,7 @@
       "default": "Checka in"
     },
     "button_label_checkin": {
-      "default": "Checka in {title}"
+      "default": "Checka in \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt använder C🍪🍪KIES för att förbättra din upplevelse. Du kan <a>läsa mer information</a> här."
@@ -1434,7 +1434,7 @@
       "default": "och {count} till"
     },
     "button_label_stop_playing": {
-      "default": "Stoppa incheckningen för {title}"
+      "default": "Stoppa incheckningen för \"{title}\""
     },
     "link_text_view_profile": {
       "default": "Visa profil"
@@ -1769,7 +1769,7 @@
       "default": "Stäng"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Är du säker på att du vill sluta titta på {title}?",
+      "default": "Är du säker på att du vill sluta titta på \"{title}\"?",
       "variables": {
         "title": {
           "type": "string"

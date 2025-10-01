@@ -90,13 +90,13 @@
       "default": "Erneut ansehen"
     },
     "button_label_add_to_watchlist": {
-      "default": "Füge {title} zu deiner Wunschliste hinzu"
+      "default": "Füge \"{title}\" zu deiner Wunschliste hinzu"
     },
     "button_label_mark_as_watched": {
-      "default": "{title} als gesehen markieren"
+      "default": "\"{title}\" als gesehen markieren"
     },
     "button_label_watched_until_here": {
-      "default": "{title} bis hier als gesehen markieren"
+      "default": "\"{title}\" bis hier als gesehen markieren"
     },
     "translated_value_genre_horror": {
       "default": "Horror"
@@ -210,7 +210,7 @@
       "default": "Science Fiction"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Entferne {title} von deiner Wunschliste"
+      "default": "Entferne \"{title}\" von deiner Wunschliste"
     },
     "input_placeholder_search": {
       "default": "Suche nach Serien & Filmen..."
@@ -450,7 +450,7 @@
       "default": "Deine Filme"
     },
     "button_label_stream_on": {
-      "default": "Titel {title} jetzt ansehen"
+      "default": "Titel \"{title}\" jetzt ansehen"
     },
     "image_alt_streaming_service_logo": {
       "default": "{service} Logo"
@@ -690,16 +690,16 @@
       "default": "Aus der Favoritenliste entfernen"
     },
     "button_label_remove_from_watched": {
-      "default": "{title} aus Ihrer Favoritenliste entfernen"
+      "default": "\"{title}\" aus Ihrer Favoritenliste entfernen"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Sind Sie sicher, dass Sie {title} von Ihrer Favoritenliste entfernen möchten? Alle Wiedergaben werden gelöscht."
+      "default": "Sind Sie sicher, dass Sie \"{title}\" von Ihrer Favoritenliste entfernen möchten? Alle Wiedergaben werden gelöscht."
     },
     "button_label_remove_from_history": {
-      "default": "Diese Wiedergabe von {title} aus deiner Gesehen-Liste entfernen"
+      "default": "Diese Wiedergabe von \"{title}\" aus deiner Gesehen-Liste entfernen"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Möchtest du diese Wiedergabe von {title} wirklich von deiner Gesehen-Liste entfernen?"
+      "default": "Möchtest du diese Wiedergabe von \"{title}\" wirklich von deiner Gesehen-Liste entfernen?"
     },
     "list_title_seasons": {
       "default": "Staffeln"
@@ -711,13 +711,13 @@
       "default": "Specials"
     },
     "button_label_expand_media_overview": {
-      "default": "Übersicht über {title} erweitern"
+      "default": "Übersicht über \"{title}\" erweitern"
     },
     "text_season_episode_number": {
       "default": "Staffel {season} • Folge {number}"
     },
     "button_label_share": {
-      "default": "Teile {title}"
+      "default": "Teile \"{title}\""
     },
     "button_text_share": {
       "default": "Teilen"
@@ -792,7 +792,7 @@
       "default": "Ganze Staffel"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Möchtest du {title} wirklich von deiner Liste zum Schauen entfernen?"
+      "default": "Möchtest du \"{title}\" wirklich von deiner Liste zum Schauen entfernen?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Alle empfohlenen Filme anzeigen"
@@ -834,13 +834,13 @@
       "default": "Aus Favoriten entfernen"
     },
     "button_label_add_to_favorites": {
-      "default": "{title} zu deinen Favoriten hinzufügen"
+      "default": "\"{title}\" zu deinen Favoriten hinzufügen"
     },
     "button_label_remove_from_favorites": {
-      "default": "{title} aus deinen Favoriten entfernen"
+      "default": "\"{title}\" aus deinen Favoriten entfernen"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Bist du sicher, dass du {title} aus deinen Favoriten entfernen möchtest?"
+      "default": "Bist du sicher, dass du \"{title}\" aus deinen Favoriten entfernen möchtest?"
     },
     "list_title_favorite_movies": {
       "default": "Lieblingsfilme"
@@ -873,13 +873,13 @@
       "default": "Auf Abruf"
     },
     "button_label_popup_menu": {
-      "default": "Menü für {title}"
+      "default": "Menü für \"{title}\""
     },
     "list_title_popular_lists": {
       "default": "Beliebte Listen"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} taucht in keinen beliebten Listen auf."
+      "default": "\"{title}\" taucht in keinen beliebten Listen auf."
     },
     "text_by": {
       "default": "von"
@@ -888,7 +888,7 @@
       "default": "{username}'s Avatar"
     },
     "image_alt_media_poster": {
-      "default": "{title} Poster"
+      "default": "\"{title}\" Poster"
     },
     "list_placeholder_comments": {
       "default": "Noch keine Kommentare. Sei der/die Erste!"
@@ -966,7 +966,7 @@
       "default": "Gefällt mir"
     },
     "text_share_movie": {
-      "default": "{title} entdeckt – unbedingt ansehen! 🎬"
+      "default": "\"{title}\" entdeckt – unbedingt ansehen! 🎬"
     },
     "text_share_show": {
       "default": "Ich habe diese tolle Serie gefunden: {title}! 📺"
@@ -1008,28 +1008,28 @@
       "default": "Ausgestrahlt"
     },
     "warning_prompt_drop_show": {
-      "default": "Sind Sie sicher, dass Sie die {title} entfernen möchten? Dies wird den Titel von Ihrer \"up next\" Liste entfernen."
+      "default": "Sind Sie sicher, dass Sie die \"{title}\" entfernen möchten? Dies wird den Titel von Ihrer \"up next\" Liste entfernen."
     },
     "button_label_drop_show": {
-      "default": "{title} als abgebrochen markieren"
+      "default": "\"{title}\" als abgebrochen markieren"
     },
     "button_text_drop_show": {
       "default": "Abbrechen"
     },
     "warning_prompt_restore_show": {
-      "default": "Bist du sicher, dass du die {title} Serie wiederherstellen möchtest? Dadurch wird der Fortschritt und der Kalender wiederhergestellt."
+      "default": "Bist du sicher, dass du die \"{title}\" Serie wiederherstellen möchtest? Dadurch wird der Fortschritt und der Kalender wiederhergestellt."
     },
     "button_label_restore_show": {
-      "default": "Serie {title} wiederherstellen"
+      "default": "Serie \"{title}\" wiederherstellen"
     },
     "button_text_restore_show": {
       "default": "Serie wiederherstellen"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Bist du sicher, dass du {title} als gesehen markieren möchtest? Dadurch werden alle Folgen als gesehen markiert."
+      "default": "Bist du sicher, dass du \"{title}\" als gesehen markieren möchtest? Dadurch werden alle Folgen als gesehen markiert."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Sind Sie sicher, dass Sie alle nicht gesehenen Episoden von {title} bis zur Episode {episode} als gesehen markieren möchten? Dadurch werden {count} Episoden als gesehen markiert."
+      "default": "Sind Sie sicher, dass Sie alle nicht gesehenen Episoden von \"{title}\" bis zur Episode {episode} als gesehen markieren möchten? Dadurch werden {count} Episoden als gesehen markiert."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Bist du sicher, dass du {count} Episoden als gesehen markieren möchtest?"
@@ -1038,7 +1038,7 @@
       "default": "Anzahl gesehen"
     },
     "list_placeholder_media_history": {
-      "default": "Du hast {title} noch nicht gesehen"
+      "default": "Du hast \"{title}\" noch nicht gesehen"
     },
     "button_label_like_comment": {
       "default": "Like Comment"
@@ -1116,7 +1116,7 @@
       "default": "Remove from list"
     },
     "button_label_remove_from_list": {
-      "default": "Remove {title} from list"
+      "default": "Remove \"{title}\" from list"
     },
     "page_title_service_unavailable": {
       "default": "Trakt-Dienst nicht erreichbar"
@@ -1143,16 +1143,16 @@
       "default": "Gelistet"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "{title} zu Listen hinzufügen oder entfernen"
+      "default": "\"{title}\" zu Listen hinzufügen oder entfernen"
     },
     "button_label_add_to_personal_list": {
-      "default": "{title} zu {list} hinzufügen"
+      "default": "\"{title}\" zu {list} hinzufügen"
     },
     "button_label_remove_from_personal_list": {
-      "default": "{title} von {list} entfernen"
+      "default": "\"{title}\" von {list} entfernen"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Möchtest du {title} wirklich von {list} entfernen?"
+      "default": "Möchtest du \"{title}\" wirklich von {list} entfernen?"
     },
     "option_text_theme_light": {
       "default": "Hell"
@@ -1224,7 +1224,7 @@
       "default": "Bewertungen"
     },
     "button_label_view_all_items_in": {
-      "default": "Alle {title} ansehen"
+      "default": "Alle \"{title}\" ansehen"
     },
     "button_text_reset_all_filters": {
       "default": "Alles zurücksetzen"
@@ -1263,7 +1263,7 @@
       "default": "Einchecken"
     },
     "button_label_checkin": {
-      "default": "Einchecken {title}"
+      "default": "Einchecken \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt verwendet C🍪🍪KIES, um Ihr Gesamterlebnis zu verbessern. Sie können <a>hier mehr Informationen lesen</a>."
@@ -1434,7 +1434,7 @@
       "default": "und {count} mehr"
     },
     "button_label_stop_playing": {
-      "default": "Den Check-in für {title} stoppen"
+      "default": "Den Check-in für \"{title}\" stoppen"
     },
     "link_text_view_profile": {
       "default": "Profil anzeigen"
@@ -1769,7 +1769,7 @@
       "default": "Schließen"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Möchtest du wirklich aufhören, {title} anzusehen?",
+      "default": "Möchtest du wirklich aufhören, \"{title}\" anzusehen?",
       "variables": {
         "title": {
           "type": "string"

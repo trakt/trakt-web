@@ -90,13 +90,13 @@
       "default": "Revizionează"
     },
     "button_label_add_to_watchlist": {
-      "default": "Adaugă {title} la lista ta de vizionat"
+      "default": "Adaugă \"{title}\" la lista ta de vizionat"
     },
     "button_label_mark_as_watched": {
-      "default": "Marchează {title} ca vizionat"
+      "default": "Marchează \"{title}\" ca vizionat"
     },
     "button_label_watched_until_here": {
-      "default": "Marchează {title} ca urmărit până aici"
+      "default": "Marchează \"{title}\" ca urmărit până aici"
     },
     "translated_value_genre_horror": {
       "default": "Horror"
@@ -210,7 +210,7 @@
       "default": "Știință-Fantazie"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Șterge {title} din lista ta de vizionat"
+      "default": "Șterge \"{title}\" din lista ta de vizionat"
     },
     "input_placeholder_search": {
       "default": "Caută seriale & filme..."
@@ -450,7 +450,7 @@
       "default": "Filmele tale"
     },
     "button_label_stream_on": {
-      "default": "Urmărește acum {title}"
+      "default": "Urmărește acum \"{title}\""
     },
     "image_alt_streaming_service_logo": {
       "default": "Sigla {service}"
@@ -690,16 +690,16 @@
       "default": "Eliminare din Vizionate"
     },
     "button_label_remove_from_watched": {
-      "default": "Eliminare {title} din lista ta de Vizionate"
+      "default": "Eliminare \"{title}\" din lista ta de Vizionate"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Esti sigur că vrei să elimini {title} din lista ta de Vizionate? Toate vizionările vor fi șterse."
+      "default": "Esti sigur că vrei să elimini \"{title}\" din lista ta de Vizionate? Toate vizionările vor fi șterse."
     },
     "button_label_remove_from_history": {
-      "default": "Șterge această vizionare a lui {title} din lista ta de Conținut Văzut"
+      "default": "Șterge această vizionare a lui \"{title}\" din lista ta de Conținut Văzut"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Sigur vrei să ștergi această vizionare a {title} din lista ta de vizionate?"
+      "default": "Sigur vrei să ștergi această vizionare a \"{title}\" din lista ta de vizionate?"
     },
     "list_title_seasons": {
       "default": "Sezoane"
@@ -711,13 +711,13 @@
       "default": "Episoade speciale"
     },
     "button_label_expand_media_overview": {
-      "default": "Detaliază prezentarea {title}"
+      "default": "Detaliază prezentarea \"{title}\""
     },
     "text_season_episode_number": {
       "default": "Sezon {season} • Episod {number}"
     },
     "button_label_share": {
-      "default": "Distribuie {title}"
+      "default": "Distribuie \"{title}\""
     },
     "button_text_share": {
       "default": "Distribuie"
@@ -792,7 +792,7 @@
       "default": "Sezon complet"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Sigur vrei să elimini {title} din lista ta de vizionat?"
+      "default": "Sigur vrei să elimini \"{title}\" din lista ta de vizionat?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Vezi toate filmele recomandate"
@@ -834,13 +834,13 @@
       "default": "Elimină din Favorite"
     },
     "button_label_add_to_favorites": {
-      "default": "Adaugă {title} la Favorite"
+      "default": "Adaugă \"{title}\" la Favorite"
     },
     "button_label_remove_from_favorites": {
-      "default": "Elimină {title} din Favorite"
+      "default": "Elimină \"{title}\" din Favorite"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Sigur dorești să elimini {title} din Favorite?"
+      "default": "Sigur dorești să elimini \"{title}\" din Favorite?"
     },
     "list_title_favorite_movies": {
       "default": "Filme favorite"
@@ -873,13 +873,13 @@
       "default": "La cerere"
     },
     "button_label_popup_menu": {
-      "default": "Meniu pop-up pentru {title}"
+      "default": "Meniu pop-up pentru \"{title}\""
     },
     "list_title_popular_lists": {
       "default": "Liste populare"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} nu apare în nicio listă populară."
+      "default": "\"{title}\" nu apare în nicio listă populară."
     },
     "text_by": {
       "default": "de"
@@ -888,7 +888,7 @@
       "default": "Avatarul lui {username}"
     },
     "image_alt_media_poster": {
-      "default": "Posterul {title}"
+      "default": "Posterul \"{title}\""
     },
     "list_placeholder_comments": {
       "default": "Încă nu sunt comentarii."
@@ -966,7 +966,7 @@
       "default": "Apreciate"
     },
     "text_share_movie": {
-      "default": "Tocmai am descoperit {title} - trebuie să-l vezi! 🎬"
+      "default": "Tocmai am descoperit \"{title}\" - trebuie să-l vezi! 🎬"
     },
     "text_share_show": {
       "default": "Am găsit un serial superb: {title}! 📺"
@@ -1008,28 +1008,28 @@
       "default": "S-a difuzat"
     },
     "warning_prompt_drop_show": {
-      "default": "Ești sigur că vrei să elimini {title} din lista ta? Aceasta va fi eliminată din următoarele titluri."
+      "default": "Ești sigur că vrei să elimini \"{title}\" din lista ta? Aceasta va fi eliminată din următoarele titluri."
     },
     "button_label_drop_show": {
-      "default": "Marchează {title} ca eliminat"
+      "default": "Marchează \"{title}\" ca eliminat"
     },
     "button_text_drop_show": {
       "default": "Elimină"
     },
     "warning_prompt_restore_show": {
-      "default": "Sigur vrei să restaurezi {title}? Acesta va fi restaurat pe progresul și calendarul tău."
+      "default": "Sigur vrei să restaurezi \"{title}\"? Acesta va fi restaurat pe progresul și calendarul tău."
     },
     "button_label_restore_show": {
-      "default": "Restaurare {title}"
+      "default": "Restaurare \"{title}\""
     },
     "button_text_restore_show": {
       "default": "Restaurare"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Sigur vrei să marchezi {title} ca vizionat? Asta va marca toate episoadele ca vizionate."
+      "default": "Sigur vrei să marchezi \"{title}\" ca vizionat? Asta va marca toate episoadele ca vizionate."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Sigur doriți să marcați toate episoadele nevăzute din {title} ca fiind văzute până la episodul {episode}? Aceasta va marca {count} episoade ca fiind văzute."
+      "default": "Sigur doriți să marcați toate episoadele nevăzute din \"{title}\" ca fiind văzute până la episodul {episode}? Aceasta va marca {count} episoade ca fiind văzute."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Sigur vrei să marchezi {count} episoade ca vizionate?"
@@ -1038,7 +1038,7 @@
       "default": "Număr de vizionări"
     },
     "list_placeholder_media_history": {
-      "default": "Încă nu ai urmărit {title}!"
+      "default": "Încă nu ai urmărit \"{title}\"!"
     },
     "button_label_like_comment": {
       "default": "Apreciază comentariul"
@@ -1116,7 +1116,7 @@
       "default": "Elimină din listă"
     },
     "button_label_remove_from_list": {
-      "default": "Elimină {title} din listă"
+      "default": "Elimină \"{title}\" din listă"
     },
     "page_title_service_unavailable": {
       "default": "Serviciul Trakt inaccesibil"
@@ -1143,16 +1143,16 @@
       "default": "Listat"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Adaugă sau elimină {title} din liste"
+      "default": "Adaugă sau elimină \"{title}\" din liste"
     },
     "button_label_add_to_personal_list": {
-      "default": "Adaugă {title} la {list}"
+      "default": "Adaugă \"{title}\" la {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Elimină {title} din {list}"
+      "default": "Elimină \"{title}\" din {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Sigur vrei să elimini {title} din {list}?"
+      "default": "Sigur vrei să elimini \"{title}\" din {list}?"
     },
     "option_text_theme_light": {
       "default": "Luminos"
@@ -1224,7 +1224,7 @@
       "default": "Evaluări"
     },
     "button_label_view_all_items_in": {
-      "default": "Vezi toate în {title}"
+      "default": "Vezi toate în \"{title}\""
     },
     "button_text_reset_all_filters": {
       "default": "Resetează tot"
@@ -1263,7 +1263,7 @@
       "default": "Check-in"
     },
     "button_label_checkin": {
-      "default": "Check-in {title}"
+      "default": "Check-in \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt folosește C🍪🍪KIES pentru a-ți îmbunătăți experiența. Poți <a>citi mai multe informații</a> aici."
@@ -1434,7 +1434,7 @@
       "default": "și încă {count}"
     },
     "button_label_stop_playing": {
-      "default": "Oprește check-in-ul pentru {title}"
+      "default": "Oprește check-in-ul pentru \"{title}\""
     },
     "link_text_view_profile": {
       "default": "Vezi profilul"
@@ -1769,7 +1769,7 @@
       "default": "Închide"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Sigur dorești să oprești vizionarea {title}?",
+      "default": "Sigur dorești să oprești vizionarea \"{title}\"?",
       "variables": {
         "title": {
           "type": "string"

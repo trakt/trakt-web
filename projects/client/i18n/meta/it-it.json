@@ -90,13 +90,13 @@
       "default": "Rivisto"
     },
     "button_label_add_to_watchlist": {
-      "default": "Aggiungi {title} alla tua Watchlist"
+      "default": "Aggiungi \"{title}\" alla tua Watchlist"
     },
     "button_label_mark_as_watched": {
-      "default": "Segna {title} come guardato"
+      "default": "Segna \"{title}\" come guardato"
     },
     "button_label_watched_until_here": {
-      "default": "Segna {title} come visto fino a qui"
+      "default": "Segna \"{title}\" come visto fino a qui"
     },
     "translated_value_genre_horror": {
       "default": "Horror"
@@ -210,7 +210,7 @@
       "default": "Fantascienza"
     },
     "button_label_remove_from_watchlist": {
-      "default": "Rimuovi {title} dalla tua Watchlist"
+      "default": "Rimuovi \"{title}\" dalla tua Watchlist"
     },
     "input_placeholder_search": {
       "default": "Cerca serie e film..."
@@ -450,7 +450,7 @@
       "default": "I tuoi film"
     },
     "button_label_stream_on": {
-      "default": "Guarda {title} ora"
+      "default": "Guarda \"{title}\" ora"
     },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo"
@@ -690,16 +690,16 @@
       "default": "Rimuovi da guardato"
     },
     "button_label_remove_from_watched": {
-      "default": "Rimuovi {title} dalla tua Watchlist"
+      "default": "Rimuovi \"{title}\" dalla tua Watchlist"
     },
     "warning_prompt_remove_from_watched": {
-      "default": "Sei sicuro di voler rimuovere {title} dalla tua Watchlist? Tutte le visualizzazioni saranno eliminate."
+      "default": "Sei sicuro di voler rimuovere \"{title}\" dalla tua Watchlist? Tutte le visualizzazioni saranno eliminate."
     },
     "button_label_remove_from_history": {
-      "default": "Rimuovi questa visione di {title} dalla lista Visti"
+      "default": "Rimuovi questa visione di \"{title}\" dalla lista Visti"
     },
     "warning_prompt_remove_single_watched": {
-      "default": "Sei sicuro di voler rimuovere questa visione di {title} dalla tua lista Visti?"
+      "default": "Sei sicuro di voler rimuovere questa visione di \"{title}\" dalla tua lista Visti?"
     },
     "list_title_seasons": {
       "default": "Stagioni"
@@ -711,13 +711,13 @@
       "default": "Speciali"
     },
     "button_label_expand_media_overview": {
-      "default": "Espandi la panoramica di {title}"
+      "default": "Espandi la panoramica di \"{title}\""
     },
     "text_season_episode_number": {
       "default": "Stagione {season} • Episodio {number}"
     },
     "button_label_share": {
-      "default": "Condividi {title}"
+      "default": "Condividi \"{title}\""
     },
     "button_text_share": {
       "default": "Condividi"
@@ -792,7 +792,7 @@
       "default": "Stagione completa"
     },
     "warning_prompt_remove_from_watchlist": {
-      "default": "Sei sicuro di voler rimuovere {title} dalla tua Watchlist?"
+      "default": "Sei sicuro di voler rimuovere \"{title}\" dalla tua Watchlist?"
     },
     "button_label_view_all_recommended_movies": {
       "default": "Visualizza tutti i film raccomandati"
@@ -834,13 +834,13 @@
       "default": "Rimuovi dai preferiti"
     },
     "button_label_add_to_favorites": {
-      "default": "Aggiungi {title} ai tuoi preferiti"
+      "default": "Aggiungi \"{title}\" ai tuoi preferiti"
     },
     "button_label_remove_from_favorites": {
-      "default": "Rimuovi {title} dai tuoi preferiti"
+      "default": "Rimuovi \"{title}\" dai tuoi preferiti"
     },
     "warning_prompt_remove_from_favorites": {
-      "default": "Sei sicuro di voler rimuovere {title} dai preferiti?"
+      "default": "Sei sicuro di voler rimuovere \"{title}\" dai preferiti?"
     },
     "list_title_favorite_movies": {
       "default": "Film preferiti"
@@ -873,13 +873,13 @@
       "default": "On Demand"
     },
     "button_label_popup_menu": {
-      "default": "Menù a tendina per {title}"
+      "default": "Menù a tendina per \"{title}\""
     },
     "list_title_popular_lists": {
       "default": "Liste popolari"
     },
     "list_placeholder_popular_lists": {
-      "default": "{title} non compare in nessuna lista popolare."
+      "default": "\"{title}\" non compare in nessuna lista popolare."
     },
     "text_by": {
       "default": "di"
@@ -888,7 +888,7 @@
       "default": "Avatar di {username}"
     },
     "image_alt_media_poster": {
-      "default": "Locandina di {title}"
+      "default": "Locandina di \"{title}\""
     },
     "list_placeholder_comments": {
       "default": "Nessun commento per ora."
@@ -966,7 +966,7 @@
       "default": "Piaciute"
     },
     "text_share_movie": {
-      "default": "Tocmai am descoperit {title} - trebuie să-l vezi! 🎬"
+      "default": "Tocmai am descoperit \"{title}\" - trebuie să-l vezi! 🎬"
     },
     "text_share_show": {
       "default": "Am găsit un serial grozav: {title}! 📺"
@@ -1008,28 +1008,28 @@
       "default": "Apărut"
     },
     "warning_prompt_drop_show": {
-      "default": "Sei sicuro di voler abbandonare il {title} ? Questo lo rimuoverà dalla tua lista prossimi."
+      "default": "Sei sicuro di voler abbandonare il \"{title}\" ? Questo lo rimuoverà dalla tua lista prossimi."
     },
     "button_label_drop_show": {
-      "default": "Segna {title} come abbandonato"
+      "default": "Segna \"{title}\" come abbandonato"
     },
     "button_text_drop_show": {
       "default": "Abbandona"
     },
     "warning_prompt_restore_show": {
-      "default": "Sei sicuro di voler ripristinare {title}? Questo ripristinerà i tuoi progressi e il calendario."
+      "default": "Sei sicuro di voler ripristinare \"{title}\"? Questo ripristinerà i tuoi progressi e il calendario."
     },
     "button_label_restore_show": {
-      "default": "Ripristina {title}"
+      "default": "Ripristina \"{title}\""
     },
     "button_text_restore_show": {
       "default": "Ripristina"
     },
     "warning_prompt_mark_as_watched_show": {
-      "default": "Sei sicuro di voler contrassegnare {title} come visto? Verranno contrassegnati come visti tutti gli episodi."
+      "default": "Sei sicuro di voler contrassegnare \"{title}\" come visto? Verranno contrassegnati come visti tutti gli episodi."
     },
     "warning_prompt_mark_as_watched_show_until": {
-      "default": "Sei sicuro di voler contrassegnare tutti gli episodi non visti di {title} come visti fino all'episodio {episode}? Questo contrassegnerà {count} episodi come visti."
+      "default": "Sei sicuro di voler contrassegnare tutti gli episodi non visti di \"{title}\" come visti fino all'episodio {episode}? Questo contrassegnerà {count} episodi come visti."
     },
     "warning_prompt_mark_as_watched_multiple_episodes": {
       "default": "Sei sicuro di voler contrassegnare {count} episodi come visti?"
@@ -1038,7 +1038,7 @@
       "default": "Conti visualizzazioni"
     },
     "list_placeholder_media_history": {
-      "default": "Non hai ancora visto {title}"
+      "default": "Non hai ancora visto \"{title}\""
     },
     "button_label_like_comment": {
       "default": "Mi piace commento"
@@ -1116,7 +1116,7 @@
       "default": "Rimuovi dalla lista"
     },
     "button_label_remove_from_list": {
-      "default": "Rimuovi {title} dalla lista"
+      "default": "Rimuovi \"{title}\" dalla lista"
     },
     "page_title_service_unavailable": {
       "default": "Servizio Trakt irraggiungibile"
@@ -1143,16 +1143,16 @@
       "default": "In lista"
     },
     "dropdown_label_add_remove_from_lists": {
-      "default": "Aggiungi o rimuovi {title} dalle liste"
+      "default": "Aggiungi o rimuovi \"{title}\" dalle liste"
     },
     "button_label_add_to_personal_list": {
-      "default": "Aggiungi {title} a {list}"
+      "default": "Aggiungi \"{title}\" a {list}"
     },
     "button_label_remove_from_personal_list": {
-      "default": "Rimuovi {title} da {list}"
+      "default": "Rimuovi \"{title}\" da {list}"
     },
     "warning_prompt_remove_from_personal_list": {
-      "default": "Sei sicuro di voler rimuovere {title} da {list}?"
+      "default": "Sei sicuro di voler rimuovere \"{title}\" da {list}?"
     },
     "option_text_theme_light": {
       "default": "Chiaro"
@@ -1224,7 +1224,7 @@
       "default": "Valutazioni"
     },
     "button_label_view_all_items_in": {
-      "default": "Vedi tutti gli elementi in {title}"
+      "default": "Vedi tutti gli elementi in \"{title}\""
     },
     "button_text_reset_all_filters": {
       "default": "Resetta tutti"
@@ -1263,7 +1263,7 @@
       "default": "Registrati"
     },
     "button_label_checkin": {
-      "default": "Registrati {title}"
+      "default": "Registrati \"{title}\""
     },
     "text_cookie_notice": {
       "default": "Trakt utilizza C🍪🍪KIES per migliorare la tua esperienza complessiva. Puoi <a>leggere maggiori informazioni</a> qui."
@@ -1434,7 +1434,7 @@
       "default": "e altri {count}"
     },
     "button_label_stop_playing": {
-      "default": "Interrompi il check-in per {title}"
+      "default": "Interrompi il check-in per \"{title}\""
     },
     "link_text_view_profile": {
       "default": "Visualizza profilo"
@@ -1769,7 +1769,7 @@
       "default": "Chiudi"
     },
     "warning_prompt_stop_checkin": {
-      "default": "Sei sicuro di voler smettere di guardare {title}?",
+      "default": "Sei sicuro di voler smettere di guardare \"{title}\"?",
       "variables": {
         "title": {
           "type": "string"
