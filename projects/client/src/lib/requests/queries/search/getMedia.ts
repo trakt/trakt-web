@@ -5,12 +5,14 @@ import { toMedia } from './response/toMedia.ts';
 
 type GetMediaProps = {
   query: string;
+  limit: number;
   types: MediaType[];
   config: TypesenseConfig;
 };
 
 export async function getMedia({
   query,
+  limit,
   types,
   config,
 }: GetMediaProps): Promise<SearchResultResponse[]> {
@@ -18,6 +20,7 @@ export async function getMedia({
     key: config.keys.media,
     server: config.server,
     query,
+    limit,
     types,
   });
 

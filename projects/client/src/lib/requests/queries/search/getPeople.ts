@@ -4,11 +4,13 @@ import { toPerson } from './response/toPerson.ts';
 
 type GetPeopleProps = {
   query: string;
+  limit: number;
   config: TypesenseConfig;
 };
 
 export async function getPeople({
   query,
+  limit,
   config,
 }: GetPeopleProps): Promise<SearchResultResponse[]> {
   const type = 'person';
@@ -17,6 +19,7 @@ export async function getPeople({
     key: config.keys.people,
     server: config.server,
     query,
+    limit,
     types: [type],
   });
 
