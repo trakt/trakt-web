@@ -1,7 +1,6 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '$lib/requests/api.ts';
+import { type ApiParams } from '$lib/requests/api.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
 import z from 'zod';
@@ -11,11 +10,11 @@ import {
   type PersonSummary,
   PersonSummarySchema,
 } from '../../models/PersonSummary.ts';
-import { EXPERIMENTAL_PARAMS } from './_internal/constants.ts';
-import { searchCancellationId } from './searchCancellationId.ts';
+import { getPeople } from './getPeople.ts';
 
 type SearchParams = {
   query: string;
+  config: TypesenseConfig;
 } & ApiParams;
 
 const PeopleSearchResultSchema = z.object({
@@ -25,7 +24,7 @@ const PeopleSearchResultSchema = z.object({
 
 export type PeopleSearchResult = z.infer<typeof PeopleSearchResultSchema>;
 
-function isGarbage(value?: PersonSummary): boolean {
+function isGarbage(value: PersonSummary): boolean {
   const relevantPositions: CrewPosition[] = [
     'directing',
     'acting',
@@ -38,34 +37,32 @@ function isGarbage(value?: PersonSummary): boolean {
 
 function mapToSearchResultEntry(
   item: SearchResultResponse,
-): PersonSummary {
+) {
   const { type } = item;
   switch (type) {
     case 'person':
-      return mapToPersonSummary(assertDefined(item.person));
+      return {
+        score: item.score,
+        ...mapToPersonSummary(assertDefined(item.person)),
+      };
     default:
       throw new Error(`Unsupported type for people search: ${type}`);
   }
 }
 
-const searchRequest = ({ query, fetch }: SearchParams) =>
-  api({
-    fetch,
-    cancellable: true,
-    cancellationId: searchCancellationId('person'),
-  })
-    .search
-    .query({
-      query: {
-        query,
-        extended: 'full,images',
-        limit: DEFAULT_SEARCH_LIMIT,
-        ...EXPERIMENTAL_PARAMS,
-      },
-      params: {
-        type: 'person',
-      },
-    });
+const searchRequest = async (
+  { query, config }: SearchParams,
+) => {
+  const response = await getPeople({
+    query,
+    config,
+  });
+
+  return response.map((item) => ({
+    ...item,
+    status: 200,
+  }));
+};
 
 export const searchPeopleQuery = defineQuery({
   key: 'searchPeople',
@@ -74,7 +71,7 @@ export const searchPeopleQuery = defineQuery({
   request: searchRequest,
   mapper: (response) => ({
     type: 'people' as const,
-    items: response.body
+    items: response
       .map(mapToSearchResultEntry)
       .filter((value) => !isGarbage(value)),
   }),

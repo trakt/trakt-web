@@ -6,4 +6,5 @@ export type SearchContext = {
   isSearching: Writable<boolean>;
   pathName: string;
   query: Writable<string>;
+  config: TypesenseConfig;
 };

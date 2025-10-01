@@ -4,11 +4,15 @@
   import { createSearchContext } from "./_internal/createSearchContext";
   import { toSearchTarget } from "./_internal/toSearchTarget";
 
-  const { children }: ChildrenProps = $props();
+  const { children, config }: ChildrenProps & { config: TypesenseConfig } =
+    $props();
 
   const initialTarget = toSearchTarget(page.url.searchParams.get("m"));
 
-  const { mode, query } = createSearchContext(initialTarget);
+  const { mode, query } = createSearchContext({
+    ...initialTarget,
+    config,
+  });
 
   $effect(() => {
     const m = page.url.searchParams.get("m");

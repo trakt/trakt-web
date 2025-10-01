@@ -1,20 +1,19 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
-import { api, type ApiParams } from '$lib/requests/api.ts';
+import { type ApiParams } from '$lib/requests/api.ts';
 import { MediaEntrySchema } from '$lib/requests/models/MediaEntry.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { DEFAULT_SEARCH_LIMIT } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SearchResultResponse } from '@trakt/api';
 import z from 'zod';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
 import type { MediaType } from '../../models/MediaType.ts';
-import { EXPERIMENTAL_PARAMS } from './_internal/constants.ts';
-import { searchCancellationId } from './searchCancellationId.ts';
+import { getMedia } from './getMedia.ts';
 
 type SearchParams = {
   query: string;
+  config: TypesenseConfig;
   type?: MediaType;
 } & ApiParams;
 
@@ -59,26 +58,20 @@ function mapToSearchResultEntry(
   }
 }
 
-const searchRequest = (
-  { query, fetch, type }: SearchParams,
-) =>
-  api({
-    fetch,
-    cancellable: true,
-    cancellationId: searchCancellationId('media'),
-  })
-    .search
-    .query({
-      query: {
-        query,
-        extended: 'full,images',
-        limit: DEFAULT_SEARCH_LIMIT,
-        ...EXPERIMENTAL_PARAMS,
-      },
-      params: {
-        type: type ?? 'movie,show',
-      },
-    });
+const searchRequest = async (
+  { query, type, config }: SearchParams,
+) => {
+  const response = await getMedia({
+    query,
+    config,
+    types: type ? [type] : ['movie', 'show'],
+  });
+
+  return response.map((item) => ({
+    ...item,
+    status: 200,
+  }));
+};
 
 export const searchMediaQuery = defineQuery({
   key: 'searchMedia',
@@ -88,7 +81,7 @@ export const searchMediaQuery = defineQuery({
   mapper: (response) => {
     return {
       type: 'media' as const,
-      items: response.body
+      items: response
         .map(mapToSearchResultEntry)
         .filter((value) => !isGarbage(value)),
     };

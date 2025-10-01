@@ -15,7 +15,15 @@
 <AuthProvider isAuthorized={$isAuthorized} isAuthorizedLegacy={false}>
   <QueryClientProvider client={new QueryClient()}>
     <ToastProvider>
-      <SearchProvider>
+      <SearchProvider
+        config={{
+          keys: {
+            media: "",
+            people: "",
+          },
+          server: "",
+        }}
+      >
         <NavigationProvider device="unknown">
           <AnalyticsProvider>
             {@render children()}

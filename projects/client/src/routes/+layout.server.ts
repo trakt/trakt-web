@@ -41,6 +41,7 @@ export const load: LayoutServerLoad = (
     isBot: isBotAgent(request.headers.get('user-agent')),
     device: getDeviceType(request.headers.get('user-agent')),
     hasConsent: locals.hasConsent,
+    typesense: locals.typesense,
   };
 
   if (
