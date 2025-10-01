@@ -1,4 +1,5 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "trakt-lite",
   "main": ".svelte-kit/cloudflare/_worker.js",
   "compatibility_date": "2025-01-01",
@@ -14,5 +15,8 @@
   },
   "version_metadata": {
     "binding": "CF_VERSION_METADATA"
+  },
+  "vars": {
+    "TYPESENSE_SERVER": "e97t3y0fkivoshd8p.a1.typesense.net"
   }
 }
