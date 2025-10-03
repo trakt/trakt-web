@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { beforeNavigate, goto } from "$app/navigation";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { createAuthContext } from "../stores/createAuthContext";
   import { initializeUserManager } from "../stores/initializeUserManager";
 
@@ -7,15 +9,36 @@
     isAuthorized: boolean;
   } & ChildrenProps;
 
-  const { children, isAuthorizedLegacy, isAuthorized }: AuthProviderProps =
-    $props();
+  const {
+    children,
+    isAuthorizedLegacy,
+    isAuthorized: isAuthorizedOidc,
+  }: AuthProviderProps = $props();
+
+  const isAuthorized = isAuthorizedLegacy || isAuthorizedOidc;
 
   createAuthContext({
-    isAuthorized: isAuthorizedLegacy || isAuthorized,
+    isAuthorized,
     token: null,
   });
 
   const { isInitializing } = initializeUserManager(isAuthorizedLegacy);
+
+  beforeNavigate(({ from, to, cancel }) => {
+    const isHomePage = from?.url.pathname === UrlBuilder.home();
+    const isSamePage = from?.url.pathname === to?.url.pathname;
+
+    if (isAuthorized || isHomePage || isSamePage) {
+      return;
+    }
+
+    const isNavigatingToHomePage = to?.url.pathname === UrlBuilder.home();
+
+    if (!isNavigatingToHomePage) {
+      cancel();
+      goto(UrlBuilder.home());
+    }
+  });
 </script>
 
 {#if !$isInitializing}

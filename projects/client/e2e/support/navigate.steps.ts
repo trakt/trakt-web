@@ -8,9 +8,9 @@ import { TraktWorld } from '../world.ts';
 When(
   'I click on the {string} button',
   async function (this: TraktWorld, testId: TestId) {
-    const moviesButton = this.page.getByTestId(testId);
+    const button = this.page.getByTestId(testId);
 
-    await moviesButton.click();
+    await button.click();
   },
 );
 
@@ -39,6 +39,13 @@ When(
   'I open the shows section',
   async function (this: TraktWorld) {
     await this.page.goto(TestUrlBuilder.shows());
+  },
+);
+
+When(
+  'I open the movies section',
+  async function (this: TraktWorld) {
+    await this.page.goto(TestUrlBuilder.movies());
   },
 );
 

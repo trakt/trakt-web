@@ -9,7 +9,7 @@ Feature: Basic navigation
     When I open the shows section
     Then I should see "Shows" in the page title
 
-    When I click on the "nav-bar-movies-button" button
+    When I open the movies section
     Then I should see "Movies" in the page title
 
     When I view the show summary of "silo"

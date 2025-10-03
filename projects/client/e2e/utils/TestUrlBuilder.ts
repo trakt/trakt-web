@@ -18,6 +18,7 @@ const builder = {
   movieSummary: (slug: string) => UrlBuilder.movie(slug),
   showSummary: (slug: string) => UrlBuilder.show(slug),
   shows: () => UrlBuilder.shows(),
+  movies: () => UrlBuilder.movies(),
 };
 
 export const TestUrlBuilder = prefixBuilderPaths(builder);
