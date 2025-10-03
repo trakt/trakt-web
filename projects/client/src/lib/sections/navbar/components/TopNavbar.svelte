@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import { trackWindowScrollDirection } from "$lib/utils/actions/trackWindowScrollDirection";
@@ -10,12 +11,17 @@
   import JoinTraktButton from "./JoinTraktButton.svelte";
   import ProfileLink from "./ProfileLink.svelte";
 
-  const isHidden = $derived(HIDDEN_ROUTE_IDS.includes(page.route.id ?? ""));
+  const isHiddenRoute = $derived(
+    HIDDEN_ROUTE_IDS.includes(page.route.id ?? ""),
+  );
+  const { isAuthorized } = useAuth();
+  const isHidden = $derived(isHiddenRoute && $isAuthorized);
 </script>
 
 <header>
   <nav
     class="trakt-navbar"
+    class:is-authorized={$isAuthorized}
     class:is-hidden={isHidden}
     use:trackWindowScroll={"trakt-navbar-scroll"}
     use:trackWindowScrollDirection={{
@@ -110,12 +116,12 @@
       backdrop-filter: blur(var(--ni-8));
     }
 
-    &:global(.trakt-navbar-scroll-down) {
+    &:global(.trakt-navbar-scroll-down.is-authorized) {
       top: var(--offscreen-top);
       opacity: 0;
     }
 
-    &:global(.trakt-navbar-scroll-up) {
+    &:global(.trakt-navbar-scroll-up.is-authorized) {
       top: 0;
       opacity: 1;
     }
