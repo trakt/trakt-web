@@ -17,7 +17,13 @@ export function useStablePaginated<T, M = MediaType>(
 
   const { list, set } = useStableArray<T>(compareFn);
 
-  onMount(() => unstable.subscribe(set));
+  onMount(() => {
+    const unsubscribe = unstable.subscribe(set);
+
+    return () => {
+      'unsubscribe' in unsubscribe ? unsubscribe.unsubscribe() : unsubscribe();
+    };
+  });
 
   return {
     list,

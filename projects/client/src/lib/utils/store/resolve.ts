@@ -1,6 +1,7 @@
-import type { Readable } from 'svelte/store';
-
-export function resolve<T>(stream: Readable<T>, timeout = 1000): Promise<T> {
+export function resolve<T>(
+  stream: ReadableOrObservable<T>,
+  timeout = 1000,
+): Promise<T> {
   return new Promise((resolve, reject) => {
     const unsubscribe = stream.subscribe((value) => {
       const timeoutId = setTimeout(
@@ -12,7 +13,11 @@ export function resolve<T>(stream: Readable<T>, timeout = 1000): Promise<T> {
       if (value !== undefined) {
         resolve(value);
         clearTimeout(timeoutId);
-        queueMicrotask(() => unsubscribe());
+        queueMicrotask(() =>
+          'unsubscribe' in unsubscribe
+            ? unsubscribe.unsubscribe()
+            : unsubscribe()
+        );
       }
     });
   });

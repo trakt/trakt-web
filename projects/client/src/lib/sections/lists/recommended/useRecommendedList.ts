@@ -10,13 +10,13 @@ import {
   type RecommendedShow,
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
-import { toInMemoryPaginatable } from '$lib/sections/lists/recommended/toInMemoryPaginatable.ts';
-import { useDailyOrderedArray } from '$lib/sections/lists/stores/useDailyOrderedArray.ts';
+import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { onDestroy } from 'svelte';
-import { derived } from 'svelte/store';
+import { map, type Observable, shareReplay } from 'rxjs';
+import { toObservable } from '../../../utils/store/toObservable.ts';
+import { paginate } from './paginate.ts';
 
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
 export type RecommendedMediaList = Array<RecommendedEntry>;
@@ -50,14 +50,9 @@ function typeToQuery(
   }
 }
 
-function useLimitRecommendedList(
-  props: Omit<RecommendationListStoreProps, 'page'>,
-) {
-  const query = useQuery(typeToQuery(props));
-  const unstable = derived(query, ($query) => $query.data ?? []);
-  const isLoading = derived(
-    query,
-    toLoadingState,
+export const useRecommendedList = (props: RecommendationListStoreProps) => {
+  const query = toObservable(useQuery(typeToQuery(props))).pipe(
+    shareReplay(1),
   );
 
   const filters = props.filter ?? {};
@@ -71,33 +66,30 @@ function useLimitRecommendedList(
     }`
     : props.type;
 
-  const { list, set } = useDailyOrderedArray<RecommendedEntry>({
-    key: `recommended-${listKey}-order`,
-    getId: (item) => item.id,
-  });
+  const allItems = query.pipe(
+    map((q) => q.data ?? []),
+    dailyOrderArray<RecommendedEntry>(
+      `recommended-${listKey}-order`,
+      (item) => item.id,
+    ),
+  );
 
-  // FIXME: refactor this to not subscribe on unstable
-  const unsubscribe = unstable.subscribe(set);
-  onDestroy(() => {
-    unsubscribe();
-  });
+  const list: Observable<RecommendedMediaList> = allItems.pipe(
+    paginate({ page: props.page, limit: props.limit }),
+  );
+
+  const page = allItems.pipe(
+    map((items) => ({
+      current: props.page,
+      total: Math.ceil(items.length / props.limit),
+    })),
+  );
+
+  const isLoading = query.pipe(map(toLoadingState));
 
   return {
-    list: derived(
-      list,
-      ($list) => $list.slice(0, props.limit),
-    ),
+    list,
+    page,
     isLoading,
   };
-}
-
-export const useRecommendedList = (props: RecommendationListStoreProps) =>
-  toInMemoryPaginatable({
-    useList: (params) =>
-      useLimitRecommendedList({
-        ...params,
-        filter: props.filter,
-      }),
-    total: props.limit,
-    type: props.type,
-  })({ ...props });
+};

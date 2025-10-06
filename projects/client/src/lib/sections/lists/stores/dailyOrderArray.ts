@@ -1,7 +1,8 @@
 import { browser } from '$app/environment';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { get } from 'svelte/store';
-import { type Identity, useOrderedArray } from './useOrderedArray.ts';
+import { type MonoTypeOperatorFunction } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { type Identity, orderArray } from './orderArray.ts';
 
 export type DailyOrderArrayOptions<T> = {
   key: string;
@@ -29,31 +30,24 @@ function saveCachedOrder(key: string, ids: Identity[]) {
   safeLocalStorage.setItem(key, JSON.stringify({ [today]: ids }));
 }
 
-export function useDailyOrderedArray<T>(
-  { key, getId }: DailyOrderArrayOptions<T>,
-) {
+/**
+ * RxJS operator that orders an array based on cached daily order from localStorage.
+ * Automatically saves the final order back to localStorage.
+ */
+export function dailyOrderArray<T>(
+  key: string,
+  getId: (item: T) => Identity,
+): MonoTypeOperatorFunction<Array<T>> {
   const today = getTodayKey();
   const cached = getCachedOrder(key);
-  const ordered = useOrderedArray({ getId, order: cached[today] });
-
-  const set = (update: Array<T>) => {
-    if (update.length === 0) {
-      ordered.set([]);
-      return;
-    }
-
-    const currentList = get(ordered.list);
-    const currentOrder = currentList.length > 0
-      ? currentList.map(getId)
-      : cached[today];
-
-    ordered.set(update, currentOrder);
-    const finalList = get(ordered.list);
-    saveCachedOrder(key, finalList.map(getId));
-  };
-
-  return {
-    list: ordered.list,
-    set,
-  };
+  const cachedOrder = cached[today];
+  return (source) =>
+    source.pipe(
+      orderArray(getId, cachedOrder),
+      tap((orderedItems) => {
+        if (orderedItems.length > 0) {
+          saveCachedOrder(key, orderedItems.map(getId));
+        }
+      }),
+    );
 }
