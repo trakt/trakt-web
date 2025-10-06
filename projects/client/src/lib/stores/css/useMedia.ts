@@ -1,6 +1,4 @@
 import { browser } from '$app/environment';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { NOOP_FN } from '$lib/utils/constants.ts';
 import {
   breakpointDesktop,
   breakpointMobile,
@@ -9,8 +7,8 @@ import {
   breakpointTabletSmMax,
   breakpointTabletSmMin,
 } from '$style/scss/variables/index.ts';
-import { onDestroy, onMount } from 'svelte';
-import { writable } from 'svelte/store';
+import { fromEvent, Observable, of } from 'rxjs';
+import { map, shareReplay, startWith } from 'rxjs/operators';
 
 export const WellKnownMediaQuery = {
   mobile: `(max-width: ${breakpointMobile})`,
@@ -23,14 +21,9 @@ export const WellKnownMediaQuery = {
   touch: '(hover: none) and (pointer: coarse)',
 };
 
-type MediaCallback = () => void;
-
 class MediaQueryManager {
   private static instance: MediaQueryManager;
-  private queries: Map<string, {
-    mediaQuery: MediaQueryList;
-    callbacks: Set<MediaCallback>;
-  }> = new Map();
+  private queries: Map<string, Observable<boolean>> = new Map();
 
   private constructor() {
     // constructor is private to prevent instantiation
@@ -43,37 +36,28 @@ class MediaQueryManager {
     return this.instance;
   }
 
-  subscribe(query: string, callback: MediaCallback): () => void {
+  observe(query: string): Observable<boolean> {
     if (!browser) {
-      return NOOP_FN;
+      return of(false);
     }
 
-    if (!this.queries.has(query)) {
+    const cached = this.queries.get(query);
+
+    if (!cached) {
       const mediaQuery = globalThis.matchMedia(query);
-      this.queries.set(query, {
-        mediaQuery,
-        callbacks: new Set(),
-      });
 
-      mediaQuery.addEventListener('change', () => {
-        this.queries.get(query)?.callbacks.forEach((cb) => cb());
-      });
+      const observer = fromEvent<MediaQueryListEvent>(mediaQuery, 'change')
+        .pipe(
+          map((event) => event.matches),
+          startWith(mediaQuery.matches),
+          shareReplay(1),
+        );
+
+      this.queries.set(query, observer);
+      return observer;
     }
 
-    const entry = assertDefined(
-      this.queries.get(query),
-      'Media query entry should be defined',
-    );
-    entry.callbacks.add(callback);
-
-    callback();
-
-    return () => {
-      entry.callbacks.delete(callback);
-      if (entry.callbacks.size === 0) {
-        this.queries.delete(query);
-      }
-    };
+    return cached;
   }
 
   static matches(query: string): boolean {
@@ -82,23 +66,6 @@ class MediaQueryManager {
   }
 }
 
-export function useMedia(query: string) {
-  const value = writable(false);
-  const manager = MediaQueryManager.getInstance();
-
-  const unsubscribe = manager.subscribe(query, () => {
-    value.set(MediaQueryManager.matches(query));
-  });
-
-  onMount(() => {
-    return manager.subscribe(query, () => {
-      value.set(MediaQueryManager.matches(query));
-    });
-  });
-
-  onDestroy(() => {
-    unsubscribe();
-  });
-
-  return value;
+export function useMedia(query: string): Observable<boolean> {
+  return MediaQueryManager.getInstance().observe(query);
 }
