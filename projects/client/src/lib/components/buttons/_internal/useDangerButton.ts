@@ -1,6 +1,7 @@
 import { useMedia, WellKnownMediaQuery } from '$lib/stores/css/useMedia.ts';
-import { onMount } from 'svelte';
-import { derived, get, writable } from 'svelte/store';
+import { BehaviorSubject, combineLatest, distinctUntilChanged } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import { time } from '../../../utils/timing/time.ts';
 import type { TraktButtonProps } from '../TraktButtonProps.ts';
 
 type ButtonColor = Exclude<TraktButtonProps['color'], Nil>;
@@ -16,29 +17,30 @@ export function useDangerButton({
   const interactionToColor = (isTouch: boolean, isActive: boolean) =>
     isTouch ? stateToColor(isActive) : seed;
 
-  const isTouch = useMedia(WellKnownMediaQuery.touch);
+  const isTouch$ = useMedia(WellKnownMediaQuery.touch);
 
-  const color = writable<ButtonColor>(
-    interactionToColor(get(isTouch), isActive),
+  const activeColor$ = new BehaviorSubject<ButtonColor | null>(null);
+
+  const color$ = combineLatest([isTouch$, activeColor$]).pipe(
+    map(([isTouch, activeColor]) =>
+      activeColor ?? interactionToColor(isTouch, isActive)
+    ),
   );
 
-  onMount(() =>
-    derived(
-      [isTouch],
-      ([$isTouch]) => interactionToColor($isTouch, isActive),
-    ).subscribe(color.set)
+  const variant$ = isTouch$.pipe(
+    map((isTouch) => isActive && !isTouch ? 'primary' : 'secondary'),
   );
 
   return {
-    color,
-    variant: derived(
-      isTouch,
-      ($isTouch) => isActive && !$isTouch ? 'primary' : 'secondary',
+    color: color$.pipe(
+      debounceTime(time.fps(60)),
+      distinctUntilChanged(),
     ),
-    isTouch,
-    onmouseover: () => color.set(stateToColor(isActive)),
-    onfocusin: () => color.set(stateToColor(isActive)),
-    onfocusout: () => color.set(interactionToColor(get(isTouch), isActive)),
-    onmouseout: () => color.set(interactionToColor(get(isTouch), isActive)),
+    variant: variant$,
+    isTouch: isTouch$,
+    onmouseover: () => activeColor$.next(stateToColor(isActive)),
+    onfocusin: () => activeColor$.next(stateToColor(isActive)),
+    onfocusout: () => activeColor$.next(null),
+    onmouseout: () => activeColor$.next(null),
   };
 }
