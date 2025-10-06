@@ -64,9 +64,15 @@
     href="https://fonts.gstatic.com"
     crossorigin="anonymous"
   />
+  <!-- FIXME: remove walter when all sources are from media.trakt.tv -->
   <link
     rel="preconnect"
     href="https://walter-r2.trakt.tv"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="preconnect"
+    href="https://media.trakt.tv"
     crossorigin="anonymous"
   />
   <link
