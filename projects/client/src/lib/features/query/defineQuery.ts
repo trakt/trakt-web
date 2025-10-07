@@ -4,6 +4,7 @@ import { error as printError } from '$lib/utils/console/print.ts';
 import { monitor } from '$lib/utils/perf/monitor.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { type z, type ZodType } from 'zod';
+import type { CustomFetchError } from '../errors/models/CustomFetchError.ts';
 import { isNoContentResponse } from './_internal/isNoContentResponse.ts';
 import { isSuccessResponse } from './_internal/isSuccessResponse.ts';
 import { zodToHash } from './_internal/zodToHash.ts';
@@ -20,9 +21,16 @@ class FetchError<TInput> extends Error {
 
     // FIXME: see if we can leverage window.onerror
     const responses = Array.isArray(response) ? response : [response];
-    responses.forEach(({ status }) => {
+    responses.forEach(({ status, body }) => {
       globalThis.window.dispatchEvent(
-        new CustomEvent(FETCH_ERROR_EVENT, { detail: status }),
+        new CustomEvent<CustomFetchError>(FETCH_ERROR_EVENT, {
+          detail: {
+            status,
+            message: status === 503 && typeof body === 'object'
+              ? body.message
+              : undefined,
+          },
+        }),
       );
     });
   }
