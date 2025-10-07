@@ -1092,7 +1092,7 @@
       "default": "Send svar"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Kommentarer skal være mindst 5 ord og på engelsk."
+      "default": "Kommentarer skal indeholde mindst 5 ord."
     },
     "translated_value_error_comment_unknown": {
       "default": "Der opstod en fejl under udgivelsen af din kommentar. Prøv igen senere."

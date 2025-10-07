@@ -1092,7 +1092,7 @@
       "default": "Post reply"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Comments must be at least 5 words and in English."
+      "default": "Comments must be at least 5 words."
     },
     "translated_value_error_comment_unknown": {
       "default": "An error occurred while posting your comment. Please try again later."

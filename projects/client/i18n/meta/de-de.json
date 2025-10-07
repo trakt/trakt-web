@@ -1092,7 +1092,7 @@
       "default": "Antwort posten"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Kommentare müssen mindestens 5 Wörter haben und auf Englisch sein."
+      "default": "Kommentare müssen mindestens 5 Wörter enthalten."
     },
     "translated_value_error_comment_unknown": {
       "default": "Beim Posten deines Kommentars ist ein Fehler aufgetreten. Versuche es später noch einmal."

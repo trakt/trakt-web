@@ -1092,7 +1092,7 @@
       "default": "Post reply"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Les commentaires doivent comporter au moins 5 mots et être en anglais."
+      "default": "Les commentaires doivent avoir au moins 5 mots."
     },
     "translated_value_error_comment_unknown": {
       "default": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard."

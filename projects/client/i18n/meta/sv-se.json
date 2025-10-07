@@ -1092,7 +1092,7 @@
       "default": "Publicera svar"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Kommentarer måste vara minst 5 ord och på engelska."
+      "default": "Kommentarer måste innehålla minst 5 ord."
     },
     "translated_value_error_comment_unknown": {
       "default": "Ett fel uppstod när du publicerade din kommentar. Försök igen senare."

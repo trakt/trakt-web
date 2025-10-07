@@ -1092,7 +1092,7 @@
       "default": "Publicar respuesta"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Los comentarios deben tener al menos 5 palabras y estar en inglés."
+      "default": "Los comentarios deben tener al menos 5 palabras."
     },
     "translated_value_error_comment_unknown": {
       "default": "Ocurrió un error al publicar tu comentario. Inténtalo de nuevo más tarde."

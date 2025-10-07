@@ -1092,7 +1092,7 @@
       "default": "Invia risposta"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "I commenti devono avere almeno 5 parole e in inglese."
+      "default": "I commenti devono contenere almeno 5 parole."
     },
     "translated_value_error_comment_unknown": {
       "default": "Si è verificato un errore durante la pubblicazione del commento. Riprova più tardi."

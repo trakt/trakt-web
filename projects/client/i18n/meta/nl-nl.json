@@ -1092,7 +1092,7 @@
       "default": "Plaats antwoord"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Opmerkingen moeten minimaal 5 woorden bevatten en in het Engels zijn."
+      "default": "Reacties moeten minimaal 5 woorden bevatten."
     },
     "translated_value_error_comment_unknown": {
       "default": "Er is een fout opgetreden bij het plaatsen van je opmerking. Probeer het later opnieuw."

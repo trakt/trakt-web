@@ -1092,7 +1092,7 @@
       "default": "Публикувай отговор"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Коментарите трябва да са поне 5 думи и на английски."
+      "default": "Коментарите трябва да са с поне 5 думи."
     },
     "translated_value_error_comment_unknown": {
       "default": "Възникна грешка при публикуването на вашия коментар. Моля, опитайте отново по-късно."

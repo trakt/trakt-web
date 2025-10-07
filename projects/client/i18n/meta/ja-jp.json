@@ -1092,7 +1092,7 @@
       "default": "返信を投稿"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "コメントは5語以上、英語で記述してください。"
+      "default": "コメントは5語以上でなければなりません。"
     },
     "translated_value_error_comment_unknown": {
       "default": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。"

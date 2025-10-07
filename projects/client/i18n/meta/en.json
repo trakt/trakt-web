@@ -3065,8 +3065,8 @@
       ]
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Comments must be at least 5 words and in English.",
-      "description": "Error message shown when a comment is invalid due to content length or language.",
+      "default": "Comments must be at least 5 words.",
+      "description": "Error message shown when a comment is invalid due to content length.",
       "exclude": [
         "android",
         "ios"
