@@ -1,5 +1,6 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
+  import TextTag from "$lib/components/tags/TextTag.svelte";
   import { isMaxDate } from "$lib/utils/date/isMaxDate";
   import type { TagIntl } from "./TagIntl";
 
@@ -14,8 +15,8 @@
   } = $props();
 </script>
 
-{#snippet content(isSecondary: boolean)}
-  <p class="meta-info capitalize no-wrap" class:secondary={isSecondary}>
+{#snippet content()}
+  <p class="meta-info capitalize no-wrap">
     {#if isMaxDate(airDate)}
       {i18n.tbaLabel()}
     {:else}
@@ -25,9 +26,11 @@
 {/snippet}
 
 {#if isTextOnly}
-  {@render content(true)}
+  <TextTag>
+    {@render content()}
+  </TextTag>
 {:else}
   <StemTag>
-    {@render content(false)}
+    {@render content()}
   </StemTag>
 {/if}

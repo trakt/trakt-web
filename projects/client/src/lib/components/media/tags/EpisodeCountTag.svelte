@@ -1,5 +1,6 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
+  import TextTag from "$lib/components/tags/TextTag.svelte";
   import type { TagIntl } from "./TagIntl";
 
   const {
@@ -13,16 +14,18 @@
   } = $props();
 </script>
 
-{#snippet content(isSecondary: boolean)}
-  <p class="meta-info capitalize no-wrap" class:secondary={isSecondary}>
+{#snippet content()}
+  <p class="meta-info capitalize no-wrap">
     {i18n.toEpisodeCount(count)}
   </p>
 {/snippet}
 
 {#if isTextOnly}
-  {@render content(true)}
+  <TextTag>
+    {@render content()}
+  </TextTag>
 {:else}
   <StemTag>
-    {@render content(false)}
+    {@render content()}
   </StemTag>
 {/if}
