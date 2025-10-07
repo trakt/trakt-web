@@ -1,6 +1,7 @@
 <script lang="ts">
   import { beforeNavigate, goto } from "$app/navigation";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { get } from "svelte/store";
   import { createAuthContext } from "../stores/createAuthContext";
   import { initializeUserManager } from "../stores/initializeUserManager";
 
@@ -15,10 +16,8 @@
     isAuthorized: isAuthorizedOidc,
   }: AuthProviderProps = $props();
 
-  const isAuthorized = isAuthorizedLegacy || isAuthorizedOidc;
-
-  createAuthContext({
-    isAuthorized,
+  const { isAuthorized } = createAuthContext({
+    isAuthorized: isAuthorizedLegacy || isAuthorizedOidc,
     token: null,
   });
 
@@ -28,7 +27,7 @@
     const isHomePage = from?.url.pathname === UrlBuilder.home();
     const isSamePage = from?.url.pathname === to?.url.pathname;
 
-    if (isAuthorized || isHomePage || isSamePage) {
+    if (get(isAuthorized) || isHomePage || isSamePage) {
       return;
     }
 
