@@ -21,8 +21,6 @@
   const runtime = $derived(
     isNaN(props.episode.runtime) ? props.show.runtime : props.episode.runtime,
   );
-
-  const isSummary = $derived(style === "summary");
 </script>
 
 {#snippet action()}
@@ -45,49 +43,33 @@
   {#if props.tag}
     {@render props.tag()}
   {:else}
-    <div class="trakt-episode-tag" class:is-summary={isSummary}>
+    <div class="trakt-episode-tag">
       {#if ["next", "default"].includes(props.variant)}
-        <DurationTag i18n={TagIntlProvider} {runtime} isTextOnly={isSummary} />
+        <DurationTag i18n={TagIntlProvider} {runtime} />
       {/if}
 
       {#if props.variant === "next"}
-        {#if isSummary}
-          <span class="secondary meta-info">·</span>
-        {/if}
         <ShowProgressTag
           total={props.episode.total}
           progress={props.episode.completed}
-          isTextOnly={isSummary}
         >
           <div class="show-progress">
             <span class="ellipsis">
               {EpisodeIntlProvider.remainingText(props.episode.remaining)}
             </span>
             <span class="no-wrap">
-              {#if isSummary}
-                ({EpisodeIntlProvider.durationText(props.episode.minutesLeft)})
-              {:else}
-                {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
-              {/if}
+              {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
             </span>
           </div>
         </ShowProgressTag>
       {/if}
 
       {#if props.variant === "upcoming"}
-        <AirDateTag
-          i18n={TagIntlProvider}
-          airDate={props.episode.airDate}
-          isTextOnly={isSummary}
-        />
+        <AirDateTag i18n={TagIntlProvider} airDate={props.episode.airDate} />
       {/if}
 
       {#if props.variant === "activity"}
-        <ActivityTag
-          i18n={TagIntlProvider}
-          activityDate={props.date}
-          isTextOnly={isSummary}
-        />
+        <ActivityTag i18n={TagIntlProvider} activityDate={props.date} />
       {/if}
     </div>
   {/if}
@@ -157,14 +139,6 @@
 
     :global(.trakt-tag) {
       background: var(--color-background-cover-tag);
-    }
-
-    &.is-summary {
-      gap: var(--gap-xs);
-
-      .show-progress {
-        gap: var(--gap-micro);
-      }
     }
   }
 </style>
