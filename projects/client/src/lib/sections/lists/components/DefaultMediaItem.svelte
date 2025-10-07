@@ -18,11 +18,12 @@
     type,
     media,
     style,
-    tag,
+    tag: externalTag,
     canDeemphasize,
     ...rest
-  }: MediaCardProps<MediaInputDefault> & { canDeemphasize?: boolean } =
-    $props();
+  }: MediaCardProps<MediaInputDefault> & {
+    canDeemphasize?: boolean;
+  } = $props();
 
   const { isWatched } = $derived(useIsWatched({ type, media }));
   const { isWatchlisted } = $derived(useIsWatchlisted({ type, media }));
@@ -30,17 +31,47 @@
   const isDeemphasized = $derived(
     canDeemphasize && ($isWatched || $isWatchlisted),
   );
+
+  const isSummary = $derived(style === "summary");
 </script>
 
 {#snippet defaultTag()}
   {#if "episode" in media}
-    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
-    <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
+    <AirDateTag
+      i18n={TagIntlProvider}
+      airDate={media.airDate}
+      isTextOnly={isSummary}
+    />
+    <EpisodeCountTag
+      i18n={TagIntlProvider}
+      count={media.episode.count}
+      isTextOnly={isSummary}
+    />
   {:else if type === "movie" && rest.variant !== "activity"}
-    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
+    <AirDateTag
+      i18n={TagIntlProvider}
+      airDate={media.airDate}
+      isTextOnly={isSummary}
+    />
     {#if media.airDate < new Date()}
-      <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
+      <DurationTag
+        i18n={TagIntlProvider}
+        runtime={media.runtime}
+        isTextOnly={isSummary}
+      />
     {/if}
+  {/if}
+
+  {#if isSummary && media.certification}
+    <span class="secondary meta-info">{media.certification}</span>
+  {/if}
+{/snippet}
+
+{#snippet tag()}
+  {#if isSummary || !externalTag}
+    {@render defaultTag()}
+  {:else}
+    {@render externalTag()}
   {/if}
 {/snippet}
 
@@ -75,14 +106,7 @@
 
 <MediaSwipe {type} {media} {style}>
   <trakt-default-media-item class:is-deemphasized={isDeemphasized}>
-    <MediaItem
-      {type}
-      {media}
-      {style}
-      tag={tag ?? defaultTag}
-      {...rest}
-      {popupActions}
-    />
+    <MediaItem {type} {media} {style} {tag} {...rest} {popupActions} />
   </trakt-default-media-item>
 </MediaSwipe>
 

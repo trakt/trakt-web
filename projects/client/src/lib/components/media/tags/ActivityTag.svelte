@@ -5,14 +5,24 @@
   const {
     activityDate,
     i18n,
+    isTextOnly = false,
   }: {
     activityDate: Date;
     i18n: TagIntl;
+    isTextOnly?: boolean;
   } = $props();
 </script>
 
-<StemTag>
-  <p class="meta-info capitalize no-wrap">
+{#snippet content(isSecondary: boolean)}
+  <p class="meta-info capitalize no-wrap" class:secondary={isSecondary}>
     {i18n.toActivityDate(activityDate)}
   </p>
-</StemTag>
+{/snippet}
+
+{#if isTextOnly}
+  {@render content(true)}
+{:else}
+  <StemTag>
+    {@render content(false)}
+  </StemTag>
+{/if}

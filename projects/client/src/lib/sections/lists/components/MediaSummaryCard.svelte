@@ -170,7 +170,11 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-
     flex-grow: 1;
+  }
+
+  .trakt-summary-card-tags > :global(:not(:last-child))::after {
+    content: "·";
+    margin-left: var(--gap-xs);
   }
 </style>
