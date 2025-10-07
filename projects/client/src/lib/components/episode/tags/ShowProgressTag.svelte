@@ -5,36 +5,26 @@
   type ShowProgressTagProps = {
     total: number;
     progress: number;
-    isTextOnly?: boolean;
   } & ChildrenProps;
 
-  const {
-    children,
-    total,
-    progress,
-    isTextOnly = false,
-  }: ShowProgressTagProps = $props();
+  const { children, total, progress }: ShowProgressTagProps = $props();
   const percentage = $derived(stretchedPercentage({ value: progress, total }));
 </script>
 
-{#if isTextOnly}
-  <p class="meta-info capitalize secondary no-wrap">{@render children()}</p>
-{:else}
-  <div
-    class="show-progress-tag"
-    style:--progress-width={`${percentage}%`}
-    role="progressbar"
-    aria-valuenow={progress}
-    aria-valuemin={0}
-    aria-valuemax={total}
-  >
-    <TagContent>
-      <p class="meta-info capitalize tag-label">
-        {@render children()}
-      </p>
-    </TagContent>
-  </div>
-{/if}
+<div
+  class="show-progress-tag"
+  style:--progress-width={`${percentage}%`}
+  role="progressbar"
+  aria-valuenow={progress}
+  aria-valuemin={0}
+  aria-valuemax={total}
+>
+  <TagContent>
+    <p class="meta-info capitalize tag-label">
+      {@render children()}
+    </p>
+  </TagContent>
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
