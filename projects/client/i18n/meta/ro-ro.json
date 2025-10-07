@@ -1092,7 +1092,7 @@
       "default": "Postează răspuns"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Comentariile trebuie să aibă cel puțin 5 cuvinte și să fie în limba engleză."
+      "default": "Comentariile trebuie să aibă cel puțin 5 cuvinte."
     },
     "translated_value_error_comment_unknown": {
       "default": "A apărut o eroare la publicarea comentariului. Vă rugăm să încercați din nou mai târziu."

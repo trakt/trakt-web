@@ -1092,7 +1092,7 @@
       "default": "Надіслати відповідь"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Коментарі повинні містити не менше 5 слів і бути англійською."
+      "default": "Коментарі повинні містити щонайменше 5 слів."
     },
     "translated_value_error_comment_unknown": {
       "default": "Виникла помилка під час публікації вашого коментаря. Спробуйте пізніше."

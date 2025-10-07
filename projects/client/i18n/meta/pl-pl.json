@@ -1092,7 +1092,7 @@
       "default": "Wyślij odpowiedź"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Komentarze muszą mieć co najmniej 5 słów i być po angielsku."
+      "default": "Komentarze muszą mieć co najmniej 5 słów."
     },
     "translated_value_error_comment_unknown": {
       "default": "Wystąpił błąd podczas publikowania komentarza. Spróbuj ponownie później."
