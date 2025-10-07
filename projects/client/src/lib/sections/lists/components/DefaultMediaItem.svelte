@@ -68,10 +68,13 @@
 {/snippet}
 
 {#snippet tag()}
-  {#if isSummary || !externalTag}
+  {#if isSummary}
+    {@render externalTag?.()}
     {@render defaultTag()}
-  {:else}
+  {:else if externalTag}
     {@render externalTag()}
+  {:else}
+    {@render defaultTag()}
   {/if}
 {/snippet}
 
