@@ -1,17 +1,33 @@
-import { WellKnownError } from '../models/WellKnownErrors.ts';
+import type { CustomFetchError } from '../models/CustomFetchError.ts';
+import {
+  type WellKnownError,
+  WellKnownErrorType,
+} from '../models/WellKnownErrors.ts';
 
-export function mapToWellKnownError(
-  statusCode: number,
-): WellKnownError | undefined {
+function mapToWellKnownErrorType(statusCode: number) {
   switch (statusCode) {
     case 502:
     case 503:
-      return WellKnownError.ServerError;
+      return WellKnownErrorType.ServerError;
     case 423:
-      return WellKnownError.LockedAccountError;
+      return WellKnownErrorType.LockedAccountError;
     case 404:
-      return WellKnownError.NotFoundError;
+      return WellKnownErrorType.NotFoundError;
     default:
       return;
   }
+}
+
+export function mapToWellKnownError(
+  error: CustomFetchError,
+): WellKnownError | undefined {
+  const errorType = mapToWellKnownErrorType(error.status);
+  if (!errorType) {
+    return;
+  }
+
+  return {
+    type: errorType,
+    message: error.message,
+  };
 }

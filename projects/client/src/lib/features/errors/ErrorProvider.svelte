@@ -9,7 +9,11 @@
   import { writable } from "svelte/store";
   import { mapToWellKnownError } from "./_internal/mapToWellKnownError";
   import { FETCH_ERROR_EVENT } from "./constants";
-  import { WellKnownError } from "./models/WellKnownErrors";
+  import type { CustomFetchError } from "./models/CustomFetchError";
+  import {
+    WellKnownErrorType,
+    type WellKnownError,
+  } from "./models/WellKnownErrors";
 
   const { children }: ChildrenProps = $props();
   const fetchError = writable<WellKnownError | undefined>(undefined);
@@ -17,7 +21,7 @@
 
   onMount(() => {
     const handler = (event: Event) => {
-      const errorEvent = event as CustomEvent<number>;
+      const errorEvent = event as CustomEvent<CustomFetchError>;
       fetchError.set(mapToWellKnownError(errorEvent.detail));
     };
 
@@ -61,15 +65,15 @@
   <UnexpectedErrorPage />
 {/if}
 
-{#if $fetchError === WellKnownError.LockedAccountError}
+{#if $fetchError?.type === WellKnownErrorType.LockedAccountError}
   <ErrorLockedAccountPage />
 {/if}
 
-{#if $fetchError === WellKnownError.ServerError}
-  <ErrorServicePage />
+{#if $fetchError?.type === WellKnownErrorType.ServerError}
+  <ErrorServicePage message={$fetchError.message} />
 {/if}
 
-{#if $fetchError === WellKnownError.NotFoundError}
+{#if $fetchError?.type === WellKnownErrorType.NotFoundError}
   <Error404Page />
 {/if}
 
