@@ -5,7 +5,7 @@
 
   const {
     certification,
-    type = "tag",
+    type = "text",
   }: {
     certification: string;
     type?: TagType;

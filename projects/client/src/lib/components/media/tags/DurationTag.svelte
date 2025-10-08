@@ -7,7 +7,7 @@
   const {
     runtime,
     i18n,
-    type = "tag",
+    type = "text",
   }: {
     runtime: number;
     i18n: TagIntl;

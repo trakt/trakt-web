@@ -15,7 +15,7 @@
     align-items: center;
     gap: var(--gap-xxs);
 
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     font-size: var(--ni-12);
 
     :global(svg) {

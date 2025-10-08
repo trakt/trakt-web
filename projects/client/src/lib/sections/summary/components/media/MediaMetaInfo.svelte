@@ -34,11 +34,11 @@
       {/if}
 
       {#if media.certification}
-        <CertificationTag certification={media.certification} />
+        <CertificationTag certification={media.certification} type="tag" />
       {/if}
 
       {#if media.year}
-        <AirDate i18n={TagIntlProvider} airDate={media.airDate} />
+        <AirDate i18n={TagIntlProvider} airDate={media.airDate} type="tag" />
       {/if}
 
       <!-- FIXME: re-enable watchers once we have better watching stats -->

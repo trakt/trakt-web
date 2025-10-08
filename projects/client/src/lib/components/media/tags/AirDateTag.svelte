@@ -8,7 +8,7 @@
   const {
     airDate,
     i18n,
-    type = "tag",
+    type = "text",
   }: {
     airDate: Date;
     i18n: TagIntl;

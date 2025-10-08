@@ -6,16 +6,10 @@
   import type { AnticipatedEntry } from "./useAnticipatedList";
 
   const { type, media, style }: MediaCardProps<AnticipatedEntry> = $props();
-
-  const isSummary = $derived(style === "summary");
 </script>
 
 {#snippet tag()}
-  <AnticipatedTag
-    i18n={TagIntlProvider}
-    score={media.score}
-    type={isSummary ? "text" : "tag"}
-  />
+  <AnticipatedTag i18n={TagIntlProvider} score={media.score} />
 {/snippet}
 
 <DefaultMediaItem

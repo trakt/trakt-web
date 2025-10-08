@@ -172,12 +172,4 @@
     gap: var(--gap-xs);
     flex-grow: 1;
   }
-
-  .trakt-summary-card-tags > :global(:not(:last-child))::after {
-    content: "·";
-    margin-left: var(--gap-xs);
-
-    font-size: var(--ni-16);
-    line-height: var(--ni-12);
-  }
 </style>

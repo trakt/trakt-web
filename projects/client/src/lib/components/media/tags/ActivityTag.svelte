@@ -7,7 +7,7 @@
   const {
     activityDate,
     i18n,
-    type = "tag",
+    type = "text",
   }: {
     activityDate: Date;
     i18n: TagIntl;

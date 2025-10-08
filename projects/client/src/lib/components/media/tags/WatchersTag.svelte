@@ -8,7 +8,7 @@
   const {
     watchers,
     i18n,
-    type = "tag",
+    type = "text",
   }: {
     watchers: number;
     i18n: TagIntl;

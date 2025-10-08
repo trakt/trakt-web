@@ -45,7 +45,7 @@
   {:else}
     <div class="trakt-episode-tag">
       {#if ["next", "default"].includes(props.variant)}
-        <DurationTag i18n={TagIntlProvider} {runtime} />
+        <DurationTag i18n={TagIntlProvider} {runtime} type="tag" />
       {/if}
 
       {#if props.variant === "next"}
@@ -65,7 +65,11 @@
       {/if}
 
       {#if props.variant === "upcoming"}
-        <AirDateTag i18n={TagIntlProvider} airDate={props.episode.airDate} />
+        <AirDateTag
+          i18n={TagIntlProvider}
+          airDate={props.episode.airDate}
+          type="tag"
+        />
       {/if}
 
       {#if props.variant === "activity"}

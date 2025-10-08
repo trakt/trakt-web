@@ -6,16 +6,10 @@
   import type { TrendingEntry } from "./useTrendingList";
 
   const { type, media, style }: MediaCardProps<TrendingEntry> = $props();
-
-  const isSummary = $derived(style === "summary");
 </script>
 
 {#snippet tag()}
-  <WatchersTag
-    i18n={TagIntlProvider}
-    watchers={media.watchers}
-    type={isSummary ? "text" : "tag"}
-  />
+  <WatchersTag i18n={TagIntlProvider} watchers={media.watchers} />
 {/snippet}
 
 <DefaultMediaItem
