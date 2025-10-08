@@ -1,5 +1,6 @@
 <script lang="ts">
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
+  import CertificationTag from "$lib/components/media/tags/CertificationTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
@@ -63,7 +64,7 @@
   {/if}
 
   {#if isSummary && media.certification}
-    <span class="secondary meta-info">{media.certification}</span>
+    <CertificationTag certification={media.certification} />
   {/if}
 {/snippet}
 
