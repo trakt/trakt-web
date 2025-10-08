@@ -1,9 +1,7 @@
 <script lang="ts">
-  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
-  import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
+  import MediaTypeTag from "$lib/components/media/tags/MediaTypeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { getLocale } from "$lib/features/i18n";
   import { type MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -11,7 +9,6 @@
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import DefaultPersonItem from "$lib/sections/lists/components/DefaultPersonItem.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import type { Snippet } from "svelte";
   import { useSearch } from "./useSearch";
 
@@ -33,19 +30,7 @@
 </script>
 
 {#snippet mediaTag(item: MediaEntry)}
-  <InfoTag>
-    {#snippet icon()}
-      {#if item.type === "movie"}
-        <MovieIcon />
-      {/if}
-
-      {#if item.type === "show"}
-        <ShowIcon />
-      {/if}
-    {/snippet}
-    {toTranslatedValue("type", item.type)}
-  </InfoTag>
-
+  <MediaTypeTag i18n={TagIntlProvider} mediaType={item.type} type="text" />
   <AirDateTag i18n={TagIntlProvider} airDate={item.airDate} />
 {/snippet}
 
