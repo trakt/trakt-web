@@ -40,24 +40,24 @@
     <AirDateTag
       i18n={TagIntlProvider}
       airDate={media.airDate}
-      isTextOnly={isSummary}
+      type={isSummary ? "text" : "tag"}
     />
     <EpisodeCountTag
       i18n={TagIntlProvider}
       count={media.episode.count}
-      isTextOnly={isSummary}
+      type={isSummary ? "text" : "tag"}
     />
   {:else if type === "movie" && rest.variant !== "activity"}
     <AirDateTag
       i18n={TagIntlProvider}
       airDate={media.airDate}
-      isTextOnly={isSummary}
+      type={isSummary ? "text" : "tag"}
     />
     {#if media.airDate < new Date()}
       <DurationTag
         i18n={TagIntlProvider}
         runtime={media.runtime}
-        isTextOnly={isSummary}
+        type={isSummary ? "text" : "tag"}
       />
     {/if}
   {/if}

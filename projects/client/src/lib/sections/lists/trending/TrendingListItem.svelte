@@ -14,7 +14,7 @@
   <WatchersTag
     i18n={TagIntlProvider}
     watchers={media.watchers}
-    isTextOnly={isSummary}
+    type={isSummary ? "text" : "tag"}
   />
 {/snippet}
 

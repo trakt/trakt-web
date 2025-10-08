@@ -14,7 +14,7 @@
   <AnticipatedTag
     i18n={TagIntlProvider}
     score={media.score}
-    isTextOnly={isSummary}
+    type={isSummary ? "text" : "tag"}
   />
 {/snippet}
 
