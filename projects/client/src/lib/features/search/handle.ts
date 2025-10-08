@@ -20,17 +20,7 @@ export const handle: Handle = ({ event, resolve }) => {
   const mediaSearchKey = typesense
     .keys()
     .generateScopedSearchKey(typesenseKey, {
-      query_by: [
-        'title',
-        'original_title',
-        'aliases',
-        'translations',
-      ],
-      sort_by: [
-        '_text_match:desc',
-        'trending_count:desc',
-        'list_count:desc',
-      ],
+      preset: 'search:media',
       limit_hits: DEFAULT_SEARCH_LIMIT,
       expires_at,
     });
@@ -38,13 +28,7 @@ export const handle: Handle = ({ event, resolve }) => {
   const peopleSearchKey = typesense
     .keys()
     .generateScopedSearchKey(typesenseKey, {
-      query_by: [
-        'name',
-      ],
-      sort_by: [
-        '_text_match:desc',
-        'top_billed_count:desc',
-      ],
+      preset: 'search:people',
       limit_hits: DEFAULT_SEARCH_LIMIT,
       expires_at,
     });

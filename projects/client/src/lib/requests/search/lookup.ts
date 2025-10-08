@@ -26,6 +26,12 @@ const COLLECTION_MAP: Record<SearchCategory, string> = {
   person: 'Person',
 };
 
+const PRESET_MAP: Record<SearchCategory, string> = {
+  movie: 'search:media',
+  show: 'search:media',
+  person: 'search:people',
+};
+
 export function lookup<T extends SearchCategory>({
   key,
   server,
@@ -41,6 +47,7 @@ export function lookup<T extends SearchCategory>({
     .perform<SchemaForCategory<T>[]>({
       searches: types.map((type) => ({
         collection: COLLECTION_MAP[type],
+        preset: PRESET_MAP[type],
       })),
       union: true,
     }, {
