@@ -1,16 +1,17 @@
 <script lang="ts">
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
+  import type { TagType } from "./models/TagType";
   import type { TagIntl } from "./TagIntl";
 
   const {
     activityDate,
     i18n,
-    isTextOnly = false,
+    type = "tag",
   }: {
     activityDate: Date;
     i18n: TagIntl;
-    isTextOnly?: boolean;
+    type?: TagType;
   } = $props();
 </script>
 
@@ -20,7 +21,7 @@
   </p>
 {/snippet}
 
-{#if isTextOnly}
+{#if type === "text"}
   <TextTag>
     {@render content()}
   </TextTag>

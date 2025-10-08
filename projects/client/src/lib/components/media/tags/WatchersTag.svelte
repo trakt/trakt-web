@@ -2,16 +2,17 @@
   import UserIcon from "$lib/components/icons/UserIcon.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
+  import type { TagType } from "./models/TagType";
   import type { TagIntl } from "./TagIntl";
 
   const {
     watchers,
     i18n,
-    isTextOnly = false,
+    type = "tag",
   }: {
     watchers: number;
     i18n: TagIntl;
-    isTextOnly?: boolean;
+    type?: TagType;
   } = $props();
 </script>
 
@@ -25,7 +26,7 @@
   </p>
 {/snippet}
 
-{#if isTextOnly}
+{#if type === "text"}
   <TextTag {icon}>
     {@render content()}
   </TextTag>
