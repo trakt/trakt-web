@@ -224,6 +224,9 @@
     "button_text_join_trakt": {
       "default": "Unisciti a Trakt"
     },
+    "button_text_meet_team": {
+      "default": "Incontra il team"
+    },
     "button_label_join_trakt": {
       "default": "Iscriviti a trakt.tv per tenere traccia di ciò che stai guardando"
     },
@@ -893,6 +896,9 @@
     "list_placeholder_comments": {
       "default": "Nessun commento per ora."
     },
+    "list_placeholder_replies": {
+      "default": "Nessuna risposta per ora."
+    },
     "text_review_by": {
       "default": "Recensione di"
     },
@@ -1310,6 +1316,9 @@
     "error_text_locked_account": {
       "default": "Il tuo account è bloccato, <a>contatta l'assistenza</a> per risolvere il problema."
     },
+    "error_text_lists_limit": {
+      "default": "Hai raggiunto il limite delle tue liste personali. Passa a VIP per liste illimitate!"
+    },
     "text_first_play_this_month": {
       "default": "Prima riproduzione questo mese"
     },
@@ -1463,8 +1472,29 @@
     "button_text_create_list": {
       "default": "Lista"
     },
+    "button_text_create": {
+      "default": "Crea"
+    },
+    "button_text_apply": {
+      "default": "Applica"
+    },
     "button_label_create_list": {
       "default": "Crea lista"
+    },
+    "page_title_create_list": {
+      "default": "Crea Lista"
+    },
+    "page_description_create_list": {
+      "default": "Inserisci un nome e una descrizione per la tua lista."
+    },
+    "page_description_edit_list": {
+      "default": "Modifica i dettagli della tua lista."
+    },
+    "list_description_released_movies": {
+      "default": "Film usciti"
+    },
+    "page_title_edit_list": {
+      "default": "Modifica Lista"
     },
     "input_prompt_create_list": {
       "default": "Inserisci un nome per la tua lista"
@@ -1540,6 +1570,12 @@
     },
     "button_label_movies": {
       "default": "Film"
+    },
+    "button_text_view_details": {
+      "default": "Vedi Dettagli"
+    },
+    "button_text_hide_details": {
+      "default": "Nascondi Dettagli"
     },
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · E{episodeNumber}"
@@ -1850,6 +1886,9 @@
     "list_title_streaming_favorite": {
       "default": "Preferiti"
     },
+    "list_title_recently_searched": {
+      "default": "Ricerca recente"
+    },
     "list_title_recently_searched_shows": {
       "default": "Serie TV cercate di recente"
     },
@@ -1871,11 +1910,20 @@
     "text_info_history_removed": {
       "default": "Rimosso dalla cronologia."
     },
+    "text_info_list_added": {
+      "default": "Aggiunto alla lista."
+    },
     "text_info_watchlist_added": {
       "default": "Aggiunto alla lista."
     },
     "text_info_watchlist_removed": {
       "default": "Rimosso dalla lista."
+    },
+    "text_info_list_removed": {
+      "default": "Rimosso dalla lista."
+    },
+    "text_info_show_dropped": {
+      "default": "Serie abbandonata."
     },
     "button_text_long_press_for_more": {
       "default": "Tieni premuto per saperne di più"
@@ -1984,6 +2032,33 @@
     },
     "filter_label_this_year": {
       "default": "Quest'anno"
+    },
+    "text_sort_recently_updated": {
+      "default": "Aggiornato di recente"
+    },
+    "text_sort_recently_added": {
+      "default": "Recently added"
+    },
+    "text_sort_comments_popular": {
+      "default": "Popolari"
+    },
+    "text_sort_comments_recent": {
+      "default": "Recenti"
+    },
+    "text_info_list_created": {
+      "default": "Lista creata."
+    },
+    "text_info_list_deleted": {
+      "default": "Lista eliminata."
+    },
+    "text_info_list_updated": {
+      "default": "Lista aggiornata."
+    },
+    "input_placeholder_lists_name": {
+      "default": "Nome"
+    },
+    "input_placeholder_lists_description": {
+      "default": "Descrizione (opzionale)"
     }
   }
 }

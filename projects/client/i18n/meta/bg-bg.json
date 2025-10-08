@@ -224,6 +224,9 @@
     "button_text_join_trakt": {
       "default": "Присъединете се към Trakt"
     },
+    "button_text_meet_team": {
+      "default": "Запознайте се с екипа"
+    },
     "button_label_join_trakt": {
       "default": "Присъедини се към trakt.tv, за да следиш какво гледаш"
     },
@@ -893,6 +896,9 @@
     "list_placeholder_comments": {
       "default": "Все още няма коментари"
     },
+    "list_placeholder_replies": {
+      "default": "Все още няма отговори."
+    },
     "text_review_by": {
       "default": "Прегледай по"
     },
@@ -1310,6 +1316,9 @@
     "error_text_locked_account": {
       "default": "Вашият акаунт е заключен, <a>свържете се с поддръжката</a>, за да разрешите този проблем."
     },
+    "error_text_lists_limit": {
+      "default": "Достигнахте лимита на личните си списъци. Надстройте до VIP за неограничен брой списъци!"
+    },
     "text_first_play_this_month": {
       "default": "Първо пускане този месец"
     },
@@ -1463,8 +1472,29 @@
     "button_text_create_list": {
       "default": "Списък"
     },
+    "button_text_create": {
+      "default": "Създаване"
+    },
+    "button_text_apply": {
+      "default": "Приложи"
+    },
     "button_label_create_list": {
       "default": "Създай списък"
+    },
+    "page_title_create_list": {
+      "default": "Създаване на списък"
+    },
+    "page_description_create_list": {
+      "default": "Въведете име и описание за вашия списък."
+    },
+    "page_description_edit_list": {
+      "default": "Редактирайте подробностите за списъка си."
+    },
+    "list_description_released_movies": {
+      "default": "Излезли филми"
+    },
+    "page_title_edit_list": {
+      "default": "Редактиране на списък"
     },
     "input_prompt_create_list": {
       "default": "Въведете име за вашия списък"
@@ -1540,6 +1570,12 @@
     },
     "button_label_movies": {
       "default": "Филми"
+    },
+    "button_text_view_details": {
+      "default": "Вижте подробности"
+    },
+    "button_text_hide_details": {
+      "default": "Скриване на подробности"
     },
     "episode_footer_season_episode": {
       "default": "C{seasonNumber} · E{episodeNumber}"
@@ -1850,6 +1886,9 @@
     "list_title_streaming_favorite": {
       "default": "Любими"
     },
+    "list_title_recently_searched": {
+      "default": "Последно търсени"
+    },
     "list_title_recently_searched_shows": {
       "default": "Наскоро търсени сериали"
     },
@@ -1871,11 +1910,20 @@
     "text_info_history_removed": {
       "default": "Премахнато от историята на гледане."
     },
+    "text_info_list_added": {
+      "default": "Добавено към списъка."
+    },
     "text_info_watchlist_added": {
       "default": "Добавено към списъка за гледане."
     },
     "text_info_watchlist_removed": {
       "default": "Премахнато от списъка за гледане."
+    },
+    "text_info_list_removed": {
+      "default": "Премахнато от списъка."
+    },
+    "text_info_show_dropped": {
+      "default": "Сериалът е прекъснат."
     },
     "button_text_long_press_for_more": {
       "default": "Натиснете за повече"
@@ -1984,6 +2032,33 @@
     },
     "filter_label_this_year": {
       "default": "Тази година"
+    },
+    "text_sort_recently_updated": {
+      "default": "Наскоро актуализирани"
+    },
+    "text_sort_recently_added": {
+      "default": "Recently added"
+    },
+    "text_sort_comments_popular": {
+      "default": "Популярни"
+    },
+    "text_sort_comments_recent": {
+      "default": "Последни"
+    },
+    "text_info_list_created": {
+      "default": "Списъкът е създаден."
+    },
+    "text_info_list_deleted": {
+      "default": "Списъкът е изтрит."
+    },
+    "text_info_list_updated": {
+      "default": "Списъкът е актуализиран."
+    },
+    "input_placeholder_lists_name": {
+      "default": "Име"
+    },
+    "input_placeholder_lists_description": {
+      "default": "Описание (незадължително)"
     }
   }
 }

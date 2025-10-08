@@ -224,6 +224,9 @@
     "button_text_join_trakt": {
       "default": "Trakt beitreten"
     },
+    "button_text_meet_team": {
+      "default": "Das Team kennenlernen"
+    },
     "button_label_join_trakt": {
       "default": "Tritt trakt.tv bei, um den Überblick über deine Inhalte zu behalten"
     },
@@ -893,6 +896,9 @@
     "list_placeholder_comments": {
       "default": "Noch keine Kommentare. Sei der/die Erste!"
     },
+    "list_placeholder_replies": {
+      "default": "Noch keine Antworten."
+    },
     "text_review_by": {
       "default": "Review von"
     },
@@ -1310,6 +1316,9 @@
     "error_text_locked_account": {
       "default": "Ihr Konto ist gesperrt, <a>wenden Sie sich an den Support</a>, um dieses Problem zu beheben."
     },
+    "error_text_lists_limit": {
+      "default": "Sie haben das Limit Ihrer persönlichen Listen erreicht. Steigen Sie auf VIP um, um eine unbegrenzte Anzahl von Listen zu erhalten!"
+    },
     "text_first_play_this_month": {
       "default": "Erste Wiedergabe diesen Monat"
     },
@@ -1463,8 +1472,29 @@
     "button_text_create_list": {
       "default": "Liste"
     },
+    "button_text_create": {
+      "default": "Erstellen"
+    },
+    "button_text_apply": {
+      "default": "Anwenden"
+    },
     "button_label_create_list": {
       "default": "Liste erstellen"
+    },
+    "page_title_create_list": {
+      "default": "Liste erstellen"
+    },
+    "page_description_create_list": {
+      "default": "Geben Sie einen Namen und eine Beschreibung für Ihre Liste ein."
+    },
+    "page_description_edit_list": {
+      "default": "Bearbeiten Sie Ihre Listendetails."
+    },
+    "list_description_released_movies": {
+      "default": "Veröffentlichte Filme"
+    },
+    "page_title_edit_list": {
+      "default": "Liste bearbeiten"
     },
     "input_prompt_create_list": {
       "default": "Gib einen Namen für deine Liste ein"
@@ -1540,6 +1570,12 @@
     },
     "button_label_movies": {
       "default": "Filme"
+    },
+    "button_text_view_details": {
+      "default": "Details ansehen"
+    },
+    "button_text_hide_details": {
+      "default": "Details ausblenden"
     },
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · F{episodeNumber}"
@@ -1850,6 +1886,9 @@
     "list_title_streaming_favorite": {
       "default": "Favoriten"
     },
+    "list_title_recently_searched": {
+      "default": "Kürzlich gesucht"
+    },
     "list_title_recently_searched_shows": {
       "default": "Zuletzt gesuchte Serien"
     },
@@ -1871,11 +1910,20 @@
     "text_info_history_removed": {
       "default": "Aus der History entfernt."
     },
+    "text_info_list_added": {
+      "default": "Zur Liste hinzugefügt."
+    },
     "text_info_watchlist_added": {
       "default": "Zur Watchlist hinzugefügt."
     },
     "text_info_watchlist_removed": {
       "default": "Von der Watchlist entfernt."
+    },
+    "text_info_list_removed": {
+      "default": "Aus der Liste entfernt."
+    },
+    "text_info_show_dropped": {
+      "default": "Serie abgebrochen."
     },
     "button_text_long_press_for_more": {
       "default": "Länger drücken für mehr"
@@ -1984,6 +2032,33 @@
     },
     "filter_label_this_year": {
       "default": "Dieses Jahr"
+    },
+    "text_sort_recently_updated": {
+      "default": "Kürzlich aktualisiert"
+    },
+    "text_sort_recently_added": {
+      "default": "Kürzlich hinzugefügt"
+    },
+    "text_sort_comments_popular": {
+      "default": "Beliebt"
+    },
+    "text_sort_comments_recent": {
+      "default": "Aktuell"
+    },
+    "text_info_list_created": {
+      "default": "Liste wurde erstellt."
+    },
+    "text_info_list_deleted": {
+      "default": "Liste wurde gelöscht."
+    },
+    "text_info_list_updated": {
+      "default": "Liste wurde aktualisiert."
+    },
+    "input_placeholder_lists_name": {
+      "default": "Name"
+    },
+    "input_placeholder_lists_description": {
+      "default": "Beschreibung (optional)"
     }
   }
 }
