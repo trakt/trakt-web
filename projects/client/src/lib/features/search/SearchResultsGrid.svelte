@@ -1,9 +1,12 @@
 <script lang="ts">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
+  import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
+  import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import MediaTypeTag from "$lib/components/media/tags/MediaTypeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { getLocale } from "$lib/features/i18n";
+  import { type MediaInputDefault } from "$lib/models/MediaInput";
   import { type MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
@@ -29,9 +32,20 @@
   );
 </script>
 
-{#snippet mediaTag(item: MediaEntry)}
-  <MediaTypeTag i18n={TagIntlProvider} mediaType={item.type} type="text" />
+{#snippet mediaTag(item: MediaInputDefault)}
+  {#if $mode === "media"}
+    <MediaTypeTag i18n={TagIntlProvider} mediaType={item.type} type="text" />
+  {/if}
+
   <AirDateTag i18n={TagIntlProvider} airDate={item.airDate} />
+
+  {#if $mode === "movie"}
+    <DurationTag i18n={TagIntlProvider} runtime={item.runtime} />
+  {/if}
+
+  {#if $mode === "show" && "episode" in item}
+    <EpisodeCountTag i18n={TagIntlProvider} count={item.episode.count} />
+  {/if}
 {/snippet}
 
 <div class="search-results-grid">
@@ -53,7 +67,7 @@
           media={item}
           style="cover"
           source="search"
-          tag={$mode === "media" ? mediaResultTag : undefined}
+          tag={mediaResultTag}
           {onclick}
         />
       {:else}
