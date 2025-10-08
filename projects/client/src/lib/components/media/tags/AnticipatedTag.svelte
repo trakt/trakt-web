@@ -8,7 +8,7 @@
   const {
     score,
     i18n,
-    type = "tag",
+    type = "text",
   }: {
     score: number;
     i18n: TagIntl;

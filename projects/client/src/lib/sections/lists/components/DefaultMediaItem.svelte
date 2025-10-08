@@ -4,6 +4,7 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import TagBar from "$lib/components/tags/TagBar.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
@@ -38,28 +39,12 @@
 
 {#snippet defaultTag()}
   {#if "episode" in media}
-    <AirDateTag
-      i18n={TagIntlProvider}
-      airDate={media.airDate}
-      type={isSummary ? "text" : "tag"}
-    />
-    <EpisodeCountTag
-      i18n={TagIntlProvider}
-      count={media.episode.count}
-      type={isSummary ? "text" : "tag"}
-    />
+    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
+    <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
   {:else if type === "movie" && rest.variant !== "activity"}
-    <AirDateTag
-      i18n={TagIntlProvider}
-      airDate={media.airDate}
-      type={isSummary ? "text" : "tag"}
-    />
+    <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     {#if media.airDate < new Date()}
-      <DurationTag
-        i18n={TagIntlProvider}
-        runtime={media.runtime}
-        type={isSummary ? "text" : "tag"}
-      />
+      <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
     {/if}
   {/if}
 
@@ -69,14 +54,16 @@
 {/snippet}
 
 {#snippet tag()}
-  {#if isSummary}
-    {@render externalTag?.()}
-    {@render defaultTag()}
-  {:else if externalTag}
-    {@render externalTag()}
-  {:else}
-    {@render defaultTag()}
-  {/if}
+  <TagBar>
+    {#if isSummary}
+      {@render externalTag?.()}
+      {@render defaultTag()}
+    {:else if externalTag}
+      {@render externalTag()}
+    {:else}
+      {@render defaultTag()}
+    {/if}
+  </TagBar>
 {/snippet}
 
 {#snippet popupActions()}

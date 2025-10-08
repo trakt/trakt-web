@@ -7,7 +7,7 @@
   const {
     count,
     i18n,
-    type = "tag",
+    type = "text",
   }: {
     count: number;
     i18n: TagIntl;

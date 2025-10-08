@@ -7,12 +7,18 @@
 
   const props: MediaCardProps = $props();
   const style = $derived(props.style ?? "cover");
+
+  const isCover = $derived(style === "cover");
 </script>
 
 {#snippet coverTag()}
   <div class="trakt-media-tag">
     {#if props.variant === "activity"}
-      <ActivityTag i18n={TagIntlProvider} activityDate={props.date} />
+      <ActivityTag
+        i18n={TagIntlProvider}
+        activityDate={props.date}
+        type={isCover ? "tag" : "text"}
+      />
     {/if}
   </div>
 {/snippet}
