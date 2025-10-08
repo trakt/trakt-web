@@ -1,6 +1,6 @@
 <script lang="ts">
   import AirDate from "$lib/components/media/tags/AirDateTag.svelte";
-  import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
+  import CertificationTag from "$lib/components/media/tags/CertificationTag.svelte";
   import PlaysTag from "$lib/components/media/tags/PlaysTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchCountTag from "$lib/components/media/tags/WatchCountTag.svelte";
@@ -34,9 +34,7 @@
       {/if}
 
       {#if media.certification}
-        <InfoTag>
-          {media.certification}
-        </InfoTag>
+        <CertificationTag certification={media.certification} />
       {/if}
 
       {#if media.year}
