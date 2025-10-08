@@ -73,7 +73,11 @@
       {/if}
 
       {#if props.variant === "activity"}
-        <ActivityTag i18n={TagIntlProvider} activityDate={props.date} />
+        <ActivityTag
+          i18n={TagIntlProvider}
+          activityDate={props.date}
+          type="tag"
+        />
       {/if}
     </div>
   {/if}

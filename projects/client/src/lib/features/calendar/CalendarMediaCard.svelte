@@ -31,7 +31,7 @@
 </script>
 
 {#snippet tag()}
-  <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
+  <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} type="tag" />
 {/snippet}
 
 <LandscapeCard>
