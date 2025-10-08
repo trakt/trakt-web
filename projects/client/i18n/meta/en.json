@@ -110,7 +110,6 @@
       "default": "Recommended Movies",
       "description": "Title for lists containing recommended movies. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -118,7 +117,6 @@
       "default": "Recommended Shows",
       "description": "Title for lists containing recommended shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -571,6 +569,14 @@
         "ios"
       ]
     },
+    "button_text_meet_team": {
+      "default": "Meet the team",
+      "description": "Text for the button that takes user to About Us page to meet the members of Trakt team. This should be a short and concise message that indicates what users can do.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "button_label_join_trakt": {
       "default": "Join trakt.tv to keep track of what you're watching",
       "description": "Aria-label for the button that takes users to the Trakt login page.",
@@ -730,7 +736,6 @@
       "default": "Browse Movies",
       "description": "Aria-label for the button that allows users to browse movies.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -753,7 +758,6 @@
       "default": "Browse Shows",
       "description": "Aria-label for the button that allows users to browse shows.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1100,7 +1104,6 @@
       "default": "Premiered",
       "description": "Header for the premiered section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1108,7 +1111,6 @@
       "default": "Runtime",
       "description": "Header for the runtime section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1116,7 +1118,6 @@
       "default": "Country",
       "description": "Header for the country section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1124,7 +1125,6 @@
       "default": "Language",
       "description": "Header for the language section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1132,7 +1132,6 @@
       "default": "Studio",
       "description": "Header for the studio section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1140,7 +1139,6 @@
       "default": "Genre",
       "description": "Header for the genre section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1829,7 +1827,6 @@
       "default": "Remove from Watched",
       "description": "Text for the button that allows users to remove a movie or episode from their watch history.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1855,7 +1852,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1955,7 +1951,6 @@
       "default": "Share",
       "description": "Text for the button that allows users to share a movie, show, episode, person, profile, etc.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1963,7 +1958,6 @@
       "default": "Trailer",
       "description": "Text for the button that allows users to watch a movie or show trailer.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1971,7 +1965,6 @@
       "default": "Status",
       "description": "Header for the status section.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2153,7 +2146,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2193,7 +2185,6 @@
       "default": "Anticipated Movies",
       "description": "Title for lists containing anticipated movies. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2201,7 +2192,6 @@
       "default": "Anticipated Shows",
       "description": "Title for lists containing anticipated shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2225,7 +2215,6 @@
       "default": "Popular Movies",
       "description": "Title for lists containing popular movies. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2233,7 +2222,6 @@
       "default": "Popular Shows",
       "description": "Title for lists containing popular shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2452,6 +2440,14 @@
         "ios"
       ]
     },
+    "list_placeholder_replies": {
+      "default": "No replies yet.",
+      "description": "Placeholder text shown when there are no replies for a given comment.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "text_review_by": {
       "default": "Review by",
       "description": "Text used to indicate the author of a review.",
@@ -2649,7 +2645,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2662,7 +2657,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2793,7 +2787,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2814,7 +2807,6 @@
       "default": "Drop show",
       "description": "Text for the button that allows a user to drop a show. Indicating that a user is no longer actively tracking this show.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3118,7 +3110,6 @@
       "default": "Original Title",
       "description": "Header for the section that shows the original title of a movie or show",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3134,7 +3125,6 @@
       "default": "Remove from list",
       "description": "Text for the button that allows users to remove a movie or show from a list.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3194,7 +3184,6 @@
       "default": "Community Sentiment",
       "description": "Header for the section that shows the community sentiment for a movie, show, or episode.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3271,7 +3260,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3340,7 +3328,6 @@
       "default": "Movie",
       "description": "Value for the movie type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3348,7 +3335,6 @@
       "default": "Show",
       "description": "Value for the show type. The value is sent back from the Trakt API.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3703,6 +3689,14 @@
         "ios"
       ]
     },
+    "error_text_lists_limit": {
+      "default": "You have reached the limit of your personal lists. Upgrade to VIP for unlimited amount of lists!",
+      "description": "Text shown to the user, informing that they have reached the maximum amount of lists they can create with their current free subscription plan.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "text_first_play_this_month": {
       "default": "First play this month",
       "description": "Text shown to indicate the first movie or show a user has watched this month.",
@@ -3987,7 +3981,6 @@
       "default": "Recently Watched",
       "description": "Title for the recently watched page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4117,7 +4110,6 @@
       "default": "Delete",
       "description": "Aria-label for the button that allows users to delete a list.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4143,7 +4135,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4159,8 +4150,23 @@
       "default": "List",
       "description": "Text for the button that allows users to create a new list. The text is shown before a 'plus' icon.",
       "exclude": [
-        "android",
         "ios"
+      ]
+    },
+    "button_text_create": {
+      "default": "Create",
+      "description": "Text for the button that allows users to create a new list, comment, rating etc.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "button_text_apply": {
+      "default": "Apply",
+      "description": "Text for the button that allows users to apply changes that are currently being edited.",
+      "exclude": [
+        "ios",
+        "web"
       ]
     },
     "button_label_create_list": {
@@ -4169,6 +4175,46 @@
       "exclude": [
         "android",
         "ios"
+      ]
+    },
+    "page_title_create_list": {
+      "default": "Create List",
+      "description": "Title for a screen that allows users to create a new list.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "page_description_create_list": {
+      "default": "Enter a name and description for your list.",
+      "description": "Description for a screen that allows users to create a new list. Prompts user to input a name and description of new list.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "page_description_edit_list": {
+      "default": "Edit your list details.",
+      "description": "Description for a screen that allows users to edit an existing list.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "list_description_released_movies": {
+      "default": "Released movies",
+      "description": "Description for a list which contains only movies that already have been released.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "page_title_edit_list": {
+      "default": "Edit List",
+      "description": "Title for a screen that allows users to edit an existing list.",
+      "exclude": [
+        "ios",
+        "web"
       ]
     },
     "input_prompt_create_list": {
@@ -4334,7 +4380,6 @@
       "default": "Watchlist",
       "description": "Title for the user's watchlist page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4358,7 +4403,6 @@
       "default": "Shows",
       "description": "Text for the button that allows users to toggle shows in the watchlist.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4374,7 +4418,6 @@
       "default": "Movies",
       "description": "Text for the button that allows users to toggle movies in the watchlist.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4386,8 +4429,24 @@
         "ios"
       ]
     },
+    "button_text_view_details": {
+      "default": "View Details",
+      "description": "Text for the button that allows users to show full details of certain show or movie.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "button_text_hide_details": {
+      "default": "Hide Details",
+      "description": "Text for the button that allows users to hide full details of certain show or movie.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "episode_footer_season_episode": {
-      "default": "S{seasonNumber} · E{episodeNumber}",
+      "default": "S{seasonNumber} • E{episodeNumber}",
       "description": "Footer text for an episode, showing the season and episode number. The text should be as short and concise as possible, wherever possible use only the first letter.",
       "variables": {
         "seasonNumber": {
@@ -4398,12 +4457,11 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
     "episode_footer_season_episode_range": {
-      "default": "S{seasonNumber} · E{startEpisode}-{endEpisode}",
+      "default": "S{seasonNumber} • E{startEpisode}-{endEpisode}",
       "description": "Footer text for an episode, showing the season and episode range. The text should be as short and concise as possible, wherever possible use only the first letter.",
       "variables": {
         "seasonNumber": {
@@ -4526,7 +4584,6 @@
       "default": "Post Credits",
       "description": "Header text for the post credits section, to either denote the number of post credits scenes, or the types of post credits scenes.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4558,7 +4615,6 @@
       "default": "Media",
       "description": "Text for the button that allows users to toggle the search mode to media.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4566,7 +4622,6 @@
       "default": "Search for people",
       "description": "Aria-label for the button that allows users to toggle the search mode to people.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4574,15 +4629,13 @@
       "default": "People",
       "description": "Text for the button that allows users to toggle the search mode to people.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
     "input_placeholder_search_people": {
-      "default": "Search for people...",
+      "default": "Search people...",
       "description": "Placeholder text for the search input field. This should be a short and concise message that indicates what users can search for.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4755,7 +4808,6 @@
       "default": "Your shows. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4763,7 +4815,6 @@
       "default": "See it. Save it. Watch it later. Start curating your personal movie queue.",
       "description": "Call to action text shown in the Watchlist Released list, encouraging users to add released movies to their watchlist.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4771,7 +4822,6 @@
       "default": "Your timeline. See what's dropping next with a full list of upcoming episodes you care about.",
       "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4779,7 +4829,6 @@
       "default": "Lights, camera… nothing? Add titles to your watchlist and let the binge begin.",
       "description": "Call to action text shown in the Watchlist Unreleased list, encouraging users to add unreleased movies to their watchlist.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4803,7 +4852,6 @@
       "default": "Start making friends quickly by following the Trakt Team and explore what they are watching.",
       "description": "Call to action text shown in the social activity list, encouraging users to follow members of the Trakt Team.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5076,7 +5124,6 @@
       "default": "Activity",
       "description": "Title for lists containing recently watched items of the profiles the user follows or their own recently watched items. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5084,7 +5131,6 @@
       "default": "Social",
       "description": "Text for the button that allows users to view social activity.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5100,7 +5146,6 @@
       "default": "Personal",
       "description": "Text for the button that allows users to view their own activity.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5191,6 +5236,14 @@
         "web"
       ]
     },
+    "list_title_recently_searched": {
+      "default": "Recently Searched",
+      "description": "Text used to indicate the list of recently searched generic media items.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "list_title_recently_searched_shows": {
       "default": "Recently Searched Shows",
       "description": "Text used to indicate the list of recently searched shows.",
@@ -5247,6 +5300,14 @@
         "web"
       ]
     },
+    "text_info_list_added": {
+      "default": "Added to list.",
+      "description": "Text shown when a user has added a media item to their personal custom list.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "text_info_watchlist_added": {
       "default": "Added to watchlist.",
       "description": "Text shown when a user has added a media item to their watchlist.",
@@ -5258,6 +5319,22 @@
     "text_info_watchlist_removed": {
       "default": "Removed from watchlist.",
       "description": "Text shown when a user has removed a media item from their watchlist.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_list_removed": {
+      "default": "Removed from list.",
+      "description": "Text shown when a user has removed a media item from their personal custom list.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_show_dropped": {
+      "default": "Show has been dropped.",
+      "description": "Text shown when a user has dropped a tv show (meaning he abandons watching it after few episodes).",
       "exclude": [
         "ios",
         "web"
@@ -5432,7 +5509,7 @@
       ]
     },
     "list_title_watch_history": {
-      "default": "Watch history",
+      "default": "Watch History",
       "description": "Title for lists containing the watch history of movies or episodes. This title should be as short and concise as possible.",
       "exclude": [
         "ios"
@@ -5465,13 +5542,12 @@
       "default": "Birthdays This Month",
       "description": "Title for lists containing the birthdays this month.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
     "text_season_activity": {
       "default": "{rangeLabel} of {title}",
-      "description": "Text to indicate the season or range of a show in activity lists, e.g. 'Season 1 of Friends' or 'S1 · E1-E3 of Friends'.",
+      "description": "Text to indicate the season or range of a show in activity lists, e.g. 'Season 1 of Friends' or 'S1 • E1-E3 of Friends'.",
       "variables": {
         "rangeLabel": {
           "type": "string"
@@ -5517,6 +5593,78 @@
       "exclude": [
         "android",
         "ios"
+      ]
+    },
+    "text_sort_recently_updated": {
+      "default": "Recently updated",
+      "description": "Label used for sorting type where items are sorted with the most recently updated ones being first.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_sort_recently_added": {
+      "default": "Recently added",
+      "description": "Label used for sorting type where items are sorted with the most recently added ones being first.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_sort_comments_popular": {
+      "default": "Popular",
+      "description": "Label used for comments sorting type where most popular comments are being displayed first.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_sort_comments_recent": {
+      "default": "Recent",
+      "description": "Label used for comments sorting type where most recent comments are being displayed first.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_list_created": {
+      "default": "List has been created.",
+      "description": "Text to indicate that the creation of a user's list is completed.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_list_deleted": {
+      "default": "List has been deleted.",
+      "description": "Text to indicate that the deletion of a user's list is completed.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_list_updated": {
+      "default": "List has been updated.",
+      "description": "Text to indicate that the editing of a user's list is completed.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "input_placeholder_lists_name": {
+      "default": "Name",
+      "description": "Placeholder text for name input field. This is displayed when users opens a form and sees empty form fields to be filled in.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "input_placeholder_lists_description": {
+      "default": "Description (optional)",
+      "description": "Placeholder text for optional description input field. This is displayed when users opens a form and sees empty form fields to be filled in.",
+      "exclude": [
+        "ios",
+        "web"
       ]
     }
   }

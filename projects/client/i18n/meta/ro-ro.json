@@ -224,6 +224,9 @@
     "button_text_join_trakt": {
       "default": "Alătură-te Trakt"
     },
+    "button_text_meet_team": {
+      "default": "Faceți cunoștință cu echipa"
+    },
     "button_label_join_trakt": {
       "default": "Alătură-te trakt.tv pentru a urmări ce urmărești"
     },
@@ -893,6 +896,9 @@
     "list_placeholder_comments": {
       "default": "Încă nu sunt comentarii."
     },
+    "list_placeholder_replies": {
+      "default": "Încă nu sunt răspunsuri."
+    },
     "text_review_by": {
       "default": "Recenzie de"
     },
@@ -1310,6 +1316,9 @@
     "error_text_locked_account": {
       "default": "Contul tău este blocat, <a>contactează asistența</a> pentru a rezolva această problemă."
     },
+    "error_text_lists_limit": {
+      "default": "Ați atins limita listelor dvs. personale. Faceți upgrade la VIP pentru un număr nelimitat de liste!"
+    },
     "text_first_play_this_month": {
       "default": "Prima redare luna aceasta"
     },
@@ -1463,8 +1472,29 @@
     "button_text_create_list": {
       "default": "Listă"
     },
+    "button_text_create": {
+      "default": "Creare"
+    },
+    "button_text_apply": {
+      "default": "Aplică"
+    },
     "button_label_create_list": {
       "default": "Crează listă"
+    },
+    "page_title_create_list": {
+      "default": "Creare Listă"
+    },
+    "page_description_create_list": {
+      "default": "Introduceți un nume și o descriere pentru lista dvs."
+    },
+    "page_description_edit_list": {
+      "default": "Editați detaliile listei."
+    },
+    "list_description_released_movies": {
+      "default": "Filme lansate"
+    },
+    "page_title_edit_list": {
+      "default": "Editare Listă"
     },
     "input_prompt_create_list": {
       "default": "Introduce un nume pentru lista ta"
@@ -1540,6 +1570,12 @@
     },
     "button_label_movies": {
       "default": "Filme"
+    },
+    "button_text_view_details": {
+      "default": "Vezi detalii"
+    },
+    "button_text_hide_details": {
+      "default": "Ascunde detalii"
     },
     "episode_footer_season_episode": {
       "default": "S{seasonNumber} · E{episodeNumber}"
@@ -1850,6 +1886,9 @@
     "list_title_streaming_favorite": {
       "default": "Favorite"
     },
+    "list_title_recently_searched": {
+      "default": "Căutări recente"
+    },
     "list_title_recently_searched_shows": {
       "default": "Seriale căutate recent"
     },
@@ -1871,11 +1910,20 @@
     "text_info_history_removed": {
       "default": "Eliminat din istoric."
     },
+    "text_info_list_added": {
+      "default": "Adăugat în listă."
+    },
     "text_info_watchlist_added": {
       "default": "Adăugat în lista de urmărire."
     },
     "text_info_watchlist_removed": {
       "default": "Eliminat din lista de urmărire."
+    },
+    "text_info_list_removed": {
+      "default": "Eliminat din listă."
+    },
+    "text_info_show_dropped": {
+      "default": "Serial abandonat."
     },
     "button_text_long_press_for_more": {
       "default": "Apăsați lung pentru mai multe"
@@ -1984,6 +2032,33 @@
     },
     "filter_label_this_year": {
       "default": "Anul acesta"
+    },
+    "text_sort_recently_updated": {
+      "default": "Actualizat recent"
+    },
+    "text_sort_recently_added": {
+      "default": "Adăugat recent"
+    },
+    "text_sort_comments_popular": {
+      "default": "Popular"
+    },
+    "text_sort_comments_recent": {
+      "default": "Recent"
+    },
+    "text_info_list_created": {
+      "default": "Lista a fost creată."
+    },
+    "text_info_list_deleted": {
+      "default": "Lista a fost ștearsă."
+    },
+    "text_info_list_updated": {
+      "default": "Lista a fost actualizată."
+    },
+    "input_placeholder_lists_name": {
+      "default": "Nume"
+    },
+    "input_placeholder_lists_description": {
+      "default": "Descriere (opțional)"
     }
   }
 }
