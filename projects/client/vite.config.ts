@@ -50,7 +50,7 @@ const TRAKT_TARGET_ENVIRONMENT = (() => {
     return Environment.staging;
   }
 
-  return Environment.production_private.replace('apiz', 'hd');
+  return Environment.production_private;
 })();
 
 export default defineConfig(({ mode }) => ({
