@@ -4,15 +4,19 @@
   import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
+  import ConfirmationDialog from "$lib/components/dialogs/ConfirmationDialog.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
-  import { attachWarning } from "../_internal/attachWarning";
+  import { writable } from "svelte/store";
   import type { DropButtonProps } from "./DropButtonProps";
 
   const { title, onDrop, isDropping, style, ...props }: DropButtonProps =
     $props();
 
-  const handler = attachWarning(onDrop, m.warning_prompt_drop_show({ title }));
+  const showWarning = writable(false);
+
+  //TODO: does not work, when popup is closed this also goes
+  const handler = () => showWarning.set(true);
 
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: false, color: "default" }),
@@ -53,3 +57,11 @@
     {/snippet}
   </DropdownItem>
 {/if}
+
+<ConfirmationDialog
+  open={showWarning}
+  message={m.warning_prompt_drop_show({ title })}
+  title={text}
+  confirmText="Drop it like it's hot"
+  onConfirm={onDrop}
+/>
