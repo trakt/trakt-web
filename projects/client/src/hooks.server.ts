@@ -6,8 +6,10 @@ import { handle as handleDevice } from '$lib/features/devices/handle.ts';
 import { handle as handleLocale } from '$lib/features/i18n/handle.ts';
 import { handle as handleImage } from '$lib/features/image/handle.ts';
 import { handle as handleMobileOperatingSystem } from '$lib/features/mobile-os/handle.ts';
+import { handle as handleQuery } from '$lib/features/query/handle.ts';
 import { handle as handleSearchConfig } from '$lib/features/search/handle.ts';
 import { handle as handleTheme } from '$lib/features/theme/handle.ts';
+import { handle as handleUser } from '$lib/features/user/handle.ts';
 
 import { SENTRY_DSN } from '$lib/utils/constants.ts';
 import {
@@ -52,10 +54,12 @@ export const handle: Handle = sequence(
     enableLogs: true,
   }),
   sentryHandle(),
+  handleQuery,
   handleDevice,
   handleLocale,
   handleTheme,
   handleAuth,
+  handleUser,
   handleImage,
   handleCacheBust,
   ({ event, resolve }) => {

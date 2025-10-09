@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { FETCH_ERROR_EVENT } from '$lib/features/errors/constants.ts';
 import type { ApiParams } from '$lib/requests/api.ts';
 import { error as printError } from '$lib/utils/console/print.ts';
@@ -18,6 +19,10 @@ class FetchError<TInput> extends Error {
     super(message);
 
     printError(message);
+
+    if (!browser) {
+      return;
+    }
 
     // FIXME: see if we can leverage window.onerror
     const responses = Array.isArray(response) ? response : [response];

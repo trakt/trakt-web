@@ -185,6 +185,7 @@ declare global {
   namespace App {
     // interface Error {}
     interface Locals {
+      queryClient: import('@tanstack/svelte-query').QueryClient;
       theme: import('$lib/features/theme/models/Theme').Theme;
       auth:
         | import('$lib/features/auth/models/SerializedAuthResponse').SerializedAuthResponse

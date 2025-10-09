@@ -6,8 +6,8 @@ import { buildOAuthUrl } from '$lib/utils/url/buildOAuthLink.ts';
 
 import { AUTH_COOKIE_NAME } from '$lib/features/auth/handle.ts';
 import type { OidcAuthToken } from '$lib/features/auth/models/OidcAuthToken.ts';
-import type { LayoutServerLoad } from './$types.ts';
-
+import { dehydrate } from '@tanstack/svelte-query';
+import type { LayoutServerLoad } from '../../.svelte-kit/types/src/routes/$types.d.ts';
 const getAuth = (auth: Nil | OidcAuthToken) => {
   if (!auth) {
     return {
@@ -42,6 +42,7 @@ export const load: LayoutServerLoad = (
     device: getDeviceType(request.headers.get('user-agent')),
     hasConsent: locals.hasConsent,
     typesense: locals.typesense,
+    dehydratedQueryClient: dehydrate(locals.queryClient),
   };
 
   if (

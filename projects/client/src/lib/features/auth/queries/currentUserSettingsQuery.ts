@@ -61,6 +61,7 @@ export const UserSettingsSchema = z.object({
       itemLimit: z.number(),
     }),
   }),
+  preferredTheme: z.enum(['light', 'dark', 'system']),
 });
 
 export type UserSettings = z.infer<typeof UserSettingsSchema>;
@@ -73,6 +74,19 @@ const PERMISSIONS_MAP: Record<
   liking: 'like',
   following: 'follow',
 };
+
+// TODO use actual theme typing
+function mapToPreferredTheme(themeResponse: string | undefined) {
+  if (!themeResponse || themeResponse === 'true') {
+    return 'dark';
+  }
+
+  if (themeResponse === 'auto') {
+    return 'system';
+  }
+
+  return 'light';
+}
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
@@ -137,6 +151,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
         itemLimit: response.limits?.list.item_count ?? 0,
       },
     },
+    preferredTheme: mapToPreferredTheme(browsing?.dark_knight),
   };
 }
 
