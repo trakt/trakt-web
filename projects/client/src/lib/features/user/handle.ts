@@ -1,27 +1,28 @@
 import type { Handle } from '@sveltejs/kit';
-import { currentUserSettingsQuery } from '../auth/queries/currentUserSettingsQuery.ts';
-
-// TODO no boolean, check data
-let handled = false;
 
 export const handle: Handle = async ({ event, resolve }) => {
-  // TODO proper auth check
+  if (
+    !event.request.headers.get('content-type')?.includes('text/html') &&
+    !event.request.headers.get('content-type')?.includes('text/plain')
+  ) {
+    return await resolve(event);
+  }
+
   const isAuthenticated = event.locals.auth?.isAuthorized ||
     event.locals.oidcAuth;
 
-  if (!handled && isAuthenticated && event.locals.queryClient) {
+  if (isAuthenticated && event.locals.queryClient) {
     try {
-      handled = true;
-      // TODO why not always authenticated? i.e. fix 401
-      const userQuery = currentUserSettingsQuery({ fetch: event.fetch });
-      const existingData = event.locals.queryClient.getQueryData(
-        userQuery.queryKey,
-      );
+      const userQuery =
+        (await import('../auth/queries/currentUserSettingsQuery.ts'))
+          .currentUserSettingsQuery({ fetch: event.fetch });
 
-      if (!existingData) {
-        const data = await event.locals.queryClient.fetchQuery(userQuery);
-        event.locals.queryClient.setQueryData(userQuery.queryKey, data);
-      }
+      const data = await event.locals.queryClient.fetchQuery(userQuery);
+      event.locals.queryClient.setQueryData(userQuery.queryKey, data);
+      console.log(
+        '------- LAYOUT LOAD',
+        event.locals.queryClient.getQueryCache().getAll(),
+      );
     } catch (error) {
       console.warn('Failed to prefetch user settings:', error);
     }

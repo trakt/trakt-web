@@ -8,7 +8,7 @@ function isExpired(expiresAt: number | Nil): boolean {
   return expiresAt ? new Date(expiresAt).getTime() < Date.now() : true;
 }
 
-export const load: LayoutLoad = async ({ data }) => {
+export const load: LayoutLoad = async ({ data, fetch }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -28,11 +28,6 @@ export const load: LayoutLoad = async ({ data }) => {
 
   const auth = data.auth.isAuthorized ? data.auth : data.oidcAuth;
   setToken({ value: auth.token, expiresAt: auth.expiresAt });
-
-  // const canPrefetch = data.auth.isAuthorized || !isExpired(auth.expiresAt);
-  // if (canPrefetch) {
-  // await queryClient.prefetchQuery(currentUserSettingsQuery({ fetch }));
-  // }
 
   return { queryClient, ...data };
 };

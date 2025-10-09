@@ -28,7 +28,10 @@ export const load: LayoutServerLoad = (
   { cookies, request, locals },
 ) => {
   const requestUrl = new URL(request.url);
-
+  console.log(
+    '--- LAYOUT LOAD',
+    locals.queryClient.getQueryCache().getAll(),
+  );
   const defaultResponse = {
     theme: locals.theme,
     auth: {
