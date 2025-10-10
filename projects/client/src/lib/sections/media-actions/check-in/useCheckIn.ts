@@ -10,6 +10,7 @@ import { checkinMovieRequest } from '$lib/requests/queries/checkin/checkinMovieR
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { MovieCheckinRequest, ShowCheckinRequest } from '@trakt/api';
 import { derived, writable } from 'svelte/store';
+import { hasAired } from '../_internal/hasAired.ts';
 
 type EpisodeProps = {
   type: 'episode';
@@ -80,9 +81,10 @@ export function useCheckIn(props: UseCheckInProps) {
     isCheckingIn.set(false);
   };
 
-  const isWatchable = type === 'episode'
-    ? props.episode.airDate && props.episode.airDate <= new Date()
-    : props.media.airDate && props.media.airDate <= new Date();
+  const airDate = type === 'episode'
+    ? props.episode.airDate
+    : props.media.airDate;
+  const isWatchable = airDate && hasAired({ airDate, type });
 
   return {
     checkin,

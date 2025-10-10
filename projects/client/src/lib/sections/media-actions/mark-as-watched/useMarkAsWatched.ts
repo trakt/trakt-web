@@ -9,6 +9,7 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';
 import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
+import { hasAired } from '../_internal/hasAired.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
@@ -69,7 +70,7 @@ export function useMarkAsWatched(
   };
 
   const isWatchable = media.every((item) => {
-    return item.airDate && item.airDate <= new Date();
+    return item.airDate && hasAired({ airDate: item.airDate, type });
   });
 
   return {
