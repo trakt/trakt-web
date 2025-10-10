@@ -17,6 +17,7 @@ import {
   upNextSortOptionSchema,
 } from '@trakt/api';
 import { z } from 'zod';
+import { Theme } from '../../theme/models/Theme.ts';
 
 export const UserSettingsSchema = z.object({
   id: z.union([z.number(), z.string()]),
@@ -61,6 +62,7 @@ export const UserSettingsSchema = z.object({
       itemLimit: z.number(),
     }),
   }),
+  preferredTheme: z.nativeEnum(Theme),
 });
 
 export type UserSettings = z.infer<typeof UserSettingsSchema>;
@@ -73,6 +75,18 @@ const PERMISSIONS_MAP: Record<
   liking: 'like',
   following: 'follow',
 };
+
+function mapToPreferredTheme(themeResponse?: string | Nil) {
+  if (!themeResponse || themeResponse === 'true') {
+    return Theme.Dark;
+  }
+
+  if (themeResponse === 'auto') {
+    return Theme.System;
+  }
+
+  return Theme.Light;
+}
 
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
@@ -137,6 +151,7 @@ function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
         itemLimit: response.limits?.list.item_count ?? 0,
       },
     },
+    preferredTheme: mapToPreferredTheme(browsing?.dark_knight),
   };
 }
 

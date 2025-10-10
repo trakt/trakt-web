@@ -1,4 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { derived, get, readable } from 'svelte/store';
 import {
   currentUserCommentReactionsQuery,
@@ -77,6 +78,7 @@ const ANONYMOUS_USER: UserSettings = {
       itemLimit: 0,
     },
   },
+  preferredTheme: Theme.Dark,
 };
 
 function definedData<T>(data: T | undefined): T {

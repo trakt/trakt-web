@@ -1,4 +1,5 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
+import { Theme } from '$lib/features/theme/models/Theme.ts';
 
 export const ExtendedUserMappedMock: UserSettings = {
   'id': 41152,
@@ -48,4 +49,5 @@ export const ExtendedUserMappedMock: UserSettings = {
       'itemLimit': 1000,
     },
   },
+  'preferredTheme': Theme.Light,
 };
