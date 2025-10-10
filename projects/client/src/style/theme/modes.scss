@@ -133,6 +133,11 @@
   --toggle-background-color: var(--shade-100);
   --toggle-background-hover-color: var(--shade-200);
   --toggle-foreground-color: var(--shade-900);
+
+  /*
+    * OG
+    */
+  --color-og-background: #fff;
 }
 
 // Define theme variables for dark mode
@@ -263,6 +268,11 @@
   --toggle-background-color: var(--shade-700);
   --toggle-background-hover-color: var(--shade-600);
   --toggle-foreground-color: var(--shade-50);
+
+  /*
+    * OG
+    */
+  --color-og-background: #1d1d1d;
 }
 
 // Apply themes to selectors

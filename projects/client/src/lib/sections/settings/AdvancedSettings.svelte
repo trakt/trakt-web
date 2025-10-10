@@ -14,7 +14,7 @@
     border-radius: var(--border-radius-l);
     overflow: hidden;
 
-    background-color: var(--color-card-background);
+    background-color: var(--color-og-background);
 
     box-shadow:
       0px var(--ni-16) var(--ni-8) 0px var(--cm-shadow-2),
