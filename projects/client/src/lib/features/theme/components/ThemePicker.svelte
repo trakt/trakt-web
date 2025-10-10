@@ -7,12 +7,17 @@
   import LightMode from "./LightMode.svelte";
   import AutoMode from "./SystemMode.svelte";
 
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useSettings } from "$lib/sections/settings/_internal/useSettings";
 
   const { set, theme } = useTheme();
 
   const availableThemes = [Theme.Light, Theme.Dark, Theme.System];
+
+  const { isAuthorized } = useAuth();
+  const { theme: themeSettings } = useSettings();
 
   const themeToTitle: Record<Theme, string> = {
     [Theme.Light]: m.option_text_theme_light(),
@@ -23,6 +28,10 @@
   async function submitTheme(value: Theme) {
     set(value);
     await workerRequest(WorkerMessage.CacheBust);
+
+    if ($isAuthorized) {
+      await themeSettings.set(value);
+    }
   }
 </script>
 
