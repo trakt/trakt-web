@@ -1,11 +1,12 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import { saveSettingsRequest } from '$lib/requests/queries/users/saveSettingsRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { SettingsRequest } from '@trakt/api';
 import { derived, writable } from 'svelte/store';
-import { saveSettingsRequest } from '../../../requests/queries/users/saveSettingsRequest.ts';
 
 type HandleSettingsProps = {
   payload: SettingsRequest;
@@ -13,6 +14,17 @@ type HandleSettingsProps = {
 };
 
 type UserSettingsRequest = SettingsRequest['user'];
+
+function mapToDarkKnight(theme: Theme) {
+  switch (theme) {
+    case Theme.Light:
+      return 'false' as const;
+    case Theme.Dark:
+      return 'true' as const;
+    case Theme.System:
+      return 'auto' as const;
+  }
+}
 
 export function useSettings() {
   const { user } = useUser();
@@ -34,6 +46,16 @@ export function useSettings() {
     track({ settings: action });
     await invalidate(InvalidateAction.User.Settings);
     isSavingSettings.set(false);
+  };
+
+  const setTheme = async (theme: Theme) => {
+    const payload = {
+      browsing: {
+        dark_knight: mapToDarkKnight(theme),
+      },
+    };
+
+    await handleSettingsChange({ payload, action: 'theme' });
   };
 
   return {
@@ -86,5 +108,6 @@ export function useSettings() {
         await handleSettingsChange({ payload, action: 'genres' });
       },
     })),
+    theme: { set: setTheme },
   };
 }
