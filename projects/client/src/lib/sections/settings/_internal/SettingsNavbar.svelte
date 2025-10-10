@@ -1,9 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DangerZone from "./DangerZone.svelte";
 </script>
@@ -23,24 +21,16 @@
   <div class="trakt-settings-navbar">
     <div class="trakt-settings-sidebar-content">
       <h4>{m.header_settings()}</h4>
-      <RenderForFeature flag={FeatureFlag.AdvancedSettings}>
-        {#snippet enabled()}
-          {@render settingsLinks()}
-        {/snippet}
-      </RenderForFeature>
+      {@render settingsLinks()}
     </div>
     <DangerZone />
   </div>
 </RenderFor>
 
 <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
-  <RenderForFeature flag={FeatureFlag.AdvancedSettings}>
-    {#snippet enabled()}
-      <div class="trakt-settings-navbar">
-        {@render settingsLinks()}
-      </div>
-    {/snippet}
-  </RenderForFeature>
+  <div class="trakt-settings-navbar">
+    {@render settingsLinks()}
+  </div>
 </RenderFor>
 
 <style lang="scss">
