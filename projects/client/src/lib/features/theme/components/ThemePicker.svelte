@@ -1,11 +1,7 @@
 <script lang="ts">
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
-  import type { ThemeResponse } from "../handle";
   import { Theme } from "../models/Theme";
-  import { ThemeEndpoint } from "../ThemeEndpoint";
   import { useTheme } from "../useTheme";
   import DarkMode from "./DarkMode.svelte";
   import LightMode from "./LightMode.svelte";
@@ -15,7 +11,6 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
 
   const { set, theme } = useTheme();
-  const { track } = useTrack(AnalyticsEvent.Theme);
 
   const availableThemes = [Theme.Light, Theme.Dark, Theme.System];
 
@@ -26,17 +21,7 @@
   };
 
   async function submitTheme(value: Theme) {
-    track({ theme: value });
     set(value);
-
-    const result = await fetch(ThemeEndpoint.Set, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ theme: value }),
-    }).then((res) => res.json() as Promise<ThemeResponse>);
-
     await workerRequest(WorkerMessage.CacheBust);
   }
 </script>
