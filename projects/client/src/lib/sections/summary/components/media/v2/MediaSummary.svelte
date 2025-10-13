@@ -76,7 +76,7 @@
     </RenderFor>
   {/snippet}
 
-  <SpoilerSection {media} type={media.type} title="description">
+  <SpoilerSection {media} type={media.type}>
     <p class="secondary">{intl.overview ?? media.overview}</p>
   </SpoilerSection>
 

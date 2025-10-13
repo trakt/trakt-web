@@ -67,7 +67,7 @@
     </RenderFor>
   {/snippet}
 
-  <SpoilerSection media={episode} {show} {type} title="description">
+  <SpoilerSection media={episode} {show} {type}>
     <p class="secondary">{overview}</p>
   </SpoilerSection>
 
