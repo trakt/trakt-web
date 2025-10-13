@@ -1,3 +1,4 @@
+import { CONFIRMATION_DIALOG_CLASS } from '$lib/components/dialogs/constants/index.ts';
 import { bodyPortal } from '$lib/features/portal/_internal/bodyPortal.ts';
 import { onMount } from 'svelte';
 import { alignPopupContainer } from './alignPopupContainer.ts';
@@ -22,6 +23,13 @@ export function openPopupContainer(
   onMount(moveNodeToBody);
 
   const observer = new MutationObserver(() => {
+    const confirmationDialog = document.querySelector(
+      `.${CONFIRMATION_DIALOG_CLASS}[open]`,
+    );
+    if (confirmationDialog) {
+      return;
+    }
+
     const targetRect = targetNode.getBoundingClientRect();
     alignPopupContainer({ node, targetRect, targetNode, placement });
   });

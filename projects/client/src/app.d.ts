@@ -162,6 +162,8 @@ declare global {
     & {
       label: string;
       'aria-pressed'?: 'true' | 'false' | 'mixed';
+      type?: 'button' | 'submit' | 'reset';
+      value?: string;
     }
     & HTMLElementProps
     & ChildrenProps;
