@@ -5666,6 +5666,30 @@
         "ios",
         "web"
       ]
+    },
+    "button_text_view_description": {
+      "default": "View Description",
+      "description": "Text for the button that allows users to show full details of certain show or movie.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "button_text_hide_description": {
+      "default": "Hide Description",
+      "description": "Text for the button that allows users to hide full details of certain show or movie.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "text_spoiler_alert": {
+      "default": "Spoiler Alert",
+      "description": "Text for the spoiler alert label that warns users about potential spoilers in the content they are about to see.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
     }
   }
 }

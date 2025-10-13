@@ -2059,6 +2059,15 @@
     },
     "input_placeholder_lists_description": {
       "default": "説明（オプション）"
+    },
+    "button_text_view_description": {
+      "default": "説明を表示"
+    },
+    "button_text_hide_description": {
+      "default": "説明を非表示"
+    },
+    "text_spoiler_alert": {
+      "default": "ネタバレ注意"
     }
   }
 }

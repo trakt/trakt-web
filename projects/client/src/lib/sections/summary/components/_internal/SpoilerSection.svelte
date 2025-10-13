@@ -1,5 +1,6 @@
 <script lang="ts">
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
+  import * as m from "$lib/features/i18n/messages.ts";
   import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
   import CollapsableContent from "./CollapsableContent.svelte";
@@ -9,18 +10,19 @@
   const { isSpoilerHidden } = $derived(useMediaSpoiler(target));
 
   const labels = {
-    view: "View description",
-    hide: "Hide description",
+    view: m.button_text_view_description(),
+    hide: m.button_text_hide_description(),
   };
-
-  // FIXME: i18n as design is finalized
 </script>
 
 {#snippet spoiler()}
   <CollapsableContent {labels} variant="contain">
     {@render children()}
     {#snippet headerContent()}
-      <p class="meta-info trakt-spoiler-alert">Spoiler alert <DropIcon /></p>
+      <p class="meta-info trakt-spoiler-alert">
+        {m.text_spoiler_alert()}
+        <DropIcon />
+      </p>
     {/snippet}
   </CollapsableContent>
 {/snippet}

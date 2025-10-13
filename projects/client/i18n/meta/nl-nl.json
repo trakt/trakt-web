@@ -2059,6 +2059,15 @@
     },
     "input_placeholder_lists_description": {
       "default": "Beschrijving (optioneel)"
+    },
+    "button_text_view_description": {
+      "default": "Bekijk beschrijving"
+    },
+    "button_text_hide_description": {
+      "default": "Beschrijving verbergen"
+    },
+    "text_spoiler_alert": {
+      "default": "Spoilerwaarschuwing"
     }
   }
 }
