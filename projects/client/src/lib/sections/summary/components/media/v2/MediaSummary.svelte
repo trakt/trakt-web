@@ -62,7 +62,12 @@
 
   {#snippet meta()}
     <RatingList ratings={$ratings} airDate={media.airDate} />
-    <SummaryTitle {title} genres={media.genres} year={media.year} />
+    <SummaryTitle
+      {title}
+      genres={media.genres}
+      year={media.year}
+      status={media.status}
+    />
 
     <RenderFor audience="authenticated">
       <MediaActions {media} {streamOn} {title} />
