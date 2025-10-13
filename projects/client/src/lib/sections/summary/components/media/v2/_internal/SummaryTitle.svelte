@@ -9,6 +9,7 @@
     i18n?: GenreIntl;
     separator?: string;
     year: number | Nil;
+    status?: string | Nil;
   };
 
   const {
@@ -17,6 +18,7 @@
     i18n = GenreIntlProvider,
     separator = " / ",
     year,
+    status,
   }: MediaTitleProps = $props();
 
   const subtitle = $derived.by(() => {
@@ -41,6 +43,12 @@
   <p class="secondary smaller">
     {subtitle}
   </p>
+
+  {#if status}
+    <p class="secondary smaller meta-info trakt-media-status">
+      {status}
+    </p>
+  {/if}
 </div>
 
 <style>
@@ -63,5 +71,9 @@
 
     font-size: clamp(var(--ni-24), var(--text-size), var(--ni-32));
     text-align: center;
+  }
+
+  .trakt-media-status {
+    color: var(--color-text-emphasis);
   }
 </style>
