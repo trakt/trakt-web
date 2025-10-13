@@ -100,7 +100,7 @@
     .trakt-list-title-container {
       display: flex;
       align-items: center;
-      gap: var(--gap-micro);
+      gap: var(--gap-xs);
       min-width: 0;
 
       :global(.trakt-preview-badge) {
@@ -109,11 +109,20 @@
       }
     }
 
-    .trakt-list-title-container {
-      gap: var(--gap-xs);
+    .trakt-list-title {
+      :global(.trakt-action-button) {
+        --button-size: var(--ni-32);
+      }
 
       @include for-mobile {
-        gap: var(--gap-xs);
+        :global(.trakt-action-button) {
+          --button-size: var(--ni-24);
+
+          :global(svg) {
+            width: var(--ni-16);
+            height: var(--ni-16);
+          }
+        }
       }
     }
 
