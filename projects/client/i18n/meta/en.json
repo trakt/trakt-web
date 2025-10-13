@@ -5366,8 +5366,7 @@
       "default": "Cancel",
       "description": "Text for cancelling an action in confirmation dialogs.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "button_text_where_to_watch": {
