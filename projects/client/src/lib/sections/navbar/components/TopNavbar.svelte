@@ -116,14 +116,16 @@
       backdrop-filter: blur(var(--ni-8));
     }
 
-    &:global(.trakt-navbar-scroll-down.is-authorized) {
-      top: var(--offscreen-top);
-      opacity: 0;
-    }
+    &:not(.is-hidden).is-authorized {
+      &:global(.trakt-navbar-scroll-down) {
+        top: var(--offscreen-top);
+        opacity: 0;
+      }
 
-    &:global(.trakt-navbar-scroll-up.is-authorized) {
-      top: 0;
-      opacity: 1;
+      &:global(.trakt-navbar-scroll-up) {
+        top: 0;
+        opacity: 1;
+      }
     }
 
     &.is-hidden {
