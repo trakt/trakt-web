@@ -2059,6 +2059,15 @@
     },
     "input_placeholder_lists_description": {
       "default": "Описание (незадължително)"
+    },
+    "button_text_view_description": {
+      "default": "Виж описание"
+    },
+    "button_text_hide_description": {
+      "default": "Скрий описание"
+    },
+    "text_spoiler_alert": {
+      "default": "Спойлер!"
     }
   }
 }

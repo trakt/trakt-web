@@ -2059,6 +2059,15 @@
     },
     "input_placeholder_lists_description": {
       "default": "Descrizione (opzionale)"
+    },
+    "button_text_view_description": {
+      "default": "Vedi descrizione"
+    },
+    "button_text_hide_description": {
+      "default": "Nascondi descrizione"
+    },
+    "text_spoiler_alert": {
+      "default": "Allerta spoiler"
     }
   }
 }

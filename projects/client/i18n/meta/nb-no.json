@@ -2059,6 +2059,15 @@
     },
     "input_placeholder_lists_description": {
       "default": "Beskrivelse (valgfritt)"
+    },
+    "button_text_view_description": {
+      "default": "Vis beskrivelse"
+    },
+    "button_text_hide_description": {
+      "default": "Skjul beskrivelse"
+    },
+    "text_spoiler_alert": {
+      "default": "Spoiler-varsel"
     }
   }
 }
