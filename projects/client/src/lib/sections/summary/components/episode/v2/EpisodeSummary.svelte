@@ -5,6 +5,7 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
+  import SummaryDetails from "../../_internal/SummaryDetails.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
@@ -71,7 +72,9 @@
     <p class="secondary">{overview}</p>
   </SpoilerSection>
 
-  <MediaDetails {episode} {crew} {type} />
+  <SummaryDetails>
+    <MediaDetails {episode} {crew} {type} />
+  </SummaryDetails>
 
   {#if streamOn}
     <RenderFor audience="authenticated">
