@@ -16,13 +16,13 @@
   const { current: activityType, set, options } = useToggler("activity");
 
   const urlBuilder = $derived(
-    $activityType === "social"
+    $activityType.value === "social"
       ? UrlBuilder.social.activity
       : UrlBuilder.history.all,
   );
 
   const cta = $derived(
-    $activityType === "social"
+    $activityType.value === "social"
       ? { type: "activity" as const }
       : { type: "personal-activity" as const },
   );
@@ -31,14 +31,15 @@
 
 <!-- TODO replace with empty state message when actionable on Trakt Web -->
 <DrillableMediaList
-  id={`activity-list-${$activityType}`}
-  source={{ id: "activity", type: $activityType }}
+  id={`activity-list-${$activityType.value}`}
+  source={{ id: "activity", type: $activityType.value }}
   type="episode"
+  metaInfo={$activityType.text}
   useList={(params) =>
     useActivityList({
       ...params,
       limit: DEFAULT_ACTIVITY_PAGE_SIZE,
-      activityType: $activityType,
+      activityType: $activityType.value,
     })}
   {urlBuilder}
   drilldownLabel={m.button_label_view_all_social_activity()}
@@ -61,6 +62,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <Toggler value={$activityType} onChange={set} {options} />
+    <Toggler value={$activityType.value} onChange={set} {options} />
   {/snippet}
 </DrillableMediaList>

@@ -19,6 +19,7 @@
     actions: externalActions,
     useList,
     filter,
+    metaInfo,
   }: MediaListProps<T, M> = $props();
 
   const { list, isLoading } = $derived(
@@ -42,6 +43,7 @@
   {item}
   {ctaItem}
   {title}
+  {metaInfo}
   actions={externalActions ? actions : undefined}
   --height-list={mediaListHeightResolver($defaultVariant)}
 >

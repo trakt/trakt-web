@@ -12,4 +12,5 @@ export type MediaListProps<T, M> = {
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
   badge?: Snippet;
+  metaInfo?: string;
 } & FilterParams;

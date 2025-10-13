@@ -15,10 +15,10 @@
   } = $props();
 
   const { current, set, options } = useToggler("social");
-  const { profiles, isLoading } = $derived(useFollowing(slug, $current));
+  const { profiles, isLoading } = $derived(useFollowing(slug, $current.value));
 
   const placeholder = $derived(
-    $current === "following"
+    $current.value === "following"
       ? m.list_placeholder_following()
       : m.list_placeholder_followers(),
   );
@@ -28,14 +28,15 @@
 
 <div class="trakt-profiles-list">
   <SectionList
-    id={`profiles-list-${slug}-${$current}`}
+    id={`profiles-list-${slug}-${$current.value}`}
     items={$profiles}
     title={m.list_title_social()}
     --height-list="var(--height-profile-list)"
+    metaInfo={$current.text}
   >
     {#snippet empty()}
       {#if !$isLoading}
-        {#if $isMe && $current === "following"}
+        {#if $isMe && $current.value === "following"}
           <CtaItem cta={{ type: "social" }} variant="placeholder" />
         {:else}
           {placeholder}
@@ -48,7 +49,7 @@
     {/snippet}
 
     {#snippet badge()}
-      <Toggler value={$current} onChange={set} {options} />
+      <Toggler value={$current.value} onChange={set} {options} />
     {/snippet}
   </SectionList>
 </div>

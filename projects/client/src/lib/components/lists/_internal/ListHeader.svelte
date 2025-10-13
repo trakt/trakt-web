@@ -7,6 +7,7 @@
   const {
     title,
     subtitle,
+    metaInfo,
     inset,
     titleAction,
     actions,
@@ -16,6 +17,7 @@
   }: {
     title: string;
     subtitle?: string;
+    metaInfo?: string;
     titleAction?: Snippet;
     actions?: Snippet;
     badge?: Snippet;
@@ -41,9 +43,9 @@
         {@render titleAction()}
       {/if}
       {#if subtitle == null}
-        <ListTitle {title} style="primary" />
+        <ListTitle {title} {metaInfo} style="primary" />
       {:else}
-        <ListTitle {title} style="secondary" />
+        <ListTitle {title} {metaInfo} style="secondary" />
         <ListTitle title={`/ ${subtitle}`} style="primary" />
       {/if}
     </div>
@@ -67,6 +69,7 @@
     justify-content: space-between;
     align-items: center;
     gap: var(--gap-m);
+    min-height: var(--ni-40);
     height: var(--ni-40);
     user-select: none;
 

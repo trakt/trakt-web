@@ -37,7 +37,7 @@
       return externalType;
     }
 
-    return $selectedType === "all" ? undefined : $selectedType;
+    return $selectedType.value === "all" ? undefined : $selectedType.value;
   });
 
   const cta = $derived(
@@ -55,6 +55,7 @@
   {type}
   filter={$filterMap}
   {useList}
+  metaInfo={status === "all" ? $selectedType.text : undefined}
   urlBuilder={({ type, ...rest }) => {
     if (status === "all") {
       return UrlBuilder.lists.watchlist();
@@ -81,7 +82,7 @@
 
   {#snippet badge()}
     {#if status === "all"}
-      <Toggler value={$selectedType} onChange={set} {options} />
+      <Toggler value={$selectedType.value} onChange={set} {options} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}

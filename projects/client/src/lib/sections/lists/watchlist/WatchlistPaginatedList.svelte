@@ -30,7 +30,7 @@
       return externalType;
     }
 
-    return $selectedType === "all" ? undefined : $selectedType;
+    return $selectedType.value === "all" ? undefined : $selectedType.value;
   });
 </script>
 
@@ -40,6 +40,7 @@
   {type}
   filter={$filterMap}
   {useList}
+  metaInfo={$selectedType.text}
 >
   {#snippet item(media)}
     <WatchlistItem type={media.type} {media} {style} />
@@ -51,7 +52,7 @@
 
   {#snippet badge()}
     {#if status === "all"}
-      <Toggler value={$selectedType} onChange={set} {options} />
+      <Toggler value={$selectedType.value} onChange={set} {options} />
     {/if}
 
     {#if status === "unreleased" || status === "released"}
