@@ -11,6 +11,7 @@
   type SectionListProps<T> = ListProps<T> & {
     id: string;
     empty?: Snippet;
+    metaInfo?: string;
   };
 
   const {
@@ -21,6 +22,7 @@
     ctaItem,
     empty,
     dynamicActions,
+    metaInfo,
     actions: externalActions,
     badge,
   }: SectionListProps<T> = $props();
@@ -62,6 +64,7 @@
 <ShadowList
   {id}
   {title}
+  {metaInfo}
   {items}
   {item}
   {ctaItem}

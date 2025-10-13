@@ -16,7 +16,9 @@
 
   const { current: selectedType, set, options } = useToggler("media");
 
-  const type = $derived($selectedType === "all" ? undefined : $selectedType);
+  const type = $derived(
+    $selectedType.value === "all" ? undefined : $selectedType.value,
+  );
 
   const { filterMap } = useFilter();
   const { list, isLoading } = $derived(
@@ -29,7 +31,7 @@
   const defaultVariant = $derived(useDefaultCardVariant(type));
 
   const placeholderMessage = $derived.by(() => {
-    switch ($selectedType) {
+    switch ($selectedType.value) {
       case "movie":
         return m.list_placeholder_favorite_movies();
       case "show":
@@ -48,6 +50,7 @@
   items={$list}
   {title}
   --height-list={mediaListHeightResolver($defaultVariant)}
+  metaInfo={$selectedType.text}
 >
   {#snippet item(media)}
     <DefaultMediaItem
@@ -85,6 +88,6 @@
   {/snippet}
 
   {#snippet badge()}
-    <Toggler value={$selectedType} onChange={set} {options} />
+    <Toggler value={$selectedType.value} onChange={set} {options} />
   {/snippet}
 </SectionList>

@@ -22,6 +22,7 @@
 
   type SectionListProps<T> = ListProps<T> & {
     subtitle?: string;
+    metaInfo?: string;
     empty?: Snippet;
     scrollContainer?: Writable<HTMLDivElement>;
     scrollX?: Writable<{ left: number; right: number }>;
@@ -34,6 +35,7 @@
     items,
     title,
     subtitle,
+    metaInfo,
     scrollX = writable({ left: 0, right: 0 }),
     scrollContainer = writable(),
     item,
@@ -103,6 +105,7 @@
         {title}
         {subtitle}
         {titleAction}
+        {metaInfo}
         actions={$isCollapsed ? undefined : actions}
         {badge}
         inset="title"

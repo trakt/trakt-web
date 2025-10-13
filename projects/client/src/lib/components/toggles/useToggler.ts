@@ -1,5 +1,6 @@
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { derived, writable } from 'svelte/store';
+import { assertDefined } from '../../utils/assert/assertDefined.ts';
 import {
   type TogglerId,
   TOGGLERS,
@@ -20,7 +21,13 @@ export function useToggler<T extends TogglerId, K = TogglerValueMap[T]>(id: T) {
 
   return {
     options: toggler.options,
-    current: derived(current, ($current) => $current),
+    current: derived(current, ($current) => ({
+      value: $current,
+      text: assertDefined(
+        toggler.options.find((o) => o.value === $current),
+        'Toggler option must exist',
+      ).text,
+    })),
     set: (value: K) => {
       current.set(value);
       safeLocalStorage.setItem(

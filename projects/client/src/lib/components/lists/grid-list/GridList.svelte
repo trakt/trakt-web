@@ -8,6 +8,7 @@
   type PageListProps<T> = Omit<ListProps<T>, "title"> & {
     empty?: Snippet;
     title?: string;
+    metaInfo?: string;
     dimensionObserver?: (node: HTMLElement) => void;
   };
 
@@ -19,6 +20,7 @@
     empty,
     badge,
     dimensionObserver,
+    metaInfo,
   }: PageListProps<T> = $props();
 
   const customAction = (node: HTMLElement) => dimensionObserver?.(node);
@@ -32,7 +34,7 @@
 
 <section class="trakt-grid-list-container">
   {#if title}
-    <ListHeader {title} {actions} {badge} inset="all" />
+    <ListHeader {title} {metaInfo} {actions} {badge} inset="all" />
   {/if}
 
   {#if items.length > 0}
