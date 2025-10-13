@@ -148,7 +148,7 @@
 
 <RenderFor audience="all" navigation="default">
   <SummaryContainer>
-    <MediaDetails {episode} {crew} type="episode" />
+    <MediaDetails {episode} {crew} type="episode" title={m.header_details()} />
 
     {#if streamOn}
       <MediaStreamingServices

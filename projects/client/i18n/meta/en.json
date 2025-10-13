@@ -4433,16 +4433,14 @@
       "default": "View Details",
       "description": "Text for the button that allows users to show full details of certain show or movie.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "button_text_hide_details": {
       "default": "Hide Details",
       "description": "Text for the button that allows users to hide full details of certain show or movie.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "episode_footer_season_episode": {

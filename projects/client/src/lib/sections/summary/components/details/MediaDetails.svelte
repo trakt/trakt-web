@@ -1,18 +1,16 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
-
   import Link from "$lib/components/link/Link.svelte";
   import CollapsableValues from "./_internal/CollapsableValues.svelte";
   import DetailsGrid from "./_internal/DetailsGrid.svelte";
   import { useMediaDetails } from "./_internal/useMediaDetails";
   import type { MediaDetailsProps } from "./MediaDetailsProps";
 
-  const props: MediaDetailsProps = $props();
+  const { title, ...props }: { title?: string } & MediaDetailsProps = $props();
 
   const mediaDetails = $derived(useMediaDetails(props));
 </script>
 
-<DetailsGrid title={m.header_details()}>
+<DetailsGrid {title}>
   {#each mediaDetails as { title, values }}
     {#if values && values.length > 0}
       <CollapsableValues category={title} {values}>

@@ -173,7 +173,7 @@
 
 <RenderFor audience="all" navigation="default">
   <SummaryContainer>
-    <MediaDetails {media} {studios} {crew} {type} />
+    <MediaDetails {media} {studios} {crew} {type} title={m.header_details()} />
 
     {#if streamOn}
       <RenderFor audience="authenticated" navigation="default">

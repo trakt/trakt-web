@@ -6,7 +6,7 @@
   import { writable } from "svelte/store";
 
   type DetailsGridProps = {
-    title: string;
+    title?: string;
     isCollapsable?: boolean;
   } & ChildrenProps;
 
@@ -16,18 +16,20 @@
 </script>
 
 <div class="trakt-summary-details-grid">
-  <div class="trakt-summary-details-grid-header">
-    <h5>{title}</h5>
-    {#if isCollapsable}
-      <MoreButton
-        i18n={MoreButtonIntlProvider}
-        label="{m.button_label_expand_category({ category: title })}}"
-        count={undefined}
-        onExpand={() => expanded.set(true)}
-        onCollapse={() => expanded.set(false)}
-      />
-    {/if}
-  </div>
+  {#if title}
+    <div class="trakt-summary-details-grid-header">
+      <h5>{title}</h5>
+      {#if isCollapsable}
+        <MoreButton
+          i18n={MoreButtonIntlProvider}
+          label="{m.button_label_expand_category({ category: title })}}"
+          count={undefined}
+          onExpand={() => expanded.set(true)}
+          onCollapse={() => expanded.set(false)}
+        />
+      {/if}
+    </div>
+  {/if}
   <div class="trakt-summary-details-grid-content" class:is-hidden={!$expanded}>
     {@render children()}
   </div>
