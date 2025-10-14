@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Спри проверка"
+    },
+    "button_text_delete_comment": {
+      "default": "Изтрий коментара"
+    },
+    "button_label_delete_comment": {
+      "default": "Изтрий коментара"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Сигурни ли сте, че искате да изтриете коментара си?"
     }
   }
 }

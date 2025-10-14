@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Stop check in"
+    },
+    "button_text_delete_comment": {
+      "default": "Delete Comment"
+    },
+    "button_label_delete_comment": {
+      "default": "Delete Comment"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Are you sure you want to delete your comment?"
     }
   }
 }

@@ -55,6 +55,7 @@
             {media}
             {reset}
             {setReplying}
+            type={props.type}
             isReplying={isReplying(comment.id)}
           />
         </comment-thread>

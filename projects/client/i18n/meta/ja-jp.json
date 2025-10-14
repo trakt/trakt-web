@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "チェックインを停止"
+    },
+    "button_text_delete_comment": {
+      "default": "コメントを削除"
+    },
+    "button_label_delete_comment": {
+      "default": "コメントを削除"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "コメントを削除してもよろしいですか？"
     }
   }
 }

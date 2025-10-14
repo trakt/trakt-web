@@ -1,6 +1,7 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import ReactAction from "../comment-actions/ReactAction.svelte";
@@ -22,6 +23,7 @@
     reset: () => void;
     isReplying: boolean;
     setReplying: (comment: MediaComment, isReplying: boolean) => void;
+    type: ExtendedMediaType;
   };
 
   const {
@@ -30,12 +32,13 @@
     isReplying,
     setReplying,
     reset,
+    type,
   }: CommentThreadCardProps = $props();
   const { list } = $derived(useCommentReplies({ id: comment.id }));
 </script>
 
 {#snippet userThread(userComment: MediaComment)}
-  <CommentHeader comment={userComment} />
+  <CommentHeader comment={userComment} {type} />
 
   <ShadowScroller>
     <div class="trakt-comment-thread">
@@ -44,7 +47,7 @@
       {#if $list}
         {#each $list as reply}
           <div class="trakt-comment-container">
-            <UserComment comment={reply} {media} />
+            <UserComment comment={reply} {media} {type} />
           </div>
         {/each}
       {/if}

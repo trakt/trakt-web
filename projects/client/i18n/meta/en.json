@@ -5703,6 +5703,30 @@
         "ios",
         "android"
       ]
+    },
+    "button_text_delete_comment": {
+      "default": "Delete Comment",
+      "description": "Text for the button that allows a user to delete a comment.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "button_label_delete_comment": {
+      "default": "Delete Comment",
+      "description": "Aria-label for the button that allows a user to delete a comment.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Are you sure you want to delete your comment?",
+      "description": "Text for the warning prompt that appears when a user attempts to delete a comment.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
     }
   }
 }

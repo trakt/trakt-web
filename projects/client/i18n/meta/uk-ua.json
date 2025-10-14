@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Зупинити відмітку перегляду"
+    },
+    "button_text_delete_comment": {
+      "default": "Видалити коментар"
+    },
+    "button_label_delete_comment": {
+      "default": "Видалити коментар"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Ви дійсно хочете видалити свій коментар?"
     }
   }
 }

@@ -48,6 +48,9 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.StopCheckin;
     title: string;
   };
+  [ConfirmationType.DeleteComment]: {
+    type: ConfirmationType.DeleteComment;
+  };
 }
 
 export type ConfirmationParams<T extends ConfirmationType> =

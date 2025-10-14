@@ -1,5 +1,6 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import ReactAction from "./comment-actions/ReactAction.svelte";
@@ -14,12 +15,13 @@
     media: MediaEntry;
     comment: MediaComment;
     onDrilldown?: (comment: ActiveComment) => void;
+    type: ExtendedMediaType;
   };
 
-  const { comment, media, onDrilldown }: CommentProps = $props();
+  const { comment, media, onDrilldown, type }: CommentProps = $props();
 </script>
 
-<CommentHeader {comment} />
+<CommentHeader {comment} {type} />
 <CommentBody {comment} {media} />
 <CommentFooter>
   <ReactAction {comment} />

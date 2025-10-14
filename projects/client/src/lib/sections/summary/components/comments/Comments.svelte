@@ -39,7 +39,7 @@
     --height-list="var(--height-comments-list)"
   >
     {#snippet item(comment)}
-      <CommentCard {comment} {media} {onDrilldown} />
+      <CommentCard {comment} {media} {onDrilldown} type={props.type} />
     {/snippet}
 
     {#snippet empty()}

@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Stopp sjekk inn"
+    },
+    "button_text_delete_comment": {
+      "default": "Slett kommentar"
+    },
+    "button_label_delete_comment": {
+      "default": "Slett kommentar"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Er du sikker på at du vil slette kommentaren din?"
     }
   }
 }
