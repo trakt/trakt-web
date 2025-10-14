@@ -37,7 +37,7 @@ const userCommentRepliesRequest = (
 
 export const commentRepliesQuery = defineQuery({
   key: 'commentReplies',
-  invalidations: [InvalidateAction.ReplyToComment],
+  invalidations: [InvalidateAction.Comment.Reply],
   dependencies: (
     params,
   ) => [

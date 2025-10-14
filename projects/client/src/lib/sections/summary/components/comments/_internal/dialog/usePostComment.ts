@@ -75,8 +75,8 @@ export function usePostComment(
   const { track } = useTrack(AnalyticsEvent.AddComment);
 
   const invalidateAction = props.commentType === 'reply'
-    ? InvalidateAction.ReplyToComment
-    : InvalidateAction.Commented(props.type);
+    ? InvalidateAction.Comment.Reply
+    : InvalidateAction.Comment.Post(props.type);
 
   const postComment = async (comment: string) => {
     const current = await resolve(user);
