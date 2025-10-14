@@ -1,11 +1,10 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
-
   import FavoriteButton from "$lib/components/buttons/favorite/FavoriteButton.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { onMount } from "svelte";
-  import { attachWarning } from "../_internal/attachWarning";
   import { useFavorites } from "./useFavorites";
 
   type FavoriteActionProps = {
@@ -33,11 +32,13 @@
     removeFromFavorites,
   } = $derived(useFavorites({ type, id }));
 
-  const onRemoveHandler = $derived(
-    attachWarning(
-      removeFromFavorites,
-      m.warning_prompt_remove_from_favorites({ title }),
-    ),
+  const { confirm } = useConfirm();
+  const confirmRemove = $derived(
+    confirm({
+      type: ConfirmationType.RemoveFavorite,
+      title,
+      onConfirm: removeFromFavorites,
+    }),
   );
 
   onMount(() => {
@@ -52,5 +53,5 @@
   isFavorited={$isFavorited}
   isFavoriteUpdating={$isUpdatingFavorite}
   onAdd={addToFavorites}
-  onRemove={onRemoveHandler}
+  onRemove={confirmRemove}
 />

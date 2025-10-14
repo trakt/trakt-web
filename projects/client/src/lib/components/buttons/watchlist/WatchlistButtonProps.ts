@@ -8,5 +8,5 @@ export type WatchlistButtonProps = {
   type: 'action' | 'normal' | 'dropdown-item';
   size: 'small' | 'normal';
   onAdd: () => void;
-  onRemove: () => void;
-} & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;
+  onRemove: (event: MouseEvent) => void;
+} & Omit<ButtonProps, 'children' | 'onclick' | 'label' | 'value' | 'type'>;

@@ -1014,7 +1014,12 @@
       "default": "Aired"
     },
     "warning_prompt_drop_show": {
-      "default": "Are you sure you want to drop \"{title}\" show? This will remove it from your up next list."
+      "default": "Are you sure you want to drop \"{title}\" show? This will remove it from your Continue Watching list.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Flag show \"{title}\" as dropped"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Spoiler Alert"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Remove from watchlist"
+    },
+    "button_text_stop_check_in": {
+      "default": "Stop check in"
     }
   }
 }

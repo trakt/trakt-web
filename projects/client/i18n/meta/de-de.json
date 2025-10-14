@@ -1014,7 +1014,12 @@
       "default": "Ausgestrahlt"
     },
     "warning_prompt_drop_show": {
-      "default": "Sind Sie sicher, dass Sie die \"{title}\" entfernen möchten? Dies wird den Titel von Ihrer \"up next\" Liste entfernen."
+      "default": "Möchtest du die Serie \"{title}\" wirklich löschen? Dies entfernt sie aus deiner 'Weiterschauen'-Liste.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "\"{title}\" als abgebrochen markieren"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Spoiler-Warnung"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Von der Watchlist entfernen"
+    },
+    "button_text_stop_check_in": {
+      "default": "Check-in beenden"
     }
   }
 }

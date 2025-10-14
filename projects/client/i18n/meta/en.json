@@ -2779,7 +2779,7 @@
       ]
     },
     "warning_prompt_drop_show": {
-      "default": "Are you sure you want to drop \"{title}\" show? This will remove it from your up next list.",
+      "default": "Are you sure you want to drop \"{title}\" show? This will remove it from your Continue Watching list.",
       "description": "Warning prompt shown when a user tries to drop a show.",
       "variables": {
         "title": {
@@ -5683,6 +5683,22 @@
     "text_spoiler_alert": {
       "default": "Spoiler Alert",
       "description": "Text for the spoiler alert label that warns users about potential spoilers in the content they are about to see.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Remove from watchlist",
+      "description": "Text for the button that allows a user to remove a show or movie from their watchlist.",
+      "exclude": [
+        "ios",
+        "android"
+      ]
+    },
+    "button_text_stop_check_in": {
+      "default": "Stop check in",
+      "description": "Text for the button that allows a user to stop the check in of a movie or episode.",
       "exclude": [
         "ios",
         "android"

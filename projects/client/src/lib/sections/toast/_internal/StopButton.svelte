@@ -1,9 +1,10 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { NowPlayingItem } from "$lib/requests/models/NowPlayingItem";
-  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
   import { useStopNowPlaying } from "./useStopNowPlaying";
 
   const {
@@ -18,15 +19,20 @@
     useStopNowPlaying(nowPlaying),
   );
 
-  const stopWithWarning = $derived(
-    attachWarning(stop, m.warning_prompt_stop_checkin({ title })),
+  const { confirm } = useConfirm();
+  const confirmStop = $derived(
+    confirm({
+      type: ConfirmationType.StopCheckin,
+      title,
+      onConfirm: stop,
+    }),
   );
 </script>
 
 {#if isStoppable}
   <ActionButton
     disabled={$isStopping}
-    onclick={stopWithWarning}
+    onclick={confirmStop}
     label={m.button_label_stop_playing({ title })}
     style="ghost"
     size="small"

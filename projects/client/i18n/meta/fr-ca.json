@@ -1014,7 +1014,12 @@
       "default": "Diffusé"
     },
     "warning_prompt_drop_show": {
-      "default": "Êtes-vous certain de vouloir abandonner le \"{title}\" ? Cela le supprimera de votre liste à venir."
+      "default": "Êtes-vous certain de vouloir laisser tomber la série \"{title}\" ? Ça va l'enlever de votre liste 'Continuer à regarder'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Marquer \"{title}\" comme abandonné"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Alerte divulgâcheur"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Retirer de la liste à visionner"
+    },
+    "button_text_stop_check_in": {
+      "default": "Arrêter l'enregistrement"
     }
   }
 }

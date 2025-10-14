@@ -1014,7 +1014,12 @@
       "default": "Виходило"
     },
     "warning_prompt_drop_show": {
-      "default": "Ви впевнені, що хочете відмовитися від \"{title}\" серіалу? Це видалить його з вашого списку наступного перегляду."
+      "default": "Ви впевнені, що хочете видалити серіал \"{title}\"? Це видалить його зі списку 'Продовжити перегляд'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Позначити серіал \"{title}\" як відхилений"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Спойлер!"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Видалити зі списку перегляду"
+    },
+    "button_text_stop_check_in": {
+      "default": "Зупинити відмітку перегляду"
     }
   }
 }

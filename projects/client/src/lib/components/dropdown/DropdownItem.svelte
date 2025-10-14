@@ -92,6 +92,7 @@
     gap: var(--gap-s);
 
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     transition: var(--transition-increment) ease-in-out;
     transition-property: background, color;

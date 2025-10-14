@@ -1,8 +1,8 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MediaInput } from "$lib/models/MediaInput";
-  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
-  import { getWarningMessage } from "$lib/sections/media-actions/mark-as-watched/_internal/getWarningMessage";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
@@ -23,15 +23,14 @@
 
   const { markAsWatched } = $derived(useMarkAsWatched(target));
 
-  const warningMessage = $derived(getWarningMessage(media.title, target));
-
-  /**
-   * TODO: @seferturan Single source of truth for warning messages
-   */
-  const onWatchHandler = $derived(
-    warningMessage
-      ? attachWarning(markAsWatched, warningMessage)
-      : markAsWatched,
+  const { confirm } = useConfirm();
+  const confirmMarkAsWatched = $derived(
+    confirm({
+      type: ConfirmationType.MarkAsWatched,
+      title: media.title,
+      target,
+      onConfirm: markAsWatched,
+    }),
   );
 
   const { addToWatchlist, isWatchlisted } = $derived(
@@ -49,7 +48,7 @@
     classList="trakt-up-next-episode"
     onSwipe={(state) => {
       if (state.direction === "left") {
-        onWatchHandler();
+        confirmMarkAsWatched();
       }
 
       if (state.direction === "right") {

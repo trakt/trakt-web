@@ -1014,7 +1014,12 @@
       "default": "Sendt"
     },
     "warning_prompt_drop_show": {
-      "default": "Er du sikker på, at du vil droppe \"{title}\" serien? Dette vil fjerne den fra din næste liste."
+      "default": "Er du sikker på, at du vil droppe serien \"{title}\"? Dette vil fjerne den fra din 'Fortsæt med at se'-liste.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Marker serien \"{title}\" som droppet"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Spoileradvarsel"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Fjern fra listen"
+    },
+    "button_text_stop_check_in": {
+      "default": "Stop check-in"
     }
   }
 }

@@ -7,4 +7,4 @@ export type ListDropdownItemProps = {
   list: MediaListSummary;
   isUpdating: Writable<boolean>;
   i18n?: ListDropdownItemIntl;
-} & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;
+} & Omit<ButtonProps, 'children' | 'onclick' | 'label' | 'type' | 'value'>;

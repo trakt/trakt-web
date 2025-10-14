@@ -1014,7 +1014,12 @@
       "default": "Estrenó"
     },
     "warning_prompt_drop_show": {
-      "default": "¿Estás seguro de que quieres eliminar la serie \"{title}\"? Esto lo eliminará de tu lista de próximos episodios."
+      "default": "¿Estás seguro de que quieres quitar la serie \"{title}\"? Esto la va a quitar de tu lista 'Siguiendo viendo'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Marcar la serie \"{title}\" como eliminada"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "¡Alerta de spoiler!"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Quitar de la lista"
+    },
+    "button_text_stop_check_in": {
+      "default": "Detener el registro"
     }
   }
 }

@@ -8,6 +8,6 @@ export type FavoriteButtonProps = {
   isFavorited: boolean;
   style: 'action' | 'normal' | 'dropdown-item';
   onAdd: () => void;
-  onRemove: () => void;
+  onRemove: (event: MouseEvent) => void;
   navigationType?: DpadNavigationType;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

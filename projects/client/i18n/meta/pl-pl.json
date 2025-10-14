@@ -1014,7 +1014,12 @@
       "default": "Wyemitowany"
     },
     "warning_prompt_drop_show": {
-      "default": "Czy na pewno chcesz usunąć \"{title}\" z kolejki? Zostanie usunięte z twojej listy odtwarzania."
+      "default": "Czy na pewno chcesz usunąć serial \"{title}\"? Spowoduje to usunięcie go z listy 'Oglądane dalej'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Zaznacz \"{title}\" jako usunięty"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Uwaga: spoiler!"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Usuń z listy do obejrzenia"
+    },
+    "button_text_stop_check_in": {
+      "default": "Zatrzymaj meldowanie"
     }
   }
 }

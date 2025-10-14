@@ -1,10 +1,9 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
-  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
   import DropSwipeIndicator from "$lib/sections/media-actions/drop/DropSwipeIndicator.svelte";
   import { useDrop } from "$lib/sections/media-actions/drop/useDrop";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
@@ -32,11 +31,13 @@
     }),
   );
 
-  /**
-   * TODO: @seferturan Single source of truth for warning messages
-   */
-  const onDropHandler = $derived(
-    attachWarning(drop, m.warning_prompt_drop_show({ title: show.title })),
+  const { confirm } = useConfirm();
+  const confirmDrop = $derived(
+    confirm({
+      type: ConfirmationType.DropShow,
+      title: show.title,
+      onConfirm: drop,
+    }),
   );
 </script>
 
@@ -51,7 +52,7 @@
       }
 
       if (state.direction === "right") {
-        onDropHandler();
+        confirmDrop();
       }
     }}
     --indicator-height="var(--height-summary-card-cover)"

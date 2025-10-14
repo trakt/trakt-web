@@ -1,9 +1,10 @@
 <script lang="ts">
   import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
-  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
 
   const {
     list,
@@ -21,15 +22,19 @@
     ...events
   } = $derived(useDangerButton({ isActive: true, color: "default" }));
 
-  const handler = attachWarning(
-    onDelete,
-    m.warning_prompt_delete_list({ name: list.name }),
+  const { confirm } = useConfirm();
+  const confirmDelete = $derived(
+    confirm({
+      type: ConfirmationType.DeleteList,
+      name: list.name,
+      onConfirm: onDelete,
+    }),
   );
 
   const buttonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_delete_list({ name: list.name }),
     color: $color,
-    onclick: handler,
+    onclick: confirmDelete,
     disabled: isDeleting,
     variant: "secondary",
     ...events,
