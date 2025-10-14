@@ -1,14 +1,32 @@
 <script lang="ts">
+  import Link from "$lib/components/link/Link.svelte";
+
   const {
     title,
     metaInfo,
     style,
-  }: { title: string; metaInfo?: string; style: "primary" | "secondary" } =
-    $props();
+    href,
+  }: {
+    title: string;
+    metaInfo?: string;
+    href?: string;
+    style: "primary" | "secondary";
+  } = $props();
 </script>
 
+{#snippet content()}
+  <h5 class="shadow-list-title ellipsis" data-style={style}>
+    {title}
+  </h5>
+{/snippet}
+
 <div class="trakt-list-title">
-  <h5 class="shadow-list-title ellipsis" data-style={style}>{title}</h5>
+  {#if href}
+    <Link {href}>{@render content()}</Link>
+  {:else}
+    {@render content()}
+  {/if}
+
   {#if metaInfo}
     <p class="meta-info ellipsis">{metaInfo}</p>
   {/if}
@@ -23,6 +41,10 @@
 
     p.meta-info {
       color: var(--list-meta-info-color);
+    }
+
+    :global(.trakt-link) {
+      text-decoration: none;
     }
   }
 

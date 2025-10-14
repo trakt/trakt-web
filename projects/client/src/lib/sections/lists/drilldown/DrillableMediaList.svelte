@@ -16,12 +16,14 @@
 
   const { drilldownLabel, source, urlBuilder, ...props }: DrillableList<T, M> =
     $props();
+
+  const href = $derived(urlBuilder({ type: props.type, ...props.filter }));
 </script>
 
-<MediaList {...props}>
-  {#snippet actions(items, type)}
+<MediaList {...props} drilldownLink={href}>
+  {#snippet actions(items)}
     <ViewAllButton
-      href={urlBuilder({ type, ...props.filter })}
+      {href}
       label={drilldownLabel}
       disabled={items.length === 0}
       {source}

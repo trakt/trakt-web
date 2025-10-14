@@ -45,6 +45,7 @@
     empty,
     headerNavigationType,
     variant = "normal",
+    drilldownLink,
   }: SectionListProps<T> = $props();
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
@@ -110,6 +111,7 @@
         {badge}
         inset="title"
         navigationType={headerNavigationType}
+        href={drilldownLink}
       />
     {/if}
     <div

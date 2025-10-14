@@ -2,6 +2,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import CalendarItem from "$lib/features/calendar/CalendarItem.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CalendarButton from "./components/CalendarButton.svelte";
   import CtaItem from "./components/cta/CtaItem.svelte";
   import { useUpcomingItems } from "./stores/useUpcomingItems";
@@ -15,6 +16,7 @@
   items={$upcoming}
   title={m.list_title_upcoming_schedule()}
   --height-list={mediaListHeightResolver("landscape")}
+  drilldownLink={UrlBuilder.calendar()}
 >
   {#snippet item(entry)}
     <CalendarItem item={entry} />

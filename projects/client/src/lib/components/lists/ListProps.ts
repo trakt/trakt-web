@@ -9,4 +9,5 @@ export type ListProps<T> = {
   actions?: Snippet;
   dynamicActions?: Snippet;
   badge?: Snippet;
+  drilldownLink?: string;
 };

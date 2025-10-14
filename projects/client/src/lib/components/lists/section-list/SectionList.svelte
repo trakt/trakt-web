@@ -25,6 +25,7 @@
     metaInfo,
     actions: externalActions,
     badge,
+    drilldownLink,
   }: SectionListProps<T> = $props();
 
   const scrollContainer = writable<HTMLDivElement>();
@@ -72,6 +73,7 @@
   {badge}
   {scrollX}
   {scrollContainer}
+  {drilldownLink}
 >
   {#snippet actions()}
     {#if dynamicActions != null}
