@@ -10,13 +10,7 @@ export function useFollowing(slug: string, type: 'following' | 'followers') {
     : useQuery(followersQuery({ slug }));
 
   return {
-    profiles: derived(query, ($query) => {
-      const data = $query.data ?? [];
-      return data.map((profile) => ({
-        ...profile,
-        id: profile.slug,
-      }));
-    }),
+    profiles: derived(query, ($query) => $query.data ?? []),
     isLoading: derived(
       query,
       toLoadingState,

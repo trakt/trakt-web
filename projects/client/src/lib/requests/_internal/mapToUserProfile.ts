@@ -10,6 +10,7 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
     : undefined;
 
   return {
+    id: user.ids.trakt,
     username: user.username,
     name: toUserName(user.name),
     private: user.private,
