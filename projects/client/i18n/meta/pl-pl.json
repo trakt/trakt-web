@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Zatrzymaj meldowanie"
+    },
+    "button_text_delete_comment": {
+      "default": "Usuń komentarz"
+    },
+    "button_label_delete_comment": {
+      "default": "Usuń komentarz"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Czy na pewno chcesz usunąć swój komentarz?"
     }
   }
 }

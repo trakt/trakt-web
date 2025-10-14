@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Check-in stoppen"
+    },
+    "button_text_delete_comment": {
+      "default": "Verwijder reactie"
+    },
+    "button_label_delete_comment": {
+      "default": "Verwijder reactie"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Weet je zeker dat je je reactie wilt verwijderen?"
     }
   }
 }

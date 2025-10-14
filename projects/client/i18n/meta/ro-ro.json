@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Oprește check-in-ul"
+    },
+    "button_text_delete_comment": {
+      "default": "Șterge comentariul"
+    },
+    "button_label_delete_comment": {
+      "default": "Șterge comentariul"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Sigur doriți să ștergeți comentariul?"
     }
   }
 }

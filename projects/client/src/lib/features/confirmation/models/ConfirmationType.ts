@@ -10,4 +10,5 @@ export enum ConfirmationType {
   RemoveFromList = 'remove-from-list',
   UnfollowUser = 'unfollow-user',
   StopCheckin = 'stop-checkin',
+  DeleteComment = 'delete-comment',
 }

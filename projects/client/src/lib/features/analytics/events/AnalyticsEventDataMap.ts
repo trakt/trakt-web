@@ -44,6 +44,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.RemoveFromHistory]: never;
   [AnalyticsEvent.React]: ReactionType;
   [AnalyticsEvent.AddComment]: CommentType;
+  [AnalyticsEvent.DeleteComment]: never;
   [AnalyticsEvent.Rate]: RatingType;
   [AnalyticsEvent.CheckIn]: CheckInType;
   [AnalyticsEvent.Extras]: ExtrasType;

@@ -83,5 +83,11 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_stop_checkin({ title: props.title }),
         operation: 'destructive',
       };
+    case ConfirmationType.DeleteComment:
+      return {
+        buttonText: m.button_text_delete_comment(),
+        message: m.warning_prompt_delete_comment(),
+        operation: 'destructive',
+      };
   }
 }

@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Parar check-in"
+    },
+    "button_text_delete_comment": {
+      "default": "Apagar comentário"
+    },
+    "button_label_delete_comment": {
+      "default": "Apagar comentário"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "Tem certeza que deseja apagar seu comentário?"
     }
   }
 }

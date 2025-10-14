@@ -2079,6 +2079,15 @@
     },
     "button_text_stop_check_in": {
       "default": "Detener el registro"
+    },
+    "button_text_delete_comment": {
+      "default": "Borrar comentario"
+    },
+    "button_label_delete_comment": {
+      "default": "Borrar comentario"
+    },
+    "warning_prompt_delete_comment": {
+      "default": "¿Seguro que quieres borrar tu comentario?"
     }
   }
 }

@@ -33,6 +33,7 @@ export const AnalyticsEvent = {
   RemoveFromHistory: 'remove-from-history',
   React: buildEventKey(ACTION_PREFIX, 'react'),
   AddComment: buildEventKey(MEDIA_ACTION_PREFIX, 'add-comment'),
+  DeleteComment: buildEventKey(MEDIA_ACTION_PREFIX, 'delete-comment'),
   Rate: buildEventKey(MEDIA_ACTION_PREFIX, 'rate'),
   CheckIn: buildEventKey(MEDIA_ACTION_PREFIX, 'check-in'),
   Extras: buildEventKey(MEDIA_ACTION_PREFIX, 'extras'),
