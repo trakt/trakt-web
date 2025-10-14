@@ -10,7 +10,7 @@ export const load: LayoutLoad = ({ data }) => {
     defaultOptions: {
       queries: {
         enabled: browser,
-        retry: 5,
+        retry: 3,
         retryDelay,
         refetchOnWindowFocus: false,
       },
