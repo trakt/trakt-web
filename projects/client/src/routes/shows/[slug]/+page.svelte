@@ -4,12 +4,9 @@
   import { useParameters } from "$lib/features/parameters/useParameters";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
-  import {
-    EMPTY_SEASON_INFO,
-    useUserSeason,
-  } from "$lib/sections/lists/stores/useUserSeason";
+  import { useUserSeason } from "$lib/sections/lists/stores/useUserSeason";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
-  import { assertDefined } from "$lib/utils/assert/assertDefined";
+  import { findActiveSeason } from "$lib/utils/media/findActiveSeason";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
   import { useShow } from "./useShow";
@@ -54,32 +51,12 @@
 
   $effect.pre(() => {
     if (!isNaN(currentSeason)) return;
-
     if ($seasons == null || $show == null) return;
 
-    if ($lastWatchedSeason === EMPTY_SEASON_INFO) {
-      goToSeason($show.slug, 1);
-    }
-
-    const active = assertDefined(
-      $seasons.find((s) => s.number === $lastWatchedSeason.number) ??
-        $seasons.find((s) => s.number === 1) ??
-        $seasons.find((s) => s.number !== 0),
-      "Active season not found",
-    );
-    const isCurrentSeasonFullyWatched =
-      active.episodes.count === $lastWatchedSeason.episodes.count &&
-      active.number === $lastWatchedSeason.number;
-
-    const maxSeason = assertDefined(
-      $seasons.at(-1),
-      "Could not find last season",
-    ).number;
-    const nextSeason = Math.min(active.number + 1, maxSeason);
-
-    const activeSeason = isCurrentSeasonFullyWatched
-      ? nextSeason
-      : active.number;
+    const activeSeason = findActiveSeason({
+      seasons: $seasons,
+      lastWatchedSeason: $lastWatchedSeason,
+    });
 
     goToSeason($show.slug, activeSeason);
   });
