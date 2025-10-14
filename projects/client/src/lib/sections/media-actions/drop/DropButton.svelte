@@ -6,13 +6,21 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropIcon from "$lib/components/icons/DropIcon.svelte";
-  import { attachWarning } from "../_internal/attachWarning";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { DropButtonProps } from "./DropButtonProps";
 
   const { title, onDrop, isDropping, style, ...props }: DropButtonProps =
     $props();
 
-  const handler = attachWarning(onDrop, m.warning_prompt_drop_show({ title }));
+  const { confirm } = useConfirm();
+  const confirmDrop = $derived(
+    confirm({
+      type: ConfirmationType.DropShow,
+      title,
+      onConfirm: onDrop,
+    }),
+  );
 
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: false, color: "default" }),
@@ -22,7 +30,7 @@
     label: m.button_label_drop_show({ title }),
     color: $color,
     variant: $variant,
-    onclick: handler,
+    onclick: confirmDrop,
     disabled: isDropping,
     ...events,
   });

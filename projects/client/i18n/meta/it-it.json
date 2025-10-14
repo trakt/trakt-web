@@ -1014,7 +1014,12 @@
       "default": "Apărut"
     },
     "warning_prompt_drop_show": {
-      "default": "Sei sicuro di voler abbandonare il \"{title}\" ? Questo lo rimuoverà dalla tua lista prossimi."
+      "default": "Sei sicuro di voler abbandonare la serie \"{title}\"? Questo la rimuoverà dalla tua lista 'Continua a guardare'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Segna \"{title}\" come abbandonato"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Allerta spoiler"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Rimuovi dalla lista"
+    },
+    "button_text_stop_check_in": {
+      "default": "Interrompi il check-in"
     }
   }
 }

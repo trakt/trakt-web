@@ -3,12 +3,12 @@
   import type { MarkAsWatchedButtonIntl } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntl";
   import { MarkAsWatchedButtonIntlProvider } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntlProvider";
   import TrackIcon from "$lib/components/TrackIcon.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
   } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
-  import { attachWarning } from "../_internal/attachWarning";
-  import { getWarningMessage } from "./_internal/getWarningMessage";
 
   type TrackButtonProps = MarkAsWatchedStoreProps & {
     title: string;
@@ -25,12 +25,14 @@
     useMarkAsWatched(target),
   );
 
-  const warningMessage = $derived(getWarningMessage(title, target));
-
-  const onWatchHandler = $derived(
-    warningMessage
-      ? attachWarning(markAsWatched, warningMessage)
-      : markAsWatched,
+  const { confirm } = useConfirm();
+  const confirmMarkAsWatched = $derived(
+    confirm({
+      type: ConfirmationType.MarkAsWatched,
+      title,
+      target,
+      onConfirm: markAsWatched,
+    }),
   );
 </script>
 
@@ -38,7 +40,7 @@
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
     label={i18n.label({ title, isWatched: false, isRewatching: false })}
-    onclick={onWatchHandler}
+    onclick={confirmMarkAsWatched}
     color="purple"
   >
     <TrackIcon />

@@ -1014,7 +1014,12 @@
       "default": "Sändes"
     },
     "warning_prompt_drop_show": {
-      "default": "Är du säker på att du vill sluta följa serien \"{title}\"? Detta kommer att ta bort den från din nästa-lista."
+      "default": "Är du säker på att du vill ta bort serien \"{title}\"? Detta kommer att ta bort den från din 'Fortsätt titta'-lista.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Markera serien \"{title}\" som avslutad"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Spoiler-varning"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Ta bort från listan"
+    },
+    "button_text_stop_check_in": {
+      "default": "Stoppa check-in"
     }
   }
 }

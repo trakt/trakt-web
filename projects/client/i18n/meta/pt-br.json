@@ -1014,7 +1014,12 @@
       "default": "Estreou"
     },
     "warning_prompt_drop_show": {
-      "default": "Tem certeza que deseja abandonar \"{title}\"? Isso removerá do seu próximo item."
+      "default": "Tem certeza que deseja remover a série \"{title}\"? Isso a removerá da sua lista 'Continuar Assistindo'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Marcar \"{title}\" como abandonado"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Alerta de spoiler"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Remover da lista"
+    },
+    "button_text_stop_check_in": {
+      "default": "Parar check-in"
     }
   }
 }

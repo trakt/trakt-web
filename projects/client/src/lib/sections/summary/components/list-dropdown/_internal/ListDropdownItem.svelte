@@ -3,9 +3,9 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import * as m from "$lib/features/i18n/messages";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
-  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
   import { onMount } from "svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
   import type { ListDropdownItemProps } from "./ListDropdownItemProps";
@@ -41,13 +41,17 @@
     };
   });
 
-  const onRemoveHandler = $derived(
-    attachWarning(
-      removeFromList,
-      m.warning_prompt_remove_from_personal_list({ list: list.name, title }),
-    ),
+  const { confirm } = useConfirm();
+  const confirmRemove = $derived(
+    confirm({
+      type: ConfirmationType.RemoveFromList,
+      title,
+      name: list.name,
+      onConfirm: removeFromList,
+    }),
   );
-  const handler = $derived($isListed ? onRemoveHandler : addToList);
+
+  const handler = $derived($isListed ? confirmRemove : addToList);
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: $isListed, color: "blue" }),
   );

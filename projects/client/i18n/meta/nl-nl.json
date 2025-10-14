@@ -1014,7 +1014,12 @@
       "default": "Uitgezonden"
     },
     "warning_prompt_drop_show": {
-      "default": "Weet je zeker dat je \"{title}\" wilt verwijderen? Dit verwijdert het van je kijklijst."
+      "default": "Weet je zeker dat je de serie \"{title}\" wilt laten vallen? Dit verwijdert het uit je 'Verder kijken'-lijst.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "\"{title}\" markeren als verwijderd"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Spoilerwaarschuwing"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Verwijderen van de watchlist"
+    },
+    "button_text_stop_check_in": {
+      "default": "Check-in stoppen"
     }
   }
 }

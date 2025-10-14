@@ -1014,7 +1014,12 @@
       "default": "Излъчено"
     },
     "warning_prompt_drop_show": {
-      "default": "Сигурни ли сте, че искате да се откажете от \"{title}\" предаване? Това ще го премахне от списъка със следващите."
+      "default": "Сигурни ли сте, че искате да премахнете сериал \"{title}\"? Това ще го премахне от списъка ви 'Продължаване на гледането'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Отбележи \"{title}\" като отследвано"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Спойлер!"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Премахни от списъка"
+    },
+    "button_text_stop_check_in": {
+      "default": "Спри проверка"
     }
   }
 }

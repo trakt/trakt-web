@@ -1,10 +1,8 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
-  import { attachWarning } from "../_internal/attachWarning";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { useIsWatchlisted } from "../watchlist/useIsWatchlisted";
-  import { getWarningMessage } from "./_internal/getWarningMessage";
   import type { MarkAsWatchedActionProps } from "./MarkAsWatchedActionProps";
   import { useMarkAsWatched } from "./useMarkAsWatched";
 
@@ -28,19 +26,21 @@
   const { isWatchlisted } = $derived(useIsWatchlisted(target));
   const isRewatching = $derived(allowRewatch && $isWatched);
 
-  const warningMessage = $derived(getWarningMessage(title, target));
-
-  const onWatchHandler = $derived(
-    warningMessage
-      ? attachWarning(markAsWatched, warningMessage)
-      : markAsWatched,
+  const { confirm } = useConfirm();
+  const confirmMarkAsWatched = $derived(
+    confirm({
+      type: ConfirmationType.MarkAsWatched,
+      title,
+      target,
+      onConfirm: markAsWatched,
+    }),
   );
-
-  const onRemoveHandler = $derived(
-    attachWarning(
-      removeWatched,
-      m.warning_prompt_remove_from_watched({ title }),
-    ),
+  const confirmRemoveFromWatched = $derived(
+    confirm({
+      type: ConfirmationType.RemoveFromWatched,
+      title,
+      onConfirm: removeWatched,
+    }),
   );
 </script>
 
@@ -53,7 +53,7 @@
     isWatched={$isWatched && !$isWatchlisted}
     {isRewatching}
     isMarkingAsWatched={$isMarkingAsWatched}
-    onWatch={onWatchHandler}
-    onRemove={onRemoveHandler}
+    onWatch={confirmMarkAsWatched}
+    onRemove={confirmRemoveFromWatched}
   />
 {/if}

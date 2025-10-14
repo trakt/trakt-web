@@ -1,8 +1,8 @@
 <script lang="ts">
   import RemoveFromHistoryButton from "$lib/components/buttons/remove-from-history/RemoveFromHistoryButton.svelte";
-  import * as m from "$lib/features/i18n/messages";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { HistoryEntry } from "$lib/sections/lists/stores/useRecentlyWatchedList";
-  import { attachWarning } from "../_internal/attachWarning";
   import { useRemoveFromHistory } from "./useRemoveFromHistory";
 
   type RemoveFromHistoryActionProps = {
@@ -23,11 +23,13 @@
     useRemoveFromHistory(entry),
   );
 
-  const onRemoveHandler = $derived(
-    attachWarning(
-      removeFromHistory,
-      m.warning_prompt_remove_single_watched({ title }),
-    ),
+  const { confirm } = useConfirm();
+  const confirmRemoveFromHistory = $derived(
+    confirm({
+      type: ConfirmationType.RemoveFromHistory,
+      title,
+      onConfirm: removeFromHistory,
+    }),
   );
 </script>
 
@@ -36,5 +38,5 @@
   {title}
   {size}
   isRemoving={$isRemoving}
-  onRemove={onRemoveHandler}
+  onRemove={confirmRemoveFromHistory}
 />

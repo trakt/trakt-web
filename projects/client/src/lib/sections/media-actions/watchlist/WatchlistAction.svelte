@@ -1,9 +1,8 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { onMount } from "svelte";
-  import { attachWarning } from "../_internal/attachWarning";
   import { useWatchlist } from "./useWatchlist";
   import type { WatchlistActionProps } from "./WatchListActionProps";
 
@@ -36,11 +35,13 @@
     };
   });
 
-  const onRemoveHandler = $derived(
-    attachWarning(
-      removeFromWatchlist,
-      m.warning_prompt_remove_from_watchlist({ title }),
-    ),
+  const { confirm } = useConfirm();
+  const confirmRemove = $derived(
+    confirm({
+      type: ConfirmationType.RemoveFromWatchList,
+      title,
+      onConfirm: removeFromWatchlist,
+    }),
   );
 </script>
 
@@ -51,5 +52,5 @@
   isWatchlisted={$isWatchlisted}
   isWatchlistUpdating={$isWatchlistUpdating}
   onAdd={addToWatchlist}
-  onRemove={onRemoveHandler}
+  onRemove={confirmRemove}
 />

@@ -1,6 +1,6 @@
 import * as m from '$lib/features/i18n/messages.ts';
-import { assertDefined } from '../../../../utils/assert/assertDefined.ts';
-import type { MarkAsWatchedStoreProps } from '../useMarkAsWatched.ts';
+import type { MarkAsWatchedStoreProps } from '$lib/sections/media-actions/mark-as-watched/useMarkAsWatched.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 
 function getShowWarningMessage(
   title: string,

@@ -1,7 +1,8 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { attachWarning } from "$lib/sections/media-actions/_internal/attachWarning";
   import type { DisplayableProfileProps } from "$lib/sections/profile/DisplayableProfileProps";
   import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { useFollowUserRequest } from "./useFollowUser";
@@ -13,11 +14,13 @@
 
   const userDisplayName = $derived(toDisplayableName(profile));
 
-  const unfollowHandler = $derived(
-    attachWarning(
-      unfollowUser,
-      m.warning_prompt_unfollow_user({ username: userDisplayName }),
-    ),
+  const { confirm } = useConfirm();
+  const confirmUnfollow = $derived(
+    confirm({
+      type: ConfirmationType.UnfollowUser,
+      username: userDisplayName,
+      onConfirm: unfollowUser,
+    }),
   );
 
   const label = $derived(
@@ -36,8 +39,8 @@
   color={$isFollowed ? "red" : "purple"}
   variant={$isFollowed ? "secondary" : "primary"}
   {label}
-  onclick={() => {
-    $isFollowed ? unfollowHandler() : followUser();
+  onclick={(event) => {
+    $isFollowed ? confirmUnfollow(event) : followUser();
   }}
   disabled={$isRequestingFollow}
 >

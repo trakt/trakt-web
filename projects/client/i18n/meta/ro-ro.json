@@ -1014,7 +1014,12 @@
       "default": "S-a difuzat"
     },
     "warning_prompt_drop_show": {
-      "default": "Ești sigur că vrei să elimini \"{title}\" din lista ta? Aceasta va fi eliminată din următoarele titluri."
+      "default": "Sigur dorești să renunți la serialul \"{title}\"? Acesta va fi eliminat din lista ta 'Continuă vizionarea'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "Marchează \"{title}\" ca eliminat"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "Alertă spoiler"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "Elimină din lista de urmărire"
+    },
+    "button_text_stop_check_in": {
+      "default": "Oprește check-in-ul"
     }
   }
 }

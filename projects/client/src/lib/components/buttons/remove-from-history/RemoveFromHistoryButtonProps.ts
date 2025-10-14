@@ -6,5 +6,5 @@ export type RemoveFromHistoryButtonProps = {
   isRemoving: boolean;
   style: 'action' | 'normal' | 'dropdown-item';
   size: 'normal' | 'small';
-  onRemove: () => void;
+  onRemove: (event: MouseEvent) => void;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

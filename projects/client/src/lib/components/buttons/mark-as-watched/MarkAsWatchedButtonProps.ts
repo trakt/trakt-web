@@ -8,6 +8,6 @@ export type MarkAsWatchedButtonProps = {
   isRewatching: boolean;
   style: 'action' | 'normal' | 'dropdown-item';
   size: 'normal' | 'small';
-  onWatch: () => void;
-  onRemove: () => void;
+  onWatch: (event: MouseEvent) => void;
+  onRemove: (event: MouseEvent) => void;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

@@ -1014,7 +1014,12 @@
       "default": "放送済み"
     },
     "warning_prompt_drop_show": {
-      "default": "\"{title}\"の番組を本当に削除してもよろしいですか？これにより、視聴予定リストから削除されます。"
+      "default": "\"{title}\" を削除しますか？視聴中リストから削除されます。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     },
     "button_label_drop_show": {
       "default": "\"{title}\"の番組を視聴済みとしてフラグ付けします"
@@ -2068,6 +2073,12 @@
     },
     "text_spoiler_alert": {
       "default": "ネタバレ注意"
+    },
+    "button_text_remove_from_watchlist": {
+      "default": "ウォッチリストから削除"
+    },
+    "button_text_stop_check_in": {
+      "default": "チェックインを停止"
     }
   }
 }
