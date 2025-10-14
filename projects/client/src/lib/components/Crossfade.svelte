@@ -1,8 +1,9 @@
 <script lang="ts">
   import { type Snippet } from "svelte";
-  import { crossfade } from "svelte/transition";
+  import { cubicInOut } from "svelte/easing";
+  import { fade } from "svelte/transition";
 
-  const CROSSFADE_KEY = Symbol("crossfade");
+  const FADE_DURATION_MS = 500;
 
   const {
     childrenA,
@@ -13,32 +14,20 @@
     childrenB: Snippet;
     showA: boolean;
   } = $props();
-
-  const [send, receive] = crossfade({
-    duration: 300,
-    fallback: () => {
-      return {
-        duration: 0,
-        css: () => "",
-      };
-    },
-  });
 </script>
 
 <div class="crossfade-container">
   {#if showA}
     <div
       class="crossfade-content"
-      in:receive={{ key: CROSSFADE_KEY }}
-      out:send={{ key: CROSSFADE_KEY }}
+      transition:fade={{ duration: FADE_DURATION_MS, easing: cubicInOut }}
     >
       {@render childrenA()}
     </div>
   {:else}
     <div
       class="crossfade-content"
-      in:receive={{ key: CROSSFADE_KEY }}
-      out:send={{ key: CROSSFADE_KEY }}
+      transition:fade={{ duration: FADE_DURATION_MS, easing: cubicInOut }}
     >
       {@render childrenB()}
     </div>
