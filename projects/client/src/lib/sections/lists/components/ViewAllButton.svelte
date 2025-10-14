@@ -1,7 +1,6 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages";
-
-  import Button from "$lib/components/buttons/Button.svelte";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import ViewAllIcon from "$lib/components/icons/ViewAllIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import type { DrilldownSource } from "./models/DrilldownSource";
@@ -25,16 +24,14 @@
   const { track } = useTrack(AnalyticsEvent.Drilldown);
 </script>
 
-<Button
+<ActionButton
   {label}
   {...rest}
+  style="ghost"
   onclick={(e) => {
     track({ source: source.id, type: source.type });
     externalOnclick?.(e);
   }}
-  style="ghost"
-  variant="primary"
-  color="purple"
 >
-  {m.button_text_view_all()}
-</Button>
+  <ViewAllIcon />
+</ActionButton>
