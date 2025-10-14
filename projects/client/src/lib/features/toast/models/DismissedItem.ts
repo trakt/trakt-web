@@ -1,7 +1,7 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 
 export type DismissedItem = {
   id: number;
-  type: MediaType | 'episode';
+  type: ExtendedMediaType;
   dismissedAt: number;
 };

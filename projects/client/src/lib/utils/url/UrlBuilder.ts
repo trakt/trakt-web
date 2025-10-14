@@ -1,9 +1,10 @@
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import type { SearchParams } from '../../requests/models/SearchParams.ts';
+import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { buildParamString } from './buildParamString.ts';
 
 type TypeParams = {
-  type: MediaType | 'episode';
+  type: ExtendedMediaType;
 };
 
 type WellKnownQueryParams = {

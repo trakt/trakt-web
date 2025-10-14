@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { describe, expect, it } from 'vitest';
 import { hasAired } from './hasAired.ts';
 
@@ -9,7 +9,7 @@ function addDays(date: Date, days: number): Date {
 }
 
 describe('hasAired', () => {
-  const runCommonTests = (type: MediaType | 'episode') => {
+  const runCommonTests = (type: ExtendedMediaType) => {
     it('returns true for items that aired today', () => {
       const today = new Date();
 

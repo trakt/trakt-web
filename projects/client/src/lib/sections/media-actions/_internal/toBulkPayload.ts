@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 
 type TraktId = { ids: { trakt: number } };
 
@@ -8,7 +8,7 @@ type MediaTypeMap<T> = {
   episode: { episodes: T[] };
 };
 
-export function toBulkPayload<K extends MediaType | 'episode'>(
+export function toBulkPayload<K extends ExtendedMediaType>(
   type: K,
   ids: number[],
 ): MediaTypeMap<TraktId>[K] {

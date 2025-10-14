@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
 import { writable } from 'svelte/store';
 import type { ActivityHistory } from '../../requests/queries/users/activityHistoryQuery.ts';
@@ -24,7 +24,7 @@ const createDismissalStore = () => {
 
   return {
     latest,
-    dismiss: (id: number, type: MediaType | 'episode') => {
+    dismiss: (id: number, type: ExtendedMediaType) => {
       const dismissal: DismissedItem = {
         id,
         type,

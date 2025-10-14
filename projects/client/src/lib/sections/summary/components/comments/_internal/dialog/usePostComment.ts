@@ -1,8 +1,8 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { postCommentRequest } from '$lib/requests/queries/comments/postCommentRequest.ts';
 import { replyCommentRequest } from '$lib/requests/queries/comments/replyCommentRequest.ts';
 import { CommentError } from '$lib/sections/summary/components/comments/_internal/models/CommentError.ts';
@@ -25,7 +25,7 @@ type PostProps = {
 
 export type UseAddCommentProps = ReplyProps | PostProps;
 
-function toPostCommentPayload(type: MediaType | 'episode', id: number) {
+function toPostCommentPayload(type: ExtendedMediaType, id: number) {
   const ids = { ids: { trakt: id } };
 
   switch (type) {

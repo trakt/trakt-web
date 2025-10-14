@@ -1,8 +1,8 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 
 type HasAiredProps = {
   airDate: Date;
-  type: MediaType | 'episode';
+  type: ExtendedMediaType;
 };
 
 const MOVIE_AIR_DATE_BUFFER_DAYS = 7;
