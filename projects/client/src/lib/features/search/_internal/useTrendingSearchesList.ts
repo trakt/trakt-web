@@ -20,6 +20,14 @@ function modeToQuery(
   }
 }
 
+function hasBirthday(person: PersonSummary): boolean {
+  const today = new Date();
+  const birthday = person.birthday;
+
+  return birthday?.getMonth() === today.getMonth() &&
+    birthday?.getDate() === today.getDate();
+}
+
 export function useTrendingSearchesList(mode: SearchMode) {
   const query = useQuery(modeToQuery(mode));
 
@@ -30,7 +38,8 @@ export function useTrendingSearchesList(mode: SearchMode) {
       }
 
       if ($query.data.type === 'people') {
-        return $query.data.items as PersonSummary[];
+        return ($query.data.items as PersonSummary[])
+          .sort((a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)));
       }
 
       return ($query.data.items as MediaEntry[])
