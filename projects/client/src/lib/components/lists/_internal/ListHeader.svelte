@@ -13,6 +13,7 @@
     actions,
     badge,
     navigationType,
+    href,
     ...props
   }: {
     title: string;
@@ -23,6 +24,7 @@
     badge?: Snippet;
     inset: "all" | "title";
     navigationType?: DpadNavigationType;
+    href?: string;
   } & HTMLElementProps = $props();
 
   const { navigation } = useNavigation();
@@ -43,9 +45,9 @@
         {@render titleAction()}
       {/if}
       {#if subtitle == null}
-        <ListTitle {title} {metaInfo} style="primary" />
+        <ListTitle {title} {href} {metaInfo} style="primary" />
       {:else}
-        <ListTitle {title} {metaInfo} style="secondary" />
+        <ListTitle {title} {href} {metaInfo} style="secondary" />
         <ListTitle title={`/ ${subtitle}`} style="primary" />
       {/if}
     </div>
