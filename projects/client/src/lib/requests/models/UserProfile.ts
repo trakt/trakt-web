@@ -2,6 +2,7 @@ import { UserNameSchema } from '$lib/requests/models/UserName.ts';
 import z from 'zod';
 
 export const UserProfileSchema = z.object({
+  id: z.number(),
   username: z.string(),
   name: UserNameSchema,
   private: z.boolean(),

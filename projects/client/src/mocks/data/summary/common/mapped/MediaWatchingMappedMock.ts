@@ -6,6 +6,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   UserProfileHarryMappedMock,
   {
     'username': 'kimkitsuragi',
+    'id': 486292,
     'private': false,
     'name': {
       'full': 'Kim Kitsuragi',
@@ -25,6 +26,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'klaasje',
+    'id': 248249,
     'private': false,
     'name': {
       'full': 'Klaasje Amandou',
@@ -44,6 +46,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'cuno',
+    'id': 4436692,
     'private': false,
     'name': {
       'full': 'Cuno',
@@ -63,6 +66,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'joyce',
+    'id': 793369,
     'private': false,
     'name': {
       'full': 'Joyce Messier',
@@ -82,6 +86,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'measurehead',
+    'id': 12530721,
     'private': false,
     'name': {
       'full': 'Measurehead',
@@ -101,6 +106,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'lilian',
+    'id': 13407874,
     'private': false,
     'name': {
       'full': 'Lilian Carter',
@@ -120,6 +126,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'titus',
+    'id': 11467318,
     'private': false,
     'name': {
       'full': 'Titus Hardie',
@@ -139,6 +146,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'garte',
+    'id': 1986881,
     'private': false,
     'name': {
       'full': 'Garte',
@@ -158,6 +166,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'evrart',
+    'id': 14194266,
     'private': false,
     'name': {
       'full': 'Evrart Claire',
@@ -177,6 +186,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'thepale',
+    'id': 13670159,
     'private': false,
     'name': {
       'full': 'The Pale',
@@ -196,6 +206,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'lena',
+    'id': 10084587,
     'private': false,
     'name': {
       'full': 'Lena',
@@ -215,6 +226,7 @@ export const MediaWatchingMappedMock: UserProfile[] = [
   },
   {
     'username': 'renee',
+    'id': 2419555,
     'private': false,
     'name': {
       'full': 'Renee',
