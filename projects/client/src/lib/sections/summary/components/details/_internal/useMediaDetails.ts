@@ -2,6 +2,7 @@ import { GenreIntlProvider } from '$lib/components/summary/GenreIntlProvider.ts'
 import { getLocale, languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type {
   CrewMember,
   Job,
@@ -9,7 +10,6 @@ import type {
 } from '$lib/requests/models/MediaCrew.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { MediaStudio } from '$lib/requests/models/MediaStudio.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
 import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
@@ -78,7 +78,7 @@ function postCredits(entry: MediaEntry | EpisodeEntry) {
   };
 }
 
-function mainCredits(type: MediaType | 'episode', crew: MediaCrew) {
+function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
   const toCrewMemberWithJob = (person: CrewMember) => {
     const jobs = person.jobs.map((job) => toTranslatedValue('job', job));
     return {

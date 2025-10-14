@@ -1,6 +1,6 @@
+import type { ExtendedMediaType } from './ExtendedMediaType.ts';
 import type { MediaType } from './MediaType.ts';
 
-type ExtendedMediaType = MediaType | 'episode';
 type UserType = 'avatar' | 'settings' | 'follow';
 type ListType = 'edited' | 'deleted' | 'created';
 

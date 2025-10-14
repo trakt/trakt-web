@@ -3,8 +3,8 @@ import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { useLastWatched } from '$lib/features/toast/useLastWatched.ts';
 import { SimpleRating } from '$lib/models/SimpleRating.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { mapRatingToSimpleRating } from '$lib/sections/summary/components/rating/mapRatingToSimpleRating.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
@@ -12,7 +12,7 @@ import type { RatingsSyncRequest } from '@trakt/api';
 import { derived, get, writable } from 'svelte/store';
 import { SIMPLE_RATINGS } from './constants.ts';
 
-type RateableType = MediaType | 'episode';
+type RateableType = ExtendedMediaType;
 
 export type WatchlistStoreProps = {
   type: RateableType;
