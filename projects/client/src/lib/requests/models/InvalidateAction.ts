@@ -17,7 +17,8 @@ export type InvalidateActionOptions =
   | `${typeof INVALIDATION_ID}:listed:${MediaType}`
   | `${typeof INVALIDATION_ID}:user:${UserType}`
   | `${typeof INVALIDATION_ID}:check_in`
-  | `${typeof INVALIDATION_ID}:list:${ListType}`;
+  | `${typeof INVALIDATION_ID}:list:${ListType}`
+  | `${typeof INVALIDATION_ID}:commented:${ExtendedMediaType}`;
 
 type TypeDataMap = {
   'auth': null;
@@ -62,8 +63,6 @@ export const InvalidateAction = {
 
   Watchlisted: (type: MediaType) => buildInvalidationKey('watchlisted', type),
   Listed: (type: MediaType) => buildInvalidationKey('listed', type),
-  Commented: (type: ExtendedMediaType) =>
-    buildInvalidationKey('commented', type),
 
   Drop: buildInvalidationKey('dropped', 'show'),
 
@@ -71,7 +70,10 @@ export const InvalidateAction = {
 
   React: buildInvalidationKey('react', 'comment'),
 
-  ReplyToComment: buildInvalidationKey('comment', 'reply'),
+  Comment: {
+    Post: (type: ExtendedMediaType) => buildInvalidationKey('commented', type),
+    Reply: buildInvalidationKey('comment', 'reply'),
+  },
 
   User: {
     Avatar: buildInvalidationKey('user', 'avatar'),
