@@ -9,10 +9,9 @@
 
   type TraktPageProps = {
     title: string | undefined;
-    type?: MediaType | "webpage";
+    type?: MediaType | "webpage" | "home";
     image: string | Nil;
     info?: {
-      title: string;
       overview: string;
       runtime: number;
     };
@@ -21,19 +20,32 @@
 
   const {
     children,
-    title,
     audience,
     type = "webpage",
-    image = DEFAULT_SHARE_COVER,
+    title: _title,
+    image: _image,
     info: _info,
     hasDynamicContent = false,
   }: ChildrenProps & TraktPageProps & AudienceProps = $props();
 
   const websiteName = "Trakt Web";
+  const websiteTitle = "Track Your Shows & Movies";
   const twitterHandle = "@trakt";
-  const displayTitle = $derived(
-    title != null ? `${websiteName}: ${title}` : `${websiteName}`,
-  );
+
+  const image = $derived(_image ?? DEFAULT_SHARE_COVER);
+  const displayTitle = $derived(`${websiteName}: ${_title || websiteTitle}`);
+  const defaultOgTitle = `${websiteName}: ${websiteTitle}`;
+
+  const ogTitle = $derived.by(() => {
+    switch (type) {
+      case "home":
+        return defaultOgTitle;
+      case "webpage":
+        return displayTitle;
+      default:
+        return _title || defaultOgTitle;
+    }
+  });
 
   const ogType = $derived.by(() => {
     switch (type) {
@@ -48,9 +60,8 @@
   });
 
   const info = $derived(
-    type === "webpage"
+    type === "webpage" || type === "home"
       ? {
-          title: "Trakt Web: Track Your Shows & Movies",
           overview:
             "Trakt Web: A new, lightweight way to track your favorite movies and TV shows.",
           runtime: 0,
@@ -73,7 +84,7 @@
   <meta property="og:type" content={ogType} />
   <meta property="og:url" content={page.url.toString()} />
   <meta property="og:image" content={image} />
-  <meta property="og:title" content={title} />
+  <meta property="og:title" content={ogTitle} />
   <meta property="og:locale" content="en_US" />
   <meta property="og:updated_time" content={new Date().toISOString()} />
 
@@ -88,7 +99,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content={twitterHandle} />
-  <meta name="twitter:title" content={title} />
+  <meta name="twitter:title" content={ogTitle} />
   <meta name="twitter:image" content={image} />
   <meta name="twitter:creator" content={twitterHandle} />
 </svelte:head>
