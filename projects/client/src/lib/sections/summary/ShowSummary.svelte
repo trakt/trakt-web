@@ -52,7 +52,7 @@
   <MediaSummary {media} {studios} {intl} {crew} {streamOn} type="show">
     {#snippet contextualContent()}
       <RenderFor device={["desktop"]} audience="authenticated">
-        {#if episode != null}
+        {#if episode != null && episode.remaining > 0}
           <EpisodeItem {episode} show={media} variant="next" />
         {/if}
       </RenderFor>
