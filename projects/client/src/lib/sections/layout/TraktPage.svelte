@@ -6,6 +6,7 @@
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
+  import UniqueMetaTag from "./_internal/UniqueMetaTag.svelte";
 
   type TraktPageProps = {
     title: string | undefined;
@@ -80,28 +81,34 @@
 
 <svelte:head>
   <title>{displayTitle}</title>
-  <meta property="og:site_name" content={websiteName} />
-  <meta property="og:type" content={ogType} />
-  <meta property="og:url" content={page.url.toString()} />
-  <meta property="og:image" content={image} />
-  <meta property="og:title" content={ogTitle} />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:updated_time" content={new Date().toISOString()} />
+  <UniqueMetaTag property="og:site_name" content={websiteName} />
+  <UniqueMetaTag property="og:type" content={ogType} />
+  <UniqueMetaTag property="og:url" content={page.url.toString()} />
+  <UniqueMetaTag property="og:image" content={image} />
+  <UniqueMetaTag property="og:title" content={ogTitle} />
+  <UniqueMetaTag property="og:locale" content="en_US" />
+  <UniqueMetaTag
+    property="og:updated_time"
+    content={new Date().toISOString()}
+  />
 
   {#if info != null}
-    <meta name="description" content={info.overview} />
-    <meta property="og:description" content={info.overview} />
+    <UniqueMetaTag name="description" content={info.overview} />
+    <UniqueMetaTag property="og:description" content={info.overview} />
     {#if info.runtime > 0}
-      <meta property="video:duration" content={`${info.runtime * 60}`} />
+      <UniqueMetaTag
+        property="video:duration"
+        content={`${info.runtime * 60}`}
+      />
     {/if}
-    <meta name="twitter:description" content={info.overview} />
+    <UniqueMetaTag name="twitter:description" content={info.overview} />
   {/if}
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content={twitterHandle} />
-  <meta name="twitter:title" content={ogTitle} />
-  <meta name="twitter:image" content={image} />
-  <meta name="twitter:creator" content={twitterHandle} />
+  <UniqueMetaTag name="twitter:card" content="summary_large_image" />
+  <UniqueMetaTag name="twitter:site" content={twitterHandle} />
+  <UniqueMetaTag name="twitter:title" content={ogTitle} />
+  <UniqueMetaTag name="twitter:image" content={image} />
+  <UniqueMetaTag name="twitter:creator" content={twitterHandle} />
 </svelte:head>
 
 <RenderFor {audience}>
