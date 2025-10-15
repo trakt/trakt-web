@@ -1,9 +1,9 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import Sidebar from "$lib/sections/navbar/components/filter/_internal/Sidebar.svelte";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
   import { writable } from "svelte/store";
   import { FEATURE_FLAG_LOCAL_STORAGE_KEY } from "./_internal/createFeatureFlagContext.ts";
@@ -39,7 +39,7 @@
   </ActionButton>
 
   {#if $isOpen}
-    <Sidebar {onClose} title="Feature Flags" hasAutoClose={false}>
+    <Drawer {onClose} title="Feature Flags" hasAutoClose={false}>
       {#if hasFlags}
         {#each Object.entries($flags) as [key, value]}
           <div class="feature-flag-item">
@@ -56,7 +56,7 @@
       {:else}
         <p class="meta-info">Currently there aren't any feature flags 🎉</p>
       {/if}
-    </Sidebar>
+    </Drawer>
   {/if}
 </RenderFor>
 
