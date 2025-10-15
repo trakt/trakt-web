@@ -19,6 +19,7 @@
   audience="all"
   image={DEFAULT_SHARE_COVER}
   title={m.page_title_home()}
+  type="home"
 >
   <TraktPageCoverSetter />
 
