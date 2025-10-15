@@ -1,0 +1,190 @@
+<script lang="ts">
+  import * as m from "$lib/features/i18n/messages.ts";
+  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { navigationTrap } from "$lib/features/navigation/navigationTrap";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { slide } from "svelte/transition";
+  import ActionButton from "../buttons/ActionButton.svelte";
+  import CloseIcon from "../icons/CloseIcon.svelte";
+  import { useDrawerPortal } from "./_internal/useDrawerPortal";
+  import { verticalDrag } from "./_internal/verticalDrag";
+
+  const DRAWER_CLASS = "trakt-drawer";
+
+  type DrawerProps = {
+    onClose: () => void;
+    title: string;
+    hasAutoClose?: boolean;
+    trapSelector?: string;
+  } & ChildrenProps;
+
+  const {
+    children,
+    onClose,
+    title,
+    hasAutoClose = true,
+    trapSelector,
+  }: DrawerProps = $props();
+
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+  const slideAxis = $derived($isMobile ? "y" : "x");
+
+  const { portal } = $derived(useDrawerPortal({ hasAutoClose, onClose }));
+
+  const trap = $derived((element: HTMLElement) => {
+    if (trapSelector) {
+      return navigationTrap(element, trapSelector);
+    }
+  });
+</script>
+
+<div
+  class={DRAWER_CLASS}
+  transition:slide={{ duration: 150, axis: slideAxis }}
+  use:portal
+  use:trap
+>
+  <RenderFor audience="all" device={["mobile"]}>
+    <div
+      class="trakt-drawer-drag-handle"
+      use:verticalDrag={{
+        onClose,
+        parentClass: DRAWER_CLASS,
+        fullscreenClass: "is-fullscreen",
+        dragClass: "is-dragging",
+        offsetVariable: "--drag-offset",
+      }}
+    >
+      <div class="drag-indicator"></div>
+    </div>
+  </RenderFor>
+
+  <div
+    class="trakt-drawer-header"
+    data-dpad-navigation={DpadNavigationType.List}
+  >
+    {title}
+
+    <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+      <ActionButton
+        onclick={onClose}
+        label={m.button_label_close()}
+        style="ghost"
+        navigationType={DpadNavigationType.Item}
+        --color-foreground-default="var(--color-text-secondary)"
+      >
+        <CloseIcon />
+      </ActionButton>
+    </RenderFor>
+  </div>
+
+  <div class="trakt-drawer-content">
+    {@render children()}
+  </div>
+</div>
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-drawer {
+    --drawer-size: var(--ni-300);
+    --drawer-padding: var(--ni-16);
+    --drawer-gap: var(--gap-m);
+
+    touch-action: none;
+
+    z-index: var(--layer-menu);
+    position: fixed;
+    box-sizing: border-box;
+
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    width: var(--drawer-size);
+    padding-top: var(--drawer-padding);
+    padding-bottom: calc(
+      var(--drawer-padding) + env(safe-area-inset-bottom, 0)
+    );
+
+    background: var(--cm-background-70);
+
+    box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
+      var(--cm-shadow-25);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--drawer-gap);
+
+    border-top-left-radius: var(--border-radius-m);
+    border-bottom-left-radius: var(--border-radius-m);
+
+    backdrop-filter: blur(var(--ni-12));
+
+    &:has(.trakt-drawer-drag-handle) {
+      padding-top: 0;
+    }
+
+    @include for-mobile {
+      --mobile-drawer-height: var(--drawer-size);
+
+      top: initial;
+      left: 0;
+
+      width: initial;
+      height: calc(var(--mobile-drawer-height) - var(--drag-offset, 0px));
+
+      border-bottom-left-radius: initial;
+      border-top-right-radius: var(--border-radius-m);
+
+      box-shadow: var(--ni-8) var(--ni-0) var(--ni-8) var(--ni-0)
+        var(--cm-shadow-25);
+
+      &:global(:not(.is-dragging)) {
+        transition: height var(--transition-increment) ease-in-out;
+      }
+
+      &:global(.is-fullscreen) {
+        --mobile-drawer-height: calc(100vh - env(safe-area-inset-top, 0px));
+      }
+    }
+  }
+
+  .trakt-drawer-drag-handle {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: calc(-1 * var(--drawer-gap));
+    padding: var(--ni-18) 0;
+
+    .drag-indicator {
+      width: var(--ni-32);
+      height: var(--ni-4);
+      border-radius: var(--ni-2);
+
+      background: var(--color-text-secondary);
+    }
+  }
+
+  .trakt-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .trakt-drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+
+    overflow-y: auto;
+    padding-bottom: var(--ni-8);
+  }
+
+  .trakt-drawer-header,
+  .trakt-drawer-content {
+    padding-left: var(--drawer-padding);
+    padding-right: var(--drawer-padding);
+  }
+</style>
