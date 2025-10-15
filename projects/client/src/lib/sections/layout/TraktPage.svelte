@@ -65,48 +65,32 @@
         }
       : {},
   );
-
-  /*
-    We manually make Svelte render meta tags in a reactive way since
-    Svelte does not update initial tags: https://github.com/sveltejs/svelte/issues/5668
-  */
-  const generateMetaTags = $derived(() => {
-    const tags = [
-      `<meta property="og:site_name" content="${websiteName}" />`,
-      `<meta property="og:type" content="${ogType}" />`,
-      `<meta property="og:url" content="${page.url.toString()}" />`,
-      `<meta property="og:image" content="${image}" />`,
-      `<meta property="og:title" content="${title}" />`,
-      `<meta property="og:locale" content="en_US" />`,
-      `<meta property="og:updated_time" content="${new Date().toISOString()}" />`,
-      `<meta name="twitter:card" content="summary_large_image" />`,
-      `<meta name="twitter:site" content="${twitterHandle}" />`,
-      `<meta name="twitter:title" content="${title}" />`,
-      `<meta name="twitter:image" content="${image}" />`,
-      `<meta name="twitter:creator" content="${twitterHandle}" />`,
-    ];
-
-    if (info != null) {
-      tags.push(
-        `<meta name="description" content="${info.overview}" />`,
-        `<meta property="og:description" content="${info.overview}" />`,
-        `<meta name="twitter:description" content="${info.overview}" />`,
-      );
-
-      if (info.runtime > 0) {
-        tags.push(
-          `<meta property="video:duration" content="${info.runtime * 60}" />`,
-        );
-      }
-    }
-
-    return tags.join("\n");
-  });
 </script>
 
 <svelte:head>
   <title>{displayTitle}</title>
-  {@html generateMetaTags()}
+  <meta property="og:site_name" content={websiteName} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={page.url.toString()} />
+  <meta property="og:image" content={image} />
+  <meta property="og:title" content={title} />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:updated_time" content={new Date().toISOString()} />
+
+  {#if info != null}
+    <meta name="description" content={info.overview} />
+    <meta property="og:description" content={info.overview} />
+    {#if info.runtime > 0}
+      <meta property="video:duration" content={`${info.runtime * 60}`} />
+    {/if}
+    <meta name="twitter:description" content={info.overview} />
+  {/if}
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content={twitterHandle} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:image" content={image} />
+  <meta name="twitter:creator" content={twitterHandle} />
 </svelte:head>
 
 <RenderFor {audience}>
