@@ -39,16 +39,16 @@ function mapShowProgressResponse(
   item: ShowProgressResponse,
 ): EpisodeProgressEntry {
   const episode = item.next_episode;
-  const posterCandidate = findDefined(...(episode.images?.screenshot ?? []));
+  const posterCandidate = findDefined(...(episode?.images?.screenshot ?? []));
 
-  const airDate = new Date(episode.first_aired ?? MAX_DATE);
+  const airDate = new Date(episode?.first_aired ?? MAX_DATE);
 
   return {
-    id: episode.ids.trakt,
-    title: episode.title,
-    season: episode.season,
-    number: episode.number,
-    runtime: episode.runtime ?? NaN,
+    id: episode?.ids.trakt ?? -1,
+    title: episode?.title ?? '',
+    season: episode?.season ?? -1,
+    number: episode?.number ?? -1,
+    runtime: episode?.runtime ?? NaN,
     cover: {
       url: prependHttps(posterCandidate),
     },
@@ -57,9 +57,9 @@ function mapShowProgressResponse(
     completed: item.completed,
     remaining: item.aired - item.completed,
     minutesLeft: item.stats?.minutes_left ?? 0,
-    type: episode.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
+    type: episode?.episode_type as EpisodeType ?? EpisodeUnknownType.unknown,
     genres: [],
-    overview: episode.overview ?? '',
+    overview: episode?.overview ?? '',
     year: airDate.getFullYear(),
     postCredits: mapToPostCredits(episode),
   };
