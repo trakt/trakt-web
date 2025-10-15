@@ -125,7 +125,7 @@ export const UrlBuilder = {
     return mediaDrilldownFactory('popular')(params);
   },
   social: {
-    activity: (_: UrlBuilderParams) => {
+    activity: () => {
       return '/social/activity';
     },
   },
