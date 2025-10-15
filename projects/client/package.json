@@ -76,7 +76,7 @@
     "@tanstack/svelte-query": "5.85.5",
     "@tanstack/svelte-query-devtools": "5.85.5",
     "@tanstack/svelte-query-persist-client": "5.85.5",
-    "@trakt/api": "npm:@jsr/trakt__api@0.2.33",
+    "@trakt/api": "npm:@jsr/trakt__api@0.2.34",
     "@ts-rest/core": "3.52.1",
     "@use-gesture/vanilla": "10.3.1",
     "date-fns": "4.1.0",
