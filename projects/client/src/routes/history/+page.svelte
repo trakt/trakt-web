@@ -2,7 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import RecentlyWatchedPaginatedList from "$lib/sections/lists/history/RecentlyWatchedPaginatedList.svelte";
+  import ActivityPaginatedList from "$lib/sections/lists/activity/ActivityPaginatedList.svelte";
 
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
@@ -14,5 +14,8 @@
 >
   <TraktPageCoverSetter />
 
-  <RecentlyWatchedPaginatedList title={m.list_title_recently_watched()} />
+  <ActivityPaginatedList
+    title={m.list_title_recently_watched()}
+    activityType="personal"
+  />
 </TraktPage>
