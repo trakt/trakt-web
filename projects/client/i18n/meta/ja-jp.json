@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "映画を視聴リストに追加して、初公開を逃さないでください。"
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "今後の映画を視聴リストに追加して、最新情報をゲット！"
-    },
     "button_text_find_movies": {
       "default": "映画を探す"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "公開作品を見る"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "公開予定作品を見る"
-    },
     "tag_text_preview": {
       "default": "プレビュー"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "公開中"
     },
-    "page_title_coming_soon": {
-      "default": "近日公開"
-    },
     "page_title_social_activity": {
       "default": "ソーシャルアクティビティ"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "公開済み"
     },
-    "tag_text_unreleased": {
-      "default": "未公開"
-    },
     "header_post_credits": {
       "default": "ポストクレジット"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "映画を探す"
-    },
-    "link_text_explore_anticipated": {
-      "default": "最も期待されているものを探す"
     },
     "link_label_browse_shows": {
       "default": "ドラマを検索"

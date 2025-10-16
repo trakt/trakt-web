@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Aggiungi film alla tua Watchlist e non perdere mai più nessuna anteprima."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Aggiungi i film in uscita alla tua Watchlist e resta aggiornato."
-    },
     "button_text_find_movies": {
       "default": "Trova film"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Vezi toate filmele disponibile acum"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Vezi toate filmele ce vin curând"
-    },
     "tag_text_preview": {
       "default": "Previzualizare"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Disponibile ora"
     },
-    "page_title_coming_soon": {
-      "default": "Prossimamente"
-    },
     "page_title_social_activity": {
       "default": "Attività social"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Uscito"
     },
-    "tag_text_unreleased": {
-      "default": "Inedito"
-    },
     "header_post_credits": {
       "default": "Scene post-crediti"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Esplora film"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Esplora i più attesi"
     },
     "link_label_browse_shows": {
       "default": "Sfoglia serie TV"

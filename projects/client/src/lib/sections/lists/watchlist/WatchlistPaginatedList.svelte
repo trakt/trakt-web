@@ -5,7 +5,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
-  import WatchlistTag from "./_internal/WatchlistTag.svelte";
+  import ReleasedTag from "./_internal/ReleasedTag.svelte";
   import EmptyWatchlist from "./EmptyWatchlist.svelte";
   import { statusToStore } from "./statusToStore";
   import WatchlistItem from "./WatchlistItem.svelte";
@@ -55,8 +55,8 @@
       <Toggler value={$selectedType.value} onChange={set} {options} />
     {/if}
 
-    {#if status === "unreleased" || status === "released"}
-      <WatchlistTag {status} />
+    {#if status === "released"}
+      <ReleasedTag />
     {/if}
   {/snippet}
 </DrilledMediaList>

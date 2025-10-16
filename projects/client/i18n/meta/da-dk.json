@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Tilføj film til din liste, og gå aldrig glip af en premiere."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Tilføj kommende film til din liste, og hold dig opdateret."
-    },
     "button_text_find_movies": {
       "default": "Find film"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Se alle film, der er tilgængelige nu"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Se alle film, der kommer snart"
-    },
     "tag_text_preview": {
       "default": "Forhåndsvisning"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Tilgængelig nu"
     },
-    "page_title_coming_soon": {
-      "default": "Snart"
-    },
     "page_title_social_activity": {
       "default": "Social aktivitet"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Udgivet"
     },
-    "tag_text_unreleased": {
-      "default": "Ikke udgivet"
-    },
     "header_post_credits": {
       "default": "Eftertekster"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Udforsk film"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Udforsk mest forventede"
     },
     "link_label_browse_shows": {
       "default": "Gennemse serier"

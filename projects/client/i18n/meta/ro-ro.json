@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Adaugă filme în lista ta și nu rata nicio premieră."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Adaugă filmele viitoare în lista ta și rămâi la curent."
-    },
     "button_text_find_movies": {
       "default": "Găsește Filme"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Vezi toate filmele disponibile acum"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Vezi toate filmele care vin curând"
-    },
     "tag_text_preview": {
       "default": "Previzualizare"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Disponibil acum"
     },
-    "page_title_coming_soon": {
-      "default": "În curând"
-    },
     "page_title_social_activity": {
       "default": "Activitate socială"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Lansat"
     },
-    "tag_text_unreleased": {
-      "default": "Nelansat"
-    },
     "header_post_credits": {
       "default": "Scene post-credite"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Explorează filme"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Explorează cele mai anticipate"
     },
     "link_label_browse_shows": {
       "default": "Răsfoiește seriale"

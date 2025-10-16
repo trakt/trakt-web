@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Додайте фільми до свого списку переглядів і ніколи не пропустіть прем'єри."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Додайте майбутні фільми до свого списку переглядів та залишайтеся в курсі."
-    },
     "button_text_find_movies": {
       "default": "Знайти фільми"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Переглянути всі доступні фільми"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Переглянути всі фільми, що виходять скоро"
-    },
     "tag_text_preview": {
       "default": "Перегляд"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Доступно зараз"
     },
-    "page_title_coming_soon": {
-      "default": "Найближчим часом"
-    },
     "page_title_social_activity": {
       "default": "Соціальна активність"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Вийшов"
     },
-    "tag_text_unreleased": {
-      "default": "Не вийшов"
-    },
     "header_post_credits": {
       "default": "Сцени після титрів"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Дослідити фільми"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Дослідити найбільш очікувані"
     },
     "link_label_browse_shows": {
       "default": "Огляд серіалів"

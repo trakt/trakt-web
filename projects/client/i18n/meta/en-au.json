@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Add movies to your watchlist and never miss a premiere."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Add upcoming movies to your watchlist and stay updated."
-    },
     "button_text_find_movies": {
       "default": "Find Movies"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "View all movies available now"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "View all movies coming soon"
-    },
     "tag_text_preview": {
       "default": "Preview"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Available Now"
     },
-    "page_title_coming_soon": {
-      "default": "Coming Soon"
-    },
     "page_title_social_activity": {
       "default": "Social activity"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Released"
     },
-    "tag_text_unreleased": {
-      "default": "Unreleased"
-    },
     "header_post_credits": {
       "default": "Post Credits"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Explore movies"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Explore most anticipated"
     },
     "link_label_browse_shows": {
       "default": "Browse shows"

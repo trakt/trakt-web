@@ -30,8 +30,6 @@
         return UrlBuilder.shows();
       case "released":
         return UrlBuilder.trending({ type: "movie" });
-      case "unreleased":
-        return UrlBuilder.anticipated({ type: "movie" });
       case "watchlist":
       case "favorites":
         return cta.mediaType === "show"
