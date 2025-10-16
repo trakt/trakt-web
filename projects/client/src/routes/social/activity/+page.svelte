@@ -3,7 +3,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
 
-  import SocialActivityPaginatedList from "$lib/sections/lists/activity/SocialActivityPaginatedList.svelte";
+  import ActivityPaginatedList from "$lib/sections/lists/activity/ActivityPaginatedList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
 
@@ -14,5 +14,8 @@
 >
   <TraktPageCoverSetter />
 
-  <SocialActivityPaginatedList title={m.list_title_social_activity()} />
+  <ActivityPaginatedList
+    title={m.list_title_social_activity()}
+    activityType="social"
+  />
 </TraktPage>
