@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Voeg films toe aan je kijklijst en mis nooit een première."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Voeg aankomende films toe aan je kijklijst en blijf op de hoogte."
-    },
     "button_text_find_movies": {
       "default": "Films zoeken"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Bekijk alle films nu"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Bekijk alle aankomende films"
-    },
     "tag_text_preview": {
       "default": "Voorbeeld"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Nu beschikbaar"
     },
-    "page_title_coming_soon": {
-      "default": "Binnenkort"
-    },
     "page_title_social_activity": {
       "default": "Sociale activiteit"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Uitgebracht"
     },
-    "tag_text_unreleased": {
-      "default": "Nog niet uitgebracht"
-    },
     "header_post_credits": {
       "default": "Nacreditscènes"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Films verkennen"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Meest verwachte ontdekken"
     },
     "link_label_browse_shows": {
       "default": "Series"

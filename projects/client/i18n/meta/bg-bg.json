@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Добавяй филми в списъка си за гледане и не пропускай нито една премиера."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Добавяй предстоящи филми в списъка си за наблюдение и получавай актуална информация."
-    },
     "button_text_find_movies": {
       "default": "Намери филми"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Виж всички филми, налични сега"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Виж всички филми, които ще се появят скоро"
-    },
     "tag_text_preview": {
       "default": "Предварителен преглед"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Налично сега"
     },
-    "page_title_coming_soon": {
-      "default": "Предстоящи"
-    },
     "page_title_social_activity": {
       "default": "Социална активност"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Излязъл"
     },
-    "tag_text_unreleased": {
-      "default": "Предстоящ"
-    },
     "header_post_credits": {
       "default": "Сцени след кредити"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Разгледайте филми"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Разгледай най-очакваното"
     },
     "link_label_browse_shows": {
       "default": "Разгледайте сериали"

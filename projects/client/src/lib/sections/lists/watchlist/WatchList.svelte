@@ -10,15 +10,16 @@
   import type { Snippet } from "svelte";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import WatchlistTag from "./_internal/WatchlistTag.svelte";
+  import ReleasedTag from "./_internal/ReleasedTag.svelte";
   import { statusToStore } from "./statusToStore";
   import WatchlistItem from "./WatchlistItem.svelte";
+  import { type WatchlistStatus } from "./WatchlistStatus";
 
   type WatchListProps = {
     type?: MediaType;
     drilldownLabel: string;
     empty?: Snippet;
-    status: "all" | "released" | "unreleased";
+    status: WatchlistStatus;
   };
 
   const {
@@ -85,8 +86,8 @@
       <Toggler value={$selectedType.value} onChange={set} {options} />
     {/if}
 
-    {#if status === "unreleased" || status === "released"}
-      <WatchlistTag {status} />
+    {#if status === "released"}
+      <ReleasedTag />
     {/if}
   {/snippet}
 </DrillableMediaList>

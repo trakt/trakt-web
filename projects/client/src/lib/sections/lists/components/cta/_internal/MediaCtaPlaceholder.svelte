@@ -3,7 +3,6 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import ReleasedIcon from "../icons/ReleasedIcon.svelte";
-  import UnreleasedIcon from "../icons/UnreleasedIcon.svelte";
   import UpcomingIcon from "../icons/UpcomingIcon.svelte";
   import UpNextIcon from "../icons/UpNextIcon.svelte";
   import type { MediaCta } from "../models/Cta";
@@ -36,10 +35,6 @@
 
     {#if cta.type === "upcoming"}
       <UpcomingIcon />
-    {/if}
-
-    {#if cta.type === "unreleased"}
-      <UnreleasedIcon />
     {/if}
   </div>
 {/snippet}

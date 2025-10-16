@@ -10,8 +10,6 @@ export const CtaItemIntlProvider: CtaItemIntl = {
         return m.text_cta_watchlist_released();
       case 'upcoming':
         return m.text_cta_upcoming();
-      case 'unreleased':
-        return m.text_cta_watchlist_unreleased();
       case 'social':
       case 'activity':
         return m.text_cta_activity();
@@ -41,7 +39,6 @@ export const CtaItemIntlProvider: CtaItemIntl = {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
         case 'upcoming':
-        case 'unreleased':
           return m.link_text_explore_more();
         default:
           return m.link_text_browse_more();
@@ -56,8 +53,6 @@ export const CtaItemIntlProvider: CtaItemIntl = {
           return m.link_label_browse_movies();
         case 'upcoming':
           return m.link_label_explore_shows();
-        case 'unreleased':
-          return m.link_label_explore_movies();
         case 'watchlist':
         case 'favorites':
           return cta.mediaType === 'show'

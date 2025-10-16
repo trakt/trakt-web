@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Lägg till filmer i din to-watch och missa aldrig en premiär."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Lägg till kommande filmer i din to-watch och håll dig uppdaterad."
-    },
     "button_text_find_movies": {
       "default": "Hitta filmer"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Se alla filmer som är tillgängliga nu"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Se alla filmer som kommer snart"
-    },
     "tag_text_preview": {
       "default": "Förhandsgranska"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Tillgängligt nu"
     },
-    "page_title_coming_soon": {
-      "default": "Kommande"
-    },
     "page_title_social_activity": {
       "default": "Social aktivitet"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Släppt"
     },
-    "tag_text_unreleased": {
-      "default": "Ej släppt"
-    },
     "header_post_credits": {
       "default": "Eftertexter"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Utforska filmer"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Utforska mest efterlängtade"
     },
     "link_label_browse_shows": {
       "default": "Bläddra serier"

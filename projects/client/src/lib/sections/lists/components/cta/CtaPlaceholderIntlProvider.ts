@@ -28,8 +28,6 @@ export const CtaPlaceholderIntlProvider: CtaItemIntl = {
           return m.link_text_browse_shows();
         case 'released':
           return m.link_text_browse_movies();
-        case 'unreleased':
-          return m.link_text_explore_anticipated();
         case 'upcoming':
           return m.link_text_explore_shows();
         case 'watchlist':

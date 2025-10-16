@@ -2,7 +2,6 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import {
   type AnticipatedMovie,
-  movieAnticipatedQuery,
 } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
 import {
   movieTrendingQuery,
@@ -48,10 +47,6 @@ function ctaToQuery(cta: MediaCta) {
       >;
     case 'upcoming':
       return showAnticipatedQuery(params) as CreateQueryOptions<
-        PaginatablePreviewItem
-      >;
-    case 'unreleased':
-      return movieAnticipatedQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
       >;
   }

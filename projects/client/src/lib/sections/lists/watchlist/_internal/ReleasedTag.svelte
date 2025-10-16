@@ -2,12 +2,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
 
   import InfoTag from "$lib/components/media/tags/InfoTag.svelte";
-
-  type WatchListProps = {
-    status: "released" | "unreleased";
-  };
-
-  const { status }: WatchListProps = $props();
 </script>
 
 <div class="watchlist-tag">
@@ -15,11 +9,7 @@
     {m.tag_text_movies()}
   </InfoTag>
   <InfoTag>
-    {#if status === "released"}
-      {m.tag_text_released()}
-    {:else}
-      {m.tag_text_unreleased()}
-    {/if}
+    {m.tag_text_released()}
   </InfoTag>
 </div>
 

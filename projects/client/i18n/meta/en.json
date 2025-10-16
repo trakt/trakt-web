@@ -823,6 +823,7 @@
       "default": "Coming Soon",
       "description": "Title for lists containing watchlisted movies that are coming soon. This title should be as short and concise as possible.",
       "exclude": [
+        "web",
         "ios"
       ]
     },
@@ -995,14 +996,6 @@
     "list_placeholder_released_movies": {
       "default": "Add movies to your watchlist and never miss a premiere.",
       "description": "Placeholder text shown when there are no released movies in the user's watchlist.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_placeholder_unreleased_movies": {
-      "default": "Add upcoming movies to your watchlist and stay updated.",
-      "description": "Placeholder text shown when there are no unreleased movies in the user's watchlist.",
       "exclude": [
         "android",
         "ios"
@@ -2738,14 +2731,6 @@
         "ios"
       ]
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "View all movies coming soon",
-      "description": "Aria-label for the button that allows users to view all movies that are coming soon.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "tag_text_preview": {
       "default": "Preview",
       "description": "Text for the tag that indicates a preview feature. This should be as short as possible.",
@@ -3897,14 +3882,6 @@
         "ios"
       ]
     },
-    "page_title_coming_soon": {
-      "default": "Coming Soon",
-      "description": "Title for the coming soon page.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "page_title_social_activity": {
       "default": "Social activity",
       "description": "Title for the social activity page.",
@@ -4570,14 +4547,6 @@
         "ios"
       ]
     },
-    "tag_text_unreleased": {
-      "default": "Unreleased",
-      "description": "Text for the tag that indicates a movie or show has not been released yet.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "header_post_credits": {
       "default": "Post Credits",
       "description": "Header text for the post credits section, to either denote the number of post credits scenes, or the types of post credits scenes.",
@@ -4827,7 +4796,8 @@
       "default": "Lights, camera… nothing? Add titles to your watchlist and let the binge begin.",
       "description": "Call to action text shown in the Watchlist Unreleased list, encouraging users to add unreleased movies to their watchlist.",
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "text_cta_activity": {
@@ -4975,14 +4945,6 @@
     "link_text_explore_movies": {
       "default": "Explore movies",
       "description": "Link text for exploring movies.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "link_text_explore_anticipated": {
-      "default": "Explore most anticipated",
-      "description": "Link text for exploring most anticipated movies.",
       "exclude": [
         "android",
         "ios"

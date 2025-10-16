@@ -3,7 +3,6 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 export type CtaType =
   | 'up-next'
   | 'released'
-  | 'unreleased'
   | 'activity'
   | 'upcoming'
   | 'personal-activity'

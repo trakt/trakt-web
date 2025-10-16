@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Füge Filme zu deiner Wunschliste hinzu und verpasse keine Premiere mehr."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Füge kommende Filme zu deiner Wunschliste hinzu und bleibe auf dem Laufenden wie Indiana Jones."
-    },
     "button_text_find_movies": {
       "default": "Filme finden"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Alle verfügbaren Filme"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Alle kommenden Filme"
-    },
     "tag_text_preview": {
       "default": "Vorschau"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Jetzt verfügbar"
     },
-    "page_title_coming_soon": {
-      "default": "Demnächst"
-    },
     "page_title_social_activity": {
       "default": "Soziale Aktivität"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Veröffentlicht"
     },
-    "tag_text_unreleased": {
-      "default": "Unveröffentlicht"
-    },
     "header_post_credits": {
       "default": "Post-Credit-Szenen"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Filme entdecken"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Beliebteste entdecken"
     },
     "link_label_browse_shows": {
       "default": "Serien"

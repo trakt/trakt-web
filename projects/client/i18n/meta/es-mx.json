@@ -389,9 +389,6 @@
     "list_placeholder_released_movies": {
       "default": "Agrega películas a tu lista de seguimiento y nunca te pierdas un estreno."
     },
-    "list_placeholder_unreleased_movies": {
-      "default": "Agrega películas próximas a tu lista de seguimiento y mantente al día."
-    },
     "button_text_find_movies": {
       "default": "Encuentra Películas"
     },
@@ -998,9 +995,6 @@
     "button_label_view_all_released_movies": {
       "default": "Ver todas las películas disponibles"
     },
-    "button_label_view_all_unreleased_movies": {
-      "default": "Ver todas las películas próximas"
-    },
     "tag_text_preview": {
       "default": "Vista previa"
     },
@@ -1390,9 +1384,6 @@
     "page_title_available_now": {
       "default": "Disponible ya"
     },
-    "page_title_coming_soon": {
-      "default": "Próximamente"
-    },
     "page_title_social_activity": {
       "default": "Actividad social"
     },
@@ -1632,9 +1623,6 @@
     "tag_text_released": {
       "default": "Estrenada"
     },
-    "tag_text_unreleased": {
-      "default": "Próximamente"
-    },
     "header_post_credits": {
       "default": "Escenas post-créditos"
     },
@@ -1787,9 +1775,6 @@
     },
     "link_text_explore_movies": {
       "default": "Explorar películas"
-    },
-    "link_text_explore_anticipated": {
-      "default": "Explora lo más esperado"
     },
     "link_label_browse_shows": {
       "default": "Series"
