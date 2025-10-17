@@ -15,8 +15,8 @@
 
   const { value, onChange, options, variant = "icon" }: TogglerProps = $props();
 
-  const trackerIndex = writable(
-    options.findIndex((option) => value === option.value),
+  const trackerIndex = $derived(
+    writable(options.findIndex((option) => value === option.value)),
   );
 
   /*
