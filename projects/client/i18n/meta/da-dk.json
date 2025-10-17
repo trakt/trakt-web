@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Administrer abonnement"
     },
-    "header_danger_zone": {
-      "default": "Farezone"
-    },
     "header_account_details": {
       "default": "Kontooplysninger"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Skift til en anden konto eller log ud af den nuværende."
     },
     "list_title_activity": {
       "default": "Aktivitet"

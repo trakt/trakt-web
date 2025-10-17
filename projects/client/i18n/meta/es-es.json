@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Gestionar suscripción"
     },
-    "header_danger_zone": {
-      "default": "Zona de peligro"
-    },
     "header_account_details": {
       "default": "Detalles de la cuenta"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Cambia a otra cuenta o cierra la sesión actual."
     },
     "list_title_activity": {
       "default": "Actividad"

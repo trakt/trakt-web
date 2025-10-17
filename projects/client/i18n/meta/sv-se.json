@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Hantera prenumeration"
     },
-    "header_danger_zone": {
-      "default": "Farlig zon"
-    },
     "header_account_details": {
       "default": "Kontouppgifter"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Byt till ett annat konto eller logga ut från det aktuella."
     },
     "list_title_activity": {
       "default": "Aktivitet"

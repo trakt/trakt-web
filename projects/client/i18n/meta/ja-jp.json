@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "サブスクリプションを管理"
     },
-    "header_danger_zone": {
-      "default": "危険区域"
-    },
     "header_account_details": {
       "default": "アカウントの詳細"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "別のアカウントに切り替えるか、現在のアカウントからログアウトします。"
     },
     "list_title_activity": {
       "default": "アクティビティ"

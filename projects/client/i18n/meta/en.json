@@ -5027,14 +5027,6 @@
         "ios"
       ]
     },
-    "header_danger_zone": {
-      "default": "Danger zone",
-      "description": "Header for the section that allows users to use destructive operations like logging out.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "header_account_details": {
       "default": "Account details",
       "description": "Header for the section that allows users to change their account details.",
@@ -5067,14 +5059,6 @@
           "type": "number"
         }
       },
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "description_danger_zone": {
-      "default": "Switch to another account or log out of the current one.",
-      "description": "Description for the danger zone section.",
       "exclude": [
         "android",
         "ios"

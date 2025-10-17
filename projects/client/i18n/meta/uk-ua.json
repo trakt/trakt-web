@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Керувати підпискою"
     },
-    "header_danger_zone": {
-      "default": "Зона ризику"
-    },
     "header_account_details": {
       "default": "Деталі облікового запису"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Переключіться на інший обліковий запис або вийдіть з поточного."
     },
     "list_title_activity": {
       "default": "Активність"

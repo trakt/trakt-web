@@ -1,6 +1,6 @@
 <script lang="ts">
+  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import DangerZone from "./_internal/DangerZone.svelte";
   import Genres from "./_internal/Genres.svelte";
   import Profile from "./_internal/Profile.svelte";
   import Spoilers from "./_internal/Spoilers.svelte";
@@ -12,7 +12,7 @@
   <Genres />
 
   <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
-    <DangerZone />
+    <LogoutButton />
   </RenderFor>
 </div>
 
