@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Відкрийте фільми та серіали"
+    },
+    "button_label_popular_comments": {
+      "default": "Популярні коментарі"
+    },
+    "button_text_popular_comments": {
+      "default": "Популярні"
+    },
+    "button_label_recent_comments": {
+      "default": "Недавні коментарі"
+    },
+    "button_text_recent_comments": {
+      "default": "Недавні"
     }
   }
 }

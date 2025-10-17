@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Descoperă filme și seriale"
+    },
+    "button_label_popular_comments": {
+      "default": "Comentarii populare"
+    },
+    "button_text_popular_comments": {
+      "default": "Populare"
+    },
+    "button_label_recent_comments": {
+      "default": "Comentarii recente"
+    },
+    "button_text_recent_comments": {
+      "default": "Recente"
     }
   }
 }

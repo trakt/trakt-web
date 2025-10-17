@@ -4,6 +4,8 @@
   import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import PeopleIcon from "$lib/components/icons/PeopleIcon.svelte";
+  import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
+  import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import SocialIcon from "$lib/components/icons/SocialIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
@@ -55,4 +57,12 @@
 
 {#if option.value === "followers"}
   <FollowersIcon />
+{/if}
+
+{#if option.value === "newest"}
+  <RecentIcon />
+{/if}
+
+{#if option.value === "likes"}
+  <PopularIcon />
 {/if}

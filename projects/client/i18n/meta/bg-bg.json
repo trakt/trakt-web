@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Открийте филми и сериали"
+    },
+    "button_label_popular_comments": {
+      "default": "Популярни коментари"
+    },
+    "button_text_popular_comments": {
+      "default": "Популярни"
+    },
+    "button_label_recent_comments": {
+      "default": "Последни коментари"
+    },
+    "button_text_recent_comments": {
+      "default": "Последни"
     }
   }
 }

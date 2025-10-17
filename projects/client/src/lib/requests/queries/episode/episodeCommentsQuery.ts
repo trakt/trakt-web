@@ -1,21 +1,20 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
+import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { LimitlessParams } from '$lib/requests/models/LimitlessParams.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 
-const DEFAULT_COMMENT_SORT = 'likes' as const;
-
 type EpisodeCommentsParams =
-  & { slug: string; season: number; episode: number }
+  & { slug: string; season: number; episode: number; sort: CommentSortType }
   & ApiParams
   & LimitlessParams;
 
 const showCommentsRequest = (
-  { fetch, slug, season, episode, limit }: EpisodeCommentsParams,
+  { fetch, slug, season, episode, limit, sort }: EpisodeCommentsParams,
 ) =>
   api({ fetch })
     .shows
@@ -25,7 +24,7 @@ const showCommentsRequest = (
         id: slug,
         season: castNumberAsString(season),
         episode,
-        sort: DEFAULT_COMMENT_SORT,
+        sort,
       },
       query: {
         extended: 'images',
@@ -38,7 +37,7 @@ export const episodeCommentsQuery = defineQuery({
   invalidations: [InvalidateAction.Comment.Post('episode')],
   dependencies: (
     params,
-  ) => [params.slug, params.season, params.episode, params.limit],
+  ) => [params.slug, params.season, params.episode, params.limit, params.sort],
   request: showCommentsRequest,
   mapper: (response) => response.body.map(mapToMediaComment),
   schema: MediaCommentSchema.array(),

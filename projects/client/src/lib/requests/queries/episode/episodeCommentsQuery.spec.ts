@@ -15,6 +15,7 @@ describe('episodeCommentsQuery', () => {
           season: EpisodeSiloResponseMock.season,
           episode: EpisodeSiloResponseMock.number,
           limit: 10,
+          sort: 'likes',
         })),
       mapper: (response) => {
         return response?.data;

@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Upptäck filmer och serier"
+    },
+    "button_label_popular_comments": {
+      "default": "Populära kommentarer"
+    },
+    "button_text_popular_comments": {
+      "default": "Populära"
+    },
+    "button_label_recent_comments": {
+      "default": "Senaste kommentarerna"
+    },
+    "button_text_recent_comments": {
+      "default": "Senaste"
     }
   }
 }

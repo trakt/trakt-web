@@ -1,5 +1,7 @@
 <script lang="ts">
   import Dialog from "$lib/components/dialogs/Dialog.svelte";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { CommentsProps } from "$lib/sections/summary/components/comments/CommentsProps";
   import { writable, type Writable } from "svelte/store";
@@ -22,11 +24,14 @@
     ...props
   }: CommentsDialogProps = $props();
 
+  const { current: sortType, set, options } = useToggler("comment");
+
   // FIXME: paginate instead of getting all
   const { comments } = $derived(
     useComments({
       slug: media.slug,
       limit: "all",
+      sort: $sortType.value,
       ...props,
     }),
   );
@@ -38,10 +43,15 @@
     $activeComment?.id === id && $activeComment?.isReplying;
 </script>
 
-<Dialog title={m.dialog_title_comments()} {dialog} onClose={reset}>
+<Dialog
+  title={m.dialog_title_comments()}
+  {dialog}
+  onClose={reset}
+  metaInfo={$sortType.text}
+>
   <div class="trakt-comment-threads">
     <CommentList
-      id={`comment-threads-list-${media.slug}`}
+      id={`comment-threads-list-${media.slug}-${$sortType.value}`}
       items={$comments}
       title=""
       --height-list="min(var(--height-comment-thread-list), calc(0.7 * var(--dialog-height)))"
@@ -62,6 +72,10 @@
       {/snippet}
     </CommentList>
   </div>
+
+  {#snippet badge()}
+    <Toggler value={$sortType.value} onChange={set} {options} />
+  {/snippet}
 </Dialog>
 
 <style lang="scss">

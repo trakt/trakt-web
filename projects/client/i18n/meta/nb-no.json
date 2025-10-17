@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Oppdag filmer og serier"
+    },
+    "button_label_popular_comments": {
+      "default": "Populære kommentarer"
+    },
+    "button_text_popular_comments": {
+      "default": "Populære"
+    },
+    "button_label_recent_comments": {
+      "default": "Nylige kommentarer"
+    },
+    "button_text_recent_comments": {
+      "default": "Nylige"
     }
   }
 }

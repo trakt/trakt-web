@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Scopri film e serie TV"
+    },
+    "button_label_popular_comments": {
+      "default": "Commenti popolari"
+    },
+    "button_text_popular_comments": {
+      "default": "Popolari"
+    },
+    "button_label_recent_comments": {
+      "default": "Commenti recenti"
+    },
+    "button_text_recent_comments": {
+      "default": "Recenti"
     }
   }
 }

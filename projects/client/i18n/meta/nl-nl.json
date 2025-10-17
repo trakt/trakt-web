@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Films en series ontdekken"
+    },
+    "button_label_popular_comments": {
+      "default": "Populaire reacties"
+    },
+    "button_text_popular_comments": {
+      "default": "Populair"
+    },
+    "button_label_recent_comments": {
+      "default": "Recente reacties"
+    },
+    "button_text_recent_comments": {
+      "default": "Recent"
     }
   }
 }
