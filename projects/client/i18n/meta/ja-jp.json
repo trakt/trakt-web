@@ -2076,6 +2076,12 @@
     },
     "button_label_view_all_start_watching": {
       "default": "視聴可能なアイテムをすべて表示"
+    },
+    "button_text_discover": {
+      "default": "発見"
+    },
+    "button_label_discover": {
+      "default": "映画とドラマを発見"
     }
   }
 }

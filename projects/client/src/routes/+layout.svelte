@@ -12,6 +12,7 @@
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import CookieConsentProvider from "$lib/features/cookie-consent/CookieConsentProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
+  import DiscoverProvider from "$lib/features/discover/DiscoverProvider.svelte";
   import ErrorProvider from "$lib/features/errors/ErrorProvider.svelte";
   import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
   import FilterProvider from "$lib/features/filters/FilterProvider.svelte";
@@ -155,65 +156,67 @@
                       <FeatureFlagProvider>
                         <CoverProvider>
                           <ToastProvider>
-                            <ConfirmationProvider>
-                              <CoverImage />
+                            <DiscoverProvider>
+                              <ConfirmationProvider>
+                                <CoverImage />
 
-                              <ThemeProvider theme={data.theme}>
-                                <ListScrollHistoryProvider>
-                                  <div class="trakt-layout-wrapper">
-                                    <RenderFor audience="authenticated">
-                                      <Navbar />
-                                    </RenderFor>
-                                    <RenderFor audience="public">
-                                      {#if !isOnHomePage}
+                                <ThemeProvider theme={data.theme}>
+                                  <ListScrollHistoryProvider>
+                                    <div class="trakt-layout-wrapper">
+                                      <RenderFor audience="authenticated">
                                         <Navbar />
+                                      </RenderFor>
+                                      <RenderFor audience="public">
+                                        {#if !isOnHomePage}
+                                          <Navbar />
+                                        {/if}
+                                      </RenderFor>
+                                      <div class="trakt-layout-content">
+                                        {@render children()}
+                                      </div>
+                                      <RenderFor
+                                        audience="authenticated"
+                                        navigation="default"
+                                      >
+                                        <Footer />
+                                      </RenderFor>
+                                      <RenderFor
+                                        audience="public"
+                                        navigation="default"
+                                      >
+                                        {#if !isOnHomePage}
+                                          <Footer />
+                                        {/if}
+                                      </RenderFor>
+                                    </div>
+                                    <RenderFor
+                                      audience="authenticated"
+                                      device={["mobile", "tablet-sm"]}
+                                    >
+                                      <MobileNavbar />
+                                    </RenderFor>
+                                    <RenderFor
+                                      audience="public"
+                                      device={["mobile", "tablet-sm"]}
+                                    >
+                                      {#if !isOnHomePage}
+                                        <MobileNavbar />
                                       {/if}
                                     </RenderFor>
-                                    <div class="trakt-layout-content">
-                                      {@render children()}
-                                    </div>
                                     <RenderFor
                                       audience="authenticated"
                                       navigation="default"
                                     >
-                                      <Footer />
+                                      <Toast />
                                     </RenderFor>
-                                    <RenderFor
-                                      audience="public"
-                                      navigation="default"
-                                    >
-                                      {#if !isOnHomePage}
-                                        <Footer />
-                                      {/if}
-                                    </RenderFor>
-                                  </div>
-                                  <RenderFor
-                                    audience="authenticated"
-                                    device={["mobile", "tablet-sm"]}
-                                  >
-                                    <MobileNavbar />
-                                  </RenderFor>
-                                  <RenderFor
-                                    audience="public"
-                                    device={["mobile", "tablet-sm"]}
-                                  >
-                                    {#if !isOnHomePage}
-                                      <MobileNavbar />
-                                    {/if}
-                                  </RenderFor>
-                                  <RenderFor
-                                    audience="authenticated"
-                                    navigation="default"
-                                  >
-                                    <Toast />
-                                  </RenderFor>
-                                  <SvelteQueryDevtools
-                                    buttonPosition="bottom-right"
-                                    styleNonce="opacity: 0.5"
-                                  />
-                                </ListScrollHistoryProvider>
-                              </ThemeProvider>
-                            </ConfirmationProvider>
+                                    <SvelteQueryDevtools
+                                      buttonPosition="bottom-right"
+                                      styleNonce="opacity: 0.5"
+                                    />
+                                  </ListScrollHistoryProvider>
+                                </ThemeProvider>
+                              </ConfirmationProvider>
+                            </DiscoverProvider>
                           </ToastProvider>
                         </CoverProvider>
                       </FeatureFlagProvider>
