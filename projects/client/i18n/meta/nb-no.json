@@ -2082,6 +2082,12 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Vis alle elementene på listen for å se"
+    },
+    "button_text_discover": {
+      "default": "Oppdag"
+    },
+    "button_label_discover": {
+      "default": "Oppdag filmer og serier"
     }
   }
 }

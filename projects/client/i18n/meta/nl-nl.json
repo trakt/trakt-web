@@ -2082,6 +2082,12 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Bekijk alle items op de kijklijst"
+    },
+    "button_text_discover": {
+      "default": "Ontdekken"
+    },
+    "button_label_discover": {
+      "default": "Films en series ontdekken"
     }
   }
 }

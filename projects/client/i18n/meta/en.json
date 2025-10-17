@@ -5713,6 +5713,22 @@
         "android",
         "ios"
       ]
+    },
+    "button_text_discover": {
+      "default": "Discover",
+      "description": "Text for the button that takes users to the discover page, where they can discover movies and shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_discover": {
+      "default": "Discover movies and shows",
+      "description": "Aria-label for the button that takes users to the discover page, where they can discover movies and shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

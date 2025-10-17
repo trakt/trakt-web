@@ -2082,6 +2082,12 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Wyświetl wszystkie pozycje z listy do obejrzenia"
+    },
+    "button_text_discover": {
+      "default": "Odkryj"
+    },
+    "button_label_discover": {
+      "default": "Odkryj filmy i seriale"
     }
   }
 }

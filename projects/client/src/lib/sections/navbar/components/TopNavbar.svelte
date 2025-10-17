@@ -1,8 +1,12 @@
 <script lang="ts">
   import { page } from "$app/state";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useAuth } from "$lib/features/auth/stores/useAuth";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import { trackWindowScrollDirection } from "$lib/utils/actions/trackWindowScrollDirection";
   import { HIDDEN_ROUTE_IDS } from "./_internal/constants";
@@ -16,6 +20,9 @@
   );
   const { isAuthorized } = useAuth();
   const isHidden = $derived(isHiddenRoute && $isAuthorized);
+
+  const { mode: selectedType, setMode, options, routes } = useDiscover();
+  const isOnDiscoverablePage = $derived($routes.includes(page.route.id ?? ""));
 </script>
 
 <header>
@@ -31,7 +38,22 @@
     }}
   >
     <div class="trakt-navbar-content">
-      <Greeting />
+      <RenderForFeature flag={FeatureFlag.Discover}>
+        {#snippet enabled()}
+          {#if isOnDiscoverablePage}
+            <Toggler
+              value={$selectedType}
+              variant="text"
+              onChange={setMode}
+              {options}
+            />
+          {:else}
+            <Greeting />
+          {/if}
+        {/snippet}
+
+        <Greeting />
+      </RenderForFeature>
     </div>
 
     <div class="trakt-navbar-links">

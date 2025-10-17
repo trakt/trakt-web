@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import { trackWindowScrollDirection } from "$lib/utils/actions/trackWindowScrollDirection";
+  import { FeatureFlag } from "../feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "../feature-flag/useFeatureFlag";
   import CalendarDays from "./_internal/CalendarDays.svelte";
   import CalendarHeader from "./_internal/CalendarHeader.svelte";
   import CalendarItems from "./_internal/CalendarItems.svelte";
@@ -10,9 +13,15 @@
   import { useCalendarPeriod } from "./context/useCalendarPeriod";
 
   const { startDate, days } = useCalendarPeriod();
+  const { mode } = useDiscover();
+  const { isEnabled } = $derived(useFeatureFlag(FeatureFlag.Discover));
 
   const { isLoading, calendar } = $derived(
-    useCalendar({ start: $startDate, days }),
+    useCalendar({
+      start: $startDate,
+      days,
+      type: $isEnabled ? $mode : undefined,
+    }),
   );
 
   const { observedDimension, observeDimension } =

@@ -2082,6 +2082,12 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Ver todos os itens da lista para assistir"
+    },
+    "button_text_discover": {
+      "default": "Descobrir"
+    },
+    "button_label_discover": {
+      "default": "Descobrir filmes e séries"
     }
   }
 }

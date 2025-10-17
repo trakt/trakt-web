@@ -1,12 +1,15 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { isMobileAppleDevice } from "$lib/utils/devices/isMobileAppleDevice";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import NavbarSearch from "./components/_internal/NavbarSearch.svelte";
@@ -14,6 +17,28 @@
   const isOnSearchPage = $derived(page.route.id === UrlBuilder.search());
   const showSearchInNavbar = $derived(!isMobileAppleDevice() && isOnSearchPage);
 </script>
+
+{#snippet discoverLink()}
+  <Link href={UrlBuilder.discover()}>
+    <div class="trakt-mobile-navbar-link">
+      <MediaIcon />
+    </div>
+  </Link>
+{/snippet}
+
+{#snippet showsAndMoviesLinks()}
+  <Link href={UrlBuilder.shows()}>
+    <div class="trakt-mobile-navbar-link">
+      <ShowIcon />
+    </div>
+  </Link>
+
+  <Link href={UrlBuilder.movies()}>
+    <div class="trakt-mobile-navbar-link">
+      <MovieIcon />
+    </div>
+  </Link>
+{/snippet}
 
 <div class="trakt-mobile-navbar" class:has-search={showSearchInNavbar}>
   {#if showSearchInNavbar}
@@ -27,17 +52,13 @@
       </div>
     </Link>
 
-    <Link href={UrlBuilder.shows()}>
-      <div class="trakt-mobile-navbar-link">
-        <ShowIcon />
-      </div>
-    </Link>
+    <RenderForFeature flag={FeatureFlag.Discover}>
+      {#snippet enabled()}
+        {@render discoverLink()}
+      {/snippet}
 
-    <Link href={UrlBuilder.movies()}>
-      <div class="trakt-mobile-navbar-link">
-        <MovieIcon />
-      </div>
-    </Link>
+      {@render showsAndMoviesLinks()}
+    </RenderForFeature>
 
     <RenderFor audience="authenticated">
       <Link href={UrlBuilder.lists.user()}>

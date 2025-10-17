@@ -2082,6 +2082,12 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Виж всички елементи в списъка за гледане"
+    },
+    "button_text_discover": {
+      "default": "Открий"
+    },
+    "button_label_discover": {
+      "default": "Открийте филми и сериали"
     }
   }
 }

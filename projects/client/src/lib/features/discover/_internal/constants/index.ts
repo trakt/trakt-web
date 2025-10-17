@@ -7,4 +7,6 @@ export const DISCOVER_ROUTES = [
   UrlBuilder.history.all({ type: 'movie' }),
   UrlBuilder.history.all({ type: 'show' }),
   UrlBuilder.progress('[user]'),
+  UrlBuilder.discover(),
+  UrlBuilder.startWatching('[user]'),
 ] as const;

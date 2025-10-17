@@ -1,7 +1,10 @@
 <script lang="ts">
-  import * as m from "$lib/features/i18n/messages.ts";
-
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
+  import { type MediaType } from "$lib/requests/models/MediaType";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -15,39 +18,57 @@
   const { list: hidden } = $derived(useHiddenShows());
 
   const { user } = useUser();
+  const { mode } = useDiscover();
 </script>
 
-<DrillableMediaList
-  type="episode"
-  id="up-next-list"
-  source={{ id: "continue-watching" }}
-  drilldownLabel={"drill label"}
-  useList={() =>
-    useStablePaginated({
-      type: "episode",
-      page: 1,
-      limit: DEFAULT_PAGE_SIZE,
-      useList: useUpNextList,
-      compareFn: (l, r) => l.show.id === r.show.id,
-    })}
-  urlBuilder={() => UrlBuilder.progress($user?.slug ?? "")}
-  title={m.list_title_up_next()}
-  --height-list={mediaListHeightResolver("landscape")}
->
-  {#snippet item(episode)}
-    <UpNextItem
-      style="cover"
-      {episode}
-      show={episode.show}
-      status={$hidden.includes(episode.show.id) ? "hidden" : "watching"}
-    />
+{#snippet content(type: MediaType)}
+  <DrillableMediaList
+    type="episode"
+    id="up-next-list"
+    source={{ id: "continue-watching" }}
+    drilldownLabel={"drill label"}
+    useList={() =>
+      useStablePaginated({
+        type,
+        page: 1,
+        limit: DEFAULT_PAGE_SIZE,
+        useList: useUpNextList,
+        compareFn: (l, r) => {
+          const isComparingEpisodes = "show" in l && "show" in r;
+          return isComparingEpisodes ? l.show.id === r.show.id : l.id === r.id;
+        },
+      })}
+    urlBuilder={() => UrlBuilder.progress($user?.slug ?? "")}
+    title={m.list_title_up_next()}
+    --height-list={mediaListHeightResolver("landscape")}
+  >
+    {#snippet item(mediaItem)}
+      {#if "show" in mediaItem}
+        <UpNextItem
+          style="cover"
+          episode={mediaItem}
+          show={mediaItem.show}
+          status={$hidden.includes(mediaItem.show.id) ? "hidden" : "watching"}
+        />
+      {:else}
+        <UpNextItem style="cover" movie={mediaItem} />
+      {/if}
+    {/snippet}
+
+    {#snippet ctaItem()}
+      <CtaItem cta={{ type: "up-next" }} variant="card" />
+    {/snippet}
+
+    {#snippet empty()}
+      <CtaItem cta={{ type: "up-next" }} variant="placeholder" />
+    {/snippet}
+  </DrillableMediaList>
+{/snippet}
+
+<RenderForFeature flag={FeatureFlag.Discover}>
+  {#snippet enabled()}
+    {@render content($mode)}
   {/snippet}
 
-  {#snippet ctaItem()}
-    <CtaItem cta={{ type: "up-next" }} variant="card" />
-  {/snippet}
-
-  {#snippet empty()}
-    <CtaItem cta={{ type: "up-next" }} variant="placeholder" />
-  {/snippet}
-</DrillableMediaList>
+  {@render content("show")}
+</RenderForFeature>

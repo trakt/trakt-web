@@ -3,27 +3,30 @@
   import { TestId } from "$e2e/models/TestId";
   import Button from "$lib/components/buttons/Button.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
-  import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
-  import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
+  import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
+  import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
+  import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import BetaBadge from "./BetaBadge.svelte";
-  import FilterButton from "./filter/FilterButton.svelte";
   import GetVIPLink from "./GetVIPLink.svelte";
   import JoinTraktButton from "./JoinTraktButton.svelte";
   import ProfileLink from "./ProfileLink.svelte";
   import TraktLogo from "./TraktLogo.svelte";
+  import FilterButton from "./filter/FilterButton.svelte";
 
   const isTV = $derived(browser && getDeviceType(navigator.userAgent) === "tv");
   const { user } = useUser();
@@ -35,6 +38,54 @@
   const forceCollapse = writable(false);
   const canExpand = $derived($isMouse || $navigation === "dpad");
 </script>
+
+{#snippet discoverLink()}
+  <Button
+    href={UrlBuilder.discover()}
+    label={m.button_label_discover()}
+    style="flat"
+    variant="secondary"
+    color="purple"
+    data-testid={TestId.NavBarMoviesButton}
+    navigationType={DpadNavigationType.Item}
+  >
+    {m.button_text_discover()}
+    {#snippet icon()}
+      <MediaIcon />
+    {/snippet}
+  </Button>
+{/snippet}
+
+{#snippet showsAndMoviesLinks()}
+  <Button
+    href={UrlBuilder.shows()}
+    label={m.button_label_browse_shows()}
+    style="flat"
+    variant="secondary"
+    color="purple"
+    data-testid={TestId.NavBarShowsButton}
+    navigationType={DpadNavigationType.Item}
+  >
+    {m.button_text_browse_shows()}
+    {#snippet icon()}
+      <ShowIcon />
+    {/snippet}
+  </Button>
+  <Button
+    href={UrlBuilder.movies()}
+    label={m.button_label_browse_movies()}
+    style="flat"
+    variant="secondary"
+    color="purple"
+    data-testid={TestId.NavBarMoviesButton}
+    navigationType={DpadNavigationType.Item}
+  >
+    {m.button_text_browse_movies()}
+    {#snippet icon()}
+      <MovieIcon />
+    {/snippet}
+  </Button>
+{/snippet}
 
 <header>
   <nav
@@ -82,34 +133,13 @@
           <HomeIcon />
         {/snippet}
       </Button>
-      <Button
-        href={UrlBuilder.shows()}
-        label={m.button_label_browse_shows()}
-        style="flat"
-        variant="secondary"
-        color="purple"
-        data-testid={TestId.NavBarShowsButton}
-        navigationType={DpadNavigationType.Item}
-      >
-        {m.button_text_browse_shows()}
-        {#snippet icon()}
-          <ShowIcon />
+
+      <RenderForFeature flag={FeatureFlag.Discover}>
+        {#snippet enabled()}
+          {@render discoverLink()}
         {/snippet}
-      </Button>
-      <Button
-        href={UrlBuilder.movies()}
-        label={m.button_label_browse_movies()}
-        style="flat"
-        variant="secondary"
-        color="purple"
-        data-testid={TestId.NavBarMoviesButton}
-        navigationType={DpadNavigationType.Item}
-      >
-        {m.button_text_browse_movies()}
-        {#snippet icon()}
-          <MovieIcon />
-        {/snippet}
-      </Button>
+        {@render showsAndMoviesLinks()}
+      </RenderForFeature>
 
       <RenderFor audience="authenticated">
         <Button

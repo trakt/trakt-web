@@ -2082,6 +2082,12 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Vezi toate elementele din lista de vizionat"
+    },
+    "button_text_discover": {
+      "default": "Descoperă"
+    },
+    "button_label_discover": {
+      "default": "Descoperă filme și seriale"
     }
   }
 }
