@@ -1,17 +1,21 @@
-import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 
-type HasAiredProps = {
+type AirDateProps = {
   airDate: Date;
-  type: ExtendedMediaType;
+  type: 'episode' | 'show';
 };
 
-const MOVIE_AIR_DATE_BUFFER_DAYS = 7;
+type StatusProps = {
+  status: MediaStatus;
+  type: 'movie';
+};
 
-export function hasAired({ airDate, type }: HasAiredProps): boolean {
-  const cutOffDate = new Date();
-  if (type === 'movie') {
-    cutOffDate.setDate(cutOffDate.getDate() + MOVIE_AIR_DATE_BUFFER_DAYS);
+type HasAiredProps = AirDateProps | StatusProps;
+
+export function hasAired(props: HasAiredProps): boolean {
+  if ('status' in props) {
+    return props.status === 'released';
   }
 
-  return airDate <= cutOffDate;
+  return props.airDate <= new Date();
 }

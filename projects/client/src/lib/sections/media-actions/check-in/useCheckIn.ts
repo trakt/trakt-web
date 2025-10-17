@@ -81,10 +81,9 @@ export function useCheckIn(props: UseCheckInProps) {
     isCheckingIn.set(false);
   };
 
-  const airDate = type === 'episode'
-    ? props.episode.airDate
-    : props.media.airDate;
-  const isWatchable = airDate && hasAired({ airDate, type });
+  const isWatchable = type === 'episode'
+    ? hasAired({ type: 'episode', airDate: props.episode.airDate })
+    : hasAired({ type: 'movie', status: props.media.status });
 
   return {
     checkin,

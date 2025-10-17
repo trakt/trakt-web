@@ -1,20 +1,21 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
 import { resolveWatchDate } from '$lib/stores/_internal/resolveWatchDate.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';
-import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 import { hasAired } from '../_internal/hasAired.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
 export type MarkAsWatchedStoreProps = MediaStoreProps<
-  { id: number; airDate: Date }
+  { id: number; airDate: Date; status?: MediaStatus }
 >;
 
 export function useMarkAsWatched(
@@ -70,7 +71,9 @@ export function useMarkAsWatched(
   };
 
   const isWatchable = media.every((item) => {
-    return item.airDate && hasAired({ airDate: item.airDate, type });
+    return type === 'movie'
+      ? hasAired({ type, status: item.status ?? 'unknown' })
+      : hasAired({ type, airDate: item.airDate });
   });
 
   return {
