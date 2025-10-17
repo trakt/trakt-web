@@ -1,4 +1,4 @@
-import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 import { describe, expect, it } from 'vitest';
 import { hasAired } from './hasAired.ts';
 
@@ -9,68 +9,59 @@ function addDays(date: Date, days: number): Date {
 }
 
 describe('hasAired', () => {
-  const runCommonTests = (type: ExtendedMediaType) => {
+  describe('for movies', () => {
+    it('returns true for movies with status "released"', () => {
+      expect(hasAired({ status: 'released', type: 'movie' })).toBe(true);
+    });
+
+    it('returns false for movies with status other than "released"', () => {
+      const nonReleasedStatuses: MediaStatus[] = [
+        'rumored',
+        'planned',
+        'in production',
+        'post production',
+        'canceled',
+        'unknown',
+      ];
+
+      nonReleasedStatuses.forEach((status) => {
+        expect(hasAired({ status, type: 'movie' })).toBe(false);
+      });
+    });
+  });
+
+  const runCommonTests = (type: 'show' | 'episode') => {
     it('returns true for items that aired today', () => {
       const today = new Date();
-
       expect(hasAired({ airDate: today, type })).toBe(true);
     });
 
     it('returns true for items that aired yesterday', () => {
       const yesterday = addDays(new Date(), -1);
-
       expect(hasAired({ airDate: yesterday, type })).toBe(true);
     });
 
     it('returns true for items that aired 1 week ago', () => {
       const oneWeekAgo = addDays(new Date(), -7);
-
       expect(hasAired({ airDate: oneWeekAgo, type })).toBe(true);
+    });
+
+    it('returns false for items that will air tomorrow', () => {
+      const tomorrow = addDays(new Date(), 1);
+      expect(hasAired({ airDate: tomorrow, type })).toBe(false);
+    });
+
+    it('returns false for items that will air in 7 days', () => {
+      const sevenDaysFromNow = addDays(new Date(), 7);
+      expect(hasAired({ airDate: sevenDaysFromNow, type })).toBe(false);
     });
   };
 
-  describe('for movies', () => {
-    const type = 'movie';
-    runCommonTests(type);
-
-    it('returns true for movies that will air tomorrow', () => {
-      const tomorrow = addDays(new Date(), 1);
-
-      expect(hasAired({ airDate: tomorrow, type })).toBe(true);
-    });
-
-    it('returns true for movies that will air in 7 days', () => {
-      const sevenDaysFromNow = addDays(new Date(), 7);
-
-      expect(hasAired({ airDate: sevenDaysFromNow, type })).toBe(true);
-    });
-
-    it('returns false for movies that will air in 8 days', () => {
-      const eightDaysFromNow = addDays(new Date(), 8);
-
-      expect(hasAired({ airDate: eightDaysFromNow, type })).toBe(false);
-    });
-  });
-
   describe('for shows', () => {
-    const type = 'show';
-    runCommonTests(type);
-
-    it('returns false for shows that will air tomorrow', () => {
-      const tomorrow = addDays(new Date(), 1);
-
-      expect(hasAired({ airDate: tomorrow, type })).toBe(false);
-    });
+    runCommonTests('show');
   });
 
   describe('for episodes', () => {
-    const type = 'episode';
-    runCommonTests(type);
-
-    it('returns false for episodes that will air tomorrow', () => {
-      const tomorrow = addDays(new Date(), 1);
-
-      expect(hasAired({ airDate: tomorrow, type })).toBe(false);
-    });
+    runCommonTests('episode');
   });
 });
