@@ -1,6 +1,6 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
-  import ViewAllIcon from "$lib/components/icons/ViewAllIcon.svelte";
+  import CaretRightIcon from "$lib/components/icons/CaretRightIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import type { DrilldownSource } from "./models/DrilldownSource";
@@ -33,5 +33,5 @@
     externalOnclick?.(e);
   }}
 >
-  <ViewAllIcon />
+  <CaretRightIcon />
 </ActionButton>
