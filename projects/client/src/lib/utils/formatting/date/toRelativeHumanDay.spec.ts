@@ -17,6 +17,15 @@ describe('toRelativeHumanDay', () => {
     expect(toRelativeHumanDay(today, today, 'en')).toBe('today');
   });
 
+  it('displays earlier in the day as Today', () => {
+    const today = new Date();
+    today.setHours(21, 49, 0, 0);
+
+    const earlierToday = new Date();
+    earlierToday.setHours(7, 39, 0, 0);
+    expect(toRelativeHumanDay(today, earlierToday, 'en')).toBe('today');
+  });
+
   it('displays tomorrow as Tomorrow', () => {
     const today = stripTime(new Date());
     const tomorrow = addDays(today, 1);
