@@ -1,13 +1,20 @@
 import * as m from '$lib/features/i18n/messages.ts';
-import type { MediaType } from '../../../requests/models/MediaType.ts';
-import type { ActivityType } from '../../../sections/lists/activity/models/ActivityType.ts';
+import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { ActivityType } from '$lib/sections/lists/activity/models/ActivityType.ts';
 import type { ToggleOption } from '../ToggleOption.ts';
 
-export type TogglerId = 'activity' | 'media' | 'social' | 'discover';
+export type TogglerId =
+  | 'activity'
+  | 'media'
+  | 'social'
+  | 'discover'
+  | 'comment';
 
 type DiscoverToggleType = MediaType;
 type MediaToggleType = MediaType | 'all';
 type SocialToggleType = 'following' | 'followers';
+type CommentToggleType = CommentSortType;
 
 type Toggler<T, K> = {
   id: T;
@@ -20,6 +27,7 @@ export type TogglerValueMap = {
   media: MediaToggleType;
   social: SocialToggleType;
   discover: DiscoverToggleType;
+  comment: CommentToggleType;
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
@@ -97,6 +105,23 @@ const discover: ToggleDefinition<'discover'> = {
   ],
 };
 
+const comment: ToggleDefinition<'comment'> = {
+  id: 'comment',
+  default: 'likes',
+  options: [
+    {
+      value: 'likes',
+      text: m.button_text_popular_comments(),
+      label: m.button_label_popular_comments(),
+    },
+    {
+      value: 'newest',
+      text: m.button_text_recent_comments(),
+      label: m.button_label_recent_comments(),
+    },
+  ],
+};
+
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
@@ -104,4 +129,5 @@ export const TOGGLERS: {
   media,
   social,
   discover,
+  comment,
 } as const;

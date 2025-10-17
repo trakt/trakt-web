@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "映画とドラマを発見"
+    },
+    "button_label_popular_comments": {
+      "default": "人気のコメント"
+    },
+    "button_text_popular_comments": {
+      "default": "人気"
+    },
+    "button_label_recent_comments": {
+      "default": "最近のコメント"
+    },
+    "button_text_recent_comments": {
+      "default": "最近"
     }
   }
 }

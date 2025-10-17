@@ -1,5 +1,7 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
+  import Toggler from "$lib/components/toggles/Toggler.svelte";
+  import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
@@ -14,9 +16,12 @@
 
   const { media, ...props }: CommentsProps = $props();
 
+  const { current: sortType, set, options } = useToggler("comment");
+
   const { isLoading, comments } = $derived(
     useComments({
       slug: media.slug,
+      sort: $sortType.value,
       ...props,
     }),
   );
@@ -33,10 +38,11 @@
 
 <RenderFor audience="all" navigation="default">
   <SectionList
-    id={`comments-list-${media.slug}`}
+    id={`comments-list-${media.slug}-${$sortType.value}`}
     items={$comments}
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
+    metaInfo={$sortType.text}
   >
     {#snippet item(comment)}
       <CommentCard {comment} {media} {onDrilldown} type={props.type} />
@@ -62,6 +68,10 @@
         onclick={() => onDrilldown()}
         source={{ id: "comments" }}
       />
+    {/snippet}
+
+    {#snippet badge()}
+      <Toggler value={$sortType.value} onChange={set} {options} />
     {/snippet}
   </SectionList>
 

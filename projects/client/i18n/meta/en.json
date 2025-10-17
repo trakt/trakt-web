@@ -5713,6 +5713,38 @@
         "android",
         "ios"
       ]
+    },
+    "button_label_popular_comments": {
+      "default": "Popular comments",
+      "description": "Aria-label for the button that allows users to sort comments by popularity.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_popular_comments": {
+      "default": "Popular",
+      "description": "Text for the button that allows users to sort comments by popularity. This should be short and ideally one word.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_recent_comments": {
+      "default": "Recent comments",
+      "description": "Aria-label for the button that allows users to sort comments by recency.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_recent_comments": {
+      "default": "Recent",
+      "description": "Text for the button that allows users to sort comments by recency. This should be short and ideally one word.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

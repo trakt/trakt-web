@@ -1,17 +1,16 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
 import { episodeCommentsQuery } from '$lib/requests/queries/episode/episodeCommentsQuery.ts';
 import { movieCommentsQuery } from '$lib/requests/queries/movies/movieCommentsQuery.ts';
 import { movieSentimentsQuery } from '$lib/requests/queries/movies/movieSentimentsQuery.ts';
 import { showCommentsQuery } from '$lib/requests/queries/shows/showCommentsQuery.ts';
 import { showSentimentsQuery } from '$lib/requests/queries/shows/showSentimentsQuery.ts';
-import { useStableArray } from '$lib/sections/lists/stores/useStableArray.ts';
 import type {
   EpisodeCommentProps,
   MediaCommentProps,
 } from '$lib/sections/summary/components/comments/CommentsProps.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { onMount } from 'svelte';
 import { derived, readable } from 'svelte/store';
 import { mergeComments } from './mergeComments.ts';
 
@@ -20,12 +19,14 @@ const COMMENT_LIMIT = 10;
 type UseCommentsProps = {
   slug: string;
   limit?: number | 'all';
+  sort: CommentSortType;
 } & (MediaCommentProps | EpisodeCommentProps);
 
 function typeToCommentsQuery(props: UseCommentsProps) {
   const commonProps = {
     slug: props.slug,
     limit: props.limit ?? COMMENT_LIMIT,
+    sort: props.sort,
   };
 
   switch (props.type) {
@@ -77,10 +78,13 @@ export function useComments(props: UseCommentsProps) {
     ($queries) => $queries.some((query) => query.isPending),
   );
 
-  const unstable = derived(comments, ($comments) => $comments.data ?? []);
-  const { list, set } = useStableArray<MediaComment>((l, r) => l.id === r.id);
+  const list = derived(comments, ($comments) => $comments.data ?? []);
+  // const { list, set } = dailyOrderArray<MediaComment>(
+  //   `comment-${props.sort}-order`,
+  //   (comment) => comment.id,
+  // );
 
-  onMount(() => unstable.subscribe(set));
+  // onMount(() => unstable.subscribe(set));
 
   return {
     isLoading,

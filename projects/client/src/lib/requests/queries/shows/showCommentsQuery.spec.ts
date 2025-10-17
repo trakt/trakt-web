@@ -10,7 +10,11 @@ describe('showCommentsQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          showCommentsQuery({ slug: ShowSiloMappedMock.slug, limit: 10 }),
+          showCommentsQuery({
+            slug: ShowSiloMappedMock.slug,
+            limit: 10,
+            sort: 'likes',
+          }),
         ),
       mapper: (response) => response?.data,
     });

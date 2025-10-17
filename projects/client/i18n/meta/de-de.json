@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Filme und Serien entdecken"
+    },
+    "button_label_popular_comments": {
+      "default": "Beliebte Kommentare"
+    },
+    "button_text_popular_comments": {
+      "default": "Beliebt"
+    },
+    "button_label_recent_comments": {
+      "default": "Aktuelle Kommentare"
+    },
+    "button_text_recent_comments": {
+      "default": "Aktuell"
     }
   }
 }

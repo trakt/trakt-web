@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Discover movies and shows"
+    },
+    "button_label_popular_comments": {
+      "default": "Popular comments"
+    },
+    "button_text_popular_comments": {
+      "default": "Popular"
+    },
+    "button_label_recent_comments": {
+      "default": "Recent comments"
+    },
+    "button_text_recent_comments": {
+      "default": "Recent"
     }
   }
 }

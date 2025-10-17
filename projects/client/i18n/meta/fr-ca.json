@@ -2082,6 +2082,18 @@
     },
     "button_label_discover": {
       "default": "Découvrir des films et séries"
+    },
+    "button_label_popular_comments": {
+      "default": "Commentaires populaires"
+    },
+    "button_text_popular_comments": {
+      "default": "Populaires"
+    },
+    "button_label_recent_comments": {
+      "default": "Commentaires récents"
+    },
+    "button_text_recent_comments": {
+      "default": "Récents"
     }
   }
 }
