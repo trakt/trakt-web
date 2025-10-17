@@ -2076,6 +2076,12 @@
     },
     "page_title_discover": {
       "default": "Découvrir"
+    },
+    "list_title_start_watching": {
+      "default": "Commencer à écouter"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Voir tous les titres de votre liste à écouter"
     }
   }
 }

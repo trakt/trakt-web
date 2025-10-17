@@ -2076,6 +2076,12 @@
     },
     "page_title_discover": {
       "default": "Descobrir"
+    },
+    "list_title_start_watching": {
+      "default": "Começar a Assistir"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Ver todos os itens da lista para assistir"
     }
   }
 }

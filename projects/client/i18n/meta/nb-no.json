@@ -2076,6 +2076,12 @@
     },
     "page_title_discover": {
       "default": "Oppdag"
+    },
+    "list_title_start_watching": {
+      "default": "Begynn å se"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Vis alle elementene på listen for å se"
     }
   }
 }
