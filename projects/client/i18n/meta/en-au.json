@@ -2070,6 +2070,12 @@
     },
     "page_title_discover": {
       "default": "Discover"
+    },
+    "list_title_start_watching": {
+      "default": "Start Watching"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "View all watchlist items available to watch"
     }
   }
 }

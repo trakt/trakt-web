@@ -2070,6 +2070,12 @@
     },
     "page_title_discover": {
       "default": "Открийте"
+    },
+    "list_title_start_watching": {
+      "default": "Започни гледане"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Виж всички елементи в списъка за гледане"
     }
   }
 }

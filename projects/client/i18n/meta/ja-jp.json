@@ -2070,6 +2070,12 @@
     },
     "page_title_discover": {
       "default": "発見"
+    },
+    "list_title_start_watching": {
+      "default": "視聴開始"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "視聴可能なアイテムをすべて表示"
     }
   }
 }

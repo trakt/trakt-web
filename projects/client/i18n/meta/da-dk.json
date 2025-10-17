@@ -2070,6 +2070,12 @@
     },
     "page_title_discover": {
       "default": "Opdag"
+    },
+    "list_title_start_watching": {
+      "default": "Begynd at se"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Se alle elementerne på listen, der skal ses"
     }
   }
 }

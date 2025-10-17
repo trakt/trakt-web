@@ -5681,6 +5681,22 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_start_watching": {
+      "default": "Start Watching",
+      "description": "Title for lists containing shows or movies a user should start watching. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_view_all_start_watching": {
+      "default": "View all watchlist items available to watch",
+      "description": "Aria-label for the button that allows users to view all items they should start watching.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

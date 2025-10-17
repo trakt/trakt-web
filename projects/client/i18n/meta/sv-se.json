@@ -2070,6 +2070,12 @@
     },
     "page_title_discover": {
       "default": "Upptäck"
+    },
+    "list_title_start_watching": {
+      "default": "Börja titta"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Visa alla objekt på din tittarlista"
     }
   }
 }

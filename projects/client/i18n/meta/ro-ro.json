@@ -2070,6 +2070,12 @@
     },
     "page_title_discover": {
       "default": "Descoperă"
+    },
+    "list_title_start_watching": {
+      "default": "Începe vizionarea"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Vezi toate elementele din lista de vizionat"
     }
   }
 }

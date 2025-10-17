@@ -2070,6 +2070,12 @@
     },
     "page_title_discover": {
       "default": "Scopri"
+    },
+    "list_title_start_watching": {
+      "default": "Inizia a guardare"
+    },
+    "button_label_view_all_start_watching": {
+      "default": "Visualizza tutti gli elementi da guardare"
     }
   }
 }

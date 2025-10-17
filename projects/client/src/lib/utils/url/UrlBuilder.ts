@@ -130,6 +130,7 @@ export const UrlBuilder = {
     },
   },
   progress: (user: string) => `/users/${user}/progress`,
+  startWatching: (user: string) => `/users/${user}/start-watching`,
   home: () => '/',
   shows: () => '/shows',
   discover: () => '/discover',
