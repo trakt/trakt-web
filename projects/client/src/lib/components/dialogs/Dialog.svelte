@@ -2,6 +2,7 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { Snippet } from "svelte";
   import { writable, type Writable } from "svelte/store";
   import { mobileAppleVisualViewportHack } from "./_internal/mobileAppleVisualViewportHack";
   import { useDialogState } from "./_internal/useDialogState.ts";
@@ -10,6 +11,8 @@
     title: string;
     dialog: Writable<HTMLDialogElement>;
     onClose?: () => void;
+    badge?: Snippet;
+    metaInfo?: string;
   } & ChildrenProps;
 
   const {
@@ -17,6 +20,8 @@
     children,
     onClose,
     dialog = writable(),
+    badge,
+    metaInfo,
   }: DialogProps = $props();
 
   const { isOpen, setDialogState } = useDialogState();
@@ -30,7 +35,15 @@
 >
   {#if $isOpen}
     <div class="trakt-dialog-header">
-      <h5 class="secondary">{title}</h5>
+      <div class="trakt-dialog-title-container">
+        <div class="trakt-dialog-title">
+          <h5>{title}</h5>
+          {#if metaInfo}
+            <p class="meta-info ellipsis">{metaInfo}</p>
+          {/if}
+        </div>
+        {@render badge?.()}
+      </div>
       <ActionButton
         onclick={() => $dialog.close()}
         label={m.button_label_close()}
@@ -109,6 +122,21 @@
     margin: var(--ni-12) var(--layout-distance-side);
     margin-top: calc(var(--ni-12) + env(safe-area-inset-top));
     padding: 0 var(--navbar-side-padding);
+  }
+
+  .trakt-dialog-title-container {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .trakt-dialog-title {
+    display: flex;
+    flex-direction: column;
+
+    p.meta-info {
+      color: var(--list-meta-info-color);
+    }
   }
 
   .trakt-dialog-content {
