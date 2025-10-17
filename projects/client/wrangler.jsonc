@@ -19,5 +19,6 @@
   },
   "vars": {
     "TYPESENSE_SERVER": "e97t3y0fkivoshd8p.a1.typesense.net"
-  }
+  },
+  "upload_source_maps": true
 }
