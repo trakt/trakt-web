@@ -19,4 +19,5 @@ export type DefineQueryProps<
   ttl: number | Nil;
   refetchOnWindowFocus?: boolean;
   retry?: number;
+  enabled?: (params: TRequestParams) => boolean;
 };
