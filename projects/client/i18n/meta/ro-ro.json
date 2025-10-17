@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Gestionați abonamentul"
     },
-    "header_danger_zone": {
-      "default": "Zonă de pericol"
-    },
     "header_account_details": {
       "default": "Detalii cont"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Treceți la un alt cont sau deconectați-vă de la cel curent."
     },
     "list_title_activity": {
       "default": "Activitate"

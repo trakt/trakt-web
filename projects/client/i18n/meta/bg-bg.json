@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Управление на абонамента"
     },
-    "header_danger_zone": {
-      "default": "Опасна зона"
-    },
     "header_account_details": {
       "default": "Данни за профила"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Превключете към друг профил или излезте от текущия."
     },
     "list_title_activity": {
       "default": "Активност"

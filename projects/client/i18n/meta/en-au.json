@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Manage subscription"
     },
-    "header_danger_zone": {
-      "default": "Danger zone"
-    },
     "header_account_details": {
       "default": "Account details"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Switch to another account or log out of the current one."
     },
     "list_title_activity": {
       "default": "Activity"

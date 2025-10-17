@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Gestisci abbonamento"
     },
-    "header_danger_zone": {
-      "default": "Zona di pericolo"
-    },
     "header_account_details": {
       "default": "Dettagli account"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Passa a un altro account o esci da quello attuale."
     },
     "list_title_activity": {
       "default": "Attività"

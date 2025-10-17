@@ -1808,9 +1808,6 @@
     "button_label_manage_subscription": {
       "default": "Abonnement beheren"
     },
-    "header_danger_zone": {
-      "default": "Gevaarlijke zone"
-    },
     "header_account_details": {
       "default": "Accountgegevens"
     },
@@ -1827,9 +1824,6 @@
           "type": "number"
         }
       }
-    },
-    "description_danger_zone": {
-      "default": "Schakel over naar een ander account of log uit van het huidige account."
     },
     "list_title_activity": {
       "default": "Activiteit"

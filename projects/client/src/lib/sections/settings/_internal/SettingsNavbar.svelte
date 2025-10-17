@@ -1,11 +1,11 @@
 <script lang="ts">
+  import LogoutButton from "$lib/components/buttons/logout/LogoutButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import DangerZone from "./DangerZone.svelte";
 </script>
 
 {#snippet settingsLinks()}
@@ -29,7 +29,7 @@
         {/snippet}
       </RenderForFeature>
     </div>
-    <DangerZone />
+    <LogoutButton />
   </div>
 </RenderFor>
 
