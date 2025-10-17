@@ -1,5 +1,5 @@
 import type { QueryObserverResult } from '@tanstack/svelte-query';
 
-export function toLoadingState<T>(query: QueryObserverResult<T>) {
-  return query.isPending || query.isFetching;
+export function toLoadingState(query: QueryObserverResult) {
+  return query.isEnabled && (query.isPending || query.isFetching);
 }

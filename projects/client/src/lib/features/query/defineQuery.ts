@@ -105,6 +105,7 @@ export function defineQuery<
       staleTime: params.ttl == null ? undefined : params.ttl,
       refetchOnWindowFocus: params.refetchOnWindowFocus,
       retry: params.retry,
+      enabled: params.enabled?.(requestParams) ?? true,
     };
   };
 }
