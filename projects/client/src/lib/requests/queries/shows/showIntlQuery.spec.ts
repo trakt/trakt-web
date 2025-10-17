@@ -1,5 +1,5 @@
-import { ShowSiloLanguageMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloLanguageMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
+import { ShowSiloTranslationsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloTranslationsMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
@@ -13,13 +13,13 @@ describe('showIntlQuery', () => {
           showIntlQuery({
             slug: ShowSiloMappedMock.slug,
             language: 'en',
-            region: 'us',
+            enabled: true,
           }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(ShowSiloLanguageMappedMock.get('en'));
+    expect(result).to.deep.equal([ShowSiloTranslationsMappedMock.get('en')]);
   });
 
   it('should query Dutch summary for Silo (2023)', async () => {
@@ -29,12 +29,12 @@ describe('showIntlQuery', () => {
           showIntlQuery({
             slug: ShowSiloMappedMock.slug,
             language: 'nl',
-            region: 'nl',
+            enabled: true,
           }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(ShowSiloLanguageMappedMock.get('nl'));
+    expect(result).to.deep.equal([ShowSiloTranslationsMappedMock.get('nl')]);
   });
 });

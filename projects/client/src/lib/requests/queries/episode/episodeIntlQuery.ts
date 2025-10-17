@@ -1,12 +1,10 @@
-import type {
-  AvailableLanguage,
-  AvailableRegion,
-} from '$lib/features/i18n/index.ts';
+import type { AvailableLanguage } from '$lib/features/i18n/index.ts';
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { castNumberAsString } from '$lib/utils/requests/castNumberAsString.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { EpisodeTranslationResponse } from '@trakt/api';
+import z from 'zod';
 import {
   type EpisodeIntl,
   EpisodeIntlSchema,
@@ -17,19 +15,16 @@ type EpisodeIntlParams = {
   season: number;
   episode: number;
   language: AvailableLanguage;
-  region: AvailableRegion;
+  enabled: boolean;
 } & ApiParams;
 
 function mapEpisodeIntlResponse(
-  translation?: EpisodeTranslationResponse[0],
-): EpisodeIntl | undefined {
-  if (!translation) {
-    return undefined;
-  }
-
+  translation: EpisodeTranslationResponse[0],
+): EpisodeIntl {
   return {
     title: translation.title,
     overview: translation.overview,
+    country: translation.country,
   };
 }
 
@@ -56,17 +51,10 @@ export const episodeIntlQuery = defineQuery({
     params.season,
     params.episode,
     params.language,
-    params.region,
   ],
   request: episodeIntlRequest,
-  mapper: (response, { language, region }) =>
-    response.body
-      .filter((translation) =>
-        translation.language === language &&
-        translation.country === region
-      )
-      .map(mapEpisodeIntlResponse)
-      .at(0),
-  schema: EpisodeIntlSchema.optional(),
+  mapper: (response) => response.body.map(mapEpisodeIntlResponse),
+  schema: z.array(EpisodeIntlSchema),
   ttl: time.days(7),
+  enabled: (params) => params.enabled,
 });

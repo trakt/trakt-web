@@ -8,12 +8,12 @@ import { MoviesPopularResponseMock } from '../data/movies/response/MoviesPopular
 import { MoviesTrendingResponseMock } from '../data/movies/response/MoviesTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
 import { HereticListsResponseMock } from '../data/summary/movies/heretic/response/HereticListsResponseMock.ts';
-import { MovieHereticLanguageResponseMock } from '../data/summary/movies/heretic/response/MovieHereticLanguageResponseMock.ts';
 import { MovieHereticPeopleResponseMock } from '../data/summary/movies/heretic/response/MovieHereticPeopleResponseMock.ts';
 import { MovieHereticRatingsResponseMock } from '../data/summary/movies/heretic/response/MovieHereticRatingsResponseMock.ts';
 import { MovieHereticRelatedResponseMock } from '../data/summary/movies/heretic/response/MovieHereticRelatedResponseMock.ts';
 import { MovieHereticResponseMock } from '../data/summary/movies/heretic/response/MovieHereticResponseMock.ts';
 import { MovieHereticStatsResponseMock } from '../data/summary/movies/heretic/response/MovieHereticStatsResponseMock.ts';
+import { MovieHereticTranslationsResponseMock } from '../data/summary/movies/heretic/response/MovieHereticTranslationsResponseMock.ts';
 import { MovieHereticVideoResponseMock } from '../data/summary/movies/heretic/response/MovieHereticVideoResponseMock.ts';
 import { MovieHereticWatchNowResponseMock } from '../data/summary/movies/heretic/response/MovieHereticWatchNowResponseMock.ts';
 import { MovieStudiosResponseMock } from '../data/summary/movies/heretic/response/MovieStudiosResponseMock.ts';
@@ -26,9 +26,21 @@ export const movies = [
     },
   ),
   http.get(
-    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/*`,
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/en`,
     () => {
-      return HttpResponse.json(MovieHereticLanguageResponseMock);
+      return HttpResponse.json(MovieHereticTranslationsResponseMock.get('en'));
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/nl`,
+    () => {
+      return HttpResponse.json(MovieHereticTranslationsResponseMock.get('nl'));
+    },
+  ),
+  http.get(
+    `http://localhost/movies/${MovieHereticResponseMock.ids.slug}/translations/pt`,
+    () => {
+      return HttpResponse.json(MovieHereticTranslationsResponseMock.get('pt'));
     },
   ),
   http.get(

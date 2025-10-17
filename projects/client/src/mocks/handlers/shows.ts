@@ -11,11 +11,10 @@ import { ShowsAnticipatedResponseMock } from '../data/shows/response/ShowsAntici
 import { ShowsPopularResponseMock } from '../data/shows/response/ShowsPopularResponseMock.ts';
 import { ShowsTrendingResponseMock } from '../data/shows/response/ShowsTrendingResponseMock.ts';
 import { MediaWatchingResponseMock } from '../data/summary/common/response/MediaWatchingResponseMock.ts';
-import { EpisodeSiloLanguageResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloLanguageResponseMock.ts';
 import { EpisodeSiloRatingsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloRatingsResponseMock.ts';
 import { EpisodeSiloResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
 import { EpisodeSiloStatsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloStatsResponseMock.ts';
-import { ShowSiloLanguageResponseMock } from '../data/summary/shows/silo/response/ShowSiloLanguageResponseMock.ts';
+import { EpisodeSiloTranslationsResponseMock } from '../data/summary/episodes/silo/response/EpisodeSiloTranslationsResponseMock.ts';
 import { ShowSiloPeopleResponseMock } from '../data/summary/shows/silo/response/ShowSiloPeopleResponseMock.ts';
 import { ShowSiloProgressResponseMock } from '../data/summary/shows/silo/response/ShowSiloProgressResponseMock.ts';
 import { ShowSiloRatingsResponseMock } from '../data/summary/shows/silo/response/ShowSiloRatingsResponseMock.ts';
@@ -25,6 +24,7 @@ import { ShowSiloSeasonEpisodesResponseMock } from '../data/summary/shows/silo/r
 import { ShowSiloSeasonsResponseMock } from '../data/summary/shows/silo/response/ShowSiloSeasonsResponseMock.ts';
 import { ShowSiloStatsResponseMock } from '../data/summary/shows/silo/response/ShowSiloStatsResponseMock.ts';
 import { ShowSiloStudiosResponseMock } from '../data/summary/shows/silo/response/ShowSiloStudiosResponseMock.ts';
+import { ShowSiloTranslationsResponseMock } from '../data/summary/shows/silo/response/ShowSiloTranslationsResponseMock.ts';
 import { ShowSiloVideoResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoResponseMock.ts';
 import { ShowSiloVideoSeason1ResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoSeason1ResponseMock.ts';
 import { ShowSiloVideoSeason2ResponseMock } from '../data/summary/shows/silo/response/ShowSiloVideoSeason2ResponseMock.ts';
@@ -39,10 +39,26 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/*`,
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/en`,
     () => {
       return HttpResponse.json(
-        ShowSiloLanguageResponseMock,
+        ShowSiloTranslationsResponseMock.get('en'),
+      );
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/nl`,
+    () => {
+      return HttpResponse.json(
+        ShowSiloTranslationsResponseMock.get('nl'),
+      );
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/translations/ja`,
+    () => {
+      return HttpResponse.json(
+        ShowSiloTranslationsResponseMock.get('ja'),
       );
     },
   ),
@@ -113,9 +129,15 @@ export const shows = [
     },
   ),
   http.get(
-    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/*`,
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/en`,
     () => {
-      return HttpResponse.json(EpisodeSiloLanguageResponseMock);
+      return HttpResponse.json(EpisodeSiloTranslationsResponseMock.get('en'));
+    },
+  ),
+  http.get(
+    `http://localhost/shows/${ShowSiloResponseMock.ids.slug}/seasons/${EpisodeSiloResponseMock.season}/episodes/${EpisodeSiloResponseMock.number}/translations/nl`,
+    () => {
+      return HttpResponse.json(EpisodeSiloTranslationsResponseMock.get('nl'));
     },
   ),
   http.get(
