@@ -26,10 +26,7 @@
   let trackerElement: HTMLDivElement;
   const handleChange = (index: number) => {
     trackerIndex.set(index);
-
-    requestAnimationFrame(() => {
-      trackerElement?.classList.add("moving");
-    });
+    trackerElement?.classList.add("moving");
   };
 </script>
 
@@ -97,6 +94,9 @@
 
     --tracker-offset: calc(var(--tracker-index) * var(--gap-xxs));
     --tracker-left: calc(var(--tracker-index) * var(--toggle-small-width));
+    --tracker-animation-duration: calc(
+      var(--toggler-animation-duration) + var(--toggle-animation-delay)
+    );
 
     left: calc(var(--tracker-left) + var(--tracker-offset));
     margin-left: var(--ni-4);
@@ -109,14 +109,9 @@
     border-radius: var(--border-radius-xxl);
     background-color: var(--toggler-tracker-color);
 
-    transition: var(--toggler-animation-duration) ease-in-out;
+    transition: var(--tracker-animation-duration) ease-in-out;
     transition-property: left, opacity;
     transform-origin: center;
-
-    /* To let the browser optimize rendering for these transitions */
-    will-change: transform, opacity, left, width;
-    /* To force GPU acceleration */
-    transform: translate3d(0, 0, 0);
 
     &:global(.moving) {
       animation: scaley-waley var(--toggler-animation-duration) ease-in-out
