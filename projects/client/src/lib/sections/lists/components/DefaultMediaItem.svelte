@@ -41,7 +41,7 @@
   {#if "episode" in media}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />
-  {:else if type === "movie" && rest.variant !== "activity"}
+  {:else if type === "movie" && rest.variant !== "activity" && rest.variant !== "next"}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     {#if media.airDate < new Date()}
       <DurationTag i18n={TagIntlProvider} runtime={media.runtime} />
@@ -97,7 +97,14 @@
 
 <MediaSwipe {type} {media} {style}>
   <trakt-default-media-item class:is-deemphasized={isDeemphasized}>
-    <MediaItem {type} {media} {style} {tag} {...rest} {popupActions} />
+    <MediaItem
+      {type}
+      {media}
+      {style}
+      tag={rest.variant !== "next" ? tag : undefined}
+      {...rest}
+      {popupActions}
+    />
   </trakt-default-media-item>
 </MediaSwipe>
 
