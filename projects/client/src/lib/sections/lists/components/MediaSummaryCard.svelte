@@ -136,7 +136,7 @@
       {@render badge()}
     {/if}
 
-    {#if !action && rest.variant !== "activity"}
+    {#if !action && rest.variant !== "activity" && rest.variant !== "next"}
       <SummaryCardRating
         item={rest.type === "episode" ? rest.episode : media}
       />

@@ -8,8 +8,10 @@
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
+  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
@@ -80,7 +82,7 @@
   </LandscapeCard>
 {/if}
 
-{#if rest.variant === "activity"}
+{#if variant === "activity" || variant === "next"}
   <LandscapeCard>
     {@render content(media.thumb.url)}
     <CardFooter {action} {tag}>
@@ -93,7 +95,11 @@
         </p>
       </Link>
       <p class="trakt-card-subtitle small ellipsis">
-        {toTranslatedValue("type", media.type)}
+        {#if variant === "activity"}
+          {toTranslatedValue("type", media.type)}
+        {:else}
+          {toHumanDuration({ minutes: media.runtime }, languageTag())}
+        {/if}
       </p>
     </CardFooter>
   </LandscapeCard>

@@ -10,7 +10,8 @@ import type { Snippet } from 'svelte';
 export type MediaItemVariant<T> =
   | { variant?: 'portrait' | 'landscape' } & MediaInput<T>
   | { variant: 'landscape' } & MediaInput<T>
-  | { variant: 'activity'; date: Date } & MediaInput<T>;
+  | { variant: 'activity'; date: Date } & MediaInput<T>
+  | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>;
 
 type BaseItemProps<T> = MediaItemVariant<T> & {
   badge?: Snippet;
