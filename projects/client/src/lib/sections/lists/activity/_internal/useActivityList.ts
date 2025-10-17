@@ -1,3 +1,4 @@
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SocialActivity } from '$lib/requests/models/SocialActivity.ts';
@@ -6,10 +7,12 @@ import { socialActivityQuery } from '$lib/requests/queries/users/socialActivityQ
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import type { HistoryEntry } from '$lib/sections/lists/stores/useRecentlyWatchedList.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import { derived } from 'svelte/store';
 import type { ActivityType } from '../models/ActivityType.ts';
 
 type ActivityListProps = {
   activityType: ActivityType;
+  type?: MediaType;
 } & PaginationParams;
 
 type ActivityEntry =
@@ -40,5 +43,20 @@ function typeToQuery(
 }
 
 export function useActivityList(props: ActivityListProps) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list, page, isLoading } = usePaginatedListQuery(typeToQuery(props));
+
+  return {
+    list: derived(list, ($list) => {
+      if (!props.type) {
+        return $list;
+      }
+
+      return $list.filter((entry) =>
+        entry.type === props.type ||
+        props.type === 'show' && entry.type === 'episode'
+      );
+    }),
+    page,
+    isLoading,
+  };
 }

@@ -1,4 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import {
   type UpcomingEpisodeEntry,
   upcomingEpisodesQuery,
@@ -9,7 +11,6 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { isSameDay } from 'date-fns/isSameDay';
 import { derived, type Readable } from 'svelte/store';
-import type { MediaEntry } from '../../../requests/models/MediaEntry.ts';
 import type { CalendarEntry } from '../models/CalendarEntry.ts';
 
 type CalendarItems = Array<MediaEntry | UpcomingEpisodeEntry>;
@@ -17,6 +18,7 @@ type CalendarItems = Array<MediaEntry | UpcomingEpisodeEntry>;
 type UseCalendarParams = {
   start: Date;
   days: number;
+  type?: MediaType;
 };
 
 type CalendarResult = {
@@ -24,9 +26,7 @@ type CalendarResult = {
   calendar: Readable<CalendarEntry[]>;
 };
 
-export function useCalendar(
-  { start, days }: UseCalendarParams,
-): CalendarResult {
+function typeToQueries({ start, days, type }: UseCalendarParams) {
   const [YYYY_MM_DD] = start.toISOString().split('T');
 
   const params = {
@@ -34,22 +34,36 @@ export function useCalendar(
     days,
   };
 
-  const episodes = useQuery(
-    upcomingEpisodesQuery(params) as CreateQueryOptions<CalendarItems>,
-  );
-  const movies = useQuery(
-    upcomingMoviesQuery(params) as CreateQueryOptions<CalendarItems>,
-  );
+  switch (type) {
+    case 'movie':
+      return [
+        upcomingMoviesQuery(params) as CreateQueryOptions<CalendarItems>,
+      ];
+    case 'show':
+      return [
+        upcomingEpisodesQuery(params) as CreateQueryOptions<CalendarItems>,
+      ];
+    default:
+      return [
+        upcomingMoviesQuery(params) as CreateQueryOptions<CalendarItems>,
+        upcomingEpisodesQuery(params) as CreateQueryOptions<CalendarItems>,
+      ];
+  }
+}
 
-  const queries = [episodes, movies];
+export function useCalendar(
+  props: UseCalendarParams,
+): CalendarResult {
+  const queries = typeToQueries(props)
+    .map((query) => useQuery(query));
 
   const isLoading = derived(
     queries,
     ($queries) => $queries.some(toLoadingState),
   );
 
-  const allItems = derived([movies, episodes], ([$movies, $episodes]) => {
-    return [...$movies.data ?? [], ...$episodes.data ?? []].sort((a, b) => {
+  const allItems = derived(queries, ($queries) => {
+    return $queries.flatMap((query) => query.data ?? []).sort((a, b) => {
       return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
     });
   });
@@ -59,9 +73,9 @@ export function useCalendar(
     calendar: derived(
       allItems,
       ($allItems) => {
-        return Array.from({ length: days }, (_, i) => {
-          const date = new Date(start);
-          date.setDate(start.getDate() + i);
+        return Array.from({ length: props.days }, (_, i) => {
+          const date = new Date(props.start);
+          date.setDate(props.start.getDate() + i);
 
           const items = $allItems.filter(
             (item) => isSameDay(item.airDate, date),

@@ -1,5 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import {
   type UpcomingEpisodeEntry,
   upcomingEpisodesQuery,
@@ -19,26 +20,40 @@ function daysAgo(days: number) {
   return new Date(Date.now() - ONE_DAY * days);
 }
 
-function getUpcomingCalendarQueries(startDate: string) {
+function getUpcomingCalendarQueries(
+  startDate: string,
+  type?: MediaType,
+) {
   const params = {
     startDate,
     days: DAYS_TO_FETCH,
   };
 
-  return [
-    upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
-    upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>,
-  ];
+  switch (type) {
+    case 'movie':
+      return [
+        upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>,
+      ];
+    case 'show':
+      return [
+        upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
+      ];
+    default:
+      return [
+        upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>,
+        upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
+      ];
+  }
 }
 
-export function useUpcomingItems() {
+export function useUpcomingItems(type?: MediaType) {
   const [YYYY_MM_DD] = daysAgo(0).toISOString().split('T');
   const startDate = assertDefined(
     YYYY_MM_DD,
     'Could not extract current date.',
   );
 
-  const queries = getUpcomingCalendarQueries(startDate)
+  const queries = getUpcomingCalendarQueries(startDate, type)
     .map((query) => useQuery(query));
 
   const isLoading = derived(
