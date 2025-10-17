@@ -2067,6 +2067,9 @@
     },
     "warning_prompt_delete_comment": {
       "default": "Tem certeza que deseja apagar seu comentário?"
+    },
+    "page_title_discover": {
+      "default": "Descobrir"
     }
   }
 }

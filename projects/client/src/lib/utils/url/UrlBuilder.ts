@@ -132,6 +132,7 @@ export const UrlBuilder = {
   progress: (user: string) => `/users/${user}/progress`,
   home: () => '/',
   shows: () => '/shows',
+  discover: () => '/discover',
   media: (type: MediaType, id: string) => {
     switch (type) {
       case 'show':

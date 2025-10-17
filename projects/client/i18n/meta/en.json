@@ -5673,6 +5673,14 @@
         "ios",
         "android"
       ]
+    },
+    "page_title_discover": {
+      "default": "Discover",
+      "description": "Title for the discover page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

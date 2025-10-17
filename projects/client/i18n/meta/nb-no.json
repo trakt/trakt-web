@@ -2067,6 +2067,9 @@
     },
     "warning_prompt_delete_comment": {
       "default": "Er du sikker på at du vil slette kommentaren din?"
+    },
+    "page_title_discover": {
+      "default": "Oppdag"
     }
   }
 }
