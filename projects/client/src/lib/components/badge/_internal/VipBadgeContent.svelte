@@ -1,11 +1,8 @@
 <script lang="ts">
-  import VipIcon from "../../icons/VipIcon.svelte";
-
   const { children }: ChildrenProps = $props();
 </script>
 
 <div class="trakt-vip-badge">
-  <VipIcon />
   <p class="small uppercase">
     {@render children()}
   </p>
@@ -35,11 +32,6 @@
     .small {
       font-weight: 700;
       white-space: nowrap;
-    }
-
-    :global(svg) {
-      width: var(--ni-16);
-      height: var(--ni-16);
     }
   }
 </style>

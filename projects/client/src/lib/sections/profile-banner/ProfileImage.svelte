@@ -6,14 +6,13 @@
   import { uploadAvatarRequest } from "$lib/requests/queries/users/uploadAvatarRequest";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import type { Snippet } from "svelte";
-  import VipBadge from "../navbar/components/VIPBadge.svelte";
 
   const {
     name,
     src,
     isEditable = false,
     isVip = false,
-    badge: externalBadge,
+    badge,
   }: {
     name: string;
     src: string;
@@ -34,14 +33,6 @@
     invalidate(InvalidateAction.User.Avatar);
   }
 </script>
-
-{#snippet badge()}
-  {#if externalBadge}
-    {@render externalBadge()}
-  {:else}
-    <VipBadge style="inverted" />
-  {/if}
-{/snippet}
 
 <div class="profile-image-container" class:is-vip={isVip}>
   <figure class="profile-image" data-sentry-block>
@@ -64,9 +55,7 @@
     {/if}
   </figure>
 
-  {#if isVip}
-    {@render badge()}
-  {/if}
+  {@render badge?.()}
 </div>
 
 <style>

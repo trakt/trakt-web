@@ -1,7 +1,6 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import VipIcon from "$lib/components/icons/VipIcon.svelte";
   import WatchNowIcon from "$lib/components/icons/WatchNowIcon.svelte";
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
 
@@ -48,10 +47,6 @@
 
               {#if color === "blue"}
                 <YouTubeIcon />
-              {/if}
-
-              {#if color === "red"}
-                <VipIcon />
               {/if}
             {/snippet}
           </Button>
