@@ -46,6 +46,10 @@ export function useScrollHistoryAction(
     return {
       update: (updatedId: string) => {
         resetHandlers(updatedId);
+        container.scrollTo({
+          left: 0,
+          behavior: 'instant',
+        });
       },
       destroy: () => {
         destroyRestore?.();
