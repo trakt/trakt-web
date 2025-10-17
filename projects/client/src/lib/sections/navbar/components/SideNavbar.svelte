@@ -185,7 +185,7 @@
 </header>
 
 <style lang="scss">
-  @mixin collapsed-states($opacity, $display) {
+  @mixin collapsed-states($opacity, $width) {
     :global(.trakt-tagline),
     :global(.trakt-button .button-label),
     :global(trakt-profile-button .profile-info),
@@ -194,8 +194,12 @@
       transition: opacity var(--transition-increment) ease-in-out;
     }
 
-    :global(trakt-get-vip-link p) {
-      display: $display;
+    :global(trakt-get-vip-link) {
+      opacity: $opacity;
+      width: $width;
+      transition:
+        opacity,
+        width var(--transition-increment) ease-in-out;
     }
   }
 
@@ -249,7 +253,7 @@
 
     overflow: hidden;
 
-    @include collapsed-states(0, none);
+    @include collapsed-states(0, 0);
 
     :global(.locale-picker-container) {
       width: var(--navbar-item-width);
@@ -257,6 +261,7 @@
     }
 
     :global(trakt-get-vip-link) {
+      width: 0;
       display: flex;
       justify-content: center;
       width: var(--navbar-item-width);
@@ -288,7 +293,7 @@
     &:not(.force-collapse):hover {
       --navbar-width: var(--navbar-expanded-width);
 
-      @include collapsed-states(1, initial);
+      @include collapsed-states(1, "initial");
 
       :global(trakt-get-vip-link) {
         width: fit-content;
