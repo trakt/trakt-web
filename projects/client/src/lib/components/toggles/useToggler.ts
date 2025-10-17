@@ -1,5 +1,5 @@
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { derived, writable } from 'svelte/store';
+import { derived, type Writable, writable } from 'svelte/store';
 import { assertDefined } from '../../utils/assert/assertDefined.ts';
 import {
   type TogglerId,
@@ -9,15 +9,22 @@ import {
 
 const TOGGLER_PREFIX = 'trakt_toggler';
 
+const globalStores = new Map<string, Writable<unknown>>();
+
 export function useToggler<T extends TogglerId, K = TogglerValueMap[T]>(id: T) {
   const toggler = TOGGLERS[id];
+  const storageKey = `${TOGGLER_PREFIX}_${toggler.id}`;
 
-  const current = writable<K>(
-    JSON.parse(
-      safeLocalStorage.getItem(`${TOGGLER_PREFIX}_${toggler.id}`) ??
+  if (!globalStores.has(storageKey)) {
+    const initialValue = JSON.parse(
+      safeLocalStorage.getItem(storageKey) ??
         JSON.stringify(toggler.default),
-    ),
-  );
+    );
+
+    globalStores.set(storageKey, writable<K>(initialValue));
+  }
+
+  const current = globalStores.get(storageKey) as Writable<K>;
 
   return {
     options: toggler.options,
@@ -30,10 +37,7 @@ export function useToggler<T extends TogglerId, K = TogglerValueMap[T]>(id: T) {
     })),
     set: (value: K) => {
       current.set(value);
-      safeLocalStorage.setItem(
-        `${TOGGLER_PREFIX}_${id}`,
-        JSON.stringify(value),
-      );
+      safeLocalStorage.setItem(storageKey, JSON.stringify(value));
     },
   };
 }
