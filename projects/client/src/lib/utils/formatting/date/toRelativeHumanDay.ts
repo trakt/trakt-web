@@ -1,7 +1,7 @@
 import type { AvailableLocale } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
+import { differenceInCalendarDays } from 'date-fns/differenceInCalendarDays';
 import { format } from 'date-fns/format';
-import { time } from '../../timing/time.ts';
 import { LOCALE_MAP } from './LOCALE_MAP.ts';
 import { isInRelativeRange } from './_internal/isInRelativeRange.ts';
 
@@ -10,9 +10,7 @@ function formatRelativeDay(
   date: Date,
   localeKey: AvailableLocale,
 ) {
-  const dayDiff = Math.round(
-    (date.getTime() - today.getTime()) / time.days(1),
-  );
+  const dayDiff = differenceInCalendarDays(date, today);
 
   const relativeFormatter = new Intl.RelativeTimeFormat(localeKey, {
     numeric: 'auto',
