@@ -3,7 +3,6 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useTraktTeam } from "$lib/features/team/useTraktTeam";
-  import VipBadge from "$lib/sections/navbar/components/VIPBadge.svelte";
   import UserAvatar from "../../UserAvatar.svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { SocialCta } from "../models/Cta";
@@ -27,11 +26,7 @@
     {#if !$isLoading}
       {#each $team.slice(0, limit ?? $team.length) as member (member.username)}
         <div class="trakt-team-member">
-          <UserAvatar user={member} onClick={() => track({ type: cta.type })}>
-            {#snippet icon()}
-              <VipBadge style="inverted" />
-            {/snippet}
-          </UserAvatar>
+          <UserAvatar user={member} onClick={() => track({ type: cta.type })} />
         </div>
       {/each}
     {/if}

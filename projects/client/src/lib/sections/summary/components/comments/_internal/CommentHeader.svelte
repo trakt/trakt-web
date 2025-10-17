@@ -1,5 +1,4 @@
 <script lang="ts">
-  import VipBadge from "$lib/components/badge/VipBadge.svelte";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
@@ -36,9 +35,6 @@
           {comment.isReview ? m.text_review_by() : m.text_shout_by()}
         </p>
         <UserProfileLink user={comment.user} />
-        {#if comment.user.isVip}
-          <VipBadge isDirector={comment.user.isDirector} />
-        {/if}
       </div>
       <p class="small secondary meta-info">
         {toHumanDate(new Date(), comment.createdAt, getLocale())}
