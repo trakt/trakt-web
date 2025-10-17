@@ -1,5 +1,6 @@
 <script lang="ts">
   import Dialog from "$lib/components/dialogs/Dialog.svelte";
+  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -7,7 +8,6 @@
   import { writable, type Writable } from "svelte/store";
   import type { ActiveComment } from "../models/ActiveComment";
   import { useComments } from "../useComments";
-  import CommentList from "./CommentList.svelte";
   import CommentThreadCard from "./CommentThreadCard.svelte";
   import { scrollActiveCommentIntoView } from "./scrollActiveCommentIntoView";
   import { useActiveComment } from "./useActiveComment";
@@ -50,11 +50,12 @@
   metaInfo={$sortType.text}
 >
   <div class="trakt-comment-threads">
-    <CommentList
+    <ShadowList
       id={`comment-threads-list-${media.slug}-${$sortType.value}`}
       items={$comments}
       title=""
       --height-list="min(var(--height-comment-thread-list), calc(0.7 * var(--dialog-height)))"
+      --item-width="var(--width-comment-thread-card)"
     >
       {#snippet item(comment)}
         <comment-thread
@@ -70,7 +71,7 @@
           />
         </comment-thread>
       {/snippet}
-    </CommentList>
+    </ShadowList>
   </div>
 
   {#snippet badge()}

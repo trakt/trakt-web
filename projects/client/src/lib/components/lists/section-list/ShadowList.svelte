@@ -7,7 +7,7 @@
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { onMount, type Snippet } from "svelte";
-  import { writable, type Writable } from "svelte/store";
+  import { writable } from "svelte/store";
   import "../_internal/list.css";
   import ListHeader from "../_internal/ListHeader.svelte";
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
@@ -24,8 +24,6 @@
     subtitle?: string;
     metaInfo?: string;
     empty?: Snippet;
-    scrollContainer?: Writable<HTMLDivElement>;
-    scrollX?: Writable<{ left: number; right: number }>;
     variant?: "normal" | "centered";
     headerNavigationType?: DpadNavigationType;
   };
@@ -36,8 +34,6 @@
     title,
     subtitle,
     metaInfo,
-    scrollX = writable({ left: 0, right: 0 }),
-    scrollContainer = writable(),
     item,
     ctaItem,
     actions,
@@ -47,6 +43,9 @@
     variant = "normal",
     drilldownLink,
   }: SectionListProps<T> = $props();
+
+  const scrollX = writable({ left: 0, right: 0 });
+
   const sideDistance = useVarToPixels("var(--layout-distance-side)");
   const windowShadowWidth = useVarToPixels("var(--ni-64)");
 
@@ -124,7 +123,6 @@
       <Crossfade showA={items.length > 0}>
         {#snippet childrenA()}
           <div
-            bind:this={$scrollContainer}
             use:scrollTracking={scrollX}
             use:scrollHistory={id}
             class="trakt-list-item-container"
