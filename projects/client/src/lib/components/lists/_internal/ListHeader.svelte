@@ -114,7 +114,8 @@
       }
     }
 
-    .trakt-list-title {
+    .trakt-list-title,
+    .trakt-list-actions {
       :global(.trakt-action-button) {
         --button-size: var(--ni-32);
       }
