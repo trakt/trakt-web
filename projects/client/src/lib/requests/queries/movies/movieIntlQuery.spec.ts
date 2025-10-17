@@ -1,5 +1,5 @@
-import { MovieHereticLanguageMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticLanguageMappedMock.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
+import { MovieHereticTranslationsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticTranslationsMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
@@ -13,13 +13,15 @@ describe('movieIntlQuery', () => {
           movieIntlQuery({
             slug: MovieHereticMappedMock.slug,
             language: 'en',
-            region: 'us',
+            enabled: true,
           }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(MovieHereticLanguageMappedMock.get('en'));
+    expect(result).to.deep.equal([
+      MovieHereticTranslationsMappedMock.get('en'),
+    ]);
   });
 
   it('should query Dutch summary for Heretic (2024)', async () => {
@@ -29,12 +31,14 @@ describe('movieIntlQuery', () => {
           movieIntlQuery({
             slug: MovieHereticMappedMock.slug,
             language: 'nl',
-            region: 'nl',
+            enabled: true,
           }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(MovieHereticLanguageMappedMock.get('nl'));
+    expect(result).to.deep.equal([
+      MovieHereticTranslationsMappedMock.get('nl'),
+    ]);
   });
 });

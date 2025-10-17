@@ -7,7 +7,8 @@ import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.t
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
-import { toMediaIntl } from '$lib/utils/media/toMediaIntl.ts';
+import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived, get, readable } from 'svelte/store';
 
 export function useShow(slug: string | undefined) {
@@ -34,10 +35,11 @@ export function useShow(slug: string | undefined) {
 
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
+  const { language } = getLanguageAndRegion();
 
-  const intl = isLocaleSkipped
-    ? show
-    : useQuery(showIntlQuery({ slug, ...getLanguageAndRegion() }));
+  const intl = useQuery(
+    showIntlQuery({ slug, language, enabled: !isLocaleSkipped }),
+  );
 
   const queries = [
     show,
@@ -50,7 +52,7 @@ export function useShow(slug: string | undefined) {
 
   const isLoading = derived(
     queries,
-    ($queries) => $queries.some((query) => query.isPending),
+    ($queries) => $queries.some(toLoadingState),
   );
 
   return {
@@ -60,24 +62,25 @@ export function useShow(slug: string | undefined) {
     crew: derived(crew, ($crew) => $crew.data),
     seasons: derived(seasons, ($seasons) => $seasons.data),
     intl: derived([intl, show], ([$intl, $show]) => {
-      if ($intl.isFetching || $show.isFetching) {
+      if (($intl.isEnabled && $intl.isFetching) || $show.isFetching) {
         return;
       }
 
-      return toMediaIntl($intl?.data, $show?.data);
+      return findRegionalIntl({
+        type: 'show',
+        translations: $intl.data,
+        fallback: $show.data,
+      });
     }),
-    streamOn: derived(
-      streamOn,
-      ($streamOn) => {
-        if (!$streamOn.data) {
-          return;
-        }
+    streamOn: derived(streamOn, ($streamOn) => {
+      if (!$streamOn.data) {
+        return;
+      }
 
-        return {
-          services: $streamOn.data,
-          preferred: getPreferred($streamOn.data),
-        };
-      },
-    ),
+      return {
+        services: $streamOn.data,
+        preferred: getPreferred($streamOn.data),
+      };
+    }),
   };
 }

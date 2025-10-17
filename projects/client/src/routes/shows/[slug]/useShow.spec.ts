@@ -1,9 +1,9 @@
 import { setLocale } from '$lib/features/i18n/index.ts';
-import { ShowSiloJapaneseMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloJapaneseMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { ShowSiloPeopleMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloPeopleMappedMock.ts';
 import { ShowSiloSeasonsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloSeasonsMappedMock.ts';
 import { ShowSiloStudiosMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloStudiosMappedMock.ts';
+import { ShowSiloTranslationsMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloTranslationsMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
 import { useShow } from './useShow.ts';
@@ -37,7 +37,7 @@ describe('store: useShow', () => {
         factory: () => useShow(ShowSiloMappedMock.slug).intl,
       });
 
-      expect(result).to.deep.equal(ShowSiloJapaneseMappedMock);
+      expect(result).to.deep.equal(ShowSiloTranslationsMappedMock.get('ja'));
     });
 
     it('should return crew', async () => {

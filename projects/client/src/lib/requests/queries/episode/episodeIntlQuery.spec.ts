@@ -1,4 +1,4 @@
-import { EpisodeSiloLanguageMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloLanguageMappedMock.ts';
+import { EpisodeSiloTranslationsMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloTranslationsMappedMock.ts';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
@@ -16,13 +16,13 @@ describe('episodeIntlQuery', () => {
             season: EpisodeSiloResponseMock.season,
             episode: EpisodeSiloResponseMock.number,
             language: 'en',
-            region: 'us',
+            enabled: true,
           }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(EpisodeSiloLanguageMappedMock.get('en'));
+    expect(result).to.deep.equal([EpisodeSiloTranslationsMappedMock.get('en')]);
   });
 
   it('should query for Dutch episode summary', async () => {
@@ -34,12 +34,12 @@ describe('episodeIntlQuery', () => {
             season: EpisodeSiloResponseMock.season,
             episode: EpisodeSiloResponseMock.number,
             language: 'nl',
-            region: 'nl',
+            enabled: true,
           }),
         ),
       mapper: (response) => response?.data,
     });
 
-    expect(result).to.deep.equal(EpisodeSiloLanguageMappedMock.get('nl'));
+    expect(result).to.deep.equal([EpisodeSiloTranslationsMappedMock.get('nl')]);
   });
 });

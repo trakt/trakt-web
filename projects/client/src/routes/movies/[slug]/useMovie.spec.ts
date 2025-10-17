@@ -1,8 +1,8 @@
 import { setLocale } from '$lib/features/i18n/index.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
 import { MovieHereticPeopleMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPeopleMappedMock.ts';
-import { MovieHereticPortugueseMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticPortugueseMappedMock.ts';
 import { MovieHereticStudiosMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticStudiosMappedMock.ts';
+import { MovieHereticTranslationsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticTranslationsMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { describe, expect, it } from 'vitest';
 import { useMovie } from './useMovie.ts';
@@ -36,7 +36,9 @@ describe('store: useMovie', () => {
         factory: () => useMovie(MovieHereticMappedMock.slug).intl,
       });
 
-      expect(result).to.deep.equal(MovieHereticPortugueseMappedMock);
+      expect(result).to.deep.equal(
+        MovieHereticTranslationsMappedMock.get('pt'),
+      );
     });
 
     it('should return studios', async () => {
