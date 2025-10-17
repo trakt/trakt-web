@@ -2073,6 +2073,9 @@
     },
     "warning_prompt_delete_comment": {
       "default": "Сигурни ли сте, че искате да изтриете коментара си?"
+    },
+    "page_title_discover": {
+      "default": "Открийте"
     }
   }
 }

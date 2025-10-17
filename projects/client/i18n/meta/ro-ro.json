@@ -2073,6 +2073,9 @@
     },
     "warning_prompt_delete_comment": {
       "default": "Sigur doriți să ștergeți comentariul?"
+    },
+    "page_title_discover": {
+      "default": "Descoperă"
     }
   }
 }

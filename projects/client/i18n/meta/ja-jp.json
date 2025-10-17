@@ -2073,6 +2073,9 @@
     },
     "warning_prompt_delete_comment": {
       "default": "コメントを削除してもよろしいですか？"
+    },
+    "page_title_discover": {
+      "default": "発見"
     }
   }
 }

@@ -2073,6 +2073,9 @@
     },
     "warning_prompt_delete_comment": {
       "default": "Êtes-vous sûr(e) de vouloir supprimer votre commentaire ?"
+    },
+    "page_title_discover": {
+      "default": "Découvrir"
     }
   }
 }

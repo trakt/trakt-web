@@ -2073,6 +2073,9 @@
     },
     "warning_prompt_delete_comment": {
       "default": "Er du sikker på, at du vil slette din kommentar?"
+    },
+    "page_title_discover": {
+      "default": "Opdag"
     }
   }
 }
