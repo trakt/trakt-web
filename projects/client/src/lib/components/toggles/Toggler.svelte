@@ -51,6 +51,7 @@
     <Toggle
       onclick={() => handleChange(index)}
       isPressed={$trackerIndex === index}
+      label={option.label}
       {variant}
     >
       {#snippet icon()}
