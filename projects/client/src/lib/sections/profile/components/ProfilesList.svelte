@@ -32,7 +32,7 @@
     items={$profiles}
     title={m.list_title_social()}
     --height-list="var(--height-profile-list)"
-    metaInfo={$current.text}
+    metaInfo={$current.text()}
   >
     {#snippet empty()}
       {#if !$isLoading}

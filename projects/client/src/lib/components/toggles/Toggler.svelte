@@ -51,7 +51,7 @@
     <Toggle
       onclick={() => handleChange(index)}
       isPressed={$trackerIndex === index}
-      label={option.label}
+      label={option.label()}
       {variant}
     >
       {#snippet icon()}
@@ -61,7 +61,7 @@
       {#if option.content}
         {@render option.content()}
       {:else}
-        {option.text}
+        {option.text()}
       {/if}
     </Toggle>
   {/each}

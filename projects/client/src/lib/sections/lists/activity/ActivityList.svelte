@@ -39,7 +39,7 @@
     id={`activity-list-${$activityType.value}`}
     source={{ id: "activity", type: $activityType.value }}
     type="episode"
-    metaInfo={$activityType.text}
+    metaInfo={$activityType.text()}
     useList={(params) =>
       useActivityList({
         ...params,

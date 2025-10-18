@@ -1,8 +1,10 @@
 import type { Snippet } from 'svelte';
 
+type IntlFn = () => string;
+
 export interface ToggleOption<T> {
   value: T;
-  text: string;
-  label: string;
+  text: IntlFn;
+  label: IntlFn;
   content?: Snippet;
 }

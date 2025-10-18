@@ -47,7 +47,7 @@
   title={m.dialog_title_comments()}
   {dialog}
   onClose={reset}
-  metaInfo={$sortType.text}
+  metaInfo={$sortType.text()}
 >
   <div class="trakt-comment-threads">
     <ShadowList
