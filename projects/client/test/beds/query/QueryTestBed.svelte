@@ -7,13 +7,15 @@
     factory,
     output,
     mapper,
+    waitFor,
   }: {
     factory: () => Readable<unknown>;
     output: (value: unknown) => void;
     mapper?: (response: any) => unknown;
+    waitFor?: (response: any) => boolean;
   } = $props();
 </script>
 
 <TestProvider>
-  <QueryRunner {factory} {output} {mapper} />
+  <QueryRunner {factory} {output} {mapper} {waitFor} />
 </TestProvider>
