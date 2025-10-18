@@ -12,7 +12,8 @@
       (audience === "authenticated" && $isAuthorized && $user != null) ||
       (audience === "public" && !$isAuthorized) ||
       (audience === "director" && $isAuthorized && $user?.isDirector) ||
-      (audience === "vip" && $isAuthorized && $user?.isVip),
+      (audience === "vip" && $isAuthorized && $user?.isVip) ||
+      (audience === "free" && $isAuthorized && !$user?.isVip),
   );
 </script>
 
