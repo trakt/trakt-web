@@ -21,6 +21,7 @@ describe('store: useShow', () => {
     it('should contain english information', async () => {
       const result = await runQuery({
         factory: () => useShow(ShowSiloMappedMock.slug).intl,
+        waitFor: (result) => result?.overview !== '',
       });
 
       expect(result).to.include({
@@ -35,6 +36,7 @@ describe('store: useShow', () => {
 
       const result = await runQuery({
         factory: () => useShow(ShowSiloMappedMock.slug).intl,
+        waitFor: (result) => result?.overview !== '' && result?.country !== '',
       });
 
       expect(result).to.deep.equal(ShowSiloTranslationsMappedMock.get('ja'));

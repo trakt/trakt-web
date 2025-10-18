@@ -73,31 +73,21 @@ export function useEpisode(
     crew: derived(crew, ($crew) => $crew.data),
     intl: derived(
       [intl, episode],
-      ([$intl, $episode]) => {
-        if (($intl.isEnabled && $intl.isFetching) || $episode.isFetching) {
-          return;
-        }
-
-        return findRegionalIntl({
+      ([$intl, $episode]) =>
+        findRegionalIntl({
           type: 'episode',
           translations: $intl.data,
           fallback: $episode.data,
-        });
-      },
+        }),
     ),
     showIntl: derived(
       [showIntl, show],
-      ([$showIntl, $show]) => {
-        if (($showIntl.isEnabled && $showIntl.isFetching) || $show.isFetching) {
-          return;
-        }
-
-        return findRegionalIntl({
+      ([$showIntl, $show]) =>
+        findRegionalIntl({
           type: 'show',
           translations: $showIntl.data,
           fallback: $show.data,
-        });
-      },
+        }),
     ),
     streamOn: derived(streamOn, ($streamOn) => {
       if (!$streamOn.data) {

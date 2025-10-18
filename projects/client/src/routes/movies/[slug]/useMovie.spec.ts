@@ -20,6 +20,7 @@ describe('store: useMovie', () => {
     it('should contain english information', async () => {
       const result = await runQuery({
         factory: () => useMovie(MovieHereticMappedMock.slug).intl,
+        waitFor: (result) => result?.overview !== '',
       });
 
       expect(result).to.include({
@@ -34,6 +35,7 @@ describe('store: useMovie', () => {
 
       const result = await runQuery({
         factory: () => useMovie(MovieHereticMappedMock.slug).intl,
+        waitFor: (result) => result?.overview !== '' && result?.country !== '',
       });
 
       expect(result).to.deep.equal(
