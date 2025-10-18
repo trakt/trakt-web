@@ -31,23 +31,23 @@
   const options: ToggleOption<SearchMode>[] = [
     {
       value: "media",
-      text: m.button_text_toggle_search_media(),
-      label: m.button_label_toggle_search_media(),
+      text: m.button_text_toggle_search_media,
+      label: m.button_label_toggle_search_media,
     },
     {
       value: "show",
-      text: m.button_text_shows(),
-      label: m.button_label_shows(),
+      text: m.button_text_shows,
+      label: m.button_label_shows,
     },
     {
       value: "movie",
-      text: m.button_text_movies(),
-      label: m.button_label_movies(),
+      text: m.button_text_movies,
+      label: m.button_label_movies,
     },
     {
       value: "people",
-      text: m.button_text_toggle_search_people(),
-      label: m.button_label_toggle_search_people(),
+      text: m.button_text_toggle_search_people,
+      label: m.button_label_toggle_search_people,
     },
   ];
 </script>

@@ -38,13 +38,13 @@ const activity: ToggleDefinition<'activity'> = {
   options: [
     {
       value: 'social',
-      text: m.button_text_social(),
-      label: m.button_label_social(),
+      text: m.button_text_social,
+      label: m.button_label_social,
     },
     {
       value: 'personal',
-      text: m.button_text_personal(),
-      label: m.button_label_personal(),
+      text: m.button_text_personal,
+      label: m.button_label_personal,
     },
   ],
 };
@@ -55,18 +55,18 @@ const media: ToggleDefinition<'media'> = {
   options: [
     {
       value: 'all',
-      text: m.button_text_all(),
-      label: m.button_label_all(),
+      text: m.button_text_all,
+      label: m.button_label_all,
     },
     {
       value: 'show',
-      text: m.button_text_shows(),
-      label: m.button_label_shows(),
+      text: m.button_text_shows,
+      label: m.button_label_shows,
     },
     {
       value: 'movie',
-      text: m.button_text_movies(),
-      label: m.button_label_movies(),
+      text: m.button_text_movies,
+      label: m.button_label_movies,
     },
   ],
 };
@@ -77,13 +77,13 @@ const social: ToggleDefinition<'social'> = {
   options: [
     {
       value: 'following',
-      text: m.button_text_following(),
-      label: m.button_label_following(),
+      text: m.button_text_following,
+      label: m.button_label_following,
     },
     {
       value: 'followers',
-      text: m.button_text_followers(),
-      label: m.button_label_followers(),
+      text: m.button_text_followers,
+      label: m.button_label_followers,
     },
   ],
 };
@@ -94,13 +94,13 @@ const discover: ToggleDefinition<'discover'> = {
   options: [
     {
       value: 'show',
-      text: m.button_text_shows(),
-      label: m.button_label_shows(),
+      text: m.button_text_shows,
+      label: m.button_label_shows,
     },
     {
       value: 'movie',
-      text: m.button_text_movies(),
-      label: m.button_label_movies(),
+      text: m.button_text_movies,
+      label: m.button_label_movies,
     },
   ],
 };
@@ -111,13 +111,13 @@ const comment: ToggleDefinition<'comment'> = {
   options: [
     {
       value: 'likes',
-      text: m.button_text_popular_comments(),
-      label: m.button_label_popular_comments(),
+      text: m.button_text_popular_comments,
+      label: m.button_label_popular_comments,
     },
     {
       value: 'newest',
-      text: m.button_text_recent_comments(),
-      label: m.button_label_recent_comments(),
+      text: m.button_text_recent_comments,
+      label: m.button_label_recent_comments,
     },
   ],
 };

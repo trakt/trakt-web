@@ -42,7 +42,7 @@
     items={$comments}
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
-    metaInfo={$sortType.text}
+    metaInfo={$sortType.text()}
   >
     {#snippet item(comment)}
       <CommentCard {comment} {media} {onDrilldown} type={props.type} />

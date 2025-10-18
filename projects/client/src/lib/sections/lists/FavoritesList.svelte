@@ -50,7 +50,7 @@
   items={$list}
   {title}
   --height-list={mediaListHeightResolver($defaultVariant)}
-  metaInfo={$selectedType.text}
+  metaInfo={$selectedType.text()}
 >
   {#snippet item(media)}
     <DefaultMediaItem

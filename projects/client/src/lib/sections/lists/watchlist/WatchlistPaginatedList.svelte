@@ -40,7 +40,7 @@
   {type}
   filter={$filterMap}
   {useList}
-  metaInfo={$selectedType.text}
+  metaInfo={$selectedType.text()}
 >
   {#snippet item(media)}
     <WatchlistItem type={media.type} {media} {style} />

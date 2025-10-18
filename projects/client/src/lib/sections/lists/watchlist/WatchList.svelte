@@ -56,7 +56,7 @@
   {type}
   filter={$filterMap}
   {useList}
-  metaInfo={status === "all" ? $selectedType.text : undefined}
+  metaInfo={status === "all" ? $selectedType.text() : undefined}
   urlBuilder={({ type, ...rest }) => {
     if (status === "all") {
       return UrlBuilder.lists.watchlist();
