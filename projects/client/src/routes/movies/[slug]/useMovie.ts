@@ -74,17 +74,12 @@ export function useMovie(slug: string | undefined) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     videos: derived(videos, ($videos) => $videos.data ?? []),
-    intl: derived([intl, movie], ([$intl, $movie]) => {
-      if (($intl.isEnabled && $intl.isFetching) || $movie.isFetching) {
-        return;
-      }
-
-      return findRegionalIntl({
+    intl: derived([intl, movie], ([$intl, $movie]) =>
+      findRegionalIntl({
         type: 'movie',
         translations: $intl.data,
         fallback: $movie.data,
-      });
-    }),
+      })),
     streamOn: derived(streamOn, ($streamOn) => {
       if (!$streamOn.data) {
         return;

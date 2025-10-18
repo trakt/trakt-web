@@ -61,17 +61,12 @@ export function useShow(slug: string | undefined) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     seasons: derived(seasons, ($seasons) => $seasons.data),
-    intl: derived([intl, show], ([$intl, $show]) => {
-      if (($intl.isEnabled && $intl.isFetching) || $show.isFetching) {
-        return;
-      }
-
-      return findRegionalIntl({
+    intl: derived([intl, show], ([$intl, $show]) =>
+      findRegionalIntl({
         type: 'show',
         translations: $intl.data,
         fallback: $show.data,
-      });
-    }),
+      })),
     streamOn: derived(streamOn, ($streamOn) => {
       if (!$streamOn.data) {
         return;
