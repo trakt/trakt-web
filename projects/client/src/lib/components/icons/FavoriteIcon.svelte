@@ -10,7 +10,8 @@
   width="24"
   height="23"
   viewBox="0 0 24 23"
-  fill={state === "filled" ? "currentColor" : "none"}
+  fill={state === "filled" ? "var(--icon-color, currentColor)" : "none"}
+  color="var(--icon-color, currentColor)"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
@@ -20,9 +21,3 @@
     stroke-linejoin="bevel"
   />
 </svg>
-
-<style>
-  svg {
-    color: var(--color-background-orange);
-  }
-</style>

@@ -51,22 +51,22 @@
 >
   {#if href}
     <Link {href} {noscroll} {target} color="inherit">
-      {@render text()}
       {#if icon}
         <div class="item-icon">
           {@render icon()}
         </div>
       {/if}
+      {@render text()}
     </Link>
   {:else}
-    <p class="small bold uppercase ellipsis">
-      {@render text()}
-    </p>
     {#if icon}
       <div class="item-icon">
         {@render icon()}
       </div>
     {/if}
+    <p class="small bold uppercase ellipsis">
+      {@render text()}
+    </p>
   {/if}
 </li>
 
@@ -74,6 +74,8 @@
   @use "$style/scss/mixins/index" as *;
 
   li {
+    --icon-gap: var(--gap-s);
+
     text-decoration: none;
     list-style-type: none;
     user-select: none;
@@ -88,8 +90,7 @@
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--gap-s);
+    gap: var(--icon-gap);
 
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -101,8 +102,8 @@
       display: flex;
 
       :global(svg) {
-        width: var(--ni-24);
-        height: var(--ni-24);
+        width: var(--ni-20);
+        height: var(--ni-20);
       }
     }
 
@@ -116,11 +117,14 @@
 
     :global(.trakt-link) {
       color: inherit;
+
       width: 100%;
       height: 100%;
-      align-items: center;
+
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      gap: var(--icon-gap);
+
       text-decoration: none;
     }
 
