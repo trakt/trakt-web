@@ -41,7 +41,7 @@
 
 {#if style === "action"}
   <ActionButton {...commonProps} {...props} style="ghost" color="default">
-    <FavoriteIcon {state} />
+    <FavoriteIcon {state} --icon-color="var(--color-background-orange)" />
   </ActionButton>
 {/if}
 

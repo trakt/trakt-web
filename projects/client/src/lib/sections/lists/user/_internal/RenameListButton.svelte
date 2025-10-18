@@ -1,5 +1,6 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
+  import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import { useRenameList } from "./useRenameList.ts";
@@ -19,4 +20,8 @@
   onclick={renameList}
 >
   {m.button_text_rename_list()}
+
+  {#snippet icon()}
+    <RenameIcon />
+  {/snippet}
 </DropdownItem>
