@@ -14,6 +14,7 @@
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { MarkAsWatchedActionProps } from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedActionProps";
+  import SetProfileImageAction from "$lib/sections/media-actions/profile-image/SetProfileImageAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import type { WatchlistActionProps } from "$lib/sections/media-actions/watchlist/WatchListActionProps";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
@@ -132,6 +133,7 @@
           />
         {/if}
       </RenderFor>
+      <SetProfileImageAction style="action" type={media.type} id={media.id} />
       <ShareButton
         {title}
         textFactory={({ title }) => {

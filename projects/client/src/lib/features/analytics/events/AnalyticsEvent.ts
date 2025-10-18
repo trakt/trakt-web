@@ -41,6 +41,7 @@ export const AnalyticsEvent = {
   StreamOn: buildEventKey(MEDIA_ACTION_PREFIX, 'stream-on'),
 
   Settings: buildEventKey(USER_ACTION_PREFIX, 'settings'),
+  ProfileImage: buildEventKey(USER_ACTION_PREFIX, 'profile-image'),
 
   Follow: buildEventKey(FOLLOW_ACTION_PREFIX, 'follow'),
 

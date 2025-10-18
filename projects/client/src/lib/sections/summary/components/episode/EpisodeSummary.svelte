@@ -9,6 +9,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import SetProfileImageAction from "$lib/sections/media-actions/profile-image/SetProfileImageAction.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import MediaDetails from "../details/MediaDetails.svelte";
@@ -95,6 +96,7 @@
           {episode}
         />
       </RenderFor>
+      <SetProfileImageAction style="action" {type} id={episode.id} />
       <ShareButton
         {title}
         textFactory={({ title }) =>

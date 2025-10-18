@@ -4,6 +4,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
+  import SetProfileImageAction from "$lib/sections/media-actions/profile-image/SetProfileImageAction.svelte";
   import StreamOnButton from "../../../stream/StreamOnButton.svelte";
   import SideActions from "./SideActions.svelte";
 
@@ -40,6 +41,12 @@
       type={media.type}
       trailer={media.trailer}
       slug={media.slug}
+    />
+
+    <SetProfileImageAction
+      style="dropdown-item"
+      type={media.type}
+      id={media.id}
     />
   {/snippet}
 </PopupMenu>
