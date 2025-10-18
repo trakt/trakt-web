@@ -8,11 +8,13 @@
     isPressed,
     onclick,
     variant = "icon",
+    label,
   }: {
     icon: Snippet;
     isPressed: boolean;
     onclick: () => void;
     variant?: "icon" | "text";
+    label: string;
   } & ChildrenProps = $props();
 </script>
 
@@ -21,6 +23,7 @@
   class:is-pressed={isPressed}
   class:text-variant={variant === "text"}
   data-dpad-navigation={DpadNavigationType.Item}
+  aria-label={label}
   {onclick}
 >
   {@render icon()}
