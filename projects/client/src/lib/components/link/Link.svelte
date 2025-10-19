@@ -56,6 +56,7 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: color, text-decoration;
     display: inline;
+    position: relative;
 
     :global(p),
     :global(span) {

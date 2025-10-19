@@ -21,7 +21,7 @@
     {/if}
     {#if children}
       {@render children()}
-    {:else}
+    {:else if text}
       <p class="meta-info">
         {text}
       </p>

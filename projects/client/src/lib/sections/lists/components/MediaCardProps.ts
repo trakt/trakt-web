@@ -19,6 +19,7 @@ type BaseItemProps<T> = MediaItemVariant<T> & {
   coverTag?: Snippet;
   action?: Snippet;
   popupActions?: Snippet;
+  indicators?: Snippet;
   style?: 'cover' | 'summary';
   source?: string;
   onclick?: (item: T) => void;
