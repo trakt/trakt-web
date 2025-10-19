@@ -10,15 +10,13 @@
   import CommentBody from "../CommentBody.svelte";
   import CommentFooter from "../CommentFooter.svelte";
   import CommentHeader from "../CommentHeader.svelte";
-  import type { Comment } from "../models/Comment";
-  import SentimentComment from "../SentimentComment.svelte";
   import ShadowScroller from "../ShadowScroller.svelte";
   import UserComment from "../UserComment.svelte";
   import CommentInput from "./CommentInput.svelte";
   import { useCommentReplies } from "./useCommentReplies";
 
   type CommentThreadCardProps = {
-    comment: Comment;
+    comment: MediaComment;
     media: MediaEntry;
     reset: () => void;
     isReplying: boolean;
@@ -80,12 +78,7 @@
   --height-card="min(var(--height-comment-thread-card), calc(0.65 * var(--dialog-height)))"
 >
   <div class="trakt-comment-thread-container">
-    {#if comment.type === "comment"}
-      {@render userThread(comment)}
-    {/if}
-    {#if comment.type === "sentiments"}
-      <SentimentComment {comment} />
-    {/if}
+    {@render userThread(comment)}
   </div>
 </Card>
 

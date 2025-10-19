@@ -2,6 +2,7 @@ import { getLanguageAndRegion, languageTag } from '$lib/features/i18n/index.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { movieIntlQuery } from '$lib/requests/queries/movies/movieIntlQuery.ts';
 import { moviePeopleQuery } from '$lib/requests/queries/movies/moviePeopleQuery.ts';
+import { movieSentimentsQuery } from '$lib/requests/queries/movies/movieSentimentsQuery.ts';
 import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuery.ts';
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.ts';
@@ -28,6 +29,7 @@ export function useMovie(slug: string | undefined) {
       videos: readable([]),
       intl: readable(undefined),
       streamOn: readable(undefined),
+      sentiments: readable(undefined),
     };
   }
 
@@ -39,6 +41,7 @@ export function useMovie(slug: string | undefined) {
 
   const studios = useQuery(movieStudiosQuery({ slug }));
   const crew = useQuery(moviePeopleQuery({ slug }));
+  const sentiments = useQuery(movieSentimentsQuery({ slug }));
 
   const videos = useQuery(movieVideosQuery({
     slug,
@@ -61,6 +64,7 @@ export function useMovie(slug: string | undefined) {
     intl,
     streamOn,
     videos,
+    sentiments,
   ];
 
   const isLoading = derived(
@@ -74,6 +78,7 @@ export function useMovie(slug: string | undefined) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     videos: derived(videos, ($videos) => $videos.data ?? []),
+    sentiments: derived(sentiments, ($sentiments) => $sentiments.data),
     intl: derived([intl, movie], ([$intl, $movie]) =>
       findRegionalIntl({
         type: 'movie',

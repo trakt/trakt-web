@@ -87,6 +87,7 @@ module.exports = {
         'requests',
         'safari',
         'search',
+        'sentiment',
         'settings',
         'show',
         'smart-list',

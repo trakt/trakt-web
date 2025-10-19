@@ -29,10 +29,10 @@
   --width-list-card: var(--ni-480);
   --height-list-card: var(--ni-256);
 
-  --width-comment-card: var(--ni-480);
+  --width-comment-card: min(var(--ni-480), 85vw);
   --height-comment-card: var(--ni-228);
 
-  --width-comment-thread-card: min(var(--width-comment-card), 85vw);
+  --width-comment-thread-card: var(--width-comment-card);
   --height-comment-thread-card: var(--ni-480);
 
   --width-toast-card: var(--ni-104);

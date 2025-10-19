@@ -3,6 +3,7 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showPeopleQuery } from '$lib/requests/queries/shows/showPeopleQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
+import { showSentimentsQuery } from '$lib/requests/queries/shows/showSentimentsQuery.ts';
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts';
@@ -22,6 +23,7 @@ export function useShow(slug: string | undefined) {
       videos: readable([]),
       intl: readable(undefined),
       streamOn: readable(undefined),
+      sentiments: readable(undefined),
     };
   }
 
@@ -32,6 +34,7 @@ export function useShow(slug: string | undefined) {
   const studios = useQuery(showStudiosQuery({ slug }));
   const crew = useQuery(showPeopleQuery({ slug }));
   const streamOn = useQuery(streamShowQuery({ slug, country: get(country) }));
+  const sentiments = useQuery(showSentimentsQuery({ slug }));
 
   const locale = languageTag();
   const isLocaleSkipped = locale === 'en';
@@ -48,6 +51,7 @@ export function useShow(slug: string | undefined) {
     crew,
     seasons,
     streamOn,
+    sentiments,
   ];
 
   const isLoading = derived(
@@ -61,6 +65,7 @@ export function useShow(slug: string | undefined) {
     studios: derived(studios, ($studios) => $studios.data),
     crew: derived(crew, ($crew) => $crew.data),
     seasons: derived(seasons, ($seasons) => $seasons.data),
+    sentiments: derived(sentiments, ($sentiments) => $sentiments.data),
     intl: derived([intl, show], ([$intl, $show]) =>
       findRegionalIntl({
         type: 'show',

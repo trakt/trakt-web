@@ -6,6 +6,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
+  import type { Sentiments } from "$lib/requests/models/Sentiments";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import EpisodeItem from "$lib/sections/lists/components/EpisodeItem.svelte";
   import { useShowProgress } from "$lib/stores/useShowProgress";
@@ -19,6 +20,7 @@
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
+  import CommunitySentiments from "./components/sentiment/CommunitySentiments.svelte";
 
   type ShowSummaryProps = MediaSummaryProps<ShowEntry> & {
     studios: MediaStudio[];
@@ -26,6 +28,7 @@
     seasons: Season[];
     videos: MediaVideo[];
     currentSeason: number;
+    sentiments: Sentiments | Nil;
   };
 
   const {
@@ -37,6 +40,7 @@
     streamOn,
     videos,
     currentSeason,
+    sentiments,
   }: ShowSummaryProps = $props();
 
   const { progress } = $derived(useShowProgress(media.slug));
@@ -65,6 +69,8 @@
 <VideoList slug={media.slug} {videos} />
 
 <SeasonList show={media} {seasons} {currentSeason} />
+
+<CommunitySentiments {sentiments} slug={media.slug} />
 
 <Comments {media} type="show" />
 
