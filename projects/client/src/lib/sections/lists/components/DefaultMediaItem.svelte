@@ -1,10 +1,13 @@
 <script lang="ts">
+  import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import CertificationTag from "$lib/components/media/tags/CertificationTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
+  import IndicatorTag from "$lib/components/media/tags/IndicatorTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
+  import TrackIcon from "$lib/components/TrackIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaInputDefault } from "$lib/models/MediaInput";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
@@ -50,6 +53,19 @@
 
   {#if isSummary && media.certification}
     <CertificationTag certification={media.certification} />
+  {/if}
+{/snippet}
+
+{#snippet indicatorTags()}
+  {#if $isWatched}
+    <IndicatorTag>
+      <TrackIcon />
+    </IndicatorTag>
+  {/if}
+  {#if $isWatchlisted}
+    <IndicatorTag>
+      <WatchlistIcon />
+    </IndicatorTag>
   {/if}
 {/snippet}
 
@@ -102,6 +118,7 @@
       {media}
       {style}
       tag={rest.variant !== "next" ? tag : undefined}
+      indicators={canDeemphasize ? indicatorTags : undefined}
       {...rest}
       {popupActions}
     />
@@ -114,14 +131,14 @@
   trakt-default-media-item {
     &.is-deemphasized {
       /* FIXME: find the root cause why on safari this does not work on .trakt-card */
-      :global(.trakt-card-content) {
+      :global(.trakt-card-cover-image) {
         transition: opacity var(--transition-increment) ease-in-out;
         opacity: var(--de-emphasized-opacity);
       }
 
       @include for-mouse() {
         &:hover {
-          :global(.trakt-card-content) {
+          :global(.trakt-card-cover-image) {
             opacity: 1;
           }
         }

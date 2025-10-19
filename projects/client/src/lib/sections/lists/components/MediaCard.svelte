@@ -6,6 +6,7 @@
   import CardCover from "$lib/components/card/CardCover.svelte";
   import LandscapeCard from "$lib/components/media/card/LandscapeCard.svelte";
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
+  import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { languageTag } from "$lib/features/i18n";
@@ -26,6 +27,7 @@
     action,
     popupActions,
     source,
+    indicators,
     ...rest
   }: MediaCardProps = $props();
 
@@ -65,6 +67,12 @@
       {badge}
       tag={coverTag}
     />
+
+    {#if indicators}
+      <IndicatorTags>
+        {@render indicators()}
+      </IndicatorTags>
+    {/if}
   </Link>
 {/snippet}
 

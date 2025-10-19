@@ -31,6 +31,9 @@
   --color-text-preview-tag: var(--shade-10);
   --color-background-preview-tag: var(--orange-600);
 
+  --color-text-indicator-tag: var(--shade-10);
+  --color-background-indicator-tag: var(--shade-800);
+
   /**
    * Avatar
    */

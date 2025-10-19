@@ -6,6 +6,7 @@
   import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
+  import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { getLocale } from "$lib/features/i18n";
@@ -28,6 +29,7 @@
     popupActions,
     media,
     source,
+    indicators,
     ...rest
   }: MediaCardProps | EpisodeCardProps = $props();
 
@@ -77,6 +79,11 @@
         alt={`Poster for ${coverData.title}`}
         src={coverData.poster}
       />
+      {#if indicators}
+        <IndicatorTags>
+          {@render indicators()}
+        </IndicatorTags>
+      {/if}
     </div>
 
     <SummaryCardDetails>
@@ -155,15 +162,23 @@
       display: flex;
       flex-grow: 1;
       text-decoration: none;
-      overflow: hidden;
     }
   }
 
   .trakt-summary-poster {
+    --poster-width: calc(
+      var(--height-summary-card-cover) * var(--poster-aspect-ratio)
+    );
+
     height: var(--height-summary-card-cover);
-    width: calc(var(--height-summary-card-cover) * var(--poster-aspect-ratio));
+    width: var(--poster-width);
 
     flex-shrink: 0;
+
+    :global(.trakt-indicator-tags) {
+      left: 0;
+      width: var(--poster-width);
+    }
   }
 
   .trakt-summary-card-tags {
