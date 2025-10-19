@@ -135,6 +135,13 @@
   --toggle-background-color: var(--shade-100);
   --toggle-background-hover-color: var(--shade-200);
   --toggle-foreground-color: var(--shade-900);
+
+  /*
+   * Sentiments
+   */
+  --sentiments-background: radial-gradient(79.17% 85.85% at 50% 100.09%,
+    var(--purple-100) 0%,
+    var(--shade-50) 100%);
 }
 
 // Define theme variables for dark mode
@@ -267,6 +274,13 @@
   --toggle-background-color: var(--shade-700);
   --toggle-background-hover-color: var(--shade-600);
   --toggle-foreground-color: var(--shade-50);
+
+  /*
+   * Sentiments
+   */
+  --sentiments-background: radial-gradient(79.17% 85.85% at 50% 100.09%,
+      var(--purple-900) 0%,
+      var(--shade-920) 100%);
 }
 
 // Apply themes to selectors

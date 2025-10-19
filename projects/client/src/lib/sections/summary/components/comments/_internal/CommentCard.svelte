@@ -1,15 +1,14 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
+  import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { ActiveComment } from "./models/ActiveComment";
-  import type { Comment } from "./models/Comment";
-  import SentimentComment from "./SentimentComment.svelte";
   import UserComment from "./UserComment.svelte";
 
   type CommentProps = {
     media: MediaEntry;
-    comment: Comment;
+    comment: MediaComment;
     onDrilldown: (comment: ActiveComment) => void;
     type: ExtendedMediaType;
   };
@@ -18,16 +17,11 @@
 </script>
 
 <Card
-  --width-card="min(var(--width-comment-card), 85vw)"
+  --width-card="var(--width-comment-card)"
   --height-card="var(--height-comment-card)"
 >
   <div class="trakt-comment-container">
-    {#if comment.type === "comment"}
-      <UserComment {comment} {media} {onDrilldown} {type} />
-    {/if}
-    {#if comment.type === "sentiments"}
-      <SentimentComment {comment} />
-    {/if}
+    <UserComment {comment} {media} {onDrilldown} {type} />
   </div>
 </Card>
 

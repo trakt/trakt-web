@@ -2,40 +2,38 @@
   import RateIcon from "$lib/components/icons/RateIcon.svelte";
   import { SimpleRating } from "$lib/models/SimpleRating";
   import type { Sentiments } from "$lib/requests/models/Sentiments";
-  import SentimentHeader from "./SentimentHeader.svelte";
-  import ShadowScroller from "./ShadowScroller.svelte";
+  import ShadowScroller from "../../comments/_internal/ShadowScroller.svelte";
 
   type SentimentProps = {
-    comment: Sentiments;
+    sentiments: Sentiments;
   };
 
-  const { comment }: SentimentProps = $props();
+  const { sentiments }: SentimentProps = $props();
 
   const mappedSentiments = [
     {
-      sentiments: comment.good,
+      sentiments: sentiments.good,
       rating: SimpleRating.Good,
       color: "var(--color-text-sentiment-good)",
     },
     {
-      sentiments: comment.bad,
+      sentiments: sentiments.bad,
       rating: SimpleRating.Bad,
       color: "var(--color-text-sentiment-bad)",
     },
   ];
 </script>
 
-<SentimentHeader />
 <ShadowScroller>
   <div class="trakt-sentiment-body">
     {#each mappedSentiments as { rating, sentiments, color }}
-      <div class="trakt-sentiment-container">
+      <div class="trakt-sentiment-container" style="--sentiment-color: {color}">
         <RateIcon {rating} --icon-fill-color={color} />
-        <ol>
+        <ul>
           {#each sentiments as sentiment}
             <li><p class="small">{sentiment}</p></li>
           {/each}
-        </ol>
+        </ul>
       </div>
     {/each}
   </div>
@@ -48,7 +46,7 @@
     gap: var(--gap-m);
   }
 
-  ol {
+  ul {
     display: flex;
     flex-direction: column;
     gap: var(--gap-xxs);
@@ -62,6 +60,12 @@
 
   .trakt-sentiment-container {
     display: flex;
-    gap: var(--gap-s);
+    gap: var(--gap-xs);
+
+    color: var(--sentiment-color);
+
+    :global(svg) {
+      flex-shrink: 0;
+    }
   }
 </style>

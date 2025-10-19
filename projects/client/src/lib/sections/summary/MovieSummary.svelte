@@ -6,6 +6,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { MovieEntry } from "$lib/requests/models/MovieEntry";
+  import type { Sentiments } from "$lib/requests/models/Sentiments";
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
@@ -15,6 +16,7 @@
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
+  import CommunitySentiments from "./components/sentiment/CommunitySentiments.svelte";
 
   const {
     media,
@@ -23,10 +25,12 @@
     crew,
     streamOn,
     videos,
+    sentiments,
   }: MediaSummaryProps<MovieEntry> & {
     studios: MediaStudio[];
     crew: MediaCrew;
     videos: MediaVideo[];
+    sentiments: Sentiments | Nil;
   } = $props();
 </script>
 
@@ -41,6 +45,8 @@
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 
 <VideoList slug={media.slug} {videos} />
+
+<CommunitySentiments {sentiments} slug={media.slug} />
 
 <Comments {media} type="movie" />
 

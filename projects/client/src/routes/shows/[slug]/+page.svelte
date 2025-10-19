@@ -14,9 +14,16 @@
 
   const { params }: PageProps = $props();
 
-  const { show, intl, studios, crew, seasons, streamOn, isLoading } = $derived(
-    useShow(params.slug),
-  );
+  const {
+    show,
+    intl,
+    studios,
+    crew,
+    seasons,
+    streamOn,
+    isLoading,
+    sentiments,
+  } = $derived(useShow(params.slug));
 
   const videos = $derived(
     useShowVideos({
@@ -81,6 +88,7 @@
       seasons={$seasons!}
       streamOn={$streamOn}
       videos={$videos}
+      sentiments={$sentiments}
       {currentSeason}
     />
   {:else}
