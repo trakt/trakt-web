@@ -12,6 +12,7 @@ import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 
 const MovieProgressSchema = MovieEntrySchema.merge(z.object({
   progress: z.number(),
+  minutesElapsed: z.number(),
   minutesLeft: z.number(),
 }));
 export type MovieProgressEntry = z.infer<typeof MovieProgressSchema>;
@@ -20,12 +21,14 @@ type MovieProgressParams = PaginationParams & ApiParams;
 
 const mapToInProgressMovie = (response: MovieProgressResponse) => {
   const runtime = response.movie.runtime ?? 0;
+  const minutesElapsed = Math.floor((response.progress / 100) * runtime);
 
   return {
     ...mapToMovieEntry(response.movie),
     progress: response.progress,
+    minutesElapsed,
     minutesLeft: runtime -
-      Math.floor((response.progress / 100) * runtime),
+      minutesElapsed,
   };
 };
 
@@ -52,7 +55,11 @@ export const movieProgressQuery = defineQuery({
   ) => [params.page, params.limit],
   request: movieProgressRequest,
   mapper: (response) => ({
-    entries: response.body.map(mapToInProgressMovie),
+    entries: response.body.map(mapToInProgressMovie)
+      /**
+       * FIXME: remove once the DB accurately tracks progress
+       */
+      .filter((movie) => movie.minutesElapsed > 5),
     page: extractPageMeta(response.headers),
   }),
   schema: PaginatableSchemaFactory(MovieProgressSchema),
