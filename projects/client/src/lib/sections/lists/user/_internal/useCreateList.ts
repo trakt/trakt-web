@@ -1,6 +1,5 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
-import * as m from '$lib/features/i18n/messages.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { createListRequest } from '$lib/requests/queries/users/createListRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
@@ -11,11 +10,8 @@ export function useCreateList() {
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.ListCreate);
 
-  const createList = async () => {
-    // skipcq: JS-0052
-    const enteredName = prompt(m.input_prompt_create_list());
-    const newName = enteredName?.trim();
-
+  const createList = async (name: string) => {
+    const newName = name?.trim();
     if (!newName) {
       return;
     }
