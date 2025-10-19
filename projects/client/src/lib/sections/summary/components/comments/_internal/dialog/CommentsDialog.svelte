@@ -56,6 +56,7 @@
       title=""
       --height-list="min(var(--height-comment-thread-list), calc(0.7 * var(--dialog-height)))"
       --item-width="var(--width-comment-thread-card)"
+      variant="centered"
     >
       {#snippet item(comment)}
         <comment-thread
