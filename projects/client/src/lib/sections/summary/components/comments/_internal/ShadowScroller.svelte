@@ -2,6 +2,8 @@
   import { setScrollInfo } from "./setScrollInfo";
 
   const { children }: ChildrenProps = $props();
+
+  // FIXME: remove this component when getting rid of scrollable comment & sentiment cards
 </script>
 
 <div class="trakt-shadow-wrapper">
@@ -16,47 +18,41 @@
     overflow: auto;
     position: relative;
 
-    &::before {
-      --list-shadow-direction: to top;
-      top: 0;
-    }
+    --mask-size: var(--ni-24);
+    mask-image: none;
 
-    &::after {
-      --list-shadow-direction: to bottom;
-      bottom: 0;
-    }
-
-    &:global(:has(.scrolled-down))::before,
-    &:global(:has(.scrolled-up))::after {
-      opacity: 1;
-    }
-
-    &::before,
-    &::after {
-      content: "";
-      z-index: var(--layer-raised);
-      pointer-events: none;
-
-      position: absolute;
-      left: 0;
-
-      width: 100%;
-      height: var(--ni-24);
-
-      opacity: 0;
-      transition: opacity var(--transition-increment) ease-in-out;
-
-      background: linear-gradient(
-        var(--list-shadow-direction),
+    &:global(:has(.scrolled-down):not(:has(.scrolled-up))) {
+      mask-image: linear-gradient(
+        to bottom,
         transparent 0%,
-        var(--color-card-background) 100%
+        black var(--mask-size),
+        black 100%
+      );
+    }
+
+    &:global(:has(.scrolled-up):not(:has(.scrolled-down))) {
+      mask-image: linear-gradient(
+        to top,
+        transparent 0%,
+        black var(--mask-size),
+        black 100%
+      );
+    }
+
+    &:global(:has(.scrolled-down):has(.scrolled-up)) {
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black var(--mask-size),
+        black calc(100% - var(--mask-size)),
+        transparent 100%
       );
     }
   }
 
   .trakt-shadow-scroller {
     height: 100%;
-    min-height: var(--ni-24);
+    min-height: var(--mask-size);
 
     overflow-y: auto;
     overflow-x: hidden;
