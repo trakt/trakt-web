@@ -65,8 +65,15 @@
         </JoinTraktButton>
       </RenderFor>
       <RenderFor audience="authenticated">
-        <FilterButton size="small" />
-        <ProfileLink />
+        <RenderForFeature flag={FeatureFlag.Discover}>
+          {#snippet enabled()}
+            {#if isOnDiscoverablePage}
+              <FilterButton size="small" />
+            {/if}
+          {/snippet}
+          <FilterButton size="small" />
+          <ProfileLink />
+        </RenderForFeature>
       </RenderFor>
     </div>
   </nav>
