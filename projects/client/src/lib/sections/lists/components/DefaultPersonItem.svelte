@@ -39,15 +39,15 @@
       src={person.headshot.url.thumb}
       alt={`${m.image_alt_person_headshot({ person: person.name })}`}
     />
-    <CardFooter>
-      <p class="trakt-card-title ellipsis">
-        {person.name}
-      </p>
-      {#if person.knownFor}
-        <p class="trakt-card-subtitle ellipsis">
-          {subtitle ?? toTranslatedValue("position", person.knownFor)}
-        </p>
-      {/if}
-    </CardFooter>
   </Link>
+  <CardFooter>
+    <p class="trakt-card-title ellipsis">
+      {person.name}
+    </p>
+    {#if person.knownFor}
+      <p class="trakt-card-subtitle ellipsis">
+        {subtitle ?? toTranslatedValue("position", person.knownFor)}
+      </p>
+    {/if}
+  </CardFooter>
 </PersonCard>
