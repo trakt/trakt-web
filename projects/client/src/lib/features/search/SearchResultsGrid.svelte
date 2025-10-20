@@ -5,13 +5,11 @@
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import MediaTypeTag from "$lib/components/media/tags/MediaTypeTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import { getLocale } from "$lib/features/i18n";
   import { type MediaInputDefault } from "$lib/models/MediaInput";
   import { type MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import DefaultMediaItem from "$lib/sections/lists/components/DefaultMediaItem.svelte";
   import DefaultPersonItem from "$lib/sections/lists/components/DefaultPersonItem.svelte";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import type { Snippet } from "svelte";
   import { useSearch } from "./useSearch";
 
@@ -74,9 +72,7 @@
         <DefaultPersonItem
           person={item}
           source="search"
-          subtitle={item.birthday
-            ? toHumanDay(item.birthday, getLocale(), "short")
-            : undefined}
+          variant="birthday"
           {onclick}
         />
       {/if}
