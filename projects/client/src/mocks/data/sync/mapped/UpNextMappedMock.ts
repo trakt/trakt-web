@@ -1,4 +1,4 @@
-import type { UpNextEntry } from '$lib/requests/queries/sync/upNextQuery.ts';
+import type { UpNextEntry } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { EpisodeSiloMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloMappedMock.ts';
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 

@@ -6,17 +6,35 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
-import { mapUpNextResponse } from '$lib/requests/queries/sync/upNextQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { type UpNextResponse } from '@trakt/api';
 import { z } from 'zod';
+import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
+import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 
 export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
   z.object({
     show: ShowEntrySchema,
   }),
 );
+export type UpNextEntry = z.infer<typeof UpNextEntryNitroSchema>;
 
 type UpNextParams = PaginationParams & ApiParams;
+
+function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
+  const show = mapToShowEntry(item.show);
+  const episode = mapToEpisodeEntry(item.progress.next_episode);
+  episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
+
+  return {
+    show,
+    ...episode,
+    total: item.progress.aired,
+    completed: item.progress.completed,
+    remaining: item.progress.aired - item.progress.completed,
+    minutesLeft: item.progress.stats?.minutes_left ?? 0,
+  };
+}
 
 const upNextNitroRequest = (params: UpNextParams) => {
   const { fetch, limit, page } = params;
