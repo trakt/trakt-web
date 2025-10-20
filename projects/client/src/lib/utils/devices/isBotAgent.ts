@@ -25,6 +25,7 @@ const bots = [
   'SkypeUriPreview',
   'Bluesky',
   'Fedicabot',
+  'Mastodon',
 
   // Other bots
   'MJ12bot',
