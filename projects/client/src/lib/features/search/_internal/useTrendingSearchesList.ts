@@ -4,6 +4,7 @@ import type { PersonSummary } from '$lib/requests/models/PersonSummary.ts';
 import { peopleThisMonthQuery } from '$lib/requests/queries/people/peopleThisMonthQuery.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import { searchTrendingQuery } from '$lib/requests/queries/search/searchTrendingQuery.ts';
+import { isSameDayOfYear } from '$lib/utils/date/isSameDayOfYear.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
@@ -22,10 +23,7 @@ function modeToQuery(
 
 function hasBirthday(person: PersonSummary): boolean {
   const today = new Date();
-  const birthday = person.birthday;
-
-  return birthday?.getMonth() === today.getMonth() &&
-    birthday?.getDate() === today.getDate();
+  return person.birthday ? isSameDayOfYear(person.birthday, today) : false;
 }
 
 export function useTrendingSearchesList(mode: SearchMode) {
