@@ -21,7 +21,7 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type: MediaType)}
+{#snippet content(type: MediaType, intent: "all" | "continue")}
   <DrillableMediaList
     type="episode"
     id="up-next-list"
@@ -32,7 +32,11 @@
         type,
         page: 1,
         limit: DEFAULT_PAGE_SIZE,
-        useList: useUpNextList,
+        useList: (params) =>
+          useUpNextList({
+            ...params,
+            intent,
+          }),
         compareFn: (l, r) => {
           const isComparingEpisodes = "show" in l && "show" in r;
           return isComparingEpisodes ? l.show.id === r.show.id : l.id === r.id;
@@ -67,8 +71,8 @@
 
 <RenderForFeature flag={FeatureFlag.Discover}>
   {#snippet enabled()}
-    {@render content($mode)}
+    {@render content($mode, "continue")}
   {/snippet}
 
-  {@render content("show")}
+  {@render content("show", "all")}
 </RenderForFeature>

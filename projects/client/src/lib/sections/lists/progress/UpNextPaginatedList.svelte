@@ -18,7 +18,7 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type: MediaType)}
+{#snippet content(type: MediaType, intent: "all" | "continue")}
   <DrilledMediaList
     id="view-all-up-next"
     type="episode"
@@ -30,7 +30,8 @@
           useUpNextList({
             limit: params.limit,
             page: params.page,
-            type: $mode,
+            type,
+            intent,
           }),
         compareFn: (l, r) => {
           const isComparingEpisodes = "show" in l && "show" in r;
@@ -56,8 +57,8 @@
 
 <RenderForFeature flag={FeatureFlag.Discover}>
   {#snippet enabled()}
-    {@render content($mode)}
+    {@render content($mode, "continue")}
   {/snippet}
 
-  {@render content("show")}
+  {@render content("show", "all")}
 </RenderForFeature>

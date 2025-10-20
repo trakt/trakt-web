@@ -7,7 +7,7 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { type UpNextResponse } from '@trakt/api';
+import { type UpNextIntentRequest, type UpNextResponse } from '@trakt/api';
 import { z } from 'zod';
 import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
@@ -19,7 +19,7 @@ export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
 );
 export type UpNextEntry = z.infer<typeof UpNextEntryNitroSchema>;
 
-type UpNextParams = PaginationParams & ApiParams;
+type UpNextParams = PaginationParams & ApiParams & UpNextIntentRequest;
 
 function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   const show = mapToShowEntry(item.show);
@@ -37,7 +37,7 @@ function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
 }
 
 const upNextNitroRequest = (params: UpNextParams) => {
-  const { fetch, limit, page } = params;
+  const { fetch, limit, page, intent } = params;
 
   return api({ fetch })
     .sync
@@ -47,6 +47,7 @@ const upNextNitroRequest = (params: UpNextParams) => {
       query: {
         page,
         limit,
+        intent,
       },
     });
 };
@@ -62,7 +63,7 @@ export const upNextNitroQuery = defineQuery({
   ],
   dependencies: (
     params: UpNextParams,
-  ) => [params.page, params.limit],
+  ) => [params.page, params.limit, params.intent],
   request: upNextNitroRequest,
   mapper: (response) => ({
     entries: response.body.map(mapUpNextResponse),
