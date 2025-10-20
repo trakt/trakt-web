@@ -5,6 +5,7 @@
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
+  import TextTag from "$lib/components/tags/TextTag.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import EpisodeCard from "./EpisodeCard.svelte";
@@ -44,23 +45,27 @@
     {@render props.tag()}
   {:else}
     <div class="trakt-episode-tag">
-      {#if ["next", "default"].includes(props.variant)}
+      {#if ["default"].includes(props.variant)}
         <DurationTag i18n={TagIntlProvider} {runtime} type="tag" />
       {/if}
 
       {#if props.variant === "next"}
         <ShowProgressTag
-          total={props.episode.total}
+          i18n={TagIntlProvider}
           progress={props.episode.completed}
+          total={props.episode.total}
+          {runtime}
         >
-          <div class="show-progress">
-            <span class="ellipsis">
+          <TextTag>
+            <p class="meta-info capitalize ellipsis">
               {EpisodeIntlProvider.remainingText(props.episode.remaining)}
-            </span>
-            <span class="no-wrap">
+            </p>
+          </TextTag>
+          <TextTag>
+            <p class="meta-info capitalize no-wrap">
               {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
-            </span>
-          </div>
+            </p>
+          </TextTag>
         </ShowProgressTag>
       {/if}
 
@@ -118,16 +123,6 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
-
-  .show-progress {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: var(--gap-xs);
-
-    position: relative;
-  }
 
   trakt-hidden-show {
     :global(.trakt-card-footer-information),
