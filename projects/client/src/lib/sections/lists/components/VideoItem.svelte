@@ -32,15 +32,12 @@
     }}
   >
     <CardCover title={video.title} src={video.thumbnail} alt={video.title} />
-    <CardFooter>
-      <p
-        use:lineClamp={{ lines: 2 }}
-        class="trakt-card-title trakt-video-title"
-      >
-        {video.title}
-      </p>
-    </CardFooter>
   </Link>
+  <CardFooter>
+    <p use:lineClamp={{ lines: 2 }} class="trakt-card-title trakt-video-title">
+      {video.title}
+    </p>
+  </CardFooter>
 </LandscapeCard>
 
 <style>

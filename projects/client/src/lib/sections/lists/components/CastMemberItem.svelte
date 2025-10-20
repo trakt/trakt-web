@@ -21,13 +21,13 @@
       src={castMember.headshot.url.thumb}
       alt={`${m.image_alt_person_headshot({ person: castMember.name })}`}
     />
-    <CardFooter>
-      <p class="trakt-card-title ellipsis">
-        {castMember.name}
-      </p>
-      <p class="trakt-card-subtitle ellipsis">
-        {castMember.characterName}
-      </p>
-    </CardFooter>
   </Link>
+  <CardFooter>
+    <p class="trakt-card-title ellipsis">
+      {castMember.name}
+    </p>
+    <p class="trakt-card-subtitle ellipsis">
+      {castMember.characterName}
+    </p>
+  </CardFooter>
 </PersonCard>
