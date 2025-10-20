@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "Senaste"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Ställ in omslagsbilder"
+    },
+    "button_text_set_cover_image": {
+      "default": "Använd som omslag"
+    },
+    "button_label_set_cover_image": {
+      "default": "Använd bilden av \"{title}\" som ditt omslag.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

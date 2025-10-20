@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "Seneste"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Indstil coverbilleder"
+    },
+    "button_text_set_cover_image": {
+      "default": "Indstil som cover"
+    },
+    "button_label_set_cover_image": {
+      "default": "Indstil billedet af \"{title}\" som dit coverbillede.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

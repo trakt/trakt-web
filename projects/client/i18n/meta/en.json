@@ -5745,6 +5745,35 @@
         "android",
         "ios"
       ]
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "to set cover images",
+      "description": "Text for the link that takes users to the VIP upsell page. This should be as short as possible and be translated as if it starts with 'get vip' (without it being part of the translation).",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_set_cover_image": {
+      "default": "Set as cover image",
+      "description": "Text for the button that sets the background image of a movie, show, or episode as the users cover image. This must be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_set_cover_image": {
+      "default": "Set the image of \"{title}\" as your cover image.",
+      "description": "Aria-label for the button that sets the background image of a movie, show, or episode as the users cover image.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

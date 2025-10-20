@@ -5,6 +5,7 @@
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
+  import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import StreamOnButton from "../../../stream/StreamOnButton.svelte";
   import EpisodeSideActions from "./EpisodeSideActions.svelte";
 
@@ -44,5 +45,12 @@
     />
 
     <EpisodeSideActions {title} {showTitle} {episode} style="dropdown-item" />
+
+    <SetCoverImageAction
+      style="dropdown-item"
+      type="episode"
+      id={episode.id}
+      {title}
+    />
   {/snippet}
 </PopupMenu>

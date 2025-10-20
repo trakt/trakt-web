@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "Nylige"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Sett forsidebilder"
+    },
+    "button_text_set_cover_image": {
+      "default": "Sett som forside"
+    },
+    "button_label_set_cover_image": {
+      "default": "Sett bildet av \"{title}\" som ditt forsidebilde.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

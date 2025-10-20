@@ -1,5 +1,6 @@
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { SimpleRating } from '$lib/models/SimpleRating.ts';
+import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
@@ -22,6 +23,7 @@ type CtaDataType = { type: CtaType };
 type DrilldownType = SourceType & { type?: string };
 type SearchType = { mode: SearchMode };
 type ShareType = DrilldownType;
+type CoverImageType = { type: ExtendedMediaType };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -52,6 +54,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.StreamOn]: StreamOnType;
 
   [AnalyticsEvent.Settings]: { settings: string };
+  [AnalyticsEvent.CoverImage]: CoverImageType;
 
   [AnalyticsEvent.Follow]: FollowType;
 

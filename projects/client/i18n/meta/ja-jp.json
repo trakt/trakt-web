@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "最近"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "カバー画像を設定"
+    },
+    "button_text_set_cover_image": {
+      "default": "カバーに設定"
+    },
+    "button_label_set_cover_image": {
+      "default": "\"{title}\"の画像をカバーに設定。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

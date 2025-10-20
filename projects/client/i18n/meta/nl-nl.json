@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "Recent"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Coverafbeeldingen instellen"
+    },
+    "button_text_set_cover_image": {
+      "default": "Instellen als cover"
+    },
+    "button_label_set_cover_image": {
+      "default": "Stel de afbeelding van \"{title}\" in als je cover.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
