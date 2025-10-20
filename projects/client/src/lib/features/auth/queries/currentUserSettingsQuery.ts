@@ -167,7 +167,11 @@ const currentUserRequest = ({ fetch }: ApiParams) =>
 export const currentUserQueryKey = ['userSettings'] as const;
 export const currentUserSettingsQuery = defineQuery({
   key: 'currentUserSettings',
-  invalidations: [InvalidateAction.User.Avatar, InvalidateAction.User.Settings],
+  invalidations: [
+    InvalidateAction.User.Avatar,
+    InvalidateAction.User.Settings,
+    InvalidateAction.User.CoverImage,
+  ],
   dependencies: [],
   request: currentUserRequest,
   mapper: (response) => mapUserSettingsResponse(response.body),

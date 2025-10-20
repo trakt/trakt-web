@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "Ostatnie"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Ustaw obrazy okładki"
+    },
+    "button_text_set_cover_image": {
+      "default": "Ustaw jako okładkę"
+    },
+    "button_label_set_cover_image": {
+      "default": "Ustaw obraz \"{title}\" jako swoją okładkę.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

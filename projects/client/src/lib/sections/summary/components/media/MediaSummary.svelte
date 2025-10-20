@@ -12,6 +12,7 @@
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
+  import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import type { MarkAsWatchedActionProps } from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedActionProps";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
@@ -132,6 +133,12 @@
           />
         {/if}
       </RenderFor>
+      <SetCoverImageAction
+        style="action"
+        type={media.type}
+        id={media.id}
+        {title}
+      />
       <ShareButton
         {title}
         textFactory={({ title }) => {

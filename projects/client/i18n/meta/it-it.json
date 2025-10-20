@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "Recenti"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Imposta immagini di copertina"
+    },
+    "button_text_set_cover_image": {
+      "default": "Imposta come copertina"
+    },
+    "button_label_set_cover_image": {
+      "default": "Imposta l'immagine di \"{title}\" come copertina.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -8,6 +8,7 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
+  import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -95,6 +96,7 @@
           {episode}
         />
       </RenderFor>
+      <SetCoverImageAction style="action" {type} id={episode.id} {title} />
       <ShareButton
         {title}
         textFactory={({ title }) =>

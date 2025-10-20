@@ -2094,6 +2094,20 @@
     },
     "button_text_recent_comments": {
       "default": "Aktuell"
+    },
+    "link_text_vip_cover_image_upsell": {
+      "default": "Cover-Bilder festlegen"
+    },
+    "button_text_set_cover_image": {
+      "default": "Als Cover festlegen"
+    },
+    "button_label_set_cover_image": {
+      "default": "Das Bild von \"{title}\" als Ihr Cover festlegen.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
     }
   }
 }
