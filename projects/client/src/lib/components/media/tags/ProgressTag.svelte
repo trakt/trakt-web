@@ -39,7 +39,7 @@
       --progress-bar-spacing: var(--ni-6);
       --progress-bar-offset: calc(var(--progress-bar-spacing) / 2);
       overflow: hidden;
-      padding: var(--ni-4) var(--ni-8);
+      padding: var(--ni-4) var(--ni-10);
 
       &::before {
         content: "";
