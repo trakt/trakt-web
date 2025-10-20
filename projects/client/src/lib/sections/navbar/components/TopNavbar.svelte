@@ -5,10 +5,12 @@
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import { trackWindowScrollDirection } from "$lib/utils/actions/trackWindowScrollDirection";
+  import { NOOP_FN } from "$lib/utils/constants";
   import { HIDDEN_ROUTE_IDS } from "./_internal/constants";
   import Greeting from "./_internal/Greeting.svelte";
   import FilterButton from "./filter/FilterButton.svelte";
@@ -23,6 +25,11 @@
 
   const { mode: selectedType, setMode, options, routes } = useDiscover();
   const isOnDiscoverablePage = $derived($routes.includes(page.route.id ?? ""));
+
+  const { isEnabled } = $derived(useFeatureFlag(FeatureFlag.Discover));
+  const scrollDirectionTracker = $derived(
+    $isEnabled ? NOOP_FN : trackWindowScrollDirection,
+  );
 </script>
 
 <header>
@@ -31,7 +38,7 @@
     class:is-authorized={$isAuthorized}
     class:is-hidden={isHidden}
     use:trackWindowScroll={"trakt-navbar-scroll"}
-    use:trackWindowScrollDirection={{
+    use:scrollDirectionTracker={{
       upClassName: "trakt-navbar-scroll-up",
       downClassName: "trakt-navbar-scroll-down",
       offsetVar: "var(--navbar-height)",
