@@ -9,20 +9,28 @@ const children = createRawSnippet(() => ({
 }));
 
 describe('ShowProgressTag', () => {
+  const runtime = 25;
+
   it('should set correct progress width with 0%', () => {
-    render(ShowProgressTag, { props: { total: 100, progress: 0, children } });
+    render(ShowProgressTag, {
+      props: { runtime, total: 100, progress: 0, children },
+    });
     const element = screen.getByRole('progressbar');
     expect(element.style.getPropertyValue('--progress-width')).toBe('0%');
   });
 
   it('should set correct progress width with 50%', () => {
-    render(ShowProgressTag, { props: { total: 100, progress: 50, children } });
+    render(ShowProgressTag, {
+      props: { runtime, total: 100, progress: 50, children },
+    });
     const element = screen.getByRole('progressbar');
     expect(element.style.getPropertyValue('--progress-width')).toBe('50%');
   });
 
   it('should set correct progress width with 100%', () => {
-    render(ShowProgressTag, { props: { total: 100, progress: 100, children } });
+    render(ShowProgressTag, {
+      props: { runtime, total: 100, progress: 100, children },
+    });
     const element = screen.getByRole('progressbar');
     expect(element.style.getPropertyValue('--progress-width')).toBe('100%');
   });
@@ -32,7 +40,7 @@ describe('ShowProgressTag', () => {
     const total = 100;
 
     render(ShowProgressTag, {
-      props: { total, progress, children },
+      props: { runtime, total, progress, children },
     });
     const expectedPercentage = stretchedPercentage({
       value: progress,
