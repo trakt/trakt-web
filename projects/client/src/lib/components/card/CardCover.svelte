@@ -115,7 +115,7 @@
       gap: var(--gap-xxs);
 
       :global(.trakt-tag) {
-        height: var(--ni-24);
+        height: var(--ni-20);
         box-sizing: border-box;
       }
     }
