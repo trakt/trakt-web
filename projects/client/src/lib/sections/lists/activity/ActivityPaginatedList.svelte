@@ -28,11 +28,11 @@
   <DrilledMediaList
     id="view-all-activity"
     {title}
-    type="episode"
+    {type}
+    cardOrientation="landscape"
     useList={(params) =>
       useActivityList({
         ...params,
-        type,
         limit: DEFAULT_ACTIVITY_PAGE_SIZE,
         activityType,
       })}
