@@ -59,6 +59,6 @@
 
     /** FIXME: remove when we have adaptive typography and updated sizes */
     font-size: var(--ni-18);
-    line-height: var(--ni-18);
+    line-height: var(--ni-22);
   }
 </style>
