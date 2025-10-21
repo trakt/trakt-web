@@ -8,7 +8,7 @@
   import CtaItem from "../components/cta/CtaItem.svelte";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
-  import CreateListHeader from "./_internal/CreateListHeader.svelte";
+  import ListsHeader from "./_internal/ListsHeader.svelte";
   import PersonalListsPlaceholder from "./_internal/PersonalListsPlaceholder.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
@@ -58,19 +58,27 @@
 
 {#if isPresentable}
   {#if variant === "preview"}
-    {#if isMine}
-      <RenderFor audience="authenticated" navigation="default">
-        <CreateListHeader />
-      </RenderFor>
+    <div class="trakt-lists-preview">
+      {#if $isMe}
+        <ListsHeader {title}>
+          {#snippet actions()}
+            {#if isMine}
+              <RenderFor audience="authenticated" navigation="default">
+                <CreateListAction />
+              </RenderFor>
+            {/if}
+          {/snippet}
+        </ListsHeader>
+      {/if}
 
-      {#if $lists.length === 0}
+      {#if isMine && $lists.length === 0}
         <PersonalListsPlaceholder />
       {/if}
-    {/if}
 
-    {#each $lists as list (list.id)}
-      <UserList {list} empty={emptyList} />
-    {/each}
+      {#each $lists as list (list.id)}
+        <UserList {list} empty={emptyList} />
+      {/each}
+    </div>
   {/if}
 
   {#if variant === "summary"}
@@ -102,3 +110,11 @@
     </SectionList>
   {/if}
 {/if}
+
+<style>
+  .trakt-lists-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-micro);
+  }
+</style>

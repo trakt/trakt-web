@@ -2607,7 +2607,7 @@
       ]
     },
     "list_title_personal_lists": {
-      "default": "Personal",
+      "default": "Your lists",
       "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible.",
       "exclude": [
         "ios"
@@ -2622,7 +2622,7 @@
       ]
     },
     "list_title_liked_lists": {
-      "default": "Liked",
+      "default": "Liked lists",
       "description": "Title for lists containing the user's liked lists. This title should be as short and concise as possible.",
       "exclude": [
         "android",
