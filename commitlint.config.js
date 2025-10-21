@@ -96,6 +96,7 @@ module.exports = {
         'streaming',
         'summary',
         'tags',
+        'team',
         'theme',
         'toast',
         'toggle',
