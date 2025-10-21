@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
+  import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
@@ -25,7 +25,7 @@
 {#snippet discoverLink()}
   <Link href={UrlBuilder.discover()}>
     <div class="trakt-mobile-navbar-link">
-      <MediaIcon />
+      <DiscoverIcon />
     </div>
   </Link>
 {/snippet}

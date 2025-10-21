@@ -3,7 +3,7 @@
   import { TestId } from "$e2e/models/TestId";
   import Button from "$lib/components/buttons/Button.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
-  import MediaIcon from "$lib/components/icons/MediaIcon.svelte";
+  import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
@@ -51,7 +51,7 @@
   >
     {m.button_text_discover()}
     {#snippet icon()}
-      <MediaIcon />
+      <DiscoverIcon />
     {/snippet}
   </Button>
 {/snippet}
