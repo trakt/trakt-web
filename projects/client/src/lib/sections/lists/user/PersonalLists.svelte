@@ -5,9 +5,11 @@
   import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
+  import CtaItem from "../components/cta/CtaItem.svelte";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
   import CreateListHeader from "./_internal/CreateListHeader.svelte";
+  import PersonalListsPlaceholder from "./_internal/PersonalListsPlaceholder.svelte";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
@@ -48,7 +50,7 @@
   const isPresentable = $derived(isMine || (!$isLoading && $lists.length > 0));
 </script>
 
-{#snippet empty()}
+{#snippet emptyList()}
   {#if !$isLoading}
     {m.list_placeholder_personal_list_empty()}
   {/if}
@@ -60,10 +62,14 @@
       <RenderFor audience="authenticated" navigation="default">
         <CreateListHeader />
       </RenderFor>
+
+      {#if $lists.length === 0}
+        <PersonalListsPlaceholder />
+      {/if}
     {/if}
 
     {#each $lists as list (list.id)}
-      <UserList {list} {empty} />
+      <UserList {list} empty={emptyList} />
     {/each}
   {/if}
 
@@ -72,7 +78,6 @@
       id={`personal-lists-${type}-list`}
       items={$lists}
       {title}
-      {empty}
       --height-list="var(--height-lists-list)"
     >
       {#snippet item(list)}
@@ -82,6 +87,16 @@
       {#snippet dynamicActions()}
         {#if isMine}
           <CreateListAction />
+        {/if}
+      {/snippet}
+
+      {#snippet empty()}
+        {#if !$isLoading}
+          {#if $isMe}
+            <CtaItem cta={{ type: "personal-list" }} variant="placeholder" />
+          {:else}
+            {@render emptyList()}
+          {/if}
         {/if}
       {/snippet}
     </SectionList>

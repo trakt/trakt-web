@@ -2,6 +2,8 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import ActivityCtaCard from "./_internal/ActivityCtaCard.svelte";
   import ActivityCtaPlaceholder from "./_internal/ActivityCtaPlaceholder.svelte";
+  import ListCtaCard from "./_internal/ListCtaCard.svelte";
+  import ListCtaPlaceholder from "./_internal/ListCtaPlaceholder.svelte";
   import MediaCtaCard from "./_internal/MediaCtaCard.svelte";
   import MediaCtaPlaceholder from "./_internal/MediaCtaPlaceholder.svelte";
   import { CtaItemIntlProvider } from "./CtaItemIntlProvider";
@@ -21,6 +23,8 @@
   {#if variant === "card"}
     {#if cta.type === "activity" || cta.type === "social"}
       <ActivityCtaCard intl={CtaItemIntlProvider} {cta} />
+    {:else if cta.type === "personal-list"}
+      <ListCtaCard intl={CtaItemIntlProvider} />
     {:else}
       <MediaCtaCard {cta} intl={CtaItemIntlProvider} />
     {/if}
@@ -33,6 +37,8 @@
     >
       {#if cta.type === "activity" || cta.type === "social"}
         <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
+      {:else if cta.type === "personal-list"}
+        <ListCtaPlaceholder intl={CtaPlaceholderIntlProvider} />
       {:else}
         <MediaCtaPlaceholder {cta} intl={CtaPlaceholderIntlProvider} />
       {/if}
