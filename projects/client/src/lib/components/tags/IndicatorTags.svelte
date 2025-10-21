@@ -11,7 +11,7 @@
     z-index: var(--layer-raised);
 
     position: absolute;
-    width: 100%;
+    width: var(--width-override-card, var(--width-card, 100%));
 
     bottom: var(--ni-neg-10);
 
