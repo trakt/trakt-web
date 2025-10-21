@@ -5774,6 +5774,14 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_start_watching": {
+      "default": "Start Watching",
+      "description": "Title for the Start Watching page, which shows the movies or shows a user should start watching.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

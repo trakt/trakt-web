@@ -2108,6 +2108,9 @@
           "type": "string"
         }
       }
+    },
+    "page_title_start_watching": {
+      "default": "Commencer à regarder"
     }
   }
 }

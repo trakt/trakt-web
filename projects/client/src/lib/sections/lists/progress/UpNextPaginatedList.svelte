@@ -12,33 +12,37 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   const { list: hidden } = $derived(useHiddenShows());
 
+  const { intent }: { intent: "continue" | "start" } = $props();
+
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
   const style = $derived($isMobile ? "summary" : "cover");
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type: MediaType, intent: "all" | "continue")}
+{#snippet content(type: MediaType, upNextIntent: "all" | "continue" | "start")}
   <DrilledMediaList
-    id="view-all-up-next"
+    id={`view-all-up-next-${type}-${upNextIntent}`}
     type="episode"
     useList={(params) =>
       useStablePaginated({
         ...params,
-        type: "episode",
+        type,
         useList: (params) =>
           useUpNextList({
             limit: params.limit,
             page: params.page,
             type,
-            intent,
+            intent: upNextIntent,
           }),
         compareFn: (l, r) => {
           const isComparingEpisodes = "show" in l && "show" in r;
           return isComparingEpisodes ? l.show.id === r.show.id : l.id === r.id;
         },
       })}
-    title={m.list_title_up_next()}
+    title={intent === "start"
+      ? m.list_title_start_watching()
+      : m.list_title_up_next()}
   >
     {#snippet item(mediaItem)}
       {#if "show" in mediaItem}
@@ -57,7 +61,10 @@
 
 <RenderForFeature flag={FeatureFlag.Discover}>
   {#snippet enabled()}
-    {@render content($mode, "continue")}
+    <!-- FIXME: use something better to deal with pagination -->
+    {#key `${$mode}-${intent}`}
+      {@render content($mode, intent)}
+    {/key}
   {/snippet}
 
   {@render content("show", "all")}

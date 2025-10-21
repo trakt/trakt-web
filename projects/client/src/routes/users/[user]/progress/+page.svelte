@@ -14,5 +14,5 @@
 >
   <TraktPageCoverSetter />
 
-  <UpNextPaginatedList />
+  <UpNextPaginatedList intent="continue" />
 </TraktPage>
