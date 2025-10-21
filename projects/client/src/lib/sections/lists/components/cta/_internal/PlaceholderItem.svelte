@@ -3,7 +3,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
-  import type { MediaCta } from "../models/Cta";
+  import type { ListCta, MediaCta } from "../models/Cta";
   import CtaListCard from "./CtaListCard.svelte";
   import MediaCtaButton from "./MediaCtaButton.svelte";
   import { useCtaCardVariant } from "./useCtaCardVariant";
@@ -14,7 +14,7 @@
     intl,
     icon,
   }: {
-    cta: MediaCta;
+    cta: MediaCta | ListCta;
     intl: CtaItemIntl;
     icon: Snippet;
   } = $props();
@@ -39,11 +39,13 @@
         </RenderFor>
       </div>
 
-      <MediaCtaButton {cta} {intl} size="small">
-        {#snippet icon()}
-          <SearchIcon />
-        {/snippet}
-      </MediaCtaButton>
+      {#if cta.type !== "personal-list"}
+        <MediaCtaButton {cta} {intl} size="small">
+          {#snippet icon()}
+            <SearchIcon />
+          {/snippet}
+        </MediaCtaButton>
+      {/if}
     </div>
 
     <RenderFor

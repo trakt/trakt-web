@@ -8,7 +8,8 @@ export type CtaType =
   | 'personal-activity'
   | 'watchlist'
   | 'favorites'
-  | 'social';
+  | 'social'
+  | 'personal-list';
 
 type CtaMap = {
   [K in CtaType]: K extends 'watchlist' | 'favorites'
@@ -18,5 +19,9 @@ type CtaMap = {
 
 export type Cta = CtaMap[CtaType];
 
-export type MediaCta = Exclude<Cta, { type: 'activity' } | { type: 'social' }>;
+export type MediaCta = Exclude<
+  Cta,
+  { type: 'activity' } | { type: 'social' } | { type: 'personal-list' }
+>;
+export type ListCta = Extract<Cta, { type: 'personal-list' }>;
 export type SocialCta = Extract<Cta, { type: 'activity' } | { type: 'social' }>;

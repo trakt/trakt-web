@@ -33,6 +33,9 @@ export const CtaItemIntlProvider: CtaItemIntl = {
           ? m.text_cta_favorites_shows()
           : m.text_cta_favorites_movies();
       }
+      case 'personal-list': {
+        return m.text_cta_personal_lists();
+      }
     }
   },
   cta: {
