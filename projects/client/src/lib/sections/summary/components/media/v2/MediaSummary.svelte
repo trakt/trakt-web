@@ -40,6 +40,17 @@
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
   const hasTags = $derived(postCreditsCount > 0 || $watchCount > 0);
+
+  const status = $derived.by(() => {
+    if (media.status !== "released") {
+      return media.status;
+    }
+
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+    return media.airDate > oneMonthAgo ? media.status : undefined;
+  });
 </script>
 
 {#snippet tags()}
@@ -63,12 +74,7 @@
 
   {#snippet meta()}
     <RatingList ratings={$ratings} airDate={media.airDate} />
-    <SummaryTitle
-      {title}
-      genres={media.genres}
-      year={media.year}
-      status={media.status}
-    />
+    <SummaryTitle {title} genres={media.genres} year={media.year} {status} />
 
     <RenderFor audience="authenticated">
       <MediaActions {media} {streamOn} {title} />
