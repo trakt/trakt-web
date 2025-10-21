@@ -12,6 +12,9 @@ import {
 } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import { derived } from 'svelte/store';
+
+const RELEASED_LIST_LIMIT = 500;
 
 export type UpNextStoreProps = PaginationParams & UpNextIntentParams & {
   type: ExtendedMediaType;
@@ -22,7 +25,10 @@ type ProgressEntry = UpNextEntry | MovieProgressEntry;
 function typeToQuery(props: UpNextStoreProps) {
   switch (props.type) {
     case 'movie':
-      return movieProgressQuery(props) as CreateQueryOptions<
+      return movieProgressQuery({
+        ...props,
+        limit: props.intent === 'start' ? RELEASED_LIST_LIMIT : props.limit,
+      }) as CreateQueryOptions<
         Paginatable<ProgressEntry>
       >;
     case 'show':
@@ -36,5 +42,26 @@ function typeToQuery(props: UpNextStoreProps) {
 export function useUpNextList(
   props: UpNextStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  const { list, page, isLoading } = usePaginatedListQuery(typeToQuery(props));
+
+  return {
+    page,
+    isLoading,
+    list: derived(list, ($list) => {
+      const movies = $list as MovieProgressEntry[];
+      if (props.type === 'movie') {
+        if (props.intent === 'start') {
+          return movies.filter((movie) => movie.airDate <= new Date());
+        }
+
+        /**
+         * FIXME: remove once the DB accurately tracks progress
+         */
+        return movies
+          .filter((movie) => movie.minutesElapsed > 5);
+      }
+
+      return $list;
+    }),
+  };
 }

@@ -10,7 +10,6 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import ActivityList from "$lib/sections/lists/activity/ActivityList.svelte";
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
-  import StartWatchingList from "$lib/sections/lists/start-watching/StartWatchingList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import ReleasedList from "$lib/sections/lists/watchlist/ReleasedList.svelte";
   import MonthInReview from "$lib/sections/month-in-review/MonthInReview.svelte";
@@ -30,10 +29,10 @@
 
   <RenderFor audience="authenticated">
     <MonthInReview />
-    <UpNextList />
+    <UpNextList intent="continue" />
     <RenderForFeature flag={FeatureFlag.Discover}>
       {#snippet enabled()}
-        <StartWatchingList />
+        <UpNextList intent="start" />
       {/snippet}
       <ReleasedList />
     </RenderForFeature>

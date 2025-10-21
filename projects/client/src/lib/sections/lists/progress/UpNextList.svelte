@@ -15,17 +15,21 @@
   import { useHiddenShows } from "./useHiddenShows";
   import { useUpNextList } from "./useUpNextList";
 
+  const { intent }: { intent: "continue" | "start" } = $props();
+
   const { list: hidden } = $derived(useHiddenShows());
 
   const { user } = useUser();
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type: MediaType, intent: "all" | "continue")}
+{#snippet content(type: MediaType, upNextIntent: "all" | "continue" | "start")}
   <DrillableMediaList
     type="episode"
-    id="up-next-list"
-    source={{ id: "continue-watching" }}
+    id={`up-next-list-${type}-${upNextIntent}`}
+    source={{
+      id: upNextIntent === "start" ? "start-watching" : "continue-watching",
+    }}
     drilldownLabel={"drill label"}
     useList={() =>
       useStablePaginated({
@@ -35,15 +39,20 @@
         useList: (params) =>
           useUpNextList({
             ...params,
-            intent,
+            intent: upNextIntent,
           }),
         compareFn: (l, r) => {
           const isComparingEpisodes = "show" in l && "show" in r;
           return isComparingEpisodes ? l.show.id === r.show.id : l.id === r.id;
         },
       })}
-    urlBuilder={() => UrlBuilder.progress($user?.slug ?? "")}
-    title={m.list_title_up_next()}
+    urlBuilder={() =>
+      intent === "start"
+        ? UrlBuilder.startWatching($user?.slug ?? "")
+        : UrlBuilder.progress($user?.slug ?? "")}
+    title={intent === "start"
+      ? m.list_title_start_watching()
+      : m.list_title_up_next()}
     --height-list={mediaListHeightResolver("landscape")}
   >
     {#snippet item(mediaItem)}
@@ -71,7 +80,7 @@
 
 <RenderForFeature flag={FeatureFlag.Discover}>
   {#snippet enabled()}
-    {@render content($mode, "continue")}
+    {@render content($mode, intent)}
   {/snippet}
 
   {@render content("show", "all")}
