@@ -163,6 +163,10 @@
       flex-grow: 1;
       text-decoration: none;
     }
+
+    :global(.trakt-link) {
+      width: 100%;
+    }
   }
 
   .trakt-summary-poster {
@@ -186,5 +190,10 @@
     align-items: center;
     gap: var(--gap-xs);
     flex-grow: 1;
+  }
+
+  .trakt-card-title,
+  .trakt-card-subtitle {
+    padding-right: var(--ni-18);
   }
 </style>
