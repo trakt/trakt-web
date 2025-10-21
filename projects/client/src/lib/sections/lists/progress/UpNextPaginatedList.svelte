@@ -23,11 +23,11 @@
 {#snippet content(type: MediaType, upNextIntent: "all" | "continue" | "start")}
   <DrilledMediaList
     id={`view-all-up-next-${type}-${upNextIntent}`}
-    type="episode"
+    {type}
+    cardOrientation="landscape"
     useList={(params) =>
       useStablePaginated({
         ...params,
-        type,
         useList: (params) =>
           useUpNextList({
             limit: params.limit,

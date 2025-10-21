@@ -10,6 +10,7 @@
 
   type DrilledMediaListProps = MediaListProps<T, M> & {
     actions?: Snippet<[]>;
+    cardOrientation?: "landscape" | "portrait";
   };
 
   const {
@@ -18,6 +19,7 @@
     empty: externalEmpty,
     useList,
     actions,
+    cardOrientation = "portrait",
     ...props
   }: DrilledMediaListProps = $props();
 
@@ -59,7 +61,7 @@
   {actions}
   items={allItems}
   dimensionObserver={observeDimension}
-  --width-item={mediaCardWidthResolver(type)}
+  --width-item={mediaCardWidthResolver(cardOrientation)}
 >
   {#snippet empty()}
     {#if !$isLoading}
