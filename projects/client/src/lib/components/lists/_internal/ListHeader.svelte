@@ -114,6 +114,10 @@
       }
     }
 
+    .trakt-list-title {
+      gap: var(--gap-micro);
+    }
+
     .trakt-list-title,
     .trakt-list-actions {
       :global(.trakt-action-button) {
