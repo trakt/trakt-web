@@ -2352,14 +2352,6 @@
         "ios"
       ]
     },
-    "header_on_demand": {
-      "default": "On Demand",
-      "description": "Header for the section that shows on-demand services for a movie, show, or episode.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_popup_menu": {
       "default": "Pop up menu for \"{title}\"",
       "description": "Aria-label for the button that opens a popup menu for a movie, show, episode, or list.",
@@ -5786,6 +5778,46 @@
     "page_title_start_watching": {
       "default": "Start Watching",
       "description": "Title for the Start Watching page, which shows the movies or shows a user should start watching.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_stream": {
+      "default": "Stream",
+      "description": "Text label indicating that the media can be streamed. If there is no short translation available, Anglicism is fine.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_rent": {
+      "default": "Rent",
+      "description": "Text label indicating that the media can be rented.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_buy": {
+      "default": "Buy",
+      "description": "Text label indicating that the media can be bought.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_on_demand": {
+      "default": "On demand",
+      "description": "Text label indicating that the media can be streamed on demand.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_title_where_to_watch": {
+      "default": "Where to Watch",
+      "description": "Title for lists containing streaming services where a movie or show is available to watch. This title should be as short and concise as possible.",
       "exclude": [
         "android",
         "ios"

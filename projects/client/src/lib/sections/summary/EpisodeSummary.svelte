@@ -7,6 +7,7 @@
   import CastList from "../lists/CastList.svelte";
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
+  import WhereToWatchList from "../lists/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import EpisodeSummary from "./components/episode/EpisodeSummary.svelte";
   import EpisodeSummaryV2 from "./components/episode/v2/EpisodeSummary.svelte";
@@ -47,6 +48,10 @@
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
   <EpisodeSummary {episode} {show} {showIntl} {episodeIntl} {streamOn} {crew} />
+</RenderFor>
+
+<RenderFor audience="authenticated" navigation="default">
+  <WhereToWatchList slug={show.slug} {streamOn} />
 </RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />

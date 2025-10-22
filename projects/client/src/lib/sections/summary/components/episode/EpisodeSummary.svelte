@@ -13,7 +13,6 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import MediaDetails from "../details/MediaDetails.svelte";
-  import MediaStreamingServices from "../details/MediaStreamingServices.svelte";
   import type { EpisodeSummaryProps } from "./../EpisodeSummaryProps";
   import MediaMetaInfo from "./../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./../overlay/StreamOnOverlay.svelte";
@@ -151,12 +150,5 @@
 <RenderFor audience="all" navigation="default">
   <SummaryContainer>
     <MediaDetails {episode} {crew} type="episode" title={m.header_details()} />
-
-    {#if streamOn}
-      <MediaStreamingServices
-        services={streamOn.services}
-        preferred={streamOn.preferred}
-      />
-    {/if}
   </SummaryContainer>
 </RenderFor>

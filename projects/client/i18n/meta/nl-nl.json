@@ -869,9 +869,6 @@
     "header_streaming": {
       "default": "Waar te kijken"
     },
-    "header_on_demand": {
-      "default": "Op aanvraag"
-    },
     "button_label_popup_menu": {
       "default": "Pop-upmenu voor \"{title}\""
     },
@@ -2114,6 +2111,21 @@
     },
     "page_title_start_watching": {
       "default": "Begin met kijken"
+    },
+    "text_stream": {
+      "default": "Streamen"
+    },
+    "text_rent": {
+      "default": "Huren"
+    },
+    "text_buy": {
+      "default": "Kopen"
+    },
+    "text_on_demand": {
+      "default": "Op aanvraag"
+    },
+    "list_title_where_to_watch": {
+      "default": "Waar te kijken"
     }
   }
 }

@@ -869,9 +869,6 @@
     "header_streaming": {
       "default": "Var du kan se"
     },
-    "header_on_demand": {
-      "default": "On Demand"
-    },
     "button_label_popup_menu": {
       "default": "Popup-meny för \"{title}\""
     },
@@ -2114,6 +2111,21 @@
     },
     "page_title_start_watching": {
       "default": "Börja titta"
+    },
+    "text_stream": {
+      "default": "Streama"
+    },
+    "text_rent": {
+      "default": "Hyra"
+    },
+    "text_buy": {
+      "default": "Köp"
+    },
+    "text_on_demand": {
+      "default": "På begäran"
+    },
+    "list_title_where_to_watch": {
+      "default": "Var man kan se"
     }
   }
 }

@@ -56,6 +56,9 @@
   --width-profile-item: var(--ni-80);
   --height-profile-item: var(--ni-96);
 
+  --width-where-to-watch-item: var(--ni-96);
+  --height-where-to-watch-item: var(--ni-96);
+
   /**
    * List dimensions
    */
@@ -82,6 +85,10 @@
   );
   --height-profile-list: calc(
     var(--height-profile-item) + var(--layout-scrollbar-width)
+  );
+  --height-where-to-watch-list: calc(
+    var(--height-where-to-watch-item) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
   );
 
   /**
