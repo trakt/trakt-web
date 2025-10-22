@@ -869,9 +869,6 @@
     "header_streaming": {
       "default": "Hvor man kan se"
     },
-    "header_on_demand": {
-      "default": "On Demand"
-    },
     "button_label_popup_menu": {
       "default": "Pop op-menu for \"{title}\""
     },
@@ -2114,6 +2111,21 @@
     },
     "page_title_start_watching": {
       "default": "Begynd at se"
+    },
+    "text_stream": {
+      "default": "Stream"
+    },
+    "text_rent": {
+      "default": "Lej"
+    },
+    "text_buy": {
+      "default": "Køb"
+    },
+    "text_on_demand": {
+      "default": "On demand"
+    },
+    "list_title_where_to_watch": {
+      "default": "Hvor man kan se"
     }
   }
 }

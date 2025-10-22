@@ -11,6 +11,7 @@
   import MediaWatchHistoryList from "../lists/history/MediaWatchHistoryList.svelte";
   import RelatedList from "../lists/RelatedList.svelte";
   import VideoList from "../lists/VideoList.svelte";
+  import WhereToWatchList from "../lists/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -40,6 +41,10 @@
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
   <MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
+</RenderFor>
+
+<RenderFor audience="authenticated" navigation="default">
+  <WhereToWatchList slug={media.slug} {streamOn} />
 </RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />

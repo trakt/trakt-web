@@ -869,9 +869,6 @@
     "header_streaming": {
       "default": "Availability"
     },
-    "header_on_demand": {
-      "default": "On Demand"
-    },
     "button_label_popup_menu": {
       "default": "Pop up menu for \"{title}\""
     },
@@ -2114,6 +2111,21 @@
     },
     "page_title_start_watching": {
       "default": "Start Watching"
+    },
+    "text_stream": {
+      "default": "Stream"
+    },
+    "text_rent": {
+      "default": "Rent"
+    },
+    "text_buy": {
+      "default": "Buy"
+    },
+    "text_on_demand": {
+      "default": "On demand"
+    },
+    "list_title_where_to_watch": {
+      "default": "Where to Watch"
     }
   }
 }

@@ -869,9 +869,6 @@
     "header_streaming": {
       "default": "Où regarder"
     },
-    "header_on_demand": {
-      "default": "À la demande"
-    },
     "button_label_popup_menu": {
       "default": "Menu contextuel pour \"{title}\""
     },
@@ -2114,6 +2111,21 @@
     },
     "page_title_start_watching": {
       "default": "Commencer à regarder"
+    },
+    "text_stream": {
+      "default": "Streaming"
+    },
+    "text_rent": {
+      "default": "Louer"
+    },
+    "text_buy": {
+      "default": "Acheter"
+    },
+    "text_on_demand": {
+      "default": "À la demande"
+    },
+    "list_title_where_to_watch": {
+      "default": "Où regarder"
     }
   }
 }

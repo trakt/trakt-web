@@ -21,7 +21,6 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import type { Snippet } from "svelte";
   import MediaDetails from "../details/MediaDetails.svelte";
-  import MediaStreamingServices from "../details/MediaStreamingServices.svelte";
   import ListDropdown from "../list-dropdown/ListDropdown.svelte";
   import type { ListDropdownProps } from "../list-dropdown/ListDropdownProps";
   import { useAllPersonalLists } from "../list-dropdown/useAllPersonalLists";
@@ -181,14 +180,5 @@
 <RenderFor audience="all" navigation="default">
   <SummaryContainer>
     <MediaDetails {media} {studios} {crew} {type} title={m.header_details()} />
-
-    {#if streamOn}
-      <RenderFor audience="authenticated" navigation="default">
-        <MediaStreamingServices
-          services={streamOn.services}
-          preferred={streamOn.preferred}
-        />
-      </RenderFor>
-    {/if}
   </SummaryContainer>
 </RenderFor>

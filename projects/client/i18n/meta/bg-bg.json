@@ -869,9 +869,6 @@
     "header_streaming": {
       "default": "Къде да гледате"
     },
-    "header_on_demand": {
-      "default": "При поискване"
-    },
     "button_label_popup_menu": {
       "default": "Изскачащо меню за \"{title}\""
     },
@@ -2114,6 +2111,21 @@
     },
     "page_title_start_watching": {
       "default": "Започнете гледането"
+    },
+    "text_stream": {
+      "default": "Поток"
+    },
+    "text_rent": {
+      "default": "Наемете"
+    },
+    "text_buy": {
+      "default": "Купи"
+    },
+    "text_on_demand": {
+      "default": "При поискване"
+    },
+    "list_title_where_to_watch": {
+      "default": "Къде да гледате"
     }
   }
 }
