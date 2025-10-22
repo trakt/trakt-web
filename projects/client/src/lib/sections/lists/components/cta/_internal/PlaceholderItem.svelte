@@ -1,11 +1,12 @@
 <script lang="ts">
+  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { ListCta, MediaCta } from "../models/Cta";
+  import CtaButton from "./CtaButton.svelte";
   import CtaListCard from "./CtaListCard.svelte";
-  import MediaCtaButton from "./MediaCtaButton.svelte";
   import { useCtaCardVariant } from "./useCtaCardVariant";
   import { usePlaceholderCover } from "./usePlaceholderCover";
 
@@ -29,6 +30,14 @@
   </div>
 {/snippet}
 
+{#snippet buttonIcon()}
+  {#if cta.type === "personal-list"}
+    <PlusIcon />
+  {:else}
+    <SearchIcon />
+  {/if}
+{/snippet}
+
 <CtaListCard variant={$defaultVariant} src={$cover?.url.medium}>
   <div class="trakt-cta-placeholder">
     <div class="trakt-cta-description">
@@ -39,13 +48,7 @@
         </RenderFor>
       </div>
 
-      {#if cta.type !== "personal-list"}
-        <MediaCtaButton {cta} {intl} size="small">
-          {#snippet icon()}
-            <SearchIcon />
-          {/snippet}
-        </MediaCtaButton>
-      {/if}
+      <CtaButton {cta} {intl} icon={buttonIcon} size="small" />
     </div>
 
     <RenderFor

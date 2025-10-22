@@ -1477,6 +1477,9 @@
     "button_label_create_list": {
       "default": "Crear lista"
     },
+    "button_text_cta_create_list": {
+      "default": "Crear lista"
+    },
     "page_title_create_list": {
       "default": "Crear Lista"
     },

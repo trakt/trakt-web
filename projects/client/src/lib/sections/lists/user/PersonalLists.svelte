@@ -6,10 +6,12 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import CtaItem from "../components/cta/CtaItem.svelte";
+  import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
   import CreateListHeader from "./_internal/CreateListHeader.svelte";
   import PersonalListsPlaceholder from "./_internal/PersonalListsPlaceholder.svelte";
+  import { useCreateList } from "./_internal/useCreateList.ts";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
@@ -48,6 +50,16 @@
 
   const isMine = $derived(type === "personal" && $isMe);
   const isPresentable = $derived(isMine || (!$isLoading && $lists.length > 0));
+
+  const { createList, isCreating } = useCreateList();
+
+  const cta: Cta = $derived({
+    type: "personal-list",
+    action: {
+      onClick: createList,
+      disabled: $isCreating,
+    },
+  });
 </script>
 
 {#snippet emptyList()}
@@ -64,7 +76,7 @@
       </RenderFor>
 
       {#if $lists.length === 0}
-        <PersonalListsPlaceholder />
+        <PersonalListsPlaceholder {cta} />
       {/if}
     {/if}
 
@@ -93,7 +105,7 @@
       {#snippet empty()}
         {#if !$isLoading}
           {#if $isMe}
-            <CtaItem cta={{ type: "personal-list" }} variant="placeholder" />
+            <CtaItem {cta} variant="placeholder" />
           {:else}
             {@render emptyList()}
           {/if}

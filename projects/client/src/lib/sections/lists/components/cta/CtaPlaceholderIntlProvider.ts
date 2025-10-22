@@ -35,6 +35,8 @@ export const CtaPlaceholderIntlProvider: CtaItemIntl = {
           return cta.mediaType === 'show'
             ? m.link_text_browse_shows()
             : m.link_text_browse_movies();
+        default:
+          return CtaItemIntlProvider.cta.text({ cta });
       }
     },
     label: CtaItemIntlProvider.cta.label,

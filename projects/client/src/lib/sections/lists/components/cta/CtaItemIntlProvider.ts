@@ -41,6 +41,8 @@ export const CtaItemIntlProvider: CtaItemIntl = {
   cta: {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
+        case 'personal-list':
+          return m.button_text_cta_create_list();
         case 'upcoming':
           return m.link_text_explore_more();
         default:
@@ -49,6 +51,8 @@ export const CtaItemIntlProvider: CtaItemIntl = {
     },
     label: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
+        case 'personal-list':
+          return m.button_label_create_list();
         case 'up-next':
         case 'personal-activity':
           return m.link_label_browse_shows();

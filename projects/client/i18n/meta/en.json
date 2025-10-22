@@ -4154,6 +4154,14 @@
         "ios"
       ]
     },
+    "button_text_cta_create_list": {
+      "default": "Create list",
+      "description": "Text for the button that allows users to create a new list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "page_title_create_list": {
       "default": "Create List",
       "description": "Title for a screen that allows users to create a new list.",

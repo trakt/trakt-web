@@ -11,10 +11,18 @@ export type CtaType =
   | 'social'
   | 'personal-list';
 
+type CtaAction = {
+  disabled: boolean;
+  onClick: () => void;
+};
+
 type CtaMap = {
   [K in CtaType]: K extends 'watchlist' | 'favorites'
     ? { type: K; mediaType?: MediaType }
-    : { type: K };
+    : (
+      K extends 'personal-list' ? { type: K; action: CtaAction }
+        : { type: K }
+    );
 };
 
 export type Cta = CtaMap[CtaType];

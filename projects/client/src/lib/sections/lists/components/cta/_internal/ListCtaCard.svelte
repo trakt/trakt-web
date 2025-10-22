@@ -1,13 +1,11 @@
 <script lang="ts">
   import type { CtaItemIntl } from "../CtaItemIntl";
-  import type { Cta } from "../models/Cta";
+  import type { ListCta } from "../models/Cta";
   import CtaCard from "./CtaCard.svelte";
   import { useCtaCardVariant } from "./useCtaCardVariant";
   import { usePlaceholderCover } from "./usePlaceholderCover";
 
-  const { intl }: { intl: CtaItemIntl } = $props();
-
-  const cta: Cta = { type: "personal-list" };
+  const { intl, cta }: { intl: CtaItemIntl; cta: ListCta } = $props();
 
   const defaultVariant = $derived(useCtaCardVariant(cta));
   const { cover } = $derived(usePlaceholderCover(cta));
