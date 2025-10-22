@@ -50,6 +50,16 @@
   });
 </script>
 
-<Button {href} {size} {icon} variant="primary" style="flat" {...buttonProps}>
-  {intl.cta.text({ cta })}
-</Button>
+<trakt-cta-button>
+  <Button {href} {size} {icon} variant="primary" style="flat" {...buttonProps}>
+    {intl.cta.text({ cta })}
+  </Button>
+</trakt-cta-button>
+
+<style>
+  trakt-cta-button {
+    :global(.trakt-button) {
+      flex-direction: row-reverse;
+    }
+  }
+</style>
