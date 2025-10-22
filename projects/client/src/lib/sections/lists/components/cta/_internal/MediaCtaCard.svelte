@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { CtaItemIntl } from "../CtaItemIntl";
   import type { MediaCta } from "../models/Cta";
+  import CtaButton from "./CtaButton.svelte";
   import CtaCard from "./CtaCard.svelte";
-  import MediaCtaButton from "./MediaCtaButton.svelte";
   import { useCtaCardVariant } from "./useCtaCardVariant";
   import { usePlaceholderCover } from "./usePlaceholderCover";
 
@@ -22,6 +22,6 @@
   <p class="smaller">{intl.text({ cta })}</p>
 
   {#snippet action()}
-    <MediaCtaButton {cta} {intl} size="tag" />
+    <CtaButton {cta} {intl} size="tag" />
   {/snippet}
 </CtaCard>

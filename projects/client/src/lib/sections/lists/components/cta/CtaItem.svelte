@@ -24,7 +24,7 @@
     {#if cta.type === "activity" || cta.type === "social"}
       <ActivityCtaCard intl={CtaItemIntlProvider} {cta} />
     {:else if cta.type === "personal-list"}
-      <ListCtaCard intl={CtaItemIntlProvider} />
+      <ListCtaCard intl={CtaItemIntlProvider} {cta} />
     {:else}
       <MediaCtaCard {cta} intl={CtaItemIntlProvider} />
     {/if}
@@ -38,7 +38,7 @@
       {#if cta.type === "activity" || cta.type === "social"}
         <ActivityCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
       {:else if cta.type === "personal-list"}
-        <ListCtaPlaceholder intl={CtaPlaceholderIntlProvider} />
+        <ListCtaPlaceholder intl={CtaPlaceholderIntlProvider} {cta} />
       {:else}
         <MediaCtaPlaceholder {cta} intl={CtaPlaceholderIntlProvider} />
       {/if}

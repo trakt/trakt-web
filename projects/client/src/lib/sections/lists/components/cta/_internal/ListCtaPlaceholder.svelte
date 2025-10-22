@@ -1,12 +1,10 @@
 <script lang="ts">
   import type { CtaItemIntl } from "../CtaItemIntl";
   import ReleasedIcon from "../icons/ReleasedIcon.svelte";
-  import type { Cta } from "../models/Cta";
+  import type { ListCta } from "../models/Cta";
   import PlaceholderItem from "./PlaceholderItem.svelte";
 
-  const { intl }: { intl: CtaItemIntl } = $props();
-
-  const cta: Cta = { type: "personal-list" };
+  const { intl, cta }: { intl: CtaItemIntl; cta: ListCta } = $props();
 </script>
 
 <PlaceholderItem {cta} {intl}>

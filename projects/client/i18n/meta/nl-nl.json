@@ -1477,6 +1477,9 @@
     "button_label_create_list": {
       "default": "Lijst aanmaken"
     },
+    "button_text_cta_create_list": {
+      "default": "Lijst aanmaken"
+    },
     "page_title_create_list": {
       "default": "Lijst maken"
     },

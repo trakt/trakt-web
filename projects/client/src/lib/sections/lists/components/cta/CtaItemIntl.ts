@@ -1,11 +1,11 @@
-import type { Cta, MediaCta } from './models/Cta.ts';
+import type { Cta, ListCta, MediaCta } from './models/Cta.ts';
 
 export type CtaItemMeta = {
   cta: Cta;
 };
 
 export type CtaLinkMeta = {
-  cta: MediaCta;
+  cta: MediaCta | ListCta;
 };
 
 export type CtaItemIntl = {
