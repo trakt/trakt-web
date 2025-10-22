@@ -76,6 +76,7 @@
 
     &.long-title {
       --text-size: 2.5cqi;
+      letter-spacing: -0.075rem;
     }
 
     font-size: clamp(var(--ni-24), var(--text-size), var(--ni-32));
