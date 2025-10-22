@@ -25,6 +25,6 @@ export const TagIntlProvider: TagIntl = {
   trendLabel: (delta) =>
     delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
   postCredits: (count) =>
-    `${m.header_post_credits()} · ${toHumanNumber(count, languageTag())}`,
+    `${toHumanNumber(count, languageTag())} · ${m.header_post_credits()}`,
   mediaTypeLabel: (type) => toTranslatedValue('type', type),
 };
