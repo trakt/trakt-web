@@ -25,6 +25,7 @@
 
   const currentPage = writable(1);
   const loadedPages = writable<Map<number, T[]>>(new Map());
+  const initialType = writable(type);
 
   const { list, page, isLoading } = $derived(
     useList({
@@ -40,6 +41,16 @@
       pages.set($page.current ?? 1, $list);
       return pages;
     });
+  });
+
+  $effect(() => {
+    if ($initialType === type) {
+      return;
+    }
+
+    currentPage.set(1);
+    loadedPages.set(new Map());
+    initialType.set(type);
   });
 
   const loadMore = () => {
