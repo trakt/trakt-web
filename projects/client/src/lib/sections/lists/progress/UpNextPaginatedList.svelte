@@ -61,10 +61,7 @@
 
 <RenderForFeature flag={FeatureFlag.Discover}>
   {#snippet enabled()}
-    <!-- FIXME: use something better to deal with pagination -->
-    {#key `${$mode}-${intent}`}
-      {@render content($mode, intent)}
-    {/key}
+    {@render content($mode, intent)}
   {/snippet}
 
   {@render content("show", "all")}
