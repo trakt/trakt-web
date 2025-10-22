@@ -315,7 +315,7 @@
       "default": "{number} visionnements"
     },
     "button_text_logout": {
-      "default": "Se déconnecter de Trakt"
+      "default": "Se déconnecter"
     },
     "button_label_logout": {
       "default": "Déconnexion"

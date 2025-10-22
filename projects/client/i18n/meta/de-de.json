@@ -315,7 +315,7 @@
       "default": "{number} Wiedergaben"
     },
     "button_text_logout": {
-      "default": "Von Trakt abmelden"
+      "default": "Ausloggen"
     },
     "button_label_logout": {
       "default": "Abmelden"

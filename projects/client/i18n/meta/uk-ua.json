@@ -315,7 +315,7 @@
       "default": "{number} переглядів"
     },
     "button_text_logout": {
-      "default": "Вийти з Trakt"
+      "default": "Вийти"
     },
     "button_label_logout": {
       "default": "Вийти"

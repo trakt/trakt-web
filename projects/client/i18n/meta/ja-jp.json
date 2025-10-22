@@ -315,7 +315,7 @@
       "default": "{number} 回再生"
     },
     "button_text_logout": {
-      "default": "Trakt からログアウト"
+      "default": "ログアウト"
     },
     "button_label_logout": {
       "default": "ログアウト"

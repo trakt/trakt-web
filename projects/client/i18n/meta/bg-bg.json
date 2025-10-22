@@ -315,7 +315,7 @@
       "default": "{number} гледания"
     },
     "button_text_logout": {
-      "default": "Изход от Trakt"
+      "default": "Изход"
     },
     "button_label_logout": {
       "default": "Изход"

@@ -315,7 +315,7 @@
       "default": "{number} reproducciones"
     },
     "button_text_logout": {
-      "default": "Cerrar sesión de Trakt"
+      "default": "Cerrar sesión"
     },
     "button_label_logout": {
       "default": "Cerrar sesión"

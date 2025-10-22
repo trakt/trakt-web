@@ -56,6 +56,10 @@
     min-height: var(--ni-480);
     max-height: calc(100dvh - var(--content-gap));
 
+    :global(.trakt-button) {
+      width: fit-content;
+    }
+
     @include for-tablet-sm-and-below {
       min-height: 0;
       height: fit-content;
