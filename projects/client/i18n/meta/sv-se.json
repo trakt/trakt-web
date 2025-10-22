@@ -315,7 +315,7 @@
       "default": "{number} visningar"
     },
     "button_text_logout": {
-      "default": "Logga ut från Trakt"
+      "default": "Logga ut"
     },
     "button_label_logout": {
       "default": "Logga ut"

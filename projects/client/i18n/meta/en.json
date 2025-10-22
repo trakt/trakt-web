@@ -805,7 +805,7 @@
       ]
     },
     "button_text_logout": {
-      "default": "Log out of Trakt",
+      "default": "Log out",
       "description": "Text for the logout button.",
       "exclude": [
         "ios"

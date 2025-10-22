@@ -315,7 +315,7 @@
       "default": "{number} riproduzioni"
     },
     "button_text_logout": {
-      "default": "Esci da Trakt"
+      "default": "Esci"
     },
     "button_label_logout": {
       "default": "Esci"

@@ -315,7 +315,7 @@
       "default": "{number} keer bekeken"
     },
     "button_text_logout": {
-      "default": "Uitloggen bij Trakt"
+      "default": "Uitloggen"
     },
     "button_label_logout": {
       "default": "Uitloggen"

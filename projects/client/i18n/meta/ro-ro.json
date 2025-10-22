@@ -315,7 +315,7 @@
       "default": "{number} vizionări"
     },
     "button_text_logout": {
-      "default": "Deconecte-te de Trakt"
+      "default": "Deconectare"
     },
     "button_label_logout": {
       "default": "Deconectare"

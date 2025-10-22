@@ -315,7 +315,7 @@
       "default": "{number} reproduções"
     },
     "button_text_logout": {
-      "default": "Sair do Trakt"
+      "default": "Sair"
     },
     "button_label_logout": {
       "default": "Sair"
