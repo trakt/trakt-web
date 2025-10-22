@@ -3,31 +3,40 @@
   import type { GenreIntl } from "$lib/components/summary/GenreIntl";
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
 
+  const SEPARATOR = "•";
+  const GENRE_SEPARATOR = " / ";
+
   type MediaTitleProps = {
     title: string;
     genres: string[];
     i18n?: GenreIntl;
-    separator?: string;
     year: number | Nil;
     status?: string | Nil;
+    certification?: string | Nil;
   };
 
   const {
     title,
     genres,
     i18n = GenreIntlProvider,
-    separator = " / ",
     year,
     status,
+    certification,
   }: MediaTitleProps = $props();
 
   const subtitle = $derived.by(() => {
-    const visibleGenres = genres.slice(0, 3).map(i18n.genre).join(separator);
-    if (!year) {
-      return visibleGenres;
-    }
+    const subtitleParts = [];
 
-    return `${year} • ${visibleGenres}`;
+    const visibleGenres = genres
+      .slice(0, 3)
+      .map(i18n.genre)
+      .join(GENRE_SEPARATOR);
+
+    year && subtitleParts.push(`${year}`);
+    certification && subtitleParts.push(certification);
+    subtitleParts.push(visibleGenres);
+
+    return subtitleParts.join(` ${SEPARATOR} `);
   });
 </script>
 
