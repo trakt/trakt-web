@@ -5,6 +5,7 @@ import { useWatchList } from './useWatchList.ts';
 export function statusToStore(status: WatchlistStatus) {
   switch (status) {
     case 'all':
+    case 'discover':
       return useWatchList;
     case 'released':
       return useReleasedList;

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
 
@@ -8,6 +9,9 @@
   import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+
+  const { mode } = useDiscover();
+  // TODO use feature flag
 </script>
 
 <TraktPage
@@ -19,7 +23,8 @@
 
   <WatchList
     drilldownLabel={m.button_label_view_all_watchlist_items()}
-    status="all"
+    status="discover"
+    type={$mode}
   />
 
   <PersonalLists slug="me" type="personal" />

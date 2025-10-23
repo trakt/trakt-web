@@ -3,8 +3,8 @@
 
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
@@ -16,7 +16,7 @@
   import { type WatchlistStatus } from "./WatchlistStatus";
 
   type WatchListProps = {
-    type?: MediaType;
+    type: DiscoverMode;
     drilldownLabel: string;
     empty?: Snippet;
     status: WatchlistStatus;
@@ -38,12 +38,15 @@
       return externalType;
     }
 
-    return $selectedType.value === "all" ? undefined : $selectedType.value;
+    return $selectedType.value === "all" ? "media" : $selectedType.value;
   });
 
   const cta = $derived(
-    status === "all"
-      ? { type: "watchlist" as const, mediaType: type }
+    status !== "released"
+      ? {
+          type: "watchlist" as const,
+          mediaType: type === "media" ? "movie" : type,
+        }
       : { type: status },
   );
 </script>
@@ -58,7 +61,7 @@
   {useList}
   metaInfo={status === "all" ? $selectedType.text() : undefined}
   urlBuilder={({ type, ...rest }) => {
-    if (status === "all") {
+    if (status === "all" || status === "discover") {
       return UrlBuilder.lists.watchlist();
     }
 

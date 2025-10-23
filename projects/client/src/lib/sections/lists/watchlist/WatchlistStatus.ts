@@ -1,1 +1,1 @@
-export type WatchlistStatus = 'all' | 'released';
+export type WatchlistStatus = 'all' | 'released' | 'discover';

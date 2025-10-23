@@ -7,6 +7,7 @@
 
   const { mode: selectedType, setMode, options, routes } = useDiscover();
 
+  $inspect(page.route.id);
   const isOnDiscoverablePage = $derived($routes.includes(page.route.id ?? ""));
 </script>
 
