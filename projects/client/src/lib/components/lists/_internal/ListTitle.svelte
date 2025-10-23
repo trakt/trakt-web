@@ -38,6 +38,7 @@
   .trakt-list-title {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 
     p.meta-info {
       color: var(--list-meta-info-color);
@@ -60,5 +61,13 @@
     /** FIXME: remove when we have adaptive typography and updated sizes */
     font-size: var(--ni-18);
     line-height: var(--ni-22);
+    &.ellipsis {
+      max-width: 100%;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: block;
+    }
   }
 </style>
