@@ -1,12 +1,14 @@
 <script lang="ts">
-  import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
   import ListedIcon from "$lib/components/icons/ListedIcon.svelte";
+  import ListManagementIcon from "$lib/components/icons/ListManagementIcon.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { writable } from "svelte/store";
-  import ListDropdownButton from "./_internal/ListDropdownButton.svelte";
   import ListDropdownItem from "./_internal/ListDropdownItem.svelte";
+  import ListsDrawer from "./_internal/ListsDrawer.svelte";
   import { useIsOnAnyList } from "./_internal/useIsOnAnyList";
   import type { ListDropdownProps } from "./ListDropdownProps";
   import { useAllPersonalLists } from "./useAllPersonalLists";
@@ -30,6 +32,13 @@
   );
 
   const isDisabled = $derived($isLoading || $isUpdating);
+  const isOpen = writable(false);
+  const onClose = () => isOpen.set(false);
+
+  const variant = $derived($isListed ? "primary" : "secondary");
+  const text = $derived(
+    $isListed ? m.button_text_listed() : m.button_text_lists(),
+  );
 </script>
 
 {#snippet dropdownItems()}
@@ -41,33 +50,40 @@
 {/snippet}
 
 {#if style === "normal"}
-  <ListDropdownButton
+  <Button
+    style="flat"
+    color="blue"
     {size}
-    title={m.dropdown_label_add_remove_from_lists({ title })}
-    isListed={$isListed}
+    {variant}
+    label={m.dropdown_label_add_remove_from_lists({ title })}
     disabled={isDisabled}
+    onclick={() => isOpen.set(!$isOpen)}
   >
-    {#snippet items()}
-      {@render dropdownItems()}
+    {text}
+
+    {#snippet icon()}
+      <ListManagementIcon />
     {/snippet}
-  </ListDropdownButton>
+  </Button>
 {/if}
 
-{#if style === "popup"}
-  <PopupMenu
+{#if style === "action"}
+  <ActionButton
     label={m.dropdown_label_add_remove_from_lists({ title })}
-    size="normal"
+    onclick={() => isOpen.set(!$isOpen)}
+    style="ghost"
     disabled={isDisabled}
   >
-    {#snippet icon()}
-      {#if $isListed}
-        <ListedIcon />
-      {:else}
-        <PlusIcon />
-      {/if}
-    {/snippet}
-    {#snippet items()}
-      {@render dropdownItems()}
-    {/snippet}
-  </PopupMenu>
+    {#if $isListed}
+      <ListedIcon />
+    {:else}
+      <PlusIcon />
+    {/if}
+  </ActionButton>
+{/if}
+
+{#if $isOpen}
+  <ListsDrawer {onClose}>
+    {@render dropdownItems()}
+  </ListsDrawer>
 {/if}
