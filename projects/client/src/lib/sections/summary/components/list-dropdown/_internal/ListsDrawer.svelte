@@ -19,5 +19,10 @@
     grid-template-columns: 100%;
 
     gap: var(--gap-xxs);
+
+    :global(li) {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
   }
 </style>

@@ -52,8 +52,8 @@
   );
 
   const handler = $derived($isListed ? confirmRemove : addToList);
-  const { color, variant, ...events } = $derived(
-    useDangerButton({ isActive: $isListed, color: "blue" }),
+  const { color, variant, isTouch, ...events } = $derived(
+    useDangerButton({ isActive: $isListed, color: "default" }),
   );
   const state = $derived($isListed ? "added" : "missing");
 
@@ -61,7 +61,7 @@
     style: "flat",
     label: i18n.label({ isListed: $isListed, listName: list.name, title }),
     color: $color,
-    variant: $variant,
+    variant: $isTouch && $isListed ? $variant : "primary",
     onclick: handler,
     disabled: $isListUpdating || !isBelowLimit,
     ...events,
