@@ -2126,6 +2126,24 @@
     },
     "list_title_where_to_watch": {
       "default": "Къде да гледате"
+    },
+    "page_title_anticipated_media": {
+      "default": "Очаквани медии"
+    },
+    "page_title_popular_media": {
+      "default": "Популярни медии"
+    },
+    "page_title_recommended_media": {
+      "default": "Препоръчани медии"
+    },
+    "page_title_trending_media": {
+      "default": "Трендиращи медии"
+    },
+    "button_text_media": {
+      "default": "Медии"
+    },
+    "button_label_media": {
+      "default": "Медии"
     }
   }
 }

@@ -5822,6 +5822,53 @@
         "android",
         "ios"
       ]
+    },
+    "page_title_anticipated_media": {
+      "default": "Anticipated media",
+      "description": "Title for the anticipated media page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_popular_media": {
+      "default": "Popular media",
+      "description": "Title for the popular media page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_recommended_media": {
+      "default": "Recommended media",
+      "description": "Title for the recommended media page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_trending_media": {
+      "default": "Trending media",
+      "description": "Title for the trending media page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_media": {
+      "default": "Media",
+      "description": "Text for the button that allows users to toggle media to show both movies and shows. This should be short as possible.",
+      "exclude": [
+        "ios"
+      ]
+    },
+    "button_label_media": {
+      "default": "Media",
+      "description": "Aria-label for the button that allows users to toggle media to show both movies and shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

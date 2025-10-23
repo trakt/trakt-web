@@ -3,7 +3,15 @@
   import type { MediaCardProps } from "../components/MediaCardProps";
   import type { RecommendedEntry } from "./useRecommendedList";
 
-  const { type, media, style }: MediaCardProps<RecommendedEntry> = $props();
+  const { type, media, style, mode }: MediaCardProps<RecommendedEntry> =
+    $props();
 </script>
 
-<DefaultMediaItem {type} {media} {style} source="recommended" canDeemphasize />
+<DefaultMediaItem
+  {type}
+  {media}
+  {style}
+  {mode}
+  source="recommended"
+  canDeemphasize
+/>

@@ -2126,6 +2126,24 @@
     },
     "list_title_where_to_watch": {
       "default": "Waar te kijken"
+    },
+    "page_title_anticipated_media": {
+      "default": "Verwachte media"
+    },
+    "page_title_popular_media": {
+      "default": "Populaire media"
+    },
+    "page_title_recommended_media": {
+      "default": "Aanbevolen media"
+    },
+    "page_title_trending_media": {
+      "default": "Trending media"
+    },
+    "button_text_media": {
+      "default": "Media"
+    },
+    "button_label_media": {
+      "default": "Media"
     }
   }
 }

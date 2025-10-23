@@ -20,7 +20,7 @@
     useCalendar({
       start: $startDate,
       days,
-      type: $isEnabled ? $mode : undefined,
+      type: $isEnabled ? $mode : "media",
     }),
   );
 

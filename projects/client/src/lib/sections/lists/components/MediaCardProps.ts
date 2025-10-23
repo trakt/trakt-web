@@ -22,6 +22,7 @@ type BaseItemProps<T> = MediaItemVariant<T> & {
   indicators?: Snippet;
   style?: 'cover' | 'summary';
   source?: string;
+  mode?: 'standalone' | 'mixed';
   onclick?: (item: T) => void;
 };
 

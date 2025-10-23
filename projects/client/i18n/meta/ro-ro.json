@@ -2126,6 +2126,24 @@
     },
     "list_title_where_to_watch": {
       "default": "Unde să vezi"
+    },
+    "page_title_anticipated_media": {
+      "default": "Media așteptate"
+    },
+    "page_title_popular_media": {
+      "default": "Media populare"
+    },
+    "page_title_recommended_media": {
+      "default": "Media recomandate"
+    },
+    "page_title_trending_media": {
+      "default": "Media în tendințe"
+    },
+    "button_text_media": {
+      "default": "Media"
+    },
+    "button_label_media": {
+      "default": "Media"
     }
   }
 }

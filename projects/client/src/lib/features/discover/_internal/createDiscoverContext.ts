@@ -1,9 +1,9 @@
 import { getContext, setContext } from 'svelte';
 import { readable, writable } from 'svelte/store';
+import type { DiscoverMode } from '../models/DiscoverMode.ts';
 import {
   DISCOVER_CONTEXT_KEY,
   type DiscoverContext,
-  type DiscoverMode,
 } from './DiscoverContext.ts';
 
 export function createDiscoverContext(

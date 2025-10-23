@@ -3,8 +3,13 @@
   import type { MediaCardProps } from "../components/MediaCardProps";
   import type { PopularEntry } from "./usePopularList";
 
-  const { type, media, style, popupActions }: MediaCardProps<PopularEntry> =
-    $props();
+  const {
+    type,
+    media,
+    style,
+    popupActions,
+    mode,
+  }: MediaCardProps<PopularEntry> = $props();
 </script>
 
 <DefaultMediaItem
@@ -12,6 +17,7 @@
   {media}
   {style}
   {popupActions}
+  {mode}
   source="popular"
   canDeemphasize
 />
