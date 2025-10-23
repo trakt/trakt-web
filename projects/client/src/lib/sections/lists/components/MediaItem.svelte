@@ -50,7 +50,7 @@
     {style}
     action={props.action}
     popupActions={props.badge ? undefined : props.popupActions}
-    tag={props.variant === "next" ? coverTag : undefined}
+    tag={props.variant === "next" ? coverTag : props.tag}
   />
 {/if}
 
