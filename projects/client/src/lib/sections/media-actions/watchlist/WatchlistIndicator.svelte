@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
+  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import StemSwipeIndicator from "../_internal/StemSwipeIndicator.svelte";
 
   const {
@@ -16,5 +16,5 @@
     ? "var(--color-background-blue)"
     : "var(--color-background-red)"}
 >
-  <WatchlistIcon {state} />
+  <BookmarkIcon {state} />
 </StemSwipeIndicator>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
+  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
@@ -72,6 +72,6 @@
   {i18n.text({ isListed: $isListed, listName: list.name, title })}
 
   {#snippet icon()}
-    <WatchlistIcon size="small" {state} />
+    <BookmarkIcon {state} size="normal" />
   {/snippet}
 </DropdownItem>

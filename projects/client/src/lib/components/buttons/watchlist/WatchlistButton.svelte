@@ -1,7 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
+  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import ActionButton from "../ActionButton.svelte";
   import { useDangerButton } from "../_internal/useDangerButton";
@@ -25,13 +25,17 @@
   );
   const state = $derived(isWatchlisted ? "added" : "missing");
 
-  const commonProps: Omit<ButtonProps, "children"> = $derived({
+  const actionProps = $derived({
     label: i18n.label({ isWatchlisted, title }),
-    color: $color,
-    variant: $variant,
     onclick: handler,
     disabled: isWatchlistUpdating,
     ...events,
+  });
+
+  const commonProps: Omit<ButtonProps, "children"> = $derived({
+    color: $color,
+    variant: $variant,
+    ...actionProps,
   });
 </script>
 
@@ -44,15 +48,15 @@
     >
       {i18n.text({ isWatchlisted, title })}
       {#snippet icon()}
-        <WatchlistIcon size="small" {state} />
+        <BookmarkIcon {state} size="normal" />
       {/snippet}
     </Button>
   </div>
 {/if}
 
 {#if type === "action"}
-  <ActionButton {...commonProps} {...props}>
-    <WatchlistIcon {state} />
+  <ActionButton style="ghost" {...actionProps} {...props}>
+    <BookmarkIcon {state} />
   </ActionButton>
 {/if}
 
@@ -60,7 +64,7 @@
   <DropdownItem {...commonProps} style="flat">
     {i18n.text({ isWatchlisted, title })}
     {#snippet icon()}
-      <WatchlistIcon size="small" {state} />
+      <BookmarkIcon {state} size="normal" />
     {/snippet}
   </DropdownItem>
 {/if}

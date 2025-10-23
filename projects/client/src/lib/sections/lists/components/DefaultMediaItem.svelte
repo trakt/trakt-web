@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
+  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import CertificationTag from "$lib/components/media/tags/CertificationTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
@@ -70,7 +70,7 @@
   {/if}
   {#if $isWatchlisted}
     <IndicatorTag>
-      <WatchlistIcon />
+      <BookmarkIcon state="added" />
     </IndicatorTag>
   {/if}
 {/snippet}
