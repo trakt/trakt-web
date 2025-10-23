@@ -9,6 +9,7 @@ import type { PersonalListType } from './models/PersonalListType.ts';
 type PersonalListsParams = {
   type: PersonalListType;
   slug?: string;
+  sortBy?: 'none' | 'recently-updated';
 };
 
 function typeToQuery({ type, slug }: PersonalListsParams) {
@@ -23,7 +24,9 @@ function typeToQuery({ type, slug }: PersonalListsParams) {
   }
 }
 
-export function usePersonalListsSummary({ type, slug }: PersonalListsParams) {
+export function usePersonalListsSummary(
+  { type, slug, sortBy = 'recently-updated' }: PersonalListsParams,
+) {
   const lists = useQuery(typeToQuery({ type, slug }));
 
   const isLoading = derived(
@@ -35,11 +38,18 @@ export function usePersonalListsSummary({ type, slug }: PersonalListsParams) {
     isLoading,
     lists: derived(
       lists,
-      ($lists) =>
-        ($lists.data ?? []).sort((a, b) =>
+      ($lists) => {
+        const data = $lists.data ?? [];
+
+        if (sortBy === 'none') {
+          return data;
+        }
+
+        return data.sort((a, b) =>
           // FIXME: update when we add sorting options
           b.updatedAt.getTime() - a.updatedAt.getTime()
-        ),
+        );
+      },
     ),
   };
 }

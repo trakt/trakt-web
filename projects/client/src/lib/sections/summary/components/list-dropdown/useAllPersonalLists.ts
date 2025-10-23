@@ -4,11 +4,13 @@ import { derived } from 'svelte/store';
 export function useAllPersonalLists() {
   const { lists, isLoading } = usePersonalListsSummary({
     type: 'personal',
+    sortBy: 'none',
   });
 
   const { lists: collaborationLists, isLoading: isLoadingCollaborations } =
     usePersonalListsSummary({
       type: 'collaboration',
+      sortBy: 'none',
     });
 
   return {
