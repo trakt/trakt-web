@@ -14,7 +14,7 @@
 
   type DrawerProps = {
     onClose: () => void;
-    title: string;
+    title?: string;
     hasAutoClose?: boolean;
     trapSelector?: string;
   } & ChildrenProps;
@@ -62,9 +62,12 @@
 
   <div
     class="trakt-drawer-header"
+    class:has-title={!!title}
     data-dpad-navigation={DpadNavigationType.List}
   >
-    {title}
+    {#if title}
+      {title}
+    {/if}
 
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
       <ActionButton
@@ -169,8 +172,12 @@
 
   .trakt-drawer-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+
+    &.has-title {
+      justify-content: space-between;
+    }
   }
 
   .trakt-drawer-content {
