@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { type DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import { type MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { DEFAULT_ACTIVITY_PAGE_SIZE } from "$lib/utils/constants";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
@@ -24,7 +24,7 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type?: MediaType)}
+{#snippet content(type: DiscoverMode)}
   <DrilledMediaList
     id="view-all-activity"
     {title}
@@ -52,5 +52,5 @@
     {@render content($mode)}
   {/snippet}
 
-  {@render content()}
+  {@render content("media")}
 </RenderForFeature>

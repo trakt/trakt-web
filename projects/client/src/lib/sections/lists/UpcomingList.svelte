@@ -16,7 +16,7 @@
   const { isEnabled } = $derived(useFeatureFlag(FeatureFlag.Discover));
 
   const { upcoming, isLoading } = $derived(
-    useUpcomingItems($isEnabled ? $mode : undefined),
+    useUpcomingItems($isEnabled ? $mode : "media"),
   );
 </script>
 

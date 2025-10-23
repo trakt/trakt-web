@@ -1,3 +1,4 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
@@ -11,7 +12,7 @@ export type TogglerId =
   | 'discover'
   | 'comment';
 
-type DiscoverToggleType = MediaType;
+type DiscoverToggleType = DiscoverMode;
 type MediaToggleType = MediaType | 'all';
 type SocialToggleType = 'following' | 'followers';
 type CommentToggleType = CommentSortType;
@@ -90,8 +91,13 @@ const social: ToggleDefinition<'social'> = {
 
 const discover: ToggleDefinition<'discover'> = {
   id: 'discover',
-  default: 'show',
+  default: 'media',
   options: [
+    {
+      value: 'media',
+      text: m.button_text_media,
+      label: m.button_label_media,
+    },
     {
       value: 'show',
       text: m.button_text_shows,

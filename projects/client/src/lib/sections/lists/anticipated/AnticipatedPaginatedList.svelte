@@ -1,8 +1,8 @@
 <script lang="ts">
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import AnticipatedListItem from "./AnticipatedListItem.svelte";
@@ -10,7 +10,7 @@
 
   type AnticipatedListProps = {
     title: string;
-    type: MediaType;
+    type: DiscoverMode;
   };
 
   const { title, type }: AnticipatedListProps = $props();
@@ -28,7 +28,12 @@
   useList={useAnticipatedList}
 >
   {#snippet item(media)}
-    <AnticipatedListItem {type} {media} {style} />
+    <AnticipatedListItem
+      type={media.type}
+      {media}
+      {style}
+      mode={type === "media" ? "mixed" : "standalone"}
+    />
   {/snippet}
 
   {#snippet actions()}

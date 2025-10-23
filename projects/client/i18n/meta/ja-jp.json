@@ -2126,6 +2126,24 @@
     },
     "list_title_where_to_watch": {
       "default": "視聴場所"
+    },
+    "page_title_anticipated_media": {
+      "default": "期待のメディア"
+    },
+    "page_title_popular_media": {
+      "default": "人気のメディア"
+    },
+    "page_title_recommended_media": {
+      "default": "おすすめのメディア"
+    },
+    "page_title_trending_media": {
+      "default": "話題のメディア"
+    },
+    "button_text_media": {
+      "default": "メディア"
+    },
+    "button_label_media": {
+      "default": "メディア"
     }
   }
 }

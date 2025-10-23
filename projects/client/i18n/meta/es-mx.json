@@ -2126,6 +2126,24 @@
     },
     "list_title_where_to_watch": {
       "default": "¿Dónde ver?"
+    },
+    "page_title_anticipated_media": {
+      "default": "Medios esperados"
+    },
+    "page_title_popular_media": {
+      "default": "Medios populares"
+    },
+    "page_title_recommended_media": {
+      "default": "Medios recomendados"
+    },
+    "page_title_trending_media": {
+      "default": "Medios en tendencia"
+    },
+    "button_text_media": {
+      "default": "Medios"
+    },
+    "button_label_media": {
+      "default": "Medios"
     }
   }
 }

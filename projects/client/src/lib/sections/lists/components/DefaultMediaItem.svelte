@@ -5,6 +5,7 @@
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
   import IndicatorTag from "$lib/components/media/tags/IndicatorTag.svelte";
+  import MediaIconTag from "$lib/components/media/tags/MediaIconTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import TrackIcon from "$lib/components/TrackIcon.svelte";
@@ -23,6 +24,7 @@
     type,
     media,
     style,
+    mode,
     tag: externalTag,
     canDeemphasize,
     ...rest
@@ -41,6 +43,10 @@
 </script>
 
 {#snippet defaultTag()}
+  {#if mode === "mixed"}
+    <MediaIconTag mediaType={media.type} />
+  {/if}
+
   {#if "episode" in media}
     <AirDateTag i18n={TagIntlProvider} airDate={media.airDate} />
     <EpisodeCountTag i18n={TagIntlProvider} count={media.episode.count} />

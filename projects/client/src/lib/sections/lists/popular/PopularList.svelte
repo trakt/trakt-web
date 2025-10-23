@@ -1,6 +1,6 @@
 <script lang="ts">
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import PopularListItem from "./PopularListItem.svelte";
@@ -9,7 +9,7 @@
   type PopularListProps = {
     title: string;
     drilldownLabel: string;
-    type: MediaType;
+    type: DiscoverMode;
     search?: Record<string, string>;
   };
 
@@ -36,6 +36,10 @@
     })}
 >
   {#snippet item(media)}
-    <PopularListItem {type} {media} />
+    <PopularListItem
+      type={media.type}
+      {media}
+      mode={type === "media" ? "mixed" : "standalone"}
+    />
   {/snippet}
 </DrillableMediaList>

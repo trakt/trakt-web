@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
@@ -10,7 +10,7 @@
 
   type RecommendedListProps = {
     title: string;
-    type: MediaType;
+    type: DiscoverMode;
   };
 
   const { title, type }: RecommendedListProps = $props();
@@ -31,6 +31,11 @@
   useList={useRecommendedList}
 >
   {#snippet item(media)}
-    <RecommendedListItem {type} {media} {style} />
+    <RecommendedListItem
+      type={media.type}
+      {media}
+      {style}
+      mode={type === "media" ? "mixed" : "standalone"}
+    />
   {/snippet}
 </DrilledMediaList>

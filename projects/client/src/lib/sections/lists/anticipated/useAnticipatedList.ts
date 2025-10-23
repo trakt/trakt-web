@@ -1,5 +1,5 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
@@ -11,22 +11,22 @@ import {
   type AnticipatedShow,
   showAnticipatedQuery,
 } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
-import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
+import { usePaginatedListQueries } from '$lib/sections/lists/stores/usePaginatedListQueries.ts';
+import { addYear } from '$lib/utils/date/addYear.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
-import { addYear } from '../../../utils/date/addYear.ts';
 
 export type AnticipatedEntry = AnticipatedMovie | AnticipatedShow;
 export type AnticipatedMediaList = Array<AnticipatedEntry>;
 
 type AnticipatedListStoreProps =
   & {
-    type: MediaType;
+    type: DiscoverMode;
   }
   & PaginationParams
   & FilterParams
   & SearchParams;
 
-function typeToQuery(
+function typeToQueries(
   { type, ...params }: AnticipatedListStoreProps,
 ) {
   if (!params.filter?.years) {
@@ -39,18 +39,27 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return movieAnticipatedQuery(params) as CreateQueryOptions<
+      return [movieAnticipatedQuery(params) as CreateQueryOptions<
         Paginatable<AnticipatedEntry>
-      >;
+      >];
     case 'show':
-      return showAnticipatedQuery(params) as CreateQueryOptions<
+      return [showAnticipatedQuery(params) as CreateQueryOptions<
         Paginatable<AnticipatedEntry>
-      >;
+      >];
+    case 'media':
+      return [
+        movieAnticipatedQuery(params) as CreateQueryOptions<
+          Paginatable<AnticipatedEntry>
+        >,
+        showAnticipatedQuery(params) as CreateQueryOptions<
+          Paginatable<AnticipatedEntry>
+        >,
+      ];
   }
 }
 
 export function useAnticipatedList(
   props: AnticipatedListStoreProps,
 ) {
-  return usePaginatedListQuery(typeToQuery(props));
+  return usePaginatedListQueries(typeToQueries(props));
 }

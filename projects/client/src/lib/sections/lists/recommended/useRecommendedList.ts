@@ -1,6 +1,6 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
   type RecommendedMovie,
@@ -11,11 +11,12 @@ import {
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
 import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
+import { weave } from '$lib/utils/array/weave.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { map, type Observable, shareReplay } from 'rxjs';
-import { toObservable } from '../../../utils/store/toObservable.ts';
+import { combineLatest, map, type Observable, shareReplay } from 'rxjs';
 import { paginate } from './paginate.ts';
 
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
@@ -23,37 +24,44 @@ export type RecommendedMediaList = Array<RecommendedEntry>;
 
 type RecommendationListStoreProps =
   & {
-    type: MediaType;
+    type: DiscoverMode;
   }
   & PaginationParams
   & FilterParams;
 
-function typeToQuery(
+function typeToQueries(
   { type, filter }: Omit<RecommendationListStoreProps, 'page'>,
 ) {
   /** Recommendations are calculated daily, so we load all of them. */
-  const props = {
-    type,
+  const params = {
     limit: RECOMMENDED_UPPER_LIMIT,
     filter,
   };
 
   switch (type) {
     case 'movie':
-      return recommendedMoviesQuery(props) as CreateQueryOptions<
+      return [recommendedMoviesQuery(params) as CreateQueryOptions<
         RecommendedMediaList
-      >;
+      >];
     case 'show':
-      return recommendedShowsQuery(props) as CreateQueryOptions<
+      return [recommendedShowsQuery(params) as CreateQueryOptions<
         RecommendedMediaList
-      >;
+      >];
+    case 'media':
+      return [
+        recommendedMoviesQuery(params) as CreateQueryOptions<
+          RecommendedMediaList
+        >,
+        recommendedShowsQuery(params) as CreateQueryOptions<
+          RecommendedMediaList
+        >,
+      ];
   }
 }
 
 export const useRecommendedList = (props: RecommendationListStoreProps) => {
-  const query = toObservable(useQuery(typeToQuery(props))).pipe(
-    shareReplay(1),
-  );
+  const queries = typeToQueries(props)
+    .map((query) => toObservable(useQuery(query)).pipe(shareReplay(1)));
 
   const filters = props.filter ?? {};
   const hasFilters = Object.keys(filters).length > 0;
@@ -66,8 +74,14 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
     }`
     : props.type;
 
-  const allItems = query.pipe(
-    map((q) => q.data ?? []),
+  const allItems = combineLatest(queries).pipe(
+    map((queryResults) => {
+      const isMixed = props.type === 'media';
+      const lists = queryResults.map((q) => q.data ?? []);
+      const items = isMixed ? weave(...lists) : lists.flat();
+
+      return items;
+    }),
     dailyOrderArray<RecommendedEntry>(
       `recommended-${listKey}-order`,
       (item) => item.id,
@@ -85,7 +99,9 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
     })),
   );
 
-  const isLoading = query.pipe(map(toLoadingState));
+  const isLoading = combineLatest(queries).pipe(
+    map((queryResults) => queryResults.some(toLoadingState)),
+  );
 
   return {
     list,

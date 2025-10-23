@@ -2126,6 +2126,24 @@
     },
     "list_title_where_to_watch": {
       "default": "Hvor man kan se"
+    },
+    "page_title_anticipated_media": {
+      "default": "Forventede medier"
+    },
+    "page_title_popular_media": {
+      "default": "Populære medier"
+    },
+    "page_title_recommended_media": {
+      "default": "Anbefalede medier"
+    },
+    "page_title_trending_media": {
+      "default": "Trending medier"
+    },
+    "button_text_media": {
+      "default": "Medier"
+    },
+    "button_label_media": {
+      "default": "Medier"
     }
   }
 }

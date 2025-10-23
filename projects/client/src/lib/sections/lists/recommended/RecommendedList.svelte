@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
@@ -11,7 +11,7 @@
   type RecommendationListProps = {
     title: string;
     drilldownLabel: string;
-    type: MediaType;
+    type: DiscoverMode;
   };
 
   const { title, drilldownLabel, type }: RecommendationListProps = $props();
@@ -32,6 +32,10 @@
   urlBuilder={UrlBuilder.recommended}
 >
   {#snippet item(media)}
-    <RecommendedListItem {type} {media} />
+    <RecommendedListItem
+      type={media.type}
+      {media}
+      mode={type === "media" ? "mixed" : "standalone"}
+    />
   {/snippet}
 </DrillableMediaList>

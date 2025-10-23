@@ -1,9 +1,9 @@
 <script lang="ts">
   import { page } from "$app/state";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { decodeRecord } from "$lib/utils/url/UrlBuilder";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
@@ -12,7 +12,7 @@
 
   type TrendingListProps = {
     title: string;
-    type: MediaType;
+    type: DiscoverMode;
   };
 
   const { title, type }: TrendingListProps = $props();
@@ -34,7 +34,12 @@
     })}
 >
   {#snippet item(media)}
-    <TrendingListItem {type} {media} {style} />
+    <TrendingListItem
+      type={media.type}
+      {media}
+      {style}
+      mode={type === "media" ? "mixed" : "standalone"}
+    />
   {/snippet}
 
   {#snippet actions()}

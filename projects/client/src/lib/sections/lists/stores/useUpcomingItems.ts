@@ -1,6 +1,6 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import {
   type UpcomingEpisodeEntry,
   upcomingEpisodesQuery,
@@ -22,7 +22,7 @@ function daysAgo(days: number) {
 
 function getUpcomingCalendarQueries(
   startDate: string,
-  type?: MediaType,
+  type: DiscoverMode,
 ) {
   const params = {
     startDate,
@@ -46,7 +46,7 @@ function getUpcomingCalendarQueries(
   }
 }
 
-export function useUpcomingItems(type?: MediaType) {
+export function useUpcomingItems(type: DiscoverMode) {
   const [YYYY_MM_DD] = daysAgo(0).toISOString().split('T');
   const startDate = assertDefined(
     YYYY_MM_DD,

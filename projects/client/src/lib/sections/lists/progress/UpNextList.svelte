@@ -1,10 +1,10 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import { type DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import { type MediaType } from "$lib/requests/models/MediaType";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -23,7 +23,10 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type: MediaType, upNextIntent: "all" | "continue" | "start")}
+{#snippet content(
+  type: DiscoverMode,
+  upNextIntent: "all" | "continue" | "start",
+)}
   <DrillableMediaList
     type="episode"
     id={`up-next-list-${type}-${upNextIntent}`}

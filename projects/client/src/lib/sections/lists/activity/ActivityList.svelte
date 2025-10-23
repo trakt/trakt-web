@@ -5,10 +5,10 @@
 
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler.ts";
+  import { type DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import { type MediaType } from "$lib/requests/models/MediaType.ts";
   import { DEFAULT_ACTIVITY_PAGE_SIZE } from "$lib/utils/constants.ts";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import RecentlyWatchedItem from "../history/RecentlyWatchedItem.svelte";
@@ -34,7 +34,7 @@
   );
 </script>
 
-{#snippet content(type?: MediaType)}
+{#snippet content(type: DiscoverMode)}
   <DrillableMediaList
     id={`activity-list-${$activityType.value}`}
     source={{ id: "activity", type: $activityType.value }}
@@ -78,5 +78,5 @@
     {@render content($mode)}
   {/snippet}
 
-  {@render content()}
+  {@render content("media")}
 </RenderForFeature>

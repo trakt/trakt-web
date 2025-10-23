@@ -1,7 +1,5 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Readable, Writable } from 'svelte/store';
-
-export type DiscoverMode = MediaType;
+import type { DiscoverMode } from '../models/DiscoverMode.ts';
 
 export const DISCOVER_CONTEXT_KEY = Symbol('discover-context');
 

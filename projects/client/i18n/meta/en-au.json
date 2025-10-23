@@ -2126,6 +2126,24 @@
     },
     "list_title_where_to_watch": {
       "default": "Where to Watch"
+    },
+    "page_title_anticipated_media": {
+      "default": "Anticipated media"
+    },
+    "page_title_popular_media": {
+      "default": "Popular media"
+    },
+    "page_title_recommended_media": {
+      "default": "Recommended media"
+    },
+    "page_title_trending_media": {
+      "default": "Trending media"
+    },
+    "button_text_media": {
+      "default": "Media"
+    },
+    "button_label_media": {
+      "default": "Media"
     }
   }
 }

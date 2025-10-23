@@ -1,6 +1,5 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import {
   type UpcomingEpisodeEntry,
   upcomingEpisodesQuery,
@@ -11,6 +10,7 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { isSameDay } from 'date-fns/isSameDay';
 import { derived, type Readable } from 'svelte/store';
+import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
 import type { CalendarEntry } from '../models/CalendarEntry.ts';
 
 type CalendarItems = Array<MediaEntry | UpcomingEpisodeEntry>;
@@ -18,7 +18,7 @@ type CalendarItems = Array<MediaEntry | UpcomingEpisodeEntry>;
 type UseCalendarParams = {
   start: Date;
   days: number;
-  type?: MediaType;
+  type: DiscoverMode;
 };
 
 type CalendarResult = {
@@ -43,7 +43,7 @@ function typeToQueries({ start, days, type }: UseCalendarParams) {
       return [
         upcomingEpisodesQuery(params) as CreateQueryOptions<CalendarItems>,
       ];
-    default:
+    case 'media':
       return [
         upcomingMoviesQuery(params) as CreateQueryOptions<CalendarItems>,
         upcomingEpisodesQuery(params) as CreateQueryOptions<CalendarItems>,

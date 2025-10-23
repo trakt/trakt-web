@@ -4,7 +4,7 @@ import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import { buildParamString } from './buildParamString.ts';
 
 type TypeParams = {
-  type: ExtendedMediaType;
+  type: ExtendedMediaType | 'media';
 };
 
 type WellKnownQueryParams = {
@@ -54,7 +54,9 @@ function sanitizeParams(
 
 const mediaDrilldownFactory =
   (category: string) => ({ type, ...params }: UrlBuilderParams) => {
-    const baseUrl = `/${type}s/${category}`;
+    const typePath = type === 'media' ? type : `${type}s`;
+
+    const baseUrl = `/${typePath}/${category}`;
     return baseUrl + buildParamString({
       ...sanitizeParams(params),
     });

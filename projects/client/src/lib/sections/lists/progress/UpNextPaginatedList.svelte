@@ -1,9 +1,9 @@
 <script lang="ts">
+  import { type DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
-  import { type MediaType } from "$lib/requests/models/MediaType";
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
   import UpNextItem from "$lib/sections/lists/progress/UpNextItem.svelte";
   import { useHiddenShows } from "$lib/sections/lists/progress/useHiddenShows";
@@ -20,7 +20,10 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type: MediaType, upNextIntent: "all" | "continue" | "start")}
+{#snippet content(
+  type: DiscoverMode,
+  upNextIntent: "all" | "continue" | "start",
+)}
   <DrilledMediaList
     id={`view-all-up-next-${type}-${upNextIntent}`}
     {type}

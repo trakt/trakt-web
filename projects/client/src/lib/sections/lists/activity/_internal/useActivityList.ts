@@ -1,4 +1,4 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SocialActivity } from '$lib/requests/models/SocialActivity.ts';
@@ -12,7 +12,7 @@ import type { ActivityType } from '../models/ActivityType.ts';
 
 type ActivityListProps = {
   activityType: ActivityType;
-  type?: MediaType;
+  type: DiscoverMode;
 } & PaginationParams;
 
 type ActivityEntry =
@@ -47,7 +47,7 @@ export function useActivityList(props: ActivityListProps) {
 
   return {
     list: derived(list, ($list) => {
-      if (!props.type) {
+      if (!props.type || props.type === 'media') {
         return $list;
       }
 
