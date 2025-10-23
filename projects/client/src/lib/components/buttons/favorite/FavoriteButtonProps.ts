@@ -7,6 +7,7 @@ export type FavoriteButtonProps = {
   isFavoriteUpdating: boolean;
   isFavorited: boolean;
   style: 'action' | 'normal' | 'dropdown-item';
+  size?: 'small' | 'normal';
   onAdd: () => void;
   onRemove: (event: MouseEvent) => void;
   navigationType?: DpadNavigationType;

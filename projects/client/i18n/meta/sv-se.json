@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Extramaterial"
     },
-    "button_label_rating_bad": {
-      "default": "Betygsätt som dålig"
-    },
-    "button_label_rating_good": {
-      "default": "Betygsätt som bra"
-    },
-    "button_label_rating_great": {
-      "default": "Betygsätt som utmärkt"
+    "button_label_star_rating": {
+      "default": "Betygsätt med {stars} stjärnor.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "och {count} till"

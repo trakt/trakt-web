@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Екстри"
     },
-    "button_label_rating_bad": {
-      "default": "Оцени като лошо"
-    },
-    "button_label_rating_good": {
-      "default": "Оцени като добро"
-    },
-    "button_label_rating_great": {
-      "default": "Оцени като страхотно"
+    "button_label_star_rating": {
+      "default": "Оценете с {stars} звезди.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "и още {count}"

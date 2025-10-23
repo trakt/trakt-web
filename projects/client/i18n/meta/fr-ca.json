@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Suppléments"
     },
-    "button_label_rating_bad": {
-      "default": "Noter comme mauvais"
-    },
-    "button_label_rating_good": {
-      "default": "Noter comme bon"
-    },
-    "button_label_rating_great": {
-      "default": "Noter comme excellent"
+    "button_label_star_rating": {
+      "default": "Noter avec {stars} étoiles.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "pis {count} autres"

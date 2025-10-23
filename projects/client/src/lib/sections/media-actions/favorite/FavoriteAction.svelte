@@ -9,6 +9,7 @@
 
   type FavoriteActionProps = {
     style?: "action" | "normal" | "dropdown-item";
+    size?: "small" | "normal";
     title: string;
     type: MediaType;
     id: number;
@@ -18,6 +19,7 @@
 
   const {
     style = "action",
+    size = "normal",
     title,
     type,
     id,
@@ -50,6 +52,7 @@
   {style}
   {title}
   {navigationType}
+  {size}
   isFavorited={$isFavorited}
   isFavoriteUpdating={$isUpdatingFavorite}
   onAdd={addToFavorites}

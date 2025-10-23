@@ -1,5 +1,4 @@
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
-import type { SimpleRating } from '$lib/models/SimpleRating.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
@@ -10,7 +9,7 @@ import { AnalyticsEvent } from './AnalyticsEvent.ts';
 type SourceType = { source: string };
 
 type ActionType = { action: 'add' | 'remove' };
-type RatingType = { action: 'added' | 'changed'; rating: SimpleRating };
+type RatingType = { action: 'added' | 'changed'; rating: number };
 type FilterType = { id: string; action: 'set' | 'reset' };
 type FiltersType = { action: 'save' | 'reset' };
 type CheckInType = { type: 'episode' | 'movie'; action: 'start' | 'stop' };

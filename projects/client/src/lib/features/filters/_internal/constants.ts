@@ -1,12 +1,12 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 import { generateDecadeOptions } from '$lib/features/filters/_internal/generateDecadeOptions.ts';
-import { RATINGS } from '$lib/features/filters/_internal/ratings.ts';
 import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
-import { SimpleRating } from '$lib/models/SimpleRating.ts';
+import { STAR_RATINGS } from '$lib/sections/summary/components/rating/constants/index.ts';
 import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
 import { GENRES } from './genres.ts';
+import { getRatingFilterRange } from './getRatingFilterRange.ts';
 
 const GENRE_FILTER: Filter = {
   label: m.header_genre(),
@@ -54,9 +54,9 @@ const RATINGS_FILTER: Filter = {
   label: m.header_ratings(),
   key: FilterKey.Ratings,
   type: 'ratings',
-  options: Object.values(SimpleRating).map((rating) => ({
+  options: STAR_RATINGS.map((rating) => ({
     rating,
-    value: RATINGS[rating as SimpleRating],
+    value: getRatingFilterRange(rating),
   })),
 };
 

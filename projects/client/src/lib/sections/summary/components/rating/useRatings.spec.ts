@@ -1,4 +1,3 @@
-import { SimpleRating } from '$lib/models/SimpleRating.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { MovieHereticMappedMock } from '$mocks/data/summary/movies/heretic/mapped/MovieHereticMappedMock.ts';
@@ -33,8 +32,8 @@ describe('useRatings', () => {
       })
     );
 
-    addRating(SimpleRating.Bad);
-    expect(get(pendingRating)).toBe(SimpleRating.Bad);
+    addRating(2);
+    expect(get(pendingRating)).toBe(2);
   });
 
   it('should not indicate that rating is in progress', async () => {
@@ -49,27 +48,31 @@ describe('useRatings', () => {
   });
 
   it('should return the current rating', async () => {
-    const { currentRating } = await renderStore(() =>
+    const { current } = await renderStore(() =>
       useRatings({
         type: 'movie',
         id: MovieHereticMappedMock.id,
       })
     );
 
-    const rating = await waitForValue(currentRating, SimpleRating.Great);
-    expect(rating).toBe('great');
+    const value = await waitForValue(current, {
+      rating: 10,
+      isHighestRating: true,
+      isFavorited: false,
+    });
+    expect(value?.rating).toBe(10);
   });
 
   it('should return undefined if there is no current rating', async () => {
-    const { currentRating } = await renderStore(() =>
+    const { current } = await renderStore(() =>
       useRatings({
         type: 'movie',
         id: MovieMatrixMappedMock.id,
       })
     );
 
-    const rating = await waitForEmission(currentRating, 2);
-    expect(rating).toBeUndefined();
+    const value = await waitForEmission(current, 2);
+    expect(value).toBeUndefined();
   });
 
   it('should call invalidate after rating', async () => {
@@ -80,7 +83,7 @@ describe('useRatings', () => {
       })
     );
 
-    await addRating(SimpleRating.Bad);
+    await addRating(2);
     expect(invalidate)
       .toHaveBeenCalledWith(InvalidateAction.Rated('movie'));
     expect(invalidate)

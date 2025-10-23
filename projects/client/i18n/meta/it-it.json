@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Extra"
     },
-    "button_label_rating_bad": {
-      "default": "Valuta come brutto"
-    },
-    "button_label_rating_good": {
-      "default": "Valuta come buono"
-    },
-    "button_label_rating_great": {
-      "default": "Valuta come fantastico"
+    "button_label_star_rating": {
+      "default": "Vota con {stars} stelle.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "e altri {count}"

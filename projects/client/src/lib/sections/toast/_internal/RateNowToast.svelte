@@ -51,7 +51,7 @@
     }
 
     :global(h6) {
-      font-size: var(--ni-24);
+      font-size: var(--ni-18);
       text-transform: capitalize;
     }
 

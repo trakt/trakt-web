@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Ekstra"
     },
-    "button_label_rating_bad": {
-      "default": "Vurder som dårlig"
-    },
-    "button_label_rating_good": {
-      "default": "Vurder som bra"
-    },
-    "button_label_rating_great": {
-      "default": "Vurder som flott"
+    "button_label_star_rating": {
+      "default": "Vurder med {stars} stjerner.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "og {count} til"

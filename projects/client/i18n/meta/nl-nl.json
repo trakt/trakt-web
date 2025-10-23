@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Extra's"
     },
-    "button_label_rating_bad": {
-      "default": "Beoordeel als slecht"
-    },
-    "button_label_rating_good": {
-      "default": "Beoordeel als goed"
-    },
-    "button_label_rating_great": {
-      "default": "Beoordeel als geweldig"
+    "button_label_star_rating": {
+      "default": "Beoordeel met {stars} sterren.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "en {count} meer"

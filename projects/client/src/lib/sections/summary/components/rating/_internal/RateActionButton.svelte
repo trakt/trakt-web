@@ -1,68 +1,67 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
+  import StarIcon from "$lib/components/icons/StarIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { SimpleRating } from "$lib/models/SimpleRating";
-  import UserRating from "../UserRating.svelte";
+  import type { StarRating } from "../models/StarRating";
+  import { getStarFillPercentage } from "./getStarFillPercentage";
 
   const {
+    star,
     rating,
-    isCurrentRating,
     isDisabled,
     onAddRating,
-    style = "flat",
+    isCurrentRating,
   }: {
-    rating: SimpleRating;
-    isCurrentRating: boolean;
+    star: StarRating;
+    rating?: number;
     isDisabled: boolean;
-    onAddRating: (rating: SimpleRating) => void;
-    style?: "flat" | "ghost";
+    onAddRating: (rating: number) => void;
+    isCurrentRating?: boolean;
   } = $props();
 
-  const label = $derived.by(() => {
-    switch (rating) {
-      case SimpleRating.Bad:
-        return m.button_label_rating_bad();
-      case SimpleRating.Good:
-        return m.button_label_rating_good();
-      case SimpleRating.Great:
-        return m.button_label_rating_great();
-    }
-  });
+  const fillPercent = $derived(
+    isCurrentRating ? 100 : getStarFillPercentage(star, rating),
+  );
 </script>
 
-<trakt-rate-button class:is-current-rating={isCurrentRating}>
+<div class="trakt-rate-button" class:has-disabled-button={isDisabled}>
   <ActionButton
     disabled={isDisabled}
-    {label}
-    onclick={() => onAddRating(rating)}
-    {style}
+    label={m.button_label_star_rating({ stars: star.index })}
+    onclick={() => onAddRating(star.value)}
+    style="ghost"
     variant="primary"
+    size="small"
     navigationType={DpadNavigationType.Item}
   >
-    <UserRating {rating} {isCurrentRating} />
+    <StarIcon {fillPercent} />
   </ActionButton>
-</trakt-rate-button>
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  trakt-rate-button {
-    --rating-active-color: var(--shade-400);
-
+  .trakt-rate-button {
     :global(.trakt-action-button) {
-      @include for-mouse() {
-        &:hover,
-        &:focus-visible {
-          background-color: var(--rating-active-color);
-        }
-      }
+      transition: color var(--transition-increment) ease-in-out;
+      border-radius: 0;
+      backdrop-filter: none;
     }
 
-    &.is-current-rating {
-      :global(.trakt-action-button) {
-        cursor: default;
-        pointer-events: none;
+    @include for-mouse() {
+      &:hover {
+        :global(.trakt-action-button) {
+          background: transparent;
+        }
+
+        :global(.trakt-action-button:not([disabled])) {
+          color: var(--orange-400);
+        }
+
+        :global(svg path) {
+          fill: currentColor;
+        }
       }
     }
   }

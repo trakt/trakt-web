@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Extra"
     },
-    "button_label_rating_bad": {
-      "default": "Evaluează ca rău"
-    },
-    "button_label_rating_good": {
-      "default": "Evaluează ca bun"
-    },
-    "button_label_rating_great": {
-      "default": "Evaluează ca grozav"
+    "button_label_star_rating": {
+      "default": "Evaluează cu {stars} stele.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "și încă {count}"
