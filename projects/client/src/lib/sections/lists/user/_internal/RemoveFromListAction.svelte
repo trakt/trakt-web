@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useDangerButton } from "$lib/components/buttons/_internal/useDangerButton";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
-  import WatchlistIcon from "$lib/components/icons/WatchlistIcon.svelte";
+  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
   import { useRemoveFromList } from "./useRemoveFromList";
@@ -42,6 +42,6 @@
   {m.button_text_remove_from_list()}
 
   {#snippet icon()}
-    <WatchlistIcon size="small" state="added" />
+    <BookmarkIcon state="added" size="normal" />
   {/snippet}
 </DropdownItem>

@@ -1,9 +1,7 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import ListedIcon from "$lib/components/icons/ListedIcon.svelte";
-  import ListManagementIcon from "$lib/components/icons/ListManagementIcon.svelte";
-  import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
+  import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import { writable } from "svelte/store";
@@ -39,6 +37,7 @@
   const text = $derived(
     $isListed ? m.button_text_listed() : m.button_text_lists(),
   );
+  const state = $derived($isListed ? "added" : "missing");
 </script>
 
 {#snippet dropdownItems()}
@@ -62,7 +61,7 @@
     {text}
 
     {#snippet icon()}
-      <ListManagementIcon />
+      <BookmarkIcon {state} size="normal" />
     {/snippet}
   </Button>
 {/if}
@@ -74,11 +73,7 @@
     style="ghost"
     disabled={isDisabled}
   >
-    {#if $isListed}
-      <ListedIcon />
-    {:else}
-      <PlusIcon />
-    {/if}
+    <BookmarkIcon {state} />
   </ActionButton>
 {/if}
 
