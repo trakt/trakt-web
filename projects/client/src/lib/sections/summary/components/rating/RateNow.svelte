@@ -1,10 +1,11 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { SimpleRating } from "$lib/models/SimpleRating";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import { fade, slide } from "svelte/transition";
-  import RateActionButton from "./_internal/RateActionButton.svelte";
+
+  import { slideFade } from "$lib/utils/transitions/slideFade";
+  import RatingStars from "./_internal/RatingStars.svelte";
   import { useIsRateable } from "./_internal/useIsRateable";
   import type { RateNowProps } from "./models/RateNowProps";
   import { useRatings } from "./useRatings";
@@ -16,7 +17,7 @@
   const type = $derived(props.type);
   const id = $derived(props.media.id);
 
-  const { pendingRating, currentRating, addRating } = $derived(
+  const { pendingRating, current, addRating } = $derived(
     useRatings({
       type,
       id,
@@ -35,30 +36,32 @@
       class="trakt-rate-actions"
       transition:fade={{ duration: 150, delay: 150 }}
     >
-      {#each Object.values(SimpleRating) as simpleRating}
-        <RateActionButton
-          style="ghost"
-          rating={simpleRating}
-          isCurrentRating={$pendingRating
-            ? $pendingRating === simpleRating
-            : $currentRating === simpleRating}
-          isDisabled={Boolean($pendingRating) || !$isRateable}
-          onAddRating={(rating: SimpleRating) => {
-            if ($currentRating === rating) {
-              return;
-            }
-            addRating(rating);
-          }}
-        />
-      {/each}
-      {#if props.type !== "episode" && $currentRating !== undefined}
-        <FavoriteAction
-          style="action"
-          title={props.media.title}
-          type={props.type}
-          id={props.media.id}
-          navigationType={DpadNavigationType.Item}
-        />
+      <RatingStars
+        rating={$pendingRating ?? $current?.rating}
+        isRating={$pendingRating !== null}
+        onAddRating={(rating: number) => {
+          if (rating === $current?.rating) {
+            return;
+          }
+
+          addRating(rating);
+        }}
+      />
+
+      {#if props.type !== "episode" && ($current?.isHighestRating || $current?.isFavorited)}
+        <div
+          class="trakt-favorite-action"
+          transition:slideFade={{ duration: 300, axis: "x" }}
+        >
+          <FavoriteAction
+            style="action"
+            size="small"
+            title={props.media.title}
+            type={props.type}
+            id={props.media.id}
+            navigationType={DpadNavigationType.Item}
+          />
+        </div>
       {/if}
     </div>
   </div>
@@ -92,6 +95,6 @@
   }
 
   .trakt-rate-actions {
-    gap: var(--gap-xs);
+    gap: var(--gap-s);
   }
 </style>

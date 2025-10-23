@@ -1,6 +1,5 @@
 <script lang="ts">
-  import RateIcon from "$lib/components/icons/RateIcon.svelte";
-  import { SimpleRating } from "$lib/models/SimpleRating";
+  import SentimentIcon from "$lib/components/icons/SentimentIcon.svelte";
   import type { Sentiments } from "$lib/requests/models/Sentiments";
   import ShadowScroller from "../../comments/_internal/ShadowScroller.svelte";
 
@@ -13,12 +12,12 @@
   const mappedSentiments = [
     {
       sentiments: sentiments.good,
-      rating: SimpleRating.Good,
+      sentiment: "good" as const,
       color: "var(--color-text-sentiment-good)",
     },
     {
       sentiments: sentiments.bad,
-      rating: SimpleRating.Bad,
+      sentiment: "bad" as const,
       color: "var(--color-text-sentiment-bad)",
     },
   ];
@@ -26,9 +25,9 @@
 
 <ShadowScroller>
   <div class="trakt-sentiment-body">
-    {#each mappedSentiments as { rating, sentiments, color }}
+    {#each mappedSentiments as { sentiment, sentiments, color }}
       <div class="trakt-sentiment-container" style="--sentiment-color: {color}">
-        <RateIcon {rating} --icon-fill-color={color} />
+        <SentimentIcon {sentiment} --icon-fill-color={color} />
         <ul>
           {#each sentiments as sentiment}
             <li><p class="small">{sentiment}</p></li>

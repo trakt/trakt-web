@@ -1,7 +1,6 @@
 import type { UserSettings } from '$lib/features/auth/queries/currentUserSettingsQuery.ts';
 import { ExtendedUserMappedMock } from '$mocks/data/users/mapped/ExtendedUserSettingsMappedMock.ts';
 import { describe, expect, it } from 'vitest';
-import { SimpleRating } from '../../../models/SimpleRating.ts';
 import type {
   ListFilter,
   RatingsFilter,
@@ -93,24 +92,27 @@ describe('mapToSearchParamValue', () => {
   });
 
   describe('ratings filters', () => {
+    const lowStarRating = { index: 1, value: 2, range: { min: 0, max: 2 } };
+    const highStarRating = { index: 2, value: 10, range: { min: 8, max: 10 } };
+
     const ratingsFilter: RatingsFilter = {
       key: FilterKey.Ratings,
       label: 'Ratings',
       type: 'ratings',
       options: [
-        { rating: SimpleRating.Great, value: '9,10' },
-        { rating: SimpleRating.Good, value: '7,8,9,10' },
+        { rating: highStarRating, value: '81-100' },
+        { rating: lowStarRating, value: '0-20' },
       ],
     };
 
     it('should return original value for ratings filter', () => {
       const result = mapToSearchParamValue({
         filter: ratingsFilter,
-        value: '9,10',
+        value: '81-100',
         user: mockUser,
       });
 
-      expect(result).toBe('9,10');
+      expect(result).toBe('81-100');
     });
   });
 });

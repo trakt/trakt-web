@@ -1423,14 +1423,13 @@
     "dropdown_label_extras": {
       "default": "Додаткові матеріали"
     },
-    "button_label_rating_bad": {
-      "default": "Оцінити як погано"
-    },
-    "button_label_rating_good": {
-      "default": "Оцінити як добре"
-    },
-    "button_label_rating_great": {
-      "default": "Оцінити як чудово"
+    "button_label_star_rating": {
+      "default": "Оцінити на {stars} зірки.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      }
     },
     "badge_text_more": {
       "default": "та ще {count}"

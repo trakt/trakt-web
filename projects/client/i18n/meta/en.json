@@ -3989,25 +3989,14 @@
         "ios"
       ]
     },
-    "button_label_rating_bad": {
-      "default": "Rate as bad",
-      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as bad.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_label_rating_good": {
-      "default": "Rate as good",
-      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as good.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_label_rating_great": {
-      "default": "Rate as great",
-      "description": "Aria-label for the button that allows users to rate a movie, show, or episode as great.",
+    "button_label_star_rating": {
+      "default": "Rate with {stars} stars.",
+      "description": "Aria-label for button that allows users to rate a movie, show, or episode with a specific number of stars.",
+      "variables": {
+        "stars": {
+          "type": "number"
+        }
+      },
       "exclude": [
         "android",
         "ios"

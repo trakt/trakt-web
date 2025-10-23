@@ -32,13 +32,14 @@
       label={m.button_label_reset_filter()}
       onclick={() => handler(null)}
       style={$currentValue ? "flat" : "ghost"}
+      size="small"
       navigationType={DpadNavigationType.Item}
     >
       <CloseIcon />
     </ActionButton>
     {#each filter.options as option}
       <RateActionButton
-        rating={option.rating}
+        star={option.rating}
         isCurrentRating={$currentValue === option.value}
         isDisabled={$currentValue === option.value}
         onAddRating={() => {

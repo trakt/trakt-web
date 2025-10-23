@@ -6,28 +6,15 @@
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
-  import { mapRatingToSimpleRating } from "../../rating/mapRatingToSimpleRating";
   import DeleteCommentButton from "./comment-actions/DeleteCommentButton.svelte";
-  import UserRatingIcon from "./UserRatingIcon.svelte";
 
   const { comment, type }: { comment: MediaComment; type: ExtendedMediaType } =
     $props();
-
-  const commenterRating = $derived(
-    comment.user.stats.rating &&
-      mapRatingToSimpleRating(comment.user.stats.rating),
-  );
 </script>
 
 <div class="trakt-comment-header">
   <div class="trakt-comment-header-content">
-    <UserAvatar user={comment.user} size="small">
-      {#snippet icon()}
-        {#if commenterRating}
-          <UserRatingIcon rating={commenterRating} />
-        {/if}
-      {/snippet}
-    </UserAvatar>
+    <UserAvatar user={comment.user} size="small" />
 
     <div class="trakt-comment-details">
       <div class="trakt-comment-user">
