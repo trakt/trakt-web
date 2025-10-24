@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Media"
+    },
+    "header_appearance": {
+      "default": "Uiterlijk"
+    },
+    "description_appearance": {
+      "default": "Verander je thema- en taalinstellingen."
+    },
+    "text_theme": {
+      "default": "Thema"
+    },
+    "text_language": {
+      "default": "Taal"
     }
   }
 }

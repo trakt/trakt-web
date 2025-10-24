@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Media"
+    },
+    "header_appearance": {
+      "default": "Utseende"
+    },
+    "description_appearance": {
+      "default": "Ändra dina tema- och språkinställningar."
+    },
+    "text_theme": {
+      "default": "Tema"
+    },
+    "text_language": {
+      "default": "Språk"
     }
   }
 }

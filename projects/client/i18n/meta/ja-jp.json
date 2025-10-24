@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "メディア"
+    },
+    "header_appearance": {
+      "default": "外観"
+    },
+    "description_appearance": {
+      "default": "テーマと言語設定を変更します。"
+    },
+    "text_theme": {
+      "default": "テーマ"
+    },
+    "text_language": {
+      "default": "言語"
     }
   }
 }

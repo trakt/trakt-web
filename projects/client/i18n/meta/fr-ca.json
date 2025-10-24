@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Médias"
+    },
+    "header_appearance": {
+      "default": "Apparence"
+    },
+    "description_appearance": {
+      "default": "Changez votre thème et vos paramètres de langue."
+    },
+    "text_theme": {
+      "default": "Thème"
+    },
+    "text_language": {
+      "default": "Langue"
     }
   }
 }

@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Медии"
+    },
+    "header_appearance": {
+      "default": "Вид"
+    },
+    "description_appearance": {
+      "default": "Променете темата и настройките на езика."
+    },
+    "text_theme": {
+      "default": "Тема"
+    },
+    "text_language": {
+      "default": "Език"
     }
   }
 }

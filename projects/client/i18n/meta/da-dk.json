@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Medier"
+    },
+    "header_appearance": {
+      "default": "Udseende"
+    },
+    "description_appearance": {
+      "default": "Skift dine tema- og sprogindstillinger."
+    },
+    "text_theme": {
+      "default": "Tema"
+    },
+    "text_language": {
+      "default": "Sprog"
     }
   }
 }
