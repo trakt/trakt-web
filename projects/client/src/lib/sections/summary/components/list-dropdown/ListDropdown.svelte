@@ -1,9 +1,13 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Button from "$lib/components/buttons/Button.svelte";
+  import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
+  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
+  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages";
-  import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
+  import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
+  import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import ListDropdownItem from "./_internal/ListDropdownItem.svelte";
   import ListsDrawer from "./_internal/ListsDrawer.svelte";
@@ -29,7 +33,26 @@
     }),
   );
 
-  const isDisabled = $derived($isLoading || $isUpdating);
+  const {
+    addToWatchlist,
+    isWatchlistUpdating,
+    isWatchlisted,
+    removeFromWatchlist,
+  } = $derived(useWatchlist(target));
+
+  const { confirm } = useConfirm();
+  const confirmRemove = $derived(
+    confirm({
+      type: ConfirmationType.RemoveFromWatchList,
+      title,
+      onConfirm: removeFromWatchlist,
+    }),
+  );
+
+  const isDisabled = $derived(
+    $isLoading || $isUpdating || $isWatchlistUpdating,
+  );
+
   const isOpen = writable(false);
   const onClose = () => isOpen.set(false);
 
@@ -38,10 +61,28 @@
     $isListed ? m.button_text_listed() : m.button_text_lists(),
   );
   const state = $derived($isListed ? "added" : "missing");
+
+  onMount(() => {
+    return isOpen.subscribe((open) => {
+      if (!open) {
+        return;
+      }
+
+      $isWatchlisted ? confirmRemove() : addToWatchlist();
+    });
+  });
 </script>
 
 {#snippet dropdownItems()}
-  <WatchlistAction style="dropdown-item" {title} {isUpdating} {...target} />
+  <WatchlistButton
+    {title}
+    type="dropdown-item"
+    size="normal"
+    isWatchlistUpdating={$isWatchlistUpdating}
+    isWatchlisted={$isWatchlisted}
+    onAdd={addToWatchlist}
+    onRemove={confirmRemove}
+  />
 
   {#each $lists as list}
     <ListDropdownItem {title} {list} {isUpdating} {...target} />

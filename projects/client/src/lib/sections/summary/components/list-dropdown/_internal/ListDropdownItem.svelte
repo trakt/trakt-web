@@ -6,6 +6,7 @@
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
+  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { onMount } from "svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
   import type { ListDropdownItemProps } from "./ListDropdownItemProps";
@@ -72,6 +73,10 @@
   {i18n.text({ isListed: $isListed, listName: list.name, title })}
 
   {#snippet icon()}
-    <BookmarkIcon {state} size="normal" />
+    {#if $isListUpdating}
+      <LoadingIndicator />
+    {:else}
+      <BookmarkIcon {state} size="normal" />
+    {/if}
   {/snippet}
 </DropdownItem>
