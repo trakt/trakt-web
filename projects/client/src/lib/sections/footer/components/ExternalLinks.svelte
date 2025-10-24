@@ -7,16 +7,26 @@
   import XIcon from "$lib/components/icons/XIcon.svelte";
 
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import FeatureFlagTool from "$lib/features/feature-flag/FeatureFlagTool.svelte";
   import { print, PrintTarget } from "$lib/utils/console/print";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useInstallPrompt } from "../stores/useInstallPrompt";
+
+  const { track } = useTrack(AnalyticsEvent.Link);
+
+  const trackLink = (target: string) => {
+    console.log("Tracking link:", target);
+    track({ target });
+  };
 
   const install = useInstallPrompt();
 
   async function handleInstall(ev: MouseEvent) {
     ev.preventDefault();
 
+    trackLink("pwa-install");
     const installed = await install.prompt();
 
     if (installed) {
@@ -35,22 +45,42 @@
       </Link>
     {/if}
 
-    <Link href={UrlBuilder.github.web()} target="_blank">
+    <Link
+      href={UrlBuilder.github.web()}
+      target="_blank"
+      onclick={() => trackLink("github-web")}
+    >
       <GithubIcon />
     </Link>
-    <Link href={UrlBuilder.app.ios()} target="_blank">
+    <Link
+      href={UrlBuilder.app.ios()}
+      target="_blank"
+      onclick={() => trackLink("ios-app")}
+    >
       <AppleIcon />
     </Link>
-    <Link href={UrlBuilder.app.android()} target="_blank">
+    <Link
+      href={UrlBuilder.app.android()}
+      target="_blank"
+      onclick={() => trackLink("android-app")}
+    >
       <AndroidIcon />
     </Link>
   </div>
 
   <div class="trakt-social-media-links">
-    <Link href={UrlBuilder.socialMedia.x()} target="_blank">
+    <Link
+      href={UrlBuilder.socialMedia.x()}
+      target="_blank"
+      onclick={() => trackLink("x")}
+    >
       <XIcon />
     </Link>
-    <Link href={UrlBuilder.socialMedia.instagram()} target="_blank">
+    <Link
+      href={UrlBuilder.socialMedia.instagram()}
+      target="_blank"
+      onclick={() => trackLink("instagram")}
+    >
       <InstagramIcon />
     </Link>
   </div>
