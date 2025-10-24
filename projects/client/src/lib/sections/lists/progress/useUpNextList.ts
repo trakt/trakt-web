@@ -39,13 +39,13 @@ function typeToQueries(props: UpNextStoreProps) {
       >];
     default:
       return [
+        upNextNitroQuery(props) as CreateQueryOptions<
+          Paginatable<ProgressEntry>
+        >,
         movieProgressQuery({
           ...props,
           limit: props.intent === 'start' ? RELEASED_LIST_LIMIT : props.limit,
         }) as CreateQueryOptions<
-          Paginatable<ProgressEntry>
-        >,
-        upNextNitroQuery(props) as CreateQueryOptions<
           Paginatable<ProgressEntry>
         >,
       ];

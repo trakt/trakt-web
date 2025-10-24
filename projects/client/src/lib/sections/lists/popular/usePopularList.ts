@@ -49,10 +49,10 @@ function typeToQueries(
       >];
     case 'media':
       return [
-        moviePopularQuery(params) as CreateQueryOptions<
+        showPopularQuery(params) as CreateQueryOptions<
           Paginatable<PopularEntry>
         >,
-        showPopularQuery(params) as CreateQueryOptions<
+        moviePopularQuery(params) as CreateQueryOptions<
           Paginatable<PopularEntry>
         >,
       ];

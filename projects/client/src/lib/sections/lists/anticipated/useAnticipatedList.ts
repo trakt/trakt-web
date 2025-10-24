@@ -48,10 +48,10 @@ function typeToQueries(
       >];
     case 'media':
       return [
-        movieAnticipatedQuery(params) as CreateQueryOptions<
+        showAnticipatedQuery(params) as CreateQueryOptions<
           Paginatable<AnticipatedEntry>
         >,
-        showAnticipatedQuery(params) as CreateQueryOptions<
+        movieAnticipatedQuery(params) as CreateQueryOptions<
           Paginatable<AnticipatedEntry>
         >,
       ];

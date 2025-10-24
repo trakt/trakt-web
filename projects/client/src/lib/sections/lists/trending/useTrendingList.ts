@@ -36,8 +36,8 @@ function typeToQueries(
       ];
     case 'media':
       return [
-        movieTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>,
         showTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>,
+        movieTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>,
       ];
   }
 }
