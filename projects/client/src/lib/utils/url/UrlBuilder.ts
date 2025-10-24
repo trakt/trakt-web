@@ -188,6 +188,10 @@ export const UrlBuilder = {
     web: () => 'https://github.com/trakt/trakt-web',
     reportIssue: () => 'https://github.com/trakt/trakt-web/issues/new',
   },
+  socialMedia: {
+    x: () => 'https://x.com/trakt',
+    instagram: () => 'https://www.instagram.com/trakt_app',
+  },
   vip: () => 'https://trakt.tv/vip',
   og: {
     getVip: () => 'https://trakt.tv/vip',
