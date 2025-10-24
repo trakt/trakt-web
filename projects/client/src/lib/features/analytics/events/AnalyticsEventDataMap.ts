@@ -34,6 +34,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.Theme]: { theme: Theme };
   [AnalyticsEvent.Locale]: { locale: string };
+  [AnalyticsEvent.Link]: { target: string };
   [AnalyticsEvent.Filter]: FilterType;
   [AnalyticsEvent.Filters]: FiltersType;
   [AnalyticsEvent.Drilldown]: DrilldownType;

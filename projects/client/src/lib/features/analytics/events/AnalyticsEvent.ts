@@ -19,6 +19,7 @@ export const AnalyticsEvent = {
 
   Theme: buildEventKey(ACTION_PREFIX, 'theme'),
   Locale: buildEventKey(ACTION_PREFIX, 'locale'),
+  Link: buildEventKey(ACTION_PREFIX, 'link'),
   Filter: buildEventKey(ACTION_PREFIX, 'filter'),
   Filters: buildEventKey(ACTION_PREFIX, 'filters'),
   Drilldown: buildEventKey(ACTION_PREFIX, 'drilldown'),
