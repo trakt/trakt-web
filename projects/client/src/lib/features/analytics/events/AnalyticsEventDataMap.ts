@@ -4,6 +4,7 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
+import type { DiscoverMode } from '../../discover/models/DiscoverMode.ts';
 import { AnalyticsEvent } from './AnalyticsEvent.ts';
 
 type SourceType = { source: string };
@@ -24,10 +25,12 @@ type DrilldownType = SourceType & { type?: string };
 type SearchType = { mode: SearchMode };
 type ShareType = DrilldownType;
 type CoverImageType = { type: ExtendedMediaType };
+type DiscoverType = SourceType & { mode: DiscoverMode };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
   [AnalyticsEvent.Cta]: CtaDataType;
+  [AnalyticsEvent.DiscoverMode]: DiscoverType;
 
   [AnalyticsEvent.Theme]: { theme: Theme };
   [AnalyticsEvent.Locale]: { locale: string };
