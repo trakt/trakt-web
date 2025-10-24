@@ -49,10 +49,10 @@ function typeToQueries(
       >];
     case 'media':
       return [
-        recommendedMoviesQuery(params) as CreateQueryOptions<
+        recommendedShowsQuery(params) as CreateQueryOptions<
           RecommendedMediaList
         >,
-        recommendedShowsQuery(params) as CreateQueryOptions<
+        recommendedMoviesQuery(params) as CreateQueryOptions<
           RecommendedMediaList
         >,
       ];
