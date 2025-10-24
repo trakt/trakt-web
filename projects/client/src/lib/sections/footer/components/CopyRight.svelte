@@ -23,7 +23,7 @@
 
     width: fit-content;
 
-    @include for-mobile {
+    @include for-tablet-sm-and-below {
       .copyright-crafted-by {
         display: none;
       }
