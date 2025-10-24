@@ -10,7 +10,6 @@
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import LocalePicker from "$lib/features/i18n/components/LocalePicker.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
@@ -163,9 +162,6 @@
 
     <div class="trakt-side-navbar-bottom">
       <RenderFor audience="authenticated">
-        <RenderFor audience="authenticated" navigation="dpad">
-          <LocalePicker />
-        </RenderFor>
         {#if !isVip}
           <RenderFor audience="authenticated" navigation="default">
             <GetVIPLink />

@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Media"
+    },
+    "header_appearance": {
+      "default": "Wygląd"
+    },
+    "description_appearance": {
+      "default": "Zmień motyw i ustawienia językowe."
+    },
+    "text_theme": {
+      "default": "Motyw"
+    },
+    "text_language": {
+      "default": "Język"
     }
   }
 }

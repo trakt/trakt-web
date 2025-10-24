@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Media"
+    },
+    "header_appearance": {
+      "default": "Apariție"
+    },
+    "description_appearance": {
+      "default": "Schimbă tema și setările de limbă."
+    },
+    "text_theme": {
+      "default": "Temă"
+    },
+    "text_language": {
+      "default": "Limbă"
     }
   }
 }

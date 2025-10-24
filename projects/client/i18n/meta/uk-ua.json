@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Медіа"
+    },
+    "header_appearance": {
+      "default": "Вигляд"
+    },
+    "description_appearance": {
+      "default": "Змініть налаштування теми та мови."
+    },
+    "text_theme": {
+      "default": "Тема"
+    },
+    "text_language": {
+      "default": "Мова"
     }
   }
 }

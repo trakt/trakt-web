@@ -5869,6 +5869,38 @@
         "android",
         "ios"
       ]
+    },
+    "header_appearance": {
+      "default": "Appearance",
+      "description": "Header for the section that allows users to change the appearance, i.e. color theme and language.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "description_appearance": {
+      "default": "Change your theme and language settings.",
+      "description": "Description for the appearance section.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_theme": {
+      "default": "Theme",
+      "description": "Text for the section that allows users to change the theme.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_language": {
+      "default": "Language",
+      "description": "Text for the section that allows users to change the language.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

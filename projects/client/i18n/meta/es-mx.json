@@ -2144,6 +2144,18 @@
     },
     "button_label_media": {
       "default": "Medios"
+    },
+    "header_appearance": {
+      "default": "Apariencia"
+    },
+    "description_appearance": {
+      "default": "Cambia tu tema y configuración de idioma."
+    },
+    "text_theme": {
+      "default": "Tema"
+    },
+    "text_language": {
+      "default": "Idioma"
     }
   }
 }
