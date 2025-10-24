@@ -3,6 +3,7 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import ActionButton from "../ActionButton.svelte";
   import { useDangerButton } from "../_internal/useDangerButton";
   import { WatchlistButtonIntlProvider } from "./WatchlistButtonIntlProvider";
@@ -64,7 +65,12 @@
   <DropdownItem {...commonProps} style="flat">
     {i18n.text({ isWatchlisted, title })}
     {#snippet icon()}
-      <BookmarkIcon {state} size="normal" />
+      <!-- FIXME: generalize this and do this for all applicable buttons/items  -->
+      {#if isWatchlistUpdating}
+        <LoadingIndicator />
+      {:else}
+        <BookmarkIcon {state} size="normal" />
+      {/if}
     {/snippet}
   </DropdownItem>
 {/if}
