@@ -74,10 +74,9 @@
       <RenderFor audience="authenticated">
         <RenderForFeature flag={FeatureFlag.Discover}>
           {#snippet enabled()}
-            {#if isOnDiscoverablePage}
-              <FilterButton size="small" />
-            {/if}
+            <FilterButton size="small" />
           {/snippet}
+
           <FilterButton size="small" />
           <ProfileLink />
         </RenderForFeature>
