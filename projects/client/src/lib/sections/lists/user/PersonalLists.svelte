@@ -4,6 +4,7 @@
   import ThumbsUpIcon from "$lib/components/icons/ThumbsUpIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
@@ -18,7 +19,11 @@
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
 
-  const { type, slug }: { type: PersonalListType; slug: string } = $props();
+  const {
+    type,
+    slug,
+    mode,
+  }: { type: PersonalListType; slug: string; mode?: DiscoverMode } = $props();
 
   const { lists, isLoading } = $derived(
     usePersonalListsSummary({ type, slug }),
@@ -98,7 +103,7 @@
       {/if}
 
       {#each $lists as list (list.id)}
-        <UserList {list} empty={emptyList} />
+        <UserList {list} empty={emptyList} type={mode} />
       {/each}
     </div>
   {/if}
@@ -111,7 +116,7 @@
       --height-list="var(--height-lists-list)"
     >
       {#snippet item(list)}
-        <ListSummaryItem {list} isOfficial={false} />
+        <ListSummaryItem {list} isOfficial={false} type={mode} />
       {/snippet}
 
       {#snippet dynamicActions()}

@@ -9,4 +9,5 @@ export const DISCOVER_ROUTES = [
   UrlBuilder.progress('[user]'),
   UrlBuilder.discover(),
   UrlBuilder.startWatching('[user]'),
+  UrlBuilder.lists.user('[user]'),
 ] as const;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Card from "$lib/components/card/Card.svelte";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType.ts";
   import ListHeader from "./_internal/ListHeader.svelte";
   import ListPosters from "./_internal/ListPosters.svelte";
 
@@ -9,7 +9,7 @@
     list,
     type,
     isOfficial,
-  }: { list: MediaListSummary; type?: MediaType; isOfficial: boolean } =
+  }: { list: MediaListSummary; type?: DiscoverMode; isOfficial: boolean } =
     $props();
 </script>
 

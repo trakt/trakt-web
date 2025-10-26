@@ -1,5 +1,5 @@
+import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { listItemsQuery } from '$lib/requests/queries/lists/listItemsQuery.ts';
 import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
@@ -18,7 +18,7 @@ export type ListParams = {
 
 type UseListItemsProps = PaginationParams & FilterParams & {
   list: ListParams;
-  type?: MediaType;
+  type?: DiscoverMode;
 };
 
 // FIXME: remove when official lists are sluggable
@@ -39,7 +39,7 @@ function listToQuery(
   { list, limit, type, page, filter }: UseListItemsProps,
 ) {
   const commonParams = {
-    type,
+    type: type === 'media' ? undefined : type,
     page,
     filter,
     limit: limit ?? LIST_LIMIT,

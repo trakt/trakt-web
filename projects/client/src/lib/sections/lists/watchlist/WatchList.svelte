@@ -3,8 +3,8 @@
 
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
@@ -16,7 +16,7 @@
   import { type WatchlistStatus } from "./WatchlistStatus";
 
   type WatchListProps = {
-    type?: MediaType;
+    type?: DiscoverMode;
     drilldownLabel: string;
     empty?: Snippet;
     status: WatchlistStatus;
@@ -43,9 +43,15 @@
 
   const cta = $derived(
     status === "all"
-      ? { type: "watchlist" as const, mediaType: type }
+      ? {
+          type: "watchlist" as const,
+          // FIXME: remove when making cta's discover mode compatible
+          mediaType: type === "media" ? "movie" : type,
+        }
       : { type: status },
   );
+
+  const hasOwnToggles = $derived(status === "all" && !externalType);
 </script>
 
 <DrillableMediaList
@@ -56,13 +62,13 @@
   {type}
   filter={$filterMap}
   {useList}
-  metaInfo={status === "all" ? $selectedType.text() : undefined}
+  metaInfo={hasOwnToggles ? $selectedType.text() : undefined}
   urlBuilder={({ type, ...rest }) => {
     if (status === "all") {
       return UrlBuilder.lists.watchlist();
     }
 
-    return UrlBuilder.lists.user({
+    return UrlBuilder.lists.user("me", {
       type: assertDefined(type),
       ...rest,
       status,
@@ -82,7 +88,7 @@
   {/snippet}
 
   {#snippet badge()}
-    {#if status === "all"}
+    {#if hasOwnToggles}
       <Toggler value={$selectedType.value} onChange={set} {options} />
     {/if}
 

@@ -169,12 +169,12 @@ export const UrlBuilder = {
   lists: {
     official: (id: number, type?: MediaType) =>
       `/lists/official/${id}?type=${type}`,
-    user: (params?: UrlBuilderParams) => {
+    user: (user: string, params?: UrlBuilderParams) => {
       if (!params) {
-        return '/users/me/lists';
+        return `/users/${user}/lists`;
       }
 
-      return categoryDrilldownFactory('users/me/lists')(params);
+      return categoryDrilldownFactory(`users/${user}/lists`)(params);
     },
     watchlist: () => {
       return '/users/me/watchlist';
