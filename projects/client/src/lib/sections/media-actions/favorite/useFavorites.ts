@@ -1,4 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
+import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest.ts';
@@ -9,9 +11,10 @@ import { derived, writable } from 'svelte/store';
 export type FavoritesStoreProps = {
   type: MediaType;
   id: number;
+  title: string;
 };
 
-function getFavoritesPayload({ type, id }: FavoritesStoreProps) {
+function getFavoritesPayload({ type, id }: Omit<FavoritesStoreProps, 'title'>) {
   switch (type) {
     case 'movie':
       return { movies: [{ ids: { trakt: id } }] };
@@ -20,10 +23,11 @@ function getFavoritesPayload({ type, id }: FavoritesStoreProps) {
   }
 }
 
-export function useFavorites({ type, id }: FavoritesStoreProps) {
+export function useFavorites({ type, id, title }: FavoritesStoreProps) {
   const isUpdatingFavorite = writable(false);
   const { favorites } = useUser();
   const { invalidate } = useInvalidator();
+  const { confirm } = useConfirm();
 
   const isFavorited = derived(
     favorites,
@@ -64,6 +68,10 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
     isUpdatingFavorite,
     isFavorited,
     addToFavorites: async () => await addOrRemoveFavorite('add'),
-    removeFromFavorites: async () => await addOrRemoveFavorite('remove'),
+    removeFromFavorites: confirm({
+      type: ConfirmationType.RemoveFavorite,
+      title,
+      onConfirm: async () => await addOrRemoveFavorite('remove'),
+    }),
   };
 }

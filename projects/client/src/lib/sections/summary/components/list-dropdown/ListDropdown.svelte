@@ -3,8 +3,6 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
   import { onMount } from "svelte";
@@ -29,6 +27,7 @@
   const { isListed } = $derived(
     useIsOnAnyList({
       lists: $lists,
+      title,
       ...target,
     }),
   );
@@ -38,16 +37,7 @@
     isWatchlistUpdating,
     isWatchlisted,
     removeFromWatchlist,
-  } = $derived(useWatchlist(target));
-
-  const { confirm } = useConfirm();
-  const confirmRemove = $derived(
-    confirm({
-      type: ConfirmationType.RemoveFromWatchList,
-      title,
-      onConfirm: removeFromWatchlist,
-    }),
-  );
+  } = $derived(useWatchlist({ ...target, title }));
 
   const isDisabled = $derived(
     $isLoading || $isUpdating || $isWatchlistUpdating,
@@ -68,7 +58,7 @@
         return;
       }
 
-      $isWatchlisted ? confirmRemove() : addToWatchlist();
+      $isWatchlisted ? removeFromWatchlist() : addToWatchlist();
     });
   });
 </script>
@@ -81,7 +71,7 @@
     isWatchlistUpdating={$isWatchlistUpdating}
     isWatchlisted={$isWatchlisted}
     onAdd={addToWatchlist}
-    onRemove={confirmRemove}
+    onRemove={removeFromWatchlist}
   />
 
   {#each $lists as list}

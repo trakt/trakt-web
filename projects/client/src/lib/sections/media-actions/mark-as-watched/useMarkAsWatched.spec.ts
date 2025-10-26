@@ -105,6 +105,7 @@ describe('useMarkAsWatched', () => {
     const props = {
       type: 'movie' as const,
       media: { id: 1, airDate: new Date() },
+      title: 'Some Movie',
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('movie'));
@@ -122,6 +123,7 @@ describe('useMarkAsWatched', () => {
     const props = {
       type: 'show' as const,
       media: { id: 1, airDate: new Date() },
+      title: 'Some Show',
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('show'));
@@ -148,6 +150,7 @@ describe('useMarkAsWatched', () => {
       type: 'episode' as const,
       media: { id: 1, season: 1, number: 1, airDate: new Date() },
       show: { id: 3 },
+      title: 'Some Episode',
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('episode'));

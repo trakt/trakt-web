@@ -56,6 +56,7 @@ describe('useRemoveFromHistory', () => {
     const props = {
       type: 'movie' as const,
       id: 1,
+      title: 'Some Movie',
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('movie'));
@@ -65,6 +66,7 @@ describe('useRemoveFromHistory', () => {
     const props = {
       type: 'episode' as const,
       id: 1,
+      title: 'Some Episode',
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('episode'));

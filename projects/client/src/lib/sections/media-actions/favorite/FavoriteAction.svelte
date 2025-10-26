@@ -1,7 +1,5 @@
 <script lang="ts">
   import FavoriteButton from "$lib/components/buttons/favorite/FavoriteButton.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { onMount } from "svelte";
@@ -30,16 +28,7 @@
     isFavorited,
     addToFavorites,
     removeFromFavorites,
-  } = $derived(useFavorites({ type, id }));
-
-  const { confirm } = useConfirm();
-  const confirmRemove = $derived(
-    confirm({
-      type: ConfirmationType.RemoveFavorite,
-      title,
-      onConfirm: removeFromFavorites,
-    }),
-  );
+  } = $derived(useFavorites({ type, id, title }));
 
   onMount(() => {
     return isUpdatingFavorite.subscribe((value) => onAction?.(value));
@@ -53,5 +42,5 @@
   isFavorited={$isFavorited}
   isFavoriteUpdating={$isUpdatingFavorite}
   onAdd={addToFavorites}
-  onRemove={confirmRemove}
+  onRemove={removeFromFavorites}
 />

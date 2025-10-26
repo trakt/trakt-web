@@ -117,7 +117,7 @@
   {/if}
 {/snippet}
 
-<MediaSwipe {type} {media} {style}>
+<MediaSwipe {type} {media} {style} title={media.title}>
   <trakt-default-media-item class:is-deemphasized={isDeemphasized}>
     <MediaItem
       {type}

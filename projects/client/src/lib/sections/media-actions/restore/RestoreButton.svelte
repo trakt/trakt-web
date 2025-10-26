@@ -6,21 +6,10 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import RestoreIcon from "$lib/components/icons/RestoreIcon.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { RestoreButtonProps } from "./RestoreButtonProps";
 
   const { title, onRestore, isRestoring, style, ...props }: RestoreButtonProps =
     $props();
-
-  const { confirm } = useConfirm();
-  const confirmRestore = $derived(
-    confirm({
-      type: ConfirmationType.RestoreShow,
-      title,
-      onConfirm: onRestore,
-    }),
-  );
 
   const { color, variant, ...events } = $derived(
     useDangerButton({ isActive: false, color: "default" }),
@@ -30,7 +19,7 @@
     label: m.button_label_restore_show({ title }),
     color: $color,
     variant: $variant,
-    onclick: confirmRestore,
+    onclick: onRestore,
     disabled: isRestoring,
     ...events,
   });

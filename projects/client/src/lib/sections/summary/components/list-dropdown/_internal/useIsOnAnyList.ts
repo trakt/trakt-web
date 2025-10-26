@@ -6,14 +6,15 @@ import { useList } from './useList.ts';
 
 type UseListCountProps = {
   lists: MediaListSummary[];
+  title: string;
 } & MediaStoreProps;
 
 // FIXME: replace with new list check endpoint when available
-export function useIsOnAnyList({ lists, ...target }: UseListCountProps) {
-  const { isWatchlisted } = useWatchlist(target);
+export function useIsOnAnyList({ lists, title, ...target }: UseListCountProps) {
+  const { isWatchlisted } = useWatchlist({ ...target, title });
 
   const personalLists = lists
-    .map((list) => useList({ list, ...target }))
+    .map((list) => useList({ list, title, ...target }))
     .map(({ isListed }) => isListed);
 
   return {

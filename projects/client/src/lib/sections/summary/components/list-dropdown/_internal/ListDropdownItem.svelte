@@ -3,8 +3,6 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import BookmarkIcon from "$lib/components/icons/BookmarkIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { onMount } from "svelte";
@@ -26,6 +24,7 @@
     $derived(
       useList({
         list,
+        title,
         ...target,
       }),
     );
@@ -42,17 +41,7 @@
     };
   });
 
-  const { confirm } = useConfirm();
-  const confirmRemove = $derived(
-    confirm({
-      type: ConfirmationType.RemoveFromList,
-      title,
-      name: list.name,
-      onConfirm: removeFromList,
-    }),
-  );
-
-  const handler = $derived($isListed ? confirmRemove : addToList);
+  const handler = $derived($isListed ? removeFromList : addToList);
   const { color, variant, isTouch, ...events } = $derived(
     useDangerButton({ isActive: $isListed, color: "default" }),
   );

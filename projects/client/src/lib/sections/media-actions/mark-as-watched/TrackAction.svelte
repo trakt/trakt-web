@@ -3,8 +3,6 @@
   import type { MarkAsWatchedButtonIntl } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntl";
   import { MarkAsWatchedButtonIntlProvider } from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButtonIntlProvider";
   import TrackIcon from "$lib/components/TrackIcon.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
@@ -22,17 +20,7 @@
   }: TrackButtonProps = $props();
 
   const { isMarkingAsWatched, markAsWatched, isWatchable } = $derived(
-    useMarkAsWatched(target),
-  );
-
-  const { confirm } = useConfirm();
-  const confirmMarkAsWatched = $derived(
-    confirm({
-      type: ConfirmationType.MarkAsWatched,
-      title,
-      target,
-      onConfirm: markAsWatched,
-    }),
+    useMarkAsWatched({ ...target, title }),
   );
 </script>
 
@@ -40,7 +28,7 @@
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
     label={i18n.label({ title, isWatched: false, isRewatching: false })}
-    onclick={confirmMarkAsWatched}
+    onclick={markAsWatched}
     color="purple"
   >
     <TrackIcon />

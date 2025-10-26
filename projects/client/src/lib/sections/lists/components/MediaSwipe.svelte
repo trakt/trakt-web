@@ -1,7 +1,5 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { MediaInput } from "$lib/models/MediaInput";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
@@ -11,9 +9,10 @@
   type MediaSwipeProps = MediaInput &
     ChildrenProps & {
       style?: "cover" | "summary";
+      title: string;
     };
 
-  const { type, media, style, children }: MediaSwipeProps = $props();
+  const { type, media, style, children, title }: MediaSwipeProps = $props();
 
   if (type === "episode") {
     throw new Error("MediaSwipe does not support episode type");
@@ -21,22 +20,13 @@
 
   const target = $derived({ type, media });
 
-  const { markAsWatched } = $derived(useMarkAsWatched(target));
-
-  const { confirm } = useConfirm();
-  const confirmMarkAsWatched = $derived(
-    confirm({
-      type: ConfirmationType.MarkAsWatched,
-      title: media.title,
-      target,
-      onConfirm: markAsWatched,
-    }),
-  );
+  const { markAsWatched } = $derived(useMarkAsWatched({ ...target, title }));
 
   const { addToWatchlist, isWatchlisted } = $derived(
     useWatchlist({
       type,
       media,
+      title,
     }),
   );
 </script>
@@ -48,7 +38,7 @@
     classList="trakt-up-next-episode"
     onSwipe={(state) => {
       if (state.direction === "left") {
-        confirmMarkAsWatched();
+        markAsWatched();
       }
 
       if (state.direction === "right") {

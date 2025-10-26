@@ -1,7 +1,5 @@
 <script lang="ts">
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import DropSwipeIndicator from "$lib/sections/media-actions/drop/DropSwipeIndicator.svelte";
@@ -13,30 +11,25 @@
     episode: EpisodeProgressEntry;
     show: ShowEntry;
     style: "cover" | "summary";
+    title: string;
   } & ChildrenProps;
 
-  const { episode, show, style, children }: UpNextEpisodeProps = $props();
+  const { episode, show, style, children, title }: UpNextEpisodeProps =
+    $props();
 
   const { markAsWatched } = $derived(
     useMarkAsWatched({
       type: "episode",
       media: episode,
       show: show,
+      title,
     }),
   );
 
   const { drop } = $derived(
     useDrop({
       ids: [show.id],
-    }),
-  );
-
-  const { confirm } = useConfirm();
-  const confirmDrop = $derived(
-    confirm({
-      type: ConfirmationType.DropShow,
-      title: show.title,
-      onConfirm: drop,
+      title,
     }),
   );
 </script>
@@ -52,7 +45,7 @@
       }
 
       if (state.direction === "right") {
-        confirmDrop();
+        drop();
       }
     }}
     --indicator-height="var(--height-summary-card-cover)"

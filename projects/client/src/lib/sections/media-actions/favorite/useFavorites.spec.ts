@@ -96,6 +96,7 @@ describe('useFavorites', () => {
     const props = {
       type: 'movie' as const,
       id: 1,
+      title: 'Some Movie',
     };
 
     runCommonTests(props, InvalidateAction.Favorited('movie'));
@@ -121,6 +122,7 @@ describe('useFavorites', () => {
     const props = {
       type: 'show' as const,
       id: 1,
+      title: 'Some Show',
     };
 
     runCommonTests(props, InvalidateAction.Favorited('show'));

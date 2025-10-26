@@ -1,16 +1,25 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
+import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { followUserRequest } from '$lib/requests/queries/users/followUserRequest.ts';
 import { unfollowUserRequest } from '$lib/requests/queries/users/unfollowUserRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { derived, writable } from 'svelte/store';
 
-export function useFollowUserRequest(slug: string) {
+type UseFollowUserProps = {
+  slug: string;
+  displayName: string;
+};
+
+export function useFollowUser({ slug, displayName }: UseFollowUserProps) {
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Follow);
   const { network } = useUser();
+  const { confirm } = useConfirm();
+
   const isRequestingFollow = writable(false);
 
   const isFollowed = derived(network, ($network) => {
@@ -47,6 +56,10 @@ export function useFollowUserRequest(slug: string) {
     isRequestingFollow,
     isFollowed,
     followUser,
-    unfollowUser,
+    unfollowUser: confirm({
+      type: ConfirmationType.UnfollowUser,
+      username: displayName,
+      onConfirm: unfollowUser,
+    }),
   };
 }

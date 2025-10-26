@@ -1,6 +1,8 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
+import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { dropShowRequest } from '$lib/requests/queries/users/dropShowRequest.ts';
 import { hideShowCalendarRequest } from '$lib/requests/queries/users/hideShowCalendarRequest.ts';
@@ -11,6 +13,7 @@ import { writable } from 'svelte/store';
 
 export type DropShowStoreProps = {
   ids: number[];
+  title: string;
 };
 
 export function useDrop(
@@ -21,6 +24,7 @@ export function useDrop(
   const { user } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Drop);
+  const { confirm } = useConfirm();
 
   const drop = async () => {
     const current = await resolve(user);
@@ -50,6 +54,10 @@ export function useDrop(
 
   return {
     isDropping,
-    drop,
+    drop: confirm({
+      type: ConfirmationType.DropShow,
+      title: props.title,
+      onConfirm: drop,
+    }),
   };
 }

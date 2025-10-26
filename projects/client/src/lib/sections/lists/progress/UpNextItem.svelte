@@ -29,7 +29,12 @@
 </script>
 
 {#if "episode" in props}
-  <UpNextSwipe episode={props.episode} show={props.show} {style}>
+  <UpNextSwipe
+    episode={props.episode}
+    show={props.show}
+    title={props.episode.title}
+    {style}
+  >
     <EpisodeItem
       episode={props.episode}
       show={props.show}

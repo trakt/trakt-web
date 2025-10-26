@@ -19,6 +19,7 @@
   const { restore, isRestoring } = $derived(
     useRestore({
       ids: [target.id],
+      title,
     }),
   );
 </script>

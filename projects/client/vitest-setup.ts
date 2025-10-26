@@ -11,6 +11,7 @@ import './test/mocks/navigator.mock.ts';
 import './test/mocks/oidc-client-ts.mock.ts';
 import './test/mocks/ResizeObserver.mock.ts';
 import './test/mocks/scrollTo.mock.ts';
+import './test/mocks/useConfirm.mock.ts';
 import './test/mocks/variables.mock.ts';
 
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
