@@ -94,7 +94,7 @@
     align-items: center;
     gap: var(--gap-xl);
 
-    :global(svg) {
+    :global(.trakt-link svg) {
       height: var(--ni-32);
       width: auto;
     }
