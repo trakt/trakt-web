@@ -24,7 +24,7 @@
 
 <RenderFor audience="authenticated" navigation="default">
   {#if $isDeleted && isOnListPage}
-    <Redirect to={UrlBuilder.lists.user()} />
+    <Redirect to={UrlBuilder.lists.user("me")} />
   {/if}
 
   {#if isListOwner}

@@ -2,8 +2,8 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
 
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import { useListItems } from "$lib/sections/lists/user/useListItems";
   import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
@@ -16,7 +16,8 @@
     list,
     type,
     empty,
-  }: { list: MediaListSummary; type?: MediaType; empty?: Snippet } = $props();
+  }: { list: MediaListSummary; type?: DiscoverMode; empty?: Snippet } =
+    $props();
   const { filterMap } = useFilter();
 </script>
 
@@ -24,7 +25,7 @@
   {type}
   {empty}
   source={{ id: "user-list", type }}
-  id={`user-list-${type ?? "media"}-${list.id}`}
+  id={`user-list-${type}-${list.id}`}
   drilldownLabel={m.button_text_view_all()}
   filter={$filterMap}
   useList={(params) => useListItems({ list, ...params })}

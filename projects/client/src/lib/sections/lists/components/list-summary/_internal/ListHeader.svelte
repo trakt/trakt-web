@@ -2,15 +2,16 @@
   import Link from "$lib/components/link/Link.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import ListActions from "$lib/sections/lists/user/ListActions.svelte";
   import { getListUrl } from "./getListUrl";
 
-  const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
+  const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
+    $props();
 
   // In list summaries, clicking on the header is considered a drilldown action
   const { track } = useTrack(AnalyticsEvent.Drilldown);

@@ -65,7 +65,7 @@
     </RenderForFeature>
 
     <RenderFor audience="authenticated">
-      <Link href={UrlBuilder.lists.user()}>
+      <Link href={UrlBuilder.lists.user("me")}>
         <div class="trakt-mobile-navbar-link">
           <WatchlistIcon />
         </div>

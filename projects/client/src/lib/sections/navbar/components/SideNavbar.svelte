@@ -142,7 +142,7 @@
 
       <RenderFor audience="authenticated">
         <Button
-          href={UrlBuilder.lists.user()}
+          href={UrlBuilder.lists.user("me")}
           label={m.button_label_browse_lists()}
           style="flat"
           variant="secondary"

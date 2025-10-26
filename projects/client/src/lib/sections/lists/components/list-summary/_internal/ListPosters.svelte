@@ -1,13 +1,14 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
-  import type { MediaType } from "$lib/requests/models/MediaType.ts";
   import { getListUrl } from "./getListUrl.ts";
 
   const POSTER_LIMIT = 8;
-  const { list, type }: { list: MediaListSummary; type?: MediaType } = $props();
+  const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
+    $props();
 
   const posters = $derived(list.posters.slice(0, POSTER_LIMIT));
 </script>
