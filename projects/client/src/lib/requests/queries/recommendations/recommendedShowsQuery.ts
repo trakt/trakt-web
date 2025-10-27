@@ -27,6 +27,8 @@ const recommendedShowsRequest = (
         ignore_collected: true,
         limit,
         ...filter,
+        // FIXME: remove when we have tri-state filter toggles
+        ignore_watched: true,
       },
     });
 
