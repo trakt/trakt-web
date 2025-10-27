@@ -1,15 +1,17 @@
 <script lang="ts">
+  import ProfileIcon from "$lib/components/icons/ProfileIcon.svelte";
+  import SocialIcon from "$lib/components/icons/SocialIcon.svelte";
+  import ThumbsUpIcon from "$lib/components/icons/ThumbsUpIcon.svelte";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
-  import CreateListHeader from "./_internal/CreateListHeader.svelte";
+  import ListsHeader from "./_internal/ListsHeader.svelte";
   import PersonalListsPlaceholder from "./_internal/PersonalListsPlaceholder.svelte";
   import { useCreateList } from "./_internal/useCreateList.ts";
   import type { PersonalListType } from "./models/PersonalListType.ts";
@@ -41,7 +43,7 @@
   const isDPad = $navigation === "dpad";
 
   const variant = $derived.by(() => {
-    if ($lists.length === 1 || $isMobile || isDPad) {
+    if ($isMobile || isDPad) {
       return "preview";
     }
 
@@ -70,19 +72,35 @@
 
 {#if isPresentable}
   {#if variant === "preview"}
-    {#if isMine}
-      <RenderFor audience="authenticated" navigation="default">
-        <CreateListHeader />
-      </RenderFor>
+    <div class="trakt-lists-preview">
+      {#if $isMe}
+        <ListsHeader {title}>
+          {#snippet icon()}
+            {#if type === "personal"}
+              <ProfileIcon />
+            {:else if type === "collaboration"}
+              <SocialIcon />
+            {:else}
+              <ThumbsUpIcon />
+            {/if}
+          {/snippet}
 
-      {#if $lists.length === 0}
+          {#snippet actions()}
+            {#if isMine && $lists.length > 0}
+              <CreateListAction />
+            {/if}
+          {/snippet}
+        </ListsHeader>
+      {/if}
+
+      {#if isMine && $lists.length === 0}
         <PersonalListsPlaceholder {cta} />
       {/if}
-    {/if}
 
-    {#each $lists as list (list.id)}
-      <UserList {list} empty={emptyList} />
-    {/each}
+      {#each $lists as list (list.id)}
+        <UserList {list} empty={emptyList} />
+      {/each}
+    </div>
   {/if}
 
   {#if variant === "summary"}
@@ -114,3 +132,11 @@
     </SectionList>
   {/if}
 {/if}
+
+<style>
+  .trakt-lists-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-micro);
+  }
+</style>
