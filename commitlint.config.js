@@ -101,6 +101,7 @@ module.exports = {
         'toast',
         'toggle',
         'tooltip',
+        'transition',
         'trending',
         'tv',
         'up-next',
