@@ -5,6 +5,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import SmartListRenderer from "$lib/sections/lists/smart/SmartListRenderer.svelte";
+  import ListsHeader from "$lib/sections/lists/user/_internal/ListsHeader.svelte";
   import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
@@ -27,7 +28,18 @@
   <PersonalLists slug="me" type="collaboration" />
 
   <RenderFor audience="director">
-    <SmartListRenderer type="movie" />
-    <SmartListRenderer type="show" />
+    <div class="trakt-lists-preview">
+      <ListsHeader title="Smart lists" />
+      <SmartListRenderer type="movie" />
+      <SmartListRenderer type="show" />
+    </div>
   </RenderFor>
 </TraktPage>
+
+<style>
+  .trakt-lists-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-micro);
+  }
+</style>

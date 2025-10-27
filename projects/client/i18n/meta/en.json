@@ -2599,7 +2599,7 @@
       ]
     },
     "list_title_personal_lists": {
-      "default": "Personal",
+      "default": "My Lists",
       "description": "Title for lists containing the user's personal lists. This title should be as short and concise as possible.",
       "exclude": [
         "ios"
