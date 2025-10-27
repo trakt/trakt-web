@@ -21,6 +21,7 @@
     filter,
     metaInfo,
     drilldownLink,
+    variant,
   }: MediaListProps<T, M> = $props();
 
   const { list, isLoading } = $derived(
@@ -28,6 +29,8 @@
   );
 
   const defaultVariant = useDefaultCardVariant(type);
+  const height = $derived(mediaListHeightResolver(variant ?? $defaultVariant));
+
   const { hasActiveFilter } = useFilter();
 </script>
 
@@ -47,7 +50,7 @@
   {metaInfo}
   {drilldownLink}
   actions={externalActions ? actions : undefined}
-  --height-list={mediaListHeightResolver($defaultVariant)}
+  --height-list={height}
 >
   {#snippet empty()}
     {#if $isLoading}

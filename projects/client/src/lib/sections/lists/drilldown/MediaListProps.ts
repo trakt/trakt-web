@@ -14,4 +14,5 @@ export type MediaListProps<T, M> = {
   badge?: Snippet;
   metaInfo?: string;
   drilldownLink?: string;
+  variant?: 'portrait' | 'landscape';
 } & FilterParams;

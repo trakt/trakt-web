@@ -10,7 +10,7 @@
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useStablePaginated } from "../stores/useStablePaginated";
-  import { mediaListHeightResolver } from "../utils/mediaListHeightResolver";
+  import WatchlistItem from "../watchlist/WatchlistItem.svelte";
   import UpNextItem from "./UpNextItem.svelte";
   import { useHiddenShows } from "./useHiddenShows";
   import { useUpNextList } from "./useUpNextList";
@@ -28,7 +28,7 @@
   upNextIntent: "all" | "continue" | "start",
 )}
   <DrillableMediaList
-    type="episode"
+    {type}
     id={`up-next-list-${type}-${upNextIntent}`}
     source={{
       id: upNextIntent === "start" ? "start-watching" : "continue-watching",
@@ -50,16 +50,22 @@
         },
       })}
     urlBuilder={() =>
-      intent === "start"
+      upNextIntent === "start"
         ? UrlBuilder.startWatching($user?.slug ?? "")
         : UrlBuilder.progress($user?.slug ?? "")}
-    title={intent === "start"
+    title={upNextIntent === "start"
       ? m.list_title_start_watching()
       : m.list_title_up_next()}
-    --height-list={mediaListHeightResolver("landscape")}
+    variant={intent === "start" ? "portrait" : "landscape"}
   >
     {#snippet item(mediaItem)}
-      {#if "show" in mediaItem}
+      {#if upNextIntent === "start"}
+        <WatchlistItem
+          type={"show" in mediaItem ? "show" : "movie"}
+          media={"show" in mediaItem ? mediaItem.show : mediaItem}
+          mode={type === "media" ? "mixed" : "standalone"}
+        />
+      {:else if "show" in mediaItem}
         <UpNextItem
           style="cover"
           episode={mediaItem}

@@ -5,7 +5,8 @@
   import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import type { MediaCardProps } from "../components/MediaCardProps";
 
-  const { type, media, style }: MediaCardProps<MediaInputDefault> = $props();
+  const { type, media, style, mode }: MediaCardProps<MediaInputDefault> =
+    $props();
 </script>
 
 {#snippet action()}
@@ -24,6 +25,7 @@
   {type}
   {media}
   {style}
+  {mode}
   action={media.status === "released" ? action : undefined}
   source="watchlist"
 />
