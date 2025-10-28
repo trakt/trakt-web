@@ -13,7 +13,7 @@
     id={`community-sentiments-${slug}`}
     items={[{ ...sentiments, key: "sentiment" }]}
     title={m.header_community_sentiment()}
-    --height-list="var(--height-comments-list)"
+    --height-list="var(--height-sentiments-list)"
   >
     {#snippet item(sentiments)}
       <SentimentsCard {sentiments} />
