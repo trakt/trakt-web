@@ -11,7 +11,7 @@
 <ProfileContainer>
   {#snippet details()}
     <div class="trakt-private-profile-avatar">
-      <CircularLogo variant="flat" />
+      <CircularLogo />
       <h5>{profile.username}</h5>
     </div>
   {/snippet}
