@@ -24,7 +24,6 @@
     subtitle?: string;
     metaInfo?: string;
     empty?: Snippet;
-    variant?: "normal" | "centered";
     headerNavigationType?: DpadNavigationType;
   };
 
@@ -40,7 +39,6 @@
     badge,
     empty,
     headerNavigationType,
-    variant = "normal",
     drilldownLink,
   }: SectionListProps<T> = $props();
 
@@ -125,10 +123,7 @@
           <div
             use:scrollTracking={scrollX}
             use:scrollHistory={id}
-            class="trakt-list-item-container"
-            class:shadow-list-horizontal-scroll-centered={variant ===
-              "centered"}
-            class:shadow-list-horizontal-scroll={variant === "normal"}
+            class="trakt-list-item-container shadow-list-horizontal-scroll"
             data-dpad-navigation={DpadNavigationType.List}
             data-navigation-type={$navigation}
           >
@@ -267,7 +262,6 @@
     }
   }
 
-  .shadow-list-horizontal-scroll-centered,
   .shadow-list-horizontal-scroll,
   :global(.trakt-skeleton-list) {
     height: var(--height-list);
@@ -317,19 +311,6 @@
       @include for-mobile() {
         scroll-snap-align: unset;
       }
-    }
-  }
-
-  .shadow-list-horizontal-scroll-centered {
-    --center-offset: calc(50% - var(--item-width) / 2);
-
-    scroll-snap-type: x mandatory;
-    padding-left: var(--center-offset);
-    padding-right: var(--center-offset);
-
-    & > :global(:not(svelte-css-wrapper)),
-    & > :global(svelte-css-wrapper > *) {
-      scroll-snap-align: center;
     }
   }
 </style>

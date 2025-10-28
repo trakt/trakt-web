@@ -30,7 +30,7 @@
   --height-list-card: var(--ni-256);
 
   --width-comment-card: min(var(--ni-480), 85vw);
-  --height-comment-card: var(--ni-228);
+  --height-comment-card: var(--ni-172);
 
   --width-sentiments-card: min(var(--ni-480), 85vw);
   --height-sentiments-card: var(--ni-228);

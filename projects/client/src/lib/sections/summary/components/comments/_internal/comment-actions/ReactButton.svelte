@@ -19,6 +19,7 @@
     type: "persistent",
   });
 
+  // FIXME: switch to extended=reactions everywhere
   const { currentReaction, summary } = $derived(
     useCommentReactions({ id: comment.id }),
   );

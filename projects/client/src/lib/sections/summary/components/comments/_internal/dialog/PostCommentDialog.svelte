@@ -3,8 +3,8 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { CommentsProps } from "$lib/sections/summary/components/comments/CommentsProps";
   import { writable, type Writable } from "svelte/store";
+  import CommentInput from "../comment-input/CommentInput.svelte";
   import type { ActiveComment } from "../models/ActiveComment";
-  import CommentInput from "./CommentInput.svelte";
 
   type PostCommentDialogProps = {
     dialog: Writable<HTMLDialogElement>;
