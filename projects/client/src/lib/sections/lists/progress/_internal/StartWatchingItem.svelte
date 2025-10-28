@@ -10,9 +10,9 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import MediaItem from "../../components/MediaItem.svelte";
-  import UpNextSwipe from "../UpNextSwipe.svelte";
   import { type ProgressEntry } from "../useUpNextList";
   import MovieStartWatchingSwipe from "./MovieStartWatchingSwipe.svelte";
+  import UpNextSwipe from "./UpNextSwipe.svelte";
 
   const {
     entry,

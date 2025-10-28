@@ -10,14 +10,11 @@
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useStablePaginated } from "../stores/useStablePaginated";
+  import ContinueWatchingItem from "./_internal/ContinueWatchingItem.svelte";
   import StartWatchingItem from "./_internal/StartWatchingItem.svelte";
-  import UpNextItem from "./UpNextItem.svelte";
-  import { useHiddenShows } from "./useHiddenShows";
   import { useUpNextList } from "./useUpNextList";
 
   const { intent }: { intent: "continue" | "start" } = $props();
-
-  const { list: hidden } = $derived(useHiddenShows());
 
   const { user } = useUser();
   const { mode } = useDiscover();
@@ -58,18 +55,11 @@
       : m.list_title_up_next()}
     variant={intent === "start" ? "portrait" : "landscape"}
   >
-    {#snippet item(mediaItem)}
+    {#snippet item(progressEntry)}
       {#if upNextIntent === "start"}
-        <StartWatchingItem entry={mediaItem} style="cover" />
-      {:else if "show" in mediaItem}
-        <UpNextItem
-          style="cover"
-          episode={mediaItem}
-          show={mediaItem.show}
-          status={$hidden.includes(mediaItem.show.id) ? "hidden" : "watching"}
-        />
+        <StartWatchingItem entry={progressEntry} style="cover" />
       {:else}
-        <UpNextItem style="cover" movie={mediaItem} />
+        <ContinueWatchingItem entry={progressEntry} style="cover" />
       {/if}
     {/snippet}
 
