@@ -22,6 +22,7 @@
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
+  import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import WSInvalidator from "$lib/features/websocket/WSInvalidator.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -39,6 +40,8 @@
   const { data, children } = $props();
 
   const isOnHomePage = $derived(UrlBuilder.home() === page.url.pathname);
+
+  $effect.pre(initializeSeasonalThemes);
 
   onMount(async () => {
     if (isPWA()) {

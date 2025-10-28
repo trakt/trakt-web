@@ -1,0 +1,18 @@
+:root {
+  &[data-seasonal-theme='halloween'] {
+    --purple-50: var(--orange-50);
+    --purple-60: var(--orange-60);
+    --purple-70: var(--orange-70);
+    --purple-80: var(--orange-80);
+    --purple-90: var(--orange-90);
+    --purple-100: var(--orange-100);
+    --purple-200: var(--orange-200);
+    --purple-300: var(--orange-300);
+    --purple-400: var(--orange-400);
+    --purple-500: var(--orange-500);
+    --purple-600: var(--orange-600);
+    --purple-700: var(--orange-700);
+    --purple-800: var(--orange-800);
+    --purple-900: var(--orange-900);
+  }
+}

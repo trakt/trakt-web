@@ -25,3 +25,5 @@ import './animations/index.css';
 import './layers/index.css';
 
 import './states/index.css';
+
+import './theme/seasonal/halloween.css';
