@@ -8,8 +8,8 @@
 
 <div class="trakt-sentiments-card">
   <Card
-    --width-card="var(--width-comment-card)"
-    --height-card="var(--height-comment-card)"
+    --width-card="var(--width-sentiments-card)"
+    --height-card="var(--height-sentiments-card)"
   >
     <div class="trakt-sentiments-container">
       <SentimentsList {sentiments} />

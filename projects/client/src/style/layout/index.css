@@ -32,6 +32,9 @@
   --width-comment-card: min(var(--ni-480), 85vw);
   --height-comment-card: var(--ni-228);
 
+  --width-sentiments-card: min(var(--ni-480), 85vw);
+  --height-sentiments-card: var(--ni-228);
+
   --width-comment-thread-card: var(--width-comment-card);
   --height-comment-thread-card: var(--ni-480);
 
@@ -77,6 +80,10 @@
   );
   --height-comments-list: calc(
     var(--height-comment-card) + var(--layout-scrollbar-width)
+      + var(--layout-footer-less-padding)
+  );
+  --height-sentiments-list: calc(
+    var(--height-sentiments-card) + var(--layout-scrollbar-width)
       + var(--layout-footer-less-padding)
   );
   --height-comment-thread-list: calc(
