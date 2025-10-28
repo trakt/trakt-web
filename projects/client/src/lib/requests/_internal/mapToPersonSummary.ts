@@ -7,6 +7,7 @@ export const mapToPersonSummary = (
 ): PersonSummary => {
   return {
     id: response.ids.trakt,
+    key: `person-${response.ids.trakt}`,
     slug: response.ids.slug,
     name: response.name,
     biography: response.biography ?? '',

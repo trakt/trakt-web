@@ -51,6 +51,7 @@ const mapToShowActivityHistory = (
   historyShow: ShowActivityHistoryResponse,
 ) => ({
   id: historyShow.id,
+  key: `episode-${historyShow.id}`,
   watchedAt: new Date(historyShow.watched_at),
   episode: mapToEpisodeEntry(historyShow.episode),
   show: mapToShowEntry(historyShow.show),

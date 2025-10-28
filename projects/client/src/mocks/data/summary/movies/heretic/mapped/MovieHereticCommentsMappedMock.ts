@@ -7,6 +7,7 @@ export const MovieHereticCommentsMappedMock: MediaComment[] = [
       'This all could have been avoided if he just started a podcast like a normal dude',
     'createdAt': new Date('2024-11-08T06:21:26.000Z'),
     'id': 1337,
+    'key': 'comment-1337',
     'isReview': false,
     'isSpoiler': false,
     'likeCount': 102,

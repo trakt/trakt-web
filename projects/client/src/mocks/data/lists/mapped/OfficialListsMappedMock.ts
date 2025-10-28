@@ -4,12 +4,14 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
   {
     'description': 'This is super official',
     'id': 1234,
+    'key': 'list-1234',
     'name': 'Official list',
     'slug': 'official-list',
     'count': 2,
     'user': {
       'username': 'Trakt',
       'id': 0,
+      'key': 'user-0',
       'avatar': {
         'url':
           'https://trakt.tv/assets/logos/logomark.circle.gradient-cb51d322e6bc3be6370499c6b61a906f8ef49c42a75e5e6d71aaeab2c6689061.svg',

@@ -5,7 +5,7 @@ import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
 import z from 'zod';
 
 export const SocialActivityMovieSchema = z.object({
-  id: z.number(),
+  key: z.string(),
   activityAt: z.date(),
   type: z.literal('movie'),
   users: z.array(UserProfileSchema),
@@ -13,7 +13,7 @@ export const SocialActivityMovieSchema = z.object({
 });
 
 export const SocialActivityEpisodeSchema = z.object({
-  id: z.number(),
+  key: z.string(),
   activityAt: z.date(),
   type: z.literal('episode'),
   users: z.array(UserProfileSchema),

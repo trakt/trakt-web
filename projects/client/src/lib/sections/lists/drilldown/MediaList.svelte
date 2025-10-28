@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown }, M">
+<script lang="ts" generics="T extends { key: string }, M">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";

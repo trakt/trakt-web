@@ -76,10 +76,10 @@ export const showVideosQuery = defineQuery({
       .filter((video) => video.site === 'youtube')
       .map(mapToMediaVideo)
       .filter((video) => {
-        if (seen.has(video.id)) {
+        if (seen.has(video.key)) {
           return false;
         }
-        seen.add(video.id);
+        seen.add(video.key);
         return true;
       })
       .sort((a, b) => {

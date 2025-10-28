@@ -4,6 +4,7 @@ import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 export const MediaListSummarySchema = z.object({
   id: z.number(),
+  key: z.string(),
   slug: z.string(),
   name: z.string(),
   description: z.string(),

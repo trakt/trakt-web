@@ -5,6 +5,7 @@ export const PersonalListsMappedMock: MediaListSummary[] = [
   {
     'description': 'I made this',
     'id': 5678,
+    'key': 'list-5678',
     'name': 'My personal list',
     'slug': 'my-personal-list',
     'user': UserProfileHarryMappedMock,

@@ -12,7 +12,7 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/447/271/headshots/medium/d7e3e2fc64.jpg.webp',
         },
       },
-      'id': 'rebecca-ferguson',
+      'key': 'rebecca-ferguson',
       'name': 'Rebecca Ferguson',
     },
     {
@@ -25,7 +25,7 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/412/328/headshots/medium/35b36ce399.jpg.webp',
         },
       },
-      'id': 'common',
+      'key': 'common',
       'name': 'Common',
     },
     {
@@ -38,7 +38,7 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/016/797/headshots/medium/987b640c84.jpg.webp',
         },
       },
-      'id': 'harriet-walter',
+      'key': 'harriet-walter',
       'name': 'Harriet Walter',
     },
     {
@@ -51,7 +51,7 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/748/739/headshots/medium/628b796714.jpg.webp',
         },
       },
-      'id': 'chinaza-uche',
+      'key': 'chinaza-uche',
       'name': 'Chinaza Uche',
     },
     {
@@ -64,7 +64,7 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/627/038/headshots/medium/110e52f004.jpg.webp',
         },
       },
-      'id': 'avi-nash',
+      'key': 'avi-nash',
       'name': 'Avi Nash',
     },
     {
@@ -77,7 +77,7 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/014/904/headshots/medium/d67b0392d8.jpg.webp',
         },
       },
-      'id': 'rick-gomez',
+      'key': 'rick-gomez',
       'name': 'Rick Gomez',
     },
     {
@@ -90,14 +90,14 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/015/518/headshots/medium/7aa5eb6e65.jpg.webp',
         },
       },
-      'id': 'tim-robbins',
+      'key': 'tim-robbins',
       'name': 'Tim Robbins',
     },
   ],
   'creators': [],
   'directors': [
     {
-      'id': 'morten-tyldum',
+      'key': 'morten-tyldum',
       'jobs': [
         'Director',
       ],
@@ -106,7 +106,7 @@ export const EpisodeSiloPeopleMappedMock: MediaCrew = {
   ],
   'writers': [
     {
-      'id': 'graham-yost',
+      'key': 'graham-yost',
       'jobs': [
         'Writer',
       ],

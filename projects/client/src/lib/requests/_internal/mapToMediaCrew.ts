@@ -12,7 +12,7 @@ function toCrewMember(
   return ({
     jobs: crewResponse.jobs,
     name: crewResponse.person.name,
-    id: crewResponse.person.ids.slug,
+    key: crewResponse.person.ids.slug,
   });
 }
 
@@ -22,7 +22,7 @@ function toCastMember(
   return ({
     name: castResponse.person.name,
     characterName: castResponse.characters.at(0) ?? '',
-    id: castResponse.person.ids.slug,
+    key: castResponse.person.ids.slug,
     headshot: mapToHeadshot(castResponse.person.images),
   });
 }

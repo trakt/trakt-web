@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown, key?: string }">
+<script lang="ts" generics="T extends { key: string }">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Crossfade from "$lib/components/Crossfade.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
@@ -132,7 +132,7 @@
             data-dpad-navigation={DpadNavigationType.List}
             data-navigation-type={$navigation}
           >
-            {#each items as i (`${items.length}_${i.key ?? i.id}`)}
+            {#each items as i (`${items.length}_${i.key}`)}
               {@render item(i)}
             {/each}
 

@@ -15,7 +15,7 @@
 </script>
 
 <PersonCard>
-  <Link focusable={false} href={UrlBuilder.people(castMember.id)}>
+  <Link focusable={false} href={UrlBuilder.people(castMember.key)}>
     <CardCover
       title={castMember.name}
       src={castMember.headshot.url.thumb}

@@ -7,6 +7,7 @@ export function mapToMediaComment(
 ): MediaComment {
   return {
     id: commentResponse.id,
+    key: `comment-${commentResponse.id}`,
     parentId: commentResponse.parent_id,
     createdAt: new Date(commentResponse.created_at),
     updatedAt: new Date(commentResponse.updated_at),

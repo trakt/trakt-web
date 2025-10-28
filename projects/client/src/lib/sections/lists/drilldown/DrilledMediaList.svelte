@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown }, M">
+<script lang="ts" generics="T extends { key: string }, M">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants";
   import type { Snippet } from "svelte";

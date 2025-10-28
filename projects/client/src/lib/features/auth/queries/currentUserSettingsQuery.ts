@@ -21,6 +21,7 @@ import { Theme } from '../../theme/models/Theme.ts';
 
 export const UserSettingsSchema = z.object({
   id: z.union([z.number(), z.string()]),
+  key: z.string(),
   slug: z.string(),
   token: z.string().nullish(),
   name: UserNameSchema,
@@ -91,11 +92,14 @@ function mapToPreferredTheme(themeResponse?: string | Nil) {
 function mapUserSettingsResponse(response: SettingsResponse): UserSettings {
   const { user, account, browsing } = response;
 
+  const id = assertDefined(
+    user.ids.trakt ?? user.ids.uuid,
+    'Current user should have a valid ID',
+  );
+
   return {
-    id: assertDefined(
-      user.ids.trakt ?? user.ids.uuid,
-      'Current user should have a valid ID',
-    ),
+    id,
+    key: `user-${id}`,
     slug: user.ids.slug,
     token: account.token,
     name: toUserName(user.name),

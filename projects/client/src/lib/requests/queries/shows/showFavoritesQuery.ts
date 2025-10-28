@@ -39,7 +39,7 @@ function mapToFavoriteShow(
   entry: FavoriteShowResponse,
 ): FavoritedEntry {
   return {
-    id: entry.show.ids.trakt,
+    key: `show-${entry.show.ids.trakt}`,
     favoritedAt: new Date(entry.listed_at),
     rank: entry.rank,
     item: mapToShowEntry(entry.show),

@@ -15,5 +15,6 @@ export const PersonFergusonMappedMock: PersonSummary = {
   slug: 'rebecca-ferguson',
   knownFor: 'acting',
   id: 447271,
+  key: 'person-447271',
   birthday: new Date('1983-10-19'),
 };

@@ -39,7 +39,7 @@ function mapToFavoriteMovie(
   entry: FavoriteMovieResponse,
 ): FavoritedEntry {
   return {
-    id: entry.movie.ids.trakt,
+    key: `movie-${entry.movie.ids.trakt}`,
     favoritedAt: new Date(entry.listed_at),
     rank: entry.rank,
     item: mapToMovieEntry(entry.movie),

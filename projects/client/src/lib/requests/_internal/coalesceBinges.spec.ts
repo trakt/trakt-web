@@ -42,18 +42,20 @@ describe('coalesceBinges', () => {
     type?: string;
   }) {
     return {
-      id,
+      key: `activity-${id}`,
       type: 'episode' as const,
       activityAt,
       users: userSlugs.map((slug) => makeUserProfile(slug)),
       episode: {
         id: episodeId,
+        key: `episode-${episodeId}`,
         season: 1,
         number: episodeId,
         type: 'standard',
       },
       show: {
         id: showId,
+        key: `show-${showId}`,
       },
     } as EpisodeActivity;
   }
@@ -70,12 +72,13 @@ describe('coalesceBinges', () => {
     activityAt: Date;
   }) {
     return {
-      id,
+      key: `activity-${id}`,
       type: 'movie' as const,
       activityAt,
       users: userSlugs.map((slug) => makeUserProfile(slug)),
       movie: {
         id: movieId,
+        key: `movie-${movieId}`,
       },
     } as SocialActivity;
   }

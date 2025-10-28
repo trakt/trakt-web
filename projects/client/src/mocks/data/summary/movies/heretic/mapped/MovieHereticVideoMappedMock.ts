@@ -2,7 +2,7 @@ import type { MediaVideo } from '$lib/requests/models/MediaVideo.ts';
 
 export const MovieHereticVideoMappedMock: MediaVideo[] = [
   {
-    'id': 'vrlu23ub93cpubuqs4v4kdht0co490li',
+    'key': 'vrlu23ub93cpubuqs4v4kdht0co490li',
     'title': 'Religion is Just a Form of Control',
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=72-5rMRKN9s',
@@ -10,7 +10,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2025-03-19T20:00:03.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4l333mit5svrd',
+    'key': 'vrlu23ub93cpubuqs4v4l333mit5svrd',
     'title': 'I Can Show You God',
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=Sansjt4DiIY',
@@ -18,7 +18,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2025-03-18T20:00:24.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lms8kjc47iul',
+    'key': 'vrlu23ub93cpubuqs4v4lms8kjc47iul',
     'title': 'Mormons Enter Killer’s House',
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=nhCGUYhfubA',
@@ -26,7 +26,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2025-03-17T20:00:26.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4l3jiejts104u',
+    'key': 'vrlu23ub93cpubuqs4v4l3jiejts104u',
     'title': 'Watch At Home Now',
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=Swm7m1xGNwg',
@@ -34,7 +34,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2025-01-02T16:31:42.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4ks9na9ull4lp',
+    'key': 'vrlu23ub93cpubuqs4v4ks9na9ull4lp',
     'title':
       "'Heretic' With Scott Beck, Bryan Woods, Stacey Sher, and Betsy Heimann | Academy Conversations",
     'type': 'featurette',
@@ -43,7 +43,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-12-05T16:00:06.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lmu3np70n7vi',
+    'key': 'vrlu23ub93cpubuqs4v4lmu3np70n7vi',
     'title': 'Hugh Grant VS Two Mormons',
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=nk1m1_pigwA',
@@ -51,7 +51,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-20T16:00:51.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4kcks9ns30tba',
+    'key': 'vrlu23ub93cpubuqs4v4kcks9ns30tba',
     'title': 'Belief or Disbelief?',
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=5GulXtPKj10',
@@ -59,7 +59,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-19T16:00:06.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lojvi7phvhea',
+    'key': 'vrlu23ub93cpubuqs4v4lojvi7phvhea',
     'title': 'Hugh Grant Slams Religion',
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=r5fW-Qjh_YY',
@@ -67,7 +67,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-18T16:00:48.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lr7df4up65qv',
+    'key': 'vrlu23ub93cpubuqs4v4lr7df4up65qv',
     'title': "The Authenticity of 'Heretic' Raises The Stakes Of The Story",
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=uGh5EZ4mWMA',
@@ -75,7 +75,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-04T16:00:06.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lgvo3nkn3ol1',
+    'key': 'vrlu23ub93cpubuqs4v4lgvo3nkn3ol1',
     'title':
       'Hugh Grant was excited to be edgy as "f***ed up" horror villain in Heretic | BAFTA',
     'type': 'featurette',
@@ -84,7 +84,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-28T17:00:18.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lpbi85bgkpta',
+    'key': 'vrlu23ub93cpubuqs4v4lpbi85bgkpta',
     'title': 'UK TV Spot 3',
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=qsqs2WwjYiU',
@@ -92,7 +92,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-27T11:52:14.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lptl1fjgejc6',
+    'key': 'vrlu23ub93cpubuqs4v4lptl1fjgejc6',
     'title': 'UK TV Spot 2',
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=rmUWhjwIols',
@@ -100,7 +100,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-24T09:02:23.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4ld082fm72f6m',
+    'key': 'vrlu23ub93cpubuqs4v4ld082fm72f6m',
     'title': 'UK TV Spot',
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=aW1o_WvHVtQ',
@@ -108,7 +108,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-15T08:57:58.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4k9q10kjtie91',
+    'key': 'vrlu23ub93cpubuqs4v4k9q10kjtie91',
     'title':
       'Scott Beck and Bryan Woods Talk About Their New Film Heretic At AFI Fest 2024',
     'type': 'featurette',
@@ -117,7 +117,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-14T19:51:58.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lk5j2pgf99fu',
+    'key': 'vrlu23ub93cpubuqs4v4lk5j2pgf99fu',
     'title': 'Official Trailer 3',
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=jpWUOxRozZg',
@@ -125,7 +125,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-08T12:59:00.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4l5lnu5qps8sa',
+    'key': 'vrlu23ub93cpubuqs4v4l5lnu5qps8sa',
     'title': 'Official Trailer 2',
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=WSo0lmONZIU',
@@ -133,7 +133,7 @@ export const MovieHereticVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-09-19T12:59:00.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4kv7mhlirc1de',
+    'key': 'vrlu23ub93cpubuqs4v4kv7mhlirc1de',
     'title': 'Official Trailer',
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=O9i2vmFhSSY',

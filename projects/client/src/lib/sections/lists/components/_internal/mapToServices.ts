@@ -19,7 +19,7 @@ export function mapToServices(streamOn?: StreamOn) {
   return allServices.map(
     (service) => ({
       ...service,
-      id: `${service.type}-${service.source}`,
+      key: `${service.type}-${service.source}`,
     }),
   );
 }

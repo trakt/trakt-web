@@ -2,7 +2,7 @@ import { videoTypeSchema } from '@trakt/api';
 import { z } from 'zod';
 
 export const MediaVideoSchema = z.object({
-  id: z.string(),
+  key: z.string(),
   type: videoTypeSchema,
   url: z.string().url(),
   thumbnail: z.string().url(),

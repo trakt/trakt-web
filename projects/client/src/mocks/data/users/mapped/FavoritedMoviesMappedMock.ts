@@ -4,7 +4,7 @@ import { MovieHereticMappedMock } from '../../summary/movies/heretic/mapped/Movi
 export const FavoritedMoviesMappedMock: FavoritedEntry[] = [
   {
     'favoritedAt': new Date('2025-01-16T17:37:18.000Z'),
-    'id': 916302,
+    'key': 'movie-916302',
     'rank': 1,
     'item': MovieHereticMappedMock,
   },

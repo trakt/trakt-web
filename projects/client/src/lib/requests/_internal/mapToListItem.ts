@@ -7,6 +7,7 @@ function mapListDetails(
 ) {
   return {
     id: listedItem.id,
+    key: `${listedItem.type}-${listedItem.id}`,
     rank: listedItem.rank,
     notes: listedItem.notes,
     type: listedItem.type,
