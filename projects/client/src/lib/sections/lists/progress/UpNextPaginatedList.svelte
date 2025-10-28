@@ -10,6 +10,7 @@
   import { useUpNextList } from "$lib/sections/lists/progress/useUpNextList";
   import { useStablePaginated } from "$lib/sections/lists/stores/useStablePaginated";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import StartWatchingItem from "./_internal/StartWatchingItem.svelte";
   const { list: hidden } = $derived(useHiddenShows());
 
   const { intent }: { intent: "continue" | "start" } = $props();
@@ -27,7 +28,7 @@
   <DrilledMediaList
     id={`view-all-up-next-${type}-${upNextIntent}`}
     {type}
-    cardOrientation="landscape"
+    cardOrientation={intent === "start" ? "portrait" : "landscape"}
     useList={(params) =>
       useStablePaginated({
         ...params,
@@ -48,7 +49,9 @@
       : m.list_title_up_next()}
   >
     {#snippet item(mediaItem)}
-      {#if "show" in mediaItem}
+      {#if upNextIntent === "start"}
+        <StartWatchingItem {style} entry={mediaItem} />
+      {:else if "show" in mediaItem}
         <UpNextItem
           episode={mediaItem}
           {style}

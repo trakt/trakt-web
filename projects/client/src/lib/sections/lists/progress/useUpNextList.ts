@@ -22,7 +22,7 @@ export type UpNextStoreProps = PaginationParams & UpNextIntentParams & {
   type: DiscoverMode;
 };
 
-type ProgressEntry = UpNextEntry | MovieProgressEntry;
+export type ProgressEntry = UpNextEntry | MovieProgressEntry;
 
 function typeToQueries(props: UpNextStoreProps) {
   switch (props.type) {

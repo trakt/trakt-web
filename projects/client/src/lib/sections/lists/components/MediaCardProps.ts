@@ -8,10 +8,10 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Snippet } from 'svelte';
 
 export type MediaItemVariant<T> =
-  | { variant?: 'portrait' | 'landscape' } & MediaInput<T>
-  | { variant: 'landscape' } & MediaInput<T>
+  | { variant?: Nil } & MediaInput<T>
   | { variant: 'activity'; date: Date } & MediaInput<T>
-  | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>;
+  | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>
+  | { variant: 'start' } & MediaInput<T>;
 
 type BaseItemProps<T> = MediaItemVariant<T> & {
   badge?: Snippet;
@@ -26,9 +26,13 @@ type BaseItemProps<T> = MediaItemVariant<T> & {
   onclick?: (item: T) => void;
 };
 
-export type MediaCardProps<T = MediaInputDefault> = BaseItemProps<T> & {
-  type: MediaType;
-};
+export type MediaCardProps<T = MediaInputDefault> =
+  & BaseItemProps<T>
+  & (
+    | { type: MediaType }
+    | { variant: 'start'; type: 'show'; episode: EpisodeEntry }
+  );
+
 export type EpisodeCardProps<T = ShowInput> =
   & BaseItemProps<T>
   & {
