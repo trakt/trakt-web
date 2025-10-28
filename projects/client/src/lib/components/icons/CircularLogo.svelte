@@ -1,7 +1,3 @@
-<script lang="ts">
-  const { variant }: { variant: "flat" | "gradient" } = $props();
-</script>
-
 <svg
   width="32"
   height="33"
@@ -27,9 +23,7 @@
     <g mask="url(#mask0_7713_149366)">
       <path
         d="M32 16.6895C32 7.8529 24.8366 0.689453 16 0.689453C7.16344 0.689453 0 7.8529 0 16.6895C0 25.526 7.16344 32.6895 16 32.6895C24.8366 32.6895 32 25.526 32 16.6895Z"
-        fill={variant === "gradient"
-          ? "url(#circular-logo-gradient)"
-          : "#9f42c6"}
+        fill="var(--purple-500)"
       />
       <path
         d="M11.4966 10.2592L10.5176 11.2383L15.8008 16.5215L16.7798 15.5424L11.4966 10.2592Z"
@@ -62,25 +56,6 @@
     </g>
   </g>
   <defs>
-    <radialGradient
-      id="circular-logo-gradient"
-      cx="0"
-      cy="0"
-      r="1"
-      gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(31.9171 0.603832) scale(38.6462)"
-    >
-      <stop stop-color="#9F42C6" />
-      <stop offset="0.27" stop-color="#A041C3" />
-      <stop offset="0.42" stop-color="#A43EBB" />
-      <stop offset="0.53" stop-color="#AA39AD" />
-      <stop offset="0.64" stop-color="#B4339A" />
-      <stop offset="0.73" stop-color="#C02B81" />
-      <stop offset="0.82" stop-color="#CF2061" />
-      <stop offset="0.9" stop-color="#E1143C" />
-      <stop offset="0.97" stop-color="#F50613" />
-      <stop offset="1" stop-color="#FF0000" />
-    </radialGradient>
     <clipPath id="clip0_7713_149366">
       <rect
         width="32"

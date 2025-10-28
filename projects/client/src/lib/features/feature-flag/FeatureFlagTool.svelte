@@ -35,7 +35,7 @@
     onclick={() => isOpen.set(!$isOpen)}
     style="ghost"
   >
-    <CircularLogo variant="flat" />
+    <CircularLogo />
   </ActionButton>
 
   {#if $isOpen}

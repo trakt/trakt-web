@@ -172,7 +172,7 @@
       <RenderFor audience="public">
         <JoinTraktButton size="normal">
           {#snippet icon()}
-            <CircularLogo variant="gradient" />
+            <CircularLogo />
           {/snippet}
         </JoinTraktButton>
       </RenderFor>

@@ -16,7 +16,14 @@
   xmlns="http://www.w3.org/2000/svg"
   style:filter={`grayscale(${style === "rated" ? 0 : 1})`}
 >
-  <rect x="0.429688" y="0.5" width="16" height="16" rx="8" fill="#9F42C6" />
+  <rect
+    x="0.429688"
+    y="0.5"
+    width="16"
+    height="16"
+    rx="8"
+    fill="var(--purple-500)"
+  />
   <path
     d="M15.262 1.59253L12.4762 4.9124L7.97674 10.2747M7.97674 10.2747L4.39129 7.26617M7.97674 10.2747L10.5302 12.4173"
     stroke="#FEFEFE"
