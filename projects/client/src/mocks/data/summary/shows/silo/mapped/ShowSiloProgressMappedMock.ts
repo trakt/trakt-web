@@ -3,6 +3,7 @@ import { EpisodeStandardType } from '$lib/requests/models/EpisodeType.ts';
 
 export const ShowSiloProgressMappedMock: EpisodeProgressEntry = {
   'id': 12105048,
+  'key': 'episode-12105048',
   'title': 'Order',
   'season': 2,
   'number': 2,

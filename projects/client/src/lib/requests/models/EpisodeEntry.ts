@@ -6,6 +6,7 @@ import { PostCreditsSchema } from './PostCreditsSchema.ts';
 
 const BaseEpisodeEntrySchema = z.object({
   id: z.number(),
+  key: z.string(),
   season: z.number(),
   number: z.number(),
   title: z.string(),

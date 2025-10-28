@@ -22,7 +22,7 @@
   <Crossfade showA={$list.length > 0}>
     {#snippet childrenA()}
       <div class="trakt-landing-trending-items">
-        {#each $list as item, index (item.id)}
+        {#each $list as item, index (item.key)}
           <div
             class="trakt-item-wrapper"
             class:has-offset={!isOddColumn(index)}

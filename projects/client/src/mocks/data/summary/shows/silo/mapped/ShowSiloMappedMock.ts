@@ -15,6 +15,7 @@ export const ShowSiloMappedMock: ShowEntry = {
     'science-fiction',
   ],
   'id': 180770,
+  'key': 'show-180770',
   'overview':
     'In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.',
   'poster': {

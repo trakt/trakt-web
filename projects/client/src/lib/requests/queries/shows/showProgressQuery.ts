@@ -43,8 +43,11 @@ function mapShowProgressResponse(
 
   const airDate = new Date(episode?.first_aired ?? MAX_DATE);
 
+  const key = `episode-${episode?.ids.trakt ?? crypto.randomUUID()}`;
+
   return {
     id: episode?.ids.trakt ?? -1,
+    key,
     title: episode?.title ?? '',
     season: episode?.season ?? -1,
     number: episode?.number ?? -1,

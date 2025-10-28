@@ -9,7 +9,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 5165667,
-
+    'key': 'episode-5165667',
     'number': 1,
     'overview':
       "Sheriff Becker's plans for the future are thrown off course after his wife meets a hacker with information about the silo.",
@@ -29,6 +29,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374195,
+    'key': 'episode-7374195',
     'number': 2,
     'overview':
       "Juliette, an engineer, pieces together what might have led to a co-worker's mysterious death.",
@@ -48,6 +49,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374298,
+    'key': 'episode-7374298',
     'number': 3,
     'overview':
       'In her hunt for a new sheriff, Mayor Jahns clashes with Bernard. Juliette strikes a deal to keep the generator running.',
@@ -67,6 +69,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374307,
+    'key': 'episode-7374307',
     'number': 4,
     'overview':
       'Juliette tries gaining the trust of Deputy Marnes as they work to uncover the truth about recent tragedies.',
@@ -86,6 +89,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374308,
+    'key': 'episode-7374308',
     'number': 5,
     'overview':
       'Sims appoints Billings as chief deputy to keep tabs on Juliette, whose efforts to solve two murders lead to a showdown.',
@@ -105,6 +109,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374309,
+    'key': 'episode-7374309',
     'number': 6,
     'overview':
       'During her investigation, Juliette uncovers disturbing secrets about someone she thought she knew.',
@@ -124,6 +129,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374310,
+    'key': 'episode-7374310',
     'number': 7,
     'overview':
       "Bernard seeks Juliette's cooperation as he grows increasingly concerned about the silo's security. Juliette asks her father for a favor.",
@@ -143,6 +149,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374312,
+    'key': 'episode-7374312',
     'number': 8,
     'overview':
       "New information causes Juliette to see her family's past differently—and she finally gains access to the silo's biggest secrets.",
@@ -162,6 +169,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374313,
+    'key': 'episode-7374313',
     'number': 9,
     'overview':
       'Racked with guilt, Billings sets off on a personal mission, only to discover a mind-blowing clue from Juliette.',
@@ -181,6 +189,7 @@ export const ShowSiloSeasonEpisodesMappedMock: EpisodeEntry[] = [
     },
     'genres': [],
     'id': 7374314,
+    'key': 'episode-7374314',
     'number': 10,
     'overview':
       "Juliette's fate seems sealed when certain truths finally come to light.",

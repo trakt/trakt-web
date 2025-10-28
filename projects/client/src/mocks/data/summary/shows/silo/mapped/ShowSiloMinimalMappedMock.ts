@@ -19,6 +19,7 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   },
   'genres': [],
   'id': 180770,
+  'key': 'show-180770',
   'languages': undefined,
   'overview': 'TBD',
   'poster': {
