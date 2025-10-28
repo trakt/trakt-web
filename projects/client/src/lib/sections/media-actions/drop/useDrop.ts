@@ -2,6 +2,8 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { dropMovieRequest } from '$lib/requests/queries/users/dropMovieRequest.ts';
 import { dropShowRequest } from '$lib/requests/queries/users/dropShowRequest.ts';
 import { hideShowCalendarRequest } from '$lib/requests/queries/users/hideShowCalendarRequest.ts';
 import { toBulkPayload } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
@@ -9,17 +11,36 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';
 
-export type DropShowStoreProps = {
-  ids: number[];
+export type DropStoreProps = {
+  id: number;
+  type: MediaType;
 };
 
+function requestDrop(props: DropStoreProps) {
+  const { id, type } = props;
+
+  if (type === 'show') {
+    return Promise.all([
+      dropShowRequest({ body: toBulkPayload('show', [id]) }),
+      /**
+       * FIXME: This is a temporary solution to hide the show from the calendar
+       * until we have a nitro version that takes drop state into account
+       */
+      hideShowCalendarRequest({ body: toBulkPayload('show', [id]) }),
+    ]);
+  }
+
+  return dropMovieRequest({ id });
+}
+
 export function useDrop(
-  props: DropShowStoreProps,
+  props: DropStoreProps,
 ) {
-  const { ids } = props;
+  const { id, type } = props;
   const isDropping = writable(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
+
   const { track } = useTrack(AnalyticsEvent.Drop);
 
   const drop = async () => {
@@ -30,20 +51,10 @@ export function useDrop(
     }
 
     isDropping.set(true);
-    track();
+    track({ type });
 
-    const body = toBulkPayload('show', ids);
-
-    await Promise.all([
-      dropShowRequest({ body }),
-      /**
-       * FIXME: This is a temporary solution to hide the show from the calendar
-       * until we have a nitro version that takes drop state into account
-       */
-      hideShowCalendarRequest({ body }),
-    ]);
-
-    await invalidate(InvalidateAction.Drop);
+    await requestDrop({ id, type });
+    await invalidate(InvalidateAction.Drop(type));
 
     isDropping.set(false);
   };

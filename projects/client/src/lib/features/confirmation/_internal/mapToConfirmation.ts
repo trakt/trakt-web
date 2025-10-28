@@ -38,6 +38,12 @@ export function mapToConfirmation<T extends ConfirmationType>(
         message: m.warning_prompt_drop_show({ title: props.title }),
         operation: 'destructive',
       };
+    case ConfirmationType.DropMovie:
+      return {
+        buttonText: m.button_text_drop_movie(),
+        message: m.warning_prompt_drop_movie({ title: props.title }),
+        operation: 'destructive',
+      };
     case ConfirmationType.RestoreShow:
       return {
         buttonText: m.button_text_restore_show(),

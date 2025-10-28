@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Dropp serie"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Er du sikker på at du vil droppe \"{title}\"? Dette vil fjerne den fra 'Fortsett å se'-listen din.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Merk film \"{title}\" som droppet",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Dropp film"
+    },
     "warning_prompt_restore_show": {
       "default": "Er du sikker på at du vil gjenopprette \"{title}\" serien? Dette vil gjenopprette det på din fremgang og kalender."
     },

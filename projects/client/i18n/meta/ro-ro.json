@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Elimină"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Sigur doriți să renunțați la \"{title}\"? Acesta va fi eliminat din lista dumneavoastră 'Continuă vizionarea'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Marcați filmul \"{title}\" ca abandonat",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Renunță la film"
+    },
     "warning_prompt_restore_show": {
       "default": "Sigur vrei să restaurezi \"{title}\"? Acesta va fi restaurat pe progresul și calendarul tău."
     },

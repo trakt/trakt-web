@@ -19,6 +19,7 @@
 
   type UpNextMovieProps = {
     movie: MovieProgressEntry;
+    playbackId: number;
   };
 
   type UpNextProps = (UpNextEpisodeProps | UpNextMovieProps) & {
@@ -61,6 +62,7 @@
             style="dropdown-item"
             title={props.show.title}
             id={props.show.id}
+            type="show"
           />
 
           {#if props.status === "hidden"}
@@ -75,5 +77,9 @@
     </EpisodeItem>
   </UpNextSwipe>
 {:else}
-  <MovieProgressItem movie={props.movie} {style} />
+  <MovieProgressItem
+    movie={props.movie}
+    playbackId={props.playbackId}
+    {style}
+  />
 {/if}

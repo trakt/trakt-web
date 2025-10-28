@@ -3,6 +3,7 @@ export enum ConfirmationType {
   RemoveFromWatched = 'remove-from-watched',
   RemoveFromHistory = 'remove-from-history',
   DropShow = 'drop-show',
+  DropMovie = 'drop-movie',
   RestoreShow = 'restore-show',
   DeleteList = 'delete-list',
   RemoveFavorite = 'remove-favorite',

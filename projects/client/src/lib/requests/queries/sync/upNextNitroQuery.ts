@@ -57,7 +57,7 @@ export const upNextNitroQuery = defineQuery({
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.MarkAsWatched('episode'),
-    InvalidateAction.Drop,
+    InvalidateAction.Drop('show'),
     InvalidateAction.Restore,
     InvalidateAction.Watchlisted('show'),
   ],

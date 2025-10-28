@@ -2,41 +2,40 @@
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import type { EpisodeProgressEntry } from "$lib/requests/models/EpisodeProgressEntry";
-  import type { ShowEntry } from "$lib/requests/models/ShowEntry";
+  import type { MovieEntry } from "$lib/requests/models/MovieEntry";
   import DropSwipeIndicator from "$lib/sections/media-actions/drop/DropSwipeIndicator.svelte";
   import { useDrop } from "$lib/sections/media-actions/drop/useDrop";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
 
-  type UpNextEpisodeProps = {
-    episode: EpisodeProgressEntry;
-    show: ShowEntry;
+  type UpNextMovieSwipeProps = {
+    movie: MovieEntry;
+    playbackId: number;
     style: "cover" | "summary";
   } & ChildrenProps;
 
-  const { episode, show, style, children }: UpNextEpisodeProps = $props();
+  const { movie, playbackId, style, children }: UpNextMovieSwipeProps =
+    $props();
 
   const { markAsWatched } = $derived(
     useMarkAsWatched({
-      type: "episode",
-      media: episode,
-      show: show,
+      type: "movie",
+      media: movie,
     }),
   );
 
   const { drop } = $derived(
     useDrop({
-      id: show.id,
-      type: "show",
+      id: playbackId,
+      type: "movie",
     }),
   );
 
   const { confirm } = useConfirm();
   const confirmDrop = $derived(
     confirm({
-      type: ConfirmationType.DropShow,
-      title: show.title,
+      type: ConfirmationType.DropMovie,
+      title: movie.title,
       onConfirm: drop,
     }),
   );
@@ -46,9 +45,10 @@
   <SwipeX
     {children}
     directions={["left", "right"]}
-    classList="trakt-up-next-episode"
+    classList="trakt-up-next-movie"
     onSwipe={(state) => {
       if (state.direction === "left") {
+        drop();
         markAsWatched();
       }
 

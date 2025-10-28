@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Відхилити серіал"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Ви впевнені, що хочете видалити \"{title}\"? Це видалить його зі списку 'Продовжувати перегляд'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Позначити фільм \"{title}\" як видалений",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Видалити фільм"
+    },
     "warning_prompt_restore_show": {
       "default": "Ви впевнені, що хочете відновити медіа-контент \"{title}\"? Це відновить його у вашому прогресі та календарі."
     },

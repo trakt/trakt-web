@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Sluta följa"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Är du säker på att du vill släppa \"{title}\"? Detta kommer att ta bort den från din 'Fortsätt titta'-lista.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Markera filmen \"{title}\" som släppt",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Släpp film"
+    },
     "warning_prompt_restore_show": {
       "default": "Är du säker på att du vill återställa serien \"{title}\"? Detta kommer att återställa den i dina framsteg och kalender."
     },

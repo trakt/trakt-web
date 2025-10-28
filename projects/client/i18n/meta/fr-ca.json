@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Abandonner"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Êtes-vous certain de vouloir abandonner \"{title}\" ? Ça va l'enlever de votre liste 'Continuer de visionner'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Marquer le film \"{title}\" comme abandonné",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Abandonner le film"
+    },
     "warning_prompt_restore_show": {
       "default": "Êtes-vous certain de vouloir restaurer la série \"{title}\" ? Cela restaurera votre progression et votre calendrier."
     },

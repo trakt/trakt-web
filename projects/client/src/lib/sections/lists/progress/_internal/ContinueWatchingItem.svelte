@@ -22,7 +22,7 @@
             ? ("hidden" as const)
             : ("watching" as const),
         }
-      : { movie: entry },
+      : { movie: entry, playbackId: entry.playbackId },
   );
 </script>
 

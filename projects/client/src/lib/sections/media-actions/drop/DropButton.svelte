@@ -10,13 +10,17 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { DropButtonProps } from "./DropButtonProps";
 
-  const { title, onDrop, isDropping, style, ...props }: DropButtonProps =
+  const { type, title, onDrop, isDropping, style, ...props }: DropButtonProps =
     $props();
 
   const { confirm } = useConfirm();
+
   const confirmDrop = $derived(
     confirm({
-      type: ConfirmationType.DropShow,
+      type:
+        type === "movie"
+          ? ConfirmationType.DropMovie
+          : ConfirmationType.DropShow,
       title,
       onConfirm: onDrop,
     }),
@@ -27,7 +31,10 @@
   );
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
-    label: m.button_label_drop_show({ title }),
+    label:
+      type === "movie"
+        ? m.button_label_drop_movie({ title })
+        : m.button_label_drop_show({ title }),
     color: $color,
     variant: $variant,
     onclick: confirmDrop,
@@ -35,7 +42,9 @@
     ...events,
   });
 
-  const text = m.button_text_drop_show();
+  const text = $derived(
+    type === "movie" ? m.button_text_drop_movie() : m.button_text_drop_show(),
+  );
 </script>
 
 {#if style === "normal"}

@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Drop serie"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Er du sikker på, at du vil droppe \"{title}\"? Dette vil fjerne det fra din 'Fortsæt med at se'-liste.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Marker film \"{title}\" som droppet",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Drop film"
+    },
     "warning_prompt_restore_show": {
       "default": "Er du sikker på, at du vil gendanne \"{title}\" serien? Dette vil gendanne den på din fremskridt og kalender."
     },

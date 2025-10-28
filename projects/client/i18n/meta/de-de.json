@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Abbrechen"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Sind Sie sicher, dass Sie \"{title}\" verwerfen möchten? Dies entfernt es aus Ihrer 'Weiter schauen'-Liste.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Film \"{title}\" als verworfen markieren",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Film verwerfen"
+    },
     "warning_prompt_restore_show": {
       "default": "Bist du sicher, dass du die \"{title}\" Serie wiederherstellen möchtest? Dadurch wird der Fortschritt und der Kalender wiederhergestellt."
     },
