@@ -10,7 +10,9 @@ import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.t
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived, get } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map, switchMap } from 'rxjs/operators';
+import { derived } from 'svelte/store';
 
 type UseEpisodeParams = {
   slug: string;
@@ -39,10 +41,12 @@ export function useEpisode(
     showIntlQuery({ slug: params.slug, language, enabled: !isLocaleSkipped }),
   );
 
-  const streamOn = useQuery(streamEpisodeQuery({
-    ...params,
-    country: get(country),
-  }));
+  const streamOn = toObservable(country)
+    .pipe(
+      switchMap((country) =>
+        toObservable(useQuery(streamEpisodeQuery({ ...params, country })))
+      ),
+    );
 
   const queries = [
     episode,
@@ -51,7 +55,6 @@ export function useEpisode(
     intl,
     showIntl,
     crew,
-    streamOn,
   ];
 
   const isLoading = derived(
@@ -89,15 +92,18 @@ export function useEpisode(
           fallback: $show.data,
         }),
     ),
-    streamOn: derived(streamOn, ($streamOn) => {
-      if (!$streamOn.data) {
-        return;
-      }
+    // FIXME: move these to the 'where to watch' component
+    streamOn: streamOn.pipe(
+      map(($streamOn) => {
+        if (!$streamOn.data) {
+          return;
+        }
 
-      return {
-        services: $streamOn.data,
-        preferred: getPreferred($streamOn.data),
-      };
-    }),
+        return {
+          services: $streamOn.data,
+          preferred: getPreferred($streamOn.data),
+        };
+      }),
+    ),
   };
 }
