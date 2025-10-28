@@ -7,6 +7,7 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
 
 export const THEME_PLACEHOLDER = '%theme.current%';
+export const THEME_SCOPE_PLACEHOLDER = '%theme.seasonal%';
 
 export type ThemeResponse = { theme: Theme };
 
@@ -46,7 +47,12 @@ export const handle: Handle = async ({ event, resolve }) => {
         const currentTheme = getDeviceType(agent) === 'tv'
           ? Theme.Dark
           : event.locals.theme;
-        return html.replace(THEME_PLACEHOLDER, `${currentTheme}`);
+
+        const scope = 'none';
+
+        return html
+          .replace(THEME_PLACEHOLDER, `${currentTheme}`)
+          .replace(THEME_SCOPE_PLACEHOLDER, `${scope}`);
       },
     },
   );
