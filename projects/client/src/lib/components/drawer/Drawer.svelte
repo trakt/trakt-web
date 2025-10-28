@@ -4,7 +4,8 @@
   import { navigationTrap } from "$lib/features/navigation/navigationTrap";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { type Snippet } from "svelte";
+  import { onMount, type Snippet } from "svelte";
+  import { writable } from "svelte/store";
   import { slide } from "svelte/transition";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
@@ -21,6 +22,7 @@
     size?: "normal" | "large";
     badge?: Snippet;
     metaInfo?: string;
+    onOpened?: () => void;
   } & ChildrenProps;
 
   const {
@@ -32,6 +34,7 @@
     size = "normal",
     badge,
     metaInfo,
+    onOpened,
   }: DrawerProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -44,6 +47,15 @@
       return navigationTrap(element, trapSelector);
     }
   });
+
+  const isOpening = writable(false);
+  onMount(() => {
+    if ($isOpening) {
+      return;
+    }
+
+    onOpened?.();
+  });
 </script>
 
 <div
@@ -52,6 +64,11 @@
   transition:slide={{ duration: 150, axis: slideAxis }}
   use:portal
   use:trap
+  onintrostart={() => isOpening.set(true)}
+  onintroend={() => {
+    isOpening.set(false);
+    onOpened?.();
+  }}
 >
   <RenderFor audience="all" device={["mobile"]}>
     <div
