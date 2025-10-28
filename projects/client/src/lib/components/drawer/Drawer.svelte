@@ -4,6 +4,7 @@
   import { navigationTrap } from "$lib/features/navigation/navigationTrap";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { type Snippet } from "svelte";
   import { slide } from "svelte/transition";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
@@ -17,6 +18,8 @@
     title?: string;
     hasAutoClose?: boolean;
     trapSelector?: string;
+    badge?: Snippet;
+    metaInfo?: string;
   } & ChildrenProps;
 
   const {
@@ -25,6 +28,8 @@
     title,
     hasAutoClose = true,
     trapSelector,
+    badge,
+    metaInfo,
   }: DrawerProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -66,7 +71,15 @@
     data-dpad-navigation={DpadNavigationType.List}
   >
     {#if title}
-      {title}
+      <div class="trakt-drawer-title-container">
+        <div class="trakt-drawer-title">
+          <h5>{title}</h5>
+          {#if metaInfo}
+            <p class="meta-info ellipsis">{metaInfo}</p>
+          {/if}
+        </div>
+        {@render badge?.()}
+      </div>
     {/if}
 
     <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
@@ -157,6 +170,7 @@
   .trakt-drawer-drag-handle {
     display: flex;
     justify-content: center;
+    touch-action: none;
 
     margin-bottom: calc(-1 * var(--drawer-gap));
     padding: var(--ni-18) 0;
@@ -167,6 +181,25 @@
       border-radius: var(--ni-2);
 
       background: var(--color-text-secondary);
+    }
+  }
+
+  .trakt-drawer-title-container {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .trakt-drawer-title {
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+      font-size: var(--ni-18);
+    }
+
+    p.meta-info {
+      color: var(--list-meta-info-color);
     }
   }
 
