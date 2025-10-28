@@ -18,6 +18,7 @@
     title?: string;
     hasAutoClose?: boolean;
     trapSelector?: string;
+    size?: "normal" | "large";
     badge?: Snippet;
     metaInfo?: string;
   } & ChildrenProps;
@@ -28,6 +29,7 @@
     title,
     hasAutoClose = true,
     trapSelector,
+    size = "normal",
     badge,
     metaInfo,
   }: DrawerProps = $props();
@@ -46,6 +48,7 @@
 
 <div
   class={DRAWER_CLASS}
+  data-size={size}
   transition:slide={{ duration: 150, axis: slideAxis }}
   use:portal
   use:trap
@@ -138,6 +141,10 @@
 
     backdrop-filter: blur(var(--ni-12));
 
+    &[data-size="large"] {
+      --drawer-size: var(--ni-480);
+    }
+
     &:has(.trakt-drawer-drag-handle) {
       padding-top: 0;
     }
@@ -161,7 +168,8 @@
         transition: height var(--transition-increment) ease-in-out;
       }
 
-      &:global(.is-fullscreen) {
+      &:global(.is-fullscreen),
+      &[data-size="large"] {
         --mobile-drawer-height: calc(100vh - env(safe-area-inset-top, 0px));
       }
     }
