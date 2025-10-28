@@ -187,6 +187,7 @@
 
     overflow-y: auto;
     padding-bottom: var(--ni-8);
+    overscroll-behavior: contain;
   }
 
   .trakt-drawer-header,
