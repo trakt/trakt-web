@@ -3,8 +3,8 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import CommentPreview from "./CommentPreview.svelte";
   import type { ActiveComment } from "./models/ActiveComment";
-  import UserComment from "./UserComment.svelte";
 
   type CommentProps = {
     media: MediaEntry;
@@ -21,7 +21,7 @@
   --height-card="var(--height-comment-card)"
 >
   <div class="trakt-comment-container">
-    <UserComment {comment} {media} {onDrilldown} {type} />
+    <CommentPreview {comment} {media} {onDrilldown} {type} />
   </div>
 </Card>
 
