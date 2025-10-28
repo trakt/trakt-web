@@ -2787,6 +2787,40 @@
         "ios"
       ]
     },
+    "warning_prompt_drop_movie": {
+      "default": "Are you sure you want to drop \"{title}\"? This will remove it from your Continue Watching list.",
+      "description": "Warning prompt shown when a user tries to drop a movie.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_drop_movie": {
+      "default": "Flag movie \"{title}\" as dropped",
+      "description": "Aria-label for the button that allows a user to drop a movie. Indicating that a user is no longer actively tracking this movie.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_drop_movie": {
+      "default": "Drop movie",
+      "description": "Text for the button that allows a user to drop a movie. Indicating that a user is no longer actively tracking this movie.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "warning_prompt_restore_show": {
       "default": "Are you sure you want to restore \"{title}\" show? This will restore it on your progress and calendar.",
       "description": "Warning prompt shown when a user tries to restore a hidden show.",

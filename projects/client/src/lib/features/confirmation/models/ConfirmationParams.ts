@@ -32,6 +32,10 @@ interface ConfirmationParamsMap {
     type: ConfirmationType.DropShow;
     title: string;
   };
+  [ConfirmationType.DropMovie]: {
+    type: ConfirmationType.DropMovie;
+    title: string;
+  };
   [ConfirmationType.RestoreShow]: {
     type: ConfirmationType.RestoreShow;
     title: string;

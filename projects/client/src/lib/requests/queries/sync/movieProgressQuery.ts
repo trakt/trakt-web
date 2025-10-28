@@ -18,6 +18,7 @@ const MovieProgressSchema = MovieEntrySchema.merge(z.object({
   progress: z.number(),
   minutesElapsed: z.number(),
   minutesLeft: z.number(),
+  playbackId: z.number(),
 }));
 export type MovieProgressEntry = z.infer<typeof MovieProgressSchema>;
 
@@ -29,6 +30,7 @@ const mapToInProgressMovie = (response: MovieProgressResponse) => {
 
   return {
     ...mapToMovieEntry(response.movie),
+    playbackId: response.id,
     progress: response.progress,
     minutesElapsed,
     minutesLeft: runtime -
@@ -41,6 +43,7 @@ const mapToStartWatchingMovie = (response: ListedMovieResponse) => {
 
   return {
     ...movie,
+    playbackId: 0,
     progress: 0,
     minutesElapsed: 0,
     minutesLeft: movie.runtime ?? 0,
@@ -97,6 +100,7 @@ export const movieProgressQuery = defineQuery({
   invalidations: [
     InvalidateAction.MarkAsWatched('movie'),
     InvalidateAction.Watchlisted('movie'),
+    InvalidateAction.Drop('movie'),
   ],
   dependencies: (
     params: MovieProgressParams,

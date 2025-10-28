@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Verwijderen"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Weet je zeker dat je \"{title}\" wilt laten vallen? Dit verwijdert het uit je 'Verder kijken'-lijst.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Markeer film \"{title}\" als laten vallen",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Film laten vallen"
+    },
     "warning_prompt_restore_show": {
       "default": "Weet je zeker dat je de \"{title}\" serie wilt herstellen? Dit herstelt de voortgang en de kalender."
     },

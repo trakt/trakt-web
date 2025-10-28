@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Премахни следването"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Сигурни ли сте, че искате да премахнете \"{title}\"? Това ще го премахне от списъка ви 'Продължавам да гледам'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Отбележете филма \"{title}\" като премахнат",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Премахни филма"
+    },
     "warning_prompt_restore_show": {
       "default": "Сигурни ли сте, че искате да възстановите \"{title}\"? Това ще го възстанови във вашия прогрес и календар."
     },

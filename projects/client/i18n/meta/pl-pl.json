@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "Usuń"
     },
+    "warning_prompt_drop_movie": {
+      "default": "Czy na pewno chcesz usunąć \"{title}\"? Spowoduje to usunięcie go z Twojej listy 'Oglądane dalej'.",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "Oznacz film \"{title}\" jako usunięty",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "Usuń film"
+    },
     "warning_prompt_restore_show": {
       "default": "Na pewno chcesz przywrócić \"{title}\"? Przywróci to Twoje postępy i kalendarz."
     },

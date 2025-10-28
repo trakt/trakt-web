@@ -1018,6 +1018,25 @@
     "button_text_drop_show": {
       "default": "番組を削除する"
     },
+    "warning_prompt_drop_movie": {
+      "default": "\"{title}\" をドロップしてもよろしいですか？視聴中のリストから削除されます。",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_label_drop_movie": {
+      "default": "映画 \"{title}\" をドロップとしてマーク",
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "button_text_drop_movie": {
+      "default": "映画をドロップ"
+    },
     "warning_prompt_restore_show": {
       "default": "\"{title}\"の番組を復元しますか？これは進行状況とカレンダーで復元されます。"
     },

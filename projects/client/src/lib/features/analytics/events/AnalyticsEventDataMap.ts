@@ -1,5 +1,6 @@
 import type { Theme } from '$lib/features/theme/models/Theme.ts';
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { MediaVideoType } from '$lib/requests/models/MediaVideo.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
 import type { CtaType } from '$lib/sections/lists/components/cta/models/Cta.ts';
@@ -41,7 +42,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.Search]: SearchType;
   [AnalyticsEvent.Share]: ShareType;
 
-  [AnalyticsEvent.Drop]: never;
+  [AnalyticsEvent.Drop]: { type: MediaType };
   [AnalyticsEvent.Restore]: never;
   [AnalyticsEvent.MarkAsWatched]: ActionType;
   [AnalyticsEvent.Watchlist]: ActionType;
