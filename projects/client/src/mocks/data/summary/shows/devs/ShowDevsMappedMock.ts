@@ -2,6 +2,7 @@ import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 
 export const ShowDevsMappedMock: ShowEntry = {
   'id': 147971,
+  'key': 'show-147971',
   'slug': 'devs',
   'type': 'show',
   'title': 'Devs',

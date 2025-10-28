@@ -2,6 +2,7 @@ import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
 
 export const MovieMatrixMappedMock: MovieEntry = {
   'id': 481,
+  'key': 'movie-481',
   'slug': 'the-matrix-1999',
   'type': 'movie',
   'title': 'The Matrix',

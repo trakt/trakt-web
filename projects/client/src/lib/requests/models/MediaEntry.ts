@@ -12,6 +12,7 @@ const ImageUrlsSchema = z.object({
 
 export const MediaEntrySchema = z.object({
   id: z.number(),
+  key: z.string(),
   slug: z.string(),
   type: MediaTypeSchema,
   year: z.number().nullish(),

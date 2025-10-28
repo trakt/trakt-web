@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown }">
+<script lang="ts" generics="T extends { id: unknown; key?: string }">
   import { onMount, type Snippet } from "svelte";
   import { writable } from "svelte/store";
   import "../_internal/list.css";
@@ -39,7 +39,7 @@
 
   {#if items.length > 0}
     <div class="trakt-list-item-container trakt-list-items" use:customAction>
-      {#each items as i (i.id)}
+      {#each items as i (i.key ?? i.id)}
         {@render item(i)}
       {/each}
     </div>

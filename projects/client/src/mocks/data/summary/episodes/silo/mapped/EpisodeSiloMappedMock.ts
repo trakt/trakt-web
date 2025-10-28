@@ -3,6 +3,7 @@ import { EpisodePremiereType } from '$lib/requests/models/EpisodeType.ts';
 
 export const EpisodeSiloMappedMock: EpisodeEntry = {
   'id': 5165667,
+  'key': 'episode-5165667',
   'type': EpisodePremiereType.series_premiere,
   'title': 'Freedom Day',
   'overview':
