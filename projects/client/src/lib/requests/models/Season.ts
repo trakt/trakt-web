@@ -3,6 +3,7 @@ import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 export const SeasonSchema = z.object({
   id: z.number(),
+  key: z.string(),
   number: z.number(),
   episodes: z.object({
     count: z.number(),

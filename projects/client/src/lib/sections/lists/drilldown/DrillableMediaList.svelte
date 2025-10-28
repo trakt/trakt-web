@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown }, M">
+<script lang="ts" generics="T extends { key: string }, M">
   import type { Snippet } from "svelte";
   import type { DrilldownSource } from "../components/models/DrilldownSource";
   import ViewAllButton from "../components/ViewAllButton.svelte";

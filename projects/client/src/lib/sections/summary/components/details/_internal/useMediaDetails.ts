@@ -83,7 +83,7 @@ function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
     const jobs = person.jobs.map((job) => toTranslatedValue('job', job));
     return {
       label: `${person.name} (${jobs.join(', ')})`,
-      link: UrlBuilder.people(person.id),
+      link: UrlBuilder.people(person.key),
     };
   };
 

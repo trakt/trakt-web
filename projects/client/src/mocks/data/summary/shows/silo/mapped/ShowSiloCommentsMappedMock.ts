@@ -7,6 +7,7 @@ export const ShowSiloCommentsMappedMock: MediaComment[] = [
       "this looks really good, can't wait. The fact that its on AppleTV and not Netflix series gives a big hope",
     'createdAt': new Date('2023-03-09T06:25:15.000Z'),
     'id': 420,
+    'key': 'comment-420',
     'isReview': false,
     'isSpoiler': false,
     'likeCount': 39,

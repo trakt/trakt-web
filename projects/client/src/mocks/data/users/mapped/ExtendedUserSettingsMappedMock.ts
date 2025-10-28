@@ -3,6 +3,7 @@ import { Theme } from '$lib/features/theme/models/Theme.ts';
 
 export const ExtendedUserMappedMock: UserSettings = {
   'id': 41152,
+  'key': 'user-41152',
   'slug': 'tequila_sunset',
   'username': 'harrier_dubois',
   'token': null,

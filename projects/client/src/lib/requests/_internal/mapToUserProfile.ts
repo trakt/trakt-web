@@ -11,6 +11,7 @@ export function mapToUserProfile(user: ProfileResponse): UserProfile {
 
   return {
     id: user.ids.trakt,
+    key: `user-${user.ids.trakt}`,
     username: user.username,
     name: toUserName(user.name),
     private: user.private,

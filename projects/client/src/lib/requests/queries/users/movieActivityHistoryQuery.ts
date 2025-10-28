@@ -20,6 +20,7 @@ type MovieActivityHistoryParams = {
 
 export const MovieActivityHistorySchema = z.object({
   id: z.number(),
+  key: z.string(),
   watchedAt: z.date(),
   movie: MovieEntrySchema,
   type: z.literal('movie'),
@@ -53,6 +54,7 @@ export const mapToMovieActivityHistory = (
   historyMovie: MovieActivityHistoryResponse,
 ) => ({
   id: historyMovie.id,
+  key: `movie-${historyMovie.id}`,
   watchedAt: new Date(historyMovie.watched_at),
   movie: mapToMovieEntry(historyMovie.movie),
   type: 'movie' as const,

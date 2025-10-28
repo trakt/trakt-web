@@ -35,7 +35,7 @@ describe('mapToServices', () => {
     expect(result).toEqual([
       {
         ...streamingService,
-        id: 'streaming-netflix',
+        key: 'streaming-netflix',
       },
     ]);
   });
@@ -61,7 +61,7 @@ describe('mapToServices', () => {
     expect(result).toEqual([
       {
         ...onDemandService,
-        id: 'on-demand-amazon',
+        key: 'on-demand-amazon',
       },
     ]);
   });
@@ -102,15 +102,15 @@ describe('mapToServices', () => {
     expect(result).toEqual([
       {
         ...preferredService,
-        id: 'streaming-netflix',
+        key: 'streaming-netflix',
       },
       {
         ...otherStreamingService,
-        id: 'streaming-hulu',
+        key: 'streaming-hulu',
       },
       {
         ...onDemandService,
-        id: 'on-demand-amazon',
+        key: 'on-demand-amazon',
       },
     ]);
   });
@@ -161,22 +161,22 @@ describe('mapToServices', () => {
 
     expect(result.at(0)).toEqual({
       ...preferredService,
-      id: 'streaming-disney',
+      key: 'streaming-disney',
     });
 
     expect(result.at(1)).toEqual({
       ...streamingService,
-      id: 'streaming-netflix',
+      key: 'streaming-netflix',
     });
 
     expect(result.at(2)).toEqual({
       ...onDemandService1,
-      id: 'on-demand-amazon',
+      key: 'on-demand-amazon',
     });
 
     expect(result.at(3)).toEqual({
       ...onDemandService2,
-      id: 'on-demand-apple',
+      key: 'on-demand-apple',
     });
   });
 });

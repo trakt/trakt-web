@@ -26,6 +26,7 @@ const showSeasonsRequest = (
 
 const mapToSeason = (item: SeasonsResponse[0]): Season => ({
   id: item.ids.trakt,
+  key: `season-${item.ids.trakt}`,
   number: item.number,
   episodes: {
     count: item.episode_count ?? 0,

@@ -4,6 +4,7 @@ import { ImageUrlsSchema } from './ImageUrlsSchema.ts';
 
 export const PersonSummarySchema = z.object({
   id: z.number(),
+  key: z.string(),
   name: z.string(),
   biography: z.string(),
   headshot: z.object({

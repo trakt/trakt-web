@@ -22,6 +22,7 @@ type EpisodeActivityHistoryParams = {
 
 export const EpisodeActivityHistorySchema = z.object({
   id: z.number(),
+  key: z.string(),
   watchedAt: z.date(),
   episode: EpisodeEntrySchema,
   show: ShowEntrySchema,
@@ -59,6 +60,7 @@ export function mapToEpisodeActivityHistory(
 ): EpisodeActivityHistory {
   return {
     id: historyEpisode.id,
+    key: `episode-${historyEpisode.id}`,
     watchedAt: new Date(historyEpisode.watched_at),
     episode: mapToEpisodeEntry(historyEpisode.episode),
     show: mapToShowEntry(historyEpisode.show),

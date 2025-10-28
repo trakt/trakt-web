@@ -2,7 +2,7 @@ import type { MediaVideo } from '$lib/requests/models/MediaVideo.ts';
 
 export const ShowSiloVideoMappedMock: MediaVideo[] = [
   {
-    'id': 'vrlu23ub93cpubuqs4v4l174mjjt0b5e',
+    'key': 'vrlu23ub93cpubuqs4v4l174mjjt0b5e',
     'title': 'An Inside Look: Building a World',
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=QQ6x6NjVM_E',
@@ -10,7 +10,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2023-06-30T16:59:46.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4koigfptp0usb',
+    'key': 'vrlu23ub93cpubuqs4v4koigfptp0usb',
     'title': 'Uncovering the Truth',
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=DsQzTUeLkbA',
@@ -18,7 +18,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2023-04-26T14:59:56.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4klee39hiflde',
+    'key': 'vrlu23ub93cpubuqs4v4klee39hiflde',
     'title': 'Opening Title Sequence',
     'type': 'opening credits',
     'url': 'https://youtube.com/watch?v=AJlOS6ZeIcA',
@@ -26,7 +26,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2023-04-25T21:00:04.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4kf8bnk17v714',
+    'key': 'vrlu23ub93cpubuqs4v4kf8bnk17v714',
     'title': 'Official Trailer',
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=8ZYhuvIv1pA',
@@ -34,7 +34,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2023-04-06T12:59:48.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4ld8dth432lhj',
+    'key': 'vrlu23ub93cpubuqs4v4ld8dth432lhj',
     'title': 'Official Teaser',
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=bBMajXwi6Cs',
@@ -42,7 +42,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2023-03-06T14:00:51.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lc80ejiglkjj',
+    'key': 'vrlu23ub93cpubuqs4v4lc80ejiglkjj',
     'title': 'Extending Worlds: Silos 17 & 18',
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=_tHrcff6BgI',
@@ -50,7 +50,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2025-01-28T19:59:52.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4li0g9cfvocft',
+    'key': 'vrlu23ub93cpubuqs4v4li0g9cfvocft',
     'title': "Inside Solo's Vault with Steve Zahn",
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=gr9s1ubiH3w',
@@ -58,7 +58,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2025-01-15T19:59:59.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4l1soj14rpvuh',
+    'key': 'vrlu23ub93cpubuqs4v4l1soj14rpvuh',
     'title': 'Rebecca Ferguson Diving in Silo 17',
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=QlmvFwUlIA4',
@@ -66,7 +66,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-12-09T20:29:49.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lfhhc18ircb5',
+    'key': 'vrlu23ub93cpubuqs4v4lfhhc18ircb5',
     'title': 'The Rebellion in Season 2',
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=deWAAmrHvVQ',
@@ -74,7 +74,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-15T17:59:51.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lfrmf7sdmlu5',
+    'key': 'vrlu23ub93cpubuqs4v4lfrmf7sdmlu5',
     'title': 'Season 1 Catch Up',
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=eTGbi_oElCQ',
@@ -82,7 +82,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-14T19:59:49.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4ls7jg7lloocs',
+    'key': 'vrlu23ub93cpubuqs4v4ls7jg7lloocs',
     'title': 'Juliette Lives Catch Up',
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=w5BoJmMt0t4',
@@ -90,7 +90,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-12T17:59:46.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4kc4u6lrihte4',
+    'key': 'vrlu23ub93cpubuqs4v4kc4u6lrihte4',
     'title': 'Judicial Catch Up',
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=3qPZM6S56ww',
@@ -98,7 +98,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-11T22:59:52.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4leqai4m226hd',
+    'key': 'vrlu23ub93cpubuqs4v4leqai4m226hd',
     'title': 'Season 1 Recap',
     'type': 'recap',
     'url': 'https://youtube.com/watch?v=ceYm0eDw7tg',
@@ -106,7 +106,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-11T18:04:51.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4ls025968sjp1',
+    'key': 'vrlu23ub93cpubuqs4v4ls025968sjp1',
     'title': 'Season 2 Official Sneak Peek',
     'type': 'clip',
     'url': 'https://youtube.com/watch?v=uiBM-BCgANE',
@@ -114,7 +114,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-11-01T15:00:50.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lqqpustcdkes',
+    'key': 'vrlu23ub93cpubuqs4v4lqqpustcdkes',
     'title': 'Rebecca Ferguson Breaks Down Fan Theories',
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=suP0-oMb9fA',
@@ -122,7 +122,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-21T18:59:51.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4kmtme45fmg5t',
+    'key': 'vrlu23ub93cpubuqs4v4kmtme45fmg5t',
     'title': 'Season 2 Official Trailer',
     'type': 'trailer',
     'url': 'https://youtube.com/watch?v=CLJDR-vFUdY',
@@ -130,7 +130,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-10-14T13:59:46.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4kbote16c5t4g',
+    'key': 'vrlu23ub93cpubuqs4v4kbote16c5t4g',
     'title': "Common's Freestyle Rap at San Diego Comic-Con",
     'type': 'featurette',
     'url': 'https://youtube.com/watch?v=3aPXnDXpdHw',
@@ -138,7 +138,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-07-30T18:23:01.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4ltf5g6g304fq',
+    'key': 'vrlu23ub93cpubuqs4v4ltf5g6g304fq',
     'title': "Behind Rebecca Ferguson's Character Tattoos",
     'type': 'behind the scenes',
     'url': 'https://youtube.com/watch?v=wiVr54aeXwI',
@@ -146,7 +146,7 @@ export const ShowSiloVideoMappedMock: MediaVideo[] = [
     'publishedAt': new Date('2024-07-28T01:29:46.000Z'),
   },
   {
-    'id': 'vrlu23ub93cpubuqs4v4lf215nj06js1',
+    'key': 'vrlu23ub93cpubuqs4v4lf215nj06js1',
     'title': '“In the event of a failed cleaning, prepare for war” — The Order',
     'type': 'teaser',
     'url': 'https://youtube.com/watch?v=e1ajCMLUYHw',

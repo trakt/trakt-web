@@ -11,7 +11,7 @@
 {#if sentiments}
   <SectionList
     id={`community-sentiments-${slug}`}
-    items={[{ ...sentiments, id: "sentiment" }]}
+    items={[{ ...sentiments, key: "sentiment" }]}
     title={m.header_community_sentiment()}
     --height-list="var(--height-comments-list)"
   >

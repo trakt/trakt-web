@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown }">
+<script lang="ts" generics="T extends { key: string }">
   import { type Snippet } from "svelte";
   import type { ListProps } from "../ListProps";
   import ShadowList from "./ShadowList.svelte";

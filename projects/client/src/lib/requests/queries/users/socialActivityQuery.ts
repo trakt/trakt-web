@@ -23,7 +23,7 @@ function mapToSocialActivity(
   response: SocialActivityResponse,
 ): SocialActivity {
   const common = {
-    id: response.id,
+    key: `${response.id}`,
     activityAt: new Date(response.activity_at),
     users: [mapToUserProfile(response.user)],
   };

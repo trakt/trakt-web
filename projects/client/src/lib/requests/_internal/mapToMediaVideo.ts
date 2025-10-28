@@ -13,7 +13,7 @@ export function mapToMediaVideo(
   const thumbnail = `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
 
   return {
-    id: checksum(video.url),
+    key: checksum(video.url),
     title: video.title,
     type: video.type,
     url: video.url,

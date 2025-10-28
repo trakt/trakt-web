@@ -8,6 +8,7 @@ export const UserProfileHarryMappedMock: UserProfile = {
   },
   'username': 'harrier_dubois',
   'id': 41152,
+  'key': 'user-41152',
   'slug': 'harry_du_bois',
   'avatar': {
     'url':

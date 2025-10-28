@@ -11,6 +11,7 @@ export function mapToMediaListSummary(
 
   return {
     id: listResponse.ids.trakt,
+    key: `list-${listResponse.ids.trakt}`,
     slug: listResponse.ids.slug,
     name: listResponse.name,
     description: listResponse.description ?? '',

@@ -4,6 +4,7 @@ import { ShowSiloMinimalMappedMock } from '$mocks/data/summary/shows/silo/mapped
 export const WatchlistShowsMappedMock: WatchlistedItem[] = [
   {
     'id': 1146015487,
+    'key': 'show-1146015487',
     'listedAt': new Date('2024-12-27T21:36:48.000Z'),
     'notes': null,
     'rank': 1,

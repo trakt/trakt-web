@@ -12,7 +12,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/004/705/headshots/medium/55cd537cc1.jpg.webp',
         },
       },
-      'id': 'hugh-grant',
+      'key': 'hugh-grant',
       'name': 'Hugh Grant',
     },
     {
@@ -25,7 +25,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/001/075/624/headshots/medium/f25b061dd4.jpg.webp',
         },
       },
-      'id': 'sophie-thatcher',
+      'key': 'sophie-thatcher',
       'name': 'Sophie Thatcher',
     },
     {
@@ -38,7 +38,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/597/826/headshots/medium/aa952fefe6.jpg.webp',
         },
       },
-      'id': 'chloe-east',
+      'key': 'chloe-east',
       'name': 'Chloe East',
     },
     {
@@ -51,7 +51,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/413/327/headshots/medium/2a4168772c.jpg.webp',
         },
       },
-      'id': 'topher-grace',
+      'key': 'topher-grace',
       'name': 'Topher Grace',
     },
     {
@@ -64,7 +64,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/001/119/654/headshots/medium/bf246a5e3a.jpg.webp',
         },
       },
-      'id': 'elle-young-1119654',
+      'key': 'elle-young-1119654',
       'name': 'Elle Young',
     },
     {
@@ -77,7 +77,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/918/391/headshots/medium/9c6d5de83f.jpg.webp',
         },
       },
-      'id': 'julie-lynn-mortensen',
+      'key': 'julie-lynn-mortensen',
       'name': 'Julie Lynn-Mortensen',
     },
     {
@@ -90,7 +90,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/004/119/501/headshots/medium/3b3d999544.jpg.webp',
         },
       },
-      'id': 'haylie-hansen',
+      'key': 'haylie-hansen',
       'name': 'Haylie Hansen',
     },
     {
@@ -103,7 +103,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/776/688/headshots/medium/d629e49aab.jpg.webp',
         },
       },
-      'id': 'elle-mckinnon',
+      'key': 'elle-mckinnon',
       'name': 'Elle McKinnon',
     },
     {
@@ -114,7 +114,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
           'medium': '/placeholders/portrait_placeholder.png' as HttpsUrl,
         },
       },
-      'id': 'hanna-huffman',
+      'key': 'hanna-huffman',
       'name': 'Hanna Huffman',
     },
     {
@@ -127,7 +127,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/310/402/headshots/medium/b786a1fb1e.jpg.webp',
         },
       },
-      'id': 'anesha-bailey',
+      'key': 'anesha-bailey',
       'name': 'Anesha Bailey',
     },
     {
@@ -140,7 +140,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/002/195/383/headshots/medium/dde9f0dc4e.jpg.webp',
         },
       },
-      'id': 'miguel-castillo',
+      'key': 'miguel-castillo',
       'name': 'Miguel Castillo',
     },
     {
@@ -153,7 +153,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/996/294/headshots/medium/bbb7d1275b.jpg.webp',
         },
       },
-      'id': 'stephanie-lavigne',
+      'key': 'stephanie-lavigne',
       'name': 'Stephanie Lavigne',
     },
     {
@@ -166,7 +166,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/003/058/237/headshots/medium/bb81a3f466.jpg.webp',
         },
       },
-      'id': 'wendy-gorling',
+      'key': 'wendy-gorling',
       'name': 'Wendy Gorling',
     },
     {
@@ -179,7 +179,7 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/003/335/090/headshots/medium/d12413a443.jpg.webp',
         },
       },
-      'id': 'river-codack',
+      'key': 'river-codack',
       'name': 'River Codack',
     },
     {
@@ -192,27 +192,27 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
             'https://walter-r2.trakt.tv/images/people/000/197/574/headshots/medium/80e3e863a0.jpg.webp',
         },
       },
-      'id': 'carolyn-adair',
+      'key': 'carolyn-adair',
       'name': 'Carolyn Adair',
     },
   ],
   'directors': [
     {
-      'id': 'scott-beck',
+      'key': 'scott-beck',
       'jobs': [
         'Director',
       ],
       'name': 'Scott Beck',
     },
     {
-      'id': 'richard-cowan',
+      'key': 'richard-cowan',
       'jobs': [
         'First Assistant Director',
       ],
       'name': 'Richard Cowan',
     },
     {
-      'id': 'bryan-woods',
+      'key': 'bryan-woods',
       'jobs': [
         'Director',
       ],
@@ -221,14 +221,14 @@ export const MovieHereticPeopleMappedMock: MediaCrew = {
   ],
   'writers': [
     {
-      'id': 'scott-beck',
+      'key': 'scott-beck',
       'jobs': [
         'Writer',
       ],
       'name': 'Scott Beck',
     },
     {
-      'id': 'bryan-woods',
+      'key': 'bryan-woods',
       'jobs': [
         'Writer',
       ],

@@ -6,14 +6,14 @@ import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfile
 
 export const SocialActivityMappedMock: SocialActivity[] = [
   {
-    id: 1,
+    key: '1',
     activityAt: new Date('2025-01-31T23:12:41.000Z'),
     users: [UserProfileHarryMappedMock],
     type: 'movie',
     movie: MovieHereticMappedMock,
   },
   {
-    id: 2,
+    key: '2',
     activityAt: new Date('2025-01-31T23:12:41.000Z'),
     users: [UserProfileHarryMappedMock],
     type: 'episode',

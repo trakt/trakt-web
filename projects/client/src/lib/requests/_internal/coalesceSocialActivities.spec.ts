@@ -17,6 +17,7 @@ describe('coalesceSocialActivities', () => {
     username,
     'slug': username,
     'id': 42,
+    'key': 'user-42',
     'avatar': { 'url': 'https://avatar.png' },
     'private': false,
     'isVip': true,

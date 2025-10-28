@@ -5,6 +5,7 @@ import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSi
 export const EpisodeActivityHistoryMappedMock: EpisodeActivityHistory[] = [
   {
     'id': 1,
+    'key': 'episode-1',
     'episode': EpisodeSiloMappedMock,
     'show': ShowSiloMappedMock,
     'type': 'episode',

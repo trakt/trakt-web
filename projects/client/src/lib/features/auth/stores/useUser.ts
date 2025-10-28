@@ -34,6 +34,7 @@ import { useAuth } from './useAuth.ts';
 
 const ANONYMOUS_USER: UserSettings = {
   id: 0,
+  key: 'user-0',
   slug: '',
   username: '',
   token: null,

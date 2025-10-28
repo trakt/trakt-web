@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { id: unknown }">
+<script lang="ts">
   import { type Snippet } from "svelte";
   import { fade, slide } from "svelte/transition";
   import Link from "../link/Link.svelte";

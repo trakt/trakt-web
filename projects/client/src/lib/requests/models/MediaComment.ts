@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 export const MediaCommentSchema = z.object({
   id: z.number(),
+  key: z.string(),
   parentId: z.number(),
   createdAt: z.date(),
   updatedAt: z.date(),
