@@ -21,7 +21,7 @@
     filter,
     metaInfo,
     drilldownLink,
-    variant,
+    variant: externalVariant,
   }: MediaListProps<T, M> = $props();
 
   const { list, isLoading } = $derived(
@@ -29,7 +29,8 @@
   );
 
   const defaultVariant = useDefaultCardVariant(type);
-  const height = $derived(mediaListHeightResolver(variant ?? $defaultVariant));
+  const variant = $derived(externalVariant ?? $defaultVariant);
+  const height = $derived(mediaListHeightResolver(variant));
 
   const { hasActiveFilter } = useFilter();
 </script>
@@ -54,7 +55,7 @@
 >
   {#snippet empty()}
     {#if $isLoading}
-      <SkeletonList {id} variant={$defaultVariant} />
+      <SkeletonList {id} {variant} />
     {:else if $hasActiveFilter}
       <NoFilterResultsPlaceholder />
     {:else}
