@@ -5,10 +5,10 @@
   import type { MovieProgressEntry } from "$lib/requests/queries/sync/movieProgressQuery";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import RestoreAction from "$lib/sections/media-actions/restore/RestoreAction.svelte";
-  import DropAction from "../../media-actions/drop/DropAction.svelte";
-  import MarkAsWatchedAction from "../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
-  import EpisodeItem from "../components/EpisodeItem.svelte";
-  import MovieProgressItem from "./_internal/MovieProgressItem.svelte";
+  import DropAction from "../../../media-actions/drop/DropAction.svelte";
+  import MarkAsWatchedAction from "../../../media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
+  import EpisodeItem from "../../components/EpisodeItem.svelte";
+  import MovieProgressItem from "./MovieProgressItem.svelte";
   import UpNextSwipe from "./UpNextSwipe.svelte";
 
   type UpNextEpisodeProps = {

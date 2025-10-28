@@ -5,13 +5,11 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
-  import UpNextItem from "$lib/sections/lists/progress/UpNextItem.svelte";
-  import { useHiddenShows } from "$lib/sections/lists/progress/useHiddenShows";
   import { useUpNextList } from "$lib/sections/lists/progress/useUpNextList";
   import { useStablePaginated } from "$lib/sections/lists/stores/useStablePaginated";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import ContinueWatchingItem from "./_internal/ContinueWatchingItem.svelte";
   import StartWatchingItem from "./_internal/StartWatchingItem.svelte";
-  const { list: hidden } = $derived(useHiddenShows());
 
   const { intent }: { intent: "continue" | "start" } = $props();
 
@@ -48,18 +46,11 @@
       ? m.list_title_start_watching()
       : m.list_title_up_next()}
   >
-    {#snippet item(mediaItem)}
+    {#snippet item(progressEntry)}
       {#if upNextIntent === "start"}
-        <StartWatchingItem {style} entry={mediaItem} />
-      {:else if "show" in mediaItem}
-        <UpNextItem
-          episode={mediaItem}
-          {style}
-          show={mediaItem.show}
-          status={$hidden.includes(mediaItem.show.id) ? "hidden" : "watching"}
-        />
+        <StartWatchingItem {style} entry={progressEntry} />
       {:else}
-        <UpNextItem movie={mediaItem} {style} />
+        <ContinueWatchingItem {style} entry={progressEntry} />
       {/if}
     {/snippet}
   </DrilledMediaList>
