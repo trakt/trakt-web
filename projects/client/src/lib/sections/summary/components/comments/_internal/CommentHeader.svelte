@@ -1,11 +1,10 @@
 <script lang="ts">
   import { getLocale } from "$lib/features/i18n";
-  import * as m from "$lib/features/i18n/messages.ts";
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import UserAvatar from "$lib/sections/lists/components/UserAvatar.svelte";
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
-  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
+  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import DeleteCommentButton from "./comment-actions/DeleteCommentButton.svelte";
 
   const { comment, type }: { comment: MediaComment; type: ExtendedMediaType } =
@@ -18,13 +17,10 @@
 
     <div class="trakt-comment-details">
       <div class="trakt-comment-user">
-        <p class="small secondary">
-          {comment.isReview ? m.text_review_by() : m.text_shout_by()}
-        </p>
         <UserProfileLink user={comment.user} />
       </div>
       <p class="small secondary meta-info">
-        {toHumanDate(new Date(), comment.createdAt, getLocale())}
+        {toHumanDay(comment.createdAt, getLocale())}
       </p>
     </div>
   </div>
