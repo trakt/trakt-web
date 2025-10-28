@@ -10,7 +10,9 @@ import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived, get, readable } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map, switchMap } from 'rxjs/operators';
+import { derived, readable } from 'svelte/store';
 
 /*
   FIXME: Fix the root cause.
@@ -55,14 +57,18 @@ export function useMovie(slug: string | undefined) {
     movieIntlQuery({ slug, language, enabled: !isLocaleSkipped }),
   );
 
-  const streamOn = useQuery(streamMovieQuery({ slug, country: get(country) }));
+  const streamOn = toObservable(country)
+    .pipe(
+      switchMap((country) =>
+        toObservable(useQuery(streamMovieQuery({ slug, country })))
+      ),
+    );
 
   const queries = [
     movie,
     studios,
     crew,
     intl,
-    streamOn,
     videos,
     sentiments,
   ];
@@ -85,15 +91,17 @@ export function useMovie(slug: string | undefined) {
         translations: $intl.data,
         fallback: $movie.data,
       })),
-    streamOn: derived(streamOn, ($streamOn) => {
-      if (!$streamOn.data) {
-        return;
-      }
+    streamOn: streamOn.pipe(
+      map(($streamOn) => {
+        if (!$streamOn.data) {
+          return;
+        }
 
-      return {
-        services: $streamOn.data,
-        preferred: getPreferred($streamOn.data),
-      };
-    }),
+        return {
+          services: $streamOn.data,
+          preferred: getPreferred($streamOn.data),
+        };
+      }),
+    ),
   };
 }

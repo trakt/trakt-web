@@ -10,7 +10,9 @@ import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts'
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived, get, readable } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map, switchMap } from 'rxjs/operators';
+import { derived, readable } from 'svelte/store';
 
 export function useShow(slug: string | undefined) {
   if (!slug) {
@@ -33,7 +35,12 @@ export function useShow(slug: string | undefined) {
   const seasons = useQuery(showSeasonsQuery({ slug }));
   const studios = useQuery(showStudiosQuery({ slug }));
   const crew = useQuery(showPeopleQuery({ slug }));
-  const streamOn = useQuery(streamShowQuery({ slug, country: get(country) }));
+  const streamOn = toObservable(country)
+    .pipe(
+      switchMap((country) =>
+        toObservable(useQuery(streamShowQuery({ slug, country })))
+      ),
+    );
   const sentiments = useQuery(showSentimentsQuery({ slug }));
 
   const locale = languageTag();
@@ -50,7 +57,6 @@ export function useShow(slug: string | undefined) {
     studios,
     crew,
     seasons,
-    streamOn,
     sentiments,
   ];
 
@@ -72,15 +78,17 @@ export function useShow(slug: string | undefined) {
         translations: $intl.data,
         fallback: $show.data,
       })),
-    streamOn: derived(streamOn, ($streamOn) => {
-      if (!$streamOn.data) {
-        return;
-      }
+    streamOn: streamOn.pipe(
+      map(($streamOn) => {
+        if (!$streamOn.data) {
+          return;
+        }
 
-      return {
-        services: $streamOn.data,
-        preferred: getPreferred($streamOn.data),
-      };
-    }),
+        return {
+          services: $streamOn.data,
+          preferred: getPreferred($streamOn.data),
+        };
+      }),
+    ),
   };
 }
