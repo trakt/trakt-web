@@ -1,33 +1,29 @@
 <script lang="ts">
-  import Dialog from "$lib/components/dialogs/Dialog.svelte";
-  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import Drawer from "$lib/components/drawer/Drawer.svelte";
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { CommentsProps } from "$lib/sections/summary/components/comments/CommentsProps";
-  import { writable, type Writable } from "svelte/store";
+  import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
+  import { writable } from "svelte/store";
+  import type { CommentsProps } from "../../CommentsProps";
   import type { ActiveComment } from "../models/ActiveComment";
   import { useComments } from "../useComments";
+  import VerticalList from "./_internal/VerticalList.svelte";
   import CommentThreadCard from "./CommentThreadCard.svelte";
   import { scrollActiveCommentIntoView } from "./scrollActiveCommentIntoView";
   import { useActiveComment } from "./useActiveComment";
 
-  type CommentsDialogProps = {
-    dialog: Writable<HTMLDialogElement>;
+  type CommentsDrawerProps = {
     source?: ActiveComment;
+    onClose: () => void;
   } & CommentsProps;
 
-  const {
-    dialog = writable(),
-    source,
-    media,
-    ...props
-  }: CommentsDialogProps = $props();
+  const { onClose, source, media, ...props }: CommentsDrawerProps = $props();
 
   const { current: sortType, set, options } = useToggler("comment");
 
-  // FIXME: paginate instead of getting all
-  const { comments } = $derived(
+  // FIXME: add support for pagination
+  const { comments, isLoading } = $derived(
     useComments({
       slug: media.slug,
       limit: "all",
@@ -41,26 +37,37 @@
   );
   const isReplying = (id: number) =>
     $activeComment?.id === id && $activeComment?.isReplying;
+
+  const isOpened = writable(false);
+  const hasScrolled = writable(false);
+
+  const shouldScrollIntoView = $derived((id: number) => {
+    const isMatch = id === source?.id;
+    if ($hasScrolled || !isMatch) {
+      return false;
+    }
+
+    hasScrolled.set(true);
+    return isMatch;
+  });
 </script>
 
-<Dialog
-  title={m.dialog_title_comments()}
-  {dialog}
-  onClose={reset}
+<Drawer
+  {onClose}
+  title={m.dialog_title_comment()}
+  size="large"
   metaInfo={$sortType.text()}
+  onOpened={() => isOpened.set(true)}
 >
-  <div class="trakt-comment-threads">
-    <ShadowList
+  {#if $isOpened}
+    <VerticalList
       id={`comment-threads-list-${media.slug}-${$sortType.value}`}
       items={$comments}
-      title=""
-      --height-list="min(var(--height-comment-thread-list), calc(0.7 * var(--dialog-height)))"
-      --item-width="var(--width-comment-thread-card)"
-      variant="centered"
     >
       {#snippet item(comment)}
-        <comment-thread
-          use:scrollActiveCommentIntoView={comment.id === source?.id}
+        <div
+          class="trakt-comment-thread"
+          use:scrollActiveCommentIntoView={shouldScrollIntoView(comment.id)}
         >
           <CommentThreadCard
             {comment}
@@ -70,30 +77,18 @@
             type={props.type}
             isReplying={isReplying(comment.id)}
           />
-        </comment-thread>
+        </div>
       {/snippet}
-    </ShadowList>
-  </div>
+
+      {#snippet empty()}
+        {#if $isLoading}
+          <LoadingIndicator />
+        {/if}
+      {/snippet}
+    </VerticalList>
+  {/if}
 
   {#snippet badge()}
     <Toggler value={$sortType.value} onChange={set} {options} />
   {/snippet}
-</Dialog>
-
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-comment-threads {
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    @include for-mobile {
-      :global(.trakt-list-header) {
-        display: none;
-      }
-    }
-  }
-</style>
+</Drawer>

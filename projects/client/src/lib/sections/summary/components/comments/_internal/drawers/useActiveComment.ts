@@ -1,6 +1,6 @@
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
-import type { ActiveComment } from '$lib/sections/summary/components/comments/_internal/models/ActiveComment.ts';
 import { derived, writable } from 'svelte/store';
+import type { ActiveComment } from '../models/ActiveComment.ts';
 
 export function useActiveComment(source?: ActiveComment) {
   const activeComment = writable<ActiveComment | undefined>(source);

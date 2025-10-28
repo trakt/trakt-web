@@ -8,8 +8,8 @@
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
   import { writable } from "svelte/store";
   import AddCommentAction from "./_internal/comment-actions/AddCommentAction.svelte";
-  import CommentsDialog from "./_internal/dialog/CommentsDialog.svelte";
   import PostCommentDialog from "./_internal/dialog/PostCommentDialog.svelte";
+  import CommentsDrawer from "./_internal/drawers/CommentsDrawer.svelte";
   import type { ActiveComment } from "./_internal/models/ActiveComment";
   import { useComments } from "./_internal/useComments";
   import type { CommentsProps } from "./CommentsProps";
@@ -26,12 +26,14 @@
     }),
   );
 
-  const dialog = writable<HTMLDialogElement>();
   const postCommentDialog = writable<HTMLDialogElement>();
   const drilldownSource = writable<ActiveComment | undefined>(undefined);
 
+  const isOpen = writable(false);
+  const onClose = () => isOpen.set(false);
+
   const onDrilldown = (comment?: ActiveComment) => {
-    $dialog.showModal();
+    isOpen.set(true);
     drilldownSource.set(comment);
   };
 </script>
@@ -81,5 +83,8 @@
     {media}
     {...props}
   />
-  <CommentsDialog source={$drilldownSource} {dialog} {media} {...props} />
+
+  {#if $isOpen}
+    <CommentsDrawer {onClose} source={$drilldownSource} {media} {...props} />
+  {/if}
 </RenderFor>

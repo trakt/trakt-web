@@ -1,27 +1,23 @@
-import { scrollActiveCommentIntoView } from '$lib/sections/summary/components/comments/_internal/dialog/scrollActiveCommentIntoView.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import { scrollActiveCommentIntoView } from './scrollActiveCommentIntoView.ts';
 
 describe('action: scrollActiveCommentIntoView', () => {
-  beforeEach(() => {
-    vi.useFakeTimers({ toFake: ['requestAnimationFrame'] });
-  });
+  const node = document.createElement('div');
+  Object.defineProperty(node, 'offsetHeight', { value: 100 });
 
   it('should scroll into view when isActiveComment is true', async () => {
-    const node = document.createElement('div');
     const scrollIntoViewMock = vi.fn();
     node.scrollIntoView = scrollIntoViewMock;
 
     await renderStore(() => scrollActiveCommentIntoView(node, true));
 
     expect(scrollIntoViewMock).toHaveBeenCalledWith({
-      behavior: 'instant',
-      inline: 'center',
+      behavior: 'smooth',
     });
   });
 
   it('should not scroll into view when isActiveComment is false', async () => {
-    const node = document.createElement('div');
     const scrollIntoViewMock = vi.fn();
     node.scrollIntoView = scrollIntoViewMock;
 
@@ -31,7 +27,6 @@ describe('action: scrollActiveCommentIntoView', () => {
   });
 
   it('should update scroll position when isActiveComment changes', async () => {
-    const node = document.createElement('div');
     const scrollIntoViewMock = vi.fn();
     node.scrollIntoView = scrollIntoViewMock;
 
@@ -41,8 +36,7 @@ describe('action: scrollActiveCommentIntoView', () => {
     action.update(true);
 
     expect(scrollIntoViewMock).toHaveBeenCalledWith({
-      behavior: 'instant',
-      inline: 'center',
+      behavior: 'smooth',
     });
   });
 });
