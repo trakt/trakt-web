@@ -46,8 +46,10 @@ export function useScrollHistoryAction(
     return {
       update: (updatedId: string) => {
         resetHandlers(updatedId);
+
+        const scrollProp = type === 'horizontal' ? 'left' : 'top';
         container.scrollTo({
-          left: 0,
+          [scrollProp]: 0,
           behavior: 'instant',
         });
       },
