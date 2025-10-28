@@ -14,6 +14,7 @@
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
   import type { MediaCardProps } from "./MediaCardProps";
@@ -112,3 +113,35 @@
     </CardFooter>
   </LandscapeCard>
 {/if}
+
+{#if rest.variant === "start"}
+  <PortraitCard>
+    {@render content(media.poster.url.thumb)}
+    <CardFooter {action}>
+      <div class="trakt-card-start-footer">
+        <p
+          class="trakt-card-title small ellipsis"
+          class:small={variant !== "activity"}
+        >
+          {media.title}
+        </p>
+        <p class="trakt-card-subtitle small ellipsis">
+          {#if "episode" in rest}
+            {episodeSubtitle(rest.episode)} - {rest.episode.title}
+          {:else}
+            {toHumanDuration({ minutes: media.runtime }, languageTag())}
+          {/if}
+        </p>
+      </div>
+    </CardFooter>
+  </PortraitCard>
+{/if}
+
+<style>
+  .trakt-card-start-footer {
+    :global(.trakt-media-icon-tag),
+    :global(.trakt-text-tag) {
+      color: var(--color-text-secondary);
+    }
+  }
+</style>

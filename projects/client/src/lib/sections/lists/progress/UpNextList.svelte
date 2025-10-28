@@ -10,7 +10,7 @@
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useStablePaginated } from "../stores/useStablePaginated";
-  import WatchlistItem from "../watchlist/WatchlistItem.svelte";
+  import StartWatchingItem from "./_internal/StartWatchingItem.svelte";
   import UpNextItem from "./UpNextItem.svelte";
   import { useHiddenShows } from "./useHiddenShows";
   import { useUpNextList } from "./useUpNextList";
@@ -60,11 +60,7 @@
   >
     {#snippet item(mediaItem)}
       {#if upNextIntent === "start"}
-        <WatchlistItem
-          type={"show" in mediaItem ? "show" : "movie"}
-          media={"show" in mediaItem ? mediaItem.show : mediaItem}
-          mode={type === "media" ? "mixed" : "standalone"}
-        />
+        <StartWatchingItem entry={mediaItem} style="cover" />
       {:else if "show" in mediaItem}
         <UpNextItem
           style="cover"

@@ -107,7 +107,7 @@
             {toHumanDate(new Date(), rest.date, getLocale())}
           {/if}
         </p>
-      {:else if rest.type === "episode"}
+      {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
         <p class="trakt-card-title ellipsis">
           {episodeNumberLabel({
             seasonNumber: rest.episode.season,

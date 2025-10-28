@@ -103,7 +103,6 @@
       {tag}
       {action}
       type="episode"
-      variant="landscape"
       style="summary"
     />
   {/if}
