@@ -19,13 +19,20 @@
     actions: externalActions,
     useList,
     filter,
+    filterOverride,
     metaInfo,
     drilldownLink,
     variant: externalVariant,
   }: MediaListProps<T, M> = $props();
 
   const { list, isLoading } = $derived(
-    useList({ type, page: 1, limit: DEFAULT_PAGE_SIZE, filter }),
+    useList({
+      type,
+      page: 1,
+      limit: DEFAULT_PAGE_SIZE,
+      filter,
+      filterOverride,
+    }),
   );
 
   const defaultVariant = useDefaultCardVariant(type);

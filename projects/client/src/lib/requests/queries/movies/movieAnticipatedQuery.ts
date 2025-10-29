@@ -36,19 +36,23 @@ function mapToAnticipatedMovie({
 }
 
 const movieAnticipatedRequest = (
-  { fetch, limit, page, filter, search }: MovieAnticipatedParams,
-) =>
-  api({ fetch })
+  { fetch, limit, page, filter, filterOverride, search }:
+    MovieAnticipatedParams,
+) => {
+  const filterParams = filterOverride?.movie ?? filter;
+
+  return api({ fetch })
     .movies
     .anticipated({
       query: {
         extended: 'full,images,colors',
         page,
         limit,
-        ...filter,
+        ...filterParams,
         ...search,
       },
     });
+};
 
 export const movieAnticipatedQuery = defineQuery({
   key: 'movieAnticipated',
@@ -61,7 +65,9 @@ export const movieAnticipatedQuery = defineQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.movie ?? params.filter,
+    ),
     ...getRecordDependencies(params.search),
   ],
   request: movieAnticipatedRequest,

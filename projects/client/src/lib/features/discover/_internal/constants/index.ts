@@ -11,3 +11,5 @@ export const DISCOVER_ROUTES = [
   UrlBuilder.startWatching('[user]'),
   UrlBuilder.lists.user('[user]'),
 ] as const;
+
+export const SEASONAL_STORAGE_KEY = 'trakt_seasonal_filter';

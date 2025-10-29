@@ -6,6 +6,7 @@
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
+  import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
@@ -74,6 +75,7 @@
       <RenderFor audience="authenticated">
         <RenderForFeature flag={FeatureFlag.Discover}>
           {#snippet enabled()}
+            <SeasonalToggle />
             <FilterButton size="small" />
           {/snippet}
 

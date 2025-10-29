@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import TrendingListItem from "./TrendingListItem.svelte";
@@ -11,9 +12,16 @@
     drilldownLabel: string;
     type: DiscoverMode;
     search?: Record<string, string>;
+    filterOverride?: FilterOverrideParams;
   };
 
-  const { title, drilldownLabel, type, search }: TrendingListProps = $props();
+  const {
+    title,
+    drilldownLabel,
+    type,
+    search,
+    filterOverride,
+  }: TrendingListProps = $props();
   const { filterMap } = useFilter();
 </script>
 
@@ -24,6 +32,7 @@
   {drilldownLabel}
   {type}
   filter={$filterMap}
+  {filterOverride}
   useList={(params) =>
     useTrendingList({
       ...params,

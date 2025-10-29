@@ -15,9 +15,11 @@ export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 type RecommendedMoviesParams = LimitParams & ApiParams & FilterParams;
 
 const recommendedMoviesRequest = (
-  { fetch, limit, filter }: RecommendedMoviesParams,
-) =>
-  api({ fetch })
+  { fetch, limit, filter, filterOverride }: RecommendedMoviesParams,
+) => {
+  const filterParams = filterOverride?.movie ?? filter;
+
+  return api({ fetch })
     .recommendations
     .movies
     .recommend({
@@ -25,11 +27,12 @@ const recommendedMoviesRequest = (
         extended: 'full,images,colors',
         ignore_collected: true,
         limit,
-        ...filter,
+        ...filterParams,
         // FIXME: remove when we have tri-state filter toggles
         ignore_watched: true,
       },
     });
+};
 
 export const recommendedMoviesQuery = defineQuery({
   key: 'recommendedMovies',
@@ -42,7 +45,9 @@ export const recommendedMoviesQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.movie ?? params.filter,
+    ),
   ],
   request: recommendedMoviesRequest,
   mapper: (response) => response.body.map(mapToMovieEntry),

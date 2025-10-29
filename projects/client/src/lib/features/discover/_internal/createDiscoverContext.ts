@@ -9,6 +9,7 @@ import {
 export function createDiscoverContext(
   mode: DiscoverMode,
   routes: readonly string[],
+  useSeasonalFilters: boolean,
 ) {
   const ctx = setContext(
     DISCOVER_CONTEXT_KEY,
@@ -16,6 +17,7 @@ export function createDiscoverContext(
       {
         mode: writable(mode),
         routes: readable(routes),
+        useSeasonalFilters: writable(useSeasonalFilters),
       },
   );
 

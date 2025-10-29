@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
+  import type { FilterOverrideParams } from "$lib/requests/models/FilterParams";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { extractWatchWindowParam } from "./extractWatchWindowParam";
@@ -12,9 +13,15 @@
     title: string;
     drilldownLabel: string;
     type: DiscoverMode;
+    filterOverride?: FilterOverrideParams;
   };
 
-  const { title, drilldownLabel, type }: RecommendationListProps = $props();
+  const {
+    title,
+    drilldownLabel,
+    type,
+    filterOverride,
+  }: RecommendationListProps = $props();
   const { filterMap } = useFilter();
 </script>
 
@@ -28,6 +35,7 @@
     ...$filterMap,
     ...extractWatchWindowParam(page.url.searchParams),
   }}
+  {filterOverride}
   useList={useRecommendedList}
   urlBuilder={UrlBuilder.recommended}
 >
