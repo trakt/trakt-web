@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Calendario"
     },
+    "text_cta_up_next_media": {
+      "default": "I tuoi film e serie TV. Al tuo ritmo. Riprendi esattamente da dove ti sei fermato. Cosa stai guardando?"
+    },
     "text_cta_up_next": {
       "default": "Le tue serie TV. Il tuo ritmo. Torna esattamente dove hai interrotto. Cosa stai guardando?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "I tuoi film. Al tuo ritmo. Riprendi esattamente da dove ti sei fermato. Cosa stai guardando?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "La tua coda ti aspetta. Aggiungi le serie TV e i film che sei impaziente di iniziare a guardare. Cosa c'è dopo?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "La tua coda ti aspetta. Aggiungi le serie TV che sei impaziente di iniziare a guardare. Cosa c'è dopo?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "La tua coda ti aspetta. Aggiungi i film che sei impaziente di iniziare a guardare. Cosa c'è dopo?"
     },
     "text_cta_watchlist_released": {
       "default": "Guardalo. Salvalo. Guardalo più tardi. Inizia a curare la tua lista di film personali."
     },
+    "text_cta_upcoming_media": {
+      "default": "La tua cronologia. Guarda cosa sta per uscire con un elenco completo degli episodi e dei film in arrivo che ti interessano."
+    },
     "text_cta_upcoming": {
       "default": "La tua cronologia. Guarda cosa uscirà, con un elenco completo degli episodi in arrivo che ti interessano."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "La tua cronologia. Guarda cosa sta per uscire con un elenco completo dei film in arrivo che ti interessano."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Luci, motore… niente? Aggiungi titoli alla tua lista e che il binge-watching abbia inizio!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "I tuoi preferiti. La tua playlist. Metti in risalto le serie TV che ti hanno colpito. Quelli che ti hanno fatto ridere, piangere o ripensare a tutto. I tuoi preferiti di sempre, salvati per ogni umore e momento."
     },
-    "link_text_browse_more": {
-      "default": "Sfoglia di più"
+    "link_text_discover_more": {
+      "default": "Scopri di più"
     },
-    "link_text_explore_more": {
-      "default": "Esplora di più"
+    "link_label_discover_more": {
+      "default": "Scopri di più"
     },
-    "link_text_browse_shows": {
-      "default": "Sfoglia serie TV"
+    "link_text_discover_media": {
+      "default": "Scopri contenuti"
     },
-    "link_text_browse_movies": {
-      "default": "Sfoglia film"
+    "link_label_discover_media": {
+      "default": "Scopri contenuti"
     },
-    "link_text_explore_shows": {
-      "default": "Esplora serie TV"
+    "link_text_discover_shows": {
+      "default": "Scopri serie TV"
     },
-    "link_text_explore_movies": {
-      "default": "Esplora film"
+    "link_label_discover_shows": {
+      "default": "Scopri serie TV"
     },
-    "link_label_browse_shows": {
-      "default": "Sfoglia serie TV"
+    "link_text_discover_movies": {
+      "default": "Scopri film"
     },
-    "link_label_browse_movies": {
-      "default": "Sfoglia film"
-    },
-    "link_label_explore_shows": {
-      "default": "Esplora serie TV"
-    },
-    "link_label_explore_movies": {
-      "default": "Esplora film"
+    "link_label_discover_movies": {
+      "default": "Scopri film"
     },
     "header_comment_reactions": {
       "default": "Reazioni ai commenti"

@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Kalender"
     },
+    "text_cta_up_next_media": {
+      "default": "Dine serier og film. I dit tempo. Hop tilbage præcis hvor du slap. Hvad ser du lige nu?"
+    },
     "text_cta_up_next": {
       "default": "Dine serier. Dit tempo. Hop tilbage lige præcis hvor du slap. Hvad ser du lige nu?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Dine film. I dit tempo. Hop tilbage præcis hvor du slap. Hvad ser du lige nu?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Din kø venter. Tilføj de serier og film, du er spændt på at starte med at se. Hvad er det næste?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Din kø venter. Tilføj de serier, du er spændt på at starte med at se. Hvad er det næste?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Din kø venter. Tilføj de film, du er spændt på at starte med at se. Hvad er det næste?"
     },
     "text_cta_watchlist_released": {
       "default": "Se det. Gem det. Se det senere. Begynd at kuratere din personlige filmliste."
     },
+    "text_cta_upcoming_media": {
+      "default": "Din tidslinje. Se hvad der kommer, med en komplet liste over kommende afsnit og film, du interesserer dig for."
+    },
     "text_cta_upcoming": {
       "default": "Din tidslinje. Se hvad der kommer næste gang med en fuld liste over kommende afsnit, du er interesseret i."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Din tidslinje. Se hvad der kommer, med en komplet liste over kommende film, du interesserer dig for."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Lys, kamera… ingenting? Tilføj titler til din liste, og lad binget begynde!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Dine favoritter. Din playliste. Fremhæv de serier, der satte et præg. Dem, der fik dig til at grine, græde eller tænke det hele igennem. Dine favoritter gennem tiderne, gemt til ethvert humør og øjeblik."
     },
-    "link_text_browse_more": {
-      "default": "Se mere"
+    "link_text_discover_more": {
+      "default": "Opdag mere"
     },
-    "link_text_explore_more": {
-      "default": "Udforsk mere"
+    "link_label_discover_more": {
+      "default": "Opdag mere"
     },
-    "link_text_browse_shows": {
-      "default": "Gennemse serier"
+    "link_text_discover_media": {
+      "default": "Opdag medier"
     },
-    "link_text_browse_movies": {
-      "default": "Gennemse film"
+    "link_label_discover_media": {
+      "default": "Opdag medier"
     },
-    "link_text_explore_shows": {
-      "default": "Udforsk serier"
+    "link_text_discover_shows": {
+      "default": "Opdag serier"
     },
-    "link_text_explore_movies": {
-      "default": "Udforsk film"
+    "link_label_discover_shows": {
+      "default": "Opdag serier"
     },
-    "link_label_browse_shows": {
-      "default": "Gennemse serier"
+    "link_text_discover_movies": {
+      "default": "Opdag film"
     },
-    "link_label_browse_movies": {
-      "default": "Gennemse film"
-    },
-    "link_label_explore_shows": {
-      "default": "Udforsk serier"
-    },
-    "link_label_explore_movies": {
-      "default": "Udforsk film"
+    "link_label_discover_movies": {
+      "default": "Opdag film"
     },
     "header_comment_reactions": {
       "default": "Kommentarreaktioner"

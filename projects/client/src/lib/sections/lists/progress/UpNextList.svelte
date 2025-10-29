@@ -78,11 +78,23 @@
     {/snippet}
 
     {#snippet ctaItem()}
-      <CtaItem cta={{ type: "up-next" }} variant="card" />
+      <CtaItem
+        cta={{
+          type: intent === "start" ? "start-watching" : "up-next",
+          mediaType: type === "media" ? undefined : type,
+        }}
+        variant="card"
+      />
     {/snippet}
 
     {#snippet empty()}
-      <CtaItem cta={{ type: "up-next" }} variant="placeholder" />
+      <CtaItem
+        cta={{
+          type: intent === "start" ? "start-watching" : "up-next",
+          mediaType: type === "media" ? undefined : type,
+        }}
+        variant="placeholder"
+      />
     {/snippet}
   </DrillableMediaList>
 {/snippet}

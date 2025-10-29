@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Kalender"
     },
+    "text_cta_up_next_media": {
+      "default": "Je series en films. Jouw tempo. Ga verder waar je gebleven bent. Wat ben je nu aan het kijken?"
+    },
     "text_cta_up_next": {
       "default": "Je series. Jouw tempo. Spring terug naar waar je gebleven was. Wat ben je momenteel aan het kijken?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Je films. Jouw tempo. Ga verder waar je gebleven bent. Wat ben je nu aan het kijken?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Je wachtrij wacht op je. Voeg de series en films toe die je graag wilt kijken. Wat is de volgende?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Je wachtrij wacht op je. Voeg de series toe die je graag wilt kijken. Wat is de volgende?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Je wachtrij wacht op je. Voeg de films toe die je graag wilt kijken. Wat is de volgende?"
     },
     "text_cta_watchlist_released": {
       "default": "Bekijk het. Bewaar het. Kijk het later. Begin met het samenstellen van je persoonlijke filmcollectie."
     },
+    "text_cta_upcoming_media": {
+      "default": "Je tijdlijn. Bekijk wat er binnenkort uitkomt met een complete lijst van aankomende afleveringen en films die je interesseren."
+    },
     "text_cta_upcoming": {
       "default": "Je tijdlijn. Bekijk wat er volgende week uitkomt met een complete lijst van komende afleveringen die je interesseren."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Je tijdlijn. Bekijk wat er binnenkort uitkomt met een complete lijst van aankomende films die je interesseren."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Licht, camera… niets? Voeg titels toe aan je lijst en laat de binge beginnen!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Je favorieten. Je afspeellijst. Zet de series in de schijnwerpers die indruk hebben gemaakt. Degene die je aan het lachen maakten, lieten huilen of je alles lieten heroverwegen. Je favorieten aller tijden, bewaard voor elke stemming en elk moment."
     },
-    "link_text_browse_more": {
-      "default": "Meer bekijken"
+    "link_text_discover_more": {
+      "default": "Ontdek meer"
     },
-    "link_text_explore_more": {
-      "default": "Meer ontdekken"
+    "link_label_discover_more": {
+      "default": "Ontdek meer"
     },
-    "link_text_browse_shows": {
-      "default": "Series"
+    "link_text_discover_media": {
+      "default": "Ontdek media"
     },
-    "link_text_browse_movies": {
-      "default": "Films"
+    "link_label_discover_media": {
+      "default": "Ontdek media"
     },
-    "link_text_explore_shows": {
-      "default": "Series verkennen"
+    "link_text_discover_shows": {
+      "default": "Ontdek series"
     },
-    "link_text_explore_movies": {
-      "default": "Films verkennen"
+    "link_label_discover_shows": {
+      "default": "Ontdek series"
     },
-    "link_label_browse_shows": {
-      "default": "Series"
+    "link_text_discover_movies": {
+      "default": "Ontdek films"
     },
-    "link_label_browse_movies": {
-      "default": "Films"
-    },
-    "link_label_explore_shows": {
-      "default": "Series verkennen"
-    },
-    "link_label_explore_movies": {
-      "default": "Films verkennen"
+    "link_label_discover_movies": {
+      "default": "Ontdek films"
     },
     "header_comment_reactions": {
       "default": "Reacties op opmerkingen"

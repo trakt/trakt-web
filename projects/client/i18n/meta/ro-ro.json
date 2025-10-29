@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Calendar"
     },
+    "text_cta_up_next_media": {
+      "default": "Seriile și filmele tale. În ritmul tău. Revino exact de unde ai rămas. Ce urmărești?"
+    },
     "text_cta_up_next": {
       "default": "Seriile tale. În ritmul tău. Revino exact de unde ai rămas. Ce urmărești în prezent?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Filmele tale. În ritmul tău. Revino exact de unde ai rămas. Ce urmărești?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Lista ta de așteptare te așteaptă. Adaugă seriile și filmele pe care ești nerăbdător să le vezi. Ce urmează?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Lista ta de așteptare te așteaptă. Adaugă seriile pe care ești nerăbdător să le vezi. Ce urmează?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Lista ta de așteptare te așteaptă. Adaugă filmele pe care ești nerăbdător să le vezi. Ce urmează?"
     },
     "text_cta_watchlist_released": {
       "default": "Vezi. Salvează. Urmărește mai târziu. Începe să-ți creezi lista personală de filme."
     },
+    "text_cta_upcoming_media": {
+      "default": "Cronologia ta. Vezi ce urmează cu o listă completă a episoadelor și filmelor care te interesează."
+    },
     "text_cta_upcoming": {
       "default": "Cronologia ta. Vezi ce urmează cu o listă completă a episoadelor viitoare care te interesează."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Cronologia ta. Vezi ce urmează cu o listă completă a filmelor care te interesează."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Lumini, camera… nimic? Adaugă titluri în lista ta și lasă maratonul să înceapă!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Preferatele tale. Lista ta de redare. Pune în lumina reflectoarelor serialele care te-au marcat. Cele care te-au făcut să râzi, să plângi sau să te gândești la tot. Favoritele tale, salvate pentru fiecare stare și moment."
     },
-    "link_text_browse_more": {
-      "default": "Vezi mai mult"
+    "link_text_discover_more": {
+      "default": "Descoperă mai mult"
     },
-    "link_text_explore_more": {
-      "default": "Explorează mai mult"
+    "link_label_discover_more": {
+      "default": "Descoperă mai mult"
     },
-    "link_text_browse_shows": {
-      "default": "Răsfoiește seriale"
+    "link_text_discover_media": {
+      "default": "Descoperă conținut"
     },
-    "link_text_browse_movies": {
-      "default": "Răsfoiește filme"
+    "link_label_discover_media": {
+      "default": "Descoperă conținut"
     },
-    "link_text_explore_shows": {
-      "default": "Explorează seriale"
+    "link_text_discover_shows": {
+      "default": "Descoperă seriale"
     },
-    "link_text_explore_movies": {
-      "default": "Explorează filme"
+    "link_label_discover_shows": {
+      "default": "Descoperă seriale"
     },
-    "link_label_browse_shows": {
-      "default": "Răsfoiește seriale"
+    "link_text_discover_movies": {
+      "default": "Descoperă filme"
     },
-    "link_label_browse_movies": {
-      "default": "Răsfoiește filme"
-    },
-    "link_label_explore_shows": {
-      "default": "Explorează seriale"
-    },
-    "link_label_explore_movies": {
-      "default": "Explorează filme"
+    "link_label_discover_movies": {
+      "default": "Descoperă filme"
     },
     "header_comment_reactions": {
       "default": "Reacții la comentarii"

@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Calendrier"
     },
+    "text_cta_up_next_media": {
+      "default": "Vos séries et films. À votre rythme. Reprenez là où vous vous êtes arrêté. Que regardez-vous en ce moment ?"
+    },
     "text_cta_up_next": {
       "default": "Vos séries. Votre rythme. Reprenez là où vous vous êtes arrêté. Que regardez-vous actuellement ?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Vos films. À votre rythme. Reprenez là où vous vous êtes arrêté. Que regardez-vous en ce moment ?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Votre liste d'attente vous attend. Ajoutez les séries et films que vous avez hâte de voir. Quelle est la suite ?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Votre liste d'attente vous attend. Ajoutez les séries que vous avez hâte de voir. Quelle est la suite ?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Votre liste d'attente vous attend. Ajoutez les films que vous avez hâte de voir. Quelle est la suite ?"
     },
     "text_cta_watchlist_released": {
       "default": "Voyez-le. Enregistrez-le. Regardez-le plus tard. Commencez à créer votre liste de lecture personnelle."
     },
+    "text_cta_upcoming_media": {
+      "default": "Votre calendrier. Découvrez les prochaines sorties avec une liste complète des épisodes et films à venir qui vous intéressent."
+    },
     "text_cta_upcoming": {
       "default": "Votre fil d'actualité. Découvrez les nouveautés avec une liste complète des épisodes à venir qui vous intéressent."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Votre calendrier. Découvrez les prochaines sorties avec une liste complète des films à venir qui vous intéressent."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Moteur, action… rien ? Ajoutez des titres à votre liste de lecture et que le marathon commence !"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Vos favoris. Votre playlist. Mettez en lumière les séries qui vous ont marqué. Ceux qui vous ont fait rire, pleurer, ou repenser à tout. Vos coups de cœur, sauvegardés pour chaque humeur et chaque moment."
     },
-    "link_text_browse_more": {
-      "default": "Parcourir plus"
+    "link_text_discover_more": {
+      "default": "Découvrir plus"
     },
-    "link_text_explore_more": {
-      "default": "Explorer plus"
+    "link_label_discover_more": {
+      "default": "Découvrir plus"
     },
-    "link_text_browse_shows": {
-      "default": "Explorer séries"
+    "link_text_discover_media": {
+      "default": "Découvrez des contenus"
     },
-    "link_text_browse_movies": {
-      "default": "Explorer films"
+    "link_label_discover_media": {
+      "default": "Découvrez des contenus"
     },
-    "link_text_explore_shows": {
-      "default": "Découvrir séries"
+    "link_text_discover_shows": {
+      "default": "Découvrez les séries"
     },
-    "link_text_explore_movies": {
-      "default": "Découvrir films"
+    "link_label_discover_shows": {
+      "default": "Découvrez les séries"
     },
-    "link_label_browse_shows": {
-      "default": "Explorer séries"
+    "link_text_discover_movies": {
+      "default": "Découvrez les films"
     },
-    "link_label_browse_movies": {
-      "default": "Explorer films"
-    },
-    "link_label_explore_shows": {
-      "default": "Découvrir séries"
-    },
-    "link_label_explore_movies": {
-      "default": "Découvrir films"
+    "link_label_discover_movies": {
+      "default": "Découvrez les films"
     },
     "header_comment_reactions": {
       "default": "Réactions aux commentaires"

@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Kalender"
     },
+    "text_cta_up_next_media": {
+      "default": "Dina serier och filmer. I din takt. Hoppa tillbaka exakt där du slutade. Vad tittar du på just nu?"
+    },
     "text_cta_up_next": {
       "default": "Dina serier. Din takt. Hoppa tillbaka precis där du slutade. Vad tittar du på just nu?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Dina filmer. I din takt. Hoppa tillbaka exakt där du slutade. Vad tittar du på just nu?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Din kö väntar. Lägg till de serier och filmer du är spänd på att börja titta på. Vad blir nästa?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Din kö väntar. Lägg till de serier du är spänd på att börja titta på. Vad blir nästa?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Din kö väntar. Lägg till de filmer du är spänd på att börja titta på. Vad blir nästa?"
     },
     "text_cta_watchlist_released": {
       "default": "Se det. Spara det. Titta på det senare. Börja kurera din personliga filmlista."
     },
+    "text_cta_upcoming_media": {
+      "default": "Din tidslinje. Se vad som kommer härnäst med en komplett lista över kommande avsnitt och filmer du bryr dig om."
+    },
     "text_cta_upcoming": {
       "default": "Din tidslinje. Se vad som kommer härnäst med en komplett lista över kommande avsnitt som du bryr dig om."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Din tidslinje. Se vad som kommer härnäst med en komplett lista över kommande filmer du bryr dig om."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Varsågod, kamera… ingenting? Lägg till titlar i din lista och låt binget börja!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Dina favoriter. Din spellista. Spotlights de serier som gjort ett avtryck. De som fick dig att skratta, gråta eller tänka om allt. Dina favoriter genom tiderna, sparade för varje humör och ögonblick."
     },
-    "link_text_browse_more": {
-      "default": "Utforska mer"
+    "link_text_discover_more": {
+      "default": "Upptäck mer"
     },
-    "link_text_explore_more": {
-      "default": "Utforska mer"
+    "link_label_discover_more": {
+      "default": "Upptäck mer"
     },
-    "link_text_browse_shows": {
-      "default": "Bläddra serier"
+    "link_text_discover_media": {
+      "default": "Upptäck media"
     },
-    "link_text_browse_movies": {
-      "default": "Bläddra filmer"
+    "link_label_discover_media": {
+      "default": "Upptäck media"
     },
-    "link_text_explore_shows": {
-      "default": "Utforska serier"
+    "link_text_discover_shows": {
+      "default": "Upptäck serier"
     },
-    "link_text_explore_movies": {
-      "default": "Utforska filmer"
+    "link_label_discover_shows": {
+      "default": "Upptäck serier"
     },
-    "link_label_browse_shows": {
-      "default": "Bläddra serier"
+    "link_text_discover_movies": {
+      "default": "Upptäck filmer"
     },
-    "link_label_browse_movies": {
-      "default": "Bläddra filmer"
-    },
-    "link_label_explore_shows": {
-      "default": "Utforska serier"
-    },
-    "link_label_explore_movies": {
-      "default": "Utforska filmer"
+    "link_label_discover_movies": {
+      "default": "Upptäck filmer"
     },
     "header_comment_reactions": {
       "default": "Kommentarreaktioner"

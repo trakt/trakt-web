@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Calendario"
     },
+    "text_cta_up_next_media": {
+      "default": "Tus series y películas. A tu ritmo. Retoma exactamente donde lo dejaste. ¿Qué estás viendo?"
+    },
     "text_cta_up_next": {
       "default": "Tus series. A tu ritmo. Vuelve exactamente donde lo dejaste. ¿Qué estás viendo actualmente?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Tus películas. A tu ritmo. Retoma exactamente donde lo dejaste. ¿Qué estás viendo?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Tu cola te espera. Añade las series y películas que te entusiasma empezar a ver. ¿Qué sigue?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Tu cola te espera. Añade las series que te entusiasma empezar a ver. ¿Qué sigue?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Tu cola te espera. Añade las películas que te entusiasma empezar a ver. ¿Qué sigue?"
     },
     "text_cta_watchlist_released": {
       "default": "Mírala. Guárdala. Mírala más tarde. Empieza a crear tu lista personal de películas."
     },
+    "text_cta_upcoming_media": {
+      "default": "Tu cronología. Mira lo que se viene con una lista completa de episodios y películas que te importan."
+    },
     "text_cta_upcoming": {
       "default": "Tu cronología. Ve lo que se estrena a continuación con una lista completa de los episodios próximos que te importan."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Tu cronología. Mira lo que se viene con una lista completa de películas que te importan."
     },
     "text_cta_watchlist_unreleased": {
       "default": "¡Luces, cámara… nada? Añade títulos a tu lista y que empiece el maratón."
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Tus favoritos. Tu lista de reproducción. Destaca las series que te han marcado. Aquellas que te hicieron reír, llorar o replantearte todo. Tus favoritos de siempre, guardados para cada estado de ánimo y momento."
     },
-    "link_text_browse_more": {
-      "default": "Explorar más"
+    "link_text_discover_more": {
+      "default": "Descubrir más"
     },
-    "link_text_explore_more": {
-      "default": "Explora más"
+    "link_label_discover_more": {
+      "default": "Descubrir más"
     },
-    "link_text_browse_shows": {
-      "default": "Explorar series"
+    "link_text_discover_media": {
+      "default": "Descubre contenido"
     },
-    "link_text_browse_movies": {
-      "default": "Explorar películas"
+    "link_label_discover_media": {
+      "default": "Descubre contenido"
     },
-    "link_text_explore_shows": {
-      "default": "Descubrir series"
+    "link_text_discover_shows": {
+      "default": "Descubre series"
     },
-    "link_text_explore_movies": {
-      "default": "Descubrir películas"
+    "link_label_discover_shows": {
+      "default": "Descubre series"
     },
-    "link_label_browse_shows": {
-      "default": "Explorar series"
+    "link_text_discover_movies": {
+      "default": "Descubre películas"
     },
-    "link_label_browse_movies": {
-      "default": "Explorar películas"
-    },
-    "link_label_explore_shows": {
-      "default": "Descubrir series"
-    },
-    "link_label_explore_movies": {
-      "default": "Descubrir películas"
+    "link_label_discover_movies": {
+      "default": "Descubre películas"
     },
     "header_comment_reactions": {
       "default": "Reacciones a los comentarios"

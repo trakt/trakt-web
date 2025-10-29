@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Kalendarz"
     },
+    "text_cta_up_next_media": {
+      "default": "Twoje seriale i filmy. W Twoim tempie. Wracaj dokładnie tam, gdzie skończyłeś. Co teraz oglądasz?"
+    },
     "text_cta_up_next": {
       "default": "Twoje seriale. Twoje tempo. Wróć dokładnie tam, gdzie skończyłeś. Co aktualnie oglądasz?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Twoje filmy. W Twoim tempie. Wracaj dokładnie tam, gdzie skończyłeś. Co teraz oglądasz?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Twoja kolejka czeka. Dodaj seriale i filmy, które chcesz zacząć oglądać. Co dalej?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Twoja kolejka czeka. Dodaj seriale, które chcesz zacząć oglądać. Co dalej?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Twoja kolejka czeka. Dodaj filmy, które chcesz zacząć oglądać. Co dalej?"
     },
     "text_cta_watchlist_released": {
       "default": "Zobacz to. Zapisz to. Obejrzyj później. Zacznij kuratorować swoją osobistą kolejkę filmową."
     },
+    "text_cta_upcoming_media": {
+      "default": "Twoja oś czasu. Zobacz, co nadchodzi, z pełną listą nadchodzących odcinków i filmów, które Cię interesują."
+    },
     "text_cta_upcoming": {
       "default": "Twoja oś czasu. Zobacz, co pojawi się w następnej kolejności, z pełną listą nadchodzących odcinków, które Cię interesują."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Twoja oś czasu. Zobacz, co nadchodzi, z pełną listą nadchodzących filmów, które Cię interesują."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Światła, kamera… nic? Dodaj tytuły do swojej listy i rozpocznij binge-watching!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Twoi ulubieńcy. Twoja lista odtwarzania. Pokaż seriale, które zrobiły wrażenie. Te, które sprawiły, że się śmiałeś, płakałeś lub przemyślałeś wszystko. Twoi ulubieńcy wszech czasów, zapisani na każdy nastrój i moment."
     },
-    "link_text_browse_more": {
-      "default": "Przeglądaj więcej"
+    "link_text_discover_more": {
+      "default": "Odkryj więcej"
     },
-    "link_text_explore_more": {
-      "default": "Odkrywaj więcej"
+    "link_label_discover_more": {
+      "default": "Odkryj więcej"
     },
-    "link_text_browse_shows": {
-      "default": "Przeglądaj seriale"
+    "link_text_discover_media": {
+      "default": "Odkryj multimedia"
     },
-    "link_text_browse_movies": {
-      "default": "Przeglądaj filmy"
+    "link_label_discover_media": {
+      "default": "Odkryj multimedia"
     },
-    "link_text_explore_shows": {
-      "default": "Odkrywaj seriale"
+    "link_text_discover_shows": {
+      "default": "Odkryj seriale"
     },
-    "link_text_explore_movies": {
-      "default": "Odkrywaj filmy"
+    "link_label_discover_shows": {
+      "default": "Odkryj seriale"
     },
-    "link_label_browse_shows": {
-      "default": "Przeglądaj seriale"
+    "link_text_discover_movies": {
+      "default": "Odkryj filmy"
     },
-    "link_label_browse_movies": {
-      "default": "Przeglądaj filmy"
-    },
-    "link_label_explore_shows": {
-      "default": "Odkrywaj seriale"
-    },
-    "link_label_explore_movies": {
-      "default": "Odkrywaj filmy"
+    "link_label_discover_movies": {
+      "default": "Odkryj filmy"
     },
     "header_comment_reactions": {
       "default": "Reakcje na komentarze"

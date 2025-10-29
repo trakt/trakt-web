@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Calendar"
     },
+    "text_cta_up_next_media": {
+      "default": "Your shows and movies. Your pace. Jump back in exactly where you left off. What are you currently watching?"
+    },
     "text_cta_up_next": {
       "default": "Your shows. Your pace. Jump back in exactly where you left off. What are you currently watching?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Your movies. Your pace. Jump back in exactly where you left off. What are you currently watching?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Your queue awaits. Add the shows and movies you're excited to start watching. What's next?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Your queue awaits. Add the shows you're excited to start watching. What's next?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Your queue awaits. Add the movies you're excited to start watching. What's next?"
     },
     "text_cta_watchlist_released": {
       "default": "See it. Save it. Watch it later. Start curating your personal movie queue."
     },
+    "text_cta_upcoming_media": {
+      "default": "Your timeline. See what's dropping next with a full list of upcoming episodes and movies you care about."
+    },
     "text_cta_upcoming": {
       "default": "Your timeline. See what's dropping next with a full list of upcoming episodes you care about."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Your timeline. See what's dropping next with a full list of upcoming movies you care about."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Lights, camera… nothing? Add titles to your watchlist and let the binge begin."
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Your faves. Your playlist. Spotlight the shows that left a mark. The ones that made you laugh, cry, or rethink everything. Your all-time favourites, saved for every mood and moment."
     },
-    "link_text_browse_more": {
-      "default": "Browse more"
+    "link_text_discover_more": {
+      "default": "Discover more"
     },
-    "link_text_explore_more": {
-      "default": "Explore more"
+    "link_label_discover_more": {
+      "default": "Discover more"
     },
-    "link_text_browse_shows": {
-      "default": "Browse shows"
+    "link_text_discover_media": {
+      "default": "Discover media"
     },
-    "link_text_browse_movies": {
-      "default": "Browse movies"
+    "link_label_discover_media": {
+      "default": "Discover media"
     },
-    "link_text_explore_shows": {
-      "default": "Explore shows"
+    "link_text_discover_shows": {
+      "default": "Discover shows"
     },
-    "link_text_explore_movies": {
-      "default": "Explore movies"
+    "link_label_discover_shows": {
+      "default": "Discover shows"
     },
-    "link_label_browse_shows": {
-      "default": "Browse shows"
+    "link_text_discover_movies": {
+      "default": "Discover movies"
     },
-    "link_label_browse_movies": {
-      "default": "Browse movies"
-    },
-    "link_label_explore_shows": {
-      "default": "Explore shows"
-    },
-    "link_label_explore_movies": {
-      "default": "Explore movies"
+    "link_label_discover_movies": {
+      "default": "Discover movies"
     },
     "header_comment_reactions": {
       "default": "Comment reactions"

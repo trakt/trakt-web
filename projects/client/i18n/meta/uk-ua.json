@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Календар"
     },
+    "text_cta_up_next_media": {
+      "default": "Ваші серіали та фільми. У вашому темпі. Почніть перегляд саме з того місця, де ви зупинилися. Що ви зараз дивитеся?"
+    },
     "text_cta_up_next": {
       "default": "Ваші серіали. Ваш темп. Поверніться саме туди, де ви зупинились. Що ви зараз дивитесь?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Ваші фільми. У вашому темпі. Почніть перегляд саме з того місця, де ви зупинилися. Що ви зараз дивитеся?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Ваша черга чекає. Додайте серіали та фільми, які ви хочете почати дивитися. Що далі?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Ваша черга чекає. Додайте серіали, які ви хочете почати дивитися. Що далі?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Ваша черга чекає. Додайте фільми, які ви хочете почати дивитися. Що далі?"
     },
     "text_cta_watchlist_released": {
       "default": "Побачити. Зберегти. Подивитись пізніше. Почніть створювати свій особистий список."
     },
+    "text_cta_upcoming_media": {
+      "default": "Ваша хронологія. Перегляньте, що буде далі, з повним списком майбутніх епізодів та фільмів, які вас цікавлять."
+    },
     "text_cta_upcoming": {
       "default": "Ваша хронологія. Дивіться, що вийде наступним з повним списком епізодів, які вам цікаві."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Ваша хронологія. Перегляньте, що буде далі, з повним списком майбутніх фільмів, які вас цікавлять."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Камера, мотор… нічого? Додайте назви до свого списку та почніть перегляд!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Твої улюблені. Твій плейлист. Покажи серіали, які тебе вразили. Ті, що змусили тебе сміятися, плакати або переосмислити все. Твої улюблені на всі часи, збережені для кожного настрою та моменту."
     },
-    "link_text_browse_more": {
-      "default": "Переглянути більше"
+    "link_text_discover_more": {
+      "default": "Дізнатися більше"
     },
-    "link_text_explore_more": {
-      "default": "Дослідити більше"
+    "link_label_discover_more": {
+      "default": "Дізнатися більше"
     },
-    "link_text_browse_shows": {
-      "default": "Огляд серіалів"
+    "link_text_discover_media": {
+      "default": "Відкрийте для себе медіа"
     },
-    "link_text_browse_movies": {
-      "default": "Огляд фільмів"
+    "link_label_discover_media": {
+      "default": "Відкрийте для себе медіа"
     },
-    "link_text_explore_shows": {
-      "default": "Дослідити серіали"
+    "link_text_discover_shows": {
+      "default": "Відкрийте для себе серіали"
     },
-    "link_text_explore_movies": {
-      "default": "Дослідити фільми"
+    "link_label_discover_shows": {
+      "default": "Відкрийте для себе серіали"
     },
-    "link_label_browse_shows": {
-      "default": "Огляд серіалів"
+    "link_text_discover_movies": {
+      "default": "Відкрийте для себе фільми"
     },
-    "link_label_browse_movies": {
-      "default": "Огляд фільмів"
-    },
-    "link_label_explore_shows": {
-      "default": "Дослідити серіали"
-    },
-    "link_label_explore_movies": {
-      "default": "Дослідити фільми"
+    "link_label_discover_movies": {
+      "default": "Відкрийте для себе фільми"
     },
     "header_comment_reactions": {
       "default": "Реакції на коментарі"

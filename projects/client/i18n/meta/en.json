@@ -4760,10 +4760,50 @@
         "ios"
       ]
     },
+    "text_cta_up_next_media": {
+      "default": "Your shows and movies. Your pace. Jump back in exactly where you left off. What are you currently watching?",
+      "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows and movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_cta_up_next": {
       "default": "Your shows. Your pace. Jump back in exactly where you left off. What are you currently watching?",
       "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite shows.",
       "exclude": [
+        "ios"
+      ]
+    },
+    "text_cta_up_next_movies": {
+      "default": "Your movies. Your pace. Jump back in exactly where you left off. What are you currently watching?",
+      "description": "Call to action text shown in the Up Next list, encouraging users to add their favorite movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_start_watching_media": {
+      "default": "Your queue awaits. Add the shows and movies you're excited to start watching. What's next?",
+      "description": "Call to action text shown in the Start Watching list, encouraging users to add their favorite shows and movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Your queue awaits. Add the shows you're excited to start watching. What's next?",
+      "description": "Call to action text shown in the Start Watching list, encouraging users to add their favorite shows.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Your queue awaits. Add the movies you're excited to start watching. What's next?",
+      "description": "Call to action text shown in the Start Watching list, encouraging users to add their favorite movies.",
+      "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4774,10 +4814,26 @@
         "ios"
       ]
     },
+    "text_cta_upcoming_media": {
+      "default": "Your timeline. See what's dropping next with a full list of upcoming episodes and movies you care about.",
+      "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes and movies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_cta_upcoming": {
       "default": "Your timeline. See what's dropping next with a full list of upcoming episodes you care about.",
       "description": "Call to action text shown in the Upcoming list, encouraging users to follow shows for upcoming episodes.",
       "exclude": [
+        "ios"
+      ]
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Your timeline. See what's dropping next with a full list of upcoming movies you care about.",
+      "description": "Call to action text shown in the Upcoming list, encouraging users to follow movies for upcoming releases.",
+      "exclude": [
+        "android",
         "ios"
       ]
     },
@@ -4891,81 +4947,65 @@
         "ios"
       ]
     },
-    "link_text_browse_more": {
-      "default": "Browse more",
-      "description": "Link text for browsing more content. Meant for content that is available.",
+    "link_text_discover_more": {
+      "default": "Discover more",
+      "description": "Link text for discovering more content. Meant to entice users to find new content.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "link_text_explore_more": {
-      "default": "Explore more",
-      "description": "Link text for exploring more content. Meant for content that is not yet available.",
+    "link_label_discover_more": {
+      "default": "Discover more",
+      "description": "Aria-label for the link that allows users to discover more content.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "link_text_browse_shows": {
-      "default": "Browse shows",
-      "description": "Link text for browsing shows.",
+    "link_text_discover_media": {
+      "default": "Discover media",
+      "description": "Link text for discovering media content. Meant to entice users to find new content.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "link_text_browse_movies": {
-      "default": "Browse movies",
-      "description": "Link text for browsing movies.",
+    "link_label_discover_media": {
+      "default": "Discover media",
+      "description": "Aria-label for the link that allows users to discover more content.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "link_text_explore_shows": {
-      "default": "Explore shows",
-      "description": "Link text for exploring shows.",
+    "link_text_discover_shows": {
+      "default": "Discover shows",
+      "description": "Link text for discovering shows. Meant to entice users to find new content.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "link_text_explore_movies": {
-      "default": "Explore movies",
-      "description": "Link text for exploring movies.",
+    "link_label_discover_shows": {
+      "default": "Discover shows",
+      "description": "Aria-label for the link that allows users to discover more shows.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "link_label_browse_shows": {
-      "default": "Browse shows",
-      "description": "Aria-label for the link that allows users to browse shows.",
+    "link_text_discover_movies": {
+      "default": "Discover movies",
+      "description": "Link text for discovering movies. Meant to entice users to find new content.",
       "exclude": [
         "android",
         "ios"
       ]
     },
-    "link_label_browse_movies": {
-      "default": "Browse movies",
-      "description": "Aria-label for the link that allows users to browse movies.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "link_label_explore_shows": {
-      "default": "Explore shows",
-      "description": "Aria-label for the link that allows users to explore shows.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "link_label_explore_movies": {
-      "default": "Explore movies",
-      "description": "Aria-label for the link that allows users to explore movies.",
+    "link_label_discover_movies": {
+      "default": "Discover movies",
+      "description": "Aria-label for the link that allows users to discover movies.",
       "exclude": [
         "android",
         "ios"

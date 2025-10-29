@@ -1,7 +1,9 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import {
   type AnticipatedMovie,
+  movieAnticipatedQuery,
 } from '$lib/requests/queries/movies/movieAnticipatedQuery.ts';
 import {
   movieTrendingQuery,
@@ -27,29 +29,49 @@ type PreviewItem =
 
 type PaginatablePreviewItem = Paginatable<PreviewItem>;
 
-function ctaToQuery(cta: MediaCta | ListCta) {
+function mediaTypeToQuery(type: MediaType, isFuture?: boolean) {
   const params = {
     page: 1,
-    limit: 1,
+    limit: 5,
   };
 
-  switch (cta.type) {
-    case 'up-next':
-    case 'personal-activity':
-      return showTrendingQuery(params) as CreateQueryOptions<
-        PaginatablePreviewItem
-      >;
-    case 'watchlist':
-    case 'favorites':
-    case 'released':
-    case 'personal-list':
+  if (isFuture) {
+    switch (type) {
+      case 'movie':
+        return movieAnticipatedQuery(params) as CreateQueryOptions<
+          PaginatablePreviewItem
+        >;
+      case 'show':
+        return showAnticipatedQuery(params) as CreateQueryOptions<
+          PaginatablePreviewItem
+        >;
+    }
+  }
+
+  switch (type) {
+    case 'movie':
       return movieTrendingQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
       >;
-    case 'upcoming':
-      return showAnticipatedQuery(params) as CreateQueryOptions<
+    case 'show':
+      return showTrendingQuery(params) as CreateQueryOptions<
         PaginatablePreviewItem
       >;
+  }
+}
+
+function ctaToQuery(cta: MediaCta | ListCta) {
+  switch (cta.type) {
+    case 'released':
+      return mediaTypeToQuery('movie');
+    case 'up-next':
+    case 'start-watching':
+    case 'personal-activity':
+    case 'watchlist':
+    case 'favorites':
+    case 'personal-list':
+    case 'upcoming':
+      return mediaTypeToQuery(cta.mediaType ?? 'show', cta.type === 'upcoming');
   }
 }
 

@@ -8,6 +8,7 @@
   import { type DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { DEFAULT_ACTIVITY_PAGE_SIZE } from "$lib/utils/constants.ts";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -27,10 +28,15 @@
       : UrlBuilder.history.all,
   );
 
+  const { isEnabled } = $derived(useFeatureFlag(FeatureFlag.Discover));
+
   const cta = $derived(
     $activityType.value === "social"
       ? { type: "activity" as const }
-      : { type: "personal-activity" as const },
+      : {
+          type: "personal-activity" as const,
+          mediaType: $mode === "media" || !$isEnabled ? undefined : $mode,
+        },
   );
 </script>
 

@@ -2,6 +2,8 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import type { CtaItemIntl } from "../CtaItemIntl";
@@ -24,6 +26,7 @@
   const href = $derived.by(() => {
     switch (cta.type) {
       case "up-next":
+      case "start-watching":
       case "personal-activity":
       case "upcoming":
         return UrlBuilder.shows();
@@ -39,6 +42,15 @@
     }
   });
 
+  const discoverHref = $derived.by(() => {
+    switch (cta.type) {
+      case "personal-list":
+        return undefined;
+      default:
+        return UrlBuilder.discover();
+    }
+  });
+
   const buttonProps = $derived({
     color: size === "small" ? ("purple" as const) : ("default" as const),
     label: intl.cta.label({ cta }),
@@ -50,10 +62,27 @@
   });
 </script>
 
-<trakt-cta-button>
-  <Button {href} {size} {icon} variant="primary" style="flat" {...buttonProps}>
+{#snippet content(buttonHref?: string)}
+  <Button
+    href={buttonHref}
+    {size}
+    {icon}
+    variant="primary"
+    style="flat"
+    {...buttonProps}
+  >
     {intl.cta.text({ cta })}
   </Button>
+{/snippet}
+
+<trakt-cta-button>
+  <RenderForFeature flag={FeatureFlag.Discover}>
+    {#snippet enabled()}
+      {@render content(discoverHref)}
+    {/snippet}
+
+    {@render content(href)}
+  </RenderForFeature>
 </trakt-cta-button>
 
 <style>

@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Kalender"
     },
+    "text_cta_up_next_media": {
+      "default": "Deine Serien und Filme. In deinem Tempo. Springe genau dort wieder ein, wo du aufgehört hast. Was schaust du gerade?"
+    },
     "text_cta_up_next": {
       "default": "Deine Serien. Dein Tempo. Steig genau dort wieder ein, wo du aufgehört hast. Was schaust du gerade?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Deine Filme. In deinem Tempo. Springe genau dort wieder ein, wo du aufgehört hast. Was schaust du gerade?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Deine Warteliste wartet. Füge die Serien und Filme hinzu, auf die du dich freust. Was kommt als Nächstes?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Deine Warteliste wartet. Füge die Serien hinzu, auf die du dich freust. Was kommt als Nächstes?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Deine Warteliste wartet. Füge die Filme hinzu, auf die du dich freust. Was kommt als Nächstes?"
     },
     "text_cta_watchlist_released": {
       "default": "Ansehen. Speichern. Später ansehen. Starte mit der Erstellung deiner persönlichen Filmliste."
     },
+    "text_cta_upcoming_media": {
+      "default": "Deine Timeline. Sieh, was als Nächstes kommt, mit einer vollständigen Liste der kommenden Episoden und Filme, die dich interessieren."
+    },
     "text_cta_upcoming": {
       "default": "Deine Chronik. Sieh dir an, was als Nächstes kommt, mit einer vollständigen Liste der kommenden Episoden, die dich interessieren."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Deine Timeline. Sieh, was als Nächstes kommt, mit einer vollständigen Liste der kommenden Filme, die dich interessieren."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Licht, Kamera… nichts? Füge deiner Liste Titel hinzu und lass das Binge-Watching beginnen!"
@@ -1757,34 +1778,28 @@
     "text_cta_favorites_list_shows": {
       "default": "Deine Favoriten. Deine Playlist. Präsentiere die Serien, die dich geprägt haben. Diejenigen, die dich zum Lachen, Weinen oder zum Umdenken gebracht haben. Deine Allzeit-Favoriten, gespeichert für jede Stimmung und jeden Moment."
     },
-    "link_text_browse_more": {
-      "default": "Mehr ansehen"
-    },
-    "link_text_explore_more": {
+    "link_text_discover_more": {
       "default": "Mehr entdecken"
     },
-    "link_text_browse_shows": {
-      "default": "Serien"
+    "link_label_discover_more": {
+      "default": "Mehr entdecken"
     },
-    "link_text_browse_movies": {
-      "default": "Filme"
+    "link_text_discover_media": {
+      "default": "Entdecke Medien"
     },
-    "link_text_explore_shows": {
+    "link_label_discover_media": {
+      "default": "Medien entdecken"
+    },
+    "link_text_discover_shows": {
       "default": "Serien entdecken"
     },
-    "link_text_explore_movies": {
+    "link_label_discover_shows": {
+      "default": "Serien entdecken"
+    },
+    "link_text_discover_movies": {
       "default": "Filme entdecken"
     },
-    "link_label_browse_shows": {
-      "default": "Serien"
-    },
-    "link_label_browse_movies": {
-      "default": "Filme"
-    },
-    "link_label_explore_shows": {
-      "default": "Serien entdecken"
-    },
-    "link_label_explore_movies": {
+    "link_label_discover_movies": {
       "default": "Filme entdecken"
     },
     "header_comment_reactions": {

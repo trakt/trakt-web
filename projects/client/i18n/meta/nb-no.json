@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Kalender"
     },
+    "text_cta_up_next_media": {
+      "default": "Dine serier og filmer. I ditt tempo. Gå tilbake akkurat der du slapp. Hva ser du på nå?"
+    },
     "text_cta_up_next": {
       "default": "Dine serier. Ditt tempo. Hopp tilbake akkurat der du slapp. Hva ser du på nå?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Dine filmer. I ditt tempo. Gå tilbake akkurat der du slapp. Hva ser du på nå?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Køen din venter. Legg til seriene og filmene du er spent på å begynne å se. Hva er det neste?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Køen din venter. Legg til seriene du er spent på å begynne å se. Hva er det neste?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Køen din venter. Legg til filmene du er spent på å begynne å se. Hva er det neste?"
     },
     "text_cta_watchlist_released": {
       "default": "Se det. Lagre det. Se det senere. Begynn å kuratere din personlige filmkø."
     },
+    "text_cta_upcoming_media": {
+      "default": "Din tidslinje. Se hva som kommer med en full liste over kommende episoder og filmer du bryr deg om."
+    },
     "text_cta_upcoming": {
       "default": "Din tidslinje. Se hva som kommer neste gang med en full liste over kommende episoder du bryr deg om."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Din tidslinje. Se hva som kommer med en full liste over kommende filmer du bryr deg om."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Lys, kamera… ingenting? Legg til titler i listen din og la bingingen begynne!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Dine favoritter. Din spilleliste. Sett søkelyset på seriene som gjorde et inntrykk. De som fikk deg til å le, gråte eller tenke over alt. Dine favoritter gjennom tidene, lagret for hvert humør og øyeblikk."
     },
-    "link_text_browse_more": {
-      "default": "Utforsk mer"
+    "link_text_discover_more": {
+      "default": "Oppdag mer"
     },
-    "link_text_explore_more": {
-      "default": "Utforsk mer"
+    "link_label_discover_more": {
+      "default": "Oppdag mer"
     },
-    "link_text_browse_shows": {
-      "default": "Bla gjennom serier"
+    "link_text_discover_media": {
+      "default": "Oppdag media"
     },
-    "link_text_browse_movies": {
-      "default": "Bla gjennom filmer"
+    "link_label_discover_media": {
+      "default": "Oppdag media"
     },
-    "link_text_explore_shows": {
-      "default": "Utforsk serier"
+    "link_text_discover_shows": {
+      "default": "Oppdag serier"
     },
-    "link_text_explore_movies": {
-      "default": "Utforsk filmer"
+    "link_label_discover_shows": {
+      "default": "Oppdag serier"
     },
-    "link_label_browse_shows": {
-      "default": "Bla gjennom serier"
+    "link_text_discover_movies": {
+      "default": "Oppdag filmer"
     },
-    "link_label_browse_movies": {
-      "default": "Bla gjennom filmer"
-    },
-    "link_label_explore_shows": {
-      "default": "Utforsk serier"
-    },
-    "link_label_explore_movies": {
-      "default": "Utforsk filmer"
+    "link_label_discover_movies": {
+      "default": "Oppdag filmer"
     },
     "header_comment_reactions": {
       "default": "Kommentarreaksjoner"
