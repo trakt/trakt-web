@@ -1,7 +1,5 @@
 <script lang="ts">
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { useIsWatchlisted } from "../watchlist/useIsWatchlisted";
   import type { MarkAsWatchedActionProps } from "./MarkAsWatchedActionProps";
   import { useMarkAsWatched } from "./useMarkAsWatched";
@@ -21,27 +19,10 @@
     markAsWatched,
     removeWatched,
     isWatchable,
-  } = $derived(useMarkAsWatched(target));
+  } = $derived(useMarkAsWatched({ ...target, title }));
 
   const { isWatchlisted } = $derived(useIsWatchlisted(target));
   const isRewatching = $derived(allowRewatch && $isWatched);
-
-  const { confirm } = useConfirm();
-  const confirmMarkAsWatched = $derived(
-    confirm({
-      type: ConfirmationType.MarkAsWatched,
-      title,
-      target,
-      onConfirm: markAsWatched,
-    }),
-  );
-  const confirmRemoveFromWatched = $derived(
-    confirm({
-      type: ConfirmationType.RemoveFromWatched,
-      title,
-      onConfirm: removeWatched,
-    }),
-  );
 </script>
 
 {#if isWatchable}
@@ -53,7 +34,7 @@
     isWatched={$isWatched && !$isWatchlisted}
     {isRewatching}
     isMarkingAsWatched={$isMarkingAsWatched}
-    onWatch={confirmMarkAsWatched}
-    onRemove={confirmRemoveFromWatched}
+    onWatch={markAsWatched}
+    onRemove={removeWatched}
   />
 {/if}

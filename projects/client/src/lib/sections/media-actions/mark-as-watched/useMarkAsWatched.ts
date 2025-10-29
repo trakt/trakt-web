@@ -1,6 +1,8 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
+import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
@@ -14,19 +16,20 @@ import { hasAired } from '../_internal/hasAired.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
 
-export type MarkAsWatchedStoreProps = MediaStoreProps<
-  { id: number; airDate: Date; status?: MediaStatus }
->;
+export type MarkAsWatchedStoreProps =
+  & MediaStoreProps<
+    { id: number; airDate: Date; status?: MediaStatus }
+  >
+  & { title: string };
 
-export function useMarkAsWatched(
-  props: MarkAsWatchedStoreProps,
-) {
+export function useMarkAsWatched(props: MarkAsWatchedStoreProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const isMarkingAsWatched = writable(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.MarkAsWatched);
+  const { confirm } = useConfirm();
 
   const { isWatched } = useIsWatched(props);
 
@@ -77,8 +80,17 @@ export function useMarkAsWatched(
   });
 
   return {
-    markAsWatched,
-    removeWatched,
+    markAsWatched: confirm({
+      type: ConfirmationType.MarkAsWatched,
+      title: props.title,
+      target: props,
+      onConfirm: markAsWatched,
+    }),
+    removeWatched: confirm({
+      type: ConfirmationType.RemoveFromWatched,
+      title: props.title,
+      onConfirm: removeWatched,
+    }),
     isWatched,
     isMarkingAsWatched,
     isWatchable,

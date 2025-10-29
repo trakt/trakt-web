@@ -1,5 +1,7 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
+import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addToWatchlistRequest } from '$lib/requests/sync/addToWatchlistRequest.ts';
@@ -9,12 +11,14 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { writable } from 'svelte/store';
 import { useIsWatchlisted } from './useIsWatchlisted.ts';
 
-export function useWatchlist(props: MediaStoreProps) {
+type UseWatchlistProps = MediaStoreProps & { title: string };
+export function useWatchlist(props: UseWatchlistProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const isWatchlistUpdating = writable(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Watchlist);
+  const { confirm } = useConfirm();
 
   const ids = media.map(({ id }) => id);
 
@@ -59,6 +63,10 @@ export function useWatchlist(props: MediaStoreProps) {
     isWatchlistUpdating,
     isWatchlisted,
     addToWatchlist,
-    removeFromWatchlist,
+    removeFromWatchlist: confirm({
+      type: ConfirmationType.RemoveFromWatchList,
+      title: props.title,
+      onConfirm: removeFromWatchlist,
+    }),
   };
 }

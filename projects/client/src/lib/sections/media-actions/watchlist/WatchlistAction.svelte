@@ -1,7 +1,5 @@
 <script lang="ts">
   import WatchlistButton from "$lib/components/buttons/watchlist/WatchlistButton.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import { onMount } from "svelte";
   import { useWatchlist } from "./useWatchlist";
   import type { WatchlistActionProps } from "./WatchListActionProps";
@@ -19,7 +17,7 @@
     isWatchlistUpdating,
     isWatchlisted,
     removeFromWatchlist,
-  } = $derived(useWatchlist(target));
+  } = $derived(useWatchlist({ ...target, title }));
 
   onMount(() => {
     if (!isUpdating) {
@@ -34,15 +32,6 @@
       destroy: unsubscribe,
     };
   });
-
-  const { confirm } = useConfirm();
-  const confirmRemove = $derived(
-    confirm({
-      type: ConfirmationType.RemoveFromWatchList,
-      title,
-      onConfirm: removeFromWatchlist,
-    }),
-  );
 </script>
 
 <WatchlistButton
@@ -52,5 +41,5 @@
   isWatchlisted={$isWatchlisted}
   isWatchlistUpdating={$isWatchlistUpdating}
   onAdd={addToWatchlist}
-  onRemove={confirmRemove}
+  onRemove={removeFromWatchlist}
 />

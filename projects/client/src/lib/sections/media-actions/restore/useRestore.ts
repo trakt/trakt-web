@@ -1,6 +1,8 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
+import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
+import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { restoreShowCalendarRequest } from '$lib/requests/queries/users/restoreShowCalendarRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
@@ -11,6 +13,7 @@ import { toBulkPayload } from '../_internal/toBulkPayload.ts';
 
 export type RestoreStoreProps = {
   ids: number[];
+  title: string;
 };
 
 export function useRestore(
@@ -21,6 +24,7 @@ export function useRestore(
   const { user } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Restore);
+  const { confirm } = useConfirm();
 
   const restore = async () => {
     const current = await resolve(user);
@@ -48,6 +52,10 @@ export function useRestore(
 
   return {
     isRestoring,
-    restore,
+    restore: confirm({
+      type: ConfirmationType.RestoreShow,
+      title: props.title,
+      onConfirm: restore,
+    }),
   };
 }

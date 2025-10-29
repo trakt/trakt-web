@@ -25,7 +25,10 @@ describe('useWatchlist', () => {
       .mockReturnValueOnce({ invalidate }); // 3: in useWatchlist -> useIsWatchlisted -> useUser
   });
 
-  const runCommonTests = (props: MediaStoreProps, invalidation: string) => {
+  const runCommonTests = (
+    props: MediaStoreProps & { title: string },
+    invalidation: string,
+  ) => {
     it('should NOT be updating watchlist when first requested', async () => {
       const { isWatchlistUpdating } = await renderStore(() =>
         useWatchlist(props)
@@ -97,6 +100,7 @@ describe('useWatchlist', () => {
     const props = {
       type: 'movie' as const,
       media: { id: 1 },
+      title: 'Some Movie',
     };
 
     runCommonTests(props, InvalidateAction.Watchlisted('movie'));
@@ -114,6 +118,7 @@ describe('useWatchlist', () => {
     const props = {
       type: 'show' as const,
       media: { id: 1 },
+      title: 'Some Show',
     };
 
     runCommonTests(props, InvalidateAction.Watchlisted('show'));

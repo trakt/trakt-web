@@ -1,7 +1,5 @@
 <script lang="ts">
   import RemoveFromHistoryButton from "$lib/components/buttons/remove-from-history/RemoveFromHistoryButton.svelte";
-  import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
-  import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import type { HistoryEntry } from "$lib/sections/lists/stores/useRecentlyWatchedList";
   import { useRemoveFromHistory } from "./useRemoveFromHistory";
 
@@ -20,16 +18,7 @@
   }: RemoveFromHistoryActionProps = $props();
 
   const { isRemoving, removeFromHistory } = $derived(
-    useRemoveFromHistory(entry),
-  );
-
-  const { confirm } = useConfirm();
-  const confirmRemoveFromHistory = $derived(
-    confirm({
-      type: ConfirmationType.RemoveFromHistory,
-      title,
-      onConfirm: removeFromHistory,
-    }),
+    useRemoveFromHistory({ ...entry, title }),
   );
 </script>
 
@@ -38,5 +27,5 @@
   {title}
   {size}
   isRemoving={$isRemoving}
-  onRemove={confirmRemoveFromHistory}
+  onRemove={removeFromHistory}
 />

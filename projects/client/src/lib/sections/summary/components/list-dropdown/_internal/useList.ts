@@ -1,5 +1,7 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
+import { ConfirmationType } from '$lib/features/confirmation/models/ConfirmationType.ts';
+import { useConfirm } from '$lib/features/confirmation/useConfirm.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
@@ -12,14 +14,14 @@ import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { writable } from 'svelte/store';
 import { useIsListed } from './useIsListed.ts';
 
-type UseListProps = { list: MediaListSummary } & MediaStoreProps;
+type UseListProps = { list: MediaListSummary; title: string } & MediaStoreProps;
 
 export function useList(props: UseListProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const isListUpdating = writable(false);
   const { invalidate } = useInvalidator();
-
+  const { confirm } = useConfirm();
   const { isListed, itemCount } = useIsListed(props);
 
   const { track } = useTrack(AnalyticsEvent.List);
@@ -64,7 +66,12 @@ export function useList(props: UseListProps) {
 
   return {
     addToList,
-    removeFromList,
+    removeFromList: confirm({
+      type: ConfirmationType.RemoveFromList,
+      title: props.title,
+      name: props.list.name,
+      onConfirm: removeFromList,
+    }),
     isListUpdating,
     isListed,
     itemCount,

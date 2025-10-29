@@ -19,6 +19,7 @@
   const { drop, isDropping } = $derived(
     useDrop({
       ids: [target.id],
+      title,
     }),
   );
 </script>
