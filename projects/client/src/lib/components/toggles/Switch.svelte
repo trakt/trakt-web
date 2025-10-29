@@ -7,11 +7,12 @@
     innerText,
     color = "purple",
     navigationType,
+    icon,
     ...props
   }: SwitchProps = $props();
 </script>
 
-<label class="trakt-switch">
+<label class="trakt-switch" class:has-custom-icon={!!icon}>
   <input
     type="checkbox"
     role="switch"
@@ -21,7 +22,13 @@
     {...props}
   />
 
-  <span class="trakt-switch-tick"><SwitchIcon /></span>
+  <span class="trakt-switch-tick">
+    {#if icon}
+      {@render icon()}
+    {:else}
+      <SwitchIcon />
+    {/if}
+  </span>
   {#if innerText}
     <span class="trakt-switch-text meta-info ellipsis">
       {innerText}
@@ -59,6 +66,12 @@
       $foreground-color: var(--color-switch-foreground-#{$color});
       $background-color: var(--color-switch-background-#{$color});
       --color-tick: var(--color-tick-#{$color});
+
+      &.has-custom-icon {
+        $foreground-color: var(--color-switch-foreground-#{$color});
+        $background-color: var(--color-tick-#{$color});
+        --color-tick: var(--color-switch-foreground-#{$color});
+      }
 
       @include state-styles($background-color, $foreground-color);
     }
@@ -218,6 +231,30 @@
           0px -2px 4px 0px rgba(0, 0, 0, 0.25) inset,
           0px 1px 2px 0px rgba(255, 255, 255, 0.44) inset,
           var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0) rgba(0, 0, 0, 0.16);
+      }
+    }
+  }
+
+  .trakt-switch.has-custom-icon {
+    &:has(input:checked) {
+      .trakt-switch-tick {
+        :global(svg) {
+          transform: rotate(0deg);
+        }
+      }
+    }
+
+    .trakt-switch-tick {
+      background: none;
+      color: var(--color-foreground-switch);
+
+      :global(svg) {
+        width: var(--ni-16);
+        height: var(--ni-16);
+      }
+
+      &::before {
+        display: none;
       }
     }
   }
