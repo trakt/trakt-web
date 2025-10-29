@@ -39,6 +39,7 @@
     "npm:msw@2.7.3": "2.7.3_typescript@5.8.3",
     "npm:oidc-client-ts@3.3.0": "3.3.0",
     "npm:playwright@1.55.0": "1.55.0",
+    "npm:plyr@^3.8.3": "3.8.3",
     "npm:postcss-nested@7.0.2": "7.0.2_postcss@8.5.6",
     "npm:prettier-plugin-svelte@3.4.0": "3.4.0_prettier@3.6.2_svelte@5.38.6__acorn@8.15.0",
     "npm:prettier@3.6.2": "3.6.2",
@@ -4130,6 +4131,10 @@
         "browserslist"
       ]
     },
+    "core-js@3.46.0": {
+      "integrity": "sha512-vDMm9B0xnqqZ8uSBpZ8sNtRtOdmfShrvT6h2TuQGLs0Is+cR0DYbj/KWP6ALVNbWPpqA/qPLoOuppJN07humpA==",
+      "scripts": true
+    },
     "core-util-is@1.0.3": {
       "integrity": "sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ=="
     },
@@ -4157,6 +4162,9 @@
         "@asamuzakjp/css-color",
         "rrweb-cssom"
       ]
+    },
+    "custom-event-polyfill@1.0.7": {
+      "integrity": "sha512-TDDkd5DkaZxZFM8p+1I3yAlvM3rSr1wbrOliG4yJiwinMZN8z/iGL7BTlDkrJcYTmgUSb4ywVCc3ZaUtOtC76w=="
     },
     "data-urls@5.0.0": {
       "integrity": "sha512-ZYP5VBHshaDAiVZxjbRVcFJpc+4xGgT0bK3vzy1HLN8jTO975HEbuYzZJcHoQEY5K1a0z8YayJkyVETa08eNTg==",
@@ -5502,6 +5510,9 @@
     "lilconfig@2.1.0": {
       "integrity": "sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ=="
     },
+    "loadjs@4.3.0": {
+      "integrity": "sha512-vNX4ZZLJBeDEOBvdr2v/F+0aN5oMuPu7JTqrMwp+DtgK+AryOlpy6Xtm2/HpNr+azEa828oQjOtWsB6iDtSfSQ=="
+    },
     "locate-character@3.0.0": {
       "integrity": "sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA=="
     },
@@ -5969,6 +5980,16 @@
       ],
       "bin": true
     },
+    "plyr@3.8.3": {
+      "integrity": "sha512-0+iI5uw0WRvtKBpgPCkmQQv7ucHVQKTEo6UFJjgJ8cy/JZhy0dQqshHQVitHXV6l2O3MzhgnuvQ95VSkWcWeSw==",
+      "dependencies": [
+        "core-js",
+        "custom-event-polyfill",
+        "loadjs",
+        "rangetouch",
+        "url-polyfill"
+      ]
+    },
     "possible-typed-array-names@1.1.0": {
       "integrity": "sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg=="
     },
@@ -6107,6 +6128,9 @@
       "dependencies": [
         "safe-buffer"
       ]
+    },
+    "rangetouch@2.0.1": {
+      "integrity": "sha512-sln+pNSc8NGaHoLzwNBssFSf/rSYkqeBXzX1AtJlkJiUaVSJSbRAWJk+4omsXkN+EJalzkZhWQ3th1m0FpR5xA=="
     },
     "react-is@17.0.2": {
       "integrity": "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="
@@ -7315,6 +7339,9 @@
         "requires-port"
       ]
     },
+    "url-polyfill@1.1.14": {
+      "integrity": "sha512-p4f3TTAG6ADVF3mwbXw7hGw+QJyw5CnNGvYh5fCuQQZIiuKUswqcznyV3pGDP9j0TSmC4UvRKm8kl1QsX1diiQ=="
+    },
     "urlpattern-polyfill@10.1.0": {
       "integrity": "sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw=="
     },
@@ -7919,6 +7946,7 @@
             "npm:msw@2.7.3",
             "npm:oidc-client-ts@3.3.0",
             "npm:playwright@1.55.0",
+            "npm:plyr@^3.8.3",
             "npm:postcss-nested@7.0.2",
             "npm:prettier-plugin-svelte@3.4.0",
             "npm:prettier@3.6.2",
