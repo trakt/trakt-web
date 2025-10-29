@@ -5,9 +5,7 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import WatchCountTag from "$lib/components/media/tags/WatchCountTag.svelte";
   import RatingList from "$lib/components/summary/RatingList.svelte";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
-  import StreamOnButton from "../stream/StreamOnButton.svelte";
   import { useMediaMetaInfo, type MetaInfoProps } from "./useMediaMetaInfo";
 
   type MediaMetaInfoProps = {
@@ -47,22 +45,6 @@
       {/if}
     </div>
   </div>
-  <div class="trakt-summary-watch-container">
-    <RenderFor
-      device={["tablet-lg", "desktop"]}
-      audience="all"
-      navigation="default"
-    >
-      <StreamOnButton {streamOn} {...target} style="normal" />
-    </RenderFor>
-    <RenderFor
-      device={["tablet-sm", "mobile"]}
-      audience="all"
-      navigation="default"
-    >
-      <StreamOnButton {streamOn} {...target} style="logo" />
-    </RenderFor>
-  </div>
 </div>
 
 <style>
@@ -83,7 +65,6 @@
     gap: var(--gap-xs);
   }
 
-  .trakt-summary-watch-container,
   .trakt-meta-tags {
     display: flex;
     align-items: center;

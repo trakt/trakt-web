@@ -83,20 +83,26 @@
     </SummaryPoster>
   {/snippet}
 
-  <SummaryHeader>
-    {#snippet headerActions()}
+  <SummaryHeader {title}>
+    {#snippet popupActions()}
       <RenderFor audience="authenticated" navigation="default">
-        <CheckInAction
-          style="normal"
-          size="small"
-          {title}
+        <StreamOnButton
+          {streamOn}
           {type}
-          {show}
           {episode}
+          media={show}
+          style="dropdown-item"
         />
+        <CheckInAction style="dropdown-item" {title} {type} {show} {episode} />
       </RenderFor>
-      <SetCoverImageAction style="action" {type} id={episode.id} {title} />
+      <SetCoverImageAction
+        style="dropdown-item"
+        {type}
+        id={episode.id}
+        {title}
+      />
       <ShareButton
+        style="dropdown-item"
         {title}
         textFactory={({ title }) =>
           m.text_share_episode({
