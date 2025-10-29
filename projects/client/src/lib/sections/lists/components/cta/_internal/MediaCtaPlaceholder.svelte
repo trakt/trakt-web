@@ -16,7 +16,7 @@
 </script>
 
 {#snippet ctaIcon()}
-  {#if cta.type === "up-next" || cta.type === "personal-activity"}
+  {#if cta.type === "up-next" || cta.type === "personal-activity" || cta.type === "start-watching"}
     <UpNextIcon />
   {/if}
 

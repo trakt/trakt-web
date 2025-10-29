@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Calendário"
     },
+    "text_cta_up_next_media": {
+      "default": "Seus filmes e séries. No seu ritmo. Retome exatamente de onde parou. O que você está assistindo?"
+    },
     "text_cta_up_next": {
       "default": "Suas séries. Seu ritmo. Volte de onde parou. O que você está assistindo agora?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Seus filmes. No seu ritmo. Retome exatamente de onde parou. O que você está assistindo?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Sua lista de espera aguarda. Adicione as séries e filmes que você está ansioso para começar a assistir. Qual o próximo?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Sua lista de espera aguarda. Adicione as séries que você está ansioso para começar a assistir. Qual o próximo?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Sua lista de espera aguarda. Adicione os filmes que você está ansioso para começar a assistir. Qual o próximo?"
     },
     "text_cta_watchlist_released": {
       "default": "Veja. Salve. Assista depois. Comece a criar sua lista pessoal."
     },
+    "text_cta_upcoming_media": {
+      "default": "Sua linha do tempo. Veja o que está chegando com uma lista completa de episódios e filmes que você se importa."
+    },
     "text_cta_upcoming": {
       "default": "Sua linha do tempo. Veja o que está por vir com uma lista completa dos próximos episódios que você se importa."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Sua linha do tempo. Veja o que está chegando com uma lista completa de filmes que você se importa."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Luzes, câmera… nada? Adicione títulos à sua lista e deixe a maratona começar!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Seus favoritos. Sua playlist. Destaque as séries que te marcaram. Aquelas que te fizeram rir, chorar ou repensar tudo. Seus favoritos de todos os tempos, salvos para cada humor e momento."
     },
-    "link_text_browse_more": {
-      "default": "Explorar mais"
+    "link_text_discover_more": {
+      "default": "Descobrir mais"
     },
-    "link_text_explore_more": {
-      "default": "Explore mais"
+    "link_label_discover_more": {
+      "default": "Descobrir mais"
     },
-    "link_text_browse_shows": {
-      "default": "Séries"
+    "link_text_discover_media": {
+      "default": "Descubra conteúdo"
     },
-    "link_text_browse_movies": {
-      "default": "Filmes"
+    "link_label_discover_media": {
+      "default": "Descubra conteúdo"
     },
-    "link_text_explore_shows": {
-      "default": "Explorar séries"
+    "link_text_discover_shows": {
+      "default": "Descubra séries"
     },
-    "link_text_explore_movies": {
-      "default": "Explorar filmes"
+    "link_label_discover_shows": {
+      "default": "Descubra séries"
     },
-    "link_label_browse_shows": {
-      "default": "Séries"
+    "link_text_discover_movies": {
+      "default": "Descubra filmes"
     },
-    "link_label_browse_movies": {
-      "default": "Filmes"
-    },
-    "link_label_explore_shows": {
-      "default": "Explorar séries"
-    },
-    "link_label_explore_movies": {
-      "default": "Explorar filmes"
+    "link_label_discover_movies": {
+      "default": "Descubra filmes"
     },
     "header_comment_reactions": {
       "default": "Reações aos comentários"

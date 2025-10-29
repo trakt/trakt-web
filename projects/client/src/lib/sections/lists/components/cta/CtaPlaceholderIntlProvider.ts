@@ -23,22 +23,33 @@ export const CtaPlaceholderIntlProvider: CtaItemIntl = {
   cta: {
     text: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
-        case 'up-next':
-        case 'personal-activity':
-          return m.link_text_browse_shows();
-        case 'released':
-          return m.link_text_browse_movies();
-        case 'upcoming':
-          return m.link_text_explore_shows();
-        case 'watchlist':
-        case 'favorites':
-          return cta.mediaType === 'show'
-            ? m.link_text_browse_shows()
-            : m.link_text_browse_movies();
-        default:
+        case 'personal-list':
           return CtaItemIntlProvider.cta.text({ cta });
+        default: {
+          if ('mediaType' in cta && cta.mediaType) {
+            return cta.mediaType === 'show'
+              ? m.link_text_discover_shows()
+              : m.link_text_discover_movies();
+          }
+
+          return m.link_text_discover_media();
+        }
       }
     },
-    label: CtaItemIntlProvider.cta.label,
+    label: ({ cta }: CtaLinkMeta) => {
+      switch (cta.type) {
+        case 'personal-list':
+          return CtaItemIntlProvider.cta.label({ cta });
+        default: {
+          if ('mediaType' in cta && cta.mediaType) {
+            return cta.mediaType === 'show'
+              ? m.link_label_discover_shows()
+              : m.link_label_discover_movies();
+          }
+
+          return m.link_label_discover_media();
+        }
+      }
+    },
   },
 };

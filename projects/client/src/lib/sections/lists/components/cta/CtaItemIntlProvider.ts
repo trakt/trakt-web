@@ -4,12 +4,33 @@ import type { CtaItemIntl, CtaItemMeta, CtaLinkMeta } from './CtaItemIntl.ts';
 export const CtaItemIntlProvider: CtaItemIntl = {
   text: ({ cta }: CtaItemMeta) => {
     switch (cta.type) {
-      case 'up-next':
-        return m.text_cta_up_next();
+      case 'up-next': {
+        if (!cta.mediaType) {
+          return m.text_cta_up_next_media();
+        }
+        return cta.mediaType === 'show'
+          ? m.text_cta_up_next()
+          : m.text_cta_up_next_movies();
+      }
+      case 'start-watching': {
+        if (!cta.mediaType) {
+          return m.text_cta_start_watching_media();
+        }
+        return cta.mediaType === 'show'
+          ? m.text_cta_start_watching_shows()
+          : m.text_cta_start_watching_movies();
+      }
       case 'released':
         return m.text_cta_watchlist_released();
-      case 'upcoming':
-        return m.text_cta_upcoming();
+      case 'upcoming': {
+        if (!cta.mediaType) {
+          return m.text_cta_upcoming_media();
+        }
+
+        return cta.mediaType === 'show'
+          ? m.text_cta_upcoming()
+          : m.text_cta_upcoming_movies();
+      }
       case 'social':
       case 'activity':
         return m.text_cta_activity();
@@ -43,28 +64,16 @@ export const CtaItemIntlProvider: CtaItemIntl = {
       switch (cta.type) {
         case 'personal-list':
           return m.button_text_cta_create_list();
-        case 'upcoming':
-          return m.link_text_explore_more();
         default:
-          return m.link_text_browse_more();
+          return m.link_text_discover_more();
       }
     },
     label: ({ cta }: CtaLinkMeta) => {
       switch (cta.type) {
         case 'personal-list':
           return m.button_label_create_list();
-        case 'up-next':
-        case 'personal-activity':
-          return m.link_label_browse_shows();
-        case 'released':
-          return m.link_label_browse_movies();
-        case 'upcoming':
-          return m.link_label_explore_shows();
-        case 'watchlist':
-        case 'favorites':
-          return cta.mediaType === 'show'
-            ? m.link_label_browse_shows()
-            : m.link_label_browse_movies();
+        default:
+          return m.link_label_discover_more();
       }
     },
   },

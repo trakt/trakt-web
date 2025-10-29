@@ -18,6 +18,11 @@
   const { upcoming, isLoading } = $derived(
     useUpcomingItems($isEnabled ? $mode : "media"),
   );
+
+  const cta = $derived({
+    type: "upcoming" as const,
+    mediaType: $mode === "media" || !$isEnabled ? undefined : $mode,
+  });
 </script>
 
 <SectionList
@@ -32,12 +37,12 @@
   {/snippet}
 
   {#snippet ctaItem()}
-    <CtaItem cta={{ type: "upcoming" }} variant="card" />
+    <CtaItem {cta} variant="card" />
   {/snippet}
 
   {#snippet empty()}
     {#if !$isLoading}
-      <CtaItem cta={{ type: "upcoming" }} variant="placeholder" />
+      <CtaItem {cta} variant="placeholder" />
     {/if}
   {/snippet}
 

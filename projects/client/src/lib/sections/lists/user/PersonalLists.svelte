@@ -5,6 +5,8 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag.ts";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
@@ -60,8 +62,11 @@
 
   const { createList, isCreating } = useCreateList();
 
+  const { isEnabled } = $derived(useFeatureFlag(FeatureFlag.Discover));
+
   const cta: Cta = $derived({
     type: "personal-list",
+    mediaType: mode === "media" || !$isEnabled ? undefined : mode,
     action: {
       onClick: createList,
       disabled: $isCreating,

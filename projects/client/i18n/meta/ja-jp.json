@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "カレンダー"
     },
+    "text_cta_up_next_media": {
+      "default": "あなたの大好きな映画とドラマを、あなたのペースで。 どこまで観たか、すぐに再開。 今、何をご覧ですか？"
+    },
     "text_cta_up_next": {
       "default": "あなたのドラマ。あなたのペース。中断したところから再開。今、何を見ていますか？"
+    },
+    "text_cta_up_next_movies": {
+      "default": "映画をあなたのペースで。 どこまで観たか、すぐに再開。 今、何をご覧ですか？"
+    },
+    "text_cta_start_watching_media": {
+      "default": "あなたのキューが待っています。 観たい映画とドラマを追加しましょう。 次は何ですか？"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "あなたのキューが待っています。 観たいドラマを追加しましょう。 次は何ですか？"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "あなたのキューが待っています。 観たい映画を追加しましょう。 次は何ですか？"
     },
     "text_cta_watchlist_released": {
       "default": "見て。保存。後で見る。あなただけの映画リストを作り始めましょう。"
     },
+    "text_cta_upcoming_media": {
+      "default": "あなたのタイムライン。 次のエピソードと映画の全リストで、次回の公開予定をチェック！"
+    },
     "text_cta_upcoming": {
       "default": "あなたのタイムライン。気になるエピソードの完全なリストで、次に来るものをチェック。"
+    },
+    "text_cta_upcoming_movies": {
+      "default": "あなたのタイムライン。 次の映画の全リストで、次回の公開予定をチェック！"
     },
     "text_cta_watchlist_unreleased": {
       "default": "ライト、カメラ…何も？あなたのウォッチリストにタイトルを追加して、一気見を始めましょう！"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "あなたの好き。あなたのプレイリスト。心に残ったドラマをスポットライト。あなたを笑わせ、泣かせ、すべてを考え直させたもの。あなたのオールタイムフェイバリットを、あらゆる気分と瞬間のために保存。"
     },
-    "link_text_browse_more": {
+    "link_text_discover_more": {
       "default": "もっと見る"
     },
-    "link_text_explore_more": {
-      "default": "もっと探す"
+    "link_label_discover_more": {
+      "default": "もっと見る"
     },
-    "link_text_browse_shows": {
-      "default": "ドラマを検索"
+    "link_text_discover_media": {
+      "default": "メディアを発見"
     },
-    "link_text_browse_movies": {
-      "default": "映画を検索"
+    "link_label_discover_media": {
+      "default": "メディアを発見"
     },
-    "link_text_explore_shows": {
-      "default": "ドラマを探す"
+    "link_text_discover_shows": {
+      "default": "ドラマを発見"
     },
-    "link_text_explore_movies": {
-      "default": "映画を探す"
+    "link_label_discover_shows": {
+      "default": "ドラマを発見"
     },
-    "link_label_browse_shows": {
-      "default": "ドラマを検索"
+    "link_text_discover_movies": {
+      "default": "映画を発見"
     },
-    "link_label_browse_movies": {
-      "default": "映画を検索"
-    },
-    "link_label_explore_shows": {
-      "default": "ドラマを探す"
-    },
-    "link_label_explore_movies": {
-      "default": "映画を探す"
+    "link_label_discover_movies": {
+      "default": "映画を発見"
     },
     "header_comment_reactions": {
       "default": "コメントへの反応"

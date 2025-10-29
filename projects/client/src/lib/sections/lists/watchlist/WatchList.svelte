@@ -45,10 +45,9 @@
     status === "all"
       ? {
           type: "watchlist" as const,
-          // FIXME: remove when making cta's discover mode compatible
-          mediaType: type === "media" ? "movie" : type,
+          mediaType: type === "media" ? undefined : type,
         }
-      : { type: status },
+      : { type: status, mediaType: "movie" },
   );
 
   const hasOwnToggles = $derived(status === "all" && !externalType);

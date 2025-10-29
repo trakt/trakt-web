@@ -1706,14 +1706,35 @@
     "button_label_calendar": {
       "default": "Календар"
     },
+    "text_cta_up_next_media": {
+      "default": "Вашите сериали и филми. С ваше темпо. Върнете се точно там, където сте спрели. Какво гледате в момента?"
+    },
     "text_cta_up_next": {
       "default": "Вашите сериали. Вашето темпо. Върнете се точно там, където сте спрели. Какво гледате в момента?"
+    },
+    "text_cta_up_next_movies": {
+      "default": "Вашите филми. С ваше темпо. Върнете се точно там, където сте спрели. Какво гледате в момента?"
+    },
+    "text_cta_start_watching_media": {
+      "default": "Вашата опашка ви очаква. Добавете сериалите и филмите, които искате да започнете да гледате. Какво следва?"
+    },
+    "text_cta_start_watching_shows": {
+      "default": "Вашата опашка ви очаква. Добавете сериалите, които искате да започнете да гледате. Какво следва?"
+    },
+    "text_cta_start_watching_movies": {
+      "default": "Вашата опашка ви очаква. Добавете филмите, които искате да започнете да гледате. Какво следва?"
     },
     "text_cta_watchlist_released": {
       "default": "Вижте го. Запазете го. Гледайте го по-късно. Започнете да създавате своя личен списък."
     },
+    "text_cta_upcoming_media": {
+      "default": "Вашата времева линия. Вижте какво предстои с пълен списък на предстоящите епизоди и филми, които ви интересуват."
+    },
     "text_cta_upcoming": {
       "default": "Вашата времева линия. Вижте какво предстои с пълен списък на предстоящите епизоди, които ви интересуват."
+    },
+    "text_cta_upcoming_movies": {
+      "default": "Вашата времева линия. Вижте какво предстои с пълен списък на предстоящите филми, които ви интересуват."
     },
     "text_cta_watchlist_unreleased": {
       "default": "Светлина, камера… нищо? Добавете заглавия към вашия списък и нека започне маратонът!"
@@ -1757,35 +1778,29 @@
     "text_cta_favorites_list_shows": {
       "default": "Твоите любими. Твоят плейлист. Отбележи сериалите, които са те впечатлили. Тези, които те накараха да се смееш, да плачеш или да преосмислиш всичко. Твоите любими за всички времена, запазени за всяко настроение и момент."
     },
-    "link_text_browse_more": {
-      "default": "Разгледай още"
+    "link_text_discover_more": {
+      "default": "Открийте повече"
     },
-    "link_text_explore_more": {
-      "default": "Разгледай още"
+    "link_label_discover_more": {
+      "default": "Открийте повече"
     },
-    "link_text_browse_shows": {
-      "default": "Разгледайте сериали"
+    "link_text_discover_media": {
+      "default": "Открийте съдържание"
     },
-    "link_text_browse_movies": {
-      "default": "Разгледайте филми"
+    "link_label_discover_media": {
+      "default": "Открийте съдържание"
     },
-    "link_text_explore_shows": {
-      "default": "Разгледайте сериали"
+    "link_text_discover_shows": {
+      "default": "Открийте сериали"
     },
-    "link_text_explore_movies": {
-      "default": "Разгледайте филми"
+    "link_label_discover_shows": {
+      "default": "Открийте сериали"
     },
-    "link_label_browse_shows": {
-      "default": "Разгледайте сериали"
+    "link_text_discover_movies": {
+      "default": "Открийте филми"
     },
-    "link_label_browse_movies": {
-      "default": "Разгледайте филми"
-    },
-    "link_label_explore_shows": {
-      "default": "Разгледайте сериали"
-    },
-    "link_label_explore_movies": {
-      "default": "Разгледайте филми"
+    "link_label_discover_movies": {
+      "default": "Открийте филми"
     },
     "header_comment_reactions": {
       "default": "Реакции на коментари"
