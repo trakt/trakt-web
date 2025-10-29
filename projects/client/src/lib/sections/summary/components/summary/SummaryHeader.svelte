@@ -1,14 +1,26 @@
 <script lang="ts">
+  import PopupMenu from "$lib/components/buttons/popup/PopupMenu.svelte";
+  import * as m from "$lib/features/i18n/messages";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
 
   const {
     children,
     headerActions,
-  }: ChildrenProps & { headerActions?: Snippet } = $props();
+    popupActions,
+    title,
+  }: ChildrenProps & {
+    headerActions?: Snippet;
+    popupActions?: Snippet;
+    title: string;
+  } = $props();
 </script>
 
 <div class="trakt-summary-header">
+  <div class="trakt-summary-header-children">
+    {@render children()}
+  </div>
+
   {#if headerActions}
     <RenderFor audience="all" navigation="default">
       <div class="trakt-summary-action-header">
@@ -16,9 +28,18 @@
       </div>
     </RenderFor>
   {/if}
-  <div class="trakt-summary-header-children">
-    {@render children()}
-  </div>
+
+  {#if popupActions}
+    <RenderFor audience="all" navigation="default">
+      <div class="trakt-summary-action-header">
+        <PopupMenu label={m.button_label_popup_menu({ title })} size="normal">
+          {#snippet items()}
+            {@render popupActions()}
+          {/snippet}
+        </PopupMenu>
+      </div>
+    </RenderFor>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -30,6 +51,8 @@
     display: flex;
     justify-content: flex-end;
     gap: var(--gap-xs);
+
+    flex: 1;
   }
 
   .trakt-summary-header-children {
@@ -40,7 +63,7 @@
 
   .trakt-summary-header {
     display: flex;
-    flex-direction: column;
     gap: var(--gap-xs);
+    justify-content: space-between;
   }
 </style>

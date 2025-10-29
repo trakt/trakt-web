@@ -16,7 +16,7 @@
     <SummaryPoster src={person.headshot.url.medium} alt={person.name} />
   {/snippet}
 
-  <SummaryHeader>
+  <SummaryHeader title={person.name}>
     {#snippet headerActions()}
       <ShareButton
         title={person.name}

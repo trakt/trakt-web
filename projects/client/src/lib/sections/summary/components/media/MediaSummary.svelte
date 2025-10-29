@@ -119,27 +119,24 @@
     </SummaryPoster>
   {/snippet}
 
-  <SummaryHeader>
-    {#snippet headerActions()}
+  <SummaryHeader {title}>
+    {#snippet popupActions()}
       <RenderFor audience="authenticated" navigation="default">
+        <StreamOnButton {streamOn} {type} {media} style="dropdown-item" />
+
         {#if media.type === "movie"}
-          <CheckInAction
-            size="small"
-            style="normal"
-            type="movie"
-            {title}
-            {media}
-          />
+          <CheckInAction style="dropdown-item" type="movie" {title} {media} />
         {/if}
       </RenderFor>
       <SetCoverImageAction
-        style="action"
+        style="dropdown-item"
         type={media.type}
         id={media.id}
         {title}
       />
       <ShareButton
         {title}
+        style="dropdown-item"
         textFactory={({ title }) => {
           switch (type) {
             case "movie":
