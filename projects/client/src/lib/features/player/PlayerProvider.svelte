@@ -2,16 +2,18 @@
   import { writable } from "svelte/store";
   import { createPlayerContext } from "./_internal/createPlayerContext";
 
-  const { embedId, isLoading } = createPlayerContext();
+  const { embedId, isLoading, shouldAutoplay } = createPlayerContext();
   const { children } = $props();
   const isFullscreen = writable(false);
 
   function initializePlyr(node: HTMLElement) {
     const PlyrClass = (globalThis as any).Plyr;
 
+    const autoplay = $shouldAutoplay;
+
     const options: Plyr.Options = {
       controls: ["play", "progress", "current-time", "mute", "fullscreen"],
-      autoplay: true,
+      autoplay,
       fullscreen: {
         enabled: true,
         fallback: true,
@@ -32,16 +34,29 @@
       isFullscreen.set(false);
       instance.stop();
       embedId.set(null);
+      shouldAutoplay.set(false);
     };
     const handleReady = () => {
       isLoading.set(false);
+
+      if (autoplay) {
+        instance.fullscreen.enter();
+      }
+    };
+    const handlePreloadPlay = async (play: boolean) => {
+      console.log("handlePreloadPlay", { autoplay, play });
+      if (autoplay) return;
+      if (!play) return;
+
       instance.fullscreen.enter();
+      await instance.play();
     };
 
     instance.on("enterfullscreen", handleStartVideo);
     instance.on("exitfullscreen", handleExitVideo);
     instance.on("ended", handleExitVideo);
     instance.on("ready", handleReady);
+    const teardownPreloadPlay = shouldAutoplay.subscribe(handlePreloadPlay);
 
     return {
       destroy() {
@@ -50,6 +65,7 @@
         instance.on("ended", handleExitVideo);
         instance.off("ready", handleReady);
         instance.destroy();
+        teardownPreloadPlay();
       },
     };
   }

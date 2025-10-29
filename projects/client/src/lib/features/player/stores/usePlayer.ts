@@ -1,13 +1,17 @@
 import { getPlayerContext } from '../_internal/getPlayerContext.ts';
 
 export function usePlayer() {
-  const { embedId } = getPlayerContext();
+  const { embedId, shouldAutoplay } = getPlayerContext();
+
+  const play = (url: string, autoplay = false) => {
+    const key = new URL(url).searchParams.get('v');
+
+    embedId.set(key);
+    shouldAutoplay.set(autoplay);
+  };
 
   return {
-    play: (url: string) => {
-      const key = new URL(url).searchParams.get('v');
-
-      embedId.set(key);
-    },
+    preload: (url: string) => play(url, false),
+    play: (url: string) => play(url, true),
   };
 }
