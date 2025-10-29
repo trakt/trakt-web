@@ -48,7 +48,7 @@
   });
 
   $effect(() => {
-    if ($initialType === type) {
+    if ($initialType === type || $currentPage === 1) {
       return;
     }
 
