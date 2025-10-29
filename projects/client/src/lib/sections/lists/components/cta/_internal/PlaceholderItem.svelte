@@ -84,6 +84,12 @@
       justify-content: space-between;
       gap: var(--gap-xxs);
 
+      .trakt-cta-list-text {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+      }
+
       :global(.trakt-button) {
         width: 100%;
         justify-content: center;
