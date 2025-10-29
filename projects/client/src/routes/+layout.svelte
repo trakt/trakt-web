@@ -19,6 +19,7 @@
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
+  import PlayerProvider from "$lib/features/player/PlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
@@ -150,89 +151,91 @@
           hasConsent={data.hasConsent || data.device === "tv"}
           device={data.device}
         >
-          <AnalyticsProvider>
-            <AutoSigninProvider>
-              <NavigationProvider device={data.device}>
-                <LocaleProvider>
-                  <SearchProvider config={data.typesense}>
-                    <FilterProvider>
-                      <FeatureFlagProvider>
-                        <CoverProvider>
-                          <ToastProvider>
-                            <DiscoverProvider>
-                              <ConfirmationProvider>
-                                <CoverImage />
+          <PlayerProvider>
+            <AnalyticsProvider>
+              <AutoSigninProvider>
+                <NavigationProvider device={data.device}>
+                  <LocaleProvider>
+                    <SearchProvider config={data.typesense}>
+                      <FilterProvider>
+                        <FeatureFlagProvider>
+                          <CoverProvider>
+                            <ToastProvider>
+                              <DiscoverProvider>
+                                <ConfirmationProvider>
+                                  <CoverImage />
 
-                                <ThemeProvider theme={data.theme}>
-                                  <ListScrollHistoryProvider>
-                                    <div class="trakt-layout-wrapper">
-                                      <RenderFor audience="authenticated">
-                                        <Navbar />
-                                      </RenderFor>
-                                      <RenderFor audience="public">
-                                        {#if !isOnHomePage}
+                                  <ThemeProvider theme={data.theme}>
+                                    <ListScrollHistoryProvider>
+                                      <div class="trakt-layout-wrapper">
+                                        <RenderFor audience="authenticated">
                                           <Navbar />
+                                        </RenderFor>
+                                        <RenderFor audience="public">
+                                          {#if !isOnHomePage}
+                                            <Navbar />
+                                          {/if}
+                                        </RenderFor>
+                                        <div class="trakt-layout-content">
+                                          {@render children()}
+                                        </div>
+                                        <RenderFor
+                                          audience="authenticated"
+                                          navigation="default"
+                                        >
+                                          <Footer />
+                                        </RenderFor>
+                                        <RenderFor
+                                          audience="public"
+                                          navigation="default"
+                                        >
+                                          {#if !isOnHomePage}
+                                            <Footer />
+                                          {/if}
+                                        </RenderFor>
+                                      </div>
+                                      <RenderFor
+                                        audience="authenticated"
+                                        device={["mobile", "tablet-sm"]}
+                                      >
+                                        <MobileNavbar />
+                                      </RenderFor>
+                                      <RenderFor
+                                        audience="public"
+                                        device={["mobile", "tablet-sm"]}
+                                      >
+                                        {#if !isOnHomePage}
+                                          <MobileNavbar />
                                         {/if}
                                       </RenderFor>
-                                      <div class="trakt-layout-content">
-                                        {@render children()}
-                                      </div>
                                       <RenderFor
                                         audience="authenticated"
                                         navigation="default"
                                       >
-                                        <Footer />
+                                        <Toast />
                                       </RenderFor>
-                                      <RenderFor
-                                        audience="public"
-                                        navigation="default"
-                                      >
-                                        {#if !isOnHomePage}
-                                          <Footer />
-                                        {/if}
-                                      </RenderFor>
-                                    </div>
-                                    <RenderFor
-                                      audience="authenticated"
-                                      device={["mobile", "tablet-sm"]}
-                                    >
-                                      <MobileNavbar />
-                                    </RenderFor>
-                                    <RenderFor
-                                      audience="public"
-                                      device={["mobile", "tablet-sm"]}
-                                    >
-                                      {#if !isOnHomePage}
-                                        <MobileNavbar />
-                                      {/if}
-                                    </RenderFor>
-                                    <RenderFor
-                                      audience="authenticated"
-                                      navigation="default"
-                                    >
-                                      <Toast />
-                                    </RenderFor>
-                                    <SvelteQueryDevtools
-                                      buttonPosition="bottom-right"
-                                      styleNonce="opacity: 0.5"
-                                    />
-                                  </ListScrollHistoryProvider>
-                                </ThemeProvider>
-                              </ConfirmationProvider>
-                            </DiscoverProvider>
-                          </ToastProvider>
-                        </CoverProvider>
-                      </FeatureFlagProvider>
-                    </FilterProvider>
-                  </SearchProvider>
-                </LocaleProvider>
-              </NavigationProvider>
+                                      <SvelteQueryDevtools
+                                        buttonPosition="bottom-right"
+                                        styleNonce="opacity: 0.5"
+                                      />
+                                    </ListScrollHistoryProvider>
+                                  </ThemeProvider>
+                                </ConfirmationProvider>
+                              </DiscoverProvider>
+                            </ToastProvider>
+                          </CoverProvider>
+                        </FeatureFlagProvider>
+                      </FilterProvider>
+                    </SearchProvider>
+                  </LocaleProvider>
+                </NavigationProvider>
 
-              {#key page.url.pathname}
-                <PageView />
-              {/key}
-            </AutoSigninProvider>
-          </AnalyticsProvider>
+                {#key page.url.pathname}
+                  <PageView />
+                {/key}
+              </AutoSigninProvider>
+            </AnalyticsProvider>
+          </PlayerProvider>
         </CookieConsentProvider>
       </AuthProvider>
     </GlobalParameterProvider>
