@@ -11,6 +11,8 @@
     spoilerExtension,
   } from "./spoilerExtension";
 
+  const MAX_PREVIEW_LINES = 3;
+
   type CommentBodyProps = {
     media: MediaEntry;
     comment: MediaComment;
@@ -49,12 +51,14 @@
     {#if type === "full"}
       {@render commentText()}
     {:else}
-      <button
-        class="trakt-comment-preview"
-        use:lineClamp={{ lines: 3 }}
-        onclick={onClick}
-      >
-        {@render commentText()}
+      <button class="trakt-comment-preview" onclick={onClick}>
+        <div
+          class="trakt-comment-preview-content"
+          use:lineClamp={{ lines: MAX_PREVIEW_LINES }}
+          style="--max-lines: {MAX_PREVIEW_LINES}"
+        >
+          {@render commentText()}
+        </div>
       </button>
     {/if}
   </div>
@@ -82,10 +86,18 @@
   }
 
   .trakt-comment-preview {
+    --preview-height: var(--ni-52);
+
     all: unset;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
+    display: flex;
+    height: var(--preview-height);
 
-    min-height: var(--ni-52);
+    .trakt-comment-preview-content {
+      :global(p) {
+        line-height: calc(var(--preview-height) / var(--max-lines));
+      }
+    }
   }
 </style>
