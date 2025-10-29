@@ -17,6 +17,7 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
+import { shuffle } from '$lib/utils/array/shuffle.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import type { ListCta, MediaCta } from '../models/Cta.ts';
@@ -32,7 +33,7 @@ type PaginatablePreviewItem = Paginatable<PreviewItem>;
 function mediaTypeToQuery(type: MediaType, isFuture?: boolean) {
   const params = {
     page: 1,
-    limit: 5,
+    limit: 10,
   };
 
   if (isFuture) {
@@ -80,15 +81,26 @@ export function usePlaceholderCover(
 ) {
   const query = useQuery(ctaToQuery(cta));
 
+  const items = derived(
+    query,
+    ($query) => {
+      if (!$query.data || $query.data.entries.length === 0) {
+        return null;
+      }
+
+      return $query.data.entries;
+    },
+  );
+
   return {
     cover: derived(
-      query,
-      ($query) => {
-        if (!$query.data || $query.data.entries.length === 0) {
+      items,
+      ($items) => {
+        if (!$items) {
           return null;
         }
 
-        return $query.data.entries.at(0)?.cover;
+        return shuffle($items).at(0)?.cover;
       },
     ),
   };
