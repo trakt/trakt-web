@@ -35,13 +35,7 @@
       />
     {/if}
 
-    <SideActions
-      {title}
-      style="dropdown-item"
-      type={media.type}
-      trailer={media.trailer}
-      slug={media.slug}
-    />
+    <SideActions {title} style="dropdown-item" type={media.type} />
 
     <SetCoverImageAction
       style="dropdown-item"

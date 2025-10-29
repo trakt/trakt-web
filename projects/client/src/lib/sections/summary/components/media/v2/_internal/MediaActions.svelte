@@ -5,6 +5,7 @@
   import SummaryActions from "../../../_internal/SummaryActions.svelte";
   import BookmarkAction from "./BookmarkAction.svelte";
   import MediaActionsPopupMenu from "./MediaActionsPopupMenu.svelte";
+  import TrailerButton from "./TrailerButton.svelte";
 
   const {
     media,
@@ -22,5 +23,6 @@
 <SummaryActions>
   <TrackAction {...targetProps} />
   <BookmarkAction {media} />
+  <TrailerButton slug={media.slug} trailer={media.trailer} style="action" />
   <MediaActionsPopupMenu {media} {streamOn} {title} />
 </SummaryActions>

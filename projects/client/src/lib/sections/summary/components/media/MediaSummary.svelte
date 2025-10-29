@@ -35,6 +35,7 @@
   import SummaryOverview from "../summary/SummaryOverview.svelte";
   import SummaryTitle from "../summary/SummaryTitle.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
+  import TrailerButton from "./v2/_internal/TrailerButton.svelte";
 
   const {
     media,
@@ -128,6 +129,11 @@
           <CheckInAction style="dropdown-item" type="movie" {title} {media} />
         {/if}
       </RenderFor>
+      <TrailerButton
+        slug={media.slug}
+        trailer={media.trailer}
+        style="dropdown-item"
+      />
       <SetCoverImageAction
         style="dropdown-item"
         type={media.type}
