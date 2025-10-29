@@ -2,8 +2,6 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
-  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
-  import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
@@ -18,8 +16,6 @@
   };
 
   const { slug, videos }: VideoListProps = $props();
-
-  const { track } = useTrack(AnalyticsEvent.Extras);
 
   const { record, types } = $derived.by(() => {
     if (!videos.length) return { record: {}, types: [] };
@@ -41,8 +37,6 @@
   const firstType = $derived(types.at(0));
   const active = $derived(writable(firstType));
   const items = $derived(record[$active] ?? []);
-
-  const trackHandler = $derived(() => track({ slug, type: $active }));
 </script>
 
 {#if videos.length > 0}
@@ -54,7 +48,7 @@
     headerNavigationType={DpadNavigationType.List}
   >
     {#snippet item(video)}
-      <VideoItem {video} {trackHandler} />
+      <VideoItem {video} {slug} />
     {/snippet}
 
     {#snippet actions()}

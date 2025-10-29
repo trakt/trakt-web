@@ -6,6 +6,7 @@
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
+  import { usePlayer } from "$lib/features/player/stores/usePlayer";
 
   const {
     trailer,
@@ -17,14 +18,21 @@
     style?: "action" | "dropdown-item";
   } = $props();
 
+  const { play, preload } = usePlayer();
+
   const { track } = useTrack(AnalyticsEvent.Trailer);
-  const onclick = () => track({ slug });
+  const onclick = () => {
+    play(trailer);
+    track({ slug });
+  };
+
+  preload(trailer);
 </script>
 
 {#if style === "action"}
   <ActionButton
     style="ghost"
-    href={trailer}
+    href="javascript:void(0);"
     label={m.translated_value_video_type_trailer()}
     {onclick}
   >
@@ -37,7 +45,7 @@
     color="default"
     variant="secondary"
     style="flat"
-    href={trailer}
+    href="javascript:void(0);"
     {onclick}
   >
     {m.button_text_trailer()}

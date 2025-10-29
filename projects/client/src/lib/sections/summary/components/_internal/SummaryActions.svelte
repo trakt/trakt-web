@@ -16,7 +16,7 @@
     position: relative;
 
     height: var(--ni-56);
-    width: var(--ni-272);
+    width: var(--ni-320);
 
     padding: var(--ni-8) var(--ni-10);
     box-sizing: border-box;
@@ -27,6 +27,10 @@
 
     :global(.trakt-popup-menu-button) {
       color: var(--color-text-primary);
+    }
+
+    :global(svg) {
+      height: var(--ni-16);
     }
   }
 </style>

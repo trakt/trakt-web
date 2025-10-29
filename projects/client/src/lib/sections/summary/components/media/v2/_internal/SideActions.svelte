@@ -3,20 +3,15 @@
 
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
-  import TrailerButton from "./TrailerButton.svelte";
 
   const {
     title,
     type,
-    trailer,
     style = "action",
-    slug,
   }: {
     title: string;
     type: MediaType;
-    trailer: string;
     style?: "action" | "dropdown-item";
-    slug: string;
   } = $props();
 </script>
 
@@ -33,5 +28,3 @@
   }}
   source={{ id: "media", type }}
 />
-
-<TrailerButton {trailer} {style} {slug} />
