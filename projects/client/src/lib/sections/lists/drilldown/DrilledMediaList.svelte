@@ -36,7 +36,11 @@
     }),
   );
 
+  // FIXME: simplify and get rid of effects
   $effect(() => {
+    if ($isLoading) {
+      return;
+    }
     loadedPages.update((pages) => {
       pages.set($page.current ?? 1, $list);
       return pages;
