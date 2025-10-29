@@ -2189,6 +2189,9 @@
     },
     "text_language": {
       "default": "Język"
+    },
+    "switch_label_toggle_halloween_filters": {
+      "default": "Przełącz filtry Halloween"
     }
   }
 }

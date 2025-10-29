@@ -36,19 +36,22 @@ function mapToTrendingMovie({
 }
 
 const movieTrendingRequest = (
-  { fetch, limit, page, filter, search }: MovieTrendingParams,
-) =>
-  api({ fetch })
+  { fetch, limit, page, filter, filterOverride, search }: MovieTrendingParams,
+) => {
+  const filterParams = filterOverride?.movie ?? filter;
+
+  return api({ fetch })
     .movies
     .trending({
       query: {
         extended: 'full,images,colors',
         page,
         limit,
-        ...filter,
+        ...filterParams,
         ...search,
       },
     });
+};
 
 export const movieTrendingQuery = defineQuery({
   key: 'movieTrending',
@@ -61,7 +64,9 @@ export const movieTrendingQuery = defineQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.movie ?? params.filter,
+    ),
     ...getRecordDependencies(params.search),
   ],
   request: movieTrendingRequest,

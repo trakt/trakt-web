@@ -16,9 +16,11 @@ export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 type RecommendedShowsParams = LimitParams & ApiParams & FilterParams;
 
 const recommendedShowsRequest = (
-  { fetch, limit, filter }: RecommendedShowsParams,
-) =>
-  api({ fetch })
+  { fetch, limit, filter, filterOverride }: RecommendedShowsParams,
+) => {
+  const filterParams = filterOverride?.show ?? filter;
+
+  return api({ fetch })
     .recommendations
     .shows
     .recommend({
@@ -26,11 +28,12 @@ const recommendedShowsRequest = (
         extended: 'full,images,colors',
         ignore_collected: true,
         limit,
-        ...filter,
+        ...filterParams,
         // FIXME: remove when we have tri-state filter toggles
         ignore_watched: true,
       },
     });
+};
 
 export const recommendedShowsQuery = defineQuery({
   key: 'recommendedShows',
@@ -44,7 +47,9 @@ export const recommendedShowsQuery = defineQuery({
   ) => [
     params.limit,
     params.filter?.watch_window,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.show ?? params.filter,
+    ),
   ],
   request: recommendedShowsRequest,
   mapper: (response) =>

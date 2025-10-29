@@ -5964,6 +5964,14 @@
         "android",
         "ios"
       ]
+    },
+    "switch_label_toggle_halloween_filters": {
+      "default": "Toggle halloween filters",
+      "description": "Aria-label for the switch that allows users to toggle halloween filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -19,19 +19,22 @@ type ShowPopularParams =
   & SearchParams;
 
 const showPopularRequest = (
-  { fetch, limit, page, filter, search }: ShowPopularParams,
-) =>
-  api({ fetch })
+  { fetch, limit, page, filter, filterOverride, search }: ShowPopularParams,
+) => {
+  const filterParams = filterOverride?.show ?? filter;
+
+  return api({ fetch })
     .shows
     .popular({
       query: {
         extended: 'full,images,colors',
         page,
         limit,
-        ...filter,
+        ...filterParams,
         ...search,
       },
     });
+};
 
 export const showPopularQuery = defineQuery({
   key: 'showPopular',
@@ -44,8 +47,11 @@ export const showPopularQuery = defineQuery({
     params,
   ) => [
     params.limit,
+
     params.page,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.show ?? params.filter,
+    ),
     ...getRecordDependencies(params.search),
   ],
   request: showPopularRequest,

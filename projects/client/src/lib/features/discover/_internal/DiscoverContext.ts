@@ -6,4 +6,5 @@ export const DISCOVER_CONTEXT_KEY = Symbol('discover-context');
 export type DiscoverContext = {
   mode: Writable<DiscoverMode>;
   routes: Readable<string[]>;
+  useSeasonalFilters: Writable<boolean>;
 };

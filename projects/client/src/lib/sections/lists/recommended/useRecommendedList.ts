@@ -30,12 +30,13 @@ type RecommendationListStoreProps =
   & FilterParams;
 
 function typeToQueries(
-  { type, filter }: Omit<RecommendationListStoreProps, 'page'>,
+  { type, filter, filterOverride }: Omit<RecommendationListStoreProps, 'page'>,
 ) {
   /** Recommendations are calculated daily, so we load all of them. */
   const params = {
     limit: RECOMMENDED_UPPER_LIMIT,
     filter,
+    filterOverride,
   };
 
   switch (type) {
@@ -59,20 +60,28 @@ function typeToQueries(
   }
 }
 
-export const useRecommendedList = (props: RecommendationListStoreProps) => {
-  const queries = typeToQueries(props)
-    .map((query) => toObservable(useQuery(query)).pipe(shareReplay(1)));
+function getListKey(props: RecommendationListStoreProps) {
+  if (props.filterOverride) {
+    return `${props.type}-overridden`;
+  }
 
   const filters = props.filter ?? {};
   const hasFilters = Object.keys(filters).length > 0;
 
-  const listKey = hasFilters
+  return hasFilters
     ? `${props.type}-${
       Object.entries(filters)
         .map(([key, value]) => `${key}-${value}`)
         .join('-')
     }`
     : props.type;
+}
+
+export const useRecommendedList = (props: RecommendationListStoreProps) => {
+  const queries = typeToQueries(props)
+    .map((query) => toObservable(useQuery(query)).pipe(shareReplay(1)));
+
+  const listKey = getListKey(props);
 
   const allItems = combineLatest(queries).pipe(
     map((queryResults) => {

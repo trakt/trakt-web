@@ -22,11 +22,13 @@
 
 <MediaList {...props} drilldownLink={href}>
   {#snippet actions(items)}
-    <ViewAllButton
-      {href}
-      label={drilldownLabel}
-      disabled={items.length === 0}
-      {source}
-    />
+    {#if !props.filterOverride}
+      <ViewAllButton
+        {href}
+        label={drilldownLabel}
+        disabled={items.length === 0}
+        {source}
+      />
+    {/if}
   {/snippet}
 </MediaList>

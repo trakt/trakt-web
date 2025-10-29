@@ -19,19 +19,22 @@ type MoviePopularParams =
   & SearchParams;
 
 const moviePopularRequest = (
-  { fetch, limit, page, filter, search }: MoviePopularParams,
-) =>
-  api({ fetch })
+  { fetch, limit, page, filter, filterOverride, search }: MoviePopularParams,
+) => {
+  const filterParams = filterOverride?.movie ?? filter;
+
+  return api({ fetch })
     .movies
     .popular({
       query: {
         extended: 'full,images,colors',
         page,
         limit,
-        ...filter,
+        ...filterParams,
         ...search,
       },
     });
+};
 
 export const moviePopularQuery = defineQuery({
   key: 'moviePopular',
@@ -44,7 +47,9 @@ export const moviePopularQuery = defineQuery({
   ) => [
     params.limit,
     params.page,
-    ...getGlobalFilterDependencies(params.filter),
+    ...getGlobalFilterDependencies(
+      params.filterOverride?.movie ?? params.filter,
+    ),
     ...getRecordDependencies(params.search),
   ],
   request: moviePopularRequest,
