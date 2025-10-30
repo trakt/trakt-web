@@ -25,7 +25,7 @@ type MovieAnticipatedParams =
   & FilterParams
   & SearchParams;
 
-function mapToAnticipatedMovie({
+export function mapToAnticipatedMovie({
   list_count,
   movie,
 }: MovieAnticipatedResponse): AnticipatedMovie {
@@ -35,7 +35,7 @@ function mapToAnticipatedMovie({
   };
 }
 
-const movieAnticipatedRequest = (
+export const movieAnticipatedRequest = (
   { fetch, limit, page, filter, filterOverride, search }:
     MovieAnticipatedParams,
 ) => {

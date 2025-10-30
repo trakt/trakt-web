@@ -11,7 +11,8 @@ import {
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
-import { usePaginatedListQueries } from '../stores/usePaginatedListQueries.ts';
+import { mediaPopularQuery } from '../../../requests/queries/media/mediaPopularQuery.ts';
+import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
 export type PopularEntry = ShowEntry | MovieEntry;
 export type PopularMediaList = Array<PopularEntry>;
@@ -24,7 +25,7 @@ type PopularListStoreProps =
   & FilterParams
   & SearchParams;
 
-function typeToQueries(
+function typeToQuery(
   { type, ...params }: PopularListStoreProps,
 ) {
   if (!params.filter?.years) {
@@ -40,27 +41,22 @@ function typeToQueries(
 
   switch (type) {
     case 'movie':
-      return [moviePopularQuery(params) as CreateQueryOptions<
+      return moviePopularQuery(params) as CreateQueryOptions<
         Paginatable<PopularEntry>
-      >];
+      >;
     case 'show':
-      return [showPopularQuery(params) as CreateQueryOptions<
+      return showPopularQuery(params) as CreateQueryOptions<
         Paginatable<PopularEntry>
-      >];
+      >;
     case 'media':
-      return [
-        showPopularQuery(params) as CreateQueryOptions<
-          Paginatable<PopularEntry>
-        >,
-        moviePopularQuery(params) as CreateQueryOptions<
-          Paginatable<PopularEntry>
-        >,
-      ];
+      return mediaPopularQuery(params) as CreateQueryOptions<
+        Paginatable<PopularEntry>
+      >;
   }
 }
 
 export function usePopularList(
   props: PopularListStoreProps,
 ) {
-  return usePaginatedListQueries(typeToQueries(props));
+  return usePaginatedListQuery(typeToQuery(props));
 }

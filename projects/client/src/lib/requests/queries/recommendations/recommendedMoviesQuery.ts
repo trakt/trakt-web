@@ -14,7 +14,7 @@ export type RecommendedMovie = z.infer<typeof RecommendedMovieSchema>;
 
 type RecommendedMoviesParams = LimitParams & ApiParams & FilterParams;
 
-const recommendedMoviesRequest = (
+export const recommendedMoviesRequest = (
   { fetch, limit, filter, filterOverride }: RecommendedMoviesParams,
 ) => {
   const filterParams = filterOverride?.movie ?? filter;

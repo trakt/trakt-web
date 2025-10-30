@@ -13,7 +13,8 @@ import {
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
-import { usePaginatedListQueries } from '../stores/usePaginatedListQueries.ts';
+import { mediaTrendingQuery } from '../../../requests/queries/media/mediaTrendingQuery.ts';
+import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
 export type TrendingEntry = TrendingMovie | TrendingShow;
 export type TrendingMediaList = Paginatable<TrendingEntry>;
@@ -22,31 +23,28 @@ type TrendingListStoreProps = PaginationParams & FilterParams & SearchParams & {
   type: DiscoverMode;
 };
 
-function typeToQueries(
+function typeToQuery(
   params: TrendingListStoreProps,
 ) {
   switch (params.type) {
     case 'movie':
-      return [movieTrendingQuery(params) as CreateQueryOptions<
+      return movieTrendingQuery(params) as CreateQueryOptions<
         TrendingMediaList
-      >];
+      >;
     case 'show':
-      return [
-        showTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>,
-      ];
+      return showTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>;
     case 'media':
-      return [
-        showTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>,
-        movieTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>,
-      ];
+      return mediaTrendingQuery(params) as CreateQueryOptions<
+        TrendingMediaList
+      >;
   }
 }
 
 export function useTrendingList(
   props: TrendingListStoreProps,
 ) {
-  const { list, page, isLoading } = usePaginatedListQueries(
-    typeToQueries(props),
+  const { list, page, isLoading } = usePaginatedListQuery(
+    typeToQuery(props),
   );
 
   return {

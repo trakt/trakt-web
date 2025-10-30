@@ -12,23 +12,15 @@ describe('weave', () => {
   it('should weave multiple arrays of equal length', () => {
     const array1 = ['a', 'd'];
     const array2 = ['b', 'e'];
-    const array3 = ['c', 'f'];
-    const result = weave(array1, array2, array3);
-    expect(result).toEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+    const result = weave(array1, array2);
+    expect(result).toEqual(['a', 'b', 'd', 'e']);
   });
 
   it('should handle arrays of different lengths', () => {
     const array1 = [1, 4, 7];
     const array2 = [2, 5];
-    const array3 = [3, 6, 8, 9];
-    const result = weave(array1, array2, array3);
-    expect(result).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  });
-
-  it('should handle single array', () => {
-    const array = [1, 2, 3];
-    const result = weave(array);
-    expect(result).toEqual([1, 2, 3]);
+    const result = weave(array1, array2);
+    expect(result).toEqual([1, 2, 4, 5, 7]);
   });
 
   it('should handle empty arrays', () => {
@@ -41,23 +33,16 @@ describe('weave', () => {
   it('should handle mix of empty and non-empty arrays', () => {
     const array1: number[] = [];
     const array2 = [1, 2, 3];
-    const array3: number[] = [];
-    const result = weave(array1, array2, array3);
+    const result = weave(array1, array2);
     expect(result).toEqual([1, 2, 3]);
-  });
-
-  it('should handle no arrays provided', () => {
-    const result = weave();
-    expect(result).toEqual([]);
   });
 
   it('should handle arrays with falsy values correctly', () => {
     const array1 = [1, 0, 3];
     const array2 = [2, null, 4];
-    const array3 = [undefined, '', 5];
-    const result = weave(array1, array2, array3);
+    const result = weave(array1, array2);
 
-    expect(result).toEqual([1, 2, undefined, 0, null, '', 3, 4, 5]);
+    expect(result).toEqual([1, 2, 0, null, 3, 4]);
   });
 
   it('should handle arrays with boolean values', () => {

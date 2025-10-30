@@ -11,10 +11,8 @@ import {
   upNextNitroQuery,
 } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import { weave } from '$lib/utils/array/weave.ts';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
+import { mediaProgressQuery } from '../../../requests/queries/sync/mediaProgressQuery.ts';
 
 const RELEASED_LIST_LIMIT = 500;
 
@@ -24,79 +22,28 @@ export type UpNextStoreProps = PaginationParams & UpNextIntentParams & {
 
 export type ProgressEntry = UpNextEntry | MovieProgressEntry;
 
-function typeToQueries(props: UpNextStoreProps) {
+function typeToQuery(props: UpNextStoreProps) {
   switch (props.type) {
     case 'movie':
-      return [movieProgressQuery({
+      return movieProgressQuery({
         ...props,
         limit: props.intent === 'start' ? RELEASED_LIST_LIMIT : props.limit,
       }) as CreateQueryOptions<
         Paginatable<ProgressEntry>
-      >];
+      >;
     case 'show':
-      return [upNextNitroQuery(props) as CreateQueryOptions<
+      return upNextNitroQuery(props) as CreateQueryOptions<
         Paginatable<ProgressEntry>
-      >];
+      >;
     default:
-      return [
-        upNextNitroQuery(props) as CreateQueryOptions<
-          Paginatable<ProgressEntry>
-        >,
-        movieProgressQuery({
-          ...props,
-          limit: props.intent === 'start' ? RELEASED_LIST_LIMIT : props.limit,
-        }) as CreateQueryOptions<
-          Paginatable<ProgressEntry>
-        >,
-      ];
+      return mediaProgressQuery(props) as CreateQueryOptions<
+        Paginatable<ProgressEntry>
+      >;
   }
 }
 
 export function useUpNextList(
   props: UpNextStoreProps,
 ) {
-  const queries = typeToQueries(props)
-    .map((query) => usePaginatedListQuery(query));
-
-  const isLoading = derived(
-    queries.map((q) => q.isLoading),
-    ($loadingStates) => $loadingStates.some((loading) => loading),
-  );
-
-  const page = derived(
-    queries.map((q) => q.page),
-    ($pages) => $pages[0],
-  );
-
-  const list = derived(
-    queries.map((q) => q.list),
-    ($lists) => {
-      const filteredLists = $lists.map((list) =>
-        list.filter((item) => {
-          if (props.intent === 'start') {
-            return item.type !== 'movie' || item.airDate <= new Date();
-          }
-
-          if (props.intent === 'continue' && item.type === 'movie') {
-            /**
-             * FIXME: remove once the DB accurately tracks progress
-             */
-            return item.minutesElapsed > 5;
-          }
-
-          return true;
-        })
-      );
-
-      return filteredLists.length === 1
-        ? assertDefined(filteredLists.at(0))
-        : weave(...filteredLists);
-    },
-  );
-
-  return {
-    list,
-    page,
-    isLoading,
-  };
+  return usePaginatedListQuery(typeToQuery(props));
 }

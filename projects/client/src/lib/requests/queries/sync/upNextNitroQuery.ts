@@ -36,7 +36,7 @@ function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   };
 }
 
-const upNextNitroRequest = (params: UpNextParams) => {
+export const upNextNitroRequest = (params: UpNextParams) => {
   const { fetch, limit, page, intent } = params;
 
   return api({ fetch })

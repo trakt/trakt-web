@@ -26,7 +26,7 @@ type ShowTrendingParams =
   & FilterParams
   & SearchParams;
 
-function mapToTrendingShow({
+export function mapToTrendingShow({
   watchers,
   show,
 }: ShowTrendingResponse): TrendingShow {
@@ -36,7 +36,7 @@ function mapToTrendingShow({
   };
 }
 
-const showTrendingRequest = (
+export const showTrendingRequest = (
   { fetch, limit, page, filter, filterOverride, search }: ShowTrendingParams,
 ) => {
   const filterParams = filterOverride?.show ?? filter;

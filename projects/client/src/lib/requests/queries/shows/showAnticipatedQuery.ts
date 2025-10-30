@@ -26,7 +26,7 @@ type ShowAnticipatedParams =
   & FilterParams
   & SearchParams;
 
-function mapToAnticipatedShow({
+export function mapToAnticipatedShow({
   list_count,
   show,
 }: ShowAnticipatedResponse): AnticipatedShow {
@@ -42,7 +42,7 @@ function mapToAnticipatedShow({
   };
 }
 
-const showAnticipatedRequest = (
+export const showAnticipatedRequest = (
   { fetch, limit, page, filter, filterOverride, search }: ShowAnticipatedParams,
 ) => {
   const filterParams = filterOverride?.show ?? filter;

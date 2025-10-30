@@ -13,8 +13,9 @@ import type {
 import z from 'zod';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
+import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 
-const MovieProgressSchema = MovieEntrySchema.merge(z.object({
+export const MovieProgressSchema = MovieEntrySchema.merge(z.object({
   progress: z.number(),
   minutesElapsed: z.number(),
   minutesLeft: z.number(),
@@ -44,27 +45,35 @@ const mapToStartWatchingMovie = (response: ListedMovieResponse) => {
   return {
     ...movie,
     playbackId: 0,
-    progress: 0,
+    progress: NaN,
     minutesElapsed: 0,
     minutesLeft: movie.runtime ?? 0,
   };
 };
 
-type SuccessResponse = {
+export const mapToMovieProgressEntry = (
+  item: MovieProgressResponse | ListedMovieResponse,
+): MovieProgressEntry => {
+  return 'listed_at' in item
+    ? mapToStartWatchingMovie(item)
+    : mapToInProgressMovie(item);
+};
+
+export type MovieProgressSuccessResponse = {
   status: 200;
   body: MovieProgressResponse[] | ListedMovieResponse[];
   headers: Headers;
 };
 
-type ResponseType = SuccessResponse | {
+export type MovieProgressResponseType = MovieProgressSuccessResponse | {
   status: number;
   body: unknown;
   headers: Headers;
 };
 
-const movieProgressRequest = (
+export const movieProgressRequest = (
   { fetch, limit, page, intent }: MovieProgressParams,
-): Promise<ResponseType> => {
+): Promise<MovieProgressResponseType> => {
   // FIXME: switch to actual movie progress endpoints once available
   if (intent === 'start') {
     return api({ fetch })
@@ -107,14 +116,12 @@ export const movieProgressQuery = defineQuery({
   ) => [params.page, params.limit, params.intent],
   request: movieProgressRequest,
   mapper: (queryResponse) => {
-    const response = queryResponse as SuccessResponse;
+    const response = queryResponse as MovieProgressSuccessResponse;
 
     return {
-      entries: response.body.map((item) => {
-        return 'listed_at' in item
-          ? mapToStartWatchingMovie(item)
-          : mapToInProgressMovie(item);
-      }),
+      entries: response.body
+        .map(mapToMovieProgressEntry)
+        .filter(isValidProgressMovie),
       page: extractPageMeta(response.headers),
     };
   },

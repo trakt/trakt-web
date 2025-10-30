@@ -15,7 +15,7 @@ export type RecommendedShow = z.infer<typeof RecommendedShowSchema>;
 
 type RecommendedShowsParams = LimitParams & ApiParams & FilterParams;
 
-const recommendedShowsRequest = (
+export const recommendedShowsRequest = (
   { fetch, limit, filter, filterOverride }: RecommendedShowsParams,
 ) => {
   const filterParams = filterOverride?.show ?? filter;

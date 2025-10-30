@@ -19,7 +19,7 @@ export const UpcomingEpisodeEntrySchema = EpisodeEntrySchema.merge(z.object({
 }));
 export type UpcomingEpisodeEntry = z.infer<typeof UpcomingEpisodeEntrySchema>;
 
-const upcomingEpisodesRequest = (
+export const upcomingEpisodesRequest = (
   { fetch, startDate, days }: CalendarShowsParams,
 ) =>
   api({ fetch })

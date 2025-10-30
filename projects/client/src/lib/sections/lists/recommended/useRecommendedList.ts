@@ -11,12 +11,12 @@ import {
   recommendedShowsQuery,
 } from '$lib/requests/queries/recommendations/recommendedShowsQuery.ts';
 import { dailyOrderArray } from '$lib/sections/lists/stores/dailyOrderArray.ts';
-import { weave } from '$lib/utils/array/weave.ts';
 import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { combineLatest, map, type Observable, shareReplay } from 'rxjs';
+import { map, type Observable, shareReplay } from 'rxjs';
+import { recommendedMediaQuery } from '../../../requests/queries/media/mediaRecommendedQuery.ts';
 import { paginate } from './paginate.ts';
 
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
@@ -29,7 +29,7 @@ type RecommendationListStoreProps =
   & PaginationParams
   & FilterParams;
 
-function typeToQueries(
+function typeToQuery(
   { type, filter, filterOverride }: Omit<RecommendationListStoreProps, 'page'>,
 ) {
   /** Recommendations are calculated daily, so we load all of them. */
@@ -41,22 +41,17 @@ function typeToQueries(
 
   switch (type) {
     case 'movie':
-      return [recommendedMoviesQuery(params) as CreateQueryOptions<
+      return recommendedMoviesQuery(params) as CreateQueryOptions<
         RecommendedMediaList
-      >];
+      >;
     case 'show':
-      return [recommendedShowsQuery(params) as CreateQueryOptions<
+      return recommendedShowsQuery(params) as CreateQueryOptions<
         RecommendedMediaList
-      >];
+      >;
     case 'media':
-      return [
-        recommendedShowsQuery(params) as CreateQueryOptions<
-          RecommendedMediaList
-        >,
-        recommendedMoviesQuery(params) as CreateQueryOptions<
-          RecommendedMediaList
-        >,
-      ];
+      return recommendedMediaQuery(params) as CreateQueryOptions<
+        RecommendedMediaList
+      >;
   }
 }
 
@@ -78,19 +73,13 @@ function getListKey(props: RecommendationListStoreProps) {
 }
 
 export const useRecommendedList = (props: RecommendationListStoreProps) => {
-  const queries = typeToQueries(props)
-    .map((query) => toObservable(useQuery(query)).pipe(shareReplay(1)));
+  const query = typeToQuery(props);
+  const queryObservable = toObservable(useQuery(query)).pipe(shareReplay(1));
 
   const listKey = getListKey(props);
 
-  const allItems = combineLatest(queries).pipe(
-    map((queryResults) => {
-      const isMixed = props.type === 'media';
-      const lists = queryResults.map((q) => q.data ?? []);
-      const items = isMixed ? weave(...lists) : lists.flat();
-
-      return items;
-    }),
+  const allItems = queryObservable.pipe(
+    map((q) => q.data ?? []),
     dailyOrderArray<RecommendedEntry>(
       `recommended-${listKey}-order`,
       (item) => item.id,
@@ -108,8 +97,8 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
     })),
   );
 
-  const isLoading = combineLatest(queries).pipe(
-    map((queryResults) => queryResults.some(toLoadingState)),
+  const isLoading = queryObservable.pipe(
+    map(toLoadingState),
   );
 
   return {

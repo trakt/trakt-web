@@ -25,7 +25,7 @@ type MovieTrendingParams =
   & FilterParams
   & SearchParams;
 
-function mapToTrendingMovie({
+export function mapToTrendingMovie({
   watchers,
   movie,
 }: MovieTrendingResponse): TrendingMovie {
@@ -35,7 +35,7 @@ function mapToTrendingMovie({
   };
 }
 
-const movieTrendingRequest = (
+export const movieTrendingRequest = (
   { fetch, limit, page, filter, filterOverride, search }: MovieTrendingParams,
 ) => {
   const filterParams = filterOverride?.movie ?? filter;
