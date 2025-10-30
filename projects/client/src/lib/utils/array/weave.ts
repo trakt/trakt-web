@@ -1,13 +1,11 @@
-export function weave<T>(...arrays: T[][]): T[] {
-  const maxLength = Math.max(...arrays.map((arr) => arr.length));
+export function weave<A, B>(a: A[], b: B[]): Array<A | B> {
+  const maxLength = Math.max(a.length, b.length);
+  const result: Array<A | B> = [];
 
-  return Array
-    .from(
-      { length: maxLength },
-      (_, i) =>
-        arrays
-          .filter((array) => array.length > i)
-          .map((array) => array.at(i) as T),
-    )
-    .flat();
+  for (let i = 0; i < maxLength; i++) {
+    if (i < a.length) result.push(a[i] as A);
+    if (i < b.length) result.push(b[i] as B);
+  }
+
+  return result;
 }

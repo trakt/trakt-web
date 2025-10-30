@@ -7,9 +7,9 @@ import {
 } from '$lib/requests/queries/calendars/upcomingEpisodesQuery.ts';
 import { upcomingMoviesQuery } from '$lib/requests/queries/calendars/upcomingMoviesQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
+import { upcomingMediaQuery } from '../../../requests/queries/calendars/upcomingMediaQuery.ts';
 
 type UpcomingList = Array<MediaEntry | UpcomingEpisodeEntry>;
 
@@ -20,7 +20,7 @@ function daysAgo(days: number) {
   return new Date(Date.now() - ONE_DAY * days);
 }
 
-function getUpcomingCalendarQueries(
+function getUpcomingCalendarQuery(
   startDate: string,
   type: DiscoverMode,
 ) {
@@ -31,18 +31,11 @@ function getUpcomingCalendarQueries(
 
   switch (type) {
     case 'movie':
-      return [
-        upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>,
-      ];
+      return upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>;
     case 'show':
-      return [
-        upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
-      ];
+      return upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>;
     default:
-      return [
-        upcomingMoviesQuery(params) as CreateQueryOptions<UpcomingList>,
-        upcomingEpisodesQuery(params) as CreateQueryOptions<UpcomingList>,
-      ];
+      return upcomingMediaQuery(params) as CreateQueryOptions<UpcomingList>;
   }
 }
 
@@ -53,28 +46,17 @@ export function useUpcomingItems(type: DiscoverMode) {
     'Could not extract current date.',
   );
 
-  const queries = getUpcomingCalendarQueries(startDate, type)
-    .map((query) => useQuery(query));
+  const query = useQuery(getUpcomingCalendarQuery(startDate, type));
 
   const isLoading = derived(
-    queries,
-    ($queries) => $queries.some(toLoadingState),
-  );
-
-  const allItems = derived(
-    queries,
-    ($queries) =>
-      $queries
-        .flatMap((query) => query.data ?? [])
-        .sort((a, b) => {
-          return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
-        }),
+    [query],
+    ([$query]) => $query.isLoading,
   );
 
   const upcoming = derived(
-    allItems,
-    ($allItems) =>
-      $allItems.filter((d) => {
+    query,
+    ($query) =>
+      ($query.data ?? []).filter((d) => {
         const distanceFromNow = d.airDate.getTime() - Date.now();
         return distanceFromNow > 0;
       }),

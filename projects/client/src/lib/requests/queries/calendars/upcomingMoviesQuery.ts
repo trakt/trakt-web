@@ -10,7 +10,7 @@ export type CalendarMoviesParams = {
   days: number;
 } & ApiParams;
 
-const upcomingMoviesRequest = (
+export const upcomingMoviesRequest = (
   { fetch, startDate, days }: CalendarMoviesParams,
 ) =>
   api({ fetch })
