@@ -20,6 +20,7 @@ export const MovieProgressSchema = MovieEntrySchema.merge(z.object({
   minutesElapsed: z.number(),
   minutesLeft: z.number(),
   playbackId: z.number(),
+  lastWatchedAt: z.date().nullable(),
 }));
 export type MovieProgressEntry = z.infer<typeof MovieProgressSchema>;
 
@@ -36,6 +37,7 @@ const mapToInProgressMovie = (response: MovieProgressResponse) => {
     minutesElapsed,
     minutesLeft: runtime -
       minutesElapsed,
+    lastWatchedAt: response.paused_at ? new Date(response.paused_at) : null,
   };
 };
 
@@ -48,6 +50,7 @@ const mapToStartWatchingMovie = (response: ListedMovieResponse) => {
     progress: NaN,
     minutesElapsed: 0,
     minutesLeft: movie.runtime ?? 0,
+    lastWatchedAt: null,
   };
 };
 

@@ -15,13 +15,14 @@ import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
   z.object({
     show: ShowEntrySchema,
+    lastWatchedAt: z.date().nullable(),
   }),
 );
 export type UpNextEntry = z.infer<typeof UpNextEntryNitroSchema>;
 
 type UpNextParams = PaginationParams & ApiParams & UpNextIntentRequest;
 
-function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
+export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   const show = mapToShowEntry(item.show);
   const episode = mapToEpisodeEntry(item.progress.next_episode);
   episode.runtime = isNaN(episode.runtime) ? show.runtime : episode.runtime;
@@ -33,6 +34,9 @@ function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
     completed: item.progress.completed,
     remaining: item.progress.aired - item.progress.completed,
     minutesLeft: item.progress.stats?.minutes_left ?? 0,
+    lastWatchedAt: item.progress.last_watched_at
+      ? new Date(item.progress.last_watched_at)
+      : null,
   };
 }
 
