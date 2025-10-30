@@ -6,6 +6,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import FilterSidebar from "./FilterSidebar.svelte";
@@ -13,14 +14,18 @@
   const { size }: { size: "small" | "normal" } = $props();
   const { hasActiveFilter, hasFilterSupport } = useFilter();
   const { useSeasonalFilters } = useDiscover();
+  const { activeTheme } = useSeasonalTheme();
 
   const state = $derived($hasActiveFilter ? "filtered" : "unfiltered");
 
   const isSidebarOpen = writable(false);
   const onClose = () => isSidebarOpen.set(false);
 
+  // FIXME: (@seferturan) $useSeasonalFilter should be false if there is no theme to begin with
   const isSeasonalDiscovery = $derived(
-    $useSeasonalFilters && page.route.id === UrlBuilder.discover(),
+    $activeTheme !== null &&
+      $useSeasonalFilters &&
+      page.route.id === UrlBuilder.discover(),
   );
   const isDisabled = $derived(
     !hasFilterSupport(page.route.id ?? "") || isSeasonalDiscovery,
