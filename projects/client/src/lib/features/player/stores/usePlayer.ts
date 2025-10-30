@@ -1,3 +1,4 @@
+import { isMobileAppleDevice } from '$lib/utils/devices/isMobileAppleDevice.ts';
 import { getPlayerContext } from '../_internal/getPlayerContext.ts';
 
 export function usePlayer() {
@@ -12,6 +13,13 @@ export function usePlayer() {
 
   return {
     preload: (url: string) => play(url, false),
-    play: (url: string) => play(url, true),
+    play: (url: string) => {
+      if (isMobileAppleDevice()) {
+        globalThis.window.open(url, '_blank');
+        return;
+      }
+
+      play(url, true);
+    },
   };
 }
