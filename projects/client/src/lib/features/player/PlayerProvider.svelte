@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { writable } from "svelte/store";
+  import { time } from "$lib/utils/timing/time";
+  import { get } from "svelte/store";
   import { createPlayerContext } from "./_internal/createPlayerContext";
 
   const { embedId, isLoading, shouldAutoplay } = createPlayerContext();
   const { children } = $props();
-  const isFullscreen = writable(false);
 
   function initializePlyr(node: HTMLElement) {
     const PlyrClass = (globalThis as any).Plyr;
@@ -29,42 +29,55 @@
     isLoading.set(true);
     const instance = new PlyrClass(node, options) as Plyr;
 
-    const handleStartVideo = () => isFullscreen.set(true);
+    const handlePauseVideo = () => {
+      shouldAutoplay.set(false);
+    };
     const handleExitVideo = () => {
-      isFullscreen.set(false);
       instance.stop();
       embedId.set(null);
-      shouldAutoplay.set(false);
+      handlePauseVideo();
     };
     const handleReady = () => {
       isLoading.set(false);
 
       if (autoplay) {
         instance.fullscreen.enter();
+        instance.play();
       }
     };
     const handlePreloadPlay = async (play: boolean) => {
-      if (autoplay) return;
       if (!play) return;
+
+      /**
+       * On iOS the ready event might have not fired yet, so we need to wait
+       */
+      while (get(isLoading)) {
+        await new Promise((resolve) => setTimeout(resolve, time.fps(24)));
+      }
 
       instance.fullscreen.enter();
       await instance.play();
     };
 
-    instance.on("enterfullscreen", handleStartVideo);
+    /** BEGIN: iOS does not emit */
     instance.on("exitfullscreen", handleExitVideo);
+    /** END: iOS does not emit */
+
+    instance.on("pause", handlePauseVideo);
     instance.on("ended", handleExitVideo);
     instance.on("ready", handleReady);
     const teardownPreloadPlay = shouldAutoplay.subscribe(handlePreloadPlay);
 
     return {
       destroy() {
-        instance.off("enterfullscreen", handleStartVideo);
         instance.off("exitfullscreen", handleExitVideo);
+
+        instance.on("pause", handlePauseVideo);
         instance.on("ended", handleExitVideo);
         instance.off("ready", handleReady);
-        instance.destroy();
         teardownPreloadPlay();
+
+        instance.destroy();
       },
     };
   }
