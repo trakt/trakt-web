@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { type DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useDiscover } from "$lib/features/discover/useDiscover";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
 
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -17,31 +14,6 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(mode?: DiscoverMode)}
-  <WatchList
-    drilldownLabel={m.button_label_view_all_watchlist_items()}
-    status="all"
-    type={mode}
-  />
-
-  <PersonalLists slug="me" type="personal" {mode} />
-  <PersonalLists slug="me" type="liked" {mode} />
-  <PersonalLists slug="me" type="collaboration" {mode} />
-
-  <RenderFor audience="director">
-    <div class="trakt-lists-preview">
-      <ListsHeader title="Smart lists" />
-
-      {#if mode === "media" || !mode}
-        <SmartListRenderer type="movie" />
-        <SmartListRenderer type="show" />
-      {:else}
-        <SmartListRenderer type={mode} />
-      {/if}
-    </div>
-  </RenderFor>
-{/snippet}
-
 <TraktPage
   audience="authenticated"
   image={DEFAULT_SHARE_COVER}
@@ -49,13 +21,28 @@
 >
   <TraktPageCoverSetter />
 
-  <RenderForFeature flag={FeatureFlag.Discover}>
-    {#snippet enabled()}
-      {@render content($mode)}
-    {/snippet}
+  <WatchList
+    drilldownLabel={m.button_label_view_all_watchlist_items()}
+    status="all"
+    type={$mode}
+  />
 
-    {@render content()}
-  </RenderForFeature>
+  <PersonalLists slug="me" type="personal" mode={$mode} />
+  <PersonalLists slug="me" type="liked" mode={$mode} />
+  <PersonalLists slug="me" type="collaboration" mode={$mode} />
+
+  <RenderFor audience="director">
+    <div class="trakt-lists-preview">
+      <ListsHeader title="Smart lists" />
+
+      {#if $mode === "media" || !mode}
+        <SmartListRenderer type="movie" />
+        <SmartListRenderer type="show" />
+      {:else}
+        <SmartListRenderer type={$mode} />
+      {/if}
+    </div>
+  </RenderFor>
 </TraktPage>
 
 <style>

@@ -4,18 +4,14 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
-  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -37,54 +33,6 @@
   const forceCollapse = writable(false);
   const canExpand = $derived($isMouse || $navigation === "dpad");
 </script>
-
-{#snippet discoverLink()}
-  <Button
-    href={UrlBuilder.discover()}
-    label={m.button_label_discover()}
-    style="flat"
-    variant="secondary"
-    color="purple"
-    data-testid={TestId.NavBarMoviesButton}
-    navigationType={DpadNavigationType.Item}
-  >
-    {m.button_text_discover()}
-    {#snippet icon()}
-      <DiscoverIcon />
-    {/snippet}
-  </Button>
-{/snippet}
-
-{#snippet showsAndMoviesLinks()}
-  <Button
-    href={UrlBuilder.shows()}
-    label={m.button_label_browse_shows()}
-    style="flat"
-    variant="secondary"
-    color="purple"
-    data-testid={TestId.NavBarShowsButton}
-    navigationType={DpadNavigationType.Item}
-  >
-    {m.button_text_browse_shows()}
-    {#snippet icon()}
-      <ShowIcon />
-    {/snippet}
-  </Button>
-  <Button
-    href={UrlBuilder.movies()}
-    label={m.button_label_browse_movies()}
-    style="flat"
-    variant="secondary"
-    color="purple"
-    data-testid={TestId.NavBarMoviesButton}
-    navigationType={DpadNavigationType.Item}
-  >
-    {m.button_text_browse_movies()}
-    {#snippet icon()}
-      <MovieIcon />
-    {/snippet}
-  </Button>
-{/snippet}
 
 <header>
   <nav
@@ -133,12 +81,20 @@
         {/snippet}
       </Button>
 
-      <RenderForFeature flag={FeatureFlag.Discover}>
-        {#snippet enabled()}
-          {@render discoverLink()}
+      <Button
+        href={UrlBuilder.discover()}
+        label={m.button_label_discover()}
+        style="flat"
+        variant="secondary"
+        color="purple"
+        data-testid={TestId.NavBarMoviesButton}
+        navigationType={DpadNavigationType.Item}
+      >
+        {m.button_text_discover()}
+        {#snippet icon()}
+          <DiscoverIcon />
         {/snippet}
-        {@render showsAndMoviesLinks()}
-      </RenderForFeature>
+      </Button>
 
       <RenderFor audience="authenticated">
         <Button

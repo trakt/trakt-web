@@ -1,8 +1,5 @@
 <script lang="ts">
-  import { type DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useDiscover } from "$lib/features/discover/useDiscover";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { DEFAULT_ACTIVITY_PAGE_SIZE } from "$lib/utils/constants";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
@@ -24,33 +21,23 @@
   const { mode } = useDiscover();
 </script>
 
-{#snippet content(type: DiscoverMode)}
-  <DrilledMediaList
-    id="view-all-activity"
-    {title}
-    {type}
-    cardOrientation="landscape"
-    useList={(params) =>
-      useActivityList({
-        ...params,
-        limit: DEFAULT_ACTIVITY_PAGE_SIZE,
-        activityType,
-      })}
-  >
-    {#snippet item(activity)}
-      {#if "activityAt" in activity}
-        <SocialActivityItem {activity} {style} />
-      {:else}
-        <RecentlyWatchedItem media={activity} {style} isActionable />
-      {/if}
-    {/snippet}
-  </DrilledMediaList>
-{/snippet}
-
-<RenderForFeature flag={FeatureFlag.Discover}>
-  {#snippet enabled()}
-    {@render content($mode)}
+<DrilledMediaList
+  id="view-all-activity"
+  {title}
+  type={$mode}
+  cardOrientation="landscape"
+  useList={(params) =>
+    useActivityList({
+      ...params,
+      limit: DEFAULT_ACTIVITY_PAGE_SIZE,
+      activityType,
+    })}
+>
+  {#snippet item(activity)}
+    {#if "activityAt" in activity}
+      <SocialActivityItem {activity} {style} />
+    {:else}
+      <RecentlyWatchedItem media={activity} {style} isActionable />
+    {/if}
   {/snippet}
-
-  {@render content("media")}
-</RenderForFeature>
+</DrilledMediaList>
