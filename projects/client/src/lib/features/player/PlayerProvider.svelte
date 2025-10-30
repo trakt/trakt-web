@@ -17,7 +17,7 @@
       fullscreen: {
         enabled: true,
         fallback: true,
-        iosNative: false,
+        iosNative: true,
       },
       quality: {
         default: 1080,
@@ -44,7 +44,6 @@
       }
     };
     const handlePreloadPlay = async (play: boolean) => {
-      console.log("handlePreloadPlay", { autoplay, play });
       if (autoplay) return;
       if (!play) return;
 
