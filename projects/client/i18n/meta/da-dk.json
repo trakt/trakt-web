@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "En personlig besked: Hvis du har oplysninger om brugeren (f.eks. deres sehistorik), kan du bruge det til at generere en mere personlig pladsholder, som f.eks. 'Denne bruger elsker gyserfilm, men hader at skrive bioer. (Måske er de for travlt med at gemme sig for zombier?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Din liste er tom. Tilføj film eller serier for at skabe dit filmiske mesterværk."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Din liste er tom. Tilføj film for at skabe dit mesterværk."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Din liste er tom. Tilføj serier for at give din fantasi brændstof."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Tilføj film til din liste, og gå aldrig glip af en premiere."
-    },
     "button_text_find_movies": {
       "default": "Find film"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Tilgængelig nu"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Se alle film, der er tilgængelige nu"
-    },
     "tag_text_preview": {
       "default": "Forhåndsvisning"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Fortsæt visning"
-    },
-    "page_title_available_now": {
-      "default": "Tilgængelig nu"
     },
     "page_title_social_activity": {
       "default": "Social aktivitet"

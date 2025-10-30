@@ -13,5 +13,5 @@
 >
   <TraktPageCoverSetter />
 
-  <WatchlistPaginatedList status="all" title={m.list_title_watchlist()} />
+  <WatchlistPaginatedList title={m.list_title_watchlist()} />
 </TraktPage>

@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Mensagem personalizada: Se você tiver alguma informação sobre o usuário (por exemplo, seu histórico de visualizações), você pode usá-la para gerar um espaço reservado mais personalizado, como 'Este usuário adora filmes de terror, mas odeia escrever biografias. (Talvez eles estejam muito ocupados se escondendo de zumbis?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Sua lista de desejos está vazia. Adicione filmes ou séries para criar sua obra-prima cinematográfica!"
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Sua lista para assistir está vazia. Adicione filmes para criar sua obra-prima cinematográfica."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Sua lista para assistir está vazia. Adicione séries para alimentar sua imaginação."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Adicione filmes à sua lista de acompanhamento e não perca nenhuma estreia."
-    },
     "button_text_find_movies": {
       "default": "Encontre Filmes"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Disponíveis agora"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Visualizar todos os filmes disponíveis agora"
-    },
     "tag_text_preview": {
       "default": "Prévia"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Continuar Assistindo"
-    },
-    "page_title_available_now": {
-      "default": "Disponível agora"
     },
     "page_title_social_activity": {
       "default": "Atividade social"

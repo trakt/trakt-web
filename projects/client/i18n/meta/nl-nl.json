@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Een gepersonaliseerde boodschap: als je informatie hebt over de gebruiker (bijvoorbeeld hun kijkgeschiedenis), kun je een meer gepersonaliseerde placeholder genereren, zoals 'Deze gebruiker houdt van horrorfilms maar haat biografieën schrijven. (Misschien zijn ze te druk met het verbergen voor zombies?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Je kijklijst is leeg. Voeg films of series toe om je filmische meesterwerk te creëren."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Je watchlist is leeg. Voeg films toe om je eigen cinematografische meesterwerk te creëren."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Je watchlist is leeg. Voeg series toe om je verbeelding te voeden."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Voeg films toe aan je kijklijst en mis nooit een première."
-    },
     "button_text_find_movies": {
       "default": "Films zoeken"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Nu beschikbaar"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Bekijk alle films nu"
-    },
     "tag_text_preview": {
       "default": "Voorbeeld"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Verder kijken"
-    },
-    "page_title_available_now": {
-      "default": "Nu beschikbaar"
     },
     "page_title_social_activity": {
       "default": "Sociale activiteit"

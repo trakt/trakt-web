@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Eine personalisierte Nachricht: Wenn Sie Informationen über den Nutzer haben (z. B. seinen Watch-Verlauf), können Sie einen personalisierteren Platzhalter generieren, wie z. B.: „Dieser Nutzer liebt Horrorfilme, aber hasst Bios schreiben. (Vielleicht sind sie zu beschäftigt, sich vor Zombies zu verstecken?)“"
     },
-    "list_placeholder_watchlist": {
-      "default": "Deine Watchlist ist leer. Füge Filme oder Serien hinzu, um dein filmisches Meisterwerk zu erschaffen."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Deine Wunschliste ist leer. Füge Filme hinzu, um dein filmisches Meisterwerk zu erschaffen."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Deine Wunschliste ist leer. Füge Serien hinzu, um deiner Fantasie Flügel zu verleihen."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Füge Filme zu deiner Wunschliste hinzu und verpasse keine Premiere mehr."
-    },
     "button_text_find_movies": {
       "default": "Filme finden"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Jetzt verfügbar"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Alle verfügbaren Filme"
-    },
     "tag_text_preview": {
       "default": "Vorschau"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Weiter schauen"
-    },
-    "page_title_available_now": {
-      "default": "Jetzt verfügbar"
     },
     "page_title_social_activity": {
       "default": "Soziale Aktivität"

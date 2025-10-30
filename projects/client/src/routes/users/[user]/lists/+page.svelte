@@ -23,7 +23,6 @@
 
   <WatchList
     drilldownLabel={m.button_label_view_all_watchlist_items()}
-    status="all"
     type={$mode}
   />
 

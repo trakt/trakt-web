@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Un message personnalisé: Si vous avez des informations sur l'utilisateur (par exemple, son historique de visionnage), vous pourriez utiliser ces informations pour générer un message plus personnalisé, comme 'Cet utilisateur adore les films d'horreur mais déteste rédiger des biographies. (Peut-être qu'il est trop occupé à se cacher des zombies?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Votre liste de visionnement est vide. Ajoutez des films ou des séries pour créer votre chef-d'œuvre cinématographique!"
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Votre liste est vide. Ajoutez des films pour créer votre chef-d'œuvre cinématographique."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Votre liste est vide. Ajoutez des séries pour stimuler votre imagination."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Ajoutez des films à votre liste de visionnement et ne manquez jamais une première."
-    },
     "button_text_find_movies": {
       "default": "Trouver des films"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Disponibles maintenant"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Voir tous les films sortis"
-    },
     "tag_text_preview": {
       "default": "Aperçu"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "À l'écoute"
-    },
-    "page_title_available_now": {
-      "default": "Dispo maintenant"
     },
     "page_title_social_activity": {
       "default": "Activité sociale"
