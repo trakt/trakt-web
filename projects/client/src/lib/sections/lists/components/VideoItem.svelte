@@ -6,7 +6,6 @@
   import { lineClamp } from "$lib/components/text/lineClamp";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { usePlayer } from "$lib/features/player/stores/usePlayer";
   import { getWebOSHandler } from "$lib/features/web-os/getWebOSHandler";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
 
@@ -15,20 +14,18 @@
   const { track } = useTrack(AnalyticsEvent.Extras);
 
   const webOSHandler = getWebOSHandler();
-  const { play, preload } = usePlayer();
-
-  preload(video.url);
+  // FIXME: use embedded player for these and style cards accordingly
 </script>
 
 <LandscapeCard>
   <Link
     focusable={false}
-    href="javascript:void(0);"
+    href={video.url}
+    target="_blank"
     onclick={(ev) => {
       track({ slug, type: video.type });
 
       if (!webOSHandler) {
-        play(video.url);
         return;
       }
 
