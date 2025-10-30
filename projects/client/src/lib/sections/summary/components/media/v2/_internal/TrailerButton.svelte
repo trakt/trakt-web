@@ -18,7 +18,7 @@
     style?: "action" | "dropdown-item";
   } = $props();
 
-  const { play, preload } = usePlayer();
+  const { play, preload, isLoading } = usePlayer();
 
   const { track } = useTrack(AnalyticsEvent.Trailer);
   const onclick = () => {
@@ -34,6 +34,7 @@
     style="ghost"
     href="javascript:void(0);"
     label={m.translated_value_video_type_trailer()}
+    disabled={$isLoading}
     {onclick}
   >
     <YouTubeIcon />
@@ -47,6 +48,7 @@
     style="flat"
     href="javascript:void(0);"
     {onclick}
+    disabled={$isLoading}
   >
     {m.button_text_trailer()}
     {#snippet icon()}
