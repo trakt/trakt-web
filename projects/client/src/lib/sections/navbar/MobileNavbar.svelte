@@ -3,14 +3,10 @@
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
-  import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
-  import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import { isMobileAppleDevice } from "$lib/utils/devices/isMobileAppleDevice";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
@@ -21,28 +17,6 @@
 
   const { user } = useUser();
 </script>
-
-{#snippet discoverLink()}
-  <Link href={UrlBuilder.discover()}>
-    <div class="trakt-mobile-navbar-link">
-      <DiscoverIcon />
-    </div>
-  </Link>
-{/snippet}
-
-{#snippet showsAndMoviesLinks()}
-  <Link href={UrlBuilder.shows()}>
-    <div class="trakt-mobile-navbar-link">
-      <ShowIcon />
-    </div>
-  </Link>
-
-  <Link href={UrlBuilder.movies()}>
-    <div class="trakt-mobile-navbar-link">
-      <MovieIcon />
-    </div>
-  </Link>
-{/snippet}
 
 <div class="trakt-mobile-navbar" class:has-search={showSearchInNavbar}>
   {#if showSearchInNavbar}
@@ -56,13 +30,11 @@
       </div>
     </Link>
 
-    <RenderForFeature flag={FeatureFlag.Discover}>
-      {#snippet enabled()}
-        {@render discoverLink()}
-      {/snippet}
-
-      {@render showsAndMoviesLinks()}
-    </RenderForFeature>
+    <Link href={UrlBuilder.discover()}>
+      <div class="trakt-mobile-navbar-link">
+        <DiscoverIcon />
+      </div>
+    </Link>
 
     <RenderFor audience="authenticated">
       <Link href={UrlBuilder.lists.user("me")}>
@@ -77,22 +49,18 @@
         </div>
       </Link>
 
-      <RenderForFeature flag={FeatureFlag.Discover}>
-        {#snippet enabled()}
-          <Link href={UrlBuilder.profile.me()}>
-            <div class="trakt-mobile-navbar-link">
-              <ProfileImage
-                --width="var(--ni-24)"
-                --height="var(--ni-24)"
-                --border-width="var(--border-thickness-xs)"
-                name={$user?.name?.first ?? ""}
-                src={$user?.avatar?.url ?? ""}
-                isVip={Boolean($user?.isVip)}
-              />
-            </div>
-          </Link>
-        {/snippet}
-      </RenderForFeature>
+      <Link href={UrlBuilder.profile.me()}>
+        <div class="trakt-mobile-navbar-link">
+          <ProfileImage
+            --width="var(--ni-24)"
+            --height="var(--ni-24)"
+            --border-width="var(--border-thickness-xs)"
+            name={$user?.name?.first ?? ""}
+            src={$user?.avatar?.url ?? ""}
+            isVip={Boolean($user?.isVip)}
+          />
+        </div>
+      </Link>
     </RenderFor>
   </div>
 </div>
