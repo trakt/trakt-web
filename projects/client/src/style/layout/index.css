@@ -115,4 +115,10 @@
   @-moz-document url-prefix() {
     --layout-scrollbar-width: var(--ni-16);
   }
+
+  img,
+  svg {
+    contain: layout;
+    content-visibility: auto;
+  }
 }
