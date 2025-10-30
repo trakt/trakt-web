@@ -70,19 +70,23 @@
   }
 </script>
 
-{#if $embedId}
-  <div hidden={!$isFullscreen}>
-    <div use:initializePlyr>
-      <iframe
-        title="Trakt Video Player"
-        src="https://www.youtube.com/embed/{$embedId}?amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-        allowfullscreen
-        allowtransparency
-        allow="autoplay"
-      >
-      </iframe>
-    </div>
-  </div>
-{/if}
+<div
+  style="position: absolute; top: -100dvh; left: -100dvw; width: 0; height: 0; overflow: hidden;"
+>
+  {#key $embedId}
+    {#if $embedId}
+      <div use:initializePlyr>
+        <iframe
+          title="Trakt Video Player"
+          src="https://www.youtube.com/embed/{$embedId}?playsinline=0&enablejsapi=1&title=false"
+          allowfullscreen
+          allowtransparency
+          allow="autoplay"
+        >
+        </iframe>
+      </div>
+    {/if}
+  {/key}
+</div>
 
 {@render children()}
