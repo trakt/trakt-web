@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Spersonalizowana wiadomość: Jeśli posiadasz jakiekolwiek informacje o użytkowniku (np. historię obejrzanych przez niego filmów), możesz ich użyć do wygenerowania bardziej spersonalizowanego elementu zastępczego, np. „Ten użytkownik uwielbia horrory, ale nie znosi pisać bio. (Może jest zbyt zajęty ukrywaniem się przed hordą zombie?)”"
     },
-    "list_placeholder_watchlist": {
-      "default": "Twoja lista do obejrzenia jest pusta. Dodaj filmy lub seriale, aby stworzyć swoje kinowe arcydzieło."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Twoja lista do obejrzenia jest pusta. Dodaj filmy i skomponuj swoje kinowe doświadczenia."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Twoja lista do obejrzenia jest pusta. Dodaj seriale i rozpal swoją wyobraźnię."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Dodaj filmy do swojej listy do obejrzenia i nigdy nie przegap premiery."
-    },
     "button_text_find_movies": {
       "default": "Znajdź filmy"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Dostępne teraz"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Zobacz wszystkie filmy dostępne teraz"
-    },
     "tag_text_preview": {
       "default": "Podgląd"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Kontynuuj oglądanie"
-    },
-    "page_title_available_now": {
-      "default": "Dostępne teraz"
     },
     "page_title_social_activity": {
       "default": "Aktywność społeczności"

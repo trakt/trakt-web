@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "A personalised message: If you have any information about the user (e.g., their watch history), you could use it to generate a more personalised placeholder, like 'This user loves horror movies but hates writing bios. (Maybe they're too busy hiding from zombies?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Your watchlist is empty. Add movies or shows to create your cinematic masterpiece."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Your watchlist is empty, mate. Chuck in a few movies!"
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Your watchlist is looking a bit bare, mate. Add a show worth a binge!"
-    },
-    "list_placeholder_released_movies": {
-      "default": "Add movies to your watchlist and never miss a premiere."
-    },
     "button_text_find_movies": {
       "default": "Find Movies"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Available Now"
     },
-    "button_label_view_all_released_movies": {
-      "default": "View all movies available now"
-    },
     "tag_text_preview": {
       "default": "Preview"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Continue Watching"
-    },
-    "page_title_available_now": {
-      "default": "Available Now"
     },
     "page_title_social_activity": {
       "default": "Social activity"

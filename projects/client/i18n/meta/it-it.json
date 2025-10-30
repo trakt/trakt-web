@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Un messaggio personalizzato: Se si dispone di informazioni sull'utente (ad esempio, la sua cronologia di cosa ha guardato), è possibile utilizzarle per generare un segnaposto più personalizzato, come 'Questo utente ama i film horror ma odia scrivere le biografie. (Forse è troppo impegnato a nascondersi dagli zombie?)'."
     },
-    "list_placeholder_watchlist": {
-      "default": "La tua lista è vuota. Aggiungi film o serie TV per creare il tuo capolavoro cinematografico."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "La tua Watchlist è vuota. Aggiungi film per creare il tuo capolavoro cinematografico."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "La tua Watchlist è vuota. Aggiungi serie TV per alimentare la tua immaginazione."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Aggiungi film alla tua Watchlist e non perdere mai più nessuna anteprima."
-    },
     "button_text_find_movies": {
       "default": "Trova film"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Disponibile ora"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Vezi toate filmele disponibile acum"
-    },
     "tag_text_preview": {
       "default": "Previzualizare"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Continua a guardare"
-    },
-    "page_title_available_now": {
-      "default": "Disponibile ora"
     },
     "page_title_social_activity": {
       "default": "Attività social"

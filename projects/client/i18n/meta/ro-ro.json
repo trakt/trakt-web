@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Un mesaj personalizat: Dacă ai vreo informație despre utilizator (de exemplu, istoricul lor de vizionare), ai putea folosi aceste informații pentru a genera un placeholder mai personalizat, cum ar fi 'Acest utilizator adoră filmele de groază, dar urăște să scrie biografii. (Poate este prea ocupat să se ascundă de zombi?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Lista ta de urmărire este goală. Adaugă filme sau seriale pentru a-ți crea capodopera cinematografică."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Lista ta de vizionat este goală. Adaugă filme pentru a-ți crea capodopera cinematografică!"
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Lista ta de vizionat este goală. Adaugă seriale TV pentru a-ți aprinde imaginația."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Adaugă filme în lista ta și nu rata nicio premieră."
-    },
     "button_text_find_movies": {
       "default": "Găsește Filme"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Disponibil Acum"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Vezi toate filmele disponibile acum"
-    },
     "tag_text_preview": {
       "default": "Previzualizare"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Continuă vizionarea"
-    },
-    "page_title_available_now": {
-      "default": "Disponibil acum"
     },
     "page_title_social_activity": {
       "default": "Activitate socială"

@@ -1,78 +1,39 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
 
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
-  import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
-  import ReleasedTag from "./_internal/ReleasedTag.svelte";
-  import { statusToStore } from "./statusToStore";
+  import { useWatchList } from "./useWatchList";
   import WatchlistItem from "./WatchlistItem.svelte";
-  import { type WatchlistStatus } from "./WatchlistStatus";
 
   type WatchListProps = {
     type?: DiscoverMode;
     drilldownLabel: string;
     empty?: Snippet;
-    status: WatchlistStatus;
   };
 
-  const {
-    type: externalType,
-    status,
-    drilldownLabel,
-  }: WatchListProps = $props();
+  const { type, drilldownLabel }: WatchListProps = $props();
   const { filterMap } = useFilter();
 
-  const useList = $derived.by(() => statusToStore(status));
-
-  const { current: selectedType, set, options } = useToggler("media");
-
-  const type = $derived.by(() => {
-    if (externalType) {
-      return externalType;
-    }
-
-    return $selectedType.value === "all" ? undefined : $selectedType.value;
+  const cta = $derived({
+    type: "watchlist" as const,
+    mediaType: type === "media" ? undefined : type,
   });
-
-  const cta = $derived(
-    status === "all"
-      ? {
-          type: "watchlist" as const,
-          mediaType: type === "media" ? undefined : type,
-        }
-      : { type: status, mediaType: "movie" },
-  );
-
-  const hasOwnToggles = $derived(status === "all" && !externalType);
 </script>
 
 <DrillableMediaList
-  id={`watch-list-${type ?? "media"}-${status}`}
+  id={`watch-list-${type ?? "media"}`}
   source={{ id: "watchlist", type }}
   title={m.list_title_watchlist()}
   {drilldownLabel}
   {type}
   filter={$filterMap}
-  {useList}
-  metaInfo={hasOwnToggles ? $selectedType.text() : undefined}
-  urlBuilder={({ type, ...rest }) => {
-    if (status === "all") {
-      return UrlBuilder.lists.watchlist();
-    }
-
-    return UrlBuilder.lists.user("me", {
-      type: assertDefined(type),
-      ...rest,
-      status,
-    });
-  }}
+  useList={useWatchList}
+  urlBuilder={() => UrlBuilder.lists.watchlist()}
 >
   {#snippet item(media)}
     <WatchlistItem type={media.type} {media} />
@@ -84,15 +45,5 @@
 
   {#snippet empty()}
     <CtaItem {cta} variant="placeholder" />
-  {/snippet}
-
-  {#snippet badge()}
-    {#if hasOwnToggles}
-      <Toggler value={$selectedType.value} onChange={set} {options} />
-    {/if}
-
-    {#if status === "released"}
-      <ReleasedTag />
-    {/if}
   {/snippet}
 </DrillableMediaList>

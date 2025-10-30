@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "パーソナライズされたメッセージ：もし、ユーザーの情報（例えば、視聴履歴）があれば、よりパーソナライズされたプレースホルダーを作成することができます。例えば、『このユーザーはホラー映画が好きですが、自己紹介を書くのが苦手です。（もしかしたら、ゾンビから隠れることに夢中なのかもしれません？）』"
     },
-    "list_placeholder_watchlist": {
-      "default": "あなたのウォッチリストは空です。映画やドラマを追加して、あなただけの傑作を作りましょう！"
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "視聴リストは空です。映画を追加して、あなたの映画史を完成させましょう！"
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "視聴リストは空です。番組を追加して、想像力を刺激しましょう！"
-    },
-    "list_placeholder_released_movies": {
-      "default": "映画を視聴リストに追加して、初公開を逃さないでください。"
-    },
     "button_text_find_movies": {
       "default": "映画を探す"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "今すぐ視聴可能"
     },
-    "button_label_view_all_released_movies": {
-      "default": "公開作品を見る"
-    },
     "tag_text_preview": {
       "default": "プレビュー"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "視聴を続ける"
-    },
-    "page_title_available_now": {
-      "default": "公開中"
     },
     "page_title_social_activity": {
       "default": "ソーシャルアクティビティ"

@@ -969,38 +969,6 @@
         "ios"
       ]
     },
-    "list_placeholder_watchlist": {
-      "default": "Your watchlist is empty. Add movies or shows to create your cinematic masterpiece.",
-      "description": "Placeholder text shown when there are no movies or shows in the user's watchlist.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Your watchlist is empty. Add movies to create your cinematic masterpiece.",
-      "description": "Placeholder text shown when there are no movies in the user's watchlist.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Your watchlist is empty. Add shows to fuel your imagination.",
-      "description": "Placeholder text shown when there are no shows in the user's watchlist.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "list_placeholder_released_movies": {
-      "default": "Add movies to your watchlist and never miss a premiere.",
-      "description": "Placeholder text shown when there are no released movies in the user's watchlist.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_text_find_movies": {
       "default": "Find Movies",
       "description": "Text for the button that allows users to find movies. This button is shown in some empty lists.",
@@ -2715,14 +2683,6 @@
         "ios"
       ]
     },
-    "button_label_view_all_released_movies": {
-      "default": "View all movies available now",
-      "description": "Aria-label for the button that allows users to view all movies that are currently available to watch.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "tag_text_preview": {
       "default": "Preview",
       "description": "Text for the tag that indicates a preview feature. This should be as short as possible.",
@@ -3895,14 +3855,6 @@
     "page_title_up_next": {
       "default": "Continue Watching",
       "description": "Title for the Up Next page, which shows the next movie or episode a user should watch.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "page_title_available_now": {
-      "default": "Available Now",
-      "description": "Title for the available now page.",
       "exclude": [
         "android",
         "ios"

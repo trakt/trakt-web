@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "En personlig melding: Hvis du har informasjon om brukeren (f.eks. visningshistorikk), kan du bruke den til å generere en mer personlig plassholder, som 'Denne brukeren elsker skrekkfilmer, men hater å skrive bioer. (Kanskje de er for opptatt med å gjemme seg for zombier?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Din liste er tom. Legg til filmer eller serier for å skape ditt filmiske mesterverk."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Watchlisten din er tom. Legg til filmer for å lage ditt kinomesterverk."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Watchlisten din er tom. Legg til serier for å gi næring til fantasien din."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Legg til filmer i watchlisten din og gå aldri glipp av en premiere."
-    },
     "button_text_find_movies": {
       "default": "Finn Filmer"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Tilgjengelig Nå"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Se alle filmer tilgjengelig nå"
-    },
     "tag_text_preview": {
       "default": "Forhåndsvisning"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Fortsett å se"
-    },
-    "page_title_available_now": {
-      "default": "Tilgjengelig nå"
     },
     "page_title_social_activity": {
       "default": "Sosial aktivitet"

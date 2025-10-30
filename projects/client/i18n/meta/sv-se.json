@@ -377,18 +377,6 @@
     "text_about_placeholder_15": {
       "default": "Ett personligt meddelande: Om du har någon information om användaren (t.ex. deras visningshistorik), kan du använda den för att generera en mer personlig platshållare, som 'Den här användaren älskar skräckfilmer men hatar att skriva bios. (Kanske gömmer de sig från zombies?)'"
     },
-    "list_placeholder_watchlist": {
-      "default": "Din bevakningslista är tom. Lägg till filmer eller serier för att skapa ditt filmiska mästerverk."
-    },
-    "list_placeholder_watchlist_movies": {
-      "default": "Din to-watch är tom. Lägg till filmer för att skapa ditt filmiska mästerverk."
-    },
-    "list_placeholder_watchlist_shows": {
-      "default": "Din to-watch är tom. Lägg till serier för att mata din fantasi."
-    },
-    "list_placeholder_released_movies": {
-      "default": "Lägg till filmer i din to-watch och missa aldrig en premiär."
-    },
     "button_text_find_movies": {
       "default": "Hitta filmer"
     },
@@ -989,9 +977,6 @@
     "list_title_available_now": {
       "default": "Tillgänglig nu"
     },
-    "button_label_view_all_released_movies": {
-      "default": "Se alla filmer som är tillgängliga nu"
-    },
     "tag_text_preview": {
       "default": "Förhandsgranska"
     },
@@ -1396,9 +1381,6 @@
     },
     "page_title_up_next": {
       "default": "Fortsätt titta"
-    },
-    "page_title_available_now": {
-      "default": "Tillgängligt nu"
     },
     "page_title_social_activity": {
       "default": "Social aktivitet"
