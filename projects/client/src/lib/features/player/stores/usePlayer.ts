@@ -1,8 +1,8 @@
-import { get } from 'svelte/store';
+import { get, readonly } from 'svelte/store';
 import { getPlayerContext } from '../_internal/getPlayerContext.ts';
 
 export function usePlayer() {
-  const { embedId, shouldAutoplay } = getPlayerContext();
+  const { embedId, shouldAutoplay, isLoading } = getPlayerContext();
 
   const play = (url: string, autoplay = false) => {
     const key = new URL(url).searchParams.get('v');
@@ -21,5 +21,6 @@ export function usePlayer() {
   return {
     preload: (url: string) => play(url, false),
     play: (url: string) => play(url, true),
+    isLoading: readonly(isLoading),
   };
 }
