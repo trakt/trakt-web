@@ -68,7 +68,7 @@
   {/snippet}
 
   {#snippet sideActions()}
-    <SideActions {title} {type} />
+    <SideActions {title} {type} slug={media.slug} trailer={media.trailer} />
   {/snippet}
 
   {#snippet meta()}

@@ -2,14 +2,20 @@
   import * as m from "$lib/features/i18n/messages";
 
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import TrailerButton from "./TrailerButton.svelte";
 
   const {
     title,
     type,
     style = "action",
+    slug,
+    trailer,
   }: {
     title: string;
+    slug: string;
+    trailer: string;
     type: MediaType;
     style?: "action" | "dropdown-item";
   } = $props();
@@ -28,3 +34,7 @@
   }}
   source={{ id: "media", type }}
 />
+
+<RenderFor audience="public">
+  <TrailerButton {slug} {trailer} style="action" />
+</RenderFor>
