@@ -81,10 +81,15 @@
     href="https://media.trakt.tv"
     crossorigin="anonymous"
   />
+  <link rel="preconnect" href="https://cdn.plyr.io" crossorigin="anonymous" />
   <link
     href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap"
     rel="stylesheet"
   />
+  <!-- Plyr CSS -->
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.8.3/plyr.css" />
+  <!-- Plyr JS -->
+  <script src="https://cdn.plyr.io/3.8.3/plyr.js"></script>
   <style>
     html,
     body {
