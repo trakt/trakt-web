@@ -176,8 +176,8 @@ export const UrlBuilder = {
 
       return categoryDrilldownFactory(`users/${user}/lists`)(params);
     },
-    watchlist: () => {
-      return '/users/me/watchlist';
+    watchlist: (user: string) => {
+      return `/users/${user}/watchlist`;
     },
   },
   app: {

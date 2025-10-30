@@ -33,7 +33,7 @@
   {type}
   filter={$filterMap}
   useList={useWatchList}
-  urlBuilder={() => UrlBuilder.lists.watchlist()}
+  urlBuilder={() => UrlBuilder.lists.watchlist("me")}
 >
   {#snippet item(media)}
     <WatchlistItem type={media.type} {media} />
