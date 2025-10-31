@@ -11,7 +11,7 @@
 
     const autoplay = $shouldAutoplay;
 
-    const options: Plyr.Options = {
+    const options: Plyr.default.Options = {
       controls: ["play", "progress", "current-time", "mute", "fullscreen"],
       autoplay,
       fullscreen: {
@@ -27,7 +27,7 @@
     };
 
     isLoading.set(true);
-    const instance = new PlyrClass(node, options) as Plyr;
+    const instance = new PlyrClass(node, options) as Plyr.default;
 
     const handlePauseVideo = () => {
       shouldAutoplay.set(false);
