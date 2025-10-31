@@ -1,8 +1,17 @@
 <script lang="ts">
+  import SeasonalActionBarImage from "$lib/features/theme/components/SeasonalActionBarImage.svelte";
+  import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
+
   const { children }: ChildrenProps = $props();
+
+  const { activeTheme } = useSeasonalTheme();
 </script>
 
-<div class="trakt-summary-actions">
+<div
+  class="trakt-summary-actions"
+  class:has-seasonal-theme={$activeTheme !== null}
+>
+  <SeasonalActionBarImage />
   {@render children()}
 </div>
 
@@ -31,6 +40,10 @@
 
     :global(svg) {
       height: var(--ni-16);
+    }
+
+    &.has-seasonal-theme {
+      margin-top: var(--ni-10);
     }
   }
 </style>

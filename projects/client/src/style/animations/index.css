@@ -111,3 +111,20 @@
 [data-device='tv'] * {
   transition: none !important;
 }
+
+@keyframes lift-and-swing {
+  0%,
+  40% {
+    transform: translateY(0%) rotate(0deg);
+  }
+  50%,
+  90% {
+    transform: translateY(-10%) rotate(-10deg);
+  }
+  70% {
+    transform: translateY(-10%) rotate(10deg);
+  }
+  100% {
+    transform: translateY(0%) rotate(0deg);
+  }
+}

@@ -1,3 +1,4 @@
+import { asset } from '$app/paths';
 import { onMount } from 'svelte';
 import { derived, writable } from 'svelte/store';
 import { SEASONAL_THEMES } from './constants.ts';
@@ -29,6 +30,16 @@ export function useSeasonalTheme() {
       }
 
       return SEASONAL_THEMES[$activeTheme]?.filters;
+    }),
+    actionBarImageSrc: derived(activeTheme, ($activeTheme) => {
+      if (!$activeTheme) {
+        return null;
+      }
+
+      const config = SEASONAL_THEMES[$activeTheme];
+      return config?.actionBarImage
+        ? asset(`/seasonal/${config.actionBarImage}`)
+        : null;
     }),
   };
 }

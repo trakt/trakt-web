@@ -5,6 +5,7 @@ export type SeasonalThemeConfig = {
   id: string;
   start: DatePart;
   end: DatePart;
+  actionBarImage?: string;
   filters?: Array<
     {
       id: string;
