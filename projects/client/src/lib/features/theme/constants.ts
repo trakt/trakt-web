@@ -52,5 +52,6 @@ export const SEASONAL_THEMES: Record<string, SeasonalThemeConfig> = {
         },
       },
     ],
+    actionBarImage: 'ghost.png',
   },
 };
