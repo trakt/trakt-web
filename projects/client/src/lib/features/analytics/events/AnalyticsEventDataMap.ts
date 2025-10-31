@@ -26,6 +26,7 @@ type SearchType = { mode: SearchMode };
 type ShareType = DrilldownType;
 type CoverImageType = { type: ExtendedMediaType };
 type DiscoverType = SourceType & { mode: DiscoverMode };
+type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -67,4 +68,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.ListCreate]: never;
 
   [AnalyticsEvent.CalendarPeriod]: CalendarType;
+
+  [AnalyticsEvent.SeasonalFilter]: SeasonalFilterType;
 };
