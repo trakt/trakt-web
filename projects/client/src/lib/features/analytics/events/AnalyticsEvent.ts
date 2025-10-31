@@ -4,6 +4,7 @@ const USER_ACTION_PREFIX = 'user-action';
 const FOLLOW_ACTION_PREFIX = 'follow-action';
 const LIST_ACTION_PREFIX = 'list-action';
 const CALENDAR_ACTION_PREFIX = 'calendar-action';
+const SEASONAL_ACTION_PREFIX = 'seasonal-action';
 
 function buildEventKey<T extends string, K extends string>(
   prefix: T,
@@ -52,4 +53,6 @@ export const AnalyticsEvent = {
   ListCreate: buildEventKey(LIST_ACTION_PREFIX, 'create'),
 
   CalendarPeriod: buildEventKey(CALENDAR_ACTION_PREFIX, 'period'),
+
+  SeasonalFilter: buildEventKey(SEASONAL_ACTION_PREFIX, 'filter'),
 } as const;
