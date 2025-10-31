@@ -38,7 +38,8 @@ Sentry.init({
         const isServiceWorker = stacktrace?.frames?.some(
           (frame) =>
             frame.filename?.includes('service-worker') ||
-            frame.function?.includes('navigator.serviceWorker.register'),
+            frame.function?.includes('navigator.serviceWorker.register') ||
+            frame.function?.includes('ServiceWorkerContainer.register'),
         );
 
         return isRejected && isServiceWorker;
