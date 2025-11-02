@@ -20,9 +20,20 @@
   */
 </script>
 
-<div class="trakt-streaming-service-logo">
+<div
+  class="trakt-streaming-service-logo"
+  class:has-channel-logo={!!service?.channelLogoUrl}
+>
   {#if service?.logoUrl}
     <CrossOriginImage src={service.logoUrl} alt={i18n.alt(displayName)} />
+    {#if service?.channelLogoUrl}
+      <div class="trakt-channel-separator"></div>
+      <CrossOriginImage
+        src={service?.channelLogoUrl}
+        alt={i18n.alt(displayName)}
+        classList="trakt-channel-logo"
+      />
+    {/if}
   {:else}
     <span class="meta-info uppercase">{displayName}</span>
   {/if}
@@ -32,10 +43,18 @@
   .trakt-streaming-service-logo {
     display: flex;
     align-items: center;
+    gap: var(--gap-micro);
 
     :global(img) {
       width: var(--ni-36);
       height: auto;
+    }
+
+    .trakt-channel-separator {
+      width: var(--ni-1);
+      height: var(--ni-12);
+
+      background-color: var(--color-text-primary);
     }
   }
 </style>

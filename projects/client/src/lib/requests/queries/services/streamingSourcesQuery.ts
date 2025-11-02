@@ -24,6 +24,7 @@ function mapStreamingSourceResponse(
     name: sourceResponse.name,
     isFree: sourceResponse.free,
     logoUrl: prependHttps(sourceResponse.images.logo),
+    channelLogoUrl: prependHttps(sourceResponse.images.channel),
   };
 }
 
