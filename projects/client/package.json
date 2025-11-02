@@ -9,7 +9,7 @@
     "dev:staging": "concurrently 'deno task pre:dev' 'IS_STAGING=true vite dev'",
     "dev:contrib": "concurrently 'deno task pre:dev' 'IS_CONTRIB=true vite dev'",
     "prebuild": "deno task i18n:web",
-    "build": "vite build",
+    "build": "vite build --debug",
     "prebuild:preview": "deno task prebuild",
     "build:preview": "IS_PREVIEW=true vite build",
     "preview": "vite preview",

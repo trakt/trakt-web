@@ -1,3 +1,4 @@
+import { manifest } from '$lib/pwa/manifest.ts';
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
@@ -6,7 +7,6 @@ import { Environment } from '@trakt/api';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vitest/config';
 import denoSveltekitExit from './.vite/deno-sveltekit-exit.ts';
-import { manifest } from './src/lib/pwa/manifest.ts';
 
 import { sentrySvelteKit } from '@sentry/sveltekit';
 import { execSync } from 'node:child_process';
@@ -111,10 +111,6 @@ export default defineConfig(({ mode }) => ({
     }),
     svelteTesting(),
   ],
-
-  build: {
-    sourcemap: true,
-  },
 
   //TODO enable globals when typings are fixed
   test: {
