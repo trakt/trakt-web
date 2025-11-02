@@ -82,8 +82,6 @@
       width: var(--ni-60);
       height: var(--ni-60);
 
-      display: flex;
-      align-items: center;
       justify-content: center;
       text-align: center;
 
@@ -96,6 +94,25 @@
 
         transition: filter var(--transition-increment) ease-in-out;
         filter: var(--streaming-service-logo-filter);
+      }
+    }
+
+    :global(.trakt-streaming-service-logo.has-channel-logo) {
+      flex-direction: column;
+
+      :global(img) {
+        height: 45%;
+      }
+
+      :global(img.trakt-channel-logo) {
+        width: 75%;
+        height: auto;
+        max-height: 45%;
+      }
+
+      :global(.trakt-channel-separator) {
+        width: 50%;
+        height: var(--ni-1);
       }
     }
   }
