@@ -71,7 +71,7 @@
     <p class="secondary">{overview}</p>
   </SpoilerSection>
 
-  <SummaryDetails>
+  <SummaryDetails {type}>
     <MediaDetails {episode} {crew} {type} />
   </SummaryDetails>
 </Summary>

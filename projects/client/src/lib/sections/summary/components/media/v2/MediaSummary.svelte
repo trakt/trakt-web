@@ -92,7 +92,7 @@
     <p class="secondary">{intl.overview ?? media.overview}</p>
   </SpoilerSection>
 
-  <SummaryDetails>
+  <SummaryDetails {type}>
     <MediaDetails {media} {studios} {crew} {type} />
   </SummaryDetails>
 </Summary>
