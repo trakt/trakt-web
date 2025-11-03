@@ -1,4 +1,3 @@
-import { STAR_RATINGS } from '../constants/index.ts';
 import type { StarRating } from '../models/StarRating.ts';
 
 export function getStarFillPercentage(
@@ -9,9 +8,14 @@ export function getStarFillPercentage(
     return 0;
   }
 
-  const step = 10 / STAR_RATINGS.length;
-  const roundedRating = Math.round(rating / step) * step;
-  const value = star.index * step;
+  const { min, max } = star.range;
 
-  return value <= roundedRating ? 100 : 0;
+  if (rating >= max) {
+    return 100;
+  }
+  if (rating <= min) {
+    return 0;
+  }
+
+  return ((rating - min) / (max - min)) * 100;
 }

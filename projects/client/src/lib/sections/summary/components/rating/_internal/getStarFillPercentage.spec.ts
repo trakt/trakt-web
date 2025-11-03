@@ -23,9 +23,9 @@ describe('getStarFillPercentage', () => {
     const star3 = { index: 3, value: 6, range: { min: 4, max: 6 } };
     const star4 = { index: 4, value: 8, range: { min: 6, max: 8 } };
 
-    const rating = 7.5;
+    const rating = 7;
     expect(getStarFillPercentage(star2, rating)).toBe(100);
     expect(getStarFillPercentage(star3, rating)).toBe(100);
-    expect(getStarFillPercentage(star4, rating)).toBe(100);
+    expect(getStarFillPercentage(star4, rating)).toBe(50);
   });
 });
