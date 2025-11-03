@@ -45,27 +45,31 @@
   {@html marked.parse(comment.comment, { gfm: true, breaks: true })}
 {/snippet}
 
-<Spoiler {media} type={media.type}>
-  <div
-    class="trakt-comment"
-    class:trakt-spoiler={comment.isSpoiler}
-    use:spoilAction
-  >
-    {#if type === "full"}
+{#if type === "full"}
+  <Spoiler {media} type={media.type}>
+    <div
+      class="trakt-comment"
+      class:trakt-spoiler={comment.isSpoiler}
+      use:spoilAction
+    >
       {@render commentText()}
-    {:else}
-      <button class="trakt-comment-preview" onclick={onClick}>
-        <div
-          class="trakt-comment-preview-content"
-          use:lineClamp={{ lines: MAX_PREVIEW_LINES }}
-          style="--max-lines: {MAX_PREVIEW_LINES}"
-        >
-          {@render commentText()}
-        </div>
-      </button>
-    {/if}
-  </div>
-</Spoiler>
+    </div>
+  </Spoiler>
+{:else}
+  <button class="trakt-comment-preview" onclick={onClick}>
+    <Spoiler {media} type={media.type} variant="persistent">
+      <div
+        class="trakt-comment trakt-comment-preview-content"
+        use:lineClamp={{ lines: MAX_PREVIEW_LINES }}
+        style="--max-lines: {MAX_PREVIEW_LINES}"
+        class:trakt-spoiler={comment.isSpoiler}
+        use:spoilAction
+      >
+        {@render commentText()}
+      </div>
+    </Spoiler>
+  </button>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
@@ -90,6 +94,21 @@
     :global(.trakt-comment-heading) {
       text-transform: none;
       text-decoration: underline;
+    }
+
+    &,
+    :global(p) {
+      transition: var(--transition-increment) ease-in-out;
+      transition-property: filter, padding;
+    }
+
+    &:global(.trakt-spoiler),
+    :global(p.trakt-spoiler span) {
+      @include spoiler-blur();
+    }
+
+    :global(p.trakt-spoiler span) {
+      pointer-events: none;
     }
   }
 
