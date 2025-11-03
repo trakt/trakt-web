@@ -67,8 +67,7 @@
     <IndicatorTag>
       <TrackIcon />
     </IndicatorTag>
-  {/if}
-  {#if $isWatchlisted}
+  {:else if $isWatchlisted}
     <IndicatorTag>
       <BookmarkIcon state="added" />
     </IndicatorTag>
