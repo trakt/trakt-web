@@ -26,8 +26,7 @@
     intl,
     studios,
     crew,
-    streamOn,
-  }: MediaSummaryProps<MediaEntry> & {
+  }: Omit<MediaSummaryProps<MediaEntry>, "streamOn"> & {
     type: MediaType;
     studios: MediaStudio[];
     crew: MediaCrew;
@@ -82,7 +81,7 @@
     />
 
     <RenderFor audience="authenticated">
-      <MediaActions {media} {streamOn} {title} />
+      <MediaActions {media} {title} />
 
       <SummaryRateNow {type} {media} />
     </RenderFor>
