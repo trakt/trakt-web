@@ -36,7 +36,7 @@
 </script>
 
 <RenderFor audience="all" device={["mobile"]}>
-  <MediaSummaryV2 {media} {studios} {crew} {intl} {streamOn} type="movie" />
+  <MediaSummaryV2 {media} {studios} {crew} {intl} type="movie" />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>

@@ -21,9 +21,8 @@
     show,
     showIntl,
     episodeIntl,
-    streamOn,
     crew,
-  }: Omit<EpisodeSummaryProps, "seasons"> = $props();
+  }: Omit<EpisodeSummaryProps, "seasons" | "streamon"> = $props();
   const type = "episode";
 
   const title = $derived(episodeIntl.title ?? episode.title);
@@ -62,7 +61,7 @@
     <SummaryTitle {title} genres={show.genres} year={episode.year} />
 
     <RenderFor audience="authenticated">
-      <EpisodeActions {episode} {show} {streamOn} {title} {showTitle} />
+      <EpisodeActions {episode} {show} {title} {showTitle} />
       <SummaryRateNow {type} media={episode} {show} />
     </RenderFor>
   {/snippet}

@@ -36,14 +36,7 @@
 />
 
 <RenderFor audience="all" device={["mobile"]}>
-  <EpisodeSummaryV2
-    {episode}
-    {show}
-    {showIntl}
-    {episodeIntl}
-    {streamOn}
-    {crew}
-  />
+  <EpisodeSummaryV2 {episode} {show} {showIntl} {episodeIntl} {crew} />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>

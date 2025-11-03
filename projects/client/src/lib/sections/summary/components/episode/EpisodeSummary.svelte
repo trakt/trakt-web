@@ -86,13 +86,6 @@
   <SummaryHeader {title}>
     {#snippet popupActions()}
       <RenderFor audience="authenticated" navigation="default">
-        <StreamOnButton
-          {streamOn}
-          {type}
-          {episode}
-          media={show}
-          style="dropdown-item"
-        />
         <CheckInAction style="dropdown-item" {title} {type} {show} {episode} />
       </RenderFor>
       <SetCoverImageAction

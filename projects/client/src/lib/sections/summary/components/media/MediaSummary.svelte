@@ -123,8 +123,6 @@
   <SummaryHeader {title}>
     {#snippet popupActions()}
       <RenderFor audience="authenticated" navigation="default">
-        <StreamOnButton {streamOn} {type} {media} style="dropdown-item" />
-
         {#if media.type === "movie"}
           <CheckInAction style="dropdown-item" type="movie" {title} {media} />
         {/if}
