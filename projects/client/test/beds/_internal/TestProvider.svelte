@@ -1,6 +1,7 @@
 <script lang="ts">
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
+  import FeatureFlagProvider from "$lib/features/feature-flag/FeatureFlagProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
@@ -14,22 +15,24 @@
 <!-- TODO: add more providers here as we expand test suite -->
 <AuthProvider isAuthorized={$isAuthorized} isAuthorizedLegacy={false}>
   <QueryClientProvider client={new QueryClient()}>
-    <ToastProvider>
-      <SearchProvider
-        config={{
-          keys: {
-            media: "",
-            people: "",
-          },
-          server: "",
-        }}
-      >
-        <NavigationProvider device="unknown">
-          <AnalyticsProvider>
-            {@render children()}
-          </AnalyticsProvider>
-        </NavigationProvider>
-      </SearchProvider>
-    </ToastProvider>
+    <FeatureFlagProvider>
+      <ToastProvider>
+        <SearchProvider
+          config={{
+            keys: {
+              media: "",
+              people: "",
+            },
+            server: "",
+          }}
+        >
+          <NavigationProvider device="unknown">
+            <AnalyticsProvider>
+              {@render children()}
+            </AnalyticsProvider>
+          </NavigationProvider>
+        </SearchProvider>
+      </ToastProvider>
+    </FeatureFlagProvider>
   </QueryClientProvider>
 </AuthProvider>

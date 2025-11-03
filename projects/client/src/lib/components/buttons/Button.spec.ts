@@ -1,9 +1,10 @@
 import Button from './Button.svelte';
 
-import type { TraktButtonProps } from '$lib/components/buttons/TraktButtonProps.ts';
-import { fireEvent, render, screen } from '@testing-library/svelte';
+import { renderComponent } from '$test/beds/component/renderComponent.ts';
+import { fireEvent, screen, waitFor } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
+import type { TraktButtonProps } from './TraktButtonProps.ts';
 
 describe('Button', () => {
   const defaultProps: TraktButtonProps = {
@@ -14,8 +15,8 @@ describe('Button', () => {
   };
 
   describe('type: button', () => {
-    it('should render a button element', () => {
-      render(
+    it('should render a button element', async () => {
+      renderComponent(
         Button,
         {
           props: {
@@ -24,94 +25,120 @@ describe('Button', () => {
         },
       );
 
-      const button = screen.getByRole('button', { name: 'Test Button' });
-      expect(button).toBeInTheDocument();
-      expect(button).toHaveTextContent('Test Button Content');
+      await waitFor(() => {
+        const button = screen.getByRole('button', { name: 'Test Button' });
+        expect(button).toBeInTheDocument();
+        expect(button).toHaveTextContent('Test Button Content');
+      });
     });
 
-    it('should render an icon', () => {
-      render(Button, {
-        ...defaultProps,
-        icon: createRawSnippet(() => ({
-          render: () => '<span>🔍</span>',
-        })),
+    it('should render an icon', async () => {
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          icon: createRawSnippet(() => ({
+            render: () => '<span>🔍</span>',
+          })),
+        },
       });
 
-      const icon = screen.getByText('🔍');
+      await waitFor(() => {
+        const icon = screen.getByText('🔍');
 
-      expect(icon).toBeInTheDocument();
+        expect(icon).toBeInTheDocument();
+      });
     });
 
-    it('should be default aligned when icon is present', () => {
-      render(Button, {
-        ...defaultProps,
-        icon: createRawSnippet(() => ({
-          render: () => '<span>🔍</span>',
-        })),
+    it('should be default aligned when icon is present', async () => {
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          icon: createRawSnippet(() => ({
+            render: () => '<span>🔍</span>',
+          })),
+        },
       });
 
-      const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('data-alignment', 'default');
+      await waitFor(() => {
+        const button = screen.getByRole('button');
+        expect(button).toHaveAttribute('data-alignment', 'default');
+      });
     });
 
-    it('should render a subtitle', () => {
-      render(Button, {
-        ...defaultProps,
-        subtitle: createRawSnippet(() => ({
-          render: () => '<span>Subtitle</span>',
-        })),
+    it('should render a subtitle', async () => {
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          subtitle: createRawSnippet(() => ({
+            render: () => '<span>Subtitle</span>',
+          })),
+        },
       });
 
-      const subtitle = screen.getByText('Subtitle');
+      await waitFor(() => {
+        const subtitle = screen.getByText('Subtitle');
 
-      expect(subtitle).toBeInTheDocument();
+        expect(subtitle).toBeInTheDocument();
+      });
     });
 
     it('should attach click event handler', async () => {
       const handler = vi.fn();
 
-      render(Button, {
-        ...defaultProps,
-        onclick: handler,
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          onclick: handler,
+        },
       });
 
-      const button = screen.getByRole('button');
-      await fireEvent.click(button);
+      await waitFor(async () => {
+        const button = screen.getByRole('button');
+        await fireEvent.click(button);
 
-      expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler).toHaveBeenCalledTimes(1);
+      });
     });
 
-    it('should apply correct styles based on props', () => {
-      render(Button, {
-        ...defaultProps,
-        variant: 'secondary',
-        size: 'small',
-        style: 'textured',
-        color: 'red',
+    it('should apply correct styles based on props', async () => {
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          variant: 'secondary',
+          size: 'small',
+          style: 'textured',
+          color: 'red',
+        },
       });
 
-      const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('data-variant', 'secondary');
-      expect(button).toHaveAttribute('data-style', 'textured');
-      expect(button).toHaveAttribute('data-size', 'small');
-      expect(button).toHaveAttribute('data-alignment', 'centered');
-      expect(button).toHaveAttribute('data-color', 'red');
+      await waitFor(() => {
+        const button = screen.getByRole('button');
+        expect(button).toHaveAttribute('data-variant', 'secondary');
+        expect(button).toHaveAttribute('data-style', 'textured');
+        expect(button).toHaveAttribute('data-size', 'small');
+        expect(button).toHaveAttribute('data-alignment', 'centered');
+        expect(button).toHaveAttribute('data-color', 'red');
+      });
     });
 
-    it('should set button as disabled', () => {
-      render(Button, {
-        ...defaultProps,
-        disabled: true,
+    it('should set button as disabled', async () => {
+      renderComponent(Button, {
+        props: {
+          ...defaultProps,
+          disabled: true,
+        },
       });
 
-      const button = screen.getByRole('button');
-      expect(button).toBeDisabled();
+      await waitFor(() => {
+        const button = screen.getByRole('button');
+        expect(button).toBeDisabled();
+      });
     });
   });
 
   describe('type: link', () => {
-    it('should render a link component', () => {
-      render(
+    it('should render a link component', async () => {
+      renderComponent(
         Button,
         {
           props: {
@@ -121,13 +148,15 @@ describe('Button', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test Button' });
-      expect(link).toBeInTheDocument();
-      expect(link).toHaveTextContent('Test Button Content');
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test Button' });
+        expect(link).toBeInTheDocument();
+        expect(link).toHaveTextContent('Test Button Content');
+      });
     });
 
-    it('should have a trakt-active-class when same url', () => {
-      render(
+    it('should have a trakt-active-class when same url', async () => {
+      renderComponent(
         Button,
         {
           props: {
@@ -137,12 +166,14 @@ describe('Button', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test Button' });
-      expect(link).toHaveClass('trakt-link-active');
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test Button' });
+        expect(link).toHaveClass('trakt-link-active');
+      });
     });
 
-    it('should not have a trakt-active-class when different url', () => {
-      render(
+    it('should not have a trakt-active-class when different url', async () => {
+      renderComponent(
         Button,
         {
           props: {
@@ -152,12 +183,14 @@ describe('Button', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test Button' });
-      expect(link).not.toHaveClass('trakt-link-active');
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test Button' });
+        expect(link).not.toHaveClass('trakt-link-active');
+      });
     });
 
-    it('should stay focused when clicked', () => {
-      render(
+    it('should stay focused when clicked', async () => {
+      renderComponent(
         Button,
         {
           props: {
@@ -167,9 +200,11 @@ describe('Button', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test Button' });
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test Button' });
 
-      expect(link).toHaveAttribute('data-sveltekit-keepfocus');
+        expect(link).toHaveAttribute('data-sveltekit-keepfocus');
+      });
     });
   });
 });

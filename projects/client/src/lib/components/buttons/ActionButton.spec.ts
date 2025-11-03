@@ -1,6 +1,7 @@
 import ActionButton from './ActionButton.svelte';
 
-import { fireEvent, render, screen } from '@testing-library/svelte';
+import { renderComponent } from '$test/beds/component/renderComponent.ts';
+import { fireEvent, screen, waitFor } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 import type { TraktActionButtonProps } from './TraktActionButtonProps.ts';
@@ -14,8 +15,8 @@ describe('ActionButton', () => {
   };
 
   describe('type: ActionButton', () => {
-    it('should render a ActionButton element', () => {
-      render(
+    it('should render a ActionButton element', async () => {
+      renderComponent(
         ActionButton,
         {
           props: {
@@ -24,55 +25,69 @@ describe('ActionButton', () => {
         },
       );
 
-      const button = screen.getByRole('button', {
-        name: 'Test ActionButton',
+      await waitFor(() => {
+        const button = screen.getByRole('button', {
+          name: 'Test ActionButton',
+        });
+        expect(button).toBeInTheDocument();
+        expect(button).toHaveTextContent('Test ActionButton Content');
+        expect(button).toHaveAttribute('data-color', 'default');
+        expect(button).toHaveAttribute('data-variant', 'primary');
       });
-      expect(button).toBeInTheDocument();
-      expect(button).toHaveTextContent('Test ActionButton Content');
-      expect(button).toHaveAttribute('data-color', 'default');
-      expect(button).toHaveAttribute('data-variant', 'primary');
     });
 
     it('should attach click event handler', async () => {
       const handler = vi.fn();
 
-      render(ActionButton, {
-        ...defaultProps,
-        onclick: handler,
+      renderComponent(ActionButton, {
+        props: {
+          ...defaultProps,
+          onclick: handler,
+        },
       });
 
-      const button = screen.getByRole('button');
-      await fireEvent.click(button);
+      await waitFor(async () => {
+        const button = screen.getByRole('button');
+        await fireEvent.click(button);
 
-      expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler).toHaveBeenCalledTimes(1);
+      });
     });
 
-    it('should apply correct styles based on props', () => {
-      render(ActionButton, {
-        ...defaultProps,
-        color: 'purple',
-        variant: 'secondary',
+    it('should apply correct styles based on props', async () => {
+      renderComponent(ActionButton, {
+        props: {
+          ...defaultProps,
+          color: 'purple',
+          variant: 'secondary',
+        },
       });
 
-      const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('data-color', 'purple');
-      expect(button).toHaveAttribute('data-variant', 'secondary');
+      await waitFor(() => {
+        const button = screen.getByRole('button');
+        expect(button).toHaveAttribute('data-color', 'purple');
+        expect(button).toHaveAttribute('data-variant', 'secondary');
+      });
     });
 
-    it('should set ActionButton as disabled', () => {
-      render(ActionButton, {
-        ...defaultProps,
-        disabled: true,
+    it('should set ActionButton as disabled', async () => {
+      renderComponent(ActionButton, {
+        props: {
+          ...defaultProps,
+          disabled: true,
+        },
       });
 
-      const button = screen.getByRole('button');
-      expect(button).toBeDisabled();
+      await waitFor(() => {
+        const button = screen.getByRole('button');
+        expect(button).toBeDisabled();
+      });
     });
   });
 
   describe('type: link', () => {
-    it('should render a link component', () => {
-      render(
+    it('should render a link component', async () => {
+      renderComponent(
         ActionButton,
         {
           props: {
@@ -82,13 +97,15 @@ describe('ActionButton', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test ActionButton' });
-      expect(link).toBeInTheDocument();
-      expect(link).toHaveTextContent('Test ActionButton Content');
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test ActionButton' });
+        expect(link).toBeInTheDocument();
+        expect(link).toHaveTextContent('Test ActionButton Content');
+      });
     });
 
-    it('should have a trakt-active-class when same url', () => {
-      render(
+    it('should have a trakt-active-class when same url', async () => {
+      renderComponent(
         ActionButton,
         {
           props: {
@@ -98,12 +115,14 @@ describe('ActionButton', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test ActionButton' });
-      expect(link).toHaveClass('trakt-link-active');
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test ActionButton' });
+        expect(link).toHaveClass('trakt-link-active');
+      });
     });
 
-    it('should not have a trakt-active-class when different url', () => {
-      render(
+    it('should not have a trakt-active-class when different url', async () => {
+      renderComponent(
         ActionButton,
         {
           props: {
@@ -113,12 +132,14 @@ describe('ActionButton', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test ActionButton' });
-      expect(link).not.toHaveClass('trakt-link-active');
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test ActionButton' });
+        expect(link).not.toHaveClass('trakt-link-active');
+      });
     });
 
-    it('should stay focused when clicked', () => {
-      render(
+    it('should stay focused when clicked', async () => {
+      renderComponent(
         ActionButton,
         {
           props: {
@@ -128,9 +149,11 @@ describe('ActionButton', () => {
         },
       );
 
-      const link = screen.getByRole('link', { name: 'Test ActionButton' });
+      await waitFor(() => {
+        const link = screen.getByRole('link', { name: 'Test ActionButton' });
 
-      expect(link).toHaveAttribute('data-sveltekit-keepfocus');
+        expect(link).toHaveAttribute('data-sveltekit-keepfocus');
+      });
     });
   });
 });

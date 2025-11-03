@@ -1,12 +1,13 @@
 import DropdownItem from './DropdownItem.svelte';
 
-import { render, screen } from '@testing-library/svelte';
+import { renderComponent } from '$test/beds/component/renderComponent.ts';
+import { screen, waitFor } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
 import { describe, expect, it } from 'vitest';
 
 describe('DropdownItem', () => {
-  it('should render as a link', () => {
-    render(DropdownItem, {
+  it('should render as a link', async () => {
+    renderComponent(DropdownItem, {
       props: {
         href: '/test-link',
         children: createRawSnippet(() => ({
@@ -15,13 +16,15 @@ describe('DropdownItem', () => {
       },
     });
 
-    const linkElement = screen.getByRole('link', { name: /test link/i });
-    expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveAttribute('href', '/test-link');
+    await waitFor(() => {
+      const linkElement = screen.getByRole('link', { name: /test link/i });
+      expect(linkElement).toBeInTheDocument();
+      expect(linkElement).toHaveAttribute('href', '/test-link');
+    });
   });
 
-  it('should render normally', () => {
-    render(DropdownItem, {
+  it('should render normally', async () => {
+    renderComponent(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
           render: () => '<span>Normal Item</span>',
@@ -29,12 +32,14 @@ describe('DropdownItem', () => {
       },
     });
 
-    const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toBeInTheDocument();
+    await waitFor(() => {
+      const listItemElement = screen.getByRole('listitem');
+      expect(listItemElement).toBeInTheDocument();
+    });
   });
 
-  it('should apply default color', () => {
-    render(DropdownItem, {
+  it('should apply default color', async () => {
+    renderComponent(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
           render: () => '<span>Default Color Item</span>',
@@ -42,12 +47,14 @@ describe('DropdownItem', () => {
       },
     });
 
-    const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toHaveAttribute('data-color', 'purple');
+    await waitFor(() => {
+      const listItemElement = screen.getByRole('listitem');
+      expect(listItemElement).toHaveAttribute('data-color', 'purple');
+    });
   });
 
-  it('should apply red color', () => {
-    render(DropdownItem, {
+  it('should apply red color', async () => {
+    renderComponent(DropdownItem, {
       props: {
         color: 'red',
         children: createRawSnippet(() => ({
@@ -56,12 +63,14 @@ describe('DropdownItem', () => {
       },
     });
 
-    const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toHaveAttribute('data-color', 'red');
+    await waitFor(() => {
+      const listItemElement = screen.getByRole('listitem');
+      expect(listItemElement).toHaveAttribute('data-color', 'red');
+    });
   });
 
-  it('should handle tabindex correctly', () => {
-    render(DropdownItem, {
+  it('should handle tabindex correctly', async () => {
+    renderComponent(DropdownItem, {
       props: {
         children: createRawSnippet(() => ({
           render: () => '<span>Item</span>',
@@ -69,12 +78,14 @@ describe('DropdownItem', () => {
       },
     });
 
-    const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toHaveAttribute('tabindex', '-1');
+    await waitFor(() => {
+      const listItemElement = screen.getByRole('listitem');
+      expect(listItemElement).toHaveAttribute('tabindex', '-1');
+    });
   });
 
-  it('should have tabindex 0 when interactive', () => {
-    render(DropdownItem, {
+  it('should have tabindex 0 when interactive', async () => {
+    renderComponent(DropdownItem, {
       props: {
         onclick: () => {},
         children: createRawSnippet(() => ({
@@ -83,13 +94,15 @@ describe('DropdownItem', () => {
       },
     });
 
-    const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toHaveAttribute('tabindex', '0');
+    await waitFor(() => {
+      const listItemElement = screen.getByRole('listitem');
+      expect(listItemElement).toHaveAttribute('tabindex', '0');
+    });
   });
 
-  it('should render an icon', () => {
+  it('should render an icon', async () => {
     const iconContent = 'This is an icon';
-    render(DropdownItem, {
+    renderComponent(DropdownItem, {
       props: {
         onclick: () => {},
         children: createRawSnippet(() => ({
@@ -101,12 +114,14 @@ describe('DropdownItem', () => {
       },
     });
 
-    const iconElement = screen.getByText(iconContent);
-    expect(iconElement).toBeInTheDocument();
+    await waitFor(() => {
+      const iconElement = screen.getByText(iconContent);
+      expect(iconElement).toBeInTheDocument();
+    });
   });
 
-  it('should apply flat style', () => {
-    render(DropdownItem, {
+  it('should apply flat style', async () => {
+    renderComponent(DropdownItem, {
       props: {
         style: 'flat',
         children: createRawSnippet(() => ({
@@ -115,7 +130,9 @@ describe('DropdownItem', () => {
       },
     });
 
-    const listItemElement = screen.getByRole('listitem');
-    expect(listItemElement).toHaveAttribute('data-style', 'flat');
+    await waitFor(() => {
+      const listItemElement = screen.getByRole('listitem');
+      expect(listItemElement).toHaveAttribute('data-style', 'flat');
+    });
   });
 });

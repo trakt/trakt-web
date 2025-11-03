@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { disableNavigation } from "$lib/utils/actions/disableNavigation";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
+  import { NOOP_FN } from "$lib/utils/constants";
   import type { TraktActionButtonProps } from "./TraktActionButtonProps";
 
   type TraktActionButtonAnchorProps = HTMLAnchorProps & TraktActionButtonProps;
@@ -25,12 +28,15 @@
   const href = $derived((rest as TraktActionButtonAnchorProps).href);
   const noscroll = $derived((rest as TraktActionButtonAnchorProps).noscroll);
   const { isActive } = $derived(useActiveLink(href));
+
+  const { isEnabled } = useFeatureFlag(FeatureFlag.DisableIosHack);
+  const iosHack = $derived($isEnabled ? NOOP_FN : mobileAppleDeviceTriggerHack);
 </script>
 
 {#if href != null}
   <a
     use:triggerWithKeyboard
-    use:mobileAppleDeviceTriggerHack
+    use:iosHack
     use:appendGlobalParameters
     use:disableNavigation={rest.disabled}
     data-sveltekit-keepfocus
