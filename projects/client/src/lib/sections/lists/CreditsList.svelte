@@ -34,7 +34,7 @@
         ? mediaCredits.cast
         : mediaCredits.crew?.get($currentPosition);
 
-    return (mediaList ?? []).sort((a, b) => b.votes - a.votes);
+    return mediaList ?? [];
   };
 
   const getAvailablePositions = (mediaCredits?: MediaCredits) => {
