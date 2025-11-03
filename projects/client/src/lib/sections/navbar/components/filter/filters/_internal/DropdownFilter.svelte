@@ -17,7 +17,6 @@
   <DropdownList
     label={filter.label}
     variant="secondary"
-    text="capitalize"
     size="small"
     style="flat"
     {color}

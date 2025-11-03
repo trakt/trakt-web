@@ -20,7 +20,7 @@
     icon,
     subtitle,
     size = "normal",
-    text = "uppercase",
+    text = "capitalize",
     navigationType,
     disabled,
     "data-testid": dataTestId,
@@ -54,6 +54,7 @@
       class:small={subtitle != null || style === "underlined"}
       class:bold={style === "underlined"}
       class:capitalize={text === "capitalize"}
+      class:uppercase={text === "uppercase"}
     >
       {@render children()}
     </p>
@@ -196,10 +197,6 @@
       font-size: 1rem;
       font-style: normal;
       font-weight: 700;
-    }
-
-    p:not(.meta-info) {
-      text-transform: uppercase;
     }
 
     &.trakt-button-link {

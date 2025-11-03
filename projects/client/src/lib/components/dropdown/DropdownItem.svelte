@@ -36,7 +36,7 @@
 </script>
 
 {#snippet text()}
-  <p class="small bold uppercase ellipsis">{@render children()}</p>
+  <p class="small bold capitalize ellipsis">{@render children()}</p>
 {/snippet}
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
