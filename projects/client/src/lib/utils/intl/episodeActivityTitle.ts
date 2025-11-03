@@ -8,6 +8,7 @@ type Show = {
   title: string;
 };
 
+// FIXME: refactor this away when changing month to date
 export function episodeActivityTitle(
   episode: EpisodeEntry,
   show?: Show,

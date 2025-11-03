@@ -12,7 +12,6 @@
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
   import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
-  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -79,18 +78,7 @@
       </p>
     {/if}
 
-    {#if rest.variant === "activity"}
-      <Link href={UrlBuilder.show(show.slug)}>
-        <p class="trakt-card-title ellipsis">
-          {show.title}
-        </p>
-      </Link>
-      <p class="trakt-card-subtitle ellipsis small">
-        {episodeActivityTitle(episode)}
-      </p>
-    {/if}
-
-    {#if !isShowContext && !isActivity}
+    {#if !isShowContext}
       <Link href={UrlBuilder.show(show.slug)}>
         <p
           class="trakt-card-title ellipsis"

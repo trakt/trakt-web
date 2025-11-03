@@ -11,6 +11,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { languageTag } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
@@ -127,7 +128,10 @@
         </p>
         <p class="trakt-card-subtitle small ellipsis">
           {#if "episode" in rest}
-            {episodeSubtitle(rest.episode)} - {rest.episode.title}
+            {episodeSubtitle(rest.episode)}
+            <Spoiler media={rest.episode} show={media} type="episode">
+              - {rest.episode.title}
+            </Spoiler>
           {:else}
             {toHumanDuration({ minutes: media.runtime }, languageTag())}
           {/if}
