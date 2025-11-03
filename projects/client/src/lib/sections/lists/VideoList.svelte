@@ -59,7 +59,6 @@
           style="flat"
           variant="primary"
           color="blue"
-          text="capitalize"
           size="small"
           navigationType={DpadNavigationType.Item}
         >

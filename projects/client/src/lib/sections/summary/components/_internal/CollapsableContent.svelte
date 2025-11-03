@@ -39,7 +39,7 @@
   class:is-contained={variant === "contain"}
 >
   <div class="trakt-collapsable-content-header">
-    <p class="meta-info">{label}</p>
+    <p class="smaller">{label}</p>
 
     {#if headerContent}
       {@render headerContent()}

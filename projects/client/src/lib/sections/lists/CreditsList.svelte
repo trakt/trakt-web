@@ -70,7 +70,6 @@
       style="flat"
       variant="primary"
       color="blue"
-      text="capitalize"
       size="small"
       disabled={positions.length <= 1}
     >
