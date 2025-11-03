@@ -41,13 +41,11 @@
   <ProfileAbout about={profile.about} />
 </ProfileContainer>
 
-{#if !$isMe}
-  <RecentlyWatchedList
-    drilldownLabel={m.button_label_view_all_recently_watched()}
-    title={m.list_title_recently_watched()}
-    {slug}
-  />
-{/if}
+<RecentlyWatchedList
+  drilldownLabel={m.button_label_view_all_recently_watched()}
+  title={m.list_title_recently_watched()}
+  {slug}
+/>
 
 <FavoritesList {slug} title={m.list_title_favorites()} />
 
