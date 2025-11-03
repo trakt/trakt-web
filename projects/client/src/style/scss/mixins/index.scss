@@ -80,3 +80,9 @@
     #{$variable}: $fallback;
   }
 }
+
+@mixin spoiler-blur() {
+  --blur-size: calc(var(--ni-2) * 1.5);
+  filter: blur(var(--blur-size));
+  padding: 0 var(--blur-size);
+}
