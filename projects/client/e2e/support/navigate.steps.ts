@@ -56,3 +56,11 @@ Then(
     await expect(element).toBeVisible();
   },
 );
+
+Then(
+  'I should not see the {string} element on the page',
+  async function (this: TraktWorld, testId: TestId) {
+    const element = this.page.getByTestId(testId);
+    await expect(element).not.toBeVisible();
+  },
+);

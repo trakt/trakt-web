@@ -17,3 +17,4 @@ Feature: Basic navigation
 
     When I view the movie summary of "heretic-2024"
     Then I should see the "summary-media-title" element on the page
+    Then I should not see the "feature-flag-tool-button" element on the page
