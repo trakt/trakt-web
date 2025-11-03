@@ -152,18 +152,18 @@
         isAuthorized={data.oidcAuth.isAuthorized}
       >
         <WSInvalidator />
-        <CookieConsentProvider
-          hasConsent={data.hasConsent || data.device === "tv"}
-          device={data.device}
-        >
-          <PlayerProvider>
-            <AnalyticsProvider>
-              <AutoSigninProvider>
-                <NavigationProvider device={data.device}>
-                  <LocaleProvider>
-                    <SearchProvider config={data.typesense}>
-                      <FilterProvider>
-                        <FeatureFlagProvider>
+        <FeatureFlagProvider>
+          <CookieConsentProvider
+            hasConsent={data.hasConsent || data.device === "tv"}
+            device={data.device}
+          >
+            <PlayerProvider>
+              <AnalyticsProvider>
+                <AutoSigninProvider>
+                  <NavigationProvider device={data.device}>
+                    <LocaleProvider>
+                      <SearchProvider config={data.typesense}>
+                        <FilterProvider>
                           <CoverProvider>
                             <ToastProvider>
                               <DiscoverProvider>
@@ -229,19 +229,19 @@
                               </DiscoverProvider>
                             </ToastProvider>
                           </CoverProvider>
-                        </FeatureFlagProvider>
-                      </FilterProvider>
-                    </SearchProvider>
-                  </LocaleProvider>
-                </NavigationProvider>
+                        </FilterProvider>
+                      </SearchProvider>
+                    </LocaleProvider>
+                  </NavigationProvider>
 
-                {#key page.url.pathname}
-                  <PageView />
-                {/key}
-              </AutoSigninProvider>
-            </AnalyticsProvider>
-          </PlayerProvider>
-        </CookieConsentProvider>
+                  {#key page.url.pathname}
+                    <PageView />
+                  {/key}
+                </AutoSigninProvider>
+              </AnalyticsProvider>
+            </PlayerProvider>
+          </CookieConsentProvider>
+        </FeatureFlagProvider>
       </AuthProvider>
     </GlobalParameterProvider>
   </QueryClientProvider>

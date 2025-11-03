@@ -1,14 +1,15 @@
 import DropdownList from './DropdownList.svelte';
 
-import type { TraktDropdownListProps } from '$lib/components/dropdown/TraktDropdownListProps.ts';
+import { renderComponent } from '$test/beds/component/renderComponent.ts';
 import {
   fireEvent,
-  render,
   screen,
+  waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/svelte';
 import { createRawSnippet } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { TraktDropdownListProps } from './TraktDropdownListProps.ts';
 
 describe('DropdownList', () => {
   const defaultProps: TraktDropdownListProps = {
@@ -28,66 +29,72 @@ describe('DropdownList', () => {
   });
 
   it('should render the dropdown list', async () => {
-    render(DropdownList, {
+    renderComponent(DropdownList, {
       props: {
         ...defaultProps,
       },
     });
 
-    const dropdownButton = screen.getByRole('button', {
-      name: /click here/i,
-    });
-    await fireEvent.click(dropdownButton);
-    vi.advanceTimersToNextFrame();
+    await waitFor(async () => {
+      const dropdownButton = screen.getByRole('button', {
+        name: /click here/i,
+      });
+      await fireEvent.click(dropdownButton);
+      vi.advanceTimersToNextFrame();
 
-    const items = screen.getAllByRole('listitem');
-    expect(items).toHaveLength(1);
+      const items = screen.getAllByRole('listitem');
+      expect(items).toHaveLength(1);
+    });
   });
 
   it('should close the dropdown when clicking outside', async () => {
-    render(DropdownList, {
+    renderComponent(DropdownList, {
       props: {
         ...defaultProps,
       },
     });
 
-    const dropdownButton = screen.getByRole('button', {
-      name: /click here/i,
+    await waitFor(async () => {
+      const dropdownButton = screen.getByRole('button', {
+        name: /click here/i,
+      });
+
+      await fireEvent.click(dropdownButton);
+      vi.advanceTimersToNextFrame();
+
+      const list = screen.getByRole('list');
+      expect(list).toBeInTheDocument();
+
+      await fireEvent.click(window);
+      vi.advanceTimersToNextFrame();
+
+      await waitForElementToBeRemoved(screen.getByRole('list'));
     });
-
-    await fireEvent.click(dropdownButton);
-    vi.advanceTimersToNextFrame();
-
-    const list = screen.getByRole('list');
-    expect(list).toBeInTheDocument();
-
-    await fireEvent.click(window);
-    vi.advanceTimersToNextFrame();
-
-    await waitForElementToBeRemoved(screen.getByRole('list'));
   });
 
   it('should close the dropdown when clicking an item', async () => {
-    render(DropdownList, {
+    renderComponent(DropdownList, {
       props: {
         ...defaultProps,
       },
-    }, {});
-
-    const dropdownButton = screen.getByRole('button', {
-      name: /click here/i,
     });
 
-    await fireEvent.click(dropdownButton);
-    vi.advanceTimersToNextFrame();
+    await waitFor(async () => {
+      const dropdownButton = screen.getByRole('button', {
+        name: /click here/i,
+      });
 
-    const list = screen.getByRole('list');
-    expect(list).toBeInTheDocument();
+      await fireEvent.click(dropdownButton);
+      vi.advanceTimersToNextFrame();
 
-    const item = screen.getByRole('listitem');
-    await fireEvent.click(item);
-    vi.advanceTimersToNextFrame();
+      const list = screen.getByRole('list');
+      expect(list).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(list);
+      const item = screen.getByRole('listitem');
+      await fireEvent.click(item);
+      vi.advanceTimersToNextFrame();
+
+      await waitForElementToBeRemoved(list);
+    });
   });
 });

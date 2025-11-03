@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
@@ -6,6 +8,7 @@
   import { disableTransitionOn } from "$lib/utils/actions/disableTransitionOn";
   import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
+  import { NOOP_FN } from "$lib/utils/constants";
   import { onMount } from "svelte";
   import type { TraktButtonProps } from "./TraktButtonProps";
 
@@ -46,6 +49,9 @@
       element.setAttribute("data-testid", dataTestId);
     });
   });
+
+  const { isEnabled } = useFeatureFlag(FeatureFlag.DisableIosHack);
+  const iosHack = $derived($isEnabled ? NOOP_FN : mobileAppleDeviceTriggerHack);
 </script>
 
 {#snippet contents()}
@@ -74,7 +80,7 @@
     use:disableTransitionOn={"touch"}
     use:clickOutside
     use:triggerWithKeyboard
-    use:mobileAppleDeviceTriggerHack
+    use:iosHack
     use:appendGlobalParameters
     use:disableNavigation={rest.disabled}
     use:appendTestId
