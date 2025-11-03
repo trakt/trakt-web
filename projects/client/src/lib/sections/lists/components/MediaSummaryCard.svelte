@@ -11,10 +11,11 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
-  import { episodeActivityTitle } from "$lib/utils/intl/episodeActivityTitle";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
+  import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import SummaryCardBackgroundImage from "./_internal/SummaryCardBackgroundImage.svelte";
   import SummaryCardBottomBar from "./_internal/SummaryCardBottomBar.svelte";
@@ -90,7 +91,12 @@
       {#if rest.variant === "activity"}
         {#if rest.type === "episode"}
           <p class="trakt-card-title ellipsis">
-            {episodeActivityTitle(rest.episode, media)}
+            {episodeSubtitle(rest.episode)}
+            {#if !["multiple_episodes", "full_season"].includes(rest.episode.type)}
+              <Spoiler media={rest.episode} show={media} type="episode">
+                - {rest.episode.title}
+              </Spoiler>
+            {/if}
           </p>
         {:else}
           <p class="trakt-card-title ellipsis">
@@ -109,13 +115,16 @@
         </p>
       {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
         <p class="trakt-card-title ellipsis">
+          {media.title}
+        </p>
+        <p class="trakt-card-subtitle small secondary ellipsis">
           {episodeNumberLabel({
             seasonNumber: rest.episode.season,
             episodeNumber: rest.episode.number,
-          })} - {media.title}
-        </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
-          {rest.episode.title}
+          })}
+          <Spoiler media={rest.episode} show={media} type="episode">
+            - {rest.episode.title}
+          </Spoiler>
         </p>
       {:else}
         <p class="trakt-card-title ellipsis">
