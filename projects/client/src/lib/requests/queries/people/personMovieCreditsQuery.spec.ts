@@ -3,14 +3,14 @@ import { PersonGrantResponseMock } from '$mocks/data/people/response/PersonGrant
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
-import { peopleMovieCreditsQuery } from './peopleMovieCreditsQuery.ts';
+import { personMovieCreditsQuery } from './personMovieCreditsQuery.ts';
 
-describe('peopleMovieCreditsQuery', () => {
+describe('personMovieCreditsQuery', () => {
   it('should query for movie credits', async () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          peopleMovieCreditsQuery({
+          personMovieCreditsQuery({
             slug: PersonGrantResponseMock.ids.slug,
           }),
         ),

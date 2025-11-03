@@ -4,10 +4,10 @@ import { MediaCreditsSchema } from '$lib/requests/models/MediaCredits.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { mapToMediaCredits } from '../../_internal/mapToMediaCredits.ts';
 
-type PeopleMovieCreditsParams = { slug: string } & ApiParams;
+type PersonMovieCreditsParams = { slug: string } & ApiParams;
 
-const peopleMovieCreditsRequest = (
-  { fetch, slug }: PeopleMovieCreditsParams,
+const personMovieCreditsRequest = (
+  { fetch, slug }: PersonMovieCreditsParams,
 ) =>
   api({ fetch })
     .people
@@ -20,11 +20,11 @@ const peopleMovieCreditsRequest = (
       },
     });
 
-export const peopleMovieCreditsQuery = defineQuery({
-  key: 'peopleMovieCredits',
+export const personMovieCreditsQuery = defineQuery({
+  key: 'personMovieCredits',
   invalidations: [],
   dependencies: (params) => [params.slug],
-  request: peopleMovieCreditsRequest,
+  request: personMovieCreditsRequest,
   mapper: (response) => mapToMediaCredits(response.body),
   schema: MediaCreditsSchema,
   ttl: time.days(7),
