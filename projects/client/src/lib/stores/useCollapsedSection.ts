@@ -1,9 +1,12 @@
 import { derived, writable } from 'svelte/store';
 import { safeLocalStorage } from '../utils/storage/safeStorage.ts';
 
-export function useCollapsedSection(key: string) {
+export function useCollapsedSection(
+  key: string,
+  defaultValue = false,
+) {
   const isCollapsed = writable(
-    JSON.parse(safeLocalStorage.getItem(key) ?? 'false'),
+    JSON.parse(safeLocalStorage.getItem(key) ?? JSON.stringify(defaultValue)),
   );
 
   return {
