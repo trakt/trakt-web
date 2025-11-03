@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { writable } from "svelte/store";
   import { slide } from "svelte/transition";
 
   const {
@@ -8,18 +7,21 @@
     labels,
     headerContent,
     variant = "sibling",
+    isCollapsed,
+    toggle,
   }: {
     labels: { view: string; hide: string };
     headerContent?: Snippet;
     variant?: "contain" | "sibling";
+    isCollapsed: boolean;
+    toggle: () => void;
   } & ChildrenProps = $props();
 
-  const isExpanded = writable(false);
-  const label = $derived($isExpanded ? labels.hide : labels.view);
+  const label = $derived(isCollapsed ? labels.view : labels.hide);
 </script>
 
 {#snippet content()}
-  {#if $isExpanded}
+  {#if !isCollapsed}
     <div
       class="trakt-collapsable-content"
       transition:slide={{ duration: 150, axis: "y" }}
@@ -32,8 +34,8 @@
 <button
   class="trakt-collapsable-content-button"
   aria-label={label}
-  onclick={() => isExpanded.set(!$isExpanded)}
-  class:is-expanded={$isExpanded}
+  onclick={toggle}
+  class:is-expanded={!isCollapsed}
   class:is-contained={variant === "contain"}
 >
   <div class="trakt-collapsable-content-header">
