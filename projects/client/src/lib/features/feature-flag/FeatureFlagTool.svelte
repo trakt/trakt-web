@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { TestId } from "$e2e/models/TestId.ts";
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
@@ -34,6 +35,7 @@
     label="Feature flags"
     onclick={() => isOpen.set(!$isOpen)}
     style="ghost"
+    data-testid={TestId.FeatureFlagToolButton}
   >
     <CircularLogo />
   </ActionButton>

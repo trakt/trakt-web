@@ -10,4 +10,5 @@ export enum TestId {
   NavBarMoviesButton = 'nav-bar-movies-button',
   SummaryMediaTitle = 'summary-media-title',
   ConsentButton = 'consent-button',
+  FeatureFlagToolButton = 'feature-flag-tool-button',
 }
