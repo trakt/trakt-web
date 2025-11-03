@@ -27,6 +27,9 @@
       extensions: [spoilerExtension()],
       renderer: {
         paragraph: createParagraphSpoilerRenderer(comment.isSpoiler),
+        heading: (tokens) => {
+          return `<h6 class="trakt-comment-heading">${tokens.text}</h6>`;
+        },
       },
     }),
   );
@@ -82,6 +85,11 @@
     :global(p),
     :global(li) {
       font-size: inherit;
+    }
+
+    :global(.trakt-comment-heading) {
+      text-transform: none;
+      text-decoration: underline;
     }
   }
 
