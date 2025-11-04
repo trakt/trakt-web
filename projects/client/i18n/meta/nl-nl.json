@@ -1846,14 +1846,8 @@
     "button_text_social": {
       "default": "Sociaal"
     },
-    "button_label_social": {
-      "default": "Bekijk sociale activiteit"
-    },
     "button_text_personal": {
       "default": "Persoonlijk"
-    },
-    "button_label_personal": {
-      "default": "Bekijk persoonlijke activiteit"
     },
     "page_title_unexpected_error": {
       "default": "Er is iets misgegaan"

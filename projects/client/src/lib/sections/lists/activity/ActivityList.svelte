@@ -3,8 +3,6 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
 
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useToggler } from "$lib/components/toggles/useToggler.ts";
   import { useDiscover } from "$lib/features/discover/useDiscover.ts";
   import { DEFAULT_ACTIVITY_PAGE_SIZE } from "$lib/utils/constants.ts";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -14,41 +12,52 @@
 
   /** once we have a proper social hub we should encourage people to find other users to follow, aka: empty placeholder */
 
-  const { current: activityType, set, options } = useToggler("activity");
+  const { activityType }: { activityType: "social" | "personal" } = $props();
 
   const { mode } = useDiscover();
 
   const urlBuilder = $derived(
-    $activityType.value === "social"
+    activityType === "social"
       ? UrlBuilder.social.activity
       : UrlBuilder.history.all,
   );
 
   const cta = $derived(
-    $activityType.value === "social"
+    activityType === "social"
       ? { type: "activity" as const }
       : {
           type: "personal-activity" as const,
           mediaType: $mode === "media" ? undefined : $mode,
         },
   );
+
+  const title = $derived(
+    activityType === "social"
+      ? m.list_title_social_activity()
+      : m.list_title_recently_watched(),
+  );
+
+  const drilldownLabel = $derived(
+    activityType === "social"
+      ? m.button_label_view_all_social_activity()
+      : m.button_label_view_all_recently_watched(),
+  );
 </script>
 
 <DrillableMediaList
-  id={`activity-list-${$activityType.value}`}
-  source={{ id: "activity", type: $activityType.value }}
-  type="episode"
-  metaInfo={$activityType.text()}
+  id={`activity-list-${activityType}`}
+  source={{ id: "activity", type: activityType }}
+  type={$mode}
+  variant="landscape"
   useList={(params) =>
     useActivityList({
       ...params,
       limit: DEFAULT_ACTIVITY_PAGE_SIZE,
-      activityType: $activityType.value,
-      type: $mode,
+      activityType,
     })}
   {urlBuilder}
-  drilldownLabel={m.button_label_view_all_social_activity()}
-  title={m.list_title_activity()}
+  {drilldownLabel}
+  {title}
 >
   {#snippet item(activity)}
     {#if "activityAt" in activity}
@@ -64,9 +73,5 @@
 
   {#snippet empty()}
     <CtaItem {cta} variant="placeholder" />
-  {/snippet}
-
-  {#snippet badge()}
-    <Toggler value={$activityType.value} onChange={set} {options} />
   {/snippet}
 </DrillableMediaList>

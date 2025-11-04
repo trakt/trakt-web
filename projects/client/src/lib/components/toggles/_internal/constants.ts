@@ -2,11 +2,9 @@ import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts
 import * as m from '$lib/features/i18n/messages.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import type { ActivityType } from '$lib/sections/lists/activity/models/ActivityType.ts';
 import type { ToggleOption } from '../ToggleOption.ts';
 
 export type TogglerId =
-  | 'activity'
   | 'media'
   | 'social'
   | 'discover'
@@ -24,7 +22,6 @@ type Toggler<T, K> = {
 };
 
 export type TogglerValueMap = {
-  activity: ActivityType;
   media: MediaToggleType;
   social: SocialToggleType;
   discover: DiscoverToggleType;
@@ -32,23 +29,6 @@ export type TogglerValueMap = {
 };
 
 type ToggleDefinition<K extends TogglerId> = Toggler<K, TogglerValueMap[K]>;
-
-const activity: ToggleDefinition<'activity'> = {
-  id: 'activity',
-  default: 'social',
-  options: [
-    {
-      value: 'social',
-      text: m.button_text_social,
-      label: m.button_label_social,
-    },
-    {
-      value: 'personal',
-      text: m.button_text_personal,
-      label: m.button_label_personal,
-    },
-  ],
-};
 
 const media: ToggleDefinition<'media'> = {
   id: 'media',
@@ -131,7 +111,6 @@ const comment: ToggleDefinition<'comment'> = {
 export const TOGGLERS: {
   [K in TogglerId]: Toggler<K, TogglerValueMap[K]>;
 } = {
-  activity,
   media,
   social,
   discover,

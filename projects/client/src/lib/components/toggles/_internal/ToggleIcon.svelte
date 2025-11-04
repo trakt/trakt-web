@@ -7,11 +7,8 @@
   import PopularIcon from "$lib/components/icons/PopularIcon.svelte";
   import RecentIcon from "$lib/components/icons/RecentIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
-  import SocialIcon from "$lib/components/icons/SocialIcon.svelte";
   import type { ToggleOption } from "$lib/components/toggles/ToggleOption";
   import { useUser } from "$lib/features/auth/stores/useUser.ts";
-  import * as m from "$lib/features/i18n/messages.ts";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
 
   interface ToggleIconProps {
     option: ToggleOption<T>;
@@ -34,17 +31,6 @@
 
 {#if option.value === "show"}
   <ShowIcon />
-{/if}
-
-{#if option.value === "social"}
-  <SocialIcon />
-{/if}
-
-{#if option.value === "personal"}
-  <CrossOriginImage
-    src={$user.avatar.url}
-    alt={m.image_alt_user_avatar({ username: $user.name.full })}
-  />
 {/if}
 
 {#if option.value === "people"}

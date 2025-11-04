@@ -1846,14 +1846,8 @@
     "button_text_social": {
       "default": "Socialt"
     },
-    "button_label_social": {
-      "default": "Vis social aktivitet"
-    },
     "button_text_personal": {
       "default": "Personligt"
-    },
-    "button_label_personal": {
-      "default": "Vis personlig aktivitet"
     },
     "page_title_unexpected_error": {
       "default": "Noget gik galt"

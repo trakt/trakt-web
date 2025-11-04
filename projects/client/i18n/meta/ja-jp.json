@@ -1846,14 +1846,8 @@
     "button_text_social": {
       "default": "ソーシャル"
     },
-    "button_label_social": {
-      "default": "ソーシャルアクティビティを表示"
-    },
     "button_text_personal": {
       "default": "パーソナル"
-    },
-    "button_label_personal": {
-      "default": "パーソナルアクティビティを表示"
     },
     "page_title_unexpected_error": {
       "default": "問題が発生しました"

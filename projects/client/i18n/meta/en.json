@@ -5093,26 +5093,10 @@
         "ios"
       ]
     },
-    "button_label_social": {
-      "default": "View social activity",
-      "description": "Aria-label for the button that allows users to view social activity.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_text_personal": {
       "default": "Personal",
       "description": "Text for the button that allows users to view their own activity.",
       "exclude": [
-        "ios"
-      ]
-    },
-    "button_label_personal": {
-      "default": "View personal activity",
-      "description": "Aria-label for the button that allows users to view their own activity.",
-      "exclude": [
-        "android",
         "ios"
       ]
     },
