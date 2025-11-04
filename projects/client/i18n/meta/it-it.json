@@ -1846,14 +1846,8 @@
     "button_text_social": {
       "default": "Social"
     },
-    "button_label_social": {
-      "default": "Visualizza attività social"
-    },
     "button_text_personal": {
       "default": "Personale"
-    },
-    "button_label_personal": {
-      "default": "Visualizza attività personale"
     },
     "page_title_unexpected_error": {
       "default": "Qualcosa è andato storto"

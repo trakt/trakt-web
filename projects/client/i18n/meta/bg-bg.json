@@ -1846,14 +1846,8 @@
     "button_text_social": {
       "default": "Социално"
     },
-    "button_label_social": {
-      "default": "Вижте социалната активност"
-    },
     "button_text_personal": {
       "default": "Лично"
-    },
-    "button_label_personal": {
-      "default": "Вижте личната активност"
     },
     "page_title_unexpected_error": {
       "default": "Нещо се обърка"

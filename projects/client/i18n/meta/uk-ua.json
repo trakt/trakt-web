@@ -1846,14 +1846,8 @@
     "button_text_social": {
       "default": "Соціальне"
     },
-    "button_label_social": {
-      "default": "Переглянути соціальну активність"
-    },
     "button_text_personal": {
       "default": "Особисте"
-    },
-    "button_label_personal": {
-      "default": "Переглянути особисту активність"
     },
     "page_title_unexpected_error": {
       "default": "Щось пішло не так"

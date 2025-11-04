@@ -27,7 +27,8 @@
     <UpNextList intent="continue" />
     <UpNextList intent="start" />
     <UpcomingList />
-    <ActivityList />
+    <ActivityList activityType="personal" />
+    <ActivityList activityType="social" />
   </RenderFor>
 
   <RenderFor
