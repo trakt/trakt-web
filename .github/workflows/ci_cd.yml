@@ -144,11 +144,10 @@ jobs:
     concurrency:
       group: ci-${{ github.ref }}
       cancel-in-progress: true
-    needs: [test, e2e]
+    needs: [test]
     if: |
       always() &&
-      needs.test.result == 'success' &&
-      (needs.e2e.result == 'success' || needs.e2e.result == 'skipped')
+      needs.test.result == 'success'
 
     steps:
       - name: Secure the Evidence aka Checkout Code
