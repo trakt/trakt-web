@@ -5,7 +5,7 @@
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
-  import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
+  import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
@@ -107,7 +107,7 @@
         >
           {m.button_text_browse_lists()}
           {#snippet icon()}
-            <WatchlistIcon />
+            <ListIcon />
           {/snippet}
         </Button>
       </RenderFor>
