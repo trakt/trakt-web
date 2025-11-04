@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { time } from '$lib/utils/timing/time.ts';
-import { User, UserManager } from 'oidc-client-ts';
+import { type User, UserManager } from 'oidc-client-ts';
 import { onMount } from 'svelte';
 import { derived, readable, writable } from 'svelte/store';
 import { getOidcConfig } from '../getOidcConfig.ts';
