@@ -123,7 +123,7 @@
       {media}
       {style}
       tag={rest.variant !== "next" ? tag : undefined}
-      indicators={canDeemphasize ? indicatorTags : undefined}
+      indicators={indicatorTags}
       {...rest}
       {popupActions}
     />
