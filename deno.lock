@@ -4,19 +4,19 @@
     "jsr:@std/cli@^1.0.20": "1.0.21",
     "npm:@cucumber/cucumber@12.2.0": "12.2.0_@cucumber+gherkin@34.0.0_@cucumber+message-streams@4.0.1__@cucumber+messages@28.1.0_@cucumber+messages@28.1.0",
     "npm:@google/generative-ai@0.24.1": "0.24.1",
-    "npm:@inlang/paraglide-js@2.2.0": "2.2.0",
+    "npm:@inlang/paraglide-js@2.4.0": "2.4.0",
     "npm:@jsr/trakt__api@0.2.36": "0.2.36_zod@3.25.76",
     "npm:@playwright/test@1.55.0": "1.55.0",
-    "npm:@sentry/sveltekit@10.7.0": "10.7.0_@sveltejs+kit@2.37.0__@sveltejs+vite-plugin-svelte@5.1.1___svelte@5.43.3____acorn@8.15.0___vite@6.3.5____sass-embedded@1.91.0____picomatch@4.0.3___sass-embedded@1.91.0__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.91.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_svelte@5.43.3__acorn@8.15.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_sass-embedded@1.91.0",
+    "npm:@sentry/sveltekit@10.22.0": "10.22.0_@sveltejs+kit@2.37.0__@sveltejs+vite-plugin-svelte@5.1.1___svelte@5.43.3____acorn@8.15.0___vite@6.3.5____sass-embedded@1.91.0____picomatch@4.0.3___sass-embedded@1.91.0__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.91.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_svelte@5.43.3__acorn@8.15.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_sass-embedded@1.91.0",
     "npm:@svelte-put/qr@2.1.0": "2.1.0_svelte@5.43.3__acorn@8.15.0",
     "npm:@sveltejs/adapter-auto@6.1.0": "6.1.0_@sveltejs+kit@2.37.0__@sveltejs+vite-plugin-svelte@5.1.1___svelte@5.43.3____acorn@8.15.0___vite@6.3.5____sass-embedded@1.91.0____picomatch@4.0.3___sass-embedded@1.91.0__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.91.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_svelte@5.43.3__acorn@8.15.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_sass-embedded@1.91.0",
     "npm:@sveltejs/adapter-cloudflare@7.2.3": "7.2.3_@sveltejs+kit@2.37.0__@sveltejs+vite-plugin-svelte@5.1.1___svelte@5.43.3____acorn@8.15.0___vite@6.3.5____sass-embedded@1.91.0____picomatch@4.0.3___sass-embedded@1.91.0__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.91.0_wrangler@4.45.1__@cloudflare+workers-types@4.20251014.0__unenv@2.0.0-rc.21__workerd@1.20251011.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_svelte@5.43.3__acorn@8.15.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_@cloudflare+workers-types@4.20251014.0_sass-embedded@1.91.0",
     "npm:@sveltejs/enhanced-img@0.6.0": "0.6.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_svelte@5.43.3__acorn@8.15.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_sass-embedded@1.91.0",
     "npm:@sveltejs/kit@2.37.0": "2.37.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_svelte@5.43.3__acorn@8.15.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_acorn@8.15.0_sass-embedded@1.91.0",
     "npm:@sveltejs/vite-plugin-svelte@5.1.1": "5.1.1_svelte@5.43.3__acorn@8.15.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_sass-embedded@1.91.0",
-    "npm:@tanstack/svelte-query-devtools@5.85.5": "5.85.5_@tanstack+svelte-query@5.85.5__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0",
-    "npm:@tanstack/svelte-query-persist-client@5.85.5": "5.85.5_@tanstack+svelte-query@5.85.5__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0",
-    "npm:@tanstack/svelte-query@5.85.5": "5.85.5_svelte@5.43.3__acorn@8.15.0",
+    "npm:@tanstack/svelte-query-devtools@5.90.2": "5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0",
+    "npm:@tanstack/svelte-query-persist-client@5.90.2": "5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0",
+    "npm:@tanstack/svelte-query@5.90.2": "5.90.2_svelte@5.43.3__acorn@8.15.0",
     "npm:@testing-library/jest-dom@6.8.0": "6.8.0",
     "npm:@testing-library/svelte@5.2.8": "5.2.8_svelte@5.43.3__acorn@8.15.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_vitest@3.2.4__jsdom@26.1.0__msw@2.7.3___typescript@5.8.3__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0__typescript@5.8.3_sass-embedded@1.91.0_jsdom@26.1.0_msw@2.7.3__typescript@5.8.3_typescript@5.8.3",
     "npm:@testing-library/user-event@14.6.1": "14.6.1_@testing-library+dom@10.4.1",
@@ -30,7 +30,7 @@
     "npm:date-fns@4.1.0": "4.1.0",
     "npm:eslint-plugin-svelte@3.11.0": "3.11.0_eslint@9.34.0_svelte@5.43.3__acorn@8.15.0_postcss@8.5.6",
     "npm:eslint@9.34.0": "9.34.0",
-    "npm:firebase@12.2.0": "12.2.0_@firebase+app@0.14.2_@firebase+app-types@0.9.3_@firebase+app-compat@0.5.2",
+    "npm:firebase@12.5.0": "12.5.0_@firebase+app@0.14.5_@firebase+app-types@0.9.3_@firebase+app-compat@0.5.5",
     "npm:flowbite-svelte@^1.22.0": "1.22.0_svelte@5.43.3__acorn@8.15.0_tailwindcss@4.1.16_tailwind-merge@3.3.1",
     "npm:globals@16.3.0": "16.3.0",
     "npm:idb-keyval@6.2.2": "6.2.2",
@@ -86,6 +86,17 @@
         "json-schema",
         "jsonpointer",
         "leven"
+      ]
+    },
+    "@apm-js-collab/code-transformer@0.8.2": {
+      "integrity": "sha512-YRjJjNq5KFSjDUoqu5pFUWrrsvGOxl6c3bu+uMFc9HNNptZ2rNU/TI2nLw4jnhQNtka972Ee2m3uqbvDQtPeCA=="
+    },
+    "@apm-js-collab/tracing-hooks@0.3.1": {
+      "integrity": "sha512-Vu1CbmPURlN5fTboVuKMoJjbO5qcq9fA5YXpskx3dXe/zTBvjODFoerw+69rVBlRLrJpwPqSDqEuJDEKIrTldw==",
+      "dependencies": [
+        "@apm-js-collab/code-transformer",
+        "debug",
+        "module-details-from-path"
       ]
     },
     "@asamuzakjp/css-color@3.2.0_@csstools+css-parser-algorithms@3.0.5__@csstools+css-tokenizer@3.0.4_@csstools+css-tokenizer@3.0.4": {
@@ -1313,8 +1324,8 @@
         "levn"
       ]
     },
-    "@firebase/ai@2.2.0_@firebase+app@0.14.2_@firebase+app-types@0.9.3": {
-      "integrity": "sha512-+Dom8MYdbno2JghxGaIUa8CDTdPIPW8Yw7/1088fEbxxBmjbcdkxBYPXSdkSp/6rcTlLZaPJe4jV49gnwYn9Sw==",
+    "@firebase/ai@2.5.0_@firebase+app@0.14.5_@firebase+app-types@0.9.3": {
+      "integrity": "sha512-OXv/jZLRjV9jTejWA4KOvW8gM1hNsLvQSCPwKhi2CEfe0Nap3rM6z+Ial0PGqXga0WgzhpypEvJOFvaAUFX3kg==",
       "dependencies": [
         "@firebase/app",
         "@firebase/app-check-interop-types",
@@ -1325,8 +1336,8 @@
         "tslib"
       ]
     },
-    "@firebase/analytics-compat@0.2.24_@firebase+app-compat@0.5.2_@firebase+app@0.14.2": {
-      "integrity": "sha512-jE+kJnPG86XSqGQGhXXYt1tpTbCTED8OQJ/PQ90SEw14CuxRxx/H+lFbWA1rlFtFSsTCptAJtgyRBwr/f00vsw==",
+    "@firebase/analytics-compat@0.2.25_@firebase+app-compat@0.5.5_@firebase+app@0.14.5": {
+      "integrity": "sha512-fdzoaG0BEKbqksRDhmf4JoyZf16Wosrl0Y7tbZtJyVDOOwziE0vrFjmZuTdviL0yhak+Nco6rMsUUbkbD+qb6Q==",
       "dependencies": [
         "@firebase/analytics",
         "@firebase/analytics-types",
@@ -1339,8 +1350,8 @@
     "@firebase/analytics-types@0.8.3": {
       "integrity": "sha512-VrIp/d8iq2g501qO46uGz3hjbDb8xzYMrbu8Tp0ovzIzrvJZ2fvmj649gTjge/b7cCCcjT0H37g1gVtlNhnkbg=="
     },
-    "@firebase/analytics@0.10.18_@firebase+app@0.14.2": {
-      "integrity": "sha512-iN7IgLvM06iFk8BeFoWqvVpRFW3Z70f+Qe2PfCJ7vPIgLPjHXDE774DhCT5Y2/ZU/ZbXPDPD60x/XPWEoZLNdg==",
+    "@firebase/analytics@0.10.19_@firebase+app@0.14.5": {
+      "integrity": "sha512-3wU676fh60gaiVYQEEXsbGS4HbF2XsiBphyvvqDbtC1U4/dO4coshbYktcCHq+HFaGIK07iHOh4pME0hEq1fcg==",
       "dependencies": [
         "@firebase/app",
         "@firebase/component",
@@ -1350,7 +1361,7 @@
         "tslib"
       ]
     },
-    "@firebase/app-check-compat@0.4.0_@firebase+app-compat@0.5.2_@firebase+app@0.14.2": {
+    "@firebase/app-check-compat@0.4.0_@firebase+app-compat@0.5.5_@firebase+app@0.14.5": {
       "integrity": "sha512-UfK2Q8RJNjYM/8MFORltZRG9lJj11k0nW84rrffiKvcJxLf1jf6IEjCIkCamykHE73C6BwqhVfhIBs69GXQV0g==",
       "dependencies": [
         "@firebase/app-check",
@@ -1368,7 +1379,7 @@
     "@firebase/app-check-types@0.5.3": {
       "integrity": "sha512-hyl5rKSj0QmwPdsAxrI5x1otDlByQ7bvNvVt8G/XPO2CSwE++rmSVf3VEhaeOR4J8ZFaF0Z0NDSmLejPweZ3ng=="
     },
-    "@firebase/app-check@0.11.0_@firebase+app@0.14.2": {
+    "@firebase/app-check@0.11.0_@firebase+app@0.14.5": {
       "integrity": "sha512-XAvALQayUMBJo58U/rxW02IhsesaxxfWVmVkauZvGEz3vOAjMEQnzFlyblqkc2iAaO82uJ2ZVyZv9XzPfxjJ6w==",
       "dependencies": [
         "@firebase/app",
@@ -1378,8 +1389,8 @@
         "tslib"
       ]
     },
-    "@firebase/app-compat@0.5.2": {
-      "integrity": "sha512-cn+U27GDaBS/irsbvrfnPZdcCzeZPRGKieSlyb7vV6LSOL6mdECnB86PgYjYGxSNg8+U48L/NeevTV1odU+mOQ==",
+    "@firebase/app-compat@0.5.5": {
+      "integrity": "sha512-lVG/nRnXaot0rQSZazmTNqy83ti9O3+kdwoaE0d5wahRIWNoDirbIMcGVjDDgdmf4IE6FYreWOMh0L3DV1475w==",
       "dependencies": [
         "@firebase/app",
         "@firebase/component",
@@ -1391,8 +1402,8 @@
     "@firebase/app-types@0.9.3": {
       "integrity": "sha512-kRVpIl4vVGJ4baogMDINbyrIOtOxqhkZQg4jTq3l8Lw6WSk0xfpEYzezFu+Kl4ve4fbPl79dvwRtaFqAC/ucCw=="
     },
-    "@firebase/app@0.14.2": {
-      "integrity": "sha512-Ecx2ig/JLC9ayIQwZHqm41Tzlf4c1WUuFhFUZB1y+JIJqDRE579x7Uil7tKT8MwDpOPwrK5ZtpxdSsrfy/LF8Q==",
+    "@firebase/app@0.14.5": {
+      "integrity": "sha512-zyNY77xJOGwcuB+xCxF8z8lSiHvD4ox7BCsqLEHEvgqQoRjxFZ0fkROR6NV5QyXmCqRLodMM8J5d2EStOocWIw==",
       "dependencies": [
         "@firebase/component",
         "@firebase/logger",
@@ -1401,8 +1412,8 @@
         "tslib"
       ]
     },
-    "@firebase/auth-compat@0.6.0_@firebase+app-compat@0.5.2_@firebase+app@0.14.2_@firebase+app-types@0.9.3_@firebase+util@1.13.0": {
-      "integrity": "sha512-J0lGSxXlG/lYVi45wbpPhcWiWUMXevY4fvLZsN1GHh+po7TZVng+figdHBVhFheaiipU8HZyc7ljw1jNojM2nw==",
+    "@firebase/auth-compat@0.6.1_@firebase+app-compat@0.5.5_@firebase+app@0.14.5_@firebase+app-types@0.9.3_@firebase+util@1.13.0": {
+      "integrity": "sha512-I0o2ZiZMnMTOQfqT22ur+zcGDVSAfdNZBHo26/Tfi8EllfR1BO7aTVo2rt/ts8o/FWsK8pOALLeVBGhZt8w/vg==",
       "dependencies": [
         "@firebase/app-compat",
         "@firebase/auth",
@@ -1422,8 +1433,8 @@
         "@firebase/util"
       ]
     },
-    "@firebase/auth@1.11.0_@firebase+app@0.14.2": {
-      "integrity": "sha512-5j7+ua93X+IRcJ1oMDTClTo85l7Xe40WSkoJ+shzPrX7OISlVWLdE1mKC57PSD+/LfAbdhJmvKixINBw2ESK6w==",
+    "@firebase/auth@1.11.1_@firebase+app@0.14.5": {
+      "integrity": "sha512-Mea0G/BwC1D0voSG+60Ylu3KZchXAFilXQ/hJXWCw3gebAu+RDINZA0dJMNeym7HFxBaBaByX8jSa7ys5+F2VA==",
       "dependencies": [
         "@firebase/app",
         "@firebase/component",
@@ -1439,7 +1450,7 @@
         "tslib"
       ]
     },
-    "@firebase/data-connect@0.3.11_@firebase+app@0.14.2": {
+    "@firebase/data-connect@0.3.11_@firebase+app@0.14.5": {
       "integrity": "sha512-G258eLzAD6im9Bsw+Qm1Z+P4x0PGNQ45yeUuuqe5M9B1rn0RJvvsQCRHXgE52Z+n9+WX1OJd/crcuunvOGc7Vw==",
       "dependencies": [
         "@firebase/app",
@@ -1480,8 +1491,8 @@
         "tslib"
       ]
     },
-    "@firebase/firestore-compat@0.4.1_@firebase+app-compat@0.5.2_@firebase+app@0.14.2_@firebase+app-types@0.9.3_@firebase+util@1.13.0": {
-      "integrity": "sha512-BjalPTDh/K0vmR/M/DE148dpIqbcfvtFVTietbUDWDWYIl9YH0TTVp/EwXRbZwswPxyjx4GdHW61GB2AYVz1SQ==",
+    "@firebase/firestore-compat@0.4.2_@firebase+app-compat@0.5.5_@firebase+app@0.14.5_@firebase+app-types@0.9.3_@firebase+util@1.13.0": {
+      "integrity": "sha512-cy7ov6SpFBx+PHwFdOOjbI7kH00uNKmIFurAn560WiPCZXy9EMnil1SOG7VF4hHZKdenC+AHtL4r3fNpirpm0w==",
       "dependencies": [
         "@firebase/app-compat",
         "@firebase/component",
@@ -1498,8 +1509,8 @@
         "@firebase/util"
       ]
     },
-    "@firebase/firestore@4.9.1_@firebase+app@0.14.2": {
-      "integrity": "sha512-PYVUTkhC9y8pydrqC3O1Oc4AMfkGSWdmuH9xgPJjiEbpUIUPQ4J8wJhyuash+o2u+axmyNRFP8ULNUKb+WzBzQ==",
+    "@firebase/firestore@4.9.2_@firebase+app@0.14.5": {
+      "integrity": "sha512-iuA5+nVr/IV/Thm0Luoqf2mERUvK9g791FZpUJV1ZGXO6RL2/i/WFJUj5ZTVXy5pRjpWYO+ZzPcReNrlilmztA==",
       "dependencies": [
         "@firebase/app",
         "@firebase/component",
@@ -1511,7 +1522,7 @@
         "tslib"
       ]
     },
-    "@firebase/functions-compat@0.4.1_@firebase+app-compat@0.5.2_@firebase+app@0.14.2": {
+    "@firebase/functions-compat@0.4.1_@firebase+app-compat@0.5.5_@firebase+app@0.14.5": {
       "integrity": "sha512-AxxUBXKuPrWaVNQ8o1cG1GaCAtXT8a0eaTDfqgS5VsRYLAR0ALcfqDLwo/QyijZj1w8Qf8n3Qrfy/+Im245hOQ==",
       "dependencies": [
         "@firebase/app-compat",
@@ -1525,7 +1536,7 @@
     "@firebase/functions-types@0.6.3": {
       "integrity": "sha512-EZoDKQLUHFKNx6VLipQwrSMh01A1SaL3Wg6Hpi//x6/fJ6Ee4hrAeswK99I5Ht8roiniKHw4iO0B1Oxj5I4plg=="
     },
-    "@firebase/functions@0.13.1_@firebase+app@0.14.2": {
+    "@firebase/functions@0.13.1_@firebase+app@0.14.5": {
       "integrity": "sha512-sUeWSb0rw5T+6wuV2o9XNmh9yHxjFI9zVGFnjFi+n7drTEWpl7ZTz1nROgGrSu472r+LAaj+2YaSicD4R8wfbw==",
       "dependencies": [
         "@firebase/app",
@@ -1537,7 +1548,7 @@
         "tslib"
       ]
     },
-    "@firebase/installations-compat@0.2.19_@firebase+app-compat@0.5.2_@firebase+app@0.14.2_@firebase+app-types@0.9.3": {
+    "@firebase/installations-compat@0.2.19_@firebase+app-compat@0.5.5_@firebase+app@0.14.5_@firebase+app-types@0.9.3": {
       "integrity": "sha512-khfzIY3EI5LePePo7vT19/VEIH1E3iYsHknI/6ek9T8QCozAZshWT9CjlwOzZrKvTHMeNcbpo/VSOSIWDSjWdQ==",
       "dependencies": [
         "@firebase/app-compat",
@@ -1554,7 +1565,7 @@
         "@firebase/app-types"
       ]
     },
-    "@firebase/installations@0.6.19_@firebase+app@0.14.2": {
+    "@firebase/installations@0.6.19_@firebase+app@0.14.5": {
       "integrity": "sha512-nGDmiwKLI1lerhwfwSHvMR9RZuIH5/8E3kgUWnVRqqL7kGVSktjLTWEMva7oh5yxQ3zXfIlIwJwMcaM5bK5j8Q==",
       "dependencies": [
         "@firebase/app",
@@ -1570,7 +1581,7 @@
         "tslib"
       ]
     },
-    "@firebase/messaging-compat@0.2.23_@firebase+app-compat@0.5.2_@firebase+app@0.14.2": {
+    "@firebase/messaging-compat@0.2.23_@firebase+app-compat@0.5.5_@firebase+app@0.14.5": {
       "integrity": "sha512-SN857v/kBUvlQ9X/UjAqBoQ2FEaL1ZozpnmL1ByTe57iXkmnVVFm9KqAsTfmf+OEwWI4kJJe9NObtN/w22lUgg==",
       "dependencies": [
         "@firebase/app-compat",
@@ -1583,7 +1594,7 @@
     "@firebase/messaging-interop-types@0.2.3": {
       "integrity": "sha512-xfzFaJpzcmtDjycpDeCUj0Ge10ATFi/VHVIvEEjDNc3hodVBQADZ7BWQU7CuFpjSHE+eLuBI13z5F/9xOoGX8Q=="
     },
-    "@firebase/messaging@0.12.23_@firebase+app@0.14.2": {
+    "@firebase/messaging@0.12.23_@firebase+app@0.14.5": {
       "integrity": "sha512-cfuzv47XxqW4HH/OcR5rM+AlQd1xL/VhuaeW/wzMW1LFrsFcTn0GND/hak1vkQc2th8UisBcrkVcQAnOnKwYxg==",
       "dependencies": [
         "@firebase/app",
@@ -1595,7 +1606,7 @@
         "tslib"
       ]
     },
-    "@firebase/performance-compat@0.2.22_@firebase+app-compat@0.5.2_@firebase+app@0.14.2": {
+    "@firebase/performance-compat@0.2.22_@firebase+app-compat@0.5.5_@firebase+app@0.14.5": {
       "integrity": "sha512-xLKxaSAl/FVi10wDX/CHIYEUP13jXUjinL+UaNXT9ByIvxII5Ne5150mx6IgM8G6Q3V+sPiw9C8/kygkyHUVxg==",
       "dependencies": [
         "@firebase/app-compat",
@@ -1610,7 +1621,7 @@
     "@firebase/performance-types@0.2.3": {
       "integrity": "sha512-IgkyTz6QZVPAq8GSkLYJvwSLr3LS9+V6vNPQr0x4YozZJiLF5jYixj0amDtATf1X0EtYHqoPO48a9ija8GocxQ=="
     },
-    "@firebase/performance@0.7.9_@firebase+app@0.14.2": {
+    "@firebase/performance@0.7.9_@firebase+app@0.14.5": {
       "integrity": "sha512-UzybENl1EdM2I1sjYm74xGt/0JzRnU/0VmfMAKo2LSpHJzaj77FCLZXmYQ4oOuE+Pxtt8Wy2BVJEENiZkaZAzQ==",
       "dependencies": [
         "@firebase/app",
@@ -1622,8 +1633,8 @@
         "web-vitals"
       ]
     },
-    "@firebase/remote-config-compat@0.2.19_@firebase+app-compat@0.5.2_@firebase+app@0.14.2": {
-      "integrity": "sha512-y7PZAb0l5+5oIgLJr88TNSelxuASGlXyAKj+3pUc4fDuRIdPNBoONMHaIUa9rlffBR5dErmaD2wUBJ7Z1a513Q==",
+    "@firebase/remote-config-compat@0.2.20_@firebase+app-compat@0.5.5_@firebase+app@0.14.5": {
+      "integrity": "sha512-P/ULS9vU35EL9maG7xp66uljkZgcPMQOxLj3Zx2F289baTKSInE6+YIkgHEi1TwHoddC/AFePXPpshPlEFkbgg==",
       "dependencies": [
         "@firebase/app-compat",
         "@firebase/component",
@@ -1634,11 +1645,11 @@
         "tslib"
       ]
     },
-    "@firebase/remote-config-types@0.4.0": {
-      "integrity": "sha512-7p3mRE/ldCNYt8fmWMQ/MSGRmXYlJ15Rvs9Rk17t8p0WwZDbeK7eRmoI1tvCPaDzn9Oqh+yD6Lw+sGLsLg4kKg=="
+    "@firebase/remote-config-types@0.5.0": {
+      "integrity": "sha512-vI3bqLoF14L/GchtgayMiFpZJF+Ao3uR8WCde0XpYNkSokDpAKca2DxvcfeZv7lZUqkUwQPL2wD83d3vQ4vvrg=="
     },
-    "@firebase/remote-config@0.6.6_@firebase+app@0.14.2": {
-      "integrity": "sha512-Yelp5xd8hM4NO1G1SuWrIk4h5K42mNwC98eWZ9YLVu6Z0S6hFk1mxotAdCRmH2luH8FASlYgLLq6OQLZ4nbnCA==",
+    "@firebase/remote-config@0.7.0_@firebase+app@0.14.5": {
+      "integrity": "sha512-dX95X6WlW7QlgNd7aaGdjAIZUiQkgWgNS+aKNu4Wv92H1T8Ue/NDUjZHd9xb8fHxLXIHNZeco9/qbZzr500MjQ==",
       "dependencies": [
         "@firebase/app",
         "@firebase/component",
@@ -1648,7 +1659,7 @@
         "tslib"
       ]
     },
-    "@firebase/storage-compat@0.4.0_@firebase+app-compat@0.5.2_@firebase+app@0.14.2_@firebase+app-types@0.9.3_@firebase+util@1.13.0": {
+    "@firebase/storage-compat@0.4.0_@firebase+app-compat@0.5.5_@firebase+app@0.14.5_@firebase+app-types@0.9.3_@firebase+util@1.13.0": {
       "integrity": "sha512-vDzhgGczr1OfcOy285YAPur5pWDEvD67w4thyeCUh6Ys0izN9fNYtA1MJERmNBfqjqu0lg0FM5GLbw0Il21M+g==",
       "dependencies": [
         "@firebase/app-compat",
@@ -1666,7 +1677,7 @@
         "@firebase/util"
       ]
     },
-    "@firebase/storage@0.14.0_@firebase+app@0.14.2": {
+    "@firebase/storage@0.14.0_@firebase+app@0.14.5": {
       "integrity": "sha512-xWWbb15o6/pWEw8H01UQ1dC5U3rf8QTAzOChYyCpafV6Xki7KVp3Yaw2nSklUwHEziSWE9KoZJS7iYeyqWnYFA==",
       "dependencies": [
         "@firebase/app",
@@ -1682,8 +1693,8 @@
       ],
       "scripts": true
     },
-    "@firebase/webchannel-wrapper@1.0.4": {
-      "integrity": "sha512-6m8+P+dE/RPl4OPzjTxcTbQ0rGeRyeTvAi9KwIffBVCiAMKrfXfLZaqD1F+m8t4B5/Q5aHsMozOgirkH1F5oMQ=="
+    "@firebase/webchannel-wrapper@1.0.5": {
+      "integrity": "sha512-+uGNN7rkfn41HLO0vekTFhTxk61eKa8mTpRGLO0QSqlQdKvIoGAvLp3ppdVIWbTGYJWM6Kp0iN+PjMIOcnVqTw=="
     },
     "@floating-ui/core@1.7.3": {
       "integrity": "sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==",
@@ -2000,8 +2011,8 @@
       "os": ["win32"],
       "cpu": ["x64"]
     },
-    "@inlang/paraglide-js@2.2.0": {
-      "integrity": "sha512-pkpXu1LanvpcAbvpVPf7PgF11Uq7DliSEBngrcUN36l4ZOOpzn3QBTvVr/tJxvks0O67WseQgiMHet8KH7Oz5A==",
+    "@inlang/paraglide-js@2.4.0": {
+      "integrity": "sha512-T/m9uoev574/1JrhCnPcgK1xnAwkVMgaDev4LFthnmID8ubX2xjboSGO3IztwXWwO0aJoT1UJr89JCwjbwgnJQ==",
       "dependencies": [
         "@inlang/recommend-sherlock",
         "@inlang/sdk",
@@ -2187,8 +2198,8 @@
     "@open-draft/until@2.1.0": {
       "integrity": "sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg=="
     },
-    "@opentelemetry/api-logs@0.203.0": {
-      "integrity": "sha512-9B9RU0H7Ya1Dx/Rkyc4stuBZSGVQF27WigitInx2QQoj6KUpEFYPKoWjdFTunJYxmXmh17HeBvbMa1EhGyPmqQ==",
+    "@opentelemetry/api-logs@0.204.0": {
+      "integrity": "sha512-DqxY8yoAaiBPivoJD4UtgrMS8gEmzZ5lnaxzPojzLVHBGqPxgWm4zcuvcUHZiqQ6kRX2Klel2r9y8cA2HAtqpw==",
       "dependencies": [
         "@opentelemetry/api"
       ]
@@ -2208,8 +2219,8 @@
         "@opentelemetry/api"
       ]
     },
-    "@opentelemetry/core@2.0.1_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-MaZk9SJIDgo1peKevlbhP6+IwIiNPNmswNL4AF0WaQJLbHXjr9SrZMgS12+iqr9ToV4ZVosCcc0f8Rg67LXjxw==",
+    "@opentelemetry/core@2.1.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-RMEtHsxJs/GiHHxYT58IY57UXAQTuUnZVco6ymDEqTNlJKTimM4qPUPVe8InNFyBjhHBEAx4k3Q8LtNayBsbUQ==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/semantic-conventions"
@@ -2222,201 +2233,201 @@
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-amqplib@0.50.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-kwNs/itehHG/qaQBcVrLNcvXVPW0I4FCOVtw3LHMLdYIqD7GJ6Yv2nX+a4YHjzbzIeRYj8iyMp0Bl7tlkidq5w==",
+    "@opentelemetry/instrumentation-amqplib@0.51.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-XGmjYwjVRktD4agFnWBWQXo9SiYHKBxR6Ag3MLXwtLE4R99N3a08kGKM5SC1qOFKIELcQDGFEFT9ydXMH00Luw==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-connect@0.47.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-pjenvjR6+PMRb6/4X85L4OtkQCootgb/Jzh/l/Utu3SJHBid1F+gk9sTGU2FWuhhEfV6P7MZ7BmCdHXQjgJ42g==",
+    "@opentelemetry/instrumentation-connect@0.48.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-OMjc3SFL4pC16PeK+tDhwP7MRvDPalYCGSvGqUhX5rASkI2H0RuxZHOWElYeXkV0WP+70Gw6JHWac/2Zqwmhdw==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions",
         "@types/connect"
       ]
     },
-    "@opentelemetry/instrumentation-dataloader@0.21.1_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-hNAm/bwGawLM8VDjKR0ZUDJ/D/qKR3s6lA5NV+btNaPVm2acqhPcT47l2uCVi+70lng2mywfQncor9v8/ykuyw==",
+    "@opentelemetry/instrumentation-dataloader@0.22.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-bXnTcwtngQsI1CvodFkTemrrRSQjAjZxqHVc+CJZTDnidT0T6wt3jkKhnsjU/Kkkc0lacr6VdRpCu2CUWa0OKw==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0"
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0"
       ]
     },
-    "@opentelemetry/instrumentation-express@0.52.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-W7pizN0Wh1/cbNhhTf7C62NpyYw7VfCFTYg0DYieSTrtPBT1vmoSZei19wfKLnrMsz3sHayCg0HxCVL2c+cz5w==",
+    "@opentelemetry/instrumentation-express@0.53.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-r/PBafQmFYRjuxLYEHJ3ze1iBnP2GDA1nXOSS6E02KnYNZAVjj6WcDA1MSthtdAUUK0XnotHvvWM8/qz7DMO5A==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-fs@0.23.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-Puan+QopWHA/KNYvDfOZN6M/JtF6buXEyD934vrb8WhsX1/FuM7OtoMlQyIqAadnE8FqqDL4KDPiEfCQH6pQcQ==",
+    "@opentelemetry/instrumentation-fs@0.24.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-HjIxJ6CBRD770KNVaTdMXIv29Sjz4C1kPCCK5x1Ujpc6SNnLGPqUVyJYZ3LUhhnHAqdbrl83ogVWjCgeT4Q0yw==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0"
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0"
       ]
     },
-    "@opentelemetry/instrumentation-generic-pool@0.47.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-UfHqf3zYK+CwDwEtTjaD12uUqGGTswZ7ofLBEdQ4sEJp9GHSSJMQ2hT3pgBxyKADzUdoxQAv/7NqvL42ZI+Qbw==",
+    "@opentelemetry/instrumentation-generic-pool@0.48.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-TLv/On8pufynNR+pUbpkyvuESVASZZKMlqCm4bBImTpXKTpqXaJJ3o/MUDeMlM91rpen+PEv2SeyOKcHCSlgag==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0"
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0"
       ]
     },
-    "@opentelemetry/instrumentation-graphql@0.51.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-LchkOu9X5DrXAnPI1+Z06h/EH/zC7D6sA86hhPrk3evLlsJTz0grPrkL/yUJM9Ty0CL/y2HSvmWQCjbJEz/ADg==",
+    "@opentelemetry/instrumentation-graphql@0.52.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-3fEJ8jOOMwopvldY16KuzHbRhPk8wSsOTSF0v2psmOCGewh6ad+ZbkTx/xyUK9rUdUMWAxRVU0tFpj4Wx1vkPA==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0"
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0"
       ]
     },
-    "@opentelemetry/instrumentation-hapi@0.50.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-5xGusXOFQXKacrZmDbpHQzqYD1gIkrMWuwvlrEPkYOsjUqGUjl1HbxCsn5Y9bUXOCgP1Lj6A4PcKt1UiJ2MujA==",
+    "@opentelemetry/instrumentation-hapi@0.51.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-qyf27DaFNL1Qhbo/da+04MSCw982B02FhuOS5/UF+PMhM61CcOiu7fPuXj8TvbqyReQuJFljXE6UirlvoT/62g==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-http@0.203.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-y3uQAcCOAwnO6vEuNVocmpVzG3PER6/YZqbPbbffDdJ9te5NkHEkfSMNzlC3+v7KlE+WinPGc3N7MR30G1HY2g==",
+    "@opentelemetry/instrumentation-http@0.204.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-1afJYyGRA4OmHTv0FfNTrTAzoEjPQUYgd+8ih/lX0LlZBnGio/O80vxA0lN3knsJPS7FiDrsDrWq25K7oAzbkw==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/core@2.0.1_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/core@2.1.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions",
         "forwarded-parse"
       ]
     },
-    "@opentelemetry/instrumentation-ioredis@0.51.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-9IUws0XWCb80NovS+17eONXsw1ZJbHwYYMXiwsfR9TSurkLV5UNbRSKb9URHO+K+pIJILy9wCxvyiOneMr91Ig==",
+    "@opentelemetry/instrumentation-ioredis@0.52.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-rUvlyZwI90HRQPYicxpDGhT8setMrlHKokCtBtZgYxQWRF5RBbG4q0pGtbZvd7kyseuHbFpA3I/5z7M8b/5ywg==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/redis-common",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-kafkajs@0.13.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-FPQyJsREOaGH64hcxlzTsIEQC4DYANgTwHjiB7z9lldmvua1LRMVn3/FfBlzXoqF179B0VGYviz6rn75E9wsDw==",
+    "@opentelemetry/instrumentation-kafkajs@0.14.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-kbB5yXS47dTIdO/lfbbXlzhvHFturbux4EpP0+6H78Lk0Bn4QXiZQW7rmZY1xBCY16mNcCb8Yt0mhz85hTnSVA==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-knex@0.48.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-V5wuaBPv/lwGxuHjC6Na2JFRjtPgstw19jTFl1B1b6zvaX8zVDYUDaR5hL7glnQtUSCMktPttQsgK4dhXpddcA==",
+    "@opentelemetry/instrumentation-knex@0.49.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-NKsRRT27fbIYL4Ix+BjjP8h4YveyKc+2gD6DMZbr5R5rUeDqfC8+DTfIt3c3ex3BIc5Vvek4rqHnN7q34ZetLQ==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-koa@0.51.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-XNLWeMTMG1/EkQBbgPYzCeBD0cwOrfnn8ao4hWgLv0fNCFQu1kCsJYygz2cvKuCs340RlnG4i321hX7R8gj3Rg==",
+    "@opentelemetry/instrumentation-koa@0.52.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-JJSBYLDx/mNSy8Ibi/uQixu2rH0bZODJa8/cz04hEhRaiZQoeJ5UrOhO/mS87IdgVsHrnBOsZ6vDu09znupyuA==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-lru-memoizer@0.48.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-KUW29wfMlTPX1wFz+NNrmE7IzN7NWZDrmFWHM/VJcmFEuQGnnBuTIdsP55CnBDxKgQ/qqYFp4udQFNtjeFosPw==",
+    "@opentelemetry/instrumentation-lru-memoizer@0.49.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-ctXu+O/1HSadAxtjoEg2w307Z5iPyLOMM8IRNwjaKrIpNAthYGSOanChbk1kqY6zU5CrpkPHGdAT6jk8dXiMqw==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0"
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0"
       ]
     },
-    "@opentelemetry/instrumentation-mongodb@0.56.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-YG5IXUUmxX3Md2buVMvxm9NWlKADrnavI36hbJsihqqvBGsWnIfguf0rUP5Srr0pfPqhQjUP+agLMsvu0GmUpA==",
+    "@opentelemetry/instrumentation-mongodb@0.57.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-KD6Rg0KSHWDkik+qjIOWoksi1xqSpix8TSPfquIK1DTmd9OTFb5PHmMkzJe16TAPVEuElUW8gvgP59cacFcrMQ==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-mongoose@0.50.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-Am8pk1Ct951r4qCiqkBcGmPIgGhoDiFcRtqPSLbJrUZqEPUsigjtMjoWDRLG1Ki1NHgOF7D0H7d+suWz1AAizw==",
+    "@opentelemetry/instrumentation-mongoose@0.51.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-gwWaAlhhV2By7XcbyU3DOLMvzsgeaymwP/jktDC+/uPkCmgB61zurwqOQdeiRq9KAf22Y2dtE5ZLXxytJRbEVA==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-mysql2@0.50.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-PoOMpmq73rOIE3nlTNLf3B1SyNYGsp7QXHYKmeTZZnJ2Ou7/fdURuOhWOI0e6QZ5gSem18IR1sJi6GOULBQJ9g==",
+    "@opentelemetry/instrumentation-mysql2@0.51.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-zT2Wg22Xn43RyfU3NOUmnFtb5zlDI0fKcijCj9AcK9zuLZ4ModgtLXOyBJSSfO+hsOCZSC1v/Fxwj+nZJFdzLQ==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions",
         "@opentelemetry/sql-common"
       ]
     },
-    "@opentelemetry/instrumentation-mysql@0.49.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-QU9IUNqNsrlfE3dJkZnFHqLjlndiU39ll/YAAEvWE40sGOCi9AtOF6rmEGzJ1IswoZ3oyePV7q2MP8SrhJfVAA==",
+    "@opentelemetry/instrumentation-mysql@0.50.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-duKAvMRI3vq6u9JwzIipY9zHfikN20bX05sL7GjDeLKr2qV0LQ4ADtKST7KStdGcQ+MTN5wghWbbVdLgNcB3rA==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions",
         "@types/mysql"
       ]
     },
-    "@opentelemetry/instrumentation-pg@0.55.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-yfJ5bYE7CnkW/uNsnrwouG/FR7nmg09zdk2MSs7k0ZOMkDDAE3WBGpVFFApGgNu2U+gtzLgEzOQG4I/X+60hXw==",
+    "@opentelemetry/instrumentation-pg@0.57.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-dWLGE+r5lBgm2A8SaaSYDE3OKJ/kwwy5WLyGyzor8PLhUL9VnJRiY6qhp4njwhnljiLtzeffRtG2Mf/YyWLeTw==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions",
         "@opentelemetry/sql-common",
         "@types/pg",
         "@types/pg-pool"
       ]
     },
-    "@opentelemetry/instrumentation-redis@0.51.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-uL/GtBA0u72YPPehwOvthAe+Wf8k3T+XQPBssJmTYl6fzuZjNq8zTfxVFhl9nRFjFVEe+CtiYNT0Q3AyqW1Z0A==",
+    "@opentelemetry/instrumentation-redis@0.53.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-WUHV8fr+8yo5RmzyU7D5BIE1zwiaNQcTyZPwtxlfr7px6NYYx7IIpSihJK7WA60npWynfxxK1T67RAVF0Gdfjg==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/redis-common",
         "@opentelemetry/semantic-conventions"
       ]
     },
-    "@opentelemetry/instrumentation-tedious@0.22.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-XrrNSUCyEjH1ax9t+Uo6lv0S2FCCykcF7hSxBMxKf7Xn0bPRxD3KyFUZy25aQXzbbbUHhtdxj3r2h88SfEM3aA==",
+    "@opentelemetry/instrumentation-tedious@0.23.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-3TMTk/9VtlRonVTaU4tCzbg4YqW+Iq/l5VnN2e5whP6JgEg/PKfrGbqQ+CxQWNLfLaQYIUgEZqAn5gk/inh1uQ==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/semantic-conventions",
         "@types/tedious"
       ]
     },
-    "@opentelemetry/instrumentation-undici@0.14.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-2HN+7ztxAReXuxzrtA3WboAKlfP5OsPA57KQn2AdYZbJ3zeRPcLXyW4uO/jpLE6PLm0QRtmeGCmfYpqRlwgSwg==",
+    "@opentelemetry/instrumentation-undici@0.15.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-sNFGA/iCDlVkNjzTzPRcudmI11vT/WAfAguRdZY9IspCw02N4WSC72zTuQhSMheh2a1gdeM9my1imnKRvEEvEg==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0"
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0"
       ]
     },
-    "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-ke1qyM+3AK2zPuBPb6Hk/GCsc5ewbLvPNkEuELx/JmANeEp6ZjnZ+wypPAJSucTw0wvCGrUaibDSdcrGFoWxKQ==",
+    "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-vV5+WSxktzoMP8JoYWKeopChy6G3HKk4UQ2hESCRDUUTZqQ3+nM3u8noVG0LmNfRWwcFBnbZ71GKC7vaYYdJ1g==",
       "dependencies": [
         "@opentelemetry/api",
-        "@opentelemetry/api-logs@0.203.0",
+        "@opentelemetry/api-logs@0.204.0",
         "import-in-the-middle",
         "require-in-the-middle"
       ]
@@ -2586,8 +2597,8 @@
     "@poppinss/exception@1.2.2": {
       "integrity": "sha512-m7bpKCD4QMlFCjA/nKTs23fuvoVFoA83brRKmObCUNmi/9tVu8Ve3w4YQAnJu4q3Tjf5fr685HYIC/IA2zHRSg=="
     },
-    "@prisma/instrumentation@6.14.0_@opentelemetry+api@1.9.0": {
-      "integrity": "sha512-Po/Hry5bAeunRDq0yAQueKookW3glpP+qjjvvyOfm6dI2KG5/Y6Bgg3ahyWd7B0u2E+Wf9xRk2rtdda7ySgK1A==",
+    "@prisma/instrumentation@6.15.0_@opentelemetry+api@1.9.0": {
+      "integrity": "sha512-6TXaH6OmDkMOQvOxwLZ8XS51hU2v4A3vmE2pSijCIiGRJYyNeMcL6nMHQMyYdZRD8wl7LF3Wzc+AMPMV/9Oo7A==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/instrumentation@0.57.2_@opentelemetry+api@1.9.0"
@@ -2801,27 +2812,27 @@
       "os": ["win32"],
       "cpu": ["x64"]
     },
-    "@sentry-internal/browser-utils@10.7.0": {
-      "integrity": "sha512-M5L1XKVkhRhIV2nfUwNxBoqir4SVDcHdqRBq+k1EK6Z6DCVF9GMTiLg46+egBwgUDlAAGIQImdKgtJTH/47Z9g==",
+    "@sentry-internal/browser-utils@10.22.0": {
+      "integrity": "sha512-BpJoLZEyJr7ORzkCrIjxRTnFWwO1mJNICVh3B9g5d9245niGT4OJvRozmLz89WgJkZFHWu84ls6Xfq5b/3tGFQ==",
       "dependencies": [
         "@sentry/core"
       ]
     },
-    "@sentry-internal/feedback@10.7.0": {
-      "integrity": "sha512-wTyoLjEKz6dwl9uyy5wfwmrlM59WmUM1DXMSyGr6j6ncDA9iPmoftU4O4+Kirkk8mRYoc0fHxjp21Z5BYtAehw==",
+    "@sentry-internal/feedback@10.22.0": {
+      "integrity": "sha512-zXySOin/gGHPV+yKaHqjN9YZ7psEJwzLn8PzCLeo+4REzF1eQwbYZIgOxJFD32z8s3nZiABSWFM/n1CvVfMEsQ==",
       "dependencies": [
         "@sentry/core"
       ]
     },
-    "@sentry-internal/replay-canvas@10.7.0": {
-      "integrity": "sha512-68jJfqa8r9UPGO4+S2IthkhhohTItgHjVj7S7dH5g1YUHUS1N03dZMrDMc2jOAhWURi3EOqmCkSjd2xxogRUVQ==",
+    "@sentry-internal/replay-canvas@10.22.0": {
+      "integrity": "sha512-DE4JNUskJg+O+wFq42W5gAa/99aD5k7TfGOwABxvnzFv8vkKA7pqXwPbFFPzypdKIkln+df7RmbnDwQRNg6/lA==",
       "dependencies": [
         "@sentry-internal/replay",
         "@sentry/core"
       ]
     },
-    "@sentry-internal/replay@10.7.0": {
-      "integrity": "sha512-lKK7NGSy20c0ArBQtGWP+ITMantNGOAeeILG2c2VaOxJUTe5EH3OcelHMNPEFTTXnYZt7RzMT03Tzmzto2LBdg==",
+    "@sentry-internal/replay@10.22.0": {
+      "integrity": "sha512-JNE4kHAQSG4/V+J+Zog3vKBWgOe9H33ol/MEU1RuLM/4I+uLf4mTetwnS9ilpnnW/Z/gQYfA+R3CiMrZtqTivw==",
       "dependencies": [
         "@sentry-internal/browser-utils",
         "@sentry/core"
@@ -2830,8 +2841,8 @@
     "@sentry/babel-plugin-component-annotate@4.6.0": {
       "integrity": "sha512-3soTX50JPQQ51FSbb4qvNBf4z/yP7jTdn43vMTp9E4IxvJ9HKJR7OEuKkCMszrZmWsVABXl02msqO7QisePdiQ=="
     },
-    "@sentry/browser@10.7.0": {
-      "integrity": "sha512-KPnKOIKFqxCpRMydyH8dn+MrPai2BEc+easWf8p3IWgUCx70+tZs5AXc0yWRgcXT534284waMnky2isn6Jbkvg==",
+    "@sentry/browser@10.22.0": {
+      "integrity": "sha512-wD2XqN+yeBpQFfdPo6+wlKDMyyuDctVGzZWE4qTPntICKQuwMdAfeq5Ma89ad0Dw+bzG9UijGeyuJQlswF87Mw==",
       "dependencies": [
         "@sentry-internal/browser-utils",
         "@sentry-internal/feedback",
@@ -2914,23 +2925,24 @@
       "scripts": true,
       "bin": true
     },
-    "@sentry/cloudflare@10.7.0": {
-      "integrity": "sha512-fJ8IxBL3ryU7zvk1jvScIJSmVvhQRQzfzwYdZXVoTPlQBc4Sq3OI2lo3Gbs9wED+S7Ck2E0qTdWlaQBAfRDrcQ==",
+    "@sentry/cloudflare@10.22.0": {
+      "integrity": "sha512-uyONKTs5chatOnHC1xoEN7Dy4QhdQop9CB0IYVQ1K4EVpCskKKtoqWglB2NxkDNN7B8UerRuCHFiFHrKuHodPQ==",
       "dependencies": [
         "@opentelemetry/api",
         "@sentry/core"
       ]
     },
-    "@sentry/core@10.7.0": {
-      "integrity": "sha512-y1Ni71O6TqeSi2Ug78StkVLHnybHZVYhnbYtj2w4g89XnQcqo4GUeR8dQRQBJpCX98UrHw22OAE8BXtKb03yXw=="
+    "@sentry/core@10.22.0": {
+      "integrity": "sha512-V1oeHbrOKzxadsCmgtPku3v3Emo/Bpb3VSuKmlLrQefiHX98MWtjJ3XDGfduzD5/dCdh0r/OOLwjcmrO/PZ2aw=="
     },
-    "@sentry/node-core@10.7.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+core@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+instrumentation@0.203.0__@opentelemetry+api@1.9.0_@opentelemetry+resources@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+semantic-conventions@1.37.0": {
-      "integrity": "sha512-iafuG3Fp0pleuk1WaL4UW7wpT6C86pMEQBZ7ARZ7UHc9ujRi/dewKFi0Stu0SxJm6PZ706VZ8Igz9xpvQ0aEEg==",
+    "@sentry/node-core@10.22.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+core@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+instrumentation@0.204.0__@opentelemetry+api@1.9.0_@opentelemetry+resources@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+semantic-conventions@1.37.0": {
+      "integrity": "sha512-88Yyn+Qvmp0kPMnNRWgpUlAvhI9CNPqOT+0glW0L7OoN8LkJcNgx2GGUoLrJ+RGeHz/S7dIJY6DGa+u0Not2Qg==",
       "dependencies": [
+        "@apm-js-collab/tracing-hooks",
         "@opentelemetry/api",
         "@opentelemetry/context-async-hooks",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/resources",
         "@opentelemetry/sdk-trace-base",
         "@opentelemetry/semantic-conventions",
@@ -2939,13 +2951,13 @@
         "import-in-the-middle"
       ]
     },
-    "@sentry/node@10.7.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+core@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+instrumentation@0.203.0__@opentelemetry+api@1.9.0_@opentelemetry+resources@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+semantic-conventions@1.37.0": {
-      "integrity": "sha512-VtUFyf8avWUqN5RRTTmcU8aGdyNUGHzz/f+3n86BR5gBL3lziKOajyc0VClfc80VLsih+PWQ/5FrIHl+S1S1YQ==",
+    "@sentry/node@10.22.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+core@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+instrumentation@0.204.0__@opentelemetry+api@1.9.0_@opentelemetry+resources@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+semantic-conventions@1.37.0": {
+      "integrity": "sha512-PfG8AMT2kgFJ7rWb0lLJOmjLW2riytTliLMjfoJ8/tLGk964uKqE0xM7FLtXZjlLJqTXVYCVG7VIPj185uyckQ==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/context-async-hooks",
         "@opentelemetry/core@2.2.0_@opentelemetry+api@1.9.0",
-        "@opentelemetry/instrumentation@0.203.0_@opentelemetry+api@1.9.0",
+        "@opentelemetry/instrumentation@0.204.0_@opentelemetry+api@1.9.0",
         "@opentelemetry/instrumentation-amqplib",
         "@opentelemetry/instrumentation-connect",
         "@opentelemetry/instrumentation-dataloader",
@@ -2979,8 +2991,8 @@
         "minimatch@9.0.5"
       ]
     },
-    "@sentry/opentelemetry@10.7.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+core@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+semantic-conventions@1.37.0": {
-      "integrity": "sha512-8SrRZyERDfCYYett6dklGe+qWMDZSytKPIZpS0nDb0IqZGC02ZVIhRISbBTy4Gctowu/gMK9XaOXfBNN0pI1sg==",
+    "@sentry/opentelemetry@10.22.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+core@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@2.2.0__@opentelemetry+api@1.9.0_@opentelemetry+semantic-conventions@1.37.0": {
+      "integrity": "sha512-XHXYYq3zsQ/dj1kQ7cGGLFIEVRmrmjcMhiJHvmKKsUGKxQjHe2G0LuG8clHIPkmbg7yEIxCT/W2I9QzrwYt5+g==",
       "dependencies": [
         "@opentelemetry/api",
         "@opentelemetry/context-async-hooks",
@@ -2990,8 +3002,8 @@
         "@sentry/core"
       ]
     },
-    "@sentry/svelte@10.7.0_svelte@5.43.3__acorn@8.15.0": {
-      "integrity": "sha512-82iOxfZ6FIIIxy3sspW+oP8pXMyRofcdQq7URuWdvJ3hQc/bEs92wJHXzG3hw3NKIh6NMHd6KDplUycZ/FNmGA==",
+    "@sentry/svelte@10.22.0_svelte@5.43.3__acorn@8.15.0": {
+      "integrity": "sha512-zPcB5C6ERxbokQ8wDLwlGXxaiNRoXqnL1XsBFCm4K/lGuaeYAouwY/KH1f+Co0Clc/Pr3MQZOBhCpRKH7+vCaA==",
       "dependencies": [
         "@sentry/browser",
         "@sentry/core",
@@ -2999,8 +3011,8 @@
         "svelte"
       ]
     },
-    "@sentry/sveltekit@10.7.0_@sveltejs+kit@2.37.0__@sveltejs+vite-plugin-svelte@5.1.1___svelte@5.43.3____acorn@8.15.0___vite@6.3.5____sass-embedded@1.91.0____picomatch@4.0.3___sass-embedded@1.91.0__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.91.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_svelte@5.43.3__acorn@8.15.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_sass-embedded@1.91.0": {
-      "integrity": "sha512-6DWSTss3QENmA8eDJett3fYw2pXAr+HNhgqQaXGckoM3MgyK6LpXFBHdGRwkXEKuQ51n2wIcVwRDy35fA+QKlw==",
+    "@sentry/sveltekit@10.22.0_@sveltejs+kit@2.37.0__@sveltejs+vite-plugin-svelte@5.1.1___svelte@5.43.3____acorn@8.15.0___vite@6.3.5____sass-embedded@1.91.0____picomatch@4.0.3___sass-embedded@1.91.0__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.91.0_vite@6.3.5__sass-embedded@1.91.0__picomatch@4.0.3_svelte@5.43.3__acorn@8.15.0_@sveltejs+vite-plugin-svelte@5.1.1__svelte@5.43.3___acorn@8.15.0__vite@6.3.5___sass-embedded@1.91.0___picomatch@4.0.3__sass-embedded@1.91.0_sass-embedded@1.91.0": {
+      "integrity": "sha512-jvbiydMeN04DBbkq0Btkt/IOyfOJ3b7//JNjCklW6EoRHMoe/NMFczuPiwp2LzlxQ3vop7nS+pcONzwI61I80A==",
       "dependencies": [
         "@babel/parser@7.26.9",
         "@sentry/cloudflare",
@@ -3163,20 +3175,20 @@
         "@svgdotjs/svg.js"
       ]
     },
-    "@tanstack/query-core@5.85.5": {
-      "integrity": "sha512-KO0WTob4JEApv69iYp1eGvfMSUkgw//IpMnq+//cORBzXf0smyRwPLrUvEe5qtAEGjwZTXrjxg+oJNP/C00t6w=="
+    "@tanstack/query-core@5.90.2": {
+      "integrity": "sha512-k/TcR3YalnzibscALLwxeiLUub6jN5EDLwKDiO7q5f4ICEoptJ+n9+7vcEFy5/x/i6Q+Lb/tXrsKCggf5uQJXQ=="
     },
-    "@tanstack/query-devtools@5.84.0": {
-      "integrity": "sha512-fbF3n+z1rqhvd9EoGp5knHkv3p5B2Zml1yNRjh7sNXklngYI5RVIWUrUjZ1RIcEoscarUb0+bOvIs5x9dwzOXQ=="
+    "@tanstack/query-devtools@5.90.1": {
+      "integrity": "sha512-GtINOPjPUH0OegJExZ70UahT9ykmAhmtNVcmtdnOZbxLwT7R5OmRztR5Ahe3/Cu7LArEmR6/588tAycuaWb1xQ=="
     },
-    "@tanstack/query-persist-client-core@5.85.5": {
-      "integrity": "sha512-2JQiyiTVaaUu8pwPqOp6tjNa64ZN+0T9eZ3lfksV4le1VuG99fTcAYmZFIydvzwWlSM7GEF/1kpl5bwW2Y1qfQ==",
+    "@tanstack/query-persist-client-core@5.90.2": {
+      "integrity": "sha512-rgJRgqqziPc3KgK2mav2HNR4PoI5e7fkiIrkg85xZ5j29mHPzTp3A0QcceQXVaV9qcPp/SMDJA48A6BpGJGHZg==",
       "dependencies": [
         "@tanstack/query-core"
       ]
     },
-    "@tanstack/svelte-query-devtools@5.85.5_@tanstack+svelte-query@5.85.5__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0": {
-      "integrity": "sha512-7ragvSK9QJqvwVPu9ApZnA0M6Jx+5DG2eMPAo9613k0TL94vkcZ308iWWDp7n8dKHkGlUkuWUOBa6KLS5IIJeg==",
+    "@tanstack/svelte-query-devtools@5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0": {
+      "integrity": "sha512-Mk6FWRz7rBr1zFlX2aBmRM8RIehCwE3VBE5/SX3L/pG5mFIBOCQqIUeyw+eNIW8RBbPvWDv9MrLohi/8cj9J4A==",
       "dependencies": [
         "@tanstack/query-devtools",
         "@tanstack/svelte-query",
@@ -3184,16 +3196,16 @@
         "svelte"
       ]
     },
-    "@tanstack/svelte-query-persist-client@5.85.5_@tanstack+svelte-query@5.85.5__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0": {
-      "integrity": "sha512-qiQml30GApZw+Ss76nxoSKQ6C7d+wWROeAvfk4i4xfzcyF6hBvx6ONzZ2kxVT6Yh0aBdiQ20sHa1tsr+eDtNiA==",
+    "@tanstack/svelte-query-persist-client@5.90.2_@tanstack+svelte-query@5.90.2__svelte@5.43.3___acorn@8.15.0_svelte@5.43.3__acorn@8.15.0": {
+      "integrity": "sha512-Q5FrwAR1KPh+yWL+hlldqakjR76vz4exRumhldaroowUKp8suV2mPbo4uYJz1CskRECzn5fKrRYOMEQsHxDRtg==",
       "dependencies": [
         "@tanstack/query-persist-client-core",
         "@tanstack/svelte-query",
         "svelte"
       ]
     },
-    "@tanstack/svelte-query@5.85.5_svelte@5.43.3__acorn@8.15.0": {
-      "integrity": "sha512-/oiyfVh0B+8b7DiGJI6s5ua8cU1wvMw+0yscs+XmQejQ29ngBlRAjkh2PEYif2VO3BK1FxGa2CdiKt62xRHywA==",
+    "@tanstack/svelte-query@5.90.2_svelte@5.43.3__acorn@8.15.0": {
+      "integrity": "sha512-owjnp0w8sOXlMhLZhucHrsYvCjgjHrVyII/wlqMGefxKFyroZS3xCwTee+IUx7UHbL+QmKr/HQTeTqhgxmxPQw==",
       "dependencies": [
         "@tanstack/query-core",
         "svelte"
@@ -3313,8 +3325,8 @@
         "@types/pg"
       ]
     },
-    "@types/pg@8.15.4": {
-      "integrity": "sha512-I6UNVBAoYbvuWkkU3oosC8yxqH21f4/Jc4DK71JLG3dT2mdlGe1z+ep/LQGXaKaOgcvUrsQoPRqfgtMcvZiJhg==",
+    "@types/pg@8.15.5": {
+      "integrity": "sha512-LF7lF6zWEKxuT3/OR8wAZGzkg4ENGXFNyiV/JeOt9z5B+0ZVwbql9McqX5c/WStFq1GaGso7H1AzP/qSzmlCKQ==",
       "dependencies": [
         "@types/node",
         "pg-protocol",
@@ -4514,8 +4526,8 @@
         "path-exists"
       ]
     },
-    "firebase@12.2.0_@firebase+app@0.14.2_@firebase+app-types@0.9.3_@firebase+app-compat@0.5.2": {
-      "integrity": "sha512-H/ko4peZZQnZM/gf62d42qpE4D5C1D71YiGwLpOgo+mTRvzv4g7MjksGDVgTiE3TDByhzyL8E/aDE/tEUiasPA==",
+    "firebase@12.5.0_@firebase+app@0.14.5_@firebase+app-types@0.9.3_@firebase+app-compat@0.5.5": {
+      "integrity": "sha512-Ak8JcpH7FL6kiv0STwkv5+3CYEROO9iFWSx7OCZVvc4kIIABAIyAGs1mPGaHRxGUIApFZdMCXA7baq17uS6Mow==",
       "dependencies": [
         "@firebase/ai",
         "@firebase/analytics",
@@ -7737,19 +7749,19 @@
           "dependencies": [
             "npm:@cucumber/cucumber@12.2.0",
             "npm:@google/generative-ai@0.24.1",
-            "npm:@inlang/paraglide-js@2.2.0",
+            "npm:@inlang/paraglide-js@2.4.0",
             "npm:@jsr/trakt__api@0.2.36",
             "npm:@playwright/test@1.55.0",
-            "npm:@sentry/sveltekit@10.7.0",
+            "npm:@sentry/sveltekit@10.22.0",
             "npm:@svelte-put/qr@2.1.0",
             "npm:@sveltejs/adapter-auto@6.1.0",
             "npm:@sveltejs/adapter-cloudflare@7.2.3",
             "npm:@sveltejs/enhanced-img@0.6.0",
             "npm:@sveltejs/kit@2.37.0",
             "npm:@sveltejs/vite-plugin-svelte@5.1.1",
-            "npm:@tanstack/svelte-query-devtools@5.85.5",
-            "npm:@tanstack/svelte-query-persist-client@5.85.5",
-            "npm:@tanstack/svelte-query@5.85.5",
+            "npm:@tanstack/svelte-query-devtools@5.90.2",
+            "npm:@tanstack/svelte-query-persist-client@5.90.2",
+            "npm:@tanstack/svelte-query@5.90.2",
             "npm:@testing-library/jest-dom@6.8.0",
             "npm:@testing-library/svelte@5.2.8",
             "npm:@testing-library/user-event@14.6.1",
@@ -7763,7 +7775,7 @@
             "npm:date-fns@4.1.0",
             "npm:eslint-plugin-svelte@3.11.0",
             "npm:eslint@9.34.0",
-            "npm:firebase@12.2.0",
+            "npm:firebase@12.5.0",
             "npm:flowbite-svelte@^1.22.0",
             "npm:globals@16.3.0",
             "npm:idb-keyval@6.2.2",
