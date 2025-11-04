@@ -9,10 +9,10 @@
 {#snippet settingsLinks()}
   <div class="trakt-settings-links">
     <Link href={UrlBuilder.settings.general()}>
-      <h5 class="uppercase">{m.link_text_general_settings()}</h5>
+      <h5>{m.link_text_general_settings()}</h5>
     </Link>
     <Link href={UrlBuilder.settings.advanced()}>
-      <h5 class="uppercase">{m.link_text_advanced_settings()}</h5>
+      <h5>{m.link_text_advanced_settings()}</h5>
     </Link>
   </div>
 {/snippet}
