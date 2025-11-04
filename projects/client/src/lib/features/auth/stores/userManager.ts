@@ -1,4 +1,4 @@
-import { UserManager } from 'oidc-client-ts';
+import { type UserManager } from 'oidc-client-ts';
 import { get, writable } from 'svelte/store';
 
 const userManager = writable<UserManager | null>(null);

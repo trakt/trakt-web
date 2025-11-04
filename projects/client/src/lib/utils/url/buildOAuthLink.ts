@@ -1,5 +1,5 @@
-import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import { Environment } from '@trakt/api';
+import { type Environment } from '@trakt/api';
+import { prependHttps } from './prependHttps.ts';
 
 export type BuildOAuthUrlParams = {
   local: Environment;
