@@ -1,12 +1,8 @@
 <script lang="ts">
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
-  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { appendGlobalParameters } from "$lib/features/parameters/appendGlobalParameters";
   import { useActiveLink } from "$lib/stores/useActiveLink";
-  import { mobileAppleDeviceTriggerHack } from "$lib/utils/actions/mobileAppleDeviceTriggerHack";
   import { triggerWithKeyboard } from "$lib/utils/actions/triggerWithKeyboard";
-  import { NOOP_FN } from "$lib/utils/constants";
 
   const {
     children,
@@ -27,16 +23,12 @@
     } = $props();
 
   const { isActive } = $derived(useActiveLink(href));
-
-  const { isEnabled } = useFeatureFlag(FeatureFlag.DisableIosHack);
-  const iosHack = $derived($isEnabled ? NOOP_FN : mobileAppleDeviceTriggerHack);
 </script>
 
 <a
   {href}
   {target}
   use:triggerWithKeyboard
-  use:iosHack
   use:appendGlobalParameters
   data-sveltekit-keepfocus
   data-sveltekit-noscroll={noscroll}
