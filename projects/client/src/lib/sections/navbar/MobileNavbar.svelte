@@ -2,7 +2,7 @@
   import { page } from "$app/state";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
-  import WatchlistIcon from "$lib/components/icons/mobile/WatchlistIcon.svelte";
+  import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
@@ -39,7 +39,7 @@
     <RenderFor audience="authenticated">
       <Link href={UrlBuilder.lists.user("me")}>
         <div class="trakt-mobile-navbar-link">
-          <WatchlistIcon />
+          <ListIcon />
         </div>
       </Link>
 
