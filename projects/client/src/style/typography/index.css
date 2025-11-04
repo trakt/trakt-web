@@ -79,7 +79,6 @@ h6 {
   font-style: normal;
   font-weight: 600;
   letter-spacing: 0.035rem;
-  text-transform: uppercase;
 }
 
 p {
@@ -103,11 +102,10 @@ p {
 span,
 p {
   &.meta-info {
-    font-size: var(--ni-10);
+    font-size: var(--ni-11);
     font-style: normal;
     font-weight: 600;
     letter-spacing: 0.025rem;
-    text-transform: uppercase;
   }
 }
 
