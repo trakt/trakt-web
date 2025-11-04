@@ -46,6 +46,7 @@ module.exports = {
         'contrib',
         'cover',
         'cta',
+        'deps',
         'dialog',
         'discover',
         'drawer',
