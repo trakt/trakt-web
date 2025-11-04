@@ -1,5 +1,5 @@
 <script lang="ts">
-  import UserIcon from "$lib/components/icons/UserIcon.svelte";
+  import WatchersIcon from "$lib/components/icons/WatchersIcon.svelte";
   import StemTag from "$lib/components/tags/StemTag.svelte";
   import TextTag from "$lib/components/tags/TextTag.svelte";
   import type { TagType } from "./models/TagType";
@@ -17,7 +17,7 @@
 </script>
 
 {#snippet icon()}
-  <UserIcon />
+  <WatchersIcon />
 {/snippet}
 
 {#snippet content()}
