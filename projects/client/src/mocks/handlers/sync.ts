@@ -3,9 +3,9 @@ import { http, HttpResponse } from 'msw';
 import { EpisodeLibraryResponseMock } from '../data/sync/response/EpisodeLibraryResponseMock.ts';
 import { MovieLibraryResponseMock } from '../data/sync/response/MovieLibraryResponseMock.ts';
 import { UpNextResponseMock } from '../data/sync/response/UpNextResponseMock.ts';
-import { UserPlexEpisodeCollectionResponseMock } from '../data/users/response/UserPlexEpisodeCollectionResponseMock.ts';
-import { UserPlexMovieCollectionResponseMock } from '../data/users/response/UserPlexMovieCollectionResponseMock.ts';
-import { UserPlexShowCollectionResponseMock } from '../data/users/response/UserPlexShowCollectionResponseMock.ts';
+import { UserPlexEpisodeLibraryResponseMock } from '../data/users/response/UserPlexEpisodeLibraryResponseMock.ts';
+import { UserPlexMovieLibraryResponseMock } from '../data/users/response/UserPlexMovieLibraryResponseMock.ts';
+import { UserPlexShowLibraryResponseMock } from '../data/users/response/UserPlexShowLibraryResponseMock.ts';
 
 export const sync = [
   http.post(
@@ -85,7 +85,7 @@ export const sync = [
       const isMinRequest = url.searchParams.get('extended') === 'min';
 
       return isMinRequest
-        ? HttpResponse.json(UserPlexMovieCollectionResponseMock)
+        ? HttpResponse.json(UserPlexMovieLibraryResponseMock)
         : HttpResponse.json(MovieLibraryResponseMock);
     },
   ),
@@ -96,7 +96,7 @@ export const sync = [
       const isMinRequest = url.searchParams.get('extended') === 'min';
 
       return isMinRequest
-        ? HttpResponse.json(UserPlexEpisodeCollectionResponseMock)
+        ? HttpResponse.json(UserPlexEpisodeLibraryResponseMock)
         : HttpResponse.json(EpisodeLibraryResponseMock);
     },
   ),
@@ -107,7 +107,7 @@ export const sync = [
       const isMinRequest = url.searchParams.get('extended') === 'min';
 
       return isMinRequest
-        ? HttpResponse.json(UserPlexShowCollectionResponseMock)
+        ? HttpResponse.json(UserPlexShowLibraryResponseMock)
         : HttpResponse.json([]);
     },
   ),

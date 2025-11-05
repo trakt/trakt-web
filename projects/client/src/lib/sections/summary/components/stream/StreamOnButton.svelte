@@ -4,7 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import type { StreamOnButtonProps } from "./StreamOnButtonProps";
-  import { usePlexCollection } from "./_internal/usePlexCollection";
+  import { usePlexLibrary } from "./_internal/usePlexLibrary";
 
   const {
     streamOn,
@@ -20,7 +20,7 @@
 
   const deviceType = $derived(getDeviceType(globalThis.navigator.userAgent));
 
-  const { isInCollection } = $derived(usePlexCollection(target));
+  const { isInLibrary } = $derived(usePlexLibrary(target));
   const canHandlePlex = $derived(
     deviceType === "tv" || deviceType === "mobile",
   );
@@ -38,7 +38,7 @@
 {/snippet}
 
 <RenderFor audience="authenticated">
-  {#if canHandlePlex && $isInCollection}
+  {#if canHandlePlex && $isInLibrary}
     <PlexButton {style} {size} {target} />
   {:else}
     {@render streamOnButton()}
