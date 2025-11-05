@@ -6,7 +6,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { StreamingServiceOption } from "$lib/requests/models/StreamingServiceOptions";
-  import { getMediaCost } from "./_internal/getMediaCost";
+  import { getMediaCost } from "./getMediaCost";
 
   const { service }: { service: StreamingServiceOption } = $props();
 
