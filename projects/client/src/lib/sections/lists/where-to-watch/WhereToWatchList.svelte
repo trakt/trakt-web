@@ -2,8 +2,8 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
-  import { mapToServices } from "./components/_internal/mapToServices";
-  import WhereToWatchItem from "./components/WhereToWatchItem.svelte";
+  import { mapToServices } from "./_internal/mapToServices";
+  import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
 
   const {
     slug,
