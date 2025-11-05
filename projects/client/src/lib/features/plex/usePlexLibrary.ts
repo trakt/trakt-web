@@ -1,6 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { derived, readable } from 'svelte/store';
-import type { MetaInfoProps } from '../../media/useMediaMetaInfo.ts';
+import type { MetaInfoProps } from '../../sections/summary/components/media/useMediaMetaInfo.ts';
 
 export function usePlexLibrary(target: MetaInfoProps) {
   if (!target.media.plexSlug) {
