@@ -2168,6 +2168,21 @@
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Увімкнути/вимкнути фільтри Хелловіну"
+    },
+    "list_title_library": {
+      "default": "Бібліотека"
+    },
+    "button_label_view_all_library_items": {
+      "default": "Переглянути всі елементи бібліотеки"
+    },
+    "dropdown_label_library": {
+      "default": "Бібліотека"
+    },
+    "translated_value_library_custom": {
+      "default": "Власне"
+    },
+    "page_title_library": {
+      "default": "Бібліотека"
     }
   }
 }

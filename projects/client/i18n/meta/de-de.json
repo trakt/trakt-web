@@ -2168,6 +2168,21 @@
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Halloween-Filter umschalten"
+    },
+    "list_title_library": {
+      "default": "Bibliothek"
+    },
+    "button_label_view_all_library_items": {
+      "default": "Alle Bibliotheksartikel ansehen"
+    },
+    "dropdown_label_library": {
+      "default": "Bibliothek"
+    },
+    "translated_value_library_custom": {
+      "default": "Benutzerdefiniert"
+    },
+    "page_title_library": {
+      "default": "Bibliothek"
     }
   }
 }

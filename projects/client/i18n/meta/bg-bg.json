@@ -2168,6 +2168,21 @@
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Превключване на филтрите за Хелоуин"
+    },
+    "list_title_library": {
+      "default": "Библиотека"
+    },
+    "button_label_view_all_library_items": {
+      "default": "Вижте всички елементи от библиотеката"
+    },
+    "dropdown_label_library": {
+      "default": "Библиотека"
+    },
+    "translated_value_library_custom": {
+      "default": "Персонализиран"
+    },
+    "page_title_library": {
+      "default": "Библиотека"
     }
   }
 }

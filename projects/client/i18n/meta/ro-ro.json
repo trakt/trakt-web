@@ -2168,6 +2168,21 @@
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Comută filtrele de Halloween"
+    },
+    "list_title_library": {
+      "default": "Bibliotecă"
+    },
+    "button_label_view_all_library_items": {
+      "default": "Vezi toate elementele din bibliotecă"
+    },
+    "dropdown_label_library": {
+      "default": "Bibliotecă"
+    },
+    "translated_value_library_custom": {
+      "default": "Personalizat"
+    },
+    "page_title_library": {
+      "default": "Bibliotecă"
     }
   }
 }

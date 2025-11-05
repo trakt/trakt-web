@@ -13,6 +13,7 @@ type WellKnownQueryParams = {
   status?: string;
   search?: string;
   display?: MediaType;
+  library?: string;
 };
 
 type UrlBuilderParams =
@@ -166,6 +167,9 @@ export const UrlBuilder = {
     monthInReview: (year: number, month: number) =>
       `/users/${id}/mir/${year}/${month}`,
   }),
+  library: {
+    me: (library: string) => `/users/me/library?library=${library}`,
+  },
   lists: {
     official: (id: number, type?: MediaType) =>
       `/lists/official/${id}?type=${type}`,
