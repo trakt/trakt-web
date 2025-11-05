@@ -86,7 +86,7 @@
       <ListDropdown {...listProps} />
     {/if}
   </RenderFor>
-  <RenderFor audience="authenticated" navigation="default">
+  <RenderFor audience="authenticated" navigation="dpad">
     <StreamOnButton {streamOn} {type} {media} style="normal" size="normal" />
     <WatchlistAction {...watchlistProps} />
   </RenderFor>
