@@ -1,5 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
+import { EpisodeLibraryResponseMock } from '../data/sync/response/EpisodeLibraryResponseMock.ts';
+import { MovieLibraryResponseMock } from '../data/sync/response/MovieLibraryResponseMock.ts';
 import { UpNextResponseMock } from '../data/sync/response/UpNextResponseMock.ts';
 import { UserPlexEpisodeCollectionResponseMock } from '../data/users/response/UserPlexEpisodeCollectionResponseMock.ts';
 import { UserPlexMovieCollectionResponseMock } from '../data/users/response/UserPlexMovieCollectionResponseMock.ts';
@@ -77,21 +79,36 @@ export const sync = [
     },
   ),
   http.get(
-    'http://localhost/sync/collection/movies*',
-    () => {
-      return HttpResponse.json(UserPlexMovieCollectionResponseMock);
+    'http://localhost/sync/collection/movies',
+    ({ request }) => {
+      const url = new URL(request.url);
+      const isMinRequest = url.searchParams.get('extended') === 'min';
+
+      return isMinRequest
+        ? HttpResponse.json(UserPlexMovieCollectionResponseMock)
+        : HttpResponse.json(MovieLibraryResponseMock);
     },
   ),
   http.get(
-    'http://localhost/sync/collection/shows*',
-    () => {
-      return HttpResponse.json(UserPlexShowCollectionResponseMock);
+    'http://localhost/sync/collection/episodes',
+    ({ request }) => {
+      const url = new URL(request.url);
+      const isMinRequest = url.searchParams.get('extended') === 'min';
+
+      return isMinRequest
+        ? HttpResponse.json(UserPlexEpisodeCollectionResponseMock)
+        : HttpResponse.json(EpisodeLibraryResponseMock);
     },
   ),
   http.get(
-    'http://localhost/sync/collection/episodes*',
-    () => {
-      return HttpResponse.json(UserPlexEpisodeCollectionResponseMock);
+    'http://localhost/sync/collection/shows',
+    ({ request }) => {
+      const url = new URL(request.url);
+      const isMinRequest = url.searchParams.get('extended') === 'min';
+
+      return isMinRequest
+        ? HttpResponse.json(UserPlexShowCollectionResponseMock)
+        : HttpResponse.json([]);
     },
   ),
 ];
