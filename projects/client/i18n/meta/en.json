@@ -5782,6 +5782,14 @@
         "ios"
       ]
     },
+    "text_library": {
+      "default": "Library",
+      "description": "Text label indicating that the media is in the users library, e.g plex. If there is no short translation available, Anglicism is fine.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_stream": {
       "default": "Stream",
       "description": "Text label indicating that the media can be streamed. If there is no short translation available, Anglicism is fine.",

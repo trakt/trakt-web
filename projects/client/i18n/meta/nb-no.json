@@ -2121,6 +2121,9 @@
     "page_title_start_watching": {
       "default": "Start å se"
     },
+    "text_library": {
+      "default": "Bibliotek"
+    },
     "text_stream": {
       "default": "Strøm"
     },

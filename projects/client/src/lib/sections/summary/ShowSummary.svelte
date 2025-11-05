@@ -66,7 +66,7 @@
 </RenderFor>
 
 <RenderFor audience="authenticated" navigation="default">
-  <WhereToWatchList slug={media.slug} {streamOn} />
+  <WhereToWatchList type="show" {media} {streamOn} />
 </RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />

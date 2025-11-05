@@ -2121,6 +2121,9 @@
     "page_title_start_watching": {
       "default": "Zacznij oglądanie"
     },
+    "text_library": {
+      "default": "Biblioteka"
+    },
     "text_stream": {
       "default": "Stream"
     },
