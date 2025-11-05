@@ -2121,6 +2121,9 @@
     "page_title_start_watching": {
       "default": "Започнете гледането"
     },
+    "text_library": {
+      "default": "Библиотека"
+    },
     "text_stream": {
       "default": "Поток"
     },
