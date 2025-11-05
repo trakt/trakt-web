@@ -31,6 +31,9 @@
         </span>
       </ProgressTag>
     {/if}
+    {#if props.coverTag}
+      {@render props.coverTag()}
+    {/if}
   </div>
 {/snippet}
 

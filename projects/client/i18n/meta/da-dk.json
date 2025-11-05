@@ -2168,6 +2168,21 @@
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Slå halloweenfiltre til/fra"
+    },
+    "list_title_library": {
+      "default": "Bibliotek"
+    },
+    "button_label_view_all_library_items": {
+      "default": "Se alle bibliotekselementer"
+    },
+    "dropdown_label_library": {
+      "default": "Bibliotek"
+    },
+    "translated_value_library_custom": {
+      "default": "Brugerdefineret"
+    },
+    "page_title_library": {
+      "default": "Bibliotek"
     }
   }
 }

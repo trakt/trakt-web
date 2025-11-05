@@ -13,4 +13,5 @@ export type TagIntl = {
   trendLabel: (delta: number) => string;
   postCredits: (count: number) => string;
   mediaTypeLabel: (type: MediaType) => string;
+  toDay: (date: Date) => string;
 };

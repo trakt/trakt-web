@@ -5908,6 +5908,46 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_library": {
+      "default": "Library",
+      "description": "Title for lists containing movies and episodes in a users library. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_view_all_library_items": {
+      "default": "View all library items",
+      "description": "Aria-label for the button that allows users to view all movies and episodes in their library.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "dropdown_label_library": {
+      "default": "Library",
+      "description": "Aria-label for the dropdown that allows users to filter the movies and episodes in their library by category, e.g. plex.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_library_custom": {
+      "default": "Custom",
+      "description": "Value for the custom library name. This is the category for library items that are not in a specific category like Plex.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_library": {
+      "default": "Library",
+      "description": "Title for the movies and episodes library page.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

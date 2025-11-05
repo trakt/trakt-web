@@ -8,6 +8,7 @@ import { toRelativeHumanDay } from '$lib/utils/formatting/date/toRelativeHumanDa
 import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
 import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
 import type { TagIntl } from './TagIntl.ts';
+import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 
 export const TagIntlProvider: TagIntl = {
   toDuration: (duration) =>
@@ -27,4 +28,5 @@ export const TagIntlProvider: TagIntl = {
   postCredits: (count) =>
     `${toHumanNumber(count, languageTag())} · ${m.header_post_credits()}`,
   mediaTypeLabel: (type) => toTranslatedValue('type', type),
+  toDay: (date) => toHumanDay(date, getLocale()),
 };

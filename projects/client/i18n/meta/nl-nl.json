@@ -2168,6 +2168,21 @@
     },
     "switch_label_toggle_halloween_filters": {
       "default": "Halloween-filters in/uitschakelen"
+    },
+    "list_title_library": {
+      "default": "Bibliotheek"
+    },
+    "button_label_view_all_library_items": {
+      "default": "Bekijk alle bibliotheekitems"
+    },
+    "dropdown_label_library": {
+      "default": "Bibliotheek"
+    },
+    "translated_value_library_custom": {
+      "default": "Aangepast"
+    },
+    "page_title_library": {
+      "default": "Bibliotheek"
     }
   }
 }

@@ -4,6 +4,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import FavoritesList from "../lists/FavoritesList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
+  import LibraryList from "../lists/library/LibraryList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
   import ProfilePageBanner from "../profile-banner/ProfilePageBanner.svelte";
   import MonthToDate from "./components/MonthToDate.svelte";
@@ -52,6 +53,11 @@
 {#if slug !== "me"}
   <PersonalLists {slug} type="personal" />
   <PersonalLists {slug} type="collaboration" />
+{/if}
+
+<!-- FIXME: add library support to view other users libraries -->
+{#if slug === "me"}
+  <LibraryList />
 {/if}
 
 <ProfilesList {slug} />
