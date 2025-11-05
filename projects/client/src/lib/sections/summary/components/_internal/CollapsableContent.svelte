@@ -78,12 +78,6 @@
 
       min-height: var(--ni-16);
 
-      .meta-info {
-        display: flex;
-        align-items: center;
-        gap: var(--gap-xs);
-      }
-
       :global(svg) {
         width: var(--ni-16);
         height: var(--ni-16);
