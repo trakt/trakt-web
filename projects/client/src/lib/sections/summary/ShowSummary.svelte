@@ -15,7 +15,7 @@
   import RelatedList from "../lists/RelatedList.svelte";
   import SeasonList from "../lists/season/SeasonList.svelte";
   import VideoList from "../lists/VideoList.svelte";
-  import WhereToWatchList from "../lists/WhereToWatchList.svelte";
+  import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
@@ -66,7 +66,7 @@
 </RenderFor>
 
 <RenderFor audience="authenticated" navigation="default">
-  <WhereToWatchList slug={media.slug} {streamOn} />
+  <WhereToWatchList type="show" {media} {streamOn} />
 </RenderFor>
 
 <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />

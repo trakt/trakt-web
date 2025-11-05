@@ -1,10 +1,10 @@
 <script lang="ts">
   import PlexButton from "$lib/components/buttons/plex/PlexButton.svelte";
   import StreamingServiceButton from "$lib/components/buttons/streaming-service/StreamingServiceButton.svelte";
+  import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import type { StreamOnButtonProps } from "./StreamOnButtonProps";
-  import { usePlexLibrary } from "./_internal/usePlexLibrary";
 
   const {
     streamOn,

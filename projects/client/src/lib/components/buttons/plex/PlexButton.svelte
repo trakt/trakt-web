@@ -3,9 +3,9 @@
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { buildPlexLink } from "$lib/features/plex/buildPlexLink";
   import Button from "../Button.svelte";
   import { StreamingServiceButtonIntlProvider } from "../streaming-service/StreamingServiceButtonIntlProvider";
-  import { buildPlexLink } from "./_internal/buildPlexLink";
   import { usePlexHandler } from "./_internal/usePlexHandler";
   import type { PlexButtonProps } from "./PlexButtonProps";
 

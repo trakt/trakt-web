@@ -6,24 +6,30 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { StreamingServiceOption } from "$lib/requests/models/StreamingServiceOptions";
-  import { getMediaCost } from "./_internal/getMediaCost";
+  import type { LibraryOption } from "../models/LibraryOption";
+  import { getMediaCost } from "./getMediaCost";
 
-  const { service }: { service: StreamingServiceOption } = $props();
+  const { service }: { service: StreamingServiceOption | LibraryOption } =
+    $props();
 
   const { track } = useTrack(AnalyticsEvent.StreamOn);
 
   const text = $derived.by(() => {
-    if (service.type === "streaming") {
-      return m.text_stream();
-    }
+    switch (service.type) {
+      case "library":
+        return m.text_library();
+      case "streaming":
+        return m.text_stream();
+      case "on-demand": {
+        const costText = getMediaCost(service);
+        if (!costText) {
+          return m.text_on_demand();
+        }
 
-    const costText = getMediaCost(service);
-    if (!costText) {
-      return m.text_on_demand();
+        const typeText = service.prices.rent ? m.text_rent() : m.text_buy();
+        return `${typeText} (${costText})`;
+      }
     }
-
-    const typeText = service.prices.rent ? m.text_rent() : m.text_buy();
-    return `${typeText} (${costText})`;
   });
 </script>
 
