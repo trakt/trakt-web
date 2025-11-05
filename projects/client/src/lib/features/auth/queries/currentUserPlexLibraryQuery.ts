@@ -1,21 +1,21 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
-import { api, type ApiParams } from '$lib/requests/api.ts';
-import { time } from '$lib/utils/timing/time.ts';
 import {
   type CollectionMinimalResponse,
   type CollectionMinimalShowResponse,
 } from '@trakt/api';
 import z from 'zod';
+import { api, type ApiParams } from '../../../requests/api.ts';
+import { time } from '../../../utils/timing/time.ts';
+import { defineQuery } from '../../query/defineQuery.ts';
 
-const UserPlexCollectionSchema = z.object({
+const UserPlexLibrarySchema = z.object({
   movieIds: z.array(z.number()),
   episodeIds: z.array(z.number()),
   showIds: z.array(z.number()),
 });
 
-export type UserPlexCollection = z.infer<typeof UserPlexCollectionSchema>;
+export type UserPlexLibrary = z.infer<typeof UserPlexLibrarySchema>;
 
-const currentUserPlexCollectionRequest = (
+const currentUserPlexLibraryRequest = (
   { fetch }: ApiParams,
   type: 'movies' | 'shows' | 'episodes',
 ) =>
@@ -30,18 +30,18 @@ const currentUserPlexCollectionRequest = (
     });
 
 function toTraktIds(
-  collectionResponse: CollectionMinimalResponse | CollectionMinimalShowResponse,
+  libraryResponse: CollectionMinimalResponse | CollectionMinimalShowResponse,
 ): number[] {
-  return Object.keys(collectionResponse).map((key) => parseInt(key, 10));
+  return Object.keys(libraryResponse).map((key) => parseInt(key, 10));
 }
 
-export const currentUserPlexCollectionQuery = defineQuery({
-  key: 'currentUserPlexCollection',
+export const currentUserPlexLibraryQuery = defineQuery({
+  key: 'currentUserPlexLibrary',
   request: () =>
     Promise.all([
-      currentUserPlexCollectionRequest({ fetch }, 'movies'),
-      currentUserPlexCollectionRequest({ fetch }, 'shows'),
-      currentUserPlexCollectionRequest({ fetch }, 'episodes'),
+      currentUserPlexLibraryRequest({ fetch }, 'movies'),
+      currentUserPlexLibraryRequest({ fetch }, 'shows'),
+      currentUserPlexLibraryRequest({ fetch }, 'episodes'),
     ]),
   invalidations: [],
   dependencies: [],
@@ -50,6 +50,6 @@ export const currentUserPlexCollectionQuery = defineQuery({
     showIds: toTraktIds(showsResponse.body),
     episodeIds: toTraktIds(episodesResponse.body),
   }),
-  schema: UserPlexCollectionSchema,
+  schema: UserPlexLibrarySchema,
   ttl: time.hours(3),
 });

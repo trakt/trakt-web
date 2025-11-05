@@ -15,9 +15,9 @@ import {
   type UserNetwork,
 } from '../queries/currentUserNetworkQuery.ts';
 import {
-  currentUserPlexCollectionQuery,
-  type UserPlexCollection,
-} from '../queries/currentUserPlexCollectionQuery.ts';
+  currentUserPlexLibraryQuery,
+  type UserPlexLibrary,
+} from '../queries/currentUserPlexLibraryQuery.ts';
 import {
   currentUserRatingsQuery,
   type UserRatings,
@@ -113,7 +113,7 @@ export function useUser() {
       network: readable<UserNetwork>({
         following: [],
       }),
-      plexCollection: readable<UserPlexCollection>({
+      plexLibrary: readable<UserPlexLibrary>({
         movieIds: [],
         episodeIds: [],
         showIds: [],
@@ -130,8 +130,8 @@ export function useUser() {
   );
   const favoritesQueryResponse = useQuery(currentUserFavoritesQuery());
   const followingQueryResponse = useQuery(currentUserNetworkQuery());
-  const plexCollectionQueryResponse = useQuery(
-    currentUserPlexCollectionQuery(),
+  const plexLibraryQueryResponse = useQuery(
+    currentUserPlexLibraryQuery(),
   );
 
   const user = derived(
@@ -162,8 +162,8 @@ export function useUser() {
     followingQueryResponse,
     ($network) => $network.data,
   );
-  const plexCollection = derived(
-    plexCollectionQueryResponse,
+  const plexLibrary = derived(
+    plexLibraryQueryResponse,
     ($collection) => $collection.data,
   );
 
@@ -175,6 +175,6 @@ export function useUser() {
     reactions,
     favorites,
     network,
-    plexCollection,
+    plexLibrary,
   };
 }
