@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import type { EpisodeEntry } from '../../../../requests/models/EpisodeEntry.ts';
-import type { MovieEntry } from '../../../../requests/models/MovieEntry.ts';
-import type { ShowEntry } from '../../../../requests/models/ShowEntry.ts';
+import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
+import type { MovieEntry } from '$lib/requests/models/MovieEntry.ts';
+import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { buildPlexLink } from './buildPlexLink.ts';
 
 describe('buildPlexLink', () => {
