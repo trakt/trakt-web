@@ -114,7 +114,7 @@
             data-dpad-navigation={DpadNavigationType.List}
             data-navigation-type={$navigation}
           >
-            {#each items as i (`${items.length}_${i.key}`)}
+            {#each items as i (i.key)}
               {@render item(i)}
             {/each}
 
