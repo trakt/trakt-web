@@ -1963,18 +1963,6 @@
     "button_text_followers": {
       "default": "Follower"
     },
-    "text_good_morning": {
-      "default": "Guten Morgen"
-    },
-    "text_good_afternoon": {
-      "default": "Guten Tag"
-    },
-    "text_good_evening": {
-      "default": "Guten Abend"
-    },
-    "text_good_night": {
-      "default": "Gute Nacht"
-    },
     "button_label_dismiss": {
       "default": "Ablehnen"
     },

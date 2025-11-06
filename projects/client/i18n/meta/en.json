@@ -5402,38 +5402,6 @@
         "ios"
       ]
     },
-    "text_good_morning": {
-      "default": "Good morning",
-      "description": "Text for the morning greeting. This should be as short as possible, preferably two short words.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_good_afternoon": {
-      "default": "Good afternoon",
-      "description": "Text for the afternoon greeting. This should be as short as possible, preferably two short words.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_good_evening": {
-      "default": "Good evening",
-      "description": "Text for the evening greeting. This should be as short as possible, preferably two short words.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "text_good_night": {
-      "default": "Good night",
-      "description": "Text for the night greeting. This should be as short as possible, preferably two short words.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_dismiss": {
       "default": "Dismiss",
       "description": "Aria-label for the button that allows users to dismiss prompts and toasts.",

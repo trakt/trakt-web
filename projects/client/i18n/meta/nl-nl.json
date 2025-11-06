@@ -1963,18 +1963,6 @@
     "button_text_followers": {
       "default": "Volgers"
     },
-    "text_good_morning": {
-      "default": "Goedemorgen"
-    },
-    "text_good_afternoon": {
-      "default": "Goedemiddag"
-    },
-    "text_good_evening": {
-      "default": "Goedenavond"
-    },
-    "text_good_night": {
-      "default": "Goedenacht"
-    },
     "button_label_dismiss": {
       "default": "Afwijzen"
     },

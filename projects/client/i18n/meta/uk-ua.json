@@ -1963,18 +1963,6 @@
     "button_text_followers": {
       "default": "Підписники"
     },
-    "text_good_morning": {
-      "default": "Добрий ранок"
-    },
-    "text_good_afternoon": {
-      "default": "Добрий день"
-    },
-    "text_good_evening": {
-      "default": "Добрий вечір"
-    },
-    "text_good_night": {
-      "default": "На добраніч"
-    },
     "button_label_dismiss": {
       "default": "Відхилити"
     },
