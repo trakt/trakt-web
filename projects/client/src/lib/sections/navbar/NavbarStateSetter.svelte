@@ -7,6 +7,7 @@
     seasonalActions,
     contextualActions,
     mode,
+    hasFilters,
   }: {
     actions?: Snippet;
     seasonalActions?: Snippet;
@@ -16,6 +17,7 @@
      */
     contextualActions?: Snippet;
     mode?: NavbarMode;
+    hasFilters?: boolean;
   } = $props();
 
   const { set, reset } = useNavbarState();
@@ -26,6 +28,7 @@
       seasonalActions,
       contextualActions,
       mode,
+      hasFilters,
     });
   });
 

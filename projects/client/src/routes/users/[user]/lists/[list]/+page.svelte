@@ -3,6 +3,7 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import UserListPaginatedList from "$lib/sections/lists/user/UserListPaginatedList.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import type { PageProps } from "./$types";
   import { mapToMediaType } from "./_internal/mapToMediaType";
@@ -27,6 +28,8 @@
   title={listName}
   hasDynamicContent={true}
 >
+  <NavbarStateSetter hasFilters />
+
   <TraktPageCoverSetter />
 
   {#if $list}

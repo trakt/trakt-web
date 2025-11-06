@@ -122,7 +122,7 @@
             {/snippet}
           </Button>
 
-          <FilterButton size="normal" />
+          <FilterButton size="normal" isDisabled={!$state.hasFilters} />
         </RenderFor>
       </div>
 

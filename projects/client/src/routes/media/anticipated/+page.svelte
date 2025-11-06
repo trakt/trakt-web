@@ -4,6 +4,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
 
   import AnticipatedPaginatedList from "$lib/sections/lists/anticipated/AnticipatedPaginatedList.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
 </script>
 
@@ -12,6 +13,7 @@
   image={DEFAULT_SHARE_MOVIE_COVER}
   title={m.page_title_anticipated_media()}
 >
+  <NavbarStateSetter hasFilters />
   <TraktPageCoverSetter />
 
   <AnticipatedPaginatedList

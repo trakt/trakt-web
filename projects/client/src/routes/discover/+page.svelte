@@ -33,7 +33,7 @@
 >
   <TraktPageCoverSetter />
 
-  <NavbarStateSetter>
+  <NavbarStateSetter hasFilters={!$useSeasonalFilters}>
     {#snippet actions()}
       <DiscoverToggles />
     {/snippet}

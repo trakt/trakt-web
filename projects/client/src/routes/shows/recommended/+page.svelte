@@ -4,6 +4,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
 
   import RecommendedPaginatedList from "$lib/sections/lists/recommended/RecommendedPaginatedList.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/constants";
 </script>
 
@@ -12,6 +13,7 @@
   image={DEFAULT_SHARE_SHOW_COVER}
   title={m.page_title_recommended_shows()}
 >
+  <NavbarStateSetter hasFilters />
   <TraktPageCoverSetter />
 
   <RecommendedPaginatedList

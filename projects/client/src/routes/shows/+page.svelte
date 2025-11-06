@@ -7,6 +7,7 @@
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
 
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/constants";
 
@@ -18,6 +19,7 @@
   image={DEFAULT_SHARE_SHOW_COVER}
   title={m.page_title_shows()}
 >
+  <NavbarStateSetter hasFilters />
   <TraktPageCoverSetter />
 
   <TrendingList
