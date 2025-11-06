@@ -1,14 +1,17 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
+  import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
   import { useSeasonalTheme } from "$lib/features/theme/useSeasonalTheme";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import AnticipatedList from "$lib/sections/lists/anticipated/AnticipatedList.svelte";
   import PopularList from "$lib/sections/lists/popular/PopularList.svelte";
   import RecommendedList from "$lib/sections/lists/recommended/RecommendedList.svelte";
   import TrendingList from "$lib/sections/lists/trending/TrendingList.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_SHOW_COVER } from "$lib/utils/constants";
 
   const { mode: type, useSeasonalFilters } = useDiscover();
@@ -24,11 +27,21 @@
 </script>
 
 <TraktPage
-  audience="all"
+  audience="authenticated"
   image={DEFAULT_SHARE_SHOW_COVER}
   title={m.page_title_discover()}
 >
   <TraktPageCoverSetter />
+
+  <NavbarStateSetter>
+    {#snippet actions()}
+      <DiscoverToggles />
+    {/snippet}
+
+    {#snippet seasonalActions()}
+      <SeasonalToggle />
+    {/snippet}
+  </NavbarStateSetter>
 
   <TrendingList
     title={m.list_title_trending()}

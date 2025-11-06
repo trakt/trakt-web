@@ -27,20 +27,17 @@
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import WSInvalidator from "$lib/features/websocket/WSInvalidator.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import Footer from "$lib/sections/footer/Footer.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
-  import Navbar from "$lib/sections/navbar/Navbar.svelte";
+  import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
+  import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
   import Toast from "$lib/sections/toast/Toast.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
   import { SvelteQueryDevtools } from "@tanstack/svelte-query-devtools";
   import { onMount } from "svelte";
 
   const { data, children } = $props();
-
-  const isOnHomePage = $derived(UrlBuilder.home() === page.url.pathname);
 
   $effect.pre(initializeSeasonalThemes);
 
@@ -172,47 +169,33 @@
 
                                   <ThemeProvider theme={data.theme}>
                                     <ListScrollHistoryProvider>
-                                      <div class="trakt-layout-wrapper">
-                                        <RenderFor audience="authenticated">
-                                          <Navbar />
-                                        </RenderFor>
-                                        <RenderFor audience="public">
-                                          {#if !isOnHomePage}
-                                            <Navbar />
-                                          {/if}
-                                        </RenderFor>
-                                        <div class="trakt-layout-content">
-                                          {@render children()}
-                                        </div>
-                                        <RenderFor
-                                          audience="authenticated"
-                                          navigation="default"
-                                        >
-                                          <Footer />
-                                        </RenderFor>
-                                        <RenderFor
-                                          audience="public"
-                                          navigation="default"
-                                        >
-                                          {#if !isOnHomePage}
-                                            <Footer />
-                                          {/if}
-                                        </RenderFor>
-                                      </div>
+                                      <!--
+                                        All navbars are added in the layout to make sure they can
+                                        persist during navigation. The state is set on a page level.
+                                      -->
                                       <RenderFor
-                                        audience="authenticated"
+                                        audience="all"
+                                        device={["mobile", "tablet-sm"]}
+                                      >
+                                        <TopNavbar />
+                                      </RenderFor>
+
+                                      <RenderFor
+                                        audience="all"
+                                        device={["desktop", "tablet-lg"]}
+                                      >
+                                        <SideNavbar />
+                                      </RenderFor>
+
+                                      {@render children()}
+
+                                      <RenderFor
+                                        audience="all"
                                         device={["mobile", "tablet-sm"]}
                                       >
                                         <MobileNavbar />
                                       </RenderFor>
-                                      <RenderFor
-                                        audience="public"
-                                        device={["mobile", "tablet-sm"]}
-                                      >
-                                        {#if !isOnHomePage}
-                                          <MobileNavbar />
-                                        {/if}
-                                      </RenderFor>
+
                                       <RenderFor
                                         audience="authenticated"
                                         navigation="default"
@@ -252,19 +235,6 @@
 
   :global(.tsqd-open-btn-container) {
     opacity: 0.25;
-  }
-
-  .trakt-layout-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .trakt-layout-content {
-    flex: 1;
-
-    padding-left: var(--layout-sidebar-distance);
-    box-sizing: border-box;
   }
 
   @include for-mouse {

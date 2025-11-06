@@ -6,6 +6,8 @@
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import Redirect from "../../components/router/Redirect.svelte";
+  import Footer from "../footer/Footer.svelte";
+  import NavbarStateSetter from "../navbar/NavbarStateSetter.svelte";
 
   type TraktPageProps = {
     title: string | undefined;
@@ -105,44 +107,13 @@
 </svelte:head>
 
 <RenderFor {audience}>
+  <NavbarStateSetter mode="full" />
+
   <div class="trakt-content" {...dynamicContentProps}>
     {@render children()}
   </div>
 
-  <style lang="scss">
-    @use "$style/scss/mixins/index" as *;
-
-    .trakt-content {
-      --content-gap: var(--gap-xl);
-
-      transition: var(--transition-increment) ease-in-out;
-      transition-property: gap, margin;
-
-      display: flex;
-      flex-direction: column;
-      gap: var(--content-gap);
-
-      &:first-child {
-        margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
-
-        @include for-tablet-sm-and-below {
-          margin-top: var(--content-gap);
-        }
-      }
-
-      @include for-tablet-lg-and-below {
-        --content-gap: var(--gap-l);
-      }
-
-      @include for-mobile {
-        --content-gap: var(--gap-m);
-
-        &:first-child {
-          margin-top: 0;
-        }
-      }
-    }
-  </style>
+  <Footer />
 </RenderFor>
 
 {#if audience === "authenticated"}
@@ -150,3 +121,35 @@
     <Redirect to={UrlBuilder.home()} />
   </RenderFor>
 {/if}
+
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
+  .trakt-content {
+    --content-gap: var(--gap-xl);
+
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: gap, margin;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--content-gap);
+
+    min-height: 100vh;
+
+    padding-left: var(--layout-sidebar-distance);
+    margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
+
+    @include for-tablet-sm-and-below {
+      margin-top: var(--content-gap);
+    }
+
+    @include for-tablet-lg-and-below {
+      --content-gap: var(--gap-l);
+    }
+
+    @include for-mobile {
+      --content-gap: var(--gap-m);
+    }
+  }
+</style>

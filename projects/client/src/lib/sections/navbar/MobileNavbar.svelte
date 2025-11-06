@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
@@ -7,65 +6,74 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { isMobileAppleDevice } from "$lib/utils/devices/isMobileAppleDevice";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { fade } from "svelte/transition";
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
-  import NavbarSearch from "./components/_internal/NavbarSearch.svelte";
+  import { useNavbarState } from "./useNavbarState";
 
-  const isOnSearchPage = $derived(page.route.id === UrlBuilder.search());
-  const showSearchInNavbar = $derived(!isMobileAppleDevice() && isOnSearchPage);
+  const { state } = useNavbarState();
 
   const { user } = useUser();
 </script>
 
-<div class="trakt-mobile-navbar" class:has-search={showSearchInNavbar}>
-  {#if showSearchInNavbar}
-    <NavbarSearch />
-  {/if}
-
-  <div class="trakt-mobile-navbar-links">
-    <Link href={UrlBuilder.home()}>
-      <div class="trakt-mobile-navbar-link">
-        <HomeIcon />
+{#if $state.mode !== "hidden"}
+  <div
+    class="trakt-mobile-navbar"
+    class:has-contextual-content={!!$state.contextualActions}
+  >
+    {#if $state.contextualActions}
+      <div
+        class="trakt-mobile-navbar-actions"
+        in:fade={{ duration: 150, delay: 150 }}
+      >
+        {@render $state.contextualActions?.()}
       </div>
-    </Link>
+    {/if}
 
-    <Link href={UrlBuilder.discover()}>
-      <div class="trakt-mobile-navbar-link">
-        <DiscoverIcon />
-      </div>
-    </Link>
-
-    <RenderFor audience="authenticated">
-      <Link href={UrlBuilder.lists.user("me")}>
+    <div class="trakt-mobile-navbar-links">
+      <Link href={UrlBuilder.home()}>
         <div class="trakt-mobile-navbar-link">
-          <ListIcon />
+          <HomeIcon />
         </div>
       </Link>
 
-      <Link href={UrlBuilder.search()}>
-        <div class="trakt-mobile-navbar-link">
-          <SearchIcon />
-        </div>
-      </Link>
+      <RenderFor audience="authenticated">
+        <Link href={UrlBuilder.discover()}>
+          <div class="trakt-mobile-navbar-link">
+            <DiscoverIcon />
+          </div>
+        </Link>
 
-      <Link href={UrlBuilder.profile.me()}>
-        <div class="trakt-mobile-navbar-link">
-          <ProfileImage
-            --width="var(--ni-24)"
-            --height="var(--ni-24)"
-            --border-width="var(--border-thickness-xs)"
-            name={$user?.name?.first ?? ""}
-            src={$user?.avatar?.url ?? ""}
-            isVip={Boolean($user?.isVip)}
-          />
-        </div>
-      </Link>
-    </RenderFor>
+        <Link href={UrlBuilder.lists.user("me")}>
+          <div class="trakt-mobile-navbar-link">
+            <ListIcon />
+          </div>
+        </Link>
+
+        <Link href={UrlBuilder.search()}>
+          <div class="trakt-mobile-navbar-link">
+            <SearchIcon />
+          </div>
+        </Link>
+
+        <Link href={UrlBuilder.profile.me()}>
+          <div class="trakt-mobile-navbar-link">
+            <ProfileImage
+              --width="var(--ni-24)"
+              --height="var(--ni-24)"
+              --border-width="var(--border-thickness-xs)"
+              name={$user?.name?.first ?? ""}
+              src={$user?.avatar?.url ?? ""}
+              isVip={Boolean($user?.isVip)}
+            />
+          </div>
+        </Link>
+      </RenderFor>
+    </div>
   </div>
-</div>
 
-<div class="trakt-mobile-navbar-spacer"></div>
+  <div class="trakt-mobile-navbar-spacer"></div>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
@@ -98,11 +106,11 @@
     transition: var(--transition-increment) ease-in-out;
     transition-property: height, gap;
 
-    &.has-search {
-      --search-height: calc(var(--ni-104) + var(--gap-m));
+    &.has-contextual-content {
+      --contextual-height: calc(var(--ni-104) + var(--gap-m));
 
       gap: var(--gap-m);
-      height: calc(var(--mobile-navbar-height) + var(--search-height));
+      height: calc(var(--mobile-navbar-height) + var(--contextual-height));
     }
 
     backdrop-filter: blur(var(--ni-8));
@@ -133,5 +141,19 @@
     .trakt-mobile-navbar-link {
       color: var(--purple-400);
     }
+  }
+
+  .trakt-mobile-navbar-actions {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100%;
+    padding: var(--ni-4) var(--ni-20);
+    box-sizing: border-box;
+
+    gap: var(--gap-s);
   }
 </style>

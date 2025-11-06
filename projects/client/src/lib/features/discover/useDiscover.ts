@@ -10,7 +10,7 @@ import type { DiscoverMode } from './models/DiscoverMode.ts';
 
 export function useDiscover() {
   const { options, set } = useToggler('discover');
-  const { mode, routes, useSeasonalFilters } = getDiscoverContext();
+  const { mode, useSeasonalFilters } = getDiscoverContext();
   const { track } = useTrack(AnalyticsEvent.DiscoverMode);
 
   const setMode = (value: DiscoverMode) => {
@@ -23,7 +23,6 @@ export function useDiscover() {
     options,
     setMode,
     mode,
-    routes,
     useSeasonalFilters: derived(
       useSeasonalFilters,
       ($useSeasonalFilters) => $useSeasonalFilters,
