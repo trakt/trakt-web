@@ -2,6 +2,7 @@
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
   import Profile from "$lib/sections/profile/Profile.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
@@ -25,6 +26,8 @@
   {title}
   hasDynamicContent={true}
 >
+  <NavbarStateSetter mode="minimal" />
+
   {#if !$isLoading && $user}
     <CoverImageSetter src={$user.cover?.url} type="main" />
     {#if $user.private}

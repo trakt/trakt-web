@@ -6,6 +6,7 @@
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import { CUSTOM_LIBRARY_NAME } from "$lib/sections/lists/library/constants";
   import LibraryListPaginated from "$lib/sections/lists/library/LibraryListPaginated.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_MOVIE_COVER } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { PageProps } from "./$types";
@@ -27,6 +28,7 @@
     image={DEFAULT_SHARE_MOVIE_COVER}
     title={m.page_title_library()}
   >
+    <NavbarStateSetter mode="minimal" />
     <TraktPageCoverSetter />
 
     <LibraryListPaginated {library} />
