@@ -1,11 +1,11 @@
 import { browser } from '$app/environment';
+import { time } from '$lib/utils/timing/time.ts';
 import {
   createQuery,
   type CreateQueryOptions,
   useQueryClient,
 } from '@tanstack/svelte-query';
 import { derived, type Readable } from 'svelte/store';
-import { time } from '../../utils/timing/time.ts';
 import { findInvalidationId } from './_internal/findInvalidationId.ts';
 import { findQueryId } from './_internal/findQueryId.ts';
 import { invalidationPredicate } from './_internal/invalidationPredicate.ts';
@@ -15,6 +15,8 @@ import { invalidationPredicate } from './_internal/invalidationPredicate.ts';
  * Prevents duplicate invalidations for the same query ID within a session.
  */
 const INVALIDATION_MAP = new Map<string, number>();
+
+const MIN_INVALIDATION_AGE = time.seconds(30);
 
 function invalidationHook<T>(
   queryKey: CreateQueryOptions['queryKey'],
@@ -47,6 +49,11 @@ function invalidationHook<T>(
 
     const currentState = client.getQueryState(queryKey);
     if (!currentState || currentState.status !== 'success') {
+      return value;
+    }
+
+    const queryAge = Date.now() - currentState.dataUpdatedAt;
+    if (queryAge < MIN_INVALIDATION_AGE) {
       return value;
     }
 
