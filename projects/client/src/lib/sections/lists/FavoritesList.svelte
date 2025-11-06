@@ -3,7 +3,6 @@
   import Toggler from "$lib/components/toggles/Toggler.svelte";
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
-  import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
@@ -20,12 +19,10 @@
     $selectedType.value === "all" ? undefined : $selectedType.value,
   );
 
-  const { filterMap } = useFilter();
   const { list, isLoading } = $derived(
     useFavoritesList({
       type,
       slug,
-      filter: $filterMap,
     }),
   );
   const defaultVariant = $derived(useDefaultCardVariant(type));

@@ -30,7 +30,7 @@
         </RenderFor>
         <RenderFor audience="authenticated">
           {@render $state.seasonalActions?.()}
-          <FilterButton size="small" />
+          <FilterButton size="small" isDisabled={!$state.hasFilters} />
         </RenderFor>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 import type { Snippet } from 'svelte';
-import { readonly, writable, type Writable } from 'svelte/store';
+import { readonly, type Writable, writable } from 'svelte/store';
 
 export type NavbarMode = 'full' | 'minimal' | 'hidden';
 
@@ -8,6 +8,7 @@ type NavbarState = {
   seasonalActions: Snippet | undefined;
   contextualActions: Snippet | undefined;
   mode: NavbarMode;
+  hasFilters: boolean;
 };
 
 const initialNavbarState: NavbarState = {
@@ -15,6 +16,7 @@ const initialNavbarState: NavbarState = {
   seasonalActions: undefined,
   contextualActions: undefined,
   mode: 'hidden',
+  hasFilters: false,
 };
 
 const navbarStateStore: Writable<NavbarState> = writable(initialNavbarState);
@@ -24,16 +26,16 @@ export function useNavbarState() {
     state: readonly(navbarStateStore),
     set: (props: Partial<NavbarState>) => {
       const definedProps = Object.fromEntries(
-        Object.entries(props).filter(([_, v]) => v !== undefined)
+        Object.entries(props).filter(([_, v]) => v !== undefined),
       ) as Partial<NavbarState>;
 
-      navbarStateStore.update(current => ({
+      navbarStateStore.update((current) => ({
         ...current,
         ...definedProps,
       }));
     },
     reset: () => {
       navbarStateStore.set(initialNavbarState);
-    }
+    },
   };
 }
