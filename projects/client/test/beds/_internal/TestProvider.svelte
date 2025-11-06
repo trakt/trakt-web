@@ -13,8 +13,8 @@
 </script>
 
 <!-- TODO: add more providers here as we expand test suite -->
-<AuthProvider isAuthorized={$isAuthorized} isAuthorizedLegacy={false}>
-  <QueryClientProvider client={new QueryClient()}>
+<QueryClientProvider client={new QueryClient()}>
+  <AuthProvider isAuthorized={$isAuthorized} isAuthorizedLegacy={false}>
     <FeatureFlagProvider>
       <ToastProvider>
         <SearchProvider
@@ -34,5 +34,5 @@
         </SearchProvider>
       </ToastProvider>
     </FeatureFlagProvider>
-  </QueryClientProvider>
-</AuthProvider>
+  </AuthProvider>
+</QueryClientProvider>
