@@ -56,7 +56,7 @@
 
     &.is-hidden {
       margin: 0;
-      height: calc(var(--gap-m) + env(safe-area-inset-top));
+      height: env(safe-area-inset-top);
     }
   }
 
