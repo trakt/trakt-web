@@ -1,4 +1,4 @@
-import { combineLatest, map, shareReplay, take } from 'rxjs';
+import { combineLatest, filter, map, shareReplay, take } from 'rxjs';
 import { writable } from 'svelte/store';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
@@ -46,20 +46,21 @@ export function useLibraryList(props: UseLibraryListProps) {
     map((r) => Object.keys(r) as string[]),
   );
 
-  const initialType = record.pipe(
-    map((r) => {
-      const keys = Object.keys(r);
-      if (props.library && keys.includes(props.library)) {
-        return props.library;
-      }
-
-      return keys.at(0);
-    }),
-  );
-
   const activeLibrary = writable<string>(CUSTOM_LIBRARY_NAME);
-  initialType
-    .pipe(take(1))
+
+  record
+    .pipe(
+      filter((r) => Object.keys(r).length > 0),
+      take(1),
+      map((r) => {
+        const keys = Object.keys(r);
+        if (props.library && keys.includes(props.library)) {
+          return props.library;
+        }
+
+        return keys.at(0);
+      }),
+    )
     .subscribe((library) => {
       activeLibrary.set(library ?? CUSTOM_LIBRARY_NAME);
     });
