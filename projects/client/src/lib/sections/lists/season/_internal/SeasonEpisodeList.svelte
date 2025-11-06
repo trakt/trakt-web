@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
@@ -38,7 +38,7 @@
     hasUnseenEpisodes && episode.airDate && episode.airDate <= new Date();
 </script>
 
-<ShadowList
+<SectionList
   id={`season-episode-list-${show.slug}`}
   items={episodes}
   {title}
@@ -76,4 +76,4 @@
       source="season-episode-list"
     />
   {/snippet}
-</ShadowList>
+</SectionList>

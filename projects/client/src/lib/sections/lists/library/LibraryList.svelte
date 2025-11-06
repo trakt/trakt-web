@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -17,7 +17,7 @@
 
 {#if $list.length > 0}
   <div class="trakt-library-list" transition:slide={{ duration: 150 }}>
-    <ShadowList
+    <SectionList
       id="library-list"
       items={$list}
       title={m.list_title_library()}
@@ -42,6 +42,6 @@
           source={{ id: "library" }}
         />
       {/snippet}
-    </ShadowList>
+    </SectionList>
   </div>
 {/if}

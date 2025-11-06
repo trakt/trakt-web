@@ -1,17 +1,17 @@
 .trakt-list-item-container,
-.shadow-list-empty-state {
+.section-list-empty-state {
   padding: 0 var(--layout-distance-side);
 }
 
-.shadow-list-empty-state:has(.trakt-skeleton-list) {
+.section-list-empty-state:has(.trakt-skeleton-list) {
   padding-right: 0;
 }
 
-.shadow-list {
+.section-list {
   margin-left: calc(-1 * var(--layout-sidebar-distance));
 
   .trakt-list-item-container,
-  .shadow-list-empty-state {
+  .section-list-empty-state {
     padding-left: calc(
       var(--layout-sidebar-distance) + var(--layout-distance-side)
     );
@@ -31,7 +31,7 @@
     margin-left: 0;
 
     .trakt-list-item-container,
-    .shadow-list-empty-state {
+    .section-list-empty-state {
       padding-left: var(--layout-distance-side);
     }
   }
