@@ -2,7 +2,6 @@
   import * as m from "$lib/features/i18n/messages";
 
   import { page } from "$app/state";
-  import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
   import SearchPlaceHolder from "$lib/features/search/SearchPlaceHolder.svelte";
@@ -13,7 +12,7 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
-  import { NAVBAR_CONFIG } from "$lib/sections/navbar/constants";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
   import { isMobileAppleDevice } from "$lib/utils/devices/isMobileAppleDevice";
 
@@ -48,7 +47,7 @@
   );
 
   // FIXME: deal with ios onscreen keyboard and move to mobile navbar
-  const showOnPageSearch = isMobileAppleDevice();
+  const isMobileApple = isMobileAppleDevice();
 
   const onResultClick = (item: PersonSummary | MediaEntry) => {
     if (!query) {
@@ -59,29 +58,31 @@
   };
 </script>
 
-{#snippet searchControls()}
-  <div class="trakt-search-container">
-    <SearchInput />
-    <SearchModeToggles />
-  </div>
-{/snippet}
-
 <TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={pageTitle}>
-  <RenderFor audience="all" device={NAVBAR_CONFIG.side.device}>
-    {@render searchControls()}
+  <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+    <div class="trakt-search-container">
+      <SearchInput />
+      <SearchModeToggles />
+    </div>
   </RenderFor>
 
-  {#if showOnPageSearch}
-    <RenderFor audience="all" device={NAVBAR_CONFIG.top.device}>
-      {@render searchControls()}
-    </RenderFor>
-  {/if}
+  <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
+    {#if isMobileApple}
+      <div class="trakt-search-container">
+        <SearchInput />
+        <SearchModeToggles />
+      </div>
+    {:else}
+      <NavbarStateSetter mode="minimal">
+        {#snippet contextualActions()}
+          <SearchModeToggles />
+          <SearchInput />
+        {/snippet}
+      </NavbarStateSetter>
+    {/if}
+  </RenderFor>
 
-  {#if src}
-    <CoverImageSetter {src} type="main" />
-  {:else}
-    <TraktPageCoverSetter />
-  {/if}
+  <TraktPageCoverSetter {src} />
 
   <div class="trakt-search-results-container">
     {#if $results}

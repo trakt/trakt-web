@@ -5,6 +5,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import { useUserSeason } from "$lib/sections/lists/stores/useUserSeason";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import ShowSummary from "$lib/sections/summary/ShowSummary.svelte";
   import { findActiveSeason } from "$lib/utils/media/findActiveSeason";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -79,6 +80,8 @@
   type="show"
   hasDynamicContent={true}
 >
+  <NavbarStateSetter mode="minimal" />
+
   {#if isReady}
     <ShowSummary
       media={$show!}

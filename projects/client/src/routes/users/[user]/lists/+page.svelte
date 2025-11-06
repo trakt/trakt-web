@@ -2,6 +2,7 @@
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
 
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
@@ -9,6 +10,7 @@
   import ListsHeader from "$lib/sections/lists/user/_internal/ListsHeader.svelte";
   import PersonalLists from "$lib/sections/lists/user/PersonalLists.svelte";
   import WatchList from "$lib/sections/lists/watchlist/WatchList.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 
   const { mode } = useDiscover();
@@ -20,6 +22,12 @@
   title={m.page_title_lists()}
 >
   <TraktPageCoverSetter />
+
+  <NavbarStateSetter>
+    {#snippet actions()}
+      <DiscoverToggles />
+    {/snippet}
+  </NavbarStateSetter>
 
   <WatchList
     drilldownLabel={m.button_label_view_all_watchlist_items()}

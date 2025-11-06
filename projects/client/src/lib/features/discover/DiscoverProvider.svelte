@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage";
-  import { DISCOVER_ROUTES, SEASONAL_STORAGE_KEY } from "./_internal/constants";
+  import { SEASONAL_STORAGE_KEY } from "./_internal/constants";
   import { createDiscoverContext } from "./_internal/createDiscoverContext";
 
   const { children }: ChildrenProps = $props();
@@ -12,7 +12,7 @@
     safeLocalStorage.getItem(SEASONAL_STORAGE_KEY) ?? "true",
   );
 
-  createDiscoverContext($current.value, DISCOVER_ROUTES, useSeasonalFilters);
+  createDiscoverContext($current.value, useSeasonalFilters);
 </script>
 
 {@render children()}

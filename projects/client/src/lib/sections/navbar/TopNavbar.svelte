@@ -1,64 +1,51 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
-  import Toggler from "$lib/components/toggles/Toggler.svelte";
-  import { useAuth } from "$lib/features/auth/stores/useAuth";
-  import { useDiscover } from "$lib/features/discover/useDiscover";
-  import SeasonalToggle from "$lib/features/theme/components/SeasonalToggle.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
-  import { HIDDEN_ROUTE_IDS } from "./_internal/constants";
   import Greeting from "./_internal/Greeting.svelte";
-  import FilterButton from "./filter/FilterButton.svelte";
-  import JoinTraktButton from "./JoinTraktButton.svelte";
+  import FilterButton from "./components/filter/FilterButton.svelte";
+  import JoinTraktButton from "./components/JoinTraktButton.svelte";
+  import { useNavbarState } from "./useNavbarState";
 
-  const isHiddenRoute = $derived(
-    HIDDEN_ROUTE_IDS.includes(page.route.id ?? ""),
-  );
-  const { isAuthorized } = useAuth();
-  const isHidden = $derived(isHiddenRoute && $isAuthorized);
-
-  const { mode: selectedType, setMode, options, routes } = useDiscover();
-  const isOnDiscoverablePage = $derived($routes.includes(page.route.id ?? ""));
+  const { state } = useNavbarState();
 </script>
 
-<header>
-  <nav
-    class="trakt-navbar"
-    class:is-authorized={$isAuthorized}
-    class:is-hidden={isHidden}
-    use:trackWindowScroll={"trakt-navbar-scroll"}
-  >
-    <div class="trakt-navbar-content">
-      {#if isOnDiscoverablePage}
-        <Toggler
-          value={$selectedType}
-          variant="text"
-          onChange={setMode}
-          {options}
-        />
-      {:else}
-        <Greeting />
-      {/if}
-    </div>
+{#if $state.mode !== "hidden"}
+  <header>
+    <nav
+      class="trakt-navbar"
+      class:is-hidden={$state.mode === "minimal"}
+      use:trackWindowScroll={"trakt-navbar-scroll"}
+    >
+      <div class="trakt-navbar-actions">
+        {#if $state.actions}
+          {@render $state.actions()}
+        {:else}
+          <Greeting />
+        {/if}
+      </div>
 
-    <div class="trakt-navbar-links">
-      <RenderFor audience="public">
-        <JoinTraktButton size="small">
-          {#snippet icon()}
-            <PlusIcon />
-          {/snippet}
-        </JoinTraktButton>
-      </RenderFor>
-      <RenderFor audience="authenticated">
-        <SeasonalToggle />
-        <FilterButton size="small" />
-      </RenderFor>
-    </div>
-  </nav>
+      <div class="trakt-navbar-links">
+        <RenderFor audience="public">
+          <JoinTraktButton size="small">
+            {#snippet icon()}
+              <PlusIcon />
+            {/snippet}
+          </JoinTraktButton>
+        </RenderFor>
+        <RenderFor audience="authenticated">
+          {@render $state.seasonalActions?.()}
+          <FilterButton size="small" />
+        </RenderFor>
+      </div>
+    </nav>
 
-  <div class="trakt-navbar-spacer" class:is-hidden={isHidden}></div>
-</header>
+    <div
+      class="trakt-navbar-spacer"
+      class:is-hidden={$state.mode === "minimal"}
+    ></div>
+  </header>
+{/if}
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;

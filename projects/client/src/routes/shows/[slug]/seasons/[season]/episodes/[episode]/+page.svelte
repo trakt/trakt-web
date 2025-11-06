@@ -1,6 +1,7 @@
 <script lang="ts">
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import EpisodeSummary from "$lib/sections/summary/EpisodeSummary.svelte";
   import type { PageProps } from "./$types";
   import { useEpisode } from "./useEpisode";
@@ -25,6 +26,8 @@
   type="movie"
   hasDynamicContent={true}
 >
+  <NavbarStateSetter mode="minimal" />
+
   {#if !$isLoading}
     <EpisodeSummary
       show={$show!}

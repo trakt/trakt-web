@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import { readable, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import type { DiscoverMode } from '../models/DiscoverMode.ts';
 import {
   DISCOVER_CONTEXT_KEY,
@@ -8,7 +8,6 @@ import {
 
 export function createDiscoverContext(
   mode: DiscoverMode,
-  routes: readonly string[],
   useSeasonalFilters: boolean,
 ) {
   const ctx = setContext(
@@ -16,7 +15,6 @@ export function createDiscoverContext(
     getContext<DiscoverContext>(DISCOVER_CONTEXT_KEY) ??
       {
         mode: writable(mode),
-        routes: readable(routes),
         useSeasonalFilters: writable(useSeasonalFilters),
       },
   );

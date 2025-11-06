@@ -70,8 +70,9 @@
     gap: var(--gap-m);
     transition: gap var(--transition-increment) ease-in-out;
 
-    @include for-mobile {
+    @include for-tablet-sm-and-below {
       gap: var(--gap-xs);
+      margin: 0;
     }
   }
 </style>
