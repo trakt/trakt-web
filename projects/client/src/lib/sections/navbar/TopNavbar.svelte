@@ -2,7 +2,6 @@
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
-  import Greeting from "./_internal/Greeting.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import { useNavbarState } from "./useNavbarState";
@@ -18,11 +17,7 @@
       use:trackWindowScroll={"trakt-navbar-scroll"}
     >
       <div class="trakt-navbar-actions">
-        {#if $state.actions}
-          {@render $state.actions()}
-        {:else}
-          <Greeting />
-        {/if}
+        {@render $state.actions?.()}
       </div>
 
       <div class="trakt-navbar-links">

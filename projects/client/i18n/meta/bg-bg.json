@@ -1963,18 +1963,6 @@
     "button_text_followers": {
       "default": "Последователи"
     },
-    "text_good_morning": {
-      "default": "Добро утро"
-    },
-    "text_good_afternoon": {
-      "default": "Добър ден"
-    },
-    "text_good_evening": {
-      "default": "Добър вечер"
-    },
-    "text_good_night": {
-      "default": "Лека нощ"
-    },
     "button_label_dismiss": {
       "default": "Отхвърли"
     },
