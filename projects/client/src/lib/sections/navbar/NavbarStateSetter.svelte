@@ -20,14 +20,16 @@
 
   const { set, reset } = useNavbarState();
 
-  onMount(() => {
+  $effect(() => {
     set({
       actions,
       seasonalActions,
       contextualActions,
       mode,
     });
+  });
 
+  onMount(() => {
     return () => {
       reset();
     };
