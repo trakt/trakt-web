@@ -70,8 +70,13 @@
     {#if isMobileApple}
       <div class="trakt-search-container">
         <SearchInput />
-        <SearchModeToggles />
       </div>
+
+      <NavbarStateSetter>
+        {#snippet actions()}
+          <SearchModeToggles />
+        {/snippet}
+      </NavbarStateSetter>
     {:else}
       <NavbarStateSetter mode="minimal">
         {#snippet contextualActions()}
