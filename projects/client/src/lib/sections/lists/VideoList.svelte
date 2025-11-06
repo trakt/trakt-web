@@ -1,7 +1,7 @@
 <script lang="ts">
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
-  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
@@ -40,7 +40,7 @@
 </script>
 
 {#if videos.length > 0}
-  <ShadowList
+  <SectionList
     id={`video-list-${slug}`}
     {items}
     title={m.list_title_extras()}
@@ -73,5 +73,5 @@
         </DropdownList>
       {/if}
     {/snippet}
-  </ShadowList>
+  </SectionList>
 {/if}

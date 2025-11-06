@@ -5,7 +5,7 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import MovieIcon from "$lib/components/icons/MovieIcon.svelte";
   import ShowIcon from "$lib/components/icons/ShowIcon.svelte";
-  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { resolveEnvironmentUri } from "$lib/features/image/components/resolveEnvironmentUri";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
@@ -97,7 +97,7 @@
     </Button>
   </div>
 
-  <ShadowList
+  <SectionList
     id="assets-covers"
     title={`Covers (${media.length})`}
     items={media}
@@ -119,9 +119,9 @@
         });
       })}
     {/snippet}
-  </ShadowList>
+  </SectionList>
 
-  <ShadowList
+  <SectionList
     id="assets-posters"
     title={`Posters (${media.length})`}
     items={media}
@@ -143,9 +143,9 @@
         });
       })}
     {/snippet}
-  </ShadowList>
+  </SectionList>
 
-  <ShadowList
+  <SectionList
     id="assets-logos"
     title={`Logos (${media.length})`}
     items={media}
@@ -167,7 +167,7 @@
         });
       })}
     {/snippet}
-  </ShadowList>
+  </SectionList>
 </TraktPage>
 
 <style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ShadowList from "$lib/components/lists/section-list/ShadowList.svelte";
+  import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { EpisodeEntry } from "$lib/requests/models/EpisodeEntry";
   import type { Season } from "$lib/requests/models/Season";
@@ -28,7 +28,7 @@
   }: SeasonListProps = $props();
 </script>
 
-<ShadowList
+<SectionList
   {title}
   {subtitle}
   id={`season-poster-list-${show.slug}`}
@@ -64,4 +64,4 @@
       />
     </RenderFor>
   {/snippet}
-</ShadowList>
+</SectionList>
