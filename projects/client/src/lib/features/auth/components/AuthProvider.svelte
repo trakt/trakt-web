@@ -4,6 +4,7 @@
   import { get } from "svelte/store";
   import { createAuthContext } from "../stores/createAuthContext";
   import { initializeUserManager } from "../stores/initializeUserManager";
+  import { useUser } from "../stores/useUser";
 
   type AuthProviderProps = {
     isAuthorizedLegacy: boolean;
@@ -22,6 +23,7 @@
   });
 
   const { isInitializing } = initializeUserManager(isAuthorizedLegacy);
+  const { user } = useUser();
 
   beforeNavigate(({ from, to, cancel }) => {
     const isHomePage = from?.url.pathname === UrlBuilder.home();
@@ -40,6 +42,6 @@
   });
 </script>
 
-{#if !$isInitializing}
+{#if !$isInitializing && $user != null}
   {@render children()}
 {/if}
