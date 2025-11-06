@@ -5,7 +5,6 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { onMount } from "svelte";
   import { ListDropdownItemIntlProvider } from "./ListDropdownItemIntlProvider";
@@ -17,20 +16,23 @@
     list,
     isUpdating,
     i18n = ListDropdownItemIntlProvider,
-    ...target
-  }: ListDropdownItemProps & MediaStoreProps = $props();
+    media,
+    listedOnIds,
+  }: ListDropdownItemProps = $props();
 
   const { user } = useUser();
 
-  const { addToList, removeFromList, isListUpdating, isListed, itemCount } =
-    $derived(
-      useList({
-        list,
-        ...target,
-      }),
-    );
+  const isListed = $derived(listedOnIds.some((listId) => listId === list.id));
 
-  const isBelowLimit = $derived($itemCount < $user.limits.lists.itemLimit);
+  const { addToList, removeFromList, isListUpdating } = $derived(
+    useList({
+      list,
+      type: media.type,
+      media,
+    }),
+  );
+
+  const isBelowLimit = $derived(list.count < $user.limits.lists.itemLimit);
 
   onMount(() => {
     const unsubscribe = isListUpdating.subscribe((value) => {
@@ -52,17 +54,17 @@
     }),
   );
 
-  const handler = $derived($isListed ? confirmRemove : addToList);
+  const handler = $derived(isListed ? confirmRemove : addToList);
   const { color, variant, isTouch, ...events } = $derived(
-    useDangerButton({ isActive: $isListed, color: "default" }),
+    useDangerButton({ isActive: isListed, color: "default" }),
   );
-  const state = $derived($isListed ? "added" : "missing");
+  const state = $derived(isListed ? "added" : "missing");
 
   const itemProps: Omit<ButtonProps, "children"> = $derived({
     style: "flat",
-    label: i18n.label({ isListed: $isListed, listName: list.name, title }),
+    label: i18n.label({ isListed, listName: list.name, title }),
     color: $color,
-    variant: $isTouch && $isListed ? $variant : "primary",
+    variant: $isTouch && isListed ? $variant : "primary",
     onclick: handler,
     disabled: $isListUpdating || !isBelowLimit,
     ...events,
@@ -70,7 +72,7 @@
 </script>
 
 <DropdownItem {...itemProps}>
-  {i18n.text({ isListed: $isListed, listName: list.name, title })}
+  {i18n.text({ isListed, listName: list.name, title })}
 
   {#snippet icon()}
     {#if $isListUpdating}

@@ -3,6 +3,12 @@ import { ClientEnvironment } from '$lib/requests/ClientEnvironment.ts';
 import { IS_DEV, IS_PREVIEW, IS_TEST } from '$lib/utils/env/index.ts';
 import { traktApi, type TraktApiOptions } from '@trakt/api';
 
+type RawApiFetchParams = {
+  environment?: HttpsUrl;
+  fetch?: typeof fetch;
+  path: string;
+};
+
 export type ApiParams = Omit<TraktApiOptions, 'apiKey' | 'environment'> & {
   environment?: HttpsUrl;
 };
@@ -42,3 +48,12 @@ export const unauthorizedApi = ({
     environment,
     fetch,
   });
+
+export const rawApiFetch = ({
+  environment = ENV,
+  fetch = globalThis.fetch,
+  path,
+}: RawApiFetchParams) => {
+  const authenticatedFetch = createAuthenticatedFetch(fetch);
+  return authenticatedFetch(`${environment}${path}`);
+};

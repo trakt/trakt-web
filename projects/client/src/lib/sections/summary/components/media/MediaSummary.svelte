@@ -64,13 +64,18 @@
     media,
   });
 
-  const { lists } = useAllPersonalLists();
+  const { lists, isLoading } = useAllPersonalLists();
 
   const watchlistProps = $derived<WatchlistActionProps>({
     ...commonProps,
     style: "normal",
+    isLoadingLists: $isLoading,
   });
-  const listProps = $derived<ListDropdownProps>(commonProps);
+  const listProps = $derived<ListDropdownProps>({
+    ...commonProps,
+    lists: $lists,
+    isLoadingLists: $isLoading,
+  });
   const markAsWatchedProps = $derived<MarkAsWatchedActionProps>({
     ...commonProps,
     style: "normal",

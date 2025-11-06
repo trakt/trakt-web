@@ -13,11 +13,11 @@
     style: "action" as const,
   });
 
-  const { lists } = useAllPersonalLists();
+  const { lists, isLoading } = useAllPersonalLists();
 </script>
 
 {#if $lists.length === 0}
-  <WatchlistAction {...listProps} />
+  <WatchlistAction {...listProps} isLoadingLists={$isLoading} />
 {:else}
-  <ListDropdown {...listProps} />
+  <ListDropdown {...listProps} lists={$lists} isLoadingLists={$isLoading} />
 {/if}

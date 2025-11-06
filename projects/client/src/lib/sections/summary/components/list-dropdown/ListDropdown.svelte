@@ -11,34 +11,31 @@
   import { writable } from "svelte/store";
   import ListDropdownItem from "./_internal/ListDropdownItem.svelte";
   import ListsDrawer from "./_internal/ListsDrawer.svelte";
-  import { useIsOnAnyList } from "./_internal/useIsOnAnyList";
+  import { useListedOnIds } from "./_internal/useListedOnIds";
   import type { ListDropdownProps } from "./ListDropdownProps";
-  import { useAllPersonalLists } from "./useAllPersonalLists";
 
   const {
     size,
     style = "normal",
     title,
-    ...target
+    lists,
+    media,
+    isLoadingLists,
   }: ListDropdownProps = $props();
 
   // FIXME: replace this when we store states in session storage
   const isUpdating = writable(false);
-  const { lists, isLoading } = useAllPersonalLists();
 
-  const { isListed } = $derived(
-    useIsOnAnyList({
-      lists: $lists,
-      ...target,
-    }),
-  );
+  const { listedOnIds, isLoading } = $derived(useListedOnIds({ media }));
 
   const {
     addToWatchlist,
     isWatchlistUpdating,
     isWatchlisted,
     removeFromWatchlist,
-  } = $derived(useWatchlist(target));
+  } = $derived(useWatchlist({ media, type: media.type }));
+
+  const isListed = $derived($listedOnIds.length > 0 || $isWatchlisted);
 
   const { confirm } = useConfirm();
   const confirmRemove = $derived(
@@ -50,17 +47,17 @@
   );
 
   const isDisabled = $derived(
-    $isLoading || $isUpdating || $isWatchlistUpdating,
+    isLoadingLists || $isUpdating || $isWatchlistUpdating || $isLoading,
   );
 
   const isOpen = writable(false);
   const onClose = () => isOpen.set(false);
 
-  const variant = $derived($isListed ? "primary" : "secondary");
+  const variant = $derived(isListed ? "primary" : "secondary");
   const text = $derived(
-    $isListed ? m.button_text_listed() : m.button_text_lists(),
+    isListed ? m.button_text_listed() : m.button_text_lists(),
   );
-  const state = $derived($isListed ? "added" : "missing");
+  const state = $derived(isListed ? "added" : "missing");
 
   onMount(() => {
     return isOpen.subscribe((open) => {
@@ -84,8 +81,14 @@
     onRemove={confirmRemove}
   />
 
-  {#each $lists as list}
-    <ListDropdownItem {title} {list} {isUpdating} {...target} />
+  {#each lists as list}
+    <ListDropdownItem
+      {title}
+      {list}
+      {isUpdating}
+      {media}
+      listedOnIds={$listedOnIds}
+    />
   {/each}
 {/snippet}
 

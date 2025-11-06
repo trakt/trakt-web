@@ -3,8 +3,8 @@ import type { WatchlistRequest } from '@trakt/api';
 
 type RemoveFromListParams = {
   body: WatchlistRequest;
-  listId: string;
-  userId?: string | Nil;
+  listId: string | number;
+  userId?: string | number | Nil;
 } & ApiParams;
 
 export function removeFromListRequest(
@@ -16,8 +16,8 @@ export function removeFromListRequest(
     .list
     .remove({
       params: {
-        id: userId ?? 'me',
-        list_id: listId,
+        id: `${userId ?? 'me'}`,
+        list_id: `${listId}`,
       },
       body,
     })
