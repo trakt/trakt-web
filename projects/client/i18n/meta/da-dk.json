@@ -971,9 +971,6 @@
     "list_title_recently_watched": {
       "default": "Nyligt set"
     },
-    "button_label_view_all_recently_watched": {
-      "default": "Se alt nyligt set"
-    },
     "list_title_available_now": {
       "default": "Tilgængelig nu"
     },
@@ -2186,6 +2183,15 @@
     },
     "page_title_library": {
       "default": "Bibliotek"
+    },
+    "list_title_history": {
+      "default": "Historik"
+    },
+    "button_label_view_all_history": {
+      "default": "Se hele historikken"
+    },
+    "page_title_history": {
+      "default": "Historik"
     }
   }
 }

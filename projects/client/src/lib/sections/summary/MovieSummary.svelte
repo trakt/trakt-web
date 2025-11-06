@@ -64,8 +64,4 @@
 <!-- TODO: move back to designed position when we have faster queries -->
 <Lists slug={media.slug} title={media.title} type="movie" />
 
-<MediaWatchHistoryList
-  title={m.list_title_watch_history()}
-  {media}
-  type="movie"
-/>
+<MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />

@@ -971,9 +971,6 @@
     "list_title_recently_watched": {
       "default": "Vizionate urmărite recent"
     },
-    "button_label_view_all_recently_watched": {
-      "default": "Vezi toate urmărite recent"
-    },
     "list_title_available_now": {
       "default": "Disponibil Acum"
     },
@@ -2186,6 +2183,15 @@
     },
     "page_title_library": {
       "default": "Bibliotecă"
+    },
+    "list_title_history": {
+      "default": "Istoric"
+    },
+    "button_label_view_all_history": {
+      "default": "Vezi tot istoricul"
+    },
+    "page_title_history": {
+      "default": "Istoric"
     }
   }
 }

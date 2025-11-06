@@ -43,8 +43,8 @@
 </ProfileContainer>
 
 <RecentlyWatchedList
-  drilldownLabel={m.button_label_view_all_recently_watched()}
-  title={m.list_title_recently_watched()}
+  drilldownLabel={m.button_label_view_all_history()}
+  title={m.list_title_history()}
   {slug}
 />
 
