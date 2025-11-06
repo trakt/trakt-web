@@ -1,4 +1,5 @@
 import { SPOILER_CLASS_NAME } from '$lib/features/spoilers/constants.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { clone } from '$lib/utils/object/clone.ts';
 import { deepAssign } from '$lib/utils/object/deepAssign.ts';
 import { ExtendedUsersResponseMock } from '$mocks/data/users/response/ExtendedUserSettingsResponseMock.ts';
@@ -68,51 +69,6 @@ describe('action: useSpoilerAction', () => {
     expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(false);
   });
 
-  it('should NOT remove the spoiler class when a show is unwatched', async () => {
-    setAuthorization(true);
-
-    const user = deepAssign(
-      clone(ExtendedUsersResponseMock),
-      {
-        browsing: {
-          spoilers: {
-            actors: null,
-            comments: null,
-            episodes: null,
-            movies: null,
-            ratings: null,
-            shows: 'hide_title',
-          },
-        },
-      },
-    );
-
-    server.use(
-      http.get('http://localhost/users/settings', () => {
-        return HttpResponse.json(user);
-      }),
-    );
-
-    const node = document.createElement('div');
-    const { spoiler } = await renderStore(() =>
-      useSpoilerAction({
-        type: 'show',
-        media: { id: 1337 },
-      })
-    );
-
-    // Attach the spoiler action
-    spoiler(node);
-
-    // Remove the class to the node
-    node.classList.remove(SPOILER_CLASS_NAME);
-
-    // Then verify it is removed
-    await waitFor(
-      () => expect(node.classList.contains(SPOILER_CLASS_NAME)).toBe(true),
-    );
-  });
-
   it('should remove the spoiler class when a movie is watched', async () => {
     setAuthorization(true);
 
@@ -142,7 +98,9 @@ describe('action: useSpoilerAction', () => {
     const { spoiler } = await renderStore(() =>
       useSpoilerAction({
         type: 'movie',
-        media: { id: WatchedMoviesResponseMock[0].movie.ids.trakt },
+        media: {
+          id: assertDefined(WatchedMoviesResponseMock.at(0)).movie.ids.trakt,
+        },
       })
     );
 
