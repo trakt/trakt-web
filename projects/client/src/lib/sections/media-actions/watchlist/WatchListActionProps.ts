@@ -6,4 +6,5 @@ export type WatchlistActionProps = {
   size?: 'small' | 'normal';
   title: string;
   isUpdating?: Writable<boolean>;
+  isLoadingLists?: boolean;
 } & MediaStoreProps;

@@ -1,7 +1,11 @@
-import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
+import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type { UserList } from '$lib/requests/queries/users/userListsQuery.ts';
 
-export type ListDropdownProps = MediaStoreProps & {
+export type ListDropdownProps = {
   size?: 'normal' | 'small';
   style?: 'normal' | 'action';
   title: string;
+  lists: UserList[];
+  media: MediaEntry;
+  isLoadingLists?: boolean;
 };

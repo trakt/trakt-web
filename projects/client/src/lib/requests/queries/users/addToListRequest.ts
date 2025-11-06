@@ -3,8 +3,8 @@ import type { WatchlistRequest } from '@trakt/api';
 
 type AddToListParams = {
   body: WatchlistRequest;
-  listId: string;
-  userId?: string | Nil;
+  listId: string | number;
+  userId?: string | number | Nil;
 } & ApiParams;
 
 export function addToListRequest(
@@ -16,8 +16,8 @@ export function addToListRequest(
     .list
     .add({
       params: {
-        id: userId ?? 'me',
-        list_id: listId,
+        id: `${userId ?? 'me'}`,
+        list_id: `${listId}`,
       },
       body,
     })

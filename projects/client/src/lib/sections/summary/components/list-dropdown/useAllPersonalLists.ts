@@ -1,30 +1,19 @@
-import { usePersonalListsSummary } from '$lib/sections/lists/user/usePersonalListsSummary.ts';
+import { useQuery } from '$lib/features/query/useQuery.ts';
+import { userListsQuery } from '$lib/requests/queries/users/userListsQuery.ts';
+import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
 
+// TODO use loading state
 export function useAllPersonalLists() {
-  const { lists, isLoading } = usePersonalListsSummary({
-    type: 'personal',
-    sortBy: 'none',
-  });
+  const lists = useQuery(userListsQuery());
 
-  const { lists: collaborationLists, isLoading: isLoadingCollaborations } =
-    usePersonalListsSummary({
-      type: 'collaboration',
-      sortBy: 'none',
-    });
+  const isLoading = derived(
+    lists,
+    toLoadingState,
+  );
 
   return {
-    isLoading: derived(
-      [isLoading, isLoadingCollaborations],
-      ([$isLoading, $isLoadingCollaborations]) => {
-        return $isLoading || $isLoadingCollaborations;
-      },
-    ),
-    lists: derived(
-      [lists, collaborationLists],
-      ([$lists, $collaborativeLists]) => {
-        return [...$lists, ...$collaborativeLists];
-      },
-    ),
+    lists: derived(lists, ($lists) => $lists.data ?? []),
+    isLoading,
   };
 }

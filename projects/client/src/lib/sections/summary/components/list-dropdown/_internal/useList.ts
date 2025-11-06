@@ -2,25 +2,22 @@ import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts';
 import { addToListRequest } from '$lib/requests/queries/users/addToListRequest.ts';
 import { removeFromListRequest } from '$lib/requests/queries/users/removeFromListRequest.ts';
+import type { UserList } from '$lib/requests/queries/users/userListsQuery.ts';
 import {
   toBulkPayload,
 } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { writable } from 'svelte/store';
-import { useIsListed } from './useIsListed.ts';
 
-type UseListProps = { list: MediaListSummary } & MediaStoreProps;
+type UseListProps = { list: UserList } & MediaStoreProps;
 
 export function useList(props: UseListProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const isListUpdating = writable(false);
   const { invalidate } = useInvalidator();
-
-  const { isListed, itemCount } = useIsListed(props);
 
   const { track } = useTrack(AnalyticsEvent.List);
   const ids = media.map(({ id }) => id);
@@ -35,8 +32,8 @@ export function useList(props: UseListProps) {
     track({ action: 'add' });
 
     await addToListRequest({
-      listId: props.list.slug,
-      userId: props.list.user.slug,
+      listId: props.list.id,
+      userId: props.list.ownerId,
       body,
     });
     await invalidate(InvalidateAction.Listed(type));
@@ -53,8 +50,8 @@ export function useList(props: UseListProps) {
     track({ action: 'remove' });
 
     await removeFromListRequest({
-      listId: props.list.slug,
-      userId: props.list.user.slug,
+      listId: props.list.id,
+      userId: props.list.ownerId,
       body,
     });
     await invalidate(InvalidateAction.Listed(type));
@@ -66,7 +63,5 @@ export function useList(props: UseListProps) {
     addToList,
     removeFromList,
     isListUpdating,
-    isListed,
-    itemCount,
   };
 }
