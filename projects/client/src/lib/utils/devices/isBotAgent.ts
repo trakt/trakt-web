@@ -26,6 +26,7 @@ const bots = [
   'Bluesky',
   'Fedicabot',
   'Mastodon',
+  'redditbot',
 
   // Other bots
   'MJ12bot',
@@ -42,6 +43,7 @@ const bots = [
   'Yeti',
   'Google-Structured-Data-Testing-Tool',
   'Google-PageSpeed-Insights',
+  'BublupBot',
 ];
 
 export function isBotAgent(userAgent: string | Nil): boolean {
