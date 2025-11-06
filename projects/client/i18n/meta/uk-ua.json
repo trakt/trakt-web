@@ -971,9 +971,6 @@
     "list_title_recently_watched": {
       "default": "Нещодавно переглянуті"
     },
-    "button_label_view_all_recently_watched": {
-      "default": "Переглянути всі нещодавно переглянуті"
-    },
     "list_title_available_now": {
       "default": "Доступно зараз"
     },
@@ -2186,6 +2183,15 @@
     },
     "page_title_library": {
       "default": "Бібліотека"
+    },
+    "list_title_history": {
+      "default": "Історія"
+    },
+    "button_label_view_all_history": {
+      "default": "Переглянути всю історію"
+    },
+    "page_title_history": {
+      "default": "Історія"
     }
   }
 }

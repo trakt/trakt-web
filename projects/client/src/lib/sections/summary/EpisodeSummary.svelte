@@ -66,7 +66,7 @@
 />
 
 <MediaWatchHistoryList
-  title={m.list_title_recently_watched()}
+  title={m.list_title_history()}
   {episode}
   {show}
   type="episode"

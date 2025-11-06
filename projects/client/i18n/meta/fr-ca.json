@@ -971,9 +971,6 @@
     "list_title_recently_watched": {
       "default": "Regarder récemment"
     },
-    "button_label_view_all_recently_watched": {
-      "default": "Voir tout ce qu'on a regardé récemment"
-    },
     "list_title_available_now": {
       "default": "Disponibles maintenant"
     },
@@ -2186,6 +2183,15 @@
     },
     "page_title_library": {
       "default": "Bibliothèque"
+    },
+    "list_title_history": {
+      "default": "Historique"
+    },
+    "button_label_view_all_history": {
+      "default": "Voir tout l'historique"
+    },
+    "page_title_history": {
+      "default": "Historique"
     }
   }
 }

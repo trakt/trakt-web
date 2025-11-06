@@ -34,13 +34,13 @@
   const title = $derived(
     activityType === "social"
       ? m.list_title_social_activity()
-      : m.list_title_recently_watched(),
+      : m.list_title_history(),
   );
 
   const drilldownLabel = $derived(
     activityType === "social"
       ? m.button_label_view_all_social_activity()
-      : m.button_label_view_all_recently_watched(),
+      : m.button_label_view_all_history(),
   );
 </script>
 

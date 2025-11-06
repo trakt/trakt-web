@@ -971,9 +971,6 @@
     "list_title_recently_watched": {
       "default": "Onlangs bekeken"
     },
-    "button_label_view_all_recently_watched": {
-      "default": "Bekijk alles onlangs bekeken"
-    },
     "list_title_available_now": {
       "default": "Nu beschikbaar"
     },
@@ -2186,6 +2183,15 @@
     },
     "page_title_library": {
       "default": "Bibliotheek"
+    },
+    "list_title_history": {
+      "default": "Geschiedenis"
+    },
+    "button_label_view_all_history": {
+      "default": "Bekijk alle geschiedenis"
+    },
+    "page_title_history": {
+      "default": "Geschiedenis"
     }
   }
 }

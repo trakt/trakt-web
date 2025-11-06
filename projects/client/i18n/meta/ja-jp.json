@@ -971,9 +971,6 @@
     "list_title_recently_watched": {
       "default": "最近視聴した"
     },
-    "button_label_view_all_recently_watched": {
-      "default": "最近視聴した全てを見る"
-    },
     "list_title_available_now": {
       "default": "今すぐ視聴可能"
     },
@@ -2186,6 +2183,15 @@
     },
     "page_title_library": {
       "default": "ライブラリ"
+    },
+    "list_title_history": {
+      "default": "履歴"
+    },
+    "button_label_view_all_history": {
+      "default": "履歴をすべて表示"
+    },
+    "page_title_history": {
+      "default": "履歴"
     }
   }
 }

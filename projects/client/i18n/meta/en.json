@@ -2668,14 +2668,6 @@
         "ios"
       ]
     },
-    "button_label_view_all_recently_watched": {
-      "default": "View all recently watched",
-      "description": "Aria-label for the button that allows users to view all recently watched movies or episodes.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "list_title_available_now": {
       "default": "Available Now",
       "description": "Title for lists containing watchlisted movies that are currently available to watch. This title should be as short and concise as possible.",
@@ -5954,6 +5946,28 @@
       "description": "Title for the movies and episodes library page.",
       "exclude": [
         "android",
+        "ios"
+      ]
+    },
+    "list_title_history": {
+      "default": "History",
+      "description": "Title for lists containing a history of recently watched movies or episodes. This title should be as short and concise as possible.",
+      "exclude": [
+        "ios"
+      ]
+    },
+    "button_label_view_all_history": {
+      "default": "View all history",
+      "description": "Aria-label for the button that allows users to view all history of watched movies or episodes.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "page_title_history": {
+      "default": "History",
+      "description": "Title for the history page, containing a history of watched movies and episodes.",
+      "exclude": [
         "ios"
       ]
     }
