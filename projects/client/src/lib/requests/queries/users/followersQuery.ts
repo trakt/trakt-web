@@ -28,8 +28,18 @@ export const followersQuery = defineQuery({
     params: FollowersParams,
   ) => [params.slug],
   request: followersRequest,
-  mapper: (response) =>
-    response.body.map((follower) => mapToUserProfile(follower.user)),
+  mapper: (response) => {
+    /**
+     * FIXME: remove once Trakt API returns unique followers
+     */
+    const profiles = response.body.map((follower) =>
+      mapToUserProfile(follower.user)
+    );
+    const uniqueProfiles = Array.from(
+      new Map(profiles.map((profile) => [profile.slug, profile])).values(),
+    );
+    return uniqueProfiles;
+  },
   schema: z.array(UserProfileSchema),
   ttl: time.days(1),
 });
