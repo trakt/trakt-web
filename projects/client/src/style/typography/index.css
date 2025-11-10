@@ -48,8 +48,8 @@ h2 {
   font-size: var(--ni-56);
   font-style: normal;
   font-weight: 600;
-  letter-spacing: -0.14rem;
-  padding-right: 0.14rem;
+  letter-spacing: -0.025rem;
+  padding-right: 0.025rem;
 }
 
 h3 {
