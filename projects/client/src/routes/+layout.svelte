@@ -8,7 +8,6 @@
   import AnalyticsProvider from "$lib/features/analytics/AnalyticsProvider.svelte";
   import PageView from "$lib/features/analytics/PageView.svelte";
   import AuthProvider from "$lib/features/auth/components/AuthProvider.svelte";
-  import AutoSigninProvider from "$lib/features/auto-signin/AutoSigninProvider.svelte";
   import ConfirmationProvider from "$lib/features/confirmation/ConfirmationProvider.svelte";
   import CookieConsentProvider from "$lib/features/cookie-consent/CookieConsentProvider.svelte";
   import { DeploymentEndpoint } from "$lib/features/deployment/DeploymentEndpoint.js";
@@ -21,6 +20,7 @@
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
   import PlayerProvider from "$lib/features/player/PlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
+  import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ThemeProvider from "$lib/features/theme/components/ThemeProvider.svelte";
   import { initializeSeasonalThemes } from "$lib/features/theme/initializeSeasonalThemes.js";
@@ -156,7 +156,7 @@
           >
             <PlayerProvider>
               <AnalyticsProvider>
-                <AutoSigninProvider>
+                <RedirectProvider>
                   <NavigationProvider device={data.device}>
                     <LocaleProvider>
                       <SearchProvider config={data.typesense}>
@@ -220,7 +220,7 @@
                   {#key page.url.pathname}
                     <PageView />
                   {/key}
-                </AutoSigninProvider>
+                </RedirectProvider>
               </AnalyticsProvider>
             </PlayerProvider>
           </CookieConsentProvider>
