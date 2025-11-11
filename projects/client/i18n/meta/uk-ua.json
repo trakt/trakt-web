@@ -387,13 +387,23 @@
       "default": "Серіали"
     },
     "text_episodes_watched": {
-      "default": "{count} серій переглянуто"
+      "default": "{count} епізодів",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Фільми"
     },
     "text_movies_watched": {
-      "default": "{count} фільмів переглянуто"
+      "default": "{count} фільмів",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Деталі"
@@ -1320,7 +1330,12 @@
       "default": "Перший показ цього місяця"
     },
     "text_shows_watched": {
-      "default": "{count} переглянуто серіалів"
+      "default": "{count} серіалів",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Слідкувати"

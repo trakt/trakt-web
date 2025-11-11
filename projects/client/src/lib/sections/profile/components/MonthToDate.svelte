@@ -8,8 +8,8 @@
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { useMonthToDate } from "../stores/useMonthToDate";
-  import FirstPlay from "./_internal/FirstPlay.svelte";
   import WatchStats from "./_internal/WatchStats.svelte";
+  import YearToDateLink from "./YearToDateLink.svelte";
 
   const { slug }: { slug: string } = $props();
 
@@ -36,11 +36,11 @@
     </div>
 
     <div class="trakt-month-to-date-header">
-      <CalendarIcon />
-      <div>
-        <h6 class="uppercase">So far,</h6>
-        <h6 class="uppercase">This month</h6>
+      <div class="trakt-month-to-date-header-this-month">
+        <CalendarIcon />
+        <h6 class="uppercase">So far, this month</h6>
       </div>
+      <YearToDateLink {slug} />
     </div>
 
     <WatchStats monthToDate={$monthToDate} />
@@ -50,49 +50,28 @@
         <YearToDateArrow />
         <div class="trakt-month-in-review-label">
           <h6 class="uppercase">{toHumanMonth(mirDate, languageTag())}</h6>
-          <h6 class="uppercase">in review</h6>
         </div>
       </Link>
     </div>
-
-    {#if $monthToDate.firstWatchedTitle}
-      <FirstPlay title={$monthToDate.firstWatchedTitle} />
-    {/if}
   {/if}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  @mixin single-column-layout {
-    height: var(--ni-320);
-    grid-template-columns: 1fr;
-
-    .trakt-month-in-review-link {
-      order: 3;
-    }
-
-    :global(.trakt-first-play) {
-      order: 4;
-    }
-
-    :global(.trakt-watch-stat) {
-      width: 100%;
-      box-sizing: border-box;
-    }
-  }
-
   .trakt-month-to-date {
+    --month-to-date-icon-size: var(--ni-18);
+
     position: relative;
-    display: grid;
-    grid-template-columns: auto auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     gap: var(--gap-m);
 
-    align-content: space-between;
-    align-items: start;
-    height: var(--ni-232);
+    height: var(--ni-148);
 
-    padding: var(--ni-24);
+    padding: var(--ni-14);
     box-sizing: border-box;
 
     border-radius: var(--border-radius-l);
@@ -106,10 +85,6 @@
       drop-shadow(var(--ni-0) var(--ni-52) var(--ni-32) var(--cm-shadow-6))
       drop-shadow(var(--ni-0) var(--ni-24) var(--ni-24) var(--cm-shadow-10))
       drop-shadow(var(--ni-0) var(--ni-8) var(--ni-12) var(--cm-shadow-12));
-
-    @include for-mobile {
-      @include single-column-layout;
-    }
   }
 
   .trakt-month-to-date-cover-image {
@@ -136,24 +111,28 @@
   .trakt-month-to-date-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--gap-m);
 
-    h6 {
-      line-height: var(--ni-14);
+    :global(svg) {
+      width: var(--month-to-date-icon-size);
+      height: var(--month-to-date-icon-size);
     }
   }
 
-  .trakt-month-in-review-link {
-    h6 {
-      line-height: var(--ni-14);
-    }
+  .trakt-month-to-date-header-this-month {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
 
+  .trakt-month-in-review-link {
     :global(.trakt-link) {
       text-decoration: none;
 
       display: flex;
       align-items: center;
-      gap: var(--gap-m);
+      gap: var(--gap-xs);
     }
 
     @include for-mouse {
@@ -164,8 +143,8 @@
     }
 
     :global(svg) {
-      width: var(--ni-24);
-      height: var(--ni-24);
+      width: var(--month-to-date-icon-size);
+      height: var(--month-to-date-icon-size);
     }
   }
 </style>

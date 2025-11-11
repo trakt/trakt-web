@@ -1,13 +1,12 @@
 <svg
-  width="41"
-  height="41"
-  viewBox="0 0 41 41"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
-    d="M38.7373 40.0127L38.7373 0.0M38.7373 2.00437L0.728904 2.00438M38.7373 2.00437L2.00363 38.738"
-    stroke="currentColor"
-    stroke-width="4"
+    d="M8 4H4V20H20V16H22V22H2V2H8V4ZM22 13H20V5.41406L10.707 14.707L9.29297 13.293L18.5859 4H11V2H22V13Z"
+    fill="currentColor"
   />
 </svg>

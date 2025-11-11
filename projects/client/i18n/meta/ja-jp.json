@@ -387,13 +387,23 @@
       "default": "番組"
     },
     "text_episodes_watched": {
-      "default": "{count}話視聴済み"
+      "default": "{count}話",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "映画"
     },
     "text_movies_watched": {
-      "default": "{count}作品視聴済み"
+      "default": "{count}作品",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "詳細"
@@ -1320,7 +1330,12 @@
       "default": "今月の初再生"
     },
     "text_shows_watched": {
-      "default": "{count} 作品を視聴済み"
+      "default": "{count}シリーズ",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "フォロー"

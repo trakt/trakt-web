@@ -387,13 +387,23 @@
       "default": "Shows"
     },
     "text_episodes_watched": {
-      "default": "{count} episodes watched"
+      "default": "{count} episodes",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Movies"
     },
     "text_movies_watched": {
-      "default": "{count} movies watched"
+      "default": "{count} movies",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Details"
@@ -1320,7 +1330,12 @@
       "default": "First play this month"
     },
     "text_shows_watched": {
-      "default": "{count} shows watched"
+      "default": "{count} shows",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Follow"

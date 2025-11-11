@@ -387,13 +387,23 @@
       "default": "Series"
     },
     "text_episodes_watched": {
-      "default": "{count} afleveringen bekeken"
+      "default": "{count} afleveringen",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Films"
     },
     "text_movies_watched": {
-      "default": "{count} films bekeken"
+      "default": "{count} films",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Details"
@@ -1320,7 +1330,12 @@
       "default": "Eerste afspeling deze maand"
     },
     "text_shows_watched": {
-      "default": "{count} series bekeken"
+      "default": "{count} series",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Volgen"

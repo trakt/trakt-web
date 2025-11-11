@@ -387,13 +387,23 @@
       "default": "Seriale"
     },
     "text_episodes_watched": {
-      "default": "{count} obejrzanych odcinków"
+      "default": "{count} odcinków",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Filmy"
     },
     "text_movies_watched": {
-      "default": "{count} obejrzanych filmów"
+      "default": "{count} filmów",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Szczegóły"
@@ -1320,7 +1330,12 @@
       "default": "Pierwsze odtworzenie w tym miesiącu"
     },
     "text_shows_watched": {
-      "default": "{count} obejrzanych seriali"
+      "default": "{count} seriali",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Obserwuj"

@@ -387,13 +387,23 @@
       "default": "Serie TV"
     },
     "text_episodes_watched": {
-      "default": "{count} episdodi guardati"
+      "default": "{count} episodi",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Film"
     },
     "text_movies_watched": {
-      "default": "{count} film guardati"
+      "default": "{count} film",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Dettagli"
@@ -1320,7 +1330,12 @@
       "default": "Prima riproduzione questo mese"
     },
     "text_shows_watched": {
-      "default": "{count} serie guardate"
+      "default": "{count} serie TV",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Segui"
