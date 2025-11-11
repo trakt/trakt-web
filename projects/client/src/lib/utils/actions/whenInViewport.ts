@@ -22,9 +22,7 @@ export function whenInViewport(
 
   return {
     destroy: () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      observer.disconnect();
     },
   };
 }
