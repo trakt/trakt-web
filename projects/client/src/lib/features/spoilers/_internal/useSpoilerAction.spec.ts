@@ -99,7 +99,9 @@ describe('action: useSpoilerAction', () => {
       useSpoilerAction({
         type: 'movie',
         media: {
-          id: assertDefined(WatchedMoviesResponseMock.at(0)).movie.ids.trakt,
+          id: Number(
+            assertDefined(Object.keys(WatchedMoviesResponseMock).at(0)),
+          ),
         },
       })
     );
