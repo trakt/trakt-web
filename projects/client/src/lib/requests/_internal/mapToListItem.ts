@@ -1,9 +1,10 @@
-import type { ListedMovieResponse, ListedShowResponse } from '@trakt/api';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import type { ListedMediaResponse } from '@trakt/api';
 import { mapToMovieEntry } from './mapToMovieEntry.ts';
 import { mapToShowEntry } from './mapToShowEntry.ts';
 
 function mapListDetails(
-  listedItem: ListedMovieResponse | ListedShowResponse,
+  listedItem: ListedMediaResponse,
 ) {
   return {
     id: listedItem.id,
@@ -15,28 +16,30 @@ function mapListDetails(
   };
 }
 
-export function mapToShowListItem(
-  listedShowResponse: ListedShowResponse,
-) {
-  return {
-    ...mapListDetails(listedShowResponse),
-    entry: mapToShowEntry(listedShowResponse.show),
-  };
-}
-
-export function mapToMovieListItem(
-  listedMovieResponse: ListedMovieResponse,
-) {
-  return {
-    ...mapListDetails(listedMovieResponse),
-    entry: mapToMovieEntry(listedMovieResponse.movie),
-  };
+function mapToListEntry(listedItem: ListedMediaResponse) {
+  switch (listedItem.type) {
+    case 'movie':
+      return mapToMovieEntry(
+        assertDefined(
+          listedItem.movie,
+          'Expected movie in ListedMediaResponse',
+        ),
+      );
+    case 'show':
+      return mapToShowEntry(
+        assertDefined(
+          listedItem.show,
+          'Expected show in ListedMediaResponse',
+        ),
+      );
+  }
 }
 
 export function mapToListItem(
-  listedItem: ListedMovieResponse | ListedShowResponse,
+  listedItem: ListedMediaResponse,
 ) {
-  return listedItem.type === 'movie'
-    ? mapToMovieListItem(listedItem)
-    : mapToShowListItem(listedItem);
+  return {
+    ...mapListDetails(listedItem),
+    entry: mapToListEntry(listedItem),
+  };
 }

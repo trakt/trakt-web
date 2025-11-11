@@ -1,9 +1,10 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
+import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { RatedItemResponse } from '@trakt/api';
 import { z } from 'zod';
-import { api, type ApiParams } from '../../../requests/api.ts';
 
 export const RatedMediaSchema = z.object({
   rating: z.number(),
@@ -22,17 +23,23 @@ function mapRatedItemResponse(response: RatedItemResponse): RatedEntry {
     case 'movie':
       return {
         ...common,
-        id: response.movie.ids.trakt,
+        id: assertDefined(response.movie, 'Expected movie in RatedItemResponse')
+          .ids.trakt,
       };
     case 'show':
       return {
         ...common,
-        id: response.show.ids.trakt,
+        id:
+          assertDefined(response.show, 'Expected show in RatedItemResponse').ids
+            .trakt,
       };
     case 'episode':
       return {
         ...common,
-        id: response.episode.ids.trakt,
+        id: assertDefined(
+          response.episode,
+          'Expected episode in RatedItemResponse',
+        ).ids.trakt,
       };
   }
 }
