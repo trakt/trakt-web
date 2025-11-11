@@ -1,5 +1,7 @@
 <script lang="ts" generics="T extends { key: string }, M">
   import GridList from "$lib/components/lists/grid-list/GridList.svelte";
+  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
+  import { useFeatureFlag } from "$lib/features/feature-flag/useFeatureFlag";
   import { DEFAULT_DRILL_SIZE } from "$lib/utils/constants";
   import type { Snippet } from "svelte";
   import { writable } from "svelte/store";
@@ -23,6 +25,8 @@
     ...props
   }: DrilledMediaListProps = $props();
 
+  const { isEnabled } = useFeatureFlag(FeatureFlag.Debug);
+
   const currentPage = writable(1);
   const loadedPages = writable<Map<number, T[]>>(new Map());
   const initialType = writable(type);
@@ -42,6 +46,12 @@
       return;
     }
     loadedPages.update((pages) => {
+      if ($isEnabled) {
+        console.debug(
+          `[DrilledMediaList] Loaded page ${$page.current}:`,
+          $list,
+        );
+      }
       pages.set($page.current ?? 1, $list);
       return pages;
     });
@@ -49,7 +59,22 @@
 
   $effect(() => {
     if ($initialType === type || $currentPage === 1) {
+      if ($isEnabled) {
+        console.debug(
+          "[DrilledMediaList] Type unchanged or still on page 1",
+          type,
+          $currentPage,
+        );
+      }
       return;
+    }
+
+    if ($isEnabled) {
+      console.debug(
+        "[DrilledMediaList] Type changed, resetting pagination",
+        $initialType,
+        type,
+      );
     }
 
     currentPage.set(1);
