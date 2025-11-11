@@ -1,6 +1,6 @@
 import type { PageMeta } from '../models/Paginatable.ts';
 
-const DEFAULT_PAGE = '0';
+const DEFAULT_PAGE = '1';
 
 export function extractPageMeta(headers: Headers): PageMeta {
   return {
