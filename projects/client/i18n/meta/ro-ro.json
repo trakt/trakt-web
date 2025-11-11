@@ -387,13 +387,23 @@
       "default": "Seriale"
     },
     "text_episodes_watched": {
-      "default": "{count} episoade vizionate"
+      "default": "{count} episoade",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Filme"
     },
     "text_movies_watched": {
-      "default": "{count} filme vizionate"
+      "default": "{count} filme",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Detalii"
@@ -1320,7 +1330,12 @@
       "default": "Prima redare luna aceasta"
     },
     "text_shows_watched": {
-      "default": "{count} seriale vizionate"
+      "default": "{count} seriale",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Urmărește"

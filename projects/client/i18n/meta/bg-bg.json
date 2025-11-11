@@ -387,13 +387,23 @@
       "default": "Предавания"
     },
     "text_episodes_watched": {
-      "default": "{count} гледани епизода"
+      "default": "{count} епизода",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Филми"
     },
     "text_movies_watched": {
-      "default": "{count} гледани филми"
+      "default": "{count} филма",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Подробности"
@@ -1320,7 +1330,12 @@
       "default": "Първо пускане този месец"
     },
     "text_shows_watched": {
-      "default": "{count} гледани сериали"
+      "default": "{count} сериала",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Следвай"

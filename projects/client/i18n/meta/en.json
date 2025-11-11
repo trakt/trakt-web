@@ -994,7 +994,7 @@
       ]
     },
     "text_episodes_watched": {
-      "default": "{count} episodes watched",
+      "default": "{count} episodes",
       "description": "Text for the number of episodes watched by a user. This should be as short and concise as possible.",
       "variables": {
         "count": {
@@ -1015,7 +1015,7 @@
       ]
     },
     "text_movies_watched": {
-      "default": "{count} movies watched",
+      "default": "{count} movies",
       "description": "Text for the number of movies watched by a user. This should be as short and concise as possible.",
       "variables": {
         "count": {
@@ -3669,7 +3669,7 @@
       ]
     },
     "text_shows_watched": {
-      "default": "{count} shows watched",
+      "default": "{count} shows",
       "description": "Text shown to indicate the number of shows a user has watched.",
       "variables": {
         "count": {

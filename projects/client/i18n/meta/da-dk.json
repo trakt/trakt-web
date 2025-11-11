@@ -387,13 +387,23 @@
       "default": "Serier"
     },
     "text_episodes_watched": {
-      "default": "{count} afsnit set"
+      "default": "{count} afsnit",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_movie_credits": {
       "default": "Film"
     },
     "text_movies_watched": {
-      "default": "{count} film set"
+      "default": "{count} film",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "header_details": {
       "default": "Detaljer"
@@ -1320,7 +1330,12 @@
       "default": "Første afspilning denne måned"
     },
     "text_shows_watched": {
-      "default": "{count} serier set"
+      "default": "{count} serier",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_text_follow": {
       "default": "Følg"

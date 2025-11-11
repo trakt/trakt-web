@@ -1,7 +1,6 @@
 <script lang="ts">
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
   import FavoritesList from "../lists/FavoritesList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import LibraryList from "../lists/library/LibraryList.svelte";
@@ -12,7 +11,6 @@
   import ProfileContainer from "./components/ProfileContainer.svelte";
   import ProfilesList from "./components/ProfilesList.svelte";
   import VipUpsell from "./components/VipUpsell.svelte";
-  import YearToDateLink from "./components/YearToDateLink.svelte";
   import type { DisplayableProfileProps } from "./DisplayableProfileProps";
 
   const { profile, slug }: DisplayableProfileProps = $props();
@@ -26,10 +24,6 @@
   {#snippet details()}
     <ProfilePageBanner {profile} {slug} />
   {/snippet}
-
-  <RenderFor audience="all" navigation="default">
-    <YearToDateLink isVip={profile.isVip} {slug} />
-  </RenderFor>
 
   {#if profile.isVip}
     <MonthToDate {slug} />

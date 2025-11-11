@@ -10,21 +10,21 @@
 <div class="trakt-watch-stats">
   <div class="trakt-watch-stat">
     <ShowIcon />
-    <p class="uppercase ellipsis">
+    <p class="uppercase ellipsis smaller">
       {m.text_episodes_watched({ count: monthToDate.episodeCount })}
     </p>
   </div>
 
   <div class="trakt-watch-stat">
     <ShowIcon />
-    <p class="uppercase ellipsis">
+    <p class="uppercase ellipsis smaller">
       {m.text_shows_watched({ count: monthToDate.showCount })}
     </p>
   </div>
 
   <div class="trakt-watch-stat">
     <MovieIcon />
-    <p class="uppercase ellipsis">
+    <p class="uppercase ellipsis smaller">
       {m.text_movies_watched({ count: monthToDate.movieCount })}
     </p>
   </div>
@@ -33,9 +33,13 @@
 <style>
   .trakt-watch-stats {
     display: flex;
-    flex-direction: column;
-
+    flex-wrap: wrap;
     gap: var(--gap-xxs);
+
+    :global(svg) {
+      width: var(--ni-16);
+      height: var(--ni-16);
+    }
   }
 
   .trakt-watch-stat {
@@ -43,12 +47,12 @@
 
     display: flex;
     align-items: center;
-    gap: var(--gap-s);
+    gap: var(--gap-xxs);
 
     background: var(--shade-940);
 
     border-radius: var(--border-radius-s);
-    padding: var(--ni-8) var(--ni-16);
+    padding: var(--ni-8) var(--ni-10);
 
     p.uppercase {
       font-weight: 700;
