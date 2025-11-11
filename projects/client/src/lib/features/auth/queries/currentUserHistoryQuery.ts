@@ -1,9 +1,10 @@
 import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { toMap } from '$lib/utils/array/toMap.ts';
-import type { WatchedMoviesResponse, WatchedShowsResponse } from '@trakt/api';
+import type { WatchedShowsResponse } from '@trakt/api';
 import { z } from 'zod';
 import { api, type ApiParams } from '../../../requests/api.ts';
+import { MAX_DATE } from '../../../utils/constants.ts';
 
 export const MediaPlayHistorySchema = z.object({
   watchedAt: z.date(),
@@ -19,13 +20,14 @@ const WatchMovieSchema = WatchedMediaSchema;
 export type WatchedMovie = z.infer<typeof WatchMovieSchema>;
 
 function mapWatchedMovieResponse(
-  entry: WatchedMoviesResponse[0],
+  [id, timestamps]: [string, string[]],
 ): WatchedMovie {
-  const { last_watched_at, plays, movie } = entry;
+  const lastWatchedAt = timestamps.toSorted().at(-1);
+
   return {
-    id: movie.ids.trakt,
-    watchedAt: new Date(last_watched_at),
-    plays,
+    id: Number(id),
+    watchedAt: new Date(lastWatchedAt ?? MAX_DATE),
+    plays: timestamps.length,
   };
 }
 
@@ -33,8 +35,12 @@ const currentUserWatchedMoviesRequest = ({ fetch }: ApiParams) =>
   api({ fetch })
     .users
     .watched
+    .minimal
     .movies({
       params: { id: 'me' },
+      query: {
+        extended: 'min',
+      },
     });
 
 export const WatchedEpisodeSchema = MediaPlayHistorySchema.extend({
@@ -116,7 +122,7 @@ export const currentUserHistoryQuery = defineQuery({
   dependencies: [],
   mapper: ([moviesResponse, showsResponse]) => ({
     movies: toMap(
-      moviesResponse.body,
+      Object.entries(moviesResponse.body),
       mapWatchedMovieResponse,
       (entry) => entry.id,
     ),
