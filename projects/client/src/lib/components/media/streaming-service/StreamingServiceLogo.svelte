@@ -6,9 +6,14 @@
   type StreamingServiceLogoProps = {
     source: string;
     i18n: StreamingServiceLogoIntl;
+    variant?: "monochrome" | "colored";
   };
 
-  const { source, i18n }: StreamingServiceLogoProps = $props();
+  const {
+    source,
+    i18n,
+    variant = "monochrome",
+  }: StreamingServiceLogoProps = $props();
   const { sources } = useStreamingServices();
 
   const service = $derived($sources.find((s) => s.source === source));
@@ -22,10 +27,16 @@
 
 <div
   class="trakt-streaming-service-logo"
+  class:is-colored={variant === "colored"}
   class:has-channel-logo={!!service?.channelLogoUrl}
+  style="--logo-color: {service?.color ?? 'var(--color-text-primary)'};"
 >
   {#if service?.logoUrl}
-    <CrossOriginImage src={service.logoUrl} alt={i18n.alt(displayName)} />
+    <CrossOriginImage
+      src={service.logoUrl}
+      alt={i18n.alt(displayName)}
+      classList="trakt-service-logo"
+    />
     {#if service?.channelLogoUrl}
       <div class="trakt-channel-separator"></div>
       <CrossOriginImage
@@ -44,6 +55,13 @@
     display: flex;
     align-items: center;
     gap: var(--gap-micro);
+
+    &.is-colored {
+      :global(img.trakt-service-logo) {
+        filter: drop-shadow(0 var(--ni-240) 0 var(--logo-color));
+        transform: translateY(var(--ni-neg-240));
+      }
+    }
 
     :global(img) {
       width: var(--ni-36);

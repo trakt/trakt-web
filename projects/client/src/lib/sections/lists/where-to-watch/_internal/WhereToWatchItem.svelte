@@ -43,6 +43,7 @@
       <StreamingServiceLogo
         source={service.source}
         i18n={StreamingServiceLogoIntlProvider}
+        variant="colored"
       />
       <p class="meta-info">{text}</p>
     </div>
@@ -97,9 +98,6 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-
-        transition: filter var(--transition-increment) ease-in-out;
-        filter: var(--streaming-service-logo-filter);
       }
     }
 
@@ -114,6 +112,9 @@
         width: 75%;
         height: auto;
         max-height: 45%;
+
+        transition: filter var(--transition-increment) ease-in-out;
+        filter: var(--streaming-service-logo-filter);
       }
 
       :global(.trakt-channel-separator) {

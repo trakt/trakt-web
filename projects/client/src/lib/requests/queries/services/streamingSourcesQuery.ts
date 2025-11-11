@@ -16,6 +16,17 @@ const StreamingSourceListSchema = z.map(
   StreamingSourceSchema.array(),
 );
 
+// FIXME: remove when API is fixed
+function mapToColor(color: string) {
+  const hexColorRegex = /^#[0-9A-Fa-f]{6}$/;
+
+  if (!hexColorRegex.test(color) || color === '#000000') {
+    return;
+  }
+
+  return color;
+}
+
 function mapStreamingSourceResponse(
   sourceResponse: WatchNowSourceResponse,
 ): StreamingSource {
@@ -25,6 +36,7 @@ function mapStreamingSourceResponse(
     isFree: sourceResponse.free,
     logoUrl: prependHttps(sourceResponse.images.logo),
     channelLogoUrl: prependHttps(sourceResponse.images.channel),
+    color: mapToColor(sourceResponse.color),
   };
 }
 
