@@ -7,6 +7,7 @@ export const StreamingSourceSchema = z.object({
   isFree: z.boolean(),
   logoUrl: HttpsUrlSchema.nullish(),
   channelLogoUrl: HttpsUrlSchema.nullish(),
+  color: z.string().nullish(),
 });
 
 export type StreamingSource = z.infer<
