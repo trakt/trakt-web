@@ -30,6 +30,7 @@ type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
+  [AnalyticsEvent.PublicRedirect]: never;
   [AnalyticsEvent.Cta]: CtaDataType;
   [AnalyticsEvent.DiscoverMode]: DiscoverType;
 

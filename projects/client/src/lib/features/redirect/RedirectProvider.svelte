@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { useAutoSignin } from "./useAutoSignin";
+  import { useRedirect } from "./useRedirect";
 
   const { children }: ChildrenProps = $props();
 
-  const { isAutoSignin, redirect } = $derived(useAutoSignin());
+  const { isOgRedirect, redirect } = $derived(useRedirect());
 
   onMount(() => {
-    if (!isAutoSignin) {
+    if (!isOgRedirect) {
       return;
     }
 
@@ -15,6 +15,6 @@
   });
 </script>
 
-{#if !isAutoSignin}
+{#if !isOgRedirect}
   {@render children()}
 {/if}

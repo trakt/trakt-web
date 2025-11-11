@@ -7,18 +7,29 @@ import { get } from 'svelte/store';
 
 const PARAM_NAME = 'ref';
 const AUTO_SIGNIN_REF = 'trakt-og-switch';
+const PUBLIC_REDIRECT_REF = 'trakt-og-autoredirect';
 
-export function useAutoSignin() {
+function mapToAnalyticsEvent(ref: string | null) {
+  if (ref === PUBLIC_REDIRECT_REF) {
+    return AnalyticsEvent.PublicRedirect;
+  }
+
+  return AnalyticsEvent.EnterLite;
+}
+
+export function useRedirect() {
   const { isAuthorized, login } = useAuth();
-  const { track } = useTrack(AnalyticsEvent.EnterLite);
 
   const ref = page.url.searchParams.get(PARAM_NAME);
   const isAutoSignin = ref === AUTO_SIGNIN_REF;
+  const isPublicRedirect = ref === PUBLIC_REDIRECT_REF;
+
+  const { track } = useTrack(mapToAnalyticsEvent(ref));
 
   const redirect = () => {
     track();
 
-    if (!get(isAuthorized)) {
+    if (isAutoSignin && !get(isAuthorized)) {
       login();
       return;
     }
@@ -32,7 +43,7 @@ export function useAutoSignin() {
   };
 
   return {
-    isAutoSignin,
+    isOgRedirect: isAutoSignin || isPublicRedirect,
     redirect,
   };
 }

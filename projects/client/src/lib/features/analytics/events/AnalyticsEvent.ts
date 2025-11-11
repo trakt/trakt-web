@@ -15,6 +15,7 @@ function buildEventKey<T extends string, K extends string>(
 
 export const AnalyticsEvent = {
   EnterLite: 'lite-on',
+  PublicRedirect: 'public-redirect',
   Cta: 'cta',
   DiscoverMode: 'discover-mode',
 
