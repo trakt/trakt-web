@@ -10,9 +10,12 @@ span.display-title {
   padding: 0;
 }
 
-h1,
-h2 {
+h1 {
   word-spacing: var(--ni-4);
+}
+
+h2 {
+  word-spacing: normal;
 }
 
 h3,
