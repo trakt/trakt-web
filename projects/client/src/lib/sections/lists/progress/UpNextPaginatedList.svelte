@@ -23,6 +23,7 @@
   useList={(params) =>
     useStablePaginated({
       ...params,
+      type: $mode,
       useList: (params) =>
         useUpNextList({
           limit: params.limit,
