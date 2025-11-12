@@ -17,8 +17,7 @@
   const { track } = useTrack(AnalyticsEvent.Link);
 
   const trackLink = (target: string) => {
-    console.log("Tracking link:", target);
-    track({ target });
+    track({ target, source: "footer" });
   };
 
   const install = useInstallPrompt();
