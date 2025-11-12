@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Sedda"
+    },
+    "header_birthday": {
+      "default": "Födelsedag"
+    },
+    "header_age": {
+      "default": "Ålder"
     }
   }
 }

@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Visto"
+    },
+    "header_birthday": {
+      "default": "Aniversário"
+    },
+    "header_age": {
+      "default": "Idade"
     }
   }
 }

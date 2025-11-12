@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Vu"
+    },
+    "header_birthday": {
+      "default": "Date de naissance"
+    },
+    "header_age": {
+      "default": "Âge"
     }
   }
 }
