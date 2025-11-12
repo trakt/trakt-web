@@ -1,7 +1,6 @@
 <script lang="ts">
   import { beforeNavigate, goto } from "$app/navigation";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { get } from "svelte/store";
   import { createAuthContext } from "../stores/createAuthContext";
   import { initializeUserManager } from "../stores/initializeUserManager";
   import { useUser } from "../stores/useUser";
@@ -29,7 +28,7 @@
     const isHomePage = from?.url.pathname === UrlBuilder.home();
     const isSamePage = from?.url.pathname === to?.url.pathname;
 
-    if (get(isAuthorized) || isHomePage || isSamePage) {
+    if ($isAuthorized || isHomePage || isSamePage) {
       return;
     }
 

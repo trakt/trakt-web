@@ -1,6 +1,8 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
-import { derived, get, readable } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map, of, shareReplay, switchMap } from 'rxjs';
+import { toStore } from '../../../utils/store/toStore.ts';
 import {
   currentUserCommentReactionsQuery,
   type UserReactions,
@@ -82,44 +84,67 @@ const ANONYMOUS_USER: UserSettings = {
   preferredTheme: Theme.Dark,
 };
 
+const ANONYMOUS_HISTORY: UserHistory = {
+  movies: new Map(),
+  shows: new Map(),
+};
+
+const ANONYMOUS_WATCHLIST: UserWatchlist = {
+  movies: new Map(),
+  shows: new Map(),
+};
+
+const ANONYMOUS_RATINGS: UserRatings = {
+  episodes: new Map(),
+  movies: new Map(),
+  shows: new Map(),
+};
+
+const ANONYMOUS_REACTIONS: UserReactions = new Map();
+
+const ANONYMOUS_FAVORITES = {
+  movies: new Map(),
+  shows: new Map(),
+};
+
+const ANONYMOUS_NETWORK: UserNetwork = {
+  following: [],
+};
+
+const ANONYMOUS_PLEX_LIBRARY: UserPlexLibrary = {
+  movieIds: [],
+  episodeIds: [],
+  showIds: [],
+};
+
 function definedData<T>(data: T | undefined): T {
   return data as T;
 }
 
+function createAuthorizedObservable<T, TQueryData = T>(
+  isAuthorized$: ReturnType<typeof toObservable<boolean>>,
+  queryResponse: ReturnType<typeof useQuery>,
+  anonymousData: T,
+  mapFn?: (queryResult: { data?: TQueryData }) => T,
+) {
+  return isAuthorized$.pipe(
+    switchMap((authorized) =>
+      authorized
+        ? toObservable(queryResponse).pipe(
+          map((queryResult) =>
+            mapFn
+              ? mapFn(queryResult as { data?: TQueryData })
+              : (queryResult.data ?? anonymousData) as T
+          ),
+        )
+        : of(anonymousData)
+    ),
+    shareReplay(1),
+  );
+}
+
 export function useUser() {
   const { isAuthorized } = useAuth();
-
-  if (!get(isAuthorized)) {
-    return {
-      user: readable(ANONYMOUS_USER),
-      history: readable<UserHistory>({
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      watchlist: readable<UserWatchlist>({
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      ratings: readable<UserRatings>({
-        episodes: new Map(),
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      reactions: readable<UserReactions>(new Map()),
-      favorites: readable({
-        movies: new Map(),
-        shows: new Map(),
-      }),
-      network: readable<UserNetwork>({
-        following: [],
-      }),
-      plexLibrary: readable<UserPlexLibrary>({
-        movieIds: [],
-        episodeIds: [],
-        showIds: [],
-      }),
-    };
-  }
 
   const userQueryResponse = useQuery(currentUserSettingsQuery());
   const historyQueryResponse = useQuery(currentUserHistoryQuery());
@@ -134,47 +159,65 @@ export function useUser() {
     currentUserPlexLibraryQuery(),
   );
 
-  const user = derived(
+  const isAuthorized$ = toObservable(isAuthorized).pipe(shareReplay(1));
+
+  const user$ = createAuthorizedObservable(
+    isAuthorized$,
     userQueryResponse,
+    ANONYMOUS_USER,
     ($query) => definedData($query.data),
   );
-  const history = derived(
+
+  const history$ = createAuthorizedObservable(
+    isAuthorized$,
     historyQueryResponse,
-    ($query) => $query.data,
+    ANONYMOUS_HISTORY,
   );
-  const watchlist = derived(
+
+  const watchlist$ = createAuthorizedObservable(
+    isAuthorized$,
     watchlistQueryResponse,
-    ($watchlist) => $watchlist.data,
+    ANONYMOUS_WATCHLIST,
   );
-  const ratings = derived(
+
+  const ratings$ = createAuthorizedObservable(
+    isAuthorized$,
     ratingsQueryResponse,
-    ($ratings) => $ratings.data,
+    ANONYMOUS_RATINGS,
   );
-  const reactions = derived(
+
+  const reactions$ = createAuthorizedObservable(
+    isAuthorized$,
     commentReactionsQueryResponse,
-    ($reactions) => $reactions.data,
+    ANONYMOUS_REACTIONS,
   );
-  const favorites = derived(
+
+  const favorites$ = createAuthorizedObservable(
+    isAuthorized$,
     favoritesQueryResponse,
-    ($favorites) => $favorites.data,
+    ANONYMOUS_FAVORITES,
   );
-  const network = derived(
+
+  const network$ = createAuthorizedObservable(
+    isAuthorized$,
     followingQueryResponse,
-    ($network) => $network.data,
+    ANONYMOUS_NETWORK,
   );
-  const plexLibrary = derived(
+
+  const plexLibrary$ = createAuthorizedObservable(
+    isAuthorized$,
     plexLibraryQueryResponse,
-    ($collection) => $collection.data,
+    ANONYMOUS_PLEX_LIBRARY,
   );
 
   return {
-    user,
-    history,
-    watchlist,
-    ratings,
-    reactions,
-    favorites,
-    network,
-    plexLibrary,
+    user: toStore(user$),
+    history: toStore(history$),
+    watchlist: toStore(watchlist$),
+    ratings: toStore(ratings$),
+    reactions: toStore(reactions$),
+    favorites: toStore(favorites$),
+    network: toStore(network$),
+    plexLibrary: toStore(plexLibrary$),
   };
 }
