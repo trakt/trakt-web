@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "Історія"
+    },
+    "text_directed_by": {
+      "default": "Режисер: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Створено {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

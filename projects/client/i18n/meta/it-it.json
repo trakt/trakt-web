@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "Cronologia"
+    },
+    "text_directed_by": {
+      "default": "Diretto da {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Creata da {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

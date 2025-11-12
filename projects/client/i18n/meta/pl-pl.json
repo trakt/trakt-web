@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "Historia"
+    },
+    "text_directed_by": {
+      "default": "Reżyseria: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Stworzone przez {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

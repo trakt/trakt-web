@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "Historikk"
+    },
+    "text_directed_by": {
+      "default": "Regissert av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Skapt av {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

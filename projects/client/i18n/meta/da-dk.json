@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "Historik"
+    },
+    "text_directed_by": {
+      "default": "Instrueret af {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Skabt af {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
