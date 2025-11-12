@@ -4,6 +4,12 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { PersonResponse } from '@trakt/api';
 import z from 'zod';
 import { mapToPersonSummary } from '../../_internal/mapToPersonSummary.ts';
+import { PersonSummarySchema } from '../../models/PersonSummary.ts';
+
+const PersonResultSchema = z.object({
+  type: z.literal('people'),
+  items: PersonSummarySchema.array(),
+});
 
 const peopleThisMonthRequest = async (
   { fetch = globalThis.fetch }: ApiParams,
@@ -30,9 +36,9 @@ export const peopleThisMonthQuery = defineQuery({
   dependencies: () => [],
   request: peopleThisMonthRequest,
   mapper: (response) => ({
-    type: 'people',
+    type: 'people' as const,
     items: response.body.map(mapToPersonSummary),
   }),
-  schema: z.any(),
+  schema: PersonResultSchema,
   ttl: time.days(1),
 });

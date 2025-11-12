@@ -10,24 +10,15 @@ import { derived } from 'svelte/store';
 
 const LIST_LIMIT = 50;
 
-function modeToQuery(
-  mode: SearchMode,
-) {
-  switch (mode) {
-    case 'people':
-      return peopleThisMonthQuery();
-    default:
-      return searchTrendingQuery({ limit: LIST_LIMIT });
-  }
-}
-
 function hasBirthday(person: PersonSummary): boolean {
   const today = new Date();
   return person.birthday ? isSameDayOfYear(person.birthday, today) : false;
 }
 
 export function useTrendingSearchesList(mode: SearchMode) {
-  const query = useQuery(modeToQuery(mode));
+  const query = mode === 'people'
+    ? useQuery(peopleThisMonthQuery())
+    : useQuery(searchTrendingQuery({ limit: LIST_LIMIT }));
 
   return {
     list: derived(query, ($query) => {
@@ -36,11 +27,16 @@ export function useTrendingSearchesList(mode: SearchMode) {
       }
 
       if ($query.data.type === 'people') {
-        return ($query.data.items as PersonSummary[])
+        const peopleData = $query.data as {
+          type: 'people';
+          items: PersonSummary[];
+        };
+        return peopleData.items
           .sort((a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)));
       }
 
-      return ($query.data.items as MediaEntry[])
+      const mediaData = $query.data as { type: 'media'; items: MediaEntry[] };
+      return mediaData.items
         .filter((item) => item.type === mode || mode === 'media')
         .slice(0, LIST_LIMIT);
     }),
