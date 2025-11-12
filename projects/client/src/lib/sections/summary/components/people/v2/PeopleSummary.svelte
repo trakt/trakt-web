@@ -5,14 +5,21 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import Summary from "./../../_internal/Summary.svelte";
   import SummaryOverview from "./../../summary/SummaryOverview.svelte";
+  import ImdbLink from "./_internal/ImdbLink.svelte";
   import PersonTitle from "./_internal/PersonTitle.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
 
+{#snippet tags()}
+  {#if person.imdb}
+    <ImdbLink imdbId={person.imdb} />
+  {/if}
+{/snippet}
+
 <Summary>
   {#snippet poster()}
-    <SummaryPoster src={person.headshot.url.medium} alt={person.name} />
+    <SummaryPoster src={person.headshot.url.medium} alt={person.name} {tags} />
   {/snippet}
 
   {#snippet sideActions()}

@@ -54,6 +54,7 @@
 
 <style>
   .trakt-summary-poster-container {
+    --bottom-padding: var(--ni-12);
     --overlay-border-size: var(--ni-2);
 
     width: var(--ni-320);
@@ -62,7 +63,7 @@
     gap: var(--gap-m);
     position: relative;
 
-    padding-bottom: var(--ni-12);
+    padding-bottom: var(--bottom-padding);
   }
 
   .trakt-summary-poster :global(img),
@@ -121,8 +122,10 @@
     position: absolute;
     z-index: var(--layer-raised);
 
-    bottom: 0;
+    bottom: var(--bottom-padding);
     left: 0;
     right: 0;
+
+    transform: translateY(50%);
   }
 </style>
