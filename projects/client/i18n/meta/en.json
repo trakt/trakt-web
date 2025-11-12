@@ -5938,6 +5938,32 @@
       "exclude": [
         "ios"
       ]
+    },
+    "text_directed_by": {
+      "default": "Directed by {name}",
+      "description": "Text to indicate the director of a movie.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_created_by": {
+      "default": "Created by {name}",
+      "description": "Text to indicate the creator of a show.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

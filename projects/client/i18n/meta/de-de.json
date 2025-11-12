@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "Verlauf"
+    },
+    "text_directed_by": {
+      "default": "Regie: {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Erstellt von {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

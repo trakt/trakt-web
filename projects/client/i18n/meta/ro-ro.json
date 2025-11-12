@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "Istoric"
+    },
+    "text_directed_by": {
+      "default": "Regizat de {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Creat de {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

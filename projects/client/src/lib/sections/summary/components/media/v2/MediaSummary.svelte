@@ -74,9 +74,11 @@
     <RatingList ratings={$ratings} airDate={media.airDate} />
     <SummaryTitle
       {title}
+      {status}
+      {type}
+      {crew}
       genres={media.genres}
       year={media.year}
-      {status}
       certification={media.certification}
     />
 

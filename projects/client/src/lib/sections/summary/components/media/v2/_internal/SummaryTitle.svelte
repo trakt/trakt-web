@@ -2,6 +2,9 @@
   import { TestId } from "$e2e/models/TestId";
   import type { GenreIntl } from "$lib/components/summary/GenreIntl";
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
+  import * as m from "$lib/features/i18n/messages.ts";
+  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
+  import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStatus } from "$lib/requests/models/MediaStatus";
   import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
 
@@ -14,6 +17,8 @@
     year: number | Nil;
     status?: MediaStatus | Nil;
     certification?: string | Nil;
+    type: ExtendedMediaType;
+    crew: MediaCrew;
   };
 
   const {
@@ -23,6 +28,8 @@
     year,
     status,
     certification,
+    type,
+    crew,
   }: MediaTitleProps = $props();
 
   const subtitle = $derived.by(() => {
@@ -37,6 +44,16 @@
 
     return subtitleParts.join(` ${SEPARATOR} `);
   });
+
+  const mainCreditText = $derived.by(() => {
+    if (type === "show") {
+      const creator = crew.creators?.at(0);
+      return creator && m.text_created_by({ name: creator.name });
+    }
+
+    const director = crew.directors?.at(0);
+    return director && m.text_directed_by({ name: director.name });
+  });
 </script>
 
 <div class="trakt-summary-title">
@@ -47,6 +64,10 @@
   >
     {title}
   </h2>
+
+  {#if mainCreditText}
+    <p class="tiny">{mainCreditText}</p>
+  {/if}
 
   <p class="secondary smaller">
     {subtitle}

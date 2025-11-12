@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "History"
+    },
+    "text_directed_by": {
+      "default": "Directed by {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "Created by {name}",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

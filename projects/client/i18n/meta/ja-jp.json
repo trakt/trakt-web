@@ -2195,6 +2195,22 @@
     },
     "page_title_history": {
       "default": "履歴"
+    },
+    "text_directed_by": {
+      "default": "{name} 監督",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "text_created_by": {
+      "default": "{name} 制作",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }
