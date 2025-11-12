@@ -47,6 +47,7 @@
     "npm:rxjs@^7.8.2": "7.8.2",
     "npm:sass-embedded@1.93.3": "1.93.3",
     "npm:svelte-check@4.3.3": "4.3.3_svelte@5.43.6__acorn@8.15.0_typescript@5.8.3",
+    "npm:svelte-confetti@^2.3.2": "2.3.2_svelte@5.43.6__acorn@8.15.0",
     "npm:svelte@^5.43.3": "5.43.6_acorn@8.15.0",
     "npm:ts-retry@6": "6.0.0",
     "npm:typescript-eslint@8.46.3": "8.46.3_eslint@9.39.1_typescript@5.8.3_@typescript-eslint+parser@8.46.3__eslint@9.39.1__typescript@5.8.3",
@@ -6952,6 +6953,12 @@
       ],
       "bin": true
     },
+    "svelte-confetti@2.3.2_svelte@5.43.6__acorn@8.15.0": {
+      "integrity": "sha512-cfIwoGqMPYWRYDUz2g7mG1uHYWy7VBepelQdzCC3j/M42UrAqaBYmIi9xaoQfow4fbINHO9WuARnTyK2bjjGQg==",
+      "dependencies": [
+        "svelte"
+      ]
+    },
     "svelte-eslint-parser@1.4.0_svelte@5.43.6__acorn@8.15.0_postcss@8.5.6": {
       "integrity": "sha512-fjPzOfipR5S7gQ/JvI9r2H8y9gMGXO3JtmrylHLLyahEMquXI0lrebcjT+9/hNgDej0H7abTyox5HpHmW1PSWA==",
       "dependencies": [
@@ -7970,6 +7977,7 @@
             "npm:rxjs@^7.8.2",
             "npm:sass-embedded@1.93.3",
             "npm:svelte-check@4.3.3",
+            "npm:svelte-confetti@^2.3.2",
             "npm:svelte@^5.43.3",
             "npm:ts-retry@6",
             "npm:typescript-eslint@8.46.3",

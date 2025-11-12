@@ -85,6 +85,7 @@
     "resolve-accept-language": "3.1.13",
     "rxjs": "^7.8.2",
     "svelte": "^5.43.3",
+    "svelte-confetti": "^2.3.2",
     "ts-retry": "^6.0.0",
     "typesense": "^2.1.0",
     "workbox-expiration": "7.3.0",
