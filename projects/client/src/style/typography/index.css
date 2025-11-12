@@ -114,6 +114,10 @@ p {
     font-weight: 600;
     letter-spacing: 0.025rem;
   }
+
+  &.meta-info.uppercase {
+    font-size: var(--ni-10);
+  }
 }
 
 .ellipsis {

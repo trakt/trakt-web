@@ -14,4 +14,5 @@ export type TagIntl = {
   postCredits: (count: number) => string;
   mediaTypeLabel: (type: MediaType) => string;
   toDay: (date: Date) => string;
+  watchedLabel: () => string;
 };

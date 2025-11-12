@@ -5964,6 +5964,14 @@
         "android",
         "ios"
       ]
+    },
+    "tag_text_watched": {
+      "default": "Watched",
+      "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
