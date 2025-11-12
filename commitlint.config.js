@@ -45,6 +45,7 @@ module.exports = {
         'comment',
         'contrib',
         'cover',
+        'credits',
         'cta',
         'deps',
         'dialog',
