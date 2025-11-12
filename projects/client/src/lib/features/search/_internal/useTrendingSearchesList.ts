@@ -1,14 +1,38 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
 import type { PersonSummary } from '$lib/requests/models/PersonSummary.ts';
-import { peopleThisMonthQuery } from '$lib/requests/queries/people/peopleThisMonthQuery.ts';
+import {
+  peopleThisMonthQuery,
+  type PeopleThisMonthResult,
+} from '$lib/requests/queries/people/peopleThisMonthQuery.ts';
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
-import { searchTrendingQuery } from '$lib/requests/queries/search/searchTrendingQuery.ts';
+import {
+  searchTrendingQuery,
+  type TrendingSearchesResult,
+} from '$lib/requests/queries/search/searchTrendingQuery.ts';
 import { isSameDayOfYear } from '$lib/utils/date/isSameDayOfYear.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
 const LIST_LIMIT = 50;
+
+type TrendingSearches = TrendingSearchesResult | PeopleThisMonthResult;
+
+function modeToQuery(
+  mode: SearchMode,
+) {
+  switch (mode) {
+    case 'people':
+      return peopleThisMonthQuery() as CreateQueryOptions<
+        TrendingSearches
+      >;
+    default:
+      return searchTrendingQuery({ limit: LIST_LIMIT }) as CreateQueryOptions<
+        TrendingSearches
+      >;
+  }
+}
 
 function hasBirthday(person: PersonSummary): boolean {
   const today = new Date();
@@ -16,9 +40,7 @@ function hasBirthday(person: PersonSummary): boolean {
 }
 
 export function useTrendingSearchesList(mode: SearchMode) {
-  const query = mode === 'people'
-    ? useQuery(peopleThisMonthQuery())
-    : useQuery(searchTrendingQuery({ limit: LIST_LIMIT }));
+  const query = useQuery(modeToQuery(mode));
 
   return {
     list: derived(query, ($query) => {
