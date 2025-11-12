@@ -37,7 +37,7 @@ export function useFavoritesList({ type, slug, filter }: UseFavoritesProps) {
     list: derived(queries, ($queries) => {
       const favorites = $queries.flatMap((query) => query.data ?? []);
       return type !== undefined
-        ? favorites.sort((a, b) => b.rank - a.rank)
+        ? favorites.toSorted((a, b) => b.rank - a.rank)
         : favorites;
     }),
     isLoading: derived(

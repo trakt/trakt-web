@@ -57,7 +57,7 @@ export const mediaProgressQuery = defineQuery({
       .filter(isValidProgressMovie);
 
     return {
-      entries: weave(episodes, movies).sort((a, b) => {
+      entries: weave(episodes, movies).toSorted((a, b) => {
         const dateA = a.lastWatchedAt ? a.lastWatchedAt.getTime() : 0;
         const dateB = b.lastWatchedAt ? b.lastWatchedAt.getTime() : 0;
         return dateB - dateA;

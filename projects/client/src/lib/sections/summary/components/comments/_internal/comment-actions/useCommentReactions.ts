@@ -43,7 +43,7 @@ export function useCommentReactions(
 
       const sortedDistribution = Object
         .entries($summary.data.distribution)
-        .sort(([_key, a], [_key2, b]) => b - a);
+        .toSorted(([_key, a], [_key2, b]) => b - a);
 
       const top = sortedDistribution
         .slice(0, PREVIEW_LIMIT)

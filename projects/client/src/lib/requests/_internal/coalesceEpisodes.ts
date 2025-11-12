@@ -65,5 +65,7 @@ export function coalesceEpisodes(
     return episodes;
   });
 
-  return coalesced.sort((a, b) => a.airDate.getTime() - b.airDate.getTime());
+  return coalesced.toSorted((a, b) =>
+    a.airDate.getTime() - b.airDate.getTime()
+  );
 }

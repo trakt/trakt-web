@@ -25,7 +25,7 @@ const GENRE_FILTER: Filter = {
         label: toTranslatedValue('genre', genre),
         value: genre,
       }))
-      .sort((a, b) => a.label.localeCompare(b.label, languageTag())),
+      .toSorted((a, b) => a.label.localeCompare(b.label, languageTag())),
   ],
 };
 

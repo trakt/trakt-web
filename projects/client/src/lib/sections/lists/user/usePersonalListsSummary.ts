@@ -45,7 +45,7 @@ export function usePersonalListsSummary(
           return data;
         }
 
-        return data.sort((a, b) =>
+        return data.toSorted((a, b) =>
           // FIXME: update when we add sorting options
           b.updatedAt.getTime() - a.updatedAt.getTime()
         );

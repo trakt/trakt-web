@@ -87,7 +87,7 @@ function extractPlaceholderTypes(stringValue: string): string[] {
   if (Object.keys(positionals).length > 0) {
     return Object.keys(positionals)
       .map((k) => parseInt(k))
-      .sort((a, b) => a - b)
+      .toSorted((a, b) => a - b)
       .map((i) => positionals[i])
       .filter((type): type is string => Boolean(type));
   }
@@ -101,7 +101,7 @@ function swiftifyKey(key: string): string {
 
 function generateStrings(args: Args): void {
   const keysAndStrings = getKeysAndStringsFromXcstrings(args.input);
-  const sortedKeys = Object.keys(keysAndStrings).sort();
+  const sortedKeys = Object.keys(keysAndStrings).toSorted();
   const enumName = 'L10n'; // Fixed enum name
 
   // Ensure output directory exists

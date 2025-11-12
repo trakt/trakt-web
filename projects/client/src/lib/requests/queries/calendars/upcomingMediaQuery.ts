@@ -54,7 +54,7 @@ export const upcomingMediaQuery = defineQuery({
     );
 
     return [...episodes, ...movies]
-      .sort((a, b) => {
+      .toSorted((a, b) => {
         return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
       });
   },

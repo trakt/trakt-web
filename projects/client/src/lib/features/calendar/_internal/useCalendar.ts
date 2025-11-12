@@ -63,7 +63,7 @@ export function useCalendar(
   );
 
   const allItems = derived(queries, ($queries) => {
-    return $queries.flatMap((query) => query.data ?? []).sort((a, b) => {
+    return $queries.flatMap((query) => query.data ?? []).toSorted((a, b) => {
       return new Date(a.airDate).getTime() - new Date(b.airDate).getTime();
     });
   });
