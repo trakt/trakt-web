@@ -4,7 +4,6 @@
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
 
   const SEPARATOR = "•";
-  const GENRE_SEPARATOR = " / ";
 
   type MediaTitleProps = {
     title: string;
@@ -27,14 +26,12 @@
   const subtitle = $derived.by(() => {
     const subtitleParts = [];
 
-    const visibleGenres = genres
-      .slice(0, 3)
-      .map(i18n.genre)
-      .join(GENRE_SEPARATOR);
+    const genre = genres.at(0);
+    const genreText = genre && i18n.genre(genre);
 
     year && subtitleParts.push(`${year}`);
     certification && subtitleParts.push(certification);
-    subtitleParts.push(visibleGenres);
+    genreText && subtitleParts.push(genreText);
 
     return subtitleParts.join(` ${SEPARATOR} `);
   });
