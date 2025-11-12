@@ -5,7 +5,7 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import Summary from "./../../_internal/Summary.svelte";
   import SummaryOverview from "./../../summary/SummaryOverview.svelte";
-  import SummaryTitle from "./../../summary/SummaryTitle.svelte";
+  import PersonTitle from "./_internal/PersonTitle.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
@@ -24,7 +24,7 @@
   {/snippet}
 
   {#snippet meta()}
-    <SummaryTitle title={person.name} />
+    <PersonTitle name={person.name} knownFor={person.knownFor} />
   {/snippet}
 
   <SummaryOverview title={person.name} overview={person.biography} />
