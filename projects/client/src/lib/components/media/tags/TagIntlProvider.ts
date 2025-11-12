@@ -26,7 +26,7 @@ export const TagIntlProvider: TagIntl = {
   trendLabel: (delta) =>
     delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
   postCredits: (count) =>
-    `${toHumanNumber(count, languageTag())} · ${m.header_post_credits()}`,
+    `${m.header_post_credits()} · ${toHumanNumber(count, languageTag())}`,
   mediaTypeLabel: (type) => toTranslatedValue('type', type),
   toDay: (date) => toHumanDay(date, getLocale()),
   watchedLabel: () => m.tag_text_watched(),
