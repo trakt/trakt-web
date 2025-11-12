@@ -82,7 +82,7 @@ export const showVideosQuery = defineQuery({
         seen.add(video.key);
         return true;
       })
-      .sort((a, b) => {
+      .toSorted((a, b) => {
         return (
           new Date(a.publishedAt).getTime() -
           new Date(b.publishedAt).getTime()

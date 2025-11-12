@@ -83,7 +83,7 @@ export const searchTrendingQuery = defineQuery({
 
     const items = allItems
       .filter((item) => item.id !== 0 && item.slug !== null)
-      .sort((a, b) => b.score - a.score);
+      .toSorted((a, b) => b.score - a.score);
 
     return {
       type: 'media' as const,

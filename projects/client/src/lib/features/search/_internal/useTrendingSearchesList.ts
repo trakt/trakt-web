@@ -49,12 +49,8 @@ export function useTrendingSearchesList(mode: SearchMode) {
       }
 
       if ($query.data.type === 'people') {
-        const peopleData = $query.data as {
-          type: 'people';
-          items: PersonSummary[];
-        };
-        return peopleData.items
-          .sort((a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)));
+        return ($query.data.items as PersonSummary[])
+          .toSorted((a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)));
       }
 
       const mediaData = $query.data as { type: 'media'; items: MediaEntry[] };

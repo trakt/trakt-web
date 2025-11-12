@@ -30,7 +30,7 @@ export const movieVideosQuery = defineQuery({
     response.body
       .filter((video) => video.site === 'youtube')
       .map(mapToMediaVideo)
-      .sort((a, b) => {
+      .toSorted((a, b) => {
         return (
           new Date(a.publishedAt).getTime() -
           new Date(b.publishedAt).getTime()

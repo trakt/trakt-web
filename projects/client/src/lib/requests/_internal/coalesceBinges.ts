@@ -32,7 +32,7 @@ export function coalesceBinges(activities: SocialActivity[]): SocialActivity[] {
 
       const groupActivity = assertDefined(group.at(0));
       const episodesInGroup = group
-        .sort((a, b) => a.activityAt.getTime() - b.activityAt.getTime())
+        .toSorted((a, b) => a.activityAt.getTime() - b.activityAt.getTime())
         .map((activity) => ({
           ...activity.episode,
           show: activity.show,
@@ -60,5 +60,5 @@ export function coalesceBinges(activities: SocialActivity[]): SocialActivity[] {
   return [
     ...activities.filter((activity) => activity.type === 'movie'),
     ...coalescedEpisodes,
-  ].sort((a, b) => b.activityAt.getTime() - a.activityAt.getTime());
+  ].toSorted((a, b) => b.activityAt.getTime() - a.activityAt.getTime());
 }
