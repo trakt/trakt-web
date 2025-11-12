@@ -1,10 +1,11 @@
 <script lang="ts">
-  import CheckIcon from "$lib/components/icons/CheckIcon.svelte";
+  import type { TagIntl } from "$lib/components/media/tags/TagIntl";
   import StemTag from "$lib/components/tags/StemTag.svelte";
+  import TrackIcon from "$lib/components/TrackIcon.svelte";
   import { linear } from "svelte/easing";
   import { slide } from "svelte/transition";
 
-  const { count }: { count: number } = $props();
+  const { count, i18n }: { count: number; i18n: TagIntl } = $props();
 
   const TRANSITION_DURATION = 300;
   // FIXME: replace the one in the tags folder when new design is leading
@@ -15,9 +16,11 @@
     --color-background-stem-tag="var(--shade-10)"
     --color-foreground-stem-tag="var(--shade-920)"
   >
-    <CheckIcon />
+    <TrackIcon />
 
     {#if count > 1}
+      <p class="meta-info uppercase no-wrap">{i18n.watchedLabel()}</p>
+      <p class="meta-info">·</p>
       <div transition:slide={{ axis: "x", duration: 150 }}>
         {#key count}
           <p
@@ -40,6 +43,11 @@
   watch-count-tag {
     :global(.trakt-tag) {
       position: relative;
+
+      :global(svg) {
+        width: var(--ni-12);
+        height: var(--ni-12);
+      }
     }
 
     :global(.counter[inert]) {

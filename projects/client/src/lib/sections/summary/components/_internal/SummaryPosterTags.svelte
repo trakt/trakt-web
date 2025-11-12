@@ -14,5 +14,5 @@
 {/if}
 
 {#if watchCount > 0}
-  <WatchCountTag count={watchCount} />
+  <WatchCountTag count={watchCount} i18n={TagIntlProvider} />
 {/if}

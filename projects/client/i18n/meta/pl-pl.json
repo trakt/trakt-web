@@ -2211,6 +2211,9 @@
           "type": "string"
         }
       }
+    },
+    "tag_text_watched": {
+      "default": "Obejrzano"
     }
   }
 }
