@@ -3,6 +3,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { trackWindowScroll } from "$lib/utils/actions/trackWindowScroll";
   import FilterButton from "./components/filter/FilterButton.svelte";
+  import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import { useNavbarState } from "./useNavbarState";
 
@@ -32,6 +33,7 @@
           {@render $state.seasonalActions?.()}
           <FilterButton size="small" isDisabled={!$state.hasFilters} />
         </RenderFor>
+        <RenderFor audience="free"><GetVIPLink /></RenderFor>
       </div>
     </nav>
 
