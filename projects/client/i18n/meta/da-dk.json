@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Set"
+    },
+    "header_birthday": {
+      "default": "Fødselsdag"
+    },
+    "header_age": {
+      "default": "Alder"
     }
   }
 }

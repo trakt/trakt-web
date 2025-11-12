@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "視聴済み"
+    },
+    "header_birthday": {
+      "default": "誕生日"
+    },
+    "header_age": {
+      "default": "年齢"
     }
   }
 }

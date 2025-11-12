@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Obejrzano"
+    },
+    "header_birthday": {
+      "default": "Urodziny"
+    },
+    "header_age": {
+      "default": "Wiek"
     }
   }
 }

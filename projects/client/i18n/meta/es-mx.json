@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Vista"
+    },
+    "header_birthday": {
+      "default": "Cumpleaños"
+    },
+    "header_age": {
+      "default": "Edad"
     }
   }
 }

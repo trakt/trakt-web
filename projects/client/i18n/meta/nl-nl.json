@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Bekeken"
+    },
+    "header_birthday": {
+      "default": "Verjaardag"
+    },
+    "header_age": {
+      "default": "Leeftijd"
     }
   }
 }

@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Переглянуто"
+    },
+    "header_birthday": {
+      "default": "День народження"
+    },
+    "header_age": {
+      "default": "Вік"
     }
   }
 }

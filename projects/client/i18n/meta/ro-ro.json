@@ -2220,6 +2220,12 @@
     },
     "tag_text_watched": {
       "default": "Vizionat"
+    },
+    "header_birthday": {
+      "default": "Zi de naștere"
+    },
+    "header_age": {
+      "default": "Vârstă"
     }
   }
 }

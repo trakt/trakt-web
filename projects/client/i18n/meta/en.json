@@ -5988,6 +5988,22 @@
         "android",
         "ios"
       ]
+    },
+    "header_birthday": {
+      "default": "Birthday",
+      "description": "Header for the section that displays the person's birthday.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "header_age": {
+      "default": "Age",
+      "description": "Header for the section that displays the person's age.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
