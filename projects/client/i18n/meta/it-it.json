@@ -910,13 +910,13 @@
       "default": "Visualizza tutte le attività social"
     },
     "dropdown_label_person_position": {
-      "default": "Poziție"
+      "default": "Posizione"
     },
     "translated_value_position_acting": {
       "default": "Recitazione"
     },
     "translated_value_position_self": {
-      "default": "Sé stesso"
+      "default": "Sé stesso/a"
     },
     "translated_value_position_narrator": {
       "default": "Narratore"
@@ -928,10 +928,10 @@
       "default": "Arte"
     },
     "translated_value_position_crew": {
-      "default": "Squadra"
+      "default": "Troupe"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Costumi e Trucco"
+      "default": "Costumi & Trucco"
     },
     "translated_value_position_directing": {
       "default": "Regia"
@@ -943,13 +943,13 @@
       "default": "Suono"
     },
     "translated_value_position_camera": {
-      "default": "Fotocamera"
+      "default": "Camera"
     },
     "translated_value_position_lighting": {
       "default": "Illuminazione"
     },
     "translated_value_position_visual_effects": {
-      "default": "Effetti Vis."
+      "default": "Effetti visivi"
     },
     "translated_value_position_editing": {
       "default": "Montaggio"
@@ -958,7 +958,7 @@
       "default": "Creatore"
     },
     "translated_value_position_created_by": {
-      "default": "Creato Da"
+      "default": "Creato da"
     },
     "list_title_personal_lists": {
       "default": "Le mie liste"

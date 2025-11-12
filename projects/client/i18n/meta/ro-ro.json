@@ -910,10 +910,10 @@
       "default": "Vezi toate activitățile sociale"
     },
     "dropdown_label_person_position": {
-      "default": "Funcție"
+      "default": "Poziție"
     },
     "translated_value_position_acting": {
-      "default": "Actor"
+      "default": "Actorie"
     },
     "translated_value_position_self": {
       "default": "Sine"
@@ -931,13 +931,13 @@
       "default": "Echipă"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Costume și Machiaj"
+      "default": "Costume & Machiaj"
     },
     "translated_value_position_directing": {
-      "default": "Regia"
+      "default": "Regie"
     },
     "translated_value_position_writing": {
-      "default": "Scriere"
+      "default": "Scriitură"
     },
     "translated_value_position_sound": {
       "default": "Sunet"
@@ -949,7 +949,7 @@
       "default": "Iluminat"
     },
     "translated_value_position_visual_effects": {
-      "default": "Efecte Vizuale"
+      "default": "Efecte vizuale"
     },
     "translated_value_position_editing": {
       "default": "Montaj"

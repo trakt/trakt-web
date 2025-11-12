@@ -2456,7 +2456,7 @@
     },
     "translated_value_position_acting": {
       "default": "Acting",
-      "description": "Value for the person who has an acting position in a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who acted in a movie or show, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2464,7 +2464,7 @@
     },
     "translated_value_position_self": {
       "default": "Self",
-      "description": "Value for the person who has a self position in a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who appeared as themselves in a movie or show, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2472,7 +2472,7 @@
     },
     "translated_value_position_narrator": {
       "default": "Narrator",
-      "description": "Value for the person who has a narrator position in a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who narrated a movie or show, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2480,7 +2480,7 @@
     },
     "translated_value_position_production": {
       "default": "Production",
-      "description": "Value for the person who worked on the production of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the production department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2488,7 +2488,7 @@
     },
     "translated_value_position_art": {
       "default": "Art",
-      "description": "Value for the person who worked on the art of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the art department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2496,7 +2496,7 @@
     },
     "translated_value_position_crew": {
       "default": "Crew",
-      "description": "Value for the person who was a member of the crew of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who was a member of the crew, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2504,7 +2504,7 @@
     },
     "translated_value_position_costume___make_up": {
       "default": "Costume & Make-Up",
-      "description": "Value for the person who worked in the costume & make-up department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the costume & make-up department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2512,7 +2512,7 @@
     },
     "translated_value_position_directing": {
       "default": "Directing",
-      "description": "Value for the person who worked in the directing department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the directing department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2520,7 +2520,7 @@
     },
     "translated_value_position_writing": {
       "default": "Writing",
-      "description": "Value for the person who worked in the writing department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the writing department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2528,7 +2528,7 @@
     },
     "translated_value_position_sound": {
       "default": "Sound",
-      "description": "Value for the person who worked in the sound department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the sound department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2536,7 +2536,7 @@
     },
     "translated_value_position_camera": {
       "default": "Camera",
-      "description": "Value for the person who worked in the camera department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the camera department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2544,7 +2544,7 @@
     },
     "translated_value_position_lighting": {
       "default": "Lighting",
-      "description": "Value for the person who worked in the lighting department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the lighting department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2552,7 +2552,7 @@
     },
     "translated_value_position_visual_effects": {
       "default": "Visual Effects",
-      "description": "Value for the person who worked in the visual effects department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the visual effects department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2560,7 +2560,7 @@
     },
     "translated_value_position_editing": {
       "default": "Editing",
-      "description": "Value for the person who worked in the editing department of a movie or show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who worked in the editing department, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2568,7 +2568,7 @@
     },
     "translated_value_position_creator": {
       "default": "Creator",
-      "description": "Value for the person who (co)created a show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who created a show, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"
@@ -2576,7 +2576,7 @@
     },
     "translated_value_position_created_by": {
       "default": "Created By",
-      "description": "Value for the person who created a show. The value is sent back from the Trakt API.",
+      "description": "Value for the person who created a show, keep language specifics in mind.",
       "exclude": [
         "android",
         "ios"

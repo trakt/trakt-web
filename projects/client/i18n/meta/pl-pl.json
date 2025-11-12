@@ -910,10 +910,10 @@
       "default": "Zobacz całą aktywność społeczną"
     },
     "dropdown_label_person_position": {
-      "default": "Pozycja"
+      "default": "Stanowisko"
     },
     "translated_value_position_acting": {
-      "default": "Aktorski"
+      "default": "Aktorstwo"
     },
     "translated_value_position_self": {
       "default": "Siebie"
@@ -925,13 +925,13 @@
       "default": "Produkcja"
     },
     "translated_value_position_art": {
-      "default": "Sztuka"
+      "default": "Artystyczny"
     },
     "translated_value_position_crew": {
-      "default": "Załoga"
+      "default": "Ekipa"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Kostiumy i makijaż"
+      "default": "Kostiumy i Makijaż"
     },
     "translated_value_position_directing": {
       "default": "Reżyseria"
@@ -958,7 +958,7 @@
       "default": "Twórca"
     },
     "translated_value_position_created_by": {
-      "default": "Utworzony przez"
+      "default": "Stworzone przez"
     },
     "list_title_personal_lists": {
       "default": "Moje Listy"

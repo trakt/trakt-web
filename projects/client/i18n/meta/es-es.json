@@ -910,13 +910,13 @@
       "default": "Ver toda la actividad social"
     },
     "dropdown_label_person_position": {
-      "default": "Puesto"
+      "default": "Posición"
     },
     "translated_value_position_acting": {
-      "default": "Actuación"
+      "default": "Interpretación"
     },
     "translated_value_position_self": {
-      "default": "Uno mismo"
+      "default": "Sí mismo/a"
     },
     "translated_value_position_narrator": {
       "default": "Narrador"
@@ -937,7 +937,7 @@
       "default": "Dirección"
     },
     "translated_value_position_writing": {
-      "default": "Escritura"
+      "default": "Guion"
     },
     "translated_value_position_sound": {
       "default": "Sonido"
@@ -952,7 +952,7 @@
       "default": "Efectos Visuales"
     },
     "translated_value_position_editing": {
-      "default": "Edición"
+      "default": "Montaje"
     },
     "translated_value_position_creator": {
       "default": "Creador"

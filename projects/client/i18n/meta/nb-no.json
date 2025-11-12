@@ -928,7 +928,7 @@
       "default": "Kunst"
     },
     "translated_value_position_crew": {
-      "default": "Stab"
+      "default": "Crew"
     },
     "translated_value_position_costume___make_up": {
       "default": "Kostyme & Sminke"
@@ -937,7 +937,7 @@
       "default": "Regi"
     },
     "translated_value_position_writing": {
-      "default": "Skriving"
+      "default": "Manus"
     },
     "translated_value_position_sound": {
       "default": "Lyd"
@@ -946,10 +946,10 @@
       "default": "Kamera"
     },
     "translated_value_position_lighting": {
-      "default": "Lyssetting"
+      "default": "Lys"
     },
     "translated_value_position_visual_effects": {
-      "default": "Visuelle Effekter"
+      "default": "Visuelle effekter"
     },
     "translated_value_position_editing": {
       "default": "Redigering"

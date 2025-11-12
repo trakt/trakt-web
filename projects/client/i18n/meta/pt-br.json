@@ -910,13 +910,13 @@
       "default": "Ver todas as atividades sociais"
     },
     "dropdown_label_person_position": {
-      "default": "Cargo"
+      "default": "Posição"
     },
     "translated_value_position_acting": {
-      "default": "Ator"
+      "default": "Atuação"
     },
     "translated_value_position_self": {
-      "default": "Próprio"
+      "default": "Ele(a) mesmo(a)"
     },
     "translated_value_position_narrator": {
       "default": "Narrador"
@@ -931,7 +931,7 @@
       "default": "Equipe"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Figurinos e Maquiagem"
+      "default": "Figurino e Maquiagem"
     },
     "translated_value_position_directing": {
       "default": "Direção"

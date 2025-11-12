@@ -916,7 +916,7 @@
       "default": "演技"
     },
     "translated_value_position_self": {
-      "default": "本人"
+      "default": "本人役"
     },
     "translated_value_position_narrator": {
       "default": "ナレーター"
@@ -928,7 +928,7 @@
       "default": "美術"
     },
     "translated_value_position_crew": {
-      "default": "スタッフ"
+      "default": "クルー"
     },
     "translated_value_position_costume___make_up": {
       "default": "衣装＆メイク"
@@ -943,13 +943,13 @@
       "default": "音響"
     },
     "translated_value_position_camera": {
-      "default": "カメラ"
+      "default": "撮影"
     },
     "translated_value_position_lighting": {
       "default": "照明"
     },
     "translated_value_position_visual_effects": {
-      "default": "ビジュアルエフェクト"
+      "default": "VFX"
     },
     "translated_value_position_editing": {
       "default": "編集"
@@ -958,7 +958,7 @@
       "default": "クリエイター"
     },
     "translated_value_position_created_by": {
-      "default": "制作"
+      "default": "作成者"
     },
     "list_title_personal_lists": {
       "default": "マイリスト"
