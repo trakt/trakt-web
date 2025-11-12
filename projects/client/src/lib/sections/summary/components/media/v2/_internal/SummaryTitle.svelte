@@ -2,6 +2,8 @@
   import { TestId } from "$e2e/models/TestId";
   import type { GenreIntl } from "$lib/components/summary/GenreIntl";
   import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
+  import type { MediaStatus } from "$lib/requests/models/MediaStatus";
+  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
 
   const SEPARATOR = "•";
 
@@ -10,7 +12,7 @@
     genres: string[];
     i18n?: GenreIntl;
     year: number | Nil;
-    status?: string | Nil;
+    status?: MediaStatus | Nil;
     certification?: string | Nil;
   };
 
@@ -51,8 +53,8 @@
   </p>
 
   {#if status}
-    <p class="secondary smaller meta-info trakt-media-status">
-      {status}
+    <p class="capitalize meta-info trakt-media-status">
+      {toTranslatedValue("status", status)}
     </p>
   {/if}
 </div>
