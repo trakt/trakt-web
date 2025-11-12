@@ -11,6 +11,8 @@ const PersonResultSchema = z.object({
   items: PersonSummarySchema.array(),
 });
 
+export type PeopleThisMonthResult = z.infer<typeof PersonResultSchema>;
+
 const peopleThisMonthRequest = async (
   { fetch = globalThis.fetch }: ApiParams,
 ) => {

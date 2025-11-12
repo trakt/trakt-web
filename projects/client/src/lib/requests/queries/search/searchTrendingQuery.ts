@@ -19,6 +19,7 @@ const TrendingSearchesSchema = z.object({
   items: TrendingSearchEntrySchema.array(),
 });
 type TrendingSearchEntry = z.infer<typeof TrendingSearchEntrySchema>;
+export type TrendingSearchesResult = z.infer<typeof TrendingSearchesSchema>;
 
 type SearchTrendingParams = { limit: number } & ApiParams;
 
