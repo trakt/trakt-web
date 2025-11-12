@@ -21,7 +21,7 @@ const peopleSummaryRequest = (
     });
 
 export const peopleSummaryQuery = defineQuery({
-  key: 'peopleSummary',
+  key: 'peopleSummary:v2',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: peopleSummaryRequest,
