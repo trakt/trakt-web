@@ -928,16 +928,16 @@
       "default": "Kunst"
     },
     "translated_value_position_crew": {
-      "default": "Hold"
+      "default": "Crew"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Kostume & Make-Up"
+      "default": "Kostume & Makeup"
     },
     "translated_value_position_directing": {
       "default": "Instruktion"
     },
     "translated_value_position_writing": {
-      "default": "Manuskriptforfatter"
+      "default": "Manuskript"
     },
     "translated_value_position_sound": {
       "default": "Lyd"
@@ -946,13 +946,13 @@
       "default": "Kamera"
     },
     "translated_value_position_lighting": {
-      "default": "Lys"
+      "default": "Belysning"
     },
     "translated_value_position_visual_effects": {
       "default": "Visuelle effekter"
     },
     "translated_value_position_editing": {
-      "default": "Redigering"
+      "default": "Klipning"
     },
     "translated_value_position_creator": {
       "default": "Skaber"

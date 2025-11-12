@@ -916,7 +916,7 @@
       "default": "Actuación"
     },
     "translated_value_position_self": {
-      "default": "Uno mismo"
+      "default": "Él/Ella mismo/a"
     },
     "translated_value_position_narrator": {
       "default": "Narrador"
@@ -937,19 +937,19 @@
       "default": "Dirección"
     },
     "translated_value_position_writing": {
-      "default": "Escritura"
+      "default": "Guion"
     },
     "translated_value_position_sound": {
       "default": "Sonido"
     },
     "translated_value_position_camera": {
-      "default": "Cámaras"
+      "default": "Cámara"
     },
     "translated_value_position_lighting": {
       "default": "Iluminación"
     },
     "translated_value_position_visual_effects": {
-      "default": "Efectos Visuales"
+      "default": "Efectos visuales"
     },
     "translated_value_position_editing": {
       "default": "Edición"

@@ -925,16 +925,16 @@
       "default": "Productie"
     },
     "translated_value_position_art": {
-      "default": "Art"
+      "default": "Kunst"
     },
     "translated_value_position_crew": {
       "default": "Crew"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Kostuum & Make-up"
+      "default": "Kostuums & Make-up"
     },
     "translated_value_position_directing": {
-      "default": "Regisseren"
+      "default": "Regie"
     },
     "translated_value_position_writing": {
       "default": "Schrijven"
@@ -946,7 +946,7 @@
       "default": "Camera"
     },
     "translated_value_position_lighting": {
-      "default": "Licht"
+      "default": "Belichting"
     },
     "translated_value_position_visual_effects": {
       "default": "Visuele effecten"
@@ -955,7 +955,7 @@
       "default": "Montage"
     },
     "translated_value_position_creator": {
-      "default": "Creator"
+      "default": "Maker"
     },
     "translated_value_position_created_by": {
       "default": "Gemaakt door"

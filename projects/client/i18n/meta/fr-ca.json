@@ -910,13 +910,13 @@
       "default": "Voir toutes les activités sociales"
     },
     "dropdown_label_person_position": {
-      "default": "Poste"
+      "default": "Rôle"
     },
     "translated_value_position_acting": {
       "default": "Interprétation"
     },
     "translated_value_position_self": {
-      "default": "Soi-même"
+      "default": "Eux-mêmes"
     },
     "translated_value_position_narrator": {
       "default": "Narrateur"
@@ -937,7 +937,7 @@
       "default": "Réalisation"
     },
     "translated_value_position_writing": {
-      "default": "Scénarisation"
+      "default": "Écriture"
     },
     "translated_value_position_sound": {
       "default": "Son"
@@ -955,7 +955,7 @@
       "default": "Montage"
     },
     "translated_value_position_creator": {
-      "default": "Créateur"
+      "default": "Créateur.trice"
     },
     "translated_value_position_created_by": {
       "default": "Créé par"

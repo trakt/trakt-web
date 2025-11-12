@@ -913,25 +913,25 @@
       "default": "Position"
     },
     "translated_value_position_acting": {
-      "default": "Schauspielerei"
+      "default": "Schauspiel"
     },
     "translated_value_position_self": {
-      "default": "Selbst"
+      "default": "Sich selbst"
     },
     "translated_value_position_narrator": {
-      "default": "Erzähler"
+      "default": "Sprecher"
     },
     "translated_value_position_production": {
       "default": "Produktion"
     },
     "translated_value_position_art": {
-      "default": "Kunst"
+      "default": "Künstlerisch"
     },
     "translated_value_position_crew": {
-      "default": "Team"
+      "default": "Crew"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Kostüm & Make-up"
+      "default": "Kostüm & Make-Up"
     },
     "translated_value_position_directing": {
       "default": "Regie"
@@ -955,7 +955,7 @@
       "default": "Schnitt"
     },
     "translated_value_position_creator": {
-      "default": "Schöpfer"
+      "default": "Ersteller"
     },
     "translated_value_position_created_by": {
       "default": "Erstellt von"

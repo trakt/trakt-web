@@ -916,7 +916,7 @@
       "default": "Акторська гра"
     },
     "translated_value_position_self": {
-      "default": "Сам"
+      "default": "Сам/Сама"
     },
     "translated_value_position_narrator": {
       "default": "Оповідач"
@@ -925,19 +925,19 @@
       "default": "Виробництво"
     },
     "translated_value_position_art": {
-      "default": "Образотворче мистецтво"
+      "default": "Мистецтво"
     },
     "translated_value_position_crew": {
       "default": "Команда"
     },
     "translated_value_position_costume___make_up": {
-      "default": "Костюми та грим"
+      "default": "Костюми та Макіяж"
     },
     "translated_value_position_directing": {
       "default": "Режисура"
     },
     "translated_value_position_writing": {
-      "default": "Написання"
+      "default": "Сценарій"
     },
     "translated_value_position_sound": {
       "default": "Звук"
@@ -955,7 +955,7 @@
       "default": "Монтаж"
     },
     "translated_value_position_creator": {
-      "default": "Створено"
+      "default": "Творець"
     },
     "translated_value_position_created_by": {
       "default": "Створено"

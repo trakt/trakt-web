@@ -928,7 +928,7 @@
       "default": "Konst"
     },
     "translated_value_position_crew": {
-      "default": "Team"
+      "default": "Crew"
     },
     "translated_value_position_costume___make_up": {
       "default": "Kostym & Smink"
@@ -937,7 +937,7 @@
       "default": "Regi"
     },
     "translated_value_position_writing": {
-      "default": "Skrivande"
+      "default": "Manus"
     },
     "translated_value_position_sound": {
       "default": "Ljud"

@@ -913,7 +913,7 @@
       "default": "Позиция"
     },
     "translated_value_position_acting": {
-      "default": "Играейки"
+      "default": "Актьорство"
     },
     "translated_value_position_self": {
       "default": "Себе си"
@@ -925,7 +925,7 @@
       "default": "Продукция"
     },
     "translated_value_position_art": {
-      "default": "Изкуство"
+      "default": "Арт"
     },
     "translated_value_position_crew": {
       "default": "Екип"
@@ -934,7 +934,7 @@
       "default": "Костюми и грим"
     },
     "translated_value_position_directing": {
-      "default": "Режисирано от"
+      "default": "Режисура"
     },
     "translated_value_position_writing": {
       "default": "Сценарий"
@@ -952,7 +952,7 @@
       "default": "Визуални ефекти"
     },
     "translated_value_position_editing": {
-      "default": "Редакция"
+      "default": "Монтаж"
     },
     "translated_value_position_creator": {
       "default": "Създател"

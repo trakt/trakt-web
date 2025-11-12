@@ -910,13 +910,13 @@
       "default": "Afficher toute l'activité sociale"
     },
     "dropdown_label_person_position": {
-      "default": "Position"
+      "default": "Fonction"
     },
     "translated_value_position_acting": {
-      "default": "Acteur"
+      "default": "Interprétation"
     },
     "translated_value_position_self": {
-      "default": "Soi-même"
+      "default": "Eux-mêmes"
     },
     "translated_value_position_narrator": {
       "default": "Narrateur"
@@ -928,7 +928,7 @@
       "default": "Art"
     },
     "translated_value_position_crew": {
-      "default": "Équipe"
+      "default": "Équipe technique"
     },
     "translated_value_position_costume___make_up": {
       "default": "Costumes & Maquillage"
@@ -937,7 +937,7 @@
       "default": "Réalisation"
     },
     "translated_value_position_writing": {
-      "default": "Écriture"
+      "default": "Scénario"
     },
     "translated_value_position_sound": {
       "default": "Son"
@@ -946,7 +946,7 @@
       "default": "Caméra"
     },
     "translated_value_position_lighting": {
-      "default": "Éclairage"
+      "default": "Lumière"
     },
     "translated_value_position_visual_effects": {
       "default": "Effets visuels"
