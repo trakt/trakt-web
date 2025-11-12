@@ -27,7 +27,6 @@
 
 <div
   class="trakt-streaming-service-logo"
-  class:is-colored={variant === "colored"}
   class:has-channel-logo={!!service?.channelLogoUrl}
   style="--logo-color: {service?.color ?? 'var(--color-text-primary)'};"
 >
