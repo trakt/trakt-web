@@ -237,5 +237,8 @@ export const UrlBuilder = {
     imdb: {
       person: (imdbId: string) => `https://www.imdb.com/name/${imdbId}`,
     },
+    x: (username: string) => `https://x.com/${username}`,
+    instagram: (username: string) => `https://www.instagram.com/${username}`,
+    facebook: (username: string) => `https://www.facebook.com/${username}`,
   },
 };
