@@ -17,4 +17,10 @@ export const PersonFergusonMappedMock: PersonSummary = {
   id: 447271,
   key: 'person-447271',
   birthday: new Date('1983-10-19'),
+  imdb: 'nm0272581',
+  socialMedia: {
+    facebook: null,
+    x: null,
+    instagram: 'rebecca_ferguson',
+  },
 };

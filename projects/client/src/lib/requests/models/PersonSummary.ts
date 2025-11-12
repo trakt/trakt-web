@@ -13,6 +13,12 @@ export const PersonSummarySchema = z.object({
   slug: z.string(),
   knownFor: crewPositionSchema.nullish(),
   birthday: z.date().nullish(),
+  imdb: z.string().nullish(),
+  socialMedia: z.object({
+    x: z.string().nullish(),
+    instagram: z.string().nullish(),
+    facebook: z.string().nullish(),
+  }).optional(),
 });
 
 export type PersonSummary = z.infer<typeof PersonSummarySchema>;
