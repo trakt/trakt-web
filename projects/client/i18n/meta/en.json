@@ -2462,6 +2462,22 @@
         "ios"
       ]
     },
+    "translated_value_position_self": {
+      "default": "Self",
+      "description": "Value for the person who has a self position in a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "translated_value_position_narrator": {
+      "default": "Narrator",
+      "description": "Value for the person who has a narrator position in a movie or show. The value is sent back from the Trakt API.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "translated_value_position_production": {
       "default": "Production",
       "description": "Value for the person who worked on the production of a movie or show. The value is sent back from the Trakt API.",

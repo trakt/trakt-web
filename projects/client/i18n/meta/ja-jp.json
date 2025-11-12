@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "演技"
     },
+    "translated_value_position_self": {
+      "default": "本人"
+    },
+    "translated_value_position_narrator": {
+      "default": "ナレーター"
+    },
     "translated_value_position_production": {
       "default": "制作"
     },

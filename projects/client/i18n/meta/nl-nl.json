@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Acteren"
     },
+    "translated_value_position_self": {
+      "default": "Zelf"
+    },
+    "translated_value_position_narrator": {
+      "default": "Verteller"
+    },
     "translated_value_position_production": {
       "default": "Productie"
     },

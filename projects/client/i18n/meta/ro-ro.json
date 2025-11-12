@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Actor"
     },
+    "translated_value_position_self": {
+      "default": "Sine"
+    },
+    "translated_value_position_narrator": {
+      "default": "Narator"
+    },
     "translated_value_position_production": {
       "default": "Producție"
     },

@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Aktorski"
     },
+    "translated_value_position_self": {
+      "default": "Siebie"
+    },
+    "translated_value_position_narrator": {
+      "default": "Narrator"
+    },
     "translated_value_position_production": {
       "default": "Produkcja"
     },

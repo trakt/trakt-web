@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Skuespill"
     },
+    "translated_value_position_self": {
+      "default": "Seg selv"
+    },
+    "translated_value_position_narrator": {
+      "default": "Forteller"
+    },
     "translated_value_position_production": {
       "default": "Produksjon"
     },
