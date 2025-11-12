@@ -233,4 +233,9 @@ export const UrlBuilder = {
     general: () => '/settings',
     advanced: () => '/settings/advanced',
   },
+  external: {
+    imdb: {
+      person: (imdbId: string) => `https://www.imdb.com/name/${imdbId}`,
+    },
+  },
 };
