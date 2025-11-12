@@ -187,7 +187,12 @@
 
       &:global(.is-fullscreen),
       &[data-size="large"] {
-        --mobile-drawer-height: calc(100vh - env(safe-area-inset-top, 0px));
+        --inset-top: env(safe-area-inset-top, 0px);
+        --inset-bottom: env(safe-area-inset-bottom, 0px);
+
+        --mobile-drawer-height: calc(
+          100dvh - var(--inset-top) - var(--inset-bottom)
+        );
       }
     }
   }
