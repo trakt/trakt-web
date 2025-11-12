@@ -29,5 +29,9 @@ export function useCreditsList(
 
   return {
     credits: derived(query, ($query) => $query.data),
+    positions: derived(query, ($query) => {
+      if (!$query.data) return [];
+      return Array.from($query.data.keys());
+    }),
   };
 }

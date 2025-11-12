@@ -28,24 +28,25 @@ function mapToMediaEntry(entryResponse: EntryResponse) {
   return mapToShowEntry(entryResponse.show);
 }
 
-function mapToCrew(response: MediaCreditsResponse) {
-  const crewResponse = Object.entries<EntryResponse[]>(response.crew ?? {});
-
-  return crewResponse
-    .reduce((map, [position, entries]) => {
-      const mediaEntry = entries.map(mapToMediaEntry);
-      map.set(position as CrewPosition, mediaEntry);
-      return map;
-    }, new Map<CrewPosition, MediaEntry[]>());
-}
-
 export function mapToMediaCredits(
   response: MediaCreditsResponse,
 ): MediaCredits {
-  const castResponse = response.cast ?? [];
+  const credits = new Map<CrewPosition, MediaEntry[]>();
 
-  return {
-    cast: castResponse.map(mapToMediaEntry),
-    crew: mapToCrew(response),
-  };
+  const castResponse = response.cast ?? [];
+  if (castResponse.length > 0) {
+    credits.set('acting', castResponse.map(mapToMediaEntry));
+  }
+
+  const crewResponse = Object.entries<EntryResponse[]>(response.crew ?? {});
+  crewResponse.forEach(([position, entries]) => {
+    const mediaEntries = entries.map(mapToMediaEntry);
+    const existingEntries = credits.get(position as CrewPosition);
+    credits.set(
+      position as CrewPosition,
+      existingEntries ? [...existingEntries, ...mediaEntries] : mediaEntries,
+    );
+  });
+
+  return credits;
 }

@@ -24,31 +24,15 @@
 
   const currentPosition = writable<CrewPosition>(person.knownFor ?? "acting");
 
-  const { credits } = $derived(useCreditsList({ type, slug: person.slug }));
+  const { credits, positions } = $derived(
+    useCreditsList({ type, slug: person.slug }),
+  );
 
   const getPositionList = (mediaCredits?: MediaCredits) => {
     if (!mediaCredits) return [];
-
-    const mediaList =
-      $currentPosition === "acting"
-        ? mediaCredits.cast
-        : mediaCredits.crew?.get($currentPosition);
-
-    return mediaList ?? [];
+    return mediaCredits.get($currentPosition) ?? [];
   };
 
-  const getAvailablePositions = (mediaCredits?: MediaCredits) => {
-    if (!mediaCredits) return [];
-
-    const positions = Array.from(mediaCredits.crew?.keys() ?? []);
-    if (mediaCredits.cast?.length) {
-      positions.unshift("acting");
-    }
-
-    return positions;
-  };
-
-  const positions = $derived(getAvailablePositions($credits));
   const list = $derived(getPositionList($credits));
   const defaultVariant = $derived(useDefaultCardVariant(type));
 </script>
@@ -71,11 +55,11 @@
       variant="primary"
       color="blue"
       size="small"
-      disabled={positions.length <= 1}
+      disabled={$positions.length <= 1}
     >
       {toTranslatedValue("position", $currentPosition)}
       {#snippet items()}
-        {#each positions as position}
+        {#each $positions as position}
           <DropdownItem
             color="blue"
             onclick={() => currentPosition.set(position)}
