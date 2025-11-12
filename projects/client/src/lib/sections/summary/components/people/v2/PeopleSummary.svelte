@@ -7,8 +7,15 @@
   import SummaryOverview from "./../../summary/SummaryOverview.svelte";
   import ImdbLink from "./_internal/ImdbLink.svelte";
   import PersonTitle from "./_internal/PersonTitle.svelte";
+  import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
 
   const { person }: { person: PersonSummary } = $props();
+
+  const hasSocialMediaLinks = $derived(
+    person.socialMedia?.facebook ||
+      person.socialMedia?.x ||
+      person.socialMedia?.instagram,
+  );
 </script>
 
 {#snippet tags()}
@@ -32,6 +39,10 @@
 
   {#snippet meta()}
     <PersonTitle name={person.name} knownFor={person.knownFor} />
+
+    {#if hasSocialMediaLinks}
+      <SocialMediaLinks {person} />
+    {/if}
   {/snippet}
 
   <SummaryOverview title={person.name} overview={person.biography} />
