@@ -27,6 +27,7 @@ type ShareType = DrilldownType;
 type CoverImageType = { type: ExtendedMediaType };
 type DiscoverType = SourceType & { mode: DiscoverMode };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
+type LinkType = SourceType & { target: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -36,7 +37,7 @@ export type AnalyticsEventDataMap = {
 
   [AnalyticsEvent.Theme]: { theme: Theme };
   [AnalyticsEvent.Locale]: { locale: string };
-  [AnalyticsEvent.Link]: { target: string };
+  [AnalyticsEvent.Link]: LinkType;
   [AnalyticsEvent.Filter]: FilterType;
   [AnalyticsEvent.Filters]: FiltersType;
   [AnalyticsEvent.Drilldown]: DrilldownType;

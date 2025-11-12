@@ -3,6 +3,8 @@
   import FacebookIcon from "$lib/components/icons/FacebookIcon.svelte";
   import InstagramIcon from "$lib/components/icons/InstagramIcon.svelte";
   import XIcon from "$lib/components/icons/XIcon.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   const {
@@ -12,6 +14,8 @@
     username: string;
     type: "x" | "facebook" | "instagram";
   } = $props();
+
+  const { track } = useTrack(AnalyticsEvent.Link);
 
   const href = $derived.by(() => {
     switch (type) {
@@ -25,7 +29,13 @@
   });
 </script>
 
-<ActionButton {href} target="_blank" label={type} style="ghost">
+<ActionButton
+  {href}
+  target="_blank"
+  label={type}
+  style="ghost"
+  onclick={() => track({ target: type, source: "person-summary" })}
+>
   {#if type === "x"}
     <XIcon />
   {/if}
