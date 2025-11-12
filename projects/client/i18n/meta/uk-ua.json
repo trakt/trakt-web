@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Акторська гра"
     },
+    "translated_value_position_self": {
+      "default": "Сам"
+    },
+    "translated_value_position_narrator": {
+      "default": "Оповідач"
+    },
     "translated_value_position_production": {
       "default": "Виробництво"
     },

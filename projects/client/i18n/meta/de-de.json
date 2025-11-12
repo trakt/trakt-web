@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Schauspielerei"
     },
+    "translated_value_position_self": {
+      "default": "Selbst"
+    },
+    "translated_value_position_narrator": {
+      "default": "Erzähler"
+    },
     "translated_value_position_production": {
       "default": "Produktion"
     },

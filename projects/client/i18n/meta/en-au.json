@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Acting"
     },
+    "translated_value_position_self": {
+      "default": "Self"
+    },
+    "translated_value_position_narrator": {
+      "default": "Narrator"
+    },
     "translated_value_position_production": {
       "default": "Production"
     },

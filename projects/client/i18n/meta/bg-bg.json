@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Играейки"
     },
+    "translated_value_position_self": {
+      "default": "Себе си"
+    },
+    "translated_value_position_narrator": {
+      "default": "Разказвач"
+    },
     "translated_value_position_production": {
       "default": "Продукция"
     },

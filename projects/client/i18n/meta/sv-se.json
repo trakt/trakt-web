@@ -915,6 +915,12 @@
     "translated_value_position_acting": {
       "default": "Skådespeleri"
     },
+    "translated_value_position_self": {
+      "default": "Sig själv"
+    },
+    "translated_value_position_narrator": {
+      "default": "Berättare"
+    },
     "translated_value_position_production": {
       "default": "Produktion"
     },
