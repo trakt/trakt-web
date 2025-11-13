@@ -4,7 +4,7 @@ import { type Filter, FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
 import { STAR_RATINGS } from '$lib/sections/summary/components/rating/constants/index.ts';
-import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
+import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 import { GENRES } from './genres.ts';
 import { getRatingFilterRange } from './getRatingFilterRange.ts';
 
@@ -22,7 +22,7 @@ const GENRE_FILTER: Filter = {
     },
     ...GENRES
       .map((genre) => ({
-        label: toTranslatedValue('genre', genre),
+        label: toTranslatedGenre(genre),
         value: genre,
       }))
       .toSorted((a, b) => a.label.localeCompare(b.label, languageTag())),

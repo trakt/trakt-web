@@ -2,7 +2,7 @@
   import { GENRES } from "$lib/features/filters/_internal/genres";
   import * as m from "$lib/features/i18n/messages.ts";
   import ToggleTag from "$lib/sections/components/ToggleTag.svelte";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue.ts";
+  import { toTranslatedGenre } from "$lib/utils/formatting/string/toTranslatedGenre";
   import type { Genre } from "@trakt/api";
   import SettingsBlock from "./SettingsBlock.svelte";
   import { useSettings } from "./useSettings";
@@ -42,7 +42,7 @@
       <ToggleTag
         disabled={!isGenreSelectable(genre)}
         label={m.button_label_toggle_genre({
-          genre: toTranslatedValue("genre", genre),
+          genre: toTranslatedGenre(genre),
         })}
         onclick={() => toggleFavoriteGenre(genre)}
         isPressed={favorites.includes(genre)}

@@ -3,7 +3,7 @@
   import DropdownList from "$lib/components/dropdown/DropdownList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedLibrary } from "$lib/utils/formatting/string/toTranslatedLibrary";
 
   const {
     selectedLibrary,
@@ -26,11 +26,11 @@
   size="small"
   navigationType={DpadNavigationType.Item}
 >
-  {toTranslatedValue("library", selectedLibrary)}
+  {toTranslatedLibrary(selectedLibrary)}
   {#snippet items()}
     {#each libraries as library}
       <DropdownItem color="blue" onclick={() => onChange(library)}>
-        {toTranslatedValue("library", library)}
+        {toTranslatedLibrary(library)}
       </DropdownItem>
     {/each}
   {/snippet}

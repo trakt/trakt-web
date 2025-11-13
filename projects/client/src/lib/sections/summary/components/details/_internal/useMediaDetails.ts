@@ -15,7 +15,8 @@ import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toCountryName } from '$lib/utils/formatting/intl/toCountryName.ts';
 import { toLanguageName } from '$lib/utils/formatting/intl/toLanguageName.ts';
-import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
+import { toTranslatedJob } from '$lib/utils/formatting/string/toTranslatedJob.ts';
+import { toTranslatedStatus } from '$lib/utils/formatting/string/toTranslatedStatus.ts';
 import { UrlBuilder } from '$lib/utils/url/UrlBuilder.ts';
 import type { MediaDetailsProps } from '../MediaDetailsProps.ts';
 
@@ -47,7 +48,7 @@ function mediaStatus(media: MediaEntry) {
     title: m.header_status(),
     values: media.year && media.type === 'movie'
       ? undefined
-      : [toTranslatedValue('status', media.status)],
+      : [toTranslatedStatus(media.status)],
   };
 }
 
@@ -80,7 +81,7 @@ function postCredits(entry: MediaEntry | EpisodeEntry) {
 
 function mainCredits(type: ExtendedMediaType, crew: MediaCrew) {
   const toCrewMemberWithJob = (person: CrewMember) => {
-    const jobs = person.jobs.map((job) => toTranslatedValue('job', job));
+    const jobs = person.jobs.map((job) => toTranslatedJob(job));
     return {
       label: `${person.name} (${jobs.join(', ')})`,
       link: UrlBuilder.people(person.key),

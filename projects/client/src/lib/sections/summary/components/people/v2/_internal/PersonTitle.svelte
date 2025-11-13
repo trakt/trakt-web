@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
 
   const { name, knownFor }: { name: string; knownFor: string | Nil } = $props();
 </script>
@@ -11,7 +11,7 @@
 
   {#if knownFor}
     <p class="secondary smaller">
-      {toTranslatedValue("position", knownFor)}
+      {toTranslatedPosition(knownFor)}
     </p>
   {/if}
 </div>

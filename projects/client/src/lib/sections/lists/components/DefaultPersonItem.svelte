@@ -12,7 +12,7 @@
   import { getYearsDifference } from "$lib/utils/date/getYearsDifference";
   import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
   const {
@@ -52,7 +52,7 @@
     </p>
 
     {#if variant === "default" && person.knownFor}
-      {toTranslatedValue("position", person.knownFor)}
+      {toTranslatedPosition(person.knownFor)}
     {/if}
 
     {#if variant === "birthday" && person.birthday}

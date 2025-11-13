@@ -6,7 +6,7 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStatus } from "$lib/requests/models/MediaStatus";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
 
   const SEPARATOR = "•";
 
@@ -75,7 +75,7 @@
 
   {#if status}
     <p class="capitalize meta-info trakt-media-status">
-      {toTranslatedValue("status", status)}
+      {toTranslatedStatus(status)}
     </p>
   {/if}
 </div>
