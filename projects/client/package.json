@@ -38,7 +38,6 @@
     "@svelte-put/qr": "2.1.1",
     "@sveltejs/adapter-auto": "7.0.0",
     "@sveltejs/adapter-cloudflare": "7.2.4",
-    "@sveltejs/enhanced-img": "0.8.4",
     "@sveltejs/kit": "2.48.4",
     "@sveltejs/vite-plugin-svelte": "6.2.1",
     "@testing-library/jest-dom": "6.9.1",
