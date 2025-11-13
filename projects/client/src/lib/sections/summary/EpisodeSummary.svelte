@@ -43,31 +43,33 @@
   <EpisodeSummary {episode} {show} {showIntl} {episodeIntl} {streamOn} {crew} />
 </RenderFor>
 
-<RenderFor audience="authenticated" navigation="default">
-  <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
+<RenderFor audience="authenticated">
+  <RenderFor audience="authenticated" navigation="default">
+    <WhereToWatchList type="episode" {episode} media={show} {streamOn} />
+  </RenderFor>
+
+  <CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
+
+  <SeasonList {show} {seasons} currentSeason={episode.season} />
+
+  <Comments
+    media={show}
+    type="episode"
+    season={episode.season}
+    episode={episode.number}
+    id={episode.id}
+  />
+
+  <RelatedList
+    title={m.list_title_related_shows()}
+    slug={show.slug}
+    type="show"
+  />
+
+  <MediaWatchHistoryList
+    title={m.list_title_history()}
+    {episode}
+    {show}
+    type="episode"
+  />
 </RenderFor>
-
-<CastList title={m.list_title_actors()} cast={crew.cast} slug={show.slug} />
-
-<SeasonList {show} {seasons} currentSeason={episode.season} />
-
-<Comments
-  media={show}
-  type="episode"
-  season={episode.season}
-  episode={episode.number}
-  id={episode.id}
-/>
-
-<RelatedList
-  title={m.list_title_related_shows()}
-  slug={show.slug}
-  type="show"
-/>
-
-<MediaWatchHistoryList
-  title={m.list_title_history()}
-  {episode}
-  {show}
-  type="episode"
-/>

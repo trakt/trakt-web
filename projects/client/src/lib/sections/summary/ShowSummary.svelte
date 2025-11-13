@@ -65,27 +65,29 @@
   </MediaSummary>
 </RenderFor>
 
-<RenderFor audience="authenticated" navigation="default">
-  <WhereToWatchList type="show" {media} {streamOn} />
+<RenderFor audience="authenticated">
+  <RenderFor audience="authenticated" navigation="default">
+    <WhereToWatchList type="show" {media} {streamOn} />
+  </RenderFor>
+
+  <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
+
+  <VideoList slug={media.slug} {videos} />
+
+  <SeasonList show={media} {seasons} {currentSeason} />
+
+  <CommunitySentiments {sentiments} slug={media.slug} />
+
+  <Comments {media} type="show" />
+
+  <RelatedList
+    title={m.list_title_related_shows()}
+    slug={media.slug}
+    type="show"
+  />
+
+  <!-- TODO: move back to designed position when we have faster queries -->
+  <Lists slug={media.slug} title={media.title} type="show" />
+
+  <MediaWatchHistoryList title={m.list_title_history()} {media} type="show" />
 </RenderFor>
-
-<CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
-
-<VideoList slug={media.slug} {videos} />
-
-<SeasonList show={media} {seasons} {currentSeason} />
-
-<CommunitySentiments {sentiments} slug={media.slug} />
-
-<Comments {media} type="show" />
-
-<RelatedList
-  title={m.list_title_related_shows()}
-  slug={media.slug}
-  type="show"
-/>
-
-<!-- TODO: move back to designed position when we have faster queries -->
-<Lists slug={media.slug} title={media.title} type="show" />
-
-<MediaWatchHistoryList title={m.list_title_history()} {media} type="show" />
