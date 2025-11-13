@@ -1,5 +1,5 @@
+import { handleUnauthorized } from '$lib/features/auth/stores/handleUnauthorized.ts';
 import { getToken } from '$lib/features/auth/token/index.ts';
-
 import { error } from '$lib/utils/console/print.ts';
 import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
 import { getUserManager } from '../../features/auth/stores/userManager.ts';
@@ -7,7 +7,7 @@ import { getMarker } from '../../utils/date/Marker.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
 
-function shouldReloadPage(expiresAt: number | Nil) {
+function shouldRefreshLegacyAuth(expiresAt: number | Nil) {
   if (getUserManager()) {
     // FIXME: completely remove this refresh flow when fully switching to oidc-client-ts
     return false;
@@ -54,13 +54,43 @@ export function createAuthenticatedFetch<
           ...init,
           headers,
         } as Parameters<T>[1],
-      ).then((response) => {
-        if (response.status === 401 && shouldReloadPage(expiresAt)) {
+      ).then(async (response) => {
+        if (response.status === 401) {
+          if (shouldRefreshLegacyAuth(expiresAt)) {
+            safeSessionStorage.setItem(
+              SESSION_STORAGE_REFRESH_KEY,
+              'true',
+            );
+            globalThis.window.location.reload();
+          }
+
+          if (safeSessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY)) {
+            return response;
+          }
+
           safeSessionStorage.setItem(
             SESSION_STORAGE_REFRESH_KEY,
             'true',
           );
-          globalThis.window.location.reload();
+          const { isRefreshed } = await handleUnauthorized();
+
+          if (!isRefreshed) {
+            globalThis.window.location.reload();
+          }
+
+          const { value: newToken } = getToken();
+          if (newToken) {
+            safeSessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
+            headers.set('Authorization', `Bearer ${newToken}`);
+
+            return baseFetch(
+              input,
+              {
+                ...init,
+                headers,
+              } as Parameters<T>[1],
+            );
+          }
         }
 
         if (response.status !== 401) {
