@@ -1,11 +1,16 @@
 <script lang="ts">
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
-  import type { RatingsFilter } from "$lib/features/filters/models/Filter";
+  import { FILTERS } from "$lib/features/filters/_internal/constants";
+  import {
+    FilterKey,
+    type RatingsFilter,
+  } from "$lib/features/filters/models/Filter";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import RateActionButton from "$lib/sections/summary/components/rating/_internal/RateActionButton.svelte";
+  import RatingStars from "$lib/sections/summary/components/rating/_internal/RatingStars.svelte";
+  import { assertDefined } from "$lib/utils/assert/assertDefined";
   import Filter from "./_internal/Filter.svelte";
   import { useFilterSetter } from "./_internal/useFilterSetter";
 
@@ -16,10 +21,26 @@
 
   const currentValue = getFilterValue(filter.key);
 
-  const handler = (value: string | null) => {
+  const ratingsFilter = assertDefined(
+    FILTERS.find((filter) => filter.key === FilterKey.Ratings) as RatingsFilter,
+  );
+
+  const currentRating = $derived.by(() => {
+    const currentOption = ratingsFilter.options.find(
+      (option) => option.value === $currentValue,
+    );
+
+    return currentOption?.rating.value ?? 0;
+  });
+
+  const handler = (rating?: number) => {
+    const ratingOption = ratingsFilter.options.find(
+      (option) => option.rating.value === rating,
+    );
+
     gotoFilteredState({
       key: filter.key,
-      value,
+      value: ratingOption?.value ?? null,
     });
   };
 </script>
@@ -30,23 +51,18 @@
       color="red"
       variant="secondary"
       label={m.button_label_reset_filter()}
-      onclick={() => handler(null)}
+      onclick={() => handler()}
       style={$currentValue ? "flat" : "ghost"}
       size="small"
       navigationType={DpadNavigationType.Item}
     >
       <CloseIcon />
     </ActionButton>
-    {#each filter.options as option}
-      <RateActionButton
-        star={option.rating}
-        isCurrentRating={$currentValue === option.value}
-        isDisabled={$currentValue === option.value}
-        onAddRating={() => {
-          handler(option.value);
-        }}
-      />
-    {/each}
+    <RatingStars
+      rating={currentRating}
+      onAddRating={handler}
+      isRating={false}
+    />
   </div>
 </Filter>
 
