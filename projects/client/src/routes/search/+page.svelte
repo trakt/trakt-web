@@ -58,15 +58,19 @@
   };
 </script>
 
-<TraktPage audience="all" image={DEFAULT_SHARE_COVER} title={pageTitle}>
-  <RenderFor audience="all" device={["tablet-lg", "desktop"]}>
+<TraktPage
+  audience="authenticated"
+  image={DEFAULT_SHARE_COVER}
+  title={pageTitle}
+>
+  <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
     <div class="trakt-search-container">
       <SearchInput />
       <SearchModeToggles />
     </div>
   </RenderFor>
 
-  <RenderFor audience="all" device={["tablet-sm", "mobile"]}>
+  <RenderFor audience="authenticated" device={["tablet-sm", "mobile"]}>
     {#if isMobileApple}
       <div class="trakt-search-container">
         <SearchInput />

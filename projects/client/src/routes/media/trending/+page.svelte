@@ -9,7 +9,7 @@
 </script>
 
 <TraktPage
-  audience="all"
+  audience="authenticated"
   image={DEFAULT_SHARE_SHOW_COVER}
   title={m.page_title_trending_media()}
 >
