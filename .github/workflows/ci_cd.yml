@@ -147,7 +147,8 @@ jobs:
     needs: [test]
     if: |
       always() &&
-      needs.test.result == 'success'
+      needs.test.result == 'success' &&
+      github.ref == 'refs/heads/main'
 
     steps:
       - name: Secure the Evidence aka Checkout Code
