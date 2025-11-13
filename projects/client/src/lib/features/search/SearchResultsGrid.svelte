@@ -3,7 +3,7 @@
   import AirDateTag from "$lib/components/media/tags/AirDateTag.svelte";
   import DurationTag from "$lib/components/media/tags/DurationTag.svelte";
   import EpisodeCountTag from "$lib/components/media/tags/EpisodeCountTag.svelte";
-  import MediaTypeTag from "$lib/components/media/tags/MediaTypeTag.svelte";
+  import MediaIconTag from "$lib/components/media/tags/MediaIconTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import { type MediaInputDefault } from "$lib/models/MediaInput";
   import { type MediaEntry } from "$lib/requests/models/MediaEntry";
@@ -32,7 +32,7 @@
 
 {#snippet mediaTag(item: MediaInputDefault)}
   {#if $mode === "media"}
-    <MediaTypeTag i18n={TagIntlProvider} mediaType={item.type} type="text" />
+    <MediaIconTag mediaType={item.type} />
   {/if}
 
   <AirDateTag i18n={TagIntlProvider} airDate={item.airDate} />

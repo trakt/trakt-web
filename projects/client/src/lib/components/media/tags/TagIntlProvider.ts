@@ -7,7 +7,6 @@ import { toHumanDay } from '$lib/utils/formatting/date/toHumanDay.ts';
 import { toHumanETA } from '$lib/utils/formatting/date/toHumanETA.ts';
 import { toRelativeHumanDay } from '$lib/utils/formatting/date/toRelativeHumanDay.ts';
 import { toHumanNumber } from '$lib/utils/formatting/number/toHumanNumber.ts';
-import { toTranslatedValue } from '$lib/utils/formatting/string/toTranslatedValue.ts';
 import type { TagIntl } from './TagIntl.ts';
 
 export const TagIntlProvider: TagIntl = {
@@ -27,7 +26,6 @@ export const TagIntlProvider: TagIntl = {
     delta ? toHumanNumber(Math.abs(delta), languageTag()) : '—',
   postCredits: (count) =>
     `${m.header_post_credits()} · ${toHumanNumber(count, languageTag())}`,
-  mediaTypeLabel: (type) => toTranslatedValue('type', type),
   toDay: (date) => toHumanDay(date, getLocale()),
   watchedLabel: () => m.tag_text_watched(),
 };

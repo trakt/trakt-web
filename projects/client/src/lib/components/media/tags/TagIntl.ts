@@ -1,5 +1,3 @@
-import type { MediaType } from '$lib/requests/models/MediaType.ts';
-
 export type TagIntl = {
   toDuration: (duration: number) => string;
   toEpisodeCount: (count: number) => string;
@@ -12,7 +10,6 @@ export type TagIntl = {
   watchCountLabel: () => string;
   trendLabel: (delta: number) => string;
   postCredits: (count: number) => string;
-  mediaTypeLabel: (type: MediaType) => string;
   toDay: (date: Date) => string;
   watchedLabel: () => string;
 };
