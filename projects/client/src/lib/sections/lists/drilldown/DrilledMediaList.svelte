@@ -87,6 +87,14 @@
       return;
     }
 
+    if ($isEnabled) {
+      console.debug(
+        "[DrilledMediaList] Loading more",
+        $currentPage,
+        $page.total,
+      );
+    }
+
     const hasMorePages = ($page?.total ?? 1) > $currentPage;
     const isCurrentPageFetched =
       $loadedPages.get($page?.current ?? 1) !== undefined;
