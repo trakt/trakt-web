@@ -43,25 +43,27 @@
   <MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
 </RenderFor>
 
-<RenderFor audience="authenticated" navigation="default">
-  <WhereToWatchList type="movie" {media} {streamOn} />
+<RenderFor audience="authenticated">
+  <RenderFor audience="authenticated" navigation="default">
+    <WhereToWatchList type="movie" {media} {streamOn} />
+  </RenderFor>
+
+  <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
+
+  <VideoList slug={media.slug} {videos} />
+
+  <CommunitySentiments {sentiments} slug={media.slug} />
+
+  <Comments {media} type="movie" />
+
+  <RelatedList
+    title={m.list_title_related_movies()}
+    slug={media.slug}
+    type="movie"
+  />
+
+  <!-- TODO: move back to designed position when we have faster queries -->
+  <Lists slug={media.slug} title={media.title} type="movie" />
+
+  <MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />
 </RenderFor>
-
-<CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
-
-<VideoList slug={media.slug} {videos} />
-
-<CommunitySentiments {sentiments} slug={media.slug} />
-
-<Comments {media} type="movie" />
-
-<RelatedList
-  title={m.list_title_related_movies()}
-  slug={media.slug}
-  type="movie"
-/>
-
-<!-- TODO: move back to designed position when we have faster queries -->
-<Lists slug={media.slug} title={media.title} type="movie" />
-
-<MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />
