@@ -1,5 +1,4 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
-import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { Environment } from '@trakt/api';
@@ -82,7 +81,6 @@ export default defineConfig(({ mode }) => ({
   },
 
   plugins: [
-    enhancedImages(),
     sentrySvelteKit({
       sourceMapsUploadOptions: {
         org: 'trakt-tv',
