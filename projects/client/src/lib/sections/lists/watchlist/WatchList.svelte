@@ -36,7 +36,11 @@
   urlBuilder={() => UrlBuilder.lists.watchlist("me")}
 >
   {#snippet item(media)}
-    <WatchlistItem type={media.type} {media} />
+    <WatchlistItem
+      type={media.type}
+      {media}
+      mode={type === "media" ? "mixed" : "standalone"}
+    />
   {/snippet}
 
   {#snippet ctaItem()}
