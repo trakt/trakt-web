@@ -5,7 +5,7 @@
   import Steps from "./components/Steps.svelte";
   import TraktApps from "./components/TraktApps.svelte";
 
-  import popcorn from "./assets/popcorn.png?enhanced";
+  import popcorn from "./assets/popcorn.png";
 </script>
 
 <div class="trakt-landing">
@@ -23,7 +23,7 @@
   <TraktApps />
 
   <!-- svelte-ignore a11y_img_redundant_alt -->
-  <enhanced:img src={popcorn} class="trakt-popcorn" alt="Popcorn image" />
+  <img src={popcorn} class="trakt-popcorn" alt="Popcorn image" />
 </div>
 
 <style>

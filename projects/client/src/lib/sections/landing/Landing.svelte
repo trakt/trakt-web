@@ -12,7 +12,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import AppStoreBadge from "./assets/AppStoreBadge.svelte";
   import GooglePlayBadge from "./assets/GooglePlayBadge.svelte";
-  import popcorn from "./assets/popcorn.png?enhanced";
+  import popcorn from "./assets/popcorn.png";
   import ExploreLabels from "./components/ExploreLabels.svelte";
   import LandingColumns from "./components/LandingColumns.svelte";
   import TrendingItems from "./components/TrendingItems.svelte";
@@ -65,7 +65,7 @@
   </LandingColumns>
 
   <!-- svelte-ignore a11y_img_redundant_alt -->
-  <enhanced:img src={popcorn} class="trakt-popcorn" alt="Popcorn image" />
+  <img src={popcorn} class="trakt-popcorn" alt="Popcorn image" />
 </div>
 
 <style lang="scss">
