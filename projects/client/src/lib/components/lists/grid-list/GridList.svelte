@@ -30,6 +30,11 @@
   onMount(() => {
     isMounted.set(true);
   });
+
+  const uniqueItems = $derived.by(() => {
+    const seenKeys = new Set<string>();
+    return items.filter(({ key }) => !seenKeys.has(key) && seenKeys.add(key));
+  });
 </script>
 
 <section class="trakt-grid-list-container">
@@ -37,9 +42,9 @@
     <ListHeader {title} {metaInfo} {actions} {badge} inset="all" />
   {/if}
 
-  {#if items.length > 0}
+  {#if uniqueItems.length > 0}
     <div class="trakt-list-item-container trakt-list-items" use:customAction>
-      {#each items as i (i.key)}
+      {#each uniqueItems as i (i.key)}
         {@render item(i)}
       {/each}
     </div>
