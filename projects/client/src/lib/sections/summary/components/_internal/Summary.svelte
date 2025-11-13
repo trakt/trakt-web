@@ -46,17 +46,9 @@
   }
 
   .trakt-summary-main {
-    --side-action-bar-width: var(--ni-40);
-    --summary-gap: var(--gap-s);
-    --poster-side-distance: calc(
-      var(--layout-distance-side) + var(--side-action-bar-width) +
-        var(--summary-gap)
-    );
-    --poster-width: calc(100dvw - 2 * var(--poster-side-distance));
-
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    gap: var(--summary-gap);
+    gap: var(--summary-poster-gap);
 
     :global(.trakt-summary-poster-container) {
       grid-column-start: 2;
@@ -64,8 +56,8 @@
 
     :global(.trakt-summary-poster-container),
     :global(.trakt-summary-poster img) {
-      width: var(--poster-width);
-      height: calc(var(--poster-width) * 1.5);
+      width: var(--summary-poster-width);
+      height: calc(var(--summary-poster-width) * 1.5);
     }
 
     :global(.trakt-summary-poster img) {

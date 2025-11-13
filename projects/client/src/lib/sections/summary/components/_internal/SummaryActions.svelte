@@ -25,7 +25,7 @@
     position: relative;
 
     height: var(--ni-56);
-    width: var(--ni-320);
+    width: var(--summary-poster-width);
 
     padding: var(--ni-8) var(--ni-10);
     box-sizing: border-box;
