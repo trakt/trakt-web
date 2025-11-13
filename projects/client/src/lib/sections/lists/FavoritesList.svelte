@@ -54,6 +54,7 @@
       type={media.item.type}
       media={media.item}
       source="favorites"
+      mode={!type ? "mixed" : "standalone"}
     >
       {#snippet popupActions()}
         <FavoriteAction
