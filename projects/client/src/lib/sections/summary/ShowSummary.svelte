@@ -70,15 +70,15 @@
     <WhereToWatchList type="show" {media} {streamOn} />
   </RenderFor>
 
+  <CommunitySentiments {sentiments} slug={media.slug} />
+
+  <Comments {media} type="show" />
+
   <CastList title={m.list_title_actors()} cast={crew.cast} slug={media.slug} />
 
   <VideoList slug={media.slug} {videos} />
 
   <SeasonList show={media} {seasons} {currentSeason} />
-
-  <CommunitySentiments {sentiments} slug={media.slug} />
-
-  <Comments {media} type="show" />
 
   <RelatedList
     title={m.list_title_related_shows()}
