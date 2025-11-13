@@ -42,23 +42,26 @@ export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
   }
 
   onMount(() => {
+    const debouncedLoadOnResize = debounce(loadMoreOnResize, time.fps(10));
+    const debouncedLoadOnScroll = debounce(loadMoreOnScroll, time.fps(10));
+
     const unSubscribeObservedDimension = observedDimension.subscribe(
       (dimension) => {
         if (dimension === 0) {
           return;
         }
-        debounce(loadMoreOnResize, time.fps(10))();
+        debouncedLoadOnResize();
       },
     );
 
     const unregisterScroll = GlobalEventBus.getInstance().register(
       'scroll',
-      () => debounce(loadMoreOnScroll, time.fps(10))(),
+      () => debouncedLoadOnScroll(),
     );
 
     const unregisterResize = GlobalEventBus.getInstance().register(
       'resize',
-      () => debounce(loadMoreOnResize, time.fps(10))(),
+      () => debouncedLoadOnResize(),
     );
 
     return () => {
