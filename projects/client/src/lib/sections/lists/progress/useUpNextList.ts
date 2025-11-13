@@ -12,9 +12,6 @@ import {
 } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
-import { FeatureFlag } from '../../../features/feature-flag/models/FeatureFlag.ts';
-import { useFeatureFlag } from '../../../features/feature-flag/useFeatureFlag.ts';
 import { mediaProgressQuery } from '../../../requests/queries/sync/mediaProgressQuery.ts';
 
 const RELEASED_LIST_LIMIT = 500;
@@ -48,20 +45,5 @@ function typeToQuery(props: UpNextStoreProps) {
 export function useUpNextList(
   props: UpNextStoreProps,
 ) {
-  const { isEnabled } = useFeatureFlag(FeatureFlag.Debug);
-  const { list, page, isLoading } = usePaginatedListQuery(typeToQuery(props));
-
-  return {
-    list: derived([list, isEnabled], ([$list, $isEnabled]) => {
-      if ($isEnabled) {
-        console.debug(
-          `[useUpNextList] New items received for ${props.type}:`,
-          $list,
-        );
-      }
-      return $list;
-    }),
-    page,
-    isLoading,
-  };
+  return usePaginatedListQuery(typeToQuery(props));
 }
