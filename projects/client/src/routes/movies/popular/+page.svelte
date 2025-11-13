@@ -9,7 +9,7 @@
 </script>
 
 <TraktPage
-  audience="all"
+  audience="authenticated"
   image={DEFAULT_SHARE_MOVIE_COVER}
   title={m.page_title_popular_movies()}
 >
