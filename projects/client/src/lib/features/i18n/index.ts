@@ -1,5 +1,10 @@
 import type { Locale } from '$lib/paraglide/runtime.js';
-import * as runtime from '$lib/paraglide/runtime.js';
+import {
+  baseLocale,
+  getLocale as _getLocale,
+  locales,
+  setLocale as _setLocale,
+} from '$lib/paraglide/runtime.js';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { resolveAcceptLanguage } from 'resolve-accept-language';
 
@@ -15,8 +20,8 @@ export type AvailableLocale = Locale;
 export type AvailableLanguage = ExtractLanguage<AvailableLocale>;
 export type AvailableRegion = ExtractRegion<AvailableLocale>;
 
-export const availableLocales = runtime.locales;
-export const defaultLocale = runtime.baseLocale;
+export const availableLocales = locales;
+export const defaultLocale = baseLocale;
 
 function sanitizeLocale(locale: string): AvailableLocale {
   return availableLocales.includes(locale as AvailableLocale)
@@ -46,11 +51,11 @@ function splitLanguageTag(languageTag: Locale): {
 }
 
 export function getLanguageAndRegion() {
-  return splitLanguageTag(runtime.getLocale());
+  return splitLanguageTag(getLocale());
 }
 
 export function getLocale() {
-  return runtime.getLocale();
+  return _getLocale();
 }
 
 export function languageTag() {
@@ -60,7 +65,7 @@ export function languageTag() {
 export const setLocale = (locale: string): AvailableLocale => {
   const sanitizedLocale = sanitizeLocale(locale);
 
-  runtime.setLocale(sanitizedLocale, { reload: false });
+  _setLocale(sanitizedLocale, { reload: false });
   return sanitizedLocale;
 };
 
