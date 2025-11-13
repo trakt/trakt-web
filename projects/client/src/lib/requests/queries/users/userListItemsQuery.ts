@@ -57,7 +57,6 @@ const userListItemsRequest = (
         extended: 'full,images,colors',
         page,
         limit,
-        sort_by: 'rank',
         ...filter,
       },
     });
