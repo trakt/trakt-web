@@ -55,6 +55,8 @@
   @use "../_internal/gap" as *;
 
   .trakt-grid-list-container {
+    contain: layout;
+
     overflow-x: hidden;
     display: flex;
     flex-direction: column;

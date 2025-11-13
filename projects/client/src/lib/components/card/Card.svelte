@@ -41,9 +41,14 @@
   .trakt-card {
     all: unset;
 
+    contain: content;
+    content-visibility: auto;
+
     position: relative;
 
+    contain-intrinsic-width: var(--width-override-card, var(--width-card));
     min-width: var(--width-override-card, var(--width-card));
+    contain-intrinsic-height: var(--height-override-card, var(--height-card));
     min-height: var(--height-override-card, var(--height-card));
   }
 

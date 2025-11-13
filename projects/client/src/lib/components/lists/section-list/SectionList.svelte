@@ -148,6 +148,9 @@
       var(--height-list) + var(--ni-40) + var(--list-header-gap)
     );
 
+    contain: layout;
+    content-visibility: auto;
+
     display: flex;
     flex-direction: column;
 

@@ -80,6 +80,8 @@
 
   .trakt-mobile-navbar-spacer,
   .trakt-mobile-navbar {
+    contain: layout;
+
     padding: var(--ni-12) 0;
     padding-bottom: calc(var(--ni-12) + env(safe-area-inset-bottom, 0));
     height: var(--mobile-navbar-height);

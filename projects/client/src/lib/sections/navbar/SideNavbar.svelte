@@ -181,6 +181,8 @@
   }
 
   .trakt-side-navbar {
+    contain: layout;
+
     z-index: var(--layer-overlay);
     position: fixed;
     top: 0;
