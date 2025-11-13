@@ -16,6 +16,8 @@
 
     gap: var(--gap-s);
 
+    width: var(--summary-side-action-bar-width);
+
     :global(.trakt-action-button) {
       background: transparent;
       backdrop-filter: none;
