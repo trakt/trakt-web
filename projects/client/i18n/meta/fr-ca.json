@@ -2203,7 +2203,7 @@
       "default": "Historique"
     },
     "text_directed_by": {
-      "default": "Réalisé par {name}",
+      "default": "Réalisé par <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Créé par {name}",
+      "default": "Créé par <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

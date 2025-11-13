@@ -2203,7 +2203,7 @@
       "default": "Cronologia"
     },
     "text_directed_by": {
-      "default": "Diretto da {name}",
+      "default": "Regia di <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Creata da {name}",
+      "default": "Creata da <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

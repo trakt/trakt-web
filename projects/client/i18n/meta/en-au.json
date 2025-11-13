@@ -2203,7 +2203,7 @@
       "default": "History"
     },
     "text_directed_by": {
-      "default": "Directed by {name}",
+      "default": "Directed by <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Created by {name}",
+      "default": "Created by <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
