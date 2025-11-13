@@ -2203,7 +2203,7 @@
       "default": "История"
     },
     "text_directed_by": {
-      "default": "Режисьор: {name}",
+      "default": "Режисьор: <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Създадено от {name}",
+      "default": "Създадено от <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

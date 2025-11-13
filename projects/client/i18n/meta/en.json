@@ -5956,7 +5956,7 @@
       ]
     },
     "text_directed_by": {
-      "default": "Directed by {name}",
+      "default": "Directed by <a>{name}</a>",
       "description": "Text to indicate the director of a movie.",
       "variables": {
         "name": {
@@ -5969,7 +5969,7 @@
       ]
     },
     "text_created_by": {
-      "default": "Created by {name}",
+      "default": "Created by <a>{name}</a>",
       "description": "Text to indicate the creator of a show.",
       "variables": {
         "name": {

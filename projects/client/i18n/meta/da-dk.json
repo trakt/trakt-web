@@ -2203,7 +2203,7 @@
       "default": "Historik"
     },
     "text_directed_by": {
-      "default": "Instrueret af {name}",
+      "default": "Instrueret af <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Skabt af {name}",
+      "default": "Skabt af <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

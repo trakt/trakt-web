@@ -2203,7 +2203,7 @@
       "default": "履歴"
     },
     "text_directed_by": {
-      "default": "{name} 監督",
+      "default": "<a>{name}</a> 監督",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "{name} 制作",
+      "default": "<a>{name}</a> 制作",
       "variables": {
         "name": {
           "type": "string"

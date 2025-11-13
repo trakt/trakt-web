@@ -2203,7 +2203,7 @@
       "default": "Geschiedenis"
     },
     "text_directed_by": {
-      "default": "Geregisseerd door {name}",
+      "default": "Geregisseerd door <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Gemaakt door {name}",
+      "default": "Gemaakt door <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

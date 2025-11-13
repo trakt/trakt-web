@@ -2203,7 +2203,7 @@
       "default": "Historikk"
     },
     "text_directed_by": {
-      "default": "Regissert av {name}",
+      "default": "Regi: <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Skapt av {name}",
+      "default": "Laget av <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

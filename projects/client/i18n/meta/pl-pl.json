@@ -2203,7 +2203,7 @@
       "default": "Historia"
     },
     "text_directed_by": {
-      "default": "Reżyseria: {name}",
+      "default": "Reżyseria: <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Stworzone przez {name}",
+      "default": "Stworzone przez <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

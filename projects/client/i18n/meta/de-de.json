@@ -2203,7 +2203,7 @@
       "default": "Verlauf"
     },
     "text_directed_by": {
-      "default": "Regie: {name}",
+      "default": "Regie: <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Erstellt von {name}",
+      "default": "Erstellt von <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"

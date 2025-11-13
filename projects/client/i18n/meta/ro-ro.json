@@ -2203,7 +2203,7 @@
       "default": "Istoric"
     },
     "text_directed_by": {
-      "default": "Regizat de {name}",
+      "default": "Regizat de <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
@@ -2211,7 +2211,7 @@
       }
     },
     "text_created_by": {
-      "default": "Creat de {name}",
+      "default": "Creat de <a>{name}</a>",
       "variables": {
         "name": {
           "type": "string"
