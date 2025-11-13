@@ -27,7 +27,7 @@
 </script>
 
 <TraktPage
-  audience="authenticated"
+  audience="all"
   image={DEFAULT_SHARE_SHOW_COVER}
   title={m.page_title_discover()}
 >
