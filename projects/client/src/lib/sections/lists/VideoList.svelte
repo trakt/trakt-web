@@ -5,7 +5,7 @@
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedVideoType } from "$lib/utils/formatting/string/toTranslatedVideoType";
   import { writable } from "svelte/store";
   import VideoItem from "./components/VideoItem.svelte";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -62,11 +62,11 @@
           size="small"
           navigationType={DpadNavigationType.Item}
         >
-          {toTranslatedValue("video_type", $active)}
+          {toTranslatedVideoType($active)}
           {#snippet items()}
             {#each types as type}
               <DropdownItem color="blue" onclick={() => active.set(type)}>
-                {toTranslatedValue("video_type", type)}
+                {toTranslatedVideoType(type)}
               </DropdownItem>
             {/each}
           {/snippet}

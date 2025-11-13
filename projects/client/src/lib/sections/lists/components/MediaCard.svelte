@@ -14,7 +14,7 @@
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CardActionBar from "../../../components/card/CardActionBar.svelte";
@@ -106,7 +106,7 @@
       </Link>
       <p class="trakt-card-subtitle small ellipsis">
         {#if variant === "activity"}
-          {toTranslatedValue("type", media.type)}
+          {toTranslatedType(media.type)}
         {:else}
           {toHumanDuration({ minutes: media.runtime }, languageTag())}
         {/if}

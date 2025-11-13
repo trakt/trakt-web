@@ -8,7 +8,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
   import { writable } from "svelte/store";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
@@ -57,14 +57,14 @@
       size="small"
       disabled={$positions.length <= 1}
     >
-      {toTranslatedValue("position", $currentPosition)}
+      {toTranslatedPosition($currentPosition)}
       {#snippet items()}
         {#each $positions as position}
           <DropdownItem
             color="blue"
             onclick={() => currentPosition.set(position)}
           >
-            {toTranslatedValue("position", position)}
+            {toTranslatedPosition(position)}
           </DropdownItem>
         {/each}
       {/snippet}

@@ -14,7 +14,7 @@
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
-  import { toTranslatedValue } from "$lib/utils/formatting/string/toTranslatedValue";
+  import { toTranslatedType } from "$lib/utils/formatting/string/toTranslatedType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { AnalyticsEvent } from "../analytics/events/AnalyticsEvent";
   import { useTrack } from "../analytics/useTrack";
@@ -87,7 +87,7 @@
       </p>
     </Link>
     <p class="trakt-card-subtitle ellipsis small">
-      {toTranslatedValue("type", media.type)}
+      {toTranslatedType(media.type)}
     </p>
   </CardFooter>
 </LandscapeCard>

@@ -2,13 +2,13 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import PostMessageIcon from "$lib/components/icons/PostMessageIcon.svelte";
   import { NOOP_FN } from "$lib/utils/constants";
+  import { toTranslatedErrorComment } from "$lib/utils/formatting/string/toTranslatedErrorComment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
   import type { ActiveComment } from "../models/ActiveComment";
   import { autoResizeArea as autoResizeAreaFn } from "./autoResizeArea";
   import CommentError from "./CommentError.svelte";
   import SpoilerSwitch from "./SpoilerSwitch.svelte";
-  import { toTranslatedError } from "./toTranslatedError";
   import { useContentObserver } from "./useContentObserver";
   import { usePostComment, type UseAddCommentProps } from "./usePostComment";
 
@@ -88,7 +88,7 @@
   </div>
   {#if $error}
     <CommentError
-      message={toTranslatedError($error)}
+      message={toTranslatedErrorComment($error)}
       onDismiss={() => error.set(null)}
     />
   {/if}
