@@ -44,6 +44,7 @@ module.exports = {
         'coming-soon',
         'comment',
         'contrib',
+        'cookie',
         'cover',
         'credits',
         'cta',

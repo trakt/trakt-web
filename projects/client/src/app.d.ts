@@ -3,6 +3,7 @@
 /// <reference lib="dom" />
 /// <reference types="plyr" />
 
+import type { CookieConsent } from '$lib/features/cookie-consent/models/CookieConsent.ts';
 import { Environment } from '@trakt/api';
 import type { Observable } from 'rxjs';
 import type { Readable } from 'svelte/store';
@@ -192,7 +193,7 @@ declare global {
       auth:
         | import('$lib/features/auth/models/SerializedAuthResponse').SerializedAuthResponse
         | Nil;
-      hasConsent: boolean;
+      cookieConsent: CookieConsent;
       oidcAuth:
         | import('$lib/features/auth/models/OidcAuthToken').OidcAuthToken
         | Nil;

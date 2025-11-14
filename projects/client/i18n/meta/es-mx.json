@@ -1288,10 +1288,16 @@
       "default": "Trakt usa C🍪🍪KIES para mejorar tu experiencia. Puedes <a>leer más información</a> aquí."
     },
     "button_text_cookie_accept": {
-      "default": "¡Va, vamos!"
+      "default": "Aceptar todo"
     },
     "button_label_cookie_accept": {
-      "default": "¡Entendido, ¡vamos!"
+      "default": "Aceptar todas las galletas"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Solo funcionales"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Aceptar solo las galletas funcionales"
     },
     "page_title_year_to_date": {
       "default": "Año hasta la fecha"

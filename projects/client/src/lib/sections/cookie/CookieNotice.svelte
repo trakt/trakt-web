@@ -3,22 +3,32 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
   import { CookieConsentEndpoint } from "$lib/features/cookie-consent/CookieConsentEndpoint";
+  import type { CookieConsent } from "$lib/features/cookie-consent/models/CookieConsent";
   import { useCookieConsent } from "$lib/features/cookie-consent/useCookieConsent";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { WorkerMessage } from "$worker/WorkerMessage";
+  import { workerRequest } from "$worker/workerRequest";
   import { fade, slide } from "svelte/transition";
 
   const NOTICE_TRANSITION_DURATION = 150;
 
-  const { hasConsent, setConsent } = useCookieConsent();
+  const { consent, setConsent } = useCookieConsent();
 
-  const consent = async () => {
-    await fetch(CookieConsentEndpoint.Consent, { method: "PUT" });
-    setConsent(true);
+  const giveConsent = async (value: CookieConsent) => {
+    setConsent(value);
+
+    await fetch(CookieConsentEndpoint.Consent, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ consent: value }),
+    });
+
+    await workerRequest(WorkerMessage.CacheBust);
   };
 </script>
 
-{#if !$hasConsent}
+{#if !$consent || $consent === "none"}
   <div
     class="trakt-cookie-underlay"
     transition:fade={{ duration: NOTICE_TRANSITION_DURATION }}
@@ -35,16 +45,27 @@
         target="_blank"
       />
     </p>
-    <Button
-      color="default"
-      variant="secondary"
-      size="small"
-      label={m.button_label_cookie_accept()}
-      onclick={consent}
-      data-testid={TestId.ConsentButton}
-    >
-      {m.button_text_cookie_accept()}
-    </Button>
+    <div class="trakt-cookie-actions">
+      <Button
+        color="default"
+        variant="primary"
+        size="small"
+        label={m.button_label_cookie_accept_functional_only()}
+        onclick={() => giveConsent("functional")}
+      >
+        {m.button_text_cookie_accept_functional_only()}
+      </Button>
+      <Button
+        color="purple"
+        variant="primary"
+        size="small"
+        label={m.button_label_cookie_accept()}
+        onclick={() => giveConsent("all")}
+        data-testid={TestId.ConsentButton}
+      >
+        {m.button_text_cookie_accept()}
+      </Button>
+    </div>
   </div>
 {/if}
 
@@ -110,6 +131,17 @@
         left: calc(50% - var(--cookie-half-size));
         top: calc(-1 * var(--cookie-half-size));
       }
+    }
+  }
+
+  .trakt-cookie-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
+
+    @include for-mobile {
+      align-items: normal;
+      flex-direction: column-reverse;
     }
   }
 

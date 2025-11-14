@@ -1,16 +1,17 @@
 <script lang="ts">
   import type { DeviceType } from "$lib/models/DeviceType";
   import CookieNotice from "$lib/sections/cookie/CookieNotice.svelte";
+  import type { CookieConsent } from "./models/CookieConsent";
   import { useCookieConsent } from "./useCookieConsent";
 
   const {
-    hasConsent,
+    consent,
     device,
     children,
-  }: { hasConsent: boolean; device: DeviceType } & ChildrenProps = $props();
+  }: { consent: CookieConsent; device: DeviceType } & ChildrenProps = $props();
 
   const { setConsent } = useCookieConsent();
-  setConsent(hasConsent);
+  setConsent(consent);
 </script>
 
 {@render children()}

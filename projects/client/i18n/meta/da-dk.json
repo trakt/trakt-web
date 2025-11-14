@@ -1288,10 +1288,16 @@
       "default": "Trakt bruger C🍪🍪KIES for at forbedre din samlede oplevelse. Du kan <a>læse mere information</a> her."
     },
     "button_text_cookie_accept": {
-      "default": "Okay, lad os komme i gang!"
+      "default": "Accepter alle"
     },
     "button_label_cookie_accept": {
-      "default": "Forstået, lad os komme i gang!"
+      "default": "Accepter alle cookies"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Kun funktionelle"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Accepter kun funktionelle cookies"
     },
     "page_title_year_to_date": {
       "default": "År til dato"

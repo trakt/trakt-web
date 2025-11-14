@@ -40,7 +40,7 @@ export const load: LayoutServerLoad = (
     oidcAuth: getAuth(locals.oidcAuth),
     isBot: isBotAgent(request.headers.get('user-agent')),
     device: getDeviceType(request.headers.get('user-agent')),
-    hasConsent: locals.hasConsent,
+    cookieConsent: locals.cookieConsent,
     typesense: locals.typesense,
   };
 

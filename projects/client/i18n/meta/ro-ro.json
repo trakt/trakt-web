@@ -1288,10 +1288,16 @@
       "default": "Trakt folosește C🍪🍪KIES pentru a-ți îmbunătăți experiența. Poți <a>citi mai multe informații</a> aici."
     },
     "button_text_cookie_accept": {
-      "default": "Am înțeles, hai!"
+      "default": "Acceptă tot"
     },
     "button_label_cookie_accept": {
-      "default": "Am înțeles!"
+      "default": "Acceptă toate cookie-urile"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Doar funcționale"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Acceptă doar cookie-urile funcționale"
     },
     "page_title_year_to_date": {
       "default": "Anul curent"
