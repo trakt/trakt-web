@@ -8,7 +8,7 @@
   type PageListProps<T> = Omit<ListProps<T>, "title"> & {
     empty?: Snippet;
     title?: string;
-    metaInfo?: string;
+    metaInfo?: Snippet;
     dimensionObserver?: (node: HTMLElement) => void;
   };
 

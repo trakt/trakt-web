@@ -4,6 +4,7 @@
   import { useToggler } from "$lib/components/toggles/useToggler";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { useFollowing } from "../stores/useFollowing";
   import ProfileItem from "./ProfileItem.svelte";
@@ -26,13 +27,17 @@
   const { isMe } = $derived(useIsMe(slug));
 </script>
 
+{#snippet metaInfo()}
+  <ListMetaInfo text={$current.text()} />
+{/snippet}
+
 <div class="trakt-profiles-list">
   <SectionList
     id={`profiles-list-${slug}-${$current.value}`}
     items={$profiles}
     title={m.list_title_social()}
     --height-list="var(--height-profile-list)"
-    metaInfo={$current.text()}
+    {metaInfo}
   >
     {#snippet empty()}
       {#if !$isLoading}

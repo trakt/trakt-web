@@ -4,6 +4,7 @@
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
   import { writable } from "svelte/store";
@@ -38,13 +39,17 @@
   };
 </script>
 
+{#snippet metaInfo()}
+  <ListMetaInfo text={$sortType.text()} />
+{/snippet}
+
 <RenderFor audience="all" navigation="default">
   <SectionList
     id={`comments-list-${media.slug}-${$sortType.value}`}
     items={$comments}
     title={m.list_title_comments()}
     --height-list="var(--height-comments-list)"
-    metaInfo={$sortType.text()}
+    {metaInfo}
   >
     {#snippet item(comment)}
       <CommentCard {comment} {media} {onDrilldown} type={props.type} />

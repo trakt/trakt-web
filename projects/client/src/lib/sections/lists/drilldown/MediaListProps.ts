@@ -12,7 +12,7 @@ export type MediaListProps<T, M> = {
   actions?: Snippet<[T[], M]>;
   empty?: Snippet;
   badge?: Snippet;
-  metaInfo?: string;
+  metaInfo?: Snippet;
   drilldownLink?: string;
   variant?: 'portrait' | 'landscape';
 } & FilterParams;
