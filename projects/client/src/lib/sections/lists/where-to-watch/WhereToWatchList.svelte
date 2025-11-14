@@ -4,6 +4,7 @@
   import type { StreamOn } from "$lib/requests/models/StreamOn";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { slide } from "svelte/transition";
+  import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
   import { useWhereToWatch } from "./_internal/useWhereToWatch";
   import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
 
@@ -18,11 +19,16 @@
 </script>
 
 {#if $services.length > 0}
+  {#snippet metaInfo()}
+    <JustWatchInfo {...target} />
+  {/snippet}
+
   <div transition:slide={{ duration: 150 }}>
     <SectionList
       id={`where-to-watch-${target.media.slug}`}
       items={$services}
       title={m.list_title_where_to_watch()}
+      {metaInfo}
       --height-list="var(--height-where-to-watch-list)"
     >
       {#snippet item(service)}
