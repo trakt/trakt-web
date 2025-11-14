@@ -6,29 +6,33 @@
     actions,
     seasonalActions,
     contextualActions,
+    toastActions,
     mode,
     hasFilters,
   }: {
     actions?: Snippet;
     seasonalActions?: Snippet;
-    /**
-     * FIXME: for now the contextual actions only set the mobile navbar's contextual actions.
-     * In case of desktop, this should trigger the toast instead.
-     */
     contextualActions?: Snippet;
+    toastActions?: Snippet | Nil;
     mode?: NavbarMode;
     hasFilters?: boolean;
   } = $props();
 
-  const { set, reset } = useNavbarState();
+  const { set, globalSet, reset } = useNavbarState();
 
   $effect(() => {
     set({
       actions,
       seasonalActions,
       contextualActions,
-      mode,
       hasFilters,
+    });
+  });
+
+  $effect(() => {
+    globalSet({
+      ...(toastActions !== undefined && { toastActions }),
+      ...(mode !== undefined && { mode }),
     });
   });
 

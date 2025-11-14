@@ -16,6 +16,7 @@
   import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
+  import Toast from "../toast/Toast.svelte";
   import BetaBadge from "./components/BetaBadge.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
@@ -43,6 +44,16 @@
       {@render $state.actions?.()}
       {@render $state.seasonalActions?.()}
     </div>
+  {/if}
+
+  {#if $state.toastActions || $state.contextualActions}
+    <Toast>
+      {#if $state.contextualActions}
+        {@render $state.contextualActions()}
+      {:else}
+        {@render $state.toastActions?.()}
+      {/if}
+    </Toast>
   {/if}
 
   <header>

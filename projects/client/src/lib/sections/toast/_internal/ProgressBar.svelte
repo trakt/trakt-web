@@ -15,6 +15,7 @@
 
     position: relative;
     display: flex;
+    overflow: hidden;
 
     box-sizing: border-box;
 
