@@ -1288,10 +1288,16 @@
       "default": "Trakt verwendet C🍪🍪KIES, um Ihr Gesamterlebnis zu verbessern. Sie können <a>hier mehr Informationen lesen</a>."
     },
     "button_text_cookie_accept": {
-      "default": "Verstanden, los geht's!"
+      "default": "Alle akzeptieren"
     },
     "button_label_cookie_accept": {
-      "default": "Verstanden, los geht's!"
+      "default": "Alle Cookies akzeptieren"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Nur funktional"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Nur funktionale Cookies akzeptieren"
     },
     "page_title_year_to_date": {
       "default": "Bisheriges Jahr"

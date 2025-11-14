@@ -3,42 +3,50 @@ import type { Handle } from '@sveltejs/kit';
 import { IS_PROD } from '../../utils/env/index.ts';
 import { CookieConsentEndpoint } from './CookieConsentEndpoint.ts';
 import { getConsentCookieValue } from './_internal/getConsentCookieValue.ts';
+import { mapToConsent } from './_internal/mapToConsent.ts';
 import { COOKIE_CONSENT_COOKIE_NAME } from './constants.ts';
+import type { CookieConsent } from './models/CookieConsent.ts';
 
 const ROOT_DOMAIN = 'trakt.tv';
 const LEGACY_COOKIE_CONSENT_COOKIE_NAME = 'trakt-consent';
 
 function coerceLegacyCookieConsent(
   cookieConsent: string | undefined,
-): boolean {
-  return JSON.parse(cookieConsent ?? 'false');
+): CookieConsent | undefined {
+  if (!cookieConsent) {
+    return;
+  }
+
+  const hasConsent = JSON.parse(cookieConsent ?? 'false');
+  return hasConsent ? 'all' : 'none';
 }
 
-function coerceCookieConsent(cookieConsent: string | undefined): boolean {
+function coerceCookieConsent(cookieConsent: string | undefined): CookieConsent {
   const cookie = JSON.parse(cookieConsent ?? '{}');
-  if (!Array.isArray(cookie.categories)) return false;
+  if (!Array.isArray(cookie.categories)) return 'none';
 
-  const requiredCategories = ['necessary', 'functionality', 'analytics'];
-  return requiredCategories.every((category) =>
-    cookie.categories.includes(category)
-  );
+  const categories = cookie.categories;
+  return mapToConsent(categories);
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
-  const setCookieConsent = (hasConsent: boolean) => {
-    event.locals.hasConsent = hasConsent;
+  const setCookieConsent = (consent: CookieConsent) => {
+    event.locals.cookieConsent = consent;
   };
 
-  const hasLegacyConsent = coerceLegacyCookieConsent(
+  const legacyConsent = coerceLegacyCookieConsent(
     event.cookies.get(LEGACY_COOKIE_CONSENT_COOKIE_NAME),
   );
-  const hasConsent = coerceCookieConsent(
+  const consent = coerceCookieConsent(
     event.cookies.get(COOKIE_CONSENT_COOKIE_NAME),
   );
-  setCookieConsent(hasConsent || hasLegacyConsent);
+  setCookieConsent(legacyConsent ?? consent);
 
   if (event.url.pathname.startsWith(CookieConsentEndpoint.Consent)) {
-    setCookieConsent(true);
+    const { consent } = await event.request.json() as {
+      consent: CookieConsent;
+    };
+    setCookieConsent(consent);
 
     return new Response(
       null,
@@ -47,7 +55,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         headers: {
           'Set-Cookie': event.cookies.serialize(
             COOKIE_CONSENT_COOKIE_NAME,
-            JSON.stringify(getConsentCookieValue(new Date())),
+            JSON.stringify(getConsentCookieValue(new Date(), consent)),
             {
               httpOnly: false,
               secure: IS_PROD,

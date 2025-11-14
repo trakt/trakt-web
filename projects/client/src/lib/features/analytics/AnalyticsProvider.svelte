@@ -4,11 +4,11 @@
 
   const { children }: ChildrenProps = $props();
 
-  const { hasConsent } = useCookieConsent();
+  const { consent } = useCookieConsent();
 </script>
 
 <svelte:head>
-  {#if $hasConsent}
+  {#if $consent === "all"}
     <!-- HOTJAR -->
     <script>
       (function (c, s, q, u, a, r, e) {
@@ -34,7 +34,7 @@
   {/if}
 </svelte:head>
 
-{#if $hasConsent}
+{#if $consent === "all"}
   <FirebaseSetup>
     {@render children()}
   </FirebaseSetup>

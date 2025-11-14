@@ -151,7 +151,7 @@
         <WSInvalidator />
         <FeatureFlagProvider>
           <CookieConsentProvider
-            hasConsent={data.hasConsent || data.device === "tv"}
+            consent={data.cookieConsent}
             device={data.device}
           >
             <PlayerProvider>

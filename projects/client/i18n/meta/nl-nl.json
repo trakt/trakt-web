@@ -1288,10 +1288,16 @@
       "default": "Trakt gebruikt C🍪🍪KIES om je algehele ervaring te verbeteren. Je kunt <a>hier meer informatie lezen</a>."
     },
     "button_text_cookie_accept": {
-      "default": "Begrepen, laten we beginnen!"
+      "default": "Alles accepteren"
     },
     "button_label_cookie_accept": {
-      "default": "Begrepen, laten we gaan!"
+      "default": "Alle cookies accepteren"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Alleen functioneel"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Accepteer alleen functionele cookies"
     },
     "page_title_year_to_date": {
       "default": "Jaar tot nu toe"

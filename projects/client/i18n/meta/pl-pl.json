@@ -1288,10 +1288,16 @@
       "default": "Trakt używa C🍪🍪KIES, aby poprawić jakość korzystania. Możesz <a>przeczytać więcej informacji</a> tutaj."
     },
     "button_text_cookie_accept": {
-      "default": "Rozumiem, zaczynamy!"
+      "default": "Akceptuj wszystko"
     },
     "button_label_cookie_accept": {
-      "default": "Rozumiem, zaczynamy!"
+      "default": "Akceptuj wszystkie pliki cookie"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Tylko funkcjonalne"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Akceptuj tylko funkcjonalne pliki cookie"
     },
     "page_title_year_to_date": {
       "default": "Rok do dziś"

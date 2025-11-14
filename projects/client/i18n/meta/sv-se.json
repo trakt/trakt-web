@@ -1288,10 +1288,16 @@
       "default": "Trakt använder C🍪🍪KIES för att förbättra din upplevelse. Du kan <a>läsa mer information</a> här."
     },
     "button_text_cookie_accept": {
-      "default": "Okej, kör!"
+      "default": "Acceptera alla"
     },
     "button_label_cookie_accept": {
-      "default": "Okej, kör!"
+      "default": "Acceptera alla cookies"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Endast funktionella"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Acceptera endast funktionella cookies"
     },
     "page_title_year_to_date": {
       "default": "Hittills i år"

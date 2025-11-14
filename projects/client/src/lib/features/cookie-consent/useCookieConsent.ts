@@ -1,12 +1,13 @@
-import { derived, writable } from 'svelte/store';
+import { readonly, writable } from 'svelte/store';
+import type { CookieConsent } from './models/CookieConsent.ts';
 
-const hasConsent = writable(false);
+const consent = writable<CookieConsent | null>(null);
 
 export function useCookieConsent() {
   return {
-    setConsent: (consent: boolean) => {
-      hasConsent.set(consent);
+    setConsent: (value: CookieConsent) => {
+      consent.set(value);
     },
-    hasConsent: derived(hasConsent, ($hasConsent) => $hasConsent),
+    consent: readonly(consent),
   };
 }

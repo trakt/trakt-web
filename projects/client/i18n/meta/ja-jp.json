@@ -1288,10 +1288,16 @@
       "default": "Traktは、より良い体験のためにC🍪🍪KIESを使用しています。 <a>詳細はこちら</a>をご覧ください。"
     },
     "button_text_cookie_accept": {
-      "default": "了解しました！"
+      "default": "すべて承認"
     },
     "button_label_cookie_accept": {
-      "default": "了解、始めましょう！"
+      "default": "すべてのクッキーを承認"
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "機能のみ"
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "機能クッキーのみを承認"
     },
     "page_title_year_to_date": {
       "default": "今年"

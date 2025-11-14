@@ -3557,16 +3557,32 @@
       ]
     },
     "button_text_cookie_accept": {
-      "default": "Got it, let's go!",
-      "description": "Text for the button that accepts the cookie notice.",
+      "default": "Accept all",
+      "description": "Text for the button that accepts all cookies.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "button_label_cookie_accept": {
-      "default": "Accept the cookies",
-      "description": "Aria-label for the button that accepts the cookie notice.",
+      "default": "Accept all cookies",
+      "description": "Aria-label for the button that accepts all cookies.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_cookie_accept_functional_only": {
+      "default": "Functional only",
+      "description": "Text for the button that accepts function cookies only.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_cookie_accept_functional_only": {
+      "default": "Accept functional cookies only",
+      "description": "Aria-label for the button that accepts function cookies only.",
       "exclude": [
         "android",
         "ios"
