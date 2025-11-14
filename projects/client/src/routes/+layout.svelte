@@ -30,7 +30,7 @@
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
-  import Toast from "$lib/sections/toast/Toast.svelte";
+  import NavbarToastContent from "$lib/sections/toast/NavbarToastContent.svelte";
   import { isPWA } from "$lib/utils/devices/isPWA.ts";
   import { WorkerMessage } from "$worker/WorkerMessage";
   import { workerRequest } from "$worker/workerRequest";
@@ -200,7 +200,7 @@
                                         audience="authenticated"
                                         navigation="default"
                                       >
-                                        <Toast />
+                                        <NavbarToastContent />
                                       </RenderFor>
                                       <SvelteQueryDevtools
                                         buttonPosition="bottom-right"

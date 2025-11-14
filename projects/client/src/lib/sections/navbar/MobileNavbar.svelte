@@ -6,6 +6,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useDimensionObserver } from "$lib/stores/css/useDimensionObserver";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { fade } from "svelte/transition";
   import ProfileImage from "../profile-banner/ProfileImage.svelte";
@@ -14,19 +15,33 @@
   const { state } = useNavbarState();
 
   const { user } = useUser();
+
+  // FIXME: remove when we have well defined dimensions for navbar contextual content
+  const { observedDimension, observeDimension } =
+    useDimensionObserver("height");
+
+  const hasContextualActions = $derived(
+    !!$state.contextualActions || !!$state.toastActions,
+  );
 </script>
 
 {#if $state.mode !== "hidden"}
   <div
     class="trakt-mobile-navbar"
-    class:has-contextual-content={!!$state.contextualActions}
+    class:has-contextual-content={hasContextualActions}
+    style="--contextual-height: {$observedDimension}px;"
   >
-    {#if $state.contextualActions}
+    {#if $state.toastActions || $state.contextualActions}
       <div
         class="trakt-mobile-navbar-actions"
+        use:observeDimension
         in:fade={{ duration: 150, delay: 150 }}
       >
-        {@render $state.contextualActions?.()}
+        {#if $state.contextualActions}
+          {@render $state.contextualActions()}
+        {:else}
+          {@render $state.toastActions?.()}
+        {/if}
       </div>
     {/if}
 
@@ -72,7 +87,11 @@
     </div>
   </div>
 
-  <div class="trakt-mobile-navbar-spacer"></div>
+  <div
+    class="trakt-mobile-navbar-spacer"
+    class:has-contextual-content={hasContextualActions}
+    style="--contextual-height: {$observedDimension}px;"
+  ></div>
 {/if}
 
 <style lang="scss">
@@ -86,6 +105,11 @@
     padding-bottom: calc(var(--ni-12) + env(safe-area-inset-bottom, 0));
     height: var(--mobile-navbar-height);
     box-sizing: border-box;
+
+    &.has-contextual-content {
+      --contextual-spacing: calc(var(--contextual-height) + var(--gap-m));
+      height: calc(var(--mobile-navbar-height) + var(--contextual-spacing));
+    }
   }
 
   .trakt-mobile-navbar {
@@ -109,10 +133,7 @@
     transition-property: height, gap;
 
     &.has-contextual-content {
-      --contextual-height: calc(var(--ni-104) + var(--gap-m));
-
       gap: var(--gap-m);
-      height: calc(var(--mobile-navbar-height) + var(--contextual-height));
     }
 
     backdrop-filter: blur(var(--ni-8));
@@ -146,13 +167,10 @@
   }
 
   .trakt-mobile-navbar-actions {
-    flex-grow: 1;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    height: 100%;
     padding: var(--ni-4) var(--ni-20);
     box-sizing: border-box;
 

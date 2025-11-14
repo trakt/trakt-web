@@ -7,7 +7,7 @@
   import { getToastTitle } from "./getToastTitle";
   import ProgressBar from "./ProgressBar.svelte";
   import StopButton from "./StopButton.svelte";
-  import ToastBase from "./ToastBase.svelte";
+  import ToastItemCard from "./ToastItemCard.svelte";
 
   const { nowPlaying }: { nowPlaying: NowPlayingItem } = $props();
 
@@ -15,38 +15,58 @@
   const title = $derived(getToastTitle(nowPlaying));
 </script>
 
-<ToastBase item={nowPlaying}>
-  <div class="trakt-now-playing-header">
-    {#if nowPlaying.media.postCredits.length > 0}
-      <div class="trakt-post-credits-label">
-        <span class="meta-info post-credits-count">
-          {nowPlaying.media.postCredits.length}
-        </span>
-        <span class="meta-info">{m.header_post_credits()}</span>
-      </div>
-    {:else}
-      <div class="trakt-now-playing-label">
-        {m.header_now_playing()}
-      </div>
-    {/if}
-    <StopButton {nowPlaying} {title} />
-  </div>
-  <div class="trakt-now-playing-status">
-    <h5 class="trakt-now-playing-title ellipsis">
-      {title}
-    </h5>
-    <div class="trakt-now-playing-remaining">
-      <span class="meta-info">
-        {toHumanDuration({ minutes: $remainingMinutes }, languageTag())}
-      </span>
-      <span class="meta-info">{m.text_remaining()}</span>
+<div class="trakt-now-playing-container">
+  <ToastItemCard item={nowPlaying} />
+  <div class="trakt-now-playing-content">
+    <div class="trakt-now-playing-header">
+      {#if nowPlaying.media.postCredits.length > 0}
+        <div class="trakt-post-credits-label">
+          <span class="meta-info post-credits-count">
+            {nowPlaying.media.postCredits.length}
+          </span>
+          <span class="meta-info">{m.header_post_credits()}</span>
+        </div>
+      {:else}
+        <div class="trakt-now-playing-label">
+          {m.header_now_playing()}
+        </div>
+      {/if}
+      <StopButton {nowPlaying} {title} />
     </div>
+    <div class="trakt-now-playing-status">
+      <h5 class="trakt-now-playing-title ellipsis">
+        {title}
+      </h5>
+      <div class="trakt-now-playing-remaining">
+        <span class="meta-info">
+          {toHumanDuration({ minutes: $remainingMinutes }, languageTag())}
+        </span>
+        <span class="meta-info">{m.text_remaining()}</span>
+      </div>
+    </div>
+    <ProgressBar progress={$progress} />
   </div>
-  <ProgressBar progress={$progress} />
-</ToastBase>
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .trakt-now-playing-container {
+    display: flex;
+    gap: var(--gap-m);
+
+    width: 100%;
+  }
+
+  .trakt-now-playing-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    flex-grow: 1;
+    min-width: 0;
+    gap: var(--gap-xxs);
+  }
 
   .trakt-now-playing-label,
   .trakt-now-playing-title {

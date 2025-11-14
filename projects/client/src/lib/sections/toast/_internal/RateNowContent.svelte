@@ -6,7 +6,7 @@
   import { useLastWatched } from "$lib/features/toast/useLastWatched";
   import RateNow from "$lib/sections/summary/components/rating/RateNow.svelte";
   import { getToastTitle } from "./getToastTitle";
-  import ToastBase from "./ToastBase.svelte";
+  import ToastItemCard from "./ToastItemCard.svelte";
 
   const { lastWatched }: { lastWatched: LastWatchedItem } = $props();
 
@@ -15,25 +15,46 @@
   const title = $derived(getToastTitle(lastWatched));
 </script>
 
-<ToastBase item={lastWatched}>
-  <div class="trakt-rate-now-header">
-    <p class="smaller ellipsis">{title}</p>
-    <ActionButton
-      onclick={() => dismiss(lastWatched.media.id, lastWatched.type)}
-      label={m.button_label_dismiss()}
-      style="ghost"
-      size="small"
-    >
-      <CloseIcon />
-    </ActionButton>
+<div class="trakt-now-playing-container">
+  <ToastItemCard item={lastWatched} />
+
+  <div class="trakt-now-playing-content">
+    <div class="trakt-rate-now-header">
+      <p class="smaller ellipsis">{title}</p>
+      <ActionButton
+        onclick={() => dismiss(lastWatched.media.id, lastWatched.type)}
+        label={m.button_label_dismiss()}
+        style="ghost"
+        size="small"
+      >
+        <CloseIcon />
+      </ActionButton>
+    </div>
+    <div class="trakt-rate-now-container">
+      <RateNow {...lastWatched} />
+    </div>
   </div>
-  <div class="trakt-rate-now-container">
-    <RateNow {...lastWatched} />
-  </div>
-</ToastBase>
+</div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .trakt-now-playing-container {
+    display: flex;
+    gap: var(--gap-m);
+
+    width: 100%;
+  }
+
+  .trakt-now-playing-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    flex-grow: 1;
+    min-width: 0;
+    gap: var(--gap-xxs);
+  }
 
   .trakt-rate-now-header {
     display: flex;
