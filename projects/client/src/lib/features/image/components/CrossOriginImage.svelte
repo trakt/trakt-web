@@ -13,6 +13,7 @@
     onload: _onload,
     onerror: _onerror,
     classList = "",
+    variant = { type: "default" },
     ...rest
   }: ImageProps = $props();
 
@@ -20,6 +21,13 @@
   const isImageLoaded = $derived(writable(false));
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
+
+  const style = $derived.by(() => {
+    if (variant.type === "masked") {
+      return `background-color: ${variant.color}; mask-image: url('${$response.uri}');`;
+    }
+    return "";
+  });
 </script>
 
 <img
@@ -27,8 +35,10 @@
   class:image-loaded={$isImageLoaded}
   class:image-animation-enabled={animate}
   class:image-placeholder={isPlaceholder}
+  class:has-mask={variant.type === "masked"}
   use:appendClassList={classList}
   src={$response.uri}
+  {style}
   {alt}
   onerror={(ev) => {
     resolveEnvironmentUri(src).then(response.set);
@@ -39,6 +49,13 @@
       isImageLoaded.set(true);
     }, 100);
     _onload?.(ev);
+
+    const shouldClearSrc =
+      variant.type === "masked" && ev.target instanceof HTMLImageElement;
+
+    if (shouldClearSrc) {
+      ev.target.src = "";
+    }
   }}
   {...rest}
 />
@@ -62,5 +79,13 @@
 
   img.image-placeholder {
     background-color: var(--shade-800);
+  }
+
+  img.has-mask {
+    content-visibility: hidden;
+    mask-size: contain;
+    mask-mode: alpha;
+    mask-repeat: no-repeat;
+    mask-position: center;
   }
 </style>
