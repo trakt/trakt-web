@@ -35,6 +35,12 @@
       src={service.logoUrl}
       alt={i18n.alt(displayName)}
       classList="trakt-service-logo"
+      variant={variant === "monochrome"
+        ? { type: "default" }
+        : {
+            type: "masked",
+            color: service?.color ?? "var(--color-text-primary)",
+          }}
     />
     {#if service?.channelLogoUrl}
       <div class="trakt-channel-separator"></div>
@@ -54,13 +60,6 @@
     display: flex;
     align-items: center;
     gap: var(--gap-micro);
-
-    &.is-colored {
-      :global(img.trakt-service-logo) {
-        filter: drop-shadow(0 var(--ni-240) 0 var(--logo-color));
-        transform: translateY(var(--ni-neg-240));
-      }
-    }
 
     :global(img) {
       width: var(--ni-36);
