@@ -10,11 +10,13 @@
 </div>
 
 <style>
-  /* FIXME: When ratings are redesigned, remove this */
   .trakt-summary-rate-now {
-    :global(h6) {
-      display: none;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-xs);
+
+    width: 100%;
 
     :global(svg) {
       --icon-color: var(--color-text-primary);

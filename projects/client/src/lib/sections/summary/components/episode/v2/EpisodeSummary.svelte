@@ -2,6 +2,7 @@
   import RatingList from "$lib/components/summary/RatingList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
@@ -11,6 +12,7 @@
   import MediaDetails from "../../details/MediaDetails.svelte";
   import { useMediaMetaInfo } from "../../media/useMediaMetaInfo";
   import SummaryTitle from "../../media/v2/_internal/SummaryTitle.svelte";
+  import { useIsRateable } from "../../rating/_internal/useIsRateable";
   import type { EpisodeSummaryProps } from "./../../EpisodeSummaryProps";
   import EpisodeActions from "./_internal/EpisodeActions.svelte";
   import EpisodeSideActions from "./_internal/EpisodeSideActions.svelte";
@@ -36,11 +38,23 @@
   );
 
   const hasTags = $derived(postCreditsCount > 0 || $watchCount > 0);
+
+  const { isRateable } = $derived(
+    useIsRateable({ type, media: episode, show }),
+  );
 </script>
 
 {#snippet tags()}
   <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
 {/snippet}
+
+{#if $isRateable}
+  <NavbarStateSetter>
+    {#snippet contextualActions()}
+      <SummaryRateNow {type} media={episode} {show} />
+    {/snippet}
+  </NavbarStateSetter>
+{/if}
 
 <Summary>
   {#snippet poster()}
@@ -68,7 +82,6 @@
 
     <RenderFor audience="authenticated">
       <EpisodeActions {episode} {show} {title} {showTitle} />
-      <SummaryRateNow {type} media={episode} {show} />
     </RenderFor>
   {/snippet}
 
