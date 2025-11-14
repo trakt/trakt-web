@@ -18,7 +18,7 @@
   }: {
     title: string;
     subtitle?: string;
-    metaInfo?: string;
+    metaInfo?: Snippet;
     titleAction?: Snippet;
     actions?: Snippet;
     badge?: Snippet;
