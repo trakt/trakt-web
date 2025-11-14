@@ -7,6 +7,7 @@
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
+  import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
@@ -14,6 +15,7 @@
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
+  import { useIsRateable } from "../../rating/_internal/useIsRateable";
   import type { MediaSummaryProps } from "../MediaSummaryProps";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
@@ -49,6 +51,8 @@
 
     return media.airDate > oneMonthAgo ? media.status : undefined;
   });
+
+  const { isRateable } = $derived(useIsRateable({ type, media }));
 </script>
 
 {#snippet tags()}
@@ -56,6 +60,14 @@
 {/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
+
+{#if $isRateable}
+  <NavbarStateSetter>
+    {#snippet contextualActions()}
+      <SummaryRateNow {type} {media} />
+    {/snippet}
+  </NavbarStateSetter>
+{/if}
 
 <Summary color={media.colors?.at(0)}>
   {#snippet poster()}
@@ -84,8 +96,6 @@
 
     <RenderFor audience="authenticated">
       <MediaActions {media} {title} />
-
-      <SummaryRateNow {type} {media} />
     </RenderFor>
   {/snippet}
 
