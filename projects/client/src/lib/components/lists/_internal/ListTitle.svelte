@@ -1,5 +1,6 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import type { Snippet } from "svelte";
 
   const {
     title,
@@ -8,7 +9,7 @@
     href,
   }: {
     title: string;
-    metaInfo?: string;
+    metaInfo?: Snippet;
     href?: string;
     style: "primary" | "secondary";
   } = $props();
@@ -28,7 +29,7 @@
   {/if}
 
   {#if metaInfo}
-    <p class="meta-info ellipsis">{metaInfo}</p>
+    {@render metaInfo()}
   {/if}
 </div>
 
@@ -39,10 +40,6 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-
-    p.meta-info {
-      color: var(--list-meta-info-color);
-    }
 
     :global(.trakt-link) {
       text-decoration: none;

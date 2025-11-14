@@ -21,7 +21,7 @@
   type SectionListProps<T> = ListProps<T> & {
     id: string;
     empty?: Snippet;
-    metaInfo?: string;
+    metaInfo?: Snippet;
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
   };

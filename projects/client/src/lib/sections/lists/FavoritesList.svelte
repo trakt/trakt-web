@@ -7,6 +7,7 @@
   import CtaItem from "$lib/sections/lists/components/cta/CtaItem.svelte";
   import { mediaListHeightResolver } from "$lib/sections/lists/utils/mediaListHeightResolver";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
+  import ListMetaInfo from "../components/ListMetaInfo.svelte";
   import FavoriteAction from "../media-actions/favorite/FavoriteAction.svelte";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
   import { useFavoritesList } from "./stores/useFavoritesList";
@@ -42,12 +43,16 @@
   const cta = $derived({ type: "favorites" as const, mediaType: type });
 </script>
 
+{#snippet metaInfo()}
+  <ListMetaInfo text={$selectedType.text()} />
+{/snippet}
+
 <SectionList
   id={`favorites-list-${selectedType}-${slug}`}
   items={$list}
   {title}
   --height-list={mediaListHeightResolver($defaultVariant)}
-  metaInfo={$selectedType.text()}
+  {metaInfo}
 >
   {#snippet item(media)}
     <DefaultMediaItem
