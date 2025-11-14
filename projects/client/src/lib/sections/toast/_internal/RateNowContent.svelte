@@ -31,7 +31,7 @@
       </ActionButton>
     </div>
     <div class="trakt-rate-now-container">
-      <RateNow {...lastWatched} />
+      <RateNow {...lastWatched} variant="allow" />
     </div>
   </div>
 </div>

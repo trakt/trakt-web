@@ -10,7 +10,10 @@
   import type { RateNowProps } from "./models/RateNowProps";
   import { useRatings } from "./useRatings";
 
-  const { ...props }: RateNowProps = $props();
+  const {
+    variant = "guard",
+    ...props
+  }: RateNowProps & { variant?: "allow" | "guard" } = $props();
 
   const { isRateable } = $derived(useIsRateable(props));
 
@@ -25,7 +28,7 @@
   );
 </script>
 
-{#if $isRateable}
+{#if variant === "allow" || $isRateable}
   <div
     class="trakt-rate-now"
     data-dpad-navigation={DpadNavigationType.List}
