@@ -1,1 +1,1 @@
-export type DeviceType = 'tv' | 'mobile' | 'unknown';
+export type DeviceType = 'mobile' | 'unknown';

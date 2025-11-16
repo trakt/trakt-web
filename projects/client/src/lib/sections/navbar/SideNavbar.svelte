@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { browser } from "$app/environment";
   import { TestId } from "$e2e/models/TestId";
   import Button from "$lib/components/buttons/Button.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
@@ -13,11 +12,9 @@
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { getDeviceType } from "$lib/utils/devices/getDeviceType";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import Toast from "../toast/Toast.svelte";
-  import BetaBadge from "./components/BetaBadge.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import ProfileLink from "./components/ProfileLink.svelte";
@@ -25,7 +22,6 @@
   import FilterButton from "./components/filter/FilterButton.svelte";
   import { useNavbarState } from "./useNavbarState";
 
-  const isTV = $derived(browser && getDeviceType(navigator.userAgent) === "tv");
   const { user } = useUser();
   const isVip = $derived(!!$user?.isVip);
 
@@ -66,9 +62,6 @@
     >
       <div class="trakt-side-navbar-top">
         <TraktLogo />
-        {#if isTV}
-          <BetaBadge />
-        {/if}
       </div>
 
       <div class="trakt-side-navbar-content">

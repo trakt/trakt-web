@@ -18,9 +18,7 @@
   }: TraktDropdownListProps = $props();
 
   const deviceType = $derived(getDeviceType(navigator.userAgent));
-  const isNativeTarget = $derived(
-    deviceType === "tv" || deviceType === "mobile",
-  );
+  const isNativeTarget = $derived(deviceType === "mobile");
   const isActuallyNative = $derived(preferNative && isNativeTarget);
 
   const { portalTrigger, portal, isOpened } = $derived(

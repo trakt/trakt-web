@@ -2,7 +2,6 @@ import { ThemeEndpoint } from '$lib/features/theme/ThemeEndpoint.ts';
 import { THEME_COOKIE_NAME } from '$lib/features/theme/constants.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
 import { coerceTheme } from '$lib/features/theme/utils/coerceTheme.ts';
-import { getDeviceType } from '$lib/utils/devices/getDeviceType.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { Handle } from '@sveltejs/kit';
 
@@ -43,15 +42,11 @@ export const handle: Handle = async ({ event, resolve }) => {
     event,
     {
       transformPageChunk: ({ html }) => {
-        const agent = event.request.headers.get('user-agent');
-        const currentTheme = getDeviceType(agent) === 'tv'
-          ? Theme.Dark
-          : event.locals.theme;
-
+        const theme = event.locals.theme;
         const scope = 'none';
 
         return html
-          .replace(THEME_PLACEHOLDER, `${currentTheme}`)
+          .replace(THEME_PLACEHOLDER, `${theme}`)
           .replace(THEME_SCOPE_PLACEHOLDER, `${scope}`);
       },
     },

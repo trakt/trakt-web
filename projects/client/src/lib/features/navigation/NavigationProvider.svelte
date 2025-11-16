@@ -1,14 +1,9 @@
 <script lang="ts">
-  import type { DeviceType } from "$lib/models/DeviceType";
   import { initializeNavigation } from "./useNavigation";
 
-  type NavigationProviderProps = {
-    device: DeviceType;
-  } & ChildrenProps;
+  const { children }: ChildrenProps = $props();
 
-  const { children, device }: NavigationProviderProps = $props();
-
-  const { controller } = $derived(initializeNavigation(device));
+  const { controller } = $derived(initializeNavigation());
 </script>
 
 {#if controller}

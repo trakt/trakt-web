@@ -125,7 +125,7 @@
 </svelte:head>
 
 <ErrorProvider>
-  <QueryClientProvider client={data.queryClient} device={data.device}>
+  <QueryClientProvider client={data.queryClient}>
     <GlobalParameterProvider>
       <AuthProvider
         isAuthorizedLegacy={data.auth.isAuthorized}
@@ -133,14 +133,11 @@
       >
         <WSInvalidator />
         <FeatureFlagProvider>
-          <CookieConsentProvider
-            consent={data.cookieConsent}
-            device={data.device}
-          >
+          <CookieConsentProvider consent={data.cookieConsent}>
             <PlayerProvider>
               <AnalyticsProvider>
                 <RedirectProvider>
-                  <NavigationProvider device={data.device}>
+                  <NavigationProvider>
                     <LocaleProvider>
                       <SearchProvider config={data.typesense}>
                         <FilterProvider>
