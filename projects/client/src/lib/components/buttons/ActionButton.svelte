@@ -170,7 +170,11 @@
 
       @include for-mouse {
         &:hover {
-          background-color: var(--cm-foreground-10);
+          background-color: color-mix(
+            in srgb,
+            var(--color-foreground) 10%,
+            transparent
+          );
         }
       }
     }

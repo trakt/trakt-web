@@ -250,7 +250,7 @@
     border-radius: var(--border-radius-m);
     background-color: var(--shade-10);
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-      var(--cm-shadow-25);
+      color-mix(in srgb, var(--color-shadow) 25%, transparent);
 
     div.spacer {
       height: calc(var(--ni-40) + var(--list-padding) * 2);

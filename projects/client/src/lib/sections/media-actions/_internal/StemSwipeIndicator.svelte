@@ -9,7 +9,11 @@
 
 <style>
   .trakt-gesture-indicator {
-    --color-gesture-inactive: var(--cm-inactive-gesture);
+    --color-gesture-inactive: color-mix(
+      in srgb,
+      var(--color-foreground) 35%,
+      var(--color-background)
+    );
     border-radius: var(--border-radius-m);
 
     width: calc(var(--indicator-width, 0) + calc(var(--border-radius-m) * 2));

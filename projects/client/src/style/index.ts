@@ -8,8 +8,6 @@ import './palette/shade.css';
 import './numeric-increments/index.css';
 import './sizing/index.css';
 
-import './color-mix/index.scss';
-
 import './layout/index.css';
 import './layout/modes.scss';
 

@@ -84,7 +84,7 @@
       &:after {
         background: linear-gradient(
           258.73deg,
-          var(--cm-gradient-stop-cta-dark) 0%,
+          color-mix(in srgb, var(--purple-500) 80%, transparent) 0%,
           var(--shade-900) 53.05%
         );
       }

@@ -124,7 +124,8 @@
     z-index: var(--layer-overlay);
 
     background-color: var(--color-background-mobile-navbar);
-    box-shadow: 0px -24px 64px 0px var(--cm-shadow-32);
+    box-shadow: 0px -24px 64px 0px
+      color-mix(in srgb, var(--color-shadow) 32%, transparent);
 
     border-top-left-radius: var(--border-radius-xxl);
     border-top-right-radius: var(--border-radius-xxl);

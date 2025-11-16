@@ -140,7 +140,7 @@
       box-sizing: border-box;
 
       border-radius: var(--border-radius-l);
-      background: var(--cm-background-25);
+      background: color-mix(in srgb, var(--color-background) 25%, transparent);
 
       transition: var(--transition-increment) ease-in-out;
       transition-property:

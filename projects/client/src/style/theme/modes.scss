@@ -18,7 +18,9 @@
    * Navbar
    */
   --color-background-navbar-base: var(--shade-50);
-  --color-background-navbar: var(--cm-background-navbar-90);
+  --color-background-navbar: color-mix(in srgb,
+      var(--color-background-navbar-base) 90%,
+      transparent);
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-300);
 
@@ -34,7 +36,9 @@
    */
   --color-cta-background-gradient: linear-gradient(258.73deg,
       color-mix(in srgb,
-        var(--cm-gradient-stop-cta-light) 80%,
+        color-mix(in srgb,
+          var(--purple-300) 80%,
+          transparent) 80%,
         transparent) 0%,
       var(--shade-100) 53.05%);
 
@@ -42,12 +46,12 @@
    * List
    */
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      var(--cm-shadow-86) 0%,
-      var(--cm-shadow-62) 24%,
-      var(--cm-shadow-43) 34%,
-      var(--cm-shadow-29) 46%,
-      var(--cm-shadow-18) 63%,
-      var(--cm-shadow-7) 86%,
+      color-mix(in srgb, var(--color-shadow) 86%, transparent) 0%,
+      color-mix(in srgb, var(--color-shadow) 62%, transparent) 24%,
+      color-mix(in srgb, var(--color-shadow) 43%, transparent) 34%,
+      color-mix(in srgb, var(--color-shadow) 29%, transparent) 46%,
+      color-mix(in srgb, var(--color-shadow) 18%, transparent) 63%,
+      color-mix(in srgb, var(--color-shadow) 7%, transparent) 86%,
       transparent 100%);
   --list-meta-info-color: var(--purple-700);
 
@@ -65,7 +69,7 @@
   /*
    * Navbar
    */
-  --color-background-mobile-navbar: var(--cm-background-90);
+  --color-background-mobile-navbar: color-mix(in srgb, var(--color-background) 90%, transparent);
 
   /*
    * Tooltip
@@ -90,8 +94,7 @@
   /**
    * Toasts
    */
-  --color-toast-background-base: var(--shade-100);
-  --color-toast-background: var(--cm-background-now-playing);
+  --color-toast-background: color-mix(in srgb, var(--shade-100) 70%, transparent 30%);
   --color-toast-border: var(--shade-200);
   --color-toast-progress-bar-background: var(--shade-300);
   --color-toast-progress-bar-progress: var(--shade-500);
@@ -116,7 +119,7 @@
   /**
     * Calendar
     */
-  --color-calendar-background: var(--cm-background-navbar-90);
+  --color-calendar-background: color-mix(in srgb, var(--color-background) 90%, transparent);
   --color-calendar-inactive-background: var(--color-background-navbar-base);
   --color-calendar-active-background: var(--shade-200);
   --color-calendar-background-hover: var(--shade-100);
@@ -165,7 +168,9 @@
    * Navbar
    */
   --color-background-navbar-base: var(--shade-920);
-  --color-background-navbar: var(--cm-background-navbar-90);
+  --color-background-navbar: color-mix(in srgb,
+      var(--color-background-navbar-base) 90%,
+      transparent);
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
 
@@ -181,7 +186,9 @@
    */
   --color-cta-background-gradient: linear-gradient(258.73deg,
       color-mix(in srgb,
-        var(--cm-gradient-stop-cta-dark) 80%,
+        color-mix(in srgb,
+          var(--purple-500) 80%,
+          transparent) 80%,
         transparent) 0%,
       var(--shade-900) 53.05%);
 
@@ -189,10 +196,10 @@
    * List
    */
   --list-shadow: radial-gradient(50% 50% at 50% 50%,
-      var(--cm-shadow-90) 0%,
-      var(--cm-shadow-45) 32%,
-      var(--cm-shadow-30) 61%,
-      var(--cm-shadow-25) 80%,
+      color-mix(in srgb, var(--color-shadow) 90%, transparent) 0%,
+      color-mix(in srgb, var(--color-shadow) 45%, transparent) 32%,
+      color-mix(in srgb, var(--color-shadow) 30%, transparent) 61%,
+      color-mix(in srgb, var(--color-shadow) 25%, transparent) 80%,
       transparent 100%);
   --list-meta-info-color: var(--purple-400);
 
@@ -210,7 +217,9 @@
   /*
    * Navbar
    */
-  --color-background-mobile-navbar: var(--cm-background-navbar-80);
+  --color-background-mobile-navbar: color-mix(in srgb,
+      var(--color-background-navbar-base) 80%,
+      transparent);
 
   /*
    * Tooltip
@@ -236,9 +245,7 @@
   /**
    * Toasts
    */
-  --color-toast-background-base: var(--shade-900);
-  --color-toast-background: var(--cm-background-now-playing);
-  --color-toast-border: var(--shade-700);
+  --color-toast-background: color-mix(in srgb, var(--shade-900) 70%, transparent 30%) --color-toast-border: var(--shade-700);
   --color-toast-progress-bar-background: var(--shade-500);
   --color-toast-progress-bar-progress: var(--shade-200);
   --color-toast-progress-bar-shadow: var(--shade-400);
@@ -261,7 +268,9 @@
   /**
     * Calendar
     */
-  --color-calendar-background: var(--cm-background-navbar-90);
+  --color-calendar-background: color-mix(in srgb,
+      var(--color-background-navbar-base) 90%,
+      transparent);
   --color-calendar-inactive-background: var(--color-background-navbar-base);
   --color-calendar-active-background: var(--shade-800);
   --color-calendar-background-hover: var(--shade-700);

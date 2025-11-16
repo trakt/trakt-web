@@ -144,10 +144,10 @@
       var(--drawer-padding) + env(safe-area-inset-bottom, 0)
     );
 
-    background: var(--cm-background-70);
+    background: color-mix(in srgb, var(--color-background) 70%, transparent);
 
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-      var(--cm-shadow-25);
+      color-mix(in srgb, var(--color-shadow) 25%, transparent);
 
     display: flex;
     flex-direction: column;
@@ -179,7 +179,7 @@
       border-top-right-radius: var(--border-radius-m);
 
       box-shadow: var(--ni-8) var(--ni-0) var(--ni-8) var(--ni-0)
-        var(--cm-shadow-25);
+        color-mix(in srgb, var(--color-shadow) 25%, transparent);
 
       &:global(:not(.is-dragging)) {
         transition: height var(--transition-increment) ease-in-out;
