@@ -39,7 +39,6 @@
     "npm:oidc-client-ts@3.3.0": "3.3.0",
     "npm:playwright@1.56.1": "1.56.1",
     "npm:plyr@^3.8.3": "3.8.3",
-    "npm:postcss-nested@7.0.2": "7.0.2_postcss@8.5.6",
     "npm:prettier-plugin-svelte@3.4.0": "3.4.0_prettier@3.6.2_svelte@5.43.6__acorn@8.15.0",
     "npm:prettier@3.6.2": "3.6.2",
     "npm:resolve-accept-language@3.1.13": "3.1.13",
@@ -5850,13 +5849,6 @@
         "postcss"
       ]
     },
-    "postcss-nested@7.0.2_postcss@8.5.6": {
-      "integrity": "sha512-5osppouFc0VR9/VYzYxO03VaDa3e8F23Kfd6/9qcZTUI8P58GIYlArOET2Wq0ywSl2o2PjELhYOFI4W7l5QHKw==",
-      "dependencies": [
-        "postcss",
-        "postcss-selector-parser"
-      ]
-    },
     "postcss-safe-parser@7.0.1_postcss@8.5.6": {
       "integrity": "sha512-0AioNCJZ2DPYz5ABT6bddIqlhgwhpHZ/l65YAYo0BCIn0xiDpsnTHz0gnoTGk0OXZW0JRs+cDwL8u/teRdz+8A==",
       "dependencies": [
@@ -7744,7 +7736,6 @@
             "npm:oidc-client-ts@3.3.0",
             "npm:playwright@1.56.1",
             "npm:plyr@^3.8.3",
-            "npm:postcss-nested@7.0.2",
             "npm:prettier-plugin-svelte@3.4.0",
             "npm:prettier@3.6.2",
             "npm:resolve-accept-language@3.1.13",
