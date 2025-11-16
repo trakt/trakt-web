@@ -26,10 +26,9 @@
   const { user } = useUser();
 
   beforeNavigate(({ from, to, cancel }) => {
-    const isHomePage = from?.url.pathname === UrlBuilder.home();
     const isSamePage = from?.url.pathname === to?.url.pathname;
 
-    if (get(isAuthorized) || isHomePage || isSamePage) {
+    if (get(isAuthorized) || isSamePage) {
       return;
     }
 
