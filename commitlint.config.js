@@ -108,7 +108,6 @@ module.exports = {
         'tooltip',
         'transition',
         'trending',
-        'tv',
         'up-next',
         'upcoming',
         'user',
