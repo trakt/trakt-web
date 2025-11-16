@@ -2,8 +2,7 @@
   import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import ReactionsSummary from "./comment-actions/ReactionsSummary.svelte";
-  import { useCommentReactions } from "./comment-actions/useCommentReactions.ts";
+  import ReactAction from "./comment-actions/ReactAction.svelte";
   import ViewRepliesAction from "./comment-actions/ViewRepliesAction.svelte";
   import CommentBody from "./CommentBody.svelte";
   import CommentFooter from "./CommentFooter.svelte";
@@ -18,7 +17,6 @@
   };
 
   const { comment, media, onDrilldown, type }: CommentProps = $props();
-  const { summary } = $derived(useCommentReactions({ id: comment.id }));
 </script>
 
 <CommentHeader {comment} {type} />
@@ -33,7 +31,7 @@
     })}
 />
 <CommentFooter>
-  <ReactionsSummary summary={$summary} />
+  <ReactAction {comment} />
 
   {#if onDrilldown}
     <ViewRepliesAction {comment} {onDrilldown} />
