@@ -8,7 +8,6 @@ export const DEVICE_TYPE_PLACEHOLDER = '%device.type%';
 const SCALE_MAP: Record<DeviceType, string> = {
   unknown: '1',
   mobile: '1',
-  tv: '0.65',
 } as const;
 
 export const handle: Handle = (

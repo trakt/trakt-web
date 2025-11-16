@@ -21,9 +21,7 @@
   const deviceType = $derived(getDeviceType(globalThis.navigator.userAgent));
 
   const { isInLibrary } = $derived(usePlexLibrary(target));
-  const canHandlePlex = $derived(
-    deviceType === "tv" || deviceType === "mobile",
-  );
+  const canHandlePlex = $derived(deviceType === "mobile");
 </script>
 
 {#snippet streamOnButton()}

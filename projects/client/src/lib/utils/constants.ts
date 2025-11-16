@@ -1,7 +1,5 @@
-import { browser } from '$app/environment';
 import { assets } from '$app/paths';
 import { shuffle } from '$lib/utils/array/shuffle.ts';
-import { getDeviceType } from '$lib/utils/devices/getDeviceType.ts';
 import { assertDefined } from './assert/assertDefined.ts';
 
 /**
@@ -60,8 +58,7 @@ export const NOOP_FN = () => {
   // noop
 };
 
-const IS_TV = browser && getDeviceType(navigator.userAgent) === 'tv';
-export const DEFAULT_PAGE_SIZE = IS_TV ? 10 : 25;
+export const DEFAULT_PAGE_SIZE = 25;
 export const DEFAULT_ACTIVITY_PAGE_SIZE = 100;
 
 export const DEFAULT_DRILL_SIZE = 100;

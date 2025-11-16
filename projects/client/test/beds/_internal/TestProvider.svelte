@@ -26,7 +26,7 @@
             server: "",
           }}
         >
-          <NavigationProvider device="unknown">
+          <NavigationProvider>
             <AnalyticsProvider>
               {@render children()}
             </AnalyticsProvider>
