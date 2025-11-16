@@ -32,6 +32,3 @@ vite.config.ts.timestamp-*
 
 # Vitest
 coverage
-
-# webOS package files
-projects/*.ipk

@@ -2,11 +2,12 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import PlexLogo from "$lib/components/icons/PlexLogo.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { buildPlexLink } from "$lib/features/plex/buildPlexLink";
   import Button from "../Button.svelte";
   import { StreamingServiceButtonIntlProvider } from "../streaming-service/StreamingServiceButtonIntlProvider";
-  import { usePlexHandler } from "./_internal/usePlexHandler";
   import type { PlexButtonProps } from "./PlexButtonProps";
 
   const {
@@ -26,7 +27,12 @@
   });
 
   const plexLink = $derived(buildPlexLink(target));
-  const handler = $derived(usePlexHandler(plexLink));
+
+  const { track } = useTrack(AnalyticsEvent.StreamOn);
+  const handler = $derived({
+    href: plexLink,
+    onclick: () => track({ source: "plex" }),
+  });
 </script>
 
 {#if style === "normal"}

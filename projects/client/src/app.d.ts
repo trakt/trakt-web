@@ -219,19 +219,6 @@ declare global {
       };
     }
   }
-
-  interface WebOS {
-    service: {
-      request: (
-        url: string,
-        options: Record<string, unknown> & {
-          onFailure?: (error: { errorCode: number; errorText: string }) => void;
-        },
-      ) => void;
-    };
-  }
-
-  const webOS: WebOS | Nil;
 }
 
 export {};

@@ -19,9 +19,6 @@ const streamMovieRequest = (
         id: slug,
         country,
       },
-      query: {
-        links: 'webos',
-      },
     });
 
 export const streamMovieQuery = defineQuery({

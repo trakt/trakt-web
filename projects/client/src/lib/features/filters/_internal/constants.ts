@@ -82,7 +82,3 @@ export const FILTERS = [
   IGNORE_WATCHED_FILTER,
   IGNORE_WATCHLISTED_FILTER,
 ] as const;
-
-export const DEFAULT_TV_FILTERS = {
-  [FilterKey.Streaming]: 'subscriptions',
-} as const;

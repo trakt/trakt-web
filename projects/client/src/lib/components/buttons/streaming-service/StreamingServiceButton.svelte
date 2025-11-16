@@ -2,10 +2,11 @@
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import PlayIcon from "$lib/components/icons/PlayIcon.svelte";
   import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import StreamingServiceLogo from "../../media/streaming-service/StreamingServiceLogo.svelte";
   import Button from "../Button.svelte";
-  import { useStreamOnHandler } from "./_internal/useStreamOnHandler";
   import { StreamingServiceButtonIntlProvider } from "./StreamingServiceButtonIntlProvider";
   import type { StreamingServiceButtonProps } from "./StreamingServiceButtonProps";
 
@@ -26,14 +27,11 @@
     navigationType: DpadNavigationType.Item,
   });
 
-  const handler = $derived(useStreamOnHandler(service));
-
-  /**
-   * TODO: @seferturan
-   *
-   * Let's replace this streaming service button with actionable tags on the cover (eg: Netflix, Prime Video, etc.)
-   * TV apps should go with actionable button, web and mobile should go with tags on the cover.
-   */
+  const { track } = useTrack(AnalyticsEvent.StreamOn);
+  const handler = $derived({
+    href: service.link,
+    onclick: () => track({ source: service.source }),
+  });
 </script>
 
 {#if style === "normal"}

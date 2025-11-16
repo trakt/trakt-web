@@ -6,14 +6,12 @@
   import { lineClamp } from "$lib/components/text/lineClamp";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { getWebOSHandler } from "$lib/features/web-os/getWebOSHandler";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
 
   const { video, slug }: { video: MediaVideo; slug: string } = $props();
 
   const { track } = useTrack(AnalyticsEvent.Extras);
 
-  const webOSHandler = getWebOSHandler();
   // FIXME: use embedded player for these and style cards accordingly
 </script>
 
@@ -24,13 +22,6 @@
     target="_blank"
     onclick={(ev) => {
       track({ slug, type: video.type });
-
-      if (!webOSHandler) {
-        return;
-      }
-
-      ev.preventDefault();
-      webOSHandler.youtube(video.url);
     }}
   >
     <CardCover title={video.title} src={video.thumbnail} alt={video.title} />
