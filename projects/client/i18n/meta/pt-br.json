@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Série"
     },
-    "page_title_sign_in": {
-      "default": "Entrar"
-    },
-    "header_device_auth_failed": {
-      "default": "Algo deu errado"
-    },
     "header_device_auth_try_again": {
       "default": "A ativação foi negada, expirou ou algo imprevisto aconteceu. Tente novamente."
     },

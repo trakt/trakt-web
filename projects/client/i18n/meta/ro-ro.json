@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Serial"
     },
-    "page_title_sign_in": {
-      "default": "Autentificare"
-    },
-    "header_device_auth_failed": {
-      "default": "Ceva n-a mers bine"
-    },
     "header_device_auth_try_again": {
       "default": "Activarea a fost refuzată, a expirat sau s-a întâmplat ceva neprevăzut. Încearcă din nou."
     },

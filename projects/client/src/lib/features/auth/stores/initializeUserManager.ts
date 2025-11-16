@@ -18,8 +18,8 @@ function mapToToken(user: User | null): Token {
   };
 }
 
-export function initializeUserManager(hasLegacyAuth: boolean) {
-  if (!browser || hasLegacyAuth) {
+export function initializeUserManager() {
+  if (!browser) {
     return {
       isInitializing: readable(false),
     };

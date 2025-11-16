@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Serie"
     },
-    "page_title_sign_in": {
-      "default": "Logg inn"
-    },
-    "header_device_auth_failed": {
-      "default": "Noe gikk galt"
-    },
     "header_device_auth_try_again": {
       "default": "Aktiveringen ble avslått, utløpt eller noe uforutsett skjedde. Prøv igjen."
     },

@@ -127,10 +127,7 @@
 <ErrorProvider>
   <QueryClientProvider client={data.queryClient}>
     <GlobalParameterProvider>
-      <AuthProvider
-        isAuthorizedLegacy={data.auth.isAuthorized}
-        isAuthorized={data.oidcAuth.isAuthorized}
-      >
+      <AuthProvider isAuthorized={data.oidcAuth.isAuthorized}>
         <WSInvalidator />
         <FeatureFlagProvider>
           <CookieConsentProvider consent={data.cookieConsent}>

@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Серіал"
     },
-    "page_title_sign_in": {
-      "default": "Увійти"
-    },
-    "header_device_auth_failed": {
-      "default": "Щось пішло не так"
-    },
     "header_device_auth_try_again": {
       "default": "Активацію відхилено, термін дії закінчився або трапилося щось непередбачуване. Спробуйте ще раз."
     },

@@ -17,8 +17,7 @@ export const load: LayoutLoad = ({ data }) => {
     },
   });
 
-  const auth = data.auth.isAuthorized ? data.auth : data.oidcAuth;
-  setToken({ value: auth.token, expiresAt: auth.expiresAt });
+  setToken({ value: data.oidcAuth.token, expiresAt: data.oidcAuth.expiresAt });
 
   return { queryClient, ...data };
 };

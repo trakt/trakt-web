@@ -3317,22 +3317,6 @@
         "ios"
       ]
     },
-    "page_title_sign_in": {
-      "default": "Sign in",
-      "description": "Title for the sign-in page.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "header_device_auth_failed": {
-      "default": "Something went wrong",
-      "description": "Header for the device authentication failed message.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "header_device_auth_try_again": {
       "default": "The activation was denied, expired, or something unforeseeable happened. Please try again.",
       "description": "Header for the device authentication try again message.",
@@ -3344,14 +3328,16 @@
       "default": "Scan the QR code, or sign in at:",
       "description": "Header for the device authentication QR code instruction message.",
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "header_device_auth_code_instruction": {
       "default": "and enter the following code:",
       "description": "Header for the device authentication code instruction message.",
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "option_text_all": {

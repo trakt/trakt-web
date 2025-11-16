@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Serie TV"
     },
-    "page_title_sign_in": {
-      "default": "Accedi"
-    },
-    "header_device_auth_failed": {
-      "default": "Qualcosa è andato storto"
-    },
     "header_device_auth_try_again": {
       "default": "L'attivazione è stata negata, è scaduta o è successo qualcosa di imprevisto. Riprova."
     },

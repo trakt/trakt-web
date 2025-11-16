@@ -9,7 +9,7 @@ import { useAuth } from './useAuth.ts';
 
 describe('initializeUserManager', () => {
   it('should initialize unauthorized users', async () => {
-    await renderStore(() => initializeUserManager(false));
+    await renderStore(() => initializeUserManager());
     const { isAuthorized } = await renderStore(() => useAuth());
 
     const token = getToken();
@@ -20,7 +20,7 @@ describe('initializeUserManager', () => {
 
   it('should initialize authorized users', async () => {
     setAuthorization(true);
-    await renderStore(() => initializeUserManager(false));
+    await renderStore(() => initializeUserManager());
     const { isAuthorized } = await renderStore(() => useAuth());
 
     const token = getToken();

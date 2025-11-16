@@ -1,5 +1,4 @@
 import { setupServer } from 'msw/node';
-import { auth } from './handlers/auth.ts';
 import { calendars } from './handlers/calendars.ts';
 import { comments } from './handlers/comments.ts';
 import { lists } from './handlers/lists.ts';
@@ -18,7 +17,6 @@ const handlers = [
   ...movies,
   ...shows,
   ...sync,
-  ...auth,
   ...people,
   ...watchNow,
   ...recommendations,

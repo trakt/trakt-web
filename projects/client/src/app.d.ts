@@ -190,9 +190,6 @@ declare global {
     // interface Error {}
     interface Locals {
       theme: import('$lib/features/theme/models/Theme').Theme;
-      auth:
-        | import('$lib/features/auth/models/SerializedAuthResponse').SerializedAuthResponse
-        | Nil;
       cookieConsent: CookieConsent;
       oidcAuth:
         | import('$lib/features/auth/models/OidcAuthToken').OidcAuthToken
