@@ -100,7 +100,7 @@
   {/snippet}
 
   <SpoilerSection {media} type={media.type}>
-    <p class="secondary">{intl.overview ?? media.overview}</p>
+    <p class="secondary small">{intl.overview ?? media.overview}</p>
   </SpoilerSection>
 
   <SummaryDetails {type}>
