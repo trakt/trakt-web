@@ -50,7 +50,7 @@
     gap: var(--toast-gap);
 
     box-shadow: var(--ni-0) var(--ni-8) var(--ni-8) var(--ni-0)
-      var(--cm-shadow-25);
+      color-mix(in srgb, var(--color-shadow) 25%, transparent);
 
     background-color: var(--color-toast-background);
     border: var(--border-thickness-xxs) solid var(--color-toast-border);

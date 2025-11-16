@@ -31,11 +31,19 @@
 
     padding: var(--ni-12);
 
-    background-color: var(--cm-background-list-summary);
+    background-color: color-mix(
+      in srgb,
+      var(--color-card-background) 40%,
+      var(--color-background)
+    );
     border-radius: var(--border-radius-m);
 
     &.trakt-list-official {
-      background-color: var(--cm-background-official-list-summary);
+      background-color: color-mix(
+        in srgb,
+        var(--color-official-list-background) 40%,
+        var(--color-background)
+      );
     }
   }
 </style>

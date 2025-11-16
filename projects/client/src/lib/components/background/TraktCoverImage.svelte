@@ -47,14 +47,14 @@
 
         background: linear-gradient(
           180deg,
-          var(--cm-background-48) 0%,
-          var(--cm-background-50) 13%,
-          var(--cm-background-57) 25%,
-          var(--cm-background-62) 34%,
-          var(--cm-background-70) 46%,
-          var(--cm-background-80) 64%,
-          var(--cm-background-95) 85%,
-          var(--color-background) 100%
+          color-mix(in srgb, var(--color-background) 48%, transparent) 0%,
+          color-mix(in srgb, var(--color-background) 50%, transparent) 13%,
+          color-mix(in srgb, var(--color-background) 57%, transparent) 25%,
+          color-mix(in srgb, var(--color-background) 62%, transparent) 34%,
+          color-mix(in srgb, var(--color-background) 70%, transparent) 46%,
+          color-mix(in srgb, var(--color-background) 80%, transparent) 64%,
+          color-mix(in srgb, var(--color-background) 95%, transparent) 85%,
+          color-mix(in srgb, var(--color-background), transparent) 100%
         );
 
         pointer-events: none;

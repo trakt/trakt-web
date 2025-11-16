@@ -206,7 +206,7 @@
 
     background-color: var(--color-background-navbar);
     box-shadow: var(--ni-0) var(--ni-24) var(--ni-64) var(--ni-0)
-      var(--cm-shadow-32);
+      color-mix(in srgb, var(--color-shadow) 32%, transparent);
 
     backdrop-filter: blur(8px);
     color: var(--color-foreground-navbar);

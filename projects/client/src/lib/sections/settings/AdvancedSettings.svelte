@@ -17,9 +17,13 @@
     background-color: var(--color-card-background);
 
     box-shadow:
-      0px var(--ni-16) var(--ni-8) 0px var(--cm-shadow-2),
-      0px var(--ni-8) var(--ni-4) 0px var(--cm-shadow-4),
-      0px var(--ni-4) var(--ni-4) 0px var(--cm-shadow-8),
-      0px var(--ni-1) var(--ni-2) 0px var(--cm-shadow-8);
+      0px var(--ni-16) var(--ni-8) 0px
+        color-mix(in srgb, var(--color-shadow) 2%, transparent),
+      0px var(--ni-8) var(--ni-4) 0px
+        color-mix(in srgb, var(--color-shadow) 4%, transparent),
+      0px var(--ni-4) var(--ni-4) 0px
+        color-mix(in srgb, var(--color-shadow) 8%, transparent),
+      0px var(--ni-1) var(--ni-2) 0px
+        color-mix(in srgb, var(--color-shadow) 8%, transparent);
   }
 </style>

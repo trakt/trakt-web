@@ -112,7 +112,7 @@
     height: var(--button-height);
 
     box-shadow: var(--ni-0) var(--ni-4) var(--ni-4) var(--ni-0)
-      var(--cm-shadow-25) inset;
+      color-mix(in srgb, var(--color-shadow) 25%, transparent) inset;
 
     box-sizing: border-box;
     padding: var(--ni-4);

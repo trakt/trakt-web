@@ -91,7 +91,7 @@
       110deg,
       var(--color-card-background) 0%,
       var(--color-card-background) 30%,
-      var(--cm-foreground-50) 50%,
+      color-mix(in srgb, var(--color-foreground) 50%, transparent) 50%,
       var(--color-card-background) 70%,
       var(--color-card-background) 100%
     );

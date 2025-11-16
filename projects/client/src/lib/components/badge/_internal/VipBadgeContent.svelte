@@ -23,9 +23,10 @@
     color: var(--color-foreground-vip-badge);
 
     box-shadow:
-      var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0) var(--cm-shadow-16),
-      var(--ni-0) var(--ni-neg-2) var(--ni-4) var(--ni-0) var(--cm-shadow-25)
-        inset,
+      var(--ni-0) var(--ni-2) var(--ni-8) var(--ni-0)
+        color-mix(in srgb, var(--color-shadow) 16%, transparent),
+      var(--ni-0) var(--ni-neg-2) var(--ni-4) var(--ni-0)
+        color-mix(in srgb, var(--color-shadow) 25%, transparent) inset,
       var(--ni-0) var(--ni-2) var(--ni-4) var(--ni-0) rgba(255, 255, 255, 0.44)
         inset;
 

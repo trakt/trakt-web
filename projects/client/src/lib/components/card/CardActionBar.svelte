@@ -39,7 +39,7 @@
 
       background-image: radial-gradient(
         circle at top right,
-        var(--cm-shadow-30) 15%,
+        color-mix(in srgb, var(--color-shadow) 30%, transparent) 15%,
         transparent 65%
       );
     }

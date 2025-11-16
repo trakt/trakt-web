@@ -80,11 +80,21 @@
     background: var(--shade-900);
 
     filter: drop-shadow(
-        var(--ni-0) var(--ni-88) var(--ni-36) var(--cm-shadow-2)
+        var(--ni-0) var(--ni-88) var(--ni-36)
+          color-mix(in srgb, var(--color-shadow) 2%, transparent)
       )
-      drop-shadow(var(--ni-0) var(--ni-52) var(--ni-32) var(--cm-shadow-6))
-      drop-shadow(var(--ni-0) var(--ni-24) var(--ni-24) var(--cm-shadow-10))
-      drop-shadow(var(--ni-0) var(--ni-8) var(--ni-12) var(--cm-shadow-12));
+      drop-shadow(
+        var(--ni-0) var(--ni-52) var(--ni-32)
+          color-mix(in srgb, var(--color-shadow) 6%, transparent)
+      )
+      drop-shadow(
+        var(--ni-0) var(--ni-24) var(--ni-24)
+          color-mix(in srgb, var(--color-shadow) 10%, transparent)
+      )
+      drop-shadow(
+        var(--ni-0) var(--ni-8) var(--ni-12)
+          color-mix(in srgb, var(--color-shadow) 12%, transparent)
+      );
   }
 
   .trakt-month-to-date-cover-image {

@@ -44,7 +44,7 @@
           50%,
         transparent
       ),
-      var(--cm-background-25)
+      color-mix(in srgb, var(--color-background) 25%, transparent)
     );
 
     &[data-cover-type="main"] {
@@ -121,7 +121,7 @@
       background: linear-gradient(
         180deg,
         transparent 0%,
-        var(--cm-background-95) 65%,
+        color-mix(in srgb, var(--color-background) 95%, transparent) 65%,
         var(--color-background) 100%
       );
     }
