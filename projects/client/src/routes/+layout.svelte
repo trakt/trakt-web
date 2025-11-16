@@ -176,10 +176,7 @@
                                         <MobileNavbar />
                                       </RenderFor>
 
-                                      <RenderFor
-                                        audience="authenticated"
-                                        navigation="default"
-                                      >
+                                      <RenderFor audience="authenticated">
                                         <NavbarToastContent />
                                       </RenderFor>
                                       <SvelteQueryDevtools

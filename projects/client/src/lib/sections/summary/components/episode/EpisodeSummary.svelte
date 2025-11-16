@@ -17,7 +17,6 @@
   import MediaMetaInfo from "./../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./../overlay/StreamOnOverlay.svelte";
   import RateNow from "./../rating/RateNow.svelte";
-  import StreamOnButton from "./../stream/StreamOnButton.svelte";
   import SummaryActions from "./../summary/SummaryActions.svelte";
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
@@ -41,16 +40,6 @@
 </script>
 
 {#snippet mediaActions(size: "small" | "normal" = "normal")}
-  <RenderFor audience="authenticated" navigation="dpad">
-    <StreamOnButton
-      {streamOn}
-      {type}
-      {episode}
-      media={show}
-      style="normal"
-      size="normal"
-    />
-  </RenderFor>
   <MarkAsWatchedAction
     style="normal"
     {type}
@@ -60,9 +49,6 @@
     {size}
     allowRewatch={$watchCount > 0}
   />
-  <RenderFor audience="authenticated" navigation="dpad">
-    <RateNow type="episode" media={episode} {show} />
-  </RenderFor>
 {/snippet}
 
 <SummaryContainer>
@@ -85,7 +71,7 @@
 
   <SummaryHeader {title}>
     {#snippet popupActions()}
-      <RenderFor audience="authenticated" navigation="default">
+      <RenderFor audience="authenticated">
         <CheckInAction style="dropdown-item" {title} {type} {show} {episode} />
       </RenderFor>
       <SetCoverImageAction
@@ -130,7 +116,7 @@
   <RenderFor audience="authenticated">
     <SummaryActions>
       {#snippet contextualActions()}
-        <RenderFor audience="authenticated" navigation="default">
+        <RenderFor audience="authenticated">
           <RateNow type="episode" media={episode} {show} />
         </RenderFor>
       {/snippet}
@@ -146,7 +132,7 @@
   </RenderFor>
 </SummaryContainer>
 
-<RenderFor audience="all" navigation="default">
+<RenderFor audience="all">
   <SummaryContainer>
     <MediaDetails {episode} {crew} type="episode" title={m.header_details()} />
   </SummaryContainer>

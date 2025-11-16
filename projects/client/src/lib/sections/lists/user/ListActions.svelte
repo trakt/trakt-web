@@ -22,7 +22,7 @@
   const isOnListPage = $derived(getListUrl(list) === page.url.pathname);
 </script>
 
-<RenderFor audience="authenticated" navigation="default">
+<RenderFor audience="authenticated">
   {#if $isDeleted && isOnListPage}
     <Redirect to={UrlBuilder.lists.user("me")} />
   {/if}

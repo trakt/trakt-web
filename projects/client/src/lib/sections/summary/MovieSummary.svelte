@@ -44,7 +44,7 @@
 </RenderFor>
 
 <RenderFor audience="authenticated">
-  <RenderFor audience="authenticated" navigation="default">
+  <RenderFor audience="authenticated">
     <WhereToWatchList type="movie" {media} {streamOn} />
   </RenderFor>
 

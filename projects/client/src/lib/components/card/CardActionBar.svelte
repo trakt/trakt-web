@@ -5,7 +5,7 @@
   const { actions }: { actions: Snippet } = $props();
 </script>
 
-<RenderFor audience="authenticated" navigation="default">
+<RenderFor audience="authenticated">
   <div class="trakt-card-action-bar">
     {@render actions()}
   </div>

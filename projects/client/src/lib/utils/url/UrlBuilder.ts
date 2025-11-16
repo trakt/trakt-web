@@ -226,9 +226,6 @@ export const UrlBuilder = {
         ),
     },
   },
-  login: {
-    activate: () => '/auth/device',
-  },
   settings: {
     general: () => '/settings',
     advanced: () => '/settings/advanced',

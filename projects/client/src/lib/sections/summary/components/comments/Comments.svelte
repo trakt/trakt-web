@@ -43,7 +43,7 @@
   <ListMetaInfo text={$sortType.text()} />
 {/snippet}
 
-<RenderFor audience="all" navigation="default">
+<RenderFor audience="all">
   <SectionList
     id={`comments-list-${media.slug}-${$sortType.value}`}
     items={$comments}

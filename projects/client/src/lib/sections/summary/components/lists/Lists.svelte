@@ -35,11 +35,7 @@
   {/if}
 {/snippet}
 
-<RenderFor
-  audience="all"
-  device={["tablet-sm", "tablet-lg", "desktop"]}
-  navigation="default"
->
+<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
   <SectionList
     id={`popular-lists-list-${slug}`}
     items={lists}
@@ -66,10 +62,6 @@
   </SectionList>
 </RenderFor>
 
-<RenderFor audience="all" device={["mobile"]} navigation="default">
-  {@render topUserList()}
-</RenderFor>
-
-<RenderFor audience="all" navigation="dpad">
+<RenderFor audience="all" device={["mobile"]}>
   {@render topUserList()}
 </RenderFor>

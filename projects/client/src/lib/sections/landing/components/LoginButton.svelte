@@ -1,11 +1,11 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
   import LockIcon from "$lib/components/icons/LockIcon.svelte";
+  import { useAuth } from "$lib/features/auth/stores/useAuth";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { useLoginTarget } from "$lib/sections/navbar/components/useLoginTarget";
 
-  const { target } = useLoginTarget();
+  const { login } = useAuth();
 </script>
 
 <Button
@@ -14,7 +14,7 @@
   size="small"
   color="default"
   navigationType={DpadNavigationType.Item}
-  {...$target}
+  onclick={login}
 >
   {m.button_text_login()}
   {#snippet icon()}

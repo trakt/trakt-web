@@ -36,7 +36,7 @@
   </div>
 
   {#if activeOverlay}
-    <RenderFor audience="all" navigation="default">
+    <RenderFor audience="all">
       <div class="trakt-summary-poster-overlay">
         {@render activeOverlay()}
       </div>

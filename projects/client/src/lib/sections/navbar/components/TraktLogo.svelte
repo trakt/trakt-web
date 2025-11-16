@@ -2,14 +2,12 @@
   import Link from "$lib/components/link/Link.svelte";
   import Logo from "$lib/components/logo/Logo.svelte";
   import LogoMark from "$lib/components/logo/LogoMark.svelte";
-  import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
 <RenderFor
   audience="authenticated"
-  navigation="default"
   device={["desktop", "tablet-lg", "tablet-sm"]}
 >
   <div class="trakt-logo">
@@ -24,37 +22,13 @@
   </div>
 </RenderFor>
 
-<RenderFor
-  audience="all"
-  device={["tablet-sm", "tablet-lg", "desktop"]}
-  navigation="dpad"
->
-  <button
-    class="trakt-logo trakt-logo-button"
-    data-dpad-navigation={DpadNavigationType.Item}
-    onclick={() => window.location.reload()}
-  >
-    <Logo />
-  </button>
-</RenderFor>
-
-<RenderFor audience="public" navigation="default">
+<RenderFor audience="public">
   <div class="trakt-logo">
     <Logo />
   </div>
 </RenderFor>
 
 <style>
-  .trakt-logo-button {
-    all: unset;
-    border-radius: var(--border-radius-xs);
-
-    &:focus-visible {
-      outline: var(--border-thickness-xs) solid var(--purple-500);
-      outline-offset: var(--gap-xs);
-    }
-  }
-
   .trakt-logo {
     height: var(--ni-32);
     display: flex;

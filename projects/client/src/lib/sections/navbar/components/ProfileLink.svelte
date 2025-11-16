@@ -31,7 +31,7 @@
       <p class="meta-info ellipsis">{m.link_text_view_profile()}</p>
     </div>
   </Link>
-  <RenderFor audience="authenticated" navigation="default">
+  <RenderFor audience="authenticated">
     <SettingsButton style="ghost" />
   </RenderFor>
 </trakt-profile-button>

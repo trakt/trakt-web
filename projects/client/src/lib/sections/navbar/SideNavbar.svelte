@@ -65,7 +65,7 @@
       </div>
 
       <div class="trakt-side-navbar-content">
-        <RenderFor audience="authenticated" navigation="default">
+        <RenderFor audience="authenticated">
           <Button
             href={UrlBuilder.search()}
             label={m.button_label_search()}
@@ -133,7 +133,7 @@
       <div class="trakt-side-navbar-bottom">
         <RenderFor audience="authenticated">
           {#if !isVip}
-            <RenderFor audience="authenticated" navigation="default">
+            <RenderFor audience="authenticated">
               <GetVIPLink />
             </RenderFor>
           {/if}
