@@ -7,22 +7,18 @@
   import { useUser } from "../stores/useUser";
 
   type AuthProviderProps = {
-    isAuthorizedLegacy: boolean;
     isAuthorized: boolean;
   } & ChildrenProps;
 
-  const {
-    children,
-    isAuthorizedLegacy,
-    isAuthorized: isAuthorizedOidc,
-  }: AuthProviderProps = $props();
+  const { children, isAuthorized: isAuthorizedOidc }: AuthProviderProps =
+    $props();
 
   const { isAuthorized } = createAuthContext({
-    isAuthorized: isAuthorizedLegacy || isAuthorizedOidc,
+    isAuthorized: isAuthorizedOidc,
     token: null,
   });
 
-  const { isInitializing } = initializeUserManager(isAuthorizedLegacy);
+  const { isInitializing } = initializeUserManager();
   const { user } = useUser();
 
   beforeNavigate(({ from, to, cancel }) => {

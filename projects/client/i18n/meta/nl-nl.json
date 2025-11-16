@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Serie"
     },
-    "page_title_sign_in": {
-      "default": "Inloggen"
-    },
-    "header_device_auth_failed": {
-      "default": "Er ging iets mis"
-    },
     "header_device_auth_try_again": {
       "default": "De activatie is geweigerd, verlopen of er is iets onvoorziens gebeurd. Probeer het opnieuw."
     },

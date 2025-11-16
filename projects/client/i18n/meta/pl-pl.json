@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Serial"
     },
-    "page_title_sign_in": {
-      "default": "Zaloguj się"
-    },
-    "header_device_auth_failed": {
-      "default": "Coś poszło nie tak"
-    },
     "header_device_auth_try_again": {
       "default": "Aktywacja została odrzucona, wygasła lub wydarzyło się coś nieprzewidzianego. Spróbuj ponownie."
     },

@@ -1,26 +1,7 @@
 import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
-import { safeSessionStorage } from '$lib/utils/storage/safeStorage.ts';
-import { getUserManager } from '../../features/auth/stores/userManager.ts';
 import { getMarker } from '../../utils/date/Marker.ts';
-
-const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
-
-function shouldReloadPage(expiresAt: number | Nil) {
-  if (getUserManager()) {
-    // FIXME: completely remove this refresh flow when fully switching to oidc-client-ts
-    return false;
-  }
-
-  if (
-    !expiresAt || safeSessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY)
-  ) {
-    return false;
-  }
-
-  return new Date(expiresAt).getTime() - Date.now() < 0;
-}
 
 export function createAuthenticatedFetch<
   T extends typeof fetch,
@@ -32,7 +13,7 @@ export function createAuthenticatedFetch<
     const headers = new Headers(init?.headers || {});
 
     try {
-      const { value: token, expiresAt } = getToken();
+      const { value: token } = getToken();
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -55,17 +36,7 @@ export function createAuthenticatedFetch<
           headers,
         } as Parameters<T>[1],
       ).then((response) => {
-        if (response.status === 401 && shouldReloadPage(expiresAt)) {
-          safeSessionStorage.setItem(
-            SESSION_STORAGE_REFRESH_KEY,
-            'true',
-          );
-          globalThis.window.location.reload();
-        }
-
-        if (response.status !== 401) {
-          safeSessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
-        }
+        //FIXME: deal with unauthorized responses even when the client has a 'valid' token
 
         return response;
       });

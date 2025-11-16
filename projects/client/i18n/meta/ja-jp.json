@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "番組"
     },
-    "page_title_sign_in": {
-      "default": "サインイン"
-    },
-    "header_device_auth_failed": {
-      "default": "問題が発生しました"
-    },
     "header_device_auth_try_again": {
       "default": "認証が拒否されたか、有効期限が切れたか、予期せぬ事態が発生しました。もう一度お試しください。"
     },

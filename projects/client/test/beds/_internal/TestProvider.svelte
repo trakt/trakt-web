@@ -14,7 +14,7 @@
 
 <!-- TODO: add more providers here as we expand test suite -->
 <QueryClientProvider client={new QueryClient()}>
-  <AuthProvider isAuthorized={$isAuthorized} isAuthorizedLegacy={false}>
+  <AuthProvider isAuthorized={$isAuthorized}>
     <FeatureFlagProvider>
       <ToastProvider>
         <SearchProvider

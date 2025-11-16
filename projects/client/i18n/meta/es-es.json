@@ -1200,12 +1200,6 @@
     "translated_value_type_show": {
       "default": "Serie"
     },
-    "page_title_sign_in": {
-      "default": "Iniciar sesión"
-    },
-    "header_device_auth_failed": {
-      "default": "Algo salió mal"
-    },
     "header_device_auth_try_again": {
       "default": "La activación fue denegada, expiró o ocurrió algo imprevisto. Inténtalo de nuevo."
     },
