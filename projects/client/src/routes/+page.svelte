@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Redirect from "$lib/components/router/Redirect.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
@@ -13,7 +12,6 @@
   import MonthInReview from "$lib/sections/month-in-review/MonthInReview.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
 <TraktPage
@@ -39,19 +37,11 @@
 </TraktPage>
 
 <RenderFor audience="public">
-  <RenderFor
-    audience="public"
-    navigation="default"
-    device={["tablet-sm", "tablet-lg", "desktop"]}
-  >
+  <RenderFor audience="public" device={["tablet-sm", "tablet-lg", "desktop"]}>
     <Landing />
   </RenderFor>
 
-  <RenderFor audience="public" navigation="default" device={["mobile"]}>
+  <RenderFor audience="public" device={["mobile"]}>
     <MobileLanding />
-  </RenderFor>
-
-  <RenderFor audience="public" navigation="dpad">
-    <Redirect to={UrlBuilder.login.activate()} />
   </RenderFor>
 </RenderFor>

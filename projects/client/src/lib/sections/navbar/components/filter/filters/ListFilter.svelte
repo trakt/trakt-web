@@ -33,14 +33,10 @@
   <RenderFor
     audience="authenticated"
     device={["tablet-sm", "tablet-lg", "desktop"]}
-    navigation="default"
   >
     <DropdownFilter {...commonProps} />
   </RenderFor>
-  <RenderFor audience="authenticated" device={["mobile"]} navigation="default">
-    <SelectFilter {...commonProps} />
-  </RenderFor>
-  <RenderFor audience="authenticated" navigation="dpad">
+  <RenderFor audience="authenticated" device={["mobile"]}>
     <SelectFilter {...commonProps} />
   </RenderFor>
 </Filter>

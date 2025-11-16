@@ -28,7 +28,6 @@
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
   import RateNow from "../rating/RateNow.svelte";
-  import StreamOnButton from "../stream/StreamOnButton.svelte";
   import SummaryActions from "../summary/SummaryActions.svelte";
   import SummaryContainer from "../summary/SummaryContainer.svelte";
   import SummaryHeader from "../summary/SummaryHeader.svelte";
@@ -84,21 +83,14 @@
 </script>
 
 {#snippet mediaActions()}
-  <RenderFor audience="authenticated" navigation="default">
+  <RenderFor audience="authenticated">
     {#if $lists.length === 0}
       <WatchlistAction {...watchlistProps} />
     {:else}
       <ListDropdown {...listProps} />
     {/if}
   </RenderFor>
-  <RenderFor audience="authenticated" navigation="dpad">
-    <StreamOnButton {streamOn} {type} {media} style="normal" size="normal" />
-    <WatchlistAction {...watchlistProps} />
-  </RenderFor>
   <MarkAsWatchedAction {...markAsWatchedProps} />
-  <RenderFor audience="authenticated" navigation="dpad">
-    <RateNow {type} {media} />
-  </RenderFor>
 {/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
@@ -127,7 +119,7 @@
 
   <SummaryHeader {title}>
     {#snippet popupActions()}
-      <RenderFor audience="authenticated" navigation="default">
+      <RenderFor audience="authenticated">
         {#if media.type === "movie"}
           <CheckInAction style="dropdown-item" type="movie" {title} {media} />
         {/if}
@@ -175,7 +167,7 @@
       </RenderFor>
 
       {#snippet contextualActions()}
-        <RenderFor audience="authenticated" navigation="default">
+        <RenderFor audience="authenticated">
           <RateNow {type} {media} />
         </RenderFor>
       {/snippet}
@@ -183,7 +175,7 @@
   </RenderFor>
 </SummaryContainer>
 
-<RenderFor audience="all" navigation="default">
+<RenderFor audience="all">
   <SummaryContainer>
     <MediaDetails {media} {studios} {crew} {type} title={m.header_details()} />
   </SummaryContainer>

@@ -12,7 +12,7 @@
   const isFirstWeek = isFirstWeekOfMonth(now);
 </script>
 
-<RenderFor audience="vip" navigation="default">
+<RenderFor audience="vip">
   {#if isFirstWeek}
     <div class="trakt-month-in-review">
       <MonthInReviewLink slug={$user.slug} date={previousMonth} />

@@ -22,7 +22,7 @@
   </div>
 
   {#if headerActions}
-    <RenderFor audience="all" navigation="default">
+    <RenderFor audience="all">
       <div class="trakt-summary-action-header">
         {@render headerActions()}
       </div>
@@ -30,7 +30,7 @@
   {/if}
 
   {#if popupActions}
-    <RenderFor audience="all" navigation="default">
+    <RenderFor audience="all">
       <div class="trakt-summary-action-header">
         <PopupMenu label={m.button_label_popup_menu({ title })} size="normal">
           {#snippet items()}

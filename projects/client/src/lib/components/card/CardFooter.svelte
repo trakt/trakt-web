@@ -17,7 +17,7 @@
   {/if}
 
   {#if action}
-    <RenderFor audience="all" navigation="default">
+    <RenderFor audience="all">
       <div class="trakt-card-footer-action">
         {@render action()}
       </div>

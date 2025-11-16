@@ -57,7 +57,7 @@
 </script>
 
 {#snippet titleAction()}
-  <RenderFor audience="all" navigation="default">
+  <RenderFor audience="all">
     <ActionButton
       onclick={toggle}
       label={$isCollapsed ? `Expand ${title} list` : `Collapse ${title} list`}

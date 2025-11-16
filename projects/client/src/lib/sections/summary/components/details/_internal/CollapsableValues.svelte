@@ -34,7 +34,7 @@
         {@render value(v)}
 
         {#if omittedValues.length > 0 && index === MAX_ITEMS - 1}
-          <RenderFor audience="all" navigation="default">
+          <RenderFor audience="all">
             <MoreButton
               i18n={MoreButtonIntlProvider}
               label="{m.button_label_expand_category({ category })}}"
