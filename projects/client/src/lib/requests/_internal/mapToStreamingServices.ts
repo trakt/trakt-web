@@ -10,21 +10,11 @@ import { sortStreamingServices } from './sortStreamingServices.ts';
 function mapToStreamNow(
   serviceResponse: WatchNowServiceResponse,
 ): StreamNow {
-  // FIXME move this to the API
-  const webOSLink = serviceResponse.link_webos &&
-      serviceResponse.link_webos.params.contentTarget !== ''
-    ? {
-      id: serviceResponse.link_webos.id,
-      contentTarget: serviceResponse.link_webos.params.contentTarget,
-    }
-    : undefined;
-
   return {
     type: 'streaming',
     link: prependHttps(serviceResponse.link),
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
-    webOSLink,
   };
 }
 

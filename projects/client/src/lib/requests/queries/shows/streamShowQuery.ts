@@ -19,9 +19,6 @@ const showWatchNowRequest = (
         id: slug,
         country,
       },
-      query: {
-        links: 'webos',
-      },
     });
 
 export const streamShowQuery = defineQuery({

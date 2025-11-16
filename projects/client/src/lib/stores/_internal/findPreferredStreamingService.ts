@@ -1,4 +1,3 @@
-import { getWebOSHandler } from '$lib/features/web-os/getWebOSHandler.ts';
 import type {
   StreamingServiceOptions,
   StreamNow,
@@ -20,24 +19,12 @@ export function findPreferredStreamingService({
   favorites,
   countryCode,
 }: FindPreferredStreamingServiceProps) {
-  const streamNowServices = services
-    .streaming
-    .filter(
-      (service) => {
-        if (getWebOSHandler()) {
-          return Boolean(service.webOSLink);
-        }
-
-        return true;
-      },
-    );
-
-  const favoriteSubscriptionMatch = streamNowServices
+  const favoriteSubscriptionMatch = services.streaming
     .find(
       (subscription) =>
         favorites.includes(`${countryCode}-${subscription.source}`),
     );
 
   return favoriteSubscriptionMatch ??
-    findViablePreferredService(streamNowServices);
+    findViablePreferredService(services.streaming);
 }

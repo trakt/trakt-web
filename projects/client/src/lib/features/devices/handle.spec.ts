@@ -14,19 +14,4 @@ describe('handle: devices', () => {
 
     expect(transformed).toMatch('<html>1</html>');
   });
-
-  it('should replace initial scale placeholder on a tv', async () => {
-    const html = `<html>${DEVICE_SCALE_PLACEHOLDER}</html>`;
-
-    const { transformPageChunk } = await interceptHandleResolveOptions(
-      handle,
-      new Request('http://localhost', {
-        headers: new Headers({ 'user-agent': 'webos' }),
-      }),
-    );
-
-    const transformed = transformPageChunk?.({ html, done: true });
-
-    expect(transformed).toMatch('<html>0.65</html>');
-  });
 });

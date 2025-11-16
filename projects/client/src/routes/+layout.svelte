@@ -122,23 +122,6 @@
       overflow: hidden;
     }
   </style>
-
-  {#if data.device === "tv"}
-    <script src="/webostv.js" charset="utf-8"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.41.0/minified.js"
-      integrity="sha512-f3bL1m/4b2hewJR1QPHqe1xtK1ch1+p3j/jhWkLbZxG4X8/KPhy4+ynauKz0AwPRITB0qXVVyna23/uKe8B4Ww=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-
-    <style>
-      /* To override the style that webOS inserts */
-      * {
-        font-family: "Spline Sans", Arial, sans-serif !important;
-      }
-    </style>
-  {/if}
 </svelte:head>
 
 <ErrorProvider>

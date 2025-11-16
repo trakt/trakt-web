@@ -10,18 +10,6 @@ describe('getDeviceType', () => {
     expect(getDeviceType(undefined)).toBe('unknown');
   });
 
-  it('should return "tv" for webOS user agents', () => {
-    const webOsUserAgent =
-      'Mozilla/5.0 (WebOS; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.211 Safari/537.36 WebAppManager/';
-    expect(getDeviceType(webOsUserAgent)).toBe('tv');
-  });
-
-  it('should return "tv" for simulated webOS user agents', () => {
-    const simulatedWebOsUserAgent =
-      'Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.211 Safari/537.36 WebAppManager/';
-    expect(getDeviceType(simulatedWebOsUserAgent)).toBe('tv');
-  });
-
   it('should return "mobile" for Android user agents', () => {
     const androidUserAgent =
       'Mozilla/5.0 (Linux; Android 12; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.120 Mobile Safari/537.36';

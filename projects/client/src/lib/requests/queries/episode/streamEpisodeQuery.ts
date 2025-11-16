@@ -25,9 +25,6 @@ const streamEpisodeRequest = (
         episode,
         country,
       },
-      query: {
-        links: 'webos',
-      },
     });
 
 export const streamEpisodeQuery = defineQuery({
