@@ -3,7 +3,7 @@
   import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import TrackAction from "$lib/sections/media-actions/mark-as-watched/TrackAction.svelte";
   import SummaryActions from "../../../_internal/SummaryActions.svelte";
-  import EpisodeActionsPopupMenu from "./EpisodeActionsPopupMenu.svelte";
+  import EpisodeActionsDrawer from "./EpisodeActionsDrawer.svelte";
 
   const {
     episode,
@@ -20,5 +20,5 @@
 
 <SummaryActions>
   <TrackAction {title} type="episode" media={episode} {show} />
-  <EpisodeActionsPopupMenu {episode} {show} {title} {showTitle} />
+  <EpisodeActionsDrawer {episode} {show} {title} {showTitle} />
 </SummaryActions>

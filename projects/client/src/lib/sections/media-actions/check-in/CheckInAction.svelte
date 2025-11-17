@@ -7,6 +7,7 @@
     style = "action",
     size = "normal",
     title,
+    variant,
     ...target
   }: CheckInActionProps = $props();
 
@@ -20,6 +21,7 @@
     {style}
     {title}
     {size}
+    {variant}
     isCheckedIn={$isCheckedIn}
     isCheckingIn={$isCheckingIn}
     {checkin}

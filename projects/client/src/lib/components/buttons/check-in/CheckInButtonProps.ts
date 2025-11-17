@@ -7,5 +7,6 @@ export type CheckInButtonProps = {
   size: 'normal' | 'small';
   isCheckingIn: boolean;
   isCheckedIn: boolean;
+  variant?: 'primary' | 'secondary';
   checkin: () => Promise<void>;
 } & Omit<ButtonProps, 'children' | 'onclick' | 'label'>;

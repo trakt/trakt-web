@@ -15,6 +15,7 @@
     urlOverride?: string;
     style?: "action" | "dropdown-item";
     source: DrilldownSource;
+    variant?: "primary" | "secondary";
   };
 
   const {
@@ -23,6 +24,7 @@
     urlOverride,
     source,
     style = "action",
+    variant = "secondary",
   }: ShareButtonProps = $props();
 
   const { track } = useTrack(AnalyticsEvent.Share);
@@ -67,12 +69,7 @@
   {/if}
 
   {#if style === "dropdown-item"}
-    <DropdownItem
-      color="default"
-      variant="secondary"
-      style="flat"
-      onclick={share}
-    >
+    <DropdownItem color="default" style="flat" onclick={share} {variant}>
       {m.button_text_share()}
       {#snippet icon()}
         <ShareIcon />
