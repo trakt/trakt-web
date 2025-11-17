@@ -116,9 +116,6 @@
 
     gap: var(--gap-s);
 
-    padding-top: var(--ni-88);
-    padding-bottom: var(--ni-24);
-
     :global(.trakt-search-icon) {
       z-index: calc(var(--layer-overlay) - 1);
     }
