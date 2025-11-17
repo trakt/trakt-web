@@ -886,10 +886,10 @@
       "default": "Posterul \"{title}\""
     },
     "list_placeholder_comments": {
-      "default": "Încă nu sunt comentarii."
+      "default": "Încă nu există recenzii."
     },
     "list_placeholder_replies": {
-      "default": "Încă nu sunt răspunsuri."
+      "default": "Încă nu există răspunsuri."
     },
     "text_review_by": {
       "default": "Recenzie de"
@@ -1060,43 +1060,58 @@
       "default": "Încă nu ai urmărit \"{title}\"!"
     },
     "button_label_like_comment": {
-      "default": "Apreciază comentariul"
+      "default": "Apreciază recenzia"
     },
     "button_label_unlike_comment": {
-      "default": "Nu aprecia comentariul"
+      "default": "Nu mai aprecia recenzia"
     },
     "button_text_comment_likes": {
-      "default": "{count} aprecieri"
+      "default": "{count} aprecieri",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Închide"
     },
     "button_label_comment_replies": {
-      "default": "Răspunsuri comentarii"
+      "default": "Răspunsuri la recenzie"
     },
     "button_text_comment_replies": {
-      "default": "{count} răspunsuri"
+      "default": "{count} răspunsuri",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Comentarii"
+      "default": "Recenzii"
     },
     "dialog_title_comments": {
-      "default": "Comentarii"
+      "default": "Recenzii"
     },
     "dialog_title_comment": {
-      "default": "Comentariu"
+      "default": "Recenzie"
     },
     "button_label_comment_reply": {
-      "default": "Răspunde lui {user}"
+      "default": "Răspunde lui {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
       "default": "Răspunde..."
     },
     "button_label_add_new_comment": {
-      "default": "Adaugă un comentariu"
+      "default": "Adaugă o recenzie nouă"
     },
     "textarea_placeholder_comment": {
-      "default": "Comentariu..."
+      "default": "Recenzia ta..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Marchează ca spoiler"
@@ -1108,13 +1123,13 @@
       "default": "Închide eroare"
     },
     "button_label_post_reply": {
-      "default": "Postează răspuns"
+      "default": "Publică răspuns"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Comentariile trebuie să aibă cel puțin 5 cuvinte."
+      "default": "Recenziile trebuie să aibă cel puțin 5 cuvinte."
     },
     "translated_value_error_comment_unknown": {
-      "default": "A apărut o eroare la publicarea comentariului. Vă rugăm să încercați din nou mai târziu."
+      "default": "A apărut o eroare la postarea recenziei. Te rugăm să încerci mai târziu."
     },
     "page_title_user_profile": {
       "default": "Profilul lui {username}"
@@ -1129,7 +1144,7 @@
       "default": "Titlu original"
     },
     "button_label_view_all_comments": {
-      "default": "Vezi toate comentariile"
+      "default": "Vezi toate recenziile"
     },
     "button_text_remove_from_list": {
       "default": "Elimină din listă"
@@ -1377,7 +1392,7 @@
       "default": "Citește mai mult"
     },
     "button_label_add_comment": {
-      "default": "Adaugă un comentariu"
+      "default": "Adaugă recenzie"
     },
     "input_prompt_rename_list": {
       "default": "Redenumiți lista"
@@ -1633,7 +1648,12 @@
       "default": "Reacții"
     },
     "button_label_react": {
-      "default": "Reacționează cu {reaction}"
+      "default": "Reacționează cu {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Filme"
@@ -1822,7 +1842,7 @@
       "default": "Descoperă filme"
     },
     "header_comment_reactions": {
-      "default": "Reacții la comentarii"
+      "default": "Reacții la recenzie"
     },
     "button_label_close_reaction": {
       "default": "Închide"
@@ -2039,10 +2059,10 @@
       "default": "Adăugat recent"
     },
     "text_sort_comments_popular": {
-      "default": "Popular"
+      "default": "Populari"
     },
     "text_sort_comments_recent": {
-      "default": "Recent"
+      "default": "Recente"
     },
     "text_info_list_created": {
       "default": "Lista a fost creată."
@@ -2075,13 +2095,13 @@
       "default": "Oprește check-in-ul"
     },
     "button_text_delete_comment": {
-      "default": "Șterge comentariul"
+      "default": "Șterge Recenzia"
     },
     "button_label_delete_comment": {
-      "default": "Șterge comentariul"
+      "default": "Șterge Recenzia"
     },
     "warning_prompt_delete_comment": {
-      "default": "Sigur doriți să ștergeți comentariul?"
+      "default": "Ești sigur că vrei să ștergi recenzia?"
     },
     "page_title_discover": {
       "default": "Descoperă"
@@ -2099,13 +2119,13 @@
       "default": "Descoperă filme și seriale"
     },
     "button_label_popular_comments": {
-      "default": "Comentarii populare"
+      "default": "Recenzii populare"
     },
     "button_text_popular_comments": {
-      "default": "Populare"
+      "default": "Populari"
     },
     "button_label_recent_comments": {
-      "default": "Comentarii recente"
+      "default": "Recenzii recente"
     },
     "button_text_recent_comments": {
       "default": "Recente"

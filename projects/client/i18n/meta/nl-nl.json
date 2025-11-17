@@ -886,10 +886,10 @@
       "default": "\"{title}\" poster"
     },
     "list_placeholder_comments": {
-      "default": "Nog geen reacties."
+      "default": "Nog geen beoordelingen."
     },
     "list_placeholder_replies": {
-      "default": "Nog geen antwoorden."
+      "default": "Nog geen reacties."
     },
     "text_review_by": {
       "default": "Review door"
@@ -1060,43 +1060,58 @@
       "default": "Je hebt \"{title}\" nog niet bekeken"
     },
     "button_label_like_comment": {
-      "default": "Vind ik leuk"
+      "default": "Beoordeling leuk vinden"
     },
     "button_label_unlike_comment": {
-      "default": "Vind ik niet leuk"
+      "default": "Beoordeling niet leuk vinden"
     },
     "button_text_comment_likes": {
-      "default": "{count} likes"
+      "default": "{count} likes",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Sluiten"
     },
     "button_label_comment_replies": {
-      "default": "Reacties"
+      "default": "Reacties op beoordeling"
     },
     "button_text_comment_replies": {
-      "default": "{count} reacties"
+      "default": "{count} reacties",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Reacties"
+      "default": "Beoordelingen"
     },
     "dialog_title_comments": {
-      "default": "Opmerkingen"
+      "default": "Beoordelingen"
     },
     "dialog_title_comment": {
-      "default": "Reactie"
+      "default": "Beoordeling"
     },
     "button_label_comment_reply": {
-      "default": "Reageer op {user}"
+      "default": "Reageer op {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
-      "default": "Reageren..."
+      "default": "Reageer..."
     },
     "button_label_add_new_comment": {
-      "default": "Voeg een reactie toe"
+      "default": "Nieuwe beoordeling toevoegen"
     },
     "textarea_placeholder_comment": {
-      "default": "Reactie..."
+      "default": "Jouw beoordeling..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Markeren als spoiler"
@@ -1108,13 +1123,13 @@
       "default": "Sluit fout"
     },
     "button_label_post_reply": {
-      "default": "Plaats antwoord"
+      "default": "Reactie plaatsen"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Reacties moeten minimaal 5 woorden bevatten."
+      "default": "Beoordelingen moeten minimaal 5 woorden bevatten."
     },
     "translated_value_error_comment_unknown": {
-      "default": "Er is een fout opgetreden bij het plaatsen van je opmerking. Probeer het later opnieuw."
+      "default": "Er is een fout opgetreden bij het plaatsen van je beoordeling. Probeer het later opnieuw."
     },
     "page_title_user_profile": {
       "default": "{username}'s profiel"
@@ -1129,7 +1144,7 @@
       "default": "Originele titel"
     },
     "button_label_view_all_comments": {
-      "default": "Bekijk alle reacties"
+      "default": "Bekijk alle beoordelingen"
     },
     "button_text_remove_from_list": {
       "default": "Verwijder van lijst"
@@ -1377,7 +1392,7 @@
       "default": "Lees meer"
     },
     "button_label_add_comment": {
-      "default": "Voeg commentaar toe"
+      "default": "Beoordeling toevoegen"
     },
     "input_prompt_rename_list": {
       "default": "Hernoem je lijst"
@@ -1633,7 +1648,12 @@
       "default": "Reacties"
     },
     "button_label_react": {
-      "default": "Reageer met {reaction}"
+      "default": "Reageren met {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Films"
@@ -1822,7 +1842,7 @@
       "default": "Ontdek films"
     },
     "header_comment_reactions": {
-      "default": "Reacties op opmerkingen"
+      "default": "Reacties op beoordeling"
     },
     "button_label_close_reaction": {
       "default": "Sluiten"
@@ -2075,13 +2095,13 @@
       "default": "Check-in stoppen"
     },
     "button_text_delete_comment": {
-      "default": "Verwijder reactie"
+      "default": "Beoordeling verwijderen"
     },
     "button_label_delete_comment": {
-      "default": "Verwijder reactie"
+      "default": "Beoordeling verwijderen"
     },
     "warning_prompt_delete_comment": {
-      "default": "Weet je zeker dat je je reactie wilt verwijderen?"
+      "default": "Weet je zeker dat je je beoordeling wilt verwijderen?"
     },
     "page_title_discover": {
       "default": "Ontdek"
@@ -2099,13 +2119,13 @@
       "default": "Films en series ontdekken"
     },
     "button_label_popular_comments": {
-      "default": "Populaire reacties"
+      "default": "Populaire beoordelingen"
     },
     "button_text_popular_comments": {
       "default": "Populair"
     },
     "button_label_recent_comments": {
-      "default": "Recente reacties"
+      "default": "Recente beoordelingen"
     },
     "button_text_recent_comments": {
       "default": "Recent"

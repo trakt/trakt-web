@@ -886,7 +886,7 @@
       "default": "\"{title}\" плакат"
     },
     "list_placeholder_comments": {
-      "default": "Все още няма коментари"
+      "default": "Все още няма ревюта."
     },
     "list_placeholder_replies": {
       "default": "Все още няма отговори."
@@ -1060,43 +1060,58 @@
       "default": "Все още не сте гледали \"{title}\""
     },
     "button_label_like_comment": {
-      "default": "Харесвам коментара"
+      "default": "Харесва ми ревюто"
     },
     "button_label_unlike_comment": {
-      "default": "Не харесвам коментара"
+      "default": "Не ми харесва ревюто"
     },
     "button_text_comment_likes": {
-      "default": "{count} харесвания"
+      "default": "{count} харесвания",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Затвори"
     },
     "button_label_comment_replies": {
-      "default": "Отговори на коментари"
+      "default": "Отговори на ревюто"
     },
     "button_text_comment_replies": {
-      "default": "{count} отговора"
+      "default": "{count} отговора",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Коментари"
+      "default": "Ревюта"
     },
     "dialog_title_comments": {
-      "default": "Коментари"
+      "default": "Ревюта"
     },
     "dialog_title_comment": {
-      "default": "Коментар"
+      "default": "Ревю"
     },
     "button_label_comment_reply": {
-      "default": "Отговор на {user}"
+      "default": "Отговор до {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
-      "default": "Отговор..."
+      "default": "Отговори..."
     },
     "button_label_add_new_comment": {
-      "default": "Добави коментар"
+      "default": "Добави ново ревю"
     },
     "textarea_placeholder_comment": {
-      "default": "Коментар..."
+      "default": "Твоето ревю..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Маркирай като спойлер"
@@ -1111,10 +1126,10 @@
       "default": "Публикувай отговор"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Коментарите трябва да са с поне 5 думи."
+      "default": "Ревютата трябва да съдържат поне 5 думи."
     },
     "translated_value_error_comment_unknown": {
-      "default": "Възникна грешка при публикуването на вашия коментар. Моля, опитайте отново по-късно."
+      "default": "Възникна грешка при публикуването на вашето ревю. Моля, опитайте отново по-късно."
     },
     "page_title_user_profile": {
       "default": "Профил на {username}"
@@ -1129,7 +1144,7 @@
       "default": "Оригинално Заглавие"
     },
     "button_label_view_all_comments": {
-      "default": "Виж всички коментари"
+      "default": "Виж всички ревюта"
     },
     "button_text_remove_from_list": {
       "default": "Премахни от списъка"
@@ -1377,7 +1392,7 @@
       "default": "Прочети още"
     },
     "button_label_add_comment": {
-      "default": "Добави коментар"
+      "default": "Добави ревю"
     },
     "input_prompt_rename_list": {
       "default": "Преименувайте списъка си"
@@ -1484,7 +1499,7 @@
       "default": "Списък"
     },
     "button_text_create": {
-      "default": "Създаване"
+      "default": "Създай"
     },
     "button_text_apply": {
       "default": "Приложи"
@@ -1633,7 +1648,12 @@
       "default": "Реакции"
     },
     "button_label_react": {
-      "default": "Реагирай с {reaction}"
+      "default": "Реагирай с {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Филми"
@@ -1822,7 +1842,7 @@
       "default": "Открийте филми"
     },
     "header_comment_reactions": {
-      "default": "Реакции на коментари"
+      "default": "Реакции на ревюто"
     },
     "button_label_close_reaction": {
       "default": "Затвори"
@@ -2075,13 +2095,13 @@
       "default": "Спри проверка"
     },
     "button_text_delete_comment": {
-      "default": "Изтрий коментара"
+      "default": "Изтрий ревюто"
     },
     "button_label_delete_comment": {
-      "default": "Изтрий коментара"
+      "default": "Изтрий ревюто"
     },
     "warning_prompt_delete_comment": {
-      "default": "Сигурни ли сте, че искате да изтриете коментара си?"
+      "default": "Сигурни ли сте, че искате да изтриете ревюто си?"
     },
     "page_title_discover": {
       "default": "Открийте"
@@ -2099,13 +2119,13 @@
       "default": "Открийте филми и сериали"
     },
     "button_label_popular_comments": {
-      "default": "Популярни коментари"
+      "default": "Популярни ревюта"
     },
     "button_text_popular_comments": {
       "default": "Популярни"
     },
     "button_label_recent_comments": {
-      "default": "Последни коментари"
+      "default": "Последни ревюта"
     },
     "button_text_recent_comments": {
       "default": "Последни"

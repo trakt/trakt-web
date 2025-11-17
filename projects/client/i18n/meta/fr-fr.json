@@ -886,7 +886,7 @@
       "default": "Affiche de \"{title}\""
     },
     "list_placeholder_comments": {
-      "default": "Pas encore de commentaires."
+      "default": "Aucun avis pour le moment."
     },
     "list_placeholder_replies": {
       "default": "Aucune réponse pour le moment."
@@ -1060,43 +1060,58 @@
       "default": "Vous n'avez pas encore vu \"{title}\""
     },
     "button_label_like_comment": {
-      "default": "J'aime le commentaire"
+      "default": "Aimer cet avis"
     },
     "button_label_unlike_comment": {
-      "default": "Je n'aime pas le commentaire"
+      "default": "Ne plus aimer cet avis"
     },
     "button_text_comment_likes": {
-      "default": "{count} j'aime"
+      "default": "{count} J'aime",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Fermer"
     },
     "button_label_comment_replies": {
-      "default": "Réponses aux commentaires"
+      "default": "Réponses à l'avis"
     },
     "button_text_comment_replies": {
-      "default": "{count} réponses"
+      "default": "{count} réponses",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Commentaires"
+      "default": "Avis"
     },
     "dialog_title_comments": {
-      "default": "Commentaires"
+      "default": "Avis"
     },
     "dialog_title_comment": {
-      "default": "Commentaire"
+      "default": "Avis"
     },
     "button_label_comment_reply": {
-      "default": "Répondre à {user}"
+      "default": "Répondre à {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
-      "default": "Réponse..."
+      "default": "Répondez..."
     },
     "button_label_add_new_comment": {
-      "default": "Ajouter un commentaire"
+      "default": "Ajouter un nouvel avis"
     },
     "textarea_placeholder_comment": {
-      "default": "Votre commentaire..."
+      "default": "Votre avis..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Marquer comme spoiler"
@@ -1108,13 +1123,13 @@
       "default": "Fermer l'erreur"
     },
     "button_label_post_reply": {
-      "default": "Poster la réponse"
+      "default": "Publier la réponse"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Les commentaires doivent comporter au moins 5 mots."
+      "default": "Les avis doivent contenir au moins 5 mots."
     },
     "translated_value_error_comment_unknown": {
-      "default": "Une erreur s'est produite lors de la publication de votre commentaire. Veuillez réessayer plus tard."
+      "default": "Une erreur est survenue lors de la publication de votre avis. Veuillez réessayer plus tard."
     },
     "page_title_user_profile": {
       "default": "Profil de {username}"
@@ -1129,7 +1144,7 @@
       "default": "Titre original"
     },
     "button_label_view_all_comments": {
-      "default": "Voir tous les commentaires"
+      "default": "Voir tous les avis"
     },
     "button_text_remove_from_list": {
       "default": "Retirer de la liste"
@@ -1377,7 +1392,7 @@
       "default": "Lire plus"
     },
     "button_label_add_comment": {
-      "default": "Ajouter un commentaire"
+      "default": "Ajouter un avis"
     },
     "input_prompt_rename_list": {
       "default": "Renommer votre liste"
@@ -1633,7 +1648,12 @@
       "default": "Réactions"
     },
     "button_label_react": {
-      "default": "Réagir avec {reaction}"
+      "default": "Réagir avec {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Films"
@@ -1822,7 +1842,7 @@
       "default": "Découvrez les films"
     },
     "header_comment_reactions": {
-      "default": "Réactions aux commentaires"
+      "default": "Réactions à l'avis"
     },
     "button_label_close_reaction": {
       "default": "Fermer"
@@ -2039,10 +2059,10 @@
       "default": "Récemment ajoutés"
     },
     "text_sort_comments_popular": {
-      "default": "Populaire"
+      "default": "Populaires"
     },
     "text_sort_comments_recent": {
-      "default": "Récent"
+      "default": "Récents"
     },
     "text_info_list_created": {
       "default": "La liste a été créée."
@@ -2075,13 +2095,13 @@
       "default": "Arrêter l'enregistrement"
     },
     "button_text_delete_comment": {
-      "default": "Supprimer le commentaire"
+      "default": "Supprimer l'avis"
     },
     "button_label_delete_comment": {
-      "default": "Supprimer le commentaire"
+      "default": "Supprimer l'avis"
     },
     "warning_prompt_delete_comment": {
-      "default": "Êtes-vous sûr(e) de vouloir supprimer votre commentaire ?"
+      "default": "Êtes-vous sûr de vouloir supprimer votre avis ?"
     },
     "page_title_discover": {
       "default": "Découvrir"
@@ -2099,13 +2119,13 @@
       "default": "Découvrir des films et séries"
     },
     "button_label_popular_comments": {
-      "default": "Commentaires populaires"
+      "default": "Avis populaires"
     },
     "button_text_popular_comments": {
       "default": "Populaires"
     },
     "button_label_recent_comments": {
-      "default": "Commentaires récents"
+      "default": "Avis récents"
     },
     "button_text_recent_comments": {
       "default": "Récents"

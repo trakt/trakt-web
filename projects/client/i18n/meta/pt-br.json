@@ -886,10 +886,10 @@
       "default": "Pôster de \"{title}\""
     },
     "list_placeholder_comments": {
-      "default": "Sem comentários por enquanto. Seja o primeiro!"
+      "default": "Nenhuma avaliação ainda."
     },
     "list_placeholder_replies": {
-      "default": "Ainda sem respostas."
+      "default": "Nenhuma resposta ainda."
     },
     "text_review_by": {
       "default": "Crítica por"
@@ -1060,43 +1060,58 @@
       "default": "Você ainda não assistiu \"{title}\""
     },
     "button_label_like_comment": {
-      "default": "Curtir comentário"
+      "default": "Curtir Avaliação"
     },
     "button_label_unlike_comment": {
-      "default": "Descurtir comentário"
+      "default": "Não Curtir Avaliação"
     },
     "button_text_comment_likes": {
-      "default": "{count} curtidas"
+      "default": "{count} curtidas",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Fechar"
     },
     "button_label_comment_replies": {
-      "default": "Respostas"
+      "default": "Respostas da Avaliação"
     },
     "button_text_comment_replies": {
-      "default": "{count} respostas"
+      "default": "{count} respostas",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Comentários"
+      "default": "Avaliações"
     },
     "dialog_title_comments": {
-      "default": "Comentários"
+      "default": "Avaliações"
     },
     "dialog_title_comment": {
-      "default": "Comentário"
+      "default": "Avaliação"
     },
     "button_label_comment_reply": {
-      "default": "Responder para {user}"
+      "default": "Responder para {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
-      "default": "Responder..."
+      "default": "Responda..."
     },
     "button_label_add_new_comment": {
-      "default": "Adicionar comentário"
+      "default": "Adicionar uma nova avaliação"
     },
     "textarea_placeholder_comment": {
-      "default": "Comentário..."
+      "default": "Sua avaliação..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Marcar como spoiler"
@@ -1108,13 +1123,13 @@
       "default": "Fechar erro"
     },
     "button_label_post_reply": {
-      "default": "Enviar resposta"
+      "default": "Publicar resposta"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Os comentários devem ter pelo menos 5 palavras."
+      "default": "As avaliações devem ter pelo menos 5 palavras."
     },
     "translated_value_error_comment_unknown": {
-      "default": "Ocorreu um erro ao postar seu comentário. Tente novamente mais tarde."
+      "default": "Ocorreu um erro ao postar sua avaliação. Por favor, tente novamente mais tarde."
     },
     "page_title_user_profile": {
       "default": "Perfil de {username}"
@@ -1129,7 +1144,7 @@
       "default": "Título Original"
     },
     "button_label_view_all_comments": {
-      "default": "Ver todos os comentários"
+      "default": "Ver todas as avaliações"
     },
     "button_text_remove_from_list": {
       "default": "Remover da lista"
@@ -1377,7 +1392,7 @@
       "default": "Ler mais"
     },
     "button_label_add_comment": {
-      "default": "Adicionar comentário"
+      "default": "Adicionar avaliação"
     },
     "input_prompt_rename_list": {
       "default": "Renomear sua lista"
@@ -1633,7 +1648,12 @@
       "default": "Reações"
     },
     "button_label_react": {
-      "default": "Reagir com {reaction}"
+      "default": "Reagir com {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Filmes"
@@ -1822,7 +1842,7 @@
       "default": "Descubra filmes"
     },
     "header_comment_reactions": {
-      "default": "Reações aos comentários"
+      "default": "Reações à avaliação"
     },
     "button_label_close_reaction": {
       "default": "Fechar"
@@ -2039,10 +2059,10 @@
       "default": "Adicionado recentemente"
     },
     "text_sort_comments_popular": {
-      "default": "Popular"
+      "default": "Populares"
     },
     "text_sort_comments_recent": {
-      "default": "Recente"
+      "default": "Recentes"
     },
     "text_info_list_created": {
       "default": "Lista criada."
@@ -2075,13 +2095,13 @@
       "default": "Parar check-in"
     },
     "button_text_delete_comment": {
-      "default": "Apagar comentário"
+      "default": "Excluir Avaliação"
     },
     "button_label_delete_comment": {
-      "default": "Apagar comentário"
+      "default": "Excluir Avaliação"
     },
     "warning_prompt_delete_comment": {
-      "default": "Tem certeza que deseja apagar seu comentário?"
+      "default": "Tem certeza de que deseja excluir sua avaliação?"
     },
     "page_title_discover": {
       "default": "Descobrir"
@@ -2099,13 +2119,13 @@
       "default": "Descobrir filmes e séries"
     },
     "button_label_popular_comments": {
-      "default": "Comentários populares"
+      "default": "Avaliações populares"
     },
     "button_text_popular_comments": {
       "default": "Populares"
     },
     "button_label_recent_comments": {
-      "default": "Comentários recentes"
+      "default": "Avaliações recentes"
     },
     "button_text_recent_comments": {
       "default": "Recentes"

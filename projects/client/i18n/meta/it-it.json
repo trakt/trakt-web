@@ -886,10 +886,10 @@
       "default": "Locandina di \"{title}\""
     },
     "list_placeholder_comments": {
-      "default": "Nessun commento per ora."
+      "default": "Nessuna recensione al momento."
     },
     "list_placeholder_replies": {
-      "default": "Nessuna risposta per ora."
+      "default": "Nessuna risposta al momento."
     },
     "text_review_by": {
       "default": "Recensione di"
@@ -1060,46 +1060,61 @@
       "default": "Non hai ancora visto \"{title}\""
     },
     "button_label_like_comment": {
-      "default": "Mi piace commento"
+      "default": "Mi piace la recensione"
     },
     "button_label_unlike_comment": {
-      "default": "Non mi piace commento"
+      "default": "Non mi piace la recensione"
     },
     "button_text_comment_likes": {
-      "default": "{count} mi piace"
+      "default": "{count} Mi piace",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Chiudi"
     },
     "button_label_comment_replies": {
-      "default": "Risposte ai commenti"
+      "default": "Risposte alla recensione"
     },
     "button_text_comment_replies": {
-      "default": "{count} risposte"
+      "default": "{count} risposte",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Commenti"
+      "default": "Recensioni"
     },
     "dialog_title_comments": {
-      "default": "Commenti"
+      "default": "Recensioni"
     },
     "dialog_title_comment": {
-      "default": "Commento"
+      "default": "Recensione"
     },
     "button_label_comment_reply": {
-      "default": "Rispondi a {user}"
+      "default": "Rispondi a {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
       "default": "Rispondi..."
     },
     "button_label_add_new_comment": {
-      "default": "Aggiungi un commento"
+      "default": "Aggiungi una nuova recensione"
     },
     "textarea_placeholder_comment": {
-      "default": "Commento..."
+      "default": "La tua recensione..."
     },
     "switch_label_mark_as_spoiler": {
-      "default": "Segna come spoiler"
+      "default": "Segnala come spoiler"
     },
     "text_spoiler": {
       "default": "Spoiler"
@@ -1108,13 +1123,13 @@
       "default": "Chiudi errore"
     },
     "button_label_post_reply": {
-      "default": "Invia risposta"
+      "default": "Pubblica risposta"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "I commenti devono contenere almeno 5 parole."
+      "default": "Le recensioni devono contenere almeno 5 parole."
     },
     "translated_value_error_comment_unknown": {
-      "default": "Si è verificato un errore durante la pubblicazione del commento. Riprova più tardi."
+      "default": "Si è verificato un errore durante la pubblicazione della tua recensione. Riprova più tardi."
     },
     "page_title_user_profile": {
       "default": "Profilo di {username}"
@@ -1129,7 +1144,7 @@
       "default": "Titolo Originale"
     },
     "button_label_view_all_comments": {
-      "default": "Vedi tutti i commenti"
+      "default": "Mostra tutte le recensioni"
     },
     "button_text_remove_from_list": {
       "default": "Rimuovi dalla lista"
@@ -1377,7 +1392,7 @@
       "default": "Leggi di più"
     },
     "button_label_add_comment": {
-      "default": "Aggiungi commento"
+      "default": "Aggiungi recensione"
     },
     "input_prompt_rename_list": {
       "default": "Rinomina la tua lista"
@@ -1633,7 +1648,12 @@
       "default": "Reazioni"
     },
     "button_label_react": {
-      "default": "Reagisci con {reaction}"
+      "default": "Reagisci con {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Film"
@@ -1822,7 +1842,7 @@
       "default": "Scopri film"
     },
     "header_comment_reactions": {
-      "default": "Reazioni ai commenti"
+      "default": "Reazioni alla recensione"
     },
     "button_label_close_reaction": {
       "default": "Chiudi"
@@ -2075,13 +2095,13 @@
       "default": "Interrompi il check-in"
     },
     "button_text_delete_comment": {
-      "default": "Cancella commento"
+      "default": "Elimina recensione"
     },
     "button_label_delete_comment": {
-      "default": "Cancella commento"
+      "default": "Elimina recensione"
     },
     "warning_prompt_delete_comment": {
-      "default": "Sei sicuro di voler cancellare il tuo commento?"
+      "default": "Sei sicuro di voler eliminare la tua recensione?"
     },
     "page_title_discover": {
       "default": "Scopri"
@@ -2099,13 +2119,13 @@
       "default": "Scopri film e serie TV"
     },
     "button_label_popular_comments": {
-      "default": "Commenti popolari"
+      "default": "Recensioni popolari"
     },
     "button_text_popular_comments": {
       "default": "Popolari"
     },
     "button_label_recent_comments": {
-      "default": "Commenti recenti"
+      "default": "Recensioni recenti"
     },
     "button_text_recent_comments": {
       "default": "Recenti"

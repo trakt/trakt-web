@@ -886,10 +886,10 @@
       "default": "Постер \"{title}\""
     },
     "list_placeholder_comments": {
-      "default": "Ще немає коментарів."
+      "default": "Відгуків ще немає."
     },
     "list_placeholder_replies": {
-      "default": "Відгуків поки що немає."
+      "default": "Відповідей ще немає."
     },
     "text_review_by": {
       "default": "Огляд від"
@@ -1060,43 +1060,58 @@
       "default": "Ви ще не дивилися \"{title}\""
     },
     "button_label_like_comment": {
-      "default": "Вподобати коментар"
+      "default": "Сподобався відгук"
     },
     "button_label_unlike_comment": {
-      "default": "Не подобається коментар"
+      "default": "Не сподобався відгук"
     },
     "button_text_comment_likes": {
-      "default": "{count} вподобайок"
+      "default": "{count} лайків",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Закрити"
     },
     "button_label_comment_replies": {
-      "default": "Відповіді на коментарі"
+      "default": "Відповіді на відгук"
     },
     "button_text_comment_replies": {
-      "default": "{count} відповідей"
+      "default": "{count} відповідей",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Коментарі"
+      "default": "Відгуки"
     },
     "dialog_title_comments": {
-      "default": "Коментарі"
+      "default": "Відгуки"
     },
     "dialog_title_comment": {
-      "default": "Коментар"
+      "default": "Відгук"
     },
     "button_label_comment_reply": {
-      "default": "Відповісти {user}"
+      "default": "Відповісти {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
-      "default": "Відповідь..."
+      "default": "Відповісти..."
     },
     "button_label_add_new_comment": {
-      "default": "Додати коментар"
+      "default": "Додати новий відгук"
     },
     "textarea_placeholder_comment": {
-      "default": "Коментар..."
+      "default": "Ваш відгук..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Позначити як спойлер"
@@ -1111,10 +1126,10 @@
       "default": "Надіслати відповідь"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Коментарі повинні містити щонайменше 5 слів."
+      "default": "Відгуки мають містити щонайменше 5 слів."
     },
     "translated_value_error_comment_unknown": {
-      "default": "Виникла помилка під час публікації вашого коментаря. Спробуйте пізніше."
+      "default": "Сталася помилка під час публікації вашого відгуку. Будь ласка, спробуйте пізніше."
     },
     "page_title_user_profile": {
       "default": "Профіль {username}"
@@ -1129,7 +1144,7 @@
       "default": "Оригінальна назва"
     },
     "button_label_view_all_comments": {
-      "default": "Переглянути всі коментарі"
+      "default": "Переглянути всі відгуки"
     },
     "button_text_remove_from_list": {
       "default": "Видалити зі списку"
@@ -1377,7 +1392,7 @@
       "default": "Читати далі"
     },
     "button_label_add_comment": {
-      "default": "Додати коментар"
+      "default": "Додати відгук"
     },
     "input_prompt_rename_list": {
       "default": "Перейменувати ваш список"
@@ -1633,7 +1648,12 @@
       "default": "Реакції"
     },
     "button_label_react": {
-      "default": "Відреагувати з {reaction}"
+      "default": "Реагувати з {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Фільми"
@@ -1822,7 +1842,7 @@
       "default": "Відкрийте для себе фільми"
     },
     "header_comment_reactions": {
-      "default": "Реакції на коментарі"
+      "default": "Реакції на відгук"
     },
     "button_label_close_reaction": {
       "default": "Закрити"
@@ -2042,7 +2062,7 @@
       "default": "Популярні"
     },
     "text_sort_comments_recent": {
-      "default": "Нещодавні"
+      "default": "Останні"
     },
     "text_info_list_created": {
       "default": "Список створено."
@@ -2075,13 +2095,13 @@
       "default": "Зупинити відмітку перегляду"
     },
     "button_text_delete_comment": {
-      "default": "Видалити коментар"
+      "default": "Видалити відгук"
     },
     "button_label_delete_comment": {
-      "default": "Видалити коментар"
+      "default": "Видалити відгук"
     },
     "warning_prompt_delete_comment": {
-      "default": "Ви дійсно хочете видалити свій коментар?"
+      "default": "Ви впевнені, що хочете видалити свій відгук?"
     },
     "page_title_discover": {
       "default": "Відкрити"
@@ -2099,16 +2119,16 @@
       "default": "Відкрийте фільми та серіали"
     },
     "button_label_popular_comments": {
-      "default": "Популярні коментарі"
+      "default": "Популярні відгуки"
     },
     "button_text_popular_comments": {
       "default": "Популярні"
     },
     "button_label_recent_comments": {
-      "default": "Недавні коментарі"
+      "default": "Останні відгуки"
     },
     "button_text_recent_comments": {
-      "default": "Недавні"
+      "default": "Останні"
     },
     "link_text_vip_cover_image_upsell": {
       "default": "Встановити зображення обкладинки"

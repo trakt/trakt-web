@@ -886,7 +886,7 @@
       "default": "\"{title}\" affisch"
     },
     "list_placeholder_comments": {
-      "default": "Inga kommentarer än."
+      "default": "Inga recensioner än."
     },
     "list_placeholder_replies": {
       "default": "Inga svar än."
@@ -1060,43 +1060,58 @@
       "default": "Du har inte sett \"{title}\" än"
     },
     "button_label_like_comment": {
-      "default": "Gilla kommentar"
+      "default": "Gilla recension"
     },
     "button_label_unlike_comment": {
-      "default": "Ogilla kommentar"
+      "default": "Ogilla recension"
     },
     "button_text_comment_likes": {
-      "default": "{count} gillar"
+      "default": "{count} gillanden",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "Stäng"
     },
     "button_label_comment_replies": {
-      "default": "Kommentarsvar"
+      "default": "Svar på recension"
     },
     "button_text_comment_replies": {
-      "default": "{count} svar"
+      "default": "{count} svar",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "Kommentarer"
+      "default": "Recensioner"
     },
     "dialog_title_comments": {
-      "default": "Kommentarer"
+      "default": "Recensioner"
     },
     "dialog_title_comment": {
-      "default": "Kommentar"
+      "default": "Recension"
     },
     "button_label_comment_reply": {
-      "default": "Svara {user}"
+      "default": "Svara {user}",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
       "default": "Svara..."
     },
     "button_label_add_new_comment": {
-      "default": "Lägg till kommentar"
+      "default": "Lägg till en ny recension"
     },
     "textarea_placeholder_comment": {
-      "default": "Kommentar..."
+      "default": "Din recension..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Markera som spoiler"
@@ -1111,10 +1126,10 @@
       "default": "Publicera svar"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Kommentarer måste innehålla minst 5 ord."
+      "default": "Recensioner måste vara minst 5 ord långa."
     },
     "translated_value_error_comment_unknown": {
-      "default": "Ett fel uppstod när du publicerade din kommentar. Försök igen senare."
+      "default": "Ett fel uppstod när din recension skulle publiceras. Försök igen senare."
     },
     "page_title_user_profile": {
       "default": "{username}'s profil"
@@ -1129,7 +1144,7 @@
       "default": "Originaltitel"
     },
     "button_label_view_all_comments": {
-      "default": "Visa alla kommentarer"
+      "default": "Visa alla recensioner"
     },
     "button_text_remove_from_list": {
       "default": "Ta bort från listan"
@@ -1377,7 +1392,7 @@
       "default": "Läs mer"
     },
     "button_label_add_comment": {
-      "default": "Lägg till kommentar"
+      "default": "Lägg till recension"
     },
     "input_prompt_rename_list": {
       "default": "Byt namn på din lista"
@@ -1633,7 +1648,12 @@
       "default": "Reaktioner"
     },
     "button_label_react": {
-      "default": "Reagera med {reaction}"
+      "default": "Reagera med {reaction}",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "Filmer"
@@ -1822,7 +1842,7 @@
       "default": "Upptäck filmer"
     },
     "header_comment_reactions": {
-      "default": "Kommentarreaktioner"
+      "default": "Reaktioner på recension"
     },
     "button_label_close_reaction": {
       "default": "Stäng"
@@ -2075,13 +2095,13 @@
       "default": "Stoppa check-in"
     },
     "button_text_delete_comment": {
-      "default": "Ta bort kommentar"
+      "default": "Radera recension"
     },
     "button_label_delete_comment": {
-      "default": "Ta bort kommentar"
+      "default": "Radera recension"
     },
     "warning_prompt_delete_comment": {
-      "default": "Är du säker på att du vill ta bort din kommentar?"
+      "default": "Är du säker på att du vill radera din recension?"
     },
     "page_title_discover": {
       "default": "Upptäck"
@@ -2099,13 +2119,13 @@
       "default": "Upptäck filmer och serier"
     },
     "button_label_popular_comments": {
-      "default": "Populära kommentarer"
+      "default": "Populära recensioner"
     },
     "button_text_popular_comments": {
       "default": "Populära"
     },
     "button_label_recent_comments": {
-      "default": "Senaste kommentarerna"
+      "default": "Senaste recensioner"
     },
     "button_text_recent_comments": {
       "default": "Senaste"

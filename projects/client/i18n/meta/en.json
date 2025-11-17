@@ -2387,15 +2387,15 @@
       ]
     },
     "list_placeholder_comments": {
-      "default": "No comments yet.",
-      "description": "Placeholder text shown when there are no comments in a list.",
+      "default": "No reviews yet.",
+      "description": "Placeholder text shown when there are no reviews in a list.",
       "exclude": [
         "ios"
       ]
     },
     "list_placeholder_replies": {
       "default": "No replies yet.",
-      "description": "Placeholder text shown when there are no replies for a given comment.",
+      "description": "Placeholder text shown when there are no replies for a given review.",
       "exclude": [
         "ios",
         "web"
@@ -2417,7 +2417,7 @@
     },
     "text_reply_by": {
       "default": "Reply by",
-      "description": "Text used to indicate the author of a reply to a comment.",
+      "description": "Text used to indicate the author of a reply to a review.",
       "exclude": [
         "ios",
         "web"
@@ -2888,16 +2888,16 @@
       ]
     },
     "button_label_like_comment": {
-      "default": "Like Comment",
-      "description": "Aria-label for the button that allows users to like a comment.",
+      "default": "Like Review",
+      "description": "Aria-label for the button that allows users to like a review.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "button_label_unlike_comment": {
-      "default": "Unlike Comment",
-      "description": "Aria-label for the button that allows users to unlike a comment.",
+      "default": "Unlike Review",
+      "description": "Aria-label for the button that allows users to unlike a review.",
       "exclude": [
         "android",
         "ios"
@@ -2905,7 +2905,7 @@
     },
     "button_text_comment_likes": {
       "default": "{count} likes",
-      "description": "Text for the button that shows the number of likes a comment has.",
+      "description": "Text for the button that shows the number of likes a review has.",
       "variables": {
         "count": {
           "type": "number"
@@ -2924,8 +2924,8 @@
       ]
     },
     "button_label_comment_replies": {
-      "default": "Comment Replies",
-      "description": "Aria-label for the button that opens the comment replies dialog.",
+      "default": "Review Replies",
+      "description": "Aria-label for the button that opens the review replies dialog.",
       "exclude": [
         "android",
         "ios"
@@ -2933,7 +2933,7 @@
     },
     "button_text_comment_replies": {
       "default": "{count} replies",
-      "description": "Text for the button that opens the comment replies dialog.",
+      "description": "Text for the button that opens the review replies dialog.",
       "variables": {
         "count": {
           "type": "number"
@@ -2944,23 +2944,23 @@
       ]
     },
     "list_title_comments": {
-      "default": "Comments",
-      "description": "Title for lists containing comments on a movie, show, or episode. This title should be as short and concise as possible.",
+      "default": "Reviews",
+      "description": "Title for lists containing reviews on a movie, show, or episode. This title should be as short and concise as possible.",
       "exclude": [
         "ios"
       ]
     },
     "dialog_title_comments": {
-      "default": "Comments",
-      "description": "Title for the comments dialog, which lists all current comments.",
+      "default": "Reviews",
+      "description": "Title for the reviews dialog, which lists all current reviews.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "dialog_title_comment": {
-      "default": "Comment",
-      "description": "Title for the comment dialog, which is used when a user is adding a new comment.",
+      "default": "Review",
+      "description": "Title for the review dialog, which is used when a user is adding a new review.",
       "exclude": [
         "android",
         "ios"
@@ -2968,7 +2968,7 @@
     },
     "button_label_comment_reply": {
       "default": "Reply to {user}",
-      "description": "Aria-label for the button that opens the comment reply dialog.",
+      "description": "Aria-label for the button that opens the review reply dialog.",
       "variables": {
         "user": {
           "type": "string"
@@ -2981,23 +2981,23 @@
     },
     "textarea_placeholder_reply": {
       "default": "Reply...",
-      "description": "Placeholder text for the reply textarea in the comment dialog.",
+      "description": "Placeholder text for the reply textarea in the review dialog.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "button_label_add_new_comment": {
-      "default": "Add a new comment",
-      "description": "Aria-label for the button that opens the comment dialog to add a new comment.",
+      "default": "Add a new review",
+      "description": "Aria-label for the button that opens the review dialog to add a new review.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "textarea_placeholder_comment": {
-      "default": "Comment...",
-      "description": "Placeholder text for the comment textarea when adding a new comment.",
+      "default": "Review...",
+      "description": "Placeholder text for the review textarea when adding a new review.",
       "exclude": [
         "android",
         "ios"
@@ -3005,7 +3005,7 @@
     },
     "switch_label_mark_as_spoiler": {
       "default": "Mark as spoiler",
-      "description": "Aria-label for the switch that allows users to mark a comment as a spoiler.",
+      "description": "Aria-label for the switch that allows users to mark a review as a spoiler.",
       "exclude": [
         "android",
         "ios"
@@ -3029,7 +3029,7 @@
     },
     "button_label_post_reply": {
       "default": "Post reply",
-      "description": "Aria-label for the button that posts a reply to a comment.",
+      "description": "Aria-label for the button that posts a reply to a review.",
       "exclude": [
         "android",
         "ios"
@@ -3037,15 +3037,15 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Comments must be at least 5 words.",
-      "description": "Error message shown when a comment is invalid due to content length.",
+      "description": "Error message shown when a review is invalid due to content length.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "translated_value_error_comment_unknown": {
-      "default": "An error occurred while posting your comment. Please try again later.",
-      "description": "Generic error message shown when an unknown error occurs while posting a comment.",
+      "default": "An error occurred while posting your review. Please try again later.",
+      "description": "Generic error message shown when an unknown error occurs while posting a review.",
       "exclude": [
         "android",
         "ios"
@@ -3093,8 +3093,8 @@
       ]
     },
     "button_label_view_all_comments": {
-      "default": "View all comments",
-      "description": "Aria-label for the button that allows users to view all comments on a movie, show, or episode.",
+      "default": "View all reviews",
+      "description": "Aria-label for the button that allows users to view all reviews on a movie, show, or episode.",
       "exclude": [
         "android",
         "ios"
@@ -3803,8 +3803,8 @@
       ]
     },
     "button_label_add_comment": {
-      "default": "Add Comment",
-      "description": "Aria-label for the button that allows users to add a new comment.",
+      "default": "Add review",
+      "description": "Aria-label for the button that allows users to add a new review.",
       "exclude": [
         "android",
         "ios"
@@ -4109,7 +4109,7 @@
     },
     "button_text_create": {
       "default": "Create",
-      "description": "Text for the button that allows users to create a new list, comment, rating etc.",
+      "description": "Text for the button that allows users to create a new list, review, rating etc.",
       "exclude": [
         "ios",
         "web"
@@ -4505,7 +4505,7 @@
     },
     "button_label_react": {
       "default": "React with {reaction}",
-      "description": "Aria-label for the button that allows users to react to a comment with a specific reaction.",
+      "description": "Aria-label for the button that allows users to react to a review with a specific reaction.",
       "variables": {
         "reaction": {
           "type": "string"
@@ -5008,8 +5008,8 @@
       ]
     },
     "header_comment_reactions": {
-      "default": "Comment reactions",
-      "description": "Header for the comment reactions section.",
+      "default": "Review reactions",
+      "description": "Header for the review reactions section.",
       "exclude": [
         "android",
         "ios"
@@ -5017,7 +5017,7 @@
     },
     "button_label_close_reaction": {
       "default": "Close",
-      "description": "Aria-label for the button that closes the comment reaction popup.",
+      "description": "Aria-label for the button that closes the review reaction popup.",
       "exclude": [
         "android",
         "ios"
@@ -5533,7 +5533,7 @@
     },
     "text_sort_comments_popular": {
       "default": "Popular",
-      "description": "Label used for comments sorting type where most popular comments are being displayed first.",
+      "description": "Label used for reviews sorting type where most popular reviews are being displayed first.",
       "exclude": [
         "ios",
         "web"
@@ -5541,7 +5541,7 @@
     },
     "text_sort_comments_recent": {
       "default": "Recent",
-      "description": "Label used for comments sorting type where most recent comments are being displayed first.",
+      "description": "Label used for reviews sorting type where most recent reviews are being displayed first.",
       "exclude": [
         "ios",
         "web"
@@ -5628,24 +5628,24 @@
       ]
     },
     "button_text_delete_comment": {
-      "default": "Delete Comment",
-      "description": "Text for the button that allows a user to delete a comment.",
+      "default": "Delete Review",
+      "description": "Text for the button that allows a user to delete a review.",
       "exclude": [
         "ios",
         "android"
       ]
     },
     "button_label_delete_comment": {
-      "default": "Delete Comment",
-      "description": "Aria-label for the button that allows a user to delete a comment.",
+      "default": "Delete Review",
+      "description": "Aria-label for the button that allows a user to delete a review.",
       "exclude": [
         "ios",
         "android"
       ]
     },
     "warning_prompt_delete_comment": {
-      "default": "Are you sure you want to delete your comment?",
-      "description": "Text for the warning prompt that appears when a user attempts to delete a comment.",
+      "default": "Are you sure you want to delete your review?",
+      "description": "Text for the warning prompt that appears when a user attempts to delete a review.",
       "exclude": [
         "ios",
         "android"
@@ -5692,8 +5692,8 @@
       ]
     },
     "button_label_popular_comments": {
-      "default": "Popular comments",
-      "description": "Aria-label for the button that allows users to sort comments by popularity.",
+      "default": "Popular reviews",
+      "description": "Aria-label for the button that allows users to sort review by popularity.",
       "exclude": [
         "android",
         "ios"
@@ -5701,15 +5701,15 @@
     },
     "button_text_popular_comments": {
       "default": "Popular",
-      "description": "Text for the button that allows users to sort comments by popularity. This should be short and ideally one word.",
+      "description": "Text for the button that allows users to sort review by popularity. This should be short and ideally one word.",
       "exclude": [
         "android",
         "ios"
       ]
     },
     "button_label_recent_comments": {
-      "default": "Recent comments",
-      "description": "Aria-label for the button that allows users to sort comments by recency.",
+      "default": "Recent reviews",
+      "description": "Aria-label for the button that allows users to sort reviews by recency.",
       "exclude": [
         "android",
         "ios"
@@ -5717,7 +5717,7 @@
     },
     "button_text_recent_comments": {
       "default": "Recent",
-      "description": "Text for the button that allows users to sort comments by recency. This should be short and ideally one word.",
+      "description": "Text for the button that allows users to sort reviews by recency. This should be short and ideally one word.",
       "exclude": [
         "android",
         "ios"

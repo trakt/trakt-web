@@ -886,10 +886,10 @@
       "default": "\"{title}\"のポスター"
     },
     "list_placeholder_comments": {
-      "default": "まだコメントはありません。"
+      "default": "レビューはありません。"
     },
     "list_placeholder_replies": {
-      "default": "まだ返信はありません。"
+      "default": "返信はありません。"
     },
     "text_review_by": {
       "default": "レビュー:"
@@ -1060,43 +1060,58 @@
       "default": "\"{title}\" はまだ見ていないよ"
     },
     "button_label_like_comment": {
-      "default": "コメントをいいね"
+      "default": "レビューにいいね"
     },
     "button_label_unlike_comment": {
-      "default": "コメントをいいねしない"
+      "default": "レビューのいいね解除"
     },
     "button_text_comment_likes": {
-      "default": "{count} 件のいいね"
+      "default": "{count} いいね",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "button_label_close": {
       "default": "閉じる"
     },
     "button_label_comment_replies": {
-      "default": "コメント返信"
+      "default": "レビューへの返信"
     },
     "button_text_comment_replies": {
-      "default": "{count} 件の返信"
+      "default": "{count} 件の返信",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     },
     "list_title_comments": {
-      "default": "コメント"
+      "default": "レビュー"
     },
     "dialog_title_comments": {
-      "default": "コメント"
+      "default": "レビュー"
     },
     "dialog_title_comment": {
-      "default": "コメント"
+      "default": "レビュー"
     },
     "button_label_comment_reply": {
-      "default": "{user} に返信する"
+      "default": "{user}さんに返信する",
+      "variables": {
+        "user": {
+          "type": "string"
+        }
+      }
     },
     "textarea_placeholder_reply": {
-      "default": "返信..."
+      "default": "返信を入力..."
     },
     "button_label_add_new_comment": {
-      "default": "コメントを追加"
+      "default": "新しいレビューを追加"
     },
     "textarea_placeholder_comment": {
-      "default": "コメント..."
+      "default": "レビューを入力..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "ネタバレとしてマーク"
@@ -1108,13 +1123,13 @@
       "default": "エラーを閉じる"
     },
     "button_label_post_reply": {
-      "default": "返信を投稿"
+      "default": "返信する"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "コメントは5語以上でなければなりません。"
+      "default": "レビューは5語以上で入力してください。"
     },
     "translated_value_error_comment_unknown": {
-      "default": "コメントの投稿中にエラーが発生しました。後でもう一度お試しください。"
+      "default": "レビューの投稿中にエラーが発生しました。後でもう一度お試しください。"
     },
     "page_title_user_profile": {
       "default": "{username}のプロフィール"
@@ -1129,7 +1144,7 @@
       "default": "原題"
     },
     "button_label_view_all_comments": {
-      "default": "すべてのコメントを表示"
+      "default": "すべてのレビューを見る"
     },
     "button_text_remove_from_list": {
       "default": "Remove from list"
@@ -1377,7 +1392,7 @@
       "default": "もっと読む"
     },
     "button_label_add_comment": {
-      "default": "コメントを追加"
+      "default": "レビューを追加"
     },
     "input_prompt_rename_list": {
       "default": "リストの名前を変更"
@@ -1633,7 +1648,12 @@
       "default": "リアクション"
     },
     "button_label_react": {
-      "default": "{reaction}でリアクション"
+      "default": "{reaction}でリアクション",
+      "variables": {
+        "reaction": {
+          "type": "string"
+        }
+      }
     },
     "tag_text_movies": {
       "default": "映画"
@@ -1822,7 +1842,7 @@
       "default": "映画を発見"
     },
     "header_comment_reactions": {
-      "default": "コメントへの反応"
+      "default": "レビューのリアクション"
     },
     "button_label_close_reaction": {
       "default": "閉じる"
@@ -2042,7 +2062,7 @@
       "default": "人気"
     },
     "text_sort_comments_recent": {
-      "default": "最近"
+      "default": "最新"
     },
     "text_info_list_created": {
       "default": "リストが作成されました。"
@@ -2075,13 +2095,13 @@
       "default": "チェックインを停止"
     },
     "button_text_delete_comment": {
-      "default": "コメントを削除"
+      "default": "レビューを削除"
     },
     "button_label_delete_comment": {
-      "default": "コメントを削除"
+      "default": "レビューを削除"
     },
     "warning_prompt_delete_comment": {
-      "default": "コメントを削除してもよろしいですか？"
+      "default": "本当にレビューを削除しますか？"
     },
     "page_title_discover": {
       "default": "発見"
@@ -2099,16 +2119,16 @@
       "default": "映画とドラマを発見"
     },
     "button_label_popular_comments": {
-      "default": "人気のコメント"
+      "default": "人気レビュー"
     },
     "button_text_popular_comments": {
       "default": "人気"
     },
     "button_label_recent_comments": {
-      "default": "最近のコメント"
+      "default": "最新レビュー"
     },
     "button_text_recent_comments": {
-      "default": "最近"
+      "default": "最新"
     },
     "link_text_vip_cover_image_upsell": {
       "default": "カバー画像を設定"
