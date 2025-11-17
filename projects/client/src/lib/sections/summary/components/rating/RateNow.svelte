@@ -2,10 +2,11 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
-  import { fade, slide } from "svelte/transition";
-
   import { slideFade } from "$lib/utils/transitions/slideFade";
+  import { writable } from "svelte/store";
+  import { fade, slide } from "svelte/transition";
   import RatingStars from "./_internal/RatingStars.svelte";
+  import StarsConfetti from "./_internal/StarsConfetti.svelte";
   import { useIsRateable } from "./_internal/useIsRateable";
   import type { RateNowProps } from "./models/RateNowProps";
   import { useRatings } from "./useRatings";
@@ -26,11 +27,31 @@
       id,
     }),
   );
+
+  const confettiPosition = writable<{ x: number; y: number } | null>(null);
+  const setConfettiPosition = (rating: number, ev: MouseEvent) => {
+    const isMaxRating = rating === 10;
+    const hasValidTarget = ev.currentTarget instanceof HTMLElement;
+
+    if (!isMaxRating || !rootElement || !hasValidTarget) {
+      confettiPosition.set(null);
+      return;
+    }
+
+    const targetRect = ev.currentTarget.getBoundingClientRect();
+    const parentRect = rootElement.getBoundingClientRect();
+
+    const x = targetRect.left + targetRect.width / 2 - parentRect.left;
+    confettiPosition.set({ x, y: 0 });
+  };
+
+  let rootElement: HTMLElement | null = $state(null);
 </script>
 
 {#if variant === "allow" || $isRateable}
   <div
     class="trakt-rate-now"
+    bind:this={rootElement}
     data-dpad-navigation={DpadNavigationType.List}
     transition:slide={{ duration: 150 }}
   >
@@ -42,11 +63,12 @@
       <RatingStars
         rating={$pendingRating ?? $current?.rating}
         isRating={$pendingRating !== null}
-        onAddRating={(rating: number) => {
+        onAddRating={(rating: number, ev: MouseEvent) => {
           if (rating === $current?.rating) {
             return;
           }
 
+          setConfettiPosition(rating, ev);
           addRating(rating);
         }}
       />
@@ -67,6 +89,10 @@
         </div>
       {/if}
     </div>
+
+    {#if $confettiPosition}
+      <StarsConfetti position={$confettiPosition} />
+    {/if}
   </div>
 {/if}
 
@@ -86,6 +112,7 @@
       }
     }
   }
+
   .trakt-rate-now,
   .trakt-rate-actions {
     display: flex;
@@ -94,6 +121,8 @@
   }
 
   .trakt-rate-now {
+    position: relative;
+
     gap: var(--gap-m);
   }
 

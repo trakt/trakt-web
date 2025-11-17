@@ -9,7 +9,7 @@
   }: {
     rating?: number;
     isRating: boolean;
-    onAddRating: (rating: number) => void;
+    onAddRating: (rating: number, ev: MouseEvent) => void;
   } = $props();
 
   /*
