@@ -18,7 +18,7 @@
     "binding": "CF_VERSION_METADATA"
   },
   "vars": {
-    "TYPESENSE_SERVER": "e97t3y0fkivoshd8p.a1.typesense.net"
+    "TYPESENSE_SERVER": "search.trakt.tv"
   },
   "upload_source_maps": true
 }
