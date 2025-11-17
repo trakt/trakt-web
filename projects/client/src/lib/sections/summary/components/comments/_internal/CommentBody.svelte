@@ -80,7 +80,7 @@
     gap: var(--gap-xs);
 
     color: var(--color-text-secondary);
-    font-size: var(--ni-14);
+    font-size: var(--font-size-text);
 
     :global(a) {
       @include default-link-style;

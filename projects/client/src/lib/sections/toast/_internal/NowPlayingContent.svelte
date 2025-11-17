@@ -81,13 +81,13 @@
 
   .trakt-now-playing-label {
     @include for-mobile {
-      font-size: var(--ni-14);
+      font-size: var(--font-size-text);
     }
   }
 
   .trakt-now-playing-title {
     @include for-mobile {
-      font-size: var(--ni-16);
+      font-size: var(--font-size-title);
     }
   }
 

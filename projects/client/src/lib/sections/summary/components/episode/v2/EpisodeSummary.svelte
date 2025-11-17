@@ -80,7 +80,7 @@
   {/snippet}
 
   <SpoilerSection media={episode} {show} {type}>
-    <p class="secondary small">{overview}</p>
+    <p class="secondary">{overview}</p>
   </SpoilerSection>
 
   <SummaryDetails {type}>

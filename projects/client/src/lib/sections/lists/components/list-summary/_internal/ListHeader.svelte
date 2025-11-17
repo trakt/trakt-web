@@ -30,7 +30,7 @@
       </p>
     </Link>
     <div class="list-credits">
-      <p class="secondary small">{m.text_by()}</p>
+      <p class="secondary">{m.text_by()}</p>
       <UserProfileLink user={list.user} />
     </div>
   </div>

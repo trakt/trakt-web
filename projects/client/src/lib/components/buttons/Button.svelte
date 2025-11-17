@@ -194,8 +194,6 @@
       text-decoration;
 
     &:not([data-style="underlined"]) p:not(.meta-info) {
-      font-size: 1rem;
-      font-style: normal;
       font-weight: 700;
     }
 

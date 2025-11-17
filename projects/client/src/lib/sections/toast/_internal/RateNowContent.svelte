@@ -20,7 +20,7 @@
 
   <div class="trakt-now-playing-content">
     <div class="trakt-rate-now-header">
-      <p class="smaller ellipsis">{title}</p>
+      <p class="ellipsis">{title}</p>
       <ActionButton
         onclick={() => dismiss(lastWatched.media.id, lastWatched.type)}
         label={m.button_label_dismiss()}
@@ -72,7 +72,7 @@
     }
 
     :global(h6) {
-      font-size: var(--ni-18);
+      font-size: var(--font-size-title);
       text-transform: capitalize;
     }
 

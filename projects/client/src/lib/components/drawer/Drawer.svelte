@@ -220,7 +220,7 @@
     flex-direction: column;
 
     h5 {
-      font-size: var(--ni-18);
+      font-size: var(--font-size-title);
     }
 
     p.meta-info {

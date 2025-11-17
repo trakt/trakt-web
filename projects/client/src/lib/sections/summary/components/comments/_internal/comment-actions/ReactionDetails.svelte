@@ -21,7 +21,7 @@
     animation={isCurrent ? "infinite" : "none"}
     {index}
   />
-  <p class="small">{toHumanNumber(count, getLocale())}</p>
+  <p class="bold">{toHumanNumber(count, getLocale())}</p>
 </div>
 
 <style>
@@ -42,10 +42,6 @@
     border-radius: var(--border-radius-xxl);
 
     transition: background-color var(--transition-increment) ease-in-out;
-
-    p.small {
-      font-weight: 600;
-    }
 
     &.is-current {
       background-color: var(--color-current-reaction-background);

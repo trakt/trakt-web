@@ -5,7 +5,7 @@
 
 <div class="trakt-filtered-placeholder">
   <FilterIcon state="filtered" />
-  <p class="small">{m.list_placeholder_no_filter_results()}</p>
+  <p>{m.list_placeholder_no_filter_results()}</p>
 </div>
 
 <style>

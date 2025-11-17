@@ -56,7 +56,7 @@
     }
 
     /** FIXME: remove when we have adaptive typography and updated sizes */
-    font-size: var(--ni-18);
+    font-size: var(--font-size-title);
     line-height: var(--ni-22);
     &.ellipsis {
       max-width: 100%;

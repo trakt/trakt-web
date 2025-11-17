@@ -178,7 +178,7 @@
       padding: var(--ni-16);
       box-sizing: border-box;
 
-      font-size: var(--ni-12);
+      font-size: var(--font-size-text);
 
       .trakt-android-phone-top-bar-left {
         font-size: var(--font-size-m);

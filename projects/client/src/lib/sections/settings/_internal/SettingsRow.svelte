@@ -43,7 +43,6 @@
         --title-width: var(--ni-104);
 
         width: var(--title-width);
-        word-spacing: var(--title-width);
       }
 
       .trakt-settings-row-content {

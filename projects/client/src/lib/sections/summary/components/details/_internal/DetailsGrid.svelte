@@ -59,14 +59,6 @@
 
       transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
     }
-
-    @include for-mobile {
-      gap: var(--gap-xs);
-
-      h5 {
-        font-size: var(--ni-18);
-      }
-    }
   }
 
   .trakt-summary-details-grid-content {

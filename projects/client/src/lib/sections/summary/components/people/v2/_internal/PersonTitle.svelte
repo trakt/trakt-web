@@ -10,7 +10,7 @@
   </h2>
 
   {#if knownFor}
-    <p class="secondary smaller">
+    <p class="secondary">
       {toTranslatedPosition(knownFor)}
     </p>
   {/if}

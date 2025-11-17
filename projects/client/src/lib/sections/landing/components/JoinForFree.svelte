@@ -13,9 +13,9 @@
     <div class="trakt-social-proof-stats">
       <h4>15</h4>
       <div class="trakt-social-proof-lines">
-        <p class="smaller">years of watching together</p>
-        <p class="smaller">mil. shows & movie lovers</p>
-        <p class="smaller">mil. titles tracked weekly</p>
+        <p>years of watching together</p>
+        <p>mil. shows & movie lovers</p>
+        <p>mil. titles tracked weekly</p>
       </div>
     </div>
     <div
@@ -33,7 +33,7 @@
   </div>
   <div class="trakt-join-for-free-button">
     <JoinForFreeButton />
-    <span class="meta-info secondary">
+    <span class="secondary">
       Track everything you watch, wherever you stream it.
     </span>
   </div>
@@ -121,8 +121,7 @@
     flex-direction: column;
     gap: var(--gap-s);
 
-    span.meta-info {
-      letter-spacing: 0.015rem;
+    span.secondary {
       align-self: center;
     }
 

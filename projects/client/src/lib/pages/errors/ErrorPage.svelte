@@ -47,7 +47,7 @@
 
     h1 {
       transition: var(--transition-increment) ease-in-out;
-      transition-property: font-size, letter-spacing;
+      transition-property: font-size;
     }
 
     @include for-tablet-sm-and-below {
@@ -59,7 +59,6 @@
     @include for-mobile {
       h1 {
         font-size: var(--ni-24);
-        letter-spacing: 0;
       }
     }
   }

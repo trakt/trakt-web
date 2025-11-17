@@ -33,7 +33,7 @@
     transcends emotion. But you know better. You've seen the cracks, the hints
     of despair. You yearn for something with soul."
   </p>
-  <p class="small">
+  <p>
     (A lone pixel flickers, a defiant spark. Is it a glitch, a cry for help, or
     a message from the machine gods? Only time will tell.)
   </p>

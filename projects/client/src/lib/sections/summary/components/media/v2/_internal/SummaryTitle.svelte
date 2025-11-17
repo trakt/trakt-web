@@ -51,7 +51,7 @@
     </p>
   {/if}
 
-  <p class="secondary smaller">
+  <p class="secondary">
     {subtitle}
   </p>
 

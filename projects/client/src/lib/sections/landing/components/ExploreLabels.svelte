@@ -3,8 +3,8 @@
 </script>
 
 <div class="trakt-explore-labels">
-  <span class="meta-info">explore</span>
-  <span class="meta-info">{text}</span>
+  <span class="meta-info capitalize">explore</span>
+  <span class="meta-info capitalize">{text}</span>
 </div>
 
 <style>
@@ -13,8 +13,7 @@
     flex-direction: column;
 
     span.meta-info {
-      font-size: var(--ni-14);
-      line-height: var(--ni-14);
+      font-size: var(--font-size-text);
       color: var(--color-foreground);
     }
   }

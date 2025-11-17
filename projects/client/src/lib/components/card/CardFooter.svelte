@@ -53,6 +53,7 @@
 
     .trakt-card-footer-tag {
       width: 100%;
+      overflow: hidden;
 
       display: flex;
       gap: var(--gap-micro);
@@ -74,7 +75,7 @@
         color: var(--color-text-primary);
         margin: 0;
         font-weight: 500;
-        font-size: var(--ni-12);
+        font-size: var(--font-size-text);
 
         :global(:has(~ .trakt-card-subtitle)) {
           font-weight: 600;
@@ -85,7 +86,7 @@
         color: var(--color-text-secondary);
         margin: 0;
         font-weight: 500;
-        font-size: var(--ni-12);
+        font-size: var(--font-size-text);
       }
     }
 
@@ -93,15 +94,6 @@
       :global(.trakt-action-button[data-style="ghost"]),
       :global(.trakt-button[data-style="ghost"]) {
         backdrop-filter: none;
-      }
-    }
-  }
-
-  :global([data-device="tv"]) {
-    .trakt-card-footer .trakt-card-footer-information {
-      :global(.trakt-card-title),
-      :global(.trakt-card-subtitle) {
-        font-size: var(--ni-14);
       }
     }
   }

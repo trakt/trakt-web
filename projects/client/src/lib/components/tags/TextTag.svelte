@@ -16,11 +16,14 @@
     gap: var(--gap-xxs);
 
     color: var(--color-text-primary);
-    font-size: var(--ni-12);
 
     :global(svg) {
       width: var(--ni-12);
       height: var(--ni-12);
+    }
+
+    :global(p) {
+      font-size: var(--font-size-tag);
     }
   }
 </style>

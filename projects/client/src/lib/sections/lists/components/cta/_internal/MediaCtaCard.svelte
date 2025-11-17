@@ -19,7 +19,7 @@
 </script>
 
 <CtaCard variant={$defaultVariant} src={$cover?.url.medium}>
-  <p class="smaller">{intl.text({ cta })}</p>
+  <p>{intl.text({ cta })}</p>
 
   {#snippet action()}
     <CtaButton {cta} {intl} size="tag" />

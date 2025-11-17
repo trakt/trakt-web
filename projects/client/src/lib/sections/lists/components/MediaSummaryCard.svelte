@@ -103,7 +103,7 @@
             {media.title}
           </p>
         {/if}
-        <p class="trakt-card-subtitle small secondary ellipsis">
+        <p class="trakt-card-subtitle secondary ellipsis">
           {#if rest.type === "episode"}
             {EpisodeIntlProvider.timestampText({
               type: rest.episode.type,
@@ -117,7 +117,7 @@
         <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
-        <p class="trakt-card-subtitle small secondary ellipsis">
+        <p class="trakt-card-subtitle secondary ellipsis">
           {episodeNumberLabel({
             seasonNumber: rest.episode.season,
             episodeNumber: rest.episode.number,
@@ -204,5 +204,9 @@
   .trakt-card-title,
   .trakt-card-subtitle {
     padding-right: var(--ni-18);
+  }
+
+  .trakt-card-title {
+    font-size: var(--font-size-title);
   }
 </style>

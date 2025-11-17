@@ -42,17 +42,9 @@
     height: 100%;
     gap: var(--gap-m);
 
-    :global(p.smaller) {
-      font-size: var(--ni-16);
-    }
-
     @include for-mobile {
       :global(.trakt-team) {
         width: 100%;
-      }
-
-      :global(p.smaller) {
-        font-size: var(--ni-14);
       }
     }
   }

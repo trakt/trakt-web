@@ -186,6 +186,8 @@
       background-color: transparent;
       appearance: none;
 
+      font-size: var(--font-size-text);
+
       cursor: pointer;
       opacity: 0;
     }
@@ -291,7 +293,7 @@
       }
 
       :global(li p) {
-        font-size: var(--ni-12);
+        font-size: var(--font-size-text);
       }
 
       div.spacer {

@@ -29,7 +29,7 @@
 
     .meta-info {
       transition: font-size var(--transition-increment) ease-in-out;
-      font-size: var(--ni-14);
+      font-size: var(--font-size-text);
     }
 
     :global(.trakt-link) {
@@ -38,7 +38,7 @@
 
     @include for-mobile {
       .meta-info {
-        font-size: var(--ni-12);
+        font-size: var(--font-size-text);
       }
     }
   }

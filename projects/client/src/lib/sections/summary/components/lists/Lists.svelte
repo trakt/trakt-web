@@ -52,7 +52,7 @@
 
     {#snippet empty()}
       {#if !$isLoading}
-        <p class="small">{m.list_placeholder_popular_lists({ title })}</p>
+        <p>{m.list_placeholder_popular_lists({ title })}</p>
       {/if}
     {/snippet}
 

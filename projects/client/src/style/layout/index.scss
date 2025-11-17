@@ -1,3 +1,5 @@
+@use '$style/scss/mixins/index' as *;
+
 :root {
   /**
    * Card dimensions
@@ -127,4 +129,18 @@
   @-moz-document url-prefix() {
     --layout-scrollbar-width: var(--ni-16);
   }
+
+  /**
+   * Font sizes
+   */
+  --font-size-tag: var(--ni-10);
+
+  --font-size-text: var(--ni-14);
+
+  @include for-mobile {
+    --font-size-text: var(--ni-12);
+  }
+
+  --font-size-title: var(--ni-18);
+  --font-size-separator: var(--ni-16);
 }
