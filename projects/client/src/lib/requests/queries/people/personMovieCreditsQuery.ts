@@ -21,7 +21,7 @@ const personMovieCreditsRequest = (
     });
 
 export const personMovieCreditsQuery = defineQuery({
-  key: 'personMovieCredits:v2',
+  key: 'personMovieCredits:v3',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: personMovieCreditsRequest,
