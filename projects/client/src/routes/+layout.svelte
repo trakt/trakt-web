@@ -80,7 +80,7 @@
   />
   <link rel="preconnect" href="https://cdn.plyr.io" crossorigin="anonymous" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300..700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&display=swap"
     rel="stylesheet"
   />
   <!-- Plyr CSS -->
@@ -114,7 +114,7 @@
     body {
       background-color: var(--color-background);
       color: var(--color-foreground);
-      font-family: "Spline Sans", Arial, sans-serif;
+      font-family: "Roboto", Arial, sans-serif;
     }
 
     body:has(dialog[open]),

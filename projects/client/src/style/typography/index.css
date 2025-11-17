@@ -43,32 +43,24 @@ h1 {
   font-size: var(--ni-72);
   font-style: normal;
   font-weight: 600;
-  letter-spacing: -0.18rem;
-  padding-right: 0.18rem;
 }
 
 h2 {
   font-size: var(--ni-56);
   font-style: normal;
   font-weight: 600;
-  letter-spacing: -0.025rem;
-  padding-right: 0.025rem;
 }
 
 h3 {
   font-size: var(--ni-48);
   font-style: normal;
   font-weight: 600;
-  letter-spacing: -0.12rem;
-  padding-right: 0.12rem;
 }
 
 h4 {
   font-size: var(--ni-40);
   font-style: normal;
   font-weight: 600;
-  letter-spacing: -0.1rem;
-  padding-right: 0.1rem;
 }
 
 h5 {
@@ -81,7 +73,6 @@ h6 {
   font-size: var(--ni-14);
   font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.035rem;
 }
 
 p {
@@ -112,7 +103,6 @@ p {
     font-size: var(--ni-11);
     font-style: normal;
     font-weight: 600;
-    letter-spacing: 0.025rem;
   }
 
   &.meta-info.uppercase {
