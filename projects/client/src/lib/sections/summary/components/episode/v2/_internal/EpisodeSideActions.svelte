@@ -8,17 +8,20 @@
     showTitle,
     episode,
     style = "action",
+    variant,
   }: {
     title: string;
     showTitle: string;
     episode: EpisodeEntry;
     style?: "action" | "dropdown-item";
+    variant?: "primary" | "secondary";
   } = $props();
 </script>
 
 <ShareButton
   {title}
   {style}
+  {variant}
   textFactory={({ title }) =>
     m.text_share_episode({
       title,

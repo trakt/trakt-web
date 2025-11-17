@@ -14,13 +14,14 @@
     isCheckingIn,
     isCheckedIn,
     checkin,
+    variant = "secondary",
     ...props
   }: CheckInButtonProps = $props();
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ title }),
     color: "default",
-    variant: "secondary",
+    variant,
     onclick: checkin,
     disabled: isCheckingIn || isCheckedIn,
   });
