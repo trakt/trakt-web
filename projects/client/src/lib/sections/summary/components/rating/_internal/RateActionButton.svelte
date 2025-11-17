@@ -16,7 +16,7 @@
     star: StarRating;
     rating?: number;
     isDisabled: boolean;
-    onAddRating: (rating: number) => void;
+    onAddRating: (rating: number, ev: MouseEvent) => void;
     isCurrentRating?: boolean;
   } = $props();
 
@@ -29,7 +29,7 @@
   <ActionButton
     disabled={isDisabled}
     label={m.button_label_star_rating({ stars: star.index })}
-    onclick={() => onAddRating(star.value)}
+    onclick={(ev) => onAddRating(star.value, ev)}
     style="ghost"
     variant="primary"
     size="small"
