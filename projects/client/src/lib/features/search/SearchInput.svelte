@@ -2,13 +2,17 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import * as m from "$lib/features/i18n/messages";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { clickOutside } from "$lib/utils/actions/clickOutside";
   import { buildParamString } from "$lib/utils/url/buildParamString";
+  import { onMount } from "svelte";
   import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
 
   const { clear, isSearching, pathName, mode, targetParams, query } =
     useSearch();
+
+  const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
   function onSearch(ev: Event) {
     const inputElement = ev.target as HTMLInputElement;
@@ -57,6 +61,20 @@
         return m.input_placeholder_search_shows();
       case "people":
         return m.input_placeholder_search_people();
+    }
+  });
+
+  onMount(() => {
+    if (!$isMouse) {
+      return;
+    }
+
+    const length = inputElement.value.length;
+    inputElement.setSelectionRange(length, length);
+    inputElement.focus();
+
+    if (length > 0) {
+      inputElement.click();
     }
   });
 </script>
