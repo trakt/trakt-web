@@ -143,4 +143,56 @@ describe('toHumanETA', () => {
       expect(toHumanETA(todayDate, targetDate, 'en')).toBe(expected);
     });
   });
+
+  describe('midnight edge cases', () => {
+    it('should return "tomorrow" when 12 hours away crossing midnight (evening to early morning)', () => {
+      const today = new Date('2025-11-17T17:00:00.000Z'); // 5 PM
+      const targetDate = new Date('2025-11-18T05:00:00.000Z'); // 5 AM next day
+      expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
+    });
+
+    it('should return "tomorrow" when late night to early morning', () => {
+      const today = new Date('2023-01-01T23:00:00.000Z'); // 11 PM
+      const targetDate = new Date('2023-01-02T01:00:00.000Z'); // 1 AM next day
+      expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
+    });
+
+    it('should return "in 5 hours" when both times are early morning same day', () => {
+      const today = new Date('2023-01-01T02:00:00.000Z'); // 2 AM
+      const targetDate = new Date('2023-01-01T07:00:00.000Z'); // 7 AM same day
+      expect(toHumanETA(today, targetDate, 'en')).toBe('in 5 hours');
+    });
+
+    it('should return "tomorrow" when early morning to early morning next day', () => {
+      const today = new Date('2023-01-01T02:00:00.000Z'); // 2 AM
+      const targetDate = new Date('2023-01-02T02:00:00.000Z'); // 2 AM next day
+      expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
+    });
+
+    it('should return "in 2 days" when early morning to early morning day after tomorrow', () => {
+      const today = new Date('2023-01-01T02:00:00.000Z'); // 2 AM
+      const targetDate = new Date('2023-01-03T04:00:00.000Z'); // 4 AM in 2 days
+      expect(toHumanETA(today, targetDate, 'en')).toBe('in 2 days');
+    });
+
+    it('should return "tomorrow" when just after midnight to next day', () => {
+      const today = new Date('2023-01-01T00:30:00.000Z'); // 12:30 AM
+      const targetDate = new Date('2023-01-02T00:15:00.000Z'); // 12:15 AM next day
+      expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
+    });
+
+    it('should return "in 23 hours" when just before midnight same calendar day', () => {
+      const today = new Date('2023-01-01T00:30:00.000Z'); // 12:30 AM
+      const targetDate = new Date('2023-01-01T23:30:00.000Z'); // 11:30 PM same day
+      expect(toHumanETA(today, targetDate, 'en')).toBe('in 23 hours');
+    });
+
+    it('should handle the reported issue: 12h 26m away showing as tomorrow not in 2 days', () => {
+      // This is the exact scenario from the bug report
+      // Current time during day, target is 5 AM next day (12 hours 26 minutes away)
+      const today = new Date('2025-11-17T16:34:00.000Z');
+      const targetDate = new Date('2025-11-18T05:00:00.000Z');
+      expect(toHumanETA(today, targetDate, 'en')).toBe('tomorrow');
+    });
+  });
 });

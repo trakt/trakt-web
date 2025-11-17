@@ -27,12 +27,6 @@ export function toHumanETA(
     return year;
   }
 
-  const isTodayAfterMidnight = today.getHours() >= 0 &&
-    today.getHours() < 6;
-
-  const isTargetAfterMidnight = targetDate.getHours() >= 0 &&
-    targetDate.getHours() < 6;
-
   const isSameDay = today.getFullYear() === targetDate.getFullYear() &&
     today.getMonth() === targetDate.getMonth() &&
     today.getDate() === targetDate.getDate();
@@ -46,8 +40,22 @@ export function toHumanETA(
   }
 
   if (days <= 6) {
-    const modifier = isTargetAfterMidnight && !isTodayAfterMidnight ? 1 : 0;
-    return rtf.format(days + modifier, 'day');
+    // Calculate actual day difference based on calendar days, not rounded time
+    const todayStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+    );
+    const targetStart = new Date(
+      targetDate.getFullYear(),
+      targetDate.getMonth(),
+      targetDate.getDate(),
+    );
+    const actualDaysDiff = Math.round(
+      (targetStart.getTime() - todayStart.getTime()) / MS_PER_DAY,
+    );
+
+    return rtf.format(actualDaysDiff, 'day');
   }
 
   const remainingDaysInWeek = days % 7;
