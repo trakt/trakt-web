@@ -2,6 +2,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
+  import { hasAired } from "$lib/sections/media-actions/_internal/hasAired";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { slide } from "svelte/transition";
   import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
@@ -16,13 +17,26 @@
   } = $props();
 
   const { services } = $derived(useWhereToWatch({ streamOn, ...target }));
+  const isAired = $derived.by(() => {
+    switch (target.type) {
+      case "movie":
+        return hasAired({ type: "movie", status: target.media.status });
+      case "show":
+        return hasAired({ type: "show", airDate: target.media.airDate });
+      case "episode":
+        return hasAired({
+          type: target.type,
+          airDate: target.episode.airDate,
+        });
+    }
+  });
 </script>
 
-{#if $services.length > 0}
-  {#snippet metaInfo()}
-    <JustWatchInfo {...target} />
-  {/snippet}
+{#snippet metaInfo()}
+  <JustWatchInfo {...target} />
+{/snippet}
 
+{#if isAired}
   <div transition:slide={{ duration: 150 }}>
     <SectionList
       id={`where-to-watch-${target.media.slug}`}
@@ -33,6 +47,10 @@
     >
       {#snippet item(service)}
         <WhereToWatchItem {service} />
+      {/snippet}
+
+      {#snippet empty()}
+        <p class="secondary">{m.button_text_no_services()}</p>
       {/snippet}
     </SectionList>
   </div>

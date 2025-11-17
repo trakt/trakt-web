@@ -5336,8 +5336,7 @@
       "default": "No services",
       "description": "Text for the button that indicates there are no streaming services available for a movie or show.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "header_get_trakt_app": {
