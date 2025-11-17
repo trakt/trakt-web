@@ -65,8 +65,8 @@
 >
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
     <div class="trakt-search-container">
-      <SearchInput />
       <SearchModeToggles />
+      <SearchInput />
     </div>
   </RenderFor>
 
