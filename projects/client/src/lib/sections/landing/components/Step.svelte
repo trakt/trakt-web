@@ -18,7 +18,7 @@
 <div class="trakt-landing-step">
   {@render icon()}
   {@render label()}
-  <p class="trakt-landing-step-description small">{i18n.description(step)}</p>
+  <p class="trakt-landing-step-description">{i18n.description(step)}</p>
 </div>
 
 <style>

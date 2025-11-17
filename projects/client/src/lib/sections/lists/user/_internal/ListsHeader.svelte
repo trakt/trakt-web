@@ -36,8 +36,7 @@
     transition: margin calc(var(--transition-increment) * 2) ease-in-out;
 
     h4 {
-      font-size: var(--ni-20);
-      letter-spacing: -0.04rem;
+      font-size: var(--font-size-title);
     }
 
     :global(.trakt-action-button) {

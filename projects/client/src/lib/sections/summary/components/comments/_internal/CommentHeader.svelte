@@ -19,7 +19,7 @@
       <div class="trakt-comment-user">
         <UserProfileLink user={comment.user} />
       </div>
-      <p class="small secondary meta-info">
+      <p class="secondary meta-info">
         {toHumanDay(comment.createdAt, getLocale())}
       </p>
     </div>

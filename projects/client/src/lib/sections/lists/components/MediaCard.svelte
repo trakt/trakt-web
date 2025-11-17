@@ -98,13 +98,13 @@
     <CardFooter {action} {tag}>
       <Link href={UrlBuilder.media(type, media.slug)}>
         <p
-          class="trakt-card-title small ellipsis"
+          class="trakt-card-title ellipsis"
           class:small={variant !== "activity"}
         >
           {media.title}
         </p>
       </Link>
-      <p class="trakt-card-subtitle small ellipsis">
+      <p class="trakt-card-subtitle ellipsis">
         {#if variant === "activity"}
           {toTranslatedType(media.type)}
         {:else}
@@ -120,13 +120,10 @@
     {@render content(media.poster.url.thumb)}
     <CardFooter {action}>
       <div class="trakt-card-start-footer">
-        <p
-          class="trakt-card-title small ellipsis"
-          class:small={variant !== "activity"}
-        >
+        <p class="trakt-card-title ellipsis">
           {media.title}
         </p>
-        <p class="trakt-card-subtitle small ellipsis">
+        <p class="trakt-card-subtitle ellipsis">
           {#if "episode" in rest}
             {episodeSubtitle(rest.episode)}
             <Spoiler media={rest.episode} show={media} type="episode">

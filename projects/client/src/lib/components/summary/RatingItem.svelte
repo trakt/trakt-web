@@ -22,17 +22,17 @@
       <div class="rating-info">
         <div class="rating-value">
           {#if !hasValidRating}
-            <p class="large bold" out:slide={{ duration: 150, axis: "x" }}>-</p>
+            <p class="bold" out:slide={{ duration: 150, axis: "x" }}>-</p>
           {:else}
             <div in:fade={{ delay: 150, duration: 150 }}>
-              <p class="large bold" in:slide={{ duration: 150, axis: "x" }}>
+              <p class="bold" in:slide={{ duration: 150, axis: "x" }}>
                 {rating}
               </p>
             </div>
           {/if}
         </div>
         {#if hasValidRating}
-          <p class="small bold uppercase secondary vote-count">
+          <p class="bold uppercase secondary vote-count">
             {@render superscript()}
           </p>
         {/if}
@@ -100,14 +100,6 @@
       :global(svg) {
         height: var(--ni-12);
         width: auto;
-      }
-
-      p.large {
-        font-size: var(--ni-12);
-      }
-
-      p.small {
-        font-size: var(--ni-10);
       }
     }
   }

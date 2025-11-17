@@ -20,7 +20,6 @@
 <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
   <div class="trakt-settings-navbar">
     <div class="trakt-settings-sidebar-content">
-      <h4>{m.header_settings()}</h4>
       {@render settingsLinks()}
     </div>
     <LogoutButton />
@@ -69,8 +68,11 @@
 
     h5 {
       color: var(--color-text-secondary);
+
+      font-size: var(--font-size-title);
       font-weight: 600;
-      transition: font-size var(--transition-increment) ease-in-out;
+
+      transition: color var(--transition-increment) ease-in-out;
     }
 
     :global(.trakt-link) {
@@ -80,23 +82,12 @@
     :global(.trakt-link.trakt-link-active) {
       :global(h5) {
         color: var(--color-text-primary);
-        font-size: var(--ni-28);
       }
     }
 
     @include for-tablet-sm-and-below {
       flex-direction: row;
       align-items: center;
-
-      h5 {
-        font-size: var(--ni-18);
-      }
-
-      :global(.trakt-link.trakt-link-active) {
-        :global(h5) {
-          font-size: var(--ni-22);
-        }
-      }
     }
   }
 </style>

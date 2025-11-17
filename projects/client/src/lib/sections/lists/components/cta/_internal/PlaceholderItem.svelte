@@ -113,7 +113,7 @@
       align-items: flex-start;
 
       p {
-        font-size: var(--ni-14);
+        font-size: var(--font-size-text);
       }
     }
   }

@@ -17,7 +17,7 @@
   {/snippet}
   <div class="trakt-private-profile">
     <p class="uppercase">{m.header_private_profile()}</p>
-    <p class="small">
+    <p class="trakt-profile-description">
       {m.text_private_profile_description({ username: profile.username })}
     </p>
   </div>
@@ -43,7 +43,7 @@
       font-weight: 700;
     }
 
-    p.small {
+    p.trakt-profile-description {
       max-width: var(--ni-224);
       line-height: 150%;
     }

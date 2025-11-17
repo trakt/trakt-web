@@ -15,7 +15,7 @@
     :global(:not(:last-child))::after {
       content: "·";
 
-      font-size: var(--ni-16);
+      font-size: var(--font-size-separator);
       line-height: var(--ni-12);
     }
   }

@@ -108,7 +108,7 @@
 
     @include for-mobile {
       h6 {
-        font-size: var(--ni-12);
+        font-size: var(--font-size-text);
       }
     }
   }

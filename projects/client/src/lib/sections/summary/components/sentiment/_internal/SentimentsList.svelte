@@ -30,7 +30,7 @@
         <SentimentIcon {sentiment} --icon-fill-color={color} />
         <ul>
           {#each sentiments as sentiment}
-            <li><p class="small">{sentiment}</p></li>
+            <li><p>{sentiment}</p></li>
           {/each}
         </ul>
       </div>
@@ -54,7 +54,7 @@
     padding: 0;
     padding-left: var(--ni-24);
 
-    font-size: var(--ni-14);
+    font-size: var(--font-size-text);
   }
 
   .trakt-sentiment-container {

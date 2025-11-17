@@ -66,7 +66,6 @@
     gap: var(--gap-xs);
 
     color: var(--color-text-primary);
-    font-size: var(--ni-16);
 
     border-radius: var(--border-radius-s);
 

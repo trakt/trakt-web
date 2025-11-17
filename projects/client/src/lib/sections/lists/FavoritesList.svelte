@@ -83,7 +83,7 @@
       {#if $isMe}
         <CtaItem {cta} variant="placeholder" />
       {:else}
-        <p class="small secondary">
+        <p class="secondary">
           {placeholderMessage}
         </p>
       {/if}

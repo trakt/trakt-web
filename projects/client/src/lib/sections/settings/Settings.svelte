@@ -20,7 +20,7 @@
 
   .trakt-settings {
     display: grid;
-    grid-template-columns: var(--ni-300) 1fr;
+    grid-template-columns: var(--ni-240) 1fr;
     gap: var(--gap-xxl);
 
     margin: 0 var(--layout-distance-side);
@@ -42,6 +42,7 @@
     @include for-tablet-sm-and-below {
       grid-template-columns: 1fr;
       grid-template-rows: auto 1fr;
+      gap: var(--gap-l);
     }
   }
 </style>

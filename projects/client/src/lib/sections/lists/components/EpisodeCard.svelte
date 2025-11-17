@@ -70,7 +70,7 @@
           {episode.title}
         </Spoiler>
       </p>
-      <p class="trakt-card-subtitle ellipsis small">
+      <p class="trakt-card-subtitle ellipsis">
         {episodeNumberLabel({
           seasonNumber: episode.season,
           episodeNumber: episode.number,
@@ -87,7 +87,7 @@
           {show.title}
         </p>
       </Link>
-      <p class="trakt-card-subtitle ellipsis small">
+      <p class="trakt-card-subtitle ellipsis">
         {episodeSubtitle(episode)}
         {#if !["multiple_episodes", "full_season"].includes(episode.type)}
           <Spoiler media={episode} {show} type="episode">

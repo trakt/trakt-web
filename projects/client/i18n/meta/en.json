@@ -3574,14 +3574,6 @@
         "ios"
       ]
     },
-    "header_settings": {
-      "default": "Settings",
-      "description": "Header for the settings side bar.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_settings": {
       "default": "Settings",
       "description": "Aria-label for the button that opens the settings page.",

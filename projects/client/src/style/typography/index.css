@@ -10,23 +10,6 @@ span.display-title {
   padding: 0;
 }
 
-h1 {
-  word-spacing: var(--ni-4);
-}
-
-h2 {
-  word-spacing: normal;
-}
-
-h3,
-h4,
-h5,
-h6,
-p,
-span {
-  word-spacing: var(--ni-2);
-}
-
 span.display-title {
   display: block;
 
@@ -75,38 +58,18 @@ h6 {
   font-weight: 600;
 }
 
+span,
 p {
-  font-size: var(--ni-16);
+  font-size: var(--font-size-text);
   font-style: normal;
   font-weight: 400;
-
-  &.large {
-    font-size: var(--ni-18);
-  }
-
-  &.small {
-    font-size: var(--ni-14);
-  }
-
-  &.smaller {
-    font-size: var(--ni-12);
-  }
-
-  &.tiny {
-    font-size: var(--ni-10);
-  }
 }
 
 span,
 p {
   &.meta-info {
-    font-size: var(--ni-11);
     font-style: normal;
     font-weight: 600;
-  }
-
-  &.meta-info.uppercase {
-    font-size: var(--ni-10);
   }
 }
 

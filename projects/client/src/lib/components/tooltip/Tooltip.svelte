@@ -11,7 +11,7 @@
 <!-- The tooltip needs to be adjacent to the children -->
 {@render children()}
 <Tooltip {trigger} class="trakt-tooltip" arrowClass="trakt-tooltip-arrow">
-  <p class="smaller">{content}</p>
+  <p>{content}</p>
 </Tooltip>
 
 <style>

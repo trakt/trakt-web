@@ -3,7 +3,7 @@
 </script>
 
 <div class="trakt-vip-badge">
-  <p class="small uppercase">
+  <p class="uppercase">
     {@render children()}
   </p>
 </div>
@@ -30,7 +30,7 @@
       var(--ni-0) var(--ni-2) var(--ni-4) var(--ni-0) rgba(255, 255, 255, 0.44)
         inset;
 
-    .small {
+    p {
       font-weight: 700;
       white-space: nowrap;
     }

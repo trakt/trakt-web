@@ -61,7 +61,7 @@
           <CelebrationIcon />
         {/if}
 
-        <p class="smaller no-wrap ellipsis">
+        <p class="no-wrap ellipsis">
           {toHumanDay(person.birthday, getLocale(), "short")}
           ({getYearsDifference(person.birthday, today)})
         </p>

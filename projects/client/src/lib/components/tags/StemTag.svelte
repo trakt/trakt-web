@@ -40,6 +40,11 @@
       color: var(--color-foreground-stem-tag);
     }
 
+    p,
+    :global(p) {
+      font-size: var(--font-size-tag);
+    }
+
     trakt-tag-icon {
       :global(svg) {
         width: var(--ni-12);

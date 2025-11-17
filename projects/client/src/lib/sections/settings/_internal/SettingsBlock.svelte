@@ -8,8 +8,8 @@
 
 <div class="trakt-settings-block">
   <div class="trakt-settings-block-header">
-    <p class="meta-info">{title}</p>
-    <p class="smaller secondary">{description}</p>
+    <p class="settings-title">{title}</p>
+    <p class="secondary">{description}</p>
   </div>
   <div class="trakt-settings-block-content">
     {@render children()}
@@ -25,16 +25,16 @@
 
     gap: var(--gap-xs);
 
-    p.meta-info {
+    p.settings-title {
       transition: font-size var(--transition-increment) ease-in-out;
       text-transform: capitalize;
-      font-size: var(--ni-24);
+      font-size: var(--font-size-title);
     }
 
     @include for-tablet-sm-and-below {
       p.meta-info {
         text-transform: uppercase;
-        font-size: var(--ni-14);
+        font-size: var(--font-size-text);
       }
     }
   }

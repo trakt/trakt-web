@@ -86,7 +86,7 @@
         {media.title}
       </p>
     </Link>
-    <p class="trakt-card-subtitle ellipsis small">
+    <p class="trakt-card-subtitle ellipsis">
       {toTranslatedType(media.type)}
     </p>
   </CardFooter>

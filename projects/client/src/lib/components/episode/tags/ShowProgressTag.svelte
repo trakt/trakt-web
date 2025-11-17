@@ -40,6 +40,10 @@
     align-items: center;
     justify-content: space-between;
 
+    .meta-info {
+      font-size: var(--font-size-tag);
+    }
+
     gap: var(--gap-xs);
 
     position: relative;

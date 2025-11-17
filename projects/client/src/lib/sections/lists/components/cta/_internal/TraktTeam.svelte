@@ -19,7 +19,7 @@
 </script>
 
 <div class="trakt-team">
-  <p class="smaller">
+  <p>
     {intl.text({ cta })}
   </p>
   <div class="trakt-team-list">

@@ -22,13 +22,13 @@
 </script>
 
 {#snippet username()}
-  <p class="secondary small ellipsis">
+  <p class="secondary ellipsis">
     {toDisplayableName(user)}
   </p>
 {/snippet}
 
 {#if displayType === "deleted"}
-  <p class="secondary small trakt-deleted-user">{m.text_deleted_username()}</p>
+  <p class="secondary trakt-deleted-user">{m.text_deleted_username()}</p>
 {/if}
 
 {#if displayType === "linkable"}

@@ -21,7 +21,7 @@
     gap: var(--gap-xxs);
 
     color: var(--color-text-primary);
-    font-size: var(--ni-12);
+    font-size: var(--font-size-text);
 
     :global(svg) {
       width: var(--ni-12);
