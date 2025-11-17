@@ -21,7 +21,7 @@ const personShowCreditsRequest = (
     });
 
 export const personShowCreditsQuery = defineQuery({
-  key: 'personShowCredits:v2',
+  key: 'personShowCredits:v3',
   invalidations: [],
   dependencies: (params) => [params.slug],
   request: personShowCreditsRequest,

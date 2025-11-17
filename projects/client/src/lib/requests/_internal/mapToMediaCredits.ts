@@ -20,10 +20,10 @@ type EntryResponse = {
   show: ShowResponse;
 };
 
-const WELL_KNOWN_ROLES = [
-  'self',
-  'narrator',
-] as const;
+const WELL_KNOWN_ROLES: Record<string, string[]> = {
+  self: ['self (', 'self -'],
+  narrator: ['narrator ('],
+};
 
 function mapToMediaEntry(entryResponse: EntryResponse) {
   if ('movie' in entryResponse) {
@@ -39,9 +39,12 @@ export function mapToMediaCredits(
   const credits = new Map<CrewPosition, MediaEntry[]>();
 
   (response.cast ?? []).forEach((entry) => {
-    const wellKnownRole = WELL_KNOWN_ROLES.find((role) =>
-      entry.character.toLowerCase() === role
-    );
+    const character = entry.character.toLowerCase();
+
+    const wellKnownRole = Object.entries(WELL_KNOWN_ROLES)
+      .find(([role, patterns]) =>
+        character === role || patterns.some((p) => character.startsWith(p))
+      )?.[0];
 
     const key = wellKnownRole ?? 'acting';
     const entries = credits.get(key) ?? credits.set(key, []).get(key);
