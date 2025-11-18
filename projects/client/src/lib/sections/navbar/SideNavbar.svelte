@@ -69,32 +69,24 @@
       <div class="trakt-side-navbar-content">
         <RenderFor audience="authenticated">
           <Link href={UrlBuilder.search()} label={m.button_label_search()}>
-            <div class="trakt-mobile-navbar-link">
-              <SearchIcon />
-            </div>
+            <SearchIcon />
           </Link>
         </RenderFor>
 
         <Link href={UrlBuilder.home()} label={m.button_label_home()}>
-          <div class="trakt-mobile-navbar-link">
-            <HomeIcon />
-          </div>
+          <HomeIcon />
         </Link>
 
         <RenderFor audience="authenticated">
           <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
-            <div class="trakt-mobile-navbar-link">
-              <DiscoverIcon />
-            </div>
+            <DiscoverIcon />
           </Link>
 
           <Link
             href={UrlBuilder.lists.user("me")}
             label={m.button_label_browse_lists()}
           >
-            <div class="trakt-mobile-navbar-link">
-              <ListIcon />
-            </div>
+            <ListIcon />
           </Link>
         </RenderFor>
       </div>
@@ -110,16 +102,11 @@
 
 <style lang="scss">
   header {
-    --navbar-padding: var(--ni-16);
-    --navbar-item-width: var(--ni-32);
-
-    --navbar-width: calc(var(--navbar-item-width) + var(--navbar-padding) * 2);
+    --navbar-item-width: var(--ni-24);
 
     --navbar-margin: var(--gap-s);
     --navbar-margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
     --navbar-margin-bottom: calc(var(--gap-m) + env(safe-area-inset-bottom));
-
-    --navbar-button-offset: var(--ni-neg-12);
   }
 
   .trakt-side-navbar {
@@ -130,27 +117,17 @@
     top: 0;
     left: 0;
 
-    width: var(--navbar-width);
+    width: var(--side-navbar-width);
     height: calc(
       100dvh - var(--navbar-margin-top) - var(--navbar-margin-bottom)
     );
 
-    background-color: var(--color-background-navbar);
-    box-shadow: var(--ni-0) var(--ni-24) var(--ni-64) var(--ni-0)
-      color-mix(in srgb, var(--color-shadow) 32%, transparent);
-
-    backdrop-filter: blur(8px);
     color: var(--color-foreground-navbar);
 
     margin: var(--navbar-margin);
     margin-top: var(--navbar-margin-top);
     margin-bottom: var(--navbar-margin-bottom);
-    padding: var(--navbar-padding);
     box-sizing: border-box;
-
-    border-radius: var(--border-radius-l);
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: background-color, box-shadow;
 
     display: flex;
     flex-direction: column;
@@ -167,24 +144,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: center;
 
     gap: var(--gap-m);
 
-    width: calc(var(--navbar-width) - 2 * var(--navbar-padding));
+    width: var(--side-navbar-width);
   }
 
-  .trakt-side-navbar-top {
-    color: var(--color-foreground);
-
-    flex-direction: row;
-    align-items: center;
+  .trakt-side-navbar-top,
+  .trakt-side-navbar-bottom {
+    height: var(--side-navbar-actions-height);
+    justify-content: center;
   }
 
   .trakt-side-navbar-content {
     gap: var(--gap-xl);
+
+    background-color: var(--color-background-side-navbar);
+
+    border-radius: var(--ni-60);
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: background-color;
+
+    padding: var(--ni-10) 0;
   }
 
   .trakt-navbar-actions {
+    height: var(--side-navbar-actions-height);
+
     display: flex;
     justify-content: space-between;
     align-items: center;

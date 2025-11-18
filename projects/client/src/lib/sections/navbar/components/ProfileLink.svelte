@@ -30,14 +30,6 @@
   @use "$style/scss/mixins/index" as *;
 
   trakt-profile-button {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: var(--gap-xxs);
-
     :global(.trakt-link) {
       height: var(--ni-40);
 
@@ -58,17 +50,6 @@
         border-radius: var(--border-radius-xs);
         outline: var(--border-thickness-xs) solid var(--color-link-active);
         outline-offset: var(--gap-xs);
-      }
-    }
-
-    :global(.profile-image-container.is-vip) {
-      padding-right: var(--ni-8);
-    }
-
-    @include for-tablet-sm-and-below {
-      .profile-info,
-      :global(.trakt-action-button) {
-        display: none;
       }
     }
   }

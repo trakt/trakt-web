@@ -1,12 +1,12 @@
 <script lang="ts">
+  import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import Link from "$lib/components/link/Link.svelte";
-  import LogoMark from "$lib/components/logo/LogoMark.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 </script>
 
 <div class="trakt-logo">
   <Link href={UrlBuilder.home()}>
-    <LogoMark />
+    <CircularLogo />
   </Link>
 </div>
 

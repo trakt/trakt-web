@@ -103,7 +103,8 @@
    */
   --navbar-side-padding: var(--ni-16);
   --navbar-height: var(--ni-72);
-  --side-navbar-width: var(--ni-66);
+  --side-navbar-width: var(--ni-48);
+  --side-navbar-actions-height: var(--ni-40);
   --mobile-navbar-height: calc(var(--ni-56) + env(safe-area-inset-bottom, 0));
   --footer-bar-padding: var(--ni-40);
 
