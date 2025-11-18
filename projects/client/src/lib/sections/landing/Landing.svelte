@@ -76,7 +76,7 @@
     --landing-gap: var(--ni-96);
 
     --popcorn-height: var(--ni-200);
-    --popcorn-safe-area: calc(var(--popcorn-height) - var(--landing-gap));
+    --popcorn-safe-area: var(--popcorn-height);
 
     position: absolute;
     left: 0;
