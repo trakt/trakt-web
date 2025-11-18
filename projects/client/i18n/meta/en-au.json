@@ -302,9 +302,6 @@
     "page_title_shows": {
       "default": "Shows"
     },
-    "button_text_home": {
-      "default": "Home"
-    },
     "button_label_home": {
       "default": "Go back to the homepage"
     },
@@ -431,9 +428,6 @@
     },
     "header_genre": {
       "default": "Genre"
-    },
-    "button_text_browse_lists": {
-      "default": "Lists"
     },
     "button_label_browse_lists": {
       "default": "Browse your lists"
@@ -1471,9 +1465,6 @@
     "link_text_view_profile": {
       "default": "View profile"
     },
-    "button_text_search": {
-      "default": "Search"
-    },
     "button_label_search": {
       "default": "Search"
     },
@@ -2108,9 +2099,6 @@
     },
     "button_label_view_all_start_watching": {
       "default": "View all watchlist items available to watch"
-    },
-    "button_text_discover": {
-      "default": "Discover"
     },
     "button_label_discover": {
       "default": "Discover movies and shows"

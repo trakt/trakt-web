@@ -302,9 +302,6 @@
     "page_title_shows": {
       "default": "Seriale"
     },
-    "button_text_home": {
-      "default": "Acasă"
-    },
     "button_label_home": {
       "default": "Întoarcere la pagina de pornire"
     },
@@ -431,9 +428,6 @@
     },
     "header_genre": {
       "default": "Gen"
-    },
-    "button_text_browse_lists": {
-      "default": "Liste"
     },
     "button_label_browse_lists": {
       "default": "Liste"
@@ -1471,9 +1465,6 @@
     "link_text_view_profile": {
       "default": "Vezi profilul"
     },
-    "button_text_search": {
-      "default": "Caută"
-    },
     "button_label_search": {
       "default": "Caută"
     },
@@ -2108,9 +2099,6 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Vezi toate elementele din lista de vizionat"
-    },
-    "button_text_discover": {
-      "default": "Descoperă"
     },
     "button_label_discover": {
       "default": "Descoperă filme și seriale"

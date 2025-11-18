@@ -302,9 +302,6 @@
     "page_title_shows": {
       "default": "Serier"
     },
-    "button_text_home": {
-      "default": "Hem"
-    },
     "button_label_home": {
       "default": "Gå tillbaka till startsidan"
     },
@@ -431,9 +428,6 @@
     },
     "header_genre": {
       "default": "Genre"
-    },
-    "button_text_browse_lists": {
-      "default": "Listor"
     },
     "button_label_browse_lists": {
       "default": "Utforska listor"
@@ -1471,9 +1465,6 @@
     "link_text_view_profile": {
       "default": "Visa profil"
     },
-    "button_text_search": {
-      "default": "Sök"
-    },
     "button_label_search": {
       "default": "Sök"
     },
@@ -2108,9 +2099,6 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Visa alla objekt på din tittarlista"
-    },
-    "button_text_discover": {
-      "default": "Upptäck"
     },
     "button_label_discover": {
       "default": "Upptäck filmer och serier"

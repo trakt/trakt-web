@@ -1,11 +1,8 @@
 <script lang="ts">
-  import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { toDisplayableName } from "$lib/utils/profile/toDisplayableName";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ProfileImage from "../../profile-banner/ProfileImage.svelte";
 
@@ -26,14 +23,7 @@
       src={$user?.avatar?.url ?? ""}
       isVip={Boolean($user?.isVip)}
     />
-    <div class="profile-info">
-      <p class="profile-name ellipsis">{toDisplayableName($user)}</p>
-      <p class="meta-info ellipsis">{m.link_text_view_profile()}</p>
-    </div>
   </Link>
-  <RenderFor audience="authenticated">
-    <SettingsButton style="ghost" />
-  </RenderFor>
 </trakt-profile-button>
 
 <style lang="scss">
@@ -71,11 +61,6 @@
       }
     }
 
-    :global(.profile-image-container .vip-badge) {
-      top: var(--ni-neg-10);
-      right: var(--ni-neg-4);
-    }
-
     :global(.profile-image-container.is-vip) {
       padding-right: var(--ni-8);
     }
@@ -85,23 +70,6 @@
       :global(.trakt-action-button) {
         display: none;
       }
-    }
-  }
-
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-
-    .profile-name {
-      line-height: 150%;
-      max-width: var(--ni-96);
-    }
-
-    .meta-info {
-      transition: color var(--transition-increment) ease-in-out;
-
-      line-height: 90%;
-      color: var(--color-text-secondary);
     }
   }
 </style>
