@@ -331,5 +331,7 @@
 
     padding: var(--gap-m);
     margin-top: env(safe-area-inset-top);
+
+    padding-left: var(--layout-sidebar-distance);
   }
 </style>
