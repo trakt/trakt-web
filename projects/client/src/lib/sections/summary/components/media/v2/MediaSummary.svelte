@@ -4,9 +4,8 @@
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
+  import type { MediaIntl } from "$lib/requests/models/MediaIntl";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
@@ -16,27 +15,28 @@
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
   import MediaDetails from "../../details/MediaDetails.svelte";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
-  import type { MediaSummaryProps } from "../MediaSummaryProps";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
   import SideActions from "./_internal/SideActions.svelte";
   import SummaryTitle from "./_internal/SummaryTitle.svelte";
+  import type { MediaSummaryEntry } from "./models/MediaSummaryEntry";
 
   const {
-    media,
-    type,
     intl,
     studios,
     crew,
-  }: Omit<MediaSummaryProps<MediaEntry>, "streamOn"> & {
-    type: MediaType;
+    ...target
+  }: {
+    intl: MediaIntl;
     studios: MediaStudio[];
     crew: MediaCrew;
-  } = $props();
+  } & MediaSummaryEntry = $props();
 
-  const { ratings } = $derived(useMediaMetaInfo({ media, type }));
+  const media = $derived(target.media);
+
+  const { ratings } = $derived(useMediaMetaInfo(target));
   const title = $derived(intl?.title ?? media?.title ?? "");
-  const { watchCount } = $derived(useWatchCount({ media, type: media.type }));
+  const { watchCount } = $derived(useWatchCount(target));
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
   const hasTags = $derived(postCreditsCount > 0 || $watchCount > 0);
@@ -52,19 +52,23 @@
     return media.airDate > oneMonthAgo ? media.status : undefined;
   });
 
-  const { isRateable } = $derived(useIsRateable({ type, media }));
+  const { isRateable } = $derived(useIsRateable(target));
 </script>
 
 {#snippet tags()}
   <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
 {/snippet}
 
-<CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
+<CoverImageSetter
+  src={media.cover.url.medium}
+  colors={media.colors}
+  type={target.type}
+/>
 
 {#if $isRateable}
   <NavbarStateSetter>
     {#snippet contextualActions()}
-      <SummaryRateNow {type} {media} />
+      <SummaryRateNow {...target} />
     {/snippet}
   </NavbarStateSetter>
 {/if}
@@ -79,20 +83,12 @@
   {/snippet}
 
   {#snippet sideActions()}
-    <SideActions {title} {type} />
+    <SideActions {title} type={target.type} />
   {/snippet}
 
   {#snippet meta()}
     <RatingList ratings={$ratings} airDate={media.airDate} />
-    <SummaryTitle
-      {title}
-      {status}
-      {type}
-      {crew}
-      genres={media.genres}
-      year={media.year}
-      certification={media.certification}
-    />
+    <SummaryTitle {title} {status} {crew} {...target} />
 
     <RenderFor audience="authenticated">
       <MediaActions {media} {title} />
@@ -103,7 +99,7 @@
     <p class="secondary small">{intl.overview ?? media.overview}</p>
   </SpoilerSection>
 
-  <SummaryDetails {type}>
-    <MediaDetails {media} {studios} {crew} {type} />
+  <SummaryDetails type={target.type}>
+    <MediaDetails {studios} {crew} {...target} />
   </SummaryDetails>
 </Summary>
