@@ -5,7 +5,6 @@
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
-  import { useUser } from "$lib/features/auth/stores/useUser";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import { useNavigation } from "$lib/features/navigation/useNavigation";
@@ -15,15 +14,12 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { writable } from "svelte/store";
   import Toast from "../toast/Toast.svelte";
+  import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
   import JoinTraktButton from "./components/JoinTraktButton.svelte";
   import ProfileLink from "./components/ProfileLink.svelte";
   import TraktLogo from "./components/TraktLogo.svelte";
-  import FilterButton from "./components/filter/FilterButton.svelte";
   import { useNavbarState } from "./useNavbarState";
-
-  const { user } = useUser();
-  const isVip = $derived(!!$user?.isVip);
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
   const { navigation } = useNavigation();
@@ -35,12 +31,24 @@
 </script>
 
 {#if $state.mode !== "hidden"}
-  {#if $state.actions || $state.seasonalActions}
-    <div class="trakt-navbar-actions">
-      {@render $state.actions?.()}
-      {@render $state.seasonalActions?.()}
+  <div class="trakt-navbar-actions">
+    <div class="trakt-navbar-actions-left">
+      <RenderFor audience="free"><GetVIPLink /></RenderFor>
     </div>
-  {/if}
+
+    <div class="trakt-navbar-actions-center">
+      {#if $state.actions || $state.seasonalActions}
+        {@render $state.actions?.()}
+        {@render $state.seasonalActions?.()}
+      {/if}
+    </div>
+
+    <div class="trakt-navbar-actions-right">
+      <RenderFor audience="authenticated">
+        <FilterButton isDisabled={!$state.hasFilters} />
+      </RenderFor>
+    </div>
+  </div>
 
   {#if $state.toastActions || $state.contextualActions}
     <Toast>
@@ -125,18 +133,11 @@
               <ListIcon />
             {/snippet}
           </Button>
-
-          <FilterButton size="normal" isDisabled={!$state.hasFilters} />
         </RenderFor>
       </div>
 
       <div class="trakt-side-navbar-bottom">
         <RenderFor audience="authenticated">
-          {#if !isVip}
-            <RenderFor audience="authenticated">
-              <GetVIPLink />
-            </RenderFor>
-          {/if}
           <ProfileLink />
         </RenderFor>
         <RenderFor audience="public">
@@ -159,14 +160,6 @@
     :global(.trakt-logo .trakt-logo-text) {
       opacity: $opacity;
       transition: opacity var(--transition-increment) ease-in-out;
-    }
-
-    :global(trakt-get-vip-link) {
-      opacity: $opacity;
-      width: $width;
-      transition:
-        opacity,
-        width var(--transition-increment) ease-in-out;
     }
   }
 
@@ -229,18 +222,6 @@
       height: var(--navbar-item-width);
     }
 
-    :global(trakt-get-vip-link) {
-      width: 0;
-      display: flex;
-      justify-content: center;
-      width: var(--navbar-item-width);
-
-      :global(.trakt-vip-badge) {
-        padding: var(--ni-8);
-        transition: padding var(--transition-increment) ease-in-out;
-      }
-    }
-
     :global(.trakt-button) {
       flex-direction: row-reverse;
       margin-left: var(--navbar-button-offset);
@@ -263,15 +244,6 @@
       --navbar-width: var(--navbar-expanded-width);
 
       @include collapsed-states(1, "initial");
-
-      :global(trakt-get-vip-link) {
-        width: fit-content;
-
-        :global(.trakt-vip-badge) {
-          padding-left: var(--ni-12);
-          padding-right: var(--ni-12);
-        }
-      }
 
       :global(.trakt-button) {
         width: calc(
@@ -324,7 +296,7 @@
 
   .trakt-navbar-actions {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     gap: var(--gap-m);
@@ -332,6 +304,8 @@
     padding: var(--gap-m);
     margin-top: env(safe-area-inset-top);
 
-    padding-left: var(--layout-sidebar-distance);
+    padding-left: calc(
+      var(--layout-distance-side) + var(--layout-sidebar-distance)
+    );
   }
 </style>
