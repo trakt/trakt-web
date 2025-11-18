@@ -1,54 +1,18 @@
 <script lang="ts">
   import { TestId } from "$e2e/models/TestId";
   import MessageWithLink from "$lib/components/link/MessageWithLink.svelte";
-  import type { GenreIntl } from "$lib/components/summary/GenreIntl";
-  import { GenreIntlProvider } from "$lib/components/summary/GenreIntlProvider";
   import * as m from "$lib/features/i18n/messages.ts";
-  import type { ExtendedMediaType } from "$lib/requests/models/ExtendedMediaType";
-  import type { MediaCrew } from "$lib/requests/models/MediaCrew";
-  import type { MediaStatus } from "$lib/requests/models/MediaStatus";
   import { toTranslatedStatus } from "$lib/utils/formatting/string/toTranslatedStatus";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import { mapToSummarySubtitle } from "./mapToSummarySubtitle";
+  import type { SummaryTitleProps } from "./SummaryTitleProps";
 
-  const SEPARATOR = "•";
+  const { title, status, crew, ...target }: SummaryTitleProps = $props();
 
-  type MediaTitleProps = {
-    title: string;
-    genres: string[];
-    i18n?: GenreIntl;
-    year: number | Nil;
-    status?: MediaStatus | Nil;
-    certification?: string | Nil;
-    type: ExtendedMediaType;
-    crew: MediaCrew;
-  };
-
-  const {
-    title,
-    genres,
-    i18n = GenreIntlProvider,
-    year,
-    status,
-    certification,
-    type,
-    crew,
-  }: MediaTitleProps = $props();
-
-  const subtitle = $derived.by(() => {
-    const subtitleParts = [];
-
-    const genre = genres.at(0);
-    const genreText = genre && i18n.genre(genre);
-
-    year && subtitleParts.push(`${year}`);
-    certification && subtitleParts.push(certification);
-    genreText && subtitleParts.push(genreText);
-
-    return subtitleParts.join(` ${SEPARATOR} `);
-  });
+  const subtitle = $derived(mapToSummarySubtitle(target));
 
   const mainCredit = $derived.by(() => {
-    if (type === "show") {
+    if (target.type === "show") {
       const creator = crew.creators?.at(0);
       return (
         creator && {

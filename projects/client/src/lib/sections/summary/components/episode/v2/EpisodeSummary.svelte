@@ -72,13 +72,7 @@
   {#snippet meta()}
     <RatingList ratings={$ratings} airDate={episode.airDate} />
     <EpisodeTitle {episode} {show} {showIntl} />
-    <SummaryTitle
-      {title}
-      {type}
-      {crew}
-      genres={show.genres}
-      year={episode.year}
-    />
+    <SummaryTitle {title} {type} {crew} media={show} {episode} />
 
     <RenderFor audience="authenticated">
       <EpisodeActions {episode} {show} {title} {showTitle} />
