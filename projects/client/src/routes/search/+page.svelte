@@ -108,7 +108,6 @@
   .trakt-search-container {
     display: flex;
     flex-direction: column;
-    padding: var(--ni-0) var(--layout-distance-side);
 
     flex-wrap: wrap;
     justify-content: center;
