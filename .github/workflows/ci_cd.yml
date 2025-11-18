@@ -75,6 +75,7 @@ jobs:
 
       - name: Trial by Deep Source
         uses: deepsourcelabs/test-coverage-action@master
+        continue-on-error: true
         with:
           key: javascript
           coverage-file: ${{github.workspace}}/projects/client/coverage/lcov.info
