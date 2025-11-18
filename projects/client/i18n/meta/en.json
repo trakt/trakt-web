@@ -5451,8 +5451,8 @@
       ]
     },
     "list_title_most_popular_searches": {
-      "default": "Most Popular Searches",
-      "description": "Title for lists containing the most popular media, movies, or show searches.",
+      "default": "Top Searches",
+      "description": "Title for lists containing the top media, movies, or show searches.",
       "exclude": [
         "ios"
       ]
