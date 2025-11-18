@@ -16,7 +16,7 @@ export type PeopleThisMonthResult = z.infer<typeof PersonResultSchema>;
 const peopleThisMonthRequest = async (
   { fetch = globalThis.fetch }: ApiParams,
 ) => {
-  const response = await fetch('https://hd.trakt.tv/people/this_month', {
+  const response = await fetch('https://apiz.trakt.tv/people/this_month', {
     headers: {
       'trakt-api-version': '2',
       'trakt-api-key': TRAKT_CLIENT_ID,
