@@ -3266,14 +3266,6 @@
         "ios"
       ]
     },
-    "button_text_filters": {
-      "default": "Filters",
-      "description": "Text for the button that opens the filters panel.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_filters": {
       "default": "Filters",
       "description": "Aria-label for the button that opens the filters panel.",

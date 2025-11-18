@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -7,10 +7,7 @@
   import { writable } from "svelte/store";
   import FilterSidebar from "./FilterSidebar.svelte";
 
-  const {
-    size,
-    isDisabled,
-  }: { size: "small" | "normal"; isDisabled: boolean } = $props();
+  const { isDisabled }: { isDisabled: boolean } = $props();
 
   const { hasActiveFilter } = useFilter();
 
@@ -23,12 +20,9 @@
 </script>
 
 <div class="trakt-filter-button" class:has-filter-support={!isDisabled}>
-  <Button
-    style="flat"
+  <ActionButton
+    style="ghost"
     label={m.button_label_filters()}
-    text="capitalize"
-    color="custom"
-    {size}
     disabled={isDisabled}
     navigationType={DpadNavigationType.Item}
     onclick={() => {
@@ -37,11 +31,8 @@
     --color-background-custom="transparent"
     --color-foreground-custom="var(--color-foreground)"
   >
-    {m.button_text_filters()}
-    {#snippet icon()}
-      <FilterIcon state={filteredState} />
-    {/snippet}
-  </Button>
+    <FilterIcon state={filteredState} />
+  </ActionButton>
 </div>
 
 {#if $isSidebarOpen}
@@ -69,17 +60,6 @@
         &:focus-visible {
           --color-background-custom: var(--color-background);
         }
-      }
-    }
-
-    @include for-tablet-sm-and-below {
-      :global(.trakt-button .button-label) {
-        display: none;
-      }
-
-      :global(.trakt-button[data-size="small"] .button-icon svg) {
-        width: var(--ni-24);
-        height: var(--ni-24);
       }
     }
   }

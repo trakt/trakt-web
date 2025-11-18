@@ -31,7 +31,7 @@
         </RenderFor>
         <RenderFor audience="authenticated">
           {@render $state.seasonalActions?.()}
-          <FilterButton size="small" isDisabled={!$state.hasFilters} />
+          <FilterButton isDisabled={!$state.hasFilters} />
         </RenderFor>
         <RenderFor audience="free"><GetVIPLink /></RenderFor>
       </div>
