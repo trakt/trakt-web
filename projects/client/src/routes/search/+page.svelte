@@ -64,8 +64,13 @@
   title={pageTitle}
 >
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
+    <NavbarStateSetter>
+      {#snippet actions()}
+        <SearchModeToggles />
+      {/snippet}
+    </NavbarStateSetter>
+
     <div class="trakt-search-container">
-      <SearchModeToggles />
       <SearchInput />
     </div>
   </RenderFor>
