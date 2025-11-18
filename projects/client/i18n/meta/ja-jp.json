@@ -302,9 +302,6 @@
     "page_title_shows": {
       "default": "ドラマ"
     },
-    "button_text_home": {
-      "default": "ホーム"
-    },
     "button_label_home": {
       "default": "ホームページ"
     },
@@ -431,9 +428,6 @@
     },
     "header_genre": {
       "default": "ジャンル"
-    },
-    "button_text_browse_lists": {
-      "default": "リスト"
     },
     "button_label_browse_lists": {
       "default": "リスト"
@@ -1471,9 +1465,6 @@
     "link_text_view_profile": {
       "default": "プロフィールを見る"
     },
-    "button_text_search": {
-      "default": "検索"
-    },
     "button_label_search": {
       "default": "検索"
     },
@@ -2108,9 +2099,6 @@
     },
     "button_label_view_all_start_watching": {
       "default": "視聴可能なアイテムをすべて表示"
-    },
-    "button_text_discover": {
-      "default": "発見"
     },
     "button_label_discover": {
       "default": "映画とドラマを発見"

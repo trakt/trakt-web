@@ -1,18 +1,14 @@
 <script lang="ts">
-  import { TestId } from "$e2e/models/TestId";
-  import Button from "$lib/components/buttons/Button.svelte";
   import CircularLogo from "$lib/components/icons/CircularLogo.svelte";
   import DiscoverIcon from "$lib/components/icons/DiscoverIcon.svelte";
   import HomeIcon from "$lib/components/icons/mobile/HomeIcon.svelte";
   import ListIcon from "$lib/components/icons/mobile/ListIcon.svelte";
+  import Link from "$lib/components/link/Link.svelte";
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { useNavigation } from "$lib/features/navigation/useNavigation";
   import SearchIcon from "$lib/features/search/SearchIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { writable } from "svelte/store";
   import Toast from "../toast/Toast.svelte";
   import FilterButton from "./components/filter/FilterButton.svelte";
   import GetVIPLink from "./components/GetVIPLink.svelte";
@@ -20,12 +16,6 @@
   import ProfileLink from "./components/ProfileLink.svelte";
   import TraktLogo from "./components/TraktLogo.svelte";
   import { useNavbarState } from "./useNavbarState";
-
-  const isMouse = useMedia(WellKnownMediaQuery.mouse);
-  const { navigation } = useNavigation();
-
-  const forceCollapse = writable(false);
-  const canExpand = $derived($isMouse || $navigation === "dpad");
 
   const { state } = useNavbarState();
 </script>
@@ -47,6 +37,13 @@
       <RenderFor audience="authenticated">
         <FilterButton isDisabled={!$state.hasFilters} />
       </RenderFor>
+      <RenderFor audience="public">
+        <JoinTraktButton size="small">
+          {#snippet icon()}
+            <CircularLogo />
+          {/snippet}
+        </JoinTraktButton>
+      </RenderFor>
     </div>
   </div>
 
@@ -63,10 +60,7 @@
   <header>
     <nav
       class="trakt-side-navbar"
-      class:can-expand={canExpand}
-      class:force-collapse={$forceCollapse}
       data-dpad-navigation={DpadNavigationType.Navbar}
-      onpointerleave={() => forceCollapse.set(false)}
     >
       <div class="trakt-side-navbar-top">
         <TraktLogo />
@@ -74,65 +68,34 @@
 
       <div class="trakt-side-navbar-content">
         <RenderFor audience="authenticated">
-          <Button
-            href={UrlBuilder.search()}
-            label={m.button_label_search()}
-            style="flat"
-            variant="secondary"
-            color="purple"
-            onclick={() => forceCollapse.set(true)}
-          >
-            {m.button_text_search()}
-            {#snippet icon()}
+          <Link href={UrlBuilder.search()} label={m.button_label_search()}>
+            <div class="trakt-mobile-navbar-link">
               <SearchIcon />
-            {/snippet}
-          </Button>
+            </div>
+          </Link>
         </RenderFor>
 
-        <Button
-          href={UrlBuilder.home()}
-          label={m.button_label_home()}
-          style="flat"
-          variant="secondary"
-          color="purple"
-          data-testid={TestId.NavBarHomeButton}
-          navigationType={DpadNavigationType.Item}
-        >
-          {m.button_text_home()}
-          {#snippet icon()}
+        <Link href={UrlBuilder.home()} label={m.button_label_home()}>
+          <div class="trakt-mobile-navbar-link">
             <HomeIcon />
-          {/snippet}
-        </Button>
+          </div>
+        </Link>
 
         <RenderFor audience="authenticated">
-          <Button
-            href={UrlBuilder.discover()}
-            label={m.button_label_discover()}
-            style="flat"
-            variant="secondary"
-            color="purple"
-            data-testid={TestId.NavBarMoviesButton}
-            navigationType={DpadNavigationType.Item}
-          >
-            {m.button_text_discover()}
-            {#snippet icon()}
+          <Link href={UrlBuilder.discover()} label={m.button_label_discover()}>
+            <div class="trakt-mobile-navbar-link">
               <DiscoverIcon />
-            {/snippet}
-          </Button>
+            </div>
+          </Link>
 
-          <Button
+          <Link
             href={UrlBuilder.lists.user("me")}
             label={m.button_label_browse_lists()}
-            style="flat"
-            variant="secondary"
-            color="purple"
-            navigationType={DpadNavigationType.Item}
           >
-            {m.button_text_browse_lists()}
-            {#snippet icon()}
+            <div class="trakt-mobile-navbar-link">
               <ListIcon />
-            {/snippet}
-          </Button>
+            </div>
+          </Link>
         </RenderFor>
       </div>
 
@@ -140,35 +103,17 @@
         <RenderFor audience="authenticated">
           <ProfileLink />
         </RenderFor>
-        <RenderFor audience="public">
-          <JoinTraktButton size="normal">
-            {#snippet icon()}
-              <CircularLogo />
-            {/snippet}
-          </JoinTraktButton>
-        </RenderFor>
       </div>
     </nav>
   </header>
 {/if}
 
 <style lang="scss">
-  @mixin collapsed-states($opacity, $width) {
-    :global(.trakt-tagline),
-    :global(.trakt-button .button-label),
-    :global(trakt-profile-button .profile-info),
-    :global(.trakt-logo .trakt-logo-text) {
-      opacity: $opacity;
-      transition: opacity var(--transition-increment) ease-in-out;
-    }
-  }
-
   header {
     --navbar-padding: var(--ni-16);
     --navbar-item-width: var(--ni-32);
 
     --navbar-width: calc(var(--navbar-item-width) + var(--navbar-padding) * 2);
-    --navbar-expanded-width: var(--ni-224);
 
     --navbar-margin: var(--gap-s);
     --navbar-margin-top: calc(var(--gap-m) + env(safe-area-inset-top));
@@ -205,7 +150,7 @@
 
     border-radius: var(--border-radius-l);
     transition: var(--transition-increment) ease-in-out;
-    transition-property: width, background-color, box-shadow;
+    transition-property: background-color, box-shadow;
 
     display: flex;
     flex-direction: column;
@@ -214,57 +159,6 @@
     gap: var(--gap-m);
 
     overflow: hidden;
-
-    @include collapsed-states(0, 0);
-
-    :global(.locale-picker-container) {
-      width: var(--navbar-item-width);
-      height: var(--navbar-item-width);
-    }
-
-    :global(.trakt-button) {
-      flex-direction: row-reverse;
-      margin-left: var(--navbar-button-offset);
-
-      color: var(--color-text-primary);
-      background: none;
-
-      transition: var(--transition-increment) ease-in-out;
-      transition-property: background-color, color;
-
-      :global(.button-label) {
-        flex: 1;
-      }
-    }
-  }
-
-  .trakt-side-navbar.can-expand {
-    &:has(:global(*):focus-visible),
-    &:not(.force-collapse):hover {
-      --navbar-width: var(--navbar-expanded-width);
-
-      @include collapsed-states(1, "initial");
-
-      :global(.trakt-button) {
-        width: calc(
-          var(--navbar-width) - 2 * var(--navbar-padding) - 2 *
-            var(--navbar-button-offset)
-        );
-
-        &:focus-visible {
-          outline: var(--border-thickness-xs) solid
-            var(--color-background-button);
-          color: var(--color-background-button);
-        }
-      }
-    }
-
-    &:not(.force-collapse) {
-      :global(.trakt-button):hover {
-        color: var(--color-foreground-button);
-        background-color: var(--color-background-button);
-      }
-    }
   }
 
   .trakt-side-navbar-top,
@@ -272,7 +166,7 @@
   .trakt-side-navbar-bottom {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 
     gap: var(--gap-m);
 
@@ -287,11 +181,7 @@
   }
 
   .trakt-side-navbar-content {
-    gap: var(--gap-xs);
-
-    :global(.trakt-button-link.trakt-link-active) {
-      color: var(--color-foreground-button);
-    }
+    gap: var(--gap-xl);
   }
 
   .trakt-navbar-actions {

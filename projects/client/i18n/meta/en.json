@@ -768,14 +768,6 @@
         "ios"
       ]
     },
-    "button_text_home": {
-      "default": "Home",
-      "description": "Text for the button that takes users back to the homepage.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_home": {
       "default": "Go back to the homepage",
       "description": "Aria-label for the button that takes users back to the homepage.",
@@ -1100,14 +1092,6 @@
       "default": "Genre",
       "description": "Header for the genre section.",
       "exclude": [
-        "ios"
-      ]
-    },
-    "button_text_browse_lists": {
-      "default": "Lists",
-      "description": "Text for the button that allows users to browse their (watch) lists.",
-      "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4023,14 +4007,6 @@
         "ios"
       ]
     },
-    "button_text_search": {
-      "default": "Search",
-      "description": "Text for the button that opens the search page.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_label_search": {
       "default": "Search",
       "description": "Aria-label for the button that opens the search page.",
@@ -5661,14 +5637,6 @@
     "button_label_view_all_start_watching": {
       "default": "View all watchlist items available to watch",
       "description": "Aria-label for the button that allows users to view all items they should start watching.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_text_discover": {
-      "default": "Discover",
-      "description": "Text for the button that takes users to the discover page, where they can discover movies and shows.",
       "exclude": [
         "android",
         "ios"

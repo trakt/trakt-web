@@ -302,9 +302,6 @@
     "page_title_shows": {
       "default": "Serier"
     },
-    "button_text_home": {
-      "default": "Hjem"
-    },
     "button_label_home": {
       "default": "Gå tilbake til hjemmesiden"
     },
@@ -431,9 +428,6 @@
     },
     "header_genre": {
       "default": "Sjanger"
-    },
-    "button_text_browse_lists": {
-      "default": "Lister"
     },
     "button_label_browse_lists": {
       "default": "Utforsk lister"
@@ -1471,9 +1465,6 @@
     "link_text_view_profile": {
       "default": "Vis profil"
     },
-    "button_text_search": {
-      "default": "Søk"
-    },
     "button_label_search": {
       "default": "Søk"
     },
@@ -2108,9 +2099,6 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Vis alle elementene på listen for å se"
-    },
-    "button_text_discover": {
-      "default": "Oppdag"
     },
     "button_label_discover": {
       "default": "Oppdag filmer og serier"

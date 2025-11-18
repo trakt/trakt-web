@@ -302,9 +302,6 @@
     "page_title_shows": {
       "default": "Serien"
     },
-    "button_text_home": {
-      "default": "Startseite"
-    },
     "button_label_home": {
       "default": "Zurück zur Startseite"
     },
@@ -431,9 +428,6 @@
     },
     "header_genre": {
       "default": "Genre"
-    },
-    "button_text_browse_lists": {
-      "default": "Listen"
     },
     "button_label_browse_lists": {
       "default": "Listenansicht"
@@ -1471,9 +1465,6 @@
     "link_text_view_profile": {
       "default": "Profil anzeigen"
     },
-    "button_text_search": {
-      "default": "Suchen"
-    },
     "button_label_search": {
       "default": "Suchen"
     },
@@ -2108,9 +2099,6 @@
     },
     "button_label_view_all_start_watching": {
       "default": "Alle Elemente der Watchlist ansehen"
-    },
-    "button_text_discover": {
-      "default": "Entdecken"
     },
     "button_label_discover": {
       "default": "Filme und Serien entdecken"
