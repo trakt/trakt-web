@@ -65,7 +65,6 @@
 
       display: flex;
       flex-direction: column;
-      gap: var(--gap-micro);
 
       :global(.trakt-card-tag) {
         display: flex;
