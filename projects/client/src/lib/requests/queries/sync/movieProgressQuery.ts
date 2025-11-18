@@ -50,7 +50,7 @@ const mapToStartWatchingMovie = (response: ListedMovieResponse) => {
     progress: NaN,
     minutesElapsed: 0,
     minutesLeft: movie.runtime ?? 0,
-    lastWatchedAt: null,
+    lastWatchedAt: new Date(movie.airDate),
   };
 };
 
