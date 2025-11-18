@@ -41,13 +41,18 @@ function mapToGenre(props: MapToSubtitleProps) {
   return genre ? toTranslatedGenre(genre) : null;
 }
 
+function mapToYear(props: MapToSubtitleProps) {
+  return props.type === 'episode' ? props.episode.year : props.media.year;
+}
+
 export function mapToSummarySubtitle(props: MapToSubtitleProps) {
   const genre = mapToGenre(props);
   const duration = mapToDuration(props);
   const episodeCount = mapToEpisodeCount(props);
+  const year = mapToYear(props);
 
   return [
-    props.media.year,
+    year,
     duration,
     episodeCount,
     props.media.certification,
