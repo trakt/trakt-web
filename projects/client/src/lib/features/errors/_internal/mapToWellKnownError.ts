@@ -6,6 +6,7 @@ import {
 
 function mapToWellKnownErrorType(statusCode: number) {
   switch (statusCode) {
+    case 500:
     case 502:
     case 503:
       return WellKnownErrorType.ServerError;
