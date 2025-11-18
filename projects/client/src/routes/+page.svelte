@@ -37,6 +37,8 @@
 </TraktPage>
 
 <RenderFor audience="public">
+  <NavbarStateSetter mode="hidden" />
+
   <RenderFor audience="public" device={["tablet-sm", "tablet-lg", "desktop"]}>
     <Landing />
   </RenderFor>
