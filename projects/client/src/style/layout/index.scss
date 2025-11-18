@@ -126,6 +126,8 @@
     )
   );
 
+  --toggle-large-width: var(--ni-88);
+
   @-moz-document url-prefix() {
     --layout-scrollbar-width: var(--ni-16);
   }
@@ -138,6 +140,7 @@
   --font-size-text: var(--ni-14);
 
   @include for-mobile {
+    --toggle-large-width: var(--ni-80);
     --font-size-text: var(--ni-12);
   }
 
