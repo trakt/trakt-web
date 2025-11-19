@@ -1,5 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 
+import { normalizeTranslationKey } from './normalizeTranslationKey.ts';
+
 const VIDEO_TYPE_MAP = {
   trailer: m.translated_value_video_type_trailer,
   clip: m.translated_value_video_type_clip,
@@ -15,6 +17,8 @@ export function toTranslatedVideoType(
   data?: Record<string, unknown>,
 ): string {
   const translationFn =
-    VIDEO_TYPE_MAP[videoType as keyof typeof VIDEO_TYPE_MAP];
+    VIDEO_TYPE_MAP[
+      normalizeTranslationKey(videoType) as keyof typeof VIDEO_TYPE_MAP
+    ];
   return translationFn?.(data) ?? videoType;
 }

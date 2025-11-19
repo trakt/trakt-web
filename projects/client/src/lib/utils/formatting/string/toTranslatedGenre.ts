@@ -1,5 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 
+import { normalizeTranslationKey } from './normalizeTranslationKey.ts';
+
 const GENRE_MAP = {
   horror: m.translated_value_genre_horror,
   comedy: m.translated_value_genre_comedy,
@@ -44,6 +46,6 @@ export function toTranslatedGenre(
   genre: string | (keyof typeof GENRE_MAP),
   data?: Record<string, unknown>,
 ): string {
-  const translationFn = GENRE_MAP[genre as keyof typeof GENRE_MAP];
+  const translationFn = GENRE_MAP[normalizeTranslationKey(genre) as keyof typeof GENRE_MAP];
   return translationFn?.(data) ?? genre;
 }
