@@ -28,7 +28,9 @@
   type="movie"
   hasDynamicContent={true}
 >
-  <NavbarStateSetter mode="minimal" />
+  <RenderFor audience="authenticated">
+    <NavbarStateSetter mode="minimal" />
+  </RenderFor>
 
   {#if !$isLoading}
     <MovieSummary

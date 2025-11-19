@@ -80,7 +80,9 @@
   type="show"
   hasDynamicContent={true}
 >
-  <NavbarStateSetter mode="minimal" />
+  <RenderFor audience="authenticated">
+    <NavbarStateSetter mode="minimal" />
+  </RenderFor>
 
   {#if isReady}
     <ShowSummary

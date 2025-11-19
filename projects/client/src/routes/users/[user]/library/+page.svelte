@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   import Redirect from "$lib/components/router/Redirect.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import { CUSTOM_LIBRARY_NAME } from "$lib/sections/lists/library/constants";
@@ -28,7 +29,10 @@
     image={DEFAULT_SHARE_MOVIE_COVER}
     title={m.page_title_library()}
   >
-    <NavbarStateSetter mode="minimal" />
+    <RenderFor audience="authenticated">
+      <NavbarStateSetter mode="minimal" />
+    </RenderFor>
+
     <TraktPageCoverSetter />
 
     <LibraryListPaginated {library} />
