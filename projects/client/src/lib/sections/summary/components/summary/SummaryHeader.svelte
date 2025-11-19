@@ -58,7 +58,8 @@
   .trakt-summary-header-children {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
+    align-items: flex-start;
+    gap: var(--gap-m);
   }
 
   .trakt-summary-header {

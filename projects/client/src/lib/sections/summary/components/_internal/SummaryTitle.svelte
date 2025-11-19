@@ -35,11 +35,7 @@
 </script>
 
 <div class="trakt-summary-title">
-  <h2
-    data-testid={TestId.SummaryMediaTitle}
-    class:short-title={title.length < 15}
-    class:long-title={title.length > 25}
-  >
+  <h2 data-testid={TestId.SummaryMediaTitle}>
     {title}
   </h2>
 
@@ -64,28 +60,28 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-summary-title {
     display: flex;
     flex-direction: column;
-    align-items: center;
 
-    gap: var(--gap-micro);
+    gap: var(--gap-xs);
+    transition: gap var(--transition-increment) ease-in-out;
+
+    @include for-tablet-sm-and-below {
+      gap: var(--gap-micro);
+      align-items: center;
+    }
   }
 
   h2 {
-    --text-size: 7cqi;
+    font-size: var(--font-size-title);
 
-    &.short-title {
-      --text-size: 10cqi;
+    @include for-tablet-sm-and-below {
+      text-align: center;
     }
-
-    &.long-title {
-      --text-size: 2.5cqi;
-    }
-
-    font-size: clamp(var(--ni-24), var(--text-size), var(--ni-32));
-    text-align: center;
   }
 
   .trakt-media-status {

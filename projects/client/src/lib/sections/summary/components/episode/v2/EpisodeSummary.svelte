@@ -4,17 +4,17 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
+  import EpisodeTitle from "../../_internal/EpisodeTitle.svelte";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
+  import SummaryTitle from "../../_internal/SummaryTitle.svelte";
   import { useMediaMetaInfo } from "../../media/useMediaMetaInfo";
-  import SummaryTitle from "../../media/v2/_internal/SummaryTitle.svelte";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
   import type { EpisodeSummaryProps } from "./../../EpisodeSummaryProps";
   import EpisodeActions from "./_internal/EpisodeActions.svelte";
   import EpisodeSideActions from "./_internal/EpisodeSideActions.svelte";
-  import EpisodeTitle from "./_internal/EpisodeTitle.svelte";
 
   const {
     episode,

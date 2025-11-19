@@ -1,8 +1,8 @@
+import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
+import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
-import { languageTag } from '../../../../../../features/i18n/index.ts';
-import { toHumanDuration } from '../../../../../../utils/formatting/date/toHumanDuration.ts';
-import type { MediaSummaryEntry } from '../models/MediaSummaryEntry.ts';
+import type { MediaSummaryEntry } from '../media/models/MediaSummaryEntry.ts';
 import type { EpisodeSummaryEntry } from './SummaryTitleProps.ts';
 
 type MapToSubtitleProps = EpisodeSummaryEntry | MediaSummaryEntry;

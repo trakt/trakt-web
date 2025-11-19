@@ -45,6 +45,10 @@
   @use "$style/scss/mixins/index" as *;
 
   rating {
+    .vote-count {
+      font-size: var(--font-size-tag);
+    }
+
     :global(.trakt-link) {
       text-decoration: none;
 
@@ -84,6 +88,9 @@
     }
 
     :global(svg) {
+      height: var(--font-size-text);
+      width: auto;
+
       transition: calc(var(--transition-increment) * 2) ease-in-out;
 
       transition-property: width, height, transform, filter;
@@ -93,13 +100,6 @@
     &.has-valid-rating {
       :global(svg) {
         filter: grayscale(0);
-      }
-    }
-
-    @include for-mobile {
-      :global(svg) {
-        height: var(--ni-12);
-        width: auto;
       }
     }
   }

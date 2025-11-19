@@ -12,12 +12,12 @@
   import Summary from "../../_internal/Summary.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
+  import SummaryTitle from "../../_internal/SummaryTitle.svelte";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
+  import type { MediaSummaryEntry } from "../models/MediaSummaryEntry";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
   import SideActions from "./_internal/SideActions.svelte";
-  import SummaryTitle from "./_internal/SummaryTitle.svelte";
-  import type { MediaSummaryEntry } from "./models/MediaSummaryEntry";
 
   const {
     intl,
