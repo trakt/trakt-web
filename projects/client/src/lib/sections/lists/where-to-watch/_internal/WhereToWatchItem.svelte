@@ -4,9 +4,7 @@
   import { StreamingServiceLogoIntlProvider } from "$lib/components/media/streaming-service/StreamingServiceLogoIntlProvider";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { FeatureFlag } from "$lib/features/feature-flag/models/FeatureFlag";
   import * as m from "$lib/features/i18n/messages.ts";
-  import RenderForFeature from "$lib/guards/RenderForFeature.svelte";
   import type { StreamingServiceOption } from "$lib/requests/models/StreamingServiceOptions";
   import type { LibraryOption } from "../models/LibraryOption";
   import { getMediaCost } from "./getMediaCost";
@@ -45,21 +43,12 @@
     onclick={() => track({ source: service.source })}
   >
     <div class="where-to-watch-item-content">
-      <RenderForFeature flag={FeatureFlag.ColorizeLogos}>
-        {#snippet enabled()}
-          <StreamingServiceLogo
-            source={service.source}
-            {country}
-            i18n={StreamingServiceLogoIntlProvider}
-            variant="colored"
-          />
-        {/snippet}
-        <StreamingServiceLogo
-          source={service.source}
-          {country}
-          i18n={StreamingServiceLogoIntlProvider}
-        />
-      </RenderForFeature>
+      <StreamingServiceLogo
+        source={service.source}
+        {country}
+        i18n={StreamingServiceLogoIntlProvider}
+        variant="colored"
+      />
       <p class="meta-info">{text}</p>
     </div>
   </Link>
