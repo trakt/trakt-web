@@ -22,6 +22,7 @@ describe('mapToServices', () => {
       source: 'netflix',
       is4k: true,
       type: 'streaming',
+      key: 'streaming-netflix',
     };
 
     const streamOn: StreamOn = {
@@ -48,6 +49,7 @@ describe('mapToServices', () => {
       currency: 'usd',
       prices: { rent: 3.99 },
       type: 'on-demand',
+      key: 'on-demand-amazon',
     };
 
     const streamOn: StreamOn = {
@@ -72,6 +74,7 @@ describe('mapToServices', () => {
       source: 'netflix',
       is4k: true,
       type: 'streaming',
+      key: 'streaming-netflix',
     };
 
     const otherStreamingService: StreamNow = {
@@ -79,6 +82,7 @@ describe('mapToServices', () => {
       source: 'hulu',
       is4k: false,
       type: 'streaming',
+      key: 'streaming-hulu',
     };
 
     const onDemandService: StreamOnDemand = {
@@ -88,6 +92,7 @@ describe('mapToServices', () => {
       currency: 'usd',
       prices: { purchase: 9.99 },
       type: 'on-demand',
+      key: 'on-demand-amazon',
     };
 
     const streamOn: StreamOn = {
@@ -121,6 +126,7 @@ describe('mapToServices', () => {
       source: 'disney',
       is4k: true,
       type: 'streaming',
+      key: 'streaming-disney',
     };
 
     const streamingService: StreamNow = {
@@ -128,6 +134,7 @@ describe('mapToServices', () => {
       source: 'netflix',
       is4k: false,
       type: 'streaming',
+      key: 'streaming-netflix',
     };
 
     const onDemandService1: StreamOnDemand = {
@@ -137,6 +144,7 @@ describe('mapToServices', () => {
       currency: 'usd',
       prices: { rent: 3.99, purchase: 12.99 },
       type: 'on-demand',
+      key: 'on-demand-amazon',
     };
 
     const onDemandService2: StreamOnDemand = {
@@ -146,6 +154,7 @@ describe('mapToServices', () => {
       currency: 'usd',
       prices: { purchase: 14.99 },
       type: 'on-demand',
+      key: 'on-demand-apple',
     };
 
     const streamOn: StreamOn = {

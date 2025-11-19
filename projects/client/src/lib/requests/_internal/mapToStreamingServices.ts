@@ -15,6 +15,7 @@ function mapToStreamNow(
     link: prependHttps(serviceResponse.link),
     source: serviceResponse.source,
     is4k: serviceResponse.uhd,
+    key: `streaming-${serviceResponse.source}`,
   };
 }
 
@@ -40,6 +41,7 @@ function mapToStreamOnDemand(
       rent: getPrice(serviceResponse.prices.rent),
       purchase: getPrice(serviceResponse.prices.purchase),
     },
+    key: `on-demand-${serviceResponse.source}`,
   };
 }
 

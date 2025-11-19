@@ -11,6 +11,7 @@ describe('getMediaCost', () => {
       currency: 'usd',
       prices: {},
       type: 'on-demand',
+      key: 'on-demand-example',
     };
 
     expect(getMediaCost(onDemandService)).toEqual('');
@@ -24,6 +25,7 @@ describe('getMediaCost', () => {
       currency: 'usd',
       prices: { rent: 3.99, purchase: 9.99 },
       type: 'on-demand',
+      key: 'on-demand-example',
     };
 
     expect(getMediaCost(onDemandService)).toEqual('$3.99');
@@ -37,6 +39,7 @@ describe('getMediaCost', () => {
       currency: 'usd',
       prices: { purchase: 9.99 },
       type: 'on-demand',
+      key: 'on-demand-example',
     };
 
     expect(getMediaCost(onDemandService)).toEqual('$9.99');

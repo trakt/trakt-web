@@ -10,16 +10,9 @@ export function mapToServices(streamOn?: StreamOn) {
   const nonPreferred = services.streaming
     .filter((service) => service.source !== preferred?.source);
 
-  const allServices = [
+  return [
     ...(preferred ? [preferred] : []),
     ...nonPreferred,
     ...services.onDemand,
   ];
-
-  return allServices.map(
-    (service) => ({
-      ...service,
-      key: `${service.type}-${service.source}`,
-    }),
-  );
 }

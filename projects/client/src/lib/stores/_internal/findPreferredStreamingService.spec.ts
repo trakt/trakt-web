@@ -19,6 +19,7 @@ describe('findPreferredStreamingService', () => {
           source: 'netflix',
           is4k: false,
           type: 'streaming',
+          key: 'streaming-netflix',
         }],
         onDemand: [],
       },
@@ -29,6 +30,7 @@ describe('findPreferredStreamingService', () => {
       'link': 'https://www.netflix.com/',
       'source': 'netflix',
       'type': 'streaming',
+      'key': 'streaming-netflix',
     });
   });
 
@@ -38,6 +40,7 @@ describe('findPreferredStreamingService', () => {
       source: 'netflix',
       is4k: false,
       type: 'streaming',
+      key: 'streaming-netflix',
     };
 
     expect(findPreferredStreamingService({
