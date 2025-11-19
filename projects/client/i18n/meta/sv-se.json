@@ -1308,9 +1308,6 @@
     "page_title_settings": {
       "default": "Inställningar"
     },
-    "header_settings": {
-      "default": "Inställningar"
-    },
     "button_label_settings": {
       "default": "Inställningar"
     },
@@ -2231,6 +2228,12 @@
     },
     "header_age": {
       "default": "Ålder"
+    },
+    "button_label_view_all_where_to_watch": {
+      "default": "Visa alla streamingtjänster"
+    },
+    "header_settings": {
+      "default": "Inställningar"
     }
   }
 }

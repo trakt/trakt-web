@@ -1308,9 +1308,6 @@
     "page_title_settings": {
       "default": "Configurações"
     },
-    "header_settings": {
-      "default": "Configurações"
-    },
     "button_label_settings": {
       "default": "Configurações"
     },
@@ -2231,6 +2228,12 @@
     },
     "header_age": {
       "default": "Idade"
+    },
+    "button_label_view_all_where_to_watch": {
+      "default": "Ver todos os serviços de streaming"
+    },
+    "header_settings": {
+      "default": "Configurações"
     }
   }
 }

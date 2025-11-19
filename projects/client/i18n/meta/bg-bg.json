@@ -1308,9 +1308,6 @@
     "page_title_settings": {
       "default": "Настройки"
     },
-    "header_settings": {
-      "default": "Настройки"
-    },
     "button_label_settings": {
       "default": "Настройки"
     },
@@ -2231,6 +2228,12 @@
     },
     "header_age": {
       "default": "Възраст"
+    },
+    "button_label_view_all_where_to_watch": {
+      "default": "Виж всички стрийминг услуги"
+    },
+    "header_settings": {
+      "default": "Настройки"
     }
   }
 }
