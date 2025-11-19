@@ -21,7 +21,7 @@
 </script>
 
 {#if $state.mode !== "hidden"}
-  <div class="trakt-navbar-actions">
+  <div class="trakt-navbar-actions" class:is-hidden={$state.mode === "minimal"}>
     <div class="trakt-navbar-actions-left">
       <RenderFor audience="free"><GetVIPLink /></RenderFor>
     </div>
@@ -171,6 +171,8 @@
 
   .trakt-navbar-actions {
     height: var(--side-navbar-actions-height);
+    transition: var(--transition-increment) ease-in-out;
+    transition-property: height, opacity, padding;
 
     display: flex;
     justify-content: space-between;
@@ -184,5 +186,13 @@
     padding-left: calc(
       var(--layout-distance-side) + var(--layout-sidebar-distance)
     );
+
+    &.is-hidden {
+      height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      pointer-events: none;
+    }
   }
 </style>
