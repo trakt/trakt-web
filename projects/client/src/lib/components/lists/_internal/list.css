@@ -27,7 +27,7 @@
   content to be scrolled under the sidebar
 */
 @supports not selector(::-webkit-scrollbar) {
-  .shadow-list {
+  .section-list {
     margin-left: 0;
 
     .trakt-list-item-container,
