@@ -64,7 +64,7 @@
   title={pageTitle}
 >
   <RenderFor audience="authenticated" device={["tablet-lg", "desktop"]}>
-    <NavbarStateSetter>
+    <NavbarStateSetter mode="full">
       {#snippet actions()}
         <SearchModeToggles />
       {/snippet}
