@@ -13,6 +13,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       },
       'source': 'apple_tv',
       'type': 'on-demand',
+      'key': 'on-demand-apple_tv',
     },
     {
       'currency': 'usd',
@@ -25,6 +26,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       },
       'source': 'amazon_video',
       'type': 'on-demand',
+      'key': 'on-demand-amazon_video',
     },
     {
       'currency': 'usd',
@@ -37,6 +39,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       },
       'source': 'fandango_at_home',
       'type': 'on-demand',
+      'key': 'on-demand-fandango_at_home',
     },
     {
       'currency': 'usd',
@@ -49,6 +52,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       },
       'source': 'google_play_movies',
       'type': 'on-demand',
+      'key': 'on-demand-google_play_movies',
     },
     {
       'currency': 'usd',
@@ -61,6 +65,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       },
       'source': 'microsoft_store',
       'type': 'on-demand',
+      'key': 'on-demand-microsoft_store',
     },
     {
       'currency': 'usd',
@@ -73,6 +78,7 @@ export const MovieHereticWatchedNowMappedMock: StreamingServiceOptions = {
       },
       'source': 'youtube',
       'type': 'on-demand',
+      'key': 'on-demand-youtube',
     },
   ],
   'streaming': [],

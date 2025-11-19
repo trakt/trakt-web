@@ -6,6 +6,7 @@ export const StreamingSubscriptionSchema = z.object({
   source: z.string(),
   is4k: z.boolean(),
   type: z.literal('streaming'),
+  key: z.string(),
 });
 export type StreamNow = z.infer<
   typeof StreamingSubscriptionSchema
@@ -22,6 +23,7 @@ export const OnDemandStreamingSchema = z.object({
     rent: z.number().optional(),
     purchase: z.number().optional(),
   }),
+  key: z.string(),
 });
 export type StreamOnDemand = z.infer<typeof OnDemandStreamingSchema>;
 
