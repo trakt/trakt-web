@@ -1,5 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 
+import { normalizeTranslationKey } from './normalizeTranslationKey.ts';
+
 const JOB_MAP = {
   action_director: m.translated_value_job_action_director,
   additional_second_assistant_director:
@@ -89,6 +91,7 @@ export function toTranslatedJob(
   job: string | (keyof typeof JOB_MAP),
   data?: Record<string, unknown>,
 ): string {
-  const translationFn = JOB_MAP[job as keyof typeof JOB_MAP];
+  const translationFn =
+    JOB_MAP[normalizeTranslationKey(job) as keyof typeof JOB_MAP];
   return translationFn?.(data) ?? job;
 }

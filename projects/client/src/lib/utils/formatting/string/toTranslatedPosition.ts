@@ -1,5 +1,7 @@
 import * as m from '$lib/features/i18n/messages.ts';
 
+import { normalizeTranslationKey } from './normalizeTranslationKey.ts';
+
 const POSITION_MAP = {
   acting: m.translated_value_position_acting,
   self: m.translated_value_position_self,
@@ -23,6 +25,9 @@ export function toTranslatedPosition(
   position: string | (keyof typeof POSITION_MAP),
   data?: Record<string, unknown>,
 ): string {
-  const translationFn = POSITION_MAP[position as keyof typeof POSITION_MAP];
+  const translationFn =
+    POSITION_MAP[
+      normalizeTranslationKey(position) as keyof typeof POSITION_MAP
+    ];
   return translationFn?.(data) ?? position;
 }
