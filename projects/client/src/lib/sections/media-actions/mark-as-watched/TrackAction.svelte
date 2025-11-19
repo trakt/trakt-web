@@ -21,9 +21,8 @@
     ...target
   }: TrackButtonProps = $props();
 
-  const { isMarkingAsWatched, markAsWatched, isWatchable } = $derived(
-    useMarkAsWatched(target),
-  );
+  const { isMarkingAsWatched, markAsWatched, isWatchable, isWatched } =
+    $derived(useMarkAsWatched(target));
 
   const { confirm } = useConfirm();
   const confirmMarkAsWatched = $derived(
@@ -43,7 +42,7 @@
     onclick={confirmMarkAsWatched}
     color="purple"
   >
-    <TrackIcon />
+    <TrackIcon state={$isWatched ? "watched" : "unwatched"} />
   </ActionButton>
 </trakt-track-action>
 
