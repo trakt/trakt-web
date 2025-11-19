@@ -9,6 +9,7 @@
   import RelatedList from "../lists/RelatedList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
+  import MediaDetails from "./components/details/MediaDetails.svelte";
   import EpisodeSummary from "./components/episode/EpisodeSummary.svelte";
   import EpisodeSummaryV2 from "./components/episode/v2/EpisodeSummary.svelte";
   import type { EpisodeSummaryProps } from "./components/EpisodeSummaryProps";
@@ -72,4 +73,6 @@
     {show}
     type="episode"
   />
+
+  <MediaDetails {crew} {episode} type="episode" />
 </RenderFor>

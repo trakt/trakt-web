@@ -12,7 +12,6 @@
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import MediaDetails from "../details/MediaDetails.svelte";
   import type { EpisodeSummaryProps } from "./../EpisodeSummaryProps";
   import MediaMetaInfo from "./../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./../overlay/StreamOnOverlay.svelte";
@@ -131,9 +130,3 @@
     </SummaryActions>
   </RenderFor>
 </SummaryContainer>
-
-<RenderFor audience="all">
-  <SummaryContainer>
-    <MediaDetails {episode} {crew} type="episode" title={m.header_details()} />
-  </SummaryContainer>
-</RenderFor>

@@ -13,6 +13,7 @@
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
+  import MediaDetails from "./components/details/MediaDetails.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
@@ -40,7 +41,7 @@
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-  <MediaSummary {media} {studios} {crew} {intl} {streamOn} type="movie" />
+  <MediaSummary {media} {intl} {streamOn} type="movie" />
 </RenderFor>
 
 <RenderFor audience="authenticated">
@@ -66,4 +67,6 @@
   <Lists slug={media.slug} title={media.title} type="movie" />
 
   <MediaWatchHistoryList title={m.list_title_history()} {media} type="movie" />
+
+  <MediaDetails {studios} {crew} {media} type="movie" />
 </RenderFor>

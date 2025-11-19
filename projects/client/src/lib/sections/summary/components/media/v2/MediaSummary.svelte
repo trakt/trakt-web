@@ -10,10 +10,8 @@
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import SpoilerSection from "../../_internal/SpoilerSection.svelte";
   import Summary from "../../_internal/Summary.svelte";
-  import SummaryDetails from "../../_internal/SummaryDetails.svelte";
   import SummaryPosterTags from "../../_internal/SummaryPosterTags.svelte";
   import SummaryRateNow from "../../_internal/SummaryRateNow.svelte";
-  import MediaDetails from "../../details/MediaDetails.svelte";
   import { useIsRateable } from "../../rating/_internal/useIsRateable";
   import { useMediaMetaInfo } from "../useMediaMetaInfo";
   import MediaActions from "./_internal/MediaActions.svelte";
@@ -98,8 +96,4 @@
   <SpoilerSection {media} type={media.type}>
     <p class="secondary small">{intl.overview ?? media.overview}</p>
   </SpoilerSection>
-
-  <SummaryDetails type={target.type}>
-    <MediaDetails {studios} {crew} {...target} />
-  </SummaryDetails>
 </Summary>

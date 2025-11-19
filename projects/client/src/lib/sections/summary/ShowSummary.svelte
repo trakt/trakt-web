@@ -17,6 +17,7 @@
   import VideoList from "../lists/VideoList.svelte";
   import WhereToWatchList from "../lists/where-to-watch/WhereToWatchList.svelte";
   import Comments from "./components/comments/Comments.svelte";
+  import MediaDetails from "./components/details/MediaDetails.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
   import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
@@ -54,7 +55,7 @@
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-  <MediaSummary {media} {studios} {intl} {crew} {streamOn} type="show">
+  <MediaSummary {media} {intl} {streamOn} type="show">
     {#snippet contextualContent()}
       <RenderFor device={["desktop"]} audience="authenticated">
         {#if episode != null && episode.remaining > 0}
@@ -90,4 +91,6 @@
   <Lists slug={media.slug} title={media.title} type="show" />
 
   <MediaWatchHistoryList title={m.list_title_history()} {media} type="show" />
+
+  <MediaDetails {studios} {crew} {media} type="show" />
 </RenderFor>

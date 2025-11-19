@@ -7,9 +7,7 @@
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
@@ -20,7 +18,6 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useWatchCount } from "$lib/stores/useWatchCount";
   import type { Snippet } from "svelte";
-  import MediaDetails from "../details/MediaDetails.svelte";
   import ListDropdown from "../list-dropdown/ListDropdown.svelte";
   import type { ListDropdownProps } from "../list-dropdown/ListDropdownProps";
   import { useAllPersonalLists } from "../list-dropdown/useAllPersonalLists";
@@ -41,14 +38,10 @@
     type,
     intl,
     contextualContent,
-    studios,
-    crew,
     streamOn,
   }: MediaSummaryProps<MediaEntry> & {
     type: MediaType;
     contextualContent?: Snippet;
-    studios: MediaStudio[];
-    crew: MediaCrew;
   } = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -174,9 +167,3 @@
     </SummaryActions>
   </RenderFor>
 </SummaryContainer>
-
-<RenderFor audience="all">
-  <SummaryContainer>
-    <MediaDetails {media} {studios} {crew} {type} title={m.header_details()} />
-  </SummaryContainer>
-</RenderFor>
