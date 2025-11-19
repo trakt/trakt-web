@@ -22,7 +22,9 @@
     showIntl,
     episodeIntl,
     crew,
-  }: Omit<EpisodeSummaryProps, "seasons" | "streamon"> = $props();
+    posterSrc,
+  }: Omit<EpisodeSummaryProps, "seasons" | "streamon"> & { posterSrc: string } =
+    $props();
   const type = "episode";
 
   const title = $derived(episodeIntl.title ?? episode.title);
@@ -57,7 +59,7 @@
 <Summary>
   {#snippet poster()}
     <SummaryPoster
-      src={show.poster.url.medium}
+      src={posterSrc}
       alt={title}
       tags={hasTags ? tags : undefined}
     />

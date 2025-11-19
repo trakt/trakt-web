@@ -28,7 +28,8 @@
     episodeIntl,
     streamOn,
     crew,
-  }: Omit<EpisodeSummaryProps, "seasons"> = $props();
+    posterSrc,
+  }: Omit<EpisodeSummaryProps, "seasons"> & { posterSrc: string } = $props();
   const type = "episode";
 
   const title = $derived(episodeIntl.title ?? episode.title);
@@ -55,11 +56,7 @@
 
 <SummaryContainer>
   {#snippet poster()}
-    <SummaryPoster
-      src={show.poster.url.medium}
-      alt={title}
-      href={streamOn?.preferred?.link}
-    >
+    <SummaryPoster src={posterSrc} alt={title} href={streamOn?.preferred?.link}>
       {#snippet hoverOverlay()}
         <StreamOnOverlay service={streamOn?.preferred} />
       {/snippet}

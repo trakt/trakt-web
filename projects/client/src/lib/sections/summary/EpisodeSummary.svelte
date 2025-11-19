@@ -23,6 +23,14 @@
     streamOn,
     crew,
   }: EpisodeSummaryProps = $props();
+
+  // FIXME: move this to the summary component when merged with v2
+  const currentSeason = $derived(
+    seasons.find((s) => s.number === episode.season),
+  );
+  const posterSrc = $derived(
+    currentSeason?.poster?.url.medium ?? show.poster.url.medium,
+  );
 </script>
 
 <!-- 
@@ -37,11 +45,26 @@
 />
 
 <RenderFor audience="all" device={["mobile"]}>
-  <EpisodeSummaryV2 {episode} {show} {showIntl} {episodeIntl} {crew} />
+  <EpisodeSummaryV2
+    {episode}
+    {show}
+    {showIntl}
+    {episodeIntl}
+    {crew}
+    {posterSrc}
+  />
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-  <EpisodeSummary {episode} {show} {showIntl} {episodeIntl} {streamOn} {crew} />
+  <EpisodeSummary
+    {episode}
+    {show}
+    {showIntl}
+    {episodeIntl}
+    {streamOn}
+    {crew}
+    {posterSrc}
+  />
 </RenderFor>
 
 <RenderFor audience="authenticated">
