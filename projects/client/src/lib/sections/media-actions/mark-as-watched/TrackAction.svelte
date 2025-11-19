@@ -21,8 +21,13 @@
     ...target
   }: TrackButtonProps = $props();
 
-  const { isMarkingAsWatched, markAsWatched, isWatchable, isWatched } =
-    $derived(useMarkAsWatched(target));
+  const {
+    isMarkingAsWatched,
+    markAsWatched,
+    isWatchable,
+    isWatched,
+    removeWatched,
+  } = $derived(useMarkAsWatched(target));
 
   const { confirm } = useConfirm();
   const confirmMarkAsWatched = $derived(
@@ -33,13 +38,29 @@
       onConfirm: markAsWatched,
     }),
   );
+  const confirmRemoveWatched = $derived(
+    confirm({
+      type: ConfirmationType.RemoveFromWatched,
+      title,
+      onConfirm: removeWatched,
+    }),
+  );
+
+  const handler = (ev: MouseEvent) => {
+    if ($isWatched) {
+      confirmRemoveWatched(ev);
+      return;
+    }
+
+    confirmMarkAsWatched(ev);
+  };
 </script>
 
 <trakt-track-action class:is-watchable={isWatchable}>
   <ActionButton
     disabled={$isMarkingAsWatched || !isWatchable}
     label={i18n.label({ title, isWatched: false, isRewatching: false })}
-    onclick={confirmMarkAsWatched}
+    onclick={handler}
     color="purple"
   >
     <TrackIcon state={$isWatched ? "watched" : "unwatched"} />
