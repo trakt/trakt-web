@@ -1,6 +1,7 @@
 <script lang="ts">
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import PrivateProfile from "$lib/sections/profile/PrivateProfile.svelte";
@@ -26,7 +27,9 @@
   {title}
   hasDynamicContent={true}
 >
-  <NavbarStateSetter mode="minimal" />
+  <RenderFor audience="authenticated">
+    <NavbarStateSetter mode="minimal" />
+  </RenderFor>
 
   {#if !$isLoading && $user}
     <CoverImageSetter src={$user.cover?.url} type="main" />

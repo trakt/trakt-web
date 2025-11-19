@@ -81,7 +81,7 @@
         <SearchInput />
       </div>
 
-      <NavbarStateSetter>
+      <NavbarStateSetter mode="full">
         {#snippet actions()}
           <SearchModeToggles />
         {/snippet}

@@ -16,7 +16,9 @@
   title={$person?.name}
   image={$person?.headshot?.url.medium}
 >
-  <NavbarStateSetter mode="minimal" />
+  <RenderFor audience="authenticated">
+    <NavbarStateSetter mode="minimal" />
+  </RenderFor>
 
   {#if !$isLoading}
     <PeopleSummary person={$person!} />
