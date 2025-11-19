@@ -5,6 +5,7 @@
 
   type StreamingServiceLogoProps = {
     source: string;
+    country: string;
     i18n: StreamingServiceLogoIntl;
     variant?: "monochrome" | "colored";
   };
@@ -13,8 +14,10 @@
     source,
     i18n,
     variant = "monochrome",
+    country,
   }: StreamingServiceLogoProps = $props();
-  const { sources } = useStreamingServices();
+
+  const { sources } = $derived(useStreamingServices(country));
 
   const service = $derived($sources.find((s) => s.source === source));
   const displayName = $derived(service?.name ?? "");

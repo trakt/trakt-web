@@ -4,6 +4,7 @@
   import type { StreamOn } from "$lib/requests/models/StreamOn";
   import { hasAired } from "$lib/sections/media-actions/_internal/hasAired";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
+  import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { slide } from "svelte/transition";
   import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
   import { useWhereToWatch } from "./_internal/useWhereToWatch";
@@ -17,6 +18,8 @@
   } = $props();
 
   const { services } = $derived(useWhereToWatch({ streamOn, ...target }));
+  const { country } = useStreamingPreferences();
+
   const isAired = $derived.by(() => {
     switch (target.type) {
       case "movie":
@@ -46,7 +49,7 @@
       --height-list="var(--height-where-to-watch-list)"
     >
       {#snippet item(service)}
-        <WhereToWatchItem {service} />
+        <WhereToWatchItem {service} country={$country} />
       {/snippet}
 
       {#snippet empty()}

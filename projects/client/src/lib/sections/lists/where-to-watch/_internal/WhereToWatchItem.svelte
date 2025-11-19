@@ -11,7 +11,10 @@
   import type { LibraryOption } from "../models/LibraryOption";
   import { getMediaCost } from "./getMediaCost";
 
-  const { service }: { service: StreamingServiceOption | LibraryOption } =
+  const {
+    service,
+    country,
+  }: { service: StreamingServiceOption | LibraryOption; country: string } =
     $props();
 
   const { track } = useTrack(AnalyticsEvent.StreamOn);
@@ -46,12 +49,14 @@
         {#snippet enabled()}
           <StreamingServiceLogo
             source={service.source}
+            {country}
             i18n={StreamingServiceLogoIntlProvider}
             variant="colored"
           />
         {/snippet}
         <StreamingServiceLogo
           source={service.source}
+          {country}
           i18n={StreamingServiceLogoIntlProvider}
         />
       </RenderForFeature>
