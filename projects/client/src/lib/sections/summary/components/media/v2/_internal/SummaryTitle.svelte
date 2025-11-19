@@ -22,7 +22,9 @@
       );
     }
 
-    const director = crew.directors?.at(0);
+    const director = crew.directors?.find((director) =>
+      director.jobs.map((job) => job.toLowerCase()).includes("director"),
+    );
     return (
       director && {
         text: m.text_directed_by({ name: director.name }),
