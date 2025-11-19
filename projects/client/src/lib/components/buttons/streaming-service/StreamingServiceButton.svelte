@@ -5,6 +5,7 @@
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
+  import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import StreamingServiceLogo from "../../media/streaming-service/StreamingServiceLogo.svelte";
   import Button from "../Button.svelte";
   import { StreamingServiceButtonIntlProvider } from "./StreamingServiceButtonIntlProvider";
@@ -27,6 +28,8 @@
     navigationType: DpadNavigationType.Item,
   });
 
+  const { country } = useStreamingPreferences();
+
   const { track } = useTrack(AnalyticsEvent.StreamOn);
   const handler = $derived({
     href: service.link,
@@ -44,6 +47,7 @@
       {#snippet icon()}
         <StreamingServiceLogo
           source={service.source}
+          country={$country}
           i18n={StreamingServiceLogoIntlProvider}
         />
         <PlayIcon />
@@ -57,6 +61,7 @@
     <Button {...commonProps} {...props} {...handler} {size}>
       <StreamingServiceLogo
         source={service.source}
+        country={$country}
         i18n={StreamingServiceLogoIntlProvider}
       />
       {#snippet icon()}
@@ -70,6 +75,7 @@
   <DropdownItem {...commonProps} style="flat">
     <StreamingServiceLogo
       source={service.source}
+      country={$country}
       i18n={StreamingServiceLogoIntlProvider}
     />
     {#snippet icon()}
