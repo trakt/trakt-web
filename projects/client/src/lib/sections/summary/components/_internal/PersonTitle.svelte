@@ -5,7 +5,7 @@
 </script>
 
 <div class="trakt-person-title">
-  <h2 class:short-title={name.length < 15} class:long-title={name.length > 25}>
+  <h2>
     {name}
   </h2>
 
@@ -16,7 +16,9 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-person-title {
     display: flex;
     flex-direction: column;
@@ -24,17 +26,10 @@
   }
 
   h2 {
-    --text-size: 7cqi;
+    font-size: var(--font-size-title);
 
-    &.short-title {
-      --text-size: 10cqi;
+    @include for-tablet-sm-and-below {
+      text-align: center;
     }
-
-    &.long-title {
-      --text-size: 2.5cqi;
-    }
-
-    font-size: clamp(var(--ni-24), var(--text-size), var(--ni-32));
-    text-align: center;
   }
 </style>

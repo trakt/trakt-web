@@ -2,7 +2,6 @@
   import * as m from "$lib/features/i18n/messages";
 
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaCrew } from "$lib/requests/models/MediaCrew";
   import type { MediaStudio } from "$lib/requests/models/MediaStudio";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import type { Season } from "$lib/requests/models/Season";
@@ -20,18 +19,18 @@
   import MediaDetails from "./components/details/MediaDetails.svelte";
   import Lists from "./components/lists/Lists.svelte";
   import MediaSummary from "./components/media/MediaSummary.svelte";
-  import type { MediaSummaryProps } from "./components/media/MediaSummaryProps";
   import MediaSummaryV2 from "./components/media/v2/MediaSummary.svelte";
   import CommunitySentiments from "./components/sentiment/CommunitySentiments.svelte";
+  import type { CommonMediaSummaryProps } from "./models/CommonMediaSummaryProps";
 
-  type ShowSummaryProps = MediaSummaryProps<ShowEntry> & {
+  type ShowSummaryProps = {
+    media: ShowEntry;
     studios: MediaStudio[];
-    crew: MediaCrew;
     seasons: Season[];
     videos: MediaVideo[];
     currentSeason: number;
     sentiments: Sentiments | Nil;
-  };
+  } & CommonMediaSummaryProps;
 
   const {
     media,
@@ -55,7 +54,7 @@
 </RenderFor>
 
 <RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
-  <MediaSummary {media} {intl} {streamOn} type="show">
+  <MediaSummary {media} {intl} {crew} {streamOn} type="show">
     {#snippet contextualContent()}
       <RenderFor device={["desktop"]} audience="authenticated">
         {#if episode != null && episode.remaining > 0}

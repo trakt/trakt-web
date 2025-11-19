@@ -3,11 +3,11 @@
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
+  import PersonTitle from "../../_internal/PersonTitle.svelte";
   import Summary from "./../../_internal/Summary.svelte";
   import SummaryOverview from "./../../summary/SummaryOverview.svelte";
   import BirthdayDetails from "./_internal/BirthdayDetails.svelte";
   import ImdbLink from "./_internal/ImdbLink.svelte";
-  import PersonTitle from "./_internal/PersonTitle.svelte";
   import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
 
   const { person }: { person: PersonSummary } = $props();

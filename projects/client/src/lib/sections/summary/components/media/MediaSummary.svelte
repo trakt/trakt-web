@@ -3,12 +3,10 @@
 
   import CoverImageSetter from "$lib/components/background/CoverImageSetter.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import GenreList from "$lib/components/summary/GenreList.svelte";
+  import RatingList from "$lib/components/summary/RatingList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import type { MediaEntry } from "$lib/requests/models/MediaEntry";
-  import type { MediaType } from "$lib/requests/models/MediaType";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
@@ -17,11 +15,10 @@
   import type { WatchlistActionProps } from "$lib/sections/media-actions/watchlist/WatchListActionProps";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useWatchCount } from "$lib/stores/useWatchCount";
-  import type { Snippet } from "svelte";
+  import SummaryTitle from "../_internal/SummaryTitle.svelte";
   import ListDropdown from "../list-dropdown/ListDropdown.svelte";
   import type { ListDropdownProps } from "../list-dropdown/ListDropdownProps";
   import { useAllPersonalLists } from "../list-dropdown/useAllPersonalLists";
-  import MediaMetaInfo from "../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
   import RateNow from "../rating/RateNow.svelte";
@@ -29,22 +26,22 @@
   import SummaryContainer from "../summary/SummaryContainer.svelte";
   import SummaryHeader from "../summary/SummaryHeader.svelte";
   import SummaryOverview from "../summary/SummaryOverview.svelte";
-  import SummaryTitle from "../summary/SummaryTitle.svelte";
   import type { MediaSummaryProps } from "./MediaSummaryProps";
+  import { useMediaMetaInfo } from "./useMediaMetaInfo";
   import TrailerButton from "./v2/_internal/TrailerButton.svelte";
 
   const {
-    media,
-    type,
     intl,
     contextualContent,
     streamOn,
-  }: MediaSummaryProps<MediaEntry> & {
-    type: MediaType;
-    contextualContent?: Snippet;
-  } = $props();
+    crew,
+    ...target
+  }: MediaSummaryProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
+
+  const media = $derived(target.media);
+  const type = $derived(media.type);
 
   const title = $derived(intl?.title ?? media?.title ?? "");
   const { watchCount } = $derived(useWatchCount({ media, type }));
@@ -57,6 +54,7 @@
   });
 
   const { lists, isLoading } = useAllPersonalLists();
+  const { ratings } = $derived(useMediaMetaInfo(target));
 
   const watchlistProps = $derived<WatchlistActionProps>({
     ...commonProps,
@@ -143,11 +141,9 @@
       />
     {/snippet}
 
-    <SummaryTitle {title} />
-    <GenreList genres={media.genres} />
+    <SummaryTitle {title} {crew} {...target} />
+    <RatingList ratings={$ratings} airDate={media.airDate} />
   </SummaryHeader>
-
-  <MediaMetaInfo watchCount={$watchCount} {streamOn} {media} {type} />
 
   <Spoiler {media} {type}>
     <SummaryOverview {title} overview={intl.overview ?? media.overview} />

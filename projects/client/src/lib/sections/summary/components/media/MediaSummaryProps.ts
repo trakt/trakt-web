@@ -1,10 +1,4 @@
-import type { MediaIntl } from '$lib/requests/models/MediaIntl.ts';
-import type { StreamOn } from '$lib/requests/models/StreamOn.ts';
-import type { Snippet } from 'svelte';
+import type { CommonMediaSummaryProps } from '../../models/CommonMediaSummaryProps.ts';
+import type { MediaSummaryEntry } from './models/MediaSummaryEntry.ts';
 
-export type MediaSummaryProps<T> = {
-  media: T;
-  intl: MediaIntl;
-  streamOn?: StreamOn;
-  actions?: Snippet;
-};
+export type MediaSummaryProps = CommonMediaSummaryProps & MediaSummaryEntry;

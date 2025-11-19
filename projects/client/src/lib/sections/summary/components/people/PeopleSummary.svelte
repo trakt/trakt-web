@@ -3,10 +3,10 @@
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
+  import PersonTitle from "../_internal/PersonTitle.svelte";
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
   import SummaryOverview from "./../summary/SummaryOverview.svelte";
-  import SummaryTitle from "./../summary/SummaryTitle.svelte";
 
   const { person }: { person: PersonSummary } = $props();
 </script>
@@ -24,7 +24,8 @@
         source={{ id: "person" }}
       />
     {/snippet}
-    <SummaryTitle title={person.name} />
+
+    <PersonTitle name={person.name} knownFor={person.knownFor} />
   </SummaryHeader>
 
   <SummaryOverview title={person.name} overview={person.biography} />

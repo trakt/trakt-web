@@ -2,8 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
 
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
-  import Link from "$lib/components/link/Link.svelte";
-  import GenreList from "$lib/components/summary/GenreList.svelte";
+  import RatingList from "$lib/components/summary/RatingList.svelte";
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
@@ -11,16 +10,16 @@
   import SetCoverImageAction from "$lib/sections/media-actions/cover-image/SetCoverImageAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import { useWatchCount } from "$lib/stores/useWatchCount";
-  import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
+  import EpisodeTitle from "../_internal/EpisodeTitle.svelte";
+  import SummaryTitle from "../_internal/SummaryTitle.svelte";
+  import { useMediaMetaInfo } from "../media/useMediaMetaInfo";
   import type { EpisodeSummaryProps } from "./../EpisodeSummaryProps";
-  import MediaMetaInfo from "./../media/MediaMetaInfo.svelte";
   import StreamOnOverlay from "./../overlay/StreamOnOverlay.svelte";
   import RateNow from "./../rating/RateNow.svelte";
   import SummaryActions from "./../summary/SummaryActions.svelte";
   import SummaryContainer from "./../summary/SummaryContainer.svelte";
   import SummaryHeader from "./../summary/SummaryHeader.svelte";
   import SummaryOverview from "./../summary/SummaryOverview.svelte";
-  import SummaryTitle from "./../summary/SummaryTitle.svelte";
 
   const {
     episode,
@@ -36,6 +35,10 @@
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
   const { watchCount } = $derived(useWatchCount({ show, episode, type }));
+
+  const { ratings } = $derived(
+    useMediaMetaInfo({ type, episode, media: show }),
+  );
 </script>
 
 {#snippet mediaActions(size: "small" | "normal" = "normal")}
@@ -92,21 +95,11 @@
         source={{ id: "episode" }}
       />
     {/snippet}
-    <SummaryTitle {title} />
-    <Link href={UrlBuilder.show(show.slug)}>
-      <h6>{showTitle}</h6>
-    </Link>
-    <p class="meta-info">{m.text_season_episode_number(episode)}</p>
-    <GenreList genres={show.genres} />
-  </SummaryHeader>
 
-  <MediaMetaInfo
-    watchCount={$watchCount}
-    {streamOn}
-    {type}
-    {episode}
-    media={show}
-  />
+    <EpisodeTitle {episode} {show} {showIntl} />
+    <SummaryTitle {title} {crew} {type} {episode} media={show} />
+    <RatingList ratings={$ratings} airDate={episode.airDate} />
+  </SummaryHeader>
 
   <Spoiler media={episode} {show} {type}>
     <SummaryOverview {title} {overview} />
