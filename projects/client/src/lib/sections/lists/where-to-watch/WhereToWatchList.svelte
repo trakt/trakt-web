@@ -8,6 +8,7 @@
   import { slide } from "svelte/transition";
   import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
   import { useWhereToWatch } from "./_internal/useWhereToWatch";
+  import WhereToWatchDrawer from "./_internal/WhereToWatchDrawer.svelte";
   import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
 
   const {
@@ -54,6 +55,10 @@
 
       {#snippet empty()}
         <p class="secondary">{m.button_text_no_services()}</p>
+      {/snippet}
+
+      {#snippet actions()}
+        <WhereToWatchDrawer {...target} />
       {/snippet}
     </SectionList>
   </div>
