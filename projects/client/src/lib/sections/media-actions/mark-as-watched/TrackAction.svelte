@@ -9,6 +9,7 @@
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
   } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
+  import { markAsWatchedDrawerStore } from "./_internal/markAsWatchedDrawerStore";
 
   type TrackButtonProps = MarkAsWatchedStoreProps & {
     title: string;
@@ -21,23 +22,16 @@
     ...target
   }: TrackButtonProps = $props();
 
-  const {
-    isMarkingAsWatched,
-    markAsWatched,
-    isWatchable,
-    isWatched,
-    removeWatched,
-  } = $derived(useMarkAsWatched(target));
+  const { isMarkingAsWatched, isWatchable, isWatched, removeWatched } =
+    $derived(useMarkAsWatched(target));
 
   const { confirm } = useConfirm();
-  const confirmMarkAsWatched = $derived(
-    confirm({
-      type: ConfirmationType.MarkAsWatched,
+  const openMarkAsWatchedDrawer = $derived(() => {
+    markAsWatchedDrawerStore.open({
       title,
-      target,
-      onConfirm: markAsWatched,
-    }),
-  );
+      mediaStore: { ...target },
+    });
+  });
   const confirmRemoveWatched = $derived(
     confirm({
       type: ConfirmationType.RemoveFromWatched,
@@ -52,7 +46,7 @@
       return;
     }
 
-    confirmMarkAsWatched(ev);
+    openMarkAsWatchedDrawer();
   };
 </script>
 
