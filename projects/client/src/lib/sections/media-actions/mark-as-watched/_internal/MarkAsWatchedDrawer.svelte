@@ -9,6 +9,7 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MarkAsWatchedAt } from "$lib/models/MarkAsWatchedAt";
+  import { onDestroy } from "svelte";
   import { writable } from "svelte/store";
   import {
     useMarkAsWatched,
@@ -34,6 +35,11 @@
 
   const confirmedAction = writable<MarkAsWatchedAt | null>(null);
 
+  const isDestroyed = writable(false);
+  onDestroy(() => {
+    isDestroyed.set(true);
+  });
+
   const handler = async (watchedAt: MarkAsWatchedAt) => {
     const confirmMarkAsWatched = confirm({
       type: ConfirmationType.MarkAsWatched,
@@ -42,7 +48,10 @@
       onConfirm: async () => {
         confirmedAction.set(watchedAt);
         await markAsWatched(watchedAt);
-        onClose();
+
+        if (!$isDestroyed) {
+          onClose();
+        }
       },
     });
 
