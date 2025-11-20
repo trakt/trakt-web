@@ -54,4 +54,44 @@ export const SEASONAL_THEMES: Record<string, SeasonalThemeConfig> = {
     ],
     actionBarImage: 'ghost.png',
   },
+  christmas: {
+    id: 'christmas',
+    start: { year: 2025, month: 12, day: 19, hour: 0, minute: 0, second: 0 },
+    end: { year: 2025, month: 12, day: 30, hour: 23, minute: 59, second: 59 },
+    filters: [
+      {
+        id: 'trending',
+        movie: { 'subgenres': 'christmas,santa claus,xmas eve' },
+        show: { 'subgenres': 'christmas,santa claus,xmas eve' },
+      },
+      {
+        id: 'recommended',
+        movie: { 'subgenres': 'christmas,santa claus,xmas eve' },
+        show: { 'subgenres': 'christmas,santa claus,xmas eve' },
+      },
+      {
+        id: 'anticipated',
+        movie: {
+          'subgenres': 'christmas,santa claus,xmas eve',
+          'years': '2021-2025',
+        },
+        show: {
+          'subgenres': 'christmas,santa claus,xmas eve',
+          'years': '2020-2025',
+        },
+      },
+      {
+        id: 'popular',
+        movie: {
+          'subgenres': 'christmas,santa claus,xmas eve',
+          'years': '1980-2025',
+        },
+        show: {
+          'subgenres': 'christmas,santa claus,xmas eve',
+          'years': '1980-2025',
+        },
+      },
+    ],
+    actionBarImage: 'hat.png',
+  },
 };

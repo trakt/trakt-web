@@ -2210,6 +2210,9 @@
     "switch_label_toggle_halloween_filters": {
       "default": "Activar/Desactivar filtros de Halloween"
     },
+    "switch_label_toggle_christmas_filters": {
+      "default": "Activar/desactivar filtros navideños"
+    },
     "list_title_library": {
       "default": "Biblioteca"
     },

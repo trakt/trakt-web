@@ -1,0 +1,18 @@
+:root {
+  &[data-seasonal-theme='christmas'] {
+    --purple-50: var(--red-50);
+    --purple-60: var(--red-60);
+    --purple-70: var(--red-70);
+    --purple-80: var(--red-80);
+    --purple-90: var(--red-90);
+    --purple-100: var(--red-100);
+    --purple-200: var(--red-200);
+    --purple-300: var(--red-300);
+    --purple-400: var(--red-400);
+    --purple-500: var(--red-600);
+    --purple-600: var(--red-600);
+    --purple-700: var(--red-700);
+    --purple-800: var(--red-800);
+    --purple-900: var(--red-900);
+  }
+}
