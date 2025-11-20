@@ -6,6 +6,8 @@
 
 <a href="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml"><img src="https://github.com/trakt/trakt-web/actions/workflows/ci_cd.yml/badge.svg" /></a>
 
+This does nothing
+
 ## Project Structure
 
 This [workspace](https://docs.deno.com/runtime/fundamentals/workspaces/) is
