@@ -49,11 +49,11 @@
   const episode = $derived($progress);
 </script>
 
-<RenderFor audience="all" device={["mobile"]}>
+<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <MediaSummaryV2 {media} {studios} {intl} {crew} type="show" />
 </RenderFor>
 
-<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
   <MediaSummary {media} {intl} {crew} {streamOn} type="show">
     {#snippet contextualContent()}
       <RenderFor device={["desktop"]} audience="authenticated">
