@@ -15,7 +15,9 @@
   {@render children()}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-summary-actions {
     display: flex;
     align-items: center;
@@ -25,7 +27,7 @@
     position: relative;
 
     height: var(--ni-56);
-    width: var(--summary-poster-width);
+    width: var(--ni-280);
 
     padding: var(--ni-8) var(--ni-10);
     box-sizing: border-box;
@@ -44,6 +46,10 @@
 
     &.has-seasonal-theme {
       margin-top: var(--ni-10);
+    }
+
+    @include for-tablet-sm-and-below {
+      width: var(--summary-poster-width);
     }
   }
 </style>
