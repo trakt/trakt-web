@@ -13,25 +13,39 @@
     title,
     onWatch,
     onRemove,
+    onAsk,
     isMarkingAsWatched,
     isWatched,
-    isRewatching,
     style,
+    mode = "hybrid",
     ...props
   }: MarkAsWatchedButtonProps = $props();
 
-  const isRemovable = $derived(isWatched && !isRewatching);
-  const handler = $derived(isRemovable ? onRemove : onWatch);
+  const isRemovable = $derived(isWatched && mode !== "ask");
+  const isRewatching = $derived(mode === "ask" && isWatched);
+
+  const handler = $derived.by(() => {
+    const shouldAsk = mode === "ask" || (mode === "hybrid" && !isWatched);
+
+    if (shouldAsk) {
+      return onAsk;
+    }
+
+    return isRemovable ? onRemove : onWatch;
+  });
 
   const { color, variant, ...events } = $derived(
-    useDangerButton({ isActive: isRemovable, color: "purple" }),
+    useDangerButton({
+      isActive: isRemovable,
+      color: mode === "ask" ? "default" : "purple",
+    }),
   );
   const state = $derived(isRemovable ? "watched" : "unwatched");
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ title, isWatched, isRewatching }),
     color: $color,
-    variant: $variant,
+    variant: mode === "ask" ? "primary" : $variant,
     onclick: handler,
     disabled: isMarkingAsWatched,
     ...events,

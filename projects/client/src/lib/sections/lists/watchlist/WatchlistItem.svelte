@@ -13,6 +13,7 @@
   <RenderFor audience="authenticated">
     <MarkAsWatchedAction
       style="action"
+      mode="act"
       size="small"
       title={media.title}
       type={media.type}

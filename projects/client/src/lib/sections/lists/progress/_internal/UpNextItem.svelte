@@ -44,7 +44,6 @@
           <MarkAsWatchedAction
             style="dropdown-item"
             type="episode"
-            allowRewatch
             title={props.episode.title}
             show={props.show}
             media={props.episode}

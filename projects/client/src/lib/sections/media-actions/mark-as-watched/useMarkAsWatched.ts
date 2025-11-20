@@ -6,10 +6,10 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaStatus } from '$lib/requests/models/MediaStatus.ts';
 import { markAsWatchedRequest } from '$lib/requests/sync/markAsWatchedRequest.ts';
 import { removeWatchedRequest } from '$lib/requests/sync/removeWatchedRequest.ts';
-import { resolveWatchDate } from '$lib/stores/_internal/resolveWatchDate.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
 import { writable } from 'svelte/store';
+import type { MarkAsWatchedAt } from '../../../models/MarkAsWatchedAt.ts';
 import { hasAired } from '../_internal/hasAired.ts';
 import { toMarkAsWatchedPayload } from './toMarkAsWatchedPayload.ts';
 import { useIsWatched } from './useIsWatched.ts';
@@ -30,20 +30,14 @@ export function useMarkAsWatched(
 
   const { isWatched } = useIsWatched(props);
 
-  const markAsWatched = async () => {
+  const markAsWatched = async (watchedAt?: MarkAsWatchedAt) => {
     const current = await resolve(user);
 
     if (!current) {
       return;
     }
 
-    const watchedAtDate = resolveWatchDate(
-      current.preferences.watch.action,
-    );
-
-    if (!watchedAtDate) {
-      return;
-    }
+    const watchedAtDate = watchedAt ?? 'now';
 
     isMarkingAsWatched.set(true);
     track({ action: 'add' });

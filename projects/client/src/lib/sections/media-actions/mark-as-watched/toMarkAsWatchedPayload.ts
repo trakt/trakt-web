@@ -1,3 +1,4 @@
+import type { MarkAsWatchedAt } from '../../../models/MarkAsWatchedAt.ts';
 import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
 type WatchedPayload = {
@@ -26,8 +27,12 @@ type MediaTypeMap = MoviesPayload | ShowsPayload | EpisodesPayload;
 
 export function toMarkAsWatchedPayload(
   target: MediaStoreProps,
-  watchedAtDate?: string,
+  watchedAt?: MarkAsWatchedAt,
 ): MediaTypeMap {
+  const watchedAtDate = watchedAt instanceof Date
+    ? watchedAt.toISOString()
+    : watchedAt;
+
   if (target.type === 'show') {
     const shows = Array.isArray(target.media) ? target.media : [target.media];
     return {
