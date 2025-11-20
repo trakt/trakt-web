@@ -6,12 +6,15 @@
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import Celebration from "./Celebration.svelte";
 
-  const { birthday }: { birthday: Date } = $props();
+  const {
+    birthday,
+    variant = "default",
+  }: { birthday: Date; variant?: "default" | "compact" } = $props();
 
   const today = new Date();
 </script>
 
-<div class="trakt-birthday-details">
+<div class="trakt-birthday-details" data-variant={variant}>
   <div class="trakt-birthday-detail">
     {#if isSameDayOfYear(birthday, today)}
       <Celebration />
@@ -36,6 +39,15 @@
     justify-content: center;
 
     width: var(--details-width);
+
+    &[data-variant="compact"] {
+      width: fit-content;
+
+      .trakt-birthday-detail {
+        width: fit-content;
+        align-items: flex-end;
+      }
+    }
   }
 
   .trakt-detail-separator {
