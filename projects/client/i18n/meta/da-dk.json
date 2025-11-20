@@ -2256,6 +2256,9 @@
     "button_label_mark_as_watched_unknown_date": {
       "default": "Ukendt dato"
     },
+    "text_this_month": {
+      "default": "Denne måned"
+    },
     "header_settings": {
       "default": "Indstillinger"
     }

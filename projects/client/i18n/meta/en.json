@@ -6029,6 +6029,14 @@
         "android",
         "ios"
       ]
+    },
+    "text_this_month": {
+      "default": "This month",
+      "description": "Text shown to indicate the users stats of the current month.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

@@ -2256,6 +2256,9 @@
     "button_label_mark_as_watched_unknown_date": {
       "default": "Data necunoscută"
     },
+    "text_this_month": {
+      "default": "Luna aceasta"
+    },
     "header_settings": {
       "default": "Setări"
     }

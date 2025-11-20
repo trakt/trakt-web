@@ -3,6 +3,7 @@
   import YearToDateArrow from "$lib/components/icons/YearToDateArrow.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { languageTag } from "$lib/features/i18n";
+  import * as m from "$lib/features/i18n/messages";
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { getPreviousMonth } from "$lib/utils/date/getPreviousMonth";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
@@ -38,7 +39,7 @@
     <div class="trakt-month-to-date-header">
       <div class="trakt-month-to-date-header-this-month">
         <CalendarIcon />
-        <h6 class="uppercase">So far, this month</h6>
+        <h6 class="uppercase">{m.text_this_month()}</h6>
       </div>
       <YearToDateLink {slug} />
     </div>
