@@ -9,6 +9,11 @@ export function useIsWatched(props: IsWatchedProps) {
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const { history } = useUser();
 
+  const episodes = props.type === 'episode'
+    ? Array.isArray(props.media) ? props.media : [props.media]
+    : [];
+  const showId = props.type === 'episode' ? props.show.id : -1;
+
   const isWatched = derived(
     history,
     ($history) => {
@@ -20,11 +25,7 @@ export function useIsWatched(props: IsWatchedProps) {
         case 'movie':
           return media.every((m) => $history.movies.has(m.id));
         case 'episode': {
-          const episodes = Array.isArray(props.media)
-            ? props.media
-            : [props.media];
-
-          const watchedEpisodes = $history.shows.get(props.show.id)?.episodes ??
+          const watchedEpisodes = $history.shows.get(showId)?.episodes ??
             [];
 
           return episodes.every((episode) =>
