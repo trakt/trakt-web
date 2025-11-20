@@ -24,4 +24,5 @@ import './layers/index.css';
 
 import './states/index.css';
 
+import './theme/seasonal/christmas.css';
 import './theme/seasonal/halloween.css';
