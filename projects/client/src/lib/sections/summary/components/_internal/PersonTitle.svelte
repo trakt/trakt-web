@@ -22,7 +22,10 @@
   .trakt-person-title {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+    @include for-tablet-sm-and-below {
+      align-items: center;
+    }
   }
 
   h2 {
