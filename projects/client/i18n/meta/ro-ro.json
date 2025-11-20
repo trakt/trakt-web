@@ -2232,6 +2232,30 @@
     "button_label_view_all_where_to_watch": {
       "default": "Vezi toate serviciile de streaming"
     },
+    "button_text_mark_as_watched_now": {
+      "default": "Chiar acum"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Chiar acum"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "Data lansării"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "Data lansării"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Altă dată"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Altă dată"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Data necunoscută"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Data necunoscută"
+    },
     "header_settings": {
       "default": "Setări"
     }

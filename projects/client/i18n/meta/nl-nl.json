@@ -2232,6 +2232,30 @@
     "button_label_view_all_where_to_watch": {
       "default": "Bekijk alle streamingdiensten"
     },
+    "button_text_mark_as_watched_now": {
+      "default": "Nu"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Nu"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "Releasedatum"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "Releasedatum"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Andere datum"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Andere datum"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Onbekende datum"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Onbekende datum"
+    },
     "header_settings": {
       "default": "Instellingen"
     }

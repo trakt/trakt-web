@@ -2232,6 +2232,30 @@
     "button_label_view_all_where_to_watch": {
       "default": "Виж всички стрийминг услуги"
     },
+    "button_text_mark_as_watched_now": {
+      "default": "Току-що"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Току-що"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "Дата на издаване"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "Дата на издаване"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Друга дата"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Друга дата"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Неизвестна дата"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Неизвестна дата"
+    },
     "header_settings": {
       "default": "Настройки"
     }

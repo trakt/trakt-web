@@ -11,7 +11,7 @@ type SeasonInfo = {
 type EpisodeProps<T> = {
   type: 'episode';
   media: ArrayOrSingle<T & { season: number; number: number }>;
-  show: { id: number };
+  show: { id: number; title: string };
 };
 
 type MovieProps<T> = {

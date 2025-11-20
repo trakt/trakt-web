@@ -2232,6 +2232,30 @@
     "button_label_view_all_where_to_watch": {
       "default": "Переглянути всі стрімінгові сервіси"
     },
+    "button_text_mark_as_watched_now": {
+      "default": "Щойно"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Щойно"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "Дата виходу"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "Дата виходу"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Інша дата"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Інша дата"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Невідома дата"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Невідома дата"
+    },
     "header_settings": {
       "default": "Налаштування"
     }

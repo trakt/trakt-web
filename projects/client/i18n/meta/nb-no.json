@@ -2232,6 +2232,30 @@
     "button_label_view_all_where_to_watch": {
       "default": "Vis alle strømmetjenester"
     },
+    "button_text_mark_as_watched_now": {
+      "default": "Nå"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Nå"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "Lanseringsdato"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "Lanseringsdato"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Annen dato"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Annen dato"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Ukjent dato"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Ukjent dato"
+    },
     "header_settings": {
       "default": "Innstillinger"
     }
