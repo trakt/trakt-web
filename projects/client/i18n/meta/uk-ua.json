@@ -2256,6 +2256,9 @@
     "button_label_mark_as_watched_unknown_date": {
       "default": "Невідома дата"
     },
+    "text_this_month": {
+      "default": "Цього місяця"
+    },
     "header_settings": {
       "default": "Налаштування"
     }

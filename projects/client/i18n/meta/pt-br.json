@@ -2256,6 +2256,9 @@
     "button_label_mark_as_watched_unknown_date": {
       "default": "Data desconhecida"
     },
+    "text_this_month": {
+      "default": "Este mês"
+    },
     "header_settings": {
       "default": "Configurações"
     }

@@ -2256,6 +2256,9 @@
     "button_label_mark_as_watched_unknown_date": {
       "default": "日付不明"
     },
+    "text_this_month": {
+      "default": "今月"
+    },
     "header_settings": {
       "default": "設定"
     }
