@@ -5965,6 +5965,70 @@
         "android",
         "ios"
       ]
+    },
+    "button_text_mark_as_watched_now": {
+      "default": "Just now",
+      "description": "Text for the button that allows users to mark a movie or episode as watched just now.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Just now",
+      "description": "Aria-label for the button that allows users to mark a movie or episode as watched just now.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "Release date",
+      "description": "Text for the button that allows users to mark a movie or episode as watched on the release date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "Release date",
+      "description": "Aria-label for the button that allows users to mark a movie or episode as watched on the release date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Other date",
+      "description": "Text for the button that allows users to mark a movie or episode as watched on a custom date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Other date",
+      "description": "Aria-label for the button that allows users to mark a movie or episode as watched on a custom date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Unknown date",
+      "description": "Text for the button that allows users to mark a movie or episode as watched on an unknown date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Unknown date",
+      "description": "Aria-label for the button that allows users to mark a movie or episode as watched on an unknown date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

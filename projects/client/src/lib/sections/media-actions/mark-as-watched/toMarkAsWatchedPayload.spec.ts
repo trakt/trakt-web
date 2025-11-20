@@ -51,7 +51,7 @@ describe('toMarkAsWatchedPayload', () => {
     const result = toMarkAsWatchedPayload(
       {
         type: 'episode' as const,
-        show: { id: 1 },
+        show: { id: 1, title: 'show' },
         media: episodes,
       },
       testDate,

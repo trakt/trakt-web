@@ -27,6 +27,7 @@
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
   import WSInvalidator from "$lib/features/websocket/WSInvalidator.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import MarkAsWatchedDrawerProvider from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedDrawerProvider.svelte";
   import MobileNavbar from "$lib/sections/navbar/MobileNavbar.svelte";
   import SideNavbar from "$lib/sections/navbar/SideNavbar.svelte";
   import TopNavbar from "$lib/sections/navbar/TopNavbar.svelte";
@@ -142,6 +143,7 @@
                             <ToastProvider>
                               <DiscoverProvider>
                                 <ConfirmationProvider>
+                                  <MarkAsWatchedDrawerProvider />
                                   <CoverImage />
 
                                   <ThemeProvider theme={data.theme}>

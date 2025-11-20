@@ -2232,6 +2232,30 @@
     "button_label_view_all_where_to_watch": {
       "default": "すべての配信サービスを見る"
     },
+    "button_text_mark_as_watched_now": {
+      "default": "今すぐ"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "今すぐ"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "公開日"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "公開日"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "他の日"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "他の日"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "日付不明"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "日付不明"
+    },
     "header_settings": {
       "default": "設定"
     }

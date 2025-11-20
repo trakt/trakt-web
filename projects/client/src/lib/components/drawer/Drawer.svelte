@@ -213,11 +213,15 @@
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
+
+    min-width: 0;
   }
 
   .trakt-drawer-title {
     display: flex;
     flex-direction: column;
+
+    min-width: 0;
 
     h5 {
       font-size: var(--font-size-title);

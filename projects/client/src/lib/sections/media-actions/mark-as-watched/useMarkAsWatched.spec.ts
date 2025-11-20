@@ -147,7 +147,7 @@ describe('useMarkAsWatched', () => {
     const props = {
       type: 'episode' as const,
       media: { id: 1, season: 1, number: 1, airDate: new Date() },
-      show: { id: 3 },
+      show: { id: 3, title: 'show' },
     };
 
     runCommonTests(props, InvalidateAction.MarkAsWatched('episode'));

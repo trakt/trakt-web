@@ -2232,6 +2232,30 @@
     "button_label_view_all_where_to_watch": {
       "default": "Ver todos los servicios de streaming"
     },
+    "button_text_mark_as_watched_now": {
+      "default": "Ahora mismo"
+    },
+    "button_label_mark_as_watched_now": {
+      "default": "Ahora mismo"
+    },
+    "button_text_mark_as_watched_release_date": {
+      "default": "Fecha de estreno"
+    },
+    "button_label_mark_as_watched_release_date": {
+      "default": "Fecha de estreno"
+    },
+    "button_text_mark_as_watched_other_date": {
+      "default": "Otra fecha"
+    },
+    "button_label_mark_as_watched_other_date": {
+      "default": "Otra fecha"
+    },
+    "button_text_mark_as_watched_unknown_date": {
+      "default": "Fecha desconocida"
+    },
+    "button_label_mark_as_watched_unknown_date": {
+      "default": "Fecha desconocida"
+    },
     "header_settings": {
       "default": "Ajustes"
     }
