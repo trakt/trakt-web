@@ -2,9 +2,9 @@
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useWatchList } from "./useWatchList";
-  import WatchlistItem from "./WatchlistItem.svelte";
 
   type WatchListProps = {
     title: string;
@@ -26,6 +26,6 @@
   useList={useWatchList}
 >
   {#snippet item(media)}
-    <WatchlistItem type={media.type} {media} {style} />
+    <DefaultMediaItem type={media.type} {media} {style} source="watchlist" />
   {/snippet}
 </DrilledMediaList>

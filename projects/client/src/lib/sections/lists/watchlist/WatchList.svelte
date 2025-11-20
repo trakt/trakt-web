@@ -6,9 +6,9 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { Snippet } from "svelte";
   import CtaItem from "../components/cta/CtaItem.svelte";
+  import DefaultMediaItem from "../components/DefaultMediaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import { useWatchList } from "./useWatchList";
-  import WatchlistItem from "./WatchlistItem.svelte";
 
   type WatchListProps = {
     type?: DiscoverMode;
@@ -36,10 +36,11 @@
   urlBuilder={() => UrlBuilder.lists.watchlist("me")}
 >
   {#snippet item(media)}
-    <WatchlistItem
+    <DefaultMediaItem
       type={media.type}
       {media}
       mode={type === "media" ? "mixed" : "standalone"}
+      source="watchlist"
     />
   {/snippet}
 
