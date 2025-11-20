@@ -6037,6 +6037,14 @@
         "android",
         "ios"
       ]
+    },
+    "text_view_all": {
+      "default": "View all",
+      "description": "Text for the button that allows users to view all items in a list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

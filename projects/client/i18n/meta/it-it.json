@@ -2259,8 +2259,8 @@
     "text_this_month": {
       "default": "Questo mese"
     },
-    "header_settings": {
-      "default": "Impostazioni"
+    "text_view_all": {
+      "default": "Mostra tutto"
     }
   }
 }

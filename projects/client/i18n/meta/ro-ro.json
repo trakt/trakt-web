@@ -2259,8 +2259,8 @@
     "text_this_month": {
       "default": "Luna aceasta"
     },
-    "header_settings": {
-      "default": "Setări"
+    "text_view_all": {
+      "default": "Vezi tot"
     }
   }
 }

@@ -2259,8 +2259,8 @@
     "text_this_month": {
       "default": "Ce mois-ci"
     },
-    "header_settings": {
-      "default": "Paramètres"
+    "text_view_all": {
+      "default": "Tout afficher"
     }
   }
 }

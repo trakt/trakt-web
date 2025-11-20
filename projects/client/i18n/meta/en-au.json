@@ -2259,8 +2259,8 @@
     "text_this_month": {
       "default": "This month"
     },
-    "header_settings": {
-      "default": "Settings"
+    "text_view_all": {
+      "default": "View all"
     }
   }
 }

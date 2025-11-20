@@ -2259,8 +2259,8 @@
     "text_this_month": {
       "default": "Този месец"
     },
-    "header_settings": {
-      "default": "Настройки"
+    "text_view_all": {
+      "default": "Виж всички"
     }
   }
 }
