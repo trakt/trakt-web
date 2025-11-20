@@ -5895,6 +5895,14 @@
         "ios"
       ]
     },
+    "switch_label_toggle_christmas_filters": {
+      "default": "Toggle christmas filters",
+      "description": "Aria-label for the switch that allows users to toggle christmas filters.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "list_title_library": {
       "default": "Library",
       "description": "Title for lists containing movies and episodes in a users library. This title should be as short and concise as possible.",

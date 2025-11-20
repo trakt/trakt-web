@@ -2210,6 +2210,9 @@
     "switch_label_toggle_halloween_filters": {
       "default": "Toggle halloween filters"
     },
+    "switch_label_toggle_christmas_filters": {
+      "default": "Toggle Christmas filters"
+    },
     "list_title_library": {
       "default": "Library"
     },

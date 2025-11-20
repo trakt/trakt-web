@@ -1,20 +1,21 @@
 <script lang="ts">
-  import HalloweenIcon from "$lib/components/icons/HalloweenIcon.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import ChristmasIcon from "../icons/ChristmasIcon.svelte";
 
   const { isEnabled, onToggle }: { isEnabled: boolean; onToggle: () => void } =
     $props();
 </script>
 
 <Switch
-  label={m.switch_label_toggle_halloween_filters()}
-  innerText={isEnabled ? "boo" : "eek"}
+  label={m.switch_label_toggle_christmas_filters()}
+  innerText={isEnabled ? "santa" : "grinch"}
   checked={isEnabled}
-  color="orange"
+  color="red"
   onclick={onToggle}
+  --custom-width="var(--ni-80)"
 >
   {#snippet icon()}
-    <HalloweenIcon />
+    <ChristmasIcon />
   {/snippet}
 </Switch>
