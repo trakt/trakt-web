@@ -3,27 +3,36 @@
   import SummaryActions from "../../../_internal/SummaryActions.svelte";
   import SocialMediaAction from "./SocialMediaAction.svelte";
 
-  const { person }: { person: PersonSummary } = $props();
+  const {
+    person,
+    variant = "default",
+  }: { person: PersonSummary; variant?: "default" | "compact" } = $props();
 
   const facebookUsername = $derived(person.socialMedia?.facebook);
   const xUsername = $derived(person.socialMedia?.x);
   const instagramUsername = $derived(person.socialMedia?.instagram);
+
+  const hasSocialMediaLinks = $derived(
+    facebookUsername || xUsername || instagramUsername,
+  );
 </script>
 
-<trakt-social-media-links>
-  <SummaryActions>
-    {#if facebookUsername}
-      <SocialMediaAction username={facebookUsername} type="facebook" />
-    {/if}
+<trakt-social-media-links data-variant={variant}>
+  {#if hasSocialMediaLinks}
+    <SummaryActions>
+      {#if facebookUsername}
+        <SocialMediaAction username={facebookUsername} type="facebook" />
+      {/if}
 
-    {#if xUsername}
-      <SocialMediaAction username={xUsername} type="x" />
-    {/if}
+      {#if xUsername}
+        <SocialMediaAction username={xUsername} type="x" />
+      {/if}
 
-    {#if instagramUsername}
-      <SocialMediaAction username={instagramUsername} type="instagram" />
-    {/if}
-  </SummaryActions>
+      {#if instagramUsername}
+        <SocialMediaAction username={instagramUsername} type="instagram" />
+      {/if}
+    </SummaryActions>
+  {/if}
 </trakt-social-media-links>
 
 <style>
@@ -35,6 +44,12 @@
       :global(svg) {
         height: var(--ni-24);
         width: auto;
+      }
+    }
+
+    &[data-variant="compact"] {
+      :global(.trakt-summary-actions) {
+        width: fit-content;
       }
     }
   }

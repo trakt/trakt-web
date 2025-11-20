@@ -11,12 +11,6 @@
   import SocialMediaLinks from "./_internal/SocialMediaLinks.svelte";
 
   const { person }: { person: PersonSummary } = $props();
-
-  const hasSocialMediaLinks = $derived(
-    person.socialMedia?.facebook ||
-      person.socialMedia?.x ||
-      person.socialMedia?.instagram,
-  );
 </script>
 
 {#snippet tags()}
@@ -41,9 +35,7 @@
   {#snippet meta()}
     <PersonTitle name={person.name} knownFor={person.knownFor} />
 
-    {#if hasSocialMediaLinks}
-      <SocialMediaLinks {person} />
-    {/if}
+    <SocialMediaLinks {person} />
 
     {#if person.birthday}
       <BirthdayDetails birthday={person.birthday} />
