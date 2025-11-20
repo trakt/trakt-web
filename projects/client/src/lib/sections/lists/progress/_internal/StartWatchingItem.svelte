@@ -42,6 +42,7 @@
 
 {#snippet action()}
   <MarkAsWatchedAction
+    mode="act"
     style="action"
     size="small"
     title={entry.title}

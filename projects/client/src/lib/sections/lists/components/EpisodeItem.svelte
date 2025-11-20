@@ -28,7 +28,7 @@
   {#if !isFuture && !isActivity && !isHidden}
     <RenderFor audience="authenticated">
       <MarkAsWatchedAction
-        allowRewatch={props.variant === "next"}
+        mode="act"
         style="action"
         type="episode"
         size="small"

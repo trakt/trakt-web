@@ -42,10 +42,11 @@
 <MarkAsWatchedButton
   {style}
   {size}
+  mode="act"
   title={media.title}
   isWatched={false}
-  isRewatching={false}
   isMarkingAsWatched={isMarkingOrDropping}
   onWatch={handler}
   onRemove={NOOP_FN}
+  onAsk={NOOP_FN}
 />

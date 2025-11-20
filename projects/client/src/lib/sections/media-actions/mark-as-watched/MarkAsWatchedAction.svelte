@@ -2,7 +2,7 @@
   import MarkAsWatchedButton from "$lib/components/buttons/mark-as-watched/MarkAsWatchedButton.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import { useIsWatchlisted } from "../watchlist/useIsWatchlisted";
+  import { markAsWatchedDrawerStore } from "./_internal/markAsWatchedDrawerStore";
   import type { MarkAsWatchedActionProps } from "./MarkAsWatchedActionProps";
   import { useMarkAsWatched } from "./useMarkAsWatched";
 
@@ -10,8 +10,8 @@
     style = "action",
     size = "normal",
     title,
-    allowRewatch = false,
     i18n,
+    mode,
     ...target
   }: MarkAsWatchedActionProps = $props();
 
@@ -22,9 +22,6 @@
     removeWatched,
     isWatchable,
   } = $derived(useMarkAsWatched(target));
-
-  const { isWatchlisted } = $derived(useIsWatchlisted(target));
-  const isRewatching = $derived(allowRewatch && $isWatched);
 
   const { confirm } = useConfirm();
   const confirmMarkAsWatched = $derived(
@@ -42,6 +39,13 @@
       onConfirm: removeWatched,
     }),
   );
+
+  const onAsk = $derived(() => {
+    markAsWatchedDrawerStore.open({
+      title,
+      mediaStore: target,
+    });
+  });
 </script>
 
 {#if isWatchable}
@@ -50,10 +54,11 @@
     {title}
     {size}
     {i18n}
-    isWatched={$isWatched && !$isWatchlisted}
-    {isRewatching}
+    {mode}
+    isWatched={$isWatched}
     isMarkingAsWatched={$isMarkingAsWatched}
     onWatch={confirmMarkAsWatched}
     onRemove={confirmRemoveFromWatched}
+    {onAsk}
   />
 {/if}

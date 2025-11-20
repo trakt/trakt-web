@@ -1,1 +1,1 @@
-export type MarkAsWatchedAt = 'ask' | 'now' | 'released' | 'unknown' | Date;
+export type MarkAsWatchedAt = 'now' | 'released' | 'unknown' | Date;
