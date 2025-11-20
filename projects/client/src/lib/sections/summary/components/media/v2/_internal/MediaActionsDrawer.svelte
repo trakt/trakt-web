@@ -17,19 +17,11 @@
     <MarkAsWatchedAction
       style="dropdown-item"
       type={media.type}
-      mode="act"
+      mode="ask"
       {title}
       {media}
     />
   {/if}
-
-  <MarkAsWatchedAction
-    style="dropdown-item"
-    type={media.type}
-    mode="ask"
-    {title}
-    {media}
-  />
 
   {#if media.type === "movie"}
     <CheckInAction

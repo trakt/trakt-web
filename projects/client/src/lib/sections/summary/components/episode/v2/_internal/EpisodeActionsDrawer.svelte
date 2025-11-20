@@ -35,20 +35,11 @@
       style="dropdown-item"
       type="episode"
       media={episode}
-      mode="act"
+      mode="ask"
       {title}
       {show}
     />
   {/if}
-
-  <MarkAsWatchedAction
-    style="dropdown-item"
-    type="episode"
-    media={episode}
-    mode="ask"
-    {title}
-    {show}
-  />
 
   <CheckInAction
     {show}
