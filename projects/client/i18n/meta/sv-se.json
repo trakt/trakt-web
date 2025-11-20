@@ -2259,8 +2259,8 @@
     "text_this_month": {
       "default": "Denna månad"
     },
-    "header_settings": {
-      "default": "Inställningar"
+    "text_view_all": {
+      "default": "Visa alla"
     }
   }
 }

@@ -12,8 +12,10 @@
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
   import type { ListProps } from "../ListProps";
   import { useCollapsedList } from "./_internal/useCollapsedList";
+  import { useListLimiter } from "./_internal/useListLimiter";
   import CollapseIcon from "./CollapseIcon.svelte";
   import ExpandIcon from "./ExpandIcon.svelte";
+  import type { ListVariant } from "./models/ListVariant";
 
   const EMPTY_STATE_CLASS = "section-list-empty-state";
   const CTA_CUT_OFF = 4;
@@ -24,6 +26,7 @@
     metaInfo?: Snippet;
     headerNavigationType?: DpadNavigationType;
     subtitle?: string;
+    variant?: ListVariant;
   };
 
   const {
@@ -40,6 +43,7 @@
     drilldownLink,
     headerNavigationType,
     subtitle,
+    variant = { type: "default" },
   }: SectionListProps<T> = $props();
 
   const isHeaderVisible = $derived(Boolean(title));
@@ -51,9 +55,23 @@
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
+  let sectionList = $state<HTMLElement | null>(null);
+  const maxItems = $derived(
+    useListLimiter({
+      variant,
+      itemCount: items.length,
+      list: sectionList,
+    }),
+  );
+
   onMount(() => {
     isMounted.set(true);
   });
+
+  const slicedItems = $derived(
+    variant.type === "limit" ? items.slice(0, $maxItems) : items,
+  );
+  const isSliced = $derived(slicedItems.length < items.length);
 </script>
 
 {#snippet titleAction()}
@@ -113,12 +131,17 @@
             class="trakt-list-item-container section-list-horizontal-scroll"
             data-dpad-navigation={DpadNavigationType.List}
             data-navigation-type={$navigation}
+            bind:this={sectionList}
           >
-            {#each items as i (i.key)}
+            {#each slicedItems as i (i.key)}
               {@render item(i)}
             {/each}
 
-            {#if ctaItem && items.length <= CTA_CUT_OFF}
+            {#if variant.type === "limit" && isSliced}
+              {#key `section-list-${id}_action_card`}
+                {@render variant.actionCard()}
+              {/key}
+            {:else if ctaItem && items.length <= CTA_CUT_OFF}
               {#key `section-list-${id}_cta`}
                 {@render ctaItem()}
               {/key}
@@ -226,7 +249,8 @@
     display: flex;
     overflow-x: auto;
     transition: gap var(--transition-increment) ease-in-out;
-    @include adaptive-gap(gap);
+    @include adaptive-gap(--list-gap);
+    gap: var(--list-gap);
 
     &[data-navigation-type="dpad"] {
       gap: var(--gap-xxs);
