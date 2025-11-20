@@ -4,6 +4,8 @@
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useWatchCount } from "$lib/stores/useWatchCount";
+  import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
   import StreamOnOverlay from "../overlay/StreamOnOverlay.svelte";
   import TrailerOverlay from "../overlay/TrailerOverlay.svelte";
@@ -28,9 +30,15 @@
   const type = $derived(media.type);
 
   const title = $derived(intl?.title ?? media?.title ?? "");
+  const { watchCount } = $derived(useWatchCount(target));
+  const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
   const { ratings } = $derived(useMediaMetaInfo(target));
 </script>
+
+{#snippet tags()}
+  <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+{/snippet}
 
 <CoverImageSetter src={media.cover.url.medium} colors={media.colors} {type} />
 
@@ -40,6 +48,7 @@
       src={media.poster.url.medium}
       alt={title}
       href={streamOn?.preferred?.link ?? media.trailer}
+      {tags}
     >
       {#snippet hoverOverlay()}
         {#if streamOn?.preferred}

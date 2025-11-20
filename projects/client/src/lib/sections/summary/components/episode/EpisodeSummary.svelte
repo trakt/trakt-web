@@ -3,7 +3,9 @@
   import SummaryPoster from "$lib/components/summary/SummaryPoster.svelte";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { useWatchCount } from "$lib/stores/useWatchCount";
   import EpisodeTitle from "../_internal/EpisodeTitle.svelte";
+  import SummaryPosterTags from "../_internal/SummaryPosterTags.svelte";
   import SummaryTitle from "../_internal/SummaryTitle.svelte";
   import { useMediaMetaInfo } from "../media/useMediaMetaInfo";
   import type { EpisodeSummaryProps } from "./../EpisodeSummaryProps";
@@ -29,15 +31,26 @@
   const title = $derived(episodeIntl.title ?? episode.title);
   const overview = $derived(episodeIntl.overview ?? episode.overview);
   const showTitle = $derived(showIntl.title ?? show.title);
+  const { watchCount } = $derived(useWatchCount({ show, episode, type }));
+  const postCreditsCount = $derived(episode.postCredits?.length ?? 0);
 
   const { ratings } = $derived(
     useMediaMetaInfo({ type, episode, media: show }),
   );
 </script>
 
+{#snippet tags()}
+  <SummaryPosterTags {postCreditsCount} watchCount={$watchCount} />
+{/snippet}
+
 <SummaryContainer>
   {#snippet poster()}
-    <SummaryPoster src={posterSrc} alt={title} href={streamOn?.preferred?.link}>
+    <SummaryPoster
+      src={posterSrc}
+      alt={title}
+      href={streamOn?.preferred?.link}
+      {tags}
+    >
       {#snippet hoverOverlay()}
         <StreamOnOverlay service={streamOn?.preferred} />
       {/snippet}
