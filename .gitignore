@@ -32,3 +32,9 @@ vite.config.ts.timestamp-*
 
 # Vitest
 coverage
+
+# gemini-cli settings
+.gemini/
+
+# GitHub App credentials
+gha-creds-*.json
