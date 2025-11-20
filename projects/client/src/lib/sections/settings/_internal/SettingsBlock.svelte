@@ -30,13 +30,6 @@
       text-transform: capitalize;
       font-size: var(--font-size-title);
     }
-
-    @include for-tablet-sm-and-below {
-      p.meta-info {
-        text-transform: uppercase;
-        font-size: var(--font-size-text);
-      }
-    }
   }
 
   .trakt-settings-block,
