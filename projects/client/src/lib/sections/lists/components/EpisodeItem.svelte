@@ -28,7 +28,9 @@
   {#if !isFuture && !isActivity && !isHidden}
     <RenderFor audience="authenticated">
       <MarkAsWatchedAction
-        mode="act"
+        mode={props.variant === "next" && props.context !== "show"
+          ? "act"
+          : "hybrid"}
         style="action"
         type="episode"
         size="small"

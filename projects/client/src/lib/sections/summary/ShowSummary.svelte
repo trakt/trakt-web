@@ -58,7 +58,7 @@
     {#snippet contextualContent()}
       <RenderFor device={["desktop"]} audience="authenticated">
         {#if episode != null && episode.remaining > 0}
-          <EpisodeItem {episode} show={media} variant="next" />
+          <EpisodeItem {episode} show={media} variant="next" context="show" />
         {/if}
       </RenderFor>
     {/snippet}
