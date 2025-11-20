@@ -3,12 +3,18 @@ import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import type { EpisodeProgressEntry } from '$lib/requests/models/EpisodeProgressEntry.ts';
 import type { Snippet } from 'svelte';
 
+type EpisodeContext = 'show' | 'standalone';
+
 export type EpisodeItemVariant =
-  | { variant: 'next'; episode: EpisodeProgressEntry }
+  | {
+    variant: 'next';
+    episode: EpisodeProgressEntry;
+    context?: EpisodeContext;
+  }
   | {
     variant: 'default' | 'upcoming';
     episode: EpisodeEntry;
-    context?: 'show' | 'standalone';
+    context?: EpisodeContext;
   }
   | { variant: 'activity'; episode: EpisodeEntry; date: Date };
 
