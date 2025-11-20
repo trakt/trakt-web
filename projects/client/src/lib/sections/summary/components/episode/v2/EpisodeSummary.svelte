@@ -37,8 +37,6 @@
     useMediaMetaInfo({ type, episode, media: show }),
   );
 
-  const hasTags = $derived(postCreditsCount > 0 || $watchCount > 0);
-
   const { isRateable } = $derived(
     useIsRateable({ type, media: episode, show }),
   );
@@ -58,11 +56,7 @@
 
 <Summary>
   {#snippet poster()}
-    <SummaryPoster
-      src={posterSrc}
-      alt={title}
-      tags={hasTags ? tags : undefined}
-    />
+    <SummaryPoster src={posterSrc} alt={title} {tags} />
   {/snippet}
 
   {#snippet sideActions()}

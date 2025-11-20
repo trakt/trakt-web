@@ -37,8 +37,6 @@
   const { watchCount } = $derived(useWatchCount(target));
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
-  const hasTags = $derived(postCreditsCount > 0 || $watchCount > 0);
-
   const status = $derived.by(() => {
     if (media.status !== "released") {
       return media.status;
@@ -73,11 +71,7 @@
 
 <Summary color={media.colors?.at(0)}>
   {#snippet poster()}
-    <SummaryPoster
-      src={media.poster.url.medium}
-      alt={title}
-      tags={hasTags ? tags : undefined}
-    />
+    <SummaryPoster src={media.poster.url.medium} alt={title} {tags} />
   {/snippet}
 
   {#snippet sideActions()}
