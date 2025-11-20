@@ -10,13 +10,10 @@
 </script>
 
 <div class="trakt-summary-actions">
-  <div class="trakt-summary-main-actions">
-    {@render children()}
-  </div>
+  {@render children()}
+
   {#if contextualActions}
-    <div class="trakt-summary-contextual-actions">
-      {@render contextualActions()}
-    </div>
+    {@render contextualActions()}
   {/if}
 </div>
 
@@ -25,36 +22,14 @@
 
   .trakt-summary-actions {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-l);
 
-    @include for-tablet-sm-and-below {
-      gap: var(--gap-xs);
+    @include for-tablet-lg {
+      flex-direction: column;
+      align-items: start;
+      gap: var(--gap-s);
     }
-  }
-
-  .trakt-summary-main-actions {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: var(--gap-xs);
-
-    @include for-tablet-sm {
-      :global(.trakt-button),
-      :global(.trakt-dropdown-wrapper) {
-        flex-basis: calc(50% - var(--gap-xs) / 2);
-      }
-    }
-
-    @include for-mobile {
-      :global(.trakt-button),
-      :global(.trakt-dropdown-wrapper) {
-        flex-grow: 1;
-      }
-    }
-  }
-
-  .trakt-summary-contextual-actions {
-    display: flex;
-    justify-content: flex-end;
   }
 </style>
