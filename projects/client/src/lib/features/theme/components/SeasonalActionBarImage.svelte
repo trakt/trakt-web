@@ -23,11 +23,20 @@
     z-index: var(--layer-background);
 
     position: absolute;
-    top: calc(-0.5 * var(--image-size));
-    right: calc(0.5 * var(--image-size));
 
     &:global(.theme-halloween) {
+      top: calc(-0.5 * var(--image-size));
+      right: calc(0.5 * var(--image-size));
       animation: lift-and-swing 5s infinite;
+    }
+
+    &:global(.theme-christmas) {
+      z-index: 1;
+
+      top: calc(-0.5 * var(--image-size));
+      right: calc(-0.35 * var(--image-size));
+
+      transform: rotate(15deg);
     }
   }
 </style>
