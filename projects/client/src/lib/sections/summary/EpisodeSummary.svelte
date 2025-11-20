@@ -44,7 +44,7 @@
   type="show"
 />
 
-<RenderFor audience="all" device={["mobile"]}>
+<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <EpisodeSummaryV2
     {episode}
     {show}
@@ -55,7 +55,7 @@
   />
 </RenderFor>
 
-<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
   <EpisodeSummary
     {episode}
     {show}

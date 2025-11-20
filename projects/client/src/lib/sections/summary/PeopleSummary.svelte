@@ -13,11 +13,11 @@
   } = $props();
 </script>
 
-<RenderFor audience="all" device={["mobile"]}>
+<RenderFor audience="all" device={["mobile", "tablet-sm"]}>
   <PeopleSummaryV2 {person} />
 </RenderFor>
 
-<RenderFor audience="all" device={["tablet-sm", "tablet-lg", "desktop"]}>
+<RenderFor audience="all" device={["tablet-lg", "desktop"]}>
   <PeopleSummary {person} />
 </RenderFor>
 

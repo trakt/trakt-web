@@ -117,13 +117,16 @@
 
   --summary-side-action-bar-width: var(--ni-40);
   --summary-poster-gap: var(--gap-s);
-  --summary-poster-width: calc(
-    100dvw
-      - 2
-      * (
-      var(--layout-distance-side) + var(--summary-side-action-bar-width)
-        + var(--summary-poster-gap)
-    )
+  --summary-poster-width: min(
+    calc(
+      100dvw
+        - 2
+        * (
+        var(--layout-distance-side) + var(--summary-side-action-bar-width)
+          + var(--summary-poster-gap)
+      )
+    ), 
+    var(--ni-320)
   );
 
   --toggle-large-width: var(--ni-88);
