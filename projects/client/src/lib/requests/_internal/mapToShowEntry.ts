@@ -1,4 +1,4 @@
-import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import { findDefined } from '$lib/utils/string/findDefined.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import { type ShowResponse } from '@trakt/api';
@@ -49,7 +49,6 @@ export function mapToShowEntry(
     overview: show.overview ?? 'TBD',
     trailer: prependHttps(
       show.trailer,
-      DEFAULT_TRAILER,
     ),
     airDate: new Date(show.first_aired ?? MAX_DATE),
     certification: show.certification,

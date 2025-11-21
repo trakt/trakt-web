@@ -1,4 +1,4 @@
-import { DEFAULT_TRAILER, MAX_DATE } from '$lib/utils/constants.ts';
+import { MAX_DATE } from '$lib/utils/constants.ts';
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
 import type { MovieCertificationResponse, MovieResponse } from '@trakt/api';
 import type { MovieEntry } from '../models/MovieEntry.ts';
@@ -51,7 +51,6 @@ export function mapToMovieEntry(
     overview: movie.overview ?? 'TBD',
     trailer: prependHttps(
       movie.trailer,
-      DEFAULT_TRAILER,
     ),
     airDate: new Date(movie.released ?? MAX_DATE),
     certification: mapMovieCertificationResponse(movie.certification),
