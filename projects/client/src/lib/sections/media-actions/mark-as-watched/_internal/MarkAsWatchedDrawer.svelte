@@ -2,9 +2,9 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import DropdownItem from "$lib/components/dropdown/DropdownItem.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
-  import MarkAsWatchedIcon from "$lib/components/icons/MarkAsWatchedIcon.svelte";
   import QuestionIcon from "$lib/components/icons/QuestionIcon.svelte";
   import RenameIcon from "$lib/components/icons/RenameIcon.svelte";
+  import TrackIcon from "$lib/components/TrackIcon.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
@@ -79,7 +79,7 @@
       {m.button_text_mark_as_watched_now()}
       {#snippet icon()}
         <IconWrapper isLoading={$confirmedAction === "now"}>
-          <MarkAsWatchedIcon state={$isWatched ? "watched" : "unwatched"} />
+          <TrackIcon state={$isWatched ? "watched" : "unwatched"} />
         </IconWrapper>
       {/snippet}
     </DropdownItem>
