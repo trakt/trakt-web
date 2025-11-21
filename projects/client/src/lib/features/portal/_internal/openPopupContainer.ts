@@ -1,6 +1,6 @@
-import { CONFIRMATION_DIALOG_CLASS } from '$lib/components/dialogs/constants/index.ts';
 import { bodyPortal } from '$lib/features/portal/_internal/bodyPortal.ts';
 import { onMount } from 'svelte';
+import { TRAKT_MODAL_CLASS } from '../../../components/dialogs/constants/index.ts';
 import { alignPopupContainer } from './alignPopupContainer.ts';
 import type { PopupPlacement } from './models/PopupPlacement.ts';
 import { resetPositionAttributes } from './resetPositionAttributes.ts';
@@ -23,10 +23,10 @@ export function openPopupContainer(
   onMount(moveNodeToBody);
 
   const observer = new MutationObserver(() => {
-    const confirmationDialog = document.querySelector(
-      `.${CONFIRMATION_DIALOG_CLASS}[open]`,
+    const openModal = document.querySelector(
+      `.${TRAKT_MODAL_CLASS}[open]`,
     );
-    if (confirmationDialog) {
+    if (openModal) {
       return;
     }
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ConfirmationDialog from "$lib/components/dialogs/ConfirmationDialog.svelte";
+  import ConfirmationDialog from "./_internal/ConfirmationDialog.svelte";
   import { createConfirmationContext } from "./_internal/createConfirmationContext";
 
   const { children }: ChildrenProps = $props();
@@ -14,12 +14,7 @@
     message={$activeConfirmation.message}
     buttonText={$activeConfirmation.buttonText}
     operation={$activeConfirmation.operation}
-    onAction={(action) => {
-      if (action === "confirm") {
-        $activeConfirmation.onConfirm();
-      }
-
-      hideConfirmation();
-    }}
+    onConfirm={() => $activeConfirmation.onConfirm()}
+    onCancel={() => hideConfirmation()}
   />
 {/if}
