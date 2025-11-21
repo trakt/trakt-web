@@ -17,6 +17,15 @@ export type UseWatchCountProps = {
 export function useWatchCount(props: UseWatchCountProps) {
   const { history } = useUser();
 
+  const mediaId = props.type !== 'episode' ? props.media.id : -1;
+  const showId = props.type === 'episode' ? props.show.id : -1;
+  const episode = props.type === 'episode'
+    ? {
+      season: props.episode.season,
+      number: props.episode.number,
+    }
+    : null;
+
   const watchCount = derived(
     history,
     ($history) => {
@@ -26,19 +35,19 @@ export function useWatchCount(props: UseWatchCountProps) {
 
       switch (props.type) {
         case 'movie':
-          return $history.movies.get(props.media.id)?.plays ?? 0;
+          return $history.movies.get(mediaId)?.plays ?? 0;
         case 'show': {
-          return $history.shows.get(props.media.id)?.plays ?? 0;
+          return $history.shows.get(mediaId)?.plays ?? 0;
         }
         case 'episode': {
-          const show = $history.shows.get(props.show.id);
-          const episode = show?.episodes.find(
+          const show = $history.shows.get(showId);
+          const historyEpisode = show?.episodes.find(
             (e) =>
-              e.season === props.episode.season &&
-              e.episode === props.episode.number,
+              e.season === episode?.season &&
+              e.episode === episode?.number,
           );
 
-          return episode?.plays ?? 0;
+          return historyEpisode?.plays ?? 0;
         }
       }
     },
