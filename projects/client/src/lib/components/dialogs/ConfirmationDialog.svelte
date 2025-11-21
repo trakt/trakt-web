@@ -1,20 +1,22 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
+  import type { ConfirmationAction } from "$lib/features/confirmation/models/ConfirmationAction";
+  import type { ConfirmationOperation } from "$lib/features/confirmation/models/ConfirmationOperation";
   import * as m from "$lib/features/i18n/messages.ts";
   import { Modal } from "flowbite-svelte";
-  import { TRAKT_MODAL_CLASS } from "./constants";
-  import type { ModalButtonProps } from "./models/ModalButtonProps";
+  import { CONFIRMATION_DIALOG_CLASS } from "./constants";
 
   const {
-    onConfirm,
-    onCancel,
-    children,
-    confirmButton,
+    message,
+    buttonText,
+    onAction,
+    operation,
   }: {
-    onConfirm: () => void;
-    onCancel: () => void;
-    confirmButton: ModalButtonProps;
-  } & ChildrenProps = $props();
+    message: string;
+    buttonText: string;
+    operation: ConfirmationOperation;
+    onAction: (action: ConfirmationAction) => void;
+  } = $props();
 
   let isOpen = $state(true);
 </script>
@@ -24,23 +26,23 @@
   bind:open={isOpen}
   permanent
   focustrap
-  oncancel={onCancel}
+  oncancel={() => onAction("cancel")}
   onaction={({ action }) => {
     if (action === "confirm") {
-      onConfirm();
+      onAction("confirm");
       return;
     }
 
-    onCancel();
+    onAction("cancel");
   }}
-  class={TRAKT_MODAL_CLASS}
+  class={CONFIRMATION_DIALOG_CLASS}
   classes={{
-    header: "trakt-modal-dialog-header",
-    body: "trakt-modal-dialog-body",
-    footer: "trakt-modal-dialog-footer",
+    header: "trakt-confirmation-dialog-header",
+    body: "trakt-confirmation-dialog-body",
+    footer: "trakt-confirmation-dialog-footer",
   }}
 >
-  {@render children()}
+  <p>{message}</p>
 
   {#snippet footer()}
     <Button
@@ -55,12 +57,11 @@
       type="submit"
       size="small"
       value="confirm"
-      variant={confirmButton.variant}
-      color={confirmButton.color ?? "purple"}
-      label={confirmButton.label}
-      disabled={confirmButton.disabled}
+      variant={operation === "destructive" ? "secondary" : "primary"}
+      color={operation === "destructive" ? "red" : "purple"}
+      label={buttonText}
     >
-      {confirmButton.text}
+      {buttonText}
     </Button>
   {/snippet}
 </Modal>
@@ -68,15 +69,13 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  :global(.trakt-modal-dialog) {
+  :global(.trakt-confirmation-dialog) {
     padding: var(--ni-24);
     border-radius: var(--border-radius-l);
     border: none;
     background-color: var(--color-card-background);
     color: var(--color-text-primary);
-
-    max-width: var(--ni-480);
-    min-width: var(--ni-320);
+    max-width: var(--ni-380);
 
     box-shadow: var(--popup-shadow);
 
@@ -87,23 +86,22 @@
     }
 
     @include for-mobile {
-      --modal-offset: var(--ni-24);
-      --modal-width: calc(100dvw - (2 * var(--modal-offset)));
+      --dialog-offset: var(--ni-24);
+      --dialog-width: calc(100dvw - (2 * var(--dialog-offset)));
 
       box-sizing: border-box;
 
-      width: var(--modal-width);
-      max-width: var(--modal-width);
-      min-width: 0;
+      width: var(--dialog-width);
+      max-width: var(--dialog-width);
 
       margin: 0 auto;
 
       top: auto;
-      bottom: calc(var(--modal-offset) + env(safe-area-inset-bottom, 0));
+      bottom: calc(var(--dialog-offset) + env(safe-area-inset-bottom, 0));
     }
   }
 
-  :global(.trakt-modal-dialog[open]) {
+  :global(.trakt-confirmation-dialog[open]) {
     @keyframes blurIn {
       from {
         backdrop-filter: blur(0);
@@ -114,16 +112,15 @@
     }
 
     &::backdrop {
-      pointer-events: none;
       animation: blurIn var(--transition-increment) ease-in-out forwards;
     }
   }
 
-  :global(.trakt-modal-dialog-header) {
+  :global(.trakt-confirmation-dialog-header) {
     display: none;
   }
 
-  :global(.trakt-modal-dialog-footer) {
+  :global(.trakt-confirmation-dialog-footer) {
     display: flex;
     align-items: center;
     justify-content: space-between;
