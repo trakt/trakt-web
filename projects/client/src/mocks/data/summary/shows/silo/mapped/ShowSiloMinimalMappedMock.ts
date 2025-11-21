@@ -38,7 +38,7 @@ export const ShowSiloMinimalMappedMock: ShowEntry = {
   },
   'title': 'Silo',
   'originalTitle': undefined,
-  'trailer': 'https://www.youtube.com/watch?v=o-YBDTqX_ZU',
+  'trailer': undefined,
   'type': 'show',
   'votes': 0,
   'year': 2023,

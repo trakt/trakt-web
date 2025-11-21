@@ -34,6 +34,8 @@
   const postCreditsCount = $derived(media.postCredits?.length ?? 0);
 
   const { ratings } = $derived(useMediaMetaInfo(target));
+
+  const posterUrl = $derived(streamOn?.preferred?.link ?? media.trailer);
 </script>
 
 {#snippet tags()}
@@ -47,14 +49,16 @@
     <SummaryPoster
       src={media.poster.url.medium}
       alt={title}
-      href={streamOn?.preferred?.link ?? media.trailer}
+      href={posterUrl}
       {tags}
     >
       {#snippet hoverOverlay()}
-        {#if streamOn?.preferred}
+        {#if streamOn?.preferred != null}
           <StreamOnOverlay service={streamOn.preferred} />
-        {:else}
-          <TrailerOverlay trailer={media.trailer} />
+        {/if}
+
+        {#if media.trailer != null}
+          <TrailerOverlay />
         {/if}
       {/snippet}
     </SummaryPoster>

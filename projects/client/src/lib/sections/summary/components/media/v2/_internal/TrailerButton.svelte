@@ -13,7 +13,7 @@
     style = "action",
     slug,
   }: {
-    trailer: string;
+    trailer: string | Nil;
     slug: string;
     style?: "action" | "dropdown-item";
   } = $props();
@@ -22,11 +22,15 @@
 
   const { track } = useTrack(AnalyticsEvent.Trailer);
   const onclick = () => {
+    if (!trailer) return;
     play(trailer);
     track({ slug });
   };
 
-  preload(trailer);
+  $effect(() => {
+    if (!trailer) return;
+    preload(trailer);
+  });
 </script>
 
 {#if style === "action"}
@@ -34,7 +38,7 @@
     style="ghost"
     href="javascript:void(0);"
     label={m.translated_value_video_type_trailer()}
-    disabled={$isLoading}
+    disabled={$isLoading || !trailer}
     {onclick}
   >
     <YouTubeIcon />

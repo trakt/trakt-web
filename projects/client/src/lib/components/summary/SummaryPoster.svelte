@@ -8,7 +8,7 @@
   type SummaryPosterProps = {
     src: string;
     alt: string;
-    href?: string;
+    href?: string | Nil;
     target?: "_blank" | "_self" | "_parent" | "_top";
     hoverOverlay?: Snippet;
     actions?: Snippet;

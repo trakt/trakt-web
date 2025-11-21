@@ -27,8 +27,6 @@ export const PLACEHOLDERS: string[] = [
   MEDIA_POSTER_PLACEHOLDER,
 ];
 
-export const DEFAULT_TRAILER = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU';
-
 export const DEFAULT_AVATAR =
   'https://walter-r2.trakt.tv/hotlink-ok/placeholders/medium/zoidberg.png' as HttpsUrl;
 
