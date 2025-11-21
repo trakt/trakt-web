@@ -172,7 +172,6 @@
     );
 
     contain: layout;
-    content-visibility: auto;
 
     display: flex;
     flex-direction: column;
