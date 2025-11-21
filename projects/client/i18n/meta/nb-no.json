@@ -2261,6 +2261,22 @@
     },
     "text_view_all": {
       "default": "Se alle"
+    },
+    "text_play_count": {
+      "default": "{count} avspillinger",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_hours_watched": {
+      "default": "{count} timer",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

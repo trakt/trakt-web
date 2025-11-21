@@ -2261,6 +2261,22 @@
     },
     "text_view_all": {
       "default": "Vezi tot"
+    },
+    "text_play_count": {
+      "default": "{count} vizionări",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_hours_watched": {
+      "default": "{count} ore",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }

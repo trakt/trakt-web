@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import Banner from "$lib/sections/banner/Banner.svelte";
   import DiscoverToggles from "$lib/sections/discover/DiscoverToggles.svelte";
   import Landing from "$lib/sections/landing/Landing.svelte";
   import MobileLanding from "$lib/sections/landing/MobileLanding.svelte";
@@ -9,7 +10,6 @@
   import ActivityList from "$lib/sections/lists/activity/ActivityList.svelte";
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
-  import MonthInReview from "$lib/sections/month-in-review/MonthInReview.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
 </script>
@@ -28,7 +28,7 @@
     {/snippet}
   </NavbarStateSetter>
 
-  <MonthInReview />
+  <Banner />
   <UpNextList intent="continue" />
   <UpNextList intent="start" />
   <UpcomingList />

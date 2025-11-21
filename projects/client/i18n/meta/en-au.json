@@ -2261,6 +2261,22 @@
     },
     "text_view_all": {
       "default": "View all"
+    },
+    "text_play_count": {
+      "default": "{count} plays",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_hours_watched": {
+      "default": "{count} hours",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }
