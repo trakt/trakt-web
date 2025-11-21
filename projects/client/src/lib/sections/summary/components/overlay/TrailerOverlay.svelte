@@ -1,24 +1,10 @@
 <script lang="ts">
-  import TrollIcon from "$lib/components/icons/TrollIcon.svelte";
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
-  import { DEFAULT_TRAILER } from "$lib/utils/constants";
-
-  const {
-    trailer = DEFAULT_TRAILER,
-  }: {
-    trailer?: string;
-  } = $props();
-
-  const isDefaultTrailer = $derived(trailer === DEFAULT_TRAILER);
 </script>
 
 <div class="trakt-trailer-overlay">
   <div class="trakt-trailer-icon">
-    {#if isDefaultTrailer}
-      <TrollIcon />
-    {:else}
-      <YouTubeIcon />
-    {/if}
+    <YouTubeIcon />
   </div>
 </div>
 
