@@ -21,7 +21,7 @@
     ...props
   }: MarkAsWatchedButtonProps = $props();
 
-  const isRemovable = $derived(isWatched && mode !== "ask");
+  const isRemovable = $derived(isWatched && mode === "hybrid");
   const isRewatching = $derived(mode === "ask" && isWatched);
 
   const handler = $derived.by(() => {
