@@ -6045,6 +6045,32 @@
         "android",
         "ios"
       ]
+    },
+    "text_play_count": {
+      "default": "{count} plays",
+      "description": "Text shown to indicate the number of episode and movie plays a user had in a certain period.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_hours_watched": {
+      "default": "{count} hours",
+      "description": "Text shown to indicate the number of hours a user has watched movies and episodes in a certain period.",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

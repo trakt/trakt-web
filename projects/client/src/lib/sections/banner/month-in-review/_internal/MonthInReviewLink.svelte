@@ -16,10 +16,7 @@
 
 <div class="trakt-month-in-review-link">
   <Link {href}>
-    <div class="trakt-month-in-review-label">
-      <h5 class="uppercase">{previousMonth}</h5>
-      <h5 class="uppercase">in review</h5>
-    </div>
+    <p class="uppercase bold">{previousMonth}</p>
     <YearToDateArrow />
   </Link>
 </div>
@@ -31,13 +28,12 @@
 
       display: flex;
       align-items: center;
-      gap: var(--gap-m);
+      gap: var(--gap-xs);
     }
-  }
 
-  .trakt-month-in-review-label {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    :global(svg) {
+      width: var(--ni-18);
+      height: var(--ni-18);
+    }
   }
 </style>

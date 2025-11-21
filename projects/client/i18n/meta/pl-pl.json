@@ -2261,6 +2261,22 @@
     },
     "text_view_all": {
       "default": "Zobacz wszystkie"
+    },
+    "text_play_count": {
+      "default": "{count} odtworzeń",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    },
+    "text_hours_watched": {
+      "default": "{count} godzin",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   }
 }
