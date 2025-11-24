@@ -17,8 +17,7 @@
     align-items: center;
     justify-content: space-between;
 
-    h6 {
-      text-transform: none;
+    span.title {
       margin-left: var(--ni-10);
     }
   }
