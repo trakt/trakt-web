@@ -76,7 +76,7 @@
     "firebase": "12.6.0",
     "flowbite-svelte": "^1.28.1",
     "idb-keyval": "6.2.2",
-    "marked": "^16.4.2",
+    "marked": "^17.0.1",
     "oidc-client-ts": "3.4.1",
     "plyr": "^3.8.3",
     "resolve-accept-language": "3.1.15",
