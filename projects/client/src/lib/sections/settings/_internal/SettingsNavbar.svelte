@@ -66,7 +66,7 @@
     flex-direction: column;
     gap: var(--gap-s);
 
-    h5 {
+    span.title {
       color: var(--color-text-secondary);
 
       transition: color var(--transition-increment) ease-in-out;
@@ -77,7 +77,7 @@
     }
 
     :global(.trakt-link.trakt-link-active) {
-      :global(h5) {
+      :global(span.title) {
         color: var(--color-text-primary);
       }
     }
