@@ -25,7 +25,7 @@
 
 <ProgressTag progress={percentage} {total}>
   <div class="show-progress">
-    <p class="bold capitalize no-wrap">
+    <p class="tag bold capitalize no-wrap">
       {i18n.toDuration(runtime)}
     </p>
     <TagBar>
@@ -39,10 +39,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    p {
-      font-size: var(--font-size-tag);
-    }
 
     gap: var(--gap-xs);
 

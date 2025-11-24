@@ -69,4 +69,8 @@ h6 {
   &.italic {
     font-style: italic;
   }
+
+  &.tag {
+    font-size: var(--font-size-tag);
+  }
 }

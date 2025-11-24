@@ -22,7 +22,7 @@
     {#if children}
       {@render children()}
     {:else if text}
-      <p class="bold">
+      <p class="bold tag">
         {text}
       </p>
     {/if}
@@ -40,7 +40,6 @@
       color: var(--color-foreground-stem-tag);
     }
 
-    p,
     :global(p) {
       font-size: var(--font-size-tag);
     }

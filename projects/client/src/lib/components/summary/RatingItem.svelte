@@ -32,7 +32,7 @@
           {/if}
         </div>
         {#if hasValidRating}
-          <p class="bold uppercase secondary vote-count">
+          <p class="bold uppercase secondary vote-count tag">
             {@render superscript()}
           </p>
         {/if}
@@ -45,10 +45,6 @@
   @use "$style/scss/mixins/index" as *;
 
   rating {
-    .vote-count {
-      font-size: var(--font-size-tag);
-    }
-
     :global(.trakt-link) {
       text-decoration: none;
 
