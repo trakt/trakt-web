@@ -41,15 +41,12 @@ function typeToQuery(props: UpNextStoreProps) {
 export function useUpNextList(
   props: UpNextStoreProps,
 ) {
-  const isStartWatchingMovie = props.type === 'movie' &&
-    props.intent === 'start';
-
-  if (!isStartWatchingMovie) {
+  if (props.type === 'show' || props.intent === 'continue') {
     return usePaginatedListQuery(typeToQuery(props));
   }
 
   /*
-    In case of a `start watching` movies, we also fetch the `continue` list
+    In case of `start watching`, we also fetch the `continue` list
     to filter out movies that are already in progress.
   */
   const startQuery = usePaginatedListQuery(typeToQuery(props));
@@ -61,8 +58,10 @@ export function useUpNextList(
   const filteredList = derived(
     [startQuery.list, continueQuery.list],
     ([$startList, $continueList]) => {
-      const continueMovieIds = new Set($continueList.map((entry) => entry.id));
-      return $startList.filter((entry) => !continueMovieIds.has(entry.id));
+      const continueMovieIds = new Set($continueList.map((entry) => entry.key));
+      return $startList.filter((entry) =>
+        'show' in entry || !continueMovieIds.has(entry.key)
+      );
     },
   );
 
