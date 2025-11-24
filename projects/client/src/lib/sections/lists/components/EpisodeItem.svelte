@@ -59,12 +59,12 @@
           {runtime}
         >
           <TextTag>
-            <p class="meta-info capitalize ellipsis">
+            <p class="bold capitalize ellipsis">
               {EpisodeIntlProvider.remainingText(props.episode.remaining)}
             </p>
           </TextTag>
           <TextTag>
-            <p class="meta-info capitalize no-wrap">
+            <p class="bold capitalize no-wrap">
               {EpisodeIntlProvider.durationText(props.episode.minutesLeft)}
             </p>
           </TextTag>

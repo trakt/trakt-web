@@ -19,12 +19,12 @@
     <TrackIcon />
 
     {#if count > 1}
-      <p class="meta-info uppercase no-wrap">{i18n.watchedLabel()}</p>
-      <p class="meta-info">·</p>
+      <p class="bold uppercase no-wrap">{i18n.watchedLabel()}</p>
+      <p class="bold">·</p>
       <div transition:slide={{ axis: "x", duration: 150 }}>
         {#key count}
           <p
-            class="meta-info uppercase no-wrap counter"
+            class="bold uppercase no-wrap counter"
             transition:slide={{
               easing: linear,
               axis: "y",

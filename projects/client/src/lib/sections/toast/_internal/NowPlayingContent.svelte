@@ -21,10 +21,10 @@
     <div class="trakt-now-playing-header">
       {#if nowPlaying.media.postCredits.length > 0}
         <div class="trakt-post-credits-label">
-          <span class="meta-info post-credits-count">
+          <span class="bold post-credits-count">
             {nowPlaying.media.postCredits.length}
           </span>
-          <span class="meta-info">{m.header_post_credits()}</span>
+          <span class="bold">{m.header_post_credits()}</span>
         </div>
       {:else}
         <div class="trakt-now-playing-label">
@@ -38,10 +38,10 @@
         {title}
       </h5>
       <div class="trakt-now-playing-remaining">
-        <span class="meta-info">
+        <span class="secondary">
           {toHumanDuration({ minutes: $remainingMinutes }, languageTag())}
         </span>
-        <span class="meta-info">{m.text_remaining()}</span>
+        <span class="secondary">{m.text_remaining()}</span>
       </div>
     </div>
     <ProgressBar progress={$progress} />

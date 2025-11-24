@@ -60,7 +60,7 @@
           i18n={StreamingServiceLogoIntlProvider}
         />
       </RenderForFeature>
-      <p class="meta-info">{text}</p>
+      <p>{text}</p>
     </div>
   </Link>
 </div>
@@ -93,7 +93,7 @@
     background-color: var(--color-card-background);
     border-radius: var(--border-radius-m);
 
-    p.meta-info {
+    p {
       text-align: center;
       flex-grow: 1;
       display: flex;

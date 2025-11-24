@@ -2,10 +2,10 @@
   const { text }: { text: string } = $props();
 </script>
 
-<p class="meta-info ellipsis">{text}</p>
+<p class="bold ellipsis">{text}</p>
 
 <style>
-  p.meta-info {
+  p {
     color: var(--list-meta-info-color);
   }
 </style>

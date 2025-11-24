@@ -2,7 +2,7 @@
 </script>
 
 <div class="typography-disclaimer-container">
-  <p class="meta-info">(scaled to 75% for presentation)</p>
+  <p class="bold">(scaled to 75% for presentation)</p>
 </div>
 
 <div class="typography-element-container">
@@ -38,7 +38,7 @@
     a message from the machine gods? Only time will tell.)
   </p>
 
-  <p class="meta-info">
+  <p class="bold">
     This website was designed in a fugue state, fueled by cheap coffee and
     dread. © The Union of Conceptual Artists, Hobo Chapter
   </p>

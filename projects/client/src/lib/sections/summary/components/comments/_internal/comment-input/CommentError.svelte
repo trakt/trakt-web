@@ -13,7 +13,7 @@
 </script>
 
 <div class="trakt-comment-error" transition:slide={{ duration: 150 }}>
-  <p class="meta-info">{message}</p>
+  <p class="bold">{message}</p>
   <ActionButton
     size="small"
     onclick={onDismiss}

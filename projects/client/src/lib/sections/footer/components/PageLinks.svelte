@@ -11,12 +11,12 @@
 <div class="trakt-page-links">
   <RenderFor audience="vip">
     <Link href={UrlBuilder.og.support($user?.slug)} target="_blank">
-      <span class="meta-info">{m.link_text_support()}</span>
+      <span class="bold">{m.link_text_support()}</span>
     </Link>
   </RenderFor>
 
   <Link href={UrlBuilder.og.forums()} target="_blank">
-    <span class="meta-info">{m.link_text_forums()}</span>
+    <span class="bold">{m.link_text_forums()}</span>
   </Link>
 </div>
 
@@ -27,19 +27,8 @@
     display: flex;
     gap: var(--gap-l);
 
-    .meta-info {
-      transition: font-size var(--transition-increment) ease-in-out;
-      font-size: var(--font-size-text);
-    }
-
     :global(.trakt-link) {
       text-decoration: none;
-    }
-
-    @include for-mobile {
-      .meta-info {
-        font-size: var(--font-size-text);
-      }
     }
   }
 </style>

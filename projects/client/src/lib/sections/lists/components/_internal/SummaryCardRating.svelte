@@ -12,7 +12,7 @@
 {#if item.rating && hasAired}
   <div class="trakt-summary-card-rating">
     <RatingIcon style="rated" />
-    <p class="meta-info">{toPercentage(item.rating, languageTag())}</p>
+    <p class="bold">{toPercentage(item.rating, languageTag())}</p>
   </div>
 {/if}
 

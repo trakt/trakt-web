@@ -20,7 +20,7 @@
   </div>
 
   {#if summary.count > 0}
-    <p class="meta-info">
+    <p class="bold">
       {toHumanNumber(summary.count, getLocale())}
     </p>
   {/if}

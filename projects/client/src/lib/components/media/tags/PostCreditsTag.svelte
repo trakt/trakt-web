@@ -9,7 +9,7 @@
   --color-background-stem-tag="var(--shade-10)"
   --color-foreground-stem-tag="var(--shade-920)"
 >
-  <p class="meta-info uppercase no-wrap">
+  <p class="bold uppercase no-wrap">
     {i18n.postCredits(count)}
   </p>
 </StemTag>

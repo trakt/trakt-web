@@ -17,7 +17,7 @@
 </script>
 
 {#snippet content()}
-  <p class="meta-info capitalize no-wrap">
+  <p class="bold capitalize no-wrap">
     {#if isMaxDate(airDate)}
       {i18n.tbaLabel()}
     {:else}

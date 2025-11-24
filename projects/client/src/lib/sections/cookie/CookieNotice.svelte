@@ -38,7 +38,7 @@
     transition:slide={{ duration: NOTICE_TRANSITION_DURATION }}
   >
     <div class="trakt-cookie">🍪</div>
-    <p class="meta-info">
+    <p>
       <MessageWithLink
         message={m.text_cookie_notice()}
         href={UrlBuilder.og.privacy()}

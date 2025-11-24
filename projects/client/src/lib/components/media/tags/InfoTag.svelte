@@ -6,7 +6,7 @@
 </script>
 
 <StemTag {icon}>
-  <p class="meta-info capitalize no-wrap">
+  <p class="bold capitalize no-wrap">
     {@render children()}
   </p>
 </StemTag>

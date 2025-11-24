@@ -25,7 +25,7 @@
 
 <ProgressTag progress={percentage} {total}>
   <div class="show-progress">
-    <p class="meta-info capitalize no-wrap">
+    <p class="bold capitalize no-wrap">
       {i18n.toDuration(runtime)}
     </p>
     <TagBar>
@@ -40,7 +40,7 @@
     align-items: center;
     justify-content: space-between;
 
-    .meta-info {
+    p {
       font-size: var(--font-size-tag);
     }
 

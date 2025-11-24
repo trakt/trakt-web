@@ -28,7 +28,7 @@
 >
   {@render icon()}
   {#if variant === "text"}
-    <p class="meta-info ellipsis">{@render children()}</p>
+    <p class="bold ellipsis">{@render children()}</p>
   {/if}
 </button>
 

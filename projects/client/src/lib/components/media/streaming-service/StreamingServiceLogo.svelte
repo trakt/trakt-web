@@ -54,7 +54,7 @@
       />
     {/if}
   {:else}
-    <span class="meta-info uppercase">{displayName}</span>
+    <span class="bold uppercase">{displayName}</span>
   {/if}
 </div>
 

@@ -95,7 +95,7 @@
         <div class="trakt-drawer-title">
           <h5>{title}</h5>
           {#if metaInfo}
-            <p class="meta-info ellipsis">{metaInfo}</p>
+            <p class="title-meta-info bold ellipsis">{metaInfo}</p>
           {/if}
         </div>
         {@render badge?.()}
@@ -227,7 +227,7 @@
       font-size: var(--font-size-title);
     }
 
-    p.meta-info {
+    .title-meta-info {
       color: var(--list-meta-info-color);
     }
   }

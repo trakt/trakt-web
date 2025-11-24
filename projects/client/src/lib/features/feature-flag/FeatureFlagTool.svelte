@@ -45,7 +45,7 @@
       {#if hasFlags}
         {#each Object.entries($flags) as [key, value]}
           <div class="feature-flag-item">
-            <span class="meta-info">{key}</span>
+            <span class="bold">{key}</span>
             <Switch
               color="orange"
               label={key}
@@ -56,7 +56,7 @@
           </div>
         {/each}
       {:else}
-        <p class="meta-info">Currently there aren't any feature flags 🎉</p>
+        <p class="bold">Currently there aren't any feature flags 🎉</p>
       {/if}
     </Drawer>
   {/if}

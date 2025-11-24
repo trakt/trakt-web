@@ -22,7 +22,7 @@
     {#if children}
       {@render children()}
     {:else if text}
-      <p class="meta-info">
+      <p class="bold">
         {text}
       </p>
     {/if}

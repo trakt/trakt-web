@@ -16,7 +16,7 @@
   ];
 </script>
 
-<p class="meta-info secondary no-content">
+<p class="bold secondary no-content">
   {shuffle(NO_ITEMS_MESSAGES).at(0)}
 </p>
 

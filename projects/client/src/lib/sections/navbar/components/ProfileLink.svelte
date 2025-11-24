@@ -39,13 +39,6 @@
 
       text-decoration: none;
 
-      &:hover,
-      &:focus-visible {
-        :global(.meta-info) {
-          color: inherit;
-        }
-      }
-
       &:focus-visible {
         border-radius: var(--border-radius-xs);
         outline: var(--border-thickness-xs) solid var(--color-link-active);

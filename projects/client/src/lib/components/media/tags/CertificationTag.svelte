@@ -13,7 +13,7 @@
 </script>
 
 {#snippet content()}
-  <p class="meta-info capitalize no-wrap">
+  <p class="bold capitalize no-wrap">
     {certification}
   </p>
 {/snippet}

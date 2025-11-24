@@ -29,11 +29,11 @@
     activeDate.set({ date: day.date, source: "navigation" });
   }}
 >
-  <span class="meta-info">
+  <span>
     {toHumanMonth(day.date, languageTag(), "short")}
   </span>
-  <span>{day.date.getDate()}</span>
-  <span class="meta-info">{toHumanDayOfWeek(day.date, getLocale())}</span>
+  <span class="bold">{day.date.getDate()}</span>
+  <span>{toHumanDayOfWeek(day.date, getLocale())}</span>
 
   <ContentIndicator {itemCount} />
 </button>

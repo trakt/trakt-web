@@ -54,7 +54,7 @@
   </p>
 
   {#if status}
-    <p class="capitalize meta-info trakt-media-status">
+    <p class="capitalize bold trakt-media-status">
       {toTranslatedStatus(status)}
     </p>
   {/if}

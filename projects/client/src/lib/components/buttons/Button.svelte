@@ -50,16 +50,15 @@
 {#snippet contents()}
   <div class="button-label">
     <p
-      class="ellipsis"
+      class="ellipsis bold"
       class:small={subtitle != null || style === "underlined"}
-      class:bold={style === "underlined"}
       class:capitalize={text === "capitalize"}
       class:uppercase={text === "uppercase"}
     >
       {@render children()}
     </p>
     {#if subtitle != null}
-      <p class="button-subtitle meta-info">{@render subtitle()}</p>
+      <p class="button-subtitle">{@render subtitle()}</p>
     {/if}
   </div>
   {#if icon}
@@ -193,10 +192,6 @@
       box-shadow, outline, padding, transform, color, background,
       text-decoration;
 
-    &:not([data-style="underlined"]) p:not(.meta-info) {
-      font-weight: 700;
-    }
-
     &.trakt-button-link {
       &[data-style="ghost"] {
         &.trakt-link-active {
@@ -233,14 +228,8 @@
       // TODO: revert this once the dynamic scaling is figured out
 
       .button-label {
-        p:not(.meta-info) {
+        p {
           font-size: 0.75rem;
-          font-weight: 600;
-        }
-
-        p.meta-info {
-          font-size: var(--ni-8);
-          font-weight: 400;
         }
       }
 

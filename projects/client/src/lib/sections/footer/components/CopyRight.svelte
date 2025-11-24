@@ -7,10 +7,10 @@
 </script>
 
 {#snippet content(copyrightText: string, subtitleText: string)}
-  <p class="secondary meta-info">
+  <p class="secondary bold">
     {copyrightText}
   </p>
-  <p class="secondary meta-info">
+  <p class="secondary bold">
     {subtitleText}
   </p>
 {/snippet}

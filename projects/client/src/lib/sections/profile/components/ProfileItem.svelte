@@ -35,7 +35,7 @@
     />
   </Link>
   <div class="profile-footer">
-    <p class="meta-info ellipsis">{toDisplayableName(profile)}</p>
+    <p class="bold ellipsis">{toDisplayableName(profile)}</p>
   </div>
 </div>
 

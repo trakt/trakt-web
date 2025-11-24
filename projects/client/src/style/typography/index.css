@@ -65,14 +65,6 @@ p {
   font-weight: 400;
 }
 
-span,
-p {
-  &.meta-info {
-    font-style: normal;
-    font-weight: 600;
-  }
-}
-
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;

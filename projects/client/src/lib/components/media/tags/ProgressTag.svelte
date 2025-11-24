@@ -18,7 +18,7 @@
   aria-valuemax={total}
 >
   <TagContent>
-    <p class="meta-info capitalize tag-label">
+    <p class="bold capitalize tag-label">
       {@render children()}
     </p>
   </TagContent>

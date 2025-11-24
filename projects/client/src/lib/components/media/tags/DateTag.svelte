@@ -16,7 +16,7 @@
 </script>
 
 {#snippet content()}
-  <p class="meta-info capitalize no-wrap">
+  <p class="bold capitalize no-wrap">
     {i18n.toDay(date)}
   </p>
 {/snippet}
