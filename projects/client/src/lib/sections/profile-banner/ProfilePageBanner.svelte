@@ -43,10 +43,10 @@
   </ProfileImage>
   <div class="profile-info" data-hj-suppress data-sentry-mask>
     <div class="profile-user-details">
-      <h5>
+      <span class="title">
         {nameLabel}
-      </h5>
-      <h6 class="user-location">{profile.location}</h6>
+      </span>
+      <span class="user-location">{profile.location}</span>
     </div>
     <div class="profile-actions">
       <RenderFor audience="authenticated">

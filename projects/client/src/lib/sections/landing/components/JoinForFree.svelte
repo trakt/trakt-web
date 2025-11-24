@@ -11,7 +11,7 @@
 <div class="trakt-join-for-free">
   <div class="trakt-landing-social-proof">
     <div class="trakt-social-proof-stats">
-      <h4>15</h4>
+      <span class="bold trakt-social-proof-count">15</span>
       <div class="trakt-social-proof-lines">
         <p>years of watching together</p>
         <p>mil. shows & movie lovers</p>
@@ -76,11 +76,11 @@
 
     flex-shrink: 0;
 
-    h4 {
+    .trakt-social-proof-count {
       display: flex;
       align-items: center;
-      font-size: 52px;
-      line-height: 52px;
+      font-size: var(--ni-52);
+      line-height: var(--ni-52);
     }
 
     .trakt-social-proof-lines {

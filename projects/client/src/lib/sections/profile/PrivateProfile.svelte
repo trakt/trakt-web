@@ -12,7 +12,7 @@
   {#snippet details()}
     <div class="trakt-private-profile-avatar">
       <CircularLogo />
-      <h5>{profile.username}</h5>
+      <span class="title">{profile.username}</span>
     </div>
   {/snippet}
   <div class="trakt-private-profile">

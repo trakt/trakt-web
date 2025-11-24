@@ -11,8 +11,8 @@
 </script>
 
 {#snippet label()}
-  <h2 class="trakt-landing-step-label-shadow">{i18n.label(step)}</h2>
-  <h2 class="trakt-landing-step-label">{i18n.label(step)}</h2>
+  <span class="bold trakt-landing-step-label-shadow">{i18n.label(step)}</span>
+  <span class="bold trakt-landing-step-label">{i18n.label(step)}</span>
 {/snippet}
 
 <div class="trakt-landing-step">

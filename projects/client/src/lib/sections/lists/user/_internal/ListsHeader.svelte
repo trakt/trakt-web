@@ -11,7 +11,7 @@
 <div class="trakt-lists-header">
   <div class="trakt-lists-title">
     {@render icon?.()}
-    <h4 class="secondary">{title}</h4>
+    <span class="title secondary">{title}</span>
   </div>
 
   {#if actions}
@@ -34,10 +34,6 @@
 
     margin: 0 var(--layout-distance-side);
     transition: margin calc(var(--transition-increment) * 2) ease-in-out;
-
-    h4 {
-      font-size: var(--font-size-title);
-    }
 
     :global(.trakt-action-button) {
       --button-size: var(--ni-32);

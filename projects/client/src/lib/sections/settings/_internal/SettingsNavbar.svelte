@@ -9,10 +9,10 @@
 {#snippet settingsLinks()}
   <div class="trakt-settings-links">
     <Link href={UrlBuilder.settings.general()}>
-      <h5>{m.link_text_general_settings()}</h5>
+      <span class="title">{m.link_text_general_settings()}</span>
     </Link>
     <Link href={UrlBuilder.settings.advanced()}>
-      <h5>{m.link_text_advanced_settings()}</h5>
+      <span class="title">{m.link_text_advanced_settings()}</span>
     </Link>
   </div>
 {/snippet}
@@ -68,9 +68,6 @@
 
     h5 {
       color: var(--color-text-secondary);
-
-      font-size: var(--font-size-title);
-      font-weight: 600;
 
       transition: color var(--transition-increment) ease-in-out;
     }

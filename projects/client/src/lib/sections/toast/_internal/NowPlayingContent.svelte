@@ -34,9 +34,9 @@
       <StopButton {nowPlaying} {title} />
     </div>
     <div class="trakt-now-playing-status">
-      <h5 class="trakt-now-playing-title ellipsis">
+      <span class="title trakt-now-playing-title ellipsis">
         {title}
-      </h5>
+      </span>
       <div class="trakt-now-playing-remaining">
         <span class="secondary">
           {toHumanDuration({ minutes: $remainingMinutes }, languageTag())}
@@ -68,11 +68,6 @@
     gap: var(--gap-xxs);
   }
 
-  .trakt-now-playing-label,
-  .trakt-now-playing-title {
-    transition: font-size var(--transition-increment) ease-in-out;
-  }
-
   .trakt-now-playing-header {
     display: flex;
     align-items: center;
@@ -80,7 +75,11 @@
   }
 
   .trakt-now-playing-title {
-    font-size: var(--font-size-title);
+    transition: font-size var(--transition-increment) ease-in-out;
+
+    @include for-mobile {
+      font-size: var(--font-size-text);
+    }
   }
 
   .trakt-now-playing-remaining {

@@ -93,7 +93,7 @@
     {#if title}
       <div class="trakt-drawer-title-container">
         <div class="trakt-drawer-title">
-          <h5>{title}</h5>
+          <h1>{title}</h1>
           {#if metaInfo}
             <p class="title-meta-info bold ellipsis">{metaInfo}</p>
           {/if}
@@ -222,10 +222,6 @@
     flex-direction: column;
 
     min-width: 0;
-
-    h5 {
-      font-size: var(--font-size-title);
-    }
 
     .title-meta-info {
       color: var(--list-meta-info-color);

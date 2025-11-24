@@ -55,7 +55,7 @@
     data-dpad-navigation={DpadNavigationType.List}
     transition:slide={{ duration: 150 }}
   >
-    <h6>{m.header_rate_now()}</h6>
+    <span class="bold">{m.header_rate_now()}</span>
     <div
       class="trakt-rate-actions"
       transition:fade={{ duration: 150, delay: 150 }}

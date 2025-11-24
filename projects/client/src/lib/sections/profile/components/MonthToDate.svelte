@@ -39,7 +39,7 @@
     <div class="trakt-month-to-date-header">
       <div class="trakt-month-to-date-header-this-month">
         <CalendarIcon />
-        <h6 class="uppercase">{m.text_this_month()}</h6>
+        <span class="bold uppercase">{m.text_this_month()}</span>
       </div>
       <YearToDateLink {slug} />
     </div>
@@ -50,7 +50,9 @@
       <Link href={mirHref} color="inherit">
         <YearToDateArrow />
         <div class="trakt-month-in-review-label">
-          <h6 class="uppercase">{toHumanMonth(mirDate, languageTag())}</h6>
+          <span class="bold uppercase">
+            {toHumanMonth(mirDate, languageTag())}
+          </span>
         </div>
       </Link>
     </div>

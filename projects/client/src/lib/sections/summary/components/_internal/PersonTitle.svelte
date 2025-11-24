@@ -5,9 +5,9 @@
 </script>
 
 <div class="trakt-person-title">
-  <h2>
+  <h1>
     {name}
-  </h2>
+  </h1>
 
   {#if knownFor}
     <p class="secondary">
@@ -28,9 +28,7 @@
     }
   }
 
-  h2 {
-    font-size: var(--font-size-title);
-
+  h1 {
     @include for-tablet-sm-and-below {
       text-align: center;
     }
