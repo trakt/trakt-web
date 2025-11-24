@@ -71,11 +71,6 @@
       justify-content: space-between;
     }
 
-    :global(h6) {
-      font-size: var(--font-size-title);
-      text-transform: capitalize;
-    }
-
     :global(svg) {
       --icon-color: var(--color-foreground);
     }

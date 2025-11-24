@@ -5,56 +5,19 @@ h4,
 h5,
 h6,
 p,
-span.display-title {
+span {
   margin: 0;
   padding: 0;
 }
 
-span.display-title {
-  display: block;
-
-  font-size: var(--ni-104);
-  font-style: normal;
-  font-weight: 600;
-}
-
-span.large {
-  font-size: var(--ni-160);
-}
-
-h1 {
-  font-size: var(--ni-72);
-  font-style: normal;
-  font-weight: 600;
-}
-
-h2 {
-  font-size: var(--ni-56);
-  font-style: normal;
-  font-weight: 600;
-}
-
-h3 {
-  font-size: var(--ni-48);
-  font-style: normal;
-  font-weight: 600;
-}
-
-h4 {
-  font-size: var(--ni-40);
-  font-style: normal;
-  font-weight: 600;
-}
-
-h5 {
-  font-size: var(--ni-24);
-  font-style: normal;
-  font-weight: 600;
-}
-
-h6 {
-  font-size: var(--ni-14);
-  font-style: normal;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span.title {
+  font-size: var(--font-size-title);
   font-weight: 600;
 }
 

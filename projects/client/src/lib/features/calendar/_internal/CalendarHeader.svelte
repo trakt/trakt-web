@@ -4,7 +4,7 @@
 </script>
 
 <div class="calendar-header">
-  <h6>{m.header_calendar()}</h6>
+  <span class="title">{m.header_calendar()}</span>
   <CalendarControls />
 </div>
 

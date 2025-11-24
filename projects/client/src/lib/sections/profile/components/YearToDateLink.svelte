@@ -13,7 +13,7 @@
 <trakt-year-to-date-link>
   <Link {href}>
     <div class="ytd-link-content">
-      <h6 class="ytd-year">{currentYear}</h6>
+      <span class="bold ytd-year">{currentYear}</span>
       <YearToDateArrow />
     </div>
   </Link>

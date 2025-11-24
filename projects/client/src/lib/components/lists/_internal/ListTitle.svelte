@@ -16,9 +16,9 @@
 </script>
 
 {#snippet content()}
-  <h5 class="shadow-list-title ellipsis" data-style={style}>
+  <span class="title shadow-list-title ellipsis" data-style={style}>
     {title}
-  </h5>
+  </span>
 {/snippet}
 
 <div class="trakt-list-title">

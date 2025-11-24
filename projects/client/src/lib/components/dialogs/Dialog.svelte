@@ -37,7 +37,7 @@
     <div class="trakt-dialog-header">
       <div class="trakt-dialog-title-container">
         <div class="trakt-dialog-title">
-          <h5>{title}</h5>
+          <h1>{title}</h1>
           {#if metaInfo}
             <p class="title-meta-info bold ellipsis">{metaInfo}</p>
           {/if}

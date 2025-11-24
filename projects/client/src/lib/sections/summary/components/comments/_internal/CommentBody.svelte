@@ -28,7 +28,7 @@
       renderer: {
         paragraph: createParagraphSpoilerRenderer(comment.isSpoiler),
         heading: (tokens) => {
-          return `<h6 class="trakt-comment-heading">${tokens.text}</h6>`;
+          return `<span class="bold trakt-comment-heading">${tokens.text}</span>`;
         },
       },
     }),

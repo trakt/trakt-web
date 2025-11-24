@@ -22,7 +22,7 @@
 
 <div class="trakt-summary-episode-title">
   <Link href={UrlBuilder.show(show.slug)}>
-    <h6>{showTitle}</h6>
+    <span class="bold">{showTitle}</span>
   </Link>
   <p class="bold">{m.text_season_episode_number(episode)}</p>
 </div>

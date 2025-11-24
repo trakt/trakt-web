@@ -35,9 +35,9 @@
 </script>
 
 <div class="trakt-summary-title">
-  <h2 data-testid={TestId.SummaryMediaTitle}>
+  <h1 data-testid={TestId.SummaryMediaTitle}>
     {title}
-  </h2>
+  </h1>
 
   {#if mainCredit}
     <p class="tiny trakt-media-main-credit">
@@ -76,9 +76,7 @@
     }
   }
 
-  h2 {
-    font-size: var(--font-size-title);
-
+  h1 {
     @include for-tablet-sm-and-below {
       text-align: center;
     }
