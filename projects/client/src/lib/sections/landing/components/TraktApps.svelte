@@ -9,7 +9,7 @@
 
 <div class="trakt-apps">
   <div class="trakt-apps-header">
-    <h4>{m.header_get_trakt_app()}</h4>
+    <h4 class="uppercase">{m.header_get_trakt_app()}</h4>
     <p>{m.text_trakt_apps_description()}</p>
   </div>
   <RenderFor audience="public" device={["mobile", "tablet-sm"]}>
@@ -45,8 +45,6 @@
     h4 {
       font-size: var(--ni-32);
       font-weight: 700;
-
-      text-transform: uppercase;
     }
   }
 

@@ -64,9 +64,7 @@
         {@render icon()}
       </div>
     {/if}
-    <p class="bold uppercase ellipsis">
-      {@render text()}
-    </p>
+    {@render text()}
   {/if}
 </li>
 

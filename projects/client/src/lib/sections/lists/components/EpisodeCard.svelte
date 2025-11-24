@@ -10,7 +10,6 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { useEpisodeSpoilerImage } from "$lib/features/spoilers/useEpisodeSpoilerImage";
-  import { EpisodeComputedType } from "$lib/requests/models/EpisodeType";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
@@ -80,10 +79,7 @@
 
     {#if !isShowContext}
       <Link href={UrlBuilder.show(show.slug)}>
-        <p
-          class="trakt-card-title ellipsis"
-          class:uppercase={episode.type === EpisodeComputedType.full_season}
-        >
+        <p class="trakt-card-title ellipsis">
           {show.title}
         </p>
       </Link>
