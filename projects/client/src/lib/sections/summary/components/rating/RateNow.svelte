@@ -96,23 +96,7 @@
   </div>
 {/if}
 
-<style lang="scss">
-  @use "$style/scss/mixins/index" as *;
-
-  .trakt-rate-now {
-    height: var(--ni-40);
-
-    h6 {
-      transition: font-size calc(var(--transition-increment) * 2) ease-in-out;
-    }
-
-    @include for-mobile {
-      h6 {
-        font-size: var(--font-size-text);
-      }
-    }
-  }
-
+<style>
   .trakt-rate-now,
   .trakt-rate-actions {
     display: flex;
@@ -121,6 +105,8 @@
   }
 
   .trakt-rate-now {
+    height: var(--ni-40);
+
     position: relative;
 
     gap: var(--gap-m);
