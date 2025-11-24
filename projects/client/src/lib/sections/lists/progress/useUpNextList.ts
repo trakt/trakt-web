@@ -15,8 +15,6 @@ import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import { mediaProgressQuery } from '../../../requests/queries/sync/mediaProgressQuery.ts';
 
-const RELEASED_LIST_LIMIT = 500;
-
 export type UpNextStoreProps = PaginationParams & UpNextIntentParams & {
   type: DiscoverMode;
 };
@@ -26,10 +24,7 @@ export type ProgressEntry = UpNextEntry | MovieProgressEntry;
 function typeToQuery(props: UpNextStoreProps) {
   switch (props.type) {
     case 'movie':
-      return movieProgressQuery({
-        ...props,
-        limit: props.intent === 'start' ? RELEASED_LIST_LIMIT : props.limit,
-      }) as CreateQueryOptions<
+      return movieProgressQuery(props) as CreateQueryOptions<
         Paginatable<ProgressEntry>
       >;
     case 'show':
