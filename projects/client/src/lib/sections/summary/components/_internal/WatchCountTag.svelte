@@ -18,8 +18,8 @@
   >
     <TrackIcon />
 
+    <p class="bold uppercase no-wrap">{i18n.watchedLabel()}</p>
     {#if count > 1}
-      <p class="bold uppercase no-wrap">{i18n.watchedLabel()}</p>
       <p class="bold">·</p>
       <div transition:slide={{ axis: "x", duration: 150 }}>
         {#key count}
