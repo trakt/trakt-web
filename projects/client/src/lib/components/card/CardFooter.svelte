@@ -74,7 +74,6 @@
         color: var(--color-text-primary);
         margin: 0;
         font-weight: 500;
-        font-size: var(--font-size-text);
 
         :global(:has(~ .trakt-card-subtitle)) {
           font-weight: 600;
@@ -85,7 +84,6 @@
         color: var(--color-text-secondary);
         margin: 0;
         font-weight: 500;
-        font-size: var(--font-size-text);
       }
     }
 
