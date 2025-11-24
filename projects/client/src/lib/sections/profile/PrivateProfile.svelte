@@ -16,7 +16,7 @@
     </div>
   {/snippet}
   <div class="trakt-private-profile">
-    <p class="uppercase">{m.header_private_profile()}</p>
+    <p class="bold">{m.header_private_profile()}</p>
     <p class="trakt-profile-description">
       {m.text_private_profile_description({ username: profile.username })}
     </p>
@@ -38,10 +38,6 @@
     border-radius: var(--border-radius-l);
     padding: var(--ni-32);
     box-sizing: border-box;
-
-    p.uppercase {
-      font-weight: 700;
-    }
 
     p.trakt-profile-description {
       max-width: var(--ni-224);

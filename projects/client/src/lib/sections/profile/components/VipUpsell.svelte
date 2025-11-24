@@ -6,7 +6,7 @@
 </script>
 
 <div class="trakt-vip-upsell">
-  <p class="uppercase">
+  <p class="bold">
     {m.text_vip_upsell()}
   </p>
   <p>
@@ -41,10 +41,6 @@
 
     padding: var(--ni-24);
     box-sizing: border-box;
-
-    p.uppercase {
-      font-weight: 700;
-    }
 
     :global(.trakt-button) {
       width: fit-content;
