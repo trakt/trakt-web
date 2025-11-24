@@ -36,7 +36,7 @@
     {:else}
       <ExpandIcon />
     {/if}
-    <span class="meta-info">
+    <span class="bold">
       {comment.replyCount} replies
     </span>
   </button>

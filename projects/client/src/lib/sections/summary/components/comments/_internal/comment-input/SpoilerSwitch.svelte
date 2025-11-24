@@ -12,7 +12,7 @@
 </script>
 
 <div class="trakt-comment-spoiler">
-  <p class="secondary meta-info" class:is-spoiler={enabled}>
+  <p class="secondary bold" class:is-spoiler={enabled}>
     {m.text_spoiler()}
   </p>
   <Switch

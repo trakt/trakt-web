@@ -30,7 +30,7 @@
     {/if}
   </span>
   {#if innerText}
-    <span class="trakt-switch-text meta-info ellipsis">
+    <span class="trakt-switch-text bold ellipsis">
       {innerText}
     </span>
   {/if}

@@ -14,7 +14,7 @@
   {/each}
 
   {#if hasMoreThanMax}
-    <span class="meta-info secondary">+{diff}</span>
+    <span class="secondary">+{diff}</span>
   {/if}
 </div>
 

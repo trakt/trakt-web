@@ -30,7 +30,7 @@
   >
     {@render children()}
     {#snippet headerContent()}
-      <p class="meta-info trakt-spoiler-alert">
+      <p class="bold trakt-spoiler-alert">
         {m.text_spoiler_alert()}
         <DropIcon />
       </p>

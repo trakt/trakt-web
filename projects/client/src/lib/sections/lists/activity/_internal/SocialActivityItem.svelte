@@ -35,7 +35,7 @@
 
     {#if remainingUsersCount > 0}
       <div class="user-profile-badge has-background">
-        <p class="meta-info user-count-label">
+        <p class="bold user-count-label">
           {m.badge_text_more({ count: remainingUsersCount })}
         </p>
       </div>

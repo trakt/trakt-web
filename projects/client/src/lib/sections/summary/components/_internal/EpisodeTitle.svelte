@@ -24,7 +24,7 @@
   <Link href={UrlBuilder.show(show.slug)}>
     <h6>{showTitle}</h6>
   </Link>
-  <p class="meta-info">{m.text_season_episode_number(episode)}</p>
+  <p class="bold">{m.text_season_episode_number(episode)}</p>
 </div>
 
 <style>

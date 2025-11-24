@@ -22,7 +22,7 @@
     {#if trendDirection !== "neutral"}
       <TrendIcon direction={trendDirection} />
     {/if}
-    <p class="meta-info">
+    <p class="bold">
       {i18n.trendLabel(delta)}
     </p>
   </div>

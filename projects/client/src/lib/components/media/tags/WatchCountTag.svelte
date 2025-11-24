@@ -15,7 +15,7 @@
     --color-foreground-stem-tag="var(--color-text-watch-count-tag)"
     classList="trakt-tag-label"
   >
-    <p class="meta-info uppercase no-wrap">
+    <p class="bold uppercase no-wrap">
       {i18n.watchCountLabel()}
     </p>
   </StemTag>
@@ -27,7 +27,7 @@
   >
     {#key count}
       <p
-        class="meta-info uppercase no-wrap counter"
+        class="bold uppercase no-wrap counter"
         transition:slide={{
           easing: linear,
           axis: "y",

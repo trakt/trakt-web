@@ -23,7 +23,7 @@
   class:is-loading={isLoading}
   out:slide={{ duration: 150, axis: "y" }}
 >
-  <span class="meta-info secondary trakt-distribution-header">
+  <span class="bold secondary trakt-distribution-header">
     <ReactionIcon state="default" />{m.header_comment_reactions()}
   </span>
   <div class="trakt-reactions">

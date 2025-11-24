@@ -39,7 +39,7 @@
         <div class="trakt-dialog-title">
           <h5>{title}</h5>
           {#if metaInfo}
-            <p class="meta-info ellipsis">{metaInfo}</p>
+            <p class="title-meta-info bold ellipsis">{metaInfo}</p>
           {/if}
         </div>
         {@render badge?.()}
@@ -134,7 +134,7 @@
     display: flex;
     flex-direction: column;
 
-    p.meta-info {
+    .title-meta-info {
       color: var(--list-meta-info-color);
     }
   }

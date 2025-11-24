@@ -27,7 +27,7 @@
     {#each mediaDetails as { title, values }}
       {#if values && values.length > 0}
         <CollapsableValues category={title} {values}>
-          <p class="meta-info secondary">{title}</p>
+          <p class="bold secondary">{title}</p>
           {#snippet value(value)}
             {#if typeof value === "object"}
               <Link href={value.link}>

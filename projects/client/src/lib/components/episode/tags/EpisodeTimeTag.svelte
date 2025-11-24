@@ -5,7 +5,7 @@
 </script>
 
 <StemTag>
-  <p class="show-progress-text meta-info capitalize">
+  <p class="show-progress-text bold capitalize">
     {@render children()}
   </p>
 </StemTag>

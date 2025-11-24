@@ -4,11 +4,11 @@
 </script>
 
 <UpsellLink>
-  <span class="meta-info">{m.link_text_vip_cover_image_upsell()}</span>
+  <span class="bold">{m.link_text_vip_cover_image_upsell()}</span>
 </UpsellLink>
 
 <style>
-  .meta-info {
+  span {
     max-width: var(--ni-96);
   }
 </style>

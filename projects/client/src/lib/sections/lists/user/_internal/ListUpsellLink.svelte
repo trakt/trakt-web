@@ -4,5 +4,5 @@
 </script>
 
 <UpsellLink>
-  <span class="meta-info">{m.link_text_vip_list_upsell()}</span>
+  <span class="bold">{m.link_text_vip_list_upsell()}</span>
 </UpsellLink>

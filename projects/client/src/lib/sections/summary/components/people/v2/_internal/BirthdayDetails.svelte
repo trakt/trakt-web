@@ -19,12 +19,12 @@
     {#if isSameDayOfYear(birthday, today)}
       <Celebration />
     {/if}
-    <span class="meta-info secondary">{m.header_birthday()}</span>
+    <span class="bold secondary">{m.header_birthday()}</span>
     <p>{toHumanDay(birthday, getLocale(), "short")}</p>
   </div>
   <div class="trakt-detail-separator"></div>
   <div class="trakt-birthday-detail">
-    <span class="meta-info secondary">{m.header_age()}</span>
+    <span class="bold secondary">{m.header_age()}</span>
     <p>{getYearsDifference(birthday, today)}</p>
   </div>
 </div>

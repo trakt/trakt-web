@@ -6,7 +6,7 @@
 </script>
 
 <StemTag>
-  <p class="meta-info uppercase no-wrap">
+  <p class="bold uppercase no-wrap">
     {i18n.toPlayCount(plays)}
   </p>
 </StemTag>

@@ -5,7 +5,7 @@
 </script>
 
 <div class="trakt-filter" data-dpad-navigation={DpadNavigationType.List}>
-  <span class="meta-info">{title}</span>
+  <span class="bold">{title}</span>
   {@render children()}
 </div>
 
