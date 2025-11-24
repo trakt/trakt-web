@@ -23,13 +23,21 @@
   const fillPercent = $derived(
     isCurrentRating ? 100 : getStarFillPercentage(star, rating),
   );
+
+  const addRating = (ev: MouseEvent) => {
+    const value =
+      star.value === rating
+        ? (star.range.max + star.range.min) / 2
+        : star.value;
+    onAddRating(value, ev);
+  };
 </script>
 
 <div class="trakt-rate-button" class:has-disabled-button={isDisabled}>
   <ActionButton
     disabled={isDisabled}
     label={m.button_label_star_rating({ stars: star.index })}
-    onclick={(ev) => onAddRating(star.value, ev)}
+    onclick={addRating}
     style="ghost"
     variant="primary"
     size="small"
