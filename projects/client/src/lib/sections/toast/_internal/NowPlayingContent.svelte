@@ -27,9 +27,9 @@
           <span class="bold">{m.header_post_credits()}</span>
         </div>
       {:else}
-        <div class="trakt-now-playing-label">
+        <span class="trakt-now-playing-label">
           {m.header_now_playing()}
-        </div>
+        </span>
       {/if}
       <StopButton {nowPlaying} {title} />
     </div>
@@ -79,16 +79,8 @@
     justify-content: space-between;
   }
 
-  .trakt-now-playing-label {
-    @include for-mobile {
-      font-size: var(--font-size-text);
-    }
-  }
-
   .trakt-now-playing-title {
-    @include for-mobile {
-      font-size: var(--font-size-title);
-    }
+    font-size: var(--font-size-title);
   }
 
   .trakt-now-playing-remaining {

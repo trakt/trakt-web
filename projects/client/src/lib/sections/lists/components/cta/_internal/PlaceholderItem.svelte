@@ -111,10 +111,6 @@
 
     @include for-mobile {
       align-items: flex-start;
-
-      p {
-        font-size: var(--font-size-text);
-      }
     }
   }
 

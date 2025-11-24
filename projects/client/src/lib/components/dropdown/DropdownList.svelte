@@ -292,10 +292,6 @@
         width: calc(100% - var(--small-padding) * 2);
       }
 
-      :global(li p) {
-        font-size: var(--font-size-text);
-      }
-
       div.spacer {
         height: calc(var(--ni-32) + var(--small-padding) * 2);
       }
