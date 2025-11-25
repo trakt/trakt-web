@@ -1,12 +1,15 @@
 <script lang="ts">
+  import TagBar from "$lib/components/tags/TagBar.svelte";
   import TagContent from "$lib/components/tags/TagContent.svelte";
+  import type { Snippet } from "svelte";
 
   type ProgressTagProps = {
     progress: number;
     total?: number;
+    tags?: Snippet;
   } & ChildrenProps;
 
-  const { children, progress, total = 100 }: ProgressTagProps = $props();
+  const { children, progress, tags, total = 100 }: ProgressTagProps = $props();
 </script>
 
 <div
@@ -18,17 +21,32 @@
   aria-valuemax={total}
 >
   <TagContent>
-    <p class="bold capitalize tag-label">
-      {@render children()}
-    </p>
+    <div class="tag-content">
+      <p class="tag bold capitalize no-wrap">
+        {@render children()}
+      </p>
+
+      {#if tags}
+        <TagBar>
+          {@render tags()}
+        </TagBar>
+      {/if}
+    </div>
   </TagContent>
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index.scss" as *;
 
-  .tag-label {
+  .tag-content {
+    position: relative;
     width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: var(--gap-xs);
   }
 
   .progress-tag {
@@ -60,6 +78,10 @@
 
       position: relative;
       background: var(--color-background-cover-tag);
+      color: var(--color-text-progress-tag);
+    }
+
+    :global(.trakt-text-tag) {
       color: var(--color-text-progress-tag);
     }
   }
