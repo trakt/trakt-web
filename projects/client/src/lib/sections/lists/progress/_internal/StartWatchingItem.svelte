@@ -6,7 +6,6 @@
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
   import TagBar from "$lib/components/tags/TagBar.svelte";
   import CheckInAction from "$lib/sections/media-actions/check-in/CheckInAction.svelte";
-  import DropAction from "$lib/sections/media-actions/drop/DropAction.svelte";
   import MarkAsWatchedAction from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedAction.svelte";
   import WatchlistAction from "$lib/sections/media-actions/watchlist/WatchlistAction.svelte";
   import MediaItem from "../../components/MediaItem.svelte";
@@ -57,6 +56,11 @@
     title={entry.title}
     {...markAsWatchedProps}
   />
+  <WatchlistAction
+    {...commonActionProps}
+    type={target.type}
+    media={target.media}
+  />
 
   {#if target.type === "show"}
     <CheckInAction
@@ -65,13 +69,7 @@
       show={target.media}
       episode={target.episode}
     />
-    <DropAction {...commonActionProps} id={target.media.id} type="show" />
   {:else}
-    <WatchlistAction
-      {...commonActionProps}
-      type={target.type}
-      media={target.media}
-    />
     <CheckInAction
       {...commonActionProps}
       type={target.type}
