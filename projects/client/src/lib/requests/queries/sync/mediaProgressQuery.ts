@@ -5,9 +5,8 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
-import { type UpNextIntentRequest } from '@trakt/api';
 import z from 'zod';
-import { weave } from '../../../utils/array/weave.ts';
+import { interleaveMediaProgress } from './_internal/interleaveMediaProgress.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 import {
   mapToMovieProgressEntry,
@@ -21,7 +20,11 @@ import {
   upNextNitroRequest,
 } from './upNextNitroQuery.ts';
 
-type MediaProgressParams = PaginationParams & ApiParams & UpNextIntentRequest;
+export type MediaProgressIntent = 'continue' | 'start';
+
+type MediaProgressParams = PaginationParams & ApiParams & {
+  intent: MediaProgressIntent;
+};
 
 const MediaProgressSchema = z.union([
   UpNextEntryNitroSchema,
@@ -48,7 +51,7 @@ export const mediaProgressQuery = defineQuery({
       upNextNitroRequest(params),
       movieProgressRequest(params),
     ]),
-  mapper: ([upNextResponse, movieProgressResponse]) => {
+  mapper: ([upNextResponse, movieProgressResponse], params) => {
     const episodes = upNextResponse.body.map(mapUpNextResponse);
 
     const movieResponse = movieProgressResponse as MovieProgressSuccessResponse;
@@ -57,10 +60,10 @@ export const mediaProgressQuery = defineQuery({
       .filter(isValidProgressMovie);
 
     return {
-      entries: weave(episodes, movies).toSorted((a, b) => {
-        const dateA = a.lastWatchedAt ? a.lastWatchedAt.getTime() : 0;
-        const dateB = b.lastWatchedAt ? b.lastWatchedAt.getTime() : 0;
-        return dateB - dateA;
+      entries: interleaveMediaProgress({
+        intent: params.intent,
+        episodes,
+        movies,
       }),
       page: extractPageMeta(upNextResponse.headers),
     };
