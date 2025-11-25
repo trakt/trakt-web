@@ -12,4 +12,5 @@ export type TagIntl = {
   postCredits: (count: number) => string;
   toDay: (date: Date) => string;
   watchedLabel: () => string;
+  toRemainingDuration: (duration: number) => string;
 };

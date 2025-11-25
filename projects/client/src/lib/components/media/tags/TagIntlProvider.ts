@@ -28,4 +28,8 @@ export const TagIntlProvider: TagIntl = {
     `${m.header_post_credits()} · ${toHumanNumber(count, languageTag())}`,
   toDay: (date) => toHumanDay(date, getLocale()),
   watchedLabel: () => m.tag_text_watched(),
+  toRemainingDuration: (duration) =>
+    m.tag_text_remaining_duration({
+      duration: toHumanDuration({ minutes: duration }, languageTag()),
+    }),
 };

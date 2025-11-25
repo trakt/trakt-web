@@ -6071,6 +6071,19 @@
         "android",
         "ios"
       ]
+    },
+    "tag_text_remaining_duration": {
+      "default": "{duration} remaining",
+      "description": "Text for the tag that shows the remaining duration of an episode or movie. This should be as short as possible.",
+      "variables": {
+        "duration": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

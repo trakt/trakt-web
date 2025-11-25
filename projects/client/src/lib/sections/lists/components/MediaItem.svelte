@@ -2,8 +2,6 @@
   import ActivityTag from "$lib/components/media/tags/ActivityTag.svelte";
   import ProgressTag from "$lib/components/media/tags/ProgressTag.svelte";
   import { TagIntlProvider } from "$lib/components/media/tags/TagIntlProvider";
-  import { languageTag } from "$lib/features/i18n";
-  import { toHumanDuration } from "$lib/utils/formatting/date/toHumanDuration";
   import MediaCard from "./MediaCard.svelte";
   import type { MediaCardProps } from "./MediaCardProps";
   import MediaSummaryCard from "./MediaSummaryCard.svelte";
@@ -25,8 +23,7 @@
     {/if}
     {#if props.variant === "next"}
       <ProgressTag progress={props.progress ?? 0}>
-        {toHumanDuration({ minutes: props.minutesLeft }, languageTag())}
-        remaining
+        {TagIntlProvider.toRemainingDuration(props.minutesLeft)}
       </ProgressTag>
     {/if}
     {#if props.coverTag}
