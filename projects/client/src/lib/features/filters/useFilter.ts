@@ -2,6 +2,7 @@ import type { FilterKey } from '$lib/features/filters/models/Filter.ts';
 import { useParameters } from '$lib/features/parameters/useParameters.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { derived, readable } from 'svelte/store';
+import { useNavbarState } from '../../sections/navbar/useNavbarState.ts';
 import { useUser } from '../auth/stores/useUser.ts';
 import { FILTERS } from './_internal/constants.ts';
 import { isDifferentFilterSet } from './_internal/isDifferentFilterSet.ts';
@@ -12,6 +13,7 @@ export function useFilter() {
   const { search } = useParameters();
   const { user } = useUser();
   const { storedFilters } = useStoredFilters();
+  const { state } = useNavbarState();
 
   return {
     filters: readable(FILTERS),
@@ -27,28 +29,39 @@ export function useFilter() {
       });
     },
     hasActiveFilter: derived(
-      [search, storedFilters],
-      ([$search, $storedFilters]) => {
+      [search, storedFilters, state],
+      ([$search, $storedFilters, $state]) => {
+        if (!$state.hasFilters) {
+          return false;
+        }
+
         const defaultFilters = $storedFilters ?? {};
         return isDifferentFilterSet(defaultFilters, $search);
       },
     ),
-    filterMap: derived([search, user], ([$search, $user]) => {
-      return FILTERS
-        .filter((filter) => {
-          const hasParameter = Boolean($search.get(filter.key));
-          const isToggle = filter.type === 'toggle';
+    filterMap: derived(
+      [search, user, state],
+      ([$search, $user, $state]) => {
+        if (!$state.hasFilters) {
+          return {};
+        }
 
-          return hasParameter || isToggle;
-        })
-        .reduce((filterMap, filter) => {
-          filterMap[filter.key] = mapToSearchParamValue({
-            filter,
-            value: $search.get(filter.key),
-            user: $user,
-          });
-          return filterMap;
-        }, {} as Record<string, string>);
-    }),
+        return FILTERS
+          .filter((filter) => {
+            const hasParameter = Boolean($search.get(filter.key));
+            const isToggle = filter.type === 'toggle';
+
+            return hasParameter || isToggle;
+          })
+          .reduce((filterMap, filter) => {
+            filterMap[filter.key] = mapToSearchParamValue({
+              filter,
+              value: $search.get(filter.key),
+              user: $user,
+            });
+            return filterMap;
+          }, {} as Record<string, string>);
+      },
+    ),
   };
 }
