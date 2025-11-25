@@ -5,6 +5,7 @@ import { listItemsQuery } from '$lib/requests/queries/lists/listItemsQuery.ts';
 import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import type { Sorting } from './models/Sorting.ts';
 
 const LIST_LIMIT = 25;
 
@@ -19,6 +20,7 @@ export type ListParams = {
 type UseListItemsProps = PaginationParams & FilterParams & {
   list: ListParams;
   type?: DiscoverMode;
+  sorting?: Sorting | Nil;
 };
 
 // FIXME: remove when official lists are sluggable
@@ -36,13 +38,15 @@ function mapListParamsToQueryParams(list: ListParams) {
 }
 
 function listToQuery(
-  { list, limit, type, page, filter }: UseListItemsProps,
+  { list, limit, type, page, filter, sorting }: UseListItemsProps,
 ) {
   const commonParams = {
     type: type === 'media' ? undefined : type,
     page,
     filter,
     limit: limit ?? LIST_LIMIT,
+    sortBy: sorting?.sortBy.value,
+    sortHow: sorting?.sortHow,
   };
 
   const params = mapListParamsToQueryParams(list);

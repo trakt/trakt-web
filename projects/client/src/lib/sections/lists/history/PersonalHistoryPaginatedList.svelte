@@ -17,7 +17,7 @@
 
 <DrilledMediaList
   title={m.list_title_history()}
-  id={"view-all-personal-history-list"}
+  id={`view-all-personal-history-list-${mode ?? "all"}`}
   type="episode"
   cardOrientation="landscape"
   useList={({ limit, page }: { limit: number; page: number }) =>

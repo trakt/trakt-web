@@ -9,26 +9,31 @@
   import PopularListItem from "../popular/PopularListItem.svelte";
   import PopupActions from "./_internal/PopupActions.svelte";
   import ListActions from "./ListActions.svelte";
+  import type { Sorting } from "./models/Sorting";
   import { useListItems } from "./useListItems";
 
   type UserListProps = {
     title: string;
     type?: MediaType;
     list: MediaListSummary;
+    sorting?: Sorting | Nil;
   };
 
-  const { title, type, list }: UserListProps = $props();
+  const { title, type, list, sorting }: UserListProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
   const { filterMap } = useFilter();
 
   const listCacheId = $derived.by(() => {
+    const sortKey = sorting
+      ? `${sorting.sortBy.value}-${sorting.sortHow}`
+      : "default";
     if (list.user?.slug) {
-      return `${list.user.slug}-${list.slug}`;
+      return `${list.user.slug}-${list.slug}-${sortKey}`;
     }
 
-    return `${list.id}`;
+    return `${list.id}-${sortKey}`;
   });
 </script>
 
@@ -37,7 +42,7 @@
   {title}
   {type}
   filter={$filterMap}
-  useList={(params) => useListItems({ list, ...params })}
+  useList={(params) => useListItems({ list, sorting, ...params })}
 >
   {#snippet item(media)}
     <PopularListItem type={media.type} media={media.entry} {style}>

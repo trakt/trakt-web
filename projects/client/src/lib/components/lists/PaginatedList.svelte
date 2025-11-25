@@ -5,11 +5,12 @@
   import { writable } from "svelte/store";
   import type { PaginatedListProps } from "./models/PaginatedListProps";
 
-  const { useList, type, filter, items }: PaginatedListProps<T, M> = $props();
+  const { id, useList, type, filter, items }: PaginatedListProps<T, M> =
+    $props();
 
   const currentPage = writable(1);
   const loadedPages = writable<Map<number, T[]>>(new Map());
-  const initialType = writable(type);
+  const initialId = writable(id);
 
   const { list, page, isLoading } = $derived(
     useList({
@@ -21,10 +22,10 @@
   );
 
   $effect(() => {
-    if (type !== $initialType) {
+    if (id !== $initialId) {
       currentPage.set(1);
       loadedPages.set(new Map());
-      initialType.set(type);
+      initialId.set(id);
     }
   });
 

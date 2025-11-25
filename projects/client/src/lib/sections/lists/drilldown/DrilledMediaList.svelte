@@ -17,14 +17,16 @@
     useList,
     actions,
     cardOrientation = "portrait",
+    id,
     ...props
   }: DrilledMediaListProps = $props();
 </script>
 
-<PaginatedList {type} {filter} {useList}>
+<PaginatedList {type} {id} {filter} {useList}>
   {#snippet items(items)}
     <GridList
       {...props}
+      {id}
       {actions}
       {items}
       --width-item={mediaCardWidthResolver(cardOrientation)}

@@ -18,6 +18,8 @@ export function mapToMediaListSummary(
     user: mapToUserProfile(listResponse.user),
     count: listResponse.item_count,
     updatedAt: new Date(listResponse.updated_at),
+    sortHow: listResponse.sort_how,
+    sortBy: listResponse.sort_by,
     posters,
   };
 }

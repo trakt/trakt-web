@@ -13,6 +13,7 @@
 
 <PaginatedList
   {type}
+  id={`view-all-personal-lists-${type}-${$mode}`}
   useList={(params) =>
     usePersonalListsSummary({
       ...params,
