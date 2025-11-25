@@ -25,10 +25,8 @@
     {/if}
     {#if props.variant === "next"}
       <ProgressTag progress={props.progress ?? 0}>
-        <span class="no-wrap media-progress">
-          {toHumanDuration({ minutes: props.minutesLeft }, languageTag())}
-          remaining
-        </span>
+        {toHumanDuration({ minutes: props.minutesLeft }, languageTag())}
+        remaining
       </ProgressTag>
     {/if}
     {#if props.coverTag}
@@ -58,12 +56,6 @@
 {/if}
 
 <style>
-  .media-progress {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
   .trakt-media-tag {
     width: 100%;
 
