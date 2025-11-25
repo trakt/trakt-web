@@ -1,7 +1,10 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
-import type { UpNextIntentParams } from '$lib/requests/models/UpNextIntentParams.ts';
+import {
+  type MediaProgressIntent,
+  mediaProgressQuery,
+} from '$lib/requests/queries/sync/mediaProgressQuery.ts';
 import {
   type MovieProgressEntry,
   movieProgressQuery,
@@ -13,10 +16,10 @@ import {
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
-import { mediaProgressQuery } from '../../../requests/queries/sync/mediaProgressQuery.ts';
 
-export type UpNextStoreProps = PaginationParams & UpNextIntentParams & {
+export type UpNextStoreProps = PaginationParams & {
   type: DiscoverMode;
+  intent: MediaProgressIntent;
 };
 
 export type ProgressEntry = UpNextEntry | MovieProgressEntry;

@@ -2,6 +2,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
+  import type { MediaProgressIntent } from "$lib/requests/queries/sync/mediaProgressQuery";
   import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
@@ -11,7 +12,7 @@
   import StartWatchingItem from "./_internal/StartWatchingItem.svelte";
   import { useUpNextList } from "./useUpNextList";
 
-  const { intent }: { intent: "continue" | "start" } = $props();
+  const { intent }: { intent: MediaProgressIntent } = $props();
 
   const { user } = useUser();
   const { mode } = useDiscover();
