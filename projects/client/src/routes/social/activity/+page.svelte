@@ -22,8 +22,5 @@
     {/snippet}
   </NavbarStateSetter>
 
-  <ActivityPaginatedList
-    title={m.list_title_social_activity()}
-    activityType="social"
-  />
+  <ActivityPaginatedList title={m.list_title_social_activity()} />
 </TraktPage>

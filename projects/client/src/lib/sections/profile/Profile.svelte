@@ -2,6 +2,7 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import * as m from "$lib/features/i18n/messages";
   import FavoritesList from "../lists/FavoritesList.svelte";
+  import PersonalHistoryList from "../lists/history/PersonalHistoryList.svelte";
   import RecentlyWatchedList from "../lists/history/RecentlyWatchedList.svelte";
   import LibraryList from "../lists/library/LibraryList.svelte";
   import PersonalLists from "../lists/user/PersonalLists.svelte";
@@ -36,11 +37,11 @@
   <ProfileAbout about={profile.about} />
 </ProfileContainer>
 
-<RecentlyWatchedList
-  drilldownLabel={m.button_label_view_all_history()}
-  title={m.list_title_history()}
-  {slug}
-/>
+{#if $isMe}
+  <PersonalHistoryList />
+{:else}
+  <RecentlyWatchedList title={m.list_title_history()} {slug} />
+{/if}
 
 <FavoritesList {slug} title={m.list_title_favorites()} />
 
