@@ -2277,6 +2277,14 @@
           "type": "number"
         }
       }
+    },
+    "tag_text_remaining_duration": {
+      "default": "{duration} tilbage",
+      "variables": {
+        "duration": {
+          "type": "string"
+        }
+      }
     }
   }
 }
