@@ -28,9 +28,8 @@
   }: EpisodeCardProps = $props();
 
   const isShowContext = $derived("context" in rest && rest.context === "show");
-  const isActivity = $derived(rest.variant === "activity");
 
-  const src = useEpisodeSpoilerImage({ episode, show });
+  const src = $derived(useEpisodeSpoilerImage({ episode, show }));
 
   const { track } = useTrack(AnalyticsEvent.SummaryDrilldown);
 </script>
