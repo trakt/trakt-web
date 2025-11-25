@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { useDiscover } from "$lib/features/discover/useDiscover";
   import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import Banner from "$lib/sections/banner/Banner.svelte";
@@ -8,10 +9,14 @@
   import TraktPage from "$lib/sections/layout/TraktPage.svelte";
   import TraktPageCoverSetter from "$lib/sections/layout/TraktPageCoverSetter.svelte";
   import ActivityList from "$lib/sections/lists/activity/ActivityList.svelte";
+  import PersonalHistoryList from "$lib/sections/lists/history/PersonalHistoryList.svelte";
   import UpNextList from "$lib/sections/lists/progress/UpNextList.svelte";
   import UpcomingList from "$lib/sections/lists/UpcomingList.svelte";
   import NavbarStateSetter from "$lib/sections/navbar/NavbarStateSetter.svelte";
   import { DEFAULT_SHARE_COVER } from "$lib/utils/constants";
+
+  // FIXME: move to PersonalHistoryList when Profile also supports discover mode
+  const { mode } = useDiscover();
 </script>
 
 <TraktPage
@@ -32,8 +37,8 @@
   <UpNextList intent="continue" />
   <UpNextList intent="start" />
   <UpcomingList />
-  <ActivityList activityType="personal" />
-  <ActivityList activityType="social" />
+  <PersonalHistoryList mode={$mode} />
+  <ActivityList />
 </TraktPage>
 
 <RenderFor audience="public">
