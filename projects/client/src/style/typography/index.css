@@ -73,4 +73,8 @@ h6 {
   &.tag {
     font-size: var(--font-size-tag);
   }
+
+  &.no-wrap {
+    white-space: nowrap;
+  }
 }
