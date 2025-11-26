@@ -1,4 +1,4 @@
-import type { DatePart } from '../models/DatePart.ts';
+import type { DatePart } from '$lib/models/DatePart.ts';
 
 export function buildLocalDate(parts: DatePart): Date {
   return new Date(
