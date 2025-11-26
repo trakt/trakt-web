@@ -1,50 +1,70 @@
 <script lang="ts">
+  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
+  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
+  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
   import { useMonthToDate } from "$lib/sections/profile/stores/useMonthToDate";
-  import { getPreviousMonth } from "$lib/utils/date/getPreviousMonth";
   import { slide } from "svelte/transition";
   import MonthInReviewLink from "../../components/MonthInReviewLink.svelte";
   import MonthInReviewStats from "./_internal/MonthInReviewStats.svelte";
   import { useMonthInReview } from "./_internal/useMonthInReview";
 
+  const { month, onDismiss }: { month: Date; onDismiss: () => void } = $props();
   const { user } = useUser();
-
-  const now = new Date();
-  const previousMonth = getPreviousMonth(now);
 
   const { review } = $derived(
     useMonthInReview({
       slug: $user.slug,
-      month: previousMonth.getMonth() + 1,
-      year: previousMonth.getFullYear(),
+      month: month.getMonth() + 1,
+      year: month.getFullYear(),
     }),
   );
 
   const { monthToDate, isLoading: isLoadingMonthToDate } = $derived(
     useMonthToDate({ slug: $user.slug }),
   );
-
-  // FIXME: dismissable
 </script>
+
+{#snippet dismissButton()}
+  <ActionButton
+    onclick={onDismiss}
+    label={m.button_label_dismiss()}
+    size="small"
+    style="ghost"
+  >
+    <CloseIcon />
+  </ActionButton>
+{/snippet}
 
 <RenderFor audience="vip">
   {#if $review && !$isLoadingMonthToDate}
     <div class="trakt-month-in-review" transition:slide={{ duration: 150 }}>
       <ReviewContent coverSrc={$monthToDate.coverUrl} variant="gradient">
         {#snippet header()}
-          <div class="trakt-mir-header">
-            <CalendarIcon />
-            <p class="bold uppercase">Month in review</p>
+          <div class="trakt-mir-header-container">
+            <div class="trakt-mir-header">
+              <CalendarIcon />
+              <p class="bold uppercase">Month in review</p>
+            </div>
+
+            <RenderFor audience="vip" device={["mobile", "tablet-sm"]}>
+              {@render dismissButton()}
+            </RenderFor>
           </div>
         {/snippet}
 
         <MonthInReviewStats review={$review} />
 
         {#snippet footer()}
-          <MonthInReviewLink slug={$user.slug} date={previousMonth} />
+          <div class="trakt-mir-footer">
+            <MonthInReviewLink slug={$user.slug} date={month} />
+            <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
+              {@render dismissButton()}
+            </RenderFor>
+          </div>
         {/snippet}
       </ReviewContent>
     </div>
@@ -55,6 +75,10 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-month-in-review {
+    :global(.trakt-action-button) {
+      color: var(--shade-10);
+    }
+
     :global(.trakt-review-content) {
       --review-content-height: var(--ni-56);
       flex-direction: row;
@@ -92,9 +116,16 @@
     }
   }
 
-  .trakt-mir-header {
+  .trakt-mir-header-container {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .trakt-mir-header,
+  .trakt-mir-footer {
     display: flex;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: var(--gap-m);
   }
 </style>
