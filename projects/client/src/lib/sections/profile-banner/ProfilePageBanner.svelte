@@ -95,6 +95,13 @@
     }
   }
 
+  .profile-user-details {
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--gap-micro);
+  }
+
   .profile-info {
     display: flex;
     flex-direction: column;
