@@ -1,5 +1,5 @@
 <script lang="ts">
-  import YearToDateArrow from "$lib/components/icons/YearToDateArrow.svelte";
+  import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
   import { languageTag } from "$lib/features/i18n";
   import { toHumanMonth } from "$lib/utils/formatting/date/toHumanMonth";
@@ -16,7 +16,7 @@
 
 <div class="trakt-month-in-review-link">
   <Link {href}>
-    <YearToDateArrow />
+    <ExternalLinkIcon />
     <p class="uppercase bold">{previousMonth}</p>
   </Link>
 </div>

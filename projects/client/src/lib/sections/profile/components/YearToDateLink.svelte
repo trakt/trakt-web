@@ -1,7 +1,7 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import YearToDateArrow from "../../../components/icons/YearToDateArrow.svelte";
+  import ExternalLinkIcon from "../../../components/icons/ExternalLinkIcon.svelte";
 
   const { slug }: { slug: string } = $props();
 
@@ -14,7 +14,7 @@
   <Link {href}>
     <div class="ytd-link-content">
       <span class="bold ytd-year">{currentYear}</span>
-      <YearToDateArrow />
+      <ExternalLinkIcon />
     </div>
   </Link>
 </trakt-year-to-date-link>
