@@ -1,11 +1,12 @@
 <script lang="ts">
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
   import { useMonthToDate } from "$lib/sections/profile/stores/useMonthToDate";
   import { getPreviousMonth } from "$lib/utils/date/getPreviousMonth";
-  import MonthInReviewLink from "./_internal/MonthInReviewLink.svelte";
+  import { slide } from "svelte/transition";
+  import MonthInReviewLink from "../../components/MonthInReviewLink.svelte";
   import MonthInReviewStats from "./_internal/MonthInReviewStats.svelte";
   import { useMonthInReview } from "./_internal/useMonthInReview";
 
@@ -26,33 +27,26 @@
     useMonthToDate({ slug: $user.slug }),
   );
 
-  // FIXME: dismissable & shared design with MonthToDate
+  // FIXME: dismissable
 </script>
 
 <RenderFor audience="vip">
-  {#if $review}
-    <div class="trakt-month-in-review">
-      {#if !$isLoadingMonthToDate}
-        <div class="trakt-mir-cover-image">
-          <CrossOriginImage
-            loading="eager"
-            src={$monthToDate.coverUrl}
-            alt={"Background for ${$monthToDate.firstWatchedTitle}"}
-            animate={false}
-          />
-        </div>
-      {/if}
-
-      <div class="trakt-mir-content">
-        <div class="trakt-mir-header">
-          <CalendarIcon />
-          <p>Month in review</p>
-        </div>
+  {#if $review && !$isLoadingMonthToDate}
+    <div class="trakt-month-in-review" transition:slide={{ duration: 150 }}>
+      <ReviewContent coverSrc={$monthToDate.coverUrl} variant="gradient">
+        {#snippet header()}
+          <div class="trakt-mir-header">
+            <CalendarIcon />
+            <p class="bold uppercase">Month in review</p>
+          </div>
+        {/snippet}
 
         <MonthInReviewStats review={$review} />
-      </div>
 
-      <MonthInReviewLink slug={$user.slug} date={previousMonth} />
+        {#snippet footer()}
+          <MonthInReviewLink slug={$user.slug} date={previousMonth} />
+        {/snippet}
+      </ReviewContent>
     </div>
   {/if}
 </RenderFor>
@@ -60,104 +54,47 @@
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
-  .trakt-month-in-review,
-  .trakt-mir-content,
-  .trakt-mir-header {
-    display: flex;
-    align-items: center;
-  }
-
   .trakt-month-in-review {
-    --mir-content-gap: var(--gap-l);
-    --mir-border-radius: var(--border-radius-l);
+    :global(.trakt-review-content) {
+      --review-content-height: var(--ni-56);
+      flex-direction: row;
+    }
 
-    position: relative;
-    z-index: var(--layer-base);
+    :global(.trakt-review-content-cover-image) {
+      width: 25%;
+      mask-image: linear-gradient(90deg, #000 0%, #000 75%, transparent 100%);
+    }
 
-    justify-content: space-between;
-    gap: var(--mir-content-gap);
-
-    height: var(--ni-56);
-
-    box-sizing: border-box;
-    padding: var(--ni-8) var(--ni-18);
-    margin-left: var(--layout-distance-side);
-    margin-right: var(--layout-distance-side);
-
-    border-radius: var(--mir-border-radius);
-
-    color: var(--shade-10);
-    background: radial-gradient(
-      60.59% 305.37% at 100% 100%,
-      var(--purple-500) 0%,
-      var(--shade-900) 100%
-    );
-
-    transition: var(--transition-increment) ease-in-out;
-    transition-property: background, height, padding, gap;
+    :global(.trakt-review-content-footer) {
+      margin-left: auto;
+    }
 
     @include for-tablet-sm-and-below {
-      --mir-content-gap: var(--gap-m);
-
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: normal;
-
-      height: var(--ni-128);
-      padding: var(--ni-14);
-
-      background: radial-gradient(
-        78.23% 78.23% at 0% 100%,
-        var(--purple-500) 0%,
-        var(--shade-900) 100%
-      );
-
-      .trakt-mir-content {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .trakt-mir-cover-image {
+      :global(.trakt-review-content-cover-image) {
         width: 100%;
         mask-image: none;
       }
+
+      :global(.trakt-review-content-footer) {
+        margin-left: 0;
+      }
+
+      :global(.trakt-review-content) {
+        --review-content-height: var(--ni-148);
+        flex-direction: column;
+
+        background: radial-gradient(
+          78.23% 78.23% at 0% 100%,
+          var(--purple-500) 0%,
+          var(--shade-900) 100%
+        );
+      }
     }
   }
 
   .trakt-mir-header {
+    display: flex;
+    align-items: center;
     gap: var(--gap-xs);
-
-    :global(svg) {
-      width: var(--ni-18);
-      height: var(--ni-18);
-    }
-  }
-
-  .trakt-mir-content {
-    transition: gap var(--transition-increment) ease-in-out;
-    gap: var(--mir-content-gap);
-  }
-
-  .trakt-mir-cover-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 25%;
-    height: 100%;
-
-    overflow: hidden;
-    border-radius: var(--mir-border-radius);
-    z-index: var(--layer-background);
-
-    mask-image: linear-gradient(90deg, #000 0%, #000 75%, transparent 100%);
-
-    :global(img) {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      opacity: 0.2;
-    }
   }
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { isFirstWeekOfMonth } from "$lib/utils/date/isFirstWeekOfMonth";
+  import BannerContainer from "./_internal/BannerContainer.svelte";
   import MonthInReview from "./month-in-review/MonthInReview.svelte";
 
   const now = new Date();
@@ -7,5 +8,7 @@
 </script>
 
 {#if isFirstWeek}
-  <MonthInReview />
+  <BannerContainer>
+    <MonthInReview />
+  </BannerContainer>
 {/if}
