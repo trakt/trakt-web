@@ -1,5 +1,6 @@
 import { languageTag } from '$lib/features/i18n/index.ts';
 import * as m from '$lib/features/i18n/messages.ts';
+import { isMaxDate } from '$lib/utils/date/isMaxDate.ts';
 import { toHumanDuration } from '$lib/utils/formatting/date/toHumanDuration.ts';
 import { toTranslatedGenre } from '$lib/utils/formatting/string/toTranslatedGenre.ts';
 import type { MediaSummaryEntry } from '../media/models/MediaSummaryEntry.ts';
@@ -42,7 +43,8 @@ function mapToGenre(props: MapToSubtitleProps) {
 }
 
 function mapToYear(props: MapToSubtitleProps) {
-  return props.type === 'episode' ? props.episode.year : props.media.year;
+  const item = props.type === 'episode' ? props.episode : props.media;
+  return isMaxDate(item.airDate) ? m.tag_text_tba() : item.year;
 }
 
 export function mapToSummarySubtitle(props: MapToSubtitleProps) {
