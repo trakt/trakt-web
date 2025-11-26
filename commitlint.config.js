@@ -84,6 +84,7 @@ module.exports = {
         'portal',
         'pr_gate',
         'profile',
+        'promotions',
         'pwa',
         'query',
         'rating',
