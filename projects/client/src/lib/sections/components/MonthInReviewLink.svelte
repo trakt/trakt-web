@@ -16,8 +16,8 @@
 
 <div class="trakt-month-in-review-link">
   <Link {href}>
-    <p class="uppercase bold">{previousMonth}</p>
     <YearToDateArrow />
+    <p class="uppercase bold">{previousMonth}</p>
   </Link>
 </div>
 
@@ -29,11 +29,15 @@
       display: flex;
       align-items: center;
       gap: var(--gap-xs);
+
+      color: var(--shade-10);
     }
 
     :global(svg) {
       width: var(--ni-18);
       height: var(--ni-18);
+
+      color: var(--shade-10);
     }
   }
 </style>
