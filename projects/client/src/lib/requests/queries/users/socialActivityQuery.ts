@@ -16,8 +16,10 @@ import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SocialActivityResponse } from '@trakt/api';
 import { coalesceSocialActivities } from '../../_internal/coalesceSocialActivities.ts';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 
-type SocialActivityParams = PaginationParams & ApiParams;
+type SocialActivityParams = PaginationParams & ApiParams & FilterParams;
 
 function mapToSocialActivity(
   response: SocialActivityResponse,
@@ -46,7 +48,7 @@ function mapToSocialActivity(
 }
 
 const socialActivityRequest = (
-  { fetch, limit, page }: SocialActivityParams,
+  { fetch, limit, page, filter }: SocialActivityParams,
 ) =>
   api({ fetch })
     .users
@@ -59,13 +61,20 @@ const socialActivityRequest = (
         extended: 'full,images',
         limit,
         page,
+        ...filter,
       },
     });
 
 export const socialActivityQuery = defineQuery({
   key: 'socialActivity',
   invalidations: [InvalidateAction.User.Follow],
-  dependencies: (params) => [params.limit, params.page],
+  dependencies: (
+    params,
+  ) => [
+    params.limit,
+    params.page,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: socialActivityRequest,
   mapper: (response) => {
     // FIXME: automatically fetch more if coalesced

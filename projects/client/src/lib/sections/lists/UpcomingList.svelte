@@ -2,6 +2,7 @@
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import CalendarItem from "$lib/features/calendar/CalendarItem.svelte";
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { useVarToPixels } from "$lib/stores/css/useVarToPixels";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -15,7 +16,11 @@
 
   const { mode } = useDiscover();
 
-  const { upcoming, isLoading } = $derived(useUpcomingItems($mode));
+  const { filterMap } = useFilter();
+
+  const { upcoming, isLoading } = $derived(
+    useUpcomingItems({ type: $mode, filter: $filterMap }),
+  );
 
   const cta = $derived({
     type: "upcoming" as const,

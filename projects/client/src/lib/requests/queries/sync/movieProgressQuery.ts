@@ -11,7 +11,9 @@ import type {
   UpNextIntentRequest,
 } from '@trakt/api';
 import z from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 
@@ -29,7 +31,11 @@ export const MovieProgressSchema = MovieEntrySchema.merge(z.object({
 }));
 export type MovieProgressEntry = z.infer<typeof MovieProgressSchema>;
 
-type MovieProgressParams = PaginationParams & ApiParams & UpNextIntentRequest;
+type MovieProgressParams =
+  & PaginationParams
+  & ApiParams
+  & UpNextIntentRequest
+  & FilterParams;
 
 const mapToInProgressMovie = (response: MovieProgressResponse) => {
   const runtime = response.movie.runtime ?? 0;
@@ -80,7 +86,7 @@ export type MovieProgressResponseType = MovieProgressSuccessResponse | {
 };
 
 export const movieProgressRequest = (
-  { fetch, limit, page, intent }: MovieProgressParams,
+  { fetch, limit, page, intent, filter }: MovieProgressParams,
 ): Promise<MovieProgressResponseType> => {
   // FIXME: switch to actual movie progress endpoints once available
   if (intent === 'start') {
@@ -97,6 +103,7 @@ export const movieProgressRequest = (
           extended: 'full,images,colors',
           page,
           limit,
+          ...filter,
         },
       });
   }
@@ -109,6 +116,7 @@ export const movieProgressRequest = (
         page,
         limit,
         extended: 'full,images',
+        ...filter,
       },
     });
 };
@@ -122,7 +130,12 @@ export const movieProgressQuery = defineQuery({
   ],
   dependencies: (
     params: MovieProgressParams,
-  ) => [params.page, params.limit, params.intent],
+  ) => [
+    params.page,
+    params.limit,
+    params.intent,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: movieProgressRequest,
   mapper: (queryResponse) => {
     const response = queryResponse as MovieProgressSuccessResponse;

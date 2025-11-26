@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import DrilledMediaList from "$lib/sections/lists/drilldown/DrilledMediaList.svelte";
   import { useUpNextList } from "$lib/sections/lists/progress/useUpNextList";
@@ -14,21 +15,20 @@
 
   const style = $derived($isMobile ? "summary" : "cover");
   const { mode } = useDiscover();
+  const { filterMap } = useFilter();
 </script>
 
 <DrilledMediaList
   id={`view-all-up-next-${$mode}-${intent}`}
   type={$mode}
   cardOrientation={intent === "start" ? "portrait" : "landscape"}
-  useList={(params) =>
+  filter={$filterMap}
+  useList={(listParams) =>
     useStablePaginated({
-      ...params,
-      type: $mode,
+      ...listParams,
       useList: (params) =>
         useUpNextList({
-          limit: params.limit,
-          page: params.page,
-          type: $mode,
+          ...params,
           intent,
         }),
       compareFn: (l, r) => {

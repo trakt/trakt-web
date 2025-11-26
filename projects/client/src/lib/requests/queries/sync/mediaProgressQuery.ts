@@ -6,6 +6,8 @@ import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import z from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 import { interleaveMediaProgress } from './_internal/interleaveMediaProgress.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 import {
@@ -22,7 +24,7 @@ import {
 
 export type MediaProgressIntent = 'continue' | 'start';
 
-type MediaProgressParams = PaginationParams & ApiParams & {
+type MediaProgressParams = PaginationParams & ApiParams & FilterParams & {
   intent: MediaProgressIntent;
 };
 
@@ -45,7 +47,12 @@ export const mediaProgressQuery = defineQuery({
   ],
   dependencies: (
     params: MediaProgressParams,
-  ) => [params.page, params.limit, params.intent],
+  ) => [
+    params.page,
+    params.limit,
+    params.intent,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: (params) =>
     Promise.all([
       upNextNitroRequest(params),

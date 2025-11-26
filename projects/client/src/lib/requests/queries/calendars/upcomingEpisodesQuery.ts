@@ -7,12 +7,17 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { EpisodeEntrySchema } from '../../models/EpisodeEntry.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 
-export type CalendarShowsParams = {
-  startDate: string;
-  days: number;
-} & ApiParams;
+export type CalendarShowsParams =
+  & {
+    startDate: string;
+    days: number;
+  }
+  & ApiParams
+  & FilterParams;
 
 export const UpcomingEpisodeEntrySchema = EpisodeEntrySchema.merge(z.object({
   show: ShowEntrySchema,
@@ -20,13 +25,14 @@ export const UpcomingEpisodeEntrySchema = EpisodeEntrySchema.merge(z.object({
 export type UpcomingEpisodeEntry = z.infer<typeof UpcomingEpisodeEntrySchema>;
 
 export const upcomingEpisodesRequest = (
-  { fetch, startDate, days }: CalendarShowsParams,
+  { fetch, startDate, days, filter }: CalendarShowsParams,
 ) =>
   api({ fetch })
     .calendars
     .shows({
       query: {
         extended: 'full,images',
+        ...filter,
       },
       params: {
         target: 'my',
@@ -43,7 +49,13 @@ export const upcomingEpisodesQuery = defineQuery({
     InvalidateAction.MarkAsWatched('show'),
     InvalidateAction.Drop('show'),
   ],
-  dependencies: (params) => [params.startDate, params.days],
+  dependencies: (
+    params,
+  ) => [
+    params.startDate,
+    params.days,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: upcomingEpisodesRequest,
   mapper: (response) => {
     const episodes = response.body.map((item) => ({
