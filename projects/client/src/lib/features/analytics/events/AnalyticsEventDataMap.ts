@@ -28,6 +28,7 @@ type CoverImageType = { type: ExtendedMediaType };
 type DiscoverType = SourceType & { mode: DiscoverMode };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 type LinkType = SourceType & { target: string };
+type BannerDismissType = { id: string; value: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -72,4 +73,6 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.CalendarPeriod]: CalendarType;
 
   [AnalyticsEvent.SeasonalFilter]: SeasonalFilterType;
+
+  [AnalyticsEvent.BannerDismiss]: BannerDismissType;
 };
