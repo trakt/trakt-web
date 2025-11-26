@@ -1,19 +1,27 @@
 <script lang="ts">
   import ExternalLinkIcon from "$lib/components/icons/ExternalLinkIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
+  import type { Promotion } from "$lib/features/promotions/models/Promotion";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import DealEnd from "./DealEnd.svelte";
 
-  const { endDate }: { endDate: Date } = $props();
+  const { promotion }: { promotion: Promotion } = $props();
+  const { track } = useTrack(AnalyticsEvent.Link);
 </script>
 
 <div class="trakt-black-friday-claim-offer">
   <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
-    <DealEnd {endDate} />
+    <DealEnd endDate={promotion.end} />
   </RenderFor>
 
-  <Link href={UrlBuilder.vip()} target="_blank">
+  <Link
+    href={UrlBuilder.vip()}
+    target="_blank"
+    onclick={() => track({ source: promotion.id, target: UrlBuilder.vip() })}
+  >
     <ExternalLinkIcon size="small" />
     <span class="no-wrap">Claim offer</span>
   </Link>
