@@ -17,6 +17,9 @@
       src={$cover.data.src}
       alt={`Background for ${$cover.data.type}`}
     />
+    {#if $cover.data.type === "main"}
+      <div class="trakt-background-cover-image-overlay"></div>
+    {/if}
   </div>
 {/if}
 
@@ -79,6 +82,18 @@
         left: -60%;
       }
     }
+  }
+
+  .trakt-background-cover-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--purple-700);
+    mix-blend-mode: color-dodge;
   }
 
   .trakt-background-cover-image {
