@@ -47,7 +47,11 @@
 
         {#snippet footer()}
           <div class="trakt-mir-footer">
-            <MonthInReviewLink slug={$user.slug} date={month} />
+            <MonthInReviewLink
+              slug={$user.slug}
+              date={month}
+              source="mir-banner"
+            />
             <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
               <DismissButton {onDismiss} />
             </RenderFor>

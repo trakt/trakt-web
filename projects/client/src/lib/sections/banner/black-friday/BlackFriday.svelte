@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Promotion } from "$lib/features/promotions/models/Promotion";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
   import BlackFridayContent from "./_internal/BlackFridayContent.svelte";
@@ -6,16 +7,18 @@
 
   import gift from "./assets/black_friday_gift.png";
 
-  const { onDismiss, endDate }: { onDismiss: () => void; endDate: Date } =
-    $props();
+  const {
+    onDismiss,
+    promotion,
+  }: { onDismiss: () => void; promotion: Promotion } = $props();
 </script>
 
 <RenderFor audience="all">
   <div class="trakt-black-friday-banner">
-    <BlackFridayContent {onDismiss} {endDate} />
+    <BlackFridayContent {onDismiss} endDate={promotion.end} />
 
     <div class="trakt-black-friday-offer">
-      <ClaimOfferLink {endDate} />
+      <ClaimOfferLink {promotion} />
 
       <RenderFor audience="all" device={["desktop", "tablet-lg"]}>
         <DismissButton {onDismiss} />

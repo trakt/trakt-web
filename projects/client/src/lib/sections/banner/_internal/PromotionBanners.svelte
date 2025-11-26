@@ -17,7 +17,7 @@
   {#if !$isDismissed}
     <BannerContainer>
       {#if promotion.id === "black-friday"}
-        <BlackFriday onDismiss={dismiss} endDate={promotion.end} />
+        <BlackFriday onDismiss={dismiss} {promotion} />
       {/if}
     </BannerContainer>
   {/if}

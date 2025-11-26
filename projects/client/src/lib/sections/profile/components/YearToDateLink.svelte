@@ -1,17 +1,20 @@
 <script lang="ts">
   import Link from "$lib/components/link/Link.svelte";
+  import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
+  import { useTrack } from "$lib/features/analytics/useTrack";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import ExternalLinkIcon from "../../../components/icons/ExternalLinkIcon.svelte";
 
-  const { slug }: { slug: string } = $props();
+  const { slug, source }: { slug: string; source: string } = $props();
 
   const currentYear = new Date().getFullYear();
 
   const href = UrlBuilder.users(slug).yearToDate(currentYear);
+  const { track } = useTrack(AnalyticsEvent.Link);
 </script>
 
 <trakt-year-to-date-link>
-  <Link {href}>
+  <Link {href} onclick={() => track({ source, target: href })}>
     <div class="ytd-link-content">
       <span class="bold ytd-year">{currentYear}</span>
       <ExternalLinkIcon />
