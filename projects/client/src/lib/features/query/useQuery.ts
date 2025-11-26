@@ -53,11 +53,12 @@ function invalidationHook<T>(
     }
 
     const queryAge = Date.now() - currentState.dataUpdatedAt;
+    INVALIDATION_MAP.set(id, Date.now());
+
     if (queryAge < MIN_INVALIDATION_AGE) {
       return value;
     }
 
-    INVALIDATION_MAP.set(id, Date.now());
     (async () => {
       const isNotReady = () => {
         const state = client.getQueryState(queryKey);
