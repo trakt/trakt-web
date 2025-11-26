@@ -1,14 +1,12 @@
 <script lang="ts">
-  import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import CalendarIcon from "$lib/components/icons/CalendarIcon.svelte";
-  import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import * as m from "$lib/features/i18n/messages.ts";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
   import { useMonthToDate } from "$lib/sections/profile/stores/useMonthToDate";
   import { slide } from "svelte/transition";
   import MonthInReviewLink from "../../components/MonthInReviewLink.svelte";
+  import DismissButton from "../_internal/DismissButton.svelte";
   import MonthInReviewStats from "./_internal/MonthInReviewStats.svelte";
   import { useMonthInReview } from "./_internal/useMonthInReview";
 
@@ -28,17 +26,6 @@
   );
 </script>
 
-{#snippet dismissButton()}
-  <ActionButton
-    onclick={onDismiss}
-    label={m.button_label_dismiss()}
-    size="small"
-    style="ghost"
-  >
-    <CloseIcon />
-  </ActionButton>
-{/snippet}
-
 <RenderFor audience="vip">
   {#if $review && !$isLoadingMonthToDate}
     <div class="trakt-month-in-review" transition:slide={{ duration: 150 }}>
@@ -51,7 +38,7 @@
             </div>
 
             <RenderFor audience="vip" device={["mobile", "tablet-sm"]}>
-              {@render dismissButton()}
+              <DismissButton {onDismiss} />
             </RenderFor>
           </div>
         {/snippet}
@@ -62,7 +49,7 @@
           <div class="trakt-mir-footer">
             <MonthInReviewLink slug={$user.slug} date={month} />
             <RenderFor audience="vip" device={["tablet-lg", "desktop"]}>
-              {@render dismissButton()}
+              <DismissButton {onDismiss} />
             </RenderFor>
           </div>
         {/snippet}
@@ -75,10 +62,6 @@
   @use "$style/scss/mixins/index" as *;
 
   .trakt-month-in-review {
-    :global(.trakt-action-button) {
-      color: var(--shade-10);
-    }
-
     :global(.trakt-review-content) {
       --review-content-height: var(--ni-56);
       flex-direction: row;
