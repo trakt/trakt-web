@@ -1,9 +1,9 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { useDiscover } from "$lib/features/discover/useDiscover";
+  import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaProgressIntent } from "$lib/requests/queries/sync/mediaProgressQuery";
-  import { DEFAULT_PAGE_SIZE } from "$lib/utils/constants";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
@@ -22,6 +22,8 @@
       intent === "start" ? ("start-watching" as const) : ("up-next" as const),
     mediaType: $mode === "media" ? undefined : $mode,
   });
+
+  const { filterMap } = useFilter();
 </script>
 
 <DrillableMediaList
@@ -31,11 +33,10 @@
     id: intent === "start" ? "start-watching" : "continue-watching",
   }}
   drilldownLabel={"drill label"}
-  useList={() =>
+  filter={$filterMap}
+  useList={(listParams) =>
     useStablePaginated({
-      type: $mode,
-      page: 1,
-      limit: DEFAULT_PAGE_SIZE,
+      ...listParams,
       useList: (params) =>
         useUpNextList({
           ...params,

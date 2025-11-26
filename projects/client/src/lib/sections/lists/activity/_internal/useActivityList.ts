@@ -1,4 +1,5 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
+import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { socialActivityQuery } from '$lib/requests/queries/users/socialActivityQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
@@ -8,7 +9,8 @@ type ActivityListProps =
   & {
     type: DiscoverMode;
   }
-  & PaginationParams;
+  & PaginationParams
+  & FilterParams;
 
 export function useActivityList(props: ActivityListProps) {
   const { list, page, isLoading } = usePaginatedListQuery(

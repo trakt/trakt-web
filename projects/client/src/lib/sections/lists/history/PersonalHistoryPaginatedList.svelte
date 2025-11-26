@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
-  import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import { useRecentlyWatchedList } from "../stores/useRecentlyWatchedList";
@@ -10,8 +9,6 @@
   const { mode }: { mode?: DiscoverMode } = $props();
 
   const historyType = $derived(toRecentlyWatchedType(mode));
-
-  const { filterMap } = useFilter();
 </script>
 
 <DrilledMediaList
@@ -25,7 +22,6 @@
       limit,
       page,
       slug: "me",
-      filter: $filterMap,
     })}
 >
   {#snippet item(media)}

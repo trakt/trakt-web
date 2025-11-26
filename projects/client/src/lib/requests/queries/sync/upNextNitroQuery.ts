@@ -9,8 +9,10 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { type UpNextIntentRequest, type UpNextResponse } from '@trakt/api';
 import { z } from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToEpisodeEntry } from '../../_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 
 export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
   z.object({
@@ -20,7 +22,11 @@ export const UpNextEntryNitroSchema = EpisodeProgressEntrySchema.merge(
 );
 export type UpNextEntry = z.infer<typeof UpNextEntryNitroSchema>;
 
-type UpNextParams = PaginationParams & ApiParams & UpNextIntentRequest;
+type UpNextParams =
+  & PaginationParams
+  & ApiParams
+  & UpNextIntentRequest
+  & FilterParams;
 
 export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
   const show = mapToShowEntry(item.show);
@@ -41,7 +47,7 @@ export function mapUpNextResponse(item: UpNextResponse): UpNextEntry {
 }
 
 export const upNextNitroRequest = (params: UpNextParams) => {
-  const { fetch, limit, page, intent } = params;
+  const { fetch, limit, page, intent, filter } = params;
 
   return api({ fetch })
     .sync
@@ -52,6 +58,7 @@ export const upNextNitroRequest = (params: UpNextParams) => {
         page,
         limit,
         intent,
+        ...filter,
       },
     });
 };
@@ -67,7 +74,12 @@ export const upNextNitroQuery = defineQuery({
   ],
   dependencies: (
     params: UpNextParams,
-  ) => [params.page, params.limit, params.intent],
+  ) => [
+    params.page,
+    params.limit,
+    params.intent,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: upNextNitroRequest,
   mapper: (response) => ({
     entries: response.body.map(mapUpNextResponse),

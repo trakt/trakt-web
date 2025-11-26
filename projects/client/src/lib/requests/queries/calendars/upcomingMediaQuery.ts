@@ -6,7 +6,9 @@ import { type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import z from 'zod';
+import { getGlobalFilterDependencies } from '../../_internal/getGlobalFilterDependencies.ts';
 import { mapToMovieEntry } from '../../_internal/mapToMovieEntry.ts';
+import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 import {
   UpcomingEpisodeEntrySchema,
@@ -14,10 +16,13 @@ import {
 } from './upcomingEpisodesQuery.ts';
 import { upcomingMoviesRequest } from './upcomingMoviesQuery.ts';
 
-export type CalendarMediaParams = {
-  startDate: string;
-  days: number;
-} & ApiParams;
+export type CalendarMediaParams =
+  & {
+    startDate: string;
+    days: number;
+  }
+  & ApiParams
+  & FilterParams;
 
 const UpcomingMediaSchema = z.union([
   UpcomingEpisodeEntrySchema,
@@ -36,7 +41,11 @@ export const upcomingMediaQuery = defineQuery({
   ],
   dependencies: (
     params: CalendarMediaParams,
-  ) => [params.startDate, params.days],
+  ) => [
+    params.startDate,
+    params.days,
+    ...getGlobalFilterDependencies(params.filter),
+  ],
   request: (params) =>
     Promise.all([
       upcomingEpisodesRequest(params),
