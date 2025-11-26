@@ -94,6 +94,7 @@
   --ni-480: 30rem;
   --ni-520: 32.5rem;
   --ni-640: 40rem;
+  --ni-920: 57.5rem;
 
   /**
    * Negative spacing and sizing variables
@@ -180,4 +181,5 @@
   --ni-neg-480: -30rem;
   --ni-neg-520: -32.5rem;
   --ni-neg-640: -40rem;
+  --ni-neg-920: -57.5rem;
 }
