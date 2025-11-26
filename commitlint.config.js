@@ -35,6 +35,7 @@ module.exports = {
         'anticipated',
         'auth',
         'badge',
+        'banner',
         'button',
         'calendar',
         'card',
