@@ -3,7 +3,7 @@
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { useTrendingSearchesList } from "./_internal/useTrendingSearchesList.ts";
   import SearchResultsGrid from "./SearchResultsGrid.svelte";
-  import { useSearch } from "./useSearch";
+  import { useSearch } from "./useSearch.ts";
 
   const { mode } = useSearch();
   const { list, isLoading } = $derived(useTrendingSearchesList($mode));

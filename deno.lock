@@ -5,6 +5,7 @@
     "npm:@cucumber/cucumber@12.2.0": "12.2.0_@cucumber+gherkin@34.0.0_@cucumber+message-streams@4.0.1__@cucumber+messages@28.1.0_@cucumber+messages@28.1.0",
     "npm:@google/generative-ai@0.24.1": "0.24.1",
     "npm:@inlang/paraglide-js@2.5.0": "2.5.0",
+    "npm:@jsr/libn__fuzzy@0.4": "0.4.0",
     "npm:@jsr/trakt__api@0.2.41": "0.2.41_zod@3.25.76",
     "npm:@playwright/test@1.56.1": "1.56.1",
     "npm:@sentry/sveltekit@10.26.0": "10.26.0_@sveltejs+kit@2.49.0__@sveltejs+vite-plugin-svelte@6.2.1___svelte@5.44.0____acorn@8.15.0___vite@7.2.4____sass-embedded@1.93.3____picomatch@4.0.3___sass-embedded@1.93.3__svelte@5.44.0___acorn@8.15.0__vite@7.2.4___sass-embedded@1.93.3___picomatch@4.0.3__acorn@8.15.0__sass-embedded@1.93.3_vite@7.2.4__sass-embedded@1.93.3__picomatch@4.0.3_svelte@5.44.0__acorn@8.15.0_@sveltejs+vite-plugin-svelte@6.2.1__svelte@5.44.0___acorn@8.15.0__vite@7.2.4___sass-embedded@1.93.3___picomatch@4.0.3__sass-embedded@1.93.3_sass-embedded@1.93.3",
@@ -2121,6 +2122,10 @@
         "@jridgewell/resolve-uri",
         "@jridgewell/sourcemap-codec"
       ]
+    },
+    "@jsr/libn__fuzzy@0.4.0": {
+      "integrity": "sha512-aD9yjW6CMt37S3AMTc95LeuRXcKor69Zkr0aWOhYvinTOEAhEIuaJhP4pQqyQGaAC9HIrQcKh1PtRTK85kkVjA==",
+      "tarball": "https://npm.jsr.io/~/11/@jsr/libn__fuzzy/0.4.0.tgz"
     },
     "@jsr/trakt__api@0.2.41_zod@3.25.76": {
       "integrity": "sha512-kjIFPF895NZT4EFlBz041WtoAr7hTTW0S0qYLuL82CIVfrzdinSH3Oips2CiN+f+OQ9T4dVI3JxggDpOxRtB3w==",
@@ -7636,6 +7641,7 @@
             "npm:@cucumber/cucumber@12.2.0",
             "npm:@google/generative-ai@0.24.1",
             "npm:@inlang/paraglide-js@2.5.0",
+            "npm:@jsr/libn__fuzzy@0.4",
             "npm:@jsr/trakt__api@0.2.41",
             "npm:@playwright/test@1.56.1",
             "npm:@sentry/sveltekit@10.26.0",

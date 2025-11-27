@@ -2,6 +2,7 @@
   import * as m from "$lib/features/i18n/messages";
 
   import { page } from "$app/state";
+  import { useTrendingSearchesList } from "$lib/features/search/_internal/useTrendingSearchesList";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
   import SearchPlaceHolder from "$lib/features/search/SearchPlaceHolder.svelte";
@@ -19,6 +20,7 @@
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
   const { search, clear, results, mode, postRecentSearch } = useSearch();
+  const { list, isLoading } = $derived(useTrendingSearchesList($mode, query));
 
   $effect(() => {
     if (!query) {
@@ -45,6 +47,19 @@
   const pageTitle = $derived(
     query ? m.page_title_search_results({ query }) : m.page_title_search(),
   );
+
+  const resultsWithTopItems = $derived.by(() => {
+    if (!query || $isLoading || $mode === "people") {
+      return $results?.items;
+    }
+
+    const trendingKeys = new Set($list.map((item) => item.key));
+    const searchResults = ($results?.items ?? []).filter(
+      (item) => !trendingKeys.has(item.key),
+    );
+
+    return [...$list, ...searchResults];
+  });
 
   // FIXME: deal with ios onscreen keyboard and move to mobile navbar
   const isMobileApple = isMobileAppleDevice();
@@ -99,8 +114,8 @@
   <TraktPageCoverSetter {src} />
 
   <div class="trakt-search-results-container">
-    {#if $results}
-      <SearchResultsGrid items={$results.items} onclick={onResultClick} />
+    {#if resultsWithTopItems}
+      <SearchResultsGrid items={resultsWithTopItems} onclick={onResultClick} />
     {:else if !query}
       <SearchPlaceHolder />
     {/if}
