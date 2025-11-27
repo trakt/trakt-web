@@ -49,11 +49,12 @@
   );
 
   const resultsWithTopItems = $derived.by(() => {
-    if (!query || $isLoading || $mode === "people") {
+    if (!query || $isLoading) {
       return undefined;
     }
 
     if ($results == null) return undefined;
+    if ($mode === "people") return $results.items;
 
     const existingKeys = new Set($list.map((item) => item.key));
 
