@@ -68,7 +68,6 @@
 
   .trakt-list-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: var(--gap-m);
     min-height: var(--ni-40);
@@ -138,6 +137,10 @@
 
     @include for-mobile {
       gap: var(--gap-xs);
+    }
+
+    @include for-tablet-sm-and-below {
+      justify-content: space-between;
     }
   }
 </style>

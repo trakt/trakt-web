@@ -16,8 +16,24 @@
   {/each}
 </div>
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-skeleton-list {
     overflow: hidden;
+
+    mask-image: linear-gradient(
+      to right,
+      black calc(100% - var(--layout-distance-side)),
+      transparent calc(100% - var(--layout-distance-side))
+    );
+
+    @supports (-moz-appearance: none) {
+      mask-image: none;
+    }
+
+    @include for-tablet-sm-and-below {
+      mask-image: none;
+    }
   }
 </style>

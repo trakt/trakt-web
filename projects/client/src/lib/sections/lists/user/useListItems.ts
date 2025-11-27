@@ -5,8 +5,7 @@ import { listItemsQuery } from '$lib/requests/queries/lists/listItemsQuery.ts';
 import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-
-const LIST_LIMIT = 25;
+import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 
 export type ListParams = {
   slug?: string;
@@ -42,7 +41,7 @@ function listToQuery(
     type: type === 'media' ? undefined : type,
     page,
     filter,
-    limit: limit ?? LIST_LIMIT,
+    limit: limit ?? DEFAULT_PAGE_SIZE,
   };
 
   const params = mapListParamsToQueryParams(list);

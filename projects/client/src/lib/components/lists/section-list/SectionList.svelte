@@ -89,6 +89,7 @@
   class:section-list-container-collapsed={$isCollapsed}
   class:section-list-container-mounted={$isMounted}
   class:section-list-container-no-header={!isHeaderVisible}
+  class:section-list-has-drilldown={Boolean(drilldownLink)}
   data-dynamic-selector={`[data-dpad-navigation="${DpadNavigationType.Item}"], .${EMPTY_STATE_CLASS}:not(:empty)`}
 >
   {#if $isVisible}
@@ -140,7 +141,6 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "../_internal/gap" as *;
 
   .section-list-container {
     --height-min-container: var(--ni-40);
@@ -225,10 +225,31 @@
     display: flex;
     overflow-x: auto;
     transition: gap var(--transition-increment) ease-in-out;
-    @include adaptive-gap(gap);
+    gap: var(--list-gap);
 
     &[data-navigation-type="dpad"] {
       gap: var(--gap-xxs);
+    }
+  }
+
+  .section-list-container.section-list-has-drilldown {
+    .section-list-horizontal-scroll {
+      overflow-x: hidden;
+      mask-image: linear-gradient(
+        to right,
+        black calc(100% - var(--layout-distance-side)),
+        transparent calc(100% - var(--layout-distance-side))
+      );
+
+      @supports (-moz-appearance: none) {
+        overflow-x: auto;
+        mask-image: none;
+      }
+
+      @include for-tablet-sm-and-below {
+        overflow-x: auto;
+        mask-image: none;
+      }
     }
   }
 
