@@ -17,10 +17,11 @@
       src={$cover.data.src}
       alt={`Background for ${$cover.data.type}`}
     />
-    {#if $cover.data.type === "main"}
-      <div class="trakt-background-cover-image-overlay"></div>
-    {/if}
   </div>
+{/if}
+
+{#if $cover.state === "no-cover" || $cover.data?.type === "main"}
+  <div class="trakt-background-cover-image-overlay"></div>
 {/if}
 
 <style lang="scss">
@@ -85,15 +86,15 @@
   }
 
   .trakt-background-cover-image-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
     width: 100%;
     height: 100%;
 
-    background-color: var(--purple-700);
-    mix-blend-mode: color;
+    background-color: var(--purple-900);
+    mix-blend-mode: color-dodge;
   }
 
   .trakt-background-cover-image {
