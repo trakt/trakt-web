@@ -54,11 +54,13 @@ export function useTrendingSearchesList(mode: SearchMode, term = '') {
           .toSorted((a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)));
       }
 
+      const lowerTerm = term.toLowerCase().trim();
+
       const mediaData = $query.data as { type: 'media'; items: MediaEntry[] };
+
       return mediaData.items
         .filter((item) => item.type === mode || mode === 'media')
         .filter((item) => {
-          const lowerTerm = term.toLowerCase().trim();
           if (!lowerTerm) return true;
 
           const titlePartSnippets = item.title
@@ -85,7 +87,6 @@ export function useTrendingSearchesList(mode: SearchMode, term = '') {
         .sort((a, b) => {
           const aTitle = a.title.toLowerCase();
           const bTitle = b.title.toLowerCase();
-          const lowerTerm = term.toLowerCase().trim();
 
           const aIndex = aTitle.indexOf(lowerTerm);
           const bIndex = bTitle.indexOf(lowerTerm);
