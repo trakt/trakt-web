@@ -81,6 +81,20 @@ export function useTrendingSearchesList(mode: SearchMode, term = '') {
 
             return levenshteinDistance <= acceptedDistance;
           });
+        })
+        .sort((a, b) => {
+          const aTitle = a.title.toLowerCase();
+          const bTitle = b.title.toLowerCase();
+          const lowerTerm = term.toLowerCase().trim();
+
+          const aIndex = aTitle.indexOf(lowerTerm);
+          const bIndex = bTitle.indexOf(lowerTerm);
+
+          if (aIndex !== bIndex) {
+            return aIndex - bIndex;
+          }
+
+          return aTitle.localeCompare(bTitle);
         });
     }),
     isLoading: derived(
