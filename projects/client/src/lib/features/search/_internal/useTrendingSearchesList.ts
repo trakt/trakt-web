@@ -58,26 +58,24 @@ export function useTrendingSearchesList(mode: SearchMode, term = '') {
       return mediaData.items
         .filter((item) => item.type === mode || mode === 'media')
         .filter((item) => {
-          if (!term) return true;
+          const lowerTitleParts = item.title.toLowerCase().trim().split(' ');
+          const lowerTerm = term.toLowerCase().trim();
 
-          const lowerTitleParts = item.title.toLowerCase().split(' ');
-          const lowerTerm = term.toLowerCase();
+          if (!lowerTerm) return true;
 
-          if (term.length < 2) {
-            return lowerTitleParts.some((lowerTerm) =>
-              lowerTerm.startsWith(term)
-            );
+          if (lowerTerm.length === 1) {
+            return lowerTitleParts.some((part) => part === lowerTerm);
           }
 
           return lowerTitleParts.some((lowerTitle) => {
-            const titleSnippet = lowerTitle.slice(0, term.length);
+            const titleSnippet = lowerTitle.slice(0, lowerTerm.length);
 
             const levenshteinDistance = distance(
               titleSnippet,
               lowerTerm,
             );
 
-            const acceptedDistance = Math.floor(term.length * 0.3);
+            const acceptedDistance = Math.floor(lowerTerm.length * 0.3);
 
             return levenshteinDistance <= acceptedDistance;
           });
