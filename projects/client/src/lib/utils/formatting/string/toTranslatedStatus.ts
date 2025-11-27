@@ -1,4 +1,5 @@
 import * as m from '$lib/features/i18n/messages.ts';
+import { normalizeTranslationKey } from './normalizeTranslationKey.ts';
 
 const STATUS_MAP = {
   released: m.translated_value_status_released,
@@ -19,6 +20,7 @@ export function toTranslatedStatus(
   status: string | (keyof typeof STATUS_MAP),
   data?: Record<string, unknown>,
 ): string {
-  const translationFn = STATUS_MAP[status as keyof typeof STATUS_MAP];
+  const translationFn =
+    STATUS_MAP[normalizeTranslationKey(status) as keyof typeof STATUS_MAP];
   return translationFn?.(data) ?? status;
 }
