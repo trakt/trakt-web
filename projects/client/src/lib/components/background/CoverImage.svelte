@@ -93,7 +93,7 @@
     height: 100%;
 
     background-color: var(--purple-700);
-    mix-blend-mode: color-dodge;
+    mix-blend-mode: color;
   }
 
   .trakt-background-cover-image {
