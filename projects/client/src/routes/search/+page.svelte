@@ -50,15 +50,17 @@
 
   const resultsWithTopItems = $derived.by(() => {
     if (!query || $isLoading || $mode === "people") {
-      return $results?.items;
+      return undefined;
     }
 
-    const trendingKeys = new Set($list.map((item) => item.key));
-    const searchResults = ($results?.items ?? []).filter(
-      (item) => !trendingKeys.has(item.key),
-    );
+    if ($results == null) return undefined;
 
-    return [...$list, ...searchResults];
+    const existingKeys = new Set($list.map((item) => item.key));
+
+    return [
+      ...$list,
+      ...$results.items.filter((item) => !existingKeys.has(item.key)),
+    ];
   });
 
   // FIXME: deal with ios onscreen keyboard and move to mobile navbar
