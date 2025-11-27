@@ -117,8 +117,8 @@
   <TraktPageCoverSetter {src} />
 
   <div class="trakt-search-results-container">
-    {#if resultsWithTopItems}
-      <SearchResultsGrid items={resultsWithTopItems} onclick={onResultClick} />
+    {#if $results}
+      <SearchResultsGrid items={$results.items} onclick={onResultClick} />
     {:else if !query}
       <SearchPlaceHolder />
     {/if}
