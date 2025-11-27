@@ -60,27 +60,28 @@ export function useTrendingSearchesList(mode: SearchMode, term = '') {
         .filter((item) => {
           if (!term) return true;
 
-          const lowerTitle = item.title.toLowerCase();
+          const lowerTitleParts = item.title.toLowerCase().split(' ');
           const lowerTerm = term.toLowerCase();
 
-          if (term.length === 1) {
-            return lowerTitle.startsWith(lowerTerm);
+          if (term.length < 2) {
+            return lowerTitleParts.some((lowerTerm) =>
+              lowerTerm.startsWith(term)
+            );
           }
 
-          const titleSnippet = lowerTitle.slice(0, term.length);
+          return lowerTitleParts.some((lowerTitle) => {
+            const titleSnippet = lowerTitle.slice(0, term.length);
 
-          const levenshteinDistance = distance(
-            titleSnippet,
-            lowerTerm,
-          );
+            const levenshteinDistance = distance(
+              titleSnippet,
+              lowerTerm,
+            );
 
-          const acceptedDistance = term.length <= 3
-            ? 1
-            : Math.floor(term.length * 0.3);
+            const acceptedDistance = Math.floor(term.length * 0.3);
 
-          return levenshteinDistance <= acceptedDistance;
-        })
-        .slice(0, LIST_LIMIT);
+            return levenshteinDistance <= acceptedDistance;
+          });
+        });
     }),
     isLoading: derived(
       query,
