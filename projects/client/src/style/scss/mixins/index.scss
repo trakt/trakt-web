@@ -86,3 +86,40 @@
   filter: blur(var(--blur-size));
   padding: 0 var(--blur-size);
 }
+
+@mixin adaptive-gap($property: gap) {
+  #{$property}: var(--gap-s);
+
+  @include for-tablet-lg-and-below {
+    #{$property}: var(--gap-xs);
+  }
+
+  @include for-mobile {
+    #{$property}: var(--gap-xxs);
+  }
+}
+
+@mixin dynamic-item-count($itemCountVariable, $minCardWidth, $maxItemCount) {
+  $calculatedItemCount: round(down, var(--list-inner-width) / ($minCardWidth + var(--list-gap)), 1);
+
+  #{$itemCountVariable}: clamp(1, $calculatedItemCount, $maxItemCount);
+
+  /*
+    Firefox does not properly strip units, for now we fall back
+    to the max item count and allow users to scroll
+  */
+  @supports (-moz-appearance: none) {
+    #{$itemCountVariable}: $maxItemCount;
+  }
+}
+
+@mixin dynamic-card-width($widthVariable, $minCardWidth, $itemCount) {
+  $listGaps: calc($itemCount * var(--list-gap));
+  $listUsableWidth: calc(var(--list-inner-width) - $listGaps);
+
+  #{$widthVariable}: max(calc($listUsableWidth / $itemCount), #{$minCardWidth});
+
+  @include for-tablet-sm-and-below {
+    #{$widthVariable}: $minCardWidth;
+  }
+}
