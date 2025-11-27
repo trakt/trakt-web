@@ -9,11 +9,13 @@
     empty?: Snippet;
     title?: string;
     metaInfo?: Snippet;
+    promotedItems?: T[];
     dimensionObserver?: (node: HTMLElement) => void;
   };
 
   const {
     items,
+    promotedItems = [],
     title,
     item,
     actions,
@@ -31,8 +33,10 @@
     isMounted.set(true);
   });
 
+  const promotedKeys = $derived(new Set(promotedItems.map(({ key }) => key)));
+
   const uniqueItems = $derived.by(() => {
-    const seenKeys = new Set<string>();
+    const seenKeys = new Set<string>(promotedKeys);
     return items.filter(({ key }) => !seenKeys.has(key) && seenKeys.add(key));
   });
 </script>
@@ -42,8 +46,11 @@
     <ListHeader {title} {metaInfo} {actions} {badge} inset="all" />
   {/if}
 
-  {#if uniqueItems.length > 0}
+  {#if uniqueItems.length > 0 || promotedItems.length > 0}
     <div class="trakt-list-item-container trakt-list-items" use:customAction>
+      {#each promotedItems as i (i.key)}
+        {@render item(i)}
+      {/each}
       {#each uniqueItems as i (i.key)}
         {@render item(i)}
       {/each}

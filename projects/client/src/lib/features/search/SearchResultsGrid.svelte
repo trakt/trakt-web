@@ -17,10 +17,18 @@
     title?: string;
     empty?: Snippet;
     items: Array<PersonSummary | MediaEntry>;
+    // FIXME: merge trending with regular items once we figure out the rendering issue
+    trendingItems?: Array<PersonSummary | MediaEntry>;
     onclick?: (item: PersonSummary | MediaEntry) => void;
   };
 
-  const { title, items, empty, onclick }: SearchResultsGridProps = $props();
+  const {
+    title,
+    items,
+    trendingItems,
+    empty,
+    onclick,
+  }: SearchResultsGridProps = $props();
 
   const { mode } = useSearch();
 
@@ -49,7 +57,8 @@
 <div class="search-results-grid">
   <GridList
     id={`search-grid-list-${id}`}
-    items={items as Array<PersonSummary | MediaEntry>}
+    {items}
+    promotedItems={trendingItems}
     {title}
     {empty}
     --width-item={`var(--width-override-card, var(${cardWidthVariable}))`}

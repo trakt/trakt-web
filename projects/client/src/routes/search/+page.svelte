@@ -20,7 +20,9 @@
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
   const { search, clear, results, mode, postRecentSearch } = useSearch();
-  const { list, isLoading } = $derived(useTrendingSearchesList($mode, query));
+  const { list: trendingResults, isLoading } = $derived(
+    useTrendingSearchesList($mode, query),
+  );
 
   $effect(() => {
     if (!query) {
@@ -37,8 +39,8 @@
     }
 
     if ($results.type !== "people") {
-      const item = $results.items.at(0);
-      return item?.cover?.url.medium;
+      const item = $trendingResults.at(0) ?? $results.items.at(0);
+      return item && "cover" in item ? item.cover?.url.medium : undefined;
     }
 
     return $results.items.at(0)?.headshot.url.medium;
@@ -48,20 +50,12 @@
     query ? m.page_title_search_results({ query }) : m.page_title_search(),
   );
 
-  const resultsWithTopItems = $derived.by(() => {
-    if (!query || $isLoading) {
+  const trendingItems = $derived.by(() => {
+    if (!query || $isLoading || $mode === "people") {
       return undefined;
     }
 
-    if ($results == null) return undefined;
-    if ($mode === "people") return $results.items;
-
-    const existingKeys = new Set($list.map((item) => item.key));
-
-    return [
-      ...$list,
-      ...$results.items.filter((item) => !existingKeys.has(item.key)),
-    ];
+    return $trendingResults;
   });
 
   // FIXME: deal with ios onscreen keyboard and move to mobile navbar
@@ -118,7 +112,11 @@
 
   <div class="trakt-search-results-container">
     {#if $results}
-      <SearchResultsGrid items={$results.items} onclick={onResultClick} />
+      <SearchResultsGrid
+        items={$results.items}
+        {trendingItems}
+        onclick={onResultClick}
+      />
     {:else if !query}
       <SearchPlaceHolder />
     {/if}
