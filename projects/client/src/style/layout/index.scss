@@ -2,27 +2,51 @@
 
 :root {
   /**
+   * Dynamic card size config
+   */
+  --list-inner-width: calc(100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance));
+  --max-list-item-count: 10;
+  --max-list-landscape-item-count: 7;
+
+  --list-item-count: var(--max-list-item-count);
+  --list-landscape-item-count: var(--max-list-landscape-item-count);
+
+  --min-portrait-card-width: var(--ni-132);
+  --min-landscape-card-width: var(--ni-200);
+
+  @include dynamic-item-count(--list-item-count,
+    var(--min-portrait-card-width),
+    var(--max-list-item-count),
+  );
+  @include dynamic-item-count(--list-landscape-item-count,
+    var(--min-landscape-card-width),
+    var(--max-list-landscape-item-count),
+  );
+
+  /**
    * Card dimensions
    */
   --height-card-footer: var(--ni-40);
 
-  --width-portrait-card: var(--ni-132);
-  --height-portrait-card-cover: var(--ni-198);
-  --height-portrait-card: calc(
-    var(--height-portrait-card-cover) + var(--height-card-footer)
+  --width-portrait-card: var(--min-portrait-card-width);
+  @include dynamic-card-width(--width-portrait-card,
+    var(--min-portrait-card-width),
+    var(--list-item-count),
   );
+  --height-portrait-card-cover: calc(var(--width-portrait-card) * 1.5);
+  --height-portrait-card: calc(var(--height-portrait-card-cover) + var(--height-card-footer));
 
-  --width-landscape-card: var(--ni-200);
-  --height-landscape-card-cover: var(--ni-112);
-  --height-landscape-card: calc(
-    var(--height-landscape-card-cover) + var(--height-card-footer)
+  --width-landscape-card: var(--min-landscape-card-width);
+  @include dynamic-card-width(--width-landscape-card,
+    var(--min-landscape-card-width),
+    var(--list-landscape-item-count),
   );
+  --height-landscape-card-cover: calc(var(--width-landscape-card) / 1.786);
+  --height-landscape-card: calc(var(--height-landscape-card-cover) + var(--height-card-footer));
 
   --width-person-card: var(--ni-120);
   --height-person-card-cover: var(--ni-176);
-  --height-person-card: calc(
-    var(--height-person-card-cover) + var(--height-card-footer)
-  );
+  --height-person-card: calc(var(--height-person-card-cover) + var(--height-card-footer));
 
   --width-summary-card: 100%;
   --height-summary-card-cover: var(--ni-132);
@@ -54,9 +78,7 @@
   --width-cta-activity-card: var(--ni-340);
   --height-cta-activity-card: var(--height-landscape-card-cover);
 
-  --width-cta-list-placeholder-card: calc(
-    100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance)
-  );
+  --width-cta-list-placeholder-card: calc(100dvw - 2 * var(--layout-distance-side) - var(--layout-sidebar-distance));
 
   --width-profile-item: var(--ni-80);
   --height-profile-item: var(--ni-96);
@@ -67,38 +89,15 @@
   /**
    * List dimensions
    */
-  --height-landscape-list: calc(
-    var(--height-landscape-card) + var(--layout-scrollbar-width)
-  );
-  --height-person-list: calc(
-    var(--height-person-card) + var(--layout-scrollbar-width)
-  );
-  --height-poster-list: calc(
-    var(--height-portrait-card) + var(--layout-scrollbar-width)
-  );
-  --height-lists-list: calc(
-    var(--height-list-card) + var(--layout-scrollbar-width)
-      + var(--layout-footer-less-padding)
-  );
-  --height-comments-list: calc(
-    var(--height-comment-card) + var(--layout-scrollbar-width)
-      + var(--layout-footer-less-padding)
-  );
-  --height-sentiments-list: calc(
-    var(--height-sentiments-card) + var(--layout-scrollbar-width)
-      + var(--layout-footer-less-padding)
-  );
-  --height-comment-thread-list: calc(
-    var(--height-comment-thread-card) + var(--layout-scrollbar-width)
-      + var(--layout-footer-less-padding)
-  );
-  --height-profile-list: calc(
-    var(--height-profile-item) + var(--layout-scrollbar-width)
-  );
-  --height-where-to-watch-list: calc(
-    var(--height-where-to-watch-item) + var(--layout-scrollbar-width)
-      + var(--layout-footer-less-padding)
-  );
+  --height-landscape-list: calc(var(--height-landscape-card) + var(--layout-scrollbar-width));
+  --height-person-list: calc(var(--height-person-card) + var(--layout-scrollbar-width));
+  --height-poster-list: calc(var(--height-portrait-card) + var(--layout-scrollbar-width));
+  --height-lists-list: calc(var(--height-list-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
+  --height-comments-list: calc(var(--height-comment-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
+  --height-sentiments-list: calc(var(--height-sentiments-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
+  --height-comment-thread-list: calc(var(--height-comment-thread-card) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
+  --height-profile-list: calc(var(--height-profile-item) + var(--layout-scrollbar-width));
+  --height-where-to-watch-list: calc(var(--height-where-to-watch-item) + var(--layout-scrollbar-width) + var(--layout-footer-less-padding));
 
   /**
    * Structural variables
@@ -114,20 +113,13 @@
   --layout-footer-less-padding: var(--ni-16);
 
   --list-header-gap: var(--gap-s);
+  --list-gap: var(--gap-s);
+  @include adaptive-gap(--list-gap);
 
   --summary-side-action-bar-width: var(--ni-40);
   --summary-poster-gap: var(--gap-s);
-  --summary-poster-width: min(
-    calc(
-      100dvw
-        - 2
-        * (
-        var(--layout-distance-side) + var(--summary-side-action-bar-width)
-          + var(--summary-poster-gap)
-      )
-    ), 
-    var(--ni-320)
-  );
+  --summary-poster-width: min(calc(100dvw - 2 * (var(--layout-distance-side) + var(--summary-side-action-bar-width) + var(--summary-poster-gap))),
+      var(--ni-320));
 
   --toggle-large-width: var(--ni-88);
 

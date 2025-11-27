@@ -6,33 +6,3 @@
 .section-list-empty-state:has(.trakt-skeleton-list) {
   padding-right: 0;
 }
-
-.section-list {
-  margin-left: calc(-1 * var(--layout-sidebar-distance));
-
-  .trakt-list-item-container,
-  .section-list-empty-state {
-    padding-left: calc(
-      var(--layout-sidebar-distance) + var(--layout-distance-side)
-    );
-  }
-
-  ::-webkit-scrollbar-track {
-    margin-left: var(--layout-sidebar-distance);
-  }
-}
-
-/*
-  FIXME: for these cases, come up with a solution that still allows
-  content to be scrolled under the sidebar
-*/
-@supports not selector(::-webkit-scrollbar) {
-  .section-list {
-    margin-left: 0;
-
-    .trakt-list-item-container,
-    .section-list-empty-state {
-      padding-left: var(--layout-distance-side);
-    }
-  }
-}

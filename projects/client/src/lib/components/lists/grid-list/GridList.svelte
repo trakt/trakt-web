@@ -64,7 +64,6 @@
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
-  @use "../_internal/gap" as *;
 
   .trakt-grid-list-container {
     contain: layout;
@@ -83,7 +82,7 @@
     justify-content: center;
     transition: gap var(--transition-increment) ease-in-out;
     grid-row-gap: var(--gap-l);
-    @include adaptive-gap(grid-column-gap);
+    grid-column-gap: var(--list-gap);
 
     @include for-mobile {
       grid-template-columns: 1fr;
