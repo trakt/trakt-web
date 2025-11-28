@@ -1,51 +1,51 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
 import { collaborationListsQuery } from '$lib/requests/queries/users/collaborationListsQuery.ts';
 import { personalListsQuery } from '$lib/requests/queries/users/personalListsQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
+import type { PaginationParams } from '../../../requests/models/PaginationParams.ts';
 import { likedListsQuery } from '../../../requests/queries/users/likedListsQuery.ts';
+import { DEFAULT_LISTS_PAGE_SIZE } from '../../../utils/constants.ts';
+import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 import type { PersonalListType } from './models/PersonalListType.ts';
 
 type PersonalListsParams = {
   type: PersonalListType;
-  slug?: string;
+  slug: string;
   sortBy?: 'none' | 'recently-updated';
-};
+} & Partial<PaginationParams>;
 
-function typeToQuery({ type, slug }: PersonalListsParams) {
-  const userSlug = slug ?? 'me';
+function typeToQuery({ type, slug, page, limit }: PersonalListsParams) {
+  const paginationProps = {
+    page: page ?? 1,
+    limit: limit ?? DEFAULT_LISTS_PAGE_SIZE,
+  };
+
   switch (type) {
     case 'liked':
-      return likedListsQuery();
+      return likedListsQuery(paginationProps);
     case 'personal':
-      return personalListsQuery({ slug: userSlug });
+      return personalListsQuery({ slug, ...paginationProps });
     case 'collaboration':
-      return collaborationListsQuery({ slug: userSlug });
+      return collaborationListsQuery({ slug });
   }
 }
 
 export function usePersonalListsSummary(
-  { type, slug, sortBy = 'recently-updated' }: PersonalListsParams,
+  { type, slug, page, limit, sortBy = 'recently-updated' }: PersonalListsParams,
 ) {
-  const lists = useQuery(typeToQuery({ type, slug }));
-
-  const isLoading = derived(
-    lists,
-    toLoadingState,
+  const { list, ...rest } = usePaginatedListQuery(
+    typeToQuery({ type, slug, page, limit }),
   );
 
   return {
-    isLoading,
-    lists: derived(
-      lists,
-      ($lists) => {
-        const data = $lists.data ?? [];
-
+    ...rest,
+    list: derived(
+      list,
+      ($list) => {
         if (sortBy === 'none') {
-          return data;
+          return $list;
         }
 
-        return data.toSorted((a, b) =>
+        return $list.toSorted((a, b) =>
           // FIXME: update when we add sorting options
           b.updatedAt.getTime() - a.updatedAt.getTime()
         );
