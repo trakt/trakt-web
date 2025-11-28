@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Reviews"
     },
+    "dialog_title_comments_warning": {
+      "default": "Minimum 5 words, be respectful, mark spoilers."
+    },
     "dialog_title_comment": {
       "default": "Review"
+    },
+    "dialog_title_reply": {
+      "default": "Reply"
     },
     "button_label_comment_reply": {
       "default": "Reply to {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Apply"
     },
+    "button_text_submit": {
+      "default": "Submit"
+    },
     "button_label_create_list": {
       "default": "Create list"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Edit your list details."
     },
+    "list_description_released_shows": {
+      "default": "Released shows"
+    },
     "list_description_released_movies": {
       "default": "Released movies"
+    },
+    "list_description_released_media": {
+      "default": "Released shows & movies"
     },
     "page_title_edit_list": {
       "default": "Edit List"
@@ -1926,6 +1941,12 @@
     "text_info_history_removed": {
       "default": "Removed from watched history."
     },
+    "text_info_favorites_added": {
+      "default": "Added to favourites."
+    },
+    "text_info_favorites_removed": {
+      "default": "Removed from favourites."
+    },
     "text_info_list_added": {
       "default": "Added to list."
     },
@@ -1940,6 +1961,18 @@
     },
     "text_info_show_dropped": {
       "default": "Show has been dropped."
+    },
+    "text_info_review_added": {
+      "default": "Review has been added."
+    },
+    "text_info_review_deleted": {
+      "default": "Review has been deleted."
+    },
+    "text_info_reply_added": {
+      "default": "Reply has been added."
+    },
+    "text_info_reply_deleted": {
+      "default": "Reply has been deleted."
     },
     "button_text_long_press_for_more": {
       "default": "Long press for more"
@@ -2082,17 +2115,29 @@
     "button_text_delete_comment": {
       "default": "Delete Review"
     },
+    "button_text_delete_reply": {
+      "default": "Delete Reply"
+    },
     "button_label_delete_comment": {
       "default": "Delete Review"
     },
     "warning_prompt_delete_comment": {
       "default": "Are you sure you want to delete your review?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "Are you sure you want to delete your reply?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Are you sure you want to log out?"
+    },
     "page_title_discover": {
       "default": "Discover"
     },
     "list_title_start_watching": {
       "default": "Start Watching"
+    },
+    "list_title_from_watchlist": {
+      "default": "From Watchlist"
     },
     "button_label_view_all_start_watching": {
       "default": "View all watchlist items available to watch"
@@ -2223,6 +2268,9 @@
     "tag_text_watched": {
       "default": "Watched"
     },
+    "tag_text_watched_count": {
+      "default": "Watched: {count}"
+    },
     "header_birthday": {
       "default": "Birthday"
     },
@@ -2258,6 +2306,12 @@
     },
     "text_this_month": {
       "default": "This month"
+    },
+    "text_this_month_so_far": {
+      "default": "So far, this month"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} in review"
     },
     "text_view_all": {
       "default": "View all"

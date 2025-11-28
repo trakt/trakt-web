@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Recenzii"
     },
+    "dialog_title_comments_warning": {
+      "default": "Minim 5 cuvinte, fii respectuos, marchează spoilerele."
+    },
     "dialog_title_comment": {
       "default": "Recenzie"
+    },
+    "dialog_title_reply": {
+      "default": "Răspunde"
     },
     "button_label_comment_reply": {
       "default": "Răspunde lui {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Aplică"
     },
+    "button_text_submit": {
+      "default": "Trimite"
+    },
     "button_label_create_list": {
       "default": "Crează listă"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Editați detaliile listei."
     },
+    "list_description_released_shows": {
+      "default": "Seriale lansate"
+    },
     "list_description_released_movies": {
       "default": "Filme lansate"
+    },
+    "list_description_released_media": {
+      "default": "Seriale și filme lansate"
     },
     "page_title_edit_list": {
       "default": "Editare Listă"
@@ -1926,6 +1941,12 @@
     "text_info_history_removed": {
       "default": "Eliminat din istoric."
     },
+    "text_info_favorites_added": {
+      "default": "Adăugat la favorite."
+    },
+    "text_info_favorites_removed": {
+      "default": "Eliminat din favorite."
+    },
     "text_info_list_added": {
       "default": "Adăugat în listă."
     },
@@ -1940,6 +1961,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serial abandonat."
+    },
+    "text_info_review_added": {
+      "default": "Recenzia a fost adăugată."
+    },
+    "text_info_review_deleted": {
+      "default": "Recenzia a fost ștearsă."
+    },
+    "text_info_reply_added": {
+      "default": "Răspunsul a fost adăugat."
+    },
+    "text_info_reply_deleted": {
+      "default": "Răspunsul a fost șters."
     },
     "button_text_long_press_for_more": {
       "default": "Apăsați lung pentru mai multe"
@@ -2082,17 +2115,29 @@
     "button_text_delete_comment": {
       "default": "Șterge Recenzia"
     },
+    "button_text_delete_reply": {
+      "default": "Șterge răspunsul"
+    },
     "button_label_delete_comment": {
       "default": "Șterge Recenzia"
     },
     "warning_prompt_delete_comment": {
       "default": "Ești sigur că vrei să ștergi recenzia?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "Ești sigur că vrei să-ți ștergi răspunsul?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Ești sigur că vrei să te deconectezi?"
+    },
     "page_title_discover": {
       "default": "Descoperă"
     },
     "list_title_start_watching": {
       "default": "Începe vizionarea"
+    },
+    "list_title_from_watchlist": {
+      "default": "Din lista de vizionat"
     },
     "button_label_view_all_start_watching": {
       "default": "Vezi toate elementele din lista de vizionat"
@@ -2223,6 +2268,9 @@
     "tag_text_watched": {
       "default": "Vizionat"
     },
+    "tag_text_watched_count": {
+      "default": "Vizionat: {count}"
+    },
     "header_birthday": {
       "default": "Zi de naștere"
     },
@@ -2258,6 +2306,12 @@
     },
     "text_this_month": {
       "default": "Luna aceasta"
+    },
+    "text_this_month_so_far": {
+      "default": "Până acum, luna aceasta"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} în revizuire"
     },
     "text_view_all": {
       "default": "Vezi tot"
