@@ -1,11 +1,11 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
-  import { usePersonalListsSummary } from "../usePersonalListsSummary";
+  import { useAllPersonalLists } from "$lib/sections/summary/components/list-dropdown/useAllPersonalLists";
   import AddNewListButton from "./CreateListButton.svelte";
   import ListUpsellLink from "./ListUpsellLink.svelte";
 
   const { user } = useUser();
-  const { lists, isLoading } = usePersonalListsSummary({ type: "personal" });
+  const { lists, isLoading } = useAllPersonalLists();
 
   const isAtLimit = $derived(
     !$isLoading && $lists.length >= $user.limits.lists.limit,

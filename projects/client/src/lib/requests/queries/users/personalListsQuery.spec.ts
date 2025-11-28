@@ -9,9 +9,9 @@ describe('personalListsQuery', () => {
     const result = await runQuery({
       factory: () =>
         createQuery(
-          personalListsQuery({ slug: 'me' }),
+          personalListsQuery({ slug: 'me', page: 1, limit: 10 }),
         ),
-      mapper: (response) => response?.data,
+      mapper: (response) => response?.data?.entries,
     });
 
     expect(result).to.deep.equal(PersonalListsMappedMock);

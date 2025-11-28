@@ -1,6 +1,7 @@
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
+import type { PersonalListType } from '$lib/sections/lists/user/models/PersonalListType.ts';
 import { buildParamString } from './buildParamString.ts';
 
 type TypeParams = {
@@ -68,6 +69,15 @@ const categoryDrilldownFactory =
     const baseUrl = `/${category}/${type}s`;
     return baseUrl + buildParamString(sanitizeParams(params));
   };
+
+const listsDrilldownFactory = (user: string) => (type: PersonalListType) => {
+  switch (type) {
+    case 'collaboration':
+      return `/users/${user}/lists/view/collaborations`;
+    default:
+      return `/users/${user}/lists/view/${type}`;
+  }
+};
 
 const ogIframeFactory = (url: HttpsUrl): HttpsUrl => {
   return `${url}/?embedded_mode=true`;
@@ -183,6 +193,8 @@ export const UrlBuilder = {
     watchlist: (user: string) => {
       return `/users/${user}/watchlist`;
     },
+    all: (user: string, type: PersonalListType) =>
+      listsDrilldownFactory(user)(type),
   },
   app: {
     android: () => 'https://trakt.tv/a/trakt-android',

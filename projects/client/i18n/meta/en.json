@@ -6092,6 +6092,14 @@
         "android",
         "ios"
       ]
+    },
+    "button_label_view_all_lists": {
+      "default": "View all lists",
+      "description": "Aria-label for the button that allows users to view all lists.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

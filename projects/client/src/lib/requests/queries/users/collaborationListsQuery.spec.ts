@@ -11,7 +11,7 @@ describe('collaborationListsQuery', () => {
         createQuery(
           collaborationListsQuery({ slug: 'me' }),
         ),
-      mapper: (response) => response?.data,
+      mapper: (response) => response?.data?.entries,
     });
 
     expect(result).to.deep.equal(CollaborationListsMappedMock);

@@ -6,18 +6,19 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { useNavigation } from "$lib/features/navigation/useNavigation.ts";
-  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia.ts";
+  import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
+  import ViewAllButton from "../components/ViewAllButton.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
   import ListsHeader from "./_internal/ListsHeader.svelte";
-  import PersonalListsPlaceholder from "./_internal/PersonalListsPlaceholder.svelte";
   import { useCreateList } from "./_internal/useCreateList.ts";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
+
+  const PREVIEW_LIMIT = 3;
 
   const {
     type,
@@ -25,21 +26,18 @@
     mode,
   }: { type: PersonalListType; slug: string; mode?: DiscoverMode } = $props();
 
-  const { lists, isLoading } = $derived(
-    usePersonalListsSummary({ type, slug }),
-  );
-  const { navigation } = useNavigation();
+  const {
+    list: lists,
+    isLoading,
+    page,
+  } = $derived(usePersonalListsSummary({ type, slug }));
 
   const { isMe } = $derived(useIsMe(slug));
-  const isMobile = useMedia(WellKnownMediaQuery.mobile);
-  const isDPad = $navigation === "dpad";
 
   const variant = $derived.by(() => {
-    if ($isMobile || isDPad) {
-      return "preview";
-    }
-
-    return "summary";
+    const shouldShowSummary =
+      $page.total > 1 || $lists.length === 0 || $lists.length > PREVIEW_LIMIT;
+    return shouldShowSummary ? "summary" : "preview";
   });
 
   const isMine = $derived(type === "personal" && $isMe);
@@ -61,7 +59,6 @@
   });
 
   const { createList, isCreating } = useCreateList();
-
   const cta: Cta = $derived({
     type: "personal-list",
     mediaType: mode === "media" ? undefined : mode,
@@ -71,12 +68,6 @@
     },
   });
 </script>
-
-{#snippet emptyList()}
-  {#if !$isLoading}
-    {m.list_placeholder_personal_list_empty()}
-  {/if}
-{/snippet}
 
 {#if isPresentable}
   {#if variant === "preview"}
@@ -101,12 +92,8 @@
         </ListsHeader>
       {/if}
 
-      {#if isMine && $lists.length === 0}
-        <PersonalListsPlaceholder {cta} />
-      {/if}
-
       {#each $lists as list (list.id)}
-        <UserList {list} empty={emptyList} type={mode} />
+        <UserList {list} type={mode} />
       {/each}
     </div>
   {/if}
@@ -130,12 +117,21 @@
 
       {#snippet empty()}
         {#if !$isLoading}
-          {#if $isMe}
+          {#if isMine}
             <CtaItem {cta} variant="placeholder" />
           {:else}
-            {@render emptyList()}
+            {m.list_placeholder_personal_list_empty()}
           {/if}
         {/if}
+      {/snippet}
+
+      {#snippet actions()}
+        <ViewAllButton
+          href={UrlBuilder.lists.all(slug, type)}
+          label={m.button_label_view_all_lists()}
+          disabled={$lists.length === 0}
+          source={{ id: "personal-lists", type }}
+        />
       {/snippet}
     </SectionList>
   {/if}

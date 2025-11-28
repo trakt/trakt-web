@@ -1,29 +1,22 @@
 <script lang="ts">
+  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
-
-  import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary.ts";
   import { useListItems } from "$lib/sections/lists/user/useListItems";
-  import type { Snippet } from "svelte";
   import { getListUrl } from "../components/list-summary/_internal/getListUrl";
   import DrillableMediaList from "../drilldown/DrillableMediaList.svelte";
   import PopularListItem from "../popular/PopularListItem.svelte";
   import PopupActions from "./_internal/PopupActions.svelte";
   import ListActions from "./ListActions.svelte";
 
-  const {
-    list,
-    type,
-    empty,
-  }: { list: MediaListSummary; type?: DiscoverMode; empty?: Snippet } =
+  const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
     $props();
   const { filterMap } = useFilter();
 </script>
 
 <DrillableMediaList
   {type}
-  {empty}
   source={{ id: "user-list", type }}
   id={`user-list-${type}-${list.id}`}
   drilldownLabel={m.button_text_view_all()}
@@ -42,5 +35,9 @@
 
   {#snippet badge()}
     <ListActions {list} />
+  {/snippet}
+
+  {#snippet empty()}
+    {m.list_placeholder_personal_list_empty()}
   {/snippet}
 </DrillableMediaList>
