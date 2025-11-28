@@ -2285,6 +2285,9 @@
           "type": "string"
         }
       }
+    },
+    "list_title_user_lists": {
+      "default": "Lister"
     }
   }
 }

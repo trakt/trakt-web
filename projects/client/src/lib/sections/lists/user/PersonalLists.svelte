@@ -30,19 +30,6 @@
   );
   const { navigation } = useNavigation();
 
-  const title = $derived.by(() => {
-    switch (type) {
-      case "personal":
-        return m.list_title_personal_lists();
-      case "liked":
-        return m.list_title_liked_lists();
-      case "collaboration":
-        return m.list_title_collaborative_lists();
-      default:
-        return "";
-    }
-  });
-
   const { isMe } = $derived(useIsMe(slug));
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const isDPad = $navigation === "dpad";
@@ -57,6 +44,21 @@
 
   const isMine = $derived(type === "personal" && $isMe);
   const isPresentable = $derived(isMine || (!$isLoading && $lists.length > 0));
+
+  const title = $derived.by(() => {
+    switch (type) {
+      case "personal":
+        return isMine
+          ? m.list_title_personal_lists()
+          : m.list_title_user_lists();
+      case "liked":
+        return m.list_title_liked_lists();
+      case "collaboration":
+        return m.list_title_collaborative_lists();
+      default:
+        return "";
+    }
+  });
 
   const { createList, isCreating } = useCreateList();
 
