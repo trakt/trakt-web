@@ -605,7 +605,6 @@
       "default": "Join Trakt for Free",
       "description": "Text for the button that takes users to the Trakt login page, keep the text as short as possible (always as short or shorter than the english version).",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -994,7 +993,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -1015,7 +1013,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2177,7 +2174,6 @@
       "default": "Remove from Favorites",
       "description": "Text for the button that allows users to remove a movie or show from their favorites.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2216,7 +2212,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2240,7 +2235,6 @@
       "default": "Favorites",
       "description": "Title for lists containing a user's favorite movies and/or shows. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2430,7 +2424,6 @@
       "default": "Acting",
       "description": "Value for the person who acted in a movie or show, keep language specifics in mind.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2835,7 +2828,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2919,7 +2911,6 @@
       "default": "Review",
       "description": "Title for the review dialog, which is used when a user is adding a new review.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2956,7 +2947,6 @@
       "default": "Review...",
       "description": "Placeholder text for the review textarea when adding a new review.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2972,7 +2962,6 @@
       "default": "Spoiler",
       "description": "Text used to indicate that something is a spoiler.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -2996,7 +2985,6 @@
       "default": "Comments must be at least 5 words.",
       "description": "Error message shown when a review is invalid due to content length.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3636,7 +3624,6 @@
         }
       },
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3715,7 +3702,6 @@
       "default": "Social",
       "description": "Title for lists containing the profiles the user follows or profiles that follow the user. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -3894,7 +3880,6 @@
       "default": "Profile",
       "description": "Title for the current users profile page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4096,14 +4081,6 @@
         "web"
       ]
     },
-    "list_description_released_movies": {
-      "default": "Released movies",
-      "description": "Description for a list which contains only movies that already have been released.",
-      "exclude": [
-        "ios",
-        "web"
-      ]
-    },
     "page_title_edit_list": {
       "default": "Edit List",
       "description": "Title for a screen that allows users to edit an existing list.",
@@ -4204,7 +4181,6 @@
       "default": "About",
       "description": "Text for the section that allows users to change their 'about me' description.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4448,7 +4424,6 @@
       "default": "Reactions",
       "description": "Aria-label for the button that opens the reactions popup.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4848,7 +4823,6 @@
       "default": "Your faves. Your story. Spotlight the movies and shows that left a mark.",
       "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies and shows.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4856,7 +4830,6 @@
       "default": "Your faves. Your story. Spotlight the movies that left a mark.",
       "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite movies.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4864,7 +4837,6 @@
       "default": "Your faves. Your story. Spotlight the shows that left a mark.",
       "description": "Call to action text shown in the Favorites list, encouraging users to add their favorite shows.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4928,7 +4900,6 @@
       "default": "Discover shows",
       "description": "Link text for discovering shows. Meant to entice users to find new content.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -4944,7 +4915,6 @@
       "default": "Discover movies",
       "description": "Link text for discovering movies. Meant to entice users to find new content.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5316,8 +5286,7 @@
       "default": "Login",
       "description": "Text for the login button.",
       "exclude": [
-        "ios",
-        "android"
+        "ios"
       ]
     },
     "button_label_all": {
@@ -5348,7 +5317,6 @@
       "default": "Following",
       "description": "Aria-label for the button that allows users to toggle the social list to view who they follow.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5364,7 +5332,6 @@
       "default": "Followers",
       "description": "Aria-label for the button that allows users to toggle the social list to view who their followers are.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5579,8 +5546,7 @@
       "default": "Delete Review",
       "description": "Text for the button that allows a user to delete a review.",
       "exclude": [
-        "ios",
-        "android"
+        "ios"
       ]
     },
     "button_label_delete_comment": {
@@ -5595,15 +5561,13 @@
       "default": "Are you sure you want to delete your review?",
       "description": "Text for the warning prompt that appears when a user attempts to delete a review.",
       "exclude": [
-        "ios",
-        "android"
+        "ios"
       ]
     },
     "page_title_discover": {
       "default": "Discover",
       "description": "Title for the discover page.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5611,7 +5575,6 @@
       "default": "Start Watching",
       "description": "Title for lists containing shows or movies a user should start watching. This title should be as short and concise as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5927,7 +5890,6 @@
       "default": "Watched",
       "description": "Text for the tag that is shown before the movie or show watch count. This should be as short as possible.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5935,7 +5897,6 @@
       "default": "Birthday",
       "description": "Header for the section that displays the person's birthday.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5943,7 +5904,6 @@
       "default": "Age",
       "description": "Header for the section that displays the person's age.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5959,7 +5919,6 @@
       "default": "Just now",
       "description": "Text for the button that allows users to mark a movie or episode as watched just now.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5975,7 +5934,6 @@
       "default": "Release date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on the release date.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -5991,7 +5949,6 @@
       "default": "Other date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on a custom date.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6007,7 +5964,6 @@
       "default": "Unknown date",
       "description": "Text for the button that allows users to mark a movie or episode as watched on an unknown date.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
@@ -6023,7 +5979,6 @@
       "default": "This month",
       "description": "Text shown to indicate the users stats of the current month.",
       "exclude": [
-        "android",
         "ios"
       ]
     },
