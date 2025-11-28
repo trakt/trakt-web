@@ -1516,6 +1516,12 @@
     "list_placeholder_personal_list_empty": {
       "default": "Der er ikke noget i denne liste endnu."
     },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "Der er ingen serier på denne liste endnu."
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "Der er ingen film på denne liste endnu."
+    },
     "text_avatar": {
       "default": "Profilbillede"
     },

@@ -1516,6 +1516,12 @@
     "list_placeholder_personal_list_empty": {
       "default": "У цьому списку поки що нічого немає."
     },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "У цьому списку ще немає серіалів."
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "У цьому списку ще немає фільмів."
+    },
     "text_avatar": {
       "default": "Зображення профілю"
     },
