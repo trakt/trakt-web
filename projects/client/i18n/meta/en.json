@@ -6084,6 +6084,14 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_user_lists": {
+      "default": "Lists",
+      "description": "Title for lists containing a user's personal lists. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }
