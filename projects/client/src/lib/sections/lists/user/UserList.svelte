@@ -13,6 +13,17 @@
   const { list, type }: { list: MediaListSummary; type?: DiscoverMode } =
     $props();
   const { filterMap } = useFilter();
+
+  const placeholderText = $derived.by(() => {
+    switch (type) {
+      case "movie":
+        return m.list_placeholder_personal_list_empty_movies();
+      case "show":
+        return m.list_placeholder_personal_list_empty_shows();
+      default:
+        return m.list_placeholder_personal_list_empty();
+    }
+  });
 </script>
 
 <DrillableMediaList
@@ -38,6 +49,6 @@
   {/snippet}
 
   {#snippet empty()}
-    {m.list_placeholder_personal_list_empty()}
+    {placeholderText}
   {/snippet}
 </DrillableMediaList>

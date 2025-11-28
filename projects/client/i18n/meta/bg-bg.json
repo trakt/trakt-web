@@ -1516,6 +1516,12 @@
     "list_placeholder_personal_list_empty": {
       "default": "Все още няма нищо в този списък."
     },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "Все още няма сериали в този списък."
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "Все още няма филми в този списък."
+    },
     "text_avatar": {
       "default": "Профилна снимка"
     },

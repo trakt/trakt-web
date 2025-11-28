@@ -4155,6 +4155,22 @@
         "ios"
       ]
     },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "There are no shows in this list yet.",
+      "description": "Placeholder text shown when there are no shows in a user's personal list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "There are no movies in this list yet.",
+      "description": "Placeholder text shown when there are no movies in a user's personal list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "text_avatar": {
       "default": "Profile image",
       "description": "Text for the section that allows users to change their avatar.",

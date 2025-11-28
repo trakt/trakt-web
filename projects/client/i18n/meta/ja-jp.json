@@ -1516,6 +1516,12 @@
     "list_placeholder_personal_list_empty": {
       "default": "このリストにはまだ何もありません。"
     },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "このリストにはまだドラマがありません。"
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "このリストにはまだ映画がありません。"
+    },
     "text_avatar": {
       "default": "プロフィール画像"
     },

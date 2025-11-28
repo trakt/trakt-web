@@ -1516,6 +1516,12 @@
     "list_placeholder_personal_list_empty": {
       "default": "There is nothing in this list yet."
     },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "There are no shows in this list yet."
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "There are no movies in this list yet."
+    },
     "text_avatar": {
       "default": "Profile image"
     },

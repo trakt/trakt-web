@@ -1516,6 +1516,12 @@
     "list_placeholder_personal_list_empty": {
       "default": "Non c'è ancora nulla in questa lista."
     },
+    "list_placeholder_personal_list_empty_shows": {
+      "default": "Non ci sono ancora serie TV in questa lista."
+    },
+    "list_placeholder_personal_list_empty_movies": {
+      "default": "Non ci sono ancora film in questa lista."
+    },
     "text_avatar": {
       "default": "Immagine del profilo"
     },
