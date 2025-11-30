@@ -1,21 +1,16 @@
 <script lang="ts">
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { useStreamingServices } from "$lib/stores/useStreamingServices";
+  import ServiceLogo from "./_internal/ServiceLogo.svelte";
   import type { StreamingServiceLogoIntl } from "./StreamingServiceLogoIntl";
 
   type StreamingServiceLogoProps = {
     source: string;
     country: string;
     i18n: StreamingServiceLogoIntl;
-    variant?: "monochrome" | "colored";
   };
 
-  const {
-    source,
-    i18n,
-    variant = "monochrome",
-    country,
-  }: StreamingServiceLogoProps = $props();
+  const { source, i18n, country }: StreamingServiceLogoProps = $props();
 
   const { sources } = $derived(useStreamingServices(country));
 
@@ -34,16 +29,11 @@
   style="--logo-color: {service?.color ?? 'var(--color-text-primary)'};"
 >
   {#if service?.logoUrl}
-    <CrossOriginImage
-      src={service.logoUrl}
-      alt={i18n.alt(displayName)}
-      classList="trakt-service-logo"
-      variant={variant === "monochrome"
-        ? { type: "default" }
-        : {
-            type: "masked",
-            color: service?.color ?? "var(--color-text-primary)",
-          }}
+    <ServiceLogo
+      source={service.source}
+      logoSrc={service.logoUrl}
+      {displayName}
+      {i18n}
     />
     {#if service?.channelLogoUrl}
       <div class="trakt-channel-separator"></div>
@@ -64,7 +54,8 @@
     align-items: center;
     gap: var(--gap-micro);
 
-    :global(img) {
+    :global(img),
+    :global(svg) {
       width: var(--ni-36);
       height: auto;
     }
