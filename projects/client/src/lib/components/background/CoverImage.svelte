@@ -94,7 +94,9 @@
     height: 100%;
 
     background-color: var(--purple-900);
-    mix-blend-mode: color-dodge;
+    mix-blend-mode: color;
+    opacity: 0.45;
+    filter: brightness(0.8);
   }
 
   .trakt-background-cover-image {
