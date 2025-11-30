@@ -36,7 +36,7 @@
         ? m.button_label_drop_movie({ title })
         : m.button_label_drop_show({ title }),
     color: $color,
-    variant: $variant,
+    variant,
     onclick: confirmDrop,
     disabled: isDropping,
     ...events,

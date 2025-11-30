@@ -23,7 +23,7 @@
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ title }),
     color: $color,
-    variant: $variant,
+    variant,
     onclick: onRemove,
     disabled: isRemoving,
     ...events,

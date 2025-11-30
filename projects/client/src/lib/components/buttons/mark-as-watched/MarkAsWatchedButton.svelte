@@ -45,7 +45,7 @@
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: i18n.label({ title, isWatched, isRewatching }),
     color: $color,
-    variant: mode === "ask" ? "primary" : $variant,
+    variant: mode === "ask" ? "primary" : variant,
     onclick: handler,
     disabled: isMarkingAsWatched,
     ...events,
@@ -68,7 +68,7 @@
 {/if}
 
 {#if style === "action"}
-  <ActionButton style="ghost" {...commonProps} {...props} variant="secondary">
+  <ActionButton style="ghost" {...commonProps} {...props}>
     <MarkAsWatchedIcon {state} />
   </ActionButton>
 {/if}
