@@ -80,7 +80,8 @@
 
     padding: 0 var(--ni-12);
     height: calc(var(--ni-20) + var(--ni-12) * 2);
-    width: calc(100% - var(--ni-36));
+    width: 100%;
+    box-sizing: border-box;
     border-radius: var(--border-radius-m);
 
     align-content: center;
