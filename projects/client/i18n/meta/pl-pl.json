@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Jeszcze nie widziałeś \"{title}\""
     },
-    "button_label_like_comment": {
-      "default": "Polub recenzję"
-    },
-    "button_label_unlike_comment": {
-      "default": "Cofnij polubienie recenzji"
-    },
     "button_text_comment_likes": {
       "default": "{count} polubień",
       "variables": {

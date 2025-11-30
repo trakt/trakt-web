@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Vous n'avez pas encore vu \"{title}\""
     },
-    "button_label_like_comment": {
-      "default": "Aimer cet avis"
-    },
-    "button_label_unlike_comment": {
-      "default": "Ne plus aimer cet avis"
-    },
     "button_text_comment_likes": {
       "default": "{count} J'aime",
       "variables": {

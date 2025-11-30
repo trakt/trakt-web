@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Du har ikke sett \"{title}\" ennå"
     },
-    "button_label_like_comment": {
-      "default": "Lik anmeldelse"
-    },
-    "button_label_unlike_comment": {
-      "default": "Fjern likerklikk på anmeldelse"
-    },
     "button_text_comment_likes": {
       "default": "{count} likerklikk",
       "variables": {

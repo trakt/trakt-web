@@ -2871,22 +2871,6 @@
         "ios"
       ]
     },
-    "button_label_like_comment": {
-      "default": "Like Review",
-      "description": "Aria-label for the button that allows users to like a review.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
-    "button_label_unlike_comment": {
-      "default": "Unlike Review",
-      "description": "Aria-label for the button that allows users to unlike a review.",
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "button_text_comment_likes": {
       "default": "{count} likes",
       "description": "Text for the button that shows the number of likes a review has.",
@@ -2896,7 +2880,8 @@
         }
       },
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "button_label_close": {

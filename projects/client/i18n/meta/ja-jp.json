@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "\"{title}\" はまだ見ていないよ"
     },
-    "button_label_like_comment": {
-      "default": "レビューにいいね"
-    },
-    "button_label_unlike_comment": {
-      "default": "レビューのいいね解除"
-    },
     "button_text_comment_likes": {
       "default": "{count} いいね",
       "variables": {

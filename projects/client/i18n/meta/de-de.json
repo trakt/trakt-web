@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Du hast \"{title}\" noch nicht gesehen"
     },
-    "button_label_like_comment": {
-      "default": "Bewertung gefällt mir"
-    },
-    "button_label_unlike_comment": {
-      "default": "Bewertung gefällt mir nicht mehr"
-    },
     "button_text_comment_likes": {
       "default": "{count} Likes",
       "variables": {

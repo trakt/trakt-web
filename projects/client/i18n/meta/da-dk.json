@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Du har ikke set \"{title}\" endnu"
     },
-    "button_label_like_comment": {
-      "default": "Synes godt om anmeldelse"
-    },
-    "button_label_unlike_comment": {
-      "default": "Fjern like fra anmeldelse"
-    },
     "button_text_comment_likes": {
       "default": "{count} likes",
       "variables": {

@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Je hebt \"{title}\" nog niet bekeken"
     },
-    "button_label_like_comment": {
-      "default": "Beoordeling leuk vinden"
-    },
-    "button_label_unlike_comment": {
-      "default": "Beoordeling niet leuk vinden"
-    },
     "button_text_comment_likes": {
       "default": "{count} likes",
       "variables": {

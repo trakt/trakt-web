@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Du har inte sett \"{title}\" än"
     },
-    "button_label_like_comment": {
-      "default": "Gilla recension"
-    },
-    "button_label_unlike_comment": {
-      "default": "Ogilla recension"
-    },
     "button_text_comment_likes": {
       "default": "{count} gillanden",
       "variables": {

@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Încă nu ai urmărit \"{title}\"!"
     },
-    "button_label_like_comment": {
-      "default": "Apreciază recenzia"
-    },
-    "button_label_unlike_comment": {
-      "default": "Nu mai aprecia recenzia"
-    },
     "button_text_comment_likes": {
       "default": "{count} aprecieri",
       "variables": {

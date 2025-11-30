@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Non hai ancora visto \"{title}\""
     },
-    "button_label_like_comment": {
-      "default": "Mi piace la recensione"
-    },
-    "button_label_unlike_comment": {
-      "default": "Non mi piace la recensione"
-    },
     "button_text_comment_likes": {
       "default": "{count} Mi piace",
       "variables": {

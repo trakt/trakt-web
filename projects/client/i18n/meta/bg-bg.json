@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Все още не сте гледали \"{title}\""
     },
-    "button_label_like_comment": {
-      "default": "Харесва ми ревюто"
-    },
-    "button_label_unlike_comment": {
-      "default": "Не ми харесва ревюто"
-    },
     "button_text_comment_likes": {
       "default": "{count} харесвания",
       "variables": {
