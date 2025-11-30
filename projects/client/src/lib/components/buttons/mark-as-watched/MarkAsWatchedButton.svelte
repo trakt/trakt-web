@@ -34,10 +34,14 @@
     return isRemovable ? onRemove : onWatch;
   });
 
+  const preferredColor = $derived(
+    style === "dropdown-item" ? "default" : "purple",
+  );
+
   const { color, variant, ...events } = $derived(
     useDangerButton({
       isActive: isRemovable,
-      color: mode === "ask" ? "default" : "purple",
+      color: mode === "ask" ? "default" : preferredColor,
     }),
   );
   const state = $derived(isRemovable ? "watched" : "unwatched");

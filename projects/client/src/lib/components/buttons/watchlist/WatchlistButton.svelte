@@ -21,8 +21,13 @@
   }: WatchlistButtonProps = $props();
 
   const handler = $derived(isWatchlisted ? onRemove : onAdd);
+
+  const preferredColor = $derived(
+    type === "dropdown-item" ? "default" : "blue",
+  );
+
   const { color, variant, ...events } = $derived(
-    useDangerButton({ isActive: isWatchlisted, color: "blue" }),
+    useDangerButton({ isActive: isWatchlisted, color: preferredColor }),
   );
   const state = $derived(isWatchlisted ? "added" : "missing");
 

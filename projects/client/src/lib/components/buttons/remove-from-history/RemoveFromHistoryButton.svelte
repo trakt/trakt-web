@@ -16,8 +16,12 @@
     ...props
   }: RemoveFromHistoryButtonProps = $props();
 
+  const preferredColor = $derived(
+    style === "dropdown-item" ? "default" : "purple",
+  );
+
   const { color, variant, ...events } = $derived(
-    useDangerButton({ isActive: true, color: "purple" }),
+    useDangerButton({ isActive: true, color: preferredColor }),
   );
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
