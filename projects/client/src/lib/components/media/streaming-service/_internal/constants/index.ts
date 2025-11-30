@@ -1,0 +1,16 @@
+export const WELL_KNOWN_SERVICES: string[] = [
+  'amazon_video',
+  'amazon_prime',
+  'amazon_prime_video',
+  'amazon_prime_video_with_ads',
+  'crunchyroll',
+  'disney_plus',
+  'google_play_movies',
+  'hulu',
+  'netflix',
+  'paramount_plus',
+  'peacock',
+  'plex',
+  'rakuten_tv',
+  'youtube',
+] as const;
