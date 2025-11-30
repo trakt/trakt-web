@@ -11,6 +11,7 @@
     metaInfo?: Snippet;
     promotedItems?: T[];
     dimensionObserver?: (node: HTMLElement) => void;
+    listActions?: Snippet;
   };
 
   const {
@@ -23,6 +24,7 @@
     badge,
     dimensionObserver,
     metaInfo,
+    listActions,
   }: PageListProps<T> = $props();
 
   const customAction = (node: HTMLElement) => dimensionObserver?.(node);
@@ -43,7 +45,14 @@
 
 <section class="trakt-grid-list-container">
   {#if title}
-    <ListHeader {title} {metaInfo} {actions} {badge} inset="all" />
+    <ListHeader
+      {title}
+      {metaInfo}
+      {actions}
+      {badge}
+      {listActions}
+      inset="all"
+    />
   {/if}
 
   {#if uniqueItems.length > 0 || promotedItems.length > 0}

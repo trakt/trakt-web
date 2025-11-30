@@ -15,6 +15,7 @@
     sortBy?: string;
   } = $props();
 
+  // TODO intl
   // TODO: proper props
   const sortHowInitial = writable<SortDirection | undefined>(sortHow);
   const sortByInitial = writable<string | undefined>(sortBy);
@@ -42,11 +43,10 @@
 </script>
 
 <div class="trakt-list-sort-actions">
-  <p class="bold">Sort by</p>
   <div class="trakt-list-sort-buttons">
     <Button
-      size="small"
       style="flat"
+      size="small"
       color="default"
       label="TODO"
       onclick={() => isOpen.set(true)}
@@ -55,8 +55,8 @@
     </Button>
 
     <Button
-      size="small"
       style="flat"
+      size="small"
       color="default"
       label="TODO"
       onclick={() =>
@@ -91,12 +91,6 @@
     display: flex;
     gap: var(--gap-xs);
     align-items: center;
-
-    :global(.trakt-button) {
-      --button-height: var(--ni-32);
-      padding: var(--ni-10);
-      border-radius: var(--border-radius-s);
-    }
   }
 
   .trakt-list-sort-actions {

@@ -5,10 +5,12 @@
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
   import type { MediaType } from "$lib/requests/models/MediaType";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { writable } from "svelte/store";
   import DrilledMediaList from "../drilldown/DrilledMediaList.svelte";
   import PopularListItem from "../popular/PopularListItem.svelte";
   import PopupActions from "./_internal/PopupActions.svelte";
   import ListActions from "./ListActions.svelte";
+  import ListSortActions from "./ListSortActions.svelte";
   import type { Sorting } from "./models/Sorting";
   import { useListItems } from "./useListItems";
 
@@ -16,18 +18,20 @@
     title: string;
     type?: MediaType;
     list: MediaListSummary;
-    sorting?: Sorting | Nil;
   };
 
-  const { title, type, list, sorting }: UserListProps = $props();
+  const { title, type, list }: UserListProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
   const style = $derived($isMobile ? "summary" : "cover");
   const { filterMap } = useFilter();
 
+  // TODO from search params
+  const sorting = writable<Sorting | null>(null);
+
   const listCacheId = $derived.by(() => {
-    const sortKey = sorting
-      ? `${sorting.sortBy.value}-${sorting.sortHow}`
+    const sortKey = $sorting
+      ? `${$sorting.sortBy.value}-${$sorting.sortHow}`
       : "default";
     if (list.user?.slug) {
       return `${list.user.slug}-${list.slug}-${sortKey}`;
@@ -42,8 +46,15 @@
   {title}
   {type}
   filter={$filterMap}
-  useList={(params) => useListItems({ list, sorting, ...params })}
+  useList={(params) => useListItems({ list, sorting: $sorting, ...params })}
 >
+  {#snippet listActions()}
+    <ListSortActions
+      onSort={sorting.set}
+      sortHow={list.sortHow}
+      sortBy={list.sortBy}
+    />
+  {/snippet}
   {#snippet item(media)}
     <PopularListItem type={media.type} media={media.entry} {style}>
       {#snippet popupActions()}
