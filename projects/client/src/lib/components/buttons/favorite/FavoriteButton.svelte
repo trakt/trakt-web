@@ -48,7 +48,7 @@
 {/if}
 
 {#if style === "dropdown-item"}
-  <DropdownItem {...commonProps} style="flat" color="orange">
+  <DropdownItem {...commonProps} style="flat" color="default">
     {i18n.text({ isFavorited, title })}
     {#snippet icon()}
       <FavoriteIcon {state} />
