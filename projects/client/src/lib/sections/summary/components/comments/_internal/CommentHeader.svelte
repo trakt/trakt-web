@@ -6,6 +6,7 @@
   import UserProfileLink from "$lib/sections/lists/components/UserProfileLink.svelte";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import DeleteCommentButton from "./comment-actions/DeleteCommentButton.svelte";
+  import CommenterRating from "./CommenterRating.svelte";
 
   const { comment, type }: { comment: MediaComment; type: ExtendedMediaType } =
     $props();
@@ -25,7 +26,8 @@
     </div>
   </div>
 
-  <div class="trakt-comment-header-actions">
+  <div>
+    <CommenterRating {comment} />
     <DeleteCommentButton {comment} {type} />
   </div>
 </div>
