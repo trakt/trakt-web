@@ -29,15 +29,14 @@ describe('useDangerButton', () => {
     const button = useDangerButton({ color: 'blue', isActive: true });
 
     const color = await firstValueFrom(button.color);
-    expect(color).toBe('red');
+    expect(color).toBe('blue');
   });
 
-  it('should return correct variant based on touch and active state', async () => {
+  it('should return correct variant based active state', () => {
     vi.mocked(useMedia).mockReturnValue(of(false));
     const button = useDangerButton({ color: 'blue', isActive: true });
 
-    const variant = await firstValueFrom(button.variant);
-    expect(variant).toBe('primary');
+    expect(button.variant).toBe('primary');
   });
 
   it('should handle focus events', async () => {

@@ -29,7 +29,7 @@
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_restore_show({ title }),
     color: $color,
-    variant: $variant,
+    variant,
     onclick: confirmRestore,
     disabled: isRestoring,
     ...events,

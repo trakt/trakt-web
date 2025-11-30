@@ -92,18 +92,4 @@
   svg[data-size="small"] {
     transform: scale(0.75);
   }
-
-  @include for-touch {
-    svg {
-      &[data-state="watched"] {
-        .icon-state-active {
-          opacity: 1;
-        }
-
-        .icon-state-idle {
-          opacity: 0;
-        }
-      }
-    }
-  }
 </style>

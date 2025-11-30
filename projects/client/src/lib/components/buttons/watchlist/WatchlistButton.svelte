@@ -35,7 +35,7 @@
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     color: $color,
-    variant: $variant,
+    variant,
     ...actionProps,
   });
 </script>
