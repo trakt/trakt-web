@@ -80,7 +80,9 @@
       }
     }
 
-    :global(.trakt-list-item-container) {
+    :global(.trakt-list-item-container),
+    :global(.section-list-empty-state) {
+      width: 100%;
       padding: 0;
     }
 
