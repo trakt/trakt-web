@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Você ainda não assistiu \"{title}\""
     },
-    "button_label_like_comment": {
-      "default": "Curtir Avaliação"
-    },
-    "button_label_unlike_comment": {
-      "default": "Não Curtir Avaliação"
-    },
     "button_text_comment_likes": {
       "default": "{count} curtidas",
       "variables": {

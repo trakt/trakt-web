@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "You haven't watched \"{title}\" yet"
     },
-    "button_label_like_comment": {
-      "default": "Like Review"
-    },
-    "button_label_unlike_comment": {
-      "default": "Unlike Review"
-    },
     "button_text_comment_likes": {
       "default": "{count} likes",
       "variables": {

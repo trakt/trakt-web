@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Ви ще не дивилися \"{title}\""
     },
-    "button_label_like_comment": {
-      "default": "Сподобався відгук"
-    },
-    "button_label_unlike_comment": {
-      "default": "Не сподобався відгук"
-    },
     "button_text_comment_likes": {
       "default": "{count} лайків",
       "variables": {

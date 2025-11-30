@@ -1053,12 +1053,6 @@
     "list_placeholder_media_history": {
       "default": "Aún no has visto \"{title}\""
     },
-    "button_label_like_comment": {
-      "default": "Me gusta la reseña"
-    },
-    "button_label_unlike_comment": {
-      "default": "Ya no me gusta la reseña"
-    },
     "button_text_comment_likes": {
       "default": "{count} me gusta",
       "variables": {
