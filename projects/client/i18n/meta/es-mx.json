@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Reseñas"
     },
+    "dialog_title_comments_warning": {
+      "default": "Mínimo 5 palabras, sé respetuoso, marca los spoilers."
+    },
     "dialog_title_comment": {
       "default": "Reseña"
+    },
+    "dialog_title_reply": {
+      "default": "Responder"
     },
     "button_label_comment_reply": {
       "default": "Responder a {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Aplicar"
     },
+    "button_text_submit": {
+      "default": "Enviar"
+    },
     "button_label_create_list": {
       "default": "Crear lista"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Edita los detalles de tu lista."
     },
+    "list_description_released_shows": {
+      "default": "Series estrenadas"
+    },
     "list_description_released_movies": {
       "default": "Películas estrenadas"
+    },
+    "list_description_released_media": {
+      "default": "Series y películas estrenadas"
     },
     "page_title_edit_list": {
       "default": "Editar Lista"
@@ -1932,6 +1947,12 @@
     "text_info_history_removed": {
       "default": "Quitado del historial."
     },
+    "text_info_favorites_added": {
+      "default": "Se agregó a tus favoritos."
+    },
+    "text_info_favorites_removed": {
+      "default": "Se eliminó de tus favoritos."
+    },
     "text_info_list_added": {
       "default": "Añadido a la lista."
     },
@@ -1946,6 +1967,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serie abandonada."
+    },
+    "text_info_review_added": {
+      "default": "Tu reseña ha sido añadida."
+    },
+    "text_info_review_deleted": {
+      "default": "Tu reseña ha sido eliminada."
+    },
+    "text_info_reply_added": {
+      "default": "Tu respuesta ha sido añadida."
+    },
+    "text_info_reply_deleted": {
+      "default": "Tu respuesta ha sido eliminada."
     },
     "button_text_long_press_for_more": {
       "default": "Mantén para más"
@@ -2088,17 +2121,29 @@
     "button_text_delete_comment": {
       "default": "Eliminar reseña"
     },
+    "button_text_delete_reply": {
+      "default": "Eliminar respuesta"
+    },
     "button_label_delete_comment": {
       "default": "Eliminar reseña"
     },
     "warning_prompt_delete_comment": {
       "default": "¿Estás seguro de que quieres eliminar tu reseña?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "¿Estás seguro de que quieres eliminar tu respuesta?"
+    },
+    "warning_prompt_log_out": {
+      "default": "¿Estás seguro de que quieres cerrar sesión?"
+    },
     "page_title_discover": {
       "default": "Descubrir"
     },
     "list_title_start_watching": {
       "default": "Comenzar a ver"
+    },
+    "list_title_from_watchlist": {
+      "default": "De tu lista"
     },
     "button_label_view_all_start_watching": {
       "default": "Ver todos los títulos por ver de tu lista"
@@ -2229,6 +2274,9 @@
     "tag_text_watched": {
       "default": "Vista"
     },
+    "tag_text_watched_count": {
+      "default": "Visto: {count}"
+    },
     "header_birthday": {
       "default": "Cumpleaños"
     },
@@ -2264,6 +2312,12 @@
     },
     "text_this_month": {
       "default": "Este mes"
+    },
+    "text_this_month_so_far": {
+      "default": "En lo que va de mes"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} en revisión"
     },
     "text_view_all": {
       "default": "Ver todo"

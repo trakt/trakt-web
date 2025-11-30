@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Recensioner"
     },
+    "dialog_title_comments_warning": {
+      "default": "Minst 5 ord, var respektfull, markera spoilers."
+    },
     "dialog_title_comment": {
       "default": "Recension"
+    },
+    "dialog_title_reply": {
+      "default": "Svara"
     },
     "button_label_comment_reply": {
       "default": "Svara {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Använd"
     },
+    "button_text_submit": {
+      "default": "Skicka"
+    },
     "button_label_create_list": {
       "default": "Skapa lista"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Redigera dina listdetaljer."
     },
+    "list_description_released_shows": {
+      "default": "Släppta serier"
+    },
     "list_description_released_movies": {
       "default": "Släppta filmer"
+    },
+    "list_description_released_media": {
+      "default": "Släppta serier & filmer"
     },
     "page_title_edit_list": {
       "default": "Redigera lista"
@@ -1932,6 +1947,12 @@
     "text_info_history_removed": {
       "default": "Borttagen från visningshistorik."
     },
+    "text_info_favorites_added": {
+      "default": "Tillagd i favoriter."
+    },
+    "text_info_favorites_removed": {
+      "default": "Borttagen från favoriter."
+    },
     "text_info_list_added": {
       "default": "Tillagd i listan."
     },
@@ -1946,6 +1967,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serien har avbrutits."
+    },
+    "text_info_review_added": {
+      "default": "Recensionen har lagts till."
+    },
+    "text_info_review_deleted": {
+      "default": "Recensionen har tagits bort."
+    },
+    "text_info_reply_added": {
+      "default": "Svar har lagts till."
+    },
+    "text_info_reply_deleted": {
+      "default": "Svar har tagits bort."
     },
     "button_text_long_press_for_more": {
       "default": "Tryck länge för mer"
@@ -2088,17 +2121,29 @@
     "button_text_delete_comment": {
       "default": "Radera recension"
     },
+    "button_text_delete_reply": {
+      "default": "Ta bort svar"
+    },
     "button_label_delete_comment": {
       "default": "Radera recension"
     },
     "warning_prompt_delete_comment": {
       "default": "Är du säker på att du vill radera din recension?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "Är du säker på att du vill ta bort ditt svar?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Är du säker på att du vill logga ut?"
+    },
     "page_title_discover": {
       "default": "Upptäck"
     },
     "list_title_start_watching": {
       "default": "Börja titta"
+    },
+    "list_title_from_watchlist": {
+      "default": "Från att-se-lista"
     },
     "button_label_view_all_start_watching": {
       "default": "Visa alla objekt på din tittarlista"
@@ -2229,6 +2274,9 @@
     "tag_text_watched": {
       "default": "Sedda"
     },
+    "tag_text_watched_count": {
+      "default": "Sedda: {count}"
+    },
     "header_birthday": {
       "default": "Födelsedag"
     },
@@ -2264,6 +2312,12 @@
     },
     "text_this_month": {
       "default": "Denna månad"
+    },
+    "text_this_month_so_far": {
+      "default": "Den här månaden hittills"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} i recension"
     },
     "text_view_all": {
       "default": "Visa alla"

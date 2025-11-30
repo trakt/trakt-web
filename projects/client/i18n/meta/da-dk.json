@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Anmeldelser"
     },
+    "dialog_title_comments_warning": {
+      "default": "Minimum 5 ord, vær respektfuld, marker spoilere."
+    },
     "dialog_title_comment": {
       "default": "Anmeldelse"
+    },
+    "dialog_title_reply": {
+      "default": "Svar"
     },
     "button_label_comment_reply": {
       "default": "Svar til {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Anvend"
     },
+    "button_text_submit": {
+      "default": "Send"
+    },
     "button_label_create_list": {
       "default": "Opret liste"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Rediger dine listedetaljer."
     },
+    "list_description_released_shows": {
+      "default": "Udgivne serier"
+    },
     "list_description_released_movies": {
       "default": "Udkomne film"
+    },
+    "list_description_released_media": {
+      "default": "Udgivne serier & film"
     },
     "page_title_edit_list": {
       "default": "Rediger liste"
@@ -1932,6 +1947,12 @@
     "text_info_history_removed": {
       "default": "Fjernet fra set-historik."
     },
+    "text_info_favorites_added": {
+      "default": "Tilføjet til favoritter."
+    },
+    "text_info_favorites_removed": {
+      "default": "Fjernet fra favoritter."
+    },
     "text_info_list_added": {
       "default": "Tilføjet til liste."
     },
@@ -1946,6 +1967,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serien er droppet."
+    },
+    "text_info_review_added": {
+      "default": "Anmeldelse er tilføjet."
+    },
+    "text_info_review_deleted": {
+      "default": "Anmeldelse er slettet."
+    },
+    "text_info_reply_added": {
+      "default": "Svar er tilføjet."
+    },
+    "text_info_reply_deleted": {
+      "default": "Svar er slettet."
     },
     "button_text_long_press_for_more": {
       "default": "Tryk længe for mere"
@@ -2088,17 +2121,29 @@
     "button_text_delete_comment": {
       "default": "Slet anmeldelse"
     },
+    "button_text_delete_reply": {
+      "default": "Slet svar"
+    },
     "button_label_delete_comment": {
       "default": "Slet anmeldelse"
     },
     "warning_prompt_delete_comment": {
       "default": "Er du sikker på, at du vil slette din anmeldelse?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "Er du sikker på, at du vil slette dit svar?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Er du sikker på, at du vil logge ud?"
+    },
     "page_title_discover": {
       "default": "Opdag"
     },
     "list_title_start_watching": {
       "default": "Begynd at se"
+    },
+    "list_title_from_watchlist": {
+      "default": "Fra min liste"
     },
     "button_label_view_all_start_watching": {
       "default": "Se alle elementerne på listen, der skal ses"
@@ -2229,6 +2274,9 @@
     "tag_text_watched": {
       "default": "Set"
     },
+    "tag_text_watched_count": {
+      "default": "Set: {count}"
+    },
     "header_birthday": {
       "default": "Fødselsdag"
     },
@@ -2264,6 +2312,12 @@
     },
     "text_this_month": {
       "default": "Denne måned"
+    },
+    "text_this_month_so_far": {
+      "default": "Hidtil denne måned"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} til anmeldelse"
     },
     "text_view_all": {
       "default": "Vis alle"

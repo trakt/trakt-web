@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Bewertungen"
     },
+    "dialog_title_comments_warning": {
+      "default": "Mindestens 5 Wörter, sei respektvoll, markiere Spoiler."
+    },
     "dialog_title_comment": {
       "default": "Bewertung"
+    },
+    "dialog_title_reply": {
+      "default": "Antworten"
     },
     "button_label_comment_reply": {
       "default": "Antworte {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Anwenden"
     },
+    "button_text_submit": {
+      "default": "Senden"
+    },
     "button_label_create_list": {
       "default": "Liste erstellen"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Bearbeiten Sie Ihre Listendetails."
     },
+    "list_description_released_shows": {
+      "default": "Veröffentlichte Serien"
+    },
     "list_description_released_movies": {
       "default": "Veröffentlichte Filme"
+    },
+    "list_description_released_media": {
+      "default": "Veröffentlichte Serien & Filme"
     },
     "page_title_edit_list": {
       "default": "Liste bearbeiten"
@@ -1932,6 +1947,12 @@
     "text_info_history_removed": {
       "default": "Aus der History entfernt."
     },
+    "text_info_favorites_added": {
+      "default": "Zu Favoriten hinzugefügt."
+    },
+    "text_info_favorites_removed": {
+      "default": "Aus Favoriten entfernt."
+    },
     "text_info_list_added": {
       "default": "Zur Liste hinzugefügt."
     },
@@ -1946,6 +1967,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serie abgebrochen."
+    },
+    "text_info_review_added": {
+      "default": "Bewertung wurde hinzugefügt."
+    },
+    "text_info_review_deleted": {
+      "default": "Bewertung wurde gelöscht."
+    },
+    "text_info_reply_added": {
+      "default": "Antwort wurde hinzugefügt."
+    },
+    "text_info_reply_deleted": {
+      "default": "Antwort wurde gelöscht."
     },
     "button_text_long_press_for_more": {
       "default": "Länger drücken für mehr"
@@ -2088,17 +2121,29 @@
     "button_text_delete_comment": {
       "default": "Bewertung löschen"
     },
+    "button_text_delete_reply": {
+      "default": "Antwort löschen"
+    },
     "button_label_delete_comment": {
       "default": "Bewertung löschen"
     },
     "warning_prompt_delete_comment": {
       "default": "Möchtest du deine Bewertung wirklich löschen?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "Möchten Sie Ihre Antwort wirklich löschen?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Möchten Sie sich wirklich abmelden?"
+    },
     "page_title_discover": {
       "default": "Entdecken"
     },
     "list_title_start_watching": {
       "default": "Ansehen starten"
+    },
+    "list_title_from_watchlist": {
+      "default": "Von Beobachtungsliste"
     },
     "button_label_view_all_start_watching": {
       "default": "Alle Elemente der Watchlist ansehen"
@@ -2229,6 +2274,9 @@
     "tag_text_watched": {
       "default": "Gesehen"
     },
+    "tag_text_watched_count": {
+      "default": "Gesehen: {count}"
+    },
     "header_birthday": {
       "default": "Geburtstag"
     },
@@ -2264,6 +2312,12 @@
     },
     "text_this_month": {
       "default": "Diesen Monat"
+    },
+    "text_this_month_so_far": {
+      "default": "Diesen Monat bisher"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} im Rückblick"
     },
     "text_view_all": {
       "default": "Alle anzeigen"

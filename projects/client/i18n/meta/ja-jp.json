@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "レビュー"
     },
+    "dialog_title_comments_warning": {
+      "default": "5単以上、敬意を払い、ネタバレをマークしてください。"
+    },
     "dialog_title_comment": {
       "default": "レビュー"
+    },
+    "dialog_title_reply": {
+      "default": "返信"
     },
     "button_label_comment_reply": {
       "default": "{user}さんに返信する",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "適用"
     },
+    "button_text_submit": {
+      "default": "投稿する"
+    },
     "button_label_create_list": {
       "default": "リストを作成"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "リストの詳細を編集します。"
     },
+    "list_description_released_shows": {
+      "default": "配信済みドラマ"
+    },
     "list_description_released_movies": {
       "default": "公開映画"
+    },
+    "list_description_released_media": {
+      "default": "配信済みドラマ＆映画"
     },
     "page_title_edit_list": {
       "default": "リスト編集"
@@ -1932,6 +1947,12 @@
     "text_info_history_removed": {
       "default": "視聴履歴から削除しました。"
     },
+    "text_info_favorites_added": {
+      "default": "お気に入りに登録されました。"
+    },
+    "text_info_favorites_removed": {
+      "default": "お気に入りから解除されました。"
+    },
     "text_info_list_added": {
       "default": "リストに追加しました。"
     },
@@ -1946,6 +1967,18 @@
     },
     "text_info_show_dropped": {
       "default": "視聴を放棄しました。"
+    },
+    "text_info_review_added": {
+      "default": "レビューが投稿されました。"
+    },
+    "text_info_review_deleted": {
+      "default": "レビューが削除されました。"
+    },
+    "text_info_reply_added": {
+      "default": "返信が追加されました。"
+    },
+    "text_info_reply_deleted": {
+      "default": "返信が削除されました。"
     },
     "button_text_long_press_for_more": {
       "default": "長押しで詳細"
@@ -2088,17 +2121,29 @@
     "button_text_delete_comment": {
       "default": "レビューを削除"
     },
+    "button_text_delete_reply": {
+      "default": "返信を削除"
+    },
     "button_label_delete_comment": {
       "default": "レビューを削除"
     },
     "warning_prompt_delete_comment": {
       "default": "本当にレビューを削除しますか？"
     },
+    "warning_prompt_delete_reply": {
+      "default": "この返信を削除してもよろしいですか？"
+    },
+    "warning_prompt_log_out": {
+      "default": "ログアウトしてもよろしいですか？"
+    },
     "page_title_discover": {
       "default": "発見"
     },
     "list_title_start_watching": {
       "default": "視聴開始"
+    },
+    "list_title_from_watchlist": {
+      "default": "ウォッチリストから"
     },
     "button_label_view_all_start_watching": {
       "default": "視聴可能なアイテムをすべて表示"
@@ -2229,6 +2274,9 @@
     "tag_text_watched": {
       "default": "視聴済み"
     },
+    "tag_text_watched_count": {
+      "default": "視聴済: {count}"
+    },
     "header_birthday": {
       "default": "誕生日"
     },
@@ -2264,6 +2312,12 @@
     },
     "text_this_month": {
       "default": "今月"
+    },
+    "text_this_month_so_far": {
+      "default": "今月これまでのところ"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} のレビュー"
     },
     "text_view_all": {
       "default": "すべて表示"

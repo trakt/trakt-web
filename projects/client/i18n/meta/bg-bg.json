@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Ревюта"
     },
+    "dialog_title_comments_warning": {
+      "default": "Минимум 5 думи, бъдете уважителни, маркирайте спойлери."
+    },
     "dialog_title_comment": {
       "default": "Ревю"
+    },
+    "dialog_title_reply": {
+      "default": "Отговор"
     },
     "button_label_comment_reply": {
       "default": "Отговор до {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Приложи"
     },
+    "button_text_submit": {
+      "default": "Изпрати"
+    },
     "button_label_create_list": {
       "default": "Създай списък"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Редактирайте подробностите за списъка си."
     },
+    "list_description_released_shows": {
+      "default": "Пуснати сериали"
+    },
     "list_description_released_movies": {
       "default": "Излезли филми"
+    },
+    "list_description_released_media": {
+      "default": "Пуснати сериали и филми"
     },
     "page_title_edit_list": {
       "default": "Редактиране на списък"
@@ -1932,6 +1947,12 @@
     "text_info_history_removed": {
       "default": "Премахнато от историята на гледане."
     },
+    "text_info_favorites_added": {
+      "default": "Добавено към любими."
+    },
+    "text_info_favorites_removed": {
+      "default": "Премахнато от любими."
+    },
     "text_info_list_added": {
       "default": "Добавено към списъка."
     },
@@ -1946,6 +1967,18 @@
     },
     "text_info_show_dropped": {
       "default": "Сериалът е прекъснат."
+    },
+    "text_info_review_added": {
+      "default": "Отзивът е добавен."
+    },
+    "text_info_review_deleted": {
+      "default": "Отзивът е изтрит."
+    },
+    "text_info_reply_added": {
+      "default": "Отговорът е добавен."
+    },
+    "text_info_reply_deleted": {
+      "default": "Отговорът е изтрит."
     },
     "button_text_long_press_for_more": {
       "default": "Натиснете за повече"
@@ -2088,17 +2121,29 @@
     "button_text_delete_comment": {
       "default": "Изтрий ревюто"
     },
+    "button_text_delete_reply": {
+      "default": "Изтрий отговора"
+    },
     "button_label_delete_comment": {
       "default": "Изтрий ревюто"
     },
     "warning_prompt_delete_comment": {
       "default": "Сигурни ли сте, че искате да изтриете ревюто си?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "Сигурни ли сте, че искате да изтриете отговора си?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Сигурни ли сте, че искате да излезете?"
+    },
     "page_title_discover": {
       "default": "Открийте"
     },
     "list_title_start_watching": {
       "default": "Започни гледане"
+    },
+    "list_title_from_watchlist": {
+      "default": "От списъка за гледане"
     },
     "button_label_view_all_start_watching": {
       "default": "Виж всички елементи в списъка за гледане"
@@ -2229,6 +2274,9 @@
     "tag_text_watched": {
       "default": "Гледано"
     },
+    "tag_text_watched_count": {
+      "default": "Гледани: {count}"
+    },
     "header_birthday": {
       "default": "Рожден ден"
     },
@@ -2264,6 +2312,12 @@
     },
     "text_this_month": {
       "default": "Този месец"
+    },
+    "text_this_month_so_far": {
+      "default": "До момента този месец"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} в преглед"
     },
     "text_view_all": {
       "default": "Виж всички"

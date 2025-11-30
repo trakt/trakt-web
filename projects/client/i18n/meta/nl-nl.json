@@ -1087,8 +1087,14 @@
     "dialog_title_comments": {
       "default": "Beoordelingen"
     },
+    "dialog_title_comments_warning": {
+      "default": "Minimaal 5 woorden, wees respectvol, markeer spoilers."
+    },
     "dialog_title_comment": {
       "default": "Beoordeling"
+    },
+    "dialog_title_reply": {
+      "default": "Reageren"
     },
     "button_label_comment_reply": {
       "default": "Reageer op {user}",
@@ -1489,6 +1495,9 @@
     "button_text_apply": {
       "default": "Toepassen"
     },
+    "button_text_submit": {
+      "default": "Verzenden"
+    },
     "button_label_create_list": {
       "default": "Lijst aanmaken"
     },
@@ -1504,8 +1513,14 @@
     "page_description_edit_list": {
       "default": "Bewerk je lijstdetails."
     },
+    "list_description_released_shows": {
+      "default": "Uitgebrachte series"
+    },
     "list_description_released_movies": {
       "default": "Uitgebrachte films"
+    },
+    "list_description_released_media": {
+      "default": "Uitgebrachte series & films"
     },
     "page_title_edit_list": {
       "default": "Lijst bewerken"
@@ -1932,6 +1947,12 @@
     "text_info_history_removed": {
       "default": "Verwijderd uit kijkgeschiedenis."
     },
+    "text_info_favorites_added": {
+      "default": "Toegevoegd aan favorieten."
+    },
+    "text_info_favorites_removed": {
+      "default": "Verwijderd uit favorieten."
+    },
     "text_info_list_added": {
       "default": "Toegevoegd aan de lijst."
     },
@@ -1946,6 +1967,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serie gestopt."
+    },
+    "text_info_review_added": {
+      "default": "Beoordeling is toegevoegd."
+    },
+    "text_info_review_deleted": {
+      "default": "Beoordeling is verwijderd."
+    },
+    "text_info_reply_added": {
+      "default": "Reactie is toegevoegd."
+    },
+    "text_info_reply_deleted": {
+      "default": "Reactie is verwijderd."
     },
     "button_text_long_press_for_more": {
       "default": "Lang indrukken voor meer"
@@ -2088,17 +2121,29 @@
     "button_text_delete_comment": {
       "default": "Beoordeling verwijderen"
     },
+    "button_text_delete_reply": {
+      "default": "Reactie verwijderen"
+    },
     "button_label_delete_comment": {
       "default": "Beoordeling verwijderen"
     },
     "warning_prompt_delete_comment": {
       "default": "Weet je zeker dat je je beoordeling wilt verwijderen?"
     },
+    "warning_prompt_delete_reply": {
+      "default": "Weet u zeker dat u uw reactie wilt verwijderen?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Weet u zeker dat u wilt uitloggen?"
+    },
     "page_title_discover": {
       "default": "Ontdek"
     },
     "list_title_start_watching": {
       "default": "Start met kijken"
+    },
+    "list_title_from_watchlist": {
+      "default": "Van kijklijst"
     },
     "button_label_view_all_start_watching": {
       "default": "Bekijk alle items op de kijklijst"
@@ -2229,6 +2274,9 @@
     "tag_text_watched": {
       "default": "Bekeken"
     },
+    "tag_text_watched_count": {
+      "default": "Bekeken: {count}"
+    },
     "header_birthday": {
       "default": "Verjaardag"
     },
@@ -2264,6 +2312,12 @@
     },
     "text_this_month": {
       "default": "Deze maand"
+    },
+    "text_this_month_so_far": {
+      "default": "Deze maand tot nu toe"
+    },
+    "text_this_month_in_review": {
+      "default": "{title} in overzicht"
     },
     "text_view_all": {
       "default": "Bekijk alles"
