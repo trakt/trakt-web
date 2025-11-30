@@ -441,9 +441,6 @@
     "list_title_watchlist_movies": {
       "default": "Dine film"
     },
-    "button_label_stream_on": {
-      "default": "Se \"{title}\" nu"
-    },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo"
     },

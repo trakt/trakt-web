@@ -441,9 +441,6 @@
     "list_title_watchlist_movies": {
       "default": "Je Films"
     },
-    "button_label_stream_on": {
-      "default": "Bekijk \"{title}\" nu"
-    },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo"
     },

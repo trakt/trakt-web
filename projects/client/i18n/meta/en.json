@@ -1126,19 +1126,6 @@
         "web"
       ]
     },
-    "button_label_stream_on": {
-      "default": "Watch \"{title}\" now",
-      "description": "Aria-label for the button that allows users to stream a movie or show on an external service.",
-      "variables": {
-        "title": {
-          "type": "string"
-        }
-      },
-      "exclude": [
-        "android",
-        "ios"
-      ]
-    },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo",
       "description": "Alt text for the logo of a streaming service.",
@@ -2285,7 +2272,8 @@
       "default": "Stream on",
       "description": "Text for the button that allows users to stream a movie or show on an external service.",
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "header_stream_on": {
