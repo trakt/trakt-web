@@ -441,9 +441,6 @@
     "list_title_watchlist_movies": {
       "default": "Ваші фільми"
     },
-    "button_label_stream_on": {
-      "default": "Дивитися \"{title}\" зараз"
-    },
     "image_alt_streaming_service_logo": {
       "default": "Логотип {service}"
     },

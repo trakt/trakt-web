@@ -441,9 +441,6 @@
     "list_title_watchlist_movies": {
       "default": "あなたの映画"
     },
-    "button_label_stream_on": {
-      "default": "\"{title}\"を今すぐ視聴"
-    },
     "image_alt_streaming_service_logo": {
       "default": "{service}のロゴ"
     },

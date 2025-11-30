@@ -441,9 +441,6 @@
     "list_title_watchlist_movies": {
       "default": "Your Movies"
     },
-    "button_label_stream_on": {
-      "default": "Watch \"{title}\" now"
-    },
     "image_alt_streaming_service_logo": {
       "default": "{service} logo"
     },

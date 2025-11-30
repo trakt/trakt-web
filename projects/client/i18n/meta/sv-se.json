@@ -441,9 +441,6 @@
     "list_title_watchlist_movies": {
       "default": "Dina filmer"
     },
-    "button_label_stream_on": {
-      "default": "Titta på \"{title}\" nu"
-    },
     "image_alt_streaming_service_logo": {
       "default": "{service} logotyp"
     },
