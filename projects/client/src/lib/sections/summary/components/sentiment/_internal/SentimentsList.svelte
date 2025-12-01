@@ -1,7 +1,8 @@
 <script lang="ts">
   import SentimentIcon from "$lib/components/icons/SentimentIcon.svelte";
   import type { Sentiments } from "$lib/requests/models/Sentiments";
-  import ShadowScroller from "../../comments/_internal/ShadowScroller.svelte";
+
+  const SENTIMENT_LIMIT = 2;
 
   type SentimentProps = {
     sentiments: Sentiments;
@@ -9,40 +10,43 @@
 
   const { sentiments }: SentimentProps = $props();
 
-  const mappedSentiments = [
+  const mappedSentiments = $derived([
     {
-      sentiments: sentiments.good,
+      sentiments: sentiments.good.slice(0, SENTIMENT_LIMIT),
       sentiment: "good" as const,
-      color: "var(--color-text-sentiment-good)",
+      backgroundColor: "var(--purple-600)",
     },
     {
-      sentiments: sentiments.bad,
+      sentiments: sentiments.bad.slice(0, SENTIMENT_LIMIT),
       sentiment: "bad" as const,
-      color: "var(--color-text-sentiment-bad)",
+      backgroundColor: "var(--purple-900)",
     },
-  ];
+  ]);
 </script>
 
-<ShadowScroller>
-  <div class="trakt-sentiment-body">
-    {#each mappedSentiments as { sentiment, sentiments, color }}
-      <div class="trakt-sentiment-container" style="--sentiment-color: {color}">
-        <SentimentIcon {sentiment} --icon-fill-color={color} />
-        <ul>
-          {#each sentiments as sentiment}
-            <li><p>{sentiment}</p></li>
-          {/each}
-        </ul>
-      </div>
-    {/each}
-  </div>
-</ShadowScroller>
+<div class="trakt-sentiment-body">
+  {#each mappedSentiments as { sentiment, sentiments, backgroundColor }}
+    <div
+      class="trakt-sentiment-container"
+      style="--sentiment-background-color: {backgroundColor}"
+    >
+      <SentimentIcon {sentiment} />
+      <ul>
+        {#each sentiments as sentiment}
+          <li><p>{sentiment}</p></li>
+        {/each}
+      </ul>
+    </div>
+  {/each}
+</div>
 
 <style>
   .trakt-sentiment-body {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
+    gap: var(--gap-xxs);
+
+    flex-grow: 1;
   }
 
   ul {
@@ -52,16 +56,33 @@
 
     margin: 0;
     padding: 0;
-    padding-left: var(--ni-24);
+    padding-left: var(--gap-m);
 
     font-size: var(--font-size-text);
+
+    list-style-type: none;
+
+    border-left: 1px solid
+      color-mix(in srgb, var(--color-text-primary) 10%, transparent);
   }
 
   .trakt-sentiment-container {
-    display: flex;
-    gap: var(--gap-xs);
+    flex: 1 1 0;
 
-    color: var(--sentiment-color);
+    display: flex;
+    gap: var(--gap-m);
+    align-items: center;
+
+    color: var(--color-text-primary);
+
+    background-color: color-mix(
+      in srgb,
+      var(--sentiment-background-color) 35%,
+      var(--color-card-background)
+    );
+
+    padding: var(--gap-m);
+    border-radius: var(--border-radius-m);
 
     :global(svg) {
       flex-shrink: 0;
