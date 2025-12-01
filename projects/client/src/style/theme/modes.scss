@@ -152,6 +152,11 @@
    */
   --streaming-service-logo-filter: brightness(0);
   --color-just-watch: #c79a00;
+
+  /*
+    * Cover image
+    */
+  --mix-blend-mode-cover-overlay: overlay;
 }
 
 // Define theme variables for dark mode
@@ -304,6 +309,11 @@
    */
   --streaming-service-logo-filter: brightness(1);
   --color-just-watch: #fcc405;
+
+  /*
+    * Cover image
+    */
+  --mix-blend-mode-cover-overlay: color-dodge;
 }
 
 // Apply themes to selectors
