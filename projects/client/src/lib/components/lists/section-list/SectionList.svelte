@@ -11,6 +11,7 @@
   import ListHeader from "../_internal/ListHeader.svelte";
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
   import type { ListProps } from "../ListProps";
+  import { resetScroll } from "./_internal/resetScroll";
   import { useCollapsedList } from "./_internal/useCollapsedList";
   import CollapseIcon from "./CollapseIcon.svelte";
   import ExpandIcon from "./ExpandIcon.svelte";
@@ -111,6 +112,7 @@
         {#snippet childrenA()}
           <div
             use:scrollHistory={id}
+            use:resetScroll
             class="trakt-list-item-container section-list-horizontal-scroll"
             data-dpad-navigation={DpadNavigationType.List}
             data-navigation-type={$navigation}
