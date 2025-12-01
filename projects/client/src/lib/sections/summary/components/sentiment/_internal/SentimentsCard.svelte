@@ -10,6 +10,7 @@
   <Card
     --width-card="var(--width-sentiments-card)"
     --height-card="var(--height-sentiments-card)"
+    variant="transparent"
   >
     <div class="trakt-sentiments-container">
       <SentimentsList {sentiments} />
@@ -34,10 +35,5 @@
 
     position: relative;
     display: flex;
-
-    padding: var(--ni-16);
-    box-sizing: border-box;
-
-    background: var(--sentiments-background);
   }
 </style>

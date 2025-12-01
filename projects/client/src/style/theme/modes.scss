@@ -78,12 +78,6 @@
   --color-tooltip-background: var(--shade-10);
   --color-tooltip-text: var(--shade-800);
 
-  /**
-   * Sentiments
-   */
-  --color-text-sentiment-good: var(--purple-700);
-  --color-text-sentiment-bad: var(--red-700);
-
   /*
   * Overrides
   */
@@ -139,13 +133,6 @@
   --toggle-background-color: var(--shade-100);
   --toggle-background-hover-color: var(--shade-200);
   --toggle-foreground-color: var(--shade-900);
-
-  /*
-   * Sentiments
-   */
-  --sentiments-background: radial-gradient(79.17% 85.85% at 50% 100.09%,
-    var(--purple-100) 0%,
-    var(--shade-50) 100%);
 
   /*
    * Where to watch
@@ -244,12 +231,6 @@
   --color-background-duration-tag: var(--shade-10);
 
   /**
-   * Sentiments
-   */
-  --color-text-sentiment-good: var(--purple-100);
-  --color-text-sentiment-bad: var(--red-100);
-
-  /**
    * Toasts
    */
   --color-toast-background: color-mix(in srgb, var(--shade-900) 70%, transparent 30%) --color-toast-border: var(--shade-700);
@@ -296,13 +277,6 @@
   --toggle-background-color: var(--shade-700);
   --toggle-background-hover-color: var(--shade-600);
   --toggle-foreground-color: var(--shade-50);
-
-  /*
-   * Sentiments
-   */
-  --sentiments-background: radial-gradient(79.17% 85.85% at 50% 100.09%,
-      var(--purple-900) 0%,
-      var(--shade-920) 100%);
 
   /*
    * Where to watch
