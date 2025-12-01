@@ -3,7 +3,6 @@
   import Card from "$lib/components/card/Card.svelte";
   import CardActionBar from "$lib/components/card/CardActionBar.svelte";
   import CardCover from "$lib/components/card/CardCover.svelte";
-  import { EpisodeIntlProvider } from "$lib/components/episode/EpisodeIntlProvider";
   import Link from "$lib/components/link/Link.svelte";
   import GenreList from "$lib/components/summary/GenreList.svelte";
   import IndicatorTags from "$lib/components/tags/IndicatorTags.svelte";
@@ -13,7 +12,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import Spoiler from "$lib/features/spoilers/components/Spoiler.svelte";
   import { EPISODE_COVER_PLACEHOLDER } from "$lib/utils/constants";
-  import { toHumanDate } from "$lib/utils/formatting/date/toHumanDate";
+  import { toRelativeHumanDay } from "$lib/utils/formatting/date/toRelativeHumanDay";
   import { episodeNumberLabel } from "$lib/utils/intl/episodeNumberLabel";
   import { episodeSubtitle } from "$lib/utils/intl/episodeSubtitle";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
@@ -104,14 +103,7 @@
           </p>
         {/if}
         <p class="trakt-card-subtitle secondary ellipsis">
-          {#if rest.type === "episode"}
-            {EpisodeIntlProvider.timestampText({
-              type: rest.episode.type,
-              date: rest.date,
-            })}
-          {:else}
-            {toHumanDate(new Date(), rest.date, getLocale())}
-          {/if}
+          {toRelativeHumanDay(new Date(), rest.date, getLocale())}
         </p>
       {:else if rest.type === "episode" || (rest.variant === "start" && "episode" in rest)}
         <p class="trakt-card-title ellipsis">
