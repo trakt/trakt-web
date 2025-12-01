@@ -3,7 +3,7 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import ReviewContent from "$lib/sections/components/ReviewContent.svelte";
-  import { useMonthToDate } from "$lib/sections/profile/stores/useMonthToDate";
+  import { DEFAULT_COVER } from "$lib/utils/constants";
   import { slide } from "svelte/transition";
   import MonthInReviewLink from "../../components/MonthInReviewLink.svelte";
   import DismissButton from "../_internal/DismissButton.svelte";
@@ -20,16 +20,15 @@
       year: month.getFullYear(),
     }),
   );
-
-  const { monthToDate, isLoading: isLoadingMonthToDate } = $derived(
-    useMonthToDate({ slug: $user.slug }),
-  );
 </script>
 
 <RenderFor audience="vip">
-  {#if $review && !$isLoadingMonthToDate}
+  {#if $review}
     <div class="trakt-month-in-review" transition:slide={{ duration: 150 }}>
-      <ReviewContent coverSrc={$monthToDate.coverUrl} variant="gradient">
+      <ReviewContent
+        coverSrc={$review.firstPlay?.cover.url.medium ?? DEFAULT_COVER}
+        variant="gradient"
+      >
         {#snippet header()}
           <div class="trakt-mir-header-container">
             <div class="trakt-mir-header">
