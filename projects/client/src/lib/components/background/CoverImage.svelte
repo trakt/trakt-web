@@ -36,6 +36,8 @@
     width: 100%;
     background: var(--shade-900);
 
+    opacity: 0.5;
+
     @include color-mix-variable-with-fallback(
       --trakt-cover-primary-color-transparent,
       color-mix(
@@ -50,6 +52,10 @@
       ),
       color-mix(in srgb, var(--color-background) 25%, transparent)
     );
+
+    @include for-tablet-sm-and-below {
+      opacity: 1;
+    }
 
     &[data-cover-type="main"] {
       --color-transparent-background: transparent;
@@ -139,9 +145,18 @@
       background: linear-gradient(
         180deg,
         transparent 0%,
-        color-mix(in srgb, var(--color-background) 95%, transparent) 65%,
+        color-mix(in srgb, var(--color-background) 90%, transparent) 90%,
         var(--color-background) 100%
       );
+
+      @include for-tablet-sm-and-below {
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          color-mix(in srgb, var(--color-background) 95%, transparent) 65%,
+          var(--color-background) 100%
+        );
+      }
     }
 
     &:not([data-cover-type="main"]) {
