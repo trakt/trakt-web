@@ -86,6 +86,8 @@
   }
 
   .trakt-background-cover-image-overlay {
+    z-index: var(--layer-background);
+
     position: fixed;
     top: 0;
     left: 0;
