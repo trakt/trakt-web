@@ -1,4 +1,5 @@
 import type { MonthInReviewResponse } from '@trakt/api';
+import { MovieHereticResponseMock } from '../../summary/movies/heretic/response/MovieHereticResponseMock.ts';
 
 export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
   'stats': {
@@ -130,34 +131,7 @@ export const UserMonthInReviewResponseMock: MonthInReviewResponse = {
   'first_watched': {
     'type': 'movie',
     'watched_at': '2025-05-07T14:42:04.000Z',
-    'movie': {
-      'title': 'Orphan',
-      'year': 2009,
-      'ids': {
-        'trakt': 13000,
-        'slug': 'orphan-2009',
-        'imdb': 'tt1148204',
-        'tmdb': 21208,
-      },
-      'images': {
-        'fanart': [
-          'walter-r2.trakt.tv/images/movies/000/013/000/fanarts/medium/01e98ac2be.jpg.webp',
-        ],
-        'poster': [
-          'walter-r2.trakt.tv/images/movies/000/013/000/posters/thumb/9ffc1c14b1.jpg.webp',
-        ],
-        'logo': [
-          'walter-r2.trakt.tv/images/movies/000/013/000/logos/medium/8b61f0a6a6.png.webp',
-        ],
-        'clearart': [],
-        'banner': [
-          'walter-r2.trakt.tv/images/movies/000/013/000/banners/medium/a4d9fb63f7.jpg.webp',
-        ],
-        'thumb': [
-          'walter-r2.trakt.tv/images/movies/000/013/000/thumbs/medium/efcacdd59e.jpg.webp',
-        ],
-      },
-    },
+    'movie': MovieHereticResponseMock,
   },
   'last_watched': {
     'type': 'movie',
