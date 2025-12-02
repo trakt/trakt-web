@@ -2321,6 +2321,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Vezi toate listele"
+    },
+    "button_text_sort_default": {
+      "default": "Implicit"
+    },
+    "button_label_sort_default": {
+      "default": "Ordonează după implicit"
+    },
+    "button_text_sort_added_date": {
+      "default": "Data Adăugării"
+    },
+    "button_label_sort_added_date": {
+      "default": "Ordonează după data adăugării"
+    },
+    "button_text_sort_runtime": {
+      "default": "Durată"
+    },
+    "button_label_sort_runtime": {
+      "default": "Ordonează după durată"
+    },
+    "button_text_sort_rating": {
+      "default": "Scor"
+    },
+    "button_label_sort_rating": {
+      "default": "Ordonează după scor"
+    },
+    "button_text_sort_release_date": {
+      "default": "Data Lansării"
+    },
+    "button_label_sort_release_date": {
+      "default": "Ordonează după data lansării"
+    },
+    "button_label_sort_list": {
+      "default": "Ordonează lista"
+    },
+    "button_label_sort_ascending": {
+      "default": "Ordonează crescător"
+    },
+    "button_label_sort_descending": {
+      "default": "Ordonează descrescător"
     }
   }
 }

@@ -2321,6 +2321,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Ver todas las listas"
+    },
+    "button_text_sort_default": {
+      "default": "Por defecto"
+    },
+    "button_label_sort_default": {
+      "default": "Ordenar por orden por defecto"
+    },
+    "button_text_sort_added_date": {
+      "default": "Fecha Agregado"
+    },
+    "button_label_sort_added_date": {
+      "default": "Ordenar por fecha agregado"
+    },
+    "button_text_sort_runtime": {
+      "default": "Duración"
+    },
+    "button_label_sort_runtime": {
+      "default": "Ordenar por duración"
+    },
+    "button_text_sort_rating": {
+      "default": "Calificación"
+    },
+    "button_label_sort_rating": {
+      "default": "Ordenar por calificación"
+    },
+    "button_text_sort_release_date": {
+      "default": "Fecha Estreno"
+    },
+    "button_label_sort_release_date": {
+      "default": "Ordenar por fecha de estreno"
+    },
+    "button_label_sort_list": {
+      "default": "Ordenar lista"
+    },
+    "button_label_sort_ascending": {
+      "default": "Ordenar ascendente"
+    },
+    "button_label_sort_descending": {
+      "default": "Ordenar descendente"
     }
   }
 }

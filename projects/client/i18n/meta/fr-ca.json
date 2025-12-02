@@ -2321,6 +2321,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Voir toutes les listes"
+    },
+    "button_text_sort_default": {
+      "default": "Par défaut"
+    },
+    "button_label_sort_default": {
+      "default": "Trier par ordre par défaut"
+    },
+    "button_text_sort_added_date": {
+      "default": "Date ajoutée"
+    },
+    "button_label_sort_added_date": {
+      "default": "Trier par date d'ajoutée"
+    },
+    "button_text_sort_runtime": {
+      "default": "Durée"
+    },
+    "button_label_sort_runtime": {
+      "default": "Trier par durée"
+    },
+    "button_text_sort_rating": {
+      "default": "Note"
+    },
+    "button_label_sort_rating": {
+      "default": "Trier par note"
+    },
+    "button_text_sort_release_date": {
+      "default": "Date sortie"
+    },
+    "button_label_sort_release_date": {
+      "default": "Trier par date de sortie"
+    },
+    "button_label_sort_list": {
+      "default": "Trier la liste"
+    },
+    "button_label_sort_ascending": {
+      "default": "Trier en ordre croissant"
+    },
+    "button_label_sort_descending": {
+      "default": "Trier en ordre décroissant"
     }
   }
 }

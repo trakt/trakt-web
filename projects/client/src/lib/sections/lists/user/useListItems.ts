@@ -6,6 +6,8 @@ import { userListItemsQuery } from '$lib/requests/queries/users/userListItemsQue
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
+import type { SortBy } from './models/SortBy.ts';
+import type { SortDirection } from './models/SortDirection.ts';
 
 export type ListParams = {
   slug?: string;
@@ -18,6 +20,8 @@ export type ListParams = {
 type UseListItemsProps = PaginationParams & FilterParams & {
   list: ListParams;
   type?: DiscoverMode;
+  sortBy?: SortBy | Nil;
+  sortHow?: SortDirection | Nil;
 };
 
 // FIXME: remove when official lists are sluggable
@@ -35,13 +39,15 @@ function mapListParamsToQueryParams(list: ListParams) {
 }
 
 function listToQuery(
-  { list, limit, type, page, filter }: UseListItemsProps,
+  { list, limit, type, page, filter, sortBy, sortHow }: UseListItemsProps,
 ) {
   const commonParams = {
     type: type === 'media' ? undefined : type,
     page,
     filter,
     limit: limit ?? DEFAULT_PAGE_SIZE,
+    sortBy,
+    sortHow,
   };
 
   const params = mapListParamsToQueryParams(list);

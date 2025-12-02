@@ -2321,6 +2321,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Vis alle lister"
+    },
+    "button_text_sort_default": {
+      "default": "Standard"
+    },
+    "button_label_sort_default": {
+      "default": "Sorter etter standardrekkefølge"
+    },
+    "button_text_sort_added_date": {
+      "default": "Dato Lagt Til"
+    },
+    "button_label_sort_added_date": {
+      "default": "Sorter etter dato lagt til"
+    },
+    "button_text_sort_runtime": {
+      "default": "Spilletid"
+    },
+    "button_label_sort_runtime": {
+      "default": "Sorter etter spilletid"
+    },
+    "button_text_sort_rating": {
+      "default": "Vurdering"
+    },
+    "button_label_sort_rating": {
+      "default": "Sorter etter vurdering"
+    },
+    "button_text_sort_release_date": {
+      "default": "Utgivelsesdato"
+    },
+    "button_label_sort_release_date": {
+      "default": "Sorter etter utgivelsesdato"
+    },
+    "button_label_sort_list": {
+      "default": "Sorter liste"
+    },
+    "button_label_sort_ascending": {
+      "default": "Sorter stigende"
+    },
+    "button_label_sort_descending": {
+      "default": "Sorter synkende"
     }
   }
 }

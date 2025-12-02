@@ -14,7 +14,7 @@
 </script>
 
 {#if posters}
-  <Link href={getListUrl(list, type)}>
+  <Link href={getListUrl(list, { mode: type })}>
     <div class="trakt-list-posters" style="--poster-count: {posters.length}">
       {#each posters as poster, index (`${list.id}_poster_${index}`)}
         <div class="poster-wrapper" style="--poster-index: {index}">

@@ -15,6 +15,8 @@ type WellKnownQueryParams = {
   search?: string;
   display?: MediaType;
   library?: string;
+  sort_by?: string;
+  sort_how?: string;
 };
 
 type UrlBuilderParams =
@@ -51,6 +53,8 @@ function sanitizeParams(
     status: params.status,
     search: encodeRecord(params.search),
     display: params.display,
+    sort_by: params.sort_by,
+    sort_how: params.sort_how,
   };
 }
 
@@ -169,10 +173,10 @@ export const UrlBuilder = {
     me: () => UrlBuilder.profile.user('me'),
   },
   users: (id: string) => ({
-    lists: (slug: string, type?: MediaType) =>
-      type
-        ? `/users/${id}/lists/${slug}?type=${type}`
-        : `/users/${id}/lists/${slug}`,
+    lists: (slug: string, params: Record<string, string> = {}) =>
+      `/users/${id}/lists/${slug}${
+        buildParamString({ ...sanitizeParams(params), type: params.type })
+      }`,
     yearToDate: (year: number) => `/users/${id}/year/${year}`,
     monthInReview: (year: number, month: number) =>
       `/users/${id}/mir/${year}/${month}`,
@@ -181,8 +185,10 @@ export const UrlBuilder = {
     me: (library: string) => `/users/me/library?library=${library}`,
   },
   lists: {
-    official: (id: number, type?: MediaType) =>
-      `/lists/official/${id}?type=${type}`,
+    official: (id: number, params: Record<string, string | number> = {}) =>
+      `/lists/official/${id}${
+        buildParamString({ ...sanitizeParams(params), type: params.type })
+      }`,
     user: (user: string, params?: UrlBuilderParams) => {
       if (!params) {
         return `/users/${user}/lists`;

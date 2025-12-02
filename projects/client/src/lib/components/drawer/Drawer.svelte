@@ -19,7 +19,7 @@
     title?: string;
     hasAutoClose?: boolean;
     trapSelector?: string;
-    size?: "normal" | "large";
+    size?: "normal" | "large" | "auto";
     badge?: Snippet;
     metaInfo?: string;
     onOpened?: () => void;
@@ -188,6 +188,10 @@
       &:global(.is-fullscreen),
       &[data-size="large"] {
         --mobile-drawer-height: calc(100vh - env(safe-area-inset-top, 0px));
+      }
+
+      &[data-size="auto"] {
+        --drawer-size: fit-content;
       }
     }
   }

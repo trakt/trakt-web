@@ -29,6 +29,7 @@ type DiscoverType = SourceType & { mode: DiscoverMode };
 type SeasonalFilterType = { id: string; state: 'enabled' | 'disabled' };
 type LinkType = SourceType & { target: string };
 type BannerDismissType = { id: string; value: string };
+type SortType = { sortBy: string; sortHow: string };
 
 export type AnalyticsEventDataMap = {
   [AnalyticsEvent.EnterLite]: never;
@@ -69,6 +70,7 @@ export type AnalyticsEventDataMap = {
   [AnalyticsEvent.ListRename]: never;
   [AnalyticsEvent.ListDelete]: never;
   [AnalyticsEvent.ListCreate]: never;
+  [AnalyticsEvent.ListSort]: SortType;
 
   [AnalyticsEvent.CalendarPeriod]: CalendarType;
 

@@ -2321,6 +2321,45 @@
     },
     "button_label_view_all_lists": {
       "default": "すべてのリストを見る"
+    },
+    "button_text_sort_default": {
+      "default": "デフォルト"
+    },
+    "button_label_sort_default": {
+      "default": "デフォルト順で並べ替え"
+    },
+    "button_text_sort_added_date": {
+      "default": "追加日"
+    },
+    "button_label_sort_added_date": {
+      "default": "追加日で並べ替え"
+    },
+    "button_text_sort_runtime": {
+      "default": "上映時間"
+    },
+    "button_label_sort_runtime": {
+      "default": "上映時間で並べ替え"
+    },
+    "button_text_sort_rating": {
+      "default": "評価"
+    },
+    "button_label_sort_rating": {
+      "default": "評価で並べ替え"
+    },
+    "button_text_sort_release_date": {
+      "default": "公開日"
+    },
+    "button_label_sort_release_date": {
+      "default": "公開日で並べ替え"
+    },
+    "button_label_sort_list": {
+      "default": "リストを並べ替え"
+    },
+    "button_label_sort_ascending": {
+      "default": "昇順で並べ替え"
+    },
+    "button_label_sort_descending": {
+      "default": "降順で並べ替え"
     }
   }
 }

@@ -2321,6 +2321,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Zobacz wszystkie listy"
+    },
+    "button_text_sort_default": {
+      "default": "Domyślnie"
+    },
+    "button_label_sort_default": {
+      "default": "Sortuj według domyślnej kolejności"
+    },
+    "button_text_sort_added_date": {
+      "default": "Data Dodania"
+    },
+    "button_label_sort_added_date": {
+      "default": "Sortuj według daty dodania"
+    },
+    "button_text_sort_runtime": {
+      "default": "Czas trwania"
+    },
+    "button_label_sort_runtime": {
+      "default": "Sortuj według czasu trwania"
+    },
+    "button_text_sort_rating": {
+      "default": "Ocena"
+    },
+    "button_label_sort_rating": {
+      "default": "Sortuj według oceny"
+    },
+    "button_text_sort_release_date": {
+      "default": "Data Premiery"
+    },
+    "button_label_sort_release_date": {
+      "default": "Sortuj według daty premiery"
+    },
+    "button_label_sort_list": {
+      "default": "Sortuj listę"
+    },
+    "button_label_sort_ascending": {
+      "default": "Sortuj rosnąco"
+    },
+    "button_label_sort_descending": {
+      "default": "Sortuj malejąco"
     }
   }
 }

@@ -53,6 +53,7 @@ export const AnalyticsEvent = {
   ListRename: buildEventKey(LIST_ACTION_PREFIX, 'rename'),
   ListDelete: buildEventKey(LIST_ACTION_PREFIX, 'delete'),
   ListCreate: buildEventKey(LIST_ACTION_PREFIX, 'create'),
+  ListSort: buildEventKey(LIST_ACTION_PREFIX, 'sort'),
 
   CalendarPeriod: buildEventKey(CALENDAR_ACTION_PREFIX, 'period'),
 
