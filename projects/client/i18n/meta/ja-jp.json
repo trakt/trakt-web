@@ -1102,7 +1102,7 @@
       "default": "新しいレビューを追加"
     },
     "textarea_placeholder_comment": {
-      "default": "レビューを入力..."
+      "default": "レビューを追加..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "ネタバレとしてマーク"
@@ -1117,7 +1117,7 @@
       "default": "返信する"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "レビューは5語以上で入力してください。"
+      "default": "レビューは5語以上である必要があります。"
     },
     "translated_value_error_reply_invalid_content": {
       "default": "返信は5語以上である必要があります。"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "すべてのリストを見る"
-    },
-    "list_description_released_movies": {
-      "default": "公開映画"
     }
   }
 }

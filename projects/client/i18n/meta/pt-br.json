@@ -1102,7 +1102,7 @@
       "default": "Adicionar uma nova avaliação"
     },
     "textarea_placeholder_comment": {
-      "default": "Sua avaliação..."
+      "default": "Adicione uma avaliação..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Marcar como spoiler"
@@ -1117,7 +1117,7 @@
       "default": "Publicar resposta"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "As avaliações devem ter pelo menos 5 palavras."
+      "default": "Resenhas precisam ter pelo menos 5 palavras."
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Respostas devem ter pelo menos 5 palavras."
@@ -1541,7 +1541,7 @@
       "default": "Mudar local"
     },
     "text_about": {
-      "default": "Sobre"
+      "default": "Sobre mim"
     },
     "button_label_change_about": {
       "default": "Mudar sobre"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Ver todas as listas"
-    },
-    "list_description_released_movies": {
-      "default": "Filmes lançados"
     }
   }
 }

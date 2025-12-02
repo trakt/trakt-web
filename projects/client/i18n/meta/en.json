@@ -2960,7 +2960,7 @@
       ]
     },
     "textarea_placeholder_comment": {
-      "default": "Review...",
+      "default": "Add a review...",
       "description": "Placeholder text for the review textarea when adding a new review.",
       "exclude": [
         "ios"
@@ -2998,7 +2998,7 @@
       ]
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Comments must be at least 5 words.",
+      "default": "Reviews must be at least 5 words.",
       "description": "Error message shown when a review is invalid due to content length.",
       "exclude": [
         "ios"
@@ -4202,7 +4202,7 @@
       ]
     },
     "text_about": {
-      "default": "About",
+      "default": "About me",
       "description": "Text for the section that allows users to change their 'about me' description.",
       "exclude": [
         "ios"

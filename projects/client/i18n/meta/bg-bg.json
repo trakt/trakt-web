@@ -1102,7 +1102,7 @@
       "default": "Добави ново ревю"
     },
     "textarea_placeholder_comment": {
-      "default": "Твоето ревю..."
+      "default": "Добавете рецензия..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Маркирай като спойлер"
@@ -1117,7 +1117,7 @@
       "default": "Публикувай отговор"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Ревютата трябва да съдържат поне 5 думи."
+      "default": "Рецензиите трябва да са поне 5 думи."
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Отговорите трябва да са поне 5 думи."
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Виж всички списъци"
-    },
-    "list_description_released_movies": {
-      "default": "Излезли филми"
     }
   }
 }
