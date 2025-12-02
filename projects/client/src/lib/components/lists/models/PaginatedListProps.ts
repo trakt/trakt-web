@@ -3,6 +3,7 @@ import type { PaginatableStore } from '$lib/sections/lists/drilldown/Paginatable
 import type { Snippet } from 'svelte';
 
 export type PaginatedListProps<T, M> = {
+  id: string;
   useList: PaginatableStore<T, M>;
   type: M;
   items: Snippet<[T[]]>;
