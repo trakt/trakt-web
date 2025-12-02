@@ -12,5 +12,7 @@ export const CollaborationListsMappedMock: MediaListSummary[] = [
     'count': 1,
     'posters': [],
     'updatedAt': new Date('2025-02-09T21:39:59.000Z'),
+    'sortBy': 'added',
+    'sortHow': 'asc',
   },
 ];
