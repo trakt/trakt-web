@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "レビュー"
     },
+    "button_text_add_review": {
+      "default": "レビューを追加"
+    },
+    "button_text_add_reply": {
+      "default": "返信を追加"
+    },
     "button_label_comment_reply": {
       "default": "{user}さんに返信する",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "レビューは5語以上で入力してください。"
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "返信は5語以上である必要があります。"
     },
     "translated_value_error_comment_unknown": {
       "default": "レビューの投稿中にエラーが発生しました。後でもう一度お試しください。"
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "リストの詳細を編集します。"
-    },
-    "list_description_released_movies": {
-      "default": "公開映画"
     },
     "page_title_edit_list": {
       "default": "リスト編集"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "視聴履歴から削除しました。"
     },
+    "text_info_favorites_added": {
+      "default": "お気に入りに追加されました。"
+    },
+    "text_info_favorites_removed": {
+      "default": "お気に入りから削除されました。"
+    },
     "text_info_list_added": {
       "default": "リストに追加しました。"
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "視聴を放棄しました。"
+    },
+    "text_info_review_added": {
+      "default": "レビューが追加されました。"
+    },
+    "text_info_review_deleted": {
+      "default": "レビューが削除されました。"
+    },
+    "text_info_reply_added": {
+      "default": "返信が追加されました。"
+    },
+    "text_info_reply_deleted": {
+      "default": "返信が削除されました。"
     },
     "button_text_long_press_for_more": {
       "default": "長押しで詳細"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "レビューを削除"
     },
+    "button_text_delete_reply": {
+      "default": "返信を削除"
+    },
     "button_label_delete_comment": {
       "default": "レビューを削除"
     },
     "warning_prompt_delete_comment": {
       "default": "本当にレビューを削除しますか？"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "この返信を削除してもよろしいですか？"
+    },
+    "warning_prompt_log_out": {
+      "default": "ログアウトしてもよろしいですか？"
     },
     "page_title_discover": {
       "default": "発見"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "すべてのリストを見る"
+    },
+    "list_description_released_movies": {
+      "default": "公開映画"
     }
   }
 }

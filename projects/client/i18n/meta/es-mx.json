@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Reseña"
     },
+    "button_text_add_review": {
+      "default": "Agregar Reseña"
+    },
+    "button_text_add_reply": {
+      "default": "Agregar Respuesta"
+    },
     "button_label_comment_reply": {
       "default": "Responder a {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Las reseñas deben tener al menos 5 palabras."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Las respuestas deben tener al menos 5 palabras."
     },
     "translated_value_error_comment_unknown": {
       "default": "Ocurrió un error al publicar tu reseña. Intenta de nuevo más tarde."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Edita los detalles de tu lista."
-    },
-    "list_description_released_movies": {
-      "default": "Películas estrenadas"
     },
     "page_title_edit_list": {
       "default": "Editar Lista"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Quitado del historial."
     },
+    "text_info_favorites_added": {
+      "default": "Agregado a favoritos."
+    },
+    "text_info_favorites_removed": {
+      "default": "Eliminado de favoritos."
+    },
     "text_info_list_added": {
       "default": "Añadido a la lista."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serie abandonada."
+    },
+    "text_info_review_added": {
+      "default": "Reseña agregada."
+    },
+    "text_info_review_deleted": {
+      "default": "Reseña eliminada."
+    },
+    "text_info_reply_added": {
+      "default": "Respuesta agregada."
+    },
+    "text_info_reply_deleted": {
+      "default": "Respuesta eliminada."
     },
     "button_text_long_press_for_more": {
       "default": "Mantén para más"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Eliminar reseña"
     },
+    "button_text_delete_reply": {
+      "default": "Eliminar Respuesta"
+    },
     "button_label_delete_comment": {
       "default": "Eliminar reseña"
     },
     "warning_prompt_delete_comment": {
       "default": "¿Estás seguro de que quieres eliminar tu reseña?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "¿Seguro que quieres eliminar tu respuesta?"
+    },
+    "warning_prompt_log_out": {
+      "default": "¿Seguro que quieres cerrar sesión?"
     },
     "page_title_discover": {
       "default": "Descubrir"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Ver todas las listas"
+    },
+    "list_description_released_movies": {
+      "default": "Películas estrenadas"
     }
   }
 }

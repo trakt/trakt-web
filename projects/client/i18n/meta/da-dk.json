@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Anmeldelse"
     },
+    "button_text_add_review": {
+      "default": "Tilføj anmeldelse"
+    },
+    "button_text_add_reply": {
+      "default": "Tilføj svar"
+    },
     "button_label_comment_reply": {
       "default": "Svar til {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Anmeldelser skal være mindst 5 ord lange."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Svar skal være mindst 5 ord lange."
     },
     "translated_value_error_comment_unknown": {
       "default": "Der opstod en fejl under publicering af din anmeldelse. Prøv igen senere."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Rediger dine listedetaljer."
-    },
-    "list_description_released_movies": {
-      "default": "Udkomne film"
     },
     "page_title_edit_list": {
       "default": "Rediger liste"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Fjernet fra set-historik."
     },
+    "text_info_favorites_added": {
+      "default": "Tilføjet til favoritter."
+    },
+    "text_info_favorites_removed": {
+      "default": "Fjernet fra favoritter."
+    },
     "text_info_list_added": {
       "default": "Tilføjet til liste."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serien er droppet."
+    },
+    "text_info_review_added": {
+      "default": "Anmeldelse tilføjet."
+    },
+    "text_info_review_deleted": {
+      "default": "Anmeldelse slettet."
+    },
+    "text_info_reply_added": {
+      "default": "Svar tilføjet."
+    },
+    "text_info_reply_deleted": {
+      "default": "Svar slettet."
     },
     "button_text_long_press_for_more": {
       "default": "Tryk længe for mere"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Slet anmeldelse"
     },
+    "button_text_delete_reply": {
+      "default": "Slet svar"
+    },
     "button_label_delete_comment": {
       "default": "Slet anmeldelse"
     },
     "warning_prompt_delete_comment": {
       "default": "Er du sikker på, at du vil slette din anmeldelse?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Er du sikker på, at du vil slette dit svar?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Er du sikker på, at du vil logge ud?"
     },
     "page_title_discover": {
       "default": "Opdag"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Se alle lister"
+    },
+    "list_description_released_movies": {
+      "default": "Udkomne film"
     }
   }
 }

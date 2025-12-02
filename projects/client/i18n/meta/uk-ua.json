@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Відгук"
     },
+    "button_text_add_review": {
+      "default": "Додати відгук"
+    },
+    "button_text_add_reply": {
+      "default": "Додати відповідь"
+    },
     "button_label_comment_reply": {
       "default": "Відповісти {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Відгуки мають містити щонайменше 5 слів."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Відповіді мають містити щонайменше 5 слів."
     },
     "translated_value_error_comment_unknown": {
       "default": "Сталася помилка під час публікації вашого відгуку. Будь ласка, спробуйте пізніше."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Відредагуйте деталі вашого списку."
-    },
-    "list_description_released_movies": {
-      "default": "Випущені фільми"
     },
     "page_title_edit_list": {
       "default": "Редагувати список"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Видалено з історії переглядів."
     },
+    "text_info_favorites_added": {
+      "default": "Додано до обраного."
+    },
+    "text_info_favorites_removed": {
+      "default": "Видалено з обраного."
+    },
     "text_info_list_added": {
       "default": "Додано до списку."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Серіал припинено."
+    },
+    "text_info_review_added": {
+      "default": "Відгук додано."
+    },
+    "text_info_review_deleted": {
+      "default": "Відгук видалено."
+    },
+    "text_info_reply_added": {
+      "default": "Відповідь додано."
+    },
+    "text_info_reply_deleted": {
+      "default": "Відповідь видалено."
     },
     "button_text_long_press_for_more": {
       "default": "Натисніть і утримуйте для додаткової інформації"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Видалити відгук"
     },
+    "button_text_delete_reply": {
+      "default": "Видалити відповідь"
+    },
     "button_label_delete_comment": {
       "default": "Видалити відгук"
     },
     "warning_prompt_delete_comment": {
       "default": "Ви впевнені, що хочете видалити свій відгук?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Ви впевнені, що хочете видалити свою відповідь?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Ви впевнені, що хочете вийти?"
     },
     "page_title_discover": {
       "default": "Відкрити"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Переглянути всі списки"
+    },
+    "list_description_released_movies": {
+      "default": "Випущені фільми"
     }
   }
 }

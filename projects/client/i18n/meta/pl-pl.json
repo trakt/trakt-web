@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Recenzja"
     },
+    "button_text_add_review": {
+      "default": "Dodaj recenzję"
+    },
+    "button_text_add_reply": {
+      "default": "Dodaj odpowiedź"
+    },
     "button_label_comment_reply": {
       "default": "Odpowiedz {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Recenzje muszą mieć co najmniej 5 słów."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Odpowiedzi muszą mieć co najmniej 5 słów."
     },
     "translated_value_error_comment_unknown": {
       "default": "Wystąpił błąd podczas publikowania recenzji. Spróbuj ponownie później."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Edytuj szczegóły listy."
-    },
-    "list_description_released_movies": {
-      "default": "Premiery"
     },
     "page_title_edit_list": {
       "default": "Edytuj listę"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Usunięto z historii oglądania."
     },
+    "text_info_favorites_added": {
+      "default": "Dodano do ulubionych."
+    },
+    "text_info_favorites_removed": {
+      "default": "Usunięto z ulubionych."
+    },
     "text_info_list_added": {
       "default": "Dodano do listy."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serial porzucony."
+    },
+    "text_info_review_added": {
+      "default": "Recenzja została dodana."
+    },
+    "text_info_review_deleted": {
+      "default": "Recenzja została usunięta."
+    },
+    "text_info_reply_added": {
+      "default": "Odpowiedź została dodana."
+    },
+    "text_info_reply_deleted": {
+      "default": "Odpowiedź została usunięta."
     },
     "button_text_long_press_for_more": {
       "default": "Dłuższe naciśnięcie, aby uzyskać więcej"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Usuń recenzję"
     },
+    "button_text_delete_reply": {
+      "default": "Usuń odpowiedź"
+    },
     "button_label_delete_comment": {
       "default": "Usuń recenzję"
     },
     "warning_prompt_delete_comment": {
       "default": "Czy na pewno chcesz usunąć swoją recenzję?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Czy na pewno chcesz usunąć swoją odpowiedź?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Czy na pewno chcesz się wylogować?"
     },
     "page_title_discover": {
       "default": "Odkrywaj"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Zobacz wszystkie listy"
+    },
+    "list_description_released_movies": {
+      "default": "Premiery"
     }
   }
 }

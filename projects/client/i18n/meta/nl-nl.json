@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Beoordeling"
     },
+    "button_text_add_review": {
+      "default": "Review toevoegen"
+    },
+    "button_text_add_reply": {
+      "default": "Reactie toevoegen"
+    },
     "button_label_comment_reply": {
       "default": "Reageer op {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Beoordelingen moeten minimaal 5 woorden bevatten."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Reacties moeten minimaal 5 woorden bevatten."
     },
     "translated_value_error_comment_unknown": {
       "default": "Er is een fout opgetreden bij het plaatsen van je beoordeling. Probeer het later opnieuw."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Bewerk je lijstdetails."
-    },
-    "list_description_released_movies": {
-      "default": "Uitgebrachte films"
     },
     "page_title_edit_list": {
       "default": "Lijst bewerken"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Verwijderd uit kijkgeschiedenis."
     },
+    "text_info_favorites_added": {
+      "default": "Toegevoegd aan favorieten."
+    },
+    "text_info_favorites_removed": {
+      "default": "Verwijderd uit favorieten."
+    },
     "text_info_list_added": {
       "default": "Toegevoegd aan de lijst."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serie gestopt."
+    },
+    "text_info_review_added": {
+      "default": "Review is toegevoegd."
+    },
+    "text_info_review_deleted": {
+      "default": "Review is verwijderd."
+    },
+    "text_info_reply_added": {
+      "default": "Reactie is toegevoegd."
+    },
+    "text_info_reply_deleted": {
+      "default": "Reactie is verwijderd."
     },
     "button_text_long_press_for_more": {
       "default": "Lang indrukken voor meer"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Beoordeling verwijderen"
     },
+    "button_text_delete_reply": {
+      "default": "Reactie verwijderen"
+    },
     "button_label_delete_comment": {
       "default": "Beoordeling verwijderen"
     },
     "warning_prompt_delete_comment": {
       "default": "Weet je zeker dat je je beoordeling wilt verwijderen?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Weet je zeker dat je je reactie wilt verwijderen?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Weet je zeker dat je wilt uitloggen?"
     },
     "page_title_discover": {
       "default": "Ontdek"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Bekijk alle lijsten"
+    },
+    "list_description_released_movies": {
+      "default": "Uitgebrachte films"
     }
   }
 }

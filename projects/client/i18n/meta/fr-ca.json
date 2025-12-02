@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Avis"
     },
+    "button_text_add_review": {
+      "default": "Ajouter un avis"
+    },
+    "button_text_add_reply": {
+      "default": "Ajouter une réponse"
+    },
     "button_label_comment_reply": {
       "default": "Répondre à {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Les avis doivent faire au moins 5 mots."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Les réponses doivent faire au moins 5 mots."
     },
     "translated_value_error_comment_unknown": {
       "default": "Une erreur s'est produite en publiant ton avis. Réessaie plus tard."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Modifier les détails de votre liste."
-    },
-    "list_description_released_movies": {
-      "default": "Films sortis"
     },
     "page_title_edit_list": {
       "default": "Modifier la liste"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Enlevé de l'historique."
     },
+    "text_info_favorites_added": {
+      "default": "Ajouté aux favoris."
+    },
+    "text_info_favorites_removed": {
+      "default": "Retiré des favoris."
+    },
     "text_info_list_added": {
       "default": "Ajouté à la liste."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Série abandonnée."
+    },
+    "text_info_review_added": {
+      "default": "Ton avis a été ajouté."
+    },
+    "text_info_review_deleted": {
+      "default": "Avis supprimé."
+    },
+    "text_info_reply_added": {
+      "default": "Ta réponse a été ajoutée."
+    },
+    "text_info_reply_deleted": {
+      "default": "Réponse supprimée."
     },
     "button_text_long_press_for_more": {
       "default": "Appuyer longtemps pour plus"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Supprimer l'avis"
     },
+    "button_text_delete_reply": {
+      "default": "Supprimer la réponse"
+    },
     "button_label_delete_comment": {
       "default": "Supprimer l'avis"
     },
     "warning_prompt_delete_comment": {
       "default": "Es-tu sûr de vouloir supprimer ton avis ?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Es-tu sûr de vouloir supprimer ta réponse ?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Es-tu sûr de vouloir te déconnecter ?"
     },
     "page_title_discover": {
       "default": "Découvrir"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Voir toutes les listes"
+    },
+    "list_description_released_movies": {
+      "default": "Films sortis"
     }
   }
 }
