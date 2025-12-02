@@ -243,7 +243,7 @@
 
     &[data-size="small"] {
       --button-height: var(--ni-40);
-      border-radius: calc(var(--border-radius-m) * 0.76925);
+      border-radius: calc(var(--border-radius-m) * 0.8);
       padding: var(--ni-12);
       gap: var(--ni-12);
     }

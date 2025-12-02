@@ -2288,6 +2288,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Переглянути всі списки"
+    },
+    "button_text_sort_default": {
+      "default": "За замовчуванням"
+    },
+    "button_label_sort_default": {
+      "default": "Сортувати за замовчуванням"
+    },
+    "button_text_sort_added_date": {
+      "default": "Дата додавання"
+    },
+    "button_label_sort_added_date": {
+      "default": "Сортувати за датою додавання"
+    },
+    "button_text_sort_runtime": {
+      "default": "Тривалість"
+    },
+    "button_label_sort_runtime": {
+      "default": "Сортувати за тривалістю"
+    },
+    "button_text_sort_rating": {
+      "default": "Рейтинг"
+    },
+    "button_label_sort_rating": {
+      "default": "Сортувати за рейтингом"
+    },
+    "button_text_sort_release_date": {
+      "default": "Дата виходу"
+    },
+    "button_label_sort_release_date": {
+      "default": "Сортувати за датою виходу"
+    },
+    "button_label_sort_list": {
+      "default": "Сортувати список"
+    },
+    "button_label_sort_ascending": {
+      "default": "Сортувати за зростанням"
+    },
+    "button_label_sort_descending": {
+      "default": "Сортувати за спаданням"
     }
   }
 }

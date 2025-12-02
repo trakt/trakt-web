@@ -2288,6 +2288,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Visa alla listor"
+    },
+    "button_text_sort_default": {
+      "default": "Standard"
+    },
+    "button_label_sort_default": {
+      "default": "Sortera efter standardordning"
+    },
+    "button_text_sort_added_date": {
+      "default": "Datum Tillagd"
+    },
+    "button_label_sort_added_date": {
+      "default": "Sortera efter datum tillagd"
+    },
+    "button_text_sort_runtime": {
+      "default": "Speltid"
+    },
+    "button_label_sort_runtime": {
+      "default": "Sortera efter speltid"
+    },
+    "button_text_sort_rating": {
+      "default": "Betyg"
+    },
+    "button_label_sort_rating": {
+      "default": "Sortera efter betyg"
+    },
+    "button_text_sort_release_date": {
+      "default": "Utgivningsdatum"
+    },
+    "button_label_sort_release_date": {
+      "default": "Sortera efter utgivningsdatum"
+    },
+    "button_label_sort_list": {
+      "default": "Sortera lista"
+    },
+    "button_label_sort_ascending": {
+      "default": "Sortera stigande"
+    },
+    "button_label_sort_descending": {
+      "default": "Sortera fallande"
     }
   }
 }

@@ -6089,6 +6089,110 @@
         "android",
         "ios"
       ]
+    },
+    "button_text_sort_default": {
+      "default": "Default",
+      "description": "Text for the button that allows users to sort items by the default sorting method.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_default": {
+      "default": "Sort by default order",
+      "description": "Aria-label for the button that allows users to sort items by the default sorting method.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_sort_added_date": {
+      "default": "Date Added",
+      "description": "Text for the button that allows users to sort items by the date they were added.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_added_date": {
+      "default": "Sort by date added",
+      "description": "Aria-label for the button that allows users to sort items by the date they were added.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_sort_runtime": {
+      "default": "Runtime",
+      "description": "Text for the button that allows users to sort items by their runtime.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_runtime": {
+      "default": "Sort by runtime",
+      "description": "Aria-label for the button that allows users to sort items by their runtime.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_sort_rating": {
+      "default": "Rating",
+      "description": "Text for the button that allows users to sort items by their rating.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_rating": {
+      "default": "Sort by rating",
+      "description": "Aria-label for the button that allows users to sort items by their rating.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_text_sort_release_date": {
+      "default": "Release Date",
+      "description": "Text for the button that allows users to sort items by their release date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_release_date": {
+      "default": "Sort by release date",
+      "description": "Aria-label for the button that allows users to sort items by their release date.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_list": {
+      "default": "Sort list",
+      "description": "Aria-label for the button that allows users to sort items in their list.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_ascending": {
+      "default": "Sort ascending",
+      "description": "Aria-label for the button that allows users to sort items in ascending order.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_sort_descending": {
+      "default": "Sort descending",
+      "description": "Aria-label for the button that allows users to sort items in descending order.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

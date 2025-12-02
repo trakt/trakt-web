@@ -38,6 +38,7 @@
     aria-label={label}
     data-color={color}
     data-variant={variant}
+    data-size={size}
     data-style={style}
     data-dpad-navigation={navigationType}
     {...rest}

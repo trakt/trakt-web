@@ -2288,6 +2288,45 @@
     },
     "button_label_view_all_lists": {
       "default": "View all lists"
+    },
+    "button_text_sort_default": {
+      "default": "Default"
+    },
+    "button_label_sort_default": {
+      "default": "Sort by default order"
+    },
+    "button_text_sort_added_date": {
+      "default": "Date Added"
+    },
+    "button_label_sort_added_date": {
+      "default": "Sort by date added"
+    },
+    "button_text_sort_runtime": {
+      "default": "Runtime"
+    },
+    "button_label_sort_runtime": {
+      "default": "Sort by runtime"
+    },
+    "button_text_sort_rating": {
+      "default": "Rating"
+    },
+    "button_label_sort_rating": {
+      "default": "Sort by rating"
+    },
+    "button_text_sort_release_date": {
+      "default": "Release Date"
+    },
+    "button_label_sort_release_date": {
+      "default": "Sort by release date"
+    },
+    "button_label_sort_list": {
+      "default": "Sort list"
+    },
+    "button_label_sort_ascending": {
+      "default": "Sort ascending"
+    },
+    "button_label_sort_descending": {
+      "default": "Sort descending"
     }
   }
 }

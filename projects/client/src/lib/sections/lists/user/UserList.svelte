@@ -33,7 +33,7 @@
   drilldownLabel={m.button_text_view_all()}
   filter={$filterMap}
   useList={(params) => useListItems({ list, ...params })}
-  urlBuilder={() => getListUrl(list, type)}
+  urlBuilder={() => getListUrl(list, { mode: type })}
   title={list.name}
 >
   {#snippet item(media)}

@@ -2288,6 +2288,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Alle Listen anzeigen"
+    },
+    "button_text_sort_default": {
+      "default": "Standard"
+    },
+    "button_label_sort_default": {
+      "default": "Nach Standard sortieren"
+    },
+    "button_text_sort_added_date": {
+      "default": "Hinzugefügt am"
+    },
+    "button_label_sort_added_date": {
+      "default": "Nach Hinzufügedatum sortieren"
+    },
+    "button_text_sort_runtime": {
+      "default": "Laufzeit"
+    },
+    "button_label_sort_runtime": {
+      "default": "Nach Laufzeit sortieren"
+    },
+    "button_text_sort_rating": {
+      "default": "Bewertung"
+    },
+    "button_label_sort_rating": {
+      "default": "Nach Bewertung sortieren"
+    },
+    "button_text_sort_release_date": {
+      "default": "Erscheinungsdatum"
+    },
+    "button_label_sort_release_date": {
+      "default": "Nach Erscheinungsdatum sortieren"
+    },
+    "button_label_sort_list": {
+      "default": "Liste sortieren"
+    },
+    "button_label_sort_ascending": {
+      "default": "Aufsteigend sortieren"
+    },
+    "button_label_sort_descending": {
+      "default": "Absteigend sortieren"
     }
   }
 }

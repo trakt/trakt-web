@@ -2288,6 +2288,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Mostra tutte le liste"
+    },
+    "button_text_sort_default": {
+      "default": "Predefinito"
+    },
+    "button_label_sort_default": {
+      "default": "Ordina per ordine predefinito"
+    },
+    "button_text_sort_added_date": {
+      "default": "Data Aggiunta"
+    },
+    "button_label_sort_added_date": {
+      "default": "Ordina per data di aggiunta"
+    },
+    "button_text_sort_runtime": {
+      "default": "Durata"
+    },
+    "button_label_sort_runtime": {
+      "default": "Ordina per durata"
+    },
+    "button_text_sort_rating": {
+      "default": "Valutazione"
+    },
+    "button_label_sort_rating": {
+      "default": "Ordina per valutazione"
+    },
+    "button_text_sort_release_date": {
+      "default": "Data Uscita"
+    },
+    "button_label_sort_release_date": {
+      "default": "Ordina per data di uscita"
+    },
+    "button_label_sort_list": {
+      "default": "Ordina lista"
+    },
+    "button_label_sort_ascending": {
+      "default": "Ordina crescente"
+    },
+    "button_label_sort_descending": {
+      "default": "Ordina decrescente"
     }
   }
 }

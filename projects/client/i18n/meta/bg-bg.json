@@ -2288,6 +2288,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Виж всички списъци"
+    },
+    "button_text_sort_default": {
+      "default": "По подразбиране"
+    },
+    "button_label_sort_default": {
+      "default": "Сортиране по подразбиране"
+    },
+    "button_text_sort_added_date": {
+      "default": "Дата на добавяне"
+    },
+    "button_label_sort_added_date": {
+      "default": "Сортиране по дата на добавяне"
+    },
+    "button_text_sort_runtime": {
+      "default": "Продължителност"
+    },
+    "button_label_sort_runtime": {
+      "default": "Сортиране по продължителност"
+    },
+    "button_text_sort_rating": {
+      "default": "Оценка"
+    },
+    "button_label_sort_rating": {
+      "default": "Сортиране по оценка"
+    },
+    "button_text_sort_release_date": {
+      "default": "Дата на премиера"
+    },
+    "button_label_sort_release_date": {
+      "default": "Сортиране по дата на премиера"
+    },
+    "button_label_sort_list": {
+      "default": "Сортиране на списъка"
+    },
+    "button_label_sort_ascending": {
+      "default": "Сортиране във възходящ ред"
+    },
+    "button_label_sort_descending": {
+      "default": "Сортиране в низходящ ред"
     }
   }
 }

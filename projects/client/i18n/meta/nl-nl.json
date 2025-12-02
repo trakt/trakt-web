@@ -2288,6 +2288,45 @@
     },
     "button_label_view_all_lists": {
       "default": "Bekijk alle lijsten"
+    },
+    "button_text_sort_default": {
+      "default": "Standaard"
+    },
+    "button_label_sort_default": {
+      "default": "Sorteren op standaardvolgorde"
+    },
+    "button_text_sort_added_date": {
+      "default": "Datum Toegevoegd"
+    },
+    "button_label_sort_added_date": {
+      "default": "Sorteren op datum toegevoegd"
+    },
+    "button_text_sort_runtime": {
+      "default": "Speelduur"
+    },
+    "button_label_sort_runtime": {
+      "default": "Sorteren op speelduur"
+    },
+    "button_text_sort_rating": {
+      "default": "Beoordeling"
+    },
+    "button_label_sort_rating": {
+      "default": "Sorteren op beoordeling"
+    },
+    "button_text_sort_release_date": {
+      "default": "Releasedatum"
+    },
+    "button_label_sort_release_date": {
+      "default": "Sorteren op releasedatum"
+    },
+    "button_label_sort_list": {
+      "default": "Lijst sorteren"
+    },
+    "button_label_sort_ascending": {
+      "default": "Sorteren oplopend"
+    },
+    "button_label_sort_descending": {
+      "default": "Sorteren aflopend"
     }
   }
 }
