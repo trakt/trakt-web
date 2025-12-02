@@ -19,7 +19,7 @@
 </script>
 
 <DrilledMediaList
-  id="view-all-activity"
+  id="view-all-activity-${$mode}"
   {title}
   type={$mode}
   cardOrientation="landscape"
