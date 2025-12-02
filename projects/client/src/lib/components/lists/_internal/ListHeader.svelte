@@ -14,6 +14,7 @@
     badge,
     navigationType,
     href,
+    listActions,
     ...props
   }: {
     title: string;
@@ -22,6 +23,7 @@
     titleAction?: Snippet;
     actions?: Snippet;
     badge?: Snippet;
+    listActions?: Snippet;
     inset: "all" | "title";
     navigationType?: DpadNavigationType;
     href?: string;
@@ -34,37 +36,62 @@
 </script>
 
 <div
-  class="trakt-list-header"
   class:trakt-list-inset-title={inset === "title"}
   class:trakt-inset-all={inset === "all"}
   {...props}
 >
-  <div class="trakt-list-title-container">
-    <div class="trakt-list-title">
-      {#if titleAction}
-        {@render titleAction()}
-      {/if}
-      {#if subtitle == null}
-        <ListTitle {title} {href} {metaInfo} style="primary" />
-      {:else}
-        <ListTitle {title} {href} {metaInfo} style="secondary" />
-        <ListTitle title={`/ ${subtitle}`} style="primary" />
+  <div class="trakt-list-header">
+    <div class="trakt-list-title-container">
+      <div class="trakt-list-title">
+        {#if titleAction}
+          {@render titleAction()}
+        {/if}
+        {#if subtitle == null}
+          <ListTitle {title} {href} {metaInfo} style="primary" />
+        {:else}
+          <ListTitle {title} {href} {metaInfo} style="secondary" />
+          <ListTitle title={`/ ${subtitle}`} style="primary" />
+        {/if}
+      </div>
+      {#if badge}
+        {@render badge()}
       {/if}
     </div>
-    {#if badge}
-      {@render badge()}
+
+    {#if actions != null && !hasHiddenActions}
+      <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
+        {@render actions()}
+      </div>
     {/if}
   </div>
 
-  {#if actions != null && !hasHiddenActions}
-    <div class="trakt-list-actions" data-dpad-navigation={navigationType}>
-      {@render actions()}
-    </div>
+  {#if listActions}
+    {@render listActions()}
   {/if}
 </div>
 
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
+
+  .trakt-list-inset-title {
+    margin: 0;
+    margin-left: var(--layout-distance-side);
+    margin-right: var(--layout-distance-side);
+    transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
+
+    @include for-tablet-sm-and-below {
+      margin-left: calc(var(--layout-distance-side));
+    }
+  }
+
+  .trakt-inset-all {
+    margin: 0 calc(var(--ni-72) + var(--layout-distance-side));
+    transition: margin calc(var(--transition-increment) * 2) ease-in-out;
+
+    @include for-tablet-sm-and-below {
+      margin: 0 calc(var(--layout-distance-side));
+    }
+  }
 
   .trakt-list-header {
     display: flex;
@@ -73,26 +100,6 @@
     min-height: var(--ni-40);
     height: var(--ni-40);
     user-select: none;
-
-    &.trakt-list-inset-title {
-      margin: 0;
-      margin-left: var(--layout-distance-side);
-      margin-right: var(--layout-distance-side);
-      transition: margin-left calc(var(--transition-increment) * 2) ease-in-out;
-
-      @include for-tablet-sm-and-below {
-        margin-left: calc(var(--layout-distance-side));
-      }
-    }
-
-    &.trakt-inset-all {
-      margin: 0 calc(var(--ni-72) + var(--layout-distance-side));
-      transition: margin calc(var(--transition-increment) * 2) ease-in-out;
-
-      @include for-tablet-sm-and-below {
-        margin: 0 calc(var(--layout-distance-side));
-      }
-    }
 
     .trakt-list-actions {
       display: flex;

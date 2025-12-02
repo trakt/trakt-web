@@ -8,6 +8,7 @@
   type DrilledMediaListProps = MediaListProps<T, M> & {
     actions?: Snippet<[]>;
     cardOrientation?: "landscape" | "portrait";
+    listActions?: Snippet;
   };
 
   const {
@@ -17,6 +18,7 @@
     useList,
     actions,
     cardOrientation = "portrait",
+    listActions,
     ...props
   }: DrilledMediaListProps = $props();
 </script>
@@ -27,6 +29,7 @@
       {...props}
       {actions}
       {items}
+      {listActions}
       --width-item={mediaCardWidthResolver(cardOrientation)}
     >
       {#snippet empty()}
