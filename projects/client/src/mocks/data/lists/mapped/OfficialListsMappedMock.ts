@@ -8,6 +8,8 @@ export const OfficialListsMappedMock: MediaListSummary[] = [
     'name': 'Official list',
     'slug': 'official-list',
     'count': 2,
+    'sortBy': 'added',
+    'sortHow': 'asc',
     'user': {
       'username': 'Trakt',
       'id': 0,

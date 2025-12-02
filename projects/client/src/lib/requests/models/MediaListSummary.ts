@@ -14,6 +14,8 @@ export const MediaListSummarySchema = z.object({
     url: ImageUrlsSchema,
   })),
   updatedAt: z.date(),
+  sortHow: z.enum(['asc', 'desc']),
+  sortBy: z.string(),
 });
 
 export type MediaListSummary = z.infer<typeof MediaListSummarySchema>;

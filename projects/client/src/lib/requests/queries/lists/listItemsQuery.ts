@@ -18,6 +18,8 @@ type ListItemsParams =
   & {
     listId: string;
     type?: MediaType;
+    sortBy?: string | Nil;
+    sortHow?: 'asc' | 'desc' | Nil;
   }
   & PaginationParams
   & ApiParams
@@ -35,6 +37,8 @@ const userListItemsRequest = (
     page,
     type,
     filter,
+    sortBy,
+    sortHow,
   }: ListItemsParams,
 ) => {
   const method = typeToListMethod(type);
@@ -49,6 +53,8 @@ const userListItemsRequest = (
         extended: 'full,images,colors',
         page,
         limit,
+        sort_by: sortBy,
+        sort_how: sortHow,
         ...filter,
       },
     });
@@ -64,6 +70,8 @@ export const listItemsQuery = defineQuery({
     params.limit,
     params.page,
     params.type,
+    params.sortBy,
+    params.sortHow,
     ...getGlobalFilterDependencies(params.filter),
   ],
   request: userListItemsRequest,
