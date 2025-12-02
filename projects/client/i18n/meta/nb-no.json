@@ -1102,7 +1102,7 @@
       "default": "Legg til en ny anmeldelse"
     },
     "textarea_placeholder_comment": {
-      "default": "Din anmeldelse..."
+      "default": "Legg til en anmeldelse..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Merk som spoiler"
@@ -1117,7 +1117,7 @@
       "default": "Send svar"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Anmeldelser må være minst 5 ord lange."
+      "default": "Anmeldelser må være minst 5 ord."
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Svar må inneholde minst 5 ord."
@@ -1541,7 +1541,7 @@
       "default": "Endre sted"
     },
     "text_about": {
-      "default": "Om"
+      "default": "Om meg"
     },
     "button_label_change_about": {
       "default": "Endre om"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Vis alle lister"
-    },
-    "list_description_released_movies": {
-      "default": "Utgitte filmer"
     }
   }
 }

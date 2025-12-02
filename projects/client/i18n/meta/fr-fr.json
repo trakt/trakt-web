@@ -1102,7 +1102,7 @@
       "default": "Ajouter un nouvel avis"
     },
     "textarea_placeholder_comment": {
-      "default": "Votre avis..."
+      "default": "Ajoutez un avis..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Marquer comme spoiler"
@@ -1117,7 +1117,7 @@
       "default": "Publier la réponse"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Les avis doivent contenir au moins 5 mots."
+      "default": "Les critiques doivent contenir au moins 5 mots."
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Les réponses doivent contenir au moins 5 mots."
@@ -1541,7 +1541,7 @@
       "default": "Modifier le lieu"
     },
     "text_about": {
-      "default": "À propos"
+      "default": "À propos de moi"
     },
     "button_label_change_about": {
       "default": "Modifier à propos"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Voir toutes les listes"
-    },
-    "list_description_released_movies": {
-      "default": "Films sortis"
     }
   }
 }

@@ -1102,7 +1102,7 @@
       "default": "Lägg till en ny recension"
     },
     "textarea_placeholder_comment": {
-      "default": "Din recension..."
+      "default": "Lägg till en recension..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Markera som spoiler"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Visa alla listor"
-    },
-    "list_description_released_movies": {
-      "default": "Släppta filmer"
     }
   }
 }

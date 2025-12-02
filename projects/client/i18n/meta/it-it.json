@@ -1102,7 +1102,7 @@
       "default": "Aggiungi una nuova recensione"
     },
     "textarea_placeholder_comment": {
-      "default": "La tua recensione..."
+      "default": "Aggiungi una recensione..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Segnala come spoiler"
@@ -1541,7 +1541,7 @@
       "default": "Cambia posizione"
     },
     "text_about": {
-      "default": "Informazioni"
+      "default": "Su di me"
     },
     "button_label_change_about": {
       "default": "Cambia informazioni"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Mostra tutte le liste"
-    },
-    "list_description_released_movies": {
-      "default": "Film usciti"
     }
   }
 }

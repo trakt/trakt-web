@@ -1102,7 +1102,7 @@
       "default": "Add a new review"
     },
     "textarea_placeholder_comment": {
-      "default": "Review..."
+      "default": "Add a review..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Mark as spoiler"
@@ -1541,7 +1541,7 @@
       "default": "Change location"
     },
     "text_about": {
-      "default": "About"
+      "default": "About me"
     },
     "button_label_change_about": {
       "default": "Change about"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "View all lists"
-    },
-    "list_description_released_movies": {
-      "default": "Released movies"
     }
   }
 }

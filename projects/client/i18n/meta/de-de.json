@@ -1102,7 +1102,7 @@
       "default": "Neue Bewertung hinzufügen"
     },
     "textarea_placeholder_comment": {
-      "default": "Deine Bewertung..."
+      "default": "Füge eine Bewertung hinzu..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Als Spoiler markieren"
@@ -1117,7 +1117,7 @@
       "default": "Antwort posten"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Bewertungen müssen mindestens 5 Wörter enthalten."
+      "default": "Bewertungen müssen mindestens 5 Wörter lang sein."
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Antworten müssen mindestens 5 Wörter lang sein."
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Alle Listen anzeigen"
-    },
-    "list_description_released_movies": {
-      "default": "Veröffentlichte Filme"
     }
   }
 }

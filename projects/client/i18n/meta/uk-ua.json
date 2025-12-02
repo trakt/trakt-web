@@ -1102,7 +1102,7 @@
       "default": "Додати новий відгук"
     },
     "textarea_placeholder_comment": {
-      "default": "Ваш відгук..."
+      "default": "Додати відгук..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Позначити як спойлер"
@@ -1117,7 +1117,7 @@
       "default": "Надіслати відповідь"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Відгуки мають містити щонайменше 5 слів."
+      "default": "Рецензії повинні мати щонайменше 5 слів."
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Відповіді мають містити щонайменше 5 слів."
@@ -1541,7 +1541,7 @@
       "default": "Змінити місцезнаходження"
     },
     "text_about": {
-      "default": "Про себе"
+      "default": "Про мене"
     },
     "button_label_change_about": {
       "default": "Змінити про себе"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Переглянути всі списки"
-    },
-    "list_description_released_movies": {
-      "default": "Випущені фільми"
     }
   }
 }

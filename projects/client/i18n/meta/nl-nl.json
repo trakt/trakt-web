@@ -1102,7 +1102,7 @@
       "default": "Nieuwe beoordeling toevoegen"
     },
     "textarea_placeholder_comment": {
-      "default": "Jouw beoordeling..."
+      "default": "Voeg een beoordeling toe..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Markeren als spoiler"
@@ -1117,7 +1117,7 @@
       "default": "Reactie plaatsen"
     },
     "translated_value_error_comment_invalid_content": {
-      "default": "Beoordelingen moeten minimaal 5 woorden bevatten."
+      "default": "Recensies moeten minimaal 5 woorden bevatten."
     },
     "translated_value_error_reply_invalid_content": {
       "default": "Reacties moeten minimaal 5 woorden bevatten."
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Bekijk alle lijsten"
-    },
-    "list_description_released_movies": {
-      "default": "Uitgebrachte films"
     }
   }
 }

@@ -1102,7 +1102,7 @@
       "default": "Adaugă o recenzie nouă"
     },
     "textarea_placeholder_comment": {
-      "default": "Recenzia ta..."
+      "default": "Adaugă o recenzie..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Marchează ca spoiler"
@@ -1541,7 +1541,7 @@
       "default": "Schimbă locația"
     },
     "text_about": {
-      "default": "Despre"
+      "default": "Despre mine"
     },
     "button_label_change_about": {
       "default": "Schimbă despre"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Vezi toate listele"
-    },
-    "list_description_released_movies": {
-      "default": "Filme lansate"
     }
   }
 }

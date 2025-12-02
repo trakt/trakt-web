@@ -1102,7 +1102,7 @@
       "default": "Dodaj nową recenzję"
     },
     "textarea_placeholder_comment": {
-      "default": "Twoja recenzja..."
+      "default": "Dodaj recenzję..."
     },
     "switch_label_mark_as_spoiler": {
       "default": "Oznacz jako spoiler"
@@ -2321,9 +2321,6 @@
     },
     "button_label_view_all_lists": {
       "default": "Zobacz wszystkie listy"
-    },
-    "list_description_released_movies": {
-      "default": "Premiery"
     }
   }
 }
