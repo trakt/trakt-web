@@ -17,11 +17,6 @@ import type { FilterParams } from '../../models/FilterParams.ts';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
 import { isValidProgressMovie } from './_internal/isValidProgressMovie.ts';
 
-// FIXME: technically not a filter; find out all possible values and move to params in api
-const UNRELEASED_FILTER = {
-  hide: 'unreleased',
-};
-
 export const MovieProgressSchema = MovieEntrySchema.merge(z.object({
   progress: z.number(),
   minutesElapsed: z.number(),
@@ -99,8 +94,8 @@ export const movieProgressRequest = (
           sort: 'released',
         },
         query: {
-          ...UNRELEASED_FILTER,
           extended: 'full,images,colors',
+          hide: 'unreleased',
           page,
           limit,
           ...filter,
