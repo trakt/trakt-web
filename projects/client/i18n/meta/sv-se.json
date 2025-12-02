@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Recension"
     },
+    "button_text_add_review": {
+      "default": "Lägg till recension"
+    },
+    "button_text_add_reply": {
+      "default": "Lägg till svar"
+    },
     "button_label_comment_reply": {
       "default": "Svara {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Recensioner måste vara minst 5 ord långa."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Svar måste innehålla minst 5 ord."
     },
     "translated_value_error_comment_unknown": {
       "default": "Ett fel uppstod när din recension skulle publiceras. Försök igen senare."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Redigera dina listdetaljer."
-    },
-    "list_description_released_movies": {
-      "default": "Släppta filmer"
     },
     "page_title_edit_list": {
       "default": "Redigera lista"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Borttagen från visningshistorik."
     },
+    "text_info_favorites_added": {
+      "default": "Lades till i favoriter."
+    },
+    "text_info_favorites_removed": {
+      "default": "Togs bort från favoriter."
+    },
     "text_info_list_added": {
       "default": "Tillagd i listan."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serien har avbrutits."
+    },
+    "text_info_review_added": {
+      "default": "Recensionen har lagts till."
+    },
+    "text_info_review_deleted": {
+      "default": "Recensionen har tagits bort."
+    },
+    "text_info_reply_added": {
+      "default": "Svar har lagts till."
+    },
+    "text_info_reply_deleted": {
+      "default": "Svar har tagits bort."
     },
     "button_text_long_press_for_more": {
       "default": "Tryck länge för mer"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Radera recension"
     },
+    "button_text_delete_reply": {
+      "default": "Ta bort svar"
+    },
     "button_label_delete_comment": {
       "default": "Radera recension"
     },
     "warning_prompt_delete_comment": {
       "default": "Är du säker på att du vill radera din recension?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Är du säker på att du vill ta bort ditt svar?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Är du säker på att du vill logga ut?"
     },
     "page_title_discover": {
       "default": "Upptäck"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Visa alla listor"
+    },
+    "list_description_released_movies": {
+      "default": "Släppta filmer"
     }
   }
 }

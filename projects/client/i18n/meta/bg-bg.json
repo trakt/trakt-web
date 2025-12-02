@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Ревю"
     },
+    "button_text_add_review": {
+      "default": "Добави ревю"
+    },
+    "button_text_add_reply": {
+      "default": "Добави отговор"
+    },
     "button_label_comment_reply": {
       "default": "Отговор до {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Ревютата трябва да съдържат поне 5 думи."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Отговорите трябва да са поне 5 думи."
     },
     "translated_value_error_comment_unknown": {
       "default": "Възникна грешка при публикуването на вашето ревю. Моля, опитайте отново по-късно."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Редактирайте подробностите за списъка си."
-    },
-    "list_description_released_movies": {
-      "default": "Излезли филми"
     },
     "page_title_edit_list": {
       "default": "Редактиране на списък"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Премахнато от историята на гледане."
     },
+    "text_info_favorites_added": {
+      "default": "Добавено към любими."
+    },
+    "text_info_favorites_removed": {
+      "default": "Премахнато от любими."
+    },
     "text_info_list_added": {
       "default": "Добавено към списъка."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Сериалът е прекъснат."
+    },
+    "text_info_review_added": {
+      "default": "Ревюто е добавено."
+    },
+    "text_info_review_deleted": {
+      "default": "Ревюто е изтрито."
+    },
+    "text_info_reply_added": {
+      "default": "Отговорът е добавен."
+    },
+    "text_info_reply_deleted": {
+      "default": "Отговорът е изтрит."
     },
     "button_text_long_press_for_more": {
       "default": "Натиснете за повече"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Изтрий ревюто"
     },
+    "button_text_delete_reply": {
+      "default": "Изтрий отговор"
+    },
     "button_label_delete_comment": {
       "default": "Изтрий ревюто"
     },
     "warning_prompt_delete_comment": {
       "default": "Сигурни ли сте, че искате да изтриете ревюто си?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Сигурни ли сте, че искате да изтриете отговора си?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Сигурни ли сте, че искате да излезете?"
     },
     "page_title_discover": {
       "default": "Открийте"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Виж всички списъци"
+    },
+    "list_description_released_movies": {
+      "default": "Излезли филми"
     }
   }
 }

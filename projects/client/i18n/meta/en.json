@@ -2914,6 +2914,22 @@
         "ios"
       ]
     },
+    "button_text_add_review": {
+      "default": "Add Review",
+      "description": "Button action label used when a user is submitting a review.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "button_text_add_reply": {
+      "default": "Add Reply",
+      "description": "Button action label used when a user is submitting a reply.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "button_label_comment_reply": {
       "default": "Reply to {user}",
       "description": "Aria-label for the button that opens the review reply dialog.",
@@ -2986,6 +3002,14 @@
       "description": "Error message shown when a review is invalid due to content length.",
       "exclude": [
         "ios"
+      ]
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Replies must be at least 5 words.",
+      "description": "Error message shown when a reply is invalid due to content length.",
+      "exclude": [
+        "ios",
+        "web"
       ]
     },
     "translated_value_error_comment_unknown": {
@@ -5172,6 +5196,22 @@
         "web"
       ]
     },
+    "text_info_favorites_added": {
+      "default": "Added to favorites.",
+      "description": "Text shown when a user has added a media item to their favorites.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_favorites_removed": {
+      "default": "Removed from favorites.",
+      "description": "Text shown when a user has removed a media item from their favorites.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "text_info_list_added": {
       "default": "Added to list.",
       "description": "Text shown when a user has added a media item to their personal custom list.",
@@ -5207,6 +5247,38 @@
     "text_info_show_dropped": {
       "default": "Show has been dropped.",
       "description": "Text shown when a user has dropped a tv show (meaning he abandons watching it after few episodes).",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_review_added": {
+      "default": "Review has been added.",
+      "description": "Text shown when a user has successfully added a new review",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_review_deleted": {
+      "default": "Review has been deleted.",
+      "description": "Text shown when a user has successfully deleted a new review",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_reply_added": {
+      "default": "Reply has been added.",
+      "description": "Text shown when a user has successfully added a new comment reply",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "text_info_reply_deleted": {
+      "default": "Reply has been deleted.",
+      "description": "Text shown when a user has successfully deleted a reply",
       "exclude": [
         "ios",
         "web"
@@ -5549,6 +5621,14 @@
         "ios"
       ]
     },
+    "button_text_delete_reply": {
+      "default": "Delete Reply",
+      "description": "Text for the button that allows a user to delete a reply.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
     "button_label_delete_comment": {
       "default": "Delete Review",
       "description": "Aria-label for the button that allows a user to delete a review.",
@@ -5561,6 +5641,22 @@
       "default": "Are you sure you want to delete your review?",
       "description": "Text for the warning prompt that appears when a user attempts to delete a review.",
       "exclude": [
+        "ios"
+      ]
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Are you sure you want to delete your reply?",
+      "description": "Text for the warning prompt that appears when a user attempts to delete a reply.",
+      "exclude": [
+        "ios",
+        "web"
+      ]
+    },
+    "warning_prompt_log_out": {
+      "default": "Are you sure you want to log out?",
+      "description": "Text for the warning prompt that appears when a user attempts to log out.",
+      "exclude": [
+        "web",
         "ios"
       ]
     },

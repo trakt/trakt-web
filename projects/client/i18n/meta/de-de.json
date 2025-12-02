@@ -1081,6 +1081,12 @@
     "dialog_title_comment": {
       "default": "Bewertung"
     },
+    "button_text_add_review": {
+      "default": "Rezension hinzufügen"
+    },
+    "button_text_add_reply": {
+      "default": "Antwort hinzufügen"
+    },
     "button_label_comment_reply": {
       "default": "Antworte {user}",
       "variables": {
@@ -1112,6 +1118,9 @@
     },
     "translated_value_error_comment_invalid_content": {
       "default": "Bewertungen müssen mindestens 5 Wörter enthalten."
+    },
+    "translated_value_error_reply_invalid_content": {
+      "default": "Antworten müssen mindestens 5 Wörter lang sein."
     },
     "translated_value_error_comment_unknown": {
       "default": "Beim Posten deiner Bewertung ist ein Fehler aufgetreten. Bitte versuche es später erneut."
@@ -1494,9 +1503,6 @@
     },
     "page_description_edit_list": {
       "default": "Bearbeiten Sie Ihre Listendetails."
-    },
-    "list_description_released_movies": {
-      "default": "Veröffentlichte Filme"
     },
     "page_title_edit_list": {
       "default": "Liste bearbeiten"
@@ -1923,6 +1929,12 @@
     "text_info_history_removed": {
       "default": "Aus der History entfernt."
     },
+    "text_info_favorites_added": {
+      "default": "Zu Favoriten hinzugefügt."
+    },
+    "text_info_favorites_removed": {
+      "default": "Aus Favoriten entfernt."
+    },
     "text_info_list_added": {
       "default": "Zur Liste hinzugefügt."
     },
@@ -1937,6 +1949,18 @@
     },
     "text_info_show_dropped": {
       "default": "Serie abgebrochen."
+    },
+    "text_info_review_added": {
+      "default": "Rezension wurde hinzugefügt."
+    },
+    "text_info_review_deleted": {
+      "default": "Rezension wurde gelöscht."
+    },
+    "text_info_reply_added": {
+      "default": "Antwort wurde hinzugefügt."
+    },
+    "text_info_reply_deleted": {
+      "default": "Antwort wurde gelöscht."
     },
     "button_text_long_press_for_more": {
       "default": "Länger drücken für mehr"
@@ -2079,11 +2103,20 @@
     "button_text_delete_comment": {
       "default": "Bewertung löschen"
     },
+    "button_text_delete_reply": {
+      "default": "Antwort löschen"
+    },
     "button_label_delete_comment": {
       "default": "Bewertung löschen"
     },
     "warning_prompt_delete_comment": {
       "default": "Möchtest du deine Bewertung wirklich löschen?"
+    },
+    "warning_prompt_delete_reply": {
+      "default": "Möchten Sie Ihre Antwort wirklich löschen?"
+    },
+    "warning_prompt_log_out": {
+      "default": "Möchten Sie sich wirklich abmelden?"
     },
     "page_title_discover": {
       "default": "Entdecken"
@@ -2288,6 +2321,9 @@
     },
     "button_label_view_all_lists": {
       "default": "Alle Listen anzeigen"
+    },
+    "list_description_released_movies": {
+      "default": "Veröffentlichte Filme"
     }
   }
 }
