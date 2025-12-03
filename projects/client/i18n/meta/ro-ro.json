@@ -2259,6 +2259,9 @@
     "header_age": {
       "default": "Vârstă"
     },
+    "header_date_of_death": {
+      "default": "Data decesului"
+    },
     "button_label_view_all_where_to_watch": {
       "default": "Vezi toate serviciile de streaming"
     },

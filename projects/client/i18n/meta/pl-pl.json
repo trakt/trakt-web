@@ -2259,6 +2259,9 @@
     "header_age": {
       "default": "Wiek"
     },
+    "header_date_of_death": {
+      "default": "Data śmierci"
+    },
     "button_label_view_all_where_to_watch": {
       "default": "Zobacz wszystkie serwisy streamingowe"
     },

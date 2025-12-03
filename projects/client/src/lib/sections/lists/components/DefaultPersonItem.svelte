@@ -6,12 +6,10 @@
   import PersonCard from "$lib/components/people/card/PersonCard.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
-  import { getYearsDifference } from "$lib/utils/date/getYearsDifference";
+  import DateWithAnniversary from "$lib/sections/components/DateWithAnniversary.svelte";
   import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear";
-  import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
 
@@ -61,10 +59,10 @@
           <CelebrationIcon />
         {/if}
 
-        <p class="no-wrap ellipsis">
-          {toHumanDay(person.birthday, getLocale(), "short")}
-          ({getYearsDifference(person.birthday, today)})
-        </p>
+        <DateWithAnniversary
+          date={person.birthday}
+          referenceDate={person.deathDate ?? today}
+        />
       </div>
     {/if}
   </CardFooter>

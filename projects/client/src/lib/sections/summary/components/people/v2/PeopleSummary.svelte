@@ -38,7 +38,10 @@
     <SocialMediaLinks {person} />
 
     {#if person.birthday}
-      <BirthdayDetails birthday={person.birthday} />
+      <BirthdayDetails
+        birthday={person.birthday}
+        deathDate={person.deathDate}
+      />
     {/if}
   {/snippet}
 

@@ -2259,6 +2259,9 @@
     "header_age": {
       "default": "Вік"
     },
+    "header_date_of_death": {
+      "default": "Дата смерті"
+    },
     "button_label_view_all_where_to_watch": {
       "default": "Переглянути всі стрімінгові сервіси"
     },
