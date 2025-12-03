@@ -2360,6 +2360,14 @@
     },
     "button_label_sort_descending": {
       "default": "降順で並べ替え"
+    },
+    "text_about_user": {
+      "default": "{username}さんのプロフィール",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     }
   }
 }

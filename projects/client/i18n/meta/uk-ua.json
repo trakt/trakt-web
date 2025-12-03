@@ -2360,6 +2360,14 @@
     },
     "button_label_sort_descending": {
       "default": "Сортувати за спаданням"
+    },
+    "text_about_user": {
+      "default": "Про {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     }
   }
 }
