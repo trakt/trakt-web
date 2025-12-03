@@ -3,6 +3,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { z } from 'zod';
 import { mapToUserProfile } from '../../_internal/mapToUserProfile.ts';
+import { InvalidateAction } from '../../models/InvalidateAction.ts';
 import { UserProfileSchema } from '../../models/UserProfile.ts';
 
 type FollowingParams = { slug: string } & ApiParams;
@@ -23,7 +24,7 @@ const followingRequest = (
 
 export const followingQuery = defineQuery({
   key: 'following',
-  invalidations: [],
+  invalidations: [InvalidateAction.User.Follow],
   dependencies: (
     params: FollowingParams,
   ) => [params.slug],
