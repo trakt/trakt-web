@@ -2360,6 +2360,14 @@
     },
     "button_label_sort_descending": {
       "default": "Ordonează descrescător"
+    },
+    "text_about_user": {
+      "default": "Despre {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     }
   }
 }

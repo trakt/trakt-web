@@ -2360,6 +2360,14 @@
     },
     "button_label_sort_descending": {
       "default": "Сортиране в низходящ ред"
+    },
+    "text_about_user": {
+      "default": "Относно {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     }
   }
 }

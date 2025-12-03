@@ -2360,6 +2360,14 @@
     },
     "button_label_sort_descending": {
       "default": "Sorteren aflopend"
+    },
+    "text_about_user": {
+      "default": "Over {username}",
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      }
     }
   }
 }

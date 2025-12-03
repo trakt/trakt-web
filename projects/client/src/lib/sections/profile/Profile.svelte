@@ -34,7 +34,7 @@
     <VipUpsell />
   {/if}
 
-  <ProfileAbout about={profile.about} />
+  <ProfileAbout {profile} {slug} />
 </ProfileContainer>
 
 {#if $isMe}
