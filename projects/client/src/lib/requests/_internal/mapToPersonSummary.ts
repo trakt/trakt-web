@@ -28,5 +28,6 @@ export const mapToPersonSummary = (
     headshot: mapToHeadshot(response.images),
     birthday: response.birthday ? new Date(response.birthday) : null,
     socialMedia: mapToSocialMedia(response),
+    deathDate: response.death ? new Date(response.death) : null,
   };
 };
