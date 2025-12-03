@@ -56,7 +56,7 @@ export const SEASONAL_THEMES: Record<string, SeasonalThemeConfig> = {
   },
   christmas: {
     id: 'christmas',
-    start: { year: 2025, month: 12, day: 20, hour: 0, minute: 0, second: 0 },
+    start: { year: 2025, month: 10, day: 20, hour: 0, minute: 0, second: 0 },
     end: { year: 2025, month: 12, day: 30, hour: 23, minute: 59, second: 59 },
     filters: [
       {
