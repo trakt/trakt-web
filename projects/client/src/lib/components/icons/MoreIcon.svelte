@@ -3,25 +3,48 @@
 
   type MoreIconProps = {
     shadowColor?: string;
+    size?: "small" | "normal";
   };
 
-  const { shadowColor }: MoreIconProps = $props();
+  const { shadowColor, size = "small" }: MoreIconProps = $props();
 
   const filterId = $derived(
     shadowColor ? `drop-shadow-${checksum(shadowColor)}` : undefined,
   );
+
+  const baseSize = $derived(size === "small" ? 16 : 24);
+  const halfBaseSize = $derived(baseSize / 2);
+  const radius = $derived(size === "small" ? 2 : 2.5);
 </script>
 
 {#snippet circles(filterUrl: string = "")}
-  <circle cx="8" cy="2" r="2" fill="currentColor" filter={filterUrl} />
-  <circle cx="8" cy="8" r="2" fill="currentColor" filter={filterUrl} />
-  <circle cx="8" cy="14" r="2" fill="currentColor" filter={filterUrl} />
+  <circle
+    cx={halfBaseSize}
+    cy={size === "small" ? 2 : 4}
+    r={radius}
+    fill="currentColor"
+    filter={filterUrl}
+  />
+  <circle
+    cx={halfBaseSize}
+    cy={halfBaseSize}
+    r={radius}
+    fill="currentColor"
+    filter={filterUrl}
+  />
+  <circle
+    cx={halfBaseSize}
+    cy={size === "small" ? 14 : 20}
+    r={radius}
+    fill="currentColor"
+    filter={filterUrl}
+  />
 {/snippet}
 
 <svg
-  width="16"
-  height="16"
-  viewBox="0 0 16 16"
+  width={baseSize}
+  height={baseSize}
+  viewBox="0 0 #{baseSize} #{baseSize}"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   overflow="visible"

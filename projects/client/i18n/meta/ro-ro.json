@@ -2371,6 +2371,9 @@
           "type": "string"
         }
       }
+    },
+    "button_label_profile_options": {
+      "default": "Opțiuni profil"
     }
   }
 }
