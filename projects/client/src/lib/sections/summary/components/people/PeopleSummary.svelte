@@ -43,7 +43,11 @@
     <SocialMediaLinks {person} variant="compact" />
 
     {#if person.birthday}
-      <BirthdayDetails birthday={person.birthday} variant="compact" />
+      <BirthdayDetails
+        birthday={person.birthday}
+        deathDate={person.deathDate}
+        variant="compact"
+      />
     {/if}
   </div>
 </SummaryContainer>

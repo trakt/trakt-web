@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getLocale } from "$lib/features/i18n";
   import * as m from "$lib/features/i18n/messages.ts";
+  import DateWithAnniversary from "$lib/sections/components/DateWithAnniversary.svelte";
   import { getYearsDifference } from "$lib/utils/date/getYearsDifference";
   import { isSameDayOfYear } from "$lib/utils/date/isSameDayOfYear";
   import { toHumanDay } from "$lib/utils/formatting/date/toHumanDay";
@@ -8,10 +9,17 @@
 
   const {
     birthday,
+    deathDate,
     variant = "default",
-  }: { birthday: Date; variant?: "default" | "compact" } = $props();
+  }: {
+    birthday: Date;
+    deathDate: Date | Nil;
+    variant?: "default" | "compact";
+  } = $props();
 
   const today = new Date();
+
+  const detailHeader = deathDate ? m.header_date_of_death() : m.header_age();
 </script>
 
 <div class="trakt-birthday-details" data-variant={variant}>
@@ -24,8 +32,13 @@
   </div>
   <div class="trakt-detail-separator"></div>
   <div class="trakt-birthday-detail">
-    <span class="bold secondary">{m.header_age()}</span>
-    <p>{getYearsDifference(birthday, today)}</p>
+    <span class="bold secondary">{detailHeader}</span>
+    {#if deathDate}
+      <DateWithAnniversary date={deathDate} referenceDate={birthday} />
+    {/if}
+    {#if !deathDate}
+      <p>{getYearsDifference(birthday, today)}</p>
+    {/if}
   </div>
 </div>
 

@@ -6003,6 +6003,14 @@
         "ios"
       ]
     },
+    "header_date_of_death": {
+      "default": "Date of death",
+      "description": "Header for the section that displays the person's date of death.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
     "button_label_view_all_where_to_watch": {
       "default": "View all streaming services",
       "description": "Aria-label for the button that allows users to view all worldwide streaming services for a movie, show, or episode.",
