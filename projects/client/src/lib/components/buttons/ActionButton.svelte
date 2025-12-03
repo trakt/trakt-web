@@ -166,9 +166,6 @@
     &[data-style="ghost"] {
       background-color: transparent;
 
-      /** This is required for improved readability when rendering over a cover image */
-      backdrop-filter: blur(var(--ni-16));
-
       @include for-mouse {
         &:hover {
           background-color: color-mix(

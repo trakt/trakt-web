@@ -54,7 +54,6 @@
     :global(.trakt-action-button) {
       transition: color var(--transition-increment) ease-in-out;
       border-radius: 0;
-      backdrop-filter: none;
     }
 
     @include for-mouse() {
