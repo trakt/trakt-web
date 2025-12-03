@@ -84,7 +84,8 @@
         }
       },
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "list_title_up_next": {
@@ -6261,6 +6262,14 @@
           "type": "string"
         }
       },
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "button_label_profile_options": {
+      "default": "Profile options",
+      "description": "Aria-label for the button that opens a popup menu or drawer for a users profile, where users can change settings and logout.",
       "exclude": [
         "android",
         "ios"

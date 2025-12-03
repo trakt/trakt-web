@@ -1,6 +1,5 @@
 <script lang="ts">
   import VipBadge from "$lib/components/badge/VipBadge.svelte";
-  import SettingsButton from "$lib/components/buttons/settings/SettingsButton.svelte";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
   import { useIsMe } from "$lib/features/auth/stores/useIsMe";
   import { useUser } from "$lib/features/auth/stores/useUser";
@@ -10,6 +9,7 @@
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import type { DisplayableProfileProps } from "../profile/DisplayableProfileProps";
   import FollowUserButton from "./_internal/FollowUserButton.svelte";
+  import ProfileOptionsButton from "./_internal/ProfileOptionsButton.svelte";
   import ProfileImage from "./ProfileImage.svelte";
 
   const { profile, slug }: DisplayableProfileProps = $props();
@@ -17,11 +17,6 @@
   const { user } = useUser();
   const { isMe } = $derived(useIsMe(slug));
 
-  const nameLabel = $derived(
-    $isMe
-      ? m.header_profile_banner_greeting({ name: toDisplayableName(profile) })
-      : toDisplayableName(profile),
-  );
   const shareableSlug = $derived($isMe ? $user.slug : slug);
 </script>
 
@@ -36,33 +31,35 @@
     isVip={profile.isVip}
   >
     {#snippet badge()}
-      {#if profile.isVip}
-        <VipBadge isDirector={profile.isDirector} />
-      {/if}
+      <RenderFor audience="all" device={["tablet-sm", "desktop"]}>
+        {#if profile.isVip}
+          <VipBadge isDirector={profile.isDirector} />
+        {/if}
+      </RenderFor>
     {/snippet}
   </ProfileImage>
   <div class="profile-info" data-hj-suppress data-sentry-mask>
     <div class="profile-user-details">
       <span class="title">
-        {nameLabel}
+        {toDisplayableName(profile)}
       </span>
       <span class="user-location">{profile.location}</span>
     </div>
     <div class="profile-actions">
-      <RenderFor audience="authenticated">
-        {#if !$isMe}
-          <FollowUserButton {profile} {slug} />
-        {/if}
-        {#if $isMe}
-          <SettingsButton style="ghost" />
-        {/if}
-      </RenderFor>
       <ShareButton
         title={profile.name.first}
         urlOverride={UrlBuilder.profile.user(shareableSlug)}
         textFactory={({ title: name }) => m.text_share_profile({ name })}
         source={{ id: "profile", type: $isMe ? "own" : "other" }}
       />
+      <RenderFor audience="authenticated">
+        {#if !$isMe}
+          <FollowUserButton {profile} {slug} />
+        {/if}
+        {#if $isMe}
+          <ProfileOptionsButton />
+        {/if}
+      </RenderFor>
     </div>
   </div>
 </div>
@@ -76,6 +73,8 @@
     align-items: flex-start;
     gap: var(--gap-m);
 
+    transition: gap var(--transition-increment) ease-in-out;
+
     :global(.profile-image-container) {
       display: flex;
       flex-direction: column;
@@ -88,24 +87,27 @@
     }
 
     @include for-tablet-sm-and-below {
+      align-items: center;
       flex-direction: row;
-      align-items: flex-end;
+      gap: var(--gap-xs);
 
-      margin: 0;
+      :global(.profile-image-container) {
+        --width: var(--ni-40);
+        --height: var(--ni-40);
+        --border-width: var(--border-thickness-xs);
+      }
     }
   }
 
   .profile-user-details {
     display: flex;
     flex-direction: column;
-
     gap: var(--gap-micro);
   }
 
   .profile-info {
     display: flex;
     flex-direction: column;
-
     gap: var(--gap-m);
 
     .user-location {
@@ -114,9 +116,9 @@
 
     @include for-tablet-sm-and-below {
       width: 100%;
-      flex-direction: column-reverse;
-
-      gap: 0;
+      flex-direction: row;
+      gap: var(--gap-xs);
+      justify-content: space-between;
     }
   }
 
@@ -125,6 +127,11 @@
     align-items: center;
 
     gap: var(--gap-s);
+
+    :global(svg) {
+      width: var(--ni-24);
+      height: var(--ni-24);
+    }
 
     @include for-tablet-sm-and-below {
       align-self: flex-end;
