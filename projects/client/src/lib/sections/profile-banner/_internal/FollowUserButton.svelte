@@ -36,8 +36,8 @@
 
 <Button
   size={"small"}
-  color={$isFollowed ? "red" : "purple"}
-  variant={$isFollowed ? "secondary" : "primary"}
+  color={"default"}
+  variant={"primary"}
   {label}
   onclick={(event) => {
     $isFollowed ? confirmUnfollow(event) : followUser();

@@ -84,7 +84,8 @@
         }
       },
       "exclude": [
-        "ios"
+        "ios",
+        "web"
       ]
     },
     "list_title_up_next": {
