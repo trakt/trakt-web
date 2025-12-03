@@ -86,12 +86,5 @@
         font-weight: 500;
       }
     }
-
-    .trakt-card-footer-action {
-      :global(.trakt-action-button[data-style="ghost"]),
-      :global(.trakt-button[data-style="ghost"]) {
-        backdrop-filter: none;
-      }
-    }
   }
 </style>

@@ -21,7 +21,6 @@
   trakt-banner-dismiss-button {
     :global(.trakt-action-button[data-style="ghost"]) {
       color: var(--shade-10);
-      backdrop-filter: none;
     }
   }
 </style>

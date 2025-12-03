@@ -72,9 +72,6 @@
 
       border-radius: 50%;
 
-      background-color: transparent;
-      backdrop-filter: none;
-
       opacity: 0;
 
       --delay-factor: calc(var(--animation-duration) / 6);

@@ -19,9 +19,6 @@
     width: var(--summary-side-action-bar-width);
 
     :global(.trakt-action-button) {
-      background: transparent;
-      backdrop-filter: none;
-
       :global(svg) {
         color: var(--color-foreground);
       }
