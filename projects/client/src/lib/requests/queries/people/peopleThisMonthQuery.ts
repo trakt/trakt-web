@@ -33,7 +33,7 @@ const peopleThisMonthRequest = async (
 };
 
 export const peopleThisMonthQuery = defineQuery({
-  key: 'peopleThisMonth',
+  key: 'peopleThisMonth:v2',
   invalidations: [],
   dependencies: () => [],
   request: peopleThisMonthRequest,
