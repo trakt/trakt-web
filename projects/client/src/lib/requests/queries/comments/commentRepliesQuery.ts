@@ -30,6 +30,7 @@ const userCommentRepliesRequest = (
         id: `${id}`,
       },
       query: {
+        extended: 'images',
         page,
         limit,
       },
