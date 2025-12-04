@@ -1,7 +1,20 @@
 import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
+import { getUserManager } from '../../features/auth/stores/userManager.ts';
 import { getMarker } from '../../utils/date/Marker.ts';
+import { safeSessionStorage } from '../../utils/storage/safeStorage.ts';
+
+const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
+
+const hasRequestedRefresh = () =>
+  Boolean(safeSessionStorage.getItem(SESSION_STORAGE_REFRESH_KEY));
+
+const setRefreshKey = () =>
+  safeSessionStorage.setItem(SESSION_STORAGE_REFRESH_KEY, 'true');
+
+const clearRefreshKey = () =>
+  safeSessionStorage.removeItem(SESSION_STORAGE_REFRESH_KEY);
 
 export function createAuthenticatedFetch<
   T extends typeof fetch,
@@ -36,7 +49,16 @@ export function createAuthenticatedFetch<
           headers,
         } as Parameters<T>[1],
       ).then((response) => {
-        //FIXME: deal with unauthorized responses even when the client has a 'valid' token
+        if (response.status === 401 && !hasRequestedRefresh()) {
+          setRefreshKey();
+          getUserManager()?.removeUser().then(() =>
+            globalThis.window.location.reload()
+          );
+        }
+
+        if (response.status !== 401) {
+          clearRefreshKey();
+        }
 
         return response;
       });
