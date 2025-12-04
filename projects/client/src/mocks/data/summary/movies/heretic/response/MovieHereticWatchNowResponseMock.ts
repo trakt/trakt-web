@@ -68,5 +68,9 @@ export const MovieHereticWatchNowResponseMock: WatchNowResponse = {
       },
     ],
     'cinema': [],
+    'streaming_ranks': {
+      'rank': 142,
+      'delta': 35,
+    },
   },
 };

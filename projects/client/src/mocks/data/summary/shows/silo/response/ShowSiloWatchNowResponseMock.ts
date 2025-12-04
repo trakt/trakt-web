@@ -49,5 +49,9 @@ export const ShowSiloWatchNowResponseMock: WatchNowResponse = {
     'cable': [],
     'purchase': [],
     'cinema': [],
+    'streaming_ranks': {
+      'rank': 42,
+      'delta': -3,
+    },
   },
 };

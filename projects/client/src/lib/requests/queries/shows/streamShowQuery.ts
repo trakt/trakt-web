@@ -19,6 +19,9 @@ const showWatchNowRequest = (
         id: slug,
         country,
       },
+      query: {
+        extended: 'streaming_ranks',
+      },
     });
 
 export const streamShowQuery = defineQuery({

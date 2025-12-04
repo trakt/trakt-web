@@ -1,5 +1,9 @@
 import { prependHttps } from '$lib/utils/url/prependHttps.ts';
-import type { WatchNowResponse, WatchNowServiceResponse } from '@trakt/api';
+import type {
+  watchNowRankResponse,
+  WatchNowResponse,
+  WatchNowServiceResponse,
+} from '@trakt/api';
 import type {
   StreamingServiceOptions,
   StreamNow,
@@ -45,6 +49,17 @@ function mapToStreamOnDemand(
   };
 }
 
+function mapToStreamingRank(rankResponse?: watchNowRankResponse) {
+  if (!rankResponse?.rank || !rankResponse?.delta) {
+    return;
+  }
+
+  return {
+    current: rankResponse.rank,
+    delta: rankResponse.delta,
+  };
+}
+
 export function mapToStreamingServices(
   response: WatchNowResponse,
   country: string,
@@ -57,5 +72,6 @@ export function mapToStreamingServices(
   return {
     streaming: subscriptionResponse.map(mapToStreamNow),
     onDemand: purchaseResponse.map(mapToStreamOnDemand),
+    streamingRank: mapToStreamingRank(data?.streaming_ranks),
   };
 }

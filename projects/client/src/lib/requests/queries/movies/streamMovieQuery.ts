@@ -19,6 +19,9 @@ const streamMovieRequest = (
         id: slug,
         country,
       },
+      query: {
+        extended: 'streaming_ranks',
+      },
     });
 
 export const streamMovieQuery = defineQuery({
