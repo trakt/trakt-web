@@ -18,7 +18,7 @@ function mapToToken(user: User | null): Token {
   };
 }
 
-export function initializeUserManager() {
+export function initializeUserManager(tokenFromServer?: string | null) {
   if (!browser) {
     return {
       isInitializing: readable(false),
@@ -32,6 +32,13 @@ export function initializeUserManager() {
     const manager = new UserManager(
       getOidcConfig(),
     );
+
+    const syncToken = (user: User | null) => {
+      if (!user) return;
+      if (user.access_token === tokenFromServer) return;
+
+      postToken(mapToToken(user));
+    };
 
     const setAuthState = (
       { token, isExpired }: { token: Token; isExpired: boolean },
@@ -59,6 +66,7 @@ export function initializeUserManager() {
 
       const token = mapToToken(user);
       setAuthState({ token, isExpired: user?.expired ?? true });
+      syncToken(user);
     };
 
     const checkTokenOnFocus = async () => {

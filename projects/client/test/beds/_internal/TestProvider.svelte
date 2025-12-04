@@ -5,6 +5,7 @@
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
   import ToastProvider from "$lib/features/toast/ToastProvider.svelte";
+  import { OidcUserMock } from "$mocks/data/auth/OidcUserMock.ts";
   import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
   import type { Snippet } from "svelte";
   import { isAuthorized } from "./isAuthorized.ts";
@@ -14,7 +15,10 @@
 
 <!-- TODO: add more providers here as we expand test suite -->
 <QueryClientProvider client={new QueryClient()}>
-  <AuthProvider isAuthorized={$isAuthorized}>
+  <AuthProvider
+    isAuthorized={$isAuthorized}
+    accessToken={OidcUserMock.access_token}
+  >
     <FeatureFlagProvider>
       <ToastProvider>
         <SearchProvider

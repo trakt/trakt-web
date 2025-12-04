@@ -8,20 +8,24 @@
 
   type AuthProviderProps = {
     isAuthorized: boolean;
+    accessToken: string | null;
   } & ChildrenProps;
 
-  const { children, isAuthorized: isAuthorizedOidc }: AuthProviderProps =
-    $props();
+  const {
+    children,
+    isAuthorized: isAuthorizedOidc,
+    accessToken,
+  }: AuthProviderProps = $props();
 
   const { isAuthorized } = createAuthContext({
     isAuthorized: isAuthorizedOidc,
     token: null,
   });
 
-  const { isInitializing } = initializeUserManager();
+  const { isInitializing } = initializeUserManager(accessToken);
   const { user } = useUser();
 
-  beforeNavigate(({ from, to, cancel }) => {
+  beforeNavigate(({ from, to }) => {
     const isSamePage = from?.url.pathname === to?.url.pathname;
 
     if (get(isAuthorized) || isSamePage) {
