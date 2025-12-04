@@ -1,5 +1,4 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { setMarker } from '../../../utils/date/Marker.ts';
 
 type DropMovieRequest = {
   id: number;
@@ -18,8 +17,6 @@ export function dropMovieRequest(
       },
     })
     .then(({ status }) => {
-      setMarker();
-
       return status === 204;
     });
 }

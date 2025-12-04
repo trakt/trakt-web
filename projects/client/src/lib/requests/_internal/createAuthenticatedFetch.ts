@@ -2,7 +2,6 @@ import { getToken } from '$lib/features/auth/token/index.ts';
 
 import { error } from '$lib/utils/console/print.ts';
 import { getUserManager } from '../../features/auth/stores/userManager.ts';
-import { getMarker } from '../../utils/date/Marker.ts';
 import { safeSessionStorage } from '../../utils/storage/safeStorage.ts';
 
 const SESSION_STORAGE_REFRESH_KEY = 'trakt:is_refreshing';
@@ -30,16 +29,6 @@ export function createAuthenticatedFetch<
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
-      }
-
-      const method = init?.method?.toUpperCase();
-      const marker = getMarker();
-
-      if (method === 'GET' && marker != null) {
-        const [path, queryString] = input.toString().split('?');
-        const params = new URLSearchParams(queryString || '');
-        params.set('marker', marker.toString());
-        input = `${path}?${params.toString()}`;
       }
 
       return baseFetch(
