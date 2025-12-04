@@ -1,5 +1,4 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { setMarker } from '../../../utils/date/Marker.ts';
 
 type RemoveReactionCommentParams = { id: number } & ApiParams;
 
@@ -15,8 +14,6 @@ export function removeReactionCommentRequest(
       },
     })
     .then(({ status }) => {
-      setMarker();
-
       return status === 204;
     });
 }

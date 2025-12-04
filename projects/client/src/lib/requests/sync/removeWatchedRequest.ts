@@ -1,6 +1,5 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { HistoryRemoveRequest } from '@trakt/api';
-import { setMarker } from '../../utils/date/Marker.ts';
 
 type RemoveWatchedParams = {
   body: HistoryRemoveRequest;
@@ -16,8 +15,6 @@ export function removeWatchedRequest(
       body,
     })
     .then(({ status }) => {
-      setMarker();
-
       return status === 200;
     });
 }
