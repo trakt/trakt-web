@@ -31,8 +31,7 @@
     const isNavigatingToHomePage = to?.url.pathname === UrlBuilder.home();
 
     if (!isNavigatingToHomePage) {
-      cancel();
-      goto(UrlBuilder.home());
+      goto(UrlBuilder.home(), { replaceState: true });
     }
   });
 </script>
