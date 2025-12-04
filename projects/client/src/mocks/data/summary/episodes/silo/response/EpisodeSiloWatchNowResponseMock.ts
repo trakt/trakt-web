@@ -49,5 +49,9 @@ export const EpisodeSiloWatchNowResponseMock: WatchNowResponse = {
     'cable': [],
     'purchase': [],
     'cinema': [],
+    'streaming_ranks': {
+      'rank': 67,
+      'delta': -5,
+    },
   },
 };

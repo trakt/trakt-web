@@ -19,4 +19,8 @@ export const ShowSiloStreamingServiceOptionsMappedMock:
         'key': 'streaming-apple_tv_plus_amazon_channel',
       },
     ],
+    'streamingRank': {
+      'current': 42,
+      'delta': -3,
+    },
   };

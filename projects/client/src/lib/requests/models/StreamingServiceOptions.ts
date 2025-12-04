@@ -1,6 +1,13 @@
 import { z } from 'zod';
 import { HttpsUrlSchema } from './HttpsUrlSchema.ts';
 
+const StreamingRankSchema = z.object({
+  current: z.number(),
+  delta: z.number(),
+});
+
+export type StreamingRank = z.infer<typeof StreamingRankSchema>;
+
 export const StreamingSubscriptionSchema = z.object({
   link: HttpsUrlSchema,
   source: z.string(),
@@ -30,6 +37,7 @@ export type StreamOnDemand = z.infer<typeof OnDemandStreamingSchema>;
 export const StreamingServiceOptionsSchema = z.object({
   streaming: StreamingSubscriptionSchema.array(),
   onDemand: OnDemandStreamingSchema.array(),
+  streamingRank: StreamingRankSchema.optional(),
 });
 
 export type StreamingServiceOption = StreamNow | StreamOnDemand;

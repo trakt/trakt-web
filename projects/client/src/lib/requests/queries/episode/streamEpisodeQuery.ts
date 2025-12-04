@@ -25,6 +25,9 @@ const streamEpisodeRequest = (
         episode,
         country,
       },
+      query: {
+        extended: 'streaming_ranks',
+      },
     });
 
 export const streamEpisodeQuery = defineQuery({
