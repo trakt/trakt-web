@@ -139,6 +139,8 @@
    */
   --streaming-service-logo-filter: brightness(0);
   --color-just-watch: #c79a00;
+  --color-rank-positive: var(--green-700);
+  --color-rank-negative: var(--red-700);
 
   /*
     * Cover image
@@ -283,6 +285,8 @@
    */
   --streaming-service-logo-filter: brightness(1);
   --color-just-watch: #fcc405;
+  --color-rank-positive: var(--green-300);
+  --color-rank-negative: var(--red-300);
 
   /*
     * Cover image

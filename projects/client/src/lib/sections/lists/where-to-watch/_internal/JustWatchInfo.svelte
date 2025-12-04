@@ -1,12 +1,18 @@
 <script lang="ts">
   import JustWatchIcon from "$lib/components/icons/JustWatchIcon.svelte";
   import Link from "$lib/components/link/Link.svelte";
+  import type { StreamingRank } from "$lib/requests/models/StreamingServiceOptions";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { slide } from "svelte/transition";
   import { useJustWatchUrl } from "./useJustWatchUrl";
 
-  const { ...target }: MetaInfoProps = $props();
+  const {
+    rank,
+    ...target
+  }: {
+    rank?: StreamingRank;
+  } & MetaInfoProps = $props();
 
   const { country } = useStreamingPreferences();
 
@@ -16,8 +22,6 @@
       ...target,
     }),
   );
-
-  //FIXME: add justwatch rankings
 </script>
 
 {#if !$isLoading && $url}
@@ -28,11 +32,33 @@
         <p class="tiny">JustWatch</p>
       </div>
     </Link>
+
+    {#if rank}
+      <span>{rank.current}</span>
+      <span
+        class:is-positive={rank.current > 0}
+        class:is-negative={rank.current < 0}
+      >
+        ({rank.delta})
+      </span>
+    {/if}
   </div>
 {/if}
 
 <style>
   .trakt-just-watch-info {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+
+    .is-positive {
+      color: var(--color-rank-positive);
+    }
+
+    .is-negative {
+      color: var(--color-rank-negative);
+    }
+
     :global(.trakt-link) {
       display: flex;
       align-items: center;
