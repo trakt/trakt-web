@@ -37,7 +37,7 @@
 </script>
 
 {#snippet metaInfo()}
-  <JustWatchInfo {...target} />
+  <JustWatchInfo {...target} rank={streamOn?.services?.streamingRank} />
 {/snippet}
 
 {#if isAired}
