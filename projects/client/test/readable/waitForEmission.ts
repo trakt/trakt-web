@@ -1,7 +1,5 @@
-import { type Readable } from 'svelte/store';
-
 export function waitForEmission<T>(
-  store: Readable<T>,
+  store: ReadableOrObservable<T>,
   emission: number,
   timeout = 100,
 ) {
@@ -14,7 +12,11 @@ export function waitForEmission<T>(
       lastValue = value;
 
       if (emissionCount === emission) {
-        queueMicrotask(() => unsubscribe());
+        queueMicrotask(() =>
+          'unsubscribe' in unsubscribe
+            ? unsubscribe.unsubscribe()
+            : unsubscribe()
+        );
         resolve(value);
       }
 
