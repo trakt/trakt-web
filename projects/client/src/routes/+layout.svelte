@@ -109,11 +109,11 @@
       display: block;
       position: fixed;
 
-      background-color: var(--color-background);
+      background-color: var(--color-root);
     }
 
     body {
-      background-color: var(--color-background);
+      background-color: var(--color-root);
       color: var(--color-foreground);
       font-family: "Roboto", Arial, sans-serif;
     }

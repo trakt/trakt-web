@@ -52,12 +52,6 @@ export function useTheme() {
           navbar: computeVariable(
             '--color-background-navbar-base',
           ),
-          background: computeVariable(
-            '--color-background',
-          ),
-          text: computeVariable(
-            '--color-foreground',
-          ),
         };
       },
     ),

@@ -11,7 +11,7 @@
   const {
     src,
     type,
-    colors = ["var(--color-background)", "var(--color-background)"],
+    colors = ["var(--color-root)", "var(--color-root)"],
   }: ImageBackgroundProps = $props();
 
   const { cover } = useCover();

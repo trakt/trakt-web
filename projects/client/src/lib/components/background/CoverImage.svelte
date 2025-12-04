@@ -40,13 +40,13 @@
         in srgb,
         color-mix(
             in srgb,
-            var(--color-background) 25%,
+            var(--color-root) 25%,
             var(--trakt-cover-primary-color)
           )
           50%,
         transparent
       ),
-      color-mix(in srgb, var(--color-background) 25%, transparent)
+      color-mix(in srgb, var(--color-root) 25%, transparent)
     );
 
     @include for-tablet-sm-and-below {
@@ -127,16 +127,16 @@
       background: linear-gradient(
         180deg,
         transparent 0%,
-        color-mix(in srgb, var(--color-background) 90%, transparent) 90%,
-        var(--color-background) 100%
+        color-mix(in srgb, var(--color-root) 90%, transparent) 90%,
+        var(--color-root) 100%
       );
 
       @include for-tablet-sm-and-below {
         background: linear-gradient(
           180deg,
           transparent 0%,
-          color-mix(in srgb, var(--color-background) 95%, transparent) 65%,
-          var(--color-background) 100%
+          color-mix(in srgb, var(--color-root) 95%, transparent) 65%,
+          var(--color-root) 100%
         );
       }
     }

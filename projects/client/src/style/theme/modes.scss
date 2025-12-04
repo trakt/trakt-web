@@ -7,11 +7,12 @@
    */
   --color-shadow: var(--shade-800);
 
+  --color-root: color-mix(in srgb, var(--shade-300) 70%, var(--purple-50));
   --color-foreground: var(--shade-920);
   --color-background: var(--shade-10);
 
-  --color-text-primary: var(--shade-800);
-  --color-text-secondary: var(--shade-500);
+  --color-text-primary: var(--shade-900);
+  --color-text-secondary: var(--shade-700);
   --color-text-emphasis: var(--purple-700);
 
   /**
@@ -23,7 +24,7 @@
       transparent);
   --color-foreground-navbar: var(--color-foreground);
   --color-border: var(--shade-300);
-  --color-background-side-navbar: var(--shade-70);
+  --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
    * Card
@@ -150,8 +151,10 @@
 @mixin dark-theme {
   --color-shadow: var(--shade-940);
 
+  --color-root: color-mix(in srgb, var(--shade-900) 90%, var(--red-900));
   --color-foreground: var(--shade-10);
-  --color-background: color-mix(in srgb, var(--shade-940) 85%, var(--purple-900));
+  --color-background: var(--shade-940);
+
 
   --color-text-primary: var(--shade-10);
   --color-text-secondary: var(--shade-300);
@@ -166,7 +169,7 @@
       transparent);
   --color-foreground-navbar: var(--shade-10);
   --color-border: var(--shade-700);
-  --color-background-side-navbar: var(--shade-900);
+  --color-background-side-navbar: var(--color-background-navbar-base);
 
   /*
    * Card
@@ -316,7 +319,7 @@
   &:has(.trakt-og-frame) {
     @include dark-theme();
 
-    --color-background: rgb(24, 23, 29);
+    --color-root: rgb(24, 23, 29);
 
     .trakt-background-cover-image {
       display: none;
