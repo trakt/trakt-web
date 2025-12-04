@@ -9,8 +9,7 @@
   import SearchIcon from "./SearchIcon.svelte";
   import { useSearch } from "./useSearch";
 
-  const { clear, isSearching, pathName, mode, targetParams, query } =
-    useSearch();
+  const { clear, isSearching, pathName, mode, query } = useSearch();
 
   const isMouse = useMedia(WellKnownMediaQuery.mouse);
 
@@ -26,7 +25,7 @@
     }
 
     const params = buildParamString({
-      ...$targetParams,
+      m: $mode,
       q: inputElement.value.trim(),
     });
     goto(`${pathName}${params}`, {
