@@ -20,7 +20,7 @@ describe('initializeUserManager', () => {
 
   it('should initialize authorized users', async () => {
     setAuthorization(true);
-    await renderStore(() => initializeUserManager());
+    await renderStore(() => initializeUserManager(OidcUserMock.access_token));
     const { isAuthorized } = await renderStore(() => useAuth());
 
     const token = getToken();
