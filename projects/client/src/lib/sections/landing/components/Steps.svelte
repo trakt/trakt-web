@@ -35,8 +35,6 @@
 
     gap: var(--gap-s);
 
-    margin-top: calc(-1 * var(--gap-s));
-
     :global(svg) {
       width: var(--ni-32);
       height: var(--ni-32);
