@@ -50,6 +50,10 @@
   });
 </script>
 
+{#if !$isLoading && $plexStreamSrc}
+  <VideoPlayer src={$plexStreamSrc} />
+{/if}
+
 {#snippet metaInfo()}
   <JustWatchInfo {...target} rank={streamOn?.services?.streamingRank} />
 {/snippet}
