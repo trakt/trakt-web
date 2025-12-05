@@ -55,7 +55,7 @@
   class:collapsable-section-container-mounted={$isMounted}
 >
   {#if $isVisible}
-    <ListHeader {title} {titleAction} inset="title" />
+    <ListHeader {title} {titleAction} />
 
     <div class="collapsable-section">
       {@render children()}

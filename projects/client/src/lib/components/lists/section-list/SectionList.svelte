@@ -102,7 +102,6 @@
         {metaInfo}
         actions={$isCollapsed ? undefined : actions}
         {badge}
-        inset="title"
         navigationType={headerNavigationType}
         href={drilldownLink}
       />

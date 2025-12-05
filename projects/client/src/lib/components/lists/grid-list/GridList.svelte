@@ -45,14 +45,7 @@
 
 <section class="trakt-grid-list-container">
   {#if title}
-    <ListHeader
-      {title}
-      {metaInfo}
-      {actions}
-      {badge}
-      {listActions}
-      inset="all"
-    />
+    <ListHeader {title} {metaInfo} {actions} {badge} {listActions} />
   {/if}
 
   {#if uniqueItems.length > 0 || promotedItems.length > 0}
