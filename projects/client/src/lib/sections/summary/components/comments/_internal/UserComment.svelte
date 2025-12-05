@@ -14,6 +14,8 @@
   };
 
   const { comment, media, type }: CommentProps = $props();
+  // TODO rename to reply
+  // TODO fetch reactions for replies separately for now?
 </script>
 
 <CommentHeader {comment} {type} />

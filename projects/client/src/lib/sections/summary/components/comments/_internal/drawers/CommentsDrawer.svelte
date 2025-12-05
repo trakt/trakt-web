@@ -55,6 +55,7 @@
       <PaginatedList
         type="comment"
         id={`view-all-comments-${media.slug}-${$sortType.value}`}
+        target="parent"
         useList={(params) =>
           useComments({
             slug: media.slug,
@@ -93,8 +94,6 @@
 
 <style>
   .trakt-comment-threads-list {
-    min-height: var(--ni-64);
-
     overflow-y: auto;
     overscroll-behavior: contain;
 

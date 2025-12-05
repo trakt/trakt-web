@@ -7,4 +7,5 @@ export type PaginatedListProps<T, M> = {
   useList: PaginatableStore<T, M>;
   type: M;
   items: Snippet<[T[]]>;
+  target?: 'default' | 'parent';
 } & FilterParams;

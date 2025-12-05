@@ -31,7 +31,8 @@ const userCommentRepliesRequest = (
         id: `${id}`,
       },
       query: {
-        extended: 'images,reactions',
+        // TODO: doesn't have reactions support?....
+        extended: 'images',
         page,
         limit,
       },

@@ -5,8 +5,14 @@
   import { writable } from "svelte/store";
   import type { PaginatedListProps } from "./models/PaginatedListProps";
 
-  const { id, useList, type, filter, items }: PaginatedListProps<T, M> =
-    $props();
+  const {
+    id,
+    useList,
+    type,
+    filter,
+    items,
+    target = "default",
+  }: PaginatedListProps<T, M> = $props();
 
   const currentPage = writable(1);
   const loadedPages = writable<Map<number, T[]>>(new Map());
@@ -53,11 +59,11 @@
     }
   };
 
-  const { observeDimension } = $derived(useLazyLoader({ loadMore }));
+  const { lazyLoader } = $derived(useLazyLoader({ loadMore, target }));
   const allItems = $derived(Array.from($loadedPages.values()).flat());
 </script>
 
-<div class="trakt-paginated-list" use:observeDimension>
+<div class="trakt-paginated-list" use:lazyLoader>
   {@render items(allItems)}
 </div>
 

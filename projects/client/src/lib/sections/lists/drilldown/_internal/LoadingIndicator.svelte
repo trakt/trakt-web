@@ -10,6 +10,8 @@
 
 <style>
   .loading-indicator {
+    overflow: hidden;
+
     display: flex;
     justify-content: center;
 
