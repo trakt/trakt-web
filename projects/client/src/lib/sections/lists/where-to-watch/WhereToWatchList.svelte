@@ -1,13 +1,15 @@
 <script lang="ts">
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
   import { hasAired } from "$lib/sections/media-actions/_internal/hasAired";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
+  import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { useStreamingPreferences } from "$lib/stores/useStreamingPreferences";
   import { slide } from "svelte/transition";
   import JustWatchInfo from "./_internal/JustWatchInfo.svelte";
-  import { useWhereToWatch } from "./_internal/useWhereToWatch";
+  import { mapToServices } from "./_internal/mapToServices";
   import WhereToWatchDrawer from "./_internal/WhereToWatchDrawer.svelte";
   import WhereToWatchItem from "./_internal/WhereToWatchItem.svelte";
 
@@ -18,7 +20,19 @@
     streamOn?: StreamOn;
   } = $props();
 
-  const { services } = $derived(useWhereToWatch({ streamOn, ...target }));
+  const justWatchServices = $derived(mapToServices(streamOn));
+  const isMobile = useMedia(WellKnownMediaQuery.mobile);
+
+  const { plexServices } = $derived(usePlexLibrary(target));
+
+  const services = $derived.by(() => {
+    if (!$isMobile) {
+      return justWatchServices;
+    }
+
+    return [...$plexServices, ...justWatchServices];
+  });
+
   const { country } = useStreamingPreferences();
 
   const isAired = $derived.by(() => {
@@ -44,7 +58,7 @@
   <div transition:slide={{ duration: 150 }}>
     <SectionList
       id={`where-to-watch-${target.media.slug}`}
-      items={$services}
+      items={services}
       title={m.list_title_where_to_watch()}
       {metaInfo}
       --height-list="var(--height-where-to-watch-list)"

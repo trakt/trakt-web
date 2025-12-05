@@ -1,11 +1,13 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import { derived, readable } from 'svelte/store';
+import type { LibraryOption } from '../../sections/lists/where-to-watch/models/LibraryOption.ts';
 import type { MetaInfoProps } from '../../sections/summary/components/media/useMediaMetaInfo.ts';
+import { buildPlexLink } from './buildPlexLink.ts';
 
 export function usePlexLibrary(target: MetaInfoProps) {
   if (!target.media.plexSlug) {
     return {
-      isInLibrary: readable(false),
+      plexServices: readable([]),
     };
   }
 
@@ -26,9 +28,22 @@ export function usePlexLibrary(target: MetaInfoProps) {
   );
 
   return {
-    isInLibrary: derived(
+    plexServices: derived(
       isInLibrary,
-      ($isInLibrary) => $isInLibrary,
+      ($isInLibrary) => {
+        if ($isInLibrary) {
+          const plexService: LibraryOption = {
+            key: 'library-plex',
+            type: 'library',
+            source: 'plex',
+            link: buildPlexLink(target),
+          };
+
+          return [plexService];
+        }
+
+        return [] as LibraryOption[];
+      },
     ),
   };
 }
