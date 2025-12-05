@@ -1,7 +1,7 @@
 <script lang="ts">
   import { time } from "$lib/utils/timing/time";
   import { get } from "svelte/store";
-  import { createPlayerContext } from "./_internal/createPlayerContext";
+  import { createPlayerContext } from "./_internal/createYoutubePlayerContext.ts";
 
   const { embedId, isLoading, shouldAutoplay } = createPlayerContext();
   const { children } = $props();

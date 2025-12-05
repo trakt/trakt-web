@@ -18,7 +18,7 @@
   import LocaleProvider from "$lib/features/i18n/components/LocaleProvider.svelte";
   import NavigationProvider from "$lib/features/navigation/NavigationProvider.svelte";
   import GlobalParameterProvider from "$lib/features/parameters/GlobalParameterProvider.svelte";
-  import PlayerProvider from "$lib/features/player/PlayerProvider.svelte";
+  import PlayerProvider from "$lib/features/player/YoutubePlayerProvider.svelte";
   import QueryClientProvider from "$lib/features/query/QueryClientProvider.svelte";
   import RedirectProvider from "$lib/features/redirect/RedirectProvider.svelte";
   import SearchProvider from "$lib/features/search/SearchProvider.svelte";
