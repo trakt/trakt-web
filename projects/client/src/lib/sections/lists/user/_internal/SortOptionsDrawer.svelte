@@ -27,6 +27,7 @@
   <div class="sort-buttons">
     {#each options as option}
       <DropdownItem
+        replacestate
         style="flat"
         color="default"
         href={`${urlBuilder({ sortHow: current.sortHow, sortBy: option.value })}`}
