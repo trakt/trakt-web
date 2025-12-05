@@ -19,9 +19,9 @@
     type: "persistent",
   });
 
-  // FIXME: switch to extended=reactions everywhere
+  // TODO: update comment on reaction change (even when on page 2 or more, it should update only that comment)
   const { currentReaction, summary } = $derived(
-    useCommentReactions({ id: comment.id }),
+    useCommentReactions({ comment }),
   );
   const { react, remove, isReacting } = $derived(
     useCommentReaction({ id: comment.id }),
@@ -49,8 +49,8 @@
     <ReactionIcon state="default" />
   </RenderFor>
 
-  {#if $summary.count > 0}
-    <ReactionsSummary summary={$summary} />
+  {#if summary.count > 0}
+    <ReactionsSummary {summary} />
   {/if}
 {/snippet}
 
@@ -61,7 +61,7 @@
     disabled={isDisabled}
     aria-label={m.button_label_popup_reactions()}
     class:is-current={$currentReaction}
-    class:has-summary={$summary.count > 0}
+    class:has-summary={summary.count > 0}
   >
     {@render content()}
   </button>
@@ -92,7 +92,7 @@
 
       {#if hasDistribution}
         <ReactionsDistribution
-          distribution={$summary.distribution}
+          distribution={summary.distribution}
           currentReaction={$currentReaction}
           isLoading={$isReacting}
         />

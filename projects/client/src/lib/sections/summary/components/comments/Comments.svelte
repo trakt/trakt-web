@@ -19,7 +19,7 @@
 
   const { current: sortType, set, options } = useToggler("comment");
 
-  const { isLoading, comments } = $derived(
+  const { isLoading, list: comments } = $derived(
     useComments({
       slug: media.slug,
       sort: $sortType.value,

@@ -1,4 +1,5 @@
 import { UserProfileSchema } from '$lib/requests/models/UserProfile.ts';
+import { reactionsSchema } from '@trakt/api';
 import { z } from 'zod';
 
 export const MediaCommentSchema = z.object({
@@ -19,6 +20,11 @@ export const MediaCommentSchema = z.object({
       completedCount: z.number(),
     }),
   }),
+  reactions: z.object({
+    count: z.number(),
+    // TODO: non @trakt/api schema
+    distribution: z.record(reactionsSchema, z.number()),
+  }).optional(),
 });
 
 export type MediaComment = z.infer<typeof MediaCommentSchema>;

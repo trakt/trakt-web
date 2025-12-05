@@ -24,5 +24,9 @@ export function mapToMediaComment(
         completedCount: commentResponse.user_stats.completed_count,
       },
     },
+    reactions: {
+      count: commentResponse.reactions.reaction_count,
+      distribution: commentResponse.reactions.distribution,
+    },
   };
 }

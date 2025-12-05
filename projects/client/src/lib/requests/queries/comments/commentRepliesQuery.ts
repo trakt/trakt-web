@@ -15,6 +15,7 @@ type CommentRepliesParams =
   & PaginationParams
   & ApiParams;
 
+// TODO update @trakt/api
 const userCommentRepliesRequest = (
   {
     fetch,
@@ -30,7 +31,7 @@ const userCommentRepliesRequest = (
         id: `${id}`,
       },
       query: {
-        extended: 'images',
+        extended: 'images,reactions',
         page,
         limit,
       },

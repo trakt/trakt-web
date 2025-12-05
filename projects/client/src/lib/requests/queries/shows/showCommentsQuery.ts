@@ -3,17 +3,19 @@ import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts'
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { CommentSortType } from '$lib/requests/models/CommentSortType.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import type { LimitlessParams } from '$lib/requests/models/LimitlessParams.ts';
 import { MediaCommentSchema } from '$lib/requests/models/MediaComment.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
+import { PaginatableSchemaFactory } from '../../models/Paginatable.ts';
+import type { PaginationParams } from '../../models/PaginationParams.ts';
 
 type ShowCommentsParams =
   & { slug: string; sort: CommentSortType }
   & ApiParams
-  & LimitlessParams;
+  & PaginationParams;
 
 const showCommentsRequest = (
-  { fetch, slug, limit, sort }: ShowCommentsParams,
+  { fetch, slug, page, limit, sort }: ShowCommentsParams,
 ) =>
   api({ fetch })
     .shows
@@ -23,7 +25,8 @@ const showCommentsRequest = (
         sort,
       },
       query: {
-        extended: 'images',
+        extended: 'images,reactions',
+        page,
         limit,
       },
     });
@@ -31,9 +34,14 @@ const showCommentsRequest = (
 export const showCommentsQuery = defineQuery({
   key: 'showComments',
   invalidations: [InvalidateAction.Comment.Post('show')],
-  dependencies: (params) => [params.slug, params.limit, params.sort],
+  dependencies: (
+    params,
+  ) => [params.slug, params.page, params.limit, params.sort],
   request: showCommentsRequest,
-  mapper: (response) => response.body.map(mapToMediaComment),
-  schema: MediaCommentSchema.array(),
+  mapper: (response) => ({
+    entries: response.body.map(mapToMediaComment),
+    page: extractPageMeta(response.headers),
+  }),
+  schema: PaginatableSchemaFactory(MediaCommentSchema),
   ttl: time.minutes(30),
 });
