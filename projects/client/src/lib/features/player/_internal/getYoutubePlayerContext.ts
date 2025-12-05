@@ -3,7 +3,7 @@ import { assertDefined } from '../../../utils/assert/assertDefined.ts';
 import {
   PLAYER_CONTEXT_KEY,
   type PlayerContextType,
-} from './createPlayerContext.ts';
+} from './createYoutubePlayerContext.ts';
 
 export function getPlayerContext() {
   const ctx = assertDefined<PlayerContextType>(

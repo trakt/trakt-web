@@ -6,7 +6,7 @@
   import YouTubeIcon from "$lib/components/icons/YouTubeIcon.svelte";
   import { AnalyticsEvent } from "$lib/features/analytics/events/AnalyticsEvent";
   import { useTrack } from "$lib/features/analytics/useTrack";
-  import { usePlayer } from "$lib/features/player/stores/usePlayer";
+  import { usePlayer } from "$lib/features/player/stores/useYoutubePlayer.ts";
 
   const {
     trailer,
