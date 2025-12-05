@@ -18,13 +18,13 @@ export function useFilterSetter() {
       if (!value) {
         track({ id: key, action: 'reset' });
         url.searchParams.delete(key);
-        goto(url, { keepFocus: true });
+        goto(url, { keepFocus: true, replaceState: true });
         return;
       }
 
       track({ id: key, action: 'set' });
       url.searchParams.set(key, value);
-      goto(url, { keepFocus: true });
+      goto(url, { keepFocus: true, replaceState: true });
     },
   };
 }

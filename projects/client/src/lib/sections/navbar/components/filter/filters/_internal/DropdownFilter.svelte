@@ -27,6 +27,7 @@
         color="red"
         href="?"
         onclick={() => track({ id: filter.key, action: "reset" })}
+        replacestate
       >
         {m.button_label_reset_filter()}
       </DropdownItem>
@@ -36,6 +37,7 @@
           disabled={option.value === value}
           href={`${buildParamString({ [filter.key]: option.value })}`}
           onclick={() => track({ id: filter.key, action: "set" })}
+          replacestate
         >
           {option.label}
         </DropdownItem>
