@@ -23,6 +23,10 @@
 
   const href = $derived((rest as TraktActionButtonAnchorProps).href);
   const noscroll = $derived((rest as TraktActionButtonAnchorProps).noscroll);
+  const replacestate = $derived(
+    (rest as TraktActionButtonAnchorProps).replacestate,
+  );
+
   const { isActive } = $derived(useActiveLink(href));
 </script>
 
@@ -33,6 +37,7 @@
     use:disableNavigation={rest.disabled}
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
+    data-sveltekit-replacestate={replacestate}
     class="trakt-action-button trakt-button-link"
     class:trakt-link-active={$isActive}
     aria-label={label}

@@ -37,6 +37,8 @@
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
   const href = $derived((rest as TraktButtonAnchorProps).href);
   const noscroll = $derived((rest as TraktButtonAnchorProps).noscroll);
+  const replacestate = $derived((rest as TraktButtonAnchorProps).replacestate);
+
   const { isActive } = $derived(useActiveLink(href));
 
   const appendTestId = $derived((element: HTMLElement) => {
@@ -78,6 +80,7 @@
     use:appendTestId
     data-sveltekit-keepfocus
     data-sveltekit-noscroll={noscroll}
+    data-sveltekit-replacestate={replacestate}
     class="trakt-button trakt-button-link"
     class:trakt-link-active={$isActive}
     aria-label={label}

@@ -11,6 +11,7 @@
     color = "default",
     focusable = true,
     noscroll,
+    replacestate,
     label,
     navigationType,
     ...props
@@ -32,6 +33,7 @@
   use:appendGlobalParameters
   data-sveltekit-keepfocus
   data-sveltekit-noscroll={noscroll}
+  data-sveltekit-replacestate={replacestate}
   tabindex={focusable ? 0 : -1}
   data-color={color}
   aria-label={label}

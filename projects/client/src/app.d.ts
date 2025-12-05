@@ -151,6 +151,7 @@ declare global {
     href: string | Nil;
     target?: '_blank' | '_self' | '_parent' | '_top';
     noscroll?: boolean;
+    replacestate?: boolean;
 
     // FIXME: make mandatory
     label?: string;
