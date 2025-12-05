@@ -1,14 +1,13 @@
 <script lang="ts">
   import { time } from "$lib/utils/timing/time";
   import { get } from "svelte/store";
-  import { createPlayerContext } from "./_internal/createPlayerContext";
+  import { createPlyr } from "./_internal/createPlyr.ts";
+  import { createPlayerContext } from "./_internal/createYoutubePlayerContext.ts";
 
   const { embedId, isLoading, shouldAutoplay } = createPlayerContext();
   const { children } = $props();
 
   function initializePlyr(node: HTMLElement) {
-    const PlyrClass = (globalThis as any).Plyr;
-
     const autoplay = $shouldAutoplay;
 
     const options: Plyr.Options = {
@@ -27,7 +26,7 @@
     };
 
     isLoading.set(true);
-    const instance = new PlyrClass(node, options) as Plyr;
+    const instance = createPlyr(node, options);
 
     const handlePauseVideo = () => {
       shouldAutoplay.set(false);

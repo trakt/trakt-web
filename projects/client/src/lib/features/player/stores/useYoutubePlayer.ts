@@ -1,5 +1,5 @@
 import { get, readonly } from 'svelte/store';
-import { getPlayerContext } from '../_internal/getPlayerContext.ts';
+import { getPlayerContext } from '../_internal/getYoutubePlayerContext.ts';
 
 export function usePlayer() {
   const { embedId, shouldAutoplay, isLoading } = getPlayerContext();
