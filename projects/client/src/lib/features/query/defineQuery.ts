@@ -5,10 +5,9 @@ import { monitor } from '$lib/utils/perf/monitor.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { type z, type ZodType } from 'zod';
 import type { CustomFetchError } from '../errors/models/CustomFetchError.ts';
-import { dependencyId } from './_internal/dependencyId.ts';
+import { buildQueryKeys } from './_internal/buildQueryKeys.ts';
 import { isNoContentResponse } from './_internal/isNoContentResponse.ts';
 import { isSuccessResponse } from './_internal/isSuccessResponse.ts';
-import { queryId } from './_internal/queryId.ts';
 import { schemaId } from './_internal/schemaId.ts';
 import { zodToHash } from './_internal/zodToHash.ts';
 import type { DefineQueryProps } from './models/DefineQueryProps.ts';
@@ -57,25 +56,16 @@ export function defineQuery<
   return (
     requestParams: TRequestParams = {} as TRequestParams,
   ): CreateQueryOptions<z.infer<TOutput>, TError> => {
-    const key = queryId(
-      typeof params.key === 'function' ? params.key(requestParams) : params.key,
+    const queryKeys = buildQueryKeys(
+      params.key,
+      requestParams,
+      hash,
+      params.dependencies,
+      invalidations,
     );
 
-    const resolved = Array.isArray(params.dependencies)
-      ? params.dependencies
-      : params.dependencies(requestParams);
-
-    const dependencies = resolved
-      .filter((dependency) => dependency != null)
-      .map((dependency) => dependencyId(dependency));
-
     return {
-      queryKey: [
-        key,
-        hash,
-        ...dependencies,
-        ...invalidations,
-      ] as const,
+      queryKey: queryKeys,
       queryFn: () =>
         request(requestParams)
           .then((response) => {
@@ -83,7 +73,10 @@ export function defineQuery<
             const isNoContent = isNoContentResponse(response);
 
             if (!(isSuccess || isNoContent)) {
-              throw new FetchError(response, `Failed to fetch data: ${key}`);
+              throw new FetchError(
+                response,
+                `Failed to fetch data: ${params.key}`,
+              );
             }
 
             return isNoContent ? null : mapper(response, requestParams);
