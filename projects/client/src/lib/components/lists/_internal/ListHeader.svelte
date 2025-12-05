@@ -8,7 +8,6 @@
     title,
     subtitle,
     metaInfo,
-    inset,
     titleAction,
     actions,
     badge,
@@ -24,7 +23,6 @@
     actions?: Snippet;
     badge?: Snippet;
     listActions?: Snippet;
-    inset: "all" | "title";
     navigationType?: DpadNavigationType;
     href?: string;
   } & HTMLElementProps = $props();
@@ -35,11 +33,7 @@
   );
 </script>
 
-<div
-  class:trakt-list-inset-title={inset === "title"}
-  class:trakt-inset-all={inset === "all"}
-  {...props}
->
+<div class="trakt-list-inset-title" {...props}>
   <div class="trakt-list-header">
     <div class="trakt-list-title-container">
       <div class="trakt-list-title">
@@ -81,15 +75,6 @@
 
     @include for-tablet-sm-and-below {
       margin-left: calc(var(--layout-distance-side));
-    }
-  }
-
-  .trakt-inset-all {
-    margin: 0 calc(var(--ni-72) + var(--layout-distance-side));
-    transition: margin calc(var(--transition-increment) * 2) ease-in-out;
-
-    @include for-tablet-sm-and-below {
-      margin: 0 calc(var(--layout-distance-side));
     }
   }
 
