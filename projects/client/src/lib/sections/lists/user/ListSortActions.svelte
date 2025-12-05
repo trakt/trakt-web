@@ -41,6 +41,7 @@
   </Button>
 
   <ActionButton
+    replacestate
     style="flat"
     color="default"
     size="small"
