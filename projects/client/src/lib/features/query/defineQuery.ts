@@ -10,9 +10,10 @@ import type { CustomFetchError } from '../errors/models/CustomFetchError.ts';
 import { createMarkerFetch } from './_internal/createMarkerFetch.ts';
 import { isNoContentResponse } from './_internal/isNoContentResponse.ts';
 import { isSuccessResponse } from './_internal/isSuccessResponse.ts';
+import { queryId } from './_internal/queryId.ts';
+import { schemaId } from './_internal/schemaId.ts';
 import { zodToHash } from './_internal/zodToHash.ts';
 import type { DefineQueryProps } from './models/DefineQueryProps.ts';
-import type { Dependency } from './models/Dependency.ts';
 import type { RequestResponse } from './models/ResponseDefinitions.ts';
 
 // FIXME: extend with error schemas
@@ -37,22 +38,6 @@ class FetchError<TInput> extends Error {
       );
     });
   }
-}
-
-const QUERY_ID = 'query';
-const SCHEMA_ID = 'schema';
-const DEPENDENCY_ID = 'dependency';
-
-export function queryId(key: string) {
-  return `${QUERY_ID}:${key}`;
-}
-
-export function schemaId(key: string) {
-  return `${SCHEMA_ID}:${key}`;
-}
-
-export function dependencyId(key: Dependency) {
-  return `${DEPENDENCY_ID}:${key}`;
 }
 
 export function defineQuery<
