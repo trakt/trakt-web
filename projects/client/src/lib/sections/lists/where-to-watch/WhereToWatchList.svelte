@@ -2,7 +2,9 @@
   import type { ListVariant } from "$lib/components/lists/section-list/ListVariant";
   import SectionList from "$lib/components/lists/section-list/SectionList.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
+  import VideoPlayer from "$lib/features/player/VideoPlayer.svelte";
   import { usePlexLibrary } from "$lib/features/plex/usePlexLibrary";
+  import { usePlexStream } from "$lib/features/plex/usePlexStream";
   import type { StreamOn } from "$lib/requests/models/StreamOn";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
@@ -27,6 +29,12 @@
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
 
   const { plexServices } = $derived(usePlexLibrary(target));
+  const { plexStreamSrc, isLoading } = $derived(
+    usePlexStream({
+      slug: target.media.slug,
+      type: target.type,
+    }),
+  );
 
   const services = $derived.by(() => {
     if (!$isMobile) {
@@ -48,6 +56,10 @@
     }
   });
 </script>
+
+{#if !$isLoading && $plexStreamSrc}
+  <VideoPlayer src={$plexStreamSrc} />
+{/if}
 
 {#snippet metaInfo()}
   <JustWatchInfo {...target} rank={streamOn?.services?.streamingRank} />

@@ -30,6 +30,8 @@ export function createAuthenticatedFetch<
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
+        headers.set('trakt-api-version', '2');
+        headers.set('trakt-api-key', TRAKT_CLIENT_ID);
       }
 
       return baseFetch(
