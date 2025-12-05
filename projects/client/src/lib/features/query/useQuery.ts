@@ -1,11 +1,16 @@
 import { browser } from '$app/environment';
 import { time } from '$lib/utils/timing/time.ts';
 import {
+  createInfiniteQuery,
+  type CreateInfiniteQueryOptions,
   createQuery,
   type CreateQueryOptions,
+  type InfiniteData,
+  type QueryKey,
   useQueryClient,
 } from '@tanstack/svelte-query';
 import { derived, type Readable } from 'svelte/store';
+import type { Paginatable } from '../../requests/models/Paginatable.ts';
 import { findInvalidationId } from './_internal/findInvalidationId.ts';
 import { findQueryId } from './_internal/findQueryId.ts';
 import { invalidationPredicate } from './_internal/invalidationPredicate.ts';
@@ -89,4 +94,22 @@ export function useQuery<
   props: CreateQueryOptions<TOutput, TError>,
 ) {
   return invalidationHook(props.queryKey, createQuery(props));
+}
+
+export function useInfiniteQuery<
+  TOutput,
+  TError extends Error,
+  TData = InfiniteData<Paginatable<TOutput>>,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = number,
+>(
+  props: CreateInfiniteQueryOptions<
+    Paginatable<TOutput>,
+    TError,
+    TData,
+    TQueryKey,
+    TPageParam
+  >,
+) {
+  return invalidationHook(props.queryKey, createInfiniteQuery(props));
 }
