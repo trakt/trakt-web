@@ -1,4 +1,4 @@
-import { queryId } from '$lib/features/query/defineQuery.ts';
+import { queryId } from './queryId.ts';
 
 export function findQueryId(queryKey: readonly unknown[]): string | Nil {
   return queryKey.find((key) =>
