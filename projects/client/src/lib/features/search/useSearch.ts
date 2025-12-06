@@ -4,7 +4,7 @@ import {
   useQueryClient,
 } from '@tanstack/svelte-query';
 import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { debounceTime, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
 import { writable } from 'svelte/store';
 import type { SearchMode } from '../../requests/queries/search/models/SearchMode.ts';
 import {
@@ -15,6 +15,11 @@ import {
   type PeopleSearchResult,
   searchPeopleQuery,
 } from '../../requests/queries/search/searchPeopleQuery.ts';
+import {
+  searchTrendingQuery,
+  type TrendingSearchesResult,
+} from '../../requests/queries/search/searchTrendingQuery.ts';
+import { dedupe } from '../../utils/array/dedupe.ts';
 import { DEFAULT_SEARCH_LIMIT } from '../../utils/constants.ts';
 import { toObservable } from '../../utils/store/toObservable.ts';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
@@ -48,6 +53,20 @@ function modeToQuery(query: string, mode: SearchMode, config: TypesenseConfig) {
   }
 }
 
+function modeToTrendingQuery(query: string, mode: SearchMode) {
+  switch (mode) {
+    case 'media':
+    case 'movie':
+    case 'show': {
+      return searchTrendingQuery({ query }) as CreateQueryOptions<
+        TrendingSearchesResult
+      >;
+    }
+    default:
+      throw new Error(`Unsupported trending search mode: ${mode}`);
+  }
+}
+
 export function useSearch() {
   const client = browser ? useQueryClient() : undefined;
   const { mode, isSearching, config, ...rest } = getSearchContext();
@@ -71,7 +90,27 @@ export function useSearch() {
       isSearching.set(true);
       track({ mode: currentMode });
 
-      return client.fetchQuery(modeToQuery(term, currentMode, config));
+      const searchQuery = client.fetchQuery(
+        modeToQuery(term, currentMode, config),
+      );
+
+      if (currentMode === 'people') {
+        return searchQuery;
+      }
+
+      const trendingQuery = client.fetchQuery(
+        modeToTrendingQuery(term, currentMode),
+      );
+      return combineLatest([searchQuery, trendingQuery]).pipe(
+        map(([searchResults, trendingResults]) => ({
+          type: 'media' as const,
+          items: dedupe(
+            (item) => item.key,
+            trendingResults?.items ?? [],
+            (searchResults as MediaSearchResult).items,
+          ),
+        })),
+      );
     }),
     tap(() => isSearching.set(false)),
   );

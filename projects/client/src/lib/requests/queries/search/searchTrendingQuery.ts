@@ -14,16 +14,16 @@ import { mapToShowEntry } from '../../_internal/mapToShowEntry.ts';
 const TrendingSearchEntrySchema = MediaEntrySchema.extend({
   score: z.number(),
 });
-const TrendingSearchesSchema = z.object({
+export const TrendingSearchesSchema = z.object({
   type: z.literal('media'),
   items: TrendingSearchEntrySchema.array(),
 });
 type TrendingSearchEntry = z.infer<typeof TrendingSearchEntrySchema>;
 export type TrendingSearchesResult = z.infer<typeof TrendingSearchesSchema>;
 
-type SearchTrendingParams = { limit: number } & ApiParams;
+type SearchTrendingParams = { limit?: number; query?: string } & ApiParams;
 
-function mapToTrendingSearchedMovie({
+export function mapToTrendingSearchedMovie({
   count,
   movie,
 }: TrendingSearchMovieResultResponse): TrendingSearchEntry {
@@ -33,7 +33,7 @@ function mapToTrendingSearchedMovie({
   };
 }
 
-function mapToTrendingSearchedShow({
+export function mapToTrendingSearchedShow({
   count,
   show,
 }: TrendingSearchShowResultResponse): TrendingSearchEntry {
@@ -44,10 +44,12 @@ function mapToTrendingSearchedShow({
 }
 
 const searchTrendingRequest = (
-  { fetch, limit }: SearchTrendingParams,
+  { fetch, limit, query }: SearchTrendingParams,
   type: 'movies' | 'shows',
-) =>
-  api({ fetch })
+) => {
+  const queryString = query ? { query } : {};
+
+  return api({ fetch })
     .search
     .trending({
       params: {
@@ -57,13 +59,15 @@ const searchTrendingRequest = (
         extended: 'full,images',
         page: 1,
         limit,
+        ...queryString,
       },
     });
+};
 
 export const searchTrendingQuery = defineQuery({
   key: 'searchTrending',
   invalidations: [],
-  dependencies: (params) => [params.limit],
+  dependencies: (params) => [params.limit, params.query?.toLowerCase().trim()],
   request: (params: SearchTrendingParams) =>
     Promise.all([
       searchTrendingRequest(params, 'movies'),
