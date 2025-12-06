@@ -1,6 +1,5 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
-import { setMarker } from '$lib/utils/date/Marker.ts';
 import { error } from '@sveltejs/kit';
 import type { CommentReplyParams } from '@trakt/api';
 import { mapToMediaComment } from '../../_internal/mapToMediaComment.ts';
@@ -23,7 +22,6 @@ export function replyCommentRequest(
         throw error(response.status);
       }
 
-      setMarker();
       return mapToMediaComment(response.body);
     });
 }

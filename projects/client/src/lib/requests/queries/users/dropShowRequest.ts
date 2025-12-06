@@ -1,6 +1,5 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { HiddenMediaRequest } from '@trakt/api';
-import { setMarker } from '../../../utils/date/Marker.ts';
 
 type DropShowRequest = {
   body: HiddenMediaRequest;
@@ -19,8 +18,6 @@ export function dropShowRequest(
       body,
     })
     .then(({ status }) => {
-      setMarker();
-
       return status === 200;
     });
 }

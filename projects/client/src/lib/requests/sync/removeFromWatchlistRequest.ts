@@ -1,6 +1,5 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { WatchlistRequest } from '@trakt/api';
-import { setMarker } from '../../utils/date/Marker.ts';
 
 type RemoveFromWatchlistParams = {
   body: WatchlistRequest;
@@ -16,8 +15,6 @@ export function removeFromWatchlistRequest(
       body,
     })
     .then(({ status }) => {
-      setMarker();
-
       return status === 200;
     });
 }

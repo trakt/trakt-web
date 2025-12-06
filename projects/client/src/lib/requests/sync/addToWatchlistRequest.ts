@@ -1,5 +1,4 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
-import { setMarker } from '$lib/utils/date/Marker.ts';
 import type { WatchlistRequest } from '@trakt/api';
 
 type AddToWatchlistParams = {
@@ -16,8 +15,6 @@ export function addToWatchlistRequest(
       body,
     })
     .then(({ status }) => {
-      setMarker();
-
       return status === 201;
     });
 }

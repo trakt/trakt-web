@@ -3,7 +3,6 @@
   import { InvalidateAction } from "$lib/requests/models/InvalidateAction.ts";
   import { useInvalidator } from "$lib/stores/useInvalidator";
   import { LogLevel, print } from "$lib/utils/console/print";
-  import { setMarker } from "$lib/utils/date/Marker";
   import { onDestroy } from "svelte";
   import { createConnection } from "./createConnection.ts";
   import { destroySocket } from "./destroySocket.ts";
@@ -17,7 +16,6 @@
   function wsInvalidate(event: MessageEvent) {
     try {
       const data: WebSocketData = JSON.parse(event.data);
-      setMarker();
 
       switch (data.key) {
         case "show:watchlist":

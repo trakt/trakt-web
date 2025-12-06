@@ -1,10 +1,13 @@
 import { FETCH_ERROR_EVENT } from '$lib/features/errors/constants.ts';
 import type { ApiParams } from '$lib/requests/api.ts';
 import { error as printError } from '$lib/utils/console/print.ts';
+import { getMarker } from '$lib/utils/date/Marker.ts';
 import { monitor } from '$lib/utils/perf/monitor.ts';
+import { checksum } from '$lib/utils/string/checksum.ts';
 import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { type z, type ZodType } from 'zod';
 import type { CustomFetchError } from '../errors/models/CustomFetchError.ts';
+import { createMarkerFetch } from './_internal/createMarkerFetch.ts';
 import { isNoContentResponse } from './_internal/isNoContentResponse.ts';
 import { isSuccessResponse } from './_internal/isSuccessResponse.ts';
 import { zodToHash } from './_internal/zodToHash.ts';
@@ -90,8 +93,14 @@ export function defineQuery<
         ...dependencies,
         ...invalidations,
       ] as const,
-      queryFn: () =>
-        request(requestParams)
+      queryFn: () => {
+        // Get markers in queryFn to ensure they are up-to-date
+        const marker = checksum(invalidations.map(getMarker).join(':'));
+
+        return request({
+          ...requestParams,
+          fetch: createMarkerFetch(marker, requestParams.fetch),
+        })
           .then((response) => {
             const isSuccess = isSuccessResponse(response);
             const isNoContent = isNoContentResponse(response);
@@ -101,7 +110,8 @@ export function defineQuery<
             }
 
             return isNoContent ? null : mapper(response, requestParams);
-          }),
+          });
+      },
       staleTime: params.ttl == null ? undefined : params.ttl,
       refetchOnWindowFocus: params.refetchOnWindowFocus,
       retry: params.retry,
