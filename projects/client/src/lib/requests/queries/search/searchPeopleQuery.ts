@@ -11,7 +11,6 @@ import {
   PersonSummarySchema,
 } from '../../models/PersonSummary.ts';
 import { getPeople } from './getPeople.ts';
-import { searchCancellationId } from './searchCancellationId.ts';
 
 type SearchParams = {
   query: string;
@@ -72,7 +71,6 @@ const searchRequest = async (
       api({
         fetch,
         cancellable: true,
-        cancellationId: searchCancellationId('person'),
       })
         .search
         .query({

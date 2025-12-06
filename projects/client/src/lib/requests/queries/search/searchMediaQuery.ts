@@ -10,7 +10,6 @@ import z from 'zod';
 import type { MediaEntry } from '../../models/MediaEntry.ts';
 import type { MediaType } from '../../models/MediaType.ts';
 import { getMedia } from './getMedia.ts';
-import { searchCancellationId } from './searchCancellationId.ts';
 
 type SearchParams = {
   query: string;
@@ -83,7 +82,6 @@ const searchRequest = async (
       api({
         fetch,
         cancellable: true,
-        cancellationId: searchCancellationId('media'),
       })
         .search
         .query({
