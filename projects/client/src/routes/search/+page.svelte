@@ -2,7 +2,6 @@
   import * as m from "$lib/features/i18n/messages";
 
   import { page } from "$app/state";
-  import { useTrendingSearchesList } from "$lib/features/search/_internal/useTrendingSearchesList";
   import SearchInput from "$lib/features/search/SearchInput.svelte";
   import SearchModeToggles from "$lib/features/search/SearchModeToggles.svelte";
   import SearchPlaceHolder from "$lib/features/search/SearchPlaceHolder.svelte";
@@ -20,9 +19,6 @@
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
   const { search, clear, results, mode, postRecentSearch } = useSearch();
-  const { list: trendingResults, isLoading } = $derived(
-    useTrendingSearchesList($mode, query),
-  );
 
   $effect(() => {
     if (!query) {
@@ -39,8 +35,8 @@
     }
 
     if ($results.type !== "people") {
-      const item = $trendingResults.at(0) ?? $results.items.at(0);
-      return item && "cover" in item ? item.cover?.url.medium : undefined;
+      const item = $results.items.at(0);
+      return item?.cover?.url.medium;
     }
 
     return $results.items.at(0)?.headshot.url.medium;
@@ -49,14 +45,6 @@
   const pageTitle = $derived(
     query ? m.page_title_search_results({ query }) : m.page_title_search(),
   );
-
-  const trendingItems = $derived.by(() => {
-    if (!query || $isLoading || $mode === "people") {
-      return undefined;
-    }
-
-    return $trendingResults;
-  });
 
   // FIXME: deal with ios onscreen keyboard and move to mobile navbar
   const isMobileApple = isMobileAppleDevice();
@@ -112,11 +100,7 @@
 
   <div class="trakt-search-results-container">
     {#if $results}
-      <SearchResultsGrid
-        items={$results.items}
-        {trendingItems}
-        onclick={onResultClick}
-      />
+      <SearchResultsGrid items={$results.items} onclick={onResultClick} />
     {:else if !query}
       <SearchPlaceHolder />
     {/if}

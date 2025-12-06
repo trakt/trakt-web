@@ -12,7 +12,6 @@ import {
 } from '$lib/requests/queries/search/searchTrendingQuery.ts';
 import { isSameDayOfYear } from '$lib/utils/date/isSameDayOfYear.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { distance } from '@libn/fuzzy';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 
@@ -40,7 +39,7 @@ function hasBirthday(person: PersonSummary): boolean {
   return person.birthday ? isSameDayOfYear(person.birthday, today) : false;
 }
 
-export function useTrendingSearchesList(mode: SearchMode, term = '') {
+export function useTrendingSearchesList(mode: SearchMode) {
   const query = useQuery(modeToQuery(mode));
 
   return {
@@ -54,49 +53,10 @@ export function useTrendingSearchesList(mode: SearchMode, term = '') {
           .toSorted((a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)));
       }
 
-      const lowerTerm = term.toLowerCase().trim();
-
       const mediaData = $query.data as { type: 'media'; items: MediaEntry[] };
-
       return mediaData.items
         .filter((item) => item.type === mode || mode === 'media')
-        .filter((item) => {
-          if (!lowerTerm) return true;
-
-          const titlePartSnippets = item.title
-            .toLowerCase()
-            .trim()
-            .split(' ')
-            .map((part) => part.slice(0, lowerTerm.length));
-
-          if (lowerTerm.length === 1) {
-            return titlePartSnippets.includes(lowerTerm);
-          }
-
-          return titlePartSnippets.some((titlePartSnippet) => {
-            const levenshteinDistance = distance(
-              titlePartSnippet,
-              lowerTerm,
-            );
-
-            const acceptedDistance = Math.floor(lowerTerm.length * 0.3);
-
-            return levenshteinDistance <= acceptedDistance;
-          });
-        })
-        .sort((a, b) => {
-          const aTitle = a.title.toLowerCase();
-          const bTitle = b.title.toLowerCase();
-
-          const aIndex = aTitle.indexOf(lowerTerm);
-          const bIndex = bTitle.indexOf(lowerTerm);
-
-          if (aIndex !== bIndex) {
-            return aIndex - bIndex;
-          }
-
-          return aTitle.localeCompare(bTitle);
-        });
+        .slice(0, LIST_LIMIT);
     }),
     isLoading: derived(
       query,
