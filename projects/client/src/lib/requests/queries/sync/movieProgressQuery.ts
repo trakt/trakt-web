@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -116,7 +116,7 @@ export const movieProgressRequest = (
     });
 };
 
-export const movieProgressQuery = defineQuery({
+export const movieProgressQuery = defineInfiniteQuery({
   key: 'movieProgress',
   invalidations: [
     InvalidateAction.MarkAsWatched('movie'),

@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -60,7 +60,7 @@ function mapToActivityHistory(
   }
 }
 
-export const activityHistoryQuery = defineQuery({
+export const activityHistoryQuery = defineInfiniteQuery({
   key: 'activityHistory',
   invalidations: [
     InvalidateAction.MarkAsWatched('episode'),

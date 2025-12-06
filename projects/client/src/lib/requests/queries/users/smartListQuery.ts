@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -84,7 +84,7 @@ const smartListRequest = (
       },
     });
 
-export const smartListQuery = defineQuery({
+export const smartListQuery = defineInfiniteQuery({
   key: (params: SavedFilterParams) => `${params.type}SavedFilters`,
   invalidations: [],
   dependencies: (

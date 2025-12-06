@@ -29,14 +29,14 @@
   const {
     list: lists,
     isLoading,
-    page,
+    hasNextPage,
   } = $derived(usePersonalListsSummary({ type, slug }));
 
   const { isMe } = $derived(useIsMe(slug));
 
   const variant = $derived.by(() => {
     const shouldShowSummary =
-      $page.total > 1 || $lists.length === 0 || $lists.length > PREVIEW_LIMIT;
+      $hasNextPage || $lists.length === 0 || $lists.length > PREVIEW_LIMIT;
     return shouldShowSummary ? "summary" : "preview";
   });
 

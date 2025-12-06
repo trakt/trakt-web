@@ -1,25 +1,51 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
+import { useInfiniteQuery } from '$lib/features/query/useQuery.ts';
 import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
+import {
+  type CreateInfiniteQueryOptions,
+  type InfiniteData,
+  type QueryKey,
+} from '@tanstack/svelte-query';
+import { derived, type Readable } from 'svelte/store';
 
 export function usePaginatedListQuery<
   TOutput,
   TError extends Error,
 >(
-  props: CreateQueryOptions<Paginatable<TOutput>, TError>,
+  props: CreateInfiniteQueryOptions<
+    Paginatable<TOutput>,
+    TError,
+    InfiniteData<Paginatable<TOutput>>,
+    QueryKey,
+    number
+  >,
 ) {
-  const query = useQuery(props);
+  const query = useInfiniteQuery(props);
 
-  const isLoading = derived(query, toLoadingState);
-
-  const list = derived(query, ($query) => $query.data?.entries ?? []);
-
-  const page = derived(
+  const isLoading = derived(
     query,
-    ($query) => $query.data?.page ?? { current: 1, total: 1 },
+    ($query) => toLoadingState($query) || $query.isFetchingNextPage,
   );
 
-  return { list, page, isLoading };
+  const list = derived(query, ($query) => {
+    if (!$query.data?.pages) {
+      return [];
+    }
+
+    return $query.data.pages.flatMap((page) => page.entries);
+  });
+
+  const hasNextPage = derived(query, ($query) => $query.hasNextPage);
+
+  const fetchNextPage: Readable<() => Promise<void>> = derived(
+    query,
+    ($query) => () => $query.fetchNextPage(),
+  );
+
+  return {
+    list,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+  };
 }

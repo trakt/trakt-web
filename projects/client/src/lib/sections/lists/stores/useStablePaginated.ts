@@ -14,13 +14,12 @@ export type StablePaginatedStoreProps<T, M> = {
 export function useStablePaginated<T, M = MediaType>(
   { useList, compareFn, ...params }: StablePaginatedStoreProps<T, M>,
 ) {
-  const { list: unstable, isLoading, page } = useList(params);
+  const { list: unstable, ...rest } = useList(params);
 
   const { list } = useStableArray<T>(compareFn, unstable);
 
   return {
     list,
-    isLoading,
-    page,
+    ...rest,
   };
 }

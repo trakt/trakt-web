@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
@@ -27,7 +27,7 @@ const personalListsRequest = (
       },
     });
 
-export const personalListsQuery = defineQuery({
+export const personalListsQuery = defineInfiniteQuery({
   key: 'personalLists',
   invalidations: [
     InvalidateAction.List.Edited,

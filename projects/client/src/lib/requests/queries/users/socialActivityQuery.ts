@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
@@ -65,7 +65,7 @@ const socialActivityRequest = (
       },
     });
 
-export const socialActivityQuery = defineQuery({
+export const socialActivityQuery = defineInfiniteQuery({
   key: 'socialActivity',
   invalidations: [InvalidateAction.User.Follow],
   dependencies: (

@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
@@ -36,7 +36,7 @@ export const showPopularRequest = (
     });
 };
 
-export const showPopularQuery = defineQuery({
+export const showPopularQuery = defineInfiniteQuery({
   key: 'showPopular',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependencies.ts';
@@ -54,7 +54,7 @@ export const movieAnticipatedRequest = (
     });
 };
 
-export const movieAnticipatedQuery = defineQuery({
+export const movieAnticipatedQuery = defineInfiniteQuery({
   key: 'movieAnticipated',
   invalidations: [
     InvalidateAction.Watchlisted('movie'),

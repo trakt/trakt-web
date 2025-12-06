@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -53,7 +53,7 @@ export const movieTrendingRequest = (
     });
 };
 
-export const movieTrendingQuery = defineQuery({
+export const movieTrendingQuery = defineInfiniteQuery({
   key: 'movieTrending',
   invalidations: [
     InvalidateAction.Watchlisted('movie'),

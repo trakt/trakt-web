@@ -1,7 +1,7 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
 import { movieActivityHistoryQuery } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { showActivityHistoryQuery } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { derived } from 'svelte/store';
+import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
 import { mapToMonthToDateDetails } from './_internal/mapToMonthToDateDetails.ts';
 
 const HISTORY_LIMIT = 1000;
@@ -20,22 +20,22 @@ export function useMonthToDate({ slug }: UseMonthToDateProps) {
     endDate: now,
   };
 
-  const movies = useQuery(movieActivityHistoryQuery(params));
-  const shows = useQuery(showActivityHistoryQuery(params));
+  const { list: movies, isLoading: isLoadingMovies } = usePaginatedListQuery(
+    movieActivityHistoryQuery(params),
+  );
+  const { list: shows, isLoading: isLoadingShows } = usePaginatedListQuery(
+    showActivityHistoryQuery(params),
+  );
 
   return {
     monthToDate: derived(
       [movies, shows],
-      ([$movies, $shows]) => {
-        return mapToMonthToDateDetails(
-          $movies.data?.entries ?? [],
-          $shows.data?.entries ?? [],
-        );
-      },
+      ([$movies, $shows]) => mapToMonthToDateDetails($movies, $shows),
     ),
     isLoading: derived(
-      [movies, shows],
-      ($queries) => $queries.some((query) => query.isPending),
+      [isLoadingMovies, isLoadingShows],
+      ([$isLoadingMovies, $isLoadingShows]) =>
+        $isLoadingMovies || $isLoadingShows,
     ),
   };
 }

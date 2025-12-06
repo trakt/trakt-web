@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { ListResponse } from '@trakt/api';
@@ -25,7 +25,7 @@ const likedListsRequest = (
       },
     });
 
-export const likedListsQuery = defineQuery({
+export const likedListsQuery = defineInfiniteQuery({
   key: 'likedLists',
   invalidations: [],
   dependencies: (params) => [params.page, params.limit],

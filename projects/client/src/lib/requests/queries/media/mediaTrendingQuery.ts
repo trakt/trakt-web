@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -29,7 +29,7 @@ type MediaTrendingParams =
   & SearchParams;
 
 const TrendingMediaSchema = z.union([TrendingShowSchema, TrendingMovieSchema]);
-export const mediaTrendingQuery = defineQuery({
+export const mediaTrendingQuery = defineInfiniteQuery({
   key: 'mediaTrending',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

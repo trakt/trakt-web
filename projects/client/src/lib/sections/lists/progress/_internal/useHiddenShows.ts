@@ -1,19 +1,15 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
 import { hiddenShowsQuery } from '$lib/requests/queries/users/hiddenShowsQuery.ts';
-import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { derived } from 'svelte/store';
+import { usePaginatedListQuery } from '../../stores/usePaginatedListQuery.ts';
 
 export const useHiddenShows = () => {
-  const query = useQuery(hiddenShowsQuery());
+  const { list, isLoading } = usePaginatedListQuery(hiddenShowsQuery());
 
   return {
     list: derived(
-      query,
-      ($query) => ($query.data?.entries ?? []).map((entry) => entry.show.id),
+      list,
+      ($list) => $list.map((entry) => entry.show.id),
     ),
-    isLoading: derived(
-      query,
-      toLoadingState,
-    ),
+    isLoading,
   };
 };

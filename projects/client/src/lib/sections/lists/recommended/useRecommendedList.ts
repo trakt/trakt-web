@@ -16,6 +16,7 @@ import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { map, type Observable, shareReplay } from 'rxjs';
+import { readable } from 'svelte/store';
 import { recommendedMediaQuery } from '../../../requests/queries/media/mediaRecommendedQuery.ts';
 import { paginate } from './paginate.ts';
 
@@ -90,20 +91,15 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
     paginate({ page: props.page, limit: props.limit }),
   );
 
-  const page = allItems.pipe(
-    map((items) => ({
-      current: props.page,
-      total: Math.ceil(items.length / props.limit),
-    })),
-  );
-
   const isLoading = queryObservable.pipe(
     map(toLoadingState),
   );
 
   return {
     list,
-    page,
     isLoading,
+    hasNextPage: readable(false),
+    // TODO: fetchNextPage support
+    fetchNextPage: readable(async () => {}),
   };
 };

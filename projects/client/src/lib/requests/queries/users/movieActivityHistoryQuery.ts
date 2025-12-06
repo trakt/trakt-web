@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -60,7 +60,7 @@ export const mapToMovieActivityHistory = (
   type: 'movie' as const,
 });
 
-export const movieActivityHistoryQuery = defineQuery({
+export const movieActivityHistoryQuery = defineInfiniteQuery({
   key: 'movieActivityHistory',
   invalidations: [InvalidateAction.MarkAsWatched('movie')],
   dependencies: (params: MovieActivityHistoryParams) => [

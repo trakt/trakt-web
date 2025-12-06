@@ -2,7 +2,7 @@ import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginatableStore } from '$lib/sections/lists/drilldown/PaginatableStore.ts';
 import type { Snippet } from 'svelte';
 
-export type PaginatedListProps<T, M> = {
+export type PaginatedListProps<T extends { key: string }, M> = {
   id: string;
   useList: PaginatableStore<T, M>;
   type: M;

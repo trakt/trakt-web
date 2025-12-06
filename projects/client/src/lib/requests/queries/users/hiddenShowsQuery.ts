@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -36,7 +36,7 @@ const hiddenShowsRequest = (
       },
     });
 
-export const hiddenShowsQuery = defineQuery({
+export const hiddenShowsQuery = defineInfiniteQuery({
   key: 'hiddenShows',
   invalidations: [InvalidateAction.Restore],
   dependencies: (

@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -60,7 +60,7 @@ const userListItemsRequest = (
     });
 };
 
-export const listItemsQuery = defineQuery({
+export const listItemsQuery = defineInfiniteQuery({
   key: 'listItems',
   invalidations: [],
   dependencies: (

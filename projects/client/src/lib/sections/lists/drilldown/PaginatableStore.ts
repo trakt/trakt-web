@@ -5,6 +5,7 @@ export type PaginatableStore<T, M = MediaType> = (
   params: { type: M; page: number; limit: number } & FilterParams,
 ) => {
   list: ReadableOrObservable<T[]>;
-  page: ReadableOrObservable<{ total?: number; current?: number }>;
   isLoading: ReadableOrObservable<boolean>;
+  fetchNextPage: ReadableOrObservable<() => Promise<void>>;
+  hasNextPage: ReadableOrObservable<boolean>;
 };
