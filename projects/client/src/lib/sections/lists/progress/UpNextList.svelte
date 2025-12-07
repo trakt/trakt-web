@@ -32,7 +32,7 @@
   source={{
     id: intent === "start" ? "start-watching" : "continue-watching",
   }}
-  drilldownLabel={"drill label"}
+  drilldownLabel="drill label"
   filter={$filterMap}
   useList={(listParams) =>
     useStablePaginated({

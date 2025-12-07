@@ -23,8 +23,8 @@
           {innerText}
         />
       {/each}
-      <Switch checked={true} label={`This is the disabled switch`} disabled />
-      <Switch label={`This is the disabled switch`} innerText="Web" disabled />
+      <Switch checked={true} label="This is the disabled switch" disabled />
+      <Switch label="This is the disabled switch" innerText="Web" disabled />
     </section>
   </div>
 </main>

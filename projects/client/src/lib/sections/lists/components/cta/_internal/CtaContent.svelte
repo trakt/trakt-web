@@ -12,7 +12,7 @@
 <div class="trakt-cta-container">
   {#if src}
     <div class="trakt-cta-cover">
-      <CrossOriginImage {src} alt={`Background`} />
+      <CrossOriginImage {src} alt="Background" />
     </div>
   {/if}
 

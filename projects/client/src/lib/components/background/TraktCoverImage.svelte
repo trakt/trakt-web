@@ -8,7 +8,7 @@
 {#if $cover.state === "ready"}
   <div class="trakt-cover-image" data-cover-type={$cover.data.type}>
     <div class="trakt-cover-image-overlay">
-      <CrossOriginImage src={$cover.data.src} alt={`Background for footer`} />
+      <CrossOriginImage src={$cover.data.src} alt="Background for footer" />
     </div>
   </div>
 {/if}

@@ -32,7 +32,7 @@
   const showProgress = $derived($history?.shows.get(show.id));
   const watchedEpisodes = $derived(showProgress?.episodes);
 
-  const hasUnseenEpisodes = $derived(!Boolean(showProgress?.isWatched));
+  const hasUnseenEpisodes = $derived(!showProgress?.isWatched);
 
   const hasBulkMarkAsWatched = (episode: EpisodeEntry) =>
     hasUnseenEpisodes && episode.airDate && episode.airDate <= new Date();

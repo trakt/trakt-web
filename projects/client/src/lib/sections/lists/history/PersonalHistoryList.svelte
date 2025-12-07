@@ -20,7 +20,7 @@
 
 <DrillableMediaList
   title={m.list_title_history()}
-  id={`personal-history-list`}
+  id="personal-history-list"
   type="episode"
   useList={({ limit }: { limit: number }) =>
     useRecentlyWatchedList({
