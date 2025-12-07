@@ -12,7 +12,7 @@
 </script>
 
 <SectionList
-  id={`person-list`}
+  id="person-list"
   items={people}
   {title}
   --height-list="var(--height-person-list)"

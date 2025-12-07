@@ -35,9 +35,9 @@
 </script>
 
 <Button
-  size={"small"}
-  color={"default"}
-  variant={"primary"}
+  size="small"
+  color="default"
+  variant="primary"
   {label}
   onclick={(event) => {
     $isFollowed ? confirmUnfollow(event) : followUser();

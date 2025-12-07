@@ -16,8 +16,8 @@
   <Tooltip content={m.tooltip_text_preview_feature()}>
     <div class="trakt-preview-badge">
       <StemTag
-        --color-background-stem-tag={"var(--color-background-preview-tag)"}
-        --color-foreground-stem-tag={"var(--color-text-preview-tag)"}
+        --color-background-stem-tag="var(--color-background-preview-tag)"
+        --color-foreground-stem-tag="var(--color-text-preview-tag)"
         text={m.tag_text_preview()}
       />
     </div>

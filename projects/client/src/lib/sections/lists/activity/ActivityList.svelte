@@ -18,7 +18,7 @@
 </script>
 
 <DrillableMediaList
-  id={"activity-list-social"}
+  id="activity-list-social"
   source={{ id: "activity", type: "social" }}
   type={$mode}
   variant="landscape"

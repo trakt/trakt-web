@@ -29,7 +29,7 @@
 
   const { navigation } = useNavigation();
   const hasHiddenActions = $derived(
-    $navigation === "dpad" && !Boolean(navigationType),
+    $navigation === "dpad" && !navigationType,
   );
 </script>
 
