@@ -1,6 +1,6 @@
 <script lang="ts">
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
-  import { Tooltip } from "flowbite-svelte";
+  import Tooltip from "flowbite-svelte/Tooltip.svelte";
 
   const { children, content }: { content: string } & ChildrenProps = $props();
 

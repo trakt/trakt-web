@@ -3,7 +3,7 @@
   import type { ConfirmationAction } from "$lib/features/confirmation/models/ConfirmationAction";
   import type { ConfirmationOperation } from "$lib/features/confirmation/models/ConfirmationOperation";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { Modal } from "flowbite-svelte";
+  import Modal from "flowbite-svelte/Modal.svelte";
   import { CONFIRMATION_DIALOG_CLASS } from "./constants";
 
   const {
