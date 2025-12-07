@@ -14,6 +14,7 @@ import './test/mocks/scrollTo.mock.ts';
 import './test/mocks/variables.mock.ts';
 
 import { setAuthorization } from '$test/beds/store/renderStore.ts';
+import process from 'node:process';
 import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import { server } from './src/mocks/server.ts';
 

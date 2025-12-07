@@ -10,7 +10,6 @@ import type { Readable } from 'svelte/store';
 
 declare global {
   // Only way to declare globalThis.install
-  // deno-lint-ignore no-var
   var install: BeforeInstallPromptEvent | Nil;
 
   /**
@@ -190,10 +189,10 @@ declare global {
   namespace App {
     // interface Error {}
     interface Locals {
-      theme: import('$lib/features/theme/models/Theme').Theme;
+      theme: import('$lib/features/theme/models/Theme.ts').Theme;
       cookieConsent: CookieConsent;
       oidcAuth:
-        | import('$lib/features/auth/models/OidcAuthToken').OidcAuthToken
+        | import('$lib/features/auth/models/OidcAuthToken.ts').OidcAuthToken
         | Nil;
       typesense: TypesenseConfig;
     }

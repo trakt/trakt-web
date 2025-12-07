@@ -1,9 +1,9 @@
-import { PersonFergusonMappedMock } from '$mocks/data/people/mapped/PersonFergusonMappedMock.js';
-import { PersonFergusonResponseMock } from '$mocks/data/people/response/PersonFergusonResponseMock.js';
+import { PersonFergusonMappedMock } from '$mocks/data/people/mapped/PersonFergusonMappedMock.ts';
+import { PersonFergusonResponseMock } from '$mocks/data/people/response/PersonFergusonResponseMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
-import { peopleSummaryQuery } from './peopleSummaryQuery.js';
+import { peopleSummaryQuery } from './peopleSummaryQuery.ts';
 
 describe('peopleSummaryQuery', () => {
   it('should query for Silo (2023)', async () => {
