@@ -6,10 +6,8 @@ import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.t
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import type { RatingsSyncRequest } from '@trakt/api';
 import { derived, get, writable } from 'svelte/store';
-import { STAR_RATINGS } from './constants/index.ts';
 
 type RateableType = ExtendedMediaType;
 
@@ -94,13 +92,8 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
         return;
       }
 
-      const highestRange = assertDefined(STAR_RATINGS.at(-1)).range;
-      const isHighestRating = $rating.rating > highestRange.min &&
-        $rating.rating <= highestRange.max;
-
       return {
         rating: $rating.rating,
-        isHighestRating,
         isFavorited: $isFavorited,
       };
     },

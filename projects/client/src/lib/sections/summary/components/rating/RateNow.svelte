@@ -73,7 +73,7 @@
         }}
       />
 
-      {#if props.type !== "episode" && ($current?.isHighestRating || $current?.isFavorited)}
+      {#if props.type !== "episode" && ($current?.rating || $current?.isFavorited)}
         <div
           class="trakt-favorite-action"
           transition:slideFade={{ duration: 300, axis: "x" }}
