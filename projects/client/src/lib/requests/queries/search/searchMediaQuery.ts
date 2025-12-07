@@ -103,7 +103,7 @@ export const searchMediaQuery = defineQuery({
   invalidations: [],
   dependencies: (
     params,
-  ) => [params.query.toLowerCase().trim(), params.type, params.limit],
+  ) => [params.query, params.type, params.limit],
   request: searchRequest,
   mapper: (response) => {
     return {

@@ -67,7 +67,7 @@ const searchTrendingRequest = (
 export const searchTrendingQuery = defineQuery({
   key: 'searchTrending',
   invalidations: [],
-  dependencies: (params) => [params.limit, params.query?.toLowerCase().trim()],
+  dependencies: (params) => [params.limit, params.query],
   request: (params: SearchTrendingParams) =>
     Promise.all([
       searchTrendingRequest(params, 'movies'),
