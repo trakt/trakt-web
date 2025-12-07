@@ -1,5 +1,5 @@
-import { parseArgs as parseCliArgs } from 'jsr:@std/cli/parse-args';
-import { basename, dirname, isAbsolute, resolve } from 'jsr:@std/path';
+import { parseArgs as parseCliArgs } from '@std/cli/parse-args';
+import { basename, dirname, isAbsolute, resolve } from '@std/path';
 
 interface XCStringsData {
   sourceLanguage: string;
