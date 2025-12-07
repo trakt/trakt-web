@@ -1,5 +1,4 @@
-import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
-import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
+import { defineQuery } from '$lib/features/query/defineQuery.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import {
@@ -7,12 +6,11 @@ import {
   HiddenShowSchema,
 } from '$lib/requests/models/HiddenShow.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
-import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
-import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { HiddenShowItemResponse } from '@trakt/api';
+import type { LimitParams } from '../../models/LimitParams.ts';
 
-type HiddenShowsParams = PaginationParams & ApiParams;
+type HiddenShowsParams = LimitParams & ApiParams;
 
 function mapToHiddenShowItem(item: HiddenShowItemResponse): HiddenShow {
   return {
@@ -23,30 +21,26 @@ function mapToHiddenShowItem(item: HiddenShowItemResponse): HiddenShow {
 
 export const DEFAULT_HIDDEN_PAGE_SIZE = 1000;
 const hiddenShowsRequest = (
-  { fetch, limit = DEFAULT_HIDDEN_PAGE_SIZE, page }: HiddenShowsParams,
+  { fetch, limit = DEFAULT_HIDDEN_PAGE_SIZE }: HiddenShowsParams,
 ) =>
   api({ fetch })
     .users
     .hidden
     .get({
       query: {
-        page,
         limit,
         type: 'show',
       },
     });
 
-export const hiddenShowsQuery = defineInfiniteQuery({
+export const hiddenShowsQuery = defineQuery({
   key: 'hiddenShows',
   invalidations: [InvalidateAction.Restore],
   dependencies: (
     params: HiddenShowsParams,
-  ) => [params.limit, params.page],
+  ) => [params.limit],
   request: hiddenShowsRequest,
-  mapper: (response) => ({
-    entries: response.body.map(mapToHiddenShowItem),
-    page: extractPageMeta(response.headers),
-  }),
-  schema: PaginatableSchemaFactory(HiddenShowSchema),
+  mapper: (response) => response.body.map(mapToHiddenShowItem),
+  schema: HiddenShowSchema.array(),
   ttl: time.days(1),
 });
