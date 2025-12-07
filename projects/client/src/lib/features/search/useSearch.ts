@@ -82,7 +82,9 @@ export function useSearch() {
     mode$,
   ]).pipe(
     debounceTime(150),
-    switchMap(([term, currentMode]) => {
+    switchMap(([rawTerm, currentMode]) => {
+      const term = rawTerm.toLowerCase().trim();
+
       if (term.trim().length === 0) {
         return of(null);
       }

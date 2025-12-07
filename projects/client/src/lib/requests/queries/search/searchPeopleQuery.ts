@@ -90,7 +90,7 @@ const searchRequest = async (
 export const searchPeopleQuery = defineQuery({
   key: 'searchPeople',
   invalidations: [],
-  dependencies: (params) => [params.query.toLowerCase().trim(), params.limit],
+  dependencies: (params) => [params.query, params.limit],
   request: searchRequest,
   mapper: (response) => ({
     type: 'people' as const,
