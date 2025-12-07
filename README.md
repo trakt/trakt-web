@@ -38,17 +38,6 @@ Want to contribute to Trakt Web? Great! Here's how to get set up:
    `http://localhost:5173/` to allow cross-origin requests.
 1. Use the Client ID and Client Secret in your development environment.
 
-**Important Note:**
-
-Public applications might have some limitations, including:
-
-- **"Up Next" Functionality:** This feature showing your future viewing queue
-  may not work properly.
-
-These limitations are in place to protect Trakt Web from scrapers and bots.
-
-Now go ahead and contribute your best work to Trakt Web! ✨
-
 ## Getting Started
 
 This is a Deno project, so you need to have Deno installed on your machine
