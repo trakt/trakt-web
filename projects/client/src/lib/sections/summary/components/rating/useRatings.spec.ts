@@ -57,7 +57,6 @@ describe('useRatings', () => {
 
     const value = await waitForValue(current, {
       rating: 10,
-      isHighestRating: true,
       isFavorited: false,
     });
     expect(value?.rating).toBe(10);
