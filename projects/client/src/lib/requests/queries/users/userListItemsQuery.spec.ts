@@ -6,27 +6,27 @@ import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mappe
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
+import { mapToEntries } from '$test/utils/mapToEntries.ts';
+import { createInfiniteQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { userListItemsQuery } from './userListItemsQuery.ts';
 
 const PAGINATION_PARAMS = {
   limit: DEFAULT_PAGE_SIZE,
-  page: 1,
 };
 
 describe('userListItemsQuery', () => {
   it('should query list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           userListItemsQuery({
             userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
             ...PAGINATION_PARAMS,
           }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal([
@@ -38,7 +38,7 @@ describe('userListItemsQuery', () => {
   it('should query show list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           userListItemsQuery({
             userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
@@ -46,7 +46,7 @@ describe('userListItemsQuery', () => {
             ...PAGINATION_PARAMS,
           }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal(ListedShowsMappedMock);
@@ -55,7 +55,7 @@ describe('userListItemsQuery', () => {
   it('should query movie list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           userListItemsQuery({
             userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(HereticListsMappedMock.at(0)).slug,
@@ -63,7 +63,7 @@ describe('userListItemsQuery', () => {
             ...PAGINATION_PARAMS,
           }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal(ListedMoviesMappedMock);

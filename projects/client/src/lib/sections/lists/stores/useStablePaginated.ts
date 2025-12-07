@@ -7,20 +7,18 @@ export type StablePaginatedStoreProps<T, M> = {
   useList: PaginatableStore<T, M>;
   compareFn: (left: T, right: T) => boolean;
   type: M;
-  page: number;
   limit: number;
 } & FilterParams;
 
 export function useStablePaginated<T, M = MediaType>(
   { useList, compareFn, ...params }: StablePaginatedStoreProps<T, M>,
 ) {
-  const { list: unstable, isLoading, page } = useList(params);
+  const { list: unstable, ...rest } = useList(params);
 
   const { list } = useStableArray<T>(compareFn, unstable);
 
   return {
     list,
-    isLoading,
-    page,
+    ...rest,
   };
 }

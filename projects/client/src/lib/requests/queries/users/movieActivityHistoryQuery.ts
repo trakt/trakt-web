@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -8,15 +8,17 @@ import { time } from '$lib/utils/timing/time.ts';
 import type { MovieActivityHistoryResponse } from '@trakt/api';
 import { z } from 'zod';
 import { MovieEntrySchema } from '../../models/MovieEntry.ts';
+import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type MovieActivityHistoryParams = {
-  limit: number;
-  slug: string;
-  startDate?: Date;
-  endDate?: Date;
-  page?: number;
-  id?: number;
-} & ApiParams;
+type MovieActivityHistoryParams =
+  & {
+    slug: string;
+    startDate?: Date;
+    endDate?: Date;
+    id?: number;
+  }
+  & ApiParams
+  & PaginationParams;
 
 export const MovieActivityHistorySchema = z.object({
   id: z.number(),
@@ -28,7 +30,7 @@ export const MovieActivityHistorySchema = z.object({
 export type MovieActivityHistory = z.infer<typeof MovieActivityHistorySchema>;
 
 const movieActivityHistoryRequest = (
-  { fetch, slug, startDate, endDate, limit, id, page = 1 }:
+  { fetch, slug, startDate, endDate, limit, id, page }:
     MovieActivityHistoryParams,
 ) => {
   const queryParams = {
@@ -60,7 +62,7 @@ export const mapToMovieActivityHistory = (
   type: 'movie' as const,
 });
 
-export const movieActivityHistoryQuery = defineQuery({
+export const movieActivityHistoryQuery = defineInfiniteQuery({
   key: 'movieActivityHistory',
   invalidations: [InvalidateAction.MarkAsWatched('movie')],
   dependencies: (params: MovieActivityHistoryParams) => [

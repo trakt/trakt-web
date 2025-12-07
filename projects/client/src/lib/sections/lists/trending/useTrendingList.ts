@@ -1,6 +1,5 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import {
@@ -11,13 +10,12 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
+import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaTrendingQuery } from '../../../requests/queries/media/mediaTrendingQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
 export type TrendingEntry = TrendingMovie | TrendingShow;
-export type TrendingMediaList = Paginatable<TrendingEntry>;
 
 type TrendingListStoreProps = PaginationParams & FilterParams & SearchParams & {
   type: DiscoverMode;
@@ -28,14 +26,16 @@ function typeToQuery(
 ) {
   switch (params.type) {
     case 'movie':
-      return movieTrendingQuery(params) as CreateQueryOptions<
-        TrendingMediaList
+      return movieTrendingQuery(params) as InfiniteQuery<
+        TrendingEntry
       >;
     case 'show':
-      return showTrendingQuery(params) as CreateQueryOptions<TrendingMediaList>;
+      return showTrendingQuery(params) as InfiniteQuery<
+        TrendingEntry
+      >;
     case 'media':
-      return mediaTrendingQuery(params) as CreateQueryOptions<
-        TrendingMediaList
+      return mediaTrendingQuery(params) as InfiniteQuery<
+        TrendingEntry
       >;
   }
 }
@@ -43,7 +43,7 @@ function typeToQuery(
 export function useTrendingList(
   props: TrendingListStoreProps,
 ) {
-  const { list, page, isLoading } = usePaginatedListQuery(
+  const { list, ...rest } = usePaginatedListQuery(
     typeToQuery(props),
   );
 
@@ -55,7 +55,6 @@ export function useTrendingList(
         return $list.filter((entry) => entry.id !== 0 && entry.slug !== null);
       },
     ),
-    page,
-    isLoading,
+    ...rest,
   };
 }

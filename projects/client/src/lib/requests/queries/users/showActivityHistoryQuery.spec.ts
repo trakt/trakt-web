@@ -1,6 +1,7 @@
 import { time } from '$lib/utils/timing/time.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
+import { mapToEntries } from '$test/utils/mapToEntries.ts';
+import { createInfiniteQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { ShowActivityHistoryMappedMock } from '../../../../mocks/data/users/mapped/ShowActivityHistoryMappedMock.ts';
 import { showActivityHistoryQuery } from './showActivityHistoryQuery.ts';
@@ -9,7 +10,7 @@ describe('showActivityHistoryQuery', () => {
   it('should query watched shows', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           showActivityHistoryQuery({
             slug: 'me',
             startDate: new Date(Date.now() - time.months(1)),
@@ -17,7 +18,7 @@ describe('showActivityHistoryQuery', () => {
             limit: 10,
           }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal(ShowActivityHistoryMappedMock);

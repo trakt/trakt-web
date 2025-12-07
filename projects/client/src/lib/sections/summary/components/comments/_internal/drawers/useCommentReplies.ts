@@ -9,7 +9,7 @@ type UseCommentRepliesParams = {
 };
 
 export function useCommentReplies({ id }: UseCommentRepliesParams) {
-  const query = commentRepliesQuery({ id, page: 1, limit: REPLY_LIMIT });
+  const query = commentRepliesQuery({ id, limit: REPLY_LIMIT });
 
   return usePaginatedListQuery(query);
 }

@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
@@ -11,21 +11,23 @@ import {
 } from '$lib/requests/queries/users/episodeActivityHistoryQuery.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { ShowActivityHistoryResponse } from '@trakt/api';
+import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type ShowActivityHistoryParams = {
-  limit: number;
-  slug: string;
-  startDate?: Date;
-  endDate?: Date;
-  page?: number;
-  id?: number;
-} & ApiParams;
+type ShowActivityHistoryParams =
+  & {
+    slug: string;
+    startDate?: Date;
+    endDate?: Date;
+    id?: number;
+  }
+  & ApiParams
+  & PaginationParams;
 
 // Show history responses are per episode
 export type ShowActivityHistory = EpisodeActivityHistory;
 
 const showHistoryRequest = (
-  { fetch, slug, startDate, endDate, limit, id, page = 1 }:
+  { fetch, slug, startDate, endDate, limit, id, page }:
     ShowActivityHistoryParams,
 ) => {
   const queryParams = {
@@ -58,7 +60,7 @@ const mapToShowActivityHistory = (
   type: 'episode' as const,
 });
 
-export const showActivityHistoryQuery = defineQuery({
+export const showActivityHistoryQuery = defineInfiniteQuery({
   key: 'showActivityHistory',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

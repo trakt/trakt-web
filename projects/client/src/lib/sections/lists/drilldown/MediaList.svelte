@@ -28,7 +28,6 @@
   const { list, isLoading } = $derived(
     useList({
       type,
-      page: 1,
       limit: DEFAULT_PAGE_SIZE,
       filter,
       filterOverride,

@@ -1,6 +1,5 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import {
@@ -12,7 +11,7 @@ import {
   showAnticipatedQuery,
 } from '$lib/requests/queries/shows/showAnticipatedQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
-import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaAnticipatedQuery } from '../../../requests/queries/media/mediaAnticipatedQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
@@ -40,16 +39,16 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return movieAnticipatedQuery(params) as CreateQueryOptions<
-        Paginatable<AnticipatedEntry>
+      return movieAnticipatedQuery(params) as InfiniteQuery<
+        AnticipatedEntry
       >;
     case 'show':
-      return showAnticipatedQuery(params) as CreateQueryOptions<
-        Paginatable<AnticipatedEntry>
+      return showAnticipatedQuery(params) as InfiniteQuery<
+        AnticipatedEntry
       >;
     case 'media':
-      return mediaAnticipatedQuery(params) as CreateQueryOptions<
-        Paginatable<AnticipatedEntry>
+      return mediaAnticipatedQuery(params) as InfiniteQuery<
+        AnticipatedEntry
       >;
   }
 }

@@ -1,7 +1,6 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import { type MovieEntry } from '$lib/requests/models/MovieEntry.ts';
-import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import type { SearchParams } from '$lib/requests/models/SearchParams.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
@@ -10,7 +9,7 @@ import {
   showPopularQuery,
 } from '$lib/requests/queries/shows/showPopularQuery.ts';
 import { addYear } from '$lib/utils/date/addYear.ts';
-import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaPopularQuery } from '../../../requests/queries/media/mediaPopularQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
 
@@ -41,16 +40,14 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return moviePopularQuery(params) as CreateQueryOptions<
-        Paginatable<PopularEntry>
+      return moviePopularQuery(params) as InfiniteQuery<
+        PopularEntry
       >;
     case 'show':
-      return showPopularQuery(params) as CreateQueryOptions<
-        Paginatable<PopularEntry>
-      >;
+      return showPopularQuery(params) as InfiniteQuery<PopularEntry>;
     case 'media':
-      return mediaPopularQuery(params) as CreateQueryOptions<
-        Paginatable<PopularEntry>
+      return mediaPopularQuery(params) as InfiniteQuery<
+        PopularEntry
       >;
   }
 }

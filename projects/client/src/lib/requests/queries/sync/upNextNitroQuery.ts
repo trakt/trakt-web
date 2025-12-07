@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { EpisodeProgressEntrySchema } from '$lib/requests/models/EpisodeProgressEntry.ts';
@@ -63,7 +63,7 @@ export const upNextNitroRequest = (params: UpNextParams) => {
     });
 };
 
-export const upNextNitroQuery = defineQuery({
+export const upNextNitroQuery = defineInfiniteQuery({
   key: 'upNext',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

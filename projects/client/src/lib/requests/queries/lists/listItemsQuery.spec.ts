@@ -4,26 +4,26 @@ import { ListedShowsMappedMock } from '$mocks/data/lists/mapped/ListedShowsMappe
 import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/HereticListsMappedMock.ts';
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
+import { mapToEntries } from '$test/utils/mapToEntries.ts';
+import { createInfiniteQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { listItemsQuery } from './listItemsQuery.ts';
 
 const PAGINATION_PARAMS = {
   limit: 10,
-  page: 1,
 };
 
 describe('listItemsQuery', () => {
   it('should query list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           listItemsQuery({
             listId: `${assertDefined(SiloListsMappedMock.at(0)).id}`,
             ...PAGINATION_PARAMS,
           }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal([
@@ -35,14 +35,14 @@ describe('listItemsQuery', () => {
   it('should query show list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           listItemsQuery({
             listId: `${assertDefined(SiloListsMappedMock.at(0)).id}`,
             type: 'show',
             ...PAGINATION_PARAMS,
           }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal(ListedShowsMappedMock);
@@ -51,14 +51,14 @@ describe('listItemsQuery', () => {
   it('should query movie list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           listItemsQuery({
             listId: `${assertDefined(HereticListsMappedMock.at(0)).id}`,
             type: 'movie',
             ...PAGINATION_PARAMS,
           }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal(ListedMoviesMappedMock);

@@ -7,6 +7,5 @@ export function useSmartLists(type: MediaType) {
   return usePaginatedListQuery(smartListQuery({
     type,
     limit: DEFAULT_SMART_LIST_LIMIT,
-    page: 1,
   }));
 }

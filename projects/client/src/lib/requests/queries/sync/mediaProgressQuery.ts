@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { type ApiParams } from '$lib/requests/api.ts';
 import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
@@ -33,7 +33,7 @@ const MediaProgressSchema = z.union([
   MovieProgressSchema,
 ]);
 
-export const mediaProgressQuery = defineQuery({
+export const mediaProgressQuery = defineInfiniteQuery({
   key: 'mediaProgress',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

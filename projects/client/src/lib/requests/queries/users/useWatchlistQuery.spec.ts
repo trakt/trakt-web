@@ -2,13 +2,13 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { WatchlistMoviesMappedMock } from '$mocks/data/users/mapped/WatchlistMoviesMappedMock.ts';
 import { WatchlistShowsMappedMock } from '$mocks/data/users/mapped/WatchlistShowsMappedMock.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
+import { mapToEntries } from '$test/utils/mapToEntries.ts';
+import { createInfiniteQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { watchlistQuery } from './watchlistQuery.ts';
 
 const COMMON_PARAMS = {
   limit: 10,
-  page: 1,
   sort: 'added',
 };
 
@@ -16,10 +16,10 @@ describe('watchlistQuery', () => {
   it('should query watchlist movies', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           watchlistQuery({ type: 'movie', ...COMMON_PARAMS }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal(WatchlistMoviesMappedMock);
@@ -40,10 +40,10 @@ describe('watchlistQuery', () => {
   it('should query watchlist shows', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createInfiniteQuery(
           watchlistQuery({ type: 'show', ...COMMON_PARAMS }),
         ),
-      mapper: (response) => response?.data?.entries,
+      mapper: mapToEntries,
     });
 
     expect(result).to.deep.equal(WatchlistShowsMappedMock);

@@ -32,7 +32,6 @@ type PaginatablePreviewItem = Paginatable<PreviewItem>;
 
 function mediaTypeToQuery(type: MediaType, isFuture?: boolean) {
   const params = {
-    page: 1,
     limit: 10,
   };
 

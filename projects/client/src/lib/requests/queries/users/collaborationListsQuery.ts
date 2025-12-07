@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { extractPageMeta } from '../../_internal/extractPageMeta.ts';
@@ -25,7 +25,7 @@ const collaborationListsRequest = (
       },
     });
 
-export const collaborationListsQuery = defineQuery({
+export const collaborationListsQuery = defineInfiniteQuery({
   key: 'collaborationLists',
   invalidations: [
     InvalidateAction.Listed('movie'),

@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
@@ -54,7 +54,7 @@ export const showTrendingRequest = (
     });
 };
 
-export const showTrendingQuery = defineQuery({
+export const showTrendingQuery = defineInfiniteQuery({
   key: 'showTrending',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
