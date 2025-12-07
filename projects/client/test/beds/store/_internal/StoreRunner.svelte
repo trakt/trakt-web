@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { iffy } from "$lib/utils/function/iffy";
+
   const {
     factory,
     output,
@@ -7,5 +9,5 @@
     output: (value: unknown) => void;
   } = $props();
 
-  output(factory());
+  iffy(() => output(factory()));
 </script>

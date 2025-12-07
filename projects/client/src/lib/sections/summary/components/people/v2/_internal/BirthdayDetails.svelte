@@ -19,7 +19,9 @@
 
   const today = new Date();
 
-  const detailHeader = deathDate ? m.header_date_of_death() : m.header_age();
+  const detailHeader = $derived(
+    deathDate ? m.header_date_of_death() : m.header_age(),
+  );
 </script>
 
 <div class="trakt-birthday-details" data-variant={variant}>

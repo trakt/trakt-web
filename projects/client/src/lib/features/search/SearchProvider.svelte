@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { iffy } from "$lib/utils/function/iffy";
   import {} from "svelte";
   import { createSearchContext } from "./_internal/createSearchContext";
   import { toSearchTarget } from "./_internal/toSearchTarget";
@@ -9,10 +10,12 @@
 
   const initialTarget = toSearchTarget(page.url.searchParams.get("m"));
 
-  const { mode, query } = createSearchContext({
-    ...initialTarget,
-    config,
-  });
+  const { mode, query } = iffy(() =>
+    createSearchContext({
+      ...initialTarget,
+      config,
+    }),
+  );
 
   $effect(() => {
     const m = page.url.searchParams.get("m");

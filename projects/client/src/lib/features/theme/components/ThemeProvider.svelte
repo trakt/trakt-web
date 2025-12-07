@@ -6,12 +6,16 @@
   import type { Theme } from "../models/Theme";
   import { useTheme } from "../useTheme";
   import { coerceTheme } from "../utils/coerceTheme";
+  import { iffy } from "$lib/utils/function/iffy";
 
   const { children, theme: initial }: ChildrenProps & { theme: Theme } =
     $props();
-  const seed = globalThis.document?.documentElement.dataset.theme ?? initial;
-  const themeStore = writable(coerceTheme(seed));
-  setContext(THEME_COOKIE_NAME, themeStore);
+
+  iffy(() => {
+    const seed = globalThis.document?.documentElement.dataset.theme ?? initial;
+    const themeStore = writable(coerceTheme(seed));
+    setContext(THEME_COOKIE_NAME, themeStore);
+  });
 
   const { color, set, theme } = useTheme();
   const { user } = useUser();

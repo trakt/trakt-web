@@ -2,22 +2,18 @@
   import SwipeX from "$lib/components/gestures/SwipeX.svelte";
   import { ConfirmationType } from "$lib/features/confirmation/models/ConfirmationType";
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
-  import type { MediaInput } from "$lib/models/MediaInput";
+  import type { BaseMediaInput } from "$lib/models/MediaInput";
   import MarkAsWatchedSwipeIndicator from "$lib/sections/media-actions/mark-as-watched/MarkAsWatchedSwipeIndicator.svelte";
   import { useMarkAsWatched } from "$lib/sections/media-actions/mark-as-watched/useMarkAsWatched";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
   import WatchlistIndicator from "$lib/sections/media-actions/watchlist/WatchlistIndicator.svelte";
 
-  type MediaSwipeProps = MediaInput &
+  type MediaSwipeProps = BaseMediaInput &
     ChildrenProps & {
       style?: "cover" | "summary";
     };
 
   const { type, media, style, children }: MediaSwipeProps = $props();
-
-  if (type === "episode") {
-    throw new Error("MediaSwipe does not support episode type");
-  }
 
   const target = $derived({ type, media });
 

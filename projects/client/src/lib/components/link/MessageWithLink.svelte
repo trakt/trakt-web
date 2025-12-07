@@ -3,7 +3,9 @@
 
   const { message, href, target } = $props();
 
-  const [beforeText, linkText, afterText] = message.split(/<a[^>]*>|<\/a>/);
+  const [beforeText, linkText, afterText] = $derived(
+    message.split(/<a[^>]*>|<\/a>/),
+  );
 </script>
 
 {beforeText}<Link {href} {target}>{linkText}</Link>{afterText}

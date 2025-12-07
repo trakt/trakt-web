@@ -1,5 +1,6 @@
 <script lang="ts">
   import CookieNotice from "$lib/sections/cookie/CookieNotice.svelte";
+  import { iffy } from "$lib/utils/function/iffy";
   import type { CookieConsent } from "./models/CookieConsent";
   import { useCookieConsent } from "./useCookieConsent";
 
@@ -7,7 +8,8 @@
     $props();
 
   const { setConsent } = useCookieConsent();
-  setConsent(consent);
+
+  iffy(() => setConsent(consent));
 </script>
 
 {@render children()}

@@ -22,9 +22,11 @@
     getDisplayText?: (value: T) => string;
   } = $props();
 
-  const displayText = getDisplayText
-    ? getDisplayText(value)
-    : (options.find((option) => option.value === value)?.text ?? "");
+  const displayText = $derived(
+    getDisplayText
+      ? getDisplayText(value)
+      : (options.find((option) => option.value === value)?.text ?? ""),
+  );
 </script>
 
 <div class="native-select-container">

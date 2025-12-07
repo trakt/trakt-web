@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { iffy } from "$lib/utils/function/iffy";
   import { derived, type Readable } from "svelte/store";
 
   const {
@@ -13,13 +14,13 @@
     waitFor?: (response: unknown) => boolean;
   } = $props();
 
-  const readable = derived(factory(), mapper);
+  iffy(() =>
+    derived(factory(), mapper).subscribe((result) => {
+      if (!waitFor(result)) {
+        return;
+      }
 
-  readable.subscribe((result) => {
-    if (!waitFor(result)) {
-      return;
-    }
-
-    output(result);
-  });
+      output(result);
+    }),
+  );
 </script>

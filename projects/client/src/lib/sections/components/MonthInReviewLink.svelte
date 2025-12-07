@@ -10,9 +10,9 @@
   const { slug, date, source }: { slug: string; date: Date; source: string } =
     $props();
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const previousMonth = toHumanMonth(date, languageTag());
+  const year = $derived(date.getFullYear());
+  const month = $derived(date.getMonth() + 1);
+  const previousMonth = $derived(toHumanMonth(date, languageTag()));
 
   const href = $derived(UrlBuilder.users(slug).monthInReview(year, month));
   const { track } = useTrack(AnalyticsEvent.Link);
