@@ -24,7 +24,7 @@
   }: DrilledMediaListProps = $props();
 </script>
 
-<PaginatedList {type} {id} {filter} {useList}>
+<PaginatedList {type} {filter} {useList}>
   {#snippet items(items)}
     <GridList
       {...props}

@@ -17,11 +17,10 @@
   {title}
   id={`recently-watched-list-${slug}`}
   type="episode"
-  useList={({ limit, page }: { limit: number; page: number }) =>
+  useList={({ limit }: { limit: number }) =>
     useRecentlyWatchedList({
       type: "all",
       limit,
-      page,
       slug,
     })}
 >

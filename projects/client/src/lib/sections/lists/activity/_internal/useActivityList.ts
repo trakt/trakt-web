@@ -13,7 +13,7 @@ type ActivityListProps =
   & FilterParams;
 
 export function useActivityList(props: ActivityListProps) {
-  const { list, page, isLoading } = usePaginatedListQuery(
+  const { list, ...rest } = usePaginatedListQuery(
     socialActivityQuery(props),
   );
 
@@ -28,7 +28,6 @@ export function useActivityList(props: ActivityListProps) {
         props.type === 'show' && entry.type === 'episode'
       );
     }),
-    page,
-    isLoading,
+    ...rest,
   };
 }

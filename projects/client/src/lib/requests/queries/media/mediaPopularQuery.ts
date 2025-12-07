@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { type ApiParams } from '$lib/requests/api.ts';
@@ -26,7 +26,7 @@ type MediaPopularParams =
 
 const PopularMediaSchema = z.union([ShowEntrySchema, MovieEntrySchema]);
 
-export const mediaPopularQuery = defineQuery({
+export const mediaPopularQuery = defineInfiniteQuery({
   key: 'mediaPopular',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToEpisodeEntry } from '$lib/requests/_internal/mapToEpisodeEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
@@ -10,15 +10,17 @@ import { ShowEntrySchema } from '$lib/requests/models/ShowEntry.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { EpisodeActivityHistoryResponse } from '@trakt/api';
 import { z } from 'zod';
+import type { PaginationParams } from '../../models/PaginationParams.ts';
 
-type EpisodeActivityHistoryParams = {
-  limit: number;
-  slug: string;
-  startDate?: Date;
-  endDate?: Date;
-  page?: number;
-  id?: number;
-} & ApiParams;
+type EpisodeActivityHistoryParams =
+  & {
+    slug: string;
+    startDate?: Date;
+    endDate?: Date;
+    id?: number;
+  }
+  & ApiParams
+  & PaginationParams;
 
 export const EpisodeActivityHistorySchema = z.object({
   id: z.number(),
@@ -33,7 +35,7 @@ export type EpisodeActivityHistory = z.infer<
 >;
 
 function episodeActivityHistoryRequest(
-  { fetch, slug, startDate, endDate, limit, id, page = 1 }:
+  { fetch, slug, startDate, endDate, limit, id, page }:
     EpisodeActivityHistoryParams,
 ) {
   const queryParams = {
@@ -68,7 +70,7 @@ export function mapToEpisodeActivityHistory(
   };
 }
 
-export const episodeActivityHistoryQuery = defineQuery({
+export const episodeActivityHistoryQuery = defineInfiniteQuery({
   key: 'episodeHistory',
   invalidations: [
     InvalidateAction.MarkAsWatched('episode'),

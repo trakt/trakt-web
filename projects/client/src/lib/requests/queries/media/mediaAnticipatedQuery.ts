@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependencies.ts';
 import { type ApiParams } from '$lib/requests/api.ts';
@@ -33,7 +33,7 @@ const AnticipatedMediaSchema = z.union([
   AnticipatedShowSchema,
 ]);
 
-export const mediaAnticipatedQuery = defineQuery({
+export const mediaAnticipatedQuery = defineInfiniteQuery({
   key: 'mediaAnticipated',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

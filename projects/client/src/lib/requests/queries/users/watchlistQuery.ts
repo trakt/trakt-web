@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { mapToListItem } from '$lib/requests/_internal/mapToListItem.ts';
@@ -63,7 +63,7 @@ const watchlistRequest = (
     });
 };
 
-export const watchlistQuery = defineQuery({
+export const watchlistQuery = defineInfiniteQuery({
   key: 'watchlist',
   invalidations: [
     InvalidateAction.Watchlisted('movie'),

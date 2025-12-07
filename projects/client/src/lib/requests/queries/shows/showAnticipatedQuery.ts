@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { getGlobalFilterDependencies } from '$lib/requests/_internal/getGlobalFilterDependencies.ts';
 import { getRecordDependencies } from '$lib/requests/_internal/getRecordDependencies.ts';
@@ -60,7 +60,7 @@ export const showAnticipatedRequest = (
     });
 };
 
-export const showAnticipatedQuery = defineQuery({
+export const showAnticipatedQuery = defineInfiniteQuery({
   key: 'showAnticipated',
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),

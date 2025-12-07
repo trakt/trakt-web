@@ -20,11 +20,10 @@
   id={`view-all-personal-history-list-${mode ?? "all"}`}
   type="episode"
   cardOrientation="landscape"
-  useList={({ limit, page }: { limit: number; page: number }) =>
+  useList={({ limit }: { limit: number }) =>
     useRecentlyWatchedList({
       type: historyType,
       limit,
-      page,
       slug: "me",
     })}
 >

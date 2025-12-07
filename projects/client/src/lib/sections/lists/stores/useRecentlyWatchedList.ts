@@ -1,4 +1,3 @@
-import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { activityHistoryQuery } from '$lib/requests/queries/users/activityHistoryQuery.ts';
 import {
@@ -14,7 +13,7 @@ import {
   showActivityHistoryQuery,
 } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import type { CreateQueryOptions } from '@tanstack/svelte-query';
+import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 
 export type RecentlyWatchedType = 'movie' | 'show' | 'episode' | 'all';
 
@@ -41,20 +40,20 @@ function typeToQuery(
 
   switch (type) {
     case 'movie':
-      return movieActivityHistoryQuery(params) as CreateQueryOptions<
-        Paginatable<HistoryEntry>
+      return movieActivityHistoryQuery(params) as InfiniteQuery<
+        HistoryEntry
       >;
     case 'episode':
-      return episodeActivityHistoryQuery(params) as CreateQueryOptions<
-        Paginatable<HistoryEntry>
+      return episodeActivityHistoryQuery(params) as InfiniteQuery<
+        HistoryEntry
       >;
     case 'show':
-      return showActivityHistoryQuery(params) as CreateQueryOptions<
-        Paginatable<HistoryEntry>
+      return showActivityHistoryQuery(params) as InfiniteQuery<
+        HistoryEntry
       >;
     case 'all':
-      return activityHistoryQuery(params) as CreateQueryOptions<
-        Paginatable<HistoryEntry>
+      return activityHistoryQuery(params) as InfiniteQuery<
+        HistoryEntry
       >;
   }
 }

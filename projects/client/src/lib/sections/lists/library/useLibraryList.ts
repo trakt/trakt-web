@@ -1,5 +1,3 @@
-import { combineLatest, filter, map, shareReplay, take } from 'rxjs';
-import { writable } from 'svelte/store';
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
@@ -8,7 +6,9 @@ import {
 } from '$lib/requests/queries/sync/libraryQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { toObservable } from '$lib/utils/store/toObservable.ts';
-import { paginate } from '../recommended/paginate.ts';
+import { combineLatest, filter, map, shareReplay, take } from 'rxjs';
+import { writable } from 'svelte/store';
+import { useInMemoryPagination } from '../../../stores/useInMemoryPagination.ts';
 import { CUSTOM_LIBRARY_NAME } from './constants/index.ts';
 
 type UseLibraryListProps = PaginationParams & {
@@ -68,20 +68,20 @@ export function useLibraryList(props: UseLibraryListProps) {
   const items = combineLatest([record, toObservable(activeLibrary)])
     .pipe(
       map(([r, active]) => r[active] ?? []),
+      shareReplay(1),
     );
 
-  const page = items.pipe(
-    map((list) => ({
-      current: props.page,
-      total: Math.ceil(list.length / props.limit),
-    })),
-  );
+  const { list, hasNextPage, fetchNextPage } = useInMemoryPagination(items, {
+    page: props.page,
+    limit: props.limit,
+  });
 
   return {
     activeLibrary,
     libraries,
-    page,
-    list: items.pipe(paginate({ page: props.page, limit: props.limit })),
+    list,
+    hasNextPage,
+    fetchNextPage,
     isLoading: queryObservable.pipe(
       map(toLoadingState),
     ),

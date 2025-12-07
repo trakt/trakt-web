@@ -13,9 +13,8 @@ type PersonalListsParams = {
   sortBy?: 'none' | 'recently-updated';
 } & Partial<PaginationParams>;
 
-function typeToQuery({ type, slug, page, limit }: PersonalListsParams) {
+function typeToQuery({ type, slug, limit }: PersonalListsParams) {
   const paginationProps = {
-    page: page ?? 1,
     limit: limit ?? DEFAULT_LISTS_PAGE_SIZE,
   };
 
@@ -30,10 +29,10 @@ function typeToQuery({ type, slug, page, limit }: PersonalListsParams) {
 }
 
 export function usePersonalListsSummary(
-  { type, slug, page, limit, sortBy = 'recently-updated' }: PersonalListsParams,
+  { type, slug, limit, sortBy = 'recently-updated' }: PersonalListsParams,
 ) {
   const { list, ...rest } = usePaginatedListQuery(
-    typeToQuery({ type, slug, page, limit }),
+    typeToQuery({ type, slug, limit }),
   );
 
   return {

@@ -1,6 +1,5 @@
 import type { DiscoverMode } from '$lib/features/discover/models/DiscoverMode.ts';
 import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
-import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import {
   type MediaProgressIntent,
@@ -15,15 +14,15 @@ import {
   upNextNitroQuery,
 } from '$lib/requests/queries/sync/upNextNitroQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import type { CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
+import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 
 export type UpNextStoreProps =
   & PaginationParams
   & FilterParams
   & {
     type: DiscoverMode;
-  intent: MediaProgressIntent;
+    intent: MediaProgressIntent;
   };
 
 export type ProgressEntry = UpNextEntry | MovieProgressEntry;
@@ -31,16 +30,14 @@ export type ProgressEntry = UpNextEntry | MovieProgressEntry;
 function typeToQuery(props: UpNextStoreProps) {
   switch (props.type) {
     case 'movie':
-      return movieProgressQuery(props) as CreateQueryOptions<
-        Paginatable<ProgressEntry>
+      return movieProgressQuery(props) as InfiniteQuery<
+        ProgressEntry
       >;
     case 'show':
-      return upNextNitroQuery(props) as CreateQueryOptions<
-        Paginatable<ProgressEntry>
-      >;
+      return upNextNitroQuery(props) as InfiniteQuery<ProgressEntry>;
     default:
-      return mediaProgressQuery(props) as CreateQueryOptions<
-        Paginatable<ProgressEntry>
+      return mediaProgressQuery(props) as InfiniteQuery<
+        ProgressEntry
       >;
   }
 }

@@ -15,9 +15,9 @@ import { RECOMMENDED_UPPER_LIMIT } from '$lib/utils/constants.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { map, type Observable, shareReplay } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 import { recommendedMediaQuery } from '../../../requests/queries/media/mediaRecommendedQuery.ts';
-import { paginate } from './paginate.ts';
+import { useInMemoryPagination } from '../../../stores/useInMemoryPagination.ts';
 
 export type RecommendedEntry = RecommendedMovie | RecommendedShow;
 export type RecommendedMediaList = Array<RecommendedEntry>;
@@ -86,16 +86,10 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
     ),
   );
 
-  const list: Observable<RecommendedMediaList> = allItems.pipe(
-    paginate({ page: props.page, limit: props.limit }),
-  );
-
-  const page = allItems.pipe(
-    map((items) => ({
-      current: props.page,
-      total: Math.ceil(items.length / props.limit),
-    })),
-  );
+  const { list, hasNextPage, fetchNextPage } = useInMemoryPagination(allItems, {
+    page: props.page,
+    limit: props.limit,
+  });
 
   const isLoading = queryObservable.pipe(
     map(toLoadingState),
@@ -103,7 +97,8 @@ export const useRecommendedList = (props: RecommendationListStoreProps) => {
 
   return {
     list,
-    page,
     isLoading,
+    hasNextPage,
+    fetchNextPage,
   };
 };

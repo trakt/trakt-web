@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import { PaginatableSchemaFactory } from '$lib/requests/models/Paginatable.ts';
@@ -34,7 +34,7 @@ const showRelatedRequest = (
       },
     });
 
-export const showRelatedQuery = defineQuery({
+export const showRelatedQuery = defineInfiniteQuery({
   key: 'showRelated',
   invalidations: [],
   dependencies: (params) => [params.slug, params.page, params.limit],

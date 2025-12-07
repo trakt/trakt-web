@@ -1,5 +1,4 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { DismissedItem } from '$lib/features/toast/models/DismissedItem.ts';
 import { useDismissals } from '$lib/features/toast/useDismissals.ts';
 import {
@@ -10,6 +9,7 @@ import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
 import { derived, writable } from 'svelte/store';
+import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
 
 const RECENTLY_WATCHED_WINDOW = time.days(1);
 
@@ -28,7 +28,7 @@ export function useCurrentUserLastWatched() {
   const { ratings } = useUser();
   const { latest, wasDismissed } = useDismissals();
 
-  const query = useQuery(movieActivityHistoryQuery({
+  const { list } = usePaginatedListQuery(movieActivityHistoryQuery({
     slug: 'me',
     startDate: new Date(Date.now() - RECENTLY_WATCHED_WINDOW),
     limit: DEFAULT_PAGE_SIZE,
@@ -46,16 +46,16 @@ export function useCurrentUserLastWatched() {
 
   return {
     lastWatchedItem: derived(
-      [query, ratings, latestDismissal],
-      ([$query, $ratings, $latestDismissal]) => {
+      [list, ratings, latestDismissal],
+      ([$list, $ratings, $latestDismissal]) => {
         const hasRecentlyDismissed = $latestDismissal &&
           $latestDismissal.dismissedAt > Date.now() - RECENTLY_WATCHED_WINDOW;
 
-        if (!$query.data || !$ratings || hasRecentlyDismissed) {
+        if (!$ratings || hasRecentlyDismissed) {
           return null;
         }
 
-        const unratedItem = $query.data.entries.find((activity) => {
+        const unratedItem = $list.find((activity) => {
           if (wasDismissed(activity, $latestDismissal)) {
             return false;
           }

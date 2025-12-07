@@ -1,4 +1,4 @@
-import { defineQuery } from '$lib/features/query/defineQuery.ts';
+import { defineInfiniteQuery } from '$lib/features/query/defineQuery.ts';
 import { extractPageMeta } from '$lib/requests/_internal/extractPageMeta.ts';
 import { mapToMediaComment } from '$lib/requests/_internal/mapToMediaComment.ts';
 import { api, type ApiParams } from '$lib/requests/api.ts';
@@ -36,7 +36,7 @@ const userCommentRepliesRequest = (
       },
     });
 
-export const commentRepliesQuery = defineQuery({
+export const commentRepliesQuery = defineInfiniteQuery({
   key: 'commentReplies',
   invalidations: [InvalidateAction.Comment.Reply],
   dependencies: (

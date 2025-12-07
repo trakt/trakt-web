@@ -31,14 +31,12 @@
     useTrendingList({
       type,
       limit,
-      page: 1,
     }),
   );
   const { list: popularMedia } = $derived(
     usePopularList({
       type,
       limit,
-      page: 1,
     }),
   );
 

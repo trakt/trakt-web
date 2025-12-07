@@ -14,22 +14,20 @@ export type WatchListStoreProps = PaginationParams & FilterParams & {
 };
 
 export function useWatchList(params: WatchListStoreProps) {
-  const { isLoading, list: items, page } = usePaginatedListQuery(
+  const { list: items, ...rest } = usePaginatedListQuery(
     watchlistQuery({
       limit: params.limit ?? DEFAULT_PAGE_SIZE,
       type: params.type === 'media' ? undefined : params.type,
-      page: params.page,
       sort: params.sort ?? 'added',
       filter: params.filter,
     }),
   );
 
   return {
-    isLoading,
     list: derived(
       items,
       ($items) => $items.map((item) => item.entry),
     ),
-    page,
+    ...rest,
   };
 }

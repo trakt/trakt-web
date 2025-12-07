@@ -11,7 +11,7 @@
   import { useLibraryList } from "./useLibraryList";
 
   const { list, libraries, activeLibrary } = $derived(
-    useLibraryList({ page: 1, limit: DEFAULT_PAGE_SIZE }),
+    useLibraryList({ limit: DEFAULT_PAGE_SIZE }),
   );
 </script>
 
