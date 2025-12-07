@@ -1,5 +1,6 @@
 <script lang="ts">
   import { beforeNavigate, goto } from "$app/navigation";
+  import { iffy } from "$lib/utils/function/iffy";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
   import { get } from "svelte/store";
   import { createAuthContext } from "../stores/createAuthContext";
@@ -17,12 +18,14 @@
     accessToken,
   }: AuthProviderProps = $props();
 
-  const { isAuthorized } = createAuthContext({
-    isAuthorized: isAuthorizedOidc,
-    token: null,
-  });
+  const { isAuthorized } = iffy(() =>
+    createAuthContext({
+      isAuthorized: isAuthorizedOidc,
+      token: null,
+    }),
+  );
 
-  const { isInitializing } = initializeUserManager(accessToken);
+  const { isInitializing } = iffy(() => initializeUserManager(accessToken));
   const { user } = useUser();
 
   beforeNavigate(({ from, to }) => {

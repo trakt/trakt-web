@@ -9,7 +9,7 @@
 
   const currentYear = new Date().getFullYear();
 
-  const href = UrlBuilder.users(slug).yearToDate(currentYear);
+  const href = $derived(UrlBuilder.users(slug).yearToDate(currentYear));
   const { track } = useTrack(AnalyticsEvent.Link);
 </script>
 

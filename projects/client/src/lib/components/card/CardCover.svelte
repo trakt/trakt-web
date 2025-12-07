@@ -3,12 +3,13 @@
   import { PLACEHOLDERS } from "$lib/utils/constants";
   import { isImageComplete } from "$lib/utils/image/isImageComplete";
   import { checksum } from "$lib/utils/string/checksum";
+  import { writable } from "svelte/store";
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 
   const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
 
-  let isImagePending = $state(!isImageComplete(src));
+  const isImagePending = $derived(writable(!isImageComplete(src)));
   const id = $derived(checksum(`${src}-${title}`));
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
@@ -16,7 +17,7 @@
 
 <div
   class="trakt-card-cover"
-  class:trakt-card-cover-loading={isImagePending}
+  class:trakt-card-cover-loading={$isImagePending}
   class:trakt-card-cover-placeholder={isPlaceholder}
   class:trakt-card-cover-youtube={src.includes("youtube")}
 >
@@ -39,7 +40,7 @@
       animate={false}
       {src}
       {alt}
-      onload={() => (isImagePending = false)}
+      onload={() => ($isImagePending = false)}
       aria-labelledby={id}
     />
     {#if overlaySrc && !PLACEHOLDERS.includes(overlaySrc)}
@@ -48,7 +49,7 @@
         animate={false}
         src={overlaySrc}
         {alt}
-        onload={() => (isImagePending = false)}
+        onload={() => ($isImagePending = false)}
         aria-labelledby={id}
       />
     {/if}

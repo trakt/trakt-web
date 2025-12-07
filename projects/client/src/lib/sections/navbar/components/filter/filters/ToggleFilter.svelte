@@ -10,7 +10,7 @@
 
   const { gotoFilteredState } = useFilterSetter();
   const { getFilterValue } = useFilter();
-  const currentValue = getFilterValue(filter.key);
+  const currentValue = $derived(getFilterValue(filter.key));
 
   const handler = () => {
     const toggledValue = $currentValue === "true" ? "false" : "true";

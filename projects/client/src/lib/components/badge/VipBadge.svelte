@@ -2,7 +2,7 @@
   import VipBadgeContent from "./_internal/VipBadgeContent.svelte";
 
   const { isDirector = false }: { isDirector?: boolean } = $props();
-  const badgeLabel = isDirector ? "DIRECTOR" : "VIP";
+  const badgeLabel = $derived(isDirector ? "DIRECTOR" : "VIP");
 </script>
 
 <VipBadgeContent>

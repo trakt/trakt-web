@@ -32,7 +32,7 @@
     disabled: disabled || undefined,
   });
 
-  const hasIcon = $state(icon != null);
+  const hasIcon = $derived(icon != null);
   const isDefaultAlignment = $derived(hasIcon);
   const alignment = $derived(isDefaultAlignment ? "default" : "centered");
   const href = $derived((rest as TraktButtonAnchorProps).href);

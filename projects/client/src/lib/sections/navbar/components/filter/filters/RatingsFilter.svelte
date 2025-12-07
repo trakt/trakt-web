@@ -19,7 +19,7 @@
   const { getFilterValue } = useFilter();
   const { gotoFilteredState } = useFilterSetter();
 
-  const currentValue = getFilterValue(filter.key);
+  const currentValue = $derived(getFilterValue(filter.key));
 
   const ratingsFilter = assertDefined(
     FILTERS.find((filter) => filter.key === FilterKey.Ratings) as RatingsFilter,

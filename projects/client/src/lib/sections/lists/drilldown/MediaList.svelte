@@ -34,7 +34,7 @@
     }),
   );
 
-  const defaultVariant = useDefaultCardVariant(type);
+  const defaultVariant = $derived(useDefaultCardVariant(type));
   const variant = $derived(externalVariant ?? $defaultVariant);
   const height = $derived(mediaListHeightResolver(variant));
 

@@ -11,7 +11,7 @@
   const { filter }: { filter: ListFilter } = $props();
 
   const { getFilterValue } = useFilter();
-  const currentValue = getFilterValue(filter.key);
+  const currentValue = $derived(getFilterValue(filter.key));
 
   const isFiltering = $derived(Boolean($currentValue));
 

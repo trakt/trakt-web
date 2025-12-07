@@ -18,8 +18,8 @@
   const { category, values, value, children }: CollapsableValuesProps<T> =
     $props();
 
-  const displayableValues = values.slice(0, MAX_ITEMS);
-  const omittedValues = values.slice(MAX_ITEMS);
+  const displayableValues = $derived(values.slice(0, MAX_ITEMS));
+  const omittedValues = $derived(values.slice(MAX_ITEMS));
 
   const expanded = writable(false);
 </script>

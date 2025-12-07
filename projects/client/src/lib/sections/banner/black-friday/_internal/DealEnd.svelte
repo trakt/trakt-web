@@ -6,7 +6,7 @@
 
   const { endDate }: { endDate: Date } = $props();
 
-  const endDateText = writable(toHumanETA(new Date(), endDate));
+  const endDateText = $derived(writable(toHumanETA(new Date(), endDate)));
 
   const getIntervalDelay = (): number => {
     const now = new Date();

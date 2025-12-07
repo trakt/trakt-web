@@ -22,7 +22,9 @@
 
   const { title, type, person }: CreditsListProps = $props();
 
-  const currentPosition = writable<CrewPosition>(person.knownFor ?? "acting");
+  const currentPosition = $derived(
+    writable<CrewPosition>(person.knownFor ?? "acting"),
+  );
 
   const { credits, positions } = $derived(
     useCreditsList({ type, slug: person.slug }),
