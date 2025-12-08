@@ -10,6 +10,6 @@ export const SeasonSchema = z.object({
   }),
   poster: z.object({
     url: ImageUrlsSchema,
-  }),
+  }).optional(),
 });
 export type Season = z.infer<typeof SeasonSchema>;
