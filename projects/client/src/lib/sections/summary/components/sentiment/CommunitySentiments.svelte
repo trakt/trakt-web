@@ -6,6 +6,17 @@
 
   const { sentiments, slug }: { sentiments: Sentiments | Nil; slug: string } =
     $props();
+
+  const hasPartialSentiments = $derived.by(() => {
+    if (!sentiments) return false;
+    return sentiments.good.length === 0 || sentiments.bad.length === 0;
+  });
+
+  const heightList = $derived(
+    hasPartialSentiments
+      ? "calc(0.5 * var(--height-sentiments-list))"
+      : "var(--height-sentiments-list)",
+  );
 </script>
 
 {#if sentiments}
@@ -13,10 +24,10 @@
     id={`community-sentiments-${slug}`}
     items={[{ ...sentiments, key: "sentiment" }]}
     title={m.header_community_sentiment()}
-    --height-list="var(--height-sentiments-list)"
+    --height-list={heightList}
   >
     {#snippet item(sentiments)}
-      <SentimentsCard {sentiments} />
+      <SentimentsCard {sentiments} isPartial={hasPartialSentiments} />
     {/snippet}
   </SectionList>
 {/if}
