@@ -118,6 +118,13 @@
             - {rest.episode.title}
           </Spoiler>
         </p>
+      {:else if rest.variant === "credit"}
+        <p class="trakt-card-title ellipsis">
+          {media.title}
+        </p>
+        <p class="trakt-card-subtitle secondary ellipsis">
+          {rest.role}
+        </p>
       {:else}
         <p class="trakt-card-title ellipsis">
           {media.title}

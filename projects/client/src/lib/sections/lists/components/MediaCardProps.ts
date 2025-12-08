@@ -11,7 +11,8 @@ export type MediaItemVariant<T> =
   | { variant?: Nil } & MediaInput<T>
   | { variant: 'activity'; date: Date } & MediaInput<T>
   | { variant: 'next'; progress: number; minutesLeft: number } & MediaInput<T>
-  | { variant: 'start' } & MediaInput<T>;
+  | { variant: 'start' } & MediaInput<T>
+  | { variant: 'credit'; role: string } & MediaInput<T>;
 
 type BaseItemProps<T> = MediaItemVariant<T> & {
   badge?: Snippet;

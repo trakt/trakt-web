@@ -8,6 +8,7 @@
   import type { MediaType } from "$lib/requests/models/MediaType";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
+  import { toTranslatedJob } from "$lib/utils/formatting/string/toTranslatedJob";
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
   import { writable } from "svelte/store";
   import DefaultMediaItem from "./components/DefaultMediaItem.svelte";
@@ -37,6 +38,16 @@
 
   const list = $derived(getPositionList($credits));
   const defaultVariant = $derived(useDefaultCardVariant(type));
+
+  const toCharacter = (character?: string) => {
+    return character || m.translated_value_status_unknown();
+  };
+
+  const toJob = (job?: string) => {
+    if (!job) return m.translated_value_status_unknown();
+
+    return toTranslatedJob(job);
+  };
 </script>
 
 <SectionList
@@ -45,8 +56,16 @@
   {title}
   --height-list={mediaListHeightResolver($defaultVariant)}
 >
-  {#snippet item(media)}
-    <DefaultMediaItem {type} {media} source="credits" />
+  {#snippet item(entry)}
+    <DefaultMediaItem
+      {type}
+      media={entry.media}
+      source="credits"
+      variant="credit"
+      role={entry.type === "cast"
+        ? toCharacter(entry.character)
+        : toJob(entry.job)}
+    />
   {/snippet}
 
   {#snippet dynamicActions()}
