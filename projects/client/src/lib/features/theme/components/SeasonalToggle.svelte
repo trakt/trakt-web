@@ -3,7 +3,7 @@
   import { useTrack } from "$lib/features/analytics/useTrack";
   import { useDiscover } from "$lib/features/discover/useDiscover";
   import { useSeasonalTheme } from "../useSeasonalTheme";
-  import HalloweenToggle from "./_internal/HalloweenToggle.svelte";
+  import HalloweenToggle from "./_internal/halloween/HalloweenToggle.svelte";
 
   const { activeTheme } = useSeasonalTheme();
   const { useSeasonalFilters, setSeasonalFilters } = useDiscover();
