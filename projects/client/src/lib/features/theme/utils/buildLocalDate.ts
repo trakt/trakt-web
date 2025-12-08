@@ -3,7 +3,7 @@ import type { DatePart } from '$lib/models/DatePart.ts';
 export function buildLocalDate(parts: DatePart): Date {
   return new Date(
     parts.year,
-    parts.month,
+    parts.month - 1,
     parts.day,
     parts.hour ?? 0,
     parts.minute ?? 0,

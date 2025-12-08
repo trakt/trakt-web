@@ -7,8 +7,8 @@ export const SEASONAL_THEMES: Record<string, SeasonalThemeConfig> = {
     /**
      * TODO: (@seferturan) add support for year agnostic ranges like
      */
-    start: { year: 2025, month: 9, day: 30, hour: 20, minute: 0, second: 0 },
-    end: { year: 2025, month: 10, day: 2, hour: 23, minute: 59, second: 59 },
+    start: { year: 2025, month: 10, day: 30, hour: 20, minute: 0, second: 0 },
+    end: { year: 2025, month: 11, day: 2, hour: 23, minute: 59, second: 59 },
     /**
      * TODO: (@seferturan) make filtering smarter, do not assume discover route
      */
