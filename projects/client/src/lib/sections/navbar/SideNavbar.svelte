@@ -27,14 +27,16 @@
     </div>
 
     <div class="trakt-navbar-actions-center">
-      {#if $state.actions || $state.seasonalActions}
+      {#if $state.actions}
         {@render $state.actions?.()}
-        {@render $state.seasonalActions?.()}
       {/if}
     </div>
 
     <div class="trakt-navbar-actions-right">
       <RenderFor audience="authenticated">
+        {#if $state.seasonalActions}
+          {@render $state.seasonalActions?.()}
+        {/if}
         <FilterButton isDisabled={!$state.hasFilters} />
       </RenderFor>
       <RenderFor audience="public">
@@ -194,5 +196,11 @@
       padding-bottom: 0;
       pointer-events: none;
     }
+  }
+
+  .trakt-navbar-actions-right {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-s);
   }
 </style>
