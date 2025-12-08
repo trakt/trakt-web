@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import ShareButton from "$lib/components/buttons/share/ShareButton.svelte";
+  import Tooltip from "$lib/components/tooltip/Tooltip.svelte";
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MediaListSummary } from "$lib/requests/models/MediaListSummary";
@@ -65,7 +66,15 @@
     })}
 >
   {#snippet listActions()}
-    <ListSortActions {options} {urlBuilder} current={$current} />
+    <div class="trakt-list-actions">
+      {#if list.description}
+        <Tooltip content={list.description}>
+          <span class="secondary ellipsis">{list.description}</span>
+        </Tooltip>
+      {/if}
+
+      <ListSortActions {options} {urlBuilder} current={$current} />
+    </div>
   {/snippet}
   {#snippet item(media)}
     <PopularListItem type={media.type} media={media.entry} {style}>
@@ -87,3 +96,11 @@
     />
   {/snippet}
 </DrilledMediaList>
+
+<style>
+  .trakt-list-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+</style>
