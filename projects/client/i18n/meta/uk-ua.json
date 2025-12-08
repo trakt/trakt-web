@@ -1974,6 +1974,9 @@
     "button_text_cancel": {
       "default": "Скасувати"
     },
+    "button_label_cancel": {
+      "default": "Скасувати"
+    },
     "button_text_where_to_watch": {
       "default": "Де дивитися"
     },

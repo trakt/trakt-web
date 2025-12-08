@@ -1974,6 +1974,9 @@
     "button_text_cancel": {
       "default": "Cancelar"
     },
+    "button_label_cancel": {
+      "default": "Cancelar"
+    },
     "button_text_where_to_watch": {
       "default": "¿Dónde ver?"
     },

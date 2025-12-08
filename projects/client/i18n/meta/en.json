@@ -4054,8 +4054,7 @@
       "default": "Create",
       "description": "Text for the button that allows users to create a new list, review, rating etc.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "button_text_apply": {
@@ -5313,6 +5312,14 @@
       "default": "Cancel",
       "description": "Text for cancelling an action in confirmation dialogs.",
       "exclude": [
+        "ios"
+      ]
+    },
+    "button_label_cancel": {
+      "default": "Cancel",
+      "description": "Aria-label for the cancel button in confirmation dialogs.",
+      "exclude": [
+        "android",
         "ios"
       ]
     },

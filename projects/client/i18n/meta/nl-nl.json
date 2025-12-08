@@ -1974,6 +1974,9 @@
     "button_text_cancel": {
       "default": "Annuleren"
     },
+    "button_label_cancel": {
+      "default": "Annuleren"
+    },
     "button_text_where_to_watch": {
       "default": "Waar te bekijken"
     },

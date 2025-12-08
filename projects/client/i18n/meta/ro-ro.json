@@ -1974,6 +1974,9 @@
     "button_text_cancel": {
       "default": "Anulează"
     },
+    "button_label_cancel": {
+      "default": "Anulare"
+    },
     "button_text_where_to_watch": {
       "default": "Unde să vezi"
     },
