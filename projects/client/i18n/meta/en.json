@@ -4085,8 +4085,7 @@
       "default": "Create List",
       "description": "Title for a screen that allows users to create a new list.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "page_description_create_list": {
@@ -4111,14 +4110,6 @@
       "exclude": [
         "ios",
         "web"
-      ]
-    },
-    "input_prompt_create_list": {
-      "default": "Enter a name for your list",
-      "description": "Message for the prompt that is shown when a user is creating a new list.",
-      "exclude": [
-        "android",
-        "ios"
       ]
     },
     "list_placeholder_personal_list_empty": {
@@ -5570,16 +5561,14 @@
       "default": "Name",
       "description": "Placeholder text for name input field. This is displayed when users opens a form and sees empty form fields to be filled in.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "input_placeholder_lists_description": {
       "default": "Description (optional)",
       "description": "Placeholder text for optional description input field. This is displayed when users opens a form and sees empty form fields to be filled in.",
       "exclude": [
-        "ios",
-        "web"
+        "ios"
       ]
     },
     "button_text_view_description": {
@@ -6285,6 +6274,30 @@
     "button_label_profile_options": {
       "default": "Profile options",
       "description": "Aria-label for the button that opens a popup menu or drawer for a users profile, where users can change settings and logout.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "validation_text_list_name": {
+      "default": "Name is required",
+      "description": "Validation text shown when the user inputs an invalid list name.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "text_private": {
+      "default": "Private",
+      "description": "Text used to indicate that something is private.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Toggle list privacy",
+      "description": "Aria-label for the button that allows users to toggle the privacy of the list.",
       "exclude": [
         "android",
         "ios"

@@ -1507,9 +1507,6 @@
     "page_title_edit_list": {
       "default": "Lijst bewerken"
     },
-    "input_prompt_create_list": {
-      "default": "Voer een naam in voor je lijst"
-    },
     "list_placeholder_personal_list_empty": {
       "default": "Er staat nog niets in deze lijst."
     },
@@ -2380,6 +2377,15 @@
     },
     "button_label_profile_options": {
       "default": "Profielopties"
+    },
+    "validation_text_list_name": {
+      "default": "Naam is vereist"
+    },
+    "text_private": {
+      "default": "Privé"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Privacy van lijst wijzigen"
     }
   }
 }

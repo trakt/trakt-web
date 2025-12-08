@@ -1507,9 +1507,6 @@
     "page_title_edit_list": {
       "default": "Редактиране на списък"
     },
-    "input_prompt_create_list": {
-      "default": "Въведете име за вашия списък"
-    },
     "list_placeholder_personal_list_empty": {
       "default": "Все още няма нищо в този списък."
     },
@@ -2380,6 +2377,15 @@
     },
     "button_label_profile_options": {
       "default": "Опции на профила"
+    },
+    "validation_text_list_name": {
+      "default": "Името е задължително"
+    },
+    "text_private": {
+      "default": "Частен"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Превключване на поверителността на списъка"
     }
   }
 }

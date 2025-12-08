@@ -4,6 +4,7 @@
   import { navigationTrap } from "$lib/features/navigation/navigationTrap";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
+  import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { onMount, type Snippet } from "svelte";
   import { writable } from "svelte/store";
   import { slide } from "svelte/transition";
@@ -23,6 +24,7 @@
     badge?: Snippet;
     metaInfo?: string;
     onOpened?: () => void;
+    classList?: string;
   } & ChildrenProps;
 
   const {
@@ -35,6 +37,7 @@
     badge,
     metaInfo,
     onOpened,
+    classList = "",
   }: DrawerProps = $props();
 
   const isMobile = useMedia(WellKnownMediaQuery.mobile);
@@ -64,6 +67,7 @@
   transition:slide={{ duration: 150, axis: slideAxis }}
   use:portal
   use:trap
+  use:appendClassList={classList}
   onintrostart={() => isOpening.set(true)}
   onintroend={() => {
     isOpening.set(false);
@@ -93,7 +97,7 @@
     {#if title}
       <div class="trakt-drawer-title-container">
         <div class="trakt-drawer-title">
-          <h1>{title}</h1>
+          <h1 class="ellipsis">{title}</h1>
           {#if metaInfo}
             <p class="title-meta-info bold ellipsis">{metaInfo}</p>
           {/if}
@@ -236,6 +240,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: var(--gap-xs);
 
     &.has-title {
       justify-content: space-between;

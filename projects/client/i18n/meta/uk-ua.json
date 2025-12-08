@@ -1507,9 +1507,6 @@
     "page_title_edit_list": {
       "default": "Редагувати список"
     },
-    "input_prompt_create_list": {
-      "default": "Введіть назву для вашого списку"
-    },
     "list_placeholder_personal_list_empty": {
       "default": "У цьому списку поки що нічого немає."
     },
@@ -2380,6 +2377,15 @@
     },
     "button_label_profile_options": {
       "default": "Опції профілю"
+    },
+    "validation_text_list_name": {
+      "default": "Назва обов'язкова"
+    },
+    "text_private": {
+      "default": "Приватний"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Перемкнути конфіденційність списку"
     }
   }
 }

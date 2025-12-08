@@ -1507,9 +1507,6 @@
     "page_title_edit_list": {
       "default": "Rediger liste"
     },
-    "input_prompt_create_list": {
-      "default": "Indtast et navn til din liste"
-    },
     "list_placeholder_personal_list_empty": {
       "default": "Der er ikke noget i denne liste endnu."
     },
@@ -2380,6 +2377,15 @@
     },
     "button_label_profile_options": {
       "default": "Profilmuligheder"
+    },
+    "validation_text_list_name": {
+      "default": "Navn er påkrævet"
+    },
+    "text_private": {
+      "default": "Privat"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Skift listens privatliv"
     }
   }
 }

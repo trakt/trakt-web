@@ -2,22 +2,34 @@
   import ActionButton from "$lib/components/buttons/ActionButton.svelte";
   import PlusIcon from "$lib/components/icons/PlusIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import { useCreateList } from "./useCreateList";
+  import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { writable } from "svelte/store";
+  import CreateListDrawer from "./CreateListDrawer.svelte";
 
   const { isLoading }: { isLoading: boolean } = $props();
 
-  const { createList, isCreating } = useCreateList();
+  const showCreateList = writable(false);
 
   const commonProps: Omit<ButtonProps, "children"> = $derived({
     label: m.button_label_create_list(),
     color: "default",
     variant: "primary",
     style: "ghost",
-    onclick: createList,
-    disabled: isLoading || $isCreating,
+    onclick: () => showCreateList.set(true),
+    disabled: isLoading,
   });
 </script>
 
 <ActionButton {...commonProps}>
   <PlusIcon />
 </ActionButton>
+
+<RenderFor audience="authenticated" device={["tablet-sm"]}>
+  <ActionButton {...commonProps}>
+    <PlusIcon />
+  </ActionButton>
+</RenderFor>
+
+{#if $showCreateList}
+  <CreateListDrawer onClose={() => showCreateList.set(false)} />
+{/if}
