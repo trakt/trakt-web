@@ -20,10 +20,6 @@
   </div>
 {/if}
 
-{#if $cover.state === "no-cover" || $cover.data?.type === "main"}
-  <div class="trakt-background-cover-image-overlay"></div>
-{/if}
-
 <style lang="scss">
   @use "$style/scss/mixins/index" as *;
 
@@ -89,20 +85,6 @@
         left: -60%;
       }
     }
-  }
-
-  .trakt-background-cover-image-overlay {
-    z-index: var(--layer-background);
-
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background-color: var(--purple-900);
-    mix-blend-mode: var(--mix-blend-mode-cover-overlay);
   }
 
   .trakt-background-cover-image {
