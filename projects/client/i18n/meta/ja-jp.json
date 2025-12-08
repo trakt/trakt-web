@@ -1507,9 +1507,6 @@
     "page_title_edit_list": {
       "default": "リスト編集"
     },
-    "input_prompt_create_list": {
-      "default": "リストの名前を入力"
-    },
     "list_placeholder_personal_list_empty": {
       "default": "このリストにはまだ何もありません。"
     },
@@ -2377,6 +2374,15 @@
     },
     "button_label_profile_options": {
       "default": "プロフィールオプション"
+    },
+    "validation_text_list_name": {
+      "default": "名前は必須です"
+    },
+    "text_private": {
+      "default": "プライベート"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "リストのプライバシーを切り替える"
     }
   }
 }

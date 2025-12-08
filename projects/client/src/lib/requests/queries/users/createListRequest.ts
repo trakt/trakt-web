@@ -1,15 +1,18 @@
 import { api, type ApiParams } from '$lib/requests/api.ts';
 import type { CreateListRequest } from '@trakt/api';
+import type { ListPrivacy } from '../../models/ListPrivacy.ts';
 
 type CreateListRequestParams =
   & {
     userId: string;
+    description?: string;
+    privacy: ListPrivacy;
   }
   & CreateListRequest
   & ApiParams;
 
 export function createListRequest(
-  { userId, name, fetch }: CreateListRequestParams,
+  { userId, name, fetch, description, privacy }: CreateListRequestParams,
 ): Promise<boolean> {
   return api({ fetch })
     .users
@@ -20,6 +23,8 @@ export function createListRequest(
       },
       body: {
         name,
+        description,
+        privacy,
       },
     })
     .then(({ status }) => status === 201);

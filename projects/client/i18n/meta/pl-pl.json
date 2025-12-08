@@ -1507,9 +1507,6 @@
     "page_title_edit_list": {
       "default": "Edytuj listę"
     },
-    "input_prompt_create_list": {
-      "default": "Wprowadź nazwę dla swojej listy"
-    },
     "list_placeholder_personal_list_empty": {
       "default": "W tej liście jeszcze nic nie ma."
     },
@@ -2377,6 +2374,15 @@
     },
     "button_label_profile_options": {
       "default": "Opcje profilu"
+    },
+    "validation_text_list_name": {
+      "default": "Nazwa jest wymagana"
+    },
+    "text_private": {
+      "default": "Prywatny"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Przełącz prywatność listy"
     }
   }
 }

@@ -7,13 +7,14 @@
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
+  import { writable } from "svelte/store";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
   import ViewAllButton from "../components/ViewAllButton.svelte";
   import CreateListAction from "./_internal/CreateListAction.svelte";
+  import CreateListDrawer from "./_internal/CreateListDrawer.svelte";
   import ListsHeader from "./_internal/ListsHeader.svelte";
-  import { useCreateList } from "./_internal/useCreateList.ts";
   import type { PersonalListType } from "./models/PersonalListType.ts";
   import { usePersonalListsSummary } from "./usePersonalListsSummary.ts";
   import UserList from "./UserList.svelte";
@@ -58,13 +59,14 @@
     }
   });
 
-  const { createList, isCreating } = useCreateList();
+  const showCreateList = writable(false);
+
   const cta: Cta = $derived({
     type: "personal-list",
     mediaType: mode === "media" ? undefined : mode,
     action: {
-      onClick: createList,
-      disabled: $isCreating,
+      onClick: () => showCreateList.set(true),
+      disabled: false,
     },
   });
 </script>
@@ -135,6 +137,10 @@
       {/snippet}
     </SectionList>
   {/if}
+{/if}
+
+{#if $showCreateList}
+  <CreateListDrawer onClose={() => showCreateList.set(false)} />
 {/if}
 
 <style>

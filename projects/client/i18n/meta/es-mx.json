@@ -1507,9 +1507,6 @@
     "page_title_edit_list": {
       "default": "Editar Lista"
     },
-    "input_prompt_create_list": {
-      "default": "Ingresa un nombre para tu lista"
-    },
     "list_placeholder_personal_list_empty": {
       "default": "¿No hay nada en esta lista, chavo?"
     },
@@ -2377,6 +2374,15 @@
     },
     "button_label_profile_options": {
       "default": "Opciones del perfil"
+    },
+    "validation_text_list_name": {
+      "default": "Se requiere nombre"
+    },
+    "text_private": {
+      "default": "Privado"
+    },
+    "switch_label_toggle_list_privacy": {
+      "default": "Cambiar privacidad de la lista"
     }
   }
 }
