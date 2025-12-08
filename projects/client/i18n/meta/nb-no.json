@@ -1974,6 +1974,9 @@
     "button_text_cancel": {
       "default": "Avbryt"
     },
+    "button_label_cancel": {
+      "default": "Avbryt"
+    },
     "button_text_where_to_watch": {
       "default": "Hvor du kan se"
     },

@@ -1974,6 +1974,9 @@
     "button_text_cancel": {
       "default": "キャンセル"
     },
+    "button_label_cancel": {
+      "default": "キャンセル"
+    },
     "button_text_where_to_watch": {
       "default": "視聴場所"
     },

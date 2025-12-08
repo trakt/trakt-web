@@ -62,6 +62,7 @@ module.exports = {
         'favorite',
         'filter',
         'footer',
+        'form',
         'formatter',
         'frame',
         'gestures',

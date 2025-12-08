@@ -1974,6 +1974,9 @@
     "button_text_cancel": {
       "default": "Отказ"
     },
+    "button_label_cancel": {
+      "default": "Отказ"
+    },
     "button_text_where_to_watch": {
       "default": "Къде да гледате"
     },
