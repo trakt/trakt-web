@@ -3,7 +3,7 @@
   import { PersistQueryClientProvider } from "@tanstack/svelte-query-persist-client";
   import { createPersister } from "./_internal/createPersister";
 
-  const BUSTER_VERSION = "v1";
+  const BUSTER_VERSION = "v2";
 
   const { children, client }: ChildrenProps & { client: QueryClient } =
     $props();
