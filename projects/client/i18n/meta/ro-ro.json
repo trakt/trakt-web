@@ -2386,6 +2386,17 @@
     },
     "switch_label_toggle_list_privacy": {
       "default": "Comutați confidențialitatea listei"
+    },
+    "list_title_from_my_history": {
+      "default": "Din Istoricul Meu"
+    },
+    "list_placeholder_from_my_history": {
+      "default": "Nu ai văzut încă nimic cu {name}.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

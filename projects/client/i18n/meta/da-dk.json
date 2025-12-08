@@ -2386,6 +2386,17 @@
     },
     "switch_label_toggle_list_privacy": {
       "default": "Skift listens privatliv"
+    },
+    "list_title_from_my_history": {
+      "default": "Fra Min Historik"
+    },
+    "list_placeholder_from_my_history": {
+      "default": "Du har ikke set {name} i noget endnu.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -2386,6 +2386,17 @@
     },
     "switch_label_toggle_list_privacy": {
       "default": "Cambiar privacidad de la lista"
+    },
+    "list_title_from_my_history": {
+      "default": "De Mi Historial"
+    },
+    "list_placeholder_from_my_history": {
+      "default": "Aún no has visto nada de {name}.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

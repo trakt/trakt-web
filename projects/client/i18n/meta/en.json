@@ -6302,6 +6302,27 @@
         "android",
         "ios"
       ]
+    },
+    "list_title_from_my_history": {
+      "default": "From My History",
+      "description": "Title for lists containing movies or shows a user has seen a person in. This title should be as short and concise as possible.",
+      "exclude": [
+        "android",
+        "ios"
+      ]
+    },
+    "list_placeholder_from_my_history": {
+      "default": "You haven't seen {name} in anything yet.",
+      "description": "Placeholder text shown when there are no movies or shows in the user's watchlist that a person has been seen in.",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "exclude": [
+        "android",
+        "ios"
+      ]
     }
   }
 }

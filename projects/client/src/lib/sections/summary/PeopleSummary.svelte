@@ -3,6 +3,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import CreditsList from "../lists/CreditsList.svelte";
+  import CreditsHistoryList from "../lists/history/CreditsHistoryList.svelte";
   import PeopleSummary from "./components/people/PeopleSummary.svelte";
   import PeopleSummaryV2 from "./components/people/v2/PeopleSummary.svelte";
 
@@ -24,4 +25,5 @@
 <RenderFor audience="authenticated">
   <CreditsList title={m.list_title_movie_credits()} type="movie" {person} />
   <CreditsList title={m.list_title_show_credits()} type="show" {person} />
+  <CreditsHistoryList {person} />
 </RenderFor>
