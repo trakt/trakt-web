@@ -3,13 +3,22 @@
   import type { Sentiments } from "$lib/requests/models/Sentiments";
   import SentimentsList from "./SentimentsList.svelte";
 
-  const { sentiments }: { sentiments: Sentiments } = $props();
+  const {
+    sentiments,
+    isPartial,
+  }: { sentiments: Sentiments; isPartial: boolean } = $props();
+
+  const heightCard = $derived(
+    isPartial
+      ? "calc(0.5 * var(--height-sentiments-card))"
+      : "var(--height-sentiments-card)",
+  );
 </script>
 
 <div class="trakt-sentiments-card">
   <Card
     --width-card="var(--width-sentiments-card)"
-    --height-card="var(--height-sentiments-card)"
+    --height-card={heightCard}
     variant="transparent"
   >
     <div class="trakt-sentiments-container">

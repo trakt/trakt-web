@@ -26,17 +26,19 @@
 
 <div class="trakt-sentiment-body">
   {#each mappedSentiments as { sentiment, sentiments, backgroundColor }}
-    <div
-      class="trakt-sentiment-container"
-      style="--sentiment-background-color: {backgroundColor}"
-    >
-      <SentimentIcon {sentiment} />
-      <ul>
-        {#each sentiments as sentiment}
-          <li><p>{sentiment}</p></li>
-        {/each}
-      </ul>
-    </div>
+    {#if sentiments.length > 0}
+      <div
+        class="trakt-sentiment-container"
+        style="--sentiment-background-color: {backgroundColor}"
+      >
+        <SentimentIcon {sentiment} />
+        <ul>
+          {#each sentiments as sentiment}
+            <li><p>{sentiment}</p></li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
   {/each}
 </div>
 
