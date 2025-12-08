@@ -1,8 +1,10 @@
 import { mapToMovieEntry } from '$lib/requests/_internal/mapToMovieEntry.ts';
 import { mapToShowEntry } from '$lib/requests/_internal/mapToShowEntry.ts';
 import type { CrewPosition } from '$lib/requests/models/CrewPosition.ts';
-import type { MediaCredits } from '$lib/requests/models/MediaCredits.ts';
-import type { MediaEntry } from '$lib/requests/models/MediaEntry.ts';
+import type {
+  MediaCredit,
+  MediaCredits,
+} from '$lib/requests/models/MediaCredits.ts';
 import type {
   MovieResponse,
   PeopleMovieCreditsResponse,
@@ -33,10 +35,13 @@ function mapToMediaEntry(entryResponse: EntryResponse) {
   return mapToShowEntry(entryResponse.show);
 }
 
+type CrewResponse = NonNullable<MediaCreditsResponse['crew']>;
+type CrewEntry = CrewResponse[string][number];
+
 export function mapToMediaCredits(
   response: MediaCreditsResponse,
 ): MediaCredits {
-  const credits = new Map<CrewPosition, MediaEntry[]>();
+  const credits = new Map<CrewPosition, MediaCredit[]>();
 
   (response.cast ?? []).forEach((entry) => {
     const character = entry.character.toLowerCase();
@@ -48,12 +53,28 @@ export function mapToMediaCredits(
 
     const key = wellKnownRole ?? 'acting';
     const entries = credits.get(key) ?? credits.set(key, []).get(key);
-    entries?.push(mapToMediaEntry(entry));
+    const media = mapToMediaEntry(entry);
+
+    entries?.push({
+      media,
+      type: 'cast',
+      character: entry.character,
+      key: media.key,
+    });
   });
 
-  const crewResponse = Object.entries<EntryResponse[]>(response.crew ?? {});
+  const crewResponse = Object.entries(response.crew ?? {});
   crewResponse.forEach(([position, entries]) => {
-    const mediaEntries = entries.map(mapToMediaEntry);
+    const mediaEntries = entries.map((entry: CrewEntry) => {
+      const media = mapToMediaEntry(entry);
+      return {
+        media,
+        type: 'crew',
+        job: entry.job,
+        key: media.key,
+      };
+    });
+
     const existingEntries = credits.get(position as CrewPosition);
     credits.set(
       position as CrewPosition,

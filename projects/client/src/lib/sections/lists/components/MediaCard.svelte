@@ -138,6 +138,18 @@
   </PortraitCard>
 {/if}
 
+{#if rest.variant === "credit"}
+  <PortraitCard>
+    {@render content(media.poster.url.thumb)}
+    <CardFooter {action}>
+      {@render tag?.()}
+      <p class="trakt-card-subtitle ellipsis">
+        {rest.role}
+      </p>
+    </CardFooter>
+  </PortraitCard>
+{/if}
+
 <style>
   .trakt-card-start-footer {
     :global(.trakt-media-icon-tag),
