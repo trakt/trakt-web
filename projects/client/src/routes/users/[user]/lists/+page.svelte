@@ -53,16 +53,18 @@
   <PersonalLists slug={$user.slug} type="collaboration" mode={$mode} />
 
   <RenderFor audience="director">
-    <div class="trakt-lists-preview">
-      <ListsHeader title="Smart lists" />
+    <RenderFor audience="vip">
+      <div class="trakt-lists-preview">
+        <ListsHeader title="Smart lists" />
 
-      {#if $mode === "media" || !mode}
-        <SmartListRenderer type="movie" />
-        <SmartListRenderer type="show" />
-      {:else}
-        <SmartListRenderer type={$mode} />
-      {/if}
-    </div>
+        {#if $mode === "media" || !mode}
+          <SmartListRenderer type="movie" />
+          <SmartListRenderer type="show" />
+        {:else}
+          <SmartListRenderer type={$mode} />
+        {/if}
+      </div>
+    </RenderFor>
   </RenderFor>
 </TraktPage>
 
