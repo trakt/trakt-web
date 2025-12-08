@@ -1,6 +1,5 @@
-import { useQuery } from '$lib/features/query/useQuery.ts';
+import type { InfiniteQuery } from '$lib/features/query/models/InfiniteQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
-import type { Paginatable } from '$lib/requests/models/Paginatable.ts';
 import {
   type AnticipatedMovie,
   movieAnticipatedQuery,
@@ -17,8 +16,8 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
+import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { shuffle } from '$lib/utils/array/shuffle.ts';
-import { type CreateQueryOptions } from '@tanstack/svelte-query';
 import { derived } from 'svelte/store';
 import type { ListCta, MediaCta } from '../models/Cta.ts';
 
@@ -28,8 +27,6 @@ type PreviewItem =
   | AnticipatedShow
   | AnticipatedMovie;
 
-type PaginatablePreviewItem = Paginatable<PreviewItem>;
-
 function mediaTypeToQuery(type: MediaType, isFuture?: boolean) {
   const params = {
     limit: 10,
@@ -38,24 +35,24 @@ function mediaTypeToQuery(type: MediaType, isFuture?: boolean) {
   if (isFuture) {
     switch (type) {
       case 'movie':
-        return movieAnticipatedQuery(params) as CreateQueryOptions<
-          PaginatablePreviewItem
+        return movieAnticipatedQuery(params) as InfiniteQuery<
+          PreviewItem
         >;
       case 'show':
-        return showAnticipatedQuery(params) as CreateQueryOptions<
-          PaginatablePreviewItem
+        return showAnticipatedQuery(params) as InfiniteQuery<
+          PreviewItem
         >;
     }
   }
 
   switch (type) {
     case 'movie':
-      return movieTrendingQuery(params) as CreateQueryOptions<
-        PaginatablePreviewItem
+      return movieTrendingQuery(params) as InfiniteQuery<
+        PreviewItem
       >;
     case 'show':
-      return showTrendingQuery(params) as CreateQueryOptions<
-        PaginatablePreviewItem
+      return showTrendingQuery(params) as InfiniteQuery<
+        PreviewItem
       >;
   }
 }
@@ -78,29 +75,9 @@ function ctaToQuery(cta: MediaCta | ListCta) {
 export function usePlaceholderCover(
   cta: MediaCta | ListCta,
 ) {
-  const query = useQuery(ctaToQuery(cta));
-
-  const items = derived(
-    query,
-    ($query) => {
-      if (!$query.data || $query.data.entries.length === 0) {
-        return null;
-      }
-
-      return $query.data.entries;
-    },
-  );
+  const { list } = usePaginatedListQuery(ctaToQuery(cta));
 
   return {
-    cover: derived(
-      items,
-      ($items) => {
-        if (!$items) {
-          return null;
-        }
-
-        return shuffle($items).at(0)?.cover;
-      },
-    ),
+    cover: derived(list, ($list) => shuffle($list).at(0)?.cover),
   };
 }
