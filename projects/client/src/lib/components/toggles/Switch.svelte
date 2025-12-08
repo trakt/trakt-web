@@ -90,10 +90,10 @@
   }
 
   .trakt-switch {
-    --button-width: var(--ni-64);
+    --button-width: var(--custom-width, var(--ni-64));
     --button-height: var(--ni-28);
 
-    --text-width: var(--ni-24);
+    --text-width: calc(var(--button-width) - var(--ni-40));
     --text-offset: var(--ni-10);
 
     --tick-size: var(--ni-20);
