@@ -1,5 +1,4 @@
 import { createUnderlay } from '$lib/features/portal/_internal/createUnderlay.ts';
-import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { onMount } from 'svelte';
 
 type DrawerPortalProps = {
@@ -14,18 +13,15 @@ export function useDrawerPortal({ hasAutoClose, onClose }: DrawerPortalProps) {
         return;
       }
 
-      const instance = GlobalEventBus.getInstance();
       const newUnderlay = createUnderlay();
 
       document.body.appendChild(newUnderlay);
       document.body.appendChild(element);
 
       newUnderlay.addEventListener('click', onClose);
-      const destroyScroll = instance.register('scroll', onClose);
 
       return () => {
         newUnderlay.removeEventListener('click', onClose);
-        destroyScroll();
         newUnderlay.remove();
         element.remove();
       };
