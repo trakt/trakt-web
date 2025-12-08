@@ -40,11 +40,6 @@ export const ShowSiloSeasonsMappedMock: Season[] = [
     'episodes': {
       'count': 1,
     },
-    'poster': {
-      'url': {
-        'medium': '/placeholders/portrait_placeholder.png' as HttpsUrl,
-        'thumb': '/placeholders/portrait_placeholder.png' as HttpsUrl,
-      },
-    },
+    'poster': undefined,
   },
 ];

@@ -3,6 +3,7 @@ import { api, type ApiParams } from '$lib/requests/api.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import type { SeasonsResponse } from '@trakt/api';
 import { z } from 'zod';
+import { findDefined } from '../../../utils/string/findDefined.ts';
 import { mapToPoster } from '../../_internal/mapToPoster.ts';
 import { type Season, SeasonSchema } from '../../models/Season.ts';
 
@@ -24,15 +25,21 @@ const showSeasonsRequest = (
       },
     });
 
-const mapToSeason = (item: SeasonsResponse[0]): Season => ({
-  id: item.ids.trakt,
-  key: `season-${item.ids.trakt}`,
-  number: item.number,
-  episodes: {
-    count: item.episode_count ?? 0,
-  },
-  poster: mapToPoster(item.images),
-});
+const mapToSeason = (item: SeasonsResponse[0]): Season => {
+  const poster = findDefined(
+    ...(item.images?.poster ?? []),
+  );
+
+  return {
+    id: item.ids.trakt,
+    key: `season-${item.ids.trakt}`,
+    number: item.number,
+    episodes: {
+      count: item.episode_count ?? 0,
+    },
+    poster: poster ? mapToPoster(item.images) : undefined,
+  };
+};
 
 export const showSeasonsQuery = defineQuery({
   key: 'showSeasons',

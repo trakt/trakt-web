@@ -5,16 +5,22 @@
   import PortraitCard from "$lib/components/media/card/PortraitCard.svelte";
   import { lineClamp } from "$lib/components/text/lineClamp";
   import type { Season } from "$lib/requests/models/Season";
+  import type { ShowEntry } from "$lib/requests/models/ShowEntry";
   import { seasonLabel } from "$lib/utils/intl/seasonLabel";
 
   const SCROLL_OFFSET = 8;
 
   const {
     season,
+    show,
     urlBuilder,
     isCurrentSeason,
-  }: { season: Season; urlBuilder: () => string; isCurrentSeason: boolean } =
-    $props();
+  }: {
+    season: Season;
+    show: ShowEntry;
+    urlBuilder: () => string;
+    isCurrentSeason: boolean;
+  } = $props();
 
   const scrollToItem = (element: HTMLElement) => {
     if (!isCurrentSeason) return;
@@ -51,7 +57,7 @@
     <Link focusable={false} href={urlBuilder()} noscroll>
       <CardCover
         title={seasonLabel(season.number)}
-        src={season.poster.url.medium}
+        src={season.poster?.url.medium ?? show.poster.url.medium}
         alt={seasonLabel(season.number)}
       />
     </Link>
