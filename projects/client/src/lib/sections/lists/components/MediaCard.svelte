@@ -142,19 +142,34 @@
   <PortraitCard>
     {@render content(media.poster.url.thumb)}
     <CardFooter {action}>
-      {@render tag?.()}
-      <p class="trakt-card-subtitle ellipsis">
-        {rest.role}
-      </p>
+      <div class="trakt-card-credit-footer">
+        {@render tag?.()}
+        <p class="trakt-card-subtitle ellipsis">
+          {rest.role}
+        </p>
+      </div>
     </CardFooter>
   </PortraitCard>
 {/if}
 
-<style>
+<style lang="scss">
+  @use "$style/scss/mixins/index" as *;
+
   .trakt-card-start-footer {
     :global(.trakt-media-icon-tag),
     :global(.trakt-text-tag) {
       color: var(--color-text-secondary);
+    }
+  }
+
+  .trakt-card-credit-footer {
+    transform: scale(0.85);
+    transform-origin: bottom left;
+
+    transition: transform var(--transition-increment) ease-in-out;
+
+    @include for-mobile {
+      transform: scale(0.9);
     }
   }
 </style>
