@@ -9,7 +9,7 @@
 
   const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
 
-  const isImagePending = $derived(writable(!isImageComplete(src)));
+  const isImagePending = writable(!isImageComplete(src));
   const id = $derived(checksum(`${src}-${title}`));
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
@@ -40,7 +40,7 @@
       animate={false}
       {src}
       {alt}
-      onload={() => ($isImagePending = false)}
+      onload={() => isImagePending.set(false)}
       aria-labelledby={id}
     />
     {#if overlaySrc && !PLACEHOLDERS.includes(overlaySrc)}
@@ -49,7 +49,7 @@
         animate={false}
         src={overlaySrc}
         {alt}
-        onload={() => ($isImagePending = false)}
+        onload={() => isImagePending.set(false)}
         aria-labelledby={id}
       />
     {/if}
