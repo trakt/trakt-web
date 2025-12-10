@@ -6,6 +6,7 @@ const POSITION_MAP = {
   acting: m.translated_value_position_acting,
   self: m.translated_value_position_self,
   narrator: m.translated_value_position_narrator,
+  unknown: m.translated_value_status_unknown,
   production: m.translated_value_position_production,
   art: m.translated_value_position_art,
   crew: m.translated_value_position_crew,
