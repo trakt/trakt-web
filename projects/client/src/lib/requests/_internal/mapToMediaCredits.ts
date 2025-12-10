@@ -22,9 +22,18 @@ type EntryResponse = {
   show: ShowResponse;
 };
 
-const WELL_KNOWN_ROLES: Record<string, string[]> = {
-  self: ['self (', 'self -'],
-  narrator: ['narrator ('],
+const WELL_KNOWN_ROLES: Record<string, (value: string) => boolean> = {
+  self: (value: string) => {
+    const patterns = ['self (', 'self -'];
+    return patterns.some((p) => value.startsWith(p));
+  },
+  narrator: (value: string) => {
+    const patterns = ['narrator ('];
+    return patterns.some((p) => value.startsWith(p));
+  },
+  unknown: (value: string) => {
+    return value.trim() === '';
+  },
 };
 
 function mapToMediaEntry(entryResponse: EntryResponse) {
@@ -47,9 +56,7 @@ export function mapToMediaCredits(
     const character = entry.character.toLowerCase();
 
     const wellKnownRole = Object.entries(WELL_KNOWN_ROLES)
-      .find(([role, patterns]) =>
-        character === role || patterns.some((p) => character.startsWith(p))
-      )?.[0];
+      .find(([role, isMatch]) => character === role || isMatch(character))?.[0];
 
     const key = wellKnownRole ?? 'acting';
     const entries = credits.get(key) ?? credits.set(key, []).get(key);
