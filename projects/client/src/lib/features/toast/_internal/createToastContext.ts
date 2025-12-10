@@ -1,5 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { writable } from 'svelte/store';
 import type { ToastContext } from './ToastContext.ts';
 
 export const TOAST_CONTEXT = Symbol('toast');
@@ -9,10 +9,14 @@ export function createToastContext() {
     TOAST_CONTEXT,
     getContext<ToastContext>(TOAST_CONTEXT) ??
       {
-        nowPlaying: writable(null),
-        remainingMinutes: writable(0),
-        progress: writable(0),
-        lastWatched: writable(null),
+        nowPlaying: new BehaviorSubject<
+          import('$lib/requests/models/NowPlayingItem.ts').NowPlayingItem | null
+        >(null),
+        remainingMinutes: new BehaviorSubject(0),
+        progress: new BehaviorSubject(0),
+        lastWatched: new BehaviorSubject<
+          import('../models/LastWatchedItem.ts').LastWatchedItem | null
+        >(null),
       },
   );
 

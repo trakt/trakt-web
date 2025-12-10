@@ -5,7 +5,7 @@ import {
 } from '$lib/sections/media-actions/remove-from-history/useRemoveFromHistory.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { renderStore } from '$test/beds/store/renderStore.ts';
-import { get } from 'svelte/store';
+// get removed - use .value or firstValueFrom
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 
 vi.mock('$lib/stores/useInvalidator.ts');
@@ -30,7 +30,7 @@ describe('useRemoveFromHistory', () => {
         useRemoveFromHistory(props)
       );
 
-      expect(get(isRemoving)).toBe(false);
+      expect(isRemoving.value).toBe(false);
     });
 
     it('should be marking as removing when removing', async () => {
@@ -39,7 +39,7 @@ describe('useRemoveFromHistory', () => {
       );
 
       removeFromHistory();
-      expect(get(isRemoving)).toBe(true);
+      expect(isRemoving.value).toBe(true);
     });
 
     it('should call invalidate after removing', async () => {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { PLACEHOLDERS } from "$lib/utils/constants";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import type { ImageProps } from "./ImageProps";
   import { resolveEnvironmentUri } from "./resolveEnvironmentUri";
 
@@ -16,8 +16,8 @@
     ...rest
   }: ImageProps = $props();
 
-  const response = $derived(writable({ uri: src }));
-  const isImageLoaded = $derived(writable(false));
+  const response = $derived(new BehaviorSubject({ uri: src }));
+  const isImageLoaded = $derived(new BehaviorSubject(false));
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
 </script>
@@ -31,12 +31,12 @@
   src={$response.uri}
   {alt}
   onerror={(ev) => {
-    resolveEnvironmentUri(src).then(response.set);
+    resolveEnvironmentUri(src).then((uri) => response.next(uri));
     _onerror?.(ev);
   }}
   onload={function (ev) {
     setTimeout(() => {
-      isImageLoaded.set(true);
+      isImageLoaded.next(true);
     }, 100);
     _onload?.(ev);
   }}

@@ -3,7 +3,7 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import * as m from "$lib/features/i18n/messages";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
   const {
     children,
@@ -14,14 +14,14 @@
     metaInfo?: string;
   } & ChildrenProps = $props();
 
-  const isOpen = writable(false);
-  const onClose = () => isOpen.set(false);
+  const isOpen = new BehaviorSubject(false);
+  const onClose = () => isOpen.next(false);
 </script>
 
 <div class="trakt-media-actions-button" class:is-opened={$isOpen}>
   <ActionButton
     label={m.button_label_popup_menu({ title })}
-    onclick={() => isOpen.set(!$isOpen)}
+    onclick={() => isOpen.next(!$isOpen)}
     style="ghost"
   >
     <MoreIcon />

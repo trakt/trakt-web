@@ -1,10 +1,10 @@
 import type { SearchMode } from '$lib/requests/queries/search/models/SearchMode.ts';
-import type { Writable } from 'svelte/store';
+import type { BehaviorSubject } from 'rxjs';
 
 export type SearchContext = {
-  mode: Writable<SearchMode>;
-  isSearching: Writable<boolean>;
+  mode: BehaviorSubject<SearchMode>;
+  isSearching: BehaviorSubject<boolean>;
   pathName: string;
-  query: Writable<string>;
+  query: BehaviorSubject<string>;
   config: TypesenseConfig;
 };

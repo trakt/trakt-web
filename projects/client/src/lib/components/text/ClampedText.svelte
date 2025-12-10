@@ -3,7 +3,7 @@
   import { MoreButtonIntlProvider } from "$lib/components/buttons/more/MoreButtonIntlProvider";
   import { lineClamp } from "$lib/components/text/lineClamp";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
   type LineClampProps = {
     label: string;
@@ -12,8 +12,8 @@
 
   const { children, label, classList = "" }: LineClampProps = $props();
 
-  const isClamped = writable(false);
-  const lines = writable(3);
+  const isClamped = new BehaviorSubject(false);
+  const lines = new BehaviorSubject(3);
   const isExpanded = $derived($lines === 1337);
 </script>
 
@@ -31,8 +31,8 @@
       i18n={MoreButtonIntlProvider}
       {label}
       count={undefined}
-      onCollapse={() => lines.set(3)}
-      onExpand={() => lines.set(1337)}
+      onCollapse={() => lines.next(3)}
+      onExpand={() => lines.next(1337)}
     />
   {/if}
 </div>

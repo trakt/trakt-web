@@ -7,7 +7,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import LoadingIndicator from "../../drilldown/_internal/LoadingIndicator.svelte";
   import { toCountryFlag } from "./toCountryFlag";
   import { useAllStreamOn } from "./useAllStreamOn";
@@ -16,8 +16,8 @@
   const { ...target }: MetaInfoProps = $props();
 
   const { list, isLoading } = $derived(useAllStreamOn(target));
-  const isOpen = writable(false);
-  const onClose = () => isOpen.set(false);
+  const isOpen = new BehaviorSubject(false);
+  const onClose = () => isOpen.next(false);
 
   const { language } = getLanguageAndRegion();
 
@@ -33,7 +33,7 @@
 
 <ActionButton
   label={m.button_label_view_all_where_to_watch()}
-  onclick={() => isOpen.set(!$isOpen)}
+  onclick={() => isOpen.next(!$isOpen)}
   style="ghost"
 >
   <CaretRightIcon />

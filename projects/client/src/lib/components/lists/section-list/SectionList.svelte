@@ -6,7 +6,7 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { onMount, type Snippet } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import "../_internal/list.css";
   import ListHeader from "../_internal/ListHeader.svelte";
   import { useScrollHistoryAction } from "../_internal/useScrollHistoryAction";
@@ -46,14 +46,14 @@
   const isHeaderVisible = $derived(Boolean(title));
 
   const { navigation } = useNavigation();
-  const isVisible = writable($navigation === "dpad");
-  const isMounted = writable(false);
+  const isVisible = new BehaviorSubject($navigation === "dpad");
+  const isMounted = new BehaviorSubject(false);
   const { isCollapsed, toggle } = $derived(useCollapsedList(id));
 
   const { scrollHistory } = useScrollHistoryAction("horizontal");
 
   onMount(() => {
-    isMounted.set(true);
+    isMounted.next(true);
   });
 </script>
 
@@ -85,7 +85,7 @@
 {/snippet}
 
 <section
-  use:whenInViewport={() => isVisible.set(true)}
+  use:whenInViewport={() => isVisible.next(true)}
   class="section-list-container"
   class:section-list-container-collapsed={$isCollapsed}
   class:section-list-container-mounted={$isMounted}

@@ -8,9 +8,9 @@
   import Drawer from "$lib/components/drawer/Drawer.svelte";
   import MoreIcon from "$lib/components/icons/MoreIcon.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
-  const isDrawerOpen = writable(false);
+  const isDrawerOpen = new BehaviorSubject(false);
 </script>
 
 {#snippet content()}
@@ -21,14 +21,14 @@
 <RenderFor audience="authenticated" device={["mobile", "tablet-sm"]}>
   <ActionButton
     label={m.button_label_profile_options()}
-    onclick={() => isDrawerOpen.set(true)}
+    onclick={() => isDrawerOpen.next(true)}
     style="ghost"
   >
     <MoreIcon size="normal" />
   </ActionButton>
 
   {#if $isDrawerOpen}
-    <Drawer onClose={() => isDrawerOpen.set(false)} size="auto">
+    <Drawer onClose={() => isDrawerOpen.next(false)} size="auto">
       <div class="trakt-profile-options">
         {@render content()}
       </div>

@@ -10,7 +10,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MarkAsWatchedAt } from "$lib/models/MarkAsWatchedAt";
   import { onDestroy } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,
@@ -35,9 +35,9 @@
 
   const confirmedAction = writable<MarkAsWatchedAt | null>(null);
 
-  const isDestroyed = writable(false);
+  const isDestroyed = new BehaviorSubject(false);
   onDestroy(() => {
-    isDestroyed.set(true);
+    isDestroyed.next(true);
   });
 
   const handler = async (watchedAt: MarkAsWatchedAt) => {
@@ -46,7 +46,7 @@
       title,
       target,
       onConfirm: async () => {
-        confirmedAction.set(watchedAt);
+        confirmedAction.next(watchedAt);
         await markAsWatched(watchedAt);
 
         if (!$isDestroyed) {
@@ -66,7 +66,7 @@
 
   const metaInfo = $derived(toMarkAsWatchedMetaInfo(target));
 
-  const showDateTimePicker = writable(false);
+  const showDateTimePicker = new BehaviorSubject(false);
 </script>
 
 <Drawer {onClose} {title} {metaInfo}>
@@ -98,7 +98,7 @@
     </DropdownItem>
 
     <DropdownItem
-      onclick={() => showDateTimePicker.set(true)}
+      onclick={() => showDateTimePicker.next(true)}
       label={m.button_label_mark_as_watched_other_date()}
       {...commonProps}
     >
@@ -128,10 +128,10 @@
 {#if $showDateTimePicker}
   <DateTimePickerDialog
     buttonText={m.button_text_mark_as_watched()}
-    onCancel={() => showDateTimePicker.set(false)}
+    onCancel={() => showDateTimePicker.next(false)}
     onConfirm={(date) => {
       handler(date);
-      showDateTimePicker.set(false);
+      showDateTimePicker.next(false);
     }}
   />
 {/if}

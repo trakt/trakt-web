@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { derived, get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
@@ -15,7 +15,9 @@ export const STORED_FILTERS_KEY = 'trakt-global-filters' as const;
 
 export type StoredFilter = Record<string, ParameterType>;
 
-const storedFilters = writable<StoredFilter | null>(getDefaultFilters());
+const storedFilters = new BehaviorSubject<StoredFilter | null>(
+  getDefaultFilters(),
+);
 
 export function useStoredFilters() {
   const { search } = useParameters();
@@ -35,17 +37,20 @@ export function useStoredFilters() {
   const saveFilters = () => {
     track({ action: 'save' });
 
-    const searchParams = get(search);
+    let searchParams: URLSearchParams;
+    const sub = search.subscribe((v) => searchParams = v);
+    sub.unsubscribe();
+
     const filtersObject: StoredFilter = {};
 
     processFilterParams(
-      searchParams.entries(),
+      searchParams!.entries(),
       (key, value) => {
         filtersObject[key] = value;
       },
     );
 
-    storedFilters.set(filtersObject);
+    storedFilters.next(filtersObject);
     safeLocalStorage.setItem(STORED_FILTERS_KEY, JSON.stringify(filtersObject));
   };
 
@@ -77,6 +82,6 @@ export function useStoredFilters() {
     saveFilters,
     restoreFilters,
     resetFilters,
-    storedFilters: derived(storedFilters, ($storedFilters) => $storedFilters),
+    storedFilters: storedFilters.asObservable(),
   };
 }

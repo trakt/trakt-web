@@ -4,7 +4,7 @@
   import { useFilter } from "$lib/features/filters/useFilter";
   import * as m from "$lib/features/i18n/messages.ts";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import FilterSidebar from "./FilterSidebar.svelte";
 
   const { isDisabled }: { isDisabled: boolean } = $props();
@@ -15,8 +15,8 @@
     $hasActiveFilter && !isDisabled ? "filtered" : "unfiltered",
   );
 
-  const isSidebarOpen = writable(false);
-  const onClose = () => isSidebarOpen.set(false);
+  const isSidebarOpen = new BehaviorSubject(false);
+  const onClose = () => isSidebarOpen.next(false);
 </script>
 
 <div class="trakt-filter-button" class:has-filter-support={!isDisabled}>
@@ -26,7 +26,7 @@
     disabled={isDisabled}
     navigationType={DpadNavigationType.Item}
     onclick={() => {
-      isSidebarOpen.set(true);
+      isSidebarOpen.next(true);
     }}
     --color-background-custom="transparent"
     --color-foreground-custom="var(--color-foreground)"

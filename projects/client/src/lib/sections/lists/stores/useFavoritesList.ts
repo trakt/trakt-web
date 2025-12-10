@@ -4,7 +4,8 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { movieFavoritesQuery } from '$lib/requests/queries/movies/movieFavoritesQuery.ts';
 import { showFavoritesQuery } from '$lib/requests/queries/shows/showFavoritesQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { combineLatest, map } from 'rxjs';
 
 type UseFavoritesProps = {
   type?: MediaType;
@@ -31,18 +32,19 @@ function typeToQueries(
 
 export function useFavoritesList({ type, slug, filter }: UseFavoritesProps) {
   const queries = typeToQueries({ type, slug, filter })
-    .map((query) => useQuery(query));
+    .map((query) => toObservable(useQuery(query)));
 
   return {
-    list: derived(queries, ($queries) => {
-      const favorites = $queries.flatMap((query) => query.data ?? []);
-      return type !== undefined
-        ? favorites.toSorted((a, b) => b.rank - a.rank)
-        : favorites;
-    }),
-    isLoading: derived(
-      queries,
-      ($queries) => $queries.some(toLoadingState),
+    list: combineLatest(queries).pipe(
+      map((qs) => {
+        const favorites = qs.flatMap((query) => query.data ?? []);
+        return type !== undefined
+          ? favorites.toSorted((a, b) => b.rank - a.rank)
+          : favorites;
+      }),
+    ),
+    isLoading: combineLatest(queries).pipe(
+      map((qs) => qs.some(toLoadingState)),
     ),
   };
 }

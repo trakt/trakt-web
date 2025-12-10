@@ -4,7 +4,8 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest.ts';
 import { removeFromFavoritesRequest } from '$lib/requests/sync/removeFromFavoritesRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { derived, writable } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { BehaviorSubject, map } from 'rxjs';
 
 export type FavoritesStoreProps = {
   type: MediaType;
@@ -21,28 +22,27 @@ function getFavoritesPayload({ type, id }: FavoritesStoreProps) {
 }
 
 export function useFavorites({ type, id }: FavoritesStoreProps) {
-  const isUpdatingFavorite = writable(false);
+  const isUpdatingFavorite = new BehaviorSubject(false);
   const { favorites } = useUser();
   const { invalidate } = useInvalidator();
 
-  const isFavorited = derived(
-    favorites,
-    ($favorites) => {
-      if (!$favorites) {
+  const isFavorited = toObservable(favorites).pipe(
+    map((favs) => {
+      if (!favs) {
         return false;
       }
 
       switch (type) {
         case 'movie':
-          return $favorites.movies.has(id);
+          return favs.movies.has(id);
         case 'show':
-          return $favorites.shows.has(id);
+          return favs.shows.has(id);
       }
-    },
+    }),
   );
 
   const addOrRemoveFavorite = async (action: 'add' | 'remove') => {
-    isUpdatingFavorite.set(true);
+    isUpdatingFavorite.next(true);
 
     const payload = getFavoritesPayload({ type, id });
 
@@ -57,11 +57,11 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
 
     await invalidate(InvalidateAction.Favorited(type));
 
-    isUpdatingFavorite.set(false);
+    isUpdatingFavorite.next(false);
   };
 
   return {
-    isUpdatingFavorite,
+    isUpdatingFavorite: isUpdatingFavorite.asObservable(),
     isFavorited,
     addToFavorites: async () => await addOrRemoveFavorite('add'),
     removeFromFavorites: async () => await addOrRemoveFavorite('remove'),

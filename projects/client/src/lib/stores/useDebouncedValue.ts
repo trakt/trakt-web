@@ -1,28 +1,24 @@
 import { debounce } from '$lib/utils/timing/debounce.ts';
-import { get, type Writable, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
-export function useDebouncedValue<T>(delay: number): Writable<T | Nil> {
-  const value = writable<T | Nil>(null);
+export function useDebouncedValue<T>(delay: number) {
+  const internal = new BehaviorSubject<T | Nil>(null);
 
-  const debouncedSet = debounce((newValue: T | Nil) => {
-    value.set(newValue);
+  const debouncedNext = debounce((newValue: T | Nil) => {
+    internal.next(newValue);
   }, delay);
 
-  const set = (newValue: T | Nil) => {
-    if (get(value) == null) {
-      return value.set(newValue);
+  const next = (newValue: T | Nil) => {
+    if (internal.value == null) {
+      internal.next(newValue);
+    } else {
+      debouncedNext(newValue);
     }
-
-    return debouncedSet(newValue);
-  };
-
-  const update = (fn: (current: T | Nil) => T) => {
-    set(fn(get(value)));
   };
 
   return {
-    subscribe: value.subscribe,
-    set,
-    update,
+    subscribe: internal.subscribe.bind(internal),
+    next,
+    getValue: () => internal.value,
   };
 }

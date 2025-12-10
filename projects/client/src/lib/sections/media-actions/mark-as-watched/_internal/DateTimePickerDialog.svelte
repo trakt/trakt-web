@@ -3,7 +3,7 @@
   import DateTimePicker from "$lib/components/date-time/DateTimePicker.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import Modal from "flowbite-svelte/Modal.svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
   const {
     onConfirm,
@@ -49,7 +49,7 @@
   <DateTimePicker
     value={$selectedDate}
     maxDate={now}
-    onChange={(date) => selectedDate.set(date)}
+    onChange={(date) => selectedDate.next(date)}
   />
 
   {#snippet footer()}

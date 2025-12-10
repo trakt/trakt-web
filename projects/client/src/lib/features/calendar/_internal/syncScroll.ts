@@ -3,7 +3,6 @@ import { debounce } from '$lib/utils/timing/debounce.ts';
 import { time } from '$lib/utils/timing/time.ts';
 import { isSameDay } from 'date-fns';
 import { onMount } from 'svelte';
-import { get } from 'svelte/store';
 import { useCalendarPeriod } from '../context/useCalendarPeriod.ts';
 import type { CalendarEntry } from '../models/CalendarEntry.ts';
 import { getMostVisibleDay } from './getMostVisibleDay.ts';
@@ -22,13 +21,13 @@ export function syncScroll(
 
   const handleScroll = () => {
     const date = getMostVisibleDay(calendar, offset);
-    const isActive = date && isSameDay(date, get(activeDate).date);
+    const isActive = date && isSameDay(date, activeDate.value.date);
 
     if (!date || isActive) {
       return;
     }
 
-    activeDate.set({ date, source: 'scroll' });
+    activeDate.next({ date, source: 'scroll' });
   };
 
   onMount(() => {
@@ -44,7 +43,7 @@ export function syncScroll(
 
     return () => {
       unregisterScroll();
-      unsubscribe();
+      unsubscribe.unsubscribe();
     };
   });
 }

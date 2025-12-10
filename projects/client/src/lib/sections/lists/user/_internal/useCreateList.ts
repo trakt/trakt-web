@@ -4,7 +4,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { ListPrivacy } from '$lib/requests/models/ListPrivacy.ts';
 import { createListRequest } from '$lib/requests/queries/users/createListRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 type CreateListProps = {
   name: string;
@@ -13,7 +13,7 @@ type CreateListProps = {
 };
 
 export function useCreateList() {
-  const isCreating = writable(false);
+  const isCreating = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.ListCreate);
 
@@ -25,7 +25,7 @@ export function useCreateList() {
       return;
     }
 
-    isCreating.set(true);
+    isCreating.next(true);
     track();
 
     await createListRequest({
@@ -37,11 +37,11 @@ export function useCreateList() {
 
     await invalidate(InvalidateAction.List.Created);
 
-    isCreating.set(false);
+    isCreating.next(false);
   };
 
   return {
-    isCreating: derived(isCreating, ($isAdding) => $isAdding),
+    isCreating: isCreating.asObservable(),
     createList,
   };
 }

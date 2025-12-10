@@ -2,7 +2,7 @@
   import Dialog from "$lib/components/dialogs/Dialog.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { CommentsProps } from "$lib/sections/summary/components/comments/CommentsProps";
-  import { writable, type Writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import CommentInput from "../comment-input/CommentInput.svelte";
   import type { ActiveComment } from "../models/ActiveComment";
 
@@ -12,7 +12,7 @@
   } & CommentsProps;
 
   const {
-    dialog = writable(),
+    dialog = new BehaviorSubject(),
     onCommentPost,
     media,
     ...props

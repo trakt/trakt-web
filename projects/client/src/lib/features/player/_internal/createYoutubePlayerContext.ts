@@ -1,19 +1,22 @@
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { type Writable, writable } from 'svelte/store';
 
 export const PLAYER_CONTEXT_KEY = Symbol('video_player');
 
 export type PlayerContextType = {
-  embedId: Writable<string | Nil>;
-  isLoading: Writable<boolean>;
-  isPreloaded: Writable<boolean>;
-  shouldAutoplay: Writable<boolean>;
+  embedId: BehaviorSubject<string | Nil>;
+  isLoading: BehaviorSubject<boolean>;
+  isPreloaded: BehaviorSubject<boolean>;
+  shouldAutoplay: BehaviorSubject<boolean>;
 };
 
 export function createPlayerContext() {
-  const embedId = writable<string | Nil>();
-  const isLoading = writable<boolean>(false);
-  const shouldAutoplay = writable<boolean>(false);
+  const embedId = new BehaviorSubject<string | Nil>(null);
+  const isLoading = new BehaviorSubject<boolean>(false);
+  const shouldAutoplay = new BehaviorSubject<boolean>(false);
+
+  // Initialize with dummy behavior subject for isPreloaded as it wasn't initialized in original
+  const isPreloaded = new BehaviorSubject<boolean>(false);
 
   const ctx = setContext(
     PLAYER_CONTEXT_KEY,
@@ -22,6 +25,7 @@ export function createPlayerContext() {
         embedId,
         isLoading,
         shouldAutoplay,
+        isPreloaded,
       },
   );
 

@@ -3,7 +3,8 @@ import { movieJustWatchUrlQuery } from '$lib/requests/queries/movies/movieJustWa
 import { showJustWatchUrlQuery } from '$lib/requests/queries/shows/showJustWatchUrlQuery.ts';
 import { showSeasonJustWatchUrlQuery } from '$lib/requests/queries/shows/showSeasonJustWatchUrlQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 import type { MetaInfoProps } from '../../../summary/components/media/useMediaMetaInfo.ts';
 
 type UseJustWatchUrlProps = {
@@ -33,9 +34,10 @@ function mapToQuery(props: UseJustWatchUrlProps) {
 
 export function useJustWatchUrl(props: UseJustWatchUrlProps) {
   const query = useQuery(mapToQuery(props));
+  const query$ = toObservable(query);
 
   return {
-    url: derived(query, ($query) => $query.data),
-    isLoading: derived(query, toLoadingState),
+    url: query$.pipe(map((q) => q.data)),
+    isLoading: query$.pipe(map(toLoadingState)),
   };
 }

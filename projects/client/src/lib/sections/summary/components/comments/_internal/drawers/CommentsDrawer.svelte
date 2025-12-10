@@ -4,7 +4,7 @@
   import { useToggler } from "$lib/components/toggles/useToggler";
   import * as m from "$lib/features/i18n/messages.ts";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import type { CommentsProps } from "../../CommentsProps";
   import type { ActiveComment } from "../models/ActiveComment";
   import { useComments } from "../useComments";
@@ -38,8 +38,8 @@
   const isReplying = (id: number) =>
     $activeComment?.id === id && $activeComment?.isReplying;
 
-  const isOpened = writable(false);
-  const hasScrolled = writable(false);
+  const isOpened = new BehaviorSubject(false);
+  const hasScrolled = new BehaviorSubject(false);
 
   const shouldScrollIntoView = $derived((id: number) => {
     const isMatch = id === source?.id;
@@ -47,7 +47,7 @@
       return false;
     }
 
-    hasScrolled.set(true);
+    hasScrolled.next(true);
     return isMatch;
   });
 </script>
@@ -57,7 +57,7 @@
   title={m.dialog_title_comment()}
   size="large"
   metaInfo={$sortType.text()}
-  onOpened={() => isOpened.set(true)}
+  onOpened={() => isOpened.next(true)}
 >
   {#if $isOpened}
     <VerticalList

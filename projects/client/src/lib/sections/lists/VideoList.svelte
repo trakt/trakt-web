@@ -6,7 +6,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
   import { toTranslatedVideoType } from "$lib/utils/formatting/string/toTranslatedVideoType";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import VideoItem from "./components/VideoItem.svelte";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -65,7 +65,7 @@
           {toTranslatedVideoType($active)}
           {#snippet items()}
             {#each types as type}
-              <DropdownItem color="blue" onclick={() => active.set(type)}>
+              <DropdownItem color="blue" onclick={() => active.next(type)}>
                 {toTranslatedVideoType(type)}
               </DropdownItem>
             {/each}

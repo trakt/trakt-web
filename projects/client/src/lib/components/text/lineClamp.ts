@@ -1,10 +1,10 @@
 import { NOOP_FN } from '$lib/utils/constants.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
-import type { Writable } from 'svelte/store';
+import type { BehaviorSubject } from 'rxjs';
 
 type LineClampProps = {
   lines: number;
-  isClamped?: Writable<boolean>;
+  isClamped?: BehaviorSubject<boolean>;
 };
 
 export function lineClamp(node: HTMLElement, {
@@ -20,7 +20,7 @@ export function lineClamp(node: HTMLElement, {
   const isObserved = isClamped !== undefined;
 
   const computeClamped = () => {
-    isClamped?.set(node.scrollHeight > node.clientHeight);
+    isClamped?.next(node.scrollHeight > node.clientHeight);
   };
 
   const cleanup = isObserved

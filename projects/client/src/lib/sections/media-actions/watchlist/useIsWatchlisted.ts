@@ -1,6 +1,7 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 
 export type IsWatchlistedStoreProps = MediaStoreProps;
 
@@ -9,22 +10,21 @@ export function useIsWatchlisted(props: IsWatchlistedStoreProps) {
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const { watchlist } = useUser();
 
-  const isWatchlisted = derived(
-    watchlist,
-    ($watchlist) => {
-      if (!$watchlist) {
+  const isWatchlisted = toObservable(watchlist).pipe(
+    map((w) => {
+      if (!w) {
         return false;
       }
 
       switch (type) {
         case 'movie':
-          return media.every((m) => $watchlist.movies.has(m.id));
+          return media.every((m) => w.movies.has(m.id));
         case 'show':
-          return media.every((m) => $watchlist.shows.has(m.id));
+          return media.every((m) => w.shows.has(m.id));
         case 'episode':
           return false;
       }
-    },
+    }),
   );
 
   return {

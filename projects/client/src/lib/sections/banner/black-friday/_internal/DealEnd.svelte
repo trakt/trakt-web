@@ -2,7 +2,7 @@
   import { toHumanETA } from "$lib/utils/formatting/date/toHumanETA";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
   const { endDate }: { endDate: Date } = $props();
 
@@ -27,7 +27,7 @@
     let intervalId: ReturnType<typeof setInterval>;
 
     const updateRemainingTime = () => {
-      endDateText.set(toHumanETA(new Date(), endDate));
+      endDateText.next(toHumanETA(new Date(), endDate));
       clearInterval(intervalId);
       intervalId = setInterval(updateRemainingTime, getIntervalDelay());
     };

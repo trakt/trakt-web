@@ -8,7 +8,7 @@
   import * as m from "$lib/features/i18n/messages";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import ListDropdownItem from "./_internal/ListDropdownItem.svelte";
   import ListsDrawer from "./_internal/ListsDrawer.svelte";
   import { useListedOnIds } from "./_internal/useListedOnIds";
@@ -24,7 +24,7 @@
   }: ListDropdownProps = $props();
 
   // FIXME: replace this when we store states in session storage
-  const isUpdating = writable(false);
+  const isUpdating = new BehaviorSubject(false);
 
   const { listedOnIds, isLoading } = $derived(useListedOnIds({ media }));
 
@@ -50,8 +50,8 @@
     isLoadingLists || $isUpdating || $isWatchlistUpdating || $isLoading,
   );
 
-  const isOpen = writable(false);
-  const onClose = () => isOpen.set(false);
+  const isOpen = new BehaviorSubject(false);
+  const onClose = () => isOpen.next(false);
 
   const variant = $derived(isListed ? "primary" : "secondary");
   const text = $derived(
@@ -100,7 +100,7 @@
     {variant}
     label={m.dropdown_label_add_remove_from_lists({ title })}
     disabled={isDisabled}
-    onclick={() => isOpen.set(!$isOpen)}
+    onclick={() => isOpen.next(!$isOpen)}
   >
     {text}
 
@@ -113,7 +113,7 @@
 {#if style === "action"}
   <ActionButton
     label={m.dropdown_label_add_remove_from_lists({ title })}
-    onclick={() => isOpen.set(!$isOpen)}
+    onclick={() => isOpen.next(!$isOpen)}
     style="ghost"
     disabled={isDisabled}
   >

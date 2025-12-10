@@ -1,14 +1,30 @@
-import { Observable } from 'rxjs';
-import type { Readable } from 'svelte/store';
+import { isObservable, Observable } from 'rxjs';
 
-export function toObservable<T>(readable: Readable<T>): Observable<T> {
+export type StoreLike<T> = {
+  subscribe: (
+    run: (value: T) => void,
+  ) => (() => void) | { unsubscribe: () => void };
+};
+
+export function toObservable<T>(
+  source: StoreLike<T> | Observable<T>,
+): Observable<T> {
+  if (isObservable(source)) {
+    return source;
+  }
+
   return new Observable((subscriber) => {
-    const unsubscribe = readable.subscribe((value) => {
+    // We trust that 'source' is a StoreLike object.
+    const unsubscribeOrObj = source.subscribe((value) => {
       subscriber.next(value);
     });
 
     return () => {
-      unsubscribe();
+      if (typeof unsubscribeOrObj === 'function') {
+        unsubscribeOrObj();
+      } else if (unsubscribeOrObj && 'unsubscribe' in unsubscribeOrObj) {
+        unsubscribeOrObj.unsubscribe();
+      }
     };
   });
 }

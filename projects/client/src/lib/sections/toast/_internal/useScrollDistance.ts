@@ -1,9 +1,9 @@
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
+import { BehaviorSubject } from 'rxjs';
 import { onMount } from 'svelte';
-import { derived, writable } from 'svelte/store';
 
 export function useScrollDistance() {
-  const distanceFromBottom = writable(0);
+  const distanceFromBottom = new BehaviorSubject(0);
 
   const handleScroll = () => {
     const scrollTop = globalThis.document.documentElement.scrollTop;
@@ -11,7 +11,7 @@ export function useScrollDistance() {
     const clientHeight = globalThis.document.documentElement.clientHeight;
 
     const scrollDistance = scrollHeight - clientHeight;
-    distanceFromBottom.set(scrollDistance - scrollTop);
+    distanceFromBottom.next(scrollDistance - scrollTop);
   };
 
   onMount(() => {
@@ -33,9 +33,6 @@ export function useScrollDistance() {
   });
 
   return {
-    distanceFromBottom: derived(
-      distanceFromBottom,
-      ($distanceFromBottom) => $distanceFromBottom,
-    ),
+    distanceFromBottom: distanceFromBottom.asObservable(),
   };
 }

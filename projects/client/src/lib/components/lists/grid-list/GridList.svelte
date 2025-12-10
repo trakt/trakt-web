@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends { key: string }">
   import { onMount, type Snippet } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import "../_internal/list.css";
   import ListHeader from "../_internal/ListHeader.svelte";
   import type { ListProps } from "../ListProps";
@@ -29,10 +29,10 @@
 
   const customAction = (node: HTMLElement) => dimensionObserver?.(node);
 
-  const isMounted = writable(false);
+  const isMounted = new BehaviorSubject(false);
 
   onMount(() => {
-    isMounted.set(true);
+    isMounted.next(true);
   });
 
   const promotedKeys = $derived(new Set(promotedItems.map(({ key }) => key)));

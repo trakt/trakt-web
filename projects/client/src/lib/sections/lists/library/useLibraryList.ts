@@ -6,8 +6,14 @@ import {
 } from '$lib/requests/queries/sync/libraryQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { toObservable } from '$lib/utils/store/toObservable.ts';
-import { combineLatest, filter, map, shareReplay, take } from 'rxjs';
-import { writable } from 'svelte/store';
+import {
+  BehaviorSubject,
+  combineLatest,
+  filter,
+  map,
+  shareReplay,
+  take,
+} from 'rxjs';
 import { useInMemoryPagination } from '../../../stores/useInMemoryPagination.ts';
 import { CUSTOM_LIBRARY_NAME } from './constants/index.ts';
 
@@ -46,7 +52,7 @@ export function useLibraryList(props: UseLibraryListProps) {
     map((r) => Object.keys(r) as string[]),
   );
 
-  const activeLibrary = writable<string>(CUSTOM_LIBRARY_NAME);
+  const activeLibrary = new BehaviorSubject<string>(CUSTOM_LIBRARY_NAME);
 
   record
     .pipe(
@@ -62,10 +68,10 @@ export function useLibraryList(props: UseLibraryListProps) {
       }),
     )
     .subscribe((library) => {
-      activeLibrary.set(library ?? CUSTOM_LIBRARY_NAME);
+      activeLibrary.next(library ?? CUSTOM_LIBRARY_NAME);
     });
 
-  const items = combineLatest([record, toObservable(activeLibrary)])
+  const items = combineLatest([record, activeLibrary])
     .pipe(
       map(([r, active]) => r[active] ?? []),
       shareReplay(1),
@@ -85,5 +91,6 @@ export function useLibraryList(props: UseLibraryListProps) {
     isLoading: queryObservable.pipe(
       map(toLoadingState),
     ),
+    setActiveLibrary: (lib: string) => activeLibrary.next(lib),
   };
 }

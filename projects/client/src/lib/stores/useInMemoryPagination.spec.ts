@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { get } from 'svelte/store';
+// get removed - use .value or firstValueFrom
 import { describe, expect, it } from 'vitest';
 import { useInMemoryPagination } from './useInMemoryPagination.ts';
 
@@ -23,7 +23,7 @@ describe('useInMemoryPagination', () => {
 
     expect(currentList).toEqual([1, 2, 3]);
     expect(currentHasNextPage).toBe(true);
-    expect(get(fetchNextPage)).toBeTypeOf('function');
+    expect(fetchNextPage.value).toBeTypeOf('function');
   });
 
   it('should load next page when fetchNextPage is called', () => {
@@ -46,7 +46,7 @@ describe('useInMemoryPagination', () => {
     expect(currentList).toEqual([1, 2, 3]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
 
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6]);
     expect(currentHasNextPage).toBe(true);
@@ -66,13 +66,13 @@ describe('useInMemoryPagination', () => {
 
     expect(currentList).toEqual([1, 2, 3]);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6]);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
@@ -90,7 +90,7 @@ describe('useInMemoryPagination', () => {
 
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
 
     expect(currentHasNextPage).toBe(false);
   });
@@ -115,7 +115,7 @@ describe('useInMemoryPagination', () => {
     expect(currentList).toEqual([1, 2, 3]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
 
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6]);
     expect(currentHasNextPage).toBe(false);
@@ -240,7 +240,7 @@ describe('useInMemoryPagination', () => {
     ]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
 
     expect(currentList).toEqual([
       { id: 1, name: 'Item 1' },
@@ -250,7 +250,7 @@ describe('useInMemoryPagination', () => {
     ]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    fetchNextPage.value();
 
     expect(currentList).toEqual([
       { id: 1, name: 'Item 1' },

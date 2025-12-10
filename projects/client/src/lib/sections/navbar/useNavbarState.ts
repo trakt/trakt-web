@@ -1,5 +1,5 @@
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import type { Snippet } from 'svelte';
-import { derived, type Writable, writable } from 'svelte/store';
 
 export type NavbarMode = 'full' | 'minimal' | 'hidden';
 
@@ -15,7 +15,7 @@ type GlobalNavbarState = {
   mode: NavbarMode;
 };
 
-const globalNavbarStateStore: Writable<GlobalNavbarState> = writable({
+const globalNavbarStateStore = new BehaviorSubject<GlobalNavbarState>({
   toastActions: null,
   mode: 'hidden',
 });
@@ -27,39 +27,38 @@ const initialNavbarState: NavbarState = {
   hasFilters: false,
 };
 
-const navbarStateStore: Writable<NavbarState> = writable(
+const navbarStateStore = new BehaviorSubject<NavbarState>(
   initialNavbarState,
 );
 
 export function useNavbarState() {
   return {
-    state: derived(
-      [navbarStateStore, globalNavbarStateStore],
-      ([$navbarStateStore, $globalNavbarStateStore]) => ({
-        ...$navbarStateStore,
-        ...$globalNavbarStateStore,
-      }),
+    state: combineLatest([navbarStateStore, globalNavbarStateStore]).pipe(
+      map(([navbarState, globalNavbarState]) => ({
+        ...navbarState,
+        ...globalNavbarState,
+      })),
     ),
     set: (props: Partial<NavbarState>) => {
-      navbarStateStore.update((current) => {
-        const definedProps = Object.fromEntries(
-          Object.entries(props).filter(([_, v]) => v !== undefined),
-        ) as Partial<NavbarState>;
+      const current = navbarStateStore.value;
+      const definedProps = Object.fromEntries(
+        Object.entries(props).filter(([_, v]) => v !== undefined),
+      ) as Partial<NavbarState>;
 
-        return {
-          ...current,
-          ...definedProps,
-        };
+      navbarStateStore.next({
+        ...current,
+        ...definedProps,
       });
     },
     globalSet: (props: Partial<GlobalNavbarState>) => {
-      globalNavbarStateStore.update((current) => ({
+      const current = globalNavbarStateStore.value;
+      globalNavbarStateStore.next({
         ...current,
         ...props,
-      }));
+      });
     },
     reset: () => {
-      navbarStateStore.set(initialNavbarState);
+      navbarStateStore.next(initialNavbarState);
     },
   };
 }

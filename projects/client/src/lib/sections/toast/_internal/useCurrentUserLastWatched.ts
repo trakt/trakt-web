@@ -7,8 +7,8 @@ import {
 } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { onMount } from 'svelte';
-import { derived, writable } from 'svelte/store';
 import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
 
 const RECENTLY_WATCHED_WINDOW = time.days(1);
@@ -23,7 +23,7 @@ function toLastWatchedMedia(
 }
 
 export function useCurrentUserLastWatched() {
-  const latestDismissal = writable<DismissedItem | null>(null);
+  const latestDismissal = new BehaviorSubject<DismissedItem | null>(null);
 
   const { ratings } = useUser();
   const { latest, wasDismissed } = useDismissals();
@@ -35,41 +35,40 @@ export function useCurrentUserLastWatched() {
   }));
 
   onMount(() => {
-    const unsubscribe = latest.subscribe(($latest) => {
-      latestDismissal.set($latest);
+    const unsubscribe = latest.subscribe((l) => {
+      latestDismissal.next(l);
     });
 
     return () => {
-      unsubscribe();
+      unsubscribe.unsubscribe();
     };
   });
 
   return {
-    lastWatchedItem: derived(
-      [list, ratings, latestDismissal],
-      ([$list, $ratings, $latestDismissal]) => {
-        const hasRecentlyDismissed = $latestDismissal &&
-          $latestDismissal.dismissedAt > Date.now() - RECENTLY_WATCHED_WINDOW;
+    lastWatchedItem: combineLatest([list, ratings, latestDismissal]).pipe(
+      map(([l, r, d]) => {
+        const hasRecentlyDismissed = d &&
+          d.dismissedAt > Date.now() - RECENTLY_WATCHED_WINDOW;
 
-        if (!$ratings || hasRecentlyDismissed) {
+        if (!r || hasRecentlyDismissed) {
           return null;
         }
 
-        const unratedItem = $list.find((activity) => {
-          if (wasDismissed(activity, $latestDismissal)) {
+        const unratedItem = l.find((activity) => {
+          if (wasDismissed(activity, d)) {
             return false;
           }
 
           switch (activity.type) {
             case 'movie':
-              return !$ratings.movies.has(activity.movie.id);
+              return !r.movies.has(activity.movie.id);
             default:
               return false;
           }
         });
 
         return unratedItem ? toLastWatchedMedia(unratedItem) : null;
-      },
+      }),
     ),
   };
 }

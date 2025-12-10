@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { setContext } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { THEME_COOKIE_NAME } from "../constants";
   import type { Theme } from "../models/Theme";
   import { useTheme } from "../useTheme";
@@ -13,7 +13,7 @@
 
   iffy(() => {
     const seed = globalThis.document?.documentElement.dataset.theme ?? initial;
-    const themeStore = writable(coerceTheme(seed));
+    const themeStore = new BehaviorSubject(coerceTheme(seed));
     setContext(THEME_COOKIE_NAME, themeStore);
   });
 

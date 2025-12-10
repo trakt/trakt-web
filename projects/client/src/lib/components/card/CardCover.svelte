@@ -3,13 +3,13 @@
   import { PLACEHOLDERS } from "$lib/utils/constants";
   import { isImageComplete } from "$lib/utils/image/isImageComplete";
   import { checksum } from "$lib/utils/string/checksum";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { lineClamp } from "../text/lineClamp";
   import type { CardCoverProps } from "./CardCoverProps";
 
   const { src, overlaySrc, alt, badge, tag, title }: CardCoverProps = $props();
 
-  const isImagePending = writable(!isImageComplete(src));
+  const isImagePending = new BehaviorSubject(!isImageComplete(src));
   const id = $derived(checksum(`${src}-${title}`));
 
   const isPlaceholder = $derived(PLACEHOLDERS.includes(src));
@@ -40,7 +40,7 @@
       animate={false}
       {src}
       {alt}
-      onload={() => isImagePending.set(false)}
+      onload={() => isImagePending.next(false)}
       aria-labelledby={id}
     />
     {#if overlaySrc && !PLACEHOLDERS.includes(overlaySrc)}
@@ -49,7 +49,7 @@
         animate={false}
         src={overlaySrc}
         {alt}
-        onload={() => isImagePending.set(false)}
+        onload={() => isImagePending.next(false)}
         aria-labelledby={id}
       />
     {/if}

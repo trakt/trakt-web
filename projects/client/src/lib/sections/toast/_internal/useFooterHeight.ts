@@ -1,9 +1,9 @@
 import { FOOTER_CLASS_NAME } from '$lib/sections/footer/constants.ts';
+import { BehaviorSubject } from 'rxjs';
 import { onMount } from 'svelte';
-import { derived, writable } from 'svelte/store';
 
 export function useFooterHeight() {
-  const footerHeight = writable(0);
+  const footerHeight = new BehaviorSubject(0);
 
   onMount(() => {
     const footer = globalThis.document.querySelector(`.${FOOTER_CLASS_NAME}`);
@@ -11,10 +11,10 @@ export function useFooterHeight() {
       return;
     }
 
-    footerHeight.set(footer.clientHeight);
+    footerHeight.next(footer.clientHeight);
 
     const observer = new MutationObserver(() => {
-      footerHeight.set(footer.clientHeight);
+      footerHeight.next(footer.clientHeight);
     });
 
     observer.observe(footer, { childList: true, subtree: true });
@@ -25,6 +25,6 @@ export function useFooterHeight() {
   });
 
   return {
-    footerHeight: derived(footerHeight, ($footerHeight) => $footerHeight),
+    footerHeight: footerHeight.asObservable(),
   };
 }

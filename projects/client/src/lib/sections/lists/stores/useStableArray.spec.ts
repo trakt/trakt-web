@@ -1,4 +1,4 @@
-import { get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { describe, expect, it } from 'vitest';
 import { useStableArray } from './useStableArray.ts';
 
@@ -35,17 +35,17 @@ const compareFn = (left: typeof item1, right: typeof item1) =>
 
 describe('useStableArray', () => {
   it('should return a store with an empty array', () => {
-    const source = writable([]);
-    expect(get(useStableArray(compareFn, source).list)).toEqual([]);
+    const source = new BehaviorSubject([]);
+    expect(useStableArray(compareFn, source.value.list)).toEqual([]);
   });
 
   it('should update the store with a new item', () => {
     const source = writable<MockItem[]>([]);
     const store = useStableArray(compareFn, source);
 
-    source.set([item1]);
+    source.next([item1]);
 
-    expect(get(store.list)).toEqual([item1]);
+    expect(store.list.value).toEqual([item1]);
   });
 
   it('should update the store with multiple items', () => {
@@ -53,19 +53,19 @@ describe('useStableArray', () => {
     const store = useStableArray(compareFn, source);
     const items = [item1, item2];
 
-    source.set(items);
+    source.next(items);
 
-    expect(get(store.list)).toEqual(items);
+    expect(store.list.value).toEqual(items);
   });
 
   it('should update the store with the same item', () => {
     const source = writable<MockItem[]>([]);
     const store = useStableArray(compareFn, source);
 
-    source.set([item1]);
-    source.set([item1]);
+    source.next([item1]);
+    source.next([item1]);
 
-    expect(get(store.list)).toEqual([item1]);
+    expect(store.list.value).toEqual([item1]);
   });
 
   it('should update the store with the same item with different data', () => {
@@ -73,10 +73,10 @@ describe('useStableArray', () => {
     const store = useStableArray(compareFn, source);
 
     const update = { ...item1, title: 'Updated Show 1' };
-    source.set([item1]);
-    source.set([update]);
+    source.next([item1]);
+    source.next([update]);
 
-    expect(get(store.list)).toEqual([update]);
+    expect(store.list.value).toEqual([update]);
   });
 
   it('should update the store with multiple items with the same item', () => {
@@ -87,9 +87,9 @@ describe('useStableArray', () => {
       item1,
     ];
 
-    source.set(items);
+    source.next(items);
 
-    expect(get(store.list)).toEqual([item1]);
+    expect(store.list.value).toEqual([item1]);
   });
 
   it('should add new items at the end of the list', () => {
@@ -97,10 +97,10 @@ describe('useStableArray', () => {
     const store = useStableArray(compareFn, source);
     const unsubscribe = store.list.subscribe(() => {});
 
-    source.set([item1, item2]);
-    source.set([item3, item1, item2]);
+    source.next([item1, item2]);
+    source.next([item3, item1, item2]);
 
-    expect(get(store.list)).toEqual([item1, item2, item3]);
+    expect(store.list.value).toEqual([item1, item2, item3]);
     unsubscribe();
   });
 
@@ -108,10 +108,10 @@ describe('useStableArray', () => {
     const source = writable<MockItem[]>([]);
     const store = useStableArray(compareFn, source);
 
-    source.set([item1, item2]);
-    source.set([item3]);
+    source.next([item1, item2]);
+    source.next([item3]);
 
-    expect(get(store.list)).toEqual([item3]);
+    expect(store.list.value).toEqual([item3]);
   });
 
   it('should keep the order of the items', () => {
@@ -121,10 +121,10 @@ describe('useStableArray', () => {
 
     const unsubscribe = store.list.subscribe(() => {});
 
-    source.set([item1, item2, item3]);
-    source.set([update2, item1, item3]);
+    source.next([item1, item2, item3]);
+    source.next([update2, item1, item3]);
 
-    expect(get(store.list)).toEqual([item1, update2, item3]);
+    expect(store.list.value).toEqual([item1, update2, item3]);
     unsubscribe();
   });
 });

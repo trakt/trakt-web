@@ -1,8 +1,8 @@
 <script lang="ts">
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { DragGesture } from "@use-gesture/vanilla";
+  import { BehaviorSubject } from "rxjs";
   import type { Snippet } from "svelte";
-  import { get, writable } from "svelte/store";
 
   type SwipeXState = {
     progress: number;
@@ -27,7 +27,7 @@
     onSwipe,
   }: ChildrenProps & SwipeXProps = $props();
 
-  const swipeState = writable<SwipeXState>({
+  const swipeState = new BehaviorSubject<SwipeXState>({
     progress: 0,
     direction: "inactive",
     isActive: false,
@@ -86,11 +86,11 @@
 
         const isActive = Math.abs(x) > threshold * 0.9;
 
-        const { isActive: isPreviouslyActive } = get(swipeState);
+        const { isActive: isPreviouslyActive } = swipeState.value;
 
         const isTriggered = isPreviouslyActive && last;
 
-        swipeState.set({
+        swipeState.next({
           progress,
           direction,
           isActive,

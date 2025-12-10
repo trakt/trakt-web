@@ -7,12 +7,13 @@ import { streamEpisodeQuery } from '$lib/requests/queries/episode/streamEpisodeQ
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
+import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { derived } from 'svelte/store';
 
 type UseEpisodeParams = {
   slug: string;
@@ -23,7 +24,7 @@ type UseEpisodeParams = {
 export function useEpisode(
   params: UseEpisodeParams,
 ) {
-  const { country, getPreferred } = useStreamingPreferences();
+  const { country, favorites } = useStreamingPreferences();
 
   const episode = useQuery(episodeSummaryQuery(params));
   const show = useQuery(showSummaryQuery({ slug: params.slug }));
@@ -43,65 +44,66 @@ export function useEpisode(
 
   const streamOn = toObservable(country)
     .pipe(
-      switchMap((country) =>
-        toObservable(useQuery(streamEpisodeQuery({ ...params, country })))
+      switchMap((c) =>
+        toObservable(useQuery(streamEpisodeQuery({ ...params, country: c })))
       ),
     );
 
   const queries = [
-    episode,
-    show,
-    seasons,
-    intl,
-    showIntl,
-    crew,
+    toObservable(episode),
+    toObservable(show),
+    toObservable(seasons),
+    toObservable(intl),
+    toObservable(showIntl),
+    toObservable(crew),
   ];
 
-  const isLoading = derived(
-    queries,
-    ($queries) => $queries.some(toLoadingState),
+  const isLoading = combineLatest(queries).pipe(
+    map((qs) => qs.some(toLoadingState)),
   );
 
   return {
     isLoading,
-    episode: derived(episode, ($episode) => $episode.data),
-    show: derived(show, ($show) => $show.data),
-    seasons: derived(
-      [seasons, episode],
-      ([$seasons, $episode]) =>
-        $seasons.data?.filter((season) =>
-          season.number === $episode.data?.season
-        ),
+    episode: toObservable(episode).pipe(map((e) => e.data)),
+    show: toObservable(show).pipe(map((s) => s.data)),
+    seasons: combineLatest([toObservable(seasons), toObservable(episode)]).pipe(
+      map(([s, e]) =>
+        s.data?.filter((season) => season.number === e.data?.season)
+      ),
     ),
-    crew: derived(crew, ($crew) => $crew.data),
-    intl: derived(
-      [intl, episode],
-      ([$intl, $episode]) =>
+    crew: toObservable(crew).pipe(map((c) => c.data)),
+    intl: combineLatest([toObservable(intl), toObservable(episode)]).pipe(
+      map(([i, e]) =>
         findRegionalIntl({
           type: 'episode',
-          translations: $intl.data,
-          fallback: $episode.data,
-        }),
+          translations: i.data,
+          fallback: e.data,
+        })
+      ),
     ),
-    showIntl: derived(
-      [showIntl, show],
-      ([$showIntl, $show]) =>
+    showIntl: combineLatest([toObservable(showIntl), toObservable(show)]).pipe(
+      map(([i, s]) =>
         findRegionalIntl({
           type: 'show',
-          translations: $showIntl.data,
-          fallback: $show.data,
-        }),
+          translations: i.data,
+          fallback: s.data,
+        })
+      ),
     ),
     // FIXME: move these to the 'where to watch' component
-    streamOn: streamOn.pipe(
-      map(($streamOn) => {
-        if (!$streamOn.data) {
+    streamOn: combineLatest([streamOn, favorites, country]).pipe(
+      map(([streamOnResponse, favs, countryCode]) => {
+        if (!streamOnResponse.data) {
           return;
         }
 
         return {
-          services: $streamOn.data,
-          preferred: getPreferred($streamOn.data),
+          services: streamOnResponse.data,
+          preferred: findPreferredStreamingService({
+            services: streamOnResponse.data,
+            favorites: favs,
+            countryCode,
+          }),
         };
       }),
     ),

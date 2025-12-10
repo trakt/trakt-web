@@ -3,7 +3,7 @@
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import FavoriteAction from "$lib/sections/media-actions/favorite/FavoriteAction.svelte";
   import { slideFade } from "$lib/utils/transitions/slideFade";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { fade, slide } from "svelte/transition";
   import RatingStars from "./_internal/RatingStars.svelte";
   import StarsConfetti from "./_internal/StarsConfetti.svelte";
@@ -34,7 +34,7 @@
     const hasValidTarget = ev.currentTarget instanceof HTMLElement;
 
     if (!isMaxRating || !rootElement || !hasValidTarget) {
-      confettiPosition.set(null);
+      confettiPosition.next(null);
       return;
     }
 
@@ -42,7 +42,7 @@
     const parentRect = rootElement.getBoundingClientRect();
 
     const x = targetRect.left + targetRect.width / 2 - parentRect.left;
-    confettiPosition.set({ x, y: 0 });
+    confettiPosition.next({ x, y: 0 });
   };
 
   let rootElement: HTMLElement | null = $state(null);

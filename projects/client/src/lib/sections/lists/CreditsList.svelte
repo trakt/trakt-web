@@ -9,7 +9,7 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
@@ -64,7 +64,7 @@
         {#each $positions as position}
           <DropdownItem
             color="blue"
-            onclick={() => currentPosition.set(position)}
+            onclick={() => currentPosition.next(position)}
           >
             {toTranslatedPosition(position)}
           </DropdownItem>

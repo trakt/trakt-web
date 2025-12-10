@@ -6,7 +6,6 @@
 import type { CookieConsent } from '$lib/features/cookie-consent/models/CookieConsent.ts';
 import { Environment } from '@trakt/api';
 import type { Observable } from 'rxjs';
-import type { Readable } from 'svelte/store';
 
 declare global {
   // Only way to declare globalThis.install
@@ -35,9 +34,10 @@ declare global {
   };
 
   /**
-   * FIXME: remove once we migrate all state to rxjs
+   * Deprecated: Use Observable<T> directly
+   * @deprecated This type exists for backward compatibility during RxJS migration
    */
-  type ReadableOrObservable<T> = Readable<T> | Observable<T>;
+  type ReadableOrObservable<T> = Observable<T>;
 
   type Nil = null | undefined;
 

@@ -1,5 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { writable } from 'svelte/store';
 import type { DiscoverMode } from '../models/DiscoverMode.ts';
 import {
   DISCOVER_CONTEXT_KEY,
@@ -14,8 +14,8 @@ export function createDiscoverContext(
     DISCOVER_CONTEXT_KEY,
     getContext<DiscoverContext>(DISCOVER_CONTEXT_KEY) ??
       {
-        mode: writable(mode),
-        useSeasonalFilters: writable(useSeasonalFilters),
+        mode: new BehaviorSubject(mode),
+        useSeasonalFilters: new BehaviorSubject(useSeasonalFilters),
       },
   );
 

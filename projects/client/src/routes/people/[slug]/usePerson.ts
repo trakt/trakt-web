@@ -1,14 +1,16 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { peopleSummaryQuery } from '$lib/requests/queries/people/peopleSummaryQuery.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 
 export function usePerson(slug: string) {
   const person = useQuery(peopleSummaryQuery({
     slug,
   }));
+  const person$ = toObservable(person);
 
   return {
-    isLoading: derived(person, ($person) => $person.isPending),
-    person: derived(person, ($person) => $person.data),
+    isLoading: person$.pipe(map((p) => p.isPending)),
+    person: person$.pipe(map((p) => p.data)),
   };
 }

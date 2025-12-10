@@ -3,7 +3,8 @@ import { streamAllEpisodeQuery } from '$lib/requests/queries/episode/streamAllEp
 import { streamAllMovieQuery } from '$lib/requests/queries/movies/streamAllMovieQuery.ts';
 import { streamAllShowQuery } from '$lib/requests/queries/shows/streamAllShowQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 import type { MetaInfoProps } from '../../../summary/components/media/useMediaMetaInfo.ts';
 
 function mapToQuery(props: MetaInfoProps) {
@@ -23,12 +24,10 @@ function mapToQuery(props: MetaInfoProps) {
 
 export function useAllStreamOn(props: MetaInfoProps) {
   const query = useQuery(mapToQuery(props));
+  const query$ = toObservable(query);
 
   return {
-    list: derived(query, ($query) => $query?.data ?? []),
-    isLoading: derived(
-      query,
-      toLoadingState,
-    ),
+    list: query$.pipe(map((q) => q?.data ?? [])),
+    isLoading: query$.pipe(map(toLoadingState)),
   };
 }

@@ -9,14 +9,14 @@ import {
   toBulkPayload,
 } from '$lib/sections/media-actions/_internal/toBulkPayload.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 type UseListProps = { list: UserList } & MediaStoreProps;
 
 export function useList(props: UseListProps) {
   const { type } = props;
   const media = Array.isArray(props.media) ? props.media : [props.media];
-  const isListUpdating = writable(false);
+  const isListUpdating = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
 
   const { track } = useTrack(AnalyticsEvent.List);
@@ -28,7 +28,7 @@ export function useList(props: UseListProps) {
       return;
     }
 
-    isListUpdating.set(true);
+    isListUpdating.next(true);
     track({ action: 'add' });
 
     await addToListRequest({
@@ -38,7 +38,7 @@ export function useList(props: UseListProps) {
     });
     await invalidate(InvalidateAction.Listed(type));
 
-    isListUpdating.set(false);
+    isListUpdating.next(false);
   };
 
   const removeFromList = async () => {
@@ -46,7 +46,7 @@ export function useList(props: UseListProps) {
       return;
     }
 
-    isListUpdating.set(true);
+    isListUpdating.next(true);
     track({ action: 'remove' });
 
     await removeFromListRequest({
@@ -56,7 +56,7 @@ export function useList(props: UseListProps) {
     });
     await invalidate(InvalidateAction.Listed(type));
 
-    isListUpdating.set(false);
+    isListUpdating.next(false);
   };
 
   return {

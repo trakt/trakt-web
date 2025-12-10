@@ -1,13 +1,13 @@
 import { type UserManager } from 'oidc-client-ts';
-import { get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
-const userManager = writable<UserManager | null>(null);
+const userManager = new BehaviorSubject<UserManager | null>(null);
 
 export function getUserManager() {
   // FIXME: assertDefined this when fully migrated to oidc-client-ts
-  return get(userManager);
+  return userManager.value;
 }
 
 export function setUserManager(manager: UserManager | null) {
-  userManager.set(manager);
+  userManager.next(manager);
 }

@@ -7,7 +7,7 @@
   import { useCollapsedSection } from "$lib/stores/useCollapsedSection";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
   const {
     id,
@@ -20,14 +20,14 @@
     toggleLabels: { expand: string; collapse: string };
   } & ChildrenProps = $props();
 
-  const isVisible = writable(false);
-  const isMounted = writable(false);
+  const isVisible = new BehaviorSubject(false);
+  const isMounted = new BehaviorSubject(false);
   const { isCollapsed, toggle } = $derived(
     useCollapsedSection(`section_collapsed_${id}`, true),
   );
 
   onMount(() => {
-    isMounted.set(true);
+    isMounted.next(true);
   });
 </script>
 
@@ -49,7 +49,7 @@
 {/snippet}
 
 <section
-  use:whenInViewport={() => isVisible.set(true)}
+  use:whenInViewport={() => isVisible.next(true)}
   class="collapsable-section-container"
   class:collapsable-section-container-collapsed={$isCollapsed}
   class:collapsable-section-container-mounted={$isMounted}

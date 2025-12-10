@@ -1,6 +1,6 @@
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { type Writable, writable } from 'svelte/store';
 
 const COVER_CONTEXT_KEY = Symbol('cover');
 
@@ -19,7 +19,7 @@ type Cover = {
 };
 
 type CoverContextData = {
-  cover: Writable<Cover>;
+  cover: BehaviorSubject<Cover>;
 };
 
 export function useCover() {
@@ -28,7 +28,7 @@ export function useCover() {
       COVER_CONTEXT_KEY,
       getContext<CoverContextData>(COVER_CONTEXT_KEY) ??
         {
-          cover: writable({
+          cover: new BehaviorSubject<Cover>({
             data: undefined,
             state: 'no-cover',
           }),

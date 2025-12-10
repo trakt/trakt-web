@@ -1,6 +1,5 @@
 import { useNavigation } from '$lib/features/navigation/useNavigation.ts';
 import { onMount } from 'svelte';
-import { get } from 'svelte/store';
 
 export function dPadTrigger(
   element: HTMLElement,
@@ -22,9 +21,14 @@ export function dPadTrigger(
   };
 
   onMount(() => {
-    if (get(navigation) !== 'dpad') {
+    let mode = '';
+    const unsubscribe = navigation.subscribe((v) => mode = v);
+
+    if (mode !== 'dpad') {
+      unsubscribe();
       return;
     }
+    unsubscribe();
 
     element.setAttribute('tabindex', '0');
     element.setAttribute('role', 'button');

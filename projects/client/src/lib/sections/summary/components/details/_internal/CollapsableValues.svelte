@@ -5,7 +5,7 @@
   import { MoreButtonIntlProvider } from "$lib/components/buttons/more/MoreButtonIntlProvider";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import type { Snippet } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
   const MAX_ITEMS = 2;
 
@@ -21,7 +21,7 @@
   const displayableValues = $derived(values.slice(0, MAX_ITEMS));
   const omittedValues = $derived(values.slice(MAX_ITEMS));
 
-  const expanded = writable(false);
+  const expanded = new BehaviorSubject(false);
 </script>
 
 <div class="trakt-collapsable-values">
@@ -39,8 +39,8 @@
               i18n={MoreButtonIntlProvider}
               label="{m.button_label_expand_category({ category })}}"
               count={omittedValues.length}
-              onExpand={() => expanded.set(true)}
-              onCollapse={() => expanded.set(false)}
+              onExpand={() => expanded.next(true)}
+              onCollapse={() => expanded.next(false)}
             />
           </RenderFor>
         {/if}

@@ -1,6 +1,7 @@
 import { movieActivityHistoryQuery } from '$lib/requests/queries/users/movieActivityHistoryQuery.ts';
 import { showActivityHistoryQuery } from '$lib/requests/queries/users/showActivityHistoryQuery.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { combineLatest, map } from 'rxjs';
 import { usePaginatedListQuery } from '../../lists/stores/usePaginatedListQuery.ts';
 import { mapToMonthToDateDetails } from './_internal/mapToMonthToDateDetails.ts';
 
@@ -28,14 +29,17 @@ export function useMonthToDate({ slug }: UseMonthToDateProps) {
   );
 
   return {
-    monthToDate: derived(
-      [movies, shows],
-      ([$movies, $shows]) => mapToMonthToDateDetails($movies, $shows),
+    monthToDate: combineLatest([
+      toObservable(movies),
+      toObservable(shows),
+    ]).pipe(
+      map(([m, s]) => mapToMonthToDateDetails(m, s)),
     ),
-    isLoading: derived(
-      [isLoadingMovies, isLoadingShows],
-      ([$isLoadingMovies, $isLoadingShows]) =>
-        $isLoadingMovies || $isLoadingShows,
+    isLoading: combineLatest([
+      toObservable(isLoadingMovies),
+      toObservable(isLoadingShows),
+    ]).pipe(
+      map(([m, s]) => m || s),
     ),
   };
 }

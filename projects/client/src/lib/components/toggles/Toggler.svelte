@@ -1,6 +1,6 @@
 <script lang="ts" generics="T">
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType.ts";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import Toggle from "./_internal/Toggle.svelte";
   import ToggleIcon from "./_internal/ToggleIcon.svelte";
   import type { ToggleOption } from "./ToggleOption.ts";
@@ -25,7 +25,7 @@
   */
   let trackerElement: HTMLDivElement;
   const handleChange = (index: number) => {
-    trackerIndex.set(index);
+    trackerIndex.next(index);
     trackerElement?.classList.add("moving");
   };
 </script>

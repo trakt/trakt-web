@@ -7,7 +7,7 @@
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import AddCommentAction from "./_internal/comment-actions/AddCommentAction.svelte";
   import PostCommentDialog from "./_internal/dialog/PostCommentDialog.svelte";
   import CommentsDrawer from "./_internal/drawers/CommentsDrawer.svelte";
@@ -30,12 +30,12 @@
   const postCommentDialog = writable<HTMLDialogElement>();
   const drilldownSource = writable<ActiveComment | undefined>(undefined);
 
-  const isOpen = writable(false);
-  const onClose = () => isOpen.set(false);
+  const isOpen = new BehaviorSubject(false);
+  const onClose = () => isOpen.next(false);
 
   const onDrilldown = (comment?: ActiveComment) => {
-    isOpen.set(true);
-    drilldownSource.set(comment);
+    isOpen.next(true);
+    drilldownSource.next(comment);
   };
 </script>
 

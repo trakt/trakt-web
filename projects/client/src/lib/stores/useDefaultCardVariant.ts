@@ -1,16 +1,20 @@
 import { useNavigation } from '$lib/features/navigation/useNavigation.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 
 export function useDefaultCardVariant<M>(type: M) {
   const { navigation } = useNavigation();
+  const navigation$ = toObservable(navigation);
 
-  return derived(navigation, ($navigation) => {
-    if (type === 'episode') {
-      return 'landscape' as const;
-    }
+  return navigation$.pipe(
+    map((n) => {
+      if (type === 'episode') {
+        return 'landscape' as const;
+      }
 
-    const isDPad = $navigation === 'dpad';
+      const isDPad = n === 'dpad';
 
-    return isDPad ? 'landscape' as const : 'portrait' as const;
-  });
+      return isDPad ? 'landscape' as const : 'portrait' as const;
+    }),
+  );
 }

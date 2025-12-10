@@ -1,5 +1,5 @@
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { focusAndScrollIntoView } from './_internal/focusAndScrollIntoView.ts';
 import { focusElement } from './_internal/focusElement.ts';
 import { getRelevantItem } from './_internal/getRelevantItem.ts';
@@ -24,17 +24,17 @@ function getItemInView() {
 }
 
 export function useNavbarNavigation() {
-  const outsideElement = writable<Element | null>(null);
-  const navbarElement = writable<Element | null>(null);
+  const outsideElement = new BehaviorSubject<Element | null>(null);
+  const navbarElement = new BehaviorSubject<Element | null>(null);
 
   const leaveNavbar = () => {
-    navbarElement.set(document.activeElement);
-    focusElement(get(outsideElement) ?? getItemInView());
-    outsideElement.set(null);
+    navbarElement.next(document.activeElement);
+    focusElement(outsideElement.value ?? getItemInView());
+    outsideElement.next(null);
   };
 
   const enterNavbar = () => {
-    outsideElement.set(document.activeElement);
+    outsideElement.next(document.activeElement);
 
     const navbar = assertDefined(
       document.querySelector(
@@ -43,16 +43,16 @@ export function useNavbarNavigation() {
       'No navbar was found',
     );
 
-    focusAndScrollIntoView(get(navbarElement) ?? getRelevantItem(navbar));
-    navbarElement.set(null);
+    focusAndScrollIntoView(navbarElement.value ?? getRelevantItem(navbar));
+    navbarElement.next(null);
   };
 
   return {
     leaveNavbar,
     enterNavbar,
     reset: () => {
-      outsideElement.set(null);
-      navbarElement.set(null);
+      outsideElement.next(null);
+      navbarElement.next(null);
     },
   };
 }

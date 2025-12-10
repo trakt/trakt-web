@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import Button from "../Button.svelte";
   import type { MoreButtonIntl } from "./MoreButtonIntl";
 
@@ -18,20 +18,19 @@
     onCollapse,
     onExpand,
   }: MediaCollapsableValuesProps = $props();
-  const expanded = writable(false);
+  const expanded = new BehaviorSubject(false);
 </script>
 
 <Button
-  onclick={() =>
-    expanded.update((state) => {
-      if (state) {
-        onCollapse();
-      } else {
-        onExpand();
-      }
-
-      return !state;
-    })}
+  onclick={() => {
+    const state = expanded.value;
+    if (state) {
+      onCollapse();
+    } else {
+      onExpand();
+    }
+    expanded.next(!state);
+  }}
   {label}
   style="ghost"
   size="tag"

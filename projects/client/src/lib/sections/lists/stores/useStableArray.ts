@@ -1,4 +1,5 @@
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { scan } from 'rxjs';
 
 export function useStableArray<T>(
   compareFn: (left: T, right: T) => boolean,
@@ -21,14 +22,9 @@ export function useStableArray<T>(
     return updatedList;
   };
 
-  let previous: Array<T> = [];
-
-  // @ts-expect-error - derived handles interoperable stores
-  const list = derived(source, ($source, set) => {
-    const updated = updateList(previous, $source);
-    previous = updated;
-    set(updated);
-  }, [] as Array<T>);
+  const list = toObservable(source).pipe(
+    scan((previous, current) => updateList(previous, current), [] as Array<T>),
+  );
 
   return {
     list,

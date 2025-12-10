@@ -3,8 +3,8 @@ import { useDimensionObserver } from '$lib/stores/css/useDimensionObserver.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
 import { debounce } from '$lib/utils/timing/debounce.ts';
 import { time } from '$lib/utils/timing/time.ts';
+import { firstValueFrom } from 'rxjs';
 import { onMount } from 'svelte';
-import { get } from 'svelte/store';
 import { NOOP_FN } from '../../../../utils/constants.ts';
 import { isPageFilling } from './isPageFilling.ts';
 import { isScrolledFarEnough } from './isScrolledFarEnough.ts';
@@ -32,8 +32,8 @@ export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
     loadMore();
   }
 
-  function loadMoreOnResize() {
-    const height = get(observedDimension);
+  async function loadMoreOnResize() {
+    const height = await firstValueFrom(observedDimension);
     if (isPageFilling(height)) {
       return;
     }
@@ -65,7 +65,7 @@ export function useLazyLoader({ loadMore }: UseLazyLoaderProps) {
     );
 
     return () => {
-      unSubscribeObservedDimension();
+      unSubscribeObservedDimension.unsubscribe();
       unregisterScroll();
       unregisterResize();
     };

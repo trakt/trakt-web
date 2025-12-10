@@ -6,7 +6,7 @@
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { onMount, type Snippet } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";
@@ -51,7 +51,7 @@
     }
   });
 
-  const isOpening = writable(false);
+  const isOpening = new BehaviorSubject(false);
   onMount(() => {
     if ($isOpening) {
       return;
@@ -68,9 +68,9 @@
   use:portal
   use:trap
   use:appendClassList={classList}
-  onintrostart={() => isOpening.set(true)}
+  onintrostart={() => isOpening.next(true)}
   onintroend={() => {
-    isOpening.set(false);
+    isOpening.next(false);
     onOpened?.();
   }}
 >

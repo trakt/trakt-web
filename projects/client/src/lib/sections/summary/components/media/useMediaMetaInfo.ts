@@ -7,7 +7,8 @@ import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
 import { episodeRatingQuery } from '$lib/requests/queries/episode/episodeRatingQuery.ts';
 import { movieRatingQuery } from '$lib/requests/queries/movies/movieRatingQuery.ts';
 import { showRatingQuery } from '$lib/requests/queries/shows/showRatingQuery.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 
 type EpisodeMetaInfoProps = {
   type: 'episode';
@@ -41,8 +42,9 @@ function typeToRatingsQuery(props: MetaInfoProps) {
 
 export function useMediaMetaInfo(props: MetaInfoProps) {
   const ratings = useQuery(typeToRatingsQuery(props));
+  const ratings$ = toObservable(ratings);
 
   return {
-    ratings: derived(ratings, ($ratings) => $ratings.data ?? EMPTY_RATINGS),
+    ratings: ratings$.pipe(map((r) => r.data ?? EMPTY_RATINGS)),
   };
 }

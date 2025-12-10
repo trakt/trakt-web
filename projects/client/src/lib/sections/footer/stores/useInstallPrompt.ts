@@ -1,14 +1,14 @@
 import { time } from '$lib/utils/timing/time.ts';
-import { get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 export function useInstallPrompt() {
-  const { subscribe, set } = writable<BeforeInstallPromptEvent | null>(
+  const store = new BehaviorSubject<BeforeInstallPromptEvent | null>(
     globalThis.install,
   );
 
   const interval = setInterval(() => {
     if (globalThis.install) {
-      set(globalThis.install);
+      store.next(globalThis.install);
       clearInterval(interval);
     }
   }, time.fps(30));
@@ -16,9 +16,9 @@ export function useInstallPrompt() {
   setTimeout(() => clearInterval(interval), time.seconds(2.5));
 
   return {
-    subscribe,
+    subscribe: store.subscribe.bind(store),
     prompt: async () => {
-      const event = get({ subscribe });
+      const event = store.value;
 
       if (!event) {
         return;
@@ -29,7 +29,7 @@ export function useInstallPrompt() {
       const isAccepted = result.outcome === 'accepted';
 
       if (isAccepted) {
-        set(null);
+        store.next(null);
       }
 
       return isAccepted;

@@ -3,7 +3,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import { useMediaSpoiler } from "$lib/features/spoilers/useMediaSpoiler";
   import type { MediaStoreProps } from "$lib/models/MediaStoreProps";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import CollapsableContent from "./CollapsableContent.svelte";
 
   const { children, ...target }: ChildrenProps & MediaStoreProps = $props();
@@ -15,7 +15,7 @@
     hide: m.button_text_hide_description(),
   };
 
-  const isCollapsed = writable(true);
+  const isCollapsed = new BehaviorSubject(true);
   const toggle = () => {
     isCollapsed.update((v) => !v);
   };

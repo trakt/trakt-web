@@ -1,6 +1,6 @@
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import type { ActivityHistory } from '../../requests/queries/users/activityHistoryQuery.ts';
 import type { DismissedItem } from './models/DismissedItem.ts';
 
@@ -20,7 +20,9 @@ function getStoredDismissal(): DismissedItem | null {
 }
 
 const createDismissalStore = () => {
-  const latest = writable<DismissedItem | null>(getStoredDismissal());
+  const latest = new BehaviorSubject<DismissedItem | null>(
+    getStoredDismissal(),
+  );
 
   return {
     latest,
@@ -32,7 +34,7 @@ const createDismissalStore = () => {
       };
 
       safeLocalStorage.setItem(STORAGE_KEY, JSON.stringify(dismissal));
-      latest.set(dismissal);
+      latest.next(dismissal);
     },
   };
 };

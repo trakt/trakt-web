@@ -5,7 +5,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { MediaComment } from '$lib/requests/models/MediaComment.ts';
 import { deleteCommentRequest } from '$lib/requests/queries/comments/deleteCommentRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 type UseDeleteCommentProps = {
   comment: MediaComment;
@@ -15,7 +15,7 @@ type UseDeleteCommentProps = {
 export function useDeleteComment(
   { comment, type }: UseDeleteCommentProps,
 ) {
-  const isDeleting = writable(false);
+  const isDeleting = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.DeleteComment);
 
@@ -24,17 +24,17 @@ export function useDeleteComment(
     : InvalidateAction.Comment.Post(type);
 
   const deleteComment = async () => {
-    isDeleting.set(true);
+    isDeleting.next(true);
 
     track();
     await deleteCommentRequest({ id: comment.id });
     await invalidate(invalidateAction);
 
-    isDeleting.set(false);
+    isDeleting.next(false);
   };
 
   return {
     deleteComment,
-    isDeleting: derived(isDeleting, ($isDeleting) => $isDeleting),
+    isDeleting: isDeleting.asObservable(),
   };
 }

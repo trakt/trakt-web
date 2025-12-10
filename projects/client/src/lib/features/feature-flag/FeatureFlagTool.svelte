@@ -6,7 +6,7 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { FEATURE_FLAG_LOCAL_STORAGE_KEY } from "./_internal/createFeatureFlagContext.ts";
   import { getFeatureFlagContext } from "./_internal/getFeatureFlagContext.ts";
   import { FeatureFlag } from "./models/FeatureFlag.ts";
@@ -14,18 +14,16 @@
   const { flags } = getFeatureFlagContext();
 
   const setFlag = (flag: FeatureFlag, value: boolean) => {
-    flags.update((currentFlags) => {
-      const updatedFlags = { ...currentFlags, [flag]: value };
-      safeLocalStorage.setItem(
-        FEATURE_FLAG_LOCAL_STORAGE_KEY,
-        JSON.stringify(updatedFlags),
-      );
-      return updatedFlags;
-    });
+    const updatedFlags = { ...flags.value, [flag]: value };
+    safeLocalStorage.setItem(
+      FEATURE_FLAG_LOCAL_STORAGE_KEY,
+      JSON.stringify(updatedFlags),
+    );
+    flags.next(updatedFlags);
   };
 
-  const isOpen = writable(false);
-  const onClose = () => isOpen.set(false);
+  const isOpen = new BehaviorSubject(false);
+  const onClose = () => isOpen.next(false);
 
   const hasFlags = $derived(Object.keys($flags).length > 0);
 </script>
@@ -33,7 +31,7 @@
 <RenderFor audience="director">
   <ActionButton
     label="Feature flags"
-    onclick={() => isOpen.set(!$isOpen)}
+    onclick={() => isOpen.next(!$isOpen)}
     style="ghost"
     data-testid={TestId.FeatureFlagToolButton}
   >

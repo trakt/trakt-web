@@ -2,7 +2,8 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 
 import { listSummaryQuery } from '$lib/requests/queries/lists/listSummaryQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 
 type UseListSummaryProps = {
   listId: string;
@@ -10,12 +11,10 @@ type UseListSummaryProps = {
 
 export function useListSummary(props: UseListSummaryProps) {
   const query = useQuery(listSummaryQuery(props));
+  const query$ = toObservable(query);
 
   return {
-    list: derived(query, ($query) => $query.data),
-    isLoading: derived(
-      query,
-      toLoadingState,
-    ),
+    list: query$.pipe(map((q) => q.data)),
+    isLoading: query$.pipe(map(toLoadingState)),
   };
 }

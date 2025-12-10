@@ -3,7 +3,6 @@
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { isSupported } from "firebase/analytics";
   import { onDestroy, onMount } from "svelte";
-  import { get } from "svelte/store";
   import type { AnalyticsProps } from "./AnalyticsProps";
 
   const { onload }: AnalyticsProps = $props();
@@ -22,7 +21,7 @@
       if (!user) {
         return;
       }
-      const userId = get(isAuthorized) ? `${user.id}` : null;
+      const userId = isAuthorized.value ? `${user.id}` : null;
 
       onload(userId);
     });

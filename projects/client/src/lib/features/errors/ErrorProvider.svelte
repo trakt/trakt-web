@@ -5,8 +5,8 @@
   import ErrorServicePage from "$lib/pages/errors/ErrorServicePage.svelte";
   import UnexpectedErrorPage from "$lib/pages/errors/UnexpectedErrorPage.svelte";
   import * as Sentry from "@sentry/sveltekit";
+  import { BehaviorSubject } from "rxjs";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
   import { mapToWellKnownError } from "./_internal/mapToWellKnownError";
   import { FETCH_ERROR_EVENT } from "./constants";
   import type { CustomFetchError } from "./models/CustomFetchError";
@@ -16,13 +16,13 @@
   } from "./models/WellKnownErrors";
 
   const { children }: ChildrenProps = $props();
-  const fetchError = writable<WellKnownError | undefined>(undefined);
-  const unexpectedError = writable<Error | undefined>(undefined);
+  const fetchError = new BehaviorSubject<WellKnownError | undefined>(undefined);
+  const unexpectedError = new BehaviorSubject<Error | undefined>(undefined);
 
   onMount(() => {
     const handler = (event: Event) => {
       const errorEvent = event as CustomEvent<CustomFetchError>;
-      fetchError.set(mapToWellKnownError(errorEvent.detail));
+      fetchError.next(mapToWellKnownError(errorEvent.detail));
     };
 
     globalThis.window.addEventListener(FETCH_ERROR_EVENT, handler);
@@ -33,8 +33,8 @@
   });
 
   afterNavigate((_) => {
-    fetchError.set(undefined);
-    unexpectedError.set(undefined);
+    fetchError.next(undefined);
+    unexpectedError.next(undefined);
   });
 
   const hasError = $derived($fetchError || $unexpectedError);
@@ -57,7 +57,7 @@
         type: "ErrorProvider",
       },
     });
-    unexpectedError.set(error);
+    unexpectedError.next(error);
   }}
 />
 

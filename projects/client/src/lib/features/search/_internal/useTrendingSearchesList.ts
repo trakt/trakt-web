@@ -12,8 +12,9 @@ import {
 } from '$lib/requests/queries/search/searchTrendingQuery.ts';
 import { isSameDayOfYear } from '$lib/utils/date/isSameDayOfYear.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 const LIST_LIMIT = 50;
 
@@ -40,27 +41,26 @@ function hasBirthday(person: PersonSummary): boolean {
 }
 
 export function useTrendingSearchesList(mode: SearchMode) {
-  const query = useQuery(modeToQuery(mode));
+  const query = toObservable(useQuery(modeToQuery(mode)));
 
   return {
-    list: derived(query, ($query) => {
-      if (!$query.data) {
+    list: query.pipe(map((q) => {
+      if (!q.data) {
         return [];
       }
 
-      if ($query.data.type === 'people') {
-        return ($query.data.items as PersonSummary[])
+      if (q.data.type === 'people') {
+        return (q.data.items as PersonSummary[])
           .toSorted((a, b) => Number(hasBirthday(b)) - Number(hasBirthday(a)));
       }
 
-      const mediaData = $query.data as { type: 'media'; items: MediaEntry[] };
+      const mediaData = q.data as { type: 'media'; items: MediaEntry[] };
       return mediaData.items
         .filter((item) => item.type === mode || mode === 'media')
         .slice(0, LIST_LIMIT);
-    }),
-    isLoading: derived(
-      query,
-      toLoadingState,
+    })),
+    isLoading: query.pipe(
+      map(toLoadingState),
     ),
   };
 }

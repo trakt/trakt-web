@@ -1,7 +1,7 @@
 import type { EpisodeEntry } from '$lib/requests/models/EpisodeEntry.ts';
 import { EpisodeComputedType } from '$lib/requests/models/EpisodeType.ts';
 import type { ShowEntry } from '$lib/requests/models/ShowEntry.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import { useMediaSpoiler } from './useMediaSpoiler.ts';
 
 type SpoilerImageProps = {
@@ -18,18 +18,17 @@ export function useEpisodeSpoilerImage(props: SpoilerImageProps) {
     type: 'episode',
   });
 
-  return derived(
-    isSpoilerHidden,
-    ($isSpoilerHidden) => {
+  return isSpoilerHidden.pipe(
+    map((hidden) => {
       switch (episode.type) {
         case EpisodeComputedType.full_season:
         case EpisodeComputedType.multiple_episodes:
           return show.cover.url.thumb;
         default:
-          return $isSpoilerHidden
+          return hidden
             ? show.cover.url.thumb
             : episode.cover.url ?? show.cover.url.thumb;
       }
-    },
+    }),
   );
 }

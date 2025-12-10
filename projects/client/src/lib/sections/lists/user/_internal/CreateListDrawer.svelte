@@ -4,16 +4,16 @@
   import FormInput from "$lib/components/form/FormInput.svelte";
   import Switch from "$lib/components/toggles/Switch.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { useCreateList } from "./useCreateList";
 
   const { onClose }: { onClose: () => void } = $props();
 
-  const isOpen = writable(true);
+  const isOpen = new BehaviorSubject(true);
 
-  const name = writable("");
-  const description = writable("");
-  const isPrivate = writable(false);
+  const name = new BehaviorSubject("");
+  const description = new BehaviorSubject("");
+  const isPrivate = new BehaviorSubject(false);
 
   const { createList, isCreating } = useCreateList();
 
@@ -30,7 +30,7 @@
 
 <Drawer
   onClose={() => {
-    isOpen.set(false);
+    isOpen.next(false);
     onClose();
   }}
   size="auto"
@@ -43,7 +43,7 @@
       <Switch
         label={m.switch_label_toggle_list_privacy()}
         checked={$isPrivate}
-        onclick={() => isPrivate.set(!$isPrivate)}
+        onclick={() => isPrivate.next(!$isPrivate)}
       />
     </div>
   {/snippet}
@@ -58,7 +58,7 @@
     <div class="trakt-list-properties">
       <FormInput
         placeholder={m.input_placeholder_lists_name()}
-        onChange={(value) => name.set(value.trim())}
+        onChange={(value) => name.next(value.trim())}
         disabled={$isCreating}
         value={$name}
         autofocus

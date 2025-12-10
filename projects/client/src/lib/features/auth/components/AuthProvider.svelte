@@ -2,7 +2,6 @@
   import { beforeNavigate, goto } from "$app/navigation";
   import { iffy } from "$lib/utils/function/iffy";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { get } from "svelte/store";
   import { createAuthContext } from "../stores/createAuthContext";
   import { initializeUserManager } from "../stores/initializeUserManager";
   import { useUser } from "../stores/useUser";
@@ -31,7 +30,7 @@
   beforeNavigate(({ from, to }) => {
     const isSamePage = from?.url.pathname === to?.url.pathname;
 
-    if (get(isAuthorized) || isSamePage) {
+    if (isAuthorized.value || isSamePage) {
       return;
     }
 

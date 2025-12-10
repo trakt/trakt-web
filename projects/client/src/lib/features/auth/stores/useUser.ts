@@ -1,6 +1,7 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { Theme } from '$lib/features/theme/models/Theme.ts';
-import { derived, get, readable } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map, of } from 'rxjs';
 import {
   currentUserCommentReactionsQuery,
   type UserReactions,
@@ -89,31 +90,31 @@ function definedData<T>(data: T | undefined): T {
 export function useUser() {
   const { isAuthorized } = useAuth();
 
-  if (!get(isAuthorized)) {
+  if (!isAuthorized.value) {
     return {
-      user: readable(ANONYMOUS_USER),
-      history: readable<UserHistory>({
+      user: of(ANONYMOUS_USER),
+      history: of<UserHistory>({
         movies: new Map(),
         shows: new Map(),
       }),
-      watchlist: readable<UserWatchlist>({
+      watchlist: of<UserWatchlist>({
         movies: new Map(),
         shows: new Map(),
       }),
-      ratings: readable<UserRatings>({
+      ratings: of<UserRatings>({
         episodes: new Map(),
         movies: new Map(),
         shows: new Map(),
       }),
-      reactions: readable<UserReactions>(new Map()),
-      favorites: readable({
+      reactions: of<UserReactions>(new Map()),
+      favorites: of({
         movies: new Map(),
         shows: new Map(),
       }),
-      network: readable<UserNetwork>({
+      network: of<UserNetwork>({
         following: [],
       }),
-      plexLibrary: readable<UserPlexLibrary>({
+      plexLibrary: of<UserPlexLibrary>({
         movieIds: [],
         episodeIds: [],
         showIds: [],
@@ -134,37 +135,29 @@ export function useUser() {
     currentUserPlexLibraryQuery(),
   );
 
-  const user = derived(
-    userQueryResponse,
-    ($query) => definedData($query.data),
+  const user = toObservable(userQueryResponse).pipe(
+    map((q) => definedData(q.data)),
   );
-  const history = derived(
-    historyQueryResponse,
-    ($query) => $query.data,
+  const history = toObservable(historyQueryResponse).pipe(
+    map((q) => q.data),
   );
-  const watchlist = derived(
-    watchlistQueryResponse,
-    ($watchlist) => $watchlist.data,
+  const watchlist = toObservable(watchlistQueryResponse).pipe(
+    map((q) => q.data),
   );
-  const ratings = derived(
-    ratingsQueryResponse,
-    ($ratings) => $ratings.data,
+  const ratings = toObservable(ratingsQueryResponse).pipe(
+    map((q) => q.data),
   );
-  const reactions = derived(
-    commentReactionsQueryResponse,
-    ($reactions) => $reactions.data,
+  const reactions = toObservable(commentReactionsQueryResponse).pipe(
+    map((q) => q.data),
   );
-  const favorites = derived(
-    favoritesQueryResponse,
-    ($favorites) => $favorites.data,
+  const favorites = toObservable(favoritesQueryResponse).pipe(
+    map((q) => q.data),
   );
-  const network = derived(
-    followingQueryResponse,
-    ($network) => $network.data,
+  const network = toObservable(followingQueryResponse).pipe(
+    map((q) => q.data),
   );
-  const plexLibrary = derived(
-    plexLibraryQueryResponse,
-    ($collection) => $collection.data,
+  const plexLibrary = toObservable(plexLibraryQueryResponse).pipe(
+    map((q) => q.data),
   );
 
   return {

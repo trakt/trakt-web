@@ -7,7 +7,7 @@
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";
@@ -59,13 +59,13 @@
     }
   });
 
-  const showCreateList = writable(false);
+  const showCreateList = new BehaviorSubject(false);
 
   const cta: Cta = $derived({
     type: "personal-list",
     mediaType: mode === "media" ? undefined : mode,
     action: {
-      onClick: () => showCreateList.set(true),
+      onClick: () => showCreateList.next(true),
       disabled: false,
     },
   });
@@ -140,7 +140,7 @@
 {/if}
 
 {#if $showCreateList}
-  <CreateListDrawer onClose={() => showCreateList.set(false)} />
+  <CreateListDrawer onClose={() => showCreateList.next(false)} />
 {/if}
 
 <style>

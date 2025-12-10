@@ -15,12 +15,16 @@
   const { lastWatched } = useLastWatched();
 
   onMount(() => {
-    const unsubscribeNowWatching = nowWatching.subscribe(nowPlaying.set);
-    const unsubscribeLastWatched = lastWatchedItem.subscribe(lastWatched.set);
+    const unsubscribeNowWatching = nowWatching.subscribe((val) =>
+      nowPlaying.next(val),
+    );
+    const unsubscribeLastWatched = lastWatchedItem.subscribe((val) =>
+      lastWatched.next(val),
+    );
 
     return () => {
-      unsubscribeNowWatching();
-      unsubscribeLastWatched();
+      unsubscribeNowWatching.unsubscribe();
+      unsubscribeLastWatched.unsubscribe();
     };
   });
 </script>

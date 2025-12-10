@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
-  const themeColor = writable("transparent");
+  const themeColor = new BehaviorSubject("transparent");
 
   function setupFrame(ev: Event) {
     const iframeElement = ev.target as HTMLIFrameElement;
@@ -39,7 +39,7 @@
         }
 
         console.log("🎨 Theme color found:", color);
-        themeColor.set(color);
+        themeColor.next(color);
       }
 
       setThemeColor();
@@ -70,10 +70,10 @@
     });
   }
 
-  const time = writable(formatTime(new Date()));
+  const time = new BehaviorSubject(formatTime(new Date()));
 
   setInterval(() => {
-    time.set(formatTime(new Date()));
+    time.next(formatTime(new Date()));
   }, 1000);
 </script>
 

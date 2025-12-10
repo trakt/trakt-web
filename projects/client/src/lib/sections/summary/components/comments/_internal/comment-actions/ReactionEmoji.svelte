@@ -2,7 +2,7 @@
   import CrossOriginImage from "$lib/features/image/components/CrossOriginImage.svelte";
   import { time } from "$lib/utils/timing/time";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { EMOJI_BASE_URL } from "./constants";
 
   const {
@@ -19,7 +19,7 @@
 
   const baseUrl = $derived(`${EMOJI_BASE_URL}/${code}`);
 
-  const hasInitialAnimation = writable(false);
+  const hasInitialAnimation = new BehaviorSubject(false);
 
   // FIXME: switch to Lottie animations for better control on the animation and reduce file size
   const hasAnimation = $derived(
@@ -35,12 +35,12 @@
     const delay = time.seconds(0.05) * (index + 1);
 
     const startTimeoutId = setTimeout(
-      () => hasInitialAnimation.set(true),
+      () => hasInitialAnimation.next(true),
       delay,
     );
 
     const endTimeoutId = setTimeout(
-      () => hasInitialAnimation.set(false),
+      () => hasInitialAnimation.next(false),
       delay + duration,
     );
 

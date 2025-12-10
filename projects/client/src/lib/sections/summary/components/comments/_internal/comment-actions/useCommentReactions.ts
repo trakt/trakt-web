@@ -5,7 +5,7 @@ import {
   type Reaction,
 } from '$lib/requests/queries/comments/commentReactionsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived, type Readable } from 'svelte/store';
+import { map, type Observable } from 'rxjs';
 import type { ReactionDistribution } from '../models/ReactionDistribution.ts';
 import type { ReactionSummary } from '../models/ReactionSummary.ts';
 
@@ -16,9 +16,9 @@ type UseCommentReactionsProps = {
 const PREVIEW_LIMIT = 3;
 
 type CommentReactions = {
-  currentReaction: Readable<Reaction | null>;
-  summary: Readable<ReactionSummary>;
-  isLoading: Readable<boolean>;
+  currentReaction: Observable<Reaction | null>;
+  summary: Observable<ReactionSummary>;
+  isLoading: Observable<boolean>;
 };
 
 export function useCommentReactions(
@@ -29,11 +29,11 @@ export function useCommentReactions(
   const summary = useQuery(commentReactionsQuery({ id }));
 
   return {
-    currentReaction: derived(reactions, ($reactions) => {
-      return $reactions?.get(id)?.reaction ?? null;
-    }),
-    summary: derived(summary, ($summary) => {
-      if (!$summary.data) {
+    currentReaction: reactions.pipe(map((r) => {
+      return r?.get(id)?.reaction ?? null;
+    })),
+    summary: summary.pipe(map((s) => {
+      if (!s.data) {
         return {
           count: 0,
           top: [],
@@ -42,7 +42,7 @@ export function useCommentReactions(
       }
 
       const sortedDistribution = Object
-        .entries($summary.data.distribution)
+        .entries(s.data.distribution)
         .toSorted(([_key, a], [_key2, b]) => b - a);
 
       const top = sortedDistribution
@@ -51,13 +51,13 @@ export function useCommentReactions(
         .map(([reaction]) => reaction) as Array<Reaction>;
 
       return {
-        count: $summary.data.count,
+        count: s.data.count,
         distribution: Object.fromEntries(
           sortedDistribution,
         ) as ReactionDistribution,
         top,
       };
-    }),
-    isLoading: derived(summary, toLoadingState),
+    })),
+    isLoading: summary.pipe(map(toLoadingState)),
   };
 }

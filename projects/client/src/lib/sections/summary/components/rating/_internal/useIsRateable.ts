@@ -1,6 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import { useIsWatched } from '../../../../media-actions/mark-as-watched/useIsWatched.ts';
 
 export type IsRateableProps = MediaStoreProps;
@@ -12,22 +12,21 @@ export function useIsRateable(props: IsRateableProps) {
 
   if (type === 'show') {
     return {
-      isRateable: derived(
-        history,
-        ($history) => {
-          if (!$history) {
+      isRateable: history.pipe(
+        map((h) => {
+          if (!h) {
             return false;
           }
 
           return media.every((m) => {
-            const show = $history.shows.get(m.id);
+            const show = h.shows.get(m.id);
             return Boolean(show?.isPartiallyWatched || show?.isWatched);
           });
-        },
+        }),
       ),
     };
   }
 
   const { isWatched } = useIsWatched(props);
-  return { isRateable: derived(isWatched, ($isWatched) => $isWatched) };
+  return { isRateable: isWatched.pipe(map((w) => w)) };
 }

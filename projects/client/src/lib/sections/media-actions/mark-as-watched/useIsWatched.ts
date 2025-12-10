@@ -1,5 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { derived } from 'svelte/store';
+import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { map } from 'rxjs';
 import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
 export type IsWatchedProps = MediaStoreProps;
@@ -14,18 +15,17 @@ export function useIsWatched(props: IsWatchedProps) {
     : [];
   const showId = props.type === 'episode' ? props.show.id : -1;
 
-  const isWatched = derived(
-    history,
-    ($history) => {
-      if (!$history) {
+  const isWatched = toObservable(history).pipe(
+    map((h) => {
+      if (!h) {
         return false;
       }
 
       switch (type) {
         case 'movie':
-          return media.every((m) => $history.movies.has(m.id));
+          return media.every((m) => h.movies.has(m.id));
         case 'episode': {
-          const watchedEpisodes = $history.shows.get(showId)?.episodes ??
+          const watchedEpisodes = h.shows.get(showId)?.episodes ??
             [];
 
           return episodes.every((episode) =>
@@ -35,12 +35,10 @@ export function useIsWatched(props: IsWatchedProps) {
           );
         }
         case 'show': {
-          return media.every((m) =>
-            Boolean($history.shows.get(m.id)?.isWatched)
-          );
+          return media.every((m) => Boolean(h.shows.get(m.id)?.isWatched));
         }
       }
-    },
+    }),
   );
 
   return { isWatched };

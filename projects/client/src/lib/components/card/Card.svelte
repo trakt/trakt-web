@@ -3,7 +3,7 @@
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { dPadTrigger } from "./_internal/dPadTrigger";
 
   const {
@@ -15,12 +15,12 @@
     classList?: string;
   } = $props();
 
-  const isVisible = writable(false);
+  const isVisible = new BehaviorSubject(false);
   const { navigation } = useNavigation();
 </script>
 
 <div
-  use:whenInViewport={() => isVisible.set(true)}
+  use:whenInViewport={() => isVisible.next(true)}
   use:dPadTrigger={".trakt-card-content .trakt-link, .trakt-button-link"}
   class="trakt-card"
   data-navigation-type={$navigation}

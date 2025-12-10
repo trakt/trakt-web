@@ -3,7 +3,7 @@ import type { FilterParams } from '$lib/requests/models/FilterParams.ts';
 import type { PaginationParams } from '$lib/requests/models/PaginationParams.ts';
 import { socialActivityQuery } from '$lib/requests/queries/users/socialActivityQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 type ActivityListProps =
   & {
@@ -18,16 +18,16 @@ export function useActivityList(props: ActivityListProps) {
   );
 
   return {
-    list: derived(list, ($list) => {
+    list: list.pipe(map((l) => {
       if (!props.type || props.type === 'media') {
-        return $list;
+        return l;
       }
 
-      return $list.filter((entry) =>
+      return l.filter((entry) =>
         entry.type === props.type ||
         props.type === 'show' && entry.type === 'episode'
       );
-    }),
+    })),
     ...rest,
   };
 }

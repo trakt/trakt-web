@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
   import type { FormInputProps } from "./models/FormInputProps";
 
@@ -25,7 +25,7 @@
 
     if (validation) {
       const isValid = validation.isValid(newValue);
-      errorText.set(isValid ? undefined : validation.errorText);
+      errorText.next(isValid ? undefined : validation.errorText);
       inputElement.setCustomValidity(!isValid ? validation.errorText : "");
     }
 

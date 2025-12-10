@@ -4,16 +4,16 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { frameListener } from "./_internal/frameListener";
 
   const { user } = useUser();
   const { value: token } = getToken();
 
-  const isLoading = writable(true);
+  const isLoading = new BehaviorSubject(true);
 
   function handleLoad() {
-    isLoading.set(false);
+    isLoading.next(false);
   }
 </script>
 

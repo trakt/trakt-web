@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import Button from "../buttons/Button.svelte";
   import type { FormProps } from "./models/FormProps";
 
@@ -15,11 +15,11 @@
 
   let formElement: HTMLFormElement;
 
-  const isFormValid = writable(false);
+  const isFormValid = new BehaviorSubject(false);
 
   const checkFormValidity = () => {
     const isValid = formElement.checkValidity();
-    isFormValid.set(isValid);
+    isFormValid.next(isValid);
   };
 </script>
 

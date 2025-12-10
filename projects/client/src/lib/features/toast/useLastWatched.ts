@@ -1,5 +1,4 @@
 import type { ExtendedMediaType } from '$lib/requests/models/ExtendedMediaType.ts';
-import { get } from 'svelte/store';
 import { getToastContext } from './_internal/getToastContext.ts';
 import { useDismissals } from './useDismissals.ts';
 
@@ -10,7 +9,7 @@ export function useLastWatched() {
   return {
     lastWatched,
     dismiss: (id: number, type: ExtendedMediaType) => {
-      const item = get(lastWatched);
+      const item = lastWatched.value;
       if (id !== item?.media.id || type !== item?.type) {
         return;
       }

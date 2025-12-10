@@ -1,14 +1,14 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
+  import { BehaviorSubject } from "rxjs";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
   import StemTag from "../tags/StemTag.svelte";
   import Tooltip from "../tooltip/Tooltip.svelte";
 
-  const isMounted = writable(false);
+  const isMounted = new BehaviorSubject(false);
 
   onMount(() => {
-    isMounted.set(true);
+    isMounted.next(true);
   });
 </script>
 

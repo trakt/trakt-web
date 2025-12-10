@@ -1,4 +1,4 @@
-import { get } from 'svelte/store';
+// get removed - use .value or firstValueFrom
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useContentObserver } from './useContentObserver.ts';
 
@@ -9,7 +9,7 @@ describe('action: useDynamicTextArea', () => {
 
   it('should initialize with no content', () => {
     const { hasContent } = useContentObserver();
-    expect(get(hasContent)).toBe(false);
+    expect(hasContent.value).toBe(false);
   });
 
   it('should detect content when text is added', () => {
@@ -22,7 +22,7 @@ describe('action: useDynamicTextArea', () => {
 
     vi.advanceTimersToNextFrame();
 
-    expect(get(hasContent)).toBe(true);
+    expect(hasContent.value).toBe(true);
     action.destroy();
   });
 });

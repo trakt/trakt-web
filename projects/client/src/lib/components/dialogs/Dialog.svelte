@@ -3,7 +3,7 @@
   import CloseIcon from "$lib/components/icons/CloseIcon.svelte";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { Snippet } from "svelte";
-  import { writable, type Writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { mobileAppleVisualViewportHack } from "./_internal/mobileAppleVisualViewportHack";
   import { useDialogState } from "./_internal/useDialogState.ts";
 
@@ -19,7 +19,7 @@
     title,
     children,
     onClose,
-    dialog = writable(),
+    dialog = new BehaviorSubject(),
     badge,
     metaInfo,
   }: DialogProps = $props();
