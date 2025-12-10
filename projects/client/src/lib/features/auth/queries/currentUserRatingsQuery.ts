@@ -77,11 +77,11 @@ export type UserRatings = z.infer<typeof UserRatingsSchema>;
 
 export const currentUserRatingsQuery = defineQuery({
   key: 'currentUserRatings',
-  request: () =>
+  request: (params) =>
     Promise.all([
-      currentUserRatedMoviesRequest({ fetch }),
-      currentUserRatedShowsRequest({ fetch }),
-      currentUserRatedEpisodesRequest({ fetch }),
+      currentUserRatedMoviesRequest(params),
+      currentUserRatedShowsRequest(params),
+      currentUserRatedEpisodesRequest(params),
     ]),
   invalidations: [
     InvalidateAction.Rated('episode'),

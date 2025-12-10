@@ -36,7 +36,7 @@ const currentUserCommentReactionsRequest = ({ fetch }: ApiParams) =>
 
 export const currentUserCommentReactionsQuery = defineQuery({
   key: 'currentUserReactions',
-  request: () => currentUserCommentReactionsRequest({ fetch }),
+  request: (params) => currentUserCommentReactionsRequest(params),
   invalidations: [InvalidateAction.React],
   dependencies: [],
   mapper: (response) =>

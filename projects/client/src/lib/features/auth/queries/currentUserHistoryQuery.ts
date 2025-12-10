@@ -109,10 +109,10 @@ export type UserHistory = z.infer<typeof UserHistorySchema>;
 
 export const currentUserHistoryQuery = defineQuery({
   key: 'currentUserHistory',
-  request: () =>
+  request: (params) =>
     Promise.all([
-      currentUserWatchedMoviesRequest({ fetch }),
-      currentUserWatchedShowsRequest({ fetch }),
+      currentUserWatchedMoviesRequest(params),
+      currentUserWatchedShowsRequest(params),
     ]),
   invalidations: [
     InvalidateAction.MarkAsWatched('show'),
