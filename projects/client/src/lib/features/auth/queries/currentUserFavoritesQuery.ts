@@ -63,10 +63,10 @@ const UserFavoritesSchema = z.object({
 export type UserFavorites = z.infer<typeof UserFavoritesSchema>;
 export const currentUserFavoritesQuery = defineQuery({
   key: 'currentUserFavorites',
-  request: () =>
+  request: (params) =>
     Promise.all([
-      favoritedMoviesRequest({ fetch }),
-      favoritedShowsRequest({ fetch }),
+      favoritedMoviesRequest(params),
+      favoritedShowsRequest(params),
     ]),
   invalidations: [
     InvalidateAction.Favorited('movie'),

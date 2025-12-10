@@ -37,11 +37,11 @@ function toTraktIds(
 
 export const currentUserPlexLibraryQuery = defineQuery({
   key: 'currentUserPlexLibrary',
-  request: () =>
+  request: (params) =>
     Promise.all([
-      currentUserPlexLibraryRequest({ fetch }, 'movies'),
-      currentUserPlexLibraryRequest({ fetch }, 'shows'),
-      currentUserPlexLibraryRequest({ fetch }, 'episodes'),
+      currentUserPlexLibraryRequest(params, 'movies'),
+      currentUserPlexLibraryRequest(params, 'shows'),
+      currentUserPlexLibraryRequest(params, 'episodes'),
     ]),
   invalidations: [],
   dependencies: [],

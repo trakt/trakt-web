@@ -67,10 +67,10 @@ export type UserWatchlist = z.infer<typeof UserWatchlistSchema>;
 
 export const currentUserWatchlistQuery = defineQuery({
   key: 'currentUserWatchlist',
-  request: () =>
+  request: (params) =>
     Promise.all([
-      currentUserWatchlistedMoviesRequest({ fetch }),
-      currentUserWatchlistedShowsRequest({ fetch }),
+      currentUserWatchlistedMoviesRequest(params),
+      currentUserWatchlistedShowsRequest(params),
     ]),
   invalidations: [
     InvalidateAction.Watchlisted('show'),
