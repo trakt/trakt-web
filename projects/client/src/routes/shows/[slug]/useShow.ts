@@ -7,40 +7,41 @@ import { showSentimentsQuery } from '$lib/requests/queries/shows/showSentimentsQ
 import { showStudiosQuery } from '$lib/requests/queries/shows/showStudiosQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
 import { streamShowQuery } from '$lib/requests/queries/shows/streamShowQuery.ts';
+import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { toObservable } from '$lib/utils/store/toObservable.ts';
-import { map, switchMap } from 'rxjs/operators';
-import { derived, readable } from 'svelte/store';
+import { combineLatest, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export function useShow(slug: string | undefined) {
   if (!slug) {
     return {
-      isLoading: readable(true),
-      show: readable(undefined),
-      studios: readable(undefined),
-      crew: readable(undefined),
-      seasons: readable(undefined),
-      videos: readable([]),
-      intl: readable(undefined),
-      streamOn: readable(undefined),
-      sentiments: readable(undefined),
+      isLoading: of(true),
+      show: of(undefined),
+      studios: of(undefined),
+      crew: of(undefined),
+      seasons: of(undefined),
+      videos: of([]),
+      intl: of(undefined),
+      streamOn: of(undefined),
+      sentiments: of(undefined),
     };
   }
 
-  const { country, getPreferred } = useStreamingPreferences();
+  const { country, favorites } = useStreamingPreferences();
 
   const show = useQuery(showSummaryQuery({ slug }));
   const seasons = useQuery(showSeasonsQuery({ slug }));
   const studios = useQuery(showStudiosQuery({ slug }));
   const crew = useQuery(showPeopleQuery({ slug }));
-  const streamOn = toObservable(country)
-    .pipe(
-      switchMap((country) =>
-        toObservable(useQuery(streamShowQuery({ slug, country })))
-      ),
-    );
+
+  const streamOnQuery = useQuery(
+    country.pipe(
+      map((country) => streamShowQuery({ slug, country })),
+    ),
+  );
+
   const sentiments = useQuery(showSentimentsQuery({ slug }));
 
   const locale = languageTag();
@@ -60,33 +61,39 @@ export function useShow(slug: string | undefined) {
     sentiments,
   ];
 
-  const isLoading = derived(
-    queries,
-    ($queries) => $queries.some(toLoadingState),
+  const isLoading = combineLatest(queries).pipe(
+    map(($queries) => $queries.some(toLoadingState)),
   );
 
   return {
     isLoading,
-    show: derived(show, ($show) => $show.data),
-    studios: derived(studios, ($studios) => $studios.data),
-    crew: derived(crew, ($crew) => $crew.data),
-    seasons: derived(seasons, ($seasons) => $seasons.data),
-    sentiments: derived(sentiments, ($sentiments) => $sentiments.data),
-    intl: derived([intl, show], ([$intl, $show]) =>
-      findRegionalIntl({
-        type: 'show',
-        translations: $intl.data,
-        fallback: $show.data,
-      })),
-    streamOn: streamOn.pipe(
-      map(($streamOn) => {
+    show: show.pipe(map(($show) => $show.data)),
+    studios: studios.pipe(map(($studios) => $studios.data)),
+    crew: crew.pipe(map(($crew) => $crew.data)),
+    seasons: seasons.pipe(map(($seasons) => $seasons.data)),
+    sentiments: sentiments.pipe(map(($sentiments) => $sentiments.data)),
+    intl: combineLatest([intl, show]).pipe(
+      map(([$intl, $show]) =>
+        findRegionalIntl({
+          type: 'show',
+          translations: $intl.data,
+          fallback: $show.data,
+        })
+      ),
+    ),
+    streamOn: combineLatest([streamOnQuery, favorites, country]).pipe(
+      map(([$streamOn, $favorites, $country]) => {
         if (!$streamOn.data) {
           return;
         }
 
         return {
           services: $streamOn.data,
-          preferred: getPreferred($streamOn.data),
+          preferred: findPreferredStreamingService({
+            services: $streamOn.data,
+            favorites: $favorites,
+            countryCode: $country,
+          }),
         };
       }),
     ),

@@ -5,8 +5,8 @@
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { useMedia, WellKnownMediaQuery } from "$lib/stores/css/useMedia";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount, type Snippet } from "svelte";
-  import { writable } from "svelte/store";
   import { slide } from "svelte/transition";
   import ActionButton from "../buttons/ActionButton.svelte";
   import CloseIcon from "../icons/CloseIcon.svelte";

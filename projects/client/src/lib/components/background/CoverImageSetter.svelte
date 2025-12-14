@@ -18,7 +18,7 @@
 
   $effect.pre(() => {
     if (!src) {
-      cover.set({
+      cover.next({
         data: undefined,
         state: "no-cover",
       });
@@ -40,11 +40,11 @@
       colors,
     };
 
-    cover.set({
+    cover.next({
       data,
       state: "change",
     });
 
-    queueMicrotask(() => cover.set({ data, state: "ready" }));
+    queueMicrotask(() => cover.next({ data, state: "ready" }));
   });
 </script>

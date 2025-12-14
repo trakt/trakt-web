@@ -1,5 +1,4 @@
 import { BehaviorSubject } from 'rxjs';
-import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import { useInMemoryPagination } from './useInMemoryPagination.ts';
 
@@ -23,10 +22,10 @@ describe('useInMemoryPagination', () => {
 
     expect(currentList).toEqual([1, 2, 3]);
     expect(currentHasNextPage).toBe(true);
-    expect(get(fetchNextPage)).toBeTypeOf('function');
+    expect(fetchNextPage).toBeTypeOf('function');
   });
 
-  it('should load next page when fetchNextPage is called', () => {
+  it('should load next page when fetchNextPage is called', async () => {
     const items$ = new BehaviorSubject([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     const { list, hasNextPage, fetchNextPage } = useInMemoryPagination(items$, {
       page: 1,
@@ -46,13 +45,13 @@ describe('useInMemoryPagination', () => {
     expect(currentList).toEqual([1, 2, 3]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
 
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6]);
     expect(currentHasNextPage).toBe(true);
   });
 
-  it('should load multiple pages cumulatively', () => {
+  it('should load multiple pages cumulatively', async () => {
     const items$ = new BehaviorSubject([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     const { list, fetchNextPage } = useInMemoryPagination(items$, {
       page: 1,
@@ -66,17 +65,17 @@ describe('useInMemoryPagination', () => {
 
     expect(currentList).toEqual([1, 2, 3]);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6]);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
-  it('should set hasNextPage to false when all items are loaded', () => {
+  it('should set hasNextPage to false when all items are loaded', async () => {
     const items$ = new BehaviorSubject([1, 2, 3, 4, 5]);
     const { hasNextPage, fetchNextPage } = useInMemoryPagination(items$, {
       page: 1,
@@ -90,12 +89,12 @@ describe('useInMemoryPagination', () => {
 
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
 
     expect(currentHasNextPage).toBe(false);
   });
 
-  it('should handle exact page boundaries', () => {
+  it('should handle exact page boundaries', async () => {
     const items$ = new BehaviorSubject([1, 2, 3, 4, 5, 6]);
     const { list, hasNextPage, fetchNextPage } = useInMemoryPagination(items$, {
       page: 1,
@@ -115,7 +114,7 @@ describe('useInMemoryPagination', () => {
     expect(currentList).toEqual([1, 2, 3]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
 
     expect(currentList).toEqual([1, 2, 3, 4, 5, 6]);
     expect(currentHasNextPage).toBe(false);
@@ -210,7 +209,7 @@ describe('useInMemoryPagination', () => {
     expect(currentHasNextPage).toBe(false);
   });
 
-  it('should work with complex objects', () => {
+  it('should work with complex objects', async () => {
     const items$ = new BehaviorSubject([
       { id: 1, name: 'Item 1' },
       { id: 2, name: 'Item 2' },
@@ -240,7 +239,7 @@ describe('useInMemoryPagination', () => {
     ]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
 
     expect(currentList).toEqual([
       { id: 1, name: 'Item 1' },
@@ -250,7 +249,7 @@ describe('useInMemoryPagination', () => {
     ]);
     expect(currentHasNextPage).toBe(true);
 
-    get(fetchNextPage)();
+    await fetchNextPage();
 
     expect(currentList).toEqual([
       { id: 1, name: 'Item 1' },

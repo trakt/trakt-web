@@ -7,7 +7,7 @@
   import ListMetaInfo from "$lib/sections/components/ListMetaInfo.svelte";
   import ViewAllButton from "$lib/sections/lists/components/ViewAllButton.svelte";
   import CommentCard from "$lib/sections/summary/components/comments/_internal/CommentCard.svelte";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import AddCommentAction from "./_internal/comment-actions/AddCommentAction.svelte";
   import PostCommentDialog from "./_internal/dialog/PostCommentDialog.svelte";
   import CommentsDrawer from "./_internal/drawers/CommentsDrawer.svelte";
@@ -27,7 +27,7 @@
     }),
   );
 
-  const postCommentDialog = writable<HTMLDialogElement>();
+  const postCommentDialog = writable<HTMLDialogElement | undefined>(undefined);
   const drilldownSource = writable<ActiveComment | undefined>(undefined);
 
   const isOpen = writable(false);
@@ -64,7 +64,7 @@
     {#snippet dynamicActions()}
       <AddCommentAction
         onclick={() => {
-          $postCommentDialog.showModal();
+          $postCommentDialog?.showModal();
         }}
       />
     {/snippet}

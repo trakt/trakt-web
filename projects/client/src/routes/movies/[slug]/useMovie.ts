@@ -7,12 +7,12 @@ import { movieStudiosQuery } from '$lib/requests/queries/movies/movieStudiosQuer
 import { movieSummaryQuery } from '$lib/requests/queries/movies/movieSummaryQuery.ts';
 import { movieVideosQuery } from '$lib/requests/queries/movies/movieVideosQuery.ts';
 import { streamMovieQuery } from '$lib/requests/queries/movies/streamMovieQuery.ts';
+import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { toObservable } from '$lib/utils/store/toObservable.ts';
-import { map, switchMap } from 'rxjs/operators';
-import { derived, readable } from 'svelte/store';
+import { combineLatest, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /*
   FIXME: Fix the root cause.
@@ -24,18 +24,18 @@ import { derived, readable } from 'svelte/store';
 export function useMovie(slug: string | undefined) {
   if (!slug) {
     return {
-      isLoading: readable(true),
-      movie: readable(undefined),
-      studios: readable(undefined),
-      crew: readable(undefined),
-      videos: readable([]),
-      intl: readable(undefined),
-      streamOn: readable(undefined),
-      sentiments: readable(undefined),
+      isLoading: of(true),
+      movie: of(undefined),
+      studios: of(undefined),
+      crew: of(undefined),
+      videos: of([]),
+      intl: of(undefined),
+      streamOn: of(undefined),
+      sentiments: of(undefined),
     };
   }
 
-  const { country, getPreferred } = useStreamingPreferences();
+  const { country, favorites } = useStreamingPreferences();
 
   const movie = useQuery(movieSummaryQuery({
     slug,
@@ -57,12 +57,11 @@ export function useMovie(slug: string | undefined) {
     movieIntlQuery({ slug, language, enabled: !isLocaleSkipped }),
   );
 
-  const streamOn = toObservable(country)
-    .pipe(
-      switchMap((country) =>
-        toObservable(useQuery(streamMovieQuery({ slug, country })))
-      ),
-    );
+  const streamOnQuery = useQuery(
+    country.pipe(
+      map((country) => streamMovieQuery({ slug, country })),
+    ),
+  );
 
   const queries = [
     movie,
@@ -73,33 +72,39 @@ export function useMovie(slug: string | undefined) {
     sentiments,
   ];
 
-  const isLoading = derived(
-    queries,
-    ($queries) => $queries.some(toLoadingState),
+  const isLoading = combineLatest(queries).pipe(
+    map(($queries) => $queries.some(toLoadingState)),
   );
 
   return {
     isLoading,
-    movie: derived(movie, ($movie) => $movie.data),
-    studios: derived(studios, ($studios) => $studios.data),
-    crew: derived(crew, ($crew) => $crew.data),
-    videos: derived(videos, ($videos) => $videos.data ?? []),
-    sentiments: derived(sentiments, ($sentiments) => $sentiments.data),
-    intl: derived([intl, movie], ([$intl, $movie]) =>
-      findRegionalIntl({
-        type: 'movie',
-        translations: $intl.data,
-        fallback: $movie.data,
-      })),
-    streamOn: streamOn.pipe(
-      map(($streamOn) => {
+    movie: movie.pipe(map(($movie) => $movie.data)),
+    studios: studios.pipe(map(($studios) => $studios.data)),
+    crew: crew.pipe(map(($crew) => $crew.data)),
+    videos: videos.pipe(map(($videos) => $videos.data ?? [])),
+    sentiments: sentiments.pipe(map(($sentiments) => $sentiments.data)),
+    intl: combineLatest([intl, movie]).pipe(
+      map(([$intl, $movie]) =>
+        findRegionalIntl({
+          type: 'movie',
+          translations: $intl.data,
+          fallback: $movie.data,
+        })
+      ),
+    ),
+    streamOn: combineLatest([streamOnQuery, favorites, country]).pipe(
+      map(([$streamOn, $favorites, $country]) => {
         if (!$streamOn.data) {
           return;
         }
 
         return {
           services: $streamOn.data,
-          preferred: getPreferred($streamOn.data),
+          preferred: findPreferredStreamingService({
+            services: $streamOn.data,
+            favorites: $favorites,
+            countryCode: $country,
+          }),
         };
       }),
     ),

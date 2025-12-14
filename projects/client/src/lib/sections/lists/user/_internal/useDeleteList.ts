@@ -5,16 +5,16 @@ import type { MediaListSummary } from '$lib/requests/models/MediaListSummary.ts'
 import { deleteListRequest } from '$lib/requests/queries/users/deleteListRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 export function useDeleteList(list: MediaListSummary) {
-  const isDeleting = writable(false);
-  const isDeleted = writable(false);
+  const isDeleting = new BehaviorSubject(false);
+  const isDeleted = new BehaviorSubject(false);
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.ListDelete);
 
   const deleteList = async () => {
-    isDeleting.set(true);
+    isDeleting.next(true);
     track();
 
     const result = await deleteListRequest({
@@ -27,13 +27,13 @@ export function useDeleteList(list: MediaListSummary) {
 
     await invalidate(InvalidateAction.List.Deleted);
 
-    isDeleted.set(result);
-    isDeleting.set(false);
+    isDeleted.next(result);
+    isDeleting.next(false);
   };
 
   return {
-    isDeleting: derived(isDeleting, ($isDeleting) => $isDeleting),
-    isDeleted: derived(isDeleted, ($isDeleted) => $isDeleted),
+    isDeleting: isDeleting.asObservable(),
+    isDeleted: isDeleted.asObservable(),
     deleteList,
   };
 }

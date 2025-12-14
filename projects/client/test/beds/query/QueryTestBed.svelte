@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Readable } from "svelte/store";
+  import type { Observable } from "rxjs";
   import TestProvider from "../_internal/TestProvider.svelte";
   import QueryRunner from "./_internal/QueryRunner.svelte";
 
@@ -9,7 +9,7 @@
     mapper,
     waitFor,
   }: {
-    factory: () => Readable<unknown>;
+    factory: () => Observable<unknown>;
     output: (value: unknown) => void;
     mapper?: (response: any) => unknown;
     waitFor?: (response: any) => boolean;

@@ -5,7 +5,7 @@ import { watchlistQuery } from '$lib/requests/queries/users/watchlistQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { DEFAULT_PAGE_SIZE } from '$lib/utils/constants.ts';
 import type { SortType } from '@trakt/api';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 export type WatchListStoreProps = PaginationParams & FilterParams & {
   type?: DiscoverMode;
@@ -24,9 +24,8 @@ export function useWatchList(params: WatchListStoreProps) {
   );
 
   return {
-    list: derived(
-      items,
-      ($items) => $items.map((item) => item.entry),
+    list: items.pipe(
+      map(($items) => $items.map((item) => item.entry)),
     ),
     ...rest,
   };

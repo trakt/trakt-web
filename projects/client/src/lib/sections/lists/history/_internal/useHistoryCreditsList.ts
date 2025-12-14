@@ -6,7 +6,6 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { personMovieCreditsQuery } from '$lib/requests/queries/people/personMovieCreditsQuery.ts';
 import { personShowCreditsQuery } from '$lib/requests/queries/people/personShowCreditsQuery.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
-import { toObservable } from '$lib/utils/store/toObservable.ts';
 import { combineLatest, map } from 'rxjs';
 import { toLoadingState } from '../../../../utils/requests/toLoadingState.ts';
 
@@ -39,9 +38,9 @@ export function useHistoryCreditsList(
   const movieQuery = useQuery(personMovieCreditsQuery({ slug }));
   const showQuery = useQuery(personShowCreditsQuery({ slug }));
 
-  const history$ = toObservable(history);
-  const movies$ = toObservable(movieQuery);
-  const shows$ = toObservable(showQuery);
+  const history$ = history;
+  const movies$ = movieQuery;
+  const shows$ = showQuery;
 
   const list$ = combineLatest([movies$, shows$, history$]).pipe(
     map(([movies, shows, historyResult]) => {

@@ -2,7 +2,7 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { movieListsQuery } from '$lib/requests/queries/movies/movieListsQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { combineLatest, map } from 'rxjs';
 import { showListsQuery } from '../../../../requests/queries/shows/showListsQuery.ts';
 import { MAX_LISTS } from './_internal/constants.ts';
 
@@ -30,20 +30,17 @@ export function useListSummary({ slug, type }: ListSummaryProps) {
   const officialLists = useQuery(typeToQuery({ slug, type }, 'official'));
 
   const queries = [personalLists, officialLists];
-  const isLoading = derived(
-    queries,
-    ($queries) => $queries.some(toLoadingState),
+  const isLoading = combineLatest(queries).pipe(
+    map(($queries) => $queries.some(toLoadingState)),
   );
 
   return {
     isLoading,
-    personalLists: derived(
-      personalLists,
-      ($personalLists) => $personalLists.data ?? [],
+    personalLists: personalLists.pipe(
+      map(($personalLists) => $personalLists.data ?? []),
     ),
-    officialLists: derived(
-      officialLists,
-      ($officialLists) => $officialLists.data ?? [],
+    officialLists: officialLists.pipe(
+      map(($officialLists) => $officialLists.data ?? []),
     ),
   };
 }

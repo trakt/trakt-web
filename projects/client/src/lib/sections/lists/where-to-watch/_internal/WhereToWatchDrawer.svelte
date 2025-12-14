@@ -7,7 +7,7 @@
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MetaInfoProps } from "$lib/sections/summary/components/media/useMediaMetaInfo";
   import { toCountryName } from "$lib/utils/formatting/intl/toCountryName";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import LoadingIndicator from "../../drilldown/_internal/LoadingIndicator.svelte";
   import { toCountryFlag } from "./toCountryFlag";
   import { useAllStreamOn } from "./useAllStreamOn";

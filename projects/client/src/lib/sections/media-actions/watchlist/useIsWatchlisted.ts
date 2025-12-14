@@ -1,6 +1,6 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
 import type { MediaStoreProps } from '$lib/models/MediaStoreProps.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 export type IsWatchlistedStoreProps = MediaStoreProps;
 
@@ -9,9 +9,8 @@ export function useIsWatchlisted(props: IsWatchlistedStoreProps) {
   const media = Array.isArray(props.media) ? props.media : [props.media];
   const { watchlist } = useUser();
 
-  const isWatchlisted = derived(
-    watchlist,
-    ($watchlist) => {
+  const isWatchlisted = watchlist.pipe(
+    map(($watchlist) => {
       if (!$watchlist) {
         return false;
       }
@@ -24,7 +23,7 @@ export function useIsWatchlisted(props: IsWatchlistedStoreProps) {
         case 'episode':
           return false;
       }
-    },
+    }),
   );
 
   return {

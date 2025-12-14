@@ -1,16 +1,18 @@
 import { useNavigation } from '$lib/features/navigation/useNavigation.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 export function useDefaultCardVariant<M>(type: M) {
   const { navigation } = useNavigation();
 
-  return derived(navigation, ($navigation) => {
-    if (type === 'episode') {
-      return 'landscape' as const;
-    }
+  return navigation.pipe(
+    map(($navigation) => {
+      if (type === 'episode') {
+        return 'landscape' as const;
+      }
 
-    const isDPad = $navigation === 'dpad';
+      const isDPad = $navigation === 'dpad';
 
-    return isDPad ? 'landscape' as const : 'portrait' as const;
-  });
+      return isDPad ? 'landscape' as const : 'portrait' as const;
+    }),
+  );
 }

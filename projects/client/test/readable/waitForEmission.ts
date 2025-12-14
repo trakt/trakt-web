@@ -1,5 +1,7 @@
+import type { Observable } from 'rxjs';
+
 export function waitForEmission<T>(
-  store: ReadableOrObservable<T>,
+  store: Observable<T>,
   emission: number,
   timeout = 100,
 ) {
@@ -7,16 +9,12 @@ export function waitForEmission<T>(
     let emissionCount = 0;
     let lastValue: T;
 
-    const unsubscribe = store.subscribe((value) => {
+    const subscription = store.subscribe((value) => {
       emissionCount++;
       lastValue = value;
 
       if (emissionCount === emission) {
-        queueMicrotask(() =>
-          'unsubscribe' in unsubscribe
-            ? unsubscribe.unsubscribe()
-            : unsubscribe()
-        );
+        queueMicrotask(() => subscription.unsubscribe());
         resolve(value);
       }
 

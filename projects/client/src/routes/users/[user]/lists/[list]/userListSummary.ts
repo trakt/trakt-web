@@ -2,7 +2,7 @@ import { useQuery } from '$lib/features/query/useQuery.ts';
 
 import { userListSummaryQuery } from '$lib/requests/queries/users/userListSummaryQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 type UseUserListSummaryProps = {
   userId: string;
@@ -13,10 +13,7 @@ export function userListSummary(props: UseUserListSummaryProps) {
   const query = useQuery(userListSummaryQuery(props));
 
   return {
-    list: derived(query, ($query) => $query.data),
-    isLoading: derived(
-      query,
-      toLoadingState,
-    ),
+    list: query.pipe(map(($query) => $query.data)),
+    isLoading: query.pipe(map(toLoadingState)),
   };
 }

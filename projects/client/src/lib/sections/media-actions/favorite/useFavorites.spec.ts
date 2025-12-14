@@ -6,7 +6,7 @@ import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappe
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
-import { get } from 'svelte/store';
+import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { type FavoritesStoreProps, useFavorites } from './useFavorites.ts';
 
@@ -30,7 +30,7 @@ describe('useFavorites', () => {
         useFavorites(props)
       );
 
-      expect(get(isUpdatingFavorite)).toBe(false);
+      expect(await firstValueFrom(isUpdatingFavorite)).toBe(false);
     });
 
     it('should be updating favorites when adding', async () => {
@@ -39,7 +39,7 @@ describe('useFavorites', () => {
       );
 
       addToFavorites();
-      expect(get(isUpdatingFavorite)).toBe(true);
+      expect(await firstValueFrom(isUpdatingFavorite)).toBe(true);
     });
 
     it('should NOT be updating favorites after add request is completed', async () => {
@@ -48,7 +48,7 @@ describe('useFavorites', () => {
       );
 
       await addToFavorites();
-      expect(get(isUpdatingFavorite)).toBe(false);
+      expect(await firstValueFrom(isUpdatingFavorite)).toBe(false);
     });
 
     it('should be updating favorites when removing', async () => {
@@ -57,7 +57,7 @@ describe('useFavorites', () => {
       );
 
       removeFromFavorites();
-      expect(get(isUpdatingFavorite)).toBe(true);
+      expect(await firstValueFrom(isUpdatingFavorite)).toBe(true);
     });
 
     it('should NOT be updating favorites after remove request is completed', async () => {
@@ -66,7 +66,7 @@ describe('useFavorites', () => {
       );
 
       await removeFromFavorites();
-      expect(get(isUpdatingFavorite)).toBe(false);
+      expect(await firstValueFrom(isUpdatingFavorite)).toBe(false);
     });
 
     it('should call invalidate after adding to favorites', async () => {

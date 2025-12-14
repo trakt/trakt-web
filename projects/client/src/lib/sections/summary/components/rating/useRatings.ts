@@ -7,7 +7,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { addRatingRequest } from '$lib/requests/sync/addRatingRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import type { RatingsSyncRequest } from '@trakt/api';
-import { derived, get, writable } from 'svelte/store';
+import { BehaviorSubject, combineLatest, firstValueFrom, map } from 'rxjs';
 
 type RateableType = ExtendedMediaType;
 
@@ -43,15 +43,14 @@ function toRatingPayload(
 }
 
 export function useRatings({ type, id }: WatchlistStoreProps) {
-  const pendingRating = writable<null | number>(null);
+  const pendingRating = new BehaviorSubject<null | number>(null);
   const { ratings, favorites } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Rate);
   const { dismiss } = useLastWatched();
 
-  const rating = derived(
-    ratings,
-    ($ratings) => {
+  const rating = ratings.pipe(
+    map(($ratings) => {
       if (!$ratings) {
         return;
       }
@@ -64,12 +63,11 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
         case 'episode':
           return $ratings.episodes.get(id);
       }
-    },
+    }),
   );
 
-  const isFavorited = derived(
-    favorites,
-    ($favorites) => {
+  const isFavorited = favorites.pipe(
+    map(($favorites) => {
       if (!$favorites) {
         return false;
       }
@@ -82,12 +80,13 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
         case 'episode':
           return false;
       }
-    },
+    }),
   );
 
-  const current = derived(
+  const current = combineLatest(
     [rating, isFavorited],
-    ([$rating, $isFavorited]) => {
+  ).pipe(
+    map(([$rating, $isFavorited]) => {
       if (!$rating) {
         return;
       }
@@ -96,13 +95,31 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
         rating: $rating.rating,
         isFavorited: $isFavorited,
       };
-    },
+    }),
   );
 
   const addRating = async (newRating: number) => {
-    pendingRating.set(newRating);
+    pendingRating.next(newRating);
+
+    // Derive current rating presence
+    let hasRating = false;
+    const currentRatings = await firstValueFrom(ratings);
+    if (currentRatings) {
+      switch (type) {
+        case 'movie':
+          hasRating = currentRatings.movies.has(id);
+          break;
+        case 'show':
+          hasRating = currentRatings.shows.has(id);
+          break;
+        case 'episode':
+          hasRating = currentRatings.episodes.has(id);
+          break;
+      }
+    }
+
     track({
-      action: get(current) ? 'changed' : 'added',
+      action: hasRating ? 'changed' : 'added',
       rating: newRating,
     });
 
@@ -111,7 +128,7 @@ export function useRatings({ type, id }: WatchlistStoreProps) {
     });
     await invalidate(InvalidateAction.Rated(type));
 
-    pendingRating.set(null);
+    pendingRating.next(null);
     dismiss(id, type);
   };
 

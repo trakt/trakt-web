@@ -2,15 +2,15 @@ import { page } from '$app/state';
 import { dpadController } from '$lib/features/navigation/_internal/dpadController.ts';
 import type { NavigationType } from '$lib/features/navigation/models/NavigationType.ts';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { get, type Readable, readable } from 'svelte/store';
 
 const NAVIGATION_CONTEXT_KEY = Symbol('navigation');
 const PARAM_NAME = 'navigation';
 const DPAD_REF = 'd-pad';
 
 type Controller = (node: HTMLElement) => void;
-type NavigationContextData = Readable<NavigationType>;
+type NavigationContextData = BehaviorSubject<NavigationType>;
 
 const navigationControllers: Record<NavigationType, Controller | undefined> = {
   'default': undefined,
@@ -26,17 +26,17 @@ export function initializeNavigation() {
     getContext<NavigationContextData>(NAVIGATION_CONTEXT_KEY) ??
       setContext<NavigationContextData>(
         NAVIGATION_CONTEXT_KEY,
-        readable(navigationType),
+        new BehaviorSubject(navigationType),
       );
 
   return {
-    controller: navigationControllers[get(navigation)],
+    controller: navigationControllers[navigation.value],
   };
 }
 
 export function useNavigation() {
   return {
-    navigation: assertDefined<Readable<NavigationType>>(
+    navigation: assertDefined<NavigationContextData>(
       getContext<NavigationContextData>(NAVIGATION_CONTEXT_KEY),
       'Navigation can only be used within the NavigationProvider context.',
     ),

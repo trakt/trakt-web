@@ -5,9 +5,9 @@ import { ListedShowsMappedMock } from '$mocks/data/lists/mapped/ListedShowsMappe
 import { HereticListsMappedMock } from '$mocks/data/summary/movies/heretic/mapped/HereticListsMappedMock.ts';
 import { SiloListsMappedMock } from '$mocks/data/summary/shows/silo/mapped/SiloListsMappedMock.ts';
 import { UserProfileHarryMappedMock } from '$mocks/data/users/mapped/UserProfileHarryMappedMock.ts';
+import { createTestBedInfiniteQuery } from '$test/beds/query/createTestBedInfiniteQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
 import { mapToEntries } from '$test/utils/mapToEntries.ts';
-import { createInfiniteQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { userListItemsQuery } from './userListItemsQuery.ts';
 
@@ -19,7 +19,7 @@ describe('userListItemsQuery', () => {
   it('should query list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createInfiniteQuery(
+        createTestBedInfiniteQuery(
           userListItemsQuery({
             userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
@@ -38,7 +38,7 @@ describe('userListItemsQuery', () => {
   it('should query show list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createInfiniteQuery(
+        createTestBedInfiniteQuery(
           userListItemsQuery({
             userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(SiloListsMappedMock.at(0)).slug,
@@ -55,7 +55,7 @@ describe('userListItemsQuery', () => {
   it('should query movie list items', async () => {
     const result = await runQuery({
       factory: () =>
-        createInfiniteQuery(
+        createTestBedInfiniteQuery(
           userListItemsQuery({
             userId: assertDefined(UserProfileHarryMappedMock.slug),
             listId: assertDefined(HereticListsMappedMock.at(0)).slug,

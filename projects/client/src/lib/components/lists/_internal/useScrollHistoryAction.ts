@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { useScrollHistory } from './useScrollHistory.ts';
 
 type DestroyCallback = () => void;
@@ -12,10 +12,10 @@ export function useScrollHistoryAction(
     let destroyRestore: DestroyCallback | undefined;
     let destroySnapshot: DestroyCallback | undefined;
 
-    const scrollPosition = writable(0);
+    const scrollPosition = new BehaviorSubject(0);
 
     const handleRestore = (restoreId: string) =>
-      scrollPosition.set(readScrollState(restoreId));
+      scrollPosition.next(readScrollState(restoreId));
 
     const handleSnapshot = (snapshotId: string) => {
       const position = type === 'horizontal'
@@ -39,7 +39,7 @@ export function useScrollHistoryAction(
 
     resetHandlers(id);
 
-    const ubSubscribeScrollPosition = scrollPosition.subscribe(
+    const subscription = scrollPosition.subscribe(
       updateScrollPosition,
     );
 
@@ -57,7 +57,7 @@ export function useScrollHistoryAction(
         destroyRestore?.();
         destroySnapshot?.();
 
-        ubSubscribeScrollPosition();
+        subscription.unsubscribe();
       },
     };
   }

@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { derived, get, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { AnalyticsEvent } from '../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../analytics/useTrack.ts';
 import type { ParameterType } from '../parameters/_internal/createParameterContext.ts';
@@ -15,7 +15,31 @@ export const STORED_FILTERS_KEY = 'trakt-global-filters' as const;
 
 export type StoredFilter = Record<string, ParameterType>;
 
-const storedFilters = writable<StoredFilter | null>(getDefaultFilters());
+export function createStoredFiltersStore(
+  key: string,
+  initialFilters: StoredFilter,
+) {
+  const filters = new BehaviorSubject<StoredFilter>(
+    JSON.parse(safeLocalStorage.getItem(key) ?? JSON.stringify(initialFilters)),
+  );
+
+  return {
+    filters: filters.asObservable(),
+    update: (newFilters: StoredFilter) => {
+      safeLocalStorage.setItem(key, JSON.stringify(newFilters));
+      filters.next(newFilters);
+    },
+    reset: () => {
+      safeLocalStorage.removeItem(key);
+      filters.next(initialFilters);
+    },
+  };
+}
+
+const storedFiltersStore = createStoredFiltersStore(
+  STORED_FILTERS_KEY,
+  getDefaultFilters() || {},
+);
 
 export function useStoredFilters() {
   const { search } = useParameters();
@@ -35,18 +59,24 @@ export function useStoredFilters() {
   const saveFilters = () => {
     track({ action: 'save' });
 
-    const searchParams = get(search);
+    let currentSearchParams: URLSearchParams | undefined;
+    const sub = search.subscribe((p) => {
+      currentSearchParams = p;
+    });
+    sub.unsubscribe();
+
+    if (!currentSearchParams) return;
+
     const filtersObject: StoredFilter = {};
 
     processFilterParams(
-      searchParams.entries(),
+      currentSearchParams.entries(),
       (key, value) => {
         filtersObject[key] = value;
       },
     );
 
-    storedFilters.set(filtersObject);
-    safeLocalStorage.setItem(STORED_FILTERS_KEY, JSON.stringify(filtersObject));
+    storedFiltersStore.update(filtersObject);
   };
 
   const restoreFilters = () => {
@@ -77,6 +107,6 @@ export function useStoredFilters() {
     saveFilters,
     restoreFilters,
     resetFilters,
-    storedFilters: derived(storedFilters, ($storedFilters) => $storedFilters),
+    storedFilters: storedFiltersStore.filters,
   };
 }

@@ -7,8 +7,9 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages";
   import { useWatchlist } from "$lib/sections/media-actions/watchlist/useWatchlist";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
+  import { BehaviorSubject } from "rxjs";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
   import ListDropdownItem from "./_internal/ListDropdownItem.svelte";
   import ListsDrawer from "./_internal/ListsDrawer.svelte";
   import { useListedOnIds } from "./_internal/useListedOnIds";
@@ -24,7 +25,7 @@
   }: ListDropdownProps = $props();
 
   // FIXME: replace this when we store states in session storage
-  const isUpdating = writable(false);
+  const isUpdating = new BehaviorSubject<boolean>(false);
 
   const { listedOnIds, isLoading } = $derived(useListedOnIds({ media }));
 

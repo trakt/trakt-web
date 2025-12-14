@@ -9,7 +9,7 @@
   import type { PersonSummary } from "$lib/requests/models/PersonSummary";
   import { useDefaultCardVariant } from "$lib/stores/useDefaultCardVariant";
   import { toTranslatedPosition } from "$lib/utils/formatting/string/toTranslatedPosition";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import CreditMediaItem from "./components/CreditMediaItem.svelte";
   import { useCreditsList } from "./stores/useCreditsList";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";

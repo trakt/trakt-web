@@ -1,5 +1,4 @@
-import { derived, writable } from 'svelte/store';
-
+import { BehaviorSubject } from 'rxjs';
 export type Dimension = 'width' | 'height' | 'bottom';
 
 // Extract dimension getter function
@@ -11,14 +10,14 @@ const getDimension = (node: HTMLElement, dimension: Dimension): number => {
 const setObservedDimension = (
   node: HTMLElement,
   dimension: Dimension,
-  store: ReturnType<typeof writable<number>>,
+  store: BehaviorSubject<number>,
 ): void => {
   const newValue = getDimension(node, dimension);
-  store.set(newValue);
+  store.next(newValue);
 };
 
 export const useDimensionObserver = (dimension: Dimension) => {
-  const observedDimension = writable(0);
+  const observedDimension = new BehaviorSubject(0);
 
   const observeDimension = (node: HTMLElement) => {
     // Initial size
@@ -55,10 +54,7 @@ export const useDimensionObserver = (dimension: Dimension) => {
   };
 
   return {
-    observedDimension: derived(
-      observedDimension,
-      ($observedDimension) => $observedDimension,
-    ),
+    observedDimension,
     observeDimension,
   };
 };

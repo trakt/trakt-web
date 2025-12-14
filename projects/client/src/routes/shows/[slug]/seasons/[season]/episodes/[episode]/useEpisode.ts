@@ -7,12 +7,12 @@ import { streamEpisodeQuery } from '$lib/requests/queries/episode/streamEpisodeQ
 import { showIntlQuery } from '$lib/requests/queries/shows/showIntlQuery.ts';
 import { showSeasonsQuery } from '$lib/requests/queries/shows/showSeasonsQuery.ts';
 import { showSummaryQuery } from '$lib/requests/queries/shows/showSummaryQuery.ts';
+import { findPreferredStreamingService } from '$lib/stores/_internal/findPreferredStreamingService.ts';
 import { useStreamingPreferences } from '$lib/stores/useStreamingPreferences.ts';
 import { findRegionalIntl } from '$lib/utils/media/findRegionalIntl.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { toObservable } from '$lib/utils/store/toObservable.ts';
+import { combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { derived } from 'svelte/store';
 
 type UseEpisodeParams = {
   slug: string;
@@ -23,7 +23,7 @@ type UseEpisodeParams = {
 export function useEpisode(
   params: UseEpisodeParams,
 ) {
-  const { country, getPreferred } = useStreamingPreferences();
+  const { country, favorites } = useStreamingPreferences();
 
   const episode = useQuery(episodeSummaryQuery(params));
   const show = useQuery(showSummaryQuery({ slug: params.slug }));
@@ -41,10 +41,10 @@ export function useEpisode(
     showIntlQuery({ slug: params.slug, language, enabled: !isLocaleSkipped }),
   );
 
-  const streamOn = toObservable(country)
+  const streamOnQuery = country
     .pipe(
       switchMap((country) =>
-        toObservable(useQuery(streamEpisodeQuery({ ...params, country })))
+        useQuery(streamEpisodeQuery({ ...params, country }))
       ),
     );
 
@@ -57,51 +57,54 @@ export function useEpisode(
     crew,
   ];
 
-  const isLoading = derived(
-    queries,
-    ($queries) => $queries.some(toLoadingState),
+  const isLoading = combineLatest(queries).pipe(
+    map(($queries) => $queries.some(toLoadingState)),
   );
 
   return {
     isLoading,
-    episode: derived(episode, ($episode) => $episode.data),
-    show: derived(show, ($show) => $show.data),
-    seasons: derived(
-      [seasons, episode],
-      ([$seasons, $episode]) =>
+    episode: episode.pipe(map(($episode) => $episode.data)),
+    show: show.pipe(map(($show) => $show.data)),
+    seasons: combineLatest([seasons, episode]).pipe(
+      map(([$seasons, $episode]) =>
         $seasons.data?.filter((season) =>
           season.number === $episode.data?.season
-        ),
+        )
+      ),
     ),
-    crew: derived(crew, ($crew) => $crew.data),
-    intl: derived(
-      [intl, episode],
-      ([$intl, $episode]) =>
+    crew: crew.pipe(map(($crew) => $crew.data)),
+    intl: combineLatest([intl, episode]).pipe(
+      map(([$intl, $episode]) =>
         findRegionalIntl({
           type: 'episode',
           translations: $intl.data,
           fallback: $episode.data,
-        }),
+        })
+      ),
     ),
-    showIntl: derived(
-      [showIntl, show],
-      ([$showIntl, $show]) =>
+    showIntl: combineLatest([showIntl, show]).pipe(
+      map(([$showIntl, $show]) =>
         findRegionalIntl({
           type: 'show',
           translations: $showIntl.data,
           fallback: $show.data,
-        }),
+        })
+      ),
     ),
     // FIXME: move these to the 'where to watch' component
-    streamOn: streamOn.pipe(
-      map(($streamOn) => {
+    streamOn: combineLatest([streamOnQuery, favorites, country]).pipe(
+      map(([$streamOn, $favorites, $country]) => {
         if (!$streamOn.data) {
           return;
         }
 
         return {
           services: $streamOn.data,
-          preferred: getPreferred($streamOn.data),
+          preferred: findPreferredStreamingService({
+            services: $streamOn.data,
+            favorites: $favorites,
+            countryCode: $country,
+          }),
         };
       }),
     ),

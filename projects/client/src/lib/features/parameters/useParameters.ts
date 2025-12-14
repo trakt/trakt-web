@@ -1,49 +1,49 @@
-import { derived, type Writable } from 'svelte/store';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import {
   createParameterContext,
   type ParameterType,
 } from './_internal/createParameterContext.ts';
 
 export type ParameterContextData = {
-  parameters: Writable<Map<string, ParameterType>>;
+  parameters: BehaviorSubject<Map<string, ParameterType>>;
 };
 
 export function useParameters() {
   const { parameters, override, isEscaped } = createParameterContext();
 
   function update(params: Record<string, ParameterType>) {
-    parameters.update((current) => {
-      Array.from(current.entries())
-        .forEach(([key]) => {
-          if (!(key in params)) {
-            current.delete(key);
-          }
-        });
-      return current;
-    });
+    const current = parameters.value;
+
+    Array.from(current.entries())
+      .forEach(([key]) => {
+        if (!(key in params)) {
+          current.delete(key);
+        }
+      });
 
     for (const [key, value] of Object.entries(params)) {
-      parameters.update((current) => {
-        current.set(key, value);
-        return current;
-      });
+      current.set(key, value);
     }
+
+    parameters.next(current);
   }
 
   /**
    * Returns a reactive URLSearchParams object that updates when parameters change
    */
-  const search = derived([parameters, override], ([$parameters, $override]) => {
-    const searchParams = new URLSearchParams();
-    for (const [key, value] of $parameters.entries()) {
-      if (key === $override) {
-        continue;
+  const search = combineLatest([parameters, override]).pipe(
+    map(([$parameters, $override]: [Map<string, ParameterType>, string]) => {
+      const searchParams = new URLSearchParams();
+      for (const [key, value] of $parameters.entries()) {
+        if (key === $override) {
+          continue;
+        }
+        searchParams.set(key, String(value));
       }
-      searchParams.set(key, String(value));
-    }
 
-    return searchParams;
-  });
+      return searchParams;
+    }),
+  );
 
   return {
     search,

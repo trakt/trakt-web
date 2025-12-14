@@ -1,6 +1,6 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { peopleSummaryQuery } from '$lib/requests/queries/people/peopleSummaryQuery.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 export function usePerson(slug: string) {
   const person = useQuery(peopleSummaryQuery({
@@ -8,7 +8,7 @@ export function usePerson(slug: string) {
   }));
 
   return {
-    isLoading: derived(person, ($person) => $person.isPending),
-    person: derived(person, ($person) => $person.data),
+    isLoading: person.pipe(map(($person) => $person.isPending)),
+    person: person.pipe(map(($person) => $person.data)),
   };
 }

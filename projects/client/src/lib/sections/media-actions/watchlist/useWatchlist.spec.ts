@@ -6,7 +6,7 @@ import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappe
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
-import { get } from 'svelte/store';
+import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import { useWatchlist } from './useWatchlist.ts';
 
@@ -31,7 +31,7 @@ describe('useWatchlist', () => {
         useWatchlist(props)
       );
 
-      expect(get(isWatchlistUpdating)).toBe(false);
+      expect(await firstValueFrom(isWatchlistUpdating)).toBe(false);
     });
 
     it('should be updating watchlist when adding', async () => {
@@ -40,7 +40,7 @@ describe('useWatchlist', () => {
       );
 
       addToWatchlist();
-      expect(get(isWatchlistUpdating)).toBe(true);
+      expect(await firstValueFrom(isWatchlistUpdating)).toBe(true);
     });
 
     it('should NOT be updating watchlist after add request is completed', async () => {
@@ -49,7 +49,7 @@ describe('useWatchlist', () => {
       );
 
       await addToWatchlist();
-      expect(get(isWatchlistUpdating)).toBe(false);
+      expect(await firstValueFrom(isWatchlistUpdating)).toBe(false);
     });
 
     it('should be updating watchlist when removing', async () => {
@@ -58,7 +58,7 @@ describe('useWatchlist', () => {
       );
 
       removeFromWatchlist();
-      expect(get(isWatchlistUpdating)).toBe(true);
+      expect(await firstValueFrom(isWatchlistUpdating)).toBe(true);
     });
 
     it('should NOT be updating watchlist after remove request is completed', async () => {
@@ -67,7 +67,7 @@ describe('useWatchlist', () => {
       );
 
       await removeFromWatchlist();
-      expect(get(isWatchlistUpdating)).toBe(false);
+      expect(await firstValueFrom(isWatchlistUpdating)).toBe(false);
     });
 
     it('should call invalidate after adding to watchlist', async () => {

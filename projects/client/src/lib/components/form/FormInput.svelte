@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { onMount } from "svelte";
-  import { writable } from "svelte/store";
   import { slide } from "svelte/transition";
   import type { FormInputProps } from "./models/FormInputProps";
 
@@ -18,7 +18,7 @@
 
   let inputElement: HTMLInputElement;
 
-  const errorText = writable<string | undefined>();
+  const errorText = writable<string | undefined>(undefined);
 
   const handleInput = (e: Event) => {
     const newValue = (e.target as HTMLInputElement).value;

@@ -1,8 +1,8 @@
 import { browser } from '$app/environment';
 import { time } from '$lib/utils/timing/time.ts';
 import { type User, UserManager } from 'oidc-client-ts';
+import { BehaviorSubject, of } from 'rxjs';
 import { onMount } from 'svelte';
-import { derived, readable, writable } from 'svelte/store';
 import { getOidcConfig } from '../getOidcConfig.ts';
 import { setToken, type Token } from '../token/index.ts';
 import { postToken } from './_internal/postToken.ts';
@@ -21,11 +21,11 @@ function mapToToken(user: User | null): Token {
 export function initializeUserManager(tokenFromServer?: string | null) {
   if (!browser) {
     return {
-      isInitializing: readable(false),
+      isInitializing: of(false),
     };
   }
 
-  const isInitializing = writable(true);
+  const isInitializing = new BehaviorSubject(true);
   const ctx = getAuthContext();
 
   onMount(() => {
@@ -44,10 +44,10 @@ export function initializeUserManager(tokenFromServer?: string | null) {
       { token, isExpired }: { token: Token; isExpired: boolean },
     ) => {
       setToken(token);
-      ctx.token.set(token);
+      ctx.token.next(token);
 
-      ctx.isAuthorized.set(!isExpired);
-      isInitializing.set(false);
+      ctx.isAuthorized.next(!isExpired);
+      isInitializing.next(false);
     };
 
     const handleUserEvent = (user: User | null) => {
@@ -94,9 +94,6 @@ export function initializeUserManager(tokenFromServer?: string | null) {
   });
 
   return {
-    isInitializing: derived(
-      isInitializing,
-      ($isInitializing) => $isInitializing,
-    ),
+    isInitializing: isInitializing.asObservable(),
   };
 }

@@ -1,5 +1,5 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import type { MediaStoreProps } from '../../../models/MediaStoreProps.ts';
 
 export type IsWatchedProps = MediaStoreProps;
@@ -14,9 +14,8 @@ export function useIsWatched(props: IsWatchedProps) {
     : [];
   const showId = props.type === 'episode' ? props.show.id : -1;
 
-  const isWatched = derived(
-    history,
-    ($history) => {
+  const isWatched = history.pipe(
+    map(($history) => {
       if (!$history) {
         return false;
       }
@@ -40,7 +39,7 @@ export function useIsWatched(props: IsWatchedProps) {
           );
         }
       }
-    },
+    }),
   );
 
   return { isWatched };

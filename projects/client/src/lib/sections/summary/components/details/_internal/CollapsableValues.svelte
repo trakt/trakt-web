@@ -4,8 +4,8 @@
   import MoreButton from "$lib/components/buttons/more/MoreButton.svelte";
   import { MoreButtonIntlProvider } from "$lib/components/buttons/more/MoreButtonIntlProvider";
   import RenderFor from "$lib/guards/RenderFor.svelte";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import type { Snippet } from "svelte";
-  import { writable } from "svelte/store";
 
   const MAX_ITEMS = 2;
 

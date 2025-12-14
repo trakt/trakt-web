@@ -1,8 +1,8 @@
-import { derived } from 'svelte/store';
+import { BehaviorSubject, type Observable } from 'rxjs';
 
 export function useStableArray<T>(
   compareFn: (left: T, right: T) => boolean,
-  source: ReadableOrObservable<T[]>,
+  source: Observable<T[]>,
 ) {
   const updateList = (previous: Array<T>, update: Array<T>) => {
     const updatedList = previous.filter(
@@ -21,16 +21,20 @@ export function useStableArray<T>(
     return updatedList;
   };
 
+  const list = new BehaviorSubject<T[]>([]);
   let previous: Array<T> = [];
 
-  // @ts-expect-error - derived handles interoperable stores
-  const list = derived(source, ($source, set) => {
-    const updated = updateList(previous, $source);
-    previous = updated;
-    set(updated);
-  }, [] as Array<T>);
+  source.subscribe({
+    next: (update) => {
+      const updated = updateList(previous, update);
+      previous = updated;
+      list.next(updated);
+    },
+    error: (err) => list.error(err),
+    complete: () => list.complete(),
+  });
 
   return {
-    list,
+    list: list.asObservable(),
   };
 }

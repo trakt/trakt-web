@@ -1,7 +1,7 @@
 import { EpisodeSiloTranslationsMappedMock } from '$mocks/data/summary/episodes/silo/mapped/EpisodeSiloTranslationsMappedMock.ts';
 import { ShowSiloResponseMock } from '$mocks/data/summary/shows/silo/response/ShowSiloResponseMock.ts';
+import { createTestBedQuery } from '$test/beds/query/createTestBedQuery.ts';
 import { runQuery } from '$test/beds/query/runQuery.ts';
-import { createQuery } from '@tanstack/svelte-query';
 import { describe, expect, it } from 'vitest';
 import { EpisodeSiloResponseMock } from '../../../../mocks/data/summary/episodes/silo/response/EpisodeSiloResponseMock.ts';
 import { episodeIntlQuery } from './episodeIntlQuery.ts';
@@ -10,7 +10,7 @@ describe('episodeIntlQuery', () => {
   it('should query for English episode summary', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createTestBedQuery(
           episodeIntlQuery({
             slug: ShowSiloResponseMock.ids.slug,
             season: EpisodeSiloResponseMock.season,
@@ -28,7 +28,7 @@ describe('episodeIntlQuery', () => {
   it('should query for Dutch episode summary', async () => {
     const result = await runQuery({
       factory: () =>
-        createQuery(
+        createTestBedQuery(
           episodeIntlQuery({
             slug: ShowSiloResponseMock.ids.slug,
             season: EpisodeSiloResponseMock.season,

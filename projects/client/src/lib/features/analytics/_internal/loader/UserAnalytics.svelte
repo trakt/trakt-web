@@ -2,8 +2,8 @@
   import { useAuth } from "$lib/features/auth/stores/useAuth";
   import { useUser } from "$lib/features/auth/stores/useUser";
   import { isSupported } from "firebase/analytics";
-  import { onDestroy, onMount } from "svelte";
-  import { get } from "svelte/store";
+  import { filter, switchMap } from "rxjs/operators";
+  import { onMount } from "svelte";
   import type { AnalyticsProps } from "./AnalyticsProps";
 
   const { onload }: AnalyticsProps = $props();
@@ -11,24 +11,23 @@
   const { user } = useUser();
   const { isAuthorized } = useAuth();
 
-  let unsubscribe: (() => void) | undefined;
-
   onMount(async () => {
     if (!(await isSupported())) {
       return;
     }
 
-    unsubscribe = user.subscribe((user) => {
-      if (!user) {
-        return;
-      }
-      const userId = get(isAuthorized) ? `${user.id}` : null;
+    const subscription = isAuthorized
+      .pipe(
+        filter((isAuthed) => isAuthed),
+        switchMap(() => user),
+        filter(Boolean),
+      )
+      .subscribe((user) => {
+        const userId = `${user.id}`;
 
-      onload(userId);
-    });
-  });
+        onload(userId);
+      });
 
-  onDestroy(() => {
-    unsubscribe?.();
+    subscription.unsubscribe();
   });
 </script>

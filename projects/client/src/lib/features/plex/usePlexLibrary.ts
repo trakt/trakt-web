@@ -1,5 +1,5 @@
 import { useUser } from '$lib/features/auth/stores/useUser.ts';
-import { derived, readable } from 'svelte/store';
+import { map, of } from 'rxjs';
 import type { LibraryOption } from '../../sections/lists/where-to-watch/models/LibraryOption.ts';
 import type { MetaInfoProps } from '../../sections/summary/components/media/useMediaMetaInfo.ts';
 import { buildPlexLink } from './buildPlexLink.ts';
@@ -7,15 +7,14 @@ import { buildPlexLink } from './buildPlexLink.ts';
 export function usePlexLibrary(target: MetaInfoProps) {
   if (!target.media.plexSlug) {
     return {
-      plexServices: readable([]),
+      plexServices: of([]),
     };
   }
 
   const { plexLibrary } = useUser();
 
-  const isInLibrary = derived(
-    plexLibrary,
-    ($plexLibrary) => {
+  const isInLibrary = plexLibrary.pipe(
+    map(($plexLibrary) => {
       switch (target.type) {
         case 'movie':
           return $plexLibrary?.movieIds.includes(target.media.id);
@@ -24,13 +23,12 @@ export function usePlexLibrary(target: MetaInfoProps) {
         case 'episode':
           return $plexLibrary?.episodeIds.includes(target.episode.id);
       }
-    },
+    }),
   );
 
   return {
-    plexServices: derived(
-      isInLibrary,
-      ($isInLibrary) => {
+    plexServices: isInLibrary.pipe(
+      map(($isInLibrary) => {
         if ($isInLibrary) {
           const plexService: LibraryOption = {
             key: 'library-plex',
@@ -43,7 +41,7 @@ export function usePlexLibrary(target: MetaInfoProps) {
         }
 
         return [] as LibraryOption[];
-      },
+      }),
     ),
   };
 }

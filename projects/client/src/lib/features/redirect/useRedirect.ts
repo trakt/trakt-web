@@ -4,7 +4,6 @@ import { page } from '$app/state';
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { useAuth } from '$lib/features/auth/stores/useAuth.ts';
-import { get } from 'svelte/store';
 
 const PARAM_NAME = 'ref';
 const AUTO_SIGNIN_REF = 'trakt-og-switch';
@@ -30,7 +29,7 @@ export function useRedirect() {
   const redirect = () => {
     track();
 
-    if (isAutoSignin && !get(isAuthorized)) {
+    if (isAutoSignin && !isAuthorized.value) {
       login();
       return;
     }

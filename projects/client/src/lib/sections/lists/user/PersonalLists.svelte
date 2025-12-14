@@ -6,8 +6,8 @@
   import { useIsMe } from "$lib/features/auth/stores/useIsMe.ts";
   import type { DiscoverMode } from "$lib/features/discover/models/DiscoverMode.ts";
   import * as m from "$lib/features/i18n/messages.ts";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { UrlBuilder } from "$lib/utils/url/UrlBuilder.ts";
-  import { writable } from "svelte/store";
   import CtaItem from "../components/cta/CtaItem.svelte";
   import type { Cta } from "../components/cta/models/Cta.ts";
   import ListSummaryItem from "../components/list-summary/ListSummaryItem.svelte";

@@ -17,7 +17,7 @@ export function useAuth() {
     await manager?.removeUser();
 
     setToken(null);
-    isAuthorized.set(false);
+    isAuthorized.next(false);
 
     await invalidate(InvalidateAction.Auth);
     await workerRequest(WorkerMessage.CacheBust);

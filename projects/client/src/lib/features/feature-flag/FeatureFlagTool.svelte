@@ -6,7 +6,7 @@
   import Switch from "$lib/components/toggles/Switch.svelte";
   import RenderFor from "$lib/guards/RenderFor.svelte";
   import { safeLocalStorage } from "$lib/utils/storage/safeStorage.ts";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { FEATURE_FLAG_LOCAL_STORAGE_KEY } from "./_internal/createFeatureFlagContext.ts";
   import { getFeatureFlagContext } from "./_internal/getFeatureFlagContext.ts";
   import { FeatureFlag } from "./models/FeatureFlag.ts";
@@ -14,14 +14,13 @@
   const { flags } = getFeatureFlagContext();
 
   const setFlag = (flag: FeatureFlag, value: boolean) => {
-    flags.update((currentFlags) => {
-      const updatedFlags = { ...currentFlags, [flag]: value };
-      safeLocalStorage.setItem(
-        FEATURE_FLAG_LOCAL_STORAGE_KEY,
-        JSON.stringify(updatedFlags),
-      );
-      return updatedFlags;
-    });
+    const currentFlags = $flags;
+    const updatedFlags = { ...currentFlags, [flag]: value };
+    safeLocalStorage.setItem(
+      FEATURE_FLAG_LOCAL_STORAGE_KEY,
+      JSON.stringify(updatedFlags),
+    );
+    flags.next(updatedFlags);
   };
 
   const isOpen = writable(false);

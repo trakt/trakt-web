@@ -4,13 +4,13 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import type { NowPlayingItem } from '$lib/requests/models/NowPlayingItem.ts';
 import { deleteCheckinRequest } from '$lib/requests/queries/checkin/deleteCheckinRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 export function useStopNowPlaying(nowPlaying: NowPlayingItem) {
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.CheckIn);
 
-  const isStopping = writable(false);
+  const isStopping = new BehaviorSubject(false);
   const isStoppable = nowPlaying.action === 'checkin';
 
   const deleteCheckin = async () => {
@@ -18,17 +18,17 @@ export function useStopNowPlaying(nowPlaying: NowPlayingItem) {
       return;
     }
 
-    isStopping.set(true);
+    isStopping.next(true);
 
     track({ type: nowPlaying.type, action: 'stop' });
     await deleteCheckinRequest({});
     await invalidate(InvalidateAction.CheckIn);
 
-    isStopping.set(false);
+    isStopping.next(false);
   };
 
   return {
-    isStopping: derived(isStopping, ($isStopping) => $isStopping),
+    isStopping: isStopping.asObservable(),
     stop: deleteCheckin,
     isStoppable,
   };

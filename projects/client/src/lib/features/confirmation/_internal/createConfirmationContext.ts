@@ -1,5 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
 import { getContext, setContext } from 'svelte';
-import { writable } from 'svelte/store';
 import type {
   ConfirmationContext,
   ConfirmationRequest,
@@ -8,14 +8,16 @@ import type {
 export const CONFIRMATION_CONTEXT_KEY = Symbol('confirmation');
 
 export function createConfirmationContext(): ConfirmationContext {
-  const activeConfirmation = writable<ConfirmationRequest | Nil>(null);
+  const activeConfirmation = new BehaviorSubject<ConfirmationRequest | Nil>(
+    null,
+  );
 
   const showConfirmation = (request: ConfirmationRequest) => {
-    activeConfirmation.set(request);
+    activeConfirmation.next(request);
   };
 
   const hideConfirmation = () => {
-    activeConfirmation.set(null);
+    activeConfirmation.next(null);
   };
 
   return setContext(

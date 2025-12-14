@@ -5,8 +5,9 @@
   import * as m from "$lib/features/i18n/messages";
   import { DpadNavigationType } from "$lib/features/navigation/models/DpadNavigationType";
   import type { MediaVideo } from "$lib/requests/models/MediaVideo";
+  import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { toTranslatedVideoType } from "$lib/utils/formatting/string/toTranslatedVideoType";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import VideoItem from "./components/VideoItem.svelte";
   import { mediaListHeightResolver } from "./utils/mediaListHeightResolver";
 
@@ -34,7 +35,9 @@
     return { record, types };
   });
 
-  const firstType = $derived(types.at(0));
+  const firstType = $derived(
+    assertDefined(types.at(0), "VideoList: No video types found"),
+  );
   const active = $derived(writable(firstType));
   const items = $derived(record[$active] ?? []);
 </script>

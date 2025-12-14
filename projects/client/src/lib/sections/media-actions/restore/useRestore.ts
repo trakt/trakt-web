@@ -5,7 +5,7 @@ import { InvalidateAction } from '$lib/requests/models/InvalidateAction.ts';
 import { restoreShowCalendarRequest } from '$lib/requests/queries/users/restoreShowCalendarRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
 import { resolve } from '$lib/utils/store/resolve.ts';
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { restoreShowProgressRequest } from '../../../requests/queries/users/restoreShowProgressRequest.ts';
 import { toBulkPayload } from '../_internal/toBulkPayload.ts';
 
@@ -17,7 +17,7 @@ export function useRestore(
   props: RestoreStoreProps,
 ) {
   const { ids } = props;
-  const isRestoring = writable(false);
+  const isRestoring = new BehaviorSubject(false);
   const { user } = useUser();
   const { invalidate } = useInvalidator();
   const { track } = useTrack(AnalyticsEvent.Restore);
@@ -29,7 +29,7 @@ export function useRestore(
       return;
     }
 
-    isRestoring.set(true);
+    isRestoring.next(true);
     track();
 
     const payload = {
@@ -43,7 +43,7 @@ export function useRestore(
 
     await invalidate(InvalidateAction.Restore);
 
-    isRestoring.set(false);
+    isRestoring.next(false);
   };
 
   return {

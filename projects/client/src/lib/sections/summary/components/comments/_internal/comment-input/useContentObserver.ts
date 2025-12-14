@@ -1,12 +1,12 @@
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
 export function useContentObserver() {
-  const hasContent = writable(false);
+  const hasContent = new BehaviorSubject(false);
 
   const contentObserver = (textArea: HTMLTextAreaElement) => {
     const handler = () => {
       requestAnimationFrame(() => {
-        hasContent.set(textArea.value.trim().length > 0);
+        hasContent.next(textArea.value.trim().length > 0);
       });
     };
 

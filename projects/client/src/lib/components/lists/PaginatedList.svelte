@@ -16,7 +16,7 @@
 
   const loadMore = () => {
     if ($hasNextPage && !$isLoading) {
-      $fetchNextPage();
+      fetchNextPage();
     }
   };
 

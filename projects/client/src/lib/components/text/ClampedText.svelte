@@ -3,7 +3,7 @@
   import { MoreButtonIntlProvider } from "$lib/components/buttons/more/MoreButtonIntlProvider";
   import { lineClamp } from "$lib/components/text/lineClamp";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject";
 
   type LineClampProps = {
     label: string;

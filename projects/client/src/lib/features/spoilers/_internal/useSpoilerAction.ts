@@ -24,12 +24,12 @@ export function useSpoilerAction(rest: SpoilerActionProps) {
       (isHidden ? add : remove)();
     }
 
-    const unsubscribe = isSpoilerHidden
+    const subscription = isSpoilerHidden
       .subscribe((isHidden) => applySpoilerStyle(isHidden));
 
     return {
       destroy() {
-        unsubscribe();
+        subscription.unsubscribe();
         node.classList.remove(SPOILER_CLASS_NAME);
       },
     };

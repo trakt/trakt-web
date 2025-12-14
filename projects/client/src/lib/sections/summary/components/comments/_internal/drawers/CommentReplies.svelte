@@ -5,7 +5,7 @@
   import type { MediaComment } from "$lib/requests/models/MediaComment";
   import type { MediaEntry } from "$lib/requests/models/MediaEntry";
   import LoadingIndicator from "$lib/sections/lists/drilldown/_internal/LoadingIndicator.svelte";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
   import { slide } from "svelte/transition";
   import UserComment from "../UserComment.svelte";
   import { useCommentReplies } from "./useCommentReplies";
@@ -17,7 +17,7 @@
   }: { comment: MediaComment; media: MediaEntry; type: ExtendedMediaType } =
     $props();
 
-  const showReplies = writable(false);
+  const showReplies = new BehaviorSubject(false);
 
   const { list, isLoading } = $derived(useCommentReplies({ id: comment.id }));
 </script>
@@ -25,7 +25,7 @@
 {#if comment.replyCount > 0}
   <button
     class="toggle-replies-button"
-    onclick={() => showReplies.set(!$showReplies)}
+    onclick={() => showReplies.next(!$showReplies)}
   >
     {#if $showReplies}
       {#if $isLoading}

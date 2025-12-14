@@ -1,18 +1,18 @@
-import { type Readable } from 'svelte/store';
+import type { Observable } from 'rxjs';
 
 export function waitForValue<T>(
-  store: Readable<T>,
+  store: Observable<T>,
   value: T,
   timeout = 100,
 ) {
   let lastValue: T;
 
   return new Promise<T>((resolve) => {
-    const unsubscribe = store.subscribe((emission) => {
+    const subscription = store.subscribe((emission) => {
       lastValue = emission;
 
       if (value === emission) {
-        queueMicrotask(() => unsubscribe());
+        queueMicrotask(() => subscription.unsubscribe());
         resolve(emission);
       }
 

@@ -9,8 +9,8 @@
   import { useConfirm } from "$lib/features/confirmation/useConfirm";
   import * as m from "$lib/features/i18n/messages.ts";
   import type { MarkAsWatchedAt } from "$lib/models/MarkAsWatchedAt";
+  import { writable } from "$lib/utils/store/WritableSubject.ts";
   import { onDestroy } from "svelte";
-  import { writable } from "svelte/store";
   import {
     useMarkAsWatched,
     type MarkAsWatchedStoreProps,

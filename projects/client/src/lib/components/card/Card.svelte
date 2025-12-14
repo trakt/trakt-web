@@ -3,7 +3,7 @@
   import { useNavigation } from "$lib/features/navigation/useNavigation";
   import { appendClassList } from "$lib/utils/actions/appendClassList";
   import { whenInViewport } from "$lib/utils/actions/whenInViewport";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import { dPadTrigger } from "./_internal/dPadTrigger";
 
   const {

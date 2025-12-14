@@ -10,7 +10,7 @@ import type {
 } from '$lib/sections/summary/components/comments/CommentsProps.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
 import { type CreateQueryOptions } from '@tanstack/svelte-query';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 
 const COMMENT_LIMIT = 10;
 
@@ -51,7 +51,7 @@ export function useComments(props: UseCommentsProps) {
   const comments = useQuery(typeToCommentsQuery(props));
 
   return {
-    isLoading: derived(comments, ($comments) => toLoadingState($comments)),
-    comments: derived(comments, ($comments) => $comments.data ?? []),
+    isLoading: comments.pipe(map(($comments) => toLoadingState($comments))),
+    comments: comments.pipe(map(($comments) => $comments.data ?? [])),
   };
 }

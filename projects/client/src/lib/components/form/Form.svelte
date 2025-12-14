@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as m from "$lib/features/i18n/messages.ts";
-  import { writable } from "svelte/store";
+  import { writable } from "$lib/utils/store/WritableSubject";
   import Button from "../buttons/Button.svelte";
   import type { FormProps } from "./models/FormProps";
 

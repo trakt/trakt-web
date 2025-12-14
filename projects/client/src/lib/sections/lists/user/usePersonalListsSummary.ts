@@ -1,6 +1,6 @@
 import { collaborationListsQuery } from '$lib/requests/queries/users/collaborationListsQuery.ts';
 import { personalListsQuery } from '$lib/requests/queries/users/personalListsQuery.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import type { PaginationParams } from '../../../requests/models/PaginationParams.ts';
 import { likedListsQuery } from '../../../requests/queries/users/likedListsQuery.ts';
 import { DEFAULT_LISTS_PAGE_SIZE } from '../../../utils/constants.ts';
@@ -37,18 +37,19 @@ export function usePersonalListsSummary(
 
   return {
     ...rest,
-    list: derived(
-      list,
-      ($list) => {
-        if (sortBy === 'none') {
-          return $list;
-        }
+    list: list.pipe(
+      map(
+        ($list) => {
+          if (sortBy === 'none') {
+            return $list;
+          }
 
-        return $list.toSorted((a, b) =>
-          // FIXME: update when we add sorting options
-          b.updatedAt.getTime() - a.updatedAt.getTime()
-        );
-      },
+          return $list.toSorted((a, b) =>
+            // FIXME: update when we add sorting options
+            b.updatedAt.getTime() - a.updatedAt.getTime()
+          );
+        },
+      ),
     ),
   };
 }

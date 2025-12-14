@@ -5,7 +5,7 @@ import {
 import {
   showTrendingQuery,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import type { InfiniteQuery } from '../../features/query/models/InfiniteQuery.ts';
 import { dailyShuffle } from '../../utils/array/dailyShuffle.ts';
 import { usePaginatedListQuery } from '../lists/stores/usePaginatedListQuery.ts';
@@ -34,11 +34,11 @@ export function useTrendingItems(type: MediaType) {
   const { list } = usePaginatedListQuery(typeToQuery(type));
 
   return {
-    list: derived(list, ($list) => {
+    list: list.pipe(map(($list) => {
       return dailyShuffle($list).slice(
         0,
         RANDOM_ITEM_COUNT,
       );
-    }),
+    })),
   };
 }

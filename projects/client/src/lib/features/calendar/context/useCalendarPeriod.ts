@@ -3,7 +3,6 @@ import { getStartOfWeek } from '$lib/utils/date/getStartOfWeek.ts';
 import { isCurrentWeek } from '$lib/utils/date/isCurrentWeek.ts';
 import { addWeeks } from 'date-fns/addWeeks';
 import { subWeeks } from 'date-fns/subWeeks';
-import { derived, get } from 'svelte/store';
 import { AnalyticsEvent } from '../../analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '../../analytics/useTrack.ts';
 import { getCalendarContext } from './getCalendarContext.ts';
@@ -27,27 +26,26 @@ export function useCalendarPeriod() {
 
   const switchPeriod = (direction: Direction) => {
     track({ action: direction });
-    startDate.update((date) => {
-      const newStart = getNextOrPreviousPeriod(date, direction);
+    const date = startDate.value;
+    const newStart = getNextOrPreviousPeriod(date, direction);
 
-      activeDate.set({ date: newStart, source: 'navigation' });
-      return newStart;
-    });
+    activeDate.next({ date: newStart, source: 'navigation' });
+    startDate.next(newStart);
   };
 
   const reset = () => {
     track({ action: 'reset' });
-    if (isCurrentWeek(get(startDate), getLocale())) {
-      activeDate.set({ date: new Date(), source: 'navigation' });
+    if (isCurrentWeek(startDate.value, getLocale())) {
+      activeDate.next({ date: new Date(), source: 'navigation' });
       return;
     }
 
-    startDate.set(getStartOfWeek(new Date(), getLocale()));
-    activeDate.set({ date: new Date(), source: 'init' });
+    startDate.next(getStartOfWeek(new Date(), getLocale()));
+    activeDate.next({ date: new Date(), source: 'init' });
   };
 
   return {
-    startDate: derived(startDate, ($startDate) => $startDate),
+    startDate: startDate.asObservable(),
     next: () => switchPeriod('next'),
     previous: () => switchPeriod('previous'),
     activeDate,

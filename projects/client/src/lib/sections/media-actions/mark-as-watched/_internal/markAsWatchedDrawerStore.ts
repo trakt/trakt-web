@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import type { MarkAsWatchedStoreProps } from '../useMarkAsWatched.ts';
 
 type MarkAsWatchedProps = {
@@ -13,15 +13,15 @@ export type MarkAsWatchedDrawerState =
   | null;
 
 function createMarkAsWatchedDrawerStore() {
-  const { subscribe, set } = writable<MarkAsWatchedDrawerState>(null);
+  const subject = new BehaviorSubject<MarkAsWatchedDrawerState>(null);
 
   return {
-    subscribe,
+    subscribe: subject.subscribe.bind(subject),
     open: (state: MarkAsWatchedProps) => {
-      set({ ...state, isOpen: true });
+      subject.next({ ...state, isOpen: true });
     },
     close: () => {
-      set(null);
+      subject.next(null);
     },
   };
 }

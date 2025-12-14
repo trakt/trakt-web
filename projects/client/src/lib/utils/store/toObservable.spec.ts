@@ -1,10 +1,26 @@
-import { writable } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import { toObservable } from './toObservable.ts';
 
+function mockWritable<T>(initial: T) {
+  let value = initial;
+  const subscribers = new Set<(val: T) => void>();
+
+  return {
+    subscribe(run: (val: T) => void) {
+      run(value);
+      subscribers.add(run);
+      return () => subscribers.delete(run);
+    },
+    set(newValue: T) {
+      value = newValue;
+      subscribers.forEach((run) => run(value));
+    },
+  };
+}
+
 describe('toObservable', () => {
   it('should emit initial value from readable store', () => {
-    const store = writable('initial');
+    const store = mockWritable('initial');
     const observable = toObservable(store);
     let emittedValue: string | undefined;
 
@@ -17,7 +33,7 @@ describe('toObservable', () => {
   });
 
   it('should emit updated values from writable store', () => {
-    const store = writable('initial');
+    const store = mockWritable('initial');
     const observable = toObservable(store);
     const emittedValues: string[] = [];
 
@@ -33,7 +49,7 @@ describe('toObservable', () => {
   });
 
   it('should handle multiple subscribers independently', () => {
-    const store = writable(1);
+    const store = mockWritable(1);
     const observable = toObservable(store);
     const values1: number[] = [];
     const values2: number[] = [];
@@ -52,7 +68,7 @@ describe('toObservable', () => {
   });
 
   it('should stop emitting after unsubscription', () => {
-    const store = writable('start');
+    const store = mockWritable('start');
     const observable = toObservable(store);
     const emittedValues: string[] = [];
 
@@ -68,7 +84,7 @@ describe('toObservable', () => {
   });
 
   it('should work with different types', () => {
-    const store = writable<number[]>([1, 2, 3]);
+    const store = mockWritable<number[]>([1, 2, 3]);
     const observable = toObservable(store);
     let emittedValue: number[] | undefined;
 

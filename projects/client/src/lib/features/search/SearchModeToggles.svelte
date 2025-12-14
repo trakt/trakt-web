@@ -8,16 +8,16 @@
   import type { SearchMode } from "$lib/requests/queries/search/models/SearchMode";
   import { assertDefined } from "$lib/utils/assert/assertDefined";
   import { buildParamString } from "$lib/utils/url/buildParamString";
-  import { writable } from "svelte/store";
+  import { BehaviorSubject } from "rxjs";
 
   const query = $derived(page.url.searchParams.get("q")?.trim());
 
   const { pathName, mode } = useSearch();
 
-  const selectedType = writable<SearchMode>($mode);
+  const selectedType = new BehaviorSubject<SearchMode>($mode);
 
   const onChange = (value: SearchMode) => {
-    selectedType.set(value);
+    selectedType.next(value);
 
     const newMode = assertDefined(value);
     const params = buildParamString({ m: newMode, q: query });

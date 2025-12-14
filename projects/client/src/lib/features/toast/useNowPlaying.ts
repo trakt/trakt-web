@@ -1,6 +1,5 @@
 import { time } from '$lib/utils/timing/time.ts';
 import { onMount } from 'svelte';
-import { derived } from 'svelte/store';
 import { getToastContext } from './_internal/getToastContext.ts';
 
 const UPDATE_FREQUENCY = time.seconds(1);
@@ -9,14 +8,14 @@ export function useNowPlaying() {
   const { nowPlaying, progress, remainingMinutes } = getToastContext();
 
   onMount(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setInterval>;
 
-    const unsubscribe = nowPlaying.subscribe((value) => {
+    const subscription = nowPlaying.subscribe((value) => {
       clearInterval(timer);
 
       if (!value) {
-        progress.set(0);
-        remainingMinutes.set(0);
+        progress.next(0);
+        remainingMinutes.next(0);
         return;
       }
 
@@ -32,11 +31,11 @@ export function useNowPlaying() {
 
         const progressPercentage = (difference / totalDuration) * 100;
 
-        remainingMinutes.set(Math.max(remaining / time.minutes(1), 1));
-        progress.set(progressPercentage);
+        remainingMinutes.next(Math.max(remaining / time.minutes(1), 1));
+        progress.next(progressPercentage);
 
         if (progressPercentage >= 100) {
-          nowPlaying.set(null);
+          nowPlaying.next(null);
         }
       };
 
@@ -46,16 +45,13 @@ export function useNowPlaying() {
 
     return () => {
       clearInterval(timer);
-      unsubscribe();
+      subscription.unsubscribe();
     };
   });
 
   return {
     nowPlaying,
-    progress: derived(progress, ($progress) => $progress),
-    remainingMinutes: derived(
-      remainingMinutes,
-      ($remainingMinutes) => $remainingMinutes,
-    ),
+    progress,
+    remainingMinutes,
   };
 }

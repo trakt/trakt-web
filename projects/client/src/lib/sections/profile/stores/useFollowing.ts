@@ -1,7 +1,7 @@
 import { useQuery } from '$lib/features/query/useQuery.ts';
 import { followingQuery } from '$lib/requests/queries/users/followingQuery.ts';
 import { toLoadingState } from '$lib/utils/requests/toLoadingState.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import { followersQuery } from '../../../requests/queries/users/followersQuery.ts';
 
 export function useFollowing(slug: string, type: 'following' | 'followers') {
@@ -10,10 +10,7 @@ export function useFollowing(slug: string, type: 'following' | 'followers') {
     : useQuery(followersQuery({ slug }));
 
   return {
-    profiles: derived(query, ($query) => $query.data ?? []),
-    isLoading: derived(
-      query,
-      toLoadingState,
-    ),
+    profiles: query.pipe(map(($query) => $query.data ?? [])),
+    isLoading: query.pipe(map(toLoadingState)),
   };
 }

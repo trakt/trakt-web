@@ -10,7 +10,7 @@ import {
   showTrendingQuery,
   type TrendingShow,
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import type { InfiniteQuery } from '../../../features/query/models/InfiniteQuery.ts';
 import { mediaTrendingQuery } from '../../../requests/queries/media/mediaTrendingQuery.ts';
 import { usePaginatedListQuery } from '../stores/usePaginatedListQuery.ts';
@@ -48,12 +48,11 @@ export function useTrendingList(
   );
 
   return {
-    list: derived(
-      list,
-      ($list) => {
+    list: list.pipe(
+      map(($list) => {
         // TODO: remove this filter when the server is fixed
         return $list.filter((entry) => entry.id !== 0 && entry.slug !== null);
-      },
+      }),
     ),
     ...rest,
   };

@@ -1,8 +1,8 @@
 import { browser } from '$app/environment';
 import { assertDefined } from '$lib/utils/assert/assertDefined.ts';
 import { GlobalEventBus } from '$lib/utils/events/GlobalEventBus.ts';
+import { BehaviorSubject } from 'rxjs';
 import { onDestroy } from 'svelte';
-import { writable } from 'svelte/store';
 
 const cache = {
   div: null as HTMLDivElement | Nil,
@@ -37,20 +37,20 @@ function calculate(value: string) {
 }
 
 export function useVarToPixels(variable: string, isStable = true) {
-  const value = writable(0);
+  const value = new BehaviorSubject(0);
 
-  if (!browser) return value;
+  if (!browser) return value.asObservable();
 
-  value.set(calculate(variable));
+  value.next(calculate(variable));
 
-  if (isStable) return value;
+  if (isStable) return value.asObservable();
 
   const destroy = GlobalEventBus.getInstance().register(
     'resize',
-    () => value.set(calculate(variable)),
+    () => value.next(calculate(variable)),
   );
 
   onDestroy(destroy);
 
-  return value;
+  return value.asObservable();
 }

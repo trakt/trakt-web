@@ -1,7 +1,7 @@
 import { AnalyticsEvent } from '$lib/features/analytics/events/AnalyticsEvent.ts';
 import { useTrack } from '$lib/features/analytics/useTrack.ts';
 import { safeLocalStorage } from '$lib/utils/storage/safeStorage.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject, map } from 'rxjs';
 
 const LOCAL_STORAGE_KEY = 'trakt-dismissed-banners';
 
@@ -28,20 +28,19 @@ function saveDismissedBanners(dismissals: DismissalMap) {
 }
 
 export function useBannerDismissal(id: string, value: string) {
-  const dismissed = writable(getDismissedBanners());
+  const dismissed = new BehaviorSubject(getDismissedBanners());
   const { track } = useTrack(AnalyticsEvent.BannerDismiss);
 
   const dismiss = () => {
-    dismissed.update((current) => {
-      current[id] = value;
-      saveDismissedBanners(current);
-      track({ id, value });
-      return current;
-    });
+    const current = dismissed.value;
+    current[id] = value;
+    saveDismissedBanners(current);
+    track({ id, value });
+    dismissed.next(current);
   };
 
   return {
     dismiss,
-    isDismissed: derived(dismissed, ($dismissed) => $dismissed[id] === value),
+    isDismissed: dismissed.pipe(map(($dismissed) => $dismissed[id] === value)),
   };
 }

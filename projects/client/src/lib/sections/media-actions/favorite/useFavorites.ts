@@ -4,7 +4,7 @@ import type { MediaType } from '$lib/requests/models/MediaType.ts';
 import { addToFavoritesRequest } from '$lib/requests/sync/addToFavoritesRequest.ts';
 import { removeFromFavoritesRequest } from '$lib/requests/sync/removeFromFavoritesRequest.ts';
 import { useInvalidator } from '$lib/stores/useInvalidator.ts';
-import { derived, writable } from 'svelte/store';
+import { BehaviorSubject, map } from 'rxjs';
 
 export type FavoritesStoreProps = {
   type: MediaType;
@@ -21,13 +21,12 @@ function getFavoritesPayload({ type, id }: FavoritesStoreProps) {
 }
 
 export function useFavorites({ type, id }: FavoritesStoreProps) {
-  const isUpdatingFavorite = writable(false);
+  const isUpdatingFavorite = new BehaviorSubject(false);
   const { favorites } = useUser();
   const { invalidate } = useInvalidator();
 
-  const isFavorited = derived(
-    favorites,
-    ($favorites) => {
+  const isFavorited = favorites.pipe(
+    map(($favorites) => {
       if (!$favorites) {
         return false;
       }
@@ -38,11 +37,11 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
         case 'show':
           return $favorites.shows.has(id);
       }
-    },
+    }),
   );
 
   const addOrRemoveFavorite = async (action: 'add' | 'remove') => {
-    isUpdatingFavorite.set(true);
+    isUpdatingFavorite.next(true);
 
     const payload = getFavoritesPayload({ type, id });
 
@@ -57,7 +56,7 @@ export function useFavorites({ type, id }: FavoritesStoreProps) {
 
     await invalidate(InvalidateAction.Favorited(type));
 
-    isUpdatingFavorite.set(false);
+    isUpdatingFavorite.next(false);
   };
 
   return {

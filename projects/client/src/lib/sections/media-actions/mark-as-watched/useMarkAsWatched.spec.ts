@@ -5,7 +5,7 @@ import { ShowDevsMappedMock } from '$mocks/data/summary/shows/devs/ShowDevsMappe
 import { ShowSiloMappedMock } from '$mocks/data/summary/shows/silo/mapped/ShowSiloMappedMock.ts';
 import { renderStore, setAuthorization } from '$test/beds/store/renderStore.ts';
 import { waitForEmission } from '$test/readable/waitForEmission.ts';
-import { get } from 'svelte/store';
+import { firstValueFrom } from 'rxjs';
 import { beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 import {
   type MarkAsWatchedStoreProps,
@@ -37,7 +37,7 @@ describe('useMarkAsWatched', () => {
         useMarkAsWatched(props)
       );
 
-      expect(get(isMarkingAsWatched)).toBe(false);
+      expect(await firstValueFrom(isMarkingAsWatched)).toBe(false);
     });
 
     it('should be marking as watched when adding', async () => {
@@ -55,7 +55,7 @@ describe('useMarkAsWatched', () => {
       );
 
       await markAsWatched();
-      expect(get(isMarkingAsWatched)).toBe(false);
+      expect(await firstValueFrom(isMarkingAsWatched)).toBe(false);
     });
 
     it('should be marking as watched when removing', async () => {
@@ -64,7 +64,7 @@ describe('useMarkAsWatched', () => {
       );
 
       removeWatched();
-      expect(get(isMarkingAsWatched)).toBe(true);
+      expect(await firstValueFrom(isMarkingAsWatched)).toBe(true);
     });
 
     it('should NOT be marking as watched after remove request is completed', async () => {
@@ -73,7 +73,7 @@ describe('useMarkAsWatched', () => {
       );
 
       await removeWatched();
-      expect(get(isMarkingAsWatched)).toBe(false);
+      expect(await firstValueFrom(isMarkingAsWatched)).toBe(false);
     });
 
     it('should call invalidate after marking as watched', async () => {

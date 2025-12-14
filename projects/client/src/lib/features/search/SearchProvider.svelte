@@ -22,7 +22,7 @@
     const target = toSearchTarget(m);
 
     const newMode = target.mode ?? $mode;
-    mode.set(newMode);
+    mode.next(newMode);
 
     if (!page.url.searchParams.has("q")) {
       return;
@@ -30,11 +30,11 @@
 
     const q = page.url.searchParams.get("q");
     if (!q?.trim()) {
-      query.set("");
+      query.next("");
       return;
     }
 
-    query.set(q);
+    query.next(q);
   });
 </script>
 

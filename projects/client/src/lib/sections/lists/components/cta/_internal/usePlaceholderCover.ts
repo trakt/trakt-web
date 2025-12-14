@@ -18,7 +18,7 @@ import {
 } from '$lib/requests/queries/shows/showTrendingQuery.ts';
 import { usePaginatedListQuery } from '$lib/sections/lists/stores/usePaginatedListQuery.ts';
 import { shuffle } from '$lib/utils/array/shuffle.ts';
-import { derived } from 'svelte/store';
+import { map } from 'rxjs';
 import type { ListCta, MediaCta } from '../models/Cta.ts';
 
 type PreviewItem =
@@ -78,6 +78,6 @@ export function usePlaceholderCover(
   const { list } = usePaginatedListQuery(ctaToQuery(cta));
 
   return {
-    cover: derived(list, ($list) => shuffle($list).at(0)?.cover),
+    cover: list.pipe(map(($list) => shuffle($list).at(0)?.cover)),
   };
 }

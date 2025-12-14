@@ -1,3 +1,3 @@
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 
-export const isAuthorized = writable(false);
+export const isAuthorized = new BehaviorSubject(false);

@@ -1,7 +1,7 @@
-import { writable } from 'svelte/store';
+import { BehaviorSubject } from 'rxjs';
 import { vi } from 'vitest';
 
-export const urlProxy = writable(new URL('https://example.com'));
+export const urlProxy = new BehaviorSubject(new URL('https://example.com'));
 
 vi.mock('$style/scss/variables/index.module.scss', () => ({
   default: {
